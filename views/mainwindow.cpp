@@ -16,13 +16,26 @@ namespace NickvisionMoney::Views
         set_titlebar(m_headerBar);
         signal_show().connect(sigc::mem_fun(*this, &MainWindow::onShow));
         //==HeaderBar==//
-        m_headerBar.getBtnOpenFolder().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::openFolder));
+        m_headerBar.getActionNewAccount()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::newAccount));
+        m_headerBar.getActionOpenAccount()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::openAccount));
+        m_headerBar.getActionCloseAccount()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::closeAccount));
+        m_headerBar.getBtnNewTransaction().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::newTransaction));
+        m_headerBar.getBtnEditTransaction().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::editTransaction));
+        m_headerBar.getBtnDTDelete().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::deleteTransaction));
+        m_headerBar.getBtnBackupAccount().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::backupAccount));
+        m_headerBar.getBtnRestoreAccount().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::restoreAccount));
         m_headerBar.getBtnSettings().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::settings));
         m_headerBar.getActionCheckForUpdates()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::checkForUpdates));
         m_headerBar.getActionGitHubRepo()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::gitHubRepo));
         m_headerBar.getActionReportABug()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::reportABug));
         m_headerBar.getActionChangelog()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::changelog));
         m_headerBar.getActionAbout()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::about));
+        m_headerBar.getActionCloseAccount()->set_enabled(false);
+        m_headerBar.getBtnNewTransaction().set_sensitive(false);
+        m_headerBar.getBtnEditTransaction().set_sensitive(false);
+        m_headerBar.getBtnDeleteTransaction().set_sensitive(false);
+        m_headerBar.getBtnBackupAccount().set_sensitive(false);
+        m_headerBar.getBtnRestoreAccount().set_sensitive(false);
         //==Name Field==//
         m_lblName.set_label("Name");
         m_lblName.set_halign(Gtk::Align::START);
@@ -61,21 +74,44 @@ namespace NickvisionMoney::Views
         }
     }
 
-    void MainWindow::openFolder()
+    void MainWindow::newAccount(const Glib::VariantBase& args)
     {
-        Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Select Folder", Gtk::FileChooserDialog::Action::SELECT_FOLDER, true);
-        folderDialog->set_modal(true);
-        folderDialog->add_button("_Select", Gtk::ResponseType::OK);
-        folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
-        folderDialog->signal_response().connect(sigc::bind([&](int response, Gtk::FileChooserDialog* dialog)
-        {
-            if(response == Gtk::ResponseType::OK)
-            {
-                set_title("Nickvision Money (" + dialog->get_file()->get_path() + ")");
-            }
-            delete dialog;
-        }, folderDialog));
-        folderDialog->show();
+
+    }
+
+    void MainWindow::openAccount(const Glib::VariantBase& args)
+    {
+
+    }
+
+    void MainWindow::closeAccount(const Glib::VariantBase& args)
+    {
+
+    }
+
+    void MainWindow::newTransaction()
+    {
+
+    }
+
+    void MainWindow::editTransaction()
+    {
+
+    }
+
+    void MainWindow::deleteTransaction()
+    {
+        m_headerBar.getPopDeleteTransaction().popdown();
+    }
+
+    void MainWindow::backupAccount()
+    {
+
+    }
+
+    void MainWindow::restoreAccount()
+    {
+
     }
 
     void MainWindow::settings()

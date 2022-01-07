@@ -4,9 +4,48 @@ namespace NickvisionMoney::Controls
 {
     HeaderBar::HeaderBar()
     {
-        //==Open Folder==//
-        m_btnOpenFolder.set_icon_name("folder-open");
-        m_btnOpenFolder.set_tooltip_text("Open Folder");
+        //==Account==//
+        m_actionAccount = Gio::SimpleActionGroup::create();
+        m_actionNewAccount = m_actionAccount->add_action("newAccount");
+        m_actionOpenAccount = m_actionAccount->add_action("openAccount");
+        m_actionCloseAccount = m_actionAccount->add_action("closeAccount");
+        insert_action_group("account", m_actionAccount);
+        m_menuAccount = Gio::Menu::create();
+        m_menuAccount->append("New Account", "account.newAccount");
+        m_menuAccount->append("Open Account", "account.openAccount");
+        m_menuAccount->append("Close Account", "account.closeAccount");
+        m_btnAccount.set_icon_name("text-x-generic");
+        m_btnAccount.set_menu_model(m_menuAccount);
+        m_btnAccount.set_tooltip_text("Account Actions");
+        //==New Transaction==//
+        m_btnNewTransaction.set_icon_name("list-add");
+        m_btnNewTransaction.set_tooltip_text("New Transaction");
+        //==Edit Transaction==//
+        m_btnEditTransaction.set_icon_name("edit");
+        m_btnEditTransaction.set_tooltip_text("Edit Transaction");
+        //==Delete Transaction==//
+        m_boxDeleteTransaction.set_orientation(Gtk::Orientation::VERTICAL);
+        m_lblDeleteTransaction.set_label("Are you sure you want to delete this transaction?");
+        m_lblDeleteTransaction.set_margin(4);
+        m_btnDTDelete.set_label("Delete");
+        m_btnDTCancel.set_label("Cancel");
+        m_btnDTCancel.signal_clicked().connect(sigc::mem_fun(m_popDeleteTransaction, &Gtk::Popover::popdown));
+        m_boxDTBtns.set_homogeneous(true);
+        m_boxDTBtns.set_spacing(6);
+        m_boxDTBtns.append(m_btnDTDelete);
+        m_boxDTBtns.append(m_btnDTCancel);
+        m_boxDeleteTransaction.append(m_lblDeleteTransaction);
+        m_boxDeleteTransaction.append(m_boxDTBtns);
+        m_popDeleteTransaction.set_child(m_boxDeleteTransaction);
+        m_btnDeleteTransaction.set_icon_name("edit-delete");
+        m_btnDeleteTransaction.set_popover(m_popDeleteTransaction);
+        m_btnDeleteTransaction.set_tooltip_text("Delete Transaction");
+        //==Backup Account==//
+        m_btnBackupAccount.set_icon_name("document-save");
+        m_btnBackupAccount.set_tooltip_text("Backup Account");
+        //==Restore Account==//
+        m_btnRestoreAccount.set_icon_name("document-open");
+        m_btnRestoreAccount.set_tooltip_text("Restore Account");
         //==Settings==//
         m_btnSettings.set_icon_name("preferences-system");
         m_btnSettings.set_tooltip_text("Settings");
@@ -34,14 +73,67 @@ namespace NickvisionMoney::Controls
         m_btnHelp.set_menu_model(m_menuHelp);
         m_btnHelp.set_tooltip_text("Help");
         //==Layout==//
-        pack_start(m_btnOpenFolder);
+        pack_start(m_btnAccount);
+        pack_start(m_sep1);
+        pack_start(m_btnNewTransaction);
+        pack_start(m_btnEditTransaction);
+        pack_start(m_btnDeleteTransaction);
         pack_end(m_btnHelp);
         pack_end(m_btnSettings);
+        pack_end(m_sep2);
+        pack_end(m_btnRestoreAccount);
+        pack_end(m_btnBackupAccount);
+
     }
 
-    Gtk::Button& HeaderBar::getBtnOpenFolder()
+    const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionNewAccount() const
     {
-        return m_btnOpenFolder;
+        return m_actionNewAccount;
+    }
+
+    const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionOpenAccount() const
+    {
+        return m_actionOpenAccount;
+    }
+
+    const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionCloseAccount() const
+    {
+        return m_actionCloseAccount;
+    }
+
+    Gtk::Button& HeaderBar::getBtnNewTransaction()
+    {
+        return m_btnNewTransaction;
+    }
+
+    Gtk::Button& HeaderBar::getBtnEditTransaction()
+    {
+        return m_btnEditTransaction;
+    }
+
+    Gtk::Popover& HeaderBar::getPopDeleteTransaction()
+    {
+        return m_popDeleteTransaction;
+    }
+
+    Gtk::Button& HeaderBar::getBtnDTDelete()
+    {
+        return m_btnDTDelete;
+    }
+
+    Gtk::MenuButton& HeaderBar::getBtnDeleteTransaction()
+    {
+        return m_btnDeleteTransaction;
+    }
+
+    Gtk::Button& HeaderBar::getBtnBackupAccount()
+    {
+        return m_btnBackupAccount;
+    }
+
+    Gtk::Button& HeaderBar::getBtnRestoreAccount()
+    {
+        return m_btnRestoreAccount;
     }
 
     Gtk::Button& HeaderBar::getBtnSettings()

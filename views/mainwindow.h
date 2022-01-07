@@ -25,7 +25,14 @@ namespace NickvisionMoney::Views
         Gtk::Entry m_txtName;
         //==Slots==//
         void onShow();
-        void openFolder();
+        void newAccount(const Glib::VariantBase& args);
+        void openAccount(const Glib::VariantBase& args);
+        void closeAccount(const Glib::VariantBase& args);
+        void newTransaction();
+        void editTransaction();
+        void deleteTransaction();
+        void backupAccount();
+        void restoreAccount();
         void settings();
         void checkForUpdates(const Glib::VariantBase& args);
         void gitHubRepo(const Glib::VariantBase& args);
