@@ -4,6 +4,13 @@ namespace NickvisionMoney::Controls
 {
     HeaderBar::HeaderBar()
     {
+        //==Title==//
+        m_boxTitle.set_orientation(Gtk::Orientation::VERTICAL);
+        m_boxTitle.set_halign(Gtk::Align::CENTER);
+        m_boxTitle.set_valign(Gtk::Align::CENTER);
+        m_lblTitle.get_style_context()->add_class("title");
+        m_lblSubtitle.get_style_context()->add_class("subtitle");
+        m_boxTitle.append(m_lblTitle);
         //==Account==//
         m_actionAccount = Gio::SimpleActionGroup::create();
         m_actionNewAccount = m_actionAccount->add_action("newAccount");
@@ -46,14 +53,12 @@ namespace NickvisionMoney::Controls
         //==Restore Account==//
         m_btnRestoreAccount.set_icon_name("document-open");
         m_btnRestoreAccount.set_tooltip_text("Restore Account");
-        //==Settings==//
-        m_btnSettings.set_icon_name("preferences-system");
-        m_btnSettings.set_tooltip_text("Settings");
         //==Help==//
         m_actionHelp = Gio::SimpleActionGroup::create();
         m_actionCheckForUpdates = m_actionHelp->add_action("checkForUpdates");
         m_actionGitHubRepo = m_actionHelp->add_action("gitHubRepo");
         m_actionReportABug = m_actionHelp->add_action("reportABug");
+        m_actionSettings = m_actionHelp->add_action("settings");
         m_actionChangelog = m_actionHelp->add_action("changelog");
         m_actionAbout = m_actionHelp->add_action("about");
         insert_action_group("help", m_actionHelp);
@@ -64,8 +69,9 @@ namespace NickvisionMoney::Controls
         m_menuHelpLinks->append("GitHub Repo", "help.gitHubRepo");
         m_menuHelpLinks->append("Report a Bug", "help.reportABug");
         m_menuHelpActions = Gio::Menu::create();
+        m_menuHelpActions->append("Settings", "help.settings");
         m_menuHelpActions->append("Changelog", "help.changelog");
-        m_menuHelpActions->append("About", "help.about");
+        m_menuHelpActions->append("About Money", "help.about");
         m_menuHelp->append_section(m_menuHelpUpdate);
         m_menuHelp->append_section(m_menuHelpLinks);
         m_menuHelp->append_section(m_menuHelpActions);
@@ -73,17 +79,32 @@ namespace NickvisionMoney::Controls
         m_btnHelp.set_menu_model(m_menuHelp);
         m_btnHelp.set_tooltip_text("Help");
         //==Layout==//
+        set_title_widget(m_boxTitle);
         pack_start(m_btnAccount);
         pack_start(m_sep1);
         pack_start(m_btnNewTransaction);
         pack_start(m_btnEditTransaction);
         pack_start(m_btnDeleteTransaction);
         pack_end(m_btnHelp);
-        pack_end(m_btnSettings);
         pack_end(m_sep2);
         pack_end(m_btnRestoreAccount);
         pack_end(m_btnBackupAccount);
 
+    }
+
+    void HeaderBar::setTitle(const std::string& title)
+    {
+        m_lblTitle.set_text(title);
+    }
+
+    void HeaderBar::setSubtitle(const std::string& subtitle)
+    {
+        m_boxTitle.remove(m_lblSubtitle);
+        if(!subtitle.empty())
+        {
+            m_boxTitle.append(m_lblSubtitle);
+            m_lblSubtitle.set_text(subtitle);
+        }
     }
 
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionNewAccount() const
@@ -136,11 +157,6 @@ namespace NickvisionMoney::Controls
         return m_btnRestoreAccount;
     }
 
-    Gtk::Button& HeaderBar::getBtnSettings()
-    {
-        return m_btnSettings;
-    }
-
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionCheckForUpdates() const
     {
         return m_actionCheckForUpdates;
@@ -154,6 +170,11 @@ namespace NickvisionMoney::Controls
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionReportABug() const
     {
         return m_actionReportABug;
+    }
+
+    const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionSettings() const
+    {
+        return m_actionSettings;
     }
 
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionChangelog() const

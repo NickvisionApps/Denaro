@@ -18,7 +18,7 @@ namespace NickvisionMoney::Views
         m_listGeneral.set_margin_start(20);
         m_listGeneral.set_margin_end(20);
         m_chkRememberLastOpenedAccount.set_label("Remember Last Opened Account");
-        m_chkRememberLastOpenedAccount.set_tooltip_text("If checked, Money will remember the last opened account and automatically open it again when that application starts again.");
+        m_chkRememberLastOpenedAccount.set_tooltip_text("If checked, Money will remember the last opened account and automatically open it again when the application starts again.");
         m_listGeneral.append(m_chkRememberLastOpenedAccount);
         //==Layout==//
         m_mainBox.set_orientation(Gtk::Orientation::VERTICAL);

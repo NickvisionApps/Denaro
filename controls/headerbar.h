@@ -10,6 +10,8 @@ namespace NickvisionMoney::Controls
     {
     public:
         HeaderBar();
+        void setTitle(const std::string& title);
+        void setSubtitle(const std::string& subtitle);
         const std::shared_ptr<Gio::SimpleAction>& getActionNewAccount() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionOpenAccount() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionCloseAccount() const;
@@ -20,14 +22,18 @@ namespace NickvisionMoney::Controls
         Gtk::MenuButton& getBtnDeleteTransaction();
         Gtk::Button& getBtnBackupAccount();
         Gtk::Button& getBtnRestoreAccount();
-        Gtk::Button& getBtnSettings();
         const std::shared_ptr<Gio::SimpleAction>& getActionCheckForUpdates() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionGitHubRepo() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionReportABug() const;
+        const std::shared_ptr<Gio::SimpleAction>& getActionSettings() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionChangelog() const;
         const std::shared_ptr<Gio::SimpleAction>& getActionAbout() const;
 
     private:
+        //==Title Widget==//
+        Gtk::Box m_boxTitle;
+        Gtk::Label m_lblTitle;
+        Gtk::Label m_lblSubtitle;
         //==Account Actions==//
         std::shared_ptr<Gio::SimpleActionGroup> m_actionAccount;
         std::shared_ptr<Gio::SimpleAction> m_actionNewAccount;
@@ -51,13 +57,12 @@ namespace NickvisionMoney::Controls
         Gtk::Button m_btnBackupAccount;
         //==Restore Account==//
         Gtk::Button m_btnRestoreAccount;
-        //==Settings==//
-        Gtk::Button m_btnSettings;
         //==Help==//
         std::shared_ptr<Gio::SimpleActionGroup> m_actionHelp;
         std::shared_ptr<Gio::SimpleAction> m_actionCheckForUpdates;
         std::shared_ptr<Gio::SimpleAction> m_actionGitHubRepo;
         std::shared_ptr<Gio::SimpleAction> m_actionReportABug;
+        std::shared_ptr<Gio::SimpleAction> m_actionSettings;
         std::shared_ptr<Gio::SimpleAction> m_actionChangelog;
         std::shared_ptr<Gio::SimpleAction> m_actionAbout;
         std::shared_ptr<Gio::Menu> m_menuHelp;
