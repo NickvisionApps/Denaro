@@ -66,11 +66,6 @@ namespace NickvisionMoney::Views
             m_opened = true;
             //==Load Config==//
             Configuration configuration;
-            if(configuration.isFirstTimeOpen())
-            {
-                configuration.setIsFirstTimeOpen(false);
-            }
-            configuration.save();
         }
     }
 

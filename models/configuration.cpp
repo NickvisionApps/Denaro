@@ -7,7 +7,7 @@
 
 namespace NickvisionMoney::Models
 {
-    Configuration::Configuration() : m_configDir(std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionMoney/"), m_isFirstTimeOpen(true)
+    Configuration::Configuration() : m_configDir(std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionMoney/"), m_rememberLastOpenedAccount(true), m_lastOpenedAccount("")
     {
         if (!std::filesystem::exists(m_configDir))
         {
@@ -20,20 +20,31 @@ namespace NickvisionMoney::Models
             try
             {
                 configFile >> json;
-                setIsFirstTimeOpen(json.get("IsFirstTimeOpen", true).asBool());
+                setRememberLastOpenedAccount(json.get("RememberLastOpenedAccount", true).asBool());
+                setLastOpenedAccount(json.get("LastOpenedAccount", "").asString());
             }
             catch (...) { }
         }
     }
 
-    bool Configuration::isFirstTimeOpen() const
+    bool Configuration::rememberLastOpenedAccount() const
     {
-        return m_isFirstTimeOpen;
+        return m_rememberLastOpenedAccount;
     }
 
-    void Configuration::setIsFirstTimeOpen(bool isFirstTimeOpen)
+    void Configuration::setRememberLastOpenedAccount(bool rememberLastOpenedAccount)
     {
-        m_isFirstTimeOpen = isFirstTimeOpen;
+        m_rememberLastOpenedAccount = rememberLastOpenedAccount;
+    }
+
+    const std::string& Configuration::getLastOpenedAccount() const
+    {
+        return m_lastOpenedAccount;
+    }
+
+    void Configuration::setLastOpenedAccount(const std::string& lastOpenedAccount)
+    {
+        m_lastOpenedAccount = lastOpenedAccount;
     }
 
     void Configuration::save() const
@@ -42,7 +53,8 @@ namespace NickvisionMoney::Models
         if (configFile.is_open())
         {
             Json::Value json;
-            json["IsFirstTimeOpen"] = isFirstTimeOpen();
+            json["RememberLastOpenedAccount"] = rememberLastOpenedAccount();
+            json["LastOpenedAccount"] = getLastOpenedAccount();
             configFile << json;
         }
     }

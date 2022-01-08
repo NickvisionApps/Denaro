@@ -52,12 +52,11 @@ namespace NickvisionMoney::Models
 
     bool Account::updateTransaction(const Transaction& transaction)
     {
-        SQLite::Statement qryUpdate(m_db, "UPDATE transactions SET id = ?, date = ?, description = ?, type = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()));
-        qryUpdate.bind(1, transaction.getID());
-        qryUpdate.bind(2, transaction.getDate());
-        qryUpdate.bind(3, transaction.getDescription());
-        qryUpdate.bind(4, static_cast<int>(transaction.getType()));
-        qryUpdate.bind(5, transaction.getAmount());
+        SQLite::Statement qryUpdate(m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()));
+        qryUpdate.bind(1, transaction.getDate());
+        qryUpdate.bind(2, transaction.getDescription());
+        qryUpdate.bind(3, static_cast<int>(transaction.getType()));
+        qryUpdate.bind(4, transaction.getAmount());
         return qryUpdate.exec() > 0;
     }
 

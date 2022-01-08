@@ -18,7 +18,7 @@ namespace NickvisionMoney::Views
         Gtk::Box m_mainBox;
         Gtk::Label m_lblGeneral;
         Gtk::ListBox m_listGeneral;
-        Gtk::CheckButton m_chkIsFirstTimeOpen;
+        Gtk::CheckButton m_chkRememberLastOpenedAccount;
     };
 }
 

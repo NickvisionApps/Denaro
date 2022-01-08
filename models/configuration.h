@@ -9,13 +9,16 @@ namespace NickvisionMoney::Models
     {
     public:
         Configuration();
-        bool isFirstTimeOpen() const;
-        void setIsFirstTimeOpen(bool isFirstTimeOpen);
+        bool rememberLastOpenedAccount() const;
+        void setRememberLastOpenedAccount(bool rememberLastOpenedAccount);
+        const std::string& getLastOpenedAccount() const;
+        void setLastOpenedAccount(const std::string& lastOpenedAccount);
         void save() const;
 
     private:
         std::string m_configDir;
-        bool m_isFirstTimeOpen;
+        bool m_rememberLastOpenedAccount;
+        std::string m_lastOpenedAccount;
     };
 }
 
