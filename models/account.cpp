@@ -6,11 +6,6 @@ namespace NickvisionMoney::Models
     Account::Account(const std::string& path) : m_path(path), m_db(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE)
     {
         m_db.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, amount REAL)");
-    }
-
-    std::vector<Transaction> Account::getTransactions()
-    {
-        std::vector<Transaction> transactions;
         SQLite::Statement qryGetAll(m_db, "SELECT * FROM transactions");
         while(qryGetAll.executeStep())
         {
@@ -19,24 +14,37 @@ namespace NickvisionMoney::Models
             transaction.setDescription(qryGetAll.getColumn(2).getString());
             transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
             transaction.setAmount(qryGetAll.getColumn(4).getDouble());
-            transactions.push_back(transaction);
+            m_transactions.push_back(transaction);
         }
-        return transactions;
     }
 
-    std::optional<Transaction> Account::getTransactionByID(int id)
+    const std::vector<Transaction>& Account::getTransactions() const
     {
-        SQLite::Statement qryGet(m_db, "SELECT * FROM transactions WHERE id = " + std::to_string(id));
-        while(qryGet.executeStep())
+        return m_transactions;
+    }
+
+    std::optional<Transaction> Account::getTransactionByID(int id) const
+    {
+        try
         {
-            Transaction transaction(qryGet.getColumn(0).getInt());
-            transaction.setDate(qryGet.getColumn(1).getString());
-            transaction.setDescription(qryGet.getColumn(2).getString());
-            transaction.setType(static_cast<TransactionType>(qryGet.getColumn(3).getInt()));
-            transaction.setAmount(qryGet.getColumn(4).getDouble());
-            return transaction;
+            return m_transactions[id - 1];
         }
-        return std::nullopt;
+        catch (...)
+        {
+            return std::nullopt;
+        }
+    }
+
+    int Account::getNextID() const
+    {
+        try
+        {
+            return m_transactions[m_transactions.size() - 1].getID() + 1;
+        }
+        catch (...)
+        {
+            return 1;
+        }
     }
 
     bool Account::addTransaction(const Transaction& transaction)
@@ -47,7 +55,12 @@ namespace NickvisionMoney::Models
         qryInsert.bind(3, transaction.getDescription());
         qryInsert.bind(4, static_cast<int>(transaction.getType()));
         qryInsert.bind(5, transaction.getAmount());
-        return qryInsert.exec() > 0;
+        if(qryInsert.exec() > 0)
+        {
+            m_transactions.push_back(transaction);
+            return true;
+        }
+        return false;
     }
 
     bool Account::updateTransaction(const Transaction& transaction)
@@ -57,18 +70,28 @@ namespace NickvisionMoney::Models
         qryUpdate.bind(2, transaction.getDescription());
         qryUpdate.bind(3, static_cast<int>(transaction.getType()));
         qryUpdate.bind(4, transaction.getAmount());
-        return qryUpdate.exec() > 0;
+        if(qryUpdate.exec() > 0)
+        {
+            m_transactions[transaction.getID() - 1] = transaction;
+            return true;
+        }
+        return false;
     }
 
     bool Account::deleteTransaction(int id)
     {
-        return m_db.exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0;
+       if(m_db.exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
+       {
+           m_transactions.erase(m_transactions.begin() + (id - 1));
+           return true;
+       }
+       return false;
     }
 
     double Account::getIncome()
     {
         double income = 0.00;
-        for(const Transaction& transaction : getTransactions())
+        for(const Transaction& transaction : m_transactions)
         {
             if(transaction.getType() == TransactionType::Income)
             {
@@ -81,7 +104,7 @@ namespace NickvisionMoney::Models
     double Account::getExpense()
     {
         double expense = 0.00;
-        for(const Transaction& transaction : getTransactions())
+        for(const Transaction& transaction : m_transactions)
         {
             if(transaction.getType() == TransactionType::Expense)
             {
@@ -94,7 +117,7 @@ namespace NickvisionMoney::Models
     double Account::getTotal()
     {
         double total = 0.00;
-        for(const Transaction& transaction : getTransactions())
+        for(const Transaction& transaction : m_transactions)
         {
             if(transaction.getType() == TransactionType::Income)
             {

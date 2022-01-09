@@ -13,8 +13,9 @@ namespace NickvisionMoney::Models
     {
     public:
         Account(const std::string& path);
-        std::vector<Transaction> getTransactions();
-        std::optional<Transaction> getTransactionByID(int id);
+        const std::vector<Transaction>& getTransactions() const;
+        std::optional<Transaction> getTransactionByID(int id) const;
+        int getNextID() const;
         bool addTransaction(const Transaction& transaction);
         bool updateTransaction(const Transaction& transaction);
         bool deleteTransaction(int id);
@@ -27,6 +28,7 @@ namespace NickvisionMoney::Models
     private:
         std::string m_path;
         SQLite::Database m_db;
+        std::vector<Transaction> m_transactions;
     };
 }
 
