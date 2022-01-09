@@ -2,7 +2,7 @@
 
 namespace NickvisionMoney::Models
 {
-    Transaction::Transaction(int id) : m_id(id)
+    Transaction::Transaction(int id) : m_id(id), m_date("1/1/2000"), m_description(""), m_type(TransactionType::Income), m_amount(0.00)
     {
 
     }
@@ -40,6 +40,18 @@ namespace NickvisionMoney::Models
     TransactionType Transaction::getType() const
     {
         return m_type;
+    }
+
+    std::string Transaction::getTypeAsString() const
+    {
+        if(m_type == TransactionType::Income)
+        {
+            return "Income";
+        }
+        else
+        {
+            return "Expense";
+        }
     }
 
     void Transaction::setType(TransactionType type)

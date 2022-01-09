@@ -88,7 +88,7 @@ namespace NickvisionMoney::Models
        return false;
     }
 
-    double Account::getIncome()
+    double Account::getIncome() const
     {
         double income = 0.00;
         for(const Transaction& transaction : m_transactions)
@@ -101,7 +101,7 @@ namespace NickvisionMoney::Models
         return income;
     }
 
-    double Account::getExpense()
+    double Account::getExpense() const
     {
         double expense = 0.00;
         for(const Transaction& transaction : m_transactions)
@@ -114,7 +114,7 @@ namespace NickvisionMoney::Models
         return expense;
     }
 
-    double Account::getTotal()
+    double Account::getTotal() const
     {
         double total = 0.00;
         for(const Transaction& transaction : m_transactions)

@@ -19,9 +19,9 @@ namespace NickvisionMoney::Models
         bool addTransaction(const Transaction& transaction);
         bool updateTransaction(const Transaction& transaction);
         bool deleteTransaction(int id);
-        double getIncome();
-        double getExpense();
-        double getTotal();
+        double getIncome() const;
+        double getExpense() const;
+        double getTotal() const;
         void backup(const std::string& backupPath);
         void restore(const std::string& restorePath);
 

@@ -22,6 +22,7 @@ namespace NickvisionMoney::Models
         const std::string& getDescription() const;
         void setDescription(const std::string& description);
         TransactionType getType() const;
+        std::string getTypeAsString() const;
         void setType(TransactionType type);
         double getAmount() const;
         void setAmount(double amount);
