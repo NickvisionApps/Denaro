@@ -14,11 +14,11 @@ namespace NickvisionMoney::Models
             transaction.setDescription(qryGetAll.getColumn(2).getString());
             transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
             transaction.setAmount(qryGetAll.getColumn(4).getDouble());
-            m_transactions.push_back(transaction);
+            m_transactions.insert({ transaction.getID(), transaction });
         }
     }
 
-    const std::vector<Transaction>& Account::getTransactions() const
+    const std::map<int, Transaction>& Account::getTransactions() const
     {
         return m_transactions;
     }
@@ -27,7 +27,7 @@ namespace NickvisionMoney::Models
     {
         try
         {
-            return m_transactions[id - 1];
+            return m_transactions.at(id);
         }
         catch (...)
         {
@@ -37,13 +37,13 @@ namespace NickvisionMoney::Models
 
     int Account::getNextID() const
     {
-        try
-        {
-            return m_transactions[m_transactions.size() - 1].getID() + 1;
-        }
-        catch (...)
+        if(m_transactions.empty())
         {
             return 1;
+        }
+        else
+        {
+            return m_transactions.rbegin()->first + 1;
         }
     }
 
@@ -57,7 +57,7 @@ namespace NickvisionMoney::Models
         qryInsert.bind(5, transaction.getAmount());
         if(qryInsert.exec() > 0)
         {
-            m_transactions.push_back(transaction);
+           m_transactions.insert({ transaction.getID(), transaction });
             return true;
         }
         return false;
@@ -72,7 +72,7 @@ namespace NickvisionMoney::Models
         qryUpdate.bind(4, transaction.getAmount());
         if(qryUpdate.exec() > 0)
         {
-            m_transactions[transaction.getID() - 1] = transaction;
+            m_transactions[transaction.getID()] = transaction;
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ namespace NickvisionMoney::Models
     {
        if(m_db.exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
        {
-           m_transactions.erase(m_transactions.begin() + (id - 1));
+           m_transactions.erase(id);
            return true;
        }
        return false;
@@ -91,11 +91,11 @@ namespace NickvisionMoney::Models
     double Account::getIncome() const
     {
         double income = 0.00;
-        for(const Transaction& transaction : m_transactions)
+        for(const std::pair<const int, Transaction>& pair : m_transactions)
         {
-            if(transaction.getType() == TransactionType::Income)
+            if(pair.second.getType() == TransactionType::Income)
             {
-                income += transaction.getAmount();
+                income += pair.second.getAmount();
             }
         }
         return income;
@@ -104,11 +104,11 @@ namespace NickvisionMoney::Models
     double Account::getExpense() const
     {
         double expense = 0.00;
-        for(const Transaction& transaction : m_transactions)
+        for(const std::pair<const int, Transaction>& pair : m_transactions)
         {
-            if(transaction.getType() == TransactionType::Expense)
+            if(pair.second.getType() == TransactionType::Expense)
             {
-                expense += transaction.getAmount();
+                expense += pair.second.getAmount();
             }
         }
         return expense;
@@ -117,15 +117,15 @@ namespace NickvisionMoney::Models
     double Account::getTotal() const
     {
         double total = 0.00;
-        for(const Transaction& transaction : m_transactions)
+        for(const std::pair<const int, Transaction>& pair : m_transactions)
         {
-            if(transaction.getType() == TransactionType::Income)
+            if(pair.second.getType() == TransactionType::Income)
             {
-                total += transaction.getAmount();
+                total += pair.second.getAmount();
             }
             else
             {
-                total -= transaction.getAmount();
+                total -= pair.second.getAmount();
             }
         }
         return total;

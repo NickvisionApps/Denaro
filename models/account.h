@@ -2,7 +2,7 @@
 #define ACCOUNT_H
 
 #include <string>
-#include <vector>
+#include <map>
 #include <optional>
 #include "SQLiteCpp/SQLiteCpp.h"
 #include "transaction.h"
@@ -13,7 +13,7 @@ namespace NickvisionMoney::Models
     {
     public:
         Account(const std::string& path);
-        const std::vector<Transaction>& getTransactions() const;
+        const std::map<int, Transaction>& getTransactions() const;
         std::optional<Transaction> getTransactionByID(int id) const;
         int getNextID() const;
         bool addTransaction(const Transaction& transaction);
@@ -28,7 +28,7 @@ namespace NickvisionMoney::Models
     private:
         std::string m_path;
         SQLite::Database m_db;
-        std::vector<Transaction> m_transactions;
+        std::map<int, Transaction> m_transactions;
     };
 }
 
