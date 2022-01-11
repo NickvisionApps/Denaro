@@ -400,7 +400,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.0-beta1");
+        aboutDialog->set_version("2022.1.0-beta2");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
@@ -422,17 +422,26 @@ namespace NickvisionMoney::Views
     void MainWindow::reloadAccount()
     {
         m_dataTransactionsModel->clear();
-        m_txtIncome.set_text(m_account->getIncomeAsString());
-        m_txtExpense.set_text(m_account->getExpenseAsString());
-        m_txtTotal.set_text(m_account->getTotalAsString());
-        for(const std::pair<unsigned int, Transaction>& pair : m_account->getTransactions())
+        if(m_account.has_value())
         {
-            Gtk::TreeRow row = *(m_dataTransactionsModel->append());
-            row[m_dataTransactionsColumns.getColID()] = pair.second.getID();
-            row[m_dataTransactionsColumns.getColDate()] = pair.second.getDate().substr(0, 10);
-            row[m_dataTransactionsColumns.getColDescription()] = pair.second.getDescription();
-            row[m_dataTransactionsColumns.getColType()] = pair.second.getTypeAsString();
-            row[m_dataTransactionsColumns.getColAmount()] = pair.second.getAmountAsString();
+            m_txtIncome.set_text(m_account->getIncomeAsString());
+            m_txtExpense.set_text(m_account->getExpenseAsString());
+            m_txtTotal.set_text(m_account->getTotalAsString());
+            for(const std::pair<unsigned int, Transaction>& pair : m_account->getTransactions())
+            {
+                Gtk::TreeRow row = *(m_dataTransactionsModel->append());
+                row[m_dataTransactionsColumns.getColID()] = pair.second.getID();
+                row[m_dataTransactionsColumns.getColDate()] = pair.second.getDate().substr(0, 10);
+                row[m_dataTransactionsColumns.getColDescription()] = pair.second.getDescription();
+                row[m_dataTransactionsColumns.getColType()] = pair.second.getTypeAsString();
+                row[m_dataTransactionsColumns.getColAmount()] = pair.second.getAmountAsString();
+            }
+        }
+        else
+        {
+            m_txtIncome.set_text("");
+            m_txtExpense.set_text("");
+            m_txtTotal.set_text("");
         }
         m_dataTransactions.columns_autosize();
     }
