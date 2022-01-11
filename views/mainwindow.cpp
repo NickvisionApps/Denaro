@@ -143,8 +143,8 @@ namespace NickvisionMoney::Views
                 {
                     newPath += ".nmoney";
                 }
-                m_account = std::make_optional<Account>(newPath);
                 delete dialog;
+                m_account = std::make_optional<Account>(newPath);
                 m_headerBar.setSubtitle(m_account->getPath());
                 m_headerBar.getActionCloseAccount()->set_enabled(true);
                 m_headerBar.getBtnNewTransaction().set_sensitive(true);
@@ -174,8 +174,9 @@ namespace NickvisionMoney::Views
         {
             if(response == Gtk::ResponseType::OK)
             {
-                m_account = std::make_optional<Account>(dialog->get_file()->get_path());
+                std::string newPath = dialog->get_file()->get_path();
                 delete dialog;
+                m_account = std::make_optional<Account>(newPath);
                 m_headerBar.setSubtitle(m_account->getPath());
                 m_headerBar.getActionCloseAccount()->set_enabled(true);
                 m_headerBar.getBtnNewTransaction().set_sensitive(true);
@@ -219,12 +220,61 @@ namespace NickvisionMoney::Views
 
     void MainWindow::backupAccount()
     {
-
+        Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Save Backup Account File", Gtk::FileChooserDialog::Action::SAVE, true);
+        folderDialog->set_modal(true);
+        folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+        std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
+        accountFileFilter->set_name("Nickvision Money Backup");
+        accountFileFilter->add_pattern("*.nmoneyb");
+        folderDialog->add_filter(accountFileFilter);
+        folderDialog->signal_response().connect(sigc::bind([&](int response, Gtk::FileChooserDialog* dialog)
+        {
+            if(response == Gtk::ResponseType::OK)
+            {
+                std::string backupPath = dialog->get_file()->get_path();
+                if(std::filesystem::path(backupPath).extension().empty())
+                {
+                    backupPath += ".nmoneyb";
+                }
+                delete dialog;
+                m_account->backup(backupPath);
+                m_infoBar.showMessage("Backup Successful", "Saved to: " + backupPath);
+            }
+            else
+            {
+                delete dialog;
+            }
+        }, folderDialog));
+        folderDialog->show();
     }
 
     void MainWindow::restoreAccount()
     {
-
+        Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Open Backup File", Gtk::FileChooserDialog::Action::OPEN, true);
+        folderDialog->set_modal(true);
+        folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+        std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
+        accountFileFilter->set_name("Nickvision Money Backup");
+        accountFileFilter->add_pattern("*.nmoneyb");
+        folderDialog->add_filter(accountFileFilter);
+        folderDialog->signal_response().connect(sigc::bind([&](int response, Gtk::FileChooserDialog* dialog)
+        {
+            if(response == Gtk::ResponseType::OK)
+            {
+                std::string restorePath = dialog->get_file()->get_path();
+                delete dialog;
+                m_account->restore(restorePath);
+                m_infoBar.showMessage("Restore Successful", "Restored from: " + restorePath);
+                reloadAccount();
+            }
+            else
+            {
+                delete dialog;
+            }
+        }, folderDialog));
+        folderDialog->show();
     }
 
     void MainWindow::checkForUpdates(const Glib::VariantBase& args)

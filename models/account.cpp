@@ -152,5 +152,16 @@ namespace NickvisionMoney::Models
             throw std::invalid_argument("Restore path can not be the same as the open database's path.");
         }
         m_db.backup(restorePath.c_str(), SQLite::Database::BackupType::Load);
+        m_transactions.clear();
+        SQLite::Statement qryGetAll(m_db, "SELECT * FROM transactions");
+        while(qryGetAll.executeStep())
+        {
+            Transaction transaction(qryGetAll.getColumn(0).getInt());
+            transaction.setDate(qryGetAll.getColumn(1).getString());
+            transaction.setDescription(qryGetAll.getColumn(2).getString());
+            transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
+            transaction.setAmount(qryGetAll.getColumn(4).getDouble());
+            m_transactions.insert({ transaction.getID(), transaction });
+        }
     }
 }
