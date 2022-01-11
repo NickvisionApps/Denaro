@@ -400,7 +400,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.0-beta2");
+        aboutDialog->set_version("2022.1.0");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
