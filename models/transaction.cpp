@@ -1,13 +1,16 @@
 #include "transaction.h"
+#include <sstream>
+#include <iomanip>
+#include <cmath>
 
 namespace NickvisionMoney::Models
 {
-    Transaction::Transaction(int id) : m_id(id), m_date("1/1/2000"), m_description(""), m_type(TransactionType::Income), m_amount(0.00)
+    Transaction::Transaction(unsigned int id) : m_id(id), m_date("1-1-2000"), m_description(""), m_type(TransactionType::Income), m_amount(0.00)
     {
 
     }
 
-    int Transaction::getID() const
+    unsigned int Transaction::getID() const
     {
         return m_id;
     }
@@ -57,6 +60,13 @@ namespace NickvisionMoney::Models
     double Transaction::getAmount() const
     {
         return m_amount;
+    }
+
+    std::string Transaction::getAmountAsString() const
+    {
+        std::stringstream builder;
+        builder << std::fixed << std::setprecision(2) << std::ceil(m_amount * 100.0) / 100.0;
+        return builder.str();
     }
 
     void Transaction::setAmount(double amount)

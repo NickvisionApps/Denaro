@@ -53,6 +53,7 @@ namespace NickvisionMoney::Views
         void settings(const Glib::VariantBase& args);
         void changelog(const Glib::VariantBase& args);
         void about(const Glib::VariantBase& args);
+        void onRowDoubleClick(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
         //==Other Functions==//
         void reloadAccount();
     };

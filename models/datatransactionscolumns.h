@@ -14,14 +14,14 @@ namespace NickvisionMoney::Models
         const Gtk::TreeModelColumn<std::string>& getColDate() const;
         const Gtk::TreeModelColumn<std::string>& getColDescription() const;
         const Gtk::TreeModelColumn<std::string>& getColType() const;
-        const Gtk::TreeModelColumn<double>& getColAmount() const;
+        const Gtk::TreeModelColumn<std::string>& getColAmount() const;
 
     private:
         Gtk::TreeModelColumn<unsigned int> m_colID;
         Gtk::TreeModelColumn<std::string> m_colDate;
         Gtk::TreeModelColumn<std::string> m_colDescription;
         Gtk::TreeModelColumn<std::string> m_colType;
-        Gtk::TreeModelColumn<double> m_colAmount;
+        Gtk::TreeModelColumn<std::string> m_colAmount;
     };
 }
 

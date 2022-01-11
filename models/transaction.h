@@ -14,8 +14,8 @@ namespace NickvisionMoney::Models
     class Transaction
     {
     public:
-        Transaction(int id = 0);
-        int getID() const;
+        Transaction(unsigned int id = 0);
+        unsigned int getID() const;
         const std::string& getDate() const;
         void setDate(const std::string& date);
         const std::string& getDescription() const;
@@ -24,6 +24,7 @@ namespace NickvisionMoney::Models
         std::string getTypeAsString() const;
         void setType(TransactionType type);
         double getAmount() const;
+        std::string getAmountAsString() const;
         void setAmount(double amount);
         bool operator<(const Transaction& toCompare) const;
         bool operator>(const Transaction& toCompare) const;
@@ -31,7 +32,7 @@ namespace NickvisionMoney::Models
         bool operator!=(const Transaction& toCompare) const;
 
     private:
-        int m_id;
+        unsigned int m_id;
         std::string m_date;
         std::string m_description;
         TransactionType m_type;

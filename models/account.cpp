@@ -1,5 +1,8 @@
 #include "account.h"
 #include <stdexcept>
+#include <sstream>
+#include <iomanip>
+#include <cmath>
 
 namespace NickvisionMoney::Models
 {
@@ -23,12 +26,12 @@ namespace NickvisionMoney::Models
         return m_path;
     }
 
-    const std::map<int, Transaction>& Account::getTransactions() const
+    const std::map<unsigned int, Transaction>& Account::getTransactions() const
     {
         return m_transactions;
     }
 
-    std::optional<Transaction> Account::getTransactionByID(int id) const
+    std::optional<Transaction> Account::getTransactionByID(unsigned int id) const
     {
         try
         {
@@ -83,7 +86,7 @@ namespace NickvisionMoney::Models
         return false;
     }
 
-    bool Account::deleteTransaction(int id)
+    bool Account::deleteTransaction(unsigned int id)
     {
        if(m_db.exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
        {
@@ -96,7 +99,7 @@ namespace NickvisionMoney::Models
     double Account::getIncome() const
     {
         double income = 0.00;
-        for(const std::pair<const int, Transaction>& pair : m_transactions)
+        for(const std::pair<unsigned int, Transaction>& pair : m_transactions)
         {
             if(pair.second.getType() == TransactionType::Income)
             {
@@ -106,10 +109,17 @@ namespace NickvisionMoney::Models
         return income;
     }
 
+    std::string Account::getIncomeAsString() const
+    {
+        std::stringstream builder;
+        builder << std::fixed << std::setprecision(2) << std::ceil(getIncome() * 100.0) / 100.0;
+        return builder.str();
+    }
+
     double Account::getExpense() const
     {
         double expense = 0.00;
-        for(const std::pair<const int, Transaction>& pair : m_transactions)
+        for(const std::pair<unsigned int, Transaction>& pair : m_transactions)
         {
             if(pair.second.getType() == TransactionType::Expense)
             {
@@ -119,10 +129,17 @@ namespace NickvisionMoney::Models
         return expense;
     }
 
+    std::string Account::getExpenseAsString() const
+    {
+        std::stringstream builder;
+        builder << std::fixed << std::setprecision(2) << std::ceil(getExpense() * 100.0) / 100.0;
+        return builder.str();
+    }
+
     double Account::getTotal() const
     {
         double total = 0.00;
-        for(const std::pair<const int, Transaction>& pair : m_transactions)
+        for(const std::pair<unsigned int, Transaction>& pair : m_transactions)
         {
             if(pair.second.getType() == TransactionType::Income)
             {
@@ -134,6 +151,13 @@ namespace NickvisionMoney::Models
             }
         }
         return total;
+    }
+
+    std::string Account::getTotalAsString() const
+    {
+        std::stringstream builder;
+        builder << std::fixed << std::setprecision(2) << std::ceil(getTotal() * 100.0) / 100.0;
+        return builder.str();
     }
 
     void Account::backup(const std::string& backupPath)

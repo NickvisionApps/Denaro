@@ -3,6 +3,7 @@
 #include "../models/configuration.h"
 #include "../controls/progressdialog.h"
 #include "settingsdialog.h"
+#include "transactiondialog.h"
 
 namespace NickvisionMoney::Views
 {
@@ -80,6 +81,21 @@ namespace NickvisionMoney::Views
         m_dataTransactions.append_column("Amount", m_dataTransactionsColumns.getColAmount());
         m_dataTransactions.set_model(m_dataTransactionsModel);
         m_dataTransactions.get_selection()->set_mode(Gtk::SelectionMode::SINGLE);
+        m_dataTransactions.set_activate_on_single_click(false);
+        m_dataTransactions.signal_row_activated().connect(sigc::mem_fun(*this, &MainWindow::onRowDoubleClick));
+        m_dataTransactions.get_selection()->signal_changed().connect([&]()
+        {
+           if(m_dataTransactions.get_selection()->get_selected_rows().size() == 1)
+           {
+               m_headerBar.getBtnEditTransaction().set_sensitive(true);
+               m_headerBar.getBtnDeleteTransaction().set_sensitive(true);
+           }
+           else
+           {
+               m_headerBar.getBtnEditTransaction().set_sensitive(false);
+               m_headerBar.getBtnDeleteTransaction().set_sensitive(false);
+           }
+        });
         //ScrollWindow
         m_scrollDataTransactions.set_child(m_dataTransactions);
         m_scrollDataTransactions.set_margin(6);
@@ -205,17 +221,43 @@ namespace NickvisionMoney::Views
 
     void MainWindow::newTransaction()
     {
-
+        TransactionDialog* transactionDialog = new TransactionDialog(*this, *m_account);
+        transactionDialog->signal_response().connect(sigc::bind([&](int response, TransactionDialog* dialog)
+        {
+            if(response != Gtk::ResponseType::NONE)
+            {
+                delete dialog;
+                if(response == Gtk::ResponseType::OK)
+                {
+                    reloadAccount();
+                }
+            }
+        }, transactionDialog));
+        transactionDialog->show();
     }
 
     void MainWindow::editTransaction()
     {
-
+        TransactionDialog* transactionDialog = new TransactionDialog(*this, *m_account, m_dataTransactions.get_selection()->get_selected()->get_value(m_dataTransactionsColumns.getColID()));
+        transactionDialog->signal_response().connect(sigc::bind([&](int response, TransactionDialog* dialog)
+        {
+            if(response != Gtk::ResponseType::NONE)
+            {
+                delete dialog;
+                if(response == Gtk::ResponseType::OK)
+                {
+                    reloadAccount();
+                }
+            }
+        }, transactionDialog));
+        transactionDialog->show();
     }
 
     void MainWindow::deleteTransaction()
     {
         m_headerBar.getPopDeleteTransaction().popdown();
+        m_account->deleteTransaction(m_dataTransactions.get_selection()->get_selected()->get_value(m_dataTransactionsColumns.getColID()));
+        reloadAccount();
     }
 
     void MainWindow::backupAccount()
@@ -358,7 +400,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.0-alpha1");
+        aboutDialog->set_version("2022.1.0-beta1");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
@@ -372,8 +414,26 @@ namespace NickvisionMoney::Views
         aboutDialog->show();
     }
 
+    void MainWindow::onRowDoubleClick(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column)
+    {
+        editTransaction();
+    }
+
     void MainWindow::reloadAccount()
     {
-
+        m_dataTransactionsModel->clear();
+        m_txtIncome.set_text(m_account->getIncomeAsString());
+        m_txtExpense.set_text(m_account->getExpenseAsString());
+        m_txtTotal.set_text(m_account->getTotalAsString());
+        for(const std::pair<unsigned int, Transaction>& pair : m_account->getTransactions())
+        {
+            Gtk::TreeRow row = *(m_dataTransactionsModel->append());
+            row[m_dataTransactionsColumns.getColID()] = pair.second.getID();
+            row[m_dataTransactionsColumns.getColDate()] = pair.second.getDate().substr(0, 10);
+            row[m_dataTransactionsColumns.getColDescription()] = pair.second.getDescription();
+            row[m_dataTransactionsColumns.getColType()] = pair.second.getTypeAsString();
+            row[m_dataTransactionsColumns.getColAmount()] = pair.second.getAmountAsString();
+        }
+        m_dataTransactions.columns_autosize();
     }
 }

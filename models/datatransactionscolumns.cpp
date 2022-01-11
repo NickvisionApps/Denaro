@@ -31,7 +31,7 @@ namespace NickvisionMoney::Models
         return m_colType;
     }
 
-    const Gtk::TreeModelColumn<double>& DataTransactionsColumns::getColAmount() const
+    const Gtk::TreeModelColumn<std::string>& DataTransactionsColumns::getColAmount() const
     {
         return m_colAmount;
     }
