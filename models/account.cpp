@@ -18,6 +18,11 @@ namespace NickvisionMoney::Models
         }
     }
 
+    const std::string& Account::getPath() const
+    {
+        return m_path;
+    }
+
     const std::map<int, Transaction>& Account::getTransactions() const
     {
         return m_transactions;

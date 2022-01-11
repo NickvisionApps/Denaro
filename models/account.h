@@ -13,6 +13,7 @@ namespace NickvisionMoney::Models
     {
     public:
         Account(const std::string& path);
+        const std::string& getPath() const;
         const std::map<int, Transaction>& getTransactions() const;
         std::optional<Transaction> getTransactionByID(int id) const;
         int getNextID() const;

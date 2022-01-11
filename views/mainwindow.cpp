@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <filesystem>
 #include "../models/configuration.h"
 #include "../controls/progressdialog.h"
 #include "settingsdialog.h"
@@ -8,7 +9,7 @@ namespace NickvisionMoney::Views
     using namespace NickvisionMoney::Models;
     using namespace NickvisionMoney::Controls;
 
-    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.0" })
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.0" }), m_account(std::nullopt)
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -37,18 +38,57 @@ namespace NickvisionMoney::Views
         m_headerBar.getBtnDeleteTransaction().set_sensitive(false);
         m_headerBar.getBtnBackupAccount().set_sensitive(false);
         m_headerBar.getBtnRestoreAccount().set_sensitive(false);
-        //==Name Field==//
-        m_lblName.set_label("Name");
-        m_lblName.set_halign(Gtk::Align::START);
-        m_lblName.set_margin_start(6);
-        m_lblName.set_margin_top(6);
-        m_txtName.set_margin(6);
-        m_txtName.set_placeholder_text("Enter name here");
+        //==Grid==//
+        m_gridAccountInfo.set_margin(6);
+        m_gridAccountInfo.insert_column(0);
+        m_gridAccountInfo.insert_column(1);
+        m_gridAccountInfo.insert_column(2);
+        m_gridAccountInfo.insert_row(0);
+        m_gridAccountInfo.insert_row(1);
+        m_gridAccountInfo.set_column_spacing(6);
+        m_gridAccountInfo.set_row_spacing(6);
+        //Income
+        m_lblIncome.set_text("Income");
+        m_lblIncome.set_halign(Gtk::Align::START);
+        m_txtIncome.set_placeholder_text("---");
+        m_txtIncome.set_editable(false);
+        m_txtIncome.set_size_request(310, -1);
+        m_gridAccountInfo.attach(m_lblIncome, 0, 0);
+        m_gridAccountInfo.attach(m_txtIncome, 0, 1);
+        //Expense
+        m_lblExpense.set_text("Expense");
+        m_lblExpense.set_halign(Gtk::Align::START);
+        m_txtExpense.set_placeholder_text("---");
+        m_txtExpense.set_editable(false);
+        m_txtExpense.set_size_request(310, -1);
+        m_gridAccountInfo.attach(m_lblExpense, 1, 0);
+        m_gridAccountInfo.attach(m_txtExpense, 1, 1);
+        //Total
+        m_lblTotal.set_text("Total");
+        m_lblTotal.set_halign(Gtk::Align::START);
+        m_txtTotal.set_placeholder_text("---");
+        m_txtTotal.set_editable(false);
+        m_txtTotal.set_size_request(310, -1);
+        m_gridAccountInfo.attach(m_lblTotal, 2, 0);
+        m_gridAccountInfo.attach(m_txtTotal, 2, 1);
+        //==Data Transactions==//
+        m_dataTransactionsModel = Gtk::ListStore::create(m_dataTransactionsColumns);
+        m_dataTransactions.append_column("ID", m_dataTransactionsColumns.getColID());
+        m_dataTransactions.append_column("Date", m_dataTransactionsColumns.getColDate());
+        m_dataTransactions.append_column("Description", m_dataTransactionsColumns.getColDescription());
+        m_dataTransactions.append_column("Type", m_dataTransactionsColumns.getColType());
+        m_dataTransactions.append_column("Amount", m_dataTransactionsColumns.getColAmount());
+        m_dataTransactions.set_model(m_dataTransactionsModel);
+        m_dataTransactions.get_selection()->set_mode(Gtk::SelectionMode::SINGLE);
+        //ScrollWindow
+        m_scrollDataTransactions.set_child(m_dataTransactions);
+        m_scrollDataTransactions.set_margin(6);
+        m_scrollDataTransactions.set_expand(true);
         //==Layout==//
         m_mainBox.set_orientation(Gtk::Orientation::VERTICAL);
         m_mainBox.append(m_infoBar);
-        m_mainBox.append(m_lblName);
-        m_mainBox.append(m_txtName);
+        m_mainBox.append(m_gridAccountInfo);
+        m_mainBox.append(m_scrollDataTransactions);
         set_child(m_mainBox);
         maximize();
     }
@@ -57,6 +97,10 @@ namespace NickvisionMoney::Views
     {
         //==Save Config==//
         Configuration configuration;
+        if(configuration.rememberLastOpenedAccount())
+        {
+            configuration.setLastOpenedAccount(m_account.has_value() ? m_account->getPath() : "");
+        }
         configuration.save();
     }
 
@@ -67,22 +111,95 @@ namespace NickvisionMoney::Views
             m_opened = true;
             //==Load Config==//
             Configuration configuration;
+            if(configuration.rememberLastOpenedAccount() && std::filesystem::exists(configuration.getLastOpenedAccount()))
+            {
+                m_account = std::make_optional<Account>(configuration.getLastOpenedAccount());
+                m_headerBar.setSubtitle(m_account->getPath());
+                m_headerBar.getActionCloseAccount()->set_enabled(true);
+                m_headerBar.getBtnNewTransaction().set_sensitive(true);
+                m_headerBar.getBtnBackupAccount().set_sensitive(true);
+                m_headerBar.getBtnRestoreAccount().set_sensitive(true);
+                reloadAccount();
+            }
         }
     }
 
     void MainWindow::newAccount(const Glib::VariantBase& args)
     {
-
+        Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Save New Account File", Gtk::FileChooserDialog::Action::SAVE, true);
+        folderDialog->set_modal(true);
+        folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+        std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
+        accountFileFilter->set_name("Nickvision Money Account");
+        accountFileFilter->add_pattern("*.nmoney");
+        folderDialog->add_filter(accountFileFilter);
+        folderDialog->signal_response().connect(sigc::bind([&](int response, Gtk::FileChooserDialog* dialog)
+        {
+            if(response == Gtk::ResponseType::OK)
+            {
+                std::string newPath = dialog->get_file()->get_path();
+                if(std::filesystem::path(newPath).extension().empty())
+                {
+                    newPath += ".nmoney";
+                }
+                m_account = std::make_optional<Account>(newPath);
+                delete dialog;
+                m_headerBar.setSubtitle(m_account->getPath());
+                m_headerBar.getActionCloseAccount()->set_enabled(true);
+                m_headerBar.getBtnNewTransaction().set_sensitive(true);
+                m_headerBar.getBtnBackupAccount().set_sensitive(true);
+                m_headerBar.getBtnRestoreAccount().set_sensitive(true);
+                reloadAccount();
+            }
+            else
+            {
+                delete dialog;
+            }
+        }, folderDialog));
+        folderDialog->show();
     }
 
     void MainWindow::openAccount(const Glib::VariantBase& args)
     {
-
+        Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Open Account File", Gtk::FileChooserDialog::Action::OPEN, true);
+        folderDialog->set_modal(true);
+        folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+        std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
+        accountFileFilter->set_name("Nickvision Money Account");
+        accountFileFilter->add_pattern("*.nmoney");
+        folderDialog->add_filter(accountFileFilter);
+        folderDialog->signal_response().connect(sigc::bind([&](int response, Gtk::FileChooserDialog* dialog)
+        {
+            if(response == Gtk::ResponseType::OK)
+            {
+                m_account = std::make_optional<Account>(dialog->get_file()->get_path());
+                delete dialog;
+                m_headerBar.setSubtitle(m_account->getPath());
+                m_headerBar.getActionCloseAccount()->set_enabled(true);
+                m_headerBar.getBtnNewTransaction().set_sensitive(true);
+                m_headerBar.getBtnBackupAccount().set_sensitive(true);
+                m_headerBar.getBtnRestoreAccount().set_sensitive(true);
+                reloadAccount();
+            }
+            else
+            {
+                delete dialog;
+            }
+        }, folderDialog));
+        folderDialog->show();
     }
 
     void MainWindow::closeAccount(const Glib::VariantBase& args)
     {
-
+        m_account = std::nullopt;
+        m_headerBar.setSubtitle("No Account Opened");
+        m_headerBar.getActionCloseAccount()->set_enabled(false);
+        m_headerBar.getBtnNewTransaction().set_sensitive(false);
+        m_headerBar.getBtnBackupAccount().set_sensitive(false);
+        m_headerBar.getBtnRestoreAccount().set_sensitive(false);
+        reloadAccount();
     }
 
     void MainWindow::newTransaction()
@@ -203,5 +320,10 @@ namespace NickvisionMoney::Views
            delete dialog;
         }, aboutDialog));
         aboutDialog->show();
+    }
+
+    void MainWindow::reloadAccount()
+    {
+
     }
 }

@@ -12,11 +12,6 @@ namespace NickvisionMoney::Models
         return m_id;
     }
 
-    void Transaction::setID(int id)
-    {
-        m_id = id;
-    }
-
     const std::string& Transaction::getDate() const
     {
         return m_date;

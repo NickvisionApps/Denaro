@@ -16,7 +16,6 @@ namespace NickvisionMoney::Models
     public:
         Transaction(int id = 0);
         int getID() const;
-        void setID(int id);
         const std::string& getDate() const;
         void setDate(const std::string& date);
         const std::string& getDescription() const;

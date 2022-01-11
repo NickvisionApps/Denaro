@@ -1,8 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <optional>
+#include <memory>
 #include <gtkmm.h>
 #include "../models/update/updater.h"
+#include "../models/account.h"
+#include "../models/datatransactionscolumns.h"
 #include "../controls/headerbar.h"
 #include "../controls/infobar.h"
 
@@ -17,12 +21,22 @@ namespace NickvisionMoney::Views
     private:
         bool m_opened;
         NickvisionMoney::Models::Update::Updater m_updater;
+        std::optional<NickvisionMoney::Models::Account> m_account;
         //==UI==//
         NickvisionMoney::Controls::HeaderBar m_headerBar;
         Gtk::Box m_mainBox;
         NickvisionMoney::Controls::InfoBar m_infoBar;
-        Gtk::Label m_lblName;
-        Gtk::Entry m_txtName;
+        Gtk::Grid m_gridAccountInfo;
+        Gtk::Label m_lblIncome;
+        Gtk::Entry m_txtIncome;
+        Gtk::Label m_lblExpense;
+        Gtk::Entry m_txtExpense;
+        Gtk::Label m_lblTotal;
+        Gtk::Entry m_txtTotal;
+        Gtk::ScrolledWindow m_scrollDataTransactions;
+        Gtk::TreeView m_dataTransactions;
+        NickvisionMoney::Models::DataTransactionsColumns m_dataTransactionsColumns;
+        std::shared_ptr<Gtk::ListStore> m_dataTransactionsModel;
         //==Slots==//
         void onShow();
         void newAccount(const Glib::VariantBase& args);
@@ -39,6 +53,8 @@ namespace NickvisionMoney::Views
         void settings(const Glib::VariantBase& args);
         void changelog(const Glib::VariantBase& args);
         void about(const Glib::VariantBase& args);
+        //==Other Functions==//
+        void reloadAccount();
     };
 }
 
