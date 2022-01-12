@@ -16,7 +16,7 @@ namespace NickvisionMoney::Models
         const std::string& getPath() const;
         const std::map<unsigned int, Transaction>& getTransactions() const;
         std::optional<Transaction> getTransactionByID(unsigned int id) const;
-        int getNextID() const;
+        unsigned int getNextID() const;
         bool addTransaction(const Transaction& transaction);
         bool updateTransaction(const Transaction& transaction);
         bool deleteTransaction(unsigned int id);

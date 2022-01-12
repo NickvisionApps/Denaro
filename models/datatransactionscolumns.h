@@ -14,6 +14,7 @@ namespace NickvisionMoney::Models
         const Gtk::TreeModelColumn<std::string>& getColDate() const;
         const Gtk::TreeModelColumn<std::string>& getColDescription() const;
         const Gtk::TreeModelColumn<std::string>& getColType() const;
+        const Gtk::TreeModelColumn<std::string>& getColRepeatInterval() const;
         const Gtk::TreeModelColumn<std::string>& getColAmount() const;
 
     private:
@@ -21,6 +22,7 @@ namespace NickvisionMoney::Models
         Gtk::TreeModelColumn<std::string> m_colDate;
         Gtk::TreeModelColumn<std::string> m_colDescription;
         Gtk::TreeModelColumn<std::string> m_colType;
+        Gtk::TreeModelColumn<std::string> m_colRepeatInterval;
         Gtk::TreeModelColumn<std::string> m_colAmount;
     };
 }

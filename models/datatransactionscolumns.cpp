@@ -8,6 +8,7 @@ namespace NickvisionMoney::Models
         add(m_colDate);
         add(m_colDescription);
         add(m_colType);
+        add(m_colRepeatInterval);
         add(m_colAmount);
     }
 
@@ -29,6 +30,11 @@ namespace NickvisionMoney::Models
     const Gtk::TreeModelColumn<std::string>& DataTransactionsColumns::getColType() const
     {
         return m_colType;
+    }
+
+    const Gtk::TreeModelColumn<std::string>& DataTransactionsColumns::getColRepeatInterval() const
+    {
+        return m_colRepeatInterval;
     }
 
     const Gtk::TreeModelColumn<std::string>& DataTransactionsColumns::getColAmount() const

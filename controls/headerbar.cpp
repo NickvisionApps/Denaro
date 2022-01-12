@@ -35,6 +35,7 @@ namespace NickvisionMoney::Controls
         m_lblDeleteTransaction.set_label("Are you sure you want to delete this transaction?");
         m_lblDeleteTransaction.set_margin(4);
         m_btnDTDelete.set_label("Delete");
+        m_btnDTDelete.get_style_context()->add_class("destructive-action");
         m_btnDTCancel.set_label("Cancel");
         m_btnDTCancel.signal_clicked().connect(sigc::mem_fun(m_popDeleteTransaction, &Gtk::Popover::popdown));
         m_boxDTBtns.set_homogeneous(true);

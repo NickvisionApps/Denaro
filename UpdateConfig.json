@@ -1,1 +1,1 @@
-{"LatestVersion":"2022.1.0","Changelog":"- Initial Release","LinkToExe":"https://github.com/nlogozzo/NickvisionMoney/releases/download/2022.1.0/NickvisionMoney"}
+{"LatestVersion":"2022.1.1","Changelog":"- Added support for repeating transactions\n- ID will now automatically increment starting from 1\n- Added action color to buttons","LinkToExe":"https://github.com/nlogozzo/NickvisionMoney/releases/download/2022.1.1/NickvisionMoney"}

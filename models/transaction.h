@@ -11,6 +11,17 @@ namespace NickvisionMoney::Models
         Expense
     };
 
+    enum class RepeatInterval
+    {
+        Never,
+        Daily,
+        Weekly,
+        Monthly,
+        Quarterly,
+        Yearly,
+        Biyearly
+    };
+
     class Transaction
     {
     public:
@@ -23,6 +34,9 @@ namespace NickvisionMoney::Models
         TransactionType getType() const;
         std::string getTypeAsString() const;
         void setType(TransactionType type);
+        RepeatInterval getRepeatInterval() const;
+        std::string getRepeatIntervalAsString() const;
+        void setRepeatInterval(RepeatInterval repeatInterval);
         double getAmount() const;
         std::string getAmountAsString() const;
         void setAmount(double amount);
@@ -36,6 +50,7 @@ namespace NickvisionMoney::Models
         std::string m_date;
         std::string m_description;
         TransactionType m_type;
+        RepeatInterval m_repeatInterval;
         double m_amount;
     };
 }

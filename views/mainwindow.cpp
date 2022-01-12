@@ -10,7 +10,7 @@ namespace NickvisionMoney::Views
     using namespace NickvisionMoney::Models;
     using namespace NickvisionMoney::Controls;
 
-    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.0" }), m_account(std::nullopt)
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.1" }), m_account(std::nullopt)
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -78,6 +78,7 @@ namespace NickvisionMoney::Views
         m_dataTransactions.append_column("Date", m_dataTransactionsColumns.getColDate());
         m_dataTransactions.append_column("Description", m_dataTransactionsColumns.getColDescription());
         m_dataTransactions.append_column("Type", m_dataTransactionsColumns.getColType());
+        m_dataTransactions.append_column("Repeat Interval", m_dataTransactionsColumns.getColRepeatInterval());
         m_dataTransactions.append_column("Amount", m_dataTransactionsColumns.getColAmount());
         m_dataTransactions.set_model(m_dataTransactionsModel);
         m_dataTransactions.get_selection()->set_mode(Gtk::SelectionMode::SINGLE);
@@ -144,7 +145,8 @@ namespace NickvisionMoney::Views
     {
         Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Save New Account File", Gtk::FileChooserDialog::Action::SAVE, true);
         folderDialog->set_modal(true);
-        folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        Gtk::Button* btnSave = folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        btnSave->get_style_context()->add_class("suggested-action");
         folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
         std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
         accountFileFilter->set_name("Nickvision Money Account");
@@ -180,7 +182,8 @@ namespace NickvisionMoney::Views
     {
         Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Open Account File", Gtk::FileChooserDialog::Action::OPEN, true);
         folderDialog->set_modal(true);
-        folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        Gtk::Button* btnOpen = folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        btnOpen->get_style_context()->add_class("suggested-action");
         folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
         std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
         accountFileFilter->set_name("Nickvision Money Account");
@@ -264,7 +267,8 @@ namespace NickvisionMoney::Views
     {
         Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Save Backup Account File", Gtk::FileChooserDialog::Action::SAVE, true);
         folderDialog->set_modal(true);
-        folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        Gtk::Button* btnSave = folderDialog->add_button("_Save", Gtk::ResponseType::OK);
+        btnSave->get_style_context()->add_class("suggested-action");
         folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
         std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
         accountFileFilter->set_name("Nickvision Money Backup");
@@ -295,7 +299,8 @@ namespace NickvisionMoney::Views
     {
         Gtk::FileChooserDialog* folderDialog = new Gtk::FileChooserDialog(*this, "Open Backup File", Gtk::FileChooserDialog::Action::OPEN, true);
         folderDialog->set_modal(true);
-        folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        Gtk::Button* btnOpen = folderDialog->add_button("_Open", Gtk::ResponseType::OK);
+        btnOpen->get_style_context()->add_class("suggested-action");
         folderDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
         std::shared_ptr<Gtk::FileFilter> accountFileFilter = Gtk::FileFilter::create();
         accountFileFilter->set_name("Nickvision Money Backup");
@@ -385,7 +390,7 @@ namespace NickvisionMoney::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Initial Release");
+        changelogDialog->set_secondary_text("\n- Added support for repeating transactions\n- ID will now automatically increment starting from 1\n- Added action color to buttons");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -400,7 +405,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.0");
+        aboutDialog->set_version("2022.1.1");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
@@ -434,6 +439,7 @@ namespace NickvisionMoney::Views
                 row[m_dataTransactionsColumns.getColDate()] = pair.second.getDate().substr(0, 10);
                 row[m_dataTransactionsColumns.getColDescription()] = pair.second.getDescription();
                 row[m_dataTransactionsColumns.getColType()] = pair.second.getTypeAsString();
+                row[m_dataTransactionsColumns.getColRepeatInterval()] = pair.second.getRepeatIntervalAsString();
                 row[m_dataTransactionsColumns.getColAmount()] = pair.second.getAmountAsString();
             }
         }

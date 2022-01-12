@@ -27,6 +27,8 @@ namespace NickvisionMoney::Views
         Gtk::Entry m_txtDescription;
         Gtk::Label m_lblType;
         Gtk::ComboBoxText m_cmbType;
+        Gtk::Label m_lblRepeatInterval;
+        Gtk::ComboBoxText m_cmbRepeatInterval;
         Gtk::Label m_lblAmount;
         Gtk::Entry m_txtAmount;
         //==Slots==//

@@ -3,12 +3,13 @@
 #include <sstream>
 #include <iomanip>
 #include <cmath>
+#include <gtkmm.h>
 
 namespace NickvisionMoney::Models
 {
     Account::Account(const std::string& path) : m_path(path), m_db(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE)
     {
-        m_db.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, amount REAL)");
+        m_db.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount REAL)");
         SQLite::Statement qryGetAll(m_db, "SELECT * FROM transactions");
         while(qryGetAll.executeStep())
         {
@@ -16,8 +17,77 @@ namespace NickvisionMoney::Models
             transaction.setDate(qryGetAll.getColumn(1).getString());
             transaction.setDescription(qryGetAll.getColumn(2).getString());
             transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
-            transaction.setAmount(qryGetAll.getColumn(4).getDouble());
+            transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAll.getColumn(4).getInt()));
+            transaction.setAmount(qryGetAll.getColumn(5).getDouble());
             m_transactions.insert({ transaction.getID(), transaction });
+        }
+        //==Repeat Needed Transactions==//
+        size_t i = 0;
+        size_t startingSize = m_transactions.size();
+        std::map<unsigned int, Transaction>::iterator it = m_transactions.begin();
+        while(i != startingSize)
+        {
+            Transaction transaction = it->second;
+            if(transaction.getRepeatInterval() != RepeatInterval::Never)
+            {
+                bool repeatNeeeded = false;
+                if(transaction.getRepeatInterval() == RepeatInterval::Daily)
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(1)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                else if(transaction.getRepeatInterval() == RepeatInterval::Weekly)
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(7)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                else if(transaction.getRepeatInterval() == RepeatInterval::Monthly)
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(1)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                else if(transaction.getRepeatInterval() == RepeatInterval::Quarterly)
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(4)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                else if(transaction.getRepeatInterval() == RepeatInterval::Yearly)
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(1)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                else
+                {
+                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(2)) != -1)
+                    {
+                        repeatNeeeded = true;
+                    }
+                }
+                if(repeatNeeeded)
+                {
+                    Transaction newTransaction(getNextID());
+                    newTransaction.setDate(Glib::DateTime::create_now_utc().format_iso8601());
+                    newTransaction.setDescription(transaction.getDescription());
+                    newTransaction.setType(transaction.getType());
+                    newTransaction.setRepeatInterval(transaction.getRepeatInterval());
+                    newTransaction.setAmount(transaction.getAmount());
+                    addTransaction(newTransaction);
+                    transaction.setRepeatInterval(RepeatInterval::Never);
+                    updateTransaction(transaction);
+                }
+            }
+            i++;
+            it++;
         }
     }
 
@@ -43,7 +113,7 @@ namespace NickvisionMoney::Models
         }
     }
 
-    int Account::getNextID() const
+    unsigned int Account::getNextID() const
     {
         if(m_transactions.empty())
         {
@@ -57,12 +127,13 @@ namespace NickvisionMoney::Models
 
     bool Account::addTransaction(const Transaction& transaction)
     {
-        SQLite::Statement qryInsert(m_db, "INSERT INTO transactions (id, date, description, type, amount) VALUES (?, ?, ?, ?, ?)");
+        SQLite::Statement qryInsert(m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)");
         qryInsert.bind(1, transaction.getID());
         qryInsert.bind(2, transaction.getDate());
         qryInsert.bind(3, transaction.getDescription());
         qryInsert.bind(4, static_cast<int>(transaction.getType()));
-        qryInsert.bind(5, transaction.getAmount());
+        qryInsert.bind(5, static_cast<int>(transaction.getRepeatInterval()));
+        qryInsert.bind(6, transaction.getAmount());
         if(qryInsert.exec() > 0)
         {
            m_transactions.insert({ transaction.getID(), transaction });
@@ -73,11 +144,12 @@ namespace NickvisionMoney::Models
 
     bool Account::updateTransaction(const Transaction& transaction)
     {
-        SQLite::Statement qryUpdate(m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()));
+        SQLite::Statement qryUpdate(m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()));
         qryUpdate.bind(1, transaction.getDate());
         qryUpdate.bind(2, transaction.getDescription());
         qryUpdate.bind(3, static_cast<int>(transaction.getType()));
-        qryUpdate.bind(4, transaction.getAmount());
+        qryUpdate.bind(4, static_cast<int>(transaction.getRepeatInterval()));
+        qryUpdate.bind(5, transaction.getAmount());
         if(qryUpdate.exec() > 0)
         {
             m_transactions[transaction.getID()] = transaction;

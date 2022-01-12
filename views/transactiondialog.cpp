@@ -12,6 +12,7 @@ namespace NickvisionMoney::Views
         //==Buttons==//
         Gtk::Button* btnCancel = add_button("_Cancel", Gtk::ResponseType::CANCEL);
         Gtk::Button* btnSave = add_button("_Save", Gtk::ResponseType::NONE);
+        btnSave->get_style_context()->add_class("suggested-action");
         btnSave->signal_clicked().connect(sigc::mem_fun(*this, &TransactionDialog::save));
         //==Main Box==//
         m_mainBox.set_orientation(Gtk::Orientation::VERTICAL);
@@ -22,7 +23,8 @@ namespace NickvisionMoney::Views
         //ID
         m_lblID.set_label("ID");
         m_lblID.set_halign(Gtk::Align::START);
-        m_txtID.set_placeholder_text("Enter id here");
+        m_txtID.set_text(std::to_string(m_account.getNextID()));
+        m_txtID.set_editable(false);
         m_txtID.set_size_request(400, -1);
         m_mainBox.append(m_lblID);
         m_mainBox.append(m_txtID);
@@ -48,6 +50,20 @@ namespace NickvisionMoney::Views
         m_cmbType.set_size_request(400, -1);
         m_mainBox.append(m_lblType);
         m_mainBox.append(m_cmbType);
+        //Repeat Interval
+        m_lblRepeatInterval.set_label("Repeat Interval");
+        m_lblRepeatInterval.set_halign(Gtk::Align::START);
+        m_cmbRepeatInterval.append("Never");
+        m_cmbRepeatInterval.append("Daily");
+        m_cmbRepeatInterval.append("Weekly");
+        m_cmbRepeatInterval.append("Monthly");
+        m_cmbRepeatInterval.append("Quarterly");
+        m_cmbRepeatInterval.append("Yearly");
+        m_cmbRepeatInterval.append("Biyearly");
+        m_cmbRepeatInterval.set_active(0);
+        m_cmbRepeatInterval.set_size_request(400, -1);
+        m_mainBox.append(m_lblRepeatInterval);
+        m_mainBox.append(m_cmbRepeatInterval);
         //Amount
         m_lblAmount.set_label("Amount");
         m_lblAmount.set_halign(Gtk::Align::START);
@@ -62,10 +78,10 @@ namespace NickvisionMoney::Views
         {
             Transaction transaction = *(m_account.getTransactionByID(*idToEdit));
             m_txtID.set_text(std::to_string(transaction.getID()));
-            m_txtID.set_editable(false);
             m_calDate.select_day(Glib::DateTime::create_from_iso8601(transaction.getDate()));
             m_txtDescription.set_text(transaction.getDescription());
             m_cmbType.set_active(static_cast<int>(transaction.getType()));
+            m_cmbRepeatInterval.set_active(static_cast<int>(transaction.getRepeatInterval()));
             m_txtAmount.set_text(transaction.getAmountAsString());
         }
     }
@@ -116,6 +132,7 @@ namespace NickvisionMoney::Views
                 transaction.setDate(m_calDate.get_date().format_iso8601());
                 transaction.setDescription(m_txtDescription.get_text());
                 transaction.setType(static_cast<TransactionType>(m_cmbType.get_active_row_number()));
+                transaction.setRepeatInterval(static_cast<RepeatInterval>(m_cmbRepeatInterval.get_active_row_number()));
                 transaction.setAmount(amount);
                 if(m_isNew)
                 {
