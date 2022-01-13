@@ -129,7 +129,7 @@ namespace NickvisionMoney::Views
             else
             {
                 Transaction transaction(id);
-                transaction.setDate(m_calDate.get_date().format_iso8601());
+                transaction.setDate(m_calDate.get_date().to_local().format_iso8601());
                 transaction.setDescription(m_txtDescription.get_text());
                 transaction.setType(static_cast<TransactionType>(m_cmbType.get_active_row_number()));
                 transaction.setRepeatInterval(static_cast<RepeatInterval>(m_cmbRepeatInterval.get_active_row_number()));

@@ -10,7 +10,7 @@ namespace NickvisionMoney::Views
     using namespace NickvisionMoney::Models;
     using namespace NickvisionMoney::Controls;
 
-    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.1" }), m_account(std::nullopt)
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.2" }), m_account(std::nullopt)
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -390,7 +390,7 @@ namespace NickvisionMoney::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Added support for repeating transactions\n- ID will now automatically increment starting from 1\n- Added action color to buttons");
+        changelogDialog->set_secondary_text("\n- Fixed issue with date handling");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -405,7 +405,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.1");
+        aboutDialog->set_version("2022.1.2");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);

@@ -33,42 +33,42 @@ namespace NickvisionMoney::Models
                 bool repeatNeeeded = false;
                 if(transaction.getRepeatInterval() == RepeatInterval::Daily)
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(1)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(1)) != -1)
                     {
                         repeatNeeeded = true;
                     }
                 }
                 else if(transaction.getRepeatInterval() == RepeatInterval::Weekly)
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(7)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(7)) != -1)
                     {
                         repeatNeeeded = true;
                     }
                 }
                 else if(transaction.getRepeatInterval() == RepeatInterval::Monthly)
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(1)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(1)) != -1)
                     {
                         repeatNeeeded = true;
                     }
                 }
                 else if(transaction.getRepeatInterval() == RepeatInterval::Quarterly)
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(4)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(4)) != -1)
                     {
                         repeatNeeeded = true;
                     }
                 }
                 else if(transaction.getRepeatInterval() == RepeatInterval::Yearly)
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(1)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(1)) != -1)
                     {
                         repeatNeeeded = true;
                     }
                 }
                 else
                 {
-                    if(Glib::DateTime::create_now_utc().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(2)) != -1)
+                    if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(2)) != -1)
                     {
                         repeatNeeeded = true;
                     }
@@ -76,7 +76,7 @@ namespace NickvisionMoney::Models
                 if(repeatNeeeded)
                 {
                     Transaction newTransaction(getNextID());
-                    newTransaction.setDate(Glib::DateTime::create_now_utc().format_iso8601());
+                    newTransaction.setDate(Glib::DateTime::create_now_local().format_iso8601());
                     newTransaction.setDescription(transaction.getDescription());
                     newTransaction.setType(transaction.getType());
                     newTransaction.setRepeatInterval(transaction.getRepeatInterval());
