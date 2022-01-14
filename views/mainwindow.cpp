@@ -2,6 +2,7 @@
 #include <filesystem>
 #include "../models/configuration.h"
 #include "../controls/progressdialog.h"
+#include "shortcutswindow.h"
 #include "settingsdialog.h"
 #include "transactiondialog.h"
 
@@ -10,7 +11,7 @@ namespace NickvisionMoney::Views
     using namespace NickvisionMoney::Models;
     using namespace NickvisionMoney::Controls;
 
-    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.2" }), m_account(std::nullopt)
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/UpdateConfig.json", { "2022.1.3" }), m_account(std::nullopt)
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -31,6 +32,7 @@ namespace NickvisionMoney::Views
         m_headerBar.getActionGitHubRepo()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::gitHubRepo));
         m_headerBar.getActionReportABug()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::reportABug));
         m_headerBar.getActionSettings()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::settings));
+        m_headerBar.getActionShortcuts()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::shortcuts));
         m_headerBar.getActionChangelog()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::changelog));
         m_headerBar.getActionAbout()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::about));
         m_headerBar.getActionCloseAccount()->set_enabled(false);
@@ -101,6 +103,109 @@ namespace NickvisionMoney::Views
         m_scrollDataTransactions.set_child(m_dataTransactions);
         m_scrollDataTransactions.set_margin(6);
         m_scrollDataTransactions.set_expand(true);
+        //==Shortcuts==//
+        m_shortcutController = Gtk::ShortcutController::create();
+        m_shortcutController->set_scope(Gtk::ShortcutScope::GLOBAL);
+        //New Account
+        m_shortcutNewAccountTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_N, Gdk::ModifierType::CONTROL_MASK);
+        m_shortcutNewAccountAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            newAccount(args);
+            return true;
+        });
+        m_shortcutNewAccount = Gtk::Shortcut::create(m_shortcutNewAccountTrigger, m_shortcutNewAccountAction);
+        m_shortcutController->add_shortcut(m_shortcutNewAccount);
+        //Open Account
+        m_shortcutOpenAccountTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_O, Gdk::ModifierType::CONTROL_MASK);
+        m_shortcutOpenAccountAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            openAccount(args);
+            return true;
+        });
+        m_shortcutOpenAccount = Gtk::Shortcut::create(m_shortcutOpenAccountTrigger, m_shortcutOpenAccountAction);
+        m_shortcutController->add_shortcut(m_shortcutOpenAccount);
+        //Close Account
+        m_shortcutCloseAccountTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_W, Gdk::ModifierType::CONTROL_MASK);
+        m_shortcutCloseAccountAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_account.has_value())
+            {
+                closeAccount(args);
+            }
+            return true;
+        });
+        m_shortcutCloseAccount = Gtk::Shortcut::create(m_shortcutCloseAccountTrigger, m_shortcutCloseAccountAction);
+        m_shortcutController->add_shortcut(m_shortcutCloseAccount);
+        //Backup Account
+        m_shortcutBackupAccountTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_B, Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::SHIFT_MASK);
+        m_shortcutBackupAccountAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_account.has_value())
+            {
+                backupAccount();
+            }
+            return true;
+        });
+        m_shortcutBackupAccount = Gtk::Shortcut::create(m_shortcutBackupAccountTrigger, m_shortcutBackupAccountAction);
+        m_shortcutController->add_shortcut(m_shortcutBackupAccount);
+        //Restore Account
+        m_shortcutRestoreAccountTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_R, Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::SHIFT_MASK);
+        m_shortcutRestoreAccountAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_account.has_value())
+            {
+                restoreAccount();
+            }
+            return true;
+        });
+        m_shortcutRestoreAccount = Gtk::Shortcut::create(m_shortcutRestoreAccountTrigger, m_shortcutRestoreAccountAction);
+        m_shortcutController->add_shortcut(m_shortcutRestoreAccount);
+        //New Transaction
+        m_shortcutNewTransactionTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_N, Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::SHIFT_MASK);
+        m_shortcutNewTransactionAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_account.has_value())
+            {
+                newTransaction();
+            }
+            return true;
+        });
+        m_shortcutNewTransaction = Gtk::Shortcut::create(m_shortcutNewTransactionTrigger, m_shortcutNewTransactionAction);
+        m_shortcutController->add_shortcut(m_shortcutNewTransaction);
+        //Edit Transaction
+        m_shortcutEditTransactionTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_O, Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::SHIFT_MASK);
+        m_shortcutEditTransactionAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_dataTransactions.get_selection()->get_selected_rows().size() == 1)
+            {
+                editTransaction();
+            }
+            return true;
+        });
+        m_shortcutEditTransaction = Gtk::Shortcut::create(m_shortcutEditTransactionTrigger, m_shortcutEditTransactionAction);
+        m_shortcutController->add_shortcut(m_shortcutEditTransaction);
+        //Delete Transaction
+        m_shortcutDeleteTransactionTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_Delete);
+        m_shortcutDeleteTransactionAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            if(m_dataTransactions.get_selection()->get_selected_rows().size() == 1)
+            {
+                m_headerBar.getPopDeleteTransaction().popup();
+            }
+            return true;
+        });
+        m_shortcutDeleteTransaction = Gtk::Shortcut::create(m_shortcutDeleteTransactionTrigger, m_shortcutDeleteTransactionAction);
+        m_shortcutController->add_shortcut(m_shortcutDeleteTransaction);
+        //About
+        m_shortcutAboutTrigger = Gtk::KeyvalTrigger::create(GDK_KEY_F1);
+        m_shortcutAboutAction = Gtk::CallbackAction::create([&](Gtk::Widget& widget, const Glib::VariantBase& args)
+        {
+            about(args);
+            return true;
+        });
+        m_shortcutAbout = Gtk::Shortcut::create(m_shortcutAboutTrigger, m_shortcutAboutAction);
+        m_shortcutController->add_shortcut(m_shortcutAbout);
+        add_controller(m_shortcutController);
         //==Layout==//
         m_mainBox.set_orientation(Gtk::Orientation::VERTICAL);
         m_mainBox.append(m_infoBar);
@@ -387,10 +492,20 @@ namespace NickvisionMoney::Views
         settingsDialog->show();
     }
 
+    void MainWindow::shortcuts(const Glib::VariantBase& args)
+    {
+        ShortcutsWindow* shortcutsWindow = new ShortcutsWindow(*this);
+        shortcutsWindow->signal_hide().connect(sigc::bind([](ShortcutsWindow* window)
+        {
+            delete window;
+        }, shortcutsWindow));
+        shortcutsWindow->show();
+    }
+
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Fixed issue with date handling");
+        changelogDialog->set_secondary_text("\n- Added keyboard shortcuts");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -405,7 +520,7 @@ namespace NickvisionMoney::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Money");
-        aboutDialog->set_version("2022.1.2");
+        aboutDialog->set_version("2022.1.3");
         aboutDialog->set_comments("A personal finance manager.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);

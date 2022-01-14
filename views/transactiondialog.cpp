@@ -8,7 +8,6 @@ namespace NickvisionMoney::Views
     {
         //==Settings==//
         set_resizable(false);
-        set_deletable(false);
         //==Buttons==//
         Gtk::Button* btnCancel = add_button("_Cancel", Gtk::ResponseType::CANCEL);
         Gtk::Button* btnSave = add_button("_Save", Gtk::ResponseType::NONE);
