@@ -23,6 +23,17 @@
             ]
         },
         {
+            "name": "SQLiteCpp",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/SRombauts/SQLiteCpp.git",
+                    "tag": "3.2.0"
+                }
+            ]
+        },
+        {
             "name": "org.nickvision.money",
             "buildsystem": "meson",
             "config-opts": [
