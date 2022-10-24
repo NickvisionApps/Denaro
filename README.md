@@ -1,7 +1,7 @@
 # Money
 <img src="src/resources/org.nickvision.money.svg" width="100" height="100"/>
 
- **A personal finance manager **
+ **A personal finance manager**
 
 # Features
 TODO
