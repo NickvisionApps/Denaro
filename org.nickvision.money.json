@@ -32,7 +32,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/nlogozzo/NickvisionMoney.git",
-                    "branch": "master"
+                    "tag": "2022.10.0-next"
                 }
             ]
         }
