@@ -1,14 +1,21 @@
-# Nickvision Money
- A personal finance manager
- 
-# Dependencies
-- [gtkmm 4](https://gtkmm.org/en/)
-- [curlpp](http://www.curlpp.org/)
-- [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
-- [sqlitecpp](https://github.com/SRombauts/SQLiteCpp)
+# Money
+<img src="src/resources/org.nickvision.money.svg" width="100" height="100"/>
+
+ **A personal finance manager **
+
+# Features
+TODO
+
+# Chat
+<a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/149027263-edb7b0db-999f-47a7-bb0d-07053baf2d7e.png)
-![TransactionDialog](https://user-images.githubusercontent.com/17648453/149264323-144cdaf7-a1bf-4775-b4d0-d7f623ea14d4.png)
-![SomeTransactions](https://user-images.githubusercontent.com/17648453/149027274-3e4273be-c761-4495-a254-d0f5c44274cb.png)
-![SettingsDialog](https://user-images.githubusercontent.com/17648453/149027276-ed6ad7a1-1cb3-4597-8f22-ddd098f8d1f0.png)
+TODO
+
+# Dependencies
+- [C++20](https://en.cppreference.com/w/cpp/20)
+- [GTK 4](https://www.gtk.org/)
+- [libadwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/)
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+
+
