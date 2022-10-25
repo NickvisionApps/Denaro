@@ -8,10 +8,11 @@ adwaita = dependency('libadwaita-1', version: '>= 1.2.0')
 jsoncpp = dependency('jsoncpp')
 dl = dependency('dl')
 sqlitecpp = dependency('SQLiteCpp')
+boost = dependency('boost')
 
 subdir('src')
 
-executable('org.nickvision.money', sources, dependencies: [threads, adwaita, jsoncpp, dl, sqlitecpp], install: true)
+executable('org.nickvision.money', sources, dependencies: [threads, adwaita, jsoncpp, dl, sqlitecpp, boost], install: true)
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')
 install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps')
 install_data('org.nickvision.money.desktop', install_dir: 'share/applications')
