@@ -22,6 +22,17 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), nullptr);
     adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), m_adwTitle);
+    //Menu Account Button
+    m_btnMenuAccount = gtk_menu_button_new();
+    GMenu* menuAccount{ g_menu_new() };
+    g_menu_append(menuAccount, "New Account", "win.newAccount");
+    g_menu_append(menuAccount, "Open Account", "win.openAccount");
+    g_menu_append(menuAccount, "Close Account", "win.closeAccount");
+    gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "emblem-documents-symbolic");
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccount), G_MENU_MODEL(menuAccount));
+    gtk_widget_set_tooltip_text(m_btnMenuAccount, "Account Menu");
+    adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
+    g_object_unref(menuAccount);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
@@ -37,6 +48,15 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
     gtk_widget_set_vexpand(m_toastOverlay, true);
+    //Page No Downloads
+    m_pageStatusNoAccounts = adw_status_page_new();
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
+    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "No Accounts Open");
+    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "Open or create an account to get started.");
+    //View Stack
+    m_viewStack = adw_view_stack_new();
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageStatusNoAccounts, "pageNoAccounts");
+    adw_toast_overlay_set_child(ADW_TOAST_OVERLAY(m_toastOverlay), m_viewStack);
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -44,6 +64,21 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_application_window_set_content(ADW_APPLICATION_WINDOW(m_gobj), m_mainBox);
     //Send Toast Callback
     m_controller.registerSendToastCallback([&](const std::string& message) { adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(message.c_str())); });
+    //New Account Action
+    m_actNewAccount = g_simple_action_new("newAccount", nullptr);
+    g_signal_connect(m_actNewAccount, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onNewAccount(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actNewAccount));
+    gtk_application_set_accels_for_action(application, "win.newAccount", new const char*[2]{ "<Ctrl>N", nullptr });
+    //Open Account Action
+    m_actOpenAccount = g_simple_action_new("openAccount", nullptr);
+    g_signal_connect(m_actOpenAccount, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onOpenAccount(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actOpenAccount));
+    gtk_application_set_accels_for_action(application, "win.openAccount", new const char*[2]{ "<Ctrl>O", nullptr });
+    //Close Account Action
+    m_actCloseAccount = g_simple_action_new("closeAccount", nullptr);
+    g_signal_connect(m_actCloseAccount, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseAccount(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actCloseAccount));
+    gtk_application_set_accels_for_action(application, "win.closeAccount", new const char*[2]{ "<Ctrl>W", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -70,6 +105,21 @@ void MainWindow::start()
 {
     gtk_widget_show(m_gobj);
     m_controller.startup();
+}
+
+void MainWindow::onNewAccount()
+{
+
+}
+
+void MainWindow::onOpenAccount()
+{
+
+}
+
+void MainWindow::onCloseAccount()
+{
+
 }
 
 void MainWindow::onPreferences()

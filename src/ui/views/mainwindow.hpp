@@ -35,11 +35,29 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_mainBox{ nullptr };
 		GtkWidget* m_headerBar{ nullptr };
 		GtkWidget* m_adwTitle{ nullptr };
+		GtkWidget* m_btnMenuAccount{ nullptr };
 		GtkWidget* m_btnMenuHelp{ nullptr };
 		GtkWidget* m_toastOverlay{ nullptr };
+		GtkWidget* m_viewStack{ nullptr };
+		GtkWidget* m_pageStatusNoAccounts{ nullptr };
+		GSimpleAction* m_actNewAccount{ nullptr };
+		GSimpleAction* m_actOpenAccount{ nullptr };
+		GSimpleAction* m_actCloseAccount{ nullptr };
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
+		/**
+		 * Creates a new account
+		 */
+		void onNewAccount();
+		/**
+		 * Opens a new account
+		 */
+		void onOpenAccount();
+		/**
+		 * Closes an opened account
+		 */
+		void onCloseAccount();
 		/**
 		 * Displays the preferences dialog
 		 */
