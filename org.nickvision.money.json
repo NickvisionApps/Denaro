@@ -8,7 +8,8 @@
         "--socket=fallback-x11",
         "--socket=wayland",
         "--device=dri",
-        "--share=ipc"
+        "--share=ipc",
+        "--filesystem=host"
     ],
     "modules" : [
         {

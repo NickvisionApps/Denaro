@@ -110,12 +110,46 @@ void MainWindow::start()
 
 void MainWindow::onNewAccount()
 {
-
+    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new("Open Account", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, "_Save", "_Cancel") };
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
+    GtkFileFilter* filter{ gtk_file_filter_new() };
+    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_add_pattern(filter, "*.nmoney");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(saveFileDialog), filter);
+    g_object_unref(filter);
+    g_signal_connect(saveFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
+            GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            g_object_unref(file);
+        }
+        g_object_unref(dialog);
+    })), this);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(saveFileDialog));
 }
 
 void MainWindow::onOpenAccount()
 {
-
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new("Open Account", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
+    GtkFileFilter* filter{ gtk_file_filter_new() };
+    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_add_pattern(filter, "*.nmoney");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
+    g_object_unref(filter);
+    g_signal_connect(openFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
+            GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            g_object_unref(file);
+        }
+        g_object_unref(dialog);
+    })), this);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFileDialog));
 }
 
 void MainWindow::onCloseAccount()
