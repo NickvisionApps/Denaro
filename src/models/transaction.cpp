@@ -2,7 +2,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ "1/1/2022" }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }
+Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ 1900, 1, 1 }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }
 {
 
 }
@@ -12,12 +12,12 @@ unsigned int Transaction::getID() const
     return m_id;
 }
 
-const std::string& Transaction::getDate() const
+const boost::gregorian::date& Transaction::getDate() const
 {
     return m_date;
 }
 
-void Transaction::setDate(const std::string& date)
+void Transaction::setDate(const boost::gregorian::date& date)
 {
     m_date = date;
 }
@@ -81,4 +81,5 @@ bool Transaction::operator!=(const Transaction& toCompare) const
 {
     return m_id != toCompare.m_id;
 }
+
 

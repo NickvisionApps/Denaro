@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <boost/date_time/gregorian/gregorian.hpp>
 
 namespace NickvisionMoney::Models
 {
@@ -26,8 +27,8 @@ namespace NickvisionMoney::Models
     public:
         Transaction(unsigned int id = 0);
         unsigned int getID() const;
-        const std::string& getDate() const;
-        void setDate(const std::string& date);
+        const boost::gregorian::date& getDate() const;
+        void setDate(const boost::gregorian::date& date);
         const std::string& getDescription() const;
         void setDescription(const std::string& description);
         TransactionType getType() const;
@@ -43,7 +44,7 @@ namespace NickvisionMoney::Models
 
     private:
         unsigned int m_id;
-        std::string m_date;
+        boost::gregorian::date m_date;
         std::string m_description;
         TransactionType m_type;
         RepeatInterval m_repeatInterval;

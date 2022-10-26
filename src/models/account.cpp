@@ -1,6 +1,7 @@
 #include "account.hpp"
 #include <chrono>
 #include <filesystem>
+#include <boost/date_time/gregorian/gregorian.hpp>
 
 using namespace NickvisionMoney::Models;
 
@@ -11,7 +12,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ m_path, SQLite
     while(qryGetAll.executeStep())
     {
         Transaction transaction(qryGetAll.getColumn(0).getInt());
-        transaction.setDate(qryGetAll.getColumn(1).getString());
+        transaction.setDate(boost::gregorian::from_string(qryGetAll.getColumn(1).getString()));
         transaction.setDescription(qryGetAll.getColumn(2).getString());
         transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
         transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAll.getColumn(4).getInt()));
@@ -27,54 +28,54 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ m_path, SQLite
         Transaction transaction = it->second;
         if(transaction.getRepeatInterval() != RepeatInterval::Never)
         {
-            /*
-            bool repeatNeeeded = false;
+            bool repeatNeeeded{ false };
+            boost::gregorian::date today{ boost::gregorian::day_clock::universal_day() };
             if(transaction.getRepeatInterval() == RepeatInterval::Daily)
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(1)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::date_duration(1))
                 {
                     repeatNeeeded = true;
                 }
             }
             else if(transaction.getRepeatInterval() == RepeatInterval::Weekly)
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_days(7)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::date_duration(7))
                 {
                     repeatNeeeded = true;
                 }
             }
             else if(transaction.getRepeatInterval() == RepeatInterval::Monthly)
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(1)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::months(1))
                 {
                     repeatNeeeded = true;
                 }
             }
             else if(transaction.getRepeatInterval() == RepeatInterval::Quarterly)
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_months(4)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::months(4))
                 {
                     repeatNeeeded = true;
                 }
             }
             else if(transaction.getRepeatInterval() == RepeatInterval::Yearly)
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(1)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::years(1))
                 {
                     repeatNeeeded = true;
                 }
             }
             else
             {
-                if(Glib::DateTime::create_now_local().compare(Glib::DateTime::create_from_iso8601(transaction.getDate()).add_years(2)) != -1)
+                if(today >= transaction.getDate() + boost::gregorian::years(2))
                 {
                     repeatNeeeded = true;
                 }
             }
             if(repeatNeeeded)
             {
-                Transaction newTransaction(getNextID());
-                newTransaction.setDate(Glib::DateTime::create_now_local().format_iso8601());
+                Transaction newTransaction(getNextAvailableId());
+                newTransaction.setDate(today);
                 newTransaction.setDescription(transaction.getDescription());
                 newTransaction.setType(transaction.getType());
                 newTransaction.setRepeatInterval(transaction.getRepeatInterval());
@@ -83,7 +84,6 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ m_path, SQLite
                 transaction.setRepeatInterval(RepeatInterval::Never);
                 updateTransaction(transaction);
             }
-            */
         }
         i++;
         it++;
@@ -128,7 +128,7 @@ bool Account::addTransaction(const Transaction& transaction)
 {
     SQLite::Statement qryInsert{ m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)" };
     qryInsert.bind(1, transaction.getID());
-    qryInsert.bind(2, transaction.getDate());
+    qryInsert.bind(2, boost::gregorian::to_iso_extended_string(transaction.getDate()));
     qryInsert.bind(3, transaction.getDescription());
     qryInsert.bind(4, static_cast<int>(transaction.getType()));
     qryInsert.bind(5, static_cast<int>(transaction.getRepeatInterval()));
@@ -144,7 +144,7 @@ bool Account::addTransaction(const Transaction& transaction)
 bool Account::updateTransaction(const Transaction& transaction)
 {
     SQLite::Statement qryUpdate{ m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()) };
-    qryUpdate.bind(1, transaction.getDate());
+    qryUpdate.bind(1, boost::gregorian::to_iso_extended_string(transaction.getDate()));
     qryUpdate.bind(2, transaction.getDescription());
     qryUpdate.bind(3, static_cast<int>(transaction.getType()));
     qryUpdate.bind(4, static_cast<int>(transaction.getRepeatInterval()));
@@ -232,7 +232,7 @@ bool Account::restore(const std::string& restorePath)
     while(qryGetAll.executeStep())
     {
         Transaction transaction(qryGetAll.getColumn(0).getInt());
-        transaction.setDate(qryGetAll.getColumn(1).getString());
+        transaction.setDate(boost::gregorian::from_string(qryGetAll.getColumn(1).getString()));
         transaction.setDescription(qryGetAll.getColumn(2).getString());
         transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
         transaction.setAmount(qryGetAll.getColumn(4).getDouble());
@@ -240,3 +240,4 @@ bool Account::restore(const std::string& restorePath)
     }
     return true;
 }
+
