@@ -1,6 +1,7 @@
 #include "account.hpp"
 #include <chrono>
 #include <filesystem>
+#include <sstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 using namespace NickvisionMoney::Models;
@@ -16,8 +17,8 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ m_path, SQLite
         transaction.setDescription(qryGetAll.getColumn(2).getString());
         transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
         transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAll.getColumn(4).getInt()));
-        transaction.setAmount(qryGetAll.getColumn(5).getDouble());
-        m_transactions.insert({ transaction.getID(), transaction });
+        transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAll.getColumn(5).getString()));
+        m_transactions.insert({ transaction.getId(), transaction });
     }
     //==Repeat Needed Transactions==//
     size_t i{ 0 };
@@ -127,15 +128,17 @@ unsigned int Account::getNextAvailableId() const
 bool Account::addTransaction(const Transaction& transaction)
 {
     SQLite::Statement qryInsert{ m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)" };
-    qryInsert.bind(1, transaction.getID());
+    std::stringstream strAmount;
+    strAmount << transaction.getAmount();
+    qryInsert.bind(1, transaction.getId());
     qryInsert.bind(2, boost::gregorian::to_iso_extended_string(transaction.getDate()));
     qryInsert.bind(3, transaction.getDescription());
     qryInsert.bind(4, static_cast<int>(transaction.getType()));
     qryInsert.bind(5, static_cast<int>(transaction.getRepeatInterval()));
-    qryInsert.bind(6, transaction.getAmount());
+    qryInsert.bind(6, strAmount.str());
     if(qryInsert.exec() > 0)
     {
-        m_transactions.insert({ transaction.getID(), transaction });
+        m_transactions.insert({ transaction.getId(), transaction });
         return true;
     }
     return false;
@@ -143,15 +146,17 @@ bool Account::addTransaction(const Transaction& transaction)
 
 bool Account::updateTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryUpdate{ m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getID()) };
+    SQLite::Statement qryUpdate{ m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getId()) };
+    std::stringstream strAmount;
+    strAmount << transaction.getAmount();
     qryUpdate.bind(1, boost::gregorian::to_iso_extended_string(transaction.getDate()));
     qryUpdate.bind(2, transaction.getDescription());
     qryUpdate.bind(3, static_cast<int>(transaction.getType()));
     qryUpdate.bind(4, static_cast<int>(transaction.getRepeatInterval()));
-    qryUpdate.bind(5, transaction.getAmount());
+    qryUpdate.bind(5, strAmount.str());
     if(qryUpdate.exec() > 0)
     {
-        m_transactions[transaction.getID()] = transaction;
+        m_transactions[transaction.getId()] = transaction;
         return true;
     }
     return false;
@@ -167,9 +172,9 @@ bool Account::deleteTransaction(unsigned int id)
     return false;
 }
 
-double Account::getIncome() const
+boost::multiprecision::cpp_dec_float_50 Account::getIncome() const
 {
-    double income{ 0.00 };
+    boost::multiprecision::cpp_dec_float_50 income{ 0.00 };
     for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
     {
         if(pair.second.getType() == TransactionType::Income)
@@ -180,9 +185,9 @@ double Account::getIncome() const
     return income;
 }
 
-double Account::getExpense() const
+boost::multiprecision::cpp_dec_float_50 Account::getExpense() const
 {
-    double expense{ 0.00 };
+    boost::multiprecision::cpp_dec_float_50 expense{ 0.00 };
     for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
     {
         if(pair.second.getType() == TransactionType::Expense)
@@ -193,9 +198,9 @@ double Account::getExpense() const
     return expense;
 }
 
-double Account::getTotal() const
+boost::multiprecision::cpp_dec_float_50 Account::getTotal() const
 {
-    double total{ 0.00 };
+    boost::multiprecision::cpp_dec_float_50 total{ 0.00 };
     for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
     {
         if(pair.second.getType() == TransactionType::Income)
@@ -235,9 +240,10 @@ bool Account::restore(const std::string& restorePath)
         transaction.setDate(boost::gregorian::from_string(qryGetAll.getColumn(1).getString()));
         transaction.setDescription(qryGetAll.getColumn(2).getString());
         transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
-        transaction.setAmount(qryGetAll.getColumn(4).getDouble());
-        m_transactions.insert({ transaction.getID(), transaction });
+        transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAll.getColumn(5).getString()));
+        m_transactions.insert({ transaction.getId(), transaction });
     }
     return true;
 }
+
 

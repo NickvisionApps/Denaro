@@ -2,6 +2,7 @@
 
 #include <string>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 
 namespace NickvisionMoney::Models
 {
@@ -26,7 +27,7 @@ namespace NickvisionMoney::Models
     {
     public:
         Transaction(unsigned int id = 0);
-        unsigned int getID() const;
+        unsigned int getId() const;
         const boost::gregorian::date& getDate() const;
         void setDate(const boost::gregorian::date& date);
         const std::string& getDescription() const;
@@ -35,8 +36,8 @@ namespace NickvisionMoney::Models
         void setType(TransactionType type);
         RepeatInterval getRepeatInterval() const;
         void setRepeatInterval(RepeatInterval repeatInterval);
-        double getAmount() const;
-        void setAmount(double amount);
+        boost::multiprecision::cpp_dec_float_50 getAmount() const;
+        void setAmount(boost::multiprecision::cpp_dec_float_50 amount);
         bool operator<(const Transaction& toCompare) const;
         bool operator>(const Transaction& toCompare) const;
         bool operator==(const Transaction& toCompare) const;
@@ -48,6 +49,6 @@ namespace NickvisionMoney::Models
         std::string m_description;
         TransactionType m_type;
         RepeatInterval m_repeatInterval;
-        double m_amount;
+        boost::multiprecision::cpp_dec_float_50 m_amount;
     };
 }

@@ -7,7 +7,7 @@ Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ 1900, 1, 1 }, m_
 
 }
 
-unsigned int Transaction::getID() const
+unsigned int Transaction::getId() const
 {
     return m_id;
 }
@@ -52,12 +52,12 @@ void Transaction::setRepeatInterval(RepeatInterval repeatInterval)
     m_repeatInterval = repeatInterval;
 }
 
-double Transaction::getAmount() const
+boost::multiprecision::cpp_dec_float_50 Transaction::getAmount() const
 {
     return m_amount;
 }
 
-void Transaction::setAmount(double amount)
+void Transaction::setAmount(boost::multiprecision::cpp_dec_float_50 amount)
 {
     m_amount = amount;
 }

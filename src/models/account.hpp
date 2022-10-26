@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 #include <map>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 #include <SQLiteCpp/SQLiteCpp.h>
 #include "transaction.hpp"
 
@@ -19,9 +20,9 @@ namespace NickvisionMoney::Models
         bool addTransaction(const Transaction& transaction);
         bool updateTransaction(const Transaction& transaction);
         bool deleteTransaction(unsigned int id);
-        double getIncome() const;
-        double getExpense() const;
-        double getTotal() const;
+        boost::multiprecision::cpp_dec_float_50 getIncome() const;
+        boost::multiprecision::cpp_dec_float_50 getExpense() const;
+        boost::multiprecision::cpp_dec_float_50 getTotal() const;
         bool backup(const std::string& backupPath);
         bool restore(const std::string& restorePath);
 
