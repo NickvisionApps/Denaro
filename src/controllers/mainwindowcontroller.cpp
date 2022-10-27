@@ -33,11 +33,6 @@ void MainWindowController::startup()
 {
     if(!m_isOpened)
     {
-        if(m_configuration.getIsFirstTimeOpen())
-        {
-            m_configuration.setIsFirstTimeOpen(false);
-            m_configuration.save();
-        }
         m_isOpened = true;
     }
 }
@@ -45,6 +40,11 @@ void MainWindowController::startup()
 void MainWindowController::onConfigurationChanged()
 {
 
+}
+
+const std::string& MainWindowController::getCurrencySymbol() const
+{
+    return m_configuration.getCurrencySymbol();
 }
 
 void MainWindowController::registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback)

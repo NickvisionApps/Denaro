@@ -6,7 +6,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_theme{ Theme::System }, m_isFirstTimeOpen{ true }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_theme{ Theme::System }, m_currencySymbol{ "$" }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -18,7 +18,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         Json::Value json;
         configFile >> json;
         m_theme = static_cast<Theme>(json.get("Theme", 0).asInt());
-        m_isFirstTimeOpen = json.get("IsFirstTimeOpen", true).asBool();
+        m_currencySymbol = json.get("CurrencySymbol", "$").asString();
     }
 }
 
@@ -32,14 +32,14 @@ void Configuration::setTheme(Theme theme)
     m_theme = theme;
 }
 
-bool Configuration::getIsFirstTimeOpen() const
+const std::string& Configuration::getCurrencySymbol() const
 {
-    return m_isFirstTimeOpen;
+    return m_currencySymbol;
 }
 
-void Configuration::setIsFirstTimeOpen(bool isFirstTimeOpen)
+void Configuration::setCurrencySymbol(const std::string& currencySymbol)
 {
-    m_isFirstTimeOpen = isFirstTimeOpen;
+    m_currencySymbol = currencySymbol;
 }
 
 void Configuration::save() const
@@ -49,7 +49,7 @@ void Configuration::save() const
     {
         Json::Value json;
         json["Theme"] = static_cast<int>(m_theme);
-        json["IsFirstTimeOpen"] = m_isFirstTimeOpen;
+        json["CurrencySymbol"] = m_currencySymbol;
         configFile << json;
     }
 }

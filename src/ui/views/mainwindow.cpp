@@ -120,7 +120,7 @@ void MainWindow::onAccountAdded(const std::string& path)
 {
     g_simple_action_set_enabled(m_actCloseAccount, true);
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
-    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(m_tabView, AccountViewController(path)) };
+    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(m_tabView, AccountViewController(path, m_controller.getCurrencySymbol())) };
     adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
     m_accountViews.push_back(std::move(newAccountView));
 }

@@ -37,17 +37,17 @@ namespace NickvisionMoney::Models
 		 */
 		void setTheme(Theme theme);
 		/**
-		 * Gets whether or not the application is being opened for the first time
+		 * Gets the currency symbol to use when displaying monetary values
 		 *
-		 * @returns True if the application is being opened for the first time, else false
+		 * @returns The currency symbol to use when displaying monetary values
 		 */
-		bool getIsFirstTimeOpen() const;
+		const std::string& getCurrencySymbol() const;
 		/**
-		 * Sets whether or not the application will be treated as being opened for the first time
+		 * Sets the currency symbol to use when displaying monetary values
 		 *
-		 * @param isFirstTimeOpen True to be treated as being opened for the first time, else false
+		 * @param currencySymbol The new currency symbol to use when displaying monetary values
 		 */
-		void setIsFirstTimeOpen(bool isFirstTimeOpen);
+		void setCurrencySymbol(const std::string& currencySymbol);
 		/**
 		 * Saves the configuration to disk
 		 */
@@ -56,6 +56,6 @@ namespace NickvisionMoney::Models
 	private:
 		std::string m_configDir;
 		Theme m_theme;
-		bool m_isFirstTimeOpen;
+		std::string m_currencySymbol;
 	};
 }

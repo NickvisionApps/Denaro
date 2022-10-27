@@ -56,6 +56,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		void onConfigurationChanged();
 		/**
+		 * Gets the currency symbol to use when displaying monetary values
+		 *
+		 * @returns The currency symbol to use when displaying monetary values
+		 */
+		const std::string& getCurrencySymbol() const;
+		/**
 		 * Registers a callback for added an account to the UI
 		 *
 		 * @param callback A void(const std::string&) function

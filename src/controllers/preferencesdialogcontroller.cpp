@@ -18,14 +18,14 @@ void PreferencesDialogController::setTheme(int theme)
     m_configuration.setTheme(static_cast<Theme>(theme));
 }
 
-bool PreferencesDialogController::getIsFirstTimeOpen() const
+const std::string& PreferencesDialogController::getCurrencySymbol() const
 {
-    return m_configuration.getIsFirstTimeOpen();
+    return m_configuration.getCurrencySymbol();
 }
 
-void PreferencesDialogController::setIsFirstTimeOpen(bool isFirstTimeOpen)
+void PreferencesDialogController::setCurrencySymbol(const std::string& currencySymbol)
 {
-    m_configuration.setIsFirstTimeOpen(isFirstTimeOpen);
+    m_configuration.setCurrencySymbol(currencySymbol);
 }
 
 void PreferencesDialogController::saveConfiguration() const

@@ -29,17 +29,17 @@ namespace NickvisionMoney::Controllers
 		 */
 		void setTheme(int theme);
 		/**
-		 * Gets whether or not the application is first time open from configuration
+		 * Gets the currency symbol to use when displaying monetary values
 		 *
-		 * @returns True for first time open, else false
+		 * @returns The currency symbol to use when displaying monetary values
 		 */
-		bool getIsFirstTimeOpen() const;
+		const std::string& getCurrencySymbol() const;
 		/**
-		 * Sets whether or not the application is first time open in the configuration
+		 * Sets the currency symbol to use when displaying monetary values
 		 *
-		 * @param isFirstTimeOpen True for is first time open, else false
+		 * @param currencySymbol The new currency symbol to use when displaying monetary values
 		 */
-		void setIsFirstTimeOpen(bool isFirstTimeOpen);
+		void setCurrencySymbol(const std::string& currencySymbol);
 		/**
 		 * Saves the configuration file
 		 */

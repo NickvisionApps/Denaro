@@ -24,22 +24,18 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ "System", "Light", "Dark", nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
     g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
-    //Application Group
-    m_grpApplication = adw_preferences_group_new();
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpApplication), "Application");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpApplication), "Customize application settings.");
-    //Is First Time Open Row
-    m_rowIsFirstTimeOpen = adw_action_row_new();
-    m_switchIsFirstTimeOpen = gtk_switch_new();
-    gtk_widget_set_valign(m_switchIsFirstTimeOpen, GTK_ALIGN_CENTER);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIsFirstTimeOpen), "Is First Time Open");
-    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
-    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
-    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpApplication), m_rowIsFirstTimeOpen);
+    //Money Group
+    m_grpMoney = adw_preferences_group_new();
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpMoney), "Money");
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpMoney), "Customize money settings.");
+    //Currency Symbol Row
+    m_rowCurrencySymbol = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowCurrencySymbol), "Currency Symbol");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpMoney), m_rowCurrencySymbol);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
-    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpApplication));
+    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpMoney));
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -47,7 +43,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
-    gtk_switch_set_active(GTK_SWITCH(m_switchIsFirstTimeOpen), m_controller.getIsFirstTimeOpen());
+    gtk_editable_set_text(GTK_EDITABLE(m_rowCurrencySymbol), m_controller.getCurrencySymbol().c_str());
 }
 
 GtkWidget* PreferencesDialog::gobj()
@@ -62,7 +58,8 @@ void PreferencesDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
-    m_controller.setIsFirstTimeOpen(gtk_switch_get_active(GTK_SWITCH(m_switchIsFirstTimeOpen)));
+    std::string currencySymbol{ gtk_editable_get_text(GTK_EDITABLE(m_rowCurrencySymbol)) };
+    m_controller.setCurrencySymbol(currencySymbol.empty() ? "$" : currencySymbol);
     m_controller.saveConfiguration();
     gtk_window_destroy(GTK_WINDOW(m_gobj));
 }
