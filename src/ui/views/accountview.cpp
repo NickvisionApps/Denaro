@@ -10,9 +10,9 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     //Account Total
     m_rowTotal = adw_expander_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), "Total");
-    adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), m_controller.getAccountTotalString().c_str());
+    adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
     //Account Income
-    m_lblIncome = gtk_label_new(m_controller.getAccountIncomeString().c_str());
+    m_lblIncome = gtk_label_new("");
     gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblIncome), "success");
     m_rowIncome = adw_action_row_new();
@@ -20,7 +20,7 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
     //Account Expense
-    m_lblExpense = gtk_label_new(m_controller.getAccountExpenseString().c_str());
+    m_lblExpense = gtk_label_new("");
     gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblExpense), "error");
     m_rowExpense = adw_action_row_new();
@@ -44,6 +44,8 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     //Tab Page
     m_gobj = adw_tab_view_append(parent, m_scrollMain);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
+    //Information
+    refreshInformation();
 }
 
 AdwTabPage* AccountView::gobj()
@@ -53,5 +55,8 @@ AdwTabPage* AccountView::gobj()
 
 void AccountView::refreshInformation()
 {
-
+    //Overview
+    adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), m_controller.getAccountTotalString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
 }
