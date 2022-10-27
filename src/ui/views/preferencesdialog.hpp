@@ -37,7 +37,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_page{ nullptr };
 		GtkWidget* m_grpUserInterface{ nullptr };
 		GtkWidget* m_rowTheme{ nullptr };
-		GtkWidget* m_grpMoney{ nullptr };
+		GtkWidget* m_grpCurrency{ nullptr };
 		GtkWidget* m_rowCurrencySymbol{ nullptr };
 		/**
 		 * Ocurrs when the theme row is changed
