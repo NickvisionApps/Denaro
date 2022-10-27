@@ -10,6 +10,9 @@ namespace NickvisionMoney::Controllers
 	public:
 		AccountViewController(const std::string& path);
 		const std::string& getAccountPath() const;
+		std::string getAccountTotalString() const;
+		std::string getAccountIncomeString() const;
+		std::string getAccountExpenseString() const;
 
 	private:
 		NickvisionMoney::Models::Account m_account;
