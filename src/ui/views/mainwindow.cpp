@@ -52,7 +52,9 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Page Tabs
     m_pageTabs = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     m_tabView = adw_tab_view_new();
+    g_signal_connect(m_tabView, "close-page", G_CALLBACK((bool (*)(AdwTabView*, AdwTabPage*, gpointer))[](AdwTabView*, AdwTabPage* page, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseAccountPage(page); }), this);
     m_tabBar = adw_tab_bar_new();
+    adw_tab_bar_set_autohide(m_tabBar, false);
     adw_tab_bar_set_view(m_tabBar, m_tabView);
     gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabBar));
     gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabView));
@@ -173,14 +175,7 @@ void MainWindow::onOpenAccount()
 
 void MainWindow::onCloseAccount()
 {
-    int selectedPageIndex{ adw_tab_view_get_page_position(m_tabView, adw_tab_view_get_selected_page(m_tabView)) };
     adw_tab_view_close_page(m_tabView, adw_tab_view_get_selected_page(m_tabView));
-    m_accountViews.erase(m_accountViews.begin() + selectedPageIndex);
-    if(m_accountViews.empty())
-    {
-        g_simple_action_set_enabled(m_actCloseAccount, false);
-        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageNoAccounts");
-    }
 }
 
 void MainWindow::onPreferences()
@@ -214,4 +209,17 @@ void MainWindow::onAbout()
                           "artists", new const char*[2]{ "David Lapshin https://github.com/daudix-UFO", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
+}
+
+bool MainWindow::onCloseAccountPage(AdwTabPage* page)
+{
+    int indexPage{ adw_tab_view_get_page_position(m_tabView, page) };
+    m_accountViews.erase(m_accountViews.begin() + indexPage);
+    adw_tab_view_close_page_finish(m_tabView, page, true);
+    if(m_accountViews.empty())
+    {
+        g_simple_action_set_enabled(m_actCloseAccount, false);
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageNoAccounts");
+    }
+    return GDK_EVENT_STOP;
 }

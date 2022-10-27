@@ -83,5 +83,11 @@ namespace NickvisionMoney::UI::Views
 		 * Displays the about dialog
 		 */
 		void onAbout();
+		/**
+		 * Occurs when an account page is closing
+		 *
+		 * @param page The page that is closing
+		 */
+		bool onCloseAccountPage(AdwTabPage* page);
 	};
 }
