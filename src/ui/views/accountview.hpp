@@ -27,6 +27,8 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_lblIncome{ nullptr };
 		GtkWidget* m_rowExpense{ nullptr };
 		GtkWidget* m_lblExpense{ nullptr };
+		GtkWidget* m_grpTransactions{ nullptr };
+		GtkWidget* m_btnNewTransaction{ nullptr };
 		/*
 		 * Refreshes the UI with the account information
 		 */

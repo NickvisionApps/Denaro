@@ -27,7 +27,7 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), "Expense");
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
-    //Account Overview
+    //Overview Group
     m_grpOverview = adw_preferences_group_new();
     gtk_widget_set_margin_start(m_grpOverview, 30);
     gtk_widget_set_margin_top(m_grpOverview, 10);
@@ -36,6 +36,22 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), "Overview");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
+    //Button New Transaction
+    m_btnNewTransaction = gtk_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewTransaction), "flat");
+    GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), "New");
+    gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
+    //Transactions Group
+    m_grpTransactions = adw_preferences_group_new();
+    gtk_widget_set_margin_start(m_grpTransactions, 30);
+    gtk_widget_set_margin_top(m_grpTransactions, 10);
+    gtk_widget_set_margin_end(m_grpTransactions, 30);
+    gtk_widget_set_margin_bottom(m_grpTransactions, 10);
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), "Transactions");
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_btnNewTransaction);
+    gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
     //Main Layout
     m_scrollMain = gtk_scrolled_window_new();
     gtk_widget_set_hexpand(m_scrollMain, true);
