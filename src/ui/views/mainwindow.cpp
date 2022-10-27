@@ -1,13 +1,9 @@
 #include "mainwindow.hpp"
-#include <chrono>
-#include <thread>
-#include <utility>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
-#include "../controls/progressdialog.hpp"
+#include <filesystem>
 
 using namespace NickvisionMoney::Controllers;
-using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
 MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
@@ -28,7 +24,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_menu_append(menuAccount, "New Account", "win.newAccount");
     g_menu_append(menuAccount, "Open Account", "win.openAccount");
     g_menu_append(menuAccount, "Close Account", "win.closeAccount");
-    gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "emblem-documents-symbolic");
+    gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "bank-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccount), G_MENU_MODEL(menuAccount));
     gtk_widget_set_tooltip_text(m_btnMenuAccount, "Account Menu");
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
@@ -53,9 +49,17 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
     adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "No Accounts Open");
     adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "Open or create an account to get started.");
+    //Page Tabs
+    m_pageTabs = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    m_tabView = adw_tab_view_new();
+    m_tabBar = adw_tab_bar_new();
+    adw_tab_bar_set_view(m_tabBar, m_tabView);
+    gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabBar));
+    gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabView));
     //View Stack
     m_viewStack = adw_view_stack_new();
     adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageStatusNoAccounts, "pageNoAccounts");
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageTabs, "pageTabs");
     adw_toast_overlay_set_child(ADW_TOAST_OVERLAY(m_toastOverlay), m_viewStack);
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -64,6 +68,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_application_window_set_content(ADW_APPLICATION_WINDOW(m_gobj), m_mainBox);
     //Send Toast Callback
     m_controller.registerSendToastCallback([&](const std::string& message) { adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(message.c_str())); });
+    //Account Added Callback
+    m_controller.registerAccountAddedCallback([&](const std::string& path) { onAccountAdded(path); });
     //New Account Action
     m_actNewAccount = g_simple_action_new("newAccount", nullptr);
     g_signal_connect(m_actNewAccount, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onNewAccount(); }), this);
@@ -108,6 +114,13 @@ void MainWindow::start()
     m_controller.startup();
 }
 
+void MainWindow::onAccountAdded(const std::string& test)
+{
+    adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
+    AdwTabPage* newPage{ adw_tab_view_append(m_tabView, gtk_label_new(std::filesystem::path(test).filename().c_str())) };
+    adw_tab_page_set_title(newPage, test.c_str());
+}
+
 void MainWindow::onNewAccount()
 {
     GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new("Open Account", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, "_Save", "_Cancel") };
@@ -123,6 +136,8 @@ void MainWindow::onNewAccount()
         {
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            std::string path{ g_file_get_path(file) };
+            mainWindow->m_controller.addAccount(path);
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -145,6 +160,8 @@ void MainWindow::onOpenAccount()
         {
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            std::string path{ g_file_get_path(file) };
+            mainWindow->m_controller.addAccount(path);
             g_object_unref(file);
         }
         g_object_unref(dialog);

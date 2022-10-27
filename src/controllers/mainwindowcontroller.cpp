@@ -46,3 +46,17 @@ void MainWindowController::onConfigurationChanged()
 {
 
 }
+
+void MainWindowController::registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback)
+{
+    m_accountAddedCallback = callback;
+}
+
+void MainWindowController::addAccount(std::string& path)
+{
+    if(std::filesystem::path(path).extension().empty())
+    {
+        path += ".nmoney";
+    }
+    m_accountAddedCallback(path);
+}

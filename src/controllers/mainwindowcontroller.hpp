@@ -1,7 +1,9 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <string>
+#include <vector>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
@@ -53,6 +55,18 @@ namespace NickvisionMoney::Controllers
 		 * Updates the controller based on the configuration changes
 		 */
 		void onConfigurationChanged();
+		/**
+		 * Registers a callback for added an account to the UI
+		 *
+		 * @param callback A void(const std::string&) function
+		 */
+		void registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback);
+		/**
+		 * Added an account to the list of opened accounts
+		 *
+		 * @param path The path of the account to add
+		 */
+		void addAccount(std::string& path);
 
 	private:
 		NickvisionMoney::Models::AppInfo& m_appInfo;
@@ -60,5 +74,6 @@ namespace NickvisionMoney::Controllers
 		bool m_isOpened;
 		bool m_isDevVersion;
 		std::function<void(const std::string& message)> m_sendToastCallback;
+		std::function<void(const std::string& path)> m_accountAddedCallback;
 	};
 }

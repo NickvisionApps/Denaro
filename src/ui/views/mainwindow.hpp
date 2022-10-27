@@ -40,12 +40,19 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_toastOverlay{ nullptr };
 		GtkWidget* m_viewStack{ nullptr };
 		GtkWidget* m_pageStatusNoAccounts{ nullptr };
+		GtkWidget* m_pageTabs{ nullptr };
+		AdwTabView* m_tabView{ nullptr };
+		AdwTabBar* m_tabBar{ nullptr };
 		GSimpleAction* m_actNewAccount{ nullptr };
 		GSimpleAction* m_actOpenAccount{ nullptr };
 		GSimpleAction* m_actCloseAccount{ nullptr };
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
+		/**
+		 * Occurs when an account is created or opened
+		 */
+		void onAccountAdded(const std::string& test);
 		/**
 		 * Creates a new account
 		 */
