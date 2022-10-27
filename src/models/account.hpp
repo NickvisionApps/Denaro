@@ -1,8 +1,9 @@
 #pragma once
 
+#include <map>
+#include <memory>
 #include <optional>
 #include <string>
-#include <map>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <SQLiteCpp/SQLiteCpp.h>
 #include "transaction.hpp"
@@ -28,7 +29,7 @@ namespace NickvisionMoney::Models
 
 	private:
 		std::string m_path;
-        SQLite::Database m_db;
+        std::shared_ptr<SQLite::Database> m_db;
         std::map<unsigned int, Transaction> m_transactions;
 	};
 }

@@ -6,10 +6,10 @@
 
 using namespace NickvisionMoney::Models;
 
-Account::Account(const std::string& path) : m_path{ path }, m_db{ m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE }
+Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
-    m_db.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount REAL)");
-    SQLite::Statement qryGetAll{ m_db, "SELECT * FROM transactions" };
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount REAL)");
+    SQLite::Statement qryGetAll{ *m_db, "SELECT * FROM transactions" };
     while(qryGetAll.executeStep())
     {
         Transaction transaction(qryGetAll.getColumn(0).getInt());
@@ -127,7 +127,7 @@ unsigned int Account::getNextAvailableId() const
 
 bool Account::addTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryInsert{ m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)" };
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)" };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryInsert.bind(1, transaction.getId());
@@ -146,7 +146,7 @@ bool Account::addTransaction(const Transaction& transaction)
 
 bool Account::updateTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryUpdate{ m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getId()) };
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getId()) };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryUpdate.bind(1, boost::gregorian::to_iso_extended_string(transaction.getDate()));
@@ -164,7 +164,7 @@ bool Account::updateTransaction(const Transaction& transaction)
 
 bool Account::deleteTransaction(unsigned int id)
 {
-    if(m_db.exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
+    if(m_db->exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
     {
         m_transactions.erase(id);
         return true;
@@ -221,7 +221,7 @@ bool Account::backup(const std::string& backupPath)
     {
         return false;
     }
-    m_db.backup(backupPath.c_str(), SQLite::Database::BackupType::Save);
+    m_db->backup(backupPath.c_str(), SQLite::Database::BackupType::Save);
     return true;
 }
 
@@ -231,9 +231,9 @@ bool Account::restore(const std::string& restorePath)
     {
         return false;
     }
-    m_db.backup(restorePath.c_str(), SQLite::Database::BackupType::Load);
+    m_db->backup(restorePath.c_str(), SQLite::Database::BackupType::Load);
     m_transactions.clear();
-    SQLite::Statement qryGetAll(m_db, "SELECT * FROM transactions");
+    SQLite::Statement qryGetAll{ *m_db, "SELECT * FROM transactions" };
     while(qryGetAll.executeStep())
     {
         Transaction transaction(qryGetAll.getColumn(0).getInt());

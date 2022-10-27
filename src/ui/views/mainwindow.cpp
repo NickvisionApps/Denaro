@@ -1,7 +1,7 @@
 #include "mainwindow.hpp"
+#include <filesystem>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
-#include <filesystem>
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
@@ -114,11 +114,13 @@ void MainWindow::start()
     m_controller.startup();
 }
 
-void MainWindow::onAccountAdded(const std::string& test)
+void MainWindow::onAccountAdded(const std::string& path)
 {
+    g_simple_action_set_enabled(m_actCloseAccount, true);
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
-    AdwTabPage* newPage{ adw_tab_view_append(m_tabView, gtk_label_new(std::filesystem::path(test).filename().c_str())) };
-    adw_tab_page_set_title(newPage, test.c_str());
+    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(m_tabView, AccountViewController(path)) };
+    adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
+    m_accountViews.push_back(std::move(newAccountView));
 }
 
 void MainWindow::onNewAccount()
@@ -171,7 +173,14 @@ void MainWindow::onOpenAccount()
 
 void MainWindow::onCloseAccount()
 {
-
+    int selectedPageIndex{ adw_tab_view_get_page_position(m_tabView, adw_tab_view_get_selected_page(m_tabView)) };
+    adw_tab_view_close_page(m_tabView, adw_tab_view_get_selected_page(m_tabView));
+    m_accountViews.erase(m_accountViews.begin() + selectedPageIndex);
+    if(m_accountViews.empty())
+    {
+        g_simple_action_set_enabled(m_actCloseAccount, false);
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageNoAccounts");
+    }
 }
 
 void MainWindow::onPreferences()

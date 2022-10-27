@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+#include <vector>
 #include <adwaita.h>
+#include "accountview.hpp"
 #include "../../controllers/mainwindowcontroller.hpp"
 
 namespace NickvisionMoney::UI::Views
@@ -49,10 +52,13 @@ namespace NickvisionMoney::UI::Views
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
+		std::vector<std::unique_ptr<AccountView>> m_accountViews;
 		/**
 		 * Occurs when an account is created or opened
+		 *
+		 * @param path The full path to the account
 		 */
-		void onAccountAdded(const std::string& test);
+		void onAccountAdded(const std::string& path);
 		/**
 		 * Creates a new account
 		 */
