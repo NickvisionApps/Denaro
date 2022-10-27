@@ -52,6 +52,7 @@ namespace NickvisionMoney::UI::Views
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
+		GtkDropTarget* m_dropTarget{ nullptr };
 		std::vector<std::unique_ptr<AccountView>> m_accountViews;
 		/**
 		 * Occurs when an account is created or opened
@@ -83,6 +84,13 @@ namespace NickvisionMoney::UI::Views
 		 * Displays the about dialog
 		 */
 		void onAbout();
+		/**
+		 * Occurs when the GtkDropTarget is triggered
+		 *
+		 * @param value The value from the drop
+		 * @returns True to accept the drop, else false
+		 */
+		bool onDrop(const GValue* value);
 		/**
 		 * Occurs when an account page is closing
 		 *

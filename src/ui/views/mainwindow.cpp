@@ -103,6 +103,10 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actAbout, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onAbout(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actAbout));
     gtk_application_set_accels_for_action(application, "win.about", new const char*[2]{ "F1", nullptr });
+    //Drop Target
+    m_dropTarget = gtk_drop_target_new(G_TYPE_FILE, GDK_ACTION_COPY);
+    g_signal_connect(m_dropTarget, "drop", G_CALLBACK((int (*)(GtkDropTarget*, const GValue*, gdouble, gdouble, gpointer))[](GtkDropTarget*, const GValue* value, gdouble, gdouble, gpointer data) -> int { return reinterpret_cast<MainWindow*>(data)->onDrop(value); }), this);
+    gtk_widget_add_controller(m_gobj, GTK_EVENT_CONTROLLER(m_dropTarget));
 }
 
 GtkWidget* MainWindow::gobj()
@@ -209,6 +213,19 @@ void MainWindow::onAbout()
                           "artists", new const char*[2]{ "David Lapshin https://github.com/daudix-UFO", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
+}
+
+
+bool MainWindow::onDrop(const GValue* value)
+{
+    void* file{ g_value_get_object(value) };
+    std::string path{ g_file_get_path(G_FILE(file)) };
+    if(std::filesystem::path(path).extension() == ".nmoney")
+    {
+        m_controller.addAccount(path);
+        return true;
+    }
+    return false;
 }
 
 bool MainWindow::onCloseAccountPage(AdwTabPage* page)
