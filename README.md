@@ -11,8 +11,9 @@ TODO
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/198326493-6d18c5df-3fd8-4df6-a1aa-e2eff415eba2.png)
-![AccountPage](https://user-images.githubusercontent.com/17648453/198326507-ab418217-adf7-4b04-b920-a86b6408a316.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/198326516-67569234-d81a-4332-b1e3-230abe23927e.png)
+![OpenAccount](https://user-images.githubusercontent.com/17648453/198750301-09f7b161-8cd1-4951-aabe-3adf27a75a0c.png)
+![New Transaction](https://user-images.githubusercontent.com/17648453/198750305-39517113-32f2-4b28-9654-aa769babfb19.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/198750308-b37cb5ce-68fd-46c9-82f6-bccdc2c51af7.png)
 
 # Dependencies
 - [C++20](https://en.cppreference.com/w/cpp/20)
