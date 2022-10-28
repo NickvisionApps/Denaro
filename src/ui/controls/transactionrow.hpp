@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <string>
 #include <adwaita.h>
 #include "../../models/transaction.hpp"
@@ -24,12 +25,34 @@ namespace NickvisionMoney::UI::Controls
 		 * @returns The GtkWidget* representing the TransactionRow
 		 */
 		GtkWidget* gobj();
+		/**
+		 * Registers a callback for editing the transaction
+		 *
+		 * @param callback A void(unsigned int) function
+		 */
+		void registerEditCallback(const std::function<void(unsigned int)>& callback);
+		/**
+		 * Registers a callback for deleting the transaction
+		 *
+		 * @param callback A void(unsigned int) function
+		 */
+		void registerDeleteCallback(const std::function<void(unsigned int)>& callback);
 
 	private:
 		NickvisionMoney::Models::Transaction m_transaction;
+		std::function<void(unsigned int)> m_editCallback;
+		std::function<void(unsigned int)> m_deleteCallback;
 		GtkWidget* m_gobj;
 		GtkWidget* m_boxButtons;
 		GtkWidget* m_btnEdit;
 		GtkWidget* m_btnDelete;
+		/**
+		 * Occurs when the edit button is clicked
+		 */
+		void onEdit();
+		/**
+		 * Occurs when the delete button is clicked
+		 */
+		void onDelete();
 	};
 }

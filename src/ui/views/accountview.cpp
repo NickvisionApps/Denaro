@@ -1,5 +1,6 @@
 #include "accountview.hpp"
 #include "transactiondialog.hpp"
+#include "../controls/messagedialog.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
@@ -91,6 +92,8 @@ void AccountView::onAccountInfoChanged()
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
         std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getCurrencySymbol()) };
+        row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
+        row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());
         m_transactionRows.push_back(row);
     }
@@ -103,5 +106,24 @@ void AccountView::onNewTransaction()
     if(dialog.run())
     {
         m_controller.addTransaction(controller.getTransaction());
+    }
+}
+
+void AccountView::onEditTransaction(unsigned int id)
+{
+    TransactionDialogController controller{ m_controller.createTransactionDialogController(id) };
+    TransactionDialog dialog{ m_parentWindow, controller };
+    if(dialog.run())
+    {
+        m_controller.updateTransaction(controller.getTransaction());
+    }
+}
+
+void AccountView::onDeleteTransaction(unsigned int id)
+{
+    MessageDialog messageDialog{ m_parentWindow, "Delete Transaction?", "Are you sure you want to delete this transaction?\nThis action is irreversible.", "No", "Yes" };
+    if(messageDialog.run() == MessageDialogResponse::Destructive)
+    {
+        m_controller.deleteTransaction(id);
     }
 }

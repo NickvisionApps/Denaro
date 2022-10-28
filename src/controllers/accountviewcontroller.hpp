@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <map>
 #include <string>
 #include "transactiondialogcontroller.hpp"
@@ -60,7 +61,7 @@ namespace NickvisionMoney::Controllers
 		/**
 		 * Registers a callback for updating the UI when an account's info is changed
 		 *
-		 * @param callback A void(const std::string&) function
+		 * @param callback A void() function
 		 */
 		void registerAccountInfoChangedCallback(const std::function<void()>& callback);
 		/**
@@ -70,6 +71,18 @@ namespace NickvisionMoney::Controllers
 		 */
 		void addTransaction(const NickvisionMoney::Models::Transaction& transaction);
 		/**
+		 * Updates a transaction in the account
+		 *
+		 * @param transaction The transaction to update
+		 */
+		void updateTransaction(const NickvisionMoney::Models::Transaction& transaction);
+		/**
+		 * Deletes a transaction in the account
+		 *
+		 * @param id The id of the transaction to delete
+		 */
+		void deleteTransaction(unsigned int id);
+		/**
 		 * Creates a TransactionDialogController for a new transaction
 		 *
 		 * @returns A new TransactionDialogController
@@ -78,10 +91,10 @@ namespace NickvisionMoney::Controllers
 		/**
 		 * Creates a TransactionDialogController for an existing transaction
 		 *
-		 * @param transaction The transaction to update
+		 * @param id The id of the transaction to edit
 		 * @returns A new TransactionDialogController
 		 */
-		TransactionDialogController createTransactionDialogController(const NickvisionMoney::Models::Transaction& transaction) const;
+		TransactionDialogController createTransactionDialogController(unsigned int id) const;
 
 	private:
 		std::string m_currencySymbol;

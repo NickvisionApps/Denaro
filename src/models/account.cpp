@@ -214,36 +214,3 @@ boost::multiprecision::cpp_dec_float_50 Account::getTotal() const
     }
     return total;
 }
-
-bool Account::backup(const std::string& backupPath)
-{
-    if(backupPath == m_path || !std::filesystem::exists(backupPath))
-    {
-        return false;
-    }
-    m_db->backup(backupPath.c_str(), SQLite::Database::BackupType::Save);
-    return true;
-}
-
-bool Account::restore(const std::string& restorePath)
-{
-    if(restorePath == m_path || !std::filesystem::exists(restorePath))
-    {
-        return false;
-    }
-    m_db->backup(restorePath.c_str(), SQLite::Database::BackupType::Load);
-    m_transactions.clear();
-    SQLite::Statement qryGetAll{ *m_db, "SELECT * FROM transactions" };
-    while(qryGetAll.executeStep())
-    {
-        Transaction transaction(qryGetAll.getColumn(0).getInt());
-        transaction.setDate(boost::gregorian::from_string(qryGetAll.getColumn(1).getString()));
-        transaction.setDescription(qryGetAll.getColumn(2).getString());
-        transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
-        transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAll.getColumn(5).getString()));
-        m_transactions.insert({ transaction.getId(), transaction });
-    }
-    return true;
-}
-
-

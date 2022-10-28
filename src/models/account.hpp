@@ -24,8 +24,6 @@ namespace NickvisionMoney::Models
         boost::multiprecision::cpp_dec_float_50 getIncome() const;
         boost::multiprecision::cpp_dec_float_50 getExpense() const;
         boost::multiprecision::cpp_dec_float_50 getTotal() const;
-        bool backup(const std::string& backupPath);
-        bool restore(const std::string& restorePath);
 
 	private:
 		std::string m_path;

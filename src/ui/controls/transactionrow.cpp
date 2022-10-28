@@ -22,12 +22,15 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnEdit), "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnEdit), "edit-symbolic");
     gtk_widget_set_tooltip_text(m_btnEdit, "Edit Transaction");
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_gobj), m_btnEdit);
+    g_signal_connect(m_btnEdit, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransactionRow*>(data)->onEdit(); }), this);
     //Delete Button
     m_btnDelete = gtk_button_new();
     gtk_widget_set_valign(m_btnDelete, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnDelete), "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnDelete), "user-trash-symbolic");
     gtk_widget_set_tooltip_text(m_btnDelete, "Delete Transaction");
+    g_signal_connect(m_btnDelete, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransactionRow*>(data)->onDelete(); }), this);
     //Buttons Box
     m_boxButtons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_boxButtons), m_btnEdit);
@@ -38,4 +41,24 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
 GtkWidget* TransactionRow::gobj()
 {
     return m_gobj;
+}
+
+void TransactionRow::registerEditCallback(const std::function<void(unsigned int)>& callback)
+{
+    m_editCallback = callback;
+}
+
+void TransactionRow::registerDeleteCallback(const std::function<void(unsigned int)>& callback)
+{
+    m_deleteCallback = callback;
+}
+
+void TransactionRow::onEdit()
+{
+    m_editCallback(m_transaction.getId());
+}
+
+void TransactionRow::onDelete()
+{
+    m_deleteCallback(m_transaction.getId());
 }

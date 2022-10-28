@@ -45,5 +45,17 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the new transaction button is clicked
 		 */
 		void onNewTransaction();
+		/**
+		 * Occurs when the edit transaction button is clicked
+		 *
+		 * @param id The id of the transaction to edit
+		 */
+		void onEditTransaction(unsigned int id);
+		/**
+		 * Occurs when the delete transaction button is clicked
+		 *
+		 * @param id The id of the transaction to delete
+		 */
+		void onDeleteTransaction(unsigned int id);
 	};
 }

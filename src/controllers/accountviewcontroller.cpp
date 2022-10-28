@@ -56,12 +56,24 @@ void AccountViewController::addTransaction(const Transaction& transaction)
     m_accountInfoChangedCallback();
 }
 
+void AccountViewController::updateTransaction(const Transaction& transaction)
+{
+    m_account.updateTransaction(transaction);
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::deleteTransaction(unsigned int id)
+{
+    m_account.deleteTransaction(id);
+    m_accountInfoChangedCallback();
+}
+
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
     return { m_account.getNextAvailableId() };
 }
 
-TransactionDialogController AccountViewController::createTransactionDialogController(const Transaction& transaction) const
+TransactionDialogController AccountViewController::createTransactionDialogController(unsigned int id) const
 {
-    return { transaction };
+    return { m_account.getTransactionById(id).value() };
 }
