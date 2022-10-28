@@ -5,6 +5,9 @@
 
 namespace NickvisionMoney::Controllers
 {
+	/**
+	 * Statuses for when a transaction is checked
+	 */
 	enum class TransactionCheckStatus
 	{
 		Valid = 0,

@@ -35,6 +35,22 @@ std::string AccountViewController::getAccountExpenseString() const
     return builder.str();
 }
 
+const std::map<unsigned int, Transaction>& AccountViewController::getTransactions() const
+{
+    return m_account.getTransactions();
+}
+
+void AccountViewController::registerAccountInfoChangedCallback(const std::function<void()>& callback)
+{
+    m_accountInfoChangedCallback = callback;
+}
+
+void AccountViewController::addTransaction(const Transaction& transaction)
+{
+    m_account.addTransaction(transaction);
+    m_accountInfoChangedCallback();
+}
+
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
     return { m_account.getNextAvailableId() };

@@ -1,10 +1,14 @@
 #pragma once
 
+#include <vector>
 #include <adwaita.h>
 #include "../../controllers/accountviewcontroller.hpp"
 
 namespace NickvisionMoney::UI::Views
 {
+	/**
+	 * The view for an opened account
+	 */
 	class AccountView
 	{
 	public:
@@ -30,10 +34,11 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_lblExpense{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
+		std::vector<GtkWidget*> m_transactionRows;
 		/**
 		 * Refreshes the UI with the account information
 		 */
-		void refreshInformation();
+		void onAccountInfoChanged();
 		/**
 		 * Occurs when the new transaction button is clicked
 		 */

@@ -62,7 +62,7 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getCurrencySymbol() const;
 		/**
-		 * Registers a callback for added an account to the UI
+		 * Registers a callback for adding an account to the UI
 		 *
 		 * @param callback A void(const std::string&) function
 		 */
