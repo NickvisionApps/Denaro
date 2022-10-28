@@ -14,6 +14,11 @@ const std::string& AccountViewController::getAccountPath() const
     return m_account.getPath();
 }
 
+const std::string& AccountViewController::getCurrencySymbol() const
+{
+    return m_currencySymbol;
+}
+
 std::string AccountViewController::getAccountTotalString() const
 {
     std::stringstream builder;

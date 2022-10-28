@@ -1,7 +1,9 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include <adwaita.h>
+#include "../controls/transactionrow.hpp"
 #include "../../controllers/accountviewcontroller.hpp"
 
 namespace NickvisionMoney::UI::Views
@@ -34,7 +36,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_lblExpense{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
-		std::vector<GtkWidget*> m_transactionRows;
+		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
 		/**
 		 * Refreshes the UI with the account information
 		 */

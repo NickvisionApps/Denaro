@@ -3,6 +3,7 @@
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
+using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
 AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
@@ -81,17 +82,15 @@ void AccountView::onAccountInfoChanged()
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
     //Transactions
-    for(GtkWidget* transactionRow : m_transactionRows)
+    for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
     {
-        adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpTransactions), transactionRow);
+        adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpTransactions), transactionRow->gobj());
     }
     m_transactionRows.clear();
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
-        GtkWidget* row{ adw_action_row_new() };
-        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), pair.second.getDescription().c_str());
-        adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(pair.second.getId()).c_str());
-        adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row);
+        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getCurrencySymbol()) };
+        adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());
         m_transactionRows.push_back(row);
     }
 }

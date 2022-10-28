@@ -28,6 +28,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getAccountPath() const;
 		/**
+		 * Gets the symbol to use when displaying monetary values
+		 *
+		 * @returns The symbol to use when displaying monetary values
+		 */
+		const std::string& getCurrencySymbol() const;
+		/**
 		 * Gets the total of the account as a string
 		 *
 		 * @returns The total of the account
