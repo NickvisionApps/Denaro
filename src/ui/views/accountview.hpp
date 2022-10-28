@@ -8,7 +8,7 @@ namespace NickvisionMoney::UI::Views
 	class AccountView
 	{
 	public:
-		AccountView(AdwTabView* parent, const NickvisionMoney::Controllers::AccountViewController& controller);
+		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const NickvisionMoney::Controllers::AccountViewController& controller);
 		/**
 		 * Gets the AdwTabPage* representing the AccountView
 		 *
@@ -18,6 +18,7 @@ namespace NickvisionMoney::UI::Views
 
 	private:
 		NickvisionMoney::Controllers::AccountViewController m_controller;
+		GtkWindow* m_parentWindow{ nullptr };
 		AdwTabPage* m_gobj{ nullptr };
 		GtkWidget* m_scrollMain{ nullptr };
 		GtkWidget* m_boxMain{ nullptr };
@@ -29,9 +30,13 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_lblExpense{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
-		/*
+		/**
 		 * Refreshes the UI with the account information
 		 */
 		void refreshInformation();
+		/**
+		 * Occurs when the new transaction button is clicked
+		 */
+		void onNewTransaction();
 	};
 }

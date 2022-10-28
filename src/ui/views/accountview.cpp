@@ -1,9 +1,10 @@
 #include "accountview.hpp"
+#include "transactiondialog.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(AdwTabView* parent, const AccountViewController& controller) : m_controller{ controller }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
 {
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -43,6 +44,7 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
     adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), "New");
     gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
+    g_signal_connect(m_btnNewTransaction, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
     //Transactions Group
     m_grpTransactions = adw_preferences_group_new();
     gtk_widget_set_margin_start(m_grpTransactions, 30);
@@ -58,7 +60,7 @@ AccountView::AccountView(AdwTabView* parent, const AccountViewController& contro
     gtk_widget_set_vexpand(m_scrollMain, true);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollMain), m_boxMain);
     //Tab Page
-    m_gobj = adw_tab_view_append(parent, m_scrollMain);
+    m_gobj = adw_tab_view_append(parentTabView, m_scrollMain);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
     //Information
     refreshInformation();
@@ -75,4 +77,10 @@ void AccountView::refreshInformation()
     adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
+}
+
+void AccountView::onNewTransaction()
+{
+    TransactionDialog transactionDialog{ m_parentWindow };
+    transactionDialog.run();
 }
