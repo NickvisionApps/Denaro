@@ -28,5 +28,8 @@ namespace NickvisionMoney::UI::Controls
 	private:
 		NickvisionMoney::Models::Transaction m_transaction;
 		GtkWidget* m_gobj;
+		GtkWidget* m_boxButtons;
+		GtkWidget* m_btnEdit;
+		GtkWidget* m_btnDelete;
 	};
 }

@@ -14,6 +14,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     m_rowTotal = adw_expander_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), "Total");
     adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
+    adw_expander_row_set_expanded(ADW_EXPANDER_ROW(m_rowTotal), true);
     //Account Income
     m_lblIncome = gtk_label_new("");
     gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
