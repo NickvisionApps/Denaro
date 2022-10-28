@@ -2,6 +2,7 @@
 #include <sstream>
 
 using namespace NickvisionMoney::Controllers;
+using namespace NickvisionMoney::Models;
 
 AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol) : m_currencySymbol{ currencySymbol }, m_account{ path }
 {
@@ -32,4 +33,14 @@ std::string AccountViewController::getAccountExpenseString() const
     std::stringstream builder;
     builder << m_currencySymbol << m_account.getExpense();
     return builder.str();
+}
+
+TransactionDialogController AccountViewController::createTransactionDialogController() const
+{
+    return { m_account.getNextAvailableId() };
+}
+
+TransactionDialogController AccountViewController::createTransactionDialogController(const Transaction& transaction) const
+{
+    return { transaction };
 }

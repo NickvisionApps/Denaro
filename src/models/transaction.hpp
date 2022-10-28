@@ -8,13 +8,13 @@ namespace NickvisionMoney::Models
 {
 	enum class TransactionType
     {
-        Income,
+        Income = 0,
         Expense
     };
 
     enum class RepeatInterval
     {
-        Never,
+        Never = 0,
         Daily,
         Weekly,
         Monthly,

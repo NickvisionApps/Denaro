@@ -81,6 +81,10 @@ void AccountView::refreshInformation()
 
 void AccountView::onNewTransaction()
 {
-    TransactionDialog transactionDialog{ m_parentWindow };
-    transactionDialog.run();
+    TransactionDialogController controller{ m_controller.createTransactionDialogController() };
+    TransactionDialog dialog{ m_parentWindow, controller };
+    if(dialog.run())
+    {
+
+    }
 }

@@ -30,7 +30,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         if(transaction.getRepeatInterval() != RepeatInterval::Never)
         {
             bool repeatNeeeded{ false };
-            boost::gregorian::date today{ boost::gregorian::day_clock::universal_day() };
+            boost::gregorian::date today{ boost::gregorian::day_clock::local_day() };
             if(transaction.getRepeatInterval() == RepeatInterval::Daily)
             {
                 if(today >= transaction.getDate() + boost::gregorian::date_duration(1))

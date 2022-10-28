@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
+#include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
+#include "../models/transaction.hpp"
 
 namespace NickvisionMoney::Controllers
 {
@@ -13,6 +15,8 @@ namespace NickvisionMoney::Controllers
 		std::string getAccountTotalString() const;
 		std::string getAccountIncomeString() const;
 		std::string getAccountExpenseString() const;
+		TransactionDialogController createTransactionDialogController() const;
+		TransactionDialogController createTransactionDialogController(const NickvisionMoney::Models::Transaction& transaction) const;
 
 	private:
 		std::string m_currencySymbol;

@@ -1,8 +1,9 @@
 #include "transactiondialog.hpp"
 
+using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
 
-TransactionDialog::TransactionDialog(GtkWindow* parent) : m_gobj{ adw_message_dialog_new(parent, "Transaction", nullptr) }
+TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Controllers::TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "Transaction", nullptr) }
 {
     //Dialog Settings
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
@@ -13,8 +14,57 @@ TransactionDialog::TransactionDialog(GtkWindow* parent) : m_gobj{ adw_message_di
     g_signal_connect(m_gobj, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->setResponse({ response }); })), this);
     //Preferences Group
     m_preferencesGroup = adw_preferences_group_new();
+    //Id
+    m_rowId = adw_entry_row_new();
+    gtk_widget_set_size_request(m_rowId, 420, -1);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowId), "ID");
+    gtk_editable_set_editable(GTK_EDITABLE(m_rowId), false);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowId);
+    //Date
+    m_calendarDate = gtk_calendar_new();
+    g_signal_connect(m_calendarDate, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
+    m_popoverDate = gtk_popover_new();
+    gtk_popover_set_child(GTK_POPOVER(m_popoverDate), m_calendarDate);
+    m_btnDate = gtk_menu_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnDate), "flat");
+    gtk_widget_set_valign(m_btnDate, GTK_ALIGN_CENTER);
+    gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnDate), m_popoverDate);
+    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
+    m_rowDate = adw_action_row_new();
+    gtk_widget_set_size_request(m_rowDate, 420, -1);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDate), "Date");
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowDate), m_btnDate);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowDate), m_btnDate);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDate);
+    //Description
+    m_rowDescription = adw_entry_row_new();
+    gtk_widget_set_size_request(m_rowDescription, 420, -1);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
+    //Type
+    m_rowType = adw_combo_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), "Type");
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ "Income", "Expense", nullptr })));
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowType);
+    //Repeat Interval
+    m_rowRepeatInterval = adw_combo_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRepeatInterval), "Repeat Interval");
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ "Never", "Daily", "Weekly", "Monthly", "Quarterly", "Yearly", "Biyearly", nullptr })));
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowRepeatInterval);
+    //Amount
+    m_rowAmount = adw_entry_row_new();
+    gtk_widget_set_size_request(m_rowAmount, 420, -1);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowAmount);
     //Layout
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_preferencesGroup);
+    //Load Transaction
+    gtk_editable_set_text(GTK_EDITABLE(m_rowId), m_controller.getIdAsString().c_str());
+    gtk_calendar_select_day(GTK_CALENDAR(m_calendarDate), g_date_time_new_local(m_controller.getYear(), m_controller.getMonth(), m_controller.getDay(), 0, 0, 0.0));
+    gtk_editable_set_text(GTK_EDITABLE(m_rowDescription), m_controller.getDescription().c_str());
+    adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowType), m_controller.getTypeAsInt());
+    adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowRepeatInterval), m_controller.getRepeatIntervalAsInt());
+    gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), m_controller.getAmountAsString().c_str());
 }
 
 GtkWidget* TransactionDialog::gobj()
@@ -29,11 +79,47 @@ bool TransactionDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
+    if(m_controller.getResponse() == "ok")
+    {
+        gtk_widget_hide(m_gobj);
+        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowType)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
+        //Invalid Transaction
+        if(status != TransactionCheckStatus::Valid)
+        {
+            //Reset UI
+            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowAmount), "error");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount");
+            //Mark Error
+            if(status == TransactionCheckStatus::EmptyDescription)
+            {
+                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowDescription), "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description (Empty)");
+            }
+            else if(status == TransactionCheckStatus::EmptyAmount)
+            {
+                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount (Empty)");
+            }
+            else if(status == TransactionCheckStatus::InvalidAmount)
+            {
+                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount (Invalid)");
+            }
+            return run();
+        }
+    }
     gtk_window_destroy(GTK_WINDOW(m_gobj));
-    return true;
+    return m_controller.getResponse() == "ok";
 }
 
 void TransactionDialog::setResponse(const std::string& response)
 {
-    //m_controller.setResponse(response);
+    m_controller.setResponse(response);
+}
+
+void TransactionDialog::onDateChanged()
+{
+    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
 }

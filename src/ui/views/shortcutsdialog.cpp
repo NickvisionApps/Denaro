@@ -33,7 +33,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="Close">Open</property>
+                                    <property name="title">Close</property>
                                     <property name="accelerator">&lt;Control&gt;W</property>
                                 </object>
                             </child>
