@@ -231,6 +231,7 @@ bool MainWindow::onDrop(const GValue* value)
 bool MainWindow::onCloseAccountPage(AdwTabPage* page)
 {
     int indexPage{ adw_tab_view_get_page_position(m_tabView, page) };
+    m_controller.closeAccount(indexPage);
     m_accountViews.erase(m_accountViews.begin() + indexPage);
     adw_tab_view_close_page_finish(m_tabView, page, true);
     if(m_accountViews.empty())

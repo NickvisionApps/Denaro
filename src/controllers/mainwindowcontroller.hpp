@@ -68,11 +68,17 @@ namespace NickvisionMoney::Controllers
 		 */
 		void registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback);
 		/**
-		 * Added an account to the list of opened accounts
+		 * Adds an account to the list of opened accounts
 		 *
 		 * @param path The path of the account to add
 		 */
 		void addAccount(std::string& path);
+		/**
+		 * Closes the account with the provided index
+		 *
+		 * @param index The index of the account
+		 */
+		void closeAccount(int index);
 
 	private:
 		NickvisionMoney::Models::AppInfo& m_appInfo;
@@ -81,5 +87,6 @@ namespace NickvisionMoney::Controllers
 		bool m_isDevVersion;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void(const std::string& path)> m_accountAddedCallback;
+		std::vector<std::string> m_openedAccounts;
 	};
 }

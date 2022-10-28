@@ -1,4 +1,5 @@
 #include "mainwindowcontroller.hpp"
+#include <algorithm>
 #include <filesystem>
 
 using namespace NickvisionMoney::Controllers;
@@ -58,5 +59,14 @@ void MainWindowController::addAccount(std::string& path)
     {
         path += ".nmoney";
     }
-    m_accountAddedCallback(path);
+    if(std::find(m_openedAccounts.begin(), m_openedAccounts.end(), path) == m_openedAccounts.end())
+    {
+        m_openedAccounts.push_back(path);
+        m_accountAddedCallback(path);
+    }
+}
+
+void MainWindowController::closeAccount(int index)
+{
+    m_openedAccounts.erase(m_openedAccounts.begin() + index);
 }
