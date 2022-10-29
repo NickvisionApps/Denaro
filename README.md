@@ -24,3 +24,6 @@
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
 - [sqlitecpp](https://github.com/SRombauts/SQLiteCpp)
 - [boost](https://www.boost.org/)
+
+# Special Thanks
+- [daudix-UFO](https://github.com/daudix-UFO) for our application icons
