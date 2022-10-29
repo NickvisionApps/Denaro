@@ -119,7 +119,7 @@ void AccountView::onAccountInfoChanged()
     m_transactionRows.clear();
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
-        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getCurrencySymbol()) };
+        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());

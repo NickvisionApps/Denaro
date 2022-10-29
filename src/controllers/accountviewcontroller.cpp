@@ -4,7 +4,7 @@
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
 
-AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol, const std::function<void(const std::string& message)>& sendToastCallback) : m_currencySymbol{ currencySymbol }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
+AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol, bool displayCurrencySymbolOnRight, const std::function<void(const std::string& message)>& sendToastCallback) : m_currencySymbol{ currencySymbol }, m_displayCurrencySymbolOnRight{ displayCurrencySymbolOnRight }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
 
 }
@@ -19,24 +19,50 @@ const std::string& AccountViewController::getCurrencySymbol() const
     return m_currencySymbol;
 }
 
+bool AccountViewController::getDisplayCurrencySymbolOnRight() const
+{
+    return m_displayCurrencySymbolOnRight;
+}
+
 std::string AccountViewController::getAccountTotalString() const
 {
     std::stringstream builder;
-    builder << m_currencySymbol << m_account.getTotal();
+    if(m_displayCurrencySymbolOnRight)
+    {
+        builder << m_account.getTotal() << m_currencySymbol;
+    }
+    else
+    {
+        builder << m_currencySymbol << m_account.getTotal();
+    }
     return builder.str();
 }
 
 std::string AccountViewController::getAccountIncomeString() const
 {
     std::stringstream builder;
-    builder << m_currencySymbol << m_account.getIncome();
+    if(m_displayCurrencySymbolOnRight)
+    {
+        builder << m_account.getIncome() << m_currencySymbol;
+    }
+    else
+    {
+        builder << m_currencySymbol << m_account.getIncome();
+    }
     return builder.str();
 }
 
 std::string AccountViewController::getAccountExpenseString() const
 {
     std::stringstream builder;
-    builder << m_currencySymbol << m_account.getExpense();
+    if(m_displayCurrencySymbolOnRight)
+    {
+        builder << m_account.getExpense() << m_currencySymbol;
+    }
+    else
+    {
+        builder << m_currencySymbol << m_account.getExpense();
+    }
     return builder.str();
 }
 

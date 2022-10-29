@@ -18,7 +18,7 @@ namespace NickvisionMoney::UI::Controls
 		 *
 		 * @param transaction The Transaction model to manage
 		 */
-		TransactionRow(const NickvisionMoney::Models::Transaction& transaction, const std::string& currencySymbol);
+		TransactionRow(const NickvisionMoney::Models::Transaction& transaction, const std::string& currencySymbol, bool displayCurrencySymbolOnRight);
 		/**
 		 * Gets the GtkWidget* representing the TransactionRow
 		 *

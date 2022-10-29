@@ -20,8 +20,10 @@ namespace NickvisionMoney::Controllers
 		 *
 		 * @param path The path of the account to open
 		 * @param currencySymbol The symbol to use when displaying monetary values
+		 * @param displayCurrencySymbolOnRight True to display the currency symbol on the right of monetary values, else false
+		 * @param sendToastCallback A callback function for sending a toast notification to the UI
 		 */
-		AccountViewController(const std::string& path, const std::string& currencySymbol, const std::function<void(const std::string& message)>& sendToastCallback);
+		AccountViewController(const std::string& path, const std::string& currencySymbol, bool displayCurrencySymbolOnRight, const std::function<void(const std::string& message)>& sendToastCallback);
 		/**
 		 * Gets the path of the account
 		 *
@@ -34,6 +36,12 @@ namespace NickvisionMoney::Controllers
 		 * @returns The symbol to use when displaying monetary values
 		 */
 		const std::string& getCurrencySymbol() const;
+		/**
+		 * Gets whether or not to display the currency symbol on the right of a monetary value
+		 *
+		 * @returns True to display currency symbol on the right, else false
+		 */
+		bool getDisplayCurrencySymbolOnRight() const;
 		/**
 		 * Gets the total of the account as a string
 		 *
@@ -110,6 +118,7 @@ namespace NickvisionMoney::Controllers
 
 	private:
 		std::string m_currencySymbol;
+		bool m_displayCurrencySymbolOnRight;
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
