@@ -24,7 +24,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.10.0-beta1" date="2022-10-28">
+    <release version="2022.10.0-beta2" date="2022-10-28">
       <description>
         <p>- Redesign with GTK4 and libadwaita 1.2</p>
       </description>

@@ -89,6 +89,12 @@ namespace NickvisionMoney::Models
          * @returns The repeat interval of the transaction
          */
         RepeatInterval getRepeatInterval() const;
+        /**
+         * Gets the repeat interval of the transaction as a string
+         *
+         * @returns The repeat interval of the transaction as a string
+         */
+        std::string getRepeatIntervalAsString() const;
          /**
          * Sets the repeat interval of the transaction
          *

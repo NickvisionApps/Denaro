@@ -47,6 +47,39 @@ RepeatInterval Transaction::getRepeatInterval() const
     return m_repeatInterval;
 }
 
+std::string Transaction::getRepeatIntervalAsString() const
+{
+    if(m_repeatInterval == RepeatInterval::Never)
+    {
+        return "Never";
+    }
+    else if(m_repeatInterval == RepeatInterval::Daily)
+    {
+        return "Daily";
+    }
+    else if(m_repeatInterval == RepeatInterval::Weekly)
+    {
+        return "Weekly";
+    }
+    else if(m_repeatInterval == RepeatInterval::Monthly)
+    {
+        return "Monthly";
+    }
+    else if(m_repeatInterval == RepeatInterval::Quarterly)
+    {
+        return "Quarterly";
+    }
+    else if(m_repeatInterval == RepeatInterval::Yearly)
+    {
+        return "Yearly";
+    }
+    else if(m_repeatInterval == RepeatInterval::Biyearly)
+    {
+        return "Biyearly";
+    }
+    return "";
+}
+
 void Transaction::setRepeatInterval(RepeatInterval repeatInterval)
 {
     m_repeatInterval = repeatInterval;

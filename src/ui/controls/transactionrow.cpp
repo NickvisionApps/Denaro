@@ -13,9 +13,18 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_gobj), builder.str().c_str());
     builder.str("");
     builder.clear();
-    builder << (m_transaction.getType() == TransactionType::Income ? "+ " : "- ") << currencySymbol << m_transaction.getAmount() << "\n";
     builder << boost::gregorian::to_iso_extended_string(m_transaction.getDate());
+    if(m_transaction.getRepeatInterval() != RepeatInterval::Never)
+    {
+        builder << "\n" << "Repeat Interval: " << m_transaction.getRepeatIntervalAsString();
+    }
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_gobj), builder.str().c_str());
+    //Amount Label
+    builder.str("");
+    builder.clear();
+    builder << currencySymbol << m_transaction.getAmount();
+    m_lblAmount = gtk_label_new(builder.str().c_str());
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_lblAmount), m_transaction.getType() == TransactionType::Income ? "success" : "error");
     //Edit Button
     m_btnEdit = gtk_button_new();
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);
@@ -31,11 +40,12 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
     gtk_button_set_icon_name(GTK_BUTTON(m_btnDelete), "user-trash-symbolic");
     gtk_widget_set_tooltip_text(m_btnDelete, "Delete Transaction");
     g_signal_connect(m_btnDelete, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransactionRow*>(data)->onDelete(); }), this);
-    //Buttons Box
-    m_boxButtons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_box_append(GTK_BOX(m_boxButtons), m_btnEdit);
-    gtk_box_append(GTK_BOX(m_boxButtons), m_btnDelete);
-    adw_action_row_add_suffix(ADW_ACTION_ROW(m_gobj), m_boxButtons);
+    //Box
+    m_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+    gtk_box_append(GTK_BOX(m_box), m_lblAmount);
+    gtk_box_append(GTK_BOX(m_box), m_btnEdit);
+    gtk_box_append(GTK_BOX(m_box), m_btnDelete);
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_gobj), m_box);
 }
 
 GtkWidget* TransactionRow::gobj()
