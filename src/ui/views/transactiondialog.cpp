@@ -75,6 +75,7 @@ GtkWidget* TransactionDialog::gobj()
 bool TransactionDialog::run()
 {
     gtk_widget_show(m_gobj);
+    gtk_widget_grab_focus(m_rowDescription);
     while(gtk_widget_is_visible(m_gobj))
     {
         g_main_context_iteration(g_main_context_default(), false);
@@ -122,4 +123,5 @@ void TransactionDialog::setResponse(const std::string& response)
 void TransactionDialog::onDateChanged()
 {
     gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
+    gtk_popover_popdown(GTK_POPOVER(m_popoverDate));
 }
