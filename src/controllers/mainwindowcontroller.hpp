@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "accountviewcontroller.hpp"
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
@@ -56,17 +57,11 @@ namespace NickvisionMoney::Controllers
 		 */
 		void onConfigurationChanged();
 		/**
-		 * Gets the currency symbol to use when displaying monetary values
-		 *
-		 * @returns The currency symbol to use when displaying monetary values
-		 */
-		const std::string& getCurrencySymbol() const;
-		/**
 		 * Registers a callback for adding an account to the UI
 		 *
-		 * @param callback A void(const std::string&) function
+		 * @param callback A void() function
 		 */
-		void registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback);
+		void registerAccountAddedCallback(const std::function<void()>& callback);
 		/**
 		 * Gets the number of accounts opened
 		 *
@@ -79,6 +74,12 @@ namespace NickvisionMoney::Controllers
 		 * @returns The path of the first opened account
 		 */
 		std::string getFirstOpenAccountPath() const;
+		/**
+		 * Creates an AccountViewController for the latest account
+		 *
+		 * @returns A new AccountViewController
+		 */
+		AccountViewController createAccountViewControllerForLatestAccount() const;
 		/**
 		 * Adds an account to the list of opened accounts
 		 *
@@ -98,7 +99,7 @@ namespace NickvisionMoney::Controllers
 		bool m_isOpened;
 		bool m_isDevVersion;
 		std::function<void(const std::string& message)> m_sendToastCallback;
-		std::function<void(const std::string& path)> m_accountAddedCallback;
+		std::function<void()> m_accountAddedCallback;
 		std::vector<std::string> m_openAccounts;
 	};
 }

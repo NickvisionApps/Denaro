@@ -90,8 +90,9 @@ namespace NickvisionMoney::Models
          * Exports the account as a CSV file
          *
          * @param path The path of the CSV file
+         * @returns True if successful, else false
          */
-        void exportAsCSV(const std::string& path);
+        bool exportAsCSV(const std::string& path);
 
 	private:
 		std::string m_path;

@@ -216,7 +216,7 @@ boost::multiprecision::cpp_dec_float_50 Account::getTotal() const
     return total;
 }
 
-void Account::exportAsCSV(const std::string& path)
+bool Account::exportAsCSV(const std::string& path)
 {
     std::ofstream file{ path };
     if(file.is_open())
@@ -231,5 +231,7 @@ void Account::exportAsCSV(const std::string& path)
             file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
             file << pair.second.getAmount() << "\n";
         }
+        return true;
     }
+    return false;
 }

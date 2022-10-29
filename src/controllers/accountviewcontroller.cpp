@@ -4,7 +4,7 @@
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
 
-AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol) : m_currencySymbol{ currencySymbol }, m_account{ path }
+AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol, const std::function<void(const std::string& message)>& sendToastCallback) : m_currencySymbol{ currencySymbol }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
 
 }
@@ -48,6 +48,22 @@ const std::map<unsigned int, Transaction>& AccountViewController::getTransaction
 void AccountViewController::registerAccountInfoChangedCallback(const std::function<void()>& callback)
 {
     m_accountInfoChangedCallback = callback;
+}
+
+void AccountViewController::exportAsCSV(std::string& path)
+{
+    if(std::filesystem::path(path).extension().empty() || std::filesystem::path(path).extension() != ".csv")
+    {
+        path += ".csv";
+    }
+    if(m_account.exportAsCSV(path))
+    {
+        m_sendToastCallback("Exported account to CSV successfully.");
+    }
+    else
+    {
+        m_sendToastCallback("Unable to export account as CSV.");
+    }
 }
 
 void AccountViewController::addTransaction(const Transaction& transaction)

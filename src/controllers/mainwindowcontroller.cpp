@@ -43,12 +43,7 @@ void MainWindowController::onConfigurationChanged()
 
 }
 
-const std::string& MainWindowController::getCurrencySymbol() const
-{
-    return m_configuration.getCurrencySymbol();
-}
-
-void MainWindowController::registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback)
+void MainWindowController::registerAccountAddedCallback(const std::function<void()>& callback)
 {
     m_accountAddedCallback = callback;
 }
@@ -63,16 +58,21 @@ std::string MainWindowController::getFirstOpenAccountPath() const
     return m_openAccounts[0];
 }
 
+AccountViewController MainWindowController::createAccountViewControllerForLatestAccount() const
+{
+    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration.getCurrencySymbol(), m_sendToastCallback };
+}
+
 void MainWindowController::addAccount(std::string& path)
 {
-    if(std::filesystem::path(path).extension().empty())
+    if(std::filesystem::path(path).extension().empty() || std::filesystem::path(path).extension() != ".nmoney")
     {
         path += ".nmoney";
     }
     if(std::find(m_openAccounts.begin(), m_openAccounts.end(), path) == m_openAccounts.end())
     {
         m_openAccounts.push_back(path);
-        m_accountAddedCallback(path);
+        m_accountAddedCallback();
     }
 }
 

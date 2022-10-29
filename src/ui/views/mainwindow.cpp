@@ -90,7 +90,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Send Toast Callback
     m_controller.registerSendToastCallback([&](const std::string& message) { adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(message.c_str())); });
     //Account Added Callback
-    m_controller.registerAccountAddedCallback([&](const std::string& path) { onAccountAdded(path); });
+    m_controller.registerAccountAddedCallback([&]() { onAccountAdded(); });
     //New Account Action
     m_actNewAccount = g_simple_action_new("newAccount", nullptr);
     g_signal_connect(m_actNewAccount, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onNewAccount(); }), this);
@@ -139,11 +139,11 @@ void MainWindow::start()
     m_controller.startup();
 }
 
-void MainWindow::onAccountAdded(const std::string& path)
+void MainWindow::onAccountAdded()
 {
     g_simple_action_set_enabled(m_actCloseAccount, true);
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
-    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, AccountViewController(path, m_controller.getCurrencySymbol())) };
+    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, m_controller.createAccountViewControllerForLatestAccount()) };
     adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
     m_accountViews.push_back(std::move(newAccountView));
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);

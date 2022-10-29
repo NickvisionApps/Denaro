@@ -21,7 +21,7 @@ namespace NickvisionMoney::Controllers
 		 * @param path The path of the account to open
 		 * @param currencySymbol The symbol to use when displaying monetary values
 		 */
-		AccountViewController(const std::string& path, const std::string& currencySymbol);
+		AccountViewController(const std::string& path, const std::string& currencySymbol, const std::function<void(const std::string& message)>& sendToastCallback);
 		/**
 		 * Gets the path of the account
 		 *
@@ -65,6 +65,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		void registerAccountInfoChangedCallback(const std::function<void()>& callback);
 		/**
+		 * Export the account as a CSV file
+		 *
+		 * @param path The path to the csv file
+		 */
+		void exportAsCSV(std::string& path);
+		/**
 		 * Adds a new transaction to the account
 		 *
 		 * @param transaction The transaction to add
@@ -99,6 +105,7 @@ namespace NickvisionMoney::Controllers
 	private:
 		std::string m_currencySymbol;
 		NickvisionMoney::Models::Account m_account;
+		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
 	};
 }

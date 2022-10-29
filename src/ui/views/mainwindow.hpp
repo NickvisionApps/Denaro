@@ -59,10 +59,8 @@ namespace NickvisionMoney::UI::Views
 		std::vector<std::unique_ptr<AccountView>> m_accountViews;
 		/**
 		 * Occurs when an account is created or opened
-		 *
-		 * @param path The full path to the account
 		 */
-		void onAccountAdded(const std::string& path);
+		void onAccountAdded();
 		/**
 		 * Creates a new account
 		 */

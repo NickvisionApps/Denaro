@@ -32,6 +32,17 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), "Expense");
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
+    //Button Menu Account Actions
+    m_btnMenuAccountActions = gtk_menu_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnMenuAccountActions), "flat");
+    GtkWidget* btnMenuAccountActionsContent{ adw_button_content_new() };
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "document-properties-symbolic");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "Actions");
+    gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
+    GMenu* menuActions{ g_menu_new() };
+    g_menu_append(menuActions, "Export as CSV", "account.exportAsCSV");
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
+    g_object_unref(menuActions);
     //Overview Group
     m_grpOverview = adw_preferences_group_new();
     gtk_widget_set_margin_start(m_grpOverview, 30);
@@ -40,6 +51,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_margin_bottom(m_grpOverview, 10);
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), "Overview");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
     //Button New Transaction
     m_btnNewTransaction = gtk_button_new();
@@ -47,8 +59,8 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
     adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), "New");
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
     gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
-    g_signal_connect(m_btnNewTransaction, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
     //Transactions Group
     m_grpTransactions = adw_preferences_group_new();
     gtk_widget_set_margin_start(m_grpTransactions, 30);
@@ -66,9 +78,20 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     //Tab Page
     m_gobj = adw_tab_view_append(parentTabView, m_scrollMain);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
+    //Action Map
+    m_actionMap = g_simple_action_group_new();
+    gtk_widget_insert_action_group(m_scrollMain, "account", G_ACTION_GROUP(m_actionMap));
+    //Export as CSV Action
+    m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
+    g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
+    //New Transaction Action
+    m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
+    g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
     //Account Info Changed Callback
     m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
-    //Information
+    //Load Information
     onAccountInfoChanged();
 }
 
@@ -97,6 +120,30 @@ void AccountView::onAccountInfoChanged()
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());
         m_transactionRows.push_back(row);
     }
+}
+
+void AccountView::onExportAsCSV()
+{
+    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new("Export as CSV", m_parentWindow, GTK_FILE_CHOOSER_ACTION_SAVE, "_Save", "_Cancel") };
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
+    GtkFileFilter* filter{ gtk_file_filter_new() };
+    gtk_file_filter_set_name(filter, "CSV (*.csv)");
+    gtk_file_filter_add_pattern(filter, "*.csv");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(saveFileDialog), filter);
+    g_object_unref(filter);
+    g_signal_connect(saveFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
+            GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            std::string path{ g_file_get_path(file) };
+            accountView->m_controller.exportAsCSV(path);
+            g_object_unref(file);
+        }
+        g_object_unref(dialog);
+    })), this);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(saveFileDialog));
 }
 
 void AccountView::onNewTransaction()
