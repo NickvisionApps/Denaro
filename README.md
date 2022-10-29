@@ -5,8 +5,9 @@
 
 # Features
 - An easy-to-use interface
-- Supports opening multiple accounts at a time
+- Supports opening multiple accounts at a time, with a familiar tab interface
 - Easily repeat transactions, such as bills that occur every month
+- Export an account as a CSV file and import a CSV file to bulk add transactions to an account
 
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
