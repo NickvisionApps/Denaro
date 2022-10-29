@@ -5,12 +5,12 @@
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
 
-TransactionDialogController::TransactionDialogController(unsigned int newId) : m_response{ "cancel" }, m_transaction{ newId }
+TransactionDialogController::TransactionDialogController(unsigned int newId, const std::string& currencySymbol) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ newId }
 {
 
 }
 
-TransactionDialogController::TransactionDialogController(const Transaction& transaction) : m_response{ "cancel" }, m_transaction{ transaction }
+TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::string& currencySymbol) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ transaction }
 {
 
 }
@@ -23,6 +23,11 @@ const std::string& TransactionDialogController::getResponse() const
 void TransactionDialogController::setResponse(const std::string& response)
 {
     m_response = response;
+}
+
+const std::string& TransactionDialogController::getCurrencySymbol() const
+{
+    return m_currencySymbol;
 }
 
 const Transaction& TransactionDialogController::getTransaction() const

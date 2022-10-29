@@ -26,14 +26,16 @@ namespace NickvisionMoney::Controllers
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param newId The Id of the new transaction
+		 * @param currencySymbol The currency symbol
 		 */
-		TransactionDialogController(unsigned int newId);
+		TransactionDialogController(unsigned int newId, const std::string& currencySymbol);
 		/**
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param transaction The transaction to update
+		 * @param currencySymbol The currency symbol
 		 */
-		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction);
+		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::string& currencySymbol);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -46,6 +48,12 @@ namespace NickvisionMoney::Controllers
 		 * @param response The new response of the dialog
 		 */
 		void setResponse(const std::string& response);
+		/**
+		 * Gets the currency symbol
+		 *
+		 * @returns The currency symbol
+		 */
+		const std::string& getCurrencySymbol() const;
 		/**
 		 * Gets the transaction managed by the dialog
 		 */
@@ -96,6 +104,7 @@ namespace NickvisionMoney::Controllers
 
 	private:
 		std::string m_response;
+		std::string m_currencySymbol;
 		NickvisionMoney::Models::Transaction m_transaction;
 	};
 }

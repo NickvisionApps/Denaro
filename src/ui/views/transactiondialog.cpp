@@ -55,7 +55,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Amount
     m_rowAmount = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowAmount, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), std::string("Amount (" + m_controller.getCurrencySymbol() + ")").c_str());
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowAmount), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowAmount);
     //Layout
@@ -93,7 +93,7 @@ bool TransactionDialog::run()
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowAmount), "error");
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), std::string("Amount (" + m_controller.getCurrencySymbol() + ")").c_str());
             //Mark Error
             if(status == TransactionCheckStatus::EmptyDescription)
             {
