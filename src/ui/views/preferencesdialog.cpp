@@ -27,11 +27,20 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Currency Group
     m_grpCurrency = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCurrency), "Currency");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpCurrency), "Customize currency settings.");
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpCurrency), "Customize currency settings.\n\nA change in one of these settings will only be applied on newly opened accounts.");
     //Currency Symbol Row
     m_rowCurrencySymbol = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowCurrencySymbol), "Currency Symbol");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCurrency), m_rowCurrencySymbol);
+    //Display Currency Symbol On Right Row
+    m_rowDisplayCurrencySymbolOnRight = adw_action_row_new();
+    m_switchDisplayCurrencySymbolOnRight = gtk_switch_new();
+    gtk_widget_set_valign(m_switchDisplayCurrencySymbolOnRight, GTK_ALIGN_CENTER);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDisplayCurrencySymbolOnRight), "Display Currency Symbol On Right");
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), "If checked, the currency symbol will be displayed on the right of a monetary value.");
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), m_switchDisplayCurrencySymbolOnRight);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), m_switchDisplayCurrencySymbolOnRight);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCurrency), m_rowDisplayCurrencySymbolOnRight);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
@@ -44,6 +53,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
     gtk_editable_set_text(GTK_EDITABLE(m_rowCurrencySymbol), m_controller.getCurrencySymbol().c_str());
+    gtk_switch_set_active(GTK_SWITCH(m_switchDisplayCurrencySymbolOnRight), m_controller.getDisplayCurrencySymbolOnRight());
 }
 
 GtkWidget* PreferencesDialog::gobj()
@@ -60,6 +70,7 @@ void PreferencesDialog::run()
     }
     std::string currencySymbol{ gtk_editable_get_text(GTK_EDITABLE(m_rowCurrencySymbol)) };
     m_controller.setCurrencySymbol(currencySymbol.empty() ? "$" : currencySymbol);
+    m_controller.setDisplayCurrencySymbolOnRight(gtk_switch_get_active(GTK_SWITCH(m_switchDisplayCurrencySymbolOnRight)));
     m_controller.saveConfiguration();
     gtk_window_destroy(GTK_WINDOW(m_gobj));
 }

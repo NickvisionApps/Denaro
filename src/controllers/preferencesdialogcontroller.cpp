@@ -28,6 +28,16 @@ void PreferencesDialogController::setCurrencySymbol(const std::string& currencyS
     m_configuration.setCurrencySymbol(currencySymbol);
 }
 
+bool PreferencesDialogController::getDisplayCurrencySymbolOnRight() const
+{
+    return m_configuration.getDisplayCurrencySymbolOnRight();
+}
+
+void PreferencesDialogController::setDisplayCurrencySymbolOnRight(bool displayCurrencySymbolOnRight)
+{
+    m_configuration.setDisplayCurrencySymbolOnRight(displayCurrencySymbolOnRight);
+}
+
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();

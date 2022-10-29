@@ -49,6 +49,18 @@ namespace NickvisionMoney::Models
 		 */
 		void setCurrencySymbol(const std::string& currencySymbol);
 		/**
+		 * Gets whether or not to display the currency symbol on the right of a monetary value
+		 *
+		 * @returns True to display currency symbol on the right, else false
+		 */
+		bool getDisplayCurrencySymbolOnRight() const;
+		/**
+		 * Sets whether or not to display the currency symbol on the right of a monetary value
+		 *
+		 * @param displayCurrencySymbolOnRight True to display currency symbol on the right, else false
+		 */
+		void setDisplayCurrencySymbolOnRight(bool displayCurrencySymbolOnRight);
+		/**
 		 * Saves the configuration to disk
 		 */
 		void save() const;
@@ -57,5 +69,6 @@ namespace NickvisionMoney::Models
 		std::string m_configDir;
 		Theme m_theme;
 		std::string m_currencySymbol;
+		bool m_displayCurrencySymbolOnRight;
 	};
 }
