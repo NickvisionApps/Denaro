@@ -43,6 +43,9 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_toastOverlay{ nullptr };
 		GtkWidget* m_viewStack{ nullptr };
 		GtkWidget* m_pageStatusNoAccounts{ nullptr };
+		GtkWidget* m_boxStatusButtons{ nullptr };
+		GtkWidget* m_btnNewAccount{ nullptr };
+		GtkWidget* m_btnOpenAccount{ nullptr };
 		GtkWidget* m_pageTabs{ nullptr };
 		AdwTabView* m_tabView{ nullptr };
 		AdwTabBar* m_tabBar{ nullptr };

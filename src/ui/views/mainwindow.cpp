@@ -44,17 +44,36 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
     gtk_widget_set_vexpand(m_toastOverlay, true);
+    //Status Buttons
+    m_boxStatusButtons = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
+    //New Account Button
+    m_btnNewAccount = gtk_button_new();
+    gtk_widget_set_halign(m_btnNewAccount, GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(m_btnNewAccount, 240, 50);
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "circular");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "suggested-action");
+    gtk_button_set_label(GTK_BUTTON(m_btnNewAccount), "New Account");
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewAccount), "win.newAccount");
+    gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnNewAccount);
+    //Open Account Button
+    m_btnOpenAccount = gtk_button_new();
+    gtk_widget_set_halign(m_btnOpenAccount, GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(m_btnOpenAccount, 240, 50);
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnOpenAccount), "circular");
+    gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), "Open Account");
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
+    gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
     //Page No Downloads
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
     adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "No Accounts Open");
     adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "Open or create an account to get started.");
+    adw_status_page_set_child(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_boxStatusButtons);
     //Page Tabs
     m_pageTabs = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     m_tabView = adw_tab_view_new();
     g_signal_connect(m_tabView, "close-page", G_CALLBACK((bool (*)(AdwTabView*, AdwTabPage*, gpointer))[](AdwTabView*, AdwTabPage* page, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseAccountPage(page); }), this);
     m_tabBar = adw_tab_bar_new();
-    adw_tab_bar_set_autohide(m_tabBar, false);
     adw_tab_bar_set_view(m_tabBar, m_tabView);
     gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabBar));
     gtk_box_append(GTK_BOX(m_pageTabs), GTK_WIDGET(m_tabView));
