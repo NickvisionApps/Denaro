@@ -97,9 +97,9 @@ namespace NickvisionMoney::Models
          * Imports transactions to the account from a CSV file
          *
          * @param path The path of the CSV file
-         * @returns True if successful, else false
+         * @returns The number of transactions imported
          */
-        bool importFromCSV(const std::string& path);
+        int importFromCSV(const std::string& path);
 
 	private:
 		std::string m_path;

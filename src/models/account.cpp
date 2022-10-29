@@ -3,9 +3,35 @@
 #include <filesystem>
 #include <fstream>
 #include <sstream>
+#include <vector>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 using namespace NickvisionMoney::Models;
+
+std::vector<std::string> split(const std::string& s, const std::string& delim)
+{
+    std::vector<std::string> result;
+    size_t last{ 0 };
+    size_t next{ s.find(delim) };
+    while(next != std::string::npos)
+    {
+        result.push_back(s.substr(last, next - last));
+        last = next + delim.length();
+        next = s.find(delim, last);
+    }
+    result.push_back(s.substr(last));
+    return result;
+}
+
+unsigned int stoui(const std::string& str, size_t* idx = nullptr, int base = 10)
+{
+    unsigned long ui{ std::stoul(str, idx, base) };
+    if (ui > UINT_MAX)
+    {
+        return UINT_MAX;
+    }
+    return ui;
+}
 
 Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
@@ -236,12 +262,98 @@ bool Account::exportAsCSV(const std::string& path)
     return false;
 }
 
-bool Account::importFromCSV(const std::string& path)
+int Account::importFromCSV(const std::string& path)
 {
+    int imported{ 0 };
     std::ifstream file{ path };
     if(file.is_open())
     {
-        return true;
+        std::string line;
+        while(getline(file, line))
+        {
+            //Separate fields by ,
+            std::vector<std::string> fields{ split(line, ",") };
+            if(fields.size() != 6)
+            {
+                continue;
+            }
+            //Get ID
+            unsigned int id{ 0 };
+            try
+            {
+                id = stoui(fields[0]);
+            }
+            catch(...)
+            {
+                continue;
+            }
+            if(getTransactionById(id) != std::nullopt)
+            {
+                continue;
+            }
+            //Get Date
+            boost::gregorian::date date;
+            try
+            {
+                date = boost::gregorian::from_string(fields[1]);
+            }
+            catch(...)
+            {
+                continue;
+            }
+            //Get Description
+            const std::string& description{ fields[2] };
+            //Get Type
+            TransactionType type{ TransactionType::Income };
+            try
+            {
+                int value{ std::stoi(fields[3]) };
+                if(value != 0 && value != 1)
+                {
+                    continue;
+                }
+                type = static_cast<TransactionType>(value);
+            }
+            catch(...)
+            {
+                continue;
+            }
+            //Get Repeat Interval
+            RepeatInterval repeatInterval{ RepeatInterval::Never };
+            try
+            {
+                int value{ std::stoi(fields[4]) };
+                if(value < 0 && value > 6)
+                {
+                    continue;
+                }
+                repeatInterval = static_cast<RepeatInterval>(value);
+            }
+            catch(...)
+            {
+                continue;
+            }
+            //Get Amount
+            boost::multiprecision::cpp_dec_float_50 amount;
+            try
+            {
+                amount = boost::multiprecision::cpp_dec_float_50(fields[5]);
+            }
+            catch(...)
+            {
+                continue;
+            }
+            //Add Transaction
+            Transaction transaction{ id };
+            transaction.setDate(date);
+            transaction.setDescription(description);
+            transaction.setType(type);
+            transaction.setRepeatInterval(repeatInterval);
+            transaction.setAmount(amount);
+            addTransaction(transaction);
+            imported++;
+        }
     }
-    return false;
+    return imported;
 }
+
