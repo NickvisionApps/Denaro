@@ -1,6 +1,7 @@
 #include "account.hpp"
 #include <chrono>
 #include <filesystem>
+#include <fstream>
 #include <sstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
@@ -213,4 +214,22 @@ boost::multiprecision::cpp_dec_float_50 Account::getTotal() const
         }
     }
     return total;
+}
+
+void Account::exportAsCSV(const std::string& path)
+{
+    std::ofstream file{ path };
+    if(file.is_open())
+    {
+        file << "ID,Date,Description,Type,RepeatInterval,Amount\n";
+        for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
+        {
+            file << pair.second.getId() << ",";
+            file << boost::gregorian::to_iso_extended_string(pair.second.getDate()) << ",";
+            file << pair.second.getDescription() << ",";
+            file << static_cast<int>(pair.second.getType()) << ",";
+            file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
+            file << pair.second.getAmount() << "\n";
+        }
+    }
 }
