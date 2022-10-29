@@ -68,6 +68,18 @@ namespace NickvisionMoney::Controllers
 		 */
 		void registerAccountAddedCallback(const std::function<void(const std::string& path)>& callback);
 		/**
+		 * Gets the number of accounts opened
+		 *
+		 * @returns The number of accounts opened
+		 */
+		int getNumberOfOpenAccounts() const;
+		/**
+		 * Gets the path of the first opened account
+		 *
+		 * @returns The path of the first opened account
+		 */
+		std::string getFirstOpenAccountPath() const;
+		/**
 		 * Adds an account to the list of opened accounts
 		 *
 		 * @param path The path of the account to add
@@ -87,6 +99,6 @@ namespace NickvisionMoney::Controllers
 		bool m_isDevVersion;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void(const std::string& path)> m_accountAddedCallback;
-		std::vector<std::string> m_openedAccounts;
+		std::vector<std::string> m_openAccounts;
 	};
 }

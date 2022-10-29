@@ -53,20 +53,30 @@ void MainWindowController::registerAccountAddedCallback(const std::function<void
     m_accountAddedCallback = callback;
 }
 
+int MainWindowController::getNumberOfOpenAccounts() const
+{
+    return m_openAccounts.size();
+}
+
+std::string MainWindowController::getFirstOpenAccountPath() const
+{
+    return m_openAccounts[0];
+}
+
 void MainWindowController::addAccount(std::string& path)
 {
     if(std::filesystem::path(path).extension().empty())
     {
         path += ".nmoney";
     }
-    if(std::find(m_openedAccounts.begin(), m_openedAccounts.end(), path) == m_openedAccounts.end())
+    if(std::find(m_openAccounts.begin(), m_openAccounts.end(), path) == m_openAccounts.end())
     {
-        m_openedAccounts.push_back(path);
+        m_openAccounts.push_back(path);
         m_accountAddedCallback(path);
     }
 }
 
 void MainWindowController::closeAccount(int index)
 {
-    m_openedAccounts.erase(m_openedAccounts.begin() + index);
+    m_openAccounts.erase(m_openAccounts.begin() + index);
 }

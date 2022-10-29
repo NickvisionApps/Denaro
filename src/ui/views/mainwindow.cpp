@@ -49,7 +49,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //New Account Button
     m_btnNewAccount = gtk_button_new();
     gtk_widget_set_halign(m_btnNewAccount, GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(m_btnNewAccount, 240, 50);
+    gtk_widget_set_size_request(m_btnNewAccount, 200, 50);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "circular");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "suggested-action");
     gtk_button_set_label(GTK_BUTTON(m_btnNewAccount), "New Account");
@@ -58,7 +58,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Open Account Button
     m_btnOpenAccount = gtk_button_new();
     gtk_widget_set_halign(m_btnOpenAccount, GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(m_btnOpenAccount, 240, 50);
+    gtk_widget_set_size_request(m_btnOpenAccount, 200, 50);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnOpenAccount), "circular");
     gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), "Open Account");
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
@@ -146,6 +146,7 @@ void MainWindow::onAccountAdded(const std::string& path)
     std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, AccountViewController(path, m_controller.getCurrencySymbol())) };
     adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
     m_accountViews.push_back(std::move(newAccountView));
+    adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
 }
 
 void MainWindow::onNewAccount()
@@ -253,7 +254,8 @@ bool MainWindow::onCloseAccountPage(AdwTabPage* page)
     m_controller.closeAccount(indexPage);
     m_accountViews.erase(m_accountViews.begin() + indexPage);
     adw_tab_view_close_page_finish(m_tabView, page, true);
-    if(m_accountViews.empty())
+    adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
+    if(m_controller.getNumberOfOpenAccounts() == 0)
     {
         g_simple_action_set_enabled(m_actCloseAccount, false);
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageNoAccounts");
