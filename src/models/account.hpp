@@ -93,6 +93,13 @@ namespace NickvisionMoney::Models
          * @returns True if successful, else false
          */
         bool exportAsCSV(const std::string& path);
+        /**
+         * Imports transactions to the account from a CSV file
+         *
+         * @param path The path of the CSV file
+         * @returns True if successful, else false
+         */
+        bool importFromCSV(const std::string& path);
 
 	private:
 		std::string m_path;

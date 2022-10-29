@@ -41,6 +41,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
     GMenu* menuActions{ g_menu_new() };
     g_menu_append(menuActions, "Export as CSV", "account.exportAsCSV");
+    g_menu_append(menuActions, "Import from CSV", "account.importFromCSV");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
     g_object_unref(menuActions);
     //Overview Group
@@ -85,6 +86,10 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
     g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
+    //Import from CSV Action
+    m_actImportFromCSV = g_simple_action_new("importFromCSV", nullptr);
+    g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
     //New Transaction Action
     m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
     g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
@@ -144,6 +149,30 @@ void AccountView::onExportAsCSV()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(saveFileDialog));
+}
+
+void AccountView::onImportFromCSV()
+{
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new("Import from CSV", m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
+    GtkFileFilter* filter{ gtk_file_filter_new() };
+    gtk_file_filter_set_name(filter, "CSV (*.csv)");
+    gtk_file_filter_add_pattern(filter, "*.csv");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
+    g_object_unref(filter);
+    g_signal_connect(openFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
+            GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            std::string path{ g_file_get_path(file) };
+            accountView->m_controller.importFromCSV(path);
+            g_object_unref(file);
+        }
+        g_object_unref(dialog);
+    })), this);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFileDialog));
 }
 
 void AccountView::onNewTransaction()

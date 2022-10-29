@@ -235,3 +235,13 @@ bool Account::exportAsCSV(const std::string& path)
     }
     return false;
 }
+
+bool Account::importFromCSV(const std::string& path)
+{
+    std::ifstream file{ path };
+    if(file.is_open())
+    {
+        return true;
+    }
+    return false;
+}

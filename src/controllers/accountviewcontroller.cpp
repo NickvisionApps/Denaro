@@ -66,6 +66,18 @@ void AccountViewController::exportAsCSV(std::string& path)
     }
 }
 
+void AccountViewController::importFromCSV(std::string& path)
+{
+    if(m_account.importFromCSV(path))
+    {
+        m_sendToastCallback("Imported transactions from CSV successfully.");
+    }
+    else
+    {
+        m_sendToastCallback("Unable to import transactions from CSV.");
+    }
+}
+
 void AccountViewController::addTransaction(const Transaction& transaction)
 {
     m_account.addTransaction(transaction);

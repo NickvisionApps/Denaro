@@ -39,6 +39,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_btnNewTransaction{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
+		GSimpleAction* m_actImportFromCSV{ nullptr };
 		GSimpleAction* m_actNewTransaction{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
 		/**
@@ -49,6 +50,10 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the export as csv menu item is clicked
 		 */
 		void onExportAsCSV();
+		/**
+		 * Occurs when the import from csv menu item is clicked
+		 */
+		void onImportFromCSV();
 		/**
 		 * Occurs when the new transaction button is clicked
 		 */
