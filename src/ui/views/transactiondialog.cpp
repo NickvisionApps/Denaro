@@ -9,7 +9,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
     adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(m_gobj), "cancel", "Cancel", "ok", "OK", nullptr);
     adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(m_gobj), "ok", ADW_RESPONSE_SUGGESTED);
-    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(m_gobj), "cancel");
+    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(m_gobj), "ok");
     adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(m_gobj), "cancel");
     g_signal_connect(m_gobj, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->setResponse({ response }); })), this);
     //Preferences Group
@@ -40,6 +40,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     m_rowDescription = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowDescription, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+    adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowDescription), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
     //Type
     m_rowType = adw_combo_row_new();
@@ -55,6 +56,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     m_rowAmount = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowAmount, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount");
+    adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowAmount), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowAmount);
     //Layout
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_preferencesGroup);
