@@ -9,7 +9,7 @@
         "--socket=wayland",
         "--device=dri",
         "--share=ipc",
-        "--filesystem=host"
+        "--filesystem=xdg-documents"
     ],
     "modules" : [
         {
