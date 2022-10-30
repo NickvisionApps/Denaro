@@ -41,6 +41,17 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                     </child>
                     <child>
                         <object class="GtkShortcutsGroup">
+                            <property name="title">Transaction</property>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">New</property>
+                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;N</property>
+                                </object>
+                            </child>
+                        </object>
+                    </child>
+                    <child>
+                        <object class="GtkShortcutsGroup">
                             <property name="title">Application</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">

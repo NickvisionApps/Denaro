@@ -14,17 +14,24 @@
   <screenshots>
     <screenshot type="default">
       <caption>MainWindow</caption>
-      <image>https://user-images.githubusercontent.com/17648453/188352482-90eeeb3c-25de-4b7c-9270-c49b7692485b.png</image>
+      <image>https://user-images.githubusercontent.com/17648453/198850728-c9131275-3093-41b4-a6e4-f831e6ef8223.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>OpenAccount</caption>
+      <image>https://user-images.githubusercontent.com/17648453/198850730-9abbf78d-beaf-4c49-a560-7c88d63c6bea.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>DarkMode</caption>
+      <image>https://user-images.githubusercontent.com/17648453/198850732-48228e49-24ee-4612-a530-29512dd6901d.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
   <project_group>Nickvision</project_group>
   <provides>
-    <binary>nickvision-money</binary>
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.10.0-beta4" date="2022-10-29">
+    <release version="2022.10.0" date="2022-10-29">
       <description>
         <p>- Redesign with GTK4 and libadwaita 1.2</p>
       </description>

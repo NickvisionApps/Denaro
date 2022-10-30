@@ -60,6 +60,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
     adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), "New");
+    gtk_widget_set_tooltip_text(m_btnNewTransaction, "New Transaction (Ctrl+Shift+N)");
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
     gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
     //Transactions Group
@@ -94,6 +95,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
     g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
+    //Shortcut Controller
+    m_shortcutController = gtk_shortcut_controller_new();
+    gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
+    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
+    gtk_widget_add_controller(m_scrollMain, m_shortcutController);
     //Account Info Changed Callback
     m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information

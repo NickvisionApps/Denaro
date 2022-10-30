@@ -41,6 +41,7 @@ namespace NickvisionMoney::UI::Views
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
 		GSimpleAction* m_actNewTransaction{ nullptr };
+		GtkEventController* m_shortcutController{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
 		/**
 		 * Refreshes the UI with the account information
