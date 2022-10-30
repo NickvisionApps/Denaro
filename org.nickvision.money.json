@@ -9,7 +9,7 @@
         "--socket=wayland",
         "--device=dri",
         "--share=ipc",
-        "--filesystem=xdg-documents"
+        "--filesystem=home"
     ],
     "cleanup":[
         "/include",
