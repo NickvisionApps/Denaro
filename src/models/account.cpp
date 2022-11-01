@@ -35,25 +35,37 @@ unsigned int stoui(const std::string& str, size_t* idx = nullptr, int base = 10)
 
 Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
-    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount REAL)");
-    SQLite::Statement qryGetAll{ *m_db, "SELECT * FROM transactions" };
-    while(qryGetAll.executeStep())
+    //Load Groups
+    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, allowance TEXT)");
+    SQLite::Statement qryGetAllGroups{ *m_db, "SELECT * FROM groups" };
+    while(qryGetAllGroups.executeStep())
     {
-        Transaction transaction(qryGetAll.getColumn(0).getInt());
-        transaction.setDate(boost::gregorian::from_string(qryGetAll.getColumn(1).getString()));
-        transaction.setDescription(qryGetAll.getColumn(2).getString());
-        transaction.setType(static_cast<TransactionType>(qryGetAll.getColumn(3).getInt()));
-        transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAll.getColumn(4).getInt()));
-        transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAll.getColumn(5).getString()));
+        Group group{ qryGetAllGroups.getColumn(0).getInt() };
+        group.setName(qryGetAllGroups.getColumn(1).getString());
+        group.setDescription(qryGetAllGroups.getColumn(2).getString());
+        group.setMonthlyAllowance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
+        m_groups.insert({ group.getId(), group });
+    }
+    //Load Transactions
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT)");
+    SQLite::Statement qryGetAllTransactions{ *m_db, "SELECT * FROM transactions" };
+    while(qryGetAllTransactions.executeStep())
+    {
+        Transaction transaction{ qryGetAllTransactions.getColumn(0).getInt() };
+        transaction.setDate(boost::gregorian::from_string(qryGetAllTransactions.getColumn(1).getString()));
+        transaction.setDescription(qryGetAllTransactions.getColumn(2).getString());
+        transaction.setType(static_cast<TransactionType>(qryGetAllTransactions.getColumn(3).getInt()));
+        transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAllTransactions.getColumn(4).getInt()));
+        transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAllTransactions.getColumn(5).getString()));
         m_transactions.insert({ transaction.getId(), transaction });
     }
-    //==Repeat Needed Transactions==//
+    //Repeat Needed Transactions
     size_t i{ 0 };
     size_t startingSize{ m_transactions.size() };
     std::map<unsigned int, Transaction>::iterator it{ m_transactions.begin() };
     while(i != startingSize)
     {
-        Transaction transaction = it->second;
+        Transaction transaction{ it->second };
         if(transaction.getRepeatInterval() != RepeatInterval::Never)
         {
             bool repeatNeeeded{ false };
@@ -102,7 +114,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
             }
             if(repeatNeeeded)
             {
-                Transaction newTransaction(getNextAvailableId());
+                Transaction newTransaction{ getNextAvailableId() };
                 newTransaction.setDate(today);
                 newTransaction.setDescription(transaction.getDescription());
                 newTransaction.setType(transaction.getType());
@@ -356,4 +368,5 @@ int Account::importFromCSV(const std::string& path)
     }
     return imported;
 }
+
 

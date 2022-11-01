@@ -6,6 +6,7 @@
 #include <string>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <SQLiteCpp/SQLiteCpp.h>
+#include "group.hpp"
 #include "transaction.hpp"
 
 namespace NickvisionMoney::Models
@@ -104,6 +105,7 @@ namespace NickvisionMoney::Models
 	private:
 		std::string m_path;
         std::shared_ptr<SQLite::Database> m_db;
+        std::map<unsigned int, Group> m_groups;
         std::map<unsigned int, Transaction> m_transactions;
 	};
 }
