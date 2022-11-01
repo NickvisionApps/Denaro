@@ -2,7 +2,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Group::Group(unsigned int id) : m_id{ id }, m_name{ "" }, m_description{ "" }, m_monthlyAllowance{ -1.0 }
+Group::Group(unsigned int id) : m_id{ id }, m_name{ "" }, m_description{ "" }, m_balance{ 0.0 }
 {
 
 }
@@ -32,12 +32,12 @@ void Group::setDescription(const std::string& description)
     m_description = description;
 }
 
-boost::multiprecision::cpp_dec_float_50 Group::getMonthlyAllowance() const
+boost::multiprecision::cpp_dec_float_50 Group::getBalance() const
 {
-    return m_monthlyAllowance;
+    return m_balance;
 }
 
-void Group::setMonthlyAllowance(boost::multiprecision::cpp_dec_float_50 monthlyAllowance)
+void Group::setBalance(boost::multiprecision::cpp_dec_float_50 balance)
 {
-    m_monthlyAllowance = monthlyAllowance;
+    m_balance = balance;
 }

@@ -48,22 +48,22 @@ namespace NickvisionMoney::Models
          */
         void setDescription(const std::string& description);
         /**
-         * Gets the monthly allowance of the group
+         * Gets the balance of the group
          *
-         * @returns The monthly allowance of the group
+         * @returns The balance of the group
          */
-        boost::multiprecision::cpp_dec_float_50 getMonthlyAllowance() const;
+        boost::multiprecision::cpp_dec_float_50 getBalance() const;
         /**
-         * Sets the monthly allowance of the group
+         * Sets the balance of the group
          *
-         * @param monthlyAllowance The new monthly allowance
+         * @param monthlyAllowance The new balance
          */
-        void setMonthlyAllowance(boost::multiprecision::cpp_dec_float_50 monthlyAllowance);
+        void setBalance(boost::multiprecision::cpp_dec_float_50 balance);
 
 	private:
 		unsigned int m_id;
 		std::string m_name;
 		std::string m_description;
-		boost::multiprecision::cpp_dec_float_50 m_monthlyAllowance;
+		boost::multiprecision::cpp_dec_float_50 m_balance;
 	};
 }

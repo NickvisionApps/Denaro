@@ -36,14 +36,14 @@ unsigned int stoui(const std::string& str, size_t* idx = nullptr, int base = 10)
 Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
     //Load Groups
-    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, allowance TEXT)");
+    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, balance TEXT)");
     SQLite::Statement qryGetAllGroups{ *m_db, "SELECT * FROM groups" };
     while(qryGetAllGroups.executeStep())
     {
         Group group{ (unsigned int)qryGetAllGroups.getColumn(0).getInt() };
         group.setName(qryGetAllGroups.getColumn(1).getString());
         group.setDescription(qryGetAllGroups.getColumn(2).getString());
-        group.setMonthlyAllowance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
+        group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
         m_groups.insert({ group.getId(), group });
     }
     //Load Transactions
@@ -62,6 +62,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         transaction.setType(static_cast<TransactionType>(qryGetAllTransactions.getColumn(3).getInt()));
         transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAllTransactions.getColumn(4).getInt()));
         transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAllTransactions.getColumn(5).getString()));
+        transaction.setGroupId(qryGetAllTransactions.getColumn(6).getInt());
         m_transactions.insert({ transaction.getId(), transaction });
     }
     //Repeat Needed Transactions
@@ -171,13 +172,13 @@ unsigned int Account::getNextAvailableGroupId() const
 
 bool Account::addGroup(const Group& group)
 {
-    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description, allowance) VALUES (?, ?, ?, ?)" };
-    std::stringstream strAllowance;
-    strAllowance << group.getMonthlyAllowance();
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description, balance) VALUES (?, ?, ?, ?)" };
+    std::stringstream strBalance;
+    strBalance << group.getBalance();
     qryInsert.bind(1, group.getId());
     qryInsert.bind(2, group.getName());
     qryInsert.bind(3, group.getDescription());
-    qryInsert.bind(4, strAllowance.str());
+    qryInsert.bind(4, strBalance.str());
     if(qryInsert.exec() > 0)
     {
         m_groups.insert({ group.getId(), group });
@@ -188,12 +189,12 @@ bool Account::addGroup(const Group& group)
 
 bool Account::updateGroup(const Group& group)
 {
-    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ?, allowance = ? WHERE id = " + std::to_string(group.getId()) };
-    std::stringstream strAllowance;
-    strAllowance << group.getMonthlyAllowance();
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ?, balance = ? WHERE id = " + std::to_string(group.getId()) };
+    std::stringstream strBalance;
+    strBalance << group.getBalance();
     qryUpdate.bind(1, group.getName());
     qryUpdate.bind(2, group.getDescription());
-    qryUpdate.bind(3, strAllowance.str());
+    qryUpdate.bind(3, strBalance.str());
     if(qryUpdate.exec() > 0)
     {
         m_groups[group.getId()] = group;
@@ -207,6 +208,13 @@ bool Account::deleteGroup(unsigned int id)
     if(m_db->exec("DELETE FROM groups WHERE id = " + std::to_string(id)) > 0)
     {
         m_groups.erase(id);
+        for(std::pair<const unsigned int, Transaction>& pair : m_transactions)
+        {
+            if(pair.second.getGroupId() == (int)id)
+            {
+                pair.second.setGroupId(-1);
+            }
+        }
         return true;
     }
     return false;
@@ -243,7 +251,7 @@ unsigned int Account::getNextAvailableTransactionId() const
 
 bool Account::addTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryInsert{ *m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount) VALUES (?, ?, ?, ?, ?, ?)" };
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount, gid) VALUES (?, ?, ?, ?, ?, ?, ?)" };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryInsert.bind(1, transaction.getId());
@@ -252,9 +260,14 @@ bool Account::addTransaction(const Transaction& transaction)
     qryInsert.bind(4, static_cast<int>(transaction.getType()));
     qryInsert.bind(5, static_cast<int>(transaction.getRepeatInterval()));
     qryInsert.bind(6, strAmount.str());
+    qryInsert.bind(7, transaction.getGroupId());
     if(qryInsert.exec() > 0)
     {
         m_transactions.insert({ transaction.getId(), transaction });
+        if(transaction.getGroupId() != -1)
+        {
+            updateGroupAmounts();
+        }
         return true;
     }
     return false;
@@ -262,7 +275,7 @@ bool Account::addTransaction(const Transaction& transaction)
 
 bool Account::updateTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryUpdate{ *m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ? WHERE id = " + std::to_string(transaction.getId()) };
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ?, gid = ? WHERE id = " + std::to_string(transaction.getId()) };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryUpdate.bind(1, boost::gregorian::to_iso_extended_string(transaction.getDate()));
@@ -270,9 +283,14 @@ bool Account::updateTransaction(const Transaction& transaction)
     qryUpdate.bind(3, static_cast<int>(transaction.getType()));
     qryUpdate.bind(4, static_cast<int>(transaction.getRepeatInterval()));
     qryUpdate.bind(5, strAmount.str());
+    qryUpdate.bind(6, transaction.getGroupId());
     if(qryUpdate.exec() > 0)
     {
         m_transactions[transaction.getId()] = transaction;
+        if(transaction.getGroupId() != -1)
+        {
+            updateGroupAmounts();
+        }
         return true;
     }
     return false;
@@ -282,7 +300,12 @@ bool Account::deleteTransaction(unsigned int id)
 {
     if(m_db->exec("DELETE FROM transactions WHERE id = " + std::to_string(id)) > 0)
     {
+        bool updateGroups{ m_transactions.at(id).getGroupId() != -1 };
         m_transactions.erase(id);
+        if(updateGroups)
+        {
+            updateGroupAmounts();
+        }
         return true;
     }
     return false;
@@ -319,14 +342,7 @@ boost::multiprecision::cpp_dec_float_50 Account::getTotal() const
     boost::multiprecision::cpp_dec_float_50 total{ 0.00 };
     for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
     {
-        if(pair.second.getType() == TransactionType::Income)
-        {
-            total += pair.second.getAmount();
-        }
-        else
-        {
-            total -= pair.second.getAmount();
-        }
+        total += pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1);
     }
     return total;
 }
@@ -465,4 +481,18 @@ int Account::importFromCSV(const std::string& path)
     return imported;
 }
 
-
+void Account::updateGroupAmounts()
+{
+    for(std::pair<const unsigned int, Group>& pair : m_groups)
+    {
+        pair.second.setBalance(0);
+    }
+    for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
+    {
+        if(pair.second.getGroupId() != -1)
+        {
+            Group& group{ m_groups.at(pair.second.getGroupId()) };
+            group.setBalance(group.getBalance() + pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1));
+        }
+    }
+}

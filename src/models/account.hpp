@@ -147,5 +147,6 @@ namespace NickvisionMoney::Models
         std::shared_ptr<SQLite::Database> m_db;
         std::map<unsigned int, Group> m_groups;
         std::map<unsigned int, Transaction> m_transactions;
+        void updateGroupAmounts();
 	};
 }
