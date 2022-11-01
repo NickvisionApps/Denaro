@@ -13,8 +13,8 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("Nickvision Money");
     m_appInfo.setShortName("Money");
     m_appInfo.setDescription("A personal finance manager.");
-    m_appInfo.setVersion("2022.10.0");
-    m_appInfo.setChangelog("<ul><li>Redesign with GTK4 and libadwaita 1.2</li></ul>");
+    m_appInfo.setVersion("2022.11.0-next");
+    m_appInfo.setChangelog("<ul><li></li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionMoney");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionMoney/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionMoney/discussions");
