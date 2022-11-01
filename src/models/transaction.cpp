@@ -95,6 +95,16 @@ void Transaction::setAmount(boost::multiprecision::cpp_dec_float_50 amount)
     m_amount = amount;
 }
 
+int Transaction::getGroupId() const
+{
+    return m_groupId;
+}
+
+void Transaction::setGroupId(int groupId)
+{
+    m_groupId = groupId;
+}
+
 bool Transaction::operator<(const Transaction& toCompare) const
 {
     return m_id < toCompare.m_id;

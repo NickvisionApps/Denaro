@@ -336,7 +336,7 @@ bool Account::exportAsCSV(const std::string& path)
     std::ofstream file{ path };
     if(file.is_open())
     {
-        file << "ID,Date,Description,Type,RepeatInterval,Amount\n";
+        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
             file << pair.second.getId() << ",";
@@ -344,7 +344,8 @@ bool Account::exportAsCSV(const std::string& path)
             file << pair.second.getDescription() << ",";
             file << static_cast<int>(pair.second.getType()) << ",";
             file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
-            file << pair.second.getAmount() << "\n";
+            file << pair.second.getAmount() << ",";
+            file << pair.second.getGroupId() << "\n";
         }
         return true;
     }
@@ -362,11 +363,11 @@ int Account::importFromCSV(const std::string& path)
         {
             //Separate fields by ,
             std::vector<std::string> fields{ split(line, ",") };
-            if(fields.size() != 6)
+            if(fields.size() != 7)
             {
                 continue;
             }
-            //Get ID
+            //Get Id
             unsigned int id{ 0 };
             try
             {
@@ -432,6 +433,23 @@ int Account::importFromCSV(const std::string& path)
             {
                 continue;
             }
+            //Get Group Id
+            int gid{ 0 };
+            if(gid != -1)
+            {
+                try
+                {
+                    gid = stoui(fields[6]);
+                }
+                catch(...)
+                {
+                    continue;
+                }
+                if(getGroupById(gid) != std::nullopt)
+                {
+                    continue;
+                }
+            }
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);
@@ -439,6 +457,7 @@ int Account::importFromCSV(const std::string& path)
             transaction.setType(type);
             transaction.setRepeatInterval(repeatInterval);
             transaction.setAmount(amount);
+            transaction.setGroupId(gid);
             addTransaction(transaction);
             imported++;
         }

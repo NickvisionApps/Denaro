@@ -54,6 +54,24 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
+    //Button New Group
+    m_btnNewGroup = gtk_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewGroup), "flat");
+    GtkWidget* btnNewGroupContent{ adw_button_content_new() };
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewGroupContent), "list-add-symbolic");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), "New");
+    gtk_widget_set_tooltip_text(m_btnNewGroup, "New Group (Ctrl+G)");
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
+    gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
+    //Groups Group
+    m_grpGroups = adw_preferences_group_new();
+    gtk_widget_set_margin_start(m_grpGroups, 30);
+    gtk_widget_set_margin_top(m_grpGroups, 10);
+    gtk_widget_set_margin_end(m_grpGroups, 30);
+    gtk_widget_set_margin_bottom(m_grpGroups, 10);
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), "Groups");
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_btnNewGroup);
+    gtk_box_append(GTK_BOX(m_boxMain), m_grpGroups);
     //Button New Transaction
     m_btnNewTransaction = gtk_button_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewTransaction), "flat");
@@ -92,12 +110,17 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
     //New Transaction Action
+    m_actNewGroup = g_simple_action_new("newGroup", nullptr);
+    g_signal_connect(m_actNewGroup, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewGroup(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewGroup));
+    //New Transaction Action
     m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
     g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
     //Shortcut Controller
     m_shortcutController = gtk_shortcut_controller_new();
     gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
+    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
     gtk_widget_add_controller(m_scrollMain, m_shortcutController);
     //Account Info Changed Callback
@@ -179,6 +202,11 @@ void AccountView::onImportFromCSV()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFileDialog));
+}
+
+void AccountView::onNewGroup()
+{
+
 }
 
 void AccountView::onNewTransaction()

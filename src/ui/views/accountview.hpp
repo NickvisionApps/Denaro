@@ -35,11 +35,14 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_rowExpense{ nullptr };
 		GtkWidget* m_lblExpense{ nullptr };
 		GtkWidget* m_btnMenuAccountActions{ nullptr };
+		GtkWidget* m_grpGroups{ nullptr };
+		GtkWidget* m_btnNewGroup{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
+		GSimpleAction* m_actNewGroup{ nullptr };
 		GSimpleAction* m_actNewTransaction{ nullptr };
 		GtkEventController* m_shortcutController{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
@@ -55,6 +58,10 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the import from csv menu item is clicked
 		 */
 		void onImportFromCSV();
+		/**
+		 * Occurs when the new group button is clicked
+		 */
+		void onNewGroup();
 		/**
 		 * Occurs when the new transaction button is clicked
 		 */
