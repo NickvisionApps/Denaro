@@ -2,7 +2,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ boost::gregorian::day_clock::local_day() }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }
+Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ boost::gregorian::day_clock::local_day() }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }, m_groupId{ -1 }
 {
 
 }

@@ -40,7 +40,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
     SQLite::Statement qryGetAllGroups{ *m_db, "SELECT * FROM groups" };
     while(qryGetAllGroups.executeStep())
     {
-        Group group{ qryGetAllGroups.getColumn(0).getInt() };
+        Group group{ (unsigned int)qryGetAllGroups.getColumn(0).getInt() };
         group.setName(qryGetAllGroups.getColumn(1).getString());
         group.setDescription(qryGetAllGroups.getColumn(2).getString());
         group.setMonthlyAllowance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
@@ -48,10 +48,15 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
     }
     //Load Transactions
     m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT)");
+    try
+    {
+        m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
+    }
+    catch(...) { }
     SQLite::Statement qryGetAllTransactions{ *m_db, "SELECT * FROM transactions" };
     while(qryGetAllTransactions.executeStep())
     {
-        Transaction transaction{ qryGetAllTransactions.getColumn(0).getInt() };
+        Transaction transaction{ (unsigned int)qryGetAllTransactions.getColumn(0).getInt() };
         transaction.setDate(boost::gregorian::from_string(qryGetAllTransactions.getColumn(1).getString()));
         transaction.setDescription(qryGetAllTransactions.getColumn(2).getString());
         transaction.setType(static_cast<TransactionType>(qryGetAllTransactions.getColumn(3).getInt()));
@@ -114,7 +119,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
             }
             if(repeatNeeeded)
             {
-                Transaction newTransaction{ getNextAvailableId() };
+                Transaction newTransaction{ getNextAvailableTransactionId() };
                 newTransaction.setDate(today);
                 newTransaction.setDescription(transaction.getDescription());
                 newTransaction.setType(transaction.getType());
@@ -135,6 +140,78 @@ const std::string& Account::getPath() const
     return m_path;
 }
 
+const std::map<unsigned int, Group>& Account::getGroups() const
+{
+    return m_groups;
+}
+
+std::optional<Group> Account::getGroupById(unsigned int id) const
+{
+    try
+    {
+        return m_groups.at(id);
+    }
+    catch (...)
+    {
+        return std::nullopt;
+    }
+}
+
+unsigned int Account::getNextAvailableGroupId() const
+{
+    if(m_groups.empty())
+    {
+        return 1;
+    }
+    else
+    {
+        return m_groups.rbegin()->first + 1;
+    }
+}
+
+bool Account::addGroup(const Group& group)
+{
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description, allowance) VALUES (?, ?, ?, ?)" };
+    std::stringstream strAllowance;
+    strAllowance << group.getMonthlyAllowance();
+    qryInsert.bind(1, group.getId());
+    qryInsert.bind(2, group.getName());
+    qryInsert.bind(3, group.getDescription());
+    qryInsert.bind(4, strAllowance.str());
+    if(qryInsert.exec() > 0)
+    {
+        m_groups.insert({ group.getId(), group });
+        return true;
+    }
+    return false;
+}
+
+bool Account::updateGroup(const Group& group)
+{
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ?, allowance = ? WHERE id = " + std::to_string(group.getId()) };
+    std::stringstream strAllowance;
+    strAllowance << group.getMonthlyAllowance();
+    qryUpdate.bind(1, group.getName());
+    qryUpdate.bind(2, group.getDescription());
+    qryUpdate.bind(3, strAllowance.str());
+    if(qryUpdate.exec() > 0)
+    {
+        m_groups[group.getId()] = group;
+        return true;
+    }
+    return false;
+}
+
+bool Account::deleteGroup(unsigned int id)
+{
+    if(m_db->exec("DELETE FROM groups WHERE id = " + std::to_string(id)) > 0)
+    {
+        m_groups.erase(id);
+        return true;
+    }
+    return false;
+}
+
 const std::map<unsigned int, Transaction>& Account::getTransactions() const
 {
     return m_transactions;
@@ -152,7 +229,7 @@ std::optional<Transaction> Account::getTransactionById(unsigned int id) const
     }
 }
 
-unsigned int Account::getNextAvailableId() const
+unsigned int Account::getNextAvailableTransactionId() const
 {
     if(m_transactions.empty())
     {

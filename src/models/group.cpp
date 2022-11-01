@@ -2,7 +2,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Group::Group(unsigned int id) : m_id{ 0 }, m_name{ "" }, m_description{ "" }, m_monthlyAllowance{ -1.0 }
+Group::Group(unsigned int id) : m_id{ id }, m_name{ "" }, m_description{ "" }, m_monthlyAllowance{ -1.0 }
 {
 
 }

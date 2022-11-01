@@ -114,6 +114,18 @@ namespace NickvisionMoney::Models
          */
         void setAmount(boost::multiprecision::cpp_dec_float_50 amount);
         /**
+         * Gets the group id of the transaction
+         *
+         * @returns The group id of the transaction. -1 if no group associated
+         */
+        int getGroupId() const;
+        /**
+         * Sets the group id of the transaction
+         *
+         * @param groupId The new group id
+         */
+        void setGroupId(int groupId);
+        /**
          * Compares two Transactions via less-than
          *
          * @param toComapre The transaction to compare
@@ -149,5 +161,6 @@ namespace NickvisionMoney::Models
         TransactionType m_type;
         RepeatInterval m_repeatInterval;
         boost::multiprecision::cpp_dec_float_50 m_amount;
+        int m_groupId;
     };
 }

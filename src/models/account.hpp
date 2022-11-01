@@ -30,9 +30,49 @@ namespace NickvisionMoney::Models
 		 */
         const std::string& getPath() const;
         /**
+         * Gets a map of groups in the account
+         *
+         * @returns The map of groups in the account
+         */
+        const std::map<unsigned int, Group>& getGroups() const;
+        /**
+         * Attempts to get a group from the account by id
+         *
+         * @param id The id of the group
+         * @returns The group if found, else std::nullopt
+         */
+        std::optional<Group> getGroupById(unsigned int id) const;
+        /**
+         * Gets the next available group id in the account
+         *
+         * @returns The next available group id in the account
+         */
+        unsigned int getNextAvailableGroupId() const;
+        /**
+         * Adds a group to the account
+         *
+         * @param group The group to add
+         * @returns True if successful, else false
+         */
+        bool addGroup(const Group& group);
+        /**
+         * Updates a group in the account
+         *
+         * @param group The group to update
+         * @returns True if successful, else false
+         */
+        bool updateGroup(const Group& group);
+        /**
+         * Deletes a group in the account
+         *
+         * @param id The id of the group to delete
+         * @returns True if successful, else false
+         */
+        bool deleteGroup(unsigned int id);
+        /**
          * Gets a map of transactions in the account
          *
-         * @returns The map of transaction in the account
+         * @returns The map of transactions in the account
          */
         const std::map<unsigned int, Transaction>& getTransactions() const;
         /**
@@ -43,11 +83,11 @@ namespace NickvisionMoney::Models
          */
         std::optional<Transaction> getTransactionById(unsigned int id) const;
         /**
-         * Gets the next available id in the account
+         * Gets the next available transaction id in the account
          *
-         * @returns The next available id in the account
+         * @returns The next available transaction id in the account
          */
-        unsigned int getNextAvailableId() const;
+        unsigned int getNextAvailableTransactionId() const;
         /**
          * Adds a transaction to the account
          *
