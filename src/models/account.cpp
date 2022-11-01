@@ -208,11 +208,13 @@ bool Account::deleteGroup(unsigned int id)
     if(m_db->exec("DELETE FROM groups WHERE id = " + std::to_string(id)) > 0)
     {
         m_groups.erase(id);
-        for(std::pair<const unsigned int, Transaction>& pair : m_transactions)
+        for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
             if(pair.second.getGroupId() == (int)id)
             {
-                pair.second.setGroupId(-1);
+                Transaction transaction{ pair.second };
+                transaction.setGroupId(-1);
+                updateTransaction(transaction);
             }
         }
         return true;
@@ -491,8 +493,9 @@ void Account::updateGroupAmounts()
     {
         if(pair.second.getGroupId() != -1)
         {
-            Group& group{ m_groups.at(pair.second.getGroupId()) };
+            Group group{ m_groups.at(pair.second.getGroupId()) };
             group.setBalance(group.getBalance() + pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1));
+            updateGroup(group);
         }
     }
 }
