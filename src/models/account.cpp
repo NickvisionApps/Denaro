@@ -47,7 +47,7 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         m_groups.insert({ group.getId(), group });
     }
     //Load Transactions
-    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT)");
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
     try
     {
         m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
@@ -494,7 +494,7 @@ void Account::updateGroupAmounts()
         if(pair.second.getGroupId() != -1)
         {
             Group group{ m_groups.at(pair.second.getGroupId()) };
-            group.setBalance(group.getBalance() + pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1));
+            group.setBalance(group.getBalance() + (pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1)));
             updateGroup(group);
         }
     }
