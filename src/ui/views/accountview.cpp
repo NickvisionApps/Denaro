@@ -1,4 +1,5 @@
 #include "accountview.hpp"
+#include "groupdialog.hpp"
 #include "transactiondialog.hpp"
 #include "../controls/messagedialog.hpp"
 
@@ -220,12 +221,22 @@ void AccountView::onImportFromCSV()
 
 void AccountView::onNewGroup()
 {
-
+    GroupDialogController controller{ m_controller.createGroupDialogController() };
+    GroupDialog dialog{ m_parentWindow, controller };
+    if(dialog.run())
+    {
+        m_controller.addGroup(controller.getGroup());
+    }
 }
 
 void AccountView::onEditGroup(unsigned int id)
 {
-
+    GroupDialogController controller{ m_controller.createGroupDialogController(id) };
+    GroupDialog dialog{ m_parentWindow, controller };
+    if(dialog.run())
+    {
+        m_controller.updateGroup(controller.getGroup());
+    }
 }
 
 void AccountView::onDeleteGroup(unsigned int id)

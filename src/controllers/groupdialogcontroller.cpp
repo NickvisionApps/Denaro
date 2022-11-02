@@ -30,7 +30,7 @@ const Group& GroupDialogController::getGroup() const
 
 const std::string& GroupDialogController::getName() const
 {
-    return m_group.getDescription();
+    return m_group.getName();
 }
 
 const std::string& GroupDialogController::getDescription() const
