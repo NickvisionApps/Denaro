@@ -3,6 +3,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
 #include "../models/group.hpp"
@@ -109,6 +110,19 @@ namespace NickvisionMoney::Controllers
 		 * @param id The id of the group to delete
 		 */
 		void deleteGroup(unsigned int id);
+		/**
+		 * Creates a GroupDialogController for a new group
+		 *
+		 * @returns A new GroupDialogController
+		 */
+		GroupDialogController createGroupDialogController() const;
+		/**
+		 * Creates a GroupDialogController for an existing group
+		 *
+		 * @param id The id of the group to edit
+		 * @returns A new GroupDialogController
+		 */
+		GroupDialogController createGroupDialogController(unsigned int id) const;
 		/**
 		 * Adds a new transaction to the account
 		 *

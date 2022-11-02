@@ -17,7 +17,7 @@ namespace NickvisionMoney::Controllers
 	};
 
 	/**
-	 * A controller for the TransactionDialogController
+	 * A controller for the TransactionDialog
 	 */
 	class TransactionDialogController
 	{
@@ -94,7 +94,7 @@ namespace NickvisionMoney::Controllers
 		 * Updates the transaction with the provided values
 		 *
 		 * @param dateString The date string
-		 * @param descriptionString The description
+		 * @param description The description
 		 * @param type The type as an int
 		 * @param repeatInterval The repeat interval as an int
 		 * @param amountString The amount string

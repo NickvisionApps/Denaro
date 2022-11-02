@@ -125,6 +125,16 @@ void AccountViewController::deleteGroup(unsigned int id)
     m_accountInfoChangedCallback();
 }
 
+GroupDialogController AccountViewController::createGroupDialogController() const
+{
+    return { m_account.getNextAvailableGroupId() };
+}
+
+GroupDialogController AccountViewController::createGroupDialogController(unsigned int id) const
+{
+    return { m_account.getGroupById(id).value() };
+}
+
 void AccountViewController::addTransaction(const Transaction& transaction)
 {
     m_account.addTransaction(transaction);
