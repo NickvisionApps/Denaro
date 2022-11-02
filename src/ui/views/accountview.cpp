@@ -140,6 +140,20 @@ void AccountView::onAccountInfoChanged()
     adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
+    //Groups
+    for(const std::shared_ptr<GroupRow>& groupRow : m_groupRows)
+    {
+        adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpGroups), groupRow->gobj());
+    }
+    m_groupRows.clear();
+    for(const std::pair<const unsigned int, Group>& pair : m_controller.getGroups())
+    {
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(pair.second, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
+        row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
+        row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
+        adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
+        m_groupRows.push_back(row);
+    }
     //Transactions
     for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
     {
@@ -207,6 +221,20 @@ void AccountView::onImportFromCSV()
 void AccountView::onNewGroup()
 {
 
+}
+
+void AccountView::onEditGroup(unsigned int id)
+{
+
+}
+
+void AccountView::onDeleteGroup(unsigned int id)
+{
+    MessageDialog messageDialog{ m_parentWindow, "Delete Group?", "Are you sure you want to delete this group?\nThis action is irreversible.", "No", "Yes" };
+    if(messageDialog.run() == MessageDialogResponse::Destructive)
+    {
+        m_controller.deleteGroup(id);
+    }
 }
 
 void AccountView::onNewTransaction()

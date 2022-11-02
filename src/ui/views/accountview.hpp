@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <adwaita.h>
+#include "../controls/grouprow.hpp"
 #include "../controls/transactionrow.hpp"
 #include "../../controllers/accountviewcontroller.hpp"
 
@@ -45,6 +46,7 @@ namespace NickvisionMoney::UI::Views
 		GSimpleAction* m_actNewGroup{ nullptr };
 		GSimpleAction* m_actNewTransaction{ nullptr };
 		GtkEventController* m_shortcutController{ nullptr };
+		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::GroupRow>> m_groupRows;
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
 		/**
 		 * Refreshes the UI with the account information
@@ -62,6 +64,18 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the new group button is clicked
 		 */
 		void onNewGroup();
+		/**
+		 * Occurs when the edit group button is clicked
+		 *
+		 * @param id The id of the group to edit
+		 */
+		void onEditGroup(unsigned int id);
+		/**
+		 * Occurs when the delete group button is clicked
+		 *
+		 * @param id The id of the group to edit
+		 */
+		void onDeleteGroup(unsigned int id);
 		/**
 		 * Occurs when the new transaction button is clicked
 		 */

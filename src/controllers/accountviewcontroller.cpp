@@ -66,6 +66,11 @@ std::string AccountViewController::getAccountExpenseString() const
     return builder.str();
 }
 
+const std::map<unsigned int, Group>& AccountViewController::getGroups() const
+{
+    return m_account.getGroups();
+}
+
 const std::map<unsigned int, Transaction>& AccountViewController::getTransactions() const
 {
     return m_account.getTransactions();
@@ -100,6 +105,24 @@ void AccountViewController::importFromCSV(std::string& path)
         m_accountInfoChangedCallback();
     }
     m_sendToastCallback("Imported " + std::to_string(imported) + " transactions from CSV.");
+}
+
+void AccountViewController::addGroup(const Group& group)
+{
+    m_account.addGroup(group);
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::updateGroup(const Group& group)
+{
+    m_account.updateGroup(group);
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::deleteGroup(unsigned int id)
+{
+    m_account.deleteGroup(id);
+    m_accountInfoChangedCallback();
 }
 
 void AccountViewController::addTransaction(const Transaction& transaction)

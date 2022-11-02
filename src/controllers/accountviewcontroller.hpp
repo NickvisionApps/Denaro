@@ -5,6 +5,7 @@
 #include <string>
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
+#include "../models/group.hpp"
 #include "../models/transaction.hpp"
 
 namespace NickvisionMoney::Controllers
@@ -61,6 +62,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		std::string getAccountExpenseString() const;
 		/**
+		 * Gets the map of groups in the account
+		 *
+		 * @returns The groups in the account
+		 */
+		const std::map<unsigned int, NickvisionMoney::Models::Group>& getGroups() const;
+		/**
 		 * Gets the map of transactions in the account
 		 *
 		 * @returns The transaction in the account
@@ -84,6 +91,24 @@ namespace NickvisionMoney::Controllers
 		 * @param path The path to the csv file
 		 */
 		void importFromCSV(std::string& path);
+		/**
+		 * Adds a new group to the account
+		 *
+		 * @param group The group to add
+		 */
+		void addGroup(const NickvisionMoney::Models::Group& group);
+		/**
+		 * Updates a group in the account
+		 *
+		 * @param group The group to update
+		 */
+		void updateGroup(const NickvisionMoney::Models::Group& group);
+		/**
+		 * Deletes a group in the account
+		 *
+		 * @param id The id of the group to delete
+		 */
+		void deleteGroup(unsigned int id);
 		/**
 		 * Adds a new transaction to the account
 		 *
