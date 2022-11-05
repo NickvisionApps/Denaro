@@ -45,13 +45,12 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Type
     m_rowType = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), _("Type"));
-    // TODO: Extract list to make is translatable
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ "Income", "Expense", nullptr })));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ _("Income"), _("Expense"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowType);
     //Repeat Interval
     m_rowRepeatInterval = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRepeatInterval), _("Repeat Interval"));
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ "Never", "Daily", "Weekly", "Monthly", "Quarterly", "Yearly", "Biyearly", nullptr })));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ _("Never"), _("Daily"), _("Weekly"), _("Monthly"), _("Quarterly"), _("Yearly"), _("Biyearly"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowRepeatInterval);
     //Amount
     m_rowAmount = adw_entry_row_new();
