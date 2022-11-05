@@ -9,6 +9,7 @@
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
 #include "../utilities/translation.hpp"
+#include "../utilities/string_format.hpp"
 
 namespace NickvisionMoney::Controllers
 {

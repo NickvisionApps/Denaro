@@ -1,5 +1,4 @@
 #include "accountviewcontroller.hpp"
-#include "../utilities/string_format.hpp"
 #include <sstream>
 
 using namespace NickvisionMoney::Controllers;
@@ -106,7 +105,7 @@ void AccountViewController::importFromCSV(std::string& path)
     {
         m_accountInfoChangedCallback();
     }
-    m_sendToastCallback("Imported " + std::to_string(imported) + " transactions from CSV.");
+    m_sendToastCallback(string_format(_("Imported %d transactions from CSV."), imported));
 }
 
 void AccountViewController::addGroup(const Group& group)

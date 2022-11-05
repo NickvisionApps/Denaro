@@ -8,4 +8,5 @@ src/ui/views/accountview.cpp
 src/ui/views/groupdialog.cpp
 src/ui/views/mainwindow.cpp
 src/ui/views/preferencesdialog.cpp
+src/ui/views/shortcutsdialog.cpp
 src/ui/views/transactiondialog.cpp

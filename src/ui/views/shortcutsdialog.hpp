@@ -2,6 +2,7 @@
 
 #include <string>
 #include <adwaita.h>
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Views
 {
