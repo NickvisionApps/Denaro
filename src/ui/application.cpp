@@ -12,7 +12,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setId(id);
     m_appInfo.setName("Nickvision Money");
     m_appInfo.setShortName("Money");
-    m_appInfo.setDescription("A personal finance manager.");
+    m_appInfo.setDescription(_("A personal finance manager."));
     m_appInfo.setVersion("2022.11.0-next");
     m_appInfo.setChangelog("<ul><li></li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionMoney");

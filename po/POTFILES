@@ -1,0 +1,11 @@
+src/controllers/accountviewcontroller.cpp
+src/models/transaction.cpp
+src/ui/controls/comboboxdialog.cpp
+src/ui/controls/entrydialog.cpp
+src/ui/controls/grouprow.cpp
+src/ui/controls/transactionrow.cpp
+src/ui/views/accountview.cpp
+src/ui/views/groupdialog.cpp
+src/ui/views/mainwindow.cpp
+src/ui/views/preferencesdialog.cpp
+src/ui/views/transactiondialog.cpp

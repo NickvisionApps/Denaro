@@ -2,6 +2,7 @@
 
 #include <adwaita.h>
 #include "../../controllers/preferencesdialogcontroller.hpp"
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Views
 {

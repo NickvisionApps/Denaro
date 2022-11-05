@@ -27,7 +27,7 @@ GroupRow::GroupRow(const Group& group, const std::string& currencySymbol, bool d
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnEdit), "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnEdit), "edit-symbolic");
-    gtk_widget_set_tooltip_text(m_btnEdit, "Edit Group");
+    gtk_widget_set_tooltip_text(m_btnEdit, _("Edit Group"));
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_gobj), m_btnEdit);
     g_signal_connect(m_btnEdit, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<GroupRow*>(data)->onEdit(); }), this);
     //Delete Button
@@ -35,7 +35,7 @@ GroupRow::GroupRow(const Group& group, const std::string& currencySymbol, bool d
     gtk_widget_set_valign(m_btnDelete, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnDelete), "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnDelete), "user-trash-symbolic");
-    gtk_widget_set_tooltip_text(m_btnDelete, "Delete Group");
+    gtk_widget_set_tooltip_text(m_btnDelete, _("Delete Group"));
     g_signal_connect(m_btnDelete, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<GroupRow*>(data)->onDelete(); }), this);
     //Box
     m_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);

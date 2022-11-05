@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <adwaita.h>
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Controls
 {

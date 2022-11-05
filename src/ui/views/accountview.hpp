@@ -6,6 +6,7 @@
 #include "../controls/grouprow.hpp"
 #include "../controls/transactionrow.hpp"
 #include "../../controllers/accountviewcontroller.hpp"
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Views
 {

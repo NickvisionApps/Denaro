@@ -8,6 +8,7 @@
 #include "../models/account.hpp"
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
+#include "../utilities/translation.hpp"
 
 namespace NickvisionMoney::Controllers
 {

@@ -5,6 +5,7 @@
 #include <adwaita.h>
 #include "accountview.hpp"
 #include "../../controllers/mainwindowcontroller.hpp"
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Views
 {

@@ -3,6 +3,7 @@
 #include <string>
 #include <adwaita.h>
 #include "../../controllers/groupdialogcontroller.hpp"
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Views
 {

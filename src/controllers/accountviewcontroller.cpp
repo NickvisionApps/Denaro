@@ -1,8 +1,10 @@
 #include "accountviewcontroller.hpp"
+#include "../utilities/string_format.hpp"
 #include <sstream>
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
+using namespace NickvisionMoney::Utilities;
 
 AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol, bool displayCurrencySymbolOnRight, const std::function<void(const std::string& message)>& sendToastCallback) : m_currencySymbol{ currencySymbol }, m_displayCurrencySymbolOnRight{ displayCurrencySymbolOnRight }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
@@ -89,11 +91,11 @@ void AccountViewController::exportAsCSV(std::string& path)
     }
     if(m_account.exportAsCSV(path))
     {
-        m_sendToastCallback("Exported account to CSV successfully.");
+        m_sendToastCallback(_("Exported account to CSV successfully."));
     }
     else
     {
-        m_sendToastCallback("Unable to export account as CSV.");
+        m_sendToastCallback(_("Unable to export account as CSV."));
     }
 }
 

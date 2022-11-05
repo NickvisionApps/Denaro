@@ -6,6 +6,7 @@
 #include "views/mainwindow.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
+#include "../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI
 {

@@ -4,6 +4,7 @@
 #include <string>
 #include <adwaita.h>
 #include "../../models/transaction.hpp"
+#include "../../utilities/translation.hpp"
 
 namespace NickvisionMoney::UI::Controls
 {

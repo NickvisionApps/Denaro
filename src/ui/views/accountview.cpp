@@ -14,7 +14,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     //Account Total
     m_rowTotal = adw_expander_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), "Total");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), _("Total"));
     adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
     adw_expander_row_set_expanded(ADW_EXPANDER_ROW(m_rowTotal), true);
     //Account Income
@@ -22,7 +22,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblIncome), "success");
     m_rowIncome = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), "Income");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
     //Account Expense
@@ -30,7 +30,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblExpense), "error");
     m_rowExpense = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), "Expense");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
     //Button Menu Account Actions
@@ -38,11 +38,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnMenuAccountActions), "flat");
     GtkWidget* btnMenuAccountActionsContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "document-properties-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "Actions");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), _("Actions"));
     gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
     GMenu* menuActions{ g_menu_new() };
-    g_menu_append(menuActions, "Export as CSV", "account.exportAsCSV");
-    g_menu_append(menuActions, "Import from CSV", "account.importFromCSV");
+    g_menu_append(menuActions, _("Export as CSV"), "account.exportAsCSV");
+    g_menu_append(menuActions, _("Import from CSV"), "account.importFromCSV");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
     g_object_unref(menuActions);
     //Overview Group
@@ -51,7 +51,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_margin_top(m_grpOverview, 10);
     gtk_widget_set_margin_end(m_grpOverview, 30);
     gtk_widget_set_margin_bottom(m_grpOverview, 10);
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), "Overview");
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), _("Overview"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
@@ -60,8 +60,8 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewGroup), "flat");
     GtkWidget* btnNewGroupContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewGroupContent), "list-add-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), "New");
-    gtk_widget_set_tooltip_text(m_btnNewGroup, "New Group (Ctrl+G)");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), _("New"));
+    gtk_widget_set_tooltip_text(m_btnNewGroup, _("New Group (Ctrl+G)"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
     //Groups Group
@@ -70,7 +70,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_margin_top(m_grpGroups, 10);
     gtk_widget_set_margin_end(m_grpGroups, 30);
     gtk_widget_set_margin_bottom(m_grpGroups, 10);
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), "Groups");
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_btnNewGroup);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpGroups);
     //Button New Transaction
@@ -78,8 +78,8 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewTransaction), "flat");
     GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), "New");
-    gtk_widget_set_tooltip_text(m_btnNewTransaction, "New Transaction (Ctrl+Shift+N)");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), _("New"));
+    gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
     gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
     //Transactions Group
@@ -88,7 +88,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_margin_top(m_grpTransactions, 10);
     gtk_widget_set_margin_end(m_grpTransactions, 30);
     gtk_widget_set_margin_bottom(m_grpTransactions, 10);
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), "Transactions");
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_btnNewTransaction);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
     //Main Layout
@@ -173,7 +173,7 @@ void AccountView::onAccountInfoChanged()
 
 void AccountView::onExportAsCSV()
 {
-    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new("Export as CSV", m_parentWindow, GTK_FILE_CHOOSER_ACTION_SAVE, "_Save", "_Cancel") };
+    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new(_("Export as CSV"), m_parentWindow, GTK_FILE_CHOOSER_ACTION_SAVE, _("_Save"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, "CSV (*.csv)");
@@ -197,7 +197,7 @@ void AccountView::onExportAsCSV()
 
 void AccountView::onImportFromCSV()
 {
-    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new("Import from CSV", m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Import from CSV"), m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, "CSV (*.csv)");
@@ -241,7 +241,7 @@ void AccountView::onEditGroup(unsigned int id)
 
 void AccountView::onDeleteGroup(unsigned int id)
 {
-    MessageDialog messageDialog{ m_parentWindow, "Delete Group?", "Are you sure you want to delete this group?\nThis action is irreversible.", "No", "Yes" };
+    MessageDialog messageDialog{ m_parentWindow, _("Delete Group?"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes") };
     if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
         m_controller.deleteGroup(id);
@@ -270,7 +270,7 @@ void AccountView::onEditTransaction(unsigned int id)
 
 void AccountView::onDeleteTransaction(unsigned int id)
 {
-    MessageDialog messageDialog{ m_parentWindow, "Delete Transaction?", "Are you sure you want to delete this transaction?\nThis action is irreversible.", "No", "Yes" };
+    MessageDialog messageDialog{ m_parentWindow, _("Delete Transaction?"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes") };
     if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
         m_controller.deleteTransaction(id);

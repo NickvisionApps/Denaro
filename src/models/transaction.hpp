@@ -3,6 +3,7 @@
 #include <string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#include "../utilities/translation.hpp"
 
 namespace NickvisionMoney::Models
 {

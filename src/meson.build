@@ -44,7 +44,9 @@ sources = files('main.cpp',
 		'ui/views/preferencesdialog.hpp',
 		'ui/views/preferencesdialog.cpp',
 		'ui/views/shortcutsdialog.hpp',
-		'ui/views/shortcutsdialog.cpp')
+		'ui/views/shortcutsdialog.cpp',
+		'utilities/string_format.hpp',
+		'utilities/translation.hpp')
 
 resources = files('resources/org.nickvision.money.svg', 'resources/org.nickvision.money-devel.svg')
 resources_symbolic = files('resources/org.nickvision.money-symbolic.svg')

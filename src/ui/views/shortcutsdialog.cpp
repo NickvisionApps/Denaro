@@ -4,6 +4,7 @@ using namespace NickvisionMoney::UI::Views;
 
 ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
 {
+    // TODO: Split the XML to access the text
     m_xml = R"(
     <?xml version="1.0" encoding="UTF-8"?>
     <interface>
