@@ -4,6 +4,7 @@
 #include <adwaita.h>
 #include "../../controllers/transactiondialogcontroller.hpp"
 #include "../../utilities/translation.hpp"
+#include "../../utilities/string_format.hpp"
 
 namespace NickvisionMoney::UI::Views
 {
