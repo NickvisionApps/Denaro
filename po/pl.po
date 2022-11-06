@@ -191,7 +191,7 @@ msgstr "Tak"
 
 #: src/ui/views/accountview.cpp:275
 msgid "Delete Transaction?"
-msgstr "Usunać transakcje?"
+msgstr "Usunąć transakcję?"
 
 #: src/ui/views/accountview.cpp:275
 msgid ""
