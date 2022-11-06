@@ -117,7 +117,7 @@ msgstr "Экспорт в CSV"
 
 #: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:201
 msgid "Import from CSV"
-msgstr "Импорт CSV"
+msgstr "Импорт из CSV"
 
 #: src/ui/views/accountview.cpp:55
 msgid "Overview"
@@ -125,7 +125,7 @@ msgstr "Обзор"
 
 #: src/ui/views/accountview.cpp:64 src/ui/views/accountview.cpp:82
 msgid "New"
-msgstr "Новый"
+msgstr "Новая"
 
 #: src/ui/views/accountview.cpp:65
 msgid "New Group (Ctrl+G)"
@@ -260,7 +260,7 @@ msgstr "Интерфейс"
 
 #: src/ui/views/preferencesdialog.cpp:21
 msgid "Customize the application's user interface."
-msgstr "Настройте интерфейс приложения."
+msgstr "Настройки интерфейса приложения."
 
 #: src/ui/views/preferencesdialog.cpp:24
 msgid "Theme"
