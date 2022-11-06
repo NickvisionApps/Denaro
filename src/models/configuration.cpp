@@ -1,12 +1,15 @@
 #include "configuration.hpp"
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
+#include <locale>
+#include <sstream>
 #include <adwaita.h>
 #include <json/json.h>
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_theme{ Theme::System }, m_currencySymbol{ "$" }, m_displayCurrencySymbolOnRight{ false }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_theme{ Theme::System }, m_currencySymbol{ "" }, m_displayCurrencySymbolOnRight{ false }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -18,8 +21,13 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         Json::Value json;
         configFile >> json;
         m_theme = static_cast<Theme>(json.get("Theme", 0).asInt());
-        m_currencySymbol = json.get("CurrencySymbol", "$").asString();
-        m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRight", false).asBool();
+        std::locale locale{ setlocale(LC_ALL, nullptr) };
+        std::stringstream builder;
+        builder.imbue(locale);
+        builder << std::put_money("1.0");
+        std::string monetaryValue{ builder.str() };
+        m_currencySymbol = json.get("CurrencySymbolV2", std::use_facet<std::moneypunct<char>>(locale).curr_symbol()).asString();
+        m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRightV2", monetaryValue.substr(0, 1) == "1").asBool();
     }
 }
 
@@ -60,8 +68,8 @@ void Configuration::save() const
     {
         Json::Value json;
         json["Theme"] = static_cast<int>(m_theme);
-        json["CurrencySymbol"] = m_currencySymbol;
-        json["DisplayCurrencySymbolOnRight"] = m_displayCurrencySymbolOnRight;;
+        json["CurrencySymbolV2"] = m_currencySymbol;
+        json["DisplayCurrencySymbolOnRightV2"] = m_displayCurrencySymbolOnRight;;
         configFile << json;
     }
 }
