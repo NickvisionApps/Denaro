@@ -1,6 +1,7 @@
 #include "transactiondialog.hpp"
 #include "../../helpers/stringhelpers.hpp"
 #include "../../helpers/translation.hpp"
+#include "../../helpers/contextualtranslation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;

@@ -1,6 +1,7 @@
 #include "shortcutsdialog.hpp"
 #include "../../helpers/stringhelpers.hpp"
 #include "../../helpers/translation.hpp"
+#include "../../helpers/contextualtranslation.hpp"
 
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::UI::Views;
