@@ -97,7 +97,7 @@ msgstr "Удалить транзакцию"
 
 #: src/ui/views/accountview.cpp:18
 msgid "Total"
-msgstr "Всего"
+msgstr "Сумма"
 
 #: src/ui/views/accountview.cpp:26 src/ui/views/transactiondialog.cpp:51
 msgid "Income"
@@ -334,7 +334,7 @@ msgstr "О приложении"
 
 #: src/ui/views/transactiondialog.cpp:23
 msgid "ID"
-msgstr "Идентификатор"
+msgstr "Идентификатор (ID)"
 
 #: src/ui/views/transactiondialog.cpp:38
 msgid "Date"
