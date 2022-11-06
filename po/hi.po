@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the org.nickvision.money package.
 # Hemish <hemish04082005@gmail.com>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
-"Report-Msgid-Bugs-To: <hemish04082005@gmail.com>\n"
-"POT-Creation-Date: 2022-11-06 19:25+0530\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-07 00:18+0530\n"
 "PO-Revision-Date: 2022-11-06 08:43+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,11 +100,13 @@ msgstr "लेन-देन हटाएँ"
 msgid "Total"
 msgstr "टोटल (कुल)"
 
-#: src/ui/views/accountview.cpp:26 src/ui/views/transactiondialog.cpp:51
+#: src/ui/views/accountview.cpp:26
+msgctxt "Overview"
 msgid "Income"
 msgstr "आय/कमाई"
 
-#: src/ui/views/accountview.cpp:34 src/ui/views/transactiondialog.cpp:51
+#: src/ui/views/accountview.cpp:34
+msgctxt "Overview"
 msgid "Expense"
 msgstr "लागत/खर्च"
 
@@ -125,7 +126,8 @@ msgstr "CSV से आयात करें"
 msgid "Overview"
 msgstr "अवलोकन"
 
-#: src/ui/views/accountview.cpp:64 src/ui/views/accountview.cpp:82
+#: src/ui/views/accountview.cpp:64
+msgctxt "Group"
 msgid "New"
 msgstr "नया"
 
@@ -137,6 +139,11 @@ msgstr "नया समूह"
 msgid "Groups"
 msgstr "समूह"
 
+#: src/ui/views/accountview.cpp:82
+msgctxt "Transaction"
+msgid "New"
+msgstr "नई"
+
 #: src/ui/views/accountview.cpp:83
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "नई लेनदेन (Ctrl+Shift+N)"
@@ -145,16 +152,16 @@ msgstr "नई लेनदेन (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "लेनदेन"
 
-#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:155
+#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:157
 msgid "_Save"
 msgstr "_संचित करें (Save)"
 
 #: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
-#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
 msgid "_Cancel"
 msgstr "_रद्द (Cancel)"
 
-#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:181
 msgid "_Open"
 msgstr "खोलें"
 
@@ -190,8 +197,7 @@ msgstr ""
 "क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?\n"
 "यह क्रिया अपरिवर्तनीय है।"
 
-#: src/ui/views/groupdialog.cpp:7 src/ui/views/shortcutsdialog.cpp:99
-#: src/ui/views/transactiondialog.cpp:60
+#: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:60
 msgid "Group"
 msgstr "समूह"
 
@@ -212,49 +218,53 @@ msgstr "नाम (खाली)"
 msgid "Description (Empty)"
 msgstr "विवरण (खाली)"
 
-#: src/ui/views/mainwindow.cpp:25 src/ui/views/mainwindow.cpp:56
+#: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
 #: src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "नया खाता"
 
-#: src/ui/views/mainwindow.cpp:26 src/ui/views/mainwindow.cpp:64
-#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
 #: src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "खाता खोलें"
 
-#: src/ui/views/mainwindow.cpp:27 src/ui/views/shortcutsdialog.cpp:98
+#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:98
 msgid "Close Account"
 msgstr "खाता बंद करें"
 
-#: src/ui/views/mainwindow.cpp:30
+#: src/ui/views/mainwindow.cpp:32
 msgid "Account Menu"
 msgstr "खाता मेन्यू"
 
-#: src/ui/views/mainwindow.cpp:36 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "सेटिंग्स (Preferences)"
 
-#: src/ui/views/mainwindow.cpp:37 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शोर्टकत"
 
-#: src/ui/views/mainwindow.cpp:38
-msgid "About "
-msgstr "बारे में "
+#: src/ui/views/mainwindow.cpp:40
+msgid "About %s"
+msgstr "%s के बारे में"
 
-#: src/ui/views/mainwindow.cpp:41
+#: src/ui/views/mainwindow.cpp:43
 msgid "Main Menu"
 msgstr "मुख्य मेन्यू"
 
-#: src/ui/views/mainwindow.cpp:70
+#: src/ui/views/mainwindow.cpp:72
 msgid "No Accounts Open"
 msgstr "कोई खाता नहीं खुला है"
 
-#: src/ui/views/mainwindow.cpp:71
+#: src/ui/views/mainwindow.cpp:73
 msgid "Open or create an account to get started."
 msgstr "आरंभ करने के लिए मौजूदा या नया खाता खोलें"
+
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+msgid "Money Account (*.nmoney)"
+msgstr ""
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -293,8 +303,7 @@ msgid ""
 msgstr ""
 "मुद्रा सेटिंग अनुकूलित करें।\n"
 "\n"
-"इन सेटिंग्स में कोई भी परिवर्तन केवल नए खोले जाने वाले खातों पर "
-"ही लागू होगा।"
+"इन सेटिंग्स में कोई भी परिवर्तन केवल नए खोले जाने वाले खातों पर ही लागू होगा।"
 
 #: src/ui/views/preferencesdialog.cpp:34
 msgid "Currency Symbol"
@@ -308,13 +317,16 @@ msgstr "मुद्रा के चिन्ह को दाईं ओर द
 msgid ""
 "If checked, the currency symbol will be displayed on the right of a monetary "
 "value."
-msgstr ""
-"यदि चयनित किया जाए, तो मुद्रा का चिह्न मूल्य के दाईं ओर दिखाया "
-"जाएगा।"
+msgstr "यदि चयनित किया जाए, तो मुद्रा का चिह्न मूल्य के दाईं ओर दिखाया जाएगा।"
 
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
 msgstr "खाता"
+
+#: src/ui/views/shortcutsdialog.cpp:99
+msgctxt "Shortcuts"
+msgid "Group"
+msgstr "समूह"
 
 #: src/ui/views/shortcutsdialog.cpp:100
 msgid "New Group"
@@ -347,6 +359,16 @@ msgstr "तिथि"
 #: src/ui/views/transactiondialog.cpp:50
 msgid "Type"
 msgstr "प्रकार"
+
+#: src/ui/views/transactiondialog.cpp:51
+msgctxt "Transaction|Edition"
+msgid "Income"
+msgstr "आय/कमाई"
+
+#: src/ui/views/transactiondialog.cpp:51
+msgctxt "Transaction|Edition"
+msgid "Expense"
+msgstr "लागत/खर्च"
 
 #: src/ui/views/transactiondialog.cpp:55
 msgid "Repeat Interval"
