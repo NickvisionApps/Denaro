@@ -48,7 +48,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Type
     m_rowType = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), _("Type"));
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ _("Income"), _("Expense"), nullptr })));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ pgettext("Transaction|Edition", "Income"), pgettext("Transaction|Edition", "Expense"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowType);
     //Repeat Interval
     m_rowRepeatInterval = adw_combo_row_new();

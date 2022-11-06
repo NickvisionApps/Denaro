@@ -96,7 +96,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
     _("New Account"),
     _("Open Account"),
     _("Close Account"),
-    _("Group"),
+    pgettext("Shortcuts", "Group"),
     _("New Group"),
     _("Transaction"),
     _("New Transaction"),

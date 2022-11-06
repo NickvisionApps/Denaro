@@ -3,9 +3,11 @@
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../../helpers/translation.hpp"
+#include "../../helpers/stringhelpers.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
+using namespace NickvisionMoney::Helpers;
 
 MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
 {
@@ -35,7 +37,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     GMenu* menuHelp{ g_menu_new() };
     g_menu_append(menuHelp, _("Preferences"), "win.preferences");
     g_menu_append(menuHelp, _("Keyboard Shortcuts"), "win.keyboardShortcuts");
-    g_menu_append(menuHelp, std::string(_("About ") + m_controller.getAppInfo().getShortName()).c_str(), "win.about");
+    g_menu_append(menuHelp, std::string(StringHelpers::format(_("About %s"), m_controller.getAppInfo().getShortName().c_str())).c_str(), "win.about");
     gtk_menu_button_set_direction(GTK_MENU_BUTTON(m_btnMenuHelp), GTK_ARROW_NONE);
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuHelp), G_MENU_MODEL(menuHelp));
     gtk_widget_set_tooltip_text(m_btnMenuHelp, _("Main Menu"));
@@ -155,7 +157,7 @@ void MainWindow::onNewAccount()
     GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, _("_Save"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
-    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_set_name(filter, _("Money Account (*.nmoney)"));
     gtk_file_filter_add_pattern(filter, "*.nmoney");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(saveFileDialog), filter);
     g_object_unref(filter);
@@ -179,7 +181,7 @@ void MainWindow::onOpenAccount()
     GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
-    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_set_name(filter, _("Money Account (*.nmoney)"));
     gtk_file_filter_add_pattern(filter, "*.nmoney");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
     g_object_unref(filter);
