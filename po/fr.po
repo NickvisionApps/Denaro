@@ -355,11 +355,9 @@ msgid "Amount (%s)"
 msgstr "Montant (%s)"
 
 #: src/ui/views/transactiondialog.cpp:121
-#, fuzzy
 msgid "Amount (Empty)"
-msgstr "Montant (%s)"
+msgstr "Montant (vide)"
 
 #: src/ui/views/transactiondialog.cpp:126
-#, fuzzy
 msgid "Amount (Invalid)"
-msgstr "Montant (%s)"
+msgstr "Montant (invalide)"
