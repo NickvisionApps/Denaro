@@ -52,6 +52,17 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRepeatInterval), "Repeat Interval");
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ "Never", "Daily", "Weekly", "Monthly", "Quarterly", "Yearly", "Biyearly", nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowRepeatInterval);
+    //Group
+    m_rowGroup = adw_combo_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowGroup), "Group");
+    const char** groupNames{ new const char*[m_controller.getGroupNames().size() + 1] };
+    for(size_t i = 0; i < m_controller.getGroupNames().size(); i++)
+    {
+        groupNames[i] = m_controller.getGroupNames()[i].c_str();
+    }
+    groupNames[m_controller.getGroupNames().size()] = nullptr;
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowGroup), G_LIST_MODEL(gtk_string_list_new(groupNames)));
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowGroup);
     //Amount
     m_rowAmount = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowAmount, 420, -1);
@@ -66,6 +77,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_editable_set_text(GTK_EDITABLE(m_rowDescription), m_controller.getDescription().c_str());
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowType), m_controller.getTypeAsInt());
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowRepeatInterval), m_controller.getRepeatIntervalAsInt());
+    adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowGroup), m_controller.getGroupAsIndex());
     gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), m_controller.getAmountAsString().c_str());
 }
 
@@ -85,7 +97,7 @@ bool TransactionDialog::run()
     if(m_controller.getResponse() == "ok")
     {
         gtk_widget_hide(m_gobj);
-        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowType)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
+        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowType)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowGroup)), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
         //Invalid Transaction
         if(status != TransactionCheckStatus::Valid)
         {

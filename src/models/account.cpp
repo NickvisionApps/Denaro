@@ -289,10 +289,7 @@ bool Account::updateTransaction(const Transaction& transaction)
     if(qryUpdate.exec() > 0)
     {
         m_transactions[transaction.getId()] = transaction;
-        if(transaction.getGroupId() != -1)
-        {
-            updateGroupAmounts();
-        }
+        updateGroupAmounts();
         return true;
     }
     return false;

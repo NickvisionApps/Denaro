@@ -155,10 +155,10 @@ void AccountViewController::deleteTransaction(unsigned int id)
 
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
-    return { m_account.getNextAvailableTransactionId(), m_currencySymbol };
+    return { m_account.getNextAvailableTransactionId(), m_currencySymbol, m_account.getGroups() };
 }
 
 TransactionDialogController AccountViewController::createTransactionDialogController(unsigned int id) const
 {
-    return { m_account.getTransactionById(id).value(), m_currencySymbol };
+    return { m_account.getTransactionById(id).value(), m_currencySymbol, m_account.getGroups() };
 }
