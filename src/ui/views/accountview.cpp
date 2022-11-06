@@ -3,7 +3,6 @@
 #include "transactiondialog.hpp"
 #include "../controls/messagedialog.hpp"
 #include "../../helpers/translation.hpp"
-#include "../../helpers/contextualtranslation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
