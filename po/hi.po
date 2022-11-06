@@ -1,5 +1,5 @@
-# Hindi translation
-# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# Hindi translation for Nickvision Money
+# Copyright (C) 2022 Nick Logozzo
 # This file is distributed under the same license as the org.nickvision.money package.
 # Hemish <hemish04082005@gmail.com>, 2022.
 #
