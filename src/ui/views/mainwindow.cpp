@@ -2,6 +2,7 @@
 #include <filesystem>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
+#include "../../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
@@ -21,23 +22,23 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Menu Account Button
     m_btnMenuAccount = gtk_menu_button_new();
     GMenu* menuAccount{ g_menu_new() };
-    g_menu_append(menuAccount, "New Account", "win.newAccount");
-    g_menu_append(menuAccount, "Open Account", "win.openAccount");
-    g_menu_append(menuAccount, "Close Account", "win.closeAccount");
+    g_menu_append(menuAccount, _("New Account"), "win.newAccount");
+    g_menu_append(menuAccount, _("Open Account"), "win.openAccount");
+    g_menu_append(menuAccount, _("Close Account"), "win.closeAccount");
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "bank-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccount), G_MENU_MODEL(menuAccount));
-    gtk_widget_set_tooltip_text(m_btnMenuAccount, "Account Menu");
+    gtk_widget_set_tooltip_text(m_btnMenuAccount, _("Account Menu"));
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
     g_object_unref(menuAccount);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
-    g_menu_append(menuHelp, "Preferences", "win.preferences");
-    g_menu_append(menuHelp, "Keyboard Shortcuts", "win.keyboardShortcuts");
-    g_menu_append(menuHelp, std::string("About " + m_controller.getAppInfo().getShortName()).c_str(), "win.about");
+    g_menu_append(menuHelp, _("Preferences"), "win.preferences");
+    g_menu_append(menuHelp, _("Keyboard Shortcuts"), "win.keyboardShortcuts");
+    g_menu_append(menuHelp, std::string(_("About ") + m_controller.getAppInfo().getShortName()).c_str(), "win.about");
     gtk_menu_button_set_direction(GTK_MENU_BUTTON(m_btnMenuHelp), GTK_ARROW_NONE);
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuHelp), G_MENU_MODEL(menuHelp));
-    gtk_widget_set_tooltip_text(m_btnMenuHelp, "Main Menu");
+    gtk_widget_set_tooltip_text(m_btnMenuHelp, _("Main Menu"));
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuHelp);
     g_object_unref(menuHelp);
     //Toast Overlay
@@ -52,7 +53,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_size_request(m_btnNewAccount, 200, 50);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "circular");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "suggested-action");
-    gtk_button_set_label(GTK_BUTTON(m_btnNewAccount), "New Account");
+    gtk_button_set_label(GTK_BUTTON(m_btnNewAccount), _("New Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewAccount), "win.newAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnNewAccount);
     //Open Account Button
@@ -60,14 +61,14 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_halign(m_btnOpenAccount, GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(m_btnOpenAccount, 200, 50);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnOpenAccount), "circular");
-    gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), "Open Account");
+    gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), _("Open Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
     //Page No Downloads
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
-    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "No Accounts Open");
-    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "Open or create an account to get started.");
+    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("No Accounts Open"));
+    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Open or create an account to get started."));
     adw_status_page_set_child(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_boxStatusButtons);
     //Page Tabs
     m_pageTabs = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -151,7 +152,7 @@ void MainWindow::onAccountAdded()
 
 void MainWindow::onNewAccount()
 {
-    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new("Open Account", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, "_Save", "_Cancel") };
+    GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, _("_Save"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
@@ -175,7 +176,7 @@ void MainWindow::onNewAccount()
 
 void MainWindow::onOpenAccount()
 {
-    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new("Open Account", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");

@@ -1,13 +1,16 @@
 #include "transactiondialog.hpp"
+#include "../../helpers/stringhelpers.hpp"
+#include "../../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
+using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::UI::Views;
 
-TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Controllers::TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "Transaction", nullptr) }
+TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Controllers::TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, _("Transaction"), nullptr) }
 {
     //Dialog Settings
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
-    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(m_gobj), "cancel", "Cancel", "ok", "OK", nullptr);
+    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(m_gobj), "cancel", _("Cancel"), "ok", _("OK"), nullptr);
     adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(m_gobj), "ok", ADW_RESPONSE_SUGGESTED);
     adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(m_gobj), "ok");
     adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(m_gobj), "cancel");
@@ -17,7 +20,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Id
     m_rowId = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowId, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowId), "ID");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowId), _("ID"));
     gtk_editable_set_editable(GTK_EDITABLE(m_rowId), false);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowId);
     //Date
@@ -32,29 +35,29 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
     m_rowDate = adw_action_row_new();
     gtk_widget_set_size_request(m_rowDate, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDate), "Date");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDate), _("Date"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowDate), m_btnDate);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowDate), m_btnDate);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDate);
     //Description
     m_rowDescription = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowDescription, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowDescription), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
     //Type
     m_rowType = adw_combo_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), "Type");
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ "Income", "Expense", nullptr })));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), _("Type"));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ _("Income"), _("Expense"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowType);
     //Repeat Interval
     m_rowRepeatInterval = adw_combo_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRepeatInterval), "Repeat Interval");
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ "Never", "Daily", "Weekly", "Monthly", "Quarterly", "Yearly", "Biyearly", nullptr })));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRepeatInterval), _("Repeat Interval"));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowRepeatInterval), G_LIST_MODEL(gtk_string_list_new(new const char*[8]{ _("Never"), _("Daily"), _("Weekly"), _("Monthly"), _("Quarterly"), _("Yearly"), _("Biyearly"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowRepeatInterval);
     //Group
     m_rowGroup = adw_combo_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowGroup), "Group");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowGroup), _("Group"));
     const char** groupNames{ new const char*[m_controller.getGroupNames().size() + 1] };
     for(size_t i = 0; i < m_controller.getGroupNames().size(); i++)
     {
@@ -66,7 +69,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Amount
     m_rowAmount = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowAmount, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), std::string("Amount (" + m_controller.getCurrencySymbol() + ")").c_str());
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), StringHelpers::format(_("Amount (%s)"), m_controller.getCurrencySymbol().c_str()).c_str());
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowAmount), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowAmount);
     //Layout
@@ -103,24 +106,24 @@ bool TransactionDialog::run()
         {
             //Reset UI
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowAmount), "error");
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), std::string("Amount (" + m_controller.getCurrencySymbol() + ")").c_str());
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), StringHelpers::format(_("Amount (%s)"), m_controller.getCurrencySymbol().c_str()).c_str());
             //Mark Error
             if(status == TransactionCheckStatus::EmptyDescription)
             {
                 gtk_style_context_add_class(gtk_widget_get_style_context(m_rowDescription), "error");
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description (Empty)");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description (Empty)"));
             }
             else if(status == TransactionCheckStatus::EmptyAmount)
             {
                 gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount (Empty)");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount (Empty)"));
             }
             else if(status == TransactionCheckStatus::InvalidAmount)
             {
                 gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), "Amount (Invalid)");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount (Invalid)"));
             }
             return run();
         }

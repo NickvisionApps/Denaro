@@ -1,4 +1,5 @@
 #include "transaction.hpp"
+#include "../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Models;
 
@@ -51,31 +52,31 @@ std::string Transaction::getRepeatIntervalAsString() const
 {
     if(m_repeatInterval == RepeatInterval::Never)
     {
-        return "Never";
+        return _("Never");
     }
     else if(m_repeatInterval == RepeatInterval::Daily)
     {
-        return "Daily";
+        return _("Daily");
     }
     else if(m_repeatInterval == RepeatInterval::Weekly)
     {
-        return "Weekly";
+        return _("Weekly");
     }
     else if(m_repeatInterval == RepeatInterval::Monthly)
     {
-        return "Monthly";
+        return _("Monthly");
     }
     else if(m_repeatInterval == RepeatInterval::Quarterly)
     {
-        return "Quarterly";
+        return _("Quarterly");
     }
     else if(m_repeatInterval == RepeatInterval::Yearly)
     {
-        return "Yearly";
+        return _("Yearly");
     }
     else if(m_repeatInterval == RepeatInterval::Biyearly)
     {
-        return "Biyearly";
+        return _("Biyearly");
     }
     return "";
 }

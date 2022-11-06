@@ -1,4 +1,7 @@
 sources = files('main.cpp',
+		'helpers/translation.hpp',
+		'helpers/stringhelpers.hpp',
+		'helpers/stringhelpers.cpp',
 		'models/appinfo.hpp',
 		'models/appinfo.cpp',
 		'models/configuration.hpp',

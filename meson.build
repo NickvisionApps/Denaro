@@ -11,6 +11,7 @@ sqlitecpp = dependency('SQLiteCpp')
 boost = dependency('boost')
 
 subdir('src')
+subdir('po')
 
 executable('org.nickvision.money', sources, dependencies: [threads, adwaita, jsoncpp, dl, sqlitecpp, boost], install: true)
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')

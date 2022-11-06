@@ -1,4 +1,5 @@
 #include "preferencesdialog.hpp"
+#include "../../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
@@ -13,31 +14,31 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
     //Header Bar
     m_headerBar = adw_header_bar_new();
-    adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), adw_window_title_new("Preferences", nullptr));
+    adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), adw_window_title_new(_("Preferences"), nullptr));
     //User Interface Group
     m_grpUserInterface = adw_preferences_group_new();
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpUserInterface), "User Interface");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpUserInterface), "Customize the application's user interface.");
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpUserInterface), _("User Interface"));
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpUserInterface), _("Customize the application's user interface."));
     //Theme Row
     m_rowTheme = adw_combo_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTheme), "Theme");
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ "System", "Light", "Dark", nullptr })));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTheme), _("Theme"));
+    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ _("System"), _("Light"), _("Dark"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
     g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
     //Currency Group
     m_grpCurrency = adw_preferences_group_new();
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCurrency), "Currency");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpCurrency), "Customize currency settings.\n\nA change in one of these settings will only be applied on newly opened accounts.");
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCurrency), _("Currency"));
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpCurrency), _("Customize currency settings.\n\nA change in one of these settings will only be applied on newly opened accounts."));
     //Currency Symbol Row
     m_rowCurrencySymbol = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowCurrencySymbol), "Currency Symbol");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowCurrencySymbol), _("Currency Symbol"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCurrency), m_rowCurrencySymbol);
     //Display Currency Symbol On Right Row
     m_rowDisplayCurrencySymbolOnRight = adw_action_row_new();
     m_switchDisplayCurrencySymbolOnRight = gtk_switch_new();
     gtk_widget_set_valign(m_switchDisplayCurrencySymbolOnRight, GTK_ALIGN_CENTER);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDisplayCurrencySymbolOnRight), "Display Currency Symbol On Right");
-    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), "If checked, the currency symbol will be displayed on the right of a monetary value.");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDisplayCurrencySymbolOnRight), _("Display Currency Symbol On Right"));
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), _("If checked, the currency symbol will be displayed on the right of a monetary value."));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), m_switchDisplayCurrencySymbolOnRight);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowDisplayCurrencySymbolOnRight), m_switchDisplayCurrencySymbolOnRight);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCurrency), m_rowDisplayCurrencySymbolOnRight);

@@ -1,13 +1,14 @@
 #include "transactiondialogcontroller.hpp"
 #include <sstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include "../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
 
 TransactionDialogController::TransactionDialogController(unsigned int newId, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ newId }, m_groups{ groups }
 {
-    m_groupNames.push_back("None");
+    m_groupNames.push_back(_("None"));
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
         m_groupNames.push_back(pair.second.getName());
@@ -16,7 +17,7 @@ TransactionDialogController::TransactionDialogController(unsigned int newId, con
 
 TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ transaction }, m_groups{ groups }
 {
-    m_groupNames.push_back("None");
+    m_groupNames.push_back(_("None"));
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
         m_groupNames.push_back(pair.second.getName());

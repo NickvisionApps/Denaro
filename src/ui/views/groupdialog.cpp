@@ -1,13 +1,14 @@
 #include "groupdialog.hpp"
+#include "../../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
 
-GroupDialog::GroupDialog(GtkWindow* parent, NickvisionMoney::Controllers::GroupDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "Group", nullptr) }
+GroupDialog::GroupDialog(GtkWindow* parent, NickvisionMoney::Controllers::GroupDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, _("Group"), nullptr) }
 {
     //Dialog Settings
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
-    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(m_gobj), "cancel", "Cancel", "ok", "OK", nullptr);
+    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(m_gobj), "cancel", _("Cancel"), "ok", _("OK"), nullptr);
     adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(m_gobj), "ok", ADW_RESPONSE_SUGGESTED);
     adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(m_gobj), "ok");
     adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(m_gobj), "cancel");
@@ -17,13 +18,13 @@ GroupDialog::GroupDialog(GtkWindow* parent, NickvisionMoney::Controllers::GroupD
     //Name
     m_rowName = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowName, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), "Name");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name"));
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowName), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowName);
     //Description
     m_rowDescription = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowDescription, 420, -1);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowDescription), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
     //Layout
@@ -55,19 +56,19 @@ bool GroupDialog::run()
         {
             //Reset UI
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowName), "error");
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), "Name");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name"));
             gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
             //Mark Error
             if(status == GroupCheckStatus::EmptyName)
             {
                 gtk_style_context_add_class(gtk_widget_get_style_context(m_rowName), "error");
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), "Name (Empty)");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name (Empty)"));
             }
             else if(status == GroupCheckStatus::EmptyDescription)
             {
                 gtk_style_context_add_class(gtk_widget_get_style_context(m_rowDescription), "error");
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), "Description (Empty)");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description (Empty)"));
             }
             return run();
         }
