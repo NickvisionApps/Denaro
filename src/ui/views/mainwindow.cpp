@@ -6,8 +6,8 @@
 #include "../../helpers/stringhelpers.hpp"
 
 using namespace NickvisionMoney::Controllers;
-using namespace NickvisionMoney::UI::Views;
 using namespace NickvisionMoney::Helpers;
+using namespace NickvisionMoney::UI::Views;
 
 MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
 {

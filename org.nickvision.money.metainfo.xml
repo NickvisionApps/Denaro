@@ -34,8 +34,10 @@
     <release version="2022.11.0-beta2" date="2022-11-06">
       <description>
         <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
-        <p>- Added support for translations</p>
-        <p>- Added french translation (Thanks @zothma!)</p>
+        <p>- Added translation support</p>
+        <p>- Added French translation (Thanks @zothma!)</p>
+        <p>- Added Hindi translation (Thanks @securearth!)</p>
+        <p>- Added Russian translation (Thanks @fsobolev!)</p>
       </description>
     </release>
   </releases>
