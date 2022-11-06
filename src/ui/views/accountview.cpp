@@ -23,7 +23,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblIncome), "success");
     m_rowIncome = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), pgettext("Overview", "Income"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
     //Account Expense
@@ -31,7 +31,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_lblExpense), "error");
     m_rowExpense = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), pgettext("Overview", "Expense"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
     //Button Menu Account Actions
@@ -61,7 +61,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewGroup), "flat");
     GtkWidget* btnNewGroupContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewGroupContent), "list-add-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), _("New"));
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), pgettext("Group", "New"));
     gtk_widget_set_tooltip_text(m_btnNewGroup, _("New Group (Ctrl+G)"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
@@ -79,7 +79,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewTransaction), "flat");
     GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), _("New"));
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), pgettext("Transaction", "New"));
     gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
     gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
