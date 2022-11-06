@@ -35,6 +35,7 @@
       <description>
         <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
         <p>- Added support for translations</p>
+        <p>- Added french translation (Thanks @zothma!)</p>
       </description>
     </release>
   </releases>
