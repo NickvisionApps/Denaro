@@ -157,7 +157,7 @@ void MainWindow::onNewAccount()
     GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, _("_Save"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
-    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_set_name(filter, _("Money Account (*.nmoney)"));
     gtk_file_filter_add_pattern(filter, "*.nmoney");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(saveFileDialog), filter);
     g_object_unref(filter);
@@ -181,7 +181,7 @@ void MainWindow::onOpenAccount()
     GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
-    gtk_file_filter_set_name(filter, "Money Account (*.nmoney)");
+    gtk_file_filter_set_name(filter, _("Money Account (*.nmoney)"));
     gtk_file_filter_add_pattern(filter, "*.nmoney");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
     g_object_unref(filter);
