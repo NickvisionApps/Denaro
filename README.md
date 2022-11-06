@@ -39,7 +39,7 @@ msgid ""
 "If checked, the currency symbol will be displayed on the right of a monetary "
 "value."
 ```
-You should use the same format for translated strings as well. But, because all languages do not have the same sentence strucutre, you may not need to follow this word-by-word, rather you should bifurcate the string in nearabout the same ratio. (For examples, look into translations of languages which do not have a English-like strucuture in `NickvisionMoney/po/`)
+You should use the same format for translated strings as well. But, because all languages do not have the same sentence strucutre, you may not need to follow this word-by-word, rather you should bifurcate the string in about the same ratio. (For examples, look into translations of languages which do not have a English-like structure in `NickvisionMoney/po/`)
 
 Put your translated file in `NickvisionMoney/po` directory in format `<LANG>.po` where `<LANG>` is the language code.
 
