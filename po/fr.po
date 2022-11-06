@@ -1,0 +1,363 @@
+# French translation for Money
+# Copyright (C) 2022
+# This file is distributed under the same license as the org.nickvision.money package.
+# Enzo MAROS <enzo.maros@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: org.nickvision.money\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-06 11:21+0100\n"
+"PO-Revision-Date: 2022-11-06 10:02+0100\n"
+"Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/controllers/accountviewcontroller.cpp:95
+msgid "Exported account to CSV successfully."
+msgstr "Compte exporté au format CSV avec succès"
+
+#: src/controllers/accountviewcontroller.cpp:99
+msgid "Unable to export account as CSV."
+msgstr "Impossible d'exporter le compte au format CSV"
+
+#: src/controllers/accountviewcontroller.cpp:110
+#, c-format
+msgid "Imported %d transactions from CSV."
+msgstr "%d transaction importées depuis le CSV"
+
+#: src/controllers/transactiondialogcontroller.cpp:11
+#: src/controllers/transactiondialogcontroller.cpp:20
+msgid "None"
+msgstr "Aucun"
+
+#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:56
+msgid "Never"
+msgstr "Jamais"
+
+#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:56
+msgid "Daily"
+msgstr "Quotidienne"
+
+#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:56
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:56
+msgid "Monthly"
+msgstr "Mensuelle"
+
+#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:56
+msgid "Quarterly"
+msgstr "Trimestrielle"
+
+#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:56
+msgid "Yearly"
+msgstr "Annuelle"
+
+#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:56
+msgid "Biyearly"
+msgstr "Semestrielle"
+
+#: src/ui/application.cpp:16
+msgid "A personal finance manager."
+msgstr "Gestionnaire des dépenses personnelles."
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
+msgid "OK"
+msgstr "OK"
+
+#: src/ui/controls/grouprow.cpp:31
+msgid "Edit Group"
+msgstr "Modifier le groupe"
+
+#: src/ui/controls/grouprow.cpp:39
+msgid "Delete Group"
+msgstr "Supprimer le groupe"
+
+#: src/ui/controls/transactionrow.cpp:20
+msgid "Repeat Interval: "
+msgstr "Répéter à intervalle : "
+
+#: src/ui/controls/transactionrow.cpp:41
+msgid "Edit Transaction"
+msgstr "Modifier la transaction"
+
+#: src/ui/controls/transactionrow.cpp:49
+msgid "Delete Transaction"
+msgstr "Supprimer la transaction"
+
+#: src/ui/views/accountview.cpp:18
+msgid "Total"
+msgstr "Total"
+
+#: src/ui/views/accountview.cpp:26 src/ui/views/transactiondialog.cpp:51
+msgid "Income"
+msgstr "Crédit"
+
+#: src/ui/views/accountview.cpp:34 src/ui/views/transactiondialog.cpp:51
+msgid "Expense"
+msgstr "Débit"
+
+#: src/ui/views/accountview.cpp:42
+msgid "Actions"
+msgstr "Actions"
+
+#: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:177
+msgid "Export as CSV"
+msgstr "Exporter au format CSV"
+
+#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:201
+msgid "Import from CSV"
+msgstr "Importer depuis un CSV"
+
+#: src/ui/views/accountview.cpp:55
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
+#: src/ui/views/accountview.cpp:64 src/ui/views/accountview.cpp:82
+msgid "New"
+msgstr "Nouveau"
+
+#: src/ui/views/accountview.cpp:65
+msgid "New Group (Ctrl+G)"
+msgstr "Nouveau groupe (Ctrl+G)"
+
+#: src/ui/views/accountview.cpp:74
+msgid "Groups"
+msgstr "Groupes"
+
+#: src/ui/views/accountview.cpp:83
+msgid "New Transaction (Ctrl+Shift+N)"
+msgstr "Nouvelle transaction (Ctrl+Maj+N)"
+
+#: src/ui/views/accountview.cpp:92
+msgid "Transactions"
+msgstr "Transactions"
+
+#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:155
+msgid "_Save"
+msgstr "_Enregistrer"
+
+#: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
+#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
+msgid "_Cancel"
+msgstr "_Annuler"
+
+#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:179
+msgid "_Open"
+msgstr "_Ouvrir"
+
+#: src/ui/views/accountview.cpp:245
+msgid "Delete Group?"
+msgstr "Supprimer le groupe ?"
+
+#: src/ui/views/accountview.cpp:245
+msgid ""
+"Are you sure you want to delete this group?\n"
+"This action is irreversible."
+msgstr ""
+"Êtes-vous sûr de vouloir supprimer ce groupe ?\n"
+"Cette action est irréversible."
+
+#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+msgid "No"
+msgstr "Non"
+
+#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+msgid "Yes"
+msgstr "Oui"
+
+#: src/ui/views/accountview.cpp:274
+msgid "Delete Transaction?"
+msgstr "Supprimer la transaction ?"
+
+#: src/ui/views/accountview.cpp:274
+msgid ""
+"Are you sure you want to delete this transaction?\n"
+"This action is irreversible."
+msgstr ""
+"Êtes-vous sûr de vouloir supprimer cette transaction ?\n"
+"Cette action est irréversible."
+
+#: src/ui/views/groupdialog.cpp:7 src/ui/views/shortcutsdialog.cpp:99
+#: src/ui/views/transactiondialog.cpp:60
+msgid "Group"
+msgstr "Groupe"
+
+#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:59
+msgid "Name"
+msgstr "Nom"
+
+#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
+#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
+msgid "Description"
+msgstr "Description"
+
+#: src/ui/views/groupdialog.cpp:66
+msgid "Name (Empty)"
+msgstr "Nom (vide)"
+
+#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
+msgid "Description (Empty)"
+msgstr "Description (vide)"
+
+#: src/ui/views/mainwindow.cpp:25 src/ui/views/mainwindow.cpp:56
+#: src/ui/views/shortcutsdialog.cpp:96
+msgid "New Account"
+msgstr "Nouveau compte"
+
+#: src/ui/views/mainwindow.cpp:26 src/ui/views/mainwindow.cpp:64
+#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/shortcutsdialog.cpp:97
+msgid "Open Account"
+msgstr "Ouvrir un compte"
+
+#: src/ui/views/mainwindow.cpp:27 src/ui/views/shortcutsdialog.cpp:98
+msgid "Close Account"
+msgstr "Fermer le compte"
+
+#: src/ui/views/mainwindow.cpp:30
+msgid "Account Menu"
+msgstr "Menu des comptes"
+
+#: src/ui/views/mainwindow.cpp:36 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/shortcutsdialog.cpp:104
+msgid "Preferences"
+msgstr "Préférences"
+
+#: src/ui/views/mainwindow.cpp:37 src/ui/views/shortcutsdialog.cpp:105
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis clavier"
+
+#: src/ui/views/mainwindow.cpp:38
+msgid "About "
+msgstr "À propos de "
+
+#: src/ui/views/mainwindow.cpp:41
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: src/ui/views/mainwindow.cpp:70
+msgid "No Accounts Open"
+msgstr "Aucun compte ouvert"
+
+#: src/ui/views/mainwindow.cpp:71
+msgid "Open or create an account to get started."
+msgstr "Ouvrez ou créez un compte pour commencer"
+
+#: src/ui/views/preferencesdialog.cpp:20
+msgid "User Interface"
+msgstr "Interface utilisateur"
+
+#: src/ui/views/preferencesdialog.cpp:21
+msgid "Customize the application's user interface."
+msgstr "Personnaliser l'interface de l'application"
+
+#: src/ui/views/preferencesdialog.cpp:24
+msgid "Theme"
+msgstr "Thème"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "System"
+msgstr "Système"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Light"
+msgstr "Clair"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Dark"
+msgstr "Sombre"
+
+#: src/ui/views/preferencesdialog.cpp:30
+msgid "Currency"
+msgstr "Monnaie"
+
+#: src/ui/views/preferencesdialog.cpp:31
+msgid ""
+"Customize currency settings.\n"
+"\n"
+"A change in one of these settings will only be applied on newly opened "
+"accounts."
+msgstr ""
+"Personnaliser les paramètres de monnaie.\n"
+"\n"
+"Les changements ne seront appliqués qu'à l'ouverture d'un compte."
+
+#: src/ui/views/preferencesdialog.cpp:34
+msgid "Currency Symbol"
+msgstr "Symbole monétaire"
+
+#: src/ui/views/preferencesdialog.cpp:40
+msgid "Display Currency Symbol On Right"
+msgstr "Afficher le symbole monétaire à droite"
+
+#: src/ui/views/preferencesdialog.cpp:41
+msgid ""
+"If checked, the currency symbol will be displayed on the right of a monetary "
+"value."
+msgstr ""
+"Quand cette option est cochée, le symbole monétaire apparaît à droite de la "
+"valeur."
+
+#: src/ui/views/shortcutsdialog.cpp:95
+msgid "Account"
+msgstr "Compte"
+
+#: src/ui/views/shortcutsdialog.cpp:100
+msgid "New Group"
+msgstr "Nouveau groupe"
+
+#: src/ui/views/shortcutsdialog.cpp:101 src/ui/views/transactiondialog.cpp:9
+msgid "Transaction"
+msgstr "Transaction"
+
+#: src/ui/views/shortcutsdialog.cpp:102
+msgid "New Transaction"
+msgstr "Nouvelle transaction"
+
+#: src/ui/views/shortcutsdialog.cpp:103
+msgid "Application"
+msgstr "Application"
+
+#: src/ui/views/shortcutsdialog.cpp:106
+msgid "About"
+msgstr "À propos"
+
+#: src/ui/views/transactiondialog.cpp:23
+msgid "ID"
+msgstr "Identifiant"
+
+#: src/ui/views/transactiondialog.cpp:38
+msgid "Date"
+msgstr "Date"
+
+#: src/ui/views/transactiondialog.cpp:50
+msgid "Type"
+msgstr "Type"
+
+#: src/ui/views/transactiondialog.cpp:55
+msgid "Repeat Interval"
+msgstr "Répéter à intervalle"
+
+#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
+#, c-format
+msgid "Amount (%s)"
+msgstr "Montant (%s)"
+
+#: src/ui/views/transactiondialog.cpp:121
+msgid "Amount (Empty)"
+msgstr "Montant (vide)"
+
+#: src/ui/views/transactiondialog.cpp:126
+msgid "Amount (Invalid)"
+msgstr "Montant (invalide)"
