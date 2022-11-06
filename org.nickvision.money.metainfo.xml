@@ -31,9 +31,9 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.11.0-next" date="2022-11-01">
+    <release version="2022.11.0-beta1" date="2022-11-05">
       <description>
-        <p></p>
+        <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
       </description>
     </release>
   </releases>
