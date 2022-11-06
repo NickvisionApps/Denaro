@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 11:21+0100\n"
-"PO-Revision-Date: 2022-11-06 17:37+0300\n"
+"POT-Creation-Date: 2022-11-06 18:53+0100\n"
+"PO-Revision-Date: 2022-11-06 21:46+0300\n"
 "Last-Translator: Fyodor Sobolev\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -26,38 +26,38 @@ msgstr "Невозможно экспортировать в CSV."
 #: src/controllers/accountviewcontroller.cpp:110
 #, c-format
 msgid "Imported %d transactions from CSV."
-msgstr "Импортировано %d транзакций из CSV."
+msgstr "Импортировано транзакций из CSV: %d."
 
 #: src/controllers/transactiondialogcontroller.cpp:11
 #: src/controllers/transactiondialogcontroller.cpp:20
 msgid "None"
 msgstr "Нет"
 
-#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:57
 msgid "Never"
 msgstr "Никогда"
 
-#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:57
 msgid "Daily"
 msgstr "Ежедневно"
 
-#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:57
 msgid "Weekly"
 msgstr "Еженедельно"
 
-#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:57
 msgid "Monthly"
 msgstr "Ежемесячно"
 
-#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:57
 msgid "Quarterly"
 msgstr "Каждый квартал"
 
-#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:57
 msgid "Yearly"
 msgstr "Каждый год"
 
-#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:56
+#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:57
 msgid "Biyearly"
 msgstr "Раз в полгода"
 
@@ -66,14 +66,14 @@ msgid "A personal finance manager."
 msgstr "Персональный менеджер финансов."
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
-#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
 msgid "Cancel"
 msgstr "Отмена"
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
-#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
 msgid "OK"
-msgstr "OK"
+msgstr "ОК"
 
 #: src/ui/controls/grouprow.cpp:31
 msgid "Edit Group"
@@ -95,72 +95,80 @@ msgstr "Редактировать транзакцию"
 msgid "Delete Transaction"
 msgstr "Удалить транзакцию"
 
-#: src/ui/views/accountview.cpp:18
+#: src/ui/views/accountview.cpp:19
 msgid "Total"
 msgstr "Сумма"
 
-#: src/ui/views/accountview.cpp:26 src/ui/views/transactiondialog.cpp:51
+#: src/ui/views/accountview.cpp:27
+msgctxt "Overview"
 msgid "Income"
 msgstr "Доходы"
 
-#: src/ui/views/accountview.cpp:34 src/ui/views/transactiondialog.cpp:51
+#: src/ui/views/accountview.cpp:35
+msgctxt "Overview"
 msgid "Expense"
 msgstr "Расходы"
 
-#: src/ui/views/accountview.cpp:42
+#: src/ui/views/accountview.cpp:43
 msgid "Actions"
 msgstr "Действия"
 
-#: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:177
+#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:178
 msgid "Export as CSV"
 msgstr "Экспорт в CSV"
 
-#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:201
+#: src/ui/views/accountview.cpp:47 src/ui/views/accountview.cpp:202
 msgid "Import from CSV"
 msgstr "Импорт из CSV"
 
-#: src/ui/views/accountview.cpp:55
+#: src/ui/views/accountview.cpp:56
 msgid "Overview"
 msgstr "Обзор"
 
-#: src/ui/views/accountview.cpp:64 src/ui/views/accountview.cpp:82
+#: src/ui/views/accountview.cpp:65
+msgctxt "Group"
 msgid "New"
 msgstr "Новая"
 
-#: src/ui/views/accountview.cpp:65
+#: src/ui/views/accountview.cpp:66
 msgid "New Group (Ctrl+G)"
 msgstr "Новая группа (Ctrl+G)"
 
-#: src/ui/views/accountview.cpp:74
+#: src/ui/views/accountview.cpp:75
 msgid "Groups"
 msgstr "Группы"
 
 #: src/ui/views/accountview.cpp:83
+msgctxt "Transaction"
+msgid "New"
+msgstr "Новая"
+
+#: src/ui/views/accountview.cpp:84
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Новая транзакция (Ctrl+Shift+N)"
 
-#: src/ui/views/accountview.cpp:92
+#: src/ui/views/accountview.cpp:93
 msgid "Transactions"
 msgstr "Транзакции"
 
-#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:155
+#: src/ui/views/accountview.cpp:178 src/ui/views/mainwindow.cpp:157
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
-#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/accountview.cpp:178 src/ui/views/accountview.cpp:202
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
 msgid "_Cancel"
 msgstr "_Отмена"
 
-#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:179
+#: src/ui/views/accountview.cpp:202 src/ui/views/mainwindow.cpp:181
 msgid "_Open"
 msgstr "_Открыть"
 
-#: src/ui/views/accountview.cpp:245
+#: src/ui/views/accountview.cpp:246
 msgid "Delete Group?"
 msgstr "Удалить группу?"
 
-#: src/ui/views/accountview.cpp:245
+#: src/ui/views/accountview.cpp:246
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -168,19 +176,19 @@ msgstr ""
 "Уверены, что хотите удалить группу?\n"
 "Это действие необратимо."
 
-#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:246 src/ui/views/accountview.cpp:275
 msgid "No"
 msgstr "Нет"
 
-#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:246 src/ui/views/accountview.cpp:275
 msgid "Yes"
 msgstr "Да"
 
-#: src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:275
 msgid "Delete Transaction?"
-msgstr "Удалить транзакцию"
+msgstr "Удалить транзакцию?"
 
-#: src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:275
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -188,8 +196,7 @@ msgstr ""
 "Уверены, что хотите удалить транзакцию?\n"
 "Это действие необратимо."
 
-#: src/ui/views/groupdialog.cpp:7 src/ui/views/shortcutsdialog.cpp:99
-#: src/ui/views/transactiondialog.cpp:60
+#: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:61
 msgid "Group"
 msgstr "Группа"
 
@@ -198,7 +205,7 @@ msgid "Name"
 msgstr "Имя"
 
 #: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
-#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
+#: src/ui/views/transactiondialog.cpp:46 src/ui/views/transactiondialog.cpp:110
 msgid "Description"
 msgstr "Описание"
 
@@ -206,53 +213,58 @@ msgstr "Описание"
 msgid "Name (Empty)"
 msgstr "Имя (Пусто)"
 
-#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
+#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:117
 msgid "Description (Empty)"
 msgstr "Описание (Пусто)"
 
-#: src/ui/views/mainwindow.cpp:25 src/ui/views/mainwindow.cpp:56
-#: src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
+#: src/ui/views/shortcutsdialog.cpp:97
 msgid "New Account"
 msgstr "Новый счёт"
 
-#: src/ui/views/mainwindow.cpp:26 src/ui/views/mainwindow.cpp:64
-#: src/ui/views/mainwindow.cpp:155 src/ui/views/mainwindow.cpp:179
-#: src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/shortcutsdialog.cpp:98
 msgid "Open Account"
 msgstr "Открыть счёт"
 
-#: src/ui/views/mainwindow.cpp:27 src/ui/views/shortcutsdialog.cpp:98
+#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:99
 msgid "Close Account"
 msgstr "Закрыть счёт"
 
-#: src/ui/views/mainwindow.cpp:30
+#: src/ui/views/mainwindow.cpp:32
 msgid "Account Menu"
 msgstr "Меню счёта"
 
-#: src/ui/views/mainwindow.cpp:36 src/ui/views/preferencesdialog.cpp:17
-#: src/ui/views/shortcutsdialog.cpp:104
+#: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/shortcutsdialog.cpp:105
 msgid "Preferences"
 msgstr "Настройки"
 
-#: src/ui/views/mainwindow.cpp:37 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:106
 msgid "Keyboard Shortcuts"
 msgstr "Сочетания клавиш"
 
-#: src/ui/views/mainwindow.cpp:38
-msgid "About "
-msgstr "О приложении "
+#: src/ui/views/mainwindow.cpp:40
+#, c-format
+msgid "About %s"
+msgstr "О приложении %s"
 
-#: src/ui/views/mainwindow.cpp:41
+#: src/ui/views/mainwindow.cpp:43
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/ui/views/mainwindow.cpp:70
+#: src/ui/views/mainwindow.cpp:72
 msgid "No Accounts Open"
 msgstr "Нет открытых счетов"
 
-#: src/ui/views/mainwindow.cpp:71
+#: src/ui/views/mainwindow.cpp:73
 msgid "Open or create an account to get started."
 msgstr "Откройте или создайте счёт, чтобы начать."
+
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+msgid "Money Account (*.nmoney)"
+msgstr "Счёт приложения Money (*.nmoney)"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -308,55 +320,70 @@ msgid ""
 msgstr ""
 "Если включено, символ валюты будет отображаться справа от значения."
 
-#: src/ui/views/shortcutsdialog.cpp:95
+#: src/ui/views/shortcutsdialog.cpp:96
 msgid "Account"
 msgstr "Счёт"
 
 #: src/ui/views/shortcutsdialog.cpp:100
+msgctxt "Shortcuts"
+msgid "Group"
+msgstr "Группа"
+
+#: src/ui/views/shortcutsdialog.cpp:101
 msgid "New Group"
 msgstr "Новая группа"
 
-#: src/ui/views/shortcutsdialog.cpp:101 src/ui/views/transactiondialog.cpp:9
+#: src/ui/views/shortcutsdialog.cpp:102 src/ui/views/transactiondialog.cpp:10
 msgid "Transaction"
 msgstr "Транзакция"
 
-#: src/ui/views/shortcutsdialog.cpp:102
+#: src/ui/views/shortcutsdialog.cpp:103
 msgid "New Transaction"
 msgstr "Новая транзакция"
 
-#: src/ui/views/shortcutsdialog.cpp:103
+#: src/ui/views/shortcutsdialog.cpp:104
 msgid "Application"
 msgstr "Приложение"
 
-#: src/ui/views/shortcutsdialog.cpp:106
+#: src/ui/views/shortcutsdialog.cpp:107
 msgid "About"
 msgstr "О приложении"
 
-#: src/ui/views/transactiondialog.cpp:23
+#: src/ui/views/transactiondialog.cpp:24
 msgid "ID"
 msgstr "Идентификатор (ID)"
 
-#: src/ui/views/transactiondialog.cpp:38
+#: src/ui/views/transactiondialog.cpp:39
 msgid "Date"
 msgstr "Дата"
 
-#: src/ui/views/transactiondialog.cpp:50
+#: src/ui/views/transactiondialog.cpp:51
 msgid "Type"
 msgstr "Тип"
 
-#: src/ui/views/transactiondialog.cpp:55
+#: src/ui/views/transactiondialog.cpp:52
+msgctxt "Transaction|Edition"
+msgid "Income"
+msgstr "Доход"
+
+#: src/ui/views/transactiondialog.cpp:52
+msgctxt "Transaction|Edition"
+msgid "Expense"
+msgstr "Расход"
+
+#: src/ui/views/transactiondialog.cpp:56
 msgid "Repeat Interval"
 msgstr "Повторять с интервалом"
 
-#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
+#: src/ui/views/transactiondialog.cpp:73 src/ui/views/transactiondialog.cpp:112
 #, c-format
 msgid "Amount (%s)"
 msgstr "Сумма (%s)"
 
-#: src/ui/views/transactiondialog.cpp:121
+#: src/ui/views/transactiondialog.cpp:122
 msgid "Amount (Empty)"
 msgstr "Сумма (Пусто)"
 
-#: src/ui/views/transactiondialog.cpp:126
+#: src/ui/views/transactiondialog.cpp:127
 msgid "Amount (Invalid)"
 msgstr "Сумма (Некорректная)"
