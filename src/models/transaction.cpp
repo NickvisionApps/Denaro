@@ -103,7 +103,7 @@ int Transaction::getGroupId() const
 
 void Transaction::setGroupId(int groupId)
 {
-    m_groupId = groupId;
+    m_groupId = groupId <= 0 ? -1 : groupId;
 }
 
 bool Transaction::operator<(const Transaction& toCompare) const

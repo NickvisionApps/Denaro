@@ -8,20 +8,22 @@ using namespace NickvisionMoney::Models;
 
 TransactionDialogController::TransactionDialogController(unsigned int newId, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ newId }, m_groups{ groups }
 {
-    m_groupNames.push_back(_("None"));
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
         m_groupNames.push_back(pair.second.getName());
     }
+    std::sort(m_groupNames.begin(), m_groupNames.end());
+    m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
 TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ transaction }, m_groups{ groups }
 {
-    m_groupNames.push_back(_("None"));
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
         m_groupNames.push_back(pair.second.getName());
     }
+    std::sort(m_groupNames.begin(), m_groupNames.end());
+    m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
 const std::string& TransactionDialogController::getResponse() const

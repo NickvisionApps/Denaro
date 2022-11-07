@@ -148,9 +148,15 @@ void AccountView::onAccountInfoChanged()
         adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpGroups), groupRow->gobj());
     }
     m_groupRows.clear();
+    std::vector<Group> groups;
     for(const std::pair<const unsigned int, Group>& pair : m_controller.getGroups())
     {
-        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(pair.second, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
+        groups.push_back(pair.second);
+    }
+    std::sort(groups.begin(), groups.end());
+    for(const Group& group : groups)
+    {
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
         row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());

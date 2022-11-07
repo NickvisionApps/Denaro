@@ -59,6 +59,34 @@ namespace NickvisionMoney::Models
          * @param monthlyAllowance The new balance
          */
         void setBalance(boost::multiprecision::cpp_dec_float_50 balance);
+        /**
+         * Compares two Groups via less-than
+         *
+         * @param toComapre The group to compare
+         * @returns True if this group < toCompare, else false
+         */
+        bool operator<(const Group& toCompare) const;
+         /**
+         * Compares two Groups via greater-than
+         *
+         * @param toComapre The group to compare
+         * @returns True if this group > toCompare, else false
+         */
+        bool operator>(const Group& toCompare) const;
+         /**
+         * Compares two Groups via equals
+         *
+         * @param toComapre The group to compare
+         * @returns True if this group == toCompare, else false
+         */
+        bool operator==(const Group& toCompare) const;
+         /**
+         * Compares two Groups via not equals
+         *
+         * @param toComapre The group to compare
+         * @returns True if this group != toCompare, else false
+         */
+        bool operator!=(const Group& toCompare) const;
 
 	private:
 		unsigned int m_id;
