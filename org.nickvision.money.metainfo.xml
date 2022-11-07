@@ -37,6 +37,7 @@
         <p>- Money will automatically obtain the user's currency symbol and format from their locale (These options can still be configured in preferences)</p>
         <p>- Fixed an issue where a new account was not created if overwriting an old one</p>
         <p>- Added translation support</p>
+        <p>- Added Dutch translation (Thanks @Vistaus!)</p>
         <p>- Added French translation (Thanks @zothma!)</p>
         <p>- Added Hindi translation (Thanks @securearth!)</p>
         <p>- Added Italian translation (Thanks @bordam!)</p>
