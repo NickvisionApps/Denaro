@@ -13,11 +13,11 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
     //Monetary Value
     std::stringstream builder;
     builder.imbue(m_locale);
-    builder << std::put_money("1.0");
+    builder << std::showbase << std::put_money("1.0");
     std::string monetaryValue{ builder.str() };
     //Defaults
     m_currencySymbol = std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
-    m_displayCurrencySymbolOnRight = monetaryValue.substr(0, 1) == "1";
+    m_displayCurrencySymbolOnRight = monetaryValue.substr(0, 1) != m_currencySymbol;
     //Load Config File
     if(!std::filesystem::exists(m_configDir))
     {
@@ -34,7 +34,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         {
             m_currencySymbol = std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
         }
-        m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRightV2", monetaryValue.substr(0, 1) == "1").asBool();
+        m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRightV2", monetaryValue.substr(0, 1) != m_currencySymbol).asBool();
     }
 }
 
