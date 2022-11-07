@@ -26,7 +26,11 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         builder.imbue(locale);
         builder << std::put_money("1.0");
         std::string monetaryValue{ builder.str() };
-        m_currencySymbol = json.get("CurrencySymbolV2", std::use_facet<std::moneypunct<char>>(locale).curr_symbol()).asString();
+        m_currencySymbol = json.get("CurrencySymbolV2", "").asString();
+        if(m_currencySymbol.empty())
+        {
+            m_currencySymbol = std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+        }
         m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRightV2", monetaryValue.substr(0, 1) == "1").asBool();
     }
 }
@@ -48,6 +52,12 @@ const std::string& Configuration::getCurrencySymbol() const
 
 void Configuration::setCurrencySymbol(const std::string& currencySymbol)
 {
+    if(currencySymbol.empty())
+    {
+        std::locale locale{ setlocale(LC_ALL, nullptr) };
+        m_currencySymbol = std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+        return;
+    }
     m_currencySymbol = currencySymbol;
 }
 

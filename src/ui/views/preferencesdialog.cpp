@@ -70,7 +70,7 @@ void PreferencesDialog::run()
         g_main_context_iteration(g_main_context_default(), false);
     }
     std::string currencySymbol{ gtk_editable_get_text(GTK_EDITABLE(m_rowCurrencySymbol)) };
-    m_controller.setCurrencySymbol(currencySymbol.empty() ? "$" : currencySymbol);
+    m_controller.setCurrencySymbol(currencySymbol);
     m_controller.setDisplayCurrencySymbolOnRight(gtk_switch_get_active(GTK_SWITCH(m_switchDisplayCurrencySymbolOnRight)));
     m_controller.saveConfiguration();
     gtk_window_destroy(GTK_WINDOW(m_gobj));
