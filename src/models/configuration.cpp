@@ -2,14 +2,13 @@
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
-#include <locale>
 #include <sstream>
 #include <adwaita.h>
 #include <json/json.h>
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_theme{ Theme::System }, m_currencySymbol{ "" }, m_displayCurrencySymbolOnRight{ false }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_currencySymbol{ std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol() }, m_displayCurrencySymbolOnRight{ false }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -21,18 +20,22 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         Json::Value json;
         configFile >> json;
         m_theme = static_cast<Theme>(json.get("Theme", 0).asInt());
-        std::locale locale{ setlocale(LC_ALL, nullptr) };
         std::stringstream builder;
-        builder.imbue(locale);
+        builder.imbue(m_locale);
         builder << std::put_money("1.0");
         std::string monetaryValue{ builder.str() };
         m_currencySymbol = json.get("CurrencySymbolV2", "").asString();
         if(m_currencySymbol.empty())
         {
-            m_currencySymbol = std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+            m_currencySymbol = std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
         }
         m_displayCurrencySymbolOnRight = json.get("DisplayCurrencySymbolOnRightV2", monetaryValue.substr(0, 1) == "1").asBool();
     }
+}
+
+const std::locale& Configuration::getLocale() const
+{
+    return m_locale;
 }
 
 Theme Configuration::getTheme() const
@@ -54,8 +57,7 @@ void Configuration::setCurrencySymbol(const std::string& currencySymbol)
 {
     if(currencySymbol.empty())
     {
-        std::locale locale{ setlocale(LC_ALL, nullptr) };
-        m_currencySymbol = std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+        m_currencySymbol = std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
         return;
     }
     m_currencySymbol = currencySymbol;

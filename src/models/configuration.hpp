@@ -1,5 +1,6 @@
 #pragma once
 
+#include <locale>
 #include <string>
 
 namespace NickvisionMoney::Models
@@ -24,6 +25,12 @@ namespace NickvisionMoney::Models
 		 * Constructs a Configuration (loading the configuraton from disk)
 		 */
 		Configuration();
+		/**
+		 * Gets the user's locale
+		 *
+		 * @returns The user's theme
+		 */
+		const std::locale& getLocale() const;
 		/**
 		 * Gets the requested theme
 		 *
@@ -67,6 +74,7 @@ namespace NickvisionMoney::Models
 
 	private:
 		std::string m_configDir;
+		std::locale m_locale;
 		Theme m_theme;
 		std::string m_currencySymbol;
 		bool m_displayCurrencySymbolOnRight;
