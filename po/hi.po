@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 00:18+0530\n"
+"POT-Creation-Date: 2022-11-07 23:15+0530\n"
 "PO-Revision-Date: 2022-11-06 08:43+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,11 +157,11 @@ msgid "_Save"
 msgstr "_संचित करें (Save)"
 
 #: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 msgid "_Cancel"
 msgstr "_रद्द (Cancel)"
 
-#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:185
 msgid "_Open"
 msgstr "खोलें"
 
@@ -224,7 +224,7 @@ msgid "New Account"
 msgstr "नया खाता"
 
 #: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 #: src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "खाता खोलें"
@@ -247,6 +247,7 @@ msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शोर्टकत"
 
 #: src/ui/views/mainwindow.cpp:40
+#, c-format
 msgid "About %s"
 msgstr "%s के बारे में"
 
@@ -262,9 +263,13 @@ msgstr "कोई खाता नहीं खुला है"
 msgid "Open or create an account to get started."
 msgstr "आरंभ करने के लिए मौजूदा या नया खाता खोलें"
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
 msgid "Money Account (*.nmoney)"
 msgstr ""
+
+#: src/ui/views/mainwindow.cpp:241
+msgid "translator-credits"
+msgstr "Hemish <hemish04082005@gmail.com>"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"

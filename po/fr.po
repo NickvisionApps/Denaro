@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 18:53+0100\n"
+"POT-Creation-Date: 2022-11-07 23:15+0530\n"
 "PO-Revision-Date: 2022-11-06 10:02+0100\n"
 "Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
 "Language: fr\n"
@@ -33,31 +33,31 @@ msgstr "%d transaction importées depuis le CSV"
 msgid "None"
 msgstr "Aucun"
 
-#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:56
 msgid "Never"
 msgstr "Jamais"
 
-#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:56
 msgid "Daily"
 msgstr "Quotidienne"
 
-#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:56
 msgid "Weekly"
 msgstr "Hebdomadaire"
 
-#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:56
 msgid "Monthly"
 msgstr "Mensuelle"
 
-#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:56
 msgid "Quarterly"
 msgstr "Trimestrielle"
 
-#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:56
 msgid "Yearly"
 msgstr "Annuelle"
 
-#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:57
+#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:56
 msgid "Biyearly"
 msgstr "Semestrielle"
 
@@ -66,12 +66,12 @@ msgid "A personal finance manager."
 msgstr "Gestionnaire des dépenses personnelles."
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
-#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
 msgid "Cancel"
 msgstr "Annuler"
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
-#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
 msgid "OK"
 msgstr "OK"
 
@@ -95,80 +95,80 @@ msgstr "Modifier la transaction"
 msgid "Delete Transaction"
 msgstr "Supprimer la transaction"
 
-#: src/ui/views/accountview.cpp:19
+#: src/ui/views/accountview.cpp:18
 msgid "Total"
 msgstr "Total"
 
-#: src/ui/views/accountview.cpp:27
+#: src/ui/views/accountview.cpp:26
 msgctxt "Overview"
 msgid "Income"
 msgstr "Crédit"
 
-#: src/ui/views/accountview.cpp:35
+#: src/ui/views/accountview.cpp:34
 msgctxt "Overview"
 msgid "Expense"
 msgstr "Débit"
 
-#: src/ui/views/accountview.cpp:43
+#: src/ui/views/accountview.cpp:42
 msgid "Actions"
 msgstr "Actions"
 
-#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:178
+#: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:177
 msgid "Export as CSV"
 msgstr "Exporter au format CSV"
 
-#: src/ui/views/accountview.cpp:47 src/ui/views/accountview.cpp:202
+#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:201
 msgid "Import from CSV"
 msgstr "Importer depuis un CSV"
 
-#: src/ui/views/accountview.cpp:56
+#: src/ui/views/accountview.cpp:55
 msgid "Overview"
 msgstr "Vue d'ensemble"
 
-#: src/ui/views/accountview.cpp:65
+#: src/ui/views/accountview.cpp:64
 msgctxt "Group"
 msgid "New"
 msgstr "Nouveau"
 
-#: src/ui/views/accountview.cpp:66
+#: src/ui/views/accountview.cpp:65
 msgid "New Group (Ctrl+G)"
 msgstr "Nouveau groupe (Ctrl+G)"
 
-#: src/ui/views/accountview.cpp:75
+#: src/ui/views/accountview.cpp:74
 msgid "Groups"
 msgstr "Groupes"
 
-#: src/ui/views/accountview.cpp:83
+#: src/ui/views/accountview.cpp:82
 msgctxt "Transaction"
 msgid "New"
 msgstr "Nouveau"
 
-#: src/ui/views/accountview.cpp:84
+#: src/ui/views/accountview.cpp:83
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Nouvelle transaction (Ctrl+Maj+N)"
 
-#: src/ui/views/accountview.cpp:93
+#: src/ui/views/accountview.cpp:92
 msgid "Transactions"
 msgstr "Transactions"
 
-#: src/ui/views/accountview.cpp:178 src/ui/views/mainwindow.cpp:157
+#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:157
 msgid "_Save"
 msgstr "_Enregistrer"
 
-#: src/ui/views/accountview.cpp:178 src/ui/views/accountview.cpp:202
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: src/ui/views/accountview.cpp:202 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:185
 msgid "_Open"
 msgstr "_Ouvrir"
 
-#: src/ui/views/accountview.cpp:246
+#: src/ui/views/accountview.cpp:245
 msgid "Delete Group?"
 msgstr "Supprimer le groupe ?"
 
-#: src/ui/views/accountview.cpp:246
+#: src/ui/views/accountview.cpp:245
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -176,19 +176,19 @@ msgstr ""
 "Êtes-vous sûr de vouloir supprimer ce groupe ?\n"
 "Cette action est irréversible."
 
-#: src/ui/views/accountview.cpp:246 src/ui/views/accountview.cpp:275
+#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
 msgid "No"
 msgstr "Non"
 
-#: src/ui/views/accountview.cpp:246 src/ui/views/accountview.cpp:275
+#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
 msgid "Yes"
 msgstr "Oui"
 
-#: src/ui/views/accountview.cpp:275
+#: src/ui/views/accountview.cpp:274
 msgid "Delete Transaction?"
 msgstr "Supprimer la transaction ?"
 
-#: src/ui/views/accountview.cpp:275
+#: src/ui/views/accountview.cpp:274
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -196,7 +196,7 @@ msgstr ""
 "Êtes-vous sûr de vouloir supprimer cette transaction ?\n"
 "Cette action est irréversible."
 
-#: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:61
+#: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:60
 msgid "Group"
 msgstr "Groupe"
 
@@ -205,7 +205,7 @@ msgid "Name"
 msgstr "Nom"
 
 #: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
-#: src/ui/views/transactiondialog.cpp:46 src/ui/views/transactiondialog.cpp:110
+#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
 msgid "Description"
 msgstr "Description"
 
@@ -213,22 +213,22 @@ msgstr "Description"
 msgid "Name (Empty)"
 msgstr "Nom (vide)"
 
-#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:117
+#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
 msgid "Description (Empty)"
 msgstr "Description (vide)"
 
 #: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
-#: src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Nouveau compte"
 
 #: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
-#: src/ui/views/shortcutsdialog.cpp:98
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Ouvrir un compte"
 
-#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:99
+#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:98
 msgid "Close Account"
 msgstr "Fermer le compte"
 
@@ -237,11 +237,11 @@ msgid "Account Menu"
 msgstr "Menu des comptes"
 
 #: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
-#: src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:106
+#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
@@ -262,9 +262,13 @@ msgstr "Aucun compte ouvert"
 msgid "Open or create an account to get started."
 msgstr "Ouvrez ou créez un compte pour commencer"
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
 msgid "Money Account (*.nmoney)"
 msgstr "Compte Money (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:241
+msgid "translator-credits"
+msgstr ""
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -321,70 +325,70 @@ msgstr ""
 "Quand cette option est cochée, le symbole monétaire apparaît à droite de la "
 "valeur."
 
-#: src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
 msgstr "Compte"
 
-#: src/ui/views/shortcutsdialog.cpp:100
+#: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"
 msgid "Group"
 msgstr "Groupe"
 
-#: src/ui/views/shortcutsdialog.cpp:101
+#: src/ui/views/shortcutsdialog.cpp:100
 msgid "New Group"
 msgstr "Nouveau groupe"
 
-#: src/ui/views/shortcutsdialog.cpp:102 src/ui/views/transactiondialog.cpp:10
+#: src/ui/views/shortcutsdialog.cpp:101 src/ui/views/transactiondialog.cpp:9
 msgid "Transaction"
 msgstr "Transaction"
 
-#: src/ui/views/shortcutsdialog.cpp:103
+#: src/ui/views/shortcutsdialog.cpp:102
 msgid "New Transaction"
 msgstr "Nouvelle transaction"
 
-#: src/ui/views/shortcutsdialog.cpp:104
+#: src/ui/views/shortcutsdialog.cpp:103
 msgid "Application"
 msgstr "Application"
 
-#: src/ui/views/shortcutsdialog.cpp:107
+#: src/ui/views/shortcutsdialog.cpp:106
 msgid "About"
 msgstr "À propos"
 
-#: src/ui/views/transactiondialog.cpp:24
+#: src/ui/views/transactiondialog.cpp:23
 msgid "ID"
 msgstr "Identifiant"
 
-#: src/ui/views/transactiondialog.cpp:39
+#: src/ui/views/transactiondialog.cpp:38
 msgid "Date"
 msgstr "Date"
 
-#: src/ui/views/transactiondialog.cpp:51
+#: src/ui/views/transactiondialog.cpp:50
 msgid "Type"
 msgstr "Type"
 
-#: src/ui/views/transactiondialog.cpp:52
+#: src/ui/views/transactiondialog.cpp:51
 msgctxt "Transaction|Edition"
 msgid "Income"
 msgstr "Crédit"
 
-#: src/ui/views/transactiondialog.cpp:52
+#: src/ui/views/transactiondialog.cpp:51
 msgctxt "Transaction|Edition"
 msgid "Expense"
 msgstr "Débit"
 
-#: src/ui/views/transactiondialog.cpp:56
+#: src/ui/views/transactiondialog.cpp:55
 msgid "Repeat Interval"
 msgstr "Répéter à intervalle"
 
-#: src/ui/views/transactiondialog.cpp:73 src/ui/views/transactiondialog.cpp:112
+#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
 #, c-format
 msgid "Amount (%s)"
 msgstr "Montant (%s)"
 
-#: src/ui/views/transactiondialog.cpp:122
+#: src/ui/views/transactiondialog.cpp:121
 msgid "Amount (Empty)"
 msgstr "Montant (vide)"
 
-#: src/ui/views/transactiondialog.cpp:127
+#: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "Montant (invalide)"

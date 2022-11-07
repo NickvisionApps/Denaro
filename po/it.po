@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 23:08+0100\n"
+"POT-Creation-Date: 2022-11-07 23:15+0530\n"
 "PO-Revision-Date: 2022-11-06 23:12+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
@@ -159,11 +159,11 @@ msgid "_Save"
 msgstr "Salva"
 
 #: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 msgid "_Cancel"
 msgstr "Annulla"
 
-#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:185
 msgid "_Open"
 msgstr "Apri"
 
@@ -226,7 +226,7 @@ msgid "New Account"
 msgstr "Nuovo account"
 
 #: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 #: src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Apri account"
@@ -265,9 +265,13 @@ msgstr "Nessun account aperto"
 msgid "Open or create an account to get started."
 msgstr "Apri o crea un account per cominciare."
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
 msgid "Money Account (*.nmoney)"
 msgstr "Account Money (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:241
+msgid "translator-credits"
+msgstr ""
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
