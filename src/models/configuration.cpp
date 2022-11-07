@@ -8,8 +8,17 @@
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_currencySymbol{ std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol() }, m_displayCurrencySymbolOnRight{ false }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }
 {
+    //Monetary Value
+    std::stringstream builder;
+    builder.imbue(m_locale);
+    builder << std::put_money("1.0");
+    std::string monetaryValue{ builder.str() };
+    //Defaults
+    m_currencySymbol = std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
+    m_displayCurrencySymbolOnRight = monetaryValue.substr(0, 1) == "1";
+    //Load Config File
     if(!std::filesystem::exists(m_configDir))
     {
         std::filesystem::create_directories(m_configDir);
@@ -20,10 +29,6 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         Json::Value json;
         configFile >> json;
         m_theme = static_cast<Theme>(json.get("Theme", 0).asInt());
-        std::stringstream builder;
-        builder.imbue(m_locale);
-        builder << std::put_money("1.0");
-        std::string monetaryValue{ builder.str() };
         m_currencySymbol = json.get("CurrencySymbolV2", "").asString();
         if(m_currencySymbol.empty())
         {
