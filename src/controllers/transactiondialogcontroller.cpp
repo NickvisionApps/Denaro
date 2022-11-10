@@ -92,7 +92,8 @@ int TransactionDialogController::getGroupAsIndex() const
     {
         return 0;
     }
-    return std::distance(m_groups.begin(), m_groups.find(m_transaction.getGroupId())) + 1;
+    const Group& group{ m_groups.at(m_transaction.getGroupId()) };
+    return std::find(m_groupNames.begin(), m_groupNames.end(), group.getName()) - m_groupNames.begin();
 }
 
 std::string TransactionDialogController::getAmountAsString() const
@@ -131,9 +132,22 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     }
     else
     {
-        std::map<unsigned int, Group>::iterator it{ m_groups.begin() };
-        std::advance(it, groupIndex - 1);
-        m_transaction.setGroupId(it->second.getId());
+        const std::string& groupName{ m_groupNames[groupIndex] };
+        if(groupName == "None")
+        {
+            m_transaction.setGroupId(-1);
+        }
+        else
+        {
+            for(const std::pair<const unsigned int, Group>& pair : m_groups)
+            {
+                if(pair.second.getName() == groupName)
+                {
+                    m_transaction.setGroupId(pair.second.getId());
+                    break;
+                }
+            }
+        }
     }
     m_transaction.setAmount(amount);
     return TransactionCheckStatus::Valid;
