@@ -48,25 +48,13 @@ namespace NickvisionMoney::Models
 		 *
 		 * @returns The currency symbol to use when displaying monetary values
 		 */
-		const std::string& getCurrencySymbol() const;
-		/**
-		 * Sets the currency symbol to use when displaying monetary values
-		 *
-		 * @param currencySymbol The new currency symbol to use when displaying monetary values
-		 */
-		void setCurrencySymbol(const std::string& currencySymbol);
+		std::string getCurrencySymbol() const;
 		/**
 		 * Gets whether or not to display the currency symbol on the right of a monetary value
 		 *
 		 * @returns True to display currency symbol on the right, else false
 		 */
 		bool getDisplayCurrencySymbolOnRight() const;
-		/**
-		 * Sets whether or not to display the currency symbol on the right of a monetary value
-		 *
-		 * @param displayCurrencySymbolOnRight True to display currency symbol on the right, else false
-		 */
-		void setDisplayCurrencySymbolOnRight(bool displayCurrencySymbolOnRight);
 		/**
 		 * Saves the configuration to disk
 		 */
@@ -76,7 +64,5 @@ namespace NickvisionMoney::Models
 		std::string m_configDir;
 		std::locale m_locale;
 		Theme m_theme;
-		std::string m_currencySymbol;
-		bool m_displayCurrencySymbolOnRight;
 	};
 }

@@ -34,7 +34,7 @@
     <release version="2022.11.0-beta3" date="2022-11-06">
       <description>
         <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
-        <p>- Money will automatically obtain the user's currency symbol and format from their locale (These options can still be configured in preferences)</p>
+        <p>- Money will automatically obtain the user's currency symbol and format from their locale</p>
         <p>- Fixed an issue where a new account was not created if overwriting an old one</p>
         <p>- Added translation support</p>
         <p>- Added Dutch translation (Thanks @Vistaus!)</p>

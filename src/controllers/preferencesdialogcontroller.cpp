@@ -18,26 +18,6 @@ void PreferencesDialogController::setTheme(int theme)
     m_configuration.setTheme(static_cast<Theme>(theme));
 }
 
-const std::string& PreferencesDialogController::getCurrencySymbol() const
-{
-    return m_configuration.getCurrencySymbol();
-}
-
-void PreferencesDialogController::setCurrencySymbol(const std::string& currencySymbol)
-{
-    m_configuration.setCurrencySymbol(currencySymbol);
-}
-
-bool PreferencesDialogController::getDisplayCurrencySymbolOnRight() const
-{
-    return m_configuration.getDisplayCurrencySymbolOnRight();
-}
-
-void PreferencesDialogController::setDisplayCurrencySymbolOnRight(bool displayCurrencySymbolOnRight)
-{
-    m_configuration.setDisplayCurrencySymbolOnRight(displayCurrencySymbolOnRight);
-}
-
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();
