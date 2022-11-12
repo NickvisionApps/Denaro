@@ -1,6 +1,5 @@
 #include "moneyhelpers.hpp"
 #include <sstream>
-#include <iostream>
 
 using namespace NickvisionMoney::Helpers;
 
@@ -52,6 +51,7 @@ std::string MoneyHelpers::getLocaleCurrencySymbol(const std::locale& locale)
 
 std::string MoneyHelpers::fixLocaleStringFormat(const std::string& s, const std::locale& locale)
 {
+    //Generate Number String
     std::string sNew{ "" };
     for(char c : s)
     {
@@ -60,15 +60,30 @@ std::string MoneyHelpers::fixLocaleStringFormat(const std::string& s, const std:
             sNew += c;
         }
     }
-    std::cout << sNew << std::endl;
-    if(isLocaleDotDecimalSeperated(locale) && sNew.find(".") == std::string::npos)
+    //Check Decimal Places
+    if(isLocaleDotDecimalSeperated(locale))
     {
-        sNew += ".00";
+        if(sNew.find(".") == std::string::npos)
+        {
+            sNew += ".00";
+        }
+        else if(sNew.substr(sNew.find(".")).length() == 2)
+        {
+            sNew += "0";
+        }
     }
-    if(!isLocaleDotDecimalSeperated(locale) && sNew.find(",") == std::string::npos)
+    else
     {
-        sNew += ",00";
+        if(sNew.find(",") == std::string::npos)
+        {
+            sNew += ",00";
+        }
+        else if(sNew.substr(sNew.find(",")).length() == 2)
+        {
+            sNew += "0";
+        }
     }
+    //Add Currency Symbol
     if(isLocaleCurrencySymbolOnLeft(locale))
     {
         sNew.insert(0, getLocaleCurrencySymbol(locale));
@@ -78,6 +93,5 @@ std::string MoneyHelpers::fixLocaleStringFormat(const std::string& s, const std:
         sNew += " ";
         sNew += getLocaleCurrencySymbol(locale);
     }
-    std::cout << sNew << std::endl;
     return sNew;
 }
