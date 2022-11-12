@@ -1,5 +1,6 @@
 #include "moneyhelpers.hpp"
 #include <sstream>
+#include <iostream>
 
 using namespace NickvisionMoney::Helpers;
 
@@ -49,31 +50,34 @@ std::string MoneyHelpers::getLocaleCurrencySymbol(const std::locale& locale)
     return std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
 }
 
-void MoneyHelpers::fixLocaleStringFormat(std::string& s, const std::locale& locale)
+std::string MoneyHelpers::fixLocaleStringFormat(const std::string& s, const std::locale& locale)
 {
-    if(s.find(getLocaleCurrencySymbol(locale)) != std::string::npos)
+    std::string sNew{ "" };
+    for(char c : s)
     {
-        s.erase(s.find(getLocaleCurrencySymbol(locale)), 1);
+        if(std::isdigit(c) || c == ',' || c == '.')
+        {
+            sNew += c;
+        }
     }
-    if(s.find(" ") != std::string::npos)
+    std::cout << sNew << std::endl;
+    if(isLocaleDotDecimalSeperated(locale) && sNew.find(".") == std::string::npos)
     {
-        s.erase(s.find(" "), 1);
+        sNew += ".00";
     }
-    if(isLocaleDotDecimalSeperated(locale) && s.find(".") == std::string::npos)
+    if(!isLocaleDotDecimalSeperated(locale) && sNew.find(",") == std::string::npos)
     {
-        s += ".00";
-    }
-    if(!isLocaleDotDecimalSeperated(locale) && s.find(",") == std::string::npos)
-    {
-        s += ",00";
+        sNew += ",00";
     }
     if(isLocaleCurrencySymbolOnLeft(locale))
     {
-        s.insert(0, getLocaleCurrencySymbol(locale));
+        sNew.insert(0, getLocaleCurrencySymbol(locale));
     }
     else
     {
-        s += " ";
-        s += getLocaleCurrencySymbol(locale);
+        sNew += " ";
+        sNew += getLocaleCurrencySymbol(locale);
     }
+    std::cout << sNew << std::endl;
+    return sNew;
 }

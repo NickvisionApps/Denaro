@@ -45,8 +45,9 @@ namespace NickvisionMoney::Helpers::MoneyHelpers
 	/**
 	 * Fixes a money string's format based on the user's locale settings
 	 *
-	 * @param s The string (stored as reference)
+	 * @param s The string
 	 * @param locale The user's locale
+	 * @returns The proper formatted locale string
 	 */
-	void fixLocaleStringFormat(std::string& s, const std::locale& locale);
+	std::string fixLocaleStringFormat(const std::string& s, const std::locale& locale);
 }
