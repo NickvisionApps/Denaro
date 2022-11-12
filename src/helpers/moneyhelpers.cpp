@@ -55,15 +55,15 @@ void MoneyHelpers::fixLocaleStringFormat(std::string& s, const std::locale& loca
     {
         s.erase(s.find(getLocaleCurrencySymbol(locale)), 1);
     }
-    if(s.find(' ') != std::string::npos)
+    if(s.find(" ") != std::string::npos)
     {
-        s.erase(' ', 1);
+        s.erase(s.find(" "), 1);
     }
-    if(isLocaleDotDecimalSeperated(locale) && s.find('.') == std::string::npos)
+    if(isLocaleDotDecimalSeperated(locale) && s.find(".") == std::string::npos)
     {
         s += ".00";
     }
-    if(!isLocaleDotDecimalSeperated(locale) && s.find(',') == std::string::npos)
+    if(!isLocaleDotDecimalSeperated(locale) && s.find(",") == std::string::npos)
     {
         s += ",00";
     }
@@ -73,7 +73,7 @@ void MoneyHelpers::fixLocaleStringFormat(std::string& s, const std::locale& loca
     }
     else
     {
-        s.insert(s.length() - 1, " ");
-        s.insert(s.length() - 1, getLocaleCurrencySymbol(locale));
+        s += " ";
+        s += getLocaleCurrencySymbol(locale);
     }
 }
