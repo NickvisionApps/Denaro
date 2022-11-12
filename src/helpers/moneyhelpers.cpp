@@ -35,7 +35,8 @@ bool MoneyHelpers::isLocaleDotDecimalSeperated(const std::locale& locale)
 {
     std::stringstream builder;
     builder.imbue(locale);
-    builder << std::showbase << std::put_money("1.0");
+    builder << std::showbase << std::put_money("1");
     std::string monetaryValue{ builder.str() };
+    std::cout << monetaryValue << std::endl;
     return monetaryValue.find(".") != std::string::npos;
 }

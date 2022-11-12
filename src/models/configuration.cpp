@@ -42,20 +42,6 @@ void Configuration::setTheme(Theme theme)
     m_theme = theme;
 }
 
-std::string Configuration::getCurrencySymbol() const
-{
-    return std::use_facet<std::moneypunct<char>>(m_locale).curr_symbol();
-}
-
-bool Configuration::getDisplayCurrencySymbolOnRight() const
-{
-    std::stringstream builder;
-    builder.imbue(m_locale);
-    builder << std::showbase << std::put_money("1.0");
-    std::string monetaryValue{ builder.str() };
-    return monetaryValue.substr(0, 1) != getCurrencySymbol();
-}
-
 const std::string& Configuration::getRecentAccount1() const
 {
     return m_recentAccount1;

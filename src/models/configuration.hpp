@@ -44,18 +44,6 @@ namespace NickvisionMoney::Models
 		 */
 		void setTheme(Theme theme);
 		/**
-		 * Gets the currency symbol to use when displaying monetary values
-		 *
-		 * @returns The currency symbol to use when displaying monetary values
-		 */
-		std::string getCurrencySymbol() const;
-		/**
-		 * Gets whether or not to display the currency symbol on the right of a monetary value
-		 *
-		 * @returns True to display currency symbol on the right, else false
-		 */
-		bool getDisplayCurrencySymbolOnRight() const;
-		/**
 		 * Gets the first recent account
 		 *
 		 * @returns The first recent account
