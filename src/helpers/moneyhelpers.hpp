@@ -42,4 +42,11 @@ namespace NickvisionMoney::Helpers::MoneyHelpers
 	 * @returns The currency symbol from the user's locale
 	 */
 	std::string getLocaleCurrencySymbol(const std::locale& locale);
+	/**
+	 * Fixes a money string's format based on the user's locale settings
+	 *
+	 * @param s The string (stored as reference)
+	 * @param locale The user's locale
+	 */
+	void fixLocaleStringFormat(std::string& s, const std::locale& locale);
 }
