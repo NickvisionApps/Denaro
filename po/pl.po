@@ -383,8 +383,8 @@ msgstr "Interwał powtórzeń"
 
 #: src/ui/views/transactiondialog.cpp:73 src/ui/views/transactiondialog.cpp:112
 #, c-format
-msgid "Amount (%s)"
-msgstr "Kwota (%s)"
+msgid "Amount"
+msgstr "Kwota"
 
 #: src/ui/views/transactiondialog.cpp:122
 msgid "Amount (Empty)"

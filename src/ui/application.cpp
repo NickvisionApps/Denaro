@@ -14,7 +14,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("Nickvision Money");
     m_appInfo.setShortName("Money");
     m_appInfo.setDescription(_("A personal finance manager."));
-    m_appInfo.setVersion("2022.11.0-beta3");
+    m_appInfo.setVersion("2022.11.0-beta4");
     m_appInfo.setChangelog("<ul><li>Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</li><li>Money will automatically obtain the user's currency symbol and format from their locale</li><li>Fixed an issue where a new account was not created if overwriting an old one</li><li>Added translation support</li><li>Added Dutch translation (Thanks @Vistaus!)</li><li>Added French translation (Thanks @zothma!)</li><li>Added Hindi translation (Thanks @securearth!)</li><li>Added Italian translation (Thanks @bordam!)</li><li>Added Polish translation (Thanks @martin-desktops!)</li><li>Added Russian translation (Thanks @fsobolev!)</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionMoney");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionMoney/issues/new");

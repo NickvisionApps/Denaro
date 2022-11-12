@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <locale>
 #include <map>
 #include <string>
 #include "groupdialogcontroller.hpp"
@@ -21,11 +22,10 @@ namespace NickvisionMoney::Controllers
 		 * Constructs an AccountViewController
 		 *
 		 * @param path The path of the account to open
-		 * @param currencySymbol The symbol to use when displaying monetary values
-		 * @param displayCurrencySymbolOnRight True to display the currency symbol on the right of monetary values, else false
+		 * @param locale The user's locale
 		 * @param sendToastCallback A callback function for sending a toast notification to the UI
 		 */
-		AccountViewController(const std::string& path, const std::string& currencySymbol, bool displayCurrencySymbolOnRight, const std::function<void(const std::string& message)>& sendToastCallback);
+		AccountViewController(const std::string& path, const std::locale& locale, const std::function<void(const std::string& message)>& sendToastCallback);
 		/**
 		 * Gets the path of the account
 		 *
@@ -33,17 +33,11 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getAccountPath() const;
 		/**
-		 * Gets the symbol to use when displaying monetary values
+		 * Gets the user's locale
 		 *
-		 * @returns The symbol to use when displaying monetary values
+		 * @returns The user's locale
 		 */
-		const std::string& getCurrencySymbol() const;
-		/**
-		 * Gets whether or not to display the currency symbol on the right of a monetary value
-		 *
-		 * @returns True to display currency symbol on the right, else false
-		 */
-		bool getDisplayCurrencySymbolOnRight() const;
+		const std::locale& getLocale() const;
 		/**
 		 * Gets the total of the account as a string
 		 *
@@ -156,8 +150,7 @@ namespace NickvisionMoney::Controllers
 		TransactionDialogController createTransactionDialogController(unsigned int id) const;
 
 	private:
-		std::string m_currencySymbol;
-		bool m_displayCurrencySymbolOnRight;
+		const std::locale& m_locale;
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;

@@ -378,8 +378,8 @@ msgstr "Répéter à intervalle"
 
 #: src/ui/views/transactiondialog.cpp:73 src/ui/views/transactiondialog.cpp:112
 #, c-format
-msgid "Amount (%s)"
-msgstr "Montant (%s)"
+msgid "Amount"
+msgstr "Montant"
 
 #: src/ui/views/transactiondialog.cpp:122
 msgid "Amount (Empty)"

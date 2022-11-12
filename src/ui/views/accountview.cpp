@@ -156,7 +156,7 @@ void AccountView::onAccountInfoChanged()
     std::sort(groups.begin(), groups.end());
     for(const Group& group : groups)
     {
-        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
@@ -170,7 +170,7 @@ void AccountView::onAccountInfoChanged()
     m_transactionRows.clear();
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
-        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getCurrencySymbol(), m_controller.getDisplayCurrencySymbolOnRight()) };
+        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());

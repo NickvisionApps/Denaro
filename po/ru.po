@@ -377,8 +377,8 @@ msgstr "Повторять с интервалом"
 
 #: src/ui/views/transactiondialog.cpp:73 src/ui/views/transactiondialog.cpp:112
 #, c-format
-msgid "Amount (%s)"
-msgstr "Сумма (%s)"
+msgid "Amount"
+msgstr "Сумма"
 
 #: src/ui/views/transactiondialog.cpp:122
 msgid "Amount (Empty)"

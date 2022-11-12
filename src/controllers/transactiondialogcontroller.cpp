@@ -1,12 +1,13 @@
 #include "transactiondialogcontroller.hpp"
-#include <sstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include "../helpers/moneyhelpers.hpp"
 #include "../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
+using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-TransactionDialogController::TransactionDialogController(unsigned int newId, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ newId }, m_groups{ groups }
+TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, const std::locale& locale) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ newId }, m_groups{ groups }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -16,7 +17,7 @@ TransactionDialogController::TransactionDialogController(unsigned int newId, con
     m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
-TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::string& currencySymbol, const std::map<unsigned int, Group>& groups) : m_response{ "cancel" }, m_currencySymbol{ currencySymbol }, m_transaction{ transaction }, m_groups{ groups }
+TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, const std::locale& locale) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ transaction }, m_groups{ groups }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -34,11 +35,6 @@ const std::string& TransactionDialogController::getResponse() const
 void TransactionDialogController::setResponse(const std::string& response)
 {
     m_response = response;
-}
-
-const std::string& TransactionDialogController::getCurrencySymbol() const
-{
-    return m_currencySymbol;
 }
 
 const Transaction& TransactionDialogController::getTransaction() const
@@ -98,12 +94,10 @@ int TransactionDialogController::getGroupAsIndex() const
 
 std::string TransactionDialogController::getAmountAsString() const
 {
-    std::stringstream builder;
-    builder << m_transaction.getAmount();
-    return builder.str();
+    return MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), m_locale);
 }
 
-TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& amountString)
+TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, std::string amountString)
 {
     if(description.empty())
     {
@@ -113,15 +107,15 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     {
         return TransactionCheckStatus::EmptyAmount;
     }
-    boost::multiprecision::cpp_dec_float_50 amount{ 0.0 };
-    try
+    if(MoneyHelpers::isLocaleDotDecimalSeperated(m_locale) && amountString.find(".") == std::string::npos)
     {
-        amount = static_cast<boost::multiprecision::cpp_dec_float_50>(amountString);
+        amountString += ".00";
     }
-    catch(...)
+    else if(!MoneyHelpers::isLocaleDotDecimalSeperated(m_locale) && amountString.find(",") == std::string::npos)
     {
-        return TransactionCheckStatus::InvalidAmount;
+        amountString += ",00";
     }
+    boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_locale) };
     m_transaction.setDate(boost::gregorian::from_string(dateString));
     m_transaction.setDescription(description);
     m_transaction.setType(static_cast<TransactionType>(type));

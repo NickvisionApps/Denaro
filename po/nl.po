@@ -377,8 +377,8 @@ msgstr "Herhalen"
 
 #: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
 #, c-format
-msgid "Amount (%s)"
-msgstr "Bedrag (%s)"
+msgid "Amount"
+msgstr "Bedrag"
 
 #: src/ui/views/transactiondialog.cpp:121
 msgid "Amount (Empty)"

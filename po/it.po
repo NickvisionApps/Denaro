@@ -381,8 +381,8 @@ msgstr "Frequenza"
 
 #: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
 #, c-format
-msgid "Amount (%s)"
-msgstr "Ammontare (%s)"
+msgid "Amount"
+msgstr "Ammontare"
 
 #: src/ui/views/transactiondialog.cpp:121
 msgid "Amount (Empty)"

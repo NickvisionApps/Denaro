@@ -1,5 +1,6 @@
 #pragma once
 
+#include <locale>
 #include <map>
 #include <string>
 #include <vector>
@@ -29,16 +30,18 @@ namespace NickvisionMoney::Controllers
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param newId The Id of the new transaction
-		 * @param currencySymbol The currency symbol
+		 * @param groups The groups of the account
+		 * @param locale The user's locale
 		 */
-		TransactionDialogController(unsigned int newId, const std::string& currencySymbol, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups);
+		TransactionDialogController(unsigned int newId, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale);
 		/**
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param transaction The transaction to update
-		 * @param currencySymbol The currency symbol
+		 * @param groups The groups of the account
+		 * @param locale The user's locale
 		 */
-		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::string& currencySymbol, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups);
+		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -51,12 +54,6 @@ namespace NickvisionMoney::Controllers
 		 * @param response The new response of the dialog
 		 */
 		void setResponse(const std::string& response);
-		/**
-		 * Gets the currency symbol
-		 *
-		 * @returns The currency symbol
-		 */
-		const std::string& getCurrencySymbol() const;
 		/**
 		 * Gets the transaction managed by the dialog
 		 *
@@ -134,11 +131,11 @@ namespace NickvisionMoney::Controllers
 		 * @param amountString The amount string
 		 * @returns The TransactionCheckStatus
 		 */
-		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& amountString);
+		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, std::string amountString);
 
 	private:
 		std::string m_response;
-		std::string m_currencySymbol;
+		const std::locale& m_locale;
 		NickvisionMoney::Models::Transaction m_transaction;
 		std::map<unsigned int, NickvisionMoney::Models::Group> m_groups;
 		std::vector<std::string> m_groupNames;

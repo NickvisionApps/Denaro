@@ -31,7 +31,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.11.0-beta3" date="2022-11-06">
+    <release version="2022.11.0-beta4" date="2022-11-12">
       <description>
         <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
         <p>- Money will automatically obtain the user's currency symbol and format from their locale</p>

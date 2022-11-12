@@ -60,7 +60,7 @@ std::string MainWindowController::getFirstOpenAccountPath() const
 
 AccountViewController MainWindowController::createAccountViewControllerForLatestAccount() const
 {
-    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration.getCurrencySymbol(), m_configuration.getDisplayCurrencySymbolOnRight(), m_sendToastCallback };
+    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration.getLocale(), m_sendToastCallback };
 }
 
 void MainWindowController::addAccount(std::string& path)

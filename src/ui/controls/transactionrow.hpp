@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <locale>
 #include <string>
 #include <adwaita.h>
 #include "../../models/transaction.hpp"
@@ -18,7 +19,7 @@ namespace NickvisionMoney::UI::Controls
 		 *
 		 * @param transaction The Transaction model to manage
 		 */
-		TransactionRow(const NickvisionMoney::Models::Transaction& transaction, const std::string& currencySymbol, bool displayCurrencySymbolOnRight);
+		TransactionRow(const NickvisionMoney::Models::Transaction& transaction, const std::locale& locale);
 		/**
 		 * Gets the GtkWidget* representing the TransactionRow
 		 *

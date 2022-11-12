@@ -1,12 +1,14 @@
 #include "transactionrow.hpp"
 #include <sstream>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include "../../helpers/moneyhelpers.hpp"
 #include "../../helpers/translation.hpp"
 
+using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 
-TransactionRow::TransactionRow(const Transaction& transaction, const std::string& currencySymbol, bool displayCurrencySymbolOnRight) : m_transaction{ transaction }, m_gobj{ adw_action_row_new() }
+TransactionRow::TransactionRow(const Transaction& transaction, const std::locale& locale) : m_transaction{ transaction }, m_gobj{ adw_action_row_new() }
 {
     //Row Settings
     std::stringstream builder;
@@ -21,17 +23,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
     }
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_gobj), builder.str().c_str());
     //Amount Label
-    builder.str("");
-    builder.clear();
-    if(displayCurrencySymbolOnRight)
-    {
-        builder << m_transaction.getAmount() << currencySymbol;
-    }
-    else
-    {
-        builder << currencySymbol << m_transaction.getAmount();
-    }
-    m_lblAmount = gtk_label_new(builder.str().c_str());
+    m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale).c_str());
     gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "success" : "error");
     //Edit Button
     m_btnEdit = gtk_button_new();
