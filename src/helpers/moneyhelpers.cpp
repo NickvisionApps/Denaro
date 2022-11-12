@@ -32,9 +32,5 @@ boost::multiprecision::cpp_dec_float_50 MoneyHelpers::localeStringToBoostMoney(c
 
 bool MoneyHelpers::isLocaleDotDecimalSeperated(const std::locale& locale)
 {
-    std::stringstream builder;
-    builder.imbue(locale);
-    builder << std::showbase << std::put_money("1");
-    std::string monetaryValue{ builder.str() };
-    return monetaryValue.find(".") != std::string::npos;
+    return std::use_facet<std::moneypunct<char>>(locale).decimal_point() == '.';
 }
