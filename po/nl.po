@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-12 20:22+0300\n"
-"PO-Revision-Date: 2022-11-07 20:41+0100\n"
+"PO-Revision-Date: 2022-11-12 19:37+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -87,7 +87,7 @@ msgstr "Groep verwijderen"
 
 #: src/ui/controls/transactionrow.cpp:22
 msgid "Repeat Interval: "
-msgstr "Herhaalperiode:"
+msgstr "Herhaalperiode: "
 
 #: src/ui/controls/transactionrow.cpp:33
 msgid "Edit Transaction"
@@ -220,9 +220,8 @@ msgid "Description (Empty)"
 msgstr "Beschrijving (leeg)"
 
 #: src/ui/views/groupdialog.cpp:76
-#, fuzzy
 msgid "Name (Exists)"
-msgstr ""
+msgstr "Naam (bestaat reeds)"
 
 #: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
 #: src/ui/views/shortcutsdialog.cpp:96
@@ -299,7 +298,7 @@ msgstr "Donker thema"
 
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
-msgstr "Rekening "
+msgstr "Rekening"
 
 #: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"
@@ -370,11 +369,8 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast "
-#~ "op nieuwe rekeningen. "
+#~ "A change in one of these settings will only be applied on newly opened accounts."
+#~ msgstr "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast op nieuwe rekeningen. "
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Valutasymbool"
@@ -382,7 +378,5 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Valutasymbool rechts van bedragen tonen"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
 #~ msgstr "Schakel in om het valutasymbool rechts van bedragen te tonen."
