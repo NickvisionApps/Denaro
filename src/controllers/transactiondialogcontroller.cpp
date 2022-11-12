@@ -116,6 +116,10 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
         amountString += ",00";
     }
     boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_locale) };
+    if(amount == 0)
+    {
+        return TransactionCheckStatus::InvalidAmount;
+    }
     m_transaction.setDate(boost::gregorian::from_string(dateString));
     m_transaction.setDescription(description);
     m_transaction.setType(static_cast<TransactionType>(type));
