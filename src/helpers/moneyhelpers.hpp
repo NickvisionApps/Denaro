@@ -29,4 +29,17 @@ namespace NickvisionMoney::Helpers::MoneyHelpers
 	 * @returns True if separated by ".", false for ","
 	 */
 	bool isLocaleDotDecimalSeperated(const std::locale& locale);
+	/**
+	 * Gets whether or not the user's locale currency symbol is on the left
+	 *
+	 * @param locale The user's locale
+	 * @returns True if on the left, false for right
+	 */
+	bool isLocaleCurrencySymbolOnLeft(const std::locale& locale);
+	/**
+	 * Gets the currency symbol from the user's locale
+	 * @param locale The user's locale
+	 * @returns The currency symbol from the user's locale
+	 */
+	std::string getLocaleCurrencySymbol(const std::locale& locale);
 }

@@ -72,6 +72,8 @@ void MainWindowController::addAccount(std::string& path)
     if(std::find(m_openAccounts.begin(), m_openAccounts.end(), path) == m_openAccounts.end())
     {
         m_openAccounts.push_back(path);
+        m_configuration.addRecentAccount(path);
+        m_configuration.save();
         m_accountAddedCallback();
     }
 }

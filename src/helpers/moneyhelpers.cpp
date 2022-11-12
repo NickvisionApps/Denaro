@@ -34,3 +34,17 @@ bool MoneyHelpers::isLocaleDotDecimalSeperated(const std::locale& locale)
 {
     return std::use_facet<std::moneypunct<char>>(locale).decimal_point() == '.';
 }
+
+bool MoneyHelpers::isLocaleCurrencySymbolOnLeft(const std::locale& locale)
+{
+    std::stringstream builder;
+    builder.imbue(locale);
+    builder << std::showbase << std::put_money("1");
+    std::string monetaryValue{ builder.str() };
+    return monetaryValue.substr(0, 1) == std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+}
+
+std::string MoneyHelpers::getLocaleCurrencySymbol(const std::locale& locale)
+{
+    return std::use_facet<std::moneypunct<char>>(locale).curr_symbol();
+}
