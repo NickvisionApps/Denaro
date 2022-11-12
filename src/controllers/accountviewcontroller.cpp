@@ -98,12 +98,22 @@ void AccountViewController::deleteGroup(unsigned int id)
 
 GroupDialogController AccountViewController::createGroupDialogController() const
 {
-    return { m_account.getNextAvailableGroupId() };
+    std::vector<std::string> groupNames;
+    for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+    {
+        groupNames.push_back(pair.second.getName());
+    }
+    return { m_account.getNextAvailableGroupId(), groupNames };
 }
 
 GroupDialogController AccountViewController::createGroupDialogController(unsigned int id) const
 {
-    return { m_account.getGroupById(id).value() };
+    std::vector<std::string> groupNames;
+    for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+    {
+        groupNames.push_back(pair.second.getName());
+    }
+    return { m_account.getGroupById(id).value(), groupNames };
 }
 
 void AccountViewController::addTransaction(const Transaction& transaction)

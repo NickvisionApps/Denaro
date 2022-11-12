@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "../models/group.hpp"
 
 namespace NickvisionMoney::Controllers
@@ -12,6 +13,7 @@ namespace NickvisionMoney::Controllers
 	{
 		Valid = 0,
 		EmptyName,
+		NameExists,
 		EmptyDescription
 	};
 
@@ -25,14 +27,16 @@ namespace NickvisionMoney::Controllers
 		 * Constructs a GroupDialogController
 		 *
 		 * @param newId The Id of the new group
+		 * @param existingNames A list of existing group names
 		 */
-		GroupDialogController(unsigned int newId);
+		GroupDialogController(unsigned int newId, const std::vector<std::string>& existingNames);
 		/**
 		 * Constructs a GroupDialogController
 		 *
 		 * @param group The group to update
+		 * @param existingNames A list of existing group names
 		 */
-		GroupDialogController(const NickvisionMoney::Models::Group& group);
+		GroupDialogController(const NickvisionMoney::Models::Group& group, const std::vector<std::string>& existingName);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -68,6 +72,7 @@ namespace NickvisionMoney::Controllers
 
 	private:
 		std::string m_response;
+		std::vector<std::string> m_existingNames;
 		NickvisionMoney::Models::Group m_group;
 	};
 }

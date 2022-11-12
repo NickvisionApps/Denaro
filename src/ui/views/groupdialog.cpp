@@ -70,6 +70,11 @@ bool GroupDialog::run()
                 gtk_widget_add_css_class(m_rowDescription, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description (Empty)"));
             }
+            else if(status == GroupCheckStatus::NameExists)
+            {
+                gtk_widget_add_css_class(m_rowName, "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name (Exists)"));
+            }
             return run();
         }
     }
