@@ -5,6 +5,8 @@ using namespace NickvisionMoney::Helpers;
 
 std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_dec_float_50 amount, const std::locale& locale)
 {
+    std::stringstream builder;
+    //Zero
     if(amount == 0)
     {
         if(isLocaleCurrencySymbolOnLeft(locale))
@@ -16,8 +18,7 @@ std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_de
             return (isLocaleDotDecimalSeperated(locale) ? "0.00 " : "0,00 ") + getLocaleCurrencySymbol(locale);
         }
     }
-    std::stringstream builder;
-    //Get Amount As String
+    //Dollar Amount
     amount *= 100.0;
     builder << amount;
     std::string amountAsString{ builder.str() };
@@ -27,7 +28,12 @@ std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_de
     //Get Amount as Locale String
     builder.imbue(locale);
     builder << std::showbase << std::put_money(amountAsString);
-    return builder.str();
+    std::string result{ builder.str() };
+    if(amount > -100 && amount < 100)
+    {
+        result.insert(isLocaleCurrencySymbolOnLeft(locale) ? 1 : 0, "0");
+    }
+    return result;
 }
 
 boost::multiprecision::cpp_dec_float_50 MoneyHelpers::localeStringToBoostMoney(const std::string& localeString, const std::locale& locale)
@@ -63,7 +69,7 @@ std::string MoneyHelpers::getLocaleCurrencySymbol(const std::locale& locale)
 std::string MoneyHelpers::fixLocaleStringFormat(const std::string& s, const std::locale& locale)
 {
     //Generate Number String
-    std::string sNew{ "" };
+    std::string sNew{ "0" };
     for(char c : s)
     {
         if(std::isdigit(c) || c == ',' || c == '.')
