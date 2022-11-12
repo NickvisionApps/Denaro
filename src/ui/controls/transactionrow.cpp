@@ -32,11 +32,11 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
         builder << currencySymbol << m_transaction.getAmount();
     }
     m_lblAmount = gtk_label_new(builder.str().c_str());
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_lblAmount), m_transaction.getType() == TransactionType::Income ? "success" : "error");
+    gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "success" : "error");
     //Edit Button
     m_btnEdit = gtk_button_new();
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnEdit), "flat");
+    gtk_widget_add_css_class(m_btnEdit, "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnEdit), "edit-symbolic");
     gtk_widget_set_tooltip_text(m_btnEdit, _("Edit Transaction"));
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_gobj), m_btnEdit);
@@ -44,7 +44,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::string
     //Delete Button
     m_btnDelete = gtk_button_new();
     gtk_widget_set_valign(m_btnDelete, GTK_ALIGN_CENTER);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnDelete), "flat");
+    gtk_widget_add_css_class(m_btnDelete, "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnDelete), "user-trash-symbolic");
     gtk_widget_set_tooltip_text(m_btnDelete, _("Delete Transaction"));
     g_signal_connect(m_btnDelete, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransactionRow*>(data)->onDelete(); }), this);

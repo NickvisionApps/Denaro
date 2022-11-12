@@ -55,19 +55,19 @@ bool GroupDialog::run()
         if(status != GroupCheckStatus::Valid)
         {
             //Reset UI
-            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowName), "error");
+            gtk_widget_remove_css_class(m_rowName, "error");
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name"));
-            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
+            gtk_widget_remove_css_class(m_rowDescription, "error");
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
             //Mark Error
             if(status == GroupCheckStatus::EmptyName)
             {
-                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowName), "error");
+                gtk_widget_add_css_class(m_rowName, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowName), _("Name (Empty)"));
             }
             else if(status == GroupCheckStatus::EmptyDescription)
             {
-                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowDescription), "error");
+                gtk_widget_add_css_class(m_rowDescription, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description (Empty)"));
             }
             return run();

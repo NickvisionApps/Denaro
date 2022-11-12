@@ -29,7 +29,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     m_popoverDate = gtk_popover_new();
     gtk_popover_set_child(GTK_POPOVER(m_popoverDate), m_calendarDate);
     m_btnDate = gtk_menu_button_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnDate), "flat");
+    gtk_widget_add_css_class(m_btnDate, "flat");
     gtk_widget_set_valign(m_btnDate, GTK_ALIGN_CENTER);
     gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnDate), m_popoverDate);
     gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
@@ -105,24 +105,24 @@ bool TransactionDialog::run()
         if(status != TransactionCheckStatus::Valid)
         {
             //Reset UI
-            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowDescription), "error");
+            gtk_widget_remove_css_class(m_rowDescription, "error");
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
-            gtk_style_context_remove_class(gtk_widget_get_style_context(m_rowAmount), "error");
+            gtk_widget_remove_css_class(m_rowAmount, "error");
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), StringHelpers::format(_("Amount (%s)"), m_controller.getCurrencySymbol().c_str()).c_str());
             //Mark Error
             if(status == TransactionCheckStatus::EmptyDescription)
             {
-                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowDescription), "error");
+                gtk_widget_add_css_class(m_rowDescription, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description (Empty)"));
             }
             else if(status == TransactionCheckStatus::EmptyAmount)
             {
-                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
+                gtk_widget_add_css_class(m_rowAmount, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount (Empty)"));
             }
             else if(status == TransactionCheckStatus::InvalidAmount)
             {
-                gtk_style_context_add_class(gtk_widget_get_style_context(m_rowAmount), "error");
+                gtk_widget_add_css_class(m_rowAmount, "error");
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount (Invalid)"));
             }
             return run();
