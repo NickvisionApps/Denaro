@@ -1,6 +1,5 @@
 #include "moneyhelpers.hpp"
 #include <sstream>
-#include <iostream>
 
 using namespace NickvisionMoney::Helpers;
 
@@ -37,6 +36,5 @@ bool MoneyHelpers::isLocaleDotDecimalSeperated(const std::locale& locale)
     builder.imbue(locale);
     builder << std::showbase << std::put_money("1");
     std::string monetaryValue{ builder.str() };
-    std::cout << monetaryValue << std::endl;
     return monetaryValue.find(".") != std::string::npos;
 }
