@@ -5,6 +5,17 @@ using namespace NickvisionMoney::Helpers;
 
 std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_dec_float_50 amount, const std::locale& locale)
 {
+    if(amount == 0)
+    {
+        if(isLocaleCurrencySymbolOnLeft(locale))
+        {
+            return getLocaleCurrencySymbol(locale) + (isLocaleDotDecimalSeperated(locale) ? "0.00" : "0,00");
+        }
+        else
+        {
+            return (isLocaleDotDecimalSeperated(locale) ? "0.00 " : "0,00 ") + getLocaleCurrencySymbol(locale);
+        }
+    }
     std::stringstream builder;
     //Get Amount As String
     amount *= 100.0;
