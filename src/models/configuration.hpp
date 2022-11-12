@@ -56,6 +56,30 @@ namespace NickvisionMoney::Models
 		 */
 		bool getDisplayCurrencySymbolOnRight() const;
 		/**
+		 * Gets the first recent account
+		 *
+		 * @returns The first recent account
+		 */
+		const std::string& getRecentAccount1() const;
+		/**
+		 * Gets the second recent account
+		 *
+		 * @returns The second recent account
+		 */
+		const std::string& getRecentAccount2() const;
+		/**
+		 * Gets the third recent account
+		 *
+		 * @returns The third recent account
+		 */
+		const std::string& getRecentAccount3() const;
+		/**
+		 * Adds a recent account to the list of recent accounts
+		 *
+		 * @param newRecentAccount The new recent account to add to the list
+		 */
+		void addRecentAccount(const std::string& newRecentAccount);
+		/**
 		 * Saves the configuration to disk
 		 */
 		void save() const;
@@ -64,5 +88,8 @@ namespace NickvisionMoney::Models
 		std::string m_configDir;
 		std::locale m_locale;
 		Theme m_theme;
+		std::string m_recentAccount1;
+		std::string m_recentAccount2;
+		std::string m_recentAccount3;
 	};
 }
