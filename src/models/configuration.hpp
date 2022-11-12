@@ -1,5 +1,6 @@
 #pragma once
 
+#include <locale>
 #include <string>
 
 namespace NickvisionMoney::Models
@@ -25,6 +26,12 @@ namespace NickvisionMoney::Models
 		 */
 		Configuration();
 		/**
+		 * Gets the user's locale
+		 *
+		 * @returns The user's theme
+		 */
+		const std::locale& getLocale() const;
+		/**
 		 * Gets the requested theme
 		 *
 		 * @returns The requested theme
@@ -37,29 +44,29 @@ namespace NickvisionMoney::Models
 		 */
 		void setTheme(Theme theme);
 		/**
-		 * Gets the currency symbol to use when displaying monetary values
+		 * Gets the first recent account
 		 *
-		 * @returns The currency symbol to use when displaying monetary values
+		 * @returns The first recent account
 		 */
-		const std::string& getCurrencySymbol() const;
+		const std::string& getRecentAccount1() const;
 		/**
-		 * Sets the currency symbol to use when displaying monetary values
+		 * Gets the second recent account
 		 *
-		 * @param currencySymbol The new currency symbol to use when displaying monetary values
+		 * @returns The second recent account
 		 */
-		void setCurrencySymbol(const std::string& currencySymbol);
+		const std::string& getRecentAccount2() const;
 		/**
-		 * Gets whether or not to display the currency symbol on the right of a monetary value
+		 * Gets the third recent account
 		 *
-		 * @returns True to display currency symbol on the right, else false
+		 * @returns The third recent account
 		 */
-		bool getDisplayCurrencySymbolOnRight() const;
+		const std::string& getRecentAccount3() const;
 		/**
-		 * Sets whether or not to display the currency symbol on the right of a monetary value
+		 * Adds a recent account to the list of recent accounts
 		 *
-		 * @param displayCurrencySymbolOnRight True to display currency symbol on the right, else false
+		 * @param newRecentAccount The new recent account to add to the list
 		 */
-		void setDisplayCurrencySymbolOnRight(bool displayCurrencySymbolOnRight);
+		void addRecentAccount(const std::string& newRecentAccount);
 		/**
 		 * Saves the configuration to disk
 		 */
@@ -67,8 +74,10 @@ namespace NickvisionMoney::Models
 
 	private:
 		std::string m_configDir;
+		std::locale m_locale;
 		Theme m_theme;
-		std::string m_currencySymbol;
-		bool m_displayCurrencySymbolOnRight;
+		std::string m_recentAccount1;
+		std::string m_recentAccount2;
+		std::string m_recentAccount3;
 	};
 }

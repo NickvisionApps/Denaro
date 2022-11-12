@@ -1,14 +1,15 @@
 #include "groupdialogcontroller.hpp"
+#include <algorithm>
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Models;
 
-GroupDialogController::GroupDialogController(unsigned int newId) : m_response{ "cancel" }, m_group{ newId }
+GroupDialogController::GroupDialogController(unsigned int newId, const std::vector<std::string>& existingNames) : m_response{ "cancel" }, m_existingNames{ existingNames }, m_group{ newId }
 {
 
 }
 
-GroupDialogController::GroupDialogController(const Group& group) : m_response{ "cancel" }, m_group{ group }
+GroupDialogController::GroupDialogController(const Group& group, const std::vector<std::string>& existingNames) : m_response{ "cancel" }, m_existingNames{ existingNames }, m_group{ group }
 {
 
 }
@@ -47,6 +48,10 @@ GroupCheckStatus GroupDialogController::updateGroup(const std::string& name, con
     if(description.empty())
     {
         return GroupCheckStatus::EmptyDescription;
+    }
+    if(name != m_group.getName() && std::find(m_existingNames.begin(), m_existingNames.end(), name) != m_existingNames.end())
+    {
+        return GroupCheckStatus::NameExists;
     }
     m_group.setName(name);
     m_group.setDescription(description);

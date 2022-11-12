@@ -15,7 +15,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 900, 700);
     if(m_controller.getIsDevVersion())
     {
-        gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+        gtk_widget_add_css_class(m_gobj, "devel");
     }
     //Header Bar
     m_headerBar = adw_header_bar_new();
@@ -53,8 +53,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_btnNewAccount = gtk_button_new();
     gtk_widget_set_halign(m_btnNewAccount, GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(m_btnNewAccount, 200, 50);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "circular");
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNewAccount), "suggested-action");
+    gtk_widget_add_css_class(m_btnNewAccount, "circular");
+    gtk_widget_add_css_class(m_btnNewAccount, "suggested-action");
     gtk_button_set_label(GTK_BUTTON(m_btnNewAccount), _("New Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewAccount), "win.newAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnNewAccount);
@@ -62,7 +62,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_btnOpenAccount = gtk_button_new();
     gtk_widget_set_halign(m_btnOpenAccount, GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(m_btnOpenAccount, 200, 50);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnOpenAccount), "circular");
+    gtk_widget_add_css_class(m_btnOpenAccount, "circular");
     gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), _("Open Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
@@ -168,6 +168,10 @@ void MainWindow::onNewAccount()
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
+            if(std::filesystem::exists(path))
+            {
+                std::filesystem::remove(path);
+            }
             mainWindow->m_controller.addAccount(path);
             g_object_unref(file);
         }

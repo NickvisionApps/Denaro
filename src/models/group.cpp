@@ -41,3 +41,24 @@ void Group::setBalance(boost::multiprecision::cpp_dec_float_50 balance)
 {
     m_balance = balance;
 }
+
+bool Group::operator<(const Group& toCompare) const
+{
+    return m_name < toCompare.m_name;
+}
+
+bool Group::operator>(const Group& toCompare) const
+{
+    return m_name > toCompare.m_name;
+}
+
+bool Group::operator==(const Group& toCompare) const
+{
+    return m_id == toCompare.m_id;
+}
+
+bool Group::operator!=(const Group& toCompare) const
+{
+    return m_id != toCompare.m_id;
+}
+

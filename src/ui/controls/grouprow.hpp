@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <locale>
 #include <string>
 #include <adwaita.h>
 #include "../../models/group.hpp"
@@ -18,7 +19,7 @@ namespace NickvisionMoney::UI::Controls
 		 *
 		 * @param group The Group model to manage
 		 */
-		GroupRow(const NickvisionMoney::Models::Group& group, const std::string& currencySymbol, bool displayCurrencySymbolOnRight);
+		GroupRow(const NickvisionMoney::Models::Group& group, const std::locale& locale);
 		/**
 		 * Gets the GtkWidget* representing the GroupRow
 		 *

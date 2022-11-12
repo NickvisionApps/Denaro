@@ -1,5 +1,5 @@
 #include "accountviewcontroller.hpp"
-#include <sstream>
+#include "../helpers/moneyhelpers.hpp"
 #include "../helpers/stringhelpers.hpp"
 #include "../helpers/translation.hpp"
 
@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-AccountViewController::AccountViewController(const std::string& path, const std::string& currencySymbol, bool displayCurrencySymbolOnRight, const std::function<void(const std::string& message)>& sendToastCallback) : m_currencySymbol{ currencySymbol }, m_displayCurrencySymbolOnRight{ displayCurrencySymbolOnRight }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
+AccountViewController::AccountViewController(const std::string& path, const std::locale& locale, const std::function<void(const std::string& message)>& sendToastCallback) : m_locale{ locale }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
 
 }
@@ -17,56 +17,24 @@ const std::string& AccountViewController::getAccountPath() const
     return m_account.getPath();
 }
 
-const std::string& AccountViewController::getCurrencySymbol() const
+const std::locale& AccountViewController::getLocale() const
 {
-    return m_currencySymbol;
-}
-
-bool AccountViewController::getDisplayCurrencySymbolOnRight() const
-{
-    return m_displayCurrencySymbolOnRight;
+    return m_locale;
 }
 
 std::string AccountViewController::getAccountTotalString() const
 {
-    std::stringstream builder;
-    if(m_displayCurrencySymbolOnRight)
-    {
-        builder << m_account.getTotal() << m_currencySymbol;
-    }
-    else
-    {
-        builder << m_currencySymbol << m_account.getTotal();
-    }
-    return builder.str();
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getTotal(), m_locale);
 }
 
 std::string AccountViewController::getAccountIncomeString() const
 {
-    std::stringstream builder;
-    if(m_displayCurrencySymbolOnRight)
-    {
-        builder << m_account.getIncome() << m_currencySymbol;
-    }
-    else
-    {
-        builder << m_currencySymbol << m_account.getIncome();
-    }
-    return builder.str();
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getIncome(), m_locale);
 }
 
 std::string AccountViewController::getAccountExpenseString() const
 {
-    std::stringstream builder;
-    if(m_displayCurrencySymbolOnRight)
-    {
-        builder << m_account.getExpense() << m_currencySymbol;
-    }
-    else
-    {
-        builder << m_currencySymbol << m_account.getExpense();
-    }
-    return builder.str();
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getExpense(), m_locale);
 }
 
 const std::map<unsigned int, Group>& AccountViewController::getGroups() const
@@ -130,12 +98,22 @@ void AccountViewController::deleteGroup(unsigned int id)
 
 GroupDialogController AccountViewController::createGroupDialogController() const
 {
-    return { m_account.getNextAvailableGroupId() };
+    std::vector<std::string> groupNames;
+    for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+    {
+        groupNames.push_back(pair.second.getName());
+    }
+    return { m_account.getNextAvailableGroupId(), groupNames };
 }
 
 GroupDialogController AccountViewController::createGroupDialogController(unsigned int id) const
 {
-    return { m_account.getGroupById(id).value() };
+    std::vector<std::string> groupNames;
+    for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+    {
+        groupNames.push_back(pair.second.getName());
+    }
+    return { m_account.getGroupById(id).value(), groupNames };
 }
 
 void AccountViewController::addTransaction(const Transaction& transaction)
@@ -158,10 +136,11 @@ void AccountViewController::deleteTransaction(unsigned int id)
 
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
-    return { m_account.getNextAvailableTransactionId(), m_currencySymbol, m_account.getGroups() };
+    return { m_account.getNextAvailableTransactionId(), m_account.getGroups(), m_locale };
 }
 
 TransactionDialogController AccountViewController::createTransactionDialogController(unsigned int id) const
 {
-    return { m_account.getTransactionById(id).value(), m_currencySymbol, m_account.getGroups() };
+    return { m_account.getTransactionById(id).value(), m_account.getGroups(), m_locale };
 }
+
