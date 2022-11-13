@@ -31,10 +31,11 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.11.0-beta4" date="2022-11-12">
+    <release version="2022.11.0-beta5" date="2022-11-12">
       <description>
         <p>- Introducing Groups: Add groups to an account and associate transactions with groups for a more precise finance management system</p>
         <p>- Money will automatically obtain the user's currency symbol and format from their locale</p>
+        <p>- Money will remember up to 3 recently opened accounts for quick and easy access</p>
         <p>- Fixed an issue where a new account was not created if overwriting an old one</p>
         <p>- Added translation support</p>
         <p>- Added Dutch translation (Thanks @Vistaus!)</p>
