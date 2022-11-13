@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-12 20:22+0300\n"
-"PO-Revision-Date: 2022-11-13 11:07+0100\n"
+"PO-Revision-Date: 2022-11-13 11:15+0100\n"
 "Last-Translator: Marcin Wolski <martinwolski04@gmail.com>\n"
 "Language-Team: Polish <->\n"
 "Language: pl\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: src/controllers/accountviewcontroller.cpp:63
 msgid "Exported account to CSV successfully."
-msgstr "Pomyślnie wyeksportowano konto do CSV."
+msgstr "Pomyślnie wyeksportowano konto do CSV.i"
 
 #: src/controllers/accountviewcontroller.cpp:67
 msgid "Unable to export account as CSV."
@@ -224,7 +224,7 @@ msgstr "Opis (Brak)"
 
 #: src/ui/views/groupdialog.cpp:76
 msgid "Name (Exists)"
-msgstr "Nazwa (Istnieje)"
+msgstr "Nazwa (Już istnieje)"
 
 #: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
 #: src/ui/views/shortcutsdialog.cpp:96
