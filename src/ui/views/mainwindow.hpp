@@ -111,5 +111,9 @@ namespace NickvisionMoney::UI::Views
 		 * Updates the list of recent accounts
 		 */
 		void updateRecentAccounts();
+		/**
+    	 * Occurs when listRecentAccounts's selection is changed
+    	 */
+		void onListRecentAccountsSelectionChanged();
 	};
 }

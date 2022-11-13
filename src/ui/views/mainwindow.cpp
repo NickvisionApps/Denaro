@@ -54,10 +54,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_popBoxHeader = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_append(GTK_BOX(m_popBoxHeader), m_lblRecents);
     gtk_box_append(GTK_BOX(m_popBoxHeader), m_popBoxButtons);
-    //Recent Accounts List
+    //List Recent Accounts
     m_listRecentAccounts = gtk_list_box_new();
     gtk_widget_add_css_class(m_listRecentAccounts, "boxed-list");
     gtk_widget_set_size_request(m_listRecentAccounts, 200, 200);
+    g_signal_connect(m_listRecentAccounts, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer))[](GtkListBox*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListRecentAccountsSelectionChanged(); }), this);
     //Account Popover Box
     m_popBoxAccount = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_widget_set_margin_start(m_popBoxAccount, 5);
@@ -328,5 +329,17 @@ void MainWindow::updateRecentAccounts()
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(recentAccount, std::regex("\\&"), "&amp;").c_str());
         gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccounts), row);
         m_listRecentAccountsRows.push_back(row);
+    }
+}
+
+void MainWindow::onListRecentAccountsSelectionChanged()
+{
+    GtkListBoxRow* selectedRow{ gtk_list_box_get_selected_row(GTK_LIST_BOX(m_listRecentAccounts)) };
+    if(selectedRow)
+    {
+        gtk_popover_popdown(GTK_POPOVER(m_popoverAccount));
+        std::string path{ adw_preferences_row_get_title(ADW_PREFERENCES_ROW(selectedRow)) };
+        m_controller.addAccount(path);
+        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listRecentAccounts));
     }
 }
