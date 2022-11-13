@@ -57,7 +57,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //List Recent Accounts
     m_listRecentAccounts = gtk_list_box_new();
     gtk_widget_add_css_class(m_listRecentAccounts, "boxed-list");
-    gtk_widget_set_size_request(m_listRecentAccounts, 200, 200);
+    gtk_widget_set_size_request(m_listRecentAccounts, -1, 55);
     g_signal_connect(m_listRecentAccounts, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer))[](GtkListBox*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListRecentAccountsSelectionChanged(); }), this);
     //Account Popover Box
     m_popBoxAccount = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
