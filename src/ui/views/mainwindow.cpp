@@ -323,10 +323,12 @@ void MainWindow::updateRecentAccounts()
         gtk_list_box_remove(GTK_LIST_BOX(m_listRecentAccounts), row);
     }
     m_listRecentAccountsRows.clear();
-    for(const std::string& recentAccount : m_controller.getRecentAccounts())
+    for(const std::string& recentAccountPath : m_controller.getRecentAccounts())
     {
         GtkWidget* row{ adw_action_row_new() };
-        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(recentAccount, std::regex("\\&"), "&amp;").c_str());
+        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
+        adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
+        adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
         gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccounts), row);
         m_listRecentAccountsRows.push_back(row);
     }
@@ -338,7 +340,7 @@ void MainWindow::onListRecentAccountsSelectionChanged()
     if(selectedRow)
     {
         gtk_popover_popdown(GTK_POPOVER(m_popoverAccount));
-        std::string path{ adw_preferences_row_get_title(ADW_PREFERENCES_ROW(selectedRow)) };
+        std::string path{ adw_action_row_get_subtitle(ADW_ACTION_ROW(selectedRow)) };
         m_controller.addAccount(path);
         gtk_list_box_unselect_all(GTK_LIST_BOX(m_listRecentAccounts));
     }
