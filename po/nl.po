@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 20:22+0300\n"
+"POT-Creation-Date: 2022-11-14 05:03+0530\n"
 "PO-Revision-Date: 2022-11-12 19:37+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -153,16 +153,16 @@ msgstr "Nieuwe transactie (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transacties"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:157
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
 msgid "_Save"
 msgstr "Op_slaan"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
 msgid "_Cancel"
 msgstr "_Annuleren"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
 msgid "_Open"
 msgstr "_Openen"
 
@@ -223,52 +223,65 @@ msgstr "Beschrijving (leeg)"
 msgid "Name (Exists)"
 msgstr "Naam (bestaat reeds)"
 
-#: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
-#: src/ui/views/shortcutsdialog.cpp:96
-msgid "New Account"
-msgstr "Rekening toevoegen"
+#: src/ui/views/mainwindow.cpp:28
+msgid "Recents"
+msgstr ""
 
-#: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
-#: src/ui/views/shortcutsdialog.cpp:97
-msgid "Open Account"
+#: src/ui/views/mainwindow.cpp:41
+#, fuzzy
+msgid "New"
+msgstr "Nieuw"
+
+#: src/ui/views/mainwindow.cpp:44
+#, fuzzy
+msgid "New Account (Ctrl+N)"
+msgstr "Nieuwe groep (Ctrl+G)"
+
+#: src/ui/views/mainwindow.cpp:50
+#, fuzzy
+msgid "Open Account (Ctrl+O)"
 msgstr "Rekening openen"
 
-#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:98
-msgid "Close Account"
-msgstr "Rekening sluiten"
-
-#: src/ui/views/mainwindow.cpp:32
+#: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
 msgstr "Rekeningmenu"
 
-#: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: src/ui/views/mainwindow.cpp:40
+#: src/ui/views/mainwindow.cpp:82
 #, c-format
 msgid "About %s"
 msgstr "Over %s"
 
-#: src/ui/views/mainwindow.cpp:43
+#: src/ui/views/mainwindow.cpp:85
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: src/ui/views/mainwindow.cpp:72
+#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+msgid "New Account"
+msgstr "Rekening toevoegen"
+
+#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+msgid "Open Account"
+msgstr "Rekening openen"
+
+#: src/ui/views/mainwindow.cpp:114
 msgid "No Accounts Open"
 msgstr "Er is geen rekening geopend"
 
-#: src/ui/views/mainwindow.cpp:73
+#: src/ui/views/mainwindow.cpp:115
 msgid "Open or create an account to get started."
 msgstr "Open een rekening of voeg er een toe om aan de slag te gaan."
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
+#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
 msgid "Money Account (*.nmoney)"
 msgstr "Money-rekening (*.nmoney)"
 
@@ -299,6 +312,10 @@ msgstr "Donker thema"
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
 msgstr "Rekening"
+
+#: src/ui/views/shortcutsdialog.cpp:98
+msgid "Close Account"
+msgstr "Rekening sluiten"
 
 #: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"
@@ -369,8 +386,11 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened accounts."
-#~ msgstr "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast op nieuwe rekeningen. "
+#~ "A change in one of these settings will only be applied on newly opened "
+#~ "accounts."
+#~ msgstr ""
+#~ "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast "
+#~ "op nieuwe rekeningen. "
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Valutasymbool"
@@ -378,5 +398,7 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Valutasymbool rechts van bedragen tonen"
 
-#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
+#~ msgid ""
+#~ "If checked, the currency symbol will be displayed on the right of a "
+#~ "monetary value."
 #~ msgstr "Schakel in om het valutasymbool rechts van bedragen te tonen."

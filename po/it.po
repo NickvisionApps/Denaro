@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 20:22+0300\n"
+"POT-Creation-Date: 2022-11-14 05:03+0530\n"
 "PO-Revision-Date: 2022-11-06 23:12+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
@@ -154,16 +154,16 @@ msgstr "Nuova transazione (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transazioni"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:157
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
 msgid "_Save"
 msgstr "Salva"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
 msgid "_Cancel"
 msgstr "Annulla"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
 msgid "_Open"
 msgstr "Apri"
 
@@ -221,56 +221,68 @@ msgid "Description (Empty)"
 msgstr "Descrizione (nessuna)"
 
 #: src/ui/views/groupdialog.cpp:76
-#, fuzzy
 msgid "Name (Exists)"
 msgstr ""
 
-#: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
-#: src/ui/views/shortcutsdialog.cpp:96
-msgid "New Account"
-msgstr "Nuovo account"
+#: src/ui/views/mainwindow.cpp:28
+msgid "Recents"
+msgstr ""
 
-#: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
-#: src/ui/views/shortcutsdialog.cpp:97
-msgid "Open Account"
+#: src/ui/views/mainwindow.cpp:41
+#, fuzzy
+msgid "New"
+msgstr "Nuovo"
+
+#: src/ui/views/mainwindow.cpp:44
+#, fuzzy
+msgid "New Account (Ctrl+N)"
+msgstr "Nuovo gruppo (Ctrl+G)"
+
+#: src/ui/views/mainwindow.cpp:50
+#, fuzzy
+msgid "Open Account (Ctrl+O)"
 msgstr "Apri account"
 
-#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:98
-msgid "Close Account"
-msgstr "Chiudi account"
-
-#: src/ui/views/mainwindow.cpp:32
+#: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
 msgstr "Menu account"
 
-#: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: src/ui/views/mainwindow.cpp:40
+#: src/ui/views/mainwindow.cpp:82
 #, c-format
 msgid "About %s"
 msgstr "Informazioni su %s"
 
-#: src/ui/views/mainwindow.cpp:43
+#: src/ui/views/mainwindow.cpp:85
 msgid "Main Menu"
 msgstr "Menu principale"
 
-#: src/ui/views/mainwindow.cpp:72
+#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+msgid "New Account"
+msgstr "Nuovo account"
+
+#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+msgid "Open Account"
+msgstr "Apri account"
+
+#: src/ui/views/mainwindow.cpp:114
 msgid "No Accounts Open"
 msgstr "Nessun account aperto"
 
-#: src/ui/views/mainwindow.cpp:73
+#: src/ui/views/mainwindow.cpp:115
 msgid "Open or create an account to get started."
 msgstr "Apri o crea un account per cominciare."
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
+#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
 msgid "Money Account (*.nmoney)"
 msgstr "Account Money (*.nmoney)"
 
@@ -301,6 +313,10 @@ msgstr "Scuro"
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
 msgstr "Account"
+
+#: src/ui/views/shortcutsdialog.cpp:98
+msgid "Close Account"
+msgstr "Chiudi account"
 
 #: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"

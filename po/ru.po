@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 20:22+0300\n"
+"POT-Creation-Date: 2022-11-14 05:03+0530\n"
 "PO-Revision-Date: 2022-11-06 21:46+0300\n"
 "Last-Translator: Fyodor Sobolev\n"
 "Language: ru\n"
@@ -151,16 +151,16 @@ msgstr "Новая транзакция (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Транзакции"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:157
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
 msgid "_Save"
 msgstr "_Сохранить"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
 msgid "_Cancel"
 msgstr "_Отмена"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:185
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
 msgid "_Open"
 msgstr "_Открыть"
 
@@ -222,52 +222,65 @@ msgstr "Описание (Пусто)"
 msgid "Name (Exists)"
 msgstr "Имя (Занято)"
 
-#: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
-#: src/ui/views/shortcutsdialog.cpp:96
-msgid "New Account"
-msgstr "Новый счёт"
+#: src/ui/views/mainwindow.cpp:28
+msgid "Recents"
+msgstr ""
 
-#: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
-#: src/ui/views/shortcutsdialog.cpp:97
-msgid "Open Account"
+#: src/ui/views/mainwindow.cpp:41
+#, fuzzy
+msgid "New"
+msgstr "Новая"
+
+#: src/ui/views/mainwindow.cpp:44
+#, fuzzy
+msgid "New Account (Ctrl+N)"
+msgstr "Новая группа (Ctrl+G)"
+
+#: src/ui/views/mainwindow.cpp:50
+#, fuzzy
+msgid "Open Account (Ctrl+O)"
 msgstr "Открыть счёт"
 
-#: src/ui/views/mainwindow.cpp:29 src/ui/views/shortcutsdialog.cpp:98
-msgid "Close Account"
-msgstr "Закрыть счёт"
-
-#: src/ui/views/mainwindow.cpp:32
+#: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
 msgstr "Меню счёта"
 
-#: src/ui/views/mainwindow.cpp:38 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Настройки"
 
-#: src/ui/views/mainwindow.cpp:39 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Сочетания клавиш"
 
-#: src/ui/views/mainwindow.cpp:40
+#: src/ui/views/mainwindow.cpp:82
 #, c-format
 msgid "About %s"
 msgstr "О приложении %s"
 
-#: src/ui/views/mainwindow.cpp:43
+#: src/ui/views/mainwindow.cpp:85
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/ui/views/mainwindow.cpp:72
+#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+msgid "New Account"
+msgstr "Новый счёт"
+
+#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+msgid "Open Account"
+msgstr "Открыть счёт"
+
+#: src/ui/views/mainwindow.cpp:114
 msgid "No Accounts Open"
 msgstr "Нет открытых счетов"
 
-#: src/ui/views/mainwindow.cpp:73
+#: src/ui/views/mainwindow.cpp:115
 msgid "Open or create an account to get started."
 msgstr "Откройте или создайте счёт, чтобы начать."
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
+#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
 msgid "Money Account (*.nmoney)"
 msgstr "Счёт приложения Money (*.nmoney)"
 
@@ -298,6 +311,10 @@ msgstr "Тёмная"
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
 msgstr "Счёт"
+
+#: src/ui/views/shortcutsdialog.cpp:98
+msgid "Close Account"
+msgstr "Закрыть счёт"
 
 #: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"
