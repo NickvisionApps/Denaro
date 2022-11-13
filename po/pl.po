@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-12 20:22+0300\n"
-"PO-Revision-Date: 2022-11-06 20:40+0100\n"
+"PO-Revision-Date: 2022-11-13 11:16+0100\n"
 "Last-Translator: Marcin Wolski <martinwolski04@gmail.com>\n"
 "Language-Team: Polish <->\n"
 "Language: pl\n"
@@ -191,7 +191,7 @@ msgstr "Tak"
 
 #: src/ui/views/accountview.cpp:280
 msgid "Delete Transaction?"
-msgstr "Usunać transakcje?"
+msgstr "Usunąć transakcję?"
 
 #: src/ui/views/accountview.cpp:280
 msgid ""
@@ -223,9 +223,8 @@ msgid "Description (Empty)"
 msgstr "Opis (Brak)"
 
 #: src/ui/views/groupdialog.cpp:76
-#, fuzzy
 msgid "Name (Exists)"
-msgstr ""
+msgstr "Nazwa (Już istnieje)"
 
 #: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
 #: src/ui/views/shortcutsdialog.cpp:96
