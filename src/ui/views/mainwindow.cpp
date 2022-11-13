@@ -21,17 +21,55 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), nullptr);
     adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), m_adwTitle);
+    //Account Popover
+    m_popoverAccount = gtk_popover_new();
+    //Account Popover Buttons Box
+    m_popBoxButtons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_add_css_class(m_popBoxButtons, "linked");
+    gtk_widget_set_halign(m_popBoxButtons, GTK_ALIGN_CENTER);
+    //Account Popover New Account Button
+    m_popBtnNewAccount = gtk_button_new();
+    gtk_widget_add_css_class(m_popBtnNewAccount, "suggested-action");
+    GtkWidget* popBtnNewAccountContent{ adw_button_content_new() };
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(popBtnNewAccountContent), _("New"));
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(popBtnNewAccountContent), "document-new-symbolic");
+    gtk_button_set_child(GTK_BUTTON(m_popBtnNewAccount), popBtnNewAccountContent);
+    gtk_widget_set_tooltip_text(m_popBtnNewAccount, _("New Account (Ctrl+N)"));
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_popBtnNewAccount), "win.newAccount");
+    gtk_box_append(GTK_BOX(m_popBoxButtons), m_popBtnNewAccount);
+    //Account Popover Open Account Button
+    m_popBtnOpenAccount = gtk_button_new();
+    GtkWidget* popBtnOpenAccountContent{ adw_button_content_new() };
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(popBtnOpenAccountContent), _("Open"));
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(popBtnOpenAccountContent), "document-open-symbolic");
+    gtk_button_set_child(GTK_BUTTON(m_popBtnOpenAccount), popBtnOpenAccountContent);
+    gtk_widget_set_tooltip_text(m_popBtnOpenAccount, _("Open Account (Ctrl+O)"));
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_popBtnOpenAccount), "win.openAccount");
+    gtk_box_append(GTK_BOX(m_popBoxButtons), m_popBtnOpenAccount);
+    //Account Popover Close Account Button
+    m_popBtnCloseAccount = gtk_button_new();
+    GtkWidget* popBtnCloseAccountContent{ adw_button_content_new() };
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(popBtnCloseAccountContent), _("Close"));
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(popBtnCloseAccountContent), "window-close-symbolic");
+    gtk_button_set_child(GTK_BUTTON(m_popBtnCloseAccount), popBtnCloseAccountContent);
+    gtk_widget_set_tooltip_text(m_popBtnCloseAccount, _("Close Account (Ctrl+W)"));
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_popBtnCloseAccount), "win.closeAccount");
+    gtk_box_append(GTK_BOX(m_popBoxButtons), m_popBtnCloseAccount);
+    //Recent Accounts List
+    m_listRecentAccounts = gtk_list_box_new();
+    gtk_widget_add_css_class(m_listRecentAccounts, "boxed-list");
+    gtk_widget_set_size_request(m_listRecentAccounts, 320, 300);
+    //Account Popover Box
+    m_popBoxAccount = gtk_box_new(GTK_ORIENTATION_VERTICAL, 6);
+    gtk_box_append(GTK_BOX(m_popBoxAccount), m_popBoxButtons);
+    gtk_box_append(GTK_BOX(m_popBoxAccount), m_listRecentAccounts);
+    gtk_popover_set_child(GTK_POPOVER(m_popoverAccount), m_popBoxAccount);
     //Menu Account Button
     m_btnMenuAccount = gtk_menu_button_new();
-    GMenu* menuAccount{ g_menu_new() };
-    g_menu_append(menuAccount, _("New Account"), "win.newAccount");
-    g_menu_append(menuAccount, _("Open Account"), "win.openAccount");
-    g_menu_append(menuAccount, _("Close Account"), "win.closeAccount");
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "bank-symbolic");
-    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccount), G_MENU_MODEL(menuAccount));
+    gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnMenuAccount), m_popoverAccount);
     gtk_widget_set_tooltip_text(m_btnMenuAccount, _("Account Menu"));
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
-    g_object_unref(menuAccount);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
@@ -154,6 +192,7 @@ void MainWindow::onAccountAdded()
 
 void MainWindow::onNewAccount()
 {
+    gtk_popover_popdown(GTK_POPOVER(m_popoverAccount));
     GtkFileChooserNative* saveFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SAVE, _("_Save"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(saveFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
@@ -182,6 +221,7 @@ void MainWindow::onNewAccount()
 
 void MainWindow::onOpenAccount()
 {
+    gtk_popover_popdown(GTK_POPOVER(m_popoverAccount));
     GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
@@ -206,6 +246,7 @@ void MainWindow::onOpenAccount()
 
 void MainWindow::onCloseAccount()
 {
+    gtk_popover_popdown(GTK_POPOVER(m_popoverAccount));
     adw_tab_view_close_page(m_tabView, adw_tab_view_get_selected_page(m_tabView));
 }
 
