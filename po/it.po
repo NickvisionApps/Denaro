@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 23:08+0100\n"
+"POT-Creation-Date: 2022-11-12 20:22+0300\n"
 "PO-Revision-Date: 2022-11-06 23:12+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: src/controllers/accountviewcontroller.cpp:95
+#: src/controllers/accountviewcontroller.cpp:63
 msgid "Exported account to CSV successfully."
 msgstr "Account esportato come CSV."
 
-#: src/controllers/accountviewcontroller.cpp:99
+#: src/controllers/accountviewcontroller.cpp:67
 msgid "Unable to export account as CSV."
 msgstr "Impossibile esportare l'account come CSV."
 
-#: src/controllers/accountviewcontroller.cpp:110
+#: src/controllers/accountviewcontroller.cpp:78
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "Importate %d transazioni dal file CSV."
 
-#: src/controllers/transactiondialogcontroller.cpp:11
-#: src/controllers/transactiondialogcontroller.cpp:20
+#: src/controllers/transactiondialogcontroller.cpp:17
+#: src/controllers/transactiondialogcontroller.cpp:27
 msgid "None"
 msgstr "Nessuno"
 
@@ -78,23 +78,23 @@ msgstr "Annulla"
 msgid "OK"
 msgstr "Ok"
 
-#: src/ui/controls/grouprow.cpp:31
+#: src/ui/controls/grouprow.cpp:23
 msgid "Edit Group"
 msgstr "Modifica gruppo"
 
-#: src/ui/controls/grouprow.cpp:39
+#: src/ui/controls/grouprow.cpp:31
 msgid "Delete Group"
 msgstr "Elimina gruppo"
 
-#: src/ui/controls/transactionrow.cpp:20
+#: src/ui/controls/transactionrow.cpp:22
 msgid "Repeat Interval: "
 msgstr "Frequenza: "
 
-#: src/ui/controls/transactionrow.cpp:41
+#: src/ui/controls/transactionrow.cpp:33
 msgid "Edit Transaction"
 msgstr "Modifica transazione"
 
-#: src/ui/controls/transactionrow.cpp:49
+#: src/ui/controls/transactionrow.cpp:41
 msgid "Delete Transaction"
 msgstr "Elimina transazione"
 
@@ -116,11 +116,11 @@ msgstr "Uscite"
 msgid "Actions"
 msgstr "Azioni"
 
-#: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:177
+#: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:183
 msgid "Export as CSV"
 msgstr "Esporta come CSV"
 
-#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:201
+#: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:207
 msgid "Import from CSV"
 msgstr "Importa da CSV"
 
@@ -154,24 +154,24 @@ msgstr "Nuova transazione (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transazioni"
 
-#: src/ui/views/accountview.cpp:177 src/ui/views/mainwindow.cpp:157
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:157
 msgid "_Save"
 msgstr "Salva"
 
-#: src/ui/views/accountview.cpp:177 src/ui/views/accountview.cpp:201
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 msgid "_Cancel"
 msgstr "Annulla"
 
-#: src/ui/views/accountview.cpp:201 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:185
 msgid "_Open"
 msgstr "Apri"
 
-#: src/ui/views/accountview.cpp:245
+#: src/ui/views/accountview.cpp:251
 msgid "Delete Group?"
 msgstr "Eliminare il gruppo?"
 
-#: src/ui/views/accountview.cpp:245
+#: src/ui/views/accountview.cpp:251
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -179,19 +179,19 @@ msgstr ""
 "Eliminare il gruppo?\n"
 "L'azione è irreversibile."
 
-#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:251 src/ui/views/accountview.cpp:280
 msgid "No"
 msgstr "No"
 
-#: src/ui/views/accountview.cpp:245 src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:251 src/ui/views/accountview.cpp:280
 msgid "Yes"
 msgstr "Si"
 
-#: src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:280
 msgid "Delete Transaction?"
 msgstr "Eliminare la transazione?"
 
-#: src/ui/views/accountview.cpp:274
+#: src/ui/views/accountview.cpp:280
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -220,13 +220,18 @@ msgstr "Nome (nessuno)"
 msgid "Description (Empty)"
 msgstr "Descrizione (nessuna)"
 
+#: src/ui/views/groupdialog.cpp:76
+#, fuzzy
+msgid "Name (Exists)"
+msgstr ""
+
 #: src/ui/views/mainwindow.cpp:27 src/ui/views/mainwindow.cpp:58
 #: src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Nuovo account"
 
 #: src/ui/views/mainwindow.cpp:28 src/ui/views/mainwindow.cpp:66
-#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:181
+#: src/ui/views/mainwindow.cpp:157 src/ui/views/mainwindow.cpp:185
 #: src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Apri account"
@@ -265,7 +270,7 @@ msgstr "Nessun account aperto"
 msgid "Open or create an account to get started."
 msgstr "Apri o crea un account per cominciare."
 
-#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:184
+#: src/ui/views/mainwindow.cpp:160 src/ui/views/mainwindow.cpp:188
 msgid "Money Account (*.nmoney)"
 msgstr "Account Money (*.nmoney)"
 
@@ -292,37 +297,6 @@ msgstr "Chiaro"
 #: src/ui/views/preferencesdialog.cpp:25
 msgid "Dark"
 msgstr "Scuro"
-
-#: src/ui/views/preferencesdialog.cpp:30
-msgid "Currency"
-msgstr "Valuta"
-
-#: src/ui/views/preferencesdialog.cpp:31
-msgid ""
-"Customize currency settings.\n"
-"\n"
-"A change in one of these settings will only be applied on newly opened "
-"accounts."
-msgstr ""
-"Personalizza le impostazioni della valuta.\n"
-"\n"
-"Le modifiche saranno applicate solo agli account aperti dopo la modifica."
-
-#: src/ui/views/preferencesdialog.cpp:34
-msgid "Currency Symbol"
-msgstr "Simbolo della valuta"
-
-#: src/ui/views/preferencesdialog.cpp:40
-msgid "Display Currency Symbol On Right"
-msgstr "Mostra il simbolo della valuta a destra"
-
-#: src/ui/views/preferencesdialog.cpp:41
-msgid ""
-"If checked, the currency symbol will be displayed on the right of a monetary "
-"value."
-msgstr ""
-"Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
-"monetario."
 
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
@@ -380,7 +354,6 @@ msgid "Repeat Interval"
 msgstr "Frequenza"
 
 #: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
-#, c-format
 msgid "Amount"
 msgstr "Ammontare"
 
@@ -391,3 +364,29 @@ msgstr "Ammontare (nessuno)"
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "Ammontare (non valido)"
+
+#~ msgid "Currency"
+#~ msgstr "Valuta"
+
+#~ msgid ""
+#~ "Customize currency settings.\n"
+#~ "\n"
+#~ "A change in one of these settings will only be applied on newly opened "
+#~ "accounts."
+#~ msgstr ""
+#~ "Personalizza le impostazioni della valuta.\n"
+#~ "\n"
+#~ "Le modifiche saranno applicate solo agli account aperti dopo la modifica."
+
+#~ msgid "Currency Symbol"
+#~ msgstr "Simbolo della valuta"
+
+#~ msgid "Display Currency Symbol On Right"
+#~ msgstr "Mostra il simbolo della valuta a destra"
+
+#~ msgid ""
+#~ "If checked, the currency symbol will be displayed on the right of a "
+#~ "monetary value."
+#~ msgstr ""
+#~ "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
+#~ "monetario."

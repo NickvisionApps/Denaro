@@ -107,14 +107,7 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     {
         return TransactionCheckStatus::EmptyAmount;
     }
-    if(MoneyHelpers::isLocaleDotDecimalSeperated(m_locale) && amountString.find(".") == std::string::npos)
-    {
-        amountString += ".00";
-    }
-    else if(!MoneyHelpers::isLocaleDotDecimalSeperated(m_locale) && amountString.find(",") == std::string::npos)
-    {
-        amountString += ",00";
-    }
+    amountString = MoneyHelpers::fixLocaleStringFormat(amountString, m_locale);
     boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_locale) };
     if(amount == 0)
     {
