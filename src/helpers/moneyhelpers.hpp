@@ -21,7 +21,7 @@ namespace NickvisionMoney::Helpers::MoneyHelpers
 	 * @param locale The user's locale
 	 * @returns The money value
 	 */
-	boost::multiprecision::cpp_dec_float_50 localeStringToBoostMoney(const std::string& localeString, const std::locale& locale);
+	boost::multiprecision::cpp_dec_float_50 localeStringToBoostMoney(std::string localeString, const std::locale& locale);
 	/*
 	 * Gets whether or not the user's locale separates the decimal by "." or ","
 	 *
@@ -42,12 +42,4 @@ namespace NickvisionMoney::Helpers::MoneyHelpers
 	 * @returns The currency symbol from the user's locale
 	 */
 	std::string getLocaleCurrencySymbol(const std::locale& locale);
-	/**
-	 * Fixes a money string's format based on the user's locale settings
-	 *
-	 * @param s The string
-	 * @param locale The user's locale
-	 * @returns The proper formatted locale string
-	 */
-	std::string fixLocaleStringFormat(const std::string& s, const std::locale& locale);
 }

@@ -8,7 +8,7 @@ adwaita = dependency('libadwaita-1', version: '>= 1.2.0')
 jsoncpp = dependency('jsoncpp')
 dl = dependency('dl')
 sqlitecpp = dependency('SQLiteCpp')
-boost = dependency('boost')
+boost = dependency('boost', modules: ['system', 'locale'])
 
 subdir('src')
 subdir('po')

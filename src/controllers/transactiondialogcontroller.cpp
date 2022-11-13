@@ -107,7 +107,6 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     {
         return TransactionCheckStatus::EmptyAmount;
     }
-    amountString = MoneyHelpers::fixLocaleStringFormat(amountString, m_locale);
     boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_locale) };
     if(amount == 0)
     {
