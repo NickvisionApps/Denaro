@@ -38,9 +38,22 @@ void MainWindowController::startup()
     }
 }
 
-void MainWindowController::onConfigurationChanged()
+std::vector<std::string> MainWindowController::getRecentAccounts()
 {
-
+    std::vector<std::string> recentAccounts;
+    if(std::filesystem::exists(m_configuration.getRecentAccount1()))
+    {
+        recentAccounts.push_back(m_configuration.getRecentAccount1());
+    }
+    if(std::filesystem::exists(m_configuration.getRecentAccount2()))
+    {
+        recentAccounts.push_back(m_configuration.getRecentAccount2());
+    }
+    if(std::filesystem::exists(m_configuration.getRecentAccount3()))
+    {
+        recentAccounts.push_back(m_configuration.getRecentAccount3());
+    }
+    return recentAccounts;
 }
 
 void MainWindowController::registerAccountAddedCallback(const std::function<void()>& callback)

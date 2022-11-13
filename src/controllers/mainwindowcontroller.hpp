@@ -53,9 +53,11 @@ namespace NickvisionMoney::Controllers
 		 */
 		void startup();
 		/**
-		 * Updates the controller based on the configuration changes
+		 * Gets a list of the recent accounts
+		 *
+		 * @returns The list of recent accounts
 		 */
-		void onConfigurationChanged();
+		std::vector<std::string> getRecentAccounts();
 		/**
 		 * Registers a callback for adding an account to the UI
 		 *

@@ -41,10 +41,11 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_btnMenuAccount{ nullptr };
 		GtkWidget* m_popoverAccount{ nullptr };
 		GtkWidget* m_popBoxAccount{ nullptr };
+		GtkWidget* m_popBoxHeader{ nullptr };
+		GtkWidget* m_lblAccounts{ nullptr };
 		GtkWidget* m_popBoxButtons{ nullptr };
 		GtkWidget* m_popBtnNewAccount{ nullptr };
 		GtkWidget* m_popBtnOpenAccount{ nullptr };
-		GtkWidget* m_popBtnCloseAccount{ nullptr };
 		GtkWidget* m_listRecentAccounts{ nullptr };
 		GtkWidget* m_btnMenuHelp{ nullptr };
 		GtkWidget* m_toastOverlay{ nullptr };
@@ -63,6 +64,7 @@ namespace NickvisionMoney::UI::Views
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
 		GtkDropTarget* m_dropTarget{ nullptr };
+		std::vector<GtkWidget*> m_listRecentAccountsRows;
 		std::vector<std::unique_ptr<AccountView>> m_accountViews;
 		/**
 		 * Occurs when an account is created or opened
@@ -105,5 +107,9 @@ namespace NickvisionMoney::UI::Views
 		 * @param page The page that is closing
 		 */
 		bool onCloseAccountPage(AdwTabPage* page);
+		/**
+		 * Updates the list of recent accounts
+		 */
+		void updateRecentAccounts();
 	};
 }
