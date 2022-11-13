@@ -24,11 +24,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), m_adwTitle);
     //Account Popover
     m_popoverAccount = gtk_popover_new();
-    //Label Accounts
-    m_lblAccounts = gtk_label_new("Accounts");
-    gtk_widget_add_css_class(m_lblAccounts, "title-4");
-    gtk_widget_set_hexpand(m_lblAccounts, true);
-    gtk_widget_set_halign(m_lblAccounts, GTK_ALIGN_START);
+    //Label Recents
+    m_lblRecents = gtk_label_new("Recents");
+    gtk_widget_add_css_class(m_lblRecents, "title-4");
+    gtk_widget_set_hexpand(m_lblRecents, true);
+    gtk_widget_set_halign(m_lblRecents, GTK_ALIGN_START);
     //Account Popover Buttons Box
     m_popBoxButtons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_add_css_class(m_popBoxButtons, "linked");
@@ -52,7 +52,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_box_append(GTK_BOX(m_popBoxButtons), m_popBtnOpenAccount);
     //Account Popover Header Box
     m_popBoxHeader = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_append(GTK_BOX(m_popBoxHeader), m_lblAccounts);
+    gtk_box_append(GTK_BOX(m_popBoxHeader), m_lblRecents);
     gtk_box_append(GTK_BOX(m_popBoxHeader), m_popBoxButtons);
     //Recent Accounts List
     m_listRecentAccounts = gtk_list_box_new();

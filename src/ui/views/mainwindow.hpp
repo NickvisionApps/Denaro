@@ -42,7 +42,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_popoverAccount{ nullptr };
 		GtkWidget* m_popBoxAccount{ nullptr };
 		GtkWidget* m_popBoxHeader{ nullptr };
-		GtkWidget* m_lblAccounts{ nullptr };
+		GtkWidget* m_lblRecents{ nullptr };
 		GtkWidget* m_popBoxButtons{ nullptr };
 		GtkWidget* m_popBtnNewAccount{ nullptr };
 		GtkWidget* m_popBtnOpenAccount{ nullptr };
