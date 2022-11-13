@@ -25,7 +25,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Account Popover
     m_popoverAccount = gtk_popover_new();
     //Label Recents
-    m_lblRecents = gtk_label_new("Recents");
+    m_lblRecents = gtk_label_new(_("Recents"));
     gtk_widget_add_css_class(m_lblRecents, "title-4");
     gtk_widget_set_hexpand(m_lblRecents, true);
     gtk_widget_set_halign(m_lblRecents, GTK_ALIGN_START);
