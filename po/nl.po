@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-14 05:03+0530\n"
-"PO-Revision-Date: 2022-11-12 19:37+0100\n"
+"PO-Revision-Date: 2022-11-14 11:46+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -225,22 +225,19 @@ msgstr "Naam (bestaat reeds)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr ""
+msgstr "Onlangs geopend"
 
 #: src/ui/views/mainwindow.cpp:41
-#, fuzzy
 msgid "New"
 msgstr "Nieuw"
 
 #: src/ui/views/mainwindow.cpp:44
-#, fuzzy
 msgid "New Account (Ctrl+N)"
-msgstr "Nieuwe groep (Ctrl+G)"
+msgstr "Nieuwe rekening (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
-#, fuzzy
 msgid "Open Account (Ctrl+O)"
-msgstr "Rekening openen"
+msgstr "Rekening openen (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
@@ -386,11 +383,8 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast "
-#~ "op nieuwe rekeningen. "
+#~ "A change in one of these settings will only be applied on newly opened accounts."
+#~ msgstr "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast op nieuwe rekeningen. "
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Valutasymbool"
@@ -398,7 +392,5 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Valutasymbool rechts van bedragen tonen"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
 #~ msgstr "Schakel in om het valutasymbool rechts van bedragen te tonen."
