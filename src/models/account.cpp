@@ -350,7 +350,7 @@ bool Account::exportAsCSV(const std::string& path)
     std::ofstream file{ path };
     if(file.is_open())
     {
-        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group\n";
+        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group,GroupName,GroupDescription\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
             file << pair.second.getId() << ",";
@@ -359,7 +359,13 @@ bool Account::exportAsCSV(const std::string& path)
             file << static_cast<int>(pair.second.getType()) << ",";
             file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
             file << pair.second.getAmount() << ",";
-            file << pair.second.getGroupId() << "\n";
+            file << pair.second.getGroupId() << ",";
+            if (pair.second.getGroupId() != -1) {
+                file << m_groups.at(pair.second.getGroupId()).getName() << ",";
+                file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
+            } else {
+                file << ",\n";
+            }
         }
         return true;
     }
