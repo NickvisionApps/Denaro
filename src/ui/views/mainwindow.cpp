@@ -110,11 +110,17 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), _("Open Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
+    //Drag Label
+    m_lblDrag = gtk_label_new(_("You may also drag in a file from your file browser to open."));
+    gtk_widget_add_css_class(m_lblDrag, "dim-label");
+    gtk_label_set_wrap(GTK_LABEL(m_lblDrag), true);
+    gtk_label_set_justify(GTK_LABEL(m_lblDrag), GTK_JUSTIFY_CENTER);
     //Status Page Box
     m_boxStatusPage = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
     gtk_widget_set_hexpand(m_boxStatusPage, false);
     gtk_widget_set_halign(m_boxStatusPage, GTK_ALIGN_CENTER);
     gtk_box_append(GTK_BOX(m_boxStatusPage), m_boxStatusButtons);
+    gtk_box_append(GTK_BOX(m_boxStatusPage), m_lblDrag);
     //Recent Accounts Label
     m_lblRecentAccounts = gtk_label_new(_("Recent Accounts"));
     gtk_widget_add_css_class(m_lblRecentAccounts, "title-4");
