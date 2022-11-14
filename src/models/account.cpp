@@ -383,7 +383,7 @@ int Account::importFromCSV(const std::string& path)
         {
             //Separate fields by ,
             std::vector<std::string> fields{ split(line, ",") };
-            if(fields.size() != 7)
+            if(fields.size() != 9)
             {
                 continue;
             }
@@ -455,21 +455,19 @@ int Account::importFromCSV(const std::string& path)
             }
             //Get Group Id
             int gid{ 0 };
-            if(gid != -1)
+            try
             {
-                try
-                {
-                    gid = stoui(fields[6]);
-                }
-                catch(...)
-                {
-                    continue;
-                }
-                if(getGroupById(gid) != std::nullopt)
-                {
-                    continue;
-                }
+                gid = stoui(fields[6]);
             }
+            catch(...)
+            {
+                continue;
+            }
+            //Get Group Name
+            const std::string& groupName{ fields[7] };
+            //Get Group Description
+            const std::string& groupDescription{ fields[8] };
+
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);
@@ -479,9 +477,19 @@ int Account::importFromCSV(const std::string& path)
             transaction.setAmount(amount);
             transaction.setGroupId(gid);
             addTransaction(transaction);
+
+            //Add Group if needed
+            if (getGroupById(gid) == std::nullopt && gid != -1) {
+                Group group{ (unsigned int) gid };
+                group.setName(groupName);
+                group.setDescription(groupDescription);
+                addGroup(group);
+            }
+
             imported++;
         }
     }
+    updateGroupAmounts();
     return imported;
 }
 
