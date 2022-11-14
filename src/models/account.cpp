@@ -37,13 +37,13 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
 {
     //Load Groups
     m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, balance TEXT)");
-    SQLite::Statement qryGetAllGroups{ *m_db, "SELECT * FROM groups" };
+    SQLite::Statement qryGetAllGroups{ *m_db, "SELECT g.*, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM groups g LEFT JOIN transactions t ON t.gid = g.id GROUP BY g.id;" };
     while(qryGetAllGroups.executeStep())
     {
         Group group{ (unsigned int)qryGetAllGroups.getColumn(0).getInt() };
         group.setName(qryGetAllGroups.getColumn(1).getString());
         group.setDescription(qryGetAllGroups.getColumn(2).getString());
-        group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
+        group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(4).getString()));
         m_groups.insert({ group.getId(), group });
     }
     //Load Transactions
