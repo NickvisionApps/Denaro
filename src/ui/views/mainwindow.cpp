@@ -51,7 +51,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_popBtnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_popBoxButtons), m_popBtnOpenAccount);
     //Account Popover Header Box
-    m_popBoxHeader = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    m_popBoxHeader = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_box_append(GTK_BOX(m_popBoxHeader), m_lblRecents);
     gtk_box_append(GTK_BOX(m_popBoxHeader), m_popBoxButtons);
     //List Recent Accounts
