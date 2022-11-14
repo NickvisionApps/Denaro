@@ -218,28 +218,24 @@ msgid "Description (Empty)"
 msgstr "Описание (Пусто)"
 
 #: src/ui/views/groupdialog.cpp:76
-#, fuzzy
 msgid "Name (Exists)"
 msgstr "Имя (Занято)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr ""
+msgstr "Недавние"
 
 #: src/ui/views/mainwindow.cpp:41
-#, fuzzy
 msgid "New"
-msgstr "Новая"
+msgstr "Новый"
 
 #: src/ui/views/mainwindow.cpp:44
-#, fuzzy
 msgid "New Account (Ctrl+N)"
-msgstr "Новая группа (Ctrl+G)"
+msgstr "Новый счёт (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
-#, fuzzy
 msgid "Open Account (Ctrl+O)"
-msgstr "Открыть счёт"
+msgstr "Открыть счёт (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
