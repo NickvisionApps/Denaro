@@ -482,17 +482,11 @@ int Account::importFromCSV(const std::string& path)
 
 void Account::updateGroupAmounts()
 {
-    for(std::pair<const unsigned int, Group>& pair : m_groups)
+    //Query for balance in SQL
+    SQLite::Statement qryGetGroupsBalance{ *m_db, "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;" };
+    while(qryGetGroupsBalance.executeStep())
     {
-        pair.second.setBalance(0);
-    }
-    for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
-    {
-        if(pair.second.getGroupId() != -1)
-        {
-            Group group{ m_groups.at(pair.second.getGroupId()) };
-            group.setBalance(group.getBalance() + (pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1)));
-            updateGroup(group);
-        }
+        int index{ qryGetGroupsBalance.getColumn(0).getInt() };
+        m_groups[index].setBalance(boost::multiprecision::cpp_dec_float_50(qryGetGroupsBalance.getColumn(1).getString()));
     }
 }
