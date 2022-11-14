@@ -66,7 +66,6 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_margin_end(m_popBoxAccount, 5);
     gtk_widget_set_margin_bottom(m_popBoxAccount, 5);
     gtk_box_append(GTK_BOX(m_popBoxAccount), m_popBoxHeader);
-    gtk_box_append(GTK_BOX(m_popBoxAccount), m_listRecentAccounts);
     gtk_popover_set_child(GTK_POPOVER(m_popoverAccount), m_popBoxAccount);
     //Menu Account Button
     m_btnMenuAccount = gtk_menu_button_new();
@@ -111,12 +110,22 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), _("Open Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
+    //Status Page Box
+    m_boxStatusPage = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
+    gtk_widget_set_hexpand(m_boxStatusPage, false);
+    gtk_widget_set_halign(m_boxStatusPage, GTK_ALIGN_CENTER);
+    gtk_box_append(GTK_BOX(m_boxStatusPage), m_boxStatusButtons);
+    //Recent Accounts Label
+    m_lblRecentAccounts = gtk_label_new(_("Recent Accounts"));
+    gtk_widget_add_css_class(m_lblRecentAccounts, "title-4");
+    gtk_widget_set_hexpand(m_lblRecentAccounts, true);
+    gtk_widget_set_halign(m_lblRecentAccounts, GTK_ALIGN_START);
     //Page No Accounts
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
     adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("No Accounts Open"));
     adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Open or create an account to get started."));
-    adw_status_page_set_child(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_boxStatusButtons);
+    adw_status_page_set_child(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_boxStatusPage);
     //Page Tabs
     m_pageTabs = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     m_tabView = adw_tab_view_new();
@@ -199,6 +208,8 @@ void MainWindow::onAccountAdded()
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
     updateRecentAccounts();
     gtk_widget_set_visible(m_btnMenuAccount, true);
+    gtk_widget_unparent(m_listRecentAccounts);
+    gtk_box_append(GTK_BOX(m_popBoxAccount), m_listRecentAccounts);
 }
 
 void MainWindow::onNewAccount()
@@ -355,7 +366,9 @@ void MainWindow::updateStatusPage()
 {
     if (m_controller.getRecentAccounts().size() > 0) {
         adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
-        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Good morning!"));
+        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Welcome!"));
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
+        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccounts);
+        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_lblRecentAccounts);
     }
 }
