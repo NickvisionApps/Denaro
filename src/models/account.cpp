@@ -37,6 +37,14 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
 {
     //Load Groups
     m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+    //Load Transactions
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
+    try
+    {
+        m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
+    }
+    catch(...) { }
+    // Queries
     SQLite::Statement qryGetAllGroups{ *m_db, "SELECT g.*, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM groups g LEFT JOIN transactions t ON t.gid = g.id GROUP BY g.id;" };
     while(qryGetAllGroups.executeStep())
     {
@@ -46,13 +54,6 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
         m_groups.insert({ group.getId(), group });
     }
-    //Load Transactions
-    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
-    try
-    {
-        m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
-    }
-    catch(...) { }
     SQLite::Statement qryGetAllTransactions{ *m_db, "SELECT * FROM transactions" };
     while(qryGetAllTransactions.executeStep())
     {
