@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 05:03+0530\n"
-"PO-Revision-Date: 2022-11-06 23:12+0100\n"
+"POT-Creation-Date: 2022-11-14 16:37+0100\n"
+"PO-Revision-Date: 2022-11-14 16:39+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #: src/controllers/accountviewcontroller.cpp:63
 msgid "Exported account to CSV successfully."
@@ -148,7 +148,7 @@ msgstr "Nuova"
 
 #: src/ui/views/accountview.cpp:83
 msgid "New Transaction (Ctrl+Shift+N)"
-msgstr "Nuova transazione (Ctrl+Shift+N)"
+msgstr "Nuova transazione (Ctrl+Maiusc+N)"
 
 #: src/ui/views/accountview.cpp:92
 msgid "Transactions"
@@ -222,26 +222,23 @@ msgstr "Descrizione (nessuna)"
 
 #: src/ui/views/groupdialog.cpp:76
 msgid "Name (Exists)"
-msgstr ""
+msgstr "Il nome non può essere uguale a un altro gruppo"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr ""
+msgstr "Recenti"
 
 #: src/ui/views/mainwindow.cpp:41
-#, fuzzy
 msgid "New"
 msgstr "Nuovo"
 
 #: src/ui/views/mainwindow.cpp:44
-#, fuzzy
 msgid "New Account (Ctrl+N)"
-msgstr "Nuovo gruppo (Ctrl+G)"
+msgstr "Nuovo account (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
-#, fuzzy
 msgid "Open Account (Ctrl+O)"
-msgstr "Apri account"
+msgstr "Apri account (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
@@ -387,8 +384,7 @@ msgstr "Ammontare (non valido)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
+#~ "A change in one of these settings will only be applied on newly opened accounts."
 #~ msgstr ""
 #~ "Personalizza le impostazioni della valuta.\n"
 #~ "\n"
@@ -400,9 +396,5 @@ msgstr "Ammontare (non valido)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Mostra il simbolo della valuta a destra"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
-#~ "monetario."
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
+#~ msgstr "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore monetario."
