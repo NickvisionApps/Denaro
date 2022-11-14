@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 16:37+0100\n"
+"POT-Creation-Date: 2022-11-15 00:31+0300\n"
 "PO-Revision-Date: 2022-11-14 16:39+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
@@ -154,16 +154,16 @@ msgstr "Nuova transazione (Ctrl+Maiusc+N)"
 msgid "Transactions"
 msgstr "Transazioni"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:224
 msgid "_Save"
 msgstr "Salva"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/mainwindow.cpp:224 src/ui/views/mainwindow.cpp:253
 msgid "_Cancel"
 msgstr "Annulla"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:253
 msgid "_Open"
 msgstr "Apri"
 
@@ -262,24 +262,33 @@ msgstr "Informazioni su %s"
 msgid "Main Menu"
 msgstr "Menu principale"
 
-#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:102 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Nuovo account"
 
-#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
-#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:110 src/ui/views/mainwindow.cpp:224
+#: src/ui/views/mainwindow.cpp:253 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Apri account"
 
 #: src/ui/views/mainwindow.cpp:114
-msgid "No Accounts Open"
-msgstr "Nessun account aperto"
+msgid "You may also drag in a file from your file browser to open."
+msgstr ""
 
-#: src/ui/views/mainwindow.cpp:115
+#: src/ui/views/mainwindow.cpp:125
+#, fuzzy
+msgid "Recent Accounts"
+msgstr "Apri account"
+
+#: src/ui/views/mainwindow.cpp:132
+msgid "Welcome!"
+msgstr ""
+
+#: src/ui/views/mainwindow.cpp:133
 msgid "Open or create an account to get started."
 msgstr "Apri o crea un account per cominciare."
 
-#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
+#: src/ui/views/mainwindow.cpp:227 src/ui/views/mainwindow.cpp:256
 msgid "Money Account (*.nmoney)"
 msgstr "Account Money (*.nmoney)"
 
@@ -378,13 +387,17 @@ msgstr "Ammontare (nessuno)"
 msgid "Amount (Invalid)"
 msgstr "Ammontare (non valido)"
 
+#~ msgid "No Accounts Open"
+#~ msgstr "Nessun account aperto"
+
 #~ msgid "Currency"
 #~ msgstr "Valuta"
 
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened accounts."
+#~ "A change in one of these settings will only be applied on newly opened "
+#~ "accounts."
 #~ msgstr ""
 #~ "Personalizza le impostazioni della valuta.\n"
 #~ "\n"
@@ -396,5 +409,9 @@ msgstr "Ammontare (non valido)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Mostra il simbolo della valuta a destra"
 
-#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
-#~ msgstr "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore monetario."
+#~ msgid ""
+#~ "If checked, the currency symbol will be displayed on the right of a "
+#~ "monetary value."
+#~ msgstr ""
+#~ "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
+#~ "monetario."
