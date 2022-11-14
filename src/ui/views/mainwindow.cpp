@@ -374,5 +374,6 @@ void MainWindow::updateStatusPage()
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
         gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccounts);
         gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_lblRecentAccounts);
+        gtk_widget_set_margin_top(m_boxStatusPage, 24);
     }
 }
