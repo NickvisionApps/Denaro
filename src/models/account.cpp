@@ -355,7 +355,8 @@ bool Account::exportAsCSV(const std::string& path)
             file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
             file << pair.second.getAmount() << ",";
             file << pair.second.getGroupId() << ",";
-            if (pair.second.getGroupId() != -1) {
+            if (pair.second.getGroupId() != -1)
+            {
                 file << m_groups.at(pair.second.getGroupId()).getName() << ",";
                 file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
             } else {
@@ -474,7 +475,8 @@ int Account::importFromCSV(const std::string& path)
             addTransaction(transaction);
 
             //Add Group if needed
-            if (getGroupById(gid) == std::nullopt && gid != -1) {
+            if (getGroupById(gid) == std::nullopt && gid != -1)
+            {
                 Group group{ (unsigned int) gid };
                 group.setName(groupName);
                 group.setDescription(groupDescription);
@@ -494,7 +496,6 @@ void Account::updateGroupAmounts()
     SQLite::Statement qryGetGroupsBalance{ *m_db, "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;" };
     while(qryGetGroupsBalance.executeStep())
     {
-        int index{ qryGetGroupsBalance.getColumn(0).getInt() };
-        m_groups[index].setBalance(boost::multiprecision::cpp_dec_float_50(qryGetGroupsBalance.getColumn(1).getString()));
+        m_groups.at(qryGetGroupsBalance.getColumn(0).getInt()).setBalance(boost::multiprecision::cpp_dec_float_50(qryGetGroupsBalance.getColumn(1).getString()));
     }
 }
