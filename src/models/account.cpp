@@ -36,14 +36,19 @@ unsigned int stoui(const std::string& str, size_t* idx = nullptr, int base = 10)
 Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
     //Load Groups
-    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, balance TEXT)");
+    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
     SQLite::Statement qryGetAllGroups{ *m_db, "SELECT g.*, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM groups g LEFT JOIN transactions t ON t.gid = g.id GROUP BY g.id;" };
+    try
+    {
+        m_db->exec("ALTER TABLE groups DROP COLUMN balance");
+    }
+    catch(...) { }
     while(qryGetAllGroups.executeStep())
     {
         Group group{ (unsigned int)qryGetAllGroups.getColumn(0).getInt() };
         group.setName(qryGetAllGroups.getColumn(1).getString());
         group.setDescription(qryGetAllGroups.getColumn(2).getString());
-        group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(4).getString()));
+        group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
         m_groups.insert({ group.getId(), group });
     }
     //Load Transactions
@@ -172,13 +177,10 @@ unsigned int Account::getNextAvailableGroupId() const
 
 bool Account::addGroup(const Group& group)
 {
-    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description, balance) VALUES (?, ?, ?, ?)" };
-    std::stringstream strBalance;
-    strBalance << group.getBalance();
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description) VALUES (?, ?, ?)" };
     qryInsert.bind(1, group.getId());
     qryInsert.bind(2, group.getName());
     qryInsert.bind(3, group.getDescription());
-    qryInsert.bind(4, strBalance.str());
     if(qryInsert.exec() > 0)
     {
         m_groups.insert({ group.getId(), group });
@@ -189,12 +191,9 @@ bool Account::addGroup(const Group& group)
 
 bool Account::updateGroup(const Group& group)
 {
-    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ?, balance = ? WHERE id = " + std::to_string(group.getId()) };
-    std::stringstream strBalance;
-    strBalance << group.getBalance();
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ? WHERE id = " + std::to_string(group.getId()) };
     qryUpdate.bind(1, group.getName());
     qryUpdate.bind(2, group.getDescription());
-    qryUpdate.bind(3, strBalance.str());
     if(qryUpdate.exec() > 0)
     {
         m_groups[group.getId()] = group;
