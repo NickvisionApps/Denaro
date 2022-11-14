@@ -70,6 +70,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_popover_set_child(GTK_POPOVER(m_popoverAccount), m_popBoxAccount);
     //Menu Account Button
     m_btnMenuAccount = gtk_menu_button_new();
+    gtk_widget_set_visible(m_btnMenuAccount, false);
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuAccount), "bank-symbolic");
     gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnMenuAccount), m_popoverAccount);
     gtk_widget_set_tooltip_text(m_btnMenuAccount, _("Account Menu"));
@@ -90,7 +91,9 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_hexpand(m_toastOverlay, true);
     gtk_widget_set_vexpand(m_toastOverlay, true);
     //Status Buttons
-    m_boxStatusButtons = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
+    m_boxStatusButtons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12);
+    gtk_widget_set_hexpand(m_boxStatusButtons, true);
+    gtk_widget_set_halign(m_boxStatusButtons, GTK_ALIGN_CENTER);
     //New Account Button
     m_btnNewAccount = gtk_button_new();
     gtk_widget_set_halign(m_btnNewAccount, GTK_ALIGN_CENTER);
@@ -108,7 +111,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_button_set_label(GTK_BUTTON(m_btnOpenAccount), _("Open Account"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnOpenAccount), "win.openAccount");
     gtk_box_append(GTK_BOX(m_boxStatusButtons), m_btnOpenAccount);
-    //Page No Downloads
+    //Page No Accounts
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
     adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("No Accounts Open"));
@@ -183,6 +186,7 @@ void MainWindow::start()
     gtk_widget_show(m_gobj);
     m_controller.startup();
     updateRecentAccounts();
+    updateStatusPage();
 }
 
 void MainWindow::onAccountAdded()
@@ -194,6 +198,7 @@ void MainWindow::onAccountAdded()
     m_accountViews.push_back(std::move(newAccountView));
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
     updateRecentAccounts();
+    gtk_widget_set_visible(m_btnMenuAccount, true);
 }
 
 void MainWindow::onNewAccount()
@@ -343,5 +348,14 @@ void MainWindow::onListRecentAccountsSelectionChanged()
         std::string path{ adw_action_row_get_subtitle(ADW_ACTION_ROW(selectedRow)) };
         m_controller.addAccount(path);
         gtk_list_box_unselect_all(GTK_LIST_BOX(m_listRecentAccounts));
+    }
+}
+
+void MainWindow::updateStatusPage()
+{
+    if (m_controller.getRecentAccounts().size() > 0) {
+        adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
+        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Good morning!"));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
     }
 }
