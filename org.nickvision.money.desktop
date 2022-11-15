@@ -2,6 +2,7 @@
 Version=1.0
 Name=Money
 Comment=A personal finance manager
+Comment[hr]=Aplikacija za osobne financije
 Exec=org.nickvision.money
 Icon=org.nickvision.money
 Terminal=false

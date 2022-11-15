@@ -9,6 +9,9 @@
     <p>
       A personal finance manager
     </p>
+    <p xml:lang="hr">
+      Aplikacija za osobne financije
+    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
