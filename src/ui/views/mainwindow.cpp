@@ -208,7 +208,21 @@ void MainWindow::start()
     gtk_widget_show(m_gobj);
     m_controller.startup();
     updateRecentAccounts();
-    updateStatusPage();
+    if (m_controller.getRecentAccounts().size() > 0)
+    {
+        for(const std::string& recentAccountPath : m_controller.getRecentAccounts())
+        {
+            GtkWidget* row{ adw_action_row_new() };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
+            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+            gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccountsOnStart), row);
+        }
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
+        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccountsOnStart);
+        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_lblRecentAccounts);
+        gtk_widget_set_margin_top(m_boxStatusPage, 24);
+    }
 }
 
 void MainWindow::onAccountAdded()
@@ -391,20 +405,3 @@ void MainWindow::onListRecentAccountsOnStartSelectionChanged()
     }
 }
 
-void MainWindow::updateStatusPage()
-{
-    if (m_controller.getRecentAccounts().size() > 0) {
-        for(const std::string& recentAccountPath : m_controller.getRecentAccounts())
-        {
-            GtkWidget* row{ adw_action_row_new() };
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
-            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
-            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
-            gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccountsOnStart), row);
-        }
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
-        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccountsOnStart);
-        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_lblRecentAccounts);
-        gtk_widget_set_margin_top(m_boxStatusPage, 24);
-    }
-}

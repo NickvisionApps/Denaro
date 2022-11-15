@@ -123,9 +123,5 @@ namespace NickvisionMoney::UI::Views
     	 	 * Occurs when listRecentAccountsOnStart's selection is changed
     	 	 */
 		void onListRecentAccountsOnStartSelectionChanged();
-		/**
-		 * Update status page if there are any recent files
-		 */
-		void updateStatusPage();
 	};
 }
