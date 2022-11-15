@@ -1,7 +1,7 @@
-# French translation for Money
+# Croatian translation for Money
 # Copyright (C) 2022
 # This file is distributed under the same license as the org.nickvision.money package.
-# Enzo MAROS <enzo.maros@gmail.com>, 2022.
+# Milo Ivir <mail@milotype.de>, 2022.
 #
 msgid ""
 msgstr ""
@@ -379,22 +379,22 @@ msgid "Amount (Invalid)"
 msgstr "Iznos (neispravan)"
 
 #~ msgid "Currency"
-#~ msgstr "Monnaie"
+#~ msgstr "Valuta"
 
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
 #~ "A change in one of these settings will only be applied on newly opened accounts."
 #~ msgstr ""
-#~ "Personnaliser les paramètres de monnaie.\n"
+#~ "Prilagodi postavke valute.\n"
 #~ "\n"
-#~ "Les changements ne seront appliqués qu'à l'ouverture d'un compte."
+#~ "Promjena jedne od ovih postavki primijenit će se samo na novootvorene račune."
 
 #~ msgid "Currency Symbol"
-#~ msgstr "Symbole monétaire"
+#~ msgstr "Simbol valute"
 
 #~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Afficher le symbole monétaire à droite"
+#~ msgstr "Prikaži simbol valute desno"
 
 #~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
-#~ msgstr "Quand cette option est cochée, le symbole monétaire apparaît à droite de la valeur."
+#~ msgstr "Ako je označeno, simbol valute će se prikazati iza novčane vrijednosti."
