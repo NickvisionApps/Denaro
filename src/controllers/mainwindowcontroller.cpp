@@ -46,11 +46,11 @@ std::string MainWindowController::getWelcomeMessage() const
     int timeNowHours{ std::localtime(&timeNow)->tm_hour };
     if(timeNowHours >= 0 && timeNowHours < 6)
     {
-        return _("Good Morning!");
+        return pgettext("Night", "Good Morning!");
     }
     else if(timeNowHours >= 6 && timeNowHours < 12)
     {
-        return _("Good Morning!");
+        return pgettext("Morning", "Good Morning!");
     }
     else if(timeNowHours >= 12 && timeNowHours < 18)
     {

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 23:03+0300\n"
+"POT-Creation-Date: 2022-11-15 23:19+0300\n"
 "PO-Revision-Date: 2022-11-14 11:46+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -31,7 +31,12 @@ msgid "Imported %d transactions from CSV."
 msgstr "Er zijn %d transacties geïmporteerd uit het csv-bestand."
 
 #: src/controllers/mainwindowcontroller.cpp:49
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr ""
+
 #: src/controllers/mainwindowcontroller.cpp:53
+msgctxt "Morning"
 msgid "Good Morning!"
 msgstr ""
 
