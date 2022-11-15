@@ -1,4 +1,5 @@
 src/controllers/accountviewcontroller.cpp
+src/controllers/mainwindowcontroller.cpp
 src/controllers/transactiondialogcontroller.cpp
 src/models/transaction.cpp
 src/ui/application.cpp

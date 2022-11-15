@@ -51,9 +51,13 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_toastOverlay{ nullptr };
 		GtkWidget* m_viewStack{ nullptr };
 		GtkWidget* m_pageStatusNoAccounts{ nullptr };
+		GtkWidget* m_boxStatusPage{ nullptr };
+		GtkWidget* m_lblRecentAccounts{ nullptr };
+		GtkWidget* m_listRecentAccountsOnStart{ nullptr };
 		GtkWidget* m_boxStatusButtons{ nullptr };
 		GtkWidget* m_btnNewAccount{ nullptr };
 		GtkWidget* m_btnOpenAccount{ nullptr };
+		GtkWidget* m_lblDrag{ nullptr };
 		GtkWidget* m_pageTabs{ nullptr };
 		AdwTabView* m_tabView{ nullptr };
 		AdwTabBar* m_tabBar{ nullptr };
@@ -112,8 +116,12 @@ namespace NickvisionMoney::UI::Views
 		 */
 		void updateRecentAccounts();
 		/**
-    	 * Occurs when listRecentAccounts's selection is changed
-    	 */
+    	 	 * Occurs when listRecentAccounts's selection is changed
+    	 	 */
 		void onListRecentAccountsSelectionChanged();
+		/**
+    	 	 * Occurs when listRecentAccountsOnStart's selection is changed
+    	 	 */
+		void onListRecentAccountsOnStartSelectionChanged();
 	};
 }

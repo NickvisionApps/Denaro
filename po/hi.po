@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 05:03+0530\n"
+"POT-Creation-Date: 2022-11-15 23:19+0300\n"
 "PO-Revision-Date: 2022-11-14 05:04+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
@@ -30,6 +30,28 @@ msgstr "खाते को CSV के रूप में निर्यात
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "CSV से %d लेनदेन आयात कर दिए गए।"
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Afternoon!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Evening!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:65
+msgid "Good Day!"
+msgstr ""
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -154,16 +176,16 @@ msgstr "नई लेनदेन (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "लेनदेन"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
 msgid "_Save"
 msgstr "सहेजें (_S)"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
 msgstr "रद्द (_C)"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
 msgstr "खोलें (_O)"
 
@@ -240,48 +262,58 @@ msgstr "नया खाता (Ctrl+N)"
 msgid "Open Account (Ctrl+O)"
 msgstr "खाता खोलें (Ctrl+O)"
 
-#: src/ui/views/mainwindow.cpp:75
+#: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
 msgstr "खाता मेन्यू"
 
-#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "सेटिंग्स (Preferences)"
 
-#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:82 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
-#: src/ui/views/mainwindow.cpp:82
+#: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
 msgstr "%s के बारे में"
 
-#: src/ui/views/mainwindow.cpp:85
+#: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
 msgstr "मुख्य मेन्यू"
 
-#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "नया खाता"
 
-#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
-#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "खाता खोलें"
 
-#: src/ui/views/mainwindow.cpp:114
-msgid "No Accounts Open"
-msgstr "कोई खाता नहीं खुला है"
-
 #: src/ui/views/mainwindow.cpp:115
+msgid "You may also drag in a file from your file browser to open."
+msgstr ""
+
+#: src/ui/views/mainwindow.cpp:126
+#, fuzzy
+msgid "Recent Accounts"
+msgstr "खाता खोलें"
+
+#: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "आरंभ करने के लिए मौजूदा या नया खाता खोलें"
 
-#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
+#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
 msgid "Money Account (*.nmoney)"
 msgstr "मनी खाता (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:245
+#, fuzzy
+msgid "Unable to override an opened account."
+msgstr "खाते को CSV के रूप में निर्यात करने में असमर्थ।"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -377,6 +409,9 @@ msgstr "धनराशि (खाली)"
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "धनराशि (अवैध)"
+
+#~ msgid "No Accounts Open"
+#~ msgstr "कोई खाता नहीं खुला है"
 
 #~ msgid "Currency"
 #~ msgstr "मुद्रा"
