@@ -235,11 +235,18 @@ void MainWindow::onNewAccount()
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            if(std::filesystem::exists(path))
+            if(mainWindow->m_controller.isAccountOpened(path))
             {
-                std::filesystem::remove(path);
+                adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(mainWindow->m_toastOverlay), adw_toast_new(_("Unable to override an opened account.")));
             }
-            mainWindow->m_controller.addAccount(path);
+            else
+            {
+                if(std::filesystem::exists(path))
+                {
+                    std::filesystem::remove(path);
+                }
+                mainWindow->m_controller.addAccount(path);
+            }
             g_object_unref(file);
         }
         g_object_unref(dialog);

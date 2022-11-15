@@ -77,6 +77,13 @@ namespace NickvisionMoney::Controllers
 		 */
 		std::string getFirstOpenAccountPath() const;
 		/**
+		 * Gets whether or not an account is opened
+		 *
+		 * @param path The path to the account
+		 * @returns True for opened, else false
+		 */
+		bool isAccountOpened(const std::string& path) const;
+		/**
 		 * Creates an AccountViewController for the latest account
 		 *
 		 * @returns A new AccountViewController
