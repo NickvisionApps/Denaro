@@ -215,7 +215,7 @@ void MainWindow::onNewAccount()
             std::string path{ g_file_get_path(file) };
             if(mainWindow->m_controller.isAccountOpened(path))
             {
-                adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(mainWindow->m_toastOverlay), adw_toast_new("Unable to override an opened account."));
+                adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(mainWindow->m_toastOverlay), adw_toast_new(_("Unable to override an opened account.")));
             }
             else
             {
