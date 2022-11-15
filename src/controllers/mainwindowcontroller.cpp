@@ -71,6 +71,11 @@ std::string MainWindowController::getFirstOpenAccountPath() const
     return m_openAccounts[0];
 }
 
+bool MainWindowController::isAccountOpened(const std::string& path) const
+{
+    return std::find(m_openAccounts.begin(), m_openAccounts.end(), path) != m_openAccounts.end();
+}
+
 AccountViewController MainWindowController::createAccountViewControllerForLatestAccount() const
 {
     return { m_openAccounts[m_openAccounts.size() - 1], m_configuration.getLocale(), m_sendToastCallback };
