@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-15 23:03+0300\n"
-"PO-Revision-Date: 2022-11-15 00:36+0300\n"
+"PO-Revision-Date: 2022-11-15 23:07+0300\n"
 "Last-Translator: Fyodor Sobolev\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -29,21 +29,24 @@ msgid "Imported %d transactions from CSV."
 msgstr "Импортировано транзакций из CSV: %d."
 
 #: src/controllers/mainwindowcontroller.cpp:49
+msgid "Good Morning!"
+msgstr "Доброй ночи!"
+
 #: src/controllers/mainwindowcontroller.cpp:53
 msgid "Good Morning!"
-msgstr ""
+msgstr "Доброе утро!"
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Добрый день!"
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "Добрый вечер!"
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "Здравствуйте!"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -175,7 +178,7 @@ msgstr "_Сохранить"
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
 #: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
-msgstr "_Отмена"
+msgstr "О_тмена"
 
 #: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
@@ -304,7 +307,7 @@ msgstr "Счёт приложения Money (*.nmoney)"
 #: src/ui/views/mainwindow.cpp:245
 #, fuzzy
 msgid "Unable to override an opened account."
-msgstr "Невозможно экспортировать в CSV."
+msgstr "Невозможно перезаписать открытый счёт."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -400,33 +403,3 @@ msgstr "Сумма (Пусто)"
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "Сумма (Некорректная)"
-
-#~ msgid "Welcome!"
-#~ msgstr "Добро пожаловать!"
-
-#~ msgid "No Accounts Open"
-#~ msgstr "Нет открытых счетов"
-
-#~ msgid "Currency"
-#~ msgstr "Валюта"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Настройки валюты.\n"
-#~ "\n"
-#~ "Изменение любой из этих настроек будет применено только к новым счетам."
-
-#~ msgid "Currency Symbol"
-#~ msgstr "Символ валюты"
-
-#~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Отображать символ валюты справа"
-
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr "Если включено, символ валюты будет отображаться справа от значения."
