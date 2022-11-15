@@ -136,7 +136,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Page No Accounts
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
-    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Welcome!"));
+    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_controller.getWelcomeMessage().c_str());
     adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), _("Open or create an account to get started."));
     adw_status_page_set_child(ADW_STATUS_PAGE(m_pageStatusNoAccounts), m_boxStatusPage);
     //Page Tabs
