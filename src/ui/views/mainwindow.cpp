@@ -66,6 +66,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_margin_end(m_popBoxAccount, 5);
     gtk_widget_set_margin_bottom(m_popBoxAccount, 5);
     gtk_box_append(GTK_BOX(m_popBoxAccount), m_popBoxHeader);
+    gtk_box_append(GTK_BOX(m_popBoxAccount), m_listRecentAccounts);
     gtk_popover_set_child(GTK_POPOVER(m_popoverAccount), m_popBoxAccount);
     //Menu Account Button
     m_btnMenuAccount = gtk_menu_button_new();
@@ -126,6 +127,12 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_add_css_class(m_lblRecentAccounts, "title-4");
     gtk_widget_set_hexpand(m_lblRecentAccounts, true);
     gtk_widget_set_halign(m_lblRecentAccounts, GTK_ALIGN_START);
+    //List Recent Accounts On The Start Screen
+    m_listRecentAccountsOnStart = gtk_list_box_new();
+    gtk_widget_add_css_class(m_listRecentAccountsOnStart, "boxed-list");
+    gtk_widget_set_size_request(m_listRecentAccountsOnStart, 200, 55);
+    gtk_widget_set_margin_bottom(m_listRecentAccountsOnStart, 24);
+    g_signal_connect(m_listRecentAccountsOnStart, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer))[](GtkListBox*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListRecentAccountsOnStartSelectionChanged(); }), this);
     //Page No Accounts
     m_pageStatusNoAccounts = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "org.nickvision.money-symbolic");
@@ -214,8 +221,6 @@ void MainWindow::onAccountAdded()
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
     updateRecentAccounts();
     gtk_widget_set_visible(m_btnMenuAccount, true);
-    gtk_widget_unparent(m_listRecentAccounts);
-    gtk_box_append(GTK_BOX(m_popBoxAccount), m_listRecentAccounts);
 }
 
 void MainWindow::onNewAccount()
@@ -375,11 +380,30 @@ void MainWindow::onListRecentAccountsSelectionChanged()
     }
 }
 
+void MainWindow::onListRecentAccountsOnStartSelectionChanged()
+{
+    GtkListBoxRow* selectedRow{ gtk_list_box_get_selected_row(GTK_LIST_BOX(m_listRecentAccountsOnStart)) };
+    if(selectedRow)
+    {
+        std::string path{ adw_action_row_get_subtitle(ADW_ACTION_ROW(selectedRow)) };
+        m_controller.addAccount(path);
+        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listRecentAccountsOnStart));
+    }
+}
+
 void MainWindow::updateStatusPage()
 {
     if (m_controller.getRecentAccounts().size() > 0) {
+        for(const std::string& recentAccountPath : m_controller.getRecentAccounts())
+        {
+            GtkWidget* row{ adw_action_row_new() };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
+            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+            gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccountsOnStart), row);
+        }
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
-        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccounts);
+        gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_listRecentAccountsOnStart);
         gtk_box_prepend(GTK_BOX(m_boxStatusPage), m_lblRecentAccounts);
         gtk_widget_set_margin_top(m_boxStatusPage, 24);
     }

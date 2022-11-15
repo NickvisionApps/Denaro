@@ -53,6 +53,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_pageStatusNoAccounts{ nullptr };
 		GtkWidget* m_boxStatusPage{ nullptr };
 		GtkWidget* m_lblRecentAccounts{ nullptr };
+		GtkWidget* m_listRecentAccountsOnStart{ nullptr };
 		GtkWidget* m_boxStatusButtons{ nullptr };
 		GtkWidget* m_btnNewAccount{ nullptr };
 		GtkWidget* m_btnOpenAccount{ nullptr };
@@ -118,6 +119,10 @@ namespace NickvisionMoney::UI::Views
     	 	 * Occurs when listRecentAccounts's selection is changed
     	 	 */
 		void onListRecentAccountsSelectionChanged();
+		/**
+    	 	 * Occurs when listRecentAccountsOnStart's selection is changed
+    	 	 */
+		void onListRecentAccountsOnStartSelectionChanged();
 		/**
 		 * Update status page if there are any recent files
 		 */
