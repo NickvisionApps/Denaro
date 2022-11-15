@@ -9,6 +9,9 @@
     <p>
       A personal finance manager
     </p>
+    <p xml:lang="hr">
+      Aplikacija za osobne financije
+    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
@@ -38,6 +41,7 @@
         <p>- Money will remember up to 3 recently opened accounts for quick and easy access</p>
         <p>- Fixed an issue where a new account was not created if overwriting an old one</p>
         <p>- Added translation support</p>
+        <p>- Added Croatian translation (Thanks @milotype!)</p>
         <p>- Added Dutch translation (Thanks @Vistaus!)</p>
         <p>- Added French translation (Thanks @zothma!)</p>
         <p>- Added Hindi translation (Thanks @securearth!)</p>

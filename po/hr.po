@@ -1,353 +1,344 @@
-# Hindi translation for Nickvision Money
-# Copyright (C) 2022 Nick Logozzo
+# Croatian translation for Money
+# Copyright (C) 2022
 # This file is distributed under the same license as the org.nickvision.money package.
-# Translators:
-# Hemish <hemish04082005@gmail.com>, 2022.
+# Milo Ivir <mail@milotype.de>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 00:31+0300\n"
-"PO-Revision-Date: 2022-11-14 05:04+0530\n"
-"Last-Translator: Hemish <hemish04082005@gmail.com>\n"
-"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
-"org/hindi\n"
-"Language: hi\n"
+"POT-Creation-Date: 2022-11-14 05:03+0530\n"
+"PO-Revision-Date: 2022-11-15 13:53+0100\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:63
 msgid "Exported account to CSV successfully."
-msgstr "खाते को CSV में सफलतापूर्वक निर्यात कर दिया गया।"
+msgstr "Račun je uspješno izvezen u CSV datoteku."
 
 #: src/controllers/accountviewcontroller.cpp:67
 msgid "Unable to export account as CSV."
-msgstr "खाते को CSV के रूप में निर्यात करने में असमर्थ।"
+msgstr "Nije moguće izvesti račun kao CSV datoteku."
 
 #: src/controllers/accountviewcontroller.cpp:78
 #, c-format
 msgid "Imported %d transactions from CSV."
-msgstr "CSV से %d लेनदेन आयात कर दिए गए।"
+msgstr "Uvezene transakcije iz CSV datoteke: %d."
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
 msgid "None"
-msgstr "कोई भी नहीं"
+msgstr "Neodređeno"
 
 #: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:56
 msgid "Never"
-msgstr "कभी नहीं"
+msgstr "Nikada"
 
 #: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:56
 msgid "Daily"
-msgstr "दैनिक/रोज़ाना"
+msgstr "Dnevno"
 
 #: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:56
 msgid "Weekly"
-msgstr "साप्ताहिक"
+msgstr "Tjedno"
 
 #: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:56
 msgid "Monthly"
-msgstr "मासिक"
+msgstr "Mjesečno"
 
 #: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:56
 msgid "Quarterly"
-msgstr "त्रैमासिक/तिमाही"
+msgstr "Kvartalno"
 
 #: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:56
 msgid "Yearly"
-msgstr "वार्षिक/सालाना"
+msgstr "Godišnje"
 
 #: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:56
 msgid "Biyearly"
-msgstr "द्विवार्षिक"
+msgstr "Dvogodišnje"
 
 #: src/ui/application.cpp:16
 msgid "A personal finance manager."
-msgstr "एक व्यक्तिगत वित्त संयोजक"
+msgstr "Aplikacija za osobne financije."
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
 msgid "Cancel"
-msgstr "रद्द (Cancel)"
+msgstr "Odustani"
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:13
 msgid "OK"
-msgstr "ठीक (OK)"
+msgstr "U redu"
 
 #: src/ui/controls/grouprow.cpp:23
 msgid "Edit Group"
-msgstr "समूह में परिवर्तन करें"
+msgstr "Uredi grupu"
 
 #: src/ui/controls/grouprow.cpp:31
 msgid "Delete Group"
-msgstr "समूह हटाएँ"
+msgstr "Izbriši grupu"
 
 #: src/ui/controls/transactionrow.cpp:22
 msgid "Repeat Interval: "
-msgstr "दोहराई का समय अंतराल: "
+msgstr "Interval ponavljanja: "
 
 #: src/ui/controls/transactionrow.cpp:33
 msgid "Edit Transaction"
-msgstr "लेनदेन में परिवर्तन करें"
+msgstr "Uredi transakciju"
 
 #: src/ui/controls/transactionrow.cpp:41
 msgid "Delete Transaction"
-msgstr "लेन-देन हटाएँ"
+msgstr "Izbriši transakciju"
 
 #: src/ui/views/accountview.cpp:18
 msgid "Total"
-msgstr "टोटल (कुल)"
+msgstr "Ukupno"
 
 #: src/ui/views/accountview.cpp:26
 msgctxt "Overview"
 msgid "Income"
-msgstr "आय/कमाई"
+msgstr "Prihod"
 
 #: src/ui/views/accountview.cpp:34
 msgctxt "Overview"
 msgid "Expense"
-msgstr "लागत/खर्च"
+msgstr "Rashod"
 
 #: src/ui/views/accountview.cpp:42
 msgid "Actions"
-msgstr "कार्य"
+msgstr "Radnje"
 
 #: src/ui/views/accountview.cpp:45 src/ui/views/accountview.cpp:183
 msgid "Export as CSV"
-msgstr "CSV के रूप में निर्यात करें"
+msgstr "Izvezi kao CSV datoteku"
 
 #: src/ui/views/accountview.cpp:46 src/ui/views/accountview.cpp:207
 msgid "Import from CSV"
-msgstr "CSV से आयात करें"
+msgstr "Uvezi iz CSV datoteke"
 
 #: src/ui/views/accountview.cpp:55
 msgid "Overview"
-msgstr "अवलोकन"
+msgstr "Pregled"
 
 #: src/ui/views/accountview.cpp:64
 msgctxt "Group"
 msgid "New"
-msgstr "नया"
+msgstr "Nova"
 
 #: src/ui/views/accountview.cpp:65
 msgid "New Group (Ctrl+G)"
-msgstr "नया समूह (Ctrl+G)"
+msgstr "Nova grupa (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:74
 msgid "Groups"
-msgstr "समूह"
+msgstr "Grupe"
 
 #: src/ui/views/accountview.cpp:82
 msgctxt "Transaction"
 msgid "New"
-msgstr "नई"
+msgstr "Nova"
 
 #: src/ui/views/accountview.cpp:83
 msgid "New Transaction (Ctrl+Shift+N)"
-msgstr "नई लेनदेन (Ctrl+Shift+N)"
+msgstr "Nova transakcija (Ctrl+Shift+N)"
 
 #: src/ui/views/accountview.cpp:92
 msgid "Transactions"
-msgstr "लेनदेन"
+msgstr "Transakcije"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:224
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
 msgid "_Save"
-msgstr "सहेजें (_S)"
+msgstr "_Spremi"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:224 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
 msgid "_Cancel"
-msgstr "रद्द (_C)"
+msgstr "O_dustani"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
 msgid "_Open"
-msgstr "खोलें (_O)"
+msgstr "_Otvori"
 
 #: src/ui/views/accountview.cpp:251
 msgid "Delete Group?"
-msgstr "समूह हटाएँ?"
+msgstr "Izbrisati grupu?"
 
 #: src/ui/views/accountview.cpp:251
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
 msgstr ""
-"क्या आप वाकई इस समूह को हटाना चाहते हैं?\n"
-"यह क्रिया अपरिवर्तनीय है।"
+"Stvarno želiš izbrisati ovu grupu?\n"
+"Ovo je nepovratna radnja."
 
 #: src/ui/views/accountview.cpp:251 src/ui/views/accountview.cpp:280
 msgid "No"
-msgstr "नहीं"
+msgstr "Ne"
 
 #: src/ui/views/accountview.cpp:251 src/ui/views/accountview.cpp:280
 msgid "Yes"
-msgstr "हाँ"
+msgstr "Da"
 
 #: src/ui/views/accountview.cpp:280
 msgid "Delete Transaction?"
-msgstr "लेनदेन हटाएँ?"
+msgstr "Izbrisati transakciju?"
 
 #: src/ui/views/accountview.cpp:280
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
 msgstr ""
-"क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?\n"
-"यह क्रिया अपरिवर्तनीय है।"
+"Stvarno želiš izbrisati ovu transakciju?\n"
+"Ovo je nepovratna radnja."
 
 #: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:60
 msgid "Group"
-msgstr "समूह"
+msgstr "Grupa"
 
 #: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:59
 msgid "Name"
-msgstr "नाम"
+msgstr "Ime"
 
 #: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
 #: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
 msgid "Description"
-msgstr "विवरण"
+msgstr "Opis"
 
 #: src/ui/views/groupdialog.cpp:66
 msgid "Name (Empty)"
-msgstr "नाम (खाली)"
+msgstr "Ime (prazno)"
 
 #: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
 msgid "Description (Empty)"
-msgstr "विवरण (खाली)"
+msgstr "Opis (prazan)"
 
 #: src/ui/views/groupdialog.cpp:76
 msgid "Name (Exists)"
-msgstr "नाम (पहले से मौजूद है)"
+msgstr "Ime (postoji)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr "हाल ही के"
+msgstr "Nedavno otvoreni"
 
 #: src/ui/views/mainwindow.cpp:41
 msgid "New"
-msgstr "नया"
+msgstr "Novi"
 
 #: src/ui/views/mainwindow.cpp:44
 msgid "New Account (Ctrl+N)"
-msgstr "नया खाता (Ctrl+N)"
+msgstr "Novi račun (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
 msgid "Open Account (Ctrl+O)"
-msgstr "खाता खोलें (Ctrl+O)"
+msgstr "Otvori račun (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
-msgstr "खाता मेन्यू"
+msgstr "Izbornik računa"
 
 #: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
-msgstr "सेटिंग्स (Preferences)"
+msgstr "Postavke"
 
 #: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
-msgstr "कीबोर्ड शॉर्टकट"
+msgstr "Tipkovni prečaci"
 
 #: src/ui/views/mainwindow.cpp:82
 #, c-format
 msgid "About %s"
-msgstr "%s के बारे में"
+msgstr "Informacije o %s"
 
 #: src/ui/views/mainwindow.cpp:85
 msgid "Main Menu"
-msgstr "मुख्य मेन्यू"
+msgstr "Glavni izbornik"
 
-#: src/ui/views/mainwindow.cpp:102 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
-msgstr "नया खाता"
+msgstr "Novi račun"
 
-#: src/ui/views/mainwindow.cpp:110 src/ui/views/mainwindow.cpp:224
-#: src/ui/views/mainwindow.cpp:253 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
-msgstr "खाता खोलें"
+msgstr "Otvori račun"
 
 #: src/ui/views/mainwindow.cpp:114
-msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgid "No Accounts Open"
+msgstr "Nema otvorenih računa"
 
-#: src/ui/views/mainwindow.cpp:125
-#, fuzzy
-msgid "Recent Accounts"
-msgstr "खाता खोलें"
-
-#: src/ui/views/mainwindow.cpp:132
-msgid "Welcome!"
-msgstr ""
-
-#: src/ui/views/mainwindow.cpp:133
+#: src/ui/views/mainwindow.cpp:115
 msgid "Open or create an account to get started."
-msgstr "आरंभ करने के लिए मौजूदा या नया खाता खोलें"
+msgstr "Otvori ili stvori jedan račun."
 
-#: src/ui/views/mainwindow.cpp:227 src/ui/views/mainwindow.cpp:256
+#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
 msgid "Money Account (*.nmoney)"
-msgstr "मनी खाता (*.nmoney)"
+msgstr "Money račun (*.nmoney)"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
-msgstr "उपयोगकर्ता इंटरफ़ेस"
+msgstr "Korisničko sučelje"
 
 #: src/ui/views/preferencesdialog.cpp:21
 msgid "Customize the application's user interface."
-msgstr "एप्लिकेशन के इंटरफ़ेस को अनुकूलित करें।"
+msgstr "Prilagodi korisničko sučelje aplikacije."
 
 #: src/ui/views/preferencesdialog.cpp:24
 msgid "Theme"
-msgstr "दिखावट"
+msgstr "Tema"
 
 #: src/ui/views/preferencesdialog.cpp:25
 msgid "System"
-msgstr "सिस्टम सेटिंग का पालन करें"
+msgstr "Sustav"
 
 #: src/ui/views/preferencesdialog.cpp:25
 msgid "Light"
-msgstr "लाइट (Light)"
+msgstr "Svijetla"
 
 #: src/ui/views/preferencesdialog.cpp:25
 msgid "Dark"
-msgstr "डार्क (Dark)"
+msgstr "Tamna"
 
 #: src/ui/views/shortcutsdialog.cpp:95
 msgid "Account"
-msgstr "खाता"
+msgstr "Račun"
 
 #: src/ui/views/shortcutsdialog.cpp:98
 msgid "Close Account"
-msgstr "खाता बंद करें"
+msgstr "Zatvori račun"
 
 #: src/ui/views/shortcutsdialog.cpp:99
 msgctxt "Shortcuts"
 msgid "Group"
-msgstr "समूह"
+msgstr "Grupa"
 
 #: src/ui/views/shortcutsdialog.cpp:100
 msgid "New Group"
-msgstr "नया समूह"
+msgstr "Nova grupa"
 
 #: src/ui/views/shortcutsdialog.cpp:101 src/ui/views/transactiondialog.cpp:9
 msgid "Transaction"
-msgstr "लेनदेन"
+msgstr "Transakcija"
 
 #: src/ui/views/shortcutsdialog.cpp:102
 msgid "New Transaction"
-msgstr "नई लेनदेन"
+msgstr "Nova transakcija"
 
 #: src/ui/views/shortcutsdialog.cpp:103
 msgid "Application"
-msgstr "एप्लिकेशन"
+msgstr "Aplikacija"
 
 #: src/ui/views/shortcutsdialog.cpp:106
 msgid "About"
-msgstr "बारे में"
+msgstr "Informacije"
 
 #: src/ui/views/transactiondialog.cpp:23
 msgid "ID"
@@ -355,61 +346,55 @@ msgstr "ID"
 
 #: src/ui/views/transactiondialog.cpp:38
 msgid "Date"
-msgstr "तिथि"
+msgstr "Datum"
 
 #: src/ui/views/transactiondialog.cpp:50
 msgid "Type"
-msgstr "प्रकार"
+msgstr "Vrsta"
 
 #: src/ui/views/transactiondialog.cpp:51
 msgctxt "Transaction|Edition"
 msgid "Income"
-msgstr "आय/कमाई"
+msgstr "Prihod"
 
 #: src/ui/views/transactiondialog.cpp:51
 msgctxt "Transaction|Edition"
 msgid "Expense"
-msgstr "लागत/खर्च"
+msgstr "Rashod"
 
 #: src/ui/views/transactiondialog.cpp:55
 msgid "Repeat Interval"
-msgstr "दोहराई का समय अंतराल"
+msgstr "Interval ponavljanja"
 
 #: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
 msgid "Amount"
-msgstr "धनराशि"
+msgstr "Iznos"
 
 #: src/ui/views/transactiondialog.cpp:121
 msgid "Amount (Empty)"
-msgstr "धनराशि (खाली)"
+msgstr "Iznos (prazan)"
 
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
-msgstr "धनराशि (अवैध)"
-
-#~ msgid "No Accounts Open"
-#~ msgstr "कोई खाता नहीं खुला है"
+msgstr "Iznos (neispravan)"
 
 #~ msgid "Currency"
-#~ msgstr "मुद्रा"
+#~ msgstr "Valuta"
 
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
+#~ "A change in one of these settings will only be applied on newly opened accounts."
 #~ msgstr ""
-#~ "मुद्रा सेटिंग अनुकूलित करें।\n"
+#~ "Prilagodi postavke valute.\n"
 #~ "\n"
-#~ "इन सेटिंग्स में कोई भी परिवर्तन केवल नए खोले जाने वाले खातों पर ही लागू होगा।"
+#~ "Promjena jedne od ovih postavki primijenit će se samo na novootvorene račune."
 
 #~ msgid "Currency Symbol"
-#~ msgstr "मुद्रा का चिन्ह"
+#~ msgstr "Simbol valute"
 
 #~ msgid "Display Currency Symbol On Right"
-#~ msgstr "मुद्रा के चिन्ह को दाईं ओर दिखाएँ"
+#~ msgstr "Prikaži simbol valute desno"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr "यदि चयनित किया जाए, तो मुद्रा का चिह्न मूल्य के दाईं ओर दिखाया जाएगा।"
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
+#~ msgstr "Ako je označeno, simbol valute će se prikazati iza novčane vrijednosti."
