@@ -234,7 +234,7 @@ msgstr "नया"
 
 #: src/ui/views/mainwindow.cpp:44
 msgid "New Account (Ctrl+N)"
-msgstr "नया खाता (Ctrl+G)"
+msgstr "नया खाता (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
 msgid "Open Account (Ctrl+O)"
