@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 00:31+0300\n"
+"POT-Creation-Date: 2022-11-15 22:56+0300\n"
 "PO-Revision-Date: 2022-11-15 00:36+0300\n"
 "Last-Translator: Fyodor Sobolev\n"
 "Language: ru\n"
@@ -27,6 +27,22 @@ msgstr "Невозможно экспортировать в CSV."
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "Импортировано транзакций из CSV: %d."
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgid "Good Afternoon!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Evening!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Day!"
+msgstr ""
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -151,16 +167,16 @@ msgstr "Новая транзакция (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Транзакции"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:224
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
 msgid "_Save"
 msgstr "_Сохранить"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:224 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
 msgstr "_Отмена"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
 msgstr "_Открыть"
 
@@ -237,56 +253,57 @@ msgstr "Новый счёт (Ctrl+N)"
 msgid "Open Account (Ctrl+O)"
 msgstr "Открыть счёт (Ctrl+O)"
 
-#: src/ui/views/mainwindow.cpp:75
+#: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
 msgstr "Меню счёта"
 
-#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Настройки"
 
-#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:82 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Сочетания клавиш"
 
-#: src/ui/views/mainwindow.cpp:82
+#: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
 msgstr "О приложении %s"
 
-#: src/ui/views/mainwindow.cpp:85
+#: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/ui/views/mainwindow.cpp:102 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Новый счёт"
 
-#: src/ui/views/mainwindow.cpp:110 src/ui/views/mainwindow.cpp:224
-#: src/ui/views/mainwindow.cpp:253 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Открыть счёт"
 
-#: src/ui/views/mainwindow.cpp:114
+#: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
 msgstr "Вы также можете перетащить сюда файл из вашего файлового менеджера."
 
-#: src/ui/views/mainwindow.cpp:125
+#: src/ui/views/mainwindow.cpp:126
 msgid "Recent Accounts"
 msgstr "Недавние счета"
 
-#: src/ui/views/mainwindow.cpp:132
-msgid "Welcome!"
-msgstr "Добро пожаловать!"
-
-#: src/ui/views/mainwindow.cpp:133
+#: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Откройте или создайте счёт, чтобы начать."
 
-#: src/ui/views/mainwindow.cpp:227 src/ui/views/mainwindow.cpp:256
+#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
 msgid "Money Account (*.nmoney)"
 msgstr "Счёт приложения Money (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:245
+#, fuzzy
+msgid "Unable to override an opened account."
+msgstr "Невозможно экспортировать в CSV."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -382,6 +399,9 @@ msgstr "Сумма (Пусто)"
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "Сумма (Некорректная)"
+
+#~ msgid "Welcome!"
+#~ msgstr "Добро пожаловать!"
 
 #~ msgid "No Accounts Open"
 #~ msgstr "Нет открытых счетов"

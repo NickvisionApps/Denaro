@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 05:03+0530\n"
+"POT-Creation-Date: 2022-11-15 22:56+0300\n"
 "PO-Revision-Date: 2022-11-15 13:53+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: \n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:63
@@ -30,6 +31,22 @@ msgstr "Nije moguće izvesti račun kao CSV datoteku."
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "Uvezene transakcije iz CSV datoteke: %d."
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgid "Good Afternoon!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Evening!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Day!"
+msgstr ""
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -154,16 +171,16 @@ msgstr "Nova transakcija (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transakcije"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:202
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
 msgid "_Save"
 msgstr "_Spremi"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:202 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
 msgstr "O_dustani"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:231
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
 msgstr "_Otvori"
 
@@ -240,48 +257,58 @@ msgstr "Novi račun (Ctrl+N)"
 msgid "Open Account (Ctrl+O)"
 msgstr "Otvori račun (Ctrl+O)"
 
-#: src/ui/views/mainwindow.cpp:75
+#: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
 msgstr "Izbornik računa"
 
-#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Postavke"
 
-#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:82 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovni prečaci"
 
-#: src/ui/views/mainwindow.cpp:82
+#: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
 msgstr "Informacije o %s"
 
-#: src/ui/views/mainwindow.cpp:85
+#: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
 msgstr "Glavni izbornik"
 
-#: src/ui/views/mainwindow.cpp:100 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Novi račun"
 
-#: src/ui/views/mainwindow.cpp:108 src/ui/views/mainwindow.cpp:202
-#: src/ui/views/mainwindow.cpp:231 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Otvori račun"
 
-#: src/ui/views/mainwindow.cpp:114
-msgid "No Accounts Open"
-msgstr "Nema otvorenih računa"
-
 #: src/ui/views/mainwindow.cpp:115
+msgid "You may also drag in a file from your file browser to open."
+msgstr ""
+
+#: src/ui/views/mainwindow.cpp:126
+#, fuzzy
+msgid "Recent Accounts"
+msgstr "Otvori račun"
+
+#: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Otvori ili stvori jedan račun."
 
-#: src/ui/views/mainwindow.cpp:205 src/ui/views/mainwindow.cpp:234
+#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
 msgid "Money Account (*.nmoney)"
 msgstr "Money račun (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:245
+#, fuzzy
+msgid "Unable to override an opened account."
+msgstr "Nije moguće izvesti račun kao CSV datoteku."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -378,17 +405,22 @@ msgstr "Iznos (prazan)"
 msgid "Amount (Invalid)"
 msgstr "Iznos (neispravan)"
 
+#~ msgid "No Accounts Open"
+#~ msgstr "Nema otvorenih računa"
+
 #~ msgid "Currency"
 #~ msgstr "Valuta"
 
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened accounts."
+#~ "A change in one of these settings will only be applied on newly opened "
+#~ "accounts."
 #~ msgstr ""
 #~ "Prilagodi postavke valute.\n"
 #~ "\n"
-#~ "Promjena jedne od ovih postavki primijenit će se samo na novootvorene račune."
+#~ "Promjena jedne od ovih postavki primijenit će se samo na novootvorene "
+#~ "račune."
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Simbol valute"
@@ -396,5 +428,8 @@ msgstr "Iznos (neispravan)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Prikaži simbol valute desno"
 
-#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
-#~ msgstr "Ako je označeno, simbol valute će se prikazati iza novčane vrijednosti."
+#~ msgid ""
+#~ "If checked, the currency symbol will be displayed on the right of a "
+#~ "monetary value."
+#~ msgstr ""
+#~ "Ako je označeno, simbol valute će se prikazati iza novčane vrijednosti."

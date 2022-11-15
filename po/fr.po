@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 00:31+0300\n"
+"POT-Creation-Date: 2022-11-15 22:56+0300\n"
 "PO-Revision-Date: 2022-11-06 10:02+0100\n"
 "Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
 "Language: fr\n"
@@ -27,6 +27,22 @@ msgstr "Impossible d'exporter le compte au format CSV"
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "%d transaction importées depuis le CSV"
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgid "Good Afternoon!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Evening!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Day!"
+msgstr ""
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -151,16 +167,16 @@ msgstr "Nouvelle transaction (Ctrl+Maj+N)"
 msgid "Transactions"
 msgstr "Transactions"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:224
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
 msgid "_Save"
 msgstr "_Enregistrer"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:224 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
 msgstr "_Ouvrir"
 
@@ -240,57 +256,58 @@ msgstr "Nouveau groupe (Ctrl+G)"
 msgid "Open Account (Ctrl+O)"
 msgstr "Ouvrir un compte"
 
-#: src/ui/views/mainwindow.cpp:75
+#: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
 msgstr "Menu des comptes"
 
-#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:82 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: src/ui/views/mainwindow.cpp:82
+#: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
 msgstr "À propos de %s"
 
-#: src/ui/views/mainwindow.cpp:85
+#: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: src/ui/views/mainwindow.cpp:102 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: src/ui/views/mainwindow.cpp:110 src/ui/views/mainwindow.cpp:224
-#: src/ui/views/mainwindow.cpp:253 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Ouvrir un compte"
 
-#: src/ui/views/mainwindow.cpp:114
+#: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
 msgstr ""
 
-#: src/ui/views/mainwindow.cpp:125
+#: src/ui/views/mainwindow.cpp:126
 #, fuzzy
 msgid "Recent Accounts"
 msgstr "Ouvrir un compte"
 
-#: src/ui/views/mainwindow.cpp:132
-msgid "Welcome!"
-msgstr ""
-
-#: src/ui/views/mainwindow.cpp:133
+#: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Ouvrez ou créez un compte pour commencer"
 
-#: src/ui/views/mainwindow.cpp:227 src/ui/views/mainwindow.cpp:256
+#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
 msgid "Money Account (*.nmoney)"
 msgstr "Compte Money (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:245
+#, fuzzy
+msgid "Unable to override an opened account."
+msgstr "Impossible d'exporter le compte au format CSV"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"

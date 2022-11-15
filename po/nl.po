@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 00:31+0300\n"
+"POT-Creation-Date: 2022-11-15 22:56+0300\n"
 "PO-Revision-Date: 2022-11-14 11:46+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -29,6 +29,22 @@ msgstr "De rekening kan niet worden geëxporteerd."
 #, c-format
 msgid "Imported %d transactions from CSV."
 msgstr "Er zijn %d transacties geïmporteerd uit het csv-bestand."
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgid "Good Morning!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgid "Good Afternoon!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Evening!"
+msgstr ""
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Day!"
+msgstr ""
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -153,16 +169,16 @@ msgstr "Nieuwe transactie (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transacties"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:224
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
 msgid "_Save"
 msgstr "Op_slaan"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:224 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
 msgid "_Cancel"
 msgstr "_Annuleren"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:253
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
 msgid "_Open"
 msgstr "_Openen"
 
@@ -239,57 +255,58 @@ msgstr "Nieuwe rekening (Ctrl+N)"
 msgid "Open Account (Ctrl+O)"
 msgstr "Rekening openen (Ctrl+O)"
 
-#: src/ui/views/mainwindow.cpp:75
+#: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
 msgstr "Rekeningmenu"
 
-#: src/ui/views/mainwindow.cpp:80 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/mainwindow.cpp:81 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: src/ui/views/mainwindow.cpp:81 src/ui/views/shortcutsdialog.cpp:105
+#: src/ui/views/mainwindow.cpp:82 src/ui/views/shortcutsdialog.cpp:105
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: src/ui/views/mainwindow.cpp:82
+#: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
 msgstr "Over %s"
 
-#: src/ui/views/mainwindow.cpp:85
+#: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: src/ui/views/mainwindow.cpp:102 src/ui/views/shortcutsdialog.cpp:96
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/shortcutsdialog.cpp:96
 msgid "New Account"
 msgstr "Rekening toevoegen"
 
-#: src/ui/views/mainwindow.cpp:110 src/ui/views/mainwindow.cpp:224
-#: src/ui/views/mainwindow.cpp:253 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Rekening openen"
 
-#: src/ui/views/mainwindow.cpp:114
+#: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
 msgstr ""
 
-#: src/ui/views/mainwindow.cpp:125
+#: src/ui/views/mainwindow.cpp:126
 #, fuzzy
 msgid "Recent Accounts"
 msgstr "Rekening openen"
 
-#: src/ui/views/mainwindow.cpp:132
-msgid "Welcome!"
-msgstr ""
-
-#: src/ui/views/mainwindow.cpp:133
+#: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Open een rekening of voeg er een toe om aan de slag te gaan."
 
-#: src/ui/views/mainwindow.cpp:227 src/ui/views/mainwindow.cpp:256
+#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
 msgid "Money Account (*.nmoney)"
 msgstr "Money-rekening (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:245
+#, fuzzy
+msgid "Unable to override an opened account."
+msgstr "De rekening kan niet worden geëxporteerd."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
