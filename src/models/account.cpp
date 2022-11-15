@@ -36,8 +36,16 @@ unsigned int stoui(const std::string& str, size_t* idx = nullptr, int base = 10)
 Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shared<SQLite::Database>(m_path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE) }
 {
     //Load Groups
-    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, balance TEXT)");
-    SQLite::Statement qryGetAllGroups{ *m_db, "SELECT * FROM groups" };
+    m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
+    //Load Transactions
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
+    try
+    {
+        m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
+    }
+    catch(...) { }
+    // Queries
+    SQLite::Statement qryGetAllGroups{ *m_db, "SELECT g.*, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM groups g LEFT JOIN transactions t ON t.gid = g.id GROUP BY g.id;" };
     while(qryGetAllGroups.executeStep())
     {
         Group group{ (unsigned int)qryGetAllGroups.getColumn(0).getInt() };
@@ -46,13 +54,6 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         group.setBalance(boost::multiprecision::cpp_dec_float_50(qryGetAllGroups.getColumn(3).getString()));
         m_groups.insert({ group.getId(), group });
     }
-    //Load Transactions
-    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
-    try
-    {
-        m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
-    }
-    catch(...) { }
     SQLite::Statement qryGetAllTransactions{ *m_db, "SELECT * FROM transactions" };
     while(qryGetAllTransactions.executeStep())
     {
@@ -172,13 +173,10 @@ unsigned int Account::getNextAvailableGroupId() const
 
 bool Account::addGroup(const Group& group)
 {
-    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description, balance) VALUES (?, ?, ?, ?)" };
-    std::stringstream strBalance;
-    strBalance << group.getBalance();
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO groups (id, name, description) VALUES (?, ?, ?)" };
     qryInsert.bind(1, group.getId());
     qryInsert.bind(2, group.getName());
     qryInsert.bind(3, group.getDescription());
-    qryInsert.bind(4, strBalance.str());
     if(qryInsert.exec() > 0)
     {
         m_groups.insert({ group.getId(), group });
@@ -189,12 +187,9 @@ bool Account::addGroup(const Group& group)
 
 bool Account::updateGroup(const Group& group)
 {
-    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ?, balance = ? WHERE id = " + std::to_string(group.getId()) };
-    std::stringstream strBalance;
-    strBalance << group.getBalance();
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE groups SET name = ?, description = ? WHERE id = " + std::to_string(group.getId()) };
     qryUpdate.bind(1, group.getName());
     qryUpdate.bind(2, group.getDescription());
-    qryUpdate.bind(3, strBalance.str());
     if(qryUpdate.exec() > 0)
     {
         m_groups[group.getId()] = group;
@@ -351,7 +346,7 @@ bool Account::exportAsCSV(const std::string& path)
     std::ofstream file{ path };
     if(file.is_open())
     {
-        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group\n";
+        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group,GroupName,GroupDescription\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
             file << pair.second.getId() << ",";
@@ -360,7 +355,14 @@ bool Account::exportAsCSV(const std::string& path)
             file << static_cast<int>(pair.second.getType()) << ",";
             file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
             file << pair.second.getAmount() << ",";
-            file << pair.second.getGroupId() << "\n";
+            file << pair.second.getGroupId() << ",";
+            if (pair.second.getGroupId() != -1)
+            {
+                file << m_groups.at(pair.second.getGroupId()).getName() << ",";
+                file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
+            } else {
+                file << ",\n";
+            }
         }
         return true;
     }
@@ -378,7 +380,7 @@ int Account::importFromCSV(const std::string& path)
         {
             //Separate fields by ,
             std::vector<std::string> fields{ split(line, ",") };
-            if(fields.size() != 7)
+            if(fields.size() != 9)
             {
                 continue;
             }
@@ -450,21 +452,19 @@ int Account::importFromCSV(const std::string& path)
             }
             //Get Group Id
             int gid{ 0 };
-            if(gid != -1)
+            try
             {
-                try
-                {
-                    gid = stoui(fields[6]);
-                }
-                catch(...)
-                {
-                    continue;
-                }
-                if(getGroupById(gid) != std::nullopt)
-                {
-                    continue;
-                }
+                gid = stoui(fields[6]);
             }
+            catch(...)
+            {
+                continue;
+            }
+            //Get Group Name
+            const std::string& groupName{ fields[7] };
+            //Get Group Description
+            const std::string& groupDescription{ fields[8] };
+
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);
@@ -474,25 +474,29 @@ int Account::importFromCSV(const std::string& path)
             transaction.setAmount(amount);
             transaction.setGroupId(gid);
             addTransaction(transaction);
+
+            //Add Group if needed
+            if (getGroupById(gid) == std::nullopt && gid != -1)
+            {
+                Group group{ (unsigned int) gid };
+                group.setName(groupName);
+                group.setDescription(groupDescription);
+                addGroup(group);
+            }
+
             imported++;
         }
     }
+    updateGroupAmounts();
     return imported;
 }
 
 void Account::updateGroupAmounts()
 {
-    for(std::pair<const unsigned int, Group>& pair : m_groups)
+    //Query for balance in SQL
+    SQLite::Statement qryGetGroupsBalance{ *m_db, "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;" };
+    while(qryGetGroupsBalance.executeStep())
     {
-        pair.second.setBalance(0);
-    }
-    for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
-    {
-        if(pair.second.getGroupId() != -1)
-        {
-            Group group{ m_groups.at(pair.second.getGroupId()) };
-            group.setBalance(group.getBalance() + (pair.second.getType() == TransactionType::Income ? pair.second.getAmount() : (pair.second.getAmount() * -1)));
-            updateGroup(group);
-        }
+        m_groups.at(qryGetGroupsBalance.getColumn(0).getInt()).setBalance(boost::multiprecision::cpp_dec_float_50(qryGetGroupsBalance.getColumn(1).getString()));
     }
 }
