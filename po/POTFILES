@@ -12,3 +12,4 @@ src/ui/views/mainwindow.cpp
 src/ui/views/preferencesdialog.cpp
 src/ui/views/shortcutsdialog.cpp
 src/ui/views/transactiondialog.cpp
+org.nickvision.money.desktop

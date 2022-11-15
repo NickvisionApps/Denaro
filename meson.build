@@ -14,9 +14,19 @@ subdir('src')
 subdir('po')
 
 executable('org.nickvision.money', sources, dependencies: [threads, adwaita, jsoncpp, dl, sqlitecpp, boost], install: true)
+
+# Desktop file
+po_dir = join_paths(meson.project_source_root(), 'po')
+desktop_file = i18n.merge_file(
+        input: join_paths(meson.project_source_root(), 'org.nickvision.money.desktop'),
+       output: 'org.nickvision.money.desktop',
+         type: 'desktop',
+       po_dir: po_dir,
+      install: true,
+  install_dir: 'share/applications')
+
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')
 install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps')
 install_data(resources_actions, install_dir: 'share/icons/hicolor/scalable/actions')
-install_data('org.nickvision.money.desktop', install_dir: 'share/applications')
 install_data('org.nickvision.money.metainfo.xml', install_dir: 'share/metainfo')
 gnome.post_install(gtk_update_icon_cache: true, update_desktop_database: true)
