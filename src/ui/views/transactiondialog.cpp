@@ -32,7 +32,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_widget_add_css_class(m_btnDate, "flat");
     gtk_widget_set_valign(m_btnDate, GTK_ALIGN_CENTER);
     gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnDate), m_popoverDate);
-    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
+    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%x"));
     m_rowDate = adw_action_row_new();
     gtk_widget_set_size_request(m_rowDate, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDate), _("Date"));
@@ -139,6 +139,7 @@ void TransactionDialog::setResponse(const std::string& response)
 
 void TransactionDialog::onDateChanged()
 {
-    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"));
+    gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%x"));
     gtk_popover_popdown(GTK_POPOVER(m_popoverDate));
 }
+

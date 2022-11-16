@@ -16,7 +16,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_gobj), builder.str().c_str());
     builder.str("");
     builder.clear();
-    builder << boost::gregorian::to_iso_extended_string(m_transaction.getDate());
+    builder << g_date_time_format(g_date_time_new_local(m_transaction.getDate().year(), m_transaction.getDate().month(), m_transaction.getDate().day(), 0, 0, 0.0), "%x");
     if(m_transaction.getRepeatInterval() != RepeatInterval::Never)
     {
         builder << "\n" << _("Repeat Interval: ") << m_transaction.getRepeatIntervalAsString();
