@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-15 23:19+0300\n"
-"PO-Revision-Date: 2022-11-15 13:53+0100\n"
+"PO-Revision-Date: 2022-11-16 16:24+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -35,24 +35,24 @@ msgstr "Uvezene transakcije iz CSV datoteke: %d."
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Dobro jutro!"
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Dobro jutro!"
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Dobar dan!"
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "Dobra večer!"
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "Dobar dan!"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -296,12 +296,11 @@ msgstr "Otvori račun"
 
 #: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgstr "Datoteku možeš otvoriti i povlačenjem iz preglednika datoteka."
 
 #: src/ui/views/mainwindow.cpp:126
-#, fuzzy
 msgid "Recent Accounts"
-msgstr "Otvori račun"
+msgstr "Nedavni računi"
 
 #: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
@@ -312,9 +311,8 @@ msgid "Money Account (*.nmoney)"
 msgstr "Money račun (*.nmoney)"
 
 #: src/ui/views/mainwindow.cpp:245
-#, fuzzy
 msgid "Unable to override an opened account."
-msgstr "Nije moguće izvesti račun kao CSV datoteku."
+msgstr "Nije moguće prepisati istoimen otvoreni račun."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
