@@ -29,13 +29,11 @@ msgid "Imported %d transactions from CSV."
 msgstr "Импортировано транзакций из CSV: %d."
 
 #: src/controllers/mainwindowcontroller.cpp:49
-#, fuzzy
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Доброй ночи!"
 
 #: src/controllers/mainwindowcontroller.cpp:53
-#, fuzzy
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Доброе утро!"
@@ -309,7 +307,6 @@ msgid "Money Account (*.nmoney)"
 msgstr "Счёт приложения Money (*.nmoney)"
 
 #: src/ui/views/mainwindow.cpp:245
-#, fuzzy
 msgid "Unable to override an opened account."
 msgstr "Невозможно перезаписать открытый счёт."
 
