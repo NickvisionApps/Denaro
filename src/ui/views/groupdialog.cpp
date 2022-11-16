@@ -42,6 +42,7 @@ GtkWidget* GroupDialog::gobj()
 bool GroupDialog::run()
 {
     gtk_widget_show(m_gobj);
+    gtk_window_set_modal(GTK_WINDOW(m_gobj), true);
     gtk_widget_grab_focus(m_rowName);
     while(gtk_widget_is_visible(m_gobj))
     {
@@ -50,6 +51,7 @@ bool GroupDialog::run()
     if(m_controller.getResponse() == "ok")
     {
         gtk_widget_hide(m_gobj);
+        gtk_window_set_modal(GTK_WINDOW(m_gobj), false);
         GroupCheckStatus status{ m_controller.updateGroup(gtk_editable_get_text(GTK_EDITABLE(m_rowName)), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription))) };
         //Invalid Group
         if(status != GroupCheckStatus::Valid)
