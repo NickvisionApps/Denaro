@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 23:19+0300\n"
-"PO-Revision-Date: 2022-11-14 16:39+0100\n"
+"POT-Creation-Date: 2022-11-16 15:11+0100\n"
+"PO-Revision-Date: 2022-11-16 15:13+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it\n"
@@ -34,24 +34,24 @@ msgstr "Importate %d transazioni dal file CSV."
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Buongiorno!"
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Buongiorno!"
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Buon pomeriggio!"
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "Buona sera!"
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "Buongiorno!"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -176,16 +176,16 @@ msgstr "Nuova transazione (Ctrl+Maiusc+N)"
 msgid "Transactions"
 msgstr "Transazioni"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:243
 msgid "_Save"
 msgstr "Salva"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/mainwindow.cpp:243 src/ui/views/mainwindow.cpp:279
 msgid "_Cancel"
 msgstr "Annulla"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:279
 msgid "_Open"
 msgstr "Apri"
 
@@ -288,32 +288,30 @@ msgstr "Menu principale"
 msgid "New Account"
 msgstr "Nuovo account"
 
-#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
-#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:243
+#: src/ui/views/mainwindow.cpp:279 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Apri account"
 
 #: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgstr "È anche possibile trascinare un file per aprirlo."
 
 #: src/ui/views/mainwindow.cpp:126
-#, fuzzy
 msgid "Recent Accounts"
-msgstr "Apri account"
+msgstr "Account recenti"
 
 #: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Apri o crea un account per cominciare."
 
-#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
+#: src/ui/views/mainwindow.cpp:246 src/ui/views/mainwindow.cpp:282
 msgid "Money Account (*.nmoney)"
 msgstr "Account Money (*.nmoney)"
 
-#: src/ui/views/mainwindow.cpp:245
-#, fuzzy
+#: src/ui/views/mainwindow.cpp:259
 msgid "Unable to override an opened account."
-msgstr "Impossibile esportare l'account come CSV."
+msgstr "Non è possibile sovrascrivere un account aperto."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -419,8 +417,7 @@ msgstr "Ammontare (non valido)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
+#~ "A change in one of these settings will only be applied on newly opened accounts."
 #~ msgstr ""
 #~ "Personalizza le impostazioni della valuta.\n"
 #~ "\n"
@@ -432,9 +429,5 @@ msgstr "Ammontare (non valido)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Mostra il simbolo della valuta a destra"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
-#~ "monetario."
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
+#~ msgstr "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore monetario."
