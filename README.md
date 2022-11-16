@@ -17,8 +17,8 @@
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/202083015-1a48ec33-84b9-476d-ab66-db9ff507d692.png)
-![Transactions](https://user-images.githubusercontent.com/17648453/202083023-4e29f13a-cca6-4a74-a55e-ddf33306bf81.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/202083033-c8c055a1-2b7c-4e46-b614-cb0d5882e574.png)
+![Transactions](https://user-images.githubusercontent.com/17648453/202083234-0cf0a733-3ba4-4270-a929-9dd857bdca33.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/202083236-da62f46d-8f69-4297-a2b6-4118cbc464b3.png)
 ![TransactionDialog](https://user-images.githubusercontent.com/17648453/202083040-302f7784-a497-4f00-8e22-846f8a1908e7.png)
 
 # Translating
