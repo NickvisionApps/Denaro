@@ -16,11 +16,10 @@
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/198850728-c9131275-3093-41b4-a6e4-f831e6ef8223.png)
-![OpenAccount](https://user-images.githubusercontent.com/17648453/198850730-9abbf78d-beaf-4c49-a560-7c88d63c6bea.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/198850732-48228e49-24ee-4612-a530-29512dd6901d.png)
-![TransactionDialog](https://user-images.githubusercontent.com/17648453/198850736-b9036208-9bc9-4ed1-8704-ac902e03ef91.png)
-![SettingsDialog](https://user-images.githubusercontent.com/17648453/198850738-deaa280c-5484-4835-912e-926977491a3e.png)
+![MainWindow](https://user-images.githubusercontent.com/17648453/202083015-1a48ec33-84b9-476d-ab66-db9ff507d692.png)
+![Transactions](https://user-images.githubusercontent.com/17648453/202083023-4e29f13a-cca6-4a74-a55e-ddf33306bf81.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/202083033-c8c055a1-2b7c-4e46-b614-cb0d5882e574.png)
+![TransactionDialog](https://user-images.githubusercontent.com/17648453/202083040-302f7784-a497-4f00-8e22-846f8a1908e7.png)
 
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
