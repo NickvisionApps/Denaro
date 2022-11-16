@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-15 23:19+0300\n"
-"PO-Revision-Date: 2022-11-14 11:46+0100\n"
+"PO-Revision-Date: 2022-11-16 11:34+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -33,24 +33,24 @@ msgstr "Er zijn %d transacties geïmporteerd uit het csv-bestand."
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Goedemorgen!"
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Goedemorgen!"
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Goedemiddag!"
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "Goedenavond!"
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "Goedendag!"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -294,12 +294,11 @@ msgstr "Rekening openen"
 
 #: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgstr "U kunt ook een bestand hierheen slepen."
 
 #: src/ui/views/mainwindow.cpp:126
-#, fuzzy
 msgid "Recent Accounts"
-msgstr "Rekening openen"
+msgstr "Onlangs gebruikte rekeningen"
 
 #: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
@@ -310,9 +309,8 @@ msgid "Money Account (*.nmoney)"
 msgstr "Money-rekening (*.nmoney)"
 
 #: src/ui/views/mainwindow.cpp:245
-#, fuzzy
 msgid "Unable to override an opened account."
-msgstr "De rekening kan niet worden geëxporteerd."
+msgstr "Een rekening kan slechts eenmaal worden geopend."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -418,11 +416,8 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid ""
 #~ "Customize currency settings.\n"
 #~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast "
-#~ "op nieuwe rekeningen. "
+#~ "A change in one of these settings will only be applied on newly opened accounts."
+#~ msgstr "Pas de valutavoorkeuren aan. Let op: wijzigingen worden alléén toegepast op nieuwe rekeningen. "
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Valutasymbool"
@@ -430,7 +425,5 @@ msgstr "Bedrag (ongeldig)"
 #~ msgid "Display Currency Symbol On Right"
 #~ msgstr "Valutasymbool rechts van bedragen tonen"
 
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
+#~ msgid "If checked, the currency symbol will be displayed on the right of a monetary value."
 #~ msgstr "Schakel in om het valutasymbool rechts van bedragen te tonen."
