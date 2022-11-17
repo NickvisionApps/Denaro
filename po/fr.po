@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 05:03+0530\n"
-"PO-Revision-Date: 2022-11-06 10:02+0100\n"
+"POT-Creation-Date: 2022-11-17 10:23+0100\n"
+"PO-Revision-Date: 2022-11-17 10:27+0100\n"
 "Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -219,26 +219,23 @@ msgstr "Description (vide)"
 
 #: src/ui/views/groupdialog.cpp:76
 msgid "Name (Exists)"
-msgstr ""
+msgstr "Nom (déjà utilisé)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr ""
+msgstr "Récents"
 
 #: src/ui/views/mainwindow.cpp:41
-#, fuzzy
 msgid "New"
 msgstr "Nouveau"
 
 #: src/ui/views/mainwindow.cpp:44
-#, fuzzy
 msgid "New Account (Ctrl+N)"
-msgstr "Nouveau groupe (Ctrl+G)"
+msgstr "Nouveau compte (Ctrl+G)"
 
 #: src/ui/views/mainwindow.cpp:50
-#, fuzzy
 msgid "Open Account (Ctrl+O)"
-msgstr "Ouvrir un compte"
+msgstr "Ouvrir un compte (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:75
 msgid "Account Menu"
@@ -377,29 +374,3 @@ msgstr "Montant (vide)"
 #: src/ui/views/transactiondialog.cpp:126
 msgid "Amount (Invalid)"
 msgstr "Montant (invalide)"
-
-#~ msgid "Currency"
-#~ msgstr "Monnaie"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Personnaliser les paramètres de monnaie.\n"
-#~ "\n"
-#~ "Les changements ne seront appliqués qu'à l'ouverture d'un compte."
-
-#~ msgid "Currency Symbol"
-#~ msgstr "Symbole monétaire"
-
-#~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Afficher le symbole monétaire à droite"
-
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Quand cette option est cochée, le symbole monétaire apparaît à droite de "
-#~ "la valeur."
