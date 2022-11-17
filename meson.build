@@ -1,4 +1,4 @@
-project('org.nickvision.money', ['cpp', 'c'], version: '2022.11.0', meson_version: '>= 0.63.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
+project('org.nickvision.money', ['cpp', 'c'], version: '2022.11.1', meson_version: '>= 0.63.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
 
 gnome = import('gnome')
 
