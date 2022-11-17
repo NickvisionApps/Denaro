@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-15 23:19+0300\n"
-"PO-Revision-Date: 2022-11-14 05:04+0530\n"
+"PO-Revision-Date: 2022-11-17 08:02+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
 "org/hindi\n"
@@ -34,24 +34,27 @@ msgstr "CSV से %d लेनदेन आयात कर दिए गए।
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "सुप्रभात"
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "नमस्ते!"
+# People use 'सुप्रभात', but 'नमस्ते' is used here so that it looks synced with all other strings being 'नमस्ते'
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "नमस्ते!"
+# We have literal translations, but no one colloquially uses them.
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "नमस्ते!"
+# We have literal translations, but no one colloquially uses them.
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "नमस्ते!"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -278,7 +281,7 @@ msgstr "कीबोर्ड शॉर्टकट"
 #: src/ui/views/mainwindow.cpp:83
 #, c-format
 msgid "About %s"
-msgstr "%s के बारे में"
+msgstr "%s का परिचय"
 
 #: src/ui/views/mainwindow.cpp:86
 msgid "Main Menu"
@@ -295,12 +298,11 @@ msgstr "खाता खोलें"
 
 #: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgstr "आप किसी फ़ाइल को खोलने के लिए अपने फ़ाइल ब्राउज़र से ड्रैग भी कर सकते हैं।"
 
 #: src/ui/views/mainwindow.cpp:126
-#, fuzzy
 msgid "Recent Accounts"
-msgstr "खाता खोलें"
+msgstr "हाल ही में उपयोग किए गए खाते"
 
 #: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
@@ -311,9 +313,8 @@ msgid "Money Account (*.nmoney)"
 msgstr "मनी खाता (*.nmoney)"
 
 #: src/ui/views/mainwindow.cpp:245
-#, fuzzy
 msgid "Unable to override an opened account."
-msgstr "खाते को CSV के रूप में निर्यात करने में असमर्थ।"
+msgstr "खुले खाते को अधिलेखित (ओवरराइड) करने में असमर्थ"
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
