@@ -34,7 +34,8 @@ msgstr "CSV से %d लेनदेन आयात कर दिए गए।
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr "सुप्रभात"
+msgstr "नमस्ते!"
+# People use 'सुप्रभात', but 'नमस्ते' is used here so that it looks synced with all other strings being 'नमस्ते'
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
