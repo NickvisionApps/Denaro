@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 23:19+0300\n"
+"POT-Creation-Date: 2022-11-17 10:33+0100\n"
 "PO-Revision-Date: 2022-11-06 10:02+0100\n"
 "Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
 "Language: fr\n"
@@ -31,24 +31,24 @@ msgstr "%d transaction importées depuis le CSV"
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Bonjour !"
 
 #: src/controllers/mainwindowcontroller.cpp:53
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Bonjour !"
 
 #: src/controllers/mainwindowcontroller.cpp:57
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Bonjour !"
 
 #: src/controllers/mainwindowcontroller.cpp:61
 msgid "Good Evening!"
-msgstr ""
+msgstr "Bonsoir !"
 
 #: src/controllers/mainwindowcontroller.cpp:65
 msgid "Good Day!"
-msgstr ""
+msgstr "Bonne journée !"
 
 #: src/controllers/transactiondialogcontroller.cpp:17
 #: src/controllers/transactiondialogcontroller.cpp:27
@@ -173,16 +173,16 @@ msgstr "Nouvelle transaction (Ctrl+Maj+N)"
 msgid "Transactions"
 msgstr "Transactions"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:243
 msgid "_Save"
 msgstr "_Enregistrer"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/mainwindow.cpp:243 src/ui/views/mainwindow.cpp:279
 msgid "_Cancel"
 msgstr "_Annuler"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:279
 msgid "_Open"
 msgstr "_Ouvrir"
 
@@ -222,45 +222,42 @@ msgstr ""
 msgid "Group"
 msgstr "Groupe"
 
-#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:59
+#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:61
 msgid "Name"
 msgstr "Nom"
 
-#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
-#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
+#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:63
+#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:111
 msgid "Description"
 msgstr "Description"
 
-#: src/ui/views/groupdialog.cpp:66
+#: src/ui/views/groupdialog.cpp:68
 msgid "Name (Empty)"
 msgstr "Nom (vide)"
 
-#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
+#: src/ui/views/groupdialog.cpp:73 src/ui/views/transactiondialog.cpp:118
 msgid "Description (Empty)"
 msgstr "Description (vide)"
 
-#: src/ui/views/groupdialog.cpp:76
+#: src/ui/views/groupdialog.cpp:78
 msgid "Name (Exists)"
-msgstr ""
+msgstr "Nom (existe déjà)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr ""
+msgstr "Récents"
 
 #: src/ui/views/mainwindow.cpp:41
-#, fuzzy
 msgid "New"
 msgstr "Nouveau"
 
 #: src/ui/views/mainwindow.cpp:44
-#, fuzzy
 msgid "New Account (Ctrl+N)"
-msgstr "Nouveau groupe (Ctrl+G)"
+msgstr "Nouveau compte (Ctrl+N)"
 
 #: src/ui/views/mainwindow.cpp:50
-#, fuzzy
 msgid "Open Account (Ctrl+O)"
-msgstr "Ouvrir un compte"
+msgstr "Ouvrir un compte (Ctrl+O)"
 
 #: src/ui/views/mainwindow.cpp:76
 msgid "Account Menu"
@@ -288,32 +285,30 @@ msgstr "Menu principal"
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
-#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:243
+#: src/ui/views/mainwindow.cpp:279 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Ouvrir un compte"
 
 #: src/ui/views/mainwindow.cpp:115
 msgid "You may also drag in a file from your file browser to open."
-msgstr ""
+msgstr "Vous pouvez aussi glisser-déposer un fichier depuis votre explorateur de fichier."
 
 #: src/ui/views/mainwindow.cpp:126
-#, fuzzy
 msgid "Recent Accounts"
-msgstr "Ouvrir un compte"
+msgstr "Compte récents"
 
 #: src/ui/views/mainwindow.cpp:140
 msgid "Open or create an account to get started."
 msgstr "Ouvrez ou créez un compte pour commencer"
 
-#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
+#: src/ui/views/mainwindow.cpp:246 src/ui/views/mainwindow.cpp:282
 msgid "Money Account (*.nmoney)"
 msgstr "Compte Money (*.nmoney)"
 
-#: src/ui/views/mainwindow.cpp:245
-#, fuzzy
+#: src/ui/views/mainwindow.cpp:259
 msgid "Unable to override an opened account."
-msgstr "Impossible d'exporter le compte au format CSV"
+msgstr "Impossible de remplacer un compte ouvert."
 
 #: src/ui/views/preferencesdialog.cpp:20
 msgid "User Interface"
@@ -398,43 +393,14 @@ msgstr "Débit"
 msgid "Repeat Interval"
 msgstr "Répéter à intervalle"
 
-#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
+#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:113
 msgid "Amount"
 msgstr "Montant"
 
-#: src/ui/views/transactiondialog.cpp:121
+#: src/ui/views/transactiondialog.cpp:123
 msgid "Amount (Empty)"
 msgstr "Montant (vide)"
 
-#: src/ui/views/transactiondialog.cpp:126
+#: src/ui/views/transactiondialog.cpp:128
 msgid "Amount (Invalid)"
 msgstr "Montant (invalide)"
-
-#~ msgid "No Accounts Open"
-#~ msgstr "Aucun compte ouvert"
-
-#~ msgid "Currency"
-#~ msgstr "Monnaie"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Personnaliser les paramètres de monnaie.\n"
-#~ "\n"
-#~ "Les changements ne seront appliqués qu'à l'ouverture d'un compte."
-
-#~ msgid "Currency Symbol"
-#~ msgstr "Symbole monétaire"
-
-#~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Afficher le symbole monétaire à droite"
-
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Quand cette option est cochée, le symbole monétaire apparaît à droite de "
-#~ "la valeur."
