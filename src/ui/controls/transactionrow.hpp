@@ -49,6 +49,7 @@ namespace NickvisionMoney::UI::Controls
 		GtkWidget* m_lblAmount;
 		GtkWidget* m_btnEdit;
 		GtkWidget* m_btnDelete;
+		GtkGesture* m_gestureMouseClick;
 		/**
 		 * Occurs when the edit button is clicked
 		 */

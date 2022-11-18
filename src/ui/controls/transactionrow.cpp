@@ -55,8 +55,12 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     m_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_box), m_lblAmount);
     gtk_box_append(GTK_BOX(m_box), m_btnEdit);
-    //gtk_box_append(GTK_BOX(m_box), m_btnDelete);
+    gtk_box_append(GTK_BOX(m_box), m_btnDelete);
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_gobj), m_box);
+    //Mouse Click Gesture
+    m_gestureMouseClick = gtk_gesture_click_new();
+    g_signal_connect(m_gestureMouseClick, "pressed", G_CALLBACK((void (*)(GtkGesture*, int, double, double, gpointer))[](GtkGesture*, int, double, double, gpointer data) { adw_action_row_activate(ADW_ACTION_ROW(reinterpret_cast<TransactionRow*>(data)->m_gobj)); }), this);
+    gtk_widget_add_controller(m_gobj, GTK_EVENT_CONTROLLER(m_gestureMouseClick));
 }
 
 GtkWidget* TransactionRow::gobj()
