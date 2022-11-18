@@ -269,10 +269,10 @@ void AccountView::onAccountInfoChanged()
         m_groupRows.push_back(row);
     }
     //Transactions
-    //for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
-    //{
-    //    adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpTransactions), transactionRow->gobj());
-    //}
+    for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
+    {
+        gtk_flow_box_remove(GTK_FLOW_BOX(m_flowBox), transactionRow->gobj());
+    }
     m_transactionRows.clear();
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
