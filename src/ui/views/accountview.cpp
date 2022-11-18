@@ -183,9 +183,13 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_flow_box_set_homogeneous(GTK_FLOW_BOX(m_flowBox), true);
     gtk_flow_box_set_column_spacing(GTK_FLOW_BOX(m_flowBox), 10);
     gtk_flow_box_set_row_spacing(GTK_FLOW_BOX(m_flowBox), 10);
+    gtk_widget_set_halign(m_flowBox, GTK_ALIGN_FILL);
+    gtk_widget_set_valign(m_flowBox, GTK_ALIGN_START);
+    gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(m_flowBox), GTK_SELECTION_NONE);
     //Transactions Scrolled Window
     m_scrollTransactions = gtk_scrolled_window_new();
     gtk_widget_set_size_request(m_scrollTransactions, 300, -1);
+    gtk_widget_set_vexpand(m_scrollTransactions, true);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTransactions), m_flowBox);
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -279,7 +283,7 @@ void AccountView::onAccountInfoChanged()
         std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-        gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
+        gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
         m_transactionRows.push_back(row);
     }
 }
