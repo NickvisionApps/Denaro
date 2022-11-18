@@ -75,6 +75,12 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnMenuAccount), m_popoverAccount);
     gtk_widget_set_tooltip_text(m_btnMenuAccount, _("Account Menu"));
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
+    //Flap Toggle Button
+    m_btnFlapToggle = gtk_toggle_button_new();
+    gtk_widget_set_visible(m_btnFlapToggle, false);
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnFlapToggle), "sidebar-show-symbolic");
+    gtk_widget_set_tooltip_text(m_btnFlapToggle, _("Toggle Sidebar"));
+    adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnFlapToggle);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
@@ -235,6 +241,7 @@ void MainWindow::onAccountAdded()
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
     updateRecentAccounts();
     gtk_widget_set_visible(m_btnMenuAccount, true);
+    gtk_widget_set_visible(m_btnFlapToggle, true);
 }
 
 void MainWindow::onNewAccount()

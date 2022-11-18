@@ -47,6 +47,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_popBtnNewAccount{ nullptr };
 		GtkWidget* m_popBtnOpenAccount{ nullptr };
 		GtkWidget* m_listRecentAccounts{ nullptr };
+		GtkWidget* m_btnFlapToggle{ nullptr };
 		GtkWidget* m_btnMenuHelp{ nullptr };
 		GtkWidget* m_toastOverlay{ nullptr };
 		GtkWidget* m_viewStack{ nullptr };
