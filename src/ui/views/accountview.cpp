@@ -212,7 +212,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
     //Action Map
     m_actionMap = g_simple_action_group_new();
-    gtk_widget_insert_action_group(m_scrollTransactions, "account", G_ACTION_GROUP(m_actionMap));
+    gtk_widget_insert_action_group(m_flap, "account", G_ACTION_GROUP(m_actionMap));
     //Export as CSV Action
     m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
     g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
@@ -234,7 +234,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
-    gtk_widget_add_controller(m_scrollTransactions, m_shortcutController);
+    gtk_widget_add_controller(m_flap, m_shortcutController);
     //Account Info Changed Callback
     m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information
