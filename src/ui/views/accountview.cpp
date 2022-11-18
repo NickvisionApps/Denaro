@@ -20,13 +20,13 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_set_size_request(m_scrollPane, 350, -1);
     adw_flap_set_flap(ADW_FLAP(m_flap), m_scrollPane);
     //Pane Box
-    m_paneBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
+    m_paneBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_widget_set_hexpand(m_paneBox, false);
     gtk_widget_set_vexpand(m_paneBox, true);
-    gtk_widget_set_margin_top(m_paneBox, 12);
-    gtk_widget_set_margin_start(m_paneBox, 12);
-    gtk_widget_set_margin_end(m_paneBox, 12);
-    gtk_widget_set_margin_bottom(m_paneBox, 12);
+    gtk_widget_set_margin_top(m_paneBox, 10);
+    gtk_widget_set_margin_start(m_paneBox, 10);
+    gtk_widget_set_margin_end(m_paneBox, 10);
+    gtk_widget_set_margin_bottom(m_paneBox, 10);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollPane), m_paneBox);
     //Account Total
     m_lblTotal = gtk_label_new("");
@@ -162,11 +162,45 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_box_append(GTK_BOX(m_paneBox), m_expRange);
     //Separator
     adw_flap_set_separator(ADW_FLAP(m_flap), gtk_separator_new(GTK_ORIENTATION_VERTICAL));
+    //Button New Transaction
+    m_btnNewTransaction = gtk_button_new();
+    gtk_widget_add_css_class(m_btnNewTransaction, "pill");
+    gtk_widget_add_css_class(m_btnNewTransaction, "suggested-action");
+    GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
+    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), pgettext("Transaction", "New"));
+    gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
+    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
+    gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
+    gtk_widget_set_halign(m_btnNewTransaction, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(m_btnNewTransaction, GTK_ALIGN_END);
+    gtk_widget_set_margin_bottom(m_btnNewTransaction, 10);
+    //Transactions Group
+    m_grpTransactions = adw_preferences_group_new();
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
+    //Transactions Flow Box
+    m_flowBox = gtk_flow_box_new();
+    gtk_flow_box_set_homogeneous(GTK_FLOW_BOX(m_flowBox), true);
+    gtk_flow_box_set_column_spacing(GTK_FLOW_BOX(m_flowBox), 10);
+    gtk_flow_box_set_row_spacing(GTK_FLOW_BOX(m_flowBox), 10);
+    //Transactions Scrolled Window
+    m_scrollTransactions = gtk_scrolled_window_new();
+    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTransactions), m_flowBox);
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    //gtk_widget_set_hexpand(m_boxMain, true);
+    gtk_widget_set_margin_start(m_boxMain, 10);
+    gtk_widget_set_margin_top(m_boxMain, 10);
+    gtk_widget_set_margin_end(m_boxMain, 10);
+    gtk_widget_set_margin_bottom(m_boxMain, 10);
+    gtk_widget_set_hexpand(m_boxMain, true);
     gtk_widget_set_vexpand(m_boxMain, true);
-    adw_flap_set_content(ADW_FLAP(m_flap), m_boxMain);
+    gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
+    //Main Overlay
+    m_overlayMain = gtk_overlay_new();
+    gtk_widget_set_vexpand(m_overlayMain, true);
+    gtk_overlay_set_child(GTK_OVERLAY(m_overlayMain), m_boxMain);
+    gtk_overlay_add_overlay(GTK_OVERLAY(m_overlayMain), m_btnNewTransaction);
+    adw_flap_set_content(ADW_FLAP(m_flap), m_overlayMain);
     //Tab Page
     m_gobj = adw_tab_view_append(parentTabView, m_flap);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());

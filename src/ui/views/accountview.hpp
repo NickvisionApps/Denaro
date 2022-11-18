@@ -29,9 +29,10 @@ namespace NickvisionMoney::UI::Views
 		AdwTabPage* m_gobj{ nullptr };
 		GtkWidget* m_flap{ nullptr };
 		GtkWidget* m_scrollPane{ nullptr };
-		GtkWidget* m_scrollMain{ nullptr };
-		GtkWidget* m_paneBox{ nullptr };
+		GtkWidget* m_scrollTransactions{ nullptr };
 		GtkWidget* m_boxMain{ nullptr };
+		GtkWidget* m_paneBox{ nullptr };
+		GtkWidget* m_overlayMain{ nullptr };
 		GtkWidget* m_grpOverview{ nullptr };
 		GtkWidget* m_rowTotal{ nullptr };
 		GtkWidget* m_lblTotal{ nullptr };
@@ -64,6 +65,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_grpCalendar{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
+		GtkWidget* m_flowBox{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
