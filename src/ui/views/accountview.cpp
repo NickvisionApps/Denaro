@@ -11,29 +11,49 @@ using namespace NickvisionMoney::UI::Views;
 
 AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
 {
-    //Main Box
-    m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    //Flap
+    m_flap = adw_flap_new();
+    //g_object_bind_property(m_btnFlapToggle, "active", m_flap, "reveal-flap", G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+    //Left Pane
+    m_scrollPane = gtk_scrolled_window_new();
+    gtk_widget_add_css_class(m_scrollPane, "background");
+    gtk_widget_set_hexpand(m_scrollPane, true);
+    adw_flap_set_flap(ADW_FLAP(m_flap), m_scrollPane);
+    //Pane Box
+    m_paneBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
+    gtk_widget_set_hexpand(m_paneBox, false);
+    gtk_widget_set_vexpand(m_paneBox, true);
+    gtk_widget_set_margin_top(m_paneBox, 12);
+    gtk_widget_set_margin_start(m_paneBox, 12);
+    gtk_widget_set_margin_end(m_paneBox, 12);
+    gtk_widget_set_margin_bottom(m_paneBox, 12);
+    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollPane), m_paneBox);
     //Account Total
-    m_rowTotal = adw_expander_row_new();
+    m_lblTotal = gtk_label_new("");
+    gtk_widget_add_css_class(m_lblTotal, "accent");
+    m_rowTotal = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), _("Total"));
-    adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
-    adw_expander_row_set_expanded(ADW_EXPANDER_ROW(m_rowTotal), true);
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTotal), m_lblTotal);
     //Account Income
     m_lblIncome = gtk_label_new("");
-    gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblIncome, "success");
+    m_chkIncome = gtk_check_button_new();
+    gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
     m_rowIncome = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), pgettext("Overview", "Income"));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
+    adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowIncome), m_chkIncome);
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
-    adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
     //Account Expense
     m_lblExpense = gtk_label_new("");
-    gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblExpense, "error");
+    m_chkExpense = gtk_check_button_new();
+    gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
     m_rowExpense = adw_action_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), pgettext("Overview", "Expense"));
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
+    adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowExpense), m_chkExpense);
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
-    adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
+    //Overview Buttons Box
+    m_boxButtonsOverview = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     //Button Menu Account Actions
     m_btnMenuAccountActions = gtk_menu_button_new();
     gtk_widget_add_css_class(m_btnMenuAccountActions, "flat");
@@ -46,16 +66,21 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     g_menu_append(menuActions, _("Import from CSV"), "account.importFromCSV");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
     g_object_unref(menuActions);
+    gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
+    //Button Reset Overview Filer
+    m_btnResetOverview = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    gtk_widget_add_css_class(m_btnResetOverview, "flat");
+    gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverview);
     //Overview Group
     m_grpOverview = adw_preferences_group_new();
-    gtk_widget_set_margin_start(m_grpOverview, 30);
-    gtk_widget_set_margin_top(m_grpOverview, 10);
-    gtk_widget_set_margin_end(m_grpOverview, 30);
-    gtk_widget_set_margin_bottom(m_grpOverview, 10);
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), _("Overview"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
-    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
-    gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowIncome);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowExpense);
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_boxButtonsOverview);
+    gtk_box_append(GTK_BOX(m_paneBox), m_grpOverview);
+    //Group Buttons Box
+    m_boxButtonsGroups = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     //Button New Group
     m_btnNewGroup = gtk_button_new();
     gtk_widget_add_css_class(m_btnNewGroup, "flat");
@@ -65,6 +90,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_tooltip_text(m_btnNewGroup, _("New Group (Ctrl+G)"));
     gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
+    gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnNewGroup);
+    //Button Reset Groups Filter
+    m_btnResetGroups = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    gtk_widget_add_css_class(m_btnResetGroups, "flat");
+    gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroups);
     //Groups Group
     m_grpGroups = adw_preferences_group_new();
     gtk_widget_set_margin_start(m_grpGroups, 30);
@@ -72,63 +102,134 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     gtk_widget_set_margin_end(m_grpGroups, 30);
     gtk_widget_set_margin_bottom(m_grpGroups, 10);
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
-    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_btnNewGroup);
-    gtk_box_append(GTK_BOX(m_boxMain), m_grpGroups);
-    //Button New Transaction
-    m_btnNewTransaction = gtk_button_new();
-    gtk_widget_add_css_class(m_btnNewTransaction, "flat");
-    GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
-    adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), pgettext("Transaction", "New"));
-    gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
-    gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
-    gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
-    //Transactions Group
-    m_grpTransactions = adw_preferences_group_new();
-    gtk_widget_set_margin_start(m_grpTransactions, 30);
-    gtk_widget_set_margin_top(m_grpTransactions, 10);
-    gtk_widget_set_margin_end(m_grpTransactions, 30);
-    gtk_widget_set_margin_bottom(m_grpTransactions, 10);
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
-    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_btnNewTransaction);
-    gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
-    //Main Layout
-    m_scrollMain = gtk_scrolled_window_new();
-    gtk_widget_set_hexpand(m_scrollMain, true);
-    gtk_widget_set_vexpand(m_scrollMain, true);
-    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollMain), m_boxMain);
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_boxButtonsGroups);
+    gtk_box_append(GTK_BOX(m_paneBox), m_grpGroups);
+    //Main Box
+    m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    //gtk_widget_set_hexpand(m_boxMain, true);
+    gtk_widget_set_vexpand(m_boxMain, true);
+    adw_flap_set_content(ADW_FLAP(m_flap), m_boxMain);
     //Tab Page
-    m_gobj = adw_tab_view_append(parentTabView, m_scrollMain);
+    m_gobj = adw_tab_view_append(parentTabView, m_flap);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
+    //Main Box
+    // m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    //Account Total
+    // m_rowTotal = adw_expander_row_new();
+    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), _("Total"));
+    // adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
+    // adw_expander_row_set_expanded(ADW_EXPANDER_ROW(m_rowTotal), true);
+    //Account Income
+    // m_lblIncome = gtk_label_new("");
+    // gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
+    // gtk_widget_add_css_class(m_lblIncome, "success");
+    // m_rowIncome = adw_action_row_new();
+    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), pgettext("Overview", "Income"));
+    // adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
+    // adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
+    //Account Expense
+    // m_lblExpense = gtk_label_new("");
+    // gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
+    // gtk_widget_add_css_class(m_lblExpense, "error");
+    // m_rowExpense = adw_action_row_new();
+    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), pgettext("Overview", "Expense"));
+    // adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
+    // adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
+    //Button Menu Account Actions
+    // m_btnMenuAccountActions = gtk_menu_button_new();
+    // gtk_widget_add_css_class(m_btnMenuAccountActions, "flat");
+    // GtkWidget* btnMenuAccountActionsContent{ adw_button_content_new() };
+    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "document-properties-symbolic");
+    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), _("Actions"));
+    // gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
+    // GMenu* menuActions{ g_menu_new() };
+    // g_menu_append(menuActions, _("Export as CSV"), "account.exportAsCSV");
+    // g_menu_append(menuActions, _("Import from CSV"), "account.importFromCSV");
+    // gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
+    // g_object_unref(menuActions);
+    //Overview Group
+    // m_grpOverview = adw_preferences_group_new();
+    // gtk_widget_set_margin_start(m_grpOverview, 30);
+    // gtk_widget_set_margin_top(m_grpOverview, 10);
+    // gtk_widget_set_margin_end(m_grpOverview, 30);
+    // gtk_widget_set_margin_bottom(m_grpOverview, 10);
+    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), _("Overview"));
+    // adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
+    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
+    // gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
+    //Button New Group
+    // m_btnNewGroup = gtk_button_new();
+    // gtk_widget_add_css_class(m_btnNewGroup, "flat");
+    // GtkWidget* btnNewGroupContent{ adw_button_content_new() };
+    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewGroupContent), "list-add-symbolic");
+    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), pgettext("Group", "New"));
+    // gtk_widget_set_tooltip_text(m_btnNewGroup, _("New Group (Ctrl+G)"));
+    // gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
+    // gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
+    //Groups Group
+    // m_grpGroups = adw_preferences_group_new();
+    // gtk_widget_set_margin_start(m_grpGroups, 30);
+    // gtk_widget_set_margin_top(m_grpGroups, 10);
+    // gtk_widget_set_margin_end(m_grpGroups, 30);
+    // gtk_widget_set_margin_bottom(m_grpGroups, 10);
+    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
+    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_btnNewGroup);
+    // gtk_box_append(GTK_BOX(m_boxMain), m_grpGroups);
+    //Button New Transaction
+    // m_btnNewTransaction = gtk_button_new();
+    // gtk_widget_add_css_class(m_btnNewTransaction, "flat");
+    // GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
+    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
+    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), pgettext("Transaction", "New"));
+    // gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
+    // gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
+    // gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
+    //Transactions Group
+    // m_grpTransactions = adw_preferences_group_new();
+    // gtk_widget_set_margin_start(m_grpTransactions, 30);
+    // gtk_widget_set_margin_top(m_grpTransactions, 10);
+    // gtk_widget_set_margin_end(m_grpTransactions, 30);
+    // gtk_widget_set_margin_bottom(m_grpTransactions, 10);
+    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
+    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_btnNewTransaction);
+    // gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
+    //Main Layout
+    // m_scrollMain = gtk_scrolled_window_new();
+    // gtk_widget_set_hexpand(m_scrollMain, true);
+    // gtk_widget_set_vexpand(m_scrollMain, true);
+    // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollMain), m_boxMain);
+    //Tab Page
+    // m_gobj = adw_tab_view_append(parentTabView, m_scrollMain);
+    // adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
     //Action Map
-    m_actionMap = g_simple_action_group_new();
-    gtk_widget_insert_action_group(m_scrollMain, "account", G_ACTION_GROUP(m_actionMap));
+    // m_actionMap = g_simple_action_group_new();
+    // gtk_widget_insert_action_group(m_scrollMain, "account", G_ACTION_GROUP(m_actionMap));
     //Export as CSV Action
-    m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
-    g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
+    // m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
+    // g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
+    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
     //Import from CSV Action
-    m_actImportFromCSV = g_simple_action_new("importFromCSV", nullptr);
-    g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
+    // m_actImportFromCSV = g_simple_action_new("importFromCSV", nullptr);
+    // g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
+    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
     //New Transaction Action
-    m_actNewGroup = g_simple_action_new("newGroup", nullptr);
-    g_signal_connect(m_actNewGroup, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewGroup(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewGroup));
+    // m_actNewGroup = g_simple_action_new("newGroup", nullptr);
+    // g_signal_connect(m_actNewGroup, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewGroup(); }), this);
+    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewGroup));
     //New Transaction Action
-    m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
-    g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
+    // m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
+    // g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
+    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
     //Shortcut Controller
-    m_shortcutController = gtk_shortcut_controller_new();
-    gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
-    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
-    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
-    gtk_widget_add_controller(m_scrollMain, m_shortcutController);
+    // m_shortcutController = gtk_shortcut_controller_new();
+    // gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
+    // gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
+    // gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
+    // gtk_widget_add_controller(m_scrollMain, m_shortcutController);
     //Account Info Changed Callback
-    m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
+    // m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information
-    onAccountInfoChanged();
+    // onAccountInfoChanged();
 }
 
 AdwTabPage* AccountView::gobj()

@@ -78,6 +78,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Flap Toggle Button
     m_btnFlapToggle = gtk_toggle_button_new();
     gtk_widget_set_visible(m_btnFlapToggle, false);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnFlapToggle), true);
     gtk_button_set_icon_name(GTK_BUTTON(m_btnFlapToggle), "sidebar-show-symbolic");
     gtk_widget_set_tooltip_text(m_btnFlapToggle, _("Toggle Sidebar"));
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnFlapToggle);
