@@ -185,6 +185,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_flow_box_set_row_spacing(GTK_FLOW_BOX(m_flowBox), 10);
     //Transactions Scrolled Window
     m_scrollTransactions = gtk_scrolled_window_new();
+    gtk_widget_set_size_request(m_scrollTransactions, 300, -1);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTransactions), m_flowBox);
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
