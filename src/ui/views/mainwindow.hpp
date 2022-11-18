@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include <vector>
 #include <adwaita.h>
 #include "accountview.hpp"
@@ -31,6 +32,12 @@ namespace NickvisionMoney::UI::Views
 		 * Starts the MainWindow
 		 */
 		void start();
+		/**
+		 * Opens an account by its path
+		 *
+		 * @param path The path to the account
+		 */
+		void openAccountByPath(std::string& path);
 
 	private:
 		NickvisionMoney::Controllers::MainWindowController m_controller;

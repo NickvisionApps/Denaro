@@ -21,6 +21,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionMoney/discussions");
     //Signals
     g_signal_connect(m_adwApp, "activate", G_CALLBACK((void (*)(GtkApplication*, gpointer))[](GtkApplication* app, gpointer data) { reinterpret_cast<Application*>(data)->onActivate(app); }), this);
+    g_signal_connect(m_adwApp, "open", G_CALLBACK((void (*)(GtkApplication*, gpointer, int, char*, gpointer))[](GtkApplication* app, gpointer files, int n_files, char* hint, gpointer data) { reinterpret_cast<Application*>(data)->onOpen(app, files, n_files, hint); }), this);
 }
 
 int Application::run(int argc, char* argv[])
@@ -45,4 +46,12 @@ void Application::onActivate(GtkApplication* app)
     m_mainWindow = std::make_shared<MainWindow>(app, MainWindowController(m_appInfo, m_configuration));
     gtk_application_add_window(app, GTK_WINDOW(m_mainWindow->gobj()));
     m_mainWindow->start();
+}
+
+void Application::onOpen(GtkApplication* app, gpointer files, int n_files, const char* hint)
+{
+    GFile** gFiles{ reinterpret_cast<GFile**>(files) };
+    std::string pathOfFirstFile{ g_file_get_path(gFiles[0]) };
+    onActivate(app);
+    m_mainWindow->openAccountByPath(pathOfFirstFile);
 }
