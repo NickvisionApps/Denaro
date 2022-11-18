@@ -42,7 +42,7 @@
   <releases>
     <release version="2022.11.1-next" date="2022-11-17">
       <description>
-        <p></p>
+        <p>- Fixed an issue where some monetary values where displayed incorrectly</p>
       </description>
     </release>
   </releases>
