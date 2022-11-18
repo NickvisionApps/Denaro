@@ -49,6 +49,18 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_btnNewGroup{ nullptr };
 		GtkWidget* m_btnResetGroups{ nullptr };
 		GtkWidget* m_calendar{ nullptr };
+		GtkWidget* m_btnResetCalendar{ nullptr };
+		GtkWidget* m_ddStartYear{ nullptr };
+		GtkWidget* m_ddStartMonth{ nullptr };
+		GtkWidget* m_ddStartDay{ nullptr };
+		GtkWidget* m_ddEndYear{ nullptr };
+		GtkWidget* m_ddEndMonth{ nullptr };
+		GtkWidget* m_ddEndDay{ nullptr };
+		GtkWidget* m_boxStartRange{ nullptr };
+		GtkWidget* m_boxEndRange{ nullptr };
+		GtkWidget* m_rowStartRange{ nullptr };
+		GtkWidget* m_rowEndRange{ nullptr };
+		GtkWidget* m_expRange{ nullptr };
 		GtkWidget* m_grpCalendar{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };

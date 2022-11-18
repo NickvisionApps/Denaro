@@ -17,7 +17,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Left Pane
     m_scrollPane = gtk_scrolled_window_new();
     gtk_widget_add_css_class(m_scrollPane, "background");
-    gtk_widget_set_hexpand(m_scrollPane, true);
+    gtk_widget_set_size_request(m_scrollPane, 350, -1);
     adw_flap_set_flap(ADW_FLAP(m_flap), m_scrollPane);
     //Pane Box
     m_paneBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 12);
@@ -69,6 +69,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
     //Button Reset Overview Filer
     m_btnResetOverview = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    gtk_widget_set_sensitive(m_btnResetOverview, false);
     gtk_widget_add_css_class(m_btnResetOverview, "flat");
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverview);
     //Overview Group
@@ -93,30 +94,74 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnNewGroup);
     //Button Reset Groups Filter
     m_btnResetGroups = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    gtk_widget_set_sensitive(m_btnResetGroups, false);
     gtk_widget_add_css_class(m_btnResetGroups, "flat");
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroups);
     //Groups Group
     m_grpGroups = adw_preferences_group_new();
-    gtk_widget_set_margin_start(m_grpGroups, 30);
-    gtk_widget_set_margin_top(m_grpGroups, 10);
-    gtk_widget_set_margin_end(m_grpGroups, 30);
-    gtk_widget_set_margin_bottom(m_grpGroups, 10);
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_boxButtonsGroups);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpGroups);
     //Calendar Widget
     m_calendar = gtk_calendar_new();
     gtk_widget_add_css_class(m_calendar, "card");
+    //Button Reset Calendar Filter
+    m_btnResetCalendar = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    gtk_widget_set_sensitive(m_btnResetCalendar, false);
+    gtk_widget_add_css_class(m_btnResetCalendar, "flat");
+    //Range DropDowns
+    m_ddStartYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartYear), false);
+    m_ddStartMonth = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddStartMonth, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartMonth), false);
+    m_ddStartDay = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddStartDay, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartDay), false);
+    m_ddEndYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddEndYear, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndYear), false);
+    m_ddEndMonth = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddEndMonth, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndMonth), false);
+    m_ddEndDay = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    gtk_widget_set_valign(m_ddEndDay, GTK_ALIGN_CENTER);
+    gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndDay), false);
+    //Range Boxes
+    m_boxStartRange = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+    gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartYear);
+    gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartMonth);
+    gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartDay);
+    m_boxEndRange = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+    gtk_box_append(GTK_BOX(m_boxEndRange), m_ddEndYear);
+    gtk_box_append(GTK_BOX(m_boxEndRange), m_ddEndMonth);
+    gtk_box_append(GTK_BOX(m_boxEndRange), m_ddEndDay);
+    //Start Range Row
+    m_rowStartRange = adw_action_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowStartRange), _("Start"));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowStartRange), m_boxStartRange);
+    //End Range Row
+    m_rowEndRange = adw_action_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowEndRange), _("End"));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowEndRange), m_boxEndRange);
+    //Expander Row Select Range
+    m_expRange = adw_expander_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_expRange), _("Select Range"));
+    adw_expander_row_set_enable_expansion(ADW_EXPANDER_ROW(m_expRange), false);
+    gtk_widget_add_css_class(m_expRange, "card");
+    adw_expander_row_set_show_enable_switch(ADW_EXPANDER_ROW(m_expRange), true);
+    adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowStartRange);
+    adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowEndRange);
     //Calendar Group
     m_grpCalendar = adw_preferences_group_new();
-    gtk_widget_set_margin_start(m_grpCalendar, 30);
-    gtk_widget_set_margin_top(m_grpCalendar, 10);
-    gtk_widget_set_margin_end(m_grpCalendar, 30);
-    gtk_widget_set_margin_bottom(m_grpCalendar, 10);
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCalendar), _("Calendar"));
-    //adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendar);
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendar);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCalendar), m_calendar);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpCalendar);
+    gtk_box_append(GTK_BOX(m_paneBox), m_expRange);
+    //Separator
+    adw_flap_set_separator(ADW_FLAP(m_flap), gtk_separator_new(GTK_ORIENTATION_VERTICAL));
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     //gtk_widget_set_hexpand(m_boxMain, true);
