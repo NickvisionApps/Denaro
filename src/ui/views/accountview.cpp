@@ -283,7 +283,7 @@ void AccountView::onAccountInfoChanged()
         std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-        gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
+        gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
         m_transactionRows.push_back(row);
     }
 }
