@@ -42,6 +42,7 @@
   <releases>
     <release version="2022.11.1-next" date="2022-11-17">
       <description>
+        <p>- You can now double-click a .nmoney file and it will open directly in Money</p>
         <p>- Fixed an issue where some monetary values were displayed incorrectly</p>
       </description>
     </release>
