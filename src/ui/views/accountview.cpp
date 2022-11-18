@@ -68,7 +68,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     g_object_unref(menuActions);
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
     //Button Reset Overview Filer
-    m_btnResetOverview = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    m_btnResetOverview = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetOverview, false);
     gtk_widget_add_css_class(m_btnResetOverview, "flat");
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverview);
@@ -93,7 +93,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnNewGroup);
     //Button Reset Groups Filter
-    m_btnResetGroups = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    m_btnResetGroups = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetGroups, false);
     gtk_widget_add_css_class(m_btnResetGroups, "flat");
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroups);
@@ -106,7 +106,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_calendar = gtk_calendar_new();
     gtk_widget_add_css_class(m_calendar, "card");
     //Button Reset Calendar Filter
-    m_btnResetCalendar = gtk_button_new_from_icon_name("view-refresh-symbolic");
+    m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetCalendar, false);
     gtk_widget_add_css_class(m_btnResetCalendar, "flat");
     //Range DropDowns
