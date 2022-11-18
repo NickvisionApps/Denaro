@@ -9,11 +9,11 @@ using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
 {
     //Flap
     m_flap = adw_flap_new();
-    //g_object_bind_property(m_btnFlapToggle, "active", m_flap, "reveal-flap", G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+    g_object_bind_property(btnFlapToggle, "active", m_flap, "reveal-flap", (GBindingFlags)(G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE));
     //Left Pane
     m_scrollPane = gtk_scrolled_window_new();
     gtk_widget_add_css_class(m_scrollPane, "background");
@@ -104,6 +104,19 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, con
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_boxButtonsGroups);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpGroups);
+    //Calendar Widget
+    m_calendar = gtk_calendar_new();
+    gtk_widget_add_css_class(m_calendar, "card");
+    //Calendar Group
+    m_grpCalendar = adw_preferences_group_new();
+    gtk_widget_set_margin_start(m_grpCalendar, 30);
+    gtk_widget_set_margin_top(m_grpCalendar, 10);
+    gtk_widget_set_margin_end(m_grpCalendar, 30);
+    gtk_widget_set_margin_bottom(m_grpCalendar, 10);
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCalendar), _("Calendar"));
+    //adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendar);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCalendar), m_calendar);
+    gtk_box_append(GTK_BOX(m_paneBox), m_grpCalendar);
     //Main Box
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     //gtk_widget_set_hexpand(m_boxMain, true);

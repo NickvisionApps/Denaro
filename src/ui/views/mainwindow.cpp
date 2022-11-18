@@ -236,7 +236,7 @@ void MainWindow::onAccountAdded()
 {
     g_simple_action_set_enabled(m_actCloseAccount, true);
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
-    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, m_controller.createAccountViewControllerForLatestAccount()) };
+    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, m_btnFlapToggle, m_controller.createAccountViewControllerForLatestAccount()) };
     adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
     m_accountViews.push_back(std::move(newAccountView));
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);

@@ -15,7 +15,7 @@ namespace NickvisionMoney::UI::Views
 	class AccountView
 	{
 	public:
-		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const NickvisionMoney::Controllers::AccountViewController& controller);
+		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const NickvisionMoney::Controllers::AccountViewController& controller);
 		/**
 		 * Gets the AdwTabPage* representing the AccountView
 		 *
@@ -48,6 +48,8 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_boxButtonsGroups{ nullptr };
 		GtkWidget* m_btnNewGroup{ nullptr };
 		GtkWidget* m_btnResetGroups{ nullptr };
+		GtkWidget* m_calendar{ nullptr };
+		GtkWidget* m_grpCalendar{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
