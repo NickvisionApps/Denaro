@@ -195,6 +195,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_set_hexpand(m_boxMain, true);
     gtk_widget_set_vexpand(m_boxMain, true);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
+    gtk_box_append(GTK_BOX(m_boxMain), m_scrollTransactions);
     //Main Overlay
     m_overlayMain = gtk_overlay_new();
     gtk_widget_set_vexpand(m_overlayMain, true);
@@ -204,124 +205,35 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Tab Page
     m_gobj = adw_tab_view_append(parentTabView, m_flap);
     adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
-    //Main Box
-    // m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    //Account Total
-    // m_rowTotal = adw_expander_row_new();
-    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), _("Total"));
-    // adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), "");
-    // adw_expander_row_set_expanded(ADW_EXPANDER_ROW(m_rowTotal), true);
-    //Account Income
-    // m_lblIncome = gtk_label_new("");
-    // gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
-    // gtk_widget_add_css_class(m_lblIncome, "success");
-    // m_rowIncome = adw_action_row_new();
-    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), pgettext("Overview", "Income"));
-    // adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
-    // adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowIncome);
-    //Account Expense
-    // m_lblExpense = gtk_label_new("");
-    // gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
-    // gtk_widget_add_css_class(m_lblExpense, "error");
-    // m_rowExpense = adw_action_row_new();
-    // adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), pgettext("Overview", "Expense"));
-    // adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowExpense), m_lblExpense);
-    // adw_expander_row_add_row(ADW_EXPANDER_ROW(m_rowTotal), m_rowExpense);
-    //Button Menu Account Actions
-    // m_btnMenuAccountActions = gtk_menu_button_new();
-    // gtk_widget_add_css_class(m_btnMenuAccountActions, "flat");
-    // GtkWidget* btnMenuAccountActionsContent{ adw_button_content_new() };
-    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "document-properties-symbolic");
-    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), _("Actions"));
-    // gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
-    // GMenu* menuActions{ g_menu_new() };
-    // g_menu_append(menuActions, _("Export as CSV"), "account.exportAsCSV");
-    // g_menu_append(menuActions, _("Import from CSV"), "account.importFromCSV");
-    // gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
-    // g_object_unref(menuActions);
-    //Overview Group
-    // m_grpOverview = adw_preferences_group_new();
-    // gtk_widget_set_margin_start(m_grpOverview, 30);
-    // gtk_widget_set_margin_top(m_grpOverview, 10);
-    // gtk_widget_set_margin_end(m_grpOverview, 30);
-    // gtk_widget_set_margin_bottom(m_grpOverview, 10);
-    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), _("Overview"));
-    // adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpOverview), m_rowTotal);
-    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpOverview), m_btnMenuAccountActions);
-    // gtk_box_append(GTK_BOX(m_boxMain), m_grpOverview);
-    //Button New Group
-    // m_btnNewGroup = gtk_button_new();
-    // gtk_widget_add_css_class(m_btnNewGroup, "flat");
-    // GtkWidget* btnNewGroupContent{ adw_button_content_new() };
-    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewGroupContent), "list-add-symbolic");
-    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewGroupContent), pgettext("Group", "New"));
-    // gtk_widget_set_tooltip_text(m_btnNewGroup, _("New Group (Ctrl+G)"));
-    // gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewGroup), "account.newGroup");
-    // gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
-    //Groups Group
-    // m_grpGroups = adw_preferences_group_new();
-    // gtk_widget_set_margin_start(m_grpGroups, 30);
-    // gtk_widget_set_margin_top(m_grpGroups, 10);
-    // gtk_widget_set_margin_end(m_grpGroups, 30);
-    // gtk_widget_set_margin_bottom(m_grpGroups, 10);
-    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
-    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpGroups), m_btnNewGroup);
-    // gtk_box_append(GTK_BOX(m_boxMain), m_grpGroups);
-    //Button New Transaction
-    // m_btnNewTransaction = gtk_button_new();
-    // gtk_widget_add_css_class(m_btnNewTransaction, "flat");
-    // GtkWidget* btnNewTransactionContent{ adw_button_content_new() };
-    // adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnNewTransactionContent), "list-add-symbolic");
-    // adw_button_content_set_label(ADW_BUTTON_CONTENT(btnNewTransactionContent), pgettext("Transaction", "New"));
-    // gtk_widget_set_tooltip_text(m_btnNewTransaction, _("New Transaction (Ctrl+Shift+N)"));
-    // gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(m_btnNewTransaction), "account.newTransaction");
-    // gtk_button_set_child(GTK_BUTTON(m_btnNewTransaction), btnNewTransactionContent);
-    //Transactions Group
-    // m_grpTransactions = adw_preferences_group_new();
-    // gtk_widget_set_margin_start(m_grpTransactions, 30);
-    // gtk_widget_set_margin_top(m_grpTransactions, 10);
-    // gtk_widget_set_margin_end(m_grpTransactions, 30);
-    // gtk_widget_set_margin_bottom(m_grpTransactions, 10);
-    // adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
-    // adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_btnNewTransaction);
-    // gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
-    //Main Layout
-    // m_scrollMain = gtk_scrolled_window_new();
-    // gtk_widget_set_hexpand(m_scrollMain, true);
-    // gtk_widget_set_vexpand(m_scrollMain, true);
-    // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollMain), m_boxMain);
-    //Tab Page
-    // m_gobj = adw_tab_view_append(parentTabView, m_scrollMain);
-    // adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
     //Action Map
-    // m_actionMap = g_simple_action_group_new();
-    // gtk_widget_insert_action_group(m_scrollMain, "account", G_ACTION_GROUP(m_actionMap));
+    m_actionMap = g_simple_action_group_new();
+    gtk_widget_insert_action_group(m_scrollTransactions, "account", G_ACTION_GROUP(m_actionMap));
     //Export as CSV Action
-    // m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
-    // g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
-    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
+    m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
+    g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actExportAsCSV));
     //Import from CSV Action
-    // m_actImportFromCSV = g_simple_action_new("importFromCSV", nullptr);
-    // g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
-    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
+    m_actImportFromCSV = g_simple_action_new("importFromCSV", nullptr);
+    g_signal_connect(m_actImportFromCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onImportFromCSV(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actImportFromCSV));
+    //New Group Action
+    m_actNewGroup = g_simple_action_new("newGroup", nullptr);
+    g_signal_connect(m_actNewGroup, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewGroup(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewGroup));
     //New Transaction Action
-    // m_actNewGroup = g_simple_action_new("newGroup", nullptr);
-    // g_signal_connect(m_actNewGroup, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewGroup(); }), this);
-    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewGroup));
-    //New Transaction Action
-    // m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
-    // g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
-    // g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
+    m_actNewTransaction = g_simple_action_new("newTransaction", nullptr);
+    g_signal_connect(m_actNewTransaction, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onNewTransaction(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actNewTransaction));
     //Shortcut Controller
-    // m_shortcutController = gtk_shortcut_controller_new();
-    // gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
-    // gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
-    // gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
-    // gtk_widget_add_controller(m_scrollMain, m_shortcutController);
+    m_shortcutController = gtk_shortcut_controller_new();
+    gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
+    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
+    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
+    gtk_widget_add_controller(m_scrollTransactions, m_shortcutController);
     //Account Info Changed Callback
-    // m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
+    m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information
-    // onAccountInfoChanged();
+    onAccountInfoChanged();
 }
 
 AdwTabPage* AccountView::gobj()
@@ -332,7 +244,7 @@ AdwTabPage* AccountView::gobj()
 void AccountView::onAccountInfoChanged()
 {
     //Overview
-    adw_expander_row_set_subtitle(ADW_EXPANDER_ROW(m_rowTotal), m_controller.getAccountTotalString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
     //Groups
@@ -356,17 +268,17 @@ void AccountView::onAccountInfoChanged()
         m_groupRows.push_back(row);
     }
     //Transactions
-    for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
-    {
-        adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpTransactions), transactionRow->gobj());
-    }
+    //for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
+    //{
+    //    adw_preferences_group_remove(ADW_PREFERENCES_GROUP(m_grpTransactions), transactionRow->gobj());
+    //}
     m_transactionRows.clear();
     for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
     {
         std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-        adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTransactions), row->gobj());
+        gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
         m_transactionRows.push_back(row);
     }
 }
