@@ -12,7 +12,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
 {
     //Row Settings
     std::stringstream builder;
-    builder << m_transaction.getId() << " - " << m_transaction.getDescription();
+    builder << m_transaction.getDescription();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_gobj), builder.str().c_str());
     builder.str("");
     builder.clear();
@@ -22,6 +22,17 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
         builder << "\n" << _("Repeat Interval: ") << m_transaction.getRepeatIntervalAsString();
     }
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_gobj), builder.str().c_str());
+    gtk_widget_add_css_class(m_gobj, "card");
+    gtk_widget_set_size_request(m_gobj, 250, -1);
+    //Button ID
+    m_btnId = gtk_button_new();
+    gtk_widget_add_css_class(m_btnId, "circular");
+    gtk_widget_set_valign(m_btnId, GTK_ALIGN_CENTER);
+    builder.str("");
+    builder.clear();
+    builder << m_transaction.getId();
+    gtk_button_set_label(GTK_BUTTON(m_btnId), builder.str().c_str());
+    adw_action_row_add_prefix(ADW_ACTION_ROW(m_gobj), m_btnId);
     //Amount Label
     m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale).c_str());
     gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "success" : "error");
@@ -44,7 +55,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     m_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_box), m_lblAmount);
     gtk_box_append(GTK_BOX(m_box), m_btnEdit);
-    gtk_box_append(GTK_BOX(m_box), m_btnDelete);
+    //gtk_box_append(GTK_BOX(m_box), m_btnDelete);
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_gobj), m_box);
 }
 
