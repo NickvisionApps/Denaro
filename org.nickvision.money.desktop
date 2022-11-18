@@ -9,4 +9,5 @@ Exec=org.nickvision.money
 Icon=org.nickvision.money
 Terminal=false
 Type=Application
+MimeType=application/x-nmoney
 X-GNOME-UsesNotifications=true

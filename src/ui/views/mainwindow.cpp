@@ -232,6 +232,14 @@ void MainWindow::start()
     }
 }
 
+void MainWindow::openAccountByPath(std::string& path)
+{
+    if(std::filesystem::exists(path))
+    {
+        m_controller.addAccount(path);
+    }
+}
+
 void MainWindow::onAccountAdded()
 {
     g_simple_action_set_enabled(m_actCloseAccount, true);

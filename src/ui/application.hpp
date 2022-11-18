@@ -43,5 +43,14 @@ namespace NickvisionMoney::UI
 		 * @param app GtkApplication*
 		 */
 		void onActivate(GtkApplication* app);
+		/**
+		 * Loads the application, shows the MainWindow, and displays the file provided
+		 *
+		 * @param app GtkApplication*
+		 * @param files GFile**
+		 * @param n_files The number of files
+		 * @param hint The hint
+		 */
+		void onOpen(GtkApplication* app, gpointer files, int n_files, const char* hint);
 	};
 }
