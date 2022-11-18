@@ -15,7 +15,7 @@ std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_de
         builder << getLocaleCurrencySymbol(locale);
     }
     builder << boost::locale::as::currency << value;
-    double decimal{ std::fmod(value, 1.0) * 100.0 };
+    long double decimal{ std::fmod(value, 1.0) * 100.0 };
     if(decimal == 0)
     {
         builder << (isLocaleDotDecimalSeperated(locale) ? ".00" : ",00");
