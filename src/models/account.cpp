@@ -363,20 +363,20 @@ bool Account::exportAsCSV(const std::string& path)
         file << "ID,Date,Description,Type,RepeatInterval,Amount,RGBA,Group,GroupName,GroupDescription\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
-            file << pair.second.getId() << ",";
-            file << boost::gregorian::to_iso_extended_string(pair.second.getDate()) << ",";
-            file << pair.second.getDescription() << ",";
-            file << static_cast<int>(pair.second.getType()) << ",";
-            file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
-            file << pair.second.getAmount() << ",";
-            file << pair.second.getRGBA() << ",";
-            file << pair.second.getGroupId() << ",";
+            file << pair.second.getId() << ";";
+            file << boost::gregorian::to_iso_extended_string(pair.second.getDate()) << ";";
+            file << pair.second.getDescription() << ";";
+            file << static_cast<int>(pair.second.getType()) << ";";
+            file << static_cast<int>(pair.second.getRepeatInterval()) << ";";
+            file << pair.second.getAmount() << ";";
+            file << pair.second.getRGBA() << ";";
+            file << pair.second.getGroupId() << ";";
             if (pair.second.getGroupId() != -1)
             {
-                file << m_groups.at(pair.second.getGroupId()).getName() << ",";
+                file << m_groups.at(pair.second.getGroupId()).getName() << ";";
                 file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
             } else {
-                file << ",\n";
+                file << ";\n";
             }
         }
         return true;
@@ -394,7 +394,7 @@ int Account::importFromCSV(const std::string& path)
         while(getline(file, line))
         {
             //Separate fields by ,
-            std::vector<std::string> fields{ split(line, ",") };
+            std::vector<std::string> fields{ split(line, ";") };
             if(fields.size() != 10)
             {
                 continue;
