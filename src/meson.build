@@ -55,14 +55,4 @@ sources = files('main.cpp',
 resources = files('resources/org.nickvision.money.svg', 'resources/org.nickvision.money-devel.svg')
 resources_symbolic = files('resources/org.nickvision.money-symbolic.svg')
 resources_actions = files('resources/bank-symbolic.svg', 'resources/edit-symbolic.svg')
-
-pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-moduledir = join_paths(pkgdatadir, 'money')
-gnome = import('gnome')
-
-gnome.compile_resources('org.nickvision.money',
-  'resources/org.nickvision.money.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
+gresource = files('resources/org.nickvision.money.gresource.xml')
