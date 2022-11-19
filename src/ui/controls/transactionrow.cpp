@@ -40,7 +40,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     std::string cssBtnId = R"(
         #btnId {
             font-size: 14px;
-            background-color: )";
+            color: )";
     cssBtnId += std::string(gdk_rgba_to_string(&colorBtnId));
     cssBtnId += ";\n}";
     gtk_css_provider_load_from_data(cssProviderBtnId, cssBtnId.c_str(), -1);
