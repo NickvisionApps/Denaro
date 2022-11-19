@@ -157,11 +157,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_expander_row_set_enable_expansion(ADW_EXPANDER_ROW(m_expRange), false);
     gtk_widget_add_css_class(m_expRange, "card");
     adw_expander_row_set_show_enable_switch(ADW_EXPANDER_ROW(m_expRange), true);
-    gtk_widget_add_css_class(
-        gtk_widget_get_first_child(
-        gtk_widget_get_first_child(
-        gtk_widget_get_first_child(m_expRange)
-    )), "card");
+    gtk_widget_add_css_class(gtk_widget_get_first_child(gtk_widget_get_first_child(gtk_widget_get_first_child(m_expRange))), "card");
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowStartRange);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowEndRange);
     //Calendar Group

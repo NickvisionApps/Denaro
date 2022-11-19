@@ -15,7 +15,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(m_gobj), "ok");
     adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(m_gobj), "cancel");
     g_signal_connect(m_gobj, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->setResponse({ response }); })), this);
-    adw_message_dialog_set_heading(ADW_MESSAGE_DIALOG(m_gobj), StringHelpers::format(_("Transaction - ID %s"), m_controller.getIdAsString().c_str()).c_str());
+    adw_message_dialog_set_heading(ADW_MESSAGE_DIALOG(m_gobj), StringHelpers::format(_("Transaction - %s"), m_controller.getIdAsString().c_str()).c_str());
     //Grid
     m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     //Main Preferences Group
