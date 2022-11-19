@@ -17,12 +17,10 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     g_signal_connect(m_gobj, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->setResponse({ response }); })), this);
     adw_message_dialog_set_heading(ADW_MESSAGE_DIALOG(m_gobj), StringHelpers::format(_("Transaction - ID %s"), m_controller.getIdAsString().c_str()).c_str());
     //Grid
-    m_grid = gtk_grid_new();
-    gtk_grid_set_row_spacing(GTK_GRID(m_grid), 10);
-    gtk_grid_set_column_spacing(GTK_GRID(m_grid), 10);
+    m_boxMain = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     //Main Preferences Group
     m_preferencesGroupMain = adw_preferences_group_new();
-    gtk_grid_attach(GTK_GRID(m_grid), m_preferencesGroupMain, 0, 0, 2, 1);
+    gtk_box_append(GTK_BOX(m_boxMain), m_preferencesGroupMain);
     //Description
     m_rowDescription = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowDescription, 420, -1);
@@ -51,9 +49,13 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowType), m_boxType);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowType), m_btnIncome);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupMain), m_rowType);
+    //Secondary Box
+    m_boxSecondary = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_box_set_homogeneous(GTK_BOX(m_boxSecondary), true);
+    gtk_box_append(GTK_BOX(m_boxMain), m_boxSecondary);
     //Date and Repeat Interval Preferences Group
     m_preferencesGroupDateRepeat = adw_preferences_group_new();
-    gtk_grid_attach(GTK_GRID(m_grid), m_preferencesGroupDateRepeat, 0, 1, 1, 1);
+    gtk_box_append(GTK_BOX(m_boxSecondary), m_preferencesGroupDateRepeat);
     //Date
     m_calendarDate = gtk_calendar_new();
     g_signal_connect(m_calendarDate, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
@@ -77,7 +79,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     //Group and Color Preferences Group
     m_preferencesGroupGroupColor = adw_preferences_group_new();
     gtk_widget_set_size_request(m_preferencesGroupGroupColor, 158, -1);
-    gtk_grid_attach(GTK_GRID(m_grid), m_preferencesGroupGroupColor, 1, 1, 1, 1);
+    gtk_box_append(GTK_BOX(m_boxSecondary), m_preferencesGroupGroupColor);
     //Group
     m_rowGroup = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowGroup), _("Group"));
@@ -98,7 +100,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowColor), m_btnColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupGroupColor), m_rowColor);
     //Layout
-    adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_grid);
+    adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_boxMain);
     //Load Transaction
     gtk_calendar_select_day(GTK_CALENDAR(m_calendarDate), g_date_time_new_local(m_controller.getYear(), m_controller.getMonth(), m_controller.getDay(), 0, 0, 0.0));
     gtk_editable_set_text(GTK_EDITABLE(m_rowDescription), m_controller.getDescription().c_str());
