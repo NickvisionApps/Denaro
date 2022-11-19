@@ -9,6 +9,9 @@ using namespace NickvisionMoney::UI::Views;
 
 Application::Application(const std::string& id, GApplicationFlags flags) : m_adwApp{ adw_application_new(id.c_str(), flags) }
 {
+    //Load Resource
+    GResource* resource = g_resource_load("/app/share/org.nickvision.money/org.nickvision.money.gresource", NULL);
+    g_resources_register(resource);
     //AppInfo
     m_appInfo.setId(id);
     m_appInfo.setName("Nickvision Money");

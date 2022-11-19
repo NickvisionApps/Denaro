@@ -1,0 +1,8 @@
+#calendar {
+  background-color: @card_bg_color;
+  border-width: 0px;
+}
+#calendar button {
+  border-radius: 12px;
+}
+
