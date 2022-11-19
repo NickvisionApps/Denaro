@@ -40,6 +40,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_add_css_class(m_lblIncome, "success");
     m_chkIncome = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
+    gtk_widget_add_css_class(m_chkIncome, "selection-mode");
     m_rowIncome = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowIncome), m_chkIncome);
@@ -49,6 +50,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_add_css_class(m_lblExpense, "error");
     m_chkExpense = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
+    gtk_widget_add_css_class(m_chkExpense, "selection-mode");
     m_rowExpense = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowExpense), m_chkExpense);

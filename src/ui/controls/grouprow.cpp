@@ -15,6 +15,7 @@ GroupRow::GroupRow(const Group& group, const std::locale& locale) : m_group{ gro
     //Filter Checkbox
     m_chkFilter = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkFilter), true);
+    gtk_widget_add_css_class(m_chkFilter, "selection-mode");
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_gobj), m_chkFilter);
     //Amount Label
     m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_group.getBalance(), locale).c_str());
