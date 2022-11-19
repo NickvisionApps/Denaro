@@ -110,6 +110,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Calendar Widget
     m_calendar = gtk_calendar_new();
     gtk_widget_add_css_class(m_calendar, "card");
+    gtk_widget_add_css_class(m_calendar, "osd");
     //Button Reset Calendar Filter
     m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetCalendar, false);
