@@ -63,6 +63,9 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_rowEndRange{ nullptr };
 		GtkWidget* m_expRange{ nullptr };
 		GtkWidget* m_grpCalendar{ nullptr };
+		GtkWidget* m_boxSort{ nullptr };
+		GtkWidget* m_btnSortTopBottom{ nullptr };
+		GtkWidget* m_btnSortBottomTop{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
 		GtkWidget* m_flowBox{ nullptr };

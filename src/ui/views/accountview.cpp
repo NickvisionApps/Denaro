@@ -186,9 +186,27 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_set_halign(m_btnNewTransaction, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(m_btnNewTransaction, GTK_ALIGN_END);
     gtk_widget_set_margin_bottom(m_btnNewTransaction, 10);
+    //Sort Box and Buttons
+    m_btnSortTopBottom = gtk_toggle_button_new();
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnSortTopBottom), "view-sort-descending-symbolic");
+    gtk_widget_set_tooltip_text(m_btnSortTopBottom, "Sort From Top To Bottom");
+    g_signal_connect(m_btnSortTopBottom, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom), true);
+    m_btnSortBottomTop = gtk_toggle_button_new();
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnSortBottomTop), "view-sort-ascending-symbolic");
+    gtk_widget_set_tooltip_text(m_btnSortBottomTop, "Sort From Bottom To Top");
+    g_signal_connect(m_btnSortBottomTop, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortBottomTop), false);
+    g_object_bind_property(m_btnSortTopBottom, "active", m_btnSortBottomTop, "active", (GBindingFlags)(G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN));
+    m_boxSort = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_box_append(GTK_BOX(m_boxSort), m_btnSortTopBottom);
+    gtk_box_append(GTK_BOX(m_boxSort), m_btnSortBottomTop);
+    gtk_widget_set_valign(m_boxSort, GTK_ALIGN_CENTER);
+    gtk_widget_add_css_class(m_boxSort, "linked");
     //Transactions Group
     m_grpTransactions = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTransactions), _("Transactions"));
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpTransactions), m_boxSort);
     //Transactions Flow Box
     m_flowBox = gtk_flow_box_new();
     gtk_flow_box_set_homogeneous(GTK_FLOW_BOX(m_flowBox), true);
@@ -295,7 +313,14 @@ void AccountView::onAccountInfoChanged()
         std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-        gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)))
+        {
+            gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
+        }
+        else
+        {
+            gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
+        }
         m_transactionRows.push_back(row);
         g_main_context_iteration(g_main_context_default(), false);
     }
