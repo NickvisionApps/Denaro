@@ -75,7 +75,7 @@ void AccountViewController::importFromCSV(std::string& path)
     {
         m_accountInfoChangedCallback();
     }
-    m_sendToastCallback(StringHelpers::format(_("Imported %d transactions from CSV."), imported));
+    m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from CSV.", "Imported %d transactions from CSV.", imported), imported));
 }
 
 void AccountViewController::addGroup(const Group& group)
