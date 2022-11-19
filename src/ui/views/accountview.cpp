@@ -68,10 +68,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
     g_object_unref(menuActions);
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
-    //Button Reset Overview Filer
+    //Button Reset Overview Filter
     m_btnResetOverview = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetOverview, false);
     gtk_widget_add_css_class(m_btnResetOverview, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetOverview, _("Reset Overview Filters"));
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverview);
     //Overview Group
     m_grpOverview = adw_preferences_group_new();
@@ -97,6 +98,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_btnResetGroups = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetGroups, false);
     gtk_widget_add_css_class(m_btnResetGroups, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetGroups, _("Reset Groups Filters"));
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroups);
     //Groups Group
     m_grpGroups = adw_preferences_group_new();
@@ -110,6 +112,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetCalendar, false);
     gtk_widget_add_css_class(m_btnResetCalendar, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetCalendar, _("Reset Dates Filters"));
     //Range DropDowns
     m_ddStartYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
     gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
