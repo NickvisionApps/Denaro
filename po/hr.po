@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-19 01:00+0100\n"
-"PO-Revision-Date: 2022-11-16 16:24+0100\n"
+"PO-Revision-Date: 2022-11-19 14:17+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:63
@@ -28,12 +28,12 @@ msgid "Unable to export account as CSV."
 msgstr "Nije moguće izvesti račun kao CSV datoteku."
 
 #: src/controllers/accountviewcontroller.cpp:78
-#, fuzzy, c-format
+#, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
-msgstr[0] "Uvezene transakcije iz CSV datoteke: %d."
-msgstr[1] "Uvezene transakcije iz CSV datoteke: %d."
-msgstr[2] "Uvezene transakcije iz CSV datoteke: %d."
+msgstr[0] "Uvezena je %d transakcija iz CSV datoteke."
+msgstr[1] "Uvezene su %d transakcije iz CSV datoteke."
+msgstr[2] "Uvezeno je %d transakcija iz CSV datoteke."
 
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
@@ -411,32 +411,3 @@ msgstr "Iznos (prazan)"
 #: src/ui/views/transactiondialog.cpp:128
 msgid "Amount (Invalid)"
 msgstr "Iznos (neispravan)"
-
-#~ msgid "No Accounts Open"
-#~ msgstr "Nema otvorenih računa"
-
-#~ msgid "Currency"
-#~ msgstr "Valuta"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Prilagodi postavke valute.\n"
-#~ "\n"
-#~ "Promjena jedne od ovih postavki primijenit će se samo na novootvorene "
-#~ "račune."
-
-#~ msgid "Currency Symbol"
-#~ msgstr "Simbol valute"
-
-#~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Prikaži simbol valute desno"
-
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Ako je označeno, simbol valute će se prikazati iza novčane vrijednosti."
