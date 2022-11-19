@@ -481,7 +481,6 @@ int Account::importFromCSV(const std::string& path)
             const std::string& groupName{ fields[8] };
             //Get Group Description
             const std::string& groupDescription{ fields[9] };
-
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);

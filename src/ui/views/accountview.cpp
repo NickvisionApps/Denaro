@@ -2,6 +2,7 @@
 #include "groupdialog.hpp"
 #include "transactiondialog.hpp"
 #include "../controls/messagedialog.hpp"
+#include "../controls/progressdialog.hpp"
 #include "../../helpers/translation.hpp"
 
 using namespace NickvisionMoney::Controllers;
@@ -271,6 +272,7 @@ void AccountView::onAccountInfoChanged()
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
         m_groupRows.push_back(row);
+        g_main_context_iteration(g_main_context_default(), false);
     }
     //Transactions
     for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
@@ -285,6 +287,7 @@ void AccountView::onAccountInfoChanged()
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
         gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
         m_transactionRows.push_back(row);
+        g_main_context_iteration(g_main_context_default(), false);
     }
 }
 
@@ -304,7 +307,8 @@ void AccountView::onExportAsCSV()
             AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            accountView->m_controller.exportAsCSV(path);
+            ProgressDialog progressDialog{ accountView->m_parentWindow, "Exporting as CSV...", [accountView, &path]() { accountView->m_controller.exportAsCSV(path); } };
+            progressDialog.run();
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -328,7 +332,8 @@ void AccountView::onImportFromCSV()
             AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            accountView->m_controller.importFromCSV(path);
+            ProgressDialog progressDialog{ accountView->m_parentWindow, "Importing from CSV...", [accountView, &path]() { accountView->m_controller.importFromCSV(path); } };
+            progressDialog.run();
             g_object_unref(file);
         }
         g_object_unref(dialog);
