@@ -23,7 +23,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
         builder << "\n" << _("Repeat Interval: ") << m_transaction.getRepeatIntervalAsString();
     }
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_row), builder.str().c_str());
-    gtk_widget_set_size_request(m_row, 300, -1);
+    gtk_widget_set_size_request(m_row, 300, 65);
     //Button ID
     m_btnId = gtk_button_new();
     gtk_widget_set_name(m_btnId, "btnId");
