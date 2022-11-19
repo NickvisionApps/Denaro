@@ -26,12 +26,25 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     gtk_widget_set_size_request(m_gobj, 250, -1);
     //Button ID
     m_btnId = gtk_button_new();
+    gtk_widget_set_name(m_btnId, "btnId");
     gtk_widget_add_css_class(m_btnId, "circular");
     gtk_widget_set_valign(m_btnId, GTK_ALIGN_CENTER);
-    builder.str("");
-    builder.clear();
-    builder << m_transaction.getId();
-    gtk_button_set_label(GTK_BUTTON(m_btnId), builder.str().c_str());
+    gtk_button_set_label(GTK_BUTTON(m_btnId), std::to_string(m_transaction.getId()).c_str());
+    //Button ID Color
+    GdkRGBA colorBtnId;
+    if(!gdk_rgba_parse(&colorBtnId, m_transaction.getRGBA().c_str()))
+    {
+        gdk_rgba_parse(&colorBtnId, "#3584e4");
+    }
+    GtkCssProvider* cssProviderBtnId{ gtk_css_provider_new() };
+    std::string cssBtnId = R"(
+        #btnId {
+            background-color: )";
+    cssBtnId += std::string(gdk_rgba_to_string(&colorBtnId));
+    cssBtnId += "\;\n}";
+    gtk_css_provider_load_from_data(cssProviderBtnId, cssBtnId.c_str(), -1);
+    GdkDisplay* screen{ gdk_display_get_default() };
+    gtk_style_context_add_provider(gtk_widget_get_style_context(m_btnId), GTK_STYLE_PROVIDER(cssProviderBtnId),  GTK_STYLE_PROVIDER_PRIORITY_USER);
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_gobj), m_btnId);
     //Amount Label
     m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale).c_str());

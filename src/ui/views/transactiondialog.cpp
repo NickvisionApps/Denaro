@@ -47,6 +47,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
     //Type
     m_rowType = adw_combo_row_new();
+    gtk_widget_set_size_request(m_rowType, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), _("Type"));
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowType), G_LIST_MODEL(gtk_string_list_new(new const char*[3]{ pgettext("Transaction|Edition", "Income"), pgettext("Transaction|Edition", "Expense"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowType);
@@ -66,6 +67,15 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     groupNames[m_controller.getGroupNames().size()] = nullptr;
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowGroup), G_LIST_MODEL(gtk_string_list_new(groupNames)));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowGroup);
+    //Color
+    m_btnColor = gtk_color_button_new();
+    gtk_widget_set_valign(m_btnColor, GTK_ALIGN_CENTER);
+    m_rowColor = adw_action_row_new();
+    gtk_widget_set_size_request(m_rowColor, 420, -1);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowColor), _("Color"));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowColor), m_btnColor);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowColor), m_btnColor);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowColor);
     //Amount
     m_rowAmount = adw_entry_row_new();
     gtk_widget_set_size_request(m_rowAmount, 420, -1);
@@ -81,6 +91,12 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowType), m_controller.getTypeAsInt());
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowRepeatInterval), m_controller.getRepeatIntervalAsInt());
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowGroup), m_controller.getGroupAsIndex());
+    GdkRGBA color;
+    if(!gdk_rgba_parse(&color, m_controller.getRGBA().c_str()))
+    {
+        gdk_rgba_parse(&color, "#3584e4");
+    }
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnColor), &color);
     gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), m_controller.getAmountAsString().c_str());
 }
 
@@ -102,7 +118,9 @@ bool TransactionDialog::run()
     {
         gtk_widget_hide(m_gobj);
         gtk_window_set_modal(GTK_WINDOW(m_gobj), false);
-        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowType)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowGroup)), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
+        GdkRGBA color;
+        gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(m_btnColor), &color);
+        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowType)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowGroup)), gdk_rgba_to_string(&color), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
         //Invalid Transaction
         if(status != TransactionCheckStatus::Valid)
         {

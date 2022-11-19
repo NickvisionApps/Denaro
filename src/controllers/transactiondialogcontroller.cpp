@@ -92,12 +92,18 @@ int TransactionDialogController::getGroupAsIndex() const
     return std::find(m_groupNames.begin(), m_groupNames.end(), group.getName()) - m_groupNames.begin();
 }
 
+const std::string& TransactionDialogController::getRGBA() const
+{
+    return m_transaction.getRGBA();
+}
+
+
 std::string TransactionDialogController::getAmountAsString() const
 {
     return MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), m_locale);
 }
 
-TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, std::string amountString)
+TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString)
 {
     if(description.empty())
     {
@@ -139,6 +145,7 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
             }
         }
     }
+    m_transaction.setRGBA(rgba);
     m_transaction.setAmount(amount);
     return TransactionCheckStatus::Valid;
 }

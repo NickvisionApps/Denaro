@@ -45,6 +45,8 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_rowType{ nullptr };
 		GtkWidget* m_rowRepeatInterval{ nullptr };
 		GtkWidget* m_rowGroup{ nullptr };
+		GtkWidget* m_rowColor{ nullptr };
+		GtkWidget* m_btnColor{ nullptr };
 		GtkWidget* m_rowAmount{ nullptr };
 		/**
     	 * Sets the response

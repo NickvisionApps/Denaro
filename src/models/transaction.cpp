@@ -3,7 +3,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ boost::gregorian::day_clock::local_day() }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }, m_groupId{ -1 }
+Transaction::Transaction(unsigned int id) : m_id{ id }, m_date{ boost::gregorian::day_clock::local_day() }, m_description{ "" }, m_type{ TransactionType::Income }, m_repeatInterval{ RepeatInterval::Never }, m_amount{ 0.00 }, m_groupId{ -1 }, m_rgba{ "#3584e4" }
 {
 
 }
@@ -104,6 +104,16 @@ int Transaction::getGroupId() const
 void Transaction::setGroupId(int groupId)
 {
     m_groupId = groupId <= 0 ? -1 : groupId;
+}
+
+const std::string& Transaction::getRGBA() const
+{
+    return m_rgba;
+}
+
+void Transaction::setRGBA(const std::string& rgba)
+{
+    m_rgba = rgba;
 }
 
 bool Transaction::operator<(const Transaction& toCompare) const
