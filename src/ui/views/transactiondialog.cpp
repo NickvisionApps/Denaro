@@ -23,13 +23,12 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_box_append(GTK_BOX(m_boxMain), m_preferencesGroupMain);
     //Description
     m_rowDescription = adw_entry_row_new();
-    gtk_widget_set_size_request(m_rowDescription, 420, -1);
+    gtk_widget_set_size_request(m_rowDescription, 320, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowDescription), _("Description"));
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowDescription), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupMain), m_rowDescription);
     //Amount
     m_rowAmount = adw_entry_row_new();
-    gtk_widget_set_size_request(m_rowAmount, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount"));
     adw_entry_row_set_activates_default(ADW_ENTRY_ROW(m_rowAmount), true);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupMain), m_rowAmount);
@@ -46,18 +45,14 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_box_append(GTK_BOX(m_boxType), m_btnExpense);
     //Type
     m_rowType = adw_action_row_new();
-    gtk_widget_set_size_request(m_rowType, 420, -1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowType), _("Type"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowType), m_boxType);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowType), m_btnIncome);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupMain), m_rowType);
-    //Secondary Box
-    m_boxSecondary = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-    gtk_box_set_homogeneous(GTK_BOX(m_boxSecondary), true);
-    gtk_box_append(GTK_BOX(m_boxMain), m_boxSecondary);
     //Date and Repeat Interval Preferences Group
     m_preferencesGroupDateRepeat = adw_preferences_group_new();
-    gtk_box_append(GTK_BOX(m_boxSecondary), m_preferencesGroupDateRepeat);
+    gtk_widget_set_hexpand(m_preferencesGroupDateRepeat, true);
+    gtk_box_append(GTK_BOX(m_boxMain), m_preferencesGroupDateRepeat);
     //Date
     m_calendarDate = gtk_calendar_new();
     g_signal_connect(m_calendarDate, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
@@ -80,8 +75,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupDateRepeat), m_rowRepeatInterval);
     //Group and Color Preferences Group
     m_preferencesGroupGroupColor = adw_preferences_group_new();
-    gtk_widget_set_size_request(m_preferencesGroupGroupColor, 158, -1);
-    gtk_box_append(GTK_BOX(m_boxSecondary), m_preferencesGroupGroupColor);
+    gtk_box_append(GTK_BOX(m_boxMain), m_preferencesGroupGroupColor);
     //Group
     m_rowGroup = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowGroup), _("Group"));

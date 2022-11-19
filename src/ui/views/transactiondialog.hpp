@@ -36,7 +36,6 @@ namespace NickvisionMoney::UI::Views
  		NickvisionMoney::Controllers::TransactionDialogController& m_controller;
 		GtkWidget* m_gobj;
 		GtkWidget* m_boxMain{ nullptr };
-		GtkWidget* m_boxSecondary{ nullptr };
 		GtkWidget* m_preferencesGroupMain{ nullptr };
 		GtkWidget* m_preferencesGroupDateRepeat{ nullptr };
 		GtkWidget* m_preferencesGroupGroupColor{ nullptr };
