@@ -65,5 +65,9 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the date selected is changed
 		 */
 		void onDateChanged();
+		/**
+		 * Occurs when transaction type is changed
+		 */
+		void onTypeChanged();
  	};
 }

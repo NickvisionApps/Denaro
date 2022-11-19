@@ -35,7 +35,9 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupMain), m_rowAmount);
     //Type Box and Buttons
     m_btnIncome = gtk_toggle_button_new_with_label(pgettext("Transaction|Edition", "Income"));
+    g_signal_connect(m_btnIncome, "toggled", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onTypeChanged(); }), this);
     m_btnExpense = gtk_toggle_button_new_with_label(pgettext("Transaction|Edition", "Expense"));
+    g_signal_connect(m_btnExpense, "toggled", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onTypeChanged(); }), this);
     g_object_bind_property(m_btnIncome, "active", m_btnExpense, "active", (GBindingFlags)(G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN));
     m_boxType = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_add_css_class(m_boxType, "linked");
@@ -186,3 +188,16 @@ void TransactionDialog::onDateChanged()
     gtk_popover_popdown(GTK_POPOVER(m_popoverDate));
 }
 
+void TransactionDialog::onTypeChanged()
+{
+    if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnIncome)))
+    {
+        gtk_widget_add_css_class(m_btnIncome, "success");
+        gtk_widget_remove_css_class(m_btnExpense, "error");
+    }
+    else
+    {
+        gtk_widget_remove_css_class(m_btnIncome, "success");
+        gtk_widget_add_css_class(m_btnExpense, "error");
+    }
+}
