@@ -151,22 +151,23 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_rowEndRange = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowEndRange), _("End"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowEndRange), m_boxEndRange);
+    //Select Range Group
+    m_grpRange = adw_preferences_group_new();
     //Expander Row Select Range
     m_expRange = adw_expander_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_expRange), _("Select Range"));
     adw_expander_row_set_enable_expansion(ADW_EXPANDER_ROW(m_expRange), false);
-    gtk_widget_add_css_class(m_expRange, "card");
     adw_expander_row_set_show_enable_switch(ADW_EXPANDER_ROW(m_expRange), true);
-    gtk_widget_add_css_class(gtk_widget_get_first_child(gtk_widget_get_first_child(gtk_widget_get_first_child(m_expRange))), "card");
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowStartRange);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowEndRange);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpRange), m_expRange);
     //Calendar Group
     m_grpCalendar = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCalendar), _("Calendar"));
     adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendar);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCalendar), m_calendar);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpCalendar);
-    gtk_box_append(GTK_BOX(m_paneBox), m_expRange);
+    gtk_box_append(GTK_BOX(m_paneBox), m_grpRange);
     //Separator
     adw_flap_set_separator(ADW_FLAP(m_flap), gtk_separator_new(GTK_ORIENTATION_VERTICAL));
     //Button New Transaction
