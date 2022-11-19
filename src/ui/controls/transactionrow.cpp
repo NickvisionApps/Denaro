@@ -39,6 +39,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     GtkCssProvider* cssProviderBtnId{ gtk_css_provider_new() };
     std::string cssBtnId = R"(
         #btnId {
+            font-size: 14px;
             background-color: )";
     cssBtnId += std::string(gdk_rgba_to_string(&colorBtnId));
     cssBtnId += ";\n}";
