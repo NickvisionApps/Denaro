@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 23:19+0300\n"
+"POT-Creation-Date: 2022-11-19 01:00+0100\n"
 "PO-Revision-Date: 2022-11-16 16:24+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:63
@@ -28,9 +28,12 @@ msgid "Unable to export account as CSV."
 msgstr "Nije moguće izvesti račun kao CSV datoteku."
 
 #: src/controllers/accountviewcontroller.cpp:78
-#, c-format
-msgid "Imported %d transactions from CSV."
-msgstr "Uvezene transakcije iz CSV datoteke: %d."
+#, fuzzy, c-format
+msgid "Imported %d transaction from CSV."
+msgid_plural "Imported %d transactions from CSV."
+msgstr[0] "Uvezene transakcije iz CSV datoteke: %d."
+msgstr[1] "Uvezene transakcije iz CSV datoteke: %d."
+msgstr[2] "Uvezene transakcije iz CSV datoteke: %d."
 
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
@@ -177,16 +180,16 @@ msgstr "Nova transakcija (Ctrl+Shift+N)"
 msgid "Transactions"
 msgstr "Transakcije"
 
-#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:229
+#: src/ui/views/accountview.cpp:183 src/ui/views/mainwindow.cpp:251
 msgid "_Save"
 msgstr "_Spremi"
 
 #: src/ui/views/accountview.cpp:183 src/ui/views/accountview.cpp:207
-#: src/ui/views/mainwindow.cpp:229 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/mainwindow.cpp:251 src/ui/views/mainwindow.cpp:287
 msgid "_Cancel"
 msgstr "O_dustani"
 
-#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:265
+#: src/ui/views/accountview.cpp:207 src/ui/views/mainwindow.cpp:287
 msgid "_Open"
 msgstr "_Otvori"
 
@@ -226,24 +229,24 @@ msgstr ""
 msgid "Group"
 msgstr "Grupa"
 
-#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:59
+#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:61
 msgid "Name"
 msgstr "Ime"
 
-#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:61
-#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:109
+#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:63
+#: src/ui/views/transactiondialog.cpp:45 src/ui/views/transactiondialog.cpp:111
 msgid "Description"
 msgstr "Opis"
 
-#: src/ui/views/groupdialog.cpp:66
+#: src/ui/views/groupdialog.cpp:68
 msgid "Name (Empty)"
 msgstr "Ime (prazno)"
 
-#: src/ui/views/groupdialog.cpp:71 src/ui/views/transactiondialog.cpp:116
+#: src/ui/views/groupdialog.cpp:73 src/ui/views/transactiondialog.cpp:118
 msgid "Description (Empty)"
 msgstr "Opis (prazan)"
 
-#: src/ui/views/groupdialog.cpp:76
+#: src/ui/views/groupdialog.cpp:78
 msgid "Name (Exists)"
 msgstr "Ime (postoji)"
 
@@ -289,8 +292,8 @@ msgstr "Glavni izbornik"
 msgid "New Account"
 msgstr "Novi račun"
 
-#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:229
-#: src/ui/views/mainwindow.cpp:265 src/ui/views/shortcutsdialog.cpp:97
+#: src/ui/views/mainwindow.cpp:111 src/ui/views/mainwindow.cpp:251
+#: src/ui/views/mainwindow.cpp:287 src/ui/views/shortcutsdialog.cpp:97
 msgid "Open Account"
 msgstr "Otvori račun"
 
@@ -306,11 +309,11 @@ msgstr "Nedavni računi"
 msgid "Open or create an account to get started."
 msgstr "Otvori ili stvori jedan račun."
 
-#: src/ui/views/mainwindow.cpp:232 src/ui/views/mainwindow.cpp:268
+#: src/ui/views/mainwindow.cpp:254 src/ui/views/mainwindow.cpp:290
 msgid "Money Account (*.nmoney)"
 msgstr "Money račun (*.nmoney)"
 
-#: src/ui/views/mainwindow.cpp:245
+#: src/ui/views/mainwindow.cpp:267
 msgid "Unable to override an opened account."
 msgstr "Nije moguće prepisati istoimen otvoreni račun."
 
@@ -397,15 +400,15 @@ msgstr "Rashod"
 msgid "Repeat Interval"
 msgstr "Interval ponavljanja"
 
-#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:111
+#: src/ui/views/transactiondialog.cpp:72 src/ui/views/transactiondialog.cpp:113
 msgid "Amount"
 msgstr "Iznos"
 
-#: src/ui/views/transactiondialog.cpp:121
+#: src/ui/views/transactiondialog.cpp:123
 msgid "Amount (Empty)"
 msgstr "Iznos (prazan)"
 
-#: src/ui/views/transactiondialog.cpp:126
+#: src/ui/views/transactiondialog.cpp:128
 msgid "Amount (Invalid)"
 msgstr "Iznos (neispravan)"
 
