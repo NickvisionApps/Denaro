@@ -48,9 +48,7 @@ namespace NickvisionMoney::UI
 		 *
 		 * @param app GtkApplication*
 		 * @param files GFile**
-		 * @param n_files The number of files
-		 * @param hint The hint
 		 */
-		void onOpen(GtkApplication* app, gpointer files, int n_files, const char* hint);
+		void onOpen(GtkApplication* app, gpointer files);
 	};
 }
