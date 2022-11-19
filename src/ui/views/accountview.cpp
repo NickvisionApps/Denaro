@@ -312,12 +312,13 @@ void AccountView::onAccountInfoChanged()
         gtk_flow_box_remove(GTK_FLOW_BOX(m_flowBox), transactionRow->gobj());
     }
     m_transactionRows.clear();
-    for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
+    m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
+    for(const Transaction& transaction : m_controller.getFilteredTransactions())
     {
-        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(pair.second, m_controller.getLocale()) };
+        std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller.getLocale()) };
         row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)))
+        if(m_controller.getSortFirstToLast())
         {
             gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
         }
@@ -328,8 +329,6 @@ void AccountView::onAccountInfoChanged()
         m_transactionRows.push_back(row);
         g_main_context_iteration(g_main_context_default(), false);
     }
-    //Remember Sort Setting
-    m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
 }
 
 void AccountView::onExportAsCSV()

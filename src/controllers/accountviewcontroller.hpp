@@ -66,9 +66,15 @@ namespace NickvisionMoney::Controllers
 		/**
 		 * Gets the map of transactions in the account
 		 *
-		 * @returns The transaction in the account
+		 * @returns The transactions in the account
 		 */
 		const std::map<unsigned int, NickvisionMoney::Models::Transaction>& getTransactions() const;
+		/**
+		 * Gets a list of filtered transactions
+		 *
+		 * @returns The list of filtered transactions
+		 */
+		std::vector<NickvisionMoney::Models::Transaction> getFilteredTransactions() const;
 		/**
 		 * Registers a callback for updating the UI when an account's info is changed
 		 *

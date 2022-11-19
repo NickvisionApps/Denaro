@@ -47,6 +47,16 @@ const std::map<unsigned int, Transaction>& AccountViewController::getTransaction
     return m_account.getTransactions();
 }
 
+std::vector<Transaction> AccountViewController::getFilteredTransactions() const
+{
+    std::vector<Transaction> filteredTransactions;
+    for(const std::pair<const unsigned int, Transaction>& pair : m_account.getTransactions())
+    {
+        filteredTransactions.push_back(pair.second);
+    }
+    return filteredTransactions;
+}
+
 void AccountViewController::registerAccountInfoChangedCallback(const std::function<void()>& callback)
 {
     m_accountInfoChangedCallback = callback;
