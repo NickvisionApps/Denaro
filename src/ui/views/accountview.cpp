@@ -109,8 +109,16 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_box_append(GTK_BOX(m_paneBox), m_grpGroups);
     //Calendar Widget
     m_calendar = gtk_calendar_new();
+    gtk_widget_set_name(m_calendar, "calendar");
     gtk_widget_add_css_class(m_calendar, "card");
-    gtk_widget_add_css_class(m_calendar, "osd");
+    GtkCssProvider* cssProviderCalendar{ gtk_css_provider_new() };
+    std::string cssCalendar = R"(
+        #calendar {
+            background-color: @card_bg_color;
+            border-width: 0px;
+        })";
+    gtk_css_provider_load_from_data(cssProviderCalendar, cssCalendar.c_str(), -1);
+    gtk_style_context_add_provider(gtk_widget_get_style_context(m_calendar), GTK_STYLE_PROVIDER(cssProviderCalendar),  GTK_STYLE_PROVIDER_PRIORITY_USER);
     //Button Reset Calendar Filter
     m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetCalendar, false);
