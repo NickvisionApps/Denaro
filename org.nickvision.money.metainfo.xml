@@ -42,6 +42,7 @@
   <releases>
     <release version="2022.11.1-next" date="2022-11-17">
       <description>
+        <p>- Introducing a brand new Account View! We completely redesigned the account view to provide an easier and more efficient way to manage your account and make the most out of Money</p>
         <p>- You can now double-click a .nmoney file and it will open directly in Money</p>
         <p>- Fixed an issue where some monetary values were displayed incorrectly</p>
       </description>
