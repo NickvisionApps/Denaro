@@ -41,9 +41,8 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
         #btnId {
             background-color: )";
     cssBtnId += std::string(gdk_rgba_to_string(&colorBtnId));
-    cssBtnId += "\;\n}";
+    cssBtnId += ";\n}";
     gtk_css_provider_load_from_data(cssProviderBtnId, cssBtnId.c_str(), -1);
-    GdkDisplay* screen{ gdk_display_get_default() };
     gtk_style_context_add_provider(gtk_widget_get_style_context(m_btnId), GTK_STYLE_PROVIDER(cssProviderBtnId),  GTK_STYLE_PROVIDER_PRIORITY_USER);
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_gobj), m_btnId);
     //Amount Label
@@ -100,3 +99,4 @@ void TransactionRow::onDelete()
 {
     m_deleteCallback(m_transaction.getId());
 }
+
