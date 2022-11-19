@@ -188,12 +188,10 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_button_set_icon_name(GTK_BUTTON(m_btnSortTopBottom), "view-sort-descending-symbolic");
     gtk_widget_set_tooltip_text(m_btnSortTopBottom, "Sort From Top To Bottom");
     g_signal_connect(m_btnSortTopBottom, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom), true);
     m_btnSortBottomTop = gtk_toggle_button_new();
     gtk_button_set_icon_name(GTK_BUTTON(m_btnSortBottomTop), "view-sort-ascending-symbolic");
     gtk_widget_set_tooltip_text(m_btnSortBottomTop, "Sort From Bottom To Top");
     g_signal_connect(m_btnSortBottomTop, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortBottomTop), false);
     g_object_bind_property(m_btnSortTopBottom, "active", m_btnSortBottomTop, "active", (GBindingFlags)(G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN));
     m_boxSort = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_append(GTK_BOX(m_boxSort), m_btnSortTopBottom);
@@ -264,6 +262,14 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Account Info Changed Callback
     m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information
+    if(m_controller.getSortFirstToLast())
+    {
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom), true);
+    }
+    else
+    {
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortBottomTop), true);
+    }
     onAccountInfoChanged();
 }
 
@@ -321,6 +327,8 @@ void AccountView::onAccountInfoChanged()
         m_transactionRows.push_back(row);
         g_main_context_iteration(g_main_context_default(), false);
     }
+    //Remember Sort Setting
+    m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
 }
 
 void AccountView::onExportAsCSV()

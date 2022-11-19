@@ -7,6 +7,7 @@
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
+#include "../models/configuration.hpp"
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
 
@@ -22,10 +23,10 @@ namespace NickvisionMoney::Controllers
 		 * Constructs an AccountViewController
 		 *
 		 * @param path The path of the account to open
-		 * @param locale The user's locale
+		 * @param configuration The configuration
 		 * @param sendToastCallback A callback function for sending a toast notification to the UI
 		 */
-		AccountViewController(const std::string& path, const std::locale& locale, const std::function<void(const std::string& message)>& sendToastCallback);
+		AccountViewController(const std::string& path, NickvisionMoney::Models::Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback);
 		/**
 		 * Gets the path of the account
 		 *
@@ -148,9 +149,21 @@ namespace NickvisionMoney::Controllers
 		 * @returns A new TransactionDialogController
 		 */
 		TransactionDialogController createTransactionDialogController(unsigned int id) const;
+		/**
+		 * Gets whether or not to sort transactions from first to last
+		 *
+		 * @returns True for first to last, false for last to first
+		 */
+		bool getSortFirstToLast() const;
+		/**
+		 * Sets whether or not to sort transactions from first to last
+		 *
+		 * @param sortFirstToLast True for first to last, false for last to first
+		 */
+		void setSortFirstToLast(bool sortFirstToLast);
 
 	private:
-		const std::locale& m_locale;
+		NickvisionMoney::Models::Configuration& m_configuration;
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;

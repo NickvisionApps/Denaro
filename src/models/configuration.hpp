@@ -68,6 +68,18 @@ namespace NickvisionMoney::Models
 		 */
 		void addRecentAccount(const std::string& newRecentAccount);
 		/**
+		 * Gets whether or not to sort transactions from first to last
+		 *
+		 * @returns True for first to last, false for last to first
+		 */
+		bool getSortFirstToLast() const;
+		/**
+		 * Sets whether or not to sort transactions from first to last
+		 *
+		 * @param sortFirstToLast True for first to last, false for last to first
+		 */
+		void setSortFirstToLast(bool sortFirstToLast);
+		/**
 		 * Saves the configuration to disk
 		 */
 		void save() const;
@@ -79,5 +91,6 @@ namespace NickvisionMoney::Models
 		std::string m_recentAccount1;
 		std::string m_recentAccount2;
 		std::string m_recentAccount3;
+		bool m_sortFirstToLast;
 	};
 }

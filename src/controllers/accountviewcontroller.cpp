@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-AccountViewController::AccountViewController(const std::string& path, const std::locale& locale, const std::function<void(const std::string& message)>& sendToastCallback) : m_locale{ locale }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
+AccountViewController::AccountViewController(const std::string& path, Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback) : m_configuration{ configuration }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
 
 }
@@ -19,22 +19,22 @@ const std::string& AccountViewController::getAccountPath() const
 
 const std::locale& AccountViewController::getLocale() const
 {
-    return m_locale;
+    return m_configuration.getLocale();
 }
 
 std::string AccountViewController::getAccountTotalString() const
 {
-    return MoneyHelpers::boostMoneyToLocaleString(m_account.getTotal(), m_locale);
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getTotal(), m_configuration.getLocale());
 }
 
 std::string AccountViewController::getAccountIncomeString() const
 {
-    return MoneyHelpers::boostMoneyToLocaleString(m_account.getIncome(), m_locale);
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getIncome(), m_configuration.getLocale());
 }
 
 std::string AccountViewController::getAccountExpenseString() const
 {
-    return MoneyHelpers::boostMoneyToLocaleString(m_account.getExpense(), m_locale);
+    return MoneyHelpers::boostMoneyToLocaleString(m_account.getExpense(), m_configuration.getLocale());
 }
 
 const std::map<unsigned int, Group>& AccountViewController::getGroups() const
@@ -136,11 +136,21 @@ void AccountViewController::deleteTransaction(unsigned int id)
 
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
-    return { m_account.getNextAvailableTransactionId(), m_account.getGroups(), m_locale };
+    return { m_account.getNextAvailableTransactionId(), m_account.getGroups(), m_configuration.getLocale() };
 }
 
 TransactionDialogController AccountViewController::createTransactionDialogController(unsigned int id) const
 {
-    return { m_account.getTransactionById(id).value(), m_account.getGroups(), m_locale };
+    return { m_account.getTransactionById(id).value(), m_account.getGroups(), m_configuration.getLocale() };
 }
 
+bool AccountViewController::getSortFirstToLast() const
+{
+    return m_configuration.getSortFirstToLast();
+}
+
+void AccountViewController::setSortFirstToLast(bool sortFirstToLast)
+{
+    m_configuration.setSortFirstToLast(sortFirstToLast);
+    m_configuration.save();
+}
