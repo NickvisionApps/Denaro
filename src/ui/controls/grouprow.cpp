@@ -48,6 +48,11 @@ GtkWidget* GroupRow::gobj()
     return m_gobj;
 }
 
+bool GroupRow::getIsFilterChecked() const
+{
+    return gtk_check_button_get_active(GTK_CHECK_BUTTON(m_chkFilter));
+}
+
 void GroupRow::registerEditCallback(const std::function<void(unsigned int)>& callback)
 {
     m_editCallback = callback;

@@ -27,6 +27,12 @@ namespace NickvisionMoney::UI::Controls
 		 */
 		GtkWidget* gobj();
 		/**
+		 * Gets whether or not the filter button is checked
+		 *
+		 * @returns True if checked, else false
+		 */
+		bool getIsFilterChecked() const;
+		/**
 		 * Registers a callback for editing the group
 		 *
 		 * @param callback A void(unsigned int) function
