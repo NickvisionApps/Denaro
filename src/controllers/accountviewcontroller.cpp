@@ -183,8 +183,11 @@ void AccountViewController::setSortFirstToLast(bool sortFirstToLast)
     m_configuration.save();
 }
 
-void AccountViewController::updateFilter(int key, bool value)
+void AccountViewController::updateFilter(int key, bool value, bool updateUI)
 {
     m_mapFilters.at(key) = value;
-    m_accountInfoChangedCallback();
+    if(updateUI)
+    {
+        m_accountInfoChangedCallback();
+    }
 }

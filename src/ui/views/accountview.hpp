@@ -44,7 +44,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_chkExpense{ nullptr };
 		GtkWidget* m_boxButtonsOverview{ nullptr };
 		GtkWidget* m_btnMenuAccountActions{ nullptr };
-		GtkWidget* m_btnResetOverview{ nullptr };
+		GtkWidget* m_btnResetOverviewFilter{ nullptr };
 		GtkWidget* m_grpGroups{ nullptr };
 		GtkWidget* m_boxButtonsGroups{ nullptr };
 		GtkWidget* m_btnNewGroup{ nullptr };
@@ -90,6 +90,10 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the import from csv menu item is clicked
 		 */
 		void onImportFromCSV();
+		/**
+		 * Occurs when the reset overview filter is clicked
+		 */
+		void onResetOverviewFilter();
 		/**
 		 * Occurs when the new group button is clicked
 		 */

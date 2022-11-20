@@ -169,12 +169,13 @@ namespace NickvisionMoney::Controllers
 		 */
 		void setSortFirstToLast(bool sortFirstToLast);
 		/**
-		 * Updates a filter and triggers the UI to reload
+		 * Updates a filter
 		 *
 		 * @param key The group id or -3 for income or -2 for expense
 		 * @param value True to include the filter, else false
+		 * @param updateUI Whether or not to update the UI with the new filtered transactions
 		 */
-		void updateFilter(int key, bool value);
+		void updateFilter(int key, bool value, bool updateUI = true);
 
 	private:
 		NickvisionMoney::Models::Configuration& m_configuration;

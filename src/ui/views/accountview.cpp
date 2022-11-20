@@ -73,11 +73,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     g_object_unref(menuActions);
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
     //Button Reset Overview Filter
-    m_btnResetOverview = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
-    gtk_widget_set_sensitive(m_btnResetOverview, false);
-    gtk_widget_add_css_class(m_btnResetOverview, "flat");
-    gtk_widget_set_tooltip_text(m_btnResetOverview, _("Reset Overview Filters"));
-    gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverview);
+    m_btnResetOverviewFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    gtk_widget_add_css_class(m_btnResetOverviewFilter, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetOverviewFilter, _("Reset Overview Filters"));
+    g_signal_connect(m_btnResetOverviewFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetOverviewFilter(); }), this);
+    gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnResetOverviewFilter);
     //Overview Group
     m_grpOverview = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpOverview), _("Overview"));
@@ -381,6 +381,18 @@ void AccountView::onImportFromCSV()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFileDialog));
+}
+
+void AccountView::onResetOverviewFilter()
+{
+    if(!gtk_check_button_get_active(GTK_CHECK_BUTTON(m_chkIncome)))
+    {
+        gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
+    }
+    if(!gtk_check_button_get_active(GTK_CHECK_BUTTON(m_chkExpense)))
+    {
+        gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
+    }
 }
 
 void AccountView::onNewGroup()
