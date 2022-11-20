@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <unordered_map>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
@@ -174,15 +175,30 @@ namespace NickvisionMoney::Controllers
 		 * @param key The key of the filter
 		 * @returns True if active, else false
 		 */
-		bool getFilterActive(int key) const;
+		bool getIfFilterActive(int key) const;
 		/**
 		 * Updates a filter
 		 *
 		 * @param key The group id or -3 for income or -2 for expense
 		 * @param value True to include the filter, else false
-		 * @param updateUI Whether or not to update the UI with the new filtered transactions
 		 */
-		void updateFilter(int key, bool value, bool updateUI = true);
+		void updateFilterValue(int key, bool value);
+		/**
+		 * Resets the date filter
+		 */
+		void resetDateFilter();
+		/**
+		 * Sets the start date of the filter
+		 *
+		 * @param date The new start date
+		 */
+		void setFilterStartDate(const boost::gregorian::date& date);
+		/**
+		 * Sets the end date of the filter
+		 *
+		 * @param date The new end date
+		 */
+		void setFilterEndDate(const boost::gregorian::date& date);
 
 	private:
 		NickvisionMoney::Models::Configuration& m_configuration;
@@ -190,5 +206,7 @@ namespace NickvisionMoney::Controllers
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
 		std::unordered_map<int, bool> m_mapFilters;
+		boost::gregorian::date m_filterStartDate;
+		boost::gregorian::date m_filterEndDate;
 	};
 }

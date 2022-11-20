@@ -130,5 +130,9 @@ namespace NickvisionMoney::UI::Views
 		 * @param id The id of the transaction to delete
 		 */
 		void onDeleteTransaction(unsigned int id);
+		/**
+		 * Occurs when the selected date of the calendar is changed
+		 */
+		void onCalendarDateChanged();
 	};
 }

@@ -1,4 +1,5 @@
 #include "accountview.hpp"
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "groupdialog.hpp"
 #include "transactiondialog.hpp"
 #include "../controls/messagedialog.hpp"
@@ -41,7 +42,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_chkIncome = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
     gtk_widget_add_css_class(m_chkIncome, "selection-mode");
-    g_signal_connect(m_chkIncome, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkIncome, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilter(-3, gtk_check_button_get_active(chkIncome)); }), this);
+    g_signal_connect(m_chkIncome, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkIncome, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilterValue(-3, gtk_check_button_get_active(chkIncome)); }), this);
     m_rowIncome = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowIncome), m_chkIncome);
@@ -52,7 +53,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_chkExpense = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
     gtk_widget_add_css_class(m_chkExpense, "selection-mode");
-    g_signal_connect(m_chkExpense, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkExpense, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilter(-2, gtk_check_button_get_active(chkExpense)); }), this);
+    g_signal_connect(m_chkExpense, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkExpense, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilterValue(-2, gtk_check_button_get_active(chkExpense)); }), this);
     m_rowExpense = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowExpense), m_chkExpense);
@@ -113,6 +114,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_calendar = gtk_calendar_new();
     gtk_widget_set_name(m_calendar, "calendar");
     gtk_widget_add_css_class(m_calendar, "card");
+    g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarDateChanged(); }), this);
     //Button Reset Calendar Filter
     m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_set_sensitive(m_btnResetCalendar, false);
@@ -301,13 +303,12 @@ void AccountView::onAccountInfoChanged()
     std::sort(groups.begin(), groups.end());
     for(const Group& group : groups)
     {
-        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale(), m_controller.getFilterActive(group.getId())) };
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale(), m_controller.getIfFilterActive(group.getId())) };
         row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
-        row->registerUpdateFilterCallback([&](int id, bool value) { m_controller.updateFilter(id, value); });
+        row->registerUpdateFilterCallback([&](int id, bool value) { m_controller.updateFilterValue(id, value); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
         m_groupRows.push_back(row);
-        g_main_context_iteration(g_main_context_default(), false);
     }
     //Transactions
     for(const std::shared_ptr<TransactionRow>& transactionRow : m_transactionRows)
@@ -330,7 +331,6 @@ void AccountView::onAccountInfoChanged()
             gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
         }
         m_transactionRows.push_back(row);
-        g_main_context_iteration(g_main_context_default(), false);
     }
 }
 
@@ -460,4 +460,12 @@ void AccountView::onDeleteTransaction(unsigned int id)
     {
         m_controller.deleteTransaction(id);
     }
+}
+
+void AccountView::onCalendarDateChanged()
+{
+    GDateTime* gtkSelectedDate{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
+    boost::gregorian::date selectedDate{ g_date_time_get_year(gtkSelectedDate), g_date_time_get_month(gtkSelectedDate), g_date_time_get_day_of_month(gtkSelectedDate) };
+    m_controller.setFilterStartDate(selectedDate);
+    m_controller.setFilterEndDate(selectedDate);
 }

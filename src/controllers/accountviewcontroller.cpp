@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-AccountViewController::AccountViewController(const std::string& path, Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback) : m_configuration{ configuration }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
+AccountViewController::AccountViewController(const std::string& path, Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback) : m_configuration{ configuration }, m_account{ path }, m_sendToastCallback{ sendToastCallback }, m_filterStartDate{ boost::gregorian::day_clock::local_day() }, m_filterEndDate{ boost::gregorian::day_clock::local_day() }
 {
     m_mapFilters.insert({ -3, true }); //income
     m_mapFilters.insert({ -2, true }); //expense
@@ -179,21 +179,44 @@ std::vector<Transaction> AccountViewController::getFilteredTransactions() const
         {
             continue;
         }
+        if(m_filterStartDate != boost::gregorian::day_clock::local_day() && m_filterEndDate != boost::gregorian::day_clock::local_day())
+        {
+            if(pair.second.getDate() < m_filterStartDate || pair.second.getDate() > m_filterEndDate)
+            {
+                continue;
+            }
+        }
         filteredTransactions.push_back(pair.second);
     }
     return filteredTransactions;
 }
 
-bool AccountViewController::getFilterActive(int key) const
+bool AccountViewController::getIfFilterActive(int key) const
 {
     return m_mapFilters.at(key);
 }
 
-void AccountViewController::updateFilter(int key, bool value, bool updateUI)
+void AccountViewController::updateFilterValue(int key, bool value)
 {
     m_mapFilters.at(key) = value;
-    if(updateUI)
-    {
-        m_accountInfoChangedCallback();
-    }
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::resetDateFilter()
+{
+    m_filterStartDate = boost::gregorian::day_clock::local_day();
+    m_filterEndDate = boost::gregorian::day_clock::local_day();
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::setFilterStartDate(const boost::gregorian::date& date)
+{
+    m_filterStartDate = date;
+    m_accountInfoChangedCallback();
+}
+
+void AccountViewController::setFilterEndDate(const boost::gregorian::date& date)
+{
+    m_filterEndDate = date;
+    m_accountInfoChangedCallback();
 }
