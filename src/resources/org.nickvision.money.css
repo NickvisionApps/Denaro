@@ -2,8 +2,18 @@
   background-color: @card_bg_color;
   border-width: 0px;
 }
+
 #calendar button {
   border-radius: 12px;
+}
+
+#calendar .day-number {
+	border-radius: 12px;
+}
+
+#calendar .today {
+	background-color: @card_bg_color;
+	box-shadow: none;
 }
 
 #calendar .day-number:checked {
@@ -14,6 +24,5 @@
 #calendar .day-number:selected {
   background-color: @accent_bg_color;
   color: @fg_color;
-  border-radius: 12px;
 }
 
