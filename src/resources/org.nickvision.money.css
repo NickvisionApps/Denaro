@@ -6,3 +6,14 @@
   border-radius: 12px;
 }
 
+#calendar .day-number:checked {
+  color: @accent_color;
+  font-weight: bold;
+}
+
+#calendar .day-number:selected {
+  background-color: @accent_bg_color;
+  color: @fg_color;
+  border-radius: 12px;
+}
+
