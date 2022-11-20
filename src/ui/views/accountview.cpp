@@ -112,7 +112,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_box_append(GTK_BOX(m_paneBox), m_grpGroups);
     //Calendar Widget
     m_calendar = gtk_calendar_new();
-    gtk_widget_set_name(m_calendar, "calendar");
+    gtk_widget_set_name(m_calendar, "calendarAccount");
     gtk_widget_add_css_class(m_calendar, "card");
     g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarDateChanged(); }), this);
     //Button Reset Calendar Filter

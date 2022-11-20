@@ -1,28 +1,42 @@
-#calendar {
+/* Account View Calendar */
+#calendarAccount {
   background-color: @card_bg_color;
   border-width: 0px;
 }
 
-#calendar button {
+#calendarAccount button {
   border-radius: 12px;
 }
 
-#calendar .day-number {
+#calendarAccount .day-number {
 	border-radius: 12px;
 }
 
-#calendar .today {
+#calendarAccount .today {
 	background-color: @headerbar_bg_color;
 	box-shadow: none;
 }
 
-#calendar .day-number:checked {
+#calendarAccount .day-number:checked {
   color: @accent_color;
   font-weight: bold;
 }
 
-#calendar .day-number:selected {
+#calendarAccount .day-number:selected {
   background-color: @accent_bg_color;
   color: @fg_color;
 }
 
+/* Transaction Dialog Calendar */
+#calendarTransactions button {
+  border-radius: 12px;
+}
+
+#calendarTransactions .day-number {
+	border-radius: 12px;
+}
+
+#calendarTransactions .today {
+	background-color: @headerbar_bg_color;
+	box-shadow: none;
+}

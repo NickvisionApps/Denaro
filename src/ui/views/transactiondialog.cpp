@@ -55,6 +55,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     gtk_box_append(GTK_BOX(m_boxMain), m_preferencesGroupDateRepeat);
     //Date
     m_calendarDate = gtk_calendar_new();
+    gtk_widget_set_name(m_calendarDate, "calendarTransactions");
     g_signal_connect(m_calendarDate, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
     m_popoverDate = gtk_popover_new();
     gtk_popover_set_child(GTK_POPOVER(m_popoverDate), m_calendarDate);
