@@ -99,11 +99,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnNewGroup);
     //Button Reset Groups Filter
-    m_btnResetGroups = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
-    gtk_widget_set_sensitive(m_btnResetGroups, false);
-    gtk_widget_add_css_class(m_btnResetGroups, "flat");
-    gtk_widget_set_tooltip_text(m_btnResetGroups, _("Reset Groups Filters"));
-    gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroups);
+    m_btnResetGroupsFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    gtk_widget_add_css_class(m_btnResetGroupsFilter, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetGroupsFilter, _("Reset Groups Filters"));
+    g_signal_connect(m_btnResetGroupsFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetGroupsFilter(); }), this);
+    gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnResetGroupsFilter);
     //Groups Group
     m_grpGroups = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpGroups), _("Groups"));
@@ -301,9 +301,10 @@ void AccountView::onAccountInfoChanged()
     std::sort(groups.begin(), groups.end());
     for(const Group& group : groups)
     {
-        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale()) };
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale(), m_controller.getFilterActive(group.getId())) };
         row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
+        row->registerUpdateFilterCallback([&](int id, bool value) { m_controller.updateFilter(id, value); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
         m_groupRows.push_back(row);
         g_main_context_iteration(g_main_context_default(), false);
@@ -421,6 +422,14 @@ void AccountView::onDeleteGroup(unsigned int id)
     if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
         m_controller.deleteGroup(id);
+    }
+}
+
+void AccountView::onResetGroupsFilter()
+{
+    for(const std::shared_ptr<GroupRow>& groupRow : m_groupRows)
+    {
+        groupRow->resetFilter();
     }
 }
 

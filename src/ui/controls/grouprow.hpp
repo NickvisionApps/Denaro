@@ -18,20 +18,16 @@ namespace NickvisionMoney::UI::Controls
 		 * Constructs a GroupRow
 		 *
 		 * @param group The Group model to manage
+		 * @param locale The user's locale
+		 * @param filterActive Whether or not the filter should be active
 		 */
-		GroupRow(const NickvisionMoney::Models::Group& group, const std::locale& locale);
+		GroupRow(const NickvisionMoney::Models::Group& group, const std::locale& locale, bool filterActive = true);
 		/**
 		 * Gets the GtkWidget* representing the GroupRow
 		 *
 		 * @returns The GtkWidget* representing the GroupRow
 		 */
 		GtkWidget* gobj();
-		/**
-		 * Gets whether or not the filter button is checked
-		 *
-		 * @returns True if checked, else false
-		 */
-		bool getIsFilterChecked() const;
 		/**
 		 * Registers a callback for editing the group
 		 *
@@ -44,11 +40,22 @@ namespace NickvisionMoney::UI::Controls
 		 * @param callback A void(unsigned int) function
 		 */
 		void registerDeleteCallback(const std::function<void(unsigned int)>& callback);
+		/**
+		 * Registers a callback for updating the filter
+		 *
+		 * @param callback A void(int, bool) function
+		 */
+		void registerUpdateFilterCallback(const std::function<void(int, bool)>& callback);
+		/**
+		 * Resets the GroupRow's filter
+		 */
+		void resetFilter();
 
 	private:
 		NickvisionMoney::Models::Group m_group;
 		std::function<void(unsigned int)> m_editCallback;
 		std::function<void(unsigned int)> m_deleteCallback;
+		std::function<void(int, bool)> m_updateFilterCallback;
 		GtkWidget* m_gobj;
 		GtkWidget* m_chkFilter;
 		GtkWidget* m_box;
@@ -63,5 +70,9 @@ namespace NickvisionMoney::UI::Controls
 		 * Occurs when the delete button is clicked
 		 */
 		void onDelete();
+		/**
+		 * Occurs when the filter checkbox is changed
+		 */
+		void onUpdateFilter();
 	};
 }

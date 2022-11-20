@@ -71,12 +71,6 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::map<unsigned int, NickvisionMoney::Models::Transaction>& getTransactions() const;
 		/**
-		 * Gets a list of filtered transactions
-		 *
-		 * @returns The list of filtered transactions
-		 */
-		std::vector<NickvisionMoney::Models::Transaction> getFilteredTransactions() const;
-		/**
 		 * Registers a callback for updating the UI when an account's info is changed
 		 *
 		 * @param callback A void() function
@@ -168,6 +162,19 @@ namespace NickvisionMoney::Controllers
 		 * @param sortFirstToLast True for first to last, false for last to first
 		 */
 		void setSortFirstToLast(bool sortFirstToLast);
+		/**
+		 * Gets a list of filtered transactions
+		 *
+		 * @returns The list of filtered transactions
+		 */
+		std::vector<NickvisionMoney::Models::Transaction> getFilteredTransactions() const;
+		/**
+		 * Gets whether or not a filter is active
+		 *
+		 * @param key The key of the filter
+		 * @returns True if active, else false
+		 */
+		bool getFilterActive(int key) const;
 		/**
 		 * Updates a filter
 		 *

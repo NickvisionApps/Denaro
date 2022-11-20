@@ -53,28 +53,6 @@ const std::map<unsigned int, Transaction>& AccountViewController::getTransaction
     return m_account.getTransactions();
 }
 
-std::vector<Transaction> AccountViewController::getFilteredTransactions() const
-{
-    std::vector<Transaction> filteredTransactions;
-    for(const std::pair<const unsigned int, Transaction>& pair : m_account.getTransactions())
-    {
-        if(pair.second.getType() == TransactionType::Income && !m_mapFilters.at(-3))
-        {
-            continue;
-        }
-        if(pair.second.getType() == TransactionType::Expense && !m_mapFilters.at(-2))
-        {
-            continue;
-        }
-        if(!m_mapFilters.at(pair.second.getGroupId()))
-        {
-            continue;
-        }
-        filteredTransactions.push_back(pair.second);
-    }
-    return filteredTransactions;
-}
-
 void AccountViewController::registerAccountInfoChangedCallback(const std::function<void()>& callback)
 {
     m_accountInfoChangedCallback = callback;
@@ -109,6 +87,7 @@ void AccountViewController::importFromCSV(std::string& path)
 void AccountViewController::addGroup(const Group& group)
 {
     m_account.addGroup(group);
+    m_mapFilters.insert({ group.getId(), true });
     m_accountInfoChangedCallback();
 }
 
@@ -181,6 +160,33 @@ void AccountViewController::setSortFirstToLast(bool sortFirstToLast)
 {
     m_configuration.setSortFirstToLast(sortFirstToLast);
     m_configuration.save();
+}
+
+std::vector<Transaction> AccountViewController::getFilteredTransactions() const
+{
+    std::vector<Transaction> filteredTransactions;
+    for(const std::pair<const unsigned int, Transaction>& pair : m_account.getTransactions())
+    {
+        if(pair.second.getType() == TransactionType::Income && !m_mapFilters.at(-3))
+        {
+            continue;
+        }
+        if(pair.second.getType() == TransactionType::Expense && !m_mapFilters.at(-2))
+        {
+            continue;
+        }
+        if(!m_mapFilters.at(pair.second.getGroupId()))
+        {
+            continue;
+        }
+        filteredTransactions.push_back(pair.second);
+    }
+    return filteredTransactions;
+}
+
+bool AccountViewController::getFilterActive(int key) const
+{
+    return m_mapFilters.at(key);
 }
 
 void AccountViewController::updateFilter(int key, bool value, bool updateUI)

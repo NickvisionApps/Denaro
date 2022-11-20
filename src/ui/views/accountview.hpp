@@ -48,7 +48,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_grpGroups{ nullptr };
 		GtkWidget* m_boxButtonsGroups{ nullptr };
 		GtkWidget* m_btnNewGroup{ nullptr };
-		GtkWidget* m_btnResetGroups{ nullptr };
+		GtkWidget* m_btnResetGroupsFilter{ nullptr };
 		GtkWidget* m_calendar{ nullptr };
 		GtkWidget* m_btnResetCalendar{ nullptr };
 		GtkWidget* m_ddStartYear{ nullptr };
@@ -110,6 +110,10 @@ namespace NickvisionMoney::UI::Views
 		 * @param id The id of the group to edit
 		 */
 		void onDeleteGroup(unsigned int id);
+		/**
+		 * Occurs when the reset groups filter is clicked
+		 */
+		void onResetGroupsFilter();
 		/**
 		 * Occurs when the new transaction button is clicked
 		 */
