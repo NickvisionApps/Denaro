@@ -12,7 +12,7 @@
 }
 
 #calendar .today {
-	background-color: @card_bg_color;
+	background-color: @headerbar_bg_color;
 	box-shadow: none;
 }
 
