@@ -50,7 +50,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_btnNewGroup{ nullptr };
 		GtkWidget* m_btnResetGroupsFilter{ nullptr };
 		GtkWidget* m_calendar{ nullptr };
-		GtkWidget* m_btnResetCalendar{ nullptr };
+		GtkWidget* m_btnResetCalendarFilter{ nullptr };
 		GtkWidget* m_ddStartYear{ nullptr };
 		GtkWidget* m_ddStartMonth{ nullptr };
 		GtkWidget* m_ddStartDay{ nullptr };
@@ -130,6 +130,10 @@ namespace NickvisionMoney::UI::Views
 		 * @param id The id of the transaction to delete
 		 */
 		void onDeleteTransaction(unsigned int id);
+		/**
+		 * Occurs when the reset calendar filter button is clicked
+		 */
+		void onResetCalendarFilter();
 		/**
 		 * Occurs when the selected date of the calendar is changed
 		 */

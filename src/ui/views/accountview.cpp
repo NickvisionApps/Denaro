@@ -116,10 +116,10 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_add_css_class(m_calendar, "card");
     g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarDateChanged(); }), this);
     //Button Reset Calendar Filter
-    m_btnResetCalendar = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
-    gtk_widget_set_sensitive(m_btnResetCalendar, false);
-    gtk_widget_add_css_class(m_btnResetCalendar, "flat");
-    gtk_widget_set_tooltip_text(m_btnResetCalendar, _("Reset Dates Filters"));
+    m_btnResetCalendarFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    gtk_widget_add_css_class(m_btnResetCalendarFilter, "flat");
+    gtk_widget_set_tooltip_text(m_btnResetCalendarFilter, _("Reset Dates Filters"));
+    g_signal_connect(m_btnResetCalendarFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetCalendarFilter(); }), this);
     //Range DropDowns
     m_ddStartYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
     gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
@@ -169,7 +169,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Calendar Group
     m_grpCalendar = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpCalendar), _("Calendar"));
-    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendar);
+    adw_preferences_group_set_header_suffix(ADW_PREFERENCES_GROUP(m_grpCalendar), m_btnResetCalendarFilter);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpCalendar), m_calendar);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpCalendar);
     gtk_box_append(GTK_BOX(m_paneBox), m_grpRange);
@@ -460,6 +460,11 @@ void AccountView::onDeleteTransaction(unsigned int id)
     {
         m_controller.deleteTransaction(id);
     }
+}
+
+void AccountView::onResetCalendarFilter()
+{
+    gtk_calendar_select_day(GTK_CALENDAR(m_calendar), g_date_time_new_now_local());
 }
 
 void AccountView::onCalendarDateChanged()
