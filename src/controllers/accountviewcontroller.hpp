@@ -4,6 +4,7 @@
 #include <locale>
 #include <map>
 #include <string>
+#include <unordered_map>
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
@@ -167,11 +168,19 @@ namespace NickvisionMoney::Controllers
 		 * @param sortFirstToLast True for first to last, false for last to first
 		 */
 		void setSortFirstToLast(bool sortFirstToLast);
+		/**
+		 * Updates a filter and triggers the UI to reload
+		 *
+		 * @param key The group id or -3 for income or -2 for expense
+		 * @param value True to include the filter, else false
+		 */
+		void updateFilter(int key, bool value);
 
 	private:
 		NickvisionMoney::Models::Configuration& m_configuration;
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
+		std::unordered_map<int, bool> m_mapFilters;
 	};
 }

@@ -9,7 +9,13 @@ using namespace NickvisionMoney::Models;
 
 AccountViewController::AccountViewController(const std::string& path, Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback) : m_configuration{ configuration }, m_account{ path }, m_sendToastCallback{ sendToastCallback }
 {
-
+    m_mapFilters.insert({ -3, true }); //income
+    m_mapFilters.insert({ -2, true }); //expense
+    m_mapFilters.insert({ -1, true }); //no group
+    for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+    {
+        m_mapFilters.insert({ pair.second.getId(), true });
+    }
 }
 
 const std::string& AccountViewController::getAccountPath() const
@@ -52,6 +58,18 @@ std::vector<Transaction> AccountViewController::getFilteredTransactions() const
     std::vector<Transaction> filteredTransactions;
     for(const std::pair<const unsigned int, Transaction>& pair : m_account.getTransactions())
     {
+        if(pair.second.getType() == TransactionType::Income && !m_mapFilters.at(-3))
+        {
+            continue;
+        }
+        if(pair.second.getType() == TransactionType::Expense && !m_mapFilters.at(-2))
+        {
+            continue;
+        }
+        if(!m_mapFilters.at(pair.second.getGroupId()))
+        {
+            continue;
+        }
         filteredTransactions.push_back(pair.second);
     }
     return filteredTransactions;
@@ -163,4 +181,10 @@ void AccountViewController::setSortFirstToLast(bool sortFirstToLast)
 {
     m_configuration.setSortFirstToLast(sortFirstToLast);
     m_configuration.save();
+}
+
+void AccountViewController::updateFilter(int key, bool value)
+{
+    m_mapFilters.at(key) = value;
+    m_accountInfoChangedCallback();
 }
