@@ -29,7 +29,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     m_btnEdit = gtk_button_new();
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_btnEdit, "flat");
-    gtk_button_set_icon_name(GTK_BUTTON(m_btnEdit), "edit-symbolic");
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnEdit), "document-edit-symbolic");
     gtk_widget_set_tooltip_text(m_btnEdit, _("Edit Transaction"));
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_gobj), m_btnEdit);
     g_signal_connect(m_btnEdit, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransactionRow*>(data)->onEdit(); }), this);
