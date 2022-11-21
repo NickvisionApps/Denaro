@@ -225,7 +225,6 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Page No Transactions
     m_pageStatusNoTransactions = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoTransactions), "org.nickvision.money-symbolic");
-    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions Found"));
     gtk_widget_set_vexpand(m_pageStatusNoTransactions, true);
     gtk_widget_set_size_request(m_pageStatusNoTransactions, 300, 400);
     gtk_widget_set_margin_bottom(m_pageStatusNoTransactions, 60);
@@ -328,11 +327,13 @@ void AccountView::onAccountInfoChanged()
     m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
     if(m_controller.getTransactions().size() > 0)
     {
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transaction matches the specified filters."));
+        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions Found"));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transactions match the specific filters."));
     }
     else
     {
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add new transaction or import transactions from a CSV file using <b>Actions</b> menu in the sidebar."));
+        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions"));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add new transaction or import transactions from a CSV file using Actions menu in the sidebar."));
     }
     if(m_controller.getFilteredTransactions().size() > 0)
     {
