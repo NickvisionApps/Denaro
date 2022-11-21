@@ -351,11 +351,6 @@ void AccountView::onAccountInfoChanged()
         gtk_widget_set_visible(m_scrollTransactions, true);
         for(const Transaction& transaction : m_controller.getFilteredTransactions())
         {
-            if(gtk_widget_get_visible(m_pageStatusNoTransactions))
-            {
-                gtk_widget_set_visible(m_pageStatusNoTransactions, false);
-                gtk_widget_set_visible(m_scrollTransactions, true);
-            }
             std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller.getLocale()) };
             row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
             row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
