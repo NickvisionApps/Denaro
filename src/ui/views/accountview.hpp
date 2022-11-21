@@ -70,6 +70,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
 		GtkWidget* m_flowBox{ nullptr };
+		GtkWidget* m_pageStatusNoTransactions{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
