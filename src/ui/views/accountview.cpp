@@ -121,22 +121,22 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_set_tooltip_text(m_btnResetCalendarFilter, _("Reset Dates Filters"));
     g_signal_connect(m_btnResetCalendarFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetCalendarFilter(); }), this);
     //Range DropDowns
-    m_ddStartYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddStartYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartYear), false);
-    m_ddStartMonth = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddStartMonth = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddStartMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartMonth), false);
-    m_ddStartDay = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddStartDay = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddStartDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartDay), false);
-    m_ddEndYear = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddEndYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddEndYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndYear), false);
-    m_ddEndMonth = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddEndMonth = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddEndMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndMonth), false);
-    m_ddEndDay = gtk_drop_down_new(G_LIST_MODEL(gtk_string_list_new(NULL)), NULL);
+    m_ddEndDay = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddEndDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndDay), false);
     //Range Boxes
