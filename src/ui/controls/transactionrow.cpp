@@ -14,6 +14,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     m_row = adw_action_row_new();
     std::stringstream builder;
     builder << m_transaction.getDescription();
+    adw_action_row_set_title_lines(ADW_ACTION_ROW(m_row), 1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_row), builder.str().c_str());
     builder.str("");
     builder.clear();
@@ -23,7 +24,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
         builder << "\n" << _("Repeat Interval: ") << m_transaction.getRepeatIntervalAsString();
     }
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_row), builder.str().c_str());
-    gtk_widget_set_size_request(m_row, 300, 65);
+    gtk_widget_set_size_request(m_row, 300, 68);
     //Button ID
     m_btnId = gtk_button_new();
     gtk_widget_set_name(m_btnId, "btnId");
