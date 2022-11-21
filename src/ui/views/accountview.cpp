@@ -11,7 +11,7 @@ using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }, m_accountLoading{ false }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
 {
     //Flap
     m_flap = adw_flap_new();
@@ -302,7 +302,6 @@ AdwTabPage* AccountView::gobj()
 
 void AccountView::onAccountInfoChanged()
 {
-    m_accountLoading = true;
     //Overview
     gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
@@ -370,17 +369,6 @@ void AccountView::onAccountInfoChanged()
         gtk_widget_set_visible(m_pageStatusNoTransactions, true);
         gtk_widget_set_visible(m_scrollTransactions, false);
     }
-    //Years For Date Filter
-    std::vector<std::string> yearsForRangeFilter{ m_controller.getYearsForRangeFilter() };
-    const char** years{ new const char*[yearsForRangeFilter.size() + 1] };
-    for(size_t i = 0; i < yearsForRangeFilter.size(); i++)
-    {
-        years[i] = yearsForRangeFilter[i].c_str();
-    }
-    years[yearsForRangeFilter.size()] = nullptr;
-    gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartYear), G_LIST_MODEL(gtk_string_list_new(years)));
-    gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndYear), G_LIST_MODEL(gtk_string_list_new(years)));
-    m_accountLoading = false;
 }
 
 void AccountView::onExportAsCSV()
@@ -532,6 +520,21 @@ void AccountView::onDateRangeToggled()
 {
     if(adw_expander_row_get_enable_expansion(ADW_EXPANDER_ROW(m_expRange)))
     {
+        //Years For Date Filter
+        int previousStartYear{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear)) };
+        int previousEndYear{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear)) };
+        std::vector<std::string> yearsForRangeFilter{ m_controller.getYearsForRangeFilter() };
+        const char** years{ new const char*[yearsForRangeFilter.size() + 1] };
+        for(size_t i = 0; i < yearsForRangeFilter.size(); i++)
+        {
+            years[i] = yearsForRangeFilter[i].c_str();
+        }
+        years[yearsForRangeFilter.size()] = nullptr;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartYear), G_LIST_MODEL(gtk_string_list_new(years)));
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndYear), G_LIST_MODEL(gtk_string_list_new(years)));
+        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddStartYear), previousStartYear > yearsForRangeFilter.size() - 1 ? 0 : previousStartYear);
+        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddEndYear), previousEndYear > yearsForRangeFilter.size() - 1 ? 0 : previousEndYear);
+        //Set Date
         m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
         m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
     }
@@ -543,110 +546,92 @@ void AccountView::onDateRangeToggled()
 
 void AccountView::onDateRangeStartYearChanged()
 {
-    if(!m_accountLoading)
-    {
-        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
-    }
+    m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
 }
 
 void AccountView::onDateRangeStartMonthChanged()
 {
-    if(!m_accountLoading)
+    int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]) };
+    int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 };
+    int newNumberOfDays{ 0 };
+    switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1)
     {
-        int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]) };
-        int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 };
-        int newNumberOfDays{ 0 };
-        switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1)
+    case 2:
+        if((year % 400 == 0 || year % 100 != 0) && year % 4 == 0)
         {
-        case 2:
-            if((year % 400 == 0 || year % 100 != 0) && year % 4 == 0)
-            {
-                newNumberOfDays = 29;
-                gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
-                break;
-            }
-            newNumberOfDays = 28;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", nullptr })));
-            break;
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            newNumberOfDays = 31;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
-            break;
-        default:
-            newNumberOfDays = 30;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+            newNumberOfDays = 29;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
             break;
         }
-        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddStartDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
-        //setFilterStartDate called from onDateRangeStartDayChanged()
+        newNumberOfDays = 28;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", nullptr })));
+        break;
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        newNumberOfDays = 31;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
+        break;
+    default:
+        newNumberOfDays = 30;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+        break;
     }
+    gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddStartDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
+    //setFilterStartDate called from onDateRangeStartDayChanged()
 }
 
 void AccountView::onDateRangeStartDayChanged()
 {
-    if(!m_accountLoading)
-    {
-        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
-    }
+    m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
 }
 
 void AccountView::onDateRangeEndYearChanged()
 {
-    if(!m_accountLoading)
-    {
-        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
-    }
+    m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
 }
 
 void AccountView::onDateRangeEndMonthChanged()
 {
-    if(!m_accountLoading)
+    int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]) };
+    int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 };
+    int newNumberOfDays{ 0 };
+    switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1)
     {
-        int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]) };
-        int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 };
-        int newNumberOfDays{ 0 };
-        switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1)
+    case 2:
+        if((year % 400 == 0 || year % 100 != 0) && year % 4 == 0)
         {
-        case 2:
-            if((year % 400 == 0 || year % 100 != 0) && year % 4 == 0)
-            {
-                newNumberOfDays = 29;
-                gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
-                break;
-            }
-            newNumberOfDays = 28;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", nullptr })));
-            break;
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            newNumberOfDays = 31;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
-            break;
-        default:
-            newNumberOfDays = 30;
-            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+            newNumberOfDays = 29;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
             break;
         }
-        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddEndDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
-        //setFilterEndDate called from onDateRangeEndDayChanged()
+        newNumberOfDays = 28;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", nullptr })));
+        break;
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        newNumberOfDays = 31;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
+        break;
+    default:
+        newNumberOfDays = 30;
+        gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+        break;
     }
+    gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddEndDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
+    //setFilterEndDate called from onDateRangeEndDayChanged()
 }
 
 void AccountView::onDateRangeEndDayChanged()
 {
-    if(!m_accountLoading)
-    {
-        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
-    }
+    m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
 }

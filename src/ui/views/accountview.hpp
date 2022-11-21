@@ -79,7 +79,6 @@ namespace NickvisionMoney::UI::Views
 		GtkEventController* m_shortcutController{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::GroupRow>> m_groupRows;
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
-		bool m_accountLoading;
 		/**
 		 * Refreshes the UI with the account information
 		 */
