@@ -184,6 +184,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		void updateFilterValue(int key, bool value);
 		/**
+		 * Gets a list of years to display in the date range filter
+		 *
+		 * @returns The list of years to display
+		 */
+		std::vector<std::string> getYearsForRangeFilter() const;
+		/**
 		 * Resets the date filter
 		 */
 		void resetDateFilter();

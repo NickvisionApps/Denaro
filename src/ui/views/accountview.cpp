@@ -120,30 +120,32 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_add_css_class(m_btnResetCalendarFilter, "flat");
     gtk_widget_set_tooltip_text(m_btnResetCalendarFilter, _("Reset Dates Filters"));
     g_signal_connect(m_btnResetCalendarFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetCalendarFilter(); }), this);
-    //Range DropDowns
+    //Start Range DropDowns
     m_ddStartYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartYear), false);
-    m_ddStartMonth = gtk_drop_down_new(nullptr, nullptr);
+    m_ddStartMonth = gtk_drop_down_new_from_strings(new const char*[13]{ _("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"), nullptr });
     gtk_widget_set_valign(m_ddStartMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartMonth), false);
-    m_ddStartDay = gtk_drop_down_new(nullptr, nullptr);
+    m_ddStartDay = gtk_drop_down_new_from_strings(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr });
     gtk_widget_set_valign(m_ddStartDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartDay), false);
+    //End Range DropDowns
     m_ddEndYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddEndYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndYear), false);
-    m_ddEndMonth = gtk_drop_down_new(nullptr, nullptr);
+    m_ddEndMonth = gtk_drop_down_new_from_strings(new const char*[13]{ _("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"), nullptr });
     gtk_widget_set_valign(m_ddEndMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndMonth), false);
-    m_ddEndDay = gtk_drop_down_new(nullptr, nullptr);
+    m_ddEndDay = gtk_drop_down_new_from_strings(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr });
     gtk_widget_set_valign(m_ddEndDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndDay), false);
-    //Range Boxes
+    //Start Range Boxes
     m_boxStartRange = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartYear);
     gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartMonth);
     gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartDay);
+    //End Range Boxes
     m_boxEndRange = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_boxEndRange), m_ddEndYear);
     gtk_box_append(GTK_BOX(m_boxEndRange), m_ddEndMonth);
@@ -365,6 +367,16 @@ void AccountView::onAccountInfoChanged()
         gtk_widget_set_visible(m_pageStatusNoTransactions, true);
         gtk_widget_set_visible(m_scrollTransactions, false);
     }
+    //Years For Date Filter
+    std::vector<std::string> yearsForRangeFilter{ m_controller.getYearsForRangeFilter() };
+    const char** years{ new const char*[yearsForRangeFilter.size() + 1] };
+    for(size_t i = 0; i < yearsForRangeFilter.size(); i++)
+    {
+        years[i] = yearsForRangeFilter[i].c_str();
+    }
+    years[yearsForRangeFilter.size()] = nullptr;
+    gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartYear), G_LIST_MODEL(gtk_string_list_new(years)));
+    gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndYear), G_LIST_MODEL(gtk_string_list_new(years)));
 }
 
 void AccountView::onExportAsCSV()

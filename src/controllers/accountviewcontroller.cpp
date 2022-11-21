@@ -202,6 +202,25 @@ void AccountViewController::updateFilterValue(int key, bool value)
     m_accountInfoChangedCallback();
 }
 
+std::vector<std::string> AccountViewController::getYearsForRangeFilter() const
+{
+    std::vector<std::string> years;
+    if(m_account.getTransactions().size() == 0)
+    {
+        years.push_back(std::to_string(boost::gregorian::day_clock::local_day().year()));
+    }
+    for(const std::pair<const unsigned int, Transaction>& pair : m_account.getTransactions())
+    {
+        std::string year{ std::to_string(pair.second.getDate().year()) };
+        if(std::find(years.begin(), years.end(), year) == years.end())
+        {
+            years.push_back(year);
+        }
+    }
+    std::sort(years.begin(), years.end());
+    return years;
+}
+
 void AccountViewController::resetDateFilter()
 {
     m_filterStartDate = boost::gregorian::day_clock::local_day();
