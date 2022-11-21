@@ -225,7 +225,6 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_widget_set_margin_start(m_boxMain, 10);
     gtk_widget_set_margin_top(m_boxMain, 10);
     gtk_widget_set_margin_end(m_boxMain, 10);
-    gtk_widget_set_margin_bottom(m_boxMain, 10);
     gtk_widget_set_hexpand(m_boxMain, true);
     gtk_widget_set_vexpand(m_boxMain, true);
     gtk_box_append(GTK_BOX(m_boxMain), m_grpTransactions);
