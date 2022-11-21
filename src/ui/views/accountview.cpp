@@ -333,7 +333,7 @@ void AccountView::onAccountInfoChanged()
     else
     {
         adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions"));
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add new transaction or import transactions from a CSV file using Actions menu in the sidebar."));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import transactions from a CSV file using the Actions menu in the sidebar."));
     }
     if(m_controller.getFilteredTransactions().size() > 0)
     {
