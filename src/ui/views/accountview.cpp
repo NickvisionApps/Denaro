@@ -11,7 +11,7 @@ using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }, m_accountLoading{ false }
 {
     //Flap
     m_flap = adw_flap_new();
@@ -124,22 +124,28 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_ddStartYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddStartYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartYear), false);
+    g_signal_connect(m_ddStartYear, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartYearChanged(); }), this);
     m_ddStartMonth = gtk_drop_down_new_from_strings(new const char*[13]{ _("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"), nullptr });
     gtk_widget_set_valign(m_ddStartMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartMonth), false);
+    g_signal_connect(m_ddStartMonth, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartMonthChanged(); }), this);
     m_ddStartDay = gtk_drop_down_new_from_strings(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr });
     gtk_widget_set_valign(m_ddStartDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddStartDay), false);
+    g_signal_connect(m_ddStartDay, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartDayChanged(); }), this);
     //End Range DropDowns
     m_ddEndYear = gtk_drop_down_new(nullptr, nullptr);
     gtk_widget_set_valign(m_ddEndYear, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndYear), false);
+    g_signal_connect(m_ddEndYear, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndYearChanged(); }), this);
     m_ddEndMonth = gtk_drop_down_new_from_strings(new const char*[13]{ _("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"), nullptr });
     gtk_widget_set_valign(m_ddEndMonth, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndMonth), false);
-    m_ddEndDay = gtk_drop_down_new_from_strings(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr });
+    g_signal_connect(m_ddEndMonth, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndMonthChanged(); }), this);
+    m_ddEndDay =gtk_drop_down_new_from_strings(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr });
     gtk_widget_set_valign(m_ddEndDay, GTK_ALIGN_CENTER);
     gtk_drop_down_set_show_arrow(GTK_DROP_DOWN(m_ddEndDay), false);
+    g_signal_connect(m_ddEndDay, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndDayChanged(); }), this);
     //Start Range Boxes
     m_boxStartRange = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     gtk_box_append(GTK_BOX(m_boxStartRange), m_ddStartYear);
@@ -167,6 +173,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_expander_row_set_show_enable_switch(ADW_EXPANDER_ROW(m_expRange), true);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowStartRange);
     adw_expander_row_add_row(ADW_EXPANDER_ROW(m_expRange), m_rowEndRange);
+    g_signal_connect(m_expRange, "notify::enable-expansion", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeToggled(); }), this);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpRange), m_expRange);
     //Calendar Group
     m_grpCalendar = adw_preferences_group_new();
@@ -295,6 +302,7 @@ AdwTabPage* AccountView::gobj()
 
 void AccountView::onAccountInfoChanged()
 {
+    m_accountLoading = true;
     //Overview
     gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
@@ -377,6 +385,7 @@ void AccountView::onAccountInfoChanged()
     years[yearsForRangeFilter.size()] = nullptr;
     gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartYear), G_LIST_MODEL(gtk_string_list_new(years)));
     gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndYear), G_LIST_MODEL(gtk_string_list_new(years)));
+    m_accountLoading = false;
 }
 
 void AccountView::onExportAsCSV()
@@ -510,6 +519,10 @@ void AccountView::onDeleteTransaction(unsigned int id)
 void AccountView::onResetCalendarFilter()
 {
     gtk_calendar_select_day(GTK_CALENDAR(m_calendar), g_date_time_new_now_local());
+    if(adw_expander_row_get_enable_expansion(ADW_EXPANDER_ROW(m_expRange)))
+    {
+        adw_expander_row_set_enable_expansion(ADW_EXPANDER_ROW(m_expRange), false);
+    }
 }
 
 void AccountView::onCalendarDateChanged()
@@ -518,4 +531,113 @@ void AccountView::onCalendarDateChanged()
     boost::gregorian::date selectedDate{ g_date_time_get_year(gtkSelectedDate), g_date_time_get_month(gtkSelectedDate), g_date_time_get_day_of_month(gtkSelectedDate) };
     m_controller.setFilterStartDate(selectedDate);
     m_controller.setFilterEndDate(selectedDate);
+}
+
+void AccountView::onDateRangeToggled()
+{
+    if(adw_expander_row_get_enable_expansion(ADW_EXPANDER_ROW(m_expRange)))
+    {
+        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+    }
+    else
+    {
+        m_controller.resetDateFilter();
+    }
+}
+
+void AccountView::onDateRangeStartYearChanged()
+{
+    if(!m_accountLoading)
+    {
+        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+    }
+}
+
+void AccountView::onDateRangeStartMonthChanged()
+{
+    if(!m_accountLoading)
+    {
+        int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 };
+        int newNumberOfDays{ 0 };
+        switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1)
+        {
+        case 2:
+            newNumberOfDays = 29;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
+            break;
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            newNumberOfDays = 31;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
+            break;
+        default:
+            newNumberOfDays = 30;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddStartDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+            break;
+        }
+        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddStartDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
+        //setFilterStartDate called from onDateRangeStartDayChanged()
+    }
+}
+
+void AccountView::onDateRangeStartDayChanged()
+{
+    if(!m_accountLoading)
+    {
+        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+    }
+}
+
+void AccountView::onDateRangeEndYearChanged()
+{
+    if(!m_accountLoading)
+    {
+        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+    }
+}
+
+void AccountView::onDateRangeEndMonthChanged()
+{
+    if(!m_accountLoading)
+    {
+        int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 };
+        int newNumberOfDays{ 0 };
+        switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1)
+        {
+        case 2:
+            newNumberOfDays = 29;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", nullptr })));
+            break;
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            newNumberOfDays = 31;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[32]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", nullptr })));
+            break;
+        default:
+            newNumberOfDays = 30;
+            gtk_drop_down_set_model(GTK_DROP_DOWN(m_ddEndDay), G_LIST_MODEL(gtk_string_list_new(new const char*[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", nullptr })));
+            break;
+        }
+        gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddEndDay), previousDay > newNumberOfDays ? 0 : previousDay - 1);
+        //setFilterEndDate called from onDateRangeEndDayChanged()
+    }
+}
+
+void AccountView::onDateRangeEndDayChanged()
+{
+    if(!m_accountLoading)
+    {
+        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+    }
 }

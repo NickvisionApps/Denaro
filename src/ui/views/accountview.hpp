@@ -79,6 +79,7 @@ namespace NickvisionMoney::UI::Views
 		GtkEventController* m_shortcutController{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::GroupRow>> m_groupRows;
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
+		bool m_accountLoading;
 		/**
 		 * Refreshes the UI with the account information
 		 */
@@ -139,5 +140,33 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the selected date of the calendar is changed
 		 */
 		void onCalendarDateChanged();
+		/**
+		 * Occurs when the select range date filter is toggled on or off
+		 */
+		void onDateRangeToggled();
+		/**
+		 * Occurs when the start year date range is changed
+		 */
+		void onDateRangeStartYearChanged();
+		/**
+		 * Occurs when the start month date range is changed
+		 */
+		void onDateRangeStartMonthChanged();
+		/**
+		 * Occurs when the start day date range is changed
+		 */
+		void onDateRangeStartDayChanged();
+		/**
+		 * Occurs when the end year date range is changed
+		 */
+		void onDateRangeEndYearChanged();
+		/**
+		 * Occurs when the end month date range is changed
+		 */
+		void onDateRangeEndMonthChanged();
+		/**
+		 * Occurs when the end day date range is changed
+		 */
+		void onDateRangeEndDayChanged();
 	};
 }
