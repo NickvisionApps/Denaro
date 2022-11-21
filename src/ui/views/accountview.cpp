@@ -224,7 +224,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTransactions), m_flowBox);
     //Page No Transactions
     m_pageStatusNoTransactions = adw_status_page_new();
-    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoTransactions), "org.nickvision.money-symbolic");
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoTransactions), "money-none-symbolic");
     gtk_widget_set_vexpand(m_pageStatusNoTransactions, true);
     gtk_widget_set_size_request(m_pageStatusNoTransactions, 300, 400);
     gtk_widget_set_margin_bottom(m_pageStatusNoTransactions, 60);
