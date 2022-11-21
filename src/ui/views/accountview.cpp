@@ -338,7 +338,7 @@ void AccountView::onAccountInfoChanged()
     if(m_controller.getTransactions().size() > 0)
     {
         adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions Found"));
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transactions match the specific filters."));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transactions match the specified filters."));
     }
     else
     {
