@@ -28,6 +28,17 @@
   color: @fg_color;
 }
 
+#calendarAccount .other-month {
+	color: @light_5;
+	font-weight: normal;
+}
+
+#calendarAccount .other-month:checked {
+	color: @light_5;
+	font-weight: normal;
+}
+
+
 /* Transaction Dialog Calendar */
 #calendarTransactions button {
   border-radius: 12px;
@@ -42,3 +53,4 @@
 	color: @warning_color;
 	box-shadow: none;
 }
+
