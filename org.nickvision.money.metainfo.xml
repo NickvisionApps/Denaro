@@ -42,7 +42,8 @@
   <releases>
     <release version="2022.11.1-next" date="2022-11-17">
       <description>
-        <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your account and transactions and to make the most out of Money</p>
+        <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</p>
+        <p>- Added support for filtering transactions by type, group, or date</p>
         <p>- You can now double-click a .nmoney file and it will open directly in Money</p>
         <p>- The CSV delimiter has been changed to a semicolon (;). This will allow us to store rgba values and descriptions with commas in a CSV file</p>
         <p>- Fixed an issue where some monetary values were displayed incorrectly</p>
