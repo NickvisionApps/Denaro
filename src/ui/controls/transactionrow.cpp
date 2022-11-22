@@ -48,7 +48,9 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     gtk_style_context_add_provider(gtk_widget_get_style_context(m_btnId), GTK_STYLE_PROVIDER(cssProviderBtnId),  GTK_STYLE_PROVIDER_PRIORITY_USER);
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_row), m_btnId);
     //Amount Label
-    m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale).c_str());
+    std::string amount{ MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale) };
+    amount.insert(0, m_transaction.getType() == TransactionType::Income ? "+  " : "-  ");
+    m_lblAmount = gtk_label_new(amount.c_str());
     gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "success" : "error");
     //Edit Button
     m_btnEdit = gtk_button_new();
