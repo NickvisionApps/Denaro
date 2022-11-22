@@ -45,6 +45,7 @@
         <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</p>
         <p>- Added support for filtering transactions by type, group, or date</p>
         <p>- You can now double-click a .nmoney file and it will open directly in Money</p>
+        <p>- When typing an amount, the user's locale's currency separator will be used instead of a period when the keypad's period is typed</p>
         <p>- The CSV delimiter has been changed to a semicolon (;). This will allow us to store rgba values and descriptions with commas in a CSV file</p>
         <p>- Fixed an issue where some monetary values were displayed incorrectly</p>
         <p>- Fixed an issue where repeated transactions would not assign themselves to a group</p>
