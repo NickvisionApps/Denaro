@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-22 05:24+0300\n"
-"PO-Revision-Date: 2022-11-19 14:17+0100\n"
+"PO-Revision-Date: 2022-11-22 13:52+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -129,12 +129,10 @@ msgid "Total"
 msgstr "Ukupno"
 
 #: src/ui/views/accountview.cpp:47
-#, fuzzy
 msgid "Income"
 msgstr "Prihod"
 
 #: src/ui/views/accountview.cpp:58
-#, fuzzy
 msgid "Expense"
 msgstr "Rashod"
 
@@ -152,7 +150,7 @@ msgstr "Uvezi iz CSV datoteke"
 
 #: src/ui/views/accountview.cpp:79
 msgid "Reset Overview Filters"
-msgstr ""
+msgstr "Resetiraj filtre pregleda"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Overview"
@@ -169,7 +167,7 @@ msgstr "Nova grupa (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:105
 msgid "Reset Groups Filters"
-msgstr ""
+msgstr "Resetiraj filtre grupa"
 
 #: src/ui/views/accountview.cpp:110
 msgid "Groups"
@@ -177,71 +175,71 @@ msgstr "Grupe"
 
 #: src/ui/views/accountview.cpp:125
 msgid "Reset Dates Filters"
-msgstr ""
+msgstr "Resetiraj filtre datuma"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "January"
-msgstr ""
+msgstr "Siječanj"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "February"
-msgstr ""
+msgstr "Veljača"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "March"
-msgstr ""
+msgstr "Ožujak"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "April"
-msgstr ""
+msgstr "Travanj"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "May"
-msgstr ""
+msgstr "Svibanj"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "June"
-msgstr ""
+msgstr "Lipanj"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "July"
-msgstr ""
+msgstr "Srpanj"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "August"
-msgstr ""
+msgstr "Kolovoz"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "September"
-msgstr ""
+msgstr "Rujan"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "October"
-msgstr ""
+msgstr "Listopad"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "November"
-msgstr ""
+msgstr "Studeni"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "December"
-msgstr ""
+msgstr "Prosinac"
 
 #: src/ui/views/accountview.cpp:165
 msgid "Start"
-msgstr ""
+msgstr "Početak"
 
 #: src/ui/views/accountview.cpp:169
 msgid "End"
-msgstr ""
+msgstr "Kraj"
 
 #: src/ui/views/accountview.cpp:175
 msgid "Select Range"
-msgstr ""
+msgstr "Odaberi raspon"
 
 #: src/ui/views/accountview.cpp:184
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendar"
 
 #: src/ui/views/accountview.cpp:197
 msgctxt "Transaction"
@@ -254,35 +252,35 @@ msgstr "Nova transakcija (Ctrl+Shift+N)"
 
 #: src/ui/views/accountview.cpp:207
 msgid "Sort From Top To Bottom"
-msgstr ""
+msgstr "Razvrstaj odozgo prema dolje"
 
 #: src/ui/views/accountview.cpp:211
 msgid "Sort From Bottom To Top"
-msgstr ""
+msgstr "Razvrstaj odozdo prema gore"
 
 #: src/ui/views/accountview.cpp:221
 msgid "Transactions"
 msgstr "Transakcije"
 
 #: src/ui/views/accountview.cpp:380
-#, fuzzy
 msgid "No Transactions Found"
-msgstr "Transakcije"
+msgstr "Nije pronađena nijedna transakcija"
 
 #: src/ui/views/accountview.cpp:381
 msgid "No transactions match the specified filters."
-msgstr ""
+msgstr "Nijedna transakcija ne odgovora zadanim filtrima."
 
 #: src/ui/views/accountview.cpp:388
-#, fuzzy
 msgid "No Transactions"
-msgstr "Transakcije"
+msgstr "Nema transakcija"
 
 #: src/ui/views/accountview.cpp:389
 msgid ""
 "Add a new transaction or import transactions from a CSV file using the "
 "Actions menu in the sidebar."
 msgstr ""
+"Dodaj novu transakciju ili uvezi transakcije iz CSV datoteke pomoću "
+"izbornika Radnje u bočnoj traci."
 
 #: src/ui/views/accountview.cpp:396 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -356,7 +354,7 @@ msgstr "Ime (postoji)"
 
 #: src/ui/views/mainwindow.cpp:28
 msgid "Recents"
-msgstr "Nedavno otvoreni"
+msgstr "Nedavno korišteni"
 
 #: src/ui/views/mainwindow.cpp:41
 msgid "New"
@@ -376,7 +374,7 @@ msgstr "Izbornik računa"
 
 #: src/ui/views/mainwindow.cpp:83
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Uključi/Isključi bočnu traku"
 
 #: src/ui/views/mainwindow.cpp:88 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
@@ -407,7 +405,7 @@ msgstr "Otvori račun"
 
 #: src/ui/views/mainwindow.cpp:122
 msgid "You may also drag in a file from your file browser to open."
-msgstr "Datoteku možeš otvoriti i povlačenjem iz preglednika datoteka."
+msgstr "Datoteke možeš otvoriti i povlačenjem iz preglednika datoteka."
 
 #: src/ui/views/mainwindow.cpp:133
 msgid "Recent Accounts"
@@ -483,9 +481,9 @@ msgid "About"
 msgstr "Informacije"
 
 #: src/ui/views/transactiondialog.cpp:18
-#, fuzzy, c-format
+#, c-format
 msgid "Transaction - %s"
-msgstr "Transakcije"
+msgstr "Transakcija – %s"
 
 #: src/ui/views/transactiondialog.cpp:32 src/ui/views/transactiondialog.cpp:151
 msgid "Amount"
@@ -515,7 +513,7 @@ msgstr "Interval ponavljanja"
 
 #: src/ui/views/transactiondialog.cpp:95
 msgid "Color"
-msgstr ""
+msgstr "Boja"
 
 #: src/ui/views/transactiondialog.cpp:161
 msgid "Amount (Empty)"
@@ -524,6 +522,3 @@ msgstr "Iznos (prazan)"
 #: src/ui/views/transactiondialog.cpp:166
 msgid "Amount (Invalid)"
 msgstr "Iznos (neispravan)"
-
-#~ msgid "ID"
-#~ msgstr "ID"
