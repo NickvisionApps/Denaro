@@ -64,7 +64,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/nlogozzo/NickvisionMoney.git",
-                    "tag": "2022.11.1-next"
+                    "tag": "2022.11.1-beta1"
                 }
             ]
         }

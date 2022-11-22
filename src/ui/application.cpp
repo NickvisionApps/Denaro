@@ -28,7 +28,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("Nickvision Money");
     m_appInfo.setShortName("Money");
     m_appInfo.setDescription(_("A personal finance manager."));
-    m_appInfo.setVersion("2022.11.1-next");
+    m_appInfo.setVersion("2022.11.1-beta1");
     m_appInfo.setChangelog("<ul><li>Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</li><li>Added support for filtering transactions by type, group, or date</li><li>You can now double-click a .nmoney file and it will open directly in Money</li><li>The CSV delimiter has been changed to a semicolon (;). This will allow us to store rgba values and descriptions with commas in a CSV file</li><li>Fixed an issue where some monetary values were displayed incorrectly</li><li>Fixed an issue where repeated transactions would not assign themselves to a group</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionMoney");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionMoney/issues/new");

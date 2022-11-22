@@ -40,7 +40,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.11.1-next" date="2022-11-17">
+    <release version="2022.11.1-beta1" date="2022-11-21">
       <description>
         <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</p>
         <p>- Added support for filtering transactions by type, group, or date</p>
