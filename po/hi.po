@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-22 05:24+0300\n"
-"PO-Revision-Date: 2022-11-17 08:02+0530\n"
+"PO-Revision-Date: 2022-11-23 05:12+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
 "org/hindi\n"
@@ -27,10 +27,10 @@ msgid "Unable to export account as CSV."
 msgstr "खाते को CSV के रूप में निर्यात करने में असमर्थ।"
 
 #: src/controllers/accountviewcontroller.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
-msgstr[0] "CSV से %d लेनदेन आयात कर दिए गए।"
+msgstr[0] "CSV से %d लेनदेन आयात कर दिया गया।"
 msgstr[1] "CSV से %d लेनदेन आयात कर दिए गए।"
 
 #: src/controllers/mainwindowcontroller.cpp:49
@@ -131,12 +131,10 @@ msgid "Total"
 msgstr "टोटल (कुल)"
 
 #: src/ui/views/accountview.cpp:47
-#, fuzzy
 msgid "Income"
 msgstr "आय/कमाई"
 
 #: src/ui/views/accountview.cpp:58
-#, fuzzy
 msgid "Expense"
 msgstr "लागत/खर्च"
 
@@ -154,7 +152,7 @@ msgstr "CSV से आयात करें"
 
 #: src/ui/views/accountview.cpp:79
 msgid "Reset Overview Filters"
-msgstr ""
+msgstr "अवलोकन फ़िल्टर रीसेट करें"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Overview"
@@ -171,7 +169,7 @@ msgstr "नया समूह (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:105
 msgid "Reset Groups Filters"
-msgstr ""
+msgstr "समूह फ़िल्टर रीसेट करें"
 
 #: src/ui/views/accountview.cpp:110
 msgid "Groups"
@@ -179,71 +177,71 @@ msgstr "समूह"
 
 #: src/ui/views/accountview.cpp:125
 msgid "Reset Dates Filters"
-msgstr ""
+msgstr "तिथि फ़िल्टर रीसेट करें"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "January"
-msgstr ""
+msgstr "जनवरी"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "February"
-msgstr ""
+msgstr "फ़रवरी"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "March"
-msgstr ""
+msgstr "मार्च"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "April"
-msgstr ""
+msgstr "अप्रैल"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "May"
-msgstr ""
+msgstr "मई"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "June"
-msgstr ""
+msgstr "जून"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "July"
-msgstr ""
+msgstr "जुलाई"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "August"
-msgstr ""
+msgstr "अगस्त"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "September"
-msgstr ""
+msgstr "सितंबर"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "October"
-msgstr ""
+msgstr "अक्तूबर"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "November"
-msgstr ""
+msgstr "नवंबर"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "December"
-msgstr ""
+msgstr "दिसंबर"
 
 #: src/ui/views/accountview.cpp:165
 msgid "Start"
-msgstr ""
+msgstr "आरंभ"
 
 #: src/ui/views/accountview.cpp:169
 msgid "End"
-msgstr ""
+msgstr "अंत"
 
 #: src/ui/views/accountview.cpp:175
 msgid "Select Range"
-msgstr ""
+msgstr "दायरे का चयन करें"
 
 #: src/ui/views/accountview.cpp:184
 msgid "Calendar"
-msgstr ""
+msgstr "पंचांग"
 
 #: src/ui/views/accountview.cpp:197
 msgctxt "Transaction"
@@ -256,35 +254,34 @@ msgstr "नई लेनदेन (Ctrl+Shift+N)"
 
 #: src/ui/views/accountview.cpp:207
 msgid "Sort From Top To Bottom"
-msgstr ""
+msgstr "ऊपर से नीचे क्रमबद्ध करें"
 
 #: src/ui/views/accountview.cpp:211
 msgid "Sort From Bottom To Top"
-msgstr ""
+msgstr "नीचे से ऊपर क्रमबद्ध करें"
 
 #: src/ui/views/accountview.cpp:221
 msgid "Transactions"
 msgstr "लेनदेन"
 
 #: src/ui/views/accountview.cpp:380
-#, fuzzy
 msgid "No Transactions Found"
-msgstr "लेनदेन"
+msgstr "कोई लेनदेन मौजूद नहीं"
 
 #: src/ui/views/accountview.cpp:381
 msgid "No transactions match the specified filters."
-msgstr ""
-
+msgstr "कोई लेनदेन दिए गए फ़िल्टर से मेल नहीं खाता।"
 #: src/ui/views/accountview.cpp:388
-#, fuzzy
 msgid "No Transactions"
-msgstr "लेनदेन"
+msgstr "कोई लेनदेन मौजूद नहीं"
 
 #: src/ui/views/accountview.cpp:389
 msgid ""
 "Add a new transaction or import transactions from a CSV file using the "
 "Actions menu in the sidebar."
 msgstr ""
+"एक नया लेनदेन जोड़ें या बाजू पट्टी में क्रिया मेनू का उपयोग करके CSV "
+"फ़ाइल से   लेनदेन आयात करें"
 
 #: src/ui/views/accountview.cpp:396 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -378,7 +375,7 @@ msgstr "खाता मेन्यू"
 
 #: src/ui/views/mainwindow.cpp:83
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "बाजू पट्टी को बंद करें/खोलें"
 
 #: src/ui/views/mainwindow.cpp:88 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
@@ -482,12 +479,12 @@ msgstr "एप्लिकेशन"
 
 #: src/ui/views/shortcutsdialog.cpp:106
 msgid "About"
-msgstr "बारे में"
+msgstr "परिच"
 
 #: src/ui/views/transactiondialog.cpp:18
-#, fuzzy, c-format
+#, c-format
 msgid "Transaction - %s"
-msgstr "लेनदेन"
+msgstr "लेनदेन - %s"
 
 #: src/ui/views/transactiondialog.cpp:32 src/ui/views/transactiondialog.cpp:151
 msgid "Amount"
@@ -517,7 +514,7 @@ msgstr "दोहराई का समय अंतराल"
 
 #: src/ui/views/transactiondialog.cpp:95
 msgid "Color"
-msgstr ""
+msgstr "रंग"
 
 #: src/ui/views/transactiondialog.cpp:161
 msgid "Amount (Empty)"
