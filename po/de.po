@@ -1,4 +1,4 @@
-# Croatian translation for Money
+# German translation for Money
 # Copyright (C) 2022
 # This file is distributed under the same license as the org.nickvision.money package.
 # Milo Ivir <mail@milotype.de>, 2022.
