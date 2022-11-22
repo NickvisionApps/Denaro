@@ -106,7 +106,7 @@ bool MainWindowController::isAccountOpened(const std::string& path) const
 
 AccountViewController MainWindowController::createAccountViewControllerForLatestAccount() const
 {
-    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration.getLocale(), m_sendToastCallback };
+    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration, m_sendToastCallback };
 }
 
 void MainWindowController::addAccount(std::string& path)

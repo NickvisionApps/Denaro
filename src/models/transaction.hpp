@@ -126,6 +126,18 @@ namespace NickvisionMoney::Models
          */
         void setGroupId(int groupId);
         /**
+         * Gets the rgba color of the transaction
+         *
+         * @returns The rgba color of the transaction
+         */
+        const std::string& getRGBA() const;
+        /**
+         * Sets the rgba color of the transaction
+         *
+         * @param rgba The new rgba color
+         */
+        void setRGBA(const std::string& rgba);
+        /**
          * Compares two Transactions via less-than
          *
          * @param toComapre The transaction to compare
@@ -162,5 +174,6 @@ namespace NickvisionMoney::Models
         RepeatInterval m_repeatInterval;
         boost::multiprecision::cpp_dec_float_50 m_amount;
         int m_groupId;
+        std::string m_rgba;
     };
 }

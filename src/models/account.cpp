@@ -38,10 +38,15 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
     //Load Groups
     m_db->exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)");
     //Load Transactions
-    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER)");
+    m_db->exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT)");
     try
     {
         m_db->exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
+    }
+    catch(...) { }
+    try
+    {
+        m_db->exec("ALTER TABLE transactions ADD COLUMN rgba TEXT");
     }
     catch(...) { }
     // Queries
@@ -64,6 +69,11 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
         transaction.setRepeatInterval(static_cast<RepeatInterval>(qryGetAllTransactions.getColumn(4).getInt()));
         transaction.setAmount(boost::multiprecision::cpp_dec_float_50(qryGetAllTransactions.getColumn(5).getString()));
         transaction.setGroupId(qryGetAllTransactions.getColumn(6).getInt());
+        std::string rgba{ qryGetAllTransactions.getColumn(7).getString() };
+        if(!rgba.empty())
+        {
+            transaction.setRGBA(qryGetAllTransactions.getColumn(7).getString());
+        }
         m_transactions.insert({ transaction.getId(), transaction });
     }
     //Repeat Needed Transactions
@@ -127,6 +137,8 @@ Account::Account(const std::string& path) : m_path{ path }, m_db{ std::make_shar
                 newTransaction.setType(transaction.getType());
                 newTransaction.setRepeatInterval(transaction.getRepeatInterval());
                 newTransaction.setAmount(transaction.getAmount());
+                newTransaction.setGroupId(transaction.getGroupId());
+                newTransaction.setRGBA(transaction.getRGBA());
                 addTransaction(newTransaction);
                 transaction.setRepeatInterval(RepeatInterval::Never);
                 updateTransaction(transaction);
@@ -248,7 +260,7 @@ unsigned int Account::getNextAvailableTransactionId() const
 
 bool Account::addTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryInsert{ *m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount, gid) VALUES (?, ?, ?, ?, ?, ?, ?)" };
+    SQLite::Statement qryInsert{ *m_db, "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES (?, ?, ?, ?, ?, ?, ?, ?)" };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryInsert.bind(1, transaction.getId());
@@ -258,6 +270,7 @@ bool Account::addTransaction(const Transaction& transaction)
     qryInsert.bind(5, static_cast<int>(transaction.getRepeatInterval()));
     qryInsert.bind(6, strAmount.str());
     qryInsert.bind(7, transaction.getGroupId());
+    qryInsert.bind(8, transaction.getRGBA());
     if(qryInsert.exec() > 0)
     {
         m_transactions.insert({ transaction.getId(), transaction });
@@ -272,7 +285,7 @@ bool Account::addTransaction(const Transaction& transaction)
 
 bool Account::updateTransaction(const Transaction& transaction)
 {
-    SQLite::Statement qryUpdate{ *m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ?, gid = ? WHERE id = " + std::to_string(transaction.getId()) };
+    SQLite::Statement qryUpdate{ *m_db, "UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ?, gid = ?, rgba = ? WHERE id = " + std::to_string(transaction.getId()) };
     std::stringstream strAmount;
     strAmount << transaction.getAmount();
     qryUpdate.bind(1, boost::gregorian::to_iso_extended_string(transaction.getDate()));
@@ -281,6 +294,7 @@ bool Account::updateTransaction(const Transaction& transaction)
     qryUpdate.bind(4, static_cast<int>(transaction.getRepeatInterval()));
     qryUpdate.bind(5, strAmount.str());
     qryUpdate.bind(6, transaction.getGroupId());
+    qryUpdate.bind(7, transaction.getRGBA());
     if(qryUpdate.exec() > 0)
     {
         m_transactions[transaction.getId()] = transaction;
@@ -346,22 +360,23 @@ bool Account::exportAsCSV(const std::string& path)
     std::ofstream file{ path };
     if(file.is_open())
     {
-        file << "ID,Date,Description,Type,RepeatInterval,Amount,Group,GroupName,GroupDescription\n";
+        file << "ID,Date,Description,Type,RepeatInterval,Amount,RGBA,Group,GroupName,GroupDescription\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
-            file << pair.second.getId() << ",";
-            file << boost::gregorian::to_iso_extended_string(pair.second.getDate()) << ",";
-            file << pair.second.getDescription() << ",";
-            file << static_cast<int>(pair.second.getType()) << ",";
-            file << static_cast<int>(pair.second.getRepeatInterval()) << ",";
-            file << pair.second.getAmount() << ",";
-            file << pair.second.getGroupId() << ",";
+            file << pair.second.getId() << ";";
+            file << boost::gregorian::to_iso_extended_string(pair.second.getDate()) << ";";
+            file << pair.second.getDescription() << ";";
+            file << static_cast<int>(pair.second.getType()) << ";";
+            file << static_cast<int>(pair.second.getRepeatInterval()) << ";";
+            file << pair.second.getAmount() << ";";
+            file << pair.second.getRGBA() << ";";
+            file << pair.second.getGroupId() << ";";
             if (pair.second.getGroupId() != -1)
             {
-                file << m_groups.at(pair.second.getGroupId()).getName() << ",";
+                file << m_groups.at(pair.second.getGroupId()).getName() << ";";
                 file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
             } else {
-                file << ",\n";
+                file << ";\n";
             }
         }
         return true;
@@ -379,8 +394,8 @@ int Account::importFromCSV(const std::string& path)
         while(getline(file, line))
         {
             //Separate fields by ,
-            std::vector<std::string> fields{ split(line, ",") };
-            if(fields.size() != 9)
+            std::vector<std::string> fields{ split(line, ";") };
+            if(fields.size() != 10)
             {
                 continue;
             }
@@ -450,21 +465,22 @@ int Account::importFromCSV(const std::string& path)
             {
                 continue;
             }
+            //Get RGBA
+            const std::string& rgba{ fields[6] };
             //Get Group Id
             int gid{ 0 };
             try
             {
-                gid = stoui(fields[6]);
+                gid = stoui(fields[7]);
             }
             catch(...)
             {
                 continue;
             }
             //Get Group Name
-            const std::string& groupName{ fields[7] };
+            const std::string& groupName{ fields[8] };
             //Get Group Description
-            const std::string& groupDescription{ fields[8] };
-
+            const std::string& groupDescription{ fields[9] };
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);
@@ -473,8 +489,8 @@ int Account::importFromCSV(const std::string& path)
             transaction.setRepeatInterval(repeatInterval);
             transaction.setAmount(amount);
             transaction.setGroupId(gid);
+            transaction.setRGBA(rgba);
             addTransaction(transaction);
-
             //Add Group if needed
             if (getGroupById(gid) == std::nullopt && gid != -1)
             {

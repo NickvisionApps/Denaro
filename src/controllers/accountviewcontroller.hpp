@@ -4,9 +4,12 @@
 #include <locale>
 #include <map>
 #include <string>
+#include <unordered_map>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
+#include "../models/configuration.hpp"
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
 
@@ -22,10 +25,10 @@ namespace NickvisionMoney::Controllers
 		 * Constructs an AccountViewController
 		 *
 		 * @param path The path of the account to open
-		 * @param locale The user's locale
+		 * @param configuration The configuration
 		 * @param sendToastCallback A callback function for sending a toast notification to the UI
 		 */
-		AccountViewController(const std::string& path, const std::locale& locale, const std::function<void(const std::string& message)>& sendToastCallback);
+		AccountViewController(const std::string& path, NickvisionMoney::Models::Configuration& configuration, const std::function<void(const std::string& message)>& sendToastCallback);
 		/**
 		 * Gets the path of the account
 		 *
@@ -65,7 +68,7 @@ namespace NickvisionMoney::Controllers
 		/**
 		 * Gets the map of transactions in the account
 		 *
-		 * @returns The transaction in the account
+		 * @returns The transactions in the account
 		 */
 		const std::map<unsigned int, NickvisionMoney::Models::Transaction>& getTransactions() const;
 		/**
@@ -148,11 +151,68 @@ namespace NickvisionMoney::Controllers
 		 * @returns A new TransactionDialogController
 		 */
 		TransactionDialogController createTransactionDialogController(unsigned int id) const;
+		/**
+		 * Gets whether or not to sort transactions from first to last
+		 *
+		 * @returns True for first to last, false for last to first
+		 */
+		bool getSortFirstToLast() const;
+		/**
+		 * Sets whether or not to sort transactions from first to last
+		 *
+		 * @param sortFirstToLast True for first to last, false for last to first
+		 */
+		void setSortFirstToLast(bool sortFirstToLast);
+		/**
+		 * Gets a list of filtered transactions
+		 *
+		 * @returns The list of filtered transactions
+		 */
+		std::vector<NickvisionMoney::Models::Transaction> getFilteredTransactions() const;
+		/**
+		 * Gets whether or not a filter is active
+		 *
+		 * @param key The key of the filter
+		 * @returns True if active, else false
+		 */
+		bool getIfFilterActive(int key) const;
+		/**
+		 * Updates a filter
+		 *
+		 * @param key The group id or -3 for income or -2 for expense
+		 * @param value True to include the filter, else false
+		 */
+		void updateFilterValue(int key, bool value);
+		/**
+		 * Gets a list of years to display in the date range filter
+		 *
+		 * @returns The list of years to display
+		 */
+		std::vector<std::string> getYearsForRangeFilter() const;
+		/**
+		 * Resets the date filter
+		 */
+		void resetDateFilter();
+		/**
+		 * Sets the start date of the filter
+		 *
+		 * @param date The new start date
+		 */
+		void setFilterStartDate(const boost::gregorian::date& date);
+		/**
+		 * Sets the end date of the filter
+		 *
+		 * @param date The new end date
+		 */
+		void setFilterEndDate(const boost::gregorian::date& date);
 
 	private:
-		const std::locale& m_locale;
+		NickvisionMoney::Models::Configuration& m_configuration;
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
+		std::unordered_map<int, bool> m_mapFilters;
+		boost::gregorian::date m_filterStartDate;
+		boost::gregorian::date m_filterEndDate;
 	};
 }

@@ -15,7 +15,7 @@ namespace NickvisionMoney::UI::Views
 	class AccountView
 	{
 	public:
-		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, const NickvisionMoney::Controllers::AccountViewController& controller);
+		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const NickvisionMoney::Controllers::AccountViewController& controller);
 		/**
 		 * Gets the AdwTabPage* representing the AccountView
 		 *
@@ -27,19 +27,50 @@ namespace NickvisionMoney::UI::Views
 		NickvisionMoney::Controllers::AccountViewController m_controller;
 		GtkWindow* m_parentWindow{ nullptr };
 		AdwTabPage* m_gobj{ nullptr };
-		GtkWidget* m_scrollMain{ nullptr };
+		GtkWidget* m_flap{ nullptr };
+		GtkWidget* m_scrollPane{ nullptr };
+		GtkWidget* m_scrollTransactions{ nullptr };
 		GtkWidget* m_boxMain{ nullptr };
+		GtkWidget* m_paneBox{ nullptr };
+		GtkWidget* m_overlayMain{ nullptr };
 		GtkWidget* m_grpOverview{ nullptr };
 		GtkWidget* m_rowTotal{ nullptr };
+		GtkWidget* m_lblTotal{ nullptr };
 		GtkWidget* m_rowIncome{ nullptr };
 		GtkWidget* m_lblIncome{ nullptr };
+		GtkWidget* m_chkIncome{ nullptr };
 		GtkWidget* m_rowExpense{ nullptr };
 		GtkWidget* m_lblExpense{ nullptr };
+		GtkWidget* m_chkExpense{ nullptr };
+		GtkWidget* m_boxButtonsOverview{ nullptr };
 		GtkWidget* m_btnMenuAccountActions{ nullptr };
+		GtkWidget* m_btnResetOverviewFilter{ nullptr };
 		GtkWidget* m_grpGroups{ nullptr };
+		GtkWidget* m_boxButtonsGroups{ nullptr };
 		GtkWidget* m_btnNewGroup{ nullptr };
+		GtkWidget* m_btnResetGroupsFilter{ nullptr };
+		GtkWidget* m_calendar{ nullptr };
+		GtkWidget* m_btnResetCalendarFilter{ nullptr };
+		GtkWidget* m_ddStartYear{ nullptr };
+		GtkWidget* m_ddStartMonth{ nullptr };
+		GtkWidget* m_ddStartDay{ nullptr };
+		GtkWidget* m_ddEndYear{ nullptr };
+		GtkWidget* m_ddEndMonth{ nullptr };
+		GtkWidget* m_ddEndDay{ nullptr };
+		GtkWidget* m_boxStartRange{ nullptr };
+		GtkWidget* m_boxEndRange{ nullptr };
+		GtkWidget* m_rowStartRange{ nullptr };
+		GtkWidget* m_rowEndRange{ nullptr };
+		GtkWidget* m_grpRange{ nullptr };
+		GtkWidget* m_expRange{ nullptr };
+		GtkWidget* m_grpCalendar{ nullptr };
+		GtkWidget* m_boxSort{ nullptr };
+		GtkWidget* m_btnSortTopBottom{ nullptr };
+		GtkWidget* m_btnSortBottomTop{ nullptr };
 		GtkWidget* m_grpTransactions{ nullptr };
 		GtkWidget* m_btnNewTransaction{ nullptr };
+		GtkWidget* m_flowBox{ nullptr };
+		GtkWidget* m_pageStatusNoTransactions{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
@@ -48,6 +79,7 @@ namespace NickvisionMoney::UI::Views
 		GtkEventController* m_shortcutController{ nullptr };
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::GroupRow>> m_groupRows;
 		std::vector<std::shared_ptr<NickvisionMoney::UI::Controls::TransactionRow>> m_transactionRows;
+		bool m_isAccountLoading;
 		/**
 		 * Refreshes the UI with the account information
 		 */
@@ -60,6 +92,10 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when the import from csv menu item is clicked
 		 */
 		void onImportFromCSV();
+		/**
+		 * Occurs when the reset overview filter is clicked
+		 */
+		void onResetOverviewFilter();
 		/**
 		 * Occurs when the new group button is clicked
 		 */
@@ -77,6 +113,10 @@ namespace NickvisionMoney::UI::Views
 		 */
 		void onDeleteGroup(unsigned int id);
 		/**
+		 * Occurs when the reset groups filter is clicked
+		 */
+		void onResetGroupsFilter();
+		/**
 		 * Occurs when the new transaction button is clicked
 		 */
 		void onNewTransaction();
@@ -92,5 +132,45 @@ namespace NickvisionMoney::UI::Views
 		 * @param id The id of the transaction to delete
 		 */
 		void onDeleteTransaction(unsigned int id);
+		/**
+		 * Occurs when the reset calendar filter button is clicked
+		 */
+		void onResetCalendarFilter();
+		/**
+		 * Occurs when the month or year of the calendar view is changed
+		 */
+		void onCalendarMonthYearChanged();
+		/**
+		 * Occurs when the selected date of the calendar is changed
+		 */
+		void onCalendarSelectedDateChanged();
+		/**
+		 * Occurs when the select range date filter is toggled on or off
+		 */
+		void onDateRangeToggled();
+		/**
+		 * Occurs when the start year date range is changed
+		 */
+		void onDateRangeStartYearChanged();
+		/**
+		 * Occurs when the start month date range is changed
+		 */
+		void onDateRangeStartMonthChanged();
+		/**
+		 * Occurs when the start day date range is changed
+		 */
+		void onDateRangeStartDayChanged();
+		/**
+		 * Occurs when the end year date range is changed
+		 */
+		void onDateRangeEndYearChanged();
+		/**
+		 * Occurs when the end month date range is changed
+		 */
+		void onDateRangeEndMonthChanged();
+		/**
+		 * Occurs when the end day date range is changed
+		 */
+		void onDateRangeEndDayChanged();
 	};
 }

@@ -8,7 +8,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_recentAccount1{ "" }, m_recentAccount2{ "" }, m_recentAccount3{ "" }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_recentAccount1{ "" }, m_recentAccount2{ "" }, m_recentAccount3{ "" }, m_sortFirstToLast{ true }
 {
     //Load Config File
     if(!std::filesystem::exists(m_configDir))
@@ -24,6 +24,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         m_recentAccount1 = json.get("RecentAccount1", "").asString();
         m_recentAccount2 = json.get("RecentAccount2", "").asString();
         m_recentAccount3 = json.get("RecentAccount3", "").asString();
+        m_sortFirstToLast = json.get("SortFirstToLast", true).asBool();
     }
 }
 
@@ -85,6 +86,16 @@ void Configuration::addRecentAccount(const std::string& newRecentAccount)
     }
 }
 
+bool Configuration::getSortFirstToLast() const
+{
+    return m_sortFirstToLast;
+}
+
+void Configuration::setSortFirstToLast(bool sortFirstToLast)
+{
+    m_sortFirstToLast = sortFirstToLast;
+}
+
 void Configuration::save() const
 {
     std::ofstream configFile{ m_configDir + "config.json" };
@@ -95,6 +106,7 @@ void Configuration::save() const
         json["RecentAccount1"] = m_recentAccount1;
         json["RecentAccount2"] = m_recentAccount2;
         json["RecentAccount3"] = m_recentAccount3;
+        json["SortFirstToLast"] = m_sortFirstToLast;
         configFile << json;
     }
 }

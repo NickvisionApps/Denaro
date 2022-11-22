@@ -44,6 +44,8 @@ namespace NickvisionMoney::UI::Controls
 		std::function<void(unsigned int)> m_editCallback;
 		std::function<void(unsigned int)> m_deleteCallback;
 		GtkWidget* m_gobj;
+		GtkWidget* m_row;
+		GtkWidget* m_btnId;
 		GtkWidget* m_box;
 		GtkWidget* m_lblAmount;
 		GtkWidget* m_btnEdit;

@@ -115,6 +115,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		int getGroupAsIndex() const;
 		/**
+         * Gets the rgba color of the transaction
+         *
+         * @returns The rgba color of the transaction
+         */
+        const std::string& getRGBA() const;
+		/**
 		 * Gets the amount of the transaction as a string
 		 *
 		 * @returns The amount of the transaction
@@ -128,10 +134,11 @@ namespace NickvisionMoney::Controllers
 		 * @param type The type as an int
 		 * @param repeatInterval The repeat interval as an int
 		 * @param groupIndex The index of the group
+		 * @param rgba The rgba string
 		 * @param amountString The amount string
 		 * @returns The TransactionCheckStatus
 		 */
-		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, std::string amountString);
+		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString);
 
 	private:
 		std::string m_response;

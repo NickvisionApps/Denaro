@@ -75,6 +75,13 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_menu_button_set_popover(GTK_MENU_BUTTON(m_btnMenuAccount), m_popoverAccount);
     gtk_widget_set_tooltip_text(m_btnMenuAccount, _("Account Menu"));
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnMenuAccount);
+    //Flap Toggle Button
+    m_btnFlapToggle = gtk_toggle_button_new();
+    gtk_widget_set_visible(m_btnFlapToggle, false);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnFlapToggle), true);
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnFlapToggle), "sidebar-show-symbolic");
+    gtk_widget_set_tooltip_text(m_btnFlapToggle, _("Toggle Sidebar"));
+    adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnFlapToggle);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
@@ -215,7 +222,7 @@ void MainWindow::start()
             GtkWidget* row{ adw_action_row_new() };
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
             adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
-            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("wallet2-symbolic"));
             gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccountsOnStart), row);
         }
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
@@ -237,12 +244,13 @@ void MainWindow::onAccountAdded()
 {
     g_simple_action_set_enabled(m_actCloseAccount, true);
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), "pageTabs");
-    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, m_controller.createAccountViewControllerForLatestAccount()) };
+    std::unique_ptr<AccountView> newAccountView{ std::make_unique<AccountView>(GTK_WINDOW(m_gobj), m_tabView, m_btnFlapToggle, m_controller.createAccountViewControllerForLatestAccount()) };
     adw_tab_view_set_selected_page(m_tabView, newAccountView->gobj());
     m_accountViews.push_back(std::move(newAccountView));
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getNumberOfOpenAccounts() == 1 ? m_controller.getFirstOpenAccountPath().c_str() : nullptr);
     updateRecentAccounts();
     gtk_widget_set_visible(m_btnMenuAccount, true);
+    gtk_widget_set_visible(m_btnFlapToggle, true);
 }
 
 void MainWindow::onNewAccount()
@@ -384,7 +392,7 @@ void MainWindow::updateRecentAccounts()
         GtkWidget* row{ adw_action_row_new() };
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
         adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
-        adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+        adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("wallet2-symbolic"));
         gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccounts), row);
         m_listRecentAccountsRows.push_back(row);
     }
