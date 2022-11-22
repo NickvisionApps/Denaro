@@ -91,11 +91,11 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getDescription() const;
 		/**
-		 * Gets the type of the transaction as an int
+		 * Gets the type of the transaction
 		 *
 		 * @returns The type of the transaction
 		 */
-		int getTypeAsInt() const;
+		NickvisionMoney::Models::TransactionType getType() const;
 		/**
 		 * Gets the repeat interval of the transaction as an int
 		 *
@@ -126,19 +126,25 @@ namespace NickvisionMoney::Controllers
 		 * @returns The amount of the transaction
 		 */
 		std::string getAmountAsString() const;
+		/*
+		 * Gets whether or not the user's locale separates the decimal by "." or ","
+		 *
+		 * @returns True if separated by ".", false for ","
+		 */
+		bool isLocaleDotDecimalSeperated() const;
 		/**
 		 * Updates the transaction with the provided values
 		 *
 		 * @param dateString The date string
 		 * @param description The description
-		 * @param type The type as an int
+		 * @param type The TransactionType
 		 * @param repeatInterval The repeat interval as an int
 		 * @param groupIndex The index of the group
 		 * @param rgba The rgba string
 		 * @param amountString The amount string
 		 * @returns The TransactionCheckStatus
 		 */
-		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString);
+		TransactionCheckStatus updateTransaction(const std::string& dateString, const std::string& description, NickvisionMoney::Models::TransactionType type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString);
 
 	private:
 		std::string m_response;

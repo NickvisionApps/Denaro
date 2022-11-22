@@ -67,9 +67,9 @@ const std::string& TransactionDialogController::getDescription() const
     return m_transaction.getDescription();
 }
 
-int TransactionDialogController::getTypeAsInt() const
+TransactionType TransactionDialogController::getType() const
 {
-    return static_cast<int>(m_transaction.getType());
+    return m_transaction.getType();
 }
 
 int TransactionDialogController::getRepeatIntervalAsInt() const
@@ -103,7 +103,12 @@ std::string TransactionDialogController::getAmountAsString() const
     return MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), m_locale);
 }
 
-TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, int type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString)
+bool TransactionDialogController::isLocaleDotDecimalSeperated() const
+{
+    return MoneyHelpers::isLocaleDotDecimalSeperated(m_locale);
+}
+
+TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, TransactionType type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString)
 {
     if(description.empty())
     {
@@ -120,7 +125,7 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     }
     m_transaction.setDate(boost::gregorian::from_string(dateString));
     m_transaction.setDescription(description);
-    m_transaction.setType(static_cast<TransactionType>(type));
+    m_transaction.setType(type);
     m_transaction.setRepeatInterval(static_cast<RepeatInterval>(repeatInterval));
     if(groupIndex == 0)
     {

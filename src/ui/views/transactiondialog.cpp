@@ -4,6 +4,7 @@
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
+using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Views;
 
 TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Controllers::TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "", nullptr) }
@@ -96,12 +97,16 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Control
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowColor), m_btnColor);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowColor), m_btnColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupGroupColor), m_rowColor);
+    //Amount Event Controller Key
+    m_eventAmountKey = gtk_event_controller_key_new();
+    g_signal_connect(m_eventAmountKey, "key-released", G_CALLBACK((void (*)(GtkEventControllerKey*, unsigned int, unsigned int, GdkModifierType, gpointer))([](GtkEventControllerKey*, unsigned int keyval, unsigned int, GdkModifierType state, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onAmountKeyReleased(keyval, state); })), this);
+    gtk_widget_add_controller(m_rowAmount, m_eventAmountKey);
     //Layout
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_boxMain);
     //Load Transaction
     gtk_calendar_select_day(GTK_CALENDAR(m_calendarDate), g_date_time_new_local(m_controller.getYear(), m_controller.getMonth(), m_controller.getDay(), 0, 0, 0.0));
     gtk_editable_set_text(GTK_EDITABLE(m_rowDescription), m_controller.getDescription().c_str());
-    if(m_controller.getTypeAsInt() == 0)
+    if(m_controller.getType() == TransactionType::Income)
     {
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnIncome), true);
     }
@@ -138,9 +143,10 @@ bool TransactionDialog::run()
     {
         gtk_widget_hide(m_gobj);
         gtk_window_set_modal(GTK_WINDOW(m_gobj), false);
+        TransactionType type{ gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnIncome)) ? TransactionType::Income : TransactionType::Expense };
         GdkRGBA color;
         gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(m_btnColor), &color);
-        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), int(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnExpense))), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowGroup)), gdk_rgba_to_string(&color), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
+        TransactionCheckStatus status{ m_controller.updateTransaction(g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%Y-%m-%d"), gtk_editable_get_text(GTK_EDITABLE(m_rowDescription)), type, adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowRepeatInterval)), adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowGroup)), gdk_rgba_to_string(&color), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
         //Invalid Transaction
         if(status != TransactionCheckStatus::Valid)
         {
@@ -194,5 +200,19 @@ void TransactionDialog::onTypeChanged()
     {
         gtk_widget_remove_css_class(m_btnIncome, "success");
         gtk_widget_add_css_class(m_btnExpense, "error");
+    }
+}
+
+void TransactionDialog::onAmountKeyReleased(unsigned int keyval, GdkModifierType state)
+{
+    if(keyval == 65454 && state == 16) //number pad period with no modifier
+    {
+        if(!m_controller.isLocaleDotDecimalSeperated())
+        {
+            std::string amountText{ gtk_editable_get_text(GTK_EDITABLE(m_rowAmount)) };
+            amountText = amountText.substr(0, amountText.size() - 1);
+            amountText += ",";
+            gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), amountText.c_str());
+        }
     }
 }

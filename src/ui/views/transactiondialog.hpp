@@ -37,23 +37,23 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_gobj;
 		GtkWidget* m_boxMain{ nullptr };
 		GtkWidget* m_preferencesGroupMain{ nullptr };
+		GtkWidget* m_rowDescription{ nullptr };
+		GtkWidget* m_rowAmount{ nullptr };
+		GtkWidget* m_rowType{ nullptr };
+		GtkWidget* m_boxType{ nullptr };
+		GtkWidget* m_btnIncome{ nullptr };
+		GtkWidget* m_btnExpense{ nullptr };
 		GtkWidget* m_preferencesGroupDateRepeat{ nullptr };
-		GtkWidget* m_preferencesGroupGroupColor{ nullptr };
-		GtkWidget* m_rowId{ nullptr };
 		GtkWidget* m_rowDate{ nullptr };
 		GtkWidget* m_btnDate{ nullptr };
 		GtkWidget* m_popoverDate{ nullptr };
 		GtkWidget* m_calendarDate{ nullptr };
-		GtkWidget* m_rowDescription{ nullptr };
-		GtkWidget* m_btnIncome{ nullptr };
-		GtkWidget* m_btnExpense{ nullptr };
-		GtkWidget* m_boxType{ nullptr };
-		GtkWidget* m_rowType{ nullptr };
 		GtkWidget* m_rowRepeatInterval{ nullptr };
+		GtkWidget* m_preferencesGroupGroupColor{ nullptr };
 		GtkWidget* m_rowGroup{ nullptr };
 		GtkWidget* m_rowColor{ nullptr };
 		GtkWidget* m_btnColor{ nullptr };
-		GtkWidget* m_rowAmount{ nullptr };
+		GtkEventController* m_eventAmountKey{ nullptr };
 		/**
     	 * Sets the response
     	 *
@@ -68,5 +68,12 @@ namespace NickvisionMoney::UI::Views
 		 * Occurs when transaction type is changed
 		 */
 		void onTypeChanged();
+		/**
+		 * Occurs when a key is released in the amount entry row
+		 *
+		 * @param keyval The released key
+		 * @param state The bitmask, representing the state of modifier keys and pointer buttons
+		 */
+		void onAmountKeyReleased(unsigned int keyval, GdkModifierType state);
  	};
 }
