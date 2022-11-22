@@ -18,6 +18,9 @@
     <p xml:lang="hi">
             एक व्यक्तिगत वित्त संयोजक
     </p>
+    <p xml:lang="it">
+      Gestione finanziaria personale
+    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
