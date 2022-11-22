@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-22 05:24+0300\n"
-"PO-Revision-Date: 2022-11-16 15:13+0100\n"
+"PO-Revision-Date: 2022-11-22 14:48+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it\n"
@@ -27,10 +27,10 @@ msgid "Unable to export account as CSV."
 msgstr "Impossibile esportare l'account come CSV."
 
 #: src/controllers/accountviewcontroller.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
-msgstr[0] "Importate %d transazioni dal file CSV."
+msgstr[0] "Importata %d transazione dal file CSV."
 msgstr[1] "Importate %d transazioni dal file CSV."
 
 #: src/controllers/mainwindowcontroller.cpp:49
@@ -127,12 +127,10 @@ msgid "Total"
 msgstr "Totale"
 
 #: src/ui/views/accountview.cpp:47
-#, fuzzy
 msgid "Income"
 msgstr "Entrate"
 
 #: src/ui/views/accountview.cpp:58
-#, fuzzy
 msgid "Expense"
 msgstr "Uscite"
 
@@ -150,7 +148,7 @@ msgstr "Importa da CSV"
 
 #: src/ui/views/accountview.cpp:79
 msgid "Reset Overview Filters"
-msgstr ""
+msgstr "Ripristina filtri dell'anteprima"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Overview"
@@ -167,7 +165,7 @@ msgstr "Nuovo gruppo (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:105
 msgid "Reset Groups Filters"
-msgstr ""
+msgstr "Ripristina filtri dei gruppi"
 
 #: src/ui/views/accountview.cpp:110
 msgid "Groups"
@@ -175,71 +173,71 @@ msgstr "Gruppi"
 
 #: src/ui/views/accountview.cpp:125
 msgid "Reset Dates Filters"
-msgstr ""
+msgstr "Ripristina filtri delle date"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "January"
-msgstr ""
+msgstr "Gennaio"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "February"
-msgstr ""
+msgstr "Febbraio"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "March"
-msgstr ""
+msgstr "Marzo"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "April"
-msgstr ""
+msgstr "Aprile"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "May"
-msgstr ""
+msgstr "Maggio"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "June"
-msgstr ""
+msgstr "Giugno"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "July"
-msgstr ""
+msgstr "Luglio"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "August"
-msgstr ""
+msgstr "Agosto"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "September"
-msgstr ""
+msgstr "Settembre"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "October"
-msgstr ""
+msgstr "Ottobre"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "December"
-msgstr ""
+msgstr "Dicembre"
 
 #: src/ui/views/accountview.cpp:165
 msgid "Start"
-msgstr ""
+msgstr "Inizio"
 
 #: src/ui/views/accountview.cpp:169
 msgid "End"
-msgstr ""
+msgstr "Fine"
 
 #: src/ui/views/accountview.cpp:175
 msgid "Select Range"
-msgstr ""
+msgstr "Seleziona periodo"
 
 #: src/ui/views/accountview.cpp:184
 msgid "Calendar"
-msgstr ""
+msgstr "Calendario"
 
 #: src/ui/views/accountview.cpp:197
 msgctxt "Transaction"
@@ -252,35 +250,36 @@ msgstr "Nuova transazione (Ctrl+Maiusc+N)"
 
 #: src/ui/views/accountview.cpp:207
 msgid "Sort From Top To Bottom"
-msgstr ""
+msgstr "Ordina dall'alto al basso"
 
 #: src/ui/views/accountview.cpp:211
 msgid "Sort From Bottom To Top"
-msgstr ""
+msgstr "Ordina dal basso all'alto"
 
 #: src/ui/views/accountview.cpp:221
 msgid "Transactions"
 msgstr "Transazioni"
 
 #: src/ui/views/accountview.cpp:380
-#, fuzzy
 msgid "No Transactions Found"
-msgstr "Transazioni"
+msgstr "Nessuna transazione trovata"
 
 #: src/ui/views/accountview.cpp:381
 msgid "No transactions match the specified filters."
 msgstr ""
+"Non è stata trovata alcuna transazione che corrisponda ai filtri selezionati."
 
 #: src/ui/views/accountview.cpp:388
-#, fuzzy
 msgid "No Transactions"
-msgstr "Transazioni"
+msgstr "Nessuna transazione"
 
 #: src/ui/views/accountview.cpp:389
 msgid ""
 "Add a new transaction or import transactions from a CSV file using the "
 "Actions menu in the sidebar."
 msgstr ""
+"Crea una nuova transazione o importa transazioni da un file CSV con il menu "
+"Azioni nella barra laterale."
 
 #: src/ui/views/accountview.cpp:396 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -342,11 +341,11 @@ msgstr "Descrizione"
 
 #: src/ui/views/groupdialog.cpp:68
 msgid "Name (Empty)"
-msgstr "Nome (nessuno)"
+msgstr "Inserire un nome"
 
 #: src/ui/views/groupdialog.cpp:73 src/ui/views/transactiondialog.cpp:156
 msgid "Description (Empty)"
-msgstr "Descrizione (nessuna)"
+msgstr "Inserire una descrizione"
 
 #: src/ui/views/groupdialog.cpp:78
 msgid "Name (Exists)"
@@ -374,7 +373,7 @@ msgstr "Menu account"
 
 #: src/ui/views/mainwindow.cpp:83
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Mostra/nascondi barra laterale"
 
 #: src/ui/views/mainwindow.cpp:88 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
@@ -481,9 +480,9 @@ msgid "About"
 msgstr "Informazioni"
 
 #: src/ui/views/transactiondialog.cpp:18
-#, fuzzy, c-format
+#, c-format
 msgid "Transaction - %s"
-msgstr "Transazioni"
+msgstr "Transazione - %s"
 
 #: src/ui/views/transactiondialog.cpp:32 src/ui/views/transactiondialog.cpp:151
 msgid "Amount"
@@ -513,15 +512,15 @@ msgstr "Frequenza"
 
 #: src/ui/views/transactiondialog.cpp:95
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 #: src/ui/views/transactiondialog.cpp:161
 msgid "Amount (Empty)"
-msgstr "Ammontare (nessuno)"
+msgstr "Inserire un ammontare"
 
 #: src/ui/views/transactiondialog.cpp:166
 msgid "Amount (Invalid)"
-msgstr "Ammontare (non valido)"
+msgstr "Inserire un ammontare valido"
 
 #~ msgid "ID"
 #~ msgstr "ID"
