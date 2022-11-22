@@ -346,7 +346,7 @@ void MainWindow::onAbout()
                           "issue-url", m_controller.getAppInfo().getIssueTracker().c_str(),
                           "support-url", m_controller.getAppInfo().getSupportUrl().c_str(),
                           "developers", new const char*[3]{ "Nicholas Logozzo https://github.com/nlogozzo", "Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors", nullptr },
-                          "designers", new const char*[2]{ "Nicholas Logozzo https://github.com/nlogozzo", nullptr },
+                          "designers", new const char*[3]{ "Nicholas Logozzo https://github.com/nlogozzo", "Fyodor Sobolev https://github.com/fsobolev", nullptr },
                           "artists", new const char*[2]{ "David Lapshin https://github.com/daudix-UFO", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
