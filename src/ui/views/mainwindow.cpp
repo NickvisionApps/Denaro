@@ -222,7 +222,7 @@ void MainWindow::start()
             GtkWidget* row{ adw_action_row_new() };
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
             adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
-            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("wallet2-symbolic"));
             gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccountsOnStart), row);
         }
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoAccounts), "");
@@ -392,7 +392,7 @@ void MainWindow::updateRecentAccounts()
         GtkWidget* row{ adw_action_row_new() };
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::filesystem::path(recentAccountPath).filename().c_str());
         adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::regex_replace(recentAccountPath, std::regex("\\&"), "&amp;").c_str());
-        adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("folder-documents-symbolic"));
+        adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("wallet2-symbolic"));
         gtk_list_box_append(GTK_LIST_BOX(m_listRecentAccounts), row);
         m_listRecentAccountsRows.push_back(row);
     }
