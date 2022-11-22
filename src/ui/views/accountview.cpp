@@ -74,7 +74,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     g_object_unref(menuActions);
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
     //Button Reset Overview Filter
-    m_btnResetOverviewFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    m_btnResetOverviewFilter = gtk_button_new_from_icon_name("larger-brush-symbolic");
     gtk_widget_add_css_class(m_btnResetOverviewFilter, "flat");
     gtk_widget_set_tooltip_text(m_btnResetOverviewFilter, _("Reset Overview Filters"));
     g_signal_connect(m_btnResetOverviewFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetOverviewFilter(); }), this);
@@ -100,7 +100,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_button_set_child(GTK_BUTTON(m_btnNewGroup), btnNewGroupContent);
     gtk_box_append(GTK_BOX(m_boxButtonsGroups), m_btnNewGroup);
     //Button Reset Groups Filter
-    m_btnResetGroupsFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    m_btnResetGroupsFilter = gtk_button_new_from_icon_name("larger-brush-symbolic");
     gtk_widget_add_css_class(m_btnResetGroupsFilter, "flat");
     gtk_widget_set_tooltip_text(m_btnResetGroupsFilter, _("Reset Groups Filters"));
     g_signal_connect(m_btnResetGroupsFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetGroupsFilter(); }), this);
@@ -120,7 +120,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     g_signal_connect(m_calendar, "next-year", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarMonthYearChanged(); }), this);
     g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarSelectedDateChanged(); }), this);
     //Button Reset Calendar Filter
-    m_btnResetCalendarFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
+    m_btnResetCalendarFilter = gtk_button_new_from_icon_name("larger-brush-symbolic");
     gtk_widget_add_css_class(m_btnResetCalendarFilter, "flat");
     gtk_widget_set_tooltip_text(m_btnResetCalendarFilter, _("Reset Dates Filters"));
     g_signal_connect(m_btnResetCalendarFilter, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onResetCalendarFilter(); }), this);

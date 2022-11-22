@@ -54,5 +54,5 @@ sources = files('main.cpp',
 
 resources = files('resources/org.nickvision.money.svg', 'resources/org.nickvision.money-devel.svg')
 resources_symbolic = files('resources/org.nickvision.money-symbolic.svg')
-resources_actions = files('resources/bank-symbolic.svg', 'resources/money-none-symbolic.svg')
+resources_actions = files('resources/bank-symbolic.svg', 'resources/larger-brush-symbolic.svg', 'resources/money-none-symbolic.svg')
 gresource = files('resources/org.nickvision.money.gresource.xml')
