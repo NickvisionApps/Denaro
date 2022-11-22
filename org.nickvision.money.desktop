@@ -5,6 +5,7 @@ Comment=A personal finance manager
 Comment[fr]=Gestionnaire des dépenses personnelles
 Comment[hi]=एक व्यक्तिगत वित्त संयोजक
 Comment[hr]=Aplikacija za osobne financije
+Comment[it]=Gestione finanziaria personale
 Exec=org.nickvision.money
 Icon=org.nickvision.money
 Terminal=false
