@@ -11,7 +11,7 @@ using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }, m_isAccountLoading{ false }
 {
     //Flap
     m_flap = adw_flap_new();
@@ -114,7 +114,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_calendar = gtk_calendar_new();
     gtk_widget_set_name(m_calendar, "calendarAccount");
     gtk_widget_add_css_class(m_calendar, "card");
-    g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarDateChanged(); }), this);
+    g_signal_connect(m_calendar, "prev-month", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarMonthYearChanged(); }), this);
+    g_signal_connect(m_calendar, "prev-year", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarMonthYearChanged(); }), this);
+    g_signal_connect(m_calendar, "next-month", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarMonthYearChanged(); }), this);
+    g_signal_connect(m_calendar, "next-year", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarMonthYearChanged(); }), this);
+    g_signal_connect(m_calendar, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))[](GtkCalendar*, gpointer data) { reinterpret_cast<AccountView*>(data)->onCalendarSelectedDateChanged(); }), this);
     //Button Reset Calendar Filter
     m_btnResetCalendarFilter = gtk_button_new_from_icon_name("edit-clear-all-symbolic");
     gtk_widget_add_css_class(m_btnResetCalendarFilter, "flat");
@@ -302,6 +306,7 @@ AdwTabPage* AccountView::gobj()
 
 void AccountView::onAccountInfoChanged()
 {
+    m_isAccountLoading = true;
     //Overview
     gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller.getAccountTotalString().c_str());
     gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
@@ -333,42 +338,57 @@ void AccountView::onAccountInfoChanged()
         gtk_flow_box_remove(GTK_FLOW_BOX(m_flowBox), transactionRow->gobj());
     }
     m_transactionRows.clear();
+    gtk_calendar_clear_marks(GTK_CALENDAR(m_calendar));
     m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
     if(m_controller.getTransactions().size() > 0)
     {
-        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions Found"));
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transactions match the specified filters."));
-    }
-    else
-    {
-        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions"));
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import transactions from a CSV file using the Actions menu in the sidebar."));
-    }
-    if(m_controller.getFilteredTransactions().size() > 0)
-    {
-        gtk_widget_set_visible(m_pageStatusNoTransactions, false);
-        gtk_widget_set_visible(m_scrollTransactions, true);
-        for(const Transaction& transaction : m_controller.getFilteredTransactions())
+        //Mark Days In Calendar
+        GDateTime* selectedDay{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
+        for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
         {
-            std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller.getLocale()) };
-            row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
-            row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-            if(m_controller.getSortFirstToLast())
+            if(pair.second.getDate().month() == g_date_time_get_month(selectedDay) && pair.second.getDate().year() == g_date_time_get_year(selectedDay))
             {
-                gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
+                gtk_calendar_mark_day(GTK_CALENDAR(m_calendar), pair.second.getDate().day());
             }
-            else
+        }
+        gtk_calendar_select_day(GTK_CALENDAR(m_calendar), g_date_time_add_years(selectedDay, -1));
+        gtk_calendar_select_day(GTK_CALENDAR(m_calendar), selectedDay);
+        if(m_controller.getFilteredTransactions().size() > 0) //Filtered Transactions
+        {
+            gtk_widget_set_visible(m_pageStatusNoTransactions, false);
+            gtk_widget_set_visible(m_scrollTransactions, true);
+            for(const Transaction& transaction : m_controller.getFilteredTransactions())
             {
-                gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
+                std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller.getLocale()) };
+                row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
+                row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
+                if(m_controller.getSortFirstToLast())
+                {
+                    gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
+                }
+                else
+                {
+                    gtk_flow_box_prepend(GTK_FLOW_BOX(m_flowBox), row->gobj());
+                }
+                m_transactionRows.push_back(row);
             }
-            m_transactionRows.push_back(row);
+        }
+        else //No Filtered Transactions
+        {
+            gtk_widget_set_visible(m_pageStatusNoTransactions, true);
+            gtk_widget_set_visible(m_scrollTransactions, false);
+            adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions Found"));
+            adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No transactions match the specified filters."));
         }
     }
     else
     {
         gtk_widget_set_visible(m_pageStatusNoTransactions, true);
         gtk_widget_set_visible(m_scrollTransactions, false);
+        adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions"));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import transactions from a CSV file using the Actions menu in the sidebar."));
     }
+    m_isAccountLoading = false;
 }
 
 void AccountView::onExportAsCSV()
@@ -508,12 +528,30 @@ void AccountView::onResetCalendarFilter()
     }
 }
 
-void AccountView::onCalendarDateChanged()
+void AccountView::onCalendarMonthYearChanged()
 {
-    GDateTime* gtkSelectedDate{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
-    boost::gregorian::date selectedDate{ g_date_time_get_year(gtkSelectedDate), g_date_time_get_month(gtkSelectedDate), g_date_time_get_day_of_month(gtkSelectedDate) };
-    m_controller.setFilterStartDate(selectedDate);
-    m_controller.setFilterEndDate(selectedDate);
+    gtk_calendar_clear_marks(GTK_CALENDAR(m_calendar));
+    GDateTime* selectedDay{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
+    for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
+    {
+        if(pair.second.getDate().month() == g_date_time_get_month(selectedDay) && pair.second.getDate().year() == g_date_time_get_year(selectedDay))
+        {
+            gtk_calendar_mark_day(GTK_CALENDAR(m_calendar), pair.second.getDate().day());
+        }
+    }
+    gtk_calendar_select_day(GTK_CALENDAR(m_calendar), g_date_time_add_years(selectedDay, -1));
+    gtk_calendar_select_day(GTK_CALENDAR(m_calendar), selectedDay);
+}
+
+void AccountView::onCalendarSelectedDateChanged()
+{
+    if(!m_isAccountLoading)
+    {
+        GDateTime* gtkSelectedDate{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
+        boost::gregorian::date selectedDate{ g_date_time_get_year(gtkSelectedDate), g_date_time_get_month(gtkSelectedDate), g_date_time_get_day_of_month(gtkSelectedDate) };
+        m_controller.setFilterStartDate(selectedDate);
+        m_controller.setFilterEndDate(selectedDate);
+    }
 }
 
 void AccountView::onDateRangeToggled()
