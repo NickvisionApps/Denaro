@@ -49,6 +49,7 @@
         <p>- The CSV delimiter has been changed to a semicolon (;). This will allow us to store rgba values and descriptions with commas in a CSV file</p>
         <p>- Fixed an issue where some monetary values were displayed incorrectly</p>
         <p>- Fixed an issue where repeated transactions would not assign themselves to a group</p>
+        <p>- Added German translation (Thanks @milotype!)</p>
       </description>
     </release>
   </releases>
