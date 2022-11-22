@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-22 04:31+0300\n"
+"POT-Creation-Date: 2022-11-22 05:24+0300\n"
 "PO-Revision-Date: 2022-11-17 08:02+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
@@ -253,6 +253,14 @@ msgstr "नई"
 #: src/ui/views/accountview.cpp:198
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "नई लेनदेन (Ctrl+Shift+N)"
+
+#: src/ui/views/accountview.cpp:207
+msgid "Sort From Top To Bottom"
+msgstr ""
+
+#: src/ui/views/accountview.cpp:211
+msgid "Sort From Bottom To Top"
+msgstr ""
 
 #: src/ui/views/accountview.cpp:221
 msgid "Transactions"
