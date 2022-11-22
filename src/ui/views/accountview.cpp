@@ -204,11 +204,11 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Sort Box and Buttons
     m_btnSortTopBottom = gtk_toggle_button_new();
     gtk_button_set_icon_name(GTK_BUTTON(m_btnSortTopBottom), "view-sort-descending-symbolic");
-    gtk_widget_set_tooltip_text(m_btnSortTopBottom, "Sort From Top To Bottom");
+    gtk_widget_set_tooltip_text(m_btnSortTopBottom, _("Sort From Top To Bottom"));
     g_signal_connect(m_btnSortTopBottom, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
     m_btnSortBottomTop = gtk_toggle_button_new();
     gtk_button_set_icon_name(GTK_BUTTON(m_btnSortBottomTop), "view-sort-ascending-symbolic");
-    gtk_widget_set_tooltip_text(m_btnSortBottomTop, "Sort From Bottom To Top");
+    gtk_widget_set_tooltip_text(m_btnSortBottomTop, _("Sort From Bottom To Top"));
     g_signal_connect(m_btnSortBottomTop, "clicked", G_CALLBACK((void (*)(GtkToggleButton*, gpointer))[](GtkToggleButton*, gpointer data) { reinterpret_cast<AccountView*>(data)->onAccountInfoChanged(); }), this);
     g_object_bind_property(m_btnSortTopBottom, "active", m_btnSortBottomTop, "active", (GBindingFlags)(G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN));
     m_boxSort = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
