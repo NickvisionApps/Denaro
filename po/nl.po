@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-22 05:24+0300\n"
-"PO-Revision-Date: 2022-11-16 11:34+0100\n"
+"PO-Revision-Date: 2022-11-22 20:00+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -26,10 +26,10 @@ msgid "Unable to export account as CSV."
 msgstr "De rekening kan niet worden geëxporteerd."
 
 #: src/controllers/accountviewcontroller.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
-msgstr[0] "Er zijn %d transacties geïmporteerd uit het csv-bestand."
+msgstr[0] "Er is %d transactie geïmporteerd uit het csv-bestand."
 msgstr[1] "Er zijn %d transacties geïmporteerd uit het csv-bestand."
 
 #: src/controllers/mainwindowcontroller.cpp:49
@@ -126,14 +126,12 @@ msgid "Total"
 msgstr "Totaal"
 
 #: src/ui/views/accountview.cpp:47
-#, fuzzy
 msgid "Income"
-msgstr "Inkomsten"
+msgstr "Inkomst"
 
 #: src/ui/views/accountview.cpp:58
-#, fuzzy
 msgid "Expense"
-msgstr "Uitgaven"
+msgstr "Uitgave"
 
 #: src/ui/views/accountview.cpp:68
 msgid "Actions"
@@ -149,7 +147,7 @@ msgstr "Importeren uit csv-bestand"
 
 #: src/ui/views/accountview.cpp:79
 msgid "Reset Overview Filters"
-msgstr ""
+msgstr "Standaard filterwaarden"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Overview"
@@ -166,7 +164,7 @@ msgstr "Nieuwe groep (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:105
 msgid "Reset Groups Filters"
-msgstr ""
+msgstr "Standaard filterwaarden"
 
 #: src/ui/views/accountview.cpp:110
 msgid "Groups"
@@ -174,71 +172,71 @@ msgstr "Groepen"
 
 #: src/ui/views/accountview.cpp:125
 msgid "Reset Dates Filters"
-msgstr ""
+msgstr "Standaard filterwaarden"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "January"
-msgstr ""
+msgstr "januari"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "February"
-msgstr ""
+msgstr "februari"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "March"
-msgstr ""
+msgstr "maart"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "April"
-msgstr ""
+msgstr "april"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "May"
-msgstr ""
+msgstr "mei"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "June"
-msgstr ""
+msgstr "juni"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "July"
-msgstr ""
+msgstr "juli"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "August"
-msgstr ""
+msgstr "augustus"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "September"
-msgstr ""
+msgstr "september"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "October"
-msgstr ""
+msgstr "oktober"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "November"
-msgstr ""
+msgstr "november"
 
 #: src/ui/views/accountview.cpp:132 src/ui/views/accountview.cpp:145
 msgid "December"
-msgstr ""
+msgstr "december"
 
 #: src/ui/views/accountview.cpp:165
 msgid "Start"
-msgstr ""
+msgstr "Van"
 
 #: src/ui/views/accountview.cpp:169
 msgid "End"
-msgstr ""
+msgstr "Tot"
 
 #: src/ui/views/accountview.cpp:175
 msgid "Select Range"
-msgstr ""
+msgstr "Kies een datumbereik"
 
 #: src/ui/views/accountview.cpp:184
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: src/ui/views/accountview.cpp:197
 msgctxt "Transaction"
@@ -251,35 +249,36 @@ msgstr "Nieuwe transactie (Ctrl+Shift+N)"
 
 #: src/ui/views/accountview.cpp:207
 msgid "Sort From Top To Bottom"
-msgstr ""
+msgstr "Sorteren van boven naar onderen"
 
 #: src/ui/views/accountview.cpp:211
 msgid "Sort From Bottom To Top"
-msgstr ""
+msgstr "Sorteren van onderen naar boven"
 
 #: src/ui/views/accountview.cpp:221
 msgid "Transactions"
 msgstr "Transacties"
 
 #: src/ui/views/accountview.cpp:380
-#, fuzzy
 msgid "No Transactions Found"
-msgstr "Transacties"
+msgstr "Geen transacties gevonden"
 
 #: src/ui/views/accountview.cpp:381
 msgid "No transactions match the specified filters."
 msgstr ""
+"Er zijn geen transacties gevonden die voldoen aan de opgegeven filters."
 
 #: src/ui/views/accountview.cpp:388
-#, fuzzy
 msgid "No Transactions"
-msgstr "Transacties"
+msgstr "Er zijn geen transacties"
 
 #: src/ui/views/accountview.cpp:389
 msgid ""
 "Add a new transaction or import transactions from a CSV file using the "
 "Actions menu in the sidebar."
 msgstr ""
+"Voeg een transactie toe of importeer ze uit een csv-bestand via het "
+"actiemenu in de zijbalk."
 
 #: src/ui/views/accountview.cpp:396 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -373,7 +372,7 @@ msgstr "Rekeningmenu"
 
 #: src/ui/views/mainwindow.cpp:83
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Zijbalk tonen/verbergen"
 
 #: src/ui/views/mainwindow.cpp:88 src/ui/views/preferencesdialog.cpp:17
 #: src/ui/views/shortcutsdialog.cpp:104
@@ -480,9 +479,9 @@ msgid "About"
 msgstr "Over"
 
 #: src/ui/views/transactiondialog.cpp:18
-#, fuzzy, c-format
+#, c-format
 msgid "Transaction - %s"
-msgstr "Transacties"
+msgstr "Transactie - %s"
 
 #: src/ui/views/transactiondialog.cpp:32 src/ui/views/transactiondialog.cpp:151
 msgid "Amount"
@@ -512,7 +511,7 @@ msgstr "Herhalen"
 
 #: src/ui/views/transactiondialog.cpp:95
 msgid "Color"
-msgstr ""
+msgstr "Kleur"
 
 #: src/ui/views/transactiondialog.cpp:161
 msgid "Amount (Empty)"
