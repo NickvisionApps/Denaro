@@ -36,11 +36,18 @@ namespace NickvisionMoney::UI::Views
  		NickvisionMoney::Controllers::TransferDialogController& m_controller;
 		GtkWidget* m_gobj;
 		GtkWidget* m_preferencesGroup{ nullptr };
+		GtkWidget* m_rowTransferAccount{ nullptr };
+		GtkWidget* m_btnOpenAccount{ nullptr };
+		GtkWidget* m_rowAmount{ nullptr };
 		/**
     	 * Sets the response
     	 *
     	 * @param The new response
     	 */
 		void setResponse(const std::string& response);
+		/**
+		 * Occurs when the open account button is clicked
+		 */
+		void onOpenAccount();
  	};
 }
