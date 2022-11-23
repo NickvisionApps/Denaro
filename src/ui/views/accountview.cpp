@@ -67,10 +67,14 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), "document-properties-symbolic");
     adw_button_content_set_label(ADW_BUTTON_CONTENT(btnMenuAccountActionsContent), _("Actions"));
     gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
+    GMenu* menuActionsCSV{ g_menu_new() };
+    g_menu_append(menuActionsCSV, _("Export as CSV"), "account.exportAsCSV");
+    g_menu_append(menuActionsCSV, _("Import from CSV"), "account.importFromCSV");
     GMenu* menuActions{ g_menu_new() };
-    g_menu_append(menuActions, _("Export as CSV"), "account.exportAsCSV");
-    g_menu_append(menuActions, _("Import from CSV"), "account.importFromCSV");
+    g_menu_append(menuActions, _("Transfer Money"), "account.transferMoney");
+    g_menu_append_section(menuActions, nullptr, G_MENU_MODEL(menuActionsCSV));
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuAccountActions), G_MENU_MODEL(menuActions));
+    g_object_unref(menuActionsCSV);
     g_object_unref(menuActions);
     gtk_box_append(GTK_BOX(m_boxButtonsOverview), m_btnMenuAccountActions);
     //Button Reset Overview Filter
@@ -263,6 +267,10 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Action Map
     m_actionMap = g_simple_action_group_new();
     gtk_widget_insert_action_group(m_flap, "account", G_ACTION_GROUP(m_actionMap));
+    //Transfer Money Action
+    m_actTransferMoney = g_simple_action_new("transferMoney", nullptr);
+    g_signal_connect(m_actTransferMoney, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onTransferMoney(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_actionMap), G_ACTION(m_actTransferMoney));
     //Export as CSV Action
     m_actExportAsCSV = g_simple_action_new("exportAsCSV", nullptr);
     g_signal_connect(m_actExportAsCSV, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<AccountView*>(data)->onExportAsCSV(); }), this);
@@ -282,6 +290,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     //Shortcut Controller
     m_shortcutController = gtk_shortcut_controller_new();
     gtk_shortcut_controller_set_scope(GTK_SHORTCUT_CONTROLLER(m_shortcutController), GTK_SHORTCUT_SCOPE_MANAGED);
+    gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>T"), gtk_named_action_new("account.transferMoney")));
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>E"), gtk_named_action_new("account.exportAsCSV")));
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>I"), gtk_named_action_new("account.importFromCSV")));
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl>G"), gtk_named_action_new("account.newGroup")));
@@ -391,6 +400,11 @@ void AccountView::onAccountInfoChanged()
         adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import transactions from a CSV file using the Actions menu in the sidebar."));
     }
     m_isAccountLoading = false;
+}
+
+void AccountView::onTransferMoney()
+{
+
 }
 
 void AccountView::onExportAsCSV()

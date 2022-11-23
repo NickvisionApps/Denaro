@@ -49,6 +49,7 @@
     <release version="2022.11.1-beta1" date="2022-11-21">
       <description>
         <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</p>
+        <p>- Added the 'Transfer Money' action to allow for transferring money to another account</p>
         <p>- Added support for filtering transactions by type, group, or date</p>
         <p>- You can now double-click a .nmoney file and it will open directly in Money</p>
         <p>- When typing an amount, the user's locale's currency separator will be used instead of a period when the keypad's period is typed</p>

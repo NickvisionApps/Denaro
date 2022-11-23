@@ -72,6 +72,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_flowBox{ nullptr };
 		GtkWidget* m_pageStatusNoTransactions{ nullptr };
 		GSimpleActionGroup* m_actionMap{ nullptr };
+		GSimpleAction* m_actTransferMoney{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
 		GSimpleAction* m_actImportFromCSV{ nullptr };
 		GSimpleAction* m_actNewGroup{ nullptr };
@@ -84,6 +85,10 @@ namespace NickvisionMoney::UI::Views
 		 * Refreshes the UI with the account information
 		 */
 		void onAccountInfoChanged();
+		/**
+		 * Occurs when the transfer money to another account menu item is clicked
+		 */
+		void onTransferMoney();
 		/**
 		 * Occurs when the export as csv menu item is clicked
 		 */
