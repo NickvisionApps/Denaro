@@ -48,6 +48,23 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">%s</property>
+                                    <property name="accelerator">&lt;Control&gt;E</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">%s</property>
+                                    <property name="accelerator">&lt;Control&gt;I</property>
+                                </object>
+                            </child>
+                        </object>
+                    </child>
+                    <child>
+                        <object class="GtkShortcutsGroup">
+                            <property name="title">%s</property>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">%s</property>
                                     <property name="accelerator">&lt;Control&gt;G</property>
                                 </object>
                             </child>
@@ -96,6 +113,9 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
     _("New Account"),
     _("Open Account"),
     _("Close Account"),
+    _("Account Actions"),
+    _("Export as CSV"),
+    _("Import from CSV"),
     pgettext("Shortcuts", "Group"),
     _("New Group"),
     _("Transaction"),
