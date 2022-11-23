@@ -79,6 +79,13 @@ void AccountViewController::importFromCSV(std::string& path)
     int imported{ m_account.importFromCSV(path) };
     if(imported > 0)
     {
+        for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
+        {
+            if(!m_mapFilters.contains(pair.second.getId()))
+            {
+                m_mapFilters.insert({ pair.second.getId(), true });
+            }
+        }
         m_accountInfoChangedCallback();
     }
     m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from CSV.", "Imported %d transactions from CSV.", imported), imported));

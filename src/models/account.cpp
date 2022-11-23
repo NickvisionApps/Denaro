@@ -360,7 +360,7 @@ bool Account::exportAsCSV(const std::string& path)
     std::ofstream file{ path };
     if(file.is_open())
     {
-        file << "ID,Date,Description,Type,RepeatInterval,Amount,RGBA,Group,GroupName,GroupDescription\n";
+        file << "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
         for(const std::pair<const unsigned int, Transaction>& pair : m_transactions)
         {
             file << pair.second.getId() << ";";
@@ -375,7 +375,9 @@ bool Account::exportAsCSV(const std::string& path)
             {
                 file << m_groups.at(pair.second.getGroupId()).getName() << ";";
                 file << m_groups.at(pair.second.getGroupId()).getDescription() << "\n";
-            } else {
+            }
+            else
+            {
                 file << ";\n";
             }
         }
@@ -393,7 +395,7 @@ int Account::importFromCSV(const std::string& path)
         std::string line;
         while(getline(file, line))
         {
-            //Separate fields by ,
+            //Separate fields by ;
             std::vector<std::string> fields{ split(line, ";") };
             if(fields.size() != 10)
             {
@@ -481,6 +483,14 @@ int Account::importFromCSV(const std::string& path)
             const std::string& groupName{ fields[8] };
             //Get Group Description
             const std::string& groupDescription{ fields[9] };
+            //Add Group if needed
+            if (getGroupById(gid) == std::nullopt && gid != -1)
+            {
+                Group group{ (unsigned int) gid };
+                group.setName(groupName);
+                group.setDescription(groupDescription);
+                addGroup(group);
+            }
             //Add Transaction
             Transaction transaction{ id };
             transaction.setDate(date);
@@ -491,19 +501,9 @@ int Account::importFromCSV(const std::string& path)
             transaction.setGroupId(gid);
             transaction.setRGBA(rgba);
             addTransaction(transaction);
-            //Add Group if needed
-            if (getGroupById(gid) == std::nullopt && gid != -1)
-            {
-                Group group{ (unsigned int) gid };
-                group.setName(groupName);
-                group.setDescription(groupDescription);
-                addGroup(group);
-            }
-
             imported++;
         }
     }
-    updateGroupAmounts();
     return imported;
 }
 
