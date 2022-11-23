@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "../models/transfer.hpp"
 
 namespace NickvisionMoney::Controllers
 {
@@ -13,8 +14,9 @@ namespace NickvisionMoney::Controllers
 		/**
 		 * Constructs a TransferDialogController
 		 *
+		 * @param sourceAccountPath The path to the source account
 		 */
-		TransferDialogController();
+		TransferDialogController(const std::string& sourceAccountPath);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -27,8 +29,27 @@ namespace NickvisionMoney::Controllers
 		 * @param response The new response of the dialog
 		 */
 		void setResponse(const std::string& response);
+		/**
+		 * Gets the path of the source account
+		 *
+		 * @returns The path of the source account
+		 */
+		const std::string& getSourceAccountPath() const;
+		/**
+		 * Gets the path of the destination account
+		 *
+		 * @returns The path of the destination account
+		 */
+		const std::string& getDestAccountPath() const;
+		/**
+		 * Sets the path of the destination account
+		 *
+		 * @param destAccountPath The new path
+		 */
+		void setDestAccountPath(const std::string& destAccountPath);
 
 	private:
 		std::string m_response;
+		NickvisionMoney::Models::Transfer m_transfer;
 	};
 }

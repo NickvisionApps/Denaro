@@ -17,18 +17,22 @@ TransferDialog::TransferDialog(GtkWindow* parent, TransferDialogController& cont
     //Preferences Group
     m_preferencesGroup = adw_preferences_group_new();
     gtk_widget_set_margin_top(m_preferencesGroup, 10);
-    //Open Account Button
-    m_btnOpenAccount = gtk_button_new();
-    gtk_widget_add_css_class(m_btnOpenAccount, "flat");
-    gtk_widget_set_valign(m_btnOpenAccount, GTK_ALIGN_CENTER);
-    gtk_button_set_icon_name(GTK_BUTTON(m_btnOpenAccount), "document-open-symbolic");
-    gtk_widget_set_tooltip_text(m_btnOpenAccount, "Open Account");
-    g_signal_connect(m_btnOpenAccount, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransferDialog*>(data)->onOpenAccount(); }), this);
+    //Transfer Account Label
+    m_lblTransferAccount = gtk_label_new(_("No Opened Account"));
+    gtk_widget_set_valign(m_lblTransferAccount, GTK_ALIGN_CENTER);
+    gtk_widget_set_margin_start(m_lblTransferAccount, 20);
+    //Select Account Button
+    m_btnSelectAccount = gtk_button_new();
+    gtk_widget_add_css_class(m_btnSelectAccount, "flat");
+    gtk_widget_set_valign(m_btnSelectAccount, GTK_ALIGN_CENTER);
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnSelectAccount), "document-open-symbolic");
+    gtk_widget_set_tooltip_text(m_btnSelectAccount, "Select Account");
+    g_signal_connect(m_btnSelectAccount, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransferDialog*>(data)->onSelectAccount(); }), this);
     //Transfer Account
-    m_rowTransferAccount = adw_combo_row_new();
+    m_rowTransferAccount = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransferAccount), _("Transfer Account"));
-    adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTransferAccount), G_LIST_MODEL(gtk_string_list_new(new const char*[2]{ _("No Accounts Opened"), nullptr })));
-    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransferAccount), m_btnOpenAccount);
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransferAccount), m_lblTransferAccount);
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransferAccount), m_btnSelectAccount);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowTransferAccount);
     //Amount
     m_rowAmount = adw_entry_row_new();
@@ -62,9 +66,9 @@ void TransferDialog::setResponse(const std::string& response)
     m_controller.setResponse(response);
 }
 
-void TransferDialog::onOpenAccount()
+void TransferDialog::onSelectAccount()
 {
-    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Open Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Select Account"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, _("Money Account (*.nmoney)"));
@@ -78,7 +82,11 @@ void TransferDialog::onOpenAccount()
             TransferDialog* transferDialog{ reinterpret_cast<TransferDialog*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-
+            if(path != transferDialog->m_controller.getSourceAccountPath())
+            {
+                transferDialog->m_controller.setDestAccountPath(path);
+                gtk_label_set_text(GTK_LABEL(transferDialog->m_lblTransferAccount), path.c_str());
+            }
             g_object_unref(file);
         }
         g_object_unref(dialog);

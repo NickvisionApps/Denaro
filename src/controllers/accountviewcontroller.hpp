@@ -9,6 +9,7 @@
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
+#include "transferdialogcontroller.hpp"
 #include "../models/account.hpp"
 #include "../models/configuration.hpp"
 #include "../models/group.hpp"
@@ -90,6 +91,12 @@ namespace NickvisionMoney::Controllers
 		 * @param callback A void() function
 		 */
 		void registerAccountInfoChangedCallback(const std::function<void()>& callback);
+		/**
+		 * Creates a TransferDialogController for a new transfer
+		 *
+		 * @returns A new TransferDialogController
+		 */
+		TransferDialogController createTransferDialogController() const;
 		/**
 		 * Export the account as a CSV file
 		 *

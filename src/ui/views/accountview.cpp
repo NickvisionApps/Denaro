@@ -407,7 +407,7 @@ void AccountView::onTransferMoney()
 {
     if(m_controller.getAccountTotal() > 0)
     {
-        TransferDialogController controller;
+        TransferDialogController controller{ m_controller.createTransferDialogController() };
         TransferDialog dialog{ m_parentWindow, controller };
         if(dialog.run())
         {

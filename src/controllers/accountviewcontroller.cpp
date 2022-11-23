@@ -68,6 +68,11 @@ void AccountViewController::registerAccountInfoChangedCallback(const std::functi
     m_accountInfoChangedCallback = callback;
 }
 
+TransferDialogController AccountViewController::createTransferDialogController() const
+{
+    return { m_account.getPath() };
+}
+
 void AccountViewController::exportAsCSV(std::string& path)
 {
     if(std::filesystem::path(path).extension().empty() || std::filesystem::path(path).extension() != ".csv")
