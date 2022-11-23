@@ -213,7 +213,7 @@ void TransactionDialog::onAmountKeyReleased(unsigned int keyval, GdkModifierType
             amountText = amountText.substr(0, amountText.size() - 1);
             amountText += ",";
             gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), amountText.c_str());
-            gtk_editable_set_position(GTK_EDITABLE(m_rowAmount), amountText.size() - 1);
+            gtk_editable_set_position(GTK_EDITABLE(m_rowAmount), -1);
         }
     }
 }
