@@ -2,6 +2,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include "groupdialog.hpp"
 #include "transactiondialog.hpp"
+#include "transferdialog.hpp"
 #include "../controls/messagedialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/translation.hpp"
@@ -404,7 +405,19 @@ void AccountView::onAccountInfoChanged()
 
 void AccountView::onTransferMoney()
 {
+    if(m_controller.getAccountTotal() > 0)
+    {
+        TransferDialogController controller;
+        TransferDialog dialog{ m_parentWindow, controller };
+        if(dialog.run())
+        {
 
+        }
+    }
+    else
+    {
+        m_controller.sendToast(_("This account has no money available to transfer."));
+    }
 }
 
 void AccountView::onExportAsCSV()

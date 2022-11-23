@@ -4,7 +4,7 @@
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::UI::Views;
 
-GroupDialog::GroupDialog(GtkWindow* parent, NickvisionMoney::Controllers::GroupDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, _("Group"), nullptr) }
+GroupDialog::GroupDialog(GtkWindow* parent, GroupDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, _("Group"), nullptr) }
 {
     //Dialog Settings
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
@@ -29,7 +29,7 @@ GroupDialog::GroupDialog(GtkWindow* parent, NickvisionMoney::Controllers::GroupD
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroup), m_rowDescription);
     //Layout
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_preferencesGroup);
-    //Load Transaction
+    //Load Group
     gtk_editable_set_text(GTK_EDITABLE(m_rowName), m_controller.getName().c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_rowDescription), m_controller.getDescription().c_str());
 }

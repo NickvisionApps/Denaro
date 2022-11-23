@@ -28,6 +28,11 @@ const std::locale& AccountViewController::getLocale() const
     return m_configuration.getLocale();
 }
 
+boost::multiprecision::cpp_dec_float_50 AccountViewController::getAccountTotal() const
+{
+    return m_account.getTotal();
+}
+
 std::string AccountViewController::getAccountTotalString() const
 {
     return MoneyHelpers::boostMoneyToLocaleString(m_account.getTotal(), m_configuration.getLocale());
@@ -51,6 +56,11 @@ const std::map<unsigned int, Group>& AccountViewController::getGroups() const
 const std::map<unsigned int, Transaction>& AccountViewController::getTransactions() const
 {
     return m_account.getTransactions();
+}
+
+void AccountViewController::sendToast(const std::string& message)
+{
+    m_sendToastCallback(message);
 }
 
 void AccountViewController::registerAccountInfoChangedCallback(const std::function<void()>& callback)

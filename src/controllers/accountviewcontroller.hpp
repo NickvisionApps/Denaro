@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 #include "groupdialogcontroller.hpp"
 #include "transactiondialogcontroller.hpp"
 #include "../models/account.hpp"
@@ -42,6 +43,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::locale& getLocale() const;
 		/**
+		 * Gets the total of the account
+		 *
+		 * @returns The total of the account
+		 */
+		boost::multiprecision::cpp_dec_float_50 getAccountTotal() const;
+		/**
 		 * Gets the total of the account as a string
 		 *
 		 * @returns The total of the account
@@ -71,6 +78,12 @@ namespace NickvisionMoney::Controllers
 		 * @returns The transactions in the account
 		 */
 		const std::map<unsigned int, NickvisionMoney::Models::Transaction>& getTransactions() const;
+		/**
+		 * Sends a toast to the main window
+		 *
+		 * @param message The message to send in the toast
+		 */
+		void sendToast(const std::string& message);
 		/**
 		 * Registers a callback for updating the UI when an account's info is changed
 		 *

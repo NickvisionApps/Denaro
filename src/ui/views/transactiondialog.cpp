@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Views;
 
-TransactionDialog::TransactionDialog(GtkWindow* parent, NickvisionMoney::Controllers::TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "", nullptr) }
+TransactionDialog::TransactionDialog(GtkWindow* parent, TransactionDialogController& controller) : m_controller{ controller }, m_gobj{ adw_message_dialog_new(parent, "", nullptr) }
 {
     //Dialog Settings
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
