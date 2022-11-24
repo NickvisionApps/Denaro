@@ -82,7 +82,7 @@ TransferDialogController AccountViewController::createTransferDialogController()
 void AccountViewController::sendTransfer(const Transfer& transfer)
 {
     Transaction transaction{ m_account.getNextAvailableTransactionId() };
-    transaction.setDescription(StringHelpers::format("Transfer To %s", std::filesystem::path(transfer.getDestAccountPath()).stem().string().c_str()));
+    transaction.setDescription(StringHelpers::format(_("Transfer To %s"), std::filesystem::path(transfer.getDestAccountPath()).stem().string().c_str()));
     transaction.setType(TransactionType::Expense);
     transaction.setAmount(transfer.getAmount());
     m_account.addTransaction(transaction);
@@ -93,7 +93,7 @@ void AccountViewController::sendTransfer(const Transfer& transfer)
 void AccountViewController::receiveTransfer(const Transfer& transfer)
 {
     Transaction transaction{ m_account.getNextAvailableTransactionId() };
-    transaction.setDescription(StringHelpers::format("Transfer From %s", std::filesystem::path(transfer.getSourceAccountPath()).stem().string().c_str()));
+    transaction.setDescription(StringHelpers::format(_("Transfer From %s"), std::filesystem::path(transfer.getSourceAccountPath()).stem().string().c_str()));
     transaction.setType(TransactionType::Income);
     transaction.setAmount(transfer.getAmount());
     m_account.addTransaction(transaction);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-24 10:34+0530\n"
+"POT-Creation-Date: 2022-11-24 09:02+0300\n"
 "PO-Revision-Date: 2022-11-18 22:09+0100\n"
 "Last-Translator: Enzo MAROS <enzo.maros@gmail.com>\n"
 "Language: fr\n"
@@ -16,15 +16,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: src/controllers/accountviewcontroller.cpp:113
+#: src/controllers/accountviewcontroller.cpp:85
+#, fuzzy, c-format
+msgid "Transfer To %s"
+msgstr "Fermer le compte"
+
+#: src/controllers/accountviewcontroller.cpp:96
+#, fuzzy, c-format
+msgid "Transfer From %s"
+msgstr "Fermer le compte"
+
+#: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
 msgstr "Compte exporté au format CSV avec succès"
 
-#: src/controllers/accountviewcontroller.cpp:117
+#: src/controllers/accountviewcontroller.cpp:115
 msgid "Unable to export account as CSV."
 msgstr "Impossible d'exporter le compte au format CSV"
 
-#: src/controllers/accountviewcontroller.cpp:135
+#: src/controllers/accountviewcontroller.cpp:133
 #, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
@@ -92,11 +102,13 @@ msgstr "Gestionnaire des dépenses personnelles."
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
 msgid "Cancel"
 msgstr "Annuler"
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
 msgid "OK"
 msgstr "OK"
 
@@ -296,10 +308,12 @@ msgstr "_Enregistrer"
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/accountview.cpp:450
 #: src/ui/views/mainwindow.cpp:259 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
 msgid "_Cancel"
 msgstr "_Annuler"
 
 #: src/ui/views/accountview.cpp:450 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
 msgid "_Open"
 msgstr "_Ouvrir"
 
@@ -426,6 +440,7 @@ msgid "Open or create an account to get started."
 msgstr "Ouvrez ou créez un compte pour commencer"
 
 #: src/ui/views/mainwindow.cpp:262 src/ui/views/mainwindow.cpp:298
+#: src/ui/views/transferdialog.cpp:101
 msgid "Money Account (*.nmoney)"
 msgstr "Compte Money (*.nmoney)"
 
@@ -501,6 +516,7 @@ msgid "Transaction - %s"
 msgstr "Transactions"
 
 #: src/ui/views/transactiondialog.cpp:33 src/ui/views/transactiondialog.cpp:157
+#: src/ui/views/transferdialog.cpp:39 src/ui/views/transferdialog.cpp:72
 msgid "Amount"
 msgstr "Montant"
 
@@ -534,8 +550,39 @@ msgstr ""
 msgid "Amount (Empty)"
 msgstr "Montant (vide)"
 
-#: src/ui/views/transactiondialog.cpp:172
+#: src/ui/views/transactiondialog.cpp:172 src/ui/views/transferdialog.cpp:82
 msgid "Amount (Invalid)"
+msgstr "Montant (invalide)"
+
+#: src/ui/views/transferdialog.cpp:7
+msgid "Transfer"
+msgstr ""
+
+#: src/ui/views/transferdialog.cpp:11
+msgid ""
+"Transferring money will create an expense transaction with the given amount "
+"in this account and an income transaction with the given amount in the "
+"account to transfer to."
+msgstr ""
+
+#: src/ui/views/transferdialog.cpp:21
+#, fuzzy
+msgid "No Account Selected"
+msgstr "Nouveau compte"
+
+#: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
+#, fuzzy
+msgid "Select Account"
+msgstr "Compte récents"
+
+#: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
+#, fuzzy
+msgid "Transfer Account"
+msgstr "Fermer le compte"
+
+#: src/ui/views/transferdialog.cpp:77
+#, fuzzy
+msgid "Transfer Account (Invalid)"
 msgstr "Montant (invalide)"
 
 #~ msgid "ID"
