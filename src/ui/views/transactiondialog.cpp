@@ -98,9 +98,9 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, TransactionDialogControl
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowColor), m_btnColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_preferencesGroupGroupColor), m_rowColor);
     //Amount Event Controller Key
-    m_eventAmountKey = gtk_event_controller_key_new();
-    g_signal_connect(m_eventAmountKey, "key-released", G_CALLBACK((void (*)(GtkEventControllerKey*, unsigned int, unsigned int, GdkModifierType, gpointer))([](GtkEventControllerKey*, unsigned int keyval, unsigned int, GdkModifierType state, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onAmountKeyReleased(keyval, state); })), this);
-    gtk_widget_add_controller(m_rowAmount, m_eventAmountKey);
+    //m_eventAmountKey = gtk_event_controller_key_new();
+    //g_signal_connect(m_eventAmountKey, "key-released", G_CALLBACK((void (*)(GtkEventControllerKey*, unsigned int, unsigned int, GdkModifierType, gpointer))([](GtkEventControllerKey*, unsigned int keyval, unsigned int, GdkModifierType state, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onAmountKeyReleased(keyval, state); })), this);
+    //gtk_widget_add_controller(m_rowAmount, m_eventAmountKey);
     //Layout
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_boxMain);
     //Load Transaction
@@ -203,6 +203,7 @@ void TransactionDialog::onTypeChanged()
     }
 }
 
+/*
 void TransactionDialog::onAmountKeyReleased(unsigned int keyval, GdkModifierType state)
 {
     if(keyval == 65454 && state == 16) //number pad period with no modifier
@@ -217,3 +218,4 @@ void TransactionDialog::onAmountKeyReleased(unsigned int keyval, GdkModifierType
         }
     }
 }
+*/

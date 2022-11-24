@@ -53,7 +53,7 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_rowGroup{ nullptr };
 		GtkWidget* m_rowColor{ nullptr };
 		GtkWidget* m_btnColor{ nullptr };
-		GtkEventController* m_eventAmountKey{ nullptr };
+		//GtkEventController* m_eventAmountKey{ nullptr };
 		/**
     	 * Sets the response
     	 *
@@ -74,6 +74,6 @@ namespace NickvisionMoney::UI::Views
 		 * @param keyval The released key
 		 * @param state The bitmask, representing the state of modifier keys and pointer buttons
 		 */
-		void onAmountKeyReleased(unsigned int keyval, GdkModifierType state);
+		//void onAmountKeyReleased(unsigned int keyval, GdkModifierType state);
  	};
 }
