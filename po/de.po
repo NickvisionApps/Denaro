@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-22 13:52+0100\n"
+"PO-Revision-Date: 2022-11-24 13:56+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,14 +19,14 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer To %s"
-msgstr "Konto schließen"
+msgstr "Überweisung nach %s"
 
 #: src/controllers/accountviewcontroller.cpp:96
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer From %s"
-msgstr "Konto schließen"
+msgstr "Überweisung von %s"
 
 #: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
@@ -162,7 +162,7 @@ msgstr "Aus CSV importieren"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
 msgid "Transfer Money"
-msgstr ""
+msgstr "Geld überweisen"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Reset Overview Filters"
@@ -300,7 +300,7 @@ msgstr ""
 
 #: src/ui/views/accountview.cpp:419
 msgid "This account has no money available to transfer."
-msgstr ""
+msgstr "Auf diesem Konto ist kein Geld für Überweisungen verfügbar."
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -479,9 +479,8 @@ msgid "Close Account"
 msgstr "Konto schließen"
 
 #: src/ui/views/shortcutsdialog.cpp:122
-#, fuzzy
 msgid "Account Actions"
-msgstr "Konto-Menü"
+msgstr "Konto-Aktionen"
 
 #: src/ui/views/shortcutsdialog.cpp:126
 msgctxt "Shortcuts"
@@ -554,7 +553,7 @@ msgstr "Betrag (ungültig)"
 
 #: src/ui/views/transferdialog.cpp:7
 msgid "Transfer"
-msgstr ""
+msgstr "Überweisung"
 
 #: src/ui/views/transferdialog.cpp:11
 msgid ""
@@ -562,23 +561,22 @@ msgid ""
 "in this account and an income transaction with the given amount in the "
 "account to transfer to."
 msgstr ""
+"Eine Überweisung erzeugt eine Aufwandstransaktion mit dem angegebenen Betrag "
+"auf diesem Konto und eine Ertragstransaktion mit dem angegebenen Betrag auf "
+"dem Konto auf das übertragen werden soll."
 
 #: src/ui/views/transferdialog.cpp:21
-#, fuzzy
 msgid "No Account Selected"
-msgstr "Neues Konto"
+msgstr "Kein Konto ausgewählt"
 
 #: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
-#, fuzzy
 msgid "Select Account"
-msgstr "Zuletzt benutzte Konten"
+msgstr "Konto auswählen"
 
 #: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
-#, fuzzy
 msgid "Transfer Account"
-msgstr "Konto schließen"
+msgstr "Überweisungskonto"
 
 #: src/ui/views/transferdialog.cpp:77
-#, fuzzy
 msgid "Transfer Account (Invalid)"
-msgstr "Betrag (ungültig)"
+msgstr "Überweisungskonto (ungültig)"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-22 13:52+0100\n"
+"PO-Revision-Date: 2022-11-24 14:17+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -20,14 +20,14 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer To %s"
-msgstr "Zatvori račun"
+msgstr "Prijenos na %s"
 
 #: src/controllers/accountviewcontroller.cpp:96
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer From %s"
-msgstr "Zatvori račun"
+msgstr "Prijenos iz %s"
 
 #: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
@@ -126,7 +126,7 @@ msgstr "Izbriši grupu"
 
 #: src/ui/controls/transactionrow.cpp:24
 msgid "Repeat Interval: "
-msgstr "Interval ponavljanja: "
+msgstr "Ponavljanje: "
 
 #: src/ui/controls/transactionrow.cpp:60
 msgid "Edit Transaction"
@@ -164,7 +164,7 @@ msgstr "Uvezi iz CSV datoteke"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
 msgid "Transfer Money"
-msgstr ""
+msgstr "Prenesi novac"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Reset Overview Filters"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: src/ui/views/accountview.cpp:419
 msgid "This account has no money available to transfer."
-msgstr ""
+msgstr "Na ovom računu nema novca za prijenos."
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -481,9 +481,8 @@ msgid "Close Account"
 msgstr "Zatvori račun"
 
 #: src/ui/views/shortcutsdialog.cpp:122
-#, fuzzy
 msgid "Account Actions"
-msgstr "Izbornik računa"
+msgstr "Radnje za račune"
 
 #: src/ui/views/shortcutsdialog.cpp:126
 msgctxt "Shortcuts"
@@ -540,7 +539,7 @@ msgstr "Datum"
 
 #: src/ui/views/transactiondialog.cpp:75
 msgid "Repeat Interval"
-msgstr "Interval ponavljanja"
+msgstr "Ponavljanje"
 
 #: src/ui/views/transactiondialog.cpp:96
 msgid "Color"
@@ -556,7 +555,7 @@ msgstr "Iznos (neispravan)"
 
 #: src/ui/views/transferdialog.cpp:7
 msgid "Transfer"
-msgstr ""
+msgstr "Prijenos"
 
 #: src/ui/views/transferdialog.cpp:11
 msgid ""
@@ -564,23 +563,21 @@ msgid ""
 "in this account and an income transaction with the given amount in the "
 "account to transfer to."
 msgstr ""
+"Prijenos novca stvorit će transakciju rashoda sa zadanim iznosom u ovom "
+"računu i transakciju prihoda sa zadanim iznosom u računu na koji se prenosi."
 
 #: src/ui/views/transferdialog.cpp:21
-#, fuzzy
 msgid "No Account Selected"
-msgstr "Novi račun"
+msgstr "Nijedan račun nije odabran"
 
 #: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
-#, fuzzy
 msgid "Select Account"
-msgstr "Nedavni računi"
+msgstr "Odaberi račun"
 
 #: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
-#, fuzzy
 msgid "Transfer Account"
-msgstr "Zatvori račun"
+msgstr "Prijenosni račun"
 
 #: src/ui/views/transferdialog.cpp:77
-#, fuzzy
 msgid "Transfer Account (Invalid)"
-msgstr "Iznos (neispravan)"
+msgstr "Prijenosni račun (neispravan)"
