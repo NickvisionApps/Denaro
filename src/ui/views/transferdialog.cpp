@@ -26,7 +26,7 @@ TransferDialog::TransferDialog(GtkWindow* parent, TransferDialogController& cont
     gtk_widget_add_css_class(m_btnSelectAccount, "flat");
     gtk_widget_set_valign(m_btnSelectAccount, GTK_ALIGN_CENTER);
     gtk_button_set_icon_name(GTK_BUTTON(m_btnSelectAccount), "document-open-symbolic");
-    gtk_widget_set_tooltip_text(m_btnSelectAccount, "Select Account");
+    gtk_widget_set_tooltip_text(m_btnSelectAccount, _("Select Account"));
     g_signal_connect(m_btnSelectAccount, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<TransferDialog*>(data)->onSelectAccount(); }), this);
     //Transfer Account
     m_rowTransferAccount = adw_action_row_new();
