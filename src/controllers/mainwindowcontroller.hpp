@@ -8,6 +8,7 @@
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
+#include "../models/transfer.hpp"
 
 namespace NickvisionMoney::Controllers
 {
@@ -94,7 +95,7 @@ namespace NickvisionMoney::Controllers
 		 *
 		 * @returns A new AccountViewController
 		 */
-		AccountViewController createAccountViewControllerForLatestAccount() const;
+		AccountViewController createAccountViewControllerForLatestAccount();
 		/**
 		 * Adds an account to the list of opened accounts
 		 *
@@ -116,5 +117,11 @@ namespace NickvisionMoney::Controllers
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountAddedCallback;
 		std::vector<std::string> m_openAccounts;
+		/**
+		 * Sends a transfer to an account to receive
+		 *
+		 * @param transfer The transfer information
+		 */
+		void receiveTransfer(const NickvisionMoney::Models::Transfer& transfer);
 	};
 }

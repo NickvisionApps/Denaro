@@ -88,7 +88,7 @@ void AccountViewController::sendTransfer(const Transfer& transfer)
     transaction.setRGBA("rgb(192,97,203)");
     m_account.addTransaction(transaction);
     m_accountInfoChangedCallback();
-    //m_receiveTransferCallback(transfer);
+    m_receiveTransferCallback(transfer);
 }
 
 void AccountViewController::receiveTransfer(const Transfer& transfer)

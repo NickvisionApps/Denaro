@@ -104,9 +104,11 @@ bool MainWindowController::isAccountOpened(const std::string& path) const
     return std::find(m_openAccounts.begin(), m_openAccounts.end(), path) != m_openAccounts.end();
 }
 
-AccountViewController MainWindowController::createAccountViewControllerForLatestAccount() const
+AccountViewController MainWindowController::createAccountViewControllerForLatestAccount()
 {
-    return { m_openAccounts[m_openAccounts.size() - 1], m_configuration, m_sendToastCallback };
+    AccountViewController controller{ m_openAccounts[m_openAccounts.size() - 1], m_configuration, m_sendToastCallback };
+    controller.registerReceiveTransferCallback([&](const Transfer& transfer) { receiveTransfer(transfer); });
+    return controller;
 }
 
 void MainWindowController::addAccount(std::string& path)
@@ -127,4 +129,13 @@ void MainWindowController::addAccount(std::string& path)
 void MainWindowController::closeAccount(int index)
 {
     m_openAccounts.erase(m_openAccounts.begin() + index);
+}
+
+void MainWindowController::receiveTransfer(const Transfer& transfer)
+{
+    std::string destAccountPath{ transfer.getDestAccountPath() };
+    if(!isAccountOpened(destAccountPath))
+    {
+        addAccount(destAccountPath);
+    }
 }
