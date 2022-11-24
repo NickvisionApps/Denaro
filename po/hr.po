@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-24 10:34+0530\n"
+"POT-Creation-Date: 2022-11-24 09:02+0300\n"
 "PO-Revision-Date: 2022-11-22 13:52+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -15,19 +15,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: src/controllers/accountviewcontroller.cpp:113
+#: src/controllers/accountviewcontroller.cpp:85
+#, fuzzy, c-format
+msgid "Transfer To %s"
+msgstr "Zatvori račun"
+
+#: src/controllers/accountviewcontroller.cpp:96
+#, fuzzy, c-format
+msgid "Transfer From %s"
+msgstr "Zatvori račun"
+
+#: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
 msgstr "Račun je uspješno izvezen u CSV datoteku."
 
-#: src/controllers/accountviewcontroller.cpp:117
+#: src/controllers/accountviewcontroller.cpp:115
 msgid "Unable to export account as CSV."
 msgstr "Nije moguće izvesti račun kao CSV datoteku."
 
-#: src/controllers/accountviewcontroller.cpp:135
+#: src/controllers/accountviewcontroller.cpp:133
 #, c-format
 msgid "Imported %d transaction from CSV."
 msgid_plural "Imported %d transactions from CSV."
@@ -96,11 +106,13 @@ msgstr "Aplikacija za osobne financije."
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
 msgid "Cancel"
 msgstr "Odustani"
 
 #: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
 #: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
 msgid "OK"
 msgstr "U redu"
 
@@ -298,10 +310,12 @@ msgstr "_Spremi"
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/accountview.cpp:450
 #: src/ui/views/mainwindow.cpp:259 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
 msgid "_Cancel"
 msgstr "O_dustani"
 
 #: src/ui/views/accountview.cpp:450 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
 msgid "_Open"
 msgstr "_Otvori"
 
@@ -426,6 +440,7 @@ msgid "Open or create an account to get started."
 msgstr "Otvori ili stvori jedan račun."
 
 #: src/ui/views/mainwindow.cpp:262 src/ui/views/mainwindow.cpp:298
+#: src/ui/views/transferdialog.cpp:101
 msgid "Money Account (*.nmoney)"
 msgstr "Money račun (*.nmoney)"
 
@@ -501,6 +516,7 @@ msgid "Transaction - %s"
 msgstr "Transakcija – %s"
 
 #: src/ui/views/transactiondialog.cpp:33 src/ui/views/transactiondialog.cpp:157
+#: src/ui/views/transferdialog.cpp:39 src/ui/views/transferdialog.cpp:72
 msgid "Amount"
 msgstr "Iznos"
 
@@ -534,6 +550,37 @@ msgstr "Boja"
 msgid "Amount (Empty)"
 msgstr "Iznos (prazan)"
 
-#: src/ui/views/transactiondialog.cpp:172
+#: src/ui/views/transactiondialog.cpp:172 src/ui/views/transferdialog.cpp:82
 msgid "Amount (Invalid)"
+msgstr "Iznos (neispravan)"
+
+#: src/ui/views/transferdialog.cpp:7
+msgid "Transfer"
+msgstr ""
+
+#: src/ui/views/transferdialog.cpp:11
+msgid ""
+"Transferring money will create an expense transaction with the given amount "
+"in this account and an income transaction with the given amount in the "
+"account to transfer to."
+msgstr ""
+
+#: src/ui/views/transferdialog.cpp:21
+#, fuzzy
+msgid "No Account Selected"
+msgstr "Novi račun"
+
+#: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
+#, fuzzy
+msgid "Select Account"
+msgstr "Nedavni računi"
+
+#: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
+#, fuzzy
+msgid "Transfer Account"
+msgstr "Zatvori račun"
+
+#: src/ui/views/transferdialog.cpp:77
+#, fuzzy
+msgid "Transfer Account (Invalid)"
 msgstr "Iznos (neispravan)"
