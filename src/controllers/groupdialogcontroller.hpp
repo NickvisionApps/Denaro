@@ -62,7 +62,7 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getDescription() const;
 		/**
-		 * Updates the transaction with the provided values
+		 * Updates the group with the provided values
 		 *
 		 * @param name The name
 		 * @param description The description

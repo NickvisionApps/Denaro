@@ -1,10 +1,21 @@
 #pragma once
 
+#include <locale>
 #include <string>
 #include "../models/transfer.hpp"
 
 namespace NickvisionMoney::Controllers
 {
+	/**
+	 * Statuses for when a transfer is checked
+	 */
+	enum class TransferCheckStatus
+	{
+		Valid = 0,
+		InvalidDestPath,
+		InvalidAmount
+	};
+
 	/**
 	 * A controller for the TransferDialog
 	 */
@@ -15,8 +26,9 @@ namespace NickvisionMoney::Controllers
 		 * Constructs a TransferDialogController
 		 *
 		 * @param sourceAccountPath The path to the source account
+		 * @param locale The user's locale
 		 */
-		TransferDialogController(const std::string& sourceAccountPath);
+		TransferDialogController(const std::string& sourceAccountPath, const std::locale& locale);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -36,20 +48,17 @@ namespace NickvisionMoney::Controllers
 		 */
 		const std::string& getSourceAccountPath() const;
 		/**
-		 * Gets the path of the destination account
+		 * Updates the transfer with the provided values
 		 *
-		 * @returns The path of the destination account
+		 * @param destAccountPath The path of the destination account
+		 * @param amountString The amount string
+		 * @returns The TransferCheckStatus
 		 */
-		const std::string& getDestAccountPath() const;
-		/**
-		 * Sets the path of the destination account
-		 *
-		 * @param destAccountPath The new path
-		 */
-		void setDestAccountPath(const std::string& destAccountPath);
+		TransferCheckStatus updateTransfer(const std::string& destAccountPath, std::string amountString);
 
 	private:
 		std::string m_response;
+		const std::locale& m_locale;
 		NickvisionMoney::Models::Transfer m_transfer;
 	};
 }

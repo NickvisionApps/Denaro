@@ -70,7 +70,7 @@ void AccountViewController::registerAccountInfoChangedCallback(const std::functi
 
 TransferDialogController AccountViewController::createTransferDialogController() const
 {
-    return { m_account.getPath() };
+    return { m_account.getPath(), m_configuration.getLocale() };
 }
 
 void AccountViewController::exportAsCSV(std::string& path)

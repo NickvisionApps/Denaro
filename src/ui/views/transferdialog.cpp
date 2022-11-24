@@ -18,7 +18,7 @@ TransferDialog::TransferDialog(GtkWindow* parent, TransferDialogController& cont
     m_preferencesGroup = adw_preferences_group_new();
     gtk_widget_set_margin_top(m_preferencesGroup, 10);
     //Transfer Account Label
-    m_lblTransferAccount = gtk_label_new(_("No Opened Account"));
+    m_lblTransferAccount = gtk_label_new(_("No Account Selected"));
     gtk_widget_set_valign(m_lblTransferAccount, GTK_ALIGN_CENTER);
     gtk_widget_set_margin_start(m_lblTransferAccount, 20);
     //Select Account Button
@@ -57,6 +57,33 @@ bool TransferDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
+    if(m_controller.getResponse() == "ok")
+    {
+        gtk_widget_hide(m_gobj);
+        gtk_window_set_modal(GTK_WINDOW(m_gobj), false);
+        TransferCheckStatus status{ m_controller.updateTransfer(gtk_label_get_text(GTK_LABEL(m_lblTransferAccount)), gtk_editable_get_text(GTK_EDITABLE(m_rowAmount))) };
+        //Invalid Transfer
+        if(status != TransferCheckStatus::Valid)
+        {
+            //Reset UI
+            gtk_widget_remove_css_class(m_rowTransferAccount, "error");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransferAccount), _("Transfer Account"));
+            gtk_widget_remove_css_class(m_rowAmount, "error");
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount"));
+            //Mark Error
+            if(status == TransferCheckStatus::InvalidDestPath)
+            {
+                gtk_widget_add_css_class(m_rowTransferAccount, "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransferAccount), _("Transfer Account (Invalid)"));
+            }
+            else if(status == TransferCheckStatus::InvalidAmount)
+            {
+                gtk_widget_add_css_class(m_rowAmount, "error");
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAmount), _("Amount (Invalid)"));
+            }
+            return run();
+        }
+    }
     gtk_window_destroy(GTK_WINDOW(m_gobj));
     return m_controller.getResponse() == "ok";
 }
@@ -84,7 +111,6 @@ void TransferDialog::onSelectAccount()
             std::string path{ g_file_get_path(file) };
             if(path != transferDialog->m_controller.getSourceAccountPath())
             {
-                transferDialog->m_controller.setDestAccountPath(path);
                 gtk_label_set_text(GTK_LABEL(transferDialog->m_lblTransferAccount), path.c_str());
             }
             g_object_unref(file);
