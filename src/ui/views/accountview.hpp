@@ -15,7 +15,7 @@ namespace NickvisionMoney::UI::Views
 	class AccountView
 	{
 	public:
-		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const NickvisionMoney::Controllers::AccountViewController& controller);
+		AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const std::shared_ptr<NickvisionMoney::Controllers::AccountViewController>& controller);
 		/**
 		 * Gets the AdwTabPage* representing the AccountView
 		 *
@@ -24,7 +24,7 @@ namespace NickvisionMoney::UI::Views
 		AdwTabPage* gobj();
 
 	private:
-		NickvisionMoney::Controllers::AccountViewController m_controller;
+		std::shared_ptr<NickvisionMoney::Controllers::AccountViewController> m_controller;
 		GtkWindow* m_parentWindow{ nullptr };
 		AdwTabPage* m_gobj{ nullptr };
 		GtkWidget* m_flap{ nullptr };

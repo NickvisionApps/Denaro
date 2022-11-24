@@ -12,7 +12,7 @@ using namespace NickvisionMoney::Models;
 using namespace NickvisionMoney::UI::Controls;
 using namespace NickvisionMoney::UI::Views;
 
-AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const AccountViewController& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }, m_isAccountLoading{ false }
+AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, GtkWidget* btnFlapToggle, const std::shared_ptr<AccountViewController>& controller) : m_controller{ controller }, m_parentWindow{ parentWindow }, m_isAccountLoading{ false }
 {
     //Flap
     m_flap = adw_flap_new();
@@ -43,7 +43,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_chkIncome = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
     gtk_widget_add_css_class(m_chkIncome, "selection-mode");
-    g_signal_connect(m_chkIncome, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkIncome, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilterValue(-3, gtk_check_button_get_active(chkIncome)); }), this);
+    g_signal_connect(m_chkIncome, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkIncome, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller->updateFilterValue(-3, gtk_check_button_get_active(chkIncome)); }), this);
     m_rowIncome = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncome), _("Income"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowIncome), m_chkIncome);
@@ -54,7 +54,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     m_chkExpense = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
     gtk_widget_add_css_class(m_chkExpense, "selection-mode");
-    g_signal_connect(m_chkExpense, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkExpense, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller.updateFilterValue(-2, gtk_check_button_get_active(chkExpense)); }), this);
+    g_signal_connect(m_chkExpense, "toggled", G_CALLBACK((void (*)(GtkCheckButton*, gpointer))[](GtkCheckButton* chkExpense, gpointer data) { reinterpret_cast<AccountView*>(data)->m_controller->updateFilterValue(-2, gtk_check_button_get_active(chkExpense)); }), this);
     m_rowExpense = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowExpense), _("Expense"));
     adw_action_row_add_prefix(ADW_ACTION_ROW(m_rowExpense), m_chkExpense);
@@ -264,7 +264,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_flap_set_content(ADW_FLAP(m_flap), m_overlayMain);
     //Tab Page
     m_gobj = adw_tab_view_append(parentTabView, m_flap);
-    adw_tab_page_set_title(m_gobj, m_controller.getAccountPath().c_str());
+    adw_tab_page_set_title(m_gobj, m_controller->getAccountPath().c_str());
     //Action Map
     m_actionMap = g_simple_action_group_new();
     gtk_widget_insert_action_group(m_flap, "account", G_ACTION_GROUP(m_actionMap));
@@ -298,9 +298,9 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_shortcut_controller_add_shortcut(GTK_SHORTCUT_CONTROLLER(m_shortcutController), gtk_shortcut_new(gtk_shortcut_trigger_parse_string("<Ctrl><Shift>N"), gtk_named_action_new("account.newTransaction")));
     gtk_widget_add_controller(m_flap, m_shortcutController);
     //Account Info Changed Callback
-    m_controller.registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
+    m_controller->registerAccountInfoChangedCallback([&]() { onAccountInfoChanged(); });
     //Load Information
-    if(m_controller.getSortFirstToLast())
+    if(m_controller->getSortFirstToLast())
     {
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom), true);
     }
@@ -320,9 +320,9 @@ void AccountView::onAccountInfoChanged()
 {
     m_isAccountLoading = true;
     //Overview
-    gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller.getAccountTotalString().c_str());
-    gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller.getAccountIncomeString().c_str());
-    gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller.getAccountExpenseString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblTotal), m_controller->getAccountTotalString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblIncome), m_controller->getAccountIncomeString().c_str());
+    gtk_label_set_label(GTK_LABEL(m_lblExpense), m_controller->getAccountExpenseString().c_str());
     //Groups
     for(const std::shared_ptr<GroupRow>& groupRow : m_groupRows)
     {
@@ -330,17 +330,17 @@ void AccountView::onAccountInfoChanged()
     }
     m_groupRows.clear();
     std::vector<Group> groups;
-    for(const std::pair<const unsigned int, Group>& pair : m_controller.getGroups())
+    for(const std::pair<const unsigned int, Group>& pair : m_controller->getGroups())
     {
         groups.push_back(pair.second);
     }
     std::sort(groups.begin(), groups.end());
     for(const Group& group : groups)
     {
-        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller.getLocale(), m_controller.getIfFilterActive(group.getId())) };
+        std::shared_ptr<GroupRow> row{ std::make_shared<GroupRow>(group, m_controller->getLocale(), m_controller->getIfFilterActive(group.getId())) };
         row->registerEditCallback([&](unsigned int id) { onEditGroup(id); });
         row->registerDeleteCallback([&](unsigned int id) { onDeleteGroup(id); });
-        row->registerUpdateFilterCallback([&](int id, bool value) { m_controller.updateFilterValue(id, value); });
+        row->registerUpdateFilterCallback([&](int id, bool value) { m_controller->updateFilterValue(id, value); });
         adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpGroups), row->gobj());
         m_groupRows.push_back(row);
     }
@@ -351,12 +351,12 @@ void AccountView::onAccountInfoChanged()
     }
     m_transactionRows.clear();
     gtk_calendar_clear_marks(GTK_CALENDAR(m_calendar));
-    m_controller.setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
-    if(m_controller.getTransactions().size() > 0)
+    m_controller->setSortFirstToLast(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnSortTopBottom)));
+    if(m_controller->getTransactions().size() > 0)
     {
         //Mark Days In Calendar
         GDateTime* selectedDay{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
-        for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
+        for(const std::pair<const unsigned int, Transaction>& pair : m_controller->getTransactions())
         {
             if(pair.second.getDate().month() == g_date_time_get_month(selectedDay) && pair.second.getDate().year() == g_date_time_get_year(selectedDay))
             {
@@ -365,16 +365,16 @@ void AccountView::onAccountInfoChanged()
         }
         gtk_calendar_select_day(GTK_CALENDAR(m_calendar), g_date_time_add_years(selectedDay, -1));
         gtk_calendar_select_day(GTK_CALENDAR(m_calendar), selectedDay);
-        if(m_controller.getFilteredTransactions().size() > 0) //Filtered Transactions
+        if(m_controller->getFilteredTransactions().size() > 0) //Filtered Transactions
         {
             gtk_widget_set_visible(m_pageStatusNoTransactions, false);
             gtk_widget_set_visible(m_scrollTransactions, true);
-            for(const Transaction& transaction : m_controller.getFilteredTransactions())
+            for(const Transaction& transaction : m_controller->getFilteredTransactions())
             {
-                std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller.getLocale()) };
+                std::shared_ptr<TransactionRow> row{ std::make_shared<TransactionRow>(transaction, m_controller->getLocale()) };
                 row->registerEditCallback([&](unsigned int id) { onEditTransaction(id); });
                 row->registerDeleteCallback([&](unsigned int id) { onDeleteTransaction(id); });
-                if(m_controller.getSortFirstToLast())
+                if(m_controller->getSortFirstToLast())
                 {
                     gtk_flow_box_append(GTK_FLOW_BOX(m_flowBox), row->gobj());
                 }
@@ -405,18 +405,18 @@ void AccountView::onAccountInfoChanged()
 
 void AccountView::onTransferMoney()
 {
-    if(m_controller.getAccountTotal() > 0)
+    if(m_controller->getAccountTotal() > 0)
     {
-        TransferDialogController controller{ m_controller.createTransferDialogController() };
+        TransferDialogController controller{ m_controller->createTransferDialogController() };
         TransferDialog dialog{ m_parentWindow, controller };
         if(dialog.run())
         {
-            m_controller.sendTransfer(controller.getTransfer());
+            m_controller->sendTransfer(controller.getTransfer());
         }
     }
     else
     {
-        m_controller.sendToast(_("This account has no money available to transfer."));
+        m_controller->sendToast(_("This account has no money available to transfer."));
     }
 }
 
@@ -436,7 +436,7 @@ void AccountView::onExportAsCSV()
             AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            ProgressDialog progressDialog{ accountView->m_parentWindow, "Exporting as CSV...", [accountView, &path]() { accountView->m_controller.exportAsCSV(path); } };
+            ProgressDialog progressDialog{ accountView->m_parentWindow, "Exporting as CSV...", [accountView, &path]() { accountView->m_controller->exportAsCSV(path); } };
             progressDialog.run();
             g_object_unref(file);
         }
@@ -461,7 +461,7 @@ void AccountView::onImportFromCSV()
             AccountView* accountView{ reinterpret_cast<AccountView*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            ProgressDialog progressDialog{ accountView->m_parentWindow, "Importing from CSV...", [accountView, &path]() { accountView->m_controller.importFromCSV(path); } };
+            ProgressDialog progressDialog{ accountView->m_parentWindow, "Importing from CSV...", [accountView, &path]() { accountView->m_controller->importFromCSV(path); } };
             progressDialog.run();
             g_object_unref(file);
         }
@@ -484,21 +484,21 @@ void AccountView::onResetOverviewFilter()
 
 void AccountView::onNewGroup()
 {
-    GroupDialogController controller{ m_controller.createGroupDialogController() };
+    GroupDialogController controller{ m_controller->createGroupDialogController() };
     GroupDialog dialog{ m_parentWindow, controller };
     if(dialog.run())
     {
-        m_controller.addGroup(controller.getGroup());
+        m_controller->addGroup(controller.getGroup());
     }
 }
 
 void AccountView::onEditGroup(unsigned int id)
 {
-    GroupDialogController controller{ m_controller.createGroupDialogController(id) };
+    GroupDialogController controller{ m_controller->createGroupDialogController(id) };
     GroupDialog dialog{ m_parentWindow, controller };
     if(dialog.run())
     {
-        m_controller.updateGroup(controller.getGroup());
+        m_controller->updateGroup(controller.getGroup());
     }
 }
 
@@ -507,7 +507,7 @@ void AccountView::onDeleteGroup(unsigned int id)
     MessageDialog messageDialog{ m_parentWindow, _("Delete Group?"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes") };
     if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
-        m_controller.deleteGroup(id);
+        m_controller->deleteGroup(id);
     }
 }
 
@@ -521,21 +521,21 @@ void AccountView::onResetGroupsFilter()
 
 void AccountView::onNewTransaction()
 {
-    TransactionDialogController controller{ m_controller.createTransactionDialogController() };
+    TransactionDialogController controller{ m_controller->createTransactionDialogController() };
     TransactionDialog dialog{ m_parentWindow, controller };
     if(dialog.run())
     {
-        m_controller.addTransaction(controller.getTransaction());
+        m_controller->addTransaction(controller.getTransaction());
     }
 }
 
 void AccountView::onEditTransaction(unsigned int id)
 {
-    TransactionDialogController controller{ m_controller.createTransactionDialogController(id) };
+    TransactionDialogController controller{ m_controller->createTransactionDialogController(id) };
     TransactionDialog dialog{ m_parentWindow, controller };
     if(dialog.run())
     {
-        m_controller.updateTransaction(controller.getTransaction());
+        m_controller->updateTransaction(controller.getTransaction());
     }
 }
 
@@ -544,7 +544,7 @@ void AccountView::onDeleteTransaction(unsigned int id)
     MessageDialog messageDialog{ m_parentWindow, _("Delete Transaction?"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes") };
     if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
-        m_controller.deleteTransaction(id);
+        m_controller->deleteTransaction(id);
     }
 }
 
@@ -561,7 +561,7 @@ void AccountView::onCalendarMonthYearChanged()
 {
     gtk_calendar_clear_marks(GTK_CALENDAR(m_calendar));
     GDateTime* selectedDay{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
-    for(const std::pair<const unsigned int, Transaction>& pair : m_controller.getTransactions())
+    for(const std::pair<const unsigned int, Transaction>& pair : m_controller->getTransactions())
     {
         if(pair.second.getDate().month() == g_date_time_get_month(selectedDay) && pair.second.getDate().year() == g_date_time_get_year(selectedDay))
         {
@@ -578,8 +578,8 @@ void AccountView::onCalendarSelectedDateChanged()
     {
         GDateTime* gtkSelectedDate{ gtk_calendar_get_date(GTK_CALENDAR(m_calendar)) };
         boost::gregorian::date selectedDate{ g_date_time_get_year(gtkSelectedDate), g_date_time_get_month(gtkSelectedDate), g_date_time_get_day_of_month(gtkSelectedDate) };
-        m_controller.setFilterStartDate(selectedDate);
-        m_controller.setFilterEndDate(selectedDate);
+        m_controller->setFilterStartDate(selectedDate);
+        m_controller->setFilterEndDate(selectedDate);
     }
 }
 
@@ -590,7 +590,7 @@ void AccountView::onDateRangeToggled()
         //Years For Date Filter
         int previousStartYear{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear)) };
         int previousEndYear{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear)) };
-        std::vector<std::string> yearsForRangeFilter{ m_controller.getYearsForRangeFilter() };
+        std::vector<std::string> yearsForRangeFilter{ m_controller->getYearsForRangeFilter() };
         const char** years{ new const char*[yearsForRangeFilter.size() + 1] };
         for(size_t i = 0; i < yearsForRangeFilter.size(); i++)
         {
@@ -602,23 +602,23 @@ void AccountView::onDateRangeToggled()
         gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddStartYear), previousStartYear > yearsForRangeFilter.size() - 1 ? 0 : previousStartYear);
         gtk_drop_down_set_selected(GTK_DROP_DOWN(m_ddEndYear), previousEndYear > yearsForRangeFilter.size() - 1 ? 0 : previousEndYear);
         //Set Date
-        m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
-        m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+        m_controller->setFilterStartDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+        m_controller->setFilterEndDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
     }
     else
     {
-        m_controller.resetDateFilter();
+        m_controller->resetDateFilter();
     }
 }
 
 void AccountView::onDateRangeStartYearChanged()
 {
-    m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+    m_controller->setFilterStartDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
 }
 
 void AccountView::onDateRangeStartMonthChanged()
 {
-    int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]) };
+    int year{ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]) };
     int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 };
     int newNumberOfDays{ 0 };
     switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1)
@@ -654,17 +654,17 @@ void AccountView::onDateRangeStartMonthChanged()
 
 void AccountView::onDateRangeStartDayChanged()
 {
-    m_controller.setFilterStartDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
+    m_controller->setFilterStartDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddStartDay)) + 1 });
 }
 
 void AccountView::onDateRangeEndYearChanged()
 {
-    m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+    m_controller->setFilterEndDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
 }
 
 void AccountView::onDateRangeEndMonthChanged()
 {
-    int year{ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]) };
+    int year{ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]) };
     int previousDay{ gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 };
     int newNumberOfDays{ 0 };
     switch(gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1)
@@ -700,5 +700,5 @@ void AccountView::onDateRangeEndMonthChanged()
 
 void AccountView::onDateRangeEndDayChanged()
 {
-    m_controller.setFilterEndDate({ std::stoi(m_controller.getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
+    m_controller->setFilterEndDate({ std::stoi(m_controller->getYearsForRangeFilter()[gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndYear))]), gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndMonth)) + 1, gtk_drop_down_get_selected(GTK_DROP_DOWN(m_ddEndDay)) + 1 });
 }

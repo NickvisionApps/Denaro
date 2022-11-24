@@ -95,7 +95,7 @@ namespace NickvisionMoney::Controllers
 		 *
 		 * @returns A new AccountViewController
 		 */
-		AccountViewController createAccountViewControllerForLatestAccount();
+		std::shared_ptr<AccountViewController> createAccountViewControllerForLatestAccount();
 		/**
 		 * Adds an account to the list of opened accounts
 		 *
@@ -117,6 +117,7 @@ namespace NickvisionMoney::Controllers
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountAddedCallback;
 		std::vector<std::string> m_openAccounts;
+		std::vector<std::shared_ptr<AccountViewController>> m_openAccountControllers;
 		/**
 		 * Sends a transfer to an account to receive
 		 *

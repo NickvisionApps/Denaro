@@ -104,10 +104,11 @@ bool MainWindowController::isAccountOpened(const std::string& path) const
     return std::find(m_openAccounts.begin(), m_openAccounts.end(), path) != m_openAccounts.end();
 }
 
-AccountViewController MainWindowController::createAccountViewControllerForLatestAccount()
+std::shared_ptr<AccountViewController> MainWindowController::createAccountViewControllerForLatestAccount()
 {
-    AccountViewController controller{ m_openAccounts[m_openAccounts.size() - 1], m_configuration, m_sendToastCallback };
-    controller.registerReceiveTransferCallback([&](const Transfer& transfer) { receiveTransfer(transfer); });
+    std::shared_ptr<AccountViewController> controller{ std::make_shared<AccountViewController>(m_openAccounts[m_openAccounts.size() - 1], m_configuration, m_sendToastCallback) };
+    controller->registerReceiveTransferCallback([&](const Transfer& transfer) { receiveTransfer(transfer); });
+    m_openAccountControllers.push_back(controller);
     return controller;
 }
 
@@ -134,8 +135,7 @@ void MainWindowController::closeAccount(int index)
 void MainWindowController::receiveTransfer(const Transfer& transfer)
 {
     std::string destAccountPath{ transfer.getDestAccountPath() };
-    if(!isAccountOpened(destAccountPath))
-    {
-        addAccount(destAccountPath);
-    }
+    addAccount(destAccountPath);
+    int destAccountIndex{ std::find(m_openAccounts.begin(), m_openAccounts.end(), destAccountPath) - m_openAccounts.begin() };
+    m_openAccountControllers[destAccountIndex]->receiveTransfer(transfer);
 }
