@@ -126,7 +126,7 @@ namespace NickvisionMoney::Controllers
 		 * @returns The amount of the transaction
 		 */
 		std::string getAmountAsString() const;
-		/*
+		/**
 		 * Gets whether or not the user's locale separates the decimal by "." or ","
 		 *
 		 * @returns True if separated by ".", false for ","

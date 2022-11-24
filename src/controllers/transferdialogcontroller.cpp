@@ -4,6 +4,7 @@
 
 using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
+using namespace NickvisionMoney::Models;
 
 TransferDialogController::TransferDialogController(const std::string& sourceAccountPath, const std::locale& locale) : m_response{ "cancel" }, m_locale{ locale }, m_transfer{ sourceAccountPath }
 {
@@ -18,6 +19,11 @@ const std::string& TransferDialogController::getResponse() const
 void TransferDialogController::setResponse(const std::string& response)
 {
     m_response = response;
+}
+
+const Transfer& TransferDialogController::getTransfer() const
+{
+    return m_transfer;
 }
 
 const std::string& TransferDialogController::getSourceAccountPath() const

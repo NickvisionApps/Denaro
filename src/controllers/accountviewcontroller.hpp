@@ -14,6 +14,7 @@
 #include "../models/configuration.hpp"
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
+#include "../models/transfer.hpp"
 
 namespace NickvisionMoney::Controllers
 {
@@ -92,11 +93,29 @@ namespace NickvisionMoney::Controllers
 		 */
 		void registerAccountInfoChangedCallback(const std::function<void()>& callback);
 		/**
+		 * Registers a callback for send a transfer to an account to receive
+		 *
+		 * @param callback A void(const NickvisionMoney::Models::Transfer&) function
+		 */
+		void registerReceiveTransferCallback(const std::function<void(const NickvisionMoney::Models::Transfer&)>& callback);
+		/**
 		 * Creates a TransferDialogController for a new transfer
 		 *
 		 * @returns A new TransferDialogController
 		 */
 		TransferDialogController createTransferDialogController() const;
+		/**
+		 * Creates an expense transaction for the transfer and triggers receiveTransfer() for the destination account
+		 *
+		 * @param transfer The transfer information
+		 */
+		void sendTransfer(const NickvisionMoney::Models::Transfer& transfer);
+		/**
+		 * Creates an income transaction for the transfer
+		 *
+		 * @param transfer The transfer information
+		 */
+		void receiveTransfer(const NickvisionMoney::Models::Transfer& transfer);
 		/**
 		 * Export the account as a CSV file
 		 *
@@ -231,6 +250,7 @@ namespace NickvisionMoney::Controllers
 		NickvisionMoney::Models::Account m_account;
 		std::function<void(const std::string& message)> m_sendToastCallback;
 		std::function<void()> m_accountInfoChangedCallback;
+		std::function<void(const NickvisionMoney::Models::Transfer&)> m_receiveTransferCallback;
 		std::unordered_map<int, bool> m_mapFilters;
 		boost::gregorian::date m_filterStartDate;
 		boost::gregorian::date m_filterEndDate;

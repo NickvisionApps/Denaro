@@ -1,4 +1,5 @@
 #include "accountviewcontroller.hpp"
+#include <filesystem>
 #include "../helpers/moneyhelpers.hpp"
 #include "../helpers/stringhelpers.hpp"
 #include "../helpers/translation.hpp"
@@ -68,9 +69,37 @@ void AccountViewController::registerAccountInfoChangedCallback(const std::functi
     m_accountInfoChangedCallback = callback;
 }
 
+void AccountViewController::registerReceiveTransferCallback(const std::function<void(const Transfer&)>& callback)
+{
+    m_receiveTransferCallback = callback;
+}
+
 TransferDialogController AccountViewController::createTransferDialogController() const
 {
     return { m_account.getPath(), m_configuration.getLocale() };
+}
+
+void AccountViewController::sendTransfer(const Transfer& transfer)
+{
+    Transaction transaction{ m_account.getNextAvailableTransactionId() };
+    transaction.setDescription("Transfer To " + std::filesystem::path(transfer.getDestAccountPath()).stem().string());
+    transaction.setType(TransactionType::Expense);
+    transaction.setAmount(transfer.getAmount());
+    transaction.setRGBA("rgb(192,97,203)");
+    m_account.addTransaction(transaction);
+    m_accountInfoChangedCallback();
+    //m_receiveTransferCallback(transfer);
+}
+
+void AccountViewController::receiveTransfer(const Transfer& transfer)
+{
+    Transaction transaction{ m_account.getNextAvailableTransactionId() };
+    transaction.setDescription("Transfer From " + std::filesystem::path(transfer.getSourceAccountPath()).stem().string());
+    transaction.setType(TransactionType::Income);
+    transaction.setAmount(transfer.getAmount());
+    transaction.setRGBA("rgb(192,97,203)");
+    m_account.addTransaction(transaction);
+    m_accountInfoChangedCallback();
 }
 
 void AccountViewController::exportAsCSV(std::string& path)

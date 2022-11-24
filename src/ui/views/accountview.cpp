@@ -411,7 +411,7 @@ void AccountView::onTransferMoney()
         TransferDialog dialog{ m_parentWindow, controller };
         if(dialog.run())
         {
-
+            m_controller.sendTransfer(controller.getTransfer());
         }
     }
     else

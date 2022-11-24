@@ -42,6 +42,12 @@ namespace NickvisionMoney::Controllers
 		 */
 		void setResponse(const std::string& response);
 		/**
+		 * Gets the transfer managed by the dialog
+		 *
+		 * @returns The transfer
+		 */
+		const NickvisionMoney::Models::Transfer& getTransfer() const;
+		/**
 		 * Gets the path of the source account
 		 *
 		 * @returns The path of the source account

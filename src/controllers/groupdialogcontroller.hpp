@@ -51,14 +51,20 @@ namespace NickvisionMoney::Controllers
 		void setResponse(const std::string& response);
 		/**
 		 * Gets the group managed by the dialog
+		 *
+		 * @returns The group
 		 */
 		const NickvisionMoney::Models::Group& getGroup() const;
 		/**
 		 * Gets the name of the group
+		 *
+		 * @returns The name of the group
 		 */
 		const std::string& getName() const;
 		/**
 		 * Gets the description of the group
+		 *
+		 * @returns The description of the group
 		 */
 		const std::string& getDescription() const;
 		/**
