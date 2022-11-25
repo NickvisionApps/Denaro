@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer To %s"
-msgstr "Fermer le compte"
+msgstr "Transférer vers %s"
 
 #: src/controllers/accountviewcontroller.cpp:96
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer From %s"
-msgstr "Fermer le compte"
+msgstr "Transférer depuis %s"
 
 #: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
@@ -137,12 +137,10 @@ msgid "Total"
 msgstr "Total"
 
 #: src/ui/views/accountview.cpp:48
-#, fuzzy
 msgid "Income"
 msgstr "Crédit"
 
 #: src/ui/views/accountview.cpp:59
-#, fuzzy
 msgid "Expense"
 msgstr "Débit"
 
@@ -162,11 +160,11 @@ msgstr "Importer depuis un CSV"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
 msgid "Transfer Money"
-msgstr ""
+msgstr "Transférer de l'argent"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Reset Overview Filters"
-msgstr ""
+msgstr "Réinitialiser les filtres"
 
 #: src/ui/views/accountview.cpp:89
 msgid "Overview"
@@ -183,7 +181,7 @@ msgstr "Nouveau groupe (Ctrl+G)"
 
 #: src/ui/views/accountview.cpp:110
 msgid "Reset Groups Filters"
-msgstr ""
+msgstr "Réinitaliser les filtres de groupe"
 
 #: src/ui/views/accountview.cpp:115
 msgid "Groups"
@@ -191,71 +189,71 @@ msgstr "Groupes"
 
 #: src/ui/views/accountview.cpp:130
 msgid "Reset Dates Filters"
-msgstr ""
+msgstr "Réinitaliser les filtres de date"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "March"
-msgstr ""
+msgstr "Mars"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "June"
-msgstr ""
+msgstr "Juin"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: src/ui/views/accountview.cpp:170
 msgid "Start"
-msgstr ""
+msgstr "Début"
 
 #: src/ui/views/accountview.cpp:174
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #: src/ui/views/accountview.cpp:180
 msgid "Select Range"
-msgstr ""
+msgstr "Choisir l'intervalle"
 
 #: src/ui/views/accountview.cpp:189
 msgid "Calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #: src/ui/views/accountview.cpp:202
 msgctxt "Transaction"
@@ -268,39 +266,39 @@ msgstr "Nouvelle transaction (Ctrl+Maj+N)"
 
 #: src/ui/views/accountview.cpp:212
 msgid "Sort From Top To Bottom"
-msgstr ""
+msgstr "Trier dans l'ordre croissant"
 
 #: src/ui/views/accountview.cpp:216
 msgid "Sort From Bottom To Top"
-msgstr ""
+msgstr "Trier dans l'ordre décroissant"
 
 #: src/ui/views/accountview.cpp:226
 msgid "Transactions"
 msgstr "Transactions"
 
 #: src/ui/views/accountview.cpp:392
-#, fuzzy
 msgid "No Transactions Found"
-msgstr "Transactions"
+msgstr "Aucune transaction trouvée"
 
 #: src/ui/views/accountview.cpp:393
 msgid "No transactions match the specified filters."
-msgstr ""
+msgstr "Aucune transaction ne correspond aux critères spécifiés."
 
 #: src/ui/views/accountview.cpp:400
-#, fuzzy
 msgid "No Transactions"
-msgstr "Transactions"
+msgstr "Aucune transaction"
 
 #: src/ui/views/accountview.cpp:401
 msgid ""
 "Add a new transaction or import transactions from a CSV file using the "
 "Actions menu in the sidebar."
 msgstr ""
+"Ajoutez une nouvelle transaction ou importez des transactions depuis un "
+"CSV en utilisant le menu Actions de la barre latérale."
 
 #: src/ui/views/accountview.cpp:419
 msgid "This account has no money available to transfer."
-msgstr ""
+msgstr "Ce compte ne dispose pas d'argent pour le transfert."
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -481,9 +479,8 @@ msgid "Close Account"
 msgstr "Fermer le compte"
 
 #: src/ui/views/shortcutsdialog.cpp:122
-#, fuzzy
 msgid "Account Actions"
-msgstr "Menu des comptes"
+msgstr "Actions sur les comptes"
 
 #: src/ui/views/shortcutsdialog.cpp:126
 msgctxt "Shortcuts"
@@ -511,9 +508,9 @@ msgid "About"
 msgstr "À propos"
 
 #: src/ui/views/transactiondialog.cpp:19
-#, fuzzy, c-format
+#, c-format
 msgid "Transaction - %s"
-msgstr "Transactions"
+msgstr "Transaction - %s"
 
 #: src/ui/views/transactiondialog.cpp:33 src/ui/views/transactiondialog.cpp:157
 #: src/ui/views/transferdialog.cpp:39 src/ui/views/transferdialog.cpp:72
@@ -544,7 +541,7 @@ msgstr "Répéter à intervalle"
 
 #: src/ui/views/transactiondialog.cpp:96
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #: src/ui/views/transactiondialog.cpp:167
 msgid "Amount (Empty)"
@@ -556,7 +553,7 @@ msgstr "Montant (invalide)"
 
 #: src/ui/views/transferdialog.cpp:7
 msgid "Transfer"
-msgstr ""
+msgstr "Transférer"
 
 #: src/ui/views/transferdialog.cpp:11
 msgid ""
@@ -564,26 +561,21 @@ msgid ""
 "in this account and an income transaction with the given amount in the "
 "account to transfer to."
 msgstr ""
+"Le transfert d'argent débitera du montant donné ce compte "
+"et un crédit du montant donné dans le compte choisi."
 
 #: src/ui/views/transferdialog.cpp:21
-#, fuzzy
 msgid "No Account Selected"
-msgstr "Nouveau compte"
+msgstr "Aucune compte sélectionné"
 
 #: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
-#, fuzzy
 msgid "Select Account"
-msgstr "Compte récents"
+msgstr "Sélectionner un compte"
 
 #: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
-#, fuzzy
 msgid "Transfer Account"
-msgstr "Fermer le compte"
+msgstr "Compte de transfert"
 
 #: src/ui/views/transferdialog.cpp:77
-#, fuzzy
 msgid "Transfer Account (Invalid)"
-msgstr "Montant (invalide)"
-
-#~ msgid "ID"
-#~ msgstr "Identifiant"
+msgstr "Compte de transfert (invalide)"
