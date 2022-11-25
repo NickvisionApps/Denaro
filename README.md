@@ -4,9 +4,10 @@
  **A personal finance manager**
 
 # Features
-- An easy-to-use interface
-- Supports opening multiple accounts at a time, with a familiar tab interface
+- Manage multiple accounts at a time, with a familiar tab interface
+- Easily filter transactions by type, group, or date
 - Easily repeat transactions, such as bills that occur every month
+- Transfer money from one account to another
 - Export an account as a CSV file and import a CSV file to bulk add transactions to an account
 
 # Installation
@@ -17,9 +18,9 @@
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/202083015-1a48ec33-84b9-476d-ab66-db9ff507d692.png)
-![Transactions](https://user-images.githubusercontent.com/17648453/202458058-28dcb582-bce7-45ec-8b0c-595adc544112.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/202458065-05a7aed2-df9c-4378-a8b4-13b05a4614d9.png)
-![TransactionDialog](https://user-images.githubusercontent.com/17648453/202083040-302f7784-a497-4f00-8e22-846f8a1908e7.png)
+![OpenAccount](https://user-images.githubusercontent.com/17648453/204042093-d01d5aaa-3a82-49fd-b579-afd48d20936e.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/204042100-a56c28e2-2a83-4c12-9629-acf8079fd89a.png)
+![TransactionDialog](https://user-images.githubusercontent.com/17648453/204042104-6f0e3019-c476-40aa-8a2b-2a5e539f7b27.png)
 
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
