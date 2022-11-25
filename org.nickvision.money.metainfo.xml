@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Money</name>
-  <summary>A personal finance manager </summary>
+  <summary>A personal finance manager</summary>
   <description>
     <p>
       A personal finance manager
@@ -36,11 +36,11 @@
     </screenshot>
     <screenshot>
       <caption>OpenAccount</caption>
-      <image>https://user-images.githubusercontent.com/17648453/202458058-28dcb582-bce7-45ec-8b0c-595adc544112.png</image>
+      <image>https://user-images.githubusercontent.com/17648453/204042093-d01d5aaa-3a82-49fd-b579-afd48d20936e.png</image>
     </screenshot>
     <screenshot>
       <caption>DarkMode</caption>
-      <image>https://user-images.githubusercontent.com/17648453/202458065-05a7aed2-df9c-4378-a8b4-13b05a4614d9.png</image>
+      <image>https://user-images.githubusercontent.com/17648453/204042100-a56c28e2-2a83-4c12-9629-acf8079fd89a.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
@@ -49,7 +49,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2022.11.1-rc1" date="2022-11-24">
+    <release version="2022.11.1" date="2022-11-25">
       <description>
         <p>- Introducing a brand new redesign! We completely redesigned the application to provide an easier and more efficient way to manage your accounts, groups, and transactions</p>
         <p>- Added the 'Transfer Money' action to allow for transferring money to another account</p>
