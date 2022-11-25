@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-24 10:43+0530\n"
+"PO-Revision-Date: 2022-11-25 22:20+0530\n"
 "Last-Translator: Hemish <hemish04082005@gmail.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net> https://indlinux."
 "org/hindi\n"
@@ -21,14 +21,14 @@ msgstr ""
 "X-Generator: Gtranslator 42.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer To %s"
-msgstr "धनराशि ट्रांसफ़र करें"
+msgstr "%s को ट्रांसफ़र"
 
 #: src/controllers/accountviewcontroller.cpp:96
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer From %s"
-msgstr "धनराशि ट्रांसफ़र करें"
+msgstr "%s से ट्रांसफ़र"
 
 #: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
@@ -557,7 +557,6 @@ msgid "Amount (Invalid)"
 msgstr "धनराशि (अवैध)"
 
 #: src/ui/views/transferdialog.cpp:7
-#, fuzzy
 msgid "Transfer"
 msgstr "धनराशि ट्रांसफ़र करें"
 
@@ -567,26 +566,24 @@ msgid ""
 "in this account and an income transaction with the given amount in the "
 "account to transfer to."
 msgstr ""
+"धनराशि ट्रांसफ़र करने से इस खाते में बताई गई राशि का खर्च लेनदेन दिखाया जाएगा और जिस "
+"खाते में ट्रांसफ़र करने के लिए कहा गया है उस में दी गई राशि का एक आय लेनदेन दिखाया जाएगा।"
 
 #: src/ui/views/transferdialog.cpp:21
-#, fuzzy
 msgid "No Account Selected"
-msgstr "कोई खाता नहीं खुला है"
+msgstr "कोई खाता नहीं चुना गया है"
 
 #: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
-#, fuzzy
 msgid "Select Account"
-msgstr "हाल ही में उपयोग किए गए खाते"
+msgstr "खाता चुनें"
 
 #: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
-#, fuzzy
 msgid "Transfer Account"
-msgstr "धनराशि ट्रांसफ़र करें"
+msgstr "राशि प्राप्त करने वाला खाता"
 
 #: src/ui/views/transferdialog.cpp:77
-#, fuzzy
 msgid "Transfer Account (Invalid)"
-msgstr "धनराशि (अवैध)"
+msgstr "राशि प्राप्त करने वाला खाता (अवैध्)"
 
 #~ msgid "ID"
 #~ msgstr "ID"
