@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-22 16:07+0100\n"
+"PO-Revision-Date: 2022-11-25 22:51+0100\n"
 "Last-Translator: Marcin Wolski <martinwolski04@gmail.com>\n"
 "Language-Team: Polish <->\n"
 "Language: pl\n"
@@ -21,14 +21,14 @@ msgstr ""
 "X-Generator: Gtranslator 42.0\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer To %s"
-msgstr "Zamknij konto"
+msgstr "Przelew do %s"
 
 #: src/controllers/accountviewcontroller.cpp:96
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer From %s"
-msgstr "Zamknij konto"
+msgstr "Przelew z %s"
 
 #: src/controllers/accountviewcontroller.cpp:111
 msgid "Exported account to CSV successfully."
@@ -165,7 +165,7 @@ msgstr "Importuj z CSV"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
 msgid "Transfer Money"
-msgstr ""
+msgstr "Przelew pieniędzy"
 
 #: src/ui/views/accountview.cpp:84
 msgid "Reset Overview Filters"
@@ -303,7 +303,7 @@ msgstr ""
 
 #: src/ui/views/accountview.cpp:419
 msgid "This account has no money available to transfer."
-msgstr ""
+msgstr "Na tym koncie nie ma pieniędzy możliwych do przelania."
 
 #: src/ui/views/accountview.cpp:425 src/ui/views/mainwindow.cpp:259
 msgid "_Save"
@@ -482,9 +482,8 @@ msgid "Close Account"
 msgstr "Zamknij konto"
 
 #: src/ui/views/shortcutsdialog.cpp:122
-#, fuzzy
 msgid "Account Actions"
-msgstr "Menu konta"
+msgstr "Działania na koncie"
 
 #: src/ui/views/shortcutsdialog.cpp:126
 msgctxt "Shortcuts"
@@ -557,7 +556,7 @@ msgstr "Kwota (Nieprawidłowa)"
 
 #: src/ui/views/transferdialog.cpp:7
 msgid "Transfer"
-msgstr ""
+msgstr "Przelew"
 
 #: src/ui/views/transferdialog.cpp:11
 msgid ""
@@ -565,26 +564,24 @@ msgid ""
 "in this account and an income transaction with the given amount in the "
 "account to transfer to."
 msgstr ""
+"Przelew pieniędzy utowrzy transakcję obciążające to konto podaną kwotą oraz "
+"transakcję przychodową zasilającą konto docelowe."
 
 #: src/ui/views/transferdialog.cpp:21
-#, fuzzy
 msgid "No Account Selected"
-msgstr "Brak otwartych kont"
+msgstr "Nie wybrano konta"
 
 #: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
-#, fuzzy
 msgid "Select Account"
-msgstr "Ostatnie konta"
+msgstr "Wybierz konto"
 
 #: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
-#, fuzzy
 msgid "Transfer Account"
-msgstr "Zamknij konto"
+msgstr "Konto docelowe"
 
 #: src/ui/views/transferdialog.cpp:77
-#, fuzzy
 msgid "Transfer Account (Invalid)"
-msgstr "Kwota (Nieprawidłowa)"
+msgstr "Konto docelowe (Nieprawidłowe)"
 
 #~ msgid "ID"
 #~ msgstr "ID"
