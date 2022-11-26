@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-25 22:51+0100\n"
+"PO-Revision-Date: 2022-11-26 17:42+0100\n"
 "Last-Translator: Marcin Wolski <martinwolski04@gmail.com>\n"
 "Language-Team: Polish <->\n"
 "Language: pl\n"
@@ -143,11 +143,11 @@ msgstr "Łącznie"
 
 #: src/ui/views/accountview.cpp:48
 msgid "Income"
-msgstr "Dochód"
+msgstr "Wpływy"
 
 #: src/ui/views/accountview.cpp:59
 msgid "Expense"
-msgstr "Wydatek"
+msgstr "Odpływy"
 
 #: src/ui/views/accountview.cpp:69
 msgid "Actions"
@@ -523,12 +523,12 @@ msgstr "Kwota"
 #: src/ui/views/transactiondialog.cpp:37
 msgctxt "Transaction|Edition"
 msgid "Income"
-msgstr "Dochód"
+msgstr "Wpływ"
 
 #: src/ui/views/transactiondialog.cpp:39
 msgctxt "Transaction|Edition"
 msgid "Expense"
-msgstr "Wydatek"
+msgstr "Wypływ"
 
 #: src/ui/views/transactiondialog.cpp:49
 msgid "Type"
