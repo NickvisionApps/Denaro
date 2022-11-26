@@ -1,4 +1,4 @@
-# Italian translation for Nickvision-Money.
+# Spanish translation for Money.
 # Copyright (C) 2022 Nick Logozzo
 # This file is distributed under the same license as the org.nickvision.money package.
 # Mattia Borda <mattiagiovanni.borda@icloud.com>, 2022.
@@ -12,7 +12,7 @@ msgstr ""
 "PO-Revision-Date: 2022-11-26 18:55+0000\n"
 "Last-Translator: Daniel Darias <dariasteam94@gmail.com>\n"
 "Language-Team: Spanish - Spain <dariasteam94@gmail.com>\n"
-"Language: es_ES\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -581,32 +581,3 @@ msgstr "Transferir cuenta"
 #: src/ui/views/transferdialog.cpp:77
 msgid "Transfer Account (Invalid)"
 msgstr "Inserta una transferencia válida"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Currency"
-#~ msgstr "Valuta"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Personalizza le impostazioni della valuta.\n"
-#~ "\n"
-#~ "Le modifiche saranno applicate solo agli account aperti dopo la modifica."
-
-#~ msgid "Currency Symbol"
-#~ msgstr "Simbolo della valuta"
-
-#~ msgid "Display Currency Symbol On Right"
-#~ msgstr "Mostra il simbolo della valuta a destra"
-
-#~ msgid ""
-#~ "If checked, the currency symbol will be displayed on the right of a "
-#~ "monetary value."
-#~ msgstr ""
-#~ "Se attivo, il simbolo della valuta sarà mostrato a destra di un valore "
-#~ "monetario."
