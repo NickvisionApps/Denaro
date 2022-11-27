@@ -70,7 +70,7 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_menu_button_set_child(GTK_MENU_BUTTON(m_btnMenuAccountActions), btnMenuAccountActionsContent);
     GMenu* menuActionsCSV{ g_menu_new() };
     g_menu_append(menuActionsCSV, _("Export as CSV"), "account.exportAsCSV");
-    g_menu_append(menuActionsCSV, _("Import from file"), "account.importFromFile");
+    g_menu_append(menuActionsCSV, _("Import from File"), "account.importFromFile");
     GMenu* menuActions{ g_menu_new() };
     g_menu_append(menuActions, _("Transfer Money"), "account.transferMoney");
     g_menu_append_section(menuActions, nullptr, G_MENU_MODEL(menuActionsCSV));
@@ -447,7 +447,7 @@ void AccountView::onExportAsCSV()
 
 void AccountView::onImportFromFile()
 {
-    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Import from CSV"), m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
+    GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Import from File"), m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
     gtk_file_filter_set_name(filter, _("Supported files"));
@@ -474,7 +474,6 @@ void AccountView::onImportFromFile()
     gtk_file_filter_add_pattern(filter, "*.qif");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
     g_object_unref(filter);
-    
     g_signal_connect(openFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
     {
         if(response_id == GTK_RESPONSE_ACCEPT)

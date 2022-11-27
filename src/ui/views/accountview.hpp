@@ -94,7 +94,7 @@ namespace NickvisionMoney::UI::Views
 		 */
 		void onExportAsCSV();
 		/**
-		 * Occurs when the import from csv menu item is clicked
+		 * Occurs when the import from file menu item is clicked
 		 */
 		void onImportFromFile();
 		/**

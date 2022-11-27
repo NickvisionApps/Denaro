@@ -389,24 +389,27 @@ bool Account::exportAsCSV(const std::string& path)
 
 int Account::importFromFile(const std::string& path)
 {
-    if (path.ends_with(".csv"))
+    if (std::filesystem::path(path).extension() == ".csv")
     {
         return importFromCSV(path);
     }
-    else if (path.ends_with(".ofx"))
+    else if (std::filesystem::path(path).extension() == ".ofx")
     {
         return importFromOFX(path);
     }
-    else if (path.ends_with(".qif"))
+    else if (std::filesystem::path(path).extension() == ".qif")
     {
         return importFromQIF(path);
     }
-
     return -1;
 }
 
 int Account::importFromCSV(const std::string& path)
 {
+    if(!std::filesystem::exists(path))
+    {
+        return -1;
+    }
     int imported{ 0 };
     std::ifstream file{ path };
     if(file.is_open())
@@ -528,13 +531,16 @@ int Account::importFromCSV(const std::string& path)
 
 int Account::importFromOFX(const std::string& path)
 {
+    if(!std::filesystem::exists(path))
+    {
+        return -1;
+    }
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
-    const std::regex xmlTagRegex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
+    std::regex xmlTagRegex{ "^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)" };
     std::smatch xmlTagMatch;
-    Transaction *transaction{ nullptr };
+    Transaction* transaction{ nullptr };
     bool skipTransaction{ false };
-
     std::ifstream file{ path };
     if (file.is_open())
     {
@@ -544,15 +550,13 @@ int Account::importFromOFX(const std::string& path)
             // Extract tag and content
             if (std::regex_match(line, xmlTagMatch, xmlTagRegex))
             {
-                const std::string& tag{ xmlTagMatch[1].str() };
+                std::string tag{ xmlTagMatch[1].str() };
                 std::string content{ xmlTagMatch[2].str() };
-
-                const long unsigned int found = content.find('\r');
+                size_t found = content.find('\r');
                 if (found != std::string::npos)
                 {
                     content.erase(found);
                 }
-
                 // Add previous transaction
                 if (tag == "/STMTTRN" && transaction != nullptr)
                 {
@@ -625,23 +629,26 @@ int Account::importFromOFX(const std::string& path)
             }
         }
     }
-
     return imported;
 }
 
 int Account::importFromQIF(const std::string& path)
 {
+    if(!std::filesystem::exists(path))
+    {
+        return -1;
+    }
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::ifstream file{ path };
-    Transaction *transaction{ new Transaction(nextId) };
+    Transaction* transaction{ new Transaction(nextId) };
     bool skipTransaction{ false };
     if (file.is_open())
     {
         std::string line;
         while (getline(file, line))
         {
-            const long unsigned int found = line.find('\r');
+            size_t found = line.find('\r');
             if (found != std::string::npos)
             {
                 line.erase(found);
@@ -668,10 +675,10 @@ int Account::importFromQIF(const std::string& path)
             {
                 try
                 {
-                    const int year{ atoi(line.substr(7, 4).c_str()) };
-                    const int month{ atoi(line.substr(4, 2).c_str()) };
-                    const int day{ atoi(line.substr(1, 2).c_str()) };
-                    transaction->setDate(boost::gregorian::date(year, month, day));
+                    const boost::gregorian::date::year_type year{ (unsigned short) std::stoul(line.substr(7, 4)) };
+                    const boost::gregorian::date::month_type month{ (unsigned short) std::stoul(line.substr(4, 2)) };
+                    const boost::gregorian::date::day_type day{ (unsigned short) std::stoul(line.substr(1, 2)) };
+                    transaction->setDate({ year, month, day });
                 }
                 catch (...)
                 {

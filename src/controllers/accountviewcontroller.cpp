@@ -129,15 +129,11 @@ void AccountViewController::importFromFile(std::string& path)
             }
         }
         m_accountInfoChangedCallback();
-    }
-
-    if (imported == -1)
-    {
-        m_sendToastCallback("Unsupported file type");
+        m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from file.", "Imported %d transactions from file.", imported), imported));
     }
     else
     {
-        m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from file.", "Imported %d transactions from file.", imported), imported));
+        m_sendToastCallback(_("Unable to import information from the file. Unsupported file type."));
     }
 }
 

@@ -143,6 +143,12 @@ namespace NickvisionMoney::Models
          */
         int importFromFile(const std::string& path);
 
+	private:
+		std::string m_path;
+        std::shared_ptr<SQLite::Database> m_db;
+        std::map<unsigned int, Group> m_groups;
+        std::map<unsigned int, Transaction> m_transactions;
+        void updateGroupAmounts();
         /**
          * Imports transactions to the account from a CSV file
          *
@@ -150,7 +156,6 @@ namespace NickvisionMoney::Models
          * @returns The number of transactions imported
          */
         int importFromCSV(const std::string& path);
-
         /**
          * Imports transactions to the account from a OFX file
          *
@@ -158,7 +163,6 @@ namespace NickvisionMoney::Models
          * @returns The number of transactions imported
          */
         int importFromOFX(const std::string& path);
-
         /**
          * Imports transactions to the account from a QIF file
          *
@@ -166,12 +170,5 @@ namespace NickvisionMoney::Models
          * @returns The number of transactions imported
          */
         int importFromQIF(const std::string& path);
-
-	private:
-		std::string m_path;
-        std::shared_ptr<SQLite::Database> m_db;
-        std::map<unsigned int, Group> m_groups;
-        std::map<unsigned int, Transaction> m_transactions;
-        void updateGroupAmounts();
 	};
 }
