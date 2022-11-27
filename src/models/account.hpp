@@ -151,6 +151,14 @@ namespace NickvisionMoney::Models
          */
         int importFromCSV(const std::string& path);
 
+        /**
+         * Imports transactions to the account from a OFX file
+         *
+         * @param path The path of the OFX file
+         * @returns The number of transactions imported
+         */
+        int importFromOFX(const std::string& path);
+
 	private:
 		std::string m_path;
         std::shared_ptr<SQLite::Database> m_db;

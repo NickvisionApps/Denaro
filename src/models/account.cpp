@@ -2,6 +2,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <regex>
 #include <sstream>
 #include <vector>
 #include <boost/date_time/gregorian/gregorian.hpp>
@@ -391,6 +392,10 @@ int Account::importFromFile(const std::string& path) {
     {
         return importFromCSV(path);
     }
+    else if (path.ends_with(".ofx"))
+    {
+        return importFromOFX(path);
+    }
 
     return -1;
 }
@@ -513,6 +518,79 @@ int Account::importFromCSV(const std::string& path)
             imported++;
         }
     }
+    return imported;
+}
+
+int Account::importFromOFX(const std::string& path)
+{
+    int imported{ 0 };
+    unsigned int nextId{ getNextAvailableTransactionId() };
+    const std::regex xmlTagRegex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
+    std::smatch xmlTagMatch;
+    Transaction *transaction{ nullptr };
+
+    std::ifstream file{ path };
+    if (file.is_open())
+    {
+        std::string line;
+        while (getline(file, line))
+        {
+            // Extract tag and content
+            if (std::regex_match(line, xmlTagMatch, xmlTagRegex))
+            {
+                const std::string& tag{ xmlTagMatch[1].str() };
+                std::string content{ xmlTagMatch[2].str() };
+
+                const long unsigned int found = content.find('\r');
+                if (found != std::string::npos)
+                {
+                    content.erase(found);
+                }
+
+                // Add previous transaction
+                if (tag == "/STMTTRN" && transaction != nullptr)
+                {
+                    addTransaction(*transaction);
+                    delete transaction;
+                    imported++;
+                }
+                // New transaction
+                if (tag == "STMTTRN")
+                {
+                    transaction = new Transaction(nextId);
+                    nextId++;
+                }
+                // Type
+                if (tag == "TRNTYPE")
+                {
+                    if (content == "CREDIT")
+                    {
+                        transaction->setType(TransactionType::Income);
+                    }
+                    else if (content == "DEBIT")
+                    {
+                        transaction->setType(TransactionType::Expense);
+                    }
+                }
+                // Name
+                if (tag == "MEMO")
+                {
+                    transaction->setDescription(content);
+                }
+                // Amount
+                if (tag == "TRNAMT")
+                {
+                    transaction->setAmount(boost::multiprecision::cpp_dec_float_50(content));
+                }
+                // Date
+                if (tag == "DTPOSTED")
+                {
+                    transaction->setDate(boost::gregorian::from_undelimited_string(content));
+                }
+            }
+        }
+    }
+
     return imported;
 }
 
