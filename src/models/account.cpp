@@ -533,6 +533,7 @@ int Account::importFromOFX(const std::string& path)
     const std::regex xmlTagRegex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
     std::smatch xmlTagMatch;
     Transaction *transaction{ nullptr };
+    bool skipTransaction{ false };
 
     std::ifstream file{ path };
     if (file.is_open())
@@ -555,9 +556,13 @@ int Account::importFromOFX(const std::string& path)
                 // Add previous transaction
                 if (tag == "/STMTTRN" && transaction != nullptr)
                 {
-                    addTransaction(*transaction);
+                    if (!skipTransaction)
+                    {
+                        addTransaction(*transaction);
+                        imported++;
+                    }
+                    skipTransaction = false;
                     delete transaction;
-                    imported++;
                 }
                 // New transaction
                 if (tag == "STMTTRN")
@@ -565,32 +570,57 @@ int Account::importFromOFX(const std::string& path)
                     transaction = new Transaction(nextId);
                     nextId++;
                 }
-                // Type
-                if (tag == "TRNTYPE")
+                if (!skipTransaction)
                 {
-                    if (content == "CREDIT")
+                    // Type
+                    if (tag == "TRNTYPE")
                     {
-                        transaction->setType(TransactionType::Income);
+                        if (content == "CREDIT")
+                        {
+                            transaction->setType(TransactionType::Income);
+                        }
+                        else if (content == "DEBIT")
+                        {
+                            transaction->setType(TransactionType::Expense);
+                        }
+                        else
+                        {
+                            // Unkown entry
+                            skipTransaction = true;
+                            continue;
+                        }
                     }
-                    else if (content == "DEBIT")
+                    // Name
+                    if (tag == "MEMO")
                     {
-                        transaction->setType(TransactionType::Expense);
+                        transaction->setDescription(content);
                     }
-                }
-                // Name
-                if (tag == "MEMO")
-                {
-                    transaction->setDescription(content);
-                }
-                // Amount
-                if (tag == "TRNAMT")
-                {
-                    transaction->setAmount(boost::multiprecision::cpp_dec_float_50(content));
-                }
-                // Date
-                if (tag == "DTPOSTED")
-                {
-                    transaction->setDate(boost::gregorian::from_undelimited_string(content));
+                    // Amount
+                    if (tag == "TRNAMT")
+                    {
+                        try
+                        {
+                            transaction->setAmount(boost::multiprecision::cpp_dec_float_50(content));
+                        }
+                        catch (...)
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                    // Date
+                    if (tag == "DTPOSTED")
+                    {
+                        try
+                        {
+                            transaction->setDate(boost::gregorian::from_undelimited_string(content));
+                        }
+                        catch (...)
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
                 }
             }
         }
@@ -605,6 +635,7 @@ int Account::importFromQIF(const std::string& path)
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::ifstream file{ path };
     Transaction *transaction{ new Transaction(nextId) };
+    bool skipTransaction{ false };
     if (file.is_open())
     {
         std::string line;
@@ -622,10 +653,14 @@ int Account::importFromQIF(const std::string& path)
             // Add the previous transaction
             if (line[0] == '^')
             {
-                addTransaction(*transaction);
+                if (!skipTransaction)
+                {
+                    addTransaction(*transaction);
+                    imported++;
+                }
                 delete transaction;
+                skipTransaction = false;
                 nextId++;
-                imported++;
                 transaction = new Transaction{ nextId };
             }
             // Date
@@ -640,14 +675,24 @@ int Account::importFromQIF(const std::string& path)
                 }
                 catch (...)
                 {
+                    skipTransaction = true;
                     continue;
                 }
             }
             // Amount and Type
             if (line[0] == 'T')
             {
-                transaction->setType(line[1] == '-' ? TransactionType::Expense : TransactionType::Income);
-                transaction->setAmount(boost::multiprecision::cpp_dec_float_50(line.substr(2)));
+                try
+                {
+                    transaction->setType(line[1] == '-' ? TransactionType::Expense : TransactionType::Income);
+                    transaction->setAmount(boost::multiprecision::cpp_dec_float_50(line.substr(2)));
+                }
+                catch (...)
+                {
+                    skipTransaction = true;
+                    continue;
+                }
+                
             }
             // Description
             if (line[0] == 'P')
