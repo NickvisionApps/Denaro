@@ -25,6 +25,12 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ _("System"), _("Light"), _("Dark"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
     g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
+    //Transaction Default Color Row
+    m_btnTransactionColor = gtk_color_button_new();
+    m_rowTransactionColor = adw_action_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransactionColor), _("Transaction Default Color"));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransactionColor);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
