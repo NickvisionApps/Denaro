@@ -127,7 +127,7 @@ namespace NickvisionMoney::Controllers
 		 *
 		 * @param path The path to the csv file
 		 */
-		void importFromCSV(std::string& path);
+		void importFromFile(std::string& path);
 		/**
 		 * Adds a new group to the account
 		 *

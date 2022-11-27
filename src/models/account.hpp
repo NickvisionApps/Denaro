@@ -135,6 +135,15 @@ namespace NickvisionMoney::Models
          */
         bool exportAsCSV(const std::string& path);
         /**
+         * Detects and calls the right function for the import depending on
+         * the file type
+         * 
+         * @param path The path of the file
+         * @returns The number of transactions imported, or -1 if the file format is unsupported
+         */
+        int importFromFile(const std::string& path);
+
+        /**
          * Imports transactions to the account from a CSV file
          *
          * @param path The path of the CSV file

@@ -386,6 +386,15 @@ bool Account::exportAsCSV(const std::string& path)
     return false;
 }
 
+int Account::importFromFile(const std::string& path) {
+    if (path.ends_with(".csv"))
+    {
+        return importFromCSV(path);
+    }
+
+    return -1;
+}
+
 int Account::importFromCSV(const std::string& path)
 {
     int imported{ 0 };
