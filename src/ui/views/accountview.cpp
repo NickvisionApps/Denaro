@@ -450,7 +450,14 @@ void AccountView::onImportFromFile()
     GtkFileChooserNative* openFileDialog{ gtk_file_chooser_native_new(_("Import from CSV"), m_parentWindow, GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFileDialog), true);
     GtkFileFilter* filter{ gtk_file_filter_new() };
+    gtk_file_filter_set_name(filter, _("Supported files"));
+    gtk_file_filter_add_pattern(filter, "*.csv");
+    gtk_file_filter_add_pattern(filter, "*.ofx");
+    gtk_file_filter_add_pattern(filter, "*.qif");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
+    g_object_unref(filter);
     // CSV support
+    filter = gtk_file_filter_new();
     gtk_file_filter_set_name(filter, "CSV (*.csv)");
     gtk_file_filter_add_pattern(filter, "*.csv");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
