@@ -20,7 +20,7 @@ std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_de
     {
         builder << (isLocaleDotDecimalSeperated(locale) ? ".00" : ",00");
     }
-    else if(std::fmod(decimal, 10.0) == 0)
+    else if(std::fmod(decimal, 10.0) < 0.001)
     {
         builder << "0";
     }
