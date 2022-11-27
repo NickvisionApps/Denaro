@@ -123,9 +123,9 @@ namespace NickvisionMoney::Controllers
 		 */
 		void exportAsCSV(std::string& path);
 		/**
-		 * Import transactions from a CSV file
+		 * Import transactions from a file
 		 *
-		 * @param path The path to the csv file
+		 * @param path The path to the file
 		 */
 		void importFromFile(std::string& path);
 		/**
