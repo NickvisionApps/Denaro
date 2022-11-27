@@ -1,0 +1,30 @@
+{
+	"Fyodor Sobolev": {
+		"lang": "Russian",
+		"url": "https://github.com/fsobolev"
+	},
+	"Milo Ivir": {
+		"lang": ["German", "Croatian"],
+		"email": "mail@milotype.de"
+	},
+	"Enzo MAROS": {
+		"lang": "French",
+		"email": "enzo.maros@gmail.co"
+	},
+	"Hemish": {
+		"lang": "Hindi",
+		"email": "hemish04082005@gmail.com"
+	},
+	"Mattia Borda": {
+		"lang": "Italian",
+		"email": "mattiagiovanni.borda@icloud.com"
+	},
+	"Heimen Stoffels": {
+		"lang": "Dutch",
+		"email": "vistausss@fastmail.com"
+	},
+	"Marcin Wolski": {
+		"lang": "Polish",
+		"email": "martinwolski04@gmail.com"
+	}
+}

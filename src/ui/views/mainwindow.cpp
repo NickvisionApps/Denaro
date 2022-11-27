@@ -348,6 +348,7 @@ void MainWindow::onAbout()
                           "developers", new const char*[3]{ "Nicholas Logozzo https://github.com/nlogozzo", "Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors", nullptr },
                           "designers", new const char*[3]{ "Nicholas Logozzo https://github.com/nlogozzo", "Fyodor Sobolev https://github.com/fsobolev", nullptr },
                           "artists", new const char*[2]{ "David Lapshin https://github.com/daudix-UFO", nullptr },
+                          "translator-credits", m_controller.getAppInfo().getTranslatorCredits().c_str(),
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
 }
