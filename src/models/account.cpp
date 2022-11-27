@@ -387,7 +387,8 @@ bool Account::exportAsCSV(const std::string& path)
     return false;
 }
 
-int Account::importFromFile(const std::string& path) {
+int Account::importFromFile(const std::string& path)
+{
     if (path.ends_with(".csv"))
     {
         return importFromCSV(path);
@@ -395,6 +396,10 @@ int Account::importFromFile(const std::string& path) {
     else if (path.ends_with(".ofx"))
     {
         return importFromOFX(path);
+    }
+    else if (path.ends_with(".qif"))
+    {
+        return importFromQIF(path);
     }
 
     return -1;
@@ -591,6 +596,67 @@ int Account::importFromOFX(const std::string& path)
         }
     }
 
+    return imported;
+}
+
+int Account::importFromQIF(const std::string& path)
+{
+    int imported{ 0 };
+    unsigned int nextId{ getNextAvailableTransactionId() };
+    std::ifstream file{ path };
+    Transaction *transaction{ new Transaction(nextId) };
+    if (file.is_open())
+    {
+        std::string line;
+        while (getline(file, line))
+        {
+            const long unsigned int found = line.find('\r');
+            if (found != std::string::npos)
+            {
+                line.erase(found);
+            }
+            if (line.length() == 0)
+            {
+                continue;
+            }
+            // Add the previous transaction
+            if (line[0] == '^')
+            {
+                addTransaction(*transaction);
+                delete transaction;
+                nextId++;
+                imported++;
+                transaction = new Transaction{ nextId };
+            }
+            // Date
+            if (line[0] == 'D')
+            {
+                try
+                {
+                    const int year{ atoi(line.substr(7, 4).c_str()) };
+                    const int month{ atoi(line.substr(4, 2).c_str()) };
+                    const int day{ atoi(line.substr(1, 2).c_str()) };
+                    transaction->setDate(boost::gregorian::date(year, month, day));
+                }
+                catch (...)
+                {
+                    continue;
+                }
+            }
+            // Amount and Type
+            if (line[0] == 'T')
+            {
+                transaction->setType(line[1] == '-' ? TransactionType::Expense : TransactionType::Income);
+                transaction->setAmount(boost::multiprecision::cpp_dec_float_50(line.substr(2)));
+            }
+            // Description
+            if (line[0] == 'P')
+            {
+                transaction->setDescription(line.substr(1));
+            }
+        }
+        delete transaction;
+    }
     return imported;
 }
 

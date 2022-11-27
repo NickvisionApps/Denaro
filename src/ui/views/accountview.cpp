@@ -461,6 +461,12 @@ void AccountView::onImportFromFile()
     gtk_file_filter_add_pattern(filter, "*.ofx");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
     g_object_unref(filter);
+    // QIF support
+    filter = gtk_file_filter_new();
+    gtk_file_filter_set_name(filter, "Quicken Format (*.qif)");
+    gtk_file_filter_add_pattern(filter, "*.qif");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openFileDialog), filter);
+    g_object_unref(filter);
     
     g_signal_connect(openFileDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
     {
