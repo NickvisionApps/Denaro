@@ -20,6 +20,7 @@ install_data(resources_actions, install_dir: 'share/icons/hicolor/scalable/actio
 install_data('org.nickvision.money.desktop', install_dir: 'share/applications')
 install_data('org.nickvision.money.metainfo.xml', install_dir: 'share/metainfo')
 install_data('org.nickvision.money.extension.xml', install_dir: 'share/mime/packages')
+install_data('po/CREDITS.json', install_dir: 'share/org.nickvision.money')
 gnome.compile_resources('org.nickvision.money', gresource, gresource_bundle: true, install: true, install_dir: 'share/org.nickvision.money')
 gnome.post_install(gtk_update_icon_cache: true, update_desktop_database: true)
 meson.add_install_script('update-mime-database', join_paths(get_option('prefix'), get_option('datadir'), 'mime'), skip_if_destdir: true)
