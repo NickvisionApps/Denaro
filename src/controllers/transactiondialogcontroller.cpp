@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, const std::locale& locale, const std::string& defaultColor) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ newId }, m_groups{ groups }, m_defaultColor{ defaultColor }
+TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_transaction{ newId }, m_groups{ groups }, m_configuration{ configuration }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -17,7 +17,7 @@ TransactionDialogController::TransactionDialogController(unsigned int newId, con
     m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
-TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, const std::locale& locale, const std::string& defaultColor) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ transaction }, m_groups{ groups }, m_defaultColor{ defaultColor }
+TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_transaction{ transaction }, m_groups{ groups }, m_configuration{ configuration }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -99,17 +99,17 @@ const std::string& TransactionDialogController::getRGBA() const
 
 const std::string& TransactionDialogController::getTransactionDefaultColor() const
 {
-    return m_defaultColor;
+    return m_configuration.getTransactionDefaultColor();
 }
 
 std::string TransactionDialogController::getAmountAsString() const
 {
-    return MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), m_locale);
+    return MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), m_configuration.getLocale());
 }
 
 bool TransactionDialogController::isLocaleDotDecimalSeperated() const
 {
-    return MoneyHelpers::isLocaleDotDecimalSeperated(m_locale);
+    return MoneyHelpers::isLocaleDotDecimalSeperated(m_configuration.getLocale());
 }
 
 TransactionCheckStatus TransactionDialogController::updateTransaction(const std::string& dateString, const std::string& description, TransactionType type, int repeatInterval, int groupIndex, const std::string& rgba, std::string amountString)
@@ -122,7 +122,7 @@ TransactionCheckStatus TransactionDialogController::updateTransaction(const std:
     {
         return TransactionCheckStatus::EmptyAmount;
     }
-    boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_locale) };
+    boost::multiprecision::cpp_dec_float_50 amount{ MoneyHelpers::localeStringToBoostMoney(amountString, m_configuration.getLocale()) };
     if(amount == 0)
     {
         return TransactionCheckStatus::InvalidAmount;

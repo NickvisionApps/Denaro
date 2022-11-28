@@ -192,12 +192,12 @@ void AccountViewController::deleteTransaction(unsigned int id)
 
 TransactionDialogController AccountViewController::createTransactionDialogController() const
 {
-    return { m_account.getNextAvailableTransactionId(), m_account.getGroups(), m_configuration.getLocale(), m_configuration.getTransactionDefaultColor() };
+    return { m_account.getNextAvailableTransactionId(), m_account.getGroups(), m_configuration };
 }
 
 TransactionDialogController AccountViewController::createTransactionDialogController(unsigned int id) const
 {
-    return { m_account.getTransactionById(id).value(), m_account.getGroups(), m_configuration.getLocale(), m_configuration.getTransactionDefaultColor() };
+    return { m_account.getTransactionById(id).value(), m_account.getGroups(), m_configuration };
 }
 
 bool AccountViewController::getSortFirstToLast() const
