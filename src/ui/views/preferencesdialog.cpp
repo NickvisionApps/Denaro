@@ -33,6 +33,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     g_signal_connect(m_btnTransactionColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransactionColorSet(); }), this);
     m_rowTransactionColor = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransactionColor), _("Transaction Default Color"));
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTransactionColor), _("A change in this setting will only be applied to newly added transactions."));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransactionColor);
@@ -44,6 +45,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     g_signal_connect(m_btnTransferColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransferColorSet(); }), this);
     m_rowTransferColor = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransferColor), _("Transfer Default Color"));
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTransferColor), _("A change in this setting will only be applied to newly added transactions."));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransferColor), m_btnTransferColor);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowTransferColor), m_btnTransferColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransferColor);
