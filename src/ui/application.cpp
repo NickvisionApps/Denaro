@@ -29,7 +29,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setShortName("Money");
     m_appInfo.setDescription(_("A personal finance manager."));
     m_appInfo.setVersion("2022.12.0-next");
-    m_appInfo.setChangelog("<ul><li></li></ul>");
+    m_appInfo.setChangelog("<ul><li>Added the ability to change the default color for transactions</li><li>Added translation credits to About dialog</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionMoney");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionMoney/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionMoney/discussions");

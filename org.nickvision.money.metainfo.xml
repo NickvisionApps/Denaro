@@ -51,7 +51,8 @@
   <releases>
     <release version="2022.12.0-next" date="2022-11-25">
       <description>
-        <p></p>
+        <p>- Added the ability to change the default color for transactions</p>
+        <p>- Added translation credits to About dialog</p>
       </description>
     </release>
   </releases>
