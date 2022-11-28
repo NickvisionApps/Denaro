@@ -26,9 +26,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
     g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
     //Transaction Default Color Row
-    GdkRGBA transactionColor;
-    gdk_rgba_parse(&transactionColor, m_controller.getTransactionDefaultColor().c_str());
-    m_btnTransactionColor = gtk_color_button_new_with_rgba(&transactionColor);
+    m_btnTransactionColor = gtk_color_button_new();
     gtk_widget_set_valign(m_btnTransactionColor, GTK_ALIGN_CENTER);
     g_signal_connect(m_btnTransactionColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransactionColorSet(); }), this);
     m_rowTransactionColor = adw_action_row_new();
@@ -38,9 +36,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransactionColor);
     //Transfer Default Color Row
-    GdkRGBA transferColor;
-    gdk_rgba_parse(&transferColor, m_controller.getTransferDefaultColor().c_str());
-    m_btnTransferColor = gtk_color_button_new_with_rgba(&transferColor);
+    m_btnTransferColor = gtk_color_button_new();
     gtk_widget_set_valign(m_btnTransferColor, GTK_ALIGN_CENTER);
     g_signal_connect(m_btnTransferColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransferColorSet(); }), this);
     m_rowTransferColor = adw_action_row_new();
@@ -59,6 +55,12 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
+    GdkRGBA transactionColor;
+    gdk_rgba_parse(&transactionColor, m_controller.getTransactionDefaultColor().c_str());
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnTransactionColor), &transactionColor);
+    GdkRGBA transferColor;
+    gdk_rgba_parse(&transferColor, m_controller.getTransferDefaultColor().c_str());
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnTransferColor), &transferColor);
 }
 
 GtkWidget* PreferencesDialog::gobj()

@@ -155,9 +155,9 @@ namespace NickvisionMoney::Controllers
 
 	private:
 		std::string m_response;
+		NickvisionMoney::Models::Configuration& m_configuration;
 		NickvisionMoney::Models::Transaction m_transaction;
 		std::map<unsigned int, NickvisionMoney::Models::Group> m_groups;
 		std::vector<std::string> m_groupNames;
-		NickvisionMoney::Models::Configuration& m_configuration;
 	};
 }

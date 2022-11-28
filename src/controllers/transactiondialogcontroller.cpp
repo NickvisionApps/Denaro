@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_transaction{ newId }, m_groups{ groups }, m_configuration{ configuration }
+TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_configuration{ configuration }, m_transaction{ newId }, m_groups{ groups }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -17,7 +17,7 @@ TransactionDialogController::TransactionDialogController(unsigned int newId, con
     m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
-TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_transaction{ transaction }, m_groups{ groups }, m_configuration{ configuration }
+TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, Configuration& configuration) : m_response{ "cancel" }, m_configuration{ configuration }, m_transaction{ transaction }, m_groups{ groups }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
