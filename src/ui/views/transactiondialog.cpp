@@ -119,7 +119,7 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, TransactionDialogControl
     GdkRGBA color;
     if(!gdk_rgba_parse(&color, m_controller.getRGBA().c_str()))
     {
-        gdk_rgba_parse(&color, "#3584e4");
+        gdk_rgba_parse(&color, m_controller.getTransactionDefaultColor().c_str());
     }
     gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnColor), &color);
     gtk_editable_set_text(GTK_EDITABLE(m_rowAmount), m_controller.getAmountAsString().c_str());

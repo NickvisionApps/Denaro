@@ -8,7 +8,7 @@
 
 using namespace NickvisionMoney::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_recentAccount1{ "" }, m_recentAccount2{ "" }, m_recentAccount3{ "" }, m_sortFirstToLast{ true }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionMoney/" }, m_locale{ setlocale(LC_ALL, nullptr) }, m_theme{ Theme::System }, m_recentAccount1{ "" }, m_recentAccount2{ "" }, m_recentAccount3{ "" }, m_sortFirstToLast{ true }, m_transactionDefaultColor{ "rgb(53,132,228)" }, m_transferDefaultColor{ "rgb(192,97,203)" }
 {
     //Load Config File
     if(!std::filesystem::exists(m_configDir))
@@ -25,6 +25,8 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         m_recentAccount2 = json.get("RecentAccount2", "").asString();
         m_recentAccount3 = json.get("RecentAccount3", "").asString();
         m_sortFirstToLast = json.get("SortFirstToLast", true).asBool();
+        m_transactionDefaultColor = json.get("TransactionDefaultColor", "rgb(53,132,228)").asString();
+        m_transferDefaultColor = json.get("TransferDefaultColor", "rgb(192,97,203)").asString();
     }
 }
 
@@ -56,6 +58,26 @@ const std::string& Configuration::getRecentAccount2() const
 const std::string& Configuration::getRecentAccount3() const
 {
     return m_recentAccount3;
+}
+
+const std::string& Configuration::getTransactionDefaultColor() const
+{
+    return m_transactionDefaultColor;
+}
+
+const std::string& Configuration::getTransferDefaultColor() const
+{
+    return m_transferDefaultColor;
+}
+
+void Configuration::setTransactionDefaultColor(std::string color)
+{
+    m_transactionDefaultColor = color;
+}
+
+void Configuration::setTransferDefaultColor(std::string color)
+{
+    m_transferDefaultColor = color;
 }
 
 void Configuration::addRecentAccount(const std::string& newRecentAccount)
@@ -107,6 +129,8 @@ void Configuration::save() const
         json["RecentAccount2"] = m_recentAccount2;
         json["RecentAccount3"] = m_recentAccount3;
         json["SortFirstToLast"] = m_sortFirstToLast;
+        json["TransactionDefaultColor"] = m_transactionDefaultColor;
+        json["TransferDefaultColor"] = m_transferDefaultColor;
         configFile << json;
     }
 }

@@ -62,6 +62,30 @@ namespace NickvisionMoney::Models
 		 */
 		const std::string& getRecentAccount3() const;
 		/**
+		 * Gets transaction default color
+		 *
+		 * @returns Transaction default color (RGB string)
+		 */
+		const std::string& getTransactionDefaultColor() const;
+		/**
+		 * Gets transfer default color
+		 *
+		 * @returns Transfer default color (RGB string)
+		 */
+		const std::string& getTransferDefaultColor() const;
+		/**
+		 * Sets transaction default color
+		 *
+		 * @param color The new transaction default color (RGB string)
+		 */
+		void setTransactionDefaultColor(std::string color);
+		/**
+		 * Sets transfer default color
+		 *
+		 * @param color The new transfer default color (RGB string)
+		 */
+		void setTransferDefaultColor(std::string color);
+		/**
 		 * Adds a recent account to the list of recent accounts
 		 *
 		 * @param newRecentAccount The new recent account to add to the list
@@ -92,5 +116,7 @@ namespace NickvisionMoney::Models
 		std::string m_recentAccount2;
 		std::string m_recentAccount3;
 		bool m_sortFirstToLast;
+		std::string m_transactionDefaultColor;
+		std::string m_transferDefaultColor;
 	};
 }

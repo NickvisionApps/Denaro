@@ -25,6 +25,26 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ _("System"), _("Light"), _("Dark"), nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
     g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
+    //Transaction Default Color Row
+    m_btnTransactionColor = gtk_color_button_new();
+    gtk_widget_set_valign(m_btnTransactionColor, GTK_ALIGN_CENTER);
+    g_signal_connect(m_btnTransactionColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransactionColorSet(); }), this);
+    m_rowTransactionColor = adw_action_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransactionColor), _("Transaction Default Color"));
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTransactionColor), _("A change in this setting will only be applied to newly added transactions."));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowTransactionColor), m_btnTransactionColor);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransactionColor);
+    //Transfer Default Color Row
+    m_btnTransferColor = gtk_color_button_new();
+    gtk_widget_set_valign(m_btnTransferColor, GTK_ALIGN_CENTER);
+    g_signal_connect(m_btnTransferColor, "color-set", G_CALLBACK((void (*)(GtkColorButton*, gpointer))[](GtkColorButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onTransferColorSet(); }), this);
+    m_rowTransferColor = adw_action_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTransferColor), _("Transfer Default Color"));
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTransferColor), _("A change in this setting will only be applied to newly added transactions."));
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTransferColor), m_btnTransferColor);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowTransferColor), m_btnTransferColor);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTransferColor);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
@@ -35,6 +55,12 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
+    GdkRGBA transactionColor;
+    gdk_rgba_parse(&transactionColor, m_controller.getTransactionDefaultColor().c_str());
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnTransactionColor), &transactionColor);
+    GdkRGBA transferColor;
+    gdk_rgba_parse(&transferColor, m_controller.getTransferDefaultColor().c_str());
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(m_btnTransferColor), &transferColor);
 }
 
 GtkWidget* PreferencesDialog::gobj()
@@ -68,4 +94,18 @@ void PreferencesDialog::onThemeChanged()
     {
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
     }
+}
+
+void PreferencesDialog::onTransactionColorSet()
+{
+    GdkRGBA color;
+    gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(m_btnTransactionColor), &color);
+    m_controller.setTransactionDefaultColor(gdk_rgba_to_string(&color));
+}
+
+void PreferencesDialog::onTransferColorSet()
+{
+    GdkRGBA color;
+    gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(m_btnTransferColor), &color);
+    m_controller.setTransferDefaultColor(gdk_rgba_to_string(&color));
 }

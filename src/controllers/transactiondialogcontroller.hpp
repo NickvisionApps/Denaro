@@ -6,6 +6,7 @@
 #include <vector>
 #include "../models/group.hpp"
 #include "../models/transaction.hpp"
+#include "../models/configuration.hpp"
 
 namespace NickvisionMoney::Controllers
 {
@@ -31,17 +32,17 @@ namespace NickvisionMoney::Controllers
 		 *
 		 * @param newId The Id of the new transaction
 		 * @param groups The groups of the account
-		 * @param locale The user's locale
+		 * @param configuration The Configuration for the application (Stored as a reference)
 		 */
-		TransactionDialogController(unsigned int newId, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale);
+		TransactionDialogController(unsigned int newId, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, NickvisionMoney::Models::Configuration& configuration);
 		/**
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param transaction The transaction to update
 		 * @param groups The groups of the account
-		 * @param locale The user's locale
+		 * @param configuration The Configuration for the application (Stored as a reference)
 		 */
-		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale);
+		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, NickvisionMoney::Models::Configuration& configuration);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -115,11 +116,17 @@ namespace NickvisionMoney::Controllers
 		 */
 		int getGroupAsIndex() const;
 		/**
-         * Gets the rgba color of the transaction
-         *
-         * @returns The rgba color of the transaction
-         */
-        const std::string& getRGBA() const;
+         	 * Gets the rgba color of the transaction
+         	 *
+         	 * @returns The rgba color of the transaction
+         	 */
+        	const std::string& getRGBA() const;
+		/**
+		 * Gets transaction default color from configuration
+		 *
+		 * @returns Transaction default color
+		 */
+		const std::string& getTransactionDefaultColor() const;
 		/**
 		 * Gets the amount of the transaction as a string
 		 *
@@ -148,7 +155,7 @@ namespace NickvisionMoney::Controllers
 
 	private:
 		std::string m_response;
-		const std::locale& m_locale;
+		NickvisionMoney::Models::Configuration& m_configuration;
 		NickvisionMoney::Models::Transaction m_transaction;
 		std::map<unsigned int, NickvisionMoney::Models::Group> m_groups;
 		std::vector<std::string> m_groupNames;
