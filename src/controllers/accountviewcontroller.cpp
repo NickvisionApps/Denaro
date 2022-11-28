@@ -85,6 +85,7 @@ void AccountViewController::sendTransfer(const Transfer& transfer)
     transaction.setDescription(StringHelpers::format(_("Transfer To %s"), std::filesystem::path(transfer.getDestAccountPath()).stem().string().c_str()));
     transaction.setType(TransactionType::Expense);
     transaction.setAmount(transfer.getAmount());
+    transaction.setRGBA(m_configuration.getTransferDefaultColor());
     m_account.addTransaction(transaction);
     m_accountInfoChangedCallback();
     m_receiveTransferCallback(transfer);
@@ -96,6 +97,7 @@ void AccountViewController::receiveTransfer(const Transfer& transfer)
     transaction.setDescription(StringHelpers::format(_("Transfer From %s"), std::filesystem::path(transfer.getSourceAccountPath()).stem().string().c_str()));
     transaction.setType(TransactionType::Income);
     transaction.setAmount(transfer.getAmount());
+    transaction.setRGBA(m_configuration.getTransferDefaultColor());
     m_account.addTransaction(transaction);
     m_accountInfoChangedCallback();
 }
