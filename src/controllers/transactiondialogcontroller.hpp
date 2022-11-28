@@ -33,18 +33,18 @@ namespace NickvisionMoney::Controllers
 		 * @param newId The Id of the new transaction
 		 * @param groups The groups of the account
 		 * @param locale The user's locale
-		 * @param configuration The Configuration for the application (Stored as a reference)
+		 * @param defaultColor Transaction Default Color
 		 */
-		TransactionDialogController(unsigned int newId, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale, NickvisionMoney::Models::Configuration& configuration);
+		TransactionDialogController(unsigned int newId, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale, const std::string& defaultColor);
 		/**
 		 * Constructs a TransactionDialogController
 		 *
 		 * @param transaction The transaction to update
 		 * @param groups The groups of the account
 		 * @param locale The user's locale
-		 * @param configuration The Configuration for the application (Stored as a reference)
+		 * @param defaultColor Transaction Default Color
 		 */
-		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale, NickvisionMoney::Models::Configuration& configuration);
+		TransactionDialogController(const NickvisionMoney::Models::Transaction& transaction, const std::map<unsigned int, NickvisionMoney::Models::Group>& groups, const std::locale& locale, const std::string& defaultColor);
 		/**
 		 * Gets the response of the dialog
 		 *
@@ -161,6 +161,6 @@ namespace NickvisionMoney::Controllers
 		NickvisionMoney::Models::Transaction m_transaction;
 		std::map<unsigned int, NickvisionMoney::Models::Group> m_groups;
 		std::vector<std::string> m_groupNames;
-		NickvisionMoney::Models::Configuration& m_configuration;
+		const std::string& m_defaultColor;
 	};
 }
