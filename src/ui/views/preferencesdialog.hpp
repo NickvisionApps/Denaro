@@ -37,9 +37,21 @@ namespace NickvisionMoney::UI::Views
 		GtkWidget* m_page{ nullptr };
 		GtkWidget* m_grpUserInterface{ nullptr };
 		GtkWidget* m_rowTheme{ nullptr };
+		GtkWidget* m_btnTransactionColor{ nullptr };
+		GtkWidget* m_rowTransactionColor{ nullptr };
+		GtkWidget* m_btnTransferColor{ nullptr };
+		GtkWidget* m_rowTransferColor{ nullptr };
 		/**
 		 * Ocurrs when the theme row is changed
 		 */
 		void onThemeChanged();
+		/**
+		 * Occurs when the transaction color chooser's value is set
+		 */
+		void onTransactionColorSet();
+		/**
+		 * Occurs when the transfer color chooser's value is set
+		 */
+		void onTransferColorSet();
 	};
 }
