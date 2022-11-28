@@ -633,7 +633,7 @@ int Account::importFromQIF(const std::string& path)
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::ifstream file{ path };
-    std::shared_ptr<Transaction> transaction = std::make_shared<Transaction>(nextId);
+    std::shared_ptr<Transaction> transaction{ std::make_shared<Transaction>(nextId) };
     bool skipTransaction{ false };
     if (file.is_open())
     {
