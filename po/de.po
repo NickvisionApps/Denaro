@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-24 09:02+0300\n"
+"POT-Creation-Date: 2022-11-28 01:03+0100\n"
 "PO-Revision-Date: 2022-11-24 13:56+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -36,12 +36,16 @@ msgstr "Konto erfolgreich in CSV exportiert."
 msgid "Unable to export account as CSV."
 msgstr "Konto kann nicht als CSV exportiert werden."
 
-#: src/controllers/accountviewcontroller.cpp:133
-#, c-format
-msgid "Imported %d transaction from CSV."
-msgid_plural "Imported %d transactions from CSV."
+#: src/controllers/accountviewcontroller.cpp:132
+#, fuzzy, c-format
+msgid "Imported %d transaction from file."
+msgid_plural "Imported %d transactions from file."
 msgstr[0] "%d Transaktion aus CSV importiert."
 msgstr[1] "%d Transaktionen aus CSV importiert."
+
+#: src/controllers/accountviewcontroller.cpp:136
+msgid "Unable to import information from the file. Unsupported file type."
+msgstr ""
 
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
@@ -156,8 +160,8 @@ msgid "Export as CSV"
 msgstr "Als CSV exportieren"
 
 #: src/ui/views/accountview.cpp:73 src/ui/views/accountview.cpp:450
-#: src/ui/views/shortcutsdialog.cpp:125
-msgid "Import from CSV"
+#, fuzzy
+msgid "Import from File"
 msgstr "Aus CSV importieren"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
@@ -291,9 +295,10 @@ msgid "No Transactions"
 msgstr "Keine Transaktionen"
 
 #: src/ui/views/accountview.cpp:401
+#, fuzzy
 msgid ""
-"Add a new transaction or import transactions from a CSV file using the "
-"Actions menu in the sidebar."
+"Add a new transaction or import account information from file using the "
+"actions menu in the sidebar."
 msgstr ""
 "Füge eine neue Transaktion hinzu oder importiere Transaktionen aus einer CSV-"
 "Datei über das Menü „Aktionen” in der Seitenleiste."
@@ -317,11 +322,15 @@ msgstr "_Abbrechen"
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: src/ui/views/accountview.cpp:507
+#: src/ui/views/accountview.cpp:453
+msgid "Supported files"
+msgstr ""
+
+#: src/ui/views/accountview.cpp:527
 msgid "Delete Group?"
 msgstr "Gruppe löschen?"
 
-#: src/ui/views/accountview.cpp:507
+#: src/ui/views/accountview.cpp:527
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -329,19 +338,19 @@ msgstr ""
 "Willst du wirklich diese Gruppe löschen?\n"
 "Diese Aktion ist unumkehrbar."
 
-#: src/ui/views/accountview.cpp:507 src/ui/views/accountview.cpp:544
+#: src/ui/views/accountview.cpp:527 src/ui/views/accountview.cpp:564
 msgid "No"
 msgstr "Nein"
 
-#: src/ui/views/accountview.cpp:507 src/ui/views/accountview.cpp:544
+#: src/ui/views/accountview.cpp:527 src/ui/views/accountview.cpp:564
 msgid "Yes"
 msgstr "Ja"
 
-#: src/ui/views/accountview.cpp:544
+#: src/ui/views/accountview.cpp:564
 msgid "Delete Transaction?"
 msgstr "Transaktion löschen?"
 
-#: src/ui/views/accountview.cpp:544
+#: src/ui/views/accountview.cpp:564
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -481,6 +490,10 @@ msgstr "Konto schließen"
 #: src/ui/views/shortcutsdialog.cpp:122
 msgid "Account Actions"
 msgstr "Konto-Aktionen"
+
+#: src/ui/views/shortcutsdialog.cpp:125
+msgid "Import from CSV"
+msgstr "Aus CSV importieren"
 
 #: src/ui/views/shortcutsdialog.cpp:126
 msgctxt "Shortcuts"

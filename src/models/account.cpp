@@ -2,6 +2,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <regex>
 #include <sstream>
 #include <vector>
 #include <boost/date_time/gregorian/gregorian.hpp>
@@ -386,6 +387,27 @@ bool Account::exportAsCSV(const std::string& path)
     return false;
 }
 
+int Account::importFromFile(const std::string& path)
+{
+    if(!std::filesystem::exists(path))
+    {
+        return -1;
+    }
+    if (std::filesystem::path(path).extension() == ".csv")
+    {
+        return importFromCSV(path);
+    }
+    else if (std::filesystem::path(path).extension() == ".ofx")
+    {
+        return importFromOFX(path);
+    }
+    else if (std::filesystem::path(path).extension() == ".qif")
+    {
+        return importFromQIF(path);
+    }
+    return -1;
+}
+
 int Account::importFromCSV(const std::string& path)
 {
     int imported{ 0 };
@@ -503,6 +525,181 @@ int Account::importFromCSV(const std::string& path)
             addTransaction(transaction);
             imported++;
         }
+    }
+    return imported;
+}
+
+int Account::importFromOFX(const std::string& path)
+{
+    int imported{ 0 };
+    unsigned int nextId{ getNextAvailableTransactionId() };
+    std::regex xmlTagRegex{ "^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)" };
+    std::smatch xmlTagMatch;
+    std::shared_ptr<Transaction> transaction;
+    bool skipTransaction{ false };
+    std::ifstream file{ path };
+    if (file.is_open())
+    {
+        std::string line;
+        while (getline(file, line))
+        {
+            // Extract tag and content
+            if (std::regex_match(line, xmlTagMatch, xmlTagRegex))
+            {
+                std::string tag{ xmlTagMatch[1].str() };
+                std::string content{ xmlTagMatch[2].str() };
+                size_t found = content.find('\r');
+                if (found != std::string::npos)
+                {
+                    content.erase(found);
+                }
+                // Add previous transaction
+                if (tag == "/STMTTRN" && transaction != nullptr)
+                {
+                    if (!skipTransaction)
+                    {
+                        addTransaction(*transaction);
+                        imported++;
+                    }
+                    skipTransaction = false;
+                    transaction.reset();
+                }
+                // New transaction
+                if (tag == "STMTTRN")
+                {
+                    transaction = std::make_shared<Transaction>(nextId);
+                    nextId++;
+                }
+                if (!skipTransaction)
+                {
+                    // Type
+                    if (tag == "TRNTYPE")
+                    {
+                        if (content == "CREDIT")
+                        {
+                            transaction->setType(TransactionType::Income);
+                        }
+                        else if (content == "DEBIT")
+                        {
+                            transaction->setType(TransactionType::Expense);
+                        }
+                        else
+                        {
+                            // Unkown entry
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                    // Name
+                    if (tag == "MEMO")
+                    {
+                        transaction->setDescription(content);
+                    }
+                    // Amount
+                    if (tag == "TRNAMT")
+                    {
+                        try
+                        {
+                            transaction->setAmount(boost::multiprecision::cpp_dec_float_50(content));
+                        }
+                        catch (...)
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                    // Date
+                    if (tag == "DTPOSTED")
+                    {
+                        try
+                        {
+                            transaction->setDate(boost::gregorian::from_undelimited_string(content));
+                        }
+                        catch (...)
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return imported;
+}
+
+int Account::importFromQIF(const std::string& path)
+{
+    int imported{ 0 };
+    unsigned int nextId{ getNextAvailableTransactionId() };
+    std::ifstream file{ path };
+    std::shared_ptr<Transaction> transaction{ std::make_shared<Transaction>(nextId) };
+    bool skipTransaction{ false };
+    if (file.is_open())
+    {
+        std::string line;
+        while (getline(file, line))
+        {
+            size_t found = line.find('\r');
+            if (found != std::string::npos)
+            {
+                line.erase(found);
+            }
+            if (line.length() == 0)
+            {
+                continue;
+            }
+            // Add the previous transaction
+            if (line[0] == '^')
+            {
+                if (!skipTransaction)
+                {
+                    addTransaction(*transaction);
+                    imported++;
+                }
+                transaction.reset();
+                skipTransaction = false;
+                nextId++;
+                transaction = std::make_shared<Transaction>(nextId);
+            }
+            // Date
+            if (line[0] == 'D')
+            {
+                try
+                {
+                    const boost::gregorian::date::year_type year{ (unsigned short) std::stoul(line.substr(7, 4)) };
+                    const boost::gregorian::date::month_type month{ (unsigned short) std::stoul(line.substr(4, 2)) };
+                    const boost::gregorian::date::day_type day{ (unsigned short) std::stoul(line.substr(1, 2)) };
+                    transaction->setDate({ year, month, day });
+                }
+                catch (...)
+                {
+                    skipTransaction = true;
+                    continue;
+                }
+            }
+            // Amount and Type
+            if (line[0] == 'T')
+            {
+                try
+                {
+                    transaction->setType(line[1] == '-' ? TransactionType::Expense : TransactionType::Income);
+                    transaction->setAmount(boost::multiprecision::cpp_dec_float_50(line.substr(2)));
+                }
+                catch (...)
+                {
+                    skipTransaction = true;
+                    continue;
+                }
+                
+            }
+            // Description
+            if (line[0] == 'P')
+            {
+                transaction->setDescription(line.substr(1));
+            }
+        }
+        transaction.reset();
     }
     return imported;
 }

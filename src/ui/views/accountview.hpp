@@ -74,7 +74,7 @@ namespace NickvisionMoney::UI::Views
 		GSimpleActionGroup* m_actionMap{ nullptr };
 		GSimpleAction* m_actTransferMoney{ nullptr };
 		GSimpleAction* m_actExportAsCSV{ nullptr };
-		GSimpleAction* m_actImportFromCSV{ nullptr };
+		GSimpleAction* m_actImportFromFile{ nullptr };
 		GSimpleAction* m_actNewGroup{ nullptr };
 		GSimpleAction* m_actNewTransaction{ nullptr };
 		GtkEventController* m_shortcutController{ nullptr };
@@ -94,9 +94,9 @@ namespace NickvisionMoney::UI::Views
 		 */
 		void onExportAsCSV();
 		/**
-		 * Occurs when the import from csv menu item is clicked
+		 * Occurs when the import from file menu item is clicked
 		 */
-		void onImportFromCSV();
+		void onImportFromFile();
 		/**
 		 * Occurs when the reset overview filter is clicked
 		 */

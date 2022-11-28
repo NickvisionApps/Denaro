@@ -135,12 +135,13 @@ namespace NickvisionMoney::Models
          */
         bool exportAsCSV(const std::string& path);
         /**
-         * Imports transactions to the account from a CSV file
-         *
-         * @param path The path of the CSV file
-         * @returns The number of transactions imported
+         * Detects and calls the right function for the import depending on
+         * the file type
+         * 
+         * @param path The path of the file
+         * @returns The number of transactions imported, or -1 if the file format is unsupported
          */
-        int importFromCSV(const std::string& path);
+        int importFromFile(const std::string& path);
 
 	private:
 		std::string m_path;
@@ -148,5 +149,26 @@ namespace NickvisionMoney::Models
         std::map<unsigned int, Group> m_groups;
         std::map<unsigned int, Transaction> m_transactions;
         void updateGroupAmounts();
+        /**
+         * Imports transactions to the account from a CSV file
+         *
+         * @param path The path of the CSV file
+         * @returns The number of transactions imported
+         */
+        int importFromCSV(const std::string& path);
+        /**
+         * Imports transactions to the account from a OFX file
+         *
+         * @param path The path of the OFX file
+         * @returns The number of transactions imported
+         */
+        int importFromOFX(const std::string& path);
+        /**
+         * Imports transactions to the account from a QIF file
+         *
+         * @param path The path of the QIF file
+         * @returns The number of transactions imported
+         */
+        int importFromQIF(const std::string& path);
 	};
 }

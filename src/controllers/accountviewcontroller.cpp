@@ -118,9 +118,9 @@ void AccountViewController::exportAsCSV(std::string& path)
     }
 }
 
-void AccountViewController::importFromCSV(std::string& path)
+void AccountViewController::importFromFile(std::string& path)
 {
-    int imported{ m_account.importFromCSV(path) };
+    int imported{ m_account.importFromFile(path) };
     if(imported > 0)
     {
         for(const std::pair<const unsigned int, Group>& pair : m_account.getGroups())
@@ -131,8 +131,12 @@ void AccountViewController::importFromCSV(std::string& path)
             }
         }
         m_accountInfoChangedCallback();
+        m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from file.", "Imported %d transactions from file.", imported), imported));
     }
-    m_sendToastCallback(StringHelpers::format(ngettext("Imported %d transaction from CSV.", "Imported %d transactions from CSV.", imported), imported));
+    else
+    {
+        m_sendToastCallback(_("Unable to import information from the file. Unsupported file type."));
+    }
 }
 
 void AccountViewController::addGroup(const Group& group)
