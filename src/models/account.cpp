@@ -389,6 +389,10 @@ bool Account::exportAsCSV(const std::string& path)
 
 int Account::importFromFile(const std::string& path)
 {
+    if(!std::filesystem::exists(path))
+    {
+        return -1;
+    }
     if (std::filesystem::path(path).extension() == ".csv")
     {
         return importFromCSV(path);
@@ -406,10 +410,6 @@ int Account::importFromFile(const std::string& path)
 
 int Account::importFromCSV(const std::string& path)
 {
-    if(!std::filesystem::exists(path))
-    {
-        return -1;
-    }
     int imported{ 0 };
     std::ifstream file{ path };
     if(file.is_open())
@@ -531,10 +531,6 @@ int Account::importFromCSV(const std::string& path)
 
 int Account::importFromOFX(const std::string& path)
 {
-    if(!std::filesystem::exists(path))
-    {
-        return -1;
-    }
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::regex xmlTagRegex{ "^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)" };
@@ -634,10 +630,6 @@ int Account::importFromOFX(const std::string& path)
 
 int Account::importFromQIF(const std::string& path)
 {
-    if(!std::filesystem::exists(path))
-    {
-        return -1;
-    }
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::ifstream file{ path };
