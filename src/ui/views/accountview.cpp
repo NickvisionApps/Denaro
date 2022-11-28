@@ -398,7 +398,7 @@ void AccountView::onAccountInfoChanged()
         gtk_widget_set_visible(m_pageStatusNoTransactions, true);
         gtk_widget_set_visible(m_scrollTransactions, false);
         adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("No Transactions"));
-        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import transactions from a CSV file using the Actions menu in the sidebar."));
+        adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoTransactions), _("Add a new transaction or import account information from file using the actions menu in the sidebar."));
     }
     m_isAccountLoading = false;
 }
