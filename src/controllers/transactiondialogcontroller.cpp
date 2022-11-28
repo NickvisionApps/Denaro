@@ -7,7 +7,7 @@ using namespace NickvisionMoney::Controllers;
 using namespace NickvisionMoney::Helpers;
 using namespace NickvisionMoney::Models;
 
-TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, const std::locale& locale) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ newId }, m_groups{ groups }
+TransactionDialogController::TransactionDialogController(unsigned int newId, const std::map<unsigned int, Group>& groups, const std::locale& locale, Configuration& configuration) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ newId }, m_groups{ groups }, m_configuration{ configuration }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -17,7 +17,7 @@ TransactionDialogController::TransactionDialogController(unsigned int newId, con
     m_groupNames.insert(m_groupNames.begin(), _("None"));
 }
 
-TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, const std::locale& locale) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ transaction }, m_groups{ groups }
+TransactionDialogController::TransactionDialogController(const Transaction& transaction, const std::map<unsigned int, Group>& groups, const std::locale& locale, NickvisionMoney::Models::Configuration& configuration) : m_response{ "cancel" }, m_locale{ locale }, m_transaction{ transaction }, m_groups{ groups }, m_configuration{ configuration }
 {
     for(const std::pair<const unsigned int, Group>& pair : m_groups)
     {
@@ -97,6 +97,10 @@ const std::string& TransactionDialogController::getRGBA() const
     return m_transaction.getRGBA();
 }
 
+const std::string& TransactionDialogController::getTransactionDefaultColor() const
+{
+    return m_configuration.getTransactionDefaultColor();
+}
 
 std::string TransactionDialogController::getAmountAsString() const
 {
