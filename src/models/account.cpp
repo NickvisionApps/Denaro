@@ -535,7 +535,7 @@ int Account::importFromOFX(const std::string& path)
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::regex xmlTagRegex{ "^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)" };
     std::smatch xmlTagMatch;
-    Transaction* transaction{ nullptr };
+    std::shared_ptr<Transaction> transaction;
     bool skipTransaction{ false };
     std::ifstream file{ path };
     if (file.is_open())
@@ -562,12 +562,12 @@ int Account::importFromOFX(const std::string& path)
                         imported++;
                     }
                     skipTransaction = false;
-                    delete transaction;
+                    transaction.reset();
                 }
                 // New transaction
                 if (tag == "STMTTRN")
                 {
-                    transaction = new Transaction(nextId);
+                    transaction = std::make_shared<Transaction>(nextId);
                     nextId++;
                 }
                 if (!skipTransaction)
@@ -633,7 +633,7 @@ int Account::importFromQIF(const std::string& path)
     int imported{ 0 };
     unsigned int nextId{ getNextAvailableTransactionId() };
     std::ifstream file{ path };
-    Transaction* transaction{ new Transaction(nextId) };
+    std::shared_ptr<Transaction> transaction = std::make_shared<Transaction>(nextId);
     bool skipTransaction{ false };
     if (file.is_open())
     {
@@ -657,10 +657,10 @@ int Account::importFromQIF(const std::string& path)
                     addTransaction(*transaction);
                     imported++;
                 }
-                delete transaction;
+                transaction.reset();
                 skipTransaction = false;
                 nextId++;
-                transaction = new Transaction{ nextId };
+                transaction = std::make_shared<Transaction>(nextId);
             }
             // Date
             if (line[0] == 'D')
@@ -699,7 +699,7 @@ int Account::importFromQIF(const std::string& path)
                 transaction->setDescription(line.substr(1));
             }
         }
-        delete transaction;
+        transaction.reset();
     }
     return imported;
 }
