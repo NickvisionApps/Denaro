@@ -22,6 +22,25 @@
 ![DarkMode](https://user-images.githubusercontent.com/17648453/204042100-a56c28e2-2a83-4c12-9629-acf8079fd89a.png)
 ![TransactionDialog](https://user-images.githubusercontent.com/17648453/204042104-6f0e3019-c476-40aa-8a2b-2a5e539f7b27.png)
 
+[![Please do not theme this app](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app) 
+This app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. Hovewer, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be in `~/.var/app/org.nickvision.money/config/gtk-4.0/gtk.css` if you installed the app using Flatpak or in `~/.config/gtk-4.0/gtk.css` otherwise. An example:
+
+```
+.money-total {
+	background-color: @warning_color;
+	color: #fff;
+}
+
+.money-income {
+  color: @purple_2;
+}
+
+.money-expense {
+  background: linear-gradient(to right, #000, @blue_4);
+  color: #fff;
+}
+```
+
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
