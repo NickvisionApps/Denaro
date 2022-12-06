@@ -21,6 +21,8 @@ GroupRow::GroupRow(const Group& group, const std::locale& locale, bool filterAct
     //Amount Label
     m_lblAmount = gtk_label_new(MoneyHelpers::boostMoneyToLocaleString(m_group.getBalance(), locale).c_str());
     gtk_widget_add_css_class(m_lblAmount, m_group.getBalance() >= 0 ? "success" : "error");
+    gtk_widget_set_valign(m_lblAmount, GTK_ALIGN_CENTER);
+    gtk_widget_add_css_class(m_lblAmount, m_group.getBalance() >= 0 ? "money-income" : "money-expense");
     //Edit Button
     m_btnEdit = gtk_button_new();
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);

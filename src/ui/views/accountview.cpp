@@ -33,13 +33,17 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollPane), m_paneBox);
     //Account Total
     m_lblTotal = gtk_label_new("");
+    gtk_widget_set_valign(m_lblTotal, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblTotal, "accent");
+    gtk_widget_add_css_class(m_lblTotal, "money-total");
     m_rowTotal = adw_action_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTotal), _("Total"));
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowTotal), m_lblTotal);
     //Account Income
     m_lblIncome = gtk_label_new("");
+    gtk_widget_set_valign(m_lblIncome, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblIncome, "success");
+    gtk_widget_add_css_class(m_lblIncome, "money-income");
     m_chkIncome = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkIncome), true);
     gtk_widget_add_css_class(m_chkIncome, "selection-mode");
@@ -50,7 +54,9 @@ AccountView::AccountView(GtkWindow* parentWindow, AdwTabView* parentTabView, Gtk
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncome), m_lblIncome);
     //Account Expense
     m_lblExpense = gtk_label_new("");
+    gtk_widget_set_valign(m_lblExpense, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblExpense, "error");
+    gtk_widget_add_css_class(m_lblExpense, "money-expense");
     m_chkExpense = gtk_check_button_new();
     gtk_check_button_set_active(GTK_CHECK_BUTTON(m_chkExpense), true);
     gtk_widget_add_css_class(m_chkExpense, "selection-mode");
