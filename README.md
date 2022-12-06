@@ -28,8 +28,8 @@ This app is designed for GNOME and optimized for the default Adwaita theme. If y
 
 ```
 .money-total {
-	background-color: @warning_color;
-	color: #fff;
+    background-color: @warning_color;
+    color: #fff;
 }
 
 .money-income {
