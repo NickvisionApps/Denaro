@@ -27,6 +27,9 @@
     <p xml:lang="ru">
       Персональный менеджер финансов
     </p>
+    <p xml:lang="sv">
+      En personlig finanshanterare
+    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
