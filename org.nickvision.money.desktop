@@ -8,6 +8,7 @@ Comment[hi]=एक व्यक्तिगत वित्त संयोज�
 Comment[hr]=Aplikacija za osobne financije
 Comment[it]=Gestione finanziaria personale
 Comment[ru]=Персональный менеджер финансов
+Comment[sv]=En personlig finanshanterare
 Exec=org.nickvision.money
 Icon=org.nickvision.money
 Terminal=false
