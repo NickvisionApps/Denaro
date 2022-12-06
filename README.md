@@ -33,12 +33,12 @@ This app is designed for GNOME and optimized for the default Adwaita theme. If y
 }
 
 .money-income {
-  color: @purple_2;
+    color: @purple_2;
 }
 
 .money-expense {
-  background: linear-gradient(to right, #000, @blue_4);
-  color: #fff;
+    background: linear-gradient(to right, #000, @blue_4);
+    color: #fff;
 }
 ```
 
