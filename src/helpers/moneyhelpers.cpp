@@ -1,5 +1,4 @@
 #include "moneyhelpers.hpp"
-#include <cmath>
 #include <sstream>
 #include <boost/locale.hpp>
 
@@ -15,12 +14,12 @@ std::string MoneyHelpers::boostMoneyToLocaleString(boost::multiprecision::cpp_de
         builder << getLocaleCurrencySymbol(locale);
     }
     builder << boost::locale::as::currency << value;
-    long double decimal{ std::fmod(value, 1.0) * 100.0 };
+    long double decimal{ value - floor(value) };
     if(decimal == 0)
     {
         builder << (isLocaleDotDecimalSeperated(locale) ? ".00" : ",00");
     }
-    else if(std::fmod(decimal, 10.0) < 0.001)
+    else if( (decimal * 10 - floor(decimal * 10) ) < 0.001 )
     {
         builder << "0";
     }
