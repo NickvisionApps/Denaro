@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.money\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-24 09:02+0300\n"
-"PO-Revision-Date: 2022-11-27 16:50+0100\n"
+"POT-Creation-Date: 2022-12-08 09:46+0100\n"
+"PO-Revision-Date: 2022-12-08 09:50+0100\n"
 "Last-Translator: Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it\n"
@@ -16,36 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/controllers/accountviewcontroller.cpp:85
 #, c-format
 msgid "Transfer To %s"
 msgstr "Trasferimento a %s"
 
-#: src/controllers/accountviewcontroller.cpp:96
+#: src/controllers/accountviewcontroller.cpp:97
 #, c-format
 msgid "Transfer From %s"
 msgstr "Trasferimento da %s"
 
-#: src/controllers/accountviewcontroller.cpp:111
+#: src/controllers/accountviewcontroller.cpp:113
 msgid "Exported account to CSV successfully."
 msgstr "Account esportato come CSV."
 
-#: src/controllers/accountviewcontroller.cpp:115
+#: src/controllers/accountviewcontroller.cpp:117
 msgid "Unable to export account as CSV."
 msgstr "Impossibile esportare l'account come CSV."
 
-#: src/controllers/accountviewcontroller.cpp:132
-#, fuzzy, c-format
+#: src/controllers/accountviewcontroller.cpp:134
+#, c-format
 msgid "Imported %d transaction from file."
 msgid_plural "Imported %d transactions from file."
-msgstr[0] "Importata %d transazione dal file CSV."
-msgstr[1] "Importate %d transazioni dal file CSV."
+msgstr[0] "Importata %d transazione dal file."
+msgstr[1] "Importate %d transazioni dal file."
 
-#: src/controllers/accountviewcontroller.cpp:136
+#: src/controllers/accountviewcontroller.cpp:138
 msgid "Unable to import information from the file. Unsupported file type."
 msgstr ""
+"Impossibile importare informazioni dal file. Il tipo di file non è "
+"supportato."
 
 #: src/controllers/mainwindowcontroller.cpp:49
 msgctxt "Night"
@@ -160,9 +162,8 @@ msgid "Export as CSV"
 msgstr "Esporta come CSV"
 
 #: src/ui/views/accountview.cpp:73 src/ui/views/accountview.cpp:450
-#, fuzzy
 msgid "Import from File"
-msgstr "Importa da CSV"
+msgstr "Importa da file"
 
 #: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
 msgid "Transfer Money"
@@ -296,13 +297,12 @@ msgid "No Transactions"
 msgstr "Nessuna transazione"
 
 #: src/ui/views/accountview.cpp:401
-#, fuzzy
 msgid ""
 "Add a new transaction or import account information from file using the "
 "actions menu in the sidebar."
 msgstr ""
-"Crea una nuova transazione o importa transazioni da un file CSV con il menu "
-"Azioni nella barra laterale."
+"Crea una nuova transazione o importa le informazioni di un account da un "
+"file con il menu Azioni nella barra laterale."
 
 #: src/ui/views/accountview.cpp:419
 msgid "This account has no money available to transfer."
@@ -325,7 +325,7 @@ msgstr "Apri"
 
 #: src/ui/views/accountview.cpp:453
 msgid "Supported files"
-msgstr ""
+msgstr "File supportati"
 
 #: src/ui/views/accountview.cpp:527
 msgid "Delete Group?"
@@ -480,6 +480,19 @@ msgstr "Chiaro"
 msgid "Dark"
 msgstr "Scuro"
 
+#: src/ui/views/preferencesdialog.cpp:33
+msgid "Transaction Default Color"
+msgstr "Colore predefinito delle transazioni"
+
+#: src/ui/views/preferencesdialog.cpp:34 src/ui/views/preferencesdialog.cpp:44
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "Le modifiche saranno applicate solo alle nuove transazioni."
+
+#: src/ui/views/preferencesdialog.cpp:43
+msgid "Transfer Default Color"
+msgstr "Colore predefinito dei trasferimenti"
+
 #: src/ui/views/shortcutsdialog.cpp:118
 msgid "Account"
 msgstr "Account"
@@ -599,16 +612,6 @@ msgstr "Selezionare un account per il trasferimento valido"
 
 #~ msgid "Currency"
 #~ msgstr "Valuta"
-
-#~ msgid ""
-#~ "Customize currency settings.\n"
-#~ "\n"
-#~ "A change in one of these settings will only be applied on newly opened "
-#~ "accounts."
-#~ msgstr ""
-#~ "Personalizza le impostazioni della valuta.\n"
-#~ "\n"
-#~ "Le modifiche saranno applicate solo agli account aperti dopo la modifica."
 
 #~ msgid "Currency Symbol"
 #~ msgstr "Simbolo della valuta"
