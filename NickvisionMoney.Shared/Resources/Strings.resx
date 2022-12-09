@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!--Use: &#xA; for newline-->
+
+	<!--Credits-->
+	<data name="TranslatorCredits" xml:space="preserve">
+	 <!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+    <value></value>
+  </data>
+
+	<!--MainWindowConroller-->
+	<data name="FolderOpened" xml:space="preserve">
+    <value>Folder Opened: {0}</value>
+  </data>
+
+	<data name="FolderClosed" xml:space="preserve">
+    <value>Folder closed.</value>
+  </data>
+
+	<!--Dialog-->
+	<data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+
+	<data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+
+	<data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+
+	<data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+
+	<!--MenuBar-->
+	<data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+
+	<data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
+
+	<data name="CloseFolder" xml:space="preserve">
+    <value>Close Folder</value>
+  </data>
+
+	<data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+
+	<data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+
+	<data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+
+	<data name="Preferences" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+
+	<data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
+
+	<data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+
+	<data name="Changelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+
+	<data name="GitHubRepo" xml:space="preserve">
+    <value>GitHub Repo</value>
+  </data>
+
+	<data name="ReportABug" xml:space="preserve">
+    <value>Report a Bug</value>
+  </data>
+
+	<data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+
+	<data name="Credits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+
+	<data name="About" xml:space="preserve">
+    <value>About {0}</value>
+  </data>
+
+	<data name="MainMenu" xml:space="preserve">
+    <value>Main Menu</value>
+  </data>
+
+	<!--CommandBar-->
+	<data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+
+	<data name="OpenFolderTooltip" xml:space="preserve">
+    <value>Open Folder (Ctrl+O)</value>
+  </data>
+
+	<data name="CloseFolderTooltip" xml:space="preserve">
+    <value>Close Folder (Ctrl+W)</value>
+  </data>
+
+	<!--NoFolderPage-->
+	<data name="NoFolderOpened" xml:space="preserve">
+    <value>No Folder Opened</value>
+  </data>
+
+	<data name="NoFolderDescription" xml:space="preserve">
+    <value>Open a folder (or drag one into the app) to get started.</value>
+  </data>
+
+	<!--LblStatus-->
+	<data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+
+	<!--RestartThemeDialog-->
+	<data name="RestartThemeTitle" xml:space="preserve">
+    <value>Restart To Apply Theme?</value>
+  </data>
+
+	<data name="RestartThemeDescription" xml:space="preserve">
+    <value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
+  </data>
+
+	<!--ChangelogDialog-->
+	<data name="ChangelogDialogTitle" xml:space="preserve">
+    <value>What's New?</value>
+  </data>
+
+	<!--CreditsDialog-->
+	<data name="CreditsDialogTitle" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+
+	<data name="CreditsDialogDescription" xml:space="preserve">
+    <value>Developers:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
+  </data>
+
+	<!--AboutDialog-->
+	<data name="AboutDialogDescription" xml:space="preserve">
+    <value>{0}&#xA;{1}&#xA;&#xA;Version: {2}&#xA;&#xA;Copyright (C) 2021-2022&#xA;All rights reserved.&#xA;Nicholas Logozzo&#xA;Nickvision</value>
+  </data>
+
+	<!--Settings-->
+	<data name="SettingsUserInterface" xml:space="preserve">
+    <value>User Interface</value>
+  </data>
+
+	<data name="SettingsUserInterfaceDescription" xml:space="preserve">
+    <value>Customize the application's user interface.</value>
+  </data>
+
+	<data name="SettingsTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+
+	<data name="SettingsThemeDescription" xml:space="preserve">
+    <value>An application restart is required to change the theme.</value>
+  </data>
+
+	<data name="SettingsThemeDescriptionGtk" xml:space="preserve">
+    <value>A theme change will be applied when the dialog is closed.</value>
+  </data>
+
+	<data name="SettingsThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+
+	<data name="SettingsThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+
+	<data name="SettingsThemeSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+</root>

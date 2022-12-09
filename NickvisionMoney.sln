@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NickvisionMoney.Shared", "NickvisionMoney.Shared\NickvisionMoney.Shared.csproj", "{6AE82815-98D8-4384-89DF-5D66736808FB}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AE82815-98D8-4384-89DF-5D66736808FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE82815-98D8-4384-89DF-5D66736808FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE82815-98D8-4384-89DF-5D66736808FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE82815-98D8-4384-89DF-5D66736808FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
