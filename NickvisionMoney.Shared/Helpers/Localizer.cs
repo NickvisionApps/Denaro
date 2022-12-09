@@ -31,7 +31,7 @@ public class Localizer
     /// </summary>
     public Localizer()
     {
-        _resourceManager = new ResourceManager("NickvisionApplication.Shared.Resources.Strings", GetType().Assembly);
+        _resourceManager = new ResourceManager("NickvisionMoney.Shared.Resources.Strings", GetType().Assembly);
         _resourceSet = _resourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true)!;
     }
 
