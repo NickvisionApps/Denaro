@@ -57,7 +57,11 @@ TransactionDialog::TransactionDialog(GtkWindow* parent, TransactionDialogControl
     //Date
     m_calendarDate = gtk_calendar_new();
     gtk_widget_set_name(m_calendarDate, "calendarTransactions");
-    g_signal_connect(m_calendarDate, "day-selected", G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
+    const std::string calendar_signals[5]{"day-selected", "next-month", "next-year", "prev-month", "prev-year"};
+    for(std::string signal : calendar_signals)
+    {
+        g_signal_connect(m_calendarDate, signal.c_str(), G_CALLBACK((void (*)(GtkCalendar*, gpointer))([](GtkCalendar*, gpointer data) { reinterpret_cast<TransactionDialog*>(data)->onDateChanged(); })), this);
+    }
     m_popoverDate = gtk_popover_new();
     gtk_popover_set_child(GTK_POPOVER(m_popoverDate), m_calendarDate);
     m_btnDate = gtk_menu_button_new();
@@ -186,7 +190,6 @@ void TransactionDialog::setResponse(const std::string& response)
 void TransactionDialog::onDateChanged()
 {
     gtk_menu_button_set_label(GTK_MENU_BUTTON(m_btnDate), g_date_time_format(gtk_calendar_get_date(GTK_CALENDAR(m_calendarDate)), "%x"));
-    gtk_popover_popdown(GTK_POPOVER(m_popoverDate));
 }
 
 void TransactionDialog::onTypeChanged()
