@@ -19,52 +19,52 @@
 	<!--Use: &#xA; for newline-->
 
   <data name="Description" xml:space="preserve">
-    <value>A personal finance manager.</value>
+    <value>Персональный менеджер финансов.</value>
   </data>
 
   <data name="Developers" xml:space="preserve">
-    <value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors on GitHub https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+    <value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Соавторы на GitHub https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
   </data>
 
 	<!--Credits-->
 	<data name="TranslatorCredits" xml:space="preserve">
 	 <!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value>Фёдор Соболев https://github.com/fsobolev</value>
   </data>
 
 	<!--MainWindowConroller-->
 
   <!--MainWindow-->
   <data name="RecentsPopover" xml:space="preserve">
-    <value>Recents</value>
+    <value>Недавние</value>
   </data>
 
   <data name="NewAccountPopover" xml:space="preserve">
-    <value>New</value>
+    <value>Новый</value>
   </data>
 
   <data name="NewAccountTooltip" xml:space="preserve">
-    <value>New Account (Ctrl+N)</value>
+    <value>Новый счёт (Ctrl+N)</value>
   </data>
 
   <data name="OpenAccountTooltip" xml:space="preserve">
-    <value>Open Account (Ctrl+O)</value>
+    <value>Открыть счёт (Ctrl+O)</value>
   </data>
 
   <data name="ButtonMenuAccountTooltip" xml:space="preserve">
-    <value>Account Menu</value>
+    <value>Меню счёта</value>
   </data>
 
   <data name="ToggleSidebarTooltip" xml:space="preserve">
-    <value>Toggle Sidebar</value>
+    <value>Переключить отображение боковой панели</value>
   </data>
 
   <data name="NewAccount" xml:space="preserve">
-    <value>New Account</value>
+    <value>Новый счёт</value>
   </data>
 
   <data name="OpenAccount" xml:space="preserve">
-    <value>Open Account</value>
+    <value>Открыть счёт</value>
   </data>
 
   <data name="CloseAccount" xml:space="preserve">
@@ -72,228 +72,228 @@
   </data>
 
   <data name="DragLabel" xml:space="preserve">
-    <value>You may also drag in a file from your file browser to open.</value>
+    <value>Вы также можете перетащить сюда файл из вашего файлового менеджера.</value>
   </data>
 
   <data name="RecentAccounts" xml:space="preserve">
-    <value>Recent Accounts</value>
+    <value>Недавние счета</value>
   </data>
 
   <data name="StartPageDescription" xml:space="preserve">
-    <value>Open or create an account to get started.</value>
+    <value>Откройте или создайте счёт, чтобы начать.</value>
   </data>
 
 	<!--Dialog-->
 	<data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Ок</value>
   </data>
 
 	<data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Да</value>
   </data>
 
 	<data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Нет</value>
   </data>
 
 	<data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отмена</value>
   </data>
 
 	<!--MenuBar-->
 	<data name="File" xml:space="preserve">
-    <value>File</value>
+    <value>Файл</value>
   </data>
 
 	<data name="OpenFolder" xml:space="preserve">
-    <value>Open Folder</value>
+    <value>Открыть папку</value>
   </data>
 
 	<data name="CloseFolder" xml:space="preserve">
-    <value>Close Folder</value>
+    <value>Закрыть папку</value>
   </data>
 
 	<data name="Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>Выход</value>
   </data>
 
 	<data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Правка</value>
   </data>
 
 	<data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
 
 	<data name="Preferences" xml:space="preserve">
-    <value>Preferences</value>
+    <value>Параметры</value>
   </data>
 
 	<data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Сочетания клавиш</value>
   </data>
 
 	<data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Помощь</value>
   </data>
 
 	<data name="Changelog" xml:space="preserve">
-    <value>Changelog</value>
+    <value>Список изменений</value>
   </data>
 
 	<data name="GitHubRepo" xml:space="preserve">
-    <value>GitHub Repo</value>
+    <value>Репозиторий GitHub</value>
   </data>
 
 	<data name="ReportABug" xml:space="preserve">
-    <value>Report a Bug</value>
+    <value>Сообщить о проблеме</value>
   </data>
 
 	<data name="Support" xml:space="preserve">
-    <value>Support</value>
+    <value>Поддержка</value>
   </data>
 
 	<data name="Credits" xml:space="preserve">
-    <value>Credits</value>
+    <value>Авторы</value>
   </data>
 
 	<data name="About" xml:space="preserve">
-    <value>About {0}</value>
+    <value>О приложении</value>
   </data>
 
 	<data name="MainMenu" xml:space="preserve">
-    <value>Main Menu</value>
+    <value>Главное меню</value>
   </data>
 
 	<!--CommandBar-->
 	<data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
 
 	<data name="OpenFolderTooltip" xml:space="preserve">
-    <value>Open Folder (Ctrl+O)</value>
+    <value>Открыть папку (Ctrl+O)</value>
   </data>
 
 	<data name="CloseFolderTooltip" xml:space="preserve">
-    <value>Close Folder (Ctrl+W)</value>
+    <value>Закрыть папку (Ctrl+W)</value>
   </data>
 
 	<!--LblStatus-->
 	<data name="Ready" xml:space="preserve">
-    <value>Ready</value>
+    <value>Готово</value>
   </data>
 
 	<!--RestartThemeDialog-->
 	<data name="RestartThemeTitle" xml:space="preserve">
-    <value>Restart To Apply Theme?</value>
+    <value>Перезапустить, чтобы применить тему?</value>
   </data>
 
 	<data name="RestartThemeDescription" xml:space="preserve">
-    <value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
+    <value>Вы хотели бы перезапустить {0}, чтобы применить новую тему?&#xA;Несохранённые данные будут утеряны.</value>
   </data>
 
 	<!--ChangelogDialog-->
 	<data name="ChangelogDialogTitle" xml:space="preserve">
-    <value>What's New?</value>
+    <value>Что нового?</value>
   </data>
 
 	<!--CreditsDialog-->
 	<data name="CreditsDialogTitle" xml:space="preserve">
-    <value>Credits</value>
+    <value>Авторы</value>
   </data>
 
 	<data name="CreditsDialogDescription" xml:space="preserve">
-    <value>Developers:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
+    <value>Разработчики:&#xA;{0}&#xA;&#xA;Дизайнеры:&#xA;{1}&#xA;&#xA;Художники:&#xA;{2}&#xA;&#xA;Переводчики:&#xA;{3}</value>
   </data>
 
 	<!--AboutDialog-->
 	<data name="AboutDialogDescription" xml:space="preserve">
-    <value>{0}&#xA;{1}&#xA;&#xA;Version: {2}&#xA;&#xA;Copyright (C) 2021-2022&#xA;All rights reserved.&#xA;Nicholas Logozzo&#xA;Nickvision</value>
+    <value>{0}&#xA;{1}&#xA;&#xA;Версия: {2}&#xA;&#xA;Copyright (C) 2021-2022&#xA;Все права защищены.&#xA;Nicholas Logozzo&#xA;Nickvision</value>
   </data>
 
 	<!--Settings-->
 	<data name="SettingsUserInterface" xml:space="preserve">
-    <value>User Interface</value>
+    <value>Интерфейс</value>
   </data>
 
 	<data name="SettingsUserInterfaceDescription" xml:space="preserve">
-    <value>Customize the application's user interface.</value>
+    <value>Настройте интерфейс приложения.</value>
   </data>
 
 	<data name="SettingsTheme" xml:space="preserve">
-    <value>Theme</value>
+    <value>Тема</value>
   </data>
 
 	<data name="SettingsThemeDescription" xml:space="preserve">
-    <value>An application restart is required to change the theme.</value>
+    <value>Перезапуск приложения потребуется для применения темы.</value>
   </data>
 
 	<data name="SettingsThemeDescriptionGtk" xml:space="preserve">
-    <value>A theme change will be applied when the dialog is closed.</value>
+    <value>Тема будет применена после закрытия диалога.</value>
   </data>
 
 	<data name="SettingsThemeLight" xml:space="preserve">
-    <value>Light</value>
+    <value>Светлая</value>
   </data>
 
 	<data name="SettingsThemeDark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Тёмная</value>
   </data>
 
 	<data name="SettingsThemeSystem" xml:space="preserve">
-    <value>System</value>
+    <value>Системная</value>
   </data>
 
   <data name="SettingsTransactionColor" xml:space="preserve">
-    <value>Transaction Default Color</value>
+    <value>Цвет транзакции по умолчанию</value>
   </data>
 
   <data name="SettingsTransferColor" xml:space="preserve">
-    <value>Transfer Default Color</value>
+    <value>Цвет по умолчанию для перевода</value>
   </data>
 
   <data name="SettingsChangeForNewTransactions" xml:space="preserve">
-    <value>A change in this setting will only be applied to newly added transactions.</value>
+    <value>Изменение этой настройки отразится только на новых транзакциях.</value>
   </data>
 
   <!--Shortcuts Dialog-->
   <data name="Account" xml:space="preserve">
-    <value>Account</value>
+    <value>Счёт</value>
   </data>
 
   <data name="AccountActions" xml:space="preserve">
-    <value>Account Actions</value>
+    <value>Действия со счётом</value>
   </data>
 
   <data name="Transfer" xml:space="preserve">
-    <value>Transfer Money</value>
+    <value>Перевод средств</value>
   </data>
 
   <data name="Export" xml:space="preserve">
-    <value>Export File</value>
+    <value>Экспорт файла</value>
   </data>
 
   <data name="Import" xml:space="preserve">
-    <value>Import File</value>
+    <value>Импорт файла</value>
   </data>
 
   <data name="Group" xml:space="preserve">
-    <value>Group</value>
+    <value>Группа</value>
   </data>
 
   <data name="NewGroup" xml:space="preserve">
-    <value>New Group</value>
+    <value>Новая группа</value>
   </data>
 
   <data name="Transaction" xml:space="preserve">
-    <value>Transaction</value>
+    <value>Транзакция</value>
   </data>
 
   <data name="NewTransaction" xml:space="preserve">
-    <value>New Transaction</value>
+    <value>Новая транзакция</value>
   </data>
 
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Приложение</value>
   </data>
 </root>

@@ -1,0 +1,56 @@
+/* Account View Calendar */
+#calendarAccount {
+  background-color: @card_bg_color;
+  border-width: 0px;
+}
+
+#calendarAccount button {
+  border-radius: 12px;
+}
+
+#calendarAccount .day-number {
+	border-radius: 12px;
+}
+
+#calendarAccount .today {
+	background-color: @headerbar_bg_color;
+	color: @warning_color;
+	box-shadow: none;
+}
+
+#calendarAccount .day-number:checked {
+  color: @accent_color;
+  font-weight: bold;
+}
+
+#calendarAccount .day-number:selected {
+  background-color: @accent_bg_color;
+  color: @fg_color;
+}
+
+#calendarAccount .other-month {
+	color: @light_5;
+	font-weight: normal;
+}
+
+#calendarAccount .other-month:checked {
+	color: @light_5;
+	font-weight: normal;
+}
+
+
+/* Transaction Dialog Calendar */
+#calendarTransactions button {
+  border-radius: 12px;
+}
+
+#calendarTransactions .day-number {
+	border-radius: 12px;
+}
+
+#calendarTransactions .today {
+	background-color: @headerbar_bg_color;
+	color: @warning_color;
+	box-shadow: none;
+}
+
