@@ -40,14 +40,6 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Adw.TabView _tabView;
     private readonly Adw.TabBar _tabBar;
 
-// m_actNewAccount{ nullptr };
-// 		GSimpleAction* m_actOpenAccount{ nullptr };
-// 		GSimpleAction* m_actCloseAccount{ nullptr };
-// 		GSimpleAction* m_actPreferences{ nullptr };
-// 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
-// 		GSimpleAction* m_actAbout{ nullptr };
-// 		GtkDropTarget* m_dropTarget{ nullptr };
-
     /// <summary>
     /// Constructs a MainWindow
     /// </summary>
@@ -74,7 +66,7 @@ public class MainWindow : Adw.ApplicationWindow
         //Account Popover
         _popoverAccount = Gtk.Popover.New();
         //Label Recents
-        _lblRecents = Gtk.Label.New(_controller.Localizer["Recents"]);
+        _lblRecents = Gtk.Label.New(_controller.Localizer["RecentsPopover"]);
         _lblRecents.AddCssClass("title-4");
         _lblRecents.SetHexpand(true);
         _lblRecents.SetHalign(Gtk.Align.Start);
@@ -87,7 +79,7 @@ public class MainWindow : Adw.ApplicationWindow
         _popBtnNewAccount = Gtk.Button.New();
         _popBtnNewAccount.AddCssClass("suggested-action");
 	_popBtnNewAccountContext = Adw.ButtonContent.New();
-	_popBtnNewAccountContext.SetLabel(_controller.Localizer["New"]);
+	_popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover"]);
 	_popBtnNewAccountContext.SetIconName("document-new-symbolic");
 	_popBtnNewAccount.SetChild(_popBtnNewAccountContext);
 	_popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccountTooltip"]);
@@ -116,7 +108,7 @@ public class MainWindow : Adw.ApplicationWindow
         _popoverAccount.SetChild(_popBoxAccount);
 	//Menu Account Button
 	_btnMenuAccount = Gtk.MenuButton.New();
-	//_btnMenuAccount.SetVisible(false);
+	_btnMenuAccount.SetVisible(false);
 	_btnMenuAccount.SetIconName("bank-symbolic");
 	_btnMenuAccount.SetPopover(_popoverAccount);
 	_btnMenuAccount.SetTooltipText(_controller.Localizer["ButtonMenuAccountTooltip"]);

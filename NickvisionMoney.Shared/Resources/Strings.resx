@@ -41,6 +41,51 @@
     <value>Folder closed.</value>
   </data>
 
+  <!--MainWindow-->
+  <data name="RecentsPopover" xml:space="preserve">
+    <value>Recents</value>
+  </data>
+
+  <data name="NewAccountPopover" xml:space="preserve">
+    <value>New</value>
+  </data>
+
+  <data name="NewAccountTooltip" xml:space="preserve">
+    <value>New Account (Ctrl+N)</value>
+  </data>
+
+  <data name="OpenAccountTooltip" xml:space="preserve">
+    <value>Open Account (Ctrl+O)</value>
+  </data>
+
+  <data name="ButtonMenuAccountTooltip" xml:space="preserve">
+    <value>Account Menu</value>
+  </data>
+
+  <data name="ToggleSidebarTooltip" xml:space="preserve">
+    <value>Toggle Sidebar</value>
+  </data>
+
+  <data name="NewAccountButton" xml:space="preserve">
+    <value>New Account</value>
+  </data>
+
+  <data name="OpenAccountButton" xml:space="preserve">
+    <value>Open Account</value>
+  </data>
+
+  <data name="DragLabel" xml:space="preserve">
+    <value>You may also drag in a file from your file browser to open.</value>
+  </data>
+
+  <data name="RecentAccounts" xml:space="preserve">
+    <value>Recent Accounts</value>
+  </data>
+
+  <data name="StartPageDescription" xml:space="preserve">
+    <value>Open or create an account to get started.</value>
+  </data>
+
 	<!--Dialog-->
 	<data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -134,15 +179,6 @@
 
 	<data name="CloseFolderTooltip" xml:space="preserve">
     <value>Close Folder (Ctrl+W)</value>
-  </data>
-
-	<!--NoFolderPage-->
-	<data name="NoFolderOpened" xml:space="preserve">
-    <value>No Folder Opened</value>
-  </data>
-
-	<data name="NoFolderDescription" xml:space="preserve">
-    <value>Open a folder (or drag one into the app) to get started.</value>
   </data>
 
 	<!--LblStatus-->
