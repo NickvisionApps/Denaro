@@ -1,5 +1,5 @@
+﻿using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
-using NickvisionMoney.Shared.Helpers;
 using System;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -12,7 +12,7 @@ public class ShortcutsDialog
     private readonly Gtk.Builder _builder;
     private readonly Gtk.ShortcutsWindow _window;
 
-    public ShortcutsDialog(Localizer localizer, Gtk.Window parent)
+    public ShortcutsDialog(MainWindowController controller, Gtk.Window parent)
     {
     	string xml = $@"<?xml version='1.0' encoding='UTF-8'?>
     <interface>
@@ -27,22 +27,22 @@ public class ShortcutsDialog
                 <object class='GtkShortcutsSection'>
                     <child>
                         <object class='GtkShortcutsGroup'>
-                            <property name='title'>{ localizer["Account"] }</property>
+                            <property name='title'>{ controller.Localizer["Account"] }</property>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["NewAccount"] }</property>
+                                    <property name='title'>{ controller.Localizer["NewAccount"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;N</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["OpenAccount"] }</property>
+                                    <property name='title'>{ controller.Localizer["OpenAccount"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;O</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["CloseAccount"] }</property>
+                                    <property name='title'>{ controller.Localizer["CloseAccount"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;W</property>
                                 </object>
                             </child>
@@ -50,22 +50,22 @@ public class ShortcutsDialog
                     </child>
                     <child>
                         <object class='GtkShortcutsGroup'>
-                            <property name='title'>{ localizer["AccountActions"] }</property>
+                            <property name='title'>{ controller.Localizer["AccountActions"] }</property>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["Transfer"] }</property>
+                                    <property name='title'>{ controller.Localizer["Transfer"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;T</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["Export"] }</property>
+                                    <property name='title'>{ controller.Localizer["Export"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;E</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["Import"] }</property>
+                                    <property name='title'>{ controller.Localizer["Import"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;I</property>
                                 </object>
                             </child>
@@ -73,10 +73,10 @@ public class ShortcutsDialog
                     </child>
                     <child>
                         <object class='GtkShortcutsGroup'>
-                            <property name='title'>{ localizer["Group"] }</property>
+                            <property name='title'>{ controller.Localizer["Group"] }</property>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["NewGroup"] }</property>
+                                    <property name='title'>{ controller.Localizer["NewGroup"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;G</property>
                                 </object>
                             </child>
@@ -84,10 +84,10 @@ public class ShortcutsDialog
                     </child>
                     <child>
                         <object class='GtkShortcutsGroup'>
-                            <property name='title'>{ localizer["Transaction"] }</property>
+                            <property name='title'>{ controller.Localizer["Transaction"] }</property>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["NewTransaction"] }</property>
+                                    <property name='title'>{ controller.Localizer["NewTransaction"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;&lt;Shift&gt;N</property>
                                 </object>
                             </child>
@@ -95,22 +95,22 @@ public class ShortcutsDialog
                     </child>
                     <child>
                         <object class='GtkShortcutsGroup'>
-                            <property name='title'>{ localizer["Application"] }</property>
+                            <property name='title'>{ controller.Localizer["Application"] }</property>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["Preferences"] }</property>
+                                    <property name='title'>{ controller.Localizer["Preferences"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;comma</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["KeyboardShortcuts"] }</property>
+                                    <property name='title'>{ controller.Localizer["KeyboardShortcuts"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;question</property>
                                 </object>
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ string.Format(localizer["About"], "") }</property>
+                                    <property name='title'>{ string.Format(controller.Localizer["About"], controller.AppInfo.ShortName) }</property>
                                     <property name='accelerator'>F1</property>
                                 </object>
                             </child>
