@@ -14,9 +14,9 @@ public class ShortcutsDialog
 
     public ShortcutsDialog(Localizer localizer, Gtk.Window parent)
     {
-    	string mXml = $@"<?xml version='1.0' encoding='UTF-8'?>
+    	string xml = $@"<?xml version='1.0' encoding='UTF-8'?>
     <interface>
-        <object class='GtkShortcutsWindow' id='mDialog'>
+        <object class='GtkShortcutsWindow' id='dialog'>
             <property name='default-width'>600</property>
             <property name='default-height'>500</property>
             <property name='modal'>true</property>
@@ -121,8 +121,8 @@ public class ShortcutsDialog
         </object>
     </interface>";
 
-        _builder = Gtk.Builder.NewFromString(mXml, -1);
-        _window = (Gtk.ShortcutsWindow)_builder.GetObject("mDialog");
+        _builder = Gtk.Builder.NewFromString(xml, -1);
+        _window = (Gtk.ShortcutsWindow)_builder.GetObject("dialog");
         _window.SetTransientFor(parent);
         _window.Show();
     }
