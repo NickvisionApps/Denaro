@@ -33,6 +33,25 @@
   </data>
 
 	<!--MainWindowConroller-->
+  <data name="GreetingNight" xml:space="preserve">
+    <value>Good Morning!</value>
+  </data>
+
+  <data name="GreetingMorning" xml:space="preserve">
+    <value>Good Morning!</value>
+  </data>
+
+  <data name="GreetingDay" xml:space="preserve">
+    <value>Good Afternoon!</value>
+  </data>
+
+  <data name="GreetingEvening" xml:space="preserve">
+    <value>Good Evening!</value>
+  </data>
+
+  <data name="Greeting" xml:space="preserve">
+    <value>Good Day!</value>
+  </data>
 
   <!--MainWindow-->
   <data name="RecentsPopover" xml:space="preserve">
