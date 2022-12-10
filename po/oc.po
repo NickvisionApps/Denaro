@@ -1,0 +1,611 @@
+# Occitan translation file.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the org.nickvision.money package.
+# Quentin PAGÈS <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: org.nickvision.money\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-07 00:30+0100\n"
+"PO-Revision-Date: 2022-12-10 14:08+0100\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language-Team: \n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: src/controllers/accountviewcontroller.cpp:85
+#, c-format
+msgid "Transfer To %s"
+msgstr "Transferir a %s"
+
+#: src/controllers/accountviewcontroller.cpp:97
+#, c-format
+msgid "Transfer From %s"
+msgstr "Transferir de %s"
+
+#: src/controllers/accountviewcontroller.cpp:113
+msgid "Exported account to CSV successfully."
+msgstr "Compte corrèctament exportat en CSV."
+
+#: src/controllers/accountviewcontroller.cpp:117
+msgid "Unable to export account as CSV."
+msgstr "Impossible d’exportar lo compte en CSV."
+
+#: src/controllers/accountviewcontroller.cpp:134
+#, c-format
+msgid "Imported %d transaction from file."
+msgid_plural "Imported %d transactions from file."
+msgstr[0] "%d transaccion importada del fichièr."
+msgstr[1] "%d transaccions importadas del fichièr."
+
+#: src/controllers/accountviewcontroller.cpp:138
+msgid "Unable to import information from the file. Unsupported file type."
+msgstr ""
+"Impossible d’importar las informacions del fichièrs. Tipe de fichièr pas "
+"pres en carga."
+
+#: src/controllers/mainwindowcontroller.cpp:49
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "Bonjorn"
+
+#: src/controllers/mainwindowcontroller.cpp:53
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "Bonjorn"
+
+#: src/controllers/mainwindowcontroller.cpp:57
+msgid "Good Afternoon!"
+msgstr "Bon aprèp-miègjorn"
+
+#: src/controllers/mainwindowcontroller.cpp:61
+msgid "Good Evening!"
+msgstr "Bonser"
+
+#: src/controllers/mainwindowcontroller.cpp:65
+msgid "Good Day!"
+msgstr "Bona jornada"
+
+#: src/controllers/transactiondialogcontroller.cpp:17
+#: src/controllers/transactiondialogcontroller.cpp:27
+msgid "None"
+msgstr "Pas cap"
+
+#: src/models/transaction.cpp:55 src/ui/views/transactiondialog.cpp:76
+msgid "Never"
+msgstr "Pas jamai"
+
+#: src/models/transaction.cpp:59 src/ui/views/transactiondialog.cpp:76
+msgid "Daily"
+msgstr "Jornalièr"
+
+#: src/models/transaction.cpp:63 src/ui/views/transactiondialog.cpp:76
+msgid "Weekly"
+msgstr "Setmanièr"
+
+#: src/models/transaction.cpp:67 src/ui/views/transactiondialog.cpp:76
+msgid "Monthly"
+msgstr "Mesadièr"
+
+#: src/models/transaction.cpp:71 src/ui/views/transactiondialog.cpp:76
+msgid "Quarterly"
+msgstr "Trimestral"
+
+#: src/models/transaction.cpp:75 src/ui/views/transactiondialog.cpp:76
+msgid "Yearly"
+msgstr "Annadièr"
+
+#: src/models/transaction.cpp:79 src/ui/views/transactiondialog.cpp:76
+msgid "Biyearly"
+msgstr "biannal"
+
+#: src/ui/application.cpp:30
+msgid "A personal finance manager."
+msgstr "Gestionari de finanças personalas."
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
+msgid "Cancel"
+msgstr "Anullar"
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/groupdialog.cpp:11 src/ui/views/transactiondialog.cpp:14
+#: src/ui/views/transferdialog.cpp:12
+msgid "OK"
+msgstr "D'acòrdi"
+
+#: src/ui/controls/grouprow.cpp:29
+msgid "Edit Group"
+msgstr "Modificar lo grop"
+
+#: src/ui/controls/grouprow.cpp:37
+msgid "Delete Group"
+msgstr "Suprimir lo grop"
+
+#: src/ui/controls/transactionrow.cpp:24
+msgid "Repeat Interval: "
+msgstr "Interval de repeticion : "
+
+#: src/ui/controls/transactionrow.cpp:60
+msgid "Edit Transaction"
+msgstr "Modificar la transaccion"
+
+#: src/ui/controls/transactionrow.cpp:68
+msgid "Delete Transaction"
+msgstr "Suprimir la transaccion"
+
+#: src/ui/views/accountview.cpp:38
+msgid "Total"
+msgstr "Total"
+
+#: src/ui/views/accountview.cpp:48
+msgid "Income"
+msgstr "Revengut"
+
+#: src/ui/views/accountview.cpp:59
+msgid "Expense"
+msgstr "Despensa"
+
+#: src/ui/views/accountview.cpp:69
+msgid "Actions"
+msgstr "Accions"
+
+#: src/ui/views/accountview.cpp:72 src/ui/views/accountview.cpp:425
+#: src/ui/views/shortcutsdialog.cpp:124
+msgid "Export as CSV"
+msgstr "Exportar en CSV"
+
+#: src/ui/views/accountview.cpp:73 src/ui/views/accountview.cpp:450
+msgid "Import from File"
+msgstr "Importar d’un fichièr"
+
+#: src/ui/views/accountview.cpp:75 src/ui/views/shortcutsdialog.cpp:123
+msgid "Transfer Money"
+msgstr "Transferir d’argent"
+
+#: src/ui/views/accountview.cpp:84
+msgid "Reset Overview Filters"
+msgstr "Reïnicializar los filtres d’apercebut"
+
+#: src/ui/views/accountview.cpp:89
+msgid "Overview"
+msgstr "Vista d'ensemble"
+
+#: src/ui/views/accountview.cpp:102
+msgctxt "Group"
+msgid "New"
+msgstr "Novèl"
+
+#: src/ui/views/accountview.cpp:103
+msgid "New Group (Ctrl+G)"
+msgstr "Grop novèl (Ctrl+G)"
+
+#: src/ui/views/accountview.cpp:110
+msgid "Reset Groups Filters"
+msgstr "Reïnicializar los filtres de grop"
+
+#: src/ui/views/accountview.cpp:115
+msgid "Groups"
+msgstr "Grops"
+
+#: src/ui/views/accountview.cpp:130
+msgid "Reset Dates Filters"
+msgstr "Reïnicializar los filtres de data"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "January"
+msgstr "Genièr"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "February"
+msgstr "Febrièr"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "March"
+msgstr "Març"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "April"
+msgstr "Abril"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "May"
+msgstr "Mai"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "June"
+msgstr "Junh"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "July"
+msgstr "Julhet"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "August"
+msgstr "Agost"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "September"
+msgstr "Setembre"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "October"
+msgstr "Octòbre"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "November"
+msgstr "Novembre"
+
+#: src/ui/views/accountview.cpp:137 src/ui/views/accountview.cpp:150
+msgid "December"
+msgstr "Decembre"
+
+#: src/ui/views/accountview.cpp:170
+msgid "Start"
+msgstr "Debuta"
+
+#: src/ui/views/accountview.cpp:174
+msgid "End"
+msgstr "Fin"
+
+#: src/ui/views/accountview.cpp:180
+msgid "Select Range"
+msgstr "Seleccionar una plaja"
+
+#: src/ui/views/accountview.cpp:189
+msgid "Calendar"
+msgstr "Calendièr"
+
+#: src/ui/views/accountview.cpp:202
+msgctxt "Transaction"
+msgid "New"
+msgstr "Novèla"
+
+#: src/ui/views/accountview.cpp:203
+msgid "New Transaction (Ctrl+Shift+N)"
+msgstr "Transaccion novèla (Ctrl+Maj+N)"
+
+#: src/ui/views/accountview.cpp:212
+msgid "Sort From Top To Bottom"
+msgstr "Triar d’en naut enbàs"
+
+#: src/ui/views/accountview.cpp:216
+msgid "Sort From Bottom To Top"
+msgstr "Triar d’enbàs en naut"
+
+#: src/ui/views/accountview.cpp:226
+msgid "Transactions"
+msgstr "Transaccions"
+
+#: src/ui/views/accountview.cpp:392
+msgid "No Transactions Found"
+msgstr "Cap de transaccion pas trobada"
+
+#: src/ui/views/accountview.cpp:393
+msgid "No transactions match the specified filters."
+msgstr "Cap de transaccion correspondenta als filtres especificats."
+
+#: src/ui/views/accountview.cpp:400
+msgid "No Transactions"
+msgstr "Cap de transaccion"
+
+#: src/ui/views/accountview.cpp:401
+msgid ""
+"Add a new transaction or import account information from file using the "
+"actions menu in the sidebar."
+msgstr ""
+"Ajustatz una transaccion novèla o importatz d’informacions de compte a "
+"partir d’un fichièr en utilizant lo menú d’accion de la barra laterala."
+
+#: src/ui/views/accountview.cpp:419
+msgid "This account has no money available to transfer."
+msgstr "Aqueste compte a cap d’argent disponible per transferir."
+
+#: src/ui/views/accountview.cpp:425 src/ui/views/mainwindow.cpp:259
+msgid "_Save"
+msgstr "_Enregistrar"
+
+#: src/ui/views/accountview.cpp:425 src/ui/views/accountview.cpp:450
+#: src/ui/views/mainwindow.cpp:259 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
+msgid "_Cancel"
+msgstr "_Anullar"
+
+#: src/ui/views/accountview.cpp:450 src/ui/views/mainwindow.cpp:295
+#: src/ui/views/transferdialog.cpp:98
+msgid "_Open"
+msgstr "_Dobrir"
+
+#: src/ui/views/accountview.cpp:453
+msgid "Supported files"
+msgstr "Fichièrs preses en carga"
+
+#: src/ui/views/accountview.cpp:527
+msgid "Delete Group?"
+msgstr "Suprimir lo grop ?"
+
+#: src/ui/views/accountview.cpp:527
+msgid ""
+"Are you sure you want to delete this group?\n"
+"This action is irreversible."
+msgstr ""
+"Volètz vertadièrament suprimir aqueste grop ?\n"
+"Aquesta accion se pòt pas anullar."
+
+#: src/ui/views/accountview.cpp:527 src/ui/views/accountview.cpp:564
+msgid "No"
+msgstr "Non"
+
+#: src/ui/views/accountview.cpp:527 src/ui/views/accountview.cpp:564
+msgid "Yes"
+msgstr "Òc "
+
+#: src/ui/views/accountview.cpp:564
+msgid "Delete Transaction?"
+msgstr "Suprimir la transaccion ?"
+
+#: src/ui/views/accountview.cpp:564
+msgid ""
+"Are you sure you want to delete this transaction?\n"
+"This action is irreversible."
+msgstr ""
+"Volètz vertadièrament suprimir aquesta transaccion ?\n"
+"Aquesta accion se pòt pas anullar."
+
+#: src/ui/views/groupdialog.cpp:7 src/ui/views/transactiondialog.cpp:83
+msgid "Group"
+msgstr "Grop"
+
+#: src/ui/views/groupdialog.cpp:21 src/ui/views/groupdialog.cpp:61
+msgid "Name"
+msgstr "Nom"
+
+#: src/ui/views/groupdialog.cpp:27 src/ui/views/groupdialog.cpp:63
+#: src/ui/views/transactiondialog.cpp:28 src/ui/views/transactiondialog.cpp:155
+msgid "Description"
+msgstr "Descripcion"
+
+#: src/ui/views/groupdialog.cpp:68
+msgid "Name (Empty)"
+msgstr "Nom (void)"
+
+#: src/ui/views/groupdialog.cpp:73 src/ui/views/transactiondialog.cpp:162
+msgid "Description (Empty)"
+msgstr "Descripcion (voida)"
+
+#: src/ui/views/groupdialog.cpp:78
+msgid "Name (Exists)"
+msgstr "Nom (existís)"
+
+#: src/ui/views/mainwindow.cpp:28
+msgid "Recents"
+msgstr "Recents"
+
+#: src/ui/views/mainwindow.cpp:41
+msgid "New"
+msgstr "Novèl"
+
+#: src/ui/views/mainwindow.cpp:44
+msgid "New Account (Ctrl+N)"
+msgstr "Compte novèl (Ctrl+N)"
+
+#: src/ui/views/mainwindow.cpp:50
+msgid "Open Account (Ctrl+O)"
+msgstr "Dobrir compte (Ctrl+O)"
+
+#: src/ui/views/mainwindow.cpp:76
+msgid "Account Menu"
+msgstr "Menú del compte"
+
+#: src/ui/views/mainwindow.cpp:83
+msgid "Toggle Sidebar"
+msgstr "Afichar o amagar lo panèl lateral"
+
+#: src/ui/views/mainwindow.cpp:88 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/shortcutsdialog.cpp:131
+msgid "Preferences"
+msgstr "Preferéncias"
+
+#: src/ui/views/mainwindow.cpp:89 src/ui/views/shortcutsdialog.cpp:132
+msgid "Keyboard Shortcuts"
+msgstr "Acorchis de clavièr"
+
+#: src/ui/views/mainwindow.cpp:90
+#, c-format
+msgid "About %s"
+msgstr "A prepaus de %s"
+
+#: src/ui/views/mainwindow.cpp:93
+msgid "Main Menu"
+msgstr "Menú principal"
+
+#: src/ui/views/mainwindow.cpp:110 src/ui/views/shortcutsdialog.cpp:119
+msgid "New Account"
+msgstr "Compte novèl"
+
+#: src/ui/views/mainwindow.cpp:118 src/ui/views/mainwindow.cpp:259
+#: src/ui/views/mainwindow.cpp:295 src/ui/views/shortcutsdialog.cpp:120
+msgid "Open Account"
+msgstr "Dobrir compte"
+
+#: src/ui/views/mainwindow.cpp:122
+msgid "You may also drag in a file from your file browser to open."
+msgstr ""
+"Podètz tanben lisar un fichièr del explorador de fichièr estant per lo "
+"dobrir."
+
+#: src/ui/views/mainwindow.cpp:133
+msgid "Recent Accounts"
+msgstr "Comptes recents"
+
+#: src/ui/views/mainwindow.cpp:147
+msgid "Open or create an account to get started."
+msgstr "Dorbissètz o creatz un compte per començar."
+
+#: src/ui/views/mainwindow.cpp:262 src/ui/views/mainwindow.cpp:298
+#: src/ui/views/transferdialog.cpp:101
+msgid "Money Account (*.nmoney)"
+msgstr "Compte bancari (*.nmoney)"
+
+#: src/ui/views/mainwindow.cpp:275
+msgid "Unable to override an opened account."
+msgstr "Impossible de subrecargar un compte dobèrt."
+
+#: src/ui/views/preferencesdialog.cpp:20
+msgid "User Interface"
+msgstr "Interfàcia utilizaire"
+
+#: src/ui/views/preferencesdialog.cpp:21
+msgid "Customize the application's user interface."
+msgstr "Personalizatz l’interfàcia utilizaire"
+
+#: src/ui/views/preferencesdialog.cpp:24
+msgid "Theme"
+msgstr "Tèma"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "System"
+msgstr "Sistèma"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Light"
+msgstr "Clar"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Dark"
+msgstr "Escur"
+
+#: src/ui/views/preferencesdialog.cpp:33
+msgid "Transaction Default Color"
+msgstr "Color per defaut de las transaccions"
+
+#: src/ui/views/preferencesdialog.cpp:34 src/ui/views/preferencesdialog.cpp:44
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr ""
+"Una modifcacion d’aqueste paramètre s’aplicarà sonque a las transaccions "
+"apondudas recentament."
+
+#: src/ui/views/preferencesdialog.cpp:43
+msgid "Transfer Default Color"
+msgstr "Color per defaut dels transferiments"
+
+#: src/ui/views/shortcutsdialog.cpp:118
+msgid "Account"
+msgstr "Compte"
+
+#: src/ui/views/shortcutsdialog.cpp:121
+msgid "Close Account"
+msgstr "Tampar lo compte"
+
+#: src/ui/views/shortcutsdialog.cpp:122
+msgid "Account Actions"
+msgstr "Accions sul compte"
+
+#: src/ui/views/shortcutsdialog.cpp:125
+msgid "Import from CSV"
+msgstr "Importar d’un CSV"
+
+#: src/ui/views/shortcutsdialog.cpp:126
+msgctxt "Shortcuts"
+msgid "Group"
+msgstr "Grop"
+
+#: src/ui/views/shortcutsdialog.cpp:127
+msgid "New Group"
+msgstr "Grop novèl"
+
+#: src/ui/views/shortcutsdialog.cpp:128
+msgid "Transaction"
+msgstr "Transaccion"
+
+#: src/ui/views/shortcutsdialog.cpp:129
+msgid "New Transaction"
+msgstr "Transaccion novèla"
+
+#: src/ui/views/shortcutsdialog.cpp:130
+msgid "Application"
+msgstr "Aplicacion"
+
+#: src/ui/views/shortcutsdialog.cpp:133
+msgid "About"
+msgstr "A prepaus"
+
+#: src/ui/views/transactiondialog.cpp:19
+#, c-format
+msgid "Transaction - %s"
+msgstr "Transaccion – %s"
+
+#: src/ui/views/transactiondialog.cpp:33 src/ui/views/transactiondialog.cpp:157
+#: src/ui/views/transferdialog.cpp:39 src/ui/views/transferdialog.cpp:72
+msgid "Amount"
+msgstr "Soma"
+
+#: src/ui/views/transactiondialog.cpp:37
+msgctxt "Transaction|Edition"
+msgid "Income"
+msgstr "Revengut"
+
+#: src/ui/views/transactiondialog.cpp:39
+msgctxt "Transaction|Edition"
+msgid "Expense"
+msgstr "Despensas"
+
+#: src/ui/views/transactiondialog.cpp:49
+msgid "Type"
+msgstr "Tipe"
+
+#: src/ui/views/transactiondialog.cpp:69
+msgid "Date"
+msgstr "Data"
+
+#: src/ui/views/transactiondialog.cpp:75
+msgid "Repeat Interval"
+msgstr "Interval de repeticion"
+
+#: src/ui/views/transactiondialog.cpp:96
+msgid "Color"
+msgstr "Color"
+
+#: src/ui/views/transactiondialog.cpp:167
+msgid "Amount (Empty)"
+msgstr "Soma (voida)"
+
+#: src/ui/views/transactiondialog.cpp:172 src/ui/views/transferdialog.cpp:82
+msgid "Amount (Invalid)"
+msgstr "Soma (invalida)"
+
+#: src/ui/views/transferdialog.cpp:7
+msgid "Transfer"
+msgstr "Transferir"
+
+#: src/ui/views/transferdialog.cpp:11
+msgid ""
+"Transferring money will create an expense transaction with the given amount "
+"in this account and an income transaction with the given amount in the "
+"account to transfer to."
+msgstr ""
+"Lo transferiment d'argent debitarà del montant donat aquel compte e "
+"creditarà d’aqueste montant lo compte causit."
+
+#: src/ui/views/transferdialog.cpp:21
+msgid "No Account Selected"
+msgstr "Cap de compte pas seleccionat"
+
+#: src/ui/views/transferdialog.cpp:29 src/ui/views/transferdialog.cpp:98
+msgid "Select Account"
+msgstr "Seleccionar un compte"
+
+#: src/ui/views/transferdialog.cpp:33 src/ui/views/transferdialog.cpp:70
+msgid "Transfer Account"
+msgstr "Transferir lo compte"
+
+#: src/ui/views/transferdialog.cpp:77
+msgid "Transfer Account (Invalid)"
+msgstr "Transferir lo compte (invalid)"
