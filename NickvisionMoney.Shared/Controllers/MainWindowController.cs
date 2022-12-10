@@ -122,28 +122,31 @@ public class MainWindowController
     /// <summary>
     /// Get the string for greeting on the start screen
     /// </summary>
-    public string getWelcomeMessage()
+    public string WelcomeMessage
     {
-        int timeNowHours = DateTime.Now.Hour;
-        if(timeNowHours >= 0 && timeNowHours < 6)
-        {
-            return Localizer["GreetingNight"];
-        }
-        else if(timeNowHours >= 6 && timeNowHours < 12)
-        {
-            return Localizer["GreetingMorning"];
-        }
-        else if(timeNowHours >= 12 && timeNowHours < 18)
-        {
-            return Localizer["GreetingDay"];
-        }
-        else if(timeNowHours >= 18 && timeNowHours < 24)
-        {
-            return Localizer["GreetingEvening"];
-        }
-        else
-        {
-            return Localizer["Greeting"];
-        }
+    	get
+    	{
+	        int timeNowHours = DateTime.Now.Hour;
+	        if(timeNowHours >= 0 && timeNowHours < 6)
+	        {
+	            return Localizer["GreetingNight"];
+	        }
+	        else if(timeNowHours >= 6 && timeNowHours < 12)
+	        {
+	            return Localizer["GreetingMorning"];
+	        }
+	        else if(timeNowHours >= 12 && timeNowHours < 18)
+	        {
+	            return Localizer["GreetingDay"];
+	        }
+	        else if(timeNowHours >= 18 && timeNowHours < 24)
+	        {
+	            return Localizer["GreetingEvening"];
+	        }
+	        else
+	        {
+	            return Localizer["Greeting"];
+	        }
+	    }
     }
 }

@@ -176,7 +176,7 @@ public class MainWindow : Adw.ApplicationWindow
 	//Page No Accounts
 	_pageStatusNoAccounts = Adw.StatusPage.New();
 	_pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
-	_pageStatusNoAccounts.SetTitle(_controller.getWelcomeMessage());
+	_pageStatusNoAccounts.SetTitle(_controller.WelcomeMessage);
 	_pageStatusNoAccounts.SetDescription(_controller.Localizer["StartPageDescription"]);
 	_pageStatusNoAccounts.SetChild(_boxStatusPage);
 	//Page Tabs
