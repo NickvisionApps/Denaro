@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/nickvision/money">
+    <file alias="style.css">NickvisionMoney.GNOME/Resources/org.nickvision.money.css</file>
+  </gresource>
+</gresources>

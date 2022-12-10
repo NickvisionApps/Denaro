@@ -1,0 +1,128 @@
+[
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm/7.0.0/microsoft.aspnetcore.app.runtime.linux-arm.7.0.0.nupkg",
+		"sha512": "fe68af4fac5062db9b9be6a298a577f3a1cc70e218d05d1e98ea47fa2536e10977033d38c995daf90da2035bbe275c2e2c163ff639ee7adfaf094fd166a39933",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm64/7.0.0/microsoft.aspnetcore.app.runtime.linux-arm64.7.0.0.nupkg",
+		"sha512": "1c3ea618c23823c54f6fa82799b8743c4e919e1fa1196d18402e547faaafb52a4d6e2131ddef6092dc71a308e8f7bcd3feac825565cec112705dacf88b1f7e57",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm64.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-x64/7.0.0/microsoft.aspnetcore.app.runtime.linux-x64.7.0.0.nupkg",
+		"sha512": "285817dc47116766e8f3279c0c6b7add76e1c362ed455b7d03790874bb4fab70f0507a31747a109a8afa3b80215b9c463a3d245e80ba14ee896114ef44f8892d",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.aspnetcore.app.runtime.linux-x64.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm/7.0.0/microsoft.netcore.app.runtime.linux-arm.7.0.0.nupkg",
+		"sha512": "7860233cc8030f239a9a8fe3c5963cd19efc4b8fe25527230e84491b1c7b5d2ddfa6ad85f494c711f50a84bc1b4d9c6a6196ffce8df757b6487e592fa00640c2",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.netcore.app.runtime.linux-arm.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm64/7.0.0/microsoft.netcore.app.runtime.linux-arm64.7.0.0.nupkg",
+		"sha512": "b0970c968b230486964549a6665d90c69c8e38f44471f02d83ecf2bba1e76c162bd383abffbf2779b515413486ceba0507d234f41b690d961a5975c41ce6f437",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.netcore.app.runtime.linux-arm64.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-x64/7.0.0/microsoft.netcore.app.runtime.linux-x64.7.0.0.nupkg",
+		"sha512": "0d2c0cd4a669b753abebb2edaf65b9fd277836b029d6f945bc95f98ed487221b462f9a82dc199dd08c5b12f1f15134531e208fcad5931c426f9fdba6ab068786",
+		"dest": "nuget-sources",
+		"dest-filename": "microsoft.netcore.app.runtime.linux-x64.7.0.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.adw-1/0.1.0/gircore.adw-1.0.1.0.nupkg",
+		"sha512": "64d6ba4f3cbf4fc67bcbd7903f30492b735d2e39aeca2dcf1734ac22c5eb3f76dcfb6de8bc06328d47d2a2da19376a123a600e97bfa78ebf47006f375e352e40",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.adw-1.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.cairo-1.0/0.1.0/gircore.cairo-1.0.0.1.0.nupkg",
+		"sha512": "12fd330b325c05b5b6302a38f59c7399bbcc6bccc41eac8b521229f6a99aa9905e2fedc3cff771adb1df7c4a71032d53f24445bc2150fe8eca5560227d930705",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.cairo-1.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gdk-4.0/0.1.0/gircore.gdk-4.0.0.1.0.nupkg",
+		"sha512": "26ecc6ebb8957110fe62bcd1c3bec732203eca710cb1ba713a84baa0295ca624b26cef1d57bab11141d53f3696f4c6e85ab2bf6d45461bae7fe93ec035b37683",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gdk-4.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gdkpixbuf-2.0/0.1.0/gircore.gdkpixbuf-2.0.0.1.0.nupkg",
+		"sha512": "b1d70ee74f507b5dbb46959dfcfb50c83ab9fa5e97fab87ca1837b4026d2343bfae12a4df5fae5a7a06e952e37b6f4a23b651ac0060a4ebba925366b154a7d07",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gdkpixbuf-2.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gio-2.0/0.1.0/gircore.gio-2.0.0.1.0.nupkg",
+		"sha512": "092029964c9fd3cbfed4b4062dbe10d128b09a3120ed30f1d3e749a60bd8532dea2386bae829f55645c31bbf2b58a1a32f6ec9e122e293a99e451488ec405d62",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gio-2.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.glib-2.0/0.1.0/gircore.glib-2.0.0.1.0.nupkg",
+		"sha512": "641e4ab0a3ab2c30e66ca755ee8a675d384f23cbb4fe3c32dde1188a8cf5e0b5695e3965e401034cdbc262314f4abacc1e72cbb5113cc182231206ce0204cc50",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.glib-2.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gobject-2.0/0.1.0/gircore.gobject-2.0.0.1.0.nupkg",
+		"sha512": "7faedec30ced327e49450b5b57faed6d95a551bf956e84d2ace05636ad7103e9661ade0d61f3cf6e14fc574554debdb48cc678cacfc320fda65d3377a879fca6",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gobject-2.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.graphene-1.0/0.1.0/gircore.graphene-1.0.0.1.0.nupkg",
+		"sha512": "216e2542d05dbaf99292ac96c96e508ac6c4ebcccde339c94cefd389bf311898c9a9e1855f2e129245b87df7295a71386193adf8d42f8f888d38d4bb868e39ab",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.graphene-1.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gsk-4.0/0.1.0/gircore.gsk-4.0.0.1.0.nupkg",
+		"sha512": "1b7ca3dd816d8ae6f243cdbcf79aab3147db75d1114ca83a06afd8832753fbe5a738f37f69ce6d0a1925bdbd66ddeb2887a0ce218e3df5d86b1b5a1a610fd898",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gsk-4.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.gtk-4.0/0.1.0/gircore.gtk-4.0.0.1.0.nupkg",
+		"sha512": "5fe1e16364940094387161655ff6115f85875a21db4eb4ad5e4a071dd74cd13d0cd462a264ce319d23471797bf3928c6b68c824f25adc24571ad6c23ee704adc",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.gtk-4.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.harfbuzz-0.0/0.1.0/gircore.harfbuzz-0.0.0.1.0.nupkg",
+		"sha512": "3b70507860d2af8c10f06dccf5b1aba351b97716ca7e19f2904c29dd9bd4a573b6b50a3b78c7530f03825a2f5b92d0b821db3e0569db940316d305ed2080f1af",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.harfbuzz-0.0.0.1.0.nupkg"
+	},
+	{
+		"type": "file",
+		"url": "https://api.nuget.org/v3-flatcontainer/gircore.pango-1.0/0.1.0/gircore.pango-1.0.0.1.0.nupkg",
+		"sha512": "4d2fa4b36cdc9756c601a8919e153a5237dc72d36609edccae190e961f546b5b556f3f0c7116ddac725c33ae4a37bdcc3a1aeec3f7635c0f27270c1dd45f24bb",
+		"dest": "nuget-sources",
+		"dest-filename": "gircore.pango-1.0.0.1.0.nupkg"
+	}
+]
