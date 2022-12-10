@@ -54,22 +54,7 @@
                 "dotnet publish -c Release --source ./nuget-sources NickvisionMoney.GNOME/NickvisionMoney.GNOME.csproj --runtime $RUNTIME --self-contained true",
                 "mkdir -p /app/opt/org.nickvision.money",
                 "cp -r --remove-destination /run/build/org.nickvision.money/NickvisionMoney.GNOME/bin/Release/net7.0/$RUNTIME/publish/* /app/opt/org.nickvision.money/",
-                "mkdir -p /app/share/icons/hicolor/scalable/apps",
-                "cp NickvisionMoney.Shared/Resources/org.nickvision.money.svg /app/share/icons/hicolor/scalable/apps/",
-                "cp NickvisionMoney.Shared/Resources/org.nickvision.money-devel.svg /app/share/icons/hicolor/scalable/apps/",
-                "mkdir -p /app/share/icons/hicolor/symbolic/apps",
-                "cp NickvisionMoney.Shared/Resources/bank-symbolic.svg /app/share/icons/hicolor/symbolic/apps/",
-                "cp NickvisionMoney.Shared/Resources/larger-brush-symbolic.svg /app/share/icons/hicolor/symbolic/apps/",
-                "cp NickvisionMoney.Shared/Resources/money-none-symbolic.svg /app/share/icons/hicolor/symbolic/apps/",
-                "cp NickvisionMoney.Shared/Resources/org.nickvision.money-symbolic.svg /app/share/icons/hicolor/symbolic/apps/",
-                "cp NickvisionMoney.Shared/Resources/wallet2-symbolic.svg /app/share/icons/hicolor/symbolic/apps/",
-                "mkdir -p /app/share/org.nickvision.money",
-                "glib-compile-resources NickvisionMoney.GNOME/Resources/org.nickvision.money.gresource.xml",
-                "mv NickvisionMoney.GNOME/Resources/org.nickvision.money.gresource /app/share/org.nickvision.money/",
-                "mkdir -p /app/share/applications",
-                "cp NickvisionMoney.GNOME/org.nickvision.money.desktop /app/share/applications/",
-                "mkdir -p /app/share/metainfo",
-                "cp NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml /app/share/metainfo/"
+                "NickvisionMoney.GNOME/install.sh /app"
 	    ],
             "sources": [
                 "sources.json",
