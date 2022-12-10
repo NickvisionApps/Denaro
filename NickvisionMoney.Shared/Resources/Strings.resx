@@ -18,6 +18,10 @@
 
 	<!--Use: &#xA; for newline-->
 
+	<data name="Description" xml:space="preserve">
+    <value>A personal finance manager.</value>
+  </data>
+
 	<!--Credits-->
 	<data name="TranslatorCredits" xml:space="preserve">
 	 <!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
