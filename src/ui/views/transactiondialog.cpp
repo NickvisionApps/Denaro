@@ -197,12 +197,16 @@ void TransactionDialog::onTypeChanged()
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(m_btnIncome)))
     {
         gtk_widget_add_css_class(m_btnIncome, "success");
+        gtk_widget_add_css_class(m_btnIncome, "money-income");
         gtk_widget_remove_css_class(m_btnExpense, "error");
+        gtk_widget_remove_css_class(m_btnExpense, "money-expense");
     }
     else
     {
         gtk_widget_remove_css_class(m_btnIncome, "success");
+        gtk_widget_remove_css_class(m_btnIncome, "money-income");
         gtk_widget_add_css_class(m_btnExpense, "error");
+        gtk_widget_add_css_class(m_btnExpense, "money-expense");
     }
 }
 

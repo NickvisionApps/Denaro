@@ -51,7 +51,9 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     std::string amount{ MoneyHelpers::boostMoneyToLocaleString(m_transaction.getAmount(), locale) };
     amount.insert(0, m_transaction.getType() == TransactionType::Income ? "+  " : "-  ");
     m_lblAmount = gtk_label_new(amount.c_str());
+    gtk_widget_set_valign(m_lblAmount, GTK_ALIGN_CENTER);
     gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "success" : "error");
+    gtk_widget_add_css_class(m_lblAmount, m_transaction.getType() == TransactionType::Income ? "money-income" : "money-expense");
     //Edit Button
     m_btnEdit = gtk_button_new();
     gtk_widget_set_valign(m_btnEdit, GTK_ALIGN_CENTER);
