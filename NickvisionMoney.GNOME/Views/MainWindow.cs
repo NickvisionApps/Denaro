@@ -140,14 +140,14 @@ public class MainWindow : Adw.ApplicationWindow
         _boxStatusButtons.SetHexpand(true);
         _boxStatusButtons.SetHalign(Gtk.Align.Center);
         //New Account Button
-        _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccountButton"]);
+        _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
         _btnNewAccount.SetSizeRequest(200, 50);
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _boxStatusButtons.Append(_btnNewAccount);
         //Open Account Button
-        _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccountButton"]);
+        _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
@@ -238,6 +238,7 @@ public class MainWindow : Adw.ApplicationWindow
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, this);
+        shortcutsDialog.Show();
     }
 
     /// <summary>
@@ -248,22 +249,18 @@ public class MainWindow : Adw.ApplicationWindow
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
         var aboutWindow = Gtk.AboutDialog.New();
-        aboutWindow.SetModal(true);
         aboutWindow.SetTransientFor(this);
+        aboutWindow.SetModal(true);
         aboutWindow.SetProgramName(_controller.AppInfo.ShortName);
         aboutWindow.SetLogoIconName(_controller.AppInfo.ID);
         aboutWindow.SetVersion(_controller.AppInfo.Version);
         aboutWindow.SetComments(_controller.AppInfo.Description);
         aboutWindow.SetLicenseType(Gtk.License.Gpl30);
         aboutWindow.SetCopyright("© Nickvision 2021-2022");
-        aboutWindow.SetWebsite(Convert.ToString(_controller.AppInfo.GitHubRepo));
+        aboutWindow.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
         aboutWindow.SetAuthors(_controller.Localizer["Developers"].Split(Environment.NewLine));
         aboutWindow.SetArtists(new string[2] { "Nicholas Logozzo https://github.com/nlogozzo", "Fyodor Sobolev https://github.com/fsobolev" });
-        string translatorCredits = _controller.Localizer["TranslatorCredits"];
-        if(translatorCredits.Length > 0)
-        {
-            aboutWindow.SetTranslatorCredits(translatorCredits);
-        }
-        aboutWindow.Present();
+        aboutWindow.SetTranslatorCredits(_controller.Localizer["TranslatorCredits"].Length > 0 ? _controller.Localizer["TranslatorCredits"] : null);
+        aboutWindow.Show();
     }
 }

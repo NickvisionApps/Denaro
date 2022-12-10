@@ -59,12 +59,16 @@
     <value>Toggle Sidebar</value>
   </data>
 
-  <data name="NewAccountButton" xml:space="preserve">
+  <data name="NewAccount" xml:space="preserve">
     <value>New Account</value>
   </data>
 
-  <data name="OpenAccountButton" xml:space="preserve">
+  <data name="OpenAccount" xml:space="preserve">
     <value>Open Account</value>
+  </data>
+
+  <data name="CloseAccount" xml:space="preserve">
+    <value>Close Account</value>
   </data>
 
   <data name="DragLabel" xml:space="preserve">
@@ -253,67 +257,43 @@
   </data>
 
   <!--Shortcuts Dialog-->
-  <data name="ShortcutsAccount" xml:space="preserve">
+  <data name="Account" xml:space="preserve">
     <value>Account</value>
   </data>
 
-  <data name="ShortcutsNewAccount" xml:space="preserve">
-    <value>New Account</value>
-  </data>
-
-  <data name="ShortcutsOpenAccount" xml:space="preserve">
-    <value>Open Account</value>
-  </data>
-
-  <data name="ShortcutsCloseAccount" xml:space="preserve">
-    <value>Close Account</value>
-  </data>
-
-  <data name="ShortcutsAccountActions" xml:space="preserve">
+  <data name="AccountActions" xml:space="preserve">
     <value>Account Actions</value>
   </data>
 
-  <data name="ShortcutsTransfer" xml:space="preserve">
+  <data name="Transfer" xml:space="preserve">
     <value>Transfer Money</value>
   </data>
 
-  <data name="ShortcutsExport" xml:space="preserve">
+  <data name="Export" xml:space="preserve">
     <value>Export File</value>
   </data>
 
-  <data name="ShortcutsImport" xml:space="preserve">
+  <data name="Import" xml:space="preserve">
     <value>Import File</value>
   </data>
 
-  <data name="ShortcutsGroup" xml:space="preserve">
+  <data name="Group" xml:space="preserve">
     <value>Group</value>
   </data>
 
-  <data name="ShortcutsNewGroup" xml:space="preserve">
+  <data name="NewGroup" xml:space="preserve">
     <value>New Group</value>
   </data>
 
-  <data name="ShortcutsTransaction" xml:space="preserve">
+  <data name="Transaction" xml:space="preserve">
     <value>Transaction</value>
   </data>
 
-  <data name="ShortcutsNewTransaction" xml:space="preserve">
+  <data name="NewTransaction" xml:space="preserve">
     <value>New Transaction</value>
   </data>
 
-  <data name="ShortcutsApplication" xml:space="preserve">
+  <data name="Application" xml:space="preserve">
     <value>Application</value>
-  </data>
-
-  <data name="ShortcutsPreferences" xml:space="preserve">
-    <value>Preferences</value>
-  </data>
-
-  <data name="ShortcutsShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
-  </data>
-
-  <data name="ShortcutsAbout" xml:space="preserve">
-    <value>About</value>
   </data>
 </root>
