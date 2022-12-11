@@ -259,28 +259,103 @@ public class Account : IDisposable
     /// </summary>
     public void Dispose() => _database.Dispose();
 
+    /// <summary>
+    /// Gets a Group object by its id
+    /// </summary>
+    /// <param name="id">The id of the Group</param>
+    /// <returns>The Group object if found, else null</returns>
     public Group? GetGroupById(uint id)
     {
+        foreach(var pair in Groups)
+        {
+            if(pair.Key == id)
+            {
+                return pair.Value;
+            }
+        }
         return null;
     }
 
+    /// <summary>
+    /// Adds a group to the account
+    /// </summary>
+    /// <param name="group">The group to add</param>
+    /// <returns>True if successful, else false</returns>
     public bool AddGroup(Group group)
     {
+        var cmdAddGroup = _database.CreateCommand();
+        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description) VALUES ($id, $name, $description)";
+        cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
+        cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
+        if(cmdAddGroup.ExecuteNonQuery() > 0)
+        {
+            Groups.Add(group.Id, group);
+            return true;
+        }
         return false;
     }
 
+    /// <summary>
+    /// Updates a group in the account
+    /// </summary>
+    /// <param name="group">The group to update</param>
+    /// <returns>True if successful, else false</returns>
     public bool UpdateGroup(Group group)
     {
+        var cmdUpdateGroup = _database.CreateCommand();
+        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description WHERE id = $id";
+        cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
+        if(cmdUpdateGroup.ExecuteNonQuery() > 0)
+        {
+            Groups[group.Id] = group;
+            return true;
+        }
         return false;
     }
 
+    /// <summary>
+    /// Delets a group from the account
+    /// </summary>
+    /// <param name="id">The id of the group to delete</param>
+    /// <returns>True if successful, else false</returns>
     public bool DeleteGroup(uint id)
     {
+        var cmdDeleteGroup = _database.CreateCommand();
+        cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
+        cmdDeleteGroup.Parameters.AddWithValue("$id", id);
+        if (cmdDeleteGroup.ExecuteNonQuery() > 0)
+        {
+            Groups.Remove(id);
+            foreach(var pair in Transactions)
+            {
+                if(pair.Value.GroupId == id)
+                {
+                    pair.Value.GroupId = -1;
+                    UpdateTransaction(pair.Value);
+                }
+            }
+            return true;
+        }
         return false;
     }
 
+    /// <summary>
+    /// Gets a Transaction object by its id
+    /// </summary>
+    /// <param name="id">The id of the Transaction</param>
+    /// <returns>The Transaction object if found, else null</returns>
     public Transaction? GetTransactionById(uint id)
     {
+        foreach (var pair in Transactions)
+        {
+            if (pair.Key == id)
+            {
+                return pair.Value;
+            }
+        }
         return null;
     }
 
@@ -324,8 +399,17 @@ public class Account : IDisposable
         return 0;
     }
 
+    /// <summary>
+    /// Updates the amount of each Group object in the account
+    /// </summary>
     private void UpdateGroupAmounts()
     {
-
+        var cmdQueryGroupBalance = _database.CreateCommand();
+        cmdQueryGroupBalance.CommandText = "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;";
+        using var readQueryGroupBalance = cmdQueryGroupBalance.ExecuteReader();
+        while(readQueryGroupBalance.Read())
+        {
+            Groups[(uint)readQueryGroupBalance.GetInt32(0)].Balance = readQueryGroupBalance.GetDecimal(1);
+        }
     }
 }
