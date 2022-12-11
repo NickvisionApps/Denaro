@@ -2,6 +2,7 @@
 using NickvisionMoney.Shared.Events;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -32,6 +33,7 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Adw.StatusPage _pageStatusNoAccounts;
     private readonly Gtk.Box _boxStatusPage;
     private readonly Gtk.Label _lblRecentAccounts;
+    private readonly List<Adw.ActionRow> _listRecentAccountsRows;
     private readonly Gtk.ListBox _listRecentAccountsOnStart;
     private readonly Gtk.Box _boxStatusButtons;
     private readonly Gtk.Button _btnNewAccount;
@@ -40,6 +42,11 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Gtk.Box _pageTabs;
     private readonly Adw.TabView _tabView;
     private readonly Adw.TabBar _tabBar;
+    //private readonly List<AccountView> _accountViews;
+    private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _actNewAccount;
+    private readonly Gio.SimpleAction _actOpenAccount;
+    private readonly Gio.SimpleAction _actCloseAccount;
 
     /// <summary>
     /// Constructs a MainWindow
@@ -98,6 +105,7 @@ public class MainWindow : Adw.ApplicationWindow
         _listRecentAccounts = Gtk.ListBox.New();
         _listRecentAccounts.AddCssClass("boxed-list");
         _listRecentAccounts.SetSizeRequest(200, 55);
+        _listRecentAccounts.OnSelectedRowsChanged += OnListRecentAccountsSelectionChanged;
         //Account Popover Box
         _popBoxAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         _popBoxAccount.SetMarginStart(5);
@@ -174,6 +182,7 @@ public class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsOnStart.AddCssClass("boxed-list");
         _listRecentAccountsOnStart.SetSizeRequest(200, 55);
         _listRecentAccountsOnStart.SetMarginBottom(24);
+        _listRecentAccountsOnStart.OnSelectedRowsChanged += OnListRecentAccountsOnStartSelectionChanged;
         //Page No Accounts
         _pageStatusNoAccounts = Adw.StatusPage.New();
         _pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
@@ -196,6 +205,22 @@ public class MainWindow : Adw.ApplicationWindow
         SetContent(_mainBox);
         //Register Events
         _controller.NotificationSent += NotificationSent;
+        //New Account Action
+        _actNewAccount = Gio.SimpleAction.New("newAccount", null);
+        _actNewAccount.OnActivate += OnNewAccount;
+        AddAction(_actNewAccount);
+        application.SetAccelsForAction("win.newAccount", new string[] { "<Ctrl>N" });
+        //Open Account Action
+        _actOpenAccount = Gio.SimpleAction.New("openAccount", null);
+        _actOpenAccount.OnActivate += OnOpenAccount;
+        AddAction(_actOpenAccount);
+        application.SetAccelsForAction("win.openAccount", new string[] { "<Ctrl>O" });
+        //Close Account Action
+        _actCloseAccount = Gio.SimpleAction.New("closeAccount", null);
+        _actCloseAccount.OnActivate += OnCloseAccount;
+        AddAction(_actCloseAccount);
+        application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
+        _actCloseAccount.SetEnabled(false);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -211,6 +236,13 @@ public class MainWindow : Adw.ApplicationWindow
         actAbout.OnActivate += About;
         AddAction(actAbout);
         application.SetAccelsForAction("win.about", new string[] { "F1" });
+        //Drop Target
+        // _dropTarget = Gtk.DropTarget.New(GLib.Type.File, Gdk.DragAction.Copy);
+        // _dropTarget.OnCurrentDrop += OnDrop;
+        // AddController(_dropTarget);
+        //Initialize additional variables
+        _listRecentAccountsRows = new List<Adw.ActionRow> {};
+        // _accountViews = new List<AccountView> {};
     }
 
     /// <summary>
@@ -242,6 +274,38 @@ public class MainWindow : Adw.ApplicationWindow
     /// <param name="sender">object?</param>
     /// <param name="e">NotificationSentEventArgs</param>
     private void NotificationSent(object? sender, NotificationSentEventArgs e) => _toastOverlay.AddToast(Adw.Toast.New(e.Message));
+
+    private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
+    {
+        _popoverAccount.Popdown();
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        saveFileDialog.SetModal(true);
+        var filter = Gtk.FileFilter.New();
+        filter.SetName(_controller.Localizer["NMoneyFilter"]);
+        filter.AddPattern("*.nmoney");
+        saveFileDialog.AddFilter(filter);
+        //saveFileDialog.OnResponse +=
+        saveFileDialog.Show();
+    }
+
+    private void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
+    {
+        _popoverAccount.Popdown();
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        openFileDialog.SetModal(true);
+        var filter = Gtk.FileFilter.New();
+        filter.SetName(_controller.Localizer["NMoneyFilter"]);
+        filter.AddPattern("*.nmoney");
+        openFileDialog.AddFilter(filter);
+        //openFileDialog.OnResponse +=
+        openFileDialog.Show();
+    }
+
+    private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
+    {
+        _popoverAccount.Popdown();
+        _tabView.ClosePage(_tabView.GetSelectedPage());
+    }
 
     /// <summary>
     /// Occurs when the preferences action is triggered
@@ -286,5 +350,71 @@ public class MainWindow : Adw.ApplicationWindow
         aboutWindow.SetArtists(new string[2] { "Nicholas Logozzo https://github.com/nlogozzo", "Fyodor Sobolev https://github.com/fsobolev" });
         aboutWindow.SetTranslatorCredits(string.IsNullOrEmpty(_controller.Localizer["TranslatorCredits"]) ? null : _controller.Localizer["TranslatorCredits"]);
         aboutWindow.Show();
+    }
+
+    private bool OnDrop(GObject.Value dropValue, EventArgs e)
+    {
+        var file = (Gio.File)dropValue.GetObject();
+        var path = file.GetPath();
+        if(Path.GetExtension(path) == ".nmoney")
+        {
+            _controller.AddAccount(path);
+            return true;
+        }
+        return false;
+    }
+
+    private bool OnCloseAccountPage(Adw.TabPage page)
+    {
+        var indexPage = _tabView.GetPagePosition(page);
+        _controller.CloseAccount(indexPage);
+        //_accountViews.RemoveAt(indexPage);
+        _tabView.ClosePageFinish(page, true);
+        _windowTitle.SetSubtitle(_controller.GetNumberOfOpenAccounts() == 1 ? _controller.GetFirstOpenAccountPath() : null);
+        if(_controller.GetNumberOfOpenAccounts() == 0)
+        {
+            _actCloseAccount.SetEnabled(false);
+            _viewStack.SetVisibleChildName("pageNoAccounts");
+        }
+        return true;
+    }
+
+    private void updateRecentAccounts()
+    {
+        foreach(var row in _listRecentAccountsRows)
+        {
+            _listRecentAccounts.Remove(row);
+        }
+        _listRecentAccountsRows.Clear();
+        foreach(var recentAccountPath in _controller.RecentAccounts)
+        {
+            var row = Adw.ActionRow.New();
+            row.SetTitle(Path.GetFileName(recentAccountPath));
+            row.SetSubtitle(recentAccountPath);
+            row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
+            _listRecentAccounts.Append(row);
+            _listRecentAccountsRows.Add(row);
+        }
+    }
+
+    private void OnListRecentAccountsSelectionChanged(Gtk.Widget sender, EventArgs e)
+    {
+        var selectedRow = (Adw.ActionRow)_listRecentAccounts.GetSelectedRow();
+        if(selectedRow != null)
+        {
+            _popoverAccount.Popdown();
+            _controller.AddAccount(selectedRow.GetSubtitle());
+            _listRecentAccounts.UnselectAll();
+        }
+    }
+
+    private void OnListRecentAccountsOnStartSelectionChanged(Gtk.Widget sender, EventArgs e)
+    {
+        var selectedRow = (Adw.ActionRow)_listRecentAccountsOnStart.GetSelectedRow();
+        if(selectedRow != null)
+        {
+            _controller.AddAccount(selectedRow.GetSubtitle());
+            _listRecentAccountsOnStart.UnselectAll();
+        }
     }
 }

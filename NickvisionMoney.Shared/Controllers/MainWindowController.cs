@@ -14,6 +14,7 @@ namespace NickvisionMoney.Shared.Controllers;
 public class MainWindowController
 {
     private bool _isOpened;
+    private List<string> _openAccounts;
 
     /// <summary>
     /// The localizer to get translated strings from
@@ -63,6 +64,7 @@ public class MainWindowController
     public MainWindowController()
     {
         _isOpened = false;
+        _openAccounts = new List<string> {};
         Localizer = new Localizer();
         FolderPath = "No Folder Opened";
     }
@@ -75,19 +77,19 @@ public class MainWindowController
         get
         {
             var timeNowHours = DateTime.Now.Hour;
-            if (timeNowHours >= 0 && timeNowHours < 6)
+            if(timeNowHours >= 0 && timeNowHours < 6)
             {
                 return Localizer["GreetingNight"];
             }
-            else if (timeNowHours >= 6 && timeNowHours < 12)
+            else if(timeNowHours >= 6 && timeNowHours < 12)
             {
                 return Localizer["GreetingMorning"];
             }
-            else if (timeNowHours >= 12 && timeNowHours < 18)
+            else if(timeNowHours >= 12 && timeNowHours < 18)
             {
                 return Localizer["GreetingDay"];
             }
-            else if (timeNowHours >= 18 && timeNowHours < 24)
+            else if(timeNowHours >= 18 && timeNowHours < 24)
             {
                 return Localizer["GreetingEvening"];
             }
@@ -103,53 +105,29 @@ public class MainWindowController
     /// </summary>
     public void Startup()
     {
-        if (!_isOpened)
+        if(!_isOpened)
         {
             _isOpened = false;
         }
     }
 
-    /// <summary>
-    /// Opens a folder
-    /// </summary>
-    /// <param name="folderPath">The path of the folder to open</param>
-    /// <returns>True if folder opened, else false</returns>
-    public bool OpenFolder(string folderPath)
+    public void AddAccount(string path)
     {
-        if (Directory.Exists(folderPath))
+        if(Path.GetExtension(path) != ".nmoney")
         {
-            FolderPath = folderPath;
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(Localizer["FolderOpened"], FolderPath), NotificationSeverity.Success));
-            FolderChanged?.Invoke(this, EventArgs.Empty);
-            return true;
+            path += ".nmoney";
         }
-        return false;
+        if(!_openAccounts.Contains(path))
+        {
+            _openAccounts.Add(path);
+            Configuration.Current.AddRecentAccount(path);
+            Configuration.Current.Save();
+        }
     }
 
-    /// <summary>
-    /// Closes the folder
-    /// </summary>
-    public void CloseFolder()
-    {
-        FolderPath = "No Folder Opened";
-        NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["FolderClosed"], NotificationSeverity.Warning));
-        FolderChanged?.Invoke(this, EventArgs.Empty);
-    }
+    public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
 
-    public async Task<List<string>?> GetFilesInFolderAsync()
-    {
-        if (IsFolderOpened)
-        {
-            var files = new List<string>();
-            await Task.Run(() =>
-            {
-                foreach (var path in Directory.EnumerateFiles(FolderPath, "*", SearchOption.AllDirectories))
-                {
-                    files.Add(Path.GetFileName(path));
-                }
-            });
-            return files;
-        }
-        return null;
-    }
+    public int GetNumberOfOpenAccounts() => _openAccounts.Count;
+
+    public string GetFirstOpenAccountPath() => _openAccounts[0];
 }
