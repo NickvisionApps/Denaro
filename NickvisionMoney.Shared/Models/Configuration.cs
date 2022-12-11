@@ -20,6 +20,21 @@ public class Configuration
     public Theme Theme { get; set; }
 
     /// <summary>
+    /// The first recent account
+    /// </summary>
+    public string RecentAccount1 { get; set; }
+
+    /// <summary>
+    /// The second recent account
+    /// </summary>
+    public string RecentAccount2 { get; set; }
+
+    /// <summary>
+    /// The third recent account
+    /// </summary>
+    public string RecentAccount3 { get; set; }
+
+    /// <summary>
     /// Occurs when the configuration is saved to disk
     /// </summary>
     public event EventHandler? Saved;
@@ -34,6 +49,9 @@ public class Configuration
             Directory.CreateDirectory(ConfigDir);
         }
         Theme = Theme.System;
+        RecentAccount1 = "";
+        RecentAccount2 = "";
+        RecentAccount3 = "";
     }
 
     /// <summary>

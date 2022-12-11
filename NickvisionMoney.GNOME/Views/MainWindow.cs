@@ -1,6 +1,7 @@
 ﻿using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using System;
+using System.IO;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -78,13 +79,13 @@ public class MainWindow : Adw.ApplicationWindow
         //Account Popover New Account Button
         _popBtnNewAccount = Gtk.Button.New();
         _popBtnNewAccount.AddCssClass("suggested-action");
-	_popBtnNewAccountContext = Adw.ButtonContent.New();
-	_popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover"]);
-	_popBtnNewAccountContext.SetIconName("document-new-symbolic");
-	_popBtnNewAccount.SetChild(_popBtnNewAccountContext);
-	_popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccountTooltip"]);
-	_popBoxButtons.Append(_popBtnNewAccount);
-	//Account Popover Open Account Button
+        _popBtnNewAccountContext = Adw.ButtonContent.New();
+        _popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover"]);
+        _popBtnNewAccountContext.SetIconName("document-new-symbolic");
+        _popBtnNewAccount.SetChild(_popBtnNewAccountContext);
+        _popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccountTooltip"]);
+        _popBoxButtons.Append(_popBtnNewAccount);
+        //Account Popover Open Account Button
         _popBtnOpenAccount = Gtk.Button.New();
         _popBtnOpenAccount.SetIconName("document-open-symbolic");
         _popBtnOpenAccount.SetTooltipText(_controller.Localizer["OpenAccountTooltip"]);
@@ -106,21 +107,21 @@ public class MainWindow : Adw.ApplicationWindow
         _popBoxAccount.Append(_popBoxHeader);
         _popBoxAccount.Append(_listRecentAccounts);
         _popoverAccount.SetChild(_popBoxAccount);
-	//Menu Account Button
-	_btnMenuAccount = Gtk.MenuButton.New();
-	_btnMenuAccount.SetVisible(false);
-	_btnMenuAccount.SetIconName("bank-symbolic");
-	_btnMenuAccount.SetPopover(_popoverAccount);
-	_btnMenuAccount.SetTooltipText(_controller.Localizer["ButtonMenuAccountTooltip"]);
-	_headerBar.PackStart(_btnMenuAccount);
-	//Flap Toggle Button
-	_btnFlapToggle = Gtk.ToggleButton.New();
-	_btnFlapToggle.SetVisible(false);
-	_btnFlapToggle.SetActive(true);
-	_btnFlapToggle.SetIconName("sidebar-show-symbolic");
-	_btnFlapToggle.SetTooltipText(_controller.Localizer["ToggleSidebarTooltip"]);
-	_headerBar.PackStart(_btnFlapToggle);
-	//Menu Help Button
+        //Menu Account Button
+        _btnMenuAccount = Gtk.MenuButton.New();
+        _btnMenuAccount.SetVisible(false);
+        _btnMenuAccount.SetIconName("bank-symbolic");
+        _btnMenuAccount.SetPopover(_popoverAccount);
+        _btnMenuAccount.SetTooltipText(_controller.Localizer["ButtonMenuAccountTooltip"]);
+        _headerBar.PackStart(_btnMenuAccount);
+        //Flap Toggle Button
+        _btnFlapToggle = Gtk.ToggleButton.New();
+        _btnFlapToggle.SetVisible(false);
+        _btnFlapToggle.SetActive(true);
+        _btnFlapToggle.SetIconName("sidebar-show-symbolic");
+        _btnFlapToggle.SetTooltipText(_controller.Localizer["ToggleSidebarTooltip"]);
+        _headerBar.PackStart(_btnFlapToggle);
+        //Menu Help Button
         _btnMenuHelp = Gtk.MenuButton.New();
         var menuHelp = Gio.Menu.New();
         menuHelp.Append(_controller.Localizer["Preferences"], "win.preferences");
@@ -165,27 +166,27 @@ public class MainWindow : Adw.ApplicationWindow
         _boxStatusPage.Append(_lblDrag);
         //Recent Accounts Label
         _lblRecentAccounts = Gtk.Label.New(_controller.Localizer["RecentAccounts"]);
-	_lblRecentAccounts.AddCssClass("title-4");
-	_lblRecentAccounts.SetHexpand(true);
-	_lblRecentAccounts.SetHalign(Gtk.Align.Start);
-	//List Recent Accounts On The Start Screen
-	_listRecentAccountsOnStart = Gtk.ListBox.New();
-	_listRecentAccountsOnStart.AddCssClass("boxed-list");
-	_listRecentAccountsOnStart.SetSizeRequest(200, 55);
-	_listRecentAccountsOnStart.SetMarginBottom(24);
-	//Page No Accounts
-	_pageStatusNoAccounts = Adw.StatusPage.New();
-	_pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
-	_pageStatusNoAccounts.SetTitle(_controller.WelcomeMessage);
-	_pageStatusNoAccounts.SetDescription(_controller.Localizer["StartPageDescription"]);
-	_pageStatusNoAccounts.SetChild(_boxStatusPage);
-	//Page Tabs
-	_pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
-	_tabView = Adw.TabView.New();
-	_tabBar = Adw.TabBar.New();
-	_tabBar.SetView(_tabView);
-	_pageTabs.Append(_tabBar);
-	_pageTabs.Append(_tabView);
+        _lblRecentAccounts.AddCssClass("title-4");
+        _lblRecentAccounts.SetHexpand(true);
+        _lblRecentAccounts.SetHalign(Gtk.Align.Start);
+        //List Recent Accounts On The Start Screen
+        _listRecentAccountsOnStart = Gtk.ListBox.New();
+        _listRecentAccountsOnStart.AddCssClass("boxed-list");
+        _listRecentAccountsOnStart.SetSizeRequest(200, 55);
+        _listRecentAccountsOnStart.SetMarginBottom(24);
+        //Page No Accounts
+        _pageStatusNoAccounts = Adw.StatusPage.New();
+        _pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
+        _pageStatusNoAccounts.SetTitle(_controller.WelcomeMessage);
+        _pageStatusNoAccounts.SetDescription(_controller.Localizer["StartPageDescription"]);
+        _pageStatusNoAccounts.SetChild(_boxStatusPage);
+        //Page Tabs
+        _pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
+        _tabView = Adw.TabView.New();
+        _tabBar = Adw.TabBar.New();
+        _tabBar.SetView(_tabView);
+        _pageTabs.Append(_tabBar);
+        _pageTabs.Append(_tabView);
         //View Stack
         _viewStack = Adw.ViewStack.New();
         _viewStack.AddNamed(_pageStatusNoAccounts, "pageNoAccounts");
@@ -210,6 +211,29 @@ public class MainWindow : Adw.ApplicationWindow
         actAbout.OnActivate += About;
         AddAction(actAbout);
         application.SetAccelsForAction("win.about", new string[] { "F1" });
+    }
+
+    /// <summary>
+    /// Starts the MainWindow
+    /// </summary>
+    public void Start()
+    {
+        Show();
+        if(_controller.RecentAccounts.Length > 0)
+        {
+            foreach(string accountPath in _controller.RecentAccounts)
+            {
+                Adw.ActionRow row = Adw.ActionRow.New();
+                row.SetTitle(Path.GetFileName(accountPath));
+                row.SetSubtitle(accountPath);
+                row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
+                _listRecentAccountsOnStart.Append(row);
+            }
+            _pageStatusNoAccounts.SetDesciption("");
+            _boxStatusPage.Prepend(_listRecentAccountsOnStart);
+            _boxStatusPage.Prepend(_lblRecentAccounts);
+            _boxStatusPage.SetMarginTop(24);
+        }
     }
 
     /// <summary>

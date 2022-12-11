@@ -149,4 +149,28 @@ public class MainWindowController
 	        }
 	    }
     }
+
+    /// <summary>
+    /// A list of the recent accounts
+    /// </summary>
+    public string[] RecentAccounts
+    {
+        get
+        {
+            List<string> recentAccounts = new List<string>();
+            if(File.Exists(@Configuration.Current.RecentAccount1))
+            {
+                recentAccounts.Add(Configuration.Current.RecentAccount1);
+            }
+            if(File.Exists(@Configuration.Current.RecentAccount2))
+            {
+                recentAccounts.Add(Configuration.Current.RecentAccount2);
+            }
+            if(File.Exists(@Configuration.Current.RecentAccount3))
+            {
+                recentAccounts.Add(Configuration.Current.RecentAccount3);
+            }
+            return recentAccounts.ToArray();
+        }
+    }
 }

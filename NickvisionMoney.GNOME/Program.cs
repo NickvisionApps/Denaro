@@ -64,6 +64,6 @@ public class Program
         //Main Window
         var mainWindow = new MainWindow(mainWindowController, _application);
         _application.AddWindow(mainWindow);
-        mainWindow.Show();
+        mainWindow.Start();
     }
 }
