@@ -8,7 +8,7 @@ fi
 echo Install prefix: $INSTALL_PREFIX
 
 SOURCE_PREFIX="."
-if [ ${PWD##*/} == "Nickvision.GNOME" ]
+if [ ${PWD##*/} == "NickvisionMoney.GNOME" ]
 then
 	SOURCE_PREFIX=".."
 fi
