@@ -54,7 +54,7 @@ public class PreferencesDialog : Adw.Window
         //Theme Row
         _rowTheme = Adw.ComboRow.New();
         _rowTheme.SetTitle(_controller.Localizer["SettingsTheme"]);
-        _rowTheme.SetSubtitle(_controller.Localizer["SettingThemeDescriptionGtk"]);
+        _rowTheme.SetSubtitle(_controller.Localizer["SettingsThemeDescriptionGtk"]);
         _rowTheme.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["SettingsThemeLight"], _controller.Localizer["SettingsThemeDark"], _controller.Localizer["SettingsThemeSystem"] }));
         _grpUserInterface.Add(_rowTheme);
         //Transaction Color Row
