@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace NickvisionMoney.Shared.Models;
@@ -369,7 +370,7 @@ public class Account : IDisposable
         var cmdAddTransaction = _database.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString());
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToLongDateString());
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
@@ -394,7 +395,7 @@ public class Account : IDisposable
         var cmdUpdateTransaction = _database.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString());
+        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToLongDateString());
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
@@ -434,12 +435,55 @@ public class Account : IDisposable
 
     public int ImportFromFile(string path)
     {
-        return 0;
+        if(!System.IO.Path.Exists(path))
+        {
+            return -1;
+        }
+        if(System.IO.Path.GetExtension(path) == ".csv")
+        {
+            return ImportFromCSV(path);
+        }
+        else if(System.IO.Path.GetExtension(path) == ".ofc")
+        {
+            return ImportFromOFX(path);
+        }
+        else if(System.IO.Path.GetExtension(path) == ".qif")
+        {
+            return ImportFromQIF(path);
+        }
+        return -1;
     }
 
+    /// <summary>
+    /// Exports the account to a CSV file
+    /// </summary>
+    /// <param name="path">The path to the CSV file</param>
+    /// <returns>True if successful, else false</returns>
     public bool ExportToCSV(string path)
     {
-        return false;
+        string result = "";
+        result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
+        foreach(var pair in Transactions)
+        {
+            result += $"{pair.Value.Id};{pair.Value.Date.ToLongDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            if(pair.Value.GroupId != -1)
+            {
+                result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
+            }
+            else
+            {
+                result += ";\n";
+            }
+        }
+        try
+        {
+            File.WriteAllText(path, result);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private int ImportFromCSV(string path)
