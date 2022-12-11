@@ -23,7 +23,6 @@ public class MainWindowController
     /// The path of the folder opened
     /// </summary>
     public string FolderPath { get; private set; }
-
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -40,6 +39,10 @@ public class MainWindowController
     /// The prefered theme of the application
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
+    /// <summary>
+    /// The list of recent accounts
+    /// </summary>
+    public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
     /// <summary>
     /// Whether or not the folder is opened
     /// </summary>
@@ -148,29 +151,5 @@ public class MainWindowController
 	            return Localizer["Greeting"];
 	        }
 	    }
-    }
-
-    /// <summary>
-    /// A list of the recent accounts
-    /// </summary>
-    public string[] RecentAccounts
-    {
-        get
-        {
-            List<string> recentAccounts = new List<string>();
-            if(File.Exists(@Configuration.Current.RecentAccount1))
-            {
-                recentAccounts.Add(Configuration.Current.RecentAccount1);
-            }
-            if(File.Exists(@Configuration.Current.RecentAccount2))
-            {
-                recentAccounts.Add(Configuration.Current.RecentAccount2);
-            }
-            if(File.Exists(@Configuration.Current.RecentAccount3))
-            {
-                recentAccounts.Add(Configuration.Current.RecentAccount3);
-            }
-            return recentAccounts.ToArray();
-        }
     }
 }

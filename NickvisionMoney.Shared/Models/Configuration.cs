@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -18,21 +19,18 @@ public class Configuration
     /// The preferred theme for the application
     /// </summary>
     public Theme Theme { get; set; }
-
     /// <summary>
     /// The first recent account
     /// </summary>
-    public string RecentAccount1 { get; set; }
-
+    public string RecentAccount1 { get; private set; }
     /// <summary>
     /// The second recent account
     /// </summary>
-    public string RecentAccount2 { get; set; }
-
+    public string RecentAccount2 { get; private set; }
     /// <summary>
     /// The third recent account
     /// </summary>
-    public string RecentAccount3 { get; set; }
+    public string RecentAccount3 { get; private set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -77,11 +75,67 @@ public class Configuration
     }
 
     /// <summary>
+    /// Gets the list of recent accounts available
+    /// </summary>
+    public List<string> RecentAccounts
+    {
+        get
+        {
+            var recents = new List<string>();
+            if (File.Exists(RecentAccount1))
+            {
+                recents.Add(RecentAccount1);
+            }
+            if (File.Exists(RecentAccount2))
+            {
+                recents.Add(RecentAccount2);
+            }
+            if (File.Exists(RecentAccount3))
+            {
+                recents.Add(RecentAccount3);
+            }
+            return recents;
+        }
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
     public void Save()
     {
         File.WriteAllText(ConfigPath, JsonSerializer.Serialize(this));
         Saved?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Adds a recent account
+    /// </summary>
+    /// <param name="newRecentAccount">The path to the new recent account</param>
+    public void AddRecentAccount(string newRecentAccount)
+    {
+        if (newRecentAccount == RecentAccount1)
+        {
+            return;
+        }
+        else if (newRecentAccount == RecentAccount2)
+        {
+            var temp = RecentAccount1;
+            RecentAccount1 = RecentAccount2;
+            RecentAccount2 = temp;
+        }
+        else if (newRecentAccount == RecentAccount3)
+        {
+            var temp1 = RecentAccount1;
+            var temp2 = RecentAccount2;
+            RecentAccount1 = RecentAccount3;
+            RecentAccount2 = temp1;
+            RecentAccount3 = temp2;
+        }
+        else
+        {
+            RecentAccount3 = RecentAccount2;
+            RecentAccount2 = RecentAccount1;
+            RecentAccount1 = newRecentAccount;
+        }
     }
 }

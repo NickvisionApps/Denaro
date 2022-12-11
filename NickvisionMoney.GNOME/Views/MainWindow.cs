@@ -219,11 +219,11 @@ public class MainWindow : Adw.ApplicationWindow
     public void Start()
     {
         Show();
-        if(_controller.RecentAccounts.Length > 0)
+        if(_controller.RecentAccounts.Count > 0)
         {
-            foreach(string accountPath in _controller.RecentAccounts)
+            foreach(var accountPath in _controller.RecentAccounts)
             {
-                Adw.ActionRow row = Adw.ActionRow.New();
+                var row = Adw.ActionRow.New();
                 row.SetTitle(Path.GetFileName(accountPath));
                 row.SetSubtitle(accountPath);
                 row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
