@@ -1,8 +1,8 @@
-﻿using NickvisionMoney.Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -22,15 +22,30 @@ public class Configuration
     /// <summary>
     /// The first recent account
     /// </summary>
+    [JsonInclude]
     public string RecentAccount1 { get; private set; }
     /// <summary>
     /// The second recent account
     /// </summary>
+    [JsonInclude]
     public string RecentAccount2 { get; private set; }
     /// <summary>
     /// The third recent account
     /// </summary>
+    [JsonInclude]
     public string RecentAccount3 { get; private set; }
+    /// <summary>
+    /// Whether or not to sort transactions from first created to last created
+    /// </summary>
+    public bool SortFirstToLast { get; set; }
+    /// <summary>
+    /// The default color of a transaction
+    /// </summary>
+    public string TransactionDefaultColor { get; set; }
+    /// <summary>
+    /// The default color of a transfer
+    /// </summary>
+    public string TransferDefaultColor { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -50,6 +65,9 @@ public class Configuration
         RecentAccount1 = "";
         RecentAccount2 = "";
         RecentAccount3 = "";
+        SortFirstToLast = true;
+        TransactionDefaultColor = "rgb(53,132,228)";
+        TransferDefaultColor = "rgb(192,97,203)";
     }
 
     /// <summary>
