@@ -91,11 +91,13 @@ public class MainWindow : Adw.ApplicationWindow
         _popBtnNewAccountContext.SetIconName("document-new-symbolic");
         _popBtnNewAccount.SetChild(_popBtnNewAccountContext);
         _popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccountTooltip"]);
+        _popBtnNewAccount.SetDetailedActionName("win.newAccount");
         _popBoxButtons.Append(_popBtnNewAccount);
         //Account Popover Open Account Button
         _popBtnOpenAccount = Gtk.Button.New();
         _popBtnOpenAccount.SetIconName("document-open-symbolic");
         _popBtnOpenAccount.SetTooltipText(_controller.Localizer["OpenAccountTooltip"]);
+        _popBtnOpenAccount.SetDetailedActionName("win.openAccount");
         _popBoxButtons.Append(_popBtnOpenAccount);
         //Account Popover Header Box
         _popBoxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 10);
@@ -155,12 +157,14 @@ public class MainWindow : Adw.ApplicationWindow
         _btnNewAccount.SetSizeRequest(200, 50);
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
+        _btnNewAccount.SetDetailedActionName("win.newAccount");
         _boxStatusButtons.Append(_btnNewAccount);
         //Open Account Button
         _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
+        _btnOpenAccount.SetDetailedActionName("win.openAccount");
         _boxStatusButtons.Append(_btnOpenAccount);
         //Drag Label
         _lblDrag = Gtk.Label.New(_controller.Localizer["DragLabel"]);
@@ -207,6 +211,8 @@ public class MainWindow : Adw.ApplicationWindow
         SetContent(_mainBox);
         //Register Events
         _controller.NotificationSent += NotificationSent;
+        //Account Added Callback
+        _controller.AccountAddedCallback = OnAccountAdded;
         //New Account Action
         _actNewAccount = Gio.SimpleAction.New("newAccount", null);
         _actNewAccount.OnActivate += OnNewAccount;
@@ -268,7 +274,6 @@ public class MainWindow : Adw.ApplicationWindow
             _boxStatusPage.Prepend(_lblRecentAccounts);
             _boxStatusPage.SetMarginTop(24);
         }
-        updateRecentAccounts();
     }
 
     /// <summary>
@@ -278,6 +283,24 @@ public class MainWindow : Adw.ApplicationWindow
     /// <param name="e">NotificationSentEventArgs</param>
     private void NotificationSent(object? sender, NotificationSentEventArgs e) => _toastOverlay.AddToast(Adw.Toast.New(e.Message));
 
+    /// <summary>
+    /// Occurs when an account is created or opened
+    /// </summary>
+    private void OnAccountAdded()
+    {
+        _actCloseAccount.SetEnabled(true);
+        _viewStack.SetVisibleChildName("pageTabs");
+        _windowTitle.SetSubtitle(_controller.GetNumberOfOpenAccounts() == 1 ? _controller.GetFirstOpenAccountPath() : null);
+        updateRecentAccounts();
+        _btnMenuAccount.SetVisible(true);
+        _btnFlapToggle.SetVisible(true);
+    }
+
+    /// <summary>
+    /// Creates a new account
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
@@ -291,6 +314,11 @@ public class MainWindow : Adw.ApplicationWindow
         saveFileDialog.Show();
     }
 
+    /// <summary>
+    /// Opens a new account
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
@@ -304,10 +332,13 @@ public class MainWindow : Adw.ApplicationWindow
         openFileDialog.Show();
     }
 
+    /// <summary>
+    /// Closes an opened account
+    /// </summary>
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        _tabView.ClosePage(_tabView.GetSelectedPage());
+        _tabView.ClosePage(_tabView.GetSelectedPage()); // FS: CRASH
     }
 
     /// <summary>
@@ -355,6 +386,11 @@ public class MainWindow : Adw.ApplicationWindow
         aboutWindow.Show();
     }
 
+    /// <summary>
+    /// Occurs when the preferences action is triggered
+    /// </summary>
+    /// <param name="dropValue">GObject.Value</param>
+    /// <param name="e">EventArgs</param>
     private bool OnDrop(GObject.Value dropValue, EventArgs e)
     {
         var file = (Gio.File)dropValue.GetObject();
@@ -367,6 +403,10 @@ public class MainWindow : Adw.ApplicationWindow
         return false;
     }
 
+    /// <summary>
+    /// Occurs when an account page is closing
+    /// </summary>
+    /// <param name="page">Adw.TabPage</param>
     private bool OnCloseAccountPage(Adw.TabPage page)
     {
         var indexPage = _tabView.GetPagePosition(page);
@@ -378,10 +418,15 @@ public class MainWindow : Adw.ApplicationWindow
         {
             _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");
+            _btnMenuAccount.SetVisible(false);
+            _btnFlapToggle.SetVisible(false);
         }
-        return true;
+        return true; // FS: I didn't find how to use GDK_EVENT_STOP, but it equals to true anyway
     }
 
+    /// <summary>
+    /// Updates the list of recent accounts
+    /// </summary>
     private void updateRecentAccounts()
     {
         foreach(var row in _listRecentAccountsRows)
@@ -400,6 +445,11 @@ public class MainWindow : Adw.ApplicationWindow
         }
     }
 
+    /// <summary>
+    /// Occurs when listRecentAccounts's selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Widget</param>
+    /// <param name="e">EventArgs</param>
     private void OnListRecentAccountsSelectionChanged(Gtk.Widget sender, EventArgs e)
     {
         var selectedRow = (Adw.ActionRow)_listRecentAccounts.GetSelectedRow();
@@ -411,6 +461,11 @@ public class MainWindow : Adw.ApplicationWindow
         }
     }
 
+    /// <summary>
+    /// Occurs when listRecentAccountsOnStart's selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Widget</param>
+    /// <param name="e">EventArgs</param>
     private void OnListRecentAccountsOnStartSelectionChanged(Gtk.Widget sender, EventArgs e)
     {
         var selectedRow = (Adw.ActionRow)_listRecentAccountsOnStart.GetSelectedRow();

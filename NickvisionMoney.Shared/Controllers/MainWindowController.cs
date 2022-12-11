@@ -45,9 +45,9 @@ public class MainWindowController
     /// </summary>
     public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
     /// <summary>
-    /// Whether or not the folder is opened
+    /// A callback for adding an account to the UI
     /// </summary>
-    public bool IsFolderOpened => FolderPath != "No Folder Opened";
+    public Action AccountAddedCallback;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -111,6 +111,10 @@ public class MainWindowController
         }
     }
 
+    /// <summary>
+    /// Adds an account to the list of opened accounts
+    /// </summary>
+    /// <param name="path">string</param>
     public void AddAccount(string path)
     {
         if(Path.GetExtension(path) != ".nmoney")
@@ -122,12 +126,23 @@ public class MainWindowController
             _openAccounts.Add(path);
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
+            AccountAddedCallback();
         }
     }
 
+    /// <summary>
+    /// Closes the account with the provided index
+    /// </summary>
+    /// <param name="index">int</param>
     public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
 
+    /// <summary>
+    /// Gets the number of accounts opened
+    /// </summary>
     public int GetNumberOfOpenAccounts() => _openAccounts.Count;
 
+    /// <summary>
+    /// Gets the path of the first opened account
+    /// </summary>
     public string GetFirstOpenAccountPath() => _openAccounts[0];
 }
