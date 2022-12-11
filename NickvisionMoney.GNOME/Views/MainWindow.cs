@@ -103,6 +103,7 @@ public class MainWindow : Adw.ApplicationWindow
         _popBoxHeader.Append(_popBoxButtons);
         //List Recent Accounts
         _listRecentAccounts = Gtk.ListBox.New();
+        _listRecentAccounts.SetSelectionMode(Gtk.SelectionMode.Multiple); // workaround crash on unselecting
         _listRecentAccounts.AddCssClass("boxed-list");
         _listRecentAccounts.SetSizeRequest(200, 55);
         _listRecentAccounts.OnSelectedRowsChanged += OnListRecentAccountsSelectionChanged;
@@ -179,6 +180,7 @@ public class MainWindow : Adw.ApplicationWindow
         _lblRecentAccounts.SetHalign(Gtk.Align.Start);
         //List Recent Accounts On The Start Screen
         _listRecentAccountsOnStart = Gtk.ListBox.New();
+        _listRecentAccountsOnStart.SetSelectionMode(Gtk.SelectionMode.Multiple); // workaround crash on unselecting
         _listRecentAccountsOnStart.AddCssClass("boxed-list");
         _listRecentAccountsOnStart.SetSizeRequest(200, 55);
         _listRecentAccountsOnStart.SetMarginBottom(24);
@@ -266,6 +268,7 @@ public class MainWindow : Adw.ApplicationWindow
             _boxStatusPage.Prepend(_lblRecentAccounts);
             _boxStatusPage.SetMarginTop(24);
         }
+        updateRecentAccounts();
     }
 
     /// <summary>
@@ -404,7 +407,7 @@ public class MainWindow : Adw.ApplicationWindow
         {
             _popoverAccount.Popdown();
             _controller.AddAccount(selectedRow.GetSubtitle());
-            _listRecentAccounts.UnselectAll();
+            _listRecentAccounts.UnselectRow(selectedRow);
         }
     }
 
@@ -414,7 +417,7 @@ public class MainWindow : Adw.ApplicationWindow
         if(selectedRow != null)
         {
             _controller.AddAccount(selectedRow.GetSubtitle());
-            _listRecentAccountsOnStart.UnselectAll();
+            _listRecentAccountsOnStart.UnselectRow(selectedRow);
         }
     }
 }
