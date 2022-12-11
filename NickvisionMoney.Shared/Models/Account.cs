@@ -359,18 +359,76 @@ public class Account : IDisposable
         return null;
     }
 
+    /// <summary>
+    /// Adds a transaction to the account
+    /// </summary>
+    /// <param name="transaction">The transaction to add</param>
+    /// <returns>True if successful, else false</returns>
     public bool AddTransaction(Transaction transaction)
     {
+        var cmdAddTransaction = _database.CreateCommand();
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba)";
+        cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString());
+        cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
+        cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
+        cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
+        cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
+        cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
+        cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        if (cmdAddTransaction.ExecuteNonQuery() > 0)
+        {
+            Transactions.Add(transaction.Id, transaction);
+            return true;
+        }
         return false;
     }
 
+    /// <summary>
+    /// Updates a transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <returns>True if successful, else false</returns>
     public bool UpdateTransaction(Transaction transaction)
     {
+        var cmdUpdateTransaction = _database.CreateCommand();
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba WHERE id = $id";
+        cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
+        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString());
+        cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
+        cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
+        cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
+        cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
+        cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        if (cmdUpdateTransaction.ExecuteNonQuery() > 0)
+        {
+            Transactions[transaction.Id] = transaction;
+            return true;
+        }
         return false;
     }
 
+    /// <summary>
+    /// The transaction to delete from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    /// <returns>True if successful, else false</returns>
     public bool DeleteTransaction(uint id)
     {
+        var cmdDeleteTransaction = _database.CreateCommand();
+        cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
+        cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
+        if (cmdDeleteTransaction.ExecuteNonQuery() > 0)
+        {
+            var updateGroups = Transactions[id].GroupId != -1;
+            Transactions.Remove(id);
+            if(updateGroups)
+            {
+                UpdateGroupAmounts();
+            }
+            return true;
+        }
         return false;
     }
 
