@@ -8,7 +8,7 @@ public class Group
     /// <summary>
     /// The id of the group
     /// </summary>
-    public uint Id { get; set; }
+    public uint Id { get; init; }
     /// <summary>
     /// The name of the group
     /// </summary>
