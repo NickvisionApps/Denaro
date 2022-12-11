@@ -229,7 +229,7 @@ public class MainWindow : Adw.ApplicationWindow
                 row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
                 _listRecentAccountsOnStart.Append(row);
             }
-            _pageStatusNoAccounts.SetDesciption("");
+            _pageStatusNoAccounts.SetDescription("");
             _boxStatusPage.Prepend(_listRecentAccountsOnStart);
             _boxStatusPage.Prepend(_lblRecentAccounts);
             _boxStatusPage.SetMarginTop(24);
