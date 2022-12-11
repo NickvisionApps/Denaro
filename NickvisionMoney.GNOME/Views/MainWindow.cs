@@ -284,7 +284,7 @@ public class MainWindow : Adw.ApplicationWindow
         aboutWindow.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
         aboutWindow.SetAuthors(_controller.Localizer["Developers"].Split(Environment.NewLine));
         aboutWindow.SetArtists(new string[2] { "Nicholas Logozzo https://github.com/nlogozzo", "Fyodor Sobolev https://github.com/fsobolev" });
-        aboutWindow.SetTranslatorCredits(_controller.Localizer["TranslatorCredits"].Length > 0 ? _controller.Localizer["TranslatorCredits"] : null);
+        aboutWindow.SetTranslatorCredits(string.IsNullOrEmpty(_controller.Localizer["TranslatorCredits"]) ? null : _controller.Localizer["TranslatorCredits"]);
         aboutWindow.Show();
     }
 }
