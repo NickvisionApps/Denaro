@@ -91,7 +91,7 @@ public class Transaction
     /// <param name="a">The first Transaction object</param>
     /// <param name="b">The second Transaction object</param>
     /// <returns>True if a == b, else false</returns>
-    public static bool operator ==(Transaction a, Transaction b) => a.Id == b.Id;
+    public static bool operator ==(Transaction? a, Transaction? b) => a?.Id == b?.Id;
 
     /// <summary>
     /// Compares two Transaction objects by !=
@@ -99,7 +99,7 @@ public class Transaction
     /// <param name="a">The first Transaction object</param>
     /// <param name="b">The second Transaction object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(Transaction a, Transaction b) => a.Id != b.Id;
+    public static bool operator !=(Transaction? a, Transaction? b) => a?.Id != b?.Id;
 
     /// <summary>
     /// Compares two Transaction objects by >
@@ -107,7 +107,7 @@ public class Transaction
     /// <param name="a">The first Transaction object</param>
     /// <param name="b">The second Transaction object</param>
     /// <returns>True if a > b, else false</returns>
-    public static bool operator <(Transaction a, Transaction b) => a.Id < b.Id;
+    public static bool operator <(Transaction? a, Transaction? b) => a?.Id < b?.Id;
 
     /// <summary>
     /// Compares two Transaction objects by <
@@ -115,5 +115,5 @@ public class Transaction
     /// <param name="a">The first Transaction object</param>
     /// <param name="b">The second Transaction object</param>
     /// <returns>True if a < b, else false</returns>
-    public static bool operator >(Transaction a, Transaction b) => a.Id > b.Id;
+    public static bool operator >(Transaction? a, Transaction? b) => a?.Id > b?.Id;
 }

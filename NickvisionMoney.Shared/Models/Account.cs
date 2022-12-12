@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -380,6 +381,10 @@ public class Account : IDisposable
         if (cmdAddTransaction.ExecuteNonQuery() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
+            if(transaction.GroupId != -1)
+            {
+                UpdateGroupAmounts();
+            }
             return true;
         }
         return false;
@@ -405,6 +410,7 @@ public class Account : IDisposable
         if (cmdUpdateTransaction.ExecuteNonQuery() > 0)
         {
             Transactions[transaction.Id] = transaction;
+            UpdateGroupAmounts();
             return true;
         }
         return false;
@@ -488,7 +494,120 @@ public class Account : IDisposable
 
     private int ImportFromCSV(string path)
     {
-        return 0;
+        var imported = 0;
+        var lines = default(List<string>);
+        try
+        {
+            lines = File.ReadAllLines(path).ToList();
+        }
+        catch
+        {
+            return -1;
+        }
+        foreach(var line in lines)
+        {
+            var fields = line.Split(';');
+            if(fields.Length != 10)
+            {
+                continue;
+            }
+            //Get Id
+            var id = 0u;
+            try
+            {
+                id = uint.Parse(fields[0]);
+            }
+            catch
+            {
+                continue;
+            }
+            if(GetTransactionById(id) != null)
+            {
+                continue;
+            }
+            //Get Date
+            var date = default(DateOnly);
+            try
+            {
+                date = DateOnly.Parse(fields[1]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Description
+            var description = fields[2];
+            //Get Type
+            var type = TransactionType.Income;
+            try
+            {
+                type = (TransactionType)int.Parse(fields[3]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Repeat Interval
+            var repeat = TransactionRepeatInterval.Never;
+            try
+            {
+                repeat = (TransactionRepeatInterval)int.Parse(fields[4]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Amount
+            var amount = 0m;
+            try
+            {
+                amount = decimal.Parse(fields[5]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get RGBA
+            var rgba = fields[6];
+            //Get Group Id
+            var gid = 0;
+            try
+            {
+                gid = int.Parse(fields[7]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Group Name
+            var groupName = fields[8];
+            //Get Group Description
+            var groupDescription = fields[9];
+            //Create Group If Needed
+            if(gid != -1 && GetGroupById((uint)gid) == null)
+            {
+                var group = new Group((uint)gid)
+                {
+                    Name = groupName,
+                    Description = groupDescription
+                };
+                AddGroup(group);
+            }
+            //Add Transaction
+            var transaction = new Transaction(id)
+            {
+                Date = date,
+                Description = description,
+                Type = type,
+                RepeatInterval = repeat,
+                Amount = amount,
+                GroupId = gid,
+                RGBA = rgba
+            };
+            AddTransaction(transaction);
+            imported++;
+        }
+        return imported;
     }
 
     private int ImportFromOFX(string path)
