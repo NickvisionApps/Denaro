@@ -1,53 +1,44 @@
-﻿// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
-
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
+﻿using Microsoft.UI.Xaml;
+using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Views;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace NickvisionMoney.WinUI;
 
-namespace NickvisionMoney.WinUI
+public partial class App : Application
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    public partial class App : Application
+    private Window? _mainWindow;
+    private MainWindowController _mainWindowController;
+
+    public App()
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
+        InitializeComponent();
+        _mainWindowController = new MainWindowController();
+        //AppInfo
+        _mainWindowController.AppInfo.ID = "org.nickvision.money";
+        _mainWindowController.AppInfo.Name = "Nickvision Money";
+        _mainWindowController.AppInfo.ShortName = "Money";
+        _mainWindowController.AppInfo.Description = _mainWindowController.Localizer["Description"];
+        _mainWindowController.AppInfo.Version = "2022.12.0-next";
+        _mainWindowController.AppInfo.Changelog = "- Initial Release";
+        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
+        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
+        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
+        //Theme
+        if (_mainWindowController.Theme == Theme.Light)
         {
-            this.InitializeComponent();
+            RequestedTheme = ApplicationTheme.Light;
         }
-
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        else if (_mainWindowController.Theme == Theme.Dark)
         {
-            m_window = new MainWindow();
-            m_window.Activate();
+            RequestedTheme = ApplicationTheme.Dark;
         }
+    }
 
-        private Window m_window;
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    {
+        _mainWindow = new MainWindow(_mainWindowController);
+        _mainWindow.Activate();
     }
 }

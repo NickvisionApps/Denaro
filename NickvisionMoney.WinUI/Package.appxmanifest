@@ -9,7 +9,7 @@
   <Identity
     Name="6c24ccc9-b16b-4a07-927c-f2429fde745f"
     Publisher="CN=nlogo"
-    Version="1.0.0.0" />
+    Version="2022.12.0.0" />
 
   <Properties>
     <DisplayName>NickvisionMoney.WinUI</DisplayName>
@@ -31,13 +31,21 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="NickvisionMoney.WinUI"
-        Description="NickvisionMoney.WinUI"
+        DisplayName="Nickvision Money"
+        Description="A personal finance manager"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Money">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

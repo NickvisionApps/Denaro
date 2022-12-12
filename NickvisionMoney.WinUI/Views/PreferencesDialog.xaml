@@ -1,0 +1,22 @@
+<ContentDialog
+    x:Class="NickvisionMoney.WinUI.Views.PreferencesDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    CloseButtonText="OK" DefaultButton="Close"
+    Opened="Dialog_Opened" Closed="Dialog_Closed">
+
+    <StackPanel Spacing="6">
+        <labs:SettingsCard x:Name="CardTheme">
+            <labs:SettingsCard.HeaderIcon>
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe790;"/>
+            </labs:SettingsCard.HeaderIcon>
+
+            <ComboBox x:Name="CmbTheme" Width="60"/>
+        </labs:SettingsCard>
+    </StackPanel>
+</ContentDialog>

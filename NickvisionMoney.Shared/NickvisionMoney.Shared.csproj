@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\org.nickvision.money.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -22,6 +26,10 @@
 
   <ItemGroup>
 	<PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\org.nickvision.money.png" />
   </ItemGroup>
 
 </Project>

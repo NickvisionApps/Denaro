@@ -124,14 +124,6 @@
     <value>File</value>
   </data>
 
-	<data name="OpenFolder" xml:space="preserve">
-    <value>Open Folder</value>
-  </data>
-
-	<data name="CloseFolder" xml:space="preserve">
-    <value>Close Folder</value>
-  </data>
-
 	<data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -187,19 +179,6 @@
 	<!--CommandBar-->
 	<data name="Open" xml:space="preserve">
     <value>Open</value>
-  </data>
-
-	<data name="OpenFolderTooltip" xml:space="preserve">
-    <value>Open Folder (Ctrl+O)</value>
-  </data>
-
-	<data name="CloseFolderTooltip" xml:space="preserve">
-    <value>Close Folder (Ctrl+W)</value>
-  </data>
-
-	<!--LblStatus-->
-	<data name="Ready" xml:space="preserve">
-    <value>Ready</value>
   </data>
 
 	<!--RestartThemeDialog-->
