@@ -19,13 +19,12 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Gtk.MenuButton _btnMenuAccount;
     private readonly Gtk.Popover _popoverAccount;
     private readonly Gtk.Box _popBoxAccount;
-    private readonly Gtk.Box _popBoxHeader;
-    private readonly Gtk.Label _lblRecents;
     private readonly Gtk.Box _popBoxButtons;
     private readonly Gtk.Button _popBtnNewAccount;
     private readonly Adw.ButtonContent _popBtnNewAccountContext;
     private readonly Gtk.Button _popBtnOpenAccount;
-    private readonly Gtk.ListBox _listRecentAccounts;
+    private readonly List<Adw.ActionRow> _listRecentAccountsRows;
+    private readonly Adw.PreferencesGroup _groupRecentAccounts;
     private readonly Gtk.ToggleButton _btnFlapToggle;
     private readonly Gtk.MenuButton _btnMenuHelp;
     private readonly Adw.ToastOverlay _toastOverlay;
@@ -33,8 +32,8 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Adw.StatusPage _pageStatusNoAccounts;
     private readonly Gtk.Box _boxStatusPage;
     private readonly Gtk.Label _lblRecentAccounts;
-    private readonly List<Adw.ActionRow> _listRecentAccountsRows;
-    private readonly Gtk.ListBox _listRecentAccountsOnStart;
+    private readonly List<Adw.ActionRow> _listRecentAccountsOnStartRows;
+    private readonly Adw.PreferencesGroup _groupRecentAccountsOnStart;
     private readonly Gtk.Box _boxStatusButtons;
     private readonly Gtk.Button _btnNewAccount;
     private readonly Gtk.Button _btnOpenAccount;
@@ -73,11 +72,6 @@ public class MainWindow : Adw.ApplicationWindow
         _mainBox.Append(_headerBar);
         //Account Popover
         _popoverAccount = Gtk.Popover.New();
-        //Label Recents
-        _lblRecents = Gtk.Label.New(_controller.Localizer["RecentsPopover"]);
-        _lblRecents.AddCssClass("title-4");
-        _lblRecents.SetHexpand(true);
-        _lblRecents.SetHalign(Gtk.Align.Start);
         //Account Popover Buttons Box
         _popBoxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
         _popBoxButtons.AddCssClass("linked");
@@ -99,24 +93,18 @@ public class MainWindow : Adw.ApplicationWindow
         _popBtnOpenAccount.SetTooltipText(_controller.Localizer["OpenAccountTooltip"]);
         _popBtnOpenAccount.SetDetailedActionName("win.openAccount");
         _popBoxButtons.Append(_popBtnOpenAccount);
-        //Account Popover Header Box
-        _popBoxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 10);
-        _popBoxHeader.Append(_lblRecents);
-        _popBoxHeader.Append(_popBoxButtons);
         //List Recent Accounts
-        _listRecentAccounts = Gtk.ListBox.New();
-        _listRecentAccounts.SetSelectionMode(Gtk.SelectionMode.Multiple); // workaround crash on unselecting
-        _listRecentAccounts.AddCssClass("boxed-list");
-        _listRecentAccounts.SetSizeRequest(200, 55);
-        _listRecentAccounts.OnSelectedRowsChanged += OnListRecentAccountsSelectionChanged;
+        _groupRecentAccounts = Adw.PreferencesGroup.New();
+        _groupRecentAccounts.SetTitle(_controller.Localizer["RecentsPopover"]);
+        _groupRecentAccounts.SetHeaderSuffix(_popBoxButtons);
+        _groupRecentAccounts.SetSizeRequest(200, 55);
         //Account Popover Box
         _popBoxAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         _popBoxAccount.SetMarginStart(5);
         _popBoxAccount.SetMarginEnd(5);
         _popBoxAccount.SetMarginTop(5);
         _popBoxAccount.SetMarginBottom(5);
-        _popBoxAccount.Append(_popBoxHeader);
-        _popBoxAccount.Append(_listRecentAccounts);
+        _popBoxAccount.Append(_groupRecentAccounts);
         _popoverAccount.SetChild(_popBoxAccount);
         //Menu Account Button
         _btnMenuAccount = Gtk.MenuButton.New();
@@ -151,6 +139,13 @@ public class MainWindow : Adw.ApplicationWindow
         _boxStatusButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 12);
         _boxStatusButtons.SetHexpand(true);
         _boxStatusButtons.SetHalign(Gtk.Align.Center);
+        //List Recent Accounts On The Start Screen
+        _groupRecentAccountsOnStart = Adw.PreferencesGroup.New();
+        _groupRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
+        _groupRecentAccountsOnStart.SetSizeRequest(200, 55);
+        _groupRecentAccountsOnStart.SetMarginTop(24);
+        _groupRecentAccountsOnStart.SetMarginBottom(24);
+        _groupRecentAccountsOnStart.SetVisible(false);
         //New Account Button
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
@@ -175,20 +170,9 @@ public class MainWindow : Adw.ApplicationWindow
         _boxStatusPage = Gtk.Box.New(Gtk.Orientation.Vertical, 12);
         _boxStatusPage.SetHexpand(false);
         _boxStatusPage.SetHalign(Gtk.Align.Center);
+        _boxStatusPage.Append(_groupRecentAccountsOnStart);
         _boxStatusPage.Append(_boxStatusButtons);
         _boxStatusPage.Append(_lblDrag);
-        //Recent Accounts Label
-        _lblRecentAccounts = Gtk.Label.New(_controller.Localizer["RecentAccounts"]);
-        _lblRecentAccounts.AddCssClass("title-4");
-        _lblRecentAccounts.SetHexpand(true);
-        _lblRecentAccounts.SetHalign(Gtk.Align.Start);
-        //List Recent Accounts On The Start Screen
-        _listRecentAccountsOnStart = Gtk.ListBox.New();
-        _listRecentAccountsOnStart.SetSelectionMode(Gtk.SelectionMode.Multiple); // workaround crash on unselecting
-        _listRecentAccountsOnStart.AddCssClass("boxed-list");
-        _listRecentAccountsOnStart.SetSizeRequest(200, 55);
-        _listRecentAccountsOnStart.SetMarginBottom(24);
-        _listRecentAccountsOnStart.OnSelectedRowsChanged += OnListRecentAccountsOnStartSelectionChanged;
         //Page No Accounts
         _pageStatusNoAccounts = Adw.StatusPage.New();
         _pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
@@ -250,6 +234,7 @@ public class MainWindow : Adw.ApplicationWindow
         // AddController(_dropTarget);
         //Initialize additional variables
         _listRecentAccountsRows = new List<Adw.ActionRow> {};
+        _listRecentAccountsOnStartRows = new List<Adw.ActionRow> {};
         // _accountViews = new List<AccountView> {};
     }
 
@@ -261,18 +246,9 @@ public class MainWindow : Adw.ApplicationWindow
         Show();
         if(_controller.RecentAccounts.Count > 0)
         {
-            foreach(var accountPath in _controller.RecentAccounts)
-            {
-                var row = Adw.ActionRow.New();
-                row.SetTitle(Path.GetFileName(accountPath));
-                row.SetSubtitle(accountPath);
-                row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
-                _listRecentAccountsOnStart.Append(row);
-            }
+            UpdateRecentAccountsOnStart();
             _pageStatusNoAccounts.SetDescription("");
-            _boxStatusPage.Prepend(_listRecentAccountsOnStart);
-            _boxStatusPage.Prepend(_lblRecentAccounts);
-            _boxStatusPage.SetMarginTop(24);
+            _groupRecentAccountsOnStart.SetVisible(true);
         }
     }
 
@@ -291,7 +267,7 @@ public class MainWindow : Adw.ApplicationWindow
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
         _windowTitle.SetSubtitle(_controller.GetNumberOfOpenAccounts() == 1 ? _controller.GetFirstOpenAccountPath() : null);
-        updateRecentAccounts();
+        UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
     }
@@ -420,6 +396,8 @@ public class MainWindow : Adw.ApplicationWindow
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _btnMenuAccount.SetVisible(false);
             _btnFlapToggle.SetVisible(false);
+            UpdateRecentAccountsOnStart();
+            _groupRecentAccountsOnStart.SetVisible(true);
         }
         return true; // FS: I didn't find how to use GDK_EVENT_STOP, but it equals to true anyway
     }
@@ -427,52 +405,61 @@ public class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Updates the list of recent accounts
     /// </summary>
-    private void updateRecentAccounts()
+    private void UpdateRecentAccounts()
     {
         foreach(var row in _listRecentAccountsRows)
         {
-            _listRecentAccounts.Remove(row);
+            _groupRecentAccounts.Remove(row);
         }
         _listRecentAccountsRows.Clear();
-        foreach(var recentAccountPath in _controller.RecentAccounts)
+        foreach(var accountPath in _controller.RecentAccounts)
         {
-            var row = Adw.ActionRow.New();
-            row.SetTitle(Path.GetFileName(recentAccountPath));
-            row.SetSubtitle(recentAccountPath);
-            row.AddPrefix(Gtk.Image.NewFromIconName("wallet2-symbolic"));
-            _listRecentAccounts.Append(row);
+            var row = CreateRecentAccountRow(accountPath);
+            _groupRecentAccounts.Add(row);
             _listRecentAccountsRows.Add(row);
         }
     }
 
     /// <summary>
-    /// Occurs when listRecentAccounts's selection is changed
+    /// Updates the list of recent accounts on start screen
     /// </summary>
-    /// <param name="sender">Gtk.Widget</param>
-    /// <param name="e">EventArgs</param>
-    private void OnListRecentAccountsSelectionChanged(Gtk.Widget sender, EventArgs e)
+    private void UpdateRecentAccountsOnStart()
     {
-        var selectedRow = (Adw.ActionRow)_listRecentAccounts.GetSelectedRow();
-        if(selectedRow != null)
+        foreach(var row in _listRecentAccountsOnStartRows)
         {
-            _popoverAccount.Popdown();
-            _controller.AddAccount(selectedRow.GetSubtitle());
-            _listRecentAccounts.UnselectRow(selectedRow);
+            _groupRecentAccountsOnStart.Remove(row);
+        }
+        _listRecentAccountsOnStartRows.Clear();
+        foreach(var accountPath in _controller.RecentAccounts)
+        {
+            var row = CreateRecentAccountRow(accountPath);
+            _groupRecentAccountsOnStart.Add(row);
+            _listRecentAccountsOnStartRows.Add(row);
         }
     }
 
     /// <summary>
-    /// Occurs when listRecentAccountsOnStart's selection is changed
+    /// Creates a row for recent accounts lists
     /// </summary>
-    /// <param name="sender">Gtk.Widget</param>
-    /// <param name="e">EventArgs</param>
-    private void OnListRecentAccountsOnStartSelectionChanged(Gtk.Widget sender, EventArgs e)
+    /// <param name="accountPath">string</param>
+    private Adw.ActionRow CreateRecentAccountRow(string accountPath)
     {
-        var selectedRow = (Adw.ActionRow)_listRecentAccountsOnStart.GetSelectedRow();
-        if(selectedRow != null)
-        {
-            _controller.AddAccount(selectedRow.GetSubtitle());
-            _listRecentAccountsOnStart.UnselectRow(selectedRow);
-        }
+        var row = Adw.ActionRow.New();
+        row.SetTitle(Path.GetFileName(accountPath));
+        row.SetSubtitle(accountPath);
+        var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
+        button.SetHalign(Gtk.Align.Center);
+        button.SetValign(Gtk.Align.Center);
+        button.AddCssClass("wallet-button");
+        button.OnClicked += delegate(Gtk.Button sender, EventArgs e) { OnOpenRecentAccount(sender, row.GetSubtitle(), e); };
+        row.AddPrefix(button);
+        row.SetActivatableWidget(button);
+        return row;
+    }
+
+    private void OnOpenRecentAccount(Gtk.Widget sender, string path, EventArgs e)
+    {
+        _popoverAccount.Popdown();
+        _controller.AddAccount(path);
     }
 }
