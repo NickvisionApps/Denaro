@@ -45,7 +45,7 @@ public class Program
         //Controller Setup
         var mainWindowController = new MainWindowController();
         mainWindowController.AppInfo.ID = "org.nickvision.money";
-        mainWindowController.AppInfo.Name = "NickvisionMoney";
+        mainWindowController.AppInfo.Name = "Nickvision Money";
         mainWindowController.AppInfo.ShortName = "Money";
         mainWindowController.AppInfo.Description = mainWindowController.Localizer["Description"];
         mainWindowController.AppInfo.Version = "2022.12.0-next";
