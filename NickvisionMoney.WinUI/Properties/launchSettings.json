@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NickvisionMoney.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NickvisionMoney.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
