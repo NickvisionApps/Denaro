@@ -21,10 +21,6 @@ public class MainWindowController
     /// </summary>
     public Localizer Localizer { get; init; }
     /// <summary>
-    /// The path of the folder opened
-    /// </summary>
-    public string FolderPath { get; private set; }
-    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
@@ -45,18 +41,22 @@ public class MainWindowController
     /// </summary>
     public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
     /// <summary>
-    /// A callback for adding an account to the UI
+    /// The number of accounts opened
     /// </summary>
-    public Action AccountAddedCallback;
+    public int NumberOfOpenAccounts => _openAccounts.Count;
+    /// <summary>
+    /// The path of the first opened account
+    /// </summary>
+    public string FirstOpenAccountPath => _openAccounts[0];
 
     /// <summary>
     /// Occurs when a notification is sent
     /// </summary>
     public event EventHandler<NotificationSentEventArgs>? NotificationSent;
     /// <summary>
-    /// Occurs when a folder is opened or closed
+    /// Occurs when an account is added
     /// </summary>
-    public event EventHandler? FolderChanged;
+    public event EventHandler? AccountAdded;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -64,9 +64,8 @@ public class MainWindowController
     public MainWindowController()
     {
         _isOpened = false;
-        _openAccounts = new List<string> {};
+        _openAccounts = new List<string>();
         Localizer = new Localizer();
-        FolderPath = "No Folder Opened";
     }
 
     /// <summary>
@@ -126,7 +125,7 @@ public class MainWindowController
             _openAccounts.Add(path);
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
-            AccountAddedCallback();
+            AccountAdded?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -135,14 +134,4 @@ public class MainWindowController
     /// </summary>
     /// <param name="index">int</param>
     public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
-
-    /// <summary>
-    /// Gets the number of accounts opened
-    /// </summary>
-    public int GetNumberOfOpenAccounts() => _openAccounts.Count;
-
-    /// <summary>
-    /// Gets the path of the first opened account
-    /// </summary>
-    public string GetFirstOpenAccountPath() => _openAccounts[0];
 }

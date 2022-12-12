@@ -195,8 +195,7 @@ public class MainWindow : Adw.ApplicationWindow
         SetContent(_mainBox);
         //Register Events
         _controller.NotificationSent += NotificationSent;
-        //Account Added Callback
-        _controller.AccountAddedCallback = OnAccountAdded;
+        _controller.AccountAdded += AccountAdded;
         //New Account Action
         _actNewAccount = Gio.SimpleAction.New("newAccount", null);
         _actNewAccount.OnActivate += OnNewAccount;
@@ -262,11 +261,11 @@ public class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when an account is created or opened
     /// </summary>
-    private void OnAccountAdded()
+    private void AccountAdded(object? sender, EventArgs e)
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        _windowTitle.SetSubtitle(_controller.GetNumberOfOpenAccounts() == 1 ? _controller.GetFirstOpenAccountPath() : null);
+        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
         UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
@@ -389,8 +388,8 @@ public class MainWindow : Adw.ApplicationWindow
         _controller.CloseAccount(indexPage);
         //_accountViews.RemoveAt(indexPage);
         _tabView.ClosePageFinish(page, true);
-        _windowTitle.SetSubtitle(_controller.GetNumberOfOpenAccounts() == 1 ? _controller.GetFirstOpenAccountPath() : null);
-        if(_controller.GetNumberOfOpenAccounts() == 0)
+        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
+        if(_controller.NumberOfOpenAccounts == 0)
         {
             _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");
