@@ -54,6 +54,7 @@
                 "dotnet publish -c Release --source ./nuget-sources NickvisionMoney.GNOME/NickvisionMoney.GNOME.csproj --runtime $RUNTIME --self-contained true",
                 "mkdir -p /app/opt/org.nickvision.money",
                 "cp -r --remove-destination /run/build/org.nickvision.money/NickvisionMoney.GNOME/bin/Release/net7.0/$RUNTIME/publish/* /app/opt/org.nickvision.money/",
+                "chmod +x NickvisionMoney.GNOME/install_extras.sh",
                 "NickvisionMoney.GNOME/install_extras.sh /app"
 	    ],
             "sources": [
