@@ -390,7 +390,6 @@ public class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _tabView.ClosePageFinish(args.Page, true);
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
         if(_controller.NumberOfOpenAccounts == 0)
         {
