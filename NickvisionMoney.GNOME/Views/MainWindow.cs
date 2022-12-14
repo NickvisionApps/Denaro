@@ -41,7 +41,7 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Gtk.Box _pageTabs;
     private readonly Adw.TabView _tabView;
     private readonly Adw.TabBar _tabBar;
-    //private readonly List<AccountView> _accountViews;
+    private readonly List<Adw.TabPage> _accountViews;
     private readonly Gtk.DropTarget _dropTarget;
     private readonly Gio.SimpleAction _actNewAccount;
     private readonly Gio.SimpleAction _actOpenAccount;
@@ -57,7 +57,6 @@ public class MainWindow : Adw.ApplicationWindow
         //Window Settings
         _controller = controller;
         _application = application;
-        New();
         SetDefaultSize(900, 700);
         if(_controller.IsDevVersion)
         {
@@ -182,6 +181,7 @@ public class MainWindow : Adw.ApplicationWindow
         //Page Tabs
         _pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _tabView = Adw.TabView.New();
+        _tabView.OnClosePage += OnCloseAccountPage;
         _tabBar = Adw.TabBar.New();
         _tabBar.SetView(_tabView);
         _pageTabs.Append(_tabBar);
@@ -234,7 +234,7 @@ public class MainWindow : Adw.ApplicationWindow
         //Initialize additional variables
         _listRecentAccountsRows = new List<Adw.ActionRow> {};
         _listRecentAccountsOnStartRows = new List<Adw.ActionRow> {};
-        // _accountViews = new List<AccountView> {};
+        _accountViews = new List<Adw.TabPage> {};
     }
 
     /// <summary>
@@ -265,6 +265,9 @@ public class MainWindow : Adw.ApplicationWindow
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
+        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle);
+        _tabView.SetSelectedPage(newAccountView.GetPage());
+        _accountViews.Add(newAccountView.GetPage());
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
         UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
@@ -313,7 +316,7 @@ public class MainWindow : Adw.ApplicationWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        _tabView.ClosePage(_tabView.GetSelectedPage()); // FS: CRASH
+        _tabView.ClosePage(_tabView.GetSelectedPage());
     }
 
     /// <summary>
@@ -382,12 +385,12 @@ public class MainWindow : Adw.ApplicationWindow
     /// Occurs when an account page is closing
     /// </summary>
     /// <param name="page">Adw.TabPage</param>
-    private bool OnCloseAccountPage(Adw.TabPage page)
+    private void OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
     {
-        var indexPage = _tabView.GetPagePosition(page);
+        var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
-        //_accountViews.RemoveAt(indexPage);
-        _tabView.ClosePageFinish(page, true);
+        _accountViews.RemoveAt(indexPage);
+        _tabView.ClosePageFinish(args.Page, true);
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
         if(_controller.NumberOfOpenAccounts == 0)
         {
@@ -398,7 +401,7 @@ public class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _groupRecentAccountsOnStart.SetVisible(true);
         }
-        return true; // FS: I didn't find how to use GDK_EVENT_STOP, but it equals to true anyway
+        //return true; // FS: I didn't find how to use GDK_EVENT_STOP, but it equals to true anyway
     }
 
     /// <summary>
