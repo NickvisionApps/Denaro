@@ -20,8 +20,13 @@ public class AccountView
     private readonly Gtk.Label _lblExpense;
     private readonly Gtk.CheckButton _chkExpense;
     private readonly Adw.ActionRow _rowExpense;
+    private readonly Gtk.Box _boxButtonsOverview;
+    private readonly Gtk.MenuButton _btnMenuAccountActions;
+    private readonly Adw.ButtonContent _btnMenuAccountActionsContent;
+    private readonly Gtk.Button _btnResetOverviewFilter;
+    private readonly Adw.PreferencesGroup _grpOverview;
 
-    public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle) //AccountViewController controller
+    public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
         //Flap
         _flap = Adw.Flap.New();
@@ -46,7 +51,7 @@ public class AccountView
         _lblTotal.AddCssClass("accent");
         _lblTotal.AddCssClass("money-total");
         _rowTotal = Adw.ActionRow.New();
-        //_rowTotal.SetTitle(controller.Localizer["Total"]);
+        _rowTotal.SetTitle(controller.Localizer["Total"]);
         _rowTotal.AddSuffix(_lblTotal);
         //Account Income
         _lblIncome = Gtk.Label.New("");
@@ -58,7 +63,8 @@ public class AccountView
         _chkIncome.AddCssClass("selection-mode");
         //_chkIncome.OnToggled += () => controller.UpdateFilterValue(-3, _chkIncome.GetActive());
         _rowIncome = Adw.ActionRow.New();
-        //_rowIncome.SetTitle(controller.Localizer["Income"]);
+        _rowIncome.SetTitle(controller.Localizer["Income"]);
+        _rowIncome.AddPrefix(_chkIncome);
         _rowIncome.AddSuffix(_lblIncome);
         //Account Expense
         _lblExpense = Gtk.Label.New("");
@@ -70,8 +76,40 @@ public class AccountView
         _chkExpense.AddCssClass("selection-mode");
         //_chkExpense.OnToggled += () => controller.UpdateFilterValue(-3, _chkExpense.GetActive());
         _rowExpense = Adw.ActionRow.New();
-        //_rowExpense.SetTitle(controller.Localizer["Expense"]);
+        _rowExpense.SetTitle(controller.Localizer["Expense"]);
+        _rowExpense.AddPrefix(_chkExpense);
         _rowExpense.AddSuffix(_lblExpense);
+        //Overview Buttons Box
+        _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        //Button Menu Account Actions
+        _btnMenuAccountActions = Gtk.MenuButton.New();
+        _btnMenuAccountActions.AddCssClass("flat");
+        _btnMenuAccountActionsContent = Adw.ButtonContent.New();
+        _btnMenuAccountActionsContent.SetIconName("document-properties-symbolic");
+        _btnMenuAccountActionsContent.SetLabel(controller.Localizer["Actions"]);
+        _btnMenuAccountActions.SetChild(_btnMenuAccountActionsContent);
+        var menuActionsCsv = Gio.Menu.New();
+        menuActionsCsv.Append(controller.Localizer["ExportCSV"], "account.exportAsCsv");
+        menuActionsCsv.Append(controller.Localizer["ImportCSV"], "account.importFromFile");
+        var menuActions = Gio.Menu.New();
+        menuActions.Append(controller.Localizer["TransferMoney"], "account.transferMoney");
+        menuActions.AppendSection(null, menuActionsCsv);
+        _btnMenuAccountActions.SetMenuModel(menuActions);
+        _boxButtonsOverview.Append(_btnMenuAccountActions);
+        //Button Reset Overview Filter
+        _btnResetOverviewFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
+        _btnResetOverviewFilter.AddCssClass("flat");
+        _btnResetOverviewFilter.SetTooltipText(controller.Localizer["ResetOverviewFilters"]);
+        _btnResetOverviewFilter.OnClicked += OnResetOverviewFilter;
+        _boxButtonsOverview.Append(_btnResetOverviewFilter);
+        //Overview Group
+        _grpOverview = Adw.PreferencesGroup.New();
+        _grpOverview.SetTitle(controller.Localizer["Overview"]);
+        _grpOverview.Add(_rowTotal);
+        _grpOverview.Add(_rowIncome);
+        _grpOverview.Add(_rowExpense);
+        _grpOverview.SetHeaderSuffix(_boxButtonsOverview);
+        _paneBox.Append(_grpOverview);
 
         //Tab Page
         _page = parentTabView.Append(_flap);
@@ -79,4 +117,9 @@ public class AccountView
     }
 
     public Adw.TabPage GetPage() => _page;
+
+    private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
+    {
+        //TODO
+    }
 }

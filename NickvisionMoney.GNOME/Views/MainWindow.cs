@@ -265,7 +265,7 @@ public class MainWindow : Adw.ApplicationWindow
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle);
+        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle, _controller.CreateAccountViewControllerForLatestAccount());
         _tabView.SetSelectedPage(newAccountView.GetPage());
         _accountViews.Add(newAccountView.GetPage());
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);

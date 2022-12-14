@@ -134,4 +134,9 @@ public class MainWindowController
     /// </summary>
     /// <param name="index">int</param>
     public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
+
+    public AccountViewController CreateAccountViewControllerForLatestAccount()
+    {
+        return new AccountViewController();
+    }
 }

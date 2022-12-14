@@ -49,6 +49,43 @@
     <value>Yes</value>
   </data>
 
+  <!--AccountView-->
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+
+  <data name="Expense" xml:space="preserve">
+    <value>Expense</value>
+  </data>
+
+  <data name="ExportCSV" xml:space="preserve">
+    <value>Export as CSV</value>
+  </data>
+
+  <data name="ImportCSV" xml:space="preserve">
+    <value>Import from CSV</value>
+  </data>
+
+  <data name="Income" xml:space="preserve">
+    <value>Income</value>
+  </data>
+
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+
+  <data name="ResetOverviewFilter" xml:space="preserve">
+    <value>Reset Overview Filters</value>
+  </data>
+
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+
+  <data name="TransferMoney" xml:space="preserve">
+    <value>Transfer Money</value>
+  </data>
+
   <!--MainWindow-->
   <data name="About" xml:space="preserve">
     <value>About {0}</value>
