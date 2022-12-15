@@ -100,7 +100,7 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnHomeOpenAccount, _controller.Localizer["OpenAccount", "Tooltip"]);
         LblBtnHomeOpenAccount.Text = _controller.Localizer["Open"];
         LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
-        StatusPageNoRecents.Title = _controller.Localizer["NoRecentAccounts"];
+        LblNoRecentAccounts.Text = _controller.Localizer["NoRecentAccounts"];
         //Page
         NavViewItemHome.IsSelected = true;
         RecentAccountsChanged(null, EventArgs.Empty);
@@ -226,11 +226,21 @@ public sealed partial class MainWindow : Window
         InfoBar.IsOpen = true;
     }
 
+    /// <summary>
+    /// Occurs when an account is created/opened in the app
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
     private void AccountAdded(object? sender, EventArgs e)
     {
         NavViewItemAccount.IsSelected = true;
     }
 
+    /// <summary>
+    /// Occurs when the list of recent accounts is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
     private void RecentAccountsChanged(object? sender, EventArgs e)
     {
         ListRecentAccounts.Items.Clear();
@@ -241,6 +251,11 @@ public sealed partial class MainWindow : Window
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
     }
 
+    /// <summary>
+    /// Occurs when the new account button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
     private async void NewAccount(object sender, RoutedEventArgs e)
     {
         var fileSavePicker = new FileSavePicker();
@@ -255,6 +270,11 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Occurs when the open account button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
     private async void OpenAccount(object sender, RoutedEventArgs e)
     {
         var fileOpenPicker = new FileOpenPicker();
@@ -265,6 +285,20 @@ public sealed partial class MainWindow : Window
         if (file != null)
         {
             _controller.AddAccount(file.Path);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when an account is selected from the list of recent accounts
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void ListRecentAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if(ListRecentAccounts.SelectedIndex != -1)
+        {
+            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex]);
+            ListRecentAccounts.SelectedIndex = -1;
         }
     }
 }

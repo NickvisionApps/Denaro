@@ -90,11 +90,15 @@
                                             <nickvision:ViewStack x:Name="ViewStackRecents">
                                                 <nickvision:ViewStack.Pages>
                                                     <nickvision:ViewStackPage PageName="NoRecents">
-                                                        <nickvision:StatusPage x:Name="StatusPageNoRecents" Glyph="&#xE823;"/>
+                                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,30" Spacing="6">
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE823;"/>
+
+                                                            <TextBlock x:Name="LblNoRecentAccounts"/>
+                                                        </StackPanel>
                                                     </nickvision:ViewStackPage>
 
                                                     <nickvision:ViewStackPage PageName="Recents">
-                                                        <ListView x:Name="ListRecentAccounts"/>
+                                                        <ListView x:Name="ListRecentAccounts" SelectionChanged="ListRecentAccounts_SelectionChanged"/>
                                                     </nickvision:ViewStackPage>
                                                 </nickvision:ViewStack.Pages>
                                             </nickvision:ViewStack>
