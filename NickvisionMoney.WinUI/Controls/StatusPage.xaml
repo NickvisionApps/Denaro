@@ -12,7 +12,7 @@
 
         <TextBlock HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind Title, Mode=OneWay}"/>
 
-        <TextBlock HorizontalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind Description, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Center" Text="{x:Bind Description, Mode=OneWay}"/>
 
         <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Child, Mode=OneWay}"/>
     </StackPanel>

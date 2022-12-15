@@ -101,6 +101,8 @@ public sealed partial class MainWindow : Window
         LblBtnHomeOpenAccount.Text = _controller.Localizer["Open"];
         LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
         LblNoRecentAccounts.Text = _controller.Localizer["NoRecentAccounts"];
+        StatusPageAccount.Title = _controller.Localizer["NoAccountOpened"];
+        StatusPageAccount.Description = _controller.Localizer["NoAccountDescription"];
         //Page
         NavViewItemHome.IsSelected = true;
         RecentAccountsChanged(null, EventArgs.Empty);
@@ -233,7 +235,16 @@ public sealed partial class MainWindow : Window
     /// <param name="e">EventArgs</param>
     private void AccountAdded(object? sender, EventArgs e)
     {
+        StatusPageAccount.Title = _controller.Localizer["SelectAccount"];
+        StatusPageAccount.Description = _controller.Localizer["SelectAccountDescription"];
         NavViewItemAccount.IsSelected = true;
+        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>());
+        items.Add(new NavigationViewItem()
+        {
+            Content = Path.GetFileNameWithoutExtension(_controller.LastOpenAccountPath),
+        });
+        NavViewItemAccount.MenuItemsSource = items;
+        NavViewItemAccount.IsExpanded = true;
     }
 
     /// <summary>

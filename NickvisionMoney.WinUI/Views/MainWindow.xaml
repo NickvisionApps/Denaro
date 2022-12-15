@@ -108,7 +108,9 @@
                             </nickvision:StatusPage>
                         </nickvision:ViewStackPage>
 
-                        <nickvision:ViewStackPage x:Name="PageAccount" PageName="Account"/>
+                        <nickvision:ViewStackPage x:Name="PageAccount" PageName="Account">
+                            <nickvision:StatusPage x:Name="StatusPageAccount" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE9F9;"/>
+                        </nickvision:ViewStackPage>
 
                         <nickvision:ViewStackPage x:Name="PageSettings" PageName="Settings"/>
                     </nickvision:ViewStack.Pages>

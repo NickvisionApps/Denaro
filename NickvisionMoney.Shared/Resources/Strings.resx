@@ -147,6 +147,14 @@
 	<data name="NoRecentAccounts" xml:space="preserve">
         <value>No Recent Accounts</value>
     </data>
+
+	<data name="SelectAccount" xml:space="preserve">
+        <value>Select Account</value>
+    </data>
+
+	<data name="SelectAccountDescription" xml:space="preserve">
+        <value>Select an account to view.</value>
+    </data>
 	<!--MainWindowController-->
 	<data name="Greeting.Generic" xml:space="preserve">
         <value>Good Day!</value>

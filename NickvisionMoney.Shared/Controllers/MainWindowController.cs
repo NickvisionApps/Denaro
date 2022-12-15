@@ -47,6 +47,10 @@ public class MainWindowController
     /// The path of the first opened account
     /// </summary>
     public string FirstOpenAccountPath => _openAccounts[0];
+    /// <summary>
+    /// The path of the last opened account
+    /// </summary>
+    public string LastOpenAccountPath => _openAccounts[_openAccounts.Count - 1];
 
     /// <summary>
     /// Occurs when a notification is sent
