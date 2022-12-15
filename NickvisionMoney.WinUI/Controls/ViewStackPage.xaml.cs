@@ -1,14 +1,18 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace NickvisionMoney.WinUI.Controls;
 
 /// <summary>
 /// A page control for a ViewStack
 /// </summary>
-public sealed partial class ViewStackPage : Frame
+public sealed partial class ViewStackPage : Frame, INotifyPropertyChanged
 {
-    public static DependencyProperty PageNameProperty { get; } = DependencyProperty.Register("PageName", typeof(string), typeof(ViewStackPage), new PropertyMetadata(""));
+    public static DependencyProperty PageNameProperty { get; } = DependencyProperty.Register("PageName", typeof(string), typeof(ViewStackPage), new PropertyMetadata("", (sender, e) => (sender as ViewStackPage)?.NotifyPropertyChanged("PageName")));
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Constructs a ViewStackPage
@@ -25,6 +29,12 @@ public sealed partial class ViewStackPage : Frame
     {
         get => (string)GetValue(PageNameProperty);
 
-        set => SetValue(PageNameProperty, value);
+        set
+        {
+            SetValue(PageNameProperty, value);
+            NotifyPropertyChanged();
+        }
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
