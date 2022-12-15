@@ -52,7 +52,7 @@ public class AppInfo
     /// <summary>
     /// Constructs an AppInfo
     /// </summary>
-    public AppInfo()
+    internal AppInfo()
     {
         ID = "";
         Name = "";

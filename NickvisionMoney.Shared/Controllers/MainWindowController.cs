@@ -4,7 +4,6 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -20,6 +19,7 @@ public class MainWindowController
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
+
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -69,44 +69,45 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Get the string for greeting on the start screen
+    /// Whether or not to show a sun icon on the home page
     /// </summary>
-    public string WelcomeMessage
+    public bool ShowSun
     {
         get
         {
             var timeNowHours = DateTime.Now.Hour;
-            if(timeNowHours >= 0 && timeNowHours < 6)
-            {
-                return Localizer["GreetingNight"];
-            }
-            else if(timeNowHours >= 6 && timeNowHours < 12)
-            {
-                return Localizer["GreetingMorning"];
-            }
-            else if(timeNowHours >= 12 && timeNowHours < 18)
-            {
-                return Localizer["GreetingDay"];
-            }
-            else if(timeNowHours >= 18 && timeNowHours < 24)
-            {
-                return Localizer["GreetingEvening"];
-            }
-            else
-            {
-                return Localizer["Greeting"];
-            }
+            return timeNowHours >= 6 && timeNowHours < 18;
         }
     }
 
     /// <summary>
-    /// Runs startup functions
+    /// The string for greeting on the home page
     /// </summary>
-    public void Startup()
+    public string Greeting
     {
-        if(!_isOpened)
+        get
         {
-            _isOpened = false;
+            var timeNowHours = DateTime.Now.Hour;
+            if (timeNowHours >= 0 && timeNowHours < 6)
+            {
+                return Localizer["Greeting", "Night"];
+            }
+            else if (timeNowHours >= 6 && timeNowHours < 12)
+            {
+                return Localizer["Greeting", "Morning"];
+            }
+            else if (timeNowHours >= 12 && timeNowHours < 18)
+            {
+                return Localizer["Greeting", "Afternoon"];
+            }
+            else if (timeNowHours >= 18 && timeNowHours < 24)
+            {
+                return Localizer["Greeting", "Evening"];
+            }
+            else
+            {
+                return Localizer["Greeting", "Generic"];
+            }
         }
     }
 
@@ -134,9 +135,4 @@ public class MainWindowController
     /// </summary>
     /// <param name="index">int</param>
     public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
-
-    public AccountViewController CreateAccountViewControllerForLatestAccount()
-    {
-        return new AccountViewController();
-    }
 }

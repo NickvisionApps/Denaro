@@ -18,315 +18,214 @@
 
 	<!--Use: &#xA; for newline-->
 
-  <data name="Description" xml:space="preserve">
-    <value>A personal finance manager.</value>
-  </data>
+	<data name="Description" xml:space="preserve">
+        <value>A template for creating Nickvision applications.</value>
+    </data>
 
-  <data name="Developers" xml:space="preserve">
-    <value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors on GitHub https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
-  </data>
+	<data name="Version" xml:space="preserve">
+		<value>Version: {0}</value>
+	</data>
+
+	<data name="About" xml:space="preserve">
+		<value>About {0}</value>
+	</data>
+
+	<data name="Changelog" xml:space="preserve">
+        <value>Changelog</value>
+    </data>
 
 	<!--Credits-->
-	<data name="TranslatorCredits" xml:space="preserve">
-	 <!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
-  </data>
+	<data name="Credits" xml:space="preserve">
+        <value>Credits</value>
+    </data>
 
-  <!--Dialog-->
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
+	<data name="Developers.Credits" xml:space="preserve">
+        <!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors on GitHub https://github.com/nlogozzo/NickvisionApplication/graphs/contributors</value>
+    </data>
+
+	<data name="Designers.Credits" xml:space="preserve">
+        <!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Fyodor Sobolev https://github.com/fsobolev</value>
+    </data>
+
+	<data name="Artists.Credits" xml:space="preserve">
+		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+        <value>Nicholas Logozzo https://github.com/nlogozzo</value>
+    </data>
+
+	<data name="Translators.Credits" xml:space="preserve">
+	    <!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+        <value></value>
+    </data>
+
+	<!--Actions-->
+	<data name="OK" xml:space="preserve">
+        <value>OK</value>
+    </data>
+
+	<data name="Yes" xml:space="preserve">
+        <value>Yes</value>
+    </data>
 
 	<data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
+        <value>No</value>
+    </data>
 
-	<data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
+	<data name="Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
 
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
+	<data name="New" xml:space="preserve">
+        <value>New</value>
+    </data>
 
-  <!--AccountView-->
-  <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
-  </data>
+	<data name="Open" xml:space="preserve">
+        <value>Open</value>
+    </data>
 
-  <data name="Expense" xml:space="preserve">
-    <value>Expense</value>
-  </data>
+	<data name="Close" xml:space="preserve">
+        <value>Close</value>
+    </data>
 
-  <data name="ExportCSV" xml:space="preserve">
-    <value>Export as CSV</value>
-  </data>
+	<!--Pages-->
+	<data name="Home" xml:space="preserve">
+        <value>Home</value>
+    </data>
 
-  <data name="ImportCSV" xml:space="preserve">
-    <value>Import from CSV</value>
-  </data>
+	<data name="Folder" xml:space="preserve">
+        <value>Folder</value>
+    </data>
 
-  <data name="Income" xml:space="preserve">
-    <value>Income</value>
-  </data>
+	<!--Mostly used in WinUI-->
+	<data name="Settings" xml:space="preserve">
+        <value>Settings</value>
+    </data>
 
-  <data name="Overview" xml:space="preserve">
-    <value>Overview</value>
-  </data>
+	<!--Mostly used in GNOME-->
+	<data name="Preferences" xml:space="preserve">
+        <value>Preferences</value>
+    </data>
 
-  <data name="ResetOverviewFilter" xml:space="preserve">
-    <value>Reset Overview Filters</value>
-  </data>
+	<data name="KeyboardShortcuts" xml:space="preserve">
+        <value>Keyboard Shortcuts</value>
+    </data>
 
-  <data name="Total" xml:space="preserve">
-    <value>Total</value>
-  </data>
+	<!--MainWindow-->
+	<data name="OpenFolder" xml:space="preserve">
+        <value>Open Folder</value>
+    </data>
 
-  <data name="TransferMoney" xml:space="preserve">
-    <value>Transfer Money</value>
-  </data>
+	<data name="OpenFolder.Tooltip" xml:space="preserve">
+        <value>Open Folder (Ctrl+O)</value>
+    </data>
 
-  <!--MainWindow-->
-  <data name="About" xml:space="preserve">
-    <value>About {0}</value>
-  </data>
+	<data name="CloseFolder" xml:space="preserve">
+        <value>Close Folder</value>
+    </data>
 
-  <data name="ButtonMenuAccountTooltip" xml:space="preserve">
-    <value>Account Menu</value>
-  </data>
+	<data name="CloseFolder.Tooltip" xml:space="preserve">
+        <value>Close Folder (Ctrl+W)</value>
+    </data>
 
-  <data name="CloseAccount" xml:space="preserve">
-    <value>Close Account</value>
-  </data>
+	<data name="NoFolderOpened" xml:space="preserve">
+        <value>No Folder Opened</value>
+    </data>
 
-  <data name="DragLabel" xml:space="preserve">
-    <value>You may also drag in a file from your file browser to open.</value>
-  </data>
+	<data name="NoFolderDescription" xml:space="preserve">
+        <value>Open a folder (or drag one into the app) to get started.</value>
+    </data>
 
-  <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
-  </data>
+	<!--MainWindowController-->
+	<data name="Greeting.Generic" xml:space="preserve">
+        <value>Good Day!</value>
+     </data>
 
-  <data name="NewAccount" xml:space="preserve">
-    <value>New Account</value>
-  </data>
+	<data name="Greeting.Morning" xml:space="preserve">
+        <value>Good Morning!</value>
+     </data>
 
-  <data name="NewAccountPopover" xml:space="preserve">
-    <value>New</value>
-  </data>
+	<data name="Greeting.Afternoon" xml:space="preserve">
+        <value>Good Afternoon!</value>
+     </data>
 
-  <data name="NewAccountTooltip" xml:space="preserve">
-    <value>New Account (Ctrl+N)</value>
-  </data>
+	<data name="Greeting.Evening" xml:space="preserve">
+        <value>Good Evening!</value>
+     </data>
 
-  <data name="Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
+	<data name="Greeting.Night" xml:space="preserve">
+        <value>Good Morning!</value>
+     </data>
 
-  <data name="OpenAccount" xml:space="preserve">
-    <value>Open Account</value>
-  </data>
+	<data name="FolderOpened" xml:space="preserve">
+        <value>Folder Opened: {0}</value>
+    </data>
 
-  <data name="OpenAccountTooltip" xml:space="preserve">
-    <value>Open Account (Ctrl+O)</value>
-  </data>
-
-  <data name="RecentAccounts" xml:space="preserve">
-    <value>Recent Accounts</value>
-  </data>
-
-  <data name="RecentsPopover" xml:space="preserve">
-    <value>Recents</value>
-  </data>
-
-  <data name="StartPageDescription" xml:space="preserve">
-    <value>Open or create an account to get started.</value>
-  </data>
-
-  <data name="ToggleSidebarTooltip" xml:space="preserve">
-    <value>Toggle Sidebar</value>
-  </data>
-
-
-  <!--MainWindowConroller-->
-  <data name="Greeting" xml:space="preserve">
-    <value>Good Day!</value>
-  </data>
-
-  <data name="GreetingDay" xml:space="preserve">
-    <value>Good Afternoon!</value>
-  </data>
-
-  <data name="GreetingEvening" xml:space="preserve">
-    <value>Good Evening!</value>
-  </data>
-
-  <data name="GreetingMorning" xml:space="preserve">
-    <value>Good Morning!</value>
-  </data>
-
-  <data name="GreetingNight" xml:space="preserve">
-    <value>Good Morning!</value>
-  </data>
+	<data name="FolderClosed" xml:space="preserve">
+        <value>Folder closed.</value>
+    </data>
 
 	<!--Settings-->
+	<data name="UserInterface" xml:space="preserve">
+        <value>User Interface</value>
+    </data>
 
-	<data name="SettingsTheme" xml:space="preserve">
-    <value>Theme</value>
-  </data>
+	<data name="UserInterfaceDescription" xml:space="preserve">
+        <value>Customize the application's user interface.</value>
+    </data>
 
-  <data name="SettingsThemeDark" xml:space="preserve">
-    <value>Dark</value>
-  </data>
+	<data name="Theme" xml:space="preserve">
+        <value>Theme</value>
+    </data>
 
-	<data name="SettingsThemeDescriptionGtk" xml:space="preserve">
-    <value>A theme change will be applied when the dialog is closed.</value>
-  </data>
+	<data name="ThemeLight" xml:space="preserve">
+        <value>Light</value>
+    </data>
 
-	<data name="SettingsThemeLight" xml:space="preserve">
-    <value>Light</value>
-  </data>
+	<data name="ThemeDark" xml:space="preserve">
+        <value>Dark</value>
+    </data>
 
-	<data name="SettingsThemeSystem" xml:space="preserve">
-    <value>System</value>
-  </data>
+	<data name="ThemeSystem" xml:space="preserve">
+        <value>System</value>
+    </data>
 
-  <data name="SettingsTransactionColor" xml:space="preserve">
-    <value>Transaction Default Color</value>
-  </data>
+	<!--Shortcuts Dialog-->
+	<data name="Folder.Shortcut" xml:space="preserve">
+        <value>Folder</value>
+    </data>
 
-  <data name="SettingsTransferColor" xml:space="preserve">
-    <value>Transfer Default Color</value>
-  </data>
+	<data name="Application.Shortcut" xml:space="preserve">
+        <value>Application</value>
+    </data>
 
-  <data name="SettingsUserInterface" xml:space="preserve">
-    <value>User Interface</value>
-  </data>
+	<!--WinUI Specific-->
+	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+        <value>What's New?</value>
+    </data>
 
-	<data name="SettingsUserInterfaceDescription" xml:space="preserve">
-    <value>Customize the application's user interface.</value>
-  </data>
+	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>Developers:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
+	</data>
 
-  <!--Shortcuts Dialog-->
-  <data name="Account" xml:space="preserve">
-    <value>Account</value>
-  </data>
+	<data name="ThemeDescription.WinUI" xml:space="preserve">
+        <value>An application restart is required to change the theme.</value>
+    </data>
 
-  <data name="AccountActions" xml:space="preserve">
-    <value>Account Actions</value>
-  </data>
+	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+        <value>Restart To Apply Theme?</value>
+    </data>
 
-  <data name="Application" xml:space="preserve">
-    <value>Application</value>
-  </data>
+	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
+        <value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
+    </data>
 
-  <data name="Export" xml:space="preserve">
-    <value>Export File</value>
-  </data>
+	<!--GTK Specific-->
+	<data name="MainMenu.GTK" xml:space="preserve">
+		<value>Main Menu</value>
+	</data>
 
-  <data name="Group" xml:space="preserve">
-    <value>Group</value>
-  </data>
-
-  <data name="Import" xml:space="preserve">
-    <value>Import File</value>
-  </data>
-
-  <data name="NewGroup" xml:space="preserve">
-    <value>New Group</value>
-  </data>
-
-  <data name="NewTransaction" xml:space="preserve">
-    <value>New Transaction</value>
-  </data>
-
-  <data name="Transaction" xml:space="preserve">
-    <value>Transaction</value>
-  </data>
-
-  <data name="Transfer" xml:space="preserve">
-    <value>Transfer Money</value>
-  </data>
-
-  <!--GNOME Specific Strings-->
-  <data name="Preferences" xml:space="preserve">
-    <value>Preferences</value>
-  </data>
-
-  <data name="SettingsChangeForNewTransactions" xml:space="preserve">
-    <value>A change in this setting will only be applied to newly added transactions.</value>
-  </data>
-
-  <!--WinUI Specific Strings-->
-  <data name="AboutDialogDescription" xml:space="preserve">
-    <value>{0}&#xA;{1}&#xA;&#xA;Version: {2}&#xA;&#xA;Copyright (C) 2021-2022&#xA;All rights reserved.&#xA;Nicholas Logozzo&#xA;Nickvision</value>
-  </data>
-
-  <data name="Changelog" xml:space="preserve">
-    <value>Changelog</value>
-  </data>
-
-  <data name="ChangelogDialogTitle" xml:space="preserve">
-    <value>What's New?</value>
-  </data>
-
-  <data name="Credits" xml:space="preserve">
-    <value>Credits</value>
-  </data>
-
-	<data name="CreditsDialogDescription" xml:space="preserve">
-    <value>Developers:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
-  </data>
-
-  <data name="CreditsDialogTitle" xml:space="preserve">
-    <value>Credits</value>
-  </data>
-
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-
-  <data name="Exit" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-
-  <data name="File" xml:space="preserve">
-    <value>File</value>
-  </data>
-
-  <data name="GitHubRepo" xml:space="preserve">
-    <value>GitHub Repo</value>
-  </data>
-
-  <data name="Help" xml:space="preserve">
-    <value>Help</value>
-  </data>
-
-  <data name="MainMenu" xml:space="preserve">
-    <value>Main Menu</value>
-  </data>
-
-  <data name="ReportABug" xml:space="preserve">
-    <value>Report a Bug</value>
-  </data>
-
-  <data name="RestartThemeTitle" xml:space="preserve">
-    <value>Restart To Apply Theme?</value>
-  </data>
-
-	<data name="RestartThemeDescription" xml:space="preserve">
-    <value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
-  </data>
-
-	<data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-
-  <data name="SettingsThemeDescription" xml:space="preserve">
-    <value>An application restart is required to change the theme.</value>
-  </data>
-
-  <data name="Support" xml:space="preserve">
-    <value>Support</value>
-  </data>
+	<data name="ThemeDescription.GTK" xml:space="preserve">
+        <value>A theme change will be applied when the dialog is closed.</value>
+    </data>
 </root>
