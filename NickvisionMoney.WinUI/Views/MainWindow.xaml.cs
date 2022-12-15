@@ -198,7 +198,7 @@ public sealed partial class MainWindow : Window
     private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
     {
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
-        if (pageName == "Account")
+        if (pageName == "OpenAccount")
         {
 
         }
@@ -238,11 +238,14 @@ public sealed partial class MainWindow : Window
         StatusPageAccount.Title = _controller.Localizer["SelectAccount"];
         StatusPageAccount.Description = _controller.Localizer["SelectAccountDescription"];
         NavViewItemAccount.IsSelected = true;
-        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>());
-        items.Add(new NavigationViewItem()
+        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>())
         {
-            Content = Path.GetFileNameWithoutExtension(_controller.LastOpenAccountPath),
-        });
+            new NavigationViewItem()
+            {
+                Tag = "OpenAccount",
+                Content = Path.GetFileNameWithoutExtension(_controller.LastOpenAccountPath)
+            }
+        };
         NavViewItemAccount.MenuItemsSource = items;
         NavViewItemAccount.IsExpanded = true;
     }
@@ -257,7 +260,7 @@ public sealed partial class MainWindow : Window
         ListRecentAccounts.Items.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            ListRecentAccounts.Items.Add(recentAccount);
+            ListRecentAccounts.Items.Add(new ActionRow(Path.GetFileName(recentAccount), Path.GetDirectoryName(recentAccount)));
         }
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
     }
