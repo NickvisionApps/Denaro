@@ -19,7 +19,7 @@
 	<!--Use: &#xA; for newline-->
 
 	<data name="Description" xml:space="preserve">
-        <value>A template for creating Nickvision applications.</value>
+        <value>A personal finance manager.</value>
     </data>
 
 	<data name="Version" xml:space="preserve">
@@ -93,17 +93,17 @@
         <value>Home</value>
     </data>
 
-	<data name="Folder" xml:space="preserve">
-        <value>Folder</value>
+	<data name="Account" xml:space="preserve">
+        <value>Account</value>
     </data>
 
-	<!--Mostly used in WinUI-->
 	<data name="Settings" xml:space="preserve">
+		<!--Mostly used in WinUI-->
         <value>Settings</value>
     </data>
 
-	<!--Mostly used in GNOME-->
 	<data name="Preferences" xml:space="preserve">
+		<!--Mostly used in GNOME-->
         <value>Preferences</value>
     </data>
 
@@ -112,30 +112,41 @@
     </data>
 
 	<!--MainWindow-->
-	<data name="OpenFolder" xml:space="preserve">
-        <value>Open Folder</value>
+	<data name="NickvisionMoneyAccount" xml:space="preserve">
+        <value>Nickvision Money Account</value>
     </data>
 
-	<data name="OpenFolder.Tooltip" xml:space="preserve">
-        <value>Open Folder (Ctrl+O)</value>
+	<data name="NewAccount" xml:space="preserve">
+        <value>New Account</value>
     </data>
 
-	<data name="CloseFolder" xml:space="preserve">
-        <value>Close Folder</value>
+	<data name="NewAccount.Tooltip" xml:space="preserve">
+        <value>New Account (Ctrl+N)</value>
     </data>
 
-	<data name="CloseFolder.Tooltip" xml:space="preserve">
-        <value>Close Folder (Ctrl+W)</value>
+	<data name="OpenAccount" xml:space="preserve">
+        <value>Open Account</value>
     </data>
 
-	<data name="NoFolderOpened" xml:space="preserve">
-        <value>No Folder Opened</value>
+	<data name="OpenAccount.Tooltip" xml:space="preserve">
+        <value>Open Account (Ctrl+O)</value>
     </data>
 
-	<data name="NoFolderDescription" xml:space="preserve">
-        <value>Open a folder (or drag one into the app) to get started.</value>
+	<data name="NoAccountOpened" xml:space="preserve">
+        <value>No Account Opened</value>
     </data>
 
+	<data name="NoAccountDescription" xml:space="preserve">
+        <value>Create or open an account to get started. You may also drag a file into the app from your file browser.</value>
+    </data>
+
+	<data name="RecentAccounts" xml:space="preserve">
+        <value>Recent Accounts</value>
+    </data>
+
+	<data name="NoRecentAccounts" xml:space="preserve">
+        <value>No Recent Accounts</value>
+    </data>
 	<!--MainWindowController-->
 	<data name="Greeting.Generic" xml:space="preserve">
         <value>Good Day!</value>

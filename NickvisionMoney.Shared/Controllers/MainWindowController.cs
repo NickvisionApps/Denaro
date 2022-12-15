@@ -12,7 +12,6 @@ namespace NickvisionMoney.Shared.Controllers;
 /// </summary>
 public class MainWindowController
 {
-    private bool _isOpened;
     private List<string> _openAccounts;
 
     /// <summary>
@@ -57,13 +56,16 @@ public class MainWindowController
     /// Occurs when an account is added
     /// </summary>
     public event EventHandler? AccountAdded;
+    /// <summary>
+    /// Occurs when the recent accounts list is changed
+    /// </summary>
+    public event EventHandler? RecentAccountsChanged;
 
     /// <summary>
     /// Constructs a MainWindowController
     /// </summary>
     public MainWindowController()
     {
-        _isOpened = false;
         _openAccounts = new List<string>();
         Localizer = new Localizer();
     }
@@ -127,6 +129,7 @@ public class MainWindowController
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);
+            RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
