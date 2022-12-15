@@ -168,12 +168,8 @@
         <value>Good Morning!</value>
      </data>
 
-	<data name="FolderOpened" xml:space="preserve">
-        <value>Folder Opened: {0}</value>
-    </data>
-
-	<data name="FolderClosed" xml:space="preserve">
-        <value>Folder closed.</value>
+	<data name="AccountOpenedAlready" xml:space="preserve">
+        <value>This account is already opened.</value>
     </data>
 
 	<!--Settings-->

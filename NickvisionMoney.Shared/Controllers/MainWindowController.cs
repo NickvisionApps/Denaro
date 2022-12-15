@@ -131,6 +131,10 @@ public class MainWindowController
             AccountAdded?.Invoke(this, EventArgs.Empty);
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
         }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
+        }
     }
 
     /// <summary>
