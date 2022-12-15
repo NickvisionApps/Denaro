@@ -23,7 +23,6 @@ public sealed partial class ViewStack : Frame
     public ViewStack()
     {
         InitializeComponent();
-        Pages.CollectionChanged += CollectionChanged;
     }
 
     /// <summary>
@@ -42,22 +41,5 @@ public sealed partial class ViewStack : Frame
             }
         }
         return false;
-    }
-
-    /// <summary>
-    /// Occurs when the pages collection is changed
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">NotifyCollectionChangedEventArgs</param>
-    private void CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (Pages.Count == 0)
-        {
-            Content = null;
-        }
-        else
-        {
-            Content = Pages[Pages.Count - 1];
-        }
     }
 }

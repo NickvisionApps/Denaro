@@ -32,9 +32,9 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
-                <NavigationViewItem x:Name="NavViewItemFolder" Tag="Folder">
+                <NavigationViewItem x:Name="NavViewItemAccount" Tag="Account">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B7;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -53,26 +53,58 @@
                         <nickvision:ViewStackPage x:Name="PageHome" PageName="Home">
                             <nickvision:StatusPage x:Name="StatusPageHome" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <nickvision:StatusPage.Child>
-                                    <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0" Orientation="Horizontal" Spacing="12">
-                                        <Button x:Name="BtnHomeOpenFolder" Width="100" Height="40" Style="{ThemeResource AccentButtonStyle}">
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE197;"/>
+                                    <StackPanel Margin="0,10,0,0">
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="12">
+                                            <Button x:Name="BtnHomeNewAccount" Width="100" Height="40" Style="{ThemeResource AccentButtonStyle}" Click="NewAccount">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
 
-                                                    <TextBlock x:Name="LblBtnHomeOpenFolder"/>
-                                                </StackPanel>
-                                            </Button.Content>
+                                                        <TextBlock x:Name="LblBtnHomeNewAccount"/>
+                                                    </StackPanel>
+                                                </Button.Content>
 
-                                            <Button.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="O"/>
-                                            </Button.KeyboardAccelerators>
-                                        </Button>
+                                                <Button.KeyboardAccelerators>
+                                                    <KeyboardAccelerator Modifiers="Control" Key="N"/>
+                                                </Button.KeyboardAccelerators>
+                                            </Button>
+
+                                            <Button x:Name="BtnHomeOpenAccount" Width="100" Height="40" Click="OpenAccount">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>
+
+                                                        <TextBlock x:Name="LblBtnHomeOpenAccount"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+
+                                                <Button.KeyboardAccelerators>
+                                                    <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                                                </Button.KeyboardAccelerators>
+                                            </Button>
+                                        </StackPanel>
+
+                                        <TextBlock Name="LblRecentAccounts" Margin="0,20,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                        <Border Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                                            <nickvision:ViewStack x:Name="ViewStackRecents">
+                                                <nickvision:ViewStack.Pages>
+                                                    <nickvision:ViewStackPage PageName="NoRecents">
+                                                        <nickvision:StatusPage x:Name="StatusPageNoRecents" Glyph="&#xE823;"/>
+                                                    </nickvision:ViewStackPage>
+
+                                                    <nickvision:ViewStackPage PageName="Recents">
+                                                        <ListView x:Name="ListRecentAccounts"/>
+                                                    </nickvision:ViewStackPage>
+                                                </nickvision:ViewStack.Pages>
+                                            </nickvision:ViewStack>
+                                        </Border>
                                     </StackPanel>
                                 </nickvision:StatusPage.Child>
                             </nickvision:StatusPage>
                         </nickvision:ViewStackPage>
 
-                        <nickvision:ViewStackPage x:Name="PageFolder" PageName="Folder"/>
+                        <nickvision:ViewStackPage x:Name="PageAccount" PageName="Account"/>
 
                         <nickvision:ViewStackPage x:Name="PageSettings" PageName="Settings"/>
                     </nickvision:ViewStack.Pages>

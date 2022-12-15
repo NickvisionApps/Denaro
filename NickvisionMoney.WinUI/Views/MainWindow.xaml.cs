@@ -9,6 +9,8 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
@@ -46,6 +48,8 @@ public sealed partial class MainWindow : Window
         //Register Events
         _appWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
+        _controller.AccountAdded += AccountAdded;
+        _controller.RecentAccountsChanged += RecentAccountsChanged;
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         _appWindow.Title = TitleBarTitle.Text;
@@ -86,15 +90,20 @@ public sealed partial class MainWindow : Window
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         NavViewItemHome.Content = _controller.Localizer["Home"];
-        NavViewItemFolder.Content = _controller.Localizer["Folder"];
+        NavViewItemAccount.Content = _controller.Localizer["Account"];
         NavViewItemSettings.Content = _controller.Localizer["Settings"];
         StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xF1DB";
         StatusPageHome.Title = _controller.Greeting;
-        StatusPageHome.Description = _controller.Localizer["NoFolderDescription"];
-        ToolTipService.SetToolTip(BtnHomeOpenFolder, _controller.Localizer["OpenFolder", "Tooltip"]);
-        LblBtnHomeOpenFolder.Text = _controller.Localizer["Open"];
+        StatusPageHome.Description = _controller.Localizer["NoAccountDescription"];
+        ToolTipService.SetToolTip(BtnHomeNewAccount, _controller.Localizer["NewAccount", "Tooltip"]);
+        LblBtnHomeNewAccount.Text = _controller.Localizer["New"];
+        ToolTipService.SetToolTip(BtnHomeOpenAccount, _controller.Localizer["OpenAccount", "Tooltip"]);
+        LblBtnHomeOpenAccount.Text = _controller.Localizer["Open"];
+        LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
+        StatusPageNoRecents.Title = _controller.Localizer["NoRecentAccounts"];
         //Page
         NavViewItemHome.IsSelected = true;
+        RecentAccountsChanged(null, EventArgs.Empty);
     }
 
     /// <summary>
@@ -168,8 +177,11 @@ public sealed partial class MainWindow : Window
                 {
                     if (item is StorageFile file)
                     {
-                        _controller.AddAccount(file.Path);
-                        break;
+                        if(Path.GetExtension(file.Path) == ".nmoney")
+                        {
+                            _controller.AddAccount(file.Path);
+                            break;
+                        }
                     }
                 }
             }
@@ -184,7 +196,7 @@ public sealed partial class MainWindow : Window
     private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
     {
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
-        if (pageName == "Folder")
+        if (pageName == "Account")
         {
 
         }
@@ -212,5 +224,47 @@ public sealed partial class MainWindow : Window
             _ => InfoBarSeverity.Informational
         };
         InfoBar.IsOpen = true;
+    }
+
+    private void AccountAdded(object? sender, EventArgs e)
+    {
+        NavViewItemAccount.IsSelected = true;
+    }
+
+    private void RecentAccountsChanged(object? sender, EventArgs e)
+    {
+        ListRecentAccounts.Items.Clear();
+        foreach(var recentAccount in _controller.RecentAccounts)
+        {
+            ListRecentAccounts.Items.Add(recentAccount);
+        }
+        ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
+    }
+
+    private async void NewAccount(object sender, RoutedEventArgs e)
+    {
+        var fileSavePicker = new FileSavePicker();
+        InitializeWithWindow(fileSavePicker);
+        fileSavePicker.FileTypeChoices.Add(_controller.Localizer["NickvisionMoneyAccount"], new List<string>() { ".nmoney" });
+        fileSavePicker.SuggestedFileName = _controller.Localizer["NewAccount"];
+        fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileSavePicker.PickSaveFileAsync();
+        if(file != null)
+        {
+            _controller.AddAccount(file.Path);
+        }
+    }
+
+    private async void OpenAccount(object sender, RoutedEventArgs e)
+    {
+        var fileOpenPicker = new FileOpenPicker();
+        InitializeWithWindow(fileOpenPicker);
+        fileOpenPicker.FileTypeFilter.Add(".nmoney");
+        fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileOpenPicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            _controller.AddAccount(file.Path);
+        }
     }
 }
