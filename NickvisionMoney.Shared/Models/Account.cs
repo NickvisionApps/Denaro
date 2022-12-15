@@ -37,7 +37,11 @@ public class Account : IDisposable
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         //Open Database
-        _database = new SqliteConnection(Path);
+        _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+        {
+            DataSource = Path,
+            Mode = SqliteOpenMode.ReadWriteCreate
+        }.ConnectionString);
         _database.Open();
         //Setup Tables
         var cmdTableGroups = _database.CreateCommand();

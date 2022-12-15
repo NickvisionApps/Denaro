@@ -12,12 +12,14 @@ namespace NickvisionMoney.Shared.Controllers;
 /// </summary>
 public class MainWindowController
 {
-    private List<string> _openAccounts;
-
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
+    /// <summary>
+    /// The list of open accounts
+    /// </summary>
+    public List<string> OpenAccounts { get; init; }
 
     /// <summary>
     /// Gets the AppInfo object
@@ -39,18 +41,6 @@ public class MainWindowController
     /// The list of recent accounts
     /// </summary>
     public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
-    /// <summary>
-    /// The number of accounts opened
-    /// </summary>
-    public int NumberOfOpenAccounts => _openAccounts.Count;
-    /// <summary>
-    /// The path of the first opened account
-    /// </summary>
-    public string FirstOpenAccountPath => _openAccounts[0];
-    /// <summary>
-    /// The path of the last opened account
-    /// </summary>
-    public string LastOpenAccountPath => _openAccounts[_openAccounts.Count - 1];
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -70,7 +60,7 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
-        _openAccounts = new List<string>();
+        OpenAccounts = new List<string>();
         Localizer = new Localizer();
     }
 
@@ -118,6 +108,13 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Creates a new AccountViewController
+    /// </summary>
+    /// <param name="index">The index of the open account to base the controller on</param>
+    /// <returns>The AccountViewController for the open account</returns>
+    public AccountViewController CreateAccountController(int index) => new AccountViewController(OpenAccounts[index]);
+
+    /// <summary>
     /// Adds an account to the list of opened accounts
     /// </summary>
     /// <param name="path">string</param>
@@ -127,9 +124,9 @@ public class MainWindowController
         {
             path += ".nmoney";
         }
-        if(!_openAccounts.Contains(path))
+        if(!OpenAccounts.Contains(path))
         {
-            _openAccounts.Add(path);
+            OpenAccounts.Add(path);
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);
@@ -145,5 +142,5 @@ public class MainWindowController
     /// Closes the account with the provided index
     /// </summary>
     /// <param name="index">int</param>
-    public void CloseAccount(int index) => _openAccounts.RemoveAt(index);
+    public void CloseAccount(int index) => OpenAccounts.RemoveAt(index);
 }
