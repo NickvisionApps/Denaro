@@ -200,7 +200,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-
+            PageOpenAccount.Content = new AccountView(_controller.CreateAccountController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)));
         }
         else if (pageName == "Settings")
         {
@@ -237,13 +237,13 @@ public sealed partial class MainWindow : Window
     {
         StatusPageAccount.Title = _controller.Localizer["SelectAccount"];
         StatusPageAccount.Description = _controller.Localizer["SelectAccountDescription"];
-        NavViewItemAccount.IsSelected = true;
         var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>())
         {
             new NavigationViewItem()
             {
                 Tag = "OpenAccount",
-                Content = Path.GetFileNameWithoutExtension(_controller.LastOpenAccountPath)
+                Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1]),
+                IsSelected = true
             }
         };
         NavViewItemAccount.MenuItemsSource = items;
