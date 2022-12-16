@@ -155,6 +155,7 @@
 	<data name="SelectAccountDescription" xml:space="preserve">
         <value>Select an account to view.</value>
     </data>
+	
 	<!--MainWindowController-->
 	<data name="Greeting.Generic" xml:space="preserve">
         <value>Good Day!</value>
@@ -178,6 +179,59 @@
 
 	<data name="AccountOpenedAlready" xml:space="preserve">
         <value>This account is already opened.</value>
+    </data>
+
+	<!--AccountView-->
+	<data name="NewTransaction" xml:space="preserve">
+        <value>New Transaction</value>
+    </data>
+
+	<data name="NewTransaction.Tooltip" xml:space="preserve">
+        <value>New Transaction (Ctrl+N)</value>
+    </data>
+
+	<data name="NewGroup" xml:space="preserve">
+        <value>New Group</value>
+    </data>
+
+	<data name="NewGroup.Tooltip" xml:space="preserve">
+        <value>New Group (Ctrl+Shift+N)</value>
+    </data>
+
+	<data name="TransferMoney" xml:space="preserve">
+        <value>Transfer Money</value>
+    </data>
+
+	<data name="TransferMoney.Tooltip" xml:space="preserve">
+        <value>Transfer Money (Ctrl+T)</value>
+    </data>
+
+	<data name="ImportFromFile" xml:space="preserve">
+        <value>Import from File</value>
+    </data>
+
+	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+        <value>Import from File (Ctrl+I)</value>
+    </data>
+
+	<data name="ExportToFile" xml:space="preserve">
+        <value>Export to File</value>
+    </data>
+
+	<data name="ExportToFile.Tooltip" xml:space="preserve">
+        <value>Export to File (Ctrl+E)</value>
+    </data>
+
+	<data name="Overview" xml:space="preserve">
+        <value>Overview</value>
+    </data>
+
+	<data name="Total" xml:space="preserve">
+        <value>Total</value>
+    </data>
+
+	<data name="Expense" xml:space="preserve">
+        <value>Expense</value>
     </data>
 
 	<!--Settings-->

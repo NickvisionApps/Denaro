@@ -11,6 +11,74 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock x:Name="LblTitle" Margin="30,30,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
+        <TextBlock x:Name="LblTitle" Margin="30,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,70,20,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+            <CommandBar DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                <CommandBar.Content>
+                    <StackPanel Margin="6,0,0,0" Orientation="Horizontal" Spacing="4">
+                        <TextBlock x:Name="LblTotalTitle"/>
+
+                        <TextBlock x:Name="LblTotalAmount"/>
+                    </StackPanel>
+                </CommandBar.Content>
+                
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton x:Name="BtnNewTransaction">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE14D;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="N"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+
+                    <AppBarButton x:Name="BtnNewGroup">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE138;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+
+                    <AppBarSeparator/>
+
+                    <AppBarButton x:Name="BtnTransferMoney">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE140;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="T"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+
+                    <AppBarSeparator/>
+
+                    <AppBarButton x:Name="BtnImportFromFile">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE11C;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="I"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+
+                    <AppBarButton x:Name="BtnExportToFile">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE118;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="E"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                </CommandBar.PrimaryCommands>
+            </CommandBar>
+        </Border>
     </Grid>
 </UserControl>

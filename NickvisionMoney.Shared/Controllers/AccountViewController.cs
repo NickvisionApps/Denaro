@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Models;
+﻿using NickvisionMoney.Shared.Helpers;
+using NickvisionMoney.Shared.Models;
 using System.IO;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -7,10 +8,16 @@ public class AccountViewController
 {
     private readonly Account _account;
 
-    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
+    public Localizer Localizer { get; init; }
 
-    public AccountViewController(string path)
+    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
+    public string AccountTotal => _account.Total.ToString("C");
+    public string AccountIncome => _account.Income.ToString("C");
+    public string AccountExpense => _account.Expense.ToString("C");
+
+    public AccountViewController(Localizer localizer, string path)
     {
         _account = new Account(path);
+        Localizer = localizer;
     }
 }
