@@ -2,6 +2,8 @@
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME;
 
@@ -10,6 +12,11 @@ namespace NickvisionMoney.GNOME;
 /// </summary>
 public class Program
 {
+    [DllImport("adwaita-1")]
+    private static extern nint g_resource_load([MarshalAs(UnmanagedType.LPStr)] string path);
+    [DllImport("adwaita-1")]
+    private static extern void g_resources_register(nint file);
+
     private readonly Adw.Application _application;
 
     /// <summary>
@@ -27,6 +34,16 @@ public class Program
         Adw.Module.Initialize();
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.FlagsNone);
         _application.OnActivate += OnActivate;
+
+        foreach(var prefix in new string[2] {"/app", "/usr"} )
+        {
+            var path = $"{prefix}/share/org.nickvision.money/org.nickvision.money.gresource";
+            if(File.Exists(path))
+            {
+                g_resources_register(g_resource_load(path));
+                break;
+            }
+        }
     }
 
     /// <summary>
