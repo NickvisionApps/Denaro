@@ -14,6 +14,7 @@ TransactionRow::TransactionRow(const Transaction& transaction, const std::locale
     m_row = adw_action_row_new();
     std::stringstream builder;
     builder << m_transaction.getDescription();
+    adw_preferences_row_set_use_markup(ADW_PREFERENCES_ROW(m_row), false);
     adw_action_row_set_title_lines(ADW_ACTION_ROW(m_row), 1);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_row), builder.str().c_str());
     builder.str("");
