@@ -1,7 +1,9 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Models;
 using System;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
 
@@ -43,6 +45,7 @@ public sealed partial class GroupRow : UserControl
         LblName.Text = _group.Name;
         LblDescription.Text = _group.Description;
         LblAmount.Text = _group.Balance.ToString("C");
+        LblAmount.Foreground = _group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 
     /// <summary>
