@@ -13,7 +13,7 @@ public class AccountViewController
     public Localizer Localizer { get; init; }
 
     public string DefaultTransactionColor => Configuration.Current.TransactionDefaultColor;
-    public string AccountTitle => Path.GetFileName(_account.Path);
+    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
     public decimal AmountTotal => _account.Total;
     public string AccountTotalString => _account.Total.ToString("C");
     public decimal AmountIncome => _account.Income;

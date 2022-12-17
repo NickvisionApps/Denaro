@@ -18,6 +18,7 @@ public sealed partial class AccountView : UserControl
         InitializeComponent();
         _controller = controller;
         //Localize Strings
+        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
         ToolTipService.SetToolTip(BtnNewTransaction, _controller.Localizer["NewTransaction", "Tooltip"]);
         BtnNewGroup.Label = _controller.Localizer["NewGroup"];
@@ -29,7 +30,6 @@ public sealed partial class AccountView : UserControl
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
         ToolTipService.SetToolTip(BtnExportToFile, _controller.Localizer["ExportToFile", "Tooltip"]);
         LblOverview.Text = _controller.Localizer["Overview"];
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
@@ -45,9 +45,10 @@ public sealed partial class AccountView : UserControl
         //Overview
         LblTitle.Text = _controller.AccountTitle;
         LblTotalAmount.Text = _controller.AccountTotalString;
-        LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
+        ChkFilterIncome.IsChecked = true;
         LblIncomeAmount.Text = _controller.AccountIncomeString;
         LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
+        ChkFilterExpense.IsChecked = true;
         LblExpenseAmount.Text = _controller.AccountExpenseString;
         LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
         //Groups

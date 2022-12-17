@@ -11,10 +11,16 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,20,20,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+        <TextBlock x:Name="LblTitle" Margin="30,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
+        
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,70,20,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
             <CommandBar DefaultLabelPosition="Right" VerticalContentAlignment="Center">
                 <CommandBar.Content>
-                    <TextBlock x:Name="LblTitle" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                    <StackPanel Margin="6,0,0,0" Orientation="Horizontal" Spacing="4">
+                        <TextBlock x:Name="LblTotalTitle"/>
+
+                        <TextBlock x:Name="LblTotalAmount"/>
+                    </StackPanel>
                 </CommandBar.Content>
                 
                 <CommandBar.PrimaryCommands>
@@ -75,29 +81,27 @@
             </CommandBar>
         </Border>
 
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,76,20,10" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,126,20,10" LastChildFill="True">
             <wct:DockPanel wct:DockPanel.Dock="Left" Width="340" LastChildFill="True">
                 <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                     <StackPanel Spacing="12">
                         <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" Spacing="4">
-                            <TextBlock x:Name="LblTotalTitle"/>
+                        <CheckBox x:Name="ChkFilterIncome" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock x:Name="LblIncomeTitle"/>
 
-                            <TextBlock x:Name="LblTotalAmount"/>
-                        </StackPanel>
-                        
-                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" Spacing="4">
-                            <TextBlock x:Name="LblIncomeTitle"/>
+                                <TextBlock x:Name="LblIncomeAmount"/>
+                            </StackPanel>
+                        </CheckBox>
 
-                            <TextBlock x:Name="LblIncomeAmount"/>
-                        </StackPanel>
+                        <CheckBox x:Name="ChkFilterExpense" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock x:Name="LblExpenseTitle"/>
 
-                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" Spacing="4">
-                            <TextBlock x:Name="LblExpenseTitle"/>
-
-                            <TextBlock x:Name="LblExpenseAmount"/>
-                        </StackPanel>
+                                <TextBlock x:Name="LblExpenseAmount"/>
+                            </StackPanel>
+                        </CheckBox>
                     </StackPanel>
                 </Border>
                 
