@@ -10,6 +10,7 @@ using namespace NickvisionMoney::UI::Controls;
 GroupRow::GroupRow(const Group& group, const std::locale& locale, bool filterActive) : m_group{ group }, m_gobj{ adw_action_row_new() }
 {
     //Row Settings
+    adw_preferences_row_set_use_markup(ADW_PREFERENCES_ROW(m_gobj), false);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_gobj), m_group.getName().c_str());
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_gobj), m_group.getDescription().c_str());
     //Filter Checkbox
