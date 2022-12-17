@@ -86,7 +86,7 @@ public sealed partial class MainWindow : Window
             _micaController.SetSystemBackdropConfiguration(_backdropConfiguration);
         }
         //Window Sizing
-        _appWindow.Resize(new SizeInt32(800, 600));
+        _appWindow.Resize(new SizeInt32(900, 700));
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         NavViewItemHome.Content = _controller.Localizer["Home"];

@@ -42,7 +42,7 @@ public sealed partial class TransactionRow : UserControl
         //Load Transaction
         BtnId.Content = _transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
-        BtnId.Foreground = ActualTheme == ElementTheme.Light ? new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)) : new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+        BtnId.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         LblName.Text = _transaction.Description;
         LblDate.Text = _transaction.Date.ToString("d");
         LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C")}";
