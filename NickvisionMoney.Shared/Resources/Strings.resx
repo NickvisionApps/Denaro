@@ -124,6 +124,10 @@
         <value>New Account (Ctrl+N)</value>
     </data>
 
+  <data name="UnableToOverride" xml:space="preserve">
+    <value>Unable to override an opened account.</value>
+  </data>
+
 	<data name="OpenAccount" xml:space="preserve">
         <value>Open Account</value>
     </data>

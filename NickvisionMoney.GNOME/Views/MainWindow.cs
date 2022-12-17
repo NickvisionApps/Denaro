@@ -31,6 +31,16 @@ public class MainWindow : Adw.ApplicationWindow
         [MarshalAs(UnmanagedType.LPStr)] string releaseNotesKey, [MarshalAs(UnmanagedType.LPStr)] string releaseNotesValue,
         nint terminator);
 
+    [DllImport("adwaita-1")]
+    private static extern nint gtk_file_chooser_get_file(nint chooser);
+
+    [DllImport("adwaita-1", CharSet = CharSet.Ansi)]
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    private static extern string g_file_get_path(nint file);
+
+    [DllImport("adwaita-1")]
+    private static extern nuint g_file_get_type();
+
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -247,9 +257,9 @@ public class MainWindow : Adw.ApplicationWindow
         AddAction(actAbout);
         application.SetAccelsForAction("win.about", new string[] { "F1" });
         //Drop Target
-        // _dropTarget = Gtk.DropTarget.New(GLib.Type.File, Gdk.DragAction.Copy);
-        // _dropTarget.OnCurrentDrop += OnDrop;
-        // AddController(_dropTarget);
+        _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
+        _dropTarget.OnDrop += OnDrop;
+        AddController(_dropTarget);
         //Initialize additional variables
         _listRecentAccountsRows = new List<Adw.ActionRow> {};
         _listRecentAccountsOnStartRows = new List<Adw.ActionRow> {};
@@ -307,7 +317,25 @@ public class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         saveFileDialog.AddFilter(filter);
-        //saveFileDialog.OnResponse +=
+        saveFileDialog.OnResponse += (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                if(_controller.OpenAccounts.Contains(path))
+                {
+                    _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
+                }
+                else
+                {
+                    if(File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                    _controller.AddAccount(path);
+                }
+            }
+        };
         saveFileDialog.Show();
     }
 
@@ -325,7 +353,14 @@ public class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         openFileDialog.AddFilter(filter);
-        //openFileDialog.OnResponse +=
+        openFileDialog.OnResponse += (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                _controller.AddAccount(path);
+            }
+        };
         openFileDialog.Show();
     }
 
@@ -397,16 +432,17 @@ public class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="dropValue">GObject.Value</param>
     /// <param name="e">EventArgs</param>
-    private bool OnDrop(GObject.Value dropValue, EventArgs e)
+    private void OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
-        var file = (Gio.File)dropValue.GetObject();
-        var path = file.GetPath();
-        if(Path.GetExtension(path) == ".nmoney")
+        var obj = e.Value.GetObject();
+        if(obj != null)
         {
-            _controller.AddAccount(path);
-            return true;
+            var path = g_file_get_path(obj.Handle);
+            if(File.Exists(path))
+            {
+                _controller.AddAccount(path);
+            }
         }
-        return false;
     }
 
     /// <summary>
