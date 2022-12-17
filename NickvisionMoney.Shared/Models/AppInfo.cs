@@ -64,4 +64,10 @@ public class AppInfo
         IssueTracker = new Uri("about:blank");
         SupportUrl = new Uri("about:blank");
     }
+
+    /// <summary>
+    /// Gets whether or not the application version is a development version or not
+    /// </summary>
+    /// <returns>True for development version, else false</returns>
+    public bool GetIsDevelVersion() => Version.Contains("-");
 }
