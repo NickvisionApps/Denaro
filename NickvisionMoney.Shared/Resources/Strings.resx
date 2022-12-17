@@ -303,6 +303,18 @@
         <value>System</value>
     </data>
 
+  <data name="TransactionColor" xml:space="preserve">
+        <value>Transaction Default Color</value>
+    </data>
+
+   <data name="TransferColor" xml:space="preserve">
+        <value>Transfer Default Color</value>
+    </data>
+
+  <data name="ColorChangeForNewTransactions" xml:space="preserve">
+        <value>A change in this setting will only be applied to newly added transactions.</value>
+    </data>
+
 	<!--Shortcuts Dialog-->
 	<data name="Folder.Shortcut" xml:space="preserve">
         <value>Folder</value>
@@ -337,10 +349,6 @@
 	<data name="MainMenu.GTK" xml:space="preserve">
 		<value>Main Menu</value>
 	</data>
-
-	<data name="ThemeDescription.GTK" xml:space="preserve">
-        <value>A theme change will be applied when the dialog is closed.</value>
-    </data>
 
   <data name="AccountActions.GTK" xml:space="preserve">
     <value>Actions</value>
