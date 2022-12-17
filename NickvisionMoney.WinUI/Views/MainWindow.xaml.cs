@@ -182,7 +182,6 @@ public sealed partial class MainWindow : Window
                         if(Path.GetExtension(file.Path) == ".nmoney")
                         {
                             _controller.AddAccount(file.Path);
-                            break;
                         }
                     }
                 }
@@ -280,7 +279,18 @@ public sealed partial class MainWindow : Window
         var file = await fileSavePicker.PickSaveFileAsync();
         if(file != null)
         {
-            _controller.AddAccount(file.Path);
+            if(_controller.OpenAccounts.Contains(file.Path))
+            {
+                NotificationSent(null, new NotificationSentEventArgs(_controller.Localizer["UnableToOverride"], NotificationSeverity.Warning));
+            }
+            else
+            {
+                if(File.Exists(file.Path))
+                {
+                    File.Delete(file.Path);
+                }
+                _controller.AddAccount(file.Path);
+            }
         }
     }
 
