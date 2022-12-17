@@ -12,7 +12,7 @@
 
     <Grid>
         <TextBlock x:Name="LblTitle" Margin="30,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
-
+        
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,70,20,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
             <CommandBar DefaultLabelPosition="Right" VerticalContentAlignment="Center">
                 <CommandBar.Content>
@@ -82,25 +82,53 @@
         </Border>
 
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,126,20,10" LastChildFill="True">
-            <Border wct:DockPanel.Dock="Left" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                <StackPanel Spacing="6">
-                    <TextBlock x:Name="LblGroups" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+            <wct:DockPanel wct:DockPanel.Dock="Left" Width="340" LastChildFill="True">
+                <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <StackPanel Spacing="12">
+                        <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                    <ListView x:Name="ListGroups" MinWidth="340" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
-                </StackPanel>
-            </Border>
+                        <CheckBox x:Name="ChkFilterIncome" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock x:Name="LblIncomeTitle"/>
 
+                                <TextBlock x:Name="LblIncomeAmount"/>
+                            </StackPanel>
+                        </CheckBox>
+
+                        <CheckBox x:Name="ChkFilterExpense" Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock x:Name="LblExpenseTitle"/>
+
+                                <TextBlock x:Name="LblExpenseAmount"/>
+                            </StackPanel>
+                        </CheckBox>
+                    </StackPanel>
+                </Border>
+                
+                <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <StackPanel Spacing="6">
+                        <TextBlock x:Name="LblGroups" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </wct:DockPanel>
+            
             <Border wct:DockPanel.Dock="Right" Margin="6,0,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                 <StackPanel Spacing="6">
                     <TextBlock x:Name="LblTransactions" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                    <GridView x:Name="ListTransactions"  SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
-                        <GridView.ItemContainerStyle>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="Margin" Value="6"/>
-                            </Style>
-                        </GridView.ItemContainerStyle>
-                    </GridView>
+                    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                        <GridView x:Name="ListTransactions" Margin="6,0,0,0" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Margin" Value="6"/>
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                        </GridView>
+                    </ScrollViewer>
                 </StackPanel>
             </Border>
         </wct:DockPanel>
