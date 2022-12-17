@@ -368,11 +368,11 @@ public class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
-        var developersCredits = new List<string>(_controller.Localizer["Developers.Credits"].Split(Environment.NewLine));
+        var developersCredits = new List<string>(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
         developersCredits.Add(null);
-        var designersCredits = new List<string>(_controller.Localizer["Designers.Credits"].Split(Environment.NewLine));
+        var designersCredits = new List<string>(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
         designersCredits.Add(null);
-        var artistsCredits = new List<string>(_controller.Localizer["Artists.Credits"].Split(Environment.NewLine));
+        var artistsCredits = new List<string>(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
         artistsCredits.Add(null);
         adw_show_about_window(this.Handle,
                           "application-name", _controller.AppInfo.ShortName,
@@ -388,7 +388,7 @@ public class MainWindow : Adw.ApplicationWindow
                           "developers", developersCredits.ToArray(),
                           "designers", designersCredits.ToArray(),
                           "artists", artistsCredits.ToArray(),
-                          "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["TranslatorCredits"]) ? null : _controller.Localizer["TranslatorCredits"]),
+                          "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? null : _controller.Localizer["Translators", "Credits"]),
                           "release-notes", _controller.AppInfo.Changelog,
                           IntPtr.Zero);
     }
