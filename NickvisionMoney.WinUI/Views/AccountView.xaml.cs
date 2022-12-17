@@ -1,7 +1,9 @@
 using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.WinUI.Controls;
+using NickvisionMoney.WinUI.Helpers;
 using System;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -52,7 +54,7 @@ public sealed partial class AccountView : UserControl
         ListTransactions.Items.Clear();
         foreach(var pair in _controller.Transactions)
         {
-            var transactionRow = new TransactionRow(pair.Value);
+            var transactionRow = new TransactionRow(pair.Value, ColorHelpers.FromRGBA(_controller.DefaultTransactionColor) ?? Color.FromArgb(255, 0, 0, 0));
             transactionRow.EditTriggered += EditTransaction;
             transactionRow.DeleteTriggered += DeleteTransaction;
             ListTransactions.Items.Add(transactionRow);

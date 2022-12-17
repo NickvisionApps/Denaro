@@ -11,8 +11,10 @@
     mc:Ignorable="d" MinWidth="400">
 
     <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-        <wct:DockPanel Margin="10,6,10,6" LastChildFill="False">
-            <StackPanel wct:DockPanel.Dock="Left" Orientation="Vertical">
+        <wct:DockPanel Margin="10,10,10,6" LastChildFill="False">
+            <Button x:Name="BtnId" wct:DockPanel.Dock="Left" CornerRadius="20"/>
+
+            <StackPanel wct:DockPanel.Dock="Left" Margin="6,0,0,0" Orientation="Vertical">
                 <TextBlock x:Name="LblName"/>
 
                 <TextBlock x:Name="LblDate" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>

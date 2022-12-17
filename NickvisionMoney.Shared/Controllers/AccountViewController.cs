@@ -12,6 +12,7 @@ public class AccountViewController
 
     public Localizer Localizer { get; init; }
 
+    public string DefaultTransactionColor => Configuration.Current.TransactionDefaultColor;
     public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
     public string AccountTotal => _account.Total.ToString("C");
     public string AccountIncome => _account.Income.ToString("C");

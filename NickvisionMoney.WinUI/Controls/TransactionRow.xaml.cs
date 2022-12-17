@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Helpers;
 using System;
 using Windows.UI;
 
@@ -29,11 +30,19 @@ public sealed partial class TransactionRow : UserControl
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
-    public TransactionRow(Transaction transaction)
+    /// <summary>
+    /// Constructs a TransactionRow
+    /// </summary>
+    /// <param name="transaction">The Transaction model to represent</param>
+    /// <param name="defaultColor">The default transaction color</param>
+    public TransactionRow(Transaction transaction, Color defaultColor)
     {
         InitializeComponent();
         _transaction = transaction;
         //Load Transaction
+        BtnId.Content = _transaction.Id;
+        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
+        BtnId.Foreground = ActualTheme == ElementTheme.Light ? new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)) : new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
         LblName.Text = _transaction.Description;
         LblDate.Text = _transaction.Date.ToString("d");
         LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C")}";
