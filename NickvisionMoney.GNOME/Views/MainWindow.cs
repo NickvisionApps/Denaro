@@ -174,8 +174,8 @@ public class MainWindow : Adw.ApplicationWindow
         _boxStatusPage.Append(_lblDrag);
         //Page No Accounts
         _pageStatusNoAccounts = Adw.StatusPage.New();
-        _pageStatusNoAccounts.SetIconName("org.nickvision.money-symbolic");
-        _pageStatusNoAccounts.SetTitle(_controller.WelcomeMessage);
+        _pageStatusNoAccounts.SetIconName(_controller.ShowSun ? "sun-alt-symbolic" : "moon-symbolic");
+        _pageStatusNoAccounts.SetTitle(_controller.Greeting);
         _pageStatusNoAccounts.SetDescription(_controller.Localizer["StartPageDescription"]);
         _pageStatusNoAccounts.SetChild(_boxStatusPage);
         //Page Tabs
@@ -265,10 +265,10 @@ public class MainWindow : Adw.ApplicationWindow
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle, _controller.CreateAccountViewControllerForLatestAccount());
+        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle, _controller.CreateAccountController(_controller.OpenAccounts.Count - 1));
         _tabView.SetSelectedPage(newAccountView.GetPage());
         _accountViews.Add(newAccountView.GetPage());
-        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : null);
         UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
@@ -390,8 +390,8 @@ public class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.FirstOpenAccountPath : null);
-        if(_controller.NumberOfOpenAccounts == 0)
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : null);
+        if(_controller.OpenAccounts.Count == 0)
         {
             _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");

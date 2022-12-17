@@ -21,7 +21,9 @@ mkdir -p $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps
 cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/bank-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
 cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/larger-brush-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
 cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/money-none-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
+cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/moon-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
 cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/org.nickvision.money-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
+cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/sun-alt-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
 cp $SOURCE_PREFIX/NickvisionMoney.Shared/Resources/wallet2-symbolic.svg $INSTALL_PREFIX/share/icons/hicolor/symbolic/apps/
 
 echo Installing GResource...
