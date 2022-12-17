@@ -48,6 +48,15 @@ public sealed partial class AccountView : UserControl
             groupRow.FilterChanged += UpdateGroupFilter;
             ListGroups.Items.Add(groupRow);
         }
+        //Transactions
+        ListTransactions.Items.Clear();
+        foreach(var pair in _controller.Transactions)
+        {
+            var transactionRow = new TransactionRow(pair.Value);
+            transactionRow.EditTriggered += EditTransaction;
+            transactionRow.DeleteTriggered += DeleteTransaction;
+            ListTransactions.Items.Add(transactionRow);
+        }
     }
 
     private async void EditGroup(object? sender, uint groupId)
@@ -89,12 +98,47 @@ public sealed partial class AccountView : UserControl
         await contentDialog.ShowAsync();
     }
 
+    private async void EditTransaction(object? sender, uint groupId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Edit transaction not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    private async void DeleteTransaction(object? sender, uint groupId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Delete transaction not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
     private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if(ListGroups.SelectedIndex != -1)
         {
             EditGroup(null, ((GroupRow)ListGroups.SelectedItem).Id);
             ListGroups.SelectedIndex = -1;
+        }
+    }
+
+    private void ListTransactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ListTransactions.SelectedIndex != -1)
+        {
+            EditTransaction(null, ((TransactionRow)ListTransactions.SelectedItem).Id);
+            ListTransactions.SelectedIndex = -1;
         }
     }
 }

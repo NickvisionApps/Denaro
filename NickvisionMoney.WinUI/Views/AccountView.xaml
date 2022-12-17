@@ -94,13 +94,12 @@
                 <StackPanel Spacing="6">
                     <TextBlock x:Name="LblTransactions" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                    <GridView x:Name="ListTransactions">
+                    <GridView x:Name="ListTransactions"  SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="Margin" Value="6"/>
                             </Style>
                         </GridView.ItemContainerStyle>
-
                     </GridView>
                 </StackPanel>
             </Border>

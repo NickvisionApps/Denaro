@@ -10,7 +10,7 @@
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d">
 
-    <wct:DockPanel Margin="10" LastChildFill="False">
+    <wct:DockPanel Margin="6" LastChildFill="False">
         <CheckBox x:Name="ChkFilter" wct:DockPanel.Dock="Left" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
             <CheckBox.Content>
                 <StackPanel Margin="6,0,0,0" Orientation="Vertical">

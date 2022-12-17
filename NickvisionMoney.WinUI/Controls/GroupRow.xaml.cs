@@ -12,6 +12,9 @@ public sealed partial class GroupRow : UserControl
 {
     private readonly Group _group;
 
+    /// <summary>
+    /// The Id of the Group the row represents
+    /// </summary>
     public uint Id => _group.Id;
 
     /// <summary>
