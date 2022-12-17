@@ -234,7 +234,11 @@
         <value>Total</value>
     </data>
 
-	<data name="Expense" xml:space="preserve">
+	<data name="Income" xml:space="preserve">
+        <value>Income</value>
+    </data>
+
+  <data name="Expense" xml:space="preserve">
         <value>Expense</value>
     </data>
 
@@ -244,6 +248,34 @@
 
 	<data name="Transactions" xml:space="preserve">
         <value>Transactions</value>
+    </data>
+
+  <data name="ResetFilters.Overview" xml:space="preserve">
+        <value>Reset Overview Filters</value>
+    </data>
+
+  <data name="ResetFilters.Groups" xml:space="preserve">
+        <value>Reset Groups Filters</value>
+    </data>
+
+  <data name="ResetFilters.Calendar" xml:space="preserve">
+        <value>Reset Dates Filters</value>
+    </data>
+
+  <data name="Calendar" xml:space="preserve">
+        <value>Calendar</value>
+    </data>
+
+  <data name="SelectRange" xml:space="preserve">
+        <value>Select Range</value>
+    </data>
+
+  <data name="Start.DateRange" xml:space="preserve">
+        <value>Start</value>
+    </data>
+
+  <data name="End.DateRange" xml:space="preserve">
+        <value>End</value>
     </data>
 
 	<!--Settings-->
@@ -309,4 +341,8 @@
 	<data name="ThemeDescription.GTK" xml:space="preserve">
         <value>A theme change will be applied when the dialog is closed.</value>
     </data>
+
+  <data name="AccountActions.GTK" xml:space="preserve">
+    <value>Actions</value>
+  </data>
 </root>
