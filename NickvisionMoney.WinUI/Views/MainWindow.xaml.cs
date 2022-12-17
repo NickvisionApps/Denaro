@@ -242,12 +242,12 @@ public sealed partial class MainWindow : Window
             new NavigationViewItem()
             {
                 Tag = "OpenAccount",
-                Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1]),
-                IsSelected = true
+                Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1])
             }
         };
         NavViewItemAccount.MenuItemsSource = items;
         NavViewItemAccount.IsExpanded = true;
+        NavViewItemAccount.IsSelected = true;
     }
 
     /// <summary>

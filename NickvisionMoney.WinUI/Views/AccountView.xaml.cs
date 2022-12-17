@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Controllers;
-using System.IO;
+using NickvisionMoney.WinUI.Controls;
+using System;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -24,8 +25,76 @@ public sealed partial class AccountView : UserControl
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
         ToolTipService.SetToolTip(BtnExportToFile, _controller.Localizer["ExportToFile", "Tooltip"]);
+        LblGroups.Text = _controller.Localizer["Groups"];
+        LblTransactions.Text = _controller.Localizer["Transactions"];
+        //Register Events
+        _controller.AccountInfoChanged += AccountInfoChanged;
         //Load Account
+        AccountInfoChanged(null, EventArgs.Empty);
+    }
+
+    private void AccountInfoChanged(object? sender, EventArgs e)
+    {
+        //Overview
         LblTitle.Text = _controller.AccountTitle;
         LblTotalAmount.Text = _controller.AccountTotal;
+        //Groups
+        ListGroups.Items.Clear();
+        foreach (var pair in _controller.Groups)
+        {
+            var groupRow = new GroupRow(pair.Value);
+            groupRow.EditTriggered += EditGroup;
+            groupRow.DeleteTriggered += DeleteGroup;
+            groupRow.FilterChanged += UpdateGroupFilter;
+            ListGroups.Items.Add(groupRow);
+        }
+    }
+
+    private async void EditGroup(object? sender, uint groupId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Edit group not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    private async void DeleteGroup(object? sender, uint groupId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Delete group not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    private async void UpdateGroupFilter(object? sender, uint groupId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Update filter not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if(ListGroups.SelectedIndex != -1)
+        {
+            EditGroup(null, ((GroupRow)ListGroups.SelectedItem).Id);
+            ListGroups.SelectedIndex = -1;
+        }
     }
 }

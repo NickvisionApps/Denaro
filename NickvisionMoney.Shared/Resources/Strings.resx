@@ -234,6 +234,14 @@
         <value>Expense</value>
     </data>
 
+	<data name="Groups" xml:space="preserve">
+        <value>Groups</value>
+    </data>
+
+	<data name="Transactions" xml:space="preserve">
+        <value>Transactions</value>
+    </data>
+
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
         <value>User Interface</value>

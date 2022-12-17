@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\ActionRow.xaml" />
+    <None Remove="Controls\GroupRow.xaml" />
     <None Remove="Controls\StatusPage.xaml" />
     <None Remove="Controls\ViewStack.xaml" />
     <None Remove="Controls\ViewStackPage.xaml" />
@@ -57,6 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\org.nickvision.money.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\GroupRow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\AccountView.xaml">
