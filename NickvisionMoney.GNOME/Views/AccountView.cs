@@ -247,9 +247,9 @@ public class AccountView
     {
         _accountLoading = true;
         //Overview
-        _lblTotal.SetLabel(_controller.AccountTotal);
-        _lblIncome.SetLabel(_controller.AccountIncome);
-        _lblExpense.SetLabel(_controller.AccountExpense);
+        _lblTotal.SetLabel(_controller.AccountTotalString);
+        _lblIncome.SetLabel(_controller.AccountIncomeString);
+        _lblExpense.SetLabel(_controller.AccountExpenseString);
 
         _accountLoading = false;
     }

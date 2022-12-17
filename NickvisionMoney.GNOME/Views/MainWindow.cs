@@ -62,8 +62,9 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Adw.StatusPage _pageStatusNoAccounts;
     private readonly Gtk.Box _boxStatusPage;
     private readonly List<Adw.ActionRow> _listRecentAccountsOnStartRows;
-    private readonly Adw.PreferencesGroup _groupRecentAccountsOnStart;
-    private readonly Gtk.Box _boxStatusButtons;
+    private readonly Adw.Clamp _clampRecentAccountsOnStart;
+    private readonly Adw.PreferencesGroup _grpRecentAccountsOnStart;
+    private readonly Gtk.FlowBox _flowBoxStatusButtons;
     private readonly Gtk.Button _btnNewAccount;
     private readonly Gtk.Button _btnOpenAccount;
     private readonly Gtk.Label _lblDrag;
@@ -86,7 +87,8 @@ public class MainWindow : Adw.ApplicationWindow
         //Window Settings
         _controller = controller;
         _application = application;
-        SetDefaultSize(900, 700);
+        SetDefaultSize(900, 720);
+        SetSizeRequest(360, -1);
         if(_controller.IsDevVersion)
         {
             AddCssClass("devel");
@@ -164,16 +166,23 @@ public class MainWindow : Adw.ApplicationWindow
         _toastOverlay.SetVexpand(true);
         _mainBox.Append(_toastOverlay);
         //Status Buttons
-        _boxStatusButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 12);
-        _boxStatusButtons.SetHexpand(true);
-        _boxStatusButtons.SetHalign(Gtk.Align.Center);
+        _flowBoxStatusButtons = Gtk.FlowBox.New();
+        _flowBoxStatusButtons.SetColumnSpacing(12);
+        _flowBoxStatusButtons.SetRowSpacing(6);
+        _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
+        _flowBoxStatusButtons.SetHomogeneous(true);
+        _flowBoxStatusButtons.SetHexpand(true);
+        _flowBoxStatusButtons.SetHalign(Gtk.Align.Center);
         //List Recent Accounts On The Start Screen
-        _groupRecentAccountsOnStart = Adw.PreferencesGroup.New();
-        _groupRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
-        _groupRecentAccountsOnStart.SetSizeRequest(200, 55);
-        _groupRecentAccountsOnStart.SetMarginTop(24);
-        _groupRecentAccountsOnStart.SetMarginBottom(24);
-        _groupRecentAccountsOnStart.SetVisible(false);
+        _clampRecentAccountsOnStart = Adw.Clamp.New();
+        _clampRecentAccountsOnStart.SetMaximumSize(420);
+        _grpRecentAccountsOnStart = Adw.PreferencesGroup.New();
+        _grpRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
+        _grpRecentAccountsOnStart.SetSizeRequest(200, 55);
+        _grpRecentAccountsOnStart.SetMarginTop(24);
+        _grpRecentAccountsOnStart.SetMarginBottom(24);
+        _grpRecentAccountsOnStart.SetVisible(false);
+        _clampRecentAccountsOnStart.SetChild(_grpRecentAccountsOnStart);
         //New Account Button
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
@@ -181,14 +190,14 @@ public class MainWindow : Adw.ApplicationWindow
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
-        _boxStatusButtons.Append(_btnNewAccount);
+        _flowBoxStatusButtons.Append(_btnNewAccount);
         //Open Account Button
         _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
-        _boxStatusButtons.Append(_btnOpenAccount);
+        _flowBoxStatusButtons.Append(_btnOpenAccount);
         //Drag Label
         _lblDrag = Gtk.Label.New(_controller.Localizer["DragLabel"]);
         _lblDrag.AddCssClass("dim-label");
@@ -196,10 +205,10 @@ public class MainWindow : Adw.ApplicationWindow
         _lblDrag.SetJustify(Gtk.Justification.Center);
         //Status Page Box
         _boxStatusPage = Gtk.Box.New(Gtk.Orientation.Vertical, 12);
-        _boxStatusPage.SetHexpand(false);
-        _boxStatusPage.SetHalign(Gtk.Align.Center);
-        _boxStatusPage.Append(_groupRecentAccountsOnStart);
-        _boxStatusPage.Append(_boxStatusButtons);
+        _boxStatusPage.SetHexpand(true);
+        _boxStatusPage.SetHalign(Gtk.Align.Fill);
+        _boxStatusPage.Append(_clampRecentAccountsOnStart);
+        _boxStatusPage.Append(_flowBoxStatusButtons);
         _boxStatusPage.Append(_lblDrag);
         //Page No Accounts
         _pageStatusNoAccounts = Adw.StatusPage.New();
@@ -276,7 +285,7 @@ public class MainWindow : Adw.ApplicationWindow
         {
             UpdateRecentAccountsOnStart();
             _pageStatusNoAccounts.SetDescription("");
-            _groupRecentAccountsOnStart.SetVisible(true);
+            _grpRecentAccountsOnStart.SetVisible(true);
         }
     }
 
@@ -462,7 +471,7 @@ public class MainWindow : Adw.ApplicationWindow
             _btnMenuAccount.SetVisible(false);
             _btnFlapToggle.SetVisible(false);
             UpdateRecentAccountsOnStart();
-            _groupRecentAccountsOnStart.SetVisible(true);
+            _grpRecentAccountsOnStart.SetVisible(true);
         }
     }
 
@@ -491,13 +500,13 @@ public class MainWindow : Adw.ApplicationWindow
     {
         foreach(var row in _listRecentAccountsOnStartRows)
         {
-            _groupRecentAccountsOnStart.Remove(row);
+            _grpRecentAccountsOnStart.Remove(row);
         }
         _listRecentAccountsOnStartRows.Clear();
         foreach(var accountPath in _controller.RecentAccounts)
         {
             var row = CreateRecentAccountRow(accountPath);
-            _groupRecentAccountsOnStart.Add(row);
+            _grpRecentAccountsOnStart.Add(row);
             _listRecentAccountsOnStartRows.Add(row);
         }
     }
