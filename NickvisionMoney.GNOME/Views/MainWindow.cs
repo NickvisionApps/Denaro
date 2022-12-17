@@ -51,7 +51,6 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Adw.ViewStack _viewStack;
     private readonly Adw.StatusPage _pageStatusNoAccounts;
     private readonly Gtk.Box _boxStatusPage;
-    private readonly Gtk.Label _lblRecentAccounts;
     private readonly List<Adw.ActionRow> _listRecentAccountsOnStartRows;
     private readonly Adw.PreferencesGroup _groupRecentAccountsOnStart;
     private readonly Gtk.Box _boxStatusButtons;
@@ -375,22 +374,22 @@ public class MainWindow : Adw.ApplicationWindow
         var artistsCredits = new List<string>(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
         artistsCredits.Add(null);
         adw_show_about_window(this.Handle,
-                          "application-name", _controller.AppInfo.ShortName,
-                          "application-icon", (_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : "")),
-                          "version", _controller.AppInfo.Version,
-                          "comments", _controller.AppInfo.Description,
-                          "developer-name", "Nickvision",
-                          "license-type", (int)Gtk.License.Gpl30,
-                          "copyright", "(C) Nickvision 2021-2022",
-                          "website", _controller.AppInfo.GitHubRepo.ToString(),
-                          "issue-url", _controller.AppInfo.IssueTracker.ToString(),
-                          "support-url", _controller.AppInfo.SupportUrl.ToString(),
-                          "developers", developersCredits.ToArray(),
-                          "designers", designersCredits.ToArray(),
-                          "artists", artistsCredits.ToArray(),
-                          "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? null : _controller.Localizer["Translators", "Credits"]),
-                          "release-notes", _controller.AppInfo.Changelog,
-                          IntPtr.Zero);
+            "application-name", _controller.AppInfo.ShortName,
+            "application-icon", (_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : "")),
+            "version", _controller.AppInfo.Version,
+            "comments", _controller.AppInfo.Description,
+            "developer-name", "Nickvision",
+            "license-type", (int)Gtk.License.Gpl30,
+            "copyright", "© Nickvision 2021-2022",
+            "website", _controller.AppInfo.GitHubRepo.ToString(),
+            "issue-url", _controller.AppInfo.IssueTracker.ToString(),
+            "support-url", _controller.AppInfo.SupportUrl.ToString(),
+            "developers", developersCredits.ToArray(),
+            "designers", designersCredits.ToArray(),
+            "artists", artistsCredits.ToArray(),
+            "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? null : _controller.Localizer["Translators", "Credits"]),
+            "release-notes", _controller.AppInfo.Changelog,
+            IntPtr.Zero);
     }
 
     /// <summary>
