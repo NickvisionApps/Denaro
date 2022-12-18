@@ -37,6 +37,26 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// The default color of a transaction
+    /// </summary>
+    public string TransactionDefaultColor
+    {
+        get => Configuration.Current.TransactionDefaultColor;
+
+        set => Configuration.Current.TransactionDefaultColor = value;
+    }
+
+    /// <summary>
+    /// The default color of a transfer
+    /// </summary>
+    public string TransferDefaultColor
+    {
+        get => Configuration.Current.TransferDefaultColor;
+
+        set => Configuration.Current.TransferDefaultColor = value;
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
     public void SaveConfiguration() => Configuration.Current.Save();

@@ -348,16 +348,28 @@
         <value>System</value>
     </data>
 
-  <data name="TransactionColor" xml:space="preserve">
+	<data name="Colors" xml:space="preserve">
+        <value>Colors</value>
+    </data>
+
+	<data name="ColorsDescription" xml:space="preserve">
+        <value>Customize the colors used by Money.</value>
+    </data>
+
+    <data name="TransactionColor" xml:space="preserve">
         <value>Transaction Default Color</value>
     </data>
 
-   <data name="TransferColor" xml:space="preserve">
+    <data name="TransferColor" xml:space="preserve">
         <value>Transfer Default Color</value>
     </data>
 
-    <data name="ColorChangeForNewTransactions" xml:space="preserve">
+    <data name="TransactionColorDescription" xml:space="preserve">
         <value>A change in this setting will only be applied to newly added transactions.</value>
+    </data>
+
+	<data name="TransferColorDescription" xml:space="preserve">
+        <value>A change in this setting will only be applied to new transfers.</value>
     </data>
 
 	<!--Shortcuts Dialog-->

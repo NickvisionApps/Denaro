@@ -103,7 +103,7 @@ public sealed partial class AccountView : UserControl
             {
                 foreach (var transaction in _controller.FilteredTransactions)
                 {
-                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.DefaultTransactionColor) ?? Color.FromArgb(255, 0, 0, 0));
+                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0));
                     transactionRow.EditTriggered += EditTransaction;
                     transactionRow.DeleteTriggered += DeleteTransaction;
                     if (_controller.SortFirstToLast)

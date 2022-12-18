@@ -67,7 +67,7 @@ public class PreferencesDialog : Adw.Window
         //Transaction Color Row
         _rowTransactionColor = Adw.ActionRow.New();
         _rowTransactionColor.SetTitle(_controller.Localizer["TransactionColor"]);
-        _rowTransactionColor.SetSubtitle(_controller.Localizer["ColorChangeForNewTransactions"]);
+        _rowTransactionColor.SetSubtitle(_controller.Localizer["TransactionColorDescription"]);
         _btnTransactionColor = Gtk.ColorButton.New();
         _btnTransactionColor.SetSensitive(false);
         _btnTransactionColor.SetValign(Gtk.Align.Center);
@@ -77,7 +77,7 @@ public class PreferencesDialog : Adw.Window
         //Transfer Color Row
         _rowTransferColor = Adw.ActionRow.New();
         _rowTransferColor.SetTitle(_controller.Localizer["TransferColor"]);
-        _rowTransferColor.SetSubtitle(_controller.Localizer["ColorChangeForNewTransactions"]);
+        _rowTransferColor.SetSubtitle(_controller.Localizer["TransferColorDescription"]);
         _btnTransferColor = Gtk.ColorButton.New();
         _btnTransferColor.SetSensitive(false);
         _btnTransferColor.SetValign(Gtk.Align.Center);

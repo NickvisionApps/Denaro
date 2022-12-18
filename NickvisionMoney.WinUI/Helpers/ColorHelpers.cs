@@ -44,7 +44,7 @@ public static class ColorHelpers
         }
     }
 
-    public static string ToRGBA(Color color)
+    public static string ToRGBA(this Color color)
     {
         if(color.A == 255)
         {

@@ -3,16 +3,24 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppLifecycle;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
 /// <summary>
 /// The PreferencesPage for the application
 /// </summary>
-public sealed partial class PreferencesPage : UserControl
+public sealed partial class PreferencesPage : UserControl, INotifyPropertyChanged
 {
     private readonly PreferencesViewController _controller;
+    private Color _transactionDefaultColor;
+    private Color _transferDefaultColor;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Constructs a PreferencesPage
@@ -36,8 +44,40 @@ public sealed partial class PreferencesPage : UserControl
         CmbTheme.Items.Add(_controller.Localizer["ThemeLight"]);
         CmbTheme.Items.Add(_controller.Localizer["ThemeDark"]);
         CmbTheme.Items.Add(_controller.Localizer["ThemeSystem"]);
+        CardColors.Header = _controller.Localizer["Colors"];
+        CardColors.Description = _controller.Localizer["ColorsDescription"];
+        CardTransactionDefaultColor.Header = _controller.Localizer["TransactionColor"];
+        CardTransactionDefaultColor.Description = _controller.Localizer["TransactionColorDescription"];
+        CardTransferDefaultColor.Header = _controller.Localizer["TransferColor"];
+        CardTransferDefaultColor.Description = _controller.Localizer["TransferColorDescription"];
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
+        TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
+        TransferDefaultColor = ColorHelpers.FromRGBA(_controller.TransferDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
+    }
+
+    public Color TransactionDefaultColor
+    {
+        get => _transactionDefaultColor;
+
+        set
+        {
+            _transactionDefaultColor = value;
+            _controller.TransactionDefaultColor = _transactionDefaultColor.ToRGBA();
+            NotifyPropertyChanged();
+        }
+    }
+
+    public Color TransferDefaultColor
+    {
+        get => _transferDefaultColor;
+
+        set
+        {
+            _transferDefaultColor = value;
+            _controller.TransferDefaultColor = _transferDefaultColor.ToRGBA();
+            NotifyPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -130,4 +170,6 @@ public sealed partial class PreferencesPage : UserControl
             }
         }
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

@@ -61,6 +61,30 @@
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
+
+                    <labs:SettingsExpander x:Name="CardColors">
+                        <labs:SettingsExpander.HeaderIcon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE790;"/>
+                        </labs:SettingsExpander.HeaderIcon>
+
+                        <labs:SettingsExpander.Items>
+                            <labs:SettingsCard x:Name="CardTransactionDefaultColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnTransactionDefaultColor" SelectedColor="{x:Bind TransactionDefaultColor}"/>
+                            </labs:SettingsCard>
+
+                            <labs:SettingsCard x:Name="CardTransferDefaultColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{x:Bind TransferDefaultColor}"/>
+                            </labs:SettingsCard>
+                        </labs:SettingsExpander.Items>
+                    </labs:SettingsExpander>
                 </StackPanel>
             </ScrollViewer>
         </wct:DockPanel>
