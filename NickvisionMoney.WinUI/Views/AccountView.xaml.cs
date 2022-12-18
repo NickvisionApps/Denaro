@@ -203,7 +203,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private async void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e)
+    private async void UpdateGroupFilter(object? sender, (int Id, bool Filter) e)
     {
         var contentDialog = new ContentDialog()
         {
@@ -272,6 +272,20 @@ public sealed partial class AccountView : UserControl
             _controller.ExportToFile(file.Path);
         }
     }
+
+    /// <summary>
+    /// Occurs when the income filter checkbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-3, ChkFilterIncome.IsChecked ?? false));
+
+    /// <summary>
+    /// Occurs when the expense filter checkbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-2, ChkFilterExpense.IsChecked ?? false));
 
     /// <summary>
     /// Occurs when the ListGroups' selection is changed

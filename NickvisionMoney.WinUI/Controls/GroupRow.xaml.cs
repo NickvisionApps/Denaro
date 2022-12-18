@@ -22,7 +22,7 @@ public sealed partial class GroupRow : UserControl
     /// <summary>
     /// Occurs when the filter checkbox is changed on the row
     /// </summary>
-    public event EventHandler<(uint Id, bool Filter)>? FilterChanged;
+    public event EventHandler<(int Id, bool Filter)>? FilterChanged;
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
     /// </summary>
@@ -63,7 +63,7 @@ public sealed partial class GroupRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterChanged(object sender, RoutedEventArgs e) => FilterChanged?.Invoke(this, (Id, ChkFilter.IsChecked ?? false));
+    private void ChkFilterChanged(object sender, RoutedEventArgs e) => FilterChanged?.Invoke(this, ((int)Id, ChkFilter.IsChecked ?? false));
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked 

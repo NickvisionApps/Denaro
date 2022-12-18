@@ -87,7 +87,7 @@
                     <StackPanel Spacing="12">
                         <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                        <CheckBox x:Name="ChkFilterIncome" Margin="20,0,0,0">
+                        <CheckBox x:Name="ChkFilterIncome" Margin="20,0,0,0" Checked="ChkFilterIncome_Changed" Unchecked="ChkFilterIncome_Changed">
                             <StackPanel Orientation="Horizontal" Spacing="4">
                                 <TextBlock x:Name="LblIncomeTitle"/>
 
@@ -95,7 +95,7 @@
                             </StackPanel>
                         </CheckBox>
 
-                        <CheckBox x:Name="ChkFilterExpense" Margin="20,0,0,0">
+                        <CheckBox x:Name="ChkFilterExpense" Margin="20,0,0,0" Checked="ChkFilterExpense_Changed" Unchecked="ChkFilterExpense_Changed">
                             <StackPanel Orientation="Horizontal" Spacing="4">
                                 <TextBlock x:Name="LblExpenseTitle"/>
 
