@@ -88,6 +88,7 @@ public class AccountViewController
         {
             Configuration.Current.SortFirstToLast = value;
             Configuration.Current.Save();
+            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

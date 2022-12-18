@@ -266,6 +266,14 @@
         <value>No transactions match the specified filters.</value>
     </data>
 
+	<data name="SortTopBottom" xml:space="preserve">
+        <value>Sort From Top To Bottom</value>
+    </data>
+
+	<data name="SortBottomTop" xml:space="preserve">
+        <value>Sort From Bottom To Top</value>
+    </data>
+
     <data name="ResetFilters.Overview" xml:space="preserve">
         <value>Reset Overview Filters</value>
     </data>
