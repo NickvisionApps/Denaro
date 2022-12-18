@@ -48,11 +48,21 @@ public sealed partial class AccountView : UserControl
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
+        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortTopBottom"]);
+        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortBottomTop"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load Account
         ChkFilterIncome.IsChecked = true;
         ChkFilterExpense.IsChecked = true;
+        if(_controller.SortFirstToLast)
+        {
+            BtnSortTopBottom.IsChecked = true;
+        }
+        else
+        {
+            BtnSortBottomTop.IsChecked = true;
+        }
         AccountInfoChanged(null, EventArgs.Empty);
     }
 
@@ -76,7 +86,10 @@ public sealed partial class AccountView : UserControl
         groups.Sort();
         foreach (var group in groups)
         {
-            var groupRow = new GroupRow(group);
+            var groupRow = new GroupRow(group)
+            {
+                FilterActive = _controller.IsFilterActive((int)group.Id)
+            };
             groupRow.EditTriggered += EditGroup;
             groupRow.DeleteTriggered += DeleteGroup;
             groupRow.FilterChanged += UpdateGroupFilter;
@@ -99,7 +112,7 @@ public sealed partial class AccountView : UserControl
                     }
                     else
                     {
-                        ListTransactions.Items.Prepend(transactionRow);
+                        ListTransactions.Items.Insert(0, transactionRow);
                     }
                 }
                 ViewStackTransactions.ChangePage("Transactions");
@@ -333,5 +346,29 @@ public sealed partial class AccountView : UserControl
             EditTransaction(null, ((TransactionRow)ListTransactions.SelectedItem).Id);
             ListTransactions.SelectedIndex = -1;
         }
+    }
+
+    /// <summary>
+    /// Occurs when the sort top to bottom button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnSortTopBottom_Click(object sender, RoutedEventArgs e)
+    {
+        BtnSortTopBottom.IsChecked = true;
+        BtnSortBottomTop.IsChecked = false;
+        _controller.SortFirstToLast = true;
+    }
+
+    /// <summary>
+    /// Occurs when the sort bottom to top button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnSortBottomTop_Click(object sender, RoutedEventArgs e)
+    {
+        BtnSortTopBottom.IsChecked = false;
+        BtnSortBottomTop.IsChecked = true;
+        _controller.SortFirstToLast = false;
     }
 }

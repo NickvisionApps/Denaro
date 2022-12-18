@@ -127,7 +127,21 @@
                             <Grid>
                                 <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,26,0,0" VerticalScrollBarVisibility="Auto">
+                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,10,0" Orientation="Horizontal">
+                                    <ToggleButton x:Name="BtnSortTopBottom" Click="BtnSortTopBottom_Click">
+                                        <ToggleButton.Content>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE014;"/>
+                                        </ToggleButton.Content>
+                                    </ToggleButton>
+
+                                    <ToggleButton x:Name="BtnSortBottomTop" Click="BtnSortBottomTop_Click">
+                                        <ToggleButton.Content>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE015;"/>
+                                        </ToggleButton.Content>
+                                    </ToggleButton>
+                                </StackPanel>
+                                
+                                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,40,0,0" VerticalScrollBarVisibility="Auto">
                                     <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                         <GridView.ItemContainerStyle>
                                             <Style TargetType="GridViewItem">
