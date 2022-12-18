@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace NickvisionMoney.WinUI.Controls;
 
@@ -10,7 +9,7 @@ namespace NickvisionMoney.WinUI.Controls;
 /// </summary>
 public sealed partial class ViewStack : Frame
 {
-    public static DependencyProperty PagesProperty { get; } = DependencyProperty.Register("Pages", typeof(ObservableCollection<ViewStackPage>), typeof(ViewStack), new PropertyMetadata(new ObservableCollection<ViewStackPage>()));
+    public static DependencyProperty PagesProperty = DependencyProperty.Register("Pages", typeof(ObservableCollection<ViewStackPage>), typeof(ViewStack), new PropertyMetadata(new ObservableCollection<ViewStackPage>()));
 
     /// <summary>
     /// The pages of the ViewStack
@@ -23,6 +22,7 @@ public sealed partial class ViewStack : Frame
     public ViewStack()
     {
         InitializeComponent();
+        SetValue(PagesProperty, new ObservableCollection<ViewStackPage>());
     }
 
     /// <summary>

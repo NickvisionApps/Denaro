@@ -7,6 +7,7 @@ using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -50,6 +51,8 @@ public sealed partial class AccountView : UserControl
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load Account
+        ChkFilterIncome.IsChecked = true;
+        ChkFilterExpense.IsChecked = true;
         AccountInfoChanged(null, EventArgs.Empty);
     }
 
@@ -63,17 +66,17 @@ public sealed partial class AccountView : UserControl
         //Overview
         LblTitle.Text = _controller.AccountTitle;
         LblTotalAmount.Text = _controller.AccountTotalString;
-        ChkFilterIncome.IsChecked = true;
         LblIncomeAmount.Text = _controller.AccountIncomeString;
         LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
-        ChkFilterExpense.IsChecked = true;
         LblExpenseAmount.Text = _controller.AccountExpenseString;
         LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
         //Groups
         ListGroups.Items.Clear();
-        foreach (var pair in _controller.Groups)
+        var groups = _controller.Groups.Values.ToList();
+        groups.Sort();
+        foreach (var group in groups)
         {
-            var groupRow = new GroupRow(pair.Value);
+            var groupRow = new GroupRow(group);
             groupRow.EditTriggered += EditGroup;
             groupRow.DeleteTriggered += DeleteGroup;
             groupRow.FilterChanged += UpdateGroupFilter;
@@ -81,12 +84,40 @@ public sealed partial class AccountView : UserControl
         }
         //Transactions
         ListTransactions.Items.Clear();
-        foreach(var pair in _controller.Transactions)
+        if(_controller.Transactions.Count > 0)
         {
-            var transactionRow = new TransactionRow(pair.Value, ColorHelpers.FromRGBA(_controller.DefaultTransactionColor) ?? Color.FromArgb(255, 0, 0, 0));
-            transactionRow.EditTriggered += EditTransaction;
-            transactionRow.DeleteTriggered += DeleteTransaction;
-            ListTransactions.Items.Add(transactionRow);
+            if(_controller.FilteredTransactions.Count > 0)
+            {
+                foreach (var transaction in _controller.FilteredTransactions)
+                {
+                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.DefaultTransactionColor) ?? Color.FromArgb(255, 0, 0, 0));
+                    transactionRow.EditTriggered += EditTransaction;
+                    transactionRow.DeleteTriggered += DeleteTransaction;
+                    if (_controller.SortFirstToLast)
+                    {
+                        ListTransactions.Items.Add(transactionRow);
+                    }
+                    else
+                    {
+                        ListTransactions.Items.Prepend(transactionRow);
+                    }
+                }
+                ViewStackTransactions.ChangePage("Transactions");
+            }
+            else
+            {
+                ViewStackTransactions.ChangePage("NoTransactions");
+                StatusPageNoTransactions.Glyph = "\xE721";
+                StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle", "Filter"];
+                StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
+            }
+        }
+        else
+        {
+            ViewStackTransactions.ChangePage("NoTransactions");
+            StatusPageNoTransactions.Glyph = "\xE152";
+            StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
+            StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
         }
     }
 
@@ -203,18 +234,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private async void UpdateGroupFilter(object? sender, (int Id, bool Filter) e)
-    {
-        var contentDialog = new ContentDialog()
-        {
-            Title = "TODO",
-            Content = "Update filter not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
-        };
-        await contentDialog.ShowAsync();
-    }
+    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller.UpdateFilterValue(e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the transfer money button is clicked
