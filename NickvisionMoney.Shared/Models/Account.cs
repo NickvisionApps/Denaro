@@ -109,42 +109,42 @@ public class Account : IDisposable
                 var repeatNeeded = false;
                 if(transaction.RepeatInterval == TransactionRepeatInterval.Daily)
                 {
-                    if(DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddDays(1))
+                    if(DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddDays(1))
                     {
                         repeatNeeded = true;
                     }
                 }
                 else if(transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddDays(7))
+                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddDays(7))
                     {
                         repeatNeeded = true;
                     }
                 }
                 else if(transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddMonths(1))
+                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddMonths(1))
                     {
                         repeatNeeded = true;
                     }
                 }
                 else if(transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddMonths(4))
+                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddMonths(4))
                     {
                         repeatNeeded = true;
                     }
                 }
                 else if(transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddYears(1))
+                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddYears(1))
                     {
                         repeatNeeded = true;
                     }
                 }
                 else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Now) >= transaction.Date.AddYears(2))
+                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddYears(2))
                     {
                         repeatNeeded = true;
                     }
@@ -153,7 +153,7 @@ public class Account : IDisposable
                 {
                     var newTransaction = new Transaction(NextAvailableTransactionId)
                     {
-                        Date = DateOnly.FromDateTime(DateTime.Now),
+                        Date = DateOnly.FromDateTime(DateTime.Today),
                         Description = transaction.Description,
                         Type= transaction.Type,
                         RepeatInterval = transaction.RepeatInterval,
@@ -375,7 +375,7 @@ public class Account : IDisposable
         var cmdAddTransaction = _database.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToLongDateString());
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToShortDateString());
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
@@ -404,7 +404,7 @@ public class Account : IDisposable
         var cmdUpdateTransaction = _database.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToLongDateString());
+        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToShortDateString());
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);

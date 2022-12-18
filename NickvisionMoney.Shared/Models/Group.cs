@@ -1,9 +1,11 @@
-﻿namespace NickvisionMoney.Shared.Models;
+﻿using System;
+
+namespace NickvisionMoney.Shared.Models;
 
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Group
+public class Group : IComparable<Group>
 {
     /// <summary>
     /// The id of the group
@@ -46,6 +48,32 @@ public class Group
             return Id == toCompare.Id;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Compares this with other
+    /// </summary>
+    /// <param name="other">The Group object to compare to</param>
+    /// <returns>-1 if this is less than other. 0 if this is equal to other. 1 if this is greater than other</returns>
+    /// <exception cref="NullReferenceException">Thrown if other is null</exception>
+    public int CompareTo(Group? other)
+    {
+        if (other == null)
+        {
+            throw new NullReferenceException();
+        }
+        if(this < other)
+        {
+            return -1;
+        }
+        else if (this == other)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
     /// <summary>

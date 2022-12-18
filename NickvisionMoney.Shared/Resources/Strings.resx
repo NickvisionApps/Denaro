@@ -250,6 +250,22 @@
         <value>Transactions</value>
     </data>
 
+	<data name="NoTransactionsTitle" xml:space="preserve">
+        <value>No Transactions</value>
+    </data>
+
+	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+        <value>No Transactions Found</value>
+    </data>
+
+	<data name="NoTransactionsDescription" xml:space="preserve">
+        <value>Add a new transaction or import transactions from a file.</value>
+    </data>
+
+	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+        <value>No transactions match the specified filters.</value>
+    </data>
+
     <data name="ResetFilters.Overview" xml:space="preserve">
         <value>Reset Overview Filters</value>
     </data>

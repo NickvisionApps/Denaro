@@ -5,7 +5,7 @@ namespace NickvisionMoney.Shared.Models;
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Transaction
+public class Transaction : IComparable<Transaction>
 {
     private int _groupId;
 
@@ -45,7 +45,7 @@ public class Transaction
     public Transaction(uint id = 0)
     {
         Id = id;
-        Date = DateOnly.FromDateTime(DateTime.Now);
+        Date = DateOnly.FromDateTime(DateTime.Today);
         Description = "";
         Type = TransactionType.Income;
         RepeatInterval = TransactionRepeatInterval.Never;
@@ -83,6 +83,32 @@ public class Transaction
             return Id == toCompare.Id;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Compares this with other
+    /// </summary>
+    /// <param name="other">The Transaction object to compare to</param>
+    /// <returns>-1 if this is less than other. 0 if this is equal to other. 1 if this is greater than other</returns>
+    /// <exception cref="NullReferenceException">Thrown if other is null</exception>
+    public int CompareTo(Transaction? other)
+    {
+        if (other == null)
+        {
+            throw new NullReferenceException();
+        }
+        if (this < other)
+        {
+            return -1;
+        }
+        else if (this == other)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
     /// <summary>

@@ -11,6 +11,8 @@ public class AccountViewController
 {
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
+    private DateOnly _filterStartDate;
+    private DateOnly _filterEndDate;
 
     public Localizer Localizer { get; init; }
 
@@ -41,6 +43,73 @@ public class AccountViewController
         foreach(var pair in _account.Groups)
         {
             _filters.Add((int)pair.Value.Id, true);
+        }
+        _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
+        _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
+    }
+
+    public List<Transaction> FilteredTransactions
+    {
+        get
+        {
+            var filteredTransactions = new List<Transaction>();
+            foreach(var pair in _account.Transactions)
+            {
+                if(pair.Value.Type == TransactionType.Income && !_filters[-3])
+                {
+                    continue;
+                }
+                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+                {
+                    continue;
+                }
+                if (!_filters[pair.Value.GroupId])
+                {
+                    continue;
+                }
+                if(_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+                {
+                    if(pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
+                    {
+                        continue;
+                    }
+                }
+                filteredTransactions.Add(pair.Value);
+            }
+            return filteredTransactions;
+        }
+    }
+
+    public bool SortFirstToLast
+    {
+        get => Configuration.Current.SortFirstToLast;
+
+        set
+        {
+            Configuration.Current.SortFirstToLast = value;
+            Configuration.Current.Save();
+        }
+    }
+
+    public DateOnly FilterStartDate
+    {
+        get => _filterStartDate;
+
+        set
+        {
+            _filterStartDate = value;
+            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public DateOnly FilterEndDate
+    {
+        get => _filterEndDate;
+
+        set
+        {
+            _filterEndDate = value;
+            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -79,5 +148,20 @@ public class AccountViewController
         {
             _notificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
         }
+    }
+
+    public bool IsFilterActive(int key) => _filters[key];
+
+    public void UpdateFilterValue(int key, bool value)
+    {
+        _filters[key] = value;
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ResetDateFilters()
+    {
+        _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
+        _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 }
