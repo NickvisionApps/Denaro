@@ -91,13 +91,9 @@ public class Account : IDisposable
                 Type = (TransactionType)readQueryTransactions.GetInt32(3),
                 RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
                 Amount = readQueryTransactions.GetDecimal(5),
-                GroupId = readQueryTransactions.GetInt32(6)
+                GroupId = readQueryTransactions.GetInt32(6),
+                RGBA = readQueryTransactions.GetString(7)
             };
-            var rgba = readQueryTransactions.GetString(7);
-            if (!string.IsNullOrEmpty(rgba))
-            {
-                transaction.RGBA = rgba;
-            }
             Transactions.Add(transaction.Id, transaction);
         }
         //Repeat Needed Transactions

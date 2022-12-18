@@ -56,6 +56,9 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         TransferDefaultColor = ColorHelpers.FromRGBA(_controller.TransferDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
     }
 
+    /// <summary>
+    /// The default color to use for a transaction
+    /// </summary>
     public Color TransactionDefaultColor
     {
         get => _transactionDefaultColor;
@@ -64,10 +67,14 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         {
             _transactionDefaultColor = value;
             _controller.TransactionDefaultColor = _transactionDefaultColor.ToRGBA();
+            _controller.SaveConfiguration();
             NotifyPropertyChanged();
         }
     }
 
+    /// <summary>
+    /// The default color to use for a transfer
+    /// </summary>
     public Color TransferDefaultColor
     {
         get => _transferDefaultColor;
@@ -76,6 +83,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         {
             _transferDefaultColor = value;
             _controller.TransferDefaultColor = _transferDefaultColor.ToRGBA();
+            _controller.SaveConfiguration();
             NotifyPropertyChanged();
         }
     }

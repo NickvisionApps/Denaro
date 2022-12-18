@@ -2,7 +2,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
-using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
