@@ -124,9 +124,9 @@
         <value>New Account (Ctrl+N)</value>
     </data>
 
-  <data name="UnableToOverride" xml:space="preserve">
-    <value>Unable to override an opened account.</value>
-  </data>
+    <data name="UnableToOverride" xml:space="preserve">
+        <value>Unable to override an opened account.</value>
+    </data>
 
 	<data name="OpenAccount" xml:space="preserve">
         <value>Open Account</value>
@@ -238,7 +238,7 @@
         <value>Income</value>
     </data>
 
-  <data name="Expense" xml:space="preserve">
+    <data name="Expense" xml:space="preserve">
         <value>Expense</value>
     </data>
 
@@ -250,34 +250,55 @@
         <value>Transactions</value>
     </data>
 
-  <data name="ResetFilters.Overview" xml:space="preserve">
+    <data name="ResetFilters.Overview" xml:space="preserve">
         <value>Reset Overview Filters</value>
     </data>
 
-  <data name="ResetFilters.Groups" xml:space="preserve">
+    <data name="ResetFilters.Groups" xml:space="preserve">
         <value>Reset Groups Filters</value>
     </data>
 
-  <data name="ResetFilters.Calendar" xml:space="preserve">
+    <data name="ResetFilters.Calendar" xml:space="preserve">
         <value>Reset Dates Filters</value>
     </data>
 
-  <data name="Calendar" xml:space="preserve">
+    <data name="Calendar" xml:space="preserve">
         <value>Calendar</value>
     </data>
 
-  <data name="SelectRange" xml:space="preserve">
+    <data name="SelectRange" xml:space="preserve">
         <value>Select Range</value>
     </data>
 
-  <data name="Start.DateRange" xml:space="preserve">
+    <data name="Start.DateRange" xml:space="preserve">
         <value>Start</value>
     </data>
 
-  <data name="End.DateRange" xml:space="preserve">
+    <data name="End.DateRange" xml:space="preserve">
         <value>End</value>
     </data>
 
+	<!--AccountViewController-->
+	<data name="Imported" xml:space="preserve">
+        <value>Imported {0} transaction from file.</value>
+    </data>
+
+	<data name="Imported.Plural" xml:space="preserve">
+        <value>Imported {0} transactions from file.</value>
+    </data>
+
+	<data name="UnableToImport" xml:space="preserve">
+        <value>Unable to import information from the file. Unsupported file type.</value>
+    </data>
+
+	<data name="Exported" xml:space="preserve">
+        <value>Exported account to CSV successfully.</value>
+    </data>
+
+	<data name="UnableToExport" xml:space="preserve">
+        <value>Unable to export account as CSV.</value>
+    </data>
+	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
         <value>User Interface</value>

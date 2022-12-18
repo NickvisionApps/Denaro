@@ -475,7 +475,7 @@ public class Account : IDisposable
         result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
         foreach(var pair in Transactions)
         {
-            result += $"{pair.Value.Id};{pair.Value.Date.ToLongDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            result += $"{pair.Value.Id};{pair.Value.Date.ToShortDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
             if(pair.Value.GroupId != -1)
             {
                 result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";

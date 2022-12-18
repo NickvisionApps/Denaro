@@ -112,7 +112,7 @@ public class MainWindowController
     /// </summary>
     /// <param name="index">The index of the open account to base the controller on</param>
     /// <returns>The AccountViewController for the open account</returns>
-    public AccountViewController CreateAccountController(int index) => new AccountViewController(Localizer, OpenAccounts[index]);
+    public AccountViewController CreateAccountController(int index) => new AccountViewController(OpenAccounts[index], Localizer, NotificationSent);
 
     /// <summary>
     /// Adds an account to the list of opened accounts
