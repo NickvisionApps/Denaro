@@ -56,7 +56,7 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly List<Adw.ActionRow> _listRecentAccountsRows;
     private readonly Adw.PreferencesGroup _groupRecentAccounts;
     private readonly Gtk.ToggleButton _btnFlapToggle;
-    private readonly Gtk.MenuButton _btnMenuHelp;
+    private readonly Gtk.MenuButton _btnMainMenu;
     private readonly Adw.ToastOverlay _toastOverlay;
     private readonly Adw.ViewStack _viewStack;
     private readonly Adw.StatusPage _pageStatusNoAccounts;
@@ -111,21 +111,21 @@ public class MainWindow : Adw.ApplicationWindow
         _popBtnNewAccount = Gtk.Button.New();
         _popBtnNewAccount.AddCssClass("suggested-action");
         _popBtnNewAccountContext = Adw.ButtonContent.New();
-        _popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover"]);
+        _popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover", "GTK"]);
         _popBtnNewAccountContext.SetIconName("document-new-symbolic");
         _popBtnNewAccount.SetChild(_popBtnNewAccountContext);
-        _popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccountTooltip"]);
+        _popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccount", "Tooltip"]);
         _popBtnNewAccount.SetDetailedActionName("win.newAccount");
         _popBoxButtons.Append(_popBtnNewAccount);
         //Account Popover Open Account Button
         _popBtnOpenAccount = Gtk.Button.New();
         _popBtnOpenAccount.SetIconName("document-open-symbolic");
-        _popBtnOpenAccount.SetTooltipText(_controller.Localizer["OpenAccountTooltip"]);
+        _popBtnOpenAccount.SetTooltipText(_controller.Localizer["OpenAccount", "Tooltip"]);
         _popBtnOpenAccount.SetDetailedActionName("win.openAccount");
         _popBoxButtons.Append(_popBtnOpenAccount);
         //List Recent Accounts
         _groupRecentAccounts = Adw.PreferencesGroup.New();
-        _groupRecentAccounts.SetTitle(_controller.Localizer["RecentsPopover"]);
+        _groupRecentAccounts.SetTitle(_controller.Localizer["Recents", "GTK"]);
         _groupRecentAccounts.SetHeaderSuffix(_popBoxButtons);
         _groupRecentAccounts.SetSizeRequest(200, 55);
         //Account Popover Box
@@ -141,7 +141,7 @@ public class MainWindow : Adw.ApplicationWindow
         _btnMenuAccount.SetVisible(false);
         _btnMenuAccount.SetIconName("bank-symbolic");
         _btnMenuAccount.SetPopover(_popoverAccount);
-        _btnMenuAccount.SetTooltipText(_controller.Localizer["ButtonMenuAccountTooltip"]);
+        _btnMenuAccount.SetTooltipText(_controller.Localizer["AccountMenu", "GTK"]);
         _headerBar.PackStart(_btnMenuAccount);
         //Flap Toggle Button
         _btnFlapToggle = Gtk.ToggleButton.New();
@@ -150,16 +150,16 @@ public class MainWindow : Adw.ApplicationWindow
         _btnFlapToggle.SetIconName("sidebar-show-symbolic");
         _btnFlapToggle.SetTooltipText(_controller.Localizer["ToggleSidebarTooltip"]);
         _headerBar.PackStart(_btnFlapToggle);
-        //Menu Help Button
-        _btnMenuHelp = Gtk.MenuButton.New();
-        var menuHelp = Gio.Menu.New();
-        menuHelp.Append(_controller.Localizer["Preferences"], "win.preferences");
-        menuHelp.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
-        menuHelp.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
-        _btnMenuHelp.SetDirection(Gtk.ArrowType.None);
-        _btnMenuHelp.SetMenuModel(menuHelp);
-        _btnMenuHelp.SetTooltipText(_controller.Localizer["MainMenu"]);
-        _headerBar.PackEnd(_btnMenuHelp);
+        //Main Menu Button
+        _btnMainMenu = Gtk.MenuButton.New();
+        var mainMenu = Gio.Menu.New();
+        mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
+        mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
+        mainMenu.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
+        _btnMainMenu.SetDirection(Gtk.ArrowType.None);
+        _btnMainMenu.SetMenuModel(mainMenu);
+        _btnMainMenu.SetTooltipText(_controller.Localizer["MainMenu", "GTK"]);
+        _headerBar.PackEnd(_btnMainMenu);
         //Toast Overlay
         _toastOverlay = Adw.ToastOverlay.New();
         _toastOverlay.SetHexpand(true);

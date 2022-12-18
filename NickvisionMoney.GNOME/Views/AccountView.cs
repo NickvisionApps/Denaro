@@ -1,5 +1,7 @@
-﻿using NickvisionMoney.Shared.Controllers;
+﻿using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ public class AccountView
 {
     private readonly AccountViewController _controller;
     private bool _accountLoading;
+    private List<GroupRow> _groupRows;
 
     public Adw.TabPage Page;
     private readonly Adw.Flap _flap;
@@ -52,6 +55,7 @@ public class AccountView
     public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
         _controller = controller;
+        _groupRows = new List<GroupRow> {};
         //Flap
         _flap = Adw.Flap.New();
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -85,7 +89,7 @@ public class AccountView
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
-        //_chkIncome.OnToggled += () => _controller.UpdateFilterValue(-3, _chkIncome.GetActive());
+        _chkIncome.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _chkIncome.GetActive());
         _rowIncome = Adw.ActionRow.New();
         _rowIncome.SetTitle(_controller.Localizer["Income"]);
         _rowIncome.AddPrefix(_chkIncome);
@@ -98,13 +102,13 @@ public class AccountView
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
-        //_chkExpense.OnToggled += () => _controller.UpdateFilterValue(-3, _chkExpense.GetActive());
+        _chkExpense.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _chkExpense.GetActive());
         _rowExpense = Adw.ActionRow.New();
         _rowExpense.SetTitle(_controller.Localizer["Expense"]);
         _rowExpense.AddPrefix(_chkExpense);
         _rowExpense.AddSuffix(_lblExpense);
         //Overview Buttons Box
-        _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         //Button Menu Account Actions
         _btnMenuAccountActions = Gtk.MenuButton.New();
         _btnMenuAccountActions.AddCssClass("flat");
@@ -250,7 +254,23 @@ public class AccountView
         _lblTotal.SetLabel(_controller.AccountTotalString);
         _lblIncome.SetLabel(_controller.AccountIncomeString);
         _lblExpense.SetLabel(_controller.AccountExpenseString);
-
+        foreach(var groupRow in _groupRows)
+        {
+            _grpGroups.Remove(groupRow);
+        }
+        _groupRows.Clear();
+        var groups = new List<Group> {};
+        foreach(var group in _controller.Groups.Values)
+        {
+            groups.Add(group);
+        }
+        groups.Sort();
+        foreach(var group in groups)
+        {
+            var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+            _grpGroups.Add(row);
+            _groupRows.Add(row);
+        }
         _accountLoading = false;
     }
 

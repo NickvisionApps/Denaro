@@ -391,9 +391,21 @@
     </data>
 
 	<!--GTK Specific-->
+  <data name="AccountMenu.GTK" xml:space="preserve">
+    <value>Account Menu</value>
+  </data>
+
 	<data name="MainMenu.GTK" xml:space="preserve">
 		<value>Main Menu</value>
 	</data>
+
+  <data name="Recents.GTK" xml:space="preserve">
+    <value>Recents</value>
+  </data>
+
+  <data name="NewAccountPopover.GTK" xml:space="preserve">
+    <value>New</value>
+  </data>
 
   <data name="AccountActions.GTK" xml:space="preserve">
     <value>Actions</value>
