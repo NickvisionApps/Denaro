@@ -1,4 +1,5 @@
-﻿using Windows.UI;
+﻿using CommunityToolkit.WinUI.Helpers;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Helpers;
 
@@ -10,37 +11,44 @@ public static class ColorHelpers
         {
             return null;
         }
-        if(rgba.StartsWith("rgb("))
+        try
         {
-            rgba = rgba.Remove(0, 4);
-            rgba = rgba.Remove(rgba.Length - 1);
-            var fields = rgba.Split(',');
-            try
+            return ColorHelper.ToColor(rgba);
+        }
+        catch
+        {
+            if (rgba.StartsWith("rgb("))
             {
-                return Color.FromArgb(255, byte.Parse(fields[0]), byte.Parse(fields[1]), byte.Parse(fields[2]));
+                rgba = rgba.Remove(0, 4);
+                rgba = rgba.Remove(rgba.Length - 1);
+                var fields = rgba.Split(',');
+                try
+                {
+                    return Color.FromArgb(255, byte.Parse(fields[0]), byte.Parse(fields[1]), byte.Parse(fields[2]));
+                }
+                catch
+                {
+                    return null;
+                }
             }
-            catch
+            else if (rgba.StartsWith("rgba("))
+            {
+                rgba = rgba.Remove(0, 5);
+                rgba = rgba.Remove(rgba.Length - 1);
+                var fields = rgba.Split(',');
+                try
+                {
+                    return Color.FromArgb(byte.Parse(fields[3]), byte.Parse(fields[0]), byte.Parse(fields[1]), byte.Parse(fields[2]));
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            else
             {
                 return null;
             }
-        }
-        else if(rgba.StartsWith("rgba("))
-        {
-            rgba = rgba.Remove(0, 5);
-            rgba = rgba.Remove(rgba.Length - 1);
-            var fields = rgba.Split(',');
-            try
-            {
-                return Color.FromArgb(byte.Parse(fields[3]), byte.Parse(fields[0]), byte.Parse(fields[1]), byte.Parse(fields[2]));
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        else
-        {
-            return null;
         }
     }
 

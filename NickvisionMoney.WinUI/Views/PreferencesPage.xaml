@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    mc:Ignorable="d">
+    mc:Ignorable="d" x:Name="This">
 
     <Grid>
         <TextBlock x:Name="LblTitle" Margin="30,30,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
@@ -73,7 +73,7 @@
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
                                 </labs:SettingsCard.HeaderIcon>
 
-                                <wct:ColorPickerButton x:Name="BtnTransactionDefaultColor" SelectedColor="{x:Bind TransactionDefaultColor}"/>
+                                <wct:ColorPickerButton x:Name="BtnTransactionDefaultColor" SelectedColor="{Binding TransactionDefaultColor, Mode=TwoWay, ElementName=This}"/>
                             </labs:SettingsCard>
 
                             <labs:SettingsCard x:Name="CardTransferDefaultColor">
@@ -81,7 +81,7 @@
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
                                 </labs:SettingsCard.HeaderIcon>
 
-                                <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{x:Bind TransferDefaultColor}"/>
+                                <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{Binding TransferDefaultColor, Mode=TwoWay, ElementName=This}"/>
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
