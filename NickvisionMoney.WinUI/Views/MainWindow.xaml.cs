@@ -199,7 +199,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.CreateAccountController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)));
+            PageOpenAccount.Content = new AccountView(_controller.CreateAccountController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)), InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {
@@ -281,7 +281,7 @@ public sealed partial class MainWindow : Window
         {
             if(_controller.OpenAccounts.Contains(file.Path))
             {
-                NotificationSent(null, new NotificationSentEventArgs(_controller.Localizer["UnableToOverride"], NotificationSeverity.Warning));
+                NotificationSent(null, new NotificationSentEventArgs(_controller.Localizer["UnableToOverride"], NotificationSeverity.Error));
             }
             else
             {

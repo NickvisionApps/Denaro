@@ -24,7 +24,7 @@
                 </CommandBar.Content>
                 
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Name="BtnNewTransaction">
+                    <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE14D;"/>
                         </AppBarButton.Icon>
@@ -34,7 +34,7 @@
                         </AppBarButton.KeyboardAccelerators>
                     </AppBarButton>
 
-                    <AppBarButton x:Name="BtnNewGroup">
+                    <AppBarButton x:Name="BtnNewGroup" Click="NewGroup">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE138;"/>
                         </AppBarButton.Icon>
@@ -46,7 +46,7 @@
 
                     <AppBarSeparator/>
 
-                    <AppBarButton x:Name="BtnTransferMoney">
+                    <AppBarButton x:Name="BtnTransferMoney" Click="TransferMoney">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE140;"/>
                         </AppBarButton.Icon>
@@ -58,7 +58,7 @@
 
                     <AppBarSeparator/>
 
-                    <AppBarButton x:Name="BtnImportFromFile">
+                    <AppBarButton x:Name="BtnImportFromFile" Click="ImportFromFile">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE11C;"/>
                         </AppBarButton.Icon>
@@ -68,7 +68,7 @@
                         </AppBarButton.KeyboardAccelerators>
                     </AppBarButton>
 
-                    <AppBarButton x:Name="BtnExportToFile">
+                    <AppBarButton x:Name="BtnExportToFile" Click="ExportToFile">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE118;"/>
                         </AppBarButton.Icon>
@@ -109,7 +109,7 @@
                     <Grid>
                         <TextBlock x:Name="LblGroups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,26,0,0" VerticalScrollBarVisibility="Auto">
                             <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
                         </ScrollViewer>
                     </Grid>
@@ -120,7 +120,7 @@
                 <Grid>
                     <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,24,0,0" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,26,0,0" VerticalScrollBarVisibility="Auto">
                         <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                             <GridView.ItemContainerStyle>
                                 <Style TargetType="GridViewItem">

@@ -2,21 +2,34 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Collections.Generic;
+using Windows.Storage.Pickers;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
+/// <summary>
+/// The AccountView for the application
+/// </summary>
 public sealed partial class AccountView : UserControl
 {
     private readonly AccountViewController _controller;
+    private readonly Action<object> _initializeWithWindow;
 
-    public AccountView(AccountViewController controller)
+    /// <summary>
+    /// Constructs an AccountView
+    /// </summary>
+    /// <param name="controller">The AccountViewController</param>
+    /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
+    public AccountView(AccountViewController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _initializeWithWindow = initializeWithWindow;
         //Localize Strings
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
@@ -40,6 +53,11 @@ public sealed partial class AccountView : UserControl
         AccountInfoChanged(null, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Occurs when the account information is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
     private void AccountInfoChanged(object? sender, EventArgs e)
     {
         //Overview
@@ -72,6 +90,83 @@ public sealed partial class AccountView : UserControl
         }
     }
 
+    /// <summary>
+    /// Occurs when the new transaction button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void NewTransaction(object? sender, RoutedEventArgs e)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "New transaction not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the edit transaction action is triggered
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="groupId">The id of the transaction to be edited</param>
+    private async void EditTransaction(object? sender, uint transactionId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Edit transaction not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the delete transaction action is triggered
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="groupId">The id of the transaction to be deleted</param>
+    private async void DeleteTransaction(object? sender, uint transactionId)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "Delete transaction not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the new group button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void NewGroup(object? sender, RoutedEventArgs e)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Title = "TODO",
+            Content = "New group not implemented yet.",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the edit group action is triggered
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="groupId">The id of the group to be edited</param>
     private async void EditGroup(object? sender, uint groupId)
     {
         var contentDialog = new ContentDialog()
@@ -85,6 +180,11 @@ public sealed partial class AccountView : UserControl
         await contentDialog.ShowAsync();
     }
 
+    /// <summary>
+    /// Occurs when the delete group action is triggered
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="groupId">The id of the group to be deleted</param>
     private async void DeleteGroup(object? sender, uint groupId)
     {
         var contentDialog = new ContentDialog()
@@ -98,7 +198,12 @@ public sealed partial class AccountView : UserControl
         await contentDialog.ShowAsync();
     }
 
-    private async void UpdateGroupFilter(object? sender, uint groupId)
+    /// <summary>
+    /// Occurs when the group filter is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
+    private async void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e)
     {
         var contentDialog = new ContentDialog()
         {
@@ -111,12 +216,17 @@ public sealed partial class AccountView : UserControl
         await contentDialog.ShowAsync();
     }
 
-    private async void EditTransaction(object? sender, uint groupId)
+    /// <summary>
+    /// Occurs when the transfer money button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void TransferMoney(object? sender, RoutedEventArgs e)
     {
         var contentDialog = new ContentDialog()
         {
             Title = "TODO",
-            Content = "Edit transaction not implemented yet.",
+            Content = "Transfer money not implemented yet.",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
@@ -124,19 +234,50 @@ public sealed partial class AccountView : UserControl
         await contentDialog.ShowAsync();
     }
 
-    private async void DeleteTransaction(object? sender, uint groupId)
+    /// <summary>
+    /// Occurs when the import from file button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ImportFromFile(object? sender, RoutedEventArgs e)
     {
-        var contentDialog = new ContentDialog()
+        var fileOpenPicker = new FileOpenPicker();
+        _initializeWithWindow(fileOpenPicker);
+        fileOpenPicker.FileTypeFilter.Add(".csv");
+        fileOpenPicker.FileTypeFilter.Add(".ofx");
+        fileOpenPicker.FileTypeFilter.Add(".qif");
+        fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileOpenPicker.PickSingleFileAsync();
+        if (file != null)
         {
-            Title = "TODO",
-            Content = "Delete transaction not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
-        };
-        await contentDialog.ShowAsync();
+            _controller.ImportFromFile(file.Path);
+        }
     }
 
+    /// <summary>
+    /// Occurs when the export to file button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ExportToFile(object? sender, RoutedEventArgs e)
+    {
+        var fileSavePicker = new FileSavePicker();
+        _initializeWithWindow(fileSavePicker);
+        fileSavePicker.FileTypeChoices.Add("CSV", new List<string>() { ".csv" });
+        fileSavePicker.SuggestedFileName = _controller.AccountTitle;
+        fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileSavePicker.PickSaveFileAsync();
+        if (file != null)
+        {
+            _controller.ExportToFile(file.Path);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the ListGroups' selection is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
     private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if(ListGroups.SelectedIndex != -1)
@@ -146,6 +287,11 @@ public sealed partial class AccountView : UserControl
         }
     }
 
+    /// <summary>
+    /// Occurs when the ListTransactions' selection is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
     private void ListTransactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ListTransactions.SelectedIndex != -1)
