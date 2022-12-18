@@ -130,13 +130,13 @@
                                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,10,0" Orientation="Horizontal">
                                     <ToggleButton x:Name="BtnSortTopBottom" Click="BtnSortTopBottom_Click">
                                         <ToggleButton.Content>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE014;"/>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE015;"/>
                                         </ToggleButton.Content>
                                     </ToggleButton>
 
                                     <ToggleButton x:Name="BtnSortBottomTop" Click="BtnSortBottomTop_Click">
                                         <ToggleButton.Content>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE015;"/>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE014;"/>
                                         </ToggleButton.Content>
                                     </ToggleButton>
                                 </StackPanel>
