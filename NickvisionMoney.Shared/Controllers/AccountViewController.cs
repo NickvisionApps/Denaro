@@ -162,6 +162,13 @@ public class AccountViewController
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public void SetSingleDateFilter(DateOnly date)
+    {
+        _filterStartDate = date;
+        _filterEndDate = date;
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public void ResetDateFilters()
     {
         _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
