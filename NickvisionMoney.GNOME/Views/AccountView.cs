@@ -11,9 +11,25 @@ namespace NickvisionMoney.GNOME.Views;
 
 public class AccountView
 {
-    [DllImport("adwaita-1")]
-    [return: MarshalAs(UnmanagedType.LPStr)]
-    private static extern string g_date_time_format_iso8601(nint datetime);
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MoneyDateTime {
+        UInt64 Usec;
+        nint Tz;
+        int Interval;
+        Int32 Days;
+        int RefCount;
+    };
+
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int g_date_time_get_month(ref MoneyDateTime datetime);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int g_date_time_get_year(ref MoneyDateTime datetime);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
 
     private readonly AccountViewController _controller;
     private bool _accountLoading;
@@ -363,20 +379,10 @@ public class AccountView
             _flowBox.Remove(transactionRow);
         }
         _transactionRows.Clear();
-        _calendar.ClearMarks();
         _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
         if(_controller.Transactions.Count > 0)
         {
-            // var selectedDay = new DateTime(g_date_time_format_iso8601(_calendar.GetDate().Handle));
-            // foreach(var transaction in _controller.Transactions.Values)
-            // {
-            //     if(transaction.Date.Month == selectedDay.Month && transaction.Date.Year == selectedDay.Year)
-            //     {
-            //         _calendar.MarkDay((uint)transaction.Date.Day);
-            //     }
-            // }
-            // _calendar.SelectDay(selectedDay.AddYears(-1)); // workaround bug to show marks
-            // _calendar.SelectDay(selectedDay);
+            OnCalendarMonthYearChanged(null, null);
             if(_controller.FilteredTransactions.Count > 0)
             {
                 _statusPageNoTransactions.SetVisible(false);
@@ -405,6 +411,7 @@ public class AccountView
         }
         else
         {
+            _calendar.ClearMarks();
             _statusPageNoTransactions.SetVisible(true);
             _scrollTransactions.SetVisible(false);
             _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactions"]);
@@ -425,7 +432,17 @@ public class AccountView
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar sender, EventArgs e)
     {
-        //TODO
+        _calendar.ClearMarks();
+        var selectedDay = gtk_calendar_get_date(_calendar.Handle);
+        foreach(var transaction in _controller.Transactions.Values)
+        {
+            if(transaction.Date.Month == g_date_time_get_month(ref selectedDay) && transaction.Date.Year == g_date_time_get_year(ref selectedDay))
+            {
+                _calendar.MarkDay((uint)transaction.Date.Day);
+            }
+        }
+        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
+        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, 0));
     }
 
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
