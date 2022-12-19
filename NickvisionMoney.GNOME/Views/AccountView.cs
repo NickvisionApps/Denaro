@@ -382,10 +382,10 @@ public class AccountView
             _grpGroups.Remove(groupRow);
         }
         _groupRows.Clear();
-        var groups = new List<Group> {};
-        foreach(var group in _controller.Groups.Values)
+        var groups = new List<Group>();
+        foreach(var pair in _controller.Groups)
         {
-            groups.Add(group);
+            groups.Add(pair.Value);
         }
         groups.Sort();
         foreach(var group in groups)
@@ -459,11 +459,11 @@ public class AccountView
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
-        foreach(var transaction in _controller.Transactions.Values)
+        foreach(var pair in _controller.Transactions)
         {
-            if(transaction.Date.Month == g_date_time_get_month(ref selectedDay) && transaction.Date.Year == g_date_time_get_year(ref selectedDay))
+            if(pair.Value.Date.Month == g_date_time_get_month(ref selectedDay) && pair.Value.Date.Year == g_date_time_get_year(ref selectedDay))
             {
-                _calendar.MarkDay((uint)transaction.Date.Day);
+                _calendar.MarkDay((uint)pair.Value.Date.Day);
             }
         }
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
