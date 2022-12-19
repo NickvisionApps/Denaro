@@ -34,6 +34,10 @@ public class AccountView
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
+    [DllImport("adwaita-1")]
+    private static extern bool g_main_context_iteration(nint context, bool may_block);
+    [DllImport("adwaita-1")]
+    private static extern nint g_main_context_default();
 
     private readonly AccountViewController _controller;
     private bool _accountLoading;
@@ -373,6 +377,8 @@ public class AccountView
         _statusPageNoTransactions.SetVisible(false);
         _binSpinner.SetVisible(true);
         _spinner.Start();
+        _paneBox.SetSensitive(false);
+        _boxSort.SetSensitive(false);
         //Overview
         _lblTotal.SetLabel(_controller.AccountTotalString);
         _lblIncome.SetLabel(_controller.AccountIncomeString);
@@ -440,8 +446,11 @@ public class AccountView
             _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
         }
         _spinner.Stop();
+        _paneBox.SetSensitive(true);
+        _boxSort.SetSensitive(true);
         _binSpinner.SetVisible(false);
         _accountLoading = false;
+        g_main_context_iteration(g_main_context_default(), true);
     }
 
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
