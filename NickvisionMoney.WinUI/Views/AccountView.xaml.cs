@@ -1,6 +1,8 @@
 using CommunityToolkit.WinUI.UI;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.WinUI.Controls;
@@ -43,6 +45,10 @@ public sealed partial class AccountView : UserControl
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
         ToolTipService.SetToolTip(BtnExportToFile, _controller.Localizer["ExportToFile", "Tooltip"]);
+        BtnFilters.Label = _controller.Localizer["Filters"];
+        MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
+        MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
+        MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
         LblOverview.Text = _controller.Localizer["Overview"];
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
@@ -105,14 +111,7 @@ public sealed partial class AccountView : UserControl
         if(_controller.Transactions.Count > 0)
         {
             //Highlight Days
-            var datesInAccount = new List<DateOnly>();
-            foreach (var pair in _controller.Transactions)
-            {
-                if (!datesInAccount.Contains(pair.Value.Date))
-                {
-                    datesInAccount.Add(pair.Value.Date);
-                }
-            }
+            var datesInAccount = await _controller.GetDatesInAccountAsync();
             var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
             foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
@@ -347,6 +346,13 @@ public sealed partial class AccountView : UserControl
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
     private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-2, ChkFilterExpense.IsChecked ?? false));
+
+    /// <summary>
+    /// Occurs when the calendar's selected date is changed
+    /// </summary>
+    /// <param name="sender">CalendarView</param>
+    /// <param name="e">CalendarViewSelectedDatesChangedEventArgs</param>
+    private void Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs e) => _controller.SetSingleDateFilter(DateOnly.FromDateTime(Calendar.SelectedDates[0].Date));
 
     /// <summary>
     /// Occurs when the ListGroups' selection is changed

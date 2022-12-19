@@ -26,7 +26,7 @@
                 <CommandBar.PrimaryCommands>
                     <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE14D;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
                         </AppBarButton.Icon>
 
                         <AppBarButton.KeyboardAccelerators>
@@ -36,7 +36,7 @@
 
                     <AppBarButton x:Name="BtnNewGroup" Click="NewGroup">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE138;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
                         </AppBarButton.Icon>
 
                         <AppBarButton.KeyboardAccelerators>
@@ -48,7 +48,7 @@
 
                     <AppBarButton x:Name="BtnTransferMoney" Click="TransferMoney">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE140;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
                         </AppBarButton.Icon>
 
                         <AppBarButton.KeyboardAccelerators>
@@ -60,7 +60,7 @@
 
                     <AppBarButton x:Name="BtnImportFromFile" Click="ImportFromFile">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE11C;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
                         </AppBarButton.Icon>
 
                         <AppBarButton.KeyboardAccelerators>
@@ -70,12 +70,30 @@
 
                     <AppBarButton x:Name="BtnExportToFile" Click="ExportToFile">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="26" Glyph="&#xE118;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
                         </AppBarButton.Icon>
 
                         <AppBarButton.KeyboardAccelerators>
                             <KeyboardAccelerator Modifiers="Control" Key="E"/>
                         </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+
+                    <AppBarSeparator/>
+
+                    <AppBarButton x:Name="BtnFilters">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE16E;"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem x:Name="MenuResetOverviewFilters"/>
+
+                                <MenuFlyoutItem x:Name="MenuResetGroupsFilters"/>
+
+                                <MenuFlyoutItem x:Name="MenuResetDatesFilters"/>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
                     </AppBarButton>
                 </CommandBar.PrimaryCommands>
             </CommandBar>
@@ -110,7 +128,7 @@
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8"/>
+                            <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
                         </StackPanel>
                     </Border>
 
