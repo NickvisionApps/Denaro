@@ -23,6 +23,8 @@ public class TransactionRow : Adw.PreferencesGroup
     private static extern string gdk_rgba_to_string(ref Color rgba);
     [DllImport("adwaita-1")]
     private static extern void gtk_css_provider_load_from_data(nint provider, [MarshalAs(UnmanagedType.LPStr)] string data, int length);
+    [DllImport("adwaita-1")]
+    private static extern void adw_preferences_row_set_use_markup(nint row, bool use_markup);
 
     public readonly uint Id;
 
@@ -38,6 +40,7 @@ public class TransactionRow : Adw.PreferencesGroup
         Id = transaction.Id;
         //Row Settings
         _row = Adw.ActionRow.New();
+        adw_preferences_row_set_use_markup(_row.Handle, false);
         _row.SetTitleLines(2);
         _row.SetTitle(transaction.Description);
         _row.SetSubtitle(transaction.Date.ToString("d") + (transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {Convert.ToString((int)transaction.RepeatInterval)}" : "")); // TODO

@@ -1,10 +1,14 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
 public class GroupRow : Adw.ActionRow
 {
+    [DllImport("adwaita-1")]
+    private static extern void adw_preferences_row_set_use_markup(nint row, bool use_markup);
+
     public readonly uint Id;
 
     private readonly Gtk.CheckButton _chkFilter;
@@ -17,7 +21,7 @@ public class GroupRow : Adw.ActionRow
     {
         Id = group.Id;
         //Row Settings
-        //SetUseMarkup(false);
+        adw_preferences_row_set_use_markup(this.Handle, false);
         SetTitle(group.Name);
         SetSubtitle(group.Description);
         //Filter Checkbox
