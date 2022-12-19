@@ -2,6 +2,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -35,10 +36,15 @@ public sealed partial class TransactionRow : UserControl
     /// </summary>
     /// <param name="transaction">The Transaction model to represent</param>
     /// <param name="defaultColor">The default transaction color</param>
-    public TransactionRow(Transaction transaction, Color defaultColor)
+    /// <param name="localizer">The Localizer for the app</param>
+    public TransactionRow(Transaction transaction, Color defaultColor, Localizer localizer)
     {
         InitializeComponent();
         _transaction = transaction;
+        //Localize Strings
+        //Localize Strings
+        ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "TransactionRow"]);
+        ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "TransactionRow"]);
         //Load Transaction
         BtnId.Content = _transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);

@@ -23,13 +23,13 @@
             <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6">
                 <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
 
-                <Button Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
+                <Button x:Name="BtnEdit" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
                     <Button.Content>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
                     </Button.Content>
                 </Button>
 
-                <Button Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
+                <Button x:Name="BtnDelete" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
                     <Button.Content>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
                     </Button.Content>

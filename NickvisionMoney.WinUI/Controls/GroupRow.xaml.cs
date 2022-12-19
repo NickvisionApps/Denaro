@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using Windows.UI;
@@ -36,10 +37,14 @@ public sealed partial class GroupRow : UserControl
     /// Constructs a GroupRow
     /// </summary>
     /// <param name="group">The Group model to represent</param>
-    public GroupRow(Group group)
+    /// <param name="localizer">The Localizer for the app</param>
+    public GroupRow(Group group, Localizer localizer)
     {
         InitializeComponent();
         _group = group;
+        //Localize Strings
+        ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
+        ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
         //Load Group
         ChkFilter.IsChecked = true;
         LblName.Text = _group.Name;

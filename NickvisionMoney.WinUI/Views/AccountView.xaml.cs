@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -46,14 +47,13 @@ public sealed partial class AccountView : UserControl
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
+        LblCalendar.Text = _controller.Localizer["Calendar"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
-        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortTopBottom"]);
-        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortBottomTop"]);
+        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstToLast"]);
+        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastToFirst"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load Account
-        ChkFilterIncome.IsChecked = true;
-        ChkFilterExpense.IsChecked = true;
         if(_controller.SortFirstToLast)
         {
             BtnSortTopBottom.IsChecked = true;
@@ -85,7 +85,7 @@ public sealed partial class AccountView : UserControl
         groups.Sort();
         foreach (var group in groups)
         {
-            var groupRow = new GroupRow(group)
+            var groupRow = new GroupRow(group, _controller.Localizer)
             {
                 FilterActive = _controller.IsFilterActive((int)group.Id)
             };
@@ -98,16 +98,39 @@ public sealed partial class AccountView : UserControl
         ListTransactions.Items.Clear();
         if(_controller.Transactions.Count > 0)
         {
-            if(_controller.FilteredTransactions.Count > 0)
+            //Highlight Days
+            var datesInAccount = new List<DateOnly>();
+            foreach (var pair in _controller.Transactions)
             {
-                foreach (var transaction in _controller.FilteredTransactions)
+                if (!datesInAccount.Contains(pair.Value.Date))
                 {
-                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0));
+                    datesInAccount.Add(pair.Value.Date);
+                }
+            }
+            var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
+            foreach(CalendarViewDayItem displayedDay in displayedDays)
+            {
+                if(datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
+                {
+                    displayedDay.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]);
+                }
+                else
+                {
+                    displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                }
+            }
+            var filteredTransactions = _controller.FilteredTransactions;
+            if(filteredTransactions.Count > 0)
+            {
+                foreach (var transaction in filteredTransactions)
+                {
+                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                     transactionRow.EditTriggered += EditTransaction;
                     transactionRow.DeleteTriggered += DeleteTransaction;
                     if (_controller.SortFirstToLast)
                     {
                         ListTransactions.Items.Add(transactionRow);
+
                     }
                     else
                     {
@@ -246,7 +269,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller.UpdateFilterValue(e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the transfer money button is clicked

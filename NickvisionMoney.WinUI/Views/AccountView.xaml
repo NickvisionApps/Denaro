@@ -82,39 +82,49 @@
         </Border>
 
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,126,20,10" LastChildFill="True">
-            <wct:DockPanel wct:DockPanel.Dock="Left" Width="340" LastChildFill="True">
-                <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <StackPanel Spacing="12">
-                        <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+            <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
+                <wct:DockPanel LastChildFill="True">
+                    <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <StackPanel Spacing="12">
+                            <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                        <CheckBox x:Name="ChkFilterIncome" Margin="20,0,0,0" Checked="ChkFilterIncome_Changed" Unchecked="ChkFilterIncome_Changed">
-                            <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock x:Name="LblIncomeTitle"/>
+                            <CheckBox x:Name="ChkFilterIncome" Margin="20,0,0,0" IsChecked="True" Checked="ChkFilterIncome_Changed" Unchecked="ChkFilterIncome_Changed">
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock x:Name="LblIncomeTitle"/>
 
-                                <TextBlock x:Name="LblIncomeAmount"/>
-                            </StackPanel>
-                        </CheckBox>
+                                    <TextBlock x:Name="LblIncomeAmount"/>
+                                </StackPanel>
+                            </CheckBox>
 
-                        <CheckBox x:Name="ChkFilterExpense" Margin="20,0,0,0" Checked="ChkFilterExpense_Changed" Unchecked="ChkFilterExpense_Changed">
-                            <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock x:Name="LblExpenseTitle"/>
+                            <CheckBox x:Name="ChkFilterExpense" Margin="20,0,0,0" IsChecked="True" Checked="ChkFilterExpense_Changed" Unchecked="ChkFilterExpense_Changed">
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock x:Name="LblExpenseTitle"/>
 
-                                <TextBlock x:Name="LblExpenseAmount"/>
-                            </StackPanel>
-                        </CheckBox>
-                    </StackPanel>
-                </Border>
-                
-                <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <Grid>
-                        <TextBlock x:Name="LblGroups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                    <TextBlock x:Name="LblExpenseAmount"/>
+                                </StackPanel>
+                            </CheckBox>
+                        </StackPanel>
+                    </Border>
 
-                        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,26,0,0" VerticalScrollBarVisibility="Auto">
-                            <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
-            </wct:DockPanel>
+                    <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" Height="400" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <StackPanel Spacing="12">
+                            <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border wct:DockPanel.Dock="Top" Margin="0,6,0,0" MinHeight="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <Grid>
+                            <TextBlock x:Name="LblGroups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,26,0,0" VerticalScrollBarVisibility="Auto">
+                                <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </wct:DockPanel>
+            </ScrollViewer>
             
             <Border wct:DockPanel.Dock="Right" Margin="6,0,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                 <nickvision:ViewStack x:Name="ViewStackTransactions">
