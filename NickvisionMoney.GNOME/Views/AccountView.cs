@@ -217,7 +217,7 @@ public class AccountView
         //Button Reset Calendar Filter
         _btnResetCalendarFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
         _btnResetCalendarFilter.AddCssClass("flat");
-        _btnResetCalendarFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Calendar"]);
+        _btnResetCalendarFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Dates"]);
         _btnResetCalendarFilter.OnClicked += OnResetCalendarFilter;
         //Start Range DropDowns
         _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "2022" });
