@@ -70,7 +70,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void AccountInfoChanged(object? sender, EventArgs e)
+    private async void AccountInfoChanged(object? sender, EventArgs e)
     {
         //Overview
         LblTitle.Text = _controller.AccountTitle;
@@ -119,7 +119,7 @@ public sealed partial class AccountView : UserControl
                     displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                 }
             }
-            var filteredTransactions = _controller.FilteredTransactions;
+            var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
             if(filteredTransactions.Count > 0)
             {
                 foreach (var transaction in filteredTransactions)
@@ -305,7 +305,7 @@ public sealed partial class AccountView : UserControl
         var file = await fileOpenPicker.PickSingleFileAsync();
         if (file != null)
         {
-            _controller.ImportFromFile(file.Path);
+            await _controller.ImportFromFileAsync(file.Path);
         }
     }
 
@@ -324,7 +324,7 @@ public sealed partial class AccountView : UserControl
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-            _controller.ExportToFile(file.Path);
+           await _controller.ExportToFileAsync(file.Path);
         }
     }
 

@@ -351,10 +351,10 @@ public class AccountView
         Page.SetTitle(_controller.AccountTitle);
 
         _controller.AccountInfoChanged += OnAccountInfoChanged;
-        OnAccountInfoChanged(null, null);
+        OnAccountInfoChanged(null, EventArgs.Empty);
     }
 
-    private void OnAccountInfoChanged(object? sender, EventArgs e)
+    private async void OnAccountInfoChanged(object? sender, EventArgs e)
     {
         _accountLoading = true;
         //Overview
@@ -387,12 +387,13 @@ public class AccountView
         _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
         if(_controller.Transactions.Count > 0)
         {
-            OnCalendarMonthYearChanged(null, null);
-            if(_controller.FilteredTransactions.Count > 0)
+            var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
+            OnCalendarMonthYearChanged(null, EventArgs.Empty);
+            if(filteredTransactions.Count > 0)
             {
                 _statusPageNoTransactions.SetVisible(false);
                 _scrollTransactions.SetVisible(true);
-                foreach(var transaction in _controller.FilteredTransactions)
+                foreach(var transaction in filteredTransactions)
                 {
                     var row = new TransactionRow(transaction, _controller.Localizer);
                     if(_controller.SortFirstToLast)
@@ -436,7 +437,7 @@ public class AccountView
         //TODO
     }
 
-    private void OnCalendarMonthYearChanged(Gtk.Calendar sender, EventArgs e)
+    private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);

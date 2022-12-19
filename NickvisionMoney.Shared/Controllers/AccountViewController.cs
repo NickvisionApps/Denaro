@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -48,37 +49,7 @@ public class AccountViewController
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
     }
 
-    public List<Transaction> FilteredTransactions
-    {
-        get
-        {
-            var filteredTransactions = new List<Transaction>();
-            foreach(var pair in _account.Transactions)
-            {
-                if(pair.Value.Type == TransactionType.Income && !_filters[-3])
-                {
-                    continue;
-                }
-                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
-                {
-                    continue;
-                }
-                if (!_filters[pair.Value.GroupId])
-                {
-                    continue;
-                }
-                if(_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
-                {
-                    if(pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
-                    {
-                        continue;
-                    }
-                }
-                filteredTransactions.Add(pair.Value);
-            }
-            return filteredTransactions;
-        }
-    }
+    ~AccountViewController() => _account.Dispose();
 
     public bool SortFirstToLast
     {
@@ -114,10 +85,42 @@ public class AccountViewController
         }
     }
 
-    public void ImportFromFile(string path)
+    public async Task<List<Transaction>> GetFilteredTransactionsAsync()
     {
-        var imported = _account.ImportFromFile(path);
-        if(imported > 0)
+        var filteredTransactions = new List<Transaction>();
+        await Task.Run(() =>
+        {
+            foreach (var pair in _account.Transactions)
+            {
+                if (pair.Value.Type == TransactionType.Income && !_filters[-3])
+                {
+                    continue;
+                }
+                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+                {
+                    continue;
+                }
+                if (!_filters[pair.Value.GroupId])
+                {
+                    continue;
+                }
+                if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+                {
+                    if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
+                    {
+                        continue;
+                    }
+                }
+                filteredTransactions.Add(pair.Value);
+            }
+        });
+        return filteredTransactions;
+    }
+
+    public async Task ImportFromFileAsync(string path)
+    {
+        var imported = await _account.ImportFromFileAsync(path);
+        if(imported >= 0)
         {
             foreach(var pair in _account.Groups)
             {
@@ -135,13 +138,13 @@ public class AccountViewController
         }
     }
 
-    public void ExportToFile(string path)
+    public async Task ExportToFileAsync(string path)
     {
         if(Path.GetExtension(path) != ".csv")
         {
             path += ".csv";
         }
-        if(_account.ExportToCSV(path))
+        if(await _account.ExportToCSVAsync(path))
         {
             _notificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }

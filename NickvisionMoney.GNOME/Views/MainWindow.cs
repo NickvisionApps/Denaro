@@ -432,7 +432,7 @@ public class MainWindow : Adw.ApplicationWindow
             "developers", developersCredits.ToArray(),
             "designers", designersCredits.ToArray(),
             "artists", artistsCredits.ToArray(),
-            "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? null : _controller.Localizer["Translators", "Credits"]),
+            "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]),
             "release-notes", _controller.AppInfo.Changelog,
             IntPtr.Zero);
     }
@@ -464,7 +464,7 @@ public class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : null);
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
         if(_controller.OpenAccounts.Count == 0)
         {
             _actCloseAccount.SetEnabled(false);
@@ -525,7 +525,7 @@ public class MainWindow : Adw.ApplicationWindow
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
         button.AddCssClass("wallet-button");
-        button.OnClicked += delegate(Gtk.Button sender, EventArgs e) { OnOpenRecentAccount(sender, row.GetSubtitle(), e); };
+        button.OnClicked += delegate(Gtk.Button sender, EventArgs e) { OnOpenRecentAccount(sender, row.GetSubtitle() ?? "", e); };
         row.AddPrefix(button);
         row.SetActivatableWidget(button);
         return row;
