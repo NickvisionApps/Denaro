@@ -307,7 +307,7 @@ public class MainWindow : Adw.ApplicationWindow
         var newAccountView = new AccountView(this, _tabView, _btnFlapToggle, _controller.CreateAccountController(_controller.OpenAccounts.Count - 1));
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : null);
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
         UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
