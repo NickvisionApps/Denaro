@@ -86,6 +86,8 @@ public class AccountView
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
+    private readonly Adw.Bin _binSpinner;
+    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
 
@@ -330,6 +332,15 @@ public class AccountView
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
+        //Loading Spinner
+        _binSpinner = Adw.Bin.New();
+        _binSpinner.SetHexpand(true);
+        _binSpinner.SetVexpand(true);
+        _spinner = Gtk.Spinner.New();
+        _spinner.SetSizeRequest(42, 42);
+        _spinner.SetHalign(Gtk.Align.Center);
+        _spinner.SetValign(Gtk.Align.Center);
+        _binSpinner.SetChild(_spinner);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -340,6 +351,7 @@ public class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
+        _boxMain.Append(_binSpinner);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
@@ -357,6 +369,10 @@ public class AccountView
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
     {
         _accountLoading = true;
+        _scrollTransactions.SetVisible(false);
+        _statusPageNoTransactions.SetVisible(false);
+        _binSpinner.SetVisible(true);
+        _spinner.Start();
         //Overview
         _lblTotal.SetLabel(_controller.AccountTotalString);
         _lblIncome.SetLabel(_controller.AccountIncomeString);
@@ -423,6 +439,8 @@ public class AccountView
             _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
             _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
         }
+        _spinner.Stop();
+        _binSpinner.SetVisible(false);
         _accountLoading = false;
     }
 
