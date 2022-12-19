@@ -25,11 +25,15 @@ public class AccountView
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern int g_date_time_get_month(ref MoneyDateTime datetime);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern int g_date_time_get_year(ref MoneyDateTime datetime);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int g_date_time_get_month(ref MoneyDateTime datetime);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern ref MoneyDateTime g_date_time_new_now_local();
 
     private readonly AccountViewController _controller;
     private bool _accountLoading;
@@ -346,10 +350,11 @@ public class AccountView
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
 
-        OnAccountInfoChanged();
+        _controller.AccountInfoChanged += OnAccountInfoChanged;
+        OnAccountInfoChanged(null, null);
     }
 
-    private void OnAccountInfoChanged()
+    private void OnAccountInfoChanged(object? sender, EventArgs e)
     {
         _accountLoading = true;
         //Overview
@@ -405,8 +410,8 @@ public class AccountView
             {
                 _statusPageNoTransactions.SetVisible(true);
                 _scrollTransactions.SetVisible(false);
-                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoFilteredTransactions"]);
-                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoFilteredTransactionsDescription"]);
+                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
+                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
             }
         }
         else
@@ -414,7 +419,7 @@ public class AccountView
             _calendar.ClearMarks();
             _statusPageNoTransactions.SetVisible(true);
             _scrollTransactions.SetVisible(false);
-            _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactions"]);
+            _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
             _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
         }
         _accountLoading = false;
@@ -422,7 +427,8 @@ public class AccountView
 
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
     {
-        //TODO
+        _chkIncome.SetActive(true);
+        _chkExpense.SetActive(true);
     }
 
     private void OnResetGroupsFilter(Gtk.Button sender, EventArgs e)
@@ -447,11 +453,18 @@ public class AccountView
 
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        //TODO
+        if(!_accountLoading)
+        {
+            var selectedDay = gtk_calendar_get_date(_calendar.Handle);
+            var selectedTransactionDate = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+            _controller.FilterStartDate = selectedTransactionDate;
+            _controller.FilterEndDate = selectedTransactionDate;
+        }
     }
 
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
-        //TODO
+        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
+        _expRange.SetEnableExpansion(false);
     }
 }
