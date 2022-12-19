@@ -282,7 +282,11 @@
         <value>Sort From Last To First</value>
     </data>
 
-    <data name="ResetFilters.Overview" xml:space="preserve">
+	<data name="Filters" xml:space="preserve">
+        <value>Filters</value>
+    </data>
+
+	<data name="ResetFilters.Overview" xml:space="preserve">
         <value>Reset Overview Filters</value>
     </data>
 
@@ -290,7 +294,7 @@
         <value>Reset Groups Filters</value>
     </data>
 
-    <data name="ResetFilters.Calendar" xml:space="preserve">
+    <data name="ResetFilters.Dates" xml:space="preserve">
         <value>Reset Dates Filters</value>
     </data>
 

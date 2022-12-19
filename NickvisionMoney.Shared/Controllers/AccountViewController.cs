@@ -117,6 +117,22 @@ public class AccountViewController
         return filteredTransactions;
     }
 
+    public async Task<List<DateOnly>> GetDatesInAccountAsync()
+    {
+        var dates = new List<DateOnly>();
+        await Task.Run(() =>
+        {
+            foreach (var pair in _account.Transactions)
+            {
+                if (!dates.Contains(pair.Value.Date))
+                {
+                    dates.Add(pair.Value.Date);
+                }
+            }
+        });
+        return dates;
+    }
+
     public async Task ImportFromFileAsync(string path)
     {
         var imported = await _account.ImportFromFileAsync(path);
