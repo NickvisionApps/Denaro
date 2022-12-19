@@ -40,7 +40,7 @@ public class AccountView
     private static extern nint g_main_context_default();
 
     private readonly AccountViewController _controller;
-    private bool _accountLoading;
+    private bool _isAccountLoading;
     private List<GroupRow> _groupRows;
     private List<TransactionRow> _transactionRows;
 
@@ -98,6 +98,7 @@ public class AccountView
     public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
         _controller = controller;
+        _isAccountLoading = false;
         _groupRows = new List<GroupRow> {};
         _transactionRows = new List<TransactionRow> {};
         //Flap
@@ -372,85 +373,88 @@ public class AccountView
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
     {
-        _accountLoading = true;
-        _scrollTransactions.SetVisible(false);
-        _statusPageNoTransactions.SetVisible(false);
-        _binSpinner.SetVisible(true);
-        _spinner.Start();
-        _paneBox.SetSensitive(false);
-        _boxSort.SetSensitive(false);
-        //Overview
-        _lblTotal.SetLabel(_controller.AccountTotalString);
-        _lblIncome.SetLabel(_controller.AccountIncomeString);
-        _lblExpense.SetLabel(_controller.AccountExpenseString);
-        foreach(var groupRow in _groupRows)
+        if(!_isAccountLoading)
         {
-            _grpGroups.Remove(groupRow);
-        }
-        _groupRows.Clear();
-        var groups = new List<Group>();
-        foreach(var pair in _controller.Groups)
-        {
-            groups.Add(pair.Value);
-        }
-        groups.Sort();
-        foreach(var group in groups)
-        {
-            var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-            _grpGroups.Add(row);
-            _groupRows.Add(row);
-        }
-        //Transactions
-        foreach(var transactionRow in _transactionRows)
-        {
-            _flowBox.Remove(transactionRow);
-        }
-        _transactionRows.Clear();
-        _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
-        if(_controller.Transactions.Count > 0)
-        {
-            var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
-            OnCalendarMonthYearChanged(null, EventArgs.Empty);
-            if(filteredTransactions.Count > 0)
+            _isAccountLoading = true;
+            _scrollTransactions.SetVisible(false);
+            _statusPageNoTransactions.SetVisible(false);
+            _binSpinner.SetVisible(true);
+            _spinner.Start();
+            _paneBox.SetSensitive(false);
+            _boxSort.SetSensitive(false);
+            //Overview
+            _lblTotal.SetLabel(_controller.AccountTotalString);
+            _lblIncome.SetLabel(_controller.AccountIncomeString);
+            _lblExpense.SetLabel(_controller.AccountExpenseString);
+            foreach (var groupRow in _groupRows)
             {
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                foreach(var transaction in filteredTransactions)
+                _grpGroups.Remove(groupRow);
+            }
+            _groupRows.Clear();
+            var groups = new List<Group>();
+            foreach (var pair in _controller.Groups)
+            {
+                groups.Add(pair.Value);
+            }
+            groups.Sort();
+            foreach (var group in groups)
+            {
+                var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                _grpGroups.Add(row);
+                _groupRows.Add(row);
+            }
+            //Transactions
+            foreach (var transactionRow in _transactionRows)
+            {
+                _flowBox.Remove(transactionRow);
+            }
+            _transactionRows.Clear();
+            _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
+            if (_controller.Transactions.Count > 0)
+            {
+                var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
+                OnCalendarMonthYearChanged(null, EventArgs.Empty);
+                if (filteredTransactions.Count > 0)
                 {
-                    var row = new TransactionRow(transaction, _controller.Localizer);
-                    if(_controller.SortFirstToLast)
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
+                    foreach (var transaction in filteredTransactions)
                     {
-                        _flowBox.Append(row);
+                        var row = new TransactionRow(transaction, _controller.Localizer);
+                        if (_controller.SortFirstToLast)
+                        {
+                            _flowBox.Append(row);
+                        }
+                        else
+                        {
+                            _flowBox.Prepend(row);
+                        }
+                        _transactionRows.Add(row);
                     }
-                    else
-                    {
-                        _flowBox.Prepend(row);
-                    }
-                    _transactionRows.Add(row);
+                }
+                else
+                {
+                    _statusPageNoTransactions.SetVisible(true);
+                    _scrollTransactions.SetVisible(false);
+                    _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
+                    _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
                 }
             }
             else
             {
+                _calendar.ClearMarks();
                 _statusPageNoTransactions.SetVisible(true);
                 _scrollTransactions.SetVisible(false);
-                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
-                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
+                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
+                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
+            _spinner.Stop();
+            _paneBox.SetSensitive(true);
+            _boxSort.SetSensitive(true);
+            _binSpinner.SetVisible(false);
+            g_main_context_iteration(g_main_context_default(), true);
+            _isAccountLoading = false;
         }
-        else
-        {
-            _calendar.ClearMarks();
-            _statusPageNoTransactions.SetVisible(true);
-            _scrollTransactions.SetVisible(false);
-            _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
-            _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
-        }
-        _spinner.Stop();
-        _paneBox.SetSensitive(true);
-        _boxSort.SetSensitive(true);
-        _binSpinner.SetVisible(false);
-        _accountLoading = false;
-        g_main_context_iteration(g_main_context_default(), true);
     }
 
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
@@ -481,7 +485,7 @@ public class AccountView
 
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        if(!_accountLoading)
+        if(!_isAccountLoading)
         {
             var selectedDay = gtk_calendar_get_date(_calendar.Handle);
             _controller.SetSingleDateFilter(new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay)));
