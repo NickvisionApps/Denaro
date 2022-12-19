@@ -22,6 +22,7 @@ public sealed partial class AccountView : UserControl
 {
     private readonly AccountViewController _controller;
     private readonly Action<object> _initializeWithWindow;
+    private bool _isAccountLoading;
 
     /// <summary>
     /// Constructs an AccountView
@@ -33,6 +34,7 @@ public sealed partial class AccountView : UserControl
         InitializeComponent();
         _controller = controller;
         _initializeWithWindow = initializeWithWindow;
+        _isAccountLoading = false;
         //Localize Strings
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
@@ -84,80 +86,85 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">EventArgs</param>
     private async void AccountInfoChanged(object? sender, EventArgs e)
     {
-        //Overview
-        LblTitle.Text = _controller.AccountTitle;
-        LblTotalAmount.Text = _controller.AccountTotalString;
-        LblIncomeAmount.Text = _controller.AccountIncomeString;
-        LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
-        LblExpenseAmount.Text = _controller.AccountExpenseString;
-        LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
-        //Groups
-        ListGroups.Items.Clear();
-        var groups = _controller.Groups.Values.ToList();
-        groups.Sort();
-        foreach (var group in groups)
+        if(!_isAccountLoading)
         {
-            var groupRow = new GroupRow(group, _controller.Localizer)
+            _isAccountLoading = true;
+            //Overview
+            LblTitle.Text = _controller.AccountTitle;
+            LblTotalAmount.Text = _controller.AccountTotalString;
+            LblIncomeAmount.Text = _controller.AccountIncomeString;
+            LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
+            LblExpenseAmount.Text = _controller.AccountExpenseString;
+            LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+            //Groups
+            ListGroups.Items.Clear();
+            var groups = _controller.Groups.Values.ToList();
+            groups.Sort();
+            foreach (var group in groups)
             {
-                FilterActive = _controller.IsFilterActive((int)group.Id)
-            };
-            groupRow.EditTriggered += EditGroup;
-            groupRow.DeleteTriggered += DeleteGroup;
-            groupRow.FilterChanged += UpdateGroupFilter;
-            ListGroups.Items.Add(groupRow);
-        }
-        //Transactions
-        ListTransactions.Items.Clear();
-        if(_controller.Transactions.Count > 0)
-        {
-            //Highlight Days
-            var datesInAccount = await _controller.GetDatesInAccountAsync();
-            var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
-            foreach (CalendarViewDayItem displayedDay in displayedDays)
-            {
-                if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
+                var groupRow = new GroupRow(group, _controller.Localizer)
                 {
-                    displayedDay.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]);
-                }
-                else
-                {
-                    displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                }
+                    FilterActive = _controller.IsFilterActive((int)group.Id)
+                };
+                groupRow.EditTriggered += EditGroup;
+                groupRow.DeleteTriggered += DeleteGroup;
+                groupRow.FilterChanged += UpdateGroupFilter;
+                ListGroups.Items.Add(groupRow);
             }
-            var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
-            if(filteredTransactions.Count > 0)
+            //Transactions
+            ListTransactions.Items.Clear();
+            if (_controller.Transactions.Count > 0)
             {
-                foreach (var transaction in filteredTransactions)
+                //Highlight Days
+                var datesInAccount = await _controller.GetDatesInAccountAsync();
+                var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
+                foreach (CalendarViewDayItem displayedDay in displayedDays)
                 {
-                    var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
-                    transactionRow.EditTriggered += EditTransaction;
-                    transactionRow.DeleteTriggered += DeleteTransaction;
-                    if (_controller.SortFirstToLast)
+                    if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
                     {
-                        ListTransactions.Items.Add(transactionRow);
-
+                        displayedDay.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]);
                     }
                     else
                     {
-                        ListTransactions.Items.Insert(0, transactionRow);
+                        displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                     }
                 }
-                ViewStackTransactions.ChangePage("Transactions");
+                var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
+                if (filteredTransactions.Count > 0)
+                {
+                    foreach (var transaction in filteredTransactions)
+                    {
+                        var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+                        transactionRow.EditTriggered += EditTransaction;
+                        transactionRow.DeleteTriggered += DeleteTransaction;
+                        if (_controller.SortFirstToLast)
+                        {
+                            ListTransactions.Items.Add(transactionRow);
+
+                        }
+                        else
+                        {
+                            ListTransactions.Items.Insert(0, transactionRow);
+                        }
+                    }
+                    ViewStackTransactions.ChangePage("Transactions");
+                }
+                else
+                {
+                    ViewStackTransactions.ChangePage("NoTransactions");
+                    StatusPageNoTransactions.Glyph = "\xE721";
+                    StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle", "Filter"];
+                    StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
+                }
             }
             else
             {
                 ViewStackTransactions.ChangePage("NoTransactions");
-                StatusPageNoTransactions.Glyph = "\xE721";
-                StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle", "Filter"];
-                StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
+                StatusPageNoTransactions.Glyph = "\xE152";
+                StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
+                StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
             }
-        }
-        else
-        {
-            ViewStackTransactions.ChangePage("NoTransactions");
-            StatusPageNoTransactions.Glyph = "\xE152";
-            StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
-            StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
+            _isAccountLoading = false;
         }
     }
 
@@ -334,6 +341,47 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
+    /// Occurs when the reset overview filters menu item is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ResetOverviewFilters(object? sender, RoutedEventArgs e)
+    {
+        if(!(ChkFilterIncome.IsChecked ?? false))
+        {
+            ChkFilterIncome.IsChecked = true;
+        }
+        if (!(ChkFilterExpense.IsChecked ?? false))
+        {
+            ChkFilterExpense.IsChecked = true;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the reset group filters menu item is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ResetGroupsFilters(object? sender, RoutedEventArgs e)
+    {
+        foreach(GroupRow groupRow in ListGroups.Items)
+        {
+            groupRow.FilterActive = true;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the reset dates filters menu item is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ResetDatesFilters(object? sender, RoutedEventArgs e)
+    {
+        Calendar.SelectedDates.Clear();
+        Calendar.SelectedDates.Add(DateTimeOffset.Now);
+    }
+
+    /// <summary>
     /// Occurs when the income filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
@@ -352,7 +400,13 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">CalendarView</param>
     /// <param name="e">CalendarViewSelectedDatesChangedEventArgs</param>
-    private void Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs e) => _controller.SetSingleDateFilter(DateOnly.FromDateTime(Calendar.SelectedDates[0].Date));
+    private void Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs e)
+    {
+        if(Calendar.SelectedDates.Count == 1)
+        {
+            _controller.SetSingleDateFilter(DateOnly.FromDateTime(Calendar.SelectedDates[0].Date));
+        }
+    }
 
     /// <summary>
     /// Occurs when the ListGroups' selection is changed

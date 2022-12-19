@@ -87,11 +87,23 @@
 
                         <AppBarButton.Flyout>
                             <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem x:Name="MenuResetOverviewFilters"/>
+                                <MenuFlyoutItem x:Name="MenuResetOverviewFilters" Click="ResetOverviewFilters">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
 
-                                <MenuFlyoutItem x:Name="MenuResetGroupsFilters"/>
+                                <MenuFlyoutItem x:Name="MenuResetGroupsFilters" Click="ResetGroupsFilters">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
 
-                                <MenuFlyoutItem x:Name="MenuResetDatesFilters"/>
+                                <MenuFlyoutItem x:Name="MenuResetDatesFilters" Click="ResetDatesFilters">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
                             </MenuFlyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
@@ -128,7 +140,7 @@
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+                            <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
                         </StackPanel>
                     </Border>
 
