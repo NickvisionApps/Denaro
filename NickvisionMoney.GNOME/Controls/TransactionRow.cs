@@ -38,10 +38,10 @@ public class TransactionRow : Adw.PreferencesGroup
         Id = transaction.Id;
         //Row Settings
         _row = Adw.ActionRow.New();
-        _row.SetTitleLines(1);
+        _row.SetTitleLines(2);
         _row.SetTitle(transaction.Description);
-        _row.SetSubtitle(transaction.Date.ToString("C") + (transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {Convert.ToString((int)transaction.RepeatInterval)}" : "")); // TODO
-        _row.SetSizeRequest(300, 68);
+        _row.SetSubtitle(transaction.Date.ToString("d") + (transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {Convert.ToString((int)transaction.RepeatInterval)}" : "")); // TODO
+        _row.SetSizeRequest(300, 70);
         //Button ID
         _btnId = Gtk.Button.New();
         _btnId.SetName("btnId");
@@ -67,14 +67,14 @@ public class TransactionRow : Adw.PreferencesGroup
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
         _btnEdit.AddCssClass("flat");
-        _btnEdit.SetTooltipText(localizer["Edit", "Transaction"]);
+        _btnEdit.SetTooltipText(localizer["Edit", "TransactionRow"]);
         //_btnEdit.OnClicked +=
         _row.SetActivatableWidget(_btnEdit);
         //DeleteButton
         _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
         _btnDelete.SetValign(Gtk.Align.Center);
         _btnDelete.AddCssClass("flat");
-        _btnDelete.SetTooltipText(localizer["Delete", "Transaction"]);
+        _btnDelete.SetTooltipText(localizer["Delete", "TransactionRow"]);
         //_btnDelete.OnClicked +=
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);

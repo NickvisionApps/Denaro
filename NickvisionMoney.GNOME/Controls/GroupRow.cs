@@ -35,14 +35,14 @@ public class GroupRow : Adw.ActionRow
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
         _btnEdit.AddCssClass("flat");
-        _btnEdit.SetTooltipText(localizer["Edit", "Group"]);
+        _btnEdit.SetTooltipText(localizer["Edit", "GroupRow"]);
         //_btnEdit.OnClicked +=
         SetActivatableWidget(_btnEdit);
         //Delete Button
         _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
         _btnDelete.SetValign(Gtk.Align.Center);
         _btnDelete.AddCssClass("flat");
-        _btnDelete.SetTooltipText(localizer["Delete", "Group"]);
+        _btnDelete.SetTooltipText(localizer["Delete", "GroupRow"]);
         //_btnDelete.OnClick +=
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);

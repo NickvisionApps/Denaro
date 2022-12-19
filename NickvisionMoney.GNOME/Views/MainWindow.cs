@@ -148,7 +148,7 @@ public class MainWindow : Adw.ApplicationWindow
         _btnFlapToggle.SetVisible(false);
         _btnFlapToggle.SetActive(true);
         _btnFlapToggle.SetIconName("sidebar-show-symbolic");
-        _btnFlapToggle.SetTooltipText(_controller.Localizer["ToggleSidebarTooltip"]);
+        _btnFlapToggle.SetTooltipText(_controller.Localizer["ToggleSidebar", "GTK"]);
         _headerBar.PackStart(_btnFlapToggle);
         //Main Menu Button
         _btnMainMenu = Gtk.MenuButton.New();
@@ -173,6 +173,7 @@ public class MainWindow : Adw.ApplicationWindow
         _flowBoxStatusButtons.SetHomogeneous(true);
         _flowBoxStatusButtons.SetHexpand(true);
         _flowBoxStatusButtons.SetHalign(Gtk.Align.Center);
+        _flowBoxStatusButtons.SetSelectionMode(Gtk.SelectionMode.None);
         //List Recent Accounts On The Start Screen
         _clampRecentAccountsOnStart = Adw.Clamp.New();
         _clampRecentAccountsOnStart.SetMaximumSize(420);

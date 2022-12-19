@@ -5,14 +5,20 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
 public class AccountView
 {
+    [DllImport("adwaita-1")]
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    private static extern string g_date_time_format_iso8601(nint datetime);
+
     private readonly AccountViewController _controller;
     private bool _accountLoading;
     private List<GroupRow> _groupRows;
+    private List<TransactionRow> _transactionRows;
 
     public Adw.TabPage Page;
     private readonly Adw.Flap _flap;
@@ -51,18 +57,30 @@ public class AccountView
     private readonly Adw.PreferencesGroup _grpRange;
     private readonly Adw.ExpanderRow _expRange;
     private readonly Adw.PreferencesGroup _grpCalendar;
+    private readonly Gtk.Button _btnNewTransaction;
+    private readonly Adw.ButtonContent _btnNewTransactionContent;
+    private readonly Gtk.ToggleButton _btnSortFirstToLast;
+    private readonly Gtk.ToggleButton _btnSortLastToFirst;
+    private readonly Gtk.Box _boxSort;
+    private readonly Adw.PreferencesGroup _grpTransactions;
+    private readonly Gtk.FlowBox _flowBox;
+    private readonly Gtk.ScrolledWindow _scrollTransactions;
+    private readonly Adw.StatusPage _statusPageNoTransactions;
+    private readonly Gtk.Box _boxMain;
+    private readonly Gtk.Overlay _overlayMain;
 
     public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
         _controller = controller;
         _groupRows = new List<GroupRow> {};
+        _transactionRows = new List<TransactionRow> {};
         //Flap
         _flap = Adw.Flap.New();
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
         //Left Pane
         _scrollPane = Gtk.ScrolledWindow.New();
         _scrollPane.AddCssClass("background");
-        _scrollPane.SetSizeRequest(350, -1);
+        _scrollPane.SetSizeRequest(360, -1);
         _flap.SetFlap(_scrollPane);
         //Pane Box
         _paneBox = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
@@ -145,7 +163,7 @@ public class AccountView
         _btnNewGroup.AddCssClass("flat");
         _btnNewGroupContent = Adw.ButtonContent.New();
         _btnNewGroupContent.SetIconName("list-add-symbolic");
-        _btnNewGroupContent.SetLabel(_controller.Localizer["NewGroup"]);
+        _btnNewGroupContent.SetLabel(_controller.Localizer["NewGroup", "Short"]);
         _btnNewGroup.SetChild(_btnNewGroupContent);
         _btnNewGroup.SetTooltipText(_controller.Localizer["NewGroup", "Tooltip"]);
         _btnNewGroup.SetDetailedActionName("account.newGroup");
@@ -239,7 +257,75 @@ public class AccountView
         _paneBox.Append(_grpRange);
         //Separator
         _flap.SetSeparator(Gtk.Separator.New(Gtk.Orientation.Vertical));
-
+        //Button New Transaction
+        _btnNewTransaction = Gtk.Button.New();
+        _btnNewTransaction.AddCssClass("pill");
+        _btnNewTransaction.AddCssClass("suggested-action");
+        _btnNewTransactionContent = Adw.ButtonContent.New();
+        _btnNewTransactionContent.SetIconName("list-add-symbolic");
+        _btnNewTransactionContent.SetLabel(_controller.Localizer["NewTransaction", "Short"]);
+        _btnNewTransaction.SetTooltipText(_controller.Localizer["NewTransaction", "Tooltip"]);
+        _btnNewTransaction.SetChild(_btnNewTransactionContent);
+        _btnNewTransaction.SetHalign(Gtk.Align.Center);
+        _btnNewTransaction.SetValign(Gtk.Align.End);
+        _btnNewTransaction.SetMarginBottom(10);
+        _btnNewTransaction.SetDetailedActionName("account.newTransaction");
+        //Sort Box And buttons
+        _btnSortFirstToLast = Gtk.ToggleButton.New();
+        _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
+        _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
+        //_btnSortFirstToLast.OnToggled +=
+        _btnSortLastToFirst = Gtk.ToggleButton.New();
+        _btnSortLastToFirst.SetIconName("view-sort-ascending-symbolic");
+        _btnSortLastToFirst.SetTooltipText(_controller.Localizer["SortLastFirst"]);
+        //_btnSortLastToFirst.OnToggled +=
+        _btnSortFirstToLast.BindProperty("active", _btnSortLastToFirst, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
+        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxSort.AddCssClass("linked");
+        _boxSort.SetValign(Gtk.Align.Center);
+        _boxSort.Append(_btnSortFirstToLast);
+        _boxSort.Append(_btnSortLastToFirst);
+        //Transaction Group
+        _grpTransactions = Adw.PreferencesGroup.New();
+        _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
+        _grpTransactions.SetHeaderSuffix(_boxSort);
+        //Transactions Flow Box
+        _flowBox = Gtk.FlowBox.New();
+        _flowBox.SetHomogeneous(true);
+        _flowBox.SetColumnSpacing(10);
+        _flowBox.SetRowSpacing(10);
+        _flowBox.SetMarginBottom(60);
+        _flowBox.SetHalign(Gtk.Align.Fill);
+        _flowBox.SetValign(Gtk.Align.Start);
+        _flowBox.SetSelectionMode(Gtk.SelectionMode.None);
+        //Transactions Scrolled Window
+        _scrollTransactions = Gtk.ScrolledWindow.New();
+        _scrollTransactions.SetSizeRequest(300, 360);
+        _scrollTransactions.SetMinContentHeight(360);
+        _scrollTransactions.SetVexpand(true);
+        _scrollTransactions.SetChild(_flowBox);
+        //Page No Transactions
+        _statusPageNoTransactions = Adw.StatusPage.New();
+        _statusPageNoTransactions.SetIconName("money-none-symbolic");
+        _statusPageNoTransactions.SetVexpand(true);
+        _statusPageNoTransactions.SetSizeRequest(300, 360);
+        _statusPageNoTransactions.SetMarginBottom(60);
+        //Main Box
+        _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
+        _boxMain.SetHexpand(true);
+        _boxMain.SetVexpand(true);
+        _boxMain.SetMarginTop(10);
+        _boxMain.SetMarginStart(10);
+        _boxMain.SetMarginEnd(10);
+        _boxMain.Append(_grpTransactions);
+        _boxMain.Append(_scrollTransactions);
+        _boxMain.Append(_statusPageNoTransactions);
+        //Main Overlay
+        _overlayMain = Gtk.Overlay.New();
+        _overlayMain.SetVexpand(true);
+        _overlayMain.SetChild(_boxMain);
+        _overlayMain.AddOverlay(_btnNewTransaction);
+        _flap.SetContent(_overlayMain);
         //Tab Page
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
@@ -270,6 +356,59 @@ public class AccountView
             var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
             _grpGroups.Add(row);
             _groupRows.Add(row);
+        }
+        //Transactions
+        foreach(var transactionRow in _transactionRows)
+        {
+            _flowBox.Remove(transactionRow);
+        }
+        _transactionRows.Clear();
+        _calendar.ClearMarks();
+        _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
+        if(_controller.Transactions.Count > 0)
+        {
+            // var selectedDay = new DateTime(g_date_time_format_iso8601(_calendar.GetDate().Handle));
+            // foreach(var transaction in _controller.Transactions.Values)
+            // {
+            //     if(transaction.Date.Month == selectedDay.Month && transaction.Date.Year == selectedDay.Year)
+            //     {
+            //         _calendar.MarkDay((uint)transaction.Date.Day);
+            //     }
+            // }
+            // _calendar.SelectDay(selectedDay.AddYears(-1)); // workaround bug to show marks
+            // _calendar.SelectDay(selectedDay);
+            if(_controller.FilteredTransactions.Count > 0)
+            {
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                foreach(var transaction in _controller.FilteredTransactions)
+                {
+                    var row = new TransactionRow(transaction, _controller.Localizer);
+                    if(_controller.SortFirstToLast)
+                    {
+                        _flowBox.Append(row);
+                    }
+                    else
+                    {
+                        _flowBox.Prepend(row);
+                    }
+                    _transactionRows.Add(row);
+                }
+            }
+            else
+            {
+                _statusPageNoTransactions.SetVisible(true);
+                _scrollTransactions.SetVisible(false);
+                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoFilteredTransactions"]);
+                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoFilteredTransactionsDescription"]);
+            }
+        }
+        else
+        {
+            _statusPageNoTransactions.SetVisible(true);
+            _scrollTransactions.SetVisible(false);
+            _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactions"]);
+            _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
         }
         _accountLoading = false;
     }

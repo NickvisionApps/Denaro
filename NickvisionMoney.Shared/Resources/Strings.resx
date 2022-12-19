@@ -41,7 +41,7 @@
 
 	<data name="Developers.Credits" xml:space="preserve">
         <!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionApplication/graphs/contributors</value>
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
     </data>
 
 	<data name="Designers.Credits" xml:space="preserve">
@@ -190,12 +190,20 @@
         <value>New Transaction</value>
     </data>
 
+  <data name="NewTransaction.Short" xml:space="preserve">
+        <value>New</value>
+    </data>
+
 	<data name="NewTransaction.Tooltip" xml:space="preserve">
         <value>New Transaction (Ctrl+N)</value>
     </data>
 
 	<data name="NewGroup" xml:space="preserve">
         <value>New Group</value>
+    </data>
+
+  <data name="NewGroup.Short" xml:space="preserve">
+        <value>New</value>
     </data>
 
 	<data name="NewGroup.Tooltip" xml:space="preserve">
@@ -266,12 +274,12 @@
         <value>No transactions match the specified filters.</value>
     </data>
 
-	<data name="SortTopBottom" xml:space="preserve">
-        <value>Sort From Top To Bottom</value>
+	<data name="SortFirstLast" xml:space="preserve">
+        <value>Sort From First To Last</value>
     </data>
 
-	<data name="SortBottomTop" xml:space="preserve">
-        <value>Sort From Bottom To Top</value>
+	<data name="SortLastFirst" xml:space="preserve">
+        <value>Sort From Last To First</value>
     </data>
 
     <data name="ResetFilters.Overview" xml:space="preserve">
@@ -321,6 +329,24 @@
 
 	<data name="UnableToExport" xml:space="preserve">
         <value>Unable to export account as CSV.</value>
+    </data>
+
+  <!--Transaction Row-->
+  <data name="Edit.TransactionRow" xml:space="preserve">
+        <value>Edit Transaction</value>
+    </data>
+
+  <data name="Delete.TransactionRow" xml:space="preserve">
+        <value>Delete Transaction</value>
+    </data>
+
+  <!--Group Row-->
+  <data name="Edit.GroupRow" xml:space="preserve">
+        <value>Edit Group</value>
+    </data>
+
+  <data name="Delete.GroupRow" xml:space="preserve">
+        <value>Delete Group</value>
     </data>
 	
 	<!--Settings-->
@@ -405,6 +431,10 @@
 	<!--GTK Specific-->
     <data name="AccountMenu.GTK" xml:space="preserve">
         <value>Account Menu</value>
+    </data>
+
+  <data name="ToggleSidebar.GTK" xml:space="preserve">
+        <value>Toggle Sidebar</value>
     </data>
 
 	<data name="MainMenu.GTK" xml:space="preserve">
