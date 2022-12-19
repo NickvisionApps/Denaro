@@ -475,9 +475,7 @@ public class AccountView
         if(!_accountLoading)
         {
             var selectedDay = gtk_calendar_get_date(_calendar.Handle);
-            var selectedTransactionDate = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-            _controller.FilterStartDate = selectedTransactionDate;
-            _controller.FilterEndDate = selectedTransactionDate;
+            _controller.SetSingleDateFilter(new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay)));
         }
     }
 
