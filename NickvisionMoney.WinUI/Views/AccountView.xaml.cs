@@ -62,8 +62,14 @@ public sealed partial class AccountView : UserControl
         {
             BtnSortBottomTop.IsChecked = true;
         }
-        AccountInfoChanged(null, EventArgs.Empty);
     }
+
+    /// <summary>
+    /// Occurs when the page is loaded
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Page_Loaded(object sender, RoutedEventArgs e) => AccountInfoChanged(null, EventArgs.Empty);
 
     /// <summary>
     /// Occurs when the account information is changed
@@ -108,9 +114,9 @@ public sealed partial class AccountView : UserControl
                 }
             }
             var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
-            foreach(CalendarViewDayItem displayedDay in displayedDays)
+            foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
-                if(datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
+                if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
                 {
                     displayedDay.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]);
                 }
