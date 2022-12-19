@@ -16,6 +16,25 @@ public class PreferencesDialog : Adw.Window
     [DllImport("adwaita-1")]
     private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Color
+    {
+        public float Red;
+        public float Green;
+        public float Blue;
+        public float Alpha;
+    }
+
+    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+    private static extern bool gdk_rgba_parse(ref Color rgba, [MarshalAs(UnmanagedType.LPStr)] string spec);
+    [DllImport("adwaita-1")]
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    private static extern string gdk_rgba_to_string(ref Color rgba);
+    [DllImport("adwaita-1")]
+    private static extern void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
+    [DllImport("adwaita-1")]
+    private static extern void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
+
     private readonly PreferencesViewController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -69,8 +88,8 @@ public class PreferencesDialog : Adw.Window
         _rowTransactionColor.SetTitle(_controller.Localizer["TransactionColor"]);
         _rowTransactionColor.SetSubtitle(_controller.Localizer["TransactionColorDescription"]);
         _btnTransactionColor = Gtk.ColorButton.New();
-        _btnTransactionColor.SetSensitive(false);
         _btnTransactionColor.SetValign(Gtk.Align.Center);
+        _btnTransactionColor.OnColorSet += OnTransactionColorSet;
         _rowTransactionColor.AddSuffix(_btnTransactionColor);
         _rowTransactionColor.SetActivatableWidget(_btnTransactionColor);
         _grpUserInterface.Add(_rowTransactionColor);
@@ -79,8 +98,8 @@ public class PreferencesDialog : Adw.Window
         _rowTransferColor.SetTitle(_controller.Localizer["TransferColor"]);
         _rowTransferColor.SetSubtitle(_controller.Localizer["TransferColorDescription"]);
         _btnTransferColor = Gtk.ColorButton.New();
-        _btnTransferColor.SetSensitive(false);
         _btnTransferColor.SetValign(Gtk.Align.Center);
+        _btnTransferColor.OnColorSet += OnTransferColorSet;
         _rowTransferColor.AddSuffix(_btnTransferColor);
         _rowTransferColor.SetActivatableWidget(_btnTransferColor);
         _grpUserInterface.Add(_rowTransferColor);
@@ -90,6 +109,12 @@ public class PreferencesDialog : Adw.Window
         OnHide += Hide;
         //Load Config
         _rowTheme.SetSelected((uint)_controller.Theme);
+        var transactionColor = new Color();
+        gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
+        gtk_color_chooser_set_rgba(_btnTransactionColor.Handle, ref transactionColor);
+        var transferColor = new Color();
+        gdk_rgba_parse(ref transferColor, _controller.TransferDefaultColor);
+        gtk_color_chooser_set_rgba(_btnTransferColor.Handle, ref transferColor);
     }
 
     /// <summary>
@@ -113,5 +138,19 @@ public class PreferencesDialog : Adw.Window
             Theme.Dark => Adw.ColorScheme.ForceDark,
             _ => Adw.ColorScheme.PreferLight
         };
+    }
+
+    private void OnTransactionColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnTransactionColor.Handle, ref color);
+        _controller.TransactionDefaultColor = gdk_rgba_to_string(ref color);
+    }
+
+    private void OnTransferColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnTransferColor.Handle, ref color);
+        _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
     }
 }
