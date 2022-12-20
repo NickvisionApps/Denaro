@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
+/// <summary>
+/// A control for an AccountView
+/// </summary>
 public class AccountViewController
 {
     private readonly Account _account;
@@ -15,28 +18,73 @@ public class AccountViewController
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
 
+    /// <summary>
+    /// The localizer to get translated strings from
+    /// </summary>
     public Localizer Localizer { get; init; }
 
+    /// <summary>
+    /// The default color to use for a transaction
+    /// </summary>
     public string TransactionDefaultColor => Configuration.Current.TransactionDefaultColor;
+    /// <summary>
+    /// The title (filename without extension) of the account
+    /// </summary>
     public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
-    public decimal AmountTotal => _account.Total;
+    /// <summary>
+    /// The total amount of the account
+    /// </summary>
+    public decimal AccountTotal => _account.Total;
+    /// <summary>
+    /// The total amount of the account as a string
+    /// </summary>
     public string AccountTotalString => _account.Total.ToString("C");
-    public decimal AmountIncome => _account.Income;
+    /// <summary>
+    /// The income amount of the account
+    /// </summary>
+    public decimal AccountIncome => _account.Income;
+    /// <summary>
+    /// The income amount of the account as a string
+    /// </summary>
     public string AccountIncomeString => _account.Income.ToString("C");
-    public decimal AmountExpense => _account.Expense;
+    /// <summary>
+    /// The expense amount of the account
+    /// </summary>
+    public decimal AccountExpense => _account.Expense;
+    /// <summary>
+    /// The expense amount of the account as a string
+    /// </summary>
     public string AccountExpenseString => _account.Expense.ToString("C");
+    /// <summary>
+    /// The groups of the account
+    /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
+    /// <summary>
+    /// The transactions of the account
+    /// </summary>
     public Dictionary<uint, Transaction> Transactions => _account.Transactions;
 
-    private event EventHandler<NotificationSentEventArgs>? _notificationSent;
+    /// <summary>
+    /// Occurs when a notification is sent
+    /// </summary>
+    private event EventHandler<NotificationSentEventArgs>? NotificationSent;
+    /// <summary>
+    /// Occurs when the information of an account is changed
+    /// </summary>
     public event EventHandler? AccountInfoChanged;
 
+    /// <summary>
+    /// Creates an AccountViewController
+    /// </summary>
+    /// <param name="path">The path of the account</param>
+    /// <param name="localizer">The Localizer of the app</param>
+    /// <param name="notificationSent">The notification sent event</param>
     public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent)
     {
         _account = new Account(path);
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
-        _notificationSent = notificationSent;
+        NotificationSent = notificationSent;
         //Setup Filters
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
@@ -49,8 +97,14 @@ public class AccountViewController
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
     }
 
+    /// <summary>
+    /// Finalizes an AccountViewController
+    /// </summary>
     ~AccountViewController() => _account.Dispose();
 
+    /// <summary>
+    /// Whether or not to sort transactions from first to last
+    /// </summary>
     public bool SortFirstToLast
     {
         get => Configuration.Current.SortFirstToLast;
@@ -63,6 +117,9 @@ public class AccountViewController
         }
     }
 
+    /// <summary>
+    /// The start date of the filter
+    /// </summary>
     public DateOnly FilterStartDate
     {
         get => _filterStartDate;
@@ -74,6 +131,9 @@ public class AccountViewController
         }
     }
 
+    /// <summary>
+    /// The end date of the filter
+    /// </summary>
     public DateOnly FilterEndDate
     {
         get => _filterEndDate;
@@ -85,6 +145,10 @@ public class AccountViewController
         }
     }
 
+    /// <summary>
+    /// Gets the list of filtered transactions
+    /// </summary>
+    /// <returns>The list of filtered transactions</returns>
     public async Task<List<Transaction>> GetFilteredTransactionsAsync()
     {
         var filteredTransactions = new List<Transaction>();
@@ -117,6 +181,10 @@ public class AccountViewController
         return filteredTransactions;
     }
 
+    /// <summary>
+    /// Gets a list of dates in the account
+    /// </summary>
+    /// <returns>The list of dates in the account</returns>
     public async Task<List<DateOnly>> GetDatesInAccountAsync()
     {
         var dates = new List<DateOnly>();
@@ -133,6 +201,10 @@ public class AccountViewController
         return dates;
     }
 
+    /// <summary>
+    /// Imports transaction from a file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
         var imported = await _account.ImportFromFileAsync(path);
@@ -146,14 +218,18 @@ public class AccountViewController
                 }
             }
             AccountInfoChanged?.Invoke(this, EventArgs.Empty);
-            _notificationSent?.Invoke(this, new NotificationSentEventArgs(imported == 1 ? string.Format(Localizer["Imported"], imported) : string.Format(Localizer["Imported", true], imported), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(imported == 1 ? string.Format(Localizer["Imported"], imported) : string.Format(Localizer["Imported", true], imported), NotificationSeverity.Success));
         }
         else
         {
-            _notificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport"], NotificationSeverity.Error));
         }
     }
 
+    /// <summary>
+    /// Exports the account to a file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
     public async Task ExportToFileAsync(string path)
     {
         if(Path.GetExtension(path) != ".csv")
@@ -162,33 +238,40 @@ public class AccountViewController
         }
         if(await _account.ExportToCSVAsync(path))
         {
-            _notificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
         else
         {
-            _notificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
         }
     }
 
+    /// <summary>
+    /// Gets whether or not a filter is active
+    /// </summary>
+    /// <param name="key">The id of the filter</param>
+    /// <returns>True if active, else false</returns>
     public bool IsFilterActive(int key) => _filters[key];
 
+    /// <summary>
+    /// Updates whether or not a filter is active
+    /// </summary>
+    /// <param name="key">The id of the filter</param>
+    /// <param name="value">The value of the filter</param>
     public void UpdateFilterValue(int key, bool value)
     {
         _filters[key] = value;
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Sets the start and end date of the filter to the same date
+    /// </summary>
+    /// <param name="date">The date to set</param>
     public void SetSingleDateFilter(DateOnly date)
     {
         _filterStartDate = date;
         _filterEndDate = date;
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void ResetDateFilters()
-    {
-        _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
-        _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 }

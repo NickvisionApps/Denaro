@@ -13,7 +13,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
-    private SqliteConnection _database { get; set; }
+    private SqliteConnection _database;
 
     /// <summary>
     /// The path of the account
