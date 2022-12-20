@@ -96,8 +96,9 @@ public class AccountView
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
 
-    public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
+    public AccountView(MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
+        parentWindow.WidthChanged += OnWindowWidthChanged;
         _controller = controller;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
@@ -380,7 +381,6 @@ public class AccountView
         {
             await _controller.RunRepeatTransactionsAsync();
             _isFirstTimeLoading = false;
-            return;
         }
         if(!_isAccountLoading)
         {
@@ -505,5 +505,13 @@ public class AccountView
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
         _expRange.SetEnableExpansion(false);
+    }
+
+    private void OnWindowWidthChanged(object sender, WindowWidthEventArgs e)
+    {
+        foreach(var row in _transactionRows)
+        {
+            row.ChangeStyle(e.SmallWidth);
+        }
     }
 }

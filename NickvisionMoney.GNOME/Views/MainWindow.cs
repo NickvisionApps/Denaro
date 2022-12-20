@@ -7,6 +7,11 @@ using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
+public class WindowWidthEventArgs : EventArgs
+{
+    public bool SmallWidth { get; set; }
+}
+
 /// <summary>
 /// The MainWindow for the application
 /// </summary>
@@ -40,6 +45,15 @@ public class MainWindow : Adw.ApplicationWindow
 
     [DllImport("adwaita-1")]
     private static extern nuint g_file_get_type();
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
+
+    [DllImport("adwaita-1")]
+    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+
+    public event EventHandler<WindowWidthEventArgs> WidthChanged;
+    private WindowWidthEventArgs _windowWidthArgs;
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -84,6 +98,8 @@ public class MainWindow : Adw.ApplicationWindow
     /// <param name="application">The Adw.Application</param>
     public MainWindow(MainWindowController controller, Adw.Application application)
     {
+        _windowWidthArgs = new WindowWidthEventArgs();
+        _windowWidthArgs.SmallWidth = false;
         //Window Settings
         _controller = controller;
         _application = application;
@@ -274,6 +290,8 @@ public class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsRows = new List<Adw.ActionRow> {};
         _listRecentAccountsOnStartRows = new List<Adw.ActionRow> {};
         _accountViews = new List<Adw.TabPage> {};
+        //Watch window width
+        g_signal_connect_data(this.Handle, "notify::default-width", OnWidthChanged, IntPtr.Zero, IntPtr.Zero, 0);
     }
 
     /// <summary>
@@ -535,5 +553,19 @@ public class MainWindow : Adw.ApplicationWindow
     {
         _popoverAccount.Popdown();
         _controller.AddAccount(path);
+    }
+
+    private void OnWidthChanged(nint sender, nint gParamSpec, nint data)
+    {
+        if(DefaultWidth > 450 && _windowWidthArgs.SmallWidth)
+        {
+            _windowWidthArgs.SmallWidth = false;
+            WidthChanged?.Invoke(this, _windowWidthArgs);
+        }
+        else if (DefaultWidth < 450 && !_windowWidthArgs.SmallWidth)
+        {
+            _windowWidthArgs.SmallWidth = true;
+            WidthChanged?.Invoke(this, _windowWidthArgs);
+        }
     }
 }
