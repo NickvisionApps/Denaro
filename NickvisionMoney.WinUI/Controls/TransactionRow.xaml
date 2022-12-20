@@ -17,7 +17,7 @@
             <StackPanel wct:DockPanel.Dock="Left" Margin="6,0,0,0" Orientation="Vertical">
                 <TextBlock x:Name="LblName"/>
 
-                <TextBlock x:Name="LblDate" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>
+                <TextBlock x:Name="LblDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>
             </StackPanel>
 
             <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6">

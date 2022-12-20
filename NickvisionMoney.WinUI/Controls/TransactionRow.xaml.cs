@@ -1,4 +1,3 @@
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -50,7 +49,11 @@ public sealed partial class TransactionRow : UserControl
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
         BtnId.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         LblName.Text = _transaction.Description;
-        LblDate.Text = _transaction.Date.ToString("d");
+        LblDescription.Text = _transaction.Date.ToString("d");
+        if(_transaction.RepeatInterval != TransactionRepeatInterval.Never)
+        {
+            LblDescription.Text += $"\nRepeat Interval: {_transaction.RepeatInterval}";
+        }
         LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C")}";
         LblAmount.Foreground = _transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
