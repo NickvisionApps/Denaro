@@ -111,9 +111,12 @@ public class AccountViewController
 
         set
         {
-            Configuration.Current.SortFirstToLast = value;
-            Configuration.Current.Save();
-            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            if(Configuration.Current.SortFirstToLast != value)
+            {
+                Configuration.Current.SortFirstToLast = value;
+                Configuration.Current.Save();
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 
