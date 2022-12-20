@@ -202,6 +202,17 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Checks if repeat transactions are needed and creates them if so
+    /// </summary>
+    public async Task RunRepeatTransactionsAsync()
+    {
+        if(await _account.RunRepeatTransactionsAsync())
+        {
+            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    /// <summary>
     /// Imports transaction from a file
     /// </summary>
     /// <param name="path">The path of the file</param>

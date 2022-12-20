@@ -75,7 +75,11 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Page_Loaded(object sender, RoutedEventArgs e) => AccountInfoChanged(null, EventArgs.Empty);
+    private async void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        AccountInfoChanged(null, EventArgs.Empty);
+        await _controller.RunRepeatTransactionsAsync();
+    }
 
     /// <summary>
     /// Occurs when the account information is changed

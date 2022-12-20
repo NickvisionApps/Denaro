@@ -97,74 +97,6 @@ public class Account : IDisposable
             };
             Transactions.Add(transaction.Id, transaction);
         }
-        //Repeat Needed Transactions
-        /*
-        foreach(var pair in Transactions) 
-        { 
-            if(pair.Value.RepeatInterval != TransactionRepeatInterval.Never)
-            {
-                var repeatNeeded = false;
-                if(pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
-                {
-                    if(DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(1))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if(pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(7))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if(pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(1))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if(pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(4))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if(pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(1))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(2))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                if(repeatNeeded)
-                {
-                    var newTransaction = new Transaction(NextAvailableTransactionId)
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Today),
-                        Description = pair.Value.Description,
-                        Type= pair.Value.Type,
-                        RepeatInterval = pair.Value.RepeatInterval,
-                        Amount = pair.Value.Amount,
-                        GroupId = pair.Value.GroupId,
-                        RGBA = pair.Value.RGBA,
-                    };
-                    AddTransaction(newTransaction);
-                    pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
-                    UpdateTransaction(pair.Value);
-                }
-            }
-        }
-        */
     }
 
     /// <summary>
@@ -262,6 +194,85 @@ public class Account : IDisposable
     /// Frees resources used by the Account object
     /// </summary>
     public void Dispose() => _database.Dispose();
+
+    /// <summary>
+    /// Checks if repeat transactions are needed and creates them if so
+    /// </summary>
+    /// <returns>True if at least one transaction was created, else false</returns>
+    public async Task<bool> RunRepeatTransactionsAsync()
+    {
+        var transactionsAdded = false;
+        await Task.Run(async () =>
+        {
+            foreach (var pair in Transactions)
+            {
+                if (pair.Value.RepeatInterval != TransactionRepeatInterval.Never)
+                {
+                    var repeatNeeded = false;
+                    if (pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(1))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(7))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(1))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(4))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(1))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(2))
+                        {
+                            repeatNeeded = true;
+                        }
+                    }
+                    if (repeatNeeded)
+                    {
+                        var newTransaction = new Transaction(NextAvailableTransactionId)
+                        {
+                            Date = DateOnly.FromDateTime(DateTime.Today),
+                            Description = pair.Value.Description,
+                            Type = pair.Value.Type,
+                            RepeatInterval = pair.Value.RepeatInterval,
+                            Amount = pair.Value.Amount,
+                            GroupId = pair.Value.GroupId,
+                            RGBA = pair.Value.RGBA,
+                        };
+                        await AddTransactionAsync(newTransaction);
+                        pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
+                        await UpdateTransactionAsync(pair.Value);
+                        transactionsAdded = true;
+                    }
+                }
+            }
+        });
+        return transactionsAdded;
+    }
 
     /// <summary>
     /// Gets a Group object by its id

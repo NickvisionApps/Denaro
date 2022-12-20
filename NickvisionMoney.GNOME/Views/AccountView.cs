@@ -40,6 +40,7 @@ public class AccountView
     private static extern nint g_main_context_default();
 
     private readonly AccountViewController _controller;
+    private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
     private List<GroupRow> _groupRows;
     private List<TransactionRow> _transactionRows;
@@ -98,9 +99,12 @@ public class AccountView
     public AccountView(Gtk.Window parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
         _controller = controller;
+        _isFirstTimeLoading = true;
         _isAccountLoading = false;
         _groupRows = new List<GroupRow> {};
         _transactionRows = new List<TransactionRow> {};
+        //Register Controller Events
+        _controller.AccountInfoChanged += OnAccountInfoChanged;
         //Flap
         _flap = Adw.Flap.New();
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -366,13 +370,18 @@ public class AccountView
         //Tab Page
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
-
-        _controller.AccountInfoChanged += OnAccountInfoChanged;
+        //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
     }
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
     {
+        if(_isFirstTimeLoading)
+        {
+            await _controller.RunRepeatTransactionsAsync();
+            _isFirstTimeLoading = false;
+            return;
+        }
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;

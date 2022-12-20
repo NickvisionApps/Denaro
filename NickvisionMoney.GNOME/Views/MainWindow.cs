@@ -93,6 +93,9 @@ public class MainWindow : Adw.ApplicationWindow
         {
             AddCssClass("devel");
         }
+        //Register Events
+        _controller.NotificationSent += NotificationSent;
+        _controller.AccountAdded += AccountAdded;
         //Main Box
         _mainBox = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         //Header Bar
@@ -232,9 +235,6 @@ public class MainWindow : Adw.ApplicationWindow
         _toastOverlay.SetChild(_viewStack);
         //Layout
         SetContent(_mainBox);
-        //Register Events
-        _controller.NotificationSent += NotificationSent;
-        _controller.AccountAdded += AccountAdded;
         //New Account Action
         _actNewAccount = Gio.SimpleAction.New("newAccount", null);
         _actNewAccount.OnActivate += OnNewAccount;
