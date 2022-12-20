@@ -264,7 +264,7 @@ public class Account : IDisposable
                         RGBA = transaction.RGBA,
                     };
                     await AddTransactionAsync(newTransaction);
-                    pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
+                    transaction.RepeatInterval = TransactionRepeatInterval.Never;
                     await UpdateTransactionAsync(transaction);
                     transactionsAdded = true;
                 }
