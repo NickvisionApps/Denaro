@@ -256,12 +256,12 @@ public class Account : IDisposable
                     var newTransaction = new Transaction(NextAvailableTransactionId)
                     {
                         Date = DateOnly.FromDateTime(DateTime.Today),
-                        Description = pair.Value.Description,
-                        Type = pair.Value.Type,
-                        RepeatInterval = pair.Value.RepeatInterval,
-                        Amount = pair.Value.Amount,
-                        GroupId = pair.Value.GroupId,
-                        RGBA = pair.Value.RGBA,
+                        Description = transaction.Description,
+                        Type = transaction.Type,
+                        RepeatInterval = transaction.RepeatInterval,
+                        Amount = transaction.Amount,
+                        GroupId = transaction.GroupId,
+                        RGBA = transaction.RGBA,
                     };
                     await AddTransactionAsync(newTransaction);
                     pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
