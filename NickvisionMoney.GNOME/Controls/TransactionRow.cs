@@ -93,6 +93,7 @@ public class TransactionRow : Adw.PreferencesGroup
         _boxButtons.Append(_btnDelete);
         //Suffix Box
         _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
+        _boxSuffix.SetValign(Gtk.Align.Center);
         _boxSuffix.Append(_lblAmount);
         _boxSuffix.Append(_boxButtons);
         _row.AddSuffix(_boxSuffix);
