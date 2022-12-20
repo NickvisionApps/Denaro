@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -202,98 +203,73 @@ public class Account : IDisposable
     public async Task<bool> RunRepeatTransactionsAsync()
     {
         var transactionsAdded = false;
-        await Task.Run(async () =>
+        foreach (var pair in Transactions)
         {
-            foreach (var pair in Transactions)
+            if (pair.Value.RepeatInterval != TransactionRepeatInterval.Never)
             {
-                if (pair.Value.RepeatInterval != TransactionRepeatInterval.Never)
+                var repeatNeeded = false;
+                if (pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
                 {
-                    var repeatNeeded = false;
-                    if (pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(1))
                     {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(1))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
-                    {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(7))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
-                    {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(1))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
-                    {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(4))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
-                    {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(1))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
-                    {
-                        if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(2))
-                        {
-                            repeatNeeded = true;
-                        }
-                    }
-                    if (repeatNeeded)
-                    {
-                        var newTransaction = new Transaction(NextAvailableTransactionId)
-                        {
-                            Date = DateOnly.FromDateTime(DateTime.Today),
-                            Description = pair.Value.Description,
-                            Type = pair.Value.Type,
-                            RepeatInterval = pair.Value.RepeatInterval,
-                            Amount = pair.Value.Amount,
-                            GroupId = pair.Value.GroupId,
-                            RGBA = pair.Value.RGBA,
-                        };
-                        await AddTransactionAsync(newTransaction);
-                        pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
-                        await UpdateTransactionAsync(pair.Value);
-                        transactionsAdded = true;
+                        repeatNeeded = true;
                     }
                 }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
+                {
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddDays(7))
+                    {
+                        repeatNeeded = true;
+                    }
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
+                {
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(1))
+                    {
+                        repeatNeeded = true;
+                    }
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                {
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddMonths(4))
+                    {
+                        repeatNeeded = true;
+                    }
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
+                {
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(1))
+                    {
+                        repeatNeeded = true;
+                    }
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                {
+                    if (DateOnly.FromDateTime(DateTime.Today) >= pair.Value.Date.AddYears(2))
+                    {
+                        repeatNeeded = true;
+                    }
+                }
+                if (repeatNeeded)
+                {
+                    var newTransaction = new Transaction(NextAvailableTransactionId)
+                    {
+                        Date = DateOnly.FromDateTime(DateTime.Today),
+                        Description = pair.Value.Description,
+                        Type = pair.Value.Type,
+                        RepeatInterval = pair.Value.RepeatInterval,
+                        Amount = pair.Value.Amount,
+                        GroupId = pair.Value.GroupId,
+                        RGBA = pair.Value.RGBA,
+                    };
+                    await AddTransactionAsync(newTransaction);
+                    pair.Value.RepeatInterval = TransactionRepeatInterval.Never;
+                    await UpdateTransactionAsync(pair.Value);
+                    transactionsAdded = true;
+                }
             }
-        });
+        }
         return transactionsAdded;
-    }
-
-    /// <summary>
-    /// Gets a Group object by its id
-    /// </summary>
-    /// <param name="id">The id of the Group</param>
-    /// <returns>The Group object if found, else null</returns>
-    public async Task<Group?> GetGroupByIdAsync(uint id)
-    {
-        Group? group = null;
-        await Task.Run(() =>
-        {
-            foreach (var pair in Groups)
-            {
-                if (pair.Key == id)
-                {
-                    group = pair.Value;
-                    break;
-                }
-            }
-        });
-        return group;
     }
 
     /// <summary>
@@ -349,42 +325,17 @@ public class Account : IDisposable
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Remove(id);
-            await Task.Run(async () =>
+            foreach (var pair in Transactions)
             {
-                foreach (var pair in Transactions)
+                if (pair.Value.GroupId == id)
                 {
-                    if (pair.Value.GroupId == id)
-                    {
-                        pair.Value.GroupId = -1;
-                        await UpdateTransactionAsync(pair.Value);
-                    }
+                    pair.Value.GroupId = -1;
+                    await UpdateTransactionAsync(pair.Value);
                 }
-            });
+            }
             return true;
         }
         return false;
-    }
-
-    /// <summary>
-    /// Gets a Transaction object by its id
-    /// </summary>
-    /// <param name="id">The id of the Transaction</param>
-    /// <returns>The Transaction object if found, else null</returns>
-    public async Task<Transaction?> GetTransactionByIdAsync(uint id)
-    {
-        Transaction? transaction = null;
-        await Task.Run(() =>
-        {
-            foreach (var pair in Transactions)
-            {
-                if (pair.Key == id)
-                {
-                    transaction = pair.Value;
-                    break;
-                }
-            }
-        });
-        return transaction;
     }
 
     /// <summary>
@@ -496,25 +447,22 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
     /// <returns>True if successful, else false</returns>
-    public async Task<bool> ExportToCSVAsync(string path)
+    public bool ExportToCSV(string path)
     {
         string result = "";
         result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
-        await Task.Run(() =>
+        foreach (var pair in Transactions)
         {
-            foreach (var pair in Transactions)
+            result += $"{pair.Value.Id};{pair.Value.Date.ToShortDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            if (pair.Value.GroupId != -1)
             {
-                result += $"{pair.Value.Id};{pair.Value.Date.ToShortDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
-                if (pair.Value.GroupId != -1)
-                {
-                    result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
-                }
-                else
-                {
-                    result += ";\n";
-                }
+                result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
             }
-        });
+            else
+            {
+                result += ";\n";
+            }
+        }
         try
         {
             File.WriteAllText(path, result);
@@ -543,112 +491,109 @@ public class Account : IDisposable
         {
             return -1;
         }
-        await Task.Run(async () =>
+        foreach (var line in lines)
         {
-            foreach (var line in lines)
+            var fields = line.Split(';');
+            if (fields.Length != 10)
             {
-                var fields = line.Split(';');
-                if (fields.Length != 10)
-                {
-                    continue;
-                }
-                //Get Id
-                var id = 0u;
-                try
-                {
-                    id = uint.Parse(fields[0]);
-                }
-                catch
-                {
-                    continue;
-                }
-                if (await GetTransactionByIdAsync(id) != null)
-                {
-                    continue;
-                }
-                //Get Date
-                var date = default(DateOnly);
-                try
-                {
-                    date = DateOnly.Parse(fields[1]);
-                }
-                catch
-                {
-                    continue;
-                }
-                //Get Description
-                var description = fields[2];
-                //Get Type
-                var type = TransactionType.Income;
-                try
-                {
-                    type = (TransactionType)int.Parse(fields[3]);
-                }
-                catch
-                {
-                    continue;
-                }
-                //Get Repeat Interval
-                var repeat = TransactionRepeatInterval.Never;
-                try
-                {
-                    repeat = (TransactionRepeatInterval)int.Parse(fields[4]);
-                }
-                catch
-                {
-                    continue;
-                }
-                //Get Amount
-                var amount = 0m;
-                try
-                {
-                    amount = decimal.Parse(fields[5]);
-                }
-                catch
-                {
-                    continue;
-                }
-                //Get RGBA
-                var rgba = fields[6];
-                //Get Group Id
-                var gid = 0;
-                try
-                {
-                    gid = int.Parse(fields[7]);
-                }
-                catch
-                {
-                    continue;
-                }
-                //Get Group Name
-                var groupName = fields[8];
-                //Get Group Description
-                var groupDescription = fields[9];
-                //Create Group If Needed
-                if (gid != -1 && await GetGroupByIdAsync((uint)gid) == null)
-                {
-                    var group = new Group((uint)gid)
-                    {
-                        Name = groupName,
-                        Description = groupDescription
-                    };
-                    await AddGroupAsync(group);
-                }
-                //Add Transaction
-                var transaction = new Transaction(id)
-                {
-                    Date = date,
-                    Description = description,
-                    Type = type,
-                    RepeatInterval = repeat,
-                    Amount = amount,
-                    GroupId = gid,
-                    RGBA = rgba
-                };
-                await AddTransactionAsync(transaction);
-                imported++;
+                continue;
             }
-        });
+            //Get Id
+            var id = 0u;
+            try
+            {
+                id = uint.Parse(fields[0]);
+            }
+            catch
+            {
+                continue;
+            }
+            if (Transactions.ContainsKey(id))
+            {
+                continue;
+            }
+            //Get Date
+            var date = default(DateOnly);
+            try
+            {
+                date = DateOnly.Parse(fields[1]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Description
+            var description = fields[2];
+            //Get Type
+            var type = TransactionType.Income;
+            try
+            {
+                type = (TransactionType)int.Parse(fields[3]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Repeat Interval
+            var repeat = TransactionRepeatInterval.Never;
+            try
+            {
+                repeat = (TransactionRepeatInterval)int.Parse(fields[4]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Amount
+            var amount = 0m;
+            try
+            {
+                amount = decimal.Parse(fields[5]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get RGBA
+            var rgba = fields[6];
+            //Get Group Id
+            var gid = 0;
+            try
+            {
+                gid = int.Parse(fields[7]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Group Name
+            var groupName = fields[8];
+            //Get Group Description
+            var groupDescription = fields[9];
+            //Create Group If Needed
+            if (gid != -1 && !Groups.ContainsKey((uint)gid))
+            {
+                var group = new Group((uint)gid)
+                {
+                    Name = groupName,
+                    Description = groupDescription
+                };
+                await AddGroupAsync(group);
+            }
+            //Add Transaction
+            var transaction = new Transaction(id)
+            {
+                Date = date,
+                Description = description,
+                Type = type,
+                RepeatInterval = repeat,
+                Amount = amount,
+                GroupId = gid,
+                RGBA = rgba
+            };
+            await AddTransactionAsync(transaction);
+            imported++;
+        }
         return imported;
     }
 

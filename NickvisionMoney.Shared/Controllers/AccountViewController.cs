@@ -117,6 +117,57 @@ public class AccountViewController
         }
     }
 
+    public List<DateOnly> DatesInAccount
+    {
+        get
+        {
+            var datesInAccount = new List<DateOnly>();
+            foreach (var pair in _account.Transactions)
+            {
+                if (!datesInAccount.Contains(pair.Value.Date))
+                {
+                    datesInAccount.Add(pair.Value.Date);
+                }
+            }
+            return datesInAccount;
+        }
+    }
+
+    /// <summary>
+    /// The list of filtered transactions
+    /// </summary>
+    public List<Transaction> FilteredTransactions
+    {
+        get
+        {
+            var filteredTransactions = new List<Transaction>();
+            foreach (var pair in _account.Transactions)
+            {
+                if (pair.Value.Type == TransactionType.Income && !_filters[-3])
+                {
+                    continue;
+                }
+                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+                {
+                    continue;
+                }
+                if (!_filters[pair.Value.GroupId])
+                {
+                    continue;
+                }
+                if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+                {
+                    if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
+                    {
+                        continue;
+                    }
+                }
+                filteredTransactions.Add(pair.Value);
+            }
+            return filteredTransactions;
+        }
+    }
+
     /// <summary>
     /// The start date of the filter
     /// </summary>
@@ -143,62 +194,6 @@ public class AccountViewController
             _filterEndDate = value;
             AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         }
-    }
-
-    /// <summary>
-    /// Gets the list of filtered transactions
-    /// </summary>
-    /// <returns>The list of filtered transactions</returns>
-    public async Task<List<Transaction>> GetFilteredTransactionsAsync()
-    {
-        var filteredTransactions = new List<Transaction>();
-        await Task.Run(() =>
-        {
-            foreach (var pair in _account.Transactions)
-            {
-                if (pair.Value.Type == TransactionType.Income && !_filters[-3])
-                {
-                    continue;
-                }
-                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
-                {
-                    continue;
-                }
-                if (!_filters[pair.Value.GroupId])
-                {
-                    continue;
-                }
-                if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
-                {
-                    if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
-                    {
-                        continue;
-                    }
-                }
-                filteredTransactions.Add(pair.Value);
-            }
-        });
-        return filteredTransactions;
-    }
-
-    /// <summary>
-    /// Gets a list of dates in the account
-    /// </summary>
-    /// <returns>The list of dates in the account</returns>
-    public async Task<List<DateOnly>> GetDatesInAccountAsync()
-    {
-        var dates = new List<DateOnly>();
-        await Task.Run(() =>
-        {
-            foreach (var pair in _account.Transactions)
-            {
-                if (!dates.Contains(pair.Value.Date))
-                {
-                    dates.Add(pair.Value.Date);
-                }
-            }
-        });
-        return dates;
     }
 
     /// <summary>
@@ -241,13 +236,13 @@ public class AccountViewController
     /// Exports the account to a file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    public async Task ExportToFileAsync(string path)
+    public void ExportToFile(string path)
     {
         if(Path.GetExtension(path) != ".csv")
         {
             path += ".csv";
         }
-        if(await _account.ExportToCSVAsync(path))
+        if(_account.ExportToCSV(path))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }

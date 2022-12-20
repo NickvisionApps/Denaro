@@ -421,7 +421,7 @@ public class AccountView
             _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
             if (_controller.Transactions.Count > 0)
             {
-                var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
+                var filteredTransactions = _controller.FilteredTransactions;
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
                 if (filteredTransactions.Count > 0)
                 {

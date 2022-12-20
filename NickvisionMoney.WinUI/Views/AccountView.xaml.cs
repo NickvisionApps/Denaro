@@ -86,7 +86,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private async void AccountInfoChanged(object? sender, EventArgs e)
+    private void AccountInfoChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
         {
@@ -118,7 +118,7 @@ public sealed partial class AccountView : UserControl
             if (_controller.Transactions.Count > 0)
             {
                 //Highlight Days
-                var datesInAccount = await _controller.GetDatesInAccountAsync();
+                var datesInAccount = _controller.DatesInAccount;
                 var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
                 foreach (CalendarViewDayItem displayedDay in displayedDays)
                 {
@@ -131,7 +131,7 @@ public sealed partial class AccountView : UserControl
                         displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                     }
                 }
-                var filteredTransactions = await _controller.GetFilteredTransactionsAsync();
+                var filteredTransactions = _controller.FilteredTransactions;
                 if (filteredTransactions.Count > 0)
                 {
                     foreach (var transaction in filteredTransactions)
@@ -338,7 +338,7 @@ public sealed partial class AccountView : UserControl
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-           await _controller.ExportToFileAsync(file.Path);
+            _controller.ExportToFile(file.Path);
         }
     }
 
