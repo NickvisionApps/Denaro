@@ -236,17 +236,15 @@ public sealed partial class MainWindow : Window
     {
         StatusPageAccount.Title = _controller.Localizer["SelectAccount"];
         StatusPageAccount.Description = _controller.Localizer["SelectAccountDescription"];
-        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>())
+        var newNavItem = new NavigationViewItem()
         {
-            new NavigationViewItem()
-            {
-                Tag = "OpenAccount",
-                Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1])
-            }
+            Tag = "OpenAccount",
+            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1])
         };
+        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>()) { newNavItem };
         NavViewItemAccount.MenuItemsSource = items;
         NavViewItemAccount.IsExpanded = true;
-        NavViewItemAccount.IsSelected = true;
+        NavView.SelectedItem = newNavItem;
     }
 
     /// <summary>
