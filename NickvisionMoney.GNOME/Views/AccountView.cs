@@ -407,7 +407,13 @@ public class AccountView
                 _grpGroups.Remove(groupRow);
             }
             _groupRows.Clear();
+            //Ungrouped Row
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            ungroupedRow.FilterChanged += UpdateGroupFilter;
+            _grpGroups.Add(ungroupedRow);
+            _groupRows.Add(ungroupedRow);
             var groups = new List<Group>();
+            //Normal groups
             foreach (var pair in _controller.Groups)
             {
                 groups.Add(pair.Value);
@@ -534,9 +540,9 @@ public class AccountView
         if(!_isAccountLoading)
         {
             var yearObject = (Gtk.StringObject)_ddStartYear.GetSelectedItem();
-            var year = Convert.ToInt32(yearObject.GetString());
-            var month = (int)_ddStartMonth.GetSelected() + 1;
-            var day = (int)_ddStartDay.GetSelected() + 1;
+            // var year = Convert.ToInt32(yearObject.GetString());
+            // var month = (int)_ddStartMonth.GetSelected() + 1;
+            // var day = (int)_ddStartDay.GetSelected() + 1;
             // _ddStartDay.SetModel(Gtk.StringList.New(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
             // foreach(var m in new int[] {2, 4, 6, 9, 11})
             // {
@@ -559,7 +565,7 @@ public class AccountView
             //         _ddStartDay.SetModel(Gtk.StringList.New(new string[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
             //     }
             // }
-            _controller.FilterStartDate = new DateOnly(year, month, day);
+            _controller.FilterStartDate = new DateOnly(Convert.ToInt32(yearObject.GetString()), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
         }
     }
 

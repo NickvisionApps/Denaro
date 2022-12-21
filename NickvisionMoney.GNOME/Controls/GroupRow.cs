@@ -39,7 +39,7 @@ public class GroupRow : Adw.ActionRow
         _chkFilter = Gtk.CheckButton.New();
         _chkFilter.SetActive(filterActive);
         _chkFilter.AddCssClass("selection-mode");
-        _chkFilter.OnToggled += (Gtk.CheckButton sender, EventArgs e) => FilterChanged?.Invoke(this, ((int)group.Id, _chkFilter.GetActive()));
+        _chkFilter.OnToggled += (Gtk.CheckButton sender, EventArgs e) => FilterChanged?.Invoke(this, ((int)group.Id == 0 ? -1 : (int)group.Id, _chkFilter.GetActive()));
         AddPrefix(_chkFilter);
         //Amount Label
         _lblAmount = Gtk.Label.New(group.Balance.ToString("C"));
@@ -62,8 +62,11 @@ public class GroupRow : Adw.ActionRow
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _box.Append(_lblAmount);
-        _box.Append(_btnEdit);
-        _box.Append(_btnDelete);
+        if(group.Id != 0)
+        {
+            _box.Append(_btnEdit);
+            _box.Append(_btnDelete);
+        }
         AddSuffix(_box);
     }
 }
