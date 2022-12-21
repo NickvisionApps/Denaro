@@ -38,10 +38,12 @@ public sealed partial class GroupRow : UserControl
     /// </summary>
     /// <param name="group">The Group model to represent</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public GroupRow(Group group, Localizer localizer)
+    /// <param name="filterActive">Whether or not the filter on the row should be active</param>
+    public GroupRow(Group group, Localizer localizer, bool filterActive)
     {
         InitializeComponent();
         _group = group;
+        ChkFilter.IsChecked = filterActive;
         if(_group.Id == 0)
         {
             BtnEdit.Visibility = Visibility.Collapsed;
@@ -59,16 +61,6 @@ public sealed partial class GroupRow : UserControl
         LblDescription.Text = _group.Description;
         LblAmount.Text = _group.Balance.ToString("C");
         LblAmount.Foreground = _group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
-    }
-
-    /// <summary>
-    /// Whether or not the filter checkbox is active
-    /// </summary>
-    public bool FilterActive
-    {
-        get => ChkFilter.IsChecked ?? false;
-
-        set => ChkFilter.IsChecked = value;
     }
 
     /// <summary>

@@ -101,10 +101,7 @@ public sealed partial class AccountView : UserControl
             //Groups
             ListGroups.Items.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer)
-            {
-                FilterActive = _controller.IsFilterActive(-1)
-            };
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
             ListGroups.Items.Add(ungroupedRow);
             //Other Group Rows
@@ -112,10 +109,7 @@ public sealed partial class AccountView : UserControl
             groups.Sort();
             foreach (var group in groups)
             {
-                var groupRow = new GroupRow(group, _controller.Localizer)
-                {
-                    FilterActive = _controller.IsFilterActive((int)group.Id)
-                };
+                var groupRow = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
                 groupRow.DeleteTriggered += DeleteGroup;
                 groupRow.FilterChanged += UpdateGroupFilter;
