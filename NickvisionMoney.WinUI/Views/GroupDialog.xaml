@@ -12,5 +12,7 @@
         <TextBox Name="TxtName" IsSpellCheckEnabled="True"/>
 
         <TextBox Name="TxtDescription" IsSpellCheckEnabled="True"/>
+
+        <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
     </StackPanel>
 </ContentDialog>

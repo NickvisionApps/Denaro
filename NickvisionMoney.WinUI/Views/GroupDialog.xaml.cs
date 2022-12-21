@@ -1,5 +1,7 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ public sealed partial class GroupDialog : ContentDialog
         TxtName.PlaceholderText = _controller.Localizer["Name", "Placeholder"];
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtDescription.PlaceholderText = _controller.Localizer["Description", "Placeholder"];
+        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Group
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
@@ -41,25 +44,21 @@ public sealed partial class GroupDialog : ContentDialog
             if (checkStatus != GroupCheckStatus.Valid)
             {
                 //Reset UI
-                TxtName.Header = _controller.Localizer["Name"];
-                VisualStateManager.GoToState(TxtName, "ValidState", false);
-                TxtDescription.Header = _controller.Localizer["Description"];
-                VisualStateManager.GoToState(TxtDescription, "ValidState", false);
+                TxtName.Header = _controller.Localizer["Name", "Field"];
+                TxtDescription.Header = _controller.Localizer["Description", "Field"];
                 if (checkStatus == GroupCheckStatus.EmptyName)
                 {
                     TxtName.Header = _controller.Localizer["Name", "Empty"];
-                    VisualStateManager.GoToState(TxtName, "InvalidState", false);
                 }
                 else if (checkStatus == GroupCheckStatus.EmptyDescription)
                 {
                     TxtDescription.Header = _controller.Localizer["Description", "Empty"];
-                    VisualStateManager.GoToState(TxtDescription, "InvalidState", false);
                 }
                 else if (checkStatus == GroupCheckStatus.NameExists)
                 {
                     TxtName.Header = _controller.Localizer["Name", "Exists"];
-                    VisualStateManager.GoToState(TxtName, "InvalidState", false);
                 }
+                TxtErrors.Visibility = Visibility.Visible;
                 return await ShowAsync();
             }
             else

@@ -398,6 +398,10 @@
 	<data name="Description.Placeholder" xml:space="preserve">
         <value>Enter description here</value>
     </data>
+
+	<data name="Description.Empty" xml:space="preserve">
+        <value>Description (Empty)</value>
+    </data>
 	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
@@ -458,6 +462,10 @@
     </data>
 
 	<!--WinUI Specific-->
+	<data name="FixErrors.WinUI" xml:space="preserve">
+        <value>Please fix the errors above.</value>
+    </data>
+
 	<data name="ChangelogTitle.WinUI" xml:space="preserve">
         <value>What's New?</value>
     </data>
@@ -483,7 +491,7 @@
         <value>Account Menu</value>
     </data>
 
-  <data name="ToggleSidebar.GTK" xml:space="preserve">
+    <data name="ToggleSidebar.GTK" xml:space="preserve">
         <value>Toggle Sidebar</value>
     </data>
 
