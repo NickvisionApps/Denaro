@@ -100,6 +100,14 @@ public sealed partial class AccountView : UserControl
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
             ListGroups.Items.Clear();
+            //Ungrouped Row
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer)
+            {
+                FilterActive = _controller.IsFilterActive(-1)
+            };
+            ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
+            ListGroups.Items.Add(ungroupedRow);
+            //Other Group Rows
             var groups = _controller.Groups.Values.ToList();
             groups.Sort();
             foreach (var group in groups)
@@ -419,7 +427,11 @@ public sealed partial class AccountView : UserControl
     {
         if(ListGroups.SelectedIndex != -1)
         {
-            EditGroup(null, ((GroupRow)ListGroups.SelectedItem).Id);
+            var groupRow = (GroupRow)ListGroups.SelectedItem;
+            if(groupRow.Id != 0)
+            {
+                EditGroup(null, groupRow.Id);
+            }
             ListGroups.SelectedIndex = -1;
         }
     }

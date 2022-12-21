@@ -42,9 +42,17 @@ public sealed partial class GroupRow : UserControl
     {
         InitializeComponent();
         _group = group;
-        //Localize Strings
-        ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
-        ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
+        if(_group.Id == 0)
+        {
+            BtnEdit.Visibility = Visibility.Collapsed;
+            BtnDelete.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            //Localize Strings
+            ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
+            ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
+        }
         //Load Group
         ChkFilter.IsChecked = true;
         LblName.Text = _group.Name;
