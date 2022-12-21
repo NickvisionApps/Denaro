@@ -221,6 +221,35 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Creates a new GroupDialogController
+    /// </summary>
+    /// <returns>The new GroupDialogController</returns>
+    public GroupDialogController CreateGroupDialogController()
+    {
+        var existingNames = new List<string>();
+        foreach(var pair in _account.Groups)
+        {
+            existingNames.Add(pair.Value.Name);
+        }
+        return new GroupDialogController(_account.NextAvailableGroupId, existingNames);
+    }
+
+    /// <summary>
+    /// Creates a new GroupDialogController
+    /// </summary>
+    /// <param name="id">The id of the existing group</param>
+    /// <returns>The GroupDialogController for the existing group</returns>
+    public GroupDialogController CreateGroupDialogController(uint id)
+    {
+        var existingNames = new List<string>();
+        foreach (var pair in _account.Groups)
+        {
+            existingNames.Add(pair.Value.Name);
+        }
+        return new GroupDialogController(_account.Groups[id], existingNames);
+    }
+
+    /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
     /// </summary>
     public async Task RunRepeatTransactionsAsync()
