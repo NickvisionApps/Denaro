@@ -215,15 +215,19 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the transaction to be deleted</param>
     private async void DeleteTransaction(object? sender, uint transactionId)
     {
-        var contentDialog = new ContentDialog()
+        var deleteDialog = new ContentDialog()
         {
-            Title = "TODO",
-            Content = "Delete transaction not implemented yet.",
-            CloseButtonText = "OK",
+            Title = _controller.Localizer["DeleteTransaction"],
+            Content = _controller.Localizer["DeleteTransactionDescription"],
+            CloseButtonText = _controller.Localizer["No"],
+            PrimaryButtonText = _controller.Localizer["Yes"],
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+        {
+            await _controller.DeleteTransactionAsync(transactionId);
+        }
     }
 
     /// <summary>

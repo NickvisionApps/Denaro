@@ -322,6 +322,14 @@
         <value>Are you sure you want to delete this group?&#xA;This action is irreversible.</value>
     </data>
 
+	<data name="DeleteTransaction" xml:space="preserve">
+        <value>Delete Transaction?</value>
+    </data>
+
+	<data name="DeleteTransactionDescription" xml:space="preserve">
+        <value>Are you sure you want to delete this transaction?&#xA;This action is irreversible.</value>
+    </data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
         <value>Ungrouped</value>
