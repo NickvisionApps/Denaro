@@ -221,6 +221,19 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Creates a new TransactionDialogController
+    /// </summary>
+    /// <returns>The new TransactionDialogController</returns>
+    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), _account.Groups, TransactionDefaultColor, Localizer);
+
+    /// <summary>
+    /// Creates a new TransactionDialogController
+    /// </summary>
+    /// <param name="id">The id of the existing transaction</param>
+    /// <returns>The TransactionDialogController for the existing transaction</returns>
+    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Groups, TransactionDefaultColor, Localizer);
+
+    /// <summary>
     /// Creates a new GroupDialogController
     /// </summary>
     /// <returns>The new GroupDialogController</returns>

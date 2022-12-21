@@ -38,7 +38,7 @@ public class GroupDialogController
     /// <summary>
     /// Creates a GroupDialogController
     /// </summary>
-    /// <param name="group">The Group object represented by the dialog</param>
+    /// <param name="group">The Group object represented by the controller</param>
     /// <param name="existingNames">The list of existing group names</param>
     /// <param name="localizer">The Localizer of the app</param>
     public GroupDialogController(Group group, List<string> existingNames, Localizer localizer)

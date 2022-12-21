@@ -3,6 +3,29 @@
 namespace NickvisionMoney.Shared.Models;
 
 /// <summary>
+/// Types of a transaction
+/// </summary>
+public enum TransactionType
+{
+    Income = 0,
+    Expense
+}
+
+/// <summary>
+/// Repeat intervals for a transaction
+/// </summary>
+public enum TransactionRepeatInterval
+{
+    Never = 0,
+    Daily,
+    Weekly,
+    Monthly,
+    Quarterly,
+    Yearly,
+    Biyearly
+}
+
+/// <summary>
 /// A model of a transaction
 /// </summary>
 public class Transaction : IComparable<Transaction>
