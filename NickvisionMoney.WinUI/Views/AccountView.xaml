@@ -13,15 +13,7 @@
     <Grid>
         <TextBlock x:Name="LblTitle" Margin="20,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
 
-        <CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,60,10,0" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
-            <CommandBar.Content>
-                <StackPanel Margin="6,0,0,0" Orientation="Horizontal" Spacing="4">
-                    <TextBlock x:Name="LblTotalTitle"/>
-
-                    <TextBlock x:Name="LblTotalAmount"/>
-                </StackPanel>
-            </CommandBar.Content>
-
+        <CommandBar HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,10,0" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
                     <AppBarButton.Icon>
@@ -112,9 +104,15 @@
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,112,10,10" LastChildFill="True">
             <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
-                    <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <StackPanel Margin="20,0,0,0" Orientation="Horizontal" Spacing="4">
+                                <TextBlock x:Name="LblTotalTitle"/>
+
+                                <TextBlock x:Name="LblTotalAmount"/>
+                            </StackPanel>
 
                             <CheckBox x:Name="ChkFilterIncome" Margin="20,0,0,0" IsChecked="True" Checked="ChkFilterIncome_Changed" Unchecked="ChkFilterIncome_Changed">
                                 <StackPanel Orientation="Horizontal" Spacing="4">

@@ -94,6 +94,7 @@ public sealed partial class AccountView : UserControl
             //Overview
             LblTitle.Text = _controller.AccountTitle;
             LblTotalAmount.Text = _controller.AccountTotalString;
+            LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
             LblIncomeAmount.Text = _controller.AccountIncomeString;
             LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
             LblExpenseAmount.Text = _controller.AccountExpenseString;
