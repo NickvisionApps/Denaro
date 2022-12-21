@@ -10,7 +10,7 @@
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d" MinWidth="400">
 
-    <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
         <wct:DockPanel Margin="10,10,10,6" LastChildFill="False">
             <Button x:Name="BtnId" wct:DockPanel.Dock="Left" Width="40" Height="40" CornerRadius="20" Click="Edit"/>
 
