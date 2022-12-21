@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace NickvisionMoney.Shared.Controllers;
 
 /// <summary>
-/// A control for an AccountView
+/// A controller for an AccountView
 /// </summary>
 public class AccountViewController
 {
@@ -231,7 +231,7 @@ public class AccountViewController
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(_account.NextAvailableGroupId, existingNames);
+        return new GroupDialogController(new Group(_account.NextAvailableGroupId), existingNames, Localizer);
     }
 
     /// <summary>
@@ -246,7 +246,7 @@ public class AccountViewController
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(_account.Groups[id], existingNames);
+        return new GroupDialogController(_account.Groups[id], existingNames, Localizer);
     }
 
     /// <summary>
