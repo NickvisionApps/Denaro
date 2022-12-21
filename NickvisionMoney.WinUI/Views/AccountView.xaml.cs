@@ -372,13 +372,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ResetGroupsFilters(object? sender, RoutedEventArgs e)
-    {
-        foreach(GroupRow groupRow in ListGroups.Items)
-        {
-            groupRow.FilterActive = true;
-        }
-    }
+    private void ResetGroupsFilters(object? sender, RoutedEventArgs e) => _controller.ResetGroupsFilter();
 
     /// <summary>
     /// Occurs when the reset dates filters menu item is clicked
