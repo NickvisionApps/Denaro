@@ -53,7 +53,7 @@ public class TransactionRow : Adw.PreferencesGroup
         _row.SetSizeRequest(300, 70);
         var rowCssProvider = Gtk.CssProvider.New();
         var rowCss = @"row {
-            border-color: " + gdk_rgba_to_string(ref color) + "}" + char.MinValue;
+            border-color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
         gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, -1);
         _row.GetStyleContext().AddProvider(rowCssProvider, 800); // GTK_STYLE_PROVIDER_PRIORITY_USER
         //Button ID

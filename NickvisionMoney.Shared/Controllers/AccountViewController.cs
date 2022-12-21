@@ -304,4 +304,16 @@ public class AccountViewController
         _filterEndDate = date;
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
+
+    /// <summary>
+    /// Resets groups filter
+    /// </summary>
+    public void ResetGroupsFilter()
+    {
+        foreach(var pair in _account.Groups)
+        {
+            _filters[(int)pair.Key] = true;
+            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

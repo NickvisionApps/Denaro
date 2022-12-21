@@ -20,6 +20,11 @@ public class AccountView
         int RefCount;
     };
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
+
+    [DllImport("adwaita-1")]
+    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
@@ -34,6 +39,8 @@ public class AccountView
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
     [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
+    [DllImport("adwaita-1")]
+    private static extern uint g_list_model_get_n_items(nint list);
     [DllImport("adwaita-1")]
     private static extern bool g_main_context_iteration(nint context, bool may_block);
     [DllImport("adwaita-1")]
@@ -204,7 +211,7 @@ public class AccountView
         _btnResetGroupsFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
         _btnResetGroupsFilter.AddCssClass("flat");
         _btnResetGroupsFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Groups"]);
-        _btnResetGroupsFilter.OnClicked += OnResetGroupsFilter;
+        _btnResetGroupsFilter.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         _boxButtonsGroups.Append(_btnResetGroupsFilter);
         //Groups Group
         _grpGroups = Adw.PreferencesGroup.New();
@@ -229,28 +236,28 @@ public class AccountView
         _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "2022" });
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
-        //g_signal_connect(_ddStartYear, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartYearChanged(); }), this);
+        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddStartMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
-        //g_signal_connect(m_ddStartMonth, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartMonthChanged(); }), this);
+        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddStartDay = Gtk.DropDown.NewFromStrings(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" });
         _ddStartDay.SetValign(Gtk.Align.Center);
         _ddStartDay.SetShowArrow(false);
-        //g_signal_connect(m_ddStartDay, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeStartDayChanged(); }), this);
+        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         //End Range DropDowns
         _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "2022" });
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
-        //g_signal_connect(m_ddEndYear, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndYearChanged(); }), this);
+        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddEndMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
-        //g_signal_connect(m_ddEndMonth, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndMonthChanged(); }), this);
+        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddEndDay = Gtk.DropDown.NewFromStrings(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" });
         _ddEndDay.SetValign(Gtk.Align.Center);
         _ddEndDay.SetShowArrow(false);
-        //g_signal_connect(m_ddEndDay, "notify::selected", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeEndDayChanged(); }), this);
+        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         //Start Range Boxes
         _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxStartRange.Append(_ddStartYear);
@@ -278,7 +285,7 @@ public class AccountView
         _expRange.SetShowEnableSwitch(true);
         _expRange.AddRow(_rowStartRange);
         _expRange.AddRow(_rowEndRange);
-        //g_signal_connect(m_expRange, "notify::enable-expansion", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<AccountView*>(data)->onDateRangeToggled(); }), this);
+        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", OnDateRangeToggled, IntPtr.Zero, IntPtr.Zero, 0);
         _grpRange.Add(_expRange);
         //Calendar Group
         _grpCalendar = Adw.PreferencesGroup.New();
@@ -306,11 +313,10 @@ public class AccountView
         _btnSortFirstToLast = Gtk.ToggleButton.New();
         _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
         _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
-        //_btnSortFirstToLast.OnToggled +=
+        _btnSortFirstToLast.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _btnSortFirstToLast.GetActive();
         _btnSortLastToFirst = Gtk.ToggleButton.New();
         _btnSortLastToFirst.SetIconName("view-sort-ascending-symbolic");
         _btnSortLastToFirst.SetTooltipText(_controller.Localizer["SortLastFirst"]);
-        //_btnSortLastToFirst.OnToggled +=
         _btnSortFirstToLast.BindProperty("active", _btnSortLastToFirst, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
         _boxSort.AddCssClass("linked");
@@ -395,6 +401,7 @@ public class AccountView
             _lblTotal.SetLabel(_controller.AccountTotalString);
             _lblIncome.SetLabel(_controller.AccountIncomeString);
             _lblExpense.SetLabel(_controller.AccountExpenseString);
+            //Groups
             foreach (var groupRow in _groupRows)
             {
                 _grpGroups.Remove(groupRow);
@@ -409,6 +416,7 @@ public class AccountView
             foreach (var group in groups)
             {
                 var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                row.FilterChanged += UpdateGroupFilter;
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
@@ -472,10 +480,12 @@ public class AccountView
         _chkExpense.SetActive(true);
     }
 
-    private void OnResetGroupsFilter(Gtk.Button sender, EventArgs e)
-    {
-        //TODO
-    }
+    /// <summary>
+    /// Occurs when the group filter is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
+    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {
@@ -505,6 +515,61 @@ public class AccountView
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
         _expRange.SetEnableExpansion(false);
+    }
+
+    private void OnDateRangeToggled(nint sender, nint gParamSpec, nint data)
+    {
+        _ddStartYear.SetSelected(0);
+        _ddStartMonth.SetSelected(0);
+        _ddStartDay.SetSelected(0);
+        _ddEndYear.SetSelected(g_list_model_get_n_items(_ddEndYear.GetModel().Handle) - 1);
+        _ddEndMonth.SetSelected(11);
+        _ddEndDay.SetSelected(30);
+        OnStartDateChanged();
+        OnEndDateChanged();
+    }
+
+    private void OnStartDateChanged()
+    {
+        if(!_isAccountLoading)
+        {
+            var yearObject = (Gtk.StringObject)_ddStartYear.GetSelectedItem();
+            var year = Convert.ToInt32(yearObject.GetString());
+            var month = (int)_ddStartMonth.GetSelected() + 1;
+            var day = (int)_ddStartDay.GetSelected() + 1;
+            // _ddStartDay.SetModel(Gtk.StringList.New(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+            // foreach(var m in new int[] {2, 4, 6, 9, 11})
+            // {
+            //     if(month == 2 && day > 28)
+            //     {
+            //         if(DateTime.IsLeapYear(year))
+            //         {
+            //             day = 29;
+            //             _ddStartDay.SetModel(Gtk.StringList.New(new string[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29" }));
+            //         }
+            //         else
+            //         {
+            //             day = 28;
+            //             _ddStartDay.SetModel(Gtk.StringList.New(new string[28]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28" }));
+            //         }
+            //     }
+            //     else if(month == m && day == 31)
+            //     {
+            //         day = 30;
+            //         _ddStartDay.SetModel(Gtk.StringList.New(new string[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+            //     }
+            // }
+            _controller.FilterStartDate = new DateOnly(year, month, day);
+        }
+    }
+
+    private void OnEndDateChanged()
+    {
+        if(!_isAccountLoading)
+        {
+            var yearObject = (Gtk.StringObject)_ddEndYear.GetSelectedItem();
+            _controller.FilterEndDate = new DateOnly(Convert.ToInt32(yearObject.GetString()), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+        }
     }
 
     private void OnWindowWidthChanged(object sender, WindowWidthEventArgs e)
