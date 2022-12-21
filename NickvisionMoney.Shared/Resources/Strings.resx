@@ -375,7 +375,7 @@
     </data>
 
 	<!--Fields-->
-	<data name="Name" xml:space="preserve">
+	<data name="Name.Field" xml:space="preserve">
         <value>Name</value>
     </data>
 
@@ -391,7 +391,7 @@
         <value>Name (Exists)</value>
     </data>
 
-	<data name="Description" xml:space="preserve">
+	<data name="Description.Field" xml:space="preserve">
         <value>Description</value>
     </data>
 
