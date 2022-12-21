@@ -11,9 +11,9 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <TextBlock x:Name="LblTitle" Margin="30,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
+        <TextBlock x:Name="LblTitle" Margin="20,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
 
-        <CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,60,20,0" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+        <CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,60,10,0" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
             <CommandBar.Content>
                 <StackPanel Margin="6,0,0,0" Orientation="Horizontal" Spacing="4">
                     <TextBlock x:Name="LblTotalTitle"/>
@@ -109,7 +109,7 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
 
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,112,20,10" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,112,10,10" LastChildFill="True">
             <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
                     <Border wct:DockPanel.Dock="Top" Height="130" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
@@ -163,7 +163,7 @@
 
                         <nickvision:ViewStackPage PageName="Transactions">
                             <Grid>
-                                <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,10,0" Orientation="Horizontal">
                                     <ToggleButton x:Name="BtnSortTopBottom" Click="BtnSortTopBottom_Click">
@@ -179,7 +179,7 @@
                                     </ToggleButton>
                                 </StackPanel>
                                 
-                                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,40,0,0" VerticalScrollBarVisibility="Auto">
+                                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,44,0,0" VerticalScrollBarVisibility="Auto">
                                     <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                         <GridView.ItemContainerStyle>
                                             <Style TargetType="GridViewItem">
