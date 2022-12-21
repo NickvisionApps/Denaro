@@ -43,7 +43,6 @@ public sealed partial class GroupRow : UserControl
     {
         InitializeComponent();
         _group = group;
-        ChkFilter.IsChecked = filterActive;
         if(_group.Id == 0)
         {
             BtnEdit.Visibility = Visibility.Collapsed;
@@ -56,7 +55,7 @@ public sealed partial class GroupRow : UserControl
             ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
         }
         //Load Group
-        ChkFilter.IsChecked = true;
+        ChkFilter.IsChecked = filterActive;
         LblName.Text = _group.Name;
         LblDescription.Text = _group.Description;
         LblAmount.Text = _group.Balance.ToString("C");

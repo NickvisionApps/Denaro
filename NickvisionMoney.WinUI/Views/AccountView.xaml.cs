@@ -233,15 +233,15 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void NewGroup(object? sender, RoutedEventArgs e)
     {
-        var contentDialog = new ContentDialog()
+        var groupController = _controller.CreateGroupDialogController();
+        var groupDialog = new GroupDialog(groupController)
         {
-            Title = "TODO",
-            Content = "New group not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if(await groupDialog.ShowAsync())
+        {
+            await _controller.AddGroupAsync(groupController.Group);
+        }
     }
 
     /// <summary>
@@ -251,15 +251,15 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the group to be edited</param>
     private async void EditGroup(object? sender, uint groupId)
     {
-        var contentDialog = new ContentDialog()
+        var groupController = _controller.CreateGroupDialogController(groupId);
+        var groupDialog = new GroupDialog(groupController)
         {
-            Title = "TODO",
-            Content = "Edit group not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if(await groupDialog.ShowAsync())
+        {
+            await _controller.UpdateGroupAsync(groupController.Group);
+        }
     }
 
     /// <summary>
@@ -269,15 +269,19 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the group to be deleted</param>
     private async void DeleteGroup(object? sender, uint groupId)
     {
-        var contentDialog = new ContentDialog()
+        var deleteDialog = new ContentDialog()
         {
-            Title = "TODO",
-            Content = "Delete group not implemented yet.",
-            CloseButtonText = "OK",
+            Title = _controller.Localizer["DeleteGroup"],
+            Content = _controller.Localizer["DeleteGroupDescription"],
+            CloseButtonText = _controller.Localizer["No"],
+            PrimaryButtonText = _controller.Localizer["Yes"],
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if(await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+        {
+            await _controller.DeleteGroupAsync(groupId);
+        }
     }
 
     /// <summary>
