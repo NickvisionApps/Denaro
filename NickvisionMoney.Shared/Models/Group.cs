@@ -82,7 +82,7 @@ public class Group : IComparable<Group>
     /// <param name="a">The first Group object</param>
     /// <param name="b">The second Group object</param>
     /// <returns>True if a == b, else false</returns>
-    public static bool operator ==(Group? a, Group? b) => a?.Name == b?.Name;
+    public static bool operator ==(Group? a, Group? b) => a?.Id == b?.Id;
 
     /// <summary>
     /// Compares two Group objects by !=
@@ -90,7 +90,7 @@ public class Group : IComparable<Group>
     /// <param name="a">The first Group object</param>
     /// <param name="b">The second Group object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(Group? a, Group? b) => a?.Name != b?.Name;
+    public static bool operator !=(Group? a, Group? b) => a?.Id != b?.Id;
 
     /// <summary>
     /// Compares two Group objects by >
@@ -98,7 +98,7 @@ public class Group : IComparable<Group>
     /// <param name="a">The first Group object</param>
     /// <param name="b">The second Group object</param>
     /// <returns>True if a > b, else false</returns>
-    public static bool operator <(Group? a, Group? b) => a?.Id < b?.Id;
+    public static bool operator <(Group? a, Group? b) => a?.Name.CompareTo(b?.Name) == -1;
 
     /// <summary>
     /// Compares two Group objects by <
@@ -106,5 +106,5 @@ public class Group : IComparable<Group>
     /// <param name="a">The first Group object</param>
     /// <param name="b">The second Group object</param>
     /// <returns>True if a < b, else false</returns>
-    public static bool operator >(Group? a, Group? b) => a?.Id > b?.Id;
+    public static bool operator >(Group? a, Group? b) => a?.Name.CompareTo(b?.Name) == 1;
 }
