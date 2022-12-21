@@ -151,6 +151,7 @@ public class AccountViewController
             return new Group(0)
             {
                 Name = Localizer["Ungrouped"],
+                Description = Localizer["UngroupedDescription"],
                 Balance = total
             };
         }
