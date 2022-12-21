@@ -314,6 +314,14 @@
         <value>End</value>
     </data>
 
+	<data name="DeleteGroup" xml:space="preserve">
+        <value>Delete Group?</value>
+    </data>
+
+	<data name="DeleteGroupDescription" xml:space="preserve">
+        <value>Are you sure you want to delete this group?&#xA;This action is irreversible.</value>
+    </data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
         <value>Ungrouped</value>
@@ -343,22 +351,52 @@
         <value>Unable to export account as CSV.</value>
     </data>
 
-  <!--Transaction Row-->
-  <data name="Edit.TransactionRow" xml:space="preserve">
+    <!--Transaction Row-->
+    <data name="Edit.TransactionRow" xml:space="preserve">
         <value>Edit Transaction</value>
     </data>
 
-  <data name="Delete.TransactionRow" xml:space="preserve">
+    <data name="Delete.TransactionRow" xml:space="preserve">
         <value>Delete Transaction</value>
     </data>
 
-  <!--Group Row-->
-  <data name="Edit.GroupRow" xml:space="preserve">
+    <!--Group Row-->
+    <data name="Edit.GroupRow" xml:space="preserve">
         <value>Edit Group</value>
     </data>
 
-  <data name="Delete.GroupRow" xml:space="preserve">
+    <data name="Delete.GroupRow" xml:space="preserve">
         <value>Delete Group</value>
+    </data>
+
+	<!--Group Dialog-->
+	<data name="Group" xml:space="preserve">
+        <value>Group</value>
+    </data>
+
+	<!--Fields-->
+	<data name="Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+
+	<data name="Name.Placeholder" xml:space="preserve">
+        <value>Enter name here</value>
+    </data>
+
+	<data name="Name.Empty" xml:space="preserve">
+        <value>Name (Empty)</value>
+    </data>
+
+	<data name="Name.Exists" xml:space="preserve">
+        <value>Name (Exists)</value>
+    </data>
+
+	<data name="Description" xml:space="preserve">
+        <value>Description</value>
+    </data>
+
+	<data name="Description.Placeholder" xml:space="preserve">
+        <value>Enter description here</value>
     </data>
 	
 	<!--Settings-->

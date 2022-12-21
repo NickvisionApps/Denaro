@@ -261,6 +261,67 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Adds a transaction to the account
+    /// </summary>
+    /// <param name="transaction">The transaction to add</param>
+    public async Task AddTransactionAsync(Transaction transaction)
+    {
+        await _account.AddTransactionAsync(transaction);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Updates a transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    public async Task UpdateTransactionAsync(Transaction transaction)
+    {
+        await _account.UpdateTransactionAsync(transaction);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes a transaction from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    public async Task DeleteTransactionAsync(uint id)
+    {
+        await _account.DeleteTransactionAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Adds a group to the account
+    /// </summary>
+    /// <param name="group">The group to add</param>
+    public async Task AddGroupAsync(Group group)
+    {
+        await _account.AddGroupAsync(group);
+        _filters.Add((int)group.Id, true);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Updates a group in the account
+    /// </summary>
+    /// <param name="group">The group to update</param>
+    public async Task UpdateGroupAsync(Group group)
+    {
+        await _account.UpdateGroupAsync(group);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes a group from the account
+    /// </summary>
+    /// <param name="id">The id of the group to delete</param>
+    public async Task DeleteGroupAsync(uint id)
+    {
+        await _account.DeleteGroupAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Imports transaction from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
