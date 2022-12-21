@@ -199,7 +199,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.CreateAccountController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)), InitializeWithWindow);
+            PageOpenAccount.Content = new AccountView(_controller.CreateAccountViewController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)), InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {
