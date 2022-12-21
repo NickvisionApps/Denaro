@@ -310,6 +310,7 @@ public class AccountViewController
     /// </summary>
     public void ResetGroupsFilter()
     {
+        _filters[-1] = true;
         foreach(var pair in _account.Groups)
         {
             _filters[(int)pair.Key] = true;
