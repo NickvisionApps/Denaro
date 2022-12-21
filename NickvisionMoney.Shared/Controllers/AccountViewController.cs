@@ -136,6 +136,26 @@ public class AccountViewController
         }
     }
 
+    public Group UngroupedGroup
+    {
+        get
+        {
+            var total = 0m;
+            foreach (var pair in Transactions)
+            {
+                if (pair.Value.GroupId == -1)
+                {
+                    total += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : (pair.Value.Amount * -1);
+                }
+            }
+            return new Group(0)
+            {
+                Name = Localizer["Ungrouped"],
+                Balance = total
+            };
+        }
+    }
+
     /// <summary>
     /// The list of filtered transactions
     /// </summary>

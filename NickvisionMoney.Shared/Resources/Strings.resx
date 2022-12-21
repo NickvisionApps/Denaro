@@ -315,6 +315,10 @@
     </data>
 
 	<!--AccountViewController-->
+	<data name="Ungrouped" xml:space="preserve">
+        <value>Ungrouped</value>
+    </data>
+		
 	<data name="Imported" xml:space="preserve">
         <value>Imported {0} transaction from file.</value>
     </data>
