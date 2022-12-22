@@ -187,7 +187,7 @@ public sealed partial class AccountView : UserControl
         };
         if(await transactionDialog.ShowAsync())
         {
-
+            await _controller.AddTransactionAsync(transactionController.Transaction);
         }
     }
 
@@ -205,7 +205,7 @@ public sealed partial class AccountView : UserControl
         };
         if (await transactionDialog.ShowAsync())
         {
-
+            await _controller.UpdateTransactionAsync(transactionController.Transaction);
         }
     }
 

@@ -1,7 +1,10 @@
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.WinUI.Views;
@@ -51,9 +54,11 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
         CmbRepeatInterval.SelectedIndex = (int)_controller.Transaction.RepeatInterval;
-        foreach (var pair in _controller.Groups)
+        var groups = _controller.Groups.Values.ToList();
+        groups.Sort();
+        foreach (var group in groups)
         {
-            CmbGroup.Items.Add(pair.Value);
+            CmbGroup.Items.Add(group);
         }
         if (_controller.Transaction.GroupId == -1)
         {
@@ -80,7 +85,27 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-
+            var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text);
+            if(checkStatus != TransactionCheckStatus.Valid)
+            {
+                TxtDescription.Header = _controller.Localizer["Description", "Field"];
+                TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+                if (checkStatus == TransactionCheckStatus.EmptyDescription)
+                {
+                    TxtDescription.Header = _controller.Localizer["Description", "Empty"];
+                }
+                else if(checkStatus == TransactionCheckStatus.InvalidAmount)
+                {
+                    TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+                }
+                TxtErrors.Visibility = Visibility.Visible;
+                return await ShowAsync();
+            }
+            else
+            {
+                _controller.Accepted = true;
+                return true;
+            }
         }
         return false;
     }
