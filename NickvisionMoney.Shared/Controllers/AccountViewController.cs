@@ -224,14 +224,30 @@ public class AccountViewController
     /// Creates a new TransactionDialogController
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
-    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), _account.Groups, TransactionDefaultColor, Localizer);
+    public TransactionDialogController CreateTransactionDialogController()
+    {
+        var groups = new Dictionary<uint, string>();
+        foreach(var pair in _account.Groups)
+        {
+            groups.Add(pair.Key, pair.Value.Name);
+        }
+        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, TransactionDefaultColor, Localizer);
+    }
 
     /// <summary>
     /// Creates a new TransactionDialogController
     /// </summary>
     /// <param name="id">The id of the existing transaction</param>
     /// <returns>The TransactionDialogController for the existing transaction</returns>
-    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Groups, TransactionDefaultColor, Localizer);
+    public TransactionDialogController CreateTransactionDialogController(uint id)
+    {
+        var groups = new Dictionary<uint, string>();
+        foreach (var pair in _account.Groups)
+        {
+            groups.Add(pair.Key, pair.Value.Name);
+        }
+        return new TransactionDialogController(_account.Transactions[id], groups, TransactionDefaultColor, Localizer);
+    }
 
     /// <summary>
     /// Creates a new GroupDialogController

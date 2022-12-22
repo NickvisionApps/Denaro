@@ -359,7 +359,7 @@
         <value>Unable to export account as CSV.</value>
     </data>
 
-    <!--Transaction Row-->
+    <!--TransactionRow-->
     <data name="Edit.TransactionRow" xml:space="preserve">
         <value>Edit Transaction</value>
     </data>
@@ -368,7 +368,7 @@
         <value>Delete Transaction</value>
     </data>
 
-    <!--Group Row-->
+    <!--GroupRow-->
     <data name="Edit.GroupRow" xml:space="preserve">
         <value>Edit Group</value>
     </data>
@@ -377,9 +377,42 @@
         <value>Delete Group</value>
     </data>
 
-	<!--Group Dialog-->
+	<!--GroupDialog-->
 	<data name="Group" xml:space="preserve">
         <value>Group</value>
+    </data>
+
+	<!--TransactionDialog-->
+	<data name="Transaction" xml:space="preserve">
+        <value>Transaction</value>
+    </data>
+
+	<data name="RepeatInterval.Never" xml:space="preserve">
+        <value>Never</value>
+    </data>
+
+	<data name="RepeatInterval.Daily" xml:space="preserve">
+        <value>Daily</value>
+    </data>
+
+	<data name="RepeatInterval.Weekly" xml:space="preserve">
+        <value>Weekly</value>
+    </data>
+
+	<data name="RepeatInterval.Monthly" xml:space="preserve">
+        <value>Monthly</value>
+    </data>
+
+	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+        <value>Quarterly</value>
+    </data>
+
+	<data name="RepeatInterval.Yearly" xml:space="preserve">
+        <value>Yearly</value>
+    </data>
+
+	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+        <value>Biyearly</value>
     </data>
 
 	<!--Fields-->
@@ -409,6 +442,38 @@
 
 	<data name="Description.Empty" xml:space="preserve">
         <value>Description (Empty)</value>
+    </data>
+
+	<data name="Amount.Field" xml:space="preserve">
+        <value>Amount</value>
+    </data>
+
+	<data name="Amount.Placeholder" xml:space="preserve">
+        <value>Enter amount here</value>
+    </data>
+
+	<data name="Amount.Invalid" xml:space="preserve">
+        <value>Amount (Invalid)</value>
+    </data>
+
+	<data name="Date.Field" xml:space="preserve">
+        <value>Date</value>
+    </data>
+
+	<data name="TransactionType.Field" xml:space="preserve">
+        <value>Type</value>
+    </data>
+
+	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+        <value>Repeat Interval</value>
+    </data>
+
+	<data name="Group.Field" xml:space="preserve">
+        <value>Group</value>
+    </data>
+
+	<data name="Color.Field" xml:space="preserve">
+        <value>Color</value>
     </data>
 	
 	<!--Settings-->

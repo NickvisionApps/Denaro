@@ -2,6 +2,7 @@
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -20,8 +21,6 @@ public enum TransactionCheckStatus
 /// </summary>
 public class TransactionDialogController
 {
-    private Dictionary<uint, Group> _groups;
-
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -30,6 +29,10 @@ public class TransactionDialogController
     /// The transaction represented by the controller
     /// </summary>
     public Transaction Transaction { get; init; }
+    /// <summary>
+    /// The groups in the account
+    /// </summary>
+    public Dictionary<uint, string> Groups { get; init; }
     /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
@@ -46,11 +49,11 @@ public class TransactionDialogController
     /// <param name="groups">The list of groups in the account</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, string transactionDefaultColor, Localizer localizer)
+    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
     {
-        _groups = groups;
         Localizer = localizer;
         Transaction = transaction;
+        Groups = groups;
         Accepted = false;
         TransactionDefaultColor = transactionDefaultColor;
     }
@@ -62,17 +65,26 @@ public class TransactionDialogController
     /// <param name="description">The new description</param>
     /// <param name="type">The new TransactionType</param>
     /// <param name="repeat">The new TransactionRepeatInterval</param>
-    /// <param name="group">The new Group object</param>
+    /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
-    /// <param name="amount">The new amount</param>
+    /// <param name="amountString">The new amount string</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, Group group, string rgba, decimal amount)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString)
     {
+        var amount = 0m;
         if(string.IsNullOrEmpty(description))
         {
             return TransactionCheckStatus.EmptyDescription;
         }
-        if(amount <= 0)
+        try
+        {
+            amount = decimal.Parse(amountString);
+        }
+        catch
+        {
+            return TransactionCheckStatus.InvalidAmount;
+        }
+        if (amount <= 0)
         {
             return TransactionCheckStatus.InvalidAmount;
         }
@@ -81,7 +93,7 @@ public class TransactionDialogController
         Transaction.Type = type;
         Transaction.RepeatInterval = repeat;
         Transaction.Amount = amount;
-        Transaction.GroupId = group.Id == 0 ? -1 : (int)group.Id;
+        Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;
         return TransactionCheckStatus.Valid;
     }
