@@ -2,6 +2,7 @@
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -78,7 +79,7 @@ public class TransactionDialogController
         }
         try
         {
-            amount = decimal.Parse(amountString);
+            amount = decimal.Parse(amountString, NumberStyles.Currency);
         }
         catch
         {
