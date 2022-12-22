@@ -7,53 +7,54 @@ using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
-public class WindowWidthEventArgs : EventArgs
+/// <summary>
+/// EventArgs for WidthChanged Event
+/// </summary>
+public class WidthChangedEventArgs : EventArgs
 {
-    public bool SmallWidth { get; set; }
+    public bool SmallWidth { get; init; }
+
+    public WidthChangedEventArgs(bool smallWidth) => SmallWidth = smallWidth;
 }
 
 /// <summary>
 /// The MainWindow for the application
 /// </summary>
-public class MainWindow : Adw.ApplicationWindow
+public partial class MainWindow : Adw.ApplicationWindow
 {
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern nint adw_show_about_window(nint parent,
-        [MarshalAs(UnmanagedType.LPStr)] string appNameKey, [MarshalAs(UnmanagedType.LPStr)] string appNameValue,
-        [MarshalAs(UnmanagedType.LPStr)] string iconKey, [MarshalAs(UnmanagedType.LPStr)] string iconValue,
-        [MarshalAs(UnmanagedType.LPStr)] string versionKey, [MarshalAs(UnmanagedType.LPStr)] string versionValue,
-        [MarshalAs(UnmanagedType.LPStr)] string commentsKey, [MarshalAs(UnmanagedType.LPStr)] string commentsValue,
-        [MarshalAs(UnmanagedType.LPStr)] string developerNameKey, [MarshalAs(UnmanagedType.LPStr)] string developerNameValue,
-        [MarshalAs(UnmanagedType.LPStr)] string licenseKey, int licenseValue,
-        [MarshalAs(UnmanagedType.LPStr)] string copyrightKey, [MarshalAs(UnmanagedType.LPStr)] string copyrightValue,
-        [MarshalAs(UnmanagedType.LPStr)] string websiteKey, [MarshalAs(UnmanagedType.LPStr)] string websiteValue,
-        [MarshalAs(UnmanagedType.LPStr)] string issueTrackerKey, [MarshalAs(UnmanagedType.LPStr)] string issueTrackerValue,
-        [MarshalAs(UnmanagedType.LPStr)] string supportUrlKey, [MarshalAs(UnmanagedType.LPStr)] string supportUrlValue,
-        [MarshalAs(UnmanagedType.LPStr)] string developersKey, [In, Out] string[] developersValue,
-        [MarshalAs(UnmanagedType.LPStr)] string designersKey, [In, Out] string[] designersValue,
-        [MarshalAs(UnmanagedType.LPStr)] string artistsKey, [In, Out] string[] artistsValue,
-        [MarshalAs(UnmanagedType.LPStr)] string translatorCreditsKey, [MarshalAs(UnmanagedType.LPStr)] string translatorCreditsValue,
-        [MarshalAs(UnmanagedType.LPStr)] string releaseNotesKey, [MarshalAs(UnmanagedType.LPStr)] string releaseNotesValue,
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint adw_show_about_window(nint parent,
+        string appNameKey, string appNameValue,
+        string iconKey, string iconValue,
+        string versionKey, string versionValue,
+        string commentsKey, string commentsValue,
+        string developerNameKey, string developerNameValue,
+        string licenseKey, int licenseValue,
+        string copyrightKey, string copyrightValue,
+        string websiteKey, string websiteValue,
+        string issueTrackerKey, string issueTrackerValue,
+        string supportUrlKey, string supportUrlValue,
+        string developersKey, string[] developersValue,
+        string designersKey, string[] designersValue,
+        string artistsKey, string[] artistsValue,
+        string translatorCreditsKey, string translatorCreditsValue,
+        string releaseNotesKey, string releaseNotesValue,
         nint terminator);
 
-    [DllImport("adwaita-1")]
-    private static extern nint gtk_file_chooser_get_file(nint chooser);
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_chooser_get_file(nint chooser);
 
-    [DllImport("adwaita-1", CharSet = CharSet.Ansi)]
-    [return: MarshalAs(UnmanagedType.LPStr)]
-    private static extern string g_file_get_path(nint file);
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
 
-    [DllImport("adwaita-1")]
-    private static extern nuint g_file_get_type();
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nuint g_file_get_type();
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
 
-    [DllImport("adwaita-1")]
-    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
-
-    public event EventHandler<WindowWidthEventArgs> WidthChanged;
-    private WindowWidthEventArgs _windowWidthArgs;
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -92,17 +93,23 @@ public class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actCloseAccount;
 
     /// <summary>
+    /// Occurs when the window's width is changed
+    /// </summary>
+    public event EventHandler<WidthChangedEventArgs>? WidthChanged;
+
+    /// <summary>
     /// Constructs a MainWindow
     /// </summary>
     /// <param name="controller">The MainWindowController</param>
     /// <param name="application">The Adw.Application</param>
     public MainWindow(MainWindowController controller, Adw.Application application)
     {
-        _windowWidthArgs = new WindowWidthEventArgs();
-        _windowWidthArgs.SmallWidth = false;
         //Window Settings
         _controller = controller;
         _application = application;
+        _listRecentAccountsRows = new List<Adw.ActionRow>();
+        _listRecentAccountsOnStartRows = new List<Adw.ActionRow>();
+        _accountViews = new List<Adw.TabPage>();
         SetDefaultSize(900, 720);
         SetSizeRequest(360, -1);
         if(_controller.IsDevVersion)
@@ -112,6 +119,7 @@ public class MainWindow : Adw.ApplicationWindow
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountAdded += AccountAdded;
+        g_signal_connect_data(Handle, "notify::default-width", (nint sender, nint gParamSpec, nint data) => OnWidthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         //Main Box
         _mainBox = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         //Header Bar
@@ -286,12 +294,6 @@ public class MainWindow : Adw.ApplicationWindow
         _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
         AddController(_dropTarget);
-        //Initialize additional variables
-        _listRecentAccountsRows = new List<Adw.ActionRow> {};
-        _listRecentAccountsOnStartRows = new List<Adw.ActionRow> {};
-        _accountViews = new List<Adw.TabPage> {};
-        //Watch window width
-        g_signal_connect_data(this.Handle, "notify::default-width", OnWidthChanged, IntPtr.Zero, IntPtr.Zero, 0);
     }
 
     /// <summary>
@@ -322,7 +324,7 @@ public class MainWindow : Adw.ApplicationWindow
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(this, _tabView, _btnFlapToggle, _controller.CreateAccountViewController(_controller.OpenAccounts.Count - 1));
+        var newAccountView = new AccountView(_controller.CreateAccountViewController(_controller.OpenAccounts.Count - 1), this, _tabView, _btnFlapToggle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
@@ -402,6 +404,27 @@ public class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when an account page is closing
+    /// </summary>
+    /// <param name="page">Adw.TabPage</param>
+    private void OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
+    {
+        var indexPage = _tabView.GetPagePosition(args.Page);
+        _controller.CloseAccount(indexPage);
+        _accountViews.RemoveAt(indexPage);
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
+        if (_controller.OpenAccounts.Count == 0)
+        {
+            _actCloseAccount.SetEnabled(false);
+            _viewStack.SetVisibleChildName("pageNoAccounts");
+            _btnMenuAccount.SetVisible(false);
+            _btnFlapToggle.SetVisible(false);
+            UpdateRecentAccountsOnStart();
+            _grpRecentAccountsOnStart.SetVisible(true);
+        }
+    }
+
+    /// <summary>
     /// Occurs when the preferences action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -436,7 +459,7 @@ public class MainWindow : Adw.ApplicationWindow
         designersCredits.Add(null);
         var artistsCredits = new List<string>(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
         artistsCredits.Add(null);
-        adw_show_about_window(this.Handle,
+        adw_show_about_window(Handle,
             "application-name", _controller.AppInfo.ShortName,
             "application-icon", (_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : "")),
             "version", _controller.AppInfo.Version,
@@ -470,27 +493,6 @@ public class MainWindow : Adw.ApplicationWindow
             {
                 _controller.AddAccount(path);
             }
-        }
-    }
-
-    /// <summary>
-    /// Occurs when an account page is closing
-    /// </summary>
-    /// <param name="page">Adw.TabPage</param>
-    private void OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
-    {
-        var indexPage = _tabView.GetPagePosition(args.Page);
-        _controller.CloseAccount(indexPage);
-        _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
-        if(_controller.OpenAccounts.Count == 0)
-        {
-            _actCloseAccount.SetEnabled(false);
-            _viewStack.SetVisibleChildName("pageNoAccounts");
-            _btnMenuAccount.SetVisible(false);
-            _btnFlapToggle.SetVisible(false);
-            UpdateRecentAccountsOnStart();
-            _grpRecentAccountsOnStart.SetVisible(true);
         }
     }
 
@@ -543,29 +545,18 @@ public class MainWindow : Adw.ApplicationWindow
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
         button.AddCssClass("wallet-button");
-        button.OnClicked += delegate(Gtk.Button sender, EventArgs e) { OnOpenRecentAccount(sender, row.GetSubtitle() ?? "", e); };
+        button.OnClicked += (Gtk.Button sender, EventArgs e) => 
+        {
+            _popoverAccount.Popdown();
+            _controller.AddAccount(row.GetSubtitle()!);
+        };
         row.AddPrefix(button);
         row.SetActivatableWidget(button);
         return row;
     }
 
-    private void OnOpenRecentAccount(Gtk.Widget sender, string path, EventArgs e)
-    {
-        _popoverAccount.Popdown();
-        _controller.AddAccount(path);
-    }
-
-    private void OnWidthChanged(nint sender, nint gParamSpec, nint data)
-    {
-        if(DefaultWidth > 450 && _windowWidthArgs.SmallWidth)
-        {
-            _windowWidthArgs.SmallWidth = false;
-            WidthChanged?.Invoke(this, _windowWidthArgs);
-        }
-        else if (DefaultWidth < 450 && !_windowWidthArgs.SmallWidth)
-        {
-            _windowWidthArgs.SmallWidth = true;
-            WidthChanged?.Invoke(this, _windowWidthArgs);
-        }
-    }
+    /// <summary>
+    /// Occurs when the window's width is changed
+    /// </summary>
+    private void OnWidthChanged() => WidthChanged?.Invoke(this, new WidthChangedEventArgs(DefaultWidth < 450));
 }

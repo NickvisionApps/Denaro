@@ -1,65 +1,89 @@
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
-public class GroupDialog
+/// <summary>
+/// A dialog for managing a Group
+/// </summary>
+public partial class GroupDialog
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate void SignalCallback(nint gObject, [MarshalAs(UnmanagedType.LPStr)] string response, nint data);
-    [DllImport("adwaita-1")]
-    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
-    [DllImport("adwaita-1")]
-    private static extern bool g_main_context_iteration(nint context, bool may_block);
-    [DllImport("adwaita-1")]
-    private static extern nint g_main_context_default();
 
-    [DllImport("adwaita-1")]
-    private static extern nint adw_entry_row_new();
-    [DllImport("adwaita-1")]
-    private static extern void adw_message_dialog_add_response(nint dialog, [MarshalAs(UnmanagedType.LPStr)] string id, [MarshalAs(UnmanagedType.LPStr)] string label);
-    [DllImport("adwaita-1")]
-    private static extern nint adw_message_dialog_new(nint parent, [MarshalAs(UnmanagedType.LPStr)] string heading, [MarshalAs(UnmanagedType.LPStr)] string body);
-    [DllImport("adwaita-1")]
-    private static extern void adw_message_dialog_set_close_response(nint dialog, [MarshalAs(UnmanagedType.LPStr)] string response);
-    [DllImport("adwaita-1")]
-    private static extern void adw_message_dialog_set_default_response(nint dialog, [MarshalAs(UnmanagedType.LPStr)] string response);
-    [DllImport("adwaita-1")]
-    private static extern void adw_message_dialog_set_extra_child(nint dialog, nint child);
-    [DllImport("adwaita-1")]
-    private static extern void adw_message_dialog_set_response_appearance(nint dialog, [MarshalAs(UnmanagedType.LPStr)] string response, int appearance);
-    [DllImport("adwaita-1")]
-    private static extern void adw_preferences_group_add(nint group, nint child);
-    [DllImport("adwaita-1")]
-    private static extern void adw_preferences_row_set_title(nint row, [MarshalAs(UnmanagedType.LPStr)] string title);
-    [DllImport("adwaita-1")]
-    [return: MarshalAs(UnmanagedType.LPStr)]
-    private static extern string gtk_editable_get_text(nint editable);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_editable_set_text(nint editable, [MarshalAs(UnmanagedType.LPStr)] string text);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_widget_add_css_class(nint widget, [MarshalAs(UnmanagedType.LPStr)] string cssClass);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_widget_grab_focus(nint widget);
-    [DllImport("adwaita-1")]
-    private static extern bool gtk_widget_is_visible(nint widget);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_widget_remove_css_class(nint widget, [MarshalAs(UnmanagedType.LPStr)] string cssClass);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_widget_show(nint widget);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_window_close(nint window);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_window_set_default_size(nint window, int x, int y);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_window_set_hide_on_close(nint window, bool setting);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_window_set_modal(nint window, bool modal);
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
-    private string _response;
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint adw_entry_row_new();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint adw_message_dialog_new(nint parent, string heading, string body);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_message_dialog_set_close_response(nint dialog, string response);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_message_dialog_set_default_response(nint dialog, string response);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_message_dialog_set_extra_child(nint dialog, nint child);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_message_dialog_set_response_appearance(nint dialog, string response, int appearance);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_preferences_group_add(nint group, nint child);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void adw_preferences_row_set_title(nint row, string title);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gtk_editable_get_text(nint editable);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_editable_set_text(nint editable, string text);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_widget_add_css_class(nint widget, string cssClass);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_widget_grab_focus(nint widget);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gtk_widget_is_visible(nint widget);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_widget_remove_css_class(nint widget, string cssClass);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_widget_show(nint widget);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_window_close(nint window);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_window_set_default_size(nint window, int x, int y);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
+
     private readonly GroupDialogController _controller;
     private readonly Localizer _localizer;
     private readonly nint _dialog;
@@ -67,12 +91,18 @@ public class GroupDialog
     private readonly nint _rowName;
     private readonly nint _rowDescription;
 
-    public GroupDialog(MainWindow parentWindow, GroupDialogController controller, Localizer localizer)
+    /// <summary>
+    /// Constructs a GroupDialog
+    /// </summary>
+    /// <param name="controller">GroupDialogController</param>
+    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="localizer">Localizer</param>
+    public GroupDialog(GroupDialogController controller, MainWindow parentWindow, Localizer localizer)
     {
         _controller = controller;
         _localizer = localizer;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(parentWindow.Handle, _localizer["Group"], null);
+        _dialog = adw_message_dialog_new(parentWindow.Handle, _localizer["Group"], "");
         gtk_window_set_default_size(_dialog, 450, -1);
         gtk_window_set_hide_on_close(_dialog, true);
         adw_message_dialog_add_response(_dialog, "cancel", _localizer["Cancel"]);
@@ -80,7 +110,7 @@ public class GroupDialog
         adw_message_dialog_add_response(_dialog, "ok", _localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        g_signal_connect_data(_dialog, "response", (nint sender, [MarshalAs(UnmanagedType.LPStr)] string response, nint data) => { _response = response; }, IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_dialog, "response", (nint sender, [MarshalAs(UnmanagedType.LPStr)] string response, nint data) => _controller.Accepted = response == "ok", IntPtr.Zero, IntPtr.Zero, 0);
         //Preferences Group
         _grpGroup = Adw.PreferencesGroup.New();
         //Name
@@ -98,6 +128,10 @@ public class GroupDialog
         gtk_editable_set_text(_rowDescription, _controller.Group.Description);
     }
 
+    /// <summary>
+    /// Runs the dialog
+    /// </summary>
+    /// <returns>True if the dialog was accepted, else false</returns>
     public bool Run()
     {
         gtk_widget_show(_dialog);
@@ -107,12 +141,10 @@ public class GroupDialog
         {
             g_main_context_iteration(g_main_context_default(), false);
         }
-        if(_response == "ok")
+        if(_controller.Accepted)
         {
             gtk_window_set_modal(_dialog, false);
-            var name = gtk_editable_get_text(_rowName);
-            var desc = gtk_editable_get_text(_rowDescription);
-            var status = _controller.UpdateGroup(name, desc);
+            var status = _controller.UpdateGroup(gtk_editable_get_text(_rowName), gtk_editable_get_text(_rowDescription));
             if(status != GroupCheckStatus.Valid)
             {
                 gtk_widget_remove_css_class(_rowName, "error");
@@ -137,7 +169,11 @@ public class GroupDialog
                 }
                 return Run();
             }
+            return true;
         }
-        return _response == "ok";
+        else
+        {
+            return false;
+        }
     }
 }

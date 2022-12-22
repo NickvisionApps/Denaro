@@ -8,14 +8,8 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// The PreferencesDialog for the application
 /// </summary>
-public class PreferencesDialog : Adw.Window
+public partial class PreferencesDialog : Adw.Window
 {
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
-
-    [DllImport("adwaita-1")]
-    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Color
     {
@@ -25,15 +19,24 @@ public class PreferencesDialog : Adw.Window
         public float Alpha;
     }
 
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern bool gdk_rgba_parse(ref Color rgba, [MarshalAs(UnmanagedType.LPStr)] string spec);
-    [DllImport("adwaita-1")]
-    [return: MarshalAs(UnmanagedType.LPStr)]
-    private static extern string gdk_rgba_to_string(ref Color rgba);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
-    [DllImport("adwaita-1")]
-    private static extern void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gdk_rgba_to_string(ref Color rgba);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
     private readonly PreferencesViewController _controller;
     private readonly Adw.Application _application;
@@ -81,7 +84,7 @@ public class PreferencesDialog : Adw.Window
         _rowTheme = Adw.ComboRow.New();
         _rowTheme.SetTitle(_controller.Localizer["Theme"]);
         _rowTheme.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["ThemeLight"], _controller.Localizer["ThemeDark"], _controller.Localizer["ThemeSystem"] }));
-        g_signal_connect_data(_rowTheme.Handle, "notify::selected-item", OnThemeChanged, IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_rowTheme.Handle, "notify::selected-item", (nint sender, nint gParamSpec, nint data) => OnThemeChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _grpUserInterface.Add(_rowTheme);
         //Transaction Color Row
         _rowTransactionColor = Adw.ActionRow.New();
@@ -128,7 +131,10 @@ public class PreferencesDialog : Adw.Window
         Destroy();
     }
 
-    private void OnThemeChanged(nint sender, nint gParamSpec, nint data)
+    /// <summary>
+    /// Occurs when the theme selection is changed
+    /// </summary>
+    private void OnThemeChanged()
     {
         _controller.Theme = (Theme)_rowTheme.GetSelected();
         _application.StyleManager!.ColorScheme = _controller.Theme switch
@@ -140,6 +146,9 @@ public class PreferencesDialog : Adw.Window
         };
     }
 
+    /// <summary>
+    /// Occurs when the transaction color is set
+    /// </summary>
     private void OnTransactionColorSet(Gtk.ColorButton sender, EventArgs e)
     {
         var color = new Color();
@@ -147,6 +156,9 @@ public class PreferencesDialog : Adw.Window
         _controller.TransactionDefaultColor = gdk_rgba_to_string(ref color);
     }
 
+    /// <summary>
+    /// Occurs when the transfer color is set
+    /// </summary>
     private void OnTransferColorSet(Gtk.ColorButton sender, EventArgs e)
     {
         var color = new Color();

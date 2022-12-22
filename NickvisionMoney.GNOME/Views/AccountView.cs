@@ -1,18 +1,20 @@
 ﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
-using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
-public class AccountView
+/// <summary>
+/// The AccountView for the application
+/// </summary>
+public partial class AccountView
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct MoneyDateTime {
+    public struct MoneyDateTime
+    {
         UInt64 Usec;
         nint Tz;
         int Interval;
@@ -23,37 +25,46 @@ public class AccountView
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+
     [DllImport("adwaita-1")]
-    private static extern ulong g_signal_connect_data(nint instance, [MarshalAs(UnmanagedType.LPStr)] string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern int g_date_time_get_year(ref MoneyDateTime datetime);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern int g_date_time_get_month(ref MoneyDateTime datetime);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
+
+    [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
-    [DllImport("adwaita-1", CallingConvention = CallingConvention.Cdecl)]
+
+    [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
-    [DllImport("adwaita-1")]
-    private static extern uint g_list_model_get_n_items(nint list);
-    [DllImport("adwaita-1")]
-    private static extern bool g_main_context_iteration(nint context, bool may_block);
-    [DllImport("adwaita-1")]
-    private static extern nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial uint g_list_model_get_n_items(nint list);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
 
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
     private List<GroupRow> _groupRows;
     private List<TransactionRow> _transactionRows;
-
     private readonly MainWindow _parentWindow;
-    public Adw.TabPage Page;
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
     private readonly Gtk.Box _paneBox;
@@ -104,7 +115,19 @@ public class AccountView
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
 
-    public AccountView(MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
+    /// <summary>
+    /// The Page widget
+    /// </summary>
+    public Adw.TabPage Page { get; init; }
+
+    /// <summary>
+    /// Constructs an AccountView
+    /// </summary>
+    /// <param name="controller">AccountViewController</param>
+    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="parentTabView">Adw.TabView</param>
+    /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
     {
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
@@ -497,18 +520,19 @@ public class AccountView
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
 
-    private async void EditGroup(object? sender, Group group)
+    private async void EditGroup(object? sender, uint id)
     {
-        var groupDialog = new GroupDialog(_parentWindow, _controller.CreateGroupDialogController(group.Id), _controller.Localizer);
+        var groupController = _controller.CreateGroupDialogController(id);
+        var groupDialog = new GroupDialog(groupController, _parentWindow, _controller.Localizer);
         if(groupDialog.Run())
         {
-            await _controller.UpdateGroupAsync(group);
+            await _controller.UpdateGroupAsync(groupController.Group);
         }
     }
 
-    private async void DeleteGroup(object? sender, Group group)
+    private void DeleteGroup(object? sender, uint id)
     {
-        //
+        
     }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
@@ -596,11 +620,11 @@ public class AccountView
         }
     }
 
-    private void OnWindowWidthChanged(object sender, WindowWidthEventArgs e)
+    private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
         foreach(var row in _transactionRows)
         {
-            row.ChangeStyle(e.SmallWidth);
+            row.IsSmall = e.SmallWidth;
         }
     }
 }
