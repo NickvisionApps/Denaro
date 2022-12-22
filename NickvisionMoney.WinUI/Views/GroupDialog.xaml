@@ -9,12 +9,16 @@
     xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
-    DefaultButton="Close">
+    DefaultButton="Primary">
 
     <StackPanel Spacing="6" Width="400">
-        <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+        <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+            <StackPanel Margin="12" Spacing="6">
+                <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-        <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+                <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            </StackPanel>
+        </Border>
 
         <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
     </StackPanel>
