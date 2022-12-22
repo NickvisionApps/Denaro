@@ -1,17 +1,22 @@
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.WinUI.Views;
 
+/// <summary>
+/// A dialog for managing a Group
+/// </summary>
 public sealed partial class GroupDialog : ContentDialog
 {
     private readonly GroupDialogController _controller;
 
+    /// <summary>
+    /// Constructs a GroupDialog
+    /// </summary>
+    /// <param name="controller">The GroupDialogController</param>
     public GroupDialog(GroupDialogController controller)
     {
         InitializeComponent();
@@ -30,6 +35,10 @@ public sealed partial class GroupDialog : ContentDialog
         TxtDescription.Text = _controller.Group.Description;
     }
 
+    /// <summary>
+    /// Shows the GroupDialog
+    /// </summary>
+    /// <returns>True if the dialog was accepted, else false</returns>
     public new async Task<bool> ShowAsync()
     {
         var result = await base.ShowAsync();

@@ -1,5 +1,5 @@
 <ContentDialog
-    x:Class="NickvisionMoney.WinUI.Views.GroupDialog"
+    x:Class="NickvisionMoney.WinUI.Views.TransactionDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NickvisionMoney.WinUI.Views"
@@ -12,9 +12,21 @@
     DefaultButton="Close">
 
     <StackPanel Spacing="6" Width="400">
-        <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+        <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-        <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+        <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
+
+        <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
+
+        <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
+
+        <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
+
+        <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
+
+        <TextBlock x:Name="LblColor"/>
+
+        <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
 
         <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
     </StackPanel>

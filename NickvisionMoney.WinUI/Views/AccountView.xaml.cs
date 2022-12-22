@@ -180,15 +180,15 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void NewTransaction(object? sender, RoutedEventArgs e)
     {
-        var contentDialog = new ContentDialog()
+        var transactionController = _controller.CreateTransactionDialogController();
+        var transactionDialog = new TransactionDialog(transactionController)
         {
-            Title = "TODO",
-            Content = "New transaction not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if(await transactionDialog.ShowAsync())
+        {
+
+        }
     }
 
     /// <summary>
@@ -198,15 +198,15 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the transaction to be edited</param>
     private async void EditTransaction(object? sender, uint transactionId)
     {
-        var contentDialog = new ContentDialog()
+        var transactionController = _controller.CreateTransactionDialogController(transactionId);
+        var transactionDialog = new TransactionDialog(transactionController)
         {
-            Title = "TODO",
-            Content = "Edit transaction not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        await contentDialog.ShowAsync();
+        if (await transactionDialog.ShowAsync())
+        {
+
+        }
     }
 
     /// <summary>
