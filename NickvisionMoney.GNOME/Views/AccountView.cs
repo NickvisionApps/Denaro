@@ -52,6 +52,7 @@ public class AccountView
     private List<GroupRow> _groupRows;
     private List<TransactionRow> _transactionRows;
 
+    private readonly MainWindow _parentWindow;
     public Adw.TabPage Page;
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
@@ -105,7 +106,8 @@ public class AccountView
 
     public AccountView(MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, AccountViewController controller)
     {
-        parentWindow.WidthChanged += OnWindowWidthChanged;
+        _parentWindow = parentWindow;
+        _parentWindow.WidthChanged += OnWindowWidthChanged;
         _controller = controller;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
@@ -423,6 +425,8 @@ public class AccountView
             {
                 var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 row.FilterChanged += UpdateGroupFilter;
+                row.EditTriggered += EditGroup;
+                row.DeleteTriggered += DeleteGroup;
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
@@ -492,6 +496,20 @@ public class AccountView
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+
+    private async void EditGroup(object? sender, Group group)
+    {
+        var groupDialog = new GroupDialog(_parentWindow, _controller.CreateGroupDialogController(group.Id), _controller.Localizer);
+        if(groupDialog.Run())
+        {
+            await _controller.UpdateGroupAsync(group);
+        }
+    }
+
+    private async void DeleteGroup(object? sender, Group group)
+    {
+        //
+    }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {

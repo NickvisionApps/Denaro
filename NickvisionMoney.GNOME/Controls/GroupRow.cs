@@ -17,11 +17,11 @@ public class GroupRow : Adw.ActionRow
     /// <summary>
     /// Occurs when the edit button on the row is clicked
     /// </summary>
-    public event EventHandler<uint>? EditTriggered;
+    public event EventHandler<Group>? EditTriggered;
     /// <summary>
     /// Occurs when the delete button on the row is clicked
     /// </summary>
-    public event EventHandler<uint>? DeleteTriggered;
+    public event EventHandler<Group>? DeleteTriggered;
 
     private readonly Gtk.CheckButton _chkFilter;
     private readonly Gtk.Label _lblAmount;
@@ -51,14 +51,14 @@ public class GroupRow : Adw.ActionRow
         _btnEdit.SetValign(Gtk.Align.Center);
         _btnEdit.AddCssClass("flat");
         _btnEdit.SetTooltipText(localizer["Edit", "GroupRow"]);
-        //_btnEdit.OnClicked +=
+        _btnEdit.OnClicked += (Gtk.Button sender, EventArgs e) => EditTriggered?.Invoke(this, group);
         SetActivatableWidget(_btnEdit);
         //Delete Button
         _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
         _btnDelete.SetValign(Gtk.Align.Center);
         _btnDelete.AddCssClass("flat");
         _btnDelete.SetTooltipText(localizer["Delete", "GroupRow"]);
-        //_btnDelete.OnClick +=
+        _btnDelete.OnClicked += (Gtk.Button sender, EventArgs e) => DeleteTriggered?.Invoke(this, group);
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _box.Append(_lblAmount);
