@@ -18,22 +18,8 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
         .string();
 
     //Load Resource
-    if(std::filesystem::exists("/usr/share/org.nickvision.money/org.nickvision.money.gresource"))
-    {
-        g_resources_register(g_resource_load("/usr/share/org.nickvision.money/org.nickvision.money.gresource", nullptr));
-    }
-    else if(std::filesystem::exists("/app/share/org.nickvision.money/org.nickvision.money.gresource"))
-    {
-        g_resources_register(g_resource_load("/app/share/org.nickvision.money/org.nickvision.money.gresource", nullptr));
-    }
-    else if(std::filesystem::exists(resDir))
-    {
-        g_resources_register(g_resource_load(resDir.c_str(), nullptr));
-    }
-    else
-    {
-        g_resources_register(g_resource_load("org.nickvision.money.gresource", nullptr));
-    }
+    g_resources_register(g_resource_load(resDir.c_str(), nullptr));
+
     //AppInfo
     m_appInfo.setId(id);
     m_appInfo.setName("Nickvision Money");
