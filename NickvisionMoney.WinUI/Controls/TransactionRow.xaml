@@ -8,19 +8,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    mc:Ignorable="d" MinWidth="400">
+    mc:Ignorable="d">
 
     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-        <wct:DockPanel Margin="10,10,10,6" LastChildFill="False">
-            <Button x:Name="BtnId" wct:DockPanel.Dock="Left" Width="40" Height="40" CornerRadius="20" Click="Edit"/>
+        <StackPanel Margin="12" Orientation="Horizontal" Spacing="6">
+            <Button x:Name="BtnId" Width="40" Height="40" CornerRadius="20" Click="Edit"/>
 
-            <StackPanel wct:DockPanel.Dock="Left" Margin="6,0,0,0" Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
                 <TextBlock x:Name="LblName"/>
 
                 <TextBlock x:Name="LblDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>
             </StackPanel>
 
-            <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6">
+            <StackPanel Margin="40,0,0,0" Orientation="Horizontal" Spacing="6">
                 <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
 
                 <Button x:Name="BtnEdit" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
@@ -35,6 +35,6 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
-        </wct:DockPanel>
+        </StackPanel>
     </Border>
 </UserControl>

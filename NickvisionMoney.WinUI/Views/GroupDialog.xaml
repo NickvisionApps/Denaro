@@ -12,13 +12,9 @@
     DefaultButton="Primary">
 
     <StackPanel Spacing="6" Width="400">
-        <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-            <StackPanel Margin="12" Spacing="6">
-                <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+        <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-                <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
-            </StackPanel>
-        </Border>
+        <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
         <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
     </StackPanel>

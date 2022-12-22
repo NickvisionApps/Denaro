@@ -13,7 +13,7 @@
     <Grid>
         <TextBlock x:Name="LblTitle" Margin="20,20,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
 
-        <CommandBar HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,10,0" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+        <CommandBar HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,10,0" DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
                     <AppBarButton.Icon>
@@ -101,7 +101,7 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
 
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,112,10,10" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,80,10,10" LastChildFill="True">
             <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
                     <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
@@ -132,11 +132,21 @@
                         </StackPanel>
                     </Border>
 
-                    <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" Height="400" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" MinHeight="400" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                             <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+
+                            <Expander HorizontalAlignment="Stretch" Margin="6,0,6,6" Header="Select Range">
+                                <Expander.Content>
+                                    <StackPanel Spacing="12">
+                                        <DatePicker Header="Start"/>
+
+                                        <DatePicker Header="End"/>
+                                    </StackPanel>
+                                </Expander.Content>
+                            </Expander>
                         </StackPanel>
                     </Border>
 
@@ -175,10 +185,18 @@
                             </StackPanel>
 
                             <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,44,0,0" VerticalScrollBarVisibility="Auto">
-                                <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
+                                <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <wct:WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+
                                     <GridView.ItemContainerStyle>
                                         <Style TargetType="GridViewItem">
-                                            <Setter Property="Margin" Value="6"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                                         </Style>
                                     </GridView.ItemContainerStyle>
                                 </GridView>

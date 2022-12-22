@@ -12,33 +12,21 @@
     DefaultButton="Primary">
 
     <StackPanel Spacing="6" Width="400">
-        <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-            <StackPanel Margin="12" Spacing="6">
-                <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+        <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-                <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
 
-                <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-        </Border>
+        <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
 
-        <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-            <StackPanel Margin="12" Spacing="6">
-                <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
+        <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
 
-                <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-        </Border>
+        <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
 
-        <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-            <StackPanel Margin="12" Spacing="6">
-                <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
+        <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
 
-                <TextBlock x:Name="LblColor"/>
+        <TextBlock x:Name="LblColor"/>
 
-                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-        </Border>
+        <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
 
         <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
     </StackPanel>
