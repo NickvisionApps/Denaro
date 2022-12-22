@@ -10,6 +10,13 @@ using namespace NickvisionMoney::UI::Views;
 
 Application::Application(const std::string& id, GApplicationFlags flags) : m_adwApp{ adw_application_new(id.c_str(), flags) }
 {
+    auto exeDir = std::filesystem::canonical("/proc/self/exe");
+    auto resDir = exeDir
+        .parent_path()
+        .parent_path()
+        .concat("/share/org.nickvision.money/org.nickvision.money.gresource")
+        .string();
+
     //Load Resource
     if(std::filesystem::exists("/usr/share/org.nickvision.money/org.nickvision.money.gresource"))
     {
@@ -18,6 +25,10 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     else if(std::filesystem::exists("/app/share/org.nickvision.money/org.nickvision.money.gresource"))
     {
         g_resources_register(g_resource_load("/app/share/org.nickvision.money/org.nickvision.money.gresource", nullptr));
+    }
+    else if(std::filesystem::exists(resDir))
+    {
+        g_resources_register(g_resource_load(resDir.c_str(), nullptr));
     }
     else
     {
