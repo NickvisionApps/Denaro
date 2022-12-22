@@ -54,13 +54,18 @@ public sealed partial class AccountView : UserControl
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
         LblCalendar.Text = _controller.Localizer["Calendar"];
+        ExpDateRange.Header = _controller.Localizer["SelectRange"];
+        DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
+        DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
         ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstToLast"]);
         ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastToFirst"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
-        //Load Account
-        if(_controller.SortFirstToLast)
+        //Load UI
+        DateRangeStart.Date = DateTimeOffset.Now;
+        DateRangeEnd.Date = DateTimeOffset.Now;
+        if (_controller.SortFirstToLast)
         {
             BtnSortTopBottom.IsChecked = true;
         }
@@ -386,6 +391,8 @@ public sealed partial class AccountView : UserControl
     {
         Calendar.SelectedDates.Clear();
         Calendar.SelectedDates.Add(DateTimeOffset.Now);
+        DateRangeStart.Date = DateTimeOffset.Now;
+        DateRangeEnd.Date = DateTimeOffset.Now;
     }
 
     /// <summary>
@@ -414,6 +421,20 @@ public sealed partial class AccountView : UserControl
             _controller.SetSingleDateFilter(DateOnly.FromDateTime(Calendar.SelectedDates[0].Date));
         }
     }
+
+    /// <summary>
+    /// Occurs when the start date range's date is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">DatePickerValueChangedEventArgs</param>
+    private void DateRangeStart_DateChanged(object sender, DatePickerValueChangedEventArgs e) => _controller.FilterStartDate = DateOnly.FromDateTime(DateRangeStart.Date.Date);
+
+    /// <summary>
+    /// Occurs when the end date range's date is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">DatePickerValueChangedEventArgs</param>
+    private void DateRangeEnd_DateChanged(object sender, DatePickerValueChangedEventArgs e) => _controller.FilterEndDate = DateOnly.FromDateTime(DateRangeEnd.Date.Date);
 
     /// <summary>
     /// Occurs when the ListGroups' selection is changed

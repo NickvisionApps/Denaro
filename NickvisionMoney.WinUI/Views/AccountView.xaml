@@ -138,12 +138,12 @@
 
                             <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" Margin="6,0,6,0" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
 
-                            <Expander HorizontalAlignment="Stretch" Margin="6,0,6,6" Header="Select Range">
+                            <Expander x:Name="ExpDateRange" HorizontalAlignment="Stretch" Margin="6,0,6,6" Header="Select Range">
                                 <Expander.Content>
                                     <StackPanel Spacing="12">
-                                        <DatePicker Header="Start"/>
+                                        <DatePicker x:Name="DateRangeStart" DateChanged="DateRangeStart_DateChanged"/>
 
-                                        <DatePicker Header="End"/>
+                                        <DatePicker x:Name="DateRangeEnd" DateChanged="DateRangeEnd_DateChanged"/>
                                     </StackPanel>
                                 </Expander.Content>
                             </Expander>
