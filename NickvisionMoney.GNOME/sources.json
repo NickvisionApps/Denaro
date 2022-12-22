@@ -1,45 +1,45 @@
 [
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm/7.0.0/microsoft.aspnetcore.app.runtime.linux-arm.7.0.0.nupkg",
-        "sha512": "fe68af4fac5062db9b9be6a298a577f3a1cc70e218d05d1e98ea47fa2536e10977033d38c995daf90da2035bbe275c2e2c163ff639ee7adfaf094fd166a39933",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm/7.0.1/microsoft.aspnetcore.app.runtime.linux-arm.7.0.1.nupkg",
+        "sha512": "699c9c3f3b529cae97adf0e147ce7f2a45980f7a9793d0e6ff8fbf068a66a06a9c8692e58e7f17f71bf55f4d2118da21840a41408ec1c9ab2661dc8d7b74bc88",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm.7.0.0.nupkg"
+        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm64/7.0.0/microsoft.aspnetcore.app.runtime.linux-arm64.7.0.0.nupkg",
-        "sha512": "1c3ea618c23823c54f6fa82799b8743c4e919e1fa1196d18402e547faaafb52a4d6e2131ddef6092dc71a308e8f7bcd3feac825565cec112705dacf88b1f7e57",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm64/7.0.1/microsoft.aspnetcore.app.runtime.linux-arm64.7.0.1.nupkg",
+        "sha512": "6118682a2978748205478db312ce64593e1b171a6afe28a443d3539aeaabf6d886370ff03462b31493a206849ed6587ec044e075d2e0e5db829f55a143c09a43",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm64.7.0.0.nupkg"
+        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-arm64.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-x64/7.0.0/microsoft.aspnetcore.app.runtime.linux-x64.7.0.0.nupkg",
-        "sha512": "285817dc47116766e8f3279c0c6b7add76e1c362ed455b7d03790874bb4fab70f0507a31747a109a8afa3b80215b9c463a3d245e80ba14ee896114ef44f8892d",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-x64/7.0.1/microsoft.aspnetcore.app.runtime.linux-x64.7.0.1.nupkg",
+        "sha512": "c33828b32f4b8a957a877329d38b5677fa1fe25f38192484bcafe7adfe669c8bd2f5d9cfc920fd1f1932f5d35160677243d8a6a33c98de1cca7369a1bf9b0bce",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-x64.7.0.0.nupkg"
+        "dest-filename": "microsoft.aspnetcore.app.runtime.linux-x64.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm/7.0.0/microsoft.netcore.app.runtime.linux-arm.7.0.0.nupkg",
-        "sha512": "7860233cc8030f239a9a8fe3c5963cd19efc4b8fe25527230e84491b1c7b5d2ddfa6ad85f494c711f50a84bc1b4d9c6a6196ffce8df757b6487e592fa00640c2",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm/7.0.1/microsoft.netcore.app.runtime.linux-arm.7.0.1.nupkg",
+        "sha512": "bb6fd7f9dff0666582cd3d122fe87e0c1082d4e62f2be6f4cc9d42b7c4d7ac54eb0ddc8400dc008bc1955d851683f07e64a9ca09aa8c810b78618bb91ca411da",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.netcore.app.runtime.linux-arm.7.0.0.nupkg"
+        "dest-filename": "microsoft.netcore.app.runtime.linux-arm.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm64/7.0.0/microsoft.netcore.app.runtime.linux-arm64.7.0.0.nupkg",
-        "sha512": "b0970c968b230486964549a6665d90c69c8e38f44471f02d83ecf2bba1e76c162bd383abffbf2779b515413486ceba0507d234f41b690d961a5975c41ce6f437",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-arm64/7.0.1/microsoft.netcore.app.runtime.linux-arm64.7.0.1.nupkg",
+        "sha512": "efb6bcef77e3f26a8b3c9152caa60c47d2b514aa4feb57719f9cd865e7bef6da9d76b5b101e48795eec3c8cb27864e86e4afcab17e8dc249caf49218d14efeb5",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.netcore.app.runtime.linux-arm64.7.0.0.nupkg"
+        "dest-filename": "microsoft.netcore.app.runtime.linux-arm64.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-x64/7.0.0/microsoft.netcore.app.runtime.linux-x64.7.0.0.nupkg",
-        "sha512": "0d2c0cd4a669b753abebb2edaf65b9fd277836b029d6f945bc95f98ed487221b462f9a82dc199dd08c5b12f1f15134531e208fcad5931c426f9fdba6ab068786",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-x64/7.0.1/microsoft.netcore.app.runtime.linux-x64.7.0.1.nupkg",
+        "sha512": "3af5711902471ccd0f663419a4255c93bac3cd84243fb9fe6a3d73dccdec4d10cd454277c83ce1a8f25b02924cadebee7e57e866086082184961c3697351b1b7",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.netcore.app.runtime.linux-x64.7.0.0.nupkg"
+        "dest-filename": "microsoft.netcore.app.runtime.linux-x64.7.0.1.nupkg"
     },
     {
         "type": "file",
@@ -127,17 +127,17 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite/7.0.0/microsoft.data.sqlite.7.0.0.nupkg",
-        "sha512": "570854a14048eff047b8f4906e86e3ac377902d4fd9531bb7701530b2e79ec1603afecd697ba56961e45a40ed095794e1fb3e4ca6e5f49a62516b440c55d29e8",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite/7.0.1/microsoft.data.sqlite.7.0.1.nupkg",
+        "sha512": "e6da7a4d77fb56b82ea8d8cab460c455063b1734f8f659f4891ddcdff089e3049dbc64035f6d72b3743bd76b546b58dec3146064b5a3f923c778549fab8b4424",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.7.0.0.nupkg"
+        "dest-filename": "microsoft.data.sqlite.7.0.1.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.0/microsoft.data.sqlite.core.7.0.0.nupkg",
-        "sha512": "21dbc87b298c3f702484be241a2a59440bd2339d1d34de9ebbc841d8acc9e3a4b56d45ff8742d2096d2cd55cac94cf05e8161c572297bf54eae44b6a93a6f85a",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.1/microsoft.data.sqlite.core.7.0.1.nupkg",
+        "sha512": "88ba307fcb1aa5dda1c1744da352279cac1c8ddda93f40a6a05f41fb3fae0f0d1cdc0fd4952f00316cfea92a0a9b41c4e42f43e44ba6b7b3d6a1e3688ddb81b2",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.core.7.0.0.nupkg"
+        "dest-filename": "microsoft.data.sqlite.core.7.0.1.nupkg"
     },
     {
         "type": "file",

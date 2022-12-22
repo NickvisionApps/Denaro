@@ -34,9 +34,7 @@
             "build-commands": [
                 "mkdir -p /app/opt/org.nickvision.money",
                 "dotnet publish NickvisionMoney.GNOME --self-contained true -o /app/opt/org.nickvision.money",
-                "chmod +x NickvisionMoney.GNOME/install_extras.sh",
-                "NickvisionMoney.GNOME/install_extras.sh /app",
-                "chmod -x NickvisionMoney.GNOME/install_extras.sh"
+                "bash NickvisionMoney.GNOME/install_extras.sh /app"
             ],
             "sources": [
                 {
