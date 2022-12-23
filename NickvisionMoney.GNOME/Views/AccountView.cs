@@ -22,7 +22,6 @@ public partial class AccountView
         int RefCount;
     };
 
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
