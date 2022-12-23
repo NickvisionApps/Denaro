@@ -470,6 +470,7 @@ public partial class AccountView
                     foreach (var transaction in filteredTransactions)
                     {
                         var row = new TransactionRow(transaction, _controller.Localizer);
+                        row.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)
                         {
                             _flowBox.Append(row);
@@ -529,9 +530,13 @@ public partial class AccountView
         }
     }
 
-    private void DeleteGroup(object? sender, uint id)
+    private async void DeleteGroup(object? sender, uint id)
     {
-        
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"], null);
+        if(dialog.Run() == MessageDialogResponse.Destructive)
+        {
+            await _controller.DeleteGroupAsync(id);
+        }
     }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
@@ -616,6 +621,15 @@ public partial class AccountView
         {
             var yearObject = (Gtk.StringObject)_ddEndYear.GetSelectedItem();
             _controller.FilterEndDate = new DateOnly(Convert.ToInt32(yearObject.GetString()), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+        }
+    }
+
+    private async void DeleteTransaction(object? sender, uint id)
+    {
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"], null);
+        if(dialog.Run() == MessageDialogResponse.Destructive)
+        {
+            await _controller.DeleteTransactionAsync(id);
         }
     }
 

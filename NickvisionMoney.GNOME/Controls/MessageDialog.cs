@@ -5,6 +5,13 @@ using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
+public enum MessageDialogResponse
+{
+    Suggested,
+    Destructive,
+    Cancel
+}
+
 public partial class MessageDialog
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -47,13 +54,6 @@ public partial class MessageDialog
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
-
-    public enum MessageDialogResponse
-    {
-        Suggested,
-        Destructive,
-        Cancel
-    }
 
     private enum _responseAppearance
     {
