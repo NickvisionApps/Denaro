@@ -1,10 +1,12 @@
 using NickvisionMoney.GNOME.Views;
-using NickvisionMoney.Shared.Helpers;
 using System;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
+/// <summary>
+/// Responses for the MessageDialog
+/// </summary>
 public enum MessageDialogResponse
 {
     Suggested,
@@ -12,13 +14,25 @@ public enum MessageDialogResponse
     Cancel
 }
 
+/// <summary>
+/// Available response appearances for the MessageDialog
+/// </summary>
+file enum ResponseAppearance : uint
+{
+    Default,
+    Suggested,
+    Destructive
+}
+
+/// <summary>
+/// A dialog for showing a message
+/// </summary>
 public partial class MessageDialog
 {
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate void SignalCallback(nint gObject, [MarshalAs(UnmanagedType.LPStr)] string response, nint data);
+    private delegate void SignalCallback(nint gObject, string response, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)]SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.I1)]
@@ -55,19 +69,21 @@ public partial class MessageDialog
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
 
-    private enum _responseAppearance
-    {
-        Default,
-        Suggested,
-        Destructive
-    }
-
     private readonly nint _dialog;
     private MessageDialogResponse _response;
 
-    public MessageDialog(MainWindow parentWindow, string title, string description, string? cancelText, string? destructiveText, string? suggestedText)
+    /// <summary>
+    /// Constructs a MessageDialog
+    /// </summary>
+    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="title">The title of the dialog</param>
+    /// <param name="message">The message of the dialog</param>
+    /// <param name="cancelText">The text of the cancel button</param>
+    /// <param name="destructiveText">The text of the destructive button</param>
+    /// <param name="suggestedText">The text of the suggested button</param>
+    public MessageDialog(MainWindow parentWindow, string title, string message, string? cancelText, string? destructiveText = null, string? suggestedText = null)
     {
-        _dialog = adw_message_dialog_new(parentWindow.Handle, title, description);
+        _dialog = adw_message_dialog_new(parentWindow.Handle, title, message);
         gtk_window_set_hide_on_close(_dialog, true);
         if(!string.IsNullOrEmpty(cancelText))
         {
@@ -78,16 +94,20 @@ public partial class MessageDialog
         if(!string.IsNullOrEmpty(destructiveText))
         {
             adw_message_dialog_add_response(_dialog, "destructive", destructiveText);
-            adw_message_dialog_set_response_appearance(_dialog, "destructive", (uint)_responseAppearance.Destructive);
+            adw_message_dialog_set_response_appearance(_dialog, "destructive", (uint)ResponseAppearance.Destructive);
         }
         if(!string.IsNullOrEmpty(suggestedText))
         {
             adw_message_dialog_add_response(_dialog, "suggested", suggestedText);
-            adw_message_dialog_set_response_appearance(_dialog, "suggested", (uint)_responseAppearance.Suggested);
+            adw_message_dialog_set_response_appearance(_dialog, "suggested", (uint)ResponseAppearance.Suggested);
         }
-        g_signal_connect_data(_dialog, "response", (nint sender, [MarshalAs(UnmanagedType.LPStr)] string response, nint data) => SetResponse(response), IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_dialog, "response", (nint sender, string response, nint data) => SetResponse(response), IntPtr.Zero, IntPtr.Zero, 0);
     }
 
+    /// <summary>
+    /// Displays the dialog
+    /// </summary>
+    /// <returns>MessageDialogResponse</returns>
     public MessageDialogResponse Run()
     {
         gtk_widget_show(_dialog);
@@ -99,6 +119,10 @@ public partial class MessageDialog
         return _response;
     }
 
+    /// <summary>
+    /// Sets the response of the dialog as a MessageDialogResponse
+    /// </summary>
+    /// <param name="response">The string response of the dialog</param>
     private void SetResponse(string response)
     {
         switch(response)

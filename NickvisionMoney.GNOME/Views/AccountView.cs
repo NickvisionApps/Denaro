@@ -549,7 +549,7 @@ public partial class AccountView
 
     private async void DeleteGroup(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"], null);
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
         if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteGroupAsync(id);
@@ -643,7 +643,7 @@ public partial class AccountView
 
     private async void DeleteTransaction(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"], null);
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
         if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteTransactionAsync(id);
