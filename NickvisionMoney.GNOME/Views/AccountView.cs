@@ -401,6 +401,13 @@ public partial class AccountView
         //Tab Page
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
+        //Action Map
+        var actionMap = Gio.SimpleActionGroup.New();
+        _flap.InsertActionGroup("account", actionMap);
+        //New Group Action
+        var actNewGroup = Gio.SimpleAction.New("newGroup", null);
+        actNewGroup.OnActivate += NewGroup;
+        actionMap.AddAction(actNewGroup);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
     }
@@ -519,6 +526,16 @@ public partial class AccountView
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+
+    private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
+    {
+        var groupController = _controller.CreateGroupDialogController();
+        var groupDialog = new GroupDialog(groupController, _parentWindow, _controller.Localizer);
+        if(groupDialog.Run())
+        {
+            await _controller.AddGroupAsync(groupController.Group);
+        }
+    }
 
     private async void EditGroup(object? sender, uint id)
     {
