@@ -2,7 +2,6 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using System;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -73,9 +72,9 @@ public partial class GroupDialog
     /// Constructs a GroupDialog
     /// </summary>
     /// <param name="controller">GroupDialogController</param>
-    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="localizer">Localizer</param>
-    public GroupDialog(GroupDialogController controller, MainWindow parentWindow, Localizer localizer)
+    public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow, Localizer localizer)
     {
         _controller = controller;
         _localizer = localizer;

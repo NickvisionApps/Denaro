@@ -1,4 +1,3 @@
-using NickvisionMoney.GNOME.Views;
 using System;
 using System.Runtime.InteropServices;
 
@@ -75,13 +74,13 @@ public partial class MessageDialog
     /// <summary>
     /// Constructs a MessageDialog
     /// </summary>
-    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="title">The title of the dialog</param>
     /// <param name="message">The message of the dialog</param>
     /// <param name="cancelText">The text of the cancel button</param>
     /// <param name="destructiveText">The text of the destructive button</param>
     /// <param name="suggestedText">The text of the suggested button</param>
-    public MessageDialog(MainWindow parentWindow, string title, string message, string? cancelText, string? destructiveText = null, string? suggestedText = null)
+    public MessageDialog(Gtk.Window parentWindow, string title, string message, string? cancelText, string? destructiveText = null, string? suggestedText = null)
     {
         _dialog = adw_message_dialog_new(parentWindow.Handle, title, message);
         gtk_window_set_hide_on_close(_dialog, true);
