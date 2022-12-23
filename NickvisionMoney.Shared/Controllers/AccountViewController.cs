@@ -120,6 +120,9 @@ public class AccountViewController
         }
     }
 
+    /// <summary>
+    /// The list of dates in the account
+    /// </summary>
     public List<DateOnly> DatesInAccount
     {
         get
@@ -136,6 +139,9 @@ public class AccountViewController
         }
     }
 
+    /// <summary>
+    /// An "Ungrouped" group
+    /// </summary>
     public Group UngroupedGroup
     {
         get
@@ -189,6 +195,31 @@ public class AccountViewController
                 filteredTransactions.Add(pair.Value);
             }
             return filteredTransactions;
+        }
+    }
+
+    /// <summary>
+    /// The list of years for the date range filter
+    /// </summary>
+    public List<string> YearsForRangeFilter
+    {
+        get
+        {
+            var years = new List<string>();
+            if (_account.Transactions.Count > 0)
+            {
+                years.Add(DateTime.Now.Year.ToString());
+            }
+            foreach (var pair in _account.Transactions)
+            {
+                var year = pair.Value.Date.Year.ToString();
+                if (!years.Contains(year))
+                {
+                    years.Add(year);
+                }
+            }
+            years.Sort();
+            return years;
         }
     }
 
