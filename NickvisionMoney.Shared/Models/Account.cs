@@ -88,7 +88,7 @@ public class Account : IDisposable
         {
             var transaction = new Transaction((uint)readQueryTransactions.GetInt32(0))
             {
-                Date = DateOnly.Parse(readQueryTransactions.GetString(1)),
+                Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
                 Description = readQueryTransactions.GetString(2),
                 Type = (TransactionType)readQueryTransactions.GetInt32(3),
                 RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
