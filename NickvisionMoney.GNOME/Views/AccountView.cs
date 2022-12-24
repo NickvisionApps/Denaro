@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -257,31 +258,31 @@ public partial class AccountView
         _btnResetCalendarFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Dates"]);
         _btnResetCalendarFilter.OnClicked += OnResetCalendarFilter;
         //Start Range DropDowns
-        _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "2022" });
+        _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
-        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddStartMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
-        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
-        _ddStartDay = Gtk.DropDown.NewFromStrings(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" });
+        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddStartDay.SetValign(Gtk.Align.Center);
         _ddStartDay.SetShowArrow(false);
-        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnStartDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartDayChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         //End Range DropDowns
-        _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "2022" });
+        _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
-        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         _ddEndMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
-        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
-        _ddEndDay = Gtk.DropDown.NewFromStrings(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" });
+        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddEndDay.SetValign(Gtk.Align.Center);
         _ddEndDay.SetShowArrow(false);
-        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnEndDateChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndDayChanged(), IntPtr.Zero, IntPtr.Zero, 0);
         //Start Range Boxes
         _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxStartRange.Append(_ddStartYear);
@@ -309,7 +310,7 @@ public partial class AccountView
         _expRange.SetShowEnableSwitch(true);
         _expRange.AddRow(_rowStartRange);
         _expRange.AddRow(_rowEndRange);
-        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", OnDateRangeToggled, IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", (nint sender, nint gParamSpec, nint data) => OnDateRangeToggled(), IntPtr.Zero, IntPtr.Zero, 0);
         _grpRange.Add(_expRange);
         //Calendar Group
         _grpCalendar = Adw.PreferencesGroup.New();
@@ -586,60 +587,75 @@ public partial class AccountView
         _expRange.SetEnableExpansion(false);
     }
 
-    private void OnDateRangeToggled(nint sender, nint gParamSpec, nint data)
+    private void OnDateRangeToggled()
     {
-        _ddStartYear.SetSelected(0);
-        _ddStartMonth.SetSelected(0);
-        _ddStartDay.SetSelected(0);
-        _ddEndYear.SetSelected(g_list_model_get_n_items(_ddEndYear.GetModel().Handle) - 1);
-        _ddEndMonth.SetSelected(11);
-        _ddEndDay.SetSelected(30);
-        OnStartDateChanged();
-        OnEndDateChanged();
-    }
-
-    private void OnStartDateChanged()
-    {
-        if(!_isAccountLoading)
+        if(_expRange.GetEnableExpansion())
         {
-            var yearObject = (Gtk.StringObject)_ddStartYear.GetSelectedItem();
-            // var year = Convert.ToInt32(yearObject.GetString());
-            // var month = (int)_ddStartMonth.GetSelected() + 1;
-            // var day = (int)_ddStartDay.GetSelected() + 1;
-            // _ddStartDay.SetModel(Gtk.StringList.New(new string[31]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-            // foreach(var m in new int[] {2, 4, 6, 9, 11})
-            // {
-            //     if(month == 2 && day > 28)
-            //     {
-            //         if(DateTime.IsLeapYear(year))
-            //         {
-            //             day = 29;
-            //             _ddStartDay.SetModel(Gtk.StringList.New(new string[29]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29" }));
-            //         }
-            //         else
-            //         {
-            //             day = 28;
-            //             _ddStartDay.SetModel(Gtk.StringList.New(new string[28]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28" }));
-            //         }
-            //     }
-            //     else if(month == m && day == 31)
-            //     {
-            //         day = 30;
-            //         _ddStartDay.SetModel(Gtk.StringList.New(new string[30]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-            //     }
-            // }
-            _controller.FilterStartDate = new DateOnly(Convert.ToInt32(yearObject.GetString()), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+            //Years For Date Filter
+            var previousStartYear = _ddStartYear.GetSelected();
+            var previousEndYear = _ddEndYear.GetSelected();
+            var yearsForRangeFilter = _controller.YearsForRangeFilter.ToArray();
+            _ddStartYear.SetModel(Gtk.StringList.New(yearsForRangeFilter));
+            _ddEndYear.SetModel(Gtk.StringList.New(yearsForRangeFilter));
+            _ddStartYear.SetSelected(previousStartYear > yearsForRangeFilter.Length - 1 ? 0 : previousStartYear);
+            _ddEndYear.SetSelected(previousEndYear > yearsForRangeFilter.Length - 1 ? 0 : previousEndYear);
+            //Set Date
+            _controller.FilterStartDate = new DateOnly(int.Parse(yearsForRangeFilter[_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+            _controller.FilterEndDate = new DateOnly(int.Parse(yearsForRangeFilter[_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+        }
+        else
+        {
+            _controller.SetSingleDateFilter(DateOnly.FromDateTime(DateTime.Now));
         }
     }
 
-    private void OnEndDateChanged()
+    private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+
+    private void OnDateRangeStartMonthChanged()
     {
-        if(!_isAccountLoading)
+        var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]);
+        var previousDay = (int)_ddStartDay.GetSelected() + 1;
+        var newNumberOfDays = ((int)_ddStartMonth.GetSelected() + 1) switch
         {
-            var yearObject = (Gtk.StringObject)_ddEndYear.GetSelectedItem();
-            _controller.FilterEndDate = new DateOnly(Convert.ToInt32(yearObject.GetString()), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
-        }
+            1 => 31,
+            2 => (year % 400 == 0 || year % 100 != 0) && year % 4 == 0 ? 29 : 28,
+            3 => 31,
+            5 => 31,
+            7 => 31,
+            8 => 31,
+            10 => 31,
+            12 => 31,
+            _ => 30
+        };
+        _ddStartDay.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
+        _ddStartDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
+
+    private void OnDateRangeStartDayChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+
+    private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+
+    private void OnDateRangeEndMonthChanged()
+    {
+        var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]);
+        var previousDay = (int)_ddEndDay.GetSelected() + 1;
+        var newNumberOfDays = ((int)_ddEndMonth.GetSelected() + 1) switch
+        {
+            1 => 31,
+            2 => (year % 400 == 0 || year % 100 != 0) && year % 4 == 0 ? 29 : 28,
+            3 => 31,
+            5 => 31,
+            7 => 31,
+            8 => 31,
+            10 => 31,
+            12 => 31,
+            _ => 30
+        };
+        _ddEndDay.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
+        _ddEndDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
+    }
+
+    private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
     private async void DeleteTransaction(object? sender, uint id)
     {
