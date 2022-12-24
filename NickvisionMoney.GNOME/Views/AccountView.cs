@@ -277,7 +277,7 @@ public partial class AccountView
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
         g_signal_connect_data(_ddEndYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
-        _ddEndMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
+        _ddEndMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
         g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
