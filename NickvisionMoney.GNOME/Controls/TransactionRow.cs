@@ -79,7 +79,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         adw_preferences_row_set_use_markup(_row.Handle, false);
         _row.SetTitleLines(1);
         _row.SetTitle(_transaction.Description);
-        _row.SetSubtitle($"{_transaction.Date.ToString("d")}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {_transaction.RepeatInterval}" : "")}");
+        _row.SetSubtitle($"{_transaction.Date.ToString("d")}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
         _row.SetSizeRequest(300, 70);
         var rowCssProvider = Gtk.CssProvider.New();
         var rowCss = @"row {

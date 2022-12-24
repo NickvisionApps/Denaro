@@ -531,7 +531,7 @@ public partial class AccountView
     private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
-        var groupDialog = new GroupDialog(groupController, _parentWindow, _controller.Localizer);
+        var groupDialog = new GroupDialog(groupController, _parentWindow);
         if(groupDialog.Run())
         {
             await _controller.AddGroupAsync(groupController.Group);
@@ -541,7 +541,7 @@ public partial class AccountView
     private async void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
-        var groupDialog = new GroupDialog(groupController, _parentWindow, _controller.Localizer);
+        var groupDialog = new GroupDialog(groupController, _parentWindow);
         if(groupDialog.Run())
         {
             await _controller.UpdateGroupAsync(groupController.Group);

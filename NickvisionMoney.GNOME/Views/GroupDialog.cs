@@ -60,7 +60,6 @@ public partial class GroupDialog
     private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
 
     private readonly GroupDialogController _controller;
-    private readonly Localizer _localizer;
     private readonly nint _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
     private readonly Adw.ActionRow _rowName;
@@ -74,17 +73,16 @@ public partial class GroupDialog
     /// <param name="controller">GroupDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="localizer">Localizer</param>
-    public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow, Localizer localizer)
+    public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow)
     {
         _controller = controller;
-        _localizer = localizer;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(parentWindow.Handle, _localizer["Group"], "");
+        _dialog = adw_message_dialog_new(parentWindow.Handle, _controller.Localizer["Group"], "");
         gtk_window_set_default_size(_dialog, 450, -1);
         gtk_window_set_hide_on_close(_dialog, true);
-        adw_message_dialog_add_response(_dialog, "cancel", _localizer["Cancel"]);
+        adw_message_dialog_add_response(_dialog, "cancel", _controller.Localizer["Cancel"]);
         adw_message_dialog_set_close_response(_dialog, "cancel");
-        adw_message_dialog_add_response(_dialog, "ok", _localizer["OK"]);
+        adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
         g_signal_connect_data(_dialog, "response", (nint sender, [MarshalAs(UnmanagedType.LPStr)] string response, nint data) => _controller.Accepted = response == "ok", IntPtr.Zero, IntPtr.Zero, 0);
@@ -92,18 +90,18 @@ public partial class GroupDialog
         _grpGroup = Adw.PreferencesGroup.New();
         //Name
         _rowName = Adw.ActionRow.New();
-        _rowName.SetTitle(_localizer["Name", "Field"]);
+        _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
         _txtName = Gtk.Entry.New();
         _txtName.SetValign(Gtk.Align.Center);
-        _txtName.SetPlaceholderText(_localizer["Name", "Placeholder"]);
+        _txtName.SetPlaceholderText(_controller.Localizer["Name", "Placeholder"]);
         _rowName.AddSuffix(_txtName);
         _grpGroup.Add(_rowName);
         //Description
         _rowDescription = Adw.ActionRow.New();
-        _rowDescription.SetTitle(_localizer["Description", "Field"]);
+        _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
         _txtDescription = Gtk.Entry.New();
         _txtDescription.SetValign(Gtk.Align.Center);
-        _txtDescription.SetPlaceholderText(_localizer["Description", "Placeholder"]);
+        _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
         _rowDescription.AddSuffix(_txtDescription);
         _grpGroup.Add(_rowDescription);
         //Layout
@@ -133,24 +131,24 @@ public partial class GroupDialog
             if(status != GroupCheckStatus.Valid)
             {
                 _rowName.RemoveCssClass("error");
-                _rowName.SetTitle(_localizer["Name", "Field"]);
+                _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
                 _rowDescription.RemoveCssClass("error");
-                _rowDescription.SetTitle(_localizer["Description", "Field"]);
+                _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
                 //Mark Error
                 if (status == GroupCheckStatus.EmptyName)
                 {
                     _rowName.AddCssClass("error");
-                    _rowName.SetTitle(_localizer["Name", "Empty"]);
+                    _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
                 }
                 else if(status == GroupCheckStatus.EmptyDescription)
                 {
                     _rowDescription.AddCssClass("error");
-                    _rowDescription.SetTitle(_localizer["Description", "Empty"]);
+                    _rowDescription.SetTitle(_controller.Localizer["Description", "Empty"]);
                 }
                 else if(status == GroupCheckStatus.NameExists)
                 {
                     _rowName.AddCssClass("error");
-                    _rowName.SetTitle(_localizer["Name", "Exists"]);
+                    _rowName.SetTitle(_controller.Localizer["Name", "Exists"]);
                 }
                 return Run();
             }
