@@ -1,10 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
@@ -483,10 +483,10 @@ public class Account : IDisposable
     private async Task<int> ImportFromCSVAsync(string path)
     {
         var imported = 0;
-        var lines = default(List<string>);
+        var lines = default(string[]);
         try
         {
-            lines = File.ReadAllLines(path).ToList();
+            lines = File.ReadAllLines(path);
         }
         catch
         {
@@ -605,7 +605,103 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromOFXAsync(string path)
     {
-        return 0;
+        var lines = default(string[]);
+        try
+        {
+            lines = File.ReadAllLines(path);
+        }
+        catch
+        {
+            return -1;
+        }
+        var imported = 0;
+        var nextId = NextAvailableTransactionId;
+        var xmlTagRegex = new Regex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
+        var transaction = default(Transaction);
+        var skipTransaction = false;
+        foreach (var line in lines)
+        {
+            var match = xmlTagRegex.Match(line);
+            if (match.Success)
+            {
+                var tag = match.Groups[1].Value;
+                var content = match.Groups[2].Value;
+                if (content.Contains('\r'))
+                {
+                    content = content.Remove(content.IndexOf('\r'));
+                }
+                //Add Previous Transaction
+                if (tag == "/STMTTRN" && transaction != null)
+                {
+                    if (!skipTransaction)
+                    {
+                        await AddTransactionAsync(transaction);
+                        imported++;
+                    }
+                    skipTransaction = false;
+                    transaction = null;
+                }
+                //New Transaction
+                if (tag == "STMTTRN")
+                {
+                    transaction = new Transaction(nextId);
+                    nextId++;
+                }
+                if (!skipTransaction)
+                {
+                    //Type
+                    if (tag == "TRNTYPE")
+                    {
+                        if (content == "CREDIT")
+                        {
+                            transaction!.Type = TransactionType.Income;
+                        }
+                        else if (content == "DEBIT")
+                        {
+                            transaction!.Type = TransactionType.Expense;
+                        }
+                        else
+                        {
+                            //Unknown Entry
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                    //Name
+                    if (tag == "MEMO")
+                    {
+                        transaction!.Description = content;
+                    }
+                    //Amount
+                    if (tag == "TRNAMT")
+                    {
+                        try
+                        {
+                            transaction!.Amount = decimal.Parse(content, NumberStyles.Currency);
+                        }
+                        catch
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                    //Date
+                    if (tag == "DTPOSTED")
+                    {
+                        try
+                        {
+                            transaction!.Date = DateOnly.Parse(content);
+                        }
+                        catch
+                        {
+                            skipTransaction = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        return imported;
     }
 
     /// <summary>
@@ -615,7 +711,79 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromQIFAsync(string path)
     {
-        return 0;
+        var lines = default(string[]);
+        try
+        {
+            lines = File.ReadAllLines(path);
+        }
+        catch
+        {
+            return -1;
+        }
+        var imported = 0;
+        var nextId = NextAvailableTransactionId;
+        var transaction = new Transaction(nextId);
+        var skipTransaction = false;
+        foreach(var l in lines)
+        {
+            var line = l;
+            if(line.Contains('\r'))
+            {
+                line = line.Remove(line.IndexOf('\r'));
+            }
+            if(line.Length == 0)
+            {
+                continue;
+            }
+            //Add Previous Transaction
+            if (line[0] == '^')
+            {
+                if(!skipTransaction)
+                {
+                    await AddTransactionAsync(transaction);
+                    imported++;
+                }
+                skipTransaction = false;
+                nextId++;
+                transaction = new Transaction(nextId);
+            }
+            //Date
+            if (line[0] == 'D')
+            {
+                try
+                {
+                    var year = int.Parse(line.Substring(7, 4));
+                    var month = int.Parse(line.Substring(4, 2));
+                    var day = int.Parse(line.Substring(1, 2));
+                    transaction.Date = new DateOnly(year, month, day);
+                }
+                catch
+                {
+                    skipTransaction = true;
+                    continue;
+                }
+            }
+            //Amount and Type
+            if (line[0] == 'T')
+            {
+                try
+                {
+                    transaction.Type = line[1] == '-' ? TransactionType.Expense : TransactionType.Income;
+                    transaction.Amount = decimal.Parse(line.Substring(2), NumberStyles.Currency);
+                }
+                catch
+                {
+                    skipTransaction = true;
+                    continue;
+                }
+            }
+            //Description
+            if (line[0] == 'P')
+            {
+                transaction.Description = line.Substring(1);
+            }
+        }
+        return imported;
     }
 
     /// <summary>
