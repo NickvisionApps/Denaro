@@ -349,7 +349,7 @@ public class Account : IDisposable
         var cmdAddTransaction = _database.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToShortDateString());
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
