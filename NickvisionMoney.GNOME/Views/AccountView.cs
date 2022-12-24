@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -262,7 +263,8 @@ public partial class AccountView
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
         g_signal_connect_data(_ddStartYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
-        _ddStartMonth = Gtk.DropDown.NewFromStrings(new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
+        var dtFormatInfo = new DateTimeFormatInfo();
+        _ddStartMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
         g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
