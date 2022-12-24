@@ -405,6 +405,10 @@ public partial class AccountView
         //Action Map
         var actionMap = Gio.SimpleActionGroup.New();
         _flap.InsertActionGroup("account", actionMap);
+        //New Transaction Action
+        var actNewTransaction = Gio.SimpleAction.New("newTransaction", null);
+        actNewTransaction.OnActivate += NewTransaction;
+        actionMap.AddAction(actNewTransaction);
         //New Group Action
         var actNewGroup = Gio.SimpleAction.New("newGroup", null);
         actNewGroup.OnActivate += NewGroup;
@@ -478,6 +482,7 @@ public partial class AccountView
                     foreach (var transaction in filteredTransactions)
                     {
                         var row = new TransactionRow(transaction, _controller.Localizer);
+                        row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)
                         {
@@ -527,6 +532,26 @@ public partial class AccountView
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+
+    private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
+    {
+        var transactionController = _controller.CreateTransactionDialogController();
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        if(transactionDialog.Run())
+        {
+            await _controller.AddTransactionAsync(transactionController.Transaction);
+        }
+    }
+
+    private async void EditTransaction(object? sender, uint id)
+    {
+        var transactionController = _controller.CreateTransactionDialogController(id);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        if(transactionDialog.Run())
+        {
+            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+        }
+    }
 
     private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {

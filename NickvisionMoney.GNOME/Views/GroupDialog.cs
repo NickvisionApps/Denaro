@@ -72,7 +72,6 @@ public partial class GroupDialog
     /// </summary>
     /// <param name="controller">GroupDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    /// <param name="localizer">Localizer</param>
     public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow)
     {
         _controller = controller;
