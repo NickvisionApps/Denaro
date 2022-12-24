@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -118,6 +119,8 @@ public partial class TransactionDialog
     private readonly Adw.ActionRow _rowDescription;
     private readonly Gtk.Entry _txtDescription;
     private readonly Adw.ActionRow _rowAmount;
+    private readonly Gtk.Box _boxAmount;
+    private readonly Gtk.Label _lblCurrency;
     private readonly Gtk.Entry _txtAmount;
     private readonly Gtk.ToggleButton _btnIncome;
     private readonly Gtk.ToggleButton _btnExpense;
@@ -168,10 +171,14 @@ public partial class TransactionDialog
         //Amount
         _rowAmount = Adw.ActionRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _boxAmount = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
+        _boxAmount.SetValign(Gtk.Align.Center);
+        _lblCurrency = Gtk.Label.New(NumberFormatInfo.CurrentInfo.CurrencySymbol);
+        _boxAmount.Append(_lblCurrency);
         _txtAmount = Gtk.Entry.New();
-        _txtAmount.SetValign(Gtk.Align.Center);
         _txtAmount.SetPlaceholderText(_controller.Localizer["Amount", "Placeholder"]);
-        _rowAmount.AddSuffix(_txtAmount);
+        _boxAmount.Append(_txtAmount);
+        _rowAmount.AddSuffix(_boxAmount);
         _grpMain.Add(_rowAmount);
         //Type Box and Buttons
         _btnIncome = Gtk.ToggleButton.NewWithLabel(_controller.Localizer["Income"]);
