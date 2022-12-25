@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -19,7 +20,7 @@ public class MainWindowController
     /// <summary>
     /// The list of open accounts
     /// </summary>
-    public List<string> OpenAccounts { get; init; }
+    public List<AccountViewController> OpenAccounts { get; init; }
 
     /// <summary>
     /// Gets the AppInfo object
@@ -60,7 +61,7 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
-        OpenAccounts = new List<string>();
+        OpenAccounts = new List<AccountViewController>();
         Localizer = new Localizer();
     }
 
@@ -108,11 +109,11 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Creates a new AccountViewController
+    /// Gets whether or not an account with the given path is opened or not
     /// </summary>
-    /// <param name="index">The index of the open account to base the controller on</param>
-    /// <returns>The AccountViewController for the open account</returns>
-    public AccountViewController CreateAccountViewController(int index) => new AccountViewController(OpenAccounts[index], Localizer, NotificationSent);
+    /// <param name="path">The path of the account to check</param>
+    /// <returns>True if the account is open, else false</returns>
+    public bool IsAccountOpen(string path) => OpenAccounts.Any(x => x.AccountPath == path);
 
     /// <summary>
     /// Adds an account to the list of opened accounts
@@ -124,9 +125,10 @@ public class MainWindowController
         {
             path += ".nmoney";
         }
-        if(!OpenAccounts.Contains(path))
+        if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
-            OpenAccounts.Add(path);
+
+            OpenAccounts.Add(new AccountViewController(path, Localizer, NotificationSent));
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);

@@ -28,6 +28,10 @@ public class AccountViewController
     /// </summary>
     public string TransactionDefaultColor => Configuration.Current.TransactionDefaultColor;
     /// <summary>
+    /// The path of the account
+    /// </summary>
+    public string AccountPath => _account.Path;
+    /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
     public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);

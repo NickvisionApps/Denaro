@@ -323,10 +323,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(_controller.CreateAccountViewController(_controller.OpenAccounts.Count - 1), this, _tabView, _btnFlapToggle);
+        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountPath : "");
         UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
@@ -351,7 +351,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
-                if(_controller.OpenAccounts.Contains(path))
+                if(_controller.IsAccountOpen(path))
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
                 }
@@ -411,7 +411,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0] : "");
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountPath : "");
         if (_controller.OpenAccounts.Count == 0)
         {
             _actCloseAccount.SetEnabled(false);

@@ -199,7 +199,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.CreateAccountViewController(_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x) == (string)((NavigationViewItem)e.SelectedItem).Content)), InitializeWithWindow);
+            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x.AccountPath) == (string)((NavigationViewItem)e.SelectedItem).Content)], InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {
@@ -239,7 +239,7 @@ public sealed partial class MainWindow : Window
         var newNavItem = new NavigationViewItem()
         {
             Tag = "OpenAccount",
-            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1])
+            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath)
         };
         var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>()) { newNavItem };
         NavViewItemAccount.MenuItemsSource = items;
@@ -277,7 +277,7 @@ public sealed partial class MainWindow : Window
         var file = await fileSavePicker.PickSaveFileAsync();
         if(file != null)
         {
-            if(_controller.OpenAccounts.Contains(file.Path))
+            if(_controller.IsAccountOpen(file.Path))
             {
                 NotificationSent(null, new NotificationSentEventArgs(_controller.Localizer["UnableToOverride"], NotificationSeverity.Error));
             }
