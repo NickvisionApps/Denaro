@@ -60,6 +60,12 @@ public partial class AccountView
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_chooser_get_file(nint chooser);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
+
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
@@ -199,12 +205,12 @@ public partial class AccountView
         _btnMenuAccountActionsContent.SetIconName("document-properties-symbolic");
         _btnMenuAccountActionsContent.SetLabel(_controller.Localizer["AccountActions", "GTK"]);
         _btnMenuAccountActions.SetChild(_btnMenuAccountActionsContent);
-        var menuActionsCsv = Gio.Menu.New();
-        menuActionsCsv.Append(_controller.Localizer["ExportToFile"], "account.exportToFile");
-        menuActionsCsv.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
+        var menuActionsExportImport = Gio.Menu.New();
+        menuActionsExportImport.Append(_controller.Localizer["ExportToFile"], "account.exportToFile");
+        menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
-        menuActions.AppendSection(null, menuActionsCsv);
+        menuActions.AppendSection(null, menuActionsExportImport);
         _btnMenuAccountActions.SetMenuModel(menuActions);
         _boxButtonsOverview.Append(_btnMenuAccountActions);
         //Button Reset Overview Filter
@@ -415,6 +421,14 @@ public partial class AccountView
         var actNewGroup = Gio.SimpleAction.New("newGroup", null);
         actNewGroup.OnActivate += NewGroup;
         actionMap.AddAction(actNewGroup);
+        //Export Action
+        var actExport = Gio.SimpleAction.New("exportToFile", null);
+        actExport.OnActivate += ExportToFile;
+        actionMap.AddAction(actExport);
+        //Import Action
+        var actImport = Gio.SimpleAction.New("importFromFile", null);
+        actImport.OnActivate += ImportFromFile;
+        actionMap.AddAction(actImport);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
     }
@@ -699,5 +713,55 @@ public partial class AccountView
         {
             row.IsSmall = e.SmallWidth;
         }
+    }
+
+    private void ExportToFile(Gio.SimpleAction sender, EventArgs e)
+    {
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        saveFileDialog.SetModal(true);
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        saveFileDialog.AddFilter(filterCsv);
+        // var filterPdf = Gtk.FileFilter.New();
+        // filterPdf.SetName("PDF (*.pdf)");
+        // filterPdf.AddPattern("*.pdf");
+        // saveFileDialog.AddFilter(filterPdf);
+        saveFileDialog.OnResponse += (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                _controller.ExportToFile(path);
+            }
+        };
+        saveFileDialog.Show();
+    }
+
+    private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
+    {
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        openFileDialog.SetModal(true);
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        openFileDialog.AddFilter(filterCsv);
+        var filterOfx = Gtk.FileFilter.New();
+        filterOfx.SetName("Open Financial Exchange (*.ofx)");
+        filterOfx.AddPattern("*.ofx");
+        openFileDialog.AddFilter(filterOfx);
+        var filterQif = Gtk.FileFilter.New();
+        filterQif.SetName("Quicken Format (*.qif)");
+        filterQif.AddPattern("*.qif");
+        openFileDialog.AddFilter(filterQif);
+        openFileDialog.OnResponse += async (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                await _controller.ImportFromFileAsync(path);
+            }
+        };
+        openFileDialog.Show();
     }
 }

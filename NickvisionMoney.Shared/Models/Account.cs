@@ -471,7 +471,7 @@ public class Account : IDisposable
         {
             return await ImportFromCSVAsync(path);
         }
-        else if(extension == ".ofc")
+        else if(extension == ".ofx")
         {
             return await ImportFromOFXAsync(path);
         }
