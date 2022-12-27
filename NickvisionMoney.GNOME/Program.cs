@@ -59,7 +59,7 @@ public class Program
         mainWindowController.AppInfo.ShortName = "Money";
         mainWindowController.AppInfo.Description = mainWindowController.Localizer["Description"];
         mainWindowController.AppInfo.Version = "2022.12.0-next";
-        mainWindowController.AppInfo.Changelog = "<ul><li>Initial Release</li></ul>";
+        mainWindowController.AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</li></ul>";
         mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
