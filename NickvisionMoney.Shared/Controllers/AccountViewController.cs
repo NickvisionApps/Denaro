@@ -76,6 +76,10 @@ public class AccountViewController
     /// Occurs when the information of an account is changed
     /// </summary>
     public event EventHandler? AccountInfoChanged;
+    /// <summary>
+    /// Occurs when a transfer is sent from this account
+    /// </summary>
+    public event EventHandler<Transfer>? TransferSent;
 
     /// <summary>
     /// Creates an AccountViewController
@@ -382,6 +386,27 @@ public class AccountViewController
     public async Task DeleteGroupAsync(uint id)
     {
         await _account.DeleteGroupAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Sends a transfer to another account
+    /// </summary>
+    /// <param name="transfer">The transfer to send</param>
+    public async Task SendTransferAsync(Transfer transfer)
+    {
+        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        TransferSent?.Invoke(this, transfer);
+    }
+
+    /// <summary>
+    /// Receives a transfer from another account 
+    /// </summary>
+    /// <param name="transfer">The transfer to recieve</param>
+    public async Task ReceiveTransferAsync(Transfer transfer)
+    {
+        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 

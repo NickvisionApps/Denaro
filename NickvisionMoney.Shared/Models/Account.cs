@@ -418,6 +418,41 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Creates an expense transaction for the transfer
+    /// </summary>
+    /// <param name="transfer">The transfer to send</param>
+    /// <param name="description">The description for the new transaction</param>
+    public async Task SendTransferAsync(Transfer transfer, string description)
+    {
+        var transaction = new Transaction(NextAvailableTransactionId)
+        {
+            Description = description,
+            Type = TransactionType.Expense,
+            Amount = transfer.Amount,
+            RGBA = Configuration.Current.TransactionDefaultColor
+        };
+        await AddTransactionAsync(transaction);
+    }
+
+    /// <summary>
+    /// Creates an income transaction for the transfer
+    /// </summary>
+    /// <param name="transfer"></param>
+    /// <param name="description"></param>
+    /// <returns></returns>
+    public async Task ReceiveTransferAsync(Transfer transfer, string description)
+    {
+        var transaction = new Transaction(NextAvailableTransactionId)
+        {
+            Description = description,
+            Type = TransactionType.Income,
+            Amount = transfer.Amount,
+            RGBA = Configuration.Current.TransactionDefaultColor
+        };
+        await AddTransactionAsync(transaction);
+    }
+
+    /// <summary>
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>

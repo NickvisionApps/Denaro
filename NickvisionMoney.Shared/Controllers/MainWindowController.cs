@@ -118,8 +118,9 @@ public class MainWindowController
     /// <summary>
     /// Adds an account to the list of opened accounts
     /// </summary>
-    /// <param name="path">string</param>
-    public void AddAccount(string path)
+    /// <param name="path">The path of the account</param>
+    /// <param name="showOpenedNotification">Whether or not to show a notification if an account is opened</param>
+    public void AddAccount(string path, bool showOpenedNotification = true)
     {
         if(Path.GetExtension(path) != ".nmoney")
         {
@@ -127,8 +128,9 @@ public class MainWindowController
         }
         if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
-
-            OpenAccounts.Add(new AccountViewController(path, Localizer, NotificationSent));
+            var controller = new AccountViewController(path, Localizer, NotificationSent);
+            controller.TransferSent += OnTransferSent;
+            OpenAccounts.Add(controller);
             Configuration.Current.AddRecentAccount(path);
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);
@@ -136,7 +138,10 @@ public class MainWindowController
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
+            if(showOpenedNotification)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
+            }
         }
     }
 
@@ -145,4 +150,15 @@ public class MainWindowController
     /// </summary>
     /// <param name="index">int</param>
     public void CloseAccount(int index) => OpenAccounts.RemoveAt(index);
+
+    /// <summary>
+    /// Occurs when a transfer is sent from an account
+    /// </summary>
+    /// <param name="transfer">The transfer sent</param>
+    private async void OnTransferSent(object? sender, Transfer transfer)
+    {
+        AddAccount(transfer.DestinationAccountPath, false);
+        var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
+        await controller.ReceiveTransferAsync(transfer);
+    }
 }

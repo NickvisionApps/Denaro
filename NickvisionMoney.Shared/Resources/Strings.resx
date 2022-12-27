@@ -359,6 +359,14 @@
 		<value>Unable to export account as CSV.</value>
 	</data>
 
+	<data name="Transfer.To" xml:space="preserve">
+		<value>Transfer To {0}</value>
+	</data>
+
+	<data name="Transfer.From" xml:space="preserve">
+		<value>Transfer From {0}</value>
+	</data>
+
 	<!--TransactionRow-->
 	<data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Edit Transaction</value>
