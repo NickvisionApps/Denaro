@@ -357,6 +357,7 @@ public sealed partial class AccountView : UserControl
         var fileSavePicker = new FileSavePicker();
         _initializeWithWindow(fileSavePicker);
         fileSavePicker.FileTypeChoices.Add("CSV", new List<string>() { ".csv" });
+        fileSavePicker.FileTypeChoices.Add("PDF", new List<string>() { ".pdf" });
         fileSavePicker.SuggestedFileName = _controller.AccountTitle;
         fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
         var file = await fileSavePicker.PickSaveFileAsync();
