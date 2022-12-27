@@ -177,6 +177,7 @@ public partial class TransactionDialog
         _boxAmount.Append(_lblCurrency);
         _txtAmount = Gtk.Entry.New();
         _txtAmount.SetPlaceholderText(_controller.Localizer["Amount", "Placeholder"]);
+        _txtAmount.SetInputPurpose(Gtk.InputPurpose.Number);
         _boxAmount.Append(_txtAmount);
         _rowAmount.AddSuffix(_boxAmount);
         _grpMain.Add(_rowAmount);
