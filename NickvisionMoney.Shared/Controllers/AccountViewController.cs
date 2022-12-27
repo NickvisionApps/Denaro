@@ -318,6 +318,12 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Creates a new TransferDialogController
+    /// </summary>
+    /// <returns>The new TransferDialogController</returns>
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), Localizer);
+
+    /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
     /// </summary>
     public async Task RunRepeatTransactionsAsync()
