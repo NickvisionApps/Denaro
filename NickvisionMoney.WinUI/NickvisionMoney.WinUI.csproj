@@ -28,6 +28,7 @@
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\PreferencesPage.xaml" />
     <None Remove="Views\TransactionDialog.xaml" />
+    <None Remove="Views\TransferDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\org.nickvision.money.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\TransferDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\TransactionDialog.xaml">

@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -308,15 +309,22 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void TransferMoney(object? sender, RoutedEventArgs e)
     {
-        var contentDialog = new ContentDialog()
+        if(_controller.AccountTotal > 0)
         {
-            Title = "TODO",
-            Content = "Transfer money not implemented yet.",
-            CloseButtonText = "OK",
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
-        };
-        await contentDialog.ShowAsync();
+            var transferController = _controller.CreateTransferDialogController();
+            var transferDialog = new TransferDialog(transferController, _initializeWithWindow)
+            {
+                XamlRoot = Content.XamlRoot
+            };
+            if (await transferDialog.ShowAsync())
+            {
+                await _controller.SendTransferAsync(transferController.Transfer);
+            }
+        }
+        else
+        {
+            _controller.SendNotification(_controller.Localizer["NoMoneyToTransfer"], NotificationSeverity.Error);
+        }
     }
 
     /// <summary>

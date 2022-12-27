@@ -1,0 +1,31 @@
+<ContentDialog
+    x:Class="NickvisionMoney.WinUI.Views.TransferDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:nickvision="using:NickvisionMoney.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Primary">
+
+    <StackPanel Spacing="6" Width="400">
+        <TextBlock Name="LblDescription" HorizontalAlignment="Stretch" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+
+        <wct:DockPanel HorizontalAlignment="Stretch" Margin="0,10,0,0" LastChildFill="True">
+            <Button x:Name="BtnSelectAccount" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectAccount">
+                <Button.Content>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>
+                </Button.Content>
+            </Button>
+            
+            <TextBox Name="TxtDestinationAccount" wct:DockPanel.Dock="Left" IsReadOnly="True"/>
+        </wct:DockPanel>
+
+        <TextBox Name="TxtAmount" HorizontalAlignment="Stretch"/>
+
+        <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+    </StackPanel>
+</ContentDialog>
