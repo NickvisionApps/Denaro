@@ -502,7 +502,7 @@
 	</data>
 
 	<data name="DestinationAccount.Field" xml:space="preserve">
-		<value>Transfer Account</value>
+		<value>Destination Account</value>
 	</data>
 
 	<data name="DestinationAccount.Placeholder" xml:space="preserve">
