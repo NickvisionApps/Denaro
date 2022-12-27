@@ -356,11 +356,11 @@
 	</data>
 
 	<data name="Exported" xml:space="preserve">
-		<value>Exported account to CSV successfully.</value>
+		<value>Exported account to file successfully.</value>
 	</data>
 
 	<data name="UnableToExport" xml:space="preserve">
-		<value>Unable to export account as CSV.</value>
+		<value>Unable to export account to file.</value>
 	</data>
 
 	<data name="Transfer.To" xml:space="preserve">

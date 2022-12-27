@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -463,15 +466,16 @@ public class Account : IDisposable
         {
             return -1;
         }
-        if(System.IO.Path.GetExtension(path) == ".csv")
+        var extension = System.IO.Path.GetExtension(path);
+        if(extension == ".csv")
         {
             return await ImportFromCSVAsync(path);
         }
-        else if(System.IO.Path.GetExtension(path) == ".ofc")
+        else if(extension == ".ofc")
         {
             return await ImportFromOFXAsync(path);
         }
-        else if(System.IO.Path.GetExtension(path) == ".qif")
+        else if(extension == ".qif")
         {
             return await ImportFromQIFAsync(path);
         }
@@ -479,11 +483,34 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Exports the account to a file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
+    /// <returns>True if successful, else false</returns>
+    public bool ExportToFile(string path)
+    {
+        if(!System.IO.Path.Exists(path))
+        {
+            return false;
+        }
+        var extension = System.IO.Path.GetExtension(path);
+        if(extension == ".csv")
+        {
+            return ExportToCSV(path);
+        }
+        else if(extension == ".pdf")
+        {
+            return ExportToPDF(path);
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToCSV(string path)
+    private bool ExportToCSV(string path)
     {
         string result = "";
         result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
@@ -508,6 +535,38 @@ public class Account : IDisposable
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Exports the account to a PDF file
+    /// </summary>
+    /// <param name="path">The path to the PDF file</param>
+    /// <returns>True if successful, else false</returns>
+    private bool ExportToPDF(string path)
+    {
+        Document.Create(container =>
+        {
+            //Page 1
+            container.Page(page =>
+            {
+                //Settings
+                page.Size(PageSizes.Letter);
+                page.Margin(1, Unit.Centimetre);
+                page.PageColor(Colors.White);
+                page.DefaultTextStyle(x => x.FontSize(14));
+                //Header
+                page.Header().Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(32).FontColor(Colors.Blue.Medium);
+                //Content
+
+                //Footer
+                page.Footer().AlignRight().Text(x =>
+                {
+                    x.Span("Page ");
+                    x.CurrentPageNumber();
+                });
+            });
+        }).GeneratePdf(path);
+        return true;
     }
 
     /// <summary>

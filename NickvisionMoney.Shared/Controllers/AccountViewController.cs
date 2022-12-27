@@ -454,11 +454,7 @@ public class AccountViewController
     /// <param name="path">The path of the file</param>
     public void ExportToFile(string path)
     {
-        if(Path.GetExtension(path) != ".csv")
-        {
-            path += ".csv";
-        }
-        if(_account.ExportToCSV(path))
+        if(_account.ExportToFile(path))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
