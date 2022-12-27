@@ -440,10 +440,6 @@
 		<value>No Account Selected</value>
 	</data>
 
-	<data name="SelectAccount" xml:space="preserve">
-		<value>Select Account</value>
-	</data>
-
 	<!--Fields-->
 	<data name="Name.Field" xml:space="preserve">
 		<value>Name</value>
