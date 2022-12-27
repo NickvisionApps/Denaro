@@ -260,6 +260,13 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Sends a notification
+    /// </summary>
+    /// <param name="message">The message of the notification</param>
+    /// <param name="severity">The NotificationSeverity of the notification</param>
+    public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
+
+    /// <summary>
     /// Creates a new TransactionDialogController
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
@@ -412,7 +419,7 @@ public class AccountViewController
     /// <param name="transfer">The transfer to recieve</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
-        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
+        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 

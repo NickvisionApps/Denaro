@@ -429,7 +429,7 @@ public class Account : IDisposable
             Description = description,
             Type = TransactionType.Expense,
             Amount = transfer.Amount,
-            RGBA = Configuration.Current.TransactionDefaultColor
+            RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
     }
@@ -447,7 +447,7 @@ public class Account : IDisposable
             Description = description,
             Type = TransactionType.Income,
             Amount = transfer.Amount,
-            RGBA = Configuration.Current.TransactionDefaultColor
+            RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
     }

@@ -55,7 +55,7 @@ public class TransferDialogController
     public TransferCheckStatus UpdateTransfer(string destPath, string amountString)
     {
         var amount = 0m;
-        if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath))
+        if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Transfer.SourceAccountPath == destPath)
         {
             return TransferCheckStatus.InvalidDestPath;
         }

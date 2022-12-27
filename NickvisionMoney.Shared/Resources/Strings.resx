@@ -330,6 +330,10 @@
 		<value>Are you sure you want to delete this transaction?&#xA;This action is irreversible.</value>
 	</data>
 
+	<data name="NoMoneyToTransfer" xml:space="preserve">
+		<value>This account has no money available to transfer.</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>
@@ -423,6 +427,23 @@
 		<value>Biyearly</value>
 	</data>
 
+	<!--TransferDialog-->
+	<data name="Transfer" xml:space="preserve">
+		<value>Transfer</value>
+	</data>
+
+	<data name="TransferDescription" xml:space="preserve">
+		<value>Transferring money will create an expense transaction with the given amount in this account and an income transaction with the given amount in the account to transfer to.</value>
+	</data>
+
+	<data name="NoAccountSelected" xml:space="preserve">
+		<value>No Account Selected</value>
+	</data>
+
+	<data name="SelectAccount" xml:space="preserve">
+		<value>Select Account</value>
+	</data>
+
 	<!--Fields-->
 	<data name="Name.Field" xml:space="preserve">
 		<value>Name</value>
@@ -482,6 +503,18 @@
 
 	<data name="Color.Field" xml:space="preserve">
 		<value>Color</value>
+	</data>
+
+	<data name="DestinationAccount.Field" xml:space="preserve">
+		<value>Transfer Account</value>
+	</data>
+
+	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+		<value>Select a destination account</value>
+	</data>
+
+	<data name="DestinationAccount.Invalid" xml:space="preserve">
+		<value>Destination Account (Invalid)</value>
 	</data>
 
 	<!--Settings-->
