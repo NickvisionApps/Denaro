@@ -88,6 +88,10 @@
 		<value>Close</value>
 	</data>
 
+	<data name="Save" xml:space="preserve">
+		<value>Save</value>
+	</data>
+
 	<!--Pages-->
 	<data name="Home" xml:space="preserve">
 		<value>Home</value>

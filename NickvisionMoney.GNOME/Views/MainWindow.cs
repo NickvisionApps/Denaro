@@ -340,7 +340,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
@@ -376,7 +376,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["OK"], _controller.Localizer["Cancel"]);
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
