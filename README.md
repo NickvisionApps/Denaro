@@ -20,12 +20,16 @@
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# Screenshots
-<!--![WinUILight](https://user-images.githubusercontent.com/17648453/207794202-2ec536e0-106c-451d-b380-2091c2db96bf.png)
-![WinUIDark](https://user-images.githubusercontent.com/17648453/207794094-f6e371b0-9c0e-4356-b9ea-7cdca7eb3b05.png)-->
+# GNOME Screenshots
 ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
 ![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
 <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='350px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='350px'></p>
+
+# WinUI Screenshots
+![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
+![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
+![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
+![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
 
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
