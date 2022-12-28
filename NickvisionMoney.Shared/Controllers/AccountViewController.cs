@@ -419,7 +419,7 @@ public class AccountViewController
     /// <param name="transfer">The transfer to recieve</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
-        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
+        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.SourceAccountPath)));
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 
