@@ -34,6 +34,7 @@
             "build-commands": [
                 "mkdir -p /app/opt/org.nickvision.money",
                 "dotnet publish NickvisionMoney.GNOME --self-contained true -o /app/opt/org.nickvision.money",
+                "ln -sf /usr/lib/$(uname -m)-linux-gnu/libadwaita-1.so.0 /app/opt/org.nickvision.money/libadwaita-1.so",
                 "bash NickvisionMoney.GNOME/install_extras.sh /app"
             ],
             "sources": [
