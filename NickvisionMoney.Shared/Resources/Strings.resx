@@ -620,4 +620,8 @@
 	<data name="AccountActions.GTK" xml:space="preserve">
 		<value>Actions</value>
 	</data>
+
+	<data name="AccountFileFilter.GTK" xml:space="preserve">
+		<value>Money Account (*.nmoney)</value>
+	</data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -421,6 +422,10 @@ public partial class AccountView
         var actNewGroup = Gio.SimpleAction.New("newGroup", null);
         actNewGroup.OnActivate += NewGroup;
         actionMap.AddAction(actNewGroup);
+        //Transfer Action
+        var actTransfer = Gio.SimpleAction.New("transferMoney", null);
+        actTransfer.OnActivate += TransferMoney;
+        actionMap.AddAction(actTransfer);
         //Export Action
         var actExport = Gio.SimpleAction.New("exportToFile", null);
         actExport.OnActivate += ExportToFile;
@@ -712,6 +717,23 @@ public partial class AccountView
         foreach(var row in _transactionRows)
         {
             row.IsSmall = e.SmallWidth;
+        }
+    }
+
+    private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
+    {
+        if(_controller.AccountTotal > 0)
+        {
+            var transferController = _controller.CreateTransferDialogController();
+            var transferDialog = new TransferDialog(transferController, _parentWindow);
+            if(transferDialog.Run())
+            {
+                await _controller.SendTransferAsync(transferController.Transfer);
+            }
+        }
+        else
+        {
+            _controller.SendNotification(_controller.Localizer["NoMoneyToTransfer"], NotificationSeverity.Error);
         }
     }
 
