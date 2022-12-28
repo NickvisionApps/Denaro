@@ -1,0 +1,40 @@
+<UserControl
+    x:Class="NickvisionMoney.WinUI.Controls.TransactionRow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionMoney.WinUI.Controls"
+    xmlns:nickvision="using:NickvisionMoney.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d">
+
+    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+        <StackPanel Margin="12" Orientation="Horizontal" Spacing="6">
+            <Button x:Name="BtnId" Width="40" Height="40" CornerRadius="20" Click="Edit"/>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock x:Name="LblName"/>
+
+                <TextBlock x:Name="LblDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>
+            </StackPanel>
+
+            <StackPanel Margin="40,0,0,0" Orientation="Horizontal" Spacing="6">
+                <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
+
+                <Button x:Name="BtnEdit" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
+                    </Button.Content>
+                </Button>
+
+                <Button x:Name="BtnDelete" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
