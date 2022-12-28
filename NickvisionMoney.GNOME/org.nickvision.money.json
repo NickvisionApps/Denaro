@@ -62,7 +62,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/nlogozzo/NickvisionMoney.git",
-                    "branch": "csharp"
+                    "tag": "2023.1.0-beta1"
                 }
             ]
         }
