@@ -563,10 +563,6 @@
 	</data>
 
 	<!--Shortcuts Dialog-->
-	<data name="Folder.Shortcut" xml:space="preserve">
-		<value>Folder</value>
-	</data>
-
 	<data name="Application.Shortcut" xml:space="preserve">
 		<value>Application</value>
 	</data>

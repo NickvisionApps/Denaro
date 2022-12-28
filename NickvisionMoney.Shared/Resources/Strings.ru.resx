@@ -563,10 +563,6 @@
 	</data>
 
 	<!--Shortcuts Dialog-->
-	<data name="Folder.Shortcut" xml:space="preserve">
-		<value>Папка</value>
-	</data>
-
 	<data name="Application.Shortcut" xml:space="preserve">
 		<value>Приложение</value>
 	</data>
