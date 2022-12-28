@@ -557,5 +557,5 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
-    private void OnWidthChanged() => WidthChanged?.Invoke(this, new WidthChangedEventArgs(DefaultWidth < 450));
+    public void OnWidthChanged() => WidthChanged?.Invoke(this, new WidthChangedEventArgs(DefaultWidth < 450));
 }

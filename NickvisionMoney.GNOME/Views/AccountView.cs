@@ -446,6 +446,7 @@ public partial class AccountView
         _flap.AddController(_shortcutController);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
+        _parentWindow.OnWidthChanged();
     }
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
