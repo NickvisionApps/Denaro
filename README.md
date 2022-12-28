@@ -70,3 +70,7 @@ When you're done, create a pull request to the project.
 
 # Special Thanks
 - [daudix-UFO](https://github.com/daudix-UFO) for our application icons
+
+# Code of Conduct
+
+This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
