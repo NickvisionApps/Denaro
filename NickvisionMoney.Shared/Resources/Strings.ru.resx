@@ -348,11 +348,11 @@
 	</data>
 
 	<data name="Imported" xml:space="preserve">
-		<value>Импортирована {0} транзакция из файла.</value>
+		<value>Импортировано транзакций из файла: {0}.</value>
 	</data>
 
 	<data name="Imported.Plural" xml:space="preserve">
-		<value>Импортировано {0} транзакций из файла.</value>
+		<value>Импортировано транзакций из файла: {0}.</value>
 	</data>
 
 	<data name="UnableToImport" xml:space="preserve">
