@@ -41,6 +41,10 @@
       <caption>OpenAccount</caption>
       <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
     </screenshot>
+    <screenshot>
+      <caption>CompactMode</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
   <project_group>Nickvision</project_group>

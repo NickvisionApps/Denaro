@@ -25,6 +25,7 @@
 ![WinUIDark](https://user-images.githubusercontent.com/17648453/207794094-f6e371b0-9c0e-4356-b9ea-7cdca7eb3b05.png)-->
 ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
 ![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
+![GNOMETransaction](NickvisionMoney.GNOME/Screenshots/Transaction.png)![GNOMECompactMode](NickvisionMoney.GNOME/Screenshots/CompactMode.png)
 
 # GNOME Theming
 
