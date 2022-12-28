@@ -489,10 +489,6 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool ExportToFile(string path)
     {
-        if(!System.IO.Path.Exists(path))
-        {
-            return false;
-        }
         var extension = System.IO.Path.GetExtension(path);
         if(extension == ".csv")
         {
