@@ -74,6 +74,7 @@ public partial class TransferDialog
     private readonly Gtk.Label _lblSelectedAccount;
     private readonly Gtk.Button _btnSelectAccount;
     private readonly Gtk.Box _boxSelectedAccount;
+    private readonly Adw.Clamp _clampSelectedAccount;
     private readonly Gtk.Box _boxTransferAccount;
     private readonly Gtk.Label _lblCurrency;
     private readonly Gtk.Entry _txtAmount;
@@ -108,6 +109,7 @@ public partial class TransferDialog
         //Transfer Account Label
         _lblSelectedAccount = Gtk.Label.New(_controller.Localizer["NoAccountSelected"]);
         _lblSelectedAccount.SetValign(Gtk.Align.Center);
+        _lblSelectedAccount.SetEllipsize(Pango.EllipsizeMode.Start);
         _lblSelectedAccount.SetMarginStart(20);
         //Select Account Button
         _btnSelectAccount = Gtk.Button.NewFromIconName("document-open-symbolic");
@@ -120,11 +122,15 @@ public partial class TransferDialog
         _boxSelectedAccount.SetHalign(Gtk.Align.Center);
         _boxSelectedAccount.Append(_lblSelectedAccount);
         _boxSelectedAccount.Append(_btnSelectAccount);
+        //Selected Account Clamp
+        _clampSelectedAccount = Adw.Clamp.New();
+        _clampSelectedAccount.SetMaximumSize(280);
+        _clampSelectedAccount.SetChild(_boxSelectedAccount);
         //Transfer Account Box
         _boxTransferAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxTransferAccount.AddCssClass("card");
         _boxTransferAccount.Append(_lblDestination);
-        _boxTransferAccount.Append(_boxSelectedAccount);
+        _boxTransferAccount.Append(_clampSelectedAccount);
         _boxMain.Append(_boxTransferAccount);
         //Amount
         _lblCurrency = Gtk.Label.New(NumberFormatInfo.CurrentInfo.CurrencySymbol);
