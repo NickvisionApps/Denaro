@@ -617,6 +617,10 @@
 		<value>New</value>
 	</data>
 
+	<data name="CloseAccount.GTK" xml:space="preserve">
+		<value>Close Account</value>
+	</data>
+
 	<data name="AccountActions.GTK" xml:space="preserve">
 		<value>Actions</value>
 	</data>

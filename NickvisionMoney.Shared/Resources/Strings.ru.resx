@@ -617,6 +617,10 @@
 		<value>Новый</value>
 	</data>
 
+	<data name="CloseAccount.GTK" xml:space="preserve">
+		<value>Закрыть счёт</value>
+	</data>
+
 	<data name="AccountActions.GTK" xml:space="preserve">
 		<value>Действия</value>
 	</data>
