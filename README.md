@@ -23,8 +23,8 @@
 # Screenshots
 <!--![WinUILight](https://user-images.githubusercontent.com/17648453/207794202-2ec536e0-106c-451d-b380-2091c2db96bf.png)
 ![WinUIDark](https://user-images.githubusercontent.com/17648453/207794094-f6e371b0-9c0e-4356-b9ea-7cdca7eb3b05.png)-->
-![GNOMELight](https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
-![GNOMEDark](https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
+![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
+![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
 
 # GNOME Theming
 
