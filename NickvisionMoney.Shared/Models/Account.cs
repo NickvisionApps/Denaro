@@ -551,9 +551,15 @@ public class Account : IDisposable
                 page.PageColor(Colors.White);
                 page.DefaultTextStyle(x => x.FontSize(14));
                 //Header
-                page.Header().Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(32).FontColor(Colors.Blue.Medium);
+                page.Header()
+                    .Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(32).FontColor(Colors.Blue.Medium);
                 //Content
+                page.Content()
+                    .PaddingHorizontal(1, Unit.Centimetre).PaddingVertical(1, Unit.Centimetre)
+                    .Column(x =>
+                    {
 
+                    });
                 //Footer
                 page.Footer().AlignRight().Text(x =>
                 {
