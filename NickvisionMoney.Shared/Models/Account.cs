@@ -552,13 +552,42 @@ public class Account : IDisposable
                 page.DefaultTextStyle(x => x.FontSize(14));
                 //Header
                 page.Header()
-                    .Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(32).FontColor(Colors.Blue.Medium);
+                    .Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(26).FontColor(Colors.Blue.Medium);
                 //Content
-                page.Content()
-                    .PaddingHorizontal(1, Unit.Centimetre).PaddingVertical(1, Unit.Centimetre)
-                    .Column(x =>
+                page.Content().PaddingVertical(0.5f, Unit.Centimetre)
+                    .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
                     {
-
+                        //Columns
+                        tbl.ColumnsDefinition(x =>
+                        {
+                            //ID, Date, Description, Type, Repeat Interval, Amount
+                            x.ConstantColumn(30);
+                            x.ConstantColumn(90);
+                            x.RelativeColumn();
+                            x.ConstantColumn(70);
+                            x.ConstantColumn(110);
+                            x.RelativeColumn();
+                        });
+                        tbl.Header(x =>
+                        {
+                            x.Cell().Text("ID").SemiBold();
+                            x.Cell().Text("Date").SemiBold();
+                            x.Cell().Text("Description").SemiBold();
+                            x.Cell().Text("Type").SemiBold();
+                            x.Cell().Text("Repeat Interval").SemiBold();
+                            x.Cell().AlignRight().Text("Amount").SemiBold();
+                        });
+                        var i = 0;
+                        foreach(var pair in Transactions)
+                        {
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Date.ToString("d"));
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C"));
+                            i++;
+                        }
                     });
                 //Footer
                 page.Footer().AlignRight().Text(x =>
