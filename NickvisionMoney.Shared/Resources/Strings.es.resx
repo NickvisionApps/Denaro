@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!--Use: &#xA; for newline-->
+
+	<data name="Description" xml:space="preserve">
+		<value>Un gestor de finanzas personales.</value>
+	</data>
+
+	<data name="Version" xml:space="preserve">
+		<value>Versión: {0}</value>
+	</data>
+
+	<data name="About" xml:space="preserve">
+		<value>Acerca de {0}</value>
+	</data>
+
+	<data name="Changelog" xml:space="preserve">
+		<value>Registro de cambios</value>
+	</data>
+
+	<!--Credits-->
+	<data name="Credits" xml:space="preserve">
+		<value>Créditos</value>
+	</data>
+
+	<data name="Developers.Credits" xml:space="preserve">
+		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contribuidores en GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+	</data>
+
+	<data name="Designers.Credits" xml:space="preserve">
+		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Fyodor Sobolev https://github.com/fsobolev</value>
+	</data>
+
+	<data name="Artists.Credits" xml:space="preserve">
+		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>David Lapshin https://github.com/daudix-UFO</value>
+	</data>
+
+	<data name="Translators.Credits" xml:space="preserve">
+		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Óscar Fernández Díaz https://github.com/oscfdezdz</value>
+	</data>
+
+	<!--Actions-->
+	<data name="OK" xml:space="preserve">
+		<value>Vale</value>
+	</data>
+
+	<data name="Yes" xml:space="preserve">
+		<value>Sí</value>
+	</data>
+
+	<data name="No" xml:space="preserve">
+		<value>No</value>
+	</data>
+
+	<data name="Cancel" xml:space="preserve">
+		<value>Cancelar</value>
+	</data>
+
+	<data name="New" xml:space="preserve">
+		<value>Nueva</value>
+	</data>
+
+	<data name="Open" xml:space="preserve">
+		<value>Abrir</value>
+	</data>
+
+	<data name="Close" xml:space="preserve">
+		<value>Cerrar</value>
+	</data>
+
+	<data name="Save" xml:space="preserve">
+		<value>Guardar</value>
+	</data>
+
+	<!--Pages-->
+	<data name="Home" xml:space="preserve">
+		<value>Inicio</value>
+	</data>
+
+	<data name="Account" xml:space="preserve">
+		<value>Cuenta</value>
+	</data>
+
+	<data name="Settings" xml:space="preserve">
+		<!--Mostly used in WinUI-->
+		<value>Configuración</value>
+	</data>
+
+	<data name="Preferences" xml:space="preserve">
+		<!--Mostly used in GNOME-->
+		<value>Preferencias</value>
+	</data>
+
+	<data name="KeyboardShortcuts" xml:space="preserve">
+		<value>Atajos del teclado</value>
+	</data>
+
+	<!--MainWindow-->
+	<data name="NickvisionMoneyAccount" xml:space="preserve">
+		<value>Cuenta bancaria de Nickvision</value>
+	</data>
+
+	<data name="NewAccount" xml:space="preserve">
+		<value>Cuenta nueva</value>
+	</data>
+
+	<data name="NewAccount.Tooltip" xml:space="preserve">
+		<value>Cuenta nueva (Ctrl+N)</value>
+	</data>
+
+	<data name="UnableToOverride" xml:space="preserve">
+		<value>No se puede anular una cuenta abierta.</value>
+	</data>
+
+	<data name="OpenAccount" xml:space="preserve">
+		<value>Abrir cuenta</value>
+	</data>
+
+	<data name="OpenAccount.Tooltip" xml:space="preserve">
+		<value>Abrir cuenta (Ctrl+O)</value>
+	</data>
+
+	<data name="NoAccountOpened" xml:space="preserve">
+		<value>Ninguna cuenta abierta</value>
+	</data>
+
+	<data name="NoAccountDescription" xml:space="preserve">
+		<value>Cree o abra una cuenta para empezar. También puede arrastrar un archivo a la aplicación desde el explorador de archivos.</value>
+	</data>
+
+	<data name="RecentAccounts" xml:space="preserve">
+		<value>Cuentas recientes</value>
+	</data>
+
+	<data name="NoRecentAccounts" xml:space="preserve">
+		<value>Sin cuentas recientes</value>
+	</data>
+
+	<data name="SelectAccount" xml:space="preserve">
+		<value>Seleccionar cuenta</value>
+	</data>
+
+	<data name="SelectAccountDescription" xml:space="preserve">
+		<value>Seleccione una cuenta para verla.</value>
+	</data>
+
+	<!--MainWindowController-->
+	<data name="Greeting.Generic" xml:space="preserve">
+		<value>¡Buen día!</value>
+	</data>
+
+	<data name="Greeting.Morning" xml:space="preserve">
+		<value>¡Buenos días!</value>
+	</data>
+
+	<data name="Greeting.Afternoon" xml:space="preserve">
+		<value>¡Buenas tardes!</value>
+	</data>
+
+	<data name="Greeting.Evening" xml:space="preserve">
+		<value>¡Buenas noches!</value>
+	</data>
+
+	<data name="Greeting.Night" xml:space="preserve">
+		<value>¡Buenos días!</value>
+	</data>
+
+	<data name="AccountOpenedAlready" xml:space="preserve">
+		<value>Esta cuenta ya está abierta.</value>
+	</data>
+
+	<!--AccountView-->
+	<data name="NewTransaction" xml:space="preserve">
+		<value>Transacción nueva</value>
+	</data>
+
+	<data name="NewTransaction.Short" xml:space="preserve">
+		<value>Nueva</value>
+	</data>
+
+	<data name="NewTransaction.Tooltip" xml:space="preserve">
+		<value>Transacción nueva (Ctrl+N)</value>
+	</data>
+
+	<data name="NewGroup" xml:space="preserve">
+		<value>Grupo nuevo</value>
+	</data>
+
+	<data name="NewGroup.Short" xml:space="preserve">
+		<value>Nuevo</value>
+	</data>
+
+	<data name="NewGroup.Tooltip" xml:space="preserve">
+		<value>Grupo nuevo (Ctrl+Shift+N)</value>
+	</data>
+
+	<data name="TransferMoney" xml:space="preserve">
+		<value>Transferir dinero</value>
+	</data>
+
+	<data name="TransferMoney.Tooltip" xml:space="preserve">
+		<value>Transferir dinero (Ctrl+T)</value>
+	</data>
+
+	<data name="ImportFromFile" xml:space="preserve">
+		<value>Importar desde archivo</value>
+	</data>
+
+	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+		<value>Importar desde archivo (Ctrl+I)</value>
+	</data>
+
+	<data name="ExportToFile" xml:space="preserve">
+		<value>Exportar a archivo</value>
+	</data>
+
+	<data name="ExportToFile.Tooltip" xml:space="preserve">
+		<value>Exportar a archivo (Ctrl+E)</value>
+	</data>
+
+	<data name="Overview" xml:space="preserve">
+		<value>Resumen</value>
+	</data>
+
+	<data name="Total" xml:space="preserve">
+		<value>Total</value>
+	</data>
+
+	<data name="Income" xml:space="preserve">
+		<value>Ingresos</value>
+	</data>
+
+	<data name="Expense" xml:space="preserve">
+		<value>Gastos</value>
+	</data>
+
+	<data name="Groups" xml:space="preserve">
+		<value>Grupos</value>
+	</data>
+
+	<data name="Transactions" xml:space="preserve">
+		<value>Transacciones</value>
+	</data>
+
+	<data name="NoTransactionsTitle" xml:space="preserve">
+		<value>Sin transacciones</value>
+	</data>
+
+	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+		<value>No se han encontrado transacciones</value>
+	</data>
+
+	<data name="NoTransactionsDescription" xml:space="preserve">
+		<value>Añadir una transacción nueva o importar transacciones desde un archivo.</value>
+	</data>
+
+	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+		<value>Ninguna transacción coincide con los filtros especificados.</value>
+	</data>
+
+	<data name="SortFirstLast" xml:space="preserve">
+		<value>Ordenar del primero al último</value>
+	</data>
+
+	<data name="SortLastFirst" xml:space="preserve">
+		<value>Ordenar del último al primero</value>
+	</data>
+
+	<data name="Filters" xml:space="preserve">
+		<value>Filtros</value>
+	</data>
+
+	<data name="ResetFilters.Overview" xml:space="preserve">
+		<value>Restablecer filtros</value>
+	</data>
+
+	<data name="ResetFilters.Groups" xml:space="preserve">
+		<value>Restablecer filtros de grupos</value>
+	</data>
+
+	<data name="ResetFilters.Dates" xml:space="preserve">
+		<value>Restablecer filtros de fechas</value>
+	</data>
+
+	<data name="Calendar" xml:space="preserve">
+		<value>Calendario</value>
+	</data>
+
+	<data name="SelectRange" xml:space="preserve">
+		<value>Seleccionar intervalo</value>
+	</data>
+
+	<data name="Start.DateRange" xml:space="preserve">
+		<value>Inicio</value>
+	</data>
+
+	<data name="End.DateRange" xml:space="preserve">
+		<value>Fin</value>
+	</data>
+
+	<data name="DeleteGroup" xml:space="preserve">
+		<value>¿Eliminar grupo?</value>
+	</data>
+
+	<data name="DeleteGroupDescription" xml:space="preserve">
+		<value>¿Está seguro de que desea eliminar este grupo?&#xA;Esta acción es irreversible.</value>
+	</data>
+
+	<data name="DeleteTransaction" xml:space="preserve">
+		<value>¿Eliminar transacción?</value>
+	</data>
+
+	<data name="DeleteTransactionDescription" xml:space="preserve">
+		<value>¿Está seguro de que desea eliminar esta transacción?&#xA;Esta acción es irreversible.</value>
+	</data>
+
+	<data name="NoMoneyToTransfer" xml:space="preserve">
+		<value>Esta cuenta no tiene dinero disponible para transferir.</value>
+	</data>
+
+	<!--AccountViewController-->
+	<data name="Ungrouped" xml:space="preserve">
+		<value>Sin agrupar</value>
+	</data>
+
+	<data name="UngroupedDescription" xml:space="preserve">
+		<value>Transacciones sin grupo</value>
+	</data>
+		
+	<data name="Imported" xml:space="preserve">
+		<value>Importada {0} transacción del archivo.</value>
+	</data>
+
+	<data name="Imported.Plural" xml:space="preserve">
+		<value>Importadas {0} transacciones del archivo.</value>
+	</data>
+
+	<data name="UnableToImport" xml:space="preserve">
+		<value>No se ha podido importar información del fichero. Tipo de archivo no compatible.</value>
+	</data>
+
+	<data name="Exported" xml:space="preserve">
+		<value>Cuenta exportada a archivo correctamente.</value>
+	</data>
+
+	<data name="UnableToExport" xml:space="preserve">
+		<value>No se puede exportar la cuenta a un archivo.</value>
+	</data>
+
+	<data name="Transfer.To" xml:space="preserve">
+		<value>Transferir a {0}</value>
+	</data>
+
+	<data name="Transfer.From" xml:space="preserve">
+		<value>Transferir desde {0}</value>
+	</data>
+
+	<!--TransactionRow-->
+	<data name="Edit.TransactionRow" xml:space="preserve">
+		<value>Editar transacción</value>
+	</data>
+
+	<data name="Delete.TransactionRow" xml:space="preserve">
+		<value>Eliminar transacción</value>
+	</data>
+
+	<!--GroupRow-->
+	<data name="Edit.GroupRow" xml:space="preserve">
+		<value>Editar grupo</value>
+	</data>
+
+	<data name="Delete.GroupRow" xml:space="preserve">
+		<value>Eliminar grupo</value>
+	</data>
+
+	<!--GroupDialog-->
+	<data name="Group" xml:space="preserve">
+		<value>Grupo</value>
+	</data>
+
+	<!--TransactionDialog-->
+	<data name="Transaction" xml:space="preserve">
+		<value>Transacción</value>
+	</data>
+
+	<data name="RepeatInterval.Never" xml:space="preserve">
+		<value>Nunca</value>
+	</data>
+
+	<data name="RepeatInterval.Daily" xml:space="preserve">
+		<value>Diario</value>
+	</data>
+
+	<data name="RepeatInterval.Weekly" xml:space="preserve">
+		<value>Semanal</value>
+	</data>
+
+	<data name="RepeatInterval.Monthly" xml:space="preserve">
+		<value>Mensual</value>
+	</data>
+
+	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+		<value>Trimestral</value>
+	</data>
+
+	<data name="RepeatInterval.Yearly" xml:space="preserve">
+		<value>Anual</value>
+	</data>
+
+	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+		<value>Bianual</value>
+	</data>
+
+	<!--TransferDialog-->
+	<data name="Transfer" xml:space="preserve">
+		<value>Transferir</value>
+	</data>
+
+	<data name="TransferDescription" xml:space="preserve">
+		<value>Al transferir dinero se creará una operación de gasto con el importe dado en esta cuenta y una operación de ingreso con el importe dado en la cuenta a la que se va a transferir.</value>
+	</data>
+
+	<data name="NoAccountSelected" xml:space="preserve">
+		<value>Ninguna cuenta seleccionada</value>
+	</data>
+
+	<!--Fields-->
+	<data name="Name.Field" xml:space="preserve">
+		<value>Nombre</value>
+	</data>
+
+	<data name="Name.Placeholder" xml:space="preserve">
+		<value>Introduzca aquí el nombre</value>
+	</data>
+
+	<data name="Name.Empty" xml:space="preserve">
+		<value>Nombre (vacío)</value>
+	</data>
+
+	<data name="Name.Exists" xml:space="preserve">
+		<value>Nombre (existente)</value>
+	</data>
+
+	<data name="Description.Field" xml:space="preserve">
+		<value>Descripción</value>
+	</data>
+
+	<data name="Description.Placeholder" xml:space="preserve">
+		<value>Introduzca aquí la descripción</value>
+	</data>
+
+	<data name="Description.Empty" xml:space="preserve">
+		<value>Descripción (vacía)</value>
+	</data>
+
+	<data name="Amount.Field" xml:space="preserve">
+		<value>Importe</value>
+	</data>
+
+	<data name="Amount.Placeholder" xml:space="preserve">
+		<value>Introduzca aquí el importe</value>
+	</data>
+
+	<data name="Amount.Invalid" xml:space="preserve">
+		<value>Importe (no válido)</value>
+	</data>
+
+	<data name="Date.Field" xml:space="preserve">
+		<value>Fecha</value>
+	</data>
+
+	<data name="TransactionType.Field" xml:space="preserve">
+		<value>Tipo</value>
+	</data>
+
+	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+		<value>Intervalo de repetición</value>
+	</data>
+
+	<data name="Group.Field" xml:space="preserve">
+		<value>Grupo</value>
+	</data>
+
+	<data name="Color.Field" xml:space="preserve">
+		<value>Color</value>
+	</data>
+
+	<data name="DestinationAccount.Field" xml:space="preserve">
+		<value>Cuenta de destino</value>
+	</data>
+
+	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+		<value>Seleccione una cuenta de destino</value>
+	</data>
+
+	<data name="DestinationAccount.Invalid" xml:space="preserve">
+		<value>Cuenta de destino (no válida)</value>
+	</data>
+
+	<!--Settings-->
+	<data name="UserInterface" xml:space="preserve">
+		<value>Interfaz de usuario</value>
+	</data>
+
+	<data name="UserInterfaceDescription" xml:space="preserve">
+		<value>Personalice la interfaz de usuario de la aplicación.</value>
+	</data>
+
+	<data name="Theme" xml:space="preserve">
+		<value>Tema</value>
+	</data>
+
+	<data name="ThemeLight" xml:space="preserve">
+		<value>Claro</value>
+	</data>
+
+	<data name="ThemeDark" xml:space="preserve">
+		<value>Oscuro</value>
+	</data>
+
+	<data name="ThemeSystem" xml:space="preserve">
+		<value>Sistema</value>
+	</data>
+
+	<data name="Colors" xml:space="preserve">
+		<value>Colores</value>
+	</data>
+
+	<data name="ColorsDescription" xml:space="preserve">
+		<value>Personalice los colores usados por Money.</value>
+	</data>
+
+	<data name="TransactionColor" xml:space="preserve">
+		<value>Color predeterminado de la transacción</value>
+	</data>
+
+	<data name="TransferColor" xml:space="preserve">
+		<value>Color predeterminado de la transferencia</value>
+	</data>
+
+	<data name="TransactionColorDescription" xml:space="preserve">
+		<value>Un cambio en esta configuración sólo se aplicará a las transacciones recién añadidas.</value>
+	</data>
+
+	<data name="TransferColorDescription" xml:space="preserve">
+		<value>Un cambio en esta configuración sólo se aplicará a las transferencias nuevas.</value>
+	</data>
+
+	<!--Shortcuts Dialog-->
+	<data name="Application.Shortcut" xml:space="preserve">
+		<value>Aplicación</value>
+	</data>
+
+	<!--WinUI Specific-->
+	<data name="FixErrors.WinUI" xml:space="preserve">
+		<value>Por favor, corrija los errores anteriores.</value>
+	</data>
+
+	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+		<value>Novedades</value>
+	</data>
+
+	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>Desarrolladores:&#xA;{0}&#xA;&#xA;Diseñadores:&#xA;{1}&#xA;&#xA;Artistas:&#xA;{2}&#xA;&#xA;Traductores:&#xA;{3}</value>
+	</data>
+
+	<data name="ThemeDescription.WinUI" xml:space="preserve">
+		<value>Para cambiar el tema es necesario reiniciar la aplicación.</value>
+	</data>
+
+	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+		<value>¿Reiniciar para aplicar el tema?</value>
+	</data>
+
+	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>¿Desea reiniciar {0} para aplicar el tema nuevo?&#xA;Cualquier cambio no guardado se perderá.</value>
+	</data>
+
+	<!--GTK Specific-->
+	<data name="AccountMenu.GTK" xml:space="preserve">
+		<value>Menú de la cuenta</value>
+	</data>
+
+	<data name="ToggleSidebar.GTK" xml:space="preserve">
+		<value>Conmutar barra lateral</value>
+	</data>
+
+	<data name="MainMenu.GTK" xml:space="preserve">
+		<value>Menú principal</value>
+	</data>
+
+	<data name="Recents.GTK" xml:space="preserve">
+		<value>Recientes</value>
+	</data>
+
+	<data name="NewAccountPopover.GTK" xml:space="preserve">
+		<value>Nueva</value>
+	</data>
+
+	<data name="CloseAccount.GTK" xml:space="preserve">
+		<value>Cerrar cuenta</value>
+	</data>
+
+	<data name="AccountActions.GTK" xml:space="preserve">
+		<value>Acciones</value>
+	</data>
+
+	<data name="AccountFileFilter.GTK" xml:space="preserve">
+		<value>Cuenta bancaria (*.nmoney)</value>
+	</data>
+</root>
