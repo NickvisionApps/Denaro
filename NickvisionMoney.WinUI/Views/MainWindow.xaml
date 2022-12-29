@@ -55,7 +55,7 @@
                                 <nickvision:StatusPage.Child>
                                     <StackPanel Margin="0,10,0,0">
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="12">
-                                            <Button x:Name="BtnHomeNewAccount" Width="100" Height="40" Style="{ThemeResource AccentButtonStyle}" Click="NewAccount">
+                                            <Button x:Name="BtnHomeNewAccount" Height="40" Style="{ThemeResource AccentButtonStyle}" Click="NewAccount">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
@@ -69,7 +69,7 @@
                                                 </Button.KeyboardAccelerators>
                                             </Button>
 
-                                            <Button x:Name="BtnHomeOpenAccount" Width="100" Height="40" Click="OpenAccount">
+                                            <Button x:Name="BtnHomeOpenAccount" Height="40" Click="OpenAccount">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>

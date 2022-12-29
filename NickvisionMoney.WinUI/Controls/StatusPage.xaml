@@ -10,9 +10,9 @@
     <StackPanel Spacing="12">
         <FontIcon HorizontalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="60" Glyph="{x:Bind Glyph, Mode=OneWay}"/>
 
-        <TextBlock HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind Title, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Text="{x:Bind Title, Mode=OneWay}"/>
 
-        <TextBlock HorizontalAlignment="Center" Text="{x:Bind Description, Mode=OneWay}"/>
+        <TextBlock HorizontalAlignment="Center" Text="{x:Bind Description, Mode=OneWay}" TextWrapping="WrapWholeWords"/>
 
         <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Child, Mode=OneWay}"/>
     </StackPanel>

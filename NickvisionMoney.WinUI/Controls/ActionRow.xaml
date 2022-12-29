@@ -11,8 +11,8 @@
     mc:Ignorable="d" Margin="6" LastChildFill="False">
 
     <StackPanel wct:DockPanel.Dock="Left" Orientation="Vertical">
-        <TextBlock Text="{x:Bind Title, Mode=OneWay}"/>
+        <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind Title, Mode=OneWay}"/>
 
-        <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" Text="{x:Bind Subtitle, Mode=OneWay}"/>
+        <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords" Text="{x:Bind Subtitle, Mode=OneWay}"/>
     </StackPanel>
 </wct:DockPanel>
