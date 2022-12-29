@@ -35,13 +35,14 @@ public class Program
         Adw.Module.Initialize();
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.FlagsNone);
         _application.OnActivate += OnActivate;
-        if(File.Exists("/usr/share/org.nickvision.money/org.nickvision.money.gresource"))
-        {
-            g_resources_register(g_resource_load(Path.GetFullPath("/usr/share/org.nickvision.money/org.nickvision.money.gresource")));
-        }
-        else
+        try
         {
             var prefix = Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName;
+            g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+        }
+        catch
+        {
+            var prefix = Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName;
             g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
         }
     }
