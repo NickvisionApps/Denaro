@@ -92,7 +92,7 @@ public sealed partial class MainWindow : Window
         NavViewItemHome.Content = _controller.Localizer["Home"];
         NavViewItemAccount.Content = _controller.Localizer["Account"];
         NavViewItemSettings.Content = _controller.Localizer["Settings"];
-        StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xF1DB";
+        StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xE708";
         StatusPageHome.Title = _controller.Greeting;
         StatusPageHome.Description = _controller.Localizer["NoAccountDescription"];
         ToolTipService.SetToolTip(BtnHomeNewAccount, _controller.Localizer["NewAccount", "Tooltip"]);
