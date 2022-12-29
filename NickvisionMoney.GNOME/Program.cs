@@ -2,6 +2,7 @@
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -35,8 +36,19 @@ public class Program
         Adw.Module.Initialize();
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.FlagsNone);
         _application.OnActivate += OnActivate;
-        var prefix = Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName;
-        g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+        var prefixes = new List<string> {
+            Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
+            Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+            "/usr"
+        };
+        foreach(var prefix in prefixes)
+        {
+            if(File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+            {
+                g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+                break;
+            }
+        }
     }
 
     /// <summary>
