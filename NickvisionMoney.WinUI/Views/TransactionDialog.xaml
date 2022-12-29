@@ -11,23 +11,25 @@
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
     DefaultButton="Primary">
 
-    <StackPanel Spacing="6" Width="400">
-        <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="6">
+            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-        <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
+            <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
 
-        <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
+            <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
 
-        <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
+            <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
 
-        <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
+            <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
 
-        <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
+            <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
 
-        <TextBlock x:Name="LblColor"/>
+            <TextBlock x:Name="LblColor"/>
 
-        <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
+            <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
 
-        <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-    </StackPanel>
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+        </StackPanel>
+    </ScrollViewer>
 </ContentDialog>

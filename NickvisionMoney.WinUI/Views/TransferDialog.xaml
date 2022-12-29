@@ -11,21 +11,23 @@
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
     DefaultButton="Primary">
 
-    <StackPanel Spacing="6" Width="400">
-        <TextBlock Name="LblDescription" HorizontalAlignment="Stretch" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="6">
+            <TextBlock Name="LblDescription" HorizontalAlignment="Stretch" Foreground="Gray" TextWrapping="WrapWholeWords"/>
 
-        <wct:DockPanel HorizontalAlignment="Stretch" Margin="0,10,0,0" LastChildFill="True">
-            <Button x:Name="BtnSelectAccount" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectAccount">
-                <Button.Content>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>
-                </Button.Content>
-            </Button>
-            
-            <TextBox Name="TxtDestinationAccount" wct:DockPanel.Dock="Left" IsReadOnly="True"/>
-        </wct:DockPanel>
+            <wct:DockPanel HorizontalAlignment="Stretch" Margin="0,10,0,0" LastChildFill="True">
+                <Button x:Name="BtnSelectAccount" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectAccount">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>
+                    </Button.Content>
+                </Button>
 
-        <TextBox Name="TxtAmount" HorizontalAlignment="Stretch"/>
+                <TextBox Name="TxtDestinationAccount" wct:DockPanel.Dock="Left" IsReadOnly="True"/>
+            </wct:DockPanel>
 
-        <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-    </StackPanel>
+            <TextBox Name="TxtAmount" HorizontalAlignment="Stretch"/>
+
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+        </StackPanel>
+    </ScrollViewer>
 </ContentDialog>

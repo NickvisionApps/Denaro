@@ -11,11 +11,13 @@
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
     DefaultButton="Primary">
 
-    <StackPanel Spacing="6" Width="400">
-        <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="6">
+            <TextBox Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-        <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-        <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-    </StackPanel>
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+        </StackPanel>
+    </ScrollViewer>
 </ContentDialog>
