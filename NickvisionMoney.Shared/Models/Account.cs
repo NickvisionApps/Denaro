@@ -100,6 +100,7 @@ public class Account : IDisposable
         {
             var transaction = new Transaction((uint)readQueryTransactions.GetInt32(0))
             {
+                Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
                 Description = readQueryTransactions.GetString(2),
                 Type = (TransactionType)readQueryTransactions.GetInt32(3),
                 RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
@@ -107,14 +108,6 @@ public class Account : IDisposable
                 GroupId = readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.GetString(7)
             };
-            try
-            {
-                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1));
-            }
-            catch
-            {
-                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false));
-            }
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
@@ -558,7 +551,7 @@ public class Account : IDisposable
     private bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
         foreach (var pair in Transactions)
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
@@ -691,7 +684,7 @@ public class Account : IDisposable
             var date = default(DateOnly);
             try
             {
-                date = DateOnly.Parse(fields[1]);
+                date = DateOnly.Parse(fields[1], new CultureInfo("en-US"));
             }
             catch
             {
@@ -723,7 +716,7 @@ public class Account : IDisposable
             var amount = 0m;
             try
             {
-                amount = decimal.Parse(fields[5]);
+                amount = decimal.Parse(fields[5], NumberStyles.Currency, new CultureInfo("en-US"));
             }
             catch
             {
