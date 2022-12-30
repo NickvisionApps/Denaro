@@ -236,6 +236,7 @@ public partial class AccountView
         //Button Toggle Groups
         _btnToggleGroups = Gtk.ToggleButton.New();
         _btnToggleGroups.AddCssClass("flat");
+        _btnToggleGroups.SetTooltipText(_controller.Localizer["ToggleGroups", "Tooltip"]);
         _btnToggleGroups.OnToggled += OnToggleGroups;
         _btnToggleGroupsContent = Adw.ButtonContent.New();
         _btnToggleGroups.SetChild(_btnToggleGroupsContent);
