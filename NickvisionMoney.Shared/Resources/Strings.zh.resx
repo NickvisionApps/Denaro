@@ -117,7 +117,7 @@
 
 	<!--MainWindow-->
 	<data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision的帳戶</value>
+		<value>Nickvision的軟體--Money的帳戶</value>
 	</data>
 
 	<data name="NewAccount" xml:space="preserve">
@@ -638,6 +638,6 @@
 	</data>
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value>帳戶 (*.nmoney)</value>
+		<value>軟體Money的帳戶 (*.nmoney)</value>
 	</data>
 </root>
