@@ -152,6 +152,20 @@
 
                     <Border wct:DockPanel.Dock="Top" Margin="0,6,0,0" MinHeight="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <Grid>
+                            <Grid.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:Name="MenuNewGroup" Click="NewGroup">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                        </MenuFlyoutItem.Icon>
+
+                                        <MenuFlyoutItem.KeyboardAccelerators>
+                                            <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
+                                        </MenuFlyoutItem.KeyboardAccelerators>
+                                    </MenuFlyoutItem>
+                                </MenuFlyout>
+                            </Grid.ContextFlyout>
+
                             <TextBlock x:Name="LblGroups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                             <ListView x:Name="ListGroups" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,26,0,6" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
@@ -167,6 +181,32 @@
                     </nickvision:ViewStackPage>
 
                     <nickvision:ViewStackPage PageName="Transactions">
+                        <nickvision:ViewStackPage.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Name="MenuNewTransaction" Click="NewTransaction">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="N"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+
+                                <MenuFlyoutSeparator/>
+
+                                <MenuFlyoutItem x:Name="MenuTransferMoney" Click="TransferMoney">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="T"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </nickvision:ViewStackPage.ContextFlyout>
+
                         <Grid>
                             <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
@@ -195,7 +235,7 @@
                                     <GridView.ItemContainerStyle>
                                         <Style TargetType="GridViewItem">
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            
+
                                             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                                         </Style>
                                     </GridView.ItemContainerStyle>

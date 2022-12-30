@@ -38,10 +38,13 @@ public sealed partial class AccountView : UserControl
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
         ToolTipService.SetToolTip(BtnNewTransaction, _controller.Localizer["NewTransaction", "Tooltip"]);
+        MenuNewTransaction.Text = _controller.Localizer["NewTransaction"];
         BtnNewGroup.Label = _controller.Localizer["NewGroup"];
         ToolTipService.SetToolTip(BtnNewGroup, _controller.Localizer["NewGroup", "Tooltip"]);
+        MenuNewGroup.Text = _controller.Localizer["NewGroup"];
         BtnTransferMoney.Label = _controller.Localizer["TransferMoney"];
         ToolTipService.SetToolTip(BtnTransferMoney, _controller.Localizer["TransferMoney", "Tooltip"]);
+        MenuTransferMoney.Text = _controller.Localizer["TransferMoney"];
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
