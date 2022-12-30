@@ -23,18 +23,12 @@
             <TextBlock x:Name="TitleBarTitle" Grid.Column="1" VerticalAlignment="Center" Margin="28,0,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
         </Grid>
 
-        <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" 
+        <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" PaneDisplayMode="Top"
                         IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="260" SelectionChanged="NavView_SelectionChanged">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NavViewItemHome" Tag="Home">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE10F;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-
-                <NavigationViewItem x:Name="NavViewItemAccount" Tag="Account">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -106,10 +100,6 @@
                                     </StackPanel>
                                 </nickvision:StatusPage.Child>
                             </nickvision:StatusPage>
-                        </nickvision:ViewStackPage>
-
-                        <nickvision:ViewStackPage x:Name="PageAccount" PageName="Account">
-                            <nickvision:StatusPage x:Name="StatusPageAccount" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE9F9;"/>
                         </nickvision:ViewStackPage>
 
                         <nickvision:ViewStackPage x:Name="PageOpenAccount" PageName="OpenAccount"/>

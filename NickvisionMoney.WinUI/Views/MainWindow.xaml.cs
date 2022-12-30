@@ -90,7 +90,6 @@ public sealed partial class MainWindow : Window
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         NavViewItemHome.Content = _controller.Localizer["Home"];
-        NavViewItemAccount.Content = _controller.Localizer["Account"];
         NavViewItemSettings.Content = _controller.Localizer["Settings"];
         StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xE708";
         StatusPageHome.Title = _controller.Greeting;
@@ -101,8 +100,6 @@ public sealed partial class MainWindow : Window
         LblBtnHomeOpenAccount.Text = _controller.Localizer["Open"];
         LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
         LblNoRecentAccounts.Text = _controller.Localizer["NoRecentAccounts"];
-        StatusPageAccount.Title = _controller.Localizer["NoAccountOpened"];
-        StatusPageAccount.Description = _controller.Localizer["NoAccountDescription"];
         //Page
         NavViewItemHome.IsSelected = true;
         RecentAccountsChanged(null, EventArgs.Empty);
@@ -234,16 +231,17 @@ public sealed partial class MainWindow : Window
     /// <param name="e">EventArgs</param>
     private void AccountAdded(object? sender, EventArgs e)
     {
-        StatusPageAccount.Title = _controller.Localizer["SelectAccount"];
-        StatusPageAccount.Description = _controller.Localizer["SelectAccountDescription"];
         var newNavItem = new NavigationViewItem()
         {
             Tag = "OpenAccount",
-            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath)
+            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath),
+            Icon = new FontIcon()
+            {
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
+                Glyph = "\uE8C7"
+            }
         };
-        var items = new List<NavigationViewItem>((List<NavigationViewItem>?)NavViewItemAccount.MenuItemsSource ?? new List<NavigationViewItem>()) { newNavItem };
-        NavViewItemAccount.MenuItemsSource = items;
-        NavViewItemAccount.IsExpanded = true;
+        NavView.MenuItems.Add(newNavItem);
         NavView.SelectedItem = newNavItem;
     }
 

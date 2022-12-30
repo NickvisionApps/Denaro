@@ -13,7 +13,7 @@
     <Grid>
         <TextBlock x:Name="LblTitle" Margin="30,30,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
 
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,100,20,10">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,10">
             <StackPanel wct:DockPanel.Dock="Right" Margin="10,0,10,0">
                 <TextBlock x:Name="LblAbout" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
