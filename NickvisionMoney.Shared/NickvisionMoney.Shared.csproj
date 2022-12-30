@@ -19,6 +19,7 @@
   <ItemGroup>
 	<PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.1" />
 	<PackageReference Include="QuestPDF" Version="2022.12.0" />
+	<PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
   </ItemGroup>
 
   <ItemGroup>

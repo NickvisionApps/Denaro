@@ -2,6 +2,8 @@
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -53,7 +55,7 @@ public class Account : IDisposable
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
         var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -67,6 +69,13 @@ public class Account : IDisposable
             var cmdTableTransactionsUpdate2 = _database.CreateCommand();
             cmdTableTransactionsUpdate2.CommandText = "ALTER TABLE transactions ADD COLUMN rgba TEXT";
             cmdTableTransactionsUpdate2.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            var cmdTableTransactionsUpdate3 = _database.CreateCommand();
+            cmdTableTransactionsUpdate3.CommandText = "ALTER TABLE transactions ADD COLUMN receipt TEXT";
+            cmdTableTransactionsUpdate3.ExecuteNonQuery();
         }
         catch { }
         //Get Groups
@@ -99,6 +108,11 @@ public class Account : IDisposable
                 GroupId = readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.GetString(7)
             };
+            var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
+            if (!string.IsNullOrEmpty(receiptString))
+            {
+                transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
+            }
             Transactions.Add(transaction.Id, transaction);
         }
     }
@@ -197,7 +211,14 @@ public class Account : IDisposable
     /// <summary>
     /// Frees resources used by the Account object
     /// </summary>
-    public void Dispose() => _database.Dispose();
+    public void Dispose()
+    {
+        _database.Dispose();
+        foreach(var pair in Transactions)
+        {
+            pair.Value.Dispose();
+        }
+    }
 
     /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
@@ -265,6 +286,7 @@ public class Account : IDisposable
                         Amount = transaction.Amount,
                         GroupId = transaction.GroupId,
                         RGBA = transaction.RGBA,
+                        Receipt = transaction.Receipt
                     };
                     await AddTransactionAsync(newTransaction);
                     transaction.RepeatInterval = TransactionRepeatInterval.Never;
@@ -350,7 +372,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         var cmdAddTransaction = _database.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -359,6 +381,16 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
         cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        if(transaction.Receipt != null)
+        {
+            using var memoryStream = new MemoryStream();
+            transaction.Receipt.Save(memoryStream, new JpegEncoder());
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+        }
+        else
+        {
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
+        }
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
@@ -379,7 +411,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         var cmdUpdateTransaction = _database.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToShortDateString());
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -388,6 +420,16 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
         cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        if (transaction.Receipt != null)
+        {
+            using var memoryStream = new MemoryStream();
+            transaction.Receipt.Save(memoryStream, new JpegEncoder());
+            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+        }
+        else
+        {
+            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
+        }
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions[transaction.Id] = transaction;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using System;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -28,7 +30,7 @@ public enum TransactionRepeatInterval
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Transaction : IComparable<Transaction>
+public class Transaction : IComparable<Transaction>, IDisposable
 {
     private int _groupId;
 
@@ -60,6 +62,10 @@ public class Transaction : IComparable<Transaction>
     /// The RGBA color of the transaction
     /// </summary>
     public string RGBA { get; set; }
+    /// <summary>
+    /// The receipt image for the transaction
+    /// </summary>
+    public Image? Receipt { get; set; }
 
     /// <summary>
     /// Constructs a Transaction
@@ -75,6 +81,8 @@ public class Transaction : IComparable<Transaction>
         Amount = 0m;
         GroupId = -1;
         RGBA = "";
+        Receipt = null;
+        
     }
 
     /// <summary>
@@ -93,6 +101,11 @@ public class Transaction : IComparable<Transaction>
             _groupId = value;
         }
     }
+
+    /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    public void Dispose() => Receipt?.Dispose();
 
     /// <summary>
     /// Gets whether or not an object is equal to this Transaction
