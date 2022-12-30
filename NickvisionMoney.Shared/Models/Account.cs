@@ -100,7 +100,6 @@ public class Account : IDisposable
         {
             var transaction = new Transaction((uint)readQueryTransactions.GetInt32(0))
             {
-                Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
                 Description = readQueryTransactions.GetString(2),
                 Type = (TransactionType)readQueryTransactions.GetInt32(3),
                 RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
@@ -108,6 +107,14 @@ public class Account : IDisposable
                 GroupId = readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.GetString(7)
             };
+            try
+            {
+                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false));
+            }
+            catch
+            {
+                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1));
+            }
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
@@ -413,7 +420,7 @@ public class Account : IDisposable
         var cmdUpdateTransaction = _database.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToShortDateString());
+        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
         cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
         cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
@@ -554,7 +561,7 @@ public class Account : IDisposable
         result += "ID;Date;Description;Type;RepeatInterval;Amount;RGBA;Group;GroupName;GroupDescription\n";
         foreach (var pair in Transactions)
         {
-            result += $"{pair.Value.Id};{pair.Value.Date.ToShortDateString()};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
             if (pair.Value.GroupId != -1)
             {
                 result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
