@@ -234,13 +234,14 @@ public sealed partial class MainWindow : Window
         var newNavItem = new NavigationViewItem()
         {
             Tag = "OpenAccount",
-            Content = Path.GetFileNameWithoutExtension(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath),
+            Content = _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountTitle,
             Icon = new FontIcon()
             {
                 FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
-                Glyph = "\uE8C7"
+                Glyph = "\uE8C7",
             }
         };
+        ToolTipService.SetToolTip(newNavItem, _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath);
         NavView.MenuItems.Add(newNavItem);
         NavView.SelectedItem = newNavItem;
     }
