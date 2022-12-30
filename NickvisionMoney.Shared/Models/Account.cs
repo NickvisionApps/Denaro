@@ -109,11 +109,11 @@ public class Account : IDisposable
             };
             try
             {
-                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false));
+                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1));
             }
             catch
             {
-                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1));
+                transaction.Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false));
             }
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
