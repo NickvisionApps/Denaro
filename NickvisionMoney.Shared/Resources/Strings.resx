@@ -338,6 +338,18 @@
 		<value>This account has no money available to transfer.</value>
 	</data>
 
+	<data name="Hide" xml:space="preserve">
+		<value>Hide</value>
+	</data>
+
+	<data name="Show" xml:space="preserve">
+		<value>Show</value>
+	</data>
+
+	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+		<value>Toggle Groups Visibility</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>

@@ -338,6 +338,18 @@
 		<value>На этом счёте нет средств для перевода.</value>
 	</data>
 
+	<data name="Hide" xml:space="preserve">
+		<value>Скрыть</value>
+	</data>
+
+	<data name="Show" xml:space="preserve">
+		<value>Показать</value>
+	</data>
+
+	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+		<value>Переключить отображение групп</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Несгруппированные</value>
