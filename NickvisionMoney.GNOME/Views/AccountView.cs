@@ -455,7 +455,6 @@ public partial class AccountView
         _flap.AddController(_shortcutController);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
-        OnToggleGroups(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
@@ -506,6 +505,7 @@ public partial class AccountView
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
+            OnToggleGroups(null, EventArgs.Empty);
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
