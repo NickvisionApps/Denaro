@@ -15,19 +15,42 @@
         <StackPanel Spacing="6">
             <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
-            <TextBox x:Name="TxtAmount" HorizontalAlignment="Stretch"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch"/>
 
-            <ComboBox x:Name="CmbType" HorizontalAlignment="Stretch"/>
+                <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+            </Grid>
 
-            <CalendarDatePicker x:Name="CalendarDate" HorizontalAlignment="Stretch"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="CmbRepeatInterval" HorizontalAlignment="Stretch"/>
+                <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch"/>
 
-            <ComboBox x:Name="CmbGroup" HorizontalAlignment="Stretch"/>
+                <ComboBox x:Name="CmbRepeatInterval" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+            </Grid>
 
-            <TextBlock x:Name="LblColor"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch"/>
+                <ComboBox x:Name="CmbGroup" Grid.Column="0" HorizontalAlignment="Stretch"/>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" Spacing="6">
+                    <TextBlock x:Name="LblColor"/>
+
+                    <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32"/>
+                </StackPanel>
+            </Grid>
 
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
