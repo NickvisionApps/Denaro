@@ -338,6 +338,14 @@
 		<value>This account has no money available to transfer.</value>
 	</data>
 
+	<data name="Hide" xml:space="preserve">
+		<value>Hide</value>
+	</data>
+
+	<data name="Show" xml:space="preserve">
+		<value>Show</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>

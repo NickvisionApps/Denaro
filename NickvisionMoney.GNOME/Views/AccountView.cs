@@ -90,6 +90,8 @@ public partial class AccountView
     private readonly Gtk.Button _btnResetOverviewFilter;
     private readonly Adw.PreferencesGroup _grpOverview;
     private readonly Gtk.Box _boxButtonsGroups;
+    private readonly Gtk.ToggleButton _btnToggleGroups;
+    private readonly Adw.ButtonContent _btnToggleGroupsContent;
     private readonly Gtk.Button _btnNewGroup;
     private readonly Adw.ButtonContent _btnNewGroupContent;
     private readonly Gtk.Button _btnResetGroupsFilter;
@@ -231,6 +233,13 @@ public partial class AccountView
         _paneBox.Append(_grpOverview);
         //Group Buttons Box
         _boxButtonsGroups = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        //Button Toggle Groups
+        _btnToggleGroups = Gtk.ToggleButton.New();
+        _btnToggleGroups.AddCssClass("flat");
+        _btnToggleGroups.OnToggled += OnToggleGroups;
+        _btnToggleGroupsContent = Adw.ButtonContent.New();
+        _btnToggleGroups.SetChild(_btnToggleGroupsContent);
+        _boxButtonsGroups.Append(_btnToggleGroups);
         //Button New Group
         _btnNewGroup = Gtk.Button.New();
         _btnNewGroup.AddCssClass("flat");
@@ -446,6 +455,7 @@ public partial class AccountView
         _flap.AddController(_shortcutController);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
+        OnToggleGroups(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
@@ -611,6 +621,29 @@ public partial class AccountView
         if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteGroupAsync(id);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the user presses the button to show/hide groups
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
+    private void OnToggleGroups(object? sender, EventArgs e)
+    {
+        if(_btnToggleGroups.GetActive())
+        {
+            _btnToggleGroupsContent.SetIconName("view-reveal-symbolic");
+            _btnToggleGroupsContent.SetLabel(_controller.Localizer["Show"]);
+        }
+        else
+        {
+            _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
+            _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
+        }
+        foreach(var groupRow in _groupRows)
+        {
+            groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
     }
 
