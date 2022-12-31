@@ -61,9 +61,8 @@
             "sources": [
                 "sources.json",
                 {
-                    "type": "git",
-                    "url": "https://github.com/nlogozzo/NickvisionMoney.git",
-                    "tag": "2023.1.0-beta1"
+                    "type": "dir",
+                    "path": ".."
                 }
             ]
         }
