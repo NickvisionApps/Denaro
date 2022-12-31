@@ -73,7 +73,7 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public void Dispose()
     {
-        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}receipt.jpg";
+        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
         if (Path.Exists(jpgPath))
         {
             File.Delete(jpgPath);
@@ -115,7 +115,7 @@ public class TransactionDialogController : IDisposable
         }
         if(image != null)
         {
-            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}receipt.jpg";
+            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
             await image.SaveAsJpegAsync(jpgPath);
             if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -196,18 +196,11 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="pathToPDF"></param>
     /// <returns></returns>
-    private Image? ConvertPDFToJPEG(string pathToPDF)
+    private Image ConvertPDFToJPEG(string pathToPDF)
     {
-        try
-        {
-            using var library = DocLib.Instance;
-            using var docReader = library.GetDocReader(pathToPDF, new PageDimensions(800, 600));
-            using var pageReader = docReader.GetPageReader(1);
-            return Image.LoadPixelData<Bgra32>(pageReader.GetImage(), 800, 600);
-        }
-        catch
-        {
-            return null;
-        }
+        using var library = DocLib.Instance;
+        using var docReader = library.GetDocReader(pathToPDF, new PageDimensions(1080, 1920));
+        using var pageReader = docReader.GetPageReader(0);
+        return Image.LoadPixelData<Bgra32>(pageReader.GetImage(new NaiveTransparencyRemover(120, 120, 0)), pageReader.GetPageWidth(), pageReader.GetPageHeight());
     }
 }
