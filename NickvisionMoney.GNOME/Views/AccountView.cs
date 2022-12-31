@@ -578,7 +578,7 @@ public partial class AccountView
 
     private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
-        var transactionController = _controller.CreateTransactionDialogController();
+        using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         if(transactionDialog.Run())
         {
@@ -588,7 +588,7 @@ public partial class AccountView
 
     private async void EditTransaction(object? sender, uint id)
     {
-        var transactionController = _controller.CreateTransactionDialogController(id);
+        using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         if(transactionDialog.Run())
         {
