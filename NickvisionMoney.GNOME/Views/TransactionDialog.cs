@@ -1,10 +1,10 @@
 using NickvisionMoney.Shared.Controllers;
-using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -112,8 +112,16 @@ public partial class TransactionDialog
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_chooser_get_file(nint chooser);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
+
     private readonly TransactionDialogController _controller;
+    private string? _receiptPath;
     private readonly nint _dialog;
+    private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
     private readonly Adw.ActionRow _rowDescription;
@@ -122,20 +130,26 @@ public partial class TransactionDialog
     private readonly Gtk.Box _boxAmount;
     private readonly Gtk.Label _lblCurrency;
     private readonly Gtk.Entry _txtAmount;
+    private readonly Adw.ActionRow _rowType;
+    private readonly Gtk.Box _boxType;
     private readonly Gtk.ToggleButton _btnIncome;
     private readonly Gtk.ToggleButton _btnExpense;
-    private readonly Gtk.Box _boxType;
-    private readonly Adw.ActionRow _rowType;
     private readonly Adw.PreferencesGroup _grpDateRepeat;
-    private readonly Gtk.Calendar _calendarDate;
-    private readonly Gtk.Popover _popoverDate;
-    private readonly Gtk.MenuButton _btnDate;
     private readonly Adw.ActionRow _rowDate;
+    private readonly Gtk.Popover _popoverDate;
+    private readonly Gtk.Calendar _calendarDate;
+    private readonly Gtk.MenuButton _btnDate;
     private readonly Adw.ComboRow _rowRepeatInterval;
     private readonly Adw.PreferencesGroup _grpGroupColor;
     private readonly Adw.ComboRow _rowGroup;
-    private readonly Gtk.ColorButton _btnColor;
     private readonly Adw.ActionRow _rowColor;
+    private readonly Gtk.ColorButton _btnColor;
+    private readonly Adw.PreferencesGroup _grpReceipt;
+    private readonly Adw.ActionRow _rowReceipt;
+    private readonly Gtk.Box _btnReceiptButtons;
+    private readonly Gtk.Button _btnReceiptView;
+    private readonly Gtk.Button _btnReceiptDelete;
+    private readonly Gtk.Button _btnReceiptUpload;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -145,8 +159,10 @@ public partial class TransactionDialog
     public TransactionDialog(TransactionDialogController controller, Gtk.Window parentWindow)
     {
         _controller = controller;
+        _receiptPath = null;
+        _parentWindow = parentWindow;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(parentWindow.Handle, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
+        _dialog = adw_message_dialog_new(_parentWindow.Handle, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
         gtk_window_set_default_size(_dialog, 360, -1);
         gtk_window_set_hide_on_close(_dialog, true);
         adw_message_dialog_add_response(_dialog, "cancel", _controller.Localizer["Cancel"]);
@@ -229,7 +245,7 @@ public partial class TransactionDialog
         _boxMain.Append(_grpGroupColor);
         //Group
         _rowGroup = Adw.ComboRow.New();
-        _rowGroup.SetTitle(_controller.Localizer["Group"]);
+        _rowGroup.SetTitle(_controller.Localizer["Group", "Field"]);
         var groups = new List<string> { _controller.Localizer["Ungrouped"] };
         foreach(var group in _controller.Groups)
         {
@@ -245,13 +261,44 @@ public partial class TransactionDialog
         _rowColor.AddSuffix(_btnColor);
         _rowColor.SetActivatableWidget(_btnColor);
         _grpGroupColor.Add(_rowColor);
+        //Group Receipt
+        _grpReceipt = Adw.PreferencesGroup.New();
+        _boxMain.Append(_grpReceipt);
+        //Receipt
+        _btnReceiptView = Gtk.Button.New();
+        _btnReceiptView.SetValign(Gtk.Align.Center);
+        _btnReceiptView.AddCssClass("flat");
+        _btnReceiptView.SetIconName("image-x-generic-symbolic");
+        _btnReceiptView.SetTooltipText(_controller.Localizer["View"]);
+        _btnReceiptView.OnClicked += OnViewReceipt;
+        _btnReceiptDelete = Gtk.Button.New();
+        _btnReceiptDelete.SetValign(Gtk.Align.Center);
+        _btnReceiptDelete.AddCssClass("flat");
+        _btnReceiptDelete.SetIconName("user-trash-symbolic");
+        _btnReceiptDelete.SetTooltipText(_controller.Localizer["Delete"]);
+        _btnReceiptDelete.OnClicked += OnDeleteReceipt;
+        _btnReceiptUpload = Gtk.Button.New();
+        _btnReceiptUpload.SetValign(Gtk.Align.Center);
+        _btnReceiptUpload.AddCssClass("flat");
+        _btnReceiptUpload.SetIconName("document-send-symbolic");
+        _btnReceiptUpload.SetTooltipText(_controller.Localizer["Upload"]);
+        _btnReceiptUpload.OnClicked += OnUploadReceipt;
+        _btnReceiptButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _btnReceiptButtons.Append(_btnReceiptView);
+        _btnReceiptButtons.Append(_btnReceiptDelete);
+        _btnReceiptButtons.Append(_btnReceiptUpload);
+        _rowReceipt = Adw.ActionRow.New();
+        _rowReceipt.SetTitle(_controller.Localizer["Receipt", "Field"]);
+        _rowReceipt.AddSuffix(_btnReceiptButtons);
+        _grpReceipt.Add(_rowReceipt);
         //Layout
         adw_message_dialog_set_extra_child(_dialog, _boxMain.Handle);
         //Load Transaction
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
         _txtDescription.SetText(_controller.Transaction.Description);
-        if(_controller.Transaction.Type == TransactionType.Income)
+        _txtAmount.SetText(_controller.Transaction.Amount.ToString("N2"));
+        if (_controller.Transaction.Type == TransactionType.Income)
         {
             _btnIncome.SetActive(true);
         }
@@ -274,14 +321,15 @@ public partial class TransactionDialog
             gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
         }
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
-        _txtAmount.SetText(_controller.Transaction.Amount.ToString());
+        _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
+        _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);
     }
 
     /// <summary>
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public bool Run()
+    public async Task<bool> RunAsync()
     {
         gtk_widget_show(_dialog);
         gtk_window_set_modal(_dialog, true);
@@ -297,7 +345,7 @@ public partial class TransactionDialog
             var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem();
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = _controller.UpdateTransaction(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (TransactionRepeatInterval)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText());
+            var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (TransactionRepeatInterval)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath);
             if(status != TransactionCheckStatus.Valid)
             {
                 //Reset UI
@@ -316,7 +364,7 @@ public partial class TransactionDialog
                     _rowAmount.AddCssClass("error");
                     _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
                 }
-                return Run();
+                return await RunAsync();
             }
         }
         gtk_window_destroy(_dialog);
@@ -357,5 +405,48 @@ public partial class TransactionDialog
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _btnDate.SetLabel(date.ToString("d"));
+    }
+
+    private async void OnViewReceipt(Gtk.Button sender, EventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
+
+    private void OnDeleteReceipt(Gtk.Button sender, EventArgs e)
+    {
+        _receiptPath = "";
+        _btnReceiptView.SetSensitive(false);
+        _btnReceiptDelete.SetSensitive(false);
+    }
+
+    private void OnUploadReceipt(Gtk.Button sender, EventArgs e)
+    {
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["Receipt", "Field"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+        openFileDialog.SetModal(true);
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.jpg, *.jpeg, *.pdf)");
+        filterAll.AddPattern("*.jpg");
+        filterAll.AddPattern("*.jpeg");
+        filterAll.AddPattern("*.pdf");
+        openFileDialog.AddFilter(filterAll);
+        var filterJpg = Gtk.FileFilter.New();
+        filterJpg.SetName("JPG (*.jpg)");
+        filterJpg.AddPattern("*.jpg");
+        openFileDialog.AddFilter(filterJpg);
+        var filterJpeg = Gtk.FileFilter.New();
+        filterJpeg.SetName("JPEG (*.jpeg)");
+        filterJpeg.AddPattern("*.jpeg");
+        openFileDialog.AddFilter(filterJpeg);
+        var filterPdf = Gtk.FileFilter.New();
+        filterPdf.SetName("PDF (*.pdf)");
+        filterPdf.AddPattern("*.pdf");
+        openFileDialog.AddFilter(filterPdf);
+        openFileDialog.OnResponse += async (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                _receiptPath = path;
+                _btnReceiptView.SetSensitive(true);
+            }
+        };
+        openFileDialog.Show();
     }
 }

@@ -580,7 +580,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        if(await transactionDialog.RunAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
         }
@@ -590,7 +590,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        if(await transactionDialog.RunAsync())
         {
             await _controller.UpdateTransactionAsync(transactionController.Transaction);
         }
@@ -790,10 +790,10 @@ public partial class AccountView
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
         saveFileDialog.AddFilter(filterCsv);
-        // var filterPdf = Gtk.FileFilter.New();
-        // filterPdf.SetName("PDF (*.pdf)");
-        // filterPdf.AddPattern("*.pdf");
-        // saveFileDialog.AddFilter(filterPdf);
+        var filterPdf = Gtk.FileFilter.New();
+        filterPdf.SetName("PDF (*.pdf)");
+        filterPdf.AddPattern("*.pdf");
+        saveFileDialog.AddFilter(filterPdf);
         saveFileDialog.OnResponse += (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
@@ -809,6 +809,12 @@ public partial class AccountView
     {
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
+        filterAll.AddPattern("*.csv");
+        filterAll.AddPattern("*.ofx");
+        filterAll.AddPattern("*.qif");
+        openFileDialog.AddFilter(filterAll);
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
