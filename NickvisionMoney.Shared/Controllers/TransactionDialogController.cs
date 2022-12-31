@@ -201,6 +201,6 @@ public class TransactionDialogController : IDisposable
         using var library = DocLib.Instance;
         using var docReader = library.GetDocReader(pathToPDF, new PageDimensions(1080, 1920));
         using var pageReader = docReader.GetPageReader(0);
-        return Image.LoadPixelData<Bgra32>(pageReader.GetImage(new NaiveTransparencyRemover(120, 120, 0)), pageReader.GetPageWidth(), pageReader.GetPageHeight());
+        return Image.LoadPixelData<Bgra32>(pageReader.GetImage(new NaiveTransparencyRemover(255, 255, 255)), pageReader.GetPageWidth(), pageReader.GetPageHeight());
     }
 }
