@@ -196,7 +196,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => Path.GetFileNameWithoutExtension(x.AccountPath) == (string)((NavigationViewItem)e.SelectedItem).Content)], InitializeWithWindow);
+            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {
