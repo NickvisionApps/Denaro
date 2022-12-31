@@ -77,7 +77,7 @@ public partial class GroupDialog
         adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        g_signal_connect_data(_dialog, "response", (nint sender, [MarshalAs(UnmanagedType.LPStr)] string response, nint data) => _controller.Accepted = response == "ok", IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_dialog, "response", (nint sender, string response, nint data) => _controller.Accepted = response == "ok", IntPtr.Zero, IntPtr.Zero, 0);
         //Preferences Group
         _grpGroup = Adw.PreferencesGroup.New();
         //Name

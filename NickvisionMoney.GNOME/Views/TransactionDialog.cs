@@ -114,6 +114,7 @@ public partial class TransactionDialog
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
     private readonly nint _dialog;
+    private readonly SignalCallback _responseCallback;
     private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
@@ -139,11 +140,11 @@ public partial class TransactionDialog
     private readonly Gtk.ColorButton _btnColor;
     private readonly Adw.PreferencesGroup _grpReceipt;
     private readonly Adw.ActionRow _rowReceipt;
-    private readonly Gtk.MenuButton _btnMenuReceipt;
-    private readonly Gio.SimpleActionGroup _actMapReceipt;
-    private readonly Gio.SimpleAction _actReceiptView;
-    private readonly Gio.SimpleAction _actReceiptDelete;
-    private readonly Gio.SimpleAction _actReceiptUpload;
+    private readonly Gtk.Box _boxReceiptButtons;
+    private readonly Gtk.Button _btnReceiptView;
+    private readonly Gtk.Button _btnReceiptDelete;
+    private readonly Gtk.Button _btnReceiptUpload;
+
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -154,6 +155,7 @@ public partial class TransactionDialog
     {
         _controller = controller;
         _receiptPath = null;
+        _responseCallback = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
         _parentWindow = parentWindow;
         //Dialog Settings
         _dialog = adw_message_dialog_new(_parentWindow.Handle, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
@@ -164,7 +166,7 @@ public partial class TransactionDialog
         adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        g_signal_connect_data(_dialog, "response", (nint sender, string response, nint data) => _controller.Accepted = response == "ok", IntPtr.Zero, IntPtr.Zero, 0);
+        g_signal_connect_data(_dialog, "response", _responseCallback, IntPtr.Zero, IntPtr.Zero, 0);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Main Preferences Group
@@ -261,37 +263,34 @@ public partial class TransactionDialog
         _grpReceipt = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpReceipt);
         //Receipt
-        var menuReceipt = Gio.Menu.New();
-        menuReceipt.Append(_controller.Localizer["View"], "transaction.receiptView");
-        menuReceipt.Append(_controller.Localizer["Delete"], "transaction.receiptDelete");
-        menuReceipt.Append(_controller.Localizer["Upload"], "transaction.receiptUpload");
-        _btnMenuReceipt = Gtk.MenuButton.New();
-        _btnMenuReceipt.SetValign(Gtk.Align.Center);
-        _btnMenuReceipt.AddCssClass("flat");
-        _btnMenuReceipt.SetLabel(_controller.Localizer["Manage"]);
-        _btnMenuReceipt.SetDirection(Gtk.ArrowType.Down);
-        _btnMenuReceipt.SetMenuModel(menuReceipt);
+        _btnReceiptView = Gtk.Button.New();
+        _btnReceiptView.SetValign(Gtk.Align.Center);
+        _btnReceiptView.AddCssClass("flat");
+        _btnReceiptView.SetIconName("image-x-generic-symbolic");
+        _btnReceiptView.SetTooltipText(_controller.Localizer["View"]);
+        _btnReceiptView.OnClicked += OnViewReceipt;
+        _btnReceiptDelete = Gtk.Button.New();
+        _btnReceiptDelete.SetValign(Gtk.Align.Center);
+        _btnReceiptDelete.AddCssClass("flat");
+        _btnReceiptDelete.SetIconName("user-trash-symbolic");
+        _btnReceiptDelete.SetTooltipText(_controller.Localizer["Delete"]);
+        _btnReceiptDelete.OnClicked += OnDeleteReceipt;
+        _btnReceiptUpload = Gtk.Button.New();
+        _btnReceiptUpload.SetValign(Gtk.Align.Center);
+        _btnReceiptUpload.AddCssClass("flat");
+        _btnReceiptUpload.SetIconName("document-send-symbolic");
+        _btnReceiptUpload.SetTooltipText(_controller.Localizer["Upload"]);
+        _btnReceiptUpload.OnClicked += OnUploadReceipt;
+        _boxReceiptButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _boxReceiptButtons.Append(_btnReceiptView);
+        _boxReceiptButtons.Append(_btnReceiptDelete);
+        _boxReceiptButtons.Append(_btnReceiptUpload);
         _rowReceipt = Adw.ActionRow.New();
         _rowReceipt.SetTitle(_controller.Localizer["Receipt", "Field"]);
-        _rowReceipt.AddSuffix(_btnMenuReceipt);
+        _rowReceipt.AddSuffix(_boxReceiptButtons);
         _grpReceipt.Add(_rowReceipt);
         //Layout
         adw_message_dialog_set_extra_child(_dialog, _boxMain.Handle);
-        //Receipt Action Map
-        _actMapReceipt = Gio.SimpleActionGroup.New();
-        _btnMenuReceipt.InsertActionGroup("transaction", _actMapReceipt);
-        //View Receipt Action
-        _actReceiptView = Gio.SimpleAction.New("receiptView", null);
-        _actReceiptView.OnActivate += (sender, e) => OnViewReceipt();
-        _actMapReceipt.AddAction(_actReceiptView);
-        //Delete Receipt Action
-        _actReceiptDelete = Gio.SimpleAction.New("receiptDelete", null);
-        _actReceiptDelete.OnActivate += (sender, e) => OnDeleteReceipt();
-        _actMapReceipt.AddAction(_actReceiptDelete);
-        //Upload Receipt Action
-        _actReceiptUpload = Gio.SimpleAction.New("receiptUpload", null);
-        _actReceiptUpload.OnActivate += (sender, e) => OnUploadReceipt();
-        _actMapReceipt.AddAction(_actReceiptUpload);
         //Load Transaction
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
@@ -320,8 +319,8 @@ public partial class TransactionDialog
             gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
         }
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
-        _actReceiptView.SetEnabled(_controller.Transaction.Receipt != null);
-        _actReceiptDelete.SetEnabled(_controller.Transaction.Receipt != null);
+        _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
+        _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);
     }
 
     /// <summary>
@@ -411,18 +410,18 @@ public partial class TransactionDialog
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private async void OnViewReceipt() => await _controller.OpenReceiptImageAsync(_receiptPath);
+    private async void OnViewReceipt(Gtk.Button sender, EventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
 
     /// <summary>
     /// Occurs when the delete receipt button is clicked
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void OnDeleteReceipt()
+    private void OnDeleteReceipt(Gtk.Button sender, EventArgs e)
     {
         _receiptPath = "";
-        _actReceiptView.SetEnabled(false);
-        _actReceiptDelete.SetEnabled(false);
+        _btnReceiptView.SetSensitive(false);
+        _btnReceiptDelete.SetSensitive(false);
     }
 
     /// <summary>
@@ -430,7 +429,7 @@ public partial class TransactionDialog
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void OnUploadReceipt()
+    private void OnUploadReceipt(Gtk.Button sender, EventArgs e)
     {
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["Receipt", "Field"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
@@ -458,7 +457,7 @@ public partial class TransactionDialog
             {
                 var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
                 _receiptPath = path;
-                _actReceiptView.SetEnabled(true);
+                _btnReceiptView.SetSensitive(true);
             }
         };
         openFileDialog.Show();
