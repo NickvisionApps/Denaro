@@ -70,8 +70,8 @@ public class Program
         mainWindowController.AppInfo.Name = "Nickvision Money";
         mainWindowController.AppInfo.ShortName = "Money";
         mainWindowController.AppInfo.Description = mainWindowController.Localizer["Description"];
-        mainWindowController.AppInfo.Version = "2023.1.0-beta1";
-        mainWindowController.AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</li><li>Added an \"Ungrouped\" row to the groups section to allow filtering transactions that don't belong to a group</li><li>Added the ability to attach a jpg/pdf of a receipt to a transaction</li><li>Made a group's description an optional field</li></ul>";
+        mainWindowController.AppInfo.Version = "2023.1.0-beta2";
+        mainWindowController.AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</li><li>Added an \"Ungrouped\" row to the groups section to allow filtering transactions that don't belong to a group</li><li>Added the ability to attach a jpg/pdf of a receipt to a transaction</li><li>Added the ability to hide the groups section</li><li>Made a group's description an optional field</li></ul>";
         mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
