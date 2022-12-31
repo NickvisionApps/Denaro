@@ -190,7 +190,7 @@ public sealed partial class AccountView : UserControl
     private async void NewTransaction(object? sender, RoutedEventArgs e)
     {
         var transactionController = _controller.CreateTransactionDialogController();
-        var transactionDialog = new TransactionDialog(transactionController)
+        var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
             XamlRoot = Content.XamlRoot
         };
@@ -208,7 +208,7 @@ public sealed partial class AccountView : UserControl
     private async void EditTransaction(object? sender, uint transactionId)
     {
         var transactionController = _controller.CreateTransactionDialogController(transactionId);
-        var transactionDialog = new TransactionDialog(transactionController)
+        var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
             XamlRoot = Content.XamlRoot
         };

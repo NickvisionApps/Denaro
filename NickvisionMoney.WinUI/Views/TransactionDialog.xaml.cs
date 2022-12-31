@@ -6,6 +6,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -15,15 +16,20 @@ namespace NickvisionMoney.WinUI.Views;
 public sealed partial class TransactionDialog : ContentDialog
 {
     private readonly TransactionDialogController _controller;
+    private readonly Action<object> _initializeWithWindow;
+    private string? _receiptPath;
 
     /// <summary>
     /// Constructs a TransactionDialog
     /// </summary>
     /// <param name="controller">The TransactionDialogController</param>
-    public TransactionDialog(TransactionDialogController controller)
+    /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
+    public TransactionDialog(TransactionDialogController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _initializeWithWindow = initializeWithWindow;
+        _receiptPath = null;
         //Localize Strings
         Title = $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}";
         CloseButtonText = _controller.Localizer["Cancel"];
@@ -47,6 +53,10 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbGroup.Header = _controller.Localizer["Group", "Field"];
         CmbGroup.Items.Add(_controller.Localizer["Ungrouped"]);
         LblColor.Text = _controller.Localizer["Color", "Field"];
+        LblReceipt.Text = _controller.Localizer["Receipt", "Field"];
+        LblBtnReceiptView.Text = _controller.Localizer["View"];
+        LblBtnReceiptDelete.Text = _controller.Localizer["Delete"];
+        LblBtnReceiptUpload.Text = _controller.Localizer["Upload"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
@@ -69,6 +79,8 @@ public sealed partial class TransactionDialog : ContentDialog
             CmbGroup.SelectedItem = _controller.Groups[(uint)_controller.Transaction.GroupId];
         }
         BtnColor.SelectedColor = (Windows.UI.Color)(ColorHelpers.FromRGBA(_controller.Transaction.RGBA) ?? ColorHelpers.FromRGBA(_controller.TransactionDefaultColor)!);
+        BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
+        BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
     }
 
     /// <summary>
@@ -85,7 +97,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text);
+            var checkStatus = await _controller.UpdateTransactionAsync(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath);
             if(checkStatus != TransactionCheckStatus.Valid)
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Field"];
@@ -108,5 +120,45 @@ public sealed partial class TransactionDialog : ContentDialog
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// Occurs when the view receipt button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ViewReceipt(object sender, RoutedEventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
+
+    /// <summary>
+    /// Occurs when the delete receipt button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DeleteReceipt(object sender, RoutedEventArgs e)
+    {
+        _receiptPath = "";
+        BtnReceiptView.IsEnabled = false;
+        BtnReceiptDelete.IsEnabled = false;
+    }
+
+    /// <summary>
+    /// Occurs when the upload receipt button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void UploadReceipt(object sender, RoutedEventArgs e)
+    {
+        var fileOpenPicker = new FileOpenPicker();
+        _initializeWithWindow(fileOpenPicker);
+        fileOpenPicker.FileTypeFilter.Add(".jpg");
+        fileOpenPicker.FileTypeFilter.Add(".jpeg");
+        fileOpenPicker.FileTypeFilter.Add(".pdf");
+        fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileOpenPicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            _receiptPath = file.Path;
+            BtnReceiptView.IsEnabled = true;
+        }
     }
 }

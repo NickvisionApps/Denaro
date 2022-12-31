@@ -52,6 +52,48 @@
                 </StackPanel>
             </Grid>
 
+            <StackPanel HorizontalAlignment="Stretch" Spacing="6">
+                <TextBlock x:Name="LblReceipt" VerticalAlignment="Center"/>
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="BtnReceiptView" Grid.Column="0" HorizontalAlignment="Stretch" Click="ViewReceipt">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B9;"/>
+
+                                <TextBlock x:Name="LblBtnReceiptView"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="BtnReceiptDelete" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" Click="DeleteReceipt">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+
+                                <TextBlock x:Name="LblBtnReceiptDelete"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="BtnReceiptUpload" Grid.Column="2" HorizontalAlignment="Stretch" Margin="6,0,0,0" Click="UploadReceipt">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
+
+                                <TextBlock x:Name="LblBtnReceiptUpload"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
     </ScrollViewer>
