@@ -563,6 +563,137 @@ public partial class AccountView
         }
     }
 
+    private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
+    {
+        if (_controller.AccountTotal > 0)
+        {
+            var transferController = _controller.CreateTransferDialogController();
+            var transferDialog = new TransferDialog(transferController, _parentWindow);
+            if (await transferDialog.RunAsync())
+            {
+                await _controller.SendTransferAsync(transferController.Transfer);
+            }
+        }
+        else
+        {
+            _controller.SendNotification(_controller.Localizer["NoMoneyToTransfer"], NotificationSeverity.Error);
+        }
+    }
+
+    private void ExportToFile(Gio.SimpleAction sender, EventArgs e)
+    {
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+        saveFileDialog.SetModal(true);
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        saveFileDialog.AddFilter(filterCsv);
+        var filterPdf = Gtk.FileFilter.New();
+        filterPdf.SetName("PDF (*.pdf)");
+        filterPdf.AddPattern("*.pdf");
+        saveFileDialog.AddFilter(filterPdf);
+        saveFileDialog.OnResponse += (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                _controller.ExportToFile(path);
+            }
+        };
+        saveFileDialog.Show();
+    }
+
+    private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
+    {
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+        openFileDialog.SetModal(true);
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
+        filterAll.AddPattern("*.csv");
+        filterAll.AddPattern("*.ofx");
+        filterAll.AddPattern("*.qif");
+        openFileDialog.AddFilter(filterAll);
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        openFileDialog.AddFilter(filterCsv);
+        var filterOfx = Gtk.FileFilter.New();
+        filterOfx.SetName("Open Financial Exchange (*.ofx)");
+        filterOfx.AddPattern("*.ofx");
+        openFileDialog.AddFilter(filterOfx);
+        var filterQif = Gtk.FileFilter.New();
+        filterQif.SetName("Quicken Format (*.qif)");
+        filterQif.AddPattern("*.qif");
+        openFileDialog.AddFilter(filterQif);
+        openFileDialog.OnResponse += async (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                await _controller.ImportFromFileAsync(path);
+            }
+        };
+        openFileDialog.Show();
+    }
+
+    private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
+    {
+        using var transactionController = _controller.CreateTransactionDialogController();
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        if(await transactionDialog.RunAsync())
+        {
+            await _controller.AddTransactionAsync(transactionController.Transaction);
+        }
+    }
+
+    private async void EditTransaction(object? sender, uint id)
+    {
+        using var transactionController = _controller.CreateTransactionDialogController(id);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        if(await transactionDialog.RunAsync())
+        {
+            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+        }
+    }
+
+    private async void DeleteTransaction(object? sender, uint id)
+    {
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+        if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        {
+            await _controller.DeleteTransactionAsync(id);
+        }
+    }
+
+    private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
+    {
+        var groupController = _controller.CreateGroupDialogController();
+        var groupDialog = new GroupDialog(groupController, _parentWindow);
+        if(await groupDialog.RunAsync())
+        {
+            await _controller.AddGroupAsync(groupController.Group);
+        }
+    }
+
+    private async void EditGroup(object? sender, uint id)
+    {
+        var groupController = _controller.CreateGroupDialogController(id);
+        var groupDialog = new GroupDialog(groupController, _parentWindow);
+        if(await groupDialog.RunAsync())
+        {
+            await _controller.UpdateGroupAsync(groupController.Group);
+        }
+    }
+
+    private async void DeleteGroup(object? sender, uint id)
+    {
+        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+        if(await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        {
+            await _controller.DeleteGroupAsync(id);
+        }
+    }
+
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
     {
         _chkIncome.SetActive(true);
@@ -575,55 +706,6 @@ public partial class AccountView
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
-
-    private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
-    {
-        using var transactionController = _controller.CreateTransactionDialogController();
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
-        {
-            await _controller.AddTransactionAsync(transactionController.Transaction);
-        }
-    }
-
-    private async void EditTransaction(object? sender, uint id)
-    {
-        using var transactionController = _controller.CreateTransactionDialogController(id);
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
-        {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
-        }
-    }
-
-    private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
-    {
-        var groupController = _controller.CreateGroupDialogController();
-        var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
-        {
-            await _controller.AddGroupAsync(groupController.Group);
-        }
-    }
-
-    private async void EditGroup(object? sender, uint id)
-    {
-        var groupController = _controller.CreateGroupDialogController(id);
-        var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
-        {
-            await _controller.UpdateGroupAsync(groupController.Group);
-        }
-    }
-
-    private async void DeleteGroup(object? sender, uint id)
-    {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(dialog.Run() == MessageDialogResponse.Destructive)
-        {
-            await _controller.DeleteGroupAsync(id);
-        }
-    }
 
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
@@ -748,93 +830,11 @@ public partial class AccountView
 
     private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
-    private async void DeleteTransaction(object? sender, uint id)
-    {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(dialog.Run() == MessageDialogResponse.Destructive)
-        {
-            await _controller.DeleteTransactionAsync(id);
-        }
-    }
-
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
         foreach(var row in _transactionRows)
         {
             row.IsSmall = e.SmallWidth;
         }
-    }
-
-    private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
-    {
-        if(_controller.AccountTotal > 0)
-        {
-            var transferController = _controller.CreateTransferDialogController();
-            var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if(transferDialog.Run())
-            {
-                await _controller.SendTransferAsync(transferController.Transfer);
-            }
-        }
-        else
-        {
-            _controller.SendNotification(_controller.Localizer["NoMoneyToTransfer"], NotificationSeverity.Error);
-        }
-    }
-
-    private void ExportToFile(Gio.SimpleAction sender, EventArgs e)
-    {
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-        saveFileDialog.SetModal(true);
-        var filterCsv = Gtk.FileFilter.New();
-        filterCsv.SetName("CSV (*.csv)");
-        filterCsv.AddPattern("*.csv");
-        saveFileDialog.AddFilter(filterCsv);
-        var filterPdf = Gtk.FileFilter.New();
-        filterPdf.SetName("PDF (*.pdf)");
-        filterPdf.AddPattern("*.pdf");
-        saveFileDialog.AddFilter(filterPdf);
-        saveFileDialog.OnResponse += (sender, e) =>
-        {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-            {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
-                _controller.ExportToFile(path);
-            }
-        };
-        saveFileDialog.Show();
-    }
-
-    private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
-    {
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-        openFileDialog.SetModal(true);
-        var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
-        filterAll.AddPattern("*.csv");
-        filterAll.AddPattern("*.ofx");
-        filterAll.AddPattern("*.qif");
-        openFileDialog.AddFilter(filterAll);
-        var filterCsv = Gtk.FileFilter.New();
-        filterCsv.SetName("CSV (*.csv)");
-        filterCsv.AddPattern("*.csv");
-        openFileDialog.AddFilter(filterCsv);
-        var filterOfx = Gtk.FileFilter.New();
-        filterOfx.SetName("Open Financial Exchange (*.ofx)");
-        filterOfx.AddPattern("*.ofx");
-        openFileDialog.AddFilter(filterOfx);
-        var filterQif = Gtk.FileFilter.New();
-        filterQif.SetName("Quicken Format (*.qif)");
-        filterQif.AddPattern("*.qif");
-        openFileDialog.AddFilter(filterQif);
-        openFileDialog.OnResponse += async (sender, e) =>
-        {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-            {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
-                await _controller.ImportFromFileAsync(path);
-            }
-        };
-        openFileDialog.Show();
     }
 }

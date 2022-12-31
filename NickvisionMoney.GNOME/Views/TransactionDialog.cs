@@ -72,13 +72,6 @@ public partial class TransactionDialog
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
     [DllImport("adwaita-1")]
@@ -331,13 +324,13 @@ public partial class TransactionDialog
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public bool Run()
+    public async Task<bool> RunAsync()
     {
         gtk_widget_show(_dialog);
         gtk_window_set_modal(_dialog, true);
         while(gtk_widget_is_visible(_dialog))
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            await Task.Delay(100);
         }
         if(_controller.Accepted)
         {
@@ -366,7 +359,7 @@ public partial class TransactionDialog
                     _rowAmount.AddCssClass("error");
                     _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
                 }
-                return Run();
+                return await RunAsync();
             }
         }
         gtk_window_destroy(_dialog);

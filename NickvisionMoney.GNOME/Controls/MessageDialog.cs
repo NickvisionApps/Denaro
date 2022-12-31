@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -32,13 +33,6 @@ public partial class MessageDialog
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
@@ -107,12 +101,12 @@ public partial class MessageDialog
     /// Displays the dialog
     /// </summary>
     /// <returns>MessageDialogResponse</returns>
-    public MessageDialogResponse Run()
+    public async Task<MessageDialogResponse> RunAsync()
     {
         gtk_widget_show(_dialog);
         while(gtk_widget_is_visible(_dialog))
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            await Task.Delay(100);
         }
         gtk_window_destroy(_dialog);
         return _response;
