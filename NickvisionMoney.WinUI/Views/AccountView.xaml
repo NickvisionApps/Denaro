@@ -101,7 +101,7 @@
             </CommandBar>
         </Border>
         
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,70,10,10" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,66,10,10" LastChildFill="True">
             <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
                     <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
@@ -224,7 +224,7 @@
                                 </ToggleButton>
                             </StackPanel>
 
-                            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,44,0,0" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,44,0,0" VerticalScrollBarVisibility="Auto">
                                 <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
