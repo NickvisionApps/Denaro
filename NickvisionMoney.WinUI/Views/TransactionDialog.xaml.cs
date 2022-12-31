@@ -97,7 +97,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath);
+            var checkStatus = await _controller.UpdateTransactionAsync(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath);
             if(checkStatus != TransactionCheckStatus.Valid)
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Field"];
@@ -127,7 +127,7 @@ public sealed partial class TransactionDialog : ContentDialog
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ViewReceipt(object sender, RoutedEventArgs e) => _controller.OpenReceiptImage(_receiptPath);
+    private async void ViewReceipt(object sender, RoutedEventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
 
     /// <summary>
     /// Occurs when the delete receipt button is clicked

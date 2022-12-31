@@ -199,7 +199,7 @@ public partial class TransferDialog
         filter.SetName(_controller.Localizer["AccountFileFilter", "GTK"]);
         filter.AddPattern("*.nmoney");
         openFileDialog.AddFilter(filter);
-        openFileDialog.OnResponse += async (sender, e) =>
+        openFileDialog.OnResponse += (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
