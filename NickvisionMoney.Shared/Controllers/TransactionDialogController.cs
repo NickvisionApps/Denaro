@@ -29,7 +29,7 @@ public enum TransactionCheckStatus
 /// <summary>
 /// A controller for a TransactionDialog
 /// </summary>
-public class TransactionDialogController
+public class TransactionDialogController : IDisposable
 {
     /// <summary>
     /// The localizer to get translated strings from
@@ -68,7 +68,23 @@ public class TransactionDialogController
         TransactionDefaultColor = transactionDefaultColor;
     }
 
-    public async Task OpenReceiptImageAsync(string? receiptPath)
+    /// <summary>
+    /// Frees resources used by the TransactionDialogController object
+    /// </summary>
+    public void Dispose()
+    {
+        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}receipt.jpg";
+        if (Path.Exists(jpgPath))
+        {
+            File.Delete(jpgPath);
+        }
+    }
+
+    /// <summary>
+    /// Opens the receipt image of the transaction in the default viewer application
+    /// </summary>
+    /// <param name="receiptPath">A possible path of a new receipt image</param>
+    public async Task OpenReceiptImageAsync(string? receiptPath = null)
     {
         var image = default(Image);
         if (receiptPath != null)
@@ -99,7 +115,7 @@ public class TransactionDialogController
         }
         if(image != null)
         {
-            var jpgPath = $"{Models.Configuration.ConfigDir}{Path.DirectorySeparatorChar}receipt.jpg";
+            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}receipt.jpg";
             await image.SaveAsJpegAsync(jpgPath);
             if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
