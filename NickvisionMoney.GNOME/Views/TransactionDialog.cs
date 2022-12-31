@@ -279,7 +279,7 @@ public partial class TransactionDialog
         adw_message_dialog_set_extra_child(_dialog, _boxMain.Handle);
         //Receipt Action Map
         _actMapReceipt = Gio.SimpleActionGroup.New();
-        _boxMain.InsertActionGroup("transaction", _actMapReceipt);
+        _btnMenuReceipt.InsertActionGroup("transaction", _actMapReceipt);
         //View Receipt Action
         _actReceiptView = Gio.SimpleAction.New("receiptView", null);
         _actReceiptView.OnActivate += (sender, e) => OnViewReceipt();
