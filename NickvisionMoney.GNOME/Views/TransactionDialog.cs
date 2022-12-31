@@ -142,9 +142,10 @@ public partial class TransactionDialog
     private readonly Adw.ActionRow _rowReceipt;
     private readonly Gtk.Box _boxReceiptButtons;
     private readonly Gtk.Button _btnReceiptView;
+    private readonly Adw.ButtonContent _btnReceiptViewContent;
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
-
+    private readonly Adw.ButtonContent _btnReceiptUploadContent;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -266,8 +267,10 @@ public partial class TransactionDialog
         _btnReceiptView = Gtk.Button.New();
         _btnReceiptView.SetValign(Gtk.Align.Center);
         _btnReceiptView.AddCssClass("flat");
-        _btnReceiptView.SetIconName("image-x-generic-symbolic");
         _btnReceiptView.SetTooltipText(_controller.Localizer["View"]);
+        _btnReceiptViewContent = Adw.ButtonContent.New();
+        _btnReceiptViewContent.SetIconName("image-x-generic-symbolic");
+        _btnReceiptView.SetChild(_btnReceiptViewContent);
         _btnReceiptView.OnClicked += OnViewReceipt;
         _btnReceiptDelete = Gtk.Button.New();
         _btnReceiptDelete.SetValign(Gtk.Align.Center);
@@ -278,8 +281,10 @@ public partial class TransactionDialog
         _btnReceiptUpload = Gtk.Button.New();
         _btnReceiptUpload.SetValign(Gtk.Align.Center);
         _btnReceiptUpload.AddCssClass("flat");
-        _btnReceiptUpload.SetIconName("document-send-symbolic");
         _btnReceiptUpload.SetTooltipText(_controller.Localizer["Upload"]);
+        _btnReceiptUploadContent = Adw.ButtonContent.New();
+        _btnReceiptUploadContent.SetIconName("document-send-symbolic");
+        _btnReceiptUpload.SetChild(_btnReceiptUploadContent);
         _btnReceiptUpload.OnClicked += OnUploadReceipt;
         _boxReceiptButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxReceiptButtons.Append(_btnReceiptView);
@@ -321,6 +326,14 @@ public partial class TransactionDialog
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
         _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
         _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);
+        if (_controller.Transaction.Receipt != null)
+        {
+            _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
+        }
+        else
+        {
+            _btnReceiptUploadContent.SetLabel(_controller.Localizer["Upload"]);
+        }
     }
 
     /// <summary>
@@ -421,7 +434,9 @@ public partial class TransactionDialog
     {
         _receiptPath = "";
         _btnReceiptView.SetSensitive(false);
+        _btnReceiptViewContent.SetLabel("");
         _btnReceiptDelete.SetSensitive(false);
+        _btnReceiptUploadContent.SetLabel(_controller.Localizer["Upload"]);
     }
 
     /// <summary>
@@ -458,6 +473,8 @@ public partial class TransactionDialog
                 var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
                 _receiptPath = path;
                 _btnReceiptView.SetSensitive(true);
+                _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
+                _btnReceiptUploadContent.SetLabel("");
             }
         };
         openFileDialog.Show();
