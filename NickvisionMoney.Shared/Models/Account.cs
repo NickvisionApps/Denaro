@@ -384,7 +384,7 @@ public class Account : IDisposable
         if(transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
-            transaction.Receipt.Save(memoryStream, new JpegEncoder());
+            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
             cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
         }
         else
@@ -423,7 +423,7 @@ public class Account : IDisposable
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
-            transaction.Receipt.Save(memoryStream, new JpegEncoder());
+            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
             cmdUpdateTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
         }
         else

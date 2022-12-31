@@ -441,6 +441,18 @@
 		<value>Biyearly</value>
 	</data>
 
+	<data name="View" xml:space="preserve">
+		<value>View</value>
+	</data>
+
+	<data name="Delete" xml:space="preserve">
+		<value>Delete</value>
+	</data>
+
+	<data name="Upload" xml:space="preserve">
+		<value>Upload</value>
+	</data>
+
 	<!--TransferDialog-->
 	<data name="Transfer" xml:space="preserve">
 		<value>Transfer</value>
@@ -513,6 +525,10 @@
 
 	<data name="Color.Field" xml:space="preserve">
 		<value>Color</value>
+	</data>
+
+	<data name="Receipt.Field" xml:space="preserve">
+		<value>Receipt</value>
 	</data>
 
 	<data name="DestinationAccount.Field" xml:space="preserve">

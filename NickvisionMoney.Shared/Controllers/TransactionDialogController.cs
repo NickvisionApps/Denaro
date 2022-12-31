@@ -1,10 +1,18 @@
-﻿using NickvisionMoney.Shared.Helpers;
+﻿using Docnet.Core;
+using Docnet.Core.Converters;
+using Docnet.Core.Models;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -60,6 +68,50 @@ public class TransactionDialogController
         TransactionDefaultColor = transactionDefaultColor;
     }
 
+    public async Task OpenReceiptImageAsync(string? receiptPath)
+    {
+        var image = default(Image);
+        if (receiptPath != null)
+        {
+            if (Path.Exists(receiptPath))
+            {
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                {
+                    image = await Image.LoadAsync(receiptPath);
+                }
+                else if (Path.GetExtension(receiptPath) == ".pdf")
+                {
+                    image = ConvertPDFToJPEG(receiptPath);
+                }
+                else
+                {
+                    image = null;
+                }
+            }
+            else
+            {
+                image = null;
+            }
+        }
+        else
+        {
+            image = Transaction.Receipt;
+        }
+        if(image != null)
+        {
+            var jpgPath = $"{Models.Configuration.ConfigDir}{Path.DirectorySeparatorChar}receipt.jpg";
+            await image.SaveAsJpegAsync(jpgPath);
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo("explorer", $"\"{jpgPath}\"") { CreateNoWindow = true });
+            }
+            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
+            }
+        }
+    }
+
     /// <summary>
     /// Updates the Transaction object
     /// </summary>
@@ -70,9 +122,9 @@ public class TransactionDialogController
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="amountString">The new amount string</param>
-    /// <param name="receipt">The new receipt image</param>
+    /// <param name="receiptPath">The new receipt image path</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, Image? receipt)
+    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -98,7 +150,48 @@ public class TransactionDialogController
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;
-        Transaction.Receipt = receipt;
+        if(receiptPath != null)
+        {
+            if (Path.Exists(receiptPath))
+            {
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                {
+                    Transaction.Receipt = await Image.LoadAsync(receiptPath);
+                }
+                else if (Path.GetExtension(receiptPath) == ".pdf")
+                {
+                    Transaction.Receipt = ConvertPDFToJPEG(receiptPath);
+                }
+                else
+                {
+                    Transaction.Receipt = null;
+                }
+            }
+            else
+            {
+                Transaction.Receipt = null;
+            }
+        }
         return TransactionCheckStatus.Valid;
+    }
+
+    /// <summary>
+    /// Converts a PDF
+    /// </summary>
+    /// <param name="pathToPDF"></param>
+    /// <returns></returns>
+    private Image? ConvertPDFToJPEG(string pathToPDF)
+    {
+        try
+        {
+            using var library = DocLib.Instance;
+            using var docReader = library.GetDocReader(pathToPDF, new PageDimensions(800, 600));
+            using var pageReader = docReader.GetPageReader(1);
+            return Image.LoadPixelData<Bgra32>(pageReader.GetImage(), 800, 600);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }
