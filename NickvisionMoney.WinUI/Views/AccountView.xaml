@@ -11,7 +11,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource SolidBackgroundFillColorBaseAltBrush}">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource SolidBackgroundFillColorBase}">
             <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
                 <CommandBar.PrimaryCommands>
                     <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
