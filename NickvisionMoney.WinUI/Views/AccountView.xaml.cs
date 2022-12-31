@@ -189,7 +189,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void NewTransaction(object? sender, RoutedEventArgs e)
     {
-        var transactionController = _controller.CreateTransactionDialogController();
+        using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
             XamlRoot = Content.XamlRoot
@@ -207,7 +207,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the transaction to be edited</param>
     private async void EditTransaction(object? sender, uint transactionId)
     {
-        var transactionController = _controller.CreateTransactionDialogController(transactionId);
+        using var transactionController = _controller.CreateTransactionDialogController(transactionId);
         var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
             XamlRoot = Content.XamlRoot
