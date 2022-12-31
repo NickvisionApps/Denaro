@@ -156,6 +156,10 @@
 		<value>No Recent Accounts</value>
 	</data>
 
+	<data name="AllFiles" xml:space="preserve">
+		<value>All files</value>
+	</data>
+
 	<!--MainWindowController-->
 	<data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
