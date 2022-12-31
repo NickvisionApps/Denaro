@@ -409,8 +409,18 @@ public partial class TransactionDialog
         _btnDate.SetLabel(date.ToString("d"));
     }
 
+    /// <summary>
+    /// Occurs when the view receipt button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnViewReceipt(Gtk.Button sender, EventArgs e) => _controller.OpenReceiptImage(_receiptPath);
 
+    /// <summary>
+    /// Occurs when the delete receipt button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnDeleteReceipt(Gtk.Button sender, EventArgs e)
     {
         _receiptPath = "";
@@ -418,6 +428,11 @@ public partial class TransactionDialog
         _btnReceiptDelete.SetSensitive(false);
     }
 
+    /// <summary>
+    /// Occurs when the upload receipt button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnUploadReceipt(Gtk.Button sender, EventArgs e)
     {
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["Receipt", "Field"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
@@ -440,7 +455,7 @@ public partial class TransactionDialog
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
         openFileDialog.AddFilter(filterPdf);
-        openFileDialog.OnResponse += async (sender, e) =>
+        openFileDialog.OnResponse += (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
