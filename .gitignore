@@ -339,3 +339,6 @@ ASALocalRun/
 
 #Resources
 *.Designer.cs
+
+# Flatpak Builder
+.flatpak-builder/
