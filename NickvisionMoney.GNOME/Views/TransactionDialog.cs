@@ -329,7 +329,7 @@ public partial class TransactionDialog
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public async Task<bool> RunAsync()
+    public bool Run()
     {
         gtk_widget_show(_dialog);
         gtk_window_set_modal(_dialog, true);
@@ -345,7 +345,7 @@ public partial class TransactionDialog
             var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem();
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (TransactionRepeatInterval)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath);
+            var status = _controller.UpdateTransaction(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (TransactionRepeatInterval)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath);
             if(status != TransactionCheckStatus.Valid)
             {
                 //Reset UI
@@ -364,7 +364,7 @@ public partial class TransactionDialog
                     _rowAmount.AddCssClass("error");
                     _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
                 }
-                return await RunAsync();
+                return Run();
             }
         }
         gtk_window_destroy(_dialog);
@@ -407,7 +407,7 @@ public partial class TransactionDialog
         _btnDate.SetLabel(date.ToString("d"));
     }
 
-    private async void OnViewReceipt(Gtk.Button sender, EventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
+    private void OnViewReceipt(Gtk.Button sender, EventArgs e) => _controller.OpenReceiptImage(_receiptPath);
 
     private void OnDeleteReceipt(Gtk.Button sender, EventArgs e)
     {

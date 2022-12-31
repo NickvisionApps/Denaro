@@ -580,7 +580,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
         }
@@ -590,7 +590,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
             await _controller.UpdateTransactionAsync(transactionController.Transaction);
         }

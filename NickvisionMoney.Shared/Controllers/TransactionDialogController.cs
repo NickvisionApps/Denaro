@@ -84,7 +84,7 @@ public class TransactionDialogController : IDisposable
     /// Opens the receipt image of the transaction in the default viewer application
     /// </summary>
     /// <param name="receiptPath">A possible path of a new receipt image</param>
-    public async Task OpenReceiptImageAsync(string? receiptPath = null)
+    public void OpenReceiptImage(string? receiptPath = null)
     {
         var image = default(Image);
         if (receiptPath != null)
@@ -93,7 +93,7 @@ public class TransactionDialogController : IDisposable
             {
                 if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
                 {
-                    image = await Image.LoadAsync(receiptPath);
+                    image = Image.Load(receiptPath);
                 }
                 else if (Path.GetExtension(receiptPath) == ".pdf")
                 {
@@ -116,7 +116,7 @@ public class TransactionDialogController : IDisposable
         if(image != null)
         {
             var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-            await image.SaveAsJpegAsync(jpgPath);
+            image.SaveAsJpeg(jpgPath);
             if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Process.Start(new ProcessStartInfo("explorer", $"\"{jpgPath}\"") { CreateNoWindow = true });
@@ -140,7 +140,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -172,7 +172,7 @@ public class TransactionDialogController : IDisposable
             {
                 if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
                 {
-                    Transaction.Receipt = await Image.LoadAsync(receiptPath);
+                    Transaction.Receipt = Image.Load(receiptPath);
                 }
                 else if (Path.GetExtension(receiptPath) == ".pdf")
                 {
