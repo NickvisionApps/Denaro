@@ -10,6 +10,22 @@
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d">
 
+    <UserControl.ContextFlyout>
+        <MenuFlyout>
+            <MenuFlyoutItem x:Name="MenuEdit" Click="Edit">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+
+            <MenuFlyoutItem x:Name="MenuDelete" Click="Delete">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+        </MenuFlyout>
+    </UserControl.ContextFlyout>
+
     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
         <StackPanel Margin="12" Orientation="Horizontal" Spacing="6">
             <Button x:Name="BtnId" Width="40" Height="40" CornerRadius="20" Click="Edit"/>

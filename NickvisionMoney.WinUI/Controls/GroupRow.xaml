@@ -9,7 +9,23 @@
     xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d">
+ 
+    <UserControl.ContextFlyout>
+        <MenuFlyout>
+            <MenuFlyoutItem x:Name="MenuEdit" Click="Edit">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
 
+            <MenuFlyoutItem x:Name="MenuDelete" Click="Delete">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+        </MenuFlyout>
+    </UserControl.ContextFlyout>    
+    
     <wct:DockPanel Margin="6" LastChildFill="False">
         <CheckBox x:Name="ChkFilter" wct:DockPanel.Dock="Left" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
             <CheckBox.Content>

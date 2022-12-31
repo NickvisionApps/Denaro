@@ -41,8 +41,9 @@ public sealed partial class TransactionRow : UserControl
         InitializeComponent();
         _transaction = transaction;
         //Localize Strings
-        //Localize Strings
+        MenuEdit.Text = localizer["Edit", "TransactionRow"];
         ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "TransactionRow"]);
+        MenuDelete.Text = localizer["Delete", "TransactionRow"];
         ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "TransactionRow"]);
         //Load Transaction
         BtnId.Content = _transaction.Id;

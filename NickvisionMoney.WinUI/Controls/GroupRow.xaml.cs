@@ -43,14 +43,18 @@ public sealed partial class GroupRow : UserControl
     {
         InitializeComponent();
         _group = group;
-        if(_group.Id == 0)
+        //Localize Strings
+        MenuEdit.Text = localizer["Edit", "GroupRow"];
+        MenuDelete.Text = localizer["Delete", "GroupRow"];
+        if (_group.Id == 0)
         {
+            MenuEdit.IsEnabled = false;
             BtnEdit.Visibility = Visibility.Collapsed;
+            MenuDelete.IsEnabled = false;
             BtnDelete.Visibility = Visibility.Collapsed;
         }
         else
         {
-            //Localize Strings
             ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
             ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
         }
