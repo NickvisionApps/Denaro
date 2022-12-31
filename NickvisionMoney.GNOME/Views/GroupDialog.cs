@@ -93,6 +93,7 @@ public partial class GroupDialog
         _txtName = Gtk.Entry.New();
         _txtName.SetValign(Gtk.Align.Center);
         _txtName.SetPlaceholderText(_controller.Localizer["Name", "Placeholder"]);
+        _txtName.SetActivatesDefault(true);
         _rowName.AddSuffix(_txtName);
         _grpGroup.Add(_rowName);
         //Description
@@ -101,6 +102,7 @@ public partial class GroupDialog
         _txtDescription = Gtk.Entry.New();
         _txtDescription.SetValign(Gtk.Align.Center);
         _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
+        _txtDescription.SetActivatesDefault(true);
         _rowDescription.AddSuffix(_txtDescription);
         _grpGroup.Add(_rowDescription);
         //Layout

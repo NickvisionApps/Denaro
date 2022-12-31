@@ -182,6 +182,7 @@ public partial class TransactionDialog
         _txtDescription = Gtk.Entry.New();
         _txtDescription.SetValign(Gtk.Align.Center);
         _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
+        _txtDescription.SetActivatesDefault(true);
         _rowDescription.AddSuffix(_txtDescription);
         _grpMain.Add(_rowDescription);
         //Amount
@@ -193,6 +194,7 @@ public partial class TransactionDialog
         _boxAmount.Append(_lblCurrency);
         _txtAmount = Gtk.Entry.New();
         _txtAmount.SetPlaceholderText(_controller.Localizer["Amount", "Placeholder"]);
+        _txtAmount.SetActivatesDefault(true);
         _txtAmount.SetInputPurpose(Gtk.InputPurpose.Number);
         _boxAmount.Append(_txtAmount);
         _rowAmount.AddSuffix(_boxAmount);
