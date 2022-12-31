@@ -133,18 +133,11 @@ public partial class GroupDialog
             {
                 _rowName.RemoveCssClass("error");
                 _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-                _rowDescription.RemoveCssClass("error");
-                _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
                 //Mark Error
                 if (status == GroupCheckStatus.EmptyName)
                 {
                     _rowName.AddCssClass("error");
                     _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
-                }
-                else if(status == GroupCheckStatus.EmptyDescription)
-                {
-                    _rowDescription.AddCssClass("error");
-                    _rowDescription.SetTitle(_controller.Localizer["Description", "Empty"]);
                 }
                 else if(status == GroupCheckStatus.NameExists)
                 {

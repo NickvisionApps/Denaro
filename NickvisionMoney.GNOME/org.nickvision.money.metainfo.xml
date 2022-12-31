@@ -60,6 +60,7 @@
         <p>- Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</p>
         <p>- Added an "Ungrouped" row to the groups section to allow filtering transactions that don't belong to a group</p>
 		<p>- Added the ability to attach a jpg/pdf of a receipt to a transaction</p>
+		<p>- Made a group's description an optional field</p>
       </description>
     </release>
   </releases>

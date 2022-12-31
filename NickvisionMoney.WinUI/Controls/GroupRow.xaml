@@ -30,9 +30,9 @@
         <CheckBox x:Name="ChkFilter" wct:DockPanel.Dock="Left" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
             <CheckBox.Content>
                 <StackPanel Margin="6,0,0,0" Orientation="Vertical">
-                    <TextBlock x:Name="LblName" TextWrapping="WrapWholeWords"/>
+                    <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
 
-                    <TextBlock x:Name="LblDescription" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                    <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
                 </StackPanel>
             </CheckBox.Content>
         </CheckBox>

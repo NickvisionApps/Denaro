@@ -61,6 +61,7 @@ public sealed partial class GroupRow : UserControl
         //Load Group
         ChkFilter.IsChecked = filterActive;
         LblName.Text = _group.Name;
+        LblDescription.Visibility = string.IsNullOrEmpty(_group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = _group.Description;
         LblAmount.Text = _group.Balance.ToString("C");
         LblAmount.Foreground = _group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));

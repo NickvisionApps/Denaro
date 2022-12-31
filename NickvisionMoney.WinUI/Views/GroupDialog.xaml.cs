@@ -54,14 +54,9 @@ public sealed partial class GroupDialog : ContentDialog
             {
                 //Reset UI
                 TxtName.Header = _controller.Localizer["Name", "Field"];
-                TxtDescription.Header = _controller.Localizer["Description", "Field"];
                 if (checkStatus == GroupCheckStatus.EmptyName)
                 {
                     TxtName.Header = _controller.Localizer["Name", "Empty"];
-                }
-                else if (checkStatus == GroupCheckStatus.EmptyDescription)
-                {
-                    TxtDescription.Header = _controller.Localizer["Description", "Empty"];
                 }
                 else if (checkStatus == GroupCheckStatus.NameExists)
                 {

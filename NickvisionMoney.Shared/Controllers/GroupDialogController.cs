@@ -11,8 +11,7 @@ public enum GroupCheckStatus
 {
     Valid = 0,
     EmptyName,
-    NameExists,
-    EmptyDescription
+    NameExists
 }
 
 /// <summary>
@@ -60,10 +59,6 @@ public class GroupDialogController
         if(string.IsNullOrEmpty(name))
         {
             return GroupCheckStatus.EmptyName;
-        }
-        if(string.IsNullOrEmpty(description))
-        {
-            return GroupCheckStatus.EmptyDescription;
         }
         if(name != Group.Name && _existingNames.Contains(name))
         {
