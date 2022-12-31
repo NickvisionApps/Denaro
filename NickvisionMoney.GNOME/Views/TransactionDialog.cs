@@ -140,7 +140,7 @@ public partial class TransactionDialog
     private readonly Adw.PreferencesGroup _grpReceipt;
     private readonly Adw.ActionRow _rowReceipt;
     private readonly Gtk.MenuButton _btnMenuReceipt;
-    private readonly Gio.ActionMap _actMapReceipt;
+    private readonly Gio.SimpleActionGroup _actMapReceipt;
     private readonly Gio.SimpleAction _actReceiptView;
     private readonly Gio.SimpleAction _actReceiptDelete;
     private readonly Gio.SimpleAction _actReceiptUpload;
