@@ -145,7 +145,7 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
-    private readonly ResponseSignal _responseCallback;
+    private readonly ResponseSignal _responseSignal;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -166,8 +166,8 @@ public partial class TransactionDialog
         adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        _responseCallback = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
-        g_signal_connect_data(_dialog, "response", _responseCallback, IntPtr.Zero, IntPtr.Zero, 0);
+        _responseSignal = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
+        g_signal_connect_data(_dialog, "response", _responseSignal, IntPtr.Zero, IntPtr.Zero, 0);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Main Preferences Group
