@@ -14,6 +14,11 @@ namespace NickvisionMoney.GNOME;
 /// </summary>
 public partial class Program
 {
+    private delegate void OpenSignal(nint application, nint files, int nfiles, string hint, nint data);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] OpenSignal c_handler, nint data, nint destroy_data, int connect_flags);
+
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_resource_load(string path);
 
@@ -25,13 +30,14 @@ public partial class Program
 
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
+    private readonly OpenSignal _openSignal;
 
     /// <summary>
     /// Main method
     /// </summary>
     /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public static int Main(string[] args) => new Program().Run();
+    public static int Main(string[] args) => new Program().Run(args);
 
     /// <summary>
     /// Constructs a Program
@@ -42,7 +48,8 @@ public partial class Program
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
         _mainWindow = null;
         _application.OnActivate += OnActivate;
-        _application.OnOpen += OnOpen;
+        _openSignal = (nint application, nint files, int nfiles, string hint, nint data) => OnOpen(files, nfiles);
+        g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
         var prefixes = new List<string> {
             Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
             Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
@@ -62,7 +69,13 @@ public partial class Program
     /// Runs the program
     /// </summary>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public int Run() => _application.Run();
+    public int Run(string[] args)
+    {
+        var argv = new string[args.Length + 1];
+        argv[0] = "NickvisionMoney.GNOME";
+        args.CopyTo(argv, 1);
+        return _application.Run(args.Length + 1, argv);
+    }
 
     /// <summary>
     /// Occurs when the application is activated
@@ -101,12 +114,14 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
+    private void OnOpen(nint files, int nFiles)
     {
-        if(e.NFiles > 0)
+        if(nFiles > 0)
         {
-            var pathOfFirstFile = g_file_get_path(e.Files[0].Handle);
-            OnActivate(sender, EventArgs.Empty);
+            var filesArray = new IntPtr[1] { IntPtr.Zero };
+            Marshal.Copy(files, filesArray, 0, 1);
+            var pathOfFirstFile = g_file_get_path(filesArray[0]);
+            OnActivate(_application, EventArgs.Empty);
             _mainWindow!.OpenAccount(pathOfFirstFile);
         }
     }
