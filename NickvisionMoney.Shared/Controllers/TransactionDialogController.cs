@@ -134,13 +134,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="date">The new DateOnly object</param>
     /// <param name="description">The new description</param>
     /// <param name="type">The new TransactionType</param>
-    /// <param name="repeat">The new TransactionRepeatInterval</param>
+    /// <param name="repeat">The new selected repeat index</param>
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
+    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -162,7 +162,15 @@ public class TransactionDialogController : IDisposable
         Transaction.Date = date;
         Transaction.Description = description;
         Transaction.Type = type;
-        Transaction.RepeatInterval = repeat;
+        if(selectedRepeat == 3)
+        {
+            selectedRepeat = 7;
+        }
+        else if(selectedRepeat > 3)
+        {
+            selectedRepeat -= 1;
+        }
+        Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;

@@ -237,7 +237,7 @@ public partial class TransactionDialog
         //Repeat Interval
         _rowRepeatInterval = Adw.ComboRow.New();
         _rowRepeatInterval.SetTitle(_controller.Localizer["TransactionRepeatInterval", "Field"]);
-        _rowRepeatInterval.SetModel(Gtk.StringList.New(new string[7] { _controller.Localizer["RepeatInterval", "Never"], _controller.Localizer["RepeatInterval", "Daily"], _controller.Localizer["RepeatInterval", "Weekly"], _controller.Localizer["RepeatInterval", "Monthly"], _controller.Localizer["RepeatInterval", "Quarterly"], _controller.Localizer["RepeatInterval", "Yearly"], _controller.Localizer["RepeatInterval", "Biyearly"] }));
+        _rowRepeatInterval.SetModel(Gtk.StringList.New(new string[8] { _controller.Localizer["RepeatInterval", "Never"], _controller.Localizer["RepeatInterval", "Daily"], _controller.Localizer["RepeatInterval", "Weekly"], _controller.Localizer["RepeatInterval", "Biweekly"], _controller.Localizer["RepeatInterval", "Monthly"], _controller.Localizer["RepeatInterval", "Quarterly"], _controller.Localizer["RepeatInterval", "Yearly"], _controller.Localizer["RepeatInterval", "Biyearly"] }));
         _grpDateRepeat.Add(_rowRepeatInterval);
         //Group and Color Preferences Group
         _grpGroupColor = Adw.PreferencesGroup.New();
@@ -356,7 +356,7 @@ public partial class TransactionDialog
             var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem();
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (TransactionRepeatInterval)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath);
+            var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath);
             if(status != TransactionCheckStatus.Valid)
             {
                 //Reset UI

@@ -46,6 +46,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Never"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Daily"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Weekly"]);
+        CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Biweekly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Monthly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Quarterly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Yearly"]);
@@ -97,7 +98,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = await _controller.UpdateTransactionAsync(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, (TransactionRepeatInterval)CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath);
+            var checkStatus = await _controller.UpdateTransactionAsync(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath);
             if(checkStatus != TransactionCheckStatus.Valid)
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Field"];

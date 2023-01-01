@@ -440,6 +440,10 @@
 	<data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>Weekly</value>
 	</data>
+	
+	<data name="RepeatInterval.Biweekly" xml:space="preserve">
+		<value>Biweekly</value>
+	</data>
 
 	<data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Monthly</value>

@@ -21,7 +21,8 @@ public enum TransactionRepeatInterval
     Never = 0,
     Daily,
     Weekly,
-    Monthly,
+    Biweekly = 7,
+    Monthly = 3,
     Quarterly,
     Yearly,
     Biyearly
