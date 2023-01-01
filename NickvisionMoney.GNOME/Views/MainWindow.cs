@@ -464,7 +464,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             "version", _controller.AppInfo.Version,
             "comments", _controller.AppInfo.Description,
             "developer-name", "Nickvision",
-            "license-type", (int)Gtk.License.Gpl30,
+            "license-type", (int)Gtk.License.MitX11,
             "copyright", "© Nickvision 2021-2022",
             "website", _controller.AppInfo.GitHubRepo.ToString(),
             "issue-url", _controller.AppInfo.IssueTracker.ToString(),
