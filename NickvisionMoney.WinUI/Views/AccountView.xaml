@@ -11,7 +11,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource SolidBackgroundFillColorBase}">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,10,10,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
             <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
                 <CommandBar.PrimaryCommands>
                     <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
@@ -103,7 +103,7 @@
             </CommandBar>
         </Border>
         
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,56,10,10" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,66,10,10" LastChildFill="True">
             <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
                     <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">

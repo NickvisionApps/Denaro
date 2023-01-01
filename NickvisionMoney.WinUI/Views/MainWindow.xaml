@@ -25,10 +25,6 @@
 
         <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" PaneDisplayMode="Top"
                         IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="260" SelectionChanged="NavView_SelectionChanged">
-            <NavigationView.Resources>
-                <Thickness x:Key="TopNavigationViewContentGridBorderThickness">0</Thickness>
-            </NavigationView.Resources>
-            
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NavViewItemHome" Tag="Home">
                     <NavigationViewItem.Icon>
