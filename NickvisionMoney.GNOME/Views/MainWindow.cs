@@ -22,6 +22,8 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    private new delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
+
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint adw_show_about_window(nint parent,
         string appNameKey, string appNameValue,
@@ -50,10 +52,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nuint g_file_get_type();
 
-    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
-
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -90,6 +90,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actNewAccount;
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
+    private readonly NotifySignal _widthChangedSignal;
 
     /// <summary>
     /// Occurs when the window's width is changed
@@ -118,7 +119,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountAdded += AccountAdded;
-        g_signal_connect_data(Handle, "notify::default-width", (nint sender, nint gParamSpec, nint data) => OnWidthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _widthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnWidthChanged();
+        g_signal_connect_data(Handle, "notify::default-width", _widthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         //Main Box
         _mainBox = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         //Header Bar

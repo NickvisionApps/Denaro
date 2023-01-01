@@ -29,10 +29,10 @@ file enum ResponseAppearance : uint
 /// </summary>
 public partial class MessageDialog
 {
-    private delegate void SignalCallback(nint gObject, string response, nint data);
+    private delegate void ResponseCallback(nint gObject, string response, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] ResponseCallback c_handler, nint data, nint destroy_data, int connect_flags);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
@@ -64,6 +64,7 @@ public partial class MessageDialog
 
     private readonly nint _dialog;
     private MessageDialogResponse _response;
+    private ResponseCallback _responseCallback;
 
     /// <summary>
     /// Constructs a MessageDialog
@@ -94,7 +95,8 @@ public partial class MessageDialog
             adw_message_dialog_add_response(_dialog, "suggested", suggestedText);
             adw_message_dialog_set_response_appearance(_dialog, "suggested", (uint)ResponseAppearance.Suggested);
         }
-        g_signal_connect_data(_dialog, "response", (nint sender, string response, nint data) => SetResponse(response), IntPtr.Zero, IntPtr.Zero, 0);
+        _responseCallback = (nint sender, string response, nint data) => SetResponse(response);
+        g_signal_connect_data(_dialog, "response", _responseCallback, IntPtr.Zero, IntPtr.Zero, 0);
     }
 
     /// <summary>

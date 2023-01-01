@@ -26,10 +26,10 @@ public partial class AccountView
         int RefCount;
     };
 
-    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
+    private delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
@@ -126,6 +126,13 @@ public partial class AccountView
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
+    private readonly NotifySignal _dateRangeStartYearChangedSignal;
+    private readonly NotifySignal _dateRangeStartMonthChangedSignal;
+    private readonly NotifySignal _dateRangeStartDayChangedSignal;
+    private readonly NotifySignal _dateRangeEndYearChangedSignal;
+    private readonly NotifySignal _dateRangeEndMonthChangedSignal;
+    private readonly NotifySignal _dateRangeEndDayChangedSignal;
+    private readonly NotifySignal _dateRangeToggledSignal;
 
     /// <summary>
     /// The Page widget
@@ -284,29 +291,35 @@ public partial class AccountView
         _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
-        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeStartYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged();
+        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", _dateRangeStartYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         var dtFormatInfo = new DateTimeFormatInfo();
         _ddStartMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
-        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeStartMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged();
+        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", _dateRangeStartMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         _ddStartDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddStartDay.SetValign(Gtk.Align.Center);
         _ddStartDay.SetShowArrow(false);
-        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeStartDayChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeStartDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartDayChanged();
+        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", _dateRangeStartDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         //End Range DropDowns
         _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
-        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeEndYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged();
+        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", _dateRangeEndYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         _ddEndMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
-        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeEndMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged();
+        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", _dateRangeEndMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         _ddEndDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddEndDay.SetValign(Gtk.Align.Center);
         _ddEndDay.SetShowArrow(false);
-        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", (nint sender, nint gParamSpec, nint data) => OnDateRangeEndDayChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeEndDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndDayChanged();
+        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", _dateRangeEndDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         //Start Range Boxes
         _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxStartRange.Append(_ddStartYear);
@@ -334,7 +347,8 @@ public partial class AccountView
         _expRange.SetShowEnableSwitch(true);
         _expRange.AddRow(_rowStartRange);
         _expRange.AddRow(_rowEndRange);
-        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", (nint sender, nint gParamSpec, nint data) => OnDateRangeToggled(), IntPtr.Zero, IntPtr.Zero, 0);
+        _dateRangeToggledSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeToggled();
+        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", _dateRangeToggledSignal, IntPtr.Zero, IntPtr.Zero, 0);
         _grpRange.Add(_expRange);
         //Calendar Group
         _grpCalendar = Adw.PreferencesGroup.New();

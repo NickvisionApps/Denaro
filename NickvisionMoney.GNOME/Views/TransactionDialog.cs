@@ -32,7 +32,7 @@ public partial class TransactionDialog
         public float Alpha;
     }
 
-    private delegate void SignalCallback(nint gObject, string response, nint data);
+    private delegate void ResponseSignal(nint gObject, string response, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
@@ -72,7 +72,7 @@ public partial class TransactionDialog
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] ResponseSignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
@@ -114,7 +114,6 @@ public partial class TransactionDialog
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
     private readonly nint _dialog;
-    private readonly SignalCallback _responseCallback;
     private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
@@ -146,6 +145,7 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
+    private readonly ResponseSignal _responseCallback;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -156,7 +156,6 @@ public partial class TransactionDialog
     {
         _controller = controller;
         _receiptPath = null;
-        _responseCallback = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
         _parentWindow = parentWindow;
         //Dialog Settings
         _dialog = adw_message_dialog_new(_parentWindow.Handle, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
@@ -167,6 +166,7 @@ public partial class TransactionDialog
         adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
         adw_message_dialog_set_default_response(_dialog, "ok");
         adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
+        _responseCallback = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
         g_signal_connect_data(_dialog, "response", _responseCallback, IntPtr.Zero, IntPtr.Zero, 0);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);

@@ -19,10 +19,10 @@ public partial class PreferencesDialog : Adw.Window
         public float Alpha;
     }
 
-    private delegate void SignalCallback(nint gObject, nint gParamSpec, nint data);
+    private new delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] SignalCallback c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.I1)]
@@ -48,6 +48,7 @@ public partial class PreferencesDialog : Adw.Window
     private readonly Gtk.ColorButton _btnTransactionColor;
     private readonly Adw.ActionRow _rowTransferColor;
     private readonly Gtk.ColorButton _btnTransferColor;
+    private readonly NotifySignal _themeChangedSignal;
 
     /// <summary>
     /// Constructs a PreferencesDialog
@@ -83,7 +84,8 @@ public partial class PreferencesDialog : Adw.Window
         _rowTheme = Adw.ComboRow.New();
         _rowTheme.SetTitle(_controller.Localizer["Theme"]);
         _rowTheme.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["ThemeLight"], _controller.Localizer["ThemeDark"], _controller.Localizer["ThemeSystem"] }));
-        g_signal_connect_data(_rowTheme.Handle, "notify::selected-item", (nint sender, nint gParamSpec, nint data) => OnThemeChanged(), IntPtr.Zero, IntPtr.Zero, 0);
+        _themeChangedSignal = (nint sender, nint gParamSpec, nint data) => OnThemeChanged();
+        g_signal_connect_data(_rowTheme.Handle, "notify::selected-item", _themeChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
         _grpUserInterface.Add(_rowTheme);
         //Transaction Color Row
         _rowTransactionColor = Adw.ActionRow.New();
