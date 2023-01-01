@@ -70,6 +70,8 @@
 
                     <AppBarSeparator/>
 
+                    <AppBarButton x:Name="BtnShowHideGroups" Click="ShowHideGroups"/>
+
                     <AppBarButton x:Name="BtnFilters">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE16E;"/>
@@ -132,7 +134,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" MinHeight="400" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <Border x:Name="SectionCalendar" wct:DockPanel.Dock="Bottom" Margin="0,6,0,0" MinHeight="400" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
@@ -150,7 +152,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border wct:DockPanel.Dock="Top" Margin="0,6,0,0" MinHeight="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <Border x:Name="SectionGroups" wct:DockPanel.Dock="Top" Margin="0,6,0,0" MinHeight="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <Grid>
                             <Grid.ContextFlyout>
                                 <MenuFlyout>

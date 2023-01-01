@@ -356,8 +356,12 @@
 		<value>Hide</value>
 	</data>
 
-	<data name="Show" xml:space="preserve">
-		<value>Show</value>
+	<data name="HideGroups" xml:space="preserve">
+		<value>Hide Groups</value>
+	</data>
+
+	<data name="ShowGroups" xml:space="preserve">
+		<value>Show Groups</value>
 	</data>
 
 	<data name="ToggleGroups.Tooltip" xml:space="preserve">

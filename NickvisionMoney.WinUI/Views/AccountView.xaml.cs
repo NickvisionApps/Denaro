@@ -1,4 +1,5 @@
 using CommunityToolkit.WinUI.UI;
+using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -49,6 +50,8 @@ public sealed partial class AccountView : UserControl
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
         ToolTipService.SetToolTip(BtnExportToFile, _controller.Localizer["ExportToFile", "Tooltip"]);
+        BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
+        BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         BtnFilters.Label = _controller.Localizer["Filters"];
         MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
@@ -366,6 +369,29 @@ public sealed partial class AccountView : UserControl
         if (file != null)
         {
             _controller.ExportToFile(file.Path);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the show hide groups button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ShowHideGroups(object? sender, RoutedEventArgs e)
+    {
+        if(SectionGroups.Visibility == Visibility.Visible)
+        {
+            SectionGroups.Visibility = Visibility.Collapsed;
+            DockPanel.SetDock(SectionCalendar, Dock.Top);
+            BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+        }
+        else
+        {
+            SectionGroups.Visibility = Visibility.Visible;
+            DockPanel.SetDock(SectionCalendar, Dock.Bottom);
+            BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
     }
 
