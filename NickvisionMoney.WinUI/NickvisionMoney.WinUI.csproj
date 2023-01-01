@@ -20,9 +20,6 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Assets\org.nickvision.money.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Controls\ActionRow.xaml" />
     <None Remove="Controls\GroupRow.xaml" />
     <None Remove="Controls\StatusPage.xaml" />
@@ -66,9 +63,6 @@
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\NickvisionMoney.Shared\NickvisionMoney.Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\org.nickvision.money.ico" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\TransferDialog.xaml">
