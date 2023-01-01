@@ -40,7 +40,7 @@ cp ./NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml $INSTALL_PREFIX/sha
 
 echo Installing mime types...
 mkdir -p $INSTALL_PREFIX/share/mime/packages
-cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml $INSTALL_PREFIX/share/mime/packages
-update-mime-database $INSTALL_PREFIX/share/mime
+cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml $INSTALL_PREFIX/share/mime/packages/
+update-mime-database $INSTALL_PREFIX/share/mime/
 
 echo Done!
