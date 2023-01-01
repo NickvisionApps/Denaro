@@ -52,7 +52,7 @@ When you're done, create a pull request to the project.
 
 [![Please do not theme this app](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app) 
 
-The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. Hovewer, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be in `~/.var/app/org.nickvision.money/config/gtk-4.0/gtk.css` if you installed the app using Flatpak or in `~/.config/gtk-4.0/gtk.css` otherwise. An example:
+The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. However, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be in `~/.var/app/org.nickvision.money/config/gtk-4.0/gtk.css` if you installed the app using Flatpak or in `~/.config/gtk-4.0/gtk.css` otherwise. An example:
 
 ```
 .money-total {

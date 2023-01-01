@@ -416,7 +416,7 @@ public class AccountViewController
     /// <summary>
     /// Receives a transfer from another account 
     /// </summary>
-    /// <param name="transfer">The transfer to recieve</param>
+    /// <param name="transfer">The transfer to receive</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
         await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.SourceAccountPath)));
