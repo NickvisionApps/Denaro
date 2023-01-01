@@ -55,7 +55,7 @@
                 "mkdir -p /app/opt/org.nickvision.money",
                 "cp -r --remove-destination /run/build/org.nickvision.money/NickvisionMoney.GNOME/bin/Release/net7.0/$RUNTIME/publish/* /app/opt/org.nickvision.money/",
                 "ln -sf /usr/lib/$(uname -m)-linux-gnu/libadwaita-1.so.0 /app/opt/org.nickvision.money/libadwaita-1.so",
-                "bash NickvisionMoney.GNOME/install_extras.sh /app /app/opt",
+                "bash NickvisionMoney.GNOME/install_extras.sh /app",
                 "desktop-file-edit --set-key='Exec' --set-value='/app/opt/org.nickvision.money/NickvisionMoney.GNOME' /app/share/applications/org.nickvision.money.desktop"
 	    ],
             "sources": [

@@ -71,10 +71,6 @@ public partial class Program
     /// <returns>Return code from Adw.Application.Run()</returns>
     public int Run(string[] args)
     {
-        if(args.Length > 0)
-        {
-            Console.WriteLine(args[0]);
-        }
         var argv = new string[args.Length + 1];
         argv[0] = "NickvisionMoney.GNOME";
         args.CopyTo(argv, 1);

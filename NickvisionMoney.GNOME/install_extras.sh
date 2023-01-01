@@ -5,13 +5,7 @@ if [ ! -z $1 ]
 then
 	INSTALL_PREFIX=$1
 fi
-BIN_PATH="/opt/org.nickvision.money/NickvisionMoney.GNOME"
-if [ ! -z $2 ]
-then
-	BIN_PATH="$2/org.nickvision.money/NickvisionMoney.GNOME"
-fi
 echo Install prefix: $INSTALL_PREFIX
-echo Bin path: $BIN_PATH
 
 if [ ${PWD##*/} == "NickvisionMoney.GNOME" ]
 then
@@ -48,11 +42,5 @@ echo Installing mime types...
 mkdir -p $INSTALL_PREFIX/share/mime/packages
 cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml $INSTALL_PREFIX/share/mime/packages
 update-mime-database $INSTALL_PREFIX/share/mime
-
-echo Creating DBUS service...
-mkdir -p $INSTALL_PREFIX/share/dbus-1/services
-echo "[D-BUS Service]" > $INSTALL_PREFIX/share/dbus-1/services/org.nickvision.money.service
-echo "Name=org.nickvision.money" >> $INSTALL_PREFIX/share/dbus-1/services/org.nickvision.money.service
-echo "Exec=$BIN_PATH --gapplication-service" >> $INSTALL_PREFIX/share/dbus-1/services/org.nickvision.money.service
 
 echo Done!
