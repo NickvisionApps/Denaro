@@ -35,7 +35,7 @@ public class MainWindowController
     /// </summary>
     public bool IsDevVersion => AppInfo.Current.Version.IndexOf('-') != -1;
     /// <summary>
-    /// The prefered theme of the application
+    /// The preferred theme of the application
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>

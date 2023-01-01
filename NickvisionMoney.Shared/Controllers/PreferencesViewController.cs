@@ -27,7 +27,7 @@ public class PreferencesViewController
     }
 
     /// <summary>
-    /// The prefered theme of the application
+    /// The preferred theme of the application
     /// </summary>
     public Theme Theme
     {
