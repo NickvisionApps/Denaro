@@ -312,6 +312,18 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Opens an account by path
+    /// </summary>
+    /// <param name="path">The path to the account</param>
+    public void OpenAccount(string path)
+    {
+        if(Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
+        {
+            _controller.AddAccount(path);
+        }
+    }
+
+    /// <summary>
     /// Occurs when a notification is sent from the controller
     /// </summary>
     /// <param name="sender">object?</param>

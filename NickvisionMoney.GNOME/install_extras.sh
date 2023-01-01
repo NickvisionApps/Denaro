@@ -38,4 +38,9 @@ echo Installing metainfo...
 mkdir -p $INSTALL_PREFIX/share/metainfo
 cp ./NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml $INSTALL_PREFIX/share/metainfo/
 
+echo Installing mime types...
+mkdir -p $INSTALL_PREFIX/share/mime/packages
+cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml $INSTALL_PREFIX/share/metainfo/
+update-mime-database $INSTALL_PREFIX/share/mime
+
 echo Done!

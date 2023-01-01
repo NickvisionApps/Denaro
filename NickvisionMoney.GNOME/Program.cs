@@ -12,14 +12,19 @@ namespace NickvisionMoney.GNOME;
 /// <summary>
 /// The Program
 /// </summary>
-public class Program
+public partial class Program
 {
-    [DllImport("adwaita-1")]
-    private static extern nint g_resource_load([MarshalAs(UnmanagedType.LPStr)] string path);
-    [DllImport("adwaita-1")]
-    private static extern void g_resources_register(nint file);
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_resource_load(string path);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_resources_register(nint file);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
 
     private readonly Adw.Application _application;
+    private MainWindow? _mainWindow;
 
     /// <summary>
     /// Main method
@@ -34,8 +39,10 @@ public class Program
     public Program()
     {
         Adw.Module.Initialize();
-        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.FlagsNone);
+        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
+        _mainWindow = null;
         _application.OnActivate += OnActivate;
+        _application.OnOpen += OnOpen;
         var prefixes = new List<string> {
             Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
             Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
@@ -84,8 +91,23 @@ public class Program
             _ => Adw.ColorScheme.PreferLight
         };
         //Main Window
-        var mainWindow = new MainWindow(mainWindowController, _application);
-        _application.AddWindow(mainWindow);
-        mainWindow.Start();
+        _mainWindow = new MainWindow(mainWindowController, _application);
+        _application.AddWindow(_mainWindow);
+        _mainWindow.Start();
+    }
+
+    /// <summary>
+    /// Occurs when an nmoney file is double clicked to open the app
+    /// </summary>
+    /// <param name="sender">Gio.Application</param>
+    /// <param name="e">Gio.Application.OpenSignalArgs</param>
+    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
+    {
+        if(e.NFiles > 0)
+        {
+            var pathOfFirstFile = g_file_get_path(e.Files[0].Handle);
+            OnActivate(sender, EventArgs.Empty);
+            _mainWindow!.OpenAccount(pathOfFirstFile);
+        }
     }
 }
