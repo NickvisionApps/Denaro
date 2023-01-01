@@ -59,12 +59,6 @@ public class ShortcutsDialog
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
-                                    <property name='title'>{ localizer["ExportToFile"] }</property>
-                                    <property name='accelerator'>&lt;Control&gt;E</property>
-                                </object>
-                            </child>
-                            <child>
-                                <object class='GtkShortcutsShortcut'>
                                     <property name='title'>{ localizer["ImportFromFile"] }</property>
                                     <property name='accelerator'>&lt;Control&gt;I</property>
                                 </object>

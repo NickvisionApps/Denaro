@@ -49,7 +49,6 @@ public sealed partial class AccountView : UserControl
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
-        ToolTipService.SetToolTip(BtnExportToFile, _controller.Localizer["ExportToFile", "Tooltip"]);
         BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
         BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         BtnFilters.Label = _controller.Localizer["Filters"];
@@ -353,15 +352,33 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
-    /// Occurs when the export to file button is clicked
+    /// Occurs when the export to csv menu item is clicked
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">RoutedEventArgs</param>
-    private async void ExportToFile(object? sender, RoutedEventArgs e)
+    private async void ExportToCSV(object? sender, RoutedEventArgs e)
     {
         var fileSavePicker = new FileSavePicker();
         _initializeWithWindow(fileSavePicker);
         fileSavePicker.FileTypeChoices.Add("CSV", new List<string>() { ".csv" });
+        fileSavePicker.SuggestedFileName = _controller.AccountTitle;
+        fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var file = await fileSavePicker.PickSaveFileAsync();
+        if (file != null)
+        {
+            _controller.ExportToFile(file.Path);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the export to pdf menu item is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ExportToPDF(object? sender, RoutedEventArgs e)
+    {
+        var fileSavePicker = new FileSavePicker();
+        _initializeWithWindow(fileSavePicker);
         fileSavePicker.FileTypeChoices.Add("PDF", new List<string>() { ".pdf" });
         fileSavePicker.SuggestedFileName = _controller.AccountTitle;
         fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;

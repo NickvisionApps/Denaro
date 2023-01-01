@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -209,8 +210,11 @@ public partial class AccountView
         _btnMenuAccountActionsContent.SetIconName("document-properties-symbolic");
         _btnMenuAccountActionsContent.SetLabel(_controller.Localizer["AccountActions", "GTK"]);
         _btnMenuAccountActions.SetChild(_btnMenuAccountActionsContent);
+        var menuActionsExport = Gio.Menu.New();
+        menuActionsExport.Append("CSV", "account.exportToCSV");
+        menuActionsExport.Append("PDF", "account.exportToPDF");
         var menuActionsExportImport = Gio.Menu.New();
-        menuActionsExportImport.Append(_controller.Localizer["ExportToFile"], "account.exportToFile");
+        menuActionsExportImport.AppendSubmenu(_controller.Localizer["ExportToFile"], menuActionsExport);
         menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
@@ -437,10 +441,14 @@ public partial class AccountView
         var actTransfer = Gio.SimpleAction.New("transferMoney", null);
         actTransfer.OnActivate += TransferMoney;
         actionMap.AddAction(actTransfer);
-        //Export Action
-        var actExport = Gio.SimpleAction.New("exportToFile", null);
-        actExport.OnActivate += ExportToFile;
-        actionMap.AddAction(actExport);
+        //Export To CSV Action
+        var actExportCSV = Gio.SimpleAction.New("exportToCSV", null);
+        actExportCSV.OnActivate += ExportToCSV;
+        actionMap.AddAction(actExportCSV);
+        //Export To PDF Action
+        var actExportPDF = Gio.SimpleAction.New("exportToPDF", null);
+        actExportPDF.OnActivate += ExportToPDF;
+        actionMap.AddAction(actExportPDF);
         //Import Action
         var actImport = Gio.SimpleAction.New("importFromFile", null);
         actImport.OnActivate += ImportFromFile;
@@ -580,7 +588,7 @@ public partial class AccountView
         }
     }
 
-    private void ExportToFile(Gio.SimpleAction sender, EventArgs e)
+    private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
     {
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
@@ -588,6 +596,25 @@ public partial class AccountView
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
         saveFileDialog.AddFilter(filterCsv);
+        saveFileDialog.OnResponse += (sender, e) =>
+        {
+            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            {
+                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                if(Path.GetExtension(path) != ".csv")
+                {
+                    path += ".csv";
+                }
+                _controller.ExportToFile(path);
+            }
+        };
+        saveFileDialog.Show();
+    }
+
+    private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
+    {
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+        saveFileDialog.SetModal(true);
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
@@ -597,6 +624,10 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                if (Path.GetExtension(path) != ".pdf")
+                {
+                    path += ".pdf";
+                }
                 _controller.ExportToFile(path);
             }
         };

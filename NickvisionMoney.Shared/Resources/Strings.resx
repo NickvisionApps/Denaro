@@ -248,10 +248,6 @@
 		<value>Export to File</value>
 	</data>
 
-	<data name="ExportToFile.Tooltip" xml:space="preserve">
-		<value>Export to File (Ctrl+E)</value>
-	</data>
-
 	<data name="Overview" xml:space="preserve">
 		<value>Overview</value>
 	</data>
