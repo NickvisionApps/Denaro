@@ -7,6 +7,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.System;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
@@ -37,6 +38,9 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         LblVersion.Text = string.Format(_controller.Localizer["Version"], _controller.AppInfo.Version);
         LblBtnChangelog.Text = _controller.Localizer["Changelog"];
         LblBtnCredits.Text = _controller.Localizer["Credits"];
+        LblBtnGitHubRepo.Text = _controller.Localizer["GitHubRepo"];
+        LblBtnReportABug.Text = _controller.Localizer["ReportABug"];
+        LblBtnDiscussions.Text = _controller.Localizer["Discussions"];
         CardUserInterface.Header = _controller.Localizer["UserInterface"];
         CardUserInterface.Description = _controller.Localizer["UserInterfaceDescription"];
         CardTheme.Header = _controller.Localizer["Theme"];
@@ -150,6 +154,27 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         };
         await creditsDialog.ShowAsync();
     }
+
+    /// <summary>
+    /// Occurs when the github repo button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void GitHubRepo(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(_controller.AppInfo.GitHubRepo);
+
+    /// <summary>
+    /// Occurs when the report a bug button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ReportABug(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(_controller.AppInfo.IssueTracker);
+
+    /// <summary>
+    /// Occurs when the discussions button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void Discussions(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(_controller.AppInfo.SupportUrl);
 
     /// <summary>
     /// Occurs when the CmbTheme selection is changed

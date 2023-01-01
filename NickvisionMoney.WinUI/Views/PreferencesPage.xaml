@@ -14,7 +14,7 @@
         <TextBlock x:Name="LblTitle" Margin="30,30,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
 
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,10">
-            <StackPanel wct:DockPanel.Dock="Right" Margin="10,0,10,0">
+            <StackPanel wct:DockPanel.Dock="Right" Margin="10,0,20,0">
                 <TextBlock x:Name="LblAbout" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                 <TextBlock x:Name="LblDescription" Foreground="Gray"/>
@@ -39,6 +39,36 @@
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE125;"/>
 
                             <TextBlock x:Name="LblBtnCredits"/>
+                        </StackPanel>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
+
+                <HyperlinkButton Margin="-12,12,0,0" Click="GitHubRepo">
+                    <HyperlinkButton.Content>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1D3;"/>
+
+                            <TextBlock x:Name="LblBtnGitHubRepo"/>
+                        </StackPanel>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
+
+                <HyperlinkButton Margin="-12,0,0,0" Click="ReportABug">
+                    <HyperlinkButton.Content>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>
+
+                            <TextBlock x:Name="LblBtnReportABug"/>
+                        </StackPanel>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
+
+                <HyperlinkButton Margin="-12,0,0,0" Click="Discussions">
+                    <HyperlinkButton.Content>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15F;"/>
+
+                            <TextBlock x:Name="LblBtnDiscussions"/>
                         </StackPanel>
                     </HyperlinkButton.Content>
                 </HyperlinkButton>

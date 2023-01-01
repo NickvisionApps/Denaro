@@ -34,6 +34,18 @@
 		<value>Changelog</value>
 	</data>
 
+	<data name="GitHubRepo" xml:space="preserve">
+		<value>GitHub Repo</value>
+	</data>
+
+	<data name="ReportABug" xml:space="preserve">
+		<value>Report a Bug</value>
+	</data>
+
+	<data name="Discussions" xml:space="preserve">
+		<value>Discussions</value>
+	</data>
+
 	<!--Credits-->
 	<data name="Credits" xml:space="preserve">
 		<value>Credits</value>
