@@ -35,6 +35,19 @@ public class Account : IDisposable
     public Dictionary<uint, Transaction> Transactions { get; init; }
 
     /// <summary>
+    /// The total income amount of the account
+    /// </summary>
+    public decimal Income => GetIncome(DateOnly.FromDateTime(DateTime.Now));
+    /// <summary>
+    /// The total expense amount of the account
+    /// </summary>
+    public decimal Expense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
+    /// <summary>
+    /// The full total amount of the account
+    /// </summary>
+    public decimal Total => GetTotal(DateOnly.FromDateTime(DateTime.Now));
+
+    /// <summary>
     /// Constructs an Account
     /// </summary>
     /// <param name="path">The path of the account</param>
@@ -156,23 +169,36 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// The income of the account
+    /// Frees resources used by the Account object
     /// </summary>
-    public decimal Income => GetIncome(DateOnly.FromDateTime(DateTime.Now));
+    public void Dispose()
+    {
+        _database.Dispose();
+        foreach(var pair in Transactions)
+        {
+            pair.Value.Dispose();
+        }
+    }
 
+    /// <summary>
+    /// Gets the income amount for the date range
+    /// </summary>
+    /// <param name="endDate">The end date</param>
+    /// <param name="startDate">The start date</param>
+    /// <returns>The income amount for the date range</returns>
     public decimal GetIncome(DateOnly endDate, DateOnly? startDate = null)
     {
         var income = 0m;
-        foreach(var pair in Transactions)
+        foreach (var pair in Transactions)
         {
-            if(startDate.HasValue)
+            if (startDate != null)
             {
-                if(pair.Value.Date < startDate)
+                if (pair.Value.Date < startDate)
                 {
                     continue;
                 }
             }
-            if(pair.Value.Type == TransactionType.Income && pair.Value.Date <= endDate)
+            if (pair.Value.Type == TransactionType.Income && pair.Value.Date <= endDate)
             {
                 income += pair.Value.Amount;
             }
@@ -181,23 +207,24 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// The expense of the account
+    /// Gets the expense amount for the date range
     /// </summary>
-    public decimal Expense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
-
+    /// <param name="endDate">The end date</param>
+    /// <param name="startDate">The start date</param>
+    /// <returns>The expense amount for the date range</returns>
     public decimal GetExpense(DateOnly endDate, DateOnly? startDate = null)
     {
         var expense = 0m;
-        foreach(var pair in Transactions)
+        foreach (var pair in Transactions)
         {
-            if(startDate.HasValue)
+            if (startDate != null)
             {
-                if(pair.Value.Date < startDate)
+                if (pair.Value.Date < startDate)
                 {
                     continue;
                 }
             }
-            if(pair.Value.Type == TransactionType.Expense && pair.Value.Date <= endDate)
+            if (pair.Value.Type == TransactionType.Expense && pair.Value.Date <= endDate)
             {
                 expense += pair.Value.Amount;
             }
@@ -206,25 +233,26 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// The total of the account
+    /// Gets the total amount for the date range
     /// </summary>
-    public decimal Total => GetTotal(DateOnly.FromDateTime(DateTime.Now));
-
+    /// <param name="endDate">The end date</param>
+    /// <param name="startDate">The start date</param>
+    /// <returns>The total amount for the date range</returns>
     public decimal GetTotal(DateOnly endDate, DateOnly? startDate = null)
     {
         var total = 0m;
-        foreach(var pair in Transactions)
+        foreach (var pair in Transactions)
         {
-            if(startDate.HasValue)
+            if (startDate != null)
             {
-                if(pair.Value.Date < startDate)
+                if (pair.Value.Date < startDate)
                 {
                     continue;
                 }
             }
-            if(pair.Value.Date <= endDate)
+            if (pair.Value.Date <= endDate)
             {
-                if(pair.Value.Type == TransactionType.Income)
+                if (pair.Value.Type == TransactionType.Income)
                 {
                     total += pair.Value.Amount;
                 }
@@ -235,18 +263,6 @@ public class Account : IDisposable
             }
         }
         return total;
-    }
-
-    /// <summary>
-    /// Frees resources used by the Account object
-    /// </summary>
-    public void Dispose()
-    {
-        _database.Dispose();
-        foreach(var pair in Transactions)
-        {
-            pair.Value.Dispose();
-        }
     }
 
     /// <summary>
