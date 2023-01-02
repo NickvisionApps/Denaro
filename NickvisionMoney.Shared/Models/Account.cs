@@ -114,7 +114,7 @@ public class Account : IDisposable
                 Amount = readQueryTransactions.GetDecimal(5),
                 GroupId = readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.GetString(7),
-                RepeatFrom = readQueryTransactions.GetInt32(9)
+                RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9)
             };
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
