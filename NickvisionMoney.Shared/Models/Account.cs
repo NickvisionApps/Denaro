@@ -158,62 +158,83 @@ public class Account : IDisposable
     /// <summary>
     /// The income of the account
     /// </summary>
-    public decimal Income
+    public decimal Income => GetIncome(DateOnly.FromDateTime(DateTime.Now));
+
+    public decimal GetIncome(DateOnly endDate, DateOnly? startDate = null)
     {
-        get
+        var income = 0m;
+        foreach(var pair in Transactions)
         {
-            var income = 0m;
-            foreach(var pair in Transactions)
+            if(startDate.HasValue)
             {
-                if(pair.Value.Type == TransactionType.Income)
+                if(pair.Value.Date < startDate)
                 {
-                    income += pair.Value.Amount;
+                    continue;
                 }
             }
-            return income;
+            if(pair.Value.Type == TransactionType.Income && pair.Value.Date <= endDate)
+            {
+                income += pair.Value.Amount;
+            }
         }
+        return income;
     }
 
     /// <summary>
     /// The expense of the account
     /// </summary>
-    public decimal Expense
+    public decimal Expense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
+
+    public decimal GetExpense(DateOnly endDate, DateOnly? startDate = null)
     {
-        get
+        var expense = 0m;
+        foreach(var pair in Transactions)
         {
-            var expense = 0m;
-            foreach (var pair in Transactions)
+            if(startDate.HasValue)
             {
-                if (pair.Value.Type == TransactionType.Expense)
+                if(pair.Value.Date < startDate)
                 {
-                    expense += pair.Value.Amount;
+                    continue;
                 }
             }
-            return expense;
+            if(pair.Value.Type == TransactionType.Expense && pair.Value.Date <= endDate)
+            {
+                expense += pair.Value.Amount;
+            }
         }
+        return expense;
     }
 
     /// <summary>
     /// The total of the account
     /// </summary>
-    public decimal Total
+    public decimal Total => GetTotal(DateOnly.FromDateTime(DateTime.Now));
+
+    public decimal GetTotal(DateOnly endDate, DateOnly? startDate = null)
     {
-        get
+        var total = 0m;
+        foreach(var pair in Transactions)
         {
-            var total = 0m;
-            foreach (var pair in Transactions)
+            if(startDate.HasValue)
             {
-                if (pair.Value.Type == TransactionType.Income)
+                if(pair.Value.Date < startDate)
+                {
+                    continue;
+                }
+            }
+            if(pair.Value.Date <= endDate)
+            {
+                if(pair.Value.Type == TransactionType.Income)
                 {
                     total += pair.Value.Amount;
                 }
-                else if(pair.Value.Type == TransactionType.Expense)
+                else
                 {
                     total -= pair.Value.Amount;
                 }
             }
-            return total;
         }
+        return total;
     }
 
     /// <summary>
