@@ -56,13 +56,6 @@ public partial class AccountView
     private static partial uint g_list_model_get_n_items(nint list);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_chooser_get_file(nint chooser);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
@@ -121,8 +114,6 @@ public partial class AccountView
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
-    private readonly Adw.Bin _binSpinner;
-    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
@@ -411,15 +402,6 @@ public partial class AccountView
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
-        //Loading Spinner
-        _binSpinner = Adw.Bin.New();
-        _binSpinner.SetHexpand(true);
-        _binSpinner.SetVexpand(true);
-        _spinner = Gtk.Spinner.New();
-        _spinner.SetSizeRequest(42, 42);
-        _spinner.SetHalign(Gtk.Align.Center);
-        _spinner.SetValign(Gtk.Align.Center);
-        _binSpinner.SetChild(_spinner);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -430,7 +412,6 @@ public partial class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
-        _boxMain.Append(_binSpinner);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
@@ -491,12 +472,6 @@ public partial class AccountView
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
-            _scrollTransactions.SetVisible(false);
-            _statusPageNoTransactions.SetVisible(false);
-            _binSpinner.SetVisible(true);
-            _spinner.Start();
-            _paneBox.SetSensitive(false);
-            _boxSort.SetSensitive(false);
             //Overview
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
@@ -512,23 +487,19 @@ public partial class AccountView
             ungroupedRow.FilterChanged += UpdateGroupFilter;
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
-            var groups = new List<Group>();
-            //Normal groups
-            foreach (var pair in _controller.Groups)
-            {
-                groups.Add(pair.Value);
-            }
+            //Other Group Rows
+            var groups = _controller.Groups.Values.ToList();
             groups.Sort();
             foreach (var group in groups)
             {
                 var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                row.FilterChanged += UpdateGroupFilter;
                 row.EditTriggered += EditGroup;
                 row.DeleteTriggered += DeleteGroup;
+                row.FilterChanged += UpdateGroupFilter;
+                row.SetVisible(!_btnToggleGroups.GetActive());
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
-            OnToggleGroups(null, EventArgs.Empty);
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
@@ -576,11 +547,6 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
-            _spinner.Stop();
-            _paneBox.SetSensitive(true);
-            _boxSort.SetSensitive(true);
-            _binSpinner.SetVisible(false);
-            g_main_context_iteration(g_main_context_default(), true);
             _isAccountLoading = false;
         }
     }
