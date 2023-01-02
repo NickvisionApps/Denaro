@@ -1001,12 +1001,16 @@ public class Account : IDisposable
     /// </summary>
     private async Task UpdateGroupAmountsAsync()
     {
-        var cmdQueryGroupBalance = _database.CreateCommand();
-        cmdQueryGroupBalance.CommandText = "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;";
-        using var readQueryGroupBalance = await cmdQueryGroupBalance.ExecuteReaderAsync();
-        while(await readQueryGroupBalance.ReadAsync())
+        foreach(var pairGroup in Groups)
         {
-            Groups[(uint)readQueryGroupBalance.GetInt32(0)].Balance = readQueryGroupBalance.GetDecimal(1);
+            pairGroup.Value.Balance = 0m;
+        }
+        foreach(var pairTransaction in Transactions)
+        {
+            if(pairTransaction.Value.Date <= DateOnly.FromDateTime(DateTime.Now) && pairTransaction.Value.GroupId != -1)
+            {
+                Groups[(uint)pairTransaction.Value.GroupId].Balance += pairTransaction.Value.Amount * (pairTransaction.Value.Type == TransactionType.Income ? 1 : -1);
+            }
         }
     }
 }

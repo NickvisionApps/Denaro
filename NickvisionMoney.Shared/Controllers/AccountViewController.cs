@@ -157,7 +157,7 @@ public class AccountViewController
             var total = 0m;
             foreach (var pair in Transactions)
             {
-                if (pair.Value.GroupId == -1)
+                if (pair.Value.GroupId == -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
                 {
                     total += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : (pair.Value.Amount * -1);
                 }
