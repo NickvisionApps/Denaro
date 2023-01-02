@@ -236,7 +236,7 @@ public partial class AccountView
         _boxButtonsOverview.Append(_btnResetOverviewFilter);
         //Overview Group
         _grpOverview = Adw.PreferencesGroup.New();
-        _grpOverview.SetTitle(_controller.Localizer["Overview"]);
+        _grpOverview.SetTitle(_controller.Localizer["Overview", "Today"]);
         _grpOverview.Add(_rowTotal);
         _grpOverview.Add(_rowIncome);
         _grpOverview.Add(_rowExpense);
@@ -498,9 +498,9 @@ public partial class AccountView
             _paneBox.SetSensitive(false);
             _boxSort.SetSensitive(false);
             //Overview
-            _lblTotal.SetLabel(_controller.AccountTotalString);
-            _lblIncome.SetLabel(_controller.AccountIncomeString);
-            _lblExpense.SetLabel(_controller.AccountExpenseString);
+            _lblTotal.SetLabel(_controller.AccountTodayTotalString);
+            _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
+            _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
             //Groups
             foreach (var groupRow in _groupRows)
             {
@@ -587,7 +587,7 @@ public partial class AccountView
 
     private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
-        if (_controller.AccountTotal > 0)
+        if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);

@@ -252,6 +252,10 @@
 		<value>Overview</value>
 	</data>
 
+	<data name="Overview.Today" xml:space="preserve">
+		<value>Today's Overview</value>
+	</data>
+
 	<data name="Total" xml:space="preserve">
 		<value>Total</value>
 	</data>

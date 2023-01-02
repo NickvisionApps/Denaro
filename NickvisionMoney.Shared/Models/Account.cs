@@ -35,17 +35,17 @@ public class Account : IDisposable
     public Dictionary<uint, Transaction> Transactions { get; init; }
 
     /// <summary>
-    /// The total income amount of the account
+    /// The income amount of the account for today
     /// </summary>
-    public decimal Income => GetIncome(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayIncome => GetIncome(DateOnly.FromDateTime(DateTime.Now));
     /// <summary>
-    /// The total expense amount of the account
+    /// The expense amount of the account for today
     /// </summary>
-    public decimal Expense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayExpense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
     /// <summary>
-    /// The full total amount of the account
+    /// The total amount of the account for today
     /// </summary>
-    public decimal Total => GetTotal(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayTotal => GetTotal(DateOnly.FromDateTime(DateTime.Now));
 
     /// <summary>
     /// Constructs an Account
@@ -100,7 +100,7 @@ public class Account : IDisposable
         catch { }
         //Get Groups
         var cmdQueryGroups = _database.CreateCommand();
-        cmdQueryGroups.CommandText = "SELECT g.*, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM groups g LEFT JOIN transactions t ON t.gid = g.id GROUP BY g.id;";
+        cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
         while(readQueryGroups.Read())
         {
@@ -108,7 +108,7 @@ public class Account : IDisposable
             {
                 Name = readQueryGroups.GetString(1),
                 Description = readQueryGroups.GetString(2),
-                Balance = readQueryGroups.GetDecimal(3)
+                Balance = 0m
             };
             Groups.Add(group.Id, group);
         }
@@ -135,6 +135,10 @@ public class Account : IDisposable
                 transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
+            if(transaction.GroupId != -1 && transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+            }
         }
     }
 
@@ -443,7 +447,7 @@ public class Account : IDisposable
             Transactions.Add(transaction.Id, transaction);
             if(transaction.GroupId != -1)
             {
-                await UpdateGroupAmountsAsync();
+                UpdateGroupAmounts();
             }
             return true;
         }
@@ -481,7 +485,7 @@ public class Account : IDisposable
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions[transaction.Id] = transaction;
-            await UpdateGroupAmountsAsync();
+            UpdateGroupAmounts();
             return true;
         }
         return false;
@@ -503,7 +507,7 @@ public class Account : IDisposable
             Transactions.Remove(id);
             if(updateGroups)
             {
-                await UpdateGroupAmountsAsync();
+                UpdateGroupAmounts();
             }
             return true;
         }
@@ -1015,17 +1019,26 @@ public class Account : IDisposable
     /// <summary>
     /// Updates the amount of each Group object in the account
     /// </summary>
-    private async Task UpdateGroupAmountsAsync()
+    private void UpdateGroupAmounts()
     {
-        foreach(var pairGroup in Groups)
+        /*
+        var cmdQueryGroupBalance = _database.CreateCommand();
+        cmdQueryGroupBalance.CommandText = "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;";
+        using var readQueryGroupBalance = await cmdQueryGroupBalance.ExecuteReaderAsync();
+        while (await readQueryGroupBalance.ReadAsync())
         {
-            pairGroup.Value.Balance = 0m;
+            Groups[(uint)readQueryGroupBalance.GetInt32(0)].Balance = readQueryGroupBalance.GetDecimal(1);
         }
-        foreach(var pairTransaction in Transactions)
+        */
+        foreach(var pair in Groups)
         {
-            if(pairTransaction.Value.Date <= DateOnly.FromDateTime(DateTime.Now) && pairTransaction.Value.GroupId != -1)
+            pair.Value.Balance = 0;
+        }
+        foreach(var pair in Transactions)
+        {
+            if(pair.Value.GroupId != -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                Groups[(uint)pairTransaction.Value.GroupId].Balance += pairTransaction.Value.Amount * (pairTransaction.Value.Type == TransactionType.Income ? 1 : -1);
+                Groups[(uint)pair.Value.GroupId].Balance += (pair.Value.Type == TransactionType.Income ? 1 : -1) * pair.Value.Amount;
             }
         }
     }

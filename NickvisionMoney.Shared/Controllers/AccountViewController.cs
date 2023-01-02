@@ -36,35 +36,35 @@ public class AccountViewController
     /// </summary>
     public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
     /// <summary>
-    /// The total amount of the account
+    /// The total amount of the account for today
     /// </summary>
-    public decimal AccountTotal => _account.Total;
+    public decimal AccountTodayTotal => _account.TodayTotal;
     /// <summary>
-    /// The total amount of the account as a string
+    /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTotalString => _account.Total.ToString("C");
+    public string AccountTodayTotalString => _account.TodayTotal.ToString("C");
     /// <summary>
-    /// The income amount of the account
+    /// The income amount of the account for today
     /// </summary>
-    public decimal AccountIncome => _account.Income;
+    public decimal AccountTodayIncome => _account.TodayIncome;
     /// <summary>
-    /// The income amount of the account as a string
+    /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountIncomeString => _account.Income.ToString("C");
+    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C");
     /// <summary>
-    /// The expense amount of the account
+    /// The expense amount of the account for today
     /// </summary>
-    public decimal AccountExpense => _account.Expense;
+    public decimal AccountTodayExpense => _account.TodayExpense;
     /// <summary>
-    /// The expense amount of the account as a string
+    /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountExpenseString => _account.Expense.ToString("C");
+    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C");
     /// <summary>
-    /// The groups of the account
+    /// The groups of the account for today
     /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
     /// <summary>
-    /// The transactions of the account
+    /// The transactions of the account for today
     /// </summary>
     public Dictionary<uint, Transaction> Transactions => _account.Transactions;
 

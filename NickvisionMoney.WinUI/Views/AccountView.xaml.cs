@@ -55,7 +55,7 @@ public sealed partial class AccountView : UserControl
         MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
-        LblOverview.Text = _controller.Localizer["Overview"];
+        LblOverview.Text = _controller.Localizer["Overview", "Today"];
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
@@ -105,11 +105,11 @@ public sealed partial class AccountView : UserControl
         {
             _isAccountLoading = true;
             //Overview
-            LblTotalAmount.Text = _controller.AccountTotalString;
+            LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
-            LblIncomeAmount.Text = _controller.AccountIncomeString;
+            LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
             LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
-            LblExpenseAmount.Text = _controller.AccountExpenseString;
+            LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
             ListGroups.Items.Clear();
@@ -323,7 +323,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void TransferMoney(object? sender, RoutedEventArgs e)
     {
-        if(_controller.AccountTotal > 0)
+        if(_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _initializeWithWindow)
