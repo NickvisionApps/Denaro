@@ -88,8 +88,10 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        AccountInfoChanged(null, EventArgs.Empty);
-        await _controller.RunRepeatTransactionsAsync();
+        if(!(await _controller.RunRepeatTransactionsAsync()))
+        {
+            AccountInfoChanged(null, EventArgs.Empty);
+        }
     }
 
     /// <summary>
@@ -198,6 +200,10 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
+            if(transactionController.RepeatIntervalChanged)
+            {
+                await _controller.RunRepeatTransactionsAsync();
+            }
         }
     }
 
@@ -216,6 +222,10 @@ public sealed partial class AccountView : UserControl
         if (await transactionDialog.ShowAsync())
         {
             await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if (transactionController.RepeatIntervalChanged)
+            {
+                await _controller.RunRepeatTransactionsAsync();
+            }
         }
     }
 

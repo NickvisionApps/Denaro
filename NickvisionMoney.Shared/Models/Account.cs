@@ -55,7 +55,7 @@ public class Account : IDisposable
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
         var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -76,6 +76,13 @@ public class Account : IDisposable
             var cmdTableTransactionsUpdate3 = _database.CreateCommand();
             cmdTableTransactionsUpdate3.CommandText = "ALTER TABLE transactions ADD COLUMN receipt TEXT";
             cmdTableTransactionsUpdate3.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            var cmdTableTransactionsUpdate4 = _database.CreateCommand();
+            cmdTableTransactionsUpdate4.CommandText = "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER";
+            cmdTableTransactionsUpdate4.ExecuteNonQuery();
         }
         catch { }
         //Get Groups
@@ -106,7 +113,8 @@ public class Account : IDisposable
                 RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
                 Amount = readQueryTransactions.GetDecimal(5),
                 GroupId = readQueryTransactions.GetInt32(6),
-                RGBA = readQueryTransactions.GetString(7)
+                RGBA = readQueryTransactions.GetString(7),
+                RepeatFrom = readQueryTransactions.GetInt32(9)
             };
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
@@ -226,77 +234,78 @@ public class Account : IDisposable
     /// <returns>True if at least one transaction was created, else false</returns>
     public async Task<bool> RunRepeatTransactionsAsync()
     {
-        var transactionsAdded = false;
-        var transactions = Transactions.Values.ToList();
-        foreach (var transaction in transactions)
+        var transactionAdded = false;
+        var transactions = Transactions.Values.ToList(); 
+        var i = 0;
+        foreach(var transaction in transactions)
         {
-            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            if(transaction.RepeatFrom == 0)
             {
-                var repeatNeeded = false;
-                if (transaction.RepeatInterval == TransactionRepeatInterval.Daily)
+                var dates = new List<DateOnly>();
+                for (var date = transaction.Date; date <= DateOnly.FromDateTime(DateTime.Now); date = date.AddDays(0))
                 {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddDays(1))
+                    if(date != transaction.Date)
                     {
-                        repeatNeeded = true;
+                        dates.Add(date);
+                    }
+                    if (transaction.RepeatInterval == TransactionRepeatInterval.Daily)
+                    {
+                        date = date.AddDays(1);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
+                    {
+                        date = date.AddDays(7);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biweekly)
+                    {
+                        date = date.AddDays(14);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
+                    {
+                        date = date.AddMonths(1);
+                    }
+                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                    {
+                        date = date.AddMonths(4);
+                    }
+                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
+                    {
+                        date = date.AddYears(1);
+                    }
+                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                    {
+                        date = date.AddYears(2);
                     }
                 }
-                else if (transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
+                for(var j = i; j < transactions.Count; j++)
                 {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddDays(7))
+                    if (transactions[j].RepeatFrom == transaction.Id)
                     {
-                        repeatNeeded = true;
+                        dates.Remove(transactions[j].Date);
                     }
                 }
-                else if (transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddMonths(1))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if (transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddMonths(4))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if (transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddYears(1))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
-                {
-                    if (DateOnly.FromDateTime(DateTime.Today) >= transaction.Date.AddYears(2))
-                    {
-                        repeatNeeded = true;
-                    }
-                }
-                if (repeatNeeded)
+                foreach(var date in dates)
                 {
                     var newTransaction = new Transaction(NextAvailableTransactionId)
                     {
-                        Date = DateOnly.FromDateTime(DateTime.Today),
+                        Date = date,
                         Description = transaction.Description,
                         Type = transaction.Type,
                         RepeatInterval = transaction.RepeatInterval,
                         Amount = transaction.Amount,
                         GroupId = transaction.GroupId,
                         RGBA = transaction.RGBA,
-                        Receipt = transaction.Receipt
+                        Receipt = transaction.Receipt,
+                        RepeatFrom = (int)transaction.Id
                     };
                     await AddTransactionAsync(newTransaction);
-                    transaction.RepeatInterval = TransactionRepeatInterval.Never;
-                    await UpdateTransactionAsync(transaction);
-                    transactionsAdded = true;
+                    transactionAdded = true;
                 }
             }
+            i++;
         }
-        return transactionsAdded;
-    }
+        return transactionAdded;
+    } 
 
     /// <summary>
     /// Adds a group to the account
@@ -372,7 +381,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         var cmdAddTransaction = _database.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -381,7 +390,7 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
         cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
-        if(transaction.Receipt != null)
+        if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
             await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
@@ -391,6 +400,7 @@ public class Account : IDisposable
         {
             cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
         }
+        cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
@@ -411,7 +421,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         var cmdUpdateTransaction = _database.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -430,6 +440,7 @@ public class Account : IDisposable
         {
             cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
         }
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions[transaction.Id] = transaction;
@@ -551,7 +562,7 @@ public class Account : IDisposable
     private bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original);Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
         foreach (var pair in Transactions)
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
@@ -662,7 +673,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 10)
+            if (fields.Length != 11)
             {
                 continue;
             }
@@ -712,32 +723,42 @@ public class Account : IDisposable
             {
                 continue;
             }
+            //Get Repeat From
+            var repeatFrom = 0;
+            try
+            {
+                repeatFrom = int.Parse(fields[5]);
+            }
+            catch
+            {
+                continue;
+            }
             //Get Amount
             var amount = 0m;
             try
             {
-                amount = decimal.Parse(fields[5], NumberStyles.Currency, new CultureInfo("en-US"));
+                amount = decimal.Parse(fields[6], NumberStyles.Currency, new CultureInfo("en-US"));
             }
             catch
             {
                 continue;
             }
             //Get RGBA
-            var rgba = fields[6];
+            var rgba = fields[7];
             //Get Group Id
             var gid = 0;
             try
             {
-                gid = int.Parse(fields[7]);
+                gid = int.Parse(fields[8]);
             }
             catch
             {
                 continue;
             }
             //Get Group Name
-            var groupName = fields[8];
+            var groupName = fields[9];
             //Get Group Description
-            var groupDescription = fields[9];
+            var groupDescription = fields[10];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
@@ -757,7 +778,8 @@ public class Account : IDisposable
                 RepeatInterval = repeat,
                 Amount = amount,
                 GroupId = gid,
-                RGBA = rgba
+                RGBA = rgba,
+                RepeatFrom = repeatFrom
             };
             await AddTransactionAsync(transaction);
             imported++;

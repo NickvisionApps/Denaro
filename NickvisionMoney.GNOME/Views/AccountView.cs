@@ -485,8 +485,8 @@ public partial class AccountView
     {
         if(_isFirstTimeLoading)
         {
-            await _controller.RunRepeatTransactionsAsync();
             _isFirstTimeLoading = false;
+            await _controller.RunRepeatTransactionsAsync();
         }
         if(!_isAccountLoading)
         {
@@ -688,6 +688,10 @@ public partial class AccountView
         if(await transactionDialog.RunAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
+            if (transactionController.RepeatIntervalChanged)
+            {
+                await _controller.RunRepeatTransactionsAsync();
+            }
         }
     }
 
@@ -698,6 +702,10 @@ public partial class AccountView
         if(await transactionDialog.RunAsync())
         {
             await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if (transactionController.RepeatIntervalChanged)
+            {
+                await _controller.RunRepeatTransactionsAsync();
+            }
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 
 namespace NickvisionMoney.Shared.Models;
@@ -67,6 +66,10 @@ public class Transaction : IComparable<Transaction>, IDisposable
     /// The receipt image for the transaction
     /// </summary>
     public Image? Receipt { get; set; }
+    /// <summary>
+    /// The id of the transaction to repeat from (or -1 for non repeat transaction, 0 for original repeat transaction)
+    /// </summary>
+    public int RepeatFrom { get; set; }
 
     /// <summary>
     /// Constructs a Transaction
@@ -83,7 +86,7 @@ public class Transaction : IComparable<Transaction>, IDisposable
         GroupId = -1;
         RGBA = "";
         Receipt = null;
-        
+        RepeatFrom = -1;
     }
 
     /// <summary>
