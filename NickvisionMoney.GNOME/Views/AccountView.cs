@@ -459,6 +459,7 @@ public partial class AccountView
         _flap.AddController(_shortcutController);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
+        OnToggleGroups(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
