@@ -119,8 +119,11 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _btnDelete.OnClicked += Delete;
         //Buttons Box
         _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxButtons.Append(_btnEdit);
-        _boxButtons.Append(_btnDelete);
+        if(_transaction.RepeatFrom <= 0)
+        {
+            _boxButtons.Append(_btnEdit);
+            _boxButtons.Append(_btnDelete);
+        }
         //Suffix Box
         _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
         _boxSuffix.SetValign(Gtk.Align.Center);

@@ -42,9 +42,19 @@ public sealed partial class TransactionRow : UserControl
         _transaction = transaction;
         //Localize Strings
         MenuEdit.Text = localizer["Edit", "TransactionRow"];
-        ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "TransactionRow"]);
         MenuDelete.Text = localizer["Delete", "TransactionRow"];
-        ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "TransactionRow"]);
+        if(_transaction.RepeatFrom > 0)
+        {
+            MenuEdit.IsEnabled = false;
+            BtnEdit.Visibility = Visibility.Collapsed;
+            MenuDelete.IsEnabled = false;
+            BtnDelete.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "TransactionRow"]);
+            ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "TransactionRow"]);
+        }
         //Load Transaction
         BtnId.Content = _transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
