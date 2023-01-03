@@ -527,7 +527,11 @@ public sealed partial class AccountView : UserControl
     {
         if (ListTransactions.SelectedIndex != -1)
         {
-            EditTransaction(null, ((TransactionRow)ListTransactions.SelectedItem).Id);
+            var transactionRow = (TransactionRow)ListTransactions.SelectedItem;
+            if(transactionRow.RepeatFrom <= 0)
+            {
+                EditTransaction(null, transactionRow.Id);
+            }
             ListTransactions.SelectedIndex = -1;
         }
     }

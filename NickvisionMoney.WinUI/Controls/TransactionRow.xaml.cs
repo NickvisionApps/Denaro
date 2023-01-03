@@ -20,6 +20,10 @@ public sealed partial class TransactionRow : UserControl
     /// The Id of the Transaction the row represents
     /// </summary>
     public uint Id => _transaction.Id;
+    /// <summary>
+    /// The RepeatFrom GroupId of the Transaction the row represents
+    /// </summary>
+    public int RepeatFrom => _transaction.RepeatFrom;
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
@@ -74,12 +78,24 @@ public sealed partial class TransactionRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Edit(object sender, RoutedEventArgs e) => EditTriggered?.Invoke(this, Id);
+    private void Edit(object sender, RoutedEventArgs e)
+    {
+        if(_transaction.RepeatFrom <= 0)
+        {
+            EditTriggered?.Invoke(this, Id);
+        }
+    }
 
     /// <summary>
     /// Occurs when the delete button on the row is clicked 
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Delete(object sender, RoutedEventArgs e) => DeleteTriggered?.Invoke(this, Id);
+    private void Delete(object sender, RoutedEventArgs e)
+    {
+        if(_transaction.RepeatFrom <= 0)
+        {
+            DeleteTriggered?.Invoke(this, Id);
+        }
+    }
 }
