@@ -43,4 +43,12 @@ mkdir -p $INSTALL_PREFIX/share/mime/packages
 cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml $INSTALL_PREFIX/share/mime/packages/
 update-mime-database $INSTALL_PREFIX/share/mime/
 
+echo Installing user docs...
+cd NickvisionMoney.GNOME/Docs
+for lang in *
+do
+	mkdir -p $INSTALL_PREFIX/share/help/$lang/denaro/
+	cp -r $lang/* $INSTALL_PREFIX/share/help/$lang/denaro/
+done
+
 echo Done!
