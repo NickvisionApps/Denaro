@@ -2,7 +2,6 @@
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -33,6 +32,9 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -464,7 +466,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Help(Gio.SimpleAction sender, EventArgs e)
     {
-        Process.Start(new ProcessStartInfo("xdg-open", "help:denaro"));
+        gtk_show_uri(this.Handle, "help:denaro", 0);
     }
 
     /// <summary>
