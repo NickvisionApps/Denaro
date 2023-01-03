@@ -1,6 +1,7 @@
 ﻿using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -183,6 +184,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var mainMenu = Gio.Menu.New();
         mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
         mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
+        mainMenu.Append(_controller.Localizer["Help"], "win.help");
         mainMenu.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
         _btnMainMenu.SetDirection(Gtk.ArrowType.None);
         _btnMainMenu.SetMenuModel(mainMenu);
@@ -286,11 +288,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         actKeyboardShortcuts.OnActivate += KeyboardShortcuts;
         AddAction(actKeyboardShortcuts);
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
+        //Help Action
+        var actHelp = Gio.SimpleAction.New("help", null);
+        actHelp.OnActivate += Help;
+        AddAction(actHelp);
+        application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
         AddAction(actAbout);
-        application.SetAccelsForAction("win.about", new string[] { "F1" });
         //Drop Target
         _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
@@ -457,6 +463,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, _controller.AppInfo.ShortName, this);
         shortcutsDialog.Show();
+    }
+
+    /// <summary>
+    /// Occurs when the help action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void Help(Gio.SimpleAction sender, EventArgs e)
+    {
+        Process.Start(new ProcessStartInfo("xdg-open", "help:denaro"));
     }
 
     /// <summary>

@@ -30,6 +30,10 @@
 		<value>About {0}</value>
 	</data>
 
+	<data name="Help" xml:space="preserve">
+		<value>Help</value>
+	</data>
+
 	<data name="Changelog" xml:space="preserve">
 		<value>Changelog</value>
 	</data>

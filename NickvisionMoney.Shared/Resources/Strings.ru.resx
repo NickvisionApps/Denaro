@@ -30,6 +30,10 @@
 		<value>О приложении</value>
 	</data>
 
+	<data name="Help" xml:space="preserve">
+		<value>Справка</value>
+	</data>
+
 	<data name="Changelog" xml:space="preserve">
 		<value>Список изменений</value>
 	</data>
