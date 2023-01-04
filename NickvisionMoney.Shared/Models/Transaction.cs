@@ -70,6 +70,10 @@ public class Transaction : IComparable<Transaction>, IDisposable
     /// The id of the transaction to repeat from (or -1 for non repeat transaction, 0 for original repeat transaction)
     /// </summary>
     public int RepeatFrom { get; set; }
+    /// <summary>
+    /// The date of when to end the repeat sequence
+    /// </summary>
+    public DateOnly? RepeatEndDate { get; set; }
 
     /// <summary>
     /// Constructs a Transaction
@@ -87,6 +91,7 @@ public class Transaction : IComparable<Transaction>, IDisposable
         RGBA = "";
         Receipt = null;
         RepeatFrom = -1;
+        RepeatEndDate = null;
     }
 
     /// <summary>

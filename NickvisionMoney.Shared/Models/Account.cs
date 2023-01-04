@@ -68,7 +68,7 @@ public class Account : IDisposable
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
         var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -96,6 +96,13 @@ public class Account : IDisposable
             var cmdTableTransactionsUpdate4 = _database.CreateCommand();
             cmdTableTransactionsUpdate4.CommandText = "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER";
             cmdTableTransactionsUpdate4.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            var cmdTableTransactionsUpdate5 = _database.CreateCommand();
+            cmdTableTransactionsUpdate5.CommandText = "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT";
+            cmdTableTransactionsUpdate5.ExecuteNonQuery();
         }
         catch { }
         //Get Groups
@@ -136,7 +143,8 @@ public class Account : IDisposable
                 GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
                 Receipt = Image.Load(Convert.FromBase64String(readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8)), new JpegDecoder()),
-                RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9)
+                RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
+                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))
             };
             Transactions.Add(transaction.Id, transaction);
             if(transaction.GroupId != -1 && transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
