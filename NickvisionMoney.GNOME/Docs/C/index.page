@@ -1,5 +1,14 @@
 <page xmlns="http://projectmallard.org/1.0/"
 	type="guide"
 	id="index">
+<info>
+	<title type="link">Denaro Help</title>
+	<title type="text">Denaro Help</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
 <title>Denaro Help</title>
 </page>
