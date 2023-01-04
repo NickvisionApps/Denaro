@@ -143,7 +143,7 @@ public class Account : IDisposable
                 GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
-                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))
+                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false)))
             };
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
@@ -299,7 +299,8 @@ public class Account : IDisposable
             if(transaction.RepeatFrom == 0)
             {
                 var dates = new List<DateOnly>();
-                for (var date = transaction.Date; date <= DateOnly.FromDateTime(DateTime.Now); date = date.AddDays(0))
+                var endDate = transaction.RepeatEndDate < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
+                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
                 {
                     if(date != transaction.Date)
                     {
@@ -353,7 +354,8 @@ public class Account : IDisposable
                         GroupId = transaction.GroupId,
                         RGBA = transaction.RGBA,
                         Receipt = transaction.Receipt,
-                        RepeatFrom = (int)transaction.Id
+                        RepeatFrom = (int)transaction.Id,
+                        RepeatEndDate = transaction.RepeatEndDate
                     };
                     await AddTransactionAsync(newTransaction);
                     transactionAdded = true;
@@ -438,7 +440,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         var cmdAddTransaction = _database.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -458,6 +460,7 @@ public class Account : IDisposable
             cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
         }
         cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
+        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
@@ -478,7 +481,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         var cmdUpdateTransaction = _database.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -498,6 +501,7 @@ public class Account : IDisposable
             cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
         }
         cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
+        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions[transaction.Id] = transaction;
@@ -619,10 +623,10 @@ public class Account : IDisposable
     private bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original);Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
         foreach (var pair in Transactions)
         {
-            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
             if (pair.Value.GroupId != -1)
             {
                 result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
@@ -730,7 +734,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 11)
+            if (fields.Length != 12)
             {
                 continue;
             }
@@ -790,32 +794,39 @@ public class Account : IDisposable
             {
                 continue;
             }
+            //Get Repeat End Date
+            var repeatEndDate = default(DateOnly?);
+            try
+            {
+                repeatEndDate = DateOnly.Parse(fields[6]);
+            }
+            catch { }
             //Get Amount
             var amount = 0m;
             try
             {
-                amount = decimal.Parse(fields[6], NumberStyles.Currency, new CultureInfo("en-US"));
+                amount = decimal.Parse(fields[7], NumberStyles.Currency, new CultureInfo("en-US"));
             }
             catch
             {
                 continue;
             }
             //Get RGBA
-            var rgba = fields[7];
+            var rgba = fields[8];
             //Get Group Id
             var gid = 0;
             try
             {
-                gid = int.Parse(fields[8]);
+                gid = int.Parse(fields[9]);
             }
             catch
             {
                 continue;
             }
             //Get Group Name
-            var groupName = fields[9];
+            var groupName = fields[10];
             //Get Group Description
-            var groupDescription = fields[10];
+            var groupDescription = fields[11];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
@@ -836,7 +847,8 @@ public class Account : IDisposable
                 Amount = amount,
                 GroupId = gid,
                 RGBA = rgba,
-                RepeatFrom = repeatFrom
+                RepeatFrom = repeatFrom,
+                RepeatEndDate = repeatEndDate
             };
             await AddTransactionAsync(transaction);
             imported++;
@@ -1037,15 +1049,6 @@ public class Account : IDisposable
     /// </summary>
     private void UpdateGroupAmounts()
     {
-        /*
-        var cmdQueryGroupBalance = _database.CreateCommand();
-        cmdQueryGroupBalance.CommandText = "SELECT g.id, CAST(COALESCE(SUM(IIF(t.type=1, -t.amount, t.amount)), 0) AS TEXT) FROM transactions t RIGHT JOIN groups g on g.id = t.gid GROUP BY g.id;";
-        using var readQueryGroupBalance = await cmdQueryGroupBalance.ExecuteReaderAsync();
-        while (await readQueryGroupBalance.ReadAsync())
-        {
-            Groups[(uint)readQueryGroupBalance.GetInt32(0)].Balance = readQueryGroupBalance.GetDecimal(1);
-        }
-        */
         foreach(var pair in Groups)
         {
             pair.Value.Balance = 0;
