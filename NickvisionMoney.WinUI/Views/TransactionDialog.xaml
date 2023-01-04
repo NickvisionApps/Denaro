@@ -34,7 +34,7 @@
 
                 <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch"/>
 
-                <ComboBox x:Name="CmbRepeatInterval" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+                <ComboBox x:Name="CmbGroup" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch">
@@ -43,14 +43,24 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="CmbGroup" Grid.Column="0" HorizontalAlignment="Stretch"/>
+                <ComboBox x:Name="CmbRepeatInterval" Grid.Column="0" HorizontalAlignment="Stretch" SelectionChanged="CmbRepeatInterval_SelectionChanged"/>
 
-                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" Spacing="6">
-                    <TextBlock x:Name="LblColor"/>
+                <wct:DockPanel Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" LastChildFill="True">
+                    <Button x:Name="BtnRepeatEndDateClear" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Click="ClearRepeatEndDate">
+                        <Button.Content>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE106;"/>
+                        </Button.Content>
+                    </Button>
 
-                    <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32"/>
-                </StackPanel>
+                    <CalendarDatePicker x:Name="CalendarRepeatEndDate" wct:DockPanel.Dock="Left" HorizontalAlignment="Stretch"/>
+                </wct:DockPanel>
             </Grid>
+
+            <StackPanel HorizontalAlignment="Stretch" Spacing="6">
+                <TextBlock x:Name="LblColor"/>
+
+                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32"/>
+            </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
                 <TextBlock x:Name="LblReceipt" VerticalAlignment="Center"/>
