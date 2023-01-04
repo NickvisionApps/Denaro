@@ -104,10 +104,14 @@ public class Account : IDisposable
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
         while(readQueryGroups.Read())
         {
+            if(readQueryGroups.IsDBNull(0))
+            {
+                continue;
+            }
             var group = new Group((uint)readQueryGroups.GetInt32(0))
             {
-                Name = readQueryGroups.GetString(1),
-                Description = readQueryGroups.GetString(2),
+                Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
+                Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
@@ -118,22 +122,22 @@ public class Account : IDisposable
         using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
         while(readQueryTransactions.Read())
         {
+            if(readQueryTransactions.IsDBNull(0))
+            {
+                continue;
+            }
             var transaction = new Transaction((uint)readQueryTransactions.GetInt32(0))
             {
-                Date = DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
-                Description = readQueryTransactions.GetString(2),
-                Type = (TransactionType)readQueryTransactions.GetInt32(3),
-                RepeatInterval = (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
-                Amount = readQueryTransactions.GetDecimal(5),
-                GroupId = readQueryTransactions.GetInt32(6),
-                RGBA = readQueryTransactions.GetString(7),
+                Date = readQueryTransactions.IsDBNull(1) ? DateOnly.FromDateTime(DateTime.Today) : DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
+                Description = readQueryTransactions.IsDBNull(2) ? "" : readQueryTransactions.GetString(2),
+                Type = readQueryTransactions.IsDBNull(3) ? TransactionType.Income : (TransactionType)readQueryTransactions.GetInt32(3),
+                RepeatInterval = readQueryTransactions.IsDBNull(4) ? TransactionRepeatInterval.Never : (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
+                Amount = readQueryTransactions.IsDBNull(5) ? 0m : readQueryTransactions.GetDecimal(5),
+                GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
+                RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
+                Receipt = Image.Load(Convert.FromBase64String(readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8)), new JpegDecoder()),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9)
             };
-            var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
-            if (!string.IsNullOrEmpty(receiptString))
-            {
-                transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
-            }
             Transactions.Add(transaction.Id, transaction);
             if(transaction.GroupId != -1 && transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
