@@ -142,10 +142,14 @@ public class Account : IDisposable
                 Amount = readQueryTransactions.IsDBNull(5) ? 0m : readQueryTransactions.GetDecimal(5),
                 GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
-                Receipt = Image.Load(Convert.FromBase64String(readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8)), new JpegDecoder()),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
                 RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))
             };
+            var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
+            if (!string.IsNullOrEmpty(receiptString))
+            {
+                transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
+            }
             Transactions.Add(transaction.Id, transaction);
             if(transaction.GroupId != -1 && transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
