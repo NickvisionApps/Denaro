@@ -501,7 +501,7 @@ public class Account : IDisposable
             cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
         }
         cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
-        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions[transaction.Id] = transaction;
