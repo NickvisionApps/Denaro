@@ -299,7 +299,7 @@ public class Account : IDisposable
             if(transaction.RepeatFrom == 0)
             {
                 var dates = new List<DateOnly>();
-                var endDate = transaction.RepeatEndDate < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
+                var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
                 for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
                 {
                     if(date != transaction.Date)

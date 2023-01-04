@@ -212,8 +212,8 @@ public class TransactionDialogController : IDisposable
         else if(Transaction.RepeatInterval != _originalRepeatInterval)
         {
             Transaction.RepeatFrom = 0;
-            Transaction.RepeatEndDate = repeatEndDate;
         }
+        Transaction.RepeatEndDate = Transaction.RepeatInterval == TransactionRepeatInterval.Never ? null : repeatEndDate;
         return TransactionCheckStatus.Valid;
     }
 
