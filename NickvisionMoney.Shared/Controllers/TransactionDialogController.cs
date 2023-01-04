@@ -142,13 +142,14 @@ public class TransactionDialogController : IDisposable
     /// <param name="date">The new DateOnly object</param>
     /// <param name="description">The new description</param>
     /// <param name="type">The new TransactionType</param>
-    /// <param name="repeat">The new selected repeat index</param>
+    /// <param name="selectedRepeat">The new selected repeat index</param>
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
+    /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath)
+    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -211,6 +212,7 @@ public class TransactionDialogController : IDisposable
         else if(Transaction.RepeatInterval != _originalRepeatInterval)
         {
             Transaction.RepeatFrom = 0;
+            Transaction.RepeatEndDate = repeatEndDate;
         }
         return TransactionCheckStatus.Valid;
     }
