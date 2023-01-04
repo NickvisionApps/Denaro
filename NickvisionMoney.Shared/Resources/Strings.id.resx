@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!--Use: &#xA; for newline-->
+
+	<data name="Description" xml:space="preserve">
+		<value>Manajer keuangan pribadi.</value>
+	</data>
+
+	<data name="Version" xml:space="preserve">
+		<value>Versi: {0}</value>
+	</data>
+
+	<data name="About" xml:space="preserve">
+		<value>Tentang {0}</value>
+	</data>
+
+	<data name="Changelog" xml:space="preserve">
+		<value>Perubahan</value>
+	</data>
+
+	<data name="GitHubRepo" xml:space="preserve">
+		<value>Repo Github</value>
+	</data>
+
+	<data name="ReportABug" xml:space="preserve">
+		<value>Laporkan Masalah</value>
+	</data>
+
+	<data name="Discussions" xml:space="preserve">
+		<value>Diskusi</value>
+	</data>
+
+	<!--Credits-->
+	<data name="Credits" xml:space="preserve">
+		<value>Kredit</value>
+	</data>
+
+	<data name="Developers.Credits" xml:space="preserve">
+		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Kontributor di GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+	</data>
+
+	<data name="Designers.Credits" xml:space="preserve">
+		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Fyodor Sobolev https://github.com/fsobolev</value>
+	</data>
+
+	<data name="Artists.Credits" xml:space="preserve">
+		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>David Lapshin https://github.com/daudix-UFO</value>
+	</data>
+
+	<data name="Translators.Credits" xml:space="preserve">
+		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value></value>
+	</data>
+
+	<!--Actions-->
+	<data name="OK" xml:space="preserve">
+		<value>OK</value>
+	</data>
+
+	<data name="Yes" xml:space="preserve">
+		<value>Ya</value>
+	</data>
+
+	<data name="No" xml:space="preserve">
+		<value>Tidak</value>
+	</data>
+
+	<data name="Cancel" xml:space="preserve">
+		<value>Batal</value>
+	</data>
+
+	<data name="New" xml:space="preserve">
+		<value>Baru</value>
+	</data>
+
+	<data name="Open" xml:space="preserve">
+		<value>Buka</value>
+	</data>
+
+	<data name="Close" xml:space="preserve">
+		<value>Tutup</value>
+	</data>
+
+	<data name="Save" xml:space="preserve">
+		<value>Simpan</value>
+	</data>
+
+	<!--Pages-->
+	<data name="Home" xml:space="preserve">
+		<value>Rumah</value>
+	</data>
+
+	<data name="Account" xml:space="preserve">
+		<value>Rekening</value>
+	</data>
+
+	<data name="Settings" xml:space="preserve">
+		<!--Mostly used in WinUI-->
+		<value>Pengaturan</value>
+	</data>
+
+	<data name="Preferences" xml:space="preserve">
+		<!--Mostly used in GNOME-->
+		<value>Preferensi</value>
+	</data>
+
+	<data name="KeyboardShortcuts" xml:space="preserve">
+		<value>Pintasan Papan Tik</value>
+	</data>
+
+	<!--MainWindow-->
+	<data name="NickvisionMoneyAccount" xml:space="preserve">
+		<value>Rekening Uang Nickvision</value>
+	</data>
+
+	<data name="NewAccount" xml:space="preserve">
+		<value>Rekening Baru</value>
+	</data>
+
+	<data name="NewAccount.Tooltip" xml:space="preserve">
+		<value>Rekening Baru (Ctrl+N)</value>
+	</data>
+
+	<data name="UnableToOverride" xml:space="preserve">
+		<value>Tidak dapat mengesampingkan rekening yang terbuka.</value>
+	</data>
+
+	<data name="OpenAccount" xml:space="preserve">
+		<value>Buka Rekening</value>
+	</data>
+
+	<data name="OpenAccount.Tooltip" xml:space="preserve">
+		<value>Buka Rekening (Ctrl+O)</value>
+	</data>
+
+	<data name="NoAccountOpened" xml:space="preserve">
+		<value>Tidak Ada Rekening yang Terbuka</value>
+	</data>
+
+	<data name="NoAccountDescription" xml:space="preserve">
+		<value>Buat atau buka rekening untuk memulai. Anda juga bisa menyeret berkas ke aplikasi dari penjelajah file.</value>
+	</data>
+
+	<data name="RecentAccounts" xml:space="preserve">
+		<value>Rekening Baru-baru Ini</value>
+	</data>
+
+	<data name="NoRecentAccounts" xml:space="preserve">
+		<value>Tidak Ada Rekening Baru-baru Ini</value>
+	</data>
+
+	<data name="AllFiles" xml:space="preserve">
+		<value>Semua Berkas</value>
+	</data>
+
+	<!--MainWindowController-->
+	<data name="Greeting.Generic" xml:space="preserve">
+		<!-- Shown when system time can't be detected -->
+		<value>Halo!</value>
+	</data>
+
+	<data name="Greeting.Morning" xml:space="preserve">
+		<!-- Shown from 6am to noon -->
+		<value>Selamat Pagi!</value>
+	</data>
+
+	<data name="Greeting.Afternoon" xml:space="preserve">
+		<!-- Shown from noon to 6pm -->
+		<value>Selamat Siang!</value>
+	</data>
+
+	<data name="Greeting.Evening" xml:space="preserve">
+		<!-- Shown from 6pm to mignight -->
+		<value>Selamat Malam!</value>
+	</data>
+
+	<data name="Greeting.Night" xml:space="preserve">
+		<!-- Shown from midnight to 6am -->
+		<!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
+		<value>Selamat Pagi!</value>
+	</data>
+
+	<data name="AccountOpenedAlready" xml:space="preserve">
+		<value>Rekening ini sudah dibuka.</value>
+	</data>
+
+	<!--AccountView-->
+	<data name="NewTransaction" xml:space="preserve">
+		<value>Transaksi Baru</value>
+	</data>
+
+	<data name="NewTransaction.Short" xml:space="preserve">
+		<value>Baru</value>
+	</data>
+
+	<data name="NewTransaction.Tooltip" xml:space="preserve">
+		<value>Transaksi Baru (Ctrl+N)</value>
+	</data>
+
+	<data name="NewGroup" xml:space="preserve">
+		<value>Grup Baru</value>
+	</data>
+
+	<data name="NewGroup.Short" xml:space="preserve">
+		<value>Baru</value>
+	</data>
+
+	<data name="NewGroup.Tooltip" xml:space="preserve">
+		<value>Grup Baru (Ctrl+Shift+N)</value>
+	</data>
+
+	<data name="TransferMoney" xml:space="preserve">
+		<value>Transfer Uang</value>
+	</data>
+
+	<data name="TransferMoney.Tooltip" xml:space="preserve">
+		<value>Transfer Uang (Ctrl+T)</value>
+	</data>
+
+	<data name="ImportFromFile" xml:space="preserve">
+		<value>Impor dari Berkas</value>
+	</data>
+
+	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+		<value>Impor dari Berkas (Ctrl+I)</value>
+	</data>
+
+	<data name="ExportToFile" xml:space="preserve">
+		<value>Ekspor ke Berkas	</value>
+	</data>
+
+	<data name="Overview" xml:space="preserve">
+		<value>Gambaran</value>
+	</data>
+
+	<data name="Total" xml:space="preserve">
+		<value>Total</value>
+	</data>
+
+	<data name="Income" xml:space="preserve">
+		<value>Pemasukan</value>
+	</data>
+
+	<data name="Expense" xml:space="preserve">
+		<value>Pengeluaran</value>
+	</data>
+
+	<data name="Groups" xml:space="preserve">
+		<value>Grup</value>
+	</data>
+
+	<data name="Transactions" xml:space="preserve">
+		<value>Transaksi</value>
+	</data>
+
+	<data name="NoTransactionsTitle" xml:space="preserve">
+		<value>Tidak Ada Transaksi</value>
+	</data>
+
+	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+		<value>Tidak Ada Transaksi yang Ditemukan</value>
+	</data>
+
+	<data name="NoTransactionsDescription" xml:space="preserve">
+		<value>Tambahkan transaksi baru atau impor transaksi dari berkas.</value>
+	</data>
+
+	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+		<value>Tidak ada transaksi yang sesuai dengan filter.</value>
+	</data>
+
+	<data name="SortFirstLast" xml:space="preserve">
+		<value>Urutkan dari awal ke akhir</value>
+	</data>
+
+	<data name="SortLastFirst" xml:space="preserve">
+		<value>Urutkan dari akhir ke awal</value>
+	</data>
+
+	<data name="Filters" xml:space="preserve">
+		<value>Filter</value>
+	</data>
+
+	<data name="ResetFilters.Overview" xml:space="preserve">
+		<value>Atur Ulang Filter Gambaran</value>
+	</data>
+
+	<data name="ResetFilters.Groups" xml:space="preserve">
+		<value>Atur Ulang Filter Grup</value>
+	</data>
+
+	<data name="ResetFilters.Dates" xml:space="preserve">
+		<value>Atur Ulang FIlter Tanggal</value>
+	</data>
+
+	<data name="Calendar" xml:space="preserve">
+		<value>Kalender</value>
+	</data>
+
+	<data name="SelectRange" xml:space="preserve">
+		<value>Pilih Rentang</value>
+	</data>
+
+	<data name="Start.DateRange" xml:space="preserve">
+		<value>Awal</value>
+	</data>
+
+	<data name="End.DateRange" xml:space="preserve">
+		<value>Akhir</value>
+	</data>
+
+	<data name="DeleteGroup" xml:space="preserve">
+		<value>Hapus Grup?</value>
+	</data>
+
+	<data name="DeleteGroupDescription" xml:space="preserve">
+		<value>Apakah anda yakin ingin menghapus grup ini?&#xA;Tindakan ini tidak dapat diurungkan.</value>
+	</data>
+
+	<data name="DeleteTransaction" xml:space="preserve">
+		<value>Hapus Transaksi?</value>
+	</data>
+
+	<data name="DeleteTransactionDescription" xml:space="preserve">
+		<value>Apakah anda yakin ingin menghapus transaksi ini?&#xA;Tindakan ini tidak dapat diurungkan.</value>
+	</data>
+
+	<data name="NoMoneyToTransfer" xml:space="preserve">
+		<value>Rekening ini tidak mempunyai uang untuk ditransfer.</value>
+	</data>
+
+	<data name="Hide" xml:space="preserve">
+		<value>Sembunyikan</value>
+	</data>
+
+	<data name="HideGroups" xml:space="preserve">
+		<value>Sembunyikan Grup</value>
+	</data>
+
+	<data name="ShowGroups" xml:space="preserve">
+		<value>Tampilkan Grup</value>
+	</data>
+
+	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+		<value>Jungkitkan Tampilnya Grup</value>
+	</data>
+
+	<!--AccountViewController-->
+	<data name="Ungrouped" xml:space="preserve">
+		<value>Tidak digrup</value>
+	</data>
+
+	<data name="UngroupedDescription" xml:space="preserve">
+		<value>Transaksi Tanpa Grup</value>
+	</data>
+
+	<data name="Imported" xml:space="preserve">
+		<value>Mengimpor {0} transaksi dari berkas.</value>
+	</data>
+
+	<data name="Imported.Plural" xml:space="preserve">
+		<value>Mengimpor {0} transactions from file.</value>
+	</data>
+
+	<data name="UnableToImport" xml:space="preserve">
+		<value>Tidak dapat mengimpor informasi dari berkas. Berkas tidak didukung.</value>
+	</data>
+
+	<data name="Exported" xml:space="preserve">
+		<value>Ekspor rekening ke berkas berhasil.</value>
+	</data>
+
+	<data name="UnableToExport" xml:space="preserve">
+		<value>Tidak dapat mengekspor rekening ke berkas.</value>
+	</data>
+
+	<data name="Transfer.To" xml:space="preserve">
+		<value>Transfer ke {0}</value>
+	</data>
+
+	<data name="Transfer.From" xml:space="preserve">
+		<value>Transfer dari {0}</value>
+	</data>
+
+	<!--TransactionRow-->
+	<data name="Edit.TransactionRow" xml:space="preserve">
+		<value>Edit Transaksi</value>
+	</data>
+
+	<data name="Delete.TransactionRow" xml:space="preserve">
+		<value>Hapus Transaksi</value>
+	</data>
+
+	<!--GroupRow-->
+	<data name="Edit.GroupRow" xml:space="preserve">
+		<value>Edit Grup</value>
+	</data>
+
+	<data name="Delete.GroupRow" xml:space="preserve">
+		<value>Hapus Grup</value>
+	</data>
+
+	<!--GroupDialog-->
+	<data name="Group" xml:space="preserve">
+		<value>Grup</value>
+	</data>
+
+	<!--TransactionDialog-->
+	<data name="Transaction" xml:space="preserve">
+		<value>Transaksi</value>
+	</data>
+
+	<data name="RepeatInterval.Never" xml:space="preserve">
+		<value>Tidak Pernah</value>
+	</data>
+
+	<data name="RepeatInterval.Daily" xml:space="preserve">
+		<value>Harian</value>
+	</data>
+
+	<data name="RepeatInterval.Weekly" xml:space="preserve">
+		<value>Mingguan</value>
+	</data>
+
+	<data name="RepeatInterval.Monthly" xml:space="preserve">
+		<value>Bulanan</value>
+	</data>
+
+	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+		<value>Triwulanan</value>
+	</data>
+
+	<data name="RepeatInterval.Yearly" xml:space="preserve">
+		<value>Tahunan</value>
+	</data>
+
+	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+		<value>Dua Tahunan</value>
+	</data>
+
+	<data name="Manage" xml:space="preserve">
+		<value>Kelola</value>
+	</data>
+
+	<data name="View" xml:space="preserve">
+		<value>Lihat</value>
+	</data>
+
+	<data name="Delete" xml:space="preserve">
+		<value>Hapus</value>
+	</data>
+
+	<data name="Upload" xml:space="preserve">
+		<value>Unggah</value>
+	</data>
+
+	<!--TransferDialog-->
+	<data name="Transfer" xml:space="preserve">
+		<value>Transfer</value>
+	</data>
+
+	<data name="TransferDescription" xml:space="preserve">
+		<value>Mentransfer uang akan membuat transaksi pengeluaran dengan jumlah yang diberikan di rekening ini dan transaksi pemasukan dengan jumlah yang diberikan di rekening tujuan.</value>
+	</data>
+
+	<data name="NoAccountSelected" xml:space="preserve">
+		<value>Tidak Ada Akun yang Dipilih</value>
+	</data>
+
+	<!--Fields-->
+	<data name="Name.Field" xml:space="preserve">
+		<value>Nama</value>
+	</data>
+
+	<data name="Name.Placeholder" xml:space="preserve">
+		<value>Masukkan nama disini</value>
+	</data>
+
+	<data name="Name.Empty" xml:space="preserve">
+		<value>Nama (Kosong)</value>
+	</data>
+
+	<data name="Name.Exists" xml:space="preserve">
+		<value>Nama (Telah digunakan)</value>
+	</data>
+
+	<data name="Description.Field" xml:space="preserve">
+		<value>Deskripsi</value>
+	</data>
+
+	<data name="Description.Placeholder" xml:space="preserve">
+		<value>Masukkan deskripsi disini</value>
+	</data>
+
+	<data name="Description.Empty" xml:space="preserve">
+		<value>Deskripsi (Kosong)</value>
+	</data>
+
+	<data name="Amount.Field" xml:space="preserve">
+		<value>Jumlah</value>
+	</data>
+
+	<data name="Amount.Placeholder" xml:space="preserve">
+		<value>Masukan jumlah disini</value>
+	</data>
+
+	<data name="Amount.Invalid" xml:space="preserve">
+		<value>Jumlah (Tidak Sah)</value>
+	</data>
+
+	<data name="Date.Field" xml:space="preserve">
+		<value>Tanggal</value>
+	</data>
+
+	<data name="TransactionType.Field" xml:space="preserve">
+		<value>Tipe</value>
+	</data>
+
+	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+		<value>Interval Pengulangan</value>
+	</data>
+
+	<data name="Group.Field" xml:space="preserve">
+		<value>Grup</value>
+	</data>
+
+	<data name="Color.Field" xml:space="preserve">
+		<value>Warna</value>
+	</data>
+
+	<data name="Receipt.Field" xml:space="preserve">
+		<value>Kuitansi</value>
+	</data>
+
+	<data name="DestinationAccount.Field" xml:space="preserve">
+		<value>Rekening Tujuan</value>
+	</data>
+
+	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+		<value>Pilih rekening tujuan</value>
+	</data>
+
+	<data name="DestinationAccount.Invalid" xml:space="preserve">
+		<value>Rekening Tujuan (Tidak Sah)</value>
+	</data>
+
+	<!--Settings-->
+	<data name="UserInterface" xml:space="preserve">
+		<value>Tampilan Pengguna</value>
+	</data>
+
+	<data name="UserInterfaceDescription" xml:space="preserve">
+		<value>Kustomisasi tampilan pengguna pada aplikasi.</value>
+	</data>
+
+	<data name="Theme" xml:space="preserve">
+		<value>Tema</value>
+	</data>
+
+	<data name="ThemeLight" xml:space="preserve">
+		<value>Terang</value>
+	</data>
+
+	<data name="ThemeDark" xml:space="preserve">
+		<value>Gelap</value>
+	</data>
+
+	<data name="ThemeSystem" xml:space="preserve">
+		<value>Sistem</value>
+	</data>
+
+	<data name="Colors" xml:space="preserve">
+		<value>Warna</value>
+	</data>
+
+	<data name="ColorsDescription" xml:space="preserve">
+		<value>Kustomisasi warna yang digunakan Money.</value>
+	</data>
+
+	<data name="TransactionColor" xml:space="preserve">
+		<value>Warna Bawaan Transaksi</value>
+	</data>
+
+	<data name="TransferColor" xml:space="preserve">
+		<value>Warna Bawaan Transfer</value>
+	</data>
+
+	<data name="TransactionColorDescription" xml:space="preserve">
+		<value>Perubahan pada pengaturan ini hanya akan diterapkan pada transaksi baru.</value>
+	</data>
+
+	<data name="TransferColorDescription" xml:space="preserve">
+		<value>Perubahan pada pengaturan ini hanya akan diterapkan pada transfer baru.</value>
+	</data>
+
+	<!--Shortcuts Dialog-->
+	<data name="Application.Shortcut" xml:space="preserve">
+		<value>Aplikasi</value>
+	</data>
+
+	<!--WinUI Specific-->
+	<data name="FixErrors.WinUI" xml:space="preserve">
+		<value>Tolong perbaiki galat di atas.</value>
+	</data>
+
+	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+		<value>Apa Yang Baru?</value>
+	</data>
+
+	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>Developer:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
+	</data>
+
+	<data name="ThemeDescription.WinUI" xml:space="preserve">
+		<value>Mulai ulang diperlukan untuk perubahan tema.</value>
+	</data>
+
+	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+		<value>Mulai Ulang untuk Menerapkan Tema?</value>
+	</data>
+
+	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>Apakah anda ingin memulai ulang {0} untuk menerapkan tema yang baru?&#xA;pekerjaan yang tidak disimpan akan hilang.</value>
+	</data>
+
+	<!--GTK Specific-->
+	<data name="AccountMenu.GTK" xml:space="preserve">
+		<value>Menu Rekening</value>
+	</data>
+
+	<data name="ToggleSidebar.GTK" xml:space="preserve">
+		<value>Jungkitkan Bilah Samping</value>
+	</data>
+
+	<data name="MainMenu.GTK" xml:space="preserve">
+		<value>Menu Utama</value>
+	</data>
+
+	<data name="Recents.GTK" xml:space="preserve">
+		<value>Baru-baru Ini</value>
+	</data>
+
+	<data name="NewAccountPopover.GTK" xml:space="preserve">
+		<value>Baru</value>
+	</data>
+
+	<data name="CloseAccount.GTK" xml:space="preserve">
+		<value>Tutup Rekening</value>
+	</data>
+
+	<data name="AccountActions.GTK" xml:space="preserve">
+		<value>Tindakan</value>
+	</data>
+
+	<data name="AccountFileFilter.GTK" xml:space="preserve">
+		<value>Rekening Uang (*.nmoney)</value>
+	</data>
+</root>
