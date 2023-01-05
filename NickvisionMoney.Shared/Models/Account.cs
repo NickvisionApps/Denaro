@@ -546,6 +546,16 @@ public class Account : IDisposable
         else
         {
             await UpdateTransactionAsync(transaction);
+            foreach (var t in Transactions.Values.ToList())
+            {
+                if (t.RepeatFrom == (int)transaction.Id)
+                {
+                    t.RepeatInterval = TransactionRepeatInterval.Never;
+                    t.RepeatFrom = -1;
+                    t.RepeatEndDate = null;
+                    await UpdateTransactionAsync(t);
+                }
+            }
         }
     }
 
@@ -598,7 +608,7 @@ public class Account : IDisposable
                 if(transaction.RepeatFrom == (int)id)
                 {
                     transaction.RepeatInterval = TransactionRepeatInterval.Never;
-                    transaction.RepeatFrom = 0;
+                    transaction.RepeatFrom = -1;
                     transaction.RepeatEndDate = null;
                     await UpdateTransactionAsync(transaction);
                 }

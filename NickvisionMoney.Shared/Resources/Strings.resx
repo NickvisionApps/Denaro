@@ -369,7 +369,7 @@
 	</data>
 
 	<data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?</value>
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Updating only the source transaction will disassociate&#xA;generated transactions from the source.</value>
 	</data>
 
 	<data name="EditOnlySourceTransaction" xml:space="preserve">
