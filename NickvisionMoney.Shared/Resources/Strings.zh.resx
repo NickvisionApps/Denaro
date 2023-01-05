@@ -121,9 +121,6 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NoRecentAccounts" xml:space="preserve">
 		<value>沒有最近曾開啟的帳戶</value>
   </data>
-  <data name="SelectAccountDescription" xml:space="preserve">
-		<value>選擇帳戶以查看</value>
-  </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<value>祝你有美好的一天!</value>

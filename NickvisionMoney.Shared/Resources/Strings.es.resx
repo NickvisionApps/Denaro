@@ -121,9 +121,6 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NoRecentAccounts" xml:space="preserve">
 		<value>Sin cuentas recientes</value>
   </data>
-  <data name="SelectAccountDescription" xml:space="preserve">
-		<value>Seleccione una cuenta para verla.</value>
-  </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<value>¡Buen día!</value>
