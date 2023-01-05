@@ -542,6 +542,39 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Removes a source transaction from the account
+    /// </summary>
+    /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
+    public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
+    {
+        if (deleteGenerated)
+        {
+            await DeleteTransactionAsync(id);
+            foreach (var transaction in Transactions.Values.ToList())
+            {
+                if (transaction.RepeatFrom == (int)id)
+                {
+                    await DeleteTransactionAsync(transaction.Id);
+                }
+            }
+        }
+        else
+        {
+            await DeleteTransactionAsync(id);
+            foreach(var transaction in Transactions.Values.ToList())
+            {
+                if(transaction.RepeatFrom == (int)id)
+                {
+                    transaction.RepeatInterval = TransactionRepeatInterval.Never;
+                    transaction.RepeatFrom = 0;
+                    transaction.RepeatEndDate = null;
+                    await UpdateTransactionAsync(transaction);
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// Creates an expense transaction for the transfer
     /// </summary>
     /// <param name="transfer">The transfer to send</param>

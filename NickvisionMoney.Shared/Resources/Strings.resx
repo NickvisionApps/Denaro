@@ -353,7 +353,7 @@
 	</data>
 
 	<data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?</value>
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Deleting only the source transaction will allow individual&#xA;generated transactions to be modifiable.</value>
 	</data>
 
 	<data name="DeleteOnlySourceTransaction" xml:space="preserve">
