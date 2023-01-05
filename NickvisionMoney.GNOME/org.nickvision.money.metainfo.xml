@@ -33,6 +33,9 @@
     <p xml:lang="sv">
       En personlig finanshanterare
     </p>
+    <p xml:lang="id">
+      Manajer keuangan pribadi
+    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
