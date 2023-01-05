@@ -103,7 +103,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _lblAmount.SetValign(Gtk.Align.Center);
         _lblAmount.SetMarginEnd(4);
         _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "success" : "error");
-        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "money-income" : "money-expense");
+        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);

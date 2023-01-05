@@ -55,7 +55,7 @@ public partial class GroupRow : Adw.ActionRow
         //Amount Label
         _lblAmount = Gtk.Label.New($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToString("C")}");
         _lblAmount.AddCssClass(_group.Balance >= 0 ? "success" : "error");
-        _lblAmount.AddCssClass(_group.Balance >= 0 ? "money-income" : "money-expense");
+        _lblAmount.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         _lblAmount.SetValign(Gtk.Align.Center);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
