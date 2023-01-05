@@ -380,6 +380,22 @@
 		<value>Update Source and Generated</value>
 	</data>
 
+	<data name="RepeatIntervalChanged" xml:space="preserve">
+		<value>Repeat Interval Changed</value>
+	</data>
+
+	<data name="RepeatIntervalChangedDescription" xml:space="preserve">
+		<value>The repeat interval was changed.&#xA;What would you like to do with existing generated transactions?&#xA;&#xA;New repeat transactions will be generated based off the new interval.</value>
+	</data>
+
+	<data name="DeleteExisting" xml:space="preserve">
+		<value>Delete Existing</value>
+	</data>
+
+	<data name="DisassociateExisting" xml:space="preserve">
+		<value>Disassociate Existing</value>
+	</data>
+
 	<data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>This account has no money available to transfer.</value>
 	</data>

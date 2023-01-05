@@ -31,8 +31,6 @@ public enum TransactionCheckStatus
 /// </summary>
 public class TransactionDialogController : IDisposable
 {
-    private TransactionRepeatInterval _originalRepeatInterval;
-
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -53,6 +51,10 @@ public class TransactionDialogController : IDisposable
     /// A default color for the transaction
     /// </summary>
     public string TransactionDefaultColor { get; init; }
+    /// <summary>
+    /// The orioginal repeat interval of a transaction
+    /// </summary>
+    public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
 
     /// <summary>
     /// Constructs a TransactionDialogController
@@ -63,7 +65,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="localizer">The Localizer of the app</param>
     public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
     {
-        _originalRepeatInterval = transaction.RepeatInterval;
+        OriginalRepeatInterval = transaction.RepeatInterval;
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
@@ -204,7 +206,7 @@ public class TransactionDialogController : IDisposable
         {
             Transaction.RepeatFrom = -1;
         }
-        else if(Transaction.RepeatInterval != _originalRepeatInterval)
+        else if(Transaction.RepeatInterval != OriginalRepeatInterval)
         {
             Transaction.RepeatFrom = 0;
         }

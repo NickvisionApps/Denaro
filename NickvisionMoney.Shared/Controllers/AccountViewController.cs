@@ -397,6 +397,16 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Removes generated repeat transactions from the account
+    /// </summary>
+    /// <param name="id">The id of the source transaction</param>
+    public async Task DeleteGeneratedTransactionsAsync(uint id)
+    {
+        await _account.DeleteGeneratedTransactionsAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Gets whether or not the transaction with the provided id is a source repeat transaction
     /// </summary>
     /// <param name="id">The id of the transaction</param>

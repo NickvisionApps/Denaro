@@ -525,10 +525,11 @@ public class Account : IDisposable
     /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
     public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
     {
+        var transactions = Transactions.Values.ToList();
         if (updateGenerated)
         {
             await UpdateTransactionAsync(transaction);
-            foreach (var t in Transactions.Values.ToList())
+            foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
                 {
@@ -546,7 +547,7 @@ public class Account : IDisposable
         else
         {
             await UpdateTransactionAsync(transaction);
-            foreach (var t in Transactions.Values.ToList())
+            foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
                 {
@@ -589,10 +590,11 @@ public class Account : IDisposable
     /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
     public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
     {
+        var transactions = Transactions.Values.ToList();
         if (deleteGenerated)
         {
             await DeleteTransactionAsync(id);
-            foreach (var transaction in Transactions.Values.ToList())
+            foreach (var transaction in transactions)
             {
                 if (transaction.RepeatFrom == (int)id)
                 {
@@ -603,7 +605,7 @@ public class Account : IDisposable
         else
         {
             await DeleteTransactionAsync(id);
-            foreach(var transaction in Transactions.Values.ToList())
+            foreach(var transaction in transactions)
             {
                 if(transaction.RepeatFrom == (int)id)
                 {
@@ -612,6 +614,22 @@ public class Account : IDisposable
                     transaction.RepeatEndDate = null;
                     await UpdateTransactionAsync(transaction);
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes generated repeat transactions from the account
+    /// </summary>
+    /// <param name="id">The id of the source transaction</param>
+    public async Task DeleteGeneratedTransactionsAsync(uint id)
+    {
+        var transactions = Transactions.Values.ToList();
+        foreach (var transaction in transactions)
+        {
+            if (transaction.RepeatFrom == (int)id)
+            {
+                await DeleteTransactionAsync(transaction.Id);
             }
         }
     }
