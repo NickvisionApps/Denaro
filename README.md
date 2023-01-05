@@ -73,7 +73,7 @@ The Linux version of this app is designed for GNOME and optimized for the defaul
 @define-color denaro_calendar_today_fg_color #ff0000;
 @define-color denaro_calendar_marked_day_fg_color @success_color;
 @define-color denaro_calendar_selected_day_bg_color @card_bg_color;
-@define-color denaro_calendar_delected_day_fg_color #55cc10;
+@define-color denaro_calendar_selected_day_fg_color #55cc10;
 @define-color denaro_calendar_other_month_fg_color @dark_5;
 ```
 
