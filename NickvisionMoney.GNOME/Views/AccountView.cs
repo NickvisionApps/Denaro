@@ -178,7 +178,7 @@ public partial class AccountView
         _lblTotal = Gtk.Label.New("");
         _lblTotal.SetValign(Gtk.Align.Center);
         _lblTotal.AddCssClass("accent");
-        _lblTotal.AddCssClass("money-total");
+        _lblTotal.AddCssClass("denaro-total");
         _rowTotal = Adw.ActionRow.New();
         _rowTotal.SetTitle(_controller.Localizer["Total"]);
         _rowTotal.AddSuffix(_lblTotal);
@@ -186,7 +186,7 @@ public partial class AccountView
         _lblIncome = Gtk.Label.New("");
         _lblIncome.SetValign(Gtk.Align.Center);
         _lblIncome.AddCssClass("success");
-        _lblTotal.AddCssClass("money-income");
+        _lblTotal.AddCssClass("denaro-income");
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
@@ -199,7 +199,7 @@ public partial class AccountView
         _lblExpense = Gtk.Label.New("");
         _lblExpense.SetValign(Gtk.Align.Center);
         _lblExpense.AddCssClass("error");
-        _lblExpense.AddCssClass("money-expense");
+        _lblExpense.AddCssClass("denaro-expense");
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
