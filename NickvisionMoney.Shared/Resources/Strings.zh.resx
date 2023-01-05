@@ -1,643 +1,495 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-
-	<!--Use: &#xA; for newline-->
-
-	<data name="Description" xml:space="preserve">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!--Use: &#xA; for newline-->
+  <data name="Description" xml:space="preserve">
 		<value>個人財政記錄軟體</value>
-	</data>
-
-	<data name="Version" xml:space="preserve">
+  </data>
+  <data name="Version" xml:space="preserve">
 		<value>版本: {0}</value>
-	</data>
-
-	<data name="About" xml:space="preserve">
+  </data>
+  <data name="About" xml:space="preserve">
 		<value>關於{0}</value>
-	</data>
-
-	<data name="Changelog" xml:space="preserve">
+  </data>
+  <data name="Changelog" xml:space="preserve">
 		<value>變更日誌</value>
-	</data>
-
-	<!--Credits-->
-	<data name="Credits" xml:space="preserve">
+  </data>
+  <!--Credits-->
+  <data name="Credits" xml:space="preserve">
 		<value>鳴謝</value>
-	</data>
-
-	<data name="Developers.Credits" xml:space="preserve">
+  </data>
+  <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;GitHub上的開發者 ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
-	</data>
-
-	<data name="Designers.Credits" xml:space="preserve">
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+GitHub上的開發者 ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+  </data>
+  <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Fyodor Sobolev https://github.com/fsobolev</value>
-	</data>
-
-	<data name="Artists.Credits" xml:space="preserve">
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Fyodor Sobolev https://github.com/fsobolev</value>
+  </data>
+  <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>David Lapshin https://github.com/daudix-UFO</value>
-	</data>
-
-	<data name="Translators.Credits" xml:space="preserve">
+    <value>David Lapshin https://github.com/daudix-UFO</value>
+  </data>
+  <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value></value>
-	</data>
-
-	<!--Actions-->
-	<data name="OK" xml:space="preserve">
+    <value />
+  </data>
+  <!--Actions-->
+  <data name="OK" xml:space="preserve">
 		<value>OK</value>
-	</data>
-
-	<data name="Yes" xml:space="preserve">
+  </data>
+  <data name="Yes" xml:space="preserve">
 		<value>是</value>
-	</data>
-
-	<data name="No" xml:space="preserve">
+  </data>
+  <data name="No" xml:space="preserve">
 		<value>否</value>
-	</data>
-
-	<data name="Cancel" xml:space="preserve">
+  </data>
+  <data name="Cancel" xml:space="preserve">
 		<value>取消</value>
-	</data>
-
-	<data name="New" xml:space="preserve">
+  </data>
+  <data name="New" xml:space="preserve">
 		<value>新增</value>
-	</data>
-
-	<data name="Open" xml:space="preserve">
+  </data>
+  <data name="Open" xml:space="preserve">
 		<value>開啟</value>
-	</data>
-
-	<data name="Close" xml:space="preserve">
+  </data>
+  <data name="Close" xml:space="preserve">
 		<value>關閉</value>
-	</data>
-
-	<data name="Save" xml:space="preserve">
+  </data>
+  <data name="Save" xml:space="preserve">
 		<value>儲存</value>
-	</data>
-
-	<!--Pages-->
-	<data name="Home" xml:space="preserve">
+  </data>
+  <!--Pages-->
+  <data name="Home" xml:space="preserve">
 		<value>目錄</value>
-	</data>
-
-	<data name="Account" xml:space="preserve">
+  </data>
+  <data name="Account" xml:space="preserve">
 		<value>帳戶</value>
-	</data>
-
-	<data name="Settings" xml:space="preserve">
+  </data>
+  <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-		<value>設定</value>
-	</data>
-
-	<data name="Preferences" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-		<value>偏好設定</value>
-	</data>
-
-	<data name="KeyboardShortcuts" xml:space="preserve">
+    <value>偏好設定</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
 		<value>快捷鍵</value>
-	</data>
-
-	<!--MainWindow-->
-	<data name="NickvisionMoneyAccount" xml:space="preserve">
+  </data>
+  <!--MainWindow-->
+  <data name="NickvisionMoneyAccount" xml:space="preserve">
 		<value>Nickvision的軟體--Money的帳戶</value>
-	</data>
-
-	<data name="NewAccount" xml:space="preserve">
+  </data>
+  <data name="NewAccount" xml:space="preserve">
 		<value>新帳戶</value>
-	</data>
-
-	<data name="NewAccount.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewAccount.Tooltip" xml:space="preserve">
 		<value>新帳戶 (Ctrl+N)</value>
-	</data>
-
-	<data name="UnableToOverride" xml:space="preserve">
+  </data>
+  <data name="UnableToOverride" xml:space="preserve">
 		<value>無法淩駕已開啟的帳戶.</value>
-	</data>
-
-	<data name="OpenAccount" xml:space="preserve">
+  </data>
+  <data name="OpenAccount" xml:space="preserve">
 		<value>開啟帳戶</value>
-	</data>
-
-	<data name="OpenAccount.Tooltip" xml:space="preserve">
+  </data>
+  <data name="OpenAccount.Tooltip" xml:space="preserve">
 		<value>開啟帳戶 (Ctrl+O)</value>
-	</data>
-
-	<data name="NoAccountOpened" xml:space="preserve">
+  </data>
+  <data name="NoAccountOpened" xml:space="preserve">
 		<value>沒有曾開啟的帳戶</value>
-	</data>
-
-	<data name="NoAccountDescription" xml:space="preserve">
+  </data>
+  <data name="NoAccountDescription" xml:space="preserve">
 		<value>創建或開啟帳戶, 或從檔案管理器拖動帳戶檔案至此</value>
-	</data>
-
-	<data name="RecentAccounts" xml:space="preserve">
+  </data>
+  <data name="RecentAccounts" xml:space="preserve">
 		<value>最近開啟的帳戶</value>
-	</data>
-
-	<data name="NoRecentAccounts" xml:space="preserve">
+  </data>
+  <data name="NoRecentAccounts" xml:space="preserve">
 		<value>沒有最近曾開啟的帳戶</value>
-	</data>
-
-	<data name="SelectAccount" xml:space="preserve">
-		<value>選擇帳戶</value>
-	</data>
-
-	<data name="SelectAccountDescription" xml:space="preserve">
+  </data>
+  <data name="SelectAccountDescription" xml:space="preserve">
 		<value>選擇帳戶以查看</value>
-	</data>
-
-	<!--MainWindowController-->
-	<data name="Greeting.Generic" xml:space="preserve">
+  </data>
+  <!--MainWindowController-->
+  <data name="Greeting.Generic" xml:space="preserve">
 		<value>祝你有美好的一天!</value>
-	</data>
-
-	<data name="Greeting.Morning" xml:space="preserve">
+  </data>
+  <data name="Greeting.Morning" xml:space="preserve">
 		<value>日安!</value>
-	</data>
-
-	<data name="Greeting.Afternoon" xml:space="preserve">
+  </data>
+  <data name="Greeting.Afternoon" xml:space="preserve">
 		<value>下午好!</value>
-	</data>
-
-	<data name="Greeting.Evening" xml:space="preserve">
+  </data>
+  <data name="Greeting.Evening" xml:space="preserve">
 		<value>晚上好!</value>
-	</data>
-
-	<data name="Greeting.Night" xml:space="preserve">
+  </data>
+  <data name="Greeting.Night" xml:space="preserve">
 		<value>晚上好!</value>
-	</data>
-
-	<data name="AccountOpenedAlready" xml:space="preserve">
+  </data>
+  <data name="AccountOpenedAlready" xml:space="preserve">
 		<value>此帳戶已被開啟</value>
-	</data>
-
-	<!--AccountView-->
-	<data name="NewTransaction" xml:space="preserve">
+  </data>
+  <!--AccountView-->
+  <data name="NewTransaction" xml:space="preserve">
 		<value>新增交易</value>
-	</data>
-
-	<data name="NewTransaction.Short" xml:space="preserve">
+  </data>
+  <data name="NewTransaction.Short" xml:space="preserve">
 		<value>新增</value>
-	</data>
-
-	<data name="NewTransaction.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>新增交易 (Ctrl+N)</value>
-	</data>
-
-	<data name="NewGroup" xml:space="preserve">
+  </data>
+  <data name="NewGroup" xml:space="preserve">
 		<value>新增群組</value>
-	</data>
-
-	<data name="NewGroup.Short" xml:space="preserve">
+  </data>
+  <data name="NewGroup.Short" xml:space="preserve">
 		<value>新增</value>
-	</data>
-
-	<data name="NewGroup.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>新增群組 (Ctrl+Shift+N)</value>
-	</data>
-
-	<data name="TransferMoney" xml:space="preserve">
+  </data>
+  <data name="TransferMoney" xml:space="preserve">
 		<value>轉帳</value>
-	</data>
-
-	<data name="TransferMoney.Tooltip" xml:space="preserve">
+  </data>
+  <data name="TransferMoney.Tooltip" xml:space="preserve">
 		<value>轉帳 (Ctrl+T)</value>
-	</data>
-
-	<data name="ImportFromFile" xml:space="preserve">
+  </data>
+  <data name="ImportFromFile" xml:space="preserve">
 		<value>從檔案導入</value>
-	</data>
-
-	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+  </data>
+  <data name="ImportFromFile.Tooltip" xml:space="preserve">
 		<value>從檔案導入 (Ctrl+I)</value>
-	</data>
-
-	<data name="ExportToFile" xml:space="preserve">
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
 		<value>導出到檔案</value>
-	</data>
-
-	<data name="ExportToFile.Tooltip" xml:space="preserve">
-		<value>導出到檔案 (Ctrl+E)</value>
-	</data>
-
-	<data name="Overview" xml:space="preserve">
+  </data>
+  <data name="Overview" xml:space="preserve">
 		<value>概要</value>
-	</data>
-
-	<data name="Total" xml:space="preserve">
+  </data>
+  <data name="Total" xml:space="preserve">
 		<value>總額</value>
-	</data>
-
-	<data name="Income" xml:space="preserve">
+  </data>
+  <data name="Income" xml:space="preserve">
 		<value>收入</value>
-	</data>
-
-	<data name="Expense" xml:space="preserve">
+  </data>
+  <data name="Expense" xml:space="preserve">
 		<value>支出</value>
-	</data>
-
-	<data name="Groups" xml:space="preserve">
+  </data>
+  <data name="Groups" xml:space="preserve">
 		<value>群組</value>
-	</data>
-
-	<data name="Transactions" xml:space="preserve">
+  </data>
+  <data name="Transactions" xml:space="preserve">
 		<value>交易</value>
-	</data>
-
-	<data name="NoTransactionsTitle" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsTitle" xml:space="preserve">
 		<value>沒有交易</value>
-	</data>
-
-	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsTitle.Filter" xml:space="preserve">
 		<value>沒有找到交易</value>
-	</data>
-
-	<data name="NoTransactionsDescription" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsDescription" xml:space="preserve">
 		<value>新增交易或從檔案中導入</value>
-	</data>
-
-	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsDescription.Filter" xml:space="preserve">
 		<value>沒有符合條件的交易</value>
-	</data>
-
-	<data name="SortFirstLast" xml:space="preserve">
+  </data>
+  <data name="SortFirstLast" xml:space="preserve">
 		<value>排序: 從最新到最後</value>
-	</data>
-
-	<data name="SortLastFirst" xml:space="preserve">
+  </data>
+  <data name="SortLastFirst" xml:space="preserve">
 		<value>排序: 從最後到最新</value>
-	</data>
-
-	<data name="Filters" xml:space="preserve">
+  </data>
+  <data name="Filters" xml:space="preserve">
 		<value>篩選</value>
-	</data>
-
-	<data name="ResetFilters.Overview" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Overview" xml:space="preserve">
 		<value>重置概要篩選條件</value>
-	</data>
-
-	<data name="ResetFilters.Groups" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Groups" xml:space="preserve">
 		<value>重置組群篩選條件</value>
-	</data>
-
-	<data name="ResetFilters.Dates" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Dates" xml:space="preserve">
 		<value>重置時間篩選條件</value>
-	</data>
-
-	<data name="Calendar" xml:space="preserve">
+  </data>
+  <data name="Calendar" xml:space="preserve">
 		<value>日曆</value>
-	</data>
-
-	<data name="SelectRange" xml:space="preserve">
+  </data>
+  <data name="SelectRange" xml:space="preserve">
 		<value>選擇範圍</value>
-	</data>
-
-	<data name="Start.DateRange" xml:space="preserve">
+  </data>
+  <data name="Start.DateRange" xml:space="preserve">
 		<value>開始</value>
-	</data>
-
-	<data name="End.DateRange" xml:space="preserve">
+  </data>
+  <data name="End.DateRange" xml:space="preserve">
 		<value>結束</value>
-	</data>
-
-	<data name="DeleteGroup" xml:space="preserve">
+  </data>
+  <data name="DeleteGroup" xml:space="preserve">
 		<value>刪除組群?</value>
-	</data>
-
-	<data name="DeleteGroupDescription" xml:space="preserve">
-		<value>確認刪除組群?&#xA;此操作不可逆轉</value>
-	</data>
-
-	<data name="DeleteTransaction" xml:space="preserve">
+  </data>
+  <data name="DeleteGroupDescription" xml:space="preserve">
+		<value>確認刪除組群?
+此操作不可逆轉</value>
+  </data>
+  <data name="DeleteTransaction" xml:space="preserve">
 		<value>刪除此交易?</value>
-	</data>
-
-	<data name="DeleteTransactionDescription" xml:space="preserve">
-		<value>確認刪除交易?&#xA;此操作不可逆轉</value>
-	</data>
-
-	<data name="NoMoneyToTransfer" xml:space="preserve">
+  </data>
+  <data name="DeleteTransactionDescription" xml:space="preserve">
+		<value>確認刪除交易?
+此操作不可逆轉</value>
+  </data>
+  <data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>此帳戶沒有足夠的結餘以完成此次轉帳</value>
-	</data>
-
-	<data name="Hide" xml:space="preserve">
+  </data>
+  <data name="Hide" xml:space="preserve">
 		<value>隱藏</value>
-	</data>
-
-	<data name="Show" xml:space="preserve">
-		<value>顯示</value>
-	</data>
-
-	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+  </data>
+  <data name="ToggleGroups.Tooltip" xml:space="preserve">
 		<value>切換組群可見性</value>
-	</data>
-
-	<!--AccountViewController-->
-	<data name="Ungrouped" xml:space="preserve">
+  </data>
+  <!--AccountViewController-->
+  <data name="Ungrouped" xml:space="preserve">
 		<value>無組群</value>
-	</data>
-
-	<data name="UngroupedDescription" xml:space="preserve">
+  </data>
+  <data name="UngroupedDescription" xml:space="preserve">
 		<value>暫無組群之交易</value>
-	</data>
-		
-	<data name="Imported" xml:space="preserve">
+  </data>
+  <data name="Imported" xml:space="preserve">
 		<value>從檔案中導入 {0} 筆交易</value>
-	</data>
-
-	<data name="Imported.Plural" xml:space="preserve">
+  </data>
+  <data name="Imported.Plural" xml:space="preserve">
 		<value>從檔案中導入 {0} 筆交易</value>
-	</data>
-
-	<data name="UnableToImport" xml:space="preserve">
+  </data>
+  <data name="UnableToImport" xml:space="preserve">
 		<value>無法從檔案中導入資料, 格式未被支援</value>
-	</data>
-
-	<data name="Exported" xml:space="preserve">
+  </data>
+  <data name="Exported" xml:space="preserve">
 		<value>成功導出帳戶至檔案</value>
-	</data>
-
-	<data name="UnableToExport" xml:space="preserve">
+  </data>
+  <data name="UnableToExport" xml:space="preserve">
 		<value>無法導出帳戶</value>
-	</data>
-
-	<data name="Transfer.To" xml:space="preserve">
+  </data>
+  <data name="Transfer.To" xml:space="preserve">
 		<value>轉帳到 {0}</value>
-	</data>
-
-	<data name="Transfer.From" xml:space="preserve">
+  </data>
+  <data name="Transfer.From" xml:space="preserve">
 		<value>從 {0} 轉帳</value>
-	</data>
-
-	<!--TransactionRow-->
-	<data name="Edit.TransactionRow" xml:space="preserve">
+  </data>
+  <!--TransactionRow-->
+  <data name="Edit.TransactionRow" xml:space="preserve">
 		<value>編輯交易資料</value>
-	</data>
-
-	<data name="Delete.TransactionRow" xml:space="preserve">
+  </data>
+  <data name="Delete.TransactionRow" xml:space="preserve">
 		<value>刪除交易</value>
-	</data>
-
-	<!--GroupRow-->
-	<data name="Edit.GroupRow" xml:space="preserve">
+  </data>
+  <!--GroupRow-->
+  <data name="Edit.GroupRow" xml:space="preserve">
 		<value>編輯組群資料</value>
-	</data>
-
-	<data name="Delete.GroupRow" xml:space="preserve">
+  </data>
+  <data name="Delete.GroupRow" xml:space="preserve">
 		<value>刪除組群</value>
-	</data>
-
-	<!--GroupDialog-->
-	<data name="Group" xml:space="preserve">
+  </data>
+  <!--GroupDialog-->
+  <data name="Group" xml:space="preserve">
 		<value>組群</value>
-	</data>
-
-	<!--TransactionDialog-->
-	<data name="Transaction" xml:space="preserve">
+  </data>
+  <!--TransactionDialog-->
+  <data name="Transaction" xml:space="preserve">
 		<value>交易</value>
-	</data>
-
-	<data name="RepeatInterval.Never" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Never" xml:space="preserve">
 		<value>永不</value>
-	</data>
-
-	<data name="RepeatInterval.Daily" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Daily" xml:space="preserve">
 		<value>每日</value>
-	</data>
-
-	<data name="RepeatInterval.Weekly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>每週</value>
-	</data>
-
-	<data name="RepeatInterval.Monthly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>每月</value>
-	</data>
-
-	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Quarterly" xml:space="preserve">
 		<value>每季度</value>
-	</data>
-
-	<data name="RepeatInterval.Yearly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Yearly" xml:space="preserve">
 		<value>每年</value>
-	</data>
-
-	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Biyearly" xml:space="preserve">
 		<value>每兩年</value>
-	</data>
-
-	<!--TransferDialog-->
-	<data name="Transfer" xml:space="preserve">
+  </data>
+  <!--TransferDialog-->
+  <data name="Transfer" xml:space="preserve">
 		<value>轉帳</value>
-	</data>
-
-	<data name="TransferDescription" xml:space="preserve">
+  </data>
+  <data name="TransferDescription" xml:space="preserve">
 		<value>轉帳會産生一筆支出, 並在相應的戶口新增一筆收入</value>
-	</data>
-
-	<data name="NoAccountSelected" xml:space="preserve">
+  </data>
+  <data name="NoAccountSelected" xml:space="preserve">
 		<value>沒有已選擇的帳戶</value>
-	</data>
-
-	<!--Fields-->
-	<data name="Name.Field" xml:space="preserve">
+  </data>
+  <!--Fields-->
+  <data name="Name.Field" xml:space="preserve">
 		<value>名稱</value>
-	</data>
-
-	<data name="Name.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Name.Placeholder" xml:space="preserve">
 		<value>請在此輸入名稱</value>
-	</data>
-
-	<data name="Name.Empty" xml:space="preserve">
+  </data>
+  <data name="Name.Empty" xml:space="preserve">
 		<value>名稱 (空)</value>
-	</data>
-
-	<data name="Name.Exists" xml:space="preserve">
+  </data>
+  <data name="Name.Exists" xml:space="preserve">
 		<value>名稱 (已存在)</value>
-	</data>
-
-	<data name="Description.Field" xml:space="preserve">
+  </data>
+  <data name="Description.Field" xml:space="preserve">
 		<value>資訊欄</value>
-	</data>
-
-	<data name="Description.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Description.Placeholder" xml:space="preserve">
 		<value>請在此輸入資料</value>
-	</data>
-
-	<data name="Description.Empty" xml:space="preserve">
+  </data>
+  <data name="Description.Empty" xml:space="preserve">
 		<value>資訊欄 (空)</value>
-	</data>
-
-	<data name="Amount.Field" xml:space="preserve">
+  </data>
+  <data name="Amount.Field" xml:space="preserve">
 		<value>數額</value>
-	</data>
-
-	<data name="Amount.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Amount.Placeholder" xml:space="preserve">
 		<value>請在此輸入數額</value>
-	</data>
-
-	<data name="Amount.Invalid" xml:space="preserve">
+  </data>
+  <data name="Amount.Invalid" xml:space="preserve">
 		<value>數額 (無效)</value>
-	</data>
-
-	<data name="Date.Field" xml:space="preserve">
+  </data>
+  <data name="Date.Field" xml:space="preserve">
 		<value>日期</value>
-	</data>
-
-	<data name="TransactionType.Field" xml:space="preserve">
+  </data>
+  <data name="TransactionType.Field" xml:space="preserve">
 		<value>種類</value>
-	</data>
-
-	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+  </data>
+  <data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>重複</value>
-	</data>
-
-	<data name="Group.Field" xml:space="preserve">
+  </data>
+  <data name="Group.Field" xml:space="preserve">
 		<value>群組</value>
-	</data>
-
-	<data name="Color.Field" xml:space="preserve">
+  </data>
+  <data name="Color.Field" xml:space="preserve">
 		<value>顏色</value>
-	</data>
-
-	<data name="DestinationAccount.Field" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Field" xml:space="preserve">
 		<value>目標戶口</value>
-	</data>
-
-	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Placeholder" xml:space="preserve">
 		<value>請選擇目標戶口</value>
-	</data>
-
-	<data name="DestinationAccount.Invalid" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Invalid" xml:space="preserve">
 		<value>目標戶口 (無效)</value>
-	</data>
-
-	<!--Settings-->
-	<data name="UserInterface" xml:space="preserve">
+  </data>
+  <!--Settings-->
+  <data name="UserInterface" xml:space="preserve">
 		<value>介面</value>
-	</data>
-
-	<data name="UserInterfaceDescription" xml:space="preserve">
+  </data>
+  <data name="UserInterfaceDescription" xml:space="preserve">
 		<value>自訂介面</value>
-	</data>
-
-	<data name="Theme" xml:space="preserve">
+  </data>
+  <data name="Theme" xml:space="preserve">
 		<value>主題</value>
-	</data>
-
-	<data name="ThemeLight" xml:space="preserve">
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
 		<value>淺色主題</value>
-	</data>
-
-	<data name="ThemeDark" xml:space="preserve">
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
 		<value>暗色主題</value>
-	</data>
-
-	<data name="ThemeSystem" xml:space="preserve">
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
 		<value>按系統主題</value>
-	</data>
-
-	<data name="Colors" xml:space="preserve">
+  </data>
+  <data name="Colors" xml:space="preserve">
 		<value>顏色</value>
-	</data>
-
-	<data name="ColorsDescription" xml:space="preserve">
+  </data>
+  <data name="ColorsDescription" xml:space="preserve">
 		<value>自訂介面的顏色</value>
-	</data>
-
-	<data name="TransactionColor" xml:space="preserve">
+  </data>
+  <data name="TransactionColor" xml:space="preserve">
 		<value>預設交易顏色</value>
-	</data>
-
-	<data name="TransferColor" xml:space="preserve">
+  </data>
+  <data name="TransferColor" xml:space="preserve">
 		<value>預設轉帳顏色</value>
-	</data>
-
-	<data name="TransactionColorDescription" xml:space="preserve">
+  </data>
+  <data name="TransactionColorDescription" xml:space="preserve">
 		<value>改變此設定僅會影響新增之交易</value>
-	</data>
-
-	<data name="TransferColorDescription" xml:space="preserve">
+  </data>
+  <data name="TransferColorDescription" xml:space="preserve">
 		<value>改變此設定僅會影響新增之轉帳</value>
-	</data>
-
-	<!--Shortcuts Dialog-->
-	<data name="Application.Shortcut" xml:space="preserve">
+  </data>
+  <!--Shortcuts Dialog-->
+  <data name="Application.Shortcut" xml:space="preserve">
 		<value>軟體</value>
-	</data>
-
-	<!--WinUI Specific-->
-	<data name="FixErrors.WinUI" xml:space="preserve">
+  </data>
+  <!--WinUI Specific-->
+  <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>請修復上述錯誤</value>
-	</data>
-
-	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+  </data>
+  <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>新增功能</value>
-	</data>
+  </data>
+  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>開發人員:
+{0}
 
-	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>開發人員:&#xA;{0}&#xA;&#xA;設計師:&#xA;{1}&#xA;&#xA;藝術家:&#xA;{2}&#xA;&#xA;翻譯人員:&#xA;{3}</value>
-	</data>
+設計師:
+{1}
 
-	<data name="ThemeDescription.WinUI" xml:space="preserve">
+藝術家:
+{2}
+
+翻譯人員:
+{3}</value>
+  </data>
+  <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>請重啟以應用設定</value>
-	</data>
-
-	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+  </data>
+  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>重啟以應用新主題?</value>
-	</data>
-
-	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>確認重啟 {0} 以應用新主題?&#xA;任何未儲存的進展都將丟失</value>
-	</data>
-
-	<!--GTK Specific-->
-	<data name="AccountMenu.GTK" xml:space="preserve">
+  </data>
+  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>確認重啟 {0} 以應用新主題?
+任何未儲存的進展都將丟失</value>
+  </data>
+  <!--GTK Specific-->
+  <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>帳戶選單</value>
-	</data>
-
-	<data name="ToggleSidebar.GTK" xml:space="preserve">
+  </data>
+  <data name="ToggleSidebar.GTK" xml:space="preserve">
 		<value>切換側邊欄</value>
-	</data>
-
-	<data name="MainMenu.GTK" xml:space="preserve">
+  </data>
+  <data name="MainMenu.GTK" xml:space="preserve">
 		<value>主選單</value>
-	</data>
-
-	<data name="Recents.GTK" xml:space="preserve">
+  </data>
+  <data name="Recents.GTK" xml:space="preserve">
 		<value>最近開啟</value>
-	</data>
-
-	<data name="NewAccountPopover.GTK" xml:space="preserve">
+  </data>
+  <data name="NewAccountPopover.GTK" xml:space="preserve">
 		<value>新增</value>
-	</data>
-
-	<data name="CloseAccount.GTK" xml:space="preserve">
+  </data>
+  <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>關閉帳戶</value>
-	</data>
-
-	<data name="AccountActions.GTK" xml:space="preserve">
+  </data>
+  <data name="AccountActions.GTK" xml:space="preserve">
 		<value>動作</value>
-	</data>
-
-	<data name="AccountFileFilter.GTK" xml:space="preserve">
+  </data>
+  <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>軟體Money的帳戶 (*.nmoney)</value>
-	</data>
+  </data>
 </root>

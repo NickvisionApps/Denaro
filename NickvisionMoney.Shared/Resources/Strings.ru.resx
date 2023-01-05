@@ -121,9 +121,6 @@
   <data name="NoRecentAccounts" xml:space="preserve">
 		<value>Нет недавних счетов</value>
   </data>
-  <data name="SelectAccountDescription" xml:space="preserve">
-		<value>Выберите счёт для просмотра.</value>
-  </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<value>Здравствуйте!</value>
