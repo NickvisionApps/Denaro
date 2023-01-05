@@ -236,18 +236,43 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the transaction to be deleted</param>
     private async void DeleteTransaction(object? sender, uint transactionId)
     {
-        var deleteDialog = new ContentDialog()
+        if(_controller.GetIsSourceRepeatTransaction(transactionId))
         {
-            Title = _controller.Localizer["DeleteTransaction"],
-            Content = _controller.Localizer["DeleteTransactionDescription"],
-            CloseButtonText = _controller.Localizer["No"],
-            PrimaryButtonText = _controller.Localizer["Yes"],
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
-        };
-        if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            var deleteDialog = new ContentDialog()
+            {
+                Title = _controller.Localizer["DeleteTransaction", "SourceRepeat"],
+                Content = _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"],
+                CloseButtonText = _controller.Localizer["Cancel"],
+                PrimaryButtonText = _controller.Localizer["DeleteSourceGeneratedTransaction"],
+                SecondaryButtonText = _controller.Localizer["DeleteOnlySourceTransaction"],
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            var result = await deleteDialog.ShowAsync();
+            if(result == ContentDialogResult.Primary)
+            {
+
+            }
+            else if(result == ContentDialogResult.Secondary)
+            {
+
+            }
+        }
+        else
         {
-            await _controller.DeleteTransactionAsync(transactionId);
+            var deleteDialog = new ContentDialog()
+            {
+                Title = _controller.Localizer["DeleteTransaction"],
+                Content = _controller.Localizer["DeleteTransactionDescription"],
+                CloseButtonText = _controller.Localizer["No"],
+                PrimaryButtonText = _controller.Localizer["Yes"],
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                await _controller.DeleteTransactionAsync(transactionId);
+            }
         }
     }
 
