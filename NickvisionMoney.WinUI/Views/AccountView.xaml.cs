@@ -249,13 +249,9 @@ public sealed partial class AccountView : UserControl
                 XamlRoot = Content.XamlRoot
             };
             var result = await deleteDialog.ShowAsync();
-            if(result == ContentDialogResult.Primary)
+            if (result != ContentDialogResult.None)
             {
-
-            }
-            else if(result == ContentDialogResult.Secondary)
-            {
-
+                await _controller.DeleteSourceTransactionAsync(transactionId, result == ContentDialogResult.Primary);
             }
         }
         else
