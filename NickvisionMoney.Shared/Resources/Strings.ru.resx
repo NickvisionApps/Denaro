@@ -442,16 +442,16 @@
 		<value>Что нового?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Разработчики:
+		<value>Разработка:
 {0}
 
-Дизайнеры:
+Дизайн:
 {1}
 
-Художники:
+Художественная работа:
 {2}
 
-Переводчики:
+Перевод:
 {3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
@@ -515,5 +515,8 @@
   </data>
   <data name="ShowGroups" xml:space="preserve">
     <value>Показать группы</value>
+  </data>
+  <data name="Receipt.Field" xml:space="preserve">
+    <value>Чек</value>
   </data>
 </root>
