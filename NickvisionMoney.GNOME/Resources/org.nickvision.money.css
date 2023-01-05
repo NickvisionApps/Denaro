@@ -1,6 +1,14 @@
 .wallet-button {
-	background-color: #00000000;
+  background-color: #00000000;
 }
+
+/* Calendars colors */
+@define-color denaro_calendar_today_bg_color @headerbar_bg_color;
+@define-color denaro_calendar_today_fg_color @warning_color;
+@define-color denaro_calendar_marked_day_fg_color @accent_color;
+@define-color denaro_calendar_selected_day_bg_color @accent_bg_color;
+@define-color denaro_calendar_delected_day_fg_color @fg_color;
+@define-color denaro_calendar_other_month_fg_color @light_5;
 
 /* Account View Calendar */
 #calendarAccount {
@@ -13,33 +21,33 @@
 }
 
 #calendarAccount .day-number {
-	border-radius: 12px;
+  border-radius: 12px;
 }
 
 #calendarAccount .today {
-	background-color: @headerbar_bg_color;
-	color: @warning_color;
-	box-shadow: none;
+  background-color: @denaro_calendar_today_bg_color;
+  color: @denaro_calendar_today_fg_color;
+  box-shadow: none;
 }
 
 #calendarAccount .day-number:checked {
-  color: @accent_color;
+  color: @denaro_calendar_marked_day_fg_color;
   font-weight: bold;
 }
 
 #calendarAccount .day-number:selected {
-  background-color: @accent_bg_color;
-  color: @fg_color;
+  background-color: @denaro_calendar_selected_day_bg_color;
+  color: @denaro_calendar_selected_day_fg_color;
 }
 
 #calendarAccount .other-month {
-	color: @light_5;
-	font-weight: normal;
+  color: @denaro_calendar_other_month_fg_color;
+  font-weight: normal;
 }
 
 #calendarAccount .other-month:checked {
-	color: @light_5;
-	font-weight: normal;
+  color: @denaro_calendar_other_month_fg_color;
+  font-weight: normal;
 }
 
 
@@ -49,13 +57,13 @@
 }
 
 #calendarTransactions .day-number {
-	border-radius: 12px;
+  border-radius: 12px;
 }
 
 #calendarTransactions .today {
-	background-color: @headerbar_bg_color;
-	color: @warning_color;
-	box-shadow: none;
+  background-color: @denaro_calendar_today_bg_color;
+  color: @denaro_calendar_today_fg_color;
+  box-shadow: none;
 }
 
 
