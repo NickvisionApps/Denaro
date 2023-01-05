@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!--Use: &#xA; for newline-->
+
+	<data name="Description" xml:space="preserve">
+		<value>Een financiënbeheerder.</value>
+	</data>
+
+	<data name="Version" xml:space="preserve">
+		<value>Versie: {0}</value>
+	</data>
+
+	<data name="About" xml:space="preserve">
+		<value>Over {0}</value>
+	</data>
+
+	<data name="Changelog" xml:space="preserve">
+		<value>Wijzigingslog</value>
+	</data>
+
+	<data name="GitHubRepo" xml:space="preserve">
+		<value>GitHub-repo</value>
+	</data>
+
+	<data name="ReportABug" xml:space="preserve">
+		<value>Bug melden</value>
+	</data>
+
+	<data name="Discussions" xml:space="preserve">
+		<value>Discussies</value>
+	</data>
+
+	<!--Credits-->
+	<data name="Credits" xml:space="preserve">
+		<value>Met dank aan</value>
+	</data>
+
+	<data name="Developers.Credits" xml:space="preserve">
+		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Contributors op GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+	</data>
+
+	<data name="Designers.Credits" xml:space="preserve">
+		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Fyodor Sobolev https://github.com/fsobolev</value>
+	</data>
+
+	<data name="Artists.Credits" xml:space="preserve">
+		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>David Lapshin https://github.com/daudix-UFO</value>
+	</data>
+
+	<data name="Translators.Credits" xml:space="preserve">
+		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+		<value>Heimen Stoffels https://github.com/Vistaus</value>
+	</data>
+
+	<!--Actions-->
+	<data name="OK" xml:space="preserve">
+		<value>Oké</value>
+	</data>
+
+	<data name="Yes" xml:space="preserve">
+		<value>Ja</value>
+	</data>
+
+	<data name="No" xml:space="preserve">
+		<value>Nee</value>
+	</data>
+
+	<data name="Cancel" xml:space="preserve">
+		<value>Annuleren</value>
+	</data>
+
+	<data name="New" xml:space="preserve">
+		<value>Nieuw</value>
+	</data>
+
+	<data name="Open" xml:space="preserve">
+		<value>Openen</value>
+	</data>
+
+	<data name="Close" xml:space="preserve">
+		<value>Sluiten</value>
+	</data>
+
+	<data name="Save" xml:space="preserve">
+		<value>Opslaan</value>
+	</data>
+
+	<!--Pages-->
+	<data name="Home" xml:space="preserve">
+		<value>Overzicht</value>
+	</data>
+
+	<data name="Account" xml:space="preserve">
+		<value>Rekening</value>
+	</data>
+
+	<data name="Settings" xml:space="preserve">
+		<!--Mostly used in WinUI-->
+		<value>Instellingen</value>
+	</data>
+
+	<data name="Preferences" xml:space="preserve">
+		<!--Mostly used in GNOME-->
+		<value>Voorkeuren</value>
+	</data>
+
+	<data name="KeyboardShortcuts" xml:space="preserve">
+		<value>Sneltoetsen</value>
+	</data>
+
+	<!--MainWindow-->
+	<data name="NickvisionMoneyAccount" xml:space="preserve">
+		<value>Nickvision Money-rekening</value>
+	</data>
+
+	<data name="NewAccount" xml:space="preserve">
+		<value>Nieuwe rekening</value>
+	</data>
+
+	<data name="NewAccount.Tooltip" xml:space="preserve">
+		<value>Nieuwe rekening (Ctrl+N)</value>
+	</data>
+
+	<data name="UnableToOverride" xml:space="preserve">
+		<value>Een rekening kan slechts eenmaal worden geopend.</value>
+	</data>
+
+	<data name="OpenAccount" xml:space="preserve">
+		<value>Rekening tonen</value>
+	</data>
+
+	<data name="OpenAccount.Tooltip" xml:space="preserve">
+		<value>Rekening tonen (Ctrl+O)</value>
+	</data>
+
+	<data name="NoAccountOpened" xml:space="preserve">
+		<value>Er is geen rekening geopend</value>
+	</data>
+
+	<data name="NoAccountDescription" xml:space="preserve">
+		<value>Open een rekening of voeg er een toe om aan de slag te gaan. Ook kunt u een rekeningbestand hierheen slepen.</value>
+	</data>
+
+	<data name="RecentAccounts" xml:space="preserve">
+		<value>Recent Accounts</value>
+	</data>
+
+	<data name="NoRecentAccounts" xml:space="preserve">
+		<value>Geen onlangs gebruikte rekeningen</value>
+	</data>
+
+	<data name="AllFiles" xml:space="preserve">
+		<value>Alle bestanden</value>
+	</data>
+
+	<!--MainWindowController-->
+	<data name="Greeting.Generic" xml:space="preserve">
+		<!-- Shown when system time can't be detected -->
+		<value>Goedendag!</value>
+	</data>
+
+	<data name="Greeting.Morning" xml:space="preserve">
+		<!-- Shown from 6am to noon -->
+		<value>Goedemorgen!</value>
+	</data>
+
+	<data name="Greeting.Afternoon" xml:space="preserve">
+		<!-- Shown from noon to 6pm -->
+		<value>Goedemiddag!</value>
+	</data>
+
+	<data name="Greeting.Evening" xml:space="preserve">
+		<!-- Shown from 6pm to mignight -->
+		<value>Goedenavond!</value>
+	</data>
+
+	<data name="Greeting.Night" xml:space="preserve">
+		<!-- Shown from midnight to 6am -->
+		<!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
+		<value>Goedenacht!</value>
+	</data>
+
+	<data name="AccountOpenedAlready" xml:space="preserve">
+		<value>Deze rekening wordt al getoond.</value>
+	</data>
+
+	<!--AccountView-->
+	<data name="NewTransaction" xml:space="preserve">
+		<value>Nieuwe overboeking</value>
+	</data>
+
+	<data name="NewTransaction.Short" xml:space="preserve">
+		<value>Nieuw</value>
+	</data>
+
+	<data name="NewTransaction.Tooltip" xml:space="preserve">
+		<value>Nieuwe overboeking (Ctrl+N)</value>
+	</data>
+
+	<data name="NewGroup" xml:space="preserve">
+		<value>Nieuwe groep</value>
+	</data>
+
+	<data name="NewGroup.Short" xml:space="preserve">
+		<value>Nieuw</value>
+	</data>
+
+	<data name="NewGroup.Tooltip" xml:space="preserve">
+		<value>Nieuwe groep (Ctrl+Shift+N)</value>
+	</data>
+
+	<data name="TransferMoney" xml:space="preserve">
+		<value>Geld overmaken</value>
+	</data>
+
+	<data name="TransferMoney.Tooltip" xml:space="preserve">
+		<value>Geld overmaken (Ctrl+T)</value>
+	</data>
+
+	<data name="ImportFromFile" xml:space="preserve">
+		<value>Import from File</value>
+	</data>
+
+	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+		<value>Importeren uit bestand (Ctrl+I)</value>
+	</data>
+
+	<data name="ExportToFile" xml:space="preserve">
+		<value>Exporteren naar bestand</value>
+	</data>
+
+	<data name="Overview" xml:space="preserve">
+		<value>Overzicht</value>
+	</data>
+
+	<data name="Total" xml:space="preserve">
+		<value>Totaal</value>
+	</data>
+
+	<data name="Income" xml:space="preserve">
+		<value>Inkomst</value>
+	</data>
+
+	<data name="Expense" xml:space="preserve">
+		<value>Uitgave</value>
+	</data>
+
+	<data name="Groups" xml:space="preserve">
+		<value>Groepen</value>
+	</data>
+
+	<data name="Transactions" xml:space="preserve">
+		<value>Transacties</value>
+	</data>
+
+	<data name="NoTransactionsTitle" xml:space="preserve">
+		<value>Geen transacties</value>
+	</data>
+
+	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+		<value>Er zijn geen transacties gevonden</value>
+	</data>
+
+	<data name="NoTransactionsDescription" xml:space="preserve">
+		<value>Voeg een transactie toe of importeer ze uit een bestand.</value>
+	</data>
+
+	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+		<value>Er zijn geen transacties gevonden die voldoen aan de opgegeven filters.</value>
+	</data>
+
+	<data name="SortFirstLast" xml:space="preserve">
+		<value>Oplopend sorteren</value>
+	</data>
+
+	<data name="SortLastFirst" xml:space="preserve">
+		<value>Aflopend sorteren</value>
+	</data>
+
+	<data name="Filters" xml:space="preserve">
+		<value>Filters</value>
+	</data>
+
+	<data name="ResetFilters.Overview" xml:space="preserve">
+		<value>Standaard filterwaarden</value>
+	</data>
+
+	<data name="ResetFilters.Groups" xml:space="preserve">
+		<value>Standaard filterwaarden</value>
+	</data>
+
+	<data name="ResetFilters.Dates" xml:space="preserve">
+		<value>Standaard filterwaarden</value>
+	</data>
+
+	<data name="Calendar" xml:space="preserve">
+		<value>Kalender</value>
+	</data>
+
+	<data name="SelectRange" xml:space="preserve">
+		<value>Kies een datumbereik</value>
+	</data>
+
+	<data name="Start.DateRange" xml:space="preserve">
+		<value>Van</value>
+	</data>
+
+	<data name="End.DateRange" xml:space="preserve">
+		<value>Tot en met</value>
+	</data>
+
+	<data name="DeleteGroup" xml:space="preserve">
+		<value>Groep verwijderen?</value>
+	</data>
+
+	<data name="DeleteGroupDescription" xml:space="preserve">
+		<value>Weet u zeker dat u deze groep wilt verwijderen?&#xA;Deze actie is onomkeerbaar.</value>
+	</data>
+
+	<data name="DeleteTransaction" xml:space="preserve">
+		<value>Transactie verwijderen?</value>
+	</data>
+
+	<data name="DeleteTransactionDescription" xml:space="preserve">
+		<value>Weet u zeker dat u deze transactie wilt verwijderen?&#xA;Deze actie is onomkeerbaar..</value>
+	</data>
+
+	<data name="NoMoneyToTransfer" xml:space="preserve">
+		<value>Er staat geen geld op deze rekening.</value>
+	</data>
+
+	<data name="Hide" xml:space="preserve">
+		<value>Verbergen</value>
+	</data>
+
+	<data name="HideGroups" xml:space="preserve">
+		<value>Groepen verbergen</value>
+	</data>
+
+	<data name="ShowGroups" xml:space="preserve">
+		<value>Groepen tonen</value>
+	</data>
+
+	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+		<value>Groepen tonen/verbergen</value>
+	</data>
+
+	<!--AccountViewController-->
+	<data name="Ungrouped" xml:space="preserve">
+		<value>Ongegroepeerd</value>
+	</data>
+
+	<data name="UngroupedDescription" xml:space="preserve">
+		<value>Transacties die geen deel uitmaken van een groep</value>
+	</data>
+		
+	<data name="Imported" xml:space="preserve">
+		<value>Er is {0} transactie geïmporteerd.</value>
+	</data>
+
+	<data name="Imported.Plural" xml:space="preserve">
+		<value>Er zijn {0} transacties geïmporteerd.</value>
+	</data>
+
+	<data name="UnableToImport" xml:space="preserve">
+		<value>Er kan geen informatie worden geïmporteerd omdat het bestandstype niet ondersteund wordt.</value>
+	</data>
+
+	<data name="Exported" xml:space="preserve">
+		<value>De rekening is geëxporteerd naar een bestand.</value>
+	</data>
+
+	<data name="UnableToExport" xml:space="preserve">
+		<value>De rekening kan niet worden geëxporteerd.</value>
+	</data>
+
+	<data name="Transfer.To" xml:space="preserve">
+		<value>Overmaken naar {0}</value>
+	</data>
+
+	<data name="Transfer.From" xml:space="preserve">
+		<value>Overmaken van {0}</value>
+	</data>
+
+	<!--TransactionRow-->
+	<data name="Edit.TransactionRow" xml:space="preserve">
+		<value>Transactie bewerken</value>
+	</data>
+
+	<data name="Delete.TransactionRow" xml:space="preserve">
+		<value>Transactie verwijderen</value>
+	</data>
+
+	<!--GroupRow-->
+	<data name="Edit.GroupRow" xml:space="preserve">
+		<value>Groep bewerken</value>
+	</data>
+
+	<data name="Delete.GroupRow" xml:space="preserve">
+		<value>Groep verwijderen</value>
+	</data>
+
+	<!--GroupDialog-->
+	<data name="Group" xml:space="preserve">
+		<value>Groep</value>
+	</data>
+
+	<!--TransactionDialog-->
+	<data name="Transaction" xml:space="preserve">
+		<value>Transactie</value>
+	</data>
+
+	<data name="RepeatInterval.Never" xml:space="preserve">
+		<value>Nooit</value>
+	</data>
+
+	<data name="RepeatInterval.Daily" xml:space="preserve">
+		<value>Iedere dag</value>
+	</data>
+
+	<data name="RepeatInterval.Weekly" xml:space="preserve">
+		<value>Iedere week</value>
+	</data>
+
+	<data name="RepeatInterval.Monthly" xml:space="preserve">
+		<value>Iedere maand</value>
+	</data>
+
+	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+		<value>Ieder kwartaal</value>
+	</data>
+
+	<data name="RepeatInterval.Yearly" xml:space="preserve">
+		<value>Ieder jaar</value>
+	</data>
+
+	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+		<value>Iedere twee jaar</value>
+	</data>
+
+	<data name="Manage" xml:space="preserve">
+		<value>Beheren</value>
+	</data>
+
+	<data name="View" xml:space="preserve">
+		<value>Bekijken</value>
+	</data>
+
+	<data name="Delete" xml:space="preserve">
+		<value>Verwijderen</value>
+	</data>
+
+	<data name="Upload" xml:space="preserve">
+		<value>Uploaden</value>
+	</data>
+
+	<!--TransferDialog-->
+	<data name="Transfer" xml:space="preserve">
+		<value>Overboeken</value>
+	</data>
+
+	<data name="TransferDescription" xml:space="preserve">
+		<value>TDoor geld over te maken wordt het bedrag in kwestie als uitgave op de oorspronkelijke rekening genoteerd en als inkomst op de andere.</value>
+	</data>
+
+	<data name="NoAccountSelected" xml:space="preserve">
+		<value>Er is geen rekening gekozen</value>
+	</data>
+
+	<!--Fields-->
+	<data name="Name.Field" xml:space="preserve">
+		<value>Naam</value>
+	</data>
+
+	<data name="Name.Placeholder" xml:space="preserve">
+		<value>Voer een naam in</value>
+	</data>
+
+	<data name="Name.Empty" xml:space="preserve">
+		<value>Naam (blanco)</value>
+	</data>
+
+	<data name="Name.Exists" xml:space="preserve">
+		<value>Naam (bestaat)</value>
+	</data>
+
+	<data name="Description.Field" xml:space="preserve">
+		<value>Beschrijving</value>
+	</data>
+
+	<data name="Description.Placeholder" xml:space="preserve">
+		<value>Voer een beschrijving in</value>
+	</data>
+
+	<data name="Description.Empty" xml:space="preserve">
+		<value>Beschrijving (blanco)</value>
+	</data>
+
+	<data name="Amount.Field" xml:space="preserve">
+		<value>Bedrag</value>
+	</data>
+
+	<data name="Amount.Placeholder" xml:space="preserve">
+		<value>Voer een bedrag in</value>
+	</data>
+
+	<data name="Amount.Invalid" xml:space="preserve">
+		<value>Bedrag (ongeldig)</value>
+	</data>
+
+	<data name="Date.Field" xml:space="preserve">
+		<value>Datum</value>
+	</data>
+
+	<data name="TransactionType.Field" xml:space="preserve">
+		<value>Type</value>
+	</data>
+
+	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+		<value>Herhaalperiode</value>
+	</data>
+
+	<data name="Group.Field" xml:space="preserve">
+		<value>Groep</value>
+	</data>
+
+	<data name="Color.Field" xml:space="preserve">
+		<value>Kleur</value>
+	</data>
+
+	<data name="Receipt.Field" xml:space="preserve">
+		<value>Bon</value>
+	</data>
+
+	<data name="DestinationAccount.Field" xml:space="preserve">
+		<value>Bestemmingsrekening</value>
+	</data>
+
+	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+		<value>Kies een bestemmingsrekening</value>
+	</data>
+
+	<data name="DestinationAccount.Invalid" xml:space="preserve">
+		<value>Bestemmingsrekening (ongeldig)</value>
+	</data>
+
+	<!--Settings-->
+	<data name="UserInterface" xml:space="preserve">
+		<value>Vormgeving</value>
+	</data>
+
+	<data name="UserInterfaceDescription" xml:space="preserve">
+		<value>Pas de vormgeving aan.</value>
+	</data>
+
+	<data name="Theme" xml:space="preserve">
+		<value>Thema</value>
+	</data>
+
+	<data name="ThemeLight" xml:space="preserve">
+		<value>Licht</value>
+	</data>
+
+	<data name="ThemeDark" xml:space="preserve">
+		<value>Donker</value>
+	</data>
+
+	<data name="ThemeSystem" xml:space="preserve">
+		<value>Systeemthema</value>
+	</data>
+
+	<data name="Colors" xml:space="preserve">
+		<value>Kleuren</value>
+	</data>
+
+	<data name="ColorsDescription" xml:space="preserve">
+		<value>Pas de gebruikte kleuren aan.</value>
+	</data>
+
+	<data name="TransactionColor" xml:space="preserve">
+		<value>Standaard transactiekleur</value>
+	</data>
+
+	<data name="TransferColor" xml:space="preserve">
+		<value>Standaard overboekingskleur</value>
+	</data>
+
+	<data name="TransactionColorDescription" xml:space="preserve">
+		<value>Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen.</value>
+	</data>
+
+	<data name="TransferColorDescription" xml:space="preserve">
+		<value>Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen.</value>
+	</data>
+
+	<!--Shortcuts Dialog-->
+	<data name="Application.Shortcut" xml:space="preserve">
+		<value>Programma</value>
+	</data>
+
+	<!--WinUI Specific-->
+	<data name="FixErrors.WinUI" xml:space="preserve">
+		<value>Los bovenstaande problemen op.</value>
+	</data>
+
+	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+		<value>Wijzigingslog</value>
+	</data>
+
+	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>Ontwikkelaars:&#xA;{0}&#xA;&#xA;Ontwerpers:&#xA;{1}&#xA;&#xA;Artiesten:&#xA;{2}&#xA;&#xA;Vertalers:&#xA;{3}</value>
+	</data>
+
+	<data name="ThemeDescription.WinUI" xml:space="preserve">
+		<value>Herstart het programma om het thema te wijzigen.</value>
+	</data>
+
+	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+		<value>Programma herstarten?</value>
+	</data>
+
+	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>Wilt u {0} herstarten om het nieuwe thema toe te passen?&#xA;Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
+	</data>
+
+	<!--GTK Specific-->
+	<data name="AccountMenu.GTK" xml:space="preserve">
+		<value>Rekeningmenu</value>
+	</data>
+
+	<data name="ToggleSidebar.GTK" xml:space="preserve">
+		<value>Zijbalk tonen/verbergen</value>
+	</data>
+
+	<data name="MainMenu.GTK" xml:space="preserve">
+		<value>Hoofdmenu</value>
+	</data>
+
+	<data name="Recents.GTK" xml:space="preserve">
+		<value>Onlangs gebruikt</value>
+	</data>
+
+	<data name="NewAccountPopover.GTK" xml:space="preserve">
+		<value>Nieuw</value>
+	</data>
+
+	<data name="CloseAccount.GTK" xml:space="preserve">
+		<value>Rekening sluiten</value>
+	</data>
+
+	<data name="AccountActions.GTK" xml:space="preserve">
+		<value>Acties</value>
+	</data>
+
+	<data name="AccountFileFilter.GTK" xml:space="preserve">
+		<value>Money-rekening (*.nmoney)</value>
+	</data>
+</root>
