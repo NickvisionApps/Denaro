@@ -481,10 +481,6 @@
 		<value>Biyearly</value>
 	</data>
 
-	<data name="Manage" xml:space="preserve">
-		<value>Manage</value>
-	</data>
-
 	<data name="View" xml:space="preserve">
 		<value>View</value>
 	</data>

@@ -34,6 +34,12 @@
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
+[![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/)
+
+## Via Weblate
+Money is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
+
+## Manually
 To start translating the app, fork the repository and clone it locally.
 
 In the `NickvisionMoney.Shared/Resources` folder you will see a file called `String.resx`. This is a C# resource file that contains all the strings for the application. Simply copy that file and rename it `String.<lang-code>.resx`. For example, if I'm creating an Italian translation, the copied file would be called `Strings.it.resx`. Once you have your copied file, simply replace each `<value>` block of each `<data>` string block with your language's appropriate translation.
