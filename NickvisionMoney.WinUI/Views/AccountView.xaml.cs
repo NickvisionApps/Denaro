@@ -221,7 +221,28 @@ public sealed partial class AccountView : UserControl
         };
         if (await transactionDialog.ShowAsync())
         {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if(_controller.GetIsSourceRepeatTransaction(transactionId))
+            {
+                var editDialog = new ContentDialog()
+                {
+                    Title = _controller.Localizer["EditTransaction", "SourceRepeat"],
+                    Content = _controller.Localizer["EditTransactionDescription", "SourceRepeat"],
+                    CloseButtonText = _controller.Localizer["Cancel"],
+                    PrimaryButtonText = _controller.Localizer["EditSourceGeneratedTransaction"],
+                    SecondaryButtonText = _controller.Localizer["EditOnlySourceTransaction"],
+                    DefaultButton = ContentDialogButton.Close,
+                    XamlRoot = Content.XamlRoot
+                };
+                var result = await editDialog.ShowAsync();
+                if (result != ContentDialogResult.None)
+                {
+                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
+                }
+            }
+            else
+            {
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            }
             if (transactionController.RepeatIntervalChanged || transactionController.RepeatEndDateChanged)
             {
                 await _controller.SyncRepeatTransactionsAsync();
