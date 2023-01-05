@@ -348,6 +348,22 @@
 		<value>Are you sure you want to delete this transaction?&#xA;This action is irreversible.</value>
 	</data>
 
+	<data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+		<value>Delete Transaction</value>
+	</data>
+
+	<data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?</value>
+	</data>
+
+	<data name="DeleteOnlySourceTransaction" xml:space="preserve">
+		<value>Delete Only Source</value>
+	</data>
+
+	<data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+		<value>Delete Source and Generated</value>
+	</data>
+
 	<data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>This account has no money available to transfer.</value>
 	</data>
