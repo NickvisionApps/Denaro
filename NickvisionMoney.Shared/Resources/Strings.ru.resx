@@ -1,643 +1,504 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-
-	<!--Use: &#xA; for newline-->
-
-	<data name="Description" xml:space="preserve">
-		<value>Персональный менеджер финансов</value>
-	</data>
-
-	<data name="Version" xml:space="preserve">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!--Use: &#xA; for newline-->
+  <data name="Description" xml:space="preserve">
+		<value>Персональный менеджер финансов.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
 		<value>Версия: {0}</value>
-	</data>
-
-	<data name="About" xml:space="preserve">
+  </data>
+  <data name="About" xml:space="preserve">
 		<value>О приложении</value>
-	</data>
-
-	<data name="Changelog" xml:space="preserve">
+  </data>
+  <data name="Changelog" xml:space="preserve">
 		<value>Список изменений</value>
-	</data>
-
-	<!--Credits-->
-	<data name="Credits" xml:space="preserve">
+  </data>
+  <!--Credits-->
+  <data name="Credits" xml:space="preserve">
 		<value>Авторы</value>
-	</data>
-
-	<data name="Developers.Credits" xml:space="preserve">
+  </data>
+  <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Соавторы на GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
-	</data>
-
-	<data name="Designers.Credits" xml:space="preserve">
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Соавторы на GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+  </data>
+  <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo&#xA;Фёдор Соболев https://github.com/fsobolev</value>
-	</data>
-
-	<data name="Artists.Credits" xml:space="preserve">
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Фёдор Соболев https://github.com/fsobolev</value>
+  </data>
+  <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>David Lapshin https://github.com/daudix-UFO</value>
-	</data>
-
-	<data name="Translators.Credits" xml:space="preserve">
+    <value>David Lapshin https://github.com/daudix-UFO</value>
+  </data>
+  <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Фёдор Соболев https://github.com/fsobolev</value>
-	</data>
-
-	<!--Actions-->
-	<data name="OK" xml:space="preserve">
+    <value>Фёдор Соболев https://github.com/fsobolev</value>
+  </data>
+  <!--Actions-->
+  <data name="OK" xml:space="preserve">
 		<value>Ок</value>
-	</data>
-
-	<data name="Yes" xml:space="preserve">
+  </data>
+  <data name="Yes" xml:space="preserve">
 		<value>Да</value>
-	</data>
-
-	<data name="No" xml:space="preserve">
+  </data>
+  <data name="No" xml:space="preserve">
 		<value>Нет</value>
-	</data>
-
-	<data name="Cancel" xml:space="preserve">
+  </data>
+  <data name="Cancel" xml:space="preserve">
 		<value>Отмена</value>
-	</data>
-
-	<data name="New" xml:space="preserve">
+  </data>
+  <data name="New" xml:space="preserve">
 		<value>Новый</value>
-	</data>
-
-	<data name="Open" xml:space="preserve">
+  </data>
+  <data name="Open" xml:space="preserve">
 		<value>Открыть</value>
-	</data>
-
-	<data name="Close" xml:space="preserve">
+  </data>
+  <data name="Close" xml:space="preserve">
 		<value>Закрыть</value>
-	</data>
-
-	<data name="Save" xml:space="preserve">
+  </data>
+  <data name="Save" xml:space="preserve">
 		<value>Сохранить</value>
-	</data>
-
-	<!--Pages-->
-	<data name="Home" xml:space="preserve">
+  </data>
+  <!--Pages-->
+  <data name="Home" xml:space="preserve">
 		<value>Домашняя страница</value>
-	</data>
-
-	<data name="Account" xml:space="preserve">
+  </data>
+  <data name="Account" xml:space="preserve">
 		<value>Счёт</value>
-	</data>
-
-	<data name="Settings" xml:space="preserve">
+  </data>
+  <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-		<value>Настройки</value>
-	</data>
-
-	<data name="Preferences" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-		<value>Параметры</value>
-	</data>
-
-	<data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
 		<value>Сочетания клавиш</value>
-	</data>
-
-	<!--MainWindow-->
-	<data name="NickvisionMoneyAccount" xml:space="preserve">
+  </data>
+  <!--MainWindow-->
+  <data name="NickvisionMoneyAccount" xml:space="preserve">
 		<value>Счёт Nickvision Money</value>
-	</data>
-
-	<data name="NewAccount" xml:space="preserve">
+  </data>
+  <data name="NewAccount" xml:space="preserve">
 		<value>Новый счёт</value>
-	</data>
-
-	<data name="NewAccount.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewAccount.Tooltip" xml:space="preserve">
 		<value>Новый счёт (Ctrl+N)</value>
-	</data>
-
-	<data name="UnableToOverride" xml:space="preserve">
+  </data>
+  <data name="UnableToOverride" xml:space="preserve">
 		<value>Невозможно перезаписать открытый счёт.</value>
-	</data>
-
-	<data name="OpenAccount" xml:space="preserve">
+  </data>
+  <data name="OpenAccount" xml:space="preserve">
 		<value>Открыть счёт</value>
-	</data>
-
-	<data name="OpenAccount.Tooltip" xml:space="preserve">
+  </data>
+  <data name="OpenAccount.Tooltip" xml:space="preserve">
 		<value>Открыть счёт (Ctrl+O)</value>
-	</data>
-
-	<data name="NoAccountOpened" xml:space="preserve">
+  </data>
+  <data name="NoAccountOpened" xml:space="preserve">
 		<value>Нет открытых счетов</value>
-	</data>
-
-	<data name="NoAccountDescription" xml:space="preserve">
+  </data>
+  <data name="NoAccountDescription" xml:space="preserve">
 		<value>Создайте или откройте счёт, чтобы начать. Вы также можете перетащить файл счёта из файлового менеджера.</value>
-	</data>
-
-	<data name="RecentAccounts" xml:space="preserve">
+  </data>
+  <data name="RecentAccounts" xml:space="preserve">
 		<value>Недавние счета</value>
-	</data>
-
-	<data name="NoRecentAccounts" xml:space="preserve">
+  </data>
+  <data name="NoRecentAccounts" xml:space="preserve">
 		<value>Нет недавних счетов</value>
-	</data>
-
-	<data name="SelectAccount" xml:space="preserve">
-		<value>Выбрать счёт</value>
-	</data>
-
-	<data name="SelectAccountDescription" xml:space="preserve">
+  </data>
+  <data name="SelectAccountDescription" xml:space="preserve">
 		<value>Выберите счёт для просмотра.</value>
-	</data>
-
-	<!--MainWindowController-->
-	<data name="Greeting.Generic" xml:space="preserve">
+  </data>
+  <!--MainWindowController-->
+  <data name="Greeting.Generic" xml:space="preserve">
 		<value>Здравствуйте!</value>
-	</data>
-
-	<data name="Greeting.Morning" xml:space="preserve">
+  </data>
+  <data name="Greeting.Morning" xml:space="preserve">
 		<value>Доброе утро!</value>
-	</data>
-
-	<data name="Greeting.Afternoon" xml:space="preserve">
+  </data>
+  <data name="Greeting.Afternoon" xml:space="preserve">
 		<value>Добрый день!</value>
-	</data>
-
-	<data name="Greeting.Evening" xml:space="preserve">
+  </data>
+  <data name="Greeting.Evening" xml:space="preserve">
 		<value>Добрый вечер!</value>
-	</data>
-
-	<data name="Greeting.Night" xml:space="preserve">
+  </data>
+  <data name="Greeting.Night" xml:space="preserve">
 		<value>Доброй ночи!</value>
-	</data>
-
-	<data name="AccountOpenedAlready" xml:space="preserve">
+  </data>
+  <data name="AccountOpenedAlready" xml:space="preserve">
 		<value>Этот счёт уже открыт.</value>
-	</data>
-
-	<!--AccountView-->
-	<data name="NewTransaction" xml:space="preserve">
+  </data>
+  <!--AccountView-->
+  <data name="NewTransaction" xml:space="preserve">
 		<value>Новая транзакция</value>
-	</data>
-
-	<data name="NewTransaction.Short" xml:space="preserve">
+  </data>
+  <data name="NewTransaction.Short" xml:space="preserve">
 		<value>Новая</value>
-	</data>
-
-	<data name="NewTransaction.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Новая транзакция (Ctrl+N)</value>
-	</data>
-
-	<data name="NewGroup" xml:space="preserve">
+  </data>
+  <data name="NewGroup" xml:space="preserve">
 		<value>Новая группа</value>
-	</data>
-
-	<data name="NewGroup.Short" xml:space="preserve">
+  </data>
+  <data name="NewGroup.Short" xml:space="preserve">
 		<value>Новая</value>
-	</data>
-
-	<data name="NewGroup.Tooltip" xml:space="preserve">
+  </data>
+  <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Новая группа (Ctrl+Shift+N)</value>
-	</data>
-
-	<data name="TransferMoney" xml:space="preserve">
+  </data>
+  <data name="TransferMoney" xml:space="preserve">
 		<value>Перевод средств</value>
-	</data>
-
-	<data name="TransferMoney.Tooltip" xml:space="preserve">
+  </data>
+  <data name="TransferMoney.Tooltip" xml:space="preserve">
 		<value>Перевод средств (Ctrl+T)</value>
-	</data>
-
-	<data name="ImportFromFile" xml:space="preserve">
+  </data>
+  <data name="ImportFromFile" xml:space="preserve">
 		<value>Импорт из файла</value>
-	</data>
-
-	<data name="ImportFromFile.Tooltip" xml:space="preserve">
+  </data>
+  <data name="ImportFromFile.Tooltip" xml:space="preserve">
 		<value>Импорт из файла (Ctrl+I)</value>
-	</data>
-
-	<data name="ExportToFile" xml:space="preserve">
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
 		<value>Экспорт в файл</value>
-	</data>
-
-	<data name="ExportToFile.Tooltip" xml:space="preserve">
-		<value>Экспорт в файл (Ctrl+E)</value>
-	</data>
-
-	<data name="Overview" xml:space="preserve">
+  </data>
+  <data name="Overview" xml:space="preserve">
 		<value>Обзор</value>
-	</data>
-
-	<data name="Total" xml:space="preserve">
+  </data>
+  <data name="Total" xml:space="preserve">
 		<value>Сумма</value>
-	</data>
-
-	<data name="Income" xml:space="preserve">
+  </data>
+  <data name="Income" xml:space="preserve">
 		<value>Доходы</value>
-	</data>
-
-	<data name="Expense" xml:space="preserve">
+  </data>
+  <data name="Expense" xml:space="preserve">
 		<value>Расходы</value>
-	</data>
-
-	<data name="Groups" xml:space="preserve">
+  </data>
+  <data name="Groups" xml:space="preserve">
 		<value>Группы</value>
-	</data>
-
-	<data name="Transactions" xml:space="preserve">
+  </data>
+  <data name="Transactions" xml:space="preserve">
 		<value>Транзакции</value>
-	</data>
-
-	<data name="NoTransactionsTitle" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsTitle" xml:space="preserve">
 		<value>Нет транзакций</value>
-	</data>
-
-	<data name="NoTransactionsTitle.Filter" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsTitle.Filter" xml:space="preserve">
 		<value>Не найдено транзакций</value>
-	</data>
-
-	<data name="NoTransactionsDescription" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsDescription" xml:space="preserve">
 		<value>Добавьте транзакцию или импортируйте транзакции из файла.</value>
-	</data>
-
-	<data name="NoTransactionsDescription.Filter" xml:space="preserve">
+  </data>
+  <data name="NoTransactionsDescription.Filter" xml:space="preserve">
 		<value>Нет транзакций, соответствующих заданным фильтрам.</value>
-	</data>
-
-	<data name="SortFirstLast" xml:space="preserve">
+  </data>
+  <data name="SortFirstLast" xml:space="preserve">
 		<value>Сортировать от первой к последней</value>
-	</data>
-
-	<data name="SortLastFirst" xml:space="preserve">
+  </data>
+  <data name="SortLastFirst" xml:space="preserve">
 		<value>Сортировать от последней к первой</value>
-	</data>
-
-	<data name="Filters" xml:space="preserve">
+  </data>
+  <data name="Filters" xml:space="preserve">
 		<value>Фильтры</value>
-	</data>
-
-	<data name="ResetFilters.Overview" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Overview" xml:space="preserve">
 		<value>Сбросить фильтры обзора</value>
-	</data>
-
-	<data name="ResetFilters.Groups" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Groups" xml:space="preserve">
 		<value>Сбросить фильтры групп</value>
-	</data>
-
-	<data name="ResetFilters.Dates" xml:space="preserve">
+  </data>
+  <data name="ResetFilters.Dates" xml:space="preserve">
 		<value>Сбросить фильтры дат</value>
-	</data>
-
-	<data name="Calendar" xml:space="preserve">
+  </data>
+  <data name="Calendar" xml:space="preserve">
 		<value>Календарь</value>
-	</data>
-
-	<data name="SelectRange" xml:space="preserve">
+  </data>
+  <data name="SelectRange" xml:space="preserve">
 		<value>Выбрать период</value>
-	</data>
-
-	<data name="Start.DateRange" xml:space="preserve">
+  </data>
+  <data name="Start.DateRange" xml:space="preserve">
 		<value>Начало</value>
-	</data>
-
-	<data name="End.DateRange" xml:space="preserve">
+  </data>
+  <data name="End.DateRange" xml:space="preserve">
 		<value>Конец</value>
-	</data>
-
-	<data name="DeleteGroup" xml:space="preserve">
+  </data>
+  <data name="DeleteGroup" xml:space="preserve">
 		<value>Удалить группу?</value>
-	</data>
-
-	<data name="DeleteGroupDescription" xml:space="preserve">
-		<value>Вы уверены, что хотите удалить эту группу?&#xA;Это действие необратимо.</value>
-	</data>
-
-	<data name="DeleteTransaction" xml:space="preserve">
+  </data>
+  <data name="DeleteGroupDescription" xml:space="preserve">
+		<value>Вы уверены, что хотите удалить эту группу?
+Это действие необратимо.</value>
+  </data>
+  <data name="DeleteTransaction" xml:space="preserve">
 		<value>Удалить транзакцию?</value>
-	</data>
-
-	<data name="DeleteTransactionDescription" xml:space="preserve">
-		<value>Вы уверены, что хотите удалить эту транзакцию?&#xA;Это действие необратимо.</value>
-	</data>
-
-	<data name="NoMoneyToTransfer" xml:space="preserve">
+  </data>
+  <data name="DeleteTransactionDescription" xml:space="preserve">
+		<value>Вы уверены, что хотите удалить эту транзакцию?
+Это действие необратимо.</value>
+  </data>
+  <data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>На этом счёте нет средств для перевода.</value>
-	</data>
-
-	<data name="Hide" xml:space="preserve">
+  </data>
+  <data name="Hide" xml:space="preserve">
 		<value>Скрыть</value>
-	</data>
-
-	<data name="Show" xml:space="preserve">
-		<value>Показать</value>
-	</data>
-
-	<data name="ToggleGroups.Tooltip" xml:space="preserve">
+  </data>
+  <data name="ToggleGroups.Tooltip" xml:space="preserve">
 		<value>Переключить отображение групп</value>
-	</data>
-
-	<!--AccountViewController-->
-	<data name="Ungrouped" xml:space="preserve">
+  </data>
+  <!--AccountViewController-->
+  <data name="Ungrouped" xml:space="preserve">
 		<value>Несгруппированные</value>
-	</data>
-
-	<data name="UngroupedDescription" xml:space="preserve">
+  </data>
+  <data name="UngroupedDescription" xml:space="preserve">
 		<value>Транзакции без группы</value>
-	</data>
-
-	<data name="Imported" xml:space="preserve">
+  </data>
+  <data name="Imported" xml:space="preserve">
 		<value>Импортировано транзакций из файла: {0}.</value>
-	</data>
-
-	<data name="Imported.Plural" xml:space="preserve">
+  </data>
+  <data name="Imported.Plural" xml:space="preserve">
 		<value>Импортировано транзакций из файла: {0}.</value>
-	</data>
-
-	<data name="UnableToImport" xml:space="preserve">
+  </data>
+  <data name="UnableToImport" xml:space="preserve">
 		<value>Невозможно импортировать информацию из файла. Тип файла не поддерживается.</value>
-	</data>
-
-	<data name="Exported" xml:space="preserve">
+  </data>
+  <data name="Exported" xml:space="preserve">
 		<value>Счёт успешно экспортирован в файл.</value>
-	</data>
-
-	<data name="UnableToExport" xml:space="preserve">
+  </data>
+  <data name="UnableToExport" xml:space="preserve">
 		<value>Невозможно экспортировать счёт в файл.</value>
-	</data>
-
-	<data name="Transfer.To" xml:space="preserve">
+  </data>
+  <data name="Transfer.To" xml:space="preserve">
 		<value>Перевод на {0}</value>
-	</data>
-
-	<data name="Transfer.From" xml:space="preserve">
+  </data>
+  <data name="Transfer.From" xml:space="preserve">
 		<value>Перевод из {0}</value>
-	</data>
-
-	<!--TransactionRow-->
-	<data name="Edit.TransactionRow" xml:space="preserve">
+  </data>
+  <!--TransactionRow-->
+  <data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Редактировать транзакцию</value>
-	</data>
-
-	<data name="Delete.TransactionRow" xml:space="preserve">
+  </data>
+  <data name="Delete.TransactionRow" xml:space="preserve">
 		<value>Удалить транзакцию</value>
-	</data>
-
-	<!--GroupRow-->
-	<data name="Edit.GroupRow" xml:space="preserve">
+  </data>
+  <!--GroupRow-->
+  <data name="Edit.GroupRow" xml:space="preserve">
 		<value>Редактировать группу</value>
-	</data>
-
-	<data name="Delete.GroupRow" xml:space="preserve">
+  </data>
+  <data name="Delete.GroupRow" xml:space="preserve">
 		<value>Удалить группу</value>
-	</data>
-
-	<!--GroupDialog-->
-	<data name="Group" xml:space="preserve">
+  </data>
+  <!--GroupDialog-->
+  <data name="Group" xml:space="preserve">
 		<value>Группа</value>
-	</data>
-
-	<!--TransactionDialog-->
-	<data name="Transaction" xml:space="preserve">
+  </data>
+  <!--TransactionDialog-->
+  <data name="Transaction" xml:space="preserve">
 		<value>Транзакция</value>
-	</data>
-
-	<data name="RepeatInterval.Never" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Never" xml:space="preserve">
 		<value>Никогда</value>
-	</data>
-
-	<data name="RepeatInterval.Daily" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Daily" xml:space="preserve">
 		<value>Ежедневно</value>
-	</data>
-
-	<data name="RepeatInterval.Weekly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>Еженедельно</value>
-	</data>
-
-	<data name="RepeatInterval.Monthly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Ежемесячно</value>
-	</data>
-
-	<data name="RepeatInterval.Quarterly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Quarterly" xml:space="preserve">
 		<value>Ежеквартально</value>
-	</data>
-
-	<data name="RepeatInterval.Yearly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Yearly" xml:space="preserve">
 		<value>Ежегодно</value>
-	</data>
-
-	<data name="RepeatInterval.Biyearly" xml:space="preserve">
+  </data>
+  <data name="RepeatInterval.Biyearly" xml:space="preserve">
 		<value>Раз в два года</value>
-	</data>
-
-	<!--TransferDialog-->
-	<data name="Transfer" xml:space="preserve">
+  </data>
+  <!--TransferDialog-->
+  <data name="Transfer" xml:space="preserve">
 		<value>Перевод средств</value>
-	</data>
-
-	<data name="TransferDescription" xml:space="preserve">
+  </data>
+  <data name="TransferDescription" xml:space="preserve">
 		<value>Перевод средств создаст расходную транзакцию на указанную сумму на этом счёте и доходную транзакцию на указанную сумму на целевом счёте.</value>
-	</data>
-
-	<data name="NoAccountSelected" xml:space="preserve">
+  </data>
+  <data name="NoAccountSelected" xml:space="preserve">
 		<value>Счёт не выбран</value>
-	</data>
-
-	<!--Fields-->
-	<data name="Name.Field" xml:space="preserve">
+  </data>
+  <!--Fields-->
+  <data name="Name.Field" xml:space="preserve">
 		<value>Имя</value>
-	</data>
-
-	<data name="Name.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Name.Placeholder" xml:space="preserve">
 		<value>Введите имя</value>
-	</data>
-
-	<data name="Name.Empty" xml:space="preserve">
+  </data>
+  <data name="Name.Empty" xml:space="preserve">
 		<value>Имя (Пусто)</value>
-	</data>
-
-	<data name="Name.Exists" xml:space="preserve">
+  </data>
+  <data name="Name.Exists" xml:space="preserve">
 		<value>Имя (Занято)</value>
-	</data>
-
-	<data name="Description.Field" xml:space="preserve">
+  </data>
+  <data name="Description.Field" xml:space="preserve">
 		<value>Описание</value>
-	</data>
-
-	<data name="Description.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Description.Placeholder" xml:space="preserve">
 		<value>Введите описание</value>
-	</data>
-
-	<data name="Description.Empty" xml:space="preserve">
+  </data>
+  <data name="Description.Empty" xml:space="preserve">
 		<value>Описание (Пусто)</value>
-	</data>
-
-	<data name="Amount.Field" xml:space="preserve">
+  </data>
+  <data name="Amount.Field" xml:space="preserve">
 		<value>Сумма</value>
-	</data>
-
-	<data name="Amount.Placeholder" xml:space="preserve">
+  </data>
+  <data name="Amount.Placeholder" xml:space="preserve">
 		<value>Введите сумму</value>
-	</data>
-
-	<data name="Amount.Invalid" xml:space="preserve">
+  </data>
+  <data name="Amount.Invalid" xml:space="preserve">
 		<value>Сумма (Некорректная)</value>
-	</data>
-
-	<data name="Date.Field" xml:space="preserve">
+  </data>
+  <data name="Date.Field" xml:space="preserve">
 		<value>Дата</value>
-	</data>
-
-	<data name="TransactionType.Field" xml:space="preserve">
+  </data>
+  <data name="TransactionType.Field" xml:space="preserve">
 		<value>Тип</value>
-	</data>
-
-	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
+  </data>
+  <data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Интервал повтора</value>
-	</data>
-
-	<data name="Group.Field" xml:space="preserve">
+  </data>
+  <data name="Group.Field" xml:space="preserve">
 		<value>Группа</value>
-	</data>
-
-	<data name="Color.Field" xml:space="preserve">
+  </data>
+  <data name="Color.Field" xml:space="preserve">
 		<value>Цвет</value>
-	</data>
-
-	<data name="DestinationAccount.Field" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Field" xml:space="preserve">
 		<value>Целевой счёт</value>
-	</data>
-
-	<data name="DestinationAccount.Placeholder" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Placeholder" xml:space="preserve">
 		<value>Выберите целевой счёт</value>
-	</data>
-
-	<data name="DestinationAccount.Invalid" xml:space="preserve">
+  </data>
+  <data name="DestinationAccount.Invalid" xml:space="preserve">
 		<value>Целевой счёт (Некорректный)</value>
-	</data>
-
-	<!--Settings-->
-	<data name="UserInterface" xml:space="preserve">
+  </data>
+  <!--Settings-->
+  <data name="UserInterface" xml:space="preserve">
 		<value>Интерфейс</value>
-	</data>
-
-	<data name="UserInterfaceDescription" xml:space="preserve">
+  </data>
+  <data name="UserInterfaceDescription" xml:space="preserve">
 		<value>Настройте интерфейс приложения.</value>
-	</data>
-
-	<data name="Theme" xml:space="preserve">
+  </data>
+  <data name="Theme" xml:space="preserve">
 		<value>Тема</value>
-	</data>
-
-	<data name="ThemeLight" xml:space="preserve">
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
 		<value>Светлая</value>
-	</data>
-
-	<data name="ThemeDark" xml:space="preserve">
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
 		<value>Тёмная</value>
-	</data>
-
-	<data name="ThemeSystem" xml:space="preserve">
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
 		<value>Системная</value>
-	</data>
-
-	<data name="Colors" xml:space="preserve">
+  </data>
+  <data name="Colors" xml:space="preserve">
 		<value>Цвета</value>
-	</data>
-
-	<data name="ColorsDescription" xml:space="preserve">
+  </data>
+  <data name="ColorsDescription" xml:space="preserve">
 		<value>Настройте цвета, используемые приложением.</value>
-	</data>
-
-	<data name="TransactionColor" xml:space="preserve">
+  </data>
+  <data name="TransactionColor" xml:space="preserve">
 		<value>Цвет транзакции по умолчанию</value>
-	</data>
-
-	<data name="TransferColor" xml:space="preserve">
+  </data>
+  <data name="TransferColor" xml:space="preserve">
 		<value>Цвет перевода средств по умолчанию</value>
-	</data>
-
-	<data name="TransactionColorDescription" xml:space="preserve">
+  </data>
+  <data name="TransactionColorDescription" xml:space="preserve">
 		<value>Изменение этой настройки затронет только новые транзакции.</value>
-	</data>
-
-	<data name="TransferColorDescription" xml:space="preserve">
+  </data>
+  <data name="TransferColorDescription" xml:space="preserve">
 		<value>Изменение этой настройки затронет только новые переводы.</value>
-	</data>
-
-	<!--Shortcuts Dialog-->
-	<data name="Application.Shortcut" xml:space="preserve">
+  </data>
+  <!--Shortcuts Dialog-->
+  <data name="Application.Shortcut" xml:space="preserve">
 		<value>Приложение</value>
-	</data>
-
-	<!--WinUI Specific-->
-	<data name="FixErrors.WinUI" xml:space="preserve">
+  </data>
+  <!--WinUI Specific-->
+  <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Пожалуйста, исправьте отмеченные ошибки.</value>
-	</data>
-
-	<data name="ChangelogTitle.WinUI" xml:space="preserve">
+  </data>
+  <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Что нового?</value>
-	</data>
+  </data>
+  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>Разработчики:
+{0}
 
-	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Разработчики:&#xA;{0}&#xA;&#xA;Дизайнеры:&#xA;{1}&#xA;&#xA;Художники:&#xA;{2}&#xA;&#xA;Переводчики:&#xA;{3}</value>
-	</data>
+Дизайнеры:
+{1}
 
-	<data name="ThemeDescription.WinUI" xml:space="preserve">
+Художники:
+{2}
+
+Переводчики:
+{3}</value>
+  </data>
+  <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Для применения темы потребуется перезапуск приложения.</value>
-	</data>
-
-	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
+  </data>
+  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Перезапустить для применения темы?</value>
-	</data>
-
-	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Вы хотите перезапустить {0}, чтобы применить новую тему?&#xA;Несохранённые данные будут утеряны.</value>
-	</data>
-
-	<!--GTK Specific-->
-	<data name="AccountMenu.GTK" xml:space="preserve">
+  </data>
+  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>Вы хотите перезапустить {0}, чтобы применить новую тему?
+Несохранённые данные будут утеряны.</value>
+  </data>
+  <!--GTK Specific-->
+  <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Меню счёта</value>
-	</data>
-
-	<data name="ToggleSidebar.GTK" xml:space="preserve">
+  </data>
+  <data name="ToggleSidebar.GTK" xml:space="preserve">
 		<value>Переключить отображение боковой панели</value>
-	</data>
-
-	<data name="MainMenu.GTK" xml:space="preserve">
+  </data>
+  <data name="MainMenu.GTK" xml:space="preserve">
 		<value>Главное меню</value>
-	</data>
-
-	<data name="Recents.GTK" xml:space="preserve">
+  </data>
+  <data name="Recents.GTK" xml:space="preserve">
 		<value>Недавние</value>
-	</data>
-
-	<data name="NewAccountPopover.GTK" xml:space="preserve">
+  </data>
+  <data name="NewAccountPopover.GTK" xml:space="preserve">
 		<value>Новый</value>
-	</data>
-
-	<data name="CloseAccount.GTK" xml:space="preserve">
+  </data>
+  <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Закрыть счёт</value>
-	</data>
-
-	<data name="AccountActions.GTK" xml:space="preserve">
+  </data>
+  <data name="AccountActions.GTK" xml:space="preserve">
 		<value>Действия</value>
-	</data>
-
-	<data name="AccountFileFilter.GTK" xml:space="preserve">
+  </data>
+  <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Счёт Money (*.nmoney)</value>
-	</data>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+    <value>Репозиторий GitHub</value>
+  </data>
+  <data name="ReportABug" xml:space="preserve">
+    <value>Сообщить об ошибке</value>
+  </data>
+  <data name="Discussions" xml:space="preserve">
+    <value>Обсуждения</value>
+  </data>
 </root>
