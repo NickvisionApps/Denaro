@@ -498,4 +498,22 @@
   <data name="Discussions" xml:space="preserve">
     <value>Обсуждения</value>
   </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Все файлы</value>
+  </data>
+  <data name="HideGroups" xml:space="preserve">
+    <value>Скрыть группы</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="ShowGroups" xml:space="preserve">
+    <value>Показать группы</value>
+  </data>
 </root>
