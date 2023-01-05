@@ -129,7 +129,7 @@
 
 	<!--MainWindow-->
 	<data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Rekening Uang Nickvision</value>
+		<value>Rekening Nickvision Money</value>
 	</data>
 
 	<data name="NewAccount" xml:space="preserve">
@@ -309,7 +309,7 @@
 	</data>
 
 	<data name="ResetFilters.Dates" xml:space="preserve">
-		<value>Atur Ulang FIlter Tanggal</value>
+		<value>Atur Ulang Filter Tanggal</value>
 	</data>
 
 	<data name="Calendar" xml:space="preserve">
@@ -627,7 +627,7 @@
 	</data>
 
 	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Developer:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
+		<value>Developer:&#xA;{0}&#xA;&#xA;Desainer:&#xA;{1}&#xA;&#xA;Seniman:&#xA;{2}&#xA;&#xA;Penerjemah:&#xA;{3}</value>
 	</data>
 
 	<data name="ThemeDescription.WinUI" xml:space="preserve">
@@ -672,6 +672,6 @@
 	</data>
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value>Rekening Uang (*.nmoney)</value>
+		<value>Rekening Money (*.nmoney)</value>
 	</data>
 </root>
