@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -218,22 +219,48 @@ public sealed partial class AccountView : UserControl
         };
         if (await transactionDialog.ShowAsync())
         {
-            if(_controller.GetIsSourceRepeatTransaction(transactionId))
+            if(_controller.GetIsSourceRepeatTransaction(transactionId) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
             {
-                var editDialog = new ContentDialog()
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    Title = _controller.Localizer["EditTransaction", "SourceRepeat"],
-                    Content = _controller.Localizer["EditTransactionDescription", "SourceRepeat"],
-                    CloseButtonText = _controller.Localizer["Cancel"],
-                    PrimaryButtonText = _controller.Localizer["EditSourceGeneratedTransaction"],
-                    SecondaryButtonText = _controller.Localizer["EditOnlySourceTransaction"],
-                    DefaultButton = ContentDialogButton.Close,
-                    XamlRoot = Content.XamlRoot
-                };
-                var result = await editDialog.ShowAsync();
-                if (result != ContentDialogResult.None)
+                    var editDialog = new ContentDialog()
+                    {
+                        Title = _controller.Localizer["RepeatIntervalChanged"],
+                        Content = _controller.Localizer["RepeatIntervalChangedDescription"],
+                        CloseButtonText = _controller.Localizer["Cancel"],
+                        PrimaryButtonText = _controller.Localizer["DeleteExisting"],
+                        SecondaryButtonText = _controller.Localizer["DisassociateExisting"],
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = Content.XamlRoot
+                    };
+                    var result = await editDialog.ShowAsync();
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        await _controller.DeleteGeneratedTransactionsAsync(transactionId);
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    else if(result == ContentDialogResult.Secondary)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                    }
+                }
+                else
                 {
-                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
+                    var editDialog = new ContentDialog()
+                    {
+                        Title = _controller.Localizer["EditTransaction", "SourceRepeat"],
+                        Content = _controller.Localizer["EditTransactionDescription", "SourceRepeat"],
+                        CloseButtonText = _controller.Localizer["Cancel"],
+                        PrimaryButtonText = _controller.Localizer["EditSourceGeneratedTransaction"],
+                        SecondaryButtonText = _controller.Localizer["EditOnlySourceTransaction"],
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = Content.XamlRoot
+                    };
+                    var result = await editDialog.ShowAsync();
+                    if (result != ContentDialogResult.None)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
+                    }
                 }
             }
             else
