@@ -334,9 +334,9 @@ public class AccountViewController
     /// Checks if repeat transactions are needed and creates them if so
     /// <returns>True if AccountInfoChanged was triggered, else false</returns>
     /// </summary>
-    public async Task<bool> RunRepeatTransactionsAsync()
+    public async Task<bool> SyncRepeatTransactionsAsync()
     {
-        if(await _account.RunRepeatTransactionsAsync())
+        if(await _account.SyncRepeatTransactionsAsync())
         {
             AccountInfoChanged?.Invoke(this, EventArgs.Empty);
             return true;
@@ -372,6 +372,23 @@ public class AccountViewController
     {
         await _account.DeleteTransactionAsync(id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Gets whether or not the transaction with the provided id is a source repeat transaction
+    /// </summary>
+    /// <param name="id">The id of the transaction</param>
+    /// <returns>True if transaction is a source repeat transaction, else false</returns>
+    public bool GetIsSourceRepeatTransaction(uint id)
+    {
+        try
+        {
+            return Transactions[id].RepeatFrom == 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>

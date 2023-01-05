@@ -286,13 +286,13 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Checks if repeat transactions are needed and creates them if so
+    /// Syncs repeat transactions in the account
     /// </summary>
     /// <returns>True if at least one transaction was created, else false</returns>
-    public async Task<bool> RunRepeatTransactionsAsync()
+    public async Task<bool> SyncRepeatTransactionsAsync()
     {
         var transactionAdded = false;
-        var transactions = Transactions.Values.ToList(); 
+        var transactions = Transactions.Values.ToList();
         var i = 0;
         foreach(var transaction in transactions)
         {
@@ -359,6 +359,13 @@ public class Account : IDisposable
                     };
                     await AddTransactionAsync(newTransaction);
                     transactionAdded = true;
+                }
+            }
+            else if(transaction.RepeatFrom > 0)
+            {
+                if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
+                {
+                    await DeleteTransactionAsync(transaction.Id);
                 }
             }
             i++;

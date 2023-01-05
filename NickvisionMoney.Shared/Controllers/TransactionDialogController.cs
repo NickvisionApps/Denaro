@@ -32,6 +32,7 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private TransactionRepeatInterval _originalRepeatInterval;
+    private DateOnly? _originalRepeatEndDate;
 
     /// <summary>
     /// The localizer to get translated strings from
@@ -58,6 +59,10 @@ public class TransactionDialogController : IDisposable
     /// Whether or not the repeat interval has changed
     /// </summary>
     public bool RepeatIntervalChanged => _originalRepeatInterval != Transaction.RepeatInterval;
+    /// <summary>
+    /// Whether or not the repeat end date has changed
+    /// </summary>
+    public bool RepeatEndDateChanged => _originalRepeatEndDate != Transaction.RepeatEndDate;
 
     /// <summary>
     /// Constructs a TransactionDialogController
@@ -69,6 +74,7 @@ public class TransactionDialogController : IDisposable
     public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
     {
         _originalRepeatInterval = transaction.RepeatInterval;
+        _originalRepeatEndDate = transaction.RepeatEndDate;
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
