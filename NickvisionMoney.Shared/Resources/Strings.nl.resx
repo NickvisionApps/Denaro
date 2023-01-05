@@ -161,7 +161,7 @@
 	</data>
 
 	<data name="RecentAccounts" xml:space="preserve">
-		<value>Recent Accounts</value>
+		<value>Onlangs geopende rekeningen</value>
 	</data>
 
 	<data name="NoRecentAccounts" xml:space="preserve">
@@ -237,7 +237,7 @@
 	</data>
 
 	<data name="ImportFromFile" xml:space="preserve">
-		<value>Import from File</value>
+		<value>Importeren uit bestand</value>
 	</data>
 
 	<data name="ImportFromFile.Tooltip" xml:space="preserve">
@@ -479,7 +479,7 @@
 	</data>
 
 	<data name="TransferDescription" xml:space="preserve">
-		<value>TDoor geld over te maken wordt het bedrag in kwestie als uitgave op de oorspronkelijke rekening genoteerd en als inkomst op de andere.</value>
+		<value>Door geld over te maken wordt het bedrag in kwestie als uitgave op de oorspronkelijke rekening genoteerd en als inkomst op de andere.</value>
 	</data>
 
 	<data name="NoAccountSelected" xml:space="preserve">
