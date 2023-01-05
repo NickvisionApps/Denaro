@@ -2,6 +2,8 @@
 <img src="NickvisionMoney.Shared/Resources/org.nickvision.money.svg" width="100" height="100"/>
 
  **A personal finance manager**
+ 
+ [![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/)
 
 # Features
 - A cross-platform C# application
@@ -20,21 +22,8 @@
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# GNOME Screenshots
-![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
-![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
-<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='350px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='350px'></p>
-
-# WinUI Screenshots
-![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
-![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
-![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
-![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
-
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
-
-[![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/)
 
 ## Via Weblate
 Money is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
@@ -53,6 +42,17 @@ Even if you're running Windows, we ask you to also translate metadata for GNOME 
 - `NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml`: `<description>` section
 
 When you're done, create a pull request to the project.
+
+# GNOME Screenshots
+![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
+![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
+<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='350px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='350px'></p>
+
+# WinUI Screenshots
+![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
+![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
+![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
+![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
 
 # GNOME Theming
 
