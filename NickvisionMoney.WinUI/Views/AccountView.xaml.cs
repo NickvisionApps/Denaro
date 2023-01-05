@@ -200,10 +200,7 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
-            if(transactionController.RepeatIntervalChanged || transactionController.RepeatEndDateChanged)
-            {
-                await _controller.SyncRepeatTransactionsAsync();
-            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -243,10 +240,7 @@ public sealed partial class AccountView : UserControl
             {
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
             }
-            if (transactionController.RepeatIntervalChanged || transactionController.RepeatEndDateChanged)
-            {
-                await _controller.SyncRepeatTransactionsAsync();
-            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
