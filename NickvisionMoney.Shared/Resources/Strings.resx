@@ -364,6 +364,22 @@
 		<value>Delete Source and Generated</value>
 	</data>
 
+	<data name="EditTransaction.SourceRepeat" xml:space="preserve">
+		<value>Update Transaction</value>
+	</data>
+
+	<data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?</value>
+	</data>
+
+	<data name="EditOnlySourceTransaction" xml:space="preserve">
+		<value>Update Only Source</value>
+	</data>
+
+	<data name="EditSourceGeneratedTransaction" xml:space="preserve">
+		<value>Update Source and Generated</value>
+	</data>
+
 	<data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>This account has no money available to transfer.</value>
 	</data>

@@ -519,6 +519,37 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Updates a source transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
+    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    {
+        if (updateGenerated)
+        {
+            await UpdateTransactionAsync(transaction);
+            foreach (var t in Transactions.Values.ToList())
+            {
+                if (t.RepeatFrom == (int)transaction.Id)
+                {
+                    t.Description = transaction.Description;
+                    t.Type = transaction.Type;
+                    t.Amount = transaction.Amount;
+                    t.GroupId = transaction.GroupId;
+                    t.RGBA = transaction.RGBA;
+                    t.Receipt = transaction.Receipt;
+                    t.RepeatEndDate = transaction.RepeatEndDate;
+                    await UpdateTransactionAsync(t);
+                }
+            }
+        }
+        else
+        {
+            await UpdateTransactionAsync(transaction);
+        }
+    }
+
+    /// <summary>
     /// The transaction to delete from the account
     /// </summary>
     /// <param name="id">The id of the transaction to delete</param>
@@ -544,6 +575,7 @@ public class Account : IDisposable
     /// <summary>
     /// Removes a source transaction from the account
     /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
     /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
     public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
     {

@@ -365,6 +365,17 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Updates a source transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
+    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    {
+        await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Removes a transaction from the account
     /// </summary>
     /// <param name="id">The id of the transaction to delete</param>
@@ -377,6 +388,7 @@ public class AccountViewController
     /// <summary>
     /// Removes a source transaction from the account
     /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
     /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
     public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
     {
