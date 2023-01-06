@@ -22,38 +22,11 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    private new delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint adw_show_about_window(nint parent,
-        string appNameKey, string appNameValue,
-        string iconKey, string iconValue,
-        string versionKey, string versionValue,
-        string commentsKey, string commentsValue,
-        string developerNameKey, string developerNameValue,
-        string licenseKey, int licenseValue,
-        string copyrightKey, string copyrightValue,
-        string websiteKey, string websiteValue,
-        string issueTrackerKey, string issueTrackerValue,
-        string supportUrlKey, string supportUrlValue,
-        string developersKey, string[] developersValue,
-        string designersKey, string[] designersValue,
-        string artistsKey, string[] artistsValue,
-        string translatorCreditsKey, string translatorCreditsValue,
-        string releaseNotesKey, string releaseNotesValue,
-        nint terminator);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nuint g_file_get_type();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -90,7 +63,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actNewAccount;
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
-    private readonly NotifySignal _widthChangedSignal;
 
     /// <summary>
     /// Occurs when the window's width is changed
@@ -119,8 +91,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountAdded += AccountAdded;
-        _widthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnWidthChanged();
-        g_signal_connect_data(Handle, "notify::default-width", _widthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        this.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "default-width")
+            {
+                OnWidthChanged();
+            }
+        };
         //Main Box
         _mainBox = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         //Header Bar
@@ -364,7 +341,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile().GetPath();
                 if(_controller.IsAccountOpen(path))
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
@@ -400,7 +377,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                var path = openFileDialog.GetFile().GetPath();
                 _controller.AddAccount(path);
             }
         };
@@ -466,29 +443,24 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
-        var developersCredits = new List<string>(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
-        developersCredits.Add(null);
-        var designersCredits = new List<string>(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
-        designersCredits.Add(null);
-        var artistsCredits = new List<string>(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
-        artistsCredits.Add(null);
-        adw_show_about_window(Handle,
-            "application-name", _controller.AppInfo.ShortName,
-            "application-icon", (_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : "")),
-            "version", _controller.AppInfo.Version,
-            "comments", _controller.AppInfo.Description,
-            "developer-name", "Nickvision",
-            "license-type", (int)Gtk.License.MitX11,
-            "copyright", "© Nickvision 2021-2022",
-            "website", _controller.AppInfo.GitHubRepo.ToString(),
-            "issue-url", _controller.AppInfo.IssueTracker.ToString(),
-            "support-url", _controller.AppInfo.SupportUrl.ToString(),
-            "developers", developersCredits.ToArray(),
-            "designers", designersCredits.ToArray(),
-            "artists", artistsCredits.ToArray(),
-            "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]),
-            "release-notes", _controller.AppInfo.Changelog,
-            IntPtr.Zero);
+        var dialog = Adw.AboutWindow.New();
+        dialog.SetTransientFor(this);
+        dialog.SetApplicationName(_controller.AppInfo.ShortName);
+        dialog.SetApplicationIcon(_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : ""));
+        dialog.SetVersion(_controller.AppInfo.Version);
+        dialog.SetComments(_controller.AppInfo.Description);
+        dialog.SetDeveloperName("Nickvision");
+        dialog.SetLicenseType(Gtk.License.MitX11);
+        dialog.SetCopyright("© Nickvision 2021-2023");
+        dialog.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
+        dialog.SetIssueUrl(_controller.AppInfo.IssueTracker.ToString());
+        dialog.SetSupportUrl(_controller.AppInfo.SupportUrl.ToString());
+        dialog.SetDevelopers(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
+        dialog.SetDesigners(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
+        dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
+        dialog.SetTranslatorCredits((string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]));
+        dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
+        dialog.Show();
     }
 
     /// <summary>
