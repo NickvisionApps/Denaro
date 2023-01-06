@@ -415,8 +415,10 @@ public partial class TransactionDialog
                 _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
                 _rowAmount.RemoveCssClass("error");
                 _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+                _rowRepeatEndDate.RemoveCssClass("error");
+                _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
                 //Mark Error
-                if(status == TransactionCheckStatus.EmptyDescription)
+                if (status == TransactionCheckStatus.EmptyDescription)
                 {
                     _rowDescription.AddCssClass("error");
                     _rowDescription.SetTitle(_controller.Localizer["Description", "Empty"]);
@@ -425,6 +427,11 @@ public partial class TransactionDialog
                 {
                     _rowAmount.AddCssClass("error");
                     _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+                }
+                else if (status == TransactionCheckStatus.InvalidRepeatEndDate)
+                {
+                    _rowRepeatEndDate.AddCssClass("error");
+                    _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
                 }
                 return await RunAsync();
             }

@@ -111,6 +111,7 @@ public sealed partial class TransactionDialog : ContentDialog
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Field"];
                 TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+                CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
                 if (checkStatus == TransactionCheckStatus.EmptyDescription)
                 {
                     TxtDescription.Header = _controller.Localizer["Description", "Empty"];
@@ -118,6 +119,10 @@ public sealed partial class TransactionDialog : ContentDialog
                 else if(checkStatus == TransactionCheckStatus.InvalidAmount)
                 {
                     TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+                }
+                else if(checkStatus == TransactionCheckStatus.InvalidRepeatEndDate)
+                {
+                    CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Invalid"];
                 }
                 TxtErrors.Visibility = Visibility.Visible;
                 return await ShowAsync();

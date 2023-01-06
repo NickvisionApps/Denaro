@@ -23,7 +23,8 @@ public enum TransactionCheckStatus
 {
     Valid = 0,
     EmptyDescription,
-    InvalidAmount
+    InvalidAmount,
+    InvalidRepeatEndDate
 }
 
 /// <summary>
@@ -164,6 +165,10 @@ public class TransactionDialogController : IDisposable
         if (amount <= 0)
         {
             return TransactionCheckStatus.InvalidAmount;
+        }
+        if(repeatEndDate.HasValue && repeatEndDate.Value <= date)
+        {
+            return TransactionCheckStatus.InvalidRepeatEndDate;
         }
         Transaction.Date = date;
         Transaction.Description = description;

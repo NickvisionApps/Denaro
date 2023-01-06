@@ -603,6 +603,10 @@
 		<value>Clear End Date</value>
 	</data>
 
+	<data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+		<value>Repeat End Date (Invalid)</value>
+	</data>
+
 	<data name="Group.Field" xml:space="preserve">
 		<value>Group</value>
 	</data>
