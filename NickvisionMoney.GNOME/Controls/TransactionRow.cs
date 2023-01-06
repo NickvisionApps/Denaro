@@ -29,9 +29,6 @@ public partial class TransactionRow : Adw.PreferencesGroup
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_preferences_row_set_use_markup(nint row, [MarshalAs(UnmanagedType.I1)] bool use_markup);
-
     private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
 
     private readonly Transaction _transaction;
@@ -76,7 +73,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         }
         //Row Settings
         _row = Adw.ActionRow.New();
-        adw_preferences_row_set_use_markup(_row.Handle, false);
+        _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
         _row.SetTitle(_transaction.Description);
         _row.SetSubtitle($"{_transaction.Date.ToString("d")}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
