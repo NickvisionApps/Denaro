@@ -44,7 +44,6 @@ public partial class Program
     /// </summary>
     public Program()
     {
-        Adw.Module.Initialize();
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
         _mainWindow = null;
         _application.OnActivate += OnActivate;
