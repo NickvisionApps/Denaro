@@ -433,7 +433,7 @@ Esta acción es irreversible.</value>
 		<value>Por favor, corrija los errores anteriores.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Novedades</value>
+		<value>¿Qué novedades hay?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Desarrolladores:
@@ -482,5 +482,106 @@ Cualquier cambio no guardado se perderá.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Cuenta bancaria (*.nmoney)</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+    <value>Sin fecha final</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+    <value>Limpiar fecha final</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+    <value>Repetir fecha final (no válida)</value>
+  </data>
+  <data name="Receipt.Field" xml:space="preserve">
+    <value>Recibo</value>
+  </data>
+  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+    <value>Eliminar transacción</value>
+  </data>
+  <data name="Overview.Today" xml:space="preserve">
+    <value>Resumen de hoy</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Esta transacción es una transacción repetida en origen.
+¿Qué desea hacer con las transacciones repetidas?
+
+Eliminar solo la transacción de origen permitirá que las
+transacciones generadas sean modificables.</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Esta transacción es una transacción repetida en origen.
+¿Qué desea hacer con las transacciones repetidas?
+
+Al actualizar sólo la transacción de origen se disociarán
+las transacciones generadas en origen.</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+    <value>Quincenal</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+    <value>Repetir fecha final</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Cargar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+    <value>Repo de GitHub</value>
+  </data>
+  <data name="ReportABug" xml:space="preserve">
+    <value>Informar de un error</value>
+  </data>
+  <data name="Discussions" xml:space="preserve">
+    <value>Debates</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Todos los archivos</value>
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+    <value>Eliminar solo origen</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+    <value>Eliminar origen y generadas</value>
+  </data>
+  <data name="EditTransaction.SourceRepeat" xml:space="preserve">
+    <value>Actualizar transacción</value>
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+    <value>Actualizar solo origen</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+    <value>Actualizar origen y generadas</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Ocultar</value>
+  </data>
+  <data name="HideGroups" xml:space="preserve">
+    <value>Ocultar grupos</value>
+  </data>
+  <data name="ShowGroups" xml:space="preserve">
+    <value>Mostrar grupos</value>
+  </data>
+  <data name="ToggleGroups.Tooltip" xml:space="preserve">
+    <value>Conmutar visibilidad de grupos</value>
+  </data>
+  <data name="DeleteExisting" xml:space="preserve">
+    <value>Eliminar existente</value>
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+    <value>Disociar existente</value>
+  </data>
+  <data name="RepeatIntervalChanged" xml:space="preserve">
+    <value>Intervalo de repetición modificado</value>
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+    <value>Se ha modificado el intervalo de repetición.
+¿Qué desea hacer con las transacciones generadas existentes?
+
+Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.</value>
   </data>
 </root>
