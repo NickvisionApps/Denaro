@@ -304,10 +304,10 @@ public class Account : IDisposable
     /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
-    /// <returns>True if at least one transaction was created, else false</returns>
+    /// <returns>True if transactions were modified, else false</returns>
     public async Task<bool> SyncRepeatTransactionsAsync()
     {
-        var transactionAdded = false;
+        var transactionsModified = false;
         var transactions = Transactions.Values.ToList();
         var i = 0;
         foreach(var transaction in transactions)
@@ -374,7 +374,7 @@ public class Account : IDisposable
                         RepeatEndDate = transaction.RepeatEndDate
                     };
                     await AddTransactionAsync(newTransaction);
-                    transactionAdded = true;
+                    transactionsModified = true;
                 }
             }
             else if(transaction.RepeatFrom > 0)
@@ -382,11 +382,12 @@ public class Account : IDisposable
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
                     await DeleteTransactionAsync(transaction.Id);
+                    transactionsModified = true;
                 }
             }
             i++;
         }
-        return transactionAdded;
+        return transactionsModified;
     } 
 
     /// <summary>

@@ -333,8 +333,8 @@ public class AccountViewController
 
     /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
-    /// <returns>True if AccountInfoChanged was triggered, else false</returns>
     /// </summary>
+    /// <returns>True if AccountInfoChanged was triggered, else false</returns>
     public async Task<bool> SyncRepeatTransactionsAsync()
     {
         if(await _account.SyncRepeatTransactionsAsync())
