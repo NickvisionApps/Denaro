@@ -20,7 +20,7 @@ for filename in os.listdir(resx_dir):
         tree = ET.parse(f'{resx_dir}/{filename}')
         root = tree.getroot()
         for item in root.findall('./data'):
-            if item.attrib['name'] == 'MetaDescription.GTK':
+            if item.attrib['name'] == 'Description':
                 text = item.find('value').text
                 if text:
                     desktop_comments.append(f'Comment[{lang_code}]={text}')
