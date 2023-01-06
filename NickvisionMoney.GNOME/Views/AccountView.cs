@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Transactions;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -665,7 +666,40 @@ public partial class AccountView
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         if(await transactionDialog.RunAsync())
         {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            {
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = await dialog.RunAsync();
+                    if (result == MessageDialogResponse.Suggested)
+                    {
+                        await _controller.DeleteGeneratedTransactionsAsync(id);
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    else if(result == MessageDialogResponse.Destructive)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                    }
+                }
+                else
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = await dialog.RunAsync();
+                    if (result != MessageDialogResponse.Cancel)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
+                    }
+                }
+            }
+            else
+            {
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            }
             await _controller.SyncRepeatTransactionsAsync();
         }
     }
