@@ -19,10 +19,10 @@ public partial class AccountView
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
-        UInt64 Usec;
+        ulong Usec;
         nint Tz;
         int Interval;
-        Int32 Days;
+        int Days;
         int RefCount;
     };
 
