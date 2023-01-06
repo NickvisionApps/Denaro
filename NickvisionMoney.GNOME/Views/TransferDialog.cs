@@ -10,8 +10,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransferDialog
 {
-    private delegate void ResponseSignal(nint gObject, string response, nint data);
-
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
 
@@ -31,7 +29,6 @@ public partial class TransferDialog
     private readonly Gtk.Label _lblCurrency;
     private readonly Adw.EntryRow _rowAmount;
     private readonly Adw.PreferencesGroup _grpAmount;
-    private readonly ResponseSignal _responseSignal;
 
     /// <summary>
     /// Constructs a TransferDialog
