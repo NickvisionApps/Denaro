@@ -131,7 +131,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Aucun compte récent</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value />
+		<value>Tous les fichiers</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
@@ -217,10 +217,10 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Aucune transaction trouvée</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value />
+		<value>Ajoutez une nouvelle transaction ou importez des transactions depuis un fichier.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value />
+		<value>Aucune transaction ne correspond aux critères spécifiés.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
 		<value>Trier du premier au dernier</value>
@@ -232,34 +232,35 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Filtres</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value />
+		<value>Réinitialiser les filtres de la vue d’ensemble</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value />
+		<value>Réinitialiser les filtres de groupes</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value />
+		<value>Réinitialiser les filtres de dates</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value />
+		<value>Calendrier</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value />
+		<value>Choisir l’intervalle</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value />
+		<value>Début</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value />
+		<value>Fin</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value />
+		<value>Supprimer le groupe ?</value>
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value />
+		<value>Êtes-vous sûr de vouloir supprimer ce groupe ?
+Cette action est irréversible.</value>
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value />
+		<value>Supprimer la transaction ?</value>
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
 		<value>Êtes-vous sûr·e de vouloir supprimer cette transaction ?
@@ -303,35 +304,35 @@ Cette action est irréversible.</value>
 		<value />
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value />
+		<value>Transférer vers {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value />
+		<value>Transférer depuis {0}</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Modifier la transaction</value>
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value />
+		<value>Supprimer la transaction</value>
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
-		<value />
+		<value>Modifier le groupe</value>
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value />
+		<value>Supprimer le groupe</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value />
+		<value>Groupe</value>
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
-		<value />
+		<value>Transaction</value>
   </data>
   <data name="RepeatInterval.Never" xml:space="preserve">
-		<value />
+		<value>Jamais</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
 		<value />
@@ -430,34 +431,34 @@ Cette action est irréversible.</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value />
+		<value>Interface utilisateur</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value />
+		<value>Personnaliser l’interface utilisateur de l’application.</value>
   </data>
   <data name="Theme" xml:space="preserve">
-		<value />
+		<value>Thème</value>
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value />
+		<value>Clair</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value />
+		<value>Sombre</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value />
+		<value>Système</value>
   </data>
   <data name="Colors" xml:space="preserve">
-		<value />
+		<value>Couleurs</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value />
+		<value>Personnaliser les couleurs utilisées par Money.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value />
+		<value>Couleur par défaut des transactions</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value />
+		<value>Couleur par défaut des transferts</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
 		<value />
@@ -467,39 +468,50 @@ Cette action est irréversible.</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value />
+		<value>Application</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value />
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Quoi de neuf ?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Développeurs :
+{0}
+
+Designers :
+{1}
+
+Artistes :
+{2}
+
+Traducteurs :
+{3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Un redémarrage de l’application est requis pour modifier le thème.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Redémarrer pour appliquer le thème ?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Souhaitez-vous redémarrer {0} pour appliquer le nouveau thème ?
+Tout changement non sauvegardé sera perdu.</value>
   </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Menu du compte</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
 		<value />
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Menu principal</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value />
+		<value>Récents</value>
   </data>
   <data name="NewAccountPopover.GTK" xml:space="preserve">
 		<value />
@@ -512,5 +524,49 @@ Cette action est irréversible.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte d’argent (*.nmoney)</value>
+  </data>
+  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+    <value>Supprimer la transaction</value>
+  </data>
+  <data name="Overview.Today" xml:space="preserve">
+    <value>Vue d’aujourd’hui</value>
+  </data>
+  <data name="EditTransaction.SourceRepeat" xml:space="preserve">
+    <value>Mettre à jour la transaction</value>
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+    <value>L’intervalle de répétition a été modifié.
+Que souhaitez-vous faire avec les transactions générées existantes ?
+
+Les nouvelles transactions répétées seront générées sur la base du nouvel intervalle.</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Cette transaction est une transaction répétée à partir de la source.
+Que voulez-vous faire avec les transactions répétées ?
+
+En mettant à jour uniquement la transaction source,
+les transactions générées en seront dissociées.</value>
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+    <value>Mettre à jour la source uniquement</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+    <value>Mettre à jour la source et les transactions générées</value>
+  </data>
+  <data name="RepeatIntervalChanged" xml:space="preserve">
+    <value>Intervalle de répétition modifié</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Cette transaction est une transaction répétée à partir de la source.
+Que voulez-vous faire avec les transactions répétées ?
+
+En supprimant uniquement la transaction source,
+les transactions individuelles générées seront modifiables.</value>
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+    <value>Supprimer uniquement la source</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+    <value>Supprimer la source et les transactions générées</value>
   </data>
 </root>
