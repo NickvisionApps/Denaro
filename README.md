@@ -35,13 +35,7 @@ In the `NickvisionMoney.Shared/Resources` folder you will see a file called `Str
 
 To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
 
-Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx` and commit these changes.
-
-Even if you're running Windows, we ask you to also translate metadata for GNOME (Linux) version of the app. There are 2 places that require changes when a new translation is added:
-- `NickvisionMoney.GNOME/org.nickvision.money.desktop`: `Comment[lang-code]` line
-- `NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml`: `<description>` section
-
-When you're done, create a pull request to the project.
+Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
 
 # GNOME Screenshots
 ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)

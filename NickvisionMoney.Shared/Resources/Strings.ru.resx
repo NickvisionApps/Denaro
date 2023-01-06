@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Персональный менеджер финансов.</value>
+		<value>Персональный менеджер финансов</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Версия: {0}</value>
