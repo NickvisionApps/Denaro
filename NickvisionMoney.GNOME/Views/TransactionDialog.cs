@@ -75,12 +75,9 @@ public partial class TransactionDialog
     private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
-    private readonly Adw.ActionRow _rowDescription;
-    private readonly Gtk.Entry _txtDescription;
-    private readonly Adw.ActionRow _rowAmount;
-    private readonly Gtk.Box _boxAmount;
+    private readonly Adw.EntryRow _rowDescription;
+    private readonly Adw.EntryRow _rowAmount;
     private readonly Gtk.Label _lblCurrency;
-    private readonly Gtk.Entry _txtAmount;
     private readonly Adw.ActionRow _rowType;
     private readonly Gtk.Box _boxType;
     private readonly Gtk.ToggleButton _btnIncome;
@@ -135,27 +132,16 @@ public partial class TransactionDialog
         _grpMain = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpMain);
         //Description
-        _rowDescription = Adw.ActionRow.New();
+        _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
-        _txtDescription = Gtk.Entry.New();
-        _txtDescription.SetValign(Gtk.Align.Center);
-        _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
-        _txtDescription.SetActivatesDefault(true);
-        _rowDescription.AddSuffix(_txtDescription);
         _grpMain.Add(_rowDescription);
         //Amount
-        _rowAmount = Adw.ActionRow.New();
+        _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-        _boxAmount = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
-        _boxAmount.SetValign(Gtk.Align.Center);
-        _lblCurrency = Gtk.Label.New(NumberFormatInfo.CurrentInfo.CurrencySymbol);
-        _boxAmount.Append(_lblCurrency);
-        _txtAmount = Gtk.Entry.New();
-        _txtAmount.SetPlaceholderText(_controller.Localizer["Amount", "Placeholder"]);
-        _txtAmount.SetActivatesDefault(true);
-        _txtAmount.SetInputPurpose(Gtk.InputPurpose.Number);
-        _boxAmount.Append(_txtAmount);
-        _rowAmount.AddSuffix(_boxAmount);
+        _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
+        _lblCurrency = Gtk.Label.New($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+        _lblCurrency.AddCssClass("dim-label");
+        _rowAmount.AddSuffix(_lblCurrency);
         _grpMain.Add(_rowAmount);
         //Type Box and Buttons
         _btnIncome = Gtk.ToggleButton.NewWithLabel(_controller.Localizer["Income"]);
@@ -289,8 +275,8 @@ public partial class TransactionDialog
         //Load Transaction
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
-        _txtDescription.SetText(_controller.Transaction.Description);
-        _txtAmount.SetText(_controller.Transaction.Amount.ToString("N2"));
+        _rowDescription.SetText(_controller.Transaction.Description);
+        _rowAmount.SetText(_controller.Transaction.Amount.ToString("N2"));
         if (_controller.Transaction.Type == TransactionType.Income)
         {
             _btnIncome.SetActive(true);
@@ -362,7 +348,7 @@ public partial class TransactionDialog
             var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem()!;
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath, repeatEndDate);
+            var status = await _controller.UpdateTransactionAsync(date, _rowDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _rowAmount.GetText(), _receiptPath, repeatEndDate);
             if(status != TransactionCheckStatus.Valid)
             {
                 //Reset UI

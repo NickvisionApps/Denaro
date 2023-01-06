@@ -17,10 +17,8 @@ public partial class GroupDialog
     private readonly GroupDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
-    private readonly Adw.ActionRow _rowName;
-    private readonly Gtk.Entry _txtName;
-    private readonly Adw.ActionRow _rowDescription;
-    private readonly Gtk.Entry _txtDescription;
+    private readonly Adw.EntryRow _rowName;
+    private readonly Adw.EntryRow _rowDescription;
 
     /// <summary>
     /// Constructs a GroupDialog
@@ -32,7 +30,7 @@ public partial class GroupDialog
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Group"], "");
-        _dialog.SetDefaultSize(450, -1);
+        _dialog.SetDefaultSize(360, -1);
         _dialog.SetHideOnClose(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
@@ -43,28 +41,18 @@ public partial class GroupDialog
         //Preferences Group
         _grpGroup = Adw.PreferencesGroup.New();
         //Name
-        _rowName = Adw.ActionRow.New();
+        _rowName = Adw.EntryRow.New();
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-        _txtName = Gtk.Entry.New();
-        _txtName.SetValign(Gtk.Align.Center);
-        _txtName.SetPlaceholderText(_controller.Localizer["Name", "Placeholder"]);
-        _txtName.SetActivatesDefault(true);
-        _rowName.AddSuffix(_txtName);
         _grpGroup.Add(_rowName);
         //Description
-        _rowDescription = Adw.ActionRow.New();
+        _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
-        _txtDescription = Gtk.Entry.New();
-        _txtDescription.SetValign(Gtk.Align.Center);
-        _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
-        _txtDescription.SetActivatesDefault(true);
-        _rowDescription.AddSuffix(_txtDescription);
         _grpGroup.Add(_rowDescription);
         //Layout
         _dialog.SetExtraChild(_grpGroup);
         //Load Group
-        _txtName.SetText(_controller.Group.Name);
-        _txtDescription.SetText(_controller.Group.Description);
+        _rowName.SetText(_controller.Group.Name);
+        _rowDescription.SetText(_controller.Group.Description);
     }
 
     /// <summary>
@@ -83,7 +71,7 @@ public partial class GroupDialog
         if(_controller.Accepted)
         {
             _dialog.SetModal(false);
-            var status = _controller.UpdateGroup(_txtName.GetText(), _txtDescription.GetText());
+            var status = _controller.UpdateGroup(_rowName.GetText(), _rowDescription.GetText());
             if(status != GroupCheckStatus.Valid)
             {
                 _rowName.RemoveCssClass("error");
