@@ -513,6 +513,10 @@
 		<value>Biyearly</value>
 	</data>
 
+	<data name="NoEndDate" xml:space="preserve">
+		<value>No End Date</value>
+	</data>
+
 	<data name="View" xml:space="preserve">
 		<value>View</value>
 	</data>
