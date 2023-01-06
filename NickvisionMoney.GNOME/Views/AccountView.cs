@@ -573,7 +573,7 @@ public partial class AccountView
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if (await transferDialog.RunAsync())
+            if (transferDialog.Run())
             {
                 await _controller.SendTransferAsync(transferController.Transfer);
             }
@@ -687,7 +687,7 @@ public partial class AccountView
                     var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
-                    var result = await dialog.RunAsync();
+                    var result = dialog.Run();
                     if (result == MessageDialogResponse.Suggested)
                     {
                         await _controller.DeleteGeneratedTransactionsAsync(id);
@@ -703,7 +703,7 @@ public partial class AccountView
                     var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
-                    var result = await dialog.RunAsync();
+                    var result = dialog.Run();
                     if (result != MessageDialogResponse.Cancel)
                     {
                         await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
@@ -725,7 +725,7 @@ public partial class AccountView
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
-            var result = await dialog.RunAsync();
+            var result = dialog.Run();
             if(result != MessageDialogResponse.Cancel)
             {
                 await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
@@ -734,7 +734,7 @@ public partial class AccountView
         else
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-            if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+            if (dialog.Run() == MessageDialogResponse.Destructive)
             {
                 await _controller.DeleteTransactionAsync(id);
             }
@@ -745,7 +745,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.AddGroupAsync(groupController.Group);
         }
@@ -755,7 +755,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.UpdateGroupAsync(groupController.Group);
         }
@@ -764,7 +764,7 @@ public partial class AccountView
     private async void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteGroupAsync(id);
         }

@@ -1,6 +1,5 @@
 using NickvisionMoney.Shared.Controllers;
-using System;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -9,6 +8,12 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class GroupDialog
 {
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
     private readonly GroupDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
@@ -66,14 +71,14 @@ public partial class GroupDialog
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public async Task<bool> RunAsync()
+    public bool Run()
     {
         _dialog.Show();
         _dialog.SetModal(true);
         _rowName.GrabFocus();
         while(_dialog.IsVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
         }
         if(_controller.Accepted)
         {
@@ -94,7 +99,7 @@ public partial class GroupDialog
                     _rowName.AddCssClass("error");
                     _rowName.SetTitle(_controller.Localizer["Name", "Exists"]);
                 }
-                return await RunAsync();
+                return Run();
             }
         }
         _dialog.Destroy();

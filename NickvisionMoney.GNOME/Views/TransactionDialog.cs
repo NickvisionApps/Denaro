@@ -33,6 +33,12 @@ public partial class TransactionDialog
     }
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
@@ -340,7 +346,7 @@ public partial class TransactionDialog
         _dialog.SetModal(true);
         while(_dialog.IsVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
         }
         if(_controller.Accepted)
         {

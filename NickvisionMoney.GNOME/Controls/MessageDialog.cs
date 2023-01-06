@@ -1,5 +1,4 @@
-using System;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -18,6 +17,12 @@ public enum MessageDialogResponse
 /// </summary>
 public partial class MessageDialog
 {
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
     private readonly Adw.MessageDialog _dialog;
     private MessageDialogResponse _response;
 
@@ -57,12 +62,12 @@ public partial class MessageDialog
     /// Displays the dialog
     /// </summary>
     /// <returns>MessageDialogResponse</returns>
-    public async Task<MessageDialogResponse> RunAsync()
+    public MessageDialogResponse Run()
     {
         _dialog.Show();
         while(_dialog.IsVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
         }
         _dialog.Destroy();
         return _response;
