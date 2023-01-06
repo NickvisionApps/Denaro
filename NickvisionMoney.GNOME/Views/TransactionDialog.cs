@@ -399,7 +399,7 @@ public partial class TransactionDialog
             var selectedDay = gtk_calendar_get_date(_calendarDate.Handle);
             var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
             var repeatEndDate = default(DateOnly?);
-            if(_btnRepeatEndDateClear.GetLabel() != _controller.Localizer["NoEndDate"])
+            if(_btnRepeatEndDate.GetLabel() != _controller.Localizer["NoEndDate"])
             {
                 var selectedEndDay = gtk_calendar_get_date(_calendarRepeatEndDate.Handle);
                 repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));

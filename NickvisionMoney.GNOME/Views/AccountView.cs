@@ -672,10 +672,24 @@ public partial class AccountView
 
     private async void DeleteTransaction(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(_controller.GetIsSourceRepeatTransaction(id))
         {
-            await _controller.DeleteTransactionAsync(id);
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+            dialog.UnsetDestructiveApperance();
+            dialog.UnsetSuggestedApperance();
+            var result = await dialog.RunAsync();
+            if(result != MessageDialogResponse.Cancel)
+            {
+                await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
+            }
+        }
+        else
+        {
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+            {
+                await _controller.DeleteTransactionAsync(id);
+            }
         }
     }
 

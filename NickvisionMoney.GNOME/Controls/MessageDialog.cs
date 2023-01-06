@@ -115,6 +115,16 @@ public partial class MessageDialog
     }
 
     /// <summary>
+    /// Resets the destructive response appearance to default
+    /// </summary>
+    public void UnsetDestructiveApperance() => adw_message_dialog_set_response_appearance(_dialog, "destructive", (uint)ResponseAppearance.Default);
+
+    /// <summary>
+    /// Resets the suggested response appearance to default
+    /// </summary>
+    public void UnsetSuggestedApperance() => adw_message_dialog_set_response_appearance(_dialog, "suggested", (uint)ResponseAppearance.Default);
+
+    /// <summary>
     /// Sets the response of the dialog as a MessageDialogResponse
     /// </summary>
     /// <param name="response">The string response of the dialog</param>
