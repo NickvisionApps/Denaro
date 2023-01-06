@@ -29,8 +29,7 @@ public partial class TransferDialog
     private readonly Adw.Clamp _clampSelectedAccount;
     private readonly Gtk.Box _boxTransferAccount;
     private readonly Gtk.Label _lblCurrency;
-    private readonly Gtk.Entry _txtAmount;
-    private readonly Adw.ActionRow _rowAmount;
+    private readonly Adw.EntryRow _rowAmount;
     private readonly Adw.PreferencesGroup _grpAmount;
     private readonly ResponseSignal _responseSignal;
 
@@ -86,15 +85,12 @@ public partial class TransferDialog
         _boxTransferAccount.Append(_clampSelectedAccount);
         _boxMain.Append(_boxTransferAccount);
         //Amount
-        _lblCurrency = Gtk.Label.New(NumberFormatInfo.CurrentInfo.CurrencySymbol);
-        _txtAmount = Gtk.Entry.New();
-        _txtAmount.SetValign(Gtk.Align.Center);
-        _txtAmount.SetPlaceholderText(_controller.Localizer["Amount", "Placeholder"]);
-        _txtAmount.SetInputPurpose(Gtk.InputPurpose.Number);
-        _rowAmount = Adw.ActionRow.New();
+        _lblCurrency = Gtk.Label.New($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+        _lblCurrency.AddCssClass("dim-label");
+        _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
         _rowAmount.AddSuffix(_lblCurrency);
-        _rowAmount.AddSuffix(_txtAmount);
         _grpAmount = Adw.PreferencesGroup.New();
         _grpAmount.Add(_rowAmount);
         _boxMain.Append(_grpAmount);
@@ -117,7 +113,7 @@ public partial class TransferDialog
         if(_controller.Accepted)
         {
             _dialog.SetModal(false);
-            var status = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _txtAmount.GetText());
+            var status = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _rowAmount.GetText());
             if(status != TransferCheckStatus.Valid)
             {
                 _lblDestination.RemoveCssClass("error");
