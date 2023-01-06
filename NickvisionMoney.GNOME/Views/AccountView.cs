@@ -8,7 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Transactions;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -119,6 +118,7 @@ public partial class AccountView
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
     public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
     {
+
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _controller = controller;
@@ -596,12 +596,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = saveFileDialog.GetFile().GetPath();
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if(Path.GetExtension(path) != ".csv")
                 {
                     path += ".csv";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -619,12 +619,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = saveFileDialog.GetFile().GetPath();
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if (Path.GetExtension(path) != ".pdf")
                 {
                     path += ".pdf";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -656,8 +656,8 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = openFileDialog.GetFile().GetPath();
-                await _controller.ImportFromFileAsync(path);
+                var path = openFileDialog.GetFile()!.GetPath();
+                await _controller.ImportFromFileAsync(path ?? "");
             }
         };
         openFileDialog.Show();

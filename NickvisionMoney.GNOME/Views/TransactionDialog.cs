@@ -353,7 +353,7 @@ public partial class TransactionDialog
                 var selectedEndDay = gtk_calendar_get_date(_calendarRepeatEndDate.Handle);
                 repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
             }
-            var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem();
+            var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem()!;
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
             var status = await _controller.UpdateTransactionAsync(date, _txtDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _txtAmount.GetText(), _receiptPath, repeatEndDate);
@@ -505,7 +505,7 @@ public partial class TransactionDialog
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = openFileDialog.GetFile().GetPath();
+                var path = openFileDialog.GetFile()!.GetPath();
                 _receiptPath = path;
                 _btnReceiptView.SetSensitive(true);
                 _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);

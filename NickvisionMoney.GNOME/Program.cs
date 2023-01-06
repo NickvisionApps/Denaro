@@ -50,8 +50,8 @@ public partial class Program
         _openSignal = (nint application, nint files, int nfiles, string hint, nint data) => OnOpen(files, nfiles);
         g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
         var prefixes = new List<string> {
-            Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
-            Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+            Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
+            Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
             "/usr"
         };
         foreach(var prefix in prefixes)

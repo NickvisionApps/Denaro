@@ -116,7 +116,7 @@ public class ShortcutsDialog
     </interface>";
 
         _builder = Gtk.Builder.NewFromString(xml, -1);
-        _window = (Gtk.ShortcutsWindow)_builder.GetObject("dialog");
+        _window = (Gtk.ShortcutsWindow)_builder.GetObject("dialog")!;
         _window.SetTransientFor(parent);
     }
 

@@ -341,7 +341,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = saveFileDialog.GetFile().GetPath();
+                var path = saveFileDialog.GetFile()!.GetPath() ?? "";
                 if(_controller.IsAccountOpen(path))
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
@@ -377,7 +377,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = openFileDialog.GetFile().GetPath();
+                var path = openFileDialog.GetFile()!.GetPath() ?? "";
                 _controller.AddAccount(path);
             }
         };
@@ -390,7 +390,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        _tabView.ClosePage(_tabView.GetSelectedPage());
+        _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
     /// <summary>
