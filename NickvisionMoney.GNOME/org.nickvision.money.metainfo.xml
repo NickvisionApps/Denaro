@@ -9,33 +9,6 @@
     <p>
       A personal finance manager
     </p>
-    <p xml:lang="de">
-      Ein persönlicher Finanzmanager
-    </p>
-	<p xml:lang="es">
-	  Un gestor de finanzas personales
-	</p>
-    <p xml:lang="fr">
-      Gestionnaire des dépenses personnelles
-    </p>
-    <p xml:lang="hr">
-      Aplikacija za osobne financije
-    </p>
-    <p xml:lang="hi">
-            एक व्यक्तिगत वित्त संयोजक
-    </p>
-    <p xml:lang="it">
-      Gestione finanziaria personale
-    </p>
-    <p xml:lang="ru">
-      Персональный менеджер финансов
-    </p>
-    <p xml:lang="sv">
-      En personlig finanshanterare
-    </p>
-    <p xml:lang="id">
-      Manajer keuangan pribadi
-    </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>

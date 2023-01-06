@@ -510,4 +510,7 @@
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value></value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value>Aplikacija za osobne financije</value>
+  </data>
 </root>

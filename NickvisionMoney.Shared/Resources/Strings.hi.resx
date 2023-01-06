@@ -512,4 +512,7 @@
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>मनी खाता (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value>एक व्यक्तिगत वित्त संयोजक</value>
+  </data>
 </root>

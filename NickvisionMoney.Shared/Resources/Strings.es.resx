@@ -483,4 +483,7 @@ Cualquier cambio no guardado se perderá.</value>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Cuenta bancaria (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value>Un gestor de finanzas personales</value>
+  </data>
 </root>

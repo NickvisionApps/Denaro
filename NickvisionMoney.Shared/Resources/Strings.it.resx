@@ -590,4 +590,7 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Account Money (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value>Gestione finanziaria personale</value>
+  </data>
 </root>

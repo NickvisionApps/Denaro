@@ -513,4 +513,7 @@ Cette action est irréversible.</value>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte d’argent (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value>Gestionnaire des dépenses personnelles</value>
+  </data>
 </root>

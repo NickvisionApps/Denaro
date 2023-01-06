@@ -489,6 +489,9 @@
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Счёт Money (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+    <value>Персональный менеджер финансов</value>
+  </data>
   <data name="GitHubRepo" xml:space="preserve">
     <value>Репозиторий GitHub</value>
   </data>

@@ -525,10 +525,10 @@ Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money-rekening (*.nmoney)</value>
   </data>
+  <data name="MetaDescription.GTK" xml:space="preserve">
+		<value></value>
+  </data>
   <data name="Overview.Today" xml:space="preserve">
     <value>Dagoverzicht</value>
-  </data>
-  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-    <value>Transactie verwijderen</value>
   </data>
 </root>
