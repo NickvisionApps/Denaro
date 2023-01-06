@@ -32,28 +32,6 @@ public partial class TransactionDialog
         public float Alpha;
     }
 
-    private delegate void ResponseSignal(nint gObject, string response, nint data);
-
-    private new delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint adw_message_dialog_new(nint parent, string heading, string body);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_close_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_default_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_extra_child(nint dialog, nint child);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_response_appearance(nint dialog, string response, int appearance);
-
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
@@ -73,12 +51,6 @@ public partial class TransactionDialog
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] ResponseSignal c_handler, nint data, nint destroy_data, int connect_flags);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
-
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
@@ -91,34 +63,9 @@ public partial class TransactionDialog
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gtk_widget_is_visible(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_widget_show(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_destroy(nint window);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_default_size(nint window, int x, int y);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
-    private readonly nint _dialog;
+    private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
@@ -155,8 +102,6 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
-    private readonly ResponseSignal _responseSignal;
-    private readonly NotifySignal _intervalChangedSignal;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -169,16 +114,15 @@ public partial class TransactionDialog
         _receiptPath = null;
         _parentWindow = parentWindow;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(_parentWindow.Handle, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
-        gtk_window_set_default_size(_dialog, 420, -1);
-        gtk_window_set_hide_on_close(_dialog, true);
-        adw_message_dialog_add_response(_dialog, "cancel", _controller.Localizer["Cancel"]);
-        adw_message_dialog_set_close_response(_dialog, "cancel");
-        adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
-        adw_message_dialog_set_default_response(_dialog, "ok");
-        adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        _responseSignal = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
-        g_signal_connect_data(_dialog, "response", _responseSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _dialog = Adw.MessageDialog.New(_parentWindow, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
+        _dialog.SetDefaultSize(420, -1);
+        _dialog.SetHideOnClose(true);
+        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
+        _dialog.SetCloseResponse("cancel");
+        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.SetDefaultResponse("ok");
+        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Main Preferences Group
@@ -249,8 +193,13 @@ public partial class TransactionDialog
         _rowRepeatInterval = Adw.ComboRow.New();
         _rowRepeatInterval.SetTitle(_controller.Localizer["TransactionRepeatInterval", "Field"]);
         _rowRepeatInterval.SetModel(Gtk.StringList.New(new string[8] { _controller.Localizer["RepeatInterval", "Never"], _controller.Localizer["RepeatInterval", "Daily"], _controller.Localizer["RepeatInterval", "Weekly"], _controller.Localizer["RepeatInterval", "Biweekly"], _controller.Localizer["RepeatInterval", "Monthly"], _controller.Localizer["RepeatInterval", "Quarterly"], _controller.Localizer["RepeatInterval", "Yearly"], _controller.Localizer["RepeatInterval", "Biyearly"] }));
-        _intervalChangedSignal = (nint sender, nint gParamSpec, nint data) => OnRepeatIntervalChanged();
-        g_signal_connect_data(_rowRepeatInterval.Handle, "notify::selected-item", _intervalChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _rowRepeatInterval.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected-item")
+            {
+                OnRepeatIntervalChanged();
+            }
+        };
         _grpDateRepeat.Add(_rowRepeatInterval);
         //Repeat End Date
         _calendarRepeatEndDate = Gtk.Calendar.New();
@@ -330,7 +279,7 @@ public partial class TransactionDialog
         _rowReceipt.AddSuffix(_boxReceiptButtons);
         _grpReceipt.Add(_rowReceipt);
         //Layout
-        adw_message_dialog_set_extra_child(_dialog, _boxMain.Handle);
+        _dialog.SetExtraChild(_boxMain);
         //Load Transaction
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
@@ -387,15 +336,15 @@ public partial class TransactionDialog
     /// <returns>True if the dialog was accepted, else false</returns>
     public async Task<bool> RunAsync()
     {
-        gtk_widget_show(_dialog);
-        gtk_window_set_modal(_dialog, true);
-        while(gtk_widget_is_visible(_dialog))
+        _dialog.Show();
+        _dialog.SetModal(true);
+        while(_dialog.IsVisible())
         {
             await Task.Delay(100);
         }
         if(_controller.Accepted)
         {
-            gtk_window_set_modal(_dialog, false);
+            _dialog.SetModal(false);
             var selectedDay = gtk_calendar_get_date(_calendarDate.Handle);
             var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
             var repeatEndDate = default(DateOnly?);
@@ -436,7 +385,7 @@ public partial class TransactionDialog
                 return await RunAsync();
             }
         }
-        gtk_window_destroy(_dialog);
+        _dialog.Destroy();
         return _controller.Accepted;
     }
 
@@ -556,7 +505,7 @@ public partial class TransactionDialog
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                var path = openFileDialog.GetFile().GetPath();
                 _receiptPath = path;
                 _btnReceiptView.SetSensitive(true);
                 _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
