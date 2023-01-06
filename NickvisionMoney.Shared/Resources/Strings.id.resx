@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Manajer keuangan pribadi.</value>
+		<value>Manajer keuangan pribadi</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versi: {0}</value>
@@ -536,8 +536,5 @@ pekerjaan yang tidak disimpan akan hilang.</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
     <value>Interval Pengulangan diubah</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value>Manajer keuangan pribadi</value>
   </data>
 </root>

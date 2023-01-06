@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Un gestionnaire de finances personnelles.</value>
+		<value>Un gestionnaire de finances personnelles</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Version : {0}</value>
@@ -512,8 +512,5 @@ Cette action est irréversible.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte d’argent (*.nmoney)</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value>Gestionnaire des dépenses personnelles</value>
   </data>
 </root>

@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Персональный менеджер финансов.</value>
+		<value>Персональный менеджер финансов</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Версия: {0}</value>
@@ -488,9 +488,6 @@
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Счёт Money (*.nmoney)</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-    <value>Персональный менеджер финансов</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
     <value>Репозиторий GitHub</value>

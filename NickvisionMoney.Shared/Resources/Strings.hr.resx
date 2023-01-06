@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value></value>
+		<value>Aplikacija za osobne financije</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value></value>
@@ -509,8 +509,5 @@
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value></value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value>Aplikacija za osobne financije</value>
   </data>
 </root>

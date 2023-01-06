@@ -489,7 +489,4 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>軟體Money的帳戶 (*.nmoney)</value>
   </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value></value>
-  </data>
 </root>

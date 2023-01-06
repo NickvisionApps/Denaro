@@ -19,7 +19,7 @@
 	<!--Use: &#xA; for newline-->
 
 	<data name="Description" xml:space="preserve">
-		<value>A personal finance manager.</value>
+		<value>A personal finance manager</value>
 	</data>
 
 	<data name="Version" xml:space="preserve">
@@ -741,9 +741,5 @@
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money Account (*.nmoney)</value>
-	</data>
-
-	<data name="MetaDescription.GTK" xml:space="preserve">
-		<value>A personal finance manager</value>
 	</data>
 </root>

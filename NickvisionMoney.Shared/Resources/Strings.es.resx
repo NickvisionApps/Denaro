@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Un gestor de finanzas personales.</value>
+		<value>Un gestor de finanzas personales</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versión: {0}</value>
@@ -482,9 +482,6 @@ Cualquier cambio no guardado se perderá.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Cuenta bancaria (*.nmoney)</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value>Un gestor de finanzas personales</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
     <value>Sin fecha final</value>

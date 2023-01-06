@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Gestione finanziaria personale.</value>
+		<value>Gestione finanziaria personale</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versione {0}</value>
@@ -589,8 +589,5 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Account Money (*.nmoney)</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value>Gestione finanziaria personale</value>
   </data>
 </root>

@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Een financiënbeheerder.</value>
+		<value>Een financiënbeheerder</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versie: {0}</value>
@@ -524,9 +524,6 @@ Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money-rekening (*.nmoney)</value>
-  </data>
-  <data name="MetaDescription.GTK" xml:space="preserve">
-		<value></value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
     <value>Dagoverzicht</value>
