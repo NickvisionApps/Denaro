@@ -147,7 +147,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="receiptPath">The new receipt image path</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -191,7 +191,7 @@ public class TransactionDialogController : IDisposable
             {
                 if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
                 {
-                    Transaction.Receipt = await Image.LoadAsync(receiptPath);
+                    Transaction.Receipt = Image.Load(receiptPath);
                 }
                 else if (Path.GetExtension(receiptPath) == ".pdf")
                 {

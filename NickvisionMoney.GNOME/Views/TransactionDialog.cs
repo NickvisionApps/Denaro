@@ -16,10 +16,10 @@ public partial class TransactionDialog
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
-        UInt64 Usec;
+        ulong Usec;
         nint Tz;
         int Interval;
-        Int32 Days;
+        int Days;
         int RefCount;
     };
 
@@ -326,7 +326,7 @@ public partial class TransactionDialog
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public async Task<bool> RunAsync()
+    public bool Run()
     {
         _dialog.Show();
         _dialog.SetModal(true);
@@ -348,7 +348,7 @@ public partial class TransactionDialog
             var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem()!;
             var color = new Color();
             gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = await _controller.UpdateTransactionAsync(date, _rowDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _rowAmount.GetText(), _receiptPath, repeatEndDate);
+            var status = _controller.UpdateTransaction(date, _rowDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _rowAmount.GetText(), _receiptPath, repeatEndDate);
             if(status != TransactionCheckStatus.Valid)
             {
                 //Reset UI
@@ -374,7 +374,7 @@ public partial class TransactionDialog
                     _rowRepeatEndDate.AddCssClass("error");
                     _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
                 }
-                return await RunAsync();
+                return Run();
             }
         }
         _dialog.Destroy();

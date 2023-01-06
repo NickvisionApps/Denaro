@@ -19,10 +19,10 @@ public partial class AccountView
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
-        UInt64 Usec;
+        ulong Usec;
         nint Tz;
         int Interval;
-        Int32 Days;
+        int Days;
         int RefCount;
     };
 
@@ -667,7 +667,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
             await _controller.SyncRepeatTransactionsAsync();
@@ -678,7 +678,7 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
             if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
             {
