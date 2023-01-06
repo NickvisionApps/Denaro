@@ -452,6 +452,7 @@ public class AccountViewController
     public async Task DeleteGroupAsync(uint id)
     {
         await _account.DeleteGroupAsync(id);
+        _filters.Remove((int)id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 
