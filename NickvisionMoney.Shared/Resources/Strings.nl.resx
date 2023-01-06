@@ -531,4 +531,7 @@ Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
   <data name="Overview.Today" xml:space="preserve">
     <value>Dagoverzicht</value>
   </data>
+  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+    <value>Transactie verwijderen</value>
+  </data>
 </root>
