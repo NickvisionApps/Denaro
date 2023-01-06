@@ -202,6 +202,7 @@ public class AccountViewController
                 }
                 filteredTransactions.Add(pair.Value);
             }
+            filteredTransactions.Sort();
             return filteredTransactions;
         }
     }

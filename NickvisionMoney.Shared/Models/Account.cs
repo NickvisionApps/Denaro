@@ -169,7 +169,15 @@ public class Account : IDisposable
             {
                 return 1;
             }
-            return Groups.Last().Value.Id + 1;
+            var id = 0u;
+            foreach (var group in Groups)
+            {
+                if (group.Key > id)
+                {
+                    id = group.Key;
+                }
+            }
+            return id + 1;
         }
     }
 
@@ -184,7 +192,15 @@ public class Account : IDisposable
             {
                 return 1;
             }
-            return Transactions.Last().Value.Id + 1;
+            var id = 0u;
+            foreach(var transaction in Transactions)
+            {
+                if(transaction.Key > id)
+                {
+                    id = transaction.Key;
+                }
+            }
+            return id + 1;
         }
     }
 
