@@ -79,12 +79,24 @@ public sealed partial class GroupRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Edit(object sender, RoutedEventArgs e) => EditTriggered?.Invoke(this, Id);
+    private void Edit(object sender, RoutedEventArgs e)
+    {
+        if(_group.Id != 0)
+        {
+            EditTriggered?.Invoke(this, Id);
+        }
+    }
 
     /// <summary>
     /// Occurs when the delete button on the row is clicked 
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Delete(object sender, RoutedEventArgs e) => DeleteTriggered?.Invoke(this, Id);
+    private void Delete(object sender, RoutedEventArgs e)
+    {
+        if(_group.Id != 0)
+        {
+            DeleteTriggered?.Invoke(this, Id);
+        }
+    }
 }

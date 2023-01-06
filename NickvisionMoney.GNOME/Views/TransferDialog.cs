@@ -2,7 +2,6 @@ using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -14,54 +13,14 @@ public partial class TransferDialog
     private delegate void ResponseSignal(nint gObject, string response, nint data);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] ResponseSignal c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial nint g_main_context_default();
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint adw_message_dialog_new(nint parent, string heading, string body);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_close_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_default_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_extra_child(nint dialog, nint child);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_response_appearance(nint dialog, string response, int appearance);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gtk_widget_is_visible(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_widget_show(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_destroy(nint window);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_default_size(nint window, int x, int y);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
-    private readonly nint _dialog;
+    private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Label _lblDestination;
     private readonly Gtk.Label _lblSelectedAccount;
@@ -85,16 +44,15 @@ public partial class TransferDialog
         _controller = controller;
         _parentWindow = parentWindow;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(parentWindow.Handle, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
-        gtk_window_set_default_size(_dialog, 360, -1);
-        gtk_window_set_hide_on_close(_dialog, true);
-        adw_message_dialog_add_response(_dialog, "cancel", _controller.Localizer["Cancel"]);
-        adw_message_dialog_set_close_response(_dialog, "cancel");
-        adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
-        adw_message_dialog_set_default_response(_dialog, "ok");
-        adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        _responseSignal = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
-        g_signal_connect_data(_dialog, "response", _responseSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
+        _dialog.SetDefaultSize(360, -1);
+        _dialog.SetHideOnClose(true);
+        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
+        _dialog.SetCloseResponse("cancel");
+        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.SetDefaultResponse("ok");
+        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Destination Label
@@ -141,24 +99,24 @@ public partial class TransferDialog
         _grpAmount.Add(_rowAmount);
         _boxMain.Append(_grpAmount);
         //Layout
-        adw_message_dialog_set_extra_child(_dialog, _boxMain.Handle);
+        _dialog.SetExtraChild(_boxMain);
     }
 
     /// <summary>
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public async Task<bool> RunAsync()
+    public bool Run()
     {
-        gtk_widget_show(_dialog);
-        gtk_window_set_modal(_dialog, true);
-        while(gtk_widget_is_visible(_dialog))
+        _dialog.Show();
+        _dialog.SetModal(true);
+        while (_dialog.IsVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
         }
         if(_controller.Accepted)
         {
-            gtk_window_set_modal(_dialog, false);
+            _dialog.SetModal(false);
             var status = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _txtAmount.GetText());
             if(status != TransferCheckStatus.Valid)
             {
@@ -181,10 +139,10 @@ public partial class TransferDialog
                     _rowAmount.AddCssClass("error");
                     _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
                 }
-                return await RunAsync();
+                return Run();
             }
         }
-        gtk_window_destroy(_dialog);
+        _dialog.Destroy();
         return _controller.Accepted;
     }
 
@@ -205,8 +163,8 @@ public partial class TransferDialog
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
-                _lblSelectedAccount.SetText(path);
+                var path = openFileDialog.GetFile()!.GetPath();
+                _lblSelectedAccount.SetText(path ?? "");
             }
         };
         openFileDialog.Show();

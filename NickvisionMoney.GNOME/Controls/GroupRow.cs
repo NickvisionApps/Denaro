@@ -1,7 +1,6 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -10,9 +9,6 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow
 {
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_preferences_row_set_use_markup(nint row, [MarshalAs(UnmanagedType.I1)] bool use_markup);
-
     private readonly Group _group;
     private readonly Gtk.CheckButton _chkFilter;
     private readonly Gtk.Label _lblAmount;
@@ -43,7 +39,7 @@ public partial class GroupRow : Adw.ActionRow
     {
         _group = group;
         //Row Settings
-        adw_preferences_row_set_use_markup(Handle, false);
+        SetUseMarkup(false);
         SetTitle(_group.Name);
         SetSubtitle(_group.Description);
         //Filter Checkbox

@@ -252,6 +252,10 @@
 		<value>Overview</value>
 	</data>
 
+	<data name="Overview.Today" xml:space="preserve">
+		<value>Today's Overview</value>
+	</data>
+
 	<data name="Total" xml:space="preserve">
 		<value>Total</value>
 	</data>
@@ -342,6 +346,54 @@
 
 	<data name="DeleteTransactionDescription" xml:space="preserve">
 		<value>Are you sure you want to delete this transaction?&#xA;This action is irreversible.</value>
+	</data>
+
+	<data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+		<value>Delete Transaction</value>
+	</data>
+
+	<data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Deleting only the source transaction will allow individual&#xA;generated transactions to be modifiable.</value>
+	</data>
+
+	<data name="DeleteOnlySourceTransaction" xml:space="preserve">
+		<value>Delete Only Source</value>
+	</data>
+
+	<data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+		<value>Delete Source and Generated</value>
+	</data>
+
+	<data name="EditTransaction.SourceRepeat" xml:space="preserve">
+		<value>Update Transaction</value>
+	</data>
+
+	<data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Updating only the source transaction will disassociate&#xA;generated transactions from the source.</value>
+	</data>
+
+	<data name="EditOnlySourceTransaction" xml:space="preserve">
+		<value>Update Only Source</value>
+	</data>
+
+	<data name="EditSourceGeneratedTransaction" xml:space="preserve">
+		<value>Update Source and Generated</value>
+	</data>
+
+	<data name="RepeatIntervalChanged" xml:space="preserve">
+		<value>Repeat Interval Changed</value>
+	</data>
+
+	<data name="RepeatIntervalChangedDescription" xml:space="preserve">
+		<value>The repeat interval was changed.&#xA;What would you like to do with existing generated transactions?&#xA;&#xA;New repeat transactions will be generated based off the new interval.</value>
+	</data>
+
+	<data name="DeleteExisting" xml:space="preserve">
+		<value>Delete Existing</value>
+	</data>
+
+	<data name="DisassociateExisting" xml:space="preserve">
+		<value>Disassociate Existing</value>
 	</data>
 
 	<data name="NoMoneyToTransfer" xml:space="preserve">
@@ -440,6 +492,10 @@
 	<data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>Weekly</value>
 	</data>
+	
+	<data name="RepeatInterval.Biweekly" xml:space="preserve">
+		<value>Biweekly</value>
+	</data>
 
 	<data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Monthly</value>
@@ -455,6 +511,10 @@
 
 	<data name="RepeatInterval.Biyearly" xml:space="preserve">
 		<value>Biyearly</value>
+	</data>
+
+	<data name="NoEndDate" xml:space="preserve">
+		<value>No End Date</value>
 	</data>
 
 	<data name="View" xml:space="preserve">
@@ -533,6 +593,18 @@
 
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Repeat Interval</value>
+	</data>
+	
+	<data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+		<value>Repeat End Date</value>
+	</data>
+
+	<data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+		<value>Clear End Date</value>
+	</data>
+
+	<data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+		<value>Repeat End Date (Invalid)</value>
 	</data>
 
 	<data name="Group.Field" xml:space="preserve">

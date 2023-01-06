@@ -36,35 +36,35 @@ public class AccountViewController
     /// </summary>
     public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
     /// <summary>
-    /// The total amount of the account
+    /// The total amount of the account for today
     /// </summary>
-    public decimal AccountTotal => _account.Total;
+    public decimal AccountTodayTotal => _account.TodayTotal;
     /// <summary>
-    /// The total amount of the account as a string
+    /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTotalString => _account.Total.ToString("C");
+    public string AccountTodayTotalString => _account.TodayTotal.ToString("C");
     /// <summary>
-    /// The income amount of the account
+    /// The income amount of the account for today
     /// </summary>
-    public decimal AccountIncome => _account.Income;
+    public decimal AccountTodayIncome => _account.TodayIncome;
     /// <summary>
-    /// The income amount of the account as a string
+    /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountIncomeString => _account.Income.ToString("C");
+    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C");
     /// <summary>
-    /// The expense amount of the account
+    /// The expense amount of the account for today
     /// </summary>
-    public decimal AccountExpense => _account.Expense;
+    public decimal AccountTodayExpense => _account.TodayExpense;
     /// <summary>
-    /// The expense amount of the account as a string
+    /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountExpenseString => _account.Expense.ToString("C");
+    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C");
     /// <summary>
-    /// The groups of the account
+    /// The groups of the account for today
     /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
     /// <summary>
-    /// The transactions of the account
+    /// The transactions of the account for today
     /// </summary>
     public Dictionary<uint, Transaction> Transactions => _account.Transactions;
 
@@ -157,7 +157,7 @@ public class AccountViewController
             var total = 0m;
             foreach (var pair in Transactions)
             {
-                if (pair.Value.GroupId == -1)
+                if (pair.Value.GroupId == -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
                 {
                     total += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : (pair.Value.Amount * -1);
                 }
@@ -202,6 +202,7 @@ public class AccountViewController
                 }
                 filteredTransactions.Add(pair.Value);
             }
+            filteredTransactions.Sort();
             return filteredTransactions;
         }
     }
@@ -332,13 +333,16 @@ public class AccountViewController
 
     /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
+    /// <returns>True if AccountInfoChanged was triggered, else false</returns>
     /// </summary>
-    public async Task RunRepeatTransactionsAsync()
+    public async Task<bool> SyncRepeatTransactionsAsync()
     {
-        if(await _account.RunRepeatTransactionsAsync())
+        if(await _account.SyncRepeatTransactionsAsync())
         {
             AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
+        return false;
     }
 
     /// <summary>
@@ -362,6 +366,17 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Updates a source transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
+    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    {
+        await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Removes a transaction from the account
     /// </summary>
     /// <param name="id">The id of the transaction to delete</param>
@@ -369,6 +384,44 @@ public class AccountViewController
     {
         await _account.DeleteTransactionAsync(id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes a source transaction from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
+    public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
+    {
+        await _account.DeleteSourceTransactionAsync(id, deleteGenerated);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes generated repeat transactions from the account
+    /// </summary>
+    /// <param name="id">The id of the source transaction</param>
+    public async Task DeleteGeneratedTransactionsAsync(uint id)
+    {
+        await _account.DeleteGeneratedTransactionsAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Gets whether or not the transaction with the provided id is a source repeat transaction
+    /// </summary>
+    /// <param name="id">The id of the transaction</param>
+    /// <returns>True if transaction is a source repeat transaction, else false</returns>
+    public bool GetIsSourceRepeatTransaction(uint id)
+    {
+        try
+        {
+            return Transactions[id].RepeatFrom == 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -399,6 +452,7 @@ public class AccountViewController
     public async Task DeleteGroupAsync(uint id)
     {
         await _account.DeleteGroupAsync(id);
+        _filters.Remove((int)id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 

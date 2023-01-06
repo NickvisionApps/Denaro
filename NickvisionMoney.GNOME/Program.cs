@@ -44,15 +44,14 @@ public partial class Program
     /// </summary>
     public Program()
     {
-        Adw.Module.Initialize();
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
         _mainWindow = null;
         _application.OnActivate += OnActivate;
         _openSignal = (nint application, nint files, int nfiles, string hint, nint data) => OnOpen(files, nfiles);
         g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
         var prefixes = new List<string> {
-            Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
-            Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+            Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
+            Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
             "/usr"
         };
         foreach(var prefix in prefixes)
@@ -91,7 +90,7 @@ public partial class Program
         mainWindowController.AppInfo.ShortName = "Money";
         mainWindowController.AppInfo.Description = mainWindowController.Localizer["Description"];
         mainWindowController.AppInfo.Version = "2023.1.0-beta2";
-        mainWindowController.AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</li><li>Added an \"Ungrouped\" row to the groups section to allow filtering transactions that don't belong to a group</li><li>Added the ability to attach a jpg/pdf of a receipt to a transaction</li><li>Added the ability to hide the groups section</li><li>Made a group's description an optional field</li></ul>";
+        mainWindowController.AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</li><li>Added an \"Ungrouped\" row to the groups section to allow filtering transactions that don't belong to a group</li><li>Added the ability to attach a jpg/pdf of a receipt to a transaction</li><li>Reworked the repeat transaction algorithm and added support for a biweekly interval</li><li>Added the ability to hide the groups section</li><li>Made a group's description an optional field</li></ul>";
         mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");

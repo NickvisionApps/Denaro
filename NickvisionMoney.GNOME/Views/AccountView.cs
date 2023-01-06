@@ -26,11 +26,6 @@ public partial class AccountView
         int RefCount;
     };
 
-    private delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
-
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
@@ -51,22 +46,6 @@ public partial class AccountView
 
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial uint g_list_model_get_n_items(nint list);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
 
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
@@ -121,18 +100,9 @@ public partial class AccountView
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
-    private readonly Adw.Bin _binSpinner;
-    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
-    private readonly NotifySignal _dateRangeStartYearChangedSignal;
-    private readonly NotifySignal _dateRangeStartMonthChangedSignal;
-    private readonly NotifySignal _dateRangeStartDayChangedSignal;
-    private readonly NotifySignal _dateRangeEndYearChangedSignal;
-    private readonly NotifySignal _dateRangeEndMonthChangedSignal;
-    private readonly NotifySignal _dateRangeEndDayChangedSignal;
-    private readonly NotifySignal _dateRangeToggledSignal;
 
     /// <summary>
     /// The Page widget
@@ -148,6 +118,7 @@ public partial class AccountView
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
     public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
     {
+
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _controller = controller;
@@ -236,7 +207,7 @@ public partial class AccountView
         _boxButtonsOverview.Append(_btnResetOverviewFilter);
         //Overview Group
         _grpOverview = Adw.PreferencesGroup.New();
-        _grpOverview.SetTitle(_controller.Localizer["Overview"]);
+        _grpOverview.SetTitle(_controller.Localizer["Overview", "Today"]);
         _grpOverview.Add(_rowTotal);
         _grpOverview.Add(_rowIncome);
         _grpOverview.Add(_rowExpense);
@@ -291,35 +262,65 @@ public partial class AccountView
         _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
-        _dateRangeStartYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged();
-        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", _dateRangeStartYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartYear.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartYearChanged();
+            }
+        };
         var dtFormatInfo = new DateTimeFormatInfo();
         _ddStartMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
-        _dateRangeStartMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged();
-        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", _dateRangeStartMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartMonth.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartMonthChanged();
+            }
+        };
         _ddStartDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddStartDay.SetValign(Gtk.Align.Center);
         _ddStartDay.SetShowArrow(false);
-        _dateRangeStartDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartDayChanged();
-        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", _dateRangeStartDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartDay.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartDayChanged();
+            }
+        };
         //End Range DropDowns
         _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
-        _dateRangeEndYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged();
-        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", _dateRangeEndYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndYear.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndYearChanged();
+            }
+        };
         _ddEndMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
-        _dateRangeEndMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged();
-        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", _dateRangeEndMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndMonth.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndMonthChanged();
+            }
+        };
         _ddEndDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddEndDay.SetValign(Gtk.Align.Center);
         _ddEndDay.SetShowArrow(false);
-        _dateRangeEndDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndDayChanged();
-        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", _dateRangeEndDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndDay.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndDayChanged();
+            }
+        };
         //Start Range Boxes
         _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxStartRange.Append(_ddStartYear);
@@ -347,8 +348,13 @@ public partial class AccountView
         _expRange.SetShowEnableSwitch(true);
         _expRange.AddRow(_rowStartRange);
         _expRange.AddRow(_rowEndRange);
-        _dateRangeToggledSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeToggled();
-        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", _dateRangeToggledSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _expRange.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "enable-expansion")
+            {
+                OnDateRangeToggled();
+            }
+        };
         _grpRange.Add(_expRange);
         //Calendar Group
         _grpCalendar = Adw.PreferencesGroup.New();
@@ -411,15 +417,6 @@ public partial class AccountView
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
-        //Loading Spinner
-        _binSpinner = Adw.Bin.New();
-        _binSpinner.SetHexpand(true);
-        _binSpinner.SetVexpand(true);
-        _spinner = Gtk.Spinner.New();
-        _spinner.SetSizeRequest(42, 42);
-        _spinner.SetHalign(Gtk.Align.Center);
-        _spinner.SetValign(Gtk.Align.Center);
-        _binSpinner.SetChild(_spinner);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -430,7 +427,6 @@ public partial class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
-        _boxMain.Append(_binSpinner);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
@@ -478,6 +474,7 @@ public partial class AccountView
         _flap.AddController(_shortcutController);
         //Load
         OnAccountInfoChanged(null, EventArgs.Empty);
+        OnToggleGroups(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
@@ -485,22 +482,16 @@ public partial class AccountView
     {
         if(_isFirstTimeLoading)
         {
-            await _controller.RunRepeatTransactionsAsync();
             _isFirstTimeLoading = false;
+            await _controller.SyncRepeatTransactionsAsync();
         }
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
-            _scrollTransactions.SetVisible(false);
-            _statusPageNoTransactions.SetVisible(false);
-            _binSpinner.SetVisible(true);
-            _spinner.Start();
-            _paneBox.SetSensitive(false);
-            _boxSort.SetSensitive(false);
             //Overview
-            _lblTotal.SetLabel(_controller.AccountTotalString);
-            _lblIncome.SetLabel(_controller.AccountIncomeString);
-            _lblExpense.SetLabel(_controller.AccountExpenseString);
+            _lblTotal.SetLabel(_controller.AccountTodayTotalString);
+            _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
+            _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
             //Groups
             foreach (var groupRow in _groupRows)
             {
@@ -512,23 +503,19 @@ public partial class AccountView
             ungroupedRow.FilterChanged += UpdateGroupFilter;
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
-            var groups = new List<Group>();
-            //Normal groups
-            foreach (var pair in _controller.Groups)
-            {
-                groups.Add(pair.Value);
-            }
+            //Other Group Rows
+            var groups = _controller.Groups.Values.ToList();
             groups.Sort();
             foreach (var group in groups)
             {
                 var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                row.FilterChanged += UpdateGroupFilter;
                 row.EditTriggered += EditGroup;
                 row.DeleteTriggered += DeleteGroup;
+                row.FilterChanged += UpdateGroupFilter;
+                row.SetVisible(!_btnToggleGroups.GetActive());
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
-            OnToggleGroups(null, EventArgs.Empty);
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
@@ -576,22 +563,17 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
-            _spinner.Stop();
-            _paneBox.SetSensitive(true);
-            _boxSort.SetSensitive(true);
-            _binSpinner.SetVisible(false);
-            g_main_context_iteration(g_main_context_default(), true);
             _isAccountLoading = false;
         }
     }
 
     private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
-        if (_controller.AccountTotal > 0)
+        if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if (await transferDialog.RunAsync())
+            if (transferDialog.Run())
             {
                 await _controller.SendTransferAsync(transferController.Transfer);
             }
@@ -614,12 +596,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if(Path.GetExtension(path) != ".csv")
                 {
                     path += ".csv";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -637,12 +619,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if (Path.GetExtension(path) != ".pdf")
                 {
                     path += ".pdf";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -674,8 +656,8 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
-                await _controller.ImportFromFileAsync(path);
+                var path = openFileDialog.GetFile()!.GetPath();
+                await _controller.ImportFromFileAsync(path ?? "");
             }
         };
         openFileDialog.Show();
@@ -688,6 +670,7 @@ public partial class AccountView
         if(await transactionDialog.RunAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -697,16 +680,64 @@ public partial class AccountView
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         if(await transactionDialog.RunAsync())
         {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            {
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = dialog.Run();
+                    if (result == MessageDialogResponse.Suggested)
+                    {
+                        await _controller.DeleteGeneratedTransactionsAsync(id);
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    else if(result == MessageDialogResponse.Destructive)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                    }
+                }
+                else
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = dialog.Run();
+                    if (result != MessageDialogResponse.Cancel)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
+                    }
+                }
+            }
+            else
+            {
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
     private async void DeleteTransaction(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(_controller.GetIsSourceRepeatTransaction(id))
         {
-            await _controller.DeleteTransactionAsync(id);
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+            dialog.UnsetDestructiveApperance();
+            dialog.UnsetSuggestedApperance();
+            var result = dialog.Run();
+            if(result != MessageDialogResponse.Cancel)
+            {
+                await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
+            }
+        }
+        else
+        {
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            if (dialog.Run() == MessageDialogResponse.Destructive)
+            {
+                await _controller.DeleteTransactionAsync(id);
+            }
         }
     }
 
@@ -714,7 +745,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.AddGroupAsync(groupController.Group);
         }
@@ -724,7 +755,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.UpdateGroupAsync(groupController.Group);
         }
@@ -733,7 +764,7 @@ public partial class AccountView
     private async void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteGroupAsync(id);
         }

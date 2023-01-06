@@ -23,7 +23,8 @@ public enum TransactionCheckStatus
 {
     Valid = 0,
     EmptyDescription,
-    InvalidAmount
+    InvalidAmount,
+    InvalidRepeatEndDate
 }
 
 /// <summary>
@@ -51,6 +52,10 @@ public class TransactionDialogController : IDisposable
     /// A default color for the transaction
     /// </summary>
     public string TransactionDefaultColor { get; init; }
+    /// <summary>
+    /// The orioginal repeat interval of a transaction
+    /// </summary>
+    public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
 
     /// <summary>
     /// Constructs a TransactionDialogController
@@ -61,6 +66,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="localizer">The Localizer of the app</param>
     public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
     {
+        OriginalRepeatInterval = transaction.RepeatInterval;
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
@@ -134,13 +140,14 @@ public class TransactionDialogController : IDisposable
     /// <param name="date">The new DateOnly object</param>
     /// <param name="description">The new description</param>
     /// <param name="type">The new TransactionType</param>
-    /// <param name="repeat">The new TransactionRepeatInterval</param>
+    /// <param name="selectedRepeat">The new selected repeat index</param>
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
+    /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
+    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -159,10 +166,22 @@ public class TransactionDialogController : IDisposable
         {
             return TransactionCheckStatus.InvalidAmount;
         }
+        if(repeatEndDate.HasValue && repeatEndDate.Value <= date)
+        {
+            return TransactionCheckStatus.InvalidRepeatEndDate;
+        }
         Transaction.Date = date;
         Transaction.Description = description;
         Transaction.Type = type;
-        Transaction.RepeatInterval = repeat;
+        if(selectedRepeat == 3)
+        {
+            selectedRepeat = 7;
+        }
+        else if(selectedRepeat > 3)
+        {
+            selectedRepeat -= 1;
+        }
+        Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;
@@ -188,6 +207,15 @@ public class TransactionDialogController : IDisposable
                 Transaction.Receipt = null;
             }
         }
+        if(Transaction.RepeatInterval == TransactionRepeatInterval.Never)
+        {
+            Transaction.RepeatFrom = -1;
+        }
+        else if(Transaction.RepeatInterval != OriginalRepeatInterval)
+        {
+            Transaction.RepeatFrom = 0;
+        }
+        Transaction.RepeatEndDate = Transaction.RepeatInterval == TransactionRepeatInterval.Never ? null : repeatEndDate;
         return TransactionCheckStatus.Valid;
     }
 
