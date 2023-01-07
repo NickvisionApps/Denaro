@@ -659,6 +659,10 @@
 	<data name="AccountType.Field" xml:space="preserve">
 		<value>Account Type</value>
 	</data>
+
+	<data name="DefaultTransactionType.Field" xml:space="preserve">
+		<value>Default Transaction Type</value>
+	</data>
 	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">

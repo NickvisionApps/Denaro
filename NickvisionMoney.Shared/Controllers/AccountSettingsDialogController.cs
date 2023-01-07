@@ -73,9 +73,8 @@ public class AccountSettingsDialogController
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
     /// <param name="defaultTransactionType">The new default transaction type</param>
-    /// <param name="showGroupsList">Whether or not to show the groups section on the account view</param>
     /// <returns></returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType, bool showGroupsList)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType)
     {
         if(string.IsNullOrEmpty(name))
         {
@@ -87,7 +86,6 @@ public class AccountSettingsDialogController
         Metadata.CustomCurrencySymbol = customSymbol;
         Metadata.CustomCurrencyCode = customCode;
         Metadata.DefaultTransactionType = defaultTransactionType;
-        Metadata.ShowGroupsList = showGroupsList;
         return AccountMetadataCheckStatus.Valid;
     }
 }
