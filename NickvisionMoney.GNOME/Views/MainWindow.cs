@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using NickvisionMoney.Shared.Models;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -499,7 +500,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsRows.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(recentAccount.Path);
+            var row = CreateRecentAccountRow(recentAccount);
             _groupRecentAccounts.Add(row);
             _listRecentAccountsRows.Add(row);
         }
@@ -517,7 +518,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsOnStartRows.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(recentAccount.Path);
+            var row = CreateRecentAccountRow(recentAccount);
             _grpRecentAccountsOnStart.Add(row);
             _listRecentAccountsOnStartRows.Add(row);
         }
@@ -527,11 +528,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Creates a row for recent accounts lists
     /// </summary>
     /// <param name="accountPath">string</param>
-    private Adw.ActionRow CreateRecentAccountRow(string accountPath)
+    private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount)
     {
         var row = Adw.ActionRow.New();
-        row.SetTitle(Path.GetFileName(accountPath));
-        row.SetSubtitle(accountPath);
+        row.SetTitle(Path.GetFileName(recentAccount.Path));
+        row.SetSubtitle(recentAccount.Path);
         var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
