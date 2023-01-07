@@ -500,6 +500,7 @@ public partial class AccountView
         {
             _isAccountLoading = true;
             //Overview
+            Page.SetTitle(_controller.AccountTitle);
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
             _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
