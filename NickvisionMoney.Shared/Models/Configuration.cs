@@ -35,10 +35,6 @@ public class Configuration
     [JsonInclude]
     public string RecentAccount3 { get; private set; }
     /// <summary>
-    /// Whether or not to sort transactions from first created to last created
-    /// </summary>
-    public bool SortFirstToLast { get; set; }
-    /// <summary>
     /// The default color of a transaction
     /// </summary>
     public string TransactionDefaultColor { get; set; }
@@ -65,7 +61,6 @@ public class Configuration
         RecentAccount1 = "";
         RecentAccount2 = "";
         RecentAccount3 = "";
-        SortFirstToLast = true;
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
     }

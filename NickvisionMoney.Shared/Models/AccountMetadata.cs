@@ -43,6 +43,10 @@ public class AccountMetadata
     /// Whether or not to show the groups section on the account view
     /// </summary>
     public bool ShowGroupsList { get; set; }
+    /// <summary>
+    /// Whether or not to sort transactions from first to last
+    /// </summary>
+    public bool SortFirstToLast { get; set; }
 
     /// <summary>
     /// Constructs a new AccountMetadata
@@ -58,5 +62,6 @@ public class AccountMetadata
         CustomCurrencyCode = null;
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
+        SortFirstToLast = true;
     }
 }

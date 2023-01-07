@@ -119,14 +119,14 @@ public class AccountViewController
     /// </summary>
     public bool SortFirstToLast
     {
-        get => Configuration.Current.SortFirstToLast;
+        get => _account.Metadata.SortFirstToLast;
 
         set
         {
-            if(Configuration.Current.SortFirstToLast != value)
+            if(_account.Metadata.SortFirstToLast != value)
             {
-                Configuration.Current.SortFirstToLast = value;
-                Configuration.Current.Save();
+                _account.Metadata.SortFirstToLast = value;
+                _account.UpdateMetadata(_account.Metadata);
                 AccountInfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
