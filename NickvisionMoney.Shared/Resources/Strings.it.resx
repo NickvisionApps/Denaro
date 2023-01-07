@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Mattia Borda https://github.com/bordam</value>
+    <value>Mattia Borda https://github.com/bordam</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
