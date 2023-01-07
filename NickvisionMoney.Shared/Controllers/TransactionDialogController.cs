@@ -60,26 +60,14 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// The repeat interval index used by GUI
     /// </summary>
-    public uint RepeatIntervalIndex
+    public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
     {
-        get
-        {
-            switch((uint)Transaction.RepeatInterval)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    return (uint)Transaction.RepeatInterval;
-                    break;
-                case 7:
-                    return 3;
-                    break;
-                default:
-                    return (uint)Transaction.RepeatInterval + 1;
-                    break;
-            }
-        }
-    }
+        0 => (uint) Transaction.RepeatInterval,
+        1 => (uint)Transaction.RepeatInterval,
+        2 => (uint)Transaction.RepeatInterval,
+        7 => 3,
+        _ => (uint)Transaction.RepeatInterval + 1
+    };
 
     /// <summary>
     /// Constructs a TransactionDialogController
