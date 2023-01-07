@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -116,7 +117,7 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
                     image = await Image.LoadAsync(receiptPath);
                 }
@@ -150,6 +151,7 @@ public class TransactionDialogController : IDisposable
             {
                 Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
             }
+            image.Dispose();
         }
     }
 
@@ -208,7 +210,7 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
                     Transaction.Receipt = Image.Load(receiptPath);
                 }
@@ -239,10 +241,10 @@ public class TransactionDialogController : IDisposable
     }
 
     /// <summary>
-    /// Converts a PDF
+    /// Converts a PDF to a JPEG Image
     /// </summary>
-    /// <param name="pathToPDF"></param>
-    /// <returns></returns>
+    /// <param name="pathToPDF">The path to the pdf file</param>
+    /// <returns>The JPEG Image</returns>
     private Image ConvertPDFToJPEG(string pathToPDF)
     {
         using var library = DocLib.Instance;

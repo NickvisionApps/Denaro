@@ -186,6 +186,7 @@ public sealed partial class TransactionDialog : ContentDialog
         _initializeWithWindow(fileOpenPicker);
         fileOpenPicker.FileTypeFilter.Add(".jpg");
         fileOpenPicker.FileTypeFilter.Add(".jpeg");
+        fileOpenPicker.FileTypeFilter.Add(".png");
         fileOpenPicker.FileTypeFilter.Add(".pdf");
         fileOpenPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
         var file = await fileOpenPicker.PickSingleFileAsync();
