@@ -21,8 +21,20 @@
       <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
     </screenshot>
     <screenshot>
+      <caption>OpenAccountDark</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png</image>
+    </screenshot>
+    <screenshot>
       <caption>CompactMode</caption>
       <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Transaction</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/Transaction.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>AccountSettings</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/AccountSettings.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
