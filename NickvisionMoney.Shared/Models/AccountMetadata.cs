@@ -24,7 +24,7 @@ public class AccountMetadata
     /// </summary>
     public AccountType AccountType { get; set; }
     /// <summary>
-    /// Whether or not to use a custom currency or not
+    /// Whether or not to use a custom currency
     /// </summary>
     public bool UseCustomCurrency { get; set; }
     /// <summary>

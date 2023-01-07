@@ -147,6 +147,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$customCode", Metadata.CustomCurrencyCode ?? "");
             cmdAddMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)Metadata.DefaultTransactionType);
             cmdAddMetadata.Parameters.AddWithValue("$showGroupsList", Metadata.ShowGroupsList);
+            cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
         var cmdQueryGroups = _database.CreateCommand();

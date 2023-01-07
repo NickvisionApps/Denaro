@@ -45,7 +45,7 @@ public class GroupDialogController
         _existingNames = existingNames;
         Localizer = localizer;
         Group = group;
-        Accepted = true;
+        Accepted = false;
     }
 
     /// <summary>
