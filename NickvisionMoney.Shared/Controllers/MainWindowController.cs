@@ -109,6 +109,22 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Gets a color for an account type
+    /// </summary>
+    /// <param name="accountType">The account type</param>
+    /// <returns>The rgb color for the account type</returns>
+    public string GetColorForAccountType(AccountType accountType)
+    {
+        return accountType switch
+        {
+            AccountType.Checking => Configuration.Current.AccountCheckingColor,
+            AccountType.Savings => Configuration.Current.AccountSavingsColor,
+            AccountType.Business => Configuration.Current.AccountBusinessColor,
+            _ => Configuration.Current.AccountSavingsColor
+        };
+    }
+
+    /// <summary>
     /// Gets whether or not an account with the given path is opened or not
     /// </summary>
     /// <param name="path">The path of the account to check</param>
