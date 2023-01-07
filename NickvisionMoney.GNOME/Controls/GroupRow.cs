@@ -1,6 +1,7 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Globalization;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -33,9 +34,10 @@ public partial class GroupRow : Adw.ActionRow
     /// Constructs a group row 
     /// </summary>
     /// <param name="group">The Group to display</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, Localizer localizer, bool filterActive)
+    public GroupRow(Group group, CultureInfo culture, Localizer localizer, bool filterActive)
     {
         _group = group;
         //Row Settings
@@ -49,7 +51,7 @@ public partial class GroupRow : Adw.ActionRow
         _chkFilter.OnToggled += FilterToggled; 
         AddPrefix(_chkFilter);
         //Amount Label
-        _lblAmount = Gtk.Label.New($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToString("C")}");
+        _lblAmount = Gtk.Label.New($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToString("C", culture)}");
         _lblAmount.AddCssClass(_group.Balance >= 0 ? "success" : "error");
         _lblAmount.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         _lblAmount.SetValign(Gtk.Align.Center);

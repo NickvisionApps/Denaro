@@ -139,7 +139,7 @@ public partial class TransactionDialog
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
         _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
-        _lblCurrency = Gtk.Label.New($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
         _grpMain.Add(_rowAmount);
@@ -305,10 +305,7 @@ public partial class TransactionDialog
             _rowGroup.SetSelected((uint)_controller.Transaction.GroupId);
         }
         var transactionColor = new Color();
-        if(!gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA))
-        {
-            gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
-        }
+        gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
         _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
         _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);

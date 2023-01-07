@@ -1,0 +1,52 @@
+<ContentDialog
+    x:Class="NickvisionMoney.WinUI.Views.AccountSettingsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Primary">
+
+    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="6">
+            <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="0,10,0,10" Width="100" Height="100" CornerRadius="20">
+                <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+            </Border>
+
+            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
+
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="CmbAccountType" Grid.Column="0" HorizontalAlignment="Stretch" SelectionChanged="CmbAccountType_SelectionChanged"/>
+
+                <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+            </Grid>
+
+            <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+            <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+
+            <ToggleSwitch x:Name="TglUseCustomCurrency" Toggled="TglUseCustomCurrency_Toggled"/>
+
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="1"/>
+
+                <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3"/>
+            </Grid>
+
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

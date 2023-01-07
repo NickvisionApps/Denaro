@@ -22,6 +22,7 @@ namespace NickvisionMoney.WinUI.Views;
 public sealed partial class AccountView : UserControl
 {
     private readonly AccountViewController _controller;
+    private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
     private bool _isAccountLoading;
 
@@ -29,34 +30,34 @@ public sealed partial class AccountView : UserControl
     /// Constructs an AccountView
     /// </summary>
     /// <param name="controller">The AccountViewController</param>
+    /// <param name="updateNavViewItemTitle">The Action<string, string> callback for updating a nav view item title</param>
     /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
-    public AccountView(AccountViewController controller, Action<object> initializeWithWindow)
+    public AccountView(AccountViewController controller, Action<string, string> updateNavViewItemTitle, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
         _isAccountLoading = false;
         //Localize Strings
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
-        BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
-        ToolTipService.SetToolTip(BtnNewTransaction, _controller.Localizer["NewTransaction", "Tooltip"]);
-        MenuNewTransaction.Text = _controller.Localizer["NewTransaction"];
-        BtnNewGroup.Label = _controller.Localizer["NewGroup"];
-        ToolTipService.SetToolTip(BtnNewGroup, _controller.Localizer["NewGroup", "Tooltip"]);
-        MenuNewGroup.Text = _controller.Localizer["NewGroup"];
-        BtnTransferMoney.Label = _controller.Localizer["TransferMoney"];
-        ToolTipService.SetToolTip(BtnTransferMoney, _controller.Localizer["TransferMoney", "Tooltip"]);
-        MenuTransferMoney.Text = _controller.Localizer["TransferMoney"];
+        BtnNew.Label = _controller.Localizer["New"];
+        MenuNewTransaction.Text = _controller.Localizer["Transaction"];
+        MenuContextNewTransaction.Text = _controller.Localizer["NewTransaction"];
+        MenuNewGroup.Text = _controller.Localizer["Group"];
+        MenuContextNewGroup.Text = _controller.Localizer["NewGroup"];
+        MenuTransferMoney.Text = _controller.Localizer["Transfer"];
+        MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
-        BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
-        BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+        ToolTipService.SetToolTip(BtnShowHideGroups, _controller.Localizer["ToggleGroups", "Tooltip"]);
         BtnFilters.Label = _controller.Localizer["Filters"];
         MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
+        BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
+        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
@@ -72,6 +73,20 @@ public sealed partial class AccountView : UserControl
         //Load UI
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
+        if (_controller.ShowGroupsList)
+        {
+            SectionGroups.Visibility = Visibility.Visible;
+            DockPanel.SetDock(SectionCalendar, Dock.Bottom);
+            BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+        }
+        else
+        {
+            SectionGroups.Visibility = Visibility.Collapsed;
+            DockPanel.SetDock(SectionCalendar, Dock.Top);
+            BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+        }
         if (_controller.SortFirstToLast)
         {
             BtnSortTopBottom.IsChecked = true;
@@ -89,6 +104,10 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
+        if(_controller.AccountNeedsFirstTimeSetup)
+        {
+            AccountSettings(null, new RoutedEventArgs());
+        }
         if(!(await _controller.SyncRepeatTransactionsAsync()))
         {
             AccountInfoChanged(null, EventArgs.Empty);
@@ -106,6 +125,7 @@ public sealed partial class AccountView : UserControl
         {
             _isAccountLoading = true;
             //Overview
+            _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
             LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
@@ -115,7 +135,7 @@ public sealed partial class AccountView : UserControl
             //Groups
             ListGroups.Items.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
             ListGroups.Items.Add(ungroupedRow);
             //Other Group Rows
@@ -123,7 +143,7 @@ public sealed partial class AccountView : UserControl
             groups.Sort();
             foreach (var group in groups)
             {
-                var groupRow = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
                 groupRow.DeleteTriggered += DeleteGroup;
                 groupRow.FilterChanged += UpdateGroupFilter;
@@ -152,7 +172,7 @@ public sealed partial class AccountView : UserControl
                 {
                     foreach (var transaction in filteredTransactions)
                     {
-                        var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+                        var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)
@@ -483,6 +503,7 @@ public sealed partial class AccountView : UserControl
             BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
             BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
+        _controller.ShowGroupsList = SectionGroups.Visibility == Visibility.Visible;
     }
 
     /// <summary>
@@ -520,6 +541,24 @@ public sealed partial class AccountView : UserControl
         Calendar.SelectedDates.Add(DateTimeOffset.Now);
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
+    }
+
+    /// <summary>
+    /// Occurs when the account settings button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void AccountSettings(object? sender, RoutedEventArgs e)
+    {
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController)
+        {
+            XamlRoot = Content.XamlRoot
+        };
+        if (await accountSettingsDialog.ShowAsync())
+        {
+            _controller.UpdateMetadata(accountSettingsController.Metadata);
+        }
     }
 
     /// <summary>

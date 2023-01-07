@@ -1,6 +1,7 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -59,8 +60,9 @@ public partial class TransactionRow : Adw.PreferencesGroup
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo culture, Localizer localizer)
     {
         _transaction = transaction;
         _isSmall = false;
@@ -95,7 +97,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _row.AddPrefix(_btnId);
         //Amount Label
-        _lblAmount = Gtk.Label.New($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToString("C")}");
+        _lblAmount = Gtk.Label.New($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToString("C", culture)}");
         _lblAmount.SetHalign(Gtk.Align.End);
         _lblAmount.SetValign(Gtk.Align.Center);
         _lblAmount.SetMarginEnd(4);

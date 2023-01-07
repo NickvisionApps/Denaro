@@ -21,8 +21,20 @@
       <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
     </screenshot>
     <screenshot>
+      <caption>OpenAccountDark</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png</image>
+    </screenshot>
+    <screenshot>
       <caption>CompactMode</caption>
       <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Transaction</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/Transaction.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>AccountSettings</caption>
+      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/AccountSettings.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
@@ -34,6 +46,7 @@
     <release version="2023.1.0-beta3" date="2023-1-6">
       <description>
         <p>- Money has been completely rewritten in C#. Money should now be a lot more stable and responsive. With the C# rewrite, there is now a new version of Money available on Windows!</p>
+		<p>- Added an Account Settings dialog to allow users to customize their accounts better</p>
         <p>- Added an "Ungrouped" row to the groups section to allow filtering transactions that don't belong to a group</p>
         <p>- Added the ability to attach a jpg/pdf of a receipt to a transaction</p>
         <p>- Reworked the repeat transaction system and added support for a biweekly interval</p>

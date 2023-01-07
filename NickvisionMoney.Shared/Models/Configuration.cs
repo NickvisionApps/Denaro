@@ -23,21 +23,17 @@ public class Configuration
     /// The first recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount1 { get; private set; }
+    public RecentAccount RecentAccount1 { get; private set; }
     /// <summary>
     /// The second recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount2 { get; private set; }
+    public RecentAccount RecentAccount2 { get; private set; }
     /// <summary>
     /// The third recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount3 { get; private set; }
-    /// <summary>
-    /// Whether or not to sort transactions from first created to last created
-    /// </summary>
-    public bool SortFirstToLast { get; set; }
+    public RecentAccount RecentAccount3 { get; private set; }
     /// <summary>
     /// The default color of a transaction
     /// </summary>
@@ -46,6 +42,18 @@ public class Configuration
     /// The default color of a transfer
     /// </summary>
     public string TransferDefaultColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Checking type
+    /// </summary>
+    public string AccountCheckingColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Savings type
+    /// </summary>
+    public string AccountSavingsColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Business type
+    /// </summary>
+    public string AccountBusinessColor { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -62,12 +70,14 @@ public class Configuration
             Directory.CreateDirectory(ConfigDir);
         }
         Theme = Theme.System;
-        RecentAccount1 = "";
-        RecentAccount2 = "";
-        RecentAccount3 = "";
-        SortFirstToLast = true;
+        RecentAccount1 = new RecentAccount();
+        RecentAccount2 = new RecentAccount();
+        RecentAccount3 = new RecentAccount();
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
+        AccountCheckingColor = "rgb(129,61,156)";
+        AccountSavingsColor = "rgb(53,132,228)";
+        AccountBusinessColor = "rgb(38,162,105)";
     }
 
     /// <summary>
@@ -95,20 +105,20 @@ public class Configuration
     /// <summary>
     /// Gets the list of recent accounts available
     /// </summary>
-    public List<string> RecentAccounts
+    public List<RecentAccount> RecentAccounts
     {
         get
         {
-            var recents = new List<string>();
-            if (File.Exists(RecentAccount1))
+            var recents = new List<RecentAccount>();
+            if (File.Exists(RecentAccount1.Path))
             {
                 recents.Add(RecentAccount1);
             }
-            if (File.Exists(RecentAccount2))
+            if (File.Exists(RecentAccount2.Path))
             {
                 recents.Add(RecentAccount2);
             }
-            if (File.Exists(RecentAccount3))
+            if (File.Exists(RecentAccount3.Path))
             {
                 recents.Add(RecentAccount3);
             }
@@ -128,11 +138,13 @@ public class Configuration
     /// <summary>
     /// Adds a recent account
     /// </summary>
-    /// <param name="newRecentAccount">The path to the new recent account</param>
-    public void AddRecentAccount(string newRecentAccount)
+    /// <param name="newRecentAccount">The new recent account</param>
+    public void AddRecentAccount(RecentAccount newRecentAccount)
     {
         if (newRecentAccount == RecentAccount1)
         {
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
             return;
         }
         else if (newRecentAccount == RecentAccount2)
@@ -140,6 +152,8 @@ public class Configuration
             var temp = RecentAccount1;
             RecentAccount1 = RecentAccount2;
             RecentAccount2 = temp;
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
         }
         else if (newRecentAccount == RecentAccount3)
         {
@@ -148,6 +162,8 @@ public class Configuration
             RecentAccount1 = RecentAccount3;
             RecentAccount2 = temp1;
             RecentAccount3 = temp2;
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
         }
         else
         {

@@ -49,29 +49,36 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
-    /// A default color for the transaction
-    /// </summary>
-    public string TransactionDefaultColor { get; init; }
-    /// <summary>
     /// The orioginal repeat interval of a transaction
     /// </summary>
     public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
+    /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString { get; init; }
 
     /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
-        OriginalRepeatInterval = transaction.RepeatInterval;
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
         Accepted = false;
-        TransactionDefaultColor = transactionDefaultColor;
+        OriginalRepeatInterval = transaction.RepeatInterval;
+        CultureForNumberString = culture;
+        if (Transaction.Amount == 0m) //new transaction
+        {
+            Transaction.Type = transactionDefaultType;
+            Transaction.RGBA = transactionDefaultColor;
+        }
     }
 
     /// <summary>
@@ -156,7 +163,7 @@ public class TransactionDialogController : IDisposable
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency);
+            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString);
         }
         catch
         {

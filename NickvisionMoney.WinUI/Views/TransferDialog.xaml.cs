@@ -37,7 +37,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
-        TxtAmount.Text = _controller.Transfer.Amount.ToString("C");
+        TxtAmount.Text = _controller.Transfer.Amount.ToString("C", _controller.CultureForNumberString);
     }
 
     /// <summary>

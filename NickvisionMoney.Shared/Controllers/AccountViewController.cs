@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -32,9 +33,17 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
+    /// Whether or not an account needs to be setup for the first time
+    /// </summary>
+    public bool AccountNeedsFirstTimeSetup => _account.NeedsFirstTimeSetup;
+    /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
-    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
+    public string AccountTitle => _account.Metadata.Name;
+    /// <summary>
+    /// The type of the account
+    /// </summary>
+    public AccountType AccountType => _account.Metadata.AccountType;
     /// <summary>
     /// The total amount of the account for today
     /// </summary>
@@ -42,7 +51,7 @@ public class AccountViewController
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => _account.TodayTotal.ToString("C");
+    public string AccountTodayTotalString => _account.TodayTotal.ToString("C", CultureForNumberString);
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -50,7 +59,7 @@ public class AccountViewController
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C");
+    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C", CultureForNumberString);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -58,7 +67,7 @@ public class AccountViewController
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C");
+    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
     /// <summary>
     /// The groups of the account for today
     /// </summary>
@@ -72,6 +81,10 @@ public class AccountViewController
     /// Occurs when a notification is sent
     /// </summary>
     private event EventHandler<NotificationSentEventArgs>? NotificationSent;
+    /// <summary>
+    /// Occurs when the recent accounts list is changed
+    /// </summary>
+    private event EventHandler? RecentAccountsChanged;
     /// <summary>
     /// Occurs when the information of an account is changed
     /// </summary>
@@ -87,12 +100,14 @@ public class AccountViewController
     /// <param name="path">The path of the account</param>
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="notificationSent">The notification sent event</param>
-    public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent)
+    /// <param name="recentAccountsChanged">The recent accounts changed event</param>
+    internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
         NotificationSent = notificationSent;
+        RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
@@ -111,18 +126,57 @@ public class AccountViewController
     ~AccountViewController() => _account.Dispose();
 
     /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString
+    {
+        get
+        {
+            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            if (_account.Metadata.UseCustomCurrency)
+            {
+                culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? "";
+            }
+            else
+            {
+                culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
+            }
+            return culture;
+        }
+    }
+
+    /// <summary>
+    /// Whether or not to show the groups section on the account view
+    /// </summary>
+    public bool ShowGroupsList
+    {
+        get => _account.Metadata.ShowGroupsList;
+
+        set
+        {
+            if (_account.Metadata.ShowGroupsList != value)
+            {
+                _account.Metadata.ShowGroupsList = value;
+                _account.UpdateMetadata(_account.Metadata);
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    /// <summary>
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast
     {
-        get => Configuration.Current.SortFirstToLast;
+        get => _account.Metadata.SortFirstToLast;
 
         set
         {
-            if(Configuration.Current.SortFirstToLast != value)
+            if(_account.Metadata.SortFirstToLast != value)
             {
-                Configuration.Current.SortFirstToLast = value;
-                Configuration.Current.Save();
+                _account.Metadata.SortFirstToLast = value;
+                _account.UpdateMetadata(_account.Metadata);
                 AccountInfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -268,6 +322,12 @@ public class AccountViewController
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// Creates a new AccountSettingsDialogController
+    /// </summary>
+    /// <returns>The new AccountSettingsDialogController</returns>
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsFirstTimeSetup, Localizer);
+
+    /// <summary>
     /// Creates a new TransactionDialogController
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
@@ -278,7 +338,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -293,7 +353,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -329,7 +389,25 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
+
+    /// <summary>
+    /// Updates the metadata of the account
+    /// </summary>
+    /// <param name="metadata">The new metadata</param>
+    /// <returns>True if successful, else false</returns>
+    public void UpdateMetadata(AccountMetadata metadata)
+    {
+        _account.UpdateMetadata(metadata);
+        Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
+        {
+            Name = AccountTitle,
+            Type = AccountType
+        });
+        Configuration.Current.Save();
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     /// <summary>
     /// Checks if repeat transactions are needed and creates them if so

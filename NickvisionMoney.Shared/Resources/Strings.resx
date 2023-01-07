@@ -408,12 +408,20 @@
 		<value>Hide Groups</value>
 	</data>
 
+	<data name="Show" xml:space="preserve">
+		<value>Show</value>
+	</data>
+
 	<data name="ShowGroups" xml:space="preserve">
 		<value>Show Groups</value>
 	</data>
 
 	<data name="ToggleGroups.Tooltip" xml:space="preserve">
 		<value>Toggle Groups Visibility</value>
+	</data>
+
+	<data name="AccountSettings" xml:space="preserve">
+		<value>Account Settings</value>
 	</data>
 
 	<!--AccountViewController-->
@@ -542,6 +550,31 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<!--AccountSettingsDialog-->
+	<data name="AccountType.Checking" xml:space="preserve">
+		<value>Checking</value>
+	</data>
+
+	<data name="AccountType.Savings" xml:space="preserve">
+		<value>Savings</value>
+	</data>
+
+	<data name="AccountType.Business" xml:space="preserve">
+		<value>Business</value>
+	</data>
+
+	<data name="AccountType.Description" xml:space="preserve">
+		<value>This is only a useful label that doesn't affect how the app works.</value>
+	</data>
+
+	<data name="NotAvailable" xml:space="preserve">
+		<value>N/A</value>
+	</data>
+
+	<data name="ReportedCurrency" xml:space="preserve">
+		<value>Your system reported that your currency is</value>
+	</data>
+	
 	<!--Fields-->
 	<data name="Name.Field" xml:space="preserve">
 		<value>Name</value>
@@ -631,6 +664,38 @@
 		<value>Destination Account (Invalid)</value>
 	</data>
 
+	<data name="AccountType.Field" xml:space="preserve">
+		<value>Account Type</value>
+	</data>
+
+	<data name="DefaultTransactionType.Field" xml:space="preserve">
+		<value>Default Transaction Type</value>
+	</data>
+
+	<data name="UseCustomCurrency.Field" xml:space="preserve">
+		<value>Use Custom Currency</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Field" xml:space="preserve">
+		<value>Currency Symbol</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+		<value>Enter symbol here</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+		<value>Currency Symbol (Empty)</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Field" xml:space="preserve">
+		<value>Currency Code</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+		<value>Enter code here</value>
+	</data>
+	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
 		<value>User Interface</value>
@@ -678,6 +743,18 @@
 
 	<data name="TransferColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to new transfers.</value>
+	</data>
+
+	<data name="AccountCheckingColor" xml:space="preserve">
+		<value>Checking Account Color</value>
+	</data>
+
+	<data name="AccountSavingsColor" xml:space="preserve">
+		<value>Savings Account Color</value>
+	</data>
+
+	<data name="AccountBusinessColor" xml:space="preserve">
+		<value>Business Account Color</value>
 	</data>
 
 	<!--Shortcuts Dialog-->

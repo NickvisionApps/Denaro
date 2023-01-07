@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
@@ -8,14 +9,17 @@ using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
+using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI;
 using WinRT;
 using WinRT.Interop;
 
@@ -112,6 +116,23 @@ public sealed partial class MainWindow : Window
     public void InitializeWithWindow(object target) => WinRT.Interop.InitializeWithWindow.Initialize(target, _hwnd);
 
     /// <summary>
+    /// Updates a NavViewItem's title
+    /// </summary>
+    /// <param name="path">The path of the nav view item</param>
+    /// <param name="title">The new title</param>
+    private void UpdateNavViewItemTitle(string path, string title)
+    {
+        foreach(NavigationViewItem navViewItem in NavView.MenuItems)
+        {
+            if((string)ToolTipService.GetToolTip(navViewItem) == path)
+            {
+                navViewItem.Content = title;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
     /// Occurs when the window is activated
     /// </summary>
     /// <param name="sender">object</param>
@@ -196,7 +217,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], InitializeWithWindow);
+            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], UpdateNavViewItemTitle, InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {
@@ -256,7 +277,28 @@ public sealed partial class MainWindow : Window
         ListRecentAccounts.Items.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            ListRecentAccounts.Items.Add(new ActionRow(Path.GetFileName(recentAccount), Path.GetDirectoryName(recentAccount)));
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+            var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
+            var typeBox = new Border()
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!),
+                CornerRadius = new CornerRadius(12)
+            };
+            var typeLabel = new TextBlock()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(30,0,30,0),
+                Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black),
+                Text = _controller.Localizer["AccountType", recentAccount.Type.ToString()]
+            };
+            typeBox.Child = typeLabel;
+            DockPanel.SetDock(typeBox, Dock.Right);
+            actionRow.Children.Add(typeBox);
+            ListRecentAccounts.Items.Add(actionRow);
         }
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
     }
@@ -318,7 +360,7 @@ public sealed partial class MainWindow : Window
     {
         if(ListRecentAccounts.SelectedIndex != -1)
         {
-            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex]);
+            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path);
             ListRecentAccounts.SelectedIndex = -1;
         }
     }

@@ -40,12 +40,12 @@ public class GroupDialogController
     /// <param name="group">The Group object represented by the controller</param>
     /// <param name="existingNames">The list of existing group names</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public GroupDialogController(Group group, List<string> existingNames, Localizer localizer)
+    internal GroupDialogController(Group group, List<string> existingNames, Localizer localizer)
     {
         _existingNames = existingNames;
         Localizer = localizer;
         Group = group;
-        Accepted = true;
+        Accepted = false;
     }
 
     /// <summary>

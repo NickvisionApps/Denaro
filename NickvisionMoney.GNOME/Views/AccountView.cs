@@ -103,6 +103,7 @@ public partial class AccountView
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
+    private readonly Action<string> _updateSubtitle;
 
     /// <summary>
     /// The Page widget
@@ -116,16 +117,17 @@ public partial class AccountView
     /// <param name="parentWindow">MainWindow</param>
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
+    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle)
     {
-
+        _controller = controller;
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
-        _controller = controller;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
-        _groupRows = new List<GroupRow> {};
-        _transactionRows = new List<TransactionRow> {};
+        _groupRows = new List<GroupRow>();
+        _transactionRows = new List<TransactionRow>();
+        _updateSubtitle = updateSubtitle;
         //Register Controller Events
         _controller.AccountInfoChanged += OnAccountInfoChanged;
         //Flap
@@ -194,9 +196,12 @@ public partial class AccountView
         var menuActionsExportImport = Gio.Menu.New();
         menuActionsExportImport.AppendSubmenu(_controller.Localizer["ExportToFile"], menuActionsExport);
         menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
+        var menuActionsAccount = Gio.Menu.New();
+        menuActionsAccount.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
         menuActions.AppendSection(null, menuActionsExportImport);
+        menuActions.AppendSection(null, menuActionsAccount);
         _btnMenuAccountActions.SetMenuModel(menuActions);
         _boxButtonsOverview.Append(_btnMenuAccountActions);
         //Button Reset Overview Filter
@@ -219,6 +224,7 @@ public partial class AccountView
         _btnToggleGroups = Gtk.ToggleButton.New();
         _btnToggleGroups.AddCssClass("flat");
         _btnToggleGroups.SetTooltipText(_controller.Localizer["ToggleGroups", "Tooltip"]);
+        _btnToggleGroups.SetActive(!_controller.ShowGroupsList);
         _btnToggleGroups.OnToggled += OnToggleGroups;
         _btnToggleGroupsContent = Adw.ButtonContent.New();
         _btnToggleGroups.SetChild(_btnToggleGroupsContent);
@@ -411,12 +417,14 @@ public partial class AccountView
         _scrollTransactions.SetMinContentHeight(360);
         _scrollTransactions.SetVexpand(true);
         _scrollTransactions.SetChild(_flowBox);
+        _scrollTransactions.SetVisible(false);
         //Page No Transactions
         _statusPageNoTransactions = Adw.StatusPage.New();
         _statusPageNoTransactions.SetIconName("money-none-symbolic");
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
+        _statusPageNoTransactions.SetVisible(false);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -463,6 +471,10 @@ public partial class AccountView
         var actImport = Gio.SimpleAction.New("importFromFile", null);
         actImport.OnActivate += ImportFromFile;
         actionMap.AddAction(actImport);
+        //Account Settings Action
+        var actAccountSettings = Gio.SimpleAction.New("accountSettings", null);
+        actAccountSettings.OnActivate += AccountSettings;
+        actionMap.AddAction(actAccountSettings);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
@@ -473,8 +485,8 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
         //Load
-        OnAccountInfoChanged(null, EventArgs.Empty);
         OnToggleGroups(null, EventArgs.Empty);
+        OnAccountInfoChanged(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
@@ -483,12 +495,18 @@ public partial class AccountView
         if(_isFirstTimeLoading)
         {
             _isFirstTimeLoading = false;
+            if(_controller.AccountNeedsFirstTimeSetup)
+            {
+                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+            }
             await _controller.SyncRepeatTransactionsAsync();
         }
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
             //Overview
+            Page.SetTitle(_controller.AccountTitle);
+            _updateSubtitle(_controller.AccountTitle);
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
             _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
@@ -499,8 +517,9 @@ public partial class AccountView
             }
             _groupRows.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
+            ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
             //Other Group Rows
@@ -508,7 +527,7 @@ public partial class AccountView
             groups.Sort();
             foreach (var group in groups)
             {
-                var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 row.EditTriggered += EditGroup;
                 row.DeleteTriggered += DeleteGroup;
                 row.FilterChanged += UpdateGroupFilter;
@@ -533,7 +552,7 @@ public partial class AccountView
                     _scrollTransactions.SetVisible(true);
                     foreach (var transaction in filteredTransactions)
                     {
-                        var row = new TransactionRow(transaction, _controller.Localizer);
+                        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)
@@ -661,6 +680,16 @@ public partial class AccountView
             }
         };
         openFileDialog.Show();
+    }
+
+    private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
+    {
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
+        if(accountSettingsDialog.Run())
+        {
+            _controller.UpdateMetadata(accountSettingsController.Metadata);
+        }
     }
 
     private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
@@ -804,6 +833,7 @@ public partial class AccountView
         {
             groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
+        _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
