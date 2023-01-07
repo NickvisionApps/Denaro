@@ -8,6 +8,7 @@ using NickvisionMoney.WinUI.Helpers;
 using Windows.UI;
 using NickvisionMoney.Shared.Models;
 using System.Text.RegularExpressions;
+using Microsoft.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -53,7 +54,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
         CmbDefaultTransactionType.SelectedIndex = (int)_controller.Metadata.DefaultTransactionType;
         TglUseCustomCurrency.IsOn = _controller.Metadata.UseCustomCurrency;
-        if(_controller.Metadata.UseCustomCurrency)
+        if (_controller.Metadata.UseCustomCurrency)
         {
             TxtCustomSymbol.Text = _controller.Metadata.CustomCurrencySymbol;
             TxtCustomCode.Text = _controller.Metadata.CustomCurrencyCode;
@@ -71,7 +72,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         var result = await base.ShowAsync();
         if (result == ContentDialogResult.None)
         {
-            if(_controller.IsFirstTimeSetup)
+            if (_controller.IsFirstTimeSetup)
             {
                 return await ShowAsync();
             }
@@ -116,14 +117,14 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">TextChangedEventArgs?</param>
     private void TxtName_TextChanged(object? sender, TextChangedEventArgs? e)
     {
-        if(TxtName.Text.Length == 0)
+        if (TxtName.Text.Length == 0)
         {
             LblId.Text = _controller.Localizer["NotAvailable"];
         }
         else
         {
             var split = TxtName.Text.Split(' ');
-            if(split.Length == 1)
+            if (split.Length == 1)
             {
                 LblId.Text = split[0].Substring(0, split[0].Length > 1 ? 2 : 1);
             }
@@ -171,7 +172,14 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">SelectionChangedEventArgs</param>
-    private void CmbAccountType_SelectionChanged(object? sender, SelectionChangedEventArgs e) => BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(_controller.GetColorForAccountType((AccountType)CmbAccountType.SelectedIndex))!);
+    private void CmbAccountType_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        var bgColorString = _controller.GetColorForAccountType((AccountType)CmbAccountType.SelectedIndex);
+        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+        var luma = int.Parse(bgColorStrArray[0]) / 255 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255 * 0.0722;
+        BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!);
+        LblId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
+    }
 
     /// <summary>
     /// Occurs when the use custom currency toggle is changed
