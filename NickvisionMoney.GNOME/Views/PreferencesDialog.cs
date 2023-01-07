@@ -43,6 +43,12 @@ public partial class PreferencesDialog : Adw.Window
     private readonly Gtk.ColorButton _btnTransactionColor;
     private readonly Adw.ActionRow _rowTransferColor;
     private readonly Gtk.ColorButton _btnTransferColor;
+    private readonly Adw.ActionRow _rowAccountCheckingColor;
+    private readonly Gtk.ColorButton _btnAccountCheckingColor;
+    private readonly Adw.ActionRow _rowAccountSavingsColor;
+    private readonly Gtk.ColorButton _btnAccountSavingsColor;
+    private readonly Adw.ActionRow _rowAccountBusinessColor;
+    private readonly Gtk.ColorButton _btnAccountBusinessColor;
 
     /// <summary>
     /// Constructs a PreferencesDialog
@@ -74,6 +80,7 @@ public partial class PreferencesDialog : Adw.Window
         _grpUserInterface = Adw.PreferencesGroup.New();
         _grpUserInterface.SetTitle(_controller.Localizer["UserInterface"]);
         _grpUserInterface.SetDescription(_controller.Localizer["UserInterfaceDescription"]);
+        _page.Add(_grpUserInterface);
         //Theme Row
         _rowTheme = Adw.ComboRow.New();
         _rowTheme.SetTitle(_controller.Localizer["Theme"]);
@@ -106,7 +113,33 @@ public partial class PreferencesDialog : Adw.Window
         _rowTransferColor.AddSuffix(_btnTransferColor);
         _rowTransferColor.SetActivatableWidget(_btnTransferColor);
         _grpUserInterface.Add(_rowTransferColor);
-        _page.Add(_grpUserInterface);
+        //Account Checking Color Row
+        _rowAccountCheckingColor = Adw.ActionRow.New();
+        _rowAccountCheckingColor.SetTitle(_controller.Localizer["AccountCheckingColor"]);
+        _btnAccountCheckingColor = Gtk.ColorButton.New();
+        _btnAccountCheckingColor.SetValign(Gtk.Align.Center);
+        _btnAccountCheckingColor.OnColorSet += OnAccountCheckingColorSet;
+        _rowAccountCheckingColor.AddSuffix(_btnAccountCheckingColor);
+        _rowAccountCheckingColor.SetActivatableWidget(_btnAccountCheckingColor);
+        _grpUserInterface.Add(_rowAccountCheckingColor);
+        //Account Savings Color Row
+        _rowAccountSavingsColor = Adw.ActionRow.New();
+        _rowAccountSavingsColor.SetTitle(_controller.Localizer["AccountSavingsColor"]);
+        _btnAccountSavingsColor = Gtk.ColorButton.New();
+        _btnAccountSavingsColor.SetValign(Gtk.Align.Center);
+        _btnAccountSavingsColor.OnColorSet += OnAccountSavingsColorSet;
+        _rowAccountSavingsColor.AddSuffix(_btnAccountSavingsColor);
+        _rowAccountSavingsColor.SetActivatableWidget(_btnAccountSavingsColor);
+        _grpUserInterface.Add(_rowAccountSavingsColor);
+        //Account Business Color Row
+        _rowAccountBusinessColor = Adw.ActionRow.New();
+        _rowAccountBusinessColor.SetTitle(_controller.Localizer["AccountBusinessColor"]);
+        _btnAccountBusinessColor = Gtk.ColorButton.New();
+        _btnAccountBusinessColor.SetValign(Gtk.Align.Center);
+        _btnAccountBusinessColor.OnColorSet += OnAccountBusinessColorSet;
+        _rowAccountBusinessColor.AddSuffix(_btnAccountBusinessColor);
+        _rowAccountBusinessColor.SetActivatableWidget(_btnAccountBusinessColor);
+        _grpUserInterface.Add(_rowAccountBusinessColor);
         //Layout
         SetContent(_mainBox);
         OnHide += Hide;
@@ -118,6 +151,15 @@ public partial class PreferencesDialog : Adw.Window
         var transferColor = new Color();
         gdk_rgba_parse(ref transferColor, _controller.TransferDefaultColor);
         gtk_color_chooser_set_rgba(_btnTransferColor.Handle, ref transferColor);
+        var accountCheckingColor = new Color();
+        gdk_rgba_parse(ref accountCheckingColor, _controller.AccountCheckingColor);
+        gtk_color_chooser_set_rgba(_btnAccountCheckingColor.Handle, ref accountCheckingColor);
+        var accountSavingsColor = new Color();
+        gdk_rgba_parse(ref accountSavingsColor, _controller.AccountSavingsColor);
+        gtk_color_chooser_set_rgba(_btnAccountSavingsColor.Handle, ref accountSavingsColor);
+        var accountBusinessColor = new Color();
+        gdk_rgba_parse(ref accountBusinessColor, _controller.AccountBusinessColor);
+        gtk_color_chooser_set_rgba(_btnAccountBusinessColor.Handle, ref accountBusinessColor);
     }
 
     /// <summary>
@@ -164,5 +206,35 @@ public partial class PreferencesDialog : Adw.Window
         var color = new Color();
         gtk_color_chooser_get_rgba(_btnTransferColor.Handle, ref color);
         _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
+    }
+
+    /// <summary>
+    /// Occurs when the checking account color is set
+    /// </summary>
+    private void OnAccountCheckingColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnAccountCheckingColor.Handle, ref color);
+        _controller.AccountCheckingColor = gdk_rgba_to_string(ref color);
+    }
+
+    /// <summary>
+    /// Occurs when the savings account color is set
+    /// </summary>
+    private void OnAccountSavingsColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnAccountSavingsColor.Handle, ref color);
+        _controller.AccountSavingsColor = gdk_rgba_to_string(ref color);
+    }
+
+    /// <summary>
+    /// Occurs when the business account color is set
+    /// </summary>
+    private void OnAccountBusinessColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnAccountBusinessColor.Handle, ref color);
+        _controller.AccountBusinessColor = gdk_rgba_to_string(ref color);
     }
 }

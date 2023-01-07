@@ -741,6 +741,18 @@
 		<value>A change in this setting will only be applied to new transfers.</value>
 	</data>
 
+	<data name="AccountCheckingColor" xml:space="preserve">
+		<value>Checking Account Color</value>
+	</data>
+
+	<data name="AccountSavingsColor" xml:space="preserve">
+		<value>Savings Account Color</value>
+	</data>
+
+	<data name="AccountBusinessColor" xml:space="preserve">
+		<value>Business Account Color</value>
+	</data>
+
 	<!--Shortcuts Dialog-->
 	<data name="Application.Shortcut" xml:space="preserve">
 		<value>Application</value>

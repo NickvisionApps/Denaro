@@ -57,6 +57,36 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// The color of accounts with Checking type
+    /// </summary>
+    public string AccountCheckingColor
+    {
+        get => Configuration.Current.AccountCheckingColor;
+
+        set => Configuration.Current.AccountCheckingColor = value;
+    }
+
+    /// <summary>
+    /// The color of accounts with Savings type
+    /// </summary>
+    public string AccountSavingsColor
+    {
+        get => Configuration.Current.AccountSavingsColor;
+
+        set => Configuration.Current.AccountSavingsColor = value;
+    }
+
+    /// <summary>
+    /// The color of accounts with Business type
+    /// </summary>
+    public string AccountBusinessColor
+    {
+        get => Configuration.Current.AccountBusinessColor;
+
+        set => Configuration.Current.AccountBusinessColor = value;
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
     public void SaveConfiguration() => Configuration.Current.Save();
