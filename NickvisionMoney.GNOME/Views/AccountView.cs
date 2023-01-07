@@ -677,7 +677,12 @@ public partial class AccountView
 
     private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
     {
-        
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
+        if(accountSettingsDialog.Run())
+        {
+            OnAccountInfoChanged(null, EventArgs.Empty);
+        }
     }
 
     private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
