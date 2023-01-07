@@ -219,6 +219,7 @@ public partial class AccountView
         _btnToggleGroups = Gtk.ToggleButton.New();
         _btnToggleGroups.AddCssClass("flat");
         _btnToggleGroups.SetTooltipText(_controller.Localizer["ToggleGroups", "Tooltip"]);
+        _btnToggleGroups.SetActive(!_controller.ShowGroupsList);
         _btnToggleGroups.OnToggled += OnToggleGroups;
         _btnToggleGroupsContent = Adw.ButtonContent.New();
         _btnToggleGroups.SetChild(_btnToggleGroupsContent);
@@ -473,8 +474,8 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
         //Load
-        OnAccountInfoChanged(null, EventArgs.Empty);
         OnToggleGroups(null, EventArgs.Empty);
+        OnAccountInfoChanged(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
@@ -501,6 +502,7 @@ public partial class AccountView
             //Ungrouped Row
             var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
+            ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
             //Other Group Rows
@@ -804,6 +806,7 @@ public partial class AccountView
         {
             groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
+        _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)

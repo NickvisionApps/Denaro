@@ -115,6 +115,24 @@ public class AccountViewController
     ~AccountViewController() => _account.Dispose();
 
     /// <summary>
+    /// Whether or not to show the groups section on the account view
+    /// </summary>
+    public bool ShowGroupsList
+    {
+        get => _account.Metadata.ShowGroupsList;
+
+        set
+        {
+            if (_account.Metadata.ShowGroupsList != value)
+            {
+                _account.Metadata.ShowGroupsList = value;
+                _account.UpdateMetadata(_account.Metadata);
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    /// <summary>
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast

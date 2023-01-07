@@ -408,6 +408,10 @@
 		<value>Hide Groups</value>
 	</data>
 
+	<data name="Show" xml:space="preserve">
+		<value>Show</value>
+	</data>
+
 	<data name="ShowGroups" xml:space="preserve">
 		<value>Show Groups</value>
 	</data>
