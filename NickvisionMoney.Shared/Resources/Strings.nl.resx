@@ -590,4 +590,61 @@ de opeenvolgende losgekoppeld..</value>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
     <value>Einddatum wissen</value>
   </data>
+  <data name="Show" xml:space="preserve">
+    <value>Tonen</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Zakelijk</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Standaard transactietype</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Soort rekening</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Voer een symbool in</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>n/b</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Spaarrekeningen</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Dit is slechts een handig label dat de werking van het programma niet beïnvloedt.</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Valutasymbool</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Valutasymbool (blanco)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Valutacode</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Voer een code in</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Kleur van chequerekening</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Kleur van spaarrekening</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Rekeninginstellingen</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Cheques</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Volgens uw besturingssysteem is uw valuta</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Aangepaste valuta gebruiken</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Kleur van zakelijke rekening</value>
+  </data>
 </root>
