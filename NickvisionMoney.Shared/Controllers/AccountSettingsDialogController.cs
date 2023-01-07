@@ -53,7 +53,7 @@ public class AccountSettingsDialogController
     /// </summary>
     /// <param name="accountType">The account type</param>
     /// <returns>The rgb color for the account type</returns>
-    private string GetColorForAccountType(AccountType accountType)
+    public string GetColorForAccountType(AccountType accountType)
     {
         return accountType switch
         {
