@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
+using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI;
 using WinRT;
 using WinRT.Interop;
 
@@ -273,7 +275,15 @@ public sealed partial class MainWindow : Window
         ListRecentAccounts.Items.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            ListRecentAccounts.Items.Add(new ActionRow(Path.GetFileName(recentAccount.Path), Path.GetDirectoryName(recentAccount.Path)));
+            var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
+            actionRow.Children.Insert(0, new InfoBadge()
+            {
+                Width = 30,
+                Height = 30,
+                Margin = new Thickness(0,0,10,0),
+                Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(_controller.GetColorForAccountType(recentAccount.Type))!)
+            });
+            ListRecentAccounts.Items.Add(actionRow);
         }
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
     }
