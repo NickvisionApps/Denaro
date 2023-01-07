@@ -66,7 +66,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
         Localizer = localizer;
         Transaction = transaction;

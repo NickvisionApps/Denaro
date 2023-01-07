@@ -47,7 +47,7 @@ public class AccountSettingsDialogController
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
     /// <param name="isFirstTimeSetup">Whether or not the dialog should be used for first time account setup</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
     {
         Localizer = localizer;
         Metadata = metadata;

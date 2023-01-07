@@ -29,7 +29,7 @@ public class MainWindowController
     /// <summary>
     /// A PreferencesViewController
     /// </summary>
-    public PreferencesViewController PreferencesViewController => new PreferencesViewController(Localizer);
+    public PreferencesViewController PreferencesViewController => new PreferencesViewController(RecentAccountsChanged, Localizer);
     /// <summary>
     /// Whether or not the version is a development version or not
     /// </summary>

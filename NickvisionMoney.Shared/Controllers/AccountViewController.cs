@@ -101,7 +101,7 @@ public class AccountViewController
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="notificationSent">The notification sent event</param>
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
-    public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
+    internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
         _filters = new Dictionary<int, bool>();

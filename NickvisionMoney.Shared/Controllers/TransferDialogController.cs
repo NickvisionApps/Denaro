@@ -44,7 +44,7 @@ public class TransferDialogController
     /// <param name="transfer">The Transfer model</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransferDialogController(Transfer transfer, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, CultureInfo culture, Localizer localizer)
     {
         Localizer = localizer;
         Transfer = transfer;
