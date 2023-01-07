@@ -293,7 +293,7 @@ public class AccountViewController
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsFirstTimeSetup, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController

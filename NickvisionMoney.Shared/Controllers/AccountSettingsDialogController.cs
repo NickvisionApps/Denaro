@@ -26,6 +26,10 @@ public class AccountSettingsDialogController
     /// </summary>
     public AccountMetadata Metadata { get; init; }
     /// <summary>
+    /// Whether or not the dialog should be used for first time account setup
+    /// </summary>
+    public bool IsFirstTimeSetup { get; init; }
+    /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
@@ -34,13 +38,32 @@ public class AccountSettingsDialogController
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
+    /// <param name="isFirstTimeSetup">Whether or not the dialog should be used for first time account setup</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public AccountSettingsDialogController(AccountMetadata metadata, Localizer localizer)
+    public AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
     {
         Localizer = localizer;
         Metadata = metadata;
+        IsFirstTimeSetup = isFirstTimeSetup;
         Accepted = false;
     }
+
+    /// <summary>
+    /// Gets a color for an account type
+    /// </summary>
+    /// <param name="accountType">The account type</param>
+    /// <returns>The rgb color for the account type</returns>
+    public string GetColorForAccountType(AccountType accountType)
+    {
+        return accountType switch
+        {
+            AccountType.Checking => "rgb(53,132,228)",
+            AccountType.Savings => "rgb(38,162,105)",
+            AccountType.Business => "rgb(36,31,49)",
+            _ => "rgb(53,132,228)"
+        };
+    }
+
 
     /// <summary>
     /// Updates the Metadata object
