@@ -531,4 +531,63 @@ Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
     <value>Transactie verwijderen</value>
   </data>
+  <data name="DeleteExisting" xml:space="preserve">
+    <value>Huidige verwijderen</value>
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+    <value>Huidige loskoppelen</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+    <value>Iedere twee weken</value>
+  </data>
+  <data name="RepeatIntervalChanged" xml:space="preserve">
+    <value>De herhaalperiode is gewijzigd</value>
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+    <value>De herhaalperiode is gewijzigd.
+Welke actie wilt u ondernemen op de huidige opeenvolgende transacties?
+
+Nieuwe opeenvolgende transacties worden op basis van de nieuwe periode ingepland.</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+    <value>Terugkerende einddatum</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Bij deze transactie is een herhaalperiode ingesteld.
+Welke actie wilt u ondernemen op de opeenvolgende transacties?
+
+Als u alleen de eerste transactie verwijdert, blijven
+de opeenvolgende aanpasbaar.</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Bij deze transactie is een herhaalperiode ingesteld.
+Welke actie wilt u ondernemen op de opeenvolgende transacties?
+
+Als u alleen de eerste transactie bijwerkt, worden
+de opeenvolgende losgekoppeld..</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+    <value>Terugkerende einddatum (ongeldig)</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+    <value>Geen einddatum</value>
+  </data>
+  <data name="EditTransaction.SourceRepeat" xml:space="preserve">
+    <value>Transactie bijwerken</value>
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+    <value>Alleen eerste bijwerken</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+    <value>Ook alle opeenvolgende transacties bijwerken</value>
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+    <value>Alleen eerste verwijderen</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+    <value>Ook alle opeenvolgende verwijderen</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+    <value>Einddatum wissen</value>
+  </data>
 </root>
