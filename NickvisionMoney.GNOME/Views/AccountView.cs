@@ -414,12 +414,14 @@ public partial class AccountView
         _scrollTransactions.SetMinContentHeight(360);
         _scrollTransactions.SetVexpand(true);
         _scrollTransactions.SetChild(_flowBox);
+        _scrollTransactions.SetVisible(false);
         //Page No Transactions
         _statusPageNoTransactions = Adw.StatusPage.New();
         _statusPageNoTransactions.SetIconName("money-none-symbolic");
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
+        _statusPageNoTransactions.SetVisible(false);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -682,7 +684,7 @@ public partial class AccountView
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         if(accountSettingsDialog.Run())
         {
-            OnAccountInfoChanged(null, EventArgs.Empty);
+            _controller.UpdateMetadata(accountSettingsController.Metadata);
         }
     }
 

@@ -52,8 +52,11 @@ public partial class AccountSettingsDialog
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
         _dialog.SetDefaultSize(360, -1);
         _dialog.SetHideOnClose(true);
-        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
-        _dialog.SetCloseResponse("cancel");
+        if(!_controller.IsFirstTimeSetup)
+        {
+            _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
+            _dialog.SetCloseResponse("cancel");
+        }
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
@@ -138,6 +141,21 @@ public partial class AccountSettingsDialog
         //Layout
         _dialog.SetExtraChild(_boxMain);
         //Load
+        _rowName.SetText(_controller.Metadata.Name);
+        OnApplyName(_rowName, EventArgs.Empty);
+        _rowAccountType.SetSelected((uint)_controller.Metadata.AccountType);
+        OnAccountTypeChanged();
+        if (_controller.Metadata.DefaultTransactionType == TransactionType.Income)
+        {
+            _btnIncome.SetActive(true);
+        }
+        else
+        {
+            _btnExpense.SetActive(true);
+        }
+        _rowCustomCurrency.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
+        _txtCustomSymbol.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
+        _txtCustomCode.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
     }
 
     /// <summary>
@@ -153,9 +171,30 @@ public partial class AccountSettingsDialog
         {
             g_main_context_iteration(g_main_context_default(), false);
         }
-        if(_controller.Accepted)
+        if(_controller.Accepted || _controller.IsFirstTimeSetup)
         {
             _dialog.SetModal(false);
+            var transactionType = _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense;
+            var status = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType);
+            if(status != AccountMetadataCheckStatus.Valid)
+            {
+                _rowName.RemoveCssClass("error");
+                _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
+                _rowCustomSymbol.RemoveCssClass("error");
+                _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
+                //Mark Error
+                if (status == AccountMetadataCheckStatus.EmptyName)
+                {
+                    _rowName.AddCssClass("error");
+                    _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
+                }
+                else if(status == AccountMetadataCheckStatus.EmptyCurrencySymbol)
+                {
+                    _rowCustomSymbol.AddCssClass("error");
+                    _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
+                }
+                return Run();
+            }
         }
         _dialog.Destroy();
         return _controller.Accepted;
@@ -199,13 +238,7 @@ public partial class AccountSettingsDialog
     private void OnAccountTypeChanged()
     {
         _btnAvatar.GetStyleContext().RemoveProvider(_btnAvatarCssProvider);
-        var accType = _rowAccountType.GetSelected() switch
-        {
-            0 => AccountType.Checking,
-            1 => AccountType.Savings,
-            2 => AccountType.Business
-        };
-        var btnCss = "#btnAvatar { color: #fff; background-color: " + _controller.GetColorForAccountType(accType) + "; }" + char.MinValue;
+        var btnCss = "#btnAvatar { color: #fff; background-color: " + _controller.GetColorForAccountType((AccountType)_rowAccountType.GetSelected()) + "; }" + char.MinValue;
         gtk_css_provider_load_from_data(_btnAvatarCssProvider.Handle, btnCss, -1);
         _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
     }
