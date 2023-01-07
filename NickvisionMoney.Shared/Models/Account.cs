@@ -867,7 +867,7 @@ public class Account : IDisposable
                 page.DefaultTextStyle(x => x.FontSize(14));
                 //Header
                 page.Header()
-                    .Text(System.IO.Path.GetFileNameWithoutExtension(Path)).SemiBold().FontSize(26).FontColor(Colors.Blue.Medium);
+                    .Text(Metadata.Name).SemiBold().FontSize(26).FontColor(Colors.Blue.Medium);
                 //Content
                 page.Content().PaddingVertical(0.5f, Unit.Centimetre)
                     .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
