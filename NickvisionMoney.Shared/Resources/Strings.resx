@@ -550,6 +550,23 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<!--AccountSettingsDialog-->
+	<data name="AccountType.Checking" xml:space="preserve">
+		<value>Checking</value>
+	</data>
+
+	<data name="AccountType.Savings" xml:space="preserve">
+		<value>Savings</value>
+	</data>
+
+	<data name="AccountType.Business" xml:space="preserve">
+		<value>Business</value>
+	</data>
+
+	<data name="NotAvailable" xml:space="preserve">
+		<value>N/A</value>
+	</data>
+	
 	<!--Fields-->
 	<data name="Name.Field" xml:space="preserve">
 		<value>Name</value>
@@ -639,6 +656,10 @@
 		<value>Destination Account (Invalid)</value>
 	</data>
 
+	<data name="AccountType.Field" xml:space="preserve">
+		<value>Account Type</value>
+	</data>
+	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
 		<value>User Interface</value>
