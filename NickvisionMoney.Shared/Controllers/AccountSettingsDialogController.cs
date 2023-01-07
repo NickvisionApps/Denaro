@@ -10,7 +10,8 @@ namespace NickvisionMoney.Shared.Controllers;
 public enum AccountMetadataCheckStatus
 {
     Valid = 0,
-    EmptyName
+    EmptyName,
+    EmptyCurrencySymbol
 }
 
 /// <summary>
@@ -38,7 +39,7 @@ public class AccountSettingsDialogController
     /// <summary>
     /// The system reported currency string (Ex: "$ (USD)")
     /// </summary>
-    public string ReportedCurrencyString => $"{CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})";
+    public string ReportedCurrencyString => $"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})";
 
     /// <summary>
     /// Creates an AccountSettingsDialogController
@@ -85,6 +86,10 @@ public class AccountSettingsDialogController
         if(string.IsNullOrEmpty(name))
         {
             return AccountMetadataCheckStatus.EmptyName;
+        }
+        if(useCustom && string.IsNullOrEmpty(customSymbol))
+        {
+            return AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
         if(customSymbol != null && customSymbol.Length > 1)
         {
