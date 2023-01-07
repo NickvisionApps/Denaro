@@ -21,6 +21,8 @@
             <ComboBox x:Name="CmbAccountType" HorizontalAlignment="Stretch" SelectionChanged="CmbAccountType_SelectionChanged"/>
 
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+
+            <ComboBox x:Name="CmbDefaultTransactionType" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>

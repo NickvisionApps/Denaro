@@ -36,9 +36,13 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Savings"]);
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Business"]);
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
+        CmbDefaultTransactionType.Header = _controller.Localizer["DefaultTransactionType", "Field"];
+        CmbDefaultTransactionType.Items.Add(_controller.Localizer["TransactionType", "Income"]);
+        CmbDefaultTransactionType.Items.Add(_controller.Localizer["TransactionType", "Expense"]);
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
+        CmbDefaultTransactionType.SelectedIndex = (int)_controller.Metadata.DefaultTransactionType;
         TxtName_TextChanged(null, null);
     }
 
@@ -63,8 +67,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = AccountMetadataCheckStatus.Valid;
-            //var checkStatus = _controller.UpdateMetadata(TxtName.Text);
+            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, false, null, null, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
             if (checkStatus != AccountMetadataCheckStatus.Valid)
             {
                 //Reset UI
