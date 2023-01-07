@@ -175,7 +175,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     {
         var bgColorString = _controller.GetColorForAccountType((AccountType)CmbAccountType.SelectedIndex);
         var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-        var luma = int.Parse(bgColorStrArray[0]) / 255 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255 * 0.0722;
+        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!);
         LblId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
     }

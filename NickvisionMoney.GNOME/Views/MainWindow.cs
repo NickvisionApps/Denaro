@@ -1,10 +1,11 @@
 ﻿using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using NickvisionMoney.Shared.Models;
+using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -549,8 +550,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
             var btnType = Gtk.Button.NewWithLabel(strType);
             btnType.SetValign(Gtk.Align.Center);
+            btnType.SetSizeRequest(120, -1);
+            btnType.OnClicked += (sender, e) => row.Activate();
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
             var btnCssProvider = Gtk.CssProvider.New();
-            var btnCss = "#btnType { background-color: " + _controller.GetColorForAccountType(recentAccount.Type) + "; }" + char.MinValue;
+            var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }" + char.MinValue;
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
             btnType.SetName("btnType");
             btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
@@ -558,8 +564,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
             var btnCssProvider = Gtk.CssProvider.New();
-            var btnCss = "#btnWallet { background-color: " + _controller.GetColorForAccountType(recentAccount.Type) + "; }" + char.MinValue;
+            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }" + char.MinValue;
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
             button.SetName("btnWallet");
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
