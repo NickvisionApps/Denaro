@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Money
+Name=Denaro
 Comment=A personal finance manager
 Exec=/usr/opt/org.nickvision.money/NickvisionMoney.GNOME
 Icon=org.nickvision.money
