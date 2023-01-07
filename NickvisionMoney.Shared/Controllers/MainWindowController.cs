@@ -144,7 +144,7 @@ public class MainWindowController
         }
         if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
-            var controller = new AccountViewController(path, Localizer, NotificationSent);
+            var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
             OpenAccounts.Add(controller);
             Configuration.Current.AddRecentAccount(new RecentAccount(path)

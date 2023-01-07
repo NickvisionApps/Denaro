@@ -143,6 +143,8 @@ public class Configuration
     {
         if (newRecentAccount == RecentAccount1)
         {
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
             return;
         }
         else if (newRecentAccount == RecentAccount2)
@@ -150,6 +152,8 @@ public class Configuration
             var temp = RecentAccount1;
             RecentAccount1 = RecentAccount2;
             RecentAccount2 = temp;
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
         }
         else if (newRecentAccount == RecentAccount3)
         {
@@ -158,6 +162,8 @@ public class Configuration
             RecentAccount1 = RecentAccount3;
             RecentAccount2 = temp1;
             RecentAccount3 = temp2;
+            RecentAccount1.Name = newRecentAccount.Name;
+            RecentAccount1.Type = newRecentAccount.Type;
         }
         else
         {

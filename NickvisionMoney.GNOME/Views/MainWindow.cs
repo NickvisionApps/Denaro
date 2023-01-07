@@ -95,6 +95,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountAdded += AccountAdded;
+        _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
+        {
+            UpdateRecentAccountsOnStart();
+            UpdateRecentAccounts();
+        };
         OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "default-width")
@@ -328,7 +333,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
-        UpdateRecentAccounts();
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
     }

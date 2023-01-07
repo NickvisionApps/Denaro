@@ -82,6 +82,10 @@ public class AccountViewController
     /// </summary>
     private event EventHandler<NotificationSentEventArgs>? NotificationSent;
     /// <summary>
+    /// Occurs when the recent accounts list is changed
+    /// </summary>
+    private event EventHandler? RecentAccountsChanged;
+    /// <summary>
     /// Occurs when the information of an account is changed
     /// </summary>
     public event EventHandler? AccountInfoChanged;
@@ -96,12 +100,14 @@ public class AccountViewController
     /// <param name="path">The path of the account</param>
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="notificationSent">The notification sent event</param>
-    public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent)
+    /// <param name="recentAccountsChanged">The recent accounts changed event</param>
+    public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
         NotificationSent = notificationSent;
+        RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
@@ -389,7 +395,13 @@ public class AccountViewController
     public void UpdateMetadata(AccountMetadata metadata)
     {
         _account.UpdateMetadata(metadata);
+        Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
+        {
+            Name = AccountTitle,
+            Type = AccountType
+        });
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
