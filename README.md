@@ -46,6 +46,7 @@ Once all changes to your translated file are made, make sure the file is in the 
 ![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
 ![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
 ![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
+![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
 ![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
 
 # GNOME Theming
