@@ -273,7 +273,7 @@ public sealed partial class MainWindow : Window
         ListRecentAccounts.Items.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            ListRecentAccounts.Items.Add(new ActionRow(Path.GetFileName(recentAccount), Path.GetDirectoryName(recentAccount)));
+            ListRecentAccounts.Items.Add(new ActionRow(Path.GetFileName(recentAccount.Path), Path.GetDirectoryName(recentAccount.Path)));
         }
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
     }
@@ -335,7 +335,7 @@ public sealed partial class MainWindow : Window
     {
         if(ListRecentAccounts.SelectedIndex != -1)
         {
-            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex]);
+            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path);
             ListRecentAccounts.SelectedIndex = -1;
         }
     }

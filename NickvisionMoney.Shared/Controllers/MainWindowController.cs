@@ -41,7 +41,7 @@ public class MainWindowController
     /// <summary>
     /// The list of recent accounts
     /// </summary>
-    public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
+    public List<RecentAccount> RecentAccounts => Configuration.Current.RecentAccounts;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -131,7 +131,11 @@ public class MainWindowController
             var controller = new AccountViewController(path, Localizer, NotificationSent);
             controller.TransferSent += OnTransferSent;
             OpenAccounts.Add(controller);
-            Configuration.Current.AddRecentAccount(path);
+            Configuration.Current.AddRecentAccount(new RecentAccount(path)
+            {
+                Name = controller.AccountTitle,
+                Type = controller.AccountType
+            });
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);

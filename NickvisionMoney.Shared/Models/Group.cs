@@ -5,7 +5,7 @@ namespace NickvisionMoney.Shared.Models;
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Group : IComparable<Group>
+public class Group : IComparable<Group>, IEquatable<Group>
 {
     /// <summary>
     /// The id of the group
@@ -49,6 +49,13 @@ public class Group : IComparable<Group>
         }
         return false;
     }
+
+    /// <summary>
+    /// Gets whether or not an object is equal to this Group
+    /// </summary>
+    /// <param name="obj">The Group? object to compare</param>
+    /// <returns>True if equals, else false</returns>
+    public bool Equals(Group? obj) => Equals(obj);
 
     /// <summary>
     /// Compares this with other

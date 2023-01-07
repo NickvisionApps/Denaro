@@ -497,9 +497,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             _groupRecentAccounts.Remove(row);
         }
         _listRecentAccountsRows.Clear();
-        foreach(var accountPath in _controller.RecentAccounts)
+        foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(accountPath);
+            var row = CreateRecentAccountRow(recentAccount.Path);
             _groupRecentAccounts.Add(row);
             _listRecentAccountsRows.Add(row);
         }
@@ -515,9 +515,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             _grpRecentAccountsOnStart.Remove(row);
         }
         _listRecentAccountsOnStartRows.Clear();
-        foreach(var accountPath in _controller.RecentAccounts)
+        foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(accountPath);
+            var row = CreateRecentAccountRow(recentAccount.Path);
             _grpRecentAccountsOnStart.Add(row);
             _listRecentAccountsOnStartRows.Add(row);
         }

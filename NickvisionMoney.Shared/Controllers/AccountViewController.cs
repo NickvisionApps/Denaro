@@ -41,6 +41,10 @@ public class AccountViewController
     /// </summary>
     public string AccountTitle => _account.Metadata.Name;
     /// <summary>
+    /// The type of the account
+    /// </summary>
+    public AccountType AccountType => _account.Metadata.AccountType;
+    /// <summary>
     /// The total amount of the account for today
     /// </summary>
     public decimal AccountTodayTotal => _account.TodayTotal;

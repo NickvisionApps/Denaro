@@ -23,17 +23,17 @@ public class Configuration
     /// The first recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount1 { get; private set; }
+    public RecentAccount RecentAccount1 { get; private set; }
     /// <summary>
     /// The second recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount2 { get; private set; }
+    public RecentAccount RecentAccount2 { get; private set; }
     /// <summary>
     /// The third recent account
     /// </summary>
     [JsonInclude]
-    public string RecentAccount3 { get; private set; }
+    public RecentAccount RecentAccount3 { get; private set; }
     /// <summary>
     /// The default color of a transaction
     /// </summary>
@@ -70,9 +70,9 @@ public class Configuration
             Directory.CreateDirectory(ConfigDir);
         }
         Theme = Theme.System;
-        RecentAccount1 = "";
-        RecentAccount2 = "";
-        RecentAccount3 = "";
+        RecentAccount1 = new RecentAccount();
+        RecentAccount2 = new RecentAccount();
+        RecentAccount3 = new RecentAccount();
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
         AccountCheckingColor = "rgb(129,61,156)";
@@ -105,20 +105,20 @@ public class Configuration
     /// <summary>
     /// Gets the list of recent accounts available
     /// </summary>
-    public List<string> RecentAccounts
+    public List<RecentAccount> RecentAccounts
     {
         get
         {
-            var recents = new List<string>();
-            if (File.Exists(RecentAccount1))
+            var recents = new List<RecentAccount>();
+            if (File.Exists(RecentAccount1.Path))
             {
                 recents.Add(RecentAccount1);
             }
-            if (File.Exists(RecentAccount2))
+            if (File.Exists(RecentAccount2.Path))
             {
                 recents.Add(RecentAccount2);
             }
-            if (File.Exists(RecentAccount3))
+            if (File.Exists(RecentAccount3.Path))
             {
                 recents.Add(RecentAccount3);
             }
@@ -138,8 +138,8 @@ public class Configuration
     /// <summary>
     /// Adds a recent account
     /// </summary>
-    /// <param name="newRecentAccount">The path to the new recent account</param>
-    public void AddRecentAccount(string newRecentAccount)
+    /// <param name="newRecentAccount">The new recent account</param>
+    public void AddRecentAccount(RecentAccount newRecentAccount)
     {
         if (newRecentAccount == RecentAccount1)
         {

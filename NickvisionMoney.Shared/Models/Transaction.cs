@@ -30,7 +30,7 @@ public enum TransactionRepeatInterval
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Transaction : IComparable<Transaction>, IDisposable
+public class Transaction : IComparable<Transaction>, IDisposable, IEquatable<Transaction>
 {
     private int _groupId;
 
@@ -129,6 +129,13 @@ public class Transaction : IComparable<Transaction>, IDisposable
         }
         return false;
     }
+
+    /// <summary>
+    /// Gets whether or not an object is equal to this Transaction
+    /// </summary>
+    /// <param name="obj">The Transaction? object to compare</param>
+    /// <returns>True if equals, else false</returns>
+    public bool Equals(Transaction? obj) => Equals(obj);
 
     /// <summary>
     /// Compares this with other
