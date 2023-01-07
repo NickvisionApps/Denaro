@@ -86,11 +86,27 @@ public class AccountSettingsDialogController
         {
             return AccountMetadataCheckStatus.EmptyName;
         }
+        if(customSymbol != null && customSymbol.Length > 1)
+        {
+            customSymbol = customSymbol.Substring(0, 1);
+        }
+        if (customCode != null && customCode.Length > 3)
+        {
+            customCode = customCode.Substring(0, 3);
+        }
         Metadata.Name = name;
         Metadata.AccountType = type;
         Metadata.UseCustomCurrency = useCustom;
-        Metadata.CustomCurrencySymbol = customSymbol;
-        Metadata.CustomCurrencyCode = customCode;
+        if(Metadata.UseCustomCurrency)
+        {
+            Metadata.CustomCurrencySymbol = customSymbol;
+            Metadata.CustomCurrencyCode = customCode.ToUpper();
+        }
+        else
+        {
+            Metadata.CustomCurrencySymbol = null;
+            Metadata.CustomCurrencyCode = null;
+        }
         Metadata.DefaultTransactionType = defaultTransactionType;
         return AccountMetadataCheckStatus.Valid;
     }
