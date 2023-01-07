@@ -87,9 +87,14 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             {
                 //Reset UI
                 TxtName.Header = _controller.Localizer["Name", "Field"];
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
                 if (checkStatus == AccountMetadataCheckStatus.EmptyName)
                 {
                     TxtName.Header = _controller.Localizer["Name", "Empty"];
+                }
+                else if (checkStatus == AccountMetadataCheckStatus.EmptyCurrencySymbol)
+                {
+                    TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
                 }
                 TxtErrors.Visibility = Visibility.Visible;
                 return await ShowAsync();
