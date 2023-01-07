@@ -40,11 +40,13 @@
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Contributors de GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
   </data>
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -99,7 +101,7 @@
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value />
+		<value>Compte Nickvision Money</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Compte novèl</value>
@@ -117,16 +119,16 @@
 		<value>Dobrir compte (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value />
+		<value>Cap de compte pas dobèrt</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value />
+		<value>Creatz o dobrissètz un compte per començar. Podètz tanben far lissar un fichièr dins l’aplicacion a partir de l’explorator de fichirs.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value />
+		<value>Comptes recents</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value />
+		<value>Cap de compte recent</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
 		<value>Totes los fichièrs</value>
@@ -173,28 +175,28 @@
 		<value>Novèl</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value />
+		<value>Grop novèl (Ctrl+Maj+N)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
 		<value>Transferir d’argent</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value />
+		<value>Transferir d’argent (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value />
+		<value>Importar d’un fichièr estant</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value />
+		<value>Importar d’un fichièr estant (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value />
+		<value>Exportar cap a un fichièr</value>
   </data>
   <data name="Overview" xml:space="preserve">
 		<value>Vista d'ensemble</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value />
+		<value>Vista d’ensemble per uèi</value>
   </data>
   <data name="Total" xml:space="preserve">
 		<value>Total</value>
@@ -218,16 +220,16 @@
 		<value>Cap de transaccion pas trobada</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value />
+		<value>Ajustatz una transaccion novèla o importatz de transaccions a partir d’un fichièr.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value />
+		<value>Cap de transaccion correspondenta als filtres especificats.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value />
+		<value>Triar del primièr al darnièr</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value />
+		<value>Triar del darnièr al primièr</value>
   </data>
   <data name="Filters" xml:space="preserve">
 		<value>Filtres</value>
