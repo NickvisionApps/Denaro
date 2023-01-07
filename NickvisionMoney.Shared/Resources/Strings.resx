@@ -420,6 +420,10 @@
 		<value>Toggle Groups Visibility</value>
 	</data>
 
+	<data name="AccountSettings" xml:space="preserve">
+		<value>Account Settings</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>

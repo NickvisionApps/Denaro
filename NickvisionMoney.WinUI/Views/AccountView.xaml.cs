@@ -50,10 +50,12 @@ public sealed partial class AccountView : UserControl
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
+        ToolTipService.SetToolTip(BtnShowHideGroups, _controller.Localizer["ToggleGroups", "Tooltip"]);
         BtnFilters.Label = _controller.Localizer["Filters"];
         MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
+        BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
@@ -101,6 +103,10 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
+        if(_controller.AccountNeedsFirstTimeSetup)
+        {
+            AccountSettings(null, new RoutedEventArgs());
+        }
         if(!(await _controller.SyncRepeatTransactionsAsync()))
         {
             AccountInfoChanged(null, EventArgs.Empty);
@@ -533,6 +539,16 @@ public sealed partial class AccountView : UserControl
         Calendar.SelectedDates.Add(DateTimeOffset.Now);
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
+    }
+
+    /// <summary>
+    /// Occurs when the account settings button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void AccountSettings(object? sender, RoutedEventArgs e)
+    {
+        
     }
 
     /// <summary>

@@ -40,7 +40,7 @@ public class Account : IDisposable
     /// <summary>
     /// Whether or not an account needs to be setup for the first time
     /// </summary>
-    public bool NeedsFirstTimeSetup { get; init; }
+    public bool NeedsFirstTimeSetup { get; private set; }
 
     /// <summary>
     /// The income amount of the account for today
@@ -289,6 +289,7 @@ public class Account : IDisposable
             Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
             Metadata.ShowGroupsList = metadata.ShowGroupsList;
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
+            NeedsFirstTimeSetup = false;
             return true;
         }
         return false;

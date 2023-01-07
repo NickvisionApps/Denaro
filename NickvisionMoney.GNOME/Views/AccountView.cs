@@ -197,6 +197,7 @@ public partial class AccountView
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
         menuActions.AppendSection(null, menuActionsExportImport);
+        menuActions.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
         _btnMenuAccountActions.SetMenuModel(menuActions);
         _boxButtonsOverview.Append(_btnMenuAccountActions);
         //Button Reset Overview Filter
@@ -464,6 +465,10 @@ public partial class AccountView
         var actImport = Gio.SimpleAction.New("importFromFile", null);
         actImport.OnActivate += ImportFromFile;
         actionMap.AddAction(actImport);
+        //Account Settings Action
+        var actAccountSettings = Gio.SimpleAction.New("accountSettings", null);
+        actAccountSettings.OnActivate += AccountSettings;
+        actionMap.AddAction(actAccountSettings);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
@@ -484,6 +489,10 @@ public partial class AccountView
         if(_isFirstTimeLoading)
         {
             _isFirstTimeLoading = false;
+            if(_controller.AccountNeedsFirstTimeSetup)
+            {
+                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+            }
             await _controller.SyncRepeatTransactionsAsync();
         }
         if(!_isAccountLoading)
@@ -663,6 +672,11 @@ public partial class AccountView
             }
         };
         openFileDialog.Show();
+    }
+
+    private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
+    {
+        
     }
 
     private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)

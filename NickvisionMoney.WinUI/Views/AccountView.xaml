@@ -111,6 +111,14 @@
                             </MenuFlyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
+
+                    <AppBarSeparator/>
+
+                    <AppBarButton x:Name="BtnAccountSettings" Click="AccountSettings">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
                 </CommandBar.PrimaryCommands>
             </CommandBar>
         </Border>
