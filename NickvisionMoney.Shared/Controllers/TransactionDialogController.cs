@@ -49,13 +49,25 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
-    /// The orioginal repeat interval of a transaction
+    /// The original repeat interval of a transaction
     /// </summary>
     public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
     /// <summary>
     /// The CultureInfo to use when displaying a number string
     /// </summary>
     public CultureInfo CultureForNumberString { get; init; }
+
+    /// <summary>
+    /// The repeat interval index used by GUI
+    /// </summary>
+    public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
+    {
+        0 => (uint) Transaction.RepeatInterval,
+        1 => (uint)Transaction.RepeatInterval,
+        2 => (uint)Transaction.RepeatInterval,
+        7 => 3,
+        _ => (uint)Transaction.RepeatInterval + 1
+    };
 
     /// <summary>
     /// Constructs a TransactionDialogController

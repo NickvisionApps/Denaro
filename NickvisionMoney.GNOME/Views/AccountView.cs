@@ -487,7 +487,6 @@ public partial class AccountView
         //Load
         OnToggleGroups(null, EventArgs.Empty);
         OnAccountInfoChanged(null, EventArgs.Empty);
-        _parentWindow.OnWidthChanged();
     }
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
@@ -582,6 +581,7 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
+            _parentWindow.OnWidthChanged();
             _isAccountLoading = false;
         }
     }

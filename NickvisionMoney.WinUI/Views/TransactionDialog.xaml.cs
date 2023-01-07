@@ -81,7 +81,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             CmbGroup.SelectedItem = _controller.Groups[(uint)_controller.Transaction.GroupId];
         }
-        CmbRepeatInterval.SelectedIndex = (int)_controller.Transaction.RepeatInterval;
+        CmbRepeatInterval.SelectedIndex = (int)_controller.RepeatIntervalIndex;
         CalendarRepeatEndDate.IsEnabled = _controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never;
         BtnRepeatEndDateClear.IsEnabled = _controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never;
         if (_controller.Transaction.RepeatEndDate != null)

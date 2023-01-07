@@ -285,7 +285,7 @@ public partial class TransactionDialog
         {
             _btnExpense.SetActive(true);
         }
-        _rowRepeatInterval.SetSelected((uint)_controller.Transaction.RepeatInterval);
+        _rowRepeatInterval.SetSelected(_controller.RepeatIntervalIndex);
         _rowRepeatEndDate.SetSensitive(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
         if (_controller.Transaction.RepeatEndDate != null)
         {
