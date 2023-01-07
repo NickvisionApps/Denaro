@@ -51,7 +51,7 @@ public partial class AccountSettingsDialog
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
-        _dialog.SetDefaultSize(360, -1);
+        _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         if(!_controller.IsFirstTimeSetup)
         {
