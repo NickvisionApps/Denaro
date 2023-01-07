@@ -52,6 +52,11 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
         CmbDefaultTransactionType.SelectedIndex = (int)_controller.Metadata.DefaultTransactionType;
         TglUseCustomCurrency.IsOn = _controller.Metadata.UseCustomCurrency;
+        if(_controller.Metadata.UseCustomCurrency)
+        {
+            TxtCustomSymbol.Text = _controller.Metadata.CustomCurrencySymbol;
+            TxtCustomCode.Text = _controller.Metadata.CustomCurrencyCode;
+        }
         TxtName_TextChanged(null, null);
         TglUseCustomCurrency_Toggled(null, new RoutedEventArgs());
     }
@@ -77,7 +82,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, null, null, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
+            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
             if (checkStatus != AccountMetadataCheckStatus.Valid)
             {
                 //Reset UI
