@@ -20,6 +20,9 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     private readonly PreferencesViewController _controller;
     private Color _transactionDefaultColor;
     private Color _transferDefaultColor;
+    private Color _accountCheckingColor;
+    private Color _accountSavingsColor;
+    private Color _accountBusinessColor;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -54,10 +57,16 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardTransactionDefaultColor.Description = _controller.Localizer["TransactionColorDescription"];
         CardTransferDefaultColor.Header = _controller.Localizer["TransferColor"];
         CardTransferDefaultColor.Description = _controller.Localizer["TransferColorDescription"];
+        CardAccountCheckingColor.Header = _controller.Localizer["AccountCheckingColor"];
+        CardAccountSavingsColor.Header = _controller.Localizer["AccountSavingsColor"];
+        CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
         TransferDefaultColor = ColorHelpers.FromRGBA(_controller.TransferDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
+        AccountCheckingColor = ColorHelpers.FromRGBA(_controller.AccountCheckingColor) ?? Color.FromArgb(255, 255, 255, 255);
+        AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
+        AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
     }
 
     /// <summary>
@@ -87,6 +96,54 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         {
             _transferDefaultColor = value;
             _controller.TransferDefaultColor = _transferDefaultColor.ToRGBA();
+            _controller.SaveConfiguration();
+            NotifyPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// The color of accounts with Checking type
+    /// </summary>
+    public Color AccountCheckingColor
+    {
+        get => _accountCheckingColor;
+
+        set
+        {
+            _accountCheckingColor = value;
+            _controller.AccountCheckingColor = _accountCheckingColor.ToRGBA();
+            _controller.SaveConfiguration();
+            NotifyPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// The color of accounts with Savings type
+    /// </summary>
+    public Color AccountSavingsColor
+    {
+        get => _accountSavingsColor;
+
+        set
+        {
+            _accountSavingsColor = value;
+            _controller.AccountSavingsColor = _accountSavingsColor.ToRGBA();
+            _controller.SaveConfiguration();
+            NotifyPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// The color of accounts with Business type
+    /// </summary>
+    public Color AccountBusinessColor
+    {
+        get => _accountBusinessColor;
+
+        set
+        {
+            _accountBusinessColor = value;
+            _controller.AccountBusinessColor = _accountBusinessColor.ToRGBA();
             _controller.SaveConfiguration();
             NotifyPropertyChanged();
         }

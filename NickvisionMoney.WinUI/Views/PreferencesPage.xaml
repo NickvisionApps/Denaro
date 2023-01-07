@@ -113,6 +113,30 @@
 
                                 <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{Binding TransferDefaultColor, Mode=TwoWay, ElementName=This}"/>
                             </labs:SettingsCard>
+
+                            <labs:SettingsCard x:Name="CardAccountCheckingColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnAccountCheckingColor" SelectedColor="{Binding AccountCheckingColor, Mode=TwoWay, ElementName=This}"/>
+                            </labs:SettingsCard>
+
+                            <labs:SettingsCard x:Name="CardAccountSavingsColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnAccountSavingsColor" SelectedColor="{Binding AccountSavingsColor, Mode=TwoWay, ElementName=This}"/>
+                            </labs:SettingsCard>
+
+                            <labs:SettingsCard x:Name="CardAccountBusinessColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnAccountBusinessColor" SelectedColor="{Binding AccountBusinessColor, Mode=TwoWay, ElementName=This}"/>
+                            </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
                 </StackPanel>
