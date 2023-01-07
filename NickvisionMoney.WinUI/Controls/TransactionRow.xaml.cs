@@ -62,7 +62,6 @@ public sealed partial class TransactionRow : UserControl
         //Load Transaction
         BtnId.Content = _transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
-        BtnId.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         LblName.Text = _transaction.Description;
         LblDescription.Text = _transaction.Date.ToString("d");
         if(_transaction.RepeatInterval != TransactionRepeatInterval.Never)

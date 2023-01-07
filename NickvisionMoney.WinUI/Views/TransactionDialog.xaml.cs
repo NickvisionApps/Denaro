@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -87,7 +88,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
-        BtnColor.SelectedColor = (Windows.UI.Color)(ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!);
+        BtnColor.SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
     }
