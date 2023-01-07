@@ -35,15 +35,25 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Checking"]);
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Savings"]);
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Business"]);
-        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         CmbDefaultTransactionType.Header = _controller.Localizer["DefaultTransactionType", "Field"];
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Income"]);
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Expense"]);
+        LblSystemCurrencyDescription.Text = _controller.Localizer["ReportedCurrency"];
+        LblSystemCurrency.Text = _controller.ReportedCurrencyString;
+        TglUseCustomCurrency.OffContent = _controller.Localizer["UseCustomCurrency", "Field"];
+        TglUseCustomCurrency.OnContent = _controller.Localizer["UseCustomCurrency", "Field"];
+        TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
+        TxtCustomSymbol.PlaceholderText = _controller.Localizer["CustomCurrencySymbol", "Placeholder"];
+        TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
+        TxtCustomCode.PlaceholderText = _controller.Localizer["CustomCurrencyCode", "Placeholder"];
+        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
         CmbDefaultTransactionType.SelectedIndex = (int)_controller.Metadata.DefaultTransactionType;
+        TglUseCustomCurrency.IsOn = _controller.Metadata.UseCustomCurrency;
         TxtName_TextChanged(null, null);
+        TglUseCustomCurrency_Toggled(null, new RoutedEventArgs());
     }
 
     /// <summary>
@@ -67,7 +77,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         }
         else if (result == ContentDialogResult.Primary)
         {
-            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, false, null, null, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
+            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, null, null, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
             if (checkStatus != AccountMetadataCheckStatus.Valid)
             {
                 //Reset UI
@@ -134,4 +144,23 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="sender">object?</param>
     /// <param name="e">SelectionChangedEventArgs</param>
     private void CmbAccountType_SelectionChanged(object? sender, SelectionChangedEventArgs e) => BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(_controller.GetColorForAccountType((AccountType)CmbAccountType.SelectedIndex))!);
+
+    /// <summary>
+    /// Occurs when the use custom currency toggle is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void TglUseCustomCurrency_Toggled(object? sender, RoutedEventArgs e)
+    {
+        if (TglUseCustomCurrency.IsOn)
+        {
+            TxtCustomSymbol.IsEnabled = true;
+            TxtCustomCode.IsEnabled = true;
+        }
+        else
+        {
+            TxtCustomSymbol.IsEnabled = false;
+            TxtCustomCode.IsEnabled = false;
+        }
+    }
 }

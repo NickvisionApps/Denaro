@@ -12,7 +12,7 @@
 
     <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="10" Width="100" Height="100" CornerRadius="20">
+            <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="0,10,0,10" Width="100" Height="100" CornerRadius="20">
                 <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
             </Border>
 
@@ -29,7 +29,24 @@
                 <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
             </Grid>
 
-            <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+            <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+            <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+
+            <ToggleSwitch x:Name="TglUseCustomCurrency" Toggled="TglUseCustomCurrency_Toggled"/>
+
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="1"/>
+
+                <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3"/>
+            </Grid>
+
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>
