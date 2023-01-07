@@ -279,7 +279,7 @@ public sealed partial class MainWindow : Window
         {
             var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
             var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255 * 0.0722;
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
             var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
             var typeBox = new Border()
             {
