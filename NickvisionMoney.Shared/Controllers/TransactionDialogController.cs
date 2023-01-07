@@ -116,7 +116,7 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
                     image = await Image.LoadAsync(receiptPath);
                 }
@@ -208,7 +208,7 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
                     Transaction.Receipt = Image.Load(receiptPath);
                 }
