@@ -305,10 +305,7 @@ public partial class TransactionDialog
             _rowGroup.SetSelected((uint)_controller.Transaction.GroupId);
         }
         var transactionColor = new Color();
-        if(!gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA))
-        {
-            gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
-        }
+        gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
         _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
         _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);

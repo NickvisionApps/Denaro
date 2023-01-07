@@ -62,7 +62,7 @@ public class Account : IDisposable
     public Account(string path)
     {
         Path = path;
-        Metadata = new AccountMetadata(Path, AccountType.Checking);
+        Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         NeedsFirstTimeSetup = true;

@@ -87,7 +87,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
-        BtnColor.SelectedColor = (Windows.UI.Color)(ColorHelpers.FromRGBA(_controller.Transaction.RGBA) ?? ColorHelpers.FromRGBA(_controller.TransactionDefaultColor)!);
+        BtnColor.SelectedColor = (Windows.UI.Color)(ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!);
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
     }

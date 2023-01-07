@@ -288,7 +288,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, Localizer);
     }
 
     /// <summary>
@@ -303,7 +303,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, Localizer);
     }
 
     /// <summary>

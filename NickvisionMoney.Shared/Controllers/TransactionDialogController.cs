@@ -49,10 +49,6 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
-    /// A default color for the transaction
-    /// </summary>
-    public string TransactionDefaultColor { get; init; }
-    /// <summary>
     /// The orioginal repeat interval of a transaction
     /// </summary>
     public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
@@ -62,16 +58,21 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
+    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, Localizer localizer)
     {
         OriginalRepeatInterval = transaction.RepeatInterval;
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
         Accepted = false;
-        TransactionDefaultColor = transactionDefaultColor;
+        if(Transaction.Amount == 0m) //new transaction
+        {
+            Transaction.Type = transactionDefaultType;
+            Transaction.RGBA = transactionDefaultColor;
+        }
     }
 
     /// <summary>
