@@ -138,6 +138,10 @@ public class AccountViewController
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
                 culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? "";
             }
+            else
+            {
+                culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
+            }
             return culture;
         }
     }
