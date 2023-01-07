@@ -205,7 +205,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
         _flowBoxStatusButtons.Append(_btnOpenAccount);
         //Drag Label
-        _lblDrag = Gtk.Label.New(_controller.Localizer["DragLabel"]);
+        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
         _lblDrag.AddCssClass("dim-label");
         _lblDrag.SetWrap(true);
         _lblDrag.SetJustify(Gtk.Justification.Center);
