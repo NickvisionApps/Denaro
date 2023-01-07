@@ -14,38 +14,46 @@
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,10,10,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
             <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton x:Name="BtnNewTransaction" Click="NewTransaction">
+                    <AppBarButton x:Name="BtnNew">
                         <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
                         </AppBarButton.Icon>
 
-                        <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control" Key="N"/>
-                        </AppBarButton.KeyboardAccelerators>
+                        <AppBarButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem x:Name="MenuNewTransaction" Click="NewTransaction">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="N"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+
+                                <MenuFlyoutItem x:Name="MenuNewGroup" Click="NewGroup">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+
+                                <MenuFlyoutItem x:Name="MenuTransferMoney" Click="TransferMoney">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="T"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
                     </AppBarButton>
-
-                    <AppBarButton x:Name="BtnNewGroup" Click="NewGroup">
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
-                        </AppBarButton.Icon>
-
-                        <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
-                        </AppBarButton.KeyboardAccelerators>
-                    </AppBarButton>
-
-                    <AppBarSeparator/>
-
-                    <AppBarButton x:Name="BtnTransferMoney" Click="TransferMoney">
-                        <AppBarButton.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
-                        </AppBarButton.Icon>
-
-                        <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control" Key="T"/>
-                        </AppBarButton.KeyboardAccelerators>
-                    </AppBarButton>
-
+                    
                     <AppBarSeparator/>
 
                     <AppBarButton x:Name="BtnImportFromFile" Click="ImportFromFile">
@@ -176,7 +184,7 @@
                         <Grid>
                             <Grid.ContextFlyout>
                                 <MenuFlyout>
-                                    <MenuFlyoutItem x:Name="MenuNewGroup" Click="NewGroup">
+                                    <MenuFlyoutItem x:Name="MenuContextNewGroup" Click="NewGroup">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
                                         </MenuFlyoutItem.Icon>
@@ -205,7 +213,7 @@
                     <nickvision:ViewStackPage PageName="Transactions">
                         <nickvision:ViewStackPage.ContextFlyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem x:Name="MenuNewTransaction" Click="NewTransaction">
+                                <MenuFlyoutItem x:Name="MenuContextNewTransaction" Click="NewTransaction">
                                     <MenuFlyoutItem.Icon>
                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
                                     </MenuFlyoutItem.Icon>
@@ -217,7 +225,7 @@
 
                                 <MenuFlyoutSeparator/>
 
-                                <MenuFlyoutItem x:Name="MenuTransferMoney" Click="TransferMoney">
+                                <MenuFlyoutItem x:Name="MenuContextTransferMoney" Click="TransferMoney">
                                     <MenuFlyoutItem.Icon>
                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
                                     </MenuFlyoutItem.Icon>

@@ -40,16 +40,13 @@ public sealed partial class AccountView : UserControl
         _initializeWithWindow = initializeWithWindow;
         _isAccountLoading = false;
         //Localize Strings
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
-        BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
-        ToolTipService.SetToolTip(BtnNewTransaction, _controller.Localizer["NewTransaction", "Tooltip"]);
-        MenuNewTransaction.Text = _controller.Localizer["NewTransaction"];
-        BtnNewGroup.Label = _controller.Localizer["NewGroup"];
-        ToolTipService.SetToolTip(BtnNewGroup, _controller.Localizer["NewGroup", "Tooltip"]);
-        MenuNewGroup.Text = _controller.Localizer["NewGroup"];
-        BtnTransferMoney.Label = _controller.Localizer["TransferMoney"];
-        ToolTipService.SetToolTip(BtnTransferMoney, _controller.Localizer["TransferMoney", "Tooltip"]);
-        MenuTransferMoney.Text = _controller.Localizer["TransferMoney"];
+        BtnNew.Label = _controller.Localizer["New"];
+        MenuNewTransaction.Text = _controller.Localizer["Transaction"];
+        MenuContextNewTransaction.Text = _controller.Localizer["NewTransaction"];
+        MenuNewGroup.Text = _controller.Localizer["Group"];
+        MenuContextNewGroup.Text = _controller.Localizer["NewGroup"];
+        MenuTransferMoney.Text = _controller.Localizer["Transfer"];
+        MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
@@ -60,6 +57,7 @@ public sealed partial class AccountView : UserControl
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
         BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
+        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
