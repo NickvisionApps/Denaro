@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
@@ -12,6 +13,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
@@ -275,14 +277,27 @@ public sealed partial class MainWindow : Window
         ListRecentAccounts.Items.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255 * 0.0722;
             var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
-            actionRow.Children.Insert(0, new InfoBadge()
+            var typeBox = new Border()
             {
-                Width = 30,
-                Height = 30,
-                Margin = new Thickness(0,0,10,0),
-                Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(_controller.GetColorForAccountType(recentAccount.Type))!)
-            });
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!),
+                CornerRadius = new CornerRadius(12)
+            };
+            var typeLabel = new TextBlock()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(30,0,30,0),
+                Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black),
+                Text = _controller.Localizer["AccountType", recentAccount.Type.ToString()]
+            };
+            typeBox.Child = typeLabel;
+            DockPanel.SetDock(typeBox, Dock.Right);
+            actionRow.Children.Add(typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
         ViewStackRecents.ChangePage(_controller.RecentAccounts.Count > 0 ? "Recents" : "NoRecents");
