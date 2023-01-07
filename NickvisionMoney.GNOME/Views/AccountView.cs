@@ -103,6 +103,7 @@ public partial class AccountView
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
+    private readonly Action<string> _updateSubtitle;
 
     /// <summary>
     /// The Page widget
@@ -116,15 +117,17 @@ public partial class AccountView
     /// <param name="parentWindow">MainWindow</param>
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
+    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle)
     {
+        _controller = controller;
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
-        _controller = controller;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
-        _groupRows = new List<GroupRow> {};
-        _transactionRows = new List<TransactionRow> {};
+        _groupRows = new List<GroupRow>();
+        _transactionRows = new List<TransactionRow>();
+        _updateSubtitle = updateSubtitle;
         //Register Controller Events
         _controller.AccountInfoChanged += OnAccountInfoChanged;
         //Flap
@@ -503,6 +506,7 @@ public partial class AccountView
             _isAccountLoading = true;
             //Overview
             Page.SetTitle(_controller.AccountTitle);
+            _updateSubtitle(_controller.AccountTitle);
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
             _lblExpense.SetLabel(_controller.AccountTodayExpenseString);

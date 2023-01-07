@@ -308,13 +308,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e) => _toastOverlay.AddToast(Adw.Toast.New(e.Message));
 
     /// <summary>
+    /// Updates the window's subtitle
+    /// </summary>
+    /// <param name="s">The new subtitle</param>
+    private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? s : "");
+
+    /// <summary>
     /// Occurs when an account is created or opened
     /// </summary>
     private void AccountAdded(object? sender, EventArgs e)
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle);
+        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
