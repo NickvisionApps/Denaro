@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Money-rekening</value>
+		<value>Nickvision Denaro-rekening</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Nieuwe rekening</value>
