@@ -400,6 +400,7 @@ public class AccountViewController
             Name = AccountTitle,
             Type = AccountType
         });
+        Configuration.Current.Save();
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
