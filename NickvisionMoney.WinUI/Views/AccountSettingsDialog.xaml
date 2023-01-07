@@ -12,7 +12,7 @@
 
     <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <Border x:Name="BorderId" HorizontalAlignment="Center" Width="100" Height="100" CornerRadius="20">
+            <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="10" Width="100" Height="100" CornerRadius="20">
                 <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
             </Border>
 
