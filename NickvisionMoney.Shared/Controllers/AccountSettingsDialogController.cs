@@ -64,10 +64,10 @@ public class AccountSettingsDialogController
     {
         return accountType switch
         {
-            AccountType.Checking => "rgb(129,61,156)",
-            AccountType.Savings => "rgb(53,132,228)",
-            AccountType.Business => "rgb(38,162,105)",
-            _ => "rgb(53,132,228)"
+            AccountType.Checking => Configuration.Current.AccountCheckingColor,
+            AccountType.Savings => Configuration.Current.AccountSavingsColor,
+            AccountType.Business => Configuration.Current.AccountBusinessColor,
+            _ => Configuration.Current.AccountSavingsColor
         };
     }
 

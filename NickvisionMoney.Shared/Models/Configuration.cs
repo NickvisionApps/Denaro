@@ -42,6 +42,18 @@ public class Configuration
     /// The default color of a transfer
     /// </summary>
     public string TransferDefaultColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Checking type
+    /// </summary>
+    public string AccountCheckingColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Savings type
+    /// </summary>
+    public string AccountSavingsColor { get; set; }
+    /// <summary>
+    /// The color of accounts with Business type
+    /// </summary>
+    public string AccountBusinessColor { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -63,6 +75,9 @@ public class Configuration
         RecentAccount3 = "";
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
+        AccountCheckingColor = "rgb(129,61,156)";
+        AccountSavingsColor = "rgb(53,132,228)";
+        AccountBusinessColor = "rgb(38,162,105)";
     }
 
     /// <summary>
