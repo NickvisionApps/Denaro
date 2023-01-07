@@ -33,17 +33,23 @@ public class TransferDialogController
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+    /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString { get; init; }
 
     /// <summary>
     /// Constructs a TransferDialogController
     /// </summary>
     /// <param name="transfer">The Transfer model</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransferDialogController(Transfer transfer, Localizer localizer)
+    public TransferDialogController(Transfer transfer, CultureInfo culture, Localizer localizer)
     {
         Localizer = localizer;
         Transfer = transfer;
         Accepted = false;
+        CultureForNumberString = culture;
     }
 
     /// <summary>
@@ -61,7 +67,7 @@ public class TransferDialogController
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency);
+            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString);
         }
         catch
         {

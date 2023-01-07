@@ -850,6 +850,11 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     private bool ExportToPDF(string path)
     {
+        var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+        if (Metadata.UseCustomCurrency)
+        {
+            culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+        }
         Document.Create(container =>
         {
             //Page 1
@@ -895,7 +900,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
                             tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
                             tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C"));
+                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
                             i++;
                         }
                     });

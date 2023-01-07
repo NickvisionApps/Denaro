@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Globalization;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
@@ -37,9 +38,10 @@ public sealed partial class GroupRow : UserControl
     /// Constructs a GroupRow
     /// </summary>
     /// <param name="group">The Group model to represent</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter on the row should be active</param>
-    public GroupRow(Group group, Localizer localizer, bool filterActive)
+    public GroupRow(Group group, CultureInfo culture, Localizer localizer, bool filterActive)
     {
         InitializeComponent();
         _group = group;
@@ -63,7 +65,7 @@ public sealed partial class GroupRow : UserControl
         LblName.Text = _group.Name;
         LblDescription.Visibility = string.IsNullOrEmpty(_group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = _group.Description;
-        LblAmount.Text = _group.Balance.ToString("C");
+        LblAmount.Text = _group.Balance.ToString("C", culture);
         LblAmount.Foreground = _group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 

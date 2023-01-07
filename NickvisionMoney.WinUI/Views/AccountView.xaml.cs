@@ -133,7 +133,7 @@ public sealed partial class AccountView : UserControl
             //Groups
             ListGroups.Items.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
             ListGroups.Items.Add(ungroupedRow);
             //Other Group Rows
@@ -141,7 +141,7 @@ public sealed partial class AccountView : UserControl
             groups.Sort();
             foreach (var group in groups)
             {
-                var groupRow = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
                 groupRow.DeleteTriggered += DeleteGroup;
                 groupRow.FilterChanged += UpdateGroupFilter;
@@ -170,7 +170,7 @@ public sealed partial class AccountView : UserControl
                 {
                     foreach (var transaction in filteredTransactions)
                     {
-                        var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+                        var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)

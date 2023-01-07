@@ -510,7 +510,7 @@ public partial class AccountView
             }
             _groupRows.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
             ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
             _grpGroups.Add(ungroupedRow);
@@ -520,7 +520,7 @@ public partial class AccountView
             groups.Sort();
             foreach (var group in groups)
             {
-                var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 row.EditTriggered += EditGroup;
                 row.DeleteTriggered += DeleteGroup;
                 row.FilterChanged += UpdateGroupFilter;
@@ -545,7 +545,7 @@ public partial class AccountView
                     _scrollTransactions.SetVisible(true);
                     foreach (var transaction in filteredTransactions)
                     {
-                        var row = new TransactionRow(transaction, _controller.Localizer);
+                        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
                         if (_controller.SortFirstToLast)

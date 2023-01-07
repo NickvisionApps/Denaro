@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Globalization;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
@@ -38,9 +39,10 @@ public sealed partial class TransactionRow : UserControl
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction model to represent</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="defaultColor">The default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Color defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo culture, Color defaultColor, Localizer localizer)
     {
         InitializeComponent();
         _transaction = transaction;
@@ -68,7 +70,7 @@ public sealed partial class TransactionRow : UserControl
         {
             LblDescription.Text += $"\nRepeat Interval: {_transaction.RepeatInterval}";
         }
-        LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C")}";
+        LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C", culture)}";
         LblAmount.Foreground = _transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 

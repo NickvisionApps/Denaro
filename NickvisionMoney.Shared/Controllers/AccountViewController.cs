@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -46,7 +47,7 @@ public class AccountViewController
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => _account.TodayTotal.ToString("C");
+    public string AccountTodayTotalString => _account.TodayTotal.ToString("C", CultureForNumberString);
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -54,7 +55,7 @@ public class AccountViewController
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C");
+    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C", CultureForNumberString);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -62,7 +63,7 @@ public class AccountViewController
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C");
+    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
     /// <summary>
     /// The groups of the account for today
     /// </summary>
@@ -113,6 +114,23 @@ public class AccountViewController
     /// Finalizes an AccountViewController
     /// </summary>
     ~AccountViewController() => _account.Dispose();
+
+    /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString
+    {
+        get
+        {
+            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            if (_account.Metadata.UseCustomCurrency)
+            {
+                culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? CultureInfo.CurrentCulture.Name;
+            }
+            return culture;
+        }
+    }
 
     /// <summary>
     /// Whether or not to show the groups section on the account view
@@ -306,7 +324,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -321,7 +339,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -357,7 +375,7 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
 
     /// <summary>
     /// Updates the metadata of the account
