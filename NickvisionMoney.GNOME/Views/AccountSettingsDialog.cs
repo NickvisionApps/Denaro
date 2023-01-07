@@ -202,6 +202,11 @@ public partial class AccountSettingsDialog
         return _controller.Accepted;
     }
 
+    /// <summary>
+    /// Occurs when a new name is applied to Adw.EntryRow
+    /// </summary>
+    /// <param name="sender">Adw.EntryRow</param>
+    /// <param name="e">EventArgs</param>
     private void OnApplyName(Adw.EntryRow sender, EventArgs e)
     {
         if(_rowName.GetText().Length == 0)
@@ -237,6 +242,9 @@ public partial class AccountSettingsDialog
         }
     }
 
+    /// <summary>
+    /// Occurs when the account type selection in changed
+    /// </summary>
     private void OnAccountTypeChanged()
     {
         _btnAvatar.GetStyleContext().RemoveProvider(_btnAvatarCssProvider);
