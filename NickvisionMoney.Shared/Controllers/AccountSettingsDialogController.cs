@@ -59,7 +59,7 @@ public class AccountSettingsDialogController
         {
             AccountType.Checking => "rgb(53,132,228)",
             AccountType.Savings => "rgb(38,162,105)",
-            AccountType.Business => "rgb(36,31,49)",
+            AccountType.Business => "rgb(99,69,44)",
             _ => "rgb(53,132,228)"
         };
     }
