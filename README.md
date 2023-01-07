@@ -40,7 +40,7 @@ Once all changes to your translated file are made, make sure the file is in the 
 # GNOME Screenshots
 ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
 ![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
-<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='200px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='200px'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='200px'></p>
+<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='200px'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='200px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='200px'></p>
 
 # WinUI Screenshots
 ![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
