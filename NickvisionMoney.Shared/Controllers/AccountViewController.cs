@@ -130,7 +130,7 @@ public class AccountViewController
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? CultureInfo.CurrentCulture.Name;
+                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? "";
             }
             return culture;
         }
