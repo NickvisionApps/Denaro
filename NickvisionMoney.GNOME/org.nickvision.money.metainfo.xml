@@ -48,7 +48,7 @@
         <p>- Money has been completely rewritten in C# and now has a new name: Denaro! With the C# rewrite, there is now a new version of Denaro available on Windows!</p>
 		<p>- Added an Account Settings dialog to allow users to customize their accounts better</p>
         <p>- Added an "Ungrouped" row to the groups section to allow filtering transactions that don't belong to a group</p>
-        <p>- Added the ability to attach a jpg/pdf of a receipt to a transaction</p>
+        <p>- Added the ability to attach a jpg/png/pdf of a receipt to a transaction</p>
         <p>- Reworked the repeat transaction system and added support for a biweekly interval</p>
 		<p>- Added the ability to export an account as a PDF</p>
         <p>- Added the ability to hide the groups section</p>
@@ -56,7 +56,7 @@
         <p xml:lang="it">- Money è stato riscritto completamente in C# e ha ricevuto un nome nuovo: Denaro! Con la conversione a C#, arriva una versione di Denaro per Windows!</p>
 		<p xml:lang="it">- Aggiunta una finestra per personalizzare gli account</p>
         <p xml:lang="it">- Aggiunta la possibilità di creare transazioni senza un gruppo</p>
-        <p xml:lang="it">- Aggiunta la possibilità di aggiungere un pdf/jpg come ricevuta di una transazione</p>
+        <p xml:lang="it">- Aggiunta la possibilità di aggiungere un jpg/png/pdf come ricevuta di una transazione</p>
         <p xml:lang="it">- La funzionalità delle transazioni ricorrenti è stata rielaborata e supporta transazioni bisettimanali</p>
 		<p xml:lang="it">- Aggiunta la possibilità di esportare un account come PDF</p>
         <p xml:lang="it">- Aggiunta la possibilità di nascondere la sezione dei gruppi</p>
