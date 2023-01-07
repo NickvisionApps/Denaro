@@ -32,9 +32,13 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
+    /// Whether or not an account needs to be setup for the first time
+    /// </summary>
+    public bool AccountNeedsFirstTimeSetup => _account.NeedsFirstTimeSetup;
+    /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
-    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
+    public string AccountTitle => _account.Metadata.Name;
     /// <summary>
     /// The total amount of the account for today
     /// </summary>
@@ -266,6 +270,12 @@ public class AccountViewController
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The NotificationSeverity of the notification</param>
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
+
+    /// <summary>
+    /// Creates a new AccountSettingsDialogController
+    /// </summary>
+    /// <returns>The new AccountSettingsDialogController</returns>
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController

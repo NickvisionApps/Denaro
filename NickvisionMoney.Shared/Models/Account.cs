@@ -40,7 +40,7 @@ public class Account : IDisposable
     /// <summary>
     /// Whether or not an account needs to be setup for the first time
     /// </summary>
-    public bool NeedsFirstAcountSetup { get; init; }
+    public bool NeedsFirstTimeSetup { get; init; }
 
     /// <summary>
     /// The income amount of the account for today
@@ -65,7 +65,7 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(Path, AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        NeedsFirstAcountSetup = true;
+        NeedsFirstTimeSetup = true;
         //Open Database
         _database = new SqliteConnection(new SqliteConnectionStringBuilder()
         {
@@ -134,7 +134,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
             Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
-            NeedsFirstAcountSetup = false;
+            NeedsFirstTimeSetup = false;
         }
         else
         {
