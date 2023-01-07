@@ -26,6 +26,10 @@ public class Account : IDisposable
     /// </summary>
     public string Path { get; init; }
     /// <summary>
+    /// The metadata of the account
+    /// </summary>
+    public AccountMetadata Metadata { get; init; }
+    /// <summary>
     /// A map of groups in the account
     /// </summary>
     public Dictionary<uint, Group> Groups { get; init; }
@@ -33,6 +37,10 @@ public class Account : IDisposable
     /// A map of transactions in the account
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
+    /// <summary>
+    /// Whether or not an account needs to be setup for the first time
+    /// </summary>
+    public bool NeedsFirstAcountSetup { get; init; }
 
     /// <summary>
     /// The income amount of the account for today
@@ -54,8 +62,10 @@ public class Account : IDisposable
     public Account(string path)
     {
         Path = path;
+        Metadata = new AccountMetadata(Path, AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
+        NeedsFirstAcountSetup = true;
         //Open Database
         _database = new SqliteConnection(new SqliteConnectionStringBuilder()
         {
@@ -63,10 +73,15 @@ public class Account : IDisposable
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ConnectionString);
         _database.Open();
-        //Setup Tables
+        //Setup Metadata Table
+        var cmdTableMetadata = _database.CreateCommand();
+        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER)";
+        cmdTableMetadata.ExecuteNonQuery();
+        //Setup Groups Table
         var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
+        //Setup Transactions Table
         var cmdTableTransactions = _database.CreateCommand();
         cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
@@ -105,6 +120,34 @@ public class Account : IDisposable
             cmdTableTransactionsUpdate5.ExecuteNonQuery();
         }
         catch { }
+        //Get Metadata
+        var cmdQueryMetadata = _database.CreateCommand();
+        cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
+        using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
+        if(readQueryMetadata.HasRows)
+        {
+            readQueryMetadata.Read();
+            Metadata.Name = readQueryMetadata.GetString(1);
+            Metadata.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
+            Metadata.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
+            Metadata.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
+            Metadata.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
+            Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
+            Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
+            NeedsFirstAcountSetup = false;
+        }
+        else
+        {
+            var cmdAddMetadata = _database.CreateCommand();
+            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList)";
+            cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
+            cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
+            cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
+            cmdAddMetadata.Parameters.AddWithValue("$customSymbol", Metadata.CustomCurrencySymbol ?? "");
+            cmdAddMetadata.Parameters.AddWithValue("$customCode", Metadata.CustomCurrencyCode ?? "");
+            cmdAddMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)Metadata.DefaultTransactionType);
+            cmdAddMetadata.Parameters.AddWithValue("$showGroupsList", Metadata.ShowGroupsList);
+        }
         //Get Groups
         var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
@@ -214,6 +257,36 @@ public class Account : IDisposable
         {
             pair.Value.Dispose();
         }
+    }
+
+    /// <summary>
+    /// Updates the metadata of the account
+    /// </summary>
+    /// <param name="metadata">The new metadata</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> UpdateMetadataAsync(AccountMetadata metadata)
+    {
+        var cmdUpdateMetadata = _database.CreateCommand();
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList WHERE id = 0";
+        cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
+        cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
+        cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
+        cmdUpdateMetadata.Parameters.AddWithValue("$customSymbol", metadata.CustomCurrencySymbol ?? "");
+        cmdUpdateMetadata.Parameters.AddWithValue("$customCode", metadata.CustomCurrencyCode ?? "");
+        cmdUpdateMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)metadata.DefaultTransactionType);
+        cmdUpdateMetadata.Parameters.AddWithValue("$showGroupsList", metadata.ShowGroupsList);
+        if (await cmdUpdateMetadata.ExecuteNonQueryAsync() > 0)
+        {
+            Metadata.Name = metadata.Name;
+            Metadata.AccountType = metadata.AccountType;
+            Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
+            Metadata.CustomCurrencySymbol = metadata.CustomCurrencySymbol;
+            Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
+            Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
+            Metadata.ShowGroupsList = metadata.ShowGroupsList;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
