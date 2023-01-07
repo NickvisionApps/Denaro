@@ -112,6 +112,23 @@ public sealed partial class MainWindow : Window
     public void InitializeWithWindow(object target) => WinRT.Interop.InitializeWithWindow.Initialize(target, _hwnd);
 
     /// <summary>
+    /// Updates a NavViewItem's title
+    /// </summary>
+    /// <param name="path">The path of the nav view item</param>
+    /// <param name="title">The new title</param>
+    private void UpdateNavViewItemTitle(string path, string title)
+    {
+        foreach(NavigationViewItem navViewItem in NavView.MenuItems)
+        {
+            if((string)ToolTipService.GetToolTip(navViewItem) == path)
+            {
+                navViewItem.Content = title;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
     /// Occurs when the window is activated
     /// </summary>
     /// <param name="sender">object</param>
@@ -196,7 +213,7 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], InitializeWithWindow);
+            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], UpdateNavViewItemTitle, InitializeWithWindow);
         }
         else if (pageName == "Settings")
         {

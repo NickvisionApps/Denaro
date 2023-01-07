@@ -22,6 +22,7 @@ namespace NickvisionMoney.WinUI.Views;
 public sealed partial class AccountView : UserControl
 {
     private readonly AccountViewController _controller;
+    private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
     private bool _isAccountLoading;
 
@@ -29,11 +30,13 @@ public sealed partial class AccountView : UserControl
     /// Constructs an AccountView
     /// </summary>
     /// <param name="controller">The AccountViewController</param>
+    /// <param name="updateNavViewItemTitle">The Action<string, string> callback for updating a nav view item title</param>
     /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
-    public AccountView(AccountViewController controller, Action<object> initializeWithWindow)
+    public AccountView(AccountViewController controller, Action<string, string> updateNavViewItemTitle, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
         _isAccountLoading = false;
         //Localize Strings
@@ -124,6 +127,7 @@ public sealed partial class AccountView : UserControl
         {
             _isAccountLoading = true;
             //Overview
+            _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
             LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
