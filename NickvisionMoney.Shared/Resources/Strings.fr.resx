@@ -418,7 +418,7 @@ Cette action est irréversible.</value>
 		<value>Couleur</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value />
+		<value>Reçu</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
 		<value>Compte destinataire</value>
@@ -472,7 +472,7 @@ Cette action est irréversible.</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
+		<value>Veuillez corriger les erreurs ci-dessus.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Quoi de neuf ?</value>
@@ -583,5 +583,11 @@ les transactions individuelles générées seront modifiables.</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
     <value>Date de fin de répétition</value>
+  </data>
+  <data name="DeleteExisting" xml:space="preserve">
+    <value>Supprimer l'existant</value>
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+    <value>Dissocier l'existant</value>
   </data>
 </root>
