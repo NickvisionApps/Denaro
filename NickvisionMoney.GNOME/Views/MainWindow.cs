@@ -29,6 +29,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nuint g_file_get_type();
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
+
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -500,7 +503,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsRows.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(recentAccount);
+            var row = CreateRecentAccountRow(recentAccount, false);
             _groupRecentAccounts.Add(row);
             _listRecentAccountsRows.Add(row);
         }
@@ -518,7 +521,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsOnStartRows.Clear();
         foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(recentAccount);
+            var row = CreateRecentAccountRow(recentAccount, true);
             _grpRecentAccountsOnStart.Add(row);
             _listRecentAccountsOnStartRows.Add(row);
         }
@@ -528,15 +531,35 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Creates a row for recent accounts lists
     /// </summary>
     /// <param name="accountPath">string</param>
-    private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount)
+    private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
         var row = Adw.ActionRow.New();
-        row.SetTitle(Path.GetFileName(recentAccount.Path));
+        row.SetTitle(recentAccount.Name);
         row.SetSubtitle(recentAccount.Path);
         var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
-        button.AddCssClass("wallet-button");
+        if(onStartScreen)
+        {
+            button.AddCssClass("wallet-button");
+            var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
+            var btnType = Gtk.Button.NewWithLabel(strType);
+            btnType.SetValign(Gtk.Align.Center);
+            var btnCssProvider = Gtk.CssProvider.New();
+            var btnCss = "#btnType { background-color: " + _controller.GetColorForAccountType(recentAccount.Type) + "; }" + char.MinValue;
+            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+            btnType.SetName("btnType");
+            btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
+            row.AddSuffix(btnType);
+        }
+        else
+        {
+            var btnCssProvider = Gtk.CssProvider.New();
+            var btnCss = "#btnWallet { background-color: " + _controller.GetColorForAccountType(recentAccount.Type) + "; }" + char.MinValue;
+            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+            button.SetName("btnWallet");
+            button.GetStyleContext().AddProvider(btnCssProvider, 800);
+        }
         button.OnClicked += (Gtk.Button sender, EventArgs e) => 
         {
             _popoverAccount.Popdown();
