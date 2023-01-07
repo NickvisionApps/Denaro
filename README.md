@@ -26,7 +26,7 @@
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
 ## Via Weblate
-Money is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
+Denaro is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
 
 ## Manually
 To start translating the app, fork the repository and clone it locally.
