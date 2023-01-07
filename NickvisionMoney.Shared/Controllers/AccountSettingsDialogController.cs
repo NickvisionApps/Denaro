@@ -49,23 +49,6 @@ public class AccountSettingsDialogController
     }
 
     /// <summary>
-    /// Gets a color for an account type
-    /// </summary>
-    /// <param name="accountType">The account type</param>
-    /// <returns>The rgb color for the account type</returns>
-    public string GetColorForAccountType(AccountType accountType)
-    {
-        return accountType switch
-        {
-            AccountType.Checking => "rgb(53,132,228)",
-            AccountType.Savings => "rgb(38,162,105)",
-            AccountType.Business => "rgb(36,31,49)",
-            _ => "rgb(53,132,228)"
-        };
-    }
-
-
-    /// <summary>
     /// Updates the Metadata object
     /// </summary>
     /// <param name="name">The new name of the account</param>
