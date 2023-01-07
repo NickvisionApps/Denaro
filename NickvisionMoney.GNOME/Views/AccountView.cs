@@ -118,7 +118,6 @@ public partial class AccountView
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
     public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
     {
-
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _controller = controller;
@@ -194,10 +193,12 @@ public partial class AccountView
         var menuActionsExportImport = Gio.Menu.New();
         menuActionsExportImport.AppendSubmenu(_controller.Localizer["ExportToFile"], menuActionsExport);
         menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
+        var menuActionsAccount = Gio.Menu.New();
+        menuActionsAccount.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
         menuActions.AppendSection(null, menuActionsExportImport);
-        menuActions.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
+        menuActions.AppendSection(null, menuActionsAccount);
         _btnMenuAccountActions.SetMenuModel(menuActions);
         _boxButtonsOverview.Append(_btnMenuAccountActions);
         //Button Reset Overview Filter
