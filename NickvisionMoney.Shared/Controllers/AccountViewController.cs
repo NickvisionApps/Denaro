@@ -360,6 +360,17 @@ public class AccountViewController
     public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), Localizer);
 
     /// <summary>
+    /// Updates the metadata of the account
+    /// </summary>
+    /// <param name="metadata">The new metadata</param>
+    /// <returns>True if successful, else false</returns>
+    public void UpdateMetadata(AccountMetadata metadata)
+    {
+        _account.UpdateMetadata(metadata);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
     /// </summary>
     /// <returns>True if AccountInfoChanged was triggered, else false</returns>
