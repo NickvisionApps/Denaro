@@ -563,6 +563,10 @@
 		<value>Business</value>
 	</data>
 
+	<data name="AccountType.Description" xml:space="preserve">
+		<value>This is only a useful label that doesn't affect how the app works.</value>
+	</data>
+
 	<data name="NotAvailable" xml:space="preserve">
 		<value>N/A</value>
 	</data>

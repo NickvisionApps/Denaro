@@ -93,6 +93,8 @@ public partial class AccountSettingsDialog
             }
         };
         _rowAccountType.SetTitle(_controller.Localizer["AccountType", "Field"]);
+        _rowAccountType.SetSubtitle(_controller.Localizer["AccountType", "Description"]);
+        _rowAccountType.SetSubtitleLines(4);
         _grpAccount.Add(_rowAccountType);
         //Default Transaction Type
         _btnIncome = Gtk.ToggleButton.NewWithLabel(_controller.Localizer["Income"]);
