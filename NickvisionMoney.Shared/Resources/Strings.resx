@@ -129,7 +129,7 @@
 
 	<!--MainWindow-->
 	<data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Money Account</value>
+		<value>Nickvision Denaro Account</value>
 	</data>
 
 	<data name="NewAccount" xml:space="preserve">
