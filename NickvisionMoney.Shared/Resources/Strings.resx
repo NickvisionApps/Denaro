@@ -566,6 +566,10 @@
 	<data name="NotAvailable" xml:space="preserve">
 		<value>N/A</value>
 	</data>
+
+	<data name="ReportedCurrency" xml:space="preserve">
+		<value>Your system reported that your currency is</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Name.Field" xml:space="preserve">
@@ -662,6 +666,26 @@
 
 	<data name="DefaultTransactionType.Field" xml:space="preserve">
 		<value>Default Transaction Type</value>
+	</data>
+
+	<data name="UseCustomCurrency.Field" xml:space="preserve">
+		<value>Use Custom Currency</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Field" xml:space="preserve">
+		<value>Currency Symbol</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+		<value>Enter symbol here</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Field" xml:space="preserve">
+		<value>Currency Code</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+		<value>Enter code here</value>
 	</data>
 	
 	<!--Settings-->

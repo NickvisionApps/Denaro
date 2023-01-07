@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System.Globalization;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -33,6 +34,11 @@ public class AccountSettingsDialogController
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+
+    /// <summary>
+    /// The system reported currency string (Ex: "$ (USD)")
+    /// </summary>
+    public string ReportedCurrencyString => $"{CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})";
 
     /// <summary>
     /// Creates an AccountSettingsDialogController
