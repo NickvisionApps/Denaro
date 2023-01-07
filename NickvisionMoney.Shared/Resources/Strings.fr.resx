@@ -289,19 +289,19 @@ Cette action est irréversible.</value>
 		<value>Transactions sans groupe</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value />
+		<value>{0} transaction importée depuis le fichier.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value />
+		<value>{0} transactions importées depuis le fichier.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value />
+		<value>Impossible d’importer des informations depuis le fichier. Type de fichier non pris en charge.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value />
+		<value>Compte exporté dans le fichier avec succès.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value />
+		<value>Impossible d’exporter le compte dans un fichier.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
 		<value>Transférer vers {0}</value>
@@ -335,22 +335,22 @@ Cette action est irréversible.</value>
 		<value>Jamais</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value />
+		<value>Quotidienne</value>
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
-		<value />
+		<value>Hebdomadaire</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value />
+		<value>Mensuel</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value />
+		<value>Trimestriel</value>
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
-		<value />
+		<value>Annuel</value>
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value />
+		<value>Bi-annuel</value>
   </data>
   <data name="View" xml:space="preserve">
 		<value>Voir</value>
@@ -366,68 +366,68 @@ Cette action est irréversible.</value>
 		<value>Transférer</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value />
+		<value>Un transfert d’argent créera dans ce compte une transaction dépensière avec le montant transféré, et une transaction de revenu dans le compte récipiendaire avec le montant transféré.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value />
+		<value>Aucun compte sélectionné</value>
   </data>
   <!--Fields-->
   <data name="Name.Field" xml:space="preserve">
-		<value />
+		<value>Nom</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value />
+		<value>Entrez le nom ici</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value />
+		<value>Nom (vide)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value />
+		<value>Nom (existe)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value />
+		<value>Description</value>
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value />
+		<value>Entrez une description ici</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value />
+		<value>Description (vide)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value />
+		<value>Montant</value>
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Entrez un montant ici</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value />
+		<value>Montant (invalide)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value />
+		<value>Date</value>
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value />
+		<value>Type</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value />
+		<value>Intervalle de répétition</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value />
+		<value>Groupe</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value />
+		<value>Couleur</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
 		<value />
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value />
+		<value>Compte destinataire</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sélectionnez une compte destinataire</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value />
+		<value>Compte destinataire (invalide)</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
@@ -461,10 +461,10 @@ Cette action est irréversible.</value>
 		<value>Couleur par défaut des transferts</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value />
+		<value>Un changement de ce paramètre ne sera uniquement appliqué qu’aux transactions nouvellement ajoutées.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value />
+		<value>Un changement de ce paramètre ne sera uniquement appliqué qu’aux nouveaux transferts.</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
@@ -502,10 +502,10 @@ Tout changement non sauvegardé sera perdu.</value>
   </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value>Menu du compte</value>
+		<value>Menu des comptes</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value />
+		<value>Afficher / masquer la barre latérale</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
 		<value>Menu principal</value>
@@ -514,7 +514,7 @@ Tout changement non sauvegardé sera perdu.</value>
 		<value>Récents</value>
   </data>
   <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value />
+		<value>Nouveau</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Fermer le compte</value>
@@ -568,5 +568,20 @@ les transactions individuelles générées seront modifiables.</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
     <value>Supprimer la source et les transactions générées</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+    <value>Bi-hebdomadaire</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+    <value>Pas de date de fin</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+    <value>Effacer la date de fin</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+    <value>Date de fin de répétition (invalide)</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+    <value>Date de fin de répétition</value>
   </data>
 </root>
