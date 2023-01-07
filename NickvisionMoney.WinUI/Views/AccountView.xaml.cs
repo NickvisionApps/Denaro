@@ -546,9 +546,17 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void AccountSettings(object? sender, RoutedEventArgs e)
+    private async void AccountSettings(object? sender, RoutedEventArgs e)
     {
-        
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController)
+        {
+            XamlRoot = Content.XamlRoot
+        };
+        if (await accountSettingsDialog.ShowAsync())
+        {
+
+        }
     }
 
     /// <summary>

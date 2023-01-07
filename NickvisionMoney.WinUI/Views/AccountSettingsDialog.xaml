@@ -1,0 +1,26 @@
+<ContentDialog
+    x:Class="NickvisionMoney.WinUI.Views.AccountSettingsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Primary">
+
+    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="6">
+            <Border x:Name="BorderId" HorizontalAlignment="Center" Width="100" Height="100" CornerRadius="20">
+                <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+            </Border>
+
+            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
+
+            <ComboBox x:Name="CmbAccountType" HorizontalAlignment="Stretch" SelectionChanged="CmbAccountType_SelectionChanged"/>
+
+            <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

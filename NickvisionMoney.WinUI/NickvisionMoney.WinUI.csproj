@@ -26,6 +26,7 @@
     <None Remove="Controls\TransactionRow.xaml" />
     <None Remove="Controls\ViewStack.xaml" />
     <None Remove="Controls\ViewStackPage.xaml" />
+    <None Remove="Views\AccountSettingsDialog.xaml" />
     <None Remove="Views\AccountView.xaml" />
     <None Remove="Views\GroupDialog.xaml" />
     <None Remove="Views\MainWindow.xaml" />
@@ -63,6 +64,11 @@
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\NickvisionMoney.Shared\NickvisionMoney.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\AccountSettingsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\TransferDialog.xaml">
