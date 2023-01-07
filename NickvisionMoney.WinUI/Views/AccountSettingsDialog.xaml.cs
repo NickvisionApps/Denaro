@@ -37,8 +37,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbAccountType.Items.Add(_controller.Localizer["AccountType", "Business"]);
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         CmbDefaultTransactionType.Header = _controller.Localizer["DefaultTransactionType", "Field"];
-        CmbDefaultTransactionType.Items.Add(_controller.Localizer["TransactionType", "Income"]);
-        CmbDefaultTransactionType.Items.Add(_controller.Localizer["TransactionType", "Expense"]);
+        CmbDefaultTransactionType.Items.Add(_controller.Localizer["Income"]);
+        CmbDefaultTransactionType.Items.Add(_controller.Localizer["Expense"]);
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;

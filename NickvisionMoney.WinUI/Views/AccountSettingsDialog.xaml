@@ -18,11 +18,18 @@
 
             <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
 
-            <ComboBox x:Name="CmbAccountType" HorizontalAlignment="Stretch" SelectionChanged="CmbAccountType_SelectionChanged"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="CmbAccountType" Grid.Column="0" HorizontalAlignment="Stretch" SelectionChanged="CmbAccountType_SelectionChanged"/>
+
+                <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+            </Grid>
 
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-
-            <ComboBox x:Name="CmbDefaultTransactionType" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>
