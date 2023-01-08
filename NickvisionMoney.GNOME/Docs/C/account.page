@@ -3,6 +3,8 @@
 	id="account">
 <info>
 	<link type="guide" xref="index"/>
+	<title type="link">🏦 Account</title>
+	<title type="text">Account</title>
 	<credit type="author">
 		<name>Fyodor Sobolev</name>
 	</credit>
@@ -10,7 +12,11 @@
 </info>
 
 <title>Account</title>
-<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>, which can be opened from Account Actions. This dialog also opens automatically after you create a new account.</p>
+<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>, which can be opened from <gui>Account Actions</gui>. This dialog also opens automatically after you create a new account.</p>
+<p>Each account is stored in a single <sys>*.nmoney</sys> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application.</p>
+<note style="warning">
+	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
+</note>
 
 <terms>
 	<item>
@@ -19,7 +25,7 @@
 	</item>
 	<item>
 		<title>Account Type</title>
-		<p>There are 3 account types available: Checking, Savings and Business. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="settings">settings</link>.</p>
+		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
 	</item>
 	<item>
 		<title>Default Transaction Type</title>
@@ -33,7 +39,7 @@
 			<item><p>If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number.</p></item>
 			<item><p>If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</em> and <em>1000,00</em> will be accepted as a valid number.</p></item>
 		</list>
-		<note style="warning">
+		<note style="advanced">
 			<p>On Linux it's possible to set different locales for system language and formats. <app>Denaro</app> will try to use formats locale, and in case of failure it will fallback to language locale. This behaviour is not considired a bug. In case of such failure, please use custom currency (see below).</p>
 		</note>
 	</item>
