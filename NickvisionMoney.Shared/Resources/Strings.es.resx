@@ -92,7 +92,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Cuenta bancaria de Nickvision</value>
+		<value>Cuenta Denaro de Nickvision</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Cuenta nueva</value>
@@ -583,5 +583,62 @@ las transacciones generadas en origen.</value>
 ¿Qué desea hacer con las transacciones generadas existentes?
 
 Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Configuración de la cuenta</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Mostrar</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Ahorros</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Se trata sólo de una etiqueta útil que no afecta al funcionamiento de la aplicación.</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Introduzca aquí el código</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Corriente</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/D</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Su sistema informó de que su moneda es</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Tipo de cuenta</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Usar moneda personalizada</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Tipo de transacción predeterminado</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Símbolo de moneda</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Introduzca aquí el símbolo</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Código de moneda</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Símbolo de moneda (vacío)</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Color de la cuenta corriente</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Color de la cuenta de ahorro</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Color de la cuenta de empresa</value>
   </data>
 </root>
