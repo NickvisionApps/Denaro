@@ -1,0 +1,17 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="configuration">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuration 🔧</title>
+	<title type="text">Configuraion</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+</page>
