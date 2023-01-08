@@ -43,7 +43,7 @@
 			<item><p>If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</em> and <em>1000,00</em> will be accepted as a valid number.</p></item>
 		</list>
 		<note style="advanced">
-			<p>On Linux it's possible to set different locales for system language and formats. <app>Denaro</app> will try to use formats locale, and in case of failure it will fallback to language locale. This behaviour is not considired a bug. In case of such failure, please use custom currency (see below).</p>
+			<p>On Linux it's possible to set different locales for system language and formats. <app>Denaro</app> will try to use formats locale, and in case of failure it will fallback to language locale. This behavior is not considered a bug. In case of such failure, please use custom currency (see below).</p>
 		</note>
 	</item>
 	<item>
