@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Money Account</value>
+		<value>Nickvision Denaro račun</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Novi račun</value>
@@ -589,5 +589,62 @@ Nove ponovljajuće transakcije generirat će se na temelju novog ponavljanja.</v
   </data>
   <data name="NoEndDate" xml:space="preserve">
     <value>Bez krajnjeg datuma</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Tekući</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Štedni</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Poslovni</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Standardna vrsta transakcije</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Koristi prilagođenu valutu</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Znak valute</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Znak valute (prazno)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Kôd valute</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Ovdje upiši kôd</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Boja poslovnog računa</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Prikaži</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Postavke računa</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Ovo je samo korisna oznaka koja ne utječe na rad aplikacije.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>--</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Tvoj sustav je prijavio da je tvoja valuta</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Vrsta računa</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Ovdje upiši znak</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Boja tekućeg računa</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Boja štednog računa</value>
   </data>
 </root>
