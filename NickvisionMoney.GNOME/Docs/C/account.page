@@ -8,12 +8,15 @@
 	<credit type="author">
 		<name>Fyodor Sobolev</name>
 	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Account</title>
-<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>, which can be opened from <gui>Account Actions</gui>. This dialog also opens automatically after you create a new account.</p>
-<p>Each account is stored in a single <sys>*.nmoney</sys> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application.</p>
+<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
+<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application.</p>
 <note style="warning">
 	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
 </note>
