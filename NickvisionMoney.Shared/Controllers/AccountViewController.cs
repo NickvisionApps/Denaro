@@ -276,14 +276,14 @@ public class AccountViewController
             }
             filteredTransactions.Sort((a, b) =>
             {
-                var compareTo = a.CompareTo(b);
-                if(!SortFirstToLast)
+                var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
                 {
-                    if(compareTo == 1)
+                    if (compareTo == 1)
                     {
                         compareTo = -1;
                     }
-                    else if(compareTo == -1)
+                    else if (compareTo == -1)
                     {
                         compareTo = 1;
                     }
