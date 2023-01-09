@@ -590,4 +590,25 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="DisassociateExisting" xml:space="preserve">
     <value>Dissocier l'existant</value>
   </data>
+  <data name="Show" xml:space="preserve">
+    <value>Montrer</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Chèques</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Épargne</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Type de compte</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Type de transaction par défaut</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Symbole monétaire</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Paramètres du compte</value>
+  </data>
 </root>
