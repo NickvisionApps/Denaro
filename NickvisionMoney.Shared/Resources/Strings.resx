@@ -701,6 +701,10 @@
 	</data>
 
 	<!--PDF-->
+	<data name="Generated.PDF" xml:space="preserve">
+		<value>Generated: {0}</value>
+	</data>
+
 	<data name="GroupName.PDF" xml:space="preserve">
 		<value>Group Name</value>
 	</data>

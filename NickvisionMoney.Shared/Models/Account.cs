@@ -888,6 +888,8 @@ public class Account : IDisposable
                     page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
                     {
                         col.Spacing(15);
+                        //Generated Date
+                        col.Item().Text(string.Format(localizer["Generated", "PDF"], DateTime.Now.ToString("g")));
                         //Overview
                         col.Item().Table(tbl =>
                         {
