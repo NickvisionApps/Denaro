@@ -899,16 +899,22 @@ public class Account : IDisposable
                                 x.Cell().Text("Repeat Interval").SemiBold();
                                 x.Cell().AlignRight().Text("Amount").SemiBold();
                             });
-                            var i = 0;
                             foreach (var pair in Transactions)
                             {
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Date.ToString("d"));
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
-                                i++;
+                                var hex = "#78"; //120
+                                var rgba = pair.Value.RGBA;
+                                rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                                rgba = rgba.Remove(rgba.Length - 1);
+                                var fields = rgba.Split(',');
+                                hex += byte.Parse(fields[0]).ToString("X2");
+                                hex += byte.Parse(fields[1]).ToString("X2");
+                                hex += byte.Parse(fields[2]).ToString("X2");
+                                tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
+                                tbl.Cell().Background(hex).Text(pair.Value.Description);
+                                tbl.Cell().Background(hex).Text(pair.Value.Type.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval.ToString());
+                                tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
                             }
                         });
                     //Footer
