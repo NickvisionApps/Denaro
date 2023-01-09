@@ -5,7 +5,6 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -100,7 +99,7 @@ public class TransactionDialogController : IDisposable
     public void Dispose()
     {
         var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (Path.Exists(jpgPath))
+        if (File.Exists(jpgPath))
         {
             File.Delete(jpgPath);
         }
@@ -115,7 +114,7 @@ public class TransactionDialogController : IDisposable
         var image = default(Image);
         if (receiptPath != null)
         {
-            if (Path.Exists(receiptPath))
+            if (File.Exists(receiptPath))
             {
                 if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {

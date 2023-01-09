@@ -705,6 +705,10 @@
 		<value>Group Name</value>
 	</data>
 
+	<data name="Receipts.PDF" xml:space="preserve">
+		<value>Receipts</value>
+	</data>
+
 	<data name="PageNumber.PDF" xml:space="preserve">
 		<value>Page {0}</value>
 	</data>
