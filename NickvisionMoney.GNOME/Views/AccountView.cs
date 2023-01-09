@@ -93,6 +93,7 @@ public partial class AccountView
     private readonly Adw.PreferencesGroup _grpCalendar;
     private readonly Gtk.Button _btnNewTransaction;
     private readonly Adw.ButtonContent _btnNewTransactionContent;
+    private readonly Gtk.DropDown _cmbSortTransactionBy;
     private readonly Gtk.ToggleButton _btnSortFirstToLast;
     private readonly Gtk.ToggleButton _btnSortLastToFirst;
     private readonly Gtk.Box _boxSort;
@@ -384,7 +385,15 @@ public partial class AccountView
         _btnNewTransaction.SetValign(Gtk.Align.End);
         _btnNewTransaction.SetMarginBottom(10);
         _btnNewTransaction.SetDetailedActionName("account.newTransaction");
-        //Sort Box And buttons
+        //Sort Box And Buttons
+        _cmbSortTransactionBy = Gtk.DropDown.New(Gtk.StringList.New(new string[2] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"] }), null);
+        _cmbSortTransactionBy.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                _controller.SortTransactionsBy = (SortBy)_cmbSortTransactionBy.GetSelected();
+            }
+        };
         _btnSortFirstToLast = Gtk.ToggleButton.New();
         _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
         _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
@@ -396,6 +405,7 @@ public partial class AccountView
         _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
         _boxSort.AddCssClass("linked");
         _boxSort.SetValign(Gtk.Align.Center);
+        _boxSort.Append(_cmbSortTransactionBy);
         _boxSort.Append(_btnSortFirstToLast);
         _boxSort.Append(_btnSortLastToFirst);
         //Transaction Group
@@ -485,6 +495,15 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
         //Load
+        _cmbSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        if(_controller.SortFirstToLast)
+        {
+            _btnSortFirstToLast.SetActive(true);
+        }
+        else
+        {
+            _btnSortLastToFirst.SetActive(true);
+        }
         OnToggleGroups(null, EventArgs.Empty);
         OnAccountInfoChanged(null, EventArgs.Empty);
     }
@@ -540,7 +559,6 @@ public partial class AccountView
                 _flowBox.Remove(transactionRow);
             }
             _transactionRows.Clear();
-            _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
             if (_controller.Transactions.Count > 0)
             {
                 var filteredTransactions = _controller.FilteredTransactions;
