@@ -881,7 +881,7 @@ public class Account : IDisposable
                     //Header
                     page.Header().Row(row =>
                     {
-                        row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16);
+                        row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16).Fallback(x => x.FontFamily("Noto Emoji").FontSize(16));
                         row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream, ImageScaling.FitArea);
                     });
                     //Content
