@@ -175,15 +175,7 @@ public sealed partial class AccountView : UserControl
                         var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            ListTransactions.Items.Add(transactionRow);
-
-                        }
-                        else
-                        {
-                            ListTransactions.Items.Insert(0, transactionRow);
-                        }
+                        ListTransactions.Items.Add(transactionRow);
                     }
                     ViewStackTransactions.ChangePage("Transactions");
                 }

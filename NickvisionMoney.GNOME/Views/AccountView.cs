@@ -554,14 +554,7 @@ public partial class AccountView
                         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            _flowBox.Append(row);
-                        }
-                        else
-                        {
-                            _flowBox.Prepend(row);
-                        }
+                        _flowBox.Append(row);
                         _transactionRows.Add(row);
                     }
                 }
