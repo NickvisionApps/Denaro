@@ -875,13 +875,37 @@ public class Account : IDisposable
                     page.PageColor(Colors.White);
                     page.DefaultTextStyle(TextStyle.Default.FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
                     //Header
-                    page.Header()
-                        .Text(Metadata.Name).SemiBold().FontSize(16);
+                    page.Header().Text(Metadata.Name).SemiBold().FontSize(16);
                     //Content
-                    page.Content().PaddingVertical(0.3f, Unit.Centimetre)
-                        .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
+                    page.Content().PaddingVertical(0.3f, Unit.Centimetre).Column(col =>
+                    {
+                        col.Spacing(15);
+                        //Groups
+                        col.Item().Table(tbl =>
                         {
-                            //Columns
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Name, Description, Balance
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(localizer["Groups"]);
+                            tbl.Cell().Text(localizer["Name", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
+                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            var i = 0;
+                            foreach (var pair in Groups)
+                            {
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Balance.ToString("C", culture));
+                                i++;
+                            }
+                        });
+                        //Transactions
+                        col.Item().Table(tbl =>
+                        {
                             tbl.ColumnsDefinition(x =>
                             {
                                 //ID, Date, Description, Type, Group Name, Repeat Interval, Amount
@@ -893,16 +917,14 @@ public class Account : IDisposable
                                 x.ConstantColumn(100);
                                 x.RelativeColumn();
                             });
-                            tbl.Header(x =>
-                            {
-                                x.Cell().Text("ID").SemiBold();
-                                x.Cell().Text("Date").SemiBold();
-                                x.Cell().Text("Description").SemiBold();
-                                x.Cell().Text("Type").SemiBold();
-                                x.Cell().Text("Group Name").SemiBold();
-                                x.Cell().Text("Repeat Interval").SemiBold();
-                                x.Cell().AlignRight().Text("Amount").SemiBold();
-                            });
+                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
+                            tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["TramsactopmType", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
+                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             foreach (var pair in Transactions)
                             {
                                 var hex = "#32"; //120
@@ -922,11 +944,12 @@ public class Account : IDisposable
                                 tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
                             }
                         });
+                    });
                     //Footer
                     page.Footer().AlignRight().Text(x =>
                     {
                         var pageString = localizer["PageNumber", "PDF"];
-                        if(pageString.EndsWith("{0}"))
+                        if (pageString.EndsWith("{0}"))
                         {
                             x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3));
                         }
