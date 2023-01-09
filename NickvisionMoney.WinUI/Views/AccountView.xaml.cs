@@ -68,8 +68,8 @@ public sealed partial class AccountView : UserControl
         LblTransactions.Text = _controller.Localizer["Transactions"];
         CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Id"]);
         CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Date"]);
-        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstToLast"]);
-        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastToFirst"]);
+        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
+        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load UI
