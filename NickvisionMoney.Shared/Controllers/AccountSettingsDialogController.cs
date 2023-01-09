@@ -105,7 +105,7 @@ public class AccountSettingsDialogController
         if(Metadata.UseCustomCurrency)
         {
             Metadata.CustomCurrencySymbol = customSymbol;
-            Metadata.CustomCurrencyCode = customCode.ToUpper();
+            Metadata.CustomCurrencyCode = customCode?.ToUpper();
         }
         else
         {
