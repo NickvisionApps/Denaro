@@ -862,8 +862,12 @@ public class Account : IDisposable
                 culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
             }
             using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
+            using var interRegularFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-Regular.otf")!;
+            using var interSemiBoldFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-SemiBold.otf")!;
             using var notoEmojiFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.NotoEmoji-VariableFont_wght.ttf")!;
-            FontManager.RegisterFontWithCustomName("Noto Emoji", notoEmojiFontStream);
+            FontManager.RegisterFont(interRegularFontStream);
+            FontManager.RegisterFont(interSemiBoldFontStream);
+            FontManager.RegisterFont(notoEmojiFontStream);
             Document.Create(container =>
             {
                 //Page 1
@@ -873,7 +877,7 @@ public class Account : IDisposable
                     page.Size(PageSizes.Letter);
                     page.Margin(1, Unit.Centimetre);
                     page.PageColor(Colors.White);
-                    page.DefaultTextStyle(TextStyle.Default.FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
+                    page.DefaultTextStyle(TextStyle.Default.FontFamily("Inter").FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
                     //Header
                     page.Header().Row(row =>
                     {

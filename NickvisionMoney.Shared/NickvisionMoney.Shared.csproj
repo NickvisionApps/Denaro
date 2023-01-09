@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Inter-Regular.otf" />
+    <None Remove="Resources\Inter-SemiBold.otf" />
     <None Remove="Resources\NotoEmoji-VariableFont_wght.ttf" />
     <None Remove="Resources\org.nickvision.money-symbolic.png" />
     <None Remove="Resources\org.nickvision.money.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Inter-Regular.otf" />
+    <EmbeddedResource Include="Resources\Inter-SemiBold.otf" />
     <EmbeddedResource Include="Resources\NotoEmoji-VariableFont_wght.ttf" />
     <EmbeddedResource Include="Resources\org.nickvision.money-symbolic.png" />
   </ItemGroup>
