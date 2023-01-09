@@ -59,7 +59,7 @@
         <p xml:lang="it">- Aggiunta la possibilità di creare transazioni senza un gruppo</p>
         <p xml:lang="it">- Aggiunta la possibilità di aggiungere un jpg/png/pdf come ricevuta di una transazione</p>
         <p xml:lang="it">- La funzionalità delle transazioni ricorrenti è stata rielaborata e supporta transazioni bisettimanali</p>
-		<p xml:lang="it">- Aggiunta la possibilità di ordinare trasazioni per il ID o la data</p>
+		<p xml:lang="it">- Aggiunta la possibilità di ordinare le trasazioni cronologicamente o per ID</p>
 		<p xml:lang="it">- Aggiunta la possibilità di esportare un account come PDF</p>
         <p xml:lang="it">- Aggiunta la possibilità di nascondere la sezione dei gruppi</p>
         <p xml:lang="it">- La descrizione dei gruppi è ora facoltativa</p>
