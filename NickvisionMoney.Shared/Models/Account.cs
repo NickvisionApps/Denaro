@@ -884,12 +884,13 @@ public class Account : IDisposable
                             //Columns
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, Repeat Interval, Amount
+                                //ID, Date, Description, Type, Group Name, Repeat Interval, Amount
                                 x.ConstantColumn(30);
-                                x.ConstantColumn(90);
+                                x.ConstantColumn(80);
                                 x.RelativeColumn();
                                 x.ConstantColumn(70);
-                                x.ConstantColumn(110);
+                                x.RelativeColumn();
+                                x.ConstantColumn(100);
                                 x.RelativeColumn();
                             });
                             tbl.Header(x =>
@@ -898,6 +899,7 @@ public class Account : IDisposable
                                 x.Cell().Text("Date").SemiBold();
                                 x.Cell().Text("Description").SemiBold();
                                 x.Cell().Text("Type").SemiBold();
+                                x.Cell().Text("Group Name").SemiBold();
                                 x.Cell().Text("Repeat Interval").SemiBold();
                                 x.Cell().AlignRight().Text("Amount").SemiBold();
                             });
@@ -915,6 +917,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
                                 tbl.Cell().Background(hex).Text(pair.Value.Description);
                                 tbl.Cell().Background(hex).Text(pair.Value.Type.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
                                 tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval.ToString());
                                 tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
                             }
