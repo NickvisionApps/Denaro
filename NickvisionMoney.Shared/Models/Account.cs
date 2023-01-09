@@ -877,7 +877,7 @@ public class Account : IDisposable
                     //Header
                     page.Header().Text(Metadata.Name).SemiBold().FontSize(16);
                     //Content
-                    page.Content().PaddingVertical(0.3f, Unit.Centimetre).Column(col =>
+                    page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
                     {
                         col.Spacing(15);
                         //Metadata
@@ -891,21 +891,23 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                                 x.RelativeColumn();
                             });
+                            //Headers
                             tbl.Cell().ColumnSpan(4).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
                             tbl.Cell().Text(localizer["AccountType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["UseCustomCurrency", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["CustomCurrencySymbol", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["CustomCurrencyCode", "Field"]).SemiBold();
-                            tbl.Cell().Text(Metadata.AccountType switch
+                            //Data
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.AccountType switch
                             {
                                 AccountType.Checking => localizer["AccountType", "Checking"],
                                 AccountType.Savings => localizer["AccountType", "Savings"],
                                 AccountType.Business => localizer["AccountType", "Business"],
                                 _ => ""
                             });
-                            tbl.Cell().Text(Metadata.UseCustomCurrency ? localizer["Yes"] : localizer["No"]);
-                            tbl.Cell().Text(Metadata.CustomCurrencySymbol);
-                            tbl.Cell().Text(Metadata.CustomCurrencyCode);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.UseCustomCurrency ? localizer["Yes"] : localizer["No"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.CustomCurrencySymbol);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.CustomCurrencyCode);
                         });
                         //Groups
                         col.Item().Table(tbl =>
@@ -917,10 +919,12 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                                 x.RelativeColumn();
                             });
+                            //Headers
                             tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(localizer["Groups"]);
                             tbl.Cell().Text(localizer["Name", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            //Data
                             var i = 0;
                             foreach (var pair in Groups)
                             {
@@ -944,6 +948,7 @@ public class Account : IDisposable
                                 x.ConstantColumn(100);
                                 x.RelativeColumn();
                             });
+                            //Headers
                             tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
@@ -952,6 +957,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            //Data
                             foreach (var pair in Transactions)
                             {
                                 var hex = "#32"; //120
@@ -989,18 +995,23 @@ public class Account : IDisposable
                         });
                     });
                     //Footer
-                    page.Footer().AlignRight().Text(x =>
+                    page.Footer().Row(row =>
                     {
-                        var pageString = localizer["PageNumber", "PDF"];
-                        if (pageString.EndsWith("{0}"))
+                        row.RelativeItem(2).Text(localizer["NickvisionMoneyAccount"]).FontColor(Colors.Grey.Medium);
+                        row.RelativeItem(1).Text(x =>
                         {
-                            x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3));
-                        }
-                        x.CurrentPageNumber();
-                        if (pageString.StartsWith("{0}"))
-                        {
-                            x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3));
-                        }
+                            var pageString = localizer["PageNumber", "PDF"];
+                            if (pageString.EndsWith("{0}"))
+                            {
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                            }
+                            x.CurrentPageNumber().FontColor(Colors.Grey.Medium);
+                            if (pageString.StartsWith("{0}"))
+                            {
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                            }
+                            x.AlignRight();
+                        });
                     });
                 });
             }).GeneratePdf(path);
