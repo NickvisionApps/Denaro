@@ -78,12 +78,12 @@ public class Account : IDisposable
         _database.Open();
         //Setup Metadata Table
         var cmdTableMetadata = _database.CreateCommand();
-        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortBy INTEGER)";
+        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
             var cmdTableMetadataUpdate1 = _database.CreateCommand();
-            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortBy INTEGER";
+            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
             cmdTableMetadataUpdate1.ExecuteNonQuery();
         }
         catch { }
@@ -145,13 +145,13 @@ public class Account : IDisposable
             Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);
-            Metadata.SortBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
+            Metadata.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
             NeedsFirstTimeSetup = false;
         }
         else
         {
             var cmdAddMetadata = _database.CreateCommand();
-            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortBy) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortBy)";
+            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
             cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
@@ -160,7 +160,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)Metadata.DefaultTransactionType);
             cmdAddMetadata.Parameters.AddWithValue("$showGroupsList", Metadata.ShowGroupsList);
             cmdAddMetadata.Parameters.AddWithValue("$sortFirstToLast", Metadata.SortFirstToLast);
-            cmdAddMetadata.Parameters.AddWithValue("$sortBy", (int)Metadata.SortBy);
+            cmdAddMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)Metadata.SortTransactionsBy);
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
@@ -282,7 +282,7 @@ public class Account : IDisposable
     public bool UpdateMetadata(AccountMetadata metadata)
     {
         var cmdUpdateMetadata = _database.CreateCommand();
-        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortBy = $sortBy WHERE id = 0";
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
         cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
@@ -291,7 +291,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)metadata.DefaultTransactionType);
         cmdUpdateMetadata.Parameters.AddWithValue("$showGroupsList", metadata.ShowGroupsList);
         cmdUpdateMetadata.Parameters.AddWithValue("$sortFirstToLast", metadata.SortFirstToLast);
-        cmdUpdateMetadata.Parameters.AddWithValue("$sortBy", (int)metadata.SortBy);
+        cmdUpdateMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)metadata.SortTransactionsBy);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
             Metadata.Name = metadata.Name;
@@ -302,7 +302,7 @@ public class Account : IDisposable
             Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
             Metadata.ShowGroupsList = metadata.ShowGroupsList;
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
-            Metadata.SortBy = metadata.SortBy;
+            Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
             NeedsFirstTimeSetup = false;
             return true;
         }

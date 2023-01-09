@@ -59,7 +59,7 @@ public class AccountMetadata
     /// <summary>
     /// The way in which to sort transactions
     /// </summary>
-    public SortBy SortBy { get; set; }
+    public SortBy SortTransactionsBy { get; set; }
 
     /// <summary>
     /// Constructs a new AccountMetadata
@@ -76,6 +76,6 @@ public class AccountMetadata
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
         SortFirstToLast = true;
-        SortBy = SortBy.Id
+        SortTransactionsBy = SortBy.Id;
     }
 }
