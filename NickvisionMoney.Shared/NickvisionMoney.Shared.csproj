@@ -7,11 +7,13 @@
 
   <ItemGroup>
     <None Remove="Resources\NotoEmoji-VariableFont_wght.ttf" />
+    <None Remove="Resources\org.nickvision.money-symbolic.png" />
     <None Remove="Resources\org.nickvision.money.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\NotoEmoji-VariableFont_wght.ttf" />
+    <EmbeddedResource Include="Resources\org.nickvision.money-symbolic.png" />
   </ItemGroup>
 
   <ItemGroup>

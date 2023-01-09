@@ -861,8 +861,8 @@ public class Account : IDisposable
             {
                 culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
             }
-            var notoEmojiResource = Assembly.GetCallingAssembly().GetManifestResourceNames().Single(str => str.EndsWith("NotoEmoji-VariableFont_wght.ttf"));
-            using var notoEmojiStream = Assembly.GetCallingAssembly().GetManifestResourceStream(notoEmojiResource)!;
+            using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
+            using var notoEmojiStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.NotoEmoji-VariableFont_wght.ttf")!;
             FontManager.RegisterFontWithCustomName("Noto Emoji", notoEmojiStream);
             Document.Create(container =>
             {
@@ -875,7 +875,11 @@ public class Account : IDisposable
                     page.PageColor(Colors.White);
                     page.DefaultTextStyle(TextStyle.Default.FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
                     //Header
-                    page.Header().Text(Metadata.Name).SemiBold().FontSize(16);
+                    page.Header().Row(row =>
+                    {
+                        row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16);
+                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream, ImageScaling.FitArea);
+                    });
                     //Content
                     page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
                     {
