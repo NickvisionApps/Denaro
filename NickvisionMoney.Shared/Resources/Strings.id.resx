@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Rekening Nickvision Money</value>
+		<value>Rekening Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Rekening Baru</value>
@@ -536,5 +536,115 @@ pekerjaan yang tidak disimpan akan hilang.</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
     <value>Interval Pengulangan diubah</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Tunjukkan</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Pengaturan Rekening</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+    <value>Dua Mingguan</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+    <value>Tidak Ada Tanggal Akhir</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Tabungan</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Ini hanyalah label yang tidak akan memengaruhi bagaimana aplikasi ini bekerja.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Sistem anda melaporkan bahwa mata uang anda adalah</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+    <value>Batas Akhir Pengulangan</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+    <value>Hapus Batas Akhir</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+    <value>Batas Akhir Pengulangan (Tidak Sah)</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Tipe Akun</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Tipe Transaksi Bawaan</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Gunakan Mata Uang Kustom</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Simbol Mata Uang</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Masukkan simbol disini</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Simbol Mata Uang (kosong)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Kode Mata Uang</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Masukkan kode disini</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Warna Rekening Giro</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Warna Rekening Tabungan</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Warna Rekening Bisnis</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Giro</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Bisnis</value>
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+    <value>Hapus Hanya Sumber</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+    <value>Hapus Sumber dan yang Dihasilkan</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Transaksi ini adalah sumber transaksi berulang.
+Apa yang anda ingin lakukan untuk transaksi berulang?
+
+Hanya menghapus transaksi sumber akan membuat transaksi
+yang telah dihasilkan untuk dimodifikasi.</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+    <value>Perbarui Sumber dan yang Dihasilkan</value>
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+    <value>Perbarui Hanya Sumber</value>
+  </data>
+  <data name="DeleteExisting" xml:space="preserve">
+    <value>Hapus yang Ada</value>
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+    <value>Pisahkan yang Ada</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Transaksi ini adalah sumber transaksi berulang.
+Apa yang anda ingin lakukan untuk transaksi berulang?
+
+Hanya memperbarui transaksi sumber akan memisahkan 
+transaksi yang telah dihasilkan dari sumber.</value>
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+    <value>Interval pengulangan telah diubah.
+Apa yang anda ingin lakukan untuk transaksi yang telah dihasilkan?
+
+Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan yang baru.</value>
   </data>
 </root>
