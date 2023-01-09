@@ -880,6 +880,33 @@ public class Account : IDisposable
                     page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
                     {
                         col.Spacing(15);
+                        //Overview
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Type, Amount
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Overview"]);
+                            //Data
+                            var maxDate = DateOnly.FromDateTime(DateTime.Today);
+                            foreach (var pair in Transactions)
+                            {
+                                if (pair.Value.Date > maxDate)
+                                {
+                                    maxDate = pair.Value.Date;
+                                }
+                            }
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Total"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Income"]);
+                            tbl.Cell().AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Expense"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
+                        });
                         //Metadata
                         col.Item().Table(tbl =>
                         {
