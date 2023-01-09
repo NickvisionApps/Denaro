@@ -995,12 +995,24 @@ public class Account : IDisposable
                         {
                             var hex = "#32"; //120
                             var rgba = pair.Value.RGBA;
-                            rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
-                            rgba = rgba.Remove(rgba.Length - 1);
-                            var fields = rgba.Split(',');
-                            hex += byte.Parse(fields[0]).ToString("X2");
-                            hex += byte.Parse(fields[1]).ToString("X2");
-                            hex += byte.Parse(fields[2]).ToString("X2");
+                            if(rgba.StartsWith("#"))
+                            {
+                                rgba = rgba.Remove(0, 1);
+                                if (rgba.Length == 8)
+                                {
+                                    rgba = rgba.Remove(rgba.Length - 2);
+                                }
+                                hex += rgba;
+                            }
+                            else
+                            {
+                                rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                                rgba = rgba.Remove(rgba.Length - 1);
+                                var fields = rgba.Split(',');
+                                hex += byte.Parse(fields[0]).ToString("X2");
+                                hex += byte.Parse(fields[1]).ToString("X2");
+                                hex += byte.Parse(fields[2]).ToString("X2");
+                            }
                             tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
                             tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
                             tbl.Cell().Background(hex).Text(pair.Value.Description);
