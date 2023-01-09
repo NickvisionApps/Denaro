@@ -91,9 +91,9 @@ public class AccountSettingsDialogController
         {
             return AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
-        if(customSymbol != null && customSymbol.Length > 1)
+        if(customSymbol != null && customSymbol.Length > 2)
         {
-            customSymbol = customSymbol.Substring(0, 1);
+            customSymbol = customSymbol.Substring(0, 2);
         }
         if (customCode != null && customCode.Length > 3)
         {
