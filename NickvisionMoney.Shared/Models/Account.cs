@@ -880,6 +880,33 @@ public class Account : IDisposable
                     page.Content().PaddingVertical(0.3f, Unit.Centimetre).Column(col =>
                     {
                         col.Spacing(15);
+                        //Metadata
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Type, UseCustomCurrency, CustomSymbol, CustomCode
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            tbl.Cell().ColumnSpan(4).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
+                            tbl.Cell().Text(localizer["AccountType", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["UseCustomCurrency", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["CustomCurrencySymbol", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["CustomCurrencyCode", "Field"]).SemiBold();
+                            tbl.Cell().Text(Metadata.AccountType switch
+                            {
+                                AccountType.Checking => localizer["AccountType", "Checking"],
+                                AccountType.Savings => localizer["AccountType", "Savings"],
+                                AccountType.Business => localizer["AccountType", "Business"],
+                                _ => ""
+                            });
+                            tbl.Cell().Text(Metadata.UseCustomCurrency ? localizer["Yes"] : localizer["No"]);
+                            tbl.Cell().Text(Metadata.CustomCurrencySymbol);
+                            tbl.Cell().Text(Metadata.CustomCurrencyCode);
+                        });
                         //Groups
                         col.Item().Table(tbl =>
                         {
@@ -908,7 +935,7 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, Group Name, Repeat Interval, Amount
+                                //ID, Date, Description, Type, GroupName, RepeatInterval, Amount
                                 x.ConstantColumn(30);
                                 x.ConstantColumn(80);
                                 x.RelativeColumn();
@@ -921,7 +948,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["TramsactopmType", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
@@ -938,9 +965,25 @@ public class Account : IDisposable
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
                                 tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
                                 tbl.Cell().Background(hex).Text(pair.Value.Description);
-                                tbl.Cell().Background(hex).Text(pair.Value.Type.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.Type switch
+                                {
+                                    TransactionType.Income => localizer["Income"],
+                                    TransactionType.Expense => localizer["Expense"],
+                                    _ => ""
+                                });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
-                                tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval switch
+                                {
+                                    TransactionRepeatInterval.Never => localizer["RepeatInterval", "Never"],
+                                    TransactionRepeatInterval.Daily => localizer["RepeatInterval", "Daily"],
+                                    TransactionRepeatInterval.Weekly => localizer["RepeatInterval", "Weekly"],
+                                    TransactionRepeatInterval.Biweekly => localizer["RepeatInterval", "Biweekly"],
+                                    TransactionRepeatInterval.Monthly => localizer["RepeatInterval", "Monthly"],
+                                    TransactionRepeatInterval.Quarterly => localizer["RepeatInterval", "Quarterly"],
+                                    TransactionRepeatInterval.Yearly => localizer["RepeatInterval", "Yearly"],
+                                    TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
+                                    _ => ""
+                                });
                                 tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
                             }
                         });
