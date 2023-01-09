@@ -951,7 +951,7 @@ public class Account : IDisposable
                             });
                             if(Metadata.UseCustomCurrency)
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(Metadata.CustomCurrencyCode != null ? $"({Metadata.CustomCurrencyCode})" : "")}");
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(!string.IsNullOrEmpty(Metadata.CustomCurrencyCode) ? $"({Metadata.CustomCurrencyCode})" : "")}");
                             }
                             else
                             {
