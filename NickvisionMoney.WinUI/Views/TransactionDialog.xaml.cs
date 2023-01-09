@@ -37,7 +37,7 @@ public sealed partial class TransactionDialog : ContentDialog
         PrimaryButtonText = _controller.Localizer["OK"];
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtDescription.PlaceholderText = _controller.Localizer["Description", "Placeholder"];
-        TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         CmbType.Header = _controller.Localizer["TransactionType", "Field"];
         CmbType.Items.Add(_controller.Localizer["Income"]);
@@ -111,7 +111,7 @@ public sealed partial class TransactionDialog : ContentDialog
             if(checkStatus != TransactionCheckStatus.Valid)
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Field"];
-                TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+                TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
                 CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
                 if (checkStatus == TransactionCheckStatus.EmptyDescription)
                 {

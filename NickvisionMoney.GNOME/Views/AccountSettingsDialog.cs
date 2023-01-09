@@ -129,6 +129,7 @@ public partial class AccountSettingsDialog
         _txtCustomSymbol.SetValign(Gtk.Align.Center);
         _txtCustomSymbol.SetMaxLength(1);
         _txtCustomSymbol.SetPlaceholderText(_controller.Localizer["CustomCurrencySymbol", "Placeholder"]);
+        _txtCustomSymbol.SetActivatesDefault(true);
         _rowCustomSymbol = Adw.ActionRow.New();
         _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
         _rowCustomSymbol.AddSuffix(_txtCustomSymbol);
@@ -137,6 +138,7 @@ public partial class AccountSettingsDialog
         _txtCustomCode.SetValign(Gtk.Align.Center);
         _txtCustomCode.SetMaxLength(3);
         _txtCustomCode.SetPlaceholderText(_controller.Localizer["CustomCurrencyCode", "Placeholder"]);
+        _txtCustomCode.SetActivatesDefault(true);
         _rowCustomCode = Adw.ActionRow.New();
         _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
         _rowCustomCode.AddSuffix(_txtCustomCode);

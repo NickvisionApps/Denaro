@@ -13,7 +13,7 @@
     <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
             <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="0,10,0,10" Width="100" Height="100" CornerRadius="20">
-                <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+                <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="White"/>
             </Border>
 
             <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>

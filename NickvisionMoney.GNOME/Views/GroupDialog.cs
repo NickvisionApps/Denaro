@@ -43,10 +43,12 @@ public partial class GroupDialog
         //Name
         _rowName = Adw.EntryRow.New();
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
+        _rowName.SetActivatesDefault(true);
         _grpGroup.Add(_rowName);
         //Description
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
+        _rowDescription.SetActivatesDefault(true);
         _grpGroup.Add(_rowDescription);
         //Layout
         _dialog.SetExtraChild(_grpGroup);

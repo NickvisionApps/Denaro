@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
+using NickvisionMoney.Shared.Helpers;
+using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -9,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -850,68 +853,250 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     private bool ExportToPDF(string path)
     {
-        var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
-        if (Metadata.UseCustomCurrency)
+        try
         {
-            culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-        }
-        Document.Create(container =>
-        {
-            //Page 1
-            container.Page(page =>
+            var localizer = new Localizer();
+            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            if (Metadata.UseCustomCurrency)
             {
-                //Settings
-                page.Size(PageSizes.Letter);
-                page.Margin(1, Unit.Centimetre);
-                page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(14));
-                //Header
-                page.Header()
-                    .Text(Metadata.Name).SemiBold().FontSize(26).FontColor(Colors.Blue.Medium);
-                //Content
-                page.Content().PaddingVertical(0.5f, Unit.Centimetre)
-                    .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
-                    {
-                        //Columns
-                        tbl.ColumnsDefinition(x =>
-                        {
-                            //ID, Date, Description, Type, Repeat Interval, Amount
-                            x.ConstantColumn(30);
-                            x.ConstantColumn(90);
-                            x.RelativeColumn();
-                            x.ConstantColumn(70);
-                            x.ConstantColumn(110);
-                            x.RelativeColumn();
-                        });
-                        tbl.Header(x =>
-                        {
-                            x.Cell().Text("ID").SemiBold();
-                            x.Cell().Text("Date").SemiBold();
-                            x.Cell().Text("Description").SemiBold();
-                            x.Cell().Text("Type").SemiBold();
-                            x.Cell().Text("Repeat Interval").SemiBold();
-                            x.Cell().AlignRight().Text("Amount").SemiBold();
-                        });
-                        var i = 0;
-                        foreach(var pair in Transactions)
-                        {
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Date.ToString("d"));
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
-                            i++;
-                        }
-                    });
-                //Footer
-                page.Footer().AlignRight().Text(x =>
+                culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+            }
+            using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
+            using var interRegularFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-Regular.otf")!;
+            using var interSemiBoldFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-SemiBold.otf")!;
+            using var notoEmojiFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.NotoEmoji-VariableFont_wght.ttf")!;
+            FontManager.RegisterFont(interRegularFontStream);
+            FontManager.RegisterFont(interSemiBoldFontStream);
+            FontManager.RegisterFont(notoEmojiFontStream);
+            Document.Create(container =>
+            {
+                //Page 1
+                container.Page(page =>
                 {
-                    x.Span("Page ");
-                    x.CurrentPageNumber();
+                    //Settings
+                    page.Size(PageSizes.Letter);
+                    page.Margin(1, Unit.Centimetre);
+                    page.PageColor(Colors.White);
+                    page.DefaultTextStyle(TextStyle.Default.FontFamily("Inter").FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
+                    //Header
+                    page.Header().Row(row =>
+                    {
+                        row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16).Fallback(x => x.FontFamily("Noto Emoji").FontSize(16));
+                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream, ImageScaling.FitArea);
+                    });
+                    //Content
+                    page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
+                    {
+                        col.Spacing(15);
+                        //Generated Date
+                        col.Item().Text(string.Format(localizer["Generated", "PDF"], DateTime.Now.ToString("g")));
+                        //Overview
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Type, Amount
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Overview"]);
+                            //Data
+                            var maxDate = DateOnly.FromDateTime(DateTime.Today);
+                            foreach (var pair in Transactions)
+                            {
+                                if (pair.Value.Date > maxDate)
+                                {
+                                    maxDate = pair.Value.Date;
+                                }
+                            }
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Total"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Income"]);
+                            tbl.Cell().AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Expense"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
+                        });
+                        //Metadata
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Type, UseCustomCurrency, CustomSymbol, CustomCode
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
+                            tbl.Cell().Text(localizer["AccountType", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Currency", "PDF"]).SemiBold();
+                            //Data
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.AccountType switch
+                            {
+                                AccountType.Checking => localizer["AccountType", "Checking"],
+                                AccountType.Savings => localizer["AccountType", "Savings"],
+                                AccountType.Business => localizer["AccountType", "Business"],
+                                _ => ""
+                            });
+                            if(Metadata.UseCustomCurrency)
+                            {
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(Metadata.CustomCurrencyCode != null ? $"({Metadata.CustomCurrencyCode})" : "")}");
+                            }
+                            else
+                            {
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+                            }
+                        });
+                        //Groups
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //Name, Description, Balance
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(localizer["Groups"]);
+                            tbl.Cell().Text(localizer["Name", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
+                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            //Data
+                            var i = 0;
+                            foreach (var pair in Groups)
+                            {
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Balance.ToString("C", culture));
+                                i++;
+                            }
+                        });
+                        //Transactions
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //ID, Date, Description, Type, GroupName, RepeatInterval, Amount
+                                x.ConstantColumn(30);
+                                x.ConstantColumn(80);
+                                x.RelativeColumn();
+                                x.ConstantColumn(70);
+                                x.RelativeColumn();
+                                x.ConstantColumn(100);
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
+                            tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
+                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            //Data
+                            foreach (var pair in Transactions)
+                            {
+                                var hex = "#32"; //120
+                                var rgba = pair.Value.RGBA;
+                                if (rgba.StartsWith("#"))
+                                {
+                                    rgba = rgba.Remove(0, 1);
+                                    if (rgba.Length == 8)
+                                    {
+                                        rgba = rgba.Remove(rgba.Length - 2);
+                                    }
+                                    hex += rgba;
+                                }
+                                else
+                                {
+                                    rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                                    rgba = rgba.Remove(rgba.Length - 1);
+                                    var fields = rgba.Split(',');
+                                    hex += byte.Parse(fields[0]).ToString("X2");
+                                    hex += byte.Parse(fields[1]).ToString("X2");
+                                    hex += byte.Parse(fields[2]).ToString("X2");
+                                }
+                                tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
+                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
+                                tbl.Cell().Background(hex).Text(pair.Value.Description);
+                                tbl.Cell().Background(hex).Text(pair.Value.Type switch
+                                {
+                                    TransactionType.Income => localizer["Income"],
+                                    TransactionType.Expense => localizer["Expense"],
+                                    _ => ""
+                                });
+                                tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
+                                tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval switch
+                                {
+                                    TransactionRepeatInterval.Never => localizer["RepeatInterval", "Never"],
+                                    TransactionRepeatInterval.Daily => localizer["RepeatInterval", "Daily"],
+                                    TransactionRepeatInterval.Weekly => localizer["RepeatInterval", "Weekly"],
+                                    TransactionRepeatInterval.Biweekly => localizer["RepeatInterval", "Biweekly"],
+                                    TransactionRepeatInterval.Monthly => localizer["RepeatInterval", "Monthly"],
+                                    TransactionRepeatInterval.Quarterly => localizer["RepeatInterval", "Quarterly"],
+                                    TransactionRepeatInterval.Yearly => localizer["RepeatInterval", "Yearly"],
+                                    TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
+                                    _ => ""
+                                });
+                                tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
+                            }
+                        });
+                        //Receipts
+                        col.Item().Table(tbl =>
+                        {
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //ID, Receipt
+                                x.ConstantColumn(30);
+                                x.RelativeColumn();
+                            });
+                            //Headers
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Receipts", "PDF"]);
+                            tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Receipt", "Field"]).SemiBold();
+                            //Data
+                            var i = 0;
+                            foreach (var pair in Transactions)
+                            {
+                                if (pair.Value.Receipt != null)
+                                {
+                                    using var memoryStream = new MemoryStream();
+                                    pair.Value.Receipt.Save(memoryStream, new JpegEncoder());
+                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
+                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray(), ImageScaling.FitArea);
+                                    i++;
+                                }
+                            }
+                        });
+                    });
+                    //Footer
+                    page.Footer().Row(row =>
+                    {
+                        row.RelativeItem(2).Text(localizer["NickvisionMoneyAccount"]).FontColor(Colors.Grey.Medium);
+                        row.RelativeItem(1).Text(x =>
+                        {
+                            var pageString = localizer["PageNumber", "PDF"];
+                            if (pageString.EndsWith("{0}"))
+                            {
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                            }
+                            x.CurrentPageNumber().FontColor(Colors.Grey.Medium);
+                            if (pageString.StartsWith("{0}"))
+                            {
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                            }
+                            x.AlignRight();
+                        });
+                    });
                 });
-            });
-        }).GeneratePdf(path);
+            }).GeneratePdf(path);
+        }
+        catch
+        {
+            return false;
+        }
         return true;
     }
 
