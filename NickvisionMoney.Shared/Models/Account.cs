@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -850,68 +852,78 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     private bool ExportToPDF(string path)
     {
-        var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
-        if (Metadata.UseCustomCurrency)
+        try
         {
-            culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-        }
-        Document.Create(container =>
-        {
-            //Page 1
-            container.Page(page =>
+            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            if (Metadata.UseCustomCurrency)
             {
-                //Settings
-                page.Size(PageSizes.Letter);
-                page.Margin(1, Unit.Centimetre);
-                page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(14));
-                //Header
-                page.Header()
-                    .Text(Metadata.Name).SemiBold().Fallback(x => x.FontFamily("Segoe UI Emoji")).FontSize(26).FontColor(Colors.Blue.Medium);
-                //Content
-                page.Content().PaddingVertical(0.5f, Unit.Centimetre)
-                    .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
-                    {
-                        //Columns
-                        tbl.ColumnsDefinition(x =>
-                        {
-                            //ID, Date, Description, Type, Repeat Interval, Amount
-                            x.ConstantColumn(30);
-                            x.ConstantColumn(90);
-                            x.RelativeColumn();
-                            x.ConstantColumn(70);
-                            x.ConstantColumn(110);
-                            x.RelativeColumn();
-                        });
-                        tbl.Header(x =>
-                        {
-                            x.Cell().Text("ID").SemiBold();
-                            x.Cell().Text("Date").SemiBold();
-                            x.Cell().Text("Description").SemiBold();
-                            x.Cell().Text("Type").SemiBold();
-                            x.Cell().Text("Repeat Interval").SemiBold();
-                            x.Cell().AlignRight().Text("Amount").SemiBold();
-                        });
-                        var i = 0;
-                        foreach(var pair in Transactions)
-                        {
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Date.ToString("d"));
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
-                            tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
-                            i++;
-                        }
-                    });
-                //Footer
-                page.Footer().AlignRight().Text(x =>
+                culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+            }
+            var notoEmojiResource = Assembly.GetCallingAssembly().GetManifestResourceNames().Single(str => str.EndsWith("NotoEmoji-VariableFont_wght.ttf"));
+            using var notoEmojiStream = Assembly.GetCallingAssembly().GetManifestResourceStream(notoEmojiResource)!;
+            FontManager.RegisterFontWithCustomName("Noto Emoji", notoEmojiStream);
+            Document.Create(container =>
+            {
+                //Page 1
+                container.Page(page =>
                 {
-                    x.Span("Page ");
-                    x.CurrentPageNumber();
+                    //Settings
+                    page.Size(PageSizes.Letter);
+                    page.Margin(1, Unit.Centimetre);
+                    page.PageColor(Colors.White);
+                    page.DefaultTextStyle(TextStyle.Default.FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
+                    //Header
+                    page.Header()
+                        .Text(Metadata.Name).SemiBold().FontSize(16);
+                    //Content
+                    page.Content().PaddingVertical(0.5f, Unit.Centimetre)
+                        .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
+                        {
+                            //Columns
+                            tbl.ColumnsDefinition(x =>
+                            {
+                                //ID, Date, Description, Type, Repeat Interval, Amount
+                                x.ConstantColumn(30);
+                                x.ConstantColumn(90);
+                                x.RelativeColumn();
+                                x.ConstantColumn(70);
+                                x.ConstantColumn(110);
+                                x.RelativeColumn();
+                            });
+                            tbl.Header(x =>
+                            {
+                                x.Cell().Text("ID").SemiBold();
+                                x.Cell().Text("Date").SemiBold();
+                                x.Cell().Text("Description").SemiBold();
+                                x.Cell().Text("Type").SemiBold();
+                                x.Cell().Text("Repeat Interval").SemiBold();
+                                x.Cell().AlignRight().Text("Amount").SemiBold();
+                            });
+                            var i = 0;
+                            foreach (var pair in Transactions)
+                            {
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Date.ToString("d"));
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Type.ToString());
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.RepeatInterval.ToString());
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
+                                i++;
+                            }
+                        });
+                    //Footer
+                    page.Footer().AlignRight().Text(x =>
+                    {
+                        x.Span("Page ");
+                        x.CurrentPageNumber();
+                    });
                 });
-            });
-        }).GeneratePdf(path);
+            }).GeneratePdf(path);
+        }
+        catch
+        {
+            return false;
+        }
         return true;
     }
 
