@@ -862,8 +862,8 @@ public class Account : IDisposable
                 culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
             }
             using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
-            using var notoEmojiStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.NotoEmoji-VariableFont_wght.ttf")!;
-            FontManager.RegisterFontWithCustomName("Noto Emoji", notoEmojiStream);
+            using var notoEmojiFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.NotoEmoji-VariableFont_wght.ttf")!;
+            FontManager.RegisterFontWithCustomName("Noto Emoji", notoEmojiFontStream);
             Document.Create(container =>
             {
                 //Page 1
