@@ -695,6 +695,11 @@
 	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
 		<value>Enter code here</value>
 	</data>
+
+	<!--PDF-->
+	<data name="PageNumber.PDF" xml:space="preserve">
+		<value>Page {0}</value>
+	</data>
 	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">

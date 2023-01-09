@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using NickvisionMoney.Shared.Helpers;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -854,6 +855,7 @@ public class Account : IDisposable
     {
         try
         {
+            var localizer = new Localizer();
             var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
@@ -876,7 +878,7 @@ public class Account : IDisposable
                     page.Header()
                         .Text(Metadata.Name).SemiBold().FontSize(16);
                     //Content
-                    page.Content().PaddingVertical(0.5f, Unit.Centimetre)
+                    page.Content().PaddingVertical(0.3f, Unit.Centimetre)
                         .Border(0.5f).PaddingHorizontal(0.2f, Unit.Centimetre).Table(tbl =>
                         {
                             //Columns
@@ -901,7 +903,7 @@ public class Account : IDisposable
                             });
                             foreach (var pair in Transactions)
                             {
-                                var hex = "#78"; //120
+                                var hex = "#32"; //120
                                 var rgba = pair.Value.RGBA;
                                 rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
                                 rgba = rgba.Remove(rgba.Length - 1);
@@ -920,8 +922,16 @@ public class Account : IDisposable
                     //Footer
                     page.Footer().AlignRight().Text(x =>
                     {
-                        x.Span("Page ");
+                        var pageString = localizer["PageNumber", "PDF"];
+                        if(pageString.EndsWith("{0}"))
+                        {
+                            x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3));
+                        }
                         x.CurrentPageNumber();
+                        if (pageString.StartsWith("{0}"))
+                        {
+                            x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3));
+                        }
                     });
                 });
             }).GeneratePdf(path);
