@@ -705,6 +705,10 @@
 		<value>Generated: {0}</value>
 	</data>
 
+	<data name="Currency.PDF" xml:space="preserve">
+		<value>Currency</value>
+	</data>
+
 	<data name="GroupName.PDF" xml:space="preserve">
 		<value>Group Name</value>
 	</data>

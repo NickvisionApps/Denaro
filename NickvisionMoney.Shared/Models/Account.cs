@@ -925,15 +925,11 @@ public class Account : IDisposable
                                 //Type, UseCustomCurrency, CustomSymbol, CustomCode
                                 x.RelativeColumn();
                                 x.RelativeColumn();
-                                x.RelativeColumn();
-                                x.RelativeColumn();
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(4).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
                             tbl.Cell().Text(localizer["AccountType", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["UseCustomCurrency", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["CustomCurrencySymbol", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["CustomCurrencyCode", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["Currency", "PDF"]).SemiBold();
                             //Data
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.AccountType switch
                             {
@@ -942,9 +938,14 @@ public class Account : IDisposable
                                 AccountType.Business => localizer["AccountType", "Business"],
                                 _ => ""
                             });
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.UseCustomCurrency ? localizer["Yes"] : localizer["No"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.CustomCurrencySymbol);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.CustomCurrencyCode);
+                            if(Metadata.UseCustomCurrency)
+                            {
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(Metadata.CustomCurrencyCode != null ? $"({Metadata.CustomCurrencyCode})" : "")}");
+                            }
+                            else
+                            {
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+                            }
                         });
                         //Groups
                         col.Item().Table(tbl =>
