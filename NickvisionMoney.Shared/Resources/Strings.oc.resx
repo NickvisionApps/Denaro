@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Compte Nickvision Money</value>
+		<value>Compte Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Compte novèl</value>
@@ -235,19 +235,19 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Filtres</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value />
+		<value>Reïnicializar los filtres de la vista d’ensemble</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value />
+		<value>Reïnicializar los filtres de grops</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value />
+		<value>Reïnicializar los filtres de datas</value>
   </data>
   <data name="Calendar" xml:space="preserve">
 		<value>Calendièr</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value />
+		<value>Seleccionar l’interval</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
 		<value>Debuta</value>
@@ -276,37 +276,37 @@ Aquesta accion se pòt pas anullar.</value>
 		<value />
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Suprimir sonque la font</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Suprimir la font e las transaccions generadas</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Actualizar la transaccion</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
 		<value />
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Actualizar sonque la font</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Actualizar la font e las transaccions generadas</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-		<value />
+		<value>Interval de repeticion modificat</value>
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
 		<value />
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value />
+		<value>Suprimir l’existent</value>
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value />
+		<value>Dissociar l’existent</value>
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value />
+		<value>Aqueste compte a pas cap d’argent disponible per transferir.</value>
   </data>
   <data name="Hide" xml:space="preserve">
 		<value>Amagar</value>
@@ -315,17 +315,17 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Amagar los grops</value>
   </data>
   <data name="ShowGroups" xml:space="preserve">
-		<value />
+		<value>Mostrar los grops</value>
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
 		<value>Bascular la visibilitat dels grops</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value />
+		<value>Pas gropat</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value />
+		<value>Transaccion sens grop</value>
   </data>
   <data name="Imported" xml:space="preserve">
 		<value />
@@ -567,5 +567,11 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte bancari (*.nmoney)</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Paramètres del compte</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Mostrar</value>
   </data>
 </root>
