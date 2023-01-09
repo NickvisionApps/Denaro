@@ -87,6 +87,7 @@ public partial class TransferDialog
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
         _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
+        _rowAmount.SetActivatesDefault(true);
         _rowAmount.AddSuffix(_lblCurrency);
         _grpAmount = Adw.PreferencesGroup.New();
         _grpAmount.Add(_rowAmount);

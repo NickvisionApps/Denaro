@@ -134,11 +134,13 @@ public partial class TransactionDialog
         //Description
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
+        _rowDescription.SetActivatesDefault(true);
         _grpMain.Add(_rowDescription);
         //Amount
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
         _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
+        _rowAmount.SetActivatesDefault(true);
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
