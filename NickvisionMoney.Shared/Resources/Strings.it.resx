@@ -665,4 +665,13 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="AccountBusinessColor" xml:space="preserve">
     <value>Colore degli account business</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Ordina per ID</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Ordina per data</value>
+  </data>
 </root>
