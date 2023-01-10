@@ -93,8 +93,10 @@ public partial class AccountView
     private readonly Adw.PreferencesGroup _grpCalendar;
     private readonly Gtk.Button _btnNewTransaction;
     private readonly Adw.ButtonContent _btnNewTransactionContent;
+    private readonly Gtk.DropDown _ddSortTransactionBy;
     private readonly Gtk.ToggleButton _btnSortFirstToLast;
     private readonly Gtk.ToggleButton _btnSortLastToFirst;
+    private readonly Gtk.Box _boxSortButtons;
     private readonly Gtk.Box _boxSort;
     private readonly Adw.PreferencesGroup _grpTransactions;
     private readonly Gtk.FlowBox _flowBox;
@@ -384,7 +386,15 @@ public partial class AccountView
         _btnNewTransaction.SetValign(Gtk.Align.End);
         _btnNewTransaction.SetMarginBottom(10);
         _btnNewTransaction.SetDetailedActionName("account.newTransaction");
-        //Sort Box And buttons
+        //Sort Box And Buttons
+        _ddSortTransactionBy = Gtk.DropDown.NewFromStrings(new string[2] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"] });
+        _ddSortTransactionBy.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                _controller.SortTransactionsBy = (SortBy)_ddSortTransactionBy.GetSelected();
+            }
+        };
         _btnSortFirstToLast = Gtk.ToggleButton.New();
         _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
         _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
@@ -393,11 +403,14 @@ public partial class AccountView
         _btnSortLastToFirst.SetIconName("view-sort-ascending-symbolic");
         _btnSortLastToFirst.SetTooltipText(_controller.Localizer["SortLastFirst"]);
         _btnSortFirstToLast.BindProperty("active", _btnSortLastToFirst, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
-        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxSort.AddCssClass("linked");
-        _boxSort.SetValign(Gtk.Align.Center);
-        _boxSort.Append(_btnSortFirstToLast);
-        _boxSort.Append(_btnSortLastToFirst);
+        _boxSortButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxSortButtons.AddCssClass("linked");
+        _boxSortButtons.SetValign(Gtk.Align.Center);
+        _boxSortButtons.Append(_btnSortFirstToLast);
+        _boxSortButtons.Append(_btnSortLastToFirst);
+        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _boxSort.Append(_ddSortTransactionBy);
+        _boxSort.Append(_boxSortButtons);
         //Transaction Group
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
@@ -485,6 +498,15 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
         //Load
+        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        if(_controller.SortFirstToLast)
+        {
+            _btnSortFirstToLast.SetActive(true);
+        }
+        else
+        {
+            _btnSortLastToFirst.SetActive(true);
+        }
         OnToggleGroups(null, EventArgs.Empty);
         OnAccountInfoChanged(null, EventArgs.Empty);
     }
@@ -540,7 +562,6 @@ public partial class AccountView
                 _flowBox.Remove(transactionRow);
             }
             _transactionRows.Clear();
-            _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
             if (_controller.Transactions.Count > 0)
             {
                 var filteredTransactions = _controller.FilteredTransactions;
@@ -554,14 +575,7 @@ public partial class AccountView
                         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            _flowBox.Append(row);
-                        }
-                        else
-                        {
-                            _flowBox.Prepend(row);
-                        }
+                        _flowBox.Append(row);
                         _transactionRows.Add(row);
                     }
                 }

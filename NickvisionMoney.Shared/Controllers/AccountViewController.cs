@@ -165,6 +165,24 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// The way in which to sort transactions
+    /// </summary>
+    public SortBy SortTransactionsBy
+    {
+        get => _account.Metadata.SortTransactionsBy;
+
+        set
+        {
+            if (_account.Metadata.SortTransactionsBy != value)
+            {
+                _account.Metadata.SortTransactionsBy = value;
+                _account.UpdateMetadata(_account.Metadata);
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    /// <summary>
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast
@@ -256,7 +274,22 @@ public class AccountViewController
                 }
                 filteredTransactions.Add(pair.Value);
             }
-            filteredTransactions.Sort();
+            filteredTransactions.Sort((a, b) =>
+            {
+                var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
+                {
+                    if (compareTo == 1)
+                    {
+                        compareTo = -1;
+                    }
+                    else if (compareTo == -1)
+                    {
+                        compareTo = 1;
+                    }
+                }
+                return compareTo;
+            });
             return filteredTransactions;
         }
     }

@@ -66,8 +66,10 @@ public sealed partial class AccountView : UserControl
         DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
         DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
-        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstToLast"]);
-        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastToFirst"]);
+        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Id"]);
+        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Date"]);
+        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
+        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load UI
@@ -87,6 +89,7 @@ public sealed partial class AccountView : UserControl
             BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
             BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
         }
+        CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
         if (_controller.SortFirstToLast)
         {
             BtnSortTopBottom.IsChecked = true;
@@ -175,15 +178,7 @@ public sealed partial class AccountView : UserControl
                         var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            ListTransactions.Items.Add(transactionRow);
-
-                        }
-                        else
-                        {
-                            ListTransactions.Items.Insert(0, transactionRow);
-                        }
+                        ListTransactions.Items.Add(transactionRow);
                     }
                     ViewStackTransactions.ChangePage("Transactions");
                 }
@@ -637,6 +632,13 @@ public sealed partial class AccountView : UserControl
             ListTransactions.SelectedIndex = -1;
         }
     }
+
+    /// <summary>
+    /// Occurs when the sort transactions by combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbSortTransactionsBy_SelectionChanged(object sender, SelectionChangedEventArgs e) => _controller.SortTransactionsBy = (SortBy)CmbSortTransactionsBy.SelectedIndex;
 
     /// <summary>
     /// Occurs when the sort top to bottom button is clicked

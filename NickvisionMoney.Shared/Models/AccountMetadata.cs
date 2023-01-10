@@ -11,6 +11,15 @@ public enum AccountType
 }
 
 /// <summary>
+/// Ways to sort transactions
+/// </summary>
+public enum SortBy
+{
+    Id = 0,
+    Date
+}
+
+/// <summary>
 /// A model of metadata for an account
 /// </summary>
 public class AccountMetadata
@@ -47,6 +56,10 @@ public class AccountMetadata
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast { get; set; }
+    /// <summary>
+    /// The way in which to sort transactions
+    /// </summary>
+    public SortBy SortTransactionsBy { get; set; }
 
     /// <summary>
     /// Constructs a new AccountMetadata
@@ -63,5 +76,6 @@ public class AccountMetadata
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
         SortFirstToLast = true;
+        SortTransactionsBy = SortBy.Id;
     }
 }

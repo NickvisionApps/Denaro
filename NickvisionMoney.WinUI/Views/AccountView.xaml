@@ -239,6 +239,8 @@
                             <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,10,0" Orientation="Horizontal">
+                                <ComboBox x:Name="CmbSortTransactionsBy" Margin="0,0,10,0" SelectionChanged="CmbSortTransactionsBy_SelectionChanged"/>
+
                                 <ToggleButton x:Name="BtnSortTopBottom" Click="BtnSortTopBottom_Click">
                                     <ToggleButton.Content>
                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE015;"/>
