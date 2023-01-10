@@ -49,7 +49,7 @@ We will then take care of the question as soon as possible.
 A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask you to investigate carefully, collect information and describe the issue in detail in your report. Please complete the following steps in advance to help us fix any potential bug as fast as possible.
 
 - Make sure that you are using the latest released version.
-- Determine if your bug is really a bug and not an error on your side. If you are looking for support, you might want to check [this section](#i-have-a-question)).
+- Determine if your bug is really a bug and not an error on your side. If you are looking for support, you might want to check [this section](#i-have-a-question).
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in both the [Discussions](https://github.com/nlogozzo/NickvisionMoney/discussions) and [Issues](https://github.com/nlogozzo/NickvisionMoney/issues) sections.
 - Collect information about the bug:
   - Stack trace (Traceback)
@@ -93,7 +93,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/nlogoz
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
-- You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
+- You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://flathub.org/apps/details/com.uploadedlobster.peek) on Linux.
 - **Explain why this enhancement would be useful** to most Nickvision Denaro users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 ### Providing Translations
@@ -112,7 +112,17 @@ In the `NickvisionMoney.Shared/Resources` folder you will see a file called `Str
 
 To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
 
+In case you run the app in GNOME Builder, it will force the app to run in en_US locale. To run the app in your locale without exporting and installing it, follow this steps:
+
+1. Build the application
+2. Press Ctrl+Alt+T to open a terminal inside the application environment
+3. Run the application with the following command: `LC_ALL=<locale-code> /app/opt/org.nickvision.money/NickvisionMoney.GNOME`, where `<locale-code>` is your system locale code (e.g. `it-IT.UTF8`).
+
 Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
+
+#### Translating documentation
+
+User documentation for Denaro is translated separately from the application itself. Denaro uses [Yelp](http://yelp.io/) to provide documentation written in [Mallard](http://projectmallard.org/index.html). To add a new translation, in `NickvisionMoney.Shared/Docs/yelp` create a directory with a name of language code, copy the content of `C` directory there and translate pages using any text editor. On Windows the application uses pages in HTML format (located in `NickvisionMoney.Shared/Docs/html`) that are generated from Yelp pages. HTML pages shouldn't be touched and your pull request should not contain any changes for HTML - our team will generate HTML pages after your translation will be accepted to be sure that the content of HTML pages will be the same as of Yelp pages.
 
 ### Your First Code Contribution
 
