@@ -43,7 +43,17 @@
                     </HyperlinkButton.Content>
                 </HyperlinkButton>
 
-                <HyperlinkButton Margin="-12,12,0,0" Click="GitHubRepo">
+                <HyperlinkButton Margin="-12,12,0,0" Click="Help">
+                    <HyperlinkButton.Content>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11B;"/>
+
+                            <TextBlock x:Name="LblBtnHelp"/>
+                        </StackPanel>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
+                
+                <HyperlinkButton Margin="-12,0,0,0" Click="GitHubRepo">
                     <HyperlinkButton.Content>
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1D3;"/>
