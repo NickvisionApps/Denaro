@@ -58,7 +58,7 @@ cp ./NickvisionMoney.GNOME/org.nickvision.money.extension.xml   \
 update-mime-database "${INSTALL_PREFIX}"/share/mime/
 
 echo "Installing user docs..."
-cd NickvisionMoney.GNOME/Docs
+cd NickvisionMoney.Shared/Docs/yelp
 for lang in *
 do
 	mkdir -p $INSTALL_PREFIX/share/help/$lang/denaro/
