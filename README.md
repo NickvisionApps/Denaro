@@ -22,20 +22,9 @@
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# Translating
-Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
+# Contributing
 
-## Via Weblate
-Denaro is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
-
-## Manually
-To start translating the app, fork the repository and clone it locally.
-
-In the `NickvisionMoney.Shared/Resources` folder you will see a file called `String.resx`. This is a C# resource file that contains all the strings for the application. Simply copy that file and rename it `String.<lang-code>.resx`. For example, if I'm creating an Italian translation, the copied file would be called `Strings.it.resx`. Once you have your copied file, simply replace each `<value>` block of each `<data>` string block with your language's appropriate translation.
-
-To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
-
-Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the project and how to provide information so we can help you in case of troubles with the app.
 
 # GNOME Screenshots
 ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
