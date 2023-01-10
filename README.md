@@ -1,7 +1,9 @@
-# Money
+# Denaro
 <img src="NickvisionMoney.Shared/Resources/org.nickvision.money.svg" width="100" height="100"/>
 
  **A personal finance manager**
+ 
+ [![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/)
 
 # Features
 - A cross-platform C# application
@@ -20,54 +22,60 @@
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# GNOME Screenshots
-![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
-![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
-<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='350px'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='350px'></p>
-
-# WinUI Screenshots
-![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
-![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
-![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
-![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
-
 # Translating
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
+## Via Weblate
+Denaro is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-money/)!
+
+## Manually
 To start translating the app, fork the repository and clone it locally.
 
 In the `NickvisionMoney.Shared/Resources` folder you will see a file called `String.resx`. This is a C# resource file that contains all the strings for the application. Simply copy that file and rename it `String.<lang-code>.resx`. For example, if I'm creating an Italian translation, the copied file would be called `Strings.it.resx`. Once you have your copied file, simply replace each `<value>` block of each `<data>` string block with your language's appropriate translation.
 
 To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
 
-Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx` and commit these changes.
+Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
 
-Even if you're running Windows, we ask you to also translate metadata for GNOME (Linux) version of the app. There are 2 places that require changes when a new translation is added:
-- `NickvisionMoney.GNOME/org.nickvision.money.desktop`: `Comment[lang-code]` line
-- `NickvisionMoney.GNOME/org.nickvision.money.metainfo.xml`: `<description>` section
+# GNOME Screenshots
+![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
+![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
+<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='30%'></p>
 
-When you're done, create a pull request to the project.
+# WinUI Screenshots
+![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
+![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
+![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
+![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
+![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
 
 # GNOME Theming
 
 [![Please do not theme this app](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app) 
 
-The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. However, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be in `~/.var/app/org.nickvision.money/config/gtk-4.0/gtk.css` if you installed the app using Flatpak or in `~/.config/gtk-4.0/gtk.css` otherwise. An example:
+The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. However, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be added to `~/.config/gtk-4.0/gtk.css`. An example (not really pleasant-looking, it's just to show what modifications you can apply):
 
 ```
-.money-total {
+.denaro-total {
     background-color: @warning_color;
     color: #fff;
 }
 
-.money-income {
+.denaro-income {
     color: @purple_2;
 }
 
-.money-expense {
+.denaro-expense {
     background: linear-gradient(to right, #000, @blue_4);
     color: #fff;
 }
+
+@define-color denaro_calendar_today_bg_color @blue_5;
+@define-color denaro_calendar_today_fg_color #ff0000;
+@define-color denaro_calendar_marked_day_fg_color @success_color;
+@define-color denaro_calendar_selected_day_bg_color @card_bg_color;
+@define-color denaro_calendar_selected_day_fg_color #55cc10;
+@define-color denaro_calendar_other_month_fg_color @dark_5;
 ```
 
 # Dependencies

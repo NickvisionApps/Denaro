@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -21,6 +22,7 @@ namespace NickvisionMoney.WinUI.Views;
 public sealed partial class AccountView : UserControl
 {
     private readonly AccountViewController _controller;
+    private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
     private bool _isAccountLoading;
 
@@ -28,34 +30,34 @@ public sealed partial class AccountView : UserControl
     /// Constructs an AccountView
     /// </summary>
     /// <param name="controller">The AccountViewController</param>
+    /// <param name="updateNavViewItemTitle">The Action<string, string> callback for updating a nav view item title</param>
     /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
-    public AccountView(AccountViewController controller, Action<object> initializeWithWindow)
+    public AccountView(AccountViewController controller, Action<string, string> updateNavViewItemTitle, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
         _isAccountLoading = false;
         //Localize Strings
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
-        BtnNewTransaction.Label = _controller.Localizer["NewTransaction"];
-        ToolTipService.SetToolTip(BtnNewTransaction, _controller.Localizer["NewTransaction", "Tooltip"]);
-        MenuNewTransaction.Text = _controller.Localizer["NewTransaction"];
-        BtnNewGroup.Label = _controller.Localizer["NewGroup"];
-        ToolTipService.SetToolTip(BtnNewGroup, _controller.Localizer["NewGroup", "Tooltip"]);
-        MenuNewGroup.Text = _controller.Localizer["NewGroup"];
-        BtnTransferMoney.Label = _controller.Localizer["TransferMoney"];
-        ToolTipService.SetToolTip(BtnTransferMoney, _controller.Localizer["TransferMoney", "Tooltip"]);
-        MenuTransferMoney.Text = _controller.Localizer["TransferMoney"];
+        BtnNew.Label = _controller.Localizer["New"];
+        MenuNewTransaction.Text = _controller.Localizer["Transaction"];
+        MenuContextNewTransaction.Text = _controller.Localizer["NewTransaction"];
+        MenuNewGroup.Text = _controller.Localizer["Group"];
+        MenuContextNewGroup.Text = _controller.Localizer["NewGroup"];
+        MenuTransferMoney.Text = _controller.Localizer["Transfer"];
+        MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
         BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
-        BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
-        BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+        ToolTipService.SetToolTip(BtnShowHideGroups, _controller.Localizer["ToggleGroups", "Tooltip"]);
         BtnFilters.Label = _controller.Localizer["Filters"];
         MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
-        LblOverview.Text = _controller.Localizer["Overview"];
+        BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
+        LblOverview.Text = _controller.Localizer["Overview", "Today"];
+        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
@@ -64,13 +66,30 @@ public sealed partial class AccountView : UserControl
         DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
         DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
-        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstToLast"]);
-        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastToFirst"]);
+        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Id"]);
+        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Date"]);
+        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
+        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
         _controller.AccountInfoChanged += AccountInfoChanged;
         //Load UI
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
+        if (_controller.ShowGroupsList)
+        {
+            SectionGroups.Visibility = Visibility.Visible;
+            DockPanel.SetDock(SectionCalendar, Dock.Bottom);
+            BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+        }
+        else
+        {
+            SectionGroups.Visibility = Visibility.Collapsed;
+            DockPanel.SetDock(SectionCalendar, Dock.Top);
+            BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
+            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+        }
+        CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
         if (_controller.SortFirstToLast)
         {
             BtnSortTopBottom.IsChecked = true;
@@ -88,8 +107,14 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        AccountInfoChanged(null, EventArgs.Empty);
-        await _controller.RunRepeatTransactionsAsync();
+        if(_controller.AccountNeedsFirstTimeSetup)
+        {
+            AccountSettings(null, new RoutedEventArgs());
+        }
+        if(!(await _controller.SyncRepeatTransactionsAsync()))
+        {
+            AccountInfoChanged(null, EventArgs.Empty);
+        }
     }
 
     /// <summary>
@@ -103,16 +128,17 @@ public sealed partial class AccountView : UserControl
         {
             _isAccountLoading = true;
             //Overview
-            LblTotalAmount.Text = _controller.AccountTotalString;
+            _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
+            LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
-            LblIncomeAmount.Text = _controller.AccountIncomeString;
+            LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
             LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
-            LblExpenseAmount.Text = _controller.AccountExpenseString;
+            LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
             ListGroups.Items.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
             ListGroups.Items.Add(ungroupedRow);
             //Other Group Rows
@@ -120,7 +146,7 @@ public sealed partial class AccountView : UserControl
             groups.Sort();
             foreach (var group in groups)
             {
-                var groupRow = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
                 groupRow.DeleteTriggered += DeleteGroup;
                 groupRow.FilterChanged += UpdateGroupFilter;
@@ -149,18 +175,10 @@ public sealed partial class AccountView : UserControl
                 {
                     foreach (var transaction in filteredTransactions)
                     {
-                        var transactionRow = new TransactionRow(transaction, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+                        var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            ListTransactions.Items.Add(transactionRow);
-
-                        }
-                        else
-                        {
-                            ListTransactions.Items.Insert(0, transactionRow);
-                        }
+                        ListTransactions.Items.Add(transactionRow);
                     }
                     ViewStackTransactions.ChangePage("Transactions");
                 }
@@ -198,6 +216,7 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -215,7 +234,55 @@ public sealed partial class AccountView : UserControl
         };
         if (await transactionDialog.ShowAsync())
         {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if(_controller.GetIsSourceRepeatTransaction(transactionId) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            {
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                {
+                    var editDialog = new ContentDialog()
+                    {
+                        Title = _controller.Localizer["RepeatIntervalChanged"],
+                        Content = _controller.Localizer["RepeatIntervalChangedDescription"],
+                        CloseButtonText = _controller.Localizer["Cancel"],
+                        PrimaryButtonText = _controller.Localizer["DeleteExisting"],
+                        SecondaryButtonText = _controller.Localizer["DisassociateExisting"],
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = Content.XamlRoot
+                    };
+                    var result = await editDialog.ShowAsync();
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        await _controller.DeleteGeneratedTransactionsAsync(transactionId);
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    else if(result == ContentDialogResult.Secondary)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                    }
+                }
+                else
+                {
+                    var editDialog = new ContentDialog()
+                    {
+                        Title = _controller.Localizer["EditTransaction", "SourceRepeat"],
+                        Content = _controller.Localizer["EditTransactionDescription", "SourceRepeat"],
+                        CloseButtonText = _controller.Localizer["Cancel"],
+                        PrimaryButtonText = _controller.Localizer["EditSourceGeneratedTransaction"],
+                        SecondaryButtonText = _controller.Localizer["EditOnlySourceTransaction"],
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = Content.XamlRoot
+                    };
+                    var result = await editDialog.ShowAsync();
+                    if (result != ContentDialogResult.None)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
+                    }
+                }
+            }
+            else
+            {
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -226,18 +293,39 @@ public sealed partial class AccountView : UserControl
     /// <param name="groupId">The id of the transaction to be deleted</param>
     private async void DeleteTransaction(object? sender, uint transactionId)
     {
-        var deleteDialog = new ContentDialog()
+        if(_controller.GetIsSourceRepeatTransaction(transactionId))
         {
-            Title = _controller.Localizer["DeleteTransaction"],
-            Content = _controller.Localizer["DeleteTransactionDescription"],
-            CloseButtonText = _controller.Localizer["No"],
-            PrimaryButtonText = _controller.Localizer["Yes"],
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
-        };
-        if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            var deleteDialog = new ContentDialog()
+            {
+                Title = _controller.Localizer["DeleteTransaction", "SourceRepeat"],
+                Content = _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"],
+                CloseButtonText = _controller.Localizer["Cancel"],
+                PrimaryButtonText = _controller.Localizer["DeleteSourceGeneratedTransaction"],
+                SecondaryButtonText = _controller.Localizer["DeleteOnlySourceTransaction"],
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            var result = await deleteDialog.ShowAsync();
+            if (result != ContentDialogResult.None)
+            {
+                await _controller.DeleteSourceTransactionAsync(transactionId, result == ContentDialogResult.Primary);
+            }
+        }
+        else
         {
-            await _controller.DeleteTransactionAsync(transactionId);
+            var deleteDialog = new ContentDialog()
+            {
+                Title = _controller.Localizer["DeleteTransaction"],
+                Content = _controller.Localizer["DeleteTransactionDescription"],
+                CloseButtonText = _controller.Localizer["No"],
+                PrimaryButtonText = _controller.Localizer["Yes"],
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                await _controller.DeleteTransactionAsync(transactionId);
+            }
         }
     }
 
@@ -313,7 +401,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private async void TransferMoney(object? sender, RoutedEventArgs e)
     {
-        if(_controller.AccountTotal > 0)
+        if(_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _initializeWithWindow)
@@ -410,6 +498,7 @@ public sealed partial class AccountView : UserControl
             BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
             BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
+        _controller.ShowGroupsList = SectionGroups.Visibility == Visibility.Visible;
     }
 
     /// <summary>
@@ -447,6 +536,24 @@ public sealed partial class AccountView : UserControl
         Calendar.SelectedDates.Add(DateTimeOffset.Now);
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
+    }
+
+    /// <summary>
+    /// Occurs when the account settings button is clicked
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void AccountSettings(object? sender, RoutedEventArgs e)
+    {
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController)
+        {
+            XamlRoot = Content.XamlRoot
+        };
+        if (await accountSettingsDialog.ShowAsync())
+        {
+            _controller.UpdateMetadata(accountSettingsController.Metadata);
+        }
     }
 
     /// <summary>
@@ -517,10 +624,21 @@ public sealed partial class AccountView : UserControl
     {
         if (ListTransactions.SelectedIndex != -1)
         {
-            EditTransaction(null, ((TransactionRow)ListTransactions.SelectedItem).Id);
+            var transactionRow = (TransactionRow)ListTransactions.SelectedItem;
+            if(transactionRow.RepeatFrom <= 0)
+            {
+                EditTransaction(null, transactionRow.Id);
+            }
             ListTransactions.SelectedIndex = -1;
         }
     }
+
+    /// <summary>
+    /// Occurs when the sort transactions by combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbSortTransactionsBy_SelectionChanged(object sender, SelectionChangedEventArgs e) => _controller.SortTransactionsBy = (SortBy)CmbSortTransactionsBy.SelectedIndex;
 
     /// <summary>
     /// Occurs when the sort top to bottom button is clicked

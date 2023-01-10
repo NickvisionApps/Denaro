@@ -1,7 +1,5 @@
 using NickvisionMoney.Shared.Controllers;
-using System;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -10,56 +8,17 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class GroupDialog
 {
-    private delegate void ResponseSignal(nint gObject, string response, nint data);
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] ResponseSignal c_handler, nint data, nint destroy_data, int connect_flags);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_add_response(nint dialog, string id, string label);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint adw_message_dialog_new(nint parent, string heading, string body);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_close_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_default_response(nint dialog, string response);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_extra_child(nint dialog, nint child);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_message_dialog_set_response_appearance(nint dialog, string response, int appearance);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gtk_widget_is_visible(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_widget_show(nint widget);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_destroy(nint window);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_default_size(nint window, int x, int y);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_hide_on_close(nint window, [MarshalAs(UnmanagedType.I1)] bool setting);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_window_set_modal(nint window, [MarshalAs(UnmanagedType.I1)] bool modal);
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
     private readonly GroupDialogController _controller;
-    private readonly nint _dialog;
+    private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
-    private readonly Adw.ActionRow _rowName;
-    private readonly Gtk.Entry _txtName;
-    private readonly Adw.ActionRow _rowDescription;
-    private readonly Gtk.Entry _txtDescription;
-    private readonly ResponseSignal _responseSignal;
+    private readonly Adw.EntryRow _rowName;
+    private readonly Adw.EntryRow _rowDescription;
 
     /// <summary>
     /// Constructs a GroupDialog
@@ -70,60 +29,51 @@ public partial class GroupDialog
     {
         _controller = controller;
         //Dialog Settings
-        _dialog = adw_message_dialog_new(parentWindow.Handle, _controller.Localizer["Group"], "");
-        gtk_window_set_default_size(_dialog, 450, -1);
-        gtk_window_set_hide_on_close(_dialog, true);
-        adw_message_dialog_add_response(_dialog, "cancel", _controller.Localizer["Cancel"]);
-        adw_message_dialog_set_close_response(_dialog, "cancel");
-        adw_message_dialog_add_response(_dialog, "ok", _controller.Localizer["OK"]);
-        adw_message_dialog_set_default_response(_dialog, "ok");
-        adw_message_dialog_set_response_appearance(_dialog, "ok", 1); // ADW_RESPONSE_SUGGESTED
-        _responseSignal = (nint sender, string response, nint data) => _controller.Accepted = response == "ok";
-        g_signal_connect_data(_dialog, "response", _responseSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Group"], "");
+        _dialog.SetDefaultSize(360, -1);
+        _dialog.SetHideOnClose(true);
+        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
+        _dialog.SetCloseResponse("cancel");
+        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.SetDefaultResponse("ok");
+        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Preferences Group
         _grpGroup = Adw.PreferencesGroup.New();
         //Name
-        _rowName = Adw.ActionRow.New();
+        _rowName = Adw.EntryRow.New();
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-        _txtName = Gtk.Entry.New();
-        _txtName.SetValign(Gtk.Align.Center);
-        _txtName.SetPlaceholderText(_controller.Localizer["Name", "Placeholder"]);
-        _txtName.SetActivatesDefault(true);
-        _rowName.AddSuffix(_txtName);
+        _rowName.SetActivatesDefault(true);
         _grpGroup.Add(_rowName);
         //Description
-        _rowDescription = Adw.ActionRow.New();
+        _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
-        _txtDescription = Gtk.Entry.New();
-        _txtDescription.SetValign(Gtk.Align.Center);
-        _txtDescription.SetPlaceholderText(_controller.Localizer["Description", "Placeholder"]);
-        _txtDescription.SetActivatesDefault(true);
-        _rowDescription.AddSuffix(_txtDescription);
+        _rowDescription.SetActivatesDefault(true);
         _grpGroup.Add(_rowDescription);
         //Layout
-        adw_message_dialog_set_extra_child(_dialog, _grpGroup.Handle);
+        _dialog.SetExtraChild(_grpGroup);
         //Load Group
-        _txtName.SetText(_controller.Group.Name);
-        _txtDescription.SetText(_controller.Group.Description);
+        _rowName.SetText(_controller.Group.Name);
+        _rowDescription.SetText(_controller.Group.Description);
     }
 
     /// <summary>
     /// Runs the dialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
-    public async Task<bool> RunAsync()
+    public bool Run()
     {
-        gtk_widget_show(_dialog);
-        gtk_window_set_modal(_dialog, true);
+        _dialog.Show();
+        _dialog.SetModal(true);
         _rowName.GrabFocus();
-        while(gtk_widget_is_visible(_dialog))
+        while(_dialog.IsVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
         }
         if(_controller.Accepted)
         {
-            gtk_window_set_modal(_dialog, false);
-            var status = _controller.UpdateGroup(_txtName.GetText(), _txtDescription.GetText());
+            _dialog.SetModal(false);
+            var status = _controller.UpdateGroup(_rowName.GetText(), _rowDescription.GetText());
             if(status != GroupCheckStatus.Valid)
             {
                 _rowName.RemoveCssClass("error");
@@ -139,10 +89,10 @@ public partial class GroupDialog
                     _rowName.AddCssClass("error");
                     _rowName.SetTitle(_controller.Localizer["Name", "Exists"]);
                 }
-                return await RunAsync();
+                return Run();
             }
         }
-        gtk_window_destroy(_dialog);
+        _dialog.Destroy();
         return _controller.Accepted;
     }
 }

@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -32,39 +33,47 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
+    /// Whether or not an account needs to be setup for the first time
+    /// </summary>
+    public bool AccountNeedsFirstTimeSetup => _account.NeedsFirstTimeSetup;
+    /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
-    public string AccountTitle => Path.GetFileNameWithoutExtension(_account.Path);
+    public string AccountTitle => _account.Metadata.Name;
     /// <summary>
-    /// The total amount of the account
+    /// The type of the account
     /// </summary>
-    public decimal AccountTotal => _account.Total;
+    public AccountType AccountType => _account.Metadata.AccountType;
     /// <summary>
-    /// The total amount of the account as a string
+    /// The total amount of the account for today
     /// </summary>
-    public string AccountTotalString => _account.Total.ToString("C");
+    public decimal AccountTodayTotal => _account.TodayTotal;
     /// <summary>
-    /// The income amount of the account
+    /// The total amount of the account for today as a string
     /// </summary>
-    public decimal AccountIncome => _account.Income;
+    public string AccountTodayTotalString => _account.TodayTotal.ToString("C", CultureForNumberString);
     /// <summary>
-    /// The income amount of the account as a string
+    /// The income amount of the account for today
     /// </summary>
-    public string AccountIncomeString => _account.Income.ToString("C");
+    public decimal AccountTodayIncome => _account.TodayIncome;
     /// <summary>
-    /// The expense amount of the account
+    /// The income amount of the account for today as a string
     /// </summary>
-    public decimal AccountExpense => _account.Expense;
+    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C", CultureForNumberString);
     /// <summary>
-    /// The expense amount of the account as a string
+    /// The expense amount of the account for today
     /// </summary>
-    public string AccountExpenseString => _account.Expense.ToString("C");
+    public decimal AccountTodayExpense => _account.TodayExpense;
     /// <summary>
-    /// The groups of the account
+    /// The expense amount of the account for today as a string
+    /// </summary>
+    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
+    /// <summary>
+    /// The groups of the account for today
     /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
     /// <summary>
-    /// The transactions of the account
+    /// The transactions of the account for today
     /// </summary>
     public Dictionary<uint, Transaction> Transactions => _account.Transactions;
 
@@ -72,6 +81,10 @@ public class AccountViewController
     /// Occurs when a notification is sent
     /// </summary>
     private event EventHandler<NotificationSentEventArgs>? NotificationSent;
+    /// <summary>
+    /// Occurs when the recent accounts list is changed
+    /// </summary>
+    private event EventHandler? RecentAccountsChanged;
     /// <summary>
     /// Occurs when the information of an account is changed
     /// </summary>
@@ -87,12 +100,14 @@ public class AccountViewController
     /// <param name="path">The path of the account</param>
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="notificationSent">The notification sent event</param>
-    public AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent)
+    /// <param name="recentAccountsChanged">The recent accounts changed event</param>
+    internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
         NotificationSent = notificationSent;
+        RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
@@ -111,18 +126,75 @@ public class AccountViewController
     ~AccountViewController() => _account.Dispose();
 
     /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString
+    {
+        get
+        {
+            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            if (_account.Metadata.UseCustomCurrency)
+            {
+                culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? "";
+            }
+            else
+            {
+                culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
+            }
+            return culture;
+        }
+    }
+
+    /// <summary>
+    /// Whether or not to show the groups section on the account view
+    /// </summary>
+    public bool ShowGroupsList
+    {
+        get => _account.Metadata.ShowGroupsList;
+
+        set
+        {
+            if (_account.Metadata.ShowGroupsList != value)
+            {
+                _account.Metadata.ShowGroupsList = value;
+                _account.UpdateMetadata(_account.Metadata);
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    /// <summary>
+    /// The way in which to sort transactions
+    /// </summary>
+    public SortBy SortTransactionsBy
+    {
+        get => _account.Metadata.SortTransactionsBy;
+
+        set
+        {
+            if (_account.Metadata.SortTransactionsBy != value)
+            {
+                _account.Metadata.SortTransactionsBy = value;
+                _account.UpdateMetadata(_account.Metadata);
+                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    /// <summary>
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast
     {
-        get => Configuration.Current.SortFirstToLast;
+        get => _account.Metadata.SortFirstToLast;
 
         set
         {
-            if(Configuration.Current.SortFirstToLast != value)
+            if(_account.Metadata.SortFirstToLast != value)
             {
-                Configuration.Current.SortFirstToLast = value;
-                Configuration.Current.Save();
+                _account.Metadata.SortFirstToLast = value;
+                _account.UpdateMetadata(_account.Metadata);
                 AccountInfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -157,7 +229,7 @@ public class AccountViewController
             var total = 0m;
             foreach (var pair in Transactions)
             {
-                if (pair.Value.GroupId == -1)
+                if (pair.Value.GroupId == -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
                 {
                     total += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : (pair.Value.Amount * -1);
                 }
@@ -202,6 +274,22 @@ public class AccountViewController
                 }
                 filteredTransactions.Add(pair.Value);
             }
+            filteredTransactions.Sort((a, b) =>
+            {
+                var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
+                {
+                    if (compareTo == 1)
+                    {
+                        compareTo = -1;
+                    }
+                    else if (compareTo == -1)
+                    {
+                        compareTo = 1;
+                    }
+                }
+                return compareTo;
+            });
             return filteredTransactions;
         }
     }
@@ -267,6 +355,12 @@ public class AccountViewController
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// Creates a new AccountSettingsDialogController
+    /// </summary>
+    /// <returns>The new AccountSettingsDialogController</returns>
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsFirstTimeSetup, Localizer);
+
+    /// <summary>
     /// Creates a new TransactionDialogController
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
@@ -277,7 +371,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -292,7 +386,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, TransactionDefaultColor, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -328,17 +422,38 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
+
+    /// <summary>
+    /// Updates the metadata of the account
+    /// </summary>
+    /// <param name="metadata">The new metadata</param>
+    /// <returns>True if successful, else false</returns>
+    public void UpdateMetadata(AccountMetadata metadata)
+    {
+        _account.UpdateMetadata(metadata);
+        Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
+        {
+            Name = AccountTitle,
+            Type = AccountType
+        });
+        Configuration.Current.Save();
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     /// <summary>
     /// Checks if repeat transactions are needed and creates them if so
     /// </summary>
-    public async Task RunRepeatTransactionsAsync()
+    /// <returns>True if AccountInfoChanged was triggered, else false</returns>
+    public async Task<bool> SyncRepeatTransactionsAsync()
     {
-        if(await _account.RunRepeatTransactionsAsync())
+        if(await _account.SyncRepeatTransactionsAsync())
         {
             AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
+        return false;
     }
 
     /// <summary>
@@ -362,6 +477,17 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Updates a source transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
+    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    {
+        await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Removes a transaction from the account
     /// </summary>
     /// <param name="id">The id of the transaction to delete</param>
@@ -369,6 +495,44 @@ public class AccountViewController
     {
         await _account.DeleteTransactionAsync(id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes a source transaction from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
+    public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
+    {
+        await _account.DeleteSourceTransactionAsync(id, deleteGenerated);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Removes generated repeat transactions from the account
+    /// </summary>
+    /// <param name="id">The id of the source transaction</param>
+    public async Task DeleteGeneratedTransactionsAsync(uint id)
+    {
+        await _account.DeleteGeneratedTransactionsAsync(id);
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Gets whether or not the transaction with the provided id is a source repeat transaction
+    /// </summary>
+    /// <param name="id">The id of the transaction</param>
+    /// <returns>True if transaction is a source repeat transaction, else false</returns>
+    public bool GetIsSourceRepeatTransaction(uint id)
+    {
+        try
+        {
+            return Transactions[id].RepeatFrom == 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -399,6 +563,7 @@ public class AccountViewController
     public async Task DeleteGroupAsync(uint id)
     {
         await _account.DeleteGroupAsync(id);
+        _filters.Remove((int)id);
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 

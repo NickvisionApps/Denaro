@@ -29,7 +29,7 @@ public class MainWindowController
     /// <summary>
     /// A PreferencesViewController
     /// </summary>
-    public PreferencesViewController PreferencesViewController => new PreferencesViewController(Localizer);
+    public PreferencesViewController PreferencesViewController => new PreferencesViewController(RecentAccountsChanged, Localizer);
     /// <summary>
     /// Whether or not the version is a development version or not
     /// </summary>
@@ -41,7 +41,7 @@ public class MainWindowController
     /// <summary>
     /// The list of recent accounts
     /// </summary>
-    public List<string> RecentAccounts => Configuration.Current.RecentAccounts;
+    public List<RecentAccount> RecentAccounts => Configuration.Current.RecentAccounts;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -109,6 +109,22 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Gets a color for an account type
+    /// </summary>
+    /// <param name="accountType">The account type</param>
+    /// <returns>The rgb color for the account type</returns>
+    public string GetColorForAccountType(AccountType accountType)
+    {
+        return accountType switch
+        {
+            AccountType.Checking => Configuration.Current.AccountCheckingColor,
+            AccountType.Savings => Configuration.Current.AccountSavingsColor,
+            AccountType.Business => Configuration.Current.AccountBusinessColor,
+            _ => Configuration.Current.AccountSavingsColor
+        };
+    }
+
+    /// <summary>
     /// Gets whether or not an account with the given path is opened or not
     /// </summary>
     /// <param name="path">The path of the account to check</param>
@@ -128,10 +144,14 @@ public class MainWindowController
         }
         if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
-            var controller = new AccountViewController(path, Localizer, NotificationSent);
+            var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
             OpenAccounts.Add(controller);
-            Configuration.Current.AddRecentAccount(path);
+            Configuration.Current.AddRecentAccount(new RecentAccount(path)
+            {
+                Name = controller.AccountTitle,
+                Type = controller.AccountType
+            });
             Configuration.Current.Save();
             AccountAdded?.Invoke(this, EventArgs.Empty);
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);

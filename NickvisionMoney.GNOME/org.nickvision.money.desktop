@@ -1,15 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=Money
+Name=Denaro
 Comment=A personal finance manager
-Comment[de]=Ein persönlicher Finanzmanager
-Comment[es]=Un gestor de finanzas personales
-Comment[fr]=Gestionnaire des dépenses personnelles
-Comment[hi]=एक व्यक्तिगत वित्त संयोजक
-Comment[hr]=Aplikacija za osobne financije
-Comment[it]=Gestione finanziaria personale
-Comment[ru]=Персональный менеджер финансов
-Comment[sv]=En personlig finanshanterare
 Exec=/usr/opt/org.nickvision.money/NickvisionMoney.GNOME
 Icon=org.nickvision.money
 Terminal=false

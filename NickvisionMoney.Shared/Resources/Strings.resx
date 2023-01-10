@@ -19,7 +19,7 @@
 	<!--Use: &#xA; for newline-->
 
 	<data name="Description" xml:space="preserve">
-		<value>A personal finance manager.</value>
+		<value>A personal finance manager</value>
 	</data>
 
 	<data name="Version" xml:space="preserve">
@@ -133,7 +133,7 @@
 
 	<!--MainWindow-->
 	<data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Money Account</value>
+		<value>Nickvision Denaro Account</value>
 	</data>
 
 	<data name="NewAccount" xml:space="preserve">
@@ -256,6 +256,10 @@
 		<value>Overview</value>
 	</data>
 
+	<data name="Overview.Today" xml:space="preserve">
+		<value>Today's Overview</value>
+	</data>
+
 	<data name="Total" xml:space="preserve">
 		<value>Total</value>
 	</data>
@@ -348,6 +352,54 @@
 		<value>Are you sure you want to delete this transaction?&#xA;This action is irreversible.</value>
 	</data>
 
+	<data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+		<value>Delete Transaction</value>
+	</data>
+
+	<data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Deleting only the source transaction will allow individual&#xA;generated transactions to be modifiable.</value>
+	</data>
+
+	<data name="DeleteOnlySourceTransaction" xml:space="preserve">
+		<value>Delete Only Source</value>
+	</data>
+
+	<data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+		<value>Delete Source and Generated</value>
+	</data>
+
+	<data name="EditTransaction.SourceRepeat" xml:space="preserve">
+		<value>Update Transaction</value>
+	</data>
+
+	<data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value>This transaction is a source repeat transaction.&#xA;What would you like to do with the repeat transactions?&#xA;&#xA;Updating only the source transaction will disassociate&#xA;generated transactions from the source.</value>
+	</data>
+
+	<data name="EditOnlySourceTransaction" xml:space="preserve">
+		<value>Update Only Source</value>
+	</data>
+
+	<data name="EditSourceGeneratedTransaction" xml:space="preserve">
+		<value>Update Source and Generated</value>
+	</data>
+
+	<data name="RepeatIntervalChanged" xml:space="preserve">
+		<value>Repeat Interval Changed</value>
+	</data>
+
+	<data name="RepeatIntervalChangedDescription" xml:space="preserve">
+		<value>The repeat interval was changed.&#xA;What would you like to do with existing generated transactions?&#xA;&#xA;New repeat transactions will be generated based off the new interval.</value>
+	</data>
+
+	<data name="DeleteExisting" xml:space="preserve">
+		<value>Delete Existing</value>
+	</data>
+
+	<data name="DisassociateExisting" xml:space="preserve">
+		<value>Disassociate Existing</value>
+	</data>
+
 	<data name="NoMoneyToTransfer" xml:space="preserve">
 		<value>This account has no money available to transfer.</value>
 	</data>
@@ -360,12 +412,28 @@
 		<value>Hide Groups</value>
 	</data>
 
+	<data name="Show" xml:space="preserve">
+		<value>Show</value>
+	</data>
+
 	<data name="ShowGroups" xml:space="preserve">
 		<value>Show Groups</value>
 	</data>
 
 	<data name="ToggleGroups.Tooltip" xml:space="preserve">
 		<value>Toggle Groups Visibility</value>
+	</data>
+
+	<data name="AccountSettings" xml:space="preserve">
+		<value>Account Settings</value>
+	</data>
+
+	<data name="SortBy.Id" xml:space="preserve">
+		<value>Sort By Id</value>
+	</data>
+
+	<data name="SortBy.Date" xml:space="preserve">
+		<value>Sort By Date</value>
 	</data>
 
 	<!--AccountViewController-->
@@ -444,6 +512,10 @@
 	<data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>Weekly</value>
 	</data>
+	
+	<data name="RepeatInterval.Biweekly" xml:space="preserve">
+		<value>Biweekly</value>
+	</data>
 
 	<data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Monthly</value>
@@ -461,8 +533,8 @@
 		<value>Biyearly</value>
 	</data>
 
-	<data name="Manage" xml:space="preserve">
-		<value>Manage</value>
+	<data name="NoEndDate" xml:space="preserve">
+		<value>No End Date</value>
 	</data>
 
 	<data name="View" xml:space="preserve">
@@ -490,7 +562,36 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<!--AccountSettingsDialog-->
+	<data name="AccountType.Checking" xml:space="preserve">
+		<value>Checking</value>
+	</data>
+
+	<data name="AccountType.Savings" xml:space="preserve">
+		<value>Savings</value>
+	</data>
+
+	<data name="AccountType.Business" xml:space="preserve">
+		<value>Business</value>
+	</data>
+
+	<data name="AccountType.Description" xml:space="preserve">
+		<value>This is only a useful label that doesn't affect how the app works.</value>
+	</data>
+
+	<data name="NotAvailable" xml:space="preserve">
+		<value>N/A</value>
+	</data>
+
+	<data name="ReportedCurrency" xml:space="preserve">
+		<value>Your system reported that your currency is</value>
+	</data>
+	
 	<!--Fields-->
+	<data name="Id.Field" xml:space="preserve">
+		<value>Id</value>
+	</data>
+
 	<data name="Name.Field" xml:space="preserve">
 		<value>Name</value>
 	</data>
@@ -542,6 +643,18 @@
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Repeat Interval</value>
 	</data>
+	
+	<data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+		<value>Repeat End Date</value>
+	</data>
+
+	<data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+		<value>Clear End Date</value>
+	</data>
+
+	<data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+		<value>Repeat End Date (Invalid)</value>
+	</data>
 
 	<data name="Group.Field" xml:space="preserve">
 		<value>Group</value>
@@ -567,6 +680,59 @@
 		<value>Destination Account (Invalid)</value>
 	</data>
 
+	<data name="AccountType.Field" xml:space="preserve">
+		<value>Account Type</value>
+	</data>
+
+	<data name="DefaultTransactionType.Field" xml:space="preserve">
+		<value>Default Transaction Type</value>
+	</data>
+
+	<data name="UseCustomCurrency.Field" xml:space="preserve">
+		<value>Use Custom Currency</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Field" xml:space="preserve">
+		<value>Currency Symbol</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+		<value>Enter symbol here</value>
+	</data>
+
+	<data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+		<value>Currency Symbol (Empty)</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Field" xml:space="preserve">
+		<value>Currency Code</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+		<value>Enter code here</value>
+	</data>
+
+	<!--PDF-->
+	<data name="Generated.PDF" xml:space="preserve">
+		<value>Generated: {0}</value>
+	</data>
+
+	<data name="Currency.PDF" xml:space="preserve">
+		<value>Currency</value>
+	</data>
+
+	<data name="GroupName.PDF" xml:space="preserve">
+		<value>Group Name</value>
+	</data>
+
+	<data name="Receipts.PDF" xml:space="preserve">
+		<value>Receipts</value>
+	</data>
+
+	<data name="PageNumber.PDF" xml:space="preserve">
+		<value>Page {0}</value>
+	</data>
+	
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
 		<value>User Interface</value>
@@ -614,6 +780,18 @@
 
 	<data name="TransferColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to new transfers.</value>
+	</data>
+
+	<data name="AccountCheckingColor" xml:space="preserve">
+		<value>Checking Account Color</value>
+	</data>
+
+	<data name="AccountSavingsColor" xml:space="preserve">
+		<value>Savings Account Color</value>
+	</data>
+
+	<data name="AccountBusinessColor" xml:space="preserve">
+		<value>Business Account Color</value>
 	</data>
 
 	<!--Shortcuts Dialog-->

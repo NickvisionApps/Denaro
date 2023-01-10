@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -19,11 +20,19 @@ public class PreferencesViewController
     public AppInfo AppInfo => AppInfo.Current;
 
     /// <summary>
-    /// Constructs a PreferencesViewController
+    /// Occurs when the recent accounts list is changed
     /// </summary>
-    internal PreferencesViewController(Localizer localizer)
+    private event EventHandler? RecentAccountsChanged;
+
+    /// <summary>
+    /// Creates a PreferencesViewController
+    /// </summary>
+    /// <param name="recentAccountsChanged">The recent accounts changed event</param>
+    /// <param name="localizer">The Localizer of the app</param>
+    internal PreferencesViewController(EventHandler? recentAccountsChanged, Localizer localizer)
     {
         Localizer = localizer;
+        RecentAccountsChanged = recentAccountsChanged;
     }
 
     /// <summary>
@@ -57,7 +66,41 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// The color of accounts with Checking type
+    /// </summary>
+    public string AccountCheckingColor
+    {
+        get => Configuration.Current.AccountCheckingColor;
+
+        set => Configuration.Current.AccountCheckingColor = value;
+    }
+
+    /// <summary>
+    /// The color of accounts with Savings type
+    /// </summary>
+    public string AccountSavingsColor
+    {
+        get => Configuration.Current.AccountSavingsColor;
+
+        set => Configuration.Current.AccountSavingsColor = value;
+    }
+
+    /// <summary>
+    /// The color of accounts with Business type
+    /// </summary>
+    public string AccountBusinessColor
+    {
+        get => Configuration.Current.AccountBusinessColor;
+
+        set => Configuration.Current.AccountBusinessColor = value;
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
-    public void SaveConfiguration() => Configuration.Current.Save();
+    public void SaveConfiguration()
+    {
+        Configuration.Current.Save();
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+    }
 }

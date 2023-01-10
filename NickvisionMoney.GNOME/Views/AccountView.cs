@@ -19,17 +19,12 @@ public partial class AccountView
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
-        UInt64 Usec;
+        ulong Usec;
         nint Tz;
         int Interval;
-        Int32 Days;
+        int Days;
         int RefCount;
     };
-
-    private delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
 
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
@@ -51,22 +46,6 @@ public partial class AccountView
 
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial uint g_list_model_get_n_items(nint list);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
 
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
@@ -114,25 +93,19 @@ public partial class AccountView
     private readonly Adw.PreferencesGroup _grpCalendar;
     private readonly Gtk.Button _btnNewTransaction;
     private readonly Adw.ButtonContent _btnNewTransactionContent;
+    private readonly Gtk.DropDown _ddSortTransactionBy;
     private readonly Gtk.ToggleButton _btnSortFirstToLast;
     private readonly Gtk.ToggleButton _btnSortLastToFirst;
+    private readonly Gtk.Box _boxSortButtons;
     private readonly Gtk.Box _boxSort;
     private readonly Adw.PreferencesGroup _grpTransactions;
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
-    private readonly Adw.Bin _binSpinner;
-    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
-    private readonly NotifySignal _dateRangeStartYearChangedSignal;
-    private readonly NotifySignal _dateRangeStartMonthChangedSignal;
-    private readonly NotifySignal _dateRangeStartDayChangedSignal;
-    private readonly NotifySignal _dateRangeEndYearChangedSignal;
-    private readonly NotifySignal _dateRangeEndMonthChangedSignal;
-    private readonly NotifySignal _dateRangeEndDayChangedSignal;
-    private readonly NotifySignal _dateRangeToggledSignal;
+    private readonly Action<string> _updateSubtitle;
 
     /// <summary>
     /// The Page widget
@@ -146,15 +119,17 @@ public partial class AccountView
     /// <param name="parentWindow">MainWindow</param>
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle)
+    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle)
     {
+        _controller = controller;
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
-        _controller = controller;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
-        _groupRows = new List<GroupRow> {};
-        _transactionRows = new List<TransactionRow> {};
+        _groupRows = new List<GroupRow>();
+        _transactionRows = new List<TransactionRow>();
+        _updateSubtitle = updateSubtitle;
         //Register Controller Events
         _controller.AccountInfoChanged += OnAccountInfoChanged;
         //Flap
@@ -178,7 +153,7 @@ public partial class AccountView
         _lblTotal = Gtk.Label.New("");
         _lblTotal.SetValign(Gtk.Align.Center);
         _lblTotal.AddCssClass("accent");
-        _lblTotal.AddCssClass("money-total");
+        _lblTotal.AddCssClass("denaro-total");
         _rowTotal = Adw.ActionRow.New();
         _rowTotal.SetTitle(_controller.Localizer["Total"]);
         _rowTotal.AddSuffix(_lblTotal);
@@ -186,7 +161,7 @@ public partial class AccountView
         _lblIncome = Gtk.Label.New("");
         _lblIncome.SetValign(Gtk.Align.Center);
         _lblIncome.AddCssClass("success");
-        _lblTotal.AddCssClass("money-income");
+        _lblTotal.AddCssClass("denaro-income");
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
@@ -199,7 +174,7 @@ public partial class AccountView
         _lblExpense = Gtk.Label.New("");
         _lblExpense.SetValign(Gtk.Align.Center);
         _lblExpense.AddCssClass("error");
-        _lblExpense.AddCssClass("money-expense");
+        _lblExpense.AddCssClass("denaro-expense");
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
@@ -223,9 +198,12 @@ public partial class AccountView
         var menuActionsExportImport = Gio.Menu.New();
         menuActionsExportImport.AppendSubmenu(_controller.Localizer["ExportToFile"], menuActionsExport);
         menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
+        var menuActionsAccount = Gio.Menu.New();
+        menuActionsAccount.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
         var menuActions = Gio.Menu.New();
         menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
         menuActions.AppendSection(null, menuActionsExportImport);
+        menuActions.AppendSection(null, menuActionsAccount);
         _btnMenuAccountActions.SetMenuModel(menuActions);
         _boxButtonsOverview.Append(_btnMenuAccountActions);
         //Button Reset Overview Filter
@@ -236,7 +214,7 @@ public partial class AccountView
         _boxButtonsOverview.Append(_btnResetOverviewFilter);
         //Overview Group
         _grpOverview = Adw.PreferencesGroup.New();
-        _grpOverview.SetTitle(_controller.Localizer["Overview"]);
+        _grpOverview.SetTitle(_controller.Localizer["Overview", "Today"]);
         _grpOverview.Add(_rowTotal);
         _grpOverview.Add(_rowIncome);
         _grpOverview.Add(_rowExpense);
@@ -248,6 +226,7 @@ public partial class AccountView
         _btnToggleGroups = Gtk.ToggleButton.New();
         _btnToggleGroups.AddCssClass("flat");
         _btnToggleGroups.SetTooltipText(_controller.Localizer["ToggleGroups", "Tooltip"]);
+        _btnToggleGroups.SetActive(!_controller.ShowGroupsList);
         _btnToggleGroups.OnToggled += OnToggleGroups;
         _btnToggleGroupsContent = Adw.ButtonContent.New();
         _btnToggleGroups.SetChild(_btnToggleGroupsContent);
@@ -291,35 +270,65 @@ public partial class AccountView
         _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddStartYear.SetValign(Gtk.Align.Center);
         _ddStartYear.SetShowArrow(false);
-        _dateRangeStartYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartYearChanged();
-        g_signal_connect_data(_ddStartYear.Handle, "notify::selected", _dateRangeStartYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartYear.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartYearChanged();
+            }
+        };
         var dtFormatInfo = new DateTimeFormatInfo();
         _ddStartMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddStartMonth.SetValign(Gtk.Align.Center);
         _ddStartMonth.SetShowArrow(false);
-        _dateRangeStartMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartMonthChanged();
-        g_signal_connect_data(_ddStartMonth.Handle, "notify::selected", _dateRangeStartMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartMonth.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartMonthChanged();
+            }
+        };
         _ddStartDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddStartDay.SetValign(Gtk.Align.Center);
         _ddStartDay.SetShowArrow(false);
-        _dateRangeStartDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeStartDayChanged();
-        g_signal_connect_data(_ddStartDay.Handle, "notify::selected", _dateRangeStartDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddStartDay.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeStartDayChanged();
+            }
+        };
         //End Range DropDowns
         _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
         _ddEndYear.SetValign(Gtk.Align.Center);
         _ddEndYear.SetShowArrow(false);
-        _dateRangeEndYearChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndYearChanged();
-        g_signal_connect_data(_ddEndYear.Handle, "notify::selected", _dateRangeEndYearChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndYear.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndYearChanged();
+            }
+        };
         _ddEndMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
         _ddEndMonth.SetValign(Gtk.Align.Center);
         _ddEndMonth.SetShowArrow(false);
-        _dateRangeEndMonthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndMonthChanged();
-        g_signal_connect_data(_ddEndMonth.Handle, "notify::selected", _dateRangeEndMonthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndMonth.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndMonthChanged();
+            }
+        };
         _ddEndDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
         _ddEndDay.SetValign(Gtk.Align.Center);
         _ddEndDay.SetShowArrow(false);
-        _dateRangeEndDayChangedSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeEndDayChanged();
-        g_signal_connect_data(_ddEndDay.Handle, "notify::selected", _dateRangeEndDayChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _ddEndDay.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "selected")
+            {
+                OnDateRangeEndDayChanged();
+            }
+        };
         //Start Range Boxes
         _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxStartRange.Append(_ddStartYear);
@@ -347,8 +356,13 @@ public partial class AccountView
         _expRange.SetShowEnableSwitch(true);
         _expRange.AddRow(_rowStartRange);
         _expRange.AddRow(_rowEndRange);
-        _dateRangeToggledSignal = (nint sender, nint gParamSpec, nint data) => OnDateRangeToggled();
-        g_signal_connect_data(_expRange.Handle, "notify::enable-expansion", _dateRangeToggledSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _expRange.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "enable-expansion")
+            {
+                OnDateRangeToggled();
+            }
+        };
         _grpRange.Add(_expRange);
         //Calendar Group
         _grpCalendar = Adw.PreferencesGroup.New();
@@ -372,7 +386,15 @@ public partial class AccountView
         _btnNewTransaction.SetValign(Gtk.Align.End);
         _btnNewTransaction.SetMarginBottom(10);
         _btnNewTransaction.SetDetailedActionName("account.newTransaction");
-        //Sort Box And buttons
+        //Sort Box And Buttons
+        _ddSortTransactionBy = Gtk.DropDown.NewFromStrings(new string[2] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"] });
+        _ddSortTransactionBy.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                _controller.SortTransactionsBy = (SortBy)_ddSortTransactionBy.GetSelected();
+            }
+        };
         _btnSortFirstToLast = Gtk.ToggleButton.New();
         _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
         _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
@@ -381,11 +403,14 @@ public partial class AccountView
         _btnSortLastToFirst.SetIconName("view-sort-ascending-symbolic");
         _btnSortLastToFirst.SetTooltipText(_controller.Localizer["SortLastFirst"]);
         _btnSortFirstToLast.BindProperty("active", _btnSortLastToFirst, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
-        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxSort.AddCssClass("linked");
-        _boxSort.SetValign(Gtk.Align.Center);
-        _boxSort.Append(_btnSortFirstToLast);
-        _boxSort.Append(_btnSortLastToFirst);
+        _boxSortButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxSortButtons.AddCssClass("linked");
+        _boxSortButtons.SetValign(Gtk.Align.Center);
+        _boxSortButtons.Append(_btnSortFirstToLast);
+        _boxSortButtons.Append(_btnSortLastToFirst);
+        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _boxSort.Append(_ddSortTransactionBy);
+        _boxSort.Append(_boxSortButtons);
         //Transaction Group
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
@@ -405,21 +430,14 @@ public partial class AccountView
         _scrollTransactions.SetMinContentHeight(360);
         _scrollTransactions.SetVexpand(true);
         _scrollTransactions.SetChild(_flowBox);
+        _scrollTransactions.SetVisible(false);
         //Page No Transactions
         _statusPageNoTransactions = Adw.StatusPage.New();
         _statusPageNoTransactions.SetIconName("money-none-symbolic");
         _statusPageNoTransactions.SetVexpand(true);
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
-        //Loading Spinner
-        _binSpinner = Adw.Bin.New();
-        _binSpinner.SetHexpand(true);
-        _binSpinner.SetVexpand(true);
-        _spinner = Gtk.Spinner.New();
-        _spinner.SetSizeRequest(42, 42);
-        _spinner.SetHalign(Gtk.Align.Center);
-        _spinner.SetValign(Gtk.Align.Center);
-        _binSpinner.SetChild(_spinner);
+        _statusPageNoTransactions.SetVisible(false);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -430,7 +448,6 @@ public partial class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
-        _boxMain.Append(_binSpinner);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
@@ -467,6 +484,10 @@ public partial class AccountView
         var actImport = Gio.SimpleAction.New("importFromFile", null);
         actImport.OnActivate += ImportFromFile;
         actionMap.AddAction(actImport);
+        //Account Settings Action
+        var actAccountSettings = Gio.SimpleAction.New("accountSettings", null);
+        actAccountSettings.OnActivate += AccountSettings;
+        actionMap.AddAction(actAccountSettings);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
@@ -477,30 +498,39 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
         //Load
+        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        if(_controller.SortFirstToLast)
+        {
+            _btnSortFirstToLast.SetActive(true);
+        }
+        else
+        {
+            _btnSortLastToFirst.SetActive(true);
+        }
+        OnToggleGroups(null, EventArgs.Empty);
         OnAccountInfoChanged(null, EventArgs.Empty);
-        _parentWindow.OnWidthChanged();
     }
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
     {
         if(_isFirstTimeLoading)
         {
-            await _controller.RunRepeatTransactionsAsync();
             _isFirstTimeLoading = false;
+            if(_controller.AccountNeedsFirstTimeSetup)
+            {
+                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
-            _scrollTransactions.SetVisible(false);
-            _statusPageNoTransactions.SetVisible(false);
-            _binSpinner.SetVisible(true);
-            _spinner.Start();
-            _paneBox.SetSensitive(false);
-            _boxSort.SetSensitive(false);
             //Overview
-            _lblTotal.SetLabel(_controller.AccountTotalString);
-            _lblIncome.SetLabel(_controller.AccountIncomeString);
-            _lblExpense.SetLabel(_controller.AccountExpenseString);
+            Page.SetTitle(_controller.AccountTitle);
+            _updateSubtitle(_controller.AccountTitle);
+            _lblTotal.SetLabel(_controller.AccountTodayTotalString);
+            _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
+            _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
             //Groups
             foreach (var groupRow in _groupRows)
             {
@@ -508,34 +538,30 @@ public partial class AccountView
             }
             _groupRows.Clear();
             //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.Localizer, _controller.IsFilterActive(-1));
+            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
+            ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
-            var groups = new List<Group>();
-            //Normal groups
-            foreach (var pair in _controller.Groups)
-            {
-                groups.Add(pair.Value);
-            }
+            //Other Group Rows
+            var groups = _controller.Groups.Values.ToList();
             groups.Sort();
             foreach (var group in groups)
             {
-                var row = new GroupRow(group, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                row.FilterChanged += UpdateGroupFilter;
+                var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 row.EditTriggered += EditGroup;
                 row.DeleteTriggered += DeleteGroup;
+                row.FilterChanged += UpdateGroupFilter;
+                row.SetVisible(!_btnToggleGroups.GetActive());
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
-            OnToggleGroups(null, EventArgs.Empty);
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
                 _flowBox.Remove(transactionRow);
             }
             _transactionRows.Clear();
-            _btnSortFirstToLast.SetActive(_controller.SortFirstToLast);
             if (_controller.Transactions.Count > 0)
             {
                 var filteredTransactions = _controller.FilteredTransactions;
@@ -546,17 +572,10 @@ public partial class AccountView
                     _scrollTransactions.SetVisible(true);
                     foreach (var transaction in filteredTransactions)
                     {
-                        var row = new TransactionRow(transaction, _controller.Localizer);
+                        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
-                        if (_controller.SortFirstToLast)
-                        {
-                            _flowBox.Append(row);
-                        }
-                        else
-                        {
-                            _flowBox.Prepend(row);
-                        }
+                        _flowBox.Append(row);
                         _transactionRows.Add(row);
                     }
                 }
@@ -576,22 +595,18 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
-            _spinner.Stop();
-            _paneBox.SetSensitive(true);
-            _boxSort.SetSensitive(true);
-            _binSpinner.SetVisible(false);
-            g_main_context_iteration(g_main_context_default(), true);
+            _parentWindow.OnWidthChanged();
             _isAccountLoading = false;
         }
     }
 
     private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
-        if (_controller.AccountTotal > 0)
+        if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if (await transferDialog.RunAsync())
+            if (transferDialog.Run())
             {
                 await _controller.SendTransferAsync(transferController.Transfer);
             }
@@ -614,12 +629,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if(Path.GetExtension(path) != ".csv")
                 {
                     path += ".csv";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -637,12 +652,12 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile()!.GetPath();
                 if (Path.GetExtension(path) != ".pdf")
                 {
                     path += ".pdf";
                 }
-                _controller.ExportToFile(path);
+                _controller.ExportToFile(path ?? "");
             }
         };
         saveFileDialog.Show();
@@ -674,20 +689,31 @@ public partial class AccountView
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
-                await _controller.ImportFromFileAsync(path);
+                var path = openFileDialog.GetFile()!.GetPath();
+                await _controller.ImportFromFileAsync(path ?? "");
             }
         };
         openFileDialog.Show();
+    }
+
+    private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
+    {
+        var accountSettingsController = _controller.CreateAccountSettingsDialogController();
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
+        if(accountSettingsDialog.Run())
+        {
+            _controller.UpdateMetadata(accountSettingsController.Metadata);
+        }
     }
 
     private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -695,18 +721,66 @@ public partial class AccountView
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(await transactionDialog.RunAsync())
+        if(transactionDialog.Run())
         {
-            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            {
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = dialog.Run();
+                    if (result == MessageDialogResponse.Suggested)
+                    {
+                        await _controller.DeleteGeneratedTransactionsAsync(id);
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    else if(result == MessageDialogResponse.Destructive)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                    }
+                }
+                else
+                {
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    var result = dialog.Run();
+                    if (result != MessageDialogResponse.Cancel)
+                    {
+                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
+                    }
+                }
+            }
+            else
+            {
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+            }
+            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
     private async void DeleteTransaction(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if (await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(_controller.GetIsSourceRepeatTransaction(id))
         {
-            await _controller.DeleteTransactionAsync(id);
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+            dialog.UnsetDestructiveApperance();
+            dialog.UnsetSuggestedApperance();
+            var result = dialog.Run();
+            if(result != MessageDialogResponse.Cancel)
+            {
+                await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
+            }
+        }
+        else
+        {
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            if (dialog.Run() == MessageDialogResponse.Destructive)
+            {
+                await _controller.DeleteTransactionAsync(id);
+            }
         }
     }
 
@@ -714,7 +788,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.AddGroupAsync(groupController.Group);
         }
@@ -724,7 +798,7 @@ public partial class AccountView
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(await groupDialog.RunAsync())
+        if(groupDialog.Run())
         {
             await _controller.UpdateGroupAsync(groupController.Group);
         }
@@ -733,7 +807,7 @@ public partial class AccountView
     private async void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(await dialog.RunAsync() == MessageDialogResponse.Destructive)
+        if(dialog.Run() == MessageDialogResponse.Destructive)
         {
             await _controller.DeleteGroupAsync(id);
         }
@@ -773,6 +847,7 @@ public partial class AccountView
         {
             groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
+        _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)

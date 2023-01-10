@@ -1,7 +1,7 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -10,9 +10,6 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow
 {
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_preferences_row_set_use_markup(nint row, [MarshalAs(UnmanagedType.I1)] bool use_markup);
-
     private readonly Group _group;
     private readonly Gtk.CheckButton _chkFilter;
     private readonly Gtk.Label _lblAmount;
@@ -37,13 +34,14 @@ public partial class GroupRow : Adw.ActionRow
     /// Constructs a group row 
     /// </summary>
     /// <param name="group">The Group to display</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, Localizer localizer, bool filterActive)
+    public GroupRow(Group group, CultureInfo culture, Localizer localizer, bool filterActive)
     {
         _group = group;
         //Row Settings
-        adw_preferences_row_set_use_markup(Handle, false);
+        SetUseMarkup(false);
         SetTitle(_group.Name);
         SetSubtitle(_group.Description);
         //Filter Checkbox
@@ -53,9 +51,9 @@ public partial class GroupRow : Adw.ActionRow
         _chkFilter.OnToggled += FilterToggled; 
         AddPrefix(_chkFilter);
         //Amount Label
-        _lblAmount = Gtk.Label.New($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToString("C")}");
+        _lblAmount = Gtk.Label.New($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToString("C", culture)}");
         _lblAmount.AddCssClass(_group.Balance >= 0 ? "success" : "error");
-        _lblAmount.AddCssClass(_group.Balance >= 0 ? "money-income" : "money-expense");
+        _lblAmount.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         _lblAmount.SetValign(Gtk.Align.Center);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");

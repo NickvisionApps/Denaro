@@ -1,0 +1,74 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="account">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Account 🏦</title>
+	<title type="text">Account</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Account</title>
+<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
+<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application.</p>
+<note style="warning">
+	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
+</note>
+
+<terms>
+	<item>
+		<title>Name</title>
+		<p>Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p>
+	</item>
+	<item>
+		<title>Account Type</title>
+		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
+	</item>
+	<item>
+		<title>Default Transaction Type</title>
+		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
+	</item>
+	<item>
+		<title>System Currency</title>
+		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+		<list>
+			<item><p>If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number.</p></item>
+			<item><p>If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number.</p></item>
+			<item><p>If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</em> and <em>1000,00</em> will be accepted as a valid number.</p></item>
+		</list>
+		<note style="advanced">
+			<p>On Linux it's possible to set different locales for system language and formats. <app>Denaro</app> will try to use formats locale, and in case of failure it will fallback to language locale. This behavior is not considered a bug. In case of such failure, please use custom currency (see below).</p>
+		</note>
+	</item>
+	<item>
+		<title>Use Custom Currency</title>
+		<p>If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale.</p>
+	</item>
+	<item>
+		<title>Custom Currency Symbol</title>
+		<p>Up to 2 characters or 1 emoji can be used as currency symbol.</p>
+	</item>
+	<item>
+		<title>Custom Currency Code</title>
+		<p>Optional code for your custom currency. If it's set, it will be shown in dialogs in parentheses next to <gui>Custom Currency Symbol</gui>. <gui>Custom Currency Code</gui> can contain up to 3 characters or 1 emoji.</p>
+	</item>
+	<item>
+		<title>Sort by Id or Date</title>
+		<p>Each account stores information about whether should transactions be sorted by Id or date in the main window. Every time you change this, it's saved and then restored when you reopen the account.</p>
+	</item>
+	<item>
+		<title>Sorting Order</title>
+		<p>Each account stores information about the order of transactions in the main window. Every time you change the order, it's saved and then restored when you reopen the account.</p>
+	</item>
+	<item>
+		<title>Groups Visibility</title>
+		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
+	</item>
+</terms>
+</page>

@@ -23,7 +23,8 @@ public enum TransactionCheckStatus
 {
     Valid = 0,
     EmptyDescription,
-    InvalidAmount
+    InvalidAmount,
+    InvalidRepeatEndDate
 }
 
 /// <summary>
@@ -48,24 +49,48 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
-    /// A default color for the transaction
+    /// The original repeat interval of a transaction
     /// </summary>
-    public string TransactionDefaultColor { get; init; }
+    public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
+    /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString { get; init; }
+
+    /// <summary>
+    /// The repeat interval index used by GUI
+    /// </summary>
+    public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
+    {
+        0 => (uint) Transaction.RepeatInterval,
+        1 => (uint)Transaction.RepeatInterval,
+        2 => (uint)Transaction.RepeatInterval,
+        7 => 3,
+        _ => (uint)Transaction.RepeatInterval + 1
+    };
 
     /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    public TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, string transactionDefaultColor, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
         Localizer = localizer;
         Transaction = transaction;
         Groups = groups;
         Accepted = false;
-        TransactionDefaultColor = transactionDefaultColor;
+        OriginalRepeatInterval = transaction.RepeatInterval;
+        CultureForNumberString = culture;
+        if (Transaction.Amount == 0m) //new transaction
+        {
+            Transaction.Type = transactionDefaultType;
+            Transaction.RGBA = transactionDefaultColor;
+        }
     }
 
     /// <summary>
@@ -74,7 +99,7 @@ public class TransactionDialogController : IDisposable
     public void Dispose()
     {
         var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (Path.Exists(jpgPath))
+        if (File.Exists(jpgPath))
         {
             File.Delete(jpgPath);
         }
@@ -89,9 +114,9 @@ public class TransactionDialogController : IDisposable
         var image = default(Image);
         if (receiptPath != null)
         {
-            if (Path.Exists(receiptPath))
+            if (File.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
                     image = await Image.LoadAsync(receiptPath);
                 }
@@ -125,6 +150,7 @@ public class TransactionDialogController : IDisposable
             {
                 Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
             }
+            image.Dispose();
         }
     }
 
@@ -134,13 +160,14 @@ public class TransactionDialogController : IDisposable
     /// <param name="date">The new DateOnly object</param>
     /// <param name="description">The new description</param>
     /// <param name="type">The new TransactionType</param>
-    /// <param name="repeat">The new TransactionRepeatInterval</param>
+    /// <param name="selectedRepeat">The new selected repeat index</param>
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
+    /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public async Task<TransactionCheckStatus> UpdateTransactionAsync(DateOnly date, string description, TransactionType type, TransactionRepeatInterval repeat, string groupName, string rgba, string amountString, string? receiptPath)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
@@ -149,7 +176,7 @@ public class TransactionDialogController : IDisposable
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency);
+            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString);
         }
         catch
         {
@@ -159,10 +186,22 @@ public class TransactionDialogController : IDisposable
         {
             return TransactionCheckStatus.InvalidAmount;
         }
+        if(repeatEndDate.HasValue && repeatEndDate.Value <= date)
+        {
+            return TransactionCheckStatus.InvalidRepeatEndDate;
+        }
         Transaction.Date = date;
         Transaction.Description = description;
         Transaction.Type = type;
-        Transaction.RepeatInterval = repeat;
+        if(selectedRepeat == 3)
+        {
+            selectedRepeat = 7;
+        }
+        else if(selectedRepeat > 3)
+        {
+            selectedRepeat -= 1;
+        }
+        Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;
@@ -170,9 +209,9 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg")
+                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
                 {
-                    Transaction.Receipt = await Image.LoadAsync(receiptPath);
+                    Transaction.Receipt = Image.Load(receiptPath);
                 }
                 else if (Path.GetExtension(receiptPath) == ".pdf")
                 {
@@ -188,14 +227,23 @@ public class TransactionDialogController : IDisposable
                 Transaction.Receipt = null;
             }
         }
+        if(Transaction.RepeatInterval == TransactionRepeatInterval.Never)
+        {
+            Transaction.RepeatFrom = -1;
+        }
+        else if(Transaction.RepeatInterval != OriginalRepeatInterval)
+        {
+            Transaction.RepeatFrom = 0;
+        }
+        Transaction.RepeatEndDate = Transaction.RepeatInterval == TransactionRepeatInterval.Never ? null : repeatEndDate;
         return TransactionCheckStatus.Valid;
     }
 
     /// <summary>
-    /// Converts a PDF
+    /// Converts a PDF to a JPEG Image
     /// </summary>
-    /// <param name="pathToPDF"></param>
-    /// <returns></returns>
+    /// <param name="pathToPDF">The path to the pdf file</param>
+    /// <returns>The JPEG Image</returns>
     private Image ConvertPDFToJPEG(string pathToPDF)
     {
         using var library = DocLib.Instance;

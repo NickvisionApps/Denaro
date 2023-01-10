@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!--Use: &#xA; for newline-->
+  <data name="Description" xml:space="preserve">
+		<value>مدير المالية الشخصية</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+		<value>الإصدار: {0}</value>
+  </data>
+  <data name="About" xml:space="preserve">
+		<value>عن {0}</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+		<value>سجل التغييرات</value>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+		<value>مستودع غيت هب</value>
+  </data>
+  <data name="ReportABug" xml:space="preserve">
+		<value>الإبلاغ عن خطأ</value>
+  </data>
+  <data name="Discussions" xml:space="preserve">
+		<value>المناقشات</value>
+  </data>
+  <!--Credits-->
+  <data name="Credits" xml:space="preserve">
+		<value>المُساهِمون في المشروع</value>
+  </data>
+  <data name="Developers.Credits" xml:space="preserve">
+		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+  </data>
+  <data name="Designers.Credits" xml:space="preserve">
+		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Fyodor Sobolev https://github.com/fsobolev</value>
+  </data>
+  <data name="Artists.Credits" xml:space="preserve">
+		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+    <value>David Lapshin https://github.com/daudix-UFO</value>
+  </data>
+  <data name="Translators.Credits" xml:space="preserve">
+		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
+    <value />
+  </data>
+  <!--Actions-->
+  <data name="OK" xml:space="preserve">
+		<value>حسنا</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+		<value>نعم</value>
+  </data>
+  <data name="No" xml:space="preserve">
+		<value>لا</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+		<value>إلغاء</value>
+  </data>
+  <data name="New" xml:space="preserve">
+		<value>جديد</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+		<value>افتح</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+		<value>غلق</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+		<value>حفظ</value>
+  </data>
+  <!--Pages-->
+  <data name="Home" xml:space="preserve">
+		<value>الرئيسية</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+		<value>الحساب</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+		<!--Mostly used in WinUI-->
+    <value>اﻹعدادات</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+		<!--Mostly used in GNOME-->
+    <value>الخيارات</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+		<value>اختصارات لوحة المفاتيح</value>
+  </data>
+  <!--MainWindow-->
+  <data name="NickvisionMoneyAccount" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NewAccount" xml:space="preserve">
+		<value>حساب جديد</value>
+  </data>
+  <data name="NewAccount.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="UnableToOverride" xml:space="preserve">
+		<value />
+  </data>
+  <data name="OpenAccount" xml:space="preserve">
+		<value>فتح حساب</value>
+  </data>
+  <data name="OpenAccount.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NoAccountOpened" xml:space="preserve">
+		<value>لا يوجد أي حساب مفتوح</value>
+  </data>
+  <data name="NoAccountDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="RecentAccounts" xml:space="preserve">
+		<value>الحسابات الحديثة</value>
+  </data>
+  <data name="NoRecentAccounts" xml:space="preserve">
+		<value>لا توجد حسابات حديثة</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+		<value>كل الملفات</value>
+  </data>
+  <!--MainWindowController-->
+  <data name="Greeting.Generic" xml:space="preserve">
+		<!-- Shown when system time can't be detected -->
+    <value>يوم سعيد!</value>
+  </data>
+  <data name="Greeting.Morning" xml:space="preserve">
+		<!-- Shown from 6am to noon -->
+    <value>صباح الخير!</value>
+  </data>
+  <data name="Greeting.Afternoon" xml:space="preserve">
+		<!-- Shown from noon to 6pm -->
+    <value>مساء الخير!</value>
+  </data>
+  <data name="Greeting.Evening" xml:space="preserve">
+		<!-- Shown from 6pm to mignight -->
+    <value>مساء الخير!</value>
+  </data>
+  <data name="Greeting.Night" xml:space="preserve">
+		<!-- Shown from midnight to 6am -->
+    <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
+    <value>صباح الخير!</value>
+  </data>
+  <data name="AccountOpenedAlready" xml:space="preserve">
+		<value>هذا الحساب مفتوح بالفعل.</value>
+  </data>
+  <!--AccountView-->
+  <data name="NewTransaction" xml:space="preserve">
+		<value>معاملة جديدة</value>
+  </data>
+  <data name="NewTransaction.Short" xml:space="preserve">
+		<value>جديدة</value>
+  </data>
+  <data name="NewTransaction.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NewGroup.Short" xml:space="preserve">
+		<value>جديد</value>
+  </data>
+  <data name="NewGroup.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="TransferMoney" xml:space="preserve">
+		<value>تحويل أموال</value>
+  </data>
+  <data name="TransferMoney.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ImportFromFile" xml:space="preserve">
+		<value>استيراد من ملف</value>
+  </data>
+  <data name="ImportFromFile.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+		<value>تصدير إلى ملف</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+		<value>ملخص</value>
+  </data>
+  <data name="Overview.Today" xml:space="preserve">
+		<value>نظرة عامة لليوم</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+		<value>الإجمالي</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+		<value>الدخل</value>
+  </data>
+  <data name="Expense" xml:space="preserve">
+		<value>النفقات</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+		<value>الفِرَق</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+		<value>التعاملات</value>
+  </data>
+  <data name="NoTransactionsTitle" xml:space="preserve">
+		<value>لا توجد معاملات</value>
+  </data>
+  <data name="NoTransactionsTitle.Filter" xml:space="preserve">
+		<value>لم يتم العثور على معاملات</value>
+  </data>
+  <data name="NoTransactionsDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NoTransactionsDescription.Filter" xml:space="preserve">
+		<value />
+  </data>
+  <data name="SortFirstLast" xml:space="preserve">
+		<value />
+  </data>
+  <data name="SortLastFirst" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Filters" xml:space="preserve">
+		<value>عوامل التصفية</value>
+  </data>
+  <data name="ResetFilters.Overview" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ResetFilters.Groups" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ResetFilters.Dates" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Calendar" xml:space="preserve">
+		<value />
+  </data>
+  <data name="SelectRange" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Start.DateRange" xml:space="preserve">
+		<value>البداية</value>
+  </data>
+  <data name="End.DateRange" xml:space="preserve">
+		<value>النهاية</value>
+  </data>
+  <data name="DeleteGroup" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DeleteGroupDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DeleteTransaction" xml:space="preserve">
+		<value>هل تريد حذف المعاملة؟</value>
+  </data>
+  <data name="DeleteTransactionDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+		<value>حذف المعاملة</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+		<value>حذف المصدر فقط</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+		<value>حذف المصدر والمعاملات التي تم توليدها</value>
+  </data>
+  <data name="EditTransaction.SourceRepeat" xml:space="preserve">
+		<value>تحديث المعاملة</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+		<value />
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+		<value>تحديث المصدر فقط</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+		<value />
+  </data>
+  <data name="RepeatIntervalChanged" xml:space="preserve">
+		<value />
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DeleteExisting" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NoMoneyToTransfer" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Hide" xml:space="preserve">
+		<value>إخفاء</value>
+  </data>
+  <data name="HideGroups" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ShowGroups" xml:space="preserve">
+		<value />
+  </data>
+  <data name="ToggleGroups.Tooltip" xml:space="preserve">
+		<value />
+  </data>
+  <!--AccountViewController-->
+  <data name="Ungrouped" xml:space="preserve">
+		<value />
+  </data>
+  <data name="UngroupedDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Imported" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Imported.Plural" xml:space="preserve">
+		<value />
+  </data>
+  <data name="UnableToImport" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Exported" xml:space="preserve">
+		<value />
+  </data>
+  <data name="UnableToExport" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Transfer.To" xml:space="preserve">
+		<value>تحويل إلى {0}</value>
+  </data>
+  <data name="Transfer.From" xml:space="preserve">
+		<value>تحويل من {0}</value>
+  </data>
+  <!--TransactionRow-->
+  <data name="Edit.TransactionRow" xml:space="preserve">
+		<value>تعديل المعاملة</value>
+  </data>
+  <data name="Delete.TransactionRow" xml:space="preserve">
+		<value>حذف المعاملة</value>
+  </data>
+  <!--GroupRow-->
+  <data name="Edit.GroupRow" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Delete.GroupRow" xml:space="preserve">
+		<value />
+  </data>
+  <!--GroupDialog-->
+  <data name="Group" xml:space="preserve">
+		<value />
+  </data>
+  <!--TransactionDialog-->
+  <data name="Transaction" xml:space="preserve">
+		<value>المعاملة</value>
+  </data>
+  <data name="RepeatInterval.Never" xml:space="preserve">
+		<value>أبداً</value>
+  </data>
+  <data name="RepeatInterval.Daily" xml:space="preserve">
+		<value>يوميًا</value>
+  </data>
+  <data name="RepeatInterval.Weekly" xml:space="preserve">
+		<value>أسبوعيا</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+		<value>نصف شهرية</value>
+  </data>
+  <data name="RepeatInterval.Monthly" xml:space="preserve">
+		<value>شهرياً</value>
+  </data>
+  <data name="RepeatInterval.Quarterly" xml:space="preserve">
+		<value>فصليا</value>
+  </data>
+  <data name="RepeatInterval.Yearly" xml:space="preserve">
+		<value>سنوياً</value>
+  </data>
+  <data name="RepeatInterval.Biyearly" xml:space="preserve">
+		<value>كل سنتين</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+		<value>لا يوجد تاريخ انتهاء</value>
+  </data>
+  <data name="View" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Delete" xml:space="preserve">
+		<value>حذف</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+		<value>رفع</value>
+  </data>
+  <!--TransferDialog-->
+  <data name="Transfer" xml:space="preserve">
+		<value>تحويل</value>
+  </data>
+  <data name="TransferDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="NoAccountSelected" xml:space="preserve">
+		<value>لم يتم تحديد حساب</value>
+  </data>
+  <!--Fields-->
+  <data name="Name.Field" xml:space="preserve">
+		<value>الاسم</value>
+  </data>
+  <data name="Name.Placeholder" xml:space="preserve">
+		<value>أدخل الاسم هنا</value>
+  </data>
+  <data name="Name.Empty" xml:space="preserve">
+		<value>الاسم (فارغ)</value>
+  </data>
+  <data name="Name.Exists" xml:space="preserve">
+		<value>الاسم (موجود)</value>
+  </data>
+  <data name="Description.Field" xml:space="preserve">
+		<value>الوصف</value>
+  </data>
+  <data name="Description.Placeholder" xml:space="preserve">
+		<value>أدخل الوصف هنا</value>
+  </data>
+  <data name="Description.Empty" xml:space="preserve">
+		<value>الوصف (فارغ)</value>
+  </data>
+  <data name="Amount.Field" xml:space="preserve">
+		<value>المَبلغ</value>
+  </data>
+  <data name="Amount.Placeholder" xml:space="preserve">
+		<value>أدخل المبلغ هنا</value>
+  </data>
+  <data name="Amount.Invalid" xml:space="preserve">
+		<value>المبلغ (غير صالح)</value>
+  </data>
+  <data name="Date.Field" xml:space="preserve">
+		<value>التاريخ</value>
+  </data>
+  <data name="TransactionType.Field" xml:space="preserve">
+		<value>النوع</value>
+  </data>
+  <data name="TransactionRepeatInterval.Field" xml:space="preserve">
+		<value />
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+		<value />
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+		<value />
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Group.Field" xml:space="preserve">
+		<value />
+  </data>
+  <data name="Color.Field" xml:space="preserve">
+		<value>اللون</value>
+  </data>
+  <data name="Receipt.Field" xml:space="preserve">
+		<value>وَصْل</value>
+  </data>
+  <data name="DestinationAccount.Field" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DestinationAccount.Placeholder" xml:space="preserve">
+		<value />
+  </data>
+  <data name="DestinationAccount.Invalid" xml:space="preserve">
+		<value />
+  </data>
+  <!--Settings-->
+  <data name="UserInterface" xml:space="preserve">
+		<value>واجهة المستخدم</value>
+  </data>
+  <data name="UserInterfaceDescription" xml:space="preserve">
+		<value>تخصيص واجهة مستخدم التطبيق.</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+		<value>المظهر</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+		<value>فاتح</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+		<value>داكن</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+		<value>النظام</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+		<value>الألوان</value>
+  </data>
+  <data name="ColorsDescription" xml:space="preserve">
+		<value>تخصيص الألوان التي يستخدمها Money.</value>
+  </data>
+  <data name="TransactionColor" xml:space="preserve">
+		<value>اللون الافتراضي للمعاملات</value>
+  </data>
+  <data name="TransferColor" xml:space="preserve">
+		<value>اللون الإفتراضي للتحويلات</value>
+  </data>
+  <data name="TransactionColorDescription" xml:space="preserve">
+		<value />
+  </data>
+  <data name="TransferColorDescription" xml:space="preserve">
+		<value />
+  </data>
+  <!--Shortcuts Dialog-->
+  <data name="Application.Shortcut" xml:space="preserve">
+		<value>التطبيق</value>
+  </data>
+  <!--WinUI Specific-->
+  <data name="FixErrors.WinUI" xml:space="preserve">
+		<value>يرجى تصحيح الأخطاء أعلاه.</value>
+  </data>
+  <data name="ChangelogTitle.WinUI" xml:space="preserve">
+		<value>ما الجديد؟</value>
+  </data>
+  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
+		<value>المطورون:
+{0}
+
+المصممون:
+{1}
+
+الفنانون:
+{2}
+
+المترجمون:
+{3}</value>
+  </data>
+  <data name="ThemeDescription.WinUI" xml:space="preserve">
+		<value>يلزم إعادة تشغيل التطبيق لتغيير السمة.</value>
+  </data>
+  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
+		<value>إعادة التشغيل لتطبيق السمة؟</value>
+  </data>
+  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
+		<value>هل تود أن تعيد تشغيل {0} لتفعيل السمة الجديدة؟
+أي عمل غير محفوظ سيضيع.</value>
+  </data>
+  <!--GTK Specific-->
+  <data name="AccountMenu.GTK" xml:space="preserve">
+		<value>قائمة الحساب</value>
+  </data>
+  <data name="ToggleSidebar.GTK" xml:space="preserve">
+		<value />
+  </data>
+  <data name="MainMenu.GTK" xml:space="preserve">
+		<value>القائمة الرئيسية</value>
+  </data>
+  <data name="Recents.GTK" xml:space="preserve">
+		<value>الحديثة</value>
+  </data>
+  <data name="NewAccountPopover.GTK" xml:space="preserve">
+		<value>جديد</value>
+  </data>
+  <data name="CloseAccount.GTK" xml:space="preserve">
+		<value>إغلاق الحساب</value>
+  </data>
+  <data name="AccountActions.GTK" xml:space="preserve">
+		<value>الإجراءات</value>
+  </data>
+  <data name="AccountFileFilter.GTK" xml:space="preserve">
+		<value />
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>التحقق</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>استخدام عملة مخصصة</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>رمز العملة</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>أدخل الرمز هنا</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>نوع المعاملة الافتراضي</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>رمز العملة (فارغ)</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>أدخل الرمز هنا</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>رمز العملة</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>لون حساب التوفير</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>التحقق من لون الحساب</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>لون حساب الأعمال</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>هذه ليست سوى تسمية مفيدة لا تؤثر على كيفية عمل التطبيق.</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>إعدادت الحساب</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>غير متوفر</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>المدخرات</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>أعمال</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>أبلغ نظامك أن عملتك هي</value>
+  </data>
+</root>

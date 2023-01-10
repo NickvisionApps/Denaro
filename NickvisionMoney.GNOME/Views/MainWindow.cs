@@ -1,9 +1,11 @@
 ﻿using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -22,30 +24,6 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    private new delegate void NotifySignal(nint gObject, nint gParamSpec, nint data);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint adw_show_about_window(nint parent,
-        string appNameKey, string appNameValue,
-        string iconKey, string iconValue,
-        string versionKey, string versionValue,
-        string commentsKey, string commentsValue,
-        string developerNameKey, string developerNameValue,
-        string licenseKey, int licenseValue,
-        string copyrightKey, string copyrightValue,
-        string websiteKey, string websiteValue,
-        string issueTrackerKey, string issueTrackerValue,
-        string supportUrlKey, string supportUrlValue,
-        string developersKey, string[] developersValue,
-        string designersKey, string[] designersValue,
-        string artistsKey, string[] artistsValue,
-        string translatorCreditsKey, string translatorCreditsValue,
-        string releaseNotesKey, string releaseNotesValue,
-        nint terminator);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_chooser_get_file(nint chooser);
-
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
@@ -53,7 +31,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial nuint g_file_get_type();
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] NotifySignal c_handler, nint data, nint destroy_data, int connect_flags);
+    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
@@ -93,7 +74,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actNewAccount;
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
-    private readonly NotifySignal _widthChangedSignal;
 
     /// <summary>
     /// Occurs when the window's width is changed
@@ -122,8 +102,18 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountAdded += AccountAdded;
-        _widthChangedSignal = (nint sender, nint gParamSpec, nint data) => OnWidthChanged();
-        g_signal_connect_data(Handle, "notify::default-width", _widthChangedSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
+        {
+            UpdateRecentAccountsOnStart();
+            UpdateRecentAccounts();
+        };
+        OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "default-width")
+            {
+                OnWidthChanged();
+            }
+        };
         //Main Box
         _mainBox = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         //Header Bar
@@ -232,7 +222,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
         _flowBoxStatusButtons.Append(_btnOpenAccount);
         //Drag Label
-        _lblDrag = Gtk.Label.New(_controller.Localizer["DragLabel"]);
+        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
         _lblDrag.AddCssClass("dim-label");
         _lblDrag.SetWrap(true);
         _lblDrag.SetJustify(Gtk.Justification.Center);
@@ -339,17 +329,22 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e) => _toastOverlay.AddToast(Adw.Toast.New(e.Message));
 
     /// <summary>
+    /// Updates the window's subtitle
+    /// </summary>
+    /// <param name="s">The new subtitle</param>
+    private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? s : "");
+
+    /// <summary>
     /// Occurs when an account is created or opened
     /// </summary>
     private void AccountAdded(object? sender, EventArgs e)
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle);
+        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountPath : "");
-        UpdateRecentAccounts();
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
     }
@@ -372,7 +367,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(saveFileDialog.Handle));
+                var path = saveFileDialog.GetFile()!.GetPath() ?? "";
                 if(_controller.IsAccountOpen(path))
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
@@ -408,7 +403,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = g_file_get_path(gtk_file_chooser_get_file(openFileDialog.Handle));
+                var path = openFileDialog.GetFile()!.GetPath() ?? "";
                 _controller.AddAccount(path);
             }
         };
@@ -421,7 +416,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        _tabView.ClosePage(_tabView.GetSelectedPage());
+        _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
     /// <summary>
@@ -433,7 +428,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountPath : "");
+        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         if (_controller.OpenAccounts.Count == 0)
         {
             _actCloseAccount.SetEnabled(false);
@@ -484,29 +479,24 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
-        var developersCredits = new List<string>(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
-        developersCredits.Add(null);
-        var designersCredits = new List<string>(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
-        designersCredits.Add(null);
-        var artistsCredits = new List<string>(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
-        artistsCredits.Add(null);
-        adw_show_about_window(Handle,
-            "application-name", _controller.AppInfo.ShortName,
-            "application-icon", (_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : "")),
-            "version", _controller.AppInfo.Version,
-            "comments", _controller.AppInfo.Description,
-            "developer-name", "Nickvision",
-            "license-type", (int)Gtk.License.MitX11,
-            "copyright", "© Nickvision 2021-2022",
-            "website", _controller.AppInfo.GitHubRepo.ToString(),
-            "issue-url", _controller.AppInfo.IssueTracker.ToString(),
-            "support-url", _controller.AppInfo.SupportUrl.ToString(),
-            "developers", developersCredits.ToArray(),
-            "designers", designersCredits.ToArray(),
-            "artists", artistsCredits.ToArray(),
-            "translator-credits", (string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]),
-            "release-notes", _controller.AppInfo.Changelog,
-            IntPtr.Zero);
+        var dialog = Adw.AboutWindow.New();
+        dialog.SetTransientFor(this);
+        dialog.SetApplicationName(_controller.AppInfo.ShortName);
+        dialog.SetApplicationIcon(_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : ""));
+        dialog.SetVersion(_controller.AppInfo.Version);
+        dialog.SetComments(_controller.AppInfo.Description);
+        dialog.SetDeveloperName("Nickvision");
+        dialog.SetLicenseType(Gtk.License.MitX11);
+        dialog.SetCopyright("© Nickvision 2021-2023");
+        dialog.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
+        dialog.SetIssueUrl(_controller.AppInfo.IssueTracker.ToString());
+        dialog.SetSupportUrl(_controller.AppInfo.SupportUrl.ToString());
+        dialog.SetDevelopers(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
+        dialog.SetDesigners(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
+        dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
+        dialog.SetTranslatorCredits((string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]));
+        dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
+        dialog.Show();
     }
 
     /// <summary>
@@ -537,9 +527,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             _groupRecentAccounts.Remove(row);
         }
         _listRecentAccountsRows.Clear();
-        foreach(var accountPath in _controller.RecentAccounts)
+        foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(accountPath);
+            var row = CreateRecentAccountRow(recentAccount, false);
             _groupRecentAccounts.Add(row);
             _listRecentAccountsRows.Add(row);
         }
@@ -555,9 +545,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             _grpRecentAccountsOnStart.Remove(row);
         }
         _listRecentAccountsOnStartRows.Clear();
-        foreach(var accountPath in _controller.RecentAccounts)
+        foreach(var recentAccount in _controller.RecentAccounts)
         {
-            var row = CreateRecentAccountRow(accountPath);
+            var row = CreateRecentAccountRow(recentAccount, true);
             _grpRecentAccountsOnStart.Add(row);
             _listRecentAccountsOnStartRows.Add(row);
         }
@@ -567,15 +557,43 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Creates a row for recent accounts lists
     /// </summary>
     /// <param name="accountPath">string</param>
-    private Adw.ActionRow CreateRecentAccountRow(string accountPath)
+    private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
         var row = Adw.ActionRow.New();
-        row.SetTitle(Path.GetFileName(accountPath));
-        row.SetSubtitle(accountPath);
+        row.SetTitle(recentAccount.Name);
+        row.SetSubtitle(recentAccount.Path);
         var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
-        button.AddCssClass("wallet-button");
+        if(onStartScreen)
+        {
+            button.AddCssClass("wallet-button");
+            var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
+            var btnType = Gtk.Button.NewWithLabel(strType);
+            btnType.SetValign(Gtk.Align.Center);
+            btnType.SetSizeRequest(120, -1);
+            btnType.OnClicked += (sender, e) => row.Activate();
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+            var btnCssProvider = Gtk.CssProvider.New();
+            var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }" + char.MinValue;
+            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+            btnType.SetName("btnType");
+            btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
+            row.AddSuffix(btnType);
+        }
+        else
+        {
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+            var btnCssProvider = Gtk.CssProvider.New();
+            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }" + char.MinValue;
+            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+            button.SetName("btnWallet");
+            button.GetStyleContext().AddProvider(btnCssProvider, 800);
+        }
         button.OnClicked += (Gtk.Button sender, EventArgs e) => 
         {
             _popoverAccount.Popdown();

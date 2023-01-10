@@ -33,11 +33,11 @@ public sealed partial class TransferDialog : ContentDialog
         ToolTipService.SetToolTip(BtnSelectAccount, _controller.Localizer["SelectAccount"]);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
-        TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
-        TxtAmount.Text = _controller.Transfer.Amount.ToString("C");
+        TxtAmount.Text = _controller.Transfer.Amount.ToString("C", _controller.CultureForNumberString);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public sealed partial class TransferDialog : ContentDialog
             if (checkStatus != TransferCheckStatus.Valid)
             {
                 TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
-                TxtAmount.Header = _controller.Localizer["Amount", "Field"];
+                TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
                 if (checkStatus == TransferCheckStatus.InvalidDestPath)
                 {
                     TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];

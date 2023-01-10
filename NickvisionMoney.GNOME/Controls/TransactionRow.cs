@@ -1,6 +1,7 @@
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -28,9 +29,6 @@ public partial class TransactionRow : Adw.PreferencesGroup
 
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void adw_preferences_row_set_use_markup(nint row, [MarshalAs(UnmanagedType.I1)] bool use_markup);
 
     private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
 
@@ -62,8 +60,9 @@ public partial class TransactionRow : Adw.PreferencesGroup
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo culture, Localizer localizer)
     {
         _transaction = transaction;
         _isSmall = false;
@@ -76,7 +75,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         }
         //Row Settings
         _row = Adw.ActionRow.New();
-        adw_preferences_row_set_use_markup(_row.Handle, false);
+        _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
         _row.SetTitle(_transaction.Description);
         _row.SetSubtitle($"{_transaction.Date.ToString("d")}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
@@ -98,12 +97,12 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _row.AddPrefix(_btnId);
         //Amount Label
-        _lblAmount = Gtk.Label.New($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToString("C")}");
+        _lblAmount = Gtk.Label.New($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToString("C", culture)}");
         _lblAmount.SetHalign(Gtk.Align.End);
         _lblAmount.SetValign(Gtk.Align.Center);
         _lblAmount.SetMarginEnd(4);
         _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "success" : "error");
-        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "money-income" : "money-expense");
+        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
@@ -119,8 +118,11 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _btnDelete.OnClicked += Delete;
         //Buttons Box
         _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxButtons.Append(_btnEdit);
-        _boxButtons.Append(_btnDelete);
+        if(_transaction.RepeatFrom <= 0)
+        {
+            _boxButtons.Append(_btnEdit);
+            _boxButtons.Append(_btnDelete);
+        }
         //Suffix Box
         _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
         _boxSuffix.SetValign(Gtk.Align.Center);
