@@ -89,17 +89,11 @@ public partial class MessageDialog
     /// <param name="response">The string response of the dialog</param>
     private void SetResponse(string response)
     {
-        switch(response)
+        _response = response switch
         {
-            case "suggested":
-                _response = MessageDialogResponse.Suggested;
-                break;
-            case "destructive":
-                _response = MessageDialogResponse.Destructive;
-                break;
-            default:
-                _response = MessageDialogResponse.Cancel;
-                break;
-        }
+            "suggested" => MessageDialogResponse.Suggested,
+            "destructive" => MessageDialogResponse.Destructive,
+            _ => MessageDialogResponse.Cancel
+        };
     }
 }

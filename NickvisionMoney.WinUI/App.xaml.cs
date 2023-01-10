@@ -9,7 +9,7 @@ namespace NickvisionMoney.WinUI;
 public partial class App : Application
 {
     private Window? _mainWindow;
-    private MainWindowController _mainWindowController;
+    private readonly MainWindowController _mainWindowController;
 
     public App()
     {

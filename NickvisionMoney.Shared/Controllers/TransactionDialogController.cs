@@ -111,7 +111,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="receiptPath">A possible path of a new receipt image</param>
     public async Task OpenReceiptImageAsync(string? receiptPath = null)
     {
-        var image = default(Image);
+        Image? image;
         if (receiptPath != null)
         {
             if (File.Exists(receiptPath))

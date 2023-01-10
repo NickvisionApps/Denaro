@@ -19,7 +19,7 @@ public enum GroupCheckStatus
 /// </summary>
 public class GroupDialogController
 {
-    private List<string> _existingNames;
+    private readonly List<string> _existingNames;
 
     /// <summary>
     /// The localizer to get translated strings from

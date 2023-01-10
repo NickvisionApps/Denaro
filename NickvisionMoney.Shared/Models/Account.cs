@@ -22,7 +22,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
-    private SqliteConnection _database;
+    private readonly SqliteConnection _database;
 
     /// <summary>
     /// The path of the account
@@ -1119,7 +1119,7 @@ public class Account : IDisposable
     private async Task<int> ImportFromCSVAsync(string path)
     {
         var imported = 0;
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);
@@ -1260,7 +1260,7 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromOFXAsync(string path)
     {
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);
@@ -1366,7 +1366,7 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromQIFAsync(string path)
     {
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);
