@@ -418,7 +418,7 @@ Deze actie is onomkeerbaar..</value>
 		<value>Kleur</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value>Bon</value>
+		<value>Factuur</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
 		<value>Bestemmingsrekening</value>
@@ -646,5 +646,23 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
     <value>Kleur van zakelijke rekening</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Gegenereerd: {0}</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Groepsnaam</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Facturen</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Pagina {0}</value>
   </data>
 </root>
