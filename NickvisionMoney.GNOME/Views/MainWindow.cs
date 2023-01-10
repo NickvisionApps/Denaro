@@ -33,6 +33,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
+
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -170,6 +173,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var mainMenu = Gio.Menu.New();
         mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
         mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
+        mainMenu.Append(_controller.Localizer["Help"], "win.help");
         mainMenu.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
         _btnMainMenu.SetDirection(Gtk.ArrowType.None);
         _btnMainMenu.SetMenuModel(mainMenu);
@@ -273,11 +277,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         actKeyboardShortcuts.OnActivate += KeyboardShortcuts;
         AddAction(actKeyboardShortcuts);
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
+        //Help Action
+        var actHelp = Gio.SimpleAction.New("help", null);
+        actHelp.OnActivate += Help;
+        AddAction(actHelp);
+        application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
         AddAction(actAbout);
-        application.SetAccelsForAction("win.about", new string[] { "F1" });
         //Drop Target
         _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
@@ -450,6 +458,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, _controller.AppInfo.ShortName, this);
         shortcutsDialog.Show();
     }
+
+    /// <summary>
+    /// Occurs when the help action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void Help(Gio.SimpleAction sender, EventArgs e) => gtk_show_uri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered

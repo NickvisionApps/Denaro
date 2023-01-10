@@ -1,0 +1,41 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="transfer">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Transfer 💸</title>
+	<title type="text">Transfer</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Transfer</title>
+<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+<list>
+	<item>
+		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
+	</item>
+	<item>
+		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
+	</item>
+</list>
+<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
+<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
+<p>Although <app>Denaro</app> supports accounts with different currencies, transfer amounts are not automatically converted for their respective currencies. The number value will be used as is. For example: if you transfer 100$ (USD) to an account that uses € (EUR) the following two transactions will be created:</p>
+<list>
+	<item>
+		<p>On source account: expense transaction for 100$ (USD).</p>
+	</item>
+	<item>
+		<p>On destination account: income transaction for 100€ (EUR).</p>
+	</item>
+</list>
+<note>
+	<p>We are looking to implement a feature to set a conversion rate for different currencies during transfer in a future version, see <link href="https://github.com/nlogozzo/NickvisionMoney/issues/144">issue #144</link>.</p>
+</note>
+</page>

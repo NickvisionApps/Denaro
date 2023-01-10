@@ -1,0 +1,46 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="configuration">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuration 🔧</title>
+	<title type="text">Configuration</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Configuration</title>
+<p>This page describes what you can change in the application configuration.</p>
+<p>Depending on the version of the application, in its interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<terms>
+	<item>
+		<title>Theme</title>
+		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+	</item>
+	<item>
+		<title>Transaction Default Color</title>
+		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link>. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
+	</item>
+	<item>
+		<title>Transfer Default Color</title>
+		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+	</item>
+	<item>
+		<title>Checking Account Color</title>
+		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
+	</item>
+	<item>
+		<title>Savings Account Color</title>
+		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
+	</item>
+	<item>
+		<title>Business Account Color</title>
+		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
+	</item>
+</terms>
+</page>

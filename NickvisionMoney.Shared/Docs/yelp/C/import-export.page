@@ -1,0 +1,47 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="import-export">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Import/Export 📤</title>
+	<title type="text">Import/Export</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Import/Export</title>
+<div>
+	<title>Import Formats</title>
+	<list>
+		<item>
+			<p>Open Financial Exchange (<file>.ofx</file>)</p>
+		</item>
+		<item>
+			<p>Quicken Interchange Format (<file>.qif</file>)</p>
+		</item>
+		<item>
+			<p>Denaro CSV (<file>.csv</file>)</p>
+			<p>❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <app>Denaro</app> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <app>Denaro</app> expects to find:</p>
+			<p><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Group;GroupName;GroupDescription</code></p>
+			<p><em>Date</em>, <em>RepeatEndDate</em> and <em>Amount</em> should be in English (US) format (<em>MM/DD/YYYY</em> for dates and <em>123,456.78</em> for the amount). <em>RepeatFrom</em> is used for repeat transactions (see <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details) and should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+		</item>
+	</list>
+</div>
+<div>
+	<title>Export Formats</title>
+	<list>
+		<item>
+			<p>Portable Document Format (<file>.pdf</file>)</p>
+			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible.</p>
+		</item>
+		<item>
+			<p>Denaro CSV (<file>.csv</file>)</p>
+		</item>
+	</list>
+</div>
+</page>
