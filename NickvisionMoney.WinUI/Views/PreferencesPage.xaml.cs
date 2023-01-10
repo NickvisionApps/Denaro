@@ -182,7 +182,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private async void Help(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/NickvisionMoney.Shared/Docs/html/C/index.html"));
+    private async void Help(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://github.com/nlogozzo/NickvisionMoney/blob/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/C/index.html"));
 
     /// <summary>
     /// Occurs when the changelog button is clicked
