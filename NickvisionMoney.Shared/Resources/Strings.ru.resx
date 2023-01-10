@@ -61,7 +61,7 @@
 		<value>Отмена</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value>Новый</value>
+		<value>Создать</value>
   </data>
   <data name="Open" xml:space="preserve">
 		<value>Открыть</value>
@@ -92,7 +92,7 @@
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Счёт Nickvision Money</value>
+		<value>Счёт Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Новый счёт</value>
@@ -518,5 +518,154 @@
   </data>
   <data name="Receipt.Field" xml:space="preserve">
     <value>Чек</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Показать</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Ваша система сообщила, что ваша валюта</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
+    <value>Дата окончания повтора</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
+    <value>Очистить дату окончания</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Это лишь вспомогательная метка, которая не влияет на работу приложения.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>Н/Д</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Тип транзакций по умолчанию</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Использовать свою валюту</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Символ валюты</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Введите символ здесь</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Символ валюты (Пустой)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Код валюты</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Введите код здесь</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Тип счёта</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Сортировать по номеру</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Расчётный</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
+    <value>Дата окончания повтора (Некорректная)</value>
+  </data>
+  <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
+    <value>Удаление транзакции</value>
+  </data>
+  <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
+    <value>Удалить всё</value>
+  </data>
+  <data name="EditTransaction.SourceRepeat" xml:space="preserve">
+    <value>Изменение транзакции</value>
+  </data>
+  <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Эта транзакция является источником повторяющихся транзакций.
+Что вы хотите сделать с повторяющимися тразакциями?
+
+Применение изменений только к источнику отвяжет
+от него сгенерированные транзакции.</value>
+  </data>
+  <data name="EditSourceGeneratedTransaction" xml:space="preserve">
+    <value>Применить ко всем</value>
+  </data>
+  <data name="EditOnlySourceTransaction" xml:space="preserve">
+    <value>Применить только к источнику</value>
+  </data>
+  <data name="RepeatIntervalChanged" xml:space="preserve">
+    <value>Изменение интервала повтора</value>
+  </data>
+  <data name="RepeatIntervalChangedDescription" xml:space="preserve">
+    <value>Интервал повтора был изменён.
+Что вы хотите сделать с существующими повторяющимися тразакциями?
+
+Новые повторяющиеся транзакции будут сгенерированы с использованием нового интервала.</value>
+  </data>
+  <data name="DeleteExisting" xml:space="preserve">
+    <value>Удалить существующие</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Настройки счёта</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Сортировать по дате</value>
+  </data>
+  <data name="RepeatInterval.Biweekly" xml:space="preserve">
+    <value>Раз в две недели</value>
+  </data>
+  <data name="NoEndDate" xml:space="preserve">
+    <value>Без даты окончания</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Сберегательный</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Бизнес</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Файл создан: {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Имя группы</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Чеки</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Страница {0}</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Цвет расчётного счёта</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Цвет сберегательного счёта</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Цвет бизнес счёта</value>
+  </data>
+  <data name="DeleteOnlySourceTransaction" xml:space="preserve">
+    <value>Удалить только источник</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
+    <value>Эта транзакция является источником повторяющихся транзакций.
+Что вы хотите сделать с повторяющимися тразакциями?
+
+Удаление только источника позволит изменять
+сгенерированные транзакции индивидуально.</value>
+  </data>
+  <data name="DisassociateExisting" xml:space="preserve">
+    <value>Отвязать существующие</value>
+  </data>
+  <data name="Overview.Today" xml:space="preserve">
+    <value>Обзор на сегодня</value>
   </data>
 </root>

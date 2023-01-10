@@ -665,4 +665,13 @@ de opeenvolgende losgekoppeld..</value>
   <data name="PageNumber.PDF" xml:space="preserve">
     <value>Pagina {0}</value>
   </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Sorteren op id</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Sorteren op datum</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Hulp</value>
+  </data>
 </root>
