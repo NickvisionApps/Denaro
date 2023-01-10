@@ -35,7 +35,7 @@
 	<list>
 		<item>
 			<p>Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information and a list of transactions without the application specific data such as transaction colors.</p>
+			<p>A file will contain an account information, a list of transactions and images of receipts.</p>
 		</item>
 		<item>
 			<p>Denaro CSV (<file>.csv</file>)</p>
