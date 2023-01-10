@@ -1,4 +1,7 @@
-﻿namespace NickvisionMoney.Shared.Models;
+﻿using Microsoft.Data.Sqlite;
+using System.IO;
+
+namespace NickvisionMoney.Shared.Models;
 
 /// <summary>
 /// Types of an account
@@ -77,5 +80,39 @@ public class AccountMetadata
         ShowGroupsList = true;
         SortFirstToLast = true;
         SortTransactionsBy = SortBy.Id;
+    }
+
+    public static AccountMetadata? LoadFromAccountFile(string path)
+    {
+        if(Path.GetExtension(path) != ".nmoney")
+        {
+            return null;
+        }
+        using var database = new SqliteConnection(new SqliteConnectionStringBuilder()
+        {
+            DataSource = path,
+            Mode = SqliteOpenMode.ReadOnly
+        }.ConnectionString);
+        database.Open();
+        // Get Metadata
+        var result = new AccountMetadata(Path.GetFileNameWithoutExtension(path), AccountType.Checking);
+        var cmdQueryMetadata = database.CreateCommand();
+        cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
+        using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
+        if (readQueryMetadata.HasRows)
+        {
+            readQueryMetadata.Read();
+            result.Name = readQueryMetadata.GetString(1);
+            result.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
+            result.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
+            result.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
+            result.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
+            result.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
+            result.ShowGroupsList = readQueryMetadata.GetBoolean(7);
+            result.SortFirstToLast = readQueryMetadata.GetBoolean(8);
+            result.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
+        }
+        database.Close();
+        return result;
     }
 }

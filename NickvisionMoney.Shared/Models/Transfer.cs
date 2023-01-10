@@ -17,6 +17,10 @@ public class Transfer
     /// The amount of the transfer
     /// </summary>
     public decimal Amount { get; set; }
+    /// <summary>
+    /// The name of the source account
+    /// </summary>
+    public string SourceAccountName { get; set; }
 
     /// <summary>
     /// Constructs a Tansfer

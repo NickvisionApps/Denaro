@@ -573,7 +573,8 @@ public class AccountViewController
     /// <param name="transfer">The transfer to send</param>
     public async Task SendTransferAsync(Transfer transfer)
     {
-        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], Path.GetFileNameWithoutExtension(transfer.DestinationAccountPath)));
+        transfer.SourceAccountName = AccountTitle;
+        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         TransferSent?.Invoke(this, transfer);
     }
@@ -584,7 +585,7 @@ public class AccountViewController
     /// <param name="transfer">The transfer to receive</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
-        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], Path.GetFileNameWithoutExtension(transfer.SourceAccountPath)));
+        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
     }
 
