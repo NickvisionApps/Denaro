@@ -16,7 +16,7 @@
 
 <title>Account</title>
 <p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
-<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application.</p>
+<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0)</p>
 <note style="warning">
 	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
 </note>
@@ -60,11 +60,11 @@
 	</item>
 	<item>
 		<title>Sort by Id or Date</title>
-		<p>Each account stores information about whether should transactions be sorted by Id or date in the main window. Every time you change this, it's saved and then restored when you reopen the account.</p>
+		<p>Each account stores whether to sort transactions in the main window by their id or by their date. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
 		<title>Sorting Order</title>
-		<p>Each account stores information about the order of transactions in the main window. Every time you change the order, it's saved and then restored when you reopen the account.</p>
+		<p>Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
 		<title>Groups Visibility</title>
