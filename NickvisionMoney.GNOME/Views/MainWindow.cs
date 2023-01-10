@@ -36,9 +36,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
-
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -467,10 +464,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e)
-    {
-        gtk_show_uri(this.Handle, "help:denaro", 0);
-    }
+    private void Help(Gio.SimpleAction sender, EventArgs e) => gtk_show_uri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
