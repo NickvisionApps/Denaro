@@ -43,7 +43,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2023.1.0-beta3" date="2023-1-6">
+    <release version="2023.1.0-rc1" date="2023-1-9">
       <description>
         <p>- Money has been completely rewritten in C# and now has a new name: Denaro! With the C# rewrite, there is now a new version of Denaro available on Windows!</p>
 		<p>- Added an Account Settings dialog to allow users to customize their accounts better</p>
