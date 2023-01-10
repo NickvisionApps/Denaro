@@ -641,4 +641,22 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="AccountBusinessColor" xml:space="preserve">
     <value>Color de la cuenta de empresa</value>
   </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Moneda</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Nombre del grupo</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Ingresos</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Generado: {0}</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Identificación</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Página {0}</value>
+  </data>
 </root>
