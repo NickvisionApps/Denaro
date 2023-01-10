@@ -35,7 +35,7 @@
 	<list>
 		<item>
 			<p>Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information, a list of transactions and images of receipts.</p>
+			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible.</p>
 		</item>
 		<item>
 			<p>Denaro CSV (<file>.csv</file>)</p>

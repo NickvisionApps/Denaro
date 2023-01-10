@@ -32,7 +32,7 @@
 	</item>
 	<item>
 		<title>Default Transaction Type</title>
-		<p>When you create a new <link xref="transaction">transaction</link> its type by default will be the same as in this setting.</p>
+		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
 	</item>
 	<item>
 		<title>System Currency</title>
@@ -68,7 +68,7 @@
 	</item>
 	<item>
 		<title>Groups Visibility</title>
-		<p>Each account stores information about whether the <link xref="group">groups</link> list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
+		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
 </terms>
 </page>
