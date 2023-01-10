@@ -52,11 +52,15 @@
 	</item>
 	<item>
 		<title>Custom Currency Symbol</title>
-		<p>Only one character can be used as currency symbol, but it can be any character, including emoji.</p>
+		<p>Up to 2 characters or 1 emoji can be used as currency symbol.</p>
 	</item>
 	<item>
 		<title>Custom Currency Code</title>
-		<p>Optional code for your custom currency. If it's set, it will be shown in dialogs in parentheses next to <gui>Custom Currency Symbol</gui>. <gui>Custom Currency Code</gui> can contain up to 3 characters.</p>
+		<p>Optional code for your custom currency. If it's set, it will be shown in dialogs in parentheses next to <gui>Custom Currency Symbol</gui>. <gui>Custom Currency Code</gui> can contain up to 3 characters or 1 emoji.</p>
+	</item>
+	<item>
+		<title>Sort by Id or Date</title>
+		<p>Each account stores information about whether should transactions be sorted by Id or date in the main window. Every time you change this, it's saved and then restored when you reopen the account.</p>
 	</item>
 	<item>
 		<title>Sorting Order</title>
