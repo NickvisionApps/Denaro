@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Account Nickvision Money</value>
+		<value>Account Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Nuovo account</value>
@@ -589,5 +589,80 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Account Money (*.nmoney)</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Mostra</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Impostazioni account</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Risparmi</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Questa è solamente una classificazione formale e non influenzerà il funzionamento dell’applicazione.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>La valuta di sistema è</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Tipo di account</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Conto corrente</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Colore degli account dei risparmi</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Tipo di transazione predefinito</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Inserire il simbolo</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Simbolo della valuta</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Simbolo della valuta (nessuno)</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Inserire il codice</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Colore degli account del conto corrente</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Usa valuta personalizzata</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Codice della valuta</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Generate: {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Nome gruppo</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Ricevute</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Pagina {0}</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Colore degli account business</value>
   </data>
 </root>
