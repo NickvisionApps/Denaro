@@ -921,12 +921,12 @@ public class Account : IDisposable
                                     maxDate = pair.Value.Date;
                                 }
                             }
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Total"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
-                            tbl.Cell().Text(localizer["Income"]);
-                            tbl.Cell().AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Expense"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Total"]);
+                            tbl.Cell().AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Expense"]);
+                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
