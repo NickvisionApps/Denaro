@@ -136,24 +136,24 @@ public sealed partial class AccountView : UserControl
             LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
-            ListGroups.Items.Clear();
+            var groupRows = new List<GroupRow>();
             //Ungrouped Row
             var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
-            ListGroups.Items.Add(ungroupedRow);
+            groupRows.Add(ungroupedRow);
             //Other Group Rows
-            var groups = _controller.Groups.Values.ToList();
-            groups.Sort();
+            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
             foreach (var group in groups)
             {
                 var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
                 groupRow.DeleteTriggered += DeleteGroup;
                 groupRow.FilterChanged += UpdateGroupFilter;
-                ListGroups.Items.Add(groupRow);
+                groupRows.Add(groupRow);
             }
+            ListGroups.ItemsSource = groupRows;
             //Transactions
-            ListTransactions.Items.Clear();
+            var transactionRows = new List<TransactionRow>();
             if (_controller.Transactions.Count > 0)
             {
                 //Highlight Days
@@ -178,8 +178,9 @@ public sealed partial class AccountView : UserControl
                         var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
                         transactionRow.EditTriggered += EditTransaction;
                         transactionRow.DeleteTriggered += DeleteTransaction;
-                        ListTransactions.Items.Add(transactionRow);
+                        transactionRows.Add(transactionRow);
                     }
+                    ListTransactions.ItemsSource = transactionRows;
                     ViewStackTransactions.ChangePage("Transactions");
                 }
                 else

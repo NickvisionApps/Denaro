@@ -536,7 +536,7 @@ public partial class AccountView
             {
                 _grpGroups.Remove(groupRow);
             }
-            _groupRows.Clear();
+            _groupRows = new List<GroupRow>();
             //Ungrouped Row
             var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
@@ -561,7 +561,7 @@ public partial class AccountView
             {
                 _flowBox.Remove(transactionRow);
             }
-            _transactionRows.Clear();
+            _transactionRows = new List<TransactionRow>();
             if (_controller.Transactions.Count > 0)
             {
                 var filteredTransactions = _controller.FilteredTransactions;
