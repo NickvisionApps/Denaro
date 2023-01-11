@@ -328,25 +328,25 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Transaccion sens grop</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value />
+		<value>{0} transaccion importada del fichièr estant.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value />
+		<value>{0} transaccions importadas del fichièr estant.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
 		<value>Impossible d’importar las informacions del fichièrs. Tipe de fichièr pas pres en carga.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value />
+		<value>Compte corrèctament exportat dins un fichièr.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value />
+		<value>Exportacion dins un fichièr del compte impossible.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value />
+		<value>Transferir cap a {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value />
+		<value>Transferir a partir de {0}</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
@@ -404,7 +404,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Suprimir</value>
   </data>
   <data name="Upload" xml:space="preserve">
-		<value />
+		<value>Enviar</value>
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
@@ -472,16 +472,16 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Color</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value />
+		<value>Recebut</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value />
+		<value>Compte de destinacion</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Seleccionatz un compte de destinacion</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value />
+		<value>Compte de destinacion (invalid)</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
@@ -506,7 +506,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Colors</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value />
+		<value>Personalizar las colors utilizadas per Money.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Color per defaut de las transaccions</value>
@@ -526,7 +526,7 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
+		<value>Volgatz corregir las errors çai-jos.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Qué de nòu ?</value>
@@ -554,7 +554,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Menú principal</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value />
+		<value>Recents</value>
   </data>
   <data name="NewAccountPopover.GTK" xml:space="preserve">
 		<value>Novèl</value>
@@ -573,5 +573,62 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Mostrar</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Chècs</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Estalvis</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Afars</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Es sonque una etiqueta utila qu’afècta pas lo foncionament de l’aplicacion.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/D</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Segon vòstre sistèma vòstra devisa es</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Color del compte d’afars</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Triar per data</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Nom del grop</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Pagina {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Devisa</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Triar per identificant</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Identificant</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Tipe de compte</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Utilizar una devisa personalizada</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Generat : {0}</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Color del compte chèc</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Color del compte d’estalvis</value>
   </data>
 </root>

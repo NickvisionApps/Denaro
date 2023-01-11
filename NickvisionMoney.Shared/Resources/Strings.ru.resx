@@ -45,7 +45,8 @@
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>Фёдор Соболев https://github.com/fsobolev</value>
+    <value>Переводчики на Weblate ❤️ https://hosted.weblate.org/projects/nickvision-money/app/
+Фёдор Соболев https://hosted.weblate.org/user/fsobolev/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
