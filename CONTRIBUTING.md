@@ -116,7 +116,7 @@ In case you run the app in GNOME Builder, it will force the app to run in en_US 
 
 1. Build the application
 2. Press Ctrl+Alt+T to open a terminal inside the application environment
-3. Run the application with the following command: `LC_ALL=<locale-code> /app/opt/org.nickvision.money/NickvisionMoney.GNOME`, where `<locale-code>` is your system locale code (e.g. `it-IT.UTF8`).
+3. Run the application with the following command: `LC_ALL=<locale-code> /app/opt/org.nickvision.money/NickvisionMoney.GNOME`, where `<locale-code>` is your system locale code (e.g. `it_IT.UTF8`).
 
 Once all changes to your translated file are made, make sure the file is in the path `NickvisionMoney.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
 

@@ -6,6 +6,7 @@ using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using Windows.System;
 using Windows.UI;
@@ -182,7 +183,14 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private async void Help(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://github.com/nlogozzo/NickvisionMoney/blob/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/C/index.html"));
+    private async void Help(object sender, RoutedEventArgs e)
+    {
+        var lang = CultureInfo.CurrentCulture.ToString() switch {
+            "ru-RU" => "ru",
+            _ => "C"
+        };
+        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
+    }
 
     /// <summary>
     /// Occurs when the changelog button is clicked

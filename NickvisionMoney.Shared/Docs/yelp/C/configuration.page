@@ -16,7 +16,7 @@
 
 <title>Configuration</title>
 <p>This page describes what you can change in the application configuration.</p>
-<p>Depending on the version of the application, in its interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
 <terms>
 	<item>
 		<title>Theme</title>
