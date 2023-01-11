@@ -8,7 +8,7 @@
 # Features
 - A cross-platform C# application
   - Windows UI in Windows App SDK (WinUI 3)
-  - GNOME UI in gir.core (Gtk4/Libadwaita)
+  - GNOME UI in [gir.core](https://gircore.github.io/) (Gtk4/Libadwaita)
 - Manage multiple accounts at a time, with a familiar tab interface
 - Easily filter transactions by type, group, or date
 - Easily repeat transactions, such as bills that occur every month
