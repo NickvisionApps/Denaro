@@ -28,7 +28,7 @@
 
     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
         <StackPanel Margin="12" Orientation="Horizontal" Spacing="6">
-            <Button x:Name="BtnId" Width="40" Height="40" CornerRadius="20" Foreground="White" Click="Edit"/>
+            <Button x:Name="BtnId" CornerRadius="10" Foreground="White" Click="Edit"/>
 
             <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                 <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>

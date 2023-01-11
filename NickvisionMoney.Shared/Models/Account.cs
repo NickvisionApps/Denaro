@@ -22,7 +22,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
-    private SqliteConnection _database;
+    private readonly SqliteConnection _database;
 
     /// <summary>
     /// The path of the account
@@ -833,7 +833,7 @@ public class Account : IDisposable
     private bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;Group;GroupName;GroupDescription\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;Group(Id Starts At 1);GroupName;GroupDescription\n";
         foreach (var pair in Transactions)
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
@@ -921,12 +921,12 @@ public class Account : IDisposable
                                     maxDate = pair.Value.Date;
                                 }
                             }
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Total"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
-                            tbl.Cell().Text(localizer["Income"]);
-                            tbl.Cell().AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Expense"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Total"]);
+                            tbl.Cell().AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
+                            tbl.Cell().Text(localizer["Expense"]);
+                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1076,7 +1076,7 @@ public class Account : IDisposable
                                     using var memoryStream = new MemoryStream();
                                     pair.Value.Receipt.Save(memoryStream, new JpegEncoder());
                                     tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray(), ImageScaling.FitArea);
+                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray());
                                     i++;
                                 }
                             }
@@ -1119,7 +1119,7 @@ public class Account : IDisposable
     private async Task<int> ImportFromCSVAsync(string path)
     {
         var imported = 0;
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);
@@ -1260,7 +1260,7 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromOFXAsync(string path)
     {
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);
@@ -1366,7 +1366,7 @@ public class Account : IDisposable
     /// <returns>The number of transactions imported. -1 for error</returns>
     private async Task<int> ImportFromQIFAsync(string path)
     {
-        var lines = default(string[]);
+        string[]? lines;
         try
         {
             lines = File.ReadAllLines(path);

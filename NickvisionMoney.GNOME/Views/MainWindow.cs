@@ -455,7 +455,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
-        var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, _controller.AppInfo.ShortName, this);
+        var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, this);
         shortcutsDialog.Show();
     }
 

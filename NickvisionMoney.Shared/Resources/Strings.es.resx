@@ -659,4 +659,13 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="PageNumber.PDF" xml:space="preserve">
     <value>Página {0}</value>
   </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Ordenar por id</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Ordenar por fecha</value>
+  </data>
 </root>

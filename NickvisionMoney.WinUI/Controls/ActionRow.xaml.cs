@@ -10,8 +10,8 @@ namespace NickvisionMoney.WinUI.Controls;
 /// </summary>
 public sealed partial class ActionRow : DockPanel, INotifyPropertyChanged
 {
-    public static DependencyProperty TitleProperty { get; } = DependencyProperty.Register("Title", typeof(string), typeof(ActionRow), new PropertyMetadata(null, (sender, e) => (sender as ActionRow)?.NotifyPropertyChanged("Title")));
-    public static DependencyProperty SubtitleProperty { get; } = DependencyProperty.Register("Subtitle", typeof(string), typeof(ActionRow), new PropertyMetadata(null, (sender, e) => (sender as ActionRow)?.NotifyPropertyChanged("Subtitle")));
+    public static DependencyProperty TitleProperty { get; } = DependencyProperty.Register("Title", typeof(string), typeof(ActionRow), new PropertyMetadata(null, (sender, e) => (sender as ActionRow)?.NotifyPropertyChanged(nameof(Title))));
+    public static DependencyProperty SubtitleProperty { get; } = DependencyProperty.Register("Subtitle", typeof(string), typeof(ActionRow), new PropertyMetadata(null, (sender, e) => (sender as ActionRow)?.NotifyPropertyChanged(nameof(Subtitle))));
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

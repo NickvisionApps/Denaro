@@ -1,6 +1,4 @@
-using NickvisionMoney.Shared.Models;
 using NickvisionMoney.Shared.Helpers;
-using System;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -12,7 +10,7 @@ public class ShortcutsDialog
     private readonly Gtk.Builder _builder;
     private readonly Gtk.ShortcutsWindow _window;
 
-    public ShortcutsDialog(Localizer localizer, string appName, Gtk.Window parent)
+    public ShortcutsDialog(Localizer localizer, Gtk.Window parent)
     {
     	string xml = $@"<?xml version='1.0' encoding='UTF-8'?>
     <interface>

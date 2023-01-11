@@ -10,7 +10,7 @@ namespace NickvisionMoney.WinUI.Controls;
 /// </summary>
 public sealed partial class ViewStackPage : Frame, INotifyPropertyChanged
 {
-    public static DependencyProperty PageNameProperty { get; } = DependencyProperty.Register("PageName", typeof(string), typeof(ViewStackPage), new PropertyMetadata("", (sender, e) => (sender as ViewStackPage)?.NotifyPropertyChanged("PageName")));
+    public static DependencyProperty PageNameProperty { get; } = DependencyProperty.Register("PageName", typeof(string), typeof(ViewStackPage), new PropertyMetadata("", (sender, e) => (sender as ViewStackPage)?.NotifyPropertyChanged(nameof(PageName))));
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
