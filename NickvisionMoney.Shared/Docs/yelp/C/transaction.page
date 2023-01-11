@@ -40,7 +40,7 @@
 	</item>
 	<item>
 		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generated <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
 	</item>
 	<item>
 		<title>Repeat End Date</title>
