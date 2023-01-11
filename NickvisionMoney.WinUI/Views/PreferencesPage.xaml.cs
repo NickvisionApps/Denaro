@@ -189,7 +189,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
             "ru-RU" => "ru",
             _ => "C"
         };
-        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/main/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
+        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
     /// <summary>
