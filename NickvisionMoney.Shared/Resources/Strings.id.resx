@@ -647,4 +647,31 @@ Apa yang anda ingin lakukan untuk transaksi yang telah dihasilkan?
 
 Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan yang baru.</value>
   </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Kuitansi</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Mata Uang</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Bantuan</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Urutkan Berdasarkan Tanggal</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Urutkan Berdasarkan Id</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Nama Grup</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Halaman</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Dihasilkan</value>
+  </data>
 </root>
