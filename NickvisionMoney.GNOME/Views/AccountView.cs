@@ -535,6 +535,7 @@ public partial class AccountView
                 AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
             }
             await _controller.StartupAsync();
+            return;
         }
         if(!_isAccountLoading)
         {
@@ -593,6 +594,7 @@ public partial class AccountView
                         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
                         row.EditTriggered += EditTransaction;
                         row.DeleteTriggered += DeleteTransaction;
+                        row.IsSmall = _parentWindow.DefaultWidth < 450;
                         _flowBox.Append(row);
                         _transactionRows.Add(row);
                         g_main_context_iteration(g_main_context_default(), false);
@@ -620,7 +622,6 @@ public partial class AccountView
             _spinner.SetVisible(false);
             _scrollPane.SetSensitive(true);
             _grpTransactions.SetSensitive(true);
-            _parentWindow.OnWidthChanged();
             _isAccountLoading = false;
         }
     }
@@ -978,6 +979,7 @@ public partial class AccountView
         foreach(var row in _transactionRows)
         {
             row.IsSmall = e.SmallWidth;
+            g_main_context_iteration(g_main_context_default(), false);
         }
     }
 }
