@@ -36,6 +36,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
+    private bool _compactMode;
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -92,6 +93,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _accountViews = new List<Adw.TabPage>();
         SetDefaultSize(900, 720);
         SetSizeRequest(360, -1);
+        _compactMode = false;
         if(_controller.IsDevVersion)
         {
             AddCssClass("devel");
@@ -601,5 +603,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
-    public void OnWidthChanged() => WidthChanged?.Invoke(this, new WidthChangedEventArgs(DefaultWidth < 450));
+    public void OnWidthChanged()
+    {
+        var compactModeNeeded = DefaultWidth < 450;
+        if((compactModeNeeded && !_compactMode) || (!compactModeNeeded && _compactMode))
+        {
+            _compactMode = !_compactMode;
+            WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));
+        }
+    }
 }

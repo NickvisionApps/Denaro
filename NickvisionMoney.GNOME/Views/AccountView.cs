@@ -525,6 +525,7 @@ public partial class AccountView
         }
         OnToggleGroups(null, EventArgs.Empty);
         OnAccountInfoChanged(null, EventArgs.Empty);
+        _parentWindow.OnWidthChanged();
     }
 
     private async void OnAccountInfoChanged(object? sender, EventArgs e)
