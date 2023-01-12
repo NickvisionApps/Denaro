@@ -254,7 +254,7 @@ public class AccountViewController
     {
         get
         {
-            var filteredTransactions = new List<Transaction>(_account.Transactions.Count);
+            var filteredTransactions = new List<Transaction>();
             foreach (var pair in _account.Transactions)
             {
                 if (pair.Value.Type == TransactionType.Income && !_filters[-3])
