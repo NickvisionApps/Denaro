@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Traductors sus Weblate ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -380,7 +380,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Setmanièr</value>
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value />
+		<value>Bisetmanièr</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Mesadièr</value>
@@ -630,5 +630,8 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
     <value>Color del compte d’estalvis</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Tipe de transaccion per defaut</value>
   </data>
 </root>
