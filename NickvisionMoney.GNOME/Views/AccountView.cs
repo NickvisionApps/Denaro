@@ -26,6 +26,12 @@ public partial class AccountView
         int RefCount;
     };
 
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
     [DllImport("adwaita-1")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
@@ -102,6 +108,7 @@ public partial class AccountView
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
+    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
@@ -438,6 +445,9 @@ public partial class AccountView
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
         _statusPageNoTransactions.SetVisible(false);
+        //Spinner
+        _spinner = Gtk.Spinner.New();
+        _spinner.SetVisible(false);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -448,6 +458,7 @@ public partial class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
+        _boxMain.Append(_spinner);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
@@ -525,6 +536,11 @@ public partial class AccountView
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
+            //Start Spinner
+            _statusPageNoTransactions.SetVisible(false);
+            _scrollTransactions.SetVisible(false);
+            _spinner.SetVisible(true);
+            _spinner.Start();
             //Overview
             Page.SetTitle(_controller.AccountTitle);
             _updateSubtitle(_controller.AccountTitle);
@@ -555,6 +571,7 @@ public partial class AccountView
                 _grpGroups.Add(row);
                 _groupRows.Add(row);
             }
+            g_main_context_iteration(g_main_context_default(), false);
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
@@ -567,8 +584,6 @@ public partial class AccountView
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
                 if (filteredTransactions.Count > 0)
                 {
-                    _statusPageNoTransactions.SetVisible(false);
-                    _scrollTransactions.SetVisible(true);
                     foreach (var transaction in filteredTransactions)
                     {
                         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
@@ -576,7 +591,10 @@ public partial class AccountView
                         row.DeleteTriggered += DeleteTransaction;
                         _flowBox.Append(row);
                         _transactionRows.Add(row);
+                        g_main_context_iteration(g_main_context_default(), false);
                     }
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
                 }
                 else
                 {
@@ -594,6 +612,8 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
+            _spinner.Stop();
+            _spinner.SetVisible(false);
             _parentWindow.OnWidthChanged();
             _isAccountLoading = false;
         }
