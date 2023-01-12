@@ -569,6 +569,9 @@ public partial class AccountView
             //Groups
             foreach (var groupRow in _groupRows)
             {
+                groupRow.EditTriggered -= EditGroup;
+                groupRow.DeleteTriggered -= DeleteGroup;
+                groupRow.FilterChanged -= UpdateGroupFilter;
                 _grpGroups.Remove(groupRow);
             }
             _groupRows = new List<GroupRow>(_controller.GroupsCount);
@@ -593,6 +596,8 @@ public partial class AccountView
             //Transactions
             foreach (var transactionRow in _transactionRows)
             {
+                transactionRow.EditTriggered -= EditTransaction;
+                transactionRow.DeleteTriggered -= DeleteTransaction;
                 _flowBox.Remove(transactionRow);
             }
             _transactionRows = new List<TransactionRow>(_controller.TransactionsCount);
