@@ -448,7 +448,9 @@ public partial class AccountView
         //Spinner
         _spinner = Gtk.Spinner.New();
         _spinner.SetSizeRequest(48, 48);
+        _spinner.SetHalign(Gtk.Align.Center);
         _spinner.SetValign(Gtk.Align.Center);
+        _spinner.SetHexpand(true);
         _spinner.SetVexpand(true);
         _spinner.SetVisible(false);
         //Main Box
@@ -542,7 +544,8 @@ public partial class AccountView
             _isAccountLoading = true;
             //Start Spinner
             _statusPageNoTransactions.SetVisible(false);
-            _scrollTransactions.SetVisible(false);
+            _scrollTransactions.SetVisible(true);
+            _scrollTransactions.SetSensitive(false);
             _spinner.SetVisible(true);
             _spinner.Start();
             _scrollPane.SetSensitive(false);
@@ -601,6 +604,7 @@ public partial class AccountView
                     }
                     _statusPageNoTransactions.SetVisible(false);
                     _scrollTransactions.SetVisible(true);
+                    _scrollTransactions.SetSensitive(true);
                 }
                 else
                 {
