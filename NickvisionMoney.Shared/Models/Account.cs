@@ -516,6 +516,10 @@ public class Account : IDisposable
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Remove(id);
+            if (id + 1 == NextAvailableGroupId)
+            {
+                NextAvailableGroupId--;
+            }
             foreach (var pair in Transactions)
             {
                 if (pair.Value.GroupId == id)
@@ -523,10 +527,6 @@ public class Account : IDisposable
                     pair.Value.GroupId = -1;
                     await UpdateTransactionAsync(pair.Value);
                 }
-            }
-            if(id + 1 == NextAvailableGroupId)
-            {
-                NextAvailableGroupId--;
             }
             return true;
         }
@@ -565,6 +565,7 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
+            NextAvailableTransactionId++;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 if (transaction.GroupId != -1)
@@ -580,11 +581,10 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            if(transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }    
-            NextAvailableTransactionId++;
             return true;
         }
         return false;
@@ -653,7 +653,10 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            await SyncRepeatTransactionsAsync();
+            if(transaction.RepeatFrom <= 0)
+            {
+                await SyncRepeatTransactionsAsync();
+            }
             return true;
         }
         return false;
