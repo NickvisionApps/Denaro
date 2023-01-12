@@ -50,8 +50,8 @@ public partial class AccountView
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
-    private readonly List<GroupRow> _groupRows;
-    private readonly List<TransactionRow> _transactionRows;
+    private List<GroupRow> _groupRows;
+    private List<TransactionRow> _transactionRows;
     private readonly MainWindow _parentWindow;
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
