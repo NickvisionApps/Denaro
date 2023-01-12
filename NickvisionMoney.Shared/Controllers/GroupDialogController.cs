@@ -44,7 +44,7 @@ public class GroupDialogController
     {
         _existingNames = existingNames;
         Localizer = localizer;
-        Group = group;
+        Group = (Group)group.Clone();
         Accepted = false;
     }
 

@@ -1,5 +1,6 @@
 ﻿using SixLabors.ImageSharp;
 using System;
+using System.Transactions;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -30,7 +31,7 @@ public enum TransactionRepeatInterval
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Transaction : IComparable<Transaction>, IDisposable, IEquatable<Transaction>
+public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IEquatable<Transaction>
 {
     private int _groupId;
 
@@ -112,30 +113,24 @@ public class Transaction : IComparable<Transaction>, IDisposable, IEquatable<Tra
     }
 
     /// <summary>
-    /// Frees resources used by the Transaction object
+    /// Clones the transaction
     /// </summary>
-    public void Dispose() => Receipt?.Dispose();
-
-    /// <summary>
-    /// Gets whether or not an object is equal to this Transaction
-    /// </summary>
-    /// <param name="obj">The object to compare</param>
-    /// <returns>True if equals, else false</returns>
-    public override bool Equals(object? obj)
+    /// <returns>A new transaction</returns>
+    public object Clone()
     {
-        if(obj is Transaction toCompare)
+        return new Transaction(Id)
         {
-            return Id == toCompare.Id;
-        }
-        return false;
+            Date = Date,
+            Description = Description,
+            Type = Type,
+            RepeatInterval = RepeatInterval,
+            Amount = Amount,
+            RGBA = RGBA,
+            Receipt = Receipt,
+            RepeatFrom = RepeatFrom,
+            RepeatEndDate = RepeatEndDate
+        };
     }
-
-    /// <summary>
-    /// Gets whether or not an object is equal to this Transaction
-    /// </summary>
-    /// <param name="obj">The Transaction? object to compare</param>
-    /// <returns>True if equals, else false</returns>
-    public bool Equals(Transaction? obj) => Equals(obj);
 
     /// <summary>
     /// Compares this with other
@@ -162,6 +157,32 @@ public class Transaction : IComparable<Transaction>, IDisposable, IEquatable<Tra
             return 1;
         }
     }
+
+    /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    public void Dispose() => Receipt?.Dispose();
+
+    /// <summary>
+    /// Gets whether or not an object is equal to this Transaction
+    /// </summary>
+    /// <param name="obj">The object to compare</param>
+    /// <returns>True if equals, else false</returns>
+    public override bool Equals(object? obj)
+    {
+        if(obj is Transaction toCompare)
+        {
+            return Id == toCompare.Id;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Gets whether or not an object is equal to this Transaction
+    /// </summary>
+    /// <param name="obj">The Transaction? object to compare</param>
+    /// <returns>True if equals, else false</returns>
+    public bool Equals(Transaction? obj) => Equals(obj);
 
     /// <summary>
     /// Compares two Transaction objects by ==

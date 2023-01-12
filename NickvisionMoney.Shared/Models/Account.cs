@@ -52,19 +52,19 @@ public class Account : IDisposable
     /// The next available transaction id
     /// </summary>
     public uint NextAvailableTransactionId { get; private set; }
-
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
-    public decimal TodayIncome => GetIncome(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayIncome { get; private set; }
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
-    public decimal TodayExpense => GetExpense(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayExpense { get; private set; }
+
     /// <summary>
     /// The total amount of the account for today
     /// </summary>
-    public decimal TodayTotal => GetTotal(DateOnly.FromDateTime(DateTime.Now));
+    public decimal TodayTotal => TodayIncome - TodayExpense;
 
     /// <summary>
     /// Constructs an Account
@@ -79,6 +79,8 @@ public class Account : IDisposable
         NeedsFirstTimeSetup = true;
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
+        TodayIncome = 0;
+        TodayExpense = 0;
         //Open Database
         _database = new SqliteConnection(new SqliteConnectionStringBuilder()
         {
@@ -220,9 +222,20 @@ public class Account : IDisposable
                 transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
-            if(transaction.GroupId != -1 && transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            if(transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                if (transaction.GroupId != -1)
+                {
+                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                }
+                if(transaction.Type == TransactionType.Income)
+                {
+                    TodayIncome += transaction.Amount;
+                }
+                else
+                {
+                    TodayExpense += transaction.Amount;
+                }
             }
             NextAvailableTransactionId++;
         }
@@ -238,41 +251,6 @@ public class Account : IDisposable
         {
             pair.Value.Dispose();
         }
-    }
-
-    /// <summary>
-    /// Updates the metadata of the account
-    /// </summary>
-    /// <param name="metadata">The new metadata</param>
-    /// <returns>True if successful, else false</returns>
-    public bool UpdateMetadata(AccountMetadata metadata)
-    {
-        var cmdUpdateMetadata = _database.CreateCommand();
-        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy WHERE id = 0";
-        cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
-        cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
-        cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
-        cmdUpdateMetadata.Parameters.AddWithValue("$customSymbol", metadata.CustomCurrencySymbol ?? "");
-        cmdUpdateMetadata.Parameters.AddWithValue("$customCode", metadata.CustomCurrencyCode ?? "");
-        cmdUpdateMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)metadata.DefaultTransactionType);
-        cmdUpdateMetadata.Parameters.AddWithValue("$showGroupsList", metadata.ShowGroupsList);
-        cmdUpdateMetadata.Parameters.AddWithValue("$sortFirstToLast", metadata.SortFirstToLast);
-        cmdUpdateMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)metadata.SortTransactionsBy);
-        if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
-        {
-            Metadata.Name = metadata.Name;
-            Metadata.AccountType = metadata.AccountType;
-            Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
-            Metadata.CustomCurrencySymbol = metadata.CustomCurrencySymbol;
-            Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
-            Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
-            Metadata.ShowGroupsList = metadata.ShowGroupsList;
-            Metadata.SortFirstToLast = metadata.SortFirstToLast;
-            Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
-            NeedsFirstTimeSetup = false;
-            return true;
-        }
-        return false;
     }
 
     /// <summary>
@@ -358,6 +336,41 @@ public class Account : IDisposable
             }
         }
         return total;
+    }
+
+    /// <summary>
+    /// Updates the metadata of the account
+    /// </summary>
+    /// <param name="metadata">The new metadata</param>
+    /// <returns>True if successful, else false</returns>
+    public bool UpdateMetadata(AccountMetadata metadata)
+    {
+        var cmdUpdateMetadata = _database.CreateCommand();
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy WHERE id = 0";
+        cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
+        cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
+        cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
+        cmdUpdateMetadata.Parameters.AddWithValue("$customSymbol", metadata.CustomCurrencySymbol ?? "");
+        cmdUpdateMetadata.Parameters.AddWithValue("$customCode", metadata.CustomCurrencyCode ?? "");
+        cmdUpdateMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)metadata.DefaultTransactionType);
+        cmdUpdateMetadata.Parameters.AddWithValue("$showGroupsList", metadata.ShowGroupsList);
+        cmdUpdateMetadata.Parameters.AddWithValue("$sortFirstToLast", metadata.SortFirstToLast);
+        cmdUpdateMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)metadata.SortTransactionsBy);
+        if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
+        {
+            Metadata.Name = metadata.Name;
+            Metadata.AccountType = metadata.AccountType;
+            Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
+            Metadata.CustomCurrencySymbol = metadata.CustomCurrencySymbol;
+            Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
+            Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
+            Metadata.ShowGroupsList = metadata.ShowGroupsList;
+            Metadata.SortFirstToLast = metadata.SortFirstToLast;
+            Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
+            NeedsFirstTimeSetup = false;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -552,9 +565,20 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
-            if(transaction.GroupId != -1)
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                UpdateGroupAmounts();
+                if (transaction.GroupId != -1)
+                {
+                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    TodayIncome += transaction.Amount;
+                }
+                else
+                {
+                    TodayExpense += transaction.Amount;
+                }
             }
             NextAvailableTransactionId++;
             return true;
@@ -593,8 +617,38 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
+            var oldTransaction = Transactions[transaction.Id];
+            if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                if (oldTransaction.GroupId != -1)
+                {
+                    Groups[(uint)oldTransaction.GroupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
+                }
+                if (oldTransaction.Type == TransactionType.Income)
+                {
+                    TodayIncome -= oldTransaction.Amount;
+                }
+                else
+                {
+                    TodayExpense -= oldTransaction.Amount;
+                }
+            }
             Transactions[transaction.Id] = transaction;
-            UpdateGroupAmounts();
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                if (transaction.GroupId != -1)
+                {
+                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    TodayIncome += transaction.Amount;
+                }
+                else
+                {
+                    TodayExpense += transaction.Amount;
+                }
+            }
             return true;
         }
         return false;
@@ -654,12 +708,23 @@ public class Account : IDisposable
         cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
         {
-            var updateGroups = Transactions[id].GroupId != -1;
-            Transactions.Remove(id);
-            if(updateGroups)
+            var transaction = Transactions[id];
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                UpdateGroupAmounts();
+                if (transaction.GroupId != -1)
+                {
+                    Groups[(uint)transaction.GroupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    TodayIncome -= transaction.Amount;
+                }
+                else
+                {
+                    TodayExpense -= transaction.Amount;
+                }
             }
+            Transactions.Remove(id);
             if (id + 1 == NextAvailableTransactionId)
             {
                 NextAvailableTransactionId--;
@@ -1415,23 +1480,5 @@ public class Account : IDisposable
             }
         }
         return imported;
-    }
-
-    /// <summary>
-    /// Updates the amount of each Group object in the account
-    /// </summary>
-    private void UpdateGroupAmounts()
-    {
-        foreach(var pair in Groups)
-        {
-            pair.Value.Balance = 0;
-        }
-        foreach(var pair in Transactions)
-        {
-            if(pair.Value.GroupId != -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                Groups[(uint)pair.Value.GroupId].Balance += (pair.Value.Type == TransactionType.Income ? 1 : -1) * pair.Value.Amount;
-            }
-        }
     }
 }

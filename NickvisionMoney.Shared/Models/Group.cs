@@ -5,7 +5,7 @@ namespace NickvisionMoney.Shared.Models;
 /// <summary>
 /// A model of a transaction
 /// </summary>
-public class Group : IComparable<Group>, IEquatable<Group>
+public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
 {
     /// <summary>
     /// The id of the group
@@ -37,6 +37,46 @@ public class Group : IComparable<Group>, IEquatable<Group>
     }
 
     /// <summary>
+    /// Clones the group
+    /// </summary>
+    /// <returns>A new Group</returns>
+    public object Clone()
+    {
+        return new Group(Id)
+        {
+            Name = Name,
+            Description = Description,
+            Balance = Balance
+        };
+    }
+
+    /// <summary>
+    /// Compares this with other
+    /// </summary>
+    /// <param name="other">The Group object to compare to</param>
+    /// <returns>-1 if this is less than other. 0 if this is equal to other. 1 if this is greater than other</returns>
+    /// <exception cref="NullReferenceException">Thrown if other is null</exception>
+    public int CompareTo(Group? other)
+    {
+        if (other == null)
+        {
+            throw new NullReferenceException();
+        }
+        if (this < other)
+        {
+            return -1;
+        }
+        else if (this == other)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    /// <summary>
     /// Gets whether or not an object is equal to this Group
     /// </summary>
     /// <param name="obj">The object to compare</param>
@@ -56,32 +96,6 @@ public class Group : IComparable<Group>, IEquatable<Group>
     /// <param name="obj">The Group? object to compare</param>
     /// <returns>True if equals, else false</returns>
     public bool Equals(Group? obj) => Equals(obj);
-
-    /// <summary>
-    /// Compares this with other
-    /// </summary>
-    /// <param name="other">The Group object to compare to</param>
-    /// <returns>-1 if this is less than other. 0 if this is equal to other. 1 if this is greater than other</returns>
-    /// <exception cref="NullReferenceException">Thrown if other is null</exception>
-    public int CompareTo(Group? other)
-    {
-        if (other == null)
-        {
-            throw new NullReferenceException();
-        }
-        if(this < other)
-        {
-            return -1;
-        }
-        else if (this == other)
-        {
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
 
     /// <summary>
     /// Compares two Group objects by ==

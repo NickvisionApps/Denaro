@@ -81,7 +81,7 @@ public class TransactionDialogController : IDisposable
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
         Localizer = localizer;
-        Transaction = transaction;
+        Transaction = (Transaction)transaction.Clone();
         Groups = groups;
         Accepted = false;
         OriginalRepeatInterval = transaction.RepeatInterval;
