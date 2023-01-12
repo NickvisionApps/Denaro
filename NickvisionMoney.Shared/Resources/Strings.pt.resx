@@ -122,7 +122,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nenhuma Conta Aberta</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Crie ou abra uma conta para iniciar. Você também pode arrastar um arquivo do seu explorador de arquivos para o aplicativo.</value>
+		<value>Crie ou abra uma conta para iniciar. Você também pode arrastar um ficheiro do seu explorador de ficheiros para o aplicativo.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
 		<value>Contas Recentes</value>
@@ -131,7 +131,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nenhuma Conta Recente</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value>Todos os arquivos</value>
+		<value>Todos os ficheiros</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
@@ -220,7 +220,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nenhuma Transação Encontrada</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value>Criar uma nova transação ou importar transações de um arquivo.</value>
+		<value>Criar uma nova transação ou importar transações de um ficheiro.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
 		<value>Nenhuma transação corresponde aos filtros especificados.</value>
@@ -331,19 +331,19 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Transações sem grupo</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value>Importada {0} transação do arquivo.</value>
+		<value>Importada {0} transação do ficheiro.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value>Importadas {0} transações do arquivo.</value>
+		<value>Importadas {0} transações do ficheiro.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value>Não foi possível importar dados do arquivo. Formato de arquivo não-suportado.</value>
+		<value>Não foi possível importar dados do ficheiro. Formato de ficheiro não-suportado.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value>Conta exportada para arquivo com sucesso.</value>
+		<value>Conta exportada para ficheiro com sucesso.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value>Não foi possível exportar conta para o arquivo.</value>
+		<value>Não foi possível exportar conta para o ficheiro.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
 		<value>Transferir Para {0}</value>
