@@ -44,6 +44,14 @@ public class Account : IDisposable
     /// Whether or not an account needs to be setup for the first time
     /// </summary>
     public bool NeedsFirstTimeSetup { get; private set; }
+    /// <summary>
+    /// The next available group id
+    /// </summary>
+    public uint NextAvailableGroupId { get; private set; }
+    /// <summary>
+    /// The next available transaction id
+    /// </summary>
+    public uint NextAvailableTransactionId { get; private set; }
 
     /// <summary>
     /// The income amount of the account for today
@@ -69,6 +77,8 @@ public class Account : IDisposable
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         NeedsFirstTimeSetup = true;
+        NextAvailableGroupId = 1;
+        NextAvailableTransactionId = 1;
         //Open Database
         _database = new SqliteConnection(new SqliteConnectionStringBuilder()
         {
@@ -180,6 +190,7 @@ public class Account : IDisposable
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
+            NextAvailableGroupId++;
         }
         //Get Transactions
         var cmdQueryTransactions = _database.CreateCommand();
@@ -213,52 +224,7 @@ public class Account : IDisposable
             {
                 Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
             }
-        }
-    }
-
-    /// <summary>
-    /// The next available group id
-    /// </summary>
-    public uint NextAvailableGroupId
-    {
-        get
-        {
-            if(Groups.Count == 0)
-            {
-                return 1;
-            }
-            var id = 0u;
-            foreach (var group in Groups)
-            {
-                if (group.Key > id)
-                {
-                    id = group.Key;
-                }
-            }
-            return id + 1;
-        }
-    }
-
-    /// <summary>
-    /// The next available transaction id
-    /// </summary>
-    public uint NextAvailableTransactionId
-    {
-        get
-        {
-            if (Transactions.Count == 0)
-            {
-                return 1;
-            }
-            var id = 0u;
-            foreach(var transaction in Transactions)
-            {
-                if(transaction.Key > id)
-                {
-                    id = transaction.Key;
-                }
-            }
-            return id + 1;
+            NextAvailableTransactionId++;
         }
     }
 
@@ -498,6 +464,7 @@ public class Account : IDisposable
         if(await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Add(group.Id, group);
+            NextAvailableGroupId++;
             return true;
         }
         return false;
@@ -544,6 +511,10 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(pair.Value);
                 }
             }
+            if(id + 1 == NextAvailableGroupId)
+            {
+                NextAvailableGroupId--;
+            }
             return true;
         }
         return false;
@@ -585,6 +556,7 @@ public class Account : IDisposable
             {
                 UpdateGroupAmounts();
             }
+            NextAvailableTransactionId++;
             return true;
         }
         return false;
@@ -687,6 +659,10 @@ public class Account : IDisposable
             if(updateGroups)
             {
                 UpdateGroupAmounts();
+            }
+            if (id + 1 == NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId--;
             }
             return true;
         }
