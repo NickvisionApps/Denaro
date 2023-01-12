@@ -108,8 +108,10 @@ public partial class AccountView
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
-    private readonly Gtk.Spinner _spinner;
     private readonly Gtk.Box _boxMain;
+    private readonly Adw.Bin _binSpinner;
+    private readonly Gtk.Spinner _spinner;
+    private readonly Gtk.Overlay _overlayLoading;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
@@ -445,14 +447,6 @@ public partial class AccountView
         _statusPageNoTransactions.SetSizeRequest(300, 360);
         _statusPageNoTransactions.SetMarginBottom(60);
         _statusPageNoTransactions.SetVisible(false);
-        //Spinner
-        _spinner = Gtk.Spinner.New();
-        _spinner.SetSizeRequest(48, 48);
-        _spinner.SetHalign(Gtk.Align.Center);
-        _spinner.SetValign(Gtk.Align.Center);
-        _spinner.SetHexpand(true);
-        _spinner.SetVexpand(true);
-        _spinner.SetVisible(false);
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
@@ -463,13 +457,30 @@ public partial class AccountView
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
-        _boxMain.Append(_spinner);
+        //Spinner Box
+        _binSpinner = Adw.Bin.New();
+        _binSpinner.SetHexpand(true);
+        _binSpinner.SetVexpand(true);
+        _binSpinner.AddCssClass("background");
+        //Spinner
+        _spinner = Gtk.Spinner.New();
+        _spinner.SetSizeRequest(48, 48);
+        _spinner.SetHalign(Gtk.Align.Center);
+        _spinner.SetValign(Gtk.Align.Center);
+        _spinner.SetHexpand(true);
+        _spinner.SetVexpand(true);
+        _binSpinner.SetChild(_spinner);
+        //Loading Overlay
+        _overlayLoading = Gtk.Overlay.New();
+        _overlayLoading.SetVexpand(true);
+        _overlayLoading.AddOverlay(_binSpinner);
+        _flap.SetContent(_overlayLoading);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
         _overlayMain.SetChild(_boxMain);
         _overlayMain.AddOverlay(_btnNewTransaction);
-        _flap.SetContent(_overlayMain);
+        _overlayLoading.SetChild(_overlayMain);
         //Tab Page
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
@@ -546,11 +557,9 @@ public partial class AccountView
             //Start Spinner
             _statusPageNoTransactions.SetVisible(false);
             _scrollTransactions.SetVisible(true);
-            _scrollTransactions.SetSensitive(false);
-            _spinner.SetVisible(true);
+            _binSpinner.SetVisible(true);
             _spinner.Start();
             _scrollPane.SetSensitive(false);
-            _grpTransactions.SetSensitive(false);
             //Overview
             Page.SetTitle(_controller.AccountTitle);
             _updateSubtitle(_controller.AccountTitle);
@@ -605,7 +614,6 @@ public partial class AccountView
                     }
                     _statusPageNoTransactions.SetVisible(false);
                     _scrollTransactions.SetVisible(true);
-                    _scrollTransactions.SetSensitive(true);
                 }
                 else
                 {
@@ -624,9 +632,8 @@ public partial class AccountView
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
             _spinner.Stop();
-            _spinner.SetVisible(false);
+            _binSpinner.SetVisible(false);
             _scrollPane.SetSensitive(true);
-            _grpTransactions.SetSensitive(true);
             _isAccountLoading = false;
         }
     }
