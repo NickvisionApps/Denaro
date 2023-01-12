@@ -544,8 +544,7 @@ public partial class AccountView
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
             //Other Group Rows
-            var groups = _controller.Groups.Values.ToList();
-            groups.Sort();
+            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
             foreach (var group in groups)
             {
                 var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
