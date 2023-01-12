@@ -31,5 +31,6 @@ public class Transfer
         SourceAccountPath = sourceAccountPath;
         DestinationAccountPath = "";
         Amount = 0m;
+        SourceAccountName = "";
     }
 }

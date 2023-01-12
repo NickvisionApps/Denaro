@@ -8,7 +8,7 @@ namespace NickvisionMoney.WinUI;
 
 public partial class App : Application
 {
-    private Window? _mainWindow;
+    public static Window? MainWindow { get; private set; } = null;
     private readonly MainWindowController _mainWindowController;
 
     public App()
@@ -38,7 +38,7 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        _mainWindow = new MainWindow(_mainWindowController);
-        _mainWindow.Activate();
+        MainWindow = new MainWindow(_mainWindowController);
+        MainWindow.Activate();
     }
 }

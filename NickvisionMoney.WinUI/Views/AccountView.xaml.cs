@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
@@ -11,6 +12,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -119,11 +121,16 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void AccountInfoChanged(object? sender, EventArgs e)
+    private async void AccountInfoChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
+            CmdBar.IsEnabled = false;
+            ScrollSidebar.IsEnabled = false;
+            ViewStackTransactions.IsEnabled = false;
+            LoadingCtrl.IsLoading = true;
+            var dispatcher = App.MainWindow!.DispatcherQueue;
             //Overview
             _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
@@ -133,23 +140,31 @@ public sealed partial class AccountView : UserControl
             LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
-            var groupRows = new List<GroupRow>(_controller.GroupsCount);
-            //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-            ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
-            groupRows.Add(ungroupedRow);
-            //Other Group Rows
-            foreach (var group in _controller.OrderedGroups)
+            ListGroups.Items.Clear();
+            await Task.Run(async () =>
             {
-                var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                groupRow.EditTriggered += EditGroup;
-                groupRow.DeleteTriggered += DeleteGroup;
-                groupRow.FilterChanged += UpdateGroupFilter;
-                groupRows.Add(groupRow);
-            }
-            ListGroups.ItemsSource = groupRows;
+                //Ungrouped Row
+                await dispatcher.EnqueueAsync(() =>
+                {
+                    var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
+                    ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
+                    ListGroups.Items.Add(ungroupedRow);
+                });
+                //Other Group Rows
+                foreach (var group in _controller.OrderedGroups)
+                {
+                    await dispatcher.EnqueueAsync(() =>
+                    {
+                        var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
+                        groupRow.EditTriggered += EditGroup;
+                        groupRow.DeleteTriggered += DeleteGroup;
+                        groupRow.FilterChanged += UpdateGroupFilter;
+                        ListGroups.Items.Add(groupRow);
+                    });
+                }
+            });
             //Transactions
-            var transactionRows = new List<TransactionRow>(_controller.TransactionsCount);
+            ListTransactions.Items.Clear();
             if (_controller.TransactionsCount > 0)
             {
                 //Highlight Days
@@ -166,17 +181,23 @@ public sealed partial class AccountView : UserControl
                         displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                     }
                 }
-                var filteredTransactions = _controller.FilteredTransactions;
-                if (filteredTransactions.Count > 0)
+                List<Transaction>? filteredTransactions = null;
+                await Task.Run(() => filteredTransactions = _controller.FilteredTransactions);
+                if (filteredTransactions!.Count > 0)
                 {
-                    foreach (var transaction in filteredTransactions)
+                    await Task.Run(async () =>
                     {
-                        var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
-                        transactionRow.EditTriggered += EditTransaction;
-                        transactionRow.DeleteTriggered += DeleteTransaction;
-                        transactionRows.Add(transactionRow);
-                    }
-                    ListTransactions.ItemsSource = transactionRows;
+                        foreach (var transaction in filteredTransactions)
+                        {
+                            await dispatcher.EnqueueAsync(() =>
+                            {
+                                var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+                                transactionRow.EditTriggered += EditTransaction;
+                                transactionRow.DeleteTriggered += DeleteTransaction;
+                                ListTransactions.Items.Add(transactionRow);
+                            });
+                        }
+                    });
                     ViewStackTransactions.ChangePage("Transactions");
                 }
                 else
@@ -194,6 +215,10 @@ public sealed partial class AccountView : UserControl
                 StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
                 StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
             }
+            CmdBar.IsEnabled = true;
+            ScrollSidebar.IsEnabled = true;
+            ViewStackTransactions.IsEnabled = true;
+            LoadingCtrl.IsLoading = false;
             _isAccountLoading = false;
         }
     }
