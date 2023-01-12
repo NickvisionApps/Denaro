@@ -133,14 +133,13 @@ public sealed partial class AccountView : UserControl
             LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
             //Groups
-            var groupRows = new List<GroupRow>();
+            var groupRows = new List<GroupRow>(_controller.GroupsCount);
             //Ungrouped Row
             var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
             groupRows.Add(ungroupedRow);
             //Other Group Rows
-            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
-            foreach (var group in groups)
+            foreach (var group in _controller.OrderedGroups)
             {
                 var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 groupRow.EditTriggered += EditGroup;
@@ -150,8 +149,8 @@ public sealed partial class AccountView : UserControl
             }
             ListGroups.ItemsSource = groupRows;
             //Transactions
-            var transactionRows = new List<TransactionRow>();
-            if (_controller.Transactions.Count > 0)
+            var transactionRows = new List<TransactionRow>(_controller.TransactionsCount);
+            if (_controller.TransactionsCount > 0)
             {
                 //Highlight Days
                 var datesInAccount = _controller.DatesInAccount;

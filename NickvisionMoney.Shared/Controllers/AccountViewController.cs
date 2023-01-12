@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -68,13 +69,17 @@ public class AccountViewController
     /// </summary>
     public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
     /// <summary>
-    /// The groups of the account for today
+    /// The count of groups in the account
     /// </summary>
-    public Dictionary<uint, Group> Groups => _account.Groups;
+    public int GroupsCount => _account.Groups.Count;
     /// <summary>
-    /// The transactions of the account for today
+    /// The count of transactions in the account
     /// </summary>
-    public Dictionary<uint, Transaction> Transactions => _account.Transactions;
+    public int TransactionsCount => _account.Transactions.Count;
+    /// <summary>
+    /// The list of groups sorted by name
+    /// </summary>
+    public IOrderedEnumerable<Group> OrderedGroups => _account.Groups.Values.OrderBy(g => g.Name);
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -226,7 +231,7 @@ public class AccountViewController
         get
         {
             var total = 0m;
-            foreach (var pair in Transactions)
+            foreach (var pair in _account.Transactions)
             {
                 if (pair.Value.GroupId == -1 && pair.Value.Date <= DateOnly.FromDateTime(DateTime.Now))
                 {
@@ -249,7 +254,7 @@ public class AccountViewController
     {
         get
         {
-            var filteredTransactions = new List<Transaction>();
+            var filteredTransactions = new List<Transaction>(_account.Transactions.Count);
             foreach (var pair in _account.Transactions)
             {
                 if (pair.Value.Type == TransactionType.Income && !_filters[-3])
@@ -518,7 +523,7 @@ public class AccountViewController
     {
         try
         {
-            return Transactions[id].RepeatFrom == 0;
+            return _account.Transactions[id].RepeatFrom == 0;
         }
         catch
         {

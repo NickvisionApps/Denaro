@@ -552,7 +552,7 @@ public partial class AccountView
             {
                 _grpGroups.Remove(groupRow);
             }
-            _groupRows = new List<GroupRow>();
+            _groupRows = new List<GroupRow>(_controller.GroupsCount);
             //Ungrouped Row
             var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
             ungroupedRow.FilterChanged += UpdateGroupFilter;
@@ -560,8 +560,7 @@ public partial class AccountView
             _grpGroups.Add(ungroupedRow);
             _groupRows.Add(ungroupedRow);
             //Other Group Rows
-            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
-            foreach (var group in groups)
+            foreach (var group in _controller.OrderedGroups)
             {
                 var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
                 row.EditTriggered += EditGroup;
@@ -577,8 +576,8 @@ public partial class AccountView
             {
                 _flowBox.Remove(transactionRow);
             }
-            _transactionRows = new List<TransactionRow>();
-            if (_controller.Transactions.Count > 0)
+            _transactionRows = new List<TransactionRow>(_controller.TransactionsCount);
+            if (_controller.TransactionsCount > 0)
             {
                 var filteredTransactions = _controller.FilteredTransactions;
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
@@ -871,11 +870,11 @@ public partial class AccountView
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
-        foreach(var pair in _controller.Transactions)
+        foreach(var date in _controller.DatesInAccount)
         {
-            if(pair.Value.Date.Month == g_date_time_get_month(ref selectedDay) && pair.Value.Date.Year == g_date_time_get_year(ref selectedDay))
+            if(date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
             {
-                _calendar.MarkDay((uint)pair.Value.Date.Day);
+                _calendar.MarkDay((uint)date.Day);
             }
         }
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
