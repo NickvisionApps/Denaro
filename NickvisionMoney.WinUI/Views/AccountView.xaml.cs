@@ -111,10 +111,7 @@ public sealed partial class AccountView : UserControl
         {
             AccountSettings(null, new RoutedEventArgs());
         }
-        if(!(await _controller.SyncRepeatTransactionsAsync()))
-        {
-            AccountInfoChanged(null, EventArgs.Empty);
-        }
+        await _controller.StartupAsync();
     }
 
     /// <summary>
@@ -217,7 +214,6 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -283,7 +279,6 @@ public sealed partial class AccountView : UserControl
             {
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
             }
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 

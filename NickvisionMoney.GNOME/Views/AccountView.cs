@@ -520,7 +520,7 @@ public partial class AccountView
             {
                 AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
             }
-            await _controller.SyncRepeatTransactionsAsync();
+            await _controller.StartupAsync();
         }
         if(!_isAccountLoading)
         {
@@ -712,7 +712,6 @@ public partial class AccountView
         if(transactionDialog.Run())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -756,7 +755,6 @@ public partial class AccountView
             {
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
             }
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 

@@ -580,6 +580,10 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            {
+                await SyncRepeatTransactionsAsync();
+            }    
             NextAvailableTransactionId++;
             return true;
         }
@@ -649,6 +653,7 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            await SyncRepeatTransactionsAsync();
             return true;
         }
         return false;

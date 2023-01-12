@@ -423,6 +423,12 @@ public class AccountViewController
     /// <returns>The new TransferDialogController</returns>
     public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
 
+    public async Task StartupAsync()
+    {
+        await _account.SyncRepeatTransactionsAsync();
+        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     /// <summary>
     /// Updates the metadata of the account
     /// </summary>
@@ -439,20 +445,6 @@ public class AccountViewController
         Configuration.Current.Save();
         AccountInfoChanged?.Invoke(this, EventArgs.Empty);
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    /// <summary>
-    /// Checks if repeat transactions are needed and creates them if so
-    /// </summary>
-    /// <returns>True if AccountInfoChanged was triggered, else false</returns>
-    public async Task<bool> SyncRepeatTransactionsAsync()
-    {
-        if(await _account.SyncRepeatTransactionsAsync())
-        {
-            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
-            return true;
-        }
-        return false;
     }
 
     /// <summary>
