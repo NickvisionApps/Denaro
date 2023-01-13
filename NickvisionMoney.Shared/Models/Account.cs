@@ -89,61 +89,61 @@ public class Account : IDisposable
         }.ConnectionString);
         _database.Open();
         //Setup Metadata Table
-        var cmdTableMetadata = _database.CreateCommand();
+        using var cmdTableMetadata = _database.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
-            var cmdTableMetadataUpdate1 = _database.CreateCommand();
+            using var cmdTableMetadataUpdate1 = _database.CreateCommand();
             cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
             cmdTableMetadataUpdate1.ExecuteNonQuery();
         }
         catch { }
         //Setup Groups Table
-        var cmdTableGroups = _database.CreateCommand();
+        using var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
-        var cmdTableTransactions = _database.CreateCommand();
+        using var cmdTableTransactions = _database.CreateCommand();
         cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
-            var cmdTableTransactionsUpdate1 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate1 = _database.CreateCommand();
             cmdTableTransactionsUpdate1.CommandText = "ALTER TABLE transactions ADD COLUMN gid INTEGER";
             cmdTableTransactionsUpdate1.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate2 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate2 = _database.CreateCommand();
             cmdTableTransactionsUpdate2.CommandText = "ALTER TABLE transactions ADD COLUMN rgba TEXT";
             cmdTableTransactionsUpdate2.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate3 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate3 = _database.CreateCommand();
             cmdTableTransactionsUpdate3.CommandText = "ALTER TABLE transactions ADD COLUMN receipt TEXT";
             cmdTableTransactionsUpdate3.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate4 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate4 = _database.CreateCommand();
             cmdTableTransactionsUpdate4.CommandText = "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER";
             cmdTableTransactionsUpdate4.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate5 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate5 = _database.CreateCommand();
             cmdTableTransactionsUpdate5.CommandText = "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT";
             cmdTableTransactionsUpdate5.ExecuteNonQuery();
         }
         catch { }
         //Get Metadata
-        var cmdQueryMetadata = _database.CreateCommand();
+        using var cmdQueryMetadata = _database.CreateCommand();
         cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
         using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
         if(readQueryMetadata.HasRows)
@@ -162,7 +162,7 @@ public class Account : IDisposable
         }
         else
         {
-            var cmdAddMetadata = _database.CreateCommand();
+            using var cmdAddMetadata = _database.CreateCommand();
             cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
@@ -176,7 +176,7 @@ public class Account : IDisposable
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
-        var cmdQueryGroups = _database.CreateCommand();
+        using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
         while(readQueryGroups.Read())
@@ -195,7 +195,7 @@ public class Account : IDisposable
             NextAvailableGroupId++;
         }
         //Get Transactions
-        var cmdQueryTransactions = _database.CreateCommand();
+        using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
         using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
         while(readQueryTransactions.Read())
@@ -345,7 +345,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool UpdateMetadata(AccountMetadata metadata)
     {
-        var cmdUpdateMetadata = _database.CreateCommand();
+        using var cmdUpdateMetadata = _database.CreateCommand();
         cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
@@ -469,7 +469,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddGroupAsync(Group group)
     {
-        var cmdAddGroup = _database.CreateCommand();
+        using var cmdAddGroup = _database.CreateCommand();
         cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description) VALUES ($id, $name, $description)";
         cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
         cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
@@ -490,7 +490,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateGroupAsync(Group group)
     {
-        var cmdUpdateGroup = _database.CreateCommand();
+        using var cmdUpdateGroup = _database.CreateCommand();
         cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description WHERE id = $id";
         cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
         cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
@@ -510,7 +510,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteGroupAsync(uint id)
     {
-        var cmdDeleteGroup = _database.CreateCommand();
+        using var cmdDeleteGroup = _database.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
@@ -540,7 +540,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
-        var cmdAddTransaction = _database.CreateCommand();
+        using var cmdAddTransaction = _database.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -597,7 +597,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
-        var cmdUpdateTransaction = _database.CreateCommand();
+        using var cmdUpdateTransaction = _database.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -711,7 +711,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteTransactionAsync(uint id)
     {
-        var cmdDeleteTransaction = _database.CreateCommand();
+        using var cmdDeleteTransaction = _database.CreateCommand();
         cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
         cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
