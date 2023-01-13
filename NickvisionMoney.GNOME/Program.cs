@@ -84,7 +84,7 @@ public partial class Program
     private void OnActivate(Gio.Application sedner, EventArgs e)
     {
         //Controller Setup
-        var mainWindowController = new MainWindowController();
+        using var mainWindowController = new MainWindowController();
         mainWindowController.AppInfo.ID = "org.nickvision.money";
         mainWindowController.AppInfo.Name = "Nickvision Denaro";
         mainWindowController.AppInfo.ShortName = "Denaro";

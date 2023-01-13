@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Resources;
 
 namespace NickvisionMoney.Shared.Helpers;
@@ -6,8 +7,9 @@ namespace NickvisionMoney.Shared.Helpers;
 /// <summary>
 /// A helper for getting localized strings
 /// </summary>
-public class Localizer
+public class Localizer : IDisposable
 {
+    private bool _disposed;
     private readonly ResourceManager _resourceManager;
     private readonly ResourceSet _resourceSet;
     private readonly ResourceSet _resourceFallback;
@@ -32,9 +34,36 @@ public class Localizer
     /// </summary>
     internal Localizer()
     {
+        _disposed = false;
         _resourceManager = new ResourceManager("NickvisionMoney.Shared.Resources.Strings", GetType().Assembly);
         _resourceSet = _resourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true)!;
         _resourceFallback = _resourceManager.GetResourceSet(new CultureInfo("en-US"), true, true)!;
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            _resourceSet.Dispose();
+            _resourceFallback.Dispose();
+        }
+        _disposed = true;
     }
 
     /// <summary>

@@ -934,7 +934,7 @@ public class Account : IDisposable
     {
         try
         {
-            var localizer = new Localizer();
+            using var localizer = new Localizer();
             var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
