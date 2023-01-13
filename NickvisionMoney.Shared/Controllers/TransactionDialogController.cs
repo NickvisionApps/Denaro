@@ -32,6 +32,8 @@ public enum TransactionCheckStatus
 /// </summary>
 public class TransactionDialogController : IDisposable
 {
+    private bool _disposed;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -80,6 +82,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="localizer">The Localizer of the app</param>
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
+        _disposed = false;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
         Groups = groups;
@@ -107,7 +110,11 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     protected virtual void Dispose(bool disposing)
     {
-        if(disposing)
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
         {
             var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
             if (File.Exists(jpgPath))
@@ -116,6 +123,7 @@ public class TransactionDialogController : IDisposable
             }
             Transaction.Dispose();
         }
+        _disposed = true;
     }
 
     /// <summary>

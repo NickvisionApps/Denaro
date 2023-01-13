@@ -32,6 +32,7 @@ public enum TransactionRepeatInterval
 /// </summary>
 public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IEquatable<Transaction>
 {
+    private bool _disposed;
     private int _groupId;
 
     /// <summary>
@@ -81,6 +82,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <param name="id">The id of the transaction</param>
     public Transaction(uint id = 0)
     {
+        _disposed = false;
         Id = id;
         Date = DateOnly.FromDateTime(DateTime.Today);
         Description = "";
@@ -169,7 +171,18 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <summary>
     /// Frees resources used by the Transaction object
     /// </summary>
-    protected virtual void Dispose(bool disposing) => Receipt?.Dispose();
+    protected virtual void Dispose(bool disposing)
+    {
+        if(_disposed)
+        {
+            return;
+        }
+        if(disposing)
+        {
+            Receipt?.Dispose();
+        }
+        _disposed = true;
+    }
 
     /// <summary>
     /// Gets whether or not an object is equal to this Transaction

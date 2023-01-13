@@ -22,6 +22,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
+    private bool _disposed;
     private readonly SqliteConnection _database;
 
     /// <summary>
@@ -72,6 +73,7 @@ public class Account : IDisposable
     /// <param name="path">The path of the account</param>
     public Account(string path)
     {
+        _disposed = false;
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
@@ -255,6 +257,10 @@ public class Account : IDisposable
     /// </summary>
     protected virtual void Dispose(bool disposing)
     {
+        if(_disposed)
+        {
+            return;
+        }
         if(disposing)
         {
             _database.Dispose();
@@ -263,6 +269,7 @@ public class Account : IDisposable
                 pair.Value.Dispose();
             }
         }
+        _disposed = true;
     }
 
     /// <summary>
