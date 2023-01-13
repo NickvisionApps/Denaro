@@ -246,10 +246,22 @@ public class Account : IDisposable
     /// </summary>
     public void Dispose()
     {
-        _database.Dispose();
-        foreach(var pair in Transactions)
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(disposing)
         {
-            pair.Value.Dispose();
+            _database.Dispose();
+            foreach (var pair in Transactions)
+            {
+                pair.Value.Dispose();
+            }
         }
     }
 

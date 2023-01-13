@@ -160,7 +160,16 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <summary>
     /// Frees resources used by the Transaction object
     /// </summary>
-    public void Dispose() => Receipt?.Dispose();
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    protected virtual void Dispose(bool disposing) => Receipt?.Dispose();
 
     /// <summary>
     /// Gets whether or not an object is equal to this Transaction

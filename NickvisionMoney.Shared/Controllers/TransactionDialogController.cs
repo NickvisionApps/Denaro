@@ -98,10 +98,23 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public void Dispose()
     {
-        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (File.Exists(jpgPath))
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the TransactionDialogController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(disposing)
         {
-            File.Delete(jpgPath);
+            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            if (File.Exists(jpgPath))
+            {
+                File.Delete(jpgPath);
+            }
+            Transaction.Dispose();
         }
     }
 
