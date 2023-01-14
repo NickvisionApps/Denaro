@@ -783,10 +783,10 @@ public class AccountViewController
     /// </summary>
     private void SortUIUpdate()
     {
-        var transactions = _account.Transactions.Values.ToList();
+        var transactions = _account.Transactions.Keys.ToList();
         transactions.Sort((a, b) =>
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
             if (!SortFirstToLast)
             {
                 if (compareTo == 1)
@@ -802,7 +802,7 @@ public class AccountViewController
         });
         for (var i = 0; i < transactions.Count; i++)
         {
-            UIMoveTransactionRow!(_transactionRows[transactions[i].Id], i);
+            UIMoveTransactionRow!(_transactionRows[transactions[i]], i);
         }
     }
 }
