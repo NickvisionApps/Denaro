@@ -1,15 +1,17 @@
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Controls;
 
 /// <summary>
 /// A row for displaying a transaction
 /// </summary>
-public partial class TransactionRow : Adw.PreferencesGroup
+public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Transaction>
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Color
@@ -32,7 +34,8 @@ public partial class TransactionRow : Adw.PreferencesGroup
 
     private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
 
-    private readonly Transaction _transaction;
+    private CultureInfo _culture;
+    private Localizer _localizer;
     private bool _isSmall;
     private readonly Adw.ActionRow _row;
     private readonly Gtk.Button _btnId;
@@ -45,7 +48,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
     /// <summary>
     /// The id of the Transaction
     /// </summary>
-    public uint Id { get; init; }
+    public uint Id { get; private set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked
@@ -64,65 +67,42 @@ public partial class TransactionRow : Adw.PreferencesGroup
     /// <param name="localizer">The Localizer for the app</param>
     public TransactionRow(Transaction transaction, CultureInfo culture, Localizer localizer)
     {
-        _transaction = transaction;
+        _culture = culture;
+        _localizer = localizer;
         _isSmall = false;
-        Id = _transaction.Id;
-        //Color
-        var color = new Color();
-        if(!gdk_rgba_parse(ref color, _transaction.RGBA))
-        {
-            gdk_rgba_parse(ref color, "#3584e4");
-        }
         //Row Settings
         _row = Adw.ActionRow.New();
         _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
-        _row.SetTitle(_transaction.Description);
-        _row.SetSubtitle($"{_transaction.Date.ToString("d")}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\nRepeat Interval: {localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
         _row.SetSizeRequest(300, 70);
-        var rowCssProvider = Gtk.CssProvider.New();
-        var rowCss = @"row {
-            border-color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, -1);
-        _row.GetStyleContext().AddProvider(rowCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Button ID
         _btnId = Gtk.Button.New();
         _btnId.SetName("btnId");
         _btnId.AddCssClass("circular");
         _btnId.SetValign(Gtk.Align.Center);
-        _btnId.SetLabel(_transaction.Id.ToString());
-        var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
-        _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _row.AddPrefix(_btnId);
         //Amount Label
-        _lblAmount = Gtk.Label.New($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToString("C", culture)}");
+        _lblAmount = Gtk.Label.New(null);
         _lblAmount.SetHalign(Gtk.Align.End);
         _lblAmount.SetValign(Gtk.Align.Center);
         _lblAmount.SetMarginEnd(4);
-        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "success" : "error");
-        _lblAmount.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
         _btnEdit.AddCssClass("flat");
-        _btnEdit.SetTooltipText(localizer["Edit", "TransactionRow"]);
+        _btnEdit.SetTooltipText(_localizer["Edit", "TransactionRow"]);
         _btnEdit.OnClicked += Edit;
         _row.SetActivatableWidget(_btnEdit);
         //DeleteButton
         _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
         _btnDelete.SetValign(Gtk.Align.Center);
         _btnDelete.AddCssClass("flat");
-        _btnDelete.SetTooltipText(localizer["Delete", "TransactionRow"]);
+        _btnDelete.SetTooltipText(_localizer["Delete", "TransactionRow"]);
         _btnDelete.OnClicked += Delete;
         //Buttons Box
         _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        if(_transaction.RepeatFrom <= 0)
-        {
-            _boxButtons.Append(_btnEdit);
-            _boxButtons.Append(_btnDelete);
-        }
+        _boxButtons.Append(_btnEdit);
+        _boxButtons.Append(_btnDelete);
         //Suffix Box
         _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
         _boxSuffix.SetValign(Gtk.Align.Center);
@@ -131,6 +111,7 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _row.AddSuffix(_boxSuffix);
         //Group Settings
         Add(_row);
+        UpdateRow(transaction);
     }
 
     /// <summary>
@@ -161,16 +142,54 @@ public partial class TransactionRow : Adw.PreferencesGroup
     }
 
     /// <summary>
+    /// Updates the row with the new model
+    /// </summary>
+    /// <param name="transaction">The new Transaction model</param>
+    public void UpdateRow(Transaction transaction)
+    {
+        Id = transaction.Id;
+        //Color
+        var color = new Color();
+        if (!gdk_rgba_parse(ref color, transaction.RGBA))
+        {
+            gdk_rgba_parse(ref color, "#3584e4");
+        }
+        //Row Settings
+        _row.SetTitle(transaction.Description);
+        _row.SetSubtitle($"{transaction.Date.ToString("d")}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
+        var rowCssProvider = Gtk.CssProvider.New();
+        var rowCss = @"row {
+            border-color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
+        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, -1);
+        _row.GetStyleContext().AddProvider(rowCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        //Button Id
+        _btnId.SetLabel(transaction.Id.ToString());
+        var btnCssProvider = Gtk.CssProvider.New();
+        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
+        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+        _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        //Amount Label
+        _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _culture)}");
+        _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "success" : "error");
+        _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+        //Buttons Box
+        _btnEdit.SetVisible(transaction.RepeatFrom <= 0);
+        _btnEdit.SetSensitive(transaction.RepeatFrom <= 0);
+        _btnDelete.SetVisible(transaction.RepeatFrom <= 0);
+        _btnDelete.SetSensitive(transaction.RepeatFrom <= 0);
+    }
+
+    /// <summary>
     /// Occurs when the edit button is clicked
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void Edit(Gtk.Button sender, EventArgs e) => EditTriggered?.Invoke(this, _transaction.Id);
+    private void Edit(Gtk.Button sender, EventArgs e) => EditTriggered?.Invoke(this, Id);
 
     /// <summary>
     /// Occurs when the delete button is clicked
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void Delete(Gtk.Button sender, EventArgs e) => DeleteTriggered?.Invoke(this, _transaction.Id);
+    private void Delete(Gtk.Button sender, EventArgs e) => DeleteTriggered?.Invoke(this, Id);
 }

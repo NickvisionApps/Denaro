@@ -8,7 +8,7 @@ public interface IGroupRowControl : IModelRowControl<Group>
     /// <summary>
     /// Occurs when the filter checkbox is changed on the row
     /// </summary>
-    public event EventHandler<(int Id, bool Filter)>? FilterChanged;
+    public event EventHandler<(uint Id, bool Filter)>? FilterChanged;
 
     /// <summary>
     /// Updates the row based on the new Group model

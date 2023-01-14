@@ -147,7 +147,7 @@ public sealed partial class AccountView : UserControl
                 await dispatcher.EnqueueAsync(() =>
                 {
                     var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-                    ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
+                    ungroupedRow.FilterChanged += UpdateGroupFilter;
                     ListGroups.Items.Add(ungroupedRow);
                 });
                 //Other Group Rows
@@ -412,7 +412,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id == 0 ? -1 : (int)e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the transfer money button is clicked
@@ -581,14 +581,14 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-3, ChkFilterIncome.IsChecked ?? false));
+    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, ChkFilterIncome.IsChecked ?? false);
 
     /// <summary>
     /// Occurs when the expense filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-2, ChkFilterExpense.IsChecked ?? false));
+    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, ChkFilterExpense.IsChecked ?? false);
 
     /// <summary>
     /// Occurs when the calendar's selected date is changed
@@ -627,10 +627,7 @@ public sealed partial class AccountView : UserControl
         if(ListGroups.SelectedIndex != -1)
         {
             var groupRow = (GroupRow)ListGroups.SelectedItem;
-            if(groupRow.Id != 0)
-            {
-                EditGroup(null, groupRow.Id);
-            }
+            groupRow.Edit(this, new RoutedEventArgs());
             ListGroups.SelectedIndex = -1;
         }
     }
@@ -645,10 +642,7 @@ public sealed partial class AccountView : UserControl
         if (ListTransactions.SelectedIndex != -1)
         {
             var transactionRow = (TransactionRow)ListTransactions.SelectedItem;
-            if(transactionRow.RepeatFrom <= 0)
-            {
-                EditTransaction(null, transactionRow.Id);
-            }
+            transactionRow.Edit(this, new RoutedEventArgs());
             ListTransactions.SelectedIndex = -1;
         }
     }
