@@ -178,6 +178,13 @@ public class Account : IDisposable
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
+        using var localizer = new Localizer();
+        Groups.Add(0, new Group(0)
+        {
+            Name = localizer["Ungrouped"],
+            Description = localizer["UngroupedDescription"],
+            Balance = 0u
+        });
         using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
@@ -226,10 +233,8 @@ public class Account : IDisposable
             Transactions.Add(transaction.Id, transaction);
             if(transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if(transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -587,10 +592,8 @@ public class Account : IDisposable
             NextAvailableTransactionId++;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -643,10 +646,8 @@ public class Account : IDisposable
             var oldTransaction = Transactions[transaction.Id];
             if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (oldTransaction.GroupId != -1)
-                {
-                    Groups[(uint)oldTransaction.GroupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
-                }
+                var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
+                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
                 if (oldTransaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= oldTransaction.Amount;
@@ -659,10 +660,8 @@ public class Account : IDisposable
             Transactions[transaction.Id] = transaction;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -738,10 +737,8 @@ public class Account : IDisposable
             var transaction = Transactions[id];
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= transaction.Amount;
