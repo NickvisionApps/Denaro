@@ -150,10 +150,14 @@ public sealed partial class AccountView : UserControl
         if (index != null)
         {
             ListTransactions.Items.Insert(index.Value, row);
+            ListTransactions.UpdateLayout();
+            row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(index.Value);
         }
         else
         {
             ListTransactions.Items.Add(row);
+            ListTransactions.UpdateLayout();
+            row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(ListTransactions.Items.Count - 1);
         }
         return row;
     }

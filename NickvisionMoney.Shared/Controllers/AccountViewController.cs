@@ -325,14 +325,7 @@ public class AccountViewController
             var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
             if (!SortFirstToLast)
             {
-                if (compareTo == 1)
-                {
-                    compareTo = -1;
-                }
-                else if (compareTo == -1)
-                {
-                    compareTo = 1;
-                }
+                compareTo *= -1;
             }
             return compareTo;
         });
@@ -789,14 +782,7 @@ public class AccountViewController
             var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
             if (!SortFirstToLast)
             {
-                if (compareTo == 1)
-                {
-                    compareTo = -1;
-                }
-                else if (compareTo == -1)
-                {
-                    compareTo = 1;
-                }
+                compareTo *= -1;
             }
             return compareTo;
         });
