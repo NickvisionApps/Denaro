@@ -759,6 +759,22 @@ public class AccountViewController
             }
             filteredTransactions.Add(pair.Value.Id);
         }
+        filteredTransactions.Sort((a, b) =>
+        {
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                if (compareTo == 1)
+                {
+                    compareTo = -1;
+                }
+                else if (compareTo == -1)
+                {
+                    compareTo = 1;
+                }
+            }
+            return compareTo;
+        });
         HasFilteredTransactions = filteredTransactions.Count > 0;
         if(HasFilteredTransactions)
         {
@@ -768,6 +784,7 @@ public class AccountViewController
                 if (filteredTransactions.Contains(pair.Value.Id))
                 {
                     pair.Value.Show();
+                    UIMoveTransactionRow!(pair.Value, filteredTransactions.IndexOf(pair.Value.Id));
                 }
                 else
                 {
