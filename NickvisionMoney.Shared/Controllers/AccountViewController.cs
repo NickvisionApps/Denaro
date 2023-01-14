@@ -759,22 +759,6 @@ public class AccountViewController
             }
             filteredTransactions.Add(pair.Value.Id);
         }
-        filteredTransactions.Sort((a, b) =>
-        {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-            if (!SortFirstToLast)
-            {
-                if (compareTo == 1)
-                {
-                    compareTo = -1;
-                }
-                else if (compareTo == -1)
-                {
-                    compareTo = 1;
-                }
-            }
-            return compareTo;
-        });
         HasFilteredTransactions = filteredTransactions.Count > 0;
         if(HasFilteredTransactions)
         {
@@ -784,7 +768,6 @@ public class AccountViewController
                 if (filteredTransactions.Contains(pair.Value.Id))
                 {
                     pair.Value.Show();
-                    UIMoveTransactionRow!(pair.Value, filteredTransactions.IndexOf(pair.Value.Id));
                 }
                 else
                 {
@@ -800,33 +783,10 @@ public class AccountViewController
     /// </summary>
     private void SortUIUpdate()
     {
-        var filteredTransactions = new List<uint>();
-        foreach (var pair in _account.Transactions)
+        var transactions = _account.Transactions.Values.ToList();
+        transactions.Sort((a, b) =>
         {
-            if (pair.Value.Type == TransactionType.Income && !_filters[-3])
-            {
-                continue;
-            }
-            if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
-            {
-                continue;
-            }
-            if (!_filters[pair.Value.GroupId])
-            {
-                continue;
-            }
-            if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
-            {
-                if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
-                {
-                    continue;
-                }
-            }
-            filteredTransactions.Add(pair.Value.Id);
-        }
-        filteredTransactions.Sort((a, b) =>
-        {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
             if (!SortFirstToLast)
             {
                 if (compareTo == 1)
@@ -840,9 +800,9 @@ public class AccountViewController
             }
             return compareTo;
         });
-        for(var i = 0; i < filteredTransactions.Count; i++)
+        for (var i = 0; i < transactions.Count; i++)
         {
-            UIMoveTransactionRow!(_transactionRows[filteredTransactions[i]], i);
+            UIMoveTransactionRow!(_transactionRows[transactions[i].Id], i);
         }
     }
 }
