@@ -159,14 +159,14 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row.SetSubtitle($"{transaction.Date.ToString("d")}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
         var rowCssProvider = Gtk.CssProvider.New();
         var rowCss = @"row {
-            border-color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, -1);
+            border-color: " + gdk_rgba_to_string(ref color) + "; }";
+        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, rowCss.Length);
         _row.GetStyleContext().AddProvider(rowCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Button Id
         _btnId.SetLabel(transaction.Id.ToString());
         var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
+        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
         _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _culture)}");
