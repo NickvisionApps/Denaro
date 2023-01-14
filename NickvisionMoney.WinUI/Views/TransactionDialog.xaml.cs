@@ -44,7 +44,6 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbType.Items.Add(_controller.Localizer["Expense"]);
         CalendarDate.Header = _controller.Localizer["Date", "Field"];
         CmbGroup.Header = _controller.Localizer["Group", "Field"];
-        CmbGroup.Items.Add(_controller.Localizer["Ungrouped"]);
         CmbRepeatInterval.Header = _controller.Localizer["TransactionRepeatInterval", "Field"];
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Never"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Daily"]);
@@ -67,11 +66,9 @@ public sealed partial class TransactionDialog : ContentDialog
         TxtAmount.Text = _controller.Transaction.Amount.ToString("C", _controller.CultureForNumberString);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
-        var groups = _controller.Groups.Values.ToList();
-        groups.Sort();
-        foreach (var group in groups)
+        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
         {
-            CmbGroup.Items.Add(group);
+            CmbGroup.Items.Add(pair.Value);
         }
         if (_controller.Transaction.GroupId == -1)
         {

@@ -359,7 +359,7 @@ public class AccountViewController
         await _account.SyncRepeatTransactionsAsync();
         //Groups
         _groupRows.Clear();
-        foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name))
+        foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
         {
             _groupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
         }

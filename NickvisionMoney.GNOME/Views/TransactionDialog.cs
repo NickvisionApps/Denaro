@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -223,10 +224,10 @@ public partial class TransactionDialog
         //Group
         _rowGroup = Adw.ComboRow.New();
         _rowGroup.SetTitle(_controller.Localizer["Group", "Field"]);
-        var groups = new List<string> { _controller.Localizer["Ungrouped"] };
-        foreach(var group in _controller.Groups)
+        var groups = new List<string>();
+        foreach(var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
         {
-            groups.Add(group.Value);
+            groups.Add(pair.Value);
         }
         _rowGroup.SetModel(Gtk.StringList.New(groups.ToArray()));
         _grpGroupColor.Add(_rowGroup);
