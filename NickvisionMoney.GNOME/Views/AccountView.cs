@@ -424,11 +424,16 @@ public partial class AccountView
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         _grpTransactions.SetHeaderSuffix(_boxSort);
+        _grpTransactions.SetMarginTop(10);
+        _grpTransactions.SetMarginStart(10);
+        _grpTransactions.SetMarginEnd(10);
         //Transactions Flow Box
         _flowBox = Gtk.FlowBox.New();
         _flowBox.SetHomogeneous(true);
         _flowBox.SetColumnSpacing(10);
         _flowBox.SetRowSpacing(10);
+        _flowBox.SetMarginStart(10);
+        _flowBox.SetMarginEnd(10);
         _flowBox.SetMarginBottom(60);
         _flowBox.SetHalign(Gtk.Align.Fill);
         _flowBox.SetValign(Gtk.Align.Start);
@@ -451,9 +456,6 @@ public partial class AccountView
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
         _boxMain.SetVexpand(true);
-        _boxMain.SetMarginTop(10);
-        _boxMain.SetMarginStart(10);
-        _boxMain.SetMarginEnd(10);
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
