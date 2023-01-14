@@ -77,6 +77,7 @@ public sealed partial class AccountView : UserControl
         _controller.UICreateGroupRow = CreateGroupRow;
         _controller.UIDeleteGroupRow = DeleteGroupRow;
         _controller.UICreateTransactionRow = CreateTransactionRow;
+        _controller.UIMoveTransactionRow = MoveTransactionRow;
         _controller.UIDeleteTransactionRow = DeleteTransactionRow;
         //Load UI
         DateRangeStart.Date = DateTimeOffset.Now;
@@ -158,7 +159,21 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
-    /// removes a transaction row from the view
+    /// Moves a row in the list
+    /// </summary>
+    /// <param name="row">The row to move</param>
+    /// <param name="index">The new position</param>
+    private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
+    {
+        if (ListTransactions.Items[index] != row)
+        {
+            ListTransactions.Items.Remove(row);
+            ListTransactions.Items.Insert(index, row);
+        }
+    }
+
+    /// <summary>
+    /// Removes a transaction row from the view
     /// </summary>
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row) => ListTransactions.Items.Remove(row);
