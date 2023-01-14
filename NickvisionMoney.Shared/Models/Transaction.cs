@@ -126,6 +126,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Type = Type,
             RepeatInterval = RepeatInterval,
             Amount = Amount,
+            GroupId = GroupId,
             RGBA = RGBA,
             Receipt = Receipt,
             RepeatFrom = RepeatFrom,
