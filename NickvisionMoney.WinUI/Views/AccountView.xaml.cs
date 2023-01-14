@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
@@ -73,7 +74,11 @@ public sealed partial class AccountView : UserControl
         ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
         ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
-        _controller.AccountInfoChanged += AccountInfoChanged;
+        _controller.AccountTransactionsChanged += AccountTransactionsChanged;
+        _controller.UICreateGroupRow = CreateGroupRow;
+        _controller.UIDeleteGroupRow = DeleteGroupRow;
+        _controller.UICreateTransactionRow = CreateTransactionRow;
+        _controller.UIDeleteTransactionRow = DeleteTransactionRow;
         //Load UI
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
@@ -103,6 +108,63 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
+    /// Creates a group row and adds it to the view
+    /// </summary>
+    /// <param name="group">The Group model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IGroupRowControl</returns>
+    private IGroupRowControl CreateGroupRow(Group group, int? index)
+    {
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        row.EditTriggered += EditGroup;
+        row.DeleteTriggered += DeleteGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        if(index != null)
+        {
+            ListGroups.Items.Insert(index.Value, row);
+        }
+        else
+        {
+            ListGroups.Items.Add(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Removes a group row from the view
+    /// </summary>
+    /// <param name="row">The IGroupRowControl</param>
+    private void DeleteGroupRow(IGroupRowControl row) => ListGroups.Items.Remove(row);
+
+    /// <summary>
+    /// Creates a transaction row and adds it to the view
+    /// </summary>
+    /// <param name="transaction">The Transaction model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IModelRowControl<Transaction></returns>
+    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
+    {
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+        row.EditTriggered += EditTransaction;
+        row.DeleteTriggered += DeleteTransaction;
+        if (index != null)
+        {
+            ListTransactions.Items.Insert(index.Value, row);
+        }
+        else
+        {
+            ListTransactions.Items.Add(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// removes a transaction row from the view
+    /// </summary>
+    /// <param name="row">The IModelRowControl<Transaction></param>
+    private void DeleteTransactionRow(IModelRowControl<Transaction> row) => ListTransactions.Items.Remove(row);
+
+    /// <summary>
     /// Occurs when the page is loaded
     /// </summary>
     /// <param name="sender"></param>
@@ -117,20 +179,15 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
-    /// Occurs when the account information is changed
+    /// Occurs when the account's transactions are changed
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private async void AccountInfoChanged(object? sender, EventArgs e)
+    private async void AccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
-            CmdBar.IsEnabled = false;
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
-            LoadingCtrl.IsLoading = true;
-            var dispatcher = App.MainWindow!.DispatcherQueue;
             //Overview
             _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
@@ -139,32 +196,7 @@ public sealed partial class AccountView : UserControl
             LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
             LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
-            //Groups
-            ListGroups.Items.Clear();
-            await Task.Run(async () =>
-            {
-                //Ungrouped Row
-                await dispatcher.EnqueueAsync(() =>
-                {
-                    var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-                    ungroupedRow.FilterChanged += UpdateGroupFilter;
-                    ListGroups.Items.Add(ungroupedRow);
-                });
-                //Other Group Rows
-                foreach (var group in _controller.OrderedGroups)
-                {
-                    await dispatcher.EnqueueAsync(() =>
-                    {
-                        var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                        groupRow.EditTriggered += EditGroup;
-                        groupRow.DeleteTriggered += DeleteGroup;
-                        groupRow.FilterChanged += UpdateGroupFilter;
-                        ListGroups.Items.Add(groupRow);
-                    });
-                }
-            });
-            //Transactions
-            ListTransactions.Items.Clear();
+            ///Transactions
             if (_controller.TransactionsCount > 0)
             {
                 //Highlight Days
@@ -181,23 +213,11 @@ public sealed partial class AccountView : UserControl
                         displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                     }
                 }
+                //Transaction Page
                 List<Transaction>? filteredTransactions = null;
                 await Task.Run(() => filteredTransactions = _controller.FilteredTransactions);
                 if (filteredTransactions!.Count > 0)
                 {
-                    await Task.Run(async () =>
-                    {
-                        foreach (var transaction in filteredTransactions)
-                        {
-                            await dispatcher.EnqueueAsync(() =>
-                            {
-                                var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
-                                transactionRow.EditTriggered += EditTransaction;
-                                transactionRow.DeleteTriggered += DeleteTransaction;
-                                ListTransactions.Items.Add(transactionRow);
-                            });
-                        }
-                    });
                     ViewStackTransactions.ChangePage("Transactions");
                 }
                 else
@@ -208,6 +228,7 @@ public sealed partial class AccountView : UserControl
                     StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
                 }
             }
+            //No Transactions
             else
             {
                 ViewStackTransactions.ChangePage("NoTransactions");
@@ -215,10 +236,6 @@ public sealed partial class AccountView : UserControl
                 StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
                 StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
             }
-            CmdBar.IsEnabled = true;
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
-            LoadingCtrl.IsLoading = false;
             _isAccountLoading = false;
         }
     }
