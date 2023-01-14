@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Events;
+﻿using NickvisionMoney.Shared.Controls;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -15,6 +16,8 @@ namespace NickvisionMoney.Shared.Controllers;
 public class AccountViewController
 {
     private readonly Account _account;
+    private readonly Dictionary<uint, IModelRowControl<Transaction>> _transactionRows;
+    private readonly Dictionary<uint, IGroupRowControl> _groupRows;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
@@ -23,6 +26,22 @@ public class AccountViewController
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
+    /// <summary>
+    /// The UI function for creating a group row
+    /// </summary>
+    public Func<Group, int?, IGroupRowControl>? UICreateGroupRow { get; set; }
+    /// <summary>
+    /// The UI function for deleting a group row
+    /// </summary>
+    public Action<IGroupRowControl>? UIDeleteGroupRow { get; set; }
+    /// <summary>
+    /// The UI function for creating a transaction row
+    /// </summary>
+    public Func<Transaction, int?, IModelRowControl<Transaction>>? UICreateTransactionRow { get; set; }
+    /// <summary>
+    /// The UI function for deleting a transaction rowe
+    /// </summary>
+    public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
 
     /// <summary>
     /// The default color to use for a transaction
@@ -90,9 +109,9 @@ public class AccountViewController
     /// </summary>
     private event EventHandler? RecentAccountsChanged;
     /// <summary>
-    /// Occurs when the information of an account is changed
+    /// Occurs when the transactions of an account are changed
     /// </summary>
-    public event EventHandler? AccountInfoChanged;
+    public event EventHandler? AccountTransactionsChanged;
     /// <summary>
     /// Occurs when a transfer is sent from this account
     /// </summary>
@@ -108,6 +127,8 @@ public class AccountViewController
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
+        _transactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
+        _groupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
         NotificationSent = notificationSent;
@@ -163,7 +184,7 @@ public class AccountViewController
             {
                 _account.Metadata.ShowGroupsList = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -181,7 +202,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortTransactionsBy = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -199,7 +220,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortFirstToLast = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -333,7 +354,7 @@ public class AccountViewController
         set
         {
             _filterStartDate = value;
-            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -347,7 +368,7 @@ public class AccountViewController
         set
         {
             _filterEndDate = value;
-            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -357,6 +378,28 @@ public class AccountViewController
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The NotificationSeverity of the notification</param>
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
+
+    /// <summary>
+    /// Initializes the AccountView
+    /// </summary>
+    public async Task StartupAsync()
+    {
+        await _account.SyncRepeatTransactionsAsync();
+        //Groups
+        _groupRows.Clear();
+        _groupRows.Add(0, UICreateGroupRow!(UngroupedGroup, null));
+        foreach (var group in OrderedGroups)
+        {
+            _groupRows.Add(group.Id, UICreateGroupRow!(group, null));
+        }
+        //Transactions
+        _transactionRows.Clear();
+        foreach (var transaction in FilteredTransactions)
+        {
+            _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+        }
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     /// <summary>
     /// Creates a new AccountSettingsDialogController
@@ -428,12 +471,6 @@ public class AccountViewController
     /// <returns>The new TransferDialogController</returns>
     public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
 
-    public async Task StartupAsync()
-    {
-        await _account.SyncRepeatTransactionsAsync();
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
-    }
-
     /// <summary>
     /// Updates the metadata of the account
     /// </summary>
@@ -448,7 +485,7 @@ public class AccountViewController
             Type = AccountType
         });
         Configuration.Current.Save();
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -458,8 +495,18 @@ public class AccountViewController
     /// <param name="transaction">The transaction to add</param>
     public async Task AddTransactionAsync(Transaction transaction)
     {
+        var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.AddTransactionAsync(transaction);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+        foreach(var pair in _account.Transactions)
+        {
+            if(pair.Value.RepeatFrom == transaction.Id)
+            {
+                _transactionRows.Add(pair.Value.Id, UICreateTransactionRow!(pair.Value, null));
+            }
+        }
+        _groupRows[groupId].UpdateRow(groupId == 0 ? UngroupedGroup : _account.Groups[groupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -468,8 +515,13 @@ public class AccountViewController
     /// <param name="transaction">The transaction to update</param>
     public async Task UpdateTransactionAsync(Transaction transaction)
     {
+        var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
+        var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _transactionRows[transaction.Id].UpdateRow(transaction);
+        _groupRows[originalGroupId].UpdateRow(originalGroupId == 0 ? UngroupedGroup : _account.Groups[originalGroupId]);
+        _groupRows[newGroupId].UpdateRow(newGroupId == 0 ? UngroupedGroup : _account.Groups[newGroupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -479,8 +531,24 @@ public class AccountViewController
     /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
     public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
     {
+        var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
+        var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _transactionRows[transaction.Id].UpdateRow(transaction);
+        foreach(var pair in _account.Transactions)
+        {
+            if(updateGenerated && pair.Value.RepeatFrom == transaction.Id)
+            {
+                _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+            }
+            else if(!updateGenerated && pair.Value.RepeatFrom == -1)
+            {
+                _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+            }
+        }
+        _groupRows[originalGroupId].UpdateRow(originalGroupId == 0 ? UngroupedGroup : _account.Groups[originalGroupId]);
+        _groupRows[newGroupId].UpdateRow(newGroupId == 0 ? UngroupedGroup : _account.Groups[newGroupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -489,8 +557,12 @@ public class AccountViewController
     /// <param name="id">The id of the transaction to delete</param>
     public async Task DeleteTransactionAsync(uint id)
     {
+        var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
         await _account.DeleteTransactionAsync(id);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        UIDeleteTransactionRow!(_transactionRows[id]);
+        _transactionRows.Remove(id);
+        _groupRows[groupId].UpdateRow(groupId == 0 ? UngroupedGroup : _account.Groups[groupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -500,8 +572,33 @@ public class AccountViewController
     /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
     public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
     {
+        var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
+        UIDeleteTransactionRow!(_transactionRows[id]);
+        _transactionRows.Remove(id);
+        if (deleteGenerated)
+        {
+            foreach(var pair in _account.Transactions) 
+            { 
+                if(pair.Value.RepeatFrom == id)
+                {
+                    UIDeleteTransactionRow!(_transactionRows[pair.Value.Id]);
+                    _transactionRows.Remove(pair.Value.Id);
+                }
+            }
+        }
         await _account.DeleteSourceTransactionAsync(id, deleteGenerated);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        if(!deleteGenerated)
+        {
+            foreach (var pair in _account.Transactions)
+            {
+                if(pair.Value.RepeatFrom == -1)
+                {
+                    _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                }
+            }
+        }
+        _groupRows[groupId].UpdateRow(groupId == 0 ? UngroupedGroup : _account.Groups[groupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -510,8 +607,18 @@ public class AccountViewController
     /// <param name="id">The id of the source transaction</param>
     public async Task DeleteGeneratedTransactionsAsync(uint id)
     {
+        var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
+        foreach (var pair in _account.Transactions)
+        {
+            if (pair.Value.RepeatFrom == id)
+            {
+                UIDeleteTransactionRow!(_transactionRows[pair.Value.Id]);
+                _transactionRows.Remove(pair.Value.Id);
+            }
+        }
         await _account.DeleteGeneratedTransactionsAsync(id);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _groupRows[groupId].UpdateRow(groupId == 0 ? UngroupedGroup : _account.Groups[groupId]);
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -539,7 +646,7 @@ public class AccountViewController
     {
         await _account.AddGroupAsync(group);
         _filters.Add((int)group.Id, true);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _groupRows.Add(group.Id, UICreateGroupRow!(group, null));
     }
 
     /// <summary>
@@ -549,7 +656,7 @@ public class AccountViewController
     public async Task UpdateGroupAsync(Group group)
     {
         await _account.UpdateGroupAsync(group);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        _groupRows[group.Id].UpdateRow(group);
     }
 
     /// <summary>
@@ -560,7 +667,8 @@ public class AccountViewController
     {
         await _account.DeleteGroupAsync(id);
         _filters.Remove((int)id);
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        UIDeleteGroupRow!(_groupRows[id]);
+        _groupRows.Remove(id);
     }
 
     /// <summary>
@@ -570,8 +678,9 @@ public class AccountViewController
     public async Task SendTransferAsync(Transfer transfer)
     {
         transfer.SourceAccountName = AccountTitle;
-        await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
+        _transactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         TransferSent?.Invoke(this, transfer);
     }
 
@@ -581,8 +690,9 @@ public class AccountViewController
     /// <param name="transfer">The transfer to receive</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
-        await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
+        _transactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -591,18 +701,23 @@ public class AccountViewController
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        var imported = await _account.ImportFromFileAsync(path);
-        if(imported >= 0)
+        var importedIds = await _account.ImportFromFileAsync(path);
+        if(importedIds.Count >= 0)
         {
             foreach(var pair in _account.Groups)
             {
                 if(!_filters.ContainsKey((int)pair.Value.Id))
                 {
                     _filters.Add((int)pair.Value.Id, true);
+                    _groupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
                 }
             }
-            AccountInfoChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(imported == 1 ? string.Format(Localizer["Imported"], imported) : string.Format(Localizer["Imported", true], imported), NotificationSeverity.Success));
+            foreach(var id in importedIds)
+            {
+                _transactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
+            }    
+            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success));
         }
         else
         {
@@ -641,7 +756,7 @@ public class AccountViewController
     public void UpdateFilterValue(int key, bool value)
     {
         _filters[key] = value;
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        //TODO
     }
 
     /// <summary>
@@ -652,7 +767,7 @@ public class AccountViewController
     {
         _filterStartDate = date;
         _filterEndDate = date;
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        //TODO
     }
 
     /// <summary>
@@ -665,6 +780,6 @@ public class AccountViewController
         {
             _filters[(int)pair.Key] = true;
         }
-        AccountInfoChanged?.Invoke(this, EventArgs.Empty);
+        //TODO
     }
 }
