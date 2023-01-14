@@ -320,7 +320,22 @@ public class AccountViewController
         //Transactions
         _transactionRows.Clear();
         var transactions = _account.Transactions.Values.ToList();
-        transactions.Sort(SortTransactions);
+        transactions.Sort((a, b) =>
+        {
+            var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                if (compareTo == 1)
+                {
+                    compareTo = -1;
+                }
+                else if (compareTo == -1)
+                {
+                    compareTo = 1;
+                }
+            }
+            return compareTo;
+        });
         foreach (var transaction in transactions)
         {
             _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
@@ -716,29 +731,6 @@ public class AccountViewController
     }
 
     /// <summary>
-    /// The function to use when sorting transactions
-    /// </summary>
-    /// <param name="a">Transaction</param>
-    /// <param name="b">Transaction</param>
-    /// <returns>The order of a and b</returns>
-    private int SortTransactions(Transaction a, Transaction b)
-    {
-        var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
-        if (!SortFirstToLast)
-        {
-            if (compareTo == 1)
-            {
-                compareTo = -1;
-            }
-            else if (compareTo == -1)
-            {
-                compareTo = 1;
-            }
-        }
-        return compareTo;
-    }
-
-    /// <summary>
     /// Updates the UI when filters are changed
     /// </summary>
     private void FilterUIUpdate()
@@ -791,7 +783,7 @@ public class AccountViewController
     /// </summary>
     private void SortUIUpdate()
     {
-        var filteredTransactions = new List<Transaction>();
+        var filteredTransactions = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
             if (pair.Value.Type == TransactionType.Income && !_filters[-3])
@@ -813,12 +805,27 @@ public class AccountViewController
                     continue;
                 }
             }
-            filteredTransactions.Add(pair.Value);
+            filteredTransactions.Add(pair.Value.Id);
         }
-        filteredTransactions.Sort(SortTransactions);
+        filteredTransactions.Sort((a, b) =>
+        {
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                if (compareTo == 1)
+                {
+                    compareTo = -1;
+                }
+                else if (compareTo == -1)
+                {
+                    compareTo = 1;
+                }
+            }
+            return compareTo;
+        });
         for(var i = 0; i < filteredTransactions.Count; i++)
         {
-            UIMoveTransactionRow!(_transactionRows[filteredTransactions[i].Id], i);
+            UIMoveTransactionRow!(_transactionRows[filteredTransactions[i]], i);
         }
     }
 }
