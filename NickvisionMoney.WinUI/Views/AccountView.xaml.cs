@@ -167,8 +167,19 @@ public sealed partial class AccountView : UserControl
     {
         if (ListTransactions.Items[index] != row)
         {
+            var oldVisibility = ((GridViewItem)ListTransactions.ContainerFromItem(row)).Visibility;
             ListTransactions.Items.Remove(row);
             ListTransactions.Items.Insert(index, row);
+            ListTransactions.UpdateLayout();
+            ((TransactionRow)row).Container = (GridViewItem)ListTransactions.ContainerFromIndex(index);
+            if(oldVisibility == Visibility.Visible)
+            {
+                row.Show();
+            }
+            else
+            {
+                row.Hide();
+            }
         }
     }
 
