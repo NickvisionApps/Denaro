@@ -71,7 +71,7 @@ public class Localizer : IDisposable
     /// </summary>
     /// <param name="name">The name of the string resource</param>
     /// <returns>The localized string</returns>
-    public string GetString(string name) => _resourceSet.GetString(name) ?? _resourceFallback.GetString(name) ?? string.Empty;
+    public string GetString(string name) => (string.IsNullOrEmpty(_resourceSet.GetString(name)) ? _resourceFallback.GetString(name) : _resourceSet.GetString(name)) ?? string.Empty;
 
     /// <summary>
     /// Gets a localized string by context
