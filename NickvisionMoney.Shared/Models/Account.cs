@@ -1198,7 +1198,7 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
         foreach (var line in lines)
         {
