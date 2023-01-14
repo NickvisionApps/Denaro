@@ -461,7 +461,6 @@ public partial class AccountView
         _binSpinner = Adw.Bin.New();
         _binSpinner.SetHexpand(true);
         _binSpinner.SetVexpand(true);
-        _binSpinner.AddCssClass("background");
         //Spinner
         _spinner = Gtk.Spinner.New();
         _spinner.SetSizeRequest(48, 48);
@@ -557,6 +556,7 @@ public partial class AccountView
             //Start Spinner
             _statusPageNoTransactions.SetVisible(false);
             _scrollTransactions.SetVisible(true);
+            _overlayMain.SetOpacity(0.0);
             _binSpinner.SetVisible(true);
             _spinner.Start();
             _scrollPane.SetSensitive(false);
@@ -633,6 +633,7 @@ public partial class AccountView
             }
             _spinner.Stop();
             _binSpinner.SetVisible(false);
+            _overlayMain.SetOpacity(1.0);
             _scrollPane.SetSensitive(true);
             _isAccountLoading = false;
         }
