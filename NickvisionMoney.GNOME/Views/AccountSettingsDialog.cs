@@ -270,8 +270,8 @@ public partial class AccountSettingsDialog
         var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         _btnAvatar.GetStyleContext().RemoveProvider(_btnAvatarCssProvider);
-        var btnCss = "#btnAvatar { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(_btnAvatarCssProvider.Handle, btnCss, -1);
+        var btnCss = "#btnAvatar { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
+        gtk_css_provider_load_from_data(_btnAvatarCssProvider.Handle, btnCss, btnCss.Length);
         _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
     }
 

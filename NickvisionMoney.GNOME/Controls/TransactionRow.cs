@@ -82,8 +82,8 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _row.SetSizeRequest(300, 70);
         var rowCssProvider = Gtk.CssProvider.New();
         var rowCss = @"row {
-            border-color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, -1);
+            border-color: " + gdk_rgba_to_string(ref color) + "; }";
+        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, rowCss.Length);
         _row.GetStyleContext().AddProvider(rowCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Button ID
         _btnId = Gtk.Button.New();
@@ -92,8 +92,8 @@ public partial class TransactionRow : Adw.PreferencesGroup
         _btnId.SetValign(Gtk.Align.Center);
         _btnId.SetLabel(_transaction.Id.ToString());
         var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }" + char.MinValue;
-        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, -1);
+        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
+        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _row.AddPrefix(_btnId);
         //Amount Label
