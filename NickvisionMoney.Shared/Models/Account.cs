@@ -817,7 +817,8 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transfer">The transfer to send</param>
     /// <param name="description">The description for the new transaction</param>
-    public async Task SendTransferAsync(Transfer transfer, string description)
+    /// <returns>The new transaction created</returns>
+    public async Task<Transaction> SendTransferAsync(Transfer transfer, string description)
     {
         var transaction = new Transaction(NextAvailableTransactionId)
         {
@@ -827,6 +828,7 @@ public class Account : IDisposable
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
+        return transaction;
     }
 
     /// <summary>
@@ -834,8 +836,8 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transfer"></param>
     /// <param name="description"></param>
-    /// <returns></returns>
-    public async Task ReceiveTransferAsync(Transfer transfer, string description)
+    /// <returns>The new transaction created</returns>
+    public async Task<Transaction> ReceiveTransferAsync(Transfer transfer, string description)
     {
         var transaction = new Transaction(NextAvailableTransactionId)
         {
@@ -845,18 +847,20 @@ public class Account : IDisposable
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
+        return transaction;
     }
 
     /// <summary>
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    public async Task<int> ImportFromFileAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    public async Task<List<uint>> ImportFromFileAsync(string path)
     {
+        var ids = new List<uint>();
         if(!System.IO.Path.Exists(path))
         {
-            return -1;
+            return ids;
         }
         var extension = System.IO.Path.GetExtension(path);
         if(extension == ".csv")
@@ -871,7 +875,7 @@ public class Account : IDisposable
         {
             return await ImportFromQIFAsync(path);
         }
-        return -1;
+        return ids;
     }
 
     /// <summary>
@@ -1183,10 +1187,10 @@ public class Account : IDisposable
     /// Imports transactions from a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromCSVAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromCSVAsync(string path)
     {
-        var imported = 0;
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1316,18 +1320,19 @@ public class Account : IDisposable
                 RepeatEndDate = repeatEndDate
             };
             await AddTransactionAsync(transaction);
-            imported++;
+            ids.Add(transaction.Id);
         }
-        return imported;
+        return ids;
     }
 
     /// <summary>
     /// Imports transactions from an OFX file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromOFXAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromOFXAsync(string path)
     {
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1335,9 +1340,8 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
-        var imported = 0;
         var nextId = NextAvailableTransactionId;
         var xmlTagRegex = new Regex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
         var transaction = default(Transaction);
@@ -1359,7 +1363,7 @@ public class Account : IDisposable
                     if (!skipTransaction)
                     {
                         await AddTransactionAsync(transaction);
-                        imported++;
+                        ids.Add(transaction.Id);
                     }
                     skipTransaction = false;
                     transaction = null;
@@ -1424,16 +1428,17 @@ public class Account : IDisposable
                 }
             }
         }
-        return imported;
+        return ids;
     }
 
     /// <summary>
     /// Imports transactions from a QIF file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromQIFAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromQIFAsync(string path)
     {
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1441,9 +1446,8 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
-        var imported = 0;
         var nextId = NextAvailableTransactionId;
         var transaction = new Transaction(nextId);
         var skipTransaction = false;
@@ -1464,7 +1468,7 @@ public class Account : IDisposable
                 if(!skipTransaction)
                 {
                     await AddTransactionAsync(transaction);
-                    imported++;
+                    ids.Add(transaction.Id);
                 }
                 skipTransaction = false;
                 nextId++;
@@ -1506,6 +1510,6 @@ public class Account : IDisposable
                 transaction.Description = line.Substring(1);
             }
         }
-        return imported;
+        return ids;
     }
 }
