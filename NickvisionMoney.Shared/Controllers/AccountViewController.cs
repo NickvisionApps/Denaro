@@ -43,6 +43,10 @@ public class AccountViewController
     /// </summary>
     public Func<Transaction, int?, IModelRowControl<Transaction>>? UICreateTransactionRow { get; set; }
     /// <summary>
+    /// The UI function for moving a transaction row
+    /// </summary>
+    public Action<IModelRowControl<Transaction>, int>? UIMoveTransactionRow { get; set; }
+    /// <summary>
     /// The UI function for deleting a transaction rowe
     /// </summary>
     public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
@@ -198,7 +202,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortTransactionsBy = value;
                 _account.UpdateMetadata(_account.Metadata);
-                FilterUIUpdate();
+                SortUIUpdate();
             }
         }
     }
@@ -216,7 +220,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortFirstToLast = value;
                 _account.UpdateMetadata(_account.Metadata);
-                FilterUIUpdate();
+                SortUIUpdate();
             }
         }
     }
@@ -739,7 +743,6 @@ public class AccountViewController
     /// </summary>
     private void FilterUIUpdate()
     {
-        //Get Filtered Transactions
         var filteredTransactions = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
@@ -781,5 +784,41 @@ public class AccountViewController
             }
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Updates the UI when sorting is changed
+    /// </summary>
+    private void SortUIUpdate()
+    {
+        var filteredTransactions = new List<Transaction>();
+        foreach (var pair in _account.Transactions)
+        {
+            if (pair.Value.Type == TransactionType.Income && !_filters[-3])
+            {
+                continue;
+            }
+            if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+            {
+                continue;
+            }
+            if (!_filters[pair.Value.GroupId])
+            {
+                continue;
+            }
+            if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+            {
+                if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
+                {
+                    continue;
+                }
+            }
+            filteredTransactions.Add(pair.Value);
+        }
+        filteredTransactions.Sort(SortTransactions);
+        for(var i = 0; i < filteredTransactions.Count; i++)
+        {
+            UIMoveTransactionRow!(_transactionRows[filteredTransactions[i].Id], i);
+        }
     }
 }
