@@ -27,6 +27,10 @@ public class AccountViewController
     /// </summary>
     public Localizer Localizer { get; init; }
     /// <summary>
+    /// Whether or not filtered transactions are available
+    /// </summary>
+    public bool HasFilteredTransactions { get; private set; }
+    /// <summary>
     /// The UI function for creating a group row
     /// </summary>
     public Func<Group, int?, IGroupRowControl>? UICreateGroupRow { get; set; }
@@ -88,10 +92,6 @@ public class AccountViewController
     /// </summary>
     public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
     /// <summary>
-    /// The count of groups in the account
-    /// </summary>
-    public int GroupsCount => _account.Groups.Count;
-    /// <summary>
     /// The count of transactions in the account
     /// </summary>
     public int TransactionsCount => _account.Transactions.Count;
@@ -127,6 +127,7 @@ public class AccountViewController
         _groupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
+        HasFilteredTransactions = false;
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
@@ -180,7 +181,6 @@ public class AccountViewController
             {
                 _account.Metadata.ShowGroupsList = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -198,7 +198,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortTransactionsBy = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+                FilterUIUpdate();
             }
         }
     }
@@ -216,7 +216,7 @@ public class AccountViewController
             {
                 _account.Metadata.SortFirstToLast = value;
                 _account.UpdateMetadata(_account.Metadata);
-                AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+                FilterUIUpdate();
             }
         }
     }
@@ -237,57 +237,6 @@ public class AccountViewController
                 }
             }
             return datesInAccount;
-        }
-    }
-
-    /// <summary>
-    /// The list of filtered transactions
-    /// </summary>
-    public List<Transaction> FilteredTransactions
-    {
-        get
-        {
-            var filteredTransactions = new List<Transaction>();
-            foreach (var pair in _account.Transactions)
-            {
-                if (pair.Value.Type == TransactionType.Income && !_filters[-3])
-                {
-                    continue;
-                }
-                if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
-                {
-                    continue;
-                }
-                if (!_filters[pair.Value.GroupId])
-                {
-                    continue;
-                }
-                if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
-                {
-                    if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
-                    {
-                        continue;
-                    }
-                }
-                filteredTransactions.Add(pair.Value);
-            }
-            filteredTransactions.Sort((a, b) =>
-            {
-                var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
-                if (!SortFirstToLast)
-                {
-                    if (compareTo == 1)
-                    {
-                        compareTo = -1;
-                    }
-                    else if (compareTo == -1)
-                    {
-                        compareTo = 1;
-                    }
-                }
-                return compareTo;
-            });
-            return filteredTransactions;
         }
     }
 
@@ -326,7 +275,7 @@ public class AccountViewController
         set
         {
             _filterStartDate = value;
-            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            FilterUIUpdate();
         }
     }
 
@@ -340,7 +289,7 @@ public class AccountViewController
         set
         {
             _filterEndDate = value;
-            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            FilterUIUpdate();
         }
     }
 
@@ -350,6 +299,7 @@ public class AccountViewController
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The NotificationSeverity of the notification</param>
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
+
 
     /// <summary>
     /// Initializes the AccountView
@@ -365,10 +315,13 @@ public class AccountViewController
         }
         //Transactions
         _transactionRows.Clear();
-        foreach (var transaction in FilteredTransactions)
+        var transactions = _account.Transactions.Values.ToList();
+        transactions.Sort(SortTransactions);
+        foreach (var transaction in transactions)
         {
             _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
         }
+        HasFilteredTransactions = transactions.Count > 0;
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -729,7 +682,7 @@ public class AccountViewController
     public void UpdateFilterValue(int key, bool value)
     {
         _filters[key] = value;
-        //TODO
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -740,7 +693,7 @@ public class AccountViewController
     {
         _filterStartDate = date;
         _filterEndDate = date;
-        //TODO
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -753,6 +706,78 @@ public class AccountViewController
         {
             _filters[(int)pair.Key] = true;
         }
-        //TODO
+        FilterUIUpdate();
+    }
+
+    /// <summary>
+    /// The function to use when sorting transactions
+    /// </summary>
+    /// <param name="a">Transaction</param>
+    /// <param name="b">Transaction</param>
+    /// <returns>The order of a and b</returns>
+    private int SortTransactions(Transaction a, Transaction b)
+    {
+        var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+        if (!SortFirstToLast)
+        {
+            if (compareTo == 1)
+            {
+                compareTo = -1;
+            }
+            else if (compareTo == -1)
+            {
+                compareTo = 1;
+            }
+        }
+        return compareTo;
+    }
+
+    /// <summary>
+    /// Updates the UI when filters are changed
+    /// </summary>
+    private void FilterUIUpdate()
+    {
+        //Get Filtered Transactions
+        var filteredTransactions = new List<uint>();
+        foreach (var pair in _account.Transactions)
+        {
+            if (pair.Value.Type == TransactionType.Income && !_filters[-3])
+            {
+                continue;
+            }
+            if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+            {
+                continue;
+            }
+            if (!_filters[pair.Value.GroupId])
+            {
+                continue;
+            }
+            if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+            {
+                if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
+                {
+                    continue;
+                }
+            }
+            filteredTransactions.Add(pair.Value.Id);
+        }
+        HasFilteredTransactions = filteredTransactions.Count > 0;
+        if(HasFilteredTransactions)
+        {
+            //Update UI
+            foreach (var pair in _transactionRows)
+            {
+                if (filteredTransactions.Contains(pair.Value.Id))
+                {
+                    pair.Value.Show();
+                }
+                else
+                {
+                    pair.Value.Hide();
+                }
+            }
+        }
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 }
