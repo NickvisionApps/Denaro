@@ -25,6 +25,10 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// The Id of the Transaction the row represents
     /// </summary>
     public uint Id { get; private set; }
+    /// <summary>
+    /// The GridViewItem container of this row
+    /// </summary>
+    public GridViewItem? Container { private get; set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
@@ -60,12 +64,12 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// <summary>
     /// Shows the row
     /// </summary>
-    public void Show() => Visibility = Visibility.Visible;
+    public void Show() => Container!.Visibility = Visibility.Visible;
 
     /// <summary>
     /// Hides the row
     /// </summary>
-    public void Hide() => Visibility = Visibility.Collapsed;
+    public void Hide() => Container!.Visibility = Visibility.Collapsed;
 
     /// <summary>
     /// Updates the row with the new model

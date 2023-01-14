@@ -258,17 +258,9 @@
                                 <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <wct:WrapPanel />
+                                            <wct:WrapPanel Orientation="Horizontal"/>
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
-
-                                    <GridView.ItemContainerStyle>
-                                        <Style TargetType="GridViewItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-
-                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        </Style>
-                                    </GridView.ItemContainerStyle>
                                 </GridView>
                             </ScrollViewer>
                         </Grid>

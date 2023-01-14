@@ -175,6 +175,11 @@ public sealed partial class AccountView : UserControl
             AccountSettings(null, new RoutedEventArgs());
         }
         await _controller.StartupAsync();
+        ListTransactions.UpdateLayout();
+        for(var i = 0; i < ListTransactions.Items.Count; i++)
+        {
+            ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
+        }
     }
 
     /// <summary>
@@ -182,7 +187,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private async void AccountTransactionsChanged(object? sender, EventArgs e)
+    private void AccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
         {
@@ -213,9 +218,7 @@ public sealed partial class AccountView : UserControl
                     }
                 }
                 //Transaction Page
-                List<Transaction>? filteredTransactions = null;
-                await Task.Run(() => filteredTransactions = _controller.FilteredTransactions);
-                if (filteredTransactions!.Count > 0)
+                if (_controller.HasFilteredTransactions)
                 {
                     ViewStackTransactions.ChangePage("Transactions");
                 }
