@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -45,6 +46,10 @@ public partial class Program
     /// </summary>
     public Program()
     {
+        if (CultureInfo.CurrentCulture.ToString() == "ar-RG")
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("ar-EG"); // Fix #211
+        }
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
