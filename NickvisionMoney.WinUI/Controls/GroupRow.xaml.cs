@@ -55,6 +55,16 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     }
 
     /// <summary>
+    /// Whether or not the filter checkbox is checked
+    /// </summary>
+    public bool FilterChecked
+    {
+        get => ChkFilter.IsChecked ?? false;
+
+        set => ChkFilter.IsChecked = value;
+    }
+
+    /// <summary>
     /// Shows the row
     /// </summary>
     public void Show() => Visibility = Visibility.Visible;

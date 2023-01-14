@@ -79,6 +79,16 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     }
 
     /// <summary>
+    /// Whether or not the filter checkbox is checked
+    /// </summary>
+    public bool FilterChecked
+    {
+        get => _chkFilter.GetActive();
+
+        set => _chkFilter.SetActive(value);
+    }
+
+    /// <summary>
     /// Updates the row with the new model
     /// </summary>
     /// <param name="group">The new Group model</param>

@@ -702,9 +702,11 @@ public class AccountViewController
     public void ResetGroupsFilter()
     {
         _filters[-1] = true; //Ungrouped
+        _groupRows[0].FilterChecked = true;
         foreach(var pair in _account.Groups)
         {
             _filters[(int)pair.Key] = true;
+            _groupRows[pair.Key].FilterChecked = true;
         }
         FilterUIUpdate();
     }

@@ -6,6 +6,11 @@ namespace NickvisionMoney.Shared.Controls;
 public interface IGroupRowControl : IModelRowControl<Group>
 {
     /// <summary>
+    /// Whether or not the filter checkbox is checked
+    /// </summary>
+    public bool FilterChecked { get; set; }
+
+    /// <summary>
     /// Occurs when the filter checkbox is changed on the row
     /// </summary>
     public event EventHandler<(uint Id, bool Filter)>? FilterChanged;
