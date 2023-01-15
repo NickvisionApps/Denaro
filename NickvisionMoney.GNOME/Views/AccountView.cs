@@ -585,11 +585,13 @@ public partial class AccountView
         if(index != null)
         {
             _flowBox.Insert(row, index.Value);
+            g_main_context_iteration(g_main_context_default(), false);
             row.Container = _flowBox.GetChildAtIndex(index.Value);
         }
         else
         {
             _flowBox.Append(row);
+            g_main_context_iteration(g_main_context_default(), false);
             row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
         }
         return row;
@@ -629,11 +631,24 @@ public partial class AccountView
         {
             AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         }
+        //Start Spinner
+        _statusPageNoTransactions.SetVisible(false);
+        _scrollTransactions.SetVisible(true);
+        _overlayMain.SetOpacity(0.0);
+        _binSpinner.SetVisible(true);
+        _spinner.Start();
+        _scrollPane.SetSensitive(false);
+        //Work
         await _controller.StartupAsync();
         for(var i = 0; i < _controller.TransactionRows.Count; i++)
         {
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
+        //Stop Spinner
+        _spinner.Stop();
+        _binSpinner.SetVisible(false);
+        _overlayMain.SetOpacity(1.0);
+        _scrollPane.SetSensitive(true);
     }
 
     private void OnAccountTransactionsChanged(object? sender, EventArgs e)
@@ -641,13 +656,6 @@ public partial class AccountView
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
-            //Start Spinner
-            _statusPageNoTransactions.SetVisible(false);
-            _scrollTransactions.SetVisible(true);
-            _overlayMain.SetOpacity(0.0);
-            _binSpinner.SetVisible(true);
-            _spinner.Start();
-            _scrollPane.SetSensitive(false);
             //Overview
             Page.SetTitle(_controller.AccountTitle);
             _updateSubtitle(_controller.AccountTitle);
@@ -679,10 +687,6 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
-            _spinner.Stop();
-            _binSpinner.SetVisible(false);
-            _overlayMain.SetOpacity(1.0);
-            _scrollPane.SetSensitive(true);
             _isAccountLoading = false;
         }
     }
