@@ -181,8 +181,8 @@ public class MainWindowController : IDisposable
                 Type = controller.AccountType
             });
             Configuration.Current.Save();
-            AccountAdded?.Invoke(this, EventArgs.Empty);
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+            AccountAdded?.Invoke(this, EventArgs.Empty);
         }
         else
         {
