@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -787,7 +788,7 @@ public partial class AccountView
                 _spinner.Start();
                 _scrollPane.SetSensitive(false);
                 //Work
-                await _controller.ImportFromFileAsync(path ?? "");
+                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
                 //Stop Spinner
                 _spinner.Stop();
                 _binSpinner.SetVisible(false);
