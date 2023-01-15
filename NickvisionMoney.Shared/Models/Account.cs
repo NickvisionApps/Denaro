@@ -665,6 +665,7 @@ public class Account : IDisposable
                     TodayExpense -= oldTransaction.Amount;
                 }
             }
+            Transactions[transaction.Id].Dispose();
             Transactions[transaction.Id] = transaction;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {

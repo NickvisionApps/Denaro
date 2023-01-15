@@ -121,7 +121,6 @@ public class TransactionDialogController : IDisposable
             {
                 File.Delete(jpgPath);
             }
-            Transaction.Dispose();
         }
         _disposed = true;
     }
