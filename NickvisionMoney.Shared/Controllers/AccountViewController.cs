@@ -13,8 +13,9 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// A controller for an AccountView
 /// </summary>
-public class AccountViewController
+public class AccountViewController : IDisposable
 {
+    private bool _disposed;
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
@@ -105,6 +106,10 @@ public class AccountViewController
     /// The count of transactions in the account
     /// </summary>
     public int TransactionsCount => _account.Transactions.Count;
+    /// <summary>
+    /// The count of groups in the account
+    /// </summary>
+    public int GroupsCount => _account.Groups.Count;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -132,6 +137,7 @@ public class AccountViewController
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
+        _disposed = false;
         _account = new Account(path);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
@@ -153,9 +159,29 @@ public class AccountViewController
     }
 
     /// <summary>
-    /// Finalizes an AccountViewController
+    /// Frees resources used by the AccountViewController object
     /// </summary>
-    ~AccountViewController() => _account.Dispose();
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the AccountViewController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            _account.Dispose();
+        }
+        _disposed = true;
+    }
 
     /// <summary>
     /// The CultureInfo to use when displaying a number string

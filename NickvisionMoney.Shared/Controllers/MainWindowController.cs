@@ -197,7 +197,11 @@ public class MainWindowController : IDisposable
     /// Closes the account with the provided index
     /// </summary>
     /// <param name="index">int</param>
-    public void CloseAccount(int index) => OpenAccounts.RemoveAt(index);
+    public void CloseAccount(int index)
+    {
+        OpenAccounts[index].Dispose();
+        OpenAccounts.RemoveAt(index);
+    }
 
     /// <summary>
     /// Occurs when a transfer is sent from an account
