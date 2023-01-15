@@ -472,7 +472,7 @@ public class AccountViewController
             }
         }
         GroupRows[groupId].UpdateRow(_account.Groups[groupId]);
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -487,7 +487,7 @@ public class AccountViewController
         TransactionRows[transaction.Id].UpdateRow(transaction);
         GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
         GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -515,6 +515,7 @@ public class AccountViewController
         GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
         GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -647,7 +648,7 @@ public class AccountViewController
         transfer.SourceAccountName = AccountTitle;
         var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
         TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+        FilterUIUpdate();
         TransferSent?.Invoke(this, transfer);
     }
 
@@ -659,7 +660,7 @@ public class AccountViewController
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
         TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+        FilterUIUpdate();
     }
 
     /// <summary>
@@ -685,7 +686,7 @@ public class AccountViewController
                 TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
                 GroupRows[groupId].UpdateRow(_account.Groups[id]);
             }    
-            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            FilterUIUpdate();
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success));
         }
         else

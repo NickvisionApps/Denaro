@@ -286,6 +286,7 @@ public sealed partial class AccountView : UserControl
         };
         if(await transactionDialog.ShowAsync())
         {
+            ViewStackTransactions.ChangePage("Transactions");
             await _controller.AddTransactionAsync(transactionController.Transaction);
         }
     }
