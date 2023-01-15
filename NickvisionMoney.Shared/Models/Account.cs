@@ -756,6 +756,7 @@ public class Account : IDisposable
                     TodayExpense -= transaction.Amount;
                 }
             }
+            Transactions[id].Dispose();
             Transactions.Remove(id);
             if (id + 1 == NextAvailableTransactionId)
             {
