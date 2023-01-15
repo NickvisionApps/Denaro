@@ -171,7 +171,10 @@ public class TransactionDialogController : IDisposable
             {
                 Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
             }
-            image.Dispose();
+        }
+        if(receiptPath != null)
+        {
+            image?.Dispose();
         }
     }
 

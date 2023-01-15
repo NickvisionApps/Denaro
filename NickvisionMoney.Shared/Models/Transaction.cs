@@ -1,4 +1,5 @@
 ﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
 
 namespace NickvisionMoney.Shared.Models;
@@ -128,7 +129,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Amount = Amount,
             GroupId = GroupId,
             RGBA = RGBA,
-            Receipt = Receipt,
+            Receipt = Receipt.Clone((x) => { }),
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate
         };
