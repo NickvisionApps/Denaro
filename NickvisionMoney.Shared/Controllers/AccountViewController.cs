@@ -16,8 +16,6 @@ namespace NickvisionMoney.Shared.Controllers;
 public class AccountViewController
 {
     private readonly Account _account;
-    private readonly Dictionary<uint, IModelRowControl<Transaction>> _transactionRows;
-    private readonly Dictionary<uint, IGroupRowControl> _groupRows;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
@@ -30,6 +28,14 @@ public class AccountViewController
     /// Whether or not filtered transactions are available
     /// </summary>
     public bool HasFilteredTransactions { get; private set; }
+    /// <summary>
+    /// The list of UI transaction row objects
+    /// </summary>
+    public Dictionary<uint, IModelRowControl<Transaction>> TransactionRows { get; init; }
+    /// <summary>
+    /// The list of UI group row objects
+    /// </summary>
+    public Dictionary<uint, IGroupRowControl> GroupRows { get; init; }
     /// <summary>
     /// The UI function for creating a group row
     /// </summary>
@@ -127,8 +133,8 @@ public class AccountViewController
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _account = new Account(path);
-        _transactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
-        _groupRows = new Dictionary<uint, IGroupRowControl>();
+        TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
+        GroupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
         HasFilteredTransactions = false;
@@ -312,13 +318,13 @@ public class AccountViewController
     {
         await _account.SyncRepeatTransactionsAsync();
         //Groups
-        _groupRows.Clear();
+        GroupRows.Clear();
         foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
         {
-            _groupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
         }
         //Transactions
-        _transactionRows.Clear();
+        TransactionRows.Clear();
         var transactions = _account.Transactions.Values.ToList();
         transactions.Sort((a, b) =>
         {
@@ -331,10 +337,21 @@ public class AccountViewController
         });
         foreach (var transaction in transactions)
         {
-            _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+            TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
         }
         HasFilteredTransactions = transactions.Count > 0;
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Gets the UI group row object via index
+    /// </summary>
+    /// <param name="index">The index of the row</param>
+    /// <returns>The IGroupRowControl</returns>
+    public IGroupRowControl GetUIGroupRowFromIndex(int index)
+    {
+        var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
+        return GroupRows[groups[index].Id];
     }
 
     /// <summary>
@@ -447,14 +464,14 @@ public class AccountViewController
         {
             if (_account.Transactions[transactions[i]] == transaction)
             {
-                _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, i));
+                TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, i));
             }
             if (_account.Transactions[transactions[i]].RepeatFrom == transaction.Id)
             {
-                _transactionRows.Add(_account.Transactions[transactions[i]].Id, UICreateTransactionRow!(_account.Transactions[transactions[i]], i));
+                TransactionRows.Add(_account.Transactions[transactions[i]].Id, UICreateTransactionRow!(_account.Transactions[transactions[i]], i));
             }
         }
-        _groupRows[groupId].UpdateRow(_account.Groups[groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -467,9 +484,9 @@ public class AccountViewController
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
-        _transactionRows[transaction.Id].UpdateRow(transaction);
-        _groupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
-        _groupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
+        TransactionRows[transaction.Id].UpdateRow(transaction);
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -483,20 +500,20 @@ public class AccountViewController
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
-        _transactionRows[transaction.Id].UpdateRow(transaction);
+        TransactionRows[transaction.Id].UpdateRow(transaction);
         foreach(var pair in _account.Transactions)
         {
             if(updateGenerated && pair.Value.RepeatFrom == transaction.Id)
             {
-                _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
             }
             else if(!updateGenerated && pair.Value.RepeatFrom == -1)
             {
-                _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
             }
         }
-        _groupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
-        _groupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -508,9 +525,9 @@ public class AccountViewController
     {
         var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
         await _account.DeleteTransactionAsync(id);
-        UIDeleteTransactionRow!(_transactionRows[id]);
-        _transactionRows.Remove(id);
-        _groupRows[groupId].UpdateRow(_account.Groups[groupId]);
+        UIDeleteTransactionRow!(TransactionRows[id]);
+        TransactionRows.Remove(id);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -522,16 +539,16 @@ public class AccountViewController
     public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
     {
         var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
-        UIDeleteTransactionRow!(_transactionRows[id]);
-        _transactionRows.Remove(id);
+        UIDeleteTransactionRow!(TransactionRows[id]);
+        TransactionRows.Remove(id);
         if (deleteGenerated)
         {
             foreach(var pair in _account.Transactions) 
             { 
                 if(pair.Value.RepeatFrom == id)
                 {
-                    UIDeleteTransactionRow!(_transactionRows[pair.Value.Id]);
-                    _transactionRows.Remove(pair.Value.Id);
+                    UIDeleteTransactionRow!(TransactionRows[pair.Value.Id]);
+                    TransactionRows.Remove(pair.Value.Id);
                 }
             }
         }
@@ -542,11 +559,11 @@ public class AccountViewController
             {
                 if(pair.Value.RepeatFrom == -1)
                 {
-                    _transactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
                 }
             }
         }
-        _groupRows[groupId].UpdateRow(_account.Groups[groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -561,12 +578,12 @@ public class AccountViewController
         {
             if (pair.Value.RepeatFrom == id)
             {
-                UIDeleteTransactionRow!(_transactionRows[pair.Value.Id]);
-                _transactionRows.Remove(pair.Value.Id);
+                UIDeleteTransactionRow!(TransactionRows[pair.Value.Id]);
+                TransactionRows.Remove(pair.Value.Id);
             }
         }
         await _account.DeleteGeneratedTransactionsAsync(id);
-        _groupRows[groupId].UpdateRow(_account.Groups[groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -596,7 +613,7 @@ public class AccountViewController
         await _account.AddGroupAsync(group);
         var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
         _filters.Add((int)group.Id, true);
-        _groupRows.Add(group.Id, UICreateGroupRow!(group, groups.IndexOf(group)));
+        GroupRows.Add(group.Id, UICreateGroupRow!(group, groups.IndexOf(group)));
     }
 
     /// <summary>
@@ -606,7 +623,7 @@ public class AccountViewController
     public async Task UpdateGroupAsync(Group group)
     {
         await _account.UpdateGroupAsync(group);
-        _groupRows[group.Id].UpdateRow(group);
+        GroupRows[group.Id].UpdateRow(group);
     }
 
     /// <summary>
@@ -617,8 +634,8 @@ public class AccountViewController
     {
         await _account.DeleteGroupAsync(id);
         _filters.Remove((int)id);
-        UIDeleteGroupRow!(_groupRows[id]);
-        _groupRows.Remove(id);
+        UIDeleteGroupRow!(GroupRows[id]);
+        GroupRows.Remove(id);
     }
 
     /// <summary>
@@ -629,7 +646,7 @@ public class AccountViewController
     {
         transfer.SourceAccountName = AccountTitle;
         var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
-        _transactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         TransferSent?.Invoke(this, transfer);
     }
@@ -641,7 +658,7 @@ public class AccountViewController
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        _transactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -659,14 +676,14 @@ public class AccountViewController
                 if(!_filters.ContainsKey((int)pair.Value.Id))
                 {
                     _filters.Add((int)pair.Value.Id, true);
-                    _groupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+                    GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
                 }
             }
             foreach(var id in importedIds)
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
-                _transactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
-                _groupRows[groupId].UpdateRow(_account.Groups[id]);
+                TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
+                GroupRows[groupId].UpdateRow(_account.Groups[id]);
             }    
             AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success));
@@ -728,11 +745,11 @@ public class AccountViewController
     public void ResetGroupsFilter()
     {
         _filters[-1] = true; //Ungrouped
-        _groupRows[0].FilterChecked = true;
+        GroupRows[0].FilterChecked = true;
         foreach(var pair in _account.Groups)
         {
             _filters[(int)pair.Key] = true;
-            _groupRows[pair.Key].FilterChecked = true;
+            GroupRows[pair.Key].FilterChecked = true;
         }
         FilterUIUpdate();
     }
@@ -770,7 +787,7 @@ public class AccountViewController
         if(HasFilteredTransactions)
         {
             //Update UI
-            foreach (var pair in _transactionRows)
+            foreach (var pair in TransactionRows)
             {
                 if (filteredTransactions.Contains(pair.Value.Id))
                 {
@@ -802,7 +819,7 @@ public class AccountViewController
         });
         for (var i = 0; i < transactions.Count; i++)
         {
-            UIMoveTransactionRow!(_transactionRows[transactions[i]], i);
+            UIMoveTransactionRow!(TransactionRows[transactions[i]], i);
         }
     }
 }
