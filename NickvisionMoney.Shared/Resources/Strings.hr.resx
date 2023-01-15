@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Prevodioci na Weblateu ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -646,5 +646,32 @@ Nove ponovljajuće transakcije generirat će se na temelju novog ponavljanja.</v
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
     <value>Boja štednog računa</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Razvrstaj po ID-u</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Pomoć</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Stvoreno: {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Ime grupe</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Priznanice</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>{0}. stranica</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Razvrstaj po datumu</value>
   </data>
 </root>
