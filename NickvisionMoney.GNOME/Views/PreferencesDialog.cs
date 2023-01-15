@@ -19,17 +19,17 @@ public partial class PreferencesDialog : Adw.Window
         public float Alpha;
     }
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.I1)]
     private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
     private readonly PreferencesViewController _controller;

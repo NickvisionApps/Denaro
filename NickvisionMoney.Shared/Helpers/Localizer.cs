@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Resources;
 
 namespace NickvisionMoney.Shared.Helpers;
@@ -6,8 +7,9 @@ namespace NickvisionMoney.Shared.Helpers;
 /// <summary>
 /// A helper for getting localized strings
 /// </summary>
-public class Localizer
+public class Localizer : IDisposable
 {
+    private bool _disposed;
     private readonly ResourceManager _resourceManager;
     private readonly ResourceSet _resourceSet;
     private readonly ResourceSet _resourceFallback;
@@ -32,9 +34,36 @@ public class Localizer
     /// </summary>
     internal Localizer()
     {
+        _disposed = false;
         _resourceManager = new ResourceManager("NickvisionMoney.Shared.Resources.Strings", GetType().Assembly);
         _resourceSet = _resourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true)!;
         _resourceFallback = _resourceManager.GetResourceSet(new CultureInfo("en-US"), true, true)!;
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            _resourceSet.Dispose();
+            _resourceFallback.Dispose();
+        }
+        _disposed = true;
     }
 
     /// <summary>
@@ -42,7 +71,7 @@ public class Localizer
     /// </summary>
     /// <param name="name">The name of the string resource</param>
     /// <returns>The localized string</returns>
-    public string GetString(string name) => _resourceSet.GetString(name) ?? _resourceFallback.GetString(name) ?? string.Empty;
+    public string GetString(string name) => (string.IsNullOrEmpty(_resourceSet.GetString(name)) ? _resourceFallback.GetString(name) : _resourceSet.GetString(name)) ?? string.Empty;
 
     /// <summary>
     /// Gets a localized string by context

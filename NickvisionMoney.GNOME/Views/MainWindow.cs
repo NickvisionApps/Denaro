@@ -24,18 +24,19 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nuint g_file_get_type();
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
+    private bool _compactMode;
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -92,6 +93,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _accountViews = new List<Adw.TabPage>();
         SetDefaultSize(900, 720);
         SetSizeRequest(360, -1);
+        _compactMode = false;
         if(_controller.IsDevVersion)
         {
             AddCssClass("devel");
@@ -344,6 +346,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
+        newAccountView.Startup();
     }
 
     /// <summary>
@@ -601,5 +604,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
-    public void OnWidthChanged() => WidthChanged?.Invoke(this, new WidthChangedEventArgs(DefaultWidth < 450));
+    public void OnWidthChanged()
+    {
+        var compactModeNeeded = DefaultWidth < 450;
+        if((compactModeNeeded && !_compactMode) || (!compactModeNeeded && _compactMode))
+        {
+            _compactMode = !_compactMode;
+            WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));
+        }
+    }
 }

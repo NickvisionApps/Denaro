@@ -1,13 +1,14 @@
 ﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -26,32 +27,35 @@ public partial class AccountView
         int RefCount;
     };
 
-    [DllImport("adwaita-1")]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
+    [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
 
-    [DllImport("adwaita-1")]
+    [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
 
-    [DllImport("adwaita-1")]
+    [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
 
     private readonly AccountViewController _controller;
-    private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
-    private List<GroupRow> _groupRows;
-    private List<TransactionRow> _transactionRows;
     private readonly MainWindow _parentWindow;
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
@@ -103,6 +107,9 @@ public partial class AccountView
     private readonly Gtk.ScrolledWindow _scrollTransactions;
     private readonly Adw.StatusPage _statusPageNoTransactions;
     private readonly Gtk.Box _boxMain;
+    private readonly Adw.Bin _binSpinner;
+    private readonly Gtk.Spinner _spinner;
+    private readonly Gtk.Overlay _overlayLoading;
     private readonly Gtk.Overlay _overlayMain;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
@@ -125,13 +132,15 @@ public partial class AccountView
         _controller = controller;
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
-        _isFirstTimeLoading = true;
         _isAccountLoading = false;
-        _groupRows = new List<GroupRow>();
-        _transactionRows = new List<TransactionRow>();
         _updateSubtitle = updateSubtitle;
         //Register Controller Events
-        _controller.AccountInfoChanged += OnAccountInfoChanged;
+        _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
+        _controller.UICreateGroupRow = CreateGroupRow;
+        _controller.UIDeleteGroupRow = DeleteGroupRow;
+        _controller.UICreateTransactionRow = CreateTransactionRow;
+        _controller.UIMoveTransactionRow = MoveTransactionRow;
+        _controller.UIDeleteTransactionRow = DeleteTransactionRow;
         //Flap
         _flap = Adw.Flap.New();
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -415,11 +424,16 @@ public partial class AccountView
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         _grpTransactions.SetHeaderSuffix(_boxSort);
+        _grpTransactions.SetMarginTop(10);
+        _grpTransactions.SetMarginStart(10);
+        _grpTransactions.SetMarginEnd(10);
         //Transactions Flow Box
         _flowBox = Gtk.FlowBox.New();
         _flowBox.SetHomogeneous(true);
         _flowBox.SetColumnSpacing(10);
         _flowBox.SetRowSpacing(10);
+        _flowBox.SetMarginStart(10);
+        _flowBox.SetMarginEnd(10);
         _flowBox.SetMarginBottom(60);
         _flowBox.SetHalign(Gtk.Align.Fill);
         _flowBox.SetValign(Gtk.Align.Start);
@@ -442,18 +456,32 @@ public partial class AccountView
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
         _boxMain.SetVexpand(true);
-        _boxMain.SetMarginTop(10);
-        _boxMain.SetMarginStart(10);
-        _boxMain.SetMarginEnd(10);
         _boxMain.Append(_grpTransactions);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
+        //Spinner Box
+        _binSpinner = Adw.Bin.New();
+        _binSpinner.SetHexpand(true);
+        _binSpinner.SetVexpand(true);
+        //Spinner
+        _spinner = Gtk.Spinner.New();
+        _spinner.SetSizeRequest(48, 48);
+        _spinner.SetHalign(Gtk.Align.Center);
+        _spinner.SetValign(Gtk.Align.Center);
+        _spinner.SetHexpand(true);
+        _spinner.SetVexpand(true);
+        _binSpinner.SetChild(_spinner);
+        //Loading Overlay
+        _overlayLoading = Gtk.Overlay.New();
+        _overlayLoading.SetVexpand(true);
+        _overlayLoading.AddOverlay(_binSpinner);
+        _flap.SetContent(_overlayLoading);
         //Main Overlay
         _overlayMain = Gtk.Overlay.New();
         _overlayMain.SetVexpand(true);
         _overlayMain.SetChild(_boxMain);
         _overlayMain.AddOverlay(_btnNewTransaction);
-        _flap.SetContent(_overlayMain);
+        _overlayLoading.SetChild(_overlayMain);
         //Tab Page
         Page = parentTabView.Append(_flap);
         Page.SetTitle(_controller.AccountTitle);
@@ -508,20 +536,121 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        OnAccountInfoChanged(null, EventArgs.Empty);
+        _parentWindow.OnWidthChanged();
     }
 
-    private async void OnAccountInfoChanged(object? sender, EventArgs e)
+    /// <summary>
+    /// Creates a group row and adds it to the view
+    /// </summary>
+    /// <param name="group">The Group model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IGroupRowControl</returns>
+    private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        if(_isFirstTimeLoading)
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        row.EditTriggered += EditGroup;
+        row.DeleteTriggered += DeleteGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        row.SetVisible(!_btnToggleGroups.GetActive());
+        if(index != null)
         {
-            _isFirstTimeLoading = false;
-            if(_controller.AccountNeedsFirstTimeSetup)
-            {
-                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-            }
-            await _controller.SyncRepeatTransactionsAsync();
+            row.InsertBefore(_grpGroups, (GroupRow)_controller.GetUIGroupRowFromIndex(index.Value));
         }
+        else
+        {
+            _grpGroups.Add(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Removes a group row from the view
+    /// </summary>
+    /// <param name="row">The IGroupRowControl</param>
+    private void DeleteGroupRow(IGroupRowControl row) => _grpGroups.Remove((GroupRow)row);
+
+    /// <summary>
+    /// Creates a transaction row and adds it to the view
+    /// </summary>
+    /// <param name="transaction">The Transaction model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IModelRowControl<Transaction></returns>
+    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
+    {
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
+        row.EditTriggered += EditTransaction;
+        row.DeleteTriggered += DeleteTransaction;
+        row.IsSmall = _parentWindow.DefaultWidth < 450;
+        if(index != null)
+        {
+            _flowBox.Insert(row, index.Value);
+            g_main_context_iteration(g_main_context_default(), false);
+            row.Container = _flowBox.GetChildAtIndex(index.Value);
+        }
+        else
+        {
+            _flowBox.Append(row);
+            g_main_context_iteration(g_main_context_default(), false);
+            row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Moves a row in the list
+    /// </summary>
+    /// <param name="row">The row to move</param>
+    /// <param name="index">The new position</param>
+    private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
+    {
+        var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
+        _flowBox.Remove(((TransactionRow)row).Container!);
+        _flowBox.Insert(((TransactionRow)row).Container!, index);
+        ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
+        if(oldVisisbility)
+        {
+            row.Show();
+        }
+        else
+        {
+            row.Hide();
+        }
+    }
+
+    /// <summary>
+    /// Removes a transaction row from the view
+    /// </summary>
+    /// <param name="row">The IModelRowControl<Transaction></param>
+    private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
+
+    public async void Startup()
+    {
+        if (_controller.AccountNeedsFirstTimeSetup)
+        {
+            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+        }
+        //Start Spinner
+        _statusPageNoTransactions.SetVisible(false);
+        _scrollTransactions.SetVisible(true);
+        _overlayMain.SetOpacity(0.0);
+        _binSpinner.SetVisible(true);
+        _spinner.Start();
+        _scrollPane.SetSensitive(false);
+        //Work
+        await _controller.StartupAsync();
+        for(var i = 0; i < _controller.TransactionRows.Count; i++)
+        {
+            ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
+        }
+        //Stop Spinner
+        _spinner.Stop();
+        _binSpinner.SetVisible(false);
+        _overlayMain.SetOpacity(1.0);
+        _scrollPane.SetSensitive(true);
+    }
+
+    private void OnAccountTransactionsChanged(object? sender, EventArgs e)
+    {
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
@@ -531,52 +660,14 @@ public partial class AccountView
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
             _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
-            //Groups
-            foreach (var groupRow in _groupRows)
-            {
-                _grpGroups.Remove(groupRow);
-            }
-            _groupRows = new List<GroupRow>();
-            //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-            ungroupedRow.FilterChanged += UpdateGroupFilter;
-            ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
-            _grpGroups.Add(ungroupedRow);
-            _groupRows.Add(ungroupedRow);
-            //Other Group Rows
-            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
-            foreach (var group in groups)
-            {
-                var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                row.EditTriggered += EditGroup;
-                row.DeleteTriggered += DeleteGroup;
-                row.FilterChanged += UpdateGroupFilter;
-                row.SetVisible(!_btnToggleGroups.GetActive());
-                _grpGroups.Add(row);
-                _groupRows.Add(row);
-            }
             //Transactions
-            foreach (var transactionRow in _transactionRows)
+            if (_controller.TransactionsCount > 0)
             {
-                _flowBox.Remove(transactionRow);
-            }
-            _transactionRows = new List<TransactionRow>();
-            if (_controller.Transactions.Count > 0)
-            {
-                var filteredTransactions = _controller.FilteredTransactions;
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
-                if (filteredTransactions.Count > 0)
+                if (_controller.HasFilteredTransactions)
                 {
                     _statusPageNoTransactions.SetVisible(false);
                     _scrollTransactions.SetVisible(true);
-                    foreach (var transaction in filteredTransactions)
-                    {
-                        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
-                        row.EditTriggered += EditTransaction;
-                        row.DeleteTriggered += DeleteTransaction;
-                        _flowBox.Append(row);
-                        _transactionRows.Add(row);
-                    }
                 }
                 else
                 {
@@ -594,7 +685,6 @@ public partial class AccountView
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
             }
-            _parentWindow.OnWidthChanged();
             _isAccountLoading = false;
         }
     }
@@ -689,7 +779,21 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath();
-                await _controller.ImportFromFileAsync(path ?? "");
+                openFileDialog.Hide();
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
             }
         };
         openFileDialog.Show();
@@ -712,7 +816,6 @@ public partial class AccountView
         if(transactionDialog.Run())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -756,7 +859,6 @@ public partial class AccountView
             {
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
             }
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -823,7 +925,7 @@ public partial class AccountView
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id == 0 ? -1 : (int)e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
@@ -842,7 +944,7 @@ public partial class AccountView
             _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
             _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
         }
-        foreach(var groupRow in _groupRows)
+        foreach(GroupRow groupRow in _controller.GroupRows.Values)
         {
             groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
@@ -853,11 +955,11 @@ public partial class AccountView
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
-        foreach(var pair in _controller.Transactions)
+        foreach(var date in _controller.DatesInAccount)
         {
-            if(pair.Value.Date.Month == g_date_time_get_month(ref selectedDay) && pair.Value.Date.Year == g_date_time_get_year(ref selectedDay))
+            if(date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
             {
-                _calendar.MarkDay((uint)pair.Value.Date.Day);
+                _calendar.MarkDay((uint)date.Day);
             }
         }
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
@@ -951,9 +1053,10 @@ public partial class AccountView
 
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
-        foreach(var row in _transactionRows)
+        foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
+            g_main_context_iteration(g_main_context_default(), false);
         }
     }
 }

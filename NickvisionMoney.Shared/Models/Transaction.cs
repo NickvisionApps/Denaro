@@ -1,6 +1,6 @@
 ﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
-using System.Transactions;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -33,6 +33,7 @@ public enum TransactionRepeatInterval
 /// </summary>
 public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IEquatable<Transaction>
 {
+    private bool _disposed;
     private int _groupId;
 
     /// <summary>
@@ -82,6 +83,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <param name="id">The id of the transaction</param>
     public Transaction(uint id = 0)
     {
+        _disposed = false;
         Id = id;
         Date = DateOnly.FromDateTime(DateTime.Today);
         Description = "";
@@ -125,8 +127,9 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Type = Type,
             RepeatInterval = RepeatInterval,
             Amount = Amount,
+            GroupId = GroupId,
             RGBA = RGBA,
-            Receipt = Receipt,
+            Receipt = Receipt != null ? Receipt.Clone((x) => { }) : null,
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate
         };
@@ -161,7 +164,27 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <summary>
     /// Frees resources used by the Transaction object
     /// </summary>
-    public void Dispose() => Receipt?.Dispose();
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(_disposed)
+        {
+            return;
+        }
+        if(disposing)
+        {
+            Receipt?.Dispose();
+        }
+        _disposed = true;
+    }
 
     /// <summary>
     /// Gets whether or not an object is equal to this Transaction
@@ -182,7 +205,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     /// <param name="obj">The Transaction? object to compare</param>
     /// <returns>True if equals, else false</returns>
-    public bool Equals(Transaction? obj) => Equals(obj);
+    public bool Equals(Transaction? obj) => Equals((object?)obj);
 
     /// <summary>
     /// Compares two Transaction objects by ==

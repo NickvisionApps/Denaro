@@ -144,7 +144,7 @@ This project contains all of the code used by all platforms of the app.
 
 #### NickvisionMoney.GNOME
 
-This project contains all of the code used for the GNOME platform version of the app, including flathub manifests and desktop files.
+This project contains all of the code used for the GNOME platform version of the app, including flathub manifest and desktop files.
 Powered by the C# bindings for GTK4/Libadwaita: [gir.core](https://github.com/gircore/gir.core)
 - Views => The views (pages, windows, dialogs) of the app that connect to the shared controllers
 - Controls => Generic controls for the app
@@ -171,9 +171,8 @@ Although, any IDE that supports .NET 7 and WindowsAppSDK should work.
 
 Recommended IDE:
 - Builder 43 and up.
- - Use Denaro's [gnome-builder-manifest](https://github.com/nlogozzo/NickvisionMoney/blob/main/NickvisionMoney.GNOME/org.nickvision.money-gnomebuilder.json) when running the application through builder
 
-You may also make your changes via any code editor and use `flatpak-builder` with Denaro's [flatpak-manifest](https://github.com/nlogozzo/NickvisionMoney/blob/main/NickvisionMoney.GNOME/org.nickvision.money.json) to run the application locally through flatpak.
+You may also make your changes via any code editor and use `flatpak-builder` to run the application locally through flatpak.
 
 You may also simply install .NET 7 locally and use dotnet's CLI to run the application.
 

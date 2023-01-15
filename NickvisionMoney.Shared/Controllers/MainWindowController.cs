@@ -11,8 +11,10 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// A controller for a MainWindow
 /// </summary>
-public class MainWindowController
+public class MainWindowController : IDisposable
 {
+    private bool _disposed;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -61,6 +63,7 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
+        _disposed = false;
         OpenAccounts = new List<AccountViewController>();
         Localizer = new Localizer();
     }
@@ -109,6 +112,31 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            Localizer.Dispose();
+        }
+        _disposed = true;
+    }
+
+    /// <summary>
     /// Gets a color for an account type
     /// </summary>
     /// <param name="accountType">The account type</param>
@@ -153,8 +181,8 @@ public class MainWindowController
                 Type = controller.AccountType
             });
             Configuration.Current.Save();
-            AccountAdded?.Invoke(this, EventArgs.Empty);
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+            AccountAdded?.Invoke(this, EventArgs.Empty);
         }
         else
         {

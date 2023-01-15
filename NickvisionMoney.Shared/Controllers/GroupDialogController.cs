@@ -49,6 +49,20 @@ public class GroupDialogController
     }
 
     /// <summary>
+    /// Creates a GroupDialogController
+    /// </summary>
+    /// <param name="id">The id of the new group</param>
+    /// <param name="existingNames">The list of existing group names</param>
+    /// <param name="localizer">The Localizer of the app</param>
+    internal GroupDialogController(uint id, List<string> existingNames, Localizer localizer)
+    {
+        _existingNames = existingNames;
+        Localizer = localizer;
+        Group = new Group(id);
+        Accepted = false;
+    }
+
+    /// <summary>
     /// Updates the Group object
     /// </summary>
     /// <param name="name">The new name for the group</param>

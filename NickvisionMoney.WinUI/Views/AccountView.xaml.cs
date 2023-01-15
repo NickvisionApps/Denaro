@@ -1,9 +1,11 @@
+using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
@@ -11,6 +13,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -71,7 +74,12 @@ public sealed partial class AccountView : UserControl
         ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
         ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
-        _controller.AccountInfoChanged += AccountInfoChanged;
+        _controller.AccountTransactionsChanged += AccountTransactionsChanged;
+        _controller.UICreateGroupRow = CreateGroupRow;
+        _controller.UIDeleteGroupRow = DeleteGroupRow;
+        _controller.UICreateTransactionRow = CreateTransactionRow;
+        _controller.UIMoveTransactionRow = MoveTransactionRow;
+        _controller.UIDeleteTransactionRow = DeleteTransactionRow;
         //Load UI
         DateRangeStart.Date = DateTimeOffset.Now;
         DateRangeEnd.Date = DateTimeOffset.Now;
@@ -101,6 +109,93 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
+    /// Creates a group row and adds it to the view
+    /// </summary>
+    /// <param name="group">The Group model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IGroupRowControl</returns>
+    private IGroupRowControl CreateGroupRow(Group group, int? index)
+    {
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        row.EditTriggered += EditGroup;
+        row.DeleteTriggered += DeleteGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        if(index != null)
+        {
+            ListGroups.Items.Insert(index.Value, row);
+        }
+        else
+        {
+            ListGroups.Items.Add(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Removes a group row from the view
+    /// </summary>
+    /// <param name="row">The IGroupRowControl</param>
+    private void DeleteGroupRow(IGroupRowControl row) => ListGroups.Items.Remove(row);
+
+    /// <summary>
+    /// Creates a transaction row and adds it to the view
+    /// </summary>
+    /// <param name="transaction">The Transaction model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IModelRowControl<Transaction></returns>
+    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
+    {
+        ViewStackTransactions.ChangePage("Transactions");
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+        row.EditTriggered += EditTransaction;
+        row.DeleteTriggered += DeleteTransaction;
+        if (index != null)
+        {
+            ListTransactions.Items.Insert(index.Value, row);
+            ListTransactions.UpdateLayout();
+            row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(index.Value);
+        }
+        else
+        {
+            ListTransactions.Items.Add(row);
+            ListTransactions.UpdateLayout();
+            row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(ListTransactions.Items.Count - 1);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Moves a row in the list
+    /// </summary>
+    /// <param name="row">The row to move</param>
+    /// <param name="index">The new position</param>
+    private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
+    {
+        if (ListTransactions.Items[index] != row)
+        {
+            var oldVisibility = ((GridViewItem)ListTransactions.ContainerFromItem(row)).Visibility;
+            ListTransactions.Items.Remove(row);
+            ListTransactions.Items.Insert(index, row);
+            ListTransactions.UpdateLayout();
+            ((TransactionRow)row).Container = (GridViewItem)ListTransactions.ContainerFromIndex(index);
+            if(oldVisibility == Visibility.Visible)
+            {
+                row.Show();
+            }
+            else
+            {
+                row.Hide();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes a transaction row from the view
+    /// </summary>
+    /// <param name="row">The IModelRowControl<Transaction></param>
+    private void DeleteTransactionRow(IModelRowControl<Transaction> row) => ListTransactions.Items.Remove(row);
+
+    /// <summary>
     /// Occurs when the page is loaded
     /// </summary>
     /// <param name="sender"></param>
@@ -111,18 +206,34 @@ public sealed partial class AccountView : UserControl
         {
             AccountSettings(null, new RoutedEventArgs());
         }
-        if(!(await _controller.SyncRepeatTransactionsAsync()))
+        //Start Loading
+        CmdBar.IsEnabled = false;
+        ScrollSidebar.IsEnabled = false;
+        ViewStackTransactions.IsEnabled = false;
+        LoadingCtrl.IsLoading = true;
+        //Work
+        await Task.Run(async () =>
         {
-            AccountInfoChanged(null, EventArgs.Empty);
+            await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.StartupAsync());
+        });
+        ListTransactions.UpdateLayout();
+        for (var i = 0; i < ListTransactions.Items.Count; i++)
+        {
+            ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
         }
+        //Done Loading
+        CmdBar.IsEnabled = true;
+        ScrollSidebar.IsEnabled = true;
+        ViewStackTransactions.IsEnabled = true;
+        LoadingCtrl.IsLoading = false;
     }
 
     /// <summary>
-    /// Occurs when the account information is changed
+    /// Occurs when the account's transactions are changed
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void AccountInfoChanged(object? sender, EventArgs e)
+    private void AccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
         {
@@ -135,26 +246,8 @@ public sealed partial class AccountView : UserControl
             LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
             LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
             LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
-            //Groups
-            var groupRows = new List<GroupRow>();
-            //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-            ungroupedRow.FilterChanged += (sender, e) => _controller?.UpdateFilterValue(-1, e.Filter);
-            groupRows.Add(ungroupedRow);
-            //Other Group Rows
-            var groups = _controller.Groups.Values.OrderBy(g => g.Name);
-            foreach (var group in groups)
-            {
-                var groupRow = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                groupRow.EditTriggered += EditGroup;
-                groupRow.DeleteTriggered += DeleteGroup;
-                groupRow.FilterChanged += UpdateGroupFilter;
-                groupRows.Add(groupRow);
-            }
-            ListGroups.ItemsSource = groupRows;
-            //Transactions
-            var transactionRows = new List<TransactionRow>();
-            if (_controller.Transactions.Count > 0)
+            ///Transactions
+            if (_controller.TransactionsCount > 0)
             {
                 //Highlight Days
                 var datesInAccount = _controller.DatesInAccount;
@@ -170,17 +263,9 @@ public sealed partial class AccountView : UserControl
                         displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                     }
                 }
-                var filteredTransactions = _controller.FilteredTransactions;
-                if (filteredTransactions.Count > 0)
+                //Transaction Page
+                if (_controller.HasFilteredTransactions)
                 {
-                    foreach (var transaction in filteredTransactions)
-                    {
-                        var transactionRow = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
-                        transactionRow.EditTriggered += EditTransaction;
-                        transactionRow.DeleteTriggered += DeleteTransaction;
-                        transactionRows.Add(transactionRow);
-                    }
-                    ListTransactions.ItemsSource = transactionRows;
                     ViewStackTransactions.ChangePage("Transactions");
                 }
                 else
@@ -191,6 +276,7 @@ public sealed partial class AccountView : UserControl
                     StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
                 }
             }
+            //No Transactions
             else
             {
                 ViewStackTransactions.ChangePage("NoTransactions");
@@ -217,7 +303,6 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             await _controller.AddTransactionAsync(transactionController.Transaction);
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -283,7 +368,6 @@ public sealed partial class AccountView : UserControl
             {
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
             }
-            await _controller.SyncRepeatTransactionsAsync();
         }
     }
 
@@ -393,7 +477,7 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (int Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id == 0 ? -1 : (int)e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the transfer money button is clicked
@@ -436,7 +520,21 @@ public sealed partial class AccountView : UserControl
         var file = await fileOpenPicker.PickSingleFileAsync();
         if (file != null)
         {
-            await _controller.ImportFromFileAsync(file.Path);
+            //Start Loading
+            CmdBar.IsEnabled = false;
+            ScrollSidebar.IsEnabled = false;
+            ViewStackTransactions.IsEnabled = false;
+            LoadingCtrl.IsLoading = true;
+            //Work
+            await Task.Run(async () =>
+            {
+                await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.ImportFromFileAsync(file.Path));
+            });
+            //Done Loading
+            CmdBar.IsEnabled = true;
+            ScrollSidebar.IsEnabled = true;
+            ViewStackTransactions.IsEnabled = true;
+            LoadingCtrl.IsLoading = false;
         }
     }
 
@@ -562,14 +660,14 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-3, ChkFilterIncome.IsChecked ?? false));
+    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, ChkFilterIncome.IsChecked ?? false);
 
     /// <summary>
     /// Occurs when the expense filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => UpdateGroupFilter(this, (-2, ChkFilterExpense.IsChecked ?? false));
+    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, ChkFilterExpense.IsChecked ?? false);
 
     /// <summary>
     /// Occurs when the calendar's selected date is changed
@@ -608,10 +706,7 @@ public sealed partial class AccountView : UserControl
         if(ListGroups.SelectedIndex != -1)
         {
             var groupRow = (GroupRow)ListGroups.SelectedItem;
-            if(groupRow.Id != 0)
-            {
-                EditGroup(null, groupRow.Id);
-            }
+            groupRow.Edit(this, new RoutedEventArgs());
             ListGroups.SelectedIndex = -1;
         }
     }
@@ -626,10 +721,7 @@ public sealed partial class AccountView : UserControl
         if (ListTransactions.SelectedIndex != -1)
         {
             var transactionRow = (TransactionRow)ListTransactions.SelectedItem;
-            if(transactionRow.RepeatFrom <= 0)
-            {
-                EditTransaction(null, transactionRow.Id);
-            }
+            transactionRow.Edit(this, new RoutedEventArgs());
             ListTransactions.SelectedIndex = -1;
         }
     }

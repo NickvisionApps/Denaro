@@ -22,6 +22,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
+    private bool _disposed;
     private readonly SqliteConnection _database;
 
     /// <summary>
@@ -72,13 +73,14 @@ public class Account : IDisposable
     /// <param name="path">The path of the account</param>
     public Account(string path)
     {
+        _disposed = false;
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         NeedsFirstTimeSetup = true;
-        NextAvailableGroupId = 1;
-        NextAvailableTransactionId = 1;
+        NextAvailableGroupId = 0;
+        NextAvailableTransactionId = 0;
         TodayIncome = 0;
         TodayExpense = 0;
         //Open Database
@@ -89,61 +91,61 @@ public class Account : IDisposable
         }.ConnectionString);
         _database.Open();
         //Setup Metadata Table
-        var cmdTableMetadata = _database.CreateCommand();
+        using var cmdTableMetadata = _database.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
-            var cmdTableMetadataUpdate1 = _database.CreateCommand();
+            using var cmdTableMetadataUpdate1 = _database.CreateCommand();
             cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
             cmdTableMetadataUpdate1.ExecuteNonQuery();
         }
         catch { }
         //Setup Groups Table
-        var cmdTableGroups = _database.CreateCommand();
+        using var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
-        var cmdTableTransactions = _database.CreateCommand();
+        using var cmdTableTransactions = _database.CreateCommand();
         cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
-            var cmdTableTransactionsUpdate1 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate1 = _database.CreateCommand();
             cmdTableTransactionsUpdate1.CommandText = "ALTER TABLE transactions ADD COLUMN gid INTEGER";
             cmdTableTransactionsUpdate1.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate2 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate2 = _database.CreateCommand();
             cmdTableTransactionsUpdate2.CommandText = "ALTER TABLE transactions ADD COLUMN rgba TEXT";
             cmdTableTransactionsUpdate2.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate3 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate3 = _database.CreateCommand();
             cmdTableTransactionsUpdate3.CommandText = "ALTER TABLE transactions ADD COLUMN receipt TEXT";
             cmdTableTransactionsUpdate3.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate4 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate4 = _database.CreateCommand();
             cmdTableTransactionsUpdate4.CommandText = "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER";
             cmdTableTransactionsUpdate4.ExecuteNonQuery();
         }
         catch { }
         try
         {
-            var cmdTableTransactionsUpdate5 = _database.CreateCommand();
+            using var cmdTableTransactionsUpdate5 = _database.CreateCommand();
             cmdTableTransactionsUpdate5.CommandText = "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT";
             cmdTableTransactionsUpdate5.ExecuteNonQuery();
         }
         catch { }
         //Get Metadata
-        var cmdQueryMetadata = _database.CreateCommand();
+        using var cmdQueryMetadata = _database.CreateCommand();
         cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
         using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
         if(readQueryMetadata.HasRows)
@@ -162,7 +164,7 @@ public class Account : IDisposable
         }
         else
         {
-            var cmdAddMetadata = _database.CreateCommand();
+            using var cmdAddMetadata = _database.CreateCommand();
             cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
@@ -176,7 +178,14 @@ public class Account : IDisposable
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
-        var cmdQueryGroups = _database.CreateCommand();
+        using var localizer = new Localizer();
+        Groups.Add(0, new Group(0)
+        {
+            Name = localizer["Ungrouped"],
+            Description = localizer["UngroupedDescription"],
+            Balance = 0u
+        });
+        using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
         while(readQueryGroups.Read())
@@ -192,10 +201,14 @@ public class Account : IDisposable
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
-            NextAvailableGroupId++;
+            if(group.Id > NextAvailableGroupId)
+            {
+                NextAvailableGroupId = group.Id;
+            }
         }
+        NextAvailableGroupId++;
         //Get Transactions
-        var cmdQueryTransactions = _database.CreateCommand();
+        using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
         using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
         while(readQueryTransactions.Read())
@@ -224,10 +237,8 @@ public class Account : IDisposable
             Transactions.Add(transaction.Id, transaction);
             if(transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if(transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -237,8 +248,12 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            NextAvailableTransactionId++;
+            if(transaction.Id > NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId = transaction.Id;
+            }
         }
+        NextAvailableTransactionId++;
     }
 
     /// <summary>
@@ -246,11 +261,29 @@ public class Account : IDisposable
     /// </summary>
     public void Dispose()
     {
-        _database.Dispose();
-        foreach(var pair in Transactions)
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(_disposed)
         {
-            pair.Value.Dispose();
+            return;
         }
+        if(disposing)
+        {
+            _database.Close();
+            _database.Dispose();
+            foreach (var pair in Transactions)
+            {
+                pair.Value.Dispose();
+            }
+        }
+        _disposed = true;
     }
 
     /// <summary>
@@ -345,7 +378,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool UpdateMetadata(AccountMetadata metadata)
     {
-        var cmdUpdateMetadata = _database.CreateCommand();
+        using var cmdUpdateMetadata = _database.CreateCommand();
         cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
@@ -469,7 +502,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddGroupAsync(Group group)
     {
-        var cmdAddGroup = _database.CreateCommand();
+        using var cmdAddGroup = _database.CreateCommand();
         cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description) VALUES ($id, $name, $description)";
         cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
         cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
@@ -490,7 +523,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateGroupAsync(Group group)
     {
-        var cmdUpdateGroup = _database.CreateCommand();
+        using var cmdUpdateGroup = _database.CreateCommand();
         cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description WHERE id = $id";
         cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
         cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
@@ -510,12 +543,16 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteGroupAsync(uint id)
     {
-        var cmdDeleteGroup = _database.CreateCommand();
+        using var cmdDeleteGroup = _database.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Remove(id);
+            if (id + 1 == NextAvailableGroupId)
+            {
+                NextAvailableGroupId--;
+            }
             foreach (var pair in Transactions)
             {
                 if (pair.Value.GroupId == id)
@@ -523,10 +560,6 @@ public class Account : IDisposable
                     pair.Value.GroupId = -1;
                     await UpdateTransactionAsync(pair.Value);
                 }
-            }
-            if(id + 1 == NextAvailableGroupId)
-            {
-                NextAvailableGroupId--;
             }
             return true;
         }
@@ -540,7 +573,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
-        var cmdAddTransaction = _database.CreateCommand();
+        using var cmdAddTransaction = _database.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -565,12 +598,11 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
+            NextAvailableTransactionId++;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -580,7 +612,10 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            NextAvailableTransactionId++;
+            if(transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
+            {
+                await SyncRepeatTransactionsAsync();
+            }    
             return true;
         }
         return false;
@@ -593,7 +628,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
-        var cmdUpdateTransaction = _database.CreateCommand();
+        using var cmdUpdateTransaction = _database.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -620,10 +655,8 @@ public class Account : IDisposable
             var oldTransaction = Transactions[transaction.Id];
             if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (oldTransaction.GroupId != -1)
-                {
-                    Groups[(uint)oldTransaction.GroupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
-                }
+                var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
+                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
                 if (oldTransaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= oldTransaction.Amount;
@@ -633,13 +666,12 @@ public class Account : IDisposable
                     TodayExpense -= oldTransaction.Amount;
                 }
             }
+            Transactions[transaction.Id].Dispose();
             Transactions[transaction.Id] = transaction;
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -648,6 +680,10 @@ public class Account : IDisposable
                 {
                     TodayExpense += transaction.Amount;
                 }
+            }
+            if(transaction.RepeatFrom == 0)
+            {
+                await SyncRepeatTransactionsAsync();
             }
             return true;
         }
@@ -664,7 +700,6 @@ public class Account : IDisposable
         var transactions = Transactions.Values.ToList();
         if (updateGenerated)
         {
-            await UpdateTransactionAsync(transaction);
             foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
@@ -679,10 +714,10 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(t);
                 }
             }
+            await UpdateTransactionAsync(transaction);
         }
         else
         {
-            await UpdateTransactionAsync(transaction);
             foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
@@ -693,6 +728,7 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(t);
                 }
             }
+            await UpdateTransactionAsync(transaction);
         }
     }
 
@@ -703,7 +739,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteTransactionAsync(uint id)
     {
-        var cmdDeleteTransaction = _database.CreateCommand();
+        using var cmdDeleteTransaction = _database.CreateCommand();
         cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
         cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
@@ -711,10 +747,8 @@ public class Account : IDisposable
             var transaction = Transactions[id];
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
-                if (transaction.GroupId != -1)
-                {
-                    Groups[(uint)transaction.GroupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                }
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= transaction.Amount;
@@ -724,6 +758,7 @@ public class Account : IDisposable
                     TodayExpense -= transaction.Amount;
                 }
             }
+            Transactions[id].Dispose();
             Transactions.Remove(id);
             if (id + 1 == NextAvailableTransactionId)
             {
@@ -790,7 +825,8 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transfer">The transfer to send</param>
     /// <param name="description">The description for the new transaction</param>
-    public async Task SendTransferAsync(Transfer transfer, string description)
+    /// <returns>The new transaction created</returns>
+    public async Task<Transaction> SendTransferAsync(Transfer transfer, string description)
     {
         var transaction = new Transaction(NextAvailableTransactionId)
         {
@@ -800,6 +836,7 @@ public class Account : IDisposable
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
+        return transaction;
     }
 
     /// <summary>
@@ -807,8 +844,8 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transfer"></param>
     /// <param name="description"></param>
-    /// <returns></returns>
-    public async Task ReceiveTransferAsync(Transfer transfer, string description)
+    /// <returns>The new transaction created</returns>
+    public async Task<Transaction> ReceiveTransferAsync(Transfer transfer, string description)
     {
         var transaction = new Transaction(NextAvailableTransactionId)
         {
@@ -818,18 +855,20 @@ public class Account : IDisposable
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
+        return transaction;
     }
 
     /// <summary>
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    public async Task<int> ImportFromFileAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    public async Task<List<uint>> ImportFromFileAsync(string path)
     {
+        var ids = new List<uint>();
         if(!System.IO.Path.Exists(path))
         {
-            return -1;
+            return ids;
         }
         var extension = System.IO.Path.GetExtension(path);
         if(extension == ".csv")
@@ -844,7 +883,7 @@ public class Account : IDisposable
         {
             return await ImportFromQIFAsync(path);
         }
-        return -1;
+        return ids;
     }
 
     /// <summary>
@@ -907,7 +946,7 @@ public class Account : IDisposable
     {
         try
         {
-            var localizer = new Localizer();
+            using var localizer = new Localizer();
             var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
@@ -1156,10 +1195,10 @@ public class Account : IDisposable
     /// Imports transactions from a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromCSVAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromCSVAsync(string path)
     {
-        var imported = 0;
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1167,7 +1206,7 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
         foreach (var line in lines)
         {
@@ -1289,18 +1328,29 @@ public class Account : IDisposable
                 RepeatEndDate = repeatEndDate
             };
             await AddTransactionAsync(transaction);
-            imported++;
+            ids.Add(transaction.Id);
+            if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            {
+                foreach(var pair in Transactions)
+                {
+                    if(pair.Value.RepeatFrom == transaction.Id)
+                    {
+                        ids.Add(pair.Value.Id);
+                    }
+                }
+            }
         }
-        return imported;
+        return ids;
     }
 
     /// <summary>
     /// Imports transactions from an OFX file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromOFXAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromOFXAsync(string path)
     {
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1308,9 +1358,8 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
-        var imported = 0;
         var nextId = NextAvailableTransactionId;
         var xmlTagRegex = new Regex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
         var transaction = default(Transaction);
@@ -1332,7 +1381,7 @@ public class Account : IDisposable
                     if (!skipTransaction)
                     {
                         await AddTransactionAsync(transaction);
-                        imported++;
+                        ids.Add(transaction.Id);
                     }
                     skipTransaction = false;
                     transaction = null;
@@ -1397,16 +1446,17 @@ public class Account : IDisposable
                 }
             }
         }
-        return imported;
+        return ids;
     }
 
     /// <summary>
     /// Imports transactions from a QIF file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <returns>The number of transactions imported. -1 for error</returns>
-    private async Task<int> ImportFromQIFAsync(string path)
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromQIFAsync(string path)
     {
+        var ids = new List<uint>();
         string[]? lines;
         try
         {
@@ -1414,9 +1464,8 @@ public class Account : IDisposable
         }
         catch
         {
-            return -1;
+            return ids;
         }
-        var imported = 0;
         var nextId = NextAvailableTransactionId;
         var transaction = new Transaction(nextId);
         var skipTransaction = false;
@@ -1437,7 +1486,7 @@ public class Account : IDisposable
                 if(!skipTransaction)
                 {
                     await AddTransactionAsync(transaction);
-                    imported++;
+                    ids.Add(transaction.Id);
                 }
                 skipTransaction = false;
                 nextId++;
@@ -1479,6 +1528,6 @@ public class Account : IDisposable
                 transaction.Description = line.Substring(1);
             }
         }
-        return imported;
+        return ids;
     }
 }

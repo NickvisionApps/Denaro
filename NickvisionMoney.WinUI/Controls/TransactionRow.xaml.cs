@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
@@ -13,18 +14,21 @@ namespace NickvisionMoney.WinUI.Controls;
 /// <summary>
 /// A row to display a Transaction model
 /// </summary>
-public sealed partial class TransactionRow : UserControl
+public sealed partial class TransactionRow : UserControl, IModelRowControl<Transaction>
 {
-    private readonly Transaction _transaction;
+    private CultureInfo _culture;
+    private Color _defaultColor;
+    private Localizer _localizer;
+    private int _repeatFrom;
 
     /// <summary>
     /// The Id of the Transaction the row represents
     /// </summary>
-    public uint Id => _transaction.Id;
+    public uint Id { get; private set; }
     /// <summary>
-    /// The RepeatFrom GroupId of the Transaction the row represents
+    /// The GridViewItem container of this row
     /// </summary>
-    public int RepeatFrom => _transaction.RepeatFrom;
+    public GridViewItem? Container { private get; set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
@@ -45,33 +49,50 @@ public sealed partial class TransactionRow : UserControl
     public TransactionRow(Transaction transaction, CultureInfo culture, Color defaultColor, Localizer localizer)
     {
         InitializeComponent();
-        _transaction = transaction;
+        _culture = culture;
+        _defaultColor = defaultColor;
+        _localizer = localizer;
+        _repeatFrom = 0;
         //Localize Strings
-        MenuEdit.Text = localizer["Edit", "TransactionRow"];
-        MenuDelete.Text = localizer["Delete", "TransactionRow"];
-        if(_transaction.RepeatFrom > 0)
+        MenuEdit.Text = _localizer["Edit", "TransactionRow"];
+        MenuDelete.Text = _localizer["Delete", "TransactionRow"];
+        ToolTipService.SetToolTip(BtnEdit, _localizer["Edit", "TransactionRow"]);
+        ToolTipService.SetToolTip(BtnDelete, _localizer["Delete", "TransactionRow"]);
+        UpdateRow(transaction);
+    }
+
+    /// <summary>
+    /// Shows the row
+    /// </summary>
+    public void Show() => Container!.Visibility = Visibility.Visible;
+
+    /// <summary>
+    /// Hides the row
+    /// </summary>
+    public void Hide() => Container!.Visibility = Visibility.Collapsed;
+
+    /// <summary>
+    /// Updates the row with the new model
+    /// </summary>
+    /// <param name="transaction">The new Transaction model</param>
+    public void UpdateRow(Transaction transaction)
+    {
+        Id = transaction.Id;
+        _repeatFrom = transaction.RepeatFrom;
+        MenuEdit.IsEnabled = _repeatFrom <= 0;
+        BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
+        MenuDelete.IsEnabled = _repeatFrom <= 0;
+        BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
+        BtnId.Content = transaction.Id;
+        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.RGBA) ?? _defaultColor);
+        LblName.Text = transaction.Description;
+        LblDescription.Text = transaction.Date.ToString("d");
+        if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
         {
-            MenuEdit.IsEnabled = false;
-            BtnEdit.Visibility = Visibility.Collapsed;
-            MenuDelete.IsEnabled = false;
-            BtnDelete.Visibility = Visibility.Collapsed;
+            LblDescription.Text += $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}";
         }
-        else
-        {
-            ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "TransactionRow"]);
-            ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "TransactionRow"]);
-        }
-        //Load Transaction
-        BtnId.Content = _transaction.Id;
-        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(_transaction.RGBA) ?? defaultColor);
-        LblName.Text = _transaction.Description;
-        LblDescription.Text = _transaction.Date.ToString("d");
-        if(_transaction.RepeatInterval != TransactionRepeatInterval.Never)
-        {
-            LblDescription.Text += $"\nRepeat Interval: {_transaction.RepeatInterval}";
-        }
-        LblAmount.Text = $"{(_transaction.Type == TransactionType.Income ? "+" : "-")}  {_transaction.Amount.ToString("C", culture)}";
-        LblAmount.Foreground = _transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToString("C", _culture)}";
+        LblAmount.Foreground = transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 
     /// <summary>
@@ -79,9 +100,9 @@ public sealed partial class TransactionRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Edit(object sender, RoutedEventArgs e)
+    public void Edit(object sender, RoutedEventArgs e)
     {
-        if(_transaction.RepeatFrom <= 0)
+        if(_repeatFrom <= 0)
         {
             EditTriggered?.Invoke(this, Id);
         }
@@ -94,7 +115,7 @@ public sealed partial class TransactionRow : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private void Delete(object sender, RoutedEventArgs e)
     {
-        if(_transaction.RepeatFrom <= 0)
+        if(_repeatFrom <= 0)
         {
             DeleteTriggered?.Invoke(this, Id);
         }

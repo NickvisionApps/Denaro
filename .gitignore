@@ -342,3 +342,4 @@ ASALocalRun/
 
 # Flatpak Builder
 .flatpak-builder/
+.flatpak/

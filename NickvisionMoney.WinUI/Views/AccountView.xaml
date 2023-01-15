@@ -11,7 +11,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <CommandBar HorizontalAlignment="Left" VerticalAlignment="Top" DefaultLabelPosition="Right">
+        <CommandBar x:Name="CmdBar" HorizontalAlignment="Left" VerticalAlignment="Top" DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="BtnNew">
                     <AppBarButton.Icon>
@@ -130,7 +130,7 @@
         </CommandBar>
 
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,46,6,6" LastChildFill="True">
-            <ScrollViewer wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="ScrollSidebar" wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True">
                     <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <StackPanel Spacing="12">
@@ -258,17 +258,9 @@
                                 <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <wct:WrapPanel />
+                                            <wct:WrapPanel Orientation="Horizontal"/>
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
-
-                                    <GridView.ItemContainerStyle>
-                                        <Style TargetType="GridViewItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-
-                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        </Style>
-                                    </GridView.ItemContainerStyle>
                                 </GridView>
                             </ScrollViewer>
                         </Grid>
@@ -276,5 +268,11 @@
                 </nickvision:ViewStack.Pages>
             </nickvision:ViewStack>
         </wct:DockPanel>
+
+        <wct:Loading x:Name="LoadingCtrl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsLoading="False">
+            <Grid>
+                <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" IsActive="True"/>
+            </Grid>
+        </wct:Loading>
     </Grid>
 </UserControl>

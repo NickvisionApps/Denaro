@@ -32,6 +32,8 @@ public enum TransactionCheckStatus
 /// </summary>
 public class TransactionDialogController : IDisposable
 {
+    private bool _disposed;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -80,11 +82,37 @@ public class TransactionDialogController : IDisposable
     /// <param name="localizer">The Localizer of the app</param>
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
     {
+        _disposed = false;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
         Groups = groups;
         Accepted = false;
-        OriginalRepeatInterval = transaction.RepeatInterval;
+        OriginalRepeatInterval = Transaction.RepeatInterval;
+        CultureForNumberString = culture;
+        if (Transaction.Amount == 0m) //new transaction
+        {
+            Transaction.Type = transactionDefaultType;
+            Transaction.RGBA = transactionDefaultColor;
+        }
+    }
+
+    /// <summary>
+    /// Constructs a TransactionDialogController
+    /// </summary>
+    /// <param name="id">The id of the new transaction</param>
+    /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactionDefaultType">A default type for the transaction</param>
+    /// <param name="transactionDefaultColor">A default color for the transaction</param>
+    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="localizer">The Localizer of the app</param>
+    internal TransactionDialogController(uint id, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
+    {
+        _disposed = false;
+        Localizer = localizer;
+        Transaction = new Transaction(id);
+        Groups = groups;
+        Accepted = false;
+        OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = culture;
         if (Transaction.Amount == 0m) //new transaction
         {
@@ -98,11 +126,28 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public void Dispose()
     {
-        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (File.Exists(jpgPath))
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the TransactionDialogController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
         {
-            File.Delete(jpgPath);
+            return;
         }
+        if (disposing)
+        {
+            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            if (File.Exists(jpgPath))
+            {
+                File.Delete(jpgPath);
+            }
+        }
+        _disposed = true;
     }
 
     /// <summary>
@@ -150,7 +195,10 @@ public class TransactionDialogController : IDisposable
             {
                 Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
             }
-            image.Dispose();
+        }
+        if(receiptPath != null)
+        {
+            image?.Dispose();
         }
     }
 

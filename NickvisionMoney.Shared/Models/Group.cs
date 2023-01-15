@@ -95,7 +95,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// </summary>
     /// <param name="obj">The Group? object to compare</param>
     /// <returns>True if equals, else false</returns>
-    public bool Equals(Group? obj) => Equals(obj);
+    public bool Equals(Group? obj) => Equals((object?)obj);
 
     /// <summary>
     /// Compares two Group objects by ==

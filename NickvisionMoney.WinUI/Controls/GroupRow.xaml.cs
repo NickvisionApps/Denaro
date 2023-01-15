@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -12,19 +13,19 @@ namespace NickvisionMoney.WinUI.Controls;
 /// <summary>
 /// A row to display a Group model
 /// </summary>
-public sealed partial class GroupRow : UserControl
+public sealed partial class GroupRow : UserControl, IGroupRowControl
 {
-    private readonly Group _group;
+    private CultureInfo _culture;
 
     /// <summary>
     /// The Id of the Group the row represents
     /// </summary>
-    public uint Id => _group.Id;
+    public uint Id { get; private set; }
 
     /// <summary>
     /// Occurs when the filter checkbox is changed on the row
     /// </summary>
-    public event EventHandler<(int Id, bool Filter)>? FilterChanged;
+    public event EventHandler<(uint Id, bool Filter)>? FilterChanged;
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
     /// </summary>
@@ -44,29 +45,56 @@ public sealed partial class GroupRow : UserControl
     public GroupRow(Group group, CultureInfo culture, Localizer localizer, bool filterActive)
     {
         InitializeComponent();
-        _group = group;
+        _culture = culture;
         //Localize Strings
         MenuEdit.Text = localizer["Edit", "GroupRow"];
         MenuDelete.Text = localizer["Delete", "GroupRow"];
-        if (_group.Id == 0)
+        ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
+        ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
+        UpdateRow(group, filterActive);
+    }
+
+    /// <summary>
+    /// Whether or not the filter checkbox is checked
+    /// </summary>
+    public bool FilterChecked
+    {
+        get => ChkFilter.IsChecked ?? false;
+
+        set => ChkFilter.IsChecked = value;
+    }
+
+    /// <summary>
+    /// Shows the row
+    /// </summary>
+    public void Show() => Visibility = Visibility.Visible;
+
+    /// <summary>
+    /// Hides the row
+    /// </summary>
+    public void Hide() => Visibility = Visibility.Collapsed;
+
+    /// <summary>
+    /// Updates the row with the new model
+    /// </summary>
+    /// <param name="group">The new Group model</param>
+    /// <param name="filterActive">Whether or not the filter checkbox is active</param>
+    public void UpdateRow(Group group, bool filterActive)
+    {
+        Id = group.Id;
+        if(group.Id == 0)
         {
             MenuEdit.IsEnabled = false;
             BtnEdit.Visibility = Visibility.Collapsed;
             MenuDelete.IsEnabled = false;
             BtnDelete.Visibility = Visibility.Collapsed;
         }
-        else
-        {
-            ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
-            ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
-        }
-        //Load Group
         ChkFilter.IsChecked = filterActive;
-        LblName.Text = _group.Name;
-        LblDescription.Visibility = string.IsNullOrEmpty(_group.Description) ? Visibility.Collapsed : Visibility.Visible;
-        LblDescription.Text = _group.Description;
-        LblAmount.Text = _group.Balance.ToString("C", culture);
-        LblAmount.Foreground = _group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        LblName.Text = group.Name;
+        LblDescription.Visibility = string.IsNullOrEmpty(group.Description) ? Visibility.Collapsed : Visibility.Visible;
+        LblDescription.Text = group.Description;
+        LblAmount.Text = group.Balance.ToString("C", _culture);
+        LblAmount.Foreground = group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 
     /// <summary>
@@ -74,16 +102,16 @@ public sealed partial class GroupRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterChanged(object sender, RoutedEventArgs e) => FilterChanged?.Invoke(this, ((int)Id, ChkFilter.IsChecked ?? false));
+    private void ChkFilterChanged(object sender, RoutedEventArgs e) => FilterChanged?.Invoke(this, (Id, ChkFilter.IsChecked ?? false));
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked 
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void Edit(object sender, RoutedEventArgs e)
+    public void Edit(object sender, RoutedEventArgs e)
     {
-        if(_group.Id != 0)
+        if(Id != 0)
         {
             EditTriggered?.Invoke(this, Id);
         }
@@ -96,7 +124,7 @@ public sealed partial class GroupRow : UserControl
     /// <param name="e">RoutedEventArgs</param>
     private void Delete(object sender, RoutedEventArgs e)
     {
-        if(_group.Id != 0)
+        if(Id != 0)
         {
             DeleteTriggered?.Invoke(this, Id);
         }
