@@ -79,8 +79,8 @@ public class Account : IDisposable
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         NeedsFirstTimeSetup = true;
-        NextAvailableGroupId = 1;
-        NextAvailableTransactionId = 1;
+        NextAvailableGroupId = 0;
+        NextAvailableTransactionId = 0;
         TodayIncome = 0;
         TodayExpense = 0;
         //Open Database
@@ -201,8 +201,12 @@ public class Account : IDisposable
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
-            NextAvailableGroupId++;
+            if(group.Id > NextAvailableGroupId)
+            {
+                NextAvailableGroupId = group.Id;
+            }
         }
+        NextAvailableGroupId++;
         //Get Transactions
         using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
@@ -244,8 +248,12 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            NextAvailableTransactionId++;
+            if(transaction.Id > NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId = transaction.Id;
+            }
         }
+        NextAvailableTransactionId++;
     }
 
     /// <summary>
