@@ -606,7 +606,7 @@ public partial class AccountView
     {
         var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
         _flowBox.Remove(((TransactionRow)row).Container!);
-        _flowBox.Insert((TransactionRow)row, index);
+        _flowBox.Insert(((TransactionRow)row).Container!, index);
         ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
         if(oldVisisbility)
         {
