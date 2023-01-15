@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
@@ -12,6 +13,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -143,6 +145,7 @@ public sealed partial class AccountView : UserControl
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
+        ViewStackTransactions.ChangePage("Transactions");
         var row = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
@@ -203,12 +206,26 @@ public sealed partial class AccountView : UserControl
         {
             AccountSettings(null, new RoutedEventArgs());
         }
-        await _controller.StartupAsync();
+        //Start Loading
+        CmdBar.IsEnabled = false;
+        ScrollSidebar.IsEnabled = false;
+        ViewStackTransactions.IsEnabled = false;
+        LoadingCtrl.IsLoading = true;
+        //Work
+        await Task.Run(async () =>
+        {
+            await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.StartupAsync());
+        });
         ListTransactions.UpdateLayout();
-        for(var i = 0; i < ListTransactions.Items.Count; i++)
+        for (var i = 0; i < ListTransactions.Items.Count; i++)
         {
             ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
         }
+        //Done Loading
+        CmdBar.IsEnabled = true;
+        ScrollSidebar.IsEnabled = true;
+        ViewStackTransactions.IsEnabled = true;
+        LoadingCtrl.IsLoading = false;
     }
 
     /// <summary>
@@ -285,7 +302,6 @@ public sealed partial class AccountView : UserControl
         };
         if(await transactionDialog.ShowAsync())
         {
-            ViewStackTransactions.ChangePage("Transactions");
             await _controller.AddTransactionAsync(transactionController.Transaction);
         }
     }
@@ -504,7 +520,21 @@ public sealed partial class AccountView : UserControl
         var file = await fileOpenPicker.PickSingleFileAsync();
         if (file != null)
         {
-            await _controller.ImportFromFileAsync(file.Path);
+            //Start Loading
+            CmdBar.IsEnabled = false;
+            ScrollSidebar.IsEnabled = false;
+            ViewStackTransactions.IsEnabled = false;
+            LoadingCtrl.IsLoading = true;
+            //Work
+            await Task.Run(async () =>
+            {
+                await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.ImportFromFileAsync(file.Path));
+            });
+            //Done Loading
+            CmdBar.IsEnabled = true;
+            ScrollSidebar.IsEnabled = true;
+            ViewStackTransactions.IsEnabled = true;
+            LoadingCtrl.IsLoading = false;
         }
     }
 
