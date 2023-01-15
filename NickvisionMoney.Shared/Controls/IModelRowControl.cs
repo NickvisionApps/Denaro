@@ -2,6 +2,10 @@
 
 namespace NickvisionMoney.Shared.Controls;
 
+/// <summary>
+/// A contract for a model row control
+/// </summary>
+/// <typeparam name="T">The model type</typeparam>
 public interface IModelRowControl<T>
 {
     /// <summary>

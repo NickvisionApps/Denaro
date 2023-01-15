@@ -3,6 +3,9 @@ using System;
 
 namespace NickvisionMoney.Shared.Controls;
 
+/// <summary>
+/// A contract for a group row control
+/// </summary>
 public interface IGroupRowControl : IModelRowControl<Group>
 {
     /// <summary>
