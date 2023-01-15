@@ -79,13 +79,10 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     {
         Id = transaction.Id;
         _repeatFrom = transaction.RepeatFrom;
-        if(_repeatFrom > 0)
-        {
-            MenuEdit.IsEnabled = false;
-            BtnEdit.Visibility = Visibility.Collapsed;
-            MenuDelete.IsEnabled = false;
-            BtnDelete.Visibility = Visibility.Collapsed;
-        }
+        MenuEdit.IsEnabled = _repeatFrom <= 0;
+        BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
+        MenuDelete.IsEnabled = _repeatFrom <= 0;
+        BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         BtnId.Content = transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.RGBA) ?? _defaultColor);
         LblName.Text = transaction.Description;
