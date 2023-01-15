@@ -52,7 +52,7 @@
             },
             "build-commands": [
                 "mkdir -p /app/opt/org.nickvision.money",
-                "dotnet publish -c Release NickvisionMoney.GNOME $([ -d \"./nuget-sources\" ] && echo \"--source ./nuget-sources\") $([ \"$RUNTIME\" ] && echo \"--runtime $RUNTIME\") --self-contained true -o /app/opt/org.nickvision.money",
+                "dotnet publish -c Release NickvisionMoney.GNOME/NickvisionMoney.GNOME.csproj $([ -d \"./nuget-sources\" ] && echo \"--source ./nuget-sources\") $([ \"$RUNTIME\" ] && echo \"--runtime $RUNTIME\") --self-contained true -o /app/opt/org.nickvision.money",
                 "sh NickvisionMoney.GNOME/install_extras.sh /app",
                 "desktop-file-edit --set-key='Exec' --set-value='/app/opt/org.nickvision.money/NickvisionMoney.GNOME' /app/share/applications/org.nickvision.money.desktop"
             ],
