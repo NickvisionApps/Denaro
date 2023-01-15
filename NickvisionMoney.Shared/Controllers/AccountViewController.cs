@@ -433,12 +433,25 @@ public class AccountViewController
     {
         var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.AddTransactionAsync(transaction);
-        _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
-        foreach(var pair in _account.Transactions)
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
         {
-            if(pair.Value.RepeatFrom == transaction.Id)
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
             {
-                _transactionRows.Add(pair.Value.Id, UICreateTransactionRow!(pair.Value, null));
+                compareTo *= -1;
+            }
+            return compareTo;
+        });
+        for(var i = 0; i < transactions.Count; i++)
+        {
+            if (_account.Transactions[transactions[i]] == transaction)
+            {
+                _transactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, i));
+            }
+            if (_account.Transactions[transactions[i]].RepeatFrom == transaction.Id)
+            {
+                _transactionRows.Add(_account.Transactions[transactions[i]].Id, UICreateTransactionRow!(_account.Transactions[transactions[i]], i));
             }
         }
         _groupRows[groupId].UpdateRow(_account.Groups[groupId]);
