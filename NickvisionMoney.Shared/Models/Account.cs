@@ -276,6 +276,7 @@ public class Account : IDisposable
         }
         if(disposing)
         {
+            _database.Close();
             _database.Dispose();
             foreach (var pair in Transactions)
             {

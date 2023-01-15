@@ -13,9 +13,8 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// A controller for an AccountView
 /// </summary>
-public class AccountViewController : IDisposable
+public class AccountViewController
 {
-    private bool _disposed;
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
@@ -137,7 +136,6 @@ public class AccountViewController : IDisposable
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
-        _disposed = false;
         _account = new Account(path);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
@@ -159,29 +157,9 @@ public class AccountViewController : IDisposable
     }
 
     /// <summary>
-    /// Frees resources used by the AccountViewController object
+    /// Finalizes an AccountViewController
     /// </summary>
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// Frees resources used by the AccountViewController object
-    /// </summary>
-    protected virtual void Dispose(bool disposing)
-    {
-        if (_disposed)
-        {
-            return;
-        }
-        if (disposing)
-        {
-            _account.Dispose();
-        }
-        _disposed = true;
-    }
+    ~AccountViewController() => _account.Dispose();
 
     /// <summary>
     /// The CultureInfo to use when displaying a number string
@@ -335,7 +313,6 @@ public class AccountViewController : IDisposable
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The NotificationSeverity of the notification</param>
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
-
 
     /// <summary>
     /// Initializes the AccountView
