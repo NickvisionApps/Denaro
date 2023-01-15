@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -56,8 +57,6 @@ public partial class AccountView
     private readonly AccountViewController _controller;
     private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
-    private List<GroupRow> _groupRows;
-    private List<TransactionRow> _transactionRows;
     private readonly MainWindow _parentWindow;
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
@@ -136,11 +135,14 @@ public partial class AccountView
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isFirstTimeLoading = true;
         _isAccountLoading = false;
-        _groupRows = new List<GroupRow>();
-        _transactionRows = new List<TransactionRow>();
         _updateSubtitle = updateSubtitle;
         //Register Controller Events
-        _controller.AccountInfoChanged += OnAccountInfoChanged;
+        _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
+        _controller.UICreateGroupRow = CreateGroupRow;
+        _controller.UIDeleteGroupRow = DeleteGroupRow;
+        _controller.UICreateTransactionRow = CreateTransactionRow;
+        _controller.UIMoveTransactionRow = MoveTransactionRow;
+        _controller.UIDeleteTransactionRow = DeleteTransactionRow;
         //Flap
         _flap = Adw.Flap.New();
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -536,11 +538,90 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        OnAccountInfoChanged(null, EventArgs.Empty);
+        OnAccountTransactionsChanged(null, EventArgs.Empty);
         _parentWindow.OnWidthChanged();
     }
 
-    private async void OnAccountInfoChanged(object? sender, EventArgs e)
+    /// <summary>
+    /// Creates a group row and adds it to the view
+    /// </summary>
+    /// <param name="group">The Group model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IGroupRowControl</returns>
+    private IGroupRowControl CreateGroupRow(Group group, int? index)
+    {
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        row.EditTriggered += EditGroup;
+        row.DeleteTriggered += DeleteGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        row.SetVisible(!_btnToggleGroups.GetActive());
+        if(index != null)
+        {
+            row.InsertBefore(_grpGroups, (GroupRow)_controller.GetUIGroupRowFromIndex(index.Value));
+        }
+        else
+        {
+            _grpGroups.Add(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Removes a group row from the view
+    /// </summary>
+    /// <param name="row">The IGroupRowControl</param>
+    private void DeleteGroupRow(IGroupRowControl row) => _grpGroups.Remove((GroupRow)row);
+
+    /// <summary>
+    /// Creates a transaction row and adds it to the view
+    /// </summary>
+    /// <param name="transaction">The Transaction model</param>
+    /// <param name="index">The optional index to insert</param>
+    /// <returns>The IModelRowControl<Transaction></returns>
+    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
+    {
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
+        row.EditTriggered += EditTransaction;
+        row.DeleteTriggered += DeleteTransaction;
+        row.IsSmall = _parentWindow.DefaultWidth < 450;
+        if(index != null)
+        {
+            _flowBox.Insert(row, index.Value);
+        }
+        else
+        {
+            _flowBox.Append(row);
+        }
+        return row;
+    }
+
+    /// <summary>
+    /// Moves a row in the list
+    /// </summary>
+    /// <param name="row">The row to move</param>
+    /// <param name="index">The new position</param>
+    private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
+    {
+        var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
+        _flowBox.Remove((TransactionRow)row);
+        _flowBox.Insert((TransactionRow)row, index);
+        if(oldVisisbility)
+        {
+            row.Show();
+        }
+        else
+        {
+            row.Hide();
+        }
+    }
+
+    /// <summary>
+    /// Removes a transaction row from the view
+    /// </summary>
+    /// <param name="row">The IModelRowControl<Transaction></param>
+    private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
+
+    private async void OnAccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(_isFirstTimeLoading)
         {
@@ -568,52 +649,12 @@ public partial class AccountView
             _lblTotal.SetLabel(_controller.AccountTodayTotalString);
             _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
             _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
-            //Groups
-            foreach (var groupRow in _groupRows)
-            {
-                _grpGroups.Remove(groupRow);
-            }
-            _groupRows = new List<GroupRow>(_controller.GroupsCount);
-            //Ungrouped Row
-            var ungroupedRow = new GroupRow(_controller.UngroupedGroup, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(-1));
-            ungroupedRow.FilterChanged += UpdateGroupFilter;
-            ungroupedRow.SetVisible(!_btnToggleGroups.GetActive());
-            _grpGroups.Add(ungroupedRow);
-            _groupRows.Add(ungroupedRow);
-            //Other Group Rows
-            foreach (var group in _controller.OrderedGroups)
-            {
-                var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive((int)group.Id));
-                row.EditTriggered += EditGroup;
-                row.DeleteTriggered += DeleteGroup;
-                row.FilterChanged += UpdateGroupFilter;
-                row.SetVisible(!_btnToggleGroups.GetActive());
-                _grpGroups.Add(row);
-                _groupRows.Add(row);
-            }
-            g_main_context_iteration(g_main_context_default(), false);
             //Transactions
-            foreach (var transactionRow in _transactionRows)
-            {
-                _flowBox.Remove(transactionRow);
-            }
-            _transactionRows = new List<TransactionRow>(_controller.TransactionsCount);
             if (_controller.TransactionsCount > 0)
             {
-                var filteredTransactions = _controller.FilteredTransactions;
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
-                if (filteredTransactions.Count > 0)
+                if (_controller.HasFilteredTransactions)
                 {
-                    foreach (var transaction in filteredTransactions)
-                    {
-                        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
-                        row.EditTriggered += EditTransaction;
-                        row.DeleteTriggered += DeleteTransaction;
-                        row.IsSmall = _parentWindow.DefaultWidth < 450;
-                        _flowBox.Append(row);
-                        _transactionRows.Add(row);
-                        g_main_context_iteration(g_main_context_default(), false);
-                    }
                     _statusPageNoTransactions.SetVisible(false);
                     _scrollTransactions.SetVisible(true);
                 }
@@ -882,7 +923,7 @@ public partial class AccountView
             _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
             _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
         }
-        foreach(var groupRow in _groupRows)
+        foreach(GroupRow groupRow in _controller.GroupRows.Values)
         {
             groupRow.SetVisible(!_btnToggleGroups.GetActive());
         }
@@ -991,7 +1032,7 @@ public partial class AccountView
 
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
-        foreach(var row in _transactionRows)
+        foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
             g_main_context_iteration(g_main_context_default(), false);
