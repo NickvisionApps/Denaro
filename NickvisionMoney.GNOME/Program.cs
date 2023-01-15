@@ -57,7 +57,7 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.1.0-rc1";
+        _mainWindowController.AppInfo.Version = "2023.1.0-rc2";
         _mainWindowController .AppInfo.Changelog = "<ul><li>Money has been completely rewritten in C# and has a new name: Denaro! With the C# rewrite, there is now a new version of Denaro available on Windows!</li><li>Added an Account Settings dialog to allow users to customize their accounts better</li><li>Added an \"Ungrouped\" row to the groups section to allow filtering transactions that don't belong to a group</li><li>Added the ability to attach a jpg/png/pdf of a receipt to a transaction</li><li>Reworked the repeat transaction system and added support for a biweekly interval</li><li>Added the ability to export an account as a PDF</li><li>Added the ability to sort transactions by id or date</li><li>Added the ability to hide the groups section</li><li>Made a group's description an optional field</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
