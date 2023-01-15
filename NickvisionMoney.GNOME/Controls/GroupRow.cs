@@ -95,6 +95,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
     public void UpdateRow(Group group, bool filterActive)
     {
+        Id = group.Id;
         //Row Settings
         SetTitle(group.Name);
         SetSubtitle(group.Description);
