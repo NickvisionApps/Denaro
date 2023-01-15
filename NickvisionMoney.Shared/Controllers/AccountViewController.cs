@@ -371,7 +371,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(new Transaction(_account.NextAvailableTransactionId), groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
+        return new TransactionDialogController(_account.NextAvailableTransactionId, groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
     }
 
     /// <summary>
@@ -400,7 +400,7 @@ public class AccountViewController
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(new Group(_account.NextAvailableGroupId), existingNames, Localizer);
+        return new GroupDialogController(_account.NextAvailableGroupId, existingNames, Localizer);
     }
 
     /// <summary>
