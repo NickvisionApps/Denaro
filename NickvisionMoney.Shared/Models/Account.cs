@@ -1328,6 +1328,16 @@ public class Account : IDisposable
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
+            if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            {
+                foreach(var pair in Transactions)
+                {
+                    if(pair.Value.RepeatFrom == transaction.Id)
+                    {
+                        ids.Add(pair.Value.Id);
+                    }
+                }
+            }
         }
         return ids;
     }
