@@ -605,8 +605,7 @@ public partial class AccountView
     private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
     {
         var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
-        ((TransactionRow)row).Container = null;
-        _flowBox.Remove((TransactionRow)row);
+        _flowBox.Remove(((TransactionRow)row).Container!);
         _flowBox.Insert((TransactionRow)row, index);
         ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
         if(oldVisisbility)

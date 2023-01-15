@@ -49,7 +49,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// </summary>
     public uint Id { get; private set; }
 
-    public Gtk.FlowBoxChild? Container { private get; set; }
+    public Gtk.FlowBoxChild? Container { get; set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked
