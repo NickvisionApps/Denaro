@@ -129,7 +129,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Amount = Amount,
             GroupId = GroupId,
             RGBA = RGBA,
-            Receipt = Receipt.Clone((x) => { }),
+            Receipt = Receipt != null ? Receipt.Clone((x) => { }) : null,
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate
         };
