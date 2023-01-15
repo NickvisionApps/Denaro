@@ -485,6 +485,16 @@ public class AccountViewController
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
         TransactionRows[transaction.Id].UpdateRow(transaction);
+        if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+        {
+            foreach (var pair in _account.Transactions)
+            {
+                if (pair.Value.RepeatFrom == transaction.Id)
+                {
+                    TransactionRows.Add(pair.Key, UICreateTransactionRow!(pair.Value, null));
+                }
+            }
+        }
         GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);
         GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId]);
         FilterUIUpdate();
@@ -505,11 +515,30 @@ public class AccountViewController
         {
             if(updateGenerated && pair.Value.RepeatFrom == transaction.Id)
             {
-                TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                if(TransactionRows.ContainsKey(pair.Key))
+                {
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                }
+                else
+                {
+                    TransactionRows.Add(pair.Key, UICreateTransactionRow!(pair.Value, null));
+                }
             }
-            else if(!updateGenerated && pair.Value.RepeatFrom == -1)
+            else if(!updateGenerated)
             {
-                TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                if(pair.Value.RepeatFrom == -1)
+                {
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value);
+                }
+                else if(pair.Value.RepeatFrom == transaction.Id)
+                {
+                    TransactionRows.Add(pair.Key, UICreateTransactionRow!(pair.Value, null));
+                }
+            }
+            if(!_account.Transactions.ContainsKey(pair.Key))
+            {
+                UIDeleteTransactionRow!(TransactionRows[pair.Key]);
+                TransactionRows.Remove(pair.Key);
             }
         }
         GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId]);

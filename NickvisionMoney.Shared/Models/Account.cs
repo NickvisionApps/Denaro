@@ -680,7 +680,7 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.RepeatFrom <= 0)
+            if(transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
@@ -699,7 +699,6 @@ public class Account : IDisposable
         var transactions = Transactions.Values.ToList();
         if (updateGenerated)
         {
-            await UpdateTransactionAsync(transaction);
             foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
@@ -714,10 +713,10 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(t);
                 }
             }
+            await UpdateTransactionAsync(transaction);
         }
         else
         {
-            await UpdateTransactionAsync(transaction);
             foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
@@ -728,6 +727,7 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(t);
                 }
             }
+            await UpdateTransactionAsync(transaction);
         }
     }
 
