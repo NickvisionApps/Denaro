@@ -462,7 +462,7 @@ public class AccountViewController
         });
         for(var i = 0; i < transactions.Count; i++)
         {
-            if (_account.Transactions[transactions[i]] == transaction)
+            if (transactions[i] == transaction.Id)
             {
                 TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, i));
             }
