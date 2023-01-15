@@ -24,16 +24,16 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nuint g_file_get_type();
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
     private bool _compactMode;

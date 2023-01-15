@@ -53,7 +53,6 @@
             "build-commands": [
                 "mkdir -p /app/opt/org.nickvision.money",
                 "dotnet publish -c Release NickvisionMoney.GNOME $([ -d \"./nuget-sources\" ] && echo \"--source ./nuget-sources\") $([ \"$RUNTIME\" ] && echo \"--runtime $RUNTIME\") --self-contained true -o /app/opt/org.nickvision.money",
-                "ln -sf /usr/lib/$(uname -m)-linux-gnu/libadwaita-1.so.0 /app/opt/org.nickvision.money/libadwaita-1.so",
                 "sh NickvisionMoney.GNOME/install_extras.sh /app",
                 "desktop-file-edit --set-key='Exec' --set-value='/app/opt/org.nickvision.money/NickvisionMoney.GNOME' /app/share/applications/org.nickvision.money.desktop"
             ],

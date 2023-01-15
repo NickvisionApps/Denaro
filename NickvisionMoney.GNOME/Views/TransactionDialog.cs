@@ -31,41 +31,41 @@ public partial class TransactionDialog
         public float Alpha;
     }
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
 
-    [DllImport("adwaita-1")]
+    [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.I1)]
     private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
-    [DllImport("adwaita-1")]
+    [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
     private readonly TransactionDialogController _controller;

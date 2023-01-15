@@ -17,16 +17,16 @@ public partial class Program
 {
     private delegate void OpenSignal(nint application, nint files, int nfiles, string hint, nint data);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] OpenSignal c_handler, nint data, nint destroy_data, int connect_flags);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_resource_load(string path);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_resources_register(nint file);
 
-    [LibraryImport("adwaita-1", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
     private readonly Adw.Application _application;
