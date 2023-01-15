@@ -778,7 +778,21 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath();
+                openFileDialog.Hide();
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
                 await _controller.ImportFromFileAsync(path ?? "");
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
             }
         };
         openFileDialog.Show();
