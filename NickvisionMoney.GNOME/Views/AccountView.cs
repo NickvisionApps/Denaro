@@ -536,7 +536,6 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        Startup();
         _parentWindow.OnWidthChanged();
     }
 
@@ -624,7 +623,7 @@ public partial class AccountView
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
 
-    private async void Startup()
+    public async void Startup()
     {
         if (_controller.AccountNeedsFirstTimeSetup)
         {

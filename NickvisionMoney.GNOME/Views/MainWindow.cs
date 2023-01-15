@@ -343,6 +343,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
+        newAccountView.Startup();
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
