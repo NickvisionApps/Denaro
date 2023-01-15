@@ -594,8 +594,9 @@ public class AccountViewController
     public async Task AddGroupAsync(Group group)
     {
         await _account.AddGroupAsync(group);
+        var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
         _filters.Add((int)group.Id, true);
-        _groupRows.Add(group.Id, UICreateGroupRow!(group, null));
+        _groupRows.Add(group.Id, UICreateGroupRow!(group, groups.IndexOf(group)));
     }
 
     /// <summary>

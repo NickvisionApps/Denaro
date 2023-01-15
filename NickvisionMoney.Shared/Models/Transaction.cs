@@ -204,7 +204,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     /// <param name="obj">The Transaction? object to compare</param>
     /// <returns>True if equals, else false</returns>
-    public bool Equals(Transaction? obj) => Equals(obj);
+    public bool Equals(Transaction? obj) => Equals((object?)obj);
 
     /// <summary>
     /// Compares two Transaction objects by ==
