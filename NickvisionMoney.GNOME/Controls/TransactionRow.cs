@@ -4,7 +4,6 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -49,6 +48,8 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// The id of the Transaction
     /// </summary>
     public uint Id { get; private set; }
+
+    public Gtk.FlowBoxChild? Container { private get; set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked
@@ -178,6 +179,10 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _btnDelete.SetVisible(transaction.RepeatFrom <= 0);
         _btnDelete.SetSensitive(transaction.RepeatFrom <= 0);
     }
+
+    public void Show() => Container!.Show();
+
+    public void Hide() => Container!.Hide();
 
     /// <summary>
     /// Occurs when the edit button is clicked

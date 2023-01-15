@@ -55,7 +55,6 @@ public partial class AccountView
     private static extern ref MoneyDateTime g_date_time_new_now_local();
 
     private readonly AccountViewController _controller;
-    private bool _isFirstTimeLoading;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
     private readonly Adw.Flap _flap;
@@ -133,7 +132,6 @@ public partial class AccountView
         _controller = controller;
         _parentWindow = parentWindow;
         _parentWindow.WidthChanged += OnWindowWidthChanged;
-        _isFirstTimeLoading = true;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         //Register Controller Events
@@ -538,7 +536,7 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        OnAccountTransactionsChanged(null, EventArgs.Empty);
+        Startup();
         _parentWindow.OnWidthChanged();
     }
 
@@ -587,10 +585,12 @@ public partial class AccountView
         if(index != null)
         {
             _flowBox.Insert(row, index.Value);
+            row.Container = _flowBox.GetChildAtIndex(index.Value);
         }
         else
         {
             _flowBox.Append(row);
+            row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
         }
         return row;
     }
@@ -603,8 +603,10 @@ public partial class AccountView
     private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
     {
         var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
+        ((TransactionRow)row).Container = null;
         _flowBox.Remove((TransactionRow)row);
         _flowBox.Insert((TransactionRow)row, index);
+        ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
         if(oldVisisbility)
         {
             row.Show();
@@ -621,18 +623,21 @@ public partial class AccountView
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
 
-    private async void OnAccountTransactionsChanged(object? sender, EventArgs e)
+    private async void Startup()
     {
-        if(_isFirstTimeLoading)
+        if (_controller.AccountNeedsFirstTimeSetup)
         {
-            _isFirstTimeLoading = false;
-            if(_controller.AccountNeedsFirstTimeSetup)
-            {
-                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-            }
-            await _controller.StartupAsync();
-            return;
+            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         }
+        await _controller.StartupAsync();
+        for(var i = 0; i < _controller.TransactionRows.Count; i++)
+        {
+            ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
+        }
+    }
+
+    private void OnAccountTransactionsChanged(object? sender, EventArgs e)
+    {
         if(!_isAccountLoading)
         {
             _isAccountLoading = true;
