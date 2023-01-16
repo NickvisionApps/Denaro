@@ -1,0 +1,74 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="account">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Cuenta 🏦</title>
+	<title type="text">Cuenta</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Cuenta</title>
+<p>Esta página explica todas las propiedades de las cuentas en <app>Denaro</app>. La mayoría de ellas se muestran en <gui>Diálogo de configuración de la cuenta</gui>. Este cuadro de diálogo también se abre automáticamente después de crear una cuenta nueva.</p>
+<p>Cada cuenta se almacena en un único archivo <file>*.nmoney</file>. Los archivos creados en una versión <em>estable</em> anterior de <app>Denaro</app> pueden abrirse con seguridad en una versión <em>estable</em> más reciente de la aplicación. Aunque la aplicación puede funcionar en diferentes plataformas (Windows y Linux), los archivos <file>*.nmoney</file> son 100% compatibles entre plataformas siempre que sean de la misma versión de la aplicación (p.ej. V2023.1.0).</p>
+<note style="warning">
+	<p>Las versiones inestables (Beta y RC) de la aplicación pueden contener errores o modificaciones inacabadas que pueden causar la pérdida de datos. ¡No use archivos de cuenta que contengan datos reales en versiones inestables de la aplicación!</p>
+</note>
+
+<terms>
+	<item>
+		<title>Nombre</title>
+		<p>El nombre de la cuenta se muestra en la lista de cuentas recientes y en las pestañas. Un nombre no tiene límite de longitud y puede contener cualquier carácter, incluidos emojis.</p>
+	</item>
+	<item>
+		<title>Tipo de cuenta</title>
+		<p>Hay 3 tipos de cuenta disponibles: 🟣<em>Corriente</em>, 🔵<em>Ahorros</em> y 🟢<em>Empresas</em>. El tipo de cuenta es sólo una etiqueta útil que se muestra en la lista de cuentas recientes y no afecta al funcionamiento de la aplicación ni a lo que se puede hacer con una cuenta. Cada tipo de cuenta tiene su propio color, estos colores se pueden configurar en la <link xref="configuration">configuración global</link>.</p>
+	</item>
+	<item>
+		<title>Tipo de transacción predeterminado</title>
+		<p>Cuando crea una transacción nueva, su tipo predeterminado será el mismo que en esta configuración.</p>
+	</item>
+	<item>
+		<title>Moneda del sistema</title>
+		<p>Cada vez que se inicia la aplicación, obtiene datos sobre el formato de la moneda y los números de la configuración regional de su sistema, y estos datos se usan para mostrar el símbolo de la moneda (a menos que se use una moneda personalizada, consulte a continuación) y para determinar en qué formato se aceptarán los valores para los importes de las transacciones. Algunos ejemplos:</p>
+		<list>
+			<item><p>Si su idioma es <em>inglés (EE. UU.)</em>, el símbolo de moneda se establecerá en <em>$</em> y se aceptará <em>1,000.00</em> como un número válido.</p></item>
+			<item><p>Si su configuración regional es <em>italiana</em>, el símbolo de moneda se establecerá en <em>€</em> y se aceptará <em>1.000,00</em> como un número válido.</p></item>
+			<item><p>Si su configuración regional es <em>ruso</em>, el símbolo de moneda se establecerá en <em>₽</em> y se aceptará <em>1000,00</em> como un número válido.</p></item>
+		</list>
+		<note style="advanced">
+			<p>En Linux, es posible establecer diferentes configuraciones regionales para el idioma y los formatos del sistema. <app>Denaro</app> intentará usar la configuración regional de formatos y, en caso de error, recurrirá a la configuración regional del idioma. Este comportamiento no se considera un error. En caso de tal error, use una moneda personalizada (ver más abajo).</p>
+		</note>
+	</item>
+	<item>
+		<title>Usar moneda personalizada</title>
+		<p>Si esta opción está activada, se usará <gui>Símbolo de moneda personalizado</gui> en lugar del símbolo de moneda proporcionado por la configuración regional de su sistema.</p>
+	</item>
+	<item>
+		<title>Símbolo de moneda personalizado</title>
+		<p>Se pueden usar hasta 2 caracteres o 1 emoji como símbolo de moneda.</p>
+	</item>
+	<item>
+		<title>Código de moneda personalizado</title>
+		<p>Código opcional para su moneda personalizada. Si está configurado, se mostrará en los cuadros de diálogo entre paréntesis junto a <gui>Símbolo de moneda personalizado</gui>. <gui>Código de moneda personalizado</gui> puede contener hasta 3 caracteres o 1 emoji.</p>
+	</item>
+	<item>
+		<title>Ordenar por id o fecha</title>
+		<p>Cada cuenta almacena si ordena las transacciones en la ventana principal por su id o por su fecha. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p>
+	</item>
+	<item>
+		<title>Orden de clasificación</title>
+		<p>Cada cuenta almacena información sobre el orden de las transacciones en la ventana principal. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p>
+	</item>
+	<item>
+		<title>Visibilidad de grupos</title>
+		<p>Cada cuenta almacena información sobre si la lista de grupos en la ventana principal está oculta o no. Cada vez que cambia la visibilidad de la lista de grupos, se guarda y luego se restaura cuando vuelve a abrir la cuenta.</p>
+	</item>
+</terms>
+</page>
