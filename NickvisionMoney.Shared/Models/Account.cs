@@ -445,7 +445,7 @@ public class Account : IDisposable
                     }
                     else if(transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
                     {
-                        date = date.AddMonths(4);
+                        date = date.AddMonths(3);
                     }
                     else if(transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
                     {
