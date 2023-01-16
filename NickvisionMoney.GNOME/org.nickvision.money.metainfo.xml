@@ -38,6 +38,9 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
+  <url type="bugtracker">https://github.com/nlogozzo/NickvisionMoney/issues </url>
+  <url type="donation">https://github.com/sponsors/nlogozzo</url>
+  <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
   <project_group>Nickvision</project_group>
   <provides>
     <binary>org.nickvision.money</binary>
@@ -67,4 +70,12 @@
     </release>
   </releases>
   <content_rating type="oars-1.1" />
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
 </component>
