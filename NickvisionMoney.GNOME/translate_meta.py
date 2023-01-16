@@ -12,6 +12,7 @@ install_prefix = sys.argv[1] if len(sys.argv) > 1 else '/usr'
 
 regex = re.compile(r'Strings\.(.+)\.resx')
 desktop_comments = []
+meta_summaries = []
 meta_descriptions = []
 for filename in os.listdir(resx_dir):
     regex_match = regex.search(filename)
@@ -24,6 +25,7 @@ for filename in os.listdir(resx_dir):
                 text = item.find('value').text
                 if text:
                     desktop_comments.append(f'Comment[{lang_code}]={text}')
+                    meta_summaries.append(f'  <summary xml:lang="{lang_code}">{text}</summary>')
                     meta_descriptions.append(f'    <p xml:lang="{lang_code}">\n      {text}\n    </p>')
 desktop_comments.sort()
 meta_descriptions.sort()
@@ -41,6 +43,9 @@ with open(f'{install_prefix}/share/applications/org.nickvision.money.desktop', '
 with open(f'{install_prefix}/share/metainfo/org.nickvision.money.metainfo.xml', 'r') as f:
     contents = f.readlines()
 for i in range(len(contents)):
+    if contents[i].find('<summary>') > -1:
+        contents.insert(i + 1, "\n".join(meta_summaries) + "\n")
+        continue
     if contents[i].find('<description>') > -1:
         contents.insert(i + 4, "\n".join(meta_descriptions) + "\n")
         break
