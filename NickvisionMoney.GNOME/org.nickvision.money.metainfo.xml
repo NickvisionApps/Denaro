@@ -38,6 +38,9 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
+  <url type="bugtracker">https://github.com/nlogozzo/NickvisionMoney/issues </url>
+  <url type="donation">https://github.com/sponsors/nlogozzo</url>
+  <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
   <project_group>Nickvision</project_group>
   <provides>
     <binary>org.nickvision.money</binary>
@@ -54,6 +57,15 @@
 		<p>- Added the ability to sort transactions by id or date</p>
         <p>- Added the ability to hide the groups section</p>
         <p>- Made a group's description an optional field</p>
+        <p xml:lang="es">- Money ha sido completamente reescrito en C# y ahora tiene un nombre nuevo: ¡Denaro! Con la reescritura en C#, ¡ahora hay una nueva versión de Denaro disponible en Windows!</p>
+		<p xml:lang="es">- Añadido un cuadro de diálogo de configuración de la cuenta para que los usuarios puedan personalizarla mejor</p>
+        <p xml:lang="es">- Añadida una fila "Sin agrupar" a la sección de grupos para poder filtrar las transacciones que no pertenecen a un grupo</p>
+        <p xml:lang="es">- Añadida la posibilidad de adjuntar un jpg/png/pdf de un recibo a una transacción</p>
+        <p xml:lang="es">- Modificado el sistema de repetición de transacciones y se ha añadido un intervalo quincenal</p>
+		<p xml:lang="es">- Añadida la posibilidad de exportar una cuenta en formato PDF</p>
+		<p xml:lang="es">- Añadida la posibilidad de ordenar las transacciones por id o fecha</p>
+        <p xml:lang="es">- Añadida la posibilidad de ocultar la sección de grupos</p>
+        <p xml:lang="es">- Convertir la descripción de un grupo en un campo opcional</p>
         <p xml:lang="it">- Money è stato riscritto completamente in C# e ha ricevuto un nome nuovo: Denaro! Con la conversione a C#, arriva una versione di Denaro per Windows!</p>
 		<p xml:lang="it">- Aggiunta una finestra per personalizzare gli account</p>
         <p xml:lang="it">- Aggiunta la possibilità di creare transazioni senza un gruppo</p>
@@ -67,4 +79,12 @@
     </release>
   </releases>
   <content_rating type="oars-1.1" />
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
 </component>
