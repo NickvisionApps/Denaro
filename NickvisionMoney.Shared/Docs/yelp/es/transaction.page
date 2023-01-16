@@ -1,0 +1,62 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="transaction">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Transacción 🧾</title>
+	<title type="text">Transacción</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Transacción</title>
+<p>Esta página explica todas las propiedades de las transacciones en <app>Denaro</app>.</p>
+
+<terms>
+	<item>
+		<title>Id</title>
+		<p>Cada transacción tiene una identificación que es única para una cuenta determinada. Los identificadores comienzan con 1 y aumentan con cada transacción agregada. Los ID no se pueden cambiar, los ID de las transacciones eliminadas no se reusan.</p>
+	</item>
+	<item>
+		<title>Descripción</title>
+		<p>Autoexplicativo. Sin límite de longitud.</p>
+	</item>
+	<item>
+		<title>Cantidad</title>
+		<p>Un número en un formato que sea válido para su región, consulte <em>Moneda del sistema</em> en <link xref="account">Página de la cuenta</link> para obtener detalles.</p>
+	</item>
+	<item>
+		<title>Tipo</title>
+		<p><em>Ingresos</em> o <em>Gastos</em>. De forma predeterminada, el elegido en <link xref="account">configuración de la cuenta</link> se seleccionará cuando abra un cuadro de diálogo para agregar una transacción nueva.</p>
+	</item>
+	<item>
+		<title>Fecha</title>
+		<p>Se puede seleccionar cualquier fecha, también puede crear transacciones para fechas futuras.</p>
+	</item>
+	<item>
+		<title>Intervalo de repetición</title>
+		<p>Use esta opción para crear una transacción recurrente. Después de agregar una transacción con un intervalo de repetición, esta transacción se convertirá en una transacción de <em>origen</em>. <app>Denaro</app> generará automáticamente transacciones <em>repetidas</em> para las fechas hasta hoy o una fecha de finalización proporcionada si se estableció en el pasado. Las transacciones <em>repetidas</em> no se pueden editar ni eliminar, solo se puede modificar <em>origen</em>. Cuando modifique la transacción <em>fuente</em>, <app>Denaro</app> le preguntará si desea modificar o desasociar las transacciones <em>repetidas</em>. Si elige desasociar, las transacciones <em>repetidas</em> se convierten en transacciones normales y se pueden editar o eliminar por separado.</p>
+	</item>
+	<item>
+		<title>Fecha de fin de repetición</title>
+		<p>Fecha de finalización de una transacción con repetición. No puede ser anterior o el mismo día que la fecha de inicio.</p>
+	</item>
+	<item>
+		<title>Grupo</title>
+		<p>Cada transacción puede pertenecer a un solo grupo o a ninguno.</p>
+	</item>
+	<item>
+		<title>Color</title>
+		<p>Un color para la transacción. De forma predeterminada, el elegido en <link xref="configuration">configuration</link> se seleccionará cuando abra un cuadro de diálogo para agregar una transacción nueva.</p>
+	</item>
+	<item>
+		<title>Recibo</title>
+		<p>Una imagen de un recibo de transacción. Puede cargar una imagen JPEG o PNG o un documento PDF, pero sin importar el formato, se convertirá y se guardará como una imagen JPEG. En caso de PDF, solo se guardará la primera página. Puede eliminar o cargar otro archivo en cualquier momento.</p>
+	</item>
+</terms>
+</page>

@@ -1,0 +1,19 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="guide"
+	id="index">
+<info>
+	<title type="link">Ayuda de Denaro</title>
+	<title type="text">Ayuda de Denaro</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title><media type="image" src="figures/denaro.png" /> Ayuda de Denaro</title>
+<p>Esta documentación lo ayudará a comprender cómo configurar y administrar datos en <app>Denaro</app> para aprovechar al máximo la aplicación.</p>
+<p>Para obtener soporte, use <link href="https://github.com/nlogozzo/NickvisionMoney/issues">incidencias</link> o <link href="https://github.com/nlogozzo/NickvisionMoney/discussions" >discusiones</link> en Github, o <link href="https://bit.ly/3GrfEid">únase a nuestro canal Matrix</link>.</p>
+</page>

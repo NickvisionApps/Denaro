@@ -1,0 +1,46 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="configuration">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuración 🔧</title>
+	<title type="text">Configuración</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Configuración</title>
+<p>Esta página describe lo que puede cambiar en la configuración de la aplicación.</p>
+<p>Dependiendo de su plataforma, en la interfaz de la aplicación, la configuración se denomina <gui>Preferencias</gui> o <gui>Configuración</gui>.</p>
+<terms>
+	<item>
+		<title>Tema</title>
+		<p>Establezca un tema claro u oscuro, o haga que <app>Denaro</app> siga el tema de su sistema. Cambiar esto en Windows requiere que se reinicie la aplicación para aplicar.</p>
+	</item>
+	<item>
+		<title>Color predeterminado de la transacción</title>
+		<p>Un color que se seleccionará de forma predeterminada al agregar una <link xref="transaction">transacción</link> nueva. Cambiar esto no afectará las transacciones existentes, incluso si usa el color predeterminado seleccionado previamente.</p>
+	</item>
+	<item>
+		<title>Color predeterminado de la transferencia</title>
+		<p>Un color que se usará para transacciones creadas usando <link xref="transfer">transfer</link>. Cambiar esto no afectará las transacciones existentes.</p>
+	</item>
+	<item>
+		<title>Color de la cuenta corriente</title>
+		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Corriente</em> en una lista de cuentas recientes.</p>
+	</item>
+	<item>
+		<title>Color de la cuenta de ahorros</title>
+		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Ahorros</em> en una lista de cuentas recientes.</p>
+	</item>
+	<item>
+		<title>Color de la cuenta de empresas</title>
+		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Empresas</em> en una lista de cuentas recientes.</p>
+	</item>
+</terms>
+</page>

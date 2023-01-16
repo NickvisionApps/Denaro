@@ -1,0 +1,41 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="transfer">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Transferencia 💸</title>
+	<title type="text">Transferencia</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Transferencia</title>
+<p>La transferencia es una forma de mover dinero de una cuenta a otra. Después de ejecutar una transferencia, se crearán 2 transacciones con las siguientes descripciones:</p>
+<list>
+	<item>
+		<p>«Transferencia a <input>Nombre de la cuenta de destino</input>» en la cuenta de origen.</p>
+	</item>
+	<item>
+		<p>«Transferencia desde <input>Nombre de la cuenta de origen</input>» en la cuenta de destino.</p>
+	</item>
+</list>
+<p>Las transacciones creadas mediante la transferencia son transacciones simples que se pueden editar o eliminar libremente. Estas transacciones no están conectadas: la modificación de la transacción en la cuenta de origen no afectará la transacción en la cuenta de destino y viceversa.</p>
+<p>La transferencia no le permite crear transacciones repetitivas ni establecer ninguna otra propiedad que no sea la cantidad. El color seleccionado en <link xref="configuration">configuration</link> se usará para las transacciones creadas.</p>
+<p>Aunque <app>Denaro</app> admite cuentas con diferentes monedas, las cantidades de las transferencias no se convierten automáticamente para sus respectivas monedas. El valor numérico se usará tal cual. Por ejemplo: si transfiere 100$ (USD) a una cuenta que utiliza € (EUR), se crearán las siguientes dos transacciones:</p>
+<list>
+	<item>
+		<p>En cuenta de origen: transacción de gastos por 100$ (USD).</p>
+	</item>
+	<item>
+		<p>En cuenta destino: transacción de ingreso por 100€ (EUR).</p>
+	</item>
+</list>
+<note>
+	<p>Estamos buscando implementar una función para establecer una tasa de conversión para diferentes monedas durante la transferencia en una versión futura, consulte <link href="https://github.com/nlogozzo/NickvisionMoney/issues/144">incidencia #144</link>.</p>
+</note>
+</page>

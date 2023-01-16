@@ -1,0 +1,47 @@
+<page xmlns="http://projectmallard.org/1.0/"
+	type="topic"
+	id="import-export">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Importar/Exportar 📤</title>
+	<title type="text">Importar/Exportar</title>
+	<credit type="author">
+		<name>Fyodor Sobolev</name>
+	</credit>
+	<credit type="publisher">
+		<name>Nicholas Logozzo</name>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Importar/Exportar</title>
+<div>
+	<title>Formatos de importación</title>
+	<list>
+		<item>
+			<p>Open Financial Exchange (<file>.ofx</file>)</p>
+		</item>
+		<item>
+			<p>Quicken Interchange Format (<file>.qif</file>)</p>
+		</item>
+		<item>
+			<p>Denaro CSV (<file>.csv</file>)</p>
+			<p>❗ Si bien CSV es un formato común y algunos bancos permiten a sus usuarios exportar información como CSV, estos archivos son, de hecho, tablas que pueden contener datos arbitrarios. La importación de un archivo CSV creado en otro programa fallará porque sus datos no serán compatibles con lo que <app>Denaro</app> intenta obtener de un archivo. El propósito de importar/exportar CSV es proporcionar una forma de agregar datos a una cuenta mediante programas externos, como editores de texto y paquetes de oficina. La importación solo agregará nuevas transacciones sin anular las existentes. Si desea crear un archivo CSV manualmente, este es el encabezado que incluye todas las columnas que <app>Denaro</app> espera encontrar:</p>
+			<p><code>ID;Fecha;Descripción;Tipo;IntervaloRepetición;RepetirDesde;RepetirFechaFin;Cantidad;RGBA;Grupo;NombreGrupo;DescripciónGrupo</code></p>
+			<p><em>Fecha</em>, <em>RepetirFechaFin</em> y <em>Cantidad</em> deben estar en formato inglés (EE. UU.) (<em>MM/DD/YYYY</em> para fechas y <em>123.456,78</em> para cantidades). <em>RepetirDesde</em> se usa para transacciones repetidas (consulte <em>Intervalo de repetición</em> en la página <link xref="transaction">transacción</link> para obtener más detalles) y debe ser una identificación de fuente transacción o 0 si es una transacción fuente o -1 si no es una transacción repetida.</p>
+		</item>
+	</list>
+</div>
+<div>
+	<title>Formatos de exportación</title>
+	<list>
+		<item>
+			<p>Portable Document Format (<file>.pdf</file>)</p>
+			<p>Un archivo contendrá la información de una cuenta, una lista de transacciones e imágenes de recibos. Las transacciones están coloreadas como en la aplicación, pero los colores se modifican haciéndolos semitransparentes para que el texto negro siempre sea claramente visible.</p>
+		</item>
+		<item>
+			<p>Denaro CSV (<file>.csv</file>)</p>
+		</item>
+	</list>
+</div>
+</page>
