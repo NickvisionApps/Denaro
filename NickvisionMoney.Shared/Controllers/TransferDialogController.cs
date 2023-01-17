@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System;
 using System.Globalization;
 using System.IO;
 
@@ -9,11 +10,12 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// Statuses for when a transfer is validated
 /// </summary>
+[Flags]
 public enum TransferCheckStatus
 {
-    Valid = 0,
-    InvalidDestPath,
-    InvalidAmount
+    Valid = 1,
+    InvalidDestPath = 2,
+    InvalidAmount = 4
 }
 
 /// <summary>
@@ -60,10 +62,11 @@ public class TransferDialogController
     /// <returns>TransferCheckStatus</returns>
     public TransferCheckStatus UpdateTransfer(string destPath, string amountString)
     {
+        TransferCheckStatus result = 0;
         var amount = 0m;
         if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Transfer.SourceAccountPath == destPath)
         {
-            return TransferCheckStatus.InvalidDestPath;
+            result |= TransferCheckStatus.InvalidDestPath;
         }
         try
         {
@@ -71,11 +74,15 @@ public class TransferDialogController
         }
         catch
         {
-            return TransferCheckStatus.InvalidAmount;
+            result |= TransferCheckStatus.InvalidAmount;
         }
         if (amount <= 0)
         {
-            return TransferCheckStatus.InvalidAmount;
+            result |= TransferCheckStatus.InvalidAmount;
+        }
+        if(result != 0)
+        {
+            return result;
         }
         Transfer.DestinationAccountPath = destPath;
         Transfer.Amount = amount;
