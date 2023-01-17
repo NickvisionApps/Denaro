@@ -853,27 +853,35 @@ public partial class AccountView
                         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
                         dialog.UnsetDestructiveApperance();
                         dialog.UnsetSuggestedApperance();
-                        var result = dialog.Run();
-                        if (result == MessageDialogResponse.Suggested)
+                        dialog.Show();
+                        dialog.OnResponse += async (sender, e) =>
                         {
-                            await _controller.DeleteGeneratedTransactionsAsync(id);
-                            await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                        }
-                        else if (result == MessageDialogResponse.Destructive)
-                        {
-                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
-                        }
+                            if (dialog.Response == MessageDialogResponse.Suggested)
+                            {
+                                await _controller.DeleteGeneratedTransactionsAsync(id);
+                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                            }
+                            else if (dialog.Response == MessageDialogResponse.Destructive)
+                            {
+                                await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                            }
+                            dialog.Destroy();
+                        };
                     }
                     else
                     {
                         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
                         dialog.UnsetDestructiveApperance();
                         dialog.UnsetSuggestedApperance();
-                        var result = dialog.Run();
-                        if (result != MessageDialogResponse.Cancel)
+                        dialog.Show();
+                        dialog.OnResponse += async (sender, e) =>
                         {
-                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
-                        }
+                            if (dialog.Response != MessageDialogResponse.Cancel)
+                            {
+                                await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
+                            }
+                            dialog.Destroy();
+                        };
                     }
                 }
                 else
@@ -885,26 +893,35 @@ public partial class AccountView
         };
     }
 
-    private async void DeleteTransaction(object? sender, uint id)
+    private void DeleteTransaction(object? sender, uint id)
     {
         if(_controller.GetIsSourceRepeatTransaction(id))
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
-            var result = dialog.Run();
-            if(result != MessageDialogResponse.Cancel)
+            dialog.Show();
+            dialog.OnResponse += async (sender, e) =>
             {
-                await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
-            }
+                if (dialog.Response != MessageDialogResponse.Cancel)
+                {
+                    await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                }
+                dialog.Destroy();
+            };
         }
         else
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-            if (dialog.Run() == MessageDialogResponse.Destructive)
+            dialog.Show();
+            dialog.OnResponse += async (sender, e) =>
             {
-                await _controller.DeleteTransactionAsync(id);
-            }
+                if (dialog.Response != MessageDialogResponse.Destructive)
+                {
+                    await _controller.DeleteTransactionAsync(id);
+                }
+                dialog.Destroy();
+            };
         }
     }
 
@@ -938,13 +955,18 @@ public partial class AccountView
         };
     }
 
-    private async void DeleteGroup(object? sender, uint id)
+    private void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(dialog.Run() == MessageDialogResponse.Destructive)
+        dialog.Show();
+        dialog.OnResponse += async (sender, e) =>
         {
-            await _controller.DeleteGroupAsync(id);
-        }
+            if (dialog.Response == MessageDialogResponse.Destructive)
+            {
+                await _controller.DeleteGroupAsync(id);
+            }
+            dialog.Destroy();
+        };
     }
 
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
