@@ -19,12 +19,13 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// Statuses for when a transaction is validated
 /// </summary>
+[Flags]
 public enum TransactionCheckStatus
 {
-    Valid = 0,
-    EmptyDescription,
-    InvalidAmount,
-    InvalidRepeatEndDate
+    Valid = 1,
+    EmptyDescription = 2,
+    InvalidAmount = 4,
+    InvalidRepeatEndDate = 8
 }
 
 /// <summary>
@@ -221,10 +222,11 @@ public class TransactionDialogController : IDisposable
     /// <returns>TransactionCheckStatus</returns>
     public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
+        TransactionCheckStatus result = 0;
         var amount = 0m;
         if(string.IsNullOrEmpty(description))
         {
-            return TransactionCheckStatus.EmptyDescription;
+            result |= TransactionCheckStatus.EmptyDescription;
         }
         try
         {
@@ -232,15 +234,19 @@ public class TransactionDialogController : IDisposable
         }
         catch
         {
-            return TransactionCheckStatus.InvalidAmount;
+            result |= TransactionCheckStatus.InvalidAmount;
         }
         if (amount <= 0)
         {
-            return TransactionCheckStatus.InvalidAmount;
+            result |= TransactionCheckStatus.InvalidAmount;
         }
         if(repeatEndDate.HasValue && repeatEndDate.Value <= date)
         {
-            return TransactionCheckStatus.InvalidRepeatEndDate;
+            result |= TransactionCheckStatus.InvalidRepeatEndDate;
+        }
+        if(result != 0)
+        {
+            return result;
         }
         Transaction.Date = date;
         Transaction.Description = description;
