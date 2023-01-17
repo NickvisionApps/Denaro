@@ -18,9 +18,13 @@
                 <ColumnDefinition x:Name="TitleBarRightPaddingColumn" Width="0"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="TitleBarIcon" Grid.Column="1" HorizontalAlignment="Left" Margin="8,0,0,0" Width="16" Height="16" Source="../Assets/org.nickvision.money.ico"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="8,0,0,0" Orientation="Horizontal" Spacing="4">
+                <Image x:Name="TitleBarIcon" Width="16" Height="16" Source="../Assets/org.nickvision.money.ico"/>
 
-            <TextBlock x:Name="TitleBarTitle" Grid.Column="1" VerticalAlignment="Center" Margin="28,0,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
+                <TextBlock x:Name="TitleBarTitle" Style="{ThemeResource CaptionTextBlockStyle}"/>
+
+                <TextBlock x:Name="TitlePreview" Grid.Column="1" Margin="10,0,0,0"  Style="{ThemeResource NavigationViewItemHeaderTextStyle}" Foreground="Gray" FontSize="12" Text="PREVIEW"/>
+            </StackPanel>
         </Grid>
 
         <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" PaneDisplayMode="Top"
