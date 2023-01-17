@@ -166,7 +166,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nova</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value>Nova transakcija (Ctrl+N)</value>
+		<value>Nova transakcija (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Nova grupa</value>
@@ -175,7 +175,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nova</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value>Nova grupa (Ctrl+Shift+N)</value>
+		<value>Nova grupa (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
 		<value>Transferiraj novac</value>
