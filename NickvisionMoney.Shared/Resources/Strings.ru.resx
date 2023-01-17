@@ -149,7 +149,7 @@
 		<value>Новая</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value>Новая транзакция (Ctrl+N)</value>
+		<value>Новая транзакция (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Новая группа</value>
@@ -158,7 +158,7 @@
 		<value>Новая</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value>Новая группа (Ctrl+Shift+N)</value>
+		<value>Новая группа (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
 		<value>Перевод средств</value>
