@@ -869,7 +869,20 @@ public partial class AccountView
         {
             if (transactionController.Accepted)
             {
-                await _controller.AddTransactionAsync(transactionController.Transaction);
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
             }
             transactionDialog.Destroy();
         };
@@ -901,12 +914,41 @@ public partial class AccountView
                         {
                             if (dialog.Response == MessageDialogResponse.Suggested)
                             {
-                                await _controller.DeleteGeneratedTransactionsAsync(id);
-                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () =>
+                                {
+                                    await _controller.DeleteGeneratedTransactionsAsync(id);
+                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                });
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
                             }
                             else if (dialog.Response == MessageDialogResponse.Destructive)
                             {
-                                await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
                             }
                             dialog.Destroy();
                         };
@@ -921,7 +963,20 @@ public partial class AccountView
                         {
                             if (dialog.Response != MessageDialogResponse.Cancel)
                             {
-                                await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
                             }
                             dialog.Destroy();
                         };
@@ -929,7 +984,20 @@ public partial class AccountView
                 }
                 else
                 {
-                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    //Start Spinner
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
                 }
             }
             transactionDialog.Destroy();
@@ -953,7 +1021,20 @@ public partial class AccountView
             {
                 if (dialog.Response != MessageDialogResponse.Cancel)
                 {
-                    await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                    //Start Spinner
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
                 }
                 dialog.Destroy();
             };
