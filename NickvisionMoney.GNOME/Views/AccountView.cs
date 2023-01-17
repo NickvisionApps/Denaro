@@ -1045,7 +1045,7 @@ public partial class AccountView
             dialog.Show();
             dialog.OnResponse += async (sender, e) =>
             {
-                if (dialog.Response != MessageDialogResponse.Destructive)
+                if (dialog.Response == MessageDialogResponse.Destructive)
                 {
                     await _controller.DeleteTransactionAsync(id);
                 }
