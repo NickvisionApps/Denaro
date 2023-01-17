@@ -254,6 +254,8 @@ public class Account : IDisposable
             }
         }
         NextAvailableTransactionId++;
+        //Cleanup
+        FreeMemory();
     }
 
     /// <summary>
@@ -282,6 +284,7 @@ public class Account : IDisposable
             {
                 pair.Value.Dispose();
             }
+            FreeMemory();
         }
         _disposed = true;
     }
@@ -401,6 +404,7 @@ public class Account : IDisposable
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
             Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
             NeedsFirstTimeSetup = false;
+            FreeMemory();
             return true;
         }
         return false;
@@ -511,6 +515,7 @@ public class Account : IDisposable
         {
             Groups.Add(group.Id, group);
             NextAvailableGroupId++;
+            FreeMemory();
             return true;
         }
         return false;
@@ -531,6 +536,7 @@ public class Account : IDisposable
         if(await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups[group.Id] = group;
+            FreeMemory();
             return true;
         }
         return false;
@@ -561,6 +567,7 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(pair.Value);
                 }
             }
+            FreeMemory();
             return true;
         }
         return false;
@@ -615,7 +622,8 @@ public class Account : IDisposable
             if(transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
-            }    
+            }
+            FreeMemory();
             return true;
         }
         return false;
@@ -685,6 +693,7 @@ public class Account : IDisposable
             {
                 await SyncRepeatTransactionsAsync();
             }
+            FreeMemory();
             return true;
         }
         return false;
@@ -764,6 +773,7 @@ public class Account : IDisposable
             {
                 NextAvailableTransactionId--;
             }
+            FreeMemory();
             return true;
         }
         return false;
@@ -1529,5 +1539,15 @@ public class Account : IDisposable
             }
         }
         return ids;
+    }
+
+    /// <summary>
+    /// Frees up memory used by the database
+    /// </summary>
+    private void FreeMemory()
+    {
+        using var cmdClean = _database.CreateCommand();
+        cmdClean.CommandText = "PRAGMA shrink_memory";
+        cmdClean.ExecuteNonQuery();
     }
 }
