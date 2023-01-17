@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System;
 using System.Globalization;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -7,11 +8,12 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// Statuses for when account metadata is validated
 /// </summary>
+[Flags]
 public enum AccountMetadataCheckStatus
 {
-    Valid = 0,
-    EmptyName,
-    EmptyCurrencySymbol
+    Valid = 1,
+    EmptyName = 2,
+    EmptyCurrencySymbol = 4
 }
 
 /// <summary>
@@ -83,13 +85,18 @@ public class AccountSettingsDialogController
     /// <returns></returns>
     public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType)
     {
+        AccountMetadataCheckStatus result = 0;
         if(string.IsNullOrEmpty(name))
         {
-            return AccountMetadataCheckStatus.EmptyName;
+            result |= AccountMetadataCheckStatus.EmptyName;
         }
         if(useCustom && string.IsNullOrEmpty(customSymbol))
         {
-            return AccountMetadataCheckStatus.EmptyCurrencySymbol;
+            result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
+        }
+        if(result != 0)
+        {
+            return result;
         }
         if(customSymbol != null && customSymbol.Length > 2)
         {
