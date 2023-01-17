@@ -713,14 +713,15 @@ public class Account : IDisposable
             {
                 if (t.RepeatFrom == (int)transaction.Id)
                 {
-                    t.Description = transaction.Description;
-                    t.Type = transaction.Type;
-                    t.Amount = transaction.Amount;
-                    t.GroupId = transaction.GroupId;
-                    t.RGBA = transaction.RGBA;
-                    t.Receipt = transaction.Receipt;
-                    t.RepeatEndDate = transaction.RepeatEndDate;
-                    await UpdateTransactionAsync(t);
+                    var tt = (Transaction)t.Clone();
+                    tt.Description = transaction.Description;
+                    tt.Type = transaction.Type;
+                    tt.Amount = transaction.Amount;
+                    tt.GroupId = transaction.GroupId;
+                    tt.RGBA = transaction.RGBA;
+                    tt.Receipt = transaction.Receipt;
+                    tt.RepeatEndDate = transaction.RepeatEndDate;
+                    await UpdateTransactionAsync(tt);
                 }
             }
             await UpdateTransactionAsync(transaction);
@@ -731,10 +732,11 @@ public class Account : IDisposable
             {
                 if (t.RepeatFrom == (int)transaction.Id)
                 {
-                    t.RepeatInterval = TransactionRepeatInterval.Never;
-                    t.RepeatFrom = -1;
-                    t.RepeatEndDate = null;
-                    await UpdateTransactionAsync(t);
+                    var tt = (Transaction)t.Clone();
+                    tt.RepeatInterval = TransactionRepeatInterval.Never;
+                    tt.RepeatFrom = -1;
+                    tt.RepeatEndDate = null;
+                    await UpdateTransactionAsync(tt);
                 }
             }
             await UpdateTransactionAsync(transaction);
@@ -805,10 +807,11 @@ public class Account : IDisposable
             {
                 if(transaction.RepeatFrom == (int)id)
                 {
-                    transaction.RepeatInterval = TransactionRepeatInterval.Never;
-                    transaction.RepeatFrom = -1;
-                    transaction.RepeatEndDate = null;
-                    await UpdateTransactionAsync(transaction);
+                    var t = (Transaction)transaction.Clone();
+                    t.RepeatInterval = TransactionRepeatInterval.Never;
+                    t.RepeatFrom = -1;
+                    t.RepeatEndDate = null;
+                    await UpdateTransactionAsync(t);
                 }
             }
         }
