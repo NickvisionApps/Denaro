@@ -23,6 +23,8 @@ public enum TransferCheckStatus
 /// </summary>
 public class TransferDialogController
 {
+    private readonly decimal _accountAmount;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -44,10 +46,12 @@ public class TransferDialogController
     /// Constructs a TransferDialogController
     /// </summary>
     /// <param name="transfer">The Transfer model</param>
+    /// <param name="accountAmount">The amount of the account</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    internal TransferDialogController(Transfer transfer, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, decimal accountAmount, CultureInfo culture, Localizer localizer)
     {
+        _accountAmount = accountAmount;
         Localizer = localizer;
         Transfer = transfer;
         Accepted = false;
@@ -76,7 +80,7 @@ public class TransferDialogController
         {
             result |= TransferCheckStatus.InvalidAmount;
         }
-        if (amount <= 0)
+        if (amount <= 0 || amount > _accountAmount)
         {
             result |= TransferCheckStatus.InvalidAmount;
         }
