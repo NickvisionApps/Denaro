@@ -1181,9 +1181,9 @@ public partial class AccountView
     /// <summary>
     /// Occurs when the calendar's month/year is changed
     /// </summary>
-    /// <param name="sender">Gtk.Calendar</param>
+    /// <param name="sender">Gtk.Calendar?</param>
     /// <param name="e">EventArgs</param>
-    private void OnCalendarMonthYearChanged(Gtk.Calendar sender, EventArgs e)
+    private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
