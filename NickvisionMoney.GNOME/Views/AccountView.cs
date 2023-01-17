@@ -80,6 +80,7 @@ public partial class AccountView
     private readonly Adw.ButtonContent _btnNewGroupContent;
     private readonly Gtk.Button _btnResetGroupsFilter;
     private readonly Adw.PreferencesGroup _grpGroups;
+    private readonly Gtk.ListBox _listGroups;
     private readonly Gtk.Calendar _calendar;
     private readonly Gtk.Button _btnResetCalendarFilter;
     private readonly Gtk.DropDown _ddStartYear;
@@ -257,9 +258,12 @@ public partial class AccountView
         _btnResetGroupsFilter.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         _boxButtonsGroups.Append(_btnResetGroupsFilter);
         //Groups Group
+        _listGroups = Gtk.ListBox.New();
+        _listGroups.AddCssClass("boxed-list");
         _grpGroups = Adw.PreferencesGroup.New();
         _grpGroups.SetTitle(_controller.Localizer["Groups"]);
         _grpGroups.SetHeaderSuffix(_boxButtonsGroups);
+        _grpGroups.Add(_listGroups);
         _paneBox.Append(_grpGroups);
         //Calendar Widget
         _calendar = Gtk.Calendar.New();
@@ -551,14 +555,13 @@ public partial class AccountView
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
-        row.SetVisible(!_btnToggleGroups.GetActive());
         if(index != null)
         {
-            row.InsertBefore(_grpGroups, (GroupRow)_controller.GetUIGroupRowFromIndex(index.Value));
+            _listGroups.Insert(row, index.Value);
         }
         else
         {
-            _grpGroups.Add(row);
+            _listGroups.Append(row);
         }
         return row;
     }
@@ -567,7 +570,7 @@ public partial class AccountView
     /// Removes a group row from the view
     /// </summary>
     /// <param name="row">The IGroupRowControl</param>
-    private void DeleteGroupRow(IGroupRowControl row) => _grpGroups.Remove((GroupRow)row);
+    private void DeleteGroupRow(IGroupRowControl row) => _listGroups.Remove((GroupRow)row);
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
@@ -974,10 +977,7 @@ public partial class AccountView
             _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
             _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
         }
-        foreach(GroupRow groupRow in _controller.GroupRows.Values)
-        {
-            groupRow.SetVisible(!_btnToggleGroups.GetActive());
-        }
+        _listGroups.SetVisible(!_btnToggleGroups.GetActive());
         _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
