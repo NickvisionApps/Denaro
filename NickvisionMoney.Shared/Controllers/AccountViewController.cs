@@ -430,7 +430,6 @@ public class AccountViewController
             Type = AccountType
         });
         Configuration.Current.Save();
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
