@@ -217,7 +217,7 @@
 	</data>
 
 	<data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value>New Transaction (Ctrl+N)</value>
+		<value>New Transaction (Ctrl+Shift+N)</value>
 	</data>
 
 	<data name="NewGroup" xml:space="preserve">
@@ -229,7 +229,7 @@
 	</data>
 
 	<data name="NewGroup.Tooltip" xml:space="preserve">
-		<value>New Group (Ctrl+Shift+N)</value>
+		<value>New Group (Ctrl+G)</value>
 	</data>
 
 	<data name="TransferMoney" xml:space="preserve">
