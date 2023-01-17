@@ -80,6 +80,7 @@ public partial class AccountView
     private readonly Adw.ButtonContent _btnNewGroupContent;
     private readonly Gtk.Button _btnResetGroupsFilter;
     private readonly Adw.PreferencesGroup _grpGroups;
+    private readonly Gtk.ListBox _listGroups;
     private readonly Gtk.Calendar _calendar;
     private readonly Gtk.Button _btnResetCalendarFilter;
     private readonly Gtk.DropDown _ddStartYear;
@@ -257,9 +258,12 @@ public partial class AccountView
         _btnResetGroupsFilter.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         _boxButtonsGroups.Append(_btnResetGroupsFilter);
         //Groups Group
+        _listGroups = Gtk.ListBox.New();
+        _listGroups.AddCssClass("boxed-list");
         _grpGroups = Adw.PreferencesGroup.New();
         _grpGroups.SetTitle(_controller.Localizer["Groups"]);
         _grpGroups.SetHeaderSuffix(_boxButtonsGroups);
+        _grpGroups.Add(_listGroups);
         _paneBox.Append(_grpGroups);
         //Calendar Widget
         _calendar = Gtk.Calendar.New();
@@ -551,14 +555,13 @@ public partial class AccountView
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
-        row.SetVisible(!_btnToggleGroups.GetActive());
         if(index != null)
         {
-            row.InsertBefore(_grpGroups, (GroupRow)_controller.GetUIGroupRowFromIndex(index.Value));
+            _listGroups.Insert(row, index.Value);
         }
         else
         {
-            _grpGroups.Add(row);
+            _listGroups.Append(row);
         }
         return row;
     }
@@ -567,7 +570,7 @@ public partial class AccountView
     /// Removes a group row from the view
     /// </summary>
     /// <param name="row">The IGroupRowControl</param>
-    private void DeleteGroupRow(IGroupRowControl row) => _grpGroups.Remove((GroupRow)row);
+    private void DeleteGroupRow(IGroupRowControl row) => _listGroups.Remove((GroupRow)row);
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
@@ -623,6 +626,9 @@ public partial class AccountView
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
 
+    /// <summary>
+    /// Starts the account view
+    /// </summary>
     public async void Startup()
     {
         if (_controller.AccountNeedsFirstTimeSetup)
@@ -649,6 +655,11 @@ public partial class AccountView
         _scrollPane.SetSensitive(true);
     }
 
+    /// <summary>
+    /// Occurs when the account's transactions are changed 
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
     private void OnAccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
@@ -689,16 +700,26 @@ public partial class AccountView
         }
     }
 
-    private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the transfer money item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
         if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if (transferDialog.Run())
+            transferDialog.Show();
+            transferDialog.OnResponse += async (sender, e) =>
             {
-                await _controller.SendTransferAsync(transferController.Transfer);
-            }
+                if (transferController.Accepted)
+                {
+                    await _controller.SendTransferAsync(transferController.Transfer);
+                }
+                transferDialog.Destroy();
+            };
         }
         else
         {
@@ -706,6 +727,11 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the export to csv item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
     {
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
@@ -729,6 +755,11 @@ public partial class AccountView
         saveFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the export to pdf item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
     {
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
@@ -752,6 +783,11 @@ public partial class AccountView
         saveFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the import from file item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
@@ -799,121 +835,289 @@ public partial class AccountView
         openFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the account settings item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
     {
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
-        if(accountSettingsDialog.Run())
+        accountSettingsDialog.Show();
+        accountSettingsDialog.OnResponse += (sender, e) =>
         {
-            _controller.UpdateMetadata(accountSettingsController.Metadata);
-        }
+            if (accountSettingsController.Accepted)
+            {
+                _controller.UpdateMetadata(accountSettingsController.Metadata);
+            }
+            accountSettingsDialog.Destroy();
+        };
     }
 
-    private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the new transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        transactionDialog.Show();
+        transactionDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.AddTransactionAsync(transactionController.Transaction);
-        }
+            if (transactionController.Accepted)
+            {
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
+            }
+            transactionDialog.Destroy();
+        };
     }
 
-    private async void EditTransaction(object? sender, uint id)
+    /// <summary>
+    /// Occurs when the edit transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        transactionDialog.Show();
+        transactionDialog.OnResponse += async (sender, e) =>
         {
-            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            if (transactionController.Accepted)
             {
-                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    var result = dialog.Run();
-                    if (result == MessageDialogResponse.Suggested)
+                    if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                     {
-                        await _controller.DeleteGeneratedTransactionsAsync(id);
-                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                        dialog.UnsetDestructiveApperance();
+                        dialog.UnsetSuggestedApperance();
+                        dialog.Show();
+                        dialog.OnResponse += async (sender, e) =>
+                        {
+                            if (dialog.Response == MessageDialogResponse.Suggested)
+                            {
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () =>
+                                {
+                                    await _controller.DeleteGeneratedTransactionsAsync(id);
+                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                });
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
+                            }
+                            else if (dialog.Response == MessageDialogResponse.Destructive)
+                            {
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
+                            }
+                            dialog.Destroy();
+                        };
                     }
-                    else if(result == MessageDialogResponse.Destructive)
+                    else
                     {
-                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                        dialog.UnsetDestructiveApperance();
+                        dialog.UnsetSuggestedApperance();
+                        dialog.Show();
+                        dialog.OnResponse += async (sender, e) =>
+                        {
+                            if (dialog.Response != MessageDialogResponse.Cancel)
+                            {
+                                //Start Spinner
+                                _statusPageNoTransactions.SetVisible(false);
+                                _scrollTransactions.SetVisible(true);
+                                _overlayMain.SetOpacity(0.0);
+                                _binSpinner.SetVisible(true);
+                                _spinner.Start();
+                                _scrollPane.SetSensitive(false);
+                                //Work
+                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
+                                //Stop Spinner
+                                _spinner.Stop();
+                                _binSpinner.SetVisible(false);
+                                _overlayMain.SetOpacity(1.0);
+                                _scrollPane.SetSensitive(true);
+                            }
+                            dialog.Destroy();
+                        };
                     }
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    var result = dialog.Run();
-                    if (result != MessageDialogResponse.Cancel)
-                    {
-                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
-                    }
+                    //Start Spinner
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
                 }
             }
-            else
-            {
-                await _controller.UpdateTransactionAsync(transactionController.Transaction);
-            }
-        }
+            transactionDialog.Destroy();
+        };
     }
 
-    private async void DeleteTransaction(object? sender, uint id)
+    /// <summary>
+    /// Occurs when the delete transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void DeleteTransaction(object? sender, uint id)
     {
         if(_controller.GetIsSourceRepeatTransaction(id))
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
-            var result = dialog.Run();
-            if(result != MessageDialogResponse.Cancel)
+            dialog.Show();
+            dialog.OnResponse += async (sender, e) =>
             {
-                await _controller.DeleteSourceTransactionAsync(id, result == MessageDialogResponse.Suggested);
-            }
+                if (dialog.Response != MessageDialogResponse.Cancel)
+                {
+                    //Start Spinner
+                    _statusPageNoTransactions.SetVisible(false);
+                    _scrollTransactions.SetVisible(true);
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
+                }
+                dialog.Destroy();
+            };
         }
         else
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-            if (dialog.Run() == MessageDialogResponse.Destructive)
+            dialog.Show();
+            dialog.OnResponse += async (sender, e) =>
             {
-                await _controller.DeleteTransactionAsync(id);
-            }
+                if (dialog.Response != MessageDialogResponse.Destructive)
+                {
+                    await _controller.DeleteTransactionAsync(id);
+                }
+                dialog.Destroy();
+            };
         }
     }
 
-    private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the new group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
+        groupDialog.Show();
+        groupDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.AddGroupAsync(groupController.Group);
-        }
+            if (groupController.Accepted)
+            {
+                await _controller.AddGroupAsync(groupController.Group);
+            }
+            groupDialog.Destroy();
+        };
     }
 
-    private async void EditGroup(object? sender, uint id)
+    /// <summary>
+    /// Occurs when the edit group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
+        groupDialog.Show();
+        groupDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.UpdateGroupAsync(groupController.Group);
-        }
+            if(groupController.Accepted)
+            {
+                await _controller.UpdateGroupAsync(groupController.Group);
+            }
+            groupDialog.Destroy();
+        };
     }
 
-    private async void DeleteGroup(object? sender, uint id)
+    /// <summary>
+    /// Occurs when the delete group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        if(dialog.Run() == MessageDialogResponse.Destructive)
+        dialog.Show();
+        dialog.OnResponse += async (sender, e) =>
         {
-            await _controller.DeleteGroupAsync(id);
-        }
+            if (dialog.Response == MessageDialogResponse.Destructive)
+            {
+                await _controller.DeleteGroupAsync(id);
+            }
+            dialog.Destroy();
+        };
     }
 
+    /// <summary>
+    /// Occurs when the reset overview filter button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
     {
         _chkIncome.SetActive(true);
@@ -944,14 +1148,16 @@ public partial class AccountView
             _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
             _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
         }
-        foreach(GroupRow groupRow in _controller.GroupRows.Values)
-        {
-            groupRow.SetVisible(!_btnToggleGroups.GetActive());
-        }
+        _listGroups.SetVisible(!_btnToggleGroups.GetActive());
         _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
-    private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the calendar's month/year is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Calendar</param>
+    /// <param name="e">EventArgs</param>
+    private void OnCalendarMonthYearChanged(Gtk.Calendar sender, EventArgs e)
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
@@ -966,6 +1172,11 @@ public partial class AccountView
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, 0));
     }
 
+    /// <summary>
+    /// Occurs when the calendar's date selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Calendar</param>
+    /// <param name="e">EventArgs</param>
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
     {
         if(!_isAccountLoading)
@@ -975,12 +1186,20 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the reset calendar filter button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
         _expRange.SetEnableExpansion(false);
     }
 
+    /// <summary>
+    /// Occurs when the select date range is toggled
+    /// </summary>
     private void OnDateRangeToggled()
     {
         if(_expRange.GetEnableExpansion())
@@ -1003,8 +1222,14 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the date range's start year is changed
+    /// </summary>
     private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's start month is changed
+    /// </summary>
     private void OnDateRangeStartMonthChanged()
     {
         var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]);
@@ -1025,10 +1250,19 @@ public partial class AccountView
         _ddStartDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
+    /// <summary>
+    /// Occurs when the date range's start day is changed
+    /// </summary>
     private void OnDateRangeStartDayChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's end year is changed
+    /// </summary>
     private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's end month is changed
+    /// </summary>
     private void OnDateRangeEndMonthChanged()
     {
         var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]);
@@ -1049,14 +1283,21 @@ public partial class AccountView
         _ddEndDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
+    /// <summary>
+    /// Occurs when the date range's end day is changed
+    /// </summary>
     private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the window's width is changed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
         foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
-            g_main_context_iteration(g_main_context_default(), false);
         }
     }
 }

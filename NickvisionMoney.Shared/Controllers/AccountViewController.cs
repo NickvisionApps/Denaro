@@ -347,17 +347,6 @@ public class AccountViewController
     }
 
     /// <summary>
-    /// Gets the UI group row object via index
-    /// </summary>
-    /// <param name="index">The index of the row</param>
-    /// <returns>The IGroupRowControl</returns>
-    public IGroupRowControl GetUIGroupRowFromIndex(int index)
-    {
-        var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
-        return GroupRows[groups[index].Id];
-    }
-
-    /// <summary>
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
@@ -425,7 +414,7 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), CultureForNumberString, Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), _account.TodayTotal, CultureForNumberString, Localizer);
 
     /// <summary>
     /// Updates the metadata of the account
@@ -441,7 +430,6 @@ public class AccountViewController
             Type = AccountType
         });
         Configuration.Current.Save();
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 

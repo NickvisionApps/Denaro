@@ -11,6 +11,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class GroupDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly GroupDialogController _controller;
 
     /// <summary>
@@ -20,6 +21,7 @@ public sealed partial class GroupDialog : ContentDialog
     public GroupDialog(GroupDialogController controller)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         //Localize Strings
         Title = $"{_controller.Localizer["Group"]} - {_controller.Group.Id}";
@@ -33,6 +35,8 @@ public sealed partial class GroupDialog : ContentDialog
         //Load Group
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
+        Validate();
+        _constructing = false;
     }
 
     /// <summary>
@@ -47,30 +51,60 @@ public sealed partial class GroupDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        else if(result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
+        TxtName.Header = _controller.Localizer["Name", "Field"];
+        if (checkStatus == GroupCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
-            if (checkStatus != GroupCheckStatus.Valid)
-            {
-                //Reset UI
-                TxtName.Header = _controller.Localizer["Name", "Field"];
-                if (checkStatus == GroupCheckStatus.EmptyName)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Empty"];
-                }
-                else if (checkStatus == GroupCheckStatus.NameExists)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Exists"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else
+        {
+            if (checkStatus == GroupCheckStatus.EmptyName)
+            {
+                TxtName.Header = _controller.Localizer["Name", "Empty"];
+            }
+            else if(checkStatus == GroupCheckStatus.NameExists)
+            {
+                TxtName.Header = _controller.Localizer["Name", "Exists"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the name textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtName_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if(!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the description textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 }

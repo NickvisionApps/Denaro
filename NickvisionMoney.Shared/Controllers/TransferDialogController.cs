@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using System;
 using System.Globalization;
 using System.IO;
 
@@ -9,11 +10,12 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// Statuses for when a transfer is validated
 /// </summary>
+[Flags]
 public enum TransferCheckStatus
 {
-    Valid = 0,
-    InvalidDestPath,
-    InvalidAmount
+    Valid = 1,
+    InvalidDestPath = 2,
+    InvalidAmount = 4
 }
 
 /// <summary>
@@ -21,6 +23,8 @@ public enum TransferCheckStatus
 /// </summary>
 public class TransferDialogController
 {
+    private readonly decimal _accountAmount;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -42,10 +46,12 @@ public class TransferDialogController
     /// Constructs a TransferDialogController
     /// </summary>
     /// <param name="transfer">The Transfer model</param>
+    /// <param name="accountAmount">The amount of the account</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    internal TransferDialogController(Transfer transfer, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, decimal accountAmount, CultureInfo culture, Localizer localizer)
     {
+        _accountAmount = accountAmount;
         Localizer = localizer;
         Transfer = transfer;
         Accepted = false;
@@ -60,10 +66,11 @@ public class TransferDialogController
     /// <returns>TransferCheckStatus</returns>
     public TransferCheckStatus UpdateTransfer(string destPath, string amountString)
     {
+        TransferCheckStatus result = 0;
         var amount = 0m;
         if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Transfer.SourceAccountPath == destPath)
         {
-            return TransferCheckStatus.InvalidDestPath;
+            result |= TransferCheckStatus.InvalidDestPath;
         }
         try
         {
@@ -71,11 +78,15 @@ public class TransferDialogController
         }
         catch
         {
-            return TransferCheckStatus.InvalidAmount;
+            result |= TransferCheckStatus.InvalidAmount;
         }
-        if (amount <= 0)
+        if (amount <= 0 || amount > _accountAmount)
         {
-            return TransferCheckStatus.InvalidAmount;
+            result |= TransferCheckStatus.InvalidAmount;
+        }
+        if(result != 0)
+        {
+            return result;
         }
         Transfer.DestinationAccountPath = destPath;
         Transfer.Amount = amount;

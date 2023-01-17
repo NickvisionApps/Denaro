@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 namespace NickvisionMoney.GNOME.Controls;
 
 /// <summary>
@@ -17,14 +15,9 @@ public enum MessageDialogResponse
 /// </summary>
 public partial class MessageDialog
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
-
     private readonly Adw.MessageDialog _dialog;
-    private MessageDialogResponse _response;
+
+    public MessageDialogResponse Response { get; private set; }
 
     /// <summary>
     /// Constructs a MessageDialog
@@ -39,6 +32,7 @@ public partial class MessageDialog
     {
         _dialog = Adw.MessageDialog.New(parentWindow, title, message);
         _dialog.SetHideOnClose(true);
+        Response = MessageDialogResponse.Cancel;
         if(!string.IsNullOrEmpty(cancelText))
         {
             _dialog.AddResponse("cancel", cancelText);
@@ -58,20 +52,27 @@ public partial class MessageDialog
         _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
     }
 
-    /// <summary>
-    /// Displays the dialog
-    /// </summary>
-    /// <returns>MessageDialogResponse</returns>
-    public MessageDialogResponse Run()
+    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
     {
-        _dialog.Show();
-        while(_dialog.IsVisible())
+        add
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            _dialog.OnResponse += value;
         }
-        _dialog.Destroy();
-        return _response;
+        remove
+        {
+            _dialog.OnResponse -= value;
+        }
     }
+
+    /// <summary>
+    /// Shows the dialog
+    /// </summary>
+    public void Show() => _dialog.Show();
+
+    /// <summary>
+    /// Destroys the dialog
+    /// </summary>
+    public void Destroy() => _dialog.Destroy();
 
     /// <summary>
     /// Resets the destructive response appearance to default
@@ -89,7 +90,7 @@ public partial class MessageDialog
     /// <param name="response">The string response of the dialog</param>
     private void SetResponse(string response)
     {
-        _response = response switch
+        Response = response switch
         {
             "suggested" => MessageDialogResponse.Suggested,
             "destructive" => MessageDialogResponse.Destructive,

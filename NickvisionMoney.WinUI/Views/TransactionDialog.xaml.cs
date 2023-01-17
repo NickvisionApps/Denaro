@@ -16,6 +16,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class TransactionDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly TransactionDialogController _controller;
     private readonly Action<object> _initializeWithWindow;
     private string? _receiptPath;
@@ -28,6 +29,7 @@ public sealed partial class TransactionDialog : ContentDialog
     public TransactionDialog(TransactionDialogController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         _initializeWithWindow = initializeWithWindow;
         _receiptPath = null;
@@ -88,6 +90,8 @@ public sealed partial class TransactionDialog : ContentDialog
         BtnColor.SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
+        Validate();
+        _constructing = false;
     }
 
     /// <summary>
@@ -102,36 +106,106 @@ public sealed partial class TransactionDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        else if (result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        TxtDescription.Header = _controller.Localizer["Description", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
+        if (checkStatus == TransactionCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
-            if(checkStatus != TransactionCheckStatus.Valid)
-            {
-                TxtDescription.Header = _controller.Localizer["Description", "Field"];
-                TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
-                CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
-                if (checkStatus == TransactionCheckStatus.EmptyDescription)
-                {
-                    TxtDescription.Header = _controller.Localizer["Description", "Empty"];
-                }
-                else if(checkStatus == TransactionCheckStatus.InvalidAmount)
-                {
-                    TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
-                }
-                else if(checkStatus == TransactionCheckStatus.InvalidRepeatEndDate)
-                {
-                    CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Invalid"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else
+        {
+            if(checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
+            {
+                TxtDescription.Header = _controller.Localizer["Description", "Empty"];
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidAmount))
+            {
+                TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidRepeatEndDate))
+            {
+                CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Invalid"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the description textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the amount textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the type combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
+    private void CalendarDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the group combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -144,6 +218,23 @@ public sealed partial class TransactionDialog : ContentDialog
         var isRepeatIntervalNever = (string)CmbRepeatInterval.SelectedItem == _controller.Localizer["RepeatInterval", "Never"];
         CalendarRepeatEndDate.IsEnabled = !isRepeatIntervalNever;
         BtnRepeatEndDateClear.IsEnabled = !isRepeatIntervalNever;
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the repeat end date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
+    private void CalendarRepeatEndDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -170,6 +261,7 @@ public sealed partial class TransactionDialog : ContentDialog
         _receiptPath = "";
         BtnReceiptView.IsEnabled = false;
         BtnReceiptDelete.IsEnabled = false;
+        Validate();
     }
 
     /// <summary>
@@ -191,6 +283,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             _receiptPath = file.Path;
             BtnReceiptView.IsEnabled = true;
+            Validate();
         }
     }
 }

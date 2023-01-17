@@ -1,14 +1,14 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using NickvisionMoney.Shared.Controllers;
-using System.Threading.Tasks;
-using System;
 using Microsoft.UI.Xaml.Media;
-using NickvisionMoney.WinUI.Helpers;
-using Windows.UI;
+using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Helpers;
+using System;
 using System.Text.RegularExpressions;
-using Microsoft.UI;
+using System.Threading.Tasks;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -17,6 +17,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class AccountSettingsDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
 
     /// <summary>
@@ -26,6 +27,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     public AccountSettingsDialog(AccountSettingsDialogController controller)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         //Localize Strings
         Title = $"{_controller.Localizer["AccountSettings"]}";
@@ -61,6 +63,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         }
         TxtName_TextChanged(null, null);
         TglUseCustomCurrency_Toggled(null, new RoutedEventArgs());
+        Validate();
+        _constructing = false;
     }
 
     /// <summary>
@@ -82,32 +86,36 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 return false;
             }
         }
-        else if (result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Validate the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
+        TxtName.Header = _controller.Localizer["Name", "Field"];
+        TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
+        if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
-            if (checkStatus != AccountMetadataCheckStatus.Valid)
-            {
-                //Reset UI
-                TxtName.Header = _controller.Localizer["Name", "Field"];
-                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
-                if (checkStatus == AccountMetadataCheckStatus.EmptyName)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Empty"];
-                }
-                else if (checkStatus == AccountMetadataCheckStatus.EmptyCurrencySymbol)
-                {
-                    TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else
+        {
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
+            {
+                TxtName.Header = _controller.Localizer["Name", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
     }
 
     /// <summary>
@@ -164,6 +172,10 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 }
             }
         }
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -178,6 +190,23 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!);
         LblId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the default transaction type combobox's selection is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbDefaultTransactionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -196,6 +225,36 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         {
             TxtCustomSymbol.IsEnabled = false;
             TxtCustomCode.IsEnabled = false;
+        }
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom symbol textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomSymbol_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom code textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomCode_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
         }
     }
 }

@@ -13,9 +13,9 @@
 
     <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
 
-            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtDescription_TextChanged"/>
 
             <TextBlock x:Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>

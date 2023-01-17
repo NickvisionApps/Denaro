@@ -38,6 +38,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
         TxtAmount.Text = _controller.Transfer.Amount.ToString("C", _controller.CultureForNumberString);
+        Validate();
     }
 
     /// <summary>
@@ -52,31 +53,36 @@ public sealed partial class TransferDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        else if (result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Validate the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text);
+        TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        if (checkStatus == TransferCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text);
-            if (checkStatus != TransferCheckStatus.Valid)
-            {
-                TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
-                TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
-                if (checkStatus == TransferCheckStatus.InvalidDestPath)
-                {
-                    TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
-                }
-                else if (checkStatus == TransferCheckStatus.InvalidAmount)
-                {
-                    TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else
+        {
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
+            {
+                TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
+            {
+                TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
     }
 
     /// <summary>
@@ -94,6 +100,14 @@ public sealed partial class TransferDialog : ContentDialog
         if (file != null)
         {
             TxtDestinationAccount.Text = file.Path;
+            Validate();
         }
     }
+
+    /// <summary>
+    /// Occurs when the amount textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e) => Validate();
 }

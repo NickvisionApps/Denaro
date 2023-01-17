@@ -13,7 +13,7 @@
 
     <ScrollViewer Width="440" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtDescription_TextChanged"/>
 
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -21,9 +21,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch"/>
+                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
 
-                <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+                <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" SelectionChanged="CmbType_SelectionChanged"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch">
@@ -32,9 +32,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch"/>
+                <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch" DateChanged="CalendarDate_DateChanged"/>
 
-                <ComboBox x:Name="CmbGroup" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+                <ComboBox x:Name="CmbGroup" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" SelectionChanged="CmbGroup_SelectionChanged"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch">
@@ -52,14 +52,14 @@
                         </Button.Content>
                     </Button>
 
-                    <CalendarDatePicker x:Name="CalendarRepeatEndDate" wct:DockPanel.Dock="Left" HorizontalAlignment="Stretch"/>
+                    <CalendarDatePicker x:Name="CalendarRepeatEndDate" wct:DockPanel.Dock="Left" HorizontalAlignment="Stretch" DateChanged="CalendarRepeatEndDate_DateChanged"/>
                 </wct:DockPanel>
             </Grid>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
                 <TextBlock x:Name="LblColor"/>
 
-                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32"/>
+                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" />
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
