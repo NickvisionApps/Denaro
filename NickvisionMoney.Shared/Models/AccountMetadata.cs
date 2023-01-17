@@ -84,9 +84,9 @@ public class AccountMetadata : ICloneable
     }
 
     /// <summary>
-    /// Clones the transaction
+    /// Clones the account metadata
     /// </summary>
-    /// <returns>A new transaction</returns>
+    /// <returns>A new AccountMetadata</returns>
     public object Clone()
     {
         return new AccountMetadata(Name, AccountType)
