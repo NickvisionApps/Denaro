@@ -186,10 +186,6 @@
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
                                         </MenuFlyoutItem.Icon>
-
-                                        <MenuFlyoutItem.KeyboardAccelerators>
-                                            <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
-                                        </MenuFlyoutItem.KeyboardAccelerators>
                                     </MenuFlyoutItem>
                                 </MenuFlyout>
                             </Grid.ContextFlyout>
@@ -215,10 +211,6 @@
                                     <MenuFlyoutItem.Icon>
                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
                                     </MenuFlyoutItem.Icon>
-
-                                    <MenuFlyoutItem.KeyboardAccelerators>
-                                        <KeyboardAccelerator Modifiers="Control" Key="N"/>
-                                    </MenuFlyoutItem.KeyboardAccelerators>
                                 </MenuFlyoutItem>
 
                                 <MenuFlyoutSeparator/>
@@ -227,10 +219,6 @@
                                     <MenuFlyoutItem.Icon>
                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
                                     </MenuFlyoutItem.Icon>
-
-                                    <MenuFlyoutItem.KeyboardAccelerators>
-                                        <KeyboardAccelerator Modifiers="Control" Key="T"/>
-                                    </MenuFlyoutItem.KeyboardAccelerators>
                                 </MenuFlyoutItem>
                             </MenuFlyout>
                         </nickvision:ViewStackPage.ContextFlyout>
