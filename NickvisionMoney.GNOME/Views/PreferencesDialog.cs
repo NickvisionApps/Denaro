@@ -62,7 +62,7 @@ public partial class PreferencesDialog : Adw.Window
         _controller = controller;
         _application = application;
         SetTransientFor(parent);
-        SetDefaultSize(600, 400);
+        SetDefaultSize(600, 490);
         SetModal(true);
         SetDestroyWithParent(false);
         SetHideOnClose(true);
