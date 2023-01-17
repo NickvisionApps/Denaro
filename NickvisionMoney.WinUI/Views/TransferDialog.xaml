@@ -25,7 +25,7 @@
                 <TextBox Name="TxtDestinationAccount" wct:DockPanel.Dock="Left" IsReadOnly="True"/>
             </wct:DockPanel>
 
-            <TextBox Name="TxtAmount" HorizontalAlignment="Stretch"/>
+            <TextBox Name="TxtAmount" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
 
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
