@@ -88,6 +88,7 @@ public sealed partial class TransactionDialog : ContentDialog
         BtnColor.SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
+        Validate();
     }
 
     /// <summary>
@@ -102,36 +103,41 @@ public sealed partial class TransactionDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        else if (result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        TxtDescription.Header = _controller.Localizer["Description", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
+        if (checkStatus == TransactionCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
-            if(checkStatus != TransactionCheckStatus.Valid)
-            {
-                TxtDescription.Header = _controller.Localizer["Description", "Field"];
-                TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
-                CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
-                if (checkStatus == TransactionCheckStatus.EmptyDescription)
-                {
-                    TxtDescription.Header = _controller.Localizer["Description", "Empty"];
-                }
-                else if(checkStatus == TransactionCheckStatus.InvalidAmount)
-                {
-                    TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
-                }
-                else if(checkStatus == TransactionCheckStatus.InvalidRepeatEndDate)
-                {
-                    CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Invalid"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else
+        {
+            if(checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
+            {
+                TxtDescription.Header = _controller.Localizer["Description", "Empty"];
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidAmount))
+            {
+                TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidRepeatEndDate))
+            {
+                CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Invalid"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
     }
 
     /// <summary>
@@ -193,4 +199,25 @@ public sealed partial class TransactionDialog : ContentDialog
             BtnReceiptView.IsEnabled = true;
         }
     }
+
+    /// <summary>
+    /// Occurs when the description textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when the amount textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when the repeat end date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
+    private void CalendarRepeatEndDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) => Validate();
 }

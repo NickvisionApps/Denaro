@@ -13,7 +13,7 @@
 
     <ScrollViewer Width="440" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtDescription_TextChanged"/>
 
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch"/>
+                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
 
                 <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
             </Grid>
@@ -52,7 +52,7 @@
                         </Button.Content>
                     </Button>
 
-                    <CalendarDatePicker x:Name="CalendarRepeatEndDate" wct:DockPanel.Dock="Left" HorizontalAlignment="Stretch"/>
+                    <CalendarDatePicker x:Name="CalendarRepeatEndDate" wct:DockPanel.Dock="Left" HorizontalAlignment="Stretch" DateChanged="CalendarRepeatEndDate_DateChanged"/>
                 </wct:DockPanel>
             </Grid>
 
