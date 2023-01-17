@@ -53,6 +53,7 @@ public partial class AccountSettingsDialog
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
+        _dialog.SetModal(true);
         if(!_controller.IsFirstTimeSetup)
         {
             _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
@@ -102,7 +103,7 @@ public partial class AccountSettingsDialog
         _btnIncome.OnToggled += OnTransactionTypeChanged;
         _btnExpense = Gtk.ToggleButton.NewWithLabel(_controller.Localizer["Expense"]);
         _btnExpense.OnToggled += OnTransactionTypeChanged;
-        _btnIncome.BindProperty("active", _btnExpense, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
+        _btnExpense.BindProperty("active", _btnIncome, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         _boxTypeButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
         _boxTypeButtons.SetValign(Gtk.Align.Center);
         _boxTypeButtons.AddCssClass("linked");
@@ -124,12 +125,26 @@ public partial class AccountSettingsDialog
         _rowCustomCurrency.SetTitle(_controller.Localizer["UseCustomCurrency", "Field"]);
         _rowCustomCurrency.SetShowEnableSwitch(true);
         _rowCustomCurrency.SetEnableExpansion(false);
+        _rowCustomCurrency.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "enable-expansion")
+            {
+                Validate();
+            }
+        };
         _grpCurrency.Add(_rowCustomCurrency);
         _txtCustomSymbol = Gtk.Entry.New();
         _txtCustomSymbol.SetValign(Gtk.Align.Center);
         _txtCustomSymbol.SetMaxLength(2);
         _txtCustomSymbol.SetPlaceholderText(_controller.Localizer["CustomCurrencySymbol", "Placeholder"]);
         _txtCustomSymbol.SetActivatesDefault(true);
+        _txtCustomSymbol.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _rowCustomSymbol = Adw.ActionRow.New();
         _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
         _rowCustomSymbol.AddSuffix(_txtCustomSymbol);
@@ -153,56 +168,70 @@ public partial class AccountSettingsDialog
         if (_controller.Metadata.DefaultTransactionType == TransactionType.Income)
         {
             _btnIncome.SetActive(true);
+            _btnExpense.SetActive(false);
         }
         else
         {
+            _btnIncome.SetActive(false);
             _btnExpense.SetActive(true);
         }
         _rowCustomCurrency.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
         _txtCustomSymbol.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _txtCustomCode.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
+        Validate();
+    }
+
+    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
+    {
+        add
+        {
+            _dialog.OnResponse += value;
+        }
+        remove
+        {
+            _dialog.OnResponse -= value;
+        }
     }
 
     /// <summary>
-    /// Runs the dialog
+    /// Shows the dialog
     /// </summary>
-    /// <returns>True if the dialog was accepted, else false</returns>
-    public bool Run()
+    public void Show() => _dialog.Show();
+
+    /// <summary>
+    /// Destroys the dialog
+    /// </summary>
+    public void Destroy() => _dialog.Destroy();
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
     {
-        _dialog.Show();
-        _dialog.SetModal(true);
-        _rowName.GrabFocus();
-        while(_dialog.IsVisible())
+        var transactionType = _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense;
+        var checkStatus = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType);
+        _rowName.RemoveCssClass("error");
+        _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
+        _rowCustomSymbol.RemoveCssClass("error");
+        _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
+        if(checkStatus == AccountMetadataCheckStatus.Valid)
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            _dialog.SetResponseEnabled("ok", true);
         }
-        if(_controller.Accepted || _controller.IsFirstTimeSetup)
+        else
         {
-            _dialog.SetModal(false);
-            var transactionType = _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense;
-            var status = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType);
-            if(status != AccountMetadataCheckStatus.Valid)
+            if(checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
             {
-                _rowName.RemoveCssClass("error");
-                _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-                _rowCustomSymbol.RemoveCssClass("error");
-                _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
-                //Mark Error
-                if (status == AccountMetadataCheckStatus.EmptyName)
-                {
-                    _rowName.AddCssClass("error");
-                    _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
-                }
-                else if(status == AccountMetadataCheckStatus.EmptyCurrencySymbol)
-                {
-                    _rowCustomSymbol.AddCssClass("error");
-                    _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
-                }
-                return Run();
+                _rowName.AddCssClass("error");
+                _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
             }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
+            {
+                _rowCustomSymbol.AddCssClass("error");
+                _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
+            }
+            _dialog.SetResponseEnabled("ok", false);
         }
-        _dialog.Destroy();
-        return _controller.Accepted;
     }
 
     /// <summary>
@@ -212,6 +241,7 @@ public partial class AccountSettingsDialog
     /// <param name="e">EventArgs</param>
     private void OnApplyName(Adw.EntryRow sender, EventArgs e)
     {
+        Validate();
         if(_rowName.GetText().Length == 0)
         {
             _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);

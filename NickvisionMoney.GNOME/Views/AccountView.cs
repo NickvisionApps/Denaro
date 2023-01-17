@@ -808,10 +808,15 @@ public partial class AccountView
     {
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
-        if(accountSettingsDialog.Run())
+        accountSettingsDialog.Show();
+        accountSettingsDialog.OnResponse += (sender, e) =>
         {
-            _controller.UpdateMetadata(accountSettingsController.Metadata);
-        }
+            if (accountSettingsController.Accepted)
+            {
+                _controller.UpdateMetadata(accountSettingsController.Metadata);
+            }
+            accountSettingsDialog.Destroy();
+        };
     }
 
     private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
