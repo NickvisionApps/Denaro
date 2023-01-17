@@ -32,12 +32,6 @@ public partial class TransactionDialog
     }
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -119,6 +113,7 @@ public partial class TransactionDialog
         _dialog = Adw.MessageDialog.New(_parentWindow, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
         _dialog.SetDefaultSize(420, -1);
         _dialog.SetHideOnClose(true);
+        _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
@@ -134,12 +129,26 @@ public partial class TransactionDialog
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
         _rowDescription.SetActivatesDefault(true);
+        _rowDescription.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _grpMain.Add(_rowDescription);
         //Amount
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
         _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
         _rowAmount.SetActivatesDefault(true);
+        _rowAmount.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
@@ -318,65 +327,77 @@ public partial class TransactionDialog
         {
             _btnReceiptUploadContent.SetLabel(_controller.Localizer["Upload"]);
         }
+        Validate();
+    }
+
+    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
+    {
+        add
+        {
+            _dialog.OnResponse += value;
+        }
+        remove
+        {
+            _dialog.OnResponse -= value;
+        }
     }
 
     /// <summary>
-    /// Runs the dialog
+    /// Shows the dialog
     /// </summary>
-    /// <returns>True if the dialog was accepted, else false</returns>
-    public bool Run()
+    public void Show() => _dialog.Show();
+
+    /// <summary>
+    /// Destroys the dialog
+    /// </summary>
+    public void Destroy() => _dialog.Destroy();
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
     {
-        _dialog.Show();
-        _dialog.SetModal(true);
-        while(_dialog.IsVisible())
+        var selectedDay = gtk_calendar_get_date(_calendarDate.Handle);
+        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var repeatEndDate = default(DateOnly?);
+        if (_btnRepeatEndDate.GetLabel() != _controller.Localizer["NoEndDate"])
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            var selectedEndDay = gtk_calendar_get_date(_calendarRepeatEndDate.Handle);
+            repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
-        if(_controller.Accepted)
+        var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem()!;
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
+        var checkStatus = _controller.UpdateTransaction(date, _rowDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _rowAmount.GetText(), _receiptPath, repeatEndDate);
+        _rowDescription.RemoveCssClass("error");
+        _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
+        _rowAmount.RemoveCssClass("error");
+        _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowRepeatEndDate.RemoveCssClass("error");
+        _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
+        if (checkStatus == TransactionCheckStatus.Valid)
         {
-            _dialog.SetModal(false);
-            var selectedDay = gtk_calendar_get_date(_calendarDate.Handle);
-            var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-            var repeatEndDate = default(DateOnly?);
-            if(_btnRepeatEndDate.GetLabel() != _controller.Localizer["NoEndDate"])
-            {
-                var selectedEndDay = gtk_calendar_get_date(_calendarRepeatEndDate.Handle);
-                repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
-            }
-            var groupObject = (Gtk.StringObject)_rowGroup.GetSelectedItem()!;
-            var color = new Color();
-            gtk_color_chooser_get_rgba(_btnColor.Handle, ref color);
-            var status = _controller.UpdateTransaction(date, _rowDescription.GetText(), _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_rowRepeatInterval.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _rowAmount.GetText(), _receiptPath, repeatEndDate);
-            if(status != TransactionCheckStatus.Valid)
-            {
-                //Reset UI
-                _rowDescription.RemoveCssClass("error");
-                _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
-                _rowAmount.RemoveCssClass("error");
-                _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-                _rowRepeatEndDate.RemoveCssClass("error");
-                _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
-                //Mark Error
-                if (status == TransactionCheckStatus.EmptyDescription)
-                {
-                    _rowDescription.AddCssClass("error");
-                    _rowDescription.SetTitle(_controller.Localizer["Description", "Empty"]);
-                }
-                else if(status == TransactionCheckStatus.InvalidAmount)
-                {
-                    _rowAmount.AddCssClass("error");
-                    _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
-                }
-                else if (status == TransactionCheckStatus.InvalidRepeatEndDate)
-                {
-                    _rowRepeatEndDate.AddCssClass("error");
-                    _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
-                }
-                return Run();
-            }
+            _dialog.SetResponseEnabled("ok", true);
         }
-        _dialog.Destroy();
-        return _controller.Accepted;
+        else
+        {
+            if (checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
+            {
+                _rowDescription.AddCssClass("error");
+                _rowDescription.SetTitle(_controller.Localizer["Description", "Empty"]);
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidAmount))
+            {
+                _rowAmount.AddCssClass("error");
+                _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+            }
+            if (checkStatus.HasFlag(TransactionCheckStatus.InvalidRepeatEndDate))
+            {
+                _rowRepeatEndDate.AddCssClass("error");
+                _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
+            }
+            _dialog.SetResponseEnabled("ok", false);
+        }
     }
 
     /// <summary>
@@ -434,6 +455,7 @@ public partial class TransactionDialog
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _btnRepeatEndDate.SetLabel(date.ToString("d"));
+        Validate();
     }
 
     /// <summary>
@@ -441,7 +463,11 @@ public partial class TransactionDialog
     /// </summary>
     /// <param name="sender">Gtk.Calendar</param>
     /// <param name="e">EventArgs</param>
-    private void OnRepeatEndDateClear(Gtk.Button sender, EventArgs e) => _btnRepeatEndDate.SetLabel(_controller.Localizer["NoEndDate"]);
+    private void OnRepeatEndDateClear(Gtk.Button sender, EventArgs e)
+    {
+        _btnRepeatEndDate.SetLabel(_controller.Localizer["NoEndDate"]);
+        Validate();
+    }
 
     /// <summary>
     /// Occurs when the view receipt button is clicked

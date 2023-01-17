@@ -689,7 +689,7 @@ public partial class AccountView
         }
     }
 
-    private async void TransferMoney(Gio.SimpleAction sender, EventArgs e)
+    private void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
         if (_controller.AccountTodayTotal > 0)
         {
@@ -814,57 +814,67 @@ public partial class AccountView
         }
     }
 
-    private async void NewTransaction(Gio.SimpleAction sender, EventArgs e)
+    private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        transactionDialog.Show();
+        transactionDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.AddTransactionAsync(transactionController.Transaction);
-        }
+            if (transactionController.Accepted)
+            {
+                await _controller.AddTransactionAsync(transactionController.Transaction);
+            }
+            transactionDialog.Destroy();
+        };
     }
 
-    private async void EditTransaction(object? sender, uint id)
+    private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        if(transactionDialog.Run())
+        transactionDialog.Show();
+        transactionDialog.OnResponse += async (sender, e) =>
         {
-            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            if (transactionController.Accepted)
             {
-                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    var result = dialog.Run();
-                    if (result == MessageDialogResponse.Suggested)
+                    if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                     {
-                        await _controller.DeleteGeneratedTransactionsAsync(id);
-                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                        dialog.UnsetDestructiveApperance();
+                        dialog.UnsetSuggestedApperance();
+                        var result = dialog.Run();
+                        if (result == MessageDialogResponse.Suggested)
+                        {
+                            await _controller.DeleteGeneratedTransactionsAsync(id);
+                            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                        }
+                        else if (result == MessageDialogResponse.Destructive)
+                        {
+                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                        }
                     }
-                    else if(result == MessageDialogResponse.Destructive)
+                    else
                     {
-                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                        dialog.UnsetDestructiveApperance();
+                        dialog.UnsetSuggestedApperance();
+                        var result = dialog.Run();
+                        if (result != MessageDialogResponse.Cancel)
+                        {
+                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
+                        }
                     }
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    var result = dialog.Run();
-                    if (result != MessageDialogResponse.Cancel)
-                    {
-                        await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == MessageDialogResponse.Suggested);
-                    }
+                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
                 }
             }
-            else
-            {
-                await _controller.UpdateTransactionAsync(transactionController.Transaction);
-            }
-        }
+            transactionDialog.Destroy();
+        };
     }
 
     private async void DeleteTransaction(object? sender, uint id)
