@@ -25,6 +25,7 @@ public partial class GroupDialog
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Group"], "");
         _dialog.SetDefaultSize(360, -1);
         _dialog.SetHideOnClose(true);
+        _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
