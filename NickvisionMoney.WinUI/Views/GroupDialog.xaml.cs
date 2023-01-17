@@ -11,6 +11,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class GroupDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly GroupDialogController _controller;
 
     /// <summary>
@@ -20,6 +21,7 @@ public sealed partial class GroupDialog : ContentDialog
     public GroupDialog(GroupDialogController controller)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         //Localize Strings
         Title = $"{_controller.Localizer["Group"]} - {_controller.Group.Id}";
@@ -34,6 +36,7 @@ public sealed partial class GroupDialog : ContentDialog
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
         Validate();
+        _constructing = false;
     }
 
     /// <summary>
@@ -84,5 +87,24 @@ public sealed partial class GroupDialog : ContentDialog
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">TextChangedEventArgs</param>
-    private void TxtName_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+    private void TxtName_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if(!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the description textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
 }

@@ -7,6 +7,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class GroupDialog
 {
+    private bool _constructing;
     private readonly GroupDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
@@ -20,6 +21,7 @@ public partial class GroupDialog
     /// <param name="parentWindow">Gtk.Window</param>
     public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow)
     {
+        _constructing = true;
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Group"], "");
@@ -42,7 +44,10 @@ public partial class GroupDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                Validate();
+                if(!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         _grpGroup.Add(_rowName);
@@ -50,6 +55,16 @@ public partial class GroupDialog
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
         _rowDescription.SetActivatesDefault(true);
+        _rowDescription.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         _grpGroup.Add(_rowDescription);
         //Layout
         _dialog.SetExtraChild(_grpGroup);
@@ -57,6 +72,7 @@ public partial class GroupDialog
         _rowName.SetText(_controller.Group.Name);
         _rowDescription.SetText(_controller.Group.Description);
         Validate();
+        _constructing = false;
     }
 
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
