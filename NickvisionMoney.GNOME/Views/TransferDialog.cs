@@ -9,12 +9,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransferDialog
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
-
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly Adw.MessageDialog _dialog;
@@ -42,6 +36,7 @@ public partial class TransferDialog
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
         _dialog.SetDefaultSize(360, -1);
         _dialog.SetHideOnClose(true);
+        _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
@@ -88,55 +83,75 @@ public partial class TransferDialog
         _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
         _rowAmount.SetActivatesDefault(true);
         _rowAmount.AddSuffix(_lblCurrency);
+        _rowAmount.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _grpAmount = Adw.PreferencesGroup.New();
         _grpAmount.Add(_rowAmount);
         _boxMain.Append(_grpAmount);
         //Layout
         _dialog.SetExtraChild(_boxMain);
+        Validate();
+    }
+
+    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
+    {
+        add
+        {
+            _dialog.OnResponse += value;
+        }
+        remove
+        {
+            _dialog.OnResponse -= value;
+        }
     }
 
     /// <summary>
-    /// Runs the dialog
+    /// Shows the dialog
     /// </summary>
-    /// <returns>True if the dialog was accepted, else false</returns>
-    public bool Run()
+    public void Show() => _dialog.Show();
+
+    /// <summary>
+    /// Destroys the dialog
+    /// </summary>
+    public void Destroy() => _dialog.Destroy();
+
+    /// <summary>
+    /// Validates the dialog's input
+    /// </summary>
+    private void Validate()
     {
-        _dialog.Show();
-        _dialog.SetModal(true);
-        while (_dialog.IsVisible())
+        var checkStatus = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _rowAmount.GetText());
+        _lblDestination.RemoveCssClass("error");
+        _lblSelectedAccount.RemoveCssClass("error");
+        _btnSelectAccount.RemoveCssClass("error");
+        _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Field"]);
+        _rowAmount.RemoveCssClass("error");
+        _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        if (checkStatus == TransferCheckStatus.Valid)
         {
-            g_main_context_iteration(g_main_context_default(), false);
+            _dialog.SetResponseEnabled("ok", true);
         }
-        if(_controller.Accepted)
+        else
         {
-            _dialog.SetModal(false);
-            var status = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _rowAmount.GetText());
-            if(status != TransferCheckStatus.Valid)
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
-                _lblDestination.RemoveCssClass("error");
-                _lblSelectedAccount.RemoveCssClass("error");
-                _btnSelectAccount.RemoveCssClass("error");
-                _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Field"]);
-                _rowAmount.RemoveCssClass("error");
-                _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-                //Mark Error
-                if(status == TransferCheckStatus.InvalidDestPath)
-                {
-                    _lblDestination.AddCssClass("error");
-                    _lblSelectedAccount.AddCssClass("error");
-                    _btnSelectAccount.AddCssClass("error");
-                    _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Invalid"]);
-                }
-                else if(status == TransferCheckStatus.InvalidAmount)
-                {
-                    _rowAmount.AddCssClass("error");
-                    _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
-                }
-                return Run();
+                _lblDestination.AddCssClass("error");
+                _lblSelectedAccount.AddCssClass("error");
+                _btnSelectAccount.AddCssClass("error");
+                _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Invalid"]);
             }
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
+            {
+                _rowAmount.AddCssClass("error");
+                _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+            }
+            _dialog.SetResponseEnabled("ok", false);
         }
-        _dialog.Destroy();
-        return _controller.Accepted;
     }
 
     /// <summary>
@@ -158,6 +173,7 @@ public partial class TransferDialog
             {
                 var path = openFileDialog.GetFile()!.GetPath();
                 _lblSelectedAccount.SetText(path ?? "");
+                Validate();
             }
         };
         openFileDialog.Show();

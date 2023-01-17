@@ -695,10 +695,15 @@ public partial class AccountView
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            if (transferDialog.Run())
+            transferDialog.Show();
+            transferDialog.OnResponse += async (sender, e) =>
             {
-                await _controller.SendTransferAsync(transferController.Transfer);
-            }
+                if (transferController.Accepted)
+                {
+                    await _controller.SendTransferAsync(transferController.Transfer);
+                }
+                transferDialog.Destroy();
+            };
         }
         else
         {
