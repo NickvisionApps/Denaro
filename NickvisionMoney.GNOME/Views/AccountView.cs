@@ -1068,7 +1068,20 @@ public partial class AccountView
         {
             if (groupController.Accepted)
             {
-                await _controller.AddGroupAsync(groupController.Group);
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
             }
             groupDialog.Destroy();
         };
@@ -1088,7 +1101,20 @@ public partial class AccountView
         {
             if(groupController.Accepted)
             {
-                await _controller.UpdateGroupAsync(groupController.Group);
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
             }
             groupDialog.Destroy();
         };
