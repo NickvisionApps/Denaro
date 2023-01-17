@@ -34,7 +34,7 @@ public partial class TransferDialog
         _parentWindow = parentWindow;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
-        _dialog.SetDefaultSize(360, -1);
+        _dialog.SetDefaultSize(420, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
