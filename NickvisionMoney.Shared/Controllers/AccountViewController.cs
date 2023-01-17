@@ -347,17 +347,6 @@ public class AccountViewController
     }
 
     /// <summary>
-    /// Gets the UI group row object via index
-    /// </summary>
-    /// <param name="index">The index of the row</param>
-    /// <returns>The IGroupRowControl</returns>
-    public IGroupRowControl GetUIGroupRowFromIndex(int index)
-    {
-        var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
-        return GroupRows[groups[index].Id];
-    }
-
-    /// <summary>
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
