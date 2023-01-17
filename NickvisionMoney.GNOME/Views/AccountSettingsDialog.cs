@@ -15,12 +15,6 @@ public partial class AccountSettingsDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
-
     private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
@@ -251,10 +245,6 @@ public partial class AccountSettingsDialog
     /// <param name="e">EventArgs</param>
     private void OnApplyName(Adw.EntryRow sender, EventArgs e)
     {
-        if(!_constructing)
-        {
-            Validate();
-        }
         if(_rowName.GetText().Length == 0)
         {
             _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);
@@ -302,6 +292,10 @@ public partial class AccountSettingsDialog
                 }
             }
         }
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -309,10 +303,6 @@ public partial class AccountSettingsDialog
     /// </summary>
     private void OnAccountTypeChanged()
     {
-        if (!_constructing)
-        {
-            Validate();
-        }
         var bgColorString = _controller.GetColorForAccountType((AccountType)_rowAccountType.GetSelected());
         var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
@@ -320,6 +310,10 @@ public partial class AccountSettingsDialog
         var btnCss = "#btnAvatar { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
         gtk_css_provider_load_from_data(_btnAvatarCssProvider.Handle, btnCss, btnCss.Length);
         _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -329,10 +323,6 @@ public partial class AccountSettingsDialog
     /// <param name="e">EventArgs</param>
     private void OnTransactionTypeChanged(Gtk.ToggleButton sender, EventArgs e)
     {
-        if (!_constructing)
-        {
-            Validate();
-        }
         if (_btnIncome.GetActive())
         {
             _btnIncome.AddCssClass("success");
@@ -347,6 +337,10 @@ public partial class AccountSettingsDialog
             _btnIncome.RemoveCssClass("denaro-income");
             _btnExpense.AddCssClass("error");
             _btnExpense.AddCssClass("denaro-expense");
+        }
+        if (!_constructing)
+        {
+            Validate();
         }
     }
 }
