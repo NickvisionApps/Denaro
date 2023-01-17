@@ -24,7 +24,7 @@ public sealed partial class GroupDialog : ContentDialog
         _constructing = true;
         _controller = controller;
         //Localize Strings
-        Title = $"{_controller.Localizer["Group"]} - {_controller.Group.Id}";
+        Title = _controller.Localizer["Group"];
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer["OK"];
         TxtName.Header = _controller.Localizer["Name", "Field"];
