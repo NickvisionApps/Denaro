@@ -626,6 +626,9 @@ public partial class AccountView
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
 
+    /// <summary>
+    /// Starts the account view
+    /// </summary>
     public async void Startup()
     {
         if (_controller.AccountNeedsFirstTimeSetup)
@@ -652,6 +655,11 @@ public partial class AccountView
         _scrollPane.SetSensitive(true);
     }
 
+    /// <summary>
+    /// Occurs when the account's transactions are changed 
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
     private void OnAccountTransactionsChanged(object? sender, EventArgs e)
     {
         if(!_isAccountLoading)
@@ -692,6 +700,11 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the transfer money item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void TransferMoney(Gio.SimpleAction sender, EventArgs e)
     {
         if (_controller.AccountTodayTotal > 0)
@@ -714,6 +727,11 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the export to csv item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
     {
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
@@ -737,6 +755,11 @@ public partial class AccountView
         saveFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the export to pdf item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
     {
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
@@ -760,6 +783,11 @@ public partial class AccountView
         saveFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the import from file item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
@@ -807,6 +835,11 @@ public partial class AccountView
         openFileDialog.Show();
     }
 
+    /// <summary>
+    /// Occurs when the account settings item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
     {
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
@@ -822,6 +855,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the new transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
         using var transactionController = _controller.CreateTransactionDialogController();
@@ -837,6 +875,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the edit transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
@@ -893,6 +936,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the delete transaction item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void DeleteTransaction(object? sender, uint id)
     {
         if(_controller.GetIsSourceRepeatTransaction(id))
@@ -925,6 +973,11 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the new group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
@@ -940,6 +993,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the edit group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
@@ -955,6 +1013,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the delete group item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
@@ -969,6 +1032,11 @@ public partial class AccountView
         };
     }
 
+    /// <summary>
+    /// Occurs when the reset overview filter button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
     {
         _chkIncome.SetActive(true);
@@ -1003,7 +1071,12 @@ public partial class AccountView
         _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
     }
 
-    private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the calendar's month/year is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Calendar</param>
+    /// <param name="e">EventArgs</param>
+    private void OnCalendarMonthYearChanged(Gtk.Calendar sender, EventArgs e)
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
@@ -1018,6 +1091,11 @@ public partial class AccountView
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, 0));
     }
 
+    /// <summary>
+    /// Occurs when the calendar's date selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.Calendar</param>
+    /// <param name="e">EventArgs</param>
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
     {
         if(!_isAccountLoading)
@@ -1027,12 +1105,20 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the reset calendar filter button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
         _expRange.SetEnableExpansion(false);
     }
 
+    /// <summary>
+    /// Occurs when the select date range is toggled
+    /// </summary>
     private void OnDateRangeToggled()
     {
         if(_expRange.GetEnableExpansion())
@@ -1055,8 +1141,14 @@ public partial class AccountView
         }
     }
 
+    /// <summary>
+    /// Occurs when the date range's start year is changed
+    /// </summary>
     private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's start month is changed
+    /// </summary>
     private void OnDateRangeStartMonthChanged()
     {
         var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]);
@@ -1077,10 +1169,19 @@ public partial class AccountView
         _ddStartDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
+    /// <summary>
+    /// Occurs when the date range's start day is changed
+    /// </summary>
     private void OnDateRangeStartDayChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's end year is changed
+    /// </summary>
     private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the date range's end month is changed
+    /// </summary>
     private void OnDateRangeEndMonthChanged()
     {
         var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]);
@@ -1101,14 +1202,21 @@ public partial class AccountView
         _ddEndDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
+    /// <summary>
+    /// Occurs when the date range's end day is changed
+    /// </summary>
     private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
 
+    /// <summary>
+    /// Occurs when the window's width is changed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
         foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
-            g_main_context_iteration(g_main_context_default(), false);
         }
     }
 }
