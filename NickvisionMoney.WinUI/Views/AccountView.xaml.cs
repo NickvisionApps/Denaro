@@ -206,26 +206,12 @@ public sealed partial class AccountView : UserControl
         {
             AccountSettings(null, new RoutedEventArgs());
         }
-        //Start Loading
-        CmdBar.IsEnabled = false;
-        ScrollSidebar.IsEnabled = false;
-        ViewStackTransactions.IsEnabled = false;
-        LoadingCtrl.IsLoading = true;
-        //Work
-        await Task.Run(async () =>
-        {
-            await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.StartupAsync());
-        });
+        await _controller.StartupAsync();
         ListTransactions.UpdateLayout();
         for (var i = 0; i < ListTransactions.Items.Count; i++)
         {
             ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
         }
-        //Done Loading
-        CmdBar.IsEnabled = true;
-        ScrollSidebar.IsEnabled = true;
-        ViewStackTransactions.IsEnabled = true;
-        LoadingCtrl.IsLoading = false;
     }
 
     /// <summary>
@@ -520,21 +506,7 @@ public sealed partial class AccountView : UserControl
         var file = await fileOpenPicker.PickSingleFileAsync();
         if (file != null)
         {
-            //Start Loading
-            CmdBar.IsEnabled = false;
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
-            LoadingCtrl.IsLoading = true;
-            //Work
-            await Task.Run(async () =>
-            {
-                await App.MainWindow!.DispatcherQueue.EnqueueAsync(async () => await _controller.ImportFromFileAsync(file.Path));
-            });
-            //Done Loading
-            CmdBar.IsEnabled = true;
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
-            LoadingCtrl.IsLoading = false;
+            await _controller.ImportFromFileAsync(file.Path);
         }
     }
 

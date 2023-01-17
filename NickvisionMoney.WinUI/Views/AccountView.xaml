@@ -256,11 +256,5 @@
                 </nickvision:ViewStack.Pages>
             </nickvision:ViewStack>
         </wct:DockPanel>
-
-        <wct:Loading x:Name="LoadingCtrl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsLoading="False">
-            <Grid>
-                <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" IsActive="True"/>
-            </Grid>
-        </wct:Loading>
     </Grid>
 </UserControl>
