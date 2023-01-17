@@ -185,10 +185,12 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     /// <param name="e">RoutedEventArgs</param>
     private async void Help(object sender, RoutedEventArgs e)
     {
-        var lang = CultureInfo.CurrentCulture.ToString() switch {
-            "ru-RU" => "ru",
-            _ => "C"
-        };
+        var lang = "C";
+        var availableTranslations = new string[2] {"es", "ru"};
+        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+        {
+            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        }
         await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
