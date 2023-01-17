@@ -885,24 +885,34 @@ public partial class AccountView
         }
     }
 
-    private async void NewGroup(Gio.SimpleAction sender, EventArgs e)
+    private void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
+        groupDialog.Show();
+        groupDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.AddGroupAsync(groupController.Group);
-        }
+            if (groupController.Accepted)
+            {
+                await _controller.AddGroupAsync(groupController.Group);
+            }
+            groupDialog.Destroy();
+        };
     }
 
-    private async void EditGroup(object? sender, uint id)
+    private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        if(groupDialog.Run())
+        groupDialog.Show();
+        groupDialog.OnResponse += async (sender, e) =>
         {
-            await _controller.UpdateGroupAsync(groupController.Group);
-        }
+            if(groupController.Accepted)
+            {
+                await _controller.UpdateGroupAsync(groupController.Group);
+            }
+            groupDialog.Destroy();
+        };
     }
 
     private async void DeleteGroup(object? sender, uint id)
