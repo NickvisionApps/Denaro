@@ -21,6 +21,7 @@ public partial class AccountSettingsDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
+    private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
@@ -48,6 +49,7 @@ public partial class AccountSettingsDialog
     /// <param name="parentWindow">Gtk.Window</param>
     public AccountSettingsDialog(AccountSettingsDialogController controller, Gtk.Window parentWindow)
     {
+        _constructing = true;
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
@@ -129,7 +131,10 @@ public partial class AccountSettingsDialog
         {
             if (e.Pspec.GetName() == "enable-expansion")
             {
-                Validate();
+                if (!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         _grpCurrency.Add(_rowCustomCurrency);
@@ -142,7 +147,10 @@ public partial class AccountSettingsDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                Validate();
+                if (!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         _rowCustomSymbol = Adw.ActionRow.New();
@@ -154,6 +162,16 @@ public partial class AccountSettingsDialog
         _txtCustomCode.SetMaxLength(3);
         _txtCustomCode.SetPlaceholderText(_controller.Localizer["CustomCurrencyCode", "Placeholder"]);
         _txtCustomCode.SetActivatesDefault(true);
+        _txtCustomCode.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         _rowCustomCode = Adw.ActionRow.New();
         _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
         _rowCustomCode.AddSuffix(_txtCustomCode);
@@ -165,20 +183,12 @@ public partial class AccountSettingsDialog
         OnApplyName(_rowName, EventArgs.Empty);
         _rowAccountType.SetSelected((uint)_controller.Metadata.AccountType);
         OnAccountTypeChanged();
-        if (_controller.Metadata.DefaultTransactionType == TransactionType.Income)
-        {
-            _btnIncome.SetActive(true);
-            _btnExpense.SetActive(false);
-        }
-        else
-        {
-            _btnIncome.SetActive(false);
-            _btnExpense.SetActive(true);
-        }
+        _btnIncome.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
         _rowCustomCurrency.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
         _txtCustomSymbol.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _txtCustomCode.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
         Validate();
+        _constructing = false;
     }
 
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
@@ -241,7 +251,10 @@ public partial class AccountSettingsDialog
     /// <param name="e">EventArgs</param>
     private void OnApplyName(Adw.EntryRow sender, EventArgs e)
     {
-        Validate();
+        if(!_constructing)
+        {
+            Validate();
+        }
         if(_rowName.GetText().Length == 0)
         {
             _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);
@@ -296,6 +309,10 @@ public partial class AccountSettingsDialog
     /// </summary>
     private void OnAccountTypeChanged()
     {
+        if (!_constructing)
+        {
+            Validate();
+        }
         var bgColorString = _controller.GetColorForAccountType((AccountType)_rowAccountType.GetSelected());
         var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
@@ -312,7 +329,11 @@ public partial class AccountSettingsDialog
     /// <param name="e">EventArgs</param>
     private void OnTransactionTypeChanged(Gtk.ToggleButton sender, EventArgs e)
     {
-        if(_btnIncome.GetActive())
+        if (!_constructing)
+        {
+            Validate();
+        }
+        if (_btnIncome.GetActive())
         {
             _btnIncome.AddCssClass("success");
             _btnIncome.AddCssClass("denaro-income");

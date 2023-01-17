@@ -52,7 +52,7 @@ public class AccountSettingsDialogController
     internal AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
     {
         Localizer = localizer;
-        Metadata = metadata;
+        Metadata = (AccountMetadata)metadata.Clone();
         IsFirstTimeSetup = isFirstTimeSetup;
         Accepted = false;
     }

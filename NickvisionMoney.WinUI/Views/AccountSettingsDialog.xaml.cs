@@ -17,6 +17,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class AccountSettingsDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
 
     /// <summary>
@@ -26,6 +27,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     public AccountSettingsDialog(AccountSettingsDialogController controller)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         //Localize Strings
         Title = $"{_controller.Localizer["AccountSettings"]}";
@@ -61,6 +63,31 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         }
         TxtName_TextChanged(null, null);
         TglUseCustomCurrency_Toggled(null, new RoutedEventArgs());
+        Validate();
+        _constructing = false;
+    }
+
+    /// <summary>
+    /// Shows the AccountSettingsDialog
+    /// </summary>
+    /// <returns>True if the dialog was accepted, else false</returns>
+    public new async Task<bool> ShowAsync()
+    {
+        var result = await base.ShowAsync();
+        if (result == ContentDialogResult.None)
+        {
+            if (_controller.IsFirstTimeSetup)
+            {
+                return await ShowAsync();
+            }
+            else
+            {
+                _controller.Accepted = false;
+                return false;
+            }
+        }
+        _controller.Accepted = true;
+        return true;
     }
 
     /// <summary>
@@ -92,36 +119,16 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     }
 
     /// <summary>
-    /// Shows the AccountSettingsDialog
-    /// </summary>
-    /// <returns>True if the dialog was accepted, else false</returns>
-    public new async Task<bool> ShowAsync()
-    {
-        var result = await base.ShowAsync();
-        if (result == ContentDialogResult.None)
-        {
-            if (_controller.IsFirstTimeSetup)
-            {
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = false;
-                return false;
-            }
-        }
-        _controller.Accepted = true;
-        return true;
-    }
-
-    /// <summary>
     /// Occurs when the name field's text is changed
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">TextChangedEventArgs?</param>
     private void TxtName_TextChanged(object? sender, TextChangedEventArgs? e)
     {
-        Validate();
+        if(!_constructing)
+        {
+            Validate();
+        }
         if (TxtName.Text.Length == 0)
         {
             LblId.Text = _controller.Localizer["NotAvailable"];
@@ -178,11 +185,28 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">SelectionChangedEventArgs</param>
     private void CmbAccountType_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (!_constructing)
+        {
+            Validate();
+        }
         var bgColorString = _controller.GetColorForAccountType((AccountType)CmbAccountType.SelectedIndex);
         var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         BorderId.Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!);
         LblId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
+    }
+
+    /// <summary>
+    /// Occurs when the default transaction type combobox's selection is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbDefaultTransactionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -192,7 +216,10 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">RoutedEventArgs</param>
     private void TglUseCustomCurrency_Toggled(object? sender, RoutedEventArgs e)
     {
-        Validate();
+        if (!_constructing)
+        {
+            Validate();
+        }
         if (TglUseCustomCurrency.IsOn)
         {
             TxtCustomSymbol.IsEnabled = true;
@@ -211,5 +238,24 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="e">TextChangedEventArgs</param>
-    private void TxtCustomSymbol_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+    private void TxtCustomSymbol_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom code textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomCode_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
 }

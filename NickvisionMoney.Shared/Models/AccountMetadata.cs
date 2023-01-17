@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using System;
 using System.IO;
 
 namespace NickvisionMoney.Shared.Models;
@@ -25,7 +26,7 @@ public enum SortBy
 /// <summary>
 /// A model of metadata for an account
 /// </summary>
-public class AccountMetadata
+public class AccountMetadata : ICloneable
 {
     /// <summary>
     /// The name of the account
@@ -82,6 +83,29 @@ public class AccountMetadata
         SortTransactionsBy = SortBy.Id;
     }
 
+    /// <summary>
+    /// Clones the transaction
+    /// </summary>
+    /// <returns>A new transaction</returns>
+    public object Clone()
+    {
+        return new AccountMetadata(Name, AccountType)
+        {
+            UseCustomCurrency = UseCustomCurrency,
+            CustomCurrencySymbol = CustomCurrencySymbol,
+            CustomCurrencyCode = CustomCurrencyCode,
+            DefaultTransactionType = DefaultTransactionType,
+            ShowGroupsList = ShowGroupsList,
+            SortFirstToLast = SortFirstToLast,
+            SortTransactionsBy = SortTransactionsBy
+        };
+    }
+
+    /// <summary>
+    /// Loads metadata from an account file
+    /// </summary>
+    /// <param name="path">The path to the account file</param>
+    /// <returns>AccountMetadata?</returns>
     public static AccountMetadata? LoadFromAccountFile(string path)
     {
         if(Path.GetExtension(path) != ".nmoney")
