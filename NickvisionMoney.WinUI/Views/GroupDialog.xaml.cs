@@ -33,12 +33,7 @@ public sealed partial class GroupDialog : ContentDialog
         //Load Group
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
-        if(string.IsNullOrEmpty(_controller.Group.Name))
-        {
-            TxtName.Header = _controller.Localizer["Name", "Empty"];
-            TxtErrors.Visibility = Visibility.Visible;
-            IsPrimaryButtonEnabled = false;
-        }
+        Validate();
     }
 
     /// <summary>
@@ -58,30 +53,36 @@ public sealed partial class GroupDialog : ContentDialog
     }
 
     /// <summary>
-    /// Occurs when the name textbox is changed
+    /// Validates the dialog's input
     /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">TextChangedEventArgs</param>
-    private void TxtName_TextChanged(object sender, TextChangedEventArgs e)
+    private void Validate()
     {
         var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
-        if(checkStatus == GroupCheckStatus.Valid)
+        TxtName.Header = _controller.Localizer["Name", "Field"];
+        if (checkStatus == GroupCheckStatus.Valid)
         {
-            TxtName.Header = _controller.Localizer["Name", "Field"];
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
-        else if(checkStatus == GroupCheckStatus.EmptyName)
+        else
         {
-            TxtName.Header = _controller.Localizer["Name", "Empty"];
-            TxtErrors.Visibility = Visibility.Visible;
-            IsPrimaryButtonEnabled = false;
-        }
-        else if(checkStatus == GroupCheckStatus.NameExists)
-        {
-            TxtName.Header = _controller.Localizer["Name", "Exists"];
+            if (checkStatus == GroupCheckStatus.EmptyName)
+            {
+                TxtName.Header = _controller.Localizer["Name", "Empty"];
+            }
+            else if(checkStatus == GroupCheckStatus.NameExists)
+            {
+                TxtName.Header = _controller.Localizer["Name", "Exists"];
+            }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
         }
     }
+
+    /// <summary>
+    /// Occurs when the name textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtName_TextChanged(object sender, TextChangedEventArgs e) => Validate();
 }
