@@ -33,6 +33,12 @@ public sealed partial class GroupDialog : ContentDialog
         //Load Group
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
+        if(string.IsNullOrEmpty(_controller.Group.Name))
+        {
+            TxtName.Header = _controller.Localizer["Name", "Empty"];
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
     }
 
     /// <summary>
@@ -47,30 +53,35 @@ public sealed partial class GroupDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        else if(result == ContentDialogResult.Primary)
+        _controller.Accepted = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Occurs when the name textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtName_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
+        if(checkStatus == GroupCheckStatus.Valid)
         {
-            var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
-            if (checkStatus != GroupCheckStatus.Valid)
-            {
-                //Reset UI
-                TxtName.Header = _controller.Localizer["Name", "Field"];
-                if (checkStatus == GroupCheckStatus.EmptyName)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Empty"];
-                }
-                else if (checkStatus == GroupCheckStatus.NameExists)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Exists"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
+            TxtName.Header = _controller.Localizer["Name", "Field"];
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
         }
-        return false;
+        else if(checkStatus == GroupCheckStatus.EmptyName)
+        {
+            TxtName.Header = _controller.Localizer["Name", "Empty"];
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
+        else if(checkStatus == GroupCheckStatus.NameExists)
+        {
+            TxtName.Header = _controller.Localizer["Name", "Exists"];
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
     }
 }

@@ -13,7 +13,7 @@
 
     <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
         <StackPanel Spacing="6">
-            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
+            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
 
             <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True"/>
 
