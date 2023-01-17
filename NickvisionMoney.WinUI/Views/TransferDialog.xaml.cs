@@ -58,6 +58,34 @@ public sealed partial class TransferDialog : ContentDialog
     }
 
     /// <summary>
+    /// Validate the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text);
+        TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        if (checkStatus == TransferCheckStatus.Valid)
+        {
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
+        }
+        else
+        {
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
+            {
+                TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
+            {
+                TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
+    }
+
+    /// <summary>
     /// Occurs when the select account button is clicked
     /// </summary>
     /// <param name="sender">object</param>
@@ -73,34 +101,6 @@ public sealed partial class TransferDialog : ContentDialog
         {
             TxtDestinationAccount.Text = file.Path;
             Validate();
-        }
-    }
-
-    /// <summary>
-    /// Validate the dialog's input
-    /// </summary>
-    private void Validate()
-    {
-        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text);
-        TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
-        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
-        if (checkStatus == TransferCheckStatus.Valid)
-        {
-            TxtErrors.Visibility = Visibility.Collapsed;
-            IsPrimaryButtonEnabled = true;
-        }
-        else
-        {
-            if(checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
-            {
-                TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
-            }
-            if(checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
-            {
-                TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
-            }
-            TxtErrors.Visibility = Visibility.Visible;
-            IsPrimaryButtonEnabled = false;
         }
     }
 
