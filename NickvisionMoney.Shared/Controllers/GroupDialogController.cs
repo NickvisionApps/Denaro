@@ -19,6 +19,7 @@ public enum GroupCheckStatus
 /// </summary>
 public class GroupDialogController
 {
+    private string _originalName;
     private readonly List<string> _existingNames;
 
     /// <summary>
@@ -42,6 +43,7 @@ public class GroupDialogController
     /// <param name="localizer">The Localizer of the app</param>
     internal GroupDialogController(Group group, List<string> existingNames, Localizer localizer)
     {
+        _originalName = group.Name;
         _existingNames = existingNames;
         Localizer = localizer;
         Group = (Group)group.Clone();
@@ -56,6 +58,7 @@ public class GroupDialogController
     /// <param name="localizer">The Localizer of the app</param>
     internal GroupDialogController(uint id, List<string> existingNames, Localizer localizer)
     {
+        _originalName = "";
         _existingNames = existingNames;
         Localizer = localizer;
         Group = new Group(id);
@@ -74,7 +77,7 @@ public class GroupDialogController
         {
             return GroupCheckStatus.EmptyName;
         }
-        if(name != Group.Name && _existingNames.Contains(name))
+        if(name != _originalName && _existingNames.Contains(name))
         {
             return GroupCheckStatus.NameExists;
         }
