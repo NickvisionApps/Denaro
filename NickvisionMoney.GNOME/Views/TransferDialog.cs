@@ -1,6 +1,5 @@
 using NickvisionMoney.Shared.Controllers;
 using System;
-using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
