@@ -187,9 +187,9 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     {
         var lang = "C";
         var availableTranslations = new string[2] {"es", "ru"};
-        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToString()))
+        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
         {
-            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToString();
+            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         }
         await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
