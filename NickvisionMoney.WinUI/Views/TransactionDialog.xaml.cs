@@ -16,6 +16,7 @@ namespace NickvisionMoney.WinUI.Views;
 /// </summary>
 public sealed partial class TransactionDialog : ContentDialog
 {
+    private bool _constructing;
     private readonly TransactionDialogController _controller;
     private readonly Action<object> _initializeWithWindow;
     private string? _receiptPath;
@@ -28,6 +29,7 @@ public sealed partial class TransactionDialog : ContentDialog
     public TransactionDialog(TransactionDialogController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
+        _constructing = true;
         _controller = controller;
         _initializeWithWindow = initializeWithWindow;
         _receiptPath = null;
@@ -89,6 +91,7 @@ public sealed partial class TransactionDialog : ContentDialog
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
         Validate();
+        _constructing = false;
     }
 
     /// <summary>
@@ -141,6 +144,71 @@ public sealed partial class TransactionDialog : ContentDialog
     }
 
     /// <summary>
+    /// Occurs when the description textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the amount textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the type combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
+    private void CalendarDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the group combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
     /// Occurs when the repeat interval combobox is changed
     /// </summary>
     /// <param name="sender">object</param>
@@ -150,6 +218,23 @@ public sealed partial class TransactionDialog : ContentDialog
         var isRepeatIntervalNever = (string)CmbRepeatInterval.SelectedItem == _controller.Localizer["RepeatInterval", "Never"];
         CalendarRepeatEndDate.IsEnabled = !isRepeatIntervalNever;
         BtnRepeatEndDateClear.IsEnabled = !isRepeatIntervalNever;
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the repeat end date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
+    private void CalendarRepeatEndDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -176,6 +261,7 @@ public sealed partial class TransactionDialog : ContentDialog
         _receiptPath = "";
         BtnReceiptView.IsEnabled = false;
         BtnReceiptDelete.IsEnabled = false;
+        Validate();
     }
 
     /// <summary>
@@ -197,27 +283,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             _receiptPath = file.Path;
             BtnReceiptView.IsEnabled = true;
+            Validate();
         }
     }
-
-    /// <summary>
-    /// Occurs when the description textbox is changed
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">TextChangedEventArgs</param>
-    private void TxtDescription_TextChanged(object sender, TextChangedEventArgs e) => Validate();
-
-    /// <summary>
-    /// Occurs when the amount textbox is changed
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">TextChangedEventArgs</param>
-    private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e) => Validate();
-
-    /// <summary>
-    /// Occurs when the repeat end date is changed
-    /// </summary>
-    /// <param name="sender">CalendarDatePicker</param>
-    /// <param name="e">CalendarDatePickerDateChangedEventArgs</param>
-    private void CalendarRepeatEndDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args) => Validate();
 }

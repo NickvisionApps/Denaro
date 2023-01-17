@@ -62,6 +62,7 @@ public partial class TransactionDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
+    private bool _constructing;
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
     private readonly Adw.MessageDialog _dialog;
@@ -106,6 +107,7 @@ public partial class TransactionDialog
     /// <param name="parentWindow">Gtk.Window</param>
     public TransactionDialog(TransactionDialogController controller, Gtk.Window parentWindow)
     {
+        _constructing = true;
         _controller = controller;
         _receiptPath = null;
         _parentWindow = parentWindow;
@@ -133,7 +135,10 @@ public partial class TransactionDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                Validate();
+                if(!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         _grpMain.Add(_rowDescription);
@@ -146,7 +151,10 @@ public partial class TransactionDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                Validate();
+                if (!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
@@ -237,10 +245,21 @@ public partial class TransactionDialog
             groups.Add(pair.Value);
         }
         _rowGroup.SetModel(Gtk.StringList.New(groups.ToArray()));
+        _rowGroup.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         _grpGroupColor.Add(_rowGroup);
         //Color
         _btnColor = Gtk.ColorButton.New();
         _btnColor.SetValign(Gtk.Align.Center);
+        _btnColor.OnColorSet += (sender, e) => Validate();
         _rowColor = Adw.ActionRow.New();
         _rowColor.SetTitle(_controller.Localizer["Color", "Field"]);
         _rowColor.AddSuffix(_btnColor);
@@ -287,14 +306,7 @@ public partial class TransactionDialog
         OnDateChanged(_calendarDate, EventArgs.Empty);
         _rowDescription.SetText(_controller.Transaction.Description);
         _rowAmount.SetText(_controller.Transaction.Amount.ToString("N2"));
-        if (_controller.Transaction.Type == TransactionType.Income)
-        {
-            _btnIncome.SetActive(true);
-        }
-        else
-        {
-            _btnExpense.SetActive(true);
-        }
+        _btnIncome.SetActive(_controller.Transaction.Type == TransactionType.Income);
         _rowRepeatInterval.SetSelected(_controller.RepeatIntervalIndex);
         _rowRepeatEndDate.SetSensitive(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
         if (_controller.Transaction.RepeatEndDate != null)
@@ -328,6 +340,7 @@ public partial class TransactionDialog
             _btnReceiptUploadContent.SetLabel(_controller.Localizer["Upload"]);
         }
         Validate();
+        _constructing = false;
     }
 
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
@@ -407,7 +420,7 @@ public partial class TransactionDialog
     /// <param name="e">EventArgs</param>
     private void OnTypeChanged(Gtk.ToggleButton sender, EventArgs e)
     {
-        if(_btnIncome.GetActive())
+        if (_btnIncome.GetActive())
         {
             _btnIncome.AddCssClass("success");
             _btnIncome.AddCssClass("denaro-income");
@@ -422,6 +435,10 @@ public partial class TransactionDialog
             _btnExpense.AddCssClass("error");
             _btnExpense.AddCssClass("denaro-expense");
         }
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -434,6 +451,10 @@ public partial class TransactionDialog
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _btnDate.SetLabel(date.ToString("d"));
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -443,6 +464,10 @@ public partial class TransactionDialog
     {
         var isRepeatIntervalNever = ((Gtk.StringObject)_rowRepeatInterval.SelectedItem!).String == _controller.Localizer["RepeatInterval", "Never"];
         _rowRepeatEndDate.SetSensitive(!isRepeatIntervalNever);
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -455,7 +480,10 @@ public partial class TransactionDialog
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _btnRepeatEndDate.SetLabel(date.ToString("d"));
-        Validate();
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -466,7 +494,10 @@ public partial class TransactionDialog
     private void OnRepeatEndDateClear(Gtk.Button sender, EventArgs e)
     {
         _btnRepeatEndDate.SetLabel(_controller.Localizer["NoEndDate"]);
-        Validate();
+        if (!_constructing)
+        {
+            Validate();
+        }
     }
 
     /// <summary>
@@ -488,6 +519,7 @@ public partial class TransactionDialog
         _btnReceiptViewContent.SetLabel("");
         _btnReceiptDelete.SetSensitive(false);
         _btnReceiptUploadContent.SetLabel(_controller.Localizer["Upload"]);
+        Validate();
     }
 
     /// <summary>
@@ -528,6 +560,7 @@ public partial class TransactionDialog
                 _btnReceiptView.SetSensitive(true);
                 _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
                 _btnReceiptUploadContent.SetLabel("");
+                Validate();
             }
         };
         openFileDialog.Show();

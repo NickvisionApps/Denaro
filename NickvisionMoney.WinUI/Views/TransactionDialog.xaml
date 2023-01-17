@@ -23,7 +23,7 @@
                 
                 <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
 
-                <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+                <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" SelectionChanged="CmbType_SelectionChanged"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch">
@@ -32,9 +32,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch"/>
+                <CalendarDatePicker x:Name="CalendarDate" Grid.Column="0" HorizontalAlignment="Stretch" DateChanged="CalendarDate_DateChanged"/>
 
-                <ComboBox x:Name="CmbGroup" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0"/>
+                <ComboBox x:Name="CmbGroup" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" SelectionChanged="CmbGroup_SelectionChanged"/>
             </Grid>
 
             <Grid HorizontalAlignment="Stretch">
@@ -59,7 +59,7 @@
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
                 <TextBlock x:Name="LblColor"/>
 
-                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32"/>
+                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" />
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
