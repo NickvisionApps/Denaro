@@ -46,35 +46,9 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2023.1.0" date="2023-1-17">
+    <release version="2023.2.0-next" date="2023-1-17">
       <description>
-        <p>- Money has been completely rewritten in C# and now has a new name: Denaro! With the C# rewrite, there is now a new version of Denaro available on Windows!</p>
-		<p>- Added an Account Settings dialog to allow users to customize their accounts better</p>
-        <p>- Added an "Ungrouped" row to the groups section to allow filtering transactions that don't belong to a group</p>
-        <p>- Added the ability to attach a jpg/png/pdf of a receipt to a transaction</p>
-        <p>- Reworked the repeat transaction system and added support for a biweekly interval</p>
-		<p>- Added the ability to export an account as a PDF</p>
-		<p>- Added the ability to sort transactions by id or date</p>
-        <p>- Added the ability to hide the groups section</p>
-        <p>- Made a group's description an optional field</p>
-        <p xml:lang="es">- Money ha sido completamente reescrito en C# y ahora tiene un nombre nuevo: ¡Denaro! Con la reescritura en C#, ¡ahora hay una nueva versión de Denaro disponible en Windows!</p>
-		<p xml:lang="es">- Añadido un cuadro de diálogo de configuración de la cuenta para que los usuarios puedan personalizarla mejor</p>
-        <p xml:lang="es">- Añadida una fila "Sin agrupar" a la sección de grupos para poder filtrar las transacciones que no pertenecen a un grupo</p>
-        <p xml:lang="es">- Añadida la posibilidad de adjuntar un jpg/png/pdf de un recibo a una transacción</p>
-        <p xml:lang="es">- Modificado el sistema de repetición de transacciones y se ha añadido un intervalo quincenal</p>
-		<p xml:lang="es">- Añadida la posibilidad de exportar una cuenta en formato PDF</p>
-		<p xml:lang="es">- Añadida la posibilidad de ordenar las transacciones por id o fecha</p>
-        <p xml:lang="es">- Añadida la posibilidad de ocultar la sección de grupos</p>
-        <p xml:lang="es">- Convertir la descripción de un grupo en un campo opcional</p>
-        <p xml:lang="it">- Money è stato riscritto completamente in C# e ha ricevuto un nome nuovo: Denaro! Con la conversione a C#, arriva una versione di Denaro per Windows!</p>
-		<p xml:lang="it">- Aggiunta una finestra per personalizzare gli account</p>
-        <p xml:lang="it">- Aggiunta la possibilità di creare transazioni senza un gruppo</p>
-        <p xml:lang="it">- Aggiunta la possibilità di aggiungere un jpg/png/pdf come ricevuta di una transazione</p>
-        <p xml:lang="it">- La funzionalità delle transazioni ricorrenti è stata rielaborata e supporta transazioni bisettimanali</p>
-		<p xml:lang="it">- Aggiunta la possibilità di ordinare le trasazioni cronologicamente o per ID</p>
-		<p xml:lang="it">- Aggiunta la possibilità di esportare un account come PDF</p>
-        <p xml:lang="it">- Aggiunta la possibilità di nascondere la sezione dei gruppi</p>
-        <p xml:lang="it">- La descrizione dei gruppi è ora facoltativa</p>
+		<p></p>
       </description>
     </release>
   </releases>
