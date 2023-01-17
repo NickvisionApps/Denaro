@@ -7,6 +7,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.System;
 using Windows.UI;
