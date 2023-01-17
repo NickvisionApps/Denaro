@@ -1,14 +1,14 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using NickvisionMoney.Shared.Controllers;
-using System.Threading.Tasks;
-using System;
 using Microsoft.UI.Xaml.Media;
-using NickvisionMoney.WinUI.Helpers;
-using Windows.UI;
+using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Helpers;
+using System;
 using System.Text.RegularExpressions;
-using Microsoft.UI;
+using System.Threading.Tasks;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -64,6 +64,34 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     }
 
     /// <summary>
+    /// Validate the dialog's input
+    /// </summary>
+    private void Validate()
+    {
+        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
+        TxtName.Header = _controller.Localizer["Name", "Field"];
+        TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
+        if (checkStatus == AccountMetadataCheckStatus.Valid)
+        {
+            TxtErrors.Visibility = Visibility.Collapsed;
+            IsPrimaryButtonEnabled = true;
+        }
+        else
+        {
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
+            {
+                TxtName.Header = _controller.Localizer["Name", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
+            }
+            TxtErrors.Visibility = Visibility.Visible;
+            IsPrimaryButtonEnabled = false;
+        }
+    }
+
+    /// <summary>
     /// Shows the AccountSettingsDialog
     /// </summary>
     /// <returns>True if the dialog was accepted, else false</returns>
@@ -82,32 +110,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 return false;
             }
         }
-        else if (result == ContentDialogResult.Primary)
-        {
-            var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
-            if (checkStatus != AccountMetadataCheckStatus.Valid)
-            {
-                //Reset UI
-                TxtName.Header = _controller.Localizer["Name", "Field"];
-                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
-                if (checkStatus == AccountMetadataCheckStatus.EmptyName)
-                {
-                    TxtName.Header = _controller.Localizer["Name", "Empty"];
-                }
-                else if (checkStatus == AccountMetadataCheckStatus.EmptyCurrencySymbol)
-                {
-                    TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
-                }
-                TxtErrors.Visibility = Visibility.Visible;
-                return await ShowAsync();
-            }
-            else
-            {
-                _controller.Accepted = true;
-                return true;
-            }
-        }
-        return false;
+        _controller.Accepted = true;
+        return true;
     }
 
     /// <summary>
@@ -117,6 +121,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">TextChangedEventArgs?</param>
     private void TxtName_TextChanged(object? sender, TextChangedEventArgs? e)
     {
+        Validate();
         if (TxtName.Text.Length == 0)
         {
             LblId.Text = _controller.Localizer["NotAvailable"];
@@ -187,6 +192,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">RoutedEventArgs</param>
     private void TglUseCustomCurrency_Toggled(object? sender, RoutedEventArgs e)
     {
+        Validate();
         if (TglUseCustomCurrency.IsOn)
         {
             TxtCustomSymbol.IsEnabled = true;
@@ -197,5 +203,13 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             TxtCustomSymbol.IsEnabled = false;
             TxtCustomCode.IsEnabled = false;
         }
+
     }
+
+    /// <summary>
+    /// Occurs when the custom symbol textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomSymbol_TextChanged(object sender, TextChangedEventArgs e) => Validate();
 }
