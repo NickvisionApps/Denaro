@@ -60,6 +60,7 @@ public partial class AccountView
     private readonly Adw.Flap _flap;
     private readonly Gtk.ScrolledWindow _scrollPane;
     private readonly Gtk.Box _paneBox;
+    private readonly Gtk.SearchEntry _txtSearchDescription;
     private readonly Gtk.Label _lblTotal;
     private readonly Adw.ActionRow _rowTotal;
     private readonly Gtk.Label _lblIncome;
@@ -159,6 +160,11 @@ public partial class AccountView
         _paneBox.SetMarginEnd(10);
         _paneBox.SetMarginBottom(10);
         _scrollPane.SetChild(_paneBox);
+        //Search Description Text
+        _txtSearchDescription = Gtk.SearchEntry.New();
+        _txtSearchDescription.SetProperty("placeholder-text", GObject.Value.From(_controller.Localizer["SearchDescription", "Placeholder"]));
+        _txtSearchDescription.OnSearchChanged += (sender, e) => _controller.SearchDescription = _txtSearchDescription.GetText();
+        _paneBox.Append(_txtSearchDescription);
         //Account Total
         _lblTotal = Gtk.Label.New("");
         _lblTotal.SetValign(Gtk.Align.Center);
