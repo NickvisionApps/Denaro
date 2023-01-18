@@ -359,7 +359,9 @@ public class AccountViewController
             }
             else if (SortTransactionsBy == SortBy.Amount)
             {
-                compareTo = a.Amount.CompareTo(b.Amount);
+                var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
+                var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
+                compareTo = aAmount.CompareTo(bAmount);
             }
             if (!SortFirstToLast)
             {
@@ -891,7 +893,9 @@ public class AccountViewController
             }
             else if (SortTransactionsBy == SortBy.Amount)
             {
-                compareTo = _account.Transactions[a].Amount.CompareTo(_account.Transactions[b].Amount);
+                var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
+                var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
+                compareTo = aAmount.CompareTo(bAmount);
             }
             if (!SortFirstToLast)
             {
