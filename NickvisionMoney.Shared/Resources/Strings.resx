@@ -436,6 +436,10 @@
 		<value>Sort By Date</value>
 	</data>
 
+	<data name="SearchDescription.Placeholder" xml:space="preserve">
+		<value>Search by description</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>

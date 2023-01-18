@@ -19,6 +19,7 @@ public class AccountViewController
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
+    private string _searchDescription;
 
     /// <summary>
     /// The localizer to get translated strings from
@@ -154,6 +155,7 @@ public class AccountViewController
         }
         _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
+        _searchDescription = "";
     }
 
     /// <summary>
@@ -276,6 +278,20 @@ public class AccountViewController
             }
             years.Sort();
             return years;
+        }
+    }
+
+    /// <summary>
+    /// The search description text
+    /// </summary>
+    public string SearchDescription
+    {
+        get => _searchDescription;
+
+        set
+        {
+            _searchDescription = value;
+            FilterUIUpdate();
         }
     }
 
@@ -783,6 +799,13 @@ public class AccountViewController
         var filteredTransactions = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
+            if(!string.IsNullOrEmpty(SearchDescription))
+            {
+                if(!pair.Value.Description.Contains(SearchDescription))
+                {
+                    continue;
+                }
+            }
             if (pair.Value.Type == TransactionType.Income && !_filters[-3])
             {
                 continue;
