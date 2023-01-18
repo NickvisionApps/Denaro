@@ -801,7 +801,7 @@ public class AccountViewController
         {
             if(!string.IsNullOrEmpty(SearchDescription))
             {
-                if(!pair.Value.Description.Contains(SearchDescription))
+                if(!pair.Value.Description.ToLower().Contains(SearchDescription.ToLower()))
                 {
                     continue;
                 }
