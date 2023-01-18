@@ -468,14 +468,14 @@ Deze actie is onomkeerbaar..</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value>Programma</value>
+		<value>App</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Los bovenstaande problemen op.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Wijzigingslog</value>
+		<value>Wat is er nieuw?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Ontwikkelaars:
@@ -491,7 +491,7 @@ Vertalers:
 {3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Herstart het programma om het thema te wijzigen.</value>
+		<value>Herstart de app om het thema te wijzigen.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Programma herstarten?</value>
@@ -673,5 +673,8 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Hulp</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>VOORVERTONING</value>
   </data>
 </root>
