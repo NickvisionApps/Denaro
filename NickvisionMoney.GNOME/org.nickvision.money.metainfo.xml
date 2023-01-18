@@ -48,7 +48,7 @@
   <releases>
     <release version="2023.2.0-next" date="2023-1-17">
       <description>
-		<p></p>
+		<p>- Added the ability to search for transactions by description</p>
       </description>
     </release>
   </releases>
