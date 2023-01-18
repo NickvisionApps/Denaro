@@ -149,7 +149,7 @@ public class AccountViewController
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
         _filters.Add(-1, true); //No Group
-        foreach(var pair in _account.Groups)
+        foreach (var pair in _account.Groups)
         {
             _filters.Add((int)pair.Value.Id, true);
         }
@@ -336,6 +336,7 @@ public class AccountViewController
     public async Task StartupAsync()
     {
         await _account.SyncRepeatTransactionsAsync();
+        _searchDescription = "";
         //Groups
         GroupRows.Clear();
         foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
