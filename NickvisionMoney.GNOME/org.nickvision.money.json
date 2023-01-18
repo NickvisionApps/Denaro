@@ -19,7 +19,6 @@
         "--socket=wayland",
         "--device=dri",
         "--share=ipc",
-        "--share=network",
         "--filesystem=home"
     ],
     "cleanup":[
