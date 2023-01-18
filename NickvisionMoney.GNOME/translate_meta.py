@@ -25,9 +25,13 @@ for filename in os.listdir(resx_dir):
                 text = item.find('value').text
                 if text:
                     desktop_comments.append(f'Comment[{lang_code}]={text}')
-                    meta_summaries.append(f'  <summary xml:lang="{lang_code}">{text}</summary>')
                     meta_descriptions.append(f'    <p xml:lang="{lang_code}">\n      {text}\n    </p>')
+            elif item.attrib['name'] == 'Summary.GTK':
+                text = item.find('value').text
+                if text:
+                    meta_summaries.append(f'  <summary xml:lang="{lang_code}">{text}</summary>')
 desktop_comments.sort()
+meta_summaries.sort()
 meta_descriptions.sort()
 
 with open(f'{install_prefix}/share/applications/org.nickvision.money.desktop', 'r') as f:

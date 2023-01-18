@@ -134,7 +134,7 @@ public partial class AccountSettingsDialog
         _grpCurrency.Add(_rowCustomCurrency);
         _txtCustomSymbol = Gtk.Entry.New();
         _txtCustomSymbol.SetValign(Gtk.Align.Center);
-        _txtCustomSymbol.SetMaxLength(2);
+        _txtCustomSymbol.SetMaxLength(3);
         _txtCustomSymbol.SetPlaceholderText(_controller.Localizer["CustomCurrencySymbol", "Placeholder"]);
         _txtCustomSymbol.SetActivatesDefault(true);
         _txtCustomSymbol.OnNotify += (sender, e) =>

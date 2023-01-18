@@ -27,7 +27,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.2.0-next";
-        _mainWindowController.AppInfo.Changelog = "- Added the ability to search for transactions by description\n- Fixed an issue where a change in an account's currency symbol would not display until account was reopened\n- Fixed an issue where a group row's filter checkbox resets on group update\n- Fixed an issue where transaction color changes were not applying";
+        _mainWindowController.AppInfo.Changelog = "- Added the ability to search for transactions by description\n- Custom currency symbols can now be 3 chars in length\n- Fixed an issue where a change in an account's currency symbol would not display until account was reopened\n- Fixed an issue where a group row's filter checkbox resets on group update\n- Fixed an issue where transaction color changes were not applying";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
