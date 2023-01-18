@@ -180,6 +180,7 @@ public class AccountViewController
                 lcMonetary = lcMonetary.Replace('_', '-');
             }
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
@@ -187,7 +188,7 @@ public class AccountViewController
             }
             else
             {
-                culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
+                culture.NumberFormat.NaNSymbol = region.ISOCurrencySymbol;
             }
             return culture;
         }
