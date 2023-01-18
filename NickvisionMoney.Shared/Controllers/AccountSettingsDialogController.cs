@@ -39,11 +39,6 @@ public class AccountSettingsDialogController
     public bool Accepted { get; set; }
 
     /// <summary>
-    /// The system reported currency string (Ex: "$ (USD)")
-    /// </summary>
-    public string ReportedCurrencyString => $"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})";
-
-    /// <summary>
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
@@ -55,6 +50,28 @@ public class AccountSettingsDialogController
         Metadata = (AccountMetadata)metadata.Clone();
         IsFirstTimeSetup = isFirstTimeSetup;
         Accepted = false;
+    }
+
+    /// <summary>
+    /// The system reported currency string (Ex: "$ (USD)")
+    /// </summary>
+    public string ReportedCurrencyString
+    {
+        get
+        {
+            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            {
+                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+            }
+            if (lcMonetary != null && lcMonetary.Contains('_'))
+            {
+                lcMonetary.Replace('_', '-');
+            }
+            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+            return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
+        }
     }
 
     /// <summary>
