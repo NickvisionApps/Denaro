@@ -674,4 +674,7 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="SortBy.Date" xml:space="preserve">
     <value>Ordina per data</value>
   </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>ANTEPRIMA</value>
+  </data>
 </root>
