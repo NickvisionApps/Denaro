@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Traducteurs sur Weblate ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Compte Nickvision Money</value>
+		<value>Compte Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Nouveau compte</value>
@@ -610,5 +610,59 @@ les transactions individuelles générées seront modifiables.</value>
   </data>
   <data name="AccountSettings" xml:space="preserve">
     <value>Paramètres du compte</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Affaires</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Entrez un symbole ici</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Code monétaire</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Entrez un code ici</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Couleur du compte d’épargne</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Couleur du compte d’affaires</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Couleur du compte de chèques</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Trier par date</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Page {0}</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>Il s’agit seulement d’un indicateur utile, qui n’affecte pas le fonctionnement de l’application.</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Votre système indique que votre devise monétaire est</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Symbole monétaire (vide)</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Généré : {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Devise monétaire</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Nom de groupe</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Utiliser une devise personnalisée</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>PRÉVISUALISATION</value>
   </data>
 </root>
