@@ -355,11 +355,11 @@ public class AccountViewController
             }
             else if (SortTransactionsBy == SortBy.Date)
             {
-                compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+                compareTo = a.Date.CompareTo(b.Date);
             }
             else if (SortTransactionsBy == SortBy.Amount)
             {
-                compareTo = _account.Transactions[a].Amount.CompareTo(_account.Transactions[b].Amount);
+                compareTo = a.Amount.CompareTo(b.Amount);
             }
             if (!SortFirstToLast)
             {
@@ -881,15 +881,15 @@ public class AccountViewController
         transactions.Sort((a, b) =>
         {
             int compareTo = 0;
-            if(SortTransactionsBy == SortBy.Id)
+            if (SortTransactionsBy == SortBy.Id)
             {
                 compareTo = a.CompareTo(b);
             }
-            else if(SortTransactionsBy == SortBy.Date)
+            else if (SortTransactionsBy == SortBy.Date)
             {
                 compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
             }
-            else if(SortTransactionsBy == SortBy.Amount)
+            else if (SortTransactionsBy == SortBy.Amount)
             {
                 compareTo = _account.Transactions[a].Amount.CompareTo(_account.Transactions[b].Amount);
             }
