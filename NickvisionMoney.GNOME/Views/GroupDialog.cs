@@ -39,6 +39,7 @@ public partial class GroupDialog
         //Name
         _rowName = Adw.EntryRow.New();
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
+        _rowName.SetInputHints(Gtk.InputHints.Spellcheck);
         _rowName.SetActivatesDefault(true);
         _rowName.OnNotify += (sender, e) =>
         {
@@ -54,6 +55,7 @@ public partial class GroupDialog
         //Description
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
+        _rowDescription.SetInputHints(Gtk.InputHints.Spellcheck);
         _rowDescription.SetActivatesDefault(true);
         _rowDescription.OnNotify += (sender, e) =>
         {
