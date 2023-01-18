@@ -171,7 +171,15 @@ public class AccountViewController
         get
         {
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+            if(lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            {
+                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8", 6));
+            }
+            if(lcMonetary != null && lcMonetary.Contains('_'))
+            {
+                lcMonetary.Replace('_', '-');
+            }
+            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
@@ -182,6 +190,18 @@ public class AccountViewController
                 culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
             }
             return culture;
+        }
+    }
+
+    /// <summary>
+    /// The CultureInfo to use when displaying a date string
+    /// </summary>
+    public CultureInfo CultureForDateString
+    {
+        get
+        {
+            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            return new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
         }
     }
 
