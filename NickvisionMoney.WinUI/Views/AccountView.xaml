@@ -131,8 +131,10 @@
 
         <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,46,6,6" LastChildFill="True">
             <ScrollViewer x:Name="ScrollSidebar" wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
-                <wct:DockPanel LastChildFill="True">
-                    <Border wct:DockPanel.Dock="Top" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                <wct:DockPanel LastChildFill="True" Margin="0,0,10,0">
+                    <AutoSuggestBox x:Name="TxtSearchDescription" wct:DockPanel.Dock="Top" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
+
+                    <Border wct:DockPanel.Dock="Top" Margin="0,6,0,0" Height="160" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                         <StackPanel Spacing="12">
                             <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
@@ -198,7 +200,7 @@
                 </wct:DockPanel>
             </ScrollViewer>
 
-            <nickvision:ViewStack x:Name="ViewStackTransactions" wct:DockPanel.Dock="Right" Margin="0,-6,0,0">
+            <nickvision:ViewStack x:Name="ViewStackTransactions" wct:DockPanel.Dock="Right" Margin="-4,-6,0,0">
                 <nickvision:ViewStack.Pages>
                     <nickvision:ViewStackPage PageName="NoTransactions">
                         <nickvision:StatusPage x:Name="StatusPageNoTransactions" HorizontalAlignment="Center" VerticalAlignment="Center"/>

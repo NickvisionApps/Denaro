@@ -59,6 +59,7 @@ public sealed partial class AccountView : UserControl
         MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
         MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
         BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
+        TxtSearchDescription.PlaceholderText = _controller.Localizer["SearchDescription", "Placeholder"];
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
@@ -746,6 +747,13 @@ public sealed partial class AccountView : UserControl
             _controller.UpdateMetadata(accountSettingsController.Metadata);
         }
     }
+
+    /// <summary>
+    /// Occurs when the search description textbox is changed
+    /// </summary>
+    /// <param name="sender">AutoSuggestBox</param>
+    /// <param name="args">AutoSuggestBoxTextChangedEventArgs</param>
+    private void TxtSearchDescription_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) => _controller.SearchDescription = TxtSearchDescription.Text;
 
     /// <summary>
     /// Occurs when the income filter checkbox is changed
