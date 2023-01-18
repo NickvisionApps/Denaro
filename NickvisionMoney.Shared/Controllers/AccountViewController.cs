@@ -868,7 +868,19 @@ public class AccountViewController
         var transactions = _account.Transactions.Keys.ToList();
         transactions.Sort((a, b) =>
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            int compareTo = 0;
+            if(SortTransactionsBy == SortBy.Id)
+            {
+                compareTo = a.CompareTo(b);
+            }
+            else if(SortTransactionsBy == SortBy.Date)
+            {
+                compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+            }
+            else if(SortTransactionsBy == SortBy.Amount)
+            {
+                compareTo = _account.Transactions[a].Amount.CompareTo(_account.Transactions[b].Amount);
+            }
             if (!SortFirstToLast)
             {
                 compareTo *= -1;

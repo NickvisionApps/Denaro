@@ -20,7 +20,8 @@ public enum AccountType
 public enum SortBy
 {
     Id = 0,
-    Date
+    Date,
+    Amount
 }
 
 /// <summary>
