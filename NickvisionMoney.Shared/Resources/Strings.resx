@@ -436,6 +436,10 @@
 		<value>Sort By Date</value>
 	</data>
 
+	<data name="SortBy.Amount" xml:space="preserve">
+		<value>Sort By Amount</value>
+	</data>
+
 	<data name="SearchDescription.Placeholder" xml:space="preserve">
 		<value>Search by description</value>
 	</data>

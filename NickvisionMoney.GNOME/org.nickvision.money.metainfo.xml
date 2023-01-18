@@ -48,7 +48,7 @@
   <releases>
     <release version="2023.2.0-next" date="2023-1-18">
       <description>
-		  <p></p>
+		  <p>- Added the ability to sort transactions by amount</p>
       </description>
     </release>
   </releases>

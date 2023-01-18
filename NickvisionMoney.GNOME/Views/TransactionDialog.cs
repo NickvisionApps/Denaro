@@ -130,6 +130,7 @@ public partial class TransactionDialog
         //Description
         _rowDescription = Adw.EntryRow.New();
         _rowDescription.SetTitle(_controller.Localizer["Description", "Field"]);
+        _rowDescription.SetInputHints(Gtk.InputHints.Spellcheck);
         _rowDescription.SetActivatesDefault(true);
         _rowDescription.OnNotify += (sender, e) =>
         {

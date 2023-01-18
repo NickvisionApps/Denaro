@@ -348,7 +348,21 @@ public class AccountViewController
         var transactions = _account.Transactions.Values.ToList();
         transactions.Sort((a, b) =>
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? a.Date.CompareTo(b.Date) : a.CompareTo(b);
+            int compareTo = 0;
+            if (SortTransactionsBy == SortBy.Id)
+            {
+                compareTo = a.CompareTo(b);
+            }
+            else if (SortTransactionsBy == SortBy.Date)
+            {
+                compareTo = a.Date.CompareTo(b.Date);
+            }
+            else if (SortTransactionsBy == SortBy.Amount)
+            {
+                var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
+                var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
+                compareTo = aAmount.CompareTo(bAmount);
+            }
             if (!SortFirstToLast)
             {
                 compareTo *= -1;
@@ -868,7 +882,21 @@ public class AccountViewController
         var transactions = _account.Transactions.Keys.ToList();
         transactions.Sort((a, b) =>
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            int compareTo = 0;
+            if (SortTransactionsBy == SortBy.Id)
+            {
+                compareTo = a.CompareTo(b);
+            }
+            else if (SortTransactionsBy == SortBy.Date)
+            {
+                compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+            }
+            else if (SortTransactionsBy == SortBy.Amount)
+            {
+                var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
+                var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
+                compareTo = aAmount.CompareTo(bAmount);
+            }
             if (!SortFirstToLast)
             {
                 compareTo *= -1;

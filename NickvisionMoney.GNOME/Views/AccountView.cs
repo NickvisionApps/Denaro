@@ -406,7 +406,7 @@ public partial class AccountView
         _btnNewTransaction.SetMarginBottom(10);
         _btnNewTransaction.SetDetailedActionName("account.newTransaction");
         //Sort Box And Buttons
-        _ddSortTransactionBy = Gtk.DropDown.NewFromStrings(new string[2] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"] });
+        _ddSortTransactionBy = Gtk.DropDown.NewFromStrings(new string[3] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"], _controller.Localizer["SortBy", "Amount"] });
         _ddSortTransactionBy.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
