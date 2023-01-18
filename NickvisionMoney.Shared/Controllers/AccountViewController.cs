@@ -173,7 +173,7 @@ public class AccountViewController
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
             if(lcMonetary != null && lcMonetary.Contains(".UTF-8"))
             {
-                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8", 6));
+                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
             if(lcMonetary != null && lcMonetary.Contains('_'))
             {
