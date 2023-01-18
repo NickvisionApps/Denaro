@@ -59,7 +59,7 @@
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
                 <TextBlock x:Name="LblColor"/>
 
-                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" />
+                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" SelectedColor="{x:Bind SelectedColor, Mode=TwoWay}"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">

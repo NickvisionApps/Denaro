@@ -19,6 +19,7 @@ public sealed partial class TransactionDialog : ContentDialog
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private readonly Action<object> _initializeWithWindow;
+    private Color _selectedColor;
     private string? _receiptPath;
 
     /// <summary>
@@ -87,11 +88,25 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
-        BtnColor.SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
+        _selectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
         Validate();
         _constructing = false;
+    }
+
+    public Color SelectedColor
+    {
+        get => _selectedColor;
+
+        set
+        {
+            _selectedColor = value;
+            if(!_constructing)
+            {
+                Validate();
+            }
+        }
     }
 
     /// <summary>
