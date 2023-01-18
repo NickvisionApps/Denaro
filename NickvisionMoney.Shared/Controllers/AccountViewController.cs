@@ -201,6 +201,14 @@ public class AccountViewController
         get
         {
             var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            if (lcTime != null && lcTime.Contains(".UTF-8"))
+            {
+                lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            if (lcTime != null && lcTime.Contains('_'))
+            {
+                lcTime.Replace('_', '-');
+            }
             return new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
         }
     }
