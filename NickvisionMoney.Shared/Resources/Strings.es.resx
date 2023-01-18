@@ -668,4 +668,10 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="SortBy.Date" xml:space="preserve">
     <value>Ordenar por fecha</value>
   </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>VISTA PREVIA</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Buscar por las descripciones</value>
+  </data>
 </root>
