@@ -49,6 +49,7 @@
     <release version="2023.2.0-next" date="2023-1-18">
       <description>
 		  <p>- Added the ability to sort transactions by amount</p>
+		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
       </description>
     </release>
   </releases>
