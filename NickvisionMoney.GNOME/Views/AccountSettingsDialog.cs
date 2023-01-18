@@ -110,7 +110,7 @@ public partial class AccountSettingsDialog
         _rowTransactionType.AddSuffix(_boxTypeButtons);
         _grpAccount.Add(_rowTransactionType);
         //Reported Currency
-        _lblReportedCurrency = Gtk.Label.New($"{_controller.Localizer["ReportedCurrency"]}\n<b>{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})</b>");
+        _lblReportedCurrency = Gtk.Label.New($"{_controller.Localizer["ReportedCurrency"]}\n<b>{_controller.ReportedCurrencyString}</b>");
         _lblReportedCurrency.SetUseMarkup(true);
         _lblReportedCurrency.SetJustify(Gtk.Justification.Center);
         _boxMain.Append(_lblReportedCurrency);
