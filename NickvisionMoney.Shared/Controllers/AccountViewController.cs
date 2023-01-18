@@ -85,7 +85,7 @@ public class AccountViewController
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => _account.TodayTotal.ToString("C", CultureForNumberString);
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{Math.Abs(_account.TodayTotal).ToString("C", CultureForNumberString)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
