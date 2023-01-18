@@ -170,7 +170,8 @@ public class AccountViewController
     {
         get
         {
-            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
