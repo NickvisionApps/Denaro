@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="2" TextChanged="TxtCustomSymbol_TextChanged"/>
+                <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="3" TextChanged="TxtCustomSymbol_TextChanged"/>
 
                 <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
             </Grid>

@@ -98,9 +98,9 @@ public class AccountSettingsDialogController
         {
             return result;
         }
-        if(customSymbol != null && customSymbol.Length > 2)
+        if(customSymbol != null && customSymbol.Length > 3)
         {
-            customSymbol = customSymbol.Substring(0, 2);
+            customSymbol = customSymbol.Substring(0, 3);
         }
         if (customCode != null && customCode.Length > 3)
         {
