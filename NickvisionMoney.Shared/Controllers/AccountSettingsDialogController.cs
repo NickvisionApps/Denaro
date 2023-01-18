@@ -62,11 +62,11 @@ public class AccountSettingsDialogController
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
             if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
             {
-                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
             if (lcMonetary != null && lcMonetary.Contains('_'))
             {
-                lcMonetary.Replace('_', '-');
+                lcMonetary = lcMonetary.Replace('_', '-');
             }
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);

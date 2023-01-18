@@ -173,11 +173,11 @@ public class AccountViewController
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
             if(lcMonetary != null && lcMonetary.Contains(".UTF-8"))
             {
-                lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
             if(lcMonetary != null && lcMonetary.Contains('_'))
             {
-                lcMonetary.Replace('_', '-');
+                lcMonetary = lcMonetary.Replace('_', '-');
             }
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             if (_account.Metadata.UseCustomCurrency)
@@ -203,11 +203,11 @@ public class AccountViewController
             var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
             if (lcTime != null && lcTime.Contains(".UTF-8"))
             {
-                lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
             }
             if (lcTime != null && lcTime.Contains('_'))
             {
-                lcTime.Replace('_', '-');
+                lcTime = lcTime.Replace('_', '-');
             }
             return new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
         }
