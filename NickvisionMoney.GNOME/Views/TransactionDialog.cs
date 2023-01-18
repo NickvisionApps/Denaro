@@ -451,7 +451,7 @@ public partial class TransactionDialog
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _btnDate.SetLabel(date.ToString("d"));
+        _btnDate.SetLabel(date.ToString("d", _controller.CultureForDateString));
         if (!_constructing)
         {
             Validate();
@@ -480,7 +480,7 @@ public partial class TransactionDialog
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _btnRepeatEndDate.SetLabel(date.ToString("d"));
+        _btnRepeatEndDate.SetLabel(date.ToString("d", _controller.CultureForDateString));
         if (!_constructing)
         {
             Validate();
