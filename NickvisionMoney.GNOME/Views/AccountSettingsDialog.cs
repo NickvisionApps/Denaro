@@ -158,7 +158,7 @@ public partial class AccountSettingsDialog
         _txtCustomCode.SetActivatesDefault(true);
         _txtCustomCode.OnNotify += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "text")
             {
                 if (!_constructing)
                 {

@@ -51,7 +51,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
         MenuDelete.Text = localizer["Delete", "GroupRow"];
         ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
         ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
-        UpdateRow(group, filterActive);
+        UpdateRow(group, culture, filterActive);
     }
 
     /// <summary>
@@ -79,9 +79,11 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// </summary>
     /// <param name="group">The new Group model</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, bool filterActive)
+    /// <param name="culture">The culture to use for displaying strings</param>
+    public void UpdateRow(Group group, CultureInfo culture, bool filterActive)
     {
         Id = group.Id;
+        _culture = culture;
         if(group.Id == 0)
         {
             MenuEdit.IsEnabled = false;
@@ -93,7 +95,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
         LblName.Text = group.Name;
         LblDescription.Visibility = string.IsNullOrEmpty(group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = group.Description;
-        LblAmount.Text = group.Balance.ToString("C", _culture);
+        LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _culture)}";
         LblAmount.Foreground = group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 

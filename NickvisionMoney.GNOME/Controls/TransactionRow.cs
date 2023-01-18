@@ -112,7 +112,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row.AddSuffix(_boxSuffix);
         //Group Settings
         Add(_row);
-        UpdateRow(transaction);
+        UpdateRow(transaction, culture);
     }
 
     /// <summary>
@@ -146,9 +146,11 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
-    public void UpdateRow(Transaction transaction)
+    /// <param name="culture">The culture to use for displaying strings</param>
+    public void UpdateRow(Transaction transaction, CultureInfo culture)
     {
         Id = transaction.Id;
+        _culture = culture;
         //Color
         var color = new Color();
         if (!gdk_rgba_parse(ref color, transaction.RGBA))
