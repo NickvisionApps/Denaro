@@ -16,7 +16,8 @@ namespace NickvisionMoney.WinUI.Controls;
 /// </summary>
 public sealed partial class TransactionRow : UserControl, IModelRowControl<Transaction>
 {
-    private CultureInfo _culture;
+    private CultureInfo _cultureAmount;
+    private CultureInfo _cultureDate;
     private Color _defaultColor;
     private Localizer _localizer;
     private int _repeatFrom;
@@ -43,13 +44,15 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction model to represent</param>
-    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="defaultColor">The default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, CultureInfo culture, Color defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Color defaultColor, Localizer localizer)
     {
         InitializeComponent();
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         _defaultColor = defaultColor;
         _localizer = localizer;
         _repeatFrom = 0;
@@ -58,7 +61,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         MenuDelete.Text = _localizer["Delete", "TransactionRow"];
         ToolTipService.SetToolTip(BtnEdit, _localizer["Edit", "TransactionRow"]);
         ToolTipService.SetToolTip(BtnDelete, _localizer["Delete", "TransactionRow"]);
-        UpdateRow(transaction, culture);
+        UpdateRow(transaction, cultureAmount, cultureDate);
     }
 
     /// <summary>
@@ -75,12 +78,14 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
-    /// <param name="culture">The culture to use for displaying strings</param>
-    public void UpdateRow(Transaction transaction, CultureInfo culture)
+    /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
+    /// <param name="cultureDate">The culture to use for displaying date strings</param>
+    public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
     {
         Id = transaction.Id;
         _repeatFrom = transaction.RepeatFrom;
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         MenuEdit.IsEnabled = _repeatFrom <= 0;
         BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuDelete.IsEnabled = _repeatFrom <= 0;
@@ -88,12 +93,12 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         BtnId.Content = transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.RGBA) ?? _defaultColor);
         LblName.Text = transaction.Description;
-        LblDescription.Text = transaction.Date.ToString("d");
+        LblDescription.Text = transaction.Date.ToString("d", _cultureDate);
         if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
         {
             LblDescription.Text += $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}";
         }
-        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToString("C", _culture)}";
+        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToString("C", _cultureAmount)}";
         LblAmount.Foreground = transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 
