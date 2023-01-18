@@ -51,7 +51,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
         MenuDelete.Text = localizer["Delete", "GroupRow"];
         ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
         ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
-        UpdateRow(group, filterActive);
+        UpdateRow(group, culture, filterActive);
     }
 
     /// <summary>
@@ -79,9 +79,11 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// </summary>
     /// <param name="group">The new Group model</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, bool filterActive)
+    /// <param name="culture">The culture to use for displaying strings</param>
+    public void UpdateRow(Group group, CultureInfo culture, bool filterActive)
     {
         Id = group.Id;
+        _culture = culture;
         if(group.Id == 0)
         {
             MenuEdit.IsEnabled = false;

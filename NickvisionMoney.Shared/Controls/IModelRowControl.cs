@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace NickvisionMoney.Shared.Controls;
 
@@ -36,5 +37,6 @@ public interface IModelRowControl<T>
     /// Updates the row based on the new model
     /// </summary>
     /// <param name="newModel">The new model T</param>
-    public void UpdateRow(T newModel);
+    /// <param name="culture">The culture to use for displaying strings</param>
+    public void UpdateRow(T newModel, CultureInfo culture);
 }

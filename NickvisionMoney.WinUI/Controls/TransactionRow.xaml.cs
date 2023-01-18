@@ -58,7 +58,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         MenuDelete.Text = _localizer["Delete", "TransactionRow"];
         ToolTipService.SetToolTip(BtnEdit, _localizer["Edit", "TransactionRow"]);
         ToolTipService.SetToolTip(BtnDelete, _localizer["Delete", "TransactionRow"]);
-        UpdateRow(transaction);
+        UpdateRow(transaction, culture);
     }
 
     /// <summary>
@@ -75,10 +75,12 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
-    public void UpdateRow(Transaction transaction)
+    /// <param name="culture">The culture to use for displaying strings</param>
+    public void UpdateRow(Transaction transaction, CultureInfo culture)
     {
         Id = transaction.Id;
         _repeatFrom = transaction.RepeatFrom;
+        _culture = culture;
         MenuEdit.IsEnabled = _repeatFrom <= 0;
         BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuDelete.IsEnabled = _repeatFrom <= 0;

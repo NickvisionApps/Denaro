@@ -75,7 +75,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _box.Append(_btnEdit);
         _box.Append(_btnDelete);
         AddSuffix(_box);
-        UpdateRow(group, filterActive);
+        UpdateRow(group, culture, filterActive);
     }
 
     /// <summary>
@@ -92,10 +92,12 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Updates the row with the new model
     /// </summary>
     /// <param name="group">The new Group model</param>
+    /// <param name="culture">The culture to use for displaying strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, bool filterActive)
+    public void UpdateRow(Group group, CultureInfo culture, bool filterActive)
     {
         Id = group.Id;
+        _culture = culture;
         //Row Settings
         SetTitle(group.Name);
         SetSubtitle(group.Description);
