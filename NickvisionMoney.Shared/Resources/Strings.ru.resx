@@ -466,6 +466,9 @@
 Несохранённые данные будут утеряны.</value>
   </data>
   <!--GTK Specific-->
+	<data name="Summary.GTK" xml:space="preserve">
+		<value>Управляйте своими личными финансами</value>
+	</data>
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Меню счёта</value>
   </data>

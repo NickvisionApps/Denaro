@@ -833,6 +833,10 @@
 	</data>
 
 	<!--GTK Specific-->
+	<data name="Summary.GTK" xml:space="preserve">
+		<value>Manage your personal finances</value>
+	</data>
+
 	<data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Account Menu</value>
 	</data>
