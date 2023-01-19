@@ -8,3 +8,5 @@ Terminal=false
 Type=Application
 MimeType=application/x-nmoney
 X-GNOME-UsesNotifications=true
+Categories=Office;Finance;
+Keywords=money;finance;
