@@ -857,6 +857,10 @@
 		<value>Manage your personal finances</value>
 	</data>
 
+	<data name="Keywords.GTK" xml:space="preserve">
+		<value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
+	</data>
+
 	<data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Account Menu</value>
 	</data>
