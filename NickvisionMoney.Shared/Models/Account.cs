@@ -1038,7 +1038,8 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(localizer["Total"]);
-                            tbl.Cell().AlignRight().Text(GetTotal(maxDate).ToString("C", cultureAmount));
+                            var total =  GetTotal(maxDate);
+                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{Math.Abs(total).ToString("C", cultureAmount)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", cultureAmount));
                             tbl.Cell().Text(localizer["Expense"]);
@@ -1095,7 +1096,7 @@ public class Account : IDisposable
                             {
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Balance.ToString("C", cultureAmount));
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "-  " : "+  ")}{Math.Abs(pair.Value.Balance).ToString("C", cultureAmount)}");
                                 i++;
                             }
                         });
@@ -1167,7 +1168,7 @@ public class Account : IDisposable
                                     TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
                                     _ => ""
                                 });
-                                tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", cultureAmount));
+                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{Math.Abs(pair.Value.Amount).ToString("C", cultureAmount)}");
                             }
                         });
                         //Receipts
