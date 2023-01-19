@@ -677,4 +677,13 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>ANTEPRIMA</value>
   </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Gestisci le tue finanze personali</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Cerca per descrizione</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Ordina per importo</value>
+  </data>
 </root>
