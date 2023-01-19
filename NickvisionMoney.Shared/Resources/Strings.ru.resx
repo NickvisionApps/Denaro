@@ -466,9 +466,9 @@
 Несохранённые данные будут утеряны.</value>
   </data>
   <!--GTK Specific-->
-	<data name="Summary.GTK" xml:space="preserve">
+  <data name="Summary.GTK" xml:space="preserve">
 		<value>Управляйте своими личными финансами</value>
-	</data>
+  </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Меню счёта</value>
   </data>
@@ -671,5 +671,14 @@
   </data>
   <data name="Overview.Today" xml:space="preserve">
     <value>Обзор на сегодня</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Поиск по описанию</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Сортировать по сумме</value>
   </data>
 </root>
