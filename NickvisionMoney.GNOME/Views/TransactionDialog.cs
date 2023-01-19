@@ -306,7 +306,7 @@ public partial class TransactionDialog
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
         _rowDescription.SetText(_controller.Transaction.Description);
-        _rowAmount.SetText(_controller.Transaction.Amount.ToString("N2"));
+        _rowAmount.SetText(_controller.Transaction.Amount.ToString("N2", _controller.CultureForNumberString));
         _btnIncome.SetActive(_controller.Transaction.Type == TransactionType.Income);
         _rowRepeatInterval.SetSelected(_controller.RepeatIntervalIndex);
         _rowRepeatEndDate.SetSensitive(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
@@ -451,7 +451,7 @@ public partial class TransactionDialog
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _btnDate.SetLabel(date.ToString("d"));
+        _btnDate.SetLabel(date.ToString("d", _controller.CultureForDateString));
         if (!_constructing)
         {
             Validate();
@@ -480,7 +480,7 @@ public partial class TransactionDialog
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _btnRepeatEndDate.SetLabel(date.ToString("d"));
+        _btnRepeatEndDate.SetLabel(date.ToString("d", _controller.CultureForDateString));
         if (!_constructing)
         {
             Validate();

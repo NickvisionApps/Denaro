@@ -557,7 +557,7 @@ public partial class AccountView
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
@@ -586,7 +586,7 @@ public partial class AccountView
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         row.IsSmall = _parentWindow.DefaultWidth < 450;

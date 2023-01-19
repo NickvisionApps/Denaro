@@ -118,7 +118,7 @@ public sealed partial class AccountView : UserControl
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
@@ -148,7 +148,7 @@ public sealed partial class AccountView : UserControl
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
         ViewStackTransactions.ChangePage("Transactions");
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)

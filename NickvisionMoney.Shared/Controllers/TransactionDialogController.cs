@@ -59,6 +59,10 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a number string
     /// </summary>
     public CultureInfo CultureForNumberString { get; init; }
+    /// <summary>
+    /// The CultureInfo to use when displaying a date string
+    /// </summary>
+    public CultureInfo CultureForDateString { get; init; }
 
     /// <summary>
     /// The repeat interval index used by GUI
@@ -79,9 +83,10 @@ public class TransactionDialogController : IDisposable
     /// <param name="groups">The list of groups in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
-    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
         Localizer = localizer;
@@ -89,7 +94,8 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         Accepted = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
-        CultureForNumberString = culture;
+        CultureForNumberString = cultureNumber;
+        CultureForDateString = cultureDate;
         if (Transaction.Amount == 0m) //new transaction
         {
             Transaction.Type = transactionDefaultType;
@@ -104,9 +110,10 @@ public class TransactionDialogController : IDisposable
     /// <param name="groups">The list of groups in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
-    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo culture, Localizer localizer)
+    internal TransactionDialogController(uint id, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
         Localizer = localizer;
@@ -114,7 +121,8 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         Accepted = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
-        CultureForNumberString = culture;
+        CultureForNumberString = cultureNumber;
+        CultureForDateString = cultureDate;
         if (Transaction.Amount == 0m) //new transaction
         {
             Transaction.Type = transactionDefaultType;

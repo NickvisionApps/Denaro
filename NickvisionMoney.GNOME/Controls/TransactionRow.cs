@@ -33,7 +33,8 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
 
     private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
 
-    private CultureInfo _culture;
+    private CultureInfo _cultureAmount;
+    private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
     private readonly Adw.ActionRow _row;
@@ -64,11 +65,13 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction to display</param>
-    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, CultureInfo culture, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer)
     {
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
         //Row Settings
@@ -112,7 +115,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row.AddSuffix(_boxSuffix);
         //Group Settings
         Add(_row);
-        UpdateRow(transaction, culture);
+        UpdateRow(transaction, cultureAmount, cultureDate);
     }
 
     /// <summary>
@@ -146,11 +149,13 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
-    /// <param name="culture">The culture to use for displaying strings</param>
-    public void UpdateRow(Transaction transaction, CultureInfo culture)
+    /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
+    /// <param name="cultureDate">The culture to use for displaying date strings</param>
+    public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
     {
         Id = transaction.Id;
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         //Color
         var color = new Color();
         if (!gdk_rgba_parse(ref color, transaction.RGBA))
@@ -159,7 +164,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         }
         //Row Settings
         _row.SetTitle(transaction.Description);
-        _row.SetSubtitle($"{transaction.Date.ToString("d")}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
+        _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
         var rowCssProvider = Gtk.CssProvider.New();
         var rowCss = @"row {
             border-color: " + gdk_rgba_to_string(ref color) + "; }";
@@ -172,7 +177,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
-        _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _culture)}");
+        _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
         _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "success" : "error");
         _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Buttons Box

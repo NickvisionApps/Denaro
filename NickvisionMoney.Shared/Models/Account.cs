@@ -960,11 +960,34 @@ public class Account : IDisposable
         try
         {
             using var localizer = new Localizer();
-            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            //Amount Culture
+            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            {
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+            }
+            if (lcMonetary != null && lcMonetary.Contains('_'))
+            {
+                lcMonetary = lcMonetary.Replace('_', '-');
+            }
+            var cultureAmount = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+            var regionAmount = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
-                culture.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
+                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? "";
             }
+            //Date Culture
+            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            if (lcTime != null && lcTime.Contains(".UTF-8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            if (lcTime != null && lcTime.Contains('_'))
+            {
+                lcTime = lcTime.Replace('_', '-');
+            }
+            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
             using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
             using var interRegularFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-Regular.otf")!;
             using var interSemiBoldFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-SemiBold.otf")!;
@@ -993,7 +1016,7 @@ public class Account : IDisposable
                     {
                         col.Spacing(15);
                         //Generated Date
-                        col.Item().Text(string.Format(localizer["Generated", "PDF"], DateTime.Now.ToString("g")));
+                        col.Item().Text(string.Format(localizer["Generated", "PDF"], DateTime.Now.ToString("g", cultureDate)));
                         //Overview
                         col.Item().Table(tbl =>
                         {
@@ -1015,11 +1038,12 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(localizer["Total"]);
-                            tbl.Cell().AlignRight().Text(GetTotal(maxDate).ToString("C", culture));
+                            var total =  GetTotal(maxDate);
+                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{Math.Abs(total).ToString("C", cultureAmount)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", culture));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", cultureAmount));
                             tbl.Cell().Text(localizer["Expense"]);
-                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToString("C", culture));
+                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToString("C", cultureAmount));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1048,7 +1072,7 @@ public class Account : IDisposable
                             }
                             else
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{NumberFormatInfo.CurrentInfo.CurrencySymbol} ({RegionInfo.CurrentRegion.ISOCurrencySymbol})");
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{cultureAmount.NumberFormat.CurrencySymbol} ({regionAmount.ISOCurrencySymbol})");
                             }
                         });
                         //Groups
@@ -1072,7 +1096,7 @@ public class Account : IDisposable
                             {
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text(pair.Value.Balance.ToString("C", culture));
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "-  " : "+  ")}{Math.Abs(pair.Value.Balance).ToString("C", cultureAmount)}");
                                 i++;
                             }
                         });
@@ -1123,7 +1147,7 @@ public class Account : IDisposable
                                     hex += byte.Parse(fields[2]).ToString("X2");
                                 }
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
-                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d"));
+                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", cultureDate));
                                 tbl.Cell().Background(hex).Text(pair.Value.Description);
                                 tbl.Cell().Background(hex).Text(pair.Value.Type switch
                                 {
@@ -1144,7 +1168,7 @@ public class Account : IDisposable
                                     TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
                                     _ => ""
                                 });
-                                tbl.Cell().Background(hex).AlignRight().Text(pair.Value.Amount.ToString("C", culture));
+                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{Math.Abs(pair.Value.Amount).ToString("C", cultureAmount)}");
                             }
                         });
                         //Receipts

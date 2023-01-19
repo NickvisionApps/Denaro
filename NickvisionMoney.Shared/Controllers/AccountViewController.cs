@@ -170,7 +170,17 @@ public class AccountViewController
     {
         get
         {
-            var culture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+            if(lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            {
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+            }
+            if(lcMonetary != null && lcMonetary.Contains('_'))
+            {
+                lcMonetary = lcMonetary.Replace('_', '-');
+            }
+            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
@@ -178,9 +188,29 @@ public class AccountViewController
             }
             else
             {
-                culture.NumberFormat.NaNSymbol = RegionInfo.CurrentRegion.ISOCurrencySymbol;
+                culture.NumberFormat.NaNSymbol = region.ISOCurrencySymbol;
             }
             return culture;
+        }
+    }
+
+    /// <summary>
+    /// The CultureInfo to use when displaying a date string
+    /// </summary>
+    public CultureInfo CultureForDateString
+    {
+        get
+        {
+            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            if (lcTime != null && lcTime.Contains(".UTF-8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            if (lcTime != null && lcTime.Contains('_'))
+            {
+                lcTime = lcTime.Replace('_', '-');
+            }
+            return new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
         }
     }
 
@@ -394,7 +424,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.NextAvailableTransactionId, groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
+        return new TransactionDialogController(_account.NextAvailableTransactionId, groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
@@ -409,7 +439,7 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
@@ -467,11 +497,11 @@ public class AccountViewController
         {
             foreach(var row in GroupRows)
             {
-                row.Value.UpdateRow(_account.Groups[row.Key], CultureForNumberString, _filters[(int)row.Key]);
+                row.Value.UpdateRow(_account.Groups[row.Key], CultureForNumberString, CultureForDateString, _filters[(int)row.Key]);
             }
             foreach(var row in TransactionRows)
             {
-                row.Value.UpdateRow(_account.Transactions[row.Key], CultureForNumberString);
+                row.Value.UpdateRow(_account.Transactions[row.Key], CultureForNumberString, CultureForDateString);
             }
             AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         }
@@ -506,7 +536,7 @@ public class AccountViewController
                 TransactionRows.Add(_account.Transactions[transactions[i]].Id, UICreateTransactionRow!(_account.Transactions[transactions[i]], i));
             }
         }
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, _filters[(int)groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
         FilterUIUpdate();
     }
 
@@ -519,7 +549,7 @@ public class AccountViewController
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
-        TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString);
+        TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString, CultureForDateString);
         if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
         {
             foreach (var pair in _account.Transactions)
@@ -530,8 +560,8 @@ public class AccountViewController
                 }
             }
         }
-        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], CultureForNumberString, _filters[(int)originalGroupId]);
-        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], CultureForNumberString, _filters[(int)newGroupId]);
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], CultureForNumberString, CultureForDateString, _filters[(int)originalGroupId]);
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], CultureForNumberString, CultureForDateString, _filters[(int)newGroupId]);
         FilterUIUpdate();
     }
 
@@ -545,14 +575,14 @@ public class AccountViewController
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
-        TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString);
+        TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString, CultureForDateString);
         foreach(var pair in _account.Transactions)
         {
             if(updateGenerated && pair.Value.RepeatFrom == transaction.Id)
             {
                 if(TransactionRows.ContainsKey(pair.Key))
                 {
-                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString);
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
                 else
                 {
@@ -563,7 +593,7 @@ public class AccountViewController
             {
                 if(pair.Value.RepeatFrom == -1)
                 {
-                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString);
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
                 else if(pair.Value.RepeatFrom == transaction.Id)
                 {
@@ -576,8 +606,8 @@ public class AccountViewController
                 TransactionRows.Remove(pair.Key);
             }
         }
-        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], CultureForNumberString, _filters[(int)originalGroupId]);
-        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], CultureForNumberString, _filters[(int)newGroupId]);
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], CultureForNumberString, CultureForDateString, _filters[(int)originalGroupId]);
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], CultureForNumberString, CultureForDateString, _filters[(int)newGroupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         FilterUIUpdate();
     }
@@ -592,7 +622,7 @@ public class AccountViewController
         await _account.DeleteTransactionAsync(id);
         UIDeleteTransactionRow!(TransactionRows[id]);
         TransactionRows.Remove(id);
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, _filters[(int)groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -624,11 +654,11 @@ public class AccountViewController
             {
                 if(pair.Value.RepeatFrom == -1)
                 {
-                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString);
+                    TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
             }
         }
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, _filters[(int)groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -648,7 +678,7 @@ public class AccountViewController
             }
         }
         await _account.DeleteGeneratedTransactionsAsync(id);
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, _filters[(int)groupId]);
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -688,7 +718,7 @@ public class AccountViewController
     public async Task UpdateGroupAsync(Group group)
     {
         await _account.UpdateGroupAsync(group);
-        GroupRows[group.Id].UpdateRow(group, CultureForNumberString, _filters[(int)group.Id]);
+        GroupRows[group.Id].UpdateRow(group, CultureForNumberString, CultureForDateString, _filters[(int)group.Id]);
     }
 
     /// <summary>
@@ -748,7 +778,7 @@ public class AccountViewController
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
                 TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
-                GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, _filters[(int)groupId]);
+                GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
             }    
             FilterUIUpdate();
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success));

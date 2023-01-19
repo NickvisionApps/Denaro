@@ -11,7 +11,8 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
-    private CultureInfo _culture;
+    private CultureInfo _cultureAmount;
+    private CultureInfo _cultureDate;
     private readonly Gtk.CheckButton _chkFilter;
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
@@ -40,12 +41,14 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Constructs a group row 
     /// </summary>
     /// <param name="group">The Group to display</param>
-    /// <param name="culture">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, CultureInfo culture, Localizer localizer, bool filterActive)
+    public GroupRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive)
     {
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         //Row Settings
         SetUseMarkup(false);
         //Filter Checkbox
@@ -75,7 +78,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _box.Append(_btnEdit);
         _box.Append(_btnDelete);
         AddSuffix(_box);
-        UpdateRow(group, culture, filterActive);
+        UpdateRow(group, cultureAmount, cultureDate, filterActive);
     }
 
     /// <summary>
@@ -92,19 +95,21 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Updates the row with the new model
     /// </summary>
     /// <param name="group">The new Group model</param>
-    /// <param name="culture">The culture to use for displaying strings</param>
+    /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
+    /// <param name="cultureDate">The culture to use for displaying date strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, CultureInfo culture, bool filterActive)
+    public void UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, bool filterActive)
     {
         Id = group.Id;
-        _culture = culture;
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
         //Row Settings
         SetTitle(group.Name);
         SetSubtitle(group.Description);
         //Filter Checkbox
         _chkFilter.SetActive(filterActive);
         //Amount Label
-        _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _culture)}");
+        _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
         _lblAmount.AddCssClass(group.Balance >= 0 ? "success" : "error");
         _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         //Buttons
