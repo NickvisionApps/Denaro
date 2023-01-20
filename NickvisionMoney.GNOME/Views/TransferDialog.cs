@@ -94,6 +94,7 @@ public partial class TransferDialog
         _boxMain.Append(_grpAmount);
         //Layout
         _dialog.SetExtraChild(_boxMain);
+        _rowAmount.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForNumberString));
         Validate();
     }
 

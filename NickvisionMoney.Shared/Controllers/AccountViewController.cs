@@ -475,7 +475,7 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), _account.TodayTotal, CultureForNumberString, Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, CultureForNumberString, Localizer);
 
     /// <summary>
     /// Updates the metadata of the account
@@ -739,8 +739,7 @@ public class AccountViewController
     /// <param name="transfer">The transfer to send</param>
     public async Task SendTransferAsync(Transfer transfer)
     {
-        transfer.SourceAccountName = AccountTitle;
-        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
+        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], transfer.DestinationAccountName));
         TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
         FilterUIUpdate();
         TransferSent?.Invoke(this, transfer);

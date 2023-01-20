@@ -89,7 +89,8 @@ public class TransferDialogController
             return result;
         }
         Transfer.DestinationAccountPath = destPath;
-        Transfer.Amount = amount;
+        Transfer.DestinationAccountName = AccountMetadata.LoadFromAccountFile(destPath)!.Name;
+        Transfer.SourceAmount = amount;
         return TransferCheckStatus.Valid;
     }
 }
