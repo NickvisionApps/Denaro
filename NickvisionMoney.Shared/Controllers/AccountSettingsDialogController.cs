@@ -13,7 +13,8 @@ public enum AccountMetadataCheckStatus
 {
     Valid = 1,
     EmptyName = 2,
-    EmptyCurrencySymbol = 4
+    EmptyCurrencySymbol = 4,
+    EmptyCurrencyCode = 8
 }
 
 /// <summary>
@@ -110,6 +111,10 @@ public class AccountSettingsDialogController
         if(useCustom && string.IsNullOrEmpty(customSymbol))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
+        }
+        if(useCustom && string.IsNullOrEmpty(customCode))
+        {
+            result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
         }
         if(result != 0)
         {

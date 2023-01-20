@@ -716,6 +716,10 @@
 		<value>Currency Code</value>
 	</data>
 
+	<data name="CustomCurrencyCode.Empty" xml:space="preserve">
+		<value>Currency Code (Empty)</value>
+	</data>
+
 	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
 		<value>Enter code here</value>
 	</data>

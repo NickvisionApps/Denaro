@@ -218,7 +218,9 @@ public partial class AccountSettingsDialog
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
         _rowCustomSymbol.RemoveCssClass("error");
         _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
-        if(checkStatus == AccountMetadataCheckStatus.Valid)
+        _rowCustomCode.RemoveCssClass("error");
+        _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
+        if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             _dialog.SetResponseEnabled("ok", true);
         }
@@ -233,6 +235,11 @@ public partial class AccountSettingsDialog
             {
                 _rowCustomSymbol.AddCssClass("error");
                 _rowCustomSymbol.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
+            {
+                _rowCustomCode.AddCssClass("error");
+                _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Empty"]);
             }
             _dialog.SetResponseEnabled("ok", false);
         }

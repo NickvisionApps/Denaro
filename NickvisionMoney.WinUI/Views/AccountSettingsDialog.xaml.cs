@@ -98,6 +98,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
         TxtName.Header = _controller.Localizer["Name", "Field"];
         TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
+        TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             TxtErrors.Visibility = Visibility.Collapsed;
@@ -112,6 +113,10 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
             {
                 TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
+            {
+                TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Empty"];
             }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
