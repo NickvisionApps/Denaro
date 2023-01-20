@@ -1,5 +1,7 @@
 using NickvisionMoney.Shared.Controllers;
 using System;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -8,6 +10,9 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransferDialog
 {
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
+
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly Adw.MessageDialog _dialog;
@@ -15,6 +20,9 @@ public partial class TransferDialog
     private readonly Gtk.Label _lblDestination;
     private readonly Gtk.Label _lblSelectedAccount;
     private readonly Gtk.Button _btnSelectAccount;
+    private readonly Gtk.MenuButton _btnRecentAccounts;
+    private readonly Gtk.Popover _popRecentAccounts;
+    private readonly Adw.PreferencesGroup _grpRecentAccounts;
     private readonly Gtk.Box _boxSelectedAccount;
     private readonly Adw.Clamp _clampSelectedAccount;
     private readonly Gtk.Box _boxTransferAccount;
@@ -68,6 +76,17 @@ public partial class TransferDialog
         _clampSelectedAccount = Adw.Clamp.New();
         _clampSelectedAccount.SetMaximumSize(280);
         _clampSelectedAccount.SetChild(_boxSelectedAccount);
+        //Recent Accounts
+        _grpRecentAccounts = Adw.PreferencesGroup.New();
+        _grpRecentAccounts.SetTitle(_controller.Localizer["Recents", "GTK"]);
+        _grpRecentAccounts.SetSizeRequest(200, 55);
+        _popRecentAccounts = Gtk.Popover.New();
+        _popRecentAccounts.SetChild(_grpRecentAccounts);
+        _btnRecentAccounts = Gtk.MenuButton.New();
+        _btnRecentAccounts.AddCssClass("flat");
+        _btnRecentAccounts.SetIconName("document-open-recent-symbolic");
+        _btnRecentAccounts.SetPopover(_popRecentAccounts);
+        _boxSelectedAccount.Append(_btnRecentAccounts);
         //Transfer Account Box
         _boxTransferAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxTransferAccount.AddCssClass("card");
@@ -94,6 +113,31 @@ public partial class TransferDialog
         _boxMain.Append(_grpAmount);
         //Layout
         _dialog.SetExtraChild(_boxMain);
+        //Load
+        foreach (var recentAccount in _controller.RecentAccounts)
+        {
+            var row = Adw.ActionRow.New();
+            row.SetTitle(recentAccount.Name);
+            row.SetSubtitle(recentAccount.Path);
+            var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
+            button.SetHalign(Gtk.Align.Center);
+            button.SetValign(Gtk.Align.Center);
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+            var btnCssProvider = Gtk.CssProvider.New();
+            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
+            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
+            button.SetName("btnWallet");
+            button.GetStyleContext().AddProvider(btnCssProvider, 800);
+            button.OnClicked += (Gtk.Button sender, EventArgs e) =>
+            {
+                //TODO
+            };
+            row.AddPrefix(button);
+            row.SetActivatableWidget(button);
+            _grpRecentAccounts.Add(row);
+        }
         _rowAmount.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForNumberString));
         Validate();
     }
