@@ -1,6 +1,7 @@
 ﻿using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -34,6 +35,10 @@ public class TransferDialogController
     /// </summary>
     public Transfer Transfer { get; init; }
     /// <summary>
+    /// The list of recent accounts
+    /// </summary>
+    public List<RecentAccount> RecentAccounts { get; init; }
+    /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
@@ -47,13 +52,15 @@ public class TransferDialogController
     /// </summary>
     /// <param name="transfer">The Transfer model</param>
     /// <param name="accountAmount">The amount of the account</param>
+    /// <param name="accountAmount">The amount of the account</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    internal TransferDialogController(Transfer transfer, decimal accountAmount, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, decimal accountAmount, List<RecentAccount> recentAccoutns, CultureInfo culture, Localizer localizer)
     {
         _accountAmount = accountAmount;
         Localizer = localizer;
         Transfer = transfer;
+        RecentAccounts = recentAccoutns;
         Accepted = false;
         CultureForNumberString = culture;
     }

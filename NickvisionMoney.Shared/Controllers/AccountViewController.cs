@@ -475,7 +475,7 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, CultureForNumberString, Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString, Localizer);
 
     /// <summary>
     /// Updates the metadata of the account
