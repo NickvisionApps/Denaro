@@ -16,20 +16,15 @@ public partial class TransferDialog
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly Adw.MessageDialog _dialog;
-    private readonly Gtk.Box _boxMain;
-    private readonly Gtk.Label _lblDestination;
-    private readonly Gtk.Label _lblSelectedAccount;
+    private readonly Adw.PreferencesGroup _grpMain;
     private readonly Gtk.Box _boxButtonsAccount;
     private readonly Gtk.Button _btnSelectAccount;
     private readonly Gtk.MenuButton _btnRecentAccounts;
     private readonly Gtk.Popover _popRecentAccounts;
     private readonly Adw.PreferencesGroup _grpRecentAccounts;
-    private readonly Gtk.Box _boxSelectedAccount;
-    private readonly Adw.Clamp _clampSelectedAccount;
-    private readonly Gtk.Box _boxTransferAccount;
+    private readonly Adw.ActionRow _rowDestinationAccount;
     private readonly Gtk.Label _lblCurrency;
     private readonly Adw.EntryRow _rowAmount;
-    private readonly Adw.PreferencesGroup _grpAmount;
 
     /// <summary>
     /// Constructs a TransferDialog
@@ -51,37 +46,16 @@ public partial class TransferDialog
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
-        //Main Box
-        _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
-        //Destination Label
-        _lblDestination = Gtk.Label.New(_controller.Localizer["DestinationAccount", "Field"]);
-        _lblDestination.AddCssClass("title-4");
-        _lblDestination.SetMarginTop(6);
-        //Transfer Account Label
-        _lblSelectedAccount = Gtk.Label.New(_controller.Localizer["NoAccountSelected"]);
-        _lblSelectedAccount.SetValign(Gtk.Align.Center);
-        _lblSelectedAccount.SetEllipsize(Pango.EllipsizeMode.Start);
-        _lblSelectedAccount.SetMarginStart(10);
+        //Main Preferences Group
+        _grpMain = Adw.PreferencesGroup.New();
+        _dialog.SetExtraChild(_grpMain);
+        //Destination Account Row
+        _rowDestinationAccount = Adw.ActionRow.New();
+        _grpMain.Add(_rowDestinationAccount);
         //Select Account Button
         _btnSelectAccount = Gtk.Button.NewFromIconName("document-open-symbolic");
-        _btnSelectAccount.SetValign(Gtk.Align.Center);
         _btnSelectAccount.SetTooltipText(_controller.Localizer["DestinationAccount", "Placeholder"]);
         _btnSelectAccount.OnClicked += OnSelectAccount;
-        //Buttons Account Box
-        _boxButtonsAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxButtonsAccount.AddCssClass("linked");
-        _boxButtonsAccount.Append(_btnSelectAccount);
-        //Selected Account Box
-        _boxSelectedAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
-        _boxSelectedAccount.SetHalign(Gtk.Align.Center);
-        _boxSelectedAccount.SetMarginTop(4);
-        _boxSelectedAccount.SetMarginBottom(4);
-        _boxSelectedAccount.Append(_lblSelectedAccount);
-        _boxSelectedAccount.Append(_boxButtonsAccount);
-        //Selected Account Clamp
-        _clampSelectedAccount = Adw.Clamp.New();
-        _clampSelectedAccount.SetMaximumSize(280);
-        _clampSelectedAccount.SetChild(_boxSelectedAccount);
         //Recent Accounts
         _grpRecentAccounts = Adw.PreferencesGroup.New();
         _grpRecentAccounts.SetTitle(_controller.Localizer["Recents", "GTK"]);
@@ -91,13 +65,13 @@ public partial class TransferDialog
         _btnRecentAccounts = Gtk.MenuButton.New();
         _btnRecentAccounts.SetIconName("document-open-recent-symbolic");
         _btnRecentAccounts.SetPopover(_popRecentAccounts);
+        //Buttons Account Box
+        _boxButtonsAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxButtonsAccount.SetValign(Gtk.Align.Center);
+        _boxButtonsAccount.AddCssClass("linked");
+        _boxButtonsAccount.Append(_btnSelectAccount);
         _boxButtonsAccount.Append(_btnRecentAccounts);
-        //Transfer Account Box
-        _boxTransferAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
-        _boxTransferAccount.AddCssClass("card");
-        _boxTransferAccount.Append(_lblDestination);
-        _boxTransferAccount.Append(_clampSelectedAccount);
-        _boxMain.Append(_boxTransferAccount);
+        _rowDestinationAccount.AddSuffix(_boxButtonsAccount);
         //Amount
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
@@ -113,12 +87,10 @@ public partial class TransferDialog
                 Validate();
             }
         };
-        _grpAmount = Adw.PreferencesGroup.New();
-        _grpAmount.Add(_rowAmount);
-        _boxMain.Append(_grpAmount);
-        //Layout
-        _dialog.SetExtraChild(_boxMain);
+        _grpMain.Add(_rowAmount);
         //Load
+        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
+        _rowDestinationAccount.SetSubtitle(_controller.Localizer["NoAccountSelected"]);
         foreach (var recentAccount in _controller.RecentAccounts)
         {
             var row = Adw.ActionRow.New();
@@ -174,10 +146,9 @@ public partial class TransferDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _rowAmount.GetText());
-        _lblDestination.RemoveCssClass("error");
-        _lblSelectedAccount.RemoveCssClass("error");
-        _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Field"]);
+        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle(), _rowAmount.GetText());
+        _rowDestinationAccount.RemoveCssClass("error");
+        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
         if (checkStatus == TransferCheckStatus.Valid)
@@ -188,9 +159,8 @@ public partial class TransferDialog
         {
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
-                _lblDestination.AddCssClass("error");
-                _lblSelectedAccount.AddCssClass("error");
-                _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Invalid"]);
+                _rowDestinationAccount.AddCssClass("error");
+                _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
@@ -219,7 +189,7 @@ public partial class TransferDialog
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath();
-                _lblSelectedAccount.SetText(path ?? "");
+                _rowDestinationAccount.SetSubtitle(path ?? "");
                 Validate();
             }
         };
