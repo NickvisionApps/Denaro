@@ -72,6 +72,7 @@ public partial class TransferDialog
         _boxButtonsAccount.Append(_btnSelectAccount);
         _boxButtonsAccount.Append(_btnRecentAccounts);
         _rowDestinationAccount.AddSuffix(_boxButtonsAccount);
+        _rowDestinationAccount.SetActivatableWidget(_btnSelectAccount);
         //Amount
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
@@ -109,7 +110,9 @@ public partial class TransferDialog
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
             button.OnClicked += (Gtk.Button sender, EventArgs e) =>
             {
-                //TODO
+                _popRecentAccounts.Popdown();
+                _rowDestinationAccount.SetSubtitle(row.GetSubtitle());
+                Validate();
             };
             row.AddPrefix(button);
             row.SetActivatableWidget(button);
