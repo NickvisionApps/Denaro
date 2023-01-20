@@ -19,6 +19,7 @@ public partial class TransferDialog
     private readonly Gtk.Box _boxMain;
     private readonly Gtk.Label _lblDestination;
     private readonly Gtk.Label _lblSelectedAccount;
+    private readonly Gtk.Box _boxButtonsAccount;
     private readonly Gtk.Button _btnSelectAccount;
     private readonly Gtk.MenuButton _btnRecentAccounts;
     private readonly Gtk.Popover _popRecentAccounts;
@@ -60,18 +61,23 @@ public partial class TransferDialog
         _lblSelectedAccount = Gtk.Label.New(_controller.Localizer["NoAccountSelected"]);
         _lblSelectedAccount.SetValign(Gtk.Align.Center);
         _lblSelectedAccount.SetEllipsize(Pango.EllipsizeMode.Start);
-        _lblSelectedAccount.SetMarginStart(20);
+        _lblSelectedAccount.SetMarginStart(10);
         //Select Account Button
         _btnSelectAccount = Gtk.Button.NewFromIconName("document-open-symbolic");
-        _btnSelectAccount.AddCssClass("flat");
         _btnSelectAccount.SetValign(Gtk.Align.Center);
         _btnSelectAccount.SetTooltipText(_controller.Localizer["DestinationAccount", "Placeholder"]);
         _btnSelectAccount.OnClicked += OnSelectAccount;
+        //Buttons Account Box
+        _boxButtonsAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxButtonsAccount.AddCssClass("linked");
+        _boxButtonsAccount.Append(_btnSelectAccount);
         //Selected Account Box
         _boxSelectedAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
         _boxSelectedAccount.SetHalign(Gtk.Align.Center);
+        _boxSelectedAccount.SetMarginTop(4);
+        _boxSelectedAccount.SetMarginBottom(4);
         _boxSelectedAccount.Append(_lblSelectedAccount);
-        _boxSelectedAccount.Append(_btnSelectAccount);
+        _boxSelectedAccount.Append(_boxButtonsAccount);
         //Selected Account Clamp
         _clampSelectedAccount = Adw.Clamp.New();
         _clampSelectedAccount.SetMaximumSize(280);
@@ -83,10 +89,9 @@ public partial class TransferDialog
         _popRecentAccounts = Gtk.Popover.New();
         _popRecentAccounts.SetChild(_grpRecentAccounts);
         _btnRecentAccounts = Gtk.MenuButton.New();
-        _btnRecentAccounts.AddCssClass("flat");
         _btnRecentAccounts.SetIconName("document-open-recent-symbolic");
         _btnRecentAccounts.SetPopover(_popRecentAccounts);
-        _boxSelectedAccount.Append(_btnRecentAccounts);
+        _boxButtonsAccount.Append(_btnRecentAccounts);
         //Transfer Account Box
         _boxTransferAccount = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxTransferAccount.AddCssClass("card");
@@ -172,7 +177,6 @@ public partial class TransferDialog
         var checkStatus = _controller.UpdateTransfer(_lblSelectedAccount.GetText(), _rowAmount.GetText());
         _lblDestination.RemoveCssClass("error");
         _lblSelectedAccount.RemoveCssClass("error");
-        _btnSelectAccount.RemoveCssClass("error");
         _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
@@ -186,7 +190,6 @@ public partial class TransferDialog
             {
                 _lblDestination.AddCssClass("error");
                 _lblSelectedAccount.AddCssClass("error");
-                _btnSelectAccount.AddCssClass("error");
                 _lblDestination.SetText(_controller.Localizer["DestinationAccount", "Invalid"]);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
