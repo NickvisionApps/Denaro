@@ -50,7 +50,7 @@ public partial class AccountSettingsDialog
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
-        if(!_controller.IsFirstTimeSetup)
+        if(!_controller.NeedsSetup)
         {
             _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
             _dialog.SetCloseResponse("cancel");

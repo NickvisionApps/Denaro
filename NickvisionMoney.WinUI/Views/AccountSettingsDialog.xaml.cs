@@ -76,7 +76,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         var result = await base.ShowAsync();
         if (result == ContentDialogResult.None)
         {
-            if (_controller.IsFirstTimeSetup)
+            if (_controller.NeedsSetup)
             {
                 return await ShowAsync();
             }

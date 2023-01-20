@@ -31,9 +31,9 @@ public class AccountSettingsDialogController
     /// </summary>
     public AccountMetadata Metadata { get; init; }
     /// <summary>
-    /// Whether or not the dialog should be used for first time account setup
+    /// Whether or not the dialog should be used for necessary account setup
     /// </summary>
-    public bool IsFirstTimeSetup { get; init; }
+    public bool NeedsSetup { get; init; }
     /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
@@ -43,13 +43,13 @@ public class AccountSettingsDialogController
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
-    /// <param name="isFirstTimeSetup">Whether or not the dialog should be used for first time account setup</param>
+    /// <param name="needsSetup">Whether or not the dialog should be used for necessary account setup</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, Localizer localizer)
     {
         Localizer = localizer;
         Metadata = (AccountMetadata)metadata.Clone();
-        IsFirstTimeSetup = isFirstTimeSetup;
+        NeedsSetup = needsSetup;
         Accepted = false;
     }
 

@@ -67,9 +67,9 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
-    /// Whether or not an account needs to be setup for the first time
+    /// Whether or not an account needs to be setup
     /// </summary>
-    public bool AccountNeedsFirstTimeSetup => _account.NeedsFirstTimeSetup;
+    public bool AccountNeedsSetup => _account.NeedsAccountSetup;
     /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
@@ -411,7 +411,7 @@ public class AccountViewController
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsFirstTimeSetup, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController

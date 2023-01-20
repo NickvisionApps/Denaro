@@ -637,7 +637,7 @@ public partial class AccountView
     /// </summary>
     public async void Startup()
     {
-        if (_controller.AccountNeedsFirstTimeSetup)
+        if (_controller.AccountNeedsSetup)
         {
             AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         }
