@@ -55,12 +55,19 @@ public class TransferDialogController
     /// <param name="accountAmount">The amount of the account</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    internal TransferDialogController(Transfer transfer, decimal accountAmount, List<RecentAccount> recentAccoutns, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, decimal accountAmount, List<RecentAccount> recentAccounts, CultureInfo culture, Localizer localizer)
     {
         _accountAmount = accountAmount;
         Localizer = localizer;
         Transfer = transfer;
-        RecentAccounts = recentAccoutns;
+        RecentAccounts = new List<RecentAccount> {};
+        foreach (var account in recentAccounts)
+        {
+            if (account.Path != Transfer.SourceAccountPath)
+            {
+                RecentAccounts.Add(account);
+            }
+        }
         Accepted = false;
         CultureForNumberString = culture;
     }
