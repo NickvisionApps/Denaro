@@ -33,7 +33,7 @@ public sealed partial class TransferDialog : ContentDialog
         ToolTipService.SetToolTip(BtnSelectAccount, _controller.Localizer["SelectAccount"]);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
-        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer

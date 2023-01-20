@@ -975,8 +975,8 @@ public class Account : IDisposable
             var regionAmount = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
-                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? "";
+                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? cultureAmount.NumberFormat.CurrencySymbol;
+                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? regionAmount.ISOCurrencySymbol;
             }
             //Date Culture
             var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
@@ -1069,7 +1069,7 @@ public class Account : IDisposable
                             });
                             if(Metadata.UseCustomCurrency)
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(!string.IsNullOrEmpty(Metadata.CustomCurrencyCode) ? $"({Metadata.CustomCurrencyCode})" : "")}");
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} ({Metadata.CustomCurrencyCode})");
                             }
                             else
                             {

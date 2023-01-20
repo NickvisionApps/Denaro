@@ -158,7 +158,7 @@ public partial class TransactionDialog
                 }
             }
         };
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
         _grpMain.Add(_rowAmount);

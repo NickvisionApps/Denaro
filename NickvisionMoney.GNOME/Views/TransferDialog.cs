@@ -75,7 +75,7 @@ public partial class TransferDialog
         _boxTransferAccount.Append(_clampSelectedAccount);
         _boxMain.Append(_boxTransferAccount);
         //Amount
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}");
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
