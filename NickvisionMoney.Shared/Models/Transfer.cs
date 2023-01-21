@@ -35,7 +35,7 @@ public class Transfer
     /// <summary>
     /// The amount to transfer from the destination account
     /// </summary>
-    public decimal DestinationAmount => SourceAmount * ConversionRate;
+    public decimal DestinationAmount => SourceAmount / ConversionRate;
 
     /// <summary>
     /// Constructs a Tansfer
