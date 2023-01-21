@@ -675,7 +675,7 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
     <value>Buscar por las descripciones</value>
   </data>
   <data name="Summary.GTK" xml:space="preserve">
-    <value>Administra tus finanzas personales</value>
+    <value>Administre sus finanzas personales</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Ordenar por cantidad</value>
