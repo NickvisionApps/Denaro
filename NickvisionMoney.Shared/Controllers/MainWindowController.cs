@@ -208,8 +208,8 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        var added = AddAccount(transfer.DestinationAccountPath, false);
+        AddAccount(transfer.DestinationAccountPath, false);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.ReceiveTransferAsync(transfer, !added);
+        await controller.ReceiveTransferAsync(transfer);
     }
 }

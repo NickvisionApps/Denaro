@@ -740,7 +740,23 @@ public class AccountViewController
     public async Task SendTransferAsync(Transfer transfer)
     {
         var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], transfer.DestinationAccountName));
-        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
+        {
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                compareTo *= -1;
+            }
+            return compareTo;
+        });
+        for (var i = 0; i < transactions.Count; i++)
+        {
+            if (transactions[i] == newTransaction.Id)
+            {
+                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+            }
+        }   
         FilterUIUpdate();
         TransferSent?.Invoke(this, transfer);
     }
@@ -749,13 +765,25 @@ public class AccountViewController
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    /// <param name="accountOpened">Whether or not the account is opened</param>
-    public async Task ReceiveTransferAsync(Transfer transfer, bool accountOpened)
+    public async Task ReceiveTransferAsync(Transfer transfer)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        if(accountOpened)
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
         {
-            TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                compareTo *= -1;
+            }
+            return compareTo;
+        });
+        for (var i = 0; i < transactions.Count; i++)
+        {
+            if (transactions[i] == newTransaction.Id)
+            {
+                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+            }
         }
         FilterUIUpdate();
     }
