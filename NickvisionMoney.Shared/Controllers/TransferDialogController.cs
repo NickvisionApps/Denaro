@@ -114,6 +114,36 @@ public class TransferDialogController
         {
             result |= TransferCheckStatus.InvalidDestPath;
         }
+        else
+        {
+            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            {
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+            }
+            if (lcMonetary != null && lcMonetary.Contains('_'))
+            {
+                lcMonetary = lcMonetary.Replace('_', '-');
+            }
+            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+            var destMetadata = AccountMetadata.LoadFromAccountFile(destPath)!;
+            DestinationCurrencyCode = destMetadata.UseCustomCurrency ? destMetadata.CustomCurrencyCode : region.ISOCurrencySymbol;
+            if (SourceCurrencyCode != DestinationCurrencyCode)
+            {
+                try
+                {
+                    conversionRate = decimal.Parse(amountString, NumberStyles.Number, CultureForNumberString);
+                }
+                catch
+                {
+                    result |= TransferCheckStatus.InvalidConversionRate;
+                }
+            }
+            else
+            {
+                conversionRate = 1.0m;
+            }
+        }
         try
         {
             amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString);
@@ -121,33 +151,6 @@ public class TransferDialogController
         catch
         {
             result |= TransferCheckStatus.InvalidAmount;
-        }
-        var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-        if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-        {
-            lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-        }
-        if (lcMonetary != null && lcMonetary.Contains('_'))
-        {
-            lcMonetary = lcMonetary.Replace('_', '-');
-        }
-        var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-        var destMetadata = AccountMetadata.LoadFromAccountFile(destPath)!;
-        DestinationCurrencyCode = destMetadata.UseCustomCurrency ? destMetadata.CustomCurrencyCode : region.ISOCurrencySymbol;
-        if(SourceCurrencyCode != DestinationCurrencyCode)
-        {
-            try
-            {
-                conversionRate = decimal.Parse(amountString, NumberStyles.Number, CultureForNumberString);
-            }
-            catch
-            {
-                result |= TransferCheckStatus.InvalidConversionRate;
-            }
-        }
-        else
-        {
-            conversionRate = 1.0m;
         }
         if (amount <= 0 || amount > _sourceAmount)
         {
