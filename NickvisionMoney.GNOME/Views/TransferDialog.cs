@@ -28,6 +28,8 @@ public partial class TransferDialog
     private readonly Adw.PreferencesGroup _grpConversionRate;
     private readonly Adw.EntryRow _rowSourceCurrency;
     private readonly Adw.EntryRow _rowDestCurrency;
+    private readonly Adw.ActionRow _rowConversionResult;
+    private readonly Gtk.Label _lblConversionResult;
 
     /// <summary>
     /// Constructs a TransferDialog
@@ -100,8 +102,13 @@ public partial class TransferDialog
         _grpConversionRate.SetVisible(false);
         _rowSourceCurrency = Adw.EntryRow.New();
         _rowDestCurrency = Adw.EntryRow.New();
+        _rowConversionResult = Adw.ActionRow.New();
+        _lblConversionResult = Gtk.Label.New(null);
+        _rowConversionResult.SetTitle(_controller.Localizer["Result"]);
+        _rowConversionResult.AddSuffix(_lblConversionResult);
         _grpConversionRate.Add(_rowSourceCurrency);
         _grpConversionRate.Add(_rowDestCurrency);
+        _grpConversionRate.Add(_rowConversionResult);
         _grpMain.Add(_grpConversionRate);
         //Load
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
@@ -168,10 +175,14 @@ public partial class TransferDialog
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowSourceCurrency.RemoveCssClass("error");
         _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
+        _rowDestCurrency.RemoveCssClass("error");
         _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode ?? "");
+        _lblConversionResult.SetText(_controller.Localizer["NotAvailable"]);
         if (checkStatus == TransferCheckStatus.Valid)
         {
+            _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForNumberString));
             _dialog.SetResponseEnabled("ok", true);
         }
         else
@@ -189,8 +200,10 @@ public partial class TransferDialog
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
             {
                 _grpConversionRate.SetVisible(true);
+                _rowSourceCurrency.AddCssClass("error");
                 _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
-                _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode);
+                _rowDestCurrency.AddCssClass("error");
+                _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode!);
             }
             _dialog.SetResponseEnabled("ok", false);
         }
