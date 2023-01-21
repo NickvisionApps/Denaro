@@ -40,7 +40,7 @@ public sealed partial class TransactionDialog : ContentDialog
         PrimaryButtonText = _controller.Localizer["OK"];
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtDescription.PlaceholderText = _controller.Localizer["Description", "Placeholder"];
-        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         CmbType.Header = _controller.Localizer["TransactionType", "Field"];
         CmbType.Items.Add(_controller.Localizer["Income"]);

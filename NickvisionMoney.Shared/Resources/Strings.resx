@@ -570,6 +570,18 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<data name="EnterConversionRate" xml:space="preserve">
+		<value>Enter conversion here</value>
+	</data>
+
+	<data name="ConversionNeeded" xml:space="preserve">
+		<value>Conversion Needed</value>
+	</data>
+
+	<data name="Result" xml:space="preserve">
+		<value>Result</value>
+	</data>
+
 	<!--AccountSettingsDialog-->
 	<data name="AccountType.Checking" xml:space="preserve">
 		<value>Checking</value>
@@ -714,6 +726,10 @@
 
 	<data name="CustomCurrencyCode.Field" xml:space="preserve">
 		<value>Currency Code</value>
+	</data>
+
+	<data name="CustomCurrencyCode.Empty" xml:space="preserve">
+		<value>Currency Code (Empty)</value>
 	</data>
 
 	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">

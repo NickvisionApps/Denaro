@@ -50,6 +50,8 @@
       <description>
 		  <p>- Added the ability to sort transactions by amount</p>
 		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
+		  <p>- Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</p>
+		  <p>- Recent accounts are now available to select from the TransferDialog</p>
       </description>
     </release>
   </releases>

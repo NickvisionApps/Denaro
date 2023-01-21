@@ -204,7 +204,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        if(_controller.AccountNeedsFirstTimeSetup)
+        if(_controller.AccountNeedsSetup)
         {
             AccountSettings(null, new RoutedEventArgs());
         }
