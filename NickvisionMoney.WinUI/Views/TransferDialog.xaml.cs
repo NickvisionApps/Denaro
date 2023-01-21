@@ -42,7 +42,7 @@ public sealed partial class TransferDialog : ContentDialog
         LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
-        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtSourceCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
         TxtDestCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
@@ -77,7 +77,7 @@ public sealed partial class TransferDialog : ContentDialog
             actionRow.Children.Insert(0, typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
-        TxtAmount.Text = _controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForNumberString);
+        TxtAmount.Text = _controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString);
         Validate();
     }
 
@@ -104,12 +104,12 @@ public sealed partial class TransferDialog : ContentDialog
     {
         var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
-        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})")}";
         TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForNumberString);
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }

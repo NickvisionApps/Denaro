@@ -44,18 +44,22 @@ public class TransferDialogController
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
-    /// The CultureInfo to use when displaying a number string
+    /// The CultureInfo to use when displaying a source number string
     /// </summary>
-    public CultureInfo CultureForNumberString { get; init; }
+    public CultureInfo CultureForSourceNumberString { get; init; }
     /// <summary>
-    /// The currency code of the destination account, if available
+    /// The CultureInfo to use when displaying a destination number string
     /// </summary>
-    public string? DestinationCurrencyCode { get; private set; }
+    public CultureInfo? CultureForDestNumberString { get; private set; }
 
     /// <summary>
     /// The currency code of the source account
     /// </summary>
-    public string SourceCurrencyCode => CultureForNumberString.NumberFormat.NaNSymbol;
+    public string SourceCurrencyCode => CultureForSourceNumberString.NumberFormat.NaNSymbol;
+    /// <summary>
+    /// The currency code of the destination account, if available
+    /// </summary>
+    public string? DestinationCurrencyCode => CultureForDestNumberString == null ? null : CultureForDestNumberString.NumberFormat.NaNSymbol;
 
     /// <summary>
     /// Constructs a TransferDialogController
@@ -79,7 +83,7 @@ public class TransferDialogController
             }
         }
         Accepted = false;
-        CultureForNumberString = culture;
+        CultureForSourceNumberString = culture;
     }
 
     /// <summary>
@@ -126,14 +130,23 @@ public class TransferDialogController
             {
                 lcMonetary = lcMonetary.Replace('_', '-');
             }
-            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+            CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+            var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             var destMetadata = AccountMetadata.LoadFromAccountFile(destPath)!;
-            DestinationCurrencyCode = destMetadata.UseCustomCurrency ? destMetadata.CustomCurrencyCode : region.ISOCurrencySymbol;
+            if (destMetadata.UseCustomCurrency)
+            {
+                CultureForDestNumberString.NumberFormat.CurrencySymbol = destMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
+                CultureForDestNumberString.NumberFormat.NaNSymbol = destMetadata.CustomCurrencyCode ?? destRegion.ISOCurrencySymbol;
+            }
+            else
+            {
+                CultureForDestNumberString.NumberFormat.NaNSymbol = destRegion.ISOCurrencySymbol;
+            }
             if (SourceCurrencyCode != DestinationCurrencyCode)
             {
                 try
                 {
-                    conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForNumberString);
+                    conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
                 }
                 catch
                 {
@@ -147,7 +160,7 @@ public class TransferDialogController
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString);
+            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForSourceNumberString);
         }
         catch
         {

@@ -80,7 +80,7 @@ public partial class TransferDialog
         _rowDestinationAccount.AddSuffix(_boxButtonsAccount);
         _rowDestinationAccount.SetActivatableWidget(_btnSelectAccount);
         //Amount
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount = Adw.EntryRow.New();
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
@@ -153,7 +153,7 @@ public partial class TransferDialog
             row.SetActivatableWidget(button);
             _grpRecentAccounts.Add(row);
         }
-        _rowAmount.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForNumberString));
+        _rowAmount.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString));
         Validate();
     }
 
@@ -195,7 +195,7 @@ public partial class TransferDialog
         _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForNumberString));
+            _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
             _dialog.SetResponseEnabled("ok", true);
         }
         else
