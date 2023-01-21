@@ -111,7 +111,7 @@ public partial class TransferDialog
             button.OnClicked += (Gtk.Button sender, EventArgs e) =>
             {
                 _popRecentAccounts.Popdown();
-                _rowDestinationAccount.SetSubtitle(row.GetSubtitle());
+                _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
                 Validate();
             };
             row.AddPrefix(button);
@@ -149,7 +149,7 @@ public partial class TransferDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle(), _rowAmount.GetText());
+        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowAmount.GetText());
         _rowDestinationAccount.RemoveCssClass("error");
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
