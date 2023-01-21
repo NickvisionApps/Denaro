@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="TxtSourceCurrency" Grid.Column="0" IsReadOnly="True" Text="1"/>
+                <TextBox x:Name="TxtSourceCurrency" Grid.Column="0"/>
 
                 <TextBlock HorizontalAlignment="Center" Margin="6,26,6,0" Grid.Column="1" FontWeight="Bold" FontSize="20" Text="="/>
 
