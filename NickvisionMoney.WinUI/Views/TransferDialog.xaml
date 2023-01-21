@@ -36,7 +36,7 @@
 
                 <Button x:Name="BtnSelectAccount" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectAccount">
                     <Button.Content>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEF40;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE838;"/>
                     </Button.Content>
                 </Button>
 
