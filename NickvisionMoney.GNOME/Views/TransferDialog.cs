@@ -189,7 +189,6 @@ public partial class TransferDialog
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-        _grpConversionRate.SetVisible(false);
         _rowSourceCurrency.RemoveCssClass("error");
         _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
         _rowDestCurrency.RemoveCssClass("error");
@@ -243,6 +242,7 @@ public partial class TransferDialog
             {
                 var path = openFileDialog.GetFile()!.GetPath();
                 _rowDestinationAccount.SetSubtitle(path ?? "");
+                _grpConversionRate.SetVisible(false);
                 Validate();
             }
         };
