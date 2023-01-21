@@ -169,4 +169,11 @@ public sealed partial class TransferDialog : ContentDialog
     /// <param name="sender">object</param>
     /// <param name="e">TextChangedEventArgs</param>
     private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when the destination currency textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtDestCurrency_TextChanged(object sender, TextChangedEventArgs e) => Validate();
 }
