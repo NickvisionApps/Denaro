@@ -59,6 +59,8 @@
                 <TextBox x:Name="TxtDestCurrency" Grid.Column="2" TextChanged="TxtDestCurrency_TextChanged"/>
             </Grid>
 
+            <TextBox Name="TxtConversionResult" Visibility="Collapsed" IsReadOnly="True"/>
+
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
     </ScrollViewer>

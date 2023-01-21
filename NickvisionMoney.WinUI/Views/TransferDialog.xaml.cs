@@ -46,6 +46,8 @@ public sealed partial class TransferDialog : ContentDialog
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtSourceCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
         TxtDestCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
+        TxtConversionResult.Header = _controller.Localizer["Result"];
+        TxtConversionResult.Text = _controller.Localizer["NotAvailable"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
         foreach (var recentAccount in _controller.RecentAccounts)
@@ -103,10 +105,11 @@ public sealed partial class TransferDialog : ContentDialog
         var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
+        TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
+        TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
-            TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForNumberString);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
@@ -123,8 +126,10 @@ public sealed partial class TransferDialog : ContentDialog
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
             {
                 BoxConversionRate.Visibility = Visibility.Visible;
+                TxtConversionResult.Visibility = Visibility.Visible;
                 TxtSourceCurrency.Header = $"{_controller.SourceCurrencyCode} ({_controller.Localizer["ConversionNeeded"]})";
                 TxtDestCurrency.Header = $"{_controller.DestinationCurrencyCode} ({_controller.Localizer["ConversionNeeded"]})";
+                TxtConversionResult.Text = _controller.Localizer["NotAvailable"];
             }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
