@@ -164,7 +164,8 @@ public class MainWindowController : IDisposable
     /// </summary>
     /// <param name="path">The path of the account</param>
     /// <param name="showOpenedNotification">Whether or not to show a notification if an account is opened</param>
-    public void AddAccount(string path, bool showOpenedNotification = true)
+    /// <returns>True if account added, else false (account already added)</returns>
+    public bool AddAccount(string path, bool showOpenedNotification = true)
     {
         if(Path.GetExtension(path) != ".nmoney")
         {
@@ -183,6 +184,7 @@ public class MainWindowController : IDisposable
             Configuration.Current.Save();
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
             AccountAdded?.Invoke(this, EventArgs.Empty);
+            return true;
         }
         else
         {
@@ -190,6 +192,7 @@ public class MainWindowController : IDisposable
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
             }
+            return false;
         }
     }
 
@@ -205,8 +208,8 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        AddAccount(transfer.DestinationAccountPath, false);
+        var added = AddAccount(transfer.DestinationAccountPath, false);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.ReceiveTransferAsync(transfer);
+        await controller.ReceiveTransferAsync(transfer, !added);
     }
 }

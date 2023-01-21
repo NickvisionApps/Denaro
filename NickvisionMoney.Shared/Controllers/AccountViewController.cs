@@ -749,10 +749,14 @@ public class AccountViewController
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    public async Task ReceiveTransferAsync(Transfer transfer)
+    /// <param name="accountOpened">Whether or not the account is opened</param>
+    public async Task ReceiveTransferAsync(Transfer transfer, bool accountOpened)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        if(accountOpened)
+        {
+            TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        }
         FilterUIUpdate();
     }
 
