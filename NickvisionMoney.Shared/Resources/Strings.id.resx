@@ -674,4 +674,16 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   <data name="Generated.PDF" xml:space="preserve">
     <value>Dihasilkan</value>
   </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Cari berdasarkan Deskripsi</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>Pratinjau</value>
+  </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Kelola keuangan pribadi anda</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Urutkan Berdasarkan Jumlah</value>
+  </data>
 </root>
