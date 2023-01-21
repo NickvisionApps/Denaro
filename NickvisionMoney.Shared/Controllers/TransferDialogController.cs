@@ -60,7 +60,7 @@ public class TransferDialogController
         _accountAmount = accountAmount;
         Localizer = localizer;
         Transfer = transfer;
-        RecentAccounts = new List<RecentAccount> {};
+        RecentAccounts = new List<RecentAccount>();
         foreach (var account in recentAccounts)
         {
             if (account.Path != Transfer.SourceAccountPath)
