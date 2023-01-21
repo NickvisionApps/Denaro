@@ -25,6 +25,10 @@ public partial class TransferDialog
     private readonly Adw.ActionRow _rowDestinationAccount;
     private readonly Gtk.Label _lblCurrency;
     private readonly Adw.EntryRow _rowAmount;
+    private readonly Gtk.Box _boxConversionRate;
+    private readonly Adw.EntryRow _rowSourceCurrency;
+    private readonly Adw.EntryRow _rowDestCurrency;
+    private readonly Gtk.Label _lblEquals;
 
     /// <summary>
     /// Constructs a TransferDialog
@@ -90,6 +94,17 @@ public partial class TransferDialog
             }
         };
         _grpMain.Add(_rowAmount);
+        //Conversion Rate
+        _boxConversionRate = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _boxConversionRate.SetVisible(false);
+        _rowSourceCurrency = Adw.EntryRow.New();
+        _rowDestCurrency = Adw.EntryRow.New();
+        _lblEquals = Gtk.Label.New(null);
+        _lblEquals.SetMarkup("<b>=</b>");
+        _boxConversionRate.Append(_rowSourceCurrency);
+        _boxConversionRate.Append(_lblEquals);
+        _boxConversionRate.Append(_rowDestCurrency);
+        _grpMain.Add(_boxConversionRate);
         //Load
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowDestinationAccount.SetSubtitle(_controller.Localizer["NoAccountSelected"]);
@@ -150,11 +165,13 @@ public partial class TransferDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowAmount.GetText());
+        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowAmount.GetText(), _rowSourceCurrency.GetText(), _rowDestCurrency.GetText());
         _rowDestinationAccount.RemoveCssClass("error");
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
+        _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
             _dialog.SetResponseEnabled("ok", true);
@@ -170,6 +187,12 @@ public partial class TransferDialog
             {
                 _rowAmount.AddCssClass("error");
                 _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
+            {
+                _boxConversionRate.SetVisible(true);
+                _rowSourceCurrency.SetText($"{_controller.SourceCurrencyCode} ({_controller.Localizer["ConversionNeeded"]})");
+                _rowDestCurrency.SetText($"{_controller.DestinationCurrencyCode} ({_controller.Localizer["ConversionNeeded"]})");
             }
             _dialog.SetResponseEnabled("ok", false);
         }
