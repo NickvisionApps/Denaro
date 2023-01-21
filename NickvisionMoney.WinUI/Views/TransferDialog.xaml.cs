@@ -1,9 +1,16 @@
+using CommunityToolkit.WinUI.UI.Controls;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.WinUI.Controls;
+using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -30,13 +37,42 @@ public sealed partial class TransferDialog : ContentDialog
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer["OK"];
         LblDescription.Text = _controller.Localizer["TransferDescription"];
-        ToolTipService.SetToolTip(BtnSelectAccount, _controller.Localizer["SelectAccount"]);
+        ToolTipService.SetToolTip(BtnSelectAccount, _controller.Localizer["DestinationAccount", "Placeholder"]);
+        ToolTipService.SetToolTip(BtnRecentAccounts, _controller.Localizer["RecentAccounts"]);
+        LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
+        foreach (var recentAccount in _controller.RecentAccounts)
+        {
+            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+            var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
+            var typeBox = new Border()
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Margin = new Thickness(-10, 0, 6, 0),
+                Background = new SolidColorBrush((Color)ColorHelpers.FromRGBA(bgColorString)!),
+                CornerRadius = new CornerRadius(12)
+            };
+            var typeLabel = new TextBlock()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(10, 0, 10, 0),
+                Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black),
+                FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
+                Text = "\uE8C7"
+            };
+            typeBox.Child = typeLabel;
+            DockPanel.SetDock(typeBox, Dock.Left);
+            actionRow.Children.Insert(0, typeBox);
+            ListRecentAccounts.Items.Add(actionRow);
+        }
         TxtAmount.Text = _controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForNumberString);
         Validate();
     }
@@ -101,6 +137,22 @@ public sealed partial class TransferDialog : ContentDialog
         {
             TxtDestinationAccount.Text = file.Path;
             Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when an account is selected from the list of recent accounts
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void ListRecentAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        FlyoutRecentAccounts.Hide();
+        if (ListRecentAccounts.SelectedIndex != -1)
+        {
+            TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
+            Validate();
+            ListRecentAccounts.SelectedIndex = -1;
         }
     }
 
