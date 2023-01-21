@@ -148,6 +148,8 @@ public partial class TransferDialog
                 _popRecentAccounts.Popdown();
                 _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
                 _grpConversionRate.SetVisible(false);
+                _rowSourceCurrency.SetText("");
+                _rowDestCurrency.SetText("");
                 Validate();
             };
             row.AddPrefix(button);
@@ -244,6 +246,8 @@ public partial class TransferDialog
                 var path = openFileDialog.GetFile()!.GetPath();
                 _rowDestinationAccount.SetSubtitle(path ?? "");
                 _grpConversionRate.SetVisible(false);
+                _rowSourceCurrency.SetText("");
+                _rowDestCurrency.SetText("");
                 Validate();
             }
         };

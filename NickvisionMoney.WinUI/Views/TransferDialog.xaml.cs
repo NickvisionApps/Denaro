@@ -153,6 +153,8 @@ public sealed partial class TransferDialog : ContentDialog
             TxtDestinationAccount.Text = file.Path;
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
+            TxtSourceCurrency.Text = "";
+            TxtDestCurrency.Text = "";
             Validate();
         }
     }
@@ -170,6 +172,8 @@ public sealed partial class TransferDialog : ContentDialog
             TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
+            TxtSourceCurrency.Text = "";
+            TxtDestCurrency.Text = "";
             Validate();
             ListRecentAccounts.SelectedIndex = -1;
         }
