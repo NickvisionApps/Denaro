@@ -44,6 +44,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
+        TxtDestCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transfer
         foreach (var recentAccount in _controller.RecentAccounts)
@@ -98,7 +99,7 @@ public sealed partial class TransferDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text);
+        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         if (checkStatus == TransferCheckStatus.Valid)
@@ -115,6 +116,12 @@ public sealed partial class TransferDialog : ContentDialog
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
                 TxtAmount.Header = _controller.Localizer["Amount", "Invalid"];
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
+            {
+                BoxConversionRate.Visibility = Visibility.Visible;
+                TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
+                TxtDestCurrency.Header = _controller.DestinationCurrencyCode;
             }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;

@@ -45,6 +45,20 @@
 
             <TextBox Name="TxtAmount" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
 
+            <Grid x:Name="BoxConversionRate" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TxtSourceCurrency" Grid.Column="0" IsReadOnly="True" Text="1"/>
+
+                <TextBlock HorizontalAlignment="Center" Margin="6,26,6,0" Grid.Column="1" FontWeight="Bold" FontSize="20" Text="="/>
+
+                <TextBox x:Name="TxtDestCurrency" Grid.Column="2"/>
+            </Grid>
+
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
     </ScrollViewer>
