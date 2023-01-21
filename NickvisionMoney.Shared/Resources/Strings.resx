@@ -578,6 +578,10 @@
 		<value>Conversion Needed</value>
 	</data>
 
+	<data name="Result" xml:space="preserve">
+		<value>Result</value>
+	</data>
+
 	<!--AccountSettingsDialog-->
 	<data name="AccountType.Checking" xml:space="preserve">
 		<value>Checking</value>
