@@ -193,7 +193,6 @@ public partial class TransferDialog
         _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
         _rowDestCurrency.RemoveCssClass("error");
         _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode ?? "");
-        _lblConversionResult.SetText(_controller.Localizer["NotAvailable"]);
         if (checkStatus == TransferCheckStatus.Valid)
         {
             _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForNumberString));
@@ -218,6 +217,7 @@ public partial class TransferDialog
                 _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
                 _rowDestCurrency.AddCssClass("error");
                 _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode!);
+                _lblConversionResult.SetText(_controller.Localizer["NotAvailable"]);
             }
             _dialog.SetResponseEnabled("ok", false);
         }
