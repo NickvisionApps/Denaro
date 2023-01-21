@@ -64,6 +64,7 @@ public partial class TransferDialog
         _popRecentAccounts.SetChild(_grpRecentAccounts);
         _btnRecentAccounts = Gtk.MenuButton.New();
         _btnRecentAccounts.SetIconName("document-open-recent-symbolic");
+        _btnRecentAccounts.SetTooltipText(_controller.Localizer["RecentAccounts"]);
         _btnRecentAccounts.SetPopover(_popRecentAccounts);
         //Buttons Account Box
         _boxButtonsAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
