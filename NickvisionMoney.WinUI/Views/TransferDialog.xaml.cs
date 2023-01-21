@@ -105,6 +105,7 @@ public sealed partial class TransferDialog : ContentDialog
         var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})")}";
+        BoxConversionRate.Visibility = Visibility.Collapsed;
         TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
