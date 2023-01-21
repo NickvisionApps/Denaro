@@ -147,6 +147,7 @@ public partial class TransferDialog
             {
                 _popRecentAccounts.Popdown();
                 _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
+                _grpConversionRate.SetVisible(false);
                 Validate();
             };
             row.AddPrefix(button);

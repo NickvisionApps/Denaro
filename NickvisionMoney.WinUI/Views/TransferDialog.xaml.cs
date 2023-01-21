@@ -168,6 +168,8 @@ public sealed partial class TransferDialog : ContentDialog
         if (ListRecentAccounts.SelectedIndex != -1)
         {
             TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
+            BoxConversionRate.Visibility = Visibility.Collapsed;
+            TxtConversionResult.Visibility = Visibility.Collapsed;
             Validate();
             ListRecentAccounts.SelectedIndex = -1;
         }
