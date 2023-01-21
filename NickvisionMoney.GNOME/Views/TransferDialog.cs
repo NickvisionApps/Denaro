@@ -101,7 +101,21 @@ public partial class TransferDialog
         _grpConversionRate.SetTitle(_controller.Localizer["ConversionNeeded"]);
         _grpConversionRate.SetVisible(false);
         _rowSourceCurrency = Adw.EntryRow.New();
+        _rowSourceCurrency.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _rowDestCurrency = Adw.EntryRow.New();
+        _rowDestCurrency.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
         _rowConversionResult = Adw.ActionRow.New();
         _lblConversionResult = Gtk.Label.New(null);
         _rowConversionResult.SetTitle(_controller.Localizer["Result"]);
