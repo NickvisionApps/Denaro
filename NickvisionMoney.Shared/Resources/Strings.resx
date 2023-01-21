@@ -574,6 +574,10 @@
 		<value>Enter conversion here</value>
 	</data>
 
+	<data name="ConversionNeeded" xml:space="preserve">
+		<value>Conversion Needed</value>
+	</data>
+
 	<!--AccountSettingsDialog-->
 	<data name="AccountType.Checking" xml:space="preserve">
 		<value>Checking</value>
