@@ -105,7 +105,7 @@ public class TransferDialogController
     /// <param name="amountString">The new amount string</param>
     /// <param name="conversionRateString">The conversion rate string for different currencies</param>
     /// <returns>TransferCheckStatus</returns>
-    public TransferCheckStatus UpdateTransfer(string destPath, string amountString, string? conversionRateString)
+    public TransferCheckStatus UpdateTransfer(string destPath, string amountString, string conversionRateString)
     {
         TransferCheckStatus result = 0;
         var amount = 0m;
@@ -132,7 +132,7 @@ public class TransferDialogController
             {
                 try
                 {
-                    conversionRate = decimal.Parse(amountString, NumberStyles.Number, CultureForNumberString);
+                    conversionRate = decimal.Parse(conversionRateString, NumberStyles.Number, CultureForNumberString);
                 }
                 catch
                 {

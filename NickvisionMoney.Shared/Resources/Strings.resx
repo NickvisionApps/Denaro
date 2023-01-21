@@ -570,6 +570,10 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<data name="EnterConversionRate" xml:space="preserve">
+		<value>Enter conversion here</value>
+	</data>
+
 	<!--AccountSettingsDialog-->
 	<data name="AccountType.Checking" xml:space="preserve">
 		<value>Checking</value>
