@@ -105,7 +105,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtDestCurrency.Header = _controller.SourceCurrencyCode;
+            TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
             TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
