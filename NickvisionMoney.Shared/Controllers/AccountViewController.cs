@@ -765,27 +765,31 @@ public class AccountViewController
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    public async Task ReceiveTransferAsync(Transfer transfer)
+    /// <param name="addTransactionRow">Whether or not to add the transaction row</param>
+    public async Task ReceiveTransferAsync(Transfer transfer, bool addTransactionRow)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        var transactions = _account.Transactions.Keys.ToList();
-        transactions.Sort((a, b) =>
+        if(addTransactionRow)
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-            if (!SortFirstToLast)
+            var transactions = _account.Transactions.Keys.ToList();
+            transactions.Sort((a, b) =>
             {
-                compareTo *= -1;
-            }
-            return compareTo;
-        });
-        for (var i = 0; i < transactions.Count; i++)
-        {
-            if (transactions[i] == newTransaction.Id)
+                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
+                {
+                    compareTo *= -1;
+                }
+                return compareTo;
+            });
+            for (var i = 0; i < transactions.Count; i++)
             {
-                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+                if (transactions[i] == newTransaction.Id)
+                {
+                    TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+                }
             }
+            FilterUIUpdate();
         }
-        FilterUIUpdate();
     }
 
     /// <summary>

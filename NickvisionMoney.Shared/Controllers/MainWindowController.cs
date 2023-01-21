@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -208,8 +209,8 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        AddAccount(transfer.DestinationAccountPath, false);
+        var added = AddAccount(transfer.DestinationAccountPath, false);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.ReceiveTransferAsync(transfer);
+        await controller.ReceiveTransferAsync(transfer, !(added && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)));
     }
 }
