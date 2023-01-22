@@ -873,6 +873,10 @@
 		<value>Main Menu</value>
 	</data>
 
+	<data name="NewWindow.GTK" xml:space="preserve">
+		<value>New Window</value>
+	</data>
+
 	<data name="Recents.GTK" xml:space="preserve">
 		<value>Recents</value>
 	</data>
