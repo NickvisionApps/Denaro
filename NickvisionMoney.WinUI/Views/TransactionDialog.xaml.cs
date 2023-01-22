@@ -4,8 +4,10 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage.Pickers;
 using Windows.UI;
 
@@ -46,6 +48,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbType.Items.Add(_controller.Localizer["Income"]);
         CmbType.Items.Add(_controller.Localizer["Expense"]);
         CalendarDate.Header = _controller.Localizer["Date", "Field"];
+        CalendarDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
         CmbGroup.Header = _controller.Localizer["Group", "Field"];
         CmbRepeatInterval.Header = _controller.Localizer["TransactionRepeatInterval", "Field"];
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Never"]);
@@ -57,6 +60,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Yearly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Biyearly"]);
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
+        CalendarRepeatEndDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
         ToolTipService.SetToolTip(BtnRepeatEndDateClear, controller.Localizer["TransactionRepeatEndDate", "Clear"]);
         LblColor.Text = _controller.Localizer["Color", "Field"];
         LblReceipt.Text = _controller.Localizer["Receipt", "Field"];

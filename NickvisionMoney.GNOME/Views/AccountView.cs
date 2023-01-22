@@ -685,6 +685,7 @@ public partial class AccountView
                 {
                     _statusPageNoTransactions.SetVisible(false);
                     _scrollTransactions.SetVisible(true);
+                    _expRange.SetSensitive(true);
                 }
                 else
                 {
@@ -692,6 +693,7 @@ public partial class AccountView
                     _scrollTransactions.SetVisible(false);
                     _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
                     _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
+                    _expRange.SetSensitive(false);
                 }
             }
             else
@@ -701,6 +703,7 @@ public partial class AccountView
                 _scrollTransactions.SetVisible(false);
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
+                _expRange.SetSensitive(false);
             }
             _isAccountLoading = false;
         }
