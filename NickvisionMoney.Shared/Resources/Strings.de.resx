@@ -687,4 +687,16 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Sortiere Nach Menge</value>
   </data>
+  <data name="Result" xml:space="preserve">
+    <value>Ergebnis</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Gebe Umwechslung hier ein</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Umwechslung Benötigt</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Währungs-Code (Leer)</value>
+  </data>
 </root>
