@@ -50,7 +50,7 @@ public partial class Program
         {
             CultureInfo.CurrentCulture = new CultureInfo("ar-EG"); // Fix #211
         }
-        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
+        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen | Gio.ApplicationFlags.NonUnique);
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.ID = "org.nickvision.money";
