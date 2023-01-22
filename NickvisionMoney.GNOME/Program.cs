@@ -30,8 +30,8 @@ public partial class Program
     private static partial string g_file_get_path(nint file);
 
     private readonly Adw.Application _application;
-    private List<MainWindow> _mainWindows;
-    private List<MainWindowController> _mainControllers;
+    private MainWindow? _mainWindow;
+    private MainWindowController _mainWindowController;
     private readonly OpenSignal _openSignal;
 
     /// <summary>
@@ -46,13 +46,22 @@ public partial class Program
     /// </summary>
     public Program()
     {
-        _mainWindows = new List<MainWindow>{};
-        _mainControllers = new List<MainWindowController>{};
         if (CultureInfo.CurrentCulture.ToString() == "ar-RG")
         {
             CultureInfo.CurrentCulture = new CultureInfo("ar-EG"); // Fix #211
         }
         _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen);
+        _mainWindow = null;
+        _mainWindowController = new MainWindowController();
+        _mainWindowController.AppInfo.ID = "org.nickvision.money";
+        _mainWindowController.AppInfo.Name = "Nickvision Denaro";
+        _mainWindowController.AppInfo.ShortName = "Denaro";
+        _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
+        _mainWindowController.AppInfo.Version = "2023.2.0-next";
+        _mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Recent accounts are now available to select from the TransferDialog</li></ul>";
+        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
+        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
+        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
         _application.OnActivate += OnActivate;
         _openSignal = (nint application, nint files, int nfiles, string hint, nint data) => OnOpen(files, nfiles);
         g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
@@ -72,46 +81,9 @@ public partial class Program
     }
 
     /// <summary>
-    /// Creates a controller for MainWindow
-    /// </summary>
-    /// <returns>New MainWindowController</returns>
-    private MainWindowController CreateMainController()
-    {
-        var mainWindowController = new MainWindowController();
-        mainWindowController.AppInfo.ID = "org.nickvision.money";
-        mainWindowController.AppInfo.Name = "Nickvision Denaro";
-        mainWindowController.AppInfo.ShortName = "Denaro";
-        mainWindowController.AppInfo.Description = $"{mainWindowController.Localizer["Description"]}.";
-        mainWindowController.AppInfo.Version = "2023.2.0-next";
-        mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Recent accounts are now available to select from the TransferDialog</li></ul>";
-        mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
-        mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
-        mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
-        _mainControllers.Add(mainWindowController);
-        return mainWindowController;
-    }
-
-    /// <summary>
-    /// Creates and starts new MainWindow
-    /// <summary>
-    public void StartNewWindow()
-    {
-        var window = new MainWindow(CreateMainController(), _application);
-        _application.AddWindow(window);
-        _mainWindows.Add(window);
-        window.Start();
-    }
-
-    /// <summary>
     /// Finalizes a Program
     /// </summary>
-    ~Program()
-    {
-        foreach (var controller in _mainControllers)
-        {
-            controller.Dispose();
-        }
-    }
+    ~Program() => _mainWindowController.Dispose();
 
     /// <summary>
     /// Runs the program
@@ -130,17 +102,20 @@ public partial class Program
     /// </summary>
     /// <param name="sedner">Gio.Application</param>
     /// <param name="e">EventArgs</param>
-    private void OnActivate(Gio.Application sender, EventArgs e)
+    private void OnActivate(Gio.Application sedner, EventArgs e)
     {
-        StartNewWindow();
         //Set Adw Theme
-        _application.StyleManager!.ColorScheme = _mainControllers[_mainControllers.Count - 1].Theme switch
+        _application.StyleManager!.ColorScheme = _mainWindowController.Theme switch
         {
             Theme.System => Adw.ColorScheme.PreferLight,
             Theme.Light => Adw.ColorScheme.ForceLight,
             Theme.Dark => Adw.ColorScheme.ForceDark,
             _ => Adw.ColorScheme.PreferLight
         };
+        //Main Window
+        _mainWindow = new MainWindow(_mainWindowController, _application);
+        _application.AddWindow(_mainWindow);
+        _mainWindow.Start();
     }
 
     /// <summary>
@@ -156,7 +131,7 @@ public partial class Program
             Marshal.Copy(files, filesArray, 0, 1);
             var pathOfFirstFile = g_file_get_path(filesArray[0]);
             OnActivate(_application, EventArgs.Empty);
-            _mainWindows[_mainWindows.Count - 1].OpenAccount(pathOfFirstFile);
+            _mainWindow!.OpenAccount(pathOfFirstFile);
         }
     }
 }
