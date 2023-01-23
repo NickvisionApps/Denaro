@@ -892,4 +892,8 @@
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money Account (*.nmoney)</value>
 	</data>
+
+	<data name="NewWindow.GTK" xml:space="preserve">
+		<value>New Window</value>
+	</data>
 </root>

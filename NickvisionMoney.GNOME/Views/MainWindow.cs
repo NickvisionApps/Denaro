@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
@@ -173,6 +174,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Main Menu Button
         _btnMainMenu = Gtk.MenuButton.New();
         var mainMenu = Gio.Menu.New();
+        mainMenu.Append(_controller.Localizer["NewWindow.GTK"], "win.newWindow");
         mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
         mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
         mainMenu.Append(_controller.Localizer["Help"], "win.help");
@@ -269,6 +271,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
         _actCloseAccount.SetEnabled(false);
+        //New Window Action
+        var actNewWindow = Gio.SimpleAction.New("newWindow", null);
+        actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule.FileName) { UseShellExecute = true });
+        AddAction(actNewWindow);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
