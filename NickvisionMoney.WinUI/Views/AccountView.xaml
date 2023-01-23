@@ -11,125 +11,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid>
-        <CommandBar x:Name="CmdBar" HorizontalAlignment="Left" VerticalAlignment="Top" DefaultLabelPosition="Right">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="BtnNew">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
-                    </AppBarButton.Icon>
-
-                    <AppBarButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem x:Name="MenuNewTransaction" Click="NewTransaction">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
-                                </MenuFlyoutItem.Icon>
-
-                                <MenuFlyoutItem.KeyboardAccelerators>
-                                    <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
-                                </MenuFlyoutItem.KeyboardAccelerators>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem x:Name="MenuNewGroup" Click="NewGroup">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
-                                </MenuFlyoutItem.Icon>
-
-                                <MenuFlyoutItem.KeyboardAccelerators>
-                                    <KeyboardAccelerator Modifiers="Control" Key="G"/>
-                                </MenuFlyoutItem.KeyboardAccelerators>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem x:Name="MenuTransferMoney" Click="TransferMoney">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
-                                </MenuFlyoutItem.Icon>
-
-                                <MenuFlyoutItem.KeyboardAccelerators>
-                                    <KeyboardAccelerator Modifiers="Control" Key="T"/>
-                                </MenuFlyoutItem.KeyboardAccelerators>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-
-                <AppBarSeparator/>
-
-                <AppBarButton x:Name="BtnImportFromFile" Click="ImportFromFile">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
-                    </AppBarButton.Icon>
-
-                    <AppBarButton.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="I"/>
-                    </AppBarButton.KeyboardAccelerators>
-                </AppBarButton>
-
-                <AppBarButton x:Name="BtnExportToFile">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
-                    </AppBarButton.Icon>
-
-                    <AppBarButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="CSV" Click="ExportToCSV">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem Text="PDF" Click="ExportToPDF">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-
-                <AppBarSeparator/>
-
-                <AppBarButton x:Name="BtnShowHideGroups" Click="ShowHideGroups"/>
-
-                <AppBarButton x:Name="BtnFilters">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE16E;"/>
-                    </AppBarButton.Icon>
-
-                    <AppBarButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem x:Name="MenuResetOverviewFilters" Click="ResetOverviewFilters">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem x:Name="MenuResetGroupsFilters" Click="ResetGroupsFilters">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem x:Name="MenuResetDatesFilters" Click="ResetDatesFilters">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
-
-                <AppBarSeparator/>
-
-                <AppBarButton x:Name="BtnAccountSettings" Click="AccountSettings">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-
-        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,46,6,6" LastChildFill="True">
+        <wct:DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,6,6,6" LastChildFill="True">
             <ScrollViewer x:Name="ScrollSidebar" wct:DockPanel.Dock="Left" Width="340" VerticalScrollBarVisibility="Auto">
                 <wct:DockPanel LastChildFill="True" Margin="0,0,10,0">
                     <AutoSuggestBox x:Name="TxtSearchDescription" wct:DockPanel.Dock="Top" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
@@ -226,9 +108,127 @@
                         </nickvision:ViewStackPage.ContextFlyout>
 
                         <Grid>
-                            <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                            <CommandBar x:Name="CmdBar" HorizontalAlignment="Left" VerticalAlignment="Top" DefaultLabelPosition="Right">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="BtnNew">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                        </AppBarButton.Icon>
 
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,10,0" Orientation="Horizontal">
+                                        <AppBarButton.Flyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <MenuFlyoutItem x:Name="MenuNewTransaction" Click="NewTransaction">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
+                                                    </MenuFlyoutItem.Icon>
+
+                                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                                        <KeyboardAccelerator Modifiers="Control,Shift" Key="N"/>
+                                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                                </MenuFlyoutItem>
+
+                                                <MenuFlyoutItem x:Name="MenuNewGroup" Click="NewGroup">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                                    </MenuFlyoutItem.Icon>
+
+                                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                                        <KeyboardAccelerator Modifiers="Control" Key="G"/>
+                                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                                </MenuFlyoutItem>
+
+                                                <MenuFlyoutItem x:Name="MenuTransferMoney" Click="TransferMoney">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
+                                                    </MenuFlyoutItem.Icon>
+
+                                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                                        <KeyboardAccelerator Modifiers="Control" Key="T"/>
+                                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                                </MenuFlyoutItem>
+                                            </MenuFlyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
+
+                                    <AppBarSeparator/>
+
+                                    <AppBarButton x:Name="BtnImportFromFile" Click="ImportFromFile">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
+                                        </AppBarButton.Icon>
+
+                                        <AppBarButton.KeyboardAccelerators>
+                                            <KeyboardAccelerator Modifiers="Control" Key="I"/>
+                                        </AppBarButton.KeyboardAccelerators>
+                                    </AppBarButton>
+
+                                    <AppBarButton x:Name="BtnExportToFile">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
+                                        </AppBarButton.Icon>
+
+                                        <AppBarButton.Flyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <MenuFlyoutItem Text="CSV" Click="ExportToCSV">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+
+                                                <MenuFlyoutItem Text="PDF" Click="ExportToPDF">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                            </MenuFlyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
+
+                                    <AppBarSeparator/>
+
+                                    <AppBarButton x:Name="BtnShowHideGroups" Click="ShowHideGroups"/>
+
+                                    <AppBarButton x:Name="BtnFilters">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE16E;"/>
+                                        </AppBarButton.Icon>
+
+                                        <AppBarButton.Flyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <MenuFlyoutItem x:Name="MenuResetOverviewFilters" Click="ResetOverviewFilters">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+
+                                                <MenuFlyoutItem x:Name="MenuResetGroupsFilters" Click="ResetGroupsFilters">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+
+                                                <MenuFlyoutItem x:Name="MenuResetDatesFilters" Click="ResetDatesFilters">
+                                                    <MenuFlyoutItem.Icon>
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                                                    </MenuFlyoutItem.Icon>
+                                                </MenuFlyoutItem>
+                                            </MenuFlyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
+
+                                    <AppBarSeparator/>
+
+                                    <AppBarButton x:Name="BtnAccountSettings" Click="AccountSettings">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
+                                        </AppBarButton.Icon>
+                                    </AppBarButton>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+
+                            <TextBlock x:Name="LblTransactions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,46,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Orientation="Horizontal">
                                 <ComboBox x:Name="CmbSortTransactionsBy" Margin="0,0,10,0" SelectionChanged="CmbSortTransactionsBy_SelectionChanged"/>
 
                                 <ToggleButton x:Name="BtnSortTopBottom" Click="BtnSortTopBottom_Click">
@@ -244,7 +244,7 @@
                                 </ToggleButton>
                             </StackPanel>
 
-                            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,44,0,0" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,76,0,0" VerticalScrollBarVisibility="Auto">
                                 <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
