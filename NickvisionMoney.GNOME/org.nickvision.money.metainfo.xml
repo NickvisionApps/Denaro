@@ -46,10 +46,13 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2023.2.0-next" date="2023-1-18">
+    <release version="2023.2.0-beta1" date="2023-01-22">
       <description>
 		  <p>- Added the ability to sort transactions by amount</p>
 		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
+		  <p>- Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</p>
+		  <p>- Recent accounts are now available to select from the TransferDialog</p>
+		  <p>- Added a "New Window" action to the main menu</p>
       </description>
     </release>
   </releases>

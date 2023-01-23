@@ -13,7 +13,8 @@ public enum AccountMetadataCheckStatus
 {
     Valid = 1,
     EmptyName = 2,
-    EmptyCurrencySymbol = 4
+    EmptyCurrencySymbol = 4,
+    EmptyCurrencyCode = 8
 }
 
 /// <summary>
@@ -30,9 +31,9 @@ public class AccountSettingsDialogController
     /// </summary>
     public AccountMetadata Metadata { get; init; }
     /// <summary>
-    /// Whether or not the dialog should be used for first time account setup
+    /// Whether or not the dialog should be used for necessary account setup
     /// </summary>
-    public bool IsFirstTimeSetup { get; init; }
+    public bool NeedsSetup { get; init; }
     /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
@@ -42,13 +43,13 @@ public class AccountSettingsDialogController
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
-    /// <param name="isFirstTimeSetup">Whether or not the dialog should be used for first time account setup</param>
+    /// <param name="needsSetup">Whether or not the dialog should be used for necessary account setup</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool isFirstTimeSetup, Localizer localizer)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, Localizer localizer)
     {
         Localizer = localizer;
         Metadata = (AccountMetadata)metadata.Clone();
-        IsFirstTimeSetup = isFirstTimeSetup;
+        NeedsSetup = needsSetup;
         Accepted = false;
     }
 
@@ -110,6 +111,10 @@ public class AccountSettingsDialogController
         if(useCustom && string.IsNullOrEmpty(customSymbol))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
+        }
+        if(useCustom && string.IsNullOrEmpty(customCode))
+        {
+            result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
         }
         if(result != 0)
         {

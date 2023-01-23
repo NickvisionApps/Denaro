@@ -67,9 +67,9 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
-    /// Whether or not an account needs to be setup for the first time
+    /// Whether or not an account needs to be setup
     /// </summary>
-    public bool AccountNeedsFirstTimeSetup => _account.NeedsFirstTimeSetup;
+    public bool AccountNeedsSetup => _account.NeedsAccountSetup;
     /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
@@ -183,8 +183,8 @@ public class AccountViewController
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
-                culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? "";
+                culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? culture.NumberFormat.CurrencySymbol;
+                culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? region.ISOCurrencySymbol;
             }
             else
             {
@@ -411,7 +411,7 @@ public class AccountViewController
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsFirstTimeSetup, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController
@@ -475,7 +475,7 @@ public class AccountViewController
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath), _account.TodayTotal, CultureForNumberString, Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString, Localizer);
 
     /// <summary>
     /// Updates the metadata of the account
@@ -739,9 +739,24 @@ public class AccountViewController
     /// <param name="transfer">The transfer to send</param>
     public async Task SendTransferAsync(Transfer transfer)
     {
-        transfer.SourceAccountName = AccountTitle;
-        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], AccountMetadata.LoadFromAccountFile(transfer.DestinationAccountPath)!.Name));
-        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
+        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], transfer.DestinationAccountName));
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
+        {
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
+            {
+                compareTo *= -1;
+            }
+            return compareTo;
+        });
+        for (var i = 0; i < transactions.Count; i++)
+        {
+            if (transactions[i] == newTransaction.Id)
+            {
+                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+            }
+        }   
         FilterUIUpdate();
         TransferSent?.Invoke(this, transfer);
     }
@@ -750,11 +765,31 @@ public class AccountViewController
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    public async Task ReceiveTransferAsync(Transfer transfer)
+    /// <param name="addTransactionRow">Whether or not to add the transaction row</param>
+    public async Task ReceiveTransferAsync(Transfer transfer, bool addTransactionRow)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, null));
-        FilterUIUpdate();
+        if(addTransactionRow)
+        {
+            var transactions = _account.Transactions.Keys.ToList();
+            transactions.Sort((a, b) =>
+            {
+                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
+                {
+                    compareTo *= -1;
+                }
+                return compareTo;
+            });
+            for (var i = 0; i < transactions.Count; i++)
+            {
+                if (transactions[i] == newTransaction.Id)
+                {
+                    TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+                }
+            }
+            FilterUIUpdate();
+        }
     }
 
     /// <summary>

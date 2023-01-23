@@ -42,9 +42,10 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
     /// <summary>
-    /// Whether or not an account needs to be setup for the first time
+    /// Whether or not an account needs to be setup
     /// </summary>
-    public bool NeedsFirstTimeSetup { get; private set; }
+    public bool NeedsAccountSetup { get; private set; }
+
     /// <summary>
     /// The next available group id
     /// </summary>
@@ -78,7 +79,7 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        NeedsFirstTimeSetup = true;
+        NeedsAccountSetup = true;
         NextAvailableGroupId = 0;
         NextAvailableTransactionId = 0;
         TodayIncome = 0;
@@ -160,7 +161,7 @@ public class Account : IDisposable
             Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);
             Metadata.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
-            NeedsFirstTimeSetup = false;
+            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode));
         }
         else
         {
@@ -403,7 +404,7 @@ public class Account : IDisposable
             Metadata.ShowGroupsList = metadata.ShowGroupsList;
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
             Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
-            NeedsFirstTimeSetup = false;
+            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode));
             FreeMemory();
             return true;
         }
@@ -845,7 +846,7 @@ public class Account : IDisposable
         {
             Description = description,
             Type = TransactionType.Expense,
-            Amount = transfer.Amount,
+            Amount = transfer.SourceAmount,
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
@@ -864,7 +865,7 @@ public class Account : IDisposable
         {
             Description = description,
             Type = TransactionType.Income,
-            Amount = transfer.Amount,
+            Amount = transfer.DestinationAmount,
             RGBA = Configuration.Current.TransferDefaultColor
         };
         await AddTransactionAsync(transaction);
@@ -974,8 +975,8 @@ public class Account : IDisposable
             var regionAmount = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (Metadata.UseCustomCurrency)
             {
-                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? NumberFormatInfo.CurrentInfo.CurrencySymbol;
-                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? "";
+                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? cultureAmount.NumberFormat.CurrencySymbol;
+                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? regionAmount.ISOCurrencySymbol;
             }
             //Date Culture
             var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
@@ -1068,7 +1069,7 @@ public class Account : IDisposable
                             });
                             if(Metadata.UseCustomCurrency)
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} {(!string.IsNullOrEmpty(Metadata.CustomCurrencyCode) ? $"({Metadata.CustomCurrencyCode})" : "")}");
+                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} ({Metadata.CustomCurrencyCode})");
                             }
                             else
                             {

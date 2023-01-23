@@ -546,7 +546,7 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        _parentWindow.OnWidthChanged();
+        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
     }
 
     /// <summary>
@@ -637,7 +637,7 @@ public partial class AccountView
     /// </summary>
     public async void Startup()
     {
-        if (_controller.AccountNeedsFirstTimeSetup)
+        if (_controller.AccountNeedsSetup)
         {
             AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         }
@@ -693,6 +693,7 @@ public partial class AccountView
                     _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
                     _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
                 }
+                _expRange.SetSensitive(true);
             }
             else
             {
@@ -701,6 +702,7 @@ public partial class AccountView
                 _scrollTransactions.SetVisible(false);
                 _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
                 _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
+                _expRange.SetSensitive(false);
             }
             _isAccountLoading = false;
         }
@@ -1361,6 +1363,14 @@ public partial class AccountView
         foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
+        }
+        if (e.SmallWidth)
+        {
+            _grpTransactions.SetTitle("");
+        }
+        else
+        {
+            _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         }
     }
 }

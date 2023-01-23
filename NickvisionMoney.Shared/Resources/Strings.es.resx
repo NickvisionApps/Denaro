@@ -674,4 +674,22 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Buscar por las descripciones</value>
   </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Administre sus finanzas personales</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Ordenar por cantidad</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Se necesita la conversión</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Escribe aquí la conversión</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Resultado</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Código de la divisa (vacío)</value>
+  </data>
 </root>

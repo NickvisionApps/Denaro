@@ -42,6 +42,10 @@
 		<value>GitHub Repo</value>
 	</data>
 
+	<data name="MatrixChat" xml:space="preserve">
+		<value>Matrix Chat</value>
+	</data>
+
 	<data name="ReportABug" xml:space="preserve">
 		<value>Report a Bug</value>
 	</data>
@@ -570,6 +574,18 @@
 		<value>No Account Selected</value>
 	</data>
 
+	<data name="EnterConversionRate" xml:space="preserve">
+		<value>Enter conversion here</value>
+	</data>
+
+	<data name="ConversionNeeded" xml:space="preserve">
+		<value>Conversion Needed</value>
+	</data>
+
+	<data name="Result" xml:space="preserve">
+		<value>Result</value>
+	</data>
+
 	<!--AccountSettingsDialog-->
 	<data name="AccountType.Checking" xml:space="preserve">
 		<value>Checking</value>
@@ -716,6 +732,10 @@
 		<value>Currency Code</value>
 	</data>
 
+	<data name="CustomCurrencyCode.Empty" xml:space="preserve">
+		<value>Currency Code (Empty)</value>
+	</data>
+
 	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
 		<value>Enter code here</value>
 	</data>
@@ -841,6 +861,10 @@
 		<value>Manage your personal finances</value>
 	</data>
 
+	<data name="Keywords.GTK" xml:space="preserve">
+		<value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
+	</data>
+
 	<data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Account Menu</value>
 	</data>
@@ -871,5 +895,9 @@
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money Account (*.nmoney)</value>
+	</data>
+
+	<data name="NewWindow.GTK" xml:space="preserve">
+		<value>New Window</value>
 	</data>
 </root>

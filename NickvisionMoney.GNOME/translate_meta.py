@@ -12,6 +12,7 @@ install_prefix = sys.argv[1] if len(sys.argv) > 1 else '/usr'
 
 regex = re.compile(r'Strings\.(.+)\.resx')
 desktop_comments = []
+desktop_keywords = []
 meta_summaries = []
 meta_descriptions = []
 for filename in os.listdir(resx_dir):
@@ -30,29 +31,43 @@ for filename in os.listdir(resx_dir):
                 text = item.find('value').text
                 if text:
                     meta_summaries.append(f'  <summary xml:lang="{lang_code}">{text}</summary>')
+            elif item.attrib['name'] == 'Keywords.GTK':
+                text = item.find('value').text
+                if text:
+                    desktop_keywords.append(f'Keywords[{lang_code}]={text}')
 desktop_comments.sort()
+desktop_keywords.sort()
 meta_summaries.sort()
 meta_descriptions.sort()
 
 with open(f'{install_prefix}/share/applications/org.nickvision.money.desktop', 'r') as f:
     contents = f.readlines()
+    new_contents = contents.copy()
+j = 0
 for i in range(len(contents)):
     if contents[i].startswith('Comment='):
-        contents.insert(i + 1, "\n".join(desktop_comments) + "\n")
-        break
+        new_contents.insert(j + 1, "\n".join(desktop_comments) + "\n")
+        j += 1
+    elif contents[i].startswith('Keywords='):
+        new_contents.insert(j + 1, "\n".join(desktop_keywords) + "\n")
+        j += 1
+    j += 1
 with open(f'{install_prefix}/share/applications/org.nickvision.money.desktop', 'w') as f:
-    contents = "".join(contents)
-    f.write(contents)
+    new_contents = "".join(new_contents)
+    f.write(new_contents)
 
 with open(f'{install_prefix}/share/metainfo/org.nickvision.money.metainfo.xml', 'r') as f:
     contents = f.readlines()
+    new_contents = contents.copy()
+j = 0
 for i in range(len(contents)):
     if contents[i].find('<summary>') > -1:
-        contents.insert(i + 1, "\n".join(meta_summaries) + "\n")
-        continue
-    if contents[i].find('<description>') > -1:
-        contents.insert(i + 4, "\n".join(meta_descriptions) + "\n")
+        new_contents.insert(j + 1, "\n".join(meta_summaries) + "\n")
+        j += 1
+    elif contents[i].find('<description>') > -1:
+        new_contents.insert(j + 4, "\n".join(meta_descriptions) + "\n")
         break
+    j += 1
 with open(f'{install_prefix}/share/metainfo/org.nickvision.money.metainfo.xml', 'w') as f:
-    contents = "".join(contents)
-    f.write(contents)
+    new_contents = "".join(new_contents)
+    f.write(new_contents)

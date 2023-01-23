@@ -686,4 +686,16 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Ordina per importo</value>
   </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Inserisci la conversione qui</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Conversione necessaria</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Risultato</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Codice valuta (vuoto)</value>
+  </data>
 </root>

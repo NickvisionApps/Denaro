@@ -282,6 +282,19 @@ public sealed partial class MainWindow : Window
             var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
             var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
             var actionRow = new ActionRow(recentAccount.Name, recentAccount.Path);
+            //Icon Label
+            var iconLabel = new TextBlock()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(-10, 0, 10, 0),
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
+                FontSize = 16,
+                Text = "\uE8C7"
+            };
+            DockPanel.SetDock(iconLabel, Dock.Left);
+            actionRow.Children.Insert(0, iconLabel);
+            //Type Box
             var typeBox = new Border()
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
@@ -292,7 +305,7 @@ public sealed partial class MainWindow : Window
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(30,0,30,0),
+                Margin = new Thickness(30, 0, 30, 0),
                 Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black),
                 Text = _controller.Localizer["AccountType", recentAccount.Type.ToString()]
             };

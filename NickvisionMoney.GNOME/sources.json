@@ -148,17 +148,17 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite/7.0.1/microsoft.data.sqlite.7.0.1.nupkg",
-        "sha512": "e6da7a4d77fb56b82ea8d8cab460c455063b1734f8f659f4891ddcdff089e3049dbc64035f6d72b3743bd76b546b58dec3146064b5a3f923c778549fab8b4424",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite/7.0.2/microsoft.data.sqlite.7.0.2.nupkg",
+        "sha512": "957a01842f8402c8ea7655c0b9f1dabeb661b8beac7f6dcf0239950df2078f7f63ae1050cbe90151b7d46f06fd6e7d510f8c0db028531d099fc9ea2bd14a59c8",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.7.0.1.nupkg"
+        "dest-filename": "microsoft.data.sqlite.7.0.2.nupkg"
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.1/microsoft.data.sqlite.core.7.0.1.nupkg",
-        "sha512": "88ba307fcb1aa5dda1c1744da352279cac1c8ddda93f40a6a05f41fb3fae0f0d1cdc0fd4952f00316cfea92a0a9b41c4e42f43e44ba6b7b3d6a1e3688ddb81b2",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.2/microsoft.data.sqlite.core.7.0.2.nupkg",
+        "sha512": "d42cd7c91e6afddb7fdb0f6a98540e608221b9276f66119a0e9c92ce5afb3ac950fc40857cf1be7b1a20b1623394f6cb91702c3e366d377587fe1b4c0ecd3936",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.core.7.0.1.nupkg"
+        "dest-filename": "microsoft.data.sqlite.core.7.0.2.nupkg"
     },
     {
         "type": "file",
@@ -190,10 +190,10 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2022.12.0/questpdf.2022.12.0.nupkg",
-        "sha512": "304bc94f1cb8491d7e098d6b3e4c363df81a5cc0bef25358ab43da05b4fabab93f3a44bf5af2ef89b9b0bad29daca28f5fe8a7836b1918aaf6ada287e089fea1",
+        "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2022.12.1/questpdf.2022.12.1.nupkg",
+        "sha512": "92853ee6e3d69e80153927784ea8b8faada88b168acbfc8e688b9b4366540e54a98c5519026a5555f0a7b27b25e932e63d7e2c4c6a8f0d8830d8743097ade378",
         "dest": "nuget-sources",
-        "dest-filename": "questpdf.2022.12.0.nupkg"
+        "dest-filename": "questpdf.2022.12.1.nupkg"
     },
     {
         "type": "file",

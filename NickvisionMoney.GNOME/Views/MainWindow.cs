@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
@@ -36,7 +37,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
-    private bool _compactMode;
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -73,6 +73,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
 
+    public bool CompactMode { get; private set; }
+
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
@@ -93,7 +95,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _accountViews = new List<Adw.TabPage>();
         SetDefaultSize(900, 720);
         SetSizeRequest(360, -1);
-        _compactMode = false;
+        CompactMode = false;
         if(_controller.IsDevVersion)
         {
             AddCssClass("devel");
@@ -173,6 +175,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Main Menu Button
         _btnMainMenu = Gtk.MenuButton.New();
         var mainMenu = Gio.Menu.New();
+        mainMenu.Append(_controller.Localizer["NewWindow.GTK"], "win.newWindow");
         mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
         mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
         mainMenu.Append(_controller.Localizer["Help"], "win.help");
@@ -269,6 +272,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
         _actCloseAccount.SetEnabled(false);
+        //New Window Action
+        var actNewWindow = Gio.SimpleAction.New("newWindow", null);
+        actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
+        AddAction(actNewWindow);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -488,6 +495,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         dialog.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
         dialog.SetIssueUrl(_controller.AppInfo.IssueTracker.ToString());
         dialog.SetSupportUrl(_controller.AppInfo.SupportUrl.ToString());
+        dialog.AddLink(_controller.Localizer["MatrixChat"], "https://matrix.to/#/#nickvision:matrix.org");
         dialog.SetDevelopers(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
         dialog.SetDesigners(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
         dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
@@ -607,9 +615,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     public void OnWidthChanged()
     {
         var compactModeNeeded = DefaultWidth < 450;
-        if((compactModeNeeded && !_compactMode) || (!compactModeNeeded && _compactMode))
+        if(compactModeNeeded != CompactMode)
         {
-            _compactMode = !_compactMode;
+            CompactMode = !CompactMode;
             WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));
         }
     }

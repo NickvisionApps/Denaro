@@ -469,6 +469,9 @@
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Управляйте своими личными финансами</value>
   </data>
+	<data name="Keywords.GTK" xml:space="preserve">
+		<value>деньги;финансы;кошелёк;наличные;банк;GTK;Nickvision;</value>
+	</data>
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Меню счёта</value>
   </data>
