@@ -37,7 +37,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
 
-    public bool CompactMode { get; private set; }
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -73,6 +72,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actNewAccount;
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
+
+    public bool CompactMode { get; private set; }
 
     /// <summary>
     /// Occurs when the window's width is changed
@@ -273,7 +274,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _actCloseAccount.SetEnabled(false);
         //New Window Action
         var actNewWindow = Gio.SimpleAction.New("newWindow", null);
-        actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule.FileName) { UseShellExecute = true });
+        actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
         AddAction(actNewWindow);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
