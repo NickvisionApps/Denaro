@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -257,6 +258,24 @@ public class Account : IDisposable
         NextAvailableTransactionId++;
         //Cleanup
         FreeMemory();
+    }
+
+    /// <summary>
+    /// Gets whether or not an account if is encrypted
+    /// </summary>
+    /// <param name="path">The path to the account file</param>
+    /// <returns>True if encrypted, else false</returns>
+    public static bool IsEncrypted(string path)
+    {
+        var header = "SQLite format 3";
+        var bytes = new byte[header.Length];
+        using var reader = new BinaryReader(new FileStream(path, FileMode.Open));
+        reader.Read(bytes, 0, header.Length);
+        if(header == Encoding.Default.GetString(bytes))
+        {
+            return false;
+        }
+        return true;
     }
 
     /// <summary>
