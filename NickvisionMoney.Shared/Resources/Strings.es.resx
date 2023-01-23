@@ -692,4 +692,13 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
     <value>Código de la divisa (vacío)</value>
   </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Chat de Matrix</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>dinero;finanzas;cartera;efectivo;banco;GTK;Nickvision;</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Ventana nueva</value>
+  </data>
 </root>

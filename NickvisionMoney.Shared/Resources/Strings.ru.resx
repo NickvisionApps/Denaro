@@ -469,9 +469,9 @@
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Управляйте своими личными финансами</value>
   </data>
-	<data name="Keywords.GTK" xml:space="preserve">
+  <data name="Keywords.GTK" xml:space="preserve">
 		<value>деньги;финансы;кошелёк;наличные;банк;GTK;Nickvision;</value>
-	</data>
+  </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Меню счёта</value>
   </data>
@@ -683,5 +683,23 @@
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Сортировать по сумме</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Введите значение для конвертации</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Требуется конвертация</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Код валюты (Пусто)</value>
+  </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Matrix Чат</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Новое окно</value>
   </data>
 </root>
