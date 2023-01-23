@@ -256,7 +256,7 @@ public sealed partial class AccountView : UserControl
                 {
                     if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
                     {
-                        displayedDay.Background = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]);
+                        displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
                     }
                     else
                     {
