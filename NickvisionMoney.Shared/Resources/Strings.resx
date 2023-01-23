@@ -42,6 +42,10 @@
 		<value>GitHub Repo</value>
 	</data>
 
+	<data name="MatrixChat" xml:space="preserve">
+		<value>Matrix Chat</value>
+	</data>
+
 	<data name="ReportABug" xml:space="preserve">
 		<value>Report a Bug</value>
 	</data>
@@ -857,6 +861,10 @@
 		<value>Manage your personal finances</value>
 	</data>
 
+	<data name="Keywords.GTK" xml:space="preserve">
+		<value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
+	</data>
+
 	<data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Account Menu</value>
 	</data>
@@ -887,5 +895,9 @@
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money Account (*.nmoney)</value>
+	</data>
+
+	<data name="NewWindow.GTK" xml:space="preserve">
+		<value>New Window</value>
 	</data>
 </root>

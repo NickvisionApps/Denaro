@@ -546,7 +546,7 @@ public partial class AccountView
             _btnSortLastToFirst.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
-        _parentWindow.OnWidthChanged();
+        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
     }
 
     /// <summary>
@@ -1332,6 +1332,14 @@ public partial class AccountView
         foreach(TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
+        }
+        if (e.SmallWidth)
+        {
+            _grpTransactions.SetTitle("");
+        }
+        else
+        {
+            _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         }
     }
 }
