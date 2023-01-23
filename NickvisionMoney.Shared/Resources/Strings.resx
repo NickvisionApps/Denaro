@@ -42,6 +42,10 @@
 		<value>GitHub Repo</value>
 	</data>
 
+	<data name="MatrixChat" xml:space="preserve">
+		<value>Matrix Chat</value>
+	</data>
+
 	<data name="ReportABug" xml:space="preserve">
 		<value>Report a Bug</value>
 	</data>
