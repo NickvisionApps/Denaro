@@ -911,7 +911,7 @@ public class AccountViewController
             {
                 continue;
             }
-            if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) && _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
+            if (_filterStartDate != DateOnly.FromDateTime(DateTime.Today) || _filterEndDate != DateOnly.FromDateTime(DateTime.Today))
             {
                 if (pair.Value.Date < _filterStartDate || pair.Value.Date > _filterEndDate)
                 {
