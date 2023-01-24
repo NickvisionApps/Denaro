@@ -212,12 +212,12 @@
 	</data>
 
 	<!--AccountView-->
+	<data name="AccountActions" xml:space="preserve">
+		<value>Actions</value>
+	</data>
+	
 	<data name="NewTransaction" xml:space="preserve">
 		<value>New Transaction</value>
-	</data>
-
-	<data name="NewTransaction.Short" xml:space="preserve">
-		<value>New</value>
 	</data>
 
 	<data name="NewTransaction.Tooltip" xml:space="preserve">
@@ -226,10 +226,6 @@
 
 	<data name="NewGroup" xml:space="preserve">
 		<value>New Group</value>
-	</data>
-
-	<data name="NewGroup.Short" xml:space="preserve">
-		<value>New</value>
 	</data>
 
 	<data name="NewGroup.Tooltip" xml:space="preserve">
@@ -881,16 +877,8 @@
 		<value>Recents</value>
 	</data>
 
-	<data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>New</value>
-	</data>
-
 	<data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Close Account</value>
-	</data>
-
-	<data name="AccountActions.GTK" xml:space="preserve">
-		<value>Actions</value>
 	</data>
 
 	<data name="AccountFileFilter.GTK" xml:space="preserve">
