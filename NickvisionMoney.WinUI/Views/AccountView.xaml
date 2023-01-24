@@ -212,7 +212,7 @@
                             </StackPanel>
 
                             <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,44,0,0" VerticalScrollBarVisibility="Auto">
-                                <GridView x:Name="ListTransactions" Margin="6,0,0,0" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
+                                <GridView x:Name="ListTransactions" Margin="6,0,0,40" VerticalAlignment="Top" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <wct:WrapPanel Orientation="Horizontal"/>
