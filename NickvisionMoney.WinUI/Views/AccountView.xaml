@@ -24,7 +24,7 @@
 
                         <Button x:Name="BtnActions" Grid.Column="1" VerticalAlignment="Stretch">
                             <Button.Content>
-                                <FontIcon VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE15E;"/>
+                                <FontIcon VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE621;"/>
                             </Button.Content>
 
                             <Button.Flyout>
@@ -67,6 +67,10 @@
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
                                         </MenuFlyoutItem.Icon>
+
+                                        <MenuFlyoutItem.KeyboardAccelerators>
+                                            <KeyboardAccelerator Modifiers="Control" Key="Decimal"/>
+                                        </MenuFlyoutItem.KeyboardAccelerators>
                                     </MenuFlyoutItem>
                                 </MenuFlyout>
                             </Button.Flyout>
