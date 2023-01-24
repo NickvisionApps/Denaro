@@ -43,22 +43,20 @@ public sealed partial class AccountView : UserControl
         _initializeWithWindow = initializeWithWindow;
         _isAccountLoading = false;
         //Localize Strings
-        BtnNew.Label = _controller.Localizer["New"];
+        LblBtnNew.Text = _controller.Localizer["New"];
         MenuNewTransaction.Text = _controller.Localizer["Transaction"];
         MenuContextNewTransaction.Text = _controller.Localizer["NewTransaction"];
         MenuNewGroup.Text = _controller.Localizer["Group"];
         MenuContextNewGroup.Text = _controller.Localizer["NewGroup"];
         MenuTransferMoney.Text = _controller.Localizer["Transfer"];
         MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
-        BtnImportFromFile.Label = _controller.Localizer["ImportFromFile"];
-        ToolTipService.SetToolTip(BtnImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
-        BtnExportToFile.Label = _controller.Localizer["ExportToFile"];
-        ToolTipService.SetToolTip(BtnShowHideGroups, _controller.Localizer["ToggleGroups", "Tooltip"]);
-        BtnFilters.Label = _controller.Localizer["Filters"];
-        MenuResetOverviewFilters.Text = _controller.Localizer["ResetFilters", "Overview"];
-        MenuResetGroupsFilters.Text = _controller.Localizer["ResetFilters", "Groups"];
-        MenuResetDatesFilters.Text = _controller.Localizer["ResetFilters", "Dates"];
-        BtnAccountSettings.Label = _controller.Localizer["AccountSettings"];
+        ToolTipService.SetToolTip(BtnActions, _controller.Localizer["AccountActions"]);
+        MenuImportFromFile.Text = _controller.Localizer["ImportFromFile"];
+        MenuExportToFile.Text = _controller.Localizer["ExportToFile"];
+        ToolTipService.SetToolTip(BtnResetOverviewFilters, _controller.Localizer["ResetFilters", "Overview"]);
+        ToolTipService.SetToolTip(BtnResetGroupsFilters, _controller.Localizer["ResetFilters", "Groups"]);
+        ToolTipService.SetToolTip(BtnResetDatesFilters, _controller.Localizer["ResetFilters", "Dates"]);
+        MenuAccountSettings.Text = _controller.Localizer["AccountSettings"];
         TxtSearchDescription.PlaceholderText = _controller.Localizer["SearchDescription", "Placeholder"];
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
@@ -89,15 +87,15 @@ public sealed partial class AccountView : UserControl
         {
             SectionGroups.Visibility = Visibility.Visible;
             DockPanel.SetDock(SectionCalendar, Dock.Bottom);
-            BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
-            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+            MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
+            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
         else
         {
             SectionGroups.Visibility = Visibility.Collapsed;
             DockPanel.SetDock(SectionCalendar, Dock.Top);
-            BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
-            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+            MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
+            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
         }
         CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
         if (_controller.SortFirstToLast)
@@ -209,7 +207,6 @@ public sealed partial class AccountView : UserControl
             AccountSettings(null, new RoutedEventArgs());
         }
         //Start Loading
-        CmdBar.IsEnabled = false;
         ScrollSidebar.IsEnabled = false;
         ViewStackTransactions.IsEnabled = false;
         LoadingCtrl.IsLoading = true;
@@ -222,7 +219,6 @@ public sealed partial class AccountView : UserControl
             ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
         }
         //Done Loading
-        CmdBar.IsEnabled = true;
         ScrollSidebar.IsEnabled = true;
         ViewStackTransactions.IsEnabled = true;
         LoadingCtrl.IsLoading = false;
@@ -303,7 +299,6 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             //Start Loading
-            CmdBar.IsEnabled = false;
             ScrollSidebar.IsEnabled = false;
             ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
@@ -311,7 +306,6 @@ public sealed partial class AccountView : UserControl
             await Task.Delay(50);
             await _controller.AddTransactionAsync(transactionController.Transaction);
             //Done Loading
-            CmdBar.IsEnabled = true;
             ScrollSidebar.IsEnabled = true;
             ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
@@ -350,7 +344,6 @@ public sealed partial class AccountView : UserControl
                     if (result == ContentDialogResult.Primary)
                     {
                         //Start Loading
-                        CmdBar.IsEnabled = false;
                         ScrollSidebar.IsEnabled = false;
                         ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
@@ -359,7 +352,6 @@ public sealed partial class AccountView : UserControl
                         await _controller.DeleteGeneratedTransactionsAsync(transactionId);
                         await _controller.UpdateTransactionAsync(transactionController.Transaction);
                         //Done Loading
-                        CmdBar.IsEnabled = true;
                         ScrollSidebar.IsEnabled = true;
                         ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
@@ -367,7 +359,6 @@ public sealed partial class AccountView : UserControl
                     else if(result == ContentDialogResult.Secondary)
                     {
                         //Start Loading
-                        CmdBar.IsEnabled = false;
                         ScrollSidebar.IsEnabled = false;
                         ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
@@ -375,7 +366,6 @@ public sealed partial class AccountView : UserControl
                         await Task.Delay(50);
                         await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
                         //Done Loading
-                        CmdBar.IsEnabled = true;
                         ScrollSidebar.IsEnabled = true;
                         ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
@@ -397,7 +387,6 @@ public sealed partial class AccountView : UserControl
                     if (result != ContentDialogResult.None)
                     {
                         //Start Loading
-                        CmdBar.IsEnabled = false;
                         ScrollSidebar.IsEnabled = false;
                         ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
@@ -405,7 +394,6 @@ public sealed partial class AccountView : UserControl
                         await Task.Delay(50);
                         await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
                         //Done Loading
-                        CmdBar.IsEnabled = true;
                         ScrollSidebar.IsEnabled = true;
                         ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
@@ -415,7 +403,6 @@ public sealed partial class AccountView : UserControl
             else
             {
                 //Start Loading
-                CmdBar.IsEnabled = false;
                 ScrollSidebar.IsEnabled = false;
                 ViewStackTransactions.IsEnabled = false;
                 LoadingCtrl.IsLoading = true;
@@ -423,7 +410,6 @@ public sealed partial class AccountView : UserControl
                 await Task.Delay(50);
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
                 //Done Loading
-                CmdBar.IsEnabled = true;
                 ScrollSidebar.IsEnabled = true;
                 ViewStackTransactions.IsEnabled = true;
                 LoadingCtrl.IsLoading = false;
@@ -454,7 +440,6 @@ public sealed partial class AccountView : UserControl
             if (result != ContentDialogResult.None)
             {
                 //Start Loading
-                CmdBar.IsEnabled = false;
                 ScrollSidebar.IsEnabled = false;
                 ViewStackTransactions.IsEnabled = false;
                 LoadingCtrl.IsLoading = true;
@@ -462,7 +447,6 @@ public sealed partial class AccountView : UserControl
                 await Task.Delay(50);
                 await _controller.DeleteSourceTransactionAsync(transactionId, result == ContentDialogResult.Primary);
                 //Done Loading
-                CmdBar.IsEnabled = true;
                 ScrollSidebar.IsEnabled = true;
                 ViewStackTransactions.IsEnabled = true;
                 LoadingCtrl.IsLoading = false;
@@ -501,7 +485,6 @@ public sealed partial class AccountView : UserControl
         if(await groupDialog.ShowAsync())
         {
             //Start Loading
-            CmdBar.IsEnabled = false;
             ScrollSidebar.IsEnabled = false;
             ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
@@ -509,7 +492,6 @@ public sealed partial class AccountView : UserControl
             await Task.Delay(50);
             await _controller.AddGroupAsync(groupController.Group);
             //Done Loading
-            CmdBar.IsEnabled = true;
             ScrollSidebar.IsEnabled = true;
             ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
@@ -531,7 +513,6 @@ public sealed partial class AccountView : UserControl
         if(await groupDialog.ShowAsync())
         {
             //Start Loading
-            CmdBar.IsEnabled = false;
             ScrollSidebar.IsEnabled = false;
             ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
@@ -539,7 +520,6 @@ public sealed partial class AccountView : UserControl
             await Task.Delay(50);
             await _controller.UpdateGroupAsync(groupController.Group);
             //Done Loading
-            CmdBar.IsEnabled = true;
             ScrollSidebar.IsEnabled = true;
             ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
@@ -617,7 +597,6 @@ public sealed partial class AccountView : UserControl
         if (file != null)
         {
             //Start Loading
-            CmdBar.IsEnabled = false;
             ScrollSidebar.IsEnabled = false;
             ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
@@ -625,7 +604,6 @@ public sealed partial class AccountView : UserControl
             await Task.Delay(50);
             await _controller.ImportFromFileAsync(file.Path);
             //Done Loading
-            CmdBar.IsEnabled = true;
             ScrollSidebar.IsEnabled = true;
             ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
@@ -681,15 +659,15 @@ public sealed partial class AccountView : UserControl
         {
             SectionGroups.Visibility = Visibility.Collapsed;
             DockPanel.SetDock(SectionCalendar, Dock.Top);
-            BtnShowHideGroups.Label = _controller.Localizer["ShowGroups"];
-            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+            MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
+            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
         }
         else
         {
             SectionGroups.Visibility = Visibility.Visible;
             DockPanel.SetDock(SectionCalendar, Dock.Bottom);
-            BtnShowHideGroups.Label = _controller.Localizer["HideGroups"];
-            BtnShowHideGroups.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+            MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
+            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
         _controller.ShowGroupsList = SectionGroups.Visibility == Visibility.Visible;
     }

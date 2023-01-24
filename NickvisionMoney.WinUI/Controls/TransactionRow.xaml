@@ -36,18 +36,18 @@
                 <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
             </StackPanel>
 
-            <StackPanel VerticalAlignment="Center" Margin="40,0,0,0" Orientation="Horizontal" Spacing="6">
+            <StackPanel VerticalAlignment="Center" Margin="40,0,0,0" Orientation="Horizontal" Spacing="0">
                 <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
 
-                <Button x:Name="BtnEdit" VerticalAlignment="Center" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
+                <Button x:Name="BtnEdit" VerticalAlignment="Center" Margin="6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
                     <Button.Content>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE104;"/>
                     </Button.Content>
                 </Button>
 
-                <Button x:Name="BtnDelete" VerticalAlignment="Center" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
+                <Button x:Name="BtnDelete" VerticalAlignment="Center" Margin="-6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
                     <Button.Content>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE107;"/>
                     </Button.Content>
                 </Button>
             </StackPanel>
