@@ -133,7 +133,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _popBtnNewAccount = Gtk.Button.New();
         _popBtnNewAccount.AddCssClass("suggested-action");
         _popBtnNewAccountContext = Adw.ButtonContent.New();
-        _popBtnNewAccountContext.SetLabel(_controller.Localizer["NewAccountPopover", "GTK"]);
+        _popBtnNewAccountContext.SetLabel(_controller.Localizer["New"]);
         _popBtnNewAccountContext.SetIconName("document-new-symbolic");
         _popBtnNewAccount.SetChild(_popBtnNewAccountContext);
         _popBtnNewAccount.SetTooltipText(_controller.Localizer["NewAccount", "Tooltip"]);

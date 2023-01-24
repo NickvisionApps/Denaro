@@ -206,7 +206,7 @@ public partial class AccountView
         _btnMenuAccountActions.AddCssClass("flat");
         _btnMenuAccountActionsContent = Adw.ButtonContent.New();
         _btnMenuAccountActionsContent.SetIconName("document-properties-symbolic");
-        _btnMenuAccountActionsContent.SetLabel(_controller.Localizer["AccountActions", "GTK"]);
+        _btnMenuAccountActionsContent.SetLabel(_controller.Localizer["AccountActions"]);
         _btnMenuAccountActions.SetChild(_btnMenuAccountActionsContent);
         var menuActionsExport = Gio.Menu.New();
         menuActionsExport.Append("CSV", "account.exportToCSV");
@@ -252,7 +252,7 @@ public partial class AccountView
         _btnNewGroup.AddCssClass("flat");
         _btnNewGroupContent = Adw.ButtonContent.New();
         _btnNewGroupContent.SetIconName("list-add-symbolic");
-        _btnNewGroupContent.SetLabel(_controller.Localizer["NewGroup", "Short"]);
+        _btnNewGroupContent.SetLabel(_controller.Localizer["New"]);
         _btnNewGroup.SetChild(_btnNewGroupContent);
         _btnNewGroup.SetTooltipText(_controller.Localizer["NewGroup", "Tooltip"]);
         _btnNewGroup.SetDetailedActionName("account.newGroup");
@@ -398,7 +398,7 @@ public partial class AccountView
         _btnNewTransaction.AddCssClass("suggested-action");
         _btnNewTransactionContent = Adw.ButtonContent.New();
         _btnNewTransactionContent.SetIconName("list-add-symbolic");
-        _btnNewTransactionContent.SetLabel(_controller.Localizer["NewTransaction", "Short"]);
+        _btnNewTransactionContent.SetLabel(_controller.Localizer["New"]);
         _btnNewTransaction.SetTooltipText(_controller.Localizer["NewTransaction", "Tooltip"]);
         _btnNewTransaction.SetChild(_btnNewTransactionContent);
         _btnNewTransaction.SetHalign(Gtk.Align.Center);
