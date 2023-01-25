@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nova transakcija</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Nova</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Nova transakcija (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Nova grupa</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Nova</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Nova grupa (Ctrl+G)</value>
@@ -513,14 +507,8 @@ Sve nespremljene promjene će se izgubiti.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Nedavno korišteni</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Novi</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Zatvori račun</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Akcije</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money račun (*.nmoney)</value>

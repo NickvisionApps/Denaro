@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Transaccion novèla</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Novèla</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Transaccion novèla (Ctrl+Maj+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Grop novèl</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Novèl</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Grop novèl (Ctrl+G)</value>
@@ -556,14 +550,8 @@ Aquesta accion se pòt pas anullar.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Recents</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Novèl</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Tampar lo compte</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Accions</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte bancari (*.nmoney)</value>
