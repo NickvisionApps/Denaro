@@ -645,14 +645,14 @@ public sealed partial class AccountView : UserControl
         if(SectionGroups.Visibility == Visibility.Visible)
         {
             SectionGroups.Visibility = Visibility.Collapsed;
-            DockPanel.SetDock(SectionCalendar, Dock.Top);
+            RowSidebarGroups.Height = new GridLength(0, GridUnitType.Pixel);
             MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
             MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
         }
         else
         {
             SectionGroups.Visibility = Visibility.Visible;
-            DockPanel.SetDock(SectionCalendar, Dock.Bottom);
+            RowSidebarGroups.Height = new GridLength(1, GridUnitType.Star);
             MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
             MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
