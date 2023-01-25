@@ -207,8 +207,6 @@ public sealed partial class AccountView : UserControl
             AccountSettings(null, new RoutedEventArgs());
         }
         //Start Loading
-        ScrollSidebar.IsEnabled = false;
-        ViewStackTransactions.IsEnabled = false;
         LoadingCtrl.IsLoading = true;
         //Work
         await Task.Delay(50);
@@ -219,10 +217,29 @@ public sealed partial class AccountView : UserControl
             ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
         }
         //Done Loading
-        ScrollSidebar.IsEnabled = true;
-        ViewStackTransactions.IsEnabled = true;
         LoadingCtrl.IsLoading = false;
     }
+
+    /// <summary>
+    /// Occurs when the page size is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SizeChangedEventArgs</param>
+    private void Page_SizeChanged(object sender, SizeChangedEventArgs e) => ScrollSidebar.Height = e.NewSize.Height - 60;
+
+    /// <summary>
+    /// Occurs when the NavView's pane is opened
+    /// </summary>
+    /// <param name="sender">NavigationView</param>
+    /// <param name="args">object</param>
+    private void NavView_PaneOpened(NavigationView sender, object args) => ScrollSidebar.Margin = new Thickness(6, 0, 0, 0);
+
+    /// <summary>
+    /// Occurs when the NavView's pane is closed
+    /// </summary>
+    /// <param name="sender">NavigationView</param>
+    /// <param name="args">object</param>
+    private void NavView_PaneClosed(NavigationView sender, object args) => ScrollSidebar.Margin = new Thickness(60, 0, 0, 0);
 
     /// <summary>
     /// Occurs when the account's transactions are changed
@@ -236,6 +253,7 @@ public sealed partial class AccountView : UserControl
             _isAccountLoading = true;
             //Overview
             _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
+            NavView.PaneTitle = _controller.AccountTitle;
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
             LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
@@ -250,7 +268,7 @@ public sealed partial class AccountView : UserControl
                 var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
                 foreach (CalendarViewDayItem displayedDay in displayedDays)
                 {
-                    if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)))
+                    if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today)
                     {
                         displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
                     }
@@ -299,15 +317,11 @@ public sealed partial class AccountView : UserControl
         if(await transactionDialog.ShowAsync())
         {
             //Start Loading
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
             await _controller.AddTransactionAsync(transactionController.Transaction);
             //Done Loading
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
         }
     }
@@ -344,30 +358,22 @@ public sealed partial class AccountView : UserControl
                     if (result == ContentDialogResult.Primary)
                     {
                         //Start Loading
-                        ScrollSidebar.IsEnabled = false;
-                        ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
                         //Work
                         await Task.Delay(50);
                         await _controller.DeleteGeneratedTransactionsAsync(transactionId);
                         await _controller.UpdateTransactionAsync(transactionController.Transaction);
                         //Done Loading
-                        ScrollSidebar.IsEnabled = true;
-                        ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
                     }
                     else if(result == ContentDialogResult.Secondary)
                     {
                         //Start Loading
-                        ScrollSidebar.IsEnabled = false;
-                        ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
                         //Work
                         await Task.Delay(50);
                         await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
                         //Done Loading
-                        ScrollSidebar.IsEnabled = true;
-                        ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
                     }
                 }
@@ -387,15 +393,11 @@ public sealed partial class AccountView : UserControl
                     if (result != ContentDialogResult.None)
                     {
                         //Start Loading
-                        ScrollSidebar.IsEnabled = false;
-                        ViewStackTransactions.IsEnabled = false;
                         LoadingCtrl.IsLoading = true;
                         //Work
                         await Task.Delay(50);
                         await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, result == ContentDialogResult.Primary);
                         //Done Loading
-                        ScrollSidebar.IsEnabled = true;
-                        ViewStackTransactions.IsEnabled = true;
                         LoadingCtrl.IsLoading = false;
                     }
                 }
@@ -403,15 +405,11 @@ public sealed partial class AccountView : UserControl
             else
             {
                 //Start Loading
-                ScrollSidebar.IsEnabled = false;
-                ViewStackTransactions.IsEnabled = false;
                 LoadingCtrl.IsLoading = true;
                 //Work
                 await Task.Delay(50);
                 await _controller.UpdateTransactionAsync(transactionController.Transaction);
                 //Done Loading
-                ScrollSidebar.IsEnabled = true;
-                ViewStackTransactions.IsEnabled = true;
                 LoadingCtrl.IsLoading = false;
             }
         }
@@ -440,15 +438,11 @@ public sealed partial class AccountView : UserControl
             if (result != ContentDialogResult.None)
             {
                 //Start Loading
-                ScrollSidebar.IsEnabled = false;
-                ViewStackTransactions.IsEnabled = false;
                 LoadingCtrl.IsLoading = true;
                 //Work
                 await Task.Delay(50);
                 await _controller.DeleteSourceTransactionAsync(transactionId, result == ContentDialogResult.Primary);
                 //Done Loading
-                ScrollSidebar.IsEnabled = true;
-                ViewStackTransactions.IsEnabled = true;
                 LoadingCtrl.IsLoading = false;
             }
         }
@@ -485,15 +479,11 @@ public sealed partial class AccountView : UserControl
         if(await groupDialog.ShowAsync())
         {
             //Start Loading
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
             await _controller.AddGroupAsync(groupController.Group);
             //Done Loading
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
         }
     }
@@ -513,15 +503,11 @@ public sealed partial class AccountView : UserControl
         if(await groupDialog.ShowAsync())
         {
             //Start Loading
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
             await _controller.UpdateGroupAsync(groupController.Group);
             //Done Loading
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
         }
     }
@@ -597,15 +583,11 @@ public sealed partial class AccountView : UserControl
         if (file != null)
         {
             //Start Loading
-            ScrollSidebar.IsEnabled = false;
-            ViewStackTransactions.IsEnabled = false;
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
             await _controller.ImportFromFileAsync(file.Path);
             //Done Loading
-            ScrollSidebar.IsEnabled = true;
-            ViewStackTransactions.IsEnabled = true;
             LoadingCtrl.IsLoading = false;
         }
     }
