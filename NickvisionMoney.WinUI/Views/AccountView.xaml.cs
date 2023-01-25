@@ -230,7 +230,11 @@ public sealed partial class AccountView : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">SizeChangedEventArgs</param>
-    private void Page_SizeChanged(object sender, SizeChangedEventArgs e) => ScrollSidebar.Height = e.NewSize.Height - 60;
+    private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        ScrollSidebar.Height = e.NewSize.Height - 60;
+        GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
+    }
 
     /// <summary>
     /// Occurs when the NavView's pane is opened

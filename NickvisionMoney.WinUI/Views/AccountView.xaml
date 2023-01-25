@@ -13,7 +13,7 @@
     <Grid>
         <NavigationView x:Name="NavView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="360" PaneOpening="NavView_PaneOpened" PaneClosing="NavView_PaneClosed">
             <NavigationView.PaneCustomContent>
-                <ScrollViewer x:Name="ScrollSidebar" Margin="6,0,0,0" Width="348" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="ScrollSidebar" Margin="6,0,0,0" Width="348" VerticalScrollBarVisibility="Auto" >
                     <Grid x:Name="GridSidebar">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="32"/>
