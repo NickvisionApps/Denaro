@@ -36,6 +36,7 @@ public sealed partial class MainWindow : Window
     private bool _isActived;
     private readonly SystemBackdropConfiguration _backdropConfiguration;
     private readonly MicaController? _micaController;
+    private readonly Dictionary<string, AccountView> _accountViews;
 
     /// <summary>
     /// Constructs a MainWindow
@@ -49,6 +50,7 @@ public sealed partial class MainWindow : Window
         _hwnd = WindowNative.GetWindowHandle(this);
         _appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(_hwnd));
         _isActived = true;
+        _accountViews = new Dictionary<string, AccountView>();
         //Register Events
         _appWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
@@ -218,7 +220,12 @@ public sealed partial class MainWindow : Window
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
         if (pageName == "OpenAccount")
         {
-            PageOpenAccount.Content = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem))], UpdateNavViewItemTitle, InitializeWithWindow);
+            var path = (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem);
+            if(!_accountViews.ContainsKey(path))
+            {
+                _accountViews.Add(path, new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == path)], UpdateNavViewItemTitle, InitializeWithWindow));
+            }
+            PageOpenAccount.Content = _accountViews[path];
         }
         else if (pageName == "Settings")
         {

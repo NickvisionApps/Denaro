@@ -1,4 +1,3 @@
-using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
@@ -27,6 +26,7 @@ public sealed partial class AccountView : UserControl
     private readonly AccountViewController _controller;
     private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
+    private bool _isOpened;
     private bool _isAccountLoading;
 
     /// <summary>
@@ -41,6 +41,7 @@ public sealed partial class AccountView : UserControl
         _controller = controller;
         _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
+        _isOpened = false;
         _isAccountLoading = false;
         //Localize Strings
         LblBtnNew.Text = _controller.Localizer["New"];
@@ -202,22 +203,26 @@ public sealed partial class AccountView : UserControl
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        if(_controller.AccountNeedsSetup)
+        if(!_isOpened)
         {
-            AccountSettings(null, new RoutedEventArgs());
+            if (_controller.AccountNeedsSetup)
+            {
+                AccountSettings(null, new RoutedEventArgs());
+            }
+            //Start Loading
+            LoadingCtrl.IsLoading = true;
+            //Work
+            await Task.Delay(50);
+            await _controller.StartupAsync();
+            ListTransactions.UpdateLayout();
+            for (var i = 0; i < ListTransactions.Items.Count; i++)
+            {
+                ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
+            }
+            //Done Loading
+            LoadingCtrl.IsLoading = false;
+            _isOpened = true;
         }
-        //Start Loading
-        LoadingCtrl.IsLoading = true;
-        //Work
-        await Task.Delay(50);
-        await _controller.StartupAsync();
-        ListTransactions.UpdateLayout();
-        for (var i = 0; i < ListTransactions.Items.Count; i++)
-        {
-            ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
-        }
-        //Done Loading
-        LoadingCtrl.IsLoading = false;
     }
 
     /// <summary>
