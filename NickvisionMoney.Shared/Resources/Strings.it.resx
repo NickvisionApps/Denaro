@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nuova transazione</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Nuova</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Nuova transazione (Ctrl+Maiusc+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Nuovo gruppo</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Nuovo</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Nuovo gruppo (Ctrl+G)</value>
@@ -578,14 +572,8 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Recenti</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Nuovo</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Chiudi account</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Azioni</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Account Money (*.nmoney)</value>
