@@ -12,80 +12,81 @@
 
     <Grid>
         <NavigationView x:Name="NavView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="360" PaneOpening="NavView_PaneOpened" PaneClosing="NavView_PaneClosed">
+            <NavigationView.PaneHeader>
+                <Grid Margin="6,0,0,0" Height="32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <AutoSuggestBox x:Name="TxtSearchDescription" Grid.Column="0" Margin="0,0,6,0" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
+
+                    <Button x:Name="BtnActions" Grid.Column="1" VerticalAlignment="Stretch">
+                        <Button.Content>
+                            <FontIcon VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE621;"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <MenuFlyoutItem x:Name="MenuShowHideGrous" Click="ShowHideGroups"/>
+
+                                <MenuFlyoutSeparator/>
+
+                                <MenuFlyoutItem x:Name="MenuImportFromFile" Click="ImportFromFile">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="I"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+
+                                <MenuFlyoutSubItem x:Name="MenuExportToFile">
+                                    <MenuFlyoutSubItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
+                                    </MenuFlyoutSubItem.Icon>
+
+                                    <MenuFlyoutItem Text="CSV" Click="ExportToCSV">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+
+                                    <MenuFlyoutItem Text="PDF" Click="ExportToPDF">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                </MenuFlyoutSubItem>
+
+                                <MenuFlyoutSeparator/>
+
+                                <MenuFlyoutItem x:Name="MenuAccountSettings" Click="AccountSettings">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
+                                    </MenuFlyoutItem.Icon>
+
+                                    <MenuFlyoutItem.KeyboardAccelerators>
+                                        <KeyboardAccelerator Modifiers="Control" Key="Decimal"/>
+                                    </MenuFlyoutItem.KeyboardAccelerators>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </Grid>
+            </NavigationView.PaneHeader>
+            
             <NavigationView.PaneCustomContent>
                 <ScrollViewer x:Name="ScrollSidebar" Margin="6,0,0,0" Width="348" VerticalScrollBarVisibility="Auto" >
                     <Grid x:Name="GridSidebar">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="32"/>
                             <RowDefinition Height="160"/>
                             <RowDefinition x:Name="RowSidebarGroups" Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-
-                            <AutoSuggestBox x:Name="TxtSearchDescription" Grid.Column="0" Margin="0,0,6,0" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
-
-                            <Button x:Name="BtnActions" Grid.Column="1" VerticalAlignment="Stretch">
-                                <Button.Content>
-                                    <FontIcon VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE621;"/>
-                                </Button.Content>
-
-                                <Button.Flyout>
-                                    <MenuFlyout Placement="Bottom">
-                                        <MenuFlyoutItem x:Name="MenuShowHideGrous" Click="ShowHideGroups"/>
-
-                                        <MenuFlyoutSeparator/>
-
-                                        <MenuFlyoutItem x:Name="MenuImportFromFile" Click="ImportFromFile">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11C;"/>
-                                            </MenuFlyoutItem.Icon>
-
-                                            <MenuFlyoutItem.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="I"/>
-                                            </MenuFlyoutItem.KeyboardAccelerators>
-                                        </MenuFlyoutItem>
-
-                                        <MenuFlyoutSubItem x:Name="MenuExportToFile">
-                                            <MenuFlyoutSubItem.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
-                                            </MenuFlyoutSubItem.Icon>
-
-                                            <MenuFlyoutItem Text="CSV" Click="ExportToCSV">
-                                                <MenuFlyoutItem.Icon>
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                                </MenuFlyoutItem.Icon>
-                                            </MenuFlyoutItem>
-
-                                            <MenuFlyoutItem Text="PDF" Click="ExportToPDF">
-                                                <MenuFlyoutItem.Icon>
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                                </MenuFlyoutItem.Icon>
-                                            </MenuFlyoutItem>
-                                        </MenuFlyoutSubItem>
-
-                                        <MenuFlyoutSeparator/>
-
-                                        <MenuFlyoutItem x:Name="MenuAccountSettings" Click="AccountSettings">
-                                            <MenuFlyoutItem.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
-                                            </MenuFlyoutItem.Icon>
-
-                                            <MenuFlyoutItem.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="Decimal"/>
-                                            </MenuFlyoutItem.KeyboardAccelerators>
-                                        </MenuFlyoutItem>
-                                    </MenuFlyout>
-                                </Button.Flyout>
-                            </Button>
-                        </Grid>
-
-                        <Border x:Name="SectionOverview" Grid.Row="1" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <Border x:Name="SectionOverview" Grid.Row="0" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                             <Grid>
                                 <StackPanel Spacing="12">
                                     <TextBlock x:Name="LblOverview" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
@@ -121,7 +122,7 @@
                             </Grid>
                         </Border>
 
-                        <Border x:Name="SectionGroups" Grid.Row="2" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <Border x:Name="SectionGroups" Grid.Row="1" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                             <Grid>
                                 <StackPanel Spacing="12">
                                     <StackPanel.ContextFlyout>
@@ -147,7 +148,7 @@
                             </Grid>
                         </Border>
 
-                        <Border x:Name="SectionCalendar" Grid.Row="3" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <Border x:Name="SectionCalendar" Grid.Row="2" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                             <Grid>
                                 <StackPanel Spacing="12">
                                     <TextBlock x:Name="LblCalendar" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>

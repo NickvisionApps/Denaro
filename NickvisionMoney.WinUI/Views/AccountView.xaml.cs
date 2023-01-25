@@ -264,7 +264,6 @@ public sealed partial class AccountView : UserControl
             _isAccountLoading = true;
             //Overview
             _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
-            NavView.PaneTitle = _controller.AccountTitle;
             LblTotalAmount.Text = _controller.AccountTodayTotalString;
             LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
             LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
