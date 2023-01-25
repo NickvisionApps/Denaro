@@ -123,18 +123,18 @@
                         </Border>
 
                         <Border x:Name="SectionGroups" Grid.Row="1" Margin="0,6,0,0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                            <Border.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:Name="MenuContextNewGroup" Click="NewGroup">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                </MenuFlyout>
+                            </Border.ContextFlyout>
+
                             <Grid>
                                 <StackPanel Spacing="12">
-                                    <StackPanel.ContextFlyout>
-                                        <MenuFlyout>
-                                            <MenuFlyoutItem x:Name="MenuContextNewGroup" Click="NewGroup">
-                                                <MenuFlyoutItem.Icon>
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
-                                                </MenuFlyoutItem.Icon>
-                                            </MenuFlyoutItem>
-                                        </MenuFlyout>
-                                    </StackPanel.ContextFlyout>
-
                                     <TextBlock x:Name="LblGroups" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                                     <ListView x:Name="ListGroups" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,6" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
