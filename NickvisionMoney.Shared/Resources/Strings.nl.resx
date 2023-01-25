@@ -677,4 +677,34 @@ de opeenvolgende losgekoppeld..</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>VOORVERTONING</value>
   </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Valutacode (leeg)</value>
+  </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Matrix-kamer</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Sorteren op hoeveelheid</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Voer conversie hier in</value>
+  </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Beheer uw persoonlijke financiën</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>money;finance;wallet;cash;bank;GTK;Nickvision;geld;financie;portemonnee;contant;pin;</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Resultaat</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Conversie benodigd</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Nieuw venster</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Zoeken op beschrijving</value>
+  </data>
 </root>
