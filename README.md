@@ -28,18 +28,34 @@
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the project and how to provide information so we can help you in case of troubles with the app.
 
-# GNOME Screenshots
-![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
-![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
-<p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png' alt='GNOMECompactMode' width='30%'></p>
+# Screenshots
 
-# WinUI Screenshots
-![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
-![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
-![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
-![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
-![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
-![TransferDialog](NickvisionMoney.WinUI/Screenshots/TransferDialog.png)
+<details>
+ <summary>GNOME</summary>
+
+ ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
+ ![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
+ <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='30%'><img   src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png'  alt='GNOMECompactMode' width='30%'></p>
+</details>
+
+<details>
+ <summary>WinUI</summary>
+
+ ![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
+ ![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
+ ![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
+ ![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
+ ![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
+ ![TransferDialog](NickvisionMoney.WinUI/Screenshots/TransferDialog.png)
+</details>
+
+<details>
+ <summary>PDF Export Sample</summary>
+
+ ![image](https://user-images.githubusercontent.com/17648453/214471610-643b6b62-6b0b-4c65-8c1c-2093174fcbbc.png)
+ ![image](https://user-images.githubusercontent.com/17648453/214471621-0f44f955-6f98-4270-860a-833c58b3b149.png)
+ ![image](https://user-images.githubusercontent.com/17648453/214471627-1d8aa751-a6ac-4cac-a2b3-89e5364dae0a.png)
+</details>
 
 # GNOME Theming
 
