@@ -16,7 +16,6 @@ public partial class AccountSettingsDialog
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     private bool _constructing;
-    public bool SetPassword;
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
@@ -36,9 +35,6 @@ public partial class AccountSettingsDialog
     private readonly Adw.ActionRow _rowCustomSymbol;
     private readonly Gtk.Entry _txtCustomCode;
     private readonly Adw.ActionRow _rowCustomCode;
-    private readonly Adw.PreferencesGroup _grpPassword;
-    private readonly Gtk.Button _btnPassword;
-    private readonly Adw.ActionRow _rowPassword;
 
     /// <summary>
     /// Constructs an AccountSettingsDialog
@@ -48,7 +44,6 @@ public partial class AccountSettingsDialog
     public AccountSettingsDialog(AccountSettingsDialogController controller, Gtk.Window parentWindow)
     {
         _constructing = true;
-        SetPassword = false;
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
@@ -175,21 +170,6 @@ public partial class AccountSettingsDialog
         _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
         _rowCustomCode.AddSuffix(_txtCustomCode);
         _rowCustomCurrency.AddRow(_rowCustomCode);
-        //Password Row
-        _grpPassword = Adw.PreferencesGroup.New();
-        _boxMain.Append(_grpPassword);
-        _btnPassword = Gtk.Button.NewFromIconName("go-next-symbolic");
-        _btnPassword.AddCssClass("flat");
-        _btnPassword.SetValign(Gtk.Align.Center);
-        _btnPassword.OnClicked += (sender, e) => {
-            SetPassword = true;
-            _dialog.Response("cancel");
-        };
-        _rowPassword = Adw.ActionRow.New();
-        _rowPassword.SetTitle("Set Password");
-        _rowPassword.AddSuffix(_btnPassword);
-        _rowPassword.SetActivatableWidget(_btnPassword);
-        _grpPassword.Add(_rowPassword);
         //Layout
         _dialog.SetExtraChild(_boxMain);
         //Load
