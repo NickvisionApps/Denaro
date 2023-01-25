@@ -160,17 +160,11 @@
   <data name="NewTransaction" xml:space="preserve">
 		<value>नई लेनदेन</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value />
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value />
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>नया समूह</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value />
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value />
@@ -500,14 +494,8 @@
   <data name="Recents.GTK" xml:space="preserve">
 		<value>हाल ही के</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>नया</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>खाता बंद करें</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>कार्य</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>मनी खाता (*.nmoney)</value>

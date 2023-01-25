@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Transaksi Baru</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Baru</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Transaksi Baru (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Grup Baru</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Baru</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Grup Baru (Ctrl+G)</value>
@@ -513,14 +507,8 @@ pekerjaan yang tidak disimpan akan hilang.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Baru-baru Ini</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Baru</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Tutup Rekening</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Tindakan</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Rekening Money (*.nmoney)</value>

@@ -145,17 +145,11 @@
   <data name="NewTransaction" xml:space="preserve">
 		<value>Новая транзакция</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Новая</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Новая транзакция (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Новая группа</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Новая</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Новая группа (Ctrl+G)</value>
@@ -484,14 +478,8 @@
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Недавние</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Новый</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Закрыть счёт</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Действия</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Счёт Money (*.nmoney)</value>

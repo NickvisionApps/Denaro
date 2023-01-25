@@ -163,17 +163,11 @@ Vous pouvez également faire glisser un fichier dans l’application depuis votr
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nouvelle transaction</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Nouvelle</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Nouvelle transaction (Ctrl+Maj+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Nouveau groupe</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Nouveau</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Nouveau groupe (Ctrl+G)</value>
@@ -514,14 +508,8 @@ Tout changement non sauvegardé sera perdu.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Récents</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Nouveau</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Fermer le compte</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Actions</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Compte d’argent (*.nmoney)</value>

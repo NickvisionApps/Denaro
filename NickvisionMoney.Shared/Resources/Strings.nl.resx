@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nieuwe overboeking</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Nieuw</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Nieuwe overboeking (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Nieuwe groep</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Nieuw</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Nieuwe groep (Ctrl+G)</value>
@@ -513,14 +507,8 @@ Let op: niet-opgeslagen aanpassingen wordt gewist.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value>Onlangs gebruikt</value>
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value>Nieuw</value>
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
 		<value>Rekening sluiten</value>
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
-		<value>Acties</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Money-rekening (*.nmoney)</value>

@@ -162,17 +162,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nova Transação</value>
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value>Novo(a)</value>
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value>Nova Transação (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
 		<value>Novo Grupo</value>
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
-		<value>Novo</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
 		<value>Novo Grupo (Ctrl+G)</value>
@@ -559,13 +553,7 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value />
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value />
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value />
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
 		<value />
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">

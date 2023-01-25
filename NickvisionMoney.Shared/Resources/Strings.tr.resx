@@ -162,16 +162,10 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="NewTransaction" xml:space="preserve">
 		<value />
   </data>
-  <data name="NewTransaction.Short" xml:space="preserve">
-		<value />
-  </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
 		<value />
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value />
-  </data>
-  <data name="NewGroup.Short" xml:space="preserve">
 		<value />
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
@@ -554,13 +548,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="Recents.GTK" xml:space="preserve">
 		<value />
   </data>
-  <data name="NewAccountPopover.GTK" xml:space="preserve">
-		<value />
-  </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value />
-  </data>
-  <data name="AccountActions.GTK" xml:space="preserve">
 		<value />
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
