@@ -39,6 +39,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 ![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
 ![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
 ![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
+![TransferDialog](NickvisionMoney.WinUI/Screenshots/TransferDialog.png)
 
 # GNOME Theming
 
