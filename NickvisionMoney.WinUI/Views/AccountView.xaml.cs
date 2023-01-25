@@ -219,6 +219,8 @@ public sealed partial class AccountView : UserControl
             {
                 ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
             }
+            ScrollSidebar.Height = ActualHeight - 60;
+            GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
             //Done Loading
             LoadingCtrl.IsLoading = false;
             _isOpened = true;
