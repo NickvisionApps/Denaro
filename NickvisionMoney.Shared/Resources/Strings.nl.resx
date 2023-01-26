@@ -695,4 +695,7 @@ de opeenvolgende losgekoppeld..</value>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Zoeken op beschrijving</value>
   </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Acties</value>
+  </data>
 </root>
