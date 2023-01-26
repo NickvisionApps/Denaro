@@ -689,4 +689,7 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="NewWindow.GTK" xml:space="preserve">
     <value>Ventana nueva</value>
   </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
 </root>
