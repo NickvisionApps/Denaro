@@ -24,7 +24,7 @@ namespace NickvisionMoney.Shared.Models;
 public class Account : IDisposable
 {
     private bool _disposed;
-    private readonly SqliteConnection _database;
+    private SqliteConnection? _database;
 
     /// <summary>
     /// The path of the account
@@ -85,13 +85,88 @@ public class Account : IDisposable
         NextAvailableTransactionId = 0;
         TodayIncome = 0;
         TodayExpense = 0;
-        //Open Database
-        _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+    }
+
+    /// <summary>
+    /// Whether or not the account is encrypted (requiring a password)
+    /// </summary>
+    public bool IsEncrypted
+    {
+        get
+        {
+            var header = "SQLite format 3";
+            var bytes = new byte[header.Length];
+            using var reader = new BinaryReader(new FileStream(Path, FileMode.Open));
+            reader.Read(bytes, 0, header.Length);
+            if (header == Encoding.Default.GetString(bytes))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(_disposed)
+        {
+            return;
+        }
+        if(disposing)
+        {
+            _database.Close();
+            _database.Dispose();
+            foreach (var pair in Transactions)
+            {
+                pair.Value.Dispose();
+            }
+            FreeMemory();
+        }
+        _disposed = true;
+    }
+
+    /// <summary>
+    /// Loads an account
+    /// </summary>
+    /// <param name="password">The password of the account, if needed</param>
+    /// <returns>True if loaded, else false (password incorrect)</returns>
+    public async Task<bool> LoadAsync(string? password)
+    {
+        var connectionStringBuilder = new SqliteConnectionStringBuilder()
         {
             DataSource = Path,
             Mode = SqliteOpenMode.ReadWriteCreate
-        }.ConnectionString);
-        _database.Open();
+        };
+        if(IsEncrypted)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+            connectionStringBuilder.Password = password;
+        }
+        //Open Database
+        _database = new SqliteConnection(connectionStringBuilder.ConnectionString);
+        try
+        {
+            _database.Open();
+        }
+        catch
+        {
+            return false;
+        }
         //Setup Metadata Table
         using var cmdTableMetadata = _database.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER)";
@@ -150,7 +225,7 @@ public class Account : IDisposable
         using var cmdQueryMetadata = _database.CreateCommand();
         cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
         using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
-        if(readQueryMetadata.HasRows)
+        if (readQueryMetadata.HasRows)
         {
             readQueryMetadata.Read();
             Metadata.Name = readQueryMetadata.GetString(1);
@@ -190,9 +265,9 @@ public class Account : IDisposable
         using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
-        while(readQueryGroups.Read())
+        while (readQueryGroups.Read())
         {
-            if(readQueryGroups.IsDBNull(0))
+            if (readQueryGroups.IsDBNull(0))
             {
                 continue;
             }
@@ -203,7 +278,7 @@ public class Account : IDisposable
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
-            if(group.Id > NextAvailableGroupId)
+            if (group.Id > NextAvailableGroupId)
             {
                 NextAvailableGroupId = group.Id;
             }
@@ -213,9 +288,9 @@ public class Account : IDisposable
         using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
         using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
-        while(readQueryTransactions.Read())
+        while (readQueryTransactions.Read())
         {
-            if(readQueryTransactions.IsDBNull(0))
+            if (readQueryTransactions.IsDBNull(0))
             {
                 continue;
             }
@@ -237,11 +312,11 @@ public class Account : IDisposable
                 transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
-            if(transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
                 Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if(transaction.Type == TransactionType.Income)
+                if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
                 }
@@ -250,63 +325,17 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.Id > NextAvailableTransactionId)
+            if (transaction.Id > NextAvailableTransactionId)
             {
                 NextAvailableTransactionId = transaction.Id;
             }
         }
         NextAvailableTransactionId++;
+        //Repeats
+        await SyncRepeatTransactionsAsync();
         //Cleanup
         FreeMemory();
-    }
-
-    /// <summary>
-    /// Gets whether or not an account if is encrypted
-    /// </summary>
-    /// <param name="path">The path to the account file</param>
-    /// <returns>True if encrypted, else false</returns>
-    public static bool IsEncrypted(string path)
-    {
-        var header = "SQLite format 3";
-        var bytes = new byte[header.Length];
-        using var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-        reader.Read(bytes, 0, header.Length);
-        if(header == Encoding.Default.GetString(bytes))
-        {
-            return false;
-        }
         return true;
-    }
-
-    /// <summary>
-    /// Frees resources used by the Account object
-    /// </summary>
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// Frees resources used by the Account object
-    /// </summary>
-    protected virtual void Dispose(bool disposing)
-    {
-        if(_disposed)
-        {
-            return;
-        }
-        if(disposing)
-        {
-            _database.Close();
-            _database.Dispose();
-            foreach (var pair in Transactions)
-            {
-                pair.Value.Dispose();
-            }
-            FreeMemory();
-        }
-        _disposed = true;
     }
 
     /// <summary>
