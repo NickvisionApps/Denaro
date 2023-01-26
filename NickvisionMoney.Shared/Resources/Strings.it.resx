@@ -695,4 +695,7 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="Keywords.GTK" xml:space="preserve">
     <value>denaro;soldi;finanza;portafoglio;contante;banca;GTK;Nickvision;</value>
   </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Azioni</value>
+  </data>
 </root>
