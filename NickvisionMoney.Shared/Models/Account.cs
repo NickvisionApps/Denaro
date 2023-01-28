@@ -102,8 +102,15 @@ public class Account : IDisposable
             }
             var header = "SQLite format 3";
             var bytes = new byte[header.Length];
+            if(_database != null)
+            {
+                _database.Close();
+                SqliteConnection.ClearPool(_database);
+            }
             using var reader = new BinaryReader(new FileStream(Path, FileMode.Open));
             reader.Read(bytes, 0, header.Length);
+            reader.Close();
+            _database?.Open();
             if (header == Encoding.Default.GetString(bytes))
             {
                 return false;
@@ -141,6 +148,7 @@ public class Account : IDisposable
                 FreeMemory();
                 _database.Close();
                 _database.Dispose();
+                SqliteConnection.ClearPool(_database);
             }
         }
         _disposed = true;
@@ -197,28 +205,42 @@ public class Account : IDisposable
         if (string.IsNullOrEmpty(password))
         {
             using var command = _database.CreateCommand();
-            command.CommandText = "PRAGMA rekey NULL";
+            command.CommandText = "PRAGMA rekey = NULL";
             command.ExecuteNonQuery();
         }
         //Change password
         if(IsEncrypted)
         {
             using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey {password}";
+            command.CommandText = $"PRAGMA rekey = {password}";
             command.ExecuteNonQuery();
         }
         //Sets new password (encrypts for first time)
         else
         {
+            //Create Temp Encrypted Database
+            var tempPath = $"{Path}.ecrypt";
             using var command = _database.CreateCommand();
-            //Quote key
-            command.CommandText = "SELECT quote($password);";
-            command.Parameters.AddWithValue("$password", password);
-            var quotedPassword = (string)command.ExecuteScalar()!;
-            //Set Password
-            command.CommandText = $"PRAGMA key {quotedPassword}";
-            command.Parameters.Clear();
+            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY '{password}'";
             command.ExecuteNonQuery();
+            command.CommandText = $"SELECT sqlcipher_export('encrypted')";
+            command.ExecuteNonQuery();
+            command.CommandText = $"DETACH encrypted";
+            command.ExecuteNonQuery();
+            //Remove Old Unencrypted Database
+            _database.Close();
+            _database.Dispose();
+            SqliteConnection.ClearPool(_database);
+            File.Delete(Path);
+            File.Move(tempPath, Path, true);
+            //Open New Encrypted Database
+            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Password = password
+            }.ConnectionString);
+            _database.Open();
         }
         return true;
     }
