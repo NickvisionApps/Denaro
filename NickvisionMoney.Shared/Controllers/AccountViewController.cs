@@ -15,6 +15,7 @@ namespace NickvisionMoney.Shared.Controllers;
 /// </summary>
 public class AccountViewController
 {
+    private bool _isOpened;
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
@@ -57,6 +58,10 @@ public class AccountViewController
     /// The UI function for deleting a transaction rowe
     /// </summary>
     public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
+    /// <summary>
+    /// The password for loading the account
+    /// </summary>
+    public string? AccountPassword { get; set; }
 
     /// <summary>
     /// The default color to use for a transaction
@@ -67,7 +72,11 @@ public class AccountViewController
     /// </summary>
     public string AccountPath => _account.Path;
     /// <summary>
-    /// Whether or not an account needs to be setup
+    /// Whether or not the account needs a password
+    /// </summary>
+    public bool AccountNeedsPassword => _account.IsEncrypted;
+    /// <summary>
+    /// Whether or not the account needs to be setup
     /// </summary>
     public bool AccountNeedsSetup => _account.NeedsAccountSetup;
     /// <summary>
@@ -137,6 +146,7 @@ public class AccountViewController
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
+        _isOpened = false;
         _account = new Account(path);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
@@ -149,10 +159,6 @@ public class AccountViewController
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
         _filters.Add(-1, true); //No Group
-        foreach (var pair in _account.Groups)
-        {
-            _filters.Add((int)pair.Value.Id, true);
-        }
         _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
         _searchDescription = "";
@@ -365,46 +371,59 @@ public class AccountViewController
     /// </summary>
     public async Task StartupAsync()
     {
-        await _account.SyncRepeatTransactionsAsync();
-        _searchDescription = "";
-        //Groups
-        GroupRows.Clear();
-        foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
+        if(!_isOpened)
         {
-            GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            await _account.LoadAsync(AccountPassword);
+            _searchDescription = "";
+            //Metadata
+            Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
+            {
+                Name = AccountTitle,
+                Type = AccountType
+            });
+            Configuration.Current.Save();
+            RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+            //Groups
+            GroupRows.Clear();
+            foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
+            {
+                _filters.Add((int)pair.Value.Id, true);
+                GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            }
+            //Transactions
+            TransactionRows.Clear();
+            var transactions = _account.Transactions.Values.ToList();
+            transactions.Sort((a, b) =>
+            {
+                int compareTo = 0;
+                if (SortTransactionsBy == SortBy.Id)
+                {
+                    compareTo = a.CompareTo(b);
+                }
+                else if (SortTransactionsBy == SortBy.Date)
+                {
+                    compareTo = a.Date.CompareTo(b.Date);
+                }
+                else if (SortTransactionsBy == SortBy.Amount)
+                {
+                    var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
+                    var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
+                    compareTo = aAmount.CompareTo(bAmount);
+                }
+                if (!SortFirstToLast)
+                {
+                    compareTo *= -1;
+                }
+                return compareTo;
+            });
+            foreach (var transaction in transactions)
+            {
+                TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+            }
+            HasFilteredTransactions = transactions.Count > 0;
+            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            _isOpened = true;
         }
-        //Transactions
-        TransactionRows.Clear();
-        var transactions = _account.Transactions.Values.ToList();
-        transactions.Sort((a, b) =>
-        {
-            int compareTo = 0;
-            if (SortTransactionsBy == SortBy.Id)
-            {
-                compareTo = a.CompareTo(b);
-            }
-            else if (SortTransactionsBy == SortBy.Date)
-            {
-                compareTo = a.Date.CompareTo(b.Date);
-            }
-            else if (SortTransactionsBy == SortBy.Amount)
-            {
-                var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
-                var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
-                compareTo = aAmount.CompareTo(bAmount);
-            }
-            if (!SortFirstToLast)
-            {
-                compareTo *= -1;
-            }
-            return compareTo;
-        });
-        foreach (var transaction in transactions)
-        {
-            TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
-        }
-        HasFilteredTransactions = transactions.Count > 0;
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

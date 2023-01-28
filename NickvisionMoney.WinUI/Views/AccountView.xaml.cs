@@ -205,15 +205,15 @@ public sealed partial class AccountView : UserControl
     {
         if(!_isOpened)
         {
-            if (_controller.AccountNeedsSetup)
-            {
-                AccountSettings(null, new RoutedEventArgs());
-            }
             //Start Loading
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
             await _controller.StartupAsync();
+            if (_controller.AccountNeedsSetup)
+            {
+                AccountSettings(null, new RoutedEventArgs());
+            }
             ListTransactions.UpdateLayout();
             for (var i = 0; i < ListTransactions.Items.Count; i++)
             {

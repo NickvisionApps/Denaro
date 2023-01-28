@@ -343,7 +343,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when an account is created or opened
     /// </summary>
-    private void AccountAdded(object? sender, EventArgs e)
+    private async void AccountAdded(object? sender, EventArgs e)
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
@@ -353,7 +353,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
-        newAccountView.Startup();
+        await newAccountView.StartupAsync();
     }
 
     /// <summary>

@@ -177,13 +177,6 @@ public class MainWindowController : IDisposable
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
             OpenAccounts.Add(controller);
-            Configuration.Current.AddRecentAccount(new RecentAccount(path)
-            {
-                Name = controller.AccountTitle,
-                Type = controller.AccountType
-            });
-            Configuration.Current.Save();
-            RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
             AccountAdded?.Invoke(this, EventArgs.Empty);
             return true;
         }

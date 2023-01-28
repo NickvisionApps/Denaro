@@ -126,13 +126,16 @@ public class Account : IDisposable
         }
         if(disposing)
         {
-            _database.Close();
-            _database.Dispose();
             foreach (var pair in Transactions)
             {
                 pair.Value.Dispose();
             }
-            FreeMemory();
+            if(_database != null)
+            {
+                FreeMemory();
+                _database.Close();
+                _database.Dispose();
+            }
         }
         _disposed = true;
     }

@@ -635,12 +635,8 @@ public partial class AccountView
     /// <summary>
     /// Starts the account view
     /// </summary>
-    public async void Startup()
+    public async Task StartupAsync()
     {
-        if (_controller.AccountNeedsSetup)
-        {
-            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-        }
         //Start Spinner
         _statusPageNoTransactions.SetVisible(false);
         _scrollTransactions.SetVisible(true);
@@ -650,7 +646,11 @@ public partial class AccountView
         _scrollPane.SetSensitive(false);
         //Work
         await _controller.StartupAsync();
-        for(var i = 0; i < _controller.TransactionRows.Count; i++)
+        if (_controller.AccountNeedsSetup)
+        {
+            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+        }
+        for (var i = 0; i < _controller.TransactionRows.Count; i++)
         {
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
