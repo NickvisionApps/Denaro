@@ -94,6 +94,10 @@ public class Account : IDisposable
     {
         get
         {
+            if(!File.Exists(Path))
+            {
+                return false;
+            }
             var header = "SQLite format 3";
             var bytes = new byte[header.Length];
             using var reader = new BinaryReader(new FileStream(Path, FileMode.Open));
