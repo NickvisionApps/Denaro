@@ -54,6 +54,7 @@ public sealed partial class MainWindow : Window
         //Register Events
         _appWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
+        _controller.AccountLoginNeeded += AccountLoginNeeded;
         _controller.AccountAdded += AccountAdded;
         _controller.RecentAccountsChanged += RecentAccountsChanged;
         //Set TitleBar
@@ -251,6 +252,16 @@ public sealed partial class MainWindow : Window
             _ => InfoBarSeverity.Informational
         };
         InfoBar.IsOpen = true;
+    }
+
+    /// <summary>
+    /// Occurs when an account needs a login
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">LoginEventArgs</param>
+    public async void AccountLoginNeeded(object? sender, LoginEventArgs e)
+    {
+
     }
 
     /// <summary>

@@ -23,6 +23,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
+    private bool _loggedIn;
     private bool _disposed;
     private SqliteConnection? _database;
 
@@ -75,6 +76,7 @@ public class Account : IDisposable
     /// <param name="path">The path of the account</param>
     public Account(string path)
     {
+        _loggedIn = false;
         _disposed = false;
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
@@ -145,22 +147,27 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Loads an account
+    /// Logins into an account
     /// </summary>
     /// <param name="password">The password of the account, if needed</param>
-    /// <returns>True if loaded, else false (password incorrect)</returns>
-    public async Task<bool> LoadAsync(string? password)
+    /// <returns>True if logged in, else false</returns>
+    public bool Login(string? password)
     {
+        if(_loggedIn)
+        {
+            return true;
+        }
         var connectionStringBuilder = new SqliteConnectionStringBuilder()
         {
             DataSource = Path,
             Mode = SqliteOpenMode.ReadWriteCreate
         };
-        if(IsEncrypted)
+        if (IsEncrypted)
         {
             if (string.IsNullOrEmpty(password))
             {
-                return false;
+                _loggedIn = false;
+                return _loggedIn;
             }
             connectionStringBuilder.Password = password;
         }
@@ -171,6 +178,21 @@ public class Account : IDisposable
             _database.Open();
         }
         catch
+        {
+            _loggedIn = false;
+            return _loggedIn;
+        }
+        _loggedIn = true;
+        return _loggedIn;
+    }
+
+    /// <summary>
+    /// Loads an account
+    /// </summary>
+    /// <returns>True if loaded, else false</returns>
+    public async Task<bool> LoadAsync()
+    {
+        if(!_loggedIn)
         {
             return false;
         }

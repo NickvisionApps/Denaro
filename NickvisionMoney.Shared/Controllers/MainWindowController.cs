@@ -51,6 +51,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public event EventHandler<NotificationSentEventArgs>? NotificationSent;
     /// <summary>
+    /// Occurs when an account login is needed
+    /// </summary>
+    public event EventHandler<LoginEventArgs>? AccountLoginNeeded;
+    /// <summary>
     /// Occurs when an account is added
     /// </summary>
     public event EventHandler? AccountAdded;
@@ -174,8 +178,20 @@ public class MainWindowController : IDisposable
         }
         if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
+            string? password = null;
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
+            if(controller.AccountNeedsPassword)
+            {
+                var loginEventArgs = new LoginEventArgs();
+                AccountLoginNeeded?.Invoke(this, loginEventArgs);
+                password = loginEventArgs.Password;
+            }
+            if (!controller.Login(password))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
+                return false;
+            }
             OpenAccounts.Add(controller);
             AccountAdded?.Invoke(this, EventArgs.Empty);
             return true;

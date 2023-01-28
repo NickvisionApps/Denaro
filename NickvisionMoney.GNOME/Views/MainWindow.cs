@@ -102,6 +102,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         //Register Events
         _controller.NotificationSent += NotificationSent;
+        _controller.AccountLoginNeeded += AccountLoginNeeded;
         _controller.AccountAdded += AccountAdded;
         _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
         {
@@ -339,6 +340,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="s">The new subtitle</param>
     private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? s : "");
+
+    /// <summary>
+    /// Occurs when an account needs a login
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">LoginEventArgs</param>
+    public async void AccountLoginNeeded(object? sender, LoginEventArgs e)
+    {
+
+    }
 
     /// <summary>
     /// Occurs when an account is created or opened

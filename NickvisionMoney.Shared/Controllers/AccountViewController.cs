@@ -58,10 +58,6 @@ public class AccountViewController
     /// The UI function for deleting a transaction rowe
     /// </summary>
     public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
-    /// <summary>
-    /// The password for loading the account
-    /// </summary>
-    public string? AccountPassword { get; set; }
 
     /// <summary>
     /// The default color to use for a transaction
@@ -367,13 +363,20 @@ public class AccountViewController
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// Logins into an account
+    /// </summary>
+    /// <param name="password">The password of the account</param>
+    /// <returns>True if login successful, else false</returns>
+    public bool Login(string? password) => _account.Login(password);
+
+    /// <summary>
     /// Initializes the AccountView
     /// </summary>
     public async Task StartupAsync()
     {
         if(!_isOpened)
         {
-            await _account.LoadAsync(AccountPassword);
+            await _account.LoadAsync();
             _searchDescription = "";
             //Metadata
             Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
