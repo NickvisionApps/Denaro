@@ -522,8 +522,8 @@ public class AccountViewController
             {
                 row.Value.UpdateRow(_account.Transactions[row.Key], CultureForNumberString, CultureForDateString);
             }
-            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         }
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
