@@ -29,14 +29,14 @@
 		<value>GitHub Repo</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value>Melde einen Fehler</value>
+		<value>Einen Fehler melden</value>
   </data>
   <data name="Discussions" xml:space="preserve">
 		<value>Diskussionen</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value>Credits</value>
+		<value>Anerkennungen</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -83,7 +83,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value>Zuhause</value>
+		<value>Startseite</value>
   </data>
   <data name="Account" xml:space="preserve">
 		<value>Konto</value>
@@ -113,13 +113,13 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Geöffnetes Konto konnte nicht überschrieben werden.</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value>Öffne Konto</value>
+		<value>Konto öffnen</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value>Öffne Konto (Strg+O)</value>
+		<value>Konto öffnen (Strg+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value>Kein Konto Geöffnet</value>
+		<value>Kein Konto geöffnet</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
 		<value>Erstelle oder öffne ein Konto um loszulegen. Dateien können auch vom Datei-Manager in das Programm gezogen werden.</value>
@@ -686,5 +686,17 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
     <value>Währungs-Code (Leer)</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Matrix-Unterhaltung</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>Geld;Finanzen;Brieftasche;Bargeld;Bank;GTK;Nickvision;</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Neues Fenster</value>
   </data>
 </root>
