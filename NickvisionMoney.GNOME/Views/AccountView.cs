@@ -535,18 +535,6 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
-        //Load
-        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
-        if(_controller.SortFirstToLast)
-        {
-            _btnSortFirstToLast.SetActive(true);
-        }
-        else
-        {
-            _btnSortLastToFirst.SetActive(true);
-        }
-        OnToggleGroups(null, EventArgs.Empty);
-        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
     }
 
     /// <summary>
@@ -650,10 +638,23 @@ public partial class AccountView
         {
             AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         }
+        //Setup Transactions
         for (var i = 0; i < _controller.TransactionRows.Count; i++)
         {
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
+        //Setup Other UI Elements
+        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        if (_controller.SortFirstToLast)
+        {
+            _btnSortFirstToLast.SetActive(true);
+        }
+        else
+        {
+            _btnSortLastToFirst.SetActive(true);
+        }
+        OnToggleGroups(null, EventArgs.Empty);
+        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         //Stop Spinner
         _spinner.Stop();
         _binSpinner.SetVisible(false);

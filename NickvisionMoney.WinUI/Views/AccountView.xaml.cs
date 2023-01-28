@@ -27,7 +27,6 @@ public sealed partial class AccountView : UserControl
     private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
     private bool _isOpened;
-    private bool _isAccountLoading;
 
     /// <summary>
     /// Constructs an AccountView
@@ -42,7 +41,6 @@ public sealed partial class AccountView : UserControl
         _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
         _isOpened = false;
-        _isAccountLoading = false;
         //Localize Strings
         LblBtnNew.Text = _controller.Localizer["New"];
         MenuNewTransaction.Text = _controller.Localizer["Transaction"];
@@ -81,32 +79,6 @@ public sealed partial class AccountView : UserControl
         _controller.UICreateTransactionRow = CreateTransactionRow;
         _controller.UIMoveTransactionRow = MoveTransactionRow;
         _controller.UIDeleteTransactionRow = DeleteTransactionRow;
-        //Load UI
-        DateRangeStart.Date = DateTimeOffset.Now;
-        DateRangeEnd.Date = DateTimeOffset.Now;
-        if (_controller.ShowGroupsList)
-        {
-            SectionGroups.Visibility = Visibility.Visible;
-            DockPanel.SetDock(SectionCalendar, Dock.Bottom);
-            MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
-            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
-        }
-        else
-        {
-            SectionGroups.Visibility = Visibility.Collapsed;
-            DockPanel.SetDock(SectionCalendar, Dock.Top);
-            MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
-            MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
-        }
-        CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
-        if (_controller.SortFirstToLast)
-        {
-            BtnSortTopBottom.IsChecked = true;
-        }
-        else
-        {
-            BtnSortBottomTop.IsChecked = true;
-        }
     }
 
     /// <summary>
@@ -214,6 +186,7 @@ public sealed partial class AccountView : UserControl
             {
                 AccountSettings(null, new RoutedEventArgs());
             }
+            //Setup Transactions
             ListTransactions.UpdateLayout();
             for (var i = 0; i < ListTransactions.Items.Count; i++)
             {
@@ -221,6 +194,32 @@ public sealed partial class AccountView : UserControl
             }
             ScrollSidebar.Height = ActualHeight - 60;
             GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
+            //Setup Other UI Elements
+            DateRangeStart.Date = DateTimeOffset.Now;
+            DateRangeEnd.Date = DateTimeOffset.Now;
+            if (_controller.ShowGroupsList)
+            {
+                SectionGroups.Visibility = Visibility.Visible;
+                DockPanel.SetDock(SectionCalendar, Dock.Bottom);
+                MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
+                MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
+            }
+            else
+            {
+                SectionGroups.Visibility = Visibility.Collapsed;
+                DockPanel.SetDock(SectionCalendar, Dock.Top);
+                MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
+                MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
+            }
+            CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
+            if (_controller.SortFirstToLast)
+            {
+                BtnSortTopBottom.IsChecked = true;
+            }
+            else
+            {
+                BtnSortBottomTop.IsChecked = true;
+            }
             //Done Loading
             LoadingCtrl.IsLoading = false;
             _isOpened = true;
@@ -259,56 +258,51 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">EventArgs</param>
     private void AccountTransactionsChanged(object? sender, EventArgs e)
     {
-        if(!_isAccountLoading)
+        //Overview
+        _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
+        LblTotalAmount.Text = _controller.AccountTodayTotalString;
+        LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
+        LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
+        LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
+        LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
+        LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        ///Transactions
+        if (_controller.TransactionsCount > 0)
         {
-            _isAccountLoading = true;
-            //Overview
-            _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
-            LblTotalAmount.Text = _controller.AccountTodayTotalString;
-            LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
-            LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
-            LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
-            LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
-            LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
-            ///Transactions
-            if (_controller.TransactionsCount > 0)
+            //Highlight Days
+            var datesInAccount = _controller.DatesInAccount;
+            var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
+            foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
-                //Highlight Days
-                var datesInAccount = _controller.DatesInAccount;
-                var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
-                foreach (CalendarViewDayItem displayedDay in displayedDays)
+                if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today)
                 {
-                    if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today)
-                    {
-                        displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
-                    }
-                    else
-                    {
-                        displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                    }
-                }
-                //Transaction Page
-                if (_controller.HasFilteredTransactions)
-                {
-                    ViewStackTransactions.ChangePage("Transactions");
+                    displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
                 }
                 else
                 {
-                    ViewStackTransactions.ChangePage("NoTransactions");
-                    StatusPageNoTransactions.Glyph = "\xE721";
-                    StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle", "Filter"];
-                    StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
+                    displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
                 }
             }
-            //No Transactions
+            //Transaction Page
+            if (_controller.HasFilteredTransactions)
+            {
+                ViewStackTransactions.ChangePage("Transactions");
+            }
             else
             {
                 ViewStackTransactions.ChangePage("NoTransactions");
-                StatusPageNoTransactions.Glyph = "\xE152";
-                StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
-                StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
+                StatusPageNoTransactions.Glyph = "\xE721";
+                StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle", "Filter"];
+                StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription", "Filter"];
             }
-            _isAccountLoading = false;
+        }
+        //No Transactions
+        else
+        {
+            ViewStackTransactions.ChangePage("NoTransactions");
+            StatusPageNoTransactions.Glyph = "\xE152";
+            StatusPageNoTransactions.Title = _controller.Localizer["NoTransactionsTitle"];
+            StatusPageNoTransactions.Description = _controller.Localizer["NoTransactionsDescription"];
         }
     }
 
