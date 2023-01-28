@@ -675,4 +675,28 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Rechercher par description</value>
   </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Conversion nécessaire</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Résultat</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>argent;finance;portefeuille;argent liquide;banque;GTK;Nickvision;</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Nouvelle fenêtre</value>
+  </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Discussion Matrix</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Code devise (vide)</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Entrez la conversion ici</value>
+  </data>
 </root>

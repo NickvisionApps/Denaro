@@ -674,4 +674,28 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Urutkan Berdasarkan Jumlah</value>
   </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Obrolan Matrix</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Masukkan konversi disini</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Konversi diperlukan</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Hasil</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Kode mata uang (kosong)</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>uang;finansial;dompet;uang tunai;bank;GTK;Nickvision</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Aksi</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Jendela Baru</value>
+  </data>
 </root>
