@@ -622,4 +622,13 @@ Aquesta accion se pòt pas anullar.</value>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
     <value>Tipe de transaccion per defaut</value>
   </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Chat Matrix</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Triar per soma</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Accions</value>
+  </data>
 </root>
