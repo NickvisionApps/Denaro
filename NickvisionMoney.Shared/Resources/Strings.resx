@@ -771,7 +771,7 @@
 	
 	<!--PasswordDialog-->
 	<data name="EnterPassword" xml:space="preserve">
-		<value>Enter password for the account</value>
+		<value>Enter Password To Login:</value>
 	</data>
 	
 	<!--Settings-->
