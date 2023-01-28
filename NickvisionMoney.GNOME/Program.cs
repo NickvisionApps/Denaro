@@ -123,7 +123,7 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(nint files, int nFiles)
+    private async void OnOpen(nint files, int nFiles)
     {
         if(nFiles > 0)
         {
@@ -131,7 +131,7 @@ public partial class Program
             Marshal.Copy(files, filesArray, 0, 1);
             var pathOfFirstFile = g_file_get_path(filesArray[0]);
             OnActivate(_application, EventArgs.Empty);
-            _mainWindow!.OpenAccount(pathOfFirstFile);
+            await _mainWindow!.OpenAccountAsync(pathOfFirstFile);
         }
     }
 }

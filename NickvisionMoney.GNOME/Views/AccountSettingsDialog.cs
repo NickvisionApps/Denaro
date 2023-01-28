@@ -16,7 +16,6 @@ public partial class AccountSettingsDialog
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     private bool _constructing;
-    public bool SetPassword;
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
@@ -48,7 +47,6 @@ public partial class AccountSettingsDialog
     public AccountSettingsDialog(AccountSettingsDialogController controller, Gtk.Window parentWindow)
     {
         _constructing = true;
-        SetPassword = false;
         _controller = controller;
         //Dialog Settings
         _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
@@ -181,10 +179,7 @@ public partial class AccountSettingsDialog
         _btnPassword = Gtk.Button.NewFromIconName("go-next-symbolic");
         _btnPassword.AddCssClass("flat");
         _btnPassword.SetValign(Gtk.Align.Center);
-        _btnPassword.OnClicked += (sender, e) => {
-            SetPassword = true;
-            _dialog.Response("cancel");
-        };
+        _btnPassword.OnClicked += OnSetPassword;
         _rowPassword = Adw.ActionRow.New();
         _rowPassword.SetTitle("Set Password");
         _rowPassword.AddSuffix(_btnPassword);
@@ -369,5 +364,15 @@ public partial class AccountSettingsDialog
         {
             Validate();
         }
+    }
+
+    /// <summary>
+    /// Occurs when the set password button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void OnSetPassword(Gtk.Button sender, EventArgs e)
+    {
+
     }
 }

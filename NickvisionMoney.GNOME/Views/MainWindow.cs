@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Controllers;
+﻿using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -102,7 +104,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         //Register Events
         _controller.NotificationSent += NotificationSent;
-        _controller.AccountLoginNeeded += AccountLoginNeeded;
+        _controller.AccountLoginAsync += AccountLoginAsync;
         _controller.AccountAdded += AccountAdded;
         _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
         {
@@ -320,11 +322,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Opens an account by path
     /// </summary>
     /// <param name="path">The path to the account</param>
-    public void OpenAccount(string path)
+    public async Task OpenAccountAsync(string path)
     {
         if(Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
         {
-            _controller.AddAccount(path);
+            await _controller.AddAccountAsync(path);
         }
     }
 
@@ -344,11 +346,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when an account needs a login
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">LoginEventArgs</param>
-    public async void AccountLoginNeeded(object? sender, LoginEventArgs e)
+    /// <param name="title">The title of the account</param>
+    public async Task<string?> AccountLoginAsync(string title)
     {
-
+        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        return await passwordDialog.Run();
     }
 
     /// <summary>
@@ -381,7 +383,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         saveFileDialog.AddFilter(filter);
-        saveFileDialog.OnResponse += (sender, e) =>
+        saveFileDialog.OnResponse += async (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
@@ -396,7 +398,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     {
                         File.Delete(path);
                     }
-                    _controller.AddAccount(path);
+                    await _controller.AddAccountAsync(path);
                 }
             }
         };
@@ -417,12 +419,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         openFileDialog.AddFilter(filter);
-        openFileDialog.OnResponse += (sender, e) =>
+        openFileDialog.OnResponse += async (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                _controller.AddAccount(path);
+                await _controller.AddAccountAsync(path);
             }
         };
         openFileDialog.Show();
@@ -520,7 +522,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="dropValue">GObject.Value</param>
     /// <param name="e">EventArgs</param>
-    private void OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
+    private async void OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
         var obj = e.Value.GetObject();
         if(obj != null)
@@ -528,7 +530,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if(File.Exists(path))
             {
-                _controller.AddAccount(path);
+                await _controller.AddAccountAsync(path);
             }
         }
     }
@@ -610,10 +612,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             button.SetName("btnWallet");
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
         }
-        button.OnClicked += (Gtk.Button sender, EventArgs e) => 
+        button.OnClicked += async (Gtk.Button sender, EventArgs e) => 
         {
             _popoverAccount.Popdown();
-            _controller.AddAccount(row.GetSubtitle()!);
+            await _controller.AddAccountAsync(row.GetSubtitle()!);
         };
         row.AddPrefix(button);
         row.SetActivatableWidget(button);

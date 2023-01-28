@@ -8,6 +8,10 @@ namespace NickvisionMoney.Shared.Events;
 public class LoginEventArgs : EventArgs
 {
     /// <summary>
+    /// The title of the account to login
+    /// </summary>
+    public string Title { get; init; }
+    /// <summary>
     /// The password of the login
     /// </summary>
     public string? Password { get; set; }
@@ -15,5 +19,10 @@ public class LoginEventArgs : EventArgs
     /// <summary>
     /// Constructs a LoginEventArgs
     /// </summary>
-    public LoginEventArgs() => Password = null;
+    /// <param name="title">The title of the account to login</param>
+    public LoginEventArgs(string title)
+    {
+        Title = title;
+        Password = null;
+    }
 }

@@ -861,37 +861,6 @@ public partial class AccountView
                 _controller.UpdateMetadata(accountSettingsController.Metadata);
             }
             accountSettingsDialog.Destroy();
-            if (accountSettingsDialog.SetPassword)
-            {
-                SetPassword();
-            }
-        };
-    }
-
-    private void SetPassword()
-    {
-        var passwordDialog = new PasswordDialog(_parentWindow);
-        passwordDialog.Show();
-        passwordDialog.OnResponse += (sender, e) => {
-            passwordDialog.Destroy();
-            if (passwordDialog.Response == PasswordDialogResponse.Suggested)
-            {
-                PasswordSettings();
-            }
-            else
-            {
-                AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-            }
-        };
-    }
-
-    private void PasswordSettings()
-    {
-        var passwordSettingsDialog = new PasswordSettingsDialog(_parentWindow);
-        passwordSettingsDialog.Show();
-        passwordSettingsDialog.OnResponse += (sender, e) => {
-            passwordSettingsDialog.Destroy();
-            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
         };
     }
 
