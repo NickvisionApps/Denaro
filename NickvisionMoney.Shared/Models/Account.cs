@@ -187,6 +187,43 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Sets the password of the account. Specifying a null/empty string will remove the password and decrypt the database
+    /// </summary>
+    /// <param name="password">The password to set</param>
+    /// <returns>True if successful, else false</returns>
+    public bool SetPassword(string? password)
+    {
+        //Remove password if empty (decrypts)
+        if (string.IsNullOrEmpty(password))
+        {
+            using var command = _database.CreateCommand();
+            command.CommandText = "PRAGMA rekey NULL";
+            command.ExecuteNonQuery();
+        }
+        //Change password
+        if(IsEncrypted)
+        {
+            using var command = _database.CreateCommand();
+            command.CommandText = $"PRAGMA rekey {password}";
+            command.ExecuteNonQuery();
+        }
+        //Sets new password (encrypts for first time)
+        else
+        {
+            using var command = _database.CreateCommand();
+            //Quote key
+            command.CommandText = "SELECT quote($password);";
+            command.Parameters.AddWithValue("$password", password);
+            var quotedPassword = (string)command.ExecuteScalar()!;
+            //Set Password
+            command.CommandText = $"PRAGMA key {quotedPassword}";
+            command.Parameters.Clear();
+            command.ExecuteNonQuery();
+        }
+        return true;
+    }
+
+    /// <summary>
     /// Loads an account
     /// </summary>
     /// <returns>True if loaded, else false</returns>
