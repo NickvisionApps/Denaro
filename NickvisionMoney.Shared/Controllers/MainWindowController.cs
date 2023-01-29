@@ -188,6 +188,7 @@ public class MainWindowController : IDisposable
             }
             if (!controller.Login(password))
             {
+                controller = null;
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
                 return false;
             }
