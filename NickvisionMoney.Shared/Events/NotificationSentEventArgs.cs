@@ -15,15 +15,20 @@ public class NotificationSentEventArgs : EventArgs
     /// The severity of the notification
     /// </summary>
     public NotificationSeverity Severity { get; set; }
+    /// <summary>
+    /// Additional action for notification
+    /// </summary>
+    public string Action { get; set; }
 
     /// <summary>
     /// Constructs a NotificationSentEventArgs
     /// </summary>
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The severity of the notification</param>
-    public NotificationSentEventArgs(string message, NotificationSeverity severity)
+    public NotificationSentEventArgs(string message, NotificationSeverity severity, string action = "")
     {
         Message = message;
         Severity = severity;
+        Action = action;
     }
 }
