@@ -41,10 +41,10 @@ public partial class PasswordDialog
         _dialog.SetHideOnClose(true);
         _response = PasswordDialogResponse.Cancel;
         _dialog.AddResponse("cancel", localizer["Cancel"]);
-        _dialog.SetDefaultResponse("cancel");
-        _dialog.SetCloseResponse("cancel");
         _dialog.AddResponse("suggested", localizer["OK"]);
         _dialog.SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);
+        _dialog.SetCloseResponse("cancel");
+        _dialog.SetDefaultResponse("suggested");
         _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
         //Password Page
         _statusPassword = Adw.StatusPage.New();
@@ -55,6 +55,7 @@ public partial class PasswordDialog
         //Password Entry
         _passwordEntry = Adw.PasswordEntryRow.New();
         _passwordEntry.AddCssClass("card");
+        _passwordEntry.SetActivatesDefault(true);
         _passwordEntry.SetTitle(localizer["Password", "Field"]);
         _statusPassword.SetChild(_passwordEntry);
     }
