@@ -187,6 +187,10 @@ public class Account : IDisposable
         }
         catch
         {
+            _database.Close();
+            _database.Dispose();
+            SqliteConnection.ClearPool(_database);
+            _database = null;
             _loggedIn = false;
             return _loggedIn;
         }
