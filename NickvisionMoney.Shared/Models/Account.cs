@@ -90,32 +90,43 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Gets whether or not an account is encrypted (requiring a password)
+    /// </summary>
+    /// <param name="path">The path of the account</param>
+    /// <returns>True if encrypted, else false</returns>
+    public static bool GetIsEncrypted(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return false;
+        }
+        var header = "SQLite format 3";
+        var bytes = new byte[header.Length];
+        using var reader = new BinaryReader(new FileStream(path, FileMode.Open));
+        reader.Read(bytes, 0, header.Length);
+        reader.Close();
+        if (header == Encoding.Default.GetString(bytes))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
     /// Whether or not the account is encrypted (requiring a password)
     /// </summary>
     public bool IsEncrypted
     {
         get
         {
-            if(!File.Exists(Path))
-            {
-                return false;
-            }
-            var header = "SQLite format 3";
-            var bytes = new byte[header.Length];
             if(_database != null)
             {
                 _database.Close();
                 SqliteConnection.ClearPool(_database);
             }
-            using var reader = new BinaryReader(new FileStream(Path, FileMode.Open));
-            reader.Read(bytes, 0, header.Length);
-            reader.Close();
+            var isEncrypted = GetIsEncrypted(Path);
             _database?.Open();
-            if (header == Encoding.Default.GetString(bytes))
-            {
-                return false;
-            }
-            return true;
+            return isEncrypted;
         }
     }
 
