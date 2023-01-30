@@ -58,7 +58,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// Whether or not there was a request to make a copy of transaction
     /// </summary>
-    public bool MakeCopy { get; set; }
+    public bool CopyRequested { get; set; }
     /// <summary>
     /// The original repeat interval of a transaction
     /// </summary>
@@ -103,7 +103,7 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         CanCopy = canCopy;
         Accepted = false;
-        MakeCopy = false;
+        CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
@@ -132,7 +132,7 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         CanCopy = false;
         Accepted = false;
-        MakeCopy = false;
+        CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
