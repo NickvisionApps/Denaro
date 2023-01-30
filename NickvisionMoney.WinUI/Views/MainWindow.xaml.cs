@@ -396,8 +396,9 @@ public sealed partial class MainWindow : Window
     {
         if(ListRecentAccounts.SelectedIndex != -1)
         {
-            await _controller.AddAccountAsync(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path);
+            var selectedIndex = ListRecentAccounts.SelectedIndex;
             ListRecentAccounts.SelectedIndex = -1;
+            await _controller.AddAccountAsync(_controller.RecentAccounts[selectedIndex].Path);
         }
     }
 }
