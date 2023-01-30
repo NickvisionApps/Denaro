@@ -335,7 +335,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">NotificationSentEventArgs</param>
-    private void NotificationSent(object? sender, NotificationSentEventArgs e) => _toastOverlay.AddToast(Adw.Toast.New(e.Message));
+    private void NotificationSent(object? sender, NotificationSentEventArgs e)
+    {
+        var toast = Adw.Toast.New(e.Message);
+        if (e.Action == "help-import")
+        {
+            toast.SetButtonLabel(_controller.Localizer["Help"]);
+            toast.OnButtonClicked += (sender, e) => gtk_show_uri(Handle, "help:denaro/import-export", 0);
+        }
+        _toastOverlay.AddToast(toast);
+    }
 
     /// <summary>
     /// Updates the window's subtitle
