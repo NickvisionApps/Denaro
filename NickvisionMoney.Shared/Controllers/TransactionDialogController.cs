@@ -44,6 +44,10 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public Transaction Transaction { get; init; }
     /// <summary>
+    /// Source transaction for copy
+    /// </summary>
+    public Transaction? SourceTransaction { get; set; }
+    /// <summary>
     /// The groups in the account
     /// </summary>
     public Dictionary<uint, string> Groups { get; init; }
@@ -51,6 +55,10 @@ public class TransactionDialogController : IDisposable
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+    /// <summary>
+    /// Whether or not there was a request to make a copy of transaction (response)
+    /// </summary>
+    public bool MakeCopy { get; set; }
     /// <summary>
     /// The original repeat interval of a transaction
     /// </summary>
@@ -91,8 +99,10 @@ public class TransactionDialogController : IDisposable
         _disposed = false;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
+        SourceTransaction = null;
         Groups = groups;
         Accepted = false;
+        MakeCopy = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
@@ -118,8 +128,10 @@ public class TransactionDialogController : IDisposable
         _disposed = false;
         Localizer = localizer;
         Transaction = new Transaction(id);
+        SourceTransaction = null;
         Groups = groups;
         Accepted = false;
+        MakeCopy = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;

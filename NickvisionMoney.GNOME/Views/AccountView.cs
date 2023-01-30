@@ -897,6 +897,39 @@ public partial class AccountView
     }
 
     /// <summary>
+    /// Occurs when creation of transaction copy was requested
+    /// </summary>
+    /// <param name="source">Source transaction for copy</param>
+    private void CopyTransaction(Transaction source)
+    {
+        using var transactionController = _controller.CreateTransactionDialogController();
+        transactionController.SourceTransaction = source;
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        transactionDialog.Show();
+        transactionDialog.OnResponse += async (sender, e) =>
+        {
+            if (transactionController.Accepted)
+            {
+                //Start Spinner
+                _statusPageNoTransactions.SetVisible(false);
+                _scrollTransactions.SetVisible(true);
+                _overlayMain.SetOpacity(0.0);
+                _binSpinner.SetVisible(true);
+                _spinner.Start();
+                _scrollPane.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+                //Stop Spinner
+                _spinner.Stop();
+                _binSpinner.SetVisible(false);
+                _overlayMain.SetOpacity(1.0);
+                _scrollPane.SetSensitive(true);
+            }
+            transactionDialog.Destroy();
+        };
+    }
+
+    /// <summary>
     /// Occurs when the edit transaction item is activated
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -904,7 +937,7 @@ public partial class AccountView
     private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow, true);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
         {
@@ -1007,6 +1040,10 @@ public partial class AccountView
                     _overlayMain.SetOpacity(1.0);
                     _scrollPane.SetSensitive(true);
                 }
+            }
+            else if (transactionController.MakeCopy)
+            {
+                CopyTransaction(transactionController.Transaction);
             }
             transactionDialog.Destroy();
         };

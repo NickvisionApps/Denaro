@@ -105,7 +105,7 @@ public partial class TransactionDialog
     /// </summary>
     /// <param name="controller">TransactionDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public TransactionDialog(TransactionDialogController controller, Gtk.Window parentWindow)
+    public TransactionDialog(TransactionDialogController controller, Gtk.Window parentWindow, bool canCopy = false)
     {
         _constructing = true;
         _controller = controller;
@@ -118,10 +118,17 @@ public partial class TransactionDialog
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
+        if (canCopy)
+        {
+            _dialog.AddResponse("copy", _controller.Localizer["MakeCopy"]);
+        }
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
+        _dialog.OnResponse += (sender, e) => {
+            _controller.Accepted = e.Response == "ok";
+            _controller.MakeCopy = e.Response == "copy";
+        };
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Main Preferences Group
@@ -303,36 +310,37 @@ public partial class TransactionDialog
         //Layout
         _dialog.SetExtraChild(_boxMain);
         //Load Transaction
-        gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
+        var transaction = _controller.SourceTransaction != null ? _controller.SourceTransaction : _controller.Transaction;
+        gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(transaction.Date.Year, transaction.Date.Month, transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
-        _rowDescription.SetText(_controller.Transaction.Description);
-        _rowAmount.SetText(_controller.Transaction.Amount.ToString("N2", _controller.CultureForNumberString));
-        _btnIncome.SetActive(_controller.Transaction.Type == TransactionType.Income);
+        _rowDescription.SetText(transaction.Description);
+        _rowAmount.SetText(transaction.Amount.ToString("N2", _controller.CultureForNumberString));
+        _btnIncome.SetActive(transaction.Type == TransactionType.Income);
         _rowRepeatInterval.SetSelected(_controller.RepeatIntervalIndex);
-        _rowRepeatEndDate.SetSensitive(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
-        if (_controller.Transaction.RepeatEndDate != null)
+        _rowRepeatEndDate.SetSensitive(transaction.RepeatInterval != TransactionRepeatInterval.Never);
+        if (transaction.RepeatEndDate != null)
         {
-            gtk_calendar_select_day(_calendarRepeatEndDate.Handle, ref g_date_time_new_local(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
+            gtk_calendar_select_day(_calendarRepeatEndDate.Handle, ref g_date_time_new_local(transaction.RepeatEndDate.Value.Year, transaction.RepeatEndDate.Value.Month, transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
             OnRepeatEndDateChanged(_calendarRepeatEndDate, EventArgs.Empty);
         }
         else
         {
             _btnRepeatEndDate.SetLabel(_controller.Localizer["NoEndDate"]);
         }
-        if(_controller.Transaction.GroupId == -1)
+        if(transaction.GroupId == -1)
         {
             _rowGroup.SetSelected(0);
         }
         else
         {
-            _rowGroup.SetSelected((uint)_controller.Transaction.GroupId);
+            _rowGroup.SetSelected((uint)transaction.GroupId);
         }
         var transactionColor = new Color();
-        gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
+        gdk_rgba_parse(ref transactionColor, transaction.RGBA);
         gtk_color_chooser_set_rgba(_btnColor.Handle, ref transactionColor);
-        _btnReceiptView.SetSensitive(_controller.Transaction.Receipt != null);
-        _btnReceiptDelete.SetSensitive(_controller.Transaction.Receipt != null);
-        if (_controller.Transaction.Receipt != null)
+        _btnReceiptView.SetSensitive(transaction.Receipt != null);
+        _btnReceiptDelete.SetSensitive(transaction.Receipt != null);
+        if (transaction.Receipt != null)
         {
             _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
         }
