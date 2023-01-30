@@ -942,7 +942,7 @@ public partial class AccountView
         {
             if (transactionController.Accepted)
             {
-                if (transactionController.MakeCopy)
+                if (transactionController.CopyRequested)
                 {
                     CopyTransaction(transactionController.Transaction);
                     return;

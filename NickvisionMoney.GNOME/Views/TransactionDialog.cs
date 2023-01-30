@@ -127,7 +127,7 @@ public partial class TransactionDialog
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => {
             _controller.Accepted = e.Response != "cancel";
-            _controller.MakeCopy = e.Response == "copy";
+            _controller.CopyRequested = e.Response == "copy";
         };
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
