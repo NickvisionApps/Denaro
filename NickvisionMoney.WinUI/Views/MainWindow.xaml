@@ -112,7 +112,11 @@
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>
 
-                <InfoBar x:Name="InfoBar" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="12" Margin="0,0,0,10"/>
+                <InfoBar x:Name="InfoBar" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" CornerRadius="12">
+                    <InfoBar.ActionButton>
+                        <Button x:Name="BtnInfoBar" HorizontalAlignment="Right"/>
+                    </InfoBar.ActionButton>
+                </InfoBar>
             </Grid>
         </NavigationView>
     </Grid>
