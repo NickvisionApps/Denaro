@@ -331,6 +331,29 @@ public sealed partial class AccountView : UserControl
     }
 
     /// <summary>
+    /// Occurs when creation of transaction copy was requested
+    /// </summary>
+    /// <param name="source">Source transaction for copy</param>
+    private async Task CopyTransactionAsync(Transaction source)
+    {
+        using var transactionController = _controller.CreateTransactionDialogController(source);
+        var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
+        {
+            XamlRoot = Content.XamlRoot
+        };
+        if (await transactionDialog.ShowAsync())
+        {
+            //Start Loading
+            LoadingCtrl.IsLoading = true;
+            //Work
+            await Task.Delay(50);
+            await _controller.AddTransactionAsync(transactionController.Transaction);
+            //Done Loading
+            LoadingCtrl.IsLoading = false;
+        }
+    }
+
+    /// <summary>
     /// Occurs when the edit transaction action is triggered
     /// </summary>
     /// <param name="sender">object?</param>
@@ -344,6 +367,11 @@ public sealed partial class AccountView : UserControl
         };
         if (await transactionDialog.ShowAsync())
         {
+            if(transactionController.CopyRequested)
+            {
+                await CopyTransactionAsync(transactionController.Transaction);
+                return;
+            }
             if(_controller.GetIsSourceRepeatTransaction(transactionId) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)

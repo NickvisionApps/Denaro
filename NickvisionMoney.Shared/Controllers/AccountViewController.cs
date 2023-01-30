@@ -436,7 +436,7 @@ public class AccountViewController
     public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, Localizer);
 
     /// <summary>
-    /// Creates a new TransactionDialogController
+    /// Creates a new TransactionDialogController for a new transaction
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
     public TransactionDialogController CreateTransactionDialogController()
@@ -450,7 +450,7 @@ public class AccountViewController
     }
 
     /// <summary>
-    /// Creates a new TransactionDialogController
+    /// Creates a new TransactionDialogController for an existing transaction
     /// </summary>
     /// <param name="id">The id of the existing transaction</param>
     /// <returns>The TransactionDialogController for the existing transaction</returns>
@@ -461,7 +461,35 @@ public class AccountViewController
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, true, CultureForNumberString, CultureForDateString, Localizer);
+    }
+
+    /// <summary>
+    /// Creates a new TransactionDialogController for a copy transaction
+    /// </summary>
+    /// <param name="source">The transaction to copy</param>
+    /// <returns>The TransactionDialogController for the copied transaction</returns>
+    public TransactionDialogController CreateTransactionDialogController(Transaction source)
+    {
+        var groups = new Dictionary<uint, string>();
+        foreach (var pair in _account.Groups)
+        {
+            groups.Add(pair.Key, pair.Value.Name);
+        }
+        var toCopy = new Transaction(_account.NextAvailableTransactionId)
+        {
+            Date = source.Date,
+            Description = $"{source.Description} {Localizer["Copy", "Transaction"]}",
+            Type = source.Type,
+            RepeatInterval = source.RepeatInterval,
+            Amount = source.Amount,
+            GroupId = source.GroupId,
+            RGBA = source.RGBA,
+            Receipt = source.Receipt,
+            RepeatFrom = source.RepeatFrom,
+            RepeatEndDate = source.RepeatEndDate
+        };
+        return new TransactionDialogController(toCopy, groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, false, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
