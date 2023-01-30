@@ -95,6 +95,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _accountViews = new List<Adw.TabPage>();
         SetDefaultSize(900, 720);
         SetSizeRequest(360, -1);
+        SetTitle(_controller.AppInfo.ShortName);
         CompactMode = false;
         if(_controller.IsDevVersion)
         {
