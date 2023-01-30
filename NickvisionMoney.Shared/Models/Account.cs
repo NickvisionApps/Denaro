@@ -1345,6 +1345,7 @@ public class Account : IDisposable
             {
                 continue;
             }
+            amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
             //Get Group Id
