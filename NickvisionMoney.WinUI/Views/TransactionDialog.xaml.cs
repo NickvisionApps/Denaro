@@ -40,6 +40,10 @@ public sealed partial class TransactionDialog : ContentDialog
         Title = $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}";
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer["OK"];
+        if(_controller.CanCopy)
+        {
+            SecondaryButtonText = _controller.Localizer["MakeCopy"];
+        }
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtDescription.PlaceholderText = _controller.Localizer["Description", "Placeholder"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})";
@@ -125,6 +129,10 @@ public sealed partial class TransactionDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
+        if(result == ContentDialogResult.Secondary)
+        {
+            _controller.CopyRequested = true;
+        }
         _controller.Accepted = true;
         return true;
     }
@@ -134,7 +142,7 @@ public sealed partial class TransactionDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(BtnColor.SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
