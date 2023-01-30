@@ -118,10 +118,17 @@ public partial class TransactionDialog
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
+        if (_controller.CanCopy)
+        {
+            _dialog.AddResponse("copy", _controller.Localizer["MakeCopy"]);
+        }
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
+        _dialog.OnResponse += (sender, e) => {
+            _controller.Accepted = e.Response != "cancel";
+            _controller.CopyRequested = e.Response == "copy";
+        };
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
         //Main Preferences Group
@@ -319,7 +326,7 @@ public partial class TransactionDialog
         {
             _btnRepeatEndDate.SetLabel(_controller.Localizer["NoEndDate"]);
         }
-        if(_controller.Transaction.GroupId == -1)
+        if (_controller.Transaction.GroupId == -1)
         {
             _rowGroup.SetSelected(0);
         }

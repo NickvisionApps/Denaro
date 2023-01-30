@@ -48,9 +48,17 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public Dictionary<uint, string> Groups { get; init; }
     /// <summary>
+    /// Whether or not this transaction can be copied
+    /// </summary>
+    public bool CanCopy { get; init; }
+    /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+    /// <summary>
+    /// Whether or not there was a request to make a copy of transaction
+    /// </summary>
+    public bool CopyRequested { get; set; }
     /// <summary>
     /// The original repeat interval of a transaction
     /// </summary>
@@ -83,16 +91,19 @@ public class TransactionDialogController : IDisposable
     /// <param name="groups">The list of groups in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
+    /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, bool canCopy, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
         Groups = groups;
+        CanCopy = canCopy;
         Accepted = false;
+        CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
@@ -119,7 +130,9 @@ public class TransactionDialogController : IDisposable
         Localizer = localizer;
         Transaction = new Transaction(id);
         Groups = groups;
+        CanCopy = false;
         Accepted = false;
+        CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;

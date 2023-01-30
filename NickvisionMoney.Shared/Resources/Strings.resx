@@ -557,6 +557,14 @@
 		<value>Upload</value>
 	</data>
 
+	<data name="MakeCopy" xml:space="preserve">
+		<value>Make a Copy</value>
+	</data>
+
+	<data name="Copy.Transaction" xml:space="preserve">
+		<value>(Copy)</value>
+	</data>
+
 	<!--TransferDialog-->
 	<data name="Transfer" xml:space="preserve">
 		<value>Transfer</value>
