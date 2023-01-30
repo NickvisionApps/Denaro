@@ -46,7 +46,7 @@
     <binary>org.nickvision.money</binary>
   </provides>
   <releases>
-    <release version="2023.2.0-beta1" date="2023-01-22">
+    <release version="2023.2.0-beta2" date="2023-01-30">
       <description>
 		  <p>- Added the ability to sort transactions by amount</p>
 		  <p>- LC_MONETARY and LC_TIME will now be respected</p>

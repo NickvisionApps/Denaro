@@ -57,7 +57,7 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.2.0-beta1";
+        _mainWindowController.AppInfo.Version = "2023.2.0-beta2";
         _mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Added the ability to copy individual transactions</li><li>Recent accounts are now available to select from the TransferDialog</li><li>Added a \"New Window\" action to the main menu</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
