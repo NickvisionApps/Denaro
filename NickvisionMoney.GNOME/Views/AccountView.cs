@@ -902,8 +902,7 @@ public partial class AccountView
     /// <param name="source">Source transaction for copy</param>
     private void CopyTransaction(Transaction source)
     {
-        using var transactionController = _controller.CreateTransactionDialogController();
-        transactionController.SourceTransaction = source;
+        using var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
@@ -937,12 +936,17 @@ public partial class AccountView
     private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow, true);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
         {
             if (transactionController.Accepted)
             {
+                if (transactionController.MakeCopy)
+                {
+                    CopyTransaction(transactionController.Transaction);
+                    return;
+                }
                 if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
                 {
                     if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
@@ -1040,10 +1044,6 @@ public partial class AccountView
                     _overlayMain.SetOpacity(1.0);
                     _scrollPane.SetSensitive(true);
                 }
-            }
-            else if (transactionController.MakeCopy)
-            {
-                CopyTransaction(transactionController.Transaction);
             }
             transactionDialog.Destroy();
         };
