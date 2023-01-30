@@ -820,7 +820,7 @@ public class AccountViewController
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport"], NotificationSeverity.Error, "help-import"));
         }
     }
 
