@@ -25,6 +25,7 @@ public class NotificationSentEventArgs : EventArgs
     /// </summary>
     /// <param name="message">The message of the notification</param>
     /// <param name="severity">The severity of the notification</param>
+    /// <param name="action">Additional action for notification</param>
     public NotificationSentEventArgs(string message, NotificationSeverity severity, string action = "")
     {
         Message = message;
