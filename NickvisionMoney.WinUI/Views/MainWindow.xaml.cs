@@ -12,13 +12,16 @@ using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI;
 using WinRT;
 using WinRT.Interop;
@@ -37,6 +40,7 @@ public sealed partial class MainWindow : Window
     private readonly SystemBackdropConfiguration _backdropConfiguration;
     private readonly MicaController? _micaController;
     private readonly Dictionary<string, AccountView> _accountViews;
+    private RoutedEventHandler? _notificationButtonClickEvent;
 
     /// <summary>
     /// Constructs a MainWindow
@@ -250,6 +254,26 @@ public sealed partial class MainWindow : Window
             NotificationSeverity.Error => InfoBarSeverity.Error,
             _ => InfoBarSeverity.Informational
         };
+        if(_notificationButtonClickEvent != null)
+        {
+            BtnInfoBar.Click -= _notificationButtonClickEvent;
+        }
+        BtnInfoBar.Visibility = !string.IsNullOrEmpty(e.Action) ? Visibility.Visible : Visibility.Collapsed;
+        if(e.Action == "help-import")
+        {
+            BtnInfoBar.Content = _controller.Localizer["Help"];
+            _notificationButtonClickEvent = async (sender, e) =>
+            {
+                var lang = "C";
+                var availableTranslations = new string[2] { "es", "ru" };
+                if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+                {
+                    lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+                }
+                await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/import-export.html"));
+            };
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
         InfoBar.IsOpen = true;
     }
 
