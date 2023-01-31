@@ -234,7 +234,7 @@ public sealed partial class AccountView : UserControl
     /// <param name="e">SizeChangedEventArgs</param>
     private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        ScrollSidebar.Height = e.NewSize.Height - 60;
+        ScrollSidebar.Height = e.NewSize.Height < 60 ? 60 : e.NewSize.Height - 60;
         GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
     }
 
