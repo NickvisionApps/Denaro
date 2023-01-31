@@ -11,7 +11,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded" SizeChanged="Page_SizeChanged">
 
     <Grid>
-        <NavigationView x:Name="NavView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="360" PaneOpening="NavView_PaneOpened" PaneClosing="NavView_PaneClosed">
+        <NavigationView x:Name="NavView" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength="360" CompactModeThresholdWidth="0" PaneOpening="NavView_PaneOpened" PaneClosing="NavView_PaneClosed">
             <NavigationView.PaneHeader>
                 <Grid Margin="6,0,0,0" Height="32">
                     <Grid.ColumnDefinitions>
