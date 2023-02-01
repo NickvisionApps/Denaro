@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:nickvision="using:NickvisionMoney.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
@@ -10,49 +11,89 @@
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
     DefaultButton="Primary">
 
-    <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
-        <StackPanel Spacing="6">
-            <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="0,10,0,10" Width="100" Height="100" CornerRadius="20">
-                <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="White"/>
-            </Border>
+    <nickvision:ViewStack x:Name="ViewStack">
+        <nickvision:ViewStack.Pages>
+            <nickvision:ViewStackPage PageName="Main">
+                <ScrollViewer Width="400" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Spacing="6">
+                        <Border x:Name="BorderId" HorizontalAlignment="Center" Margin="0,10,0,10" Width="100" Height="100" CornerRadius="20">
+                            <TextBlock x:Name="LblId" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="White"/>
+                        </Border>
 
-            <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
+                        <TextBox x:Name="TxtName" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtName_TextChanged"/>
 
-            <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="CmbAccountType" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" SelectionChanged="CmbAccountType_SelectionChanged"/>
+                            <ComboBox x:Name="CmbAccountType" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" SelectionChanged="CmbAccountType_SelectionChanged"/>
 
-                <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,0,0" SelectionChanged="CmbDefaultTransactionType_SelectionChanged"/>
-            </Grid>
+                            <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,0,0" SelectionChanged="CmbDefaultTransactionType_SelectionChanged"/>
+                        </Grid>
 
-            <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
-            <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
 
-            <ToggleSwitch x:Name="TglUseCustomCurrency" Toggled="TglUseCustomCurrency_Toggled"/>
+                        <ToggleSwitch x:Name="TglUseCustomCurrency" Toggled="TglUseCustomCurrency_Toggled"/>
 
-            <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="3" TextChanged="TxtCustomSymbol_TextChanged"/>
+                            <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="3" TextChanged="TxtCustomSymbol_TextChanged"/>
 
-                <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
-            </Grid>
+                            <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
+                        </Grid>
 
-            <labs:SettingsCard x:Name="CardPassword" Margin="0,10,0,0" IsClickEnabled="True" Click="CardPassword_Click">
-                <labs:SettingsCard.HeaderIcon>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72E;"/>
-                </labs:SettingsCard.HeaderIcon>
-            </labs:SettingsCard>
+                        <labs:SettingsCard x:Name="CardPassword" Margin="0,10,0,0" IsClickEnabled="True" Click="CardPassword_Click">
+                            <labs:SettingsCard.HeaderIcon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72E;"/>
+                            </labs:SettingsCard.HeaderIcon>
+                        </labs:SettingsCard>
 
-            <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-        </StackPanel>
-    </ScrollViewer>
+                        <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </nickvision:ViewStackPage>
+
+            <nickvision:ViewStackPage PageName="Password">
+                <StackPanel Width="340" Orientation="Vertical" Spacing="6">
+                    <wct:DockPanel LastChildFill="False">
+                        <Button x:Name="BtnPasswordBack" wct:DockPanel.Dock="Left" Click="BtnPasswordBack_Click">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE112;"/>
+
+                                    <TextBlock x:Name="LblPasswordBack"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="BtnPasswordRemove" wct:DockPanel.Dock="Right" Click="BtnPasswordRemove_Click">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE107;"/>
+
+                                    <TextBlock x:Name="LblPasswordRemove"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </wct:DockPanel>
+
+                    <PasswordBox x:Name="TxtPasswordNew" PasswordChanged="TxtPasswordNew_PasswordChanged"/>
+
+                    <PasswordBox x:Name="TxtPasswordConfirm" PasswordChanged="TxtPasswordConfirm_PasswordChanged"/>
+
+                    <TextBlock x:Name="LblPasswordWarning" Margin="0,10,0,0" Foreground="{ThemeResource SystemFillColorCautionBrush}" TextWrapping="Wrap"/>
+
+                    <TextBlock Name="TxtPasswordErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                </StackPanel>
+            </nickvision:ViewStackPage>
+        </nickvision:ViewStack.Pages>
+    </nickvision:ViewStack>
 </ContentDialog>

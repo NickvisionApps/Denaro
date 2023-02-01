@@ -30,7 +30,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         _constructing = true;
         _controller = controller;
         //Localize Strings
-        Title = $"{_controller.Localizer["AccountSettings"]}";
+        Title = _controller.Localizer["AccountSettings"];
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer["OK"];
         TxtName.Header = _controller.Localizer["Name", "Field"];
@@ -53,6 +53,14 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CardPassword.Header = _controller.Localizer["ManagePassword"];
         CardPassword.Description = _controller.Localizer["ManagePassword", "Description"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
+        LblPasswordBack.Text = _controller.Localizer["Back"];
+        LblPasswordRemove.Text = _controller.Localizer["Remove"];
+        TxtPasswordNew.Header = _controller.Localizer["NewPassword", "Field"];
+        TxtPasswordNew.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
+        TxtPasswordConfirm.Header = _controller.Localizer["ConfirmPassword", "Field"];
+        TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
+        LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
+        TxtPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
@@ -63,9 +71,11 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             TxtCustomSymbol.Text = _controller.Metadata.CustomCurrencySymbol;
             TxtCustomCode.Text = _controller.Metadata.CustomCurrencyCode;
         }
+        BtnPasswordRemove.Visibility = _controller.IsEncrypted ? Visibility.Visible : Visibility.Collapsed;
         TxtName_TextChanged(null, null);
         TglUseCustomCurrency_Toggled(null, new RoutedEventArgs());
         Validate();
+        ViewStack.ChangePage("Main");
         _constructing = false;
     }
 
@@ -97,13 +107,14 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex);
+        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex, TxtPasswordNew.Password, TxtPasswordConfirm.Password);
         TxtName.Header = _controller.Localizer["Name", "Field"];
         TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             TxtErrors.Visibility = Visibility.Collapsed;
+            TxtPasswordErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
         else
@@ -119,6 +130,10 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))
+            {
+                TxtPasswordErrors.Visibility = Visibility.Visible;
             }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
@@ -272,6 +287,46 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">RoutedEventArgs</param>
     private void CardPassword_Click(object sender, RoutedEventArgs e)
     {
-
+        Title = $"{_controller.Localizer["AccountSettings"]} - {_controller.Localizer["Password", "Field"]}";
+        ViewStack.ChangePage("Password");
     }
+
+    /// <summary>
+    /// Occurs when the back button on the password page is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnPasswordBack_Click(object sender, RoutedEventArgs e)
+    {
+        TxtPasswordNew.Password = "";
+        TxtPasswordConfirm.Password = "";
+        Title = _controller.Localizer["AccountSettings"];
+        ViewStack.ChangePage("Main");
+        Validate();
+    }
+
+    /// <summary>
+    /// Occurs when the remove button on the password page is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnPasswordRemove_Click(object sender, RoutedEventArgs e)
+    {
+        _controller.SetRemovePassword();
+        BtnPasswordRemove.IsEnabled = false;
+    }
+
+    /// <summary>
+    /// Occurs when the new password textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void TxtPasswordNew_PasswordChanged(object sender, RoutedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when the confirm password textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void TxtPasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e) => Validate();
 }

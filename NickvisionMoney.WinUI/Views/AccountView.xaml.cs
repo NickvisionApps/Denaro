@@ -738,6 +738,10 @@ public sealed partial class AccountView : UserControl
         if (await accountSettingsDialog.ShowAsync())
         {
             _controller.UpdateMetadata(accountSettingsController.Metadata);
+            if(accountSettingsController.NewPassword != null)
+            {
+                _controller.SetPassword(accountSettingsController.NewPassword);
+            }
         }
     }
 
