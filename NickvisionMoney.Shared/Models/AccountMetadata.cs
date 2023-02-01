@@ -107,18 +107,32 @@ public class AccountMetadata : ICloneable
     /// </summary>
     /// <param name="path">The path to the account file</param>
     /// <returns>AccountMetadata?</returns>
-    public static AccountMetadata? LoadFromAccountFile(string path)
+    public static AccountMetadata? LoadFromAccountFile(string path, string? password)
     {
         if(Path.GetExtension(path) != ".nmoney")
         {
             return null;
         }
-        using var database = new SqliteConnection(new SqliteConnectionStringBuilder()
+        var connectionString = new SqliteConnectionStringBuilder()
         {
             DataSource = path,
             Mode = SqliteOpenMode.ReadOnly
-        }.ConnectionString);
-        database.Open();
+        };
+        if(!string.IsNullOrEmpty(password))
+        {
+            connectionString.Password = password;
+        }
+        using var database = new SqliteConnection(connectionString.ConnectionString);
+        try
+        {
+            database.Open();
+        }
+        catch
+        {
+            database.Close();
+            SqliteConnection.ClearPool(database);
+            return null;
+        }
         // Get Metadata
         var result = new AccountMetadata(Path.GetFileNameWithoutExtension(path), AccountType.Checking);
         var cmdQueryMetadata = database.CreateCommand();

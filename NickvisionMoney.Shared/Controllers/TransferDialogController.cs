@@ -132,7 +132,7 @@ public class TransferDialogController
             }
             CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            var destMetadata = AccountMetadata.LoadFromAccountFile(destPath)!;
+            var destMetadata = AccountMetadata.LoadFromAccountFile(destPath, "")!;
             if (destMetadata.UseCustomCurrency)
             {
                 CultureForDestNumberString.NumberFormat.CurrencySymbol = destMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
@@ -175,7 +175,7 @@ public class TransferDialogController
             return result;
         }
         Transfer.DestinationAccountPath = destPath;
-        Transfer.DestinationAccountName = AccountMetadata.LoadFromAccountFile(destPath)!.Name;
+        Transfer.DestinationAccountName = AccountMetadata.LoadFromAccountFile(destPath, null)!.Name;
         Transfer.SourceAmount = amount;
         Transfer.ConversionRate = conversionRate;
         return TransferCheckStatus.Valid;
