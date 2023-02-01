@@ -320,12 +320,13 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">RoutedEventArgs</param>
     private void BtnPasswordRemove_Click(object sender, RoutedEventArgs e)
     {
+        TxtPasswordNew.Password = "";
+        TxtPasswordConfirm.Password = "";
         _controller.SetRemovePassword();
-        InfoBadgePassword.Visibility = Visibility.Visible;
-        InfoBadgePassword.Style = (Style)App.Current.Resources["SuccessDotInfoBadgeStyle"];
+        Validate();
+        BtnPasswordRemove.Visibility = Visibility.Collapsed;
         Title = _controller.Localizer["AccountSettings"];
         ViewStack.ChangePage("Main");
-        BtnPasswordRemove.Visibility = Visibility.Collapsed;
     }
 
     /// <summary>
