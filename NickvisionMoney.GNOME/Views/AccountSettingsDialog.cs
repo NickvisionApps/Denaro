@@ -428,7 +428,9 @@ public partial class AccountSettingsDialog
     private void OnRemovePassword(Gtk.Button sender, EventArgs e)
     {
         _controller.SetRemovePassword();
-        _btnRemovePassword.SetVisible(false);
         _rowPassword.SetEnableExpansion(false);
+        _rowPassword.SetSensitive(false);
+        _rowPassword.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
+        _rowPassword.SetSubtitle("");
     }
 }

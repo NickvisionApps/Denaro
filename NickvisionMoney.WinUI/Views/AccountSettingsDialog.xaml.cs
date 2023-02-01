@@ -60,7 +60,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtPasswordConfirm.Header = _controller.Localizer["ConfirmPassword", "Field"];
         TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
-        TxtPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords"];
+        TxtPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;

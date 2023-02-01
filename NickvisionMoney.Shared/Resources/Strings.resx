@@ -792,10 +792,6 @@
 		<value>Confirm Password</value>
 	</data>
 
-	<data name="NonMatchingPasswords" xml:space="preserve">
-		<value>The passwords do not match.</value>
-	</data>
-
 	<!--PDF-->
 	<data name="Generated.PDF" xml:space="preserve">
 		<value>Generated: {0}</value>
@@ -917,6 +913,10 @@
 		<value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
 	</data>
 
+	<data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+		<value>The passwords do not match.</value>
+	</data>
+
 	<!--GTK Specific-->
 	<data name="Summary.GTK" xml:space="preserve">
 		<value>Manage your personal finances</value>
@@ -952,5 +952,9 @@
 
 	<data name="NewWindow.GTK" xml:space="preserve">
 		<value>New Window</value>
+	</data>
+
+	<data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+		<value>The password will be removed upon closing this dialog.</value>
 	</data>
 </root>
