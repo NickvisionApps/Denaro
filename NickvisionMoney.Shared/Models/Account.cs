@@ -14,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
@@ -250,6 +251,15 @@ public class Account : IDisposable
             using var command = _database.CreateCommand();
             command.CommandText = $"PRAGMA rekey = '{password}'";
             command.ExecuteNonQuery();
+            _database.Close();
+            _database.ConnectionString = new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Password = password
+            }.ConnectionString;
+            _database.Open();
+            Thread.Sleep(100);
         }
         //Sets new password (encrypts for first time)
         else
