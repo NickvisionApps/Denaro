@@ -160,7 +160,7 @@ public class AccountSettingsDialogController
             Metadata.CustomCurrencyCode = null;
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
-        NewPassword = string.IsNullOrEmpty(newPassword) ? null : newPassword;
+        NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
         return AccountMetadataCheckStatus.Valid;
     }
 
