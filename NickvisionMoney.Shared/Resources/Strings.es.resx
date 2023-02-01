@@ -692,4 +692,10 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="AccountActions" xml:space="preserve">
     <value>Acciones</value>
   </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Copia)</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Hacer una copia</value>
+  </data>
 </root>
