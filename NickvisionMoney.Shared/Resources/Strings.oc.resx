@@ -529,10 +529,10 @@ Aquesta accion se pòt pas anullar.</value>
 		<value />
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Cal una reaviada per aplicar la modificacion del tèma.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Reaviar l’aplicacion per aplicar lo tèma ?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value />
@@ -630,5 +630,41 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <data name="AccountActions" xml:space="preserve">
     <value>Accions</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Realizar una còpia</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Copiar)</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Resultat</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Conversion requerida</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Picatz la conversion aicí</value>
+  </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Gerissètz vòstras finanças personalas</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>argent;finança;pòrtafuèlha;cash;GTK;Nickvision;</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Recebuts</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Picatz un còdi aquí</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Fenèstra novèla</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Recercar per descripcion</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>APERCEBUT</value>
   </data>
 </root>

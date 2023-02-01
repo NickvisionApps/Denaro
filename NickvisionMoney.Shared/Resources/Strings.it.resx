@@ -698,4 +698,10 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="AccountActions" xml:space="preserve">
     <value>Azioni</value>
   </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Copia)</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Fai una copia</value>
+  </data>
 </root>

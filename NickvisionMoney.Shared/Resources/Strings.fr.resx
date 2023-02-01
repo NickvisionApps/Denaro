@@ -699,4 +699,10 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="EnterConversionRate" xml:space="preserve">
     <value>Entrez la conversion ici</value>
   </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Copie)</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Faire une copie</value>
+  </data>
 </root>
