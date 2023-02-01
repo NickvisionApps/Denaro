@@ -1,5 +1,6 @@
 using NickvisionMoney.Shared.Controllers;
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
@@ -31,6 +32,7 @@ public partial class TransferDialog
     private readonly Adw.EntryRow _rowDestCurrency;
     private readonly Adw.ActionRow _rowConversionResult;
     private readonly Gtk.Label _lblConversionResult;
+    private readonly Gtk.EventControllerKey _amountKeyController;
 
     /// <summary>
     /// Constructs a TransferDialog
@@ -102,6 +104,16 @@ public partial class TransferDialog
             if (e.Pspec.GetName() == "text")
             {
                 Validate();
+            }
+        };
+        _amountKeyController = Gtk.EventControllerKey.New();
+        _rowAmount.AddController(_amountKeyController);
+        _amountKeyController.OnKeyReleased += (sender, e) =>
+        {
+            if ((e.Keyval == 65454) || (e.Keyval == 65452) || (e.Keyval == 2749))
+            {
+                _rowAmount.SetText(_rowAmount.GetText().Remove(_rowAmount.GetText().Length - 1, 1) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                _rowAmount.SetPosition(_rowAmount.GetText().Length);
             }
         };
         _grpMain.Add(_rowAmount);

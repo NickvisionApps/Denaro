@@ -2,6 +2,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -99,6 +100,7 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
+    private readonly Gtk.EventControllerKey _amountKeyController;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -163,6 +165,16 @@ public partial class TransactionDialog
                 {
                     Validate();
                 }
+            }
+        };
+        _amountKeyController = Gtk.EventControllerKey.New();
+        _rowAmount.AddController(_amountKeyController);
+        _amountKeyController.OnKeyReleased += (sender, e) =>
+        {
+            if ((e.Keyval == 65454) || (e.Keyval == 65452) || (e.Keyval == 2749))
+            {
+                _rowAmount.SetText(_rowAmount.GetText().Remove(_rowAmount.GetText().Length - 1, 1) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                _rowAmount.SetPosition(_rowAmount.GetText().Length);
             }
         };
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})");
