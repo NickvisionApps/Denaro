@@ -113,10 +113,10 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value />
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value />
+		<value>Hesap Aç</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>Hesap Aç (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
 		<value />
@@ -553,5 +553,8 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value />
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Yardım</value>
   </data>
 </root>
