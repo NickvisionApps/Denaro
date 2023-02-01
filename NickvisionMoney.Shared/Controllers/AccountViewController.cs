@@ -433,7 +433,7 @@ public class AccountViewController
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, _account.IsEncrypted, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a new transaction
@@ -526,6 +526,23 @@ public class AccountViewController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
     public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString, Localizer);
+
+    /// <summary>
+    /// Sets the new password of the account
+    /// </summary>
+    /// <param name="password">The new password</param>
+    public void SetPassword(string password)
+    {
+        _account.SetPassword(password);
+        if (string.IsNullOrEmpty(password))
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordRemoved"], NotificationSeverity.Success));
+        }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordUpdated"], NotificationSeverity.Success));
+        }
+    }
 
     /// <summary>
     /// Updates the metadata of the account

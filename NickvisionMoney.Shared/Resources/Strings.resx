@@ -112,6 +112,14 @@
 		<value>Save</value>
 	</data>
 
+	<data name="Back" xml:space="preserve">
+		<value>Back</value>
+	</data>
+
+	<data name="Remove" xml:space="preserve">
+		<value>Remove</value>
+	</data>
+
 	<!--Pages-->
 	<data name="Home" xml:space="preserve">
 		<value>Home</value>
@@ -448,6 +456,14 @@
 		<value>Search by description</value>
 	</data>
 
+	<data name="PasswordRemoved" xml:space="preserve">
+		<value>The password of the account was removed.</value>
+	</data>
+
+	<data name="PasswordUpdated" xml:space="preserve">
+		<value>The password of the account was changed.</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>
@@ -626,6 +642,10 @@
 	<data name="ManagePassword.Description" xml:space="preserve">
 		<value>Add, change, and remove a password from the account.</value>
 	</data>
+
+	<data name="ManagePassword.Warning" xml:space="preserve">
+		<value>If the password is lost, there is no way to restore your account!</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Id.Field" xml:space="preserve">
@@ -762,6 +782,18 @@
 
 	<data name="Password.Placeholder" xml:space="preserve">
 		<value>Enter password here</value>
+	</data>
+
+	<data name="NewPassword.Field" xml:space="preserve">
+		<value>New Password</value>
+	</data>
+
+	<data name="ConfirmPassword.Field" xml:space="preserve">
+		<value>Confirm Password</value>
+	</data>
+
+	<data name="NonMatchingPasswords" xml:space="preserve">
+		<value>The passwords do not match.</value>
 	</data>
 
 	<!--PDF-->

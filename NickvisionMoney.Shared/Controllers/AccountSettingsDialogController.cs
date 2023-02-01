@@ -14,7 +14,8 @@ public enum AccountMetadataCheckStatus
     Valid = 1,
     EmptyName = 2,
     EmptyCurrencySymbol = 4,
-    EmptyCurrencyCode = 8
+    EmptyCurrencyCode = 8,
+    NonMatchingPasswords = 16,
 }
 
 /// <summary>
@@ -35,22 +36,33 @@ public class AccountSettingsDialogController
     /// </summary>
     public bool NeedsSetup { get; init; }
     /// <summary>
+    /// Whether or not the account is encrypted
+    /// </summary>
+    public bool IsEncrypted { get; init; }
+    /// <summary>
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+    /// <summary>
+    /// The new password for the account, if available
+    /// </summary>
+    public string? NewPassword { get; private set; }
 
     /// <summary>
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
     /// <param name="needsSetup">Whether or not the dialog should be used for necessary account setup</param>
+    /// <param name="isEncrypted">Whether or not the account is encrypted</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, Localizer localizer)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, bool isEncrypted, Localizer localizer)
     {
         Localizer = localizer;
         Metadata = (AccountMetadata)metadata.Clone();
         NeedsSetup = needsSetup;
+        IsEncrypted = isEncrypted;
         Accepted = false;
+        NewPassword = null;
     }
 
     /// <summary>
@@ -100,8 +112,10 @@ public class AccountSettingsDialogController
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
     /// <param name="defaultTransactionType">The new default transaction type</param>
+    /// <param name="newPassword">The new password</param>
+    /// <param name="confirmPassword">The new password confirmed</param>
     /// <returns></returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
         if(string.IsNullOrEmpty(name))
@@ -115,6 +129,10 @@ public class AccountSettingsDialogController
         if(useCustom && string.IsNullOrEmpty(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
+        }
+        if(newPassword != confirmPassword)
+        {
+            result |= AccountMetadataCheckStatus.NonMatchingPasswords;
         }
         if(result != 0)
         {
@@ -142,6 +160,12 @@ public class AccountSettingsDialogController
             Metadata.CustomCurrencyCode = null;
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
+        NewPassword = string.IsNullOrEmpty(newPassword) ? null : newPassword;
         return AccountMetadataCheckStatus.Valid;
     }
+
+    /// <summary>
+    /// Sets the password to be removed from the account
+    /// </summary>
+    public void SetRemovePassword() => NewPassword = "";
 }

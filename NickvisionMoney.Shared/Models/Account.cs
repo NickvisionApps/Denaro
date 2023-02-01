@@ -214,14 +214,33 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="password">The password to set</param>
     /// <returns>True if successful, else false</returns>
-    public bool SetPassword(string? password)
+    public bool SetPassword(string password)
     {
         //Remove password if empty (decrypts)
         if (string.IsNullOrEmpty(password))
         {
+            //Create Temp Decrypted Database
+            var tempPath = $"{Path}.decrypt";
             using var command = _database.CreateCommand();
-            command.CommandText = "PRAGMA rekey = NULL";
+            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
             command.ExecuteNonQuery();
+            command.CommandText = $"SELECT sqlcipher_export('plaintext')";
+            command.ExecuteNonQuery();
+            command.CommandText = $"DETACH DATABASE plaintext";
+            command.ExecuteNonQuery();
+            //Remove Old Encrypted Database
+            _database.Close();
+            _database.Dispose();
+            SqliteConnection.ClearPool(_database);
+            File.Delete(Path);
+            File.Move(tempPath, Path, true);
+            //Open New Decrypted Database
+            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate
+            }.ConnectionString);
+            _database.Open();
         }
         //Change password
         if(IsEncrypted)
@@ -240,7 +259,7 @@ public class Account : IDisposable
             command.ExecuteNonQuery();
             command.CommandText = $"SELECT sqlcipher_export('encrypted')";
             command.ExecuteNonQuery();
-            command.CommandText = $"DETACH encrypted";
+            command.CommandText = $"DETACH DATABASE encrypted";
             command.ExecuteNonQuery();
             //Remove Old Unencrypted Database
             _database.Close();
