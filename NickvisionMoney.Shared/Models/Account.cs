@@ -202,6 +202,8 @@ public class Account : IDisposable
             _database.Dispose();
             SqliteConnection.ClearPool(_database);
             _database = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             _loggedIn = false;
             return _loggedIn;
         }
@@ -246,7 +248,7 @@ public class Account : IDisposable
         if(IsEncrypted)
         {
             using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey = {password}";
+            command.CommandText = $"PRAGMA rekey = '{password}'";
             command.ExecuteNonQuery();
         }
         //Sets new password (encrypts for first time)
