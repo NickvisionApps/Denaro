@@ -54,6 +54,8 @@
                             <labs:SettingsCard.HeaderIcon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72E;"/>
                             </labs:SettingsCard.HeaderIcon>
+
+                            <InfoBadge x:Name="InfoBadgePassword" Visibility="Collapsed"/>
                         </labs:SettingsCard>
 
                         <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>

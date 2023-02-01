@@ -113,6 +113,15 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
+            if(_controller.NewPassword != null)
+            {
+                InfoBadgePassword.Visibility = Visibility.Visible;
+                InfoBadgePassword.Style = (Style)App.Current.Resources["SuccessDotInfoBadgeStyle"];
+            }
+            else
+            {
+                InfoBadgePassword.Visibility = Visibility.Collapsed;
+            }
             TxtErrors.Visibility = Visibility.Collapsed;
             TxtPasswordErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
@@ -133,6 +142,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))
             {
+                InfoBadgePassword.Visibility = Visibility.Visible;
+                InfoBadgePassword.Style = (Style)App.Current.Resources["CriticalDotInfoBadgeStyle"];
                 TxtPasswordErrors.Visibility = Visibility.Visible;
             }
             TxtErrors.Visibility = Visibility.Visible;
@@ -298,11 +309,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="e">RoutedEventArgs</param>
     private void BtnPasswordBack_Click(object sender, RoutedEventArgs e)
     {
-        TxtPasswordNew.Password = "";
-        TxtPasswordConfirm.Password = "";
         Title = _controller.Localizer["AccountSettings"];
         ViewStack.ChangePage("Main");
-        Validate();
     }
 
     /// <summary>
@@ -313,7 +321,11 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     private void BtnPasswordRemove_Click(object sender, RoutedEventArgs e)
     {
         _controller.SetRemovePassword();
-        BtnPasswordRemove.IsEnabled = false;
+        InfoBadgePassword.Visibility = Visibility.Visible;
+        InfoBadgePassword.Style = (Style)App.Current.Resources["SuccessDotInfoBadgeStyle"];
+        Title = _controller.Localizer["AccountSettings"];
+        ViewStack.ChangePage("Main");
+        BtnPasswordRemove.Visibility = Visibility.Collapsed;
     }
 
     /// <summary>
