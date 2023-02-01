@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
@@ -740,7 +741,13 @@ public sealed partial class AccountView : UserControl
             _controller.UpdateMetadata(accountSettingsController.Metadata);
             if(accountSettingsController.NewPassword != null)
             {
-                _controller.SetPassword(accountSettingsController.NewPassword);
+                //Start Loading
+                LoadingCtrl.IsLoading = true;
+                //Work
+                await Task.Delay(50);
+                await Task.Run(async () => await App.MainWindow!.DispatcherQueue.EnqueueAsync(() => _controller.SetPassword(accountSettingsController.NewPassword)));
+                //Done Loading
+                LoadingCtrl.IsLoading = false;
             }
         }
     }
