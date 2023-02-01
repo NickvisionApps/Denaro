@@ -82,9 +82,17 @@ public partial class AccountSettingsDialog
         _boxMain.Append(_grpAccount);
         //Account Name
         _rowName = Adw.EntryRow.New();
-        _rowName.SetShowApplyButton(true);
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-        _rowName.OnApply += OnApplyName;
+        _rowName.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    OnNameChanged();
+                }
+            }
+        };
         _grpAccount.Add(_rowName);
         //Account Type
         _rowAccountType = Adw.ComboRow.New();
@@ -236,7 +244,7 @@ public partial class AccountSettingsDialog
         _dialog.SetExtraChild(_boxMain);
         //Load
         _rowName.SetText(_controller.Metadata.Name);
-        OnApplyName(_rowName, EventArgs.Empty);
+        OnNameChanged();
         _rowAccountType.SetSelected((uint)_controller.Metadata.AccountType);
         OnAccountTypeChanged();
         _btnIncome.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
@@ -317,9 +325,7 @@ public partial class AccountSettingsDialog
     /// <summary>
     /// Occurs when a new name is applied to Adw.EntryRow
     /// </summary>
-    /// <param name="sender">Adw.EntryRow</param>
-    /// <param name="e">EventArgs</param>
-    private void OnApplyName(Adw.EntryRow sender, EventArgs e)
+    private void OnNameChanged()
     {
         if(_rowName.GetText().Length == 0)
         {
