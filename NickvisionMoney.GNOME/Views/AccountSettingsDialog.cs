@@ -19,6 +19,8 @@ public partial class AccountSettingsDialog
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
+    private readonly Gtk.Box _boxHeader;
+    private readonly Gtk.Label _lblTitle;
     private readonly Gtk.Button _btnAvatar;
     private readonly Gtk.CssProvider _btnAvatarCssProvider;
     private readonly Adw.PreferencesGroup _grpAccount;
@@ -52,7 +54,7 @@ public partial class AccountSettingsDialog
         _constructing = true;
         _controller = controller;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
+        _dialog = Adw.MessageDialog.New(parentWindow, "", "");
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
@@ -67,16 +69,28 @@ public partial class AccountSettingsDialog
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 16);
+        //Header Box
+        _boxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
+        _boxMain.Append(_boxHeader);
+        //Title
+        _lblTitle = Gtk.Label.New(_controller.Localizer["AccountSettings"]);
+        _lblTitle.SetHexpand(true);
+        _lblTitle.SetMarginStart(4);
+        _lblTitle.SetHalign(Gtk.Align.Start);
+        _lblTitle.SetValign(Gtk.Align.Center);
+        _lblTitle.AddCssClass("title-1");
+        _boxHeader.Append(_lblTitle);
         //Avatar
         _btnAvatar = Gtk.Button.New();
         _btnAvatar.AddCssClass("circular");
-        _btnAvatar.AddCssClass("title-1");
+        _btnAvatar.AddCssClass("title-2");
         _btnAvatar.SetName("btnAvatar");
-        _btnAvatar.SetHalign(Gtk.Align.Center);
-        _btnAvatar.SetSizeRequest(96, 96);
+        _btnAvatar.SetHalign(Gtk.Align.End);
+        _btnAvatar.SetValign(Gtk.Align.Center);
+        _btnAvatar.SetSizeRequest(72, 72);
         _btnAvatarCssProvider = Gtk.CssProvider.New();
         _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
-        _boxMain.Append(_btnAvatar);
+        _boxHeader.Append(_btnAvatar);
         //Preferences Group
         _grpAccount = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpAccount);
