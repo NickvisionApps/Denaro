@@ -636,11 +636,11 @@
 	</data>
 
 	<data name="ManagePassword" xml:space="preserve">
-		<value>Password</value>
+		<value>Change Password</value>
 	</data>
 
 	<data name="ManagePassword.Description" xml:space="preserve">
-		<value>Add, change, and remove a password from the account.</value>
+		<value>Set a new password or remove one.</value>
 	</data>
 
 	<data name="ManagePassword.Warning" xml:space="preserve">
