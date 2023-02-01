@@ -854,14 +854,25 @@ public partial class AccountView
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         accountSettingsDialog.Show();
-        accountSettingsDialog.OnResponse += (sender, e) =>
+        accountSettingsDialog.OnResponse += async (sender, e) =>
         {
             if (accountSettingsController.Accepted)
             {
                 _controller.UpdateMetadata(accountSettingsController.Metadata);
                 if(accountSettingsController.NewPassword != null)
                 {
-                    _controller.SetPassword(accountSettingsController.NewPassword);
+                    //Start Spinner
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(() => _controller.SetPassword(accountSettingsController.NewPassword));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
                 }
             }
             accountSettingsDialog.Destroy();
