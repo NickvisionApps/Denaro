@@ -859,6 +859,10 @@ public partial class AccountView
             if (accountSettingsController.Accepted)
             {
                 _controller.UpdateMetadata(accountSettingsController.Metadata);
+                if(accountSettingsController.NewPassword != null)
+                {
+                    _controller.SetPassword(accountSettingsController.NewPassword);
+                }
             }
             accountSettingsDialog.Destroy();
         };

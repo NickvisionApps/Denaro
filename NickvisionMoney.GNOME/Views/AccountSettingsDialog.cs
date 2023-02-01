@@ -36,8 +36,11 @@ public partial class AccountSettingsDialog
     private readonly Gtk.Entry _txtCustomCode;
     private readonly Adw.ActionRow _rowCustomCode;
     private readonly Adw.PreferencesGroup _grpPassword;
-    private readonly Gtk.Button _btnPassword;
-    private readonly Adw.ActionRow _rowPassword;
+    private readonly Adw.ExpanderRow _rowPassword;
+    private readonly Adw.PasswordEntryRow _rowNewPassword;
+    private readonly Adw.PasswordEntryRow _rowNewPasswordConfirm;
+    private readonly Adw.ActionRow _rowRemovePassword;
+    private readonly Gtk.Button _btnRemovePassword;
 
     /// <summary>
     /// Constructs an AccountSettingsDialog
@@ -176,17 +179,59 @@ public partial class AccountSettingsDialog
         //Password Row
         _grpPassword = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpPassword);
-        _btnPassword = Gtk.Button.NewFromIconName("go-next-symbolic");
-        _btnPassword.AddCssClass("flat");
-        _btnPassword.SetValign(Gtk.Align.Center);
-        _btnPassword.OnClicked += OnManagePassword;
-        _rowPassword = Adw.ActionRow.New();
+        _rowPassword = Adw.ExpanderRow.New();
         _rowPassword.SetTitle(_controller.Localizer["ManagePassword"]);
         _rowPassword.SetSubtitle(_controller.Localizer["ManagePassword", "Description"]);
         _rowPassword.SetIconName("dialog-password-symbolic");
-        _rowPassword.AddSuffix(_btnPassword);
-        _rowPassword.SetActivatableWidget(_btnPassword);
+        _rowPassword.SetShowEnableSwitch(true);
+        _rowPassword.SetEnableExpansion(false);
+        _rowPassword.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "enable-expansion")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         _grpPassword.Add(_rowPassword);
+        _rowNewPassword = Adw.PasswordEntryRow.New();
+        _rowNewPassword.SetTitle(_controller.Localizer["NewPassword", "Field"]);
+        _rowNewPassword.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _rowPassword.AddRow(_rowNewPassword);
+        _rowNewPasswordConfirm = Adw.PasswordEntryRow.New();
+        _rowNewPasswordConfirm.SetTitle(_controller.Localizer["ConfirmPassword", "Field"]);
+        _rowNewPasswordConfirm.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _rowPassword.AddRow(_rowNewPasswordConfirm);
+        _rowRemovePassword = Adw.ActionRow.New();
+        _rowRemovePassword.SetSubtitle(_controller.Localizer["ManagePassword", "Warning"]);
+        _rowRemovePassword.AddCssClass("warning");
+        _rowPassword.AddRow(_rowRemovePassword);
+        _btnRemovePassword = Gtk.Button.NewWithLabel(_controller.Localizer["Remove"]);
+        _btnRemovePassword.AddCssClass("destructive-action");
+        _btnRemovePassword.SetValign(Gtk.Align.Center);
+        _btnRemovePassword.SetVisible(_controller.IsEncrypted);
+        _btnRemovePassword.OnClicked += OnRemovePassword;
+        _rowRemovePassword.AddSuffix(_btnRemovePassword);
         //Layout
         _dialog.SetExtraChild(_boxMain);
         //Load
@@ -230,7 +275,14 @@ public partial class AccountSettingsDialog
     private void Validate()
     {
         var transactionType = _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense;
-        var checkStatus = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType);
+        var newPassword = "";
+        var newPasswordConfirm = "";
+        if (_rowPassword.GetEnableExpansion())
+        {
+            newPassword = _rowNewPassword.GetText();
+            newPasswordConfirm = _rowNewPasswordConfirm.GetText();
+        }
+        var checkStatus = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType, newPassword, newPasswordConfirm);
         _rowName.RemoveCssClass("error");
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
         _rowCustomSymbol.RemoveCssClass("error");
@@ -369,12 +421,14 @@ public partial class AccountSettingsDialog
     }
 
     /// <summary>
-    /// Occurs when the set password button is clicked
+    /// Occurs when the remove password button is clicked
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void OnManagePassword(Gtk.Button sender, EventArgs e)
+    private void OnRemovePassword(Gtk.Button sender, EventArgs e)
     {
-
+        _controller.SetRemovePassword();
+        _btnRemovePassword.SetVisible(false);
+        _rowPassword.SetEnableExpansion(false);
     }
 }
