@@ -50,6 +50,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtCustomSymbol.PlaceholderText = _controller.Localizer["CustomCurrencySymbol", "Placeholder"];
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         TxtCustomCode.PlaceholderText = _controller.Localizer["CustomCurrencyCode", "Placeholder"];
+        CardPassword.Header = _controller.Localizer["ManagePassword"];
+        CardPassword.Description = _controller.Localizer["ManagePassword", "Description"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
@@ -261,5 +263,15 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         {
             Validate();
         }
+    }
+
+    /// <summary>
+    /// Occurs when the password card is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CardPassword_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

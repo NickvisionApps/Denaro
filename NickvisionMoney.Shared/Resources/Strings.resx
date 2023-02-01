@@ -618,6 +618,14 @@
 	<data name="ReportedCurrency" xml:space="preserve">
 		<value>Your system reported that your currency is</value>
 	</data>
+
+	<data name="ManagePassword" xml:space="preserve">
+		<value>Password</value>
+	</data>
+
+	<data name="ManagePassword.Description" xml:space="preserve">
+		<value>Add, change, and remove a password from the account.</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Id.Field" xml:space="preserve">

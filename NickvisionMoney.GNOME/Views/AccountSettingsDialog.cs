@@ -179,9 +179,11 @@ public partial class AccountSettingsDialog
         _btnPassword = Gtk.Button.NewFromIconName("go-next-symbolic");
         _btnPassword.AddCssClass("flat");
         _btnPassword.SetValign(Gtk.Align.Center);
-        _btnPassword.OnClicked += OnSetPassword;
+        _btnPassword.OnClicked += OnManagePassword;
         _rowPassword = Adw.ActionRow.New();
-        _rowPassword.SetTitle("Set Password");
+        _rowPassword.SetTitle(_controller.Localizer["ManagePassword"]);
+        _rowPassword.SetSubtitle(_controller.Localizer["ManagePassword", "Description"]);
+        _rowPassword.SetIconName("dialog-password-symbolic");
         _rowPassword.AddSuffix(_btnPassword);
         _rowPassword.SetActivatableWidget(_btnPassword);
         _grpPassword.Add(_rowPassword);
@@ -371,7 +373,7 @@ public partial class AccountSettingsDialog
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void OnSetPassword(Gtk.Button sender, EventArgs e)
+    private void OnManagePassword(Gtk.Button sender, EventArgs e)
     {
 
     }

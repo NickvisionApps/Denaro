@@ -46,6 +46,12 @@
                 <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
             </Grid>
 
+            <labs:SettingsCard x:Name="CardPassword" Margin="0,10,0,0" IsClickEnabled="True" Click="CardPassword_Click">
+                <labs:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72E;"/>
+                </labs:SettingsCard.HeaderIcon>
+            </labs:SettingsCard>
+
             <TextBlock Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
         </StackPanel>
     </ScrollViewer>
