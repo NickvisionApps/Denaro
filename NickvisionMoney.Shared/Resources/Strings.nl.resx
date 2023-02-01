@@ -698,4 +698,10 @@ de opeenvolgende losgekoppeld..</value>
   <data name="AccountActions" xml:space="preserve">
     <value>Acties</value>
   </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Kopie maken</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(kopie)</value>
+  </data>
 </root>

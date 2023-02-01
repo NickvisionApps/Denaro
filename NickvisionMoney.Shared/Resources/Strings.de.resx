@@ -699,4 +699,10 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="NewWindow.GTK" xml:space="preserve">
     <value>Neues Fenster</value>
   </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Eine Kopie erstellen</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Kopie)</value>
+  </data>
 </root>
