@@ -245,11 +245,15 @@ public class Account : IDisposable
             }.ConnectionString);
             _database.Open();
         }
+        using var cmdQuote = _database.CreateCommand();
+        cmdQuote.CommandText = "SELECT quote($password)";
+        cmdQuote.Parameters.AddWithValue("$password", password);
+        var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
         //Change password
         if(IsEncrypted)
         {
             using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey = '{password}'";
+            command.CommandText = $"PRAGMA rekey = {quotedPassword}";
             command.ExecuteNonQuery();
             _database.Close();
             _database.ConnectionString = new SqliteConnectionStringBuilder()
@@ -267,7 +271,7 @@ public class Account : IDisposable
             //Create Temp Encrypted Database
             var tempPath = $"{Path}.ecrypt";
             using var command = _database.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY '{password}'";
+            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
             command.ExecuteNonQuery();
             command.CommandText = $"SELECT sqlcipher_export('encrypted')";
             command.ExecuteNonQuery();
