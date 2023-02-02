@@ -12,6 +12,11 @@ then
     cd ..
 fi
 
+echo "Installing Occitan translation... (dotnet bug workaround)"
+mkdir -p "${INSTALL_PREFIX}"/opt/org.nickvision.money/oc
+cp ./NickvisionMoney.GNOME/oc-workaround/NickvisionMoney.Shared.resources.dll \
+    "${INSTALL_PREFIX}"/opt/org.nickvision.money/oc/
+
 echo "Installing icons..."
 mkdir -p "${INSTALL_PREFIX}"/share/icons/hicolor/scalable/apps
 for icon in org.nickvision.money.svg org.nickvision.money-devel.svg
