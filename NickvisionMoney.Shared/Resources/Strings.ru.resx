@@ -690,4 +690,13 @@
   <data name="NewWindow.GTK" xml:space="preserve">
     <value>Новое окно</value>
   </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Создать копию</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Копия)</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
 </root>
