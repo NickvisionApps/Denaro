@@ -122,7 +122,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Cap de compte pas dobèrt</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Creatz o dobrissètz un compte per començar. Podètz tanben far lissar un fichièr dins l’aplicacion a partir de l’explorator de fichirs.</value>
+		<value>Creatz o dobrissètz un compte per començar. Podètz tanben far lissar un fichièr dins l’aplicacion a partir de l’explorator de fichièrs.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
 		<value>Comptes recents</value>
