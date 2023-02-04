@@ -690,12 +690,18 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
     <value>Kode mata uang (kosong)</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-    <value>uang;finansial;dompet;uang tunai;bank;GTK;Nickvision</value>
+    <value>money;finance;wallet;cash;bank;GTK;Nickvision;uang;finansial;dompet;tunai;bank;</value>
   </data>
   <data name="AccountActions" xml:space="preserve">
     <value>Aksi</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
     <value>Jendela Baru</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Buat Salinan</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Salin)</value>
   </data>
 </root>
