@@ -120,6 +120,10 @@
 		<value>Remove</value>
 	</data>
 
+	<data name="Accept" xml:space="preserve">
+		<value>Accept</value>
+	</data>
+
 	<!--Pages-->
 	<data name="Home" xml:space="preserve">
 		<value>Home</value>
@@ -790,6 +794,18 @@
 
 	<data name="ConfirmPassword.Field" xml:space="preserve">
 		<value>Confirm Password</value>
+	</data>
+
+	<data name="DestinationPassword.Field" xml:space="preserve">
+		<value>Destination Account Password</value>
+	</data>
+
+	<data name="DestinationPassword.Required" xml:space="preserve">
+		<value>Destination Account Password (Required)</value>
+	</data>
+
+	<data name="DestinationPassword.Invalid" xml:space="preserve">
+		<value>Destination Account Password (Invalid)</value>
 	</data>
 
 	<!--PDF-->
