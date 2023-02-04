@@ -27,16 +27,22 @@
     </UserControl.ContextFlyout>
 
     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-        <StackPanel Margin="12" Orientation="Horizontal" Spacing="6">
-            <Button x:Name="BtnId" CornerRadius="10" Foreground="White" Click="Edit"/>
+        <Grid Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+            <Button x:Name="BtnId" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0" CornerRadius="10" Foreground="White" Click="Edit"/>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,20,0" Orientation="Vertical">
                 <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
 
-                <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray"/>
             </StackPanel>
 
-            <StackPanel VerticalAlignment="Center" Margin="40,0,0,0" Orientation="Horizontal" Spacing="0">
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Spacing="0">
                 <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
 
                 <Button x:Name="BtnEdit" VerticalAlignment="Center" Margin="6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
@@ -51,6 +57,6 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

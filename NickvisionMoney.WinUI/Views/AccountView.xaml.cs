@@ -3,6 +3,7 @@ using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Controls;
@@ -12,7 +13,9 @@ using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.UI;
@@ -22,12 +25,15 @@ namespace NickvisionMoney.WinUI.Views;
 /// <summary>
 /// The AccountView for the application
 /// </summary>
-public sealed partial class AccountView : UserControl
+public sealed partial class AccountView : UserControl, INotifyPropertyChanged
 {
     private readonly AccountViewController _controller;
     private readonly Action<string, string> _updateNavViewItemTitle;
     private readonly Action<object> _initializeWithWindow;
     private bool _isOpened;
+    private double _transactionRowWidth;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Constructs an AccountView
@@ -42,6 +48,7 @@ public sealed partial class AccountView : UserControl
         _updateNavViewItemTitle = updateNavViewItemTitle;
         _initializeWithWindow = initializeWithWindow;
         _isOpened = false;
+        _transactionRowWidth = -1;
         //Localize Strings
         LblBtnNew.Text = _controller.Localizer["New"];
         MenuNewTransaction.Text = _controller.Localizer["Transaction"];
@@ -80,6 +87,20 @@ public sealed partial class AccountView : UserControl
         _controller.UICreateTransactionRow = CreateTransactionRow;
         _controller.UIMoveTransactionRow = MoveTransactionRow;
         _controller.UIDeleteTransactionRow = DeleteTransactionRow;
+    }
+
+    /// <summary>
+    /// The width for transaction rows
+    /// </summary>
+    public double TransactionRowWidth
+    {
+        get => _transactionRowWidth;
+
+        set
+        {
+            _transactionRowWidth = value;
+            NotifyPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -128,13 +149,26 @@ public sealed partial class AccountView : UserControl
             ListTransactions.Items.Insert(index.Value, row);
             ListTransactions.UpdateLayout();
             row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(index.Value);
+            row.UpdateLayout();
         }
         else
         {
             ListTransactions.Items.Add(row);
             ListTransactions.UpdateLayout();
             row.Container = (GridViewItem)ListTransactions.ContainerFromIndex(ListTransactions.Items.Count - 1);
+            row.UpdateLayout();
         }
+        if (row.ActualWidth > TransactionRowWidth)
+        {
+            TransactionRowWidth = row.ActualWidth;
+        }
+        row.SetBinding(WidthProperty, new Binding()
+        {
+            Source = this,
+            Path = new PropertyPath("TransactionRowWidth"),
+            Mode = BindingMode.OneWay,
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+        });
         return row;
     }
 
@@ -860,4 +894,6 @@ public sealed partial class AccountView : UserControl
         BtnSortBottomTop.IsChecked = true;
         _controller.SortFirstToLast = false;
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
