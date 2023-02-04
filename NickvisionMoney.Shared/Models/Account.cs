@@ -100,17 +100,29 @@ public class Account : IDisposable
         {
             if(_isEncrypted == null)
             {
-                if(_database != null)
+                var tempConnectionString = new SqliteConnectionStringBuilder()
                 {
-                    _database.Close();
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadOnly,
+                    Pooling = false
+                };
+                using var tempDatabase = new SqliteConnection(tempConnectionString.ConnectionString);
+                tempDatabase.Open();
+                try
+                {
+                    using var tempCmd = tempDatabase.CreateCommand();
+                    tempCmd.CommandText = "PRAGMA schema_version";
+                    tempCmd.ExecuteScalar();
+                    _isEncrypted = false;
                 }
-                var header = "SQLite format 3";
-                var bytes = new byte[header.Length];
-                using var reader = new BinaryReader(new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read));
-                reader.Read(bytes, 0, header.Length);
-                reader.Close();
-                _isEncrypted = header != Encoding.Default.GetString(bytes);
-                _database?.Open();
+                catch
+                {
+                    _isEncrypted = true;
+                }
+                finally
+                {
+                    tempDatabase.Close();
+                }
             }
             return _isEncrypted.Value;
         }
