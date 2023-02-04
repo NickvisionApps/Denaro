@@ -174,8 +174,9 @@ public class MainWindowController : IDisposable
     /// </summary>
     /// <param name="path">The path of the account</param>
     /// <param name="showOpenedNotification">Whether or not to show a notification if an account is opened</param>
+    /// <param name="password">A password for an account (if available)</param>
     /// <returns>True if account added, else false (account already added)</returns>
-    public async Task<bool> AddAccountAsync(string path, bool showOpenedNotification = true)
+    public async Task<bool> AddAccountAsync(string path, bool showOpenedNotification = true, string? password = null)
     {
         if(Path.GetExtension(path) != ".nmoney")
         {
@@ -183,10 +184,9 @@ public class MainWindowController : IDisposable
         }
         if(!OpenAccounts.Any(x => x.AccountPath == path))
         {
-            string? password = null;
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
-            if (controller.AccountNeedsPassword)
+            if (controller.AccountNeedsPassword && string.IsNullOrEmpty(password))
             {
                 password = await AccountLoginAsync!(controller.AccountPath);
             }
@@ -229,7 +229,7 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        var added = await AddAccountAsync(transfer.DestinationAccountPath, false);
+        var added = await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
         await controller.ReceiveTransferAsync(transfer, !(added && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)));
     }

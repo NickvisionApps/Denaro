@@ -116,7 +116,8 @@ public class AccountMetadata : ICloneable
         var connectionString = new SqliteConnectionStringBuilder()
         {
             DataSource = path,
-            Mode = SqliteOpenMode.ReadOnly
+            Mode = SqliteOpenMode.ReadOnly,
+            Pooling = false
         };
         if(!string.IsNullOrEmpty(password))
         {
@@ -130,7 +131,6 @@ public class AccountMetadata : ICloneable
         catch
         {
             database.Close();
-            SqliteConnection.ClearPool(database);
             return null;
         }
         // Get Metadata

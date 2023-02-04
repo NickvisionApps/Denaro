@@ -16,8 +16,10 @@ public enum TransferCheckStatus
 {
     Valid = 1,
     InvalidDestPath = 2,
-    InvalidAmount = 4,
-    InvalidConversionRate = 8
+    DestAccountRequiresPassword = 4,
+    DestAccountPasswordInvalid = 8,
+    InvalidAmount = 16,
+    InvalidConversionRate = 32
 }
 
 /// <summary>
@@ -106,56 +108,73 @@ public class TransferDialogController
     /// Updates the Transfer object
     /// </summary>
     /// <param name="destPath">The new path of the destination account</param>
+    /// <param name="destPassword">The password for the destination account (if needed)</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="sourceConversionAmountString">The source currency conversion amount</param>
     /// <param name="destConversionAmountString">The destination currency conversion amount</param>
     /// <returns>TransferCheckStatus</returns>
-    public TransferCheckStatus UpdateTransfer(string destPath, string amountString, string sourceConversionAmountString, string destConversionAmountString)
+    public TransferCheckStatus UpdateTransfer(string destPath, string? destPassword, string amountString, string sourceConversionAmountString, string destConversionAmountString)
     {
         TransferCheckStatus result = 0;
         var amount = 0m;
         var conversionRate = 0m;
+        AccountMetadata? destMetadata = null;
         if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath) != ".nmoney" || Transfer.SourceAccountPath == destPath)
         {
             result |= TransferCheckStatus.InvalidDestPath;
         }
         else
         {
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            if(new Account(destPath).IsEncrypted && string.IsNullOrEmpty(destPassword))
             {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            var destMetadata = AccountMetadata.LoadFromAccountFile(destPath, "")!;
-            if (destMetadata.UseCustomCurrency)
-            {
-                CultureForDestNumberString.NumberFormat.CurrencySymbol = destMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
-                CultureForDestNumberString.NumberFormat.NaNSymbol = destMetadata.CustomCurrencyCode ?? destRegion.ISOCurrencySymbol;
+                result |= TransferCheckStatus.DestAccountRequiresPassword;
             }
             else
             {
-                CultureForDestNumberString.NumberFormat.NaNSymbol = destRegion.ISOCurrencySymbol;
-            }
-            if (SourceCurrencyCode != DestinationCurrencyCode)
-            {
-                try
+                var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+                if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
                 {
-                    conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                    lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
                 }
-                catch
+                if (lcMonetary != null && lcMonetary.Contains('_'))
                 {
-                    result |= TransferCheckStatus.InvalidConversionRate;
+                    lcMonetary = lcMonetary.Replace('_', '-');
                 }
-            }
-            else
-            {
-                conversionRate = 1.0m;
+                CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+                var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+                destMetadata = AccountMetadata.LoadFromAccountFile(destPath, destPassword)!;
+                if(destMetadata == null)
+                {
+                    result |= TransferCheckStatus.DestAccountPasswordInvalid;
+                }
+                else
+                {
+                    Transfer.DestinationAccountPassword = destPassword;
+                    if (destMetadata.UseCustomCurrency)
+                    {
+                        CultureForDestNumberString.NumberFormat.CurrencySymbol = destMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
+                        CultureForDestNumberString.NumberFormat.NaNSymbol = destMetadata.CustomCurrencyCode ?? destRegion.ISOCurrencySymbol;
+                    }
+                    else
+                    {
+                        CultureForDestNumberString.NumberFormat.NaNSymbol = destRegion.ISOCurrencySymbol;
+                    }
+                    if (SourceCurrencyCode != DestinationCurrencyCode)
+                    {
+                        try
+                        {
+                            conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                        }
+                        catch
+                        {
+                            result |= TransferCheckStatus.InvalidConversionRate;
+                        }
+                    }
+                    else
+                    {
+                        conversionRate = 1.0m;
+                    }
+                }
             }
         }
         try
@@ -175,7 +194,7 @@ public class TransferDialogController
             return result;
         }
         Transfer.DestinationAccountPath = destPath;
-        Transfer.DestinationAccountName = AccountMetadata.LoadFromAccountFile(destPath, null)!.Name;
+        Transfer.DestinationAccountName = destMetadata!.Name;
         Transfer.SourceAmount = amount;
         Transfer.ConversionRate = conversionRate;
         return TransferCheckStatus.Valid;
