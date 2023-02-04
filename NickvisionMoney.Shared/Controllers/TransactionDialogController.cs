@@ -71,13 +71,17 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a date string
     /// </summary>
     public CultureInfo CultureForDateString { get; init; }
+    /// <summary>
+    /// Decimal Separator Inserting
+    /// <summary>
+    public InsertSeparator InsertSeparator => NickvisionMoney.Shared.Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
 
     /// <summary>
     /// The repeat interval index used by GUI
     /// </summary>
     public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
     {
-        0 => (uint) Transaction.RepeatInterval,
+        0 => (uint)Transaction.RepeatInterval,
         1 => (uint)Transaction.RepeatInterval,
         2 => (uint)Transaction.RepeatInterval,
         7 => 3,

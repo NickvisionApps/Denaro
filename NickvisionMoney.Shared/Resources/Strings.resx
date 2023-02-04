@@ -895,6 +895,30 @@
 		<value>Business Account Color</value>
 	</data>
 
+	<data name="Locale" xml:space="preserve">
+		<value>Locale</value>
+	</data>
+
+	<data name="InsertSeparator" xml:space="preserve">
+		<value>Insert Decimal Separator</value>
+	</data>
+
+	<data name="InsertSeparator.Description" xml:space="preserve">
+		<value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
+	</data>
+
+	<data name="InsertSeparator.Off" xml:space="preserve">
+		<value>Off</value>
+	</data>
+
+	<data name="InsertSeparator.Numpad" xml:space="preserve">
+		<value>Numpad period only</value>
+	</data>
+
+	<data name="InsertSeparator.PeriodComma" xml:space="preserve">
+		<value>Period and Comma</value>
+	</data>
+
 	<!--Shortcuts Dialog-->
 	<data name="Application.Shortcut" xml:space="preserve">
 		<value>Application</value>

@@ -1,4 +1,5 @@
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -308,11 +309,14 @@ public partial class TransferDialog
     /// </summary>
     private bool OnKeyPressed(nint sender, uint keyval, uint keycode, nint state, nint data)
     {
-        if (keyval == 65454 || keyval == 65452 || keyval == 2749)
+         if (_controller.InsertSeparator != InsertSeparator.Off)
         {
-            _rowAmount.SetText(_rowAmount.GetText() + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-            _rowAmount.SetPosition(_rowAmount.GetText().Length);
-            return true;
+            if (keyval == 65454 || keyval == 65452 || keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (keyval == 44 || keyval == 46)))
+            {
+                _rowAmount.SetText(_rowAmount.GetText() + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                _rowAmount.SetPosition(_rowAmount.GetText().Length);
+                return true;
+            }
         }
         return false;
     }

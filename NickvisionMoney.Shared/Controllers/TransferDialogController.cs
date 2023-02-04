@@ -63,6 +63,10 @@ public class TransferDialogController
     /// The currency code of the destination account, if available
     /// </summary>
     public string? DestinationCurrencyCode => CultureForDestNumberString == null ? null : CultureForDestNumberString.NumberFormat.NaNSymbol;
+    /// <summary>
+    /// Decimal Separator Inserting
+    /// <summary>
+    public InsertSeparator InsertSeparator => Configuration.Current.InsertSeparator;
 
     /// <summary>
     /// Constructs a TransferDialogController
