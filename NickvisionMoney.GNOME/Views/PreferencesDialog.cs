@@ -49,7 +49,7 @@ public partial class PreferencesDialog : Adw.Window
     private readonly Gtk.ColorButton _btnAccountSavingsColor;
     private readonly Adw.ActionRow _rowAccountBusinessColor;
     private readonly Gtk.ColorButton _btnAccountBusinessColor;
-    private readonly Adw.PreferencesGroup _grpMisc;
+    private readonly Adw.PreferencesGroup _grpLocale;
     private readonly Adw.ComboRow _rowInsertSeparator;
 
     /// <summary>
@@ -64,7 +64,7 @@ public partial class PreferencesDialog : Adw.Window
         _controller = controller;
         _application = application;
         SetTransientFor(parent);
-        SetDefaultSize(600, 570);
+        SetDefaultSize(600, 610);
         SetModal(true);
         SetDestroyWithParent(false);
         SetHideOnClose(true);
@@ -142,9 +142,9 @@ public partial class PreferencesDialog : Adw.Window
         _rowAccountBusinessColor.SetActivatableWidget(_btnAccountBusinessColor);
         _grpUserInterface.Add(_rowAccountBusinessColor);
         // Misc Group
-        _grpMisc = Adw.PreferencesGroup.New();
-        _grpMisc.SetTitle(_controller.Localizer["Misc"]);
-        _page.Add(_grpMisc);
+        _grpLocale = Adw.PreferencesGroup.New();
+        _grpLocale.SetTitle(_controller.Localizer["Locale"]);
+        _page.Add(_grpLocale);
         // Period Replacement Row
         _rowInsertSeparator = Adw.ComboRow.New();
         _rowInsertSeparator.SetModel(Gtk.StringList.New(new string [] { _controller.Localizer["InsertSeparator.Off"], _controller.Localizer["InsertSeparator.Numpad"], _controller.Localizer["InsertSeparator.PeriodComma"] }));
@@ -158,7 +158,7 @@ public partial class PreferencesDialog : Adw.Window
                 _controller.InsertSeparator = (InsertSeparator)_rowInsertSeparator.GetSelected();
             }
         };
-        _grpMisc.Add(_rowInsertSeparator);
+        _grpLocale.Add(_rowInsertSeparator);
         //Layout
         SetContent(_mainBox);
         OnHide += Hide;
