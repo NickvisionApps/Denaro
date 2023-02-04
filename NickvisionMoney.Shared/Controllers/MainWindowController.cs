@@ -138,6 +138,10 @@ public class MainWindowController : IDisposable
         if (disposing)
         {
             Localizer.Dispose();
+            foreach(var controller in OpenAccounts)
+            {
+                controller.Dispose();
+            }
         }
         _disposed = true;
     }
@@ -182,13 +186,13 @@ public class MainWindowController : IDisposable
             string? password = null;
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
-            if(controller.AccountNeedsPassword)
+            if (controller.AccountNeedsPassword)
             {
                 password = await AccountLoginAsync!(controller.AccountPath);
             }
             if (!controller.Login(password))
             {
-                controller = null;
+                controller.Dispose();
                 if(password != null)
                 {
                     NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
@@ -213,7 +217,11 @@ public class MainWindowController : IDisposable
     /// Closes the account with the provided index
     /// </summary>
     /// <param name="index">int</param>
-    public void CloseAccount(int index) => OpenAccounts.RemoveAt(index);
+    public void CloseAccount(int index)
+    {
+        OpenAccounts[index].Dispose();
+        OpenAccounts.RemoveAt(index);
+    }
 
     /// <summary>
     /// Occurs when a transfer is sent from an account

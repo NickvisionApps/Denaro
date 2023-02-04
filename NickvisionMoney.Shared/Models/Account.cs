@@ -14,7 +14,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
@@ -27,6 +26,7 @@ public class Account : IDisposable
     private bool _loggedIn;
     private bool _disposed;
     private SqliteConnection? _database;
+    private bool? _isEncrypted;
 
     /// <summary>
     /// The path of the account
@@ -79,6 +79,7 @@ public class Account : IDisposable
     {
         _loggedIn = false;
         _disposed = false;
+        _isEncrypted = null;
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
@@ -91,43 +92,27 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Gets whether or not an account is encrypted (requiring a password)
-    /// </summary>
-    /// <param name="path">The path of the account</param>
-    /// <returns>True if encrypted, else false</returns>
-    public static bool GetIsEncrypted(string path)
-    {
-        if (!File.Exists(path))
-        {
-            return false;
-        }
-        var header = "SQLite format 3";
-        var bytes = new byte[header.Length];
-        using var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-        reader.Read(bytes, 0, header.Length);
-        reader.Close();
-        if (header == Encoding.Default.GetString(bytes))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /// <summary>
     /// Whether or not the account is encrypted (requiring a password)
     /// </summary>
     public bool IsEncrypted
     {
         get
         {
-            if(_database != null)
+            if(_isEncrypted == null)
             {
-                _database.Close();
-                SqliteConnection.ClearPool(_database);
+                if(_database != null)
+                {
+                    _database.Close();
+                }
+                var header = "SQLite format 3";
+                var bytes = new byte[header.Length];
+                using var reader = new BinaryReader(new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read));
+                reader.Read(bytes, 0, header.Length);
+                reader.Close();
+                _isEncrypted = header != Encoding.Default.GetString(bytes);
+                _database?.Open();
             }
-            var isEncrypted = GetIsEncrypted(Path);
-            _database?.Open();
-            return isEncrypted;
+            return _isEncrypted.Value;
         }
     }
 
@@ -160,7 +145,7 @@ public class Account : IDisposable
                 FreeMemory();
                 _database.Close();
                 _database.Dispose();
-                SqliteConnection.ClearPool(_database);
+                _database = null;
             }
         }
         _disposed = true;
@@ -173,42 +158,41 @@ public class Account : IDisposable
     /// <returns>True if logged in, else false</returns>
     public bool Login(string? password)
     {
-        if(_loggedIn)
+        if(!_loggedIn)
         {
-            return true;
-        }
-        var connectionStringBuilder = new SqliteConnectionStringBuilder()
-        {
-            DataSource = Path,
-            Mode = SqliteOpenMode.ReadWriteCreate
-        };
-        if (IsEncrypted)
-        {
-            if (string.IsNullOrEmpty(password))
+            var connectionStringBuilder = new SqliteConnectionStringBuilder()
             {
-                _loggedIn = false;
-                return _loggedIn;
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false
+            };
+            //Set Password
+            if (IsEncrypted)
+            {
+                if (string.IsNullOrEmpty(password))
+                {
+                    _loggedIn = false;
+                    return false;
+                }
+                else
+                {
+                    connectionStringBuilder.Password = password;
+                }
             }
-            connectionStringBuilder.Password = password;
+            _database = new SqliteConnection(connectionStringBuilder.ConnectionString);
+            try
+            {
+                _database.Open();
+                _loggedIn = true;
+            }
+            catch
+            {
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                _loggedIn = false;
+            }
         }
-        //Open Database
-        _database = new SqliteConnection(connectionStringBuilder.ConnectionString);
-        try
-        {
-            _database.Open();
-        }
-        catch
-        {
-            _database.Close();
-            _database.Dispose();
-            SqliteConnection.ClearPool(_database);
-            _database = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            _loggedIn = false;
-            return _loggedIn;
-        }
-        _loggedIn = true;
         return _loggedIn;
     }
 
@@ -234,16 +218,18 @@ public class Account : IDisposable
             //Remove Old Encrypted Database
             _database.Close();
             _database.Dispose();
-            SqliteConnection.ClearPool(_database);
+            _database = null;
             File.Delete(Path);
             File.Move(tempPath, Path, true);
             //Open New Decrypted Database
             _database = new SqliteConnection(new SqliteConnectionStringBuilder()
             {
                 DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false
             }.ConnectionString);
             _database.Open();
+            _isEncrypted = false;
         }
         using var cmdQuote = _database.CreateCommand();
         cmdQuote.CommandText = "SELECT quote($password)";
@@ -260,10 +246,11 @@ public class Account : IDisposable
             {
                 DataSource = Path,
                 Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false,
                 Password = password
             }.ConnectionString;
             _database.Open();
-            Thread.Sleep(100);
+            _isEncrypted = true;
         }
         //Sets new password (encrypts for first time)
         else
@@ -280,7 +267,7 @@ public class Account : IDisposable
             //Remove Old Unencrypted Database
             _database.Close();
             _database.Dispose();
-            SqliteConnection.ClearPool(_database);
+            _database = null;
             File.Delete(Path);
             File.Move(tempPath, Path, true);
             //Open New Encrypted Database
@@ -288,9 +275,11 @@ public class Account : IDisposable
             {
                 DataSource = Path,
                 Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false,
                 Password = password
             }.ConnectionString);
             _database.Open();
+            _isEncrypted = true;
         }
         return true;
     }

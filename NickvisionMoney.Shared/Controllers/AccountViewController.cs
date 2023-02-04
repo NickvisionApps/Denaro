@@ -13,9 +13,10 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// A controller for an AccountView
 /// </summary>
-public class AccountViewController
+public class AccountViewController : IDisposable
 {
     private bool _isOpened;
+    private bool _disposed;
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
@@ -67,7 +68,6 @@ public class AccountViewController
     /// The path of the account
     /// </summary>
     public string AccountPath => _account.Path;
-    /// <summary>
     /// Whether or not the account needs a password
     /// </summary>
     public bool AccountNeedsPassword => _account.IsEncrypted;
@@ -143,6 +143,7 @@ public class AccountViewController
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _isOpened = false;
+        _disposed = false;
         _account = new Account(path);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
@@ -159,11 +160,6 @@ public class AccountViewController
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
         _searchDescription = "";
     }
-
-    /// <summary>
-    /// Finalizes an AccountViewController
-    /// </summary>
-    ~AccountViewController() => _account.Dispose();
 
     /// <summary>
     /// The CultureInfo to use when displaying a number string
@@ -353,6 +349,31 @@ public class AccountViewController
             _filterEndDate = value;
             FilterUIUpdate();
         }
+    }
+
+    /// <summary>
+    /// Frees resources used by the AccountViewController object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the AccountViewController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            _account.Dispose();
+        }
+        _disposed = true;
     }
 
     /// <summary>
