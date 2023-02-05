@@ -16,6 +16,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
@@ -58,6 +59,7 @@ public sealed partial class MainWindow : Window
         //Register Events
         _appWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
+        _controller.AccountLoginAsync += AccountLoginAsync;
         _controller.AccountAdded += AccountAdded;
         _controller.RecentAccountsChanged += RecentAccountsChanged;
         //Set TitleBar
@@ -206,7 +208,7 @@ public sealed partial class MainWindow : Window
                     {
                         if(Path.GetExtension(file.Path) == ".nmoney")
                         {
-                            _controller.AddAccount(file.Path);
+                            await _controller.AddAccountAsync(file.Path);
                         }
                     }
                 }
@@ -275,6 +277,19 @@ public sealed partial class MainWindow : Window
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         InfoBar.IsOpen = true;
+    }
+
+    /// <summary>
+    /// Occurs when an account needs a login
+    /// </summary>
+    /// <param name="title">The title of the account</param>
+    public async Task<string?> AccountLoginAsync(string title)
+    {
+        var passwordDialog = new PasswordDialog(title, _controller.Localizer)
+        {
+            XamlRoot = Content.XamlRoot
+        };
+        return await passwordDialog.ShowAsync();
     }
 
     /// <summary>
@@ -373,7 +388,7 @@ public sealed partial class MainWindow : Window
                 {
                     File.Delete(file.Path);
                 }
-                _controller.AddAccount(file.Path);
+                await _controller.AddAccountAsync(file.Path);
             }
         }
     }
@@ -392,7 +407,7 @@ public sealed partial class MainWindow : Window
         var file = await fileOpenPicker.PickSingleFileAsync();
         if (file != null)
         {
-            _controller.AddAccount(file.Path);
+            await _controller.AddAccountAsync(file.Path);
         }
     }
 
@@ -401,12 +416,13 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">SelectionChangedEventArgs</param>
-    private void ListRecentAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void ListRecentAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if(ListRecentAccounts.SelectedIndex != -1)
         {
-            _controller.AddAccount(_controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path);
+            var selectedIndex = ListRecentAccounts.SelectedIndex;
             ListRecentAccounts.SelectedIndex = -1;
+            await _controller.AddAccountAsync(_controller.RecentAccounts[selectedIndex].Path);
         }
     }
 }

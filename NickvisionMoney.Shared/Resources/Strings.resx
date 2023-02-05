@@ -112,6 +112,18 @@
 		<value>Save</value>
 	</data>
 
+	<data name="Back" xml:space="preserve">
+		<value>Back</value>
+	</data>
+
+	<data name="Remove" xml:space="preserve">
+		<value>Remove</value>
+	</data>
+
+	<data name="Apply" xml:space="preserve">
+		<value>Apply</value>
+	</data>
+
 	<!--Pages-->
 	<data name="Home" xml:space="preserve">
 		<value>Home</value>
@@ -209,6 +221,10 @@
 
 	<data name="AccountOpenedAlready" xml:space="preserve">
 		<value>This account is already opened.</value>
+	</data>
+
+	<data name="InvalidPassword" xml:space="preserve">
+		<value>Unable to login to account. Provided password is invalid.</value>
 	</data>
 
 	<!--AccountView-->
@@ -444,6 +460,14 @@
 		<value>Search by description</value>
 	</data>
 
+	<data name="PasswordRemoved" xml:space="preserve">
+		<value>The password of the account was removed.</value>
+	</data>
+
+	<data name="PasswordUpdated" xml:space="preserve">
+		<value>The password of the account was changed.</value>
+	</data>
+
 	<!--AccountViewController-->
 	<data name="Ungrouped" xml:space="preserve">
 		<value>Ungrouped</value>
@@ -614,6 +638,18 @@
 	<data name="ReportedCurrency" xml:space="preserve">
 		<value>Your system reported that your currency is</value>
 	</data>
+
+	<data name="ManagePassword" xml:space="preserve">
+		<value>Change Password</value>
+	</data>
+
+	<data name="ManagePassword.Description" xml:space="preserve">
+		<value>Set a new password or remove one.</value>
+	</data>
+
+	<data name="ManagePassword.Warning" xml:space="preserve">
+		<value>If the password is lost, there is no way to restore your account!</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Id.Field" xml:space="preserve">
@@ -744,6 +780,34 @@
 		<value>Enter code here</value>
 	</data>
 
+	<data name="Password.Field" xml:space="preserve">
+		<value>Password</value>
+	</data>
+
+	<data name="Password.Placeholder" xml:space="preserve">
+		<value>Enter password here</value>
+	</data>
+
+	<data name="NewPassword.Field" xml:space="preserve">
+		<value>New Password</value>
+	</data>
+
+	<data name="ConfirmPassword.Field" xml:space="preserve">
+		<value>Confirm Password</value>
+	</data>
+
+	<data name="DestinationPassword.Field" xml:space="preserve">
+		<value>Destination Account Password</value>
+	</data>
+
+	<data name="DestinationPassword.Required" xml:space="preserve">
+		<value>Destination Account Password (Required)</value>
+	</data>
+
+	<data name="DestinationPassword.Invalid" xml:space="preserve">
+		<value>Destination Account Password (Invalid)</value>
+	</data>
+
 	<!--PDF-->
 	<data name="Generated.PDF" xml:space="preserve">
 		<value>Generated: {0}</value>
@@ -763,6 +827,11 @@
 
 	<data name="PageNumber.PDF" xml:space="preserve">
 		<value>Page {0}</value>
+	</data>
+	
+	<!--PasswordDialog-->
+	<data name="EnterPassword" xml:space="preserve">
+		<value>Enter Password To Login:</value>
 	</data>
 	
 	<!--Settings-->
@@ -860,6 +929,10 @@
 		<value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
 	</data>
 
+	<data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+		<value>The passwords do not match.</value>
+	</data>
+
 	<!--GTK Specific-->
 	<data name="Summary.GTK" xml:space="preserve">
 		<value>Manage your personal finances</value>
@@ -895,5 +968,9 @@
 
 	<data name="NewWindow.GTK" xml:space="preserve">
 		<value>New Window</value>
+	</data>
+
+	<data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+		<value>The password will be removed upon closing this dialog.</value>
 	</data>
 </root>

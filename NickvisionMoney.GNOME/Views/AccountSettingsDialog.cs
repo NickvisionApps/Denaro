@@ -19,6 +19,8 @@ public partial class AccountSettingsDialog
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
+    private readonly Gtk.Box _boxHeader;
+    private readonly Gtk.Label _lblTitle;
     private readonly Gtk.Button _btnAvatar;
     private readonly Gtk.CssProvider _btnAvatarCssProvider;
     private readonly Adw.PreferencesGroup _grpAccount;
@@ -35,6 +37,12 @@ public partial class AccountSettingsDialog
     private readonly Adw.ActionRow _rowCustomSymbol;
     private readonly Gtk.Entry _txtCustomCode;
     private readonly Adw.ActionRow _rowCustomCode;
+    private readonly Adw.PreferencesGroup _grpPassword;
+    private readonly Adw.ExpanderRow _rowPassword;
+    private readonly Adw.PasswordEntryRow _rowNewPassword;
+    private readonly Adw.PasswordEntryRow _rowNewPasswordConfirm;
+    private readonly Adw.ActionRow _rowRemovePassword;
+    private readonly Gtk.Button _btnRemovePassword;
 
     /// <summary>
     /// Constructs an AccountSettingsDialog
@@ -46,7 +54,7 @@ public partial class AccountSettingsDialog
         _constructing = true;
         _controller = controller;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
+        _dialog = Adw.MessageDialog.New(parentWindow, "", "");
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
@@ -61,24 +69,44 @@ public partial class AccountSettingsDialog
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 16);
+        //Header Box
+        _boxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
+        _boxMain.Append(_boxHeader);
+        //Title
+        _lblTitle = Gtk.Label.New(_controller.Localizer["AccountSettings"]);
+        _lblTitle.SetHexpand(true);
+        _lblTitle.SetMarginStart(4);
+        _lblTitle.SetHalign(Gtk.Align.Start);
+        _lblTitle.SetValign(Gtk.Align.Center);
+        _lblTitle.AddCssClass("title-1");
+        _boxHeader.Append(_lblTitle);
         //Avatar
         _btnAvatar = Gtk.Button.New();
         _btnAvatar.AddCssClass("circular");
-        _btnAvatar.AddCssClass("title-1");
+        _btnAvatar.AddCssClass("title-2");
         _btnAvatar.SetName("btnAvatar");
-        _btnAvatar.SetHalign(Gtk.Align.Center);
-        _btnAvatar.SetSizeRequest(96, 96);
+        _btnAvatar.SetHalign(Gtk.Align.End);
+        _btnAvatar.SetValign(Gtk.Align.Center);
+        _btnAvatar.SetSizeRequest(72, 72);
         _btnAvatarCssProvider = Gtk.CssProvider.New();
         _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
-        _boxMain.Append(_btnAvatar);
+        _boxHeader.Append(_btnAvatar);
         //Preferences Group
         _grpAccount = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpAccount);
         //Account Name
         _rowName = Adw.EntryRow.New();
-        _rowName.SetShowApplyButton(true);
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
-        _rowName.OnApply += OnApplyName;
+        _rowName.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    OnNameChanged();
+                }
+            }
+        };
         _grpAccount.Add(_rowName);
         //Account Type
         _rowAccountType = Adw.ComboRow.New();
@@ -170,11 +198,67 @@ public partial class AccountSettingsDialog
         _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
         _rowCustomCode.AddSuffix(_txtCustomCode);
         _rowCustomCurrency.AddRow(_rowCustomCode);
+        //Password Row
+        _grpPassword = Adw.PreferencesGroup.New();
+        _boxMain.Append(_grpPassword);
+        _rowPassword = Adw.ExpanderRow.New();
+        _rowPassword.SetTitle(_controller.Localizer["ManagePassword"]);
+        _rowPassword.SetSubtitle(_controller.Localizer["ManagePassword", "Description"]);
+        _rowPassword.SetIconName("dialog-password-symbolic");
+        _rowPassword.SetShowEnableSwitch(true);
+        _rowPassword.SetEnableExpansion(false);
+        _rowPassword.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "enable-expansion")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _grpPassword.Add(_rowPassword);
+        _rowNewPassword = Adw.PasswordEntryRow.New();
+        _rowNewPassword.SetTitle(_controller.Localizer["NewPassword", "Field"]);
+        _rowNewPassword.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _rowPassword.AddRow(_rowNewPassword);
+        _rowNewPasswordConfirm = Adw.PasswordEntryRow.New();
+        _rowNewPasswordConfirm.SetTitle(_controller.Localizer["ConfirmPassword", "Field"]);
+        _rowNewPasswordConfirm.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _rowPassword.AddRow(_rowNewPasswordConfirm);
+        _rowRemovePassword = Adw.ActionRow.New();
+        _rowRemovePassword.SetSubtitle(_controller.Localizer["ManagePassword", "Warning"]);
+        _rowRemovePassword.AddCssClass("warning");
+        _rowPassword.AddRow(_rowRemovePassword);
+        _btnRemovePassword = Gtk.Button.NewWithLabel(_controller.Localizer["Remove"]);
+        _btnRemovePassword.AddCssClass("destructive-action");
+        _btnRemovePassword.SetValign(Gtk.Align.Center);
+        _btnRemovePassword.SetVisible(_controller.IsEncrypted);
+        _btnRemovePassword.OnClicked += OnRemovePassword;
+        _rowRemovePassword.AddSuffix(_btnRemovePassword);
         //Layout
         _dialog.SetExtraChild(_boxMain);
         //Load
         _rowName.SetText(_controller.Metadata.Name);
-        OnApplyName(_rowName, EventArgs.Empty);
+        OnNameChanged();
         _rowAccountType.SetSelected((uint)_controller.Metadata.AccountType);
         OnAccountTypeChanged();
         _btnIncome.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
@@ -213,7 +297,14 @@ public partial class AccountSettingsDialog
     private void Validate()
     {
         var transactionType = _btnIncome.GetActive() ? TransactionType.Income : TransactionType.Expense;
-        var checkStatus = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType);
+        var newPassword = "";
+        var newPasswordConfirm = "";
+        if (_rowPassword.GetEnableExpansion())
+        {
+            newPassword = _rowNewPassword.GetText();
+            newPasswordConfirm = _rowNewPasswordConfirm.GetText();
+        }
+        var checkStatus = _controller.UpdateMetadata(_rowName.GetText(), (AccountType)_rowAccountType.GetSelected(), _rowCustomCurrency.GetEnableExpansion(), _txtCustomSymbol.GetText(), _txtCustomCode.GetText(), transactionType, newPassword, newPasswordConfirm);
         _rowName.RemoveCssClass("error");
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
         _rowCustomSymbol.RemoveCssClass("error");
@@ -248,9 +339,7 @@ public partial class AccountSettingsDialog
     /// <summary>
     /// Occurs when a new name is applied to Adw.EntryRow
     /// </summary>
-    /// <param name="sender">Adw.EntryRow</param>
-    /// <param name="e">EventArgs</param>
-    private void OnApplyName(Adw.EntryRow sender, EventArgs e)
+    private void OnNameChanged()
     {
         if(_rowName.GetText().Length == 0)
         {
@@ -349,5 +438,19 @@ public partial class AccountSettingsDialog
         {
             Validate();
         }
+    }
+
+    /// <summary>
+    /// Occurs when the remove password button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void OnRemovePassword(Gtk.Button sender, EventArgs e)
+    {
+        _controller.SetRemovePassword();
+        _rowPassword.SetEnableExpansion(false);
+        _rowPassword.SetSensitive(false);
+        _rowPassword.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
+        _rowPassword.SetSubtitle("");
     }
 }

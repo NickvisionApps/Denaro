@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Controllers;
+﻿using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -27,9 +29,6 @@ public partial class MainWindow : Adw.ApplicationWindow
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nuint g_file_get_type();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
@@ -103,6 +102,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         //Register Events
         _controller.NotificationSent += NotificationSent;
+        _controller.AccountLoginAsync += AccountLoginAsync;
         _controller.AccountAdded += AccountAdded;
         _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
         {
@@ -297,7 +297,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         actAbout.OnActivate += About;
         AddAction(actAbout);
         //Drop Target
-        _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
+        _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
         AddController(_dropTarget);
     }
@@ -320,11 +320,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Opens an account by path
     /// </summary>
     /// <param name="path">The path to the account</param>
-    public void OpenAccount(string path)
+    public async Task OpenAccountAsync(string path)
     {
         if(Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
         {
-            _controller.AddAccount(path);
+            await _controller.AddAccountAsync(path);
         }
     }
 
@@ -351,9 +351,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? s : "");
 
     /// <summary>
+    /// Occurs when an account needs a login
+    /// </summary>
+    /// <param name="title">The title of the account</param>
+    public async Task<string?> AccountLoginAsync(string title)
+    {
+        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        return await passwordDialog.Run();
+    }
+
+    /// <summary>
     /// Occurs when an account is created or opened
     /// </summary>
-    private void AccountAdded(object? sender, EventArgs e)
+    private async void AccountAdded(object? sender, EventArgs e)
     {
         _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
@@ -363,7 +373,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
-        newAccountView.Startup();
+        await newAccountView.StartupAsync();
     }
 
     /// <summary>
@@ -380,7 +390,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         saveFileDialog.AddFilter(filter);
-        saveFileDialog.OnResponse += (sender, e) =>
+        saveFileDialog.OnResponse += async (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
@@ -395,7 +405,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     {
                         File.Delete(path);
                     }
-                    _controller.AddAccount(path);
+                    await _controller.AddAccountAsync(path);
                 }
             }
         };
@@ -416,12 +426,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
         filter.AddPattern("*.nmoney");
         openFileDialog.AddFilter(filter);
-        openFileDialog.OnResponse += (sender, e) =>
+        openFileDialog.OnResponse += async (sender, e) =>
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                _controller.AddAccount(path);
+                await _controller.AddAccountAsync(path);
             }
         };
         openFileDialog.Show();
@@ -440,7 +450,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when an account page is closing
     /// </summary>
     /// <param name="page">Adw.TabPage</param>
-    private void OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
+    private bool OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
     {
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
@@ -455,6 +465,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _grpRecentAccountsOnStart.SetVisible(true);
         }
+        return true;
     }
 
     /// <summary>
@@ -517,9 +528,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the preferences action is triggered
     /// </summary>
-    /// <param name="dropValue">GObject.Value</param>
-    /// <param name="e">EventArgs</param>
-    private void OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
+    /// <param name="sender">Gtk.DropTarget</param>
+    /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
+    private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
         var obj = e.Value.GetObject();
         if(obj != null)
@@ -527,9 +538,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if(File.Exists(path))
             {
-                _controller.AddAccount(path);
+                _controller.AddAccountAsync(path).Wait();
+                return true;
             }
         }
+        return false;
     }
 
     /// <summary>
@@ -609,10 +622,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             button.SetName("btnWallet");
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
         }
-        button.OnClicked += (Gtk.Button sender, EventArgs e) => 
+        button.OnClicked += async (Gtk.Button sender, EventArgs e) => 
         {
             _popoverAccount.Popdown();
-            _controller.AddAccount(row.GetSubtitle()!);
+            await _controller.AddAccountAsync(row.GetSubtitle()!);
         };
         row.AddPrefix(button);
         row.SetActivatableWidget(button);

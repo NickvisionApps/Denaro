@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME;
 
@@ -58,12 +59,12 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.2.0-beta2";
-        _mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Added the ability to copy individual transactions</li><li>Recent accounts are now available to select from the TransferDialog</li><li>Added a \"New Window\" action to the main menu</li></ul>";
+        _mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to add a password to an account (This will encrypt the nmoney file)</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Added the ability to copy individual transactions</li><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Recent accounts are now available to select from the TransferDialog</li><li>Added a \"New Window\" action to the main menu</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
         _application.OnActivate += OnActivate;
-        _openSignal = (nint application, nint files, int nfiles, string hint, nint data) => OnOpen(files, nfiles);
+        _openSignal = async (nint application, nint files, int nfiles, string hint, nint data) => await OnOpen(files, nfiles);
         g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
         var prefixes = new List<string> {
             Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
@@ -123,7 +124,7 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(nint files, int nFiles)
+    private async Task OnOpen(nint files, int nFiles)
     {
         if(nFiles > 0)
         {
@@ -131,7 +132,7 @@ public partial class Program
             Marshal.Copy(files, filesArray, 0, 1);
             var pathOfFirstFile = g_file_get_path(filesArray[0]);
             OnActivate(_application, EventArgs.Empty);
-            _mainWindow!.OpenAccount(pathOfFirstFile);
+            await _mainWindow!.OpenAccountAsync(pathOfFirstFile);
         }
     }
 }

@@ -23,8 +23,10 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Account : IDisposable
 {
+    private bool _loggedIn;
     private bool _disposed;
-    private readonly SqliteConnection _database;
+    private SqliteConnection? _database;
+    private bool? _isEncrypted;
 
     /// <summary>
     /// The path of the account
@@ -75,7 +77,9 @@ public class Account : IDisposable
     /// <param name="path">The path of the account</param>
     public Account(string path)
     {
+        _loggedIn = false;
         _disposed = false;
+        _isEncrypted = null;
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
@@ -85,13 +89,230 @@ public class Account : IDisposable
         NextAvailableTransactionId = 0;
         TodayIncome = 0;
         TodayExpense = 0;
-        //Open Database
-        _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+    }
+
+    /// <summary>
+    /// Whether or not the account is encrypted (requiring a password)
+    /// </summary>
+    public bool IsEncrypted
+    {
+        get
         {
-            DataSource = Path,
-            Mode = SqliteOpenMode.ReadWriteCreate
-        }.ConnectionString);
-        _database.Open();
+            if(_isEncrypted == null)
+            {
+                if(!File.Exists(Path))
+                {
+                    _isEncrypted = false;
+                }
+                else
+                {
+                    var tempConnectionString = new SqliteConnectionStringBuilder()
+                    {
+                        DataSource = Path,
+                        Mode = SqliteOpenMode.ReadOnly,
+                        Pooling = false
+                    };
+                    using var tempDatabase = new SqliteConnection(tempConnectionString.ConnectionString);
+                    tempDatabase.Open();
+                    try
+                    {
+                        using var tempCmd = tempDatabase.CreateCommand();
+                        tempCmd.CommandText = "PRAGMA schema_version";
+                        tempCmd.ExecuteScalar();
+                        _isEncrypted = false;
+                    }
+                    catch
+                    {
+                        _isEncrypted = true;
+                    }
+                    finally
+                    {
+                        tempDatabase.Close();
+                    }
+                }
+            }
+            return _isEncrypted.Value;
+        }
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Account object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if(_disposed)
+        {
+            return;
+        }
+        if(disposing)
+        {
+            foreach (var pair in Transactions)
+            {
+                pair.Value.Dispose();
+            }
+            if(_database != null)
+            {
+                FreeMemory();
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+            }
+        }
+        _disposed = true;
+    }
+
+    /// <summary>
+    /// Logins into an account
+    /// </summary>
+    /// <param name="password">The password of the account, if needed</param>
+    /// <returns>True if logged in, else false</returns>
+    public bool Login(string? password)
+    {
+        if(!_loggedIn)
+        {
+            var connectionStringBuilder = new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false
+            };
+            //Set Password
+            if (IsEncrypted)
+            {
+                if (string.IsNullOrEmpty(password))
+                {
+                    _loggedIn = false;
+                    return false;
+                }
+                else
+                {
+                    connectionStringBuilder.Password = password;
+                }
+            }
+            _database = new SqliteConnection(connectionStringBuilder.ConnectionString);
+            try
+            {
+                _database.Open();
+                _loggedIn = true;
+            }
+            catch
+            {
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                _loggedIn = false;
+            }
+        }
+        return _loggedIn;
+    }
+
+    /// <summary>
+    /// Sets the password of the account. Specifying a null/empty string will remove the password and decrypt the database
+    /// </summary>
+    /// <param name="password">The password to set</param>
+    /// <returns>True if successful, else false</returns>
+    public bool SetPassword(string password)
+    {
+        //Remove password if empty (decrypts)
+        if (string.IsNullOrEmpty(password))
+        {
+            //Create Temp Decrypted Database
+            var tempPath = $"{Path}.decrypt";
+            using var command = _database.CreateCommand();
+            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
+            command.ExecuteNonQuery();
+            command.CommandText = $"SELECT sqlcipher_export('plaintext')";
+            command.ExecuteNonQuery();
+            command.CommandText = $"DETACH DATABASE plaintext";
+            command.ExecuteNonQuery();
+            //Remove Old Encrypted Database
+            _database.Close();
+            _database.Dispose();
+            _database = null;
+            File.Delete(Path);
+            File.Move(tempPath, Path, true);
+            //Open New Decrypted Database
+            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false
+            }.ConnectionString);
+            _database.Open();
+            _isEncrypted = false;
+        }
+        using var cmdQuote = _database.CreateCommand();
+        cmdQuote.CommandText = "SELECT quote($password)";
+        cmdQuote.Parameters.AddWithValue("$password", password);
+        var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
+        //Change password
+        if(IsEncrypted)
+        {
+            using var command = _database.CreateCommand();
+            command.CommandText = $"PRAGMA rekey = {quotedPassword}";
+            command.ExecuteNonQuery();
+            _database.Close();
+            _database.ConnectionString = new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false,
+                Password = password
+            }.ConnectionString;
+            _database.Open();
+            _isEncrypted = true;
+        }
+        //Sets new password (encrypts for first time)
+        else
+        {
+            //Create Temp Encrypted Database
+            var tempPath = $"{Path}.ecrypt";
+            using var command = _database.CreateCommand();
+            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
+            command.ExecuteNonQuery();
+            command.CommandText = $"SELECT sqlcipher_export('encrypted')";
+            command.ExecuteNonQuery();
+            command.CommandText = $"DETACH DATABASE encrypted";
+            command.ExecuteNonQuery();
+            //Remove Old Unencrypted Database
+            _database.Close();
+            _database.Dispose();
+            _database = null;
+            File.Delete(Path);
+            File.Move(tempPath, Path, true);
+            //Open New Encrypted Database
+            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+            {
+                DataSource = Path,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false,
+                Password = password
+            }.ConnectionString);
+            _database.Open();
+            _isEncrypted = true;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Loads an account
+    /// </summary>
+    /// <returns>True if loaded, else false</returns>
+    public async Task<bool> LoadAsync()
+    {
+        if(!_loggedIn)
+        {
+            return false;
+        }
         //Setup Metadata Table
         using var cmdTableMetadata = _database.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER)";
@@ -150,7 +371,7 @@ public class Account : IDisposable
         using var cmdQueryMetadata = _database.CreateCommand();
         cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
         using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
-        if(readQueryMetadata.HasRows)
+        if (readQueryMetadata.HasRows)
         {
             readQueryMetadata.Read();
             Metadata.Name = readQueryMetadata.GetString(1);
@@ -190,9 +411,9 @@ public class Account : IDisposable
         using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
         using var readQueryGroups = cmdQueryGroups.ExecuteReader();
-        while(readQueryGroups.Read())
+        while (readQueryGroups.Read())
         {
-            if(readQueryGroups.IsDBNull(0))
+            if (readQueryGroups.IsDBNull(0))
             {
                 continue;
             }
@@ -203,7 +424,7 @@ public class Account : IDisposable
                 Balance = 0m
             };
             Groups.Add(group.Id, group);
-            if(group.Id > NextAvailableGroupId)
+            if (group.Id > NextAvailableGroupId)
             {
                 NextAvailableGroupId = group.Id;
             }
@@ -213,9 +434,9 @@ public class Account : IDisposable
         using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
         using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
-        while(readQueryTransactions.Read())
+        while (readQueryTransactions.Read())
         {
-            if(readQueryTransactions.IsDBNull(0))
+            if (readQueryTransactions.IsDBNull(0))
             {
                 continue;
             }
@@ -237,11 +458,11 @@ public class Account : IDisposable
                 transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
-            if(transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
                 Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if(transaction.Type == TransactionType.Income)
+                if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
                 }
@@ -250,63 +471,17 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.Id > NextAvailableTransactionId)
+            if (transaction.Id > NextAvailableTransactionId)
             {
                 NextAvailableTransactionId = transaction.Id;
             }
         }
         NextAvailableTransactionId++;
+        //Repeats
+        await SyncRepeatTransactionsAsync();
         //Cleanup
         FreeMemory();
-    }
-
-    /// <summary>
-    /// Gets whether or not an account if is encrypted
-    /// </summary>
-    /// <param name="path">The path to the account file</param>
-    /// <returns>True if encrypted, else false</returns>
-    public static bool IsEncrypted(string path)
-    {
-        var header = "SQLite format 3";
-        var bytes = new byte[header.Length];
-        using var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-        reader.Read(bytes, 0, header.Length);
-        if(header == Encoding.Default.GetString(bytes))
-        {
-            return false;
-        }
         return true;
-    }
-
-    /// <summary>
-    /// Frees resources used by the Account object
-    /// </summary>
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// Frees resources used by the Account object
-    /// </summary>
-    protected virtual void Dispose(bool disposing)
-    {
-        if(_disposed)
-        {
-            return;
-        }
-        if(disposing)
-        {
-            _database.Close();
-            _database.Dispose();
-            foreach (var pair in Transactions)
-            {
-                pair.Value.Dispose();
-            }
-            FreeMemory();
-        }
-        _disposed = true;
     }
 
     /// <summary>

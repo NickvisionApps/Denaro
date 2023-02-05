@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -45,6 +46,10 @@ public class MainWindowController : IDisposable
     /// The list of recent accounts
     /// </summary>
     public List<RecentAccount> RecentAccounts => Configuration.Current.RecentAccounts;
+    /// <summary>
+    /// A function for getting a password for an account
+    /// </summary>
+    public Func<string, Task<string?>>? AccountLoginAsync;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -133,6 +138,10 @@ public class MainWindowController : IDisposable
         if (disposing)
         {
             Localizer.Dispose();
+            foreach(var controller in OpenAccounts)
+            {
+                controller.Dispose();
+            }
         }
         _disposed = true;
     }
@@ -165,8 +174,9 @@ public class MainWindowController : IDisposable
     /// </summary>
     /// <param name="path">The path of the account</param>
     /// <param name="showOpenedNotification">Whether or not to show a notification if an account is opened</param>
+    /// <param name="password">A password for an account (if available)</param>
     /// <returns>True if account added, else false (account already added)</returns>
-    public bool AddAccount(string path, bool showOpenedNotification = true)
+    public async Task<bool> AddAccountAsync(string path, bool showOpenedNotification = true, string? password = null)
     {
         if(Path.GetExtension(path) != ".nmoney")
         {
@@ -176,14 +186,20 @@ public class MainWindowController : IDisposable
         {
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
-            OpenAccounts.Add(controller);
-            Configuration.Current.AddRecentAccount(new RecentAccount(path)
+            if (controller.AccountNeedsPassword && string.IsNullOrEmpty(password))
             {
-                Name = controller.AccountTitle,
-                Type = controller.AccountType
-            });
-            Configuration.Current.Save();
-            RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+                password = await AccountLoginAsync!(controller.AccountPath);
+            }
+            if (!controller.Login(password))
+            {
+                controller.Dispose();
+                if(password != null)
+                {
+                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
+                }
+                return false;
+            }
+            OpenAccounts.Add(controller);
             AccountAdded?.Invoke(this, EventArgs.Empty);
             return true;
         }
@@ -201,7 +217,11 @@ public class MainWindowController : IDisposable
     /// Closes the account with the provided index
     /// </summary>
     /// <param name="index">int</param>
-    public void CloseAccount(int index) => OpenAccounts.RemoveAt(index);
+    public void CloseAccount(int index)
+    {
+        OpenAccounts[index].Dispose();
+        OpenAccounts.RemoveAt(index);
+    }
 
     /// <summary>
     /// Occurs when a transfer is sent from an account
@@ -209,8 +229,9 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        var added = AddAccount(transfer.DestinationAccountPath, false);
+        await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.ReceiveTransferAsync(transfer, !(added && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)));
+        await controller.StartupAsync();
+        await controller.ReceiveTransferAsync(transfer);
     }
 }

@@ -42,6 +42,9 @@ public sealed partial class TransferDialog : ContentDialog
         LblRecentAccounts.Text = _controller.Localizer["RecentAccounts"];
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationAccount.PlaceholderText = _controller.Localizer["DestinationAccount", "Placeholder"];
+        ToolTipService.SetToolTip(BtnApplyDestinationPassword, _controller.Localizer["Apply"]);
+        TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Field"];
+        TxtDestinationPassword.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})";
         TxtAmount.PlaceholderText = _controller.Localizer["Amount", "Placeholder"];
         TxtSourceCurrency.PlaceholderText = _controller.Localizer["EnterConversionRate"];
@@ -102,8 +105,10 @@ public sealed partial class TransferDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
+        var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtDestinationPassword.Password, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
+        TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Field"];
+        TxtAmount.Visibility = Visibility.Visible;
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})")}";
         TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
@@ -118,6 +123,18 @@ public sealed partial class TransferDialog : ContentDialog
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
                 TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
+                TxtAmount.Visibility = Visibility.Collapsed;
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
+            {
+                BoxDestinationPassword.Visibility = Visibility.Visible;
+                TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Required"];
+                TxtAmount.Visibility = Visibility.Collapsed;
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
+            {
+                TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Invalid"];
+                TxtAmount.Visibility = Visibility.Collapsed;
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
@@ -151,6 +168,9 @@ public sealed partial class TransferDialog : ContentDialog
         if (file != null)
         {
             TxtDestinationAccount.Text = file.Path;
+            BoxDestinationPassword.Visibility = Visibility.Collapsed;
+            TxtDestinationPassword.Password = "";
+            TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
             TxtSourceCurrency.Text = "";
@@ -170,6 +190,9 @@ public sealed partial class TransferDialog : ContentDialog
         if (ListRecentAccounts.SelectedIndex != -1)
         {
             TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
+            BoxDestinationPassword.Visibility = Visibility.Collapsed;
+            TxtDestinationPassword.Password = "";
+            TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
             TxtSourceCurrency.Text = "";
@@ -177,6 +200,24 @@ public sealed partial class TransferDialog : ContentDialog
             Validate();
             ListRecentAccounts.SelectedIndex = -1;
         }
+    }
+
+    /// <summary>
+    /// Occurs when the destination account password passwordbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void TxtDestinationPassword_PasswordChanged(object sender, RoutedEventArgs e) => BtnApplyDestinationPassword.IsEnabled = TxtDestinationPassword.Password.Length > 0 ? true : false;
+
+    /// <summary>
+    /// Occurs when the apply destination password button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ApplyDestinationPassword(object sender, RoutedEventArgs e)
+    {
+        BtnApplyDestinationPassword.IsEnabled = false;
+        Validate();
     }
 
     /// <summary>

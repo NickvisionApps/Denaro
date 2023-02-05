@@ -535,18 +535,6 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _flap.AddController(_shortcutController);
-        //Load
-        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
-        if(_controller.SortFirstToLast)
-        {
-            _btnSortFirstToLast.SetActive(true);
-        }
-        else
-        {
-            _btnSortLastToFirst.SetActive(true);
-        }
-        OnToggleGroups(null, EventArgs.Empty);
-        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
     }
 
     /// <summary>
@@ -635,12 +623,8 @@ public partial class AccountView
     /// <summary>
     /// Starts the account view
     /// </summary>
-    public async void Startup()
+    public async Task StartupAsync()
     {
-        if (_controller.AccountNeedsSetup)
-        {
-            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-        }
         //Start Spinner
         _statusPageNoTransactions.SetVisible(false);
         _scrollTransactions.SetVisible(true);
@@ -650,10 +634,27 @@ public partial class AccountView
         _scrollPane.SetSensitive(false);
         //Work
         await _controller.StartupAsync();
-        for(var i = 0; i < _controller.TransactionRows.Count; i++)
+        if (_controller.AccountNeedsSetup)
+        {
+            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
+        }
+        //Setup Transactions
+        for (var i = 0; i < _controller.TransactionRows.Count; i++)
         {
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
+        //Setup Other UI Elements
+        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        if (_controller.SortFirstToLast)
+        {
+            _btnSortFirstToLast.SetActive(true);
+        }
+        else
+        {
+            _btnSortLastToFirst.SetActive(true);
+        }
+        OnToggleGroups(null, EventArgs.Empty);
+        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         //Stop Spinner
         _spinner.Stop();
         _binSpinner.SetVisible(false);
@@ -853,11 +854,26 @@ public partial class AccountView
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         accountSettingsDialog.Show();
-        accountSettingsDialog.OnResponse += (sender, e) =>
+        accountSettingsDialog.OnResponse += async (sender, e) =>
         {
             if (accountSettingsController.Accepted)
             {
                 _controller.UpdateMetadata(accountSettingsController.Metadata);
+                if(accountSettingsController.NewPassword != null)
+                {
+                    //Start Spinner
+                    _overlayMain.SetOpacity(0.0);
+                    _binSpinner.SetVisible(true);
+                    _spinner.Start();
+                    _scrollPane.SetSensitive(false);
+                    //Work
+                    await Task.Run(() => _controller.SetPassword(accountSettingsController.NewPassword));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _binSpinner.SetVisible(false);
+                    _overlayMain.SetOpacity(1.0);
+                    _scrollPane.SetSensitive(true);
+                }
             }
             accountSettingsDialog.Destroy();
         };

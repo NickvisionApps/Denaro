@@ -28,6 +28,10 @@ public class Transfer
     /// </summary>
     public string DestinationAccountName { get; set; }
     /// <summary>
+    /// The password for the destination account (if needed)
+    /// </summary>
+    public string? DestinationAccountPassword { get; set; }
+    /// <summary>
     /// The rate of converting the source amount to the destination amount
     /// </summary>
     public decimal ConversionRate { get; set; }
@@ -49,6 +53,7 @@ public class Transfer
         SourceAmount = 0m;
         DestinationAccountPath = "";
         DestinationAccountName = "";
+        DestinationAccountPassword = null;
         ConversionRate = 1.0m;
     }
 }

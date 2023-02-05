@@ -23,6 +23,7 @@ public partial class TransferDialog
     private readonly Gtk.Popover _popRecentAccounts;
     private readonly Adw.PreferencesGroup _grpRecentAccounts;
     private readonly Adw.ActionRow _rowDestinationAccount;
+    private readonly Adw.PasswordEntryRow _rowDestinationPassword;
     private readonly Gtk.Label _lblCurrency;
     private readonly Adw.EntryRow _rowAmount;
     private readonly Adw.PreferencesGroup _grpConversionRate;
@@ -56,7 +57,16 @@ public partial class TransferDialog
         _dialog.SetExtraChild(_grpMain);
         //Destination Account Row
         _rowDestinationAccount = Adw.ActionRow.New();
+        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
+        _rowDestinationAccount.SetSubtitle(_controller.Localizer["NoAccountSelected"]);
         _grpMain.Add(_rowDestinationAccount);
+        //Destination Password Row
+        _rowDestinationPassword = Adw.PasswordEntryRow.New();
+        _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
+        _rowDestinationPassword.SetShowApplyButton(true);
+        _rowDestinationPassword.SetVisible(false);
+        _rowDestinationPassword.OnApply += OnApplyDestinationPassword;
+        _grpMain.Add(_rowDestinationPassword);
         //Select Account Button
         _btnSelectAccount = Gtk.Button.NewFromIconName("document-open-symbolic");
         _btnSelectAccount.SetTooltipText(_controller.Localizer["DestinationAccount", "Placeholder"]);
@@ -125,8 +135,6 @@ public partial class TransferDialog
         _grpConversionRate.Add(_rowConversionResult);
         _grpMain.Add(_grpConversionRate);
         //Load
-        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
-        _rowDestinationAccount.SetSubtitle(_controller.Localizer["NoAccountSelected"]);
         foreach (var recentAccount in _controller.RecentAccounts)
         {
             var row = Adw.ActionRow.New();
@@ -147,6 +155,9 @@ public partial class TransferDialog
             {
                 _popRecentAccounts.Popdown();
                 _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
+                _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetText("");
+                _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
                 _rowSourceCurrency.SetText("");
                 _rowDestCurrency.SetText("");
@@ -187,11 +198,14 @@ public partial class TransferDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowAmount.GetText(), _rowSourceCurrency.GetText(), _rowDestCurrency.GetText());
+        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowDestinationPassword.GetText(), _rowAmount.GetText(), _rowSourceCurrency.GetText(), _rowDestCurrency.GetText());
         _rowDestinationAccount.RemoveCssClass("error");
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
+        _rowDestinationPassword.RemoveCssClass("error");
+        _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowAmount.SetVisible(true);
         _rowSourceCurrency.RemoveCssClass("error");
         _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
         _rowDestCurrency.RemoveCssClass("error");
@@ -207,6 +221,20 @@ public partial class TransferDialog
             {
                 _rowDestinationAccount.AddCssClass("error");
                 _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
+                _rowAmount.SetVisible(false);
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
+            {
+                _rowDestinationPassword.SetVisible(true);
+                _rowDestinationPassword.AddCssClass("error");
+                _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Required"]);
+                _rowAmount.SetVisible(false);
+            }
+            if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
+            {
+                _rowDestinationPassword.AddCssClass("error");
+                _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Invalid"]);
+                _rowAmount.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
@@ -243,8 +271,11 @@ public partial class TransferDialog
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = openFileDialog.GetFile()!.GetPath();
-                _rowDestinationAccount.SetSubtitle(path ?? "");
+                var path = openFileDialog.GetFile()!.GetPath() ?? "";
+                _rowDestinationAccount.SetSubtitle(path);
+                _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetText("");
+                _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
                 _rowSourceCurrency.SetText("");
                 _rowDestCurrency.SetText("");
@@ -253,4 +284,11 @@ public partial class TransferDialog
         };
         openFileDialog.Show();
     }
+
+    /// <summary>
+    /// Occurs when the apply destination password button is clicked
+    /// </summary>
+    /// <param name="sender">Adw.EntryRow</param>
+    /// <param name="e">EventArgs</param>
+    private void OnApplyDestinationPassword(Adw.EntryRow sender, EventArgs e) => Validate();
 }

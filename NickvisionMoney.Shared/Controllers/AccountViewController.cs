@@ -13,8 +13,10 @@ namespace NickvisionMoney.Shared.Controllers;
 /// <summary>
 /// A controller for an AccountView
 /// </summary>
-public class AccountViewController
+public class AccountViewController : IDisposable
 {
+    private bool _isOpened;
+    private bool _disposed;
     private readonly Account _account;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
@@ -66,8 +68,11 @@ public class AccountViewController
     /// The path of the account
     /// </summary>
     public string AccountPath => _account.Path;
+    /// Whether or not the account needs a password
+    /// </summary>
+    public bool AccountNeedsPassword => _account.IsEncrypted;
     /// <summary>
-    /// Whether or not an account needs to be setup
+    /// Whether or not the account needs to be setup
     /// </summary>
     public bool AccountNeedsSetup => _account.NeedsAccountSetup;
     /// <summary>
@@ -137,6 +142,8 @@ public class AccountViewController
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
     internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
+        _isOpened = false;
+        _disposed = false;
         _account = new Account(path);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
@@ -149,19 +156,10 @@ public class AccountViewController
         _filters.Add(-3, true); //Income 
         _filters.Add(-2, true); //Expense
         _filters.Add(-1, true); //No Group
-        foreach (var pair in _account.Groups)
-        {
-            _filters.Add((int)pair.Value.Id, true);
-        }
         _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
         _searchDescription = "";
     }
-
-    /// <summary>
-    /// Finalizes an AccountViewController
-    /// </summary>
-    ~AccountViewController() => _account.Dispose();
 
     /// <summary>
     /// The CultureInfo to use when displaying a number string
@@ -354,6 +352,31 @@ public class AccountViewController
     }
 
     /// <summary>
+    /// Frees resources used by the AccountViewController object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the AccountViewController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            _account.Dispose();
+        }
+        _disposed = true;
+    }
+
+    /// <summary>
     /// Sends a notification
     /// </summary>
     /// <param name="message">The message of the notification</param>
@@ -361,57 +384,77 @@ public class AccountViewController
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// Logins into an account
+    /// </summary>
+    /// <param name="password">The password of the account</param>
+    /// <returns>True if login successful, else false</returns>
+    public bool Login(string? password) => _account.Login(password);
+
+    /// <summary>
     /// Initializes the AccountView
     /// </summary>
     public async Task StartupAsync()
     {
-        await _account.SyncRepeatTransactionsAsync();
-        _searchDescription = "";
-        //Groups
-        GroupRows.Clear();
-        foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
+        if(!_isOpened)
         {
-            GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            await _account.LoadAsync();
+            _searchDescription = "";
+            //Metadata
+            Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
+            {
+                Name = AccountTitle,
+                Type = AccountType
+            });
+            Configuration.Current.Save();
+            RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
+            //Groups
+            GroupRows.Clear();
+            foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
+            {
+                _filters.Add((int)pair.Value.Id, true);
+                GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            }
+            //Transactions
+            TransactionRows.Clear();
+            var transactions = _account.Transactions.Values.ToList();
+            transactions.Sort((a, b) =>
+            {
+                int compareTo = 0;
+                if (SortTransactionsBy == SortBy.Id)
+                {
+                    compareTo = a.CompareTo(b);
+                }
+                else if (SortTransactionsBy == SortBy.Date)
+                {
+                    compareTo = a.Date.CompareTo(b.Date);
+                }
+                else if (SortTransactionsBy == SortBy.Amount)
+                {
+                    var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
+                    var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
+                    compareTo = aAmount.CompareTo(bAmount);
+                }
+                if (!SortFirstToLast)
+                {
+                    compareTo *= -1;
+                }
+                return compareTo;
+            });
+            foreach (var transaction in transactions)
+            {
+                TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+            }
+            HasFilteredTransactions = transactions.Count > 0;
+            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
+            _isOpened = true;
         }
-        //Transactions
-        TransactionRows.Clear();
-        var transactions = _account.Transactions.Values.ToList();
-        transactions.Sort((a, b) =>
-        {
-            int compareTo = 0;
-            if (SortTransactionsBy == SortBy.Id)
-            {
-                compareTo = a.CompareTo(b);
-            }
-            else if (SortTransactionsBy == SortBy.Date)
-            {
-                compareTo = a.Date.CompareTo(b.Date);
-            }
-            else if (SortTransactionsBy == SortBy.Amount)
-            {
-                var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
-                var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
-                compareTo = aAmount.CompareTo(bAmount);
-            }
-            if (!SortFirstToLast)
-            {
-                compareTo *= -1;
-            }
-            return compareTo;
-        });
-        foreach (var transaction in transactions)
-        {
-            TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
-        }
-        HasFilteredTransactions = transactions.Count > 0;
-        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, _account.IsEncrypted, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a new transaction
@@ -506,6 +549,23 @@ public class AccountViewController
     public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString, Localizer);
 
     /// <summary>
+    /// Sets the new password of the account
+    /// </summary>
+    /// <param name="password">The new password</param>
+    public void SetPassword(string password)
+    {
+        _account.SetPassword(password);
+        if (string.IsNullOrEmpty(password))
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordRemoved"], NotificationSeverity.Success));
+        }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordUpdated"], NotificationSeverity.Success));
+        }
+    }
+
+    /// <summary>
     /// Updates the metadata of the account
     /// </summary>
     /// <param name="metadata">The new metadata</param>
@@ -531,8 +591,8 @@ public class AccountViewController
             {
                 row.Value.UpdateRow(_account.Transactions[row.Key], CultureForNumberString, CultureForDateString);
             }
-            AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         }
+        AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -793,31 +853,27 @@ public class AccountViewController
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    /// <param name="addTransactionRow">Whether or not to add the transaction row</param>
-    public async Task ReceiveTransferAsync(Transfer transfer, bool addTransactionRow)
+    public async Task ReceiveTransferAsync(Transfer transfer)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        if(addTransactionRow)
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
         {
-            var transactions = _account.Transactions.Keys.ToList();
-            transactions.Sort((a, b) =>
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
             {
-                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-                if (!SortFirstToLast)
-                {
-                    compareTo *= -1;
-                }
-                return compareTo;
-            });
-            for (var i = 0; i < transactions.Count; i++)
-            {
-                if (transactions[i] == newTransaction.Id)
-                {
-                    TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
-                }
+                compareTo *= -1;
             }
-            FilterUIUpdate();
+            return compareTo;
+        });
+        for (var i = 0; i < transactions.Count; i++)
+        {
+            if (transactions[i] == newTransaction.Id)
+            {
+                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+            }
         }
+        FilterUIUpdate();
     }
 
     /// <summary>
