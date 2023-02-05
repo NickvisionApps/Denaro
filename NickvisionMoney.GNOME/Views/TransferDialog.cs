@@ -306,7 +306,7 @@ public partial class TransferDialog
     /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
     private bool OnKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
     {
-         if (_controller.InsertSeparator != InsertSeparator.Off)
+        if (_controller.InsertSeparator != InsertSeparator.Off)
         {
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
