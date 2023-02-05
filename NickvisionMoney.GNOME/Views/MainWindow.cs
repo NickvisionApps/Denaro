@@ -31,9 +31,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nuint g_file_get_type();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -300,7 +297,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         actAbout.OnActivate += About;
         AddAction(actAbout);
         //Drop Target
-        _dropTarget = Gtk.DropTarget.New(g_file_get_type(), Gdk.DragAction.Copy);
+        _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
         AddController(_dropTarget);
     }
@@ -453,7 +450,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when an account page is closing
     /// </summary>
     /// <param name="page">Adw.TabPage</param>
-    private void OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
+    private bool OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
     {
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
@@ -468,6 +465,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _grpRecentAccountsOnStart.SetVisible(true);
         }
+        return true;
     }
 
     /// <summary>
@@ -530,9 +528,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the preferences action is triggered
     /// </summary>
-    /// <param name="dropValue">GObject.Value</param>
-    /// <param name="e">EventArgs</param>
-    private async void OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
+    /// <param name="sender">Gtk.DropTarget</param>
+    /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
+    private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
         var obj = e.Value.GetObject();
         if(obj != null)
@@ -540,9 +538,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if(File.Exists(path))
             {
-                await _controller.AddAccountAsync(path);
+                _controller.AddAccountAsync(path).Wait();
+                return true;
             }
         }
+        return false;
     }
 
     /// <summary>
