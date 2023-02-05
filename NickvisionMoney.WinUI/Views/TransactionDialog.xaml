@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
+                <TextBox x:Name="TxtAmount" Grid.Column="0" HorizontalAlignment="Stretch" KeyUp="TxtAmount_KeyUp" TextChanged="TxtAmount_TextChanged"/>
 
                 <ComboBox x:Name="CmbType" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" SelectionChanged="CmbType_SelectionChanged"/>
             </Grid>

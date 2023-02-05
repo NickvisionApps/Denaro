@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
@@ -181,6 +183,25 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             Validate();
         }
+    }
+
+    /// <summary>
+    /// Occurs when a key is pressed on the amount textbox
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TxtAmount_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
+            {
+                TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator;
+                TxtAmount.Select(TxtAmount.Text.Length, 0);
+                e.Handled = true;
+            }
+        }
+        e.Handled = false;
     }
 
     /// <summary>
