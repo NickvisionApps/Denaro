@@ -33,6 +33,8 @@ public partial class TransferDialog
     private readonly Adw.ActionRow _rowConversionResult;
     private readonly Gtk.Label _lblConversionResult;
     private readonly Gtk.EventControllerKey _amountKeyController;
+    private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
+    private readonly Gtk.EventControllerKey _destCurrencyKeyController;
 
     /// <summary>
     /// Constructs a TransferDialog
@@ -108,7 +110,7 @@ public partial class TransferDialog
         };
         _amountKeyController = Gtk.EventControllerKey.New();
         _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
-        _amountKeyController.OnKeyPressed += OnKeyPressed;
+        _amountKeyController.OnKeyPressed += OnKeyPressedSource;
         _rowAmount.AddController(_amountKeyController);
         _grpMain.Add(_rowAmount);
         //Conversion Rate
@@ -124,6 +126,10 @@ public partial class TransferDialog
                 Validate();
             }
         };
+        _sourceCurrencyKeyController = Gtk.EventControllerKey.New();
+        _sourceCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _sourceCurrencyKeyController.OnKeyPressed += OnKeyPressedSource;
+        _rowSourceCurrency.AddController(_sourceCurrencyKeyController);
         _rowDestCurrency = Adw.EntryRow.New();
         _rowDestCurrency.OnNotify += (sender, e) =>
         {
@@ -132,6 +138,10 @@ public partial class TransferDialog
                 Validate();
             }
         };
+        _destCurrencyKeyController = Gtk.EventControllerKey.New();
+        _destCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
+        _rowDestCurrency.AddController(_destCurrencyKeyController);
         _rowConversionResult = Adw.ActionRow.New();
         _lblConversionResult = Gtk.Label.New(null);
         _rowConversionResult.SetTitle(_controller.Localizer["Result"]);
@@ -299,18 +309,39 @@ public partial class TransferDialog
     private void OnApplyDestinationPassword(Adw.EntryRow sender, EventArgs e) => Validate();
 
     /// <summary>
-    /// Callback for key-pressed signal
+    /// Callback for key-pressed signal for source entries
     /// </summary>
     /// <param name="sender">Gtk.EventControllerKey</param>
     /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
-    private bool OnKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
+    private bool OnKeyPressedSource(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
     {
         if (_controller.InsertSeparator != InsertSeparator.Off)
         {
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
-                _rowAmount.SetText(_rowAmount.GetText() + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator);
-                _rowAmount.SetPosition(_rowAmount.GetText().Length);
+                var row = (Adw.EntryRow)(sender.GetWidget());
+                row.SetText(row.GetText() + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator);
+                row.SetPosition(row.GetText().Length);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Callback for key-pressed signal for dest entries
+    /// </summary>
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnKeyPressedDest(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
+            {
+                var row = (Adw.EntryRow)(sender.GetWidget());
+                row.SetText(row.GetText() + _controller.CultureForDestNumberString.NumberFormat.NumberDecimalSeparator);
+                row.SetPosition(row.GetText().Length);
                 return true;
             }
         }

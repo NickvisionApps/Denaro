@@ -380,8 +380,9 @@ public partial class TransactionDialog
         {
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
-                _rowAmount.SetText(_rowAmount.GetText() + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator);
-                _rowAmount.SetPosition(_rowAmount.GetText().Length);
+                var row = (Adw.EntryRow)(sender.GetWidget());
+                row.SetText(row.GetText() + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator);
+                row.SetPosition(row.GetText().Length);
                 return true;
             }
         }
