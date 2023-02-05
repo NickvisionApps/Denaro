@@ -85,24 +85,6 @@ public class AccountMetadata : ICloneable
     }
 
     /// <summary>
-    /// Clones the account metadata
-    /// </summary>
-    /// <returns>A new AccountMetadata</returns>
-    public object Clone()
-    {
-        return new AccountMetadata(Name, AccountType)
-        {
-            UseCustomCurrency = UseCustomCurrency,
-            CustomCurrencySymbol = CustomCurrencySymbol,
-            CustomCurrencyCode = CustomCurrencyCode,
-            DefaultTransactionType = DefaultTransactionType,
-            ShowGroupsList = ShowGroupsList,
-            SortFirstToLast = SortFirstToLast,
-            SortTransactionsBy = SortTransactionsBy
-        };
-    }
-
-    /// <summary>
     /// Loads metadata from an account file
     /// </summary>
     /// <param name="path">The path to the account file</param>
@@ -153,5 +135,23 @@ public class AccountMetadata : ICloneable
         }
         database.Close();
         return result;
+    }
+
+    /// <summary>
+    /// Clones the account metadata
+    /// </summary>
+    /// <returns>A new AccountMetadata</returns>
+    public object Clone()
+    {
+        return new AccountMetadata(Name, AccountType)
+        {
+            UseCustomCurrency = UseCustomCurrency,
+            CustomCurrencySymbol = CustomCurrencySymbol,
+            CustomCurrencyCode = CustomCurrencyCode,
+            DefaultTransactionType = DefaultTransactionType,
+            ShowGroupsList = ShowGroupsList,
+            SortFirstToLast = SortFirstToLast,
+            SortTransactionsBy = SortTransactionsBy
+        };
     }
 }

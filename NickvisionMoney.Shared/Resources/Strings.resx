@@ -120,8 +120,8 @@
 		<value>Remove</value>
 	</data>
 
-	<data name="Accept" xml:space="preserve">
-		<value>Accept</value>
+	<data name="Apply" xml:space="preserve">
+		<value>Apply</value>
 	</data>
 
 	<!--Pages-->

@@ -229,8 +229,9 @@ public class MainWindowController : IDisposable
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
-        var added = await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
+        await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
         var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.ReceiveTransferAsync(transfer, !(added && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)));
+        await controller.StartupAsync();
+        await controller.ReceiveTransferAsync(transfer);
     }
 }

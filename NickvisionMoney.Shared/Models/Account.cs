@@ -100,28 +100,35 @@ public class Account : IDisposable
         {
             if(_isEncrypted == null)
             {
-                var tempConnectionString = new SqliteConnectionStringBuilder()
+                if(!File.Exists(Path))
                 {
-                    DataSource = Path,
-                    Mode = SqliteOpenMode.ReadOnly,
-                    Pooling = false
-                };
-                using var tempDatabase = new SqliteConnection(tempConnectionString.ConnectionString);
-                tempDatabase.Open();
-                try
-                {
-                    using var tempCmd = tempDatabase.CreateCommand();
-                    tempCmd.CommandText = "PRAGMA schema_version";
-                    tempCmd.ExecuteScalar();
                     _isEncrypted = false;
                 }
-                catch
+                else
                 {
-                    _isEncrypted = true;
-                }
-                finally
-                {
-                    tempDatabase.Close();
+                    var tempConnectionString = new SqliteConnectionStringBuilder()
+                    {
+                        DataSource = Path,
+                        Mode = SqliteOpenMode.ReadOnly,
+                        Pooling = false
+                    };
+                    using var tempDatabase = new SqliteConnection(tempConnectionString.ConnectionString);
+                    tempDatabase.Open();
+                    try
+                    {
+                        using var tempCmd = tempDatabase.CreateCommand();
+                        tempCmd.CommandText = "PRAGMA schema_version";
+                        tempCmd.ExecuteScalar();
+                        _isEncrypted = false;
+                    }
+                    catch
+                    {
+                        _isEncrypted = true;
+                    }
+                    finally
+                    {
+                        tempDatabase.Close();
+                    }
                 }
             }
             return _isEncrypted.Value;

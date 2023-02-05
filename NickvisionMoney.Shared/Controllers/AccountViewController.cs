@@ -853,31 +853,27 @@ public class AccountViewController : IDisposable
     /// Receives a transfer from another account 
     /// </summary>
     /// <param name="transfer">The transfer to receive</param>
-    /// <param name="addTransactionRow">Whether or not to add the transaction row</param>
-    public async Task ReceiveTransferAsync(Transfer transfer, bool addTransactionRow)
+    public async Task ReceiveTransferAsync(Transfer transfer)
     {
         var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
-        if(addTransactionRow)
+        var transactions = _account.Transactions.Keys.ToList();
+        transactions.Sort((a, b) =>
         {
-            var transactions = _account.Transactions.Keys.ToList();
-            transactions.Sort((a, b) =>
+            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+            if (!SortFirstToLast)
             {
-                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-                if (!SortFirstToLast)
-                {
-                    compareTo *= -1;
-                }
-                return compareTo;
-            });
-            for (var i = 0; i < transactions.Count; i++)
-            {
-                if (transactions[i] == newTransaction.Id)
-                {
-                    TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
-                }
+                compareTo *= -1;
             }
-            FilterUIUpdate();
+            return compareTo;
+        });
+        for (var i = 0; i < transactions.Count; i++)
+        {
+            if (transactions[i] == newTransaction.Id)
+            {
+                TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
+            }
         }
+        FilterUIUpdate();
     }
 
     /// <summary>
