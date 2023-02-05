@@ -218,6 +218,7 @@ public partial class TransferDialog
             {
                 _rowDestinationAccount.AddCssClass("error");
                 _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
+                _rowAmount.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
             {

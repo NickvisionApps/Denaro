@@ -123,6 +123,7 @@ public sealed partial class TransferDialog : ContentDialog
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
                 TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Invalid"];
+                TxtAmount.Visibility = Visibility.Collapsed;
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
             {
