@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -138,7 +137,7 @@ public class MainWindowController : IDisposable
         if (disposing)
         {
             Localizer.Dispose();
-            foreach(var controller in OpenAccounts)
+            foreach (var controller in OpenAccounts)
             {
                 controller.Dispose();
             }
@@ -178,11 +177,11 @@ public class MainWindowController : IDisposable
     /// <returns>True if account added, else false (account already added)</returns>
     public async Task<bool> AddAccountAsync(string path, bool showOpenedNotification = true, string? password = null)
     {
-        if(Path.GetExtension(path) != ".nmoney")
+        if (Path.GetExtension(path) != ".nmoney")
         {
             path += ".nmoney";
         }
-        if(!OpenAccounts.Any(x => x.AccountPath == path))
+        if (!OpenAccounts.Any(x => x.AccountPath == path))
         {
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
@@ -193,7 +192,7 @@ public class MainWindowController : IDisposable
             if (!controller.Login(password))
             {
                 controller.Dispose();
-                if(password != null)
+                if (password != null)
                 {
                     NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
                 }
@@ -205,7 +204,7 @@ public class MainWindowController : IDisposable
         }
         else
         {
-            if(showOpenedNotification)
+            if (showOpenedNotification)
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
             }

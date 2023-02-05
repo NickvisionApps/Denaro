@@ -27,7 +27,7 @@ public interface IModelRowControl<T>
     /// Shows the row
     /// </summary>
     public void Show();
-    
+
     /// <summary>
     /// Hides the row
     /// </summary>

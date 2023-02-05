@@ -106,7 +106,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
 
         set
         {
-            if(value <= 0)
+            if (value <= 0)
             {
                 value = -1;
             }
@@ -175,11 +175,11 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     protected virtual void Dispose(bool disposing)
     {
-        if(_disposed)
+        if (_disposed)
         {
             return;
         }
-        if(disposing)
+        if (disposing)
         {
             Receipt?.Dispose();
         }
@@ -193,7 +193,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <returns>True if equals, else false</returns>
     public override bool Equals(object? obj)
     {
-        if(obj is Transaction toCompare)
+        if (obj is Transaction toCompare)
         {
             return Id == toCompare.Id;
         }

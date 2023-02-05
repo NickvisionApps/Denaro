@@ -63,6 +63,10 @@ public class TransferDialogController
     /// The currency code of the destination account, if available
     /// </summary>
     public string? DestinationCurrencyCode => CultureForDestNumberString == null ? null : CultureForDestNumberString.NumberFormat.NaNSymbol;
+    /// <summary>
+    /// Decimal Separator Inserting
+    /// <summary>
+    public InsertSeparator InsertSeparator => Configuration.Current.InsertSeparator;
 
     /// <summary>
     /// Constructs a TransferDialogController
@@ -133,7 +137,7 @@ public class TransferDialogController
             }
             else
             {
-                if(_previousDestPath != destPath)
+                if (_previousDestPath != destPath)
                 {
                     _previousDestPath = destPath;
                     _previousDestMetadata = null;
@@ -149,7 +153,7 @@ public class TransferDialogController
                 }
                 CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
                 var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-                if(_previousDestMetadata == null)
+                if (_previousDestMetadata == null)
                 {
                     _previousDestMetadata = AccountMetadata.LoadFromAccountFile(destPath, destPassword)!;
                 }
@@ -174,6 +178,10 @@ public class TransferDialogController
                         try
                         {
                             conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                            if(conversionRate == 0)
+                            {
+                                throw new ArgumentException();
+                            }
                         }
                         catch
                         {

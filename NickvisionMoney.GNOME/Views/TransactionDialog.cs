@@ -99,6 +99,7 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
+    private readonly Gtk.EventControllerKey _amountKeyController;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -125,7 +126,8 @@ public partial class TransactionDialog
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => {
+        _dialog.OnResponse += (sender, e) =>
+        {
             _controller.Accepted = e.Response != "cancel";
             _controller.CopyRequested = e.Response == "copy";
         };
@@ -143,7 +145,7 @@ public partial class TransactionDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(!_constructing)
+                if (!_constructing)
                 {
                     Validate();
                 }
@@ -165,7 +167,11 @@ public partial class TransactionDialog
                 }
             }
         };
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})");
+        _amountKeyController = Gtk.EventControllerKey.New();
+        _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _amountKeyController.OnKeyPressed += OnKeyPressed;
+        _rowAmount.AddController(_amountKeyController);
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
         _grpMain.Add(_rowAmount);
@@ -213,7 +219,7 @@ public partial class TransactionDialog
         _rowRepeatInterval.SetModel(Gtk.StringList.New(new string[8] { _controller.Localizer["RepeatInterval", "Never"], _controller.Localizer["RepeatInterval", "Daily"], _controller.Localizer["RepeatInterval", "Weekly"], _controller.Localizer["RepeatInterval", "Biweekly"], _controller.Localizer["RepeatInterval", "Monthly"], _controller.Localizer["RepeatInterval", "Quarterly"], _controller.Localizer["RepeatInterval", "Yearly"], _controller.Localizer["RepeatInterval", "Biyearly"] }));
         _rowRepeatInterval.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "selected-item")
             {
                 OnRepeatIntervalChanged();
             }
@@ -248,7 +254,7 @@ public partial class TransactionDialog
         _rowGroup = Adw.ComboRow.New();
         _rowGroup.SetTitle(_controller.Localizer["Group", "Field"]);
         var groups = new List<string>();
-        foreach(var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
+        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
         {
             groups.Add(pair.Value);
         }
@@ -361,6 +367,26 @@ public partial class TransactionDialog
         {
             _dialog.OnResponse -= value;
         }
+    }
+
+    /// <summary>
+    /// Callback for key-pressed signal
+    /// </summary>
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
+            {
+                var row = (Adw.EntryRow)(sender.GetWidget());
+                row.SetText(row.GetText() + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator);
+                row.SetPosition(row.GetText().Length);
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>

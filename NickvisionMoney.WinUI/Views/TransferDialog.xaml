@@ -53,7 +53,7 @@
                 <PasswordBox Name="TxtDestinationPassword" wct:DockPanel.Dock="Left" PasswordChanged="TxtDestinationPassword_PasswordChanged"/>
             </wct:DockPanel>
 
-            <TextBox Name="TxtAmount" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
+            <TextBox Name="TxtAmount" HorizontalAlignment="Stretch" KeyUp="TxtAmount_KeyUp" TextChanged="TxtAmount_TextChanged"/>
 
             <Grid x:Name="BoxConversionRate" HorizontalAlignment="Stretch" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
@@ -62,11 +62,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="TxtSourceCurrency" Grid.Column="0"/>
+                <TextBox x:Name="TxtSourceCurrency" Grid.Column="0" KeyUp="TxtSourceCurrency_KeyUp" TextChanged="TxtSourceCurrency_TextChanged"/>
 
                 <TextBlock HorizontalAlignment="Center" Margin="6,26,6,0" Grid.Column="1" FontWeight="Bold" FontSize="20" Text="="/>
 
-                <TextBox x:Name="TxtDestCurrency" Grid.Column="2" TextChanged="TxtDestCurrency_TextChanged"/>
+                <TextBox x:Name="TxtDestCurrency" Grid.Column="2" KeyUp="TxtDestCurrency_KeyUp" TextChanged="TxtDestCurrency_TextChanged"/>
             </Grid>
 
             <TextBox Name="TxtConversionResult" Visibility="Collapsed" IsReadOnly="True"/>

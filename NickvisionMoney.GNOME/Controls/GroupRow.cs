@@ -54,7 +54,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         //Filter Checkbox
         _chkFilter = Gtk.CheckButton.New();
         _chkFilter.AddCssClass("selection-mode");
-        _chkFilter.OnToggled += FilterToggled; 
+        _chkFilter.OnToggled += FilterToggled;
         AddPrefix(_chkFilter);
         //Amount Label
         _lblAmount = Gtk.Label.New(null);

@@ -78,12 +78,12 @@ public partial class PasswordDialog
     public async Task<string?> Run()
     {
         _dialog.Show();
-        while(_dialog.GetVisible())
+        while (_dialog.GetVisible())
         {
             await Task.Delay(100);
         }
         string? password = null;
-        if(_response == PasswordDialogResponse.Suggested)
+        if (_response == PasswordDialogResponse.Suggested)
         {
             password = _passwordEntry.GetText();
         }

@@ -169,11 +169,11 @@ public class AccountViewController : IDisposable
         get
         {
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if(lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
             {
                 lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
-            if(lcMonetary != null && lcMonetary.Contains('_'))
+            if (lcMonetary != null && lcMonetary.Contains('_'))
             {
                 lcMonetary = lcMonetary.Replace('_', '-');
             }
@@ -256,7 +256,7 @@ public class AccountViewController : IDisposable
 
         set
         {
-            if(_account.Metadata.SortFirstToLast != value)
+            if (_account.Metadata.SortFirstToLast != value)
             {
                 _account.Metadata.SortFirstToLast = value;
                 _account.UpdateMetadata(_account.Metadata);
@@ -395,7 +395,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     public async Task StartupAsync()
     {
-        if(!_isOpened)
+        if (!_isOpened)
         {
             await _account.LoadAsync();
             _searchDescription = "";
@@ -463,7 +463,7 @@ public class AccountViewController : IDisposable
     public TransactionDialogController CreateTransactionDialogController()
     {
         var groups = new Dictionary<uint, string>();
-        foreach(var pair in _account.Groups)
+        foreach (var pair in _account.Groups)
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
@@ -520,7 +520,7 @@ public class AccountViewController : IDisposable
     public GroupDialogController CreateGroupDialogController()
     {
         var existingNames = new List<string>();
-        foreach(var pair in _account.Groups)
+        foreach (var pair in _account.Groups)
         {
             existingNames.Add(pair.Value.Name);
         }
@@ -581,13 +581,13 @@ public class AccountViewController : IDisposable
         });
         Configuration.Current.Save();
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-        if(oldSymbol != metadata.CustomCurrencySymbol)
+        if (oldSymbol != metadata.CustomCurrencySymbol)
         {
-            foreach(var row in GroupRows)
+            foreach (var row in GroupRows)
             {
                 row.Value.UpdateRow(_account.Groups[row.Key], CultureForNumberString, CultureForDateString, _filters[(int)row.Key]);
             }
-            foreach(var row in TransactionRows)
+            foreach (var row in TransactionRows)
             {
                 row.Value.UpdateRow(_account.Transactions[row.Key], CultureForNumberString, CultureForDateString);
             }
@@ -613,7 +613,7 @@ public class AccountViewController : IDisposable
             }
             return compareTo;
         });
-        for(var i = 0; i < transactions.Count; i++)
+        for (var i = 0; i < transactions.Count; i++)
         {
             if (transactions[i] == transaction.Id)
             {
@@ -638,7 +638,7 @@ public class AccountViewController : IDisposable
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
         TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString, CultureForDateString);
-        if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+        if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
         {
             foreach (var pair in _account.Transactions)
             {
@@ -664,11 +664,11 @@ public class AccountViewController : IDisposable
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
         TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString, CultureForDateString);
-        foreach(var pair in _account.Transactions)
+        foreach (var pair in _account.Transactions)
         {
-            if(updateGenerated && pair.Value.RepeatFrom == transaction.Id)
+            if (updateGenerated && pair.Value.RepeatFrom == transaction.Id)
             {
-                if(TransactionRows.ContainsKey(pair.Key))
+                if (TransactionRows.ContainsKey(pair.Key))
                 {
                     TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
@@ -677,18 +677,18 @@ public class AccountViewController : IDisposable
                     TransactionRows.Add(pair.Key, UICreateTransactionRow!(pair.Value, null));
                 }
             }
-            else if(!updateGenerated)
+            else if (!updateGenerated)
             {
-                if(pair.Value.RepeatFrom == -1)
+                if (pair.Value.RepeatFrom == -1)
                 {
                     TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
-                else if(pair.Value.RepeatFrom == transaction.Id)
+                else if (pair.Value.RepeatFrom == transaction.Id)
                 {
                     TransactionRows.Add(pair.Key, UICreateTransactionRow!(pair.Value, null));
                 }
             }
-            if(!_account.Transactions.ContainsKey(pair.Key))
+            if (!_account.Transactions.ContainsKey(pair.Key))
             {
                 UIDeleteTransactionRow!(TransactionRows[pair.Key]);
                 TransactionRows.Remove(pair.Key);
@@ -726,9 +726,9 @@ public class AccountViewController : IDisposable
         TransactionRows.Remove(id);
         if (deleteGenerated)
         {
-            foreach(var pair in _account.Transactions) 
-            { 
-                if(pair.Value.RepeatFrom == id)
+            foreach (var pair in _account.Transactions)
+            {
+                if (pair.Value.RepeatFrom == id)
                 {
                     UIDeleteTransactionRow!(TransactionRows[pair.Value.Id]);
                     TransactionRows.Remove(pair.Value.Id);
@@ -736,11 +736,11 @@ public class AccountViewController : IDisposable
             }
         }
         await _account.DeleteSourceTransactionAsync(id, deleteGenerated);
-        if(!deleteGenerated)
+        if (!deleteGenerated)
         {
             foreach (var pair in _account.Transactions)
             {
-                if(pair.Value.RepeatFrom == -1)
+                if (pair.Value.RepeatFrom == -1)
                 {
                     TransactionRows[pair.Value.Id].UpdateRow(pair.Value, CultureForNumberString, CultureForDateString);
                 }
@@ -844,7 +844,7 @@ public class AccountViewController : IDisposable
             {
                 TransactionRows.Add(newTransaction.Id, UICreateTransactionRow!(newTransaction, i));
             }
-        }   
+        }
         FilterUIUpdate();
         TransferSent?.Invoke(this, transfer);
     }
@@ -883,22 +883,22 @@ public class AccountViewController : IDisposable
     public async Task ImportFromFileAsync(string path)
     {
         var importedIds = await _account.ImportFromFileAsync(path);
-        if(importedIds.Count >= 0)
+        if (importedIds.Count >= 0)
         {
-            foreach(var pair in _account.Groups)
+            foreach (var pair in _account.Groups)
             {
-                if(!_filters.ContainsKey((int)pair.Value.Id))
+                if (!_filters.ContainsKey((int)pair.Value.Id))
                 {
                     _filters.Add((int)pair.Value.Id, true);
                     GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
                 }
             }
-            foreach(var id in importedIds)
+            foreach (var id in importedIds)
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
                 TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
                 GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
-            }    
+            }
             FilterUIUpdate();
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success, importedIds.Count == 0 ? "help-import" : ""));
         }
@@ -914,7 +914,7 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public void ExportToFile(string path)
     {
-        if(_account.ExportToFile(path))
+        if (_account.ExportToFile(path))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
@@ -960,7 +960,7 @@ public class AccountViewController : IDisposable
     {
         _filters[-1] = true; //Ungrouped
         GroupRows[0].FilterChecked = true;
-        foreach(var pair in _account.Groups)
+        foreach (var pair in _account.Groups)
         {
             _filters[(int)pair.Key] = true;
             GroupRows[pair.Key].FilterChecked = true;
@@ -976,9 +976,9 @@ public class AccountViewController : IDisposable
         var filteredTransactions = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
-            if(!string.IsNullOrEmpty(SearchDescription))
+            if (!string.IsNullOrEmpty(SearchDescription))
             {
-                if(!pair.Value.Description.ToLower().Contains(SearchDescription.ToLower()))
+                if (!pair.Value.Description.ToLower().Contains(SearchDescription.ToLower()))
                 {
                     continue;
                 }
@@ -1005,7 +1005,7 @@ public class AccountViewController : IDisposable
             filteredTransactions.Add(pair.Value.Id);
         }
         HasFilteredTransactions = filteredTransactions.Count > 0;
-        if(HasFilteredTransactions)
+        if (HasFilteredTransactions)
         {
             //Update UI
             foreach (var pair in TransactionRows)

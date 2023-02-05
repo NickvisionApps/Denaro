@@ -864,7 +864,7 @@
 	</data>
 
 	<data name="ColorsDescription" xml:space="preserve">
-		<value>Customize the colors used by Money.</value>
+		<value>Customize the colors used by Denaro.</value>
 	</data>
 
 	<data name="TransactionColor" xml:space="preserve">
@@ -893,6 +893,34 @@
 
 	<data name="AccountBusinessColor" xml:space="preserve">
 		<value>Business Account Color</value>
+	</data>
+
+	<data name="Locale" xml:space="preserve">
+		<value>Locale</value>
+	</data>
+
+	<data name="LocaleDescription" xml:space="preserve">
+		<value>Customize how Denaro uses locale settings.</value>
+	</data>
+
+	<data name="InsertSeparator" xml:space="preserve">
+		<value>Insert Decimal Separator</value>
+	</data>
+
+	<data name="InsertSeparator.Description" xml:space="preserve">
+		<value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
+	</data>
+
+	<data name="InsertSeparatorOff" xml:space="preserve">
+		<value>Off</value>
+	</data>
+
+	<data name="InsertSeparatorNumpad" xml:space="preserve">
+		<value>Numpad period only</value>
+	</data>
+
+	<data name="InsertSeparatorPeriodComma" xml:space="preserve">
+		<value>Period and Comma</value>
 	</data>
 
 	<!--Shortcuts Dialog-->

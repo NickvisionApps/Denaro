@@ -7,6 +7,16 @@ using System.Text.Json.Serialization;
 namespace NickvisionMoney.Shared.Models;
 
 /// <summary>
+/// Decimal Separator Inserting
+/// <summary>
+public enum InsertSeparator
+{
+    Off = 0,
+    NumpadOnly,
+    PeriodComma
+}
+
+/// <summary>
 /// A model for the configuration of the application
 /// </summary>
 public class Configuration
@@ -54,6 +64,10 @@ public class Configuration
     /// The color of accounts with Business type
     /// </summary>
     public string AccountBusinessColor { get; set; }
+    /// <summary>
+    /// Decimal Separator Inserting
+    /// <summary>
+    public InsertSeparator InsertSeparator { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -78,6 +92,7 @@ public class Configuration
         AccountCheckingColor = "rgb(129,61,156)";
         AccountSavingsColor = "rgb(53,132,228)";
         AccountBusinessColor = "rgb(38,162,105)";
+        InsertSeparator = InsertSeparator.NumpadOnly;
     }
 
     /// <summary>

@@ -2,14 +2,17 @@ using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
@@ -221,11 +224,75 @@ public sealed partial class TransferDialog : ContentDialog
     }
 
     /// <summary>
+    /// Occurs when a key is pressed on the amount textbox
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TxtAmount_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if(e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
+            {
+                TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
+                TxtAmount.Select(TxtAmount.Text.Length, 0);
+                e.Handled = true;
+            }
+        }
+        e.Handled = false;
+    }
+
+    /// <summary>
     /// Occurs when the amount textbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">TextChangedEventArgs</param>
     private void TxtAmount_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when a key is pressed on the source currency textbox
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TxtSourceCurrency_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
+            {
+                TxtSourceCurrency.Text = TxtSourceCurrency.Text.Substring(0, TxtSourceCurrency.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
+                TxtSourceCurrency.Select(TxtSourceCurrency.Text.Length, 0);
+                e.Handled = true;
+            }
+        }
+        e.Handled = false;
+    }
+
+    /// <summary>
+    /// Occurs when the source currency textbox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtSourceCurrency_TextChanged(object sender, TextChangedEventArgs e) => Validate();
+
+    /// <summary>
+    /// Occurs when a key is pressed on the destination currency textbox
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TxtDestCurrency_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (_controller.InsertSeparator != InsertSeparator.Off)
+        {
+            if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
+            {
+                TxtDestCurrency.Text = TxtDestCurrency.Text.Substring(0, TxtDestCurrency.Text.Length - 1) + _controller.CultureForDestNumberString!.NumberFormat.NumberDecimalSeparator;
+                TxtDestCurrency.Select(TxtDestCurrency.Text.Length, 0);
+                e.Handled = true;
+            }
+        }
+        e.Handled = false;
+    }
 
     /// <summary>
     /// Occurs when the destination currency textbox is changed

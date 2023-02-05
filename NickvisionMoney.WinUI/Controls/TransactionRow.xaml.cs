@@ -109,7 +109,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// <param name="e">RoutedEventArgs</param>
     public void Edit(object sender, RoutedEventArgs e)
     {
-        if(_repeatFrom <= 0)
+        if (_repeatFrom <= 0)
         {
             EditTriggered?.Invoke(this, Id);
         }
@@ -122,7 +122,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// <param name="e">RoutedEventArgs</param>
     private void Delete(object sender, RoutedEventArgs e)
     {
-        if(_repeatFrom <= 0)
+        if (_repeatFrom <= 0)
         {
             DeleteTriggered?.Invoke(this, Id);
         }

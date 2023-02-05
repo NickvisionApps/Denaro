@@ -291,7 +291,7 @@ public partial class AccountView
         _ddStartYear.SetShowArrow(false);
         _ddStartYear.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeStartYearChanged();
             }
@@ -302,7 +302,7 @@ public partial class AccountView
         _ddStartMonth.SetShowArrow(false);
         _ddStartMonth.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeStartMonthChanged();
             }
@@ -312,7 +312,7 @@ public partial class AccountView
         _ddStartDay.SetShowArrow(false);
         _ddStartDay.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeStartDayChanged();
             }
@@ -323,7 +323,7 @@ public partial class AccountView
         _ddEndYear.SetShowArrow(false);
         _ddEndYear.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndYearChanged();
             }
@@ -333,7 +333,7 @@ public partial class AccountView
         _ddEndMonth.SetShowArrow(false);
         _ddEndMonth.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndMonthChanged();
             }
@@ -343,7 +343,7 @@ public partial class AccountView
         _ddEndDay.SetShowArrow(false);
         _ddEndDay.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected")
+            if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndDayChanged();
             }
@@ -377,7 +377,7 @@ public partial class AccountView
         _expRange.AddRow(_rowEndRange);
         _expRange.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "enable-expansion")
+            if (e.Pspec.GetName() == "enable-expansion")
             {
                 OnDateRangeToggled();
             }
@@ -549,7 +549,7 @@ public partial class AccountView
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
-        if(index != null)
+        if (index != null)
         {
             _listGroups.Insert(row, index.Value);
         }
@@ -578,7 +578,7 @@ public partial class AccountView
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         row.IsSmall = _parentWindow.DefaultWidth < 450;
-        if(index != null)
+        if (index != null)
         {
             _flowBox.Insert(row, index.Value);
             g_main_context_iteration(g_main_context_default(), false);
@@ -604,7 +604,7 @@ public partial class AccountView
         _flowBox.Remove(((TransactionRow)row).Container!);
         _flowBox.Insert(((TransactionRow)row).Container!, index);
         ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
-        if(oldVisisbility)
+        if (oldVisisbility)
         {
             row.Show();
         }
@@ -669,7 +669,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void OnAccountTransactionsChanged(object? sender, EventArgs e)
     {
-        if(!_isAccountLoading)
+        if (!_isAccountLoading)
         {
             _isAccountLoading = true;
             //Overview
@@ -754,7 +754,7 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = saveFileDialog.GetFile()!.GetPath();
-                if(Path.GetExtension(path) != ".csv")
+                if (Path.GetExtension(path) != ".csv")
                 {
                     path += ".csv";
                 }
@@ -859,7 +859,7 @@ public partial class AccountView
             if (accountSettingsController.Accepted)
             {
                 _controller.UpdateMetadata(accountSettingsController.Metadata);
-                if(accountSettingsController.NewPassword != null)
+                if (accountSettingsController.NewPassword != null)
                 {
                     //Start Spinner
                     _overlayMain.SetOpacity(0.0);
@@ -1072,7 +1072,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void DeleteTransaction(object? sender, uint id)
     {
-        if(_controller.GetIsSourceRepeatTransaction(id))
+        if (_controller.GetIsSourceRepeatTransaction(id))
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
@@ -1160,7 +1160,7 @@ public partial class AccountView
         groupDialog.Show();
         groupDialog.OnResponse += async (sender, e) =>
         {
-            if(groupController.Accepted)
+            if (groupController.Accepted)
             {
                 //Start Spinner
                 _statusPageNoTransactions.SetVisible(false);
@@ -1225,7 +1225,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void OnToggleGroups(object? sender, EventArgs e)
     {
-        if(_btnToggleGroups.GetActive())
+        if (_btnToggleGroups.GetActive())
         {
             _btnToggleGroupsContent.SetIconName("view-reveal-symbolic");
             _btnToggleGroupsContent.SetLabel(_controller.Localizer["Show"]);
@@ -1248,9 +1248,9 @@ public partial class AccountView
     {
         _calendar.ClearMarks();
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
-        foreach(var date in _controller.DatesInAccount)
+        foreach (var date in _controller.DatesInAccount)
         {
-            if(date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
+            if (date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
             {
                 _calendar.MarkDay((uint)date.Day);
             }
@@ -1266,7 +1266,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void OnCalendarSelectedDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        if(!_isAccountLoading)
+        if (!_isAccountLoading)
         {
             var selectedDay = gtk_calendar_get_date(_calendar.Handle);
             _controller.SetSingleDateFilter(new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay)));
@@ -1289,7 +1289,7 @@ public partial class AccountView
     /// </summary>
     private void OnDateRangeToggled()
     {
-        if(_expRange.GetEnableExpansion())
+        if (_expRange.GetEnableExpansion())
         {
             //Years For Date Filter
             var previousStartYear = _ddStartYear.GetSelected();
@@ -1382,7 +1382,7 @@ public partial class AccountView
     /// <param name="e"></param>
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
-        foreach(TransactionRow row in _controller.TransactionRows.Values)
+        foreach (TransactionRow row in _controller.TransactionRows.Values)
         {
             row.IsSmall = e.SmallWidth;
         }

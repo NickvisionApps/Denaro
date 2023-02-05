@@ -3,9 +3,9 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -96,7 +96,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         SetSizeRequest(360, -1);
         SetTitle(_controller.AppInfo.ShortName);
         CompactMode = false;
-        if(_controller.IsDevVersion)
+        if (_controller.IsDevVersion)
         {
             AddCssClass("devel");
         }
@@ -111,7 +111,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         };
         OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "default-width")
+            if (e.Pspec.GetName() == "default-width")
             {
                 OnWidthChanged();
             }
@@ -308,7 +308,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     public void Start()
     {
         Show();
-        if(_controller.RecentAccounts.Count > 0)
+        if (_controller.RecentAccounts.Count > 0)
         {
             UpdateRecentAccountsOnStart();
             _pageStatusNoAccounts.SetDescription("");
@@ -322,7 +322,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="path">The path to the account</param>
     public async Task OpenAccountAsync(string path)
     {
-        if(Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
+        if (Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
         {
             await _controller.AddAccountAsync(path);
         }
@@ -395,13 +395,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = saveFileDialog.GetFile()!.GetPath() ?? "";
-                if(_controller.IsAccountOpen(path))
+                if (_controller.IsAccountOpen(path))
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
                 }
                 else
                 {
-                    if(File.Exists(path))
+                    if (File.Exists(path))
                     {
                         File.Delete(path);
                     }
@@ -533,10 +533,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
         var obj = e.Value.GetObject();
-        if(obj != null)
+        if (obj != null)
         {
             var path = g_file_get_path(obj.Handle);
-            if(File.Exists(path))
+            if (File.Exists(path))
             {
                 _controller.AddAccountAsync(path).Wait();
                 return true;
@@ -550,12 +550,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccounts()
     {
-        foreach(var row in _listRecentAccountsRows)
+        foreach (var row in _listRecentAccountsRows)
         {
             _groupRecentAccounts.Remove(row);
         }
         _listRecentAccountsRows.Clear();
-        foreach(var recentAccount in _controller.RecentAccounts)
+        foreach (var recentAccount in _controller.RecentAccounts)
         {
             var row = CreateRecentAccountRow(recentAccount, false);
             _groupRecentAccounts.Add(row);
@@ -568,12 +568,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
-        foreach(var row in _listRecentAccountsOnStartRows)
+        foreach (var row in _listRecentAccountsOnStartRows)
         {
             _grpRecentAccountsOnStart.Remove(row);
         }
         _listRecentAccountsOnStartRows.Clear();
-        foreach(var recentAccount in _controller.RecentAccounts)
+        foreach (var recentAccount in _controller.RecentAccounts)
         {
             var row = CreateRecentAccountRow(recentAccount, true);
             _grpRecentAccountsOnStart.Add(row);
@@ -593,7 +593,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
-        if(onStartScreen)
+        if (onStartScreen)
         {
             button.AddCssClass("wallet-button");
             var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
@@ -622,7 +622,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             button.SetName("btnWallet");
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
         }
-        button.OnClicked += async (Gtk.Button sender, EventArgs e) => 
+        button.OnClicked += async (Gtk.Button sender, EventArgs e) =>
         {
             _popoverAccount.Popdown();
             await _controller.AddAccountAsync(row.GetSubtitle()!);
@@ -638,7 +638,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     public void OnWidthChanged()
     {
         var compactModeNeeded = DefaultWidth < 450;
-        if(compactModeNeeded != CompactMode)
+        if (compactModeNeeded != CompactMode)
         {
             CompactMode = !CompactMode;
             WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));

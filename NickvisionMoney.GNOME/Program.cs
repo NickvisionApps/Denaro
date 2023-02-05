@@ -59,7 +59,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.2.0-beta2";
-        _mainWindowController .AppInfo.Changelog = "<ul><li>Added the ability to add a password to an account (This will encrypt the nmoney file)</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Added the ability to copy individual transactions</li><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Recent accounts are now available to select from the TransferDialog</li><li>Added a \"New Window\" action to the main menu</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to add a password to an account (This will encrypt the nmoney file)</li><li>Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</li><li>Added the ability to configure how Denaro uses locale separators in amount fields</li><li>Added the ability to copy individual transactions</li><li>Added the ability to sort transactions by amount</li><li>LC_MONETARY and LC_TIME will now be respected</li><li>Recent accounts are now available to select from the TransferDialog</li><li>Added a \"New Window\" action to the main menu</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
@@ -71,9 +71,9 @@ public partial class Program
             Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
             "/usr"
         };
-        foreach(var prefix in prefixes)
+        foreach (var prefix in prefixes)
         {
-            if(File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+            if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
             {
                 g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
                 break;
@@ -126,7 +126,7 @@ public partial class Program
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
     private async Task OnOpen(nint files, int nFiles)
     {
-        if(nFiles > 0)
+        if (nFiles > 0)
         {
             var filesArray = new IntPtr[1] { IntPtr.Zero };
             Marshal.Copy(files, filesArray, 0, 1);

@@ -118,27 +118,27 @@ public class AccountSettingsDialogController
     public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
-        if(string.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(name))
         {
             result |= AccountMetadataCheckStatus.EmptyName;
         }
-        if(useCustom && string.IsNullOrEmpty(customSymbol))
+        if (useCustom && string.IsNullOrEmpty(customSymbol))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
-        if(useCustom && string.IsNullOrEmpty(customCode))
+        if (useCustom && string.IsNullOrEmpty(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
         }
-        if(newPassword != confirmPassword)
+        if (newPassword != confirmPassword)
         {
             result |= AccountMetadataCheckStatus.NonMatchingPasswords;
         }
-        if(result != 0)
+        if (result != 0)
         {
             return result;
         }
-        if(customSymbol != null && customSymbol.Length > 3)
+        if (customSymbol != null && customSymbol.Length > 3)
         {
             customSymbol = customSymbol.Substring(0, 3);
         }
@@ -149,7 +149,7 @@ public class AccountSettingsDialogController
         Metadata.Name = name;
         Metadata.AccountType = type;
         Metadata.UseCustomCurrency = useCustom;
-        if(Metadata.UseCustomCurrency)
+        if (Metadata.UseCustomCurrency)
         {
             Metadata.CustomCurrencySymbol = customSymbol;
             Metadata.CustomCurrencyCode = customCode?.ToUpper();

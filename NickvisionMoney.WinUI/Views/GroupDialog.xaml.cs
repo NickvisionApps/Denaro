@@ -46,7 +46,7 @@ public sealed partial class GroupDialog : ContentDialog
     public new async Task<bool> ShowAsync()
     {
         var result = await base.ShowAsync();
-        if(result == ContentDialogResult.None)
+        if (result == ContentDialogResult.None)
         {
             _controller.Accepted = false;
             return false;
@@ -73,7 +73,7 @@ public sealed partial class GroupDialog : ContentDialog
             {
                 TxtName.Header = _controller.Localizer["Name", "Empty"];
             }
-            else if(checkStatus == GroupCheckStatus.NameExists)
+            else if (checkStatus == GroupCheckStatus.NameExists)
             {
                 TxtName.Header = _controller.Localizer["Name", "Exists"];
             }
@@ -89,7 +89,7 @@ public sealed partial class GroupDialog : ContentDialog
     /// <param name="e">TextChangedEventArgs</param>
     private void TxtName_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if(!_constructing)
+        if (!_constructing)
         {
             Validate();
         }

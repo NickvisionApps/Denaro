@@ -96,6 +96,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// Decimal Separator Inserting
+    /// <summary>
+    public InsertSeparator InsertSeparator
+    {
+        get => Configuration.Current.InsertSeparator;
+
+        set => Configuration.Current.InsertSeparator = value;
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
     public void SaveConfiguration()
