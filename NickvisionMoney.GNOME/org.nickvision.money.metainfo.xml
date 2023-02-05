@@ -50,6 +50,7 @@
       <description>
 		  <p>- Added the ability to add a password to an account (This will encrypt the nmoney file)</p>
 		  <p>- Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</p>
+		  <p>- Added the ability to configure how Denaro uses locale separators in amount fields</p>
 		  <p>- Added the ability to copy individual transactions</p>
 		  <p>- Added the ability to sort transactions by amount</p>
 		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
