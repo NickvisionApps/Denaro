@@ -178,6 +178,10 @@ public class TransferDialogController
                         try
                         {
                             conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                            if(conversionRate == 0)
+                            {
+                                throw new ArgumentException();
+                            }
                         }
                         catch
                         {
