@@ -63,6 +63,13 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardAccountCheckingColor.Header = _controller.Localizer["AccountCheckingColor"];
         CardAccountSavingsColor.Header = _controller.Localizer["AccountSavingsColor"];
         CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
+        CardLocale.Header = _controller.Localizer["Locale"];
+        CardLocale.Description = _controller.Localizer["LocaleDescription"];
+        CardInsertSeparator.Header = _controller.Localizer["InsertSeparator"];
+        CardInsertSeparator.Description = _controller.Localizer["InsertSeparator", "Description"];
+        CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorOff"]);
+        CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorNumpad"]);
+        CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorPeriodComma"]);
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
@@ -70,6 +77,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         AccountCheckingColor = ColorHelpers.FromRGBA(_controller.AccountCheckingColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
+        CmbInsertSeparator.SelectedIndex = (int)_controller.InsertSeparator;
     }
 
     /// <summary>
@@ -255,8 +263,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     /// <summary>
     /// Occurs when the CmbTheme selection is changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
     private async void CmbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_controller.Theme != (Theme)CmbTheme.SelectedIndex)
@@ -278,6 +286,17 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
                 AppInstance.Restart("Apply new theme");
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when the CmbInserSeparator selection is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbInsertSeparator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        _controller.InsertSeparator = (InsertSeparator)CmbInsertSeparator.SelectedIndex;
+        _controller.SaveConfiguration();
     }
 
     private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

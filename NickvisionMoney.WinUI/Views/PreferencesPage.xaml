@@ -149,6 +149,22 @@
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
+
+                    <labs:SettingsExpander x:Name="CardLocale">
+                        <labs:SettingsExpander.HeaderIcon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE12B;"/>
+                        </labs:SettingsExpander.HeaderIcon>
+
+                        <labs:SettingsExpander.Items>
+                            <labs:SettingsCard x:Name="CardInsertSeparator">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE144;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <ComboBox x:Name="CmbInsertSeparator" SelectionChanged="CmbInsertSeparator_SelectionChanged"/>
+                            </labs:SettingsCard>
+                        </labs:SettingsExpander.Items>
+                    </labs:SettingsExpander>
                 </StackPanel>
             </ScrollViewer>
         </wct:DockPanel>

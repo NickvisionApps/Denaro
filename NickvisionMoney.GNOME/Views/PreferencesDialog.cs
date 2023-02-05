@@ -141,15 +141,16 @@ public partial class PreferencesDialog : Adw.Window
         _rowAccountBusinessColor.AddSuffix(_btnAccountBusinessColor);
         _rowAccountBusinessColor.SetActivatableWidget(_btnAccountBusinessColor);
         _grpUserInterface.Add(_rowAccountBusinessColor);
-        // Misc Group
+        // Locale Group
         _grpLocale = Adw.PreferencesGroup.New();
         _grpLocale.SetTitle(_controller.Localizer["Locale"]);
+        _grpLocale.SetDescription(_controller.Localizer["LocaleDescription"]);
         _page.Add(_grpLocale);
         // Period Replacement Row
         _rowInsertSeparator = Adw.ComboRow.New();
-        _rowInsertSeparator.SetModel(Gtk.StringList.New(new string [] { _controller.Localizer["InsertSeparator.Off"], _controller.Localizer["InsertSeparator.Numpad"], _controller.Localizer["InsertSeparator.PeriodComma"] }));
+        _rowInsertSeparator.SetModel(Gtk.StringList.New(new string [] { _controller.Localizer["InsertSeparatorOff"], _controller.Localizer["InsertSeparatorNumpad"], _controller.Localizer["InsertSeparatorPeriodComma"] }));
         _rowInsertSeparator.SetTitle(_controller.Localizer["InsertSeparator"]);
-        _rowInsertSeparator.SetSubtitle(_controller.Localizer["InsertSeparator.Description"]);
+        _rowInsertSeparator.SetSubtitle(_controller.Localizer["InsertSeparator", "Description"]);
         _rowInsertSeparator.SetSubtitleLines(3);
         _rowInsertSeparator.OnNotify += (sender, e) =>
         {
