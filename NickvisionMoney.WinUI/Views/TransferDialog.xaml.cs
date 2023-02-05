@@ -286,7 +286,7 @@ public sealed partial class TransferDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtDestCurrency.Text = TxtDestCurrency.Text.Substring(0, TxtDestCurrency.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
+                TxtDestCurrency.Text = TxtDestCurrency.Text.Substring(0, TxtDestCurrency.Text.Length - 1) + _controller.CultureForDestNumberString!.NumberFormat.NumberDecimalSeparator;
                 TxtDestCurrency.Select(TxtDestCurrency.Text.Length, 0);
                 e.Handled = true;
             }
