@@ -271,6 +271,8 @@ public partial class TransferDialog
                 var path = openFileDialog.GetFile()!.GetPath();
                 _rowDestinationAccount.SetSubtitle(path ?? "");
                 _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetText("");
+                _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
                 _rowSourceCurrency.SetText("");
                 _rowDestCurrency.SetText("");

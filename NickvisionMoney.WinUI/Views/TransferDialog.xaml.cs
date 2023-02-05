@@ -169,6 +169,8 @@ public sealed partial class TransferDialog : ContentDialog
         {
             TxtDestinationAccount.Text = file.Path;
             BoxDestinationPassword.Visibility = Visibility.Collapsed;
+            TxtDestinationPassword.Password = "";
+            TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
             TxtSourceCurrency.Text = "";
