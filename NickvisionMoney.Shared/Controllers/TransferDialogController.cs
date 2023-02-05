@@ -28,6 +28,8 @@ public enum TransferCheckStatus
 public class TransferDialogController
 {
     private readonly decimal _sourceAmount;
+    private string? _previousDestAccountPath;
+    private AccountMetadata? _previousDestAccountMetadata;
 
     /// <summary>
     /// The localizer to get translated strings from
@@ -74,6 +76,8 @@ public class TransferDialogController
     internal TransferDialogController(Transfer transfer, decimal sourceAmount, List<RecentAccount> recentAccounts, CultureInfo culture, Localizer localizer)
     {
         _sourceAmount = sourceAmount;
+        _previousDestAccountPath = null;
+        _previousDestAccountMetadata = null;
         Localizer = localizer;
         Transfer = transfer;
         RecentAccounts = new List<RecentAccount>();
@@ -118,42 +122,51 @@ public class TransferDialogController
         TransferCheckStatus result = 0;
         var amount = 0m;
         var conversionRate = 0m;
-        AccountMetadata? destMetadata = null;
         if(string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath) != ".nmoney" || Transfer.SourceAccountPath == destPath)
         {
             result |= TransferCheckStatus.InvalidDestPath;
         }
         else
         {
-            if(new Account(destPath).IsEncrypted && string.IsNullOrEmpty(destPassword))
+            if(_previousDestAccountPath != destPath)
             {
-                result |= TransferCheckStatus.DestAccountRequiresPassword;
+                if (new Account(destPath).IsEncrypted && string.IsNullOrEmpty(destPassword))
+                {
+                    result |= TransferCheckStatus.DestAccountRequiresPassword;
+                }
+                else
+                {
+                    _previousDestAccountPath = destPath;
+                }
             }
             else
             {
-                var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-                if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+                if(_previousDestAccountMetadata == null)
                 {
-                    lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+                    _previousDestAccountMetadata = AccountMetadata.LoadFromAccountFile(_previousDestAccountPath, destPassword)!;
                 }
-                if (lcMonetary != null && lcMonetary.Contains('_'))
-                {
-                    lcMonetary = lcMonetary.Replace('_', '-');
-                }
-                CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-                var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-                destMetadata = AccountMetadata.LoadFromAccountFile(destPath, destPassword)!;
-                if(destMetadata == null)
+                if (_previousDestAccountMetadata == null)
                 {
                     result |= TransferCheckStatus.DestAccountPasswordInvalid;
                 }
                 else
                 {
-                    Transfer.DestinationAccountPassword = destPassword;
-                    if (destMetadata.UseCustomCurrency)
+                    var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+                    if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
                     {
-                        CultureForDestNumberString.NumberFormat.CurrencySymbol = destMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
-                        CultureForDestNumberString.NumberFormat.NaNSymbol = destMetadata.CustomCurrencyCode ?? destRegion.ISOCurrencySymbol;
+                        lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+                    }
+                    if (lcMonetary != null && lcMonetary.Contains('_'))
+                    {
+                        lcMonetary = lcMonetary.Replace('_', '-');
+                    }
+                    CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+                    var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+                    Transfer.DestinationAccountPassword = destPassword;
+                    if (_previousDestAccountMetadata.UseCustomCurrency)
+                    {
+                        CultureForDestNumberString.NumberFormat.CurrencySymbol = _previousDestAccountMetadata.CustomCurrencySymbol ?? CultureForDestNumberString.NumberFormat.CurrencySymbol;
+                        CultureForDestNumberString.NumberFormat.NaNSymbol = _previousDestAccountMetadata.CustomCurrencyCode ?? destRegion.ISOCurrencySymbol;
                     }
                     else
                     {
@@ -193,8 +206,8 @@ public class TransferDialogController
         {
             return result;
         }
-        Transfer.DestinationAccountPath = destPath;
-        Transfer.DestinationAccountName = destMetadata!.Name;
+        Transfer.DestinationAccountPath = _previousDestAccountPath!;
+        Transfer.DestinationAccountName = _previousDestAccountMetadata!.Name;
         Transfer.SourceAmount = amount;
         Transfer.ConversionRate = conversionRate;
         return TransferCheckStatus.Valid;
