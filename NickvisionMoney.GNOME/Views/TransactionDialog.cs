@@ -63,11 +63,6 @@ public partial class TransactionDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
-    private new delegate bool PressedSignal(nint gObject, uint keyval, uint keycode, nint state, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] PressedSignal c_handler, nint data, nint destroy_data, int connect_flags);
-
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
@@ -174,8 +169,8 @@ public partial class TransactionDialog
         };
         _amountKeyController = Gtk.EventControllerKey.New();
         _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _amountKeyController.OnKeyPressed += OnKeyPressed;
         _rowAmount.AddController(_amountKeyController);
-        g_signal_connect_data(_amountKeyController.Handle, "key-pressed", OnKeyPressed, IntPtr.Zero, IntPtr.Zero, 0);
         _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
@@ -377,11 +372,13 @@ public partial class TransactionDialog
     /// <summary>
     /// Callback for key-pressed signal
     /// </summary>
-    private bool OnKeyPressed(nint sender, uint keyval, uint keycode, nint state, nint data)
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
     {
         if (_controller.InsertSeparator != InsertSeparator.Off)
         {
-            if (keyval == 65454 || keyval == 65452 || keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (keyval == 44 || keyval == 46)))
+            if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 _rowAmount.SetText(_rowAmount.GetText() + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 _rowAmount.SetPosition(_rowAmount.GetText().Length);
