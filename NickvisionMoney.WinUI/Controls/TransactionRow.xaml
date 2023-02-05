@@ -31,7 +31,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Button x:Name="BtnId" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0" CornerRadius="10" Foreground="White" Click="Edit"/>
