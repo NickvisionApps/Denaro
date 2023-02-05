@@ -113,7 +113,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
-            if(_controller.NewPassword != null)
+            if (_controller.NewPassword != null)
             {
                 InfoBadgePassword.Visibility = Visibility.Visible;
                 InfoBadgePassword.Style = (Style)App.Current.Resources["SuccessDotInfoBadgeStyle"];

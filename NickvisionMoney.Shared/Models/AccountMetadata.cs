@@ -91,7 +91,7 @@ public class AccountMetadata : ICloneable
     /// <returns>AccountMetadata?</returns>
     public static AccountMetadata? LoadFromAccountFile(string path, string? password)
     {
-        if(Path.GetExtension(path) != ".nmoney")
+        if (Path.GetExtension(path) != ".nmoney")
         {
             return null;
         }
@@ -101,7 +101,7 @@ public class AccountMetadata : ICloneable
             Mode = SqliteOpenMode.ReadOnly,
             Pooling = false
         };
-        if(!string.IsNullOrEmpty(password))
+        if (!string.IsNullOrEmpty(password))
         {
             connectionString.Password = password;
         }

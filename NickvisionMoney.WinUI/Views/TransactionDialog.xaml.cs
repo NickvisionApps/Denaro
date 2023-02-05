@@ -40,7 +40,7 @@ public sealed partial class TransactionDialog : ContentDialog
         Title = $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}";
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer["OK"];
-        if(_controller.CanCopy)
+        if (_controller.CanCopy)
         {
             SecondaryButtonText = _controller.Localizer["MakeCopy"];
         }
@@ -110,7 +110,7 @@ public sealed partial class TransactionDialog : ContentDialog
         set
         {
             _selectedColor = value;
-            if(!_constructing)
+            if (!_constructing)
             {
                 Validate();
             }
@@ -129,7 +129,7 @@ public sealed partial class TransactionDialog : ContentDialog
             _controller.Accepted = false;
             return false;
         }
-        if(result == ContentDialogResult.Secondary)
+        if (result == ContentDialogResult.Secondary)
         {
             _controller.CopyRequested = true;
         }
@@ -153,7 +153,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else
         {
-            if(checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
+            if (checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
             {
                 TxtDescription.Header = _controller.Localizer["Description", "Empty"];
             }

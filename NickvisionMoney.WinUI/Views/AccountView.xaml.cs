@@ -115,7 +115,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
-        if(index != null)
+        if (index != null)
         {
             ListGroups.Items.Insert(index.Value, row);
         }
@@ -186,7 +186,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             ListTransactions.Items.Insert(index, row);
             ListTransactions.UpdateLayout();
             ((TransactionRow)row).Container = (GridViewItem)ListTransactions.ContainerFromIndex(index);
-            if(oldVisibility == Visibility.Visible)
+            if (oldVisibility == Visibility.Visible)
             {
                 row.Show();
             }
@@ -210,7 +210,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e"></param>
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        if(!_isOpened)
+        if (!_isOpened)
         {
             //Start Loading
             LoadingCtrl.IsLoading = true;
@@ -353,7 +353,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         {
             XamlRoot = Content.XamlRoot
         };
-        if(await transactionDialog.ShowAsync())
+        if (await transactionDialog.ShowAsync())
         {
             //Start Loading
             LoadingCtrl.IsLoading = true;
@@ -402,12 +402,12 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         };
         if (await transactionDialog.ShowAsync())
         {
-            if(transactionController.CopyRequested)
+            if (transactionController.CopyRequested)
             {
                 await CopyTransactionAsync(transactionController.Transaction);
                 return;
             }
-            if(_controller.GetIsSourceRepeatTransaction(transactionId) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            if (_controller.GetIsSourceRepeatTransaction(transactionId) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
@@ -433,7 +433,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                         //Done Loading
                         LoadingCtrl.IsLoading = false;
                     }
-                    else if(result == ContentDialogResult.Secondary)
+                    else if (result == ContentDialogResult.Secondary)
                     {
                         //Start Loading
                         LoadingCtrl.IsLoading = true;
@@ -489,7 +489,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="groupId">The id of the transaction to be deleted</param>
     private async void DeleteTransaction(object? sender, uint transactionId)
     {
-        if(_controller.GetIsSourceRepeatTransaction(transactionId))
+        if (_controller.GetIsSourceRepeatTransaction(transactionId))
         {
             var deleteDialog = new ContentDialog()
             {
@@ -543,7 +543,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         {
             XamlRoot = Content.XamlRoot
         };
-        if(await groupDialog.ShowAsync())
+        if (await groupDialog.ShowAsync())
         {
             //Start Loading
             LoadingCtrl.IsLoading = true;
@@ -567,7 +567,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         {
             XamlRoot = Content.XamlRoot
         };
-        if(await groupDialog.ShowAsync())
+        if (await groupDialog.ShowAsync())
         {
             //Start Loading
             LoadingCtrl.IsLoading = true;
@@ -595,7 +595,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
-        if(await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
+        if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
         {
             await _controller.DeleteGroupAsync(groupId);
         }
@@ -615,7 +615,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e">RoutedEventArgs</param>
     private async void TransferMoney(object? sender, RoutedEventArgs e)
     {
-        if(_controller.AccountTodayTotal > 0)
+        if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _initializeWithWindow)
@@ -704,7 +704,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e">RoutedEventArgs</param>
     private void ShowHideGroups(object? sender, RoutedEventArgs e)
     {
-        if(SectionGroups.Visibility == Visibility.Visible)
+        if (SectionGroups.Visibility == Visibility.Visible)
         {
             SectionGroups.Visibility = Visibility.Collapsed;
             RowSidebarGroups.Height = new GridLength(0, GridUnitType.Pixel);
@@ -728,7 +728,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e">RoutedEventArgs</param>
     private void ResetOverviewFilters(object? sender, RoutedEventArgs e)
     {
-        if(!(ChkFilterIncome.IsChecked ?? false))
+        if (!(ChkFilterIncome.IsChecked ?? false))
         {
             ChkFilterIncome.IsChecked = true;
         }
@@ -773,7 +773,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         if (await accountSettingsDialog.ShowAsync())
         {
             _controller.UpdateMetadata(accountSettingsController.Metadata);
-            if(accountSettingsController.NewPassword != null)
+            if (accountSettingsController.NewPassword != null)
             {
                 //Start Loading
                 LoadingCtrl.IsLoading = true;
@@ -814,7 +814,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e">CalendarViewSelectedDatesChangedEventArgs</param>
     private void Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs e)
     {
-        if(Calendar.SelectedDates.Count == 1)
+        if (Calendar.SelectedDates.Count == 1)
         {
             _controller.SetSingleDateFilter(DateOnly.FromDateTime(Calendar.SelectedDates[0].Date));
         }
@@ -841,7 +841,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <param name="e">SelectionChangedEventArgs</param>
     private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if(ListGroups.SelectedIndex != -1)
+        if (ListGroups.SelectedIndex != -1)
         {
             var groupRow = (GroupRow)ListGroups.SelectedItem;
             groupRow.Edit(this, new RoutedEventArgs());

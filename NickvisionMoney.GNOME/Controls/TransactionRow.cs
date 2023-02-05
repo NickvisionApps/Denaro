@@ -128,13 +128,13 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         set
         {
             _isSmall = value;
-            if(_isSmall)
+            if (_isSmall)
             {
                 _row.AddCssClass("row-small");
                 _boxSuffix.SetOrientation(Gtk.Orientation.Vertical);
                 _boxSuffix.SetMarginTop(4);
                 _btnId.SetVisible(false);
-            }   
+            }
             else
             {
                 _row.RemoveCssClass("row-small");

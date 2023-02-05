@@ -137,7 +137,7 @@ public class TransferDialogController
             }
             else
             {
-                if(_previousDestPath != destPath)
+                if (_previousDestPath != destPath)
                 {
                     _previousDestPath = destPath;
                     _previousDestMetadata = null;
@@ -153,7 +153,7 @@ public class TransferDialogController
                 }
                 CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
                 var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-                if(_previousDestMetadata == null)
+                if (_previousDestMetadata == null)
                 {
                     _previousDestMetadata = AccountMetadata.LoadFromAccountFile(destPath, destPassword)!;
                 }

@@ -2,7 +2,6 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -127,7 +126,8 @@ public partial class TransactionDialog
         _dialog.AddResponse("ok", _controller.Localizer["OK"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => {
+        _dialog.OnResponse += (sender, e) =>
+        {
             _controller.Accepted = e.Response != "cancel";
             _controller.CopyRequested = e.Response == "copy";
         };
@@ -145,7 +145,7 @@ public partial class TransactionDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(!_constructing)
+                if (!_constructing)
                 {
                     Validate();
                 }
@@ -171,7 +171,7 @@ public partial class TransactionDialog
         _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _amountKeyController.OnKeyPressed += OnKeyPressed;
         _rowAmount.AddController(_amountKeyController);
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({ _controller.CultureForNumberString.NumberFormat.NaNSymbol})");
+        _lblCurrency = Gtk.Label.New($"{_controller.CultureForNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForNumberString.NumberFormat.NaNSymbol})");
         _lblCurrency.AddCssClass("dim-label");
         _rowAmount.AddSuffix(_lblCurrency);
         _grpMain.Add(_rowAmount);
@@ -219,7 +219,7 @@ public partial class TransactionDialog
         _rowRepeatInterval.SetModel(Gtk.StringList.New(new string[8] { _controller.Localizer["RepeatInterval", "Never"], _controller.Localizer["RepeatInterval", "Daily"], _controller.Localizer["RepeatInterval", "Weekly"], _controller.Localizer["RepeatInterval", "Biweekly"], _controller.Localizer["RepeatInterval", "Monthly"], _controller.Localizer["RepeatInterval", "Quarterly"], _controller.Localizer["RepeatInterval", "Yearly"], _controller.Localizer["RepeatInterval", "Biyearly"] }));
         _rowRepeatInterval.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "selected-item")
             {
                 OnRepeatIntervalChanged();
             }
@@ -254,7 +254,7 @@ public partial class TransactionDialog
         _rowGroup = Adw.ComboRow.New();
         _rowGroup.SetTitle(_controller.Localizer["Group", "Field"]);
         var groups = new List<string>();
-        foreach(var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
+        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
         {
             groups.Add(pair.Value);
         }

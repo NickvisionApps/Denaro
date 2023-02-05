@@ -33,18 +33,18 @@ public partial class MessageDialog
         _dialog = Adw.MessageDialog.New(parentWindow, title, message);
         _dialog.SetHideOnClose(true);
         Response = MessageDialogResponse.Cancel;
-        if(!string.IsNullOrEmpty(cancelText))
+        if (!string.IsNullOrEmpty(cancelText))
         {
             _dialog.AddResponse("cancel", cancelText);
             _dialog.SetDefaultResponse("cancel");
             _dialog.SetCloseResponse("cancel");
         }
-        if(!string.IsNullOrEmpty(destructiveText))
+        if (!string.IsNullOrEmpty(destructiveText))
         {
             _dialog.AddResponse("destructive", destructiveText);
             _dialog.SetResponseAppearance("destructive", Adw.ResponseAppearance.Destructive);
         }
-        if(!string.IsNullOrEmpty(suggestedText))
+        if (!string.IsNullOrEmpty(suggestedText))
         {
             _dialog.AddResponse("suggested", suggestedText);
             _dialog.SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);

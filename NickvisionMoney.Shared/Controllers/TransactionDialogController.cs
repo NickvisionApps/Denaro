@@ -172,7 +172,7 @@ public class TransactionDialogController : IDisposable
             {
                 File.Delete(jpgPath);
             }
-            if(!Accepted)
+            if (!Accepted)
             {
                 Transaction.Dispose();
             }
@@ -213,20 +213,20 @@ public class TransactionDialogController : IDisposable
         {
             image = Transaction.Receipt;
         }
-        if(image != null)
+        if (image != null)
         {
             var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
             await image.SaveAsJpegAsync(jpgPath);
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Process.Start(new ProcessStartInfo("explorer", $"\"{jpgPath}\"") { CreateNoWindow = true });
             }
-            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
             }
         }
-        if(receiptPath != null)
+        if (receiptPath != null)
         {
             image?.Dispose();
         }
@@ -249,7 +249,7 @@ public class TransactionDialogController : IDisposable
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
-        if(string.IsNullOrEmpty(description))
+        if (string.IsNullOrEmpty(description))
         {
             result |= TransactionCheckStatus.EmptyDescription;
         }
@@ -265,22 +265,22 @@ public class TransactionDialogController : IDisposable
         {
             result |= TransactionCheckStatus.InvalidAmount;
         }
-        if(repeatEndDate.HasValue && repeatEndDate.Value <= date)
+        if (repeatEndDate.HasValue && repeatEndDate.Value <= date)
         {
             result |= TransactionCheckStatus.InvalidRepeatEndDate;
         }
-        if(result != 0)
+        if (result != 0)
         {
             return result;
         }
         Transaction.Date = date;
         Transaction.Description = description;
         Transaction.Type = type;
-        if(selectedRepeat == 3)
+        if (selectedRepeat == 3)
         {
             selectedRepeat = 7;
         }
-        else if(selectedRepeat > 3)
+        else if (selectedRepeat > 3)
         {
             selectedRepeat -= 1;
         }
@@ -288,7 +288,7 @@ public class TransactionDialogController : IDisposable
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
         Transaction.RGBA = rgba;
-        if(receiptPath != null)
+        if (receiptPath != null)
         {
             if (Path.Exists(receiptPath))
             {
@@ -310,11 +310,11 @@ public class TransactionDialogController : IDisposable
                 Transaction.Receipt = null;
             }
         }
-        if(Transaction.RepeatInterval == TransactionRepeatInterval.Never)
+        if (Transaction.RepeatInterval == TransactionRepeatInterval.Never)
         {
             Transaction.RepeatFrom = -1;
         }
-        else if(Transaction.RepeatInterval != OriginalRepeatInterval)
+        else if (Transaction.RepeatInterval != OriginalRepeatInterval)
         {
             Transaction.RepeatFrom = 0;
         }

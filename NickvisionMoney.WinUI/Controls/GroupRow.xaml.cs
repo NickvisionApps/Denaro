@@ -118,7 +118,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// <param name="e">RoutedEventArgs</param>
     public void Edit(object sender, RoutedEventArgs e)
     {
-        if(Id != 0)
+        if (Id != 0)
         {
             EditTriggered?.Invoke(this, Id);
         }
@@ -131,7 +131,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// <param name="e">RoutedEventArgs</param>
     private void Delete(object sender, RoutedEventArgs e)
     {
-        if(Id != 0)
+        if (Id != 0)
         {
             DeleteTriggered?.Invoke(this, Id);
         }

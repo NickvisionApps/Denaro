@@ -73,11 +73,11 @@ public class GroupDialogController
     /// <returns>GroupCheckStatus</returns>
     public GroupCheckStatus UpdateGroup(string name, string description)
     {
-        if(string.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(name))
         {
             return GroupCheckStatus.EmptyName;
         }
-        if(name != _originalName && _existingNames.Contains(name))
+        if (name != _originalName && _existingNames.Contains(name))
         {
             return GroupCheckStatus.NameExists;
         }

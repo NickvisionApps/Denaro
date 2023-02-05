@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Helpers;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.WinUI.Controls;
 

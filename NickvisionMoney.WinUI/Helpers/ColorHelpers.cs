@@ -7,7 +7,7 @@ public static class ColorHelpers
 {
     public static Color? FromRGBA(string rgba)
     {
-        if(string.IsNullOrEmpty(rgba))
+        if (string.IsNullOrEmpty(rgba))
         {
             return null;
         }
@@ -54,7 +54,7 @@ public static class ColorHelpers
 
     public static string ToRGBA(this Color color)
     {
-        if(color.A == 255)
+        if (color.A == 255)
         {
             return $"rgb({color.R},{color.G},{color.B})";
         }

@@ -131,9 +131,9 @@ public sealed partial class MainWindow : Window
     /// <param name="title">The new title</param>
     private void UpdateNavViewItemTitle(string path, string title)
     {
-        foreach(NavigationViewItem navViewItem in NavView.MenuItems)
+        foreach (NavigationViewItem navViewItem in NavView.MenuItems)
         {
-            if((string)ToolTipService.GetToolTip(navViewItem) == path)
+            if ((string)ToolTipService.GetToolTip(navViewItem) == path)
             {
                 navViewItem.Content = title;
                 break;
@@ -206,7 +206,7 @@ public sealed partial class MainWindow : Window
                 {
                     if (item is StorageFile file)
                     {
-                        if(Path.GetExtension(file.Path) == ".nmoney")
+                        if (Path.GetExtension(file.Path) == ".nmoney")
                         {
                             await _controller.AddAccountAsync(file.Path);
                         }
@@ -227,7 +227,7 @@ public sealed partial class MainWindow : Window
         if (pageName == "OpenAccount")
         {
             var path = (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem);
-            if(!_accountViews.ContainsKey(path))
+            if (!_accountViews.ContainsKey(path))
             {
                 _accountViews.Add(path, new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == path)], UpdateNavViewItemTitle, InitializeWithWindow));
             }
@@ -256,12 +256,12 @@ public sealed partial class MainWindow : Window
             NotificationSeverity.Error => InfoBarSeverity.Error,
             _ => InfoBarSeverity.Informational
         };
-        if(_notificationButtonClickEvent != null)
+        if (_notificationButtonClickEvent != null)
         {
             BtnInfoBar.Click -= _notificationButtonClickEvent;
         }
         BtnInfoBar.Visibility = !string.IsNullOrEmpty(e.Action) ? Visibility.Visible : Visibility.Collapsed;
-        if(e.Action == "help-import")
+        if (e.Action == "help-import")
         {
             BtnInfoBar.Content = _controller.Localizer["Help"];
             _notificationButtonClickEvent = async (sender, e) =>
@@ -322,7 +322,7 @@ public sealed partial class MainWindow : Window
     private void RecentAccountsChanged(object? sender, EventArgs e)
     {
         ListRecentAccounts.Items.Clear();
-        foreach(var recentAccount in _controller.RecentAccounts)
+        foreach (var recentAccount in _controller.RecentAccounts)
         {
             var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
             var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
@@ -376,15 +376,15 @@ public sealed partial class MainWindow : Window
         fileSavePicker.SuggestedFileName = _controller.Localizer["NewAccount"];
         fileSavePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
         var file = await fileSavePicker.PickSaveFileAsync();
-        if(file != null)
+        if (file != null)
         {
-            if(_controller.IsAccountOpen(file.Path))
+            if (_controller.IsAccountOpen(file.Path))
             {
                 NotificationSent(null, new NotificationSentEventArgs(_controller.Localizer["UnableToOverride"], NotificationSeverity.Error));
             }
             else
             {
-                if(File.Exists(file.Path))
+                if (File.Exists(file.Path))
                 {
                     File.Delete(file.Path);
                 }
@@ -418,7 +418,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">SelectionChangedEventArgs</param>
     private async void ListRecentAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if(ListRecentAccounts.SelectedIndex != -1)
+        if (ListRecentAccounts.SelectedIndex != -1)
         {
             var selectedIndex = ListRecentAccounts.SelectedIndex;
             ListRecentAccounts.SelectedIndex = -1;

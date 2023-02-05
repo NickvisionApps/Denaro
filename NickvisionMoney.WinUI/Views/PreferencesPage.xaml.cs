@@ -195,7 +195,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     private async void Help(object sender, RoutedEventArgs e)
     {
         var lang = "C";
-        var availableTranslations = new string[2] {"es", "ru"};
+        var availableTranslations = new string[2] { "es", "ru" };
         if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
         {
             lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;

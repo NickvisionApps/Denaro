@@ -12,7 +12,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -98,9 +97,9 @@ public class Account : IDisposable
     {
         get
         {
-            if(_isEncrypted == null)
+            if (_isEncrypted == null)
             {
-                if(!File.Exists(Path))
+                if (!File.Exists(Path))
                 {
                     _isEncrypted = false;
                 }
@@ -149,17 +148,17 @@ public class Account : IDisposable
     /// </summary>
     protected virtual void Dispose(bool disposing)
     {
-        if(_disposed)
+        if (_disposed)
         {
             return;
         }
-        if(disposing)
+        if (disposing)
         {
             foreach (var pair in Transactions)
             {
                 pair.Value.Dispose();
             }
-            if(_database != null)
+            if (_database != null)
             {
                 FreeMemory();
                 _database.Close();
@@ -177,7 +176,7 @@ public class Account : IDisposable
     /// <returns>True if logged in, else false</returns>
     public bool Login(string? password)
     {
-        if(!_loggedIn)
+        if (!_loggedIn)
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder()
             {
@@ -255,7 +254,7 @@ public class Account : IDisposable
         cmdQuote.Parameters.AddWithValue("$password", password);
         var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
         //Change password
-        if(IsEncrypted)
+        if (IsEncrypted)
         {
             using var command = _database.CreateCommand();
             command.CommandText = $"PRAGMA rekey = {quotedPassword}";
@@ -309,7 +308,7 @@ public class Account : IDisposable
     /// <returns>True if loaded, else false</returns>
     public async Task<bool> LoadAsync()
     {
-        if(!_loggedIn)
+        if (!_loggedIn)
         {
             return false;
         }
@@ -614,15 +613,15 @@ public class Account : IDisposable
         var transactionsModified = false;
         var transactions = Transactions.Values.ToList();
         var i = 0;
-        foreach(var transaction in transactions)
+        foreach (var transaction in transactions)
         {
-            if(transaction.RepeatFrom == 0)
+            if (transaction.RepeatFrom == 0)
             {
                 var dates = new List<DateOnly>();
                 var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
                 for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
                 {
-                    if(date != transaction.Date)
+                    if (date != transaction.Date)
                     {
                         dates.Add(date);
                     }
@@ -642,27 +641,27 @@ public class Account : IDisposable
                     {
                         date = date.AddMonths(1);
                     }
-                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
                     {
                         date = date.AddMonths(3);
                     }
-                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
                     {
                         date = date.AddYears(1);
                     }
-                    else if(transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
                     {
                         date = date.AddYears(2);
                     }
                 }
-                for(var j = i; j < transactions.Count; j++)
+                for (var j = i; j < transactions.Count; j++)
                 {
                     if (transactions[j].RepeatFrom == transaction.Id)
                     {
                         dates.Remove(transactions[j].Date);
                     }
                 }
-                foreach(var date in dates)
+                foreach (var date in dates)
                 {
                     var newTransaction = new Transaction(NextAvailableTransactionId)
                     {
@@ -681,7 +680,7 @@ public class Account : IDisposable
                     transactionsModified = true;
                 }
             }
-            else if(transaction.RepeatFrom > 0)
+            else if (transaction.RepeatFrom > 0)
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
@@ -692,7 +691,7 @@ public class Account : IDisposable
             i++;
         }
         return transactionsModified;
-    } 
+    }
 
     /// <summary>
     /// Adds a group to the account
@@ -706,7 +705,7 @@ public class Account : IDisposable
         cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
         cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
         cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
-        if(await cmdAddGroup.ExecuteNonQueryAsync() > 0)
+        if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Add(group.Id, group);
             NextAvailableGroupId++;
@@ -728,7 +727,7 @@ public class Account : IDisposable
         cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
         cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
         cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
-        if(await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
+        if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups[group.Id] = group;
             FreeMemory();
@@ -814,7 +813,7 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
+            if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
@@ -884,7 +883,7 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if(transaction.RepeatFrom == 0)
+            if (transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
@@ -998,9 +997,9 @@ public class Account : IDisposable
         else
         {
             await DeleteTransactionAsync(id);
-            foreach(var transaction in transactions)
+            foreach (var transaction in transactions)
             {
-                if(transaction.RepeatFrom == (int)id)
+                if (transaction.RepeatFrom == (int)id)
                 {
                     var t = (Transaction)transaction.Clone();
                     t.RepeatInterval = TransactionRepeatInterval.Never;
@@ -1074,20 +1073,20 @@ public class Account : IDisposable
     public async Task<List<uint>> ImportFromFileAsync(string path)
     {
         var ids = new List<uint>();
-        if(!System.IO.Path.Exists(path))
+        if (!System.IO.Path.Exists(path))
         {
             return ids;
         }
         var extension = System.IO.Path.GetExtension(path);
-        if(extension == ".csv")
+        if (extension == ".csv")
         {
             return await ImportFromCSVAsync(path);
         }
-        else if(extension == ".ofx")
+        else if (extension == ".ofx")
         {
             return await ImportFromOFXAsync(path);
         }
-        else if(extension == ".qif")
+        else if (extension == ".qif")
         {
             return await ImportFromQIFAsync(path);
         }
@@ -1102,11 +1101,11 @@ public class Account : IDisposable
     public bool ExportToFile(string path)
     {
         var extension = System.IO.Path.GetExtension(path);
-        if(extension == ".csv")
+        if (extension == ".csv")
         {
             return ExportToCSV(path);
         }
-        else if(extension == ".pdf")
+        else if (extension == ".pdf")
         {
             return ExportToPDF(path);
         }
@@ -1233,7 +1232,7 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(localizer["Total"]);
-                            var total =  GetTotal(maxDate);
+                            var total = GetTotal(maxDate);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{Math.Abs(total).ToString("C", cultureAmount)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToString("C", cultureAmount));
@@ -1261,7 +1260,7 @@ public class Account : IDisposable
                                 AccountType.Business => localizer["AccountType", "Business"],
                                 _ => ""
                             });
-                            if(Metadata.UseCustomCurrency)
+                            if (Metadata.UseCustomCurrency)
                             {
                                 tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} ({Metadata.CustomCurrencyCode})");
                             }
@@ -1562,11 +1561,11 @@ public class Account : IDisposable
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
-            if(transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
             {
-                foreach(var pair in Transactions)
+                foreach (var pair in Transactions)
                 {
-                    if(pair.Value.RepeatFrom == transaction.Id)
+                    if (pair.Value.RepeatFrom == transaction.Id)
                     {
                         ids.Add(pair.Value.Id);
                     }
@@ -1702,21 +1701,21 @@ public class Account : IDisposable
         var nextId = NextAvailableTransactionId;
         var transaction = new Transaction(nextId);
         var skipTransaction = false;
-        foreach(var l in lines)
+        foreach (var l in lines)
         {
             var line = l;
-            if(line.Contains('\r'))
+            if (line.Contains('\r'))
             {
                 line = line.Remove(line.IndexOf('\r'));
             }
-            if(line.Length == 0)
+            if (line.Length == 0)
             {
                 continue;
             }
             //Add Previous Transaction
             if (line[0] == '^')
             {
-                if(!skipTransaction)
+                if (!skipTransaction)
                 {
                     await AddTransactionAsync(transaction);
                     ids.Add(transaction.Id);

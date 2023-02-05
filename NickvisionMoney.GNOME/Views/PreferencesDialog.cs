@@ -88,7 +88,7 @@ public partial class PreferencesDialog : Adw.Window
         _rowTheme.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["ThemeLight"], _controller.Localizer["ThemeDark"], _controller.Localizer["ThemeSystem"] }));
         _rowTheme.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "selected-item")
             {
                 OnThemeChanged();
             }
@@ -148,13 +148,13 @@ public partial class PreferencesDialog : Adw.Window
         _page.Add(_grpLocale);
         // Period Replacement Row
         _rowInsertSeparator = Adw.ComboRow.New();
-        _rowInsertSeparator.SetModel(Gtk.StringList.New(new string [] { _controller.Localizer["InsertSeparatorOff"], _controller.Localizer["InsertSeparatorNumpad"], _controller.Localizer["InsertSeparatorPeriodComma"] }));
+        _rowInsertSeparator.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["InsertSeparatorOff"], _controller.Localizer["InsertSeparatorNumpad"], _controller.Localizer["InsertSeparatorPeriodComma"] }));
         _rowInsertSeparator.SetTitle(_controller.Localizer["InsertSeparator"]);
         _rowInsertSeparator.SetSubtitle(_controller.Localizer["InsertSeparator", "Description"]);
         _rowInsertSeparator.SetSubtitleLines(3);
         _rowInsertSeparator.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "selected-item")
             {
                 _controller.InsertSeparator = (InsertSeparator)_rowInsertSeparator.GetSelected();
             }

@@ -1,7 +1,6 @@
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
@@ -58,7 +57,7 @@ public partial class AccountSettingsDialog
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
-        if(!_controller.NeedsSetup)
+        if (!_controller.NeedsSetup)
         {
             _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
             _dialog.SetCloseResponse("cancel");
@@ -110,10 +109,10 @@ public partial class AccountSettingsDialog
         _grpAccount.Add(_rowName);
         //Account Type
         _rowAccountType = Adw.ComboRow.New();
-        _rowAccountType.SetModel(Gtk.StringList.New(new string[3] {_controller.Localizer["AccountType", "Checking"], _controller.Localizer["AccountType", "Savings"], _controller.Localizer["AccountType", "Business"]}));
+        _rowAccountType.SetModel(Gtk.StringList.New(new string[3] { _controller.Localizer["AccountType", "Checking"], _controller.Localizer["AccountType", "Savings"], _controller.Localizer["AccountType", "Business"] }));
         _rowAccountType.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "selected-item")
+            if (e.Pspec.GetName() == "selected-item")
             {
                 OnAccountTypeChanged();
             }
@@ -317,7 +316,7 @@ public partial class AccountSettingsDialog
         }
         else
         {
-            if(checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
             {
                 _rowName.AddCssClass("error");
                 _rowName.SetTitle(_controller.Localizer["Name", "Empty"]);
@@ -341,14 +340,14 @@ public partial class AccountSettingsDialog
     /// </summary>
     private void OnNameChanged()
     {
-        if(_rowName.GetText().Length == 0)
+        if (_rowName.GetText().Length == 0)
         {
             _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);
         }
         else
         {
             var split = _rowName.GetText().Split(' ');
-            if(split.Length == 1)
+            if (split.Length == 1)
             {
                 _btnAvatar.SetLabel(split[0].Substring(0, split[0].Length > 1 ? 2 : 1));
             }

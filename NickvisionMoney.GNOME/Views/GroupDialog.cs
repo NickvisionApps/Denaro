@@ -45,7 +45,7 @@ public partial class GroupDialog
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(!_constructing)
+                if (!_constructing)
                 {
                     Validate();
                 }

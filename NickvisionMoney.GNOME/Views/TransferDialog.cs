@@ -1,7 +1,6 @@
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
