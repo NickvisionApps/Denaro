@@ -190,6 +190,9 @@ public sealed partial class TransferDialog : ContentDialog
         if (ListRecentAccounts.SelectedIndex != -1)
         {
             TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
+            BoxDestinationPassword.Visibility = Visibility.Collapsed;
+            TxtDestinationPassword.Password = "";
+            TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
             TxtSourceCurrency.Text = "";

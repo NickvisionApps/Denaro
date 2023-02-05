@@ -155,6 +155,9 @@ public partial class TransferDialog
             {
                 _popRecentAccounts.Popdown();
                 _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
+                _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetText("");
+                _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
                 _rowSourceCurrency.SetText("");
                 _rowDestCurrency.SetText("");
@@ -268,8 +271,8 @@ public partial class TransferDialog
         {
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
-                var path = openFileDialog.GetFile()!.GetPath();
-                _rowDestinationAccount.SetSubtitle(path ?? "");
+                var path = openFileDialog.GetFile()!.GetPath() ?? "";
+                _rowDestinationAccount.SetSubtitle(path);
                 _rowDestinationPassword.SetVisible(false);
                 _rowDestinationPassword.SetText("");
                 _rowAmount.SetText("");
