@@ -15,11 +15,6 @@ public partial class TransferDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    private new delegate bool PressedSignal(nint gObject, uint keyval, uint keycode, nint state, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] PressedSignal c_handler, nint data, nint destroy_data, int connect_flags);
-
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly Adw.MessageDialog _dialog;
@@ -114,8 +109,8 @@ public partial class TransferDialog
         };
         _amountKeyController = Gtk.EventControllerKey.New();
         _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _amountKeyController.OnKeyPressed += OnKeyPressed;
         _rowAmount.AddController(_amountKeyController);
-        g_signal_connect_data(_amountKeyController.Handle, "key-pressed", OnKeyPressed, IntPtr.Zero, IntPtr.Zero, 0);
         _grpMain.Add(_rowAmount);
         //Conversion Rate
         _grpConversionRate = Adw.PreferencesGroup.New();
@@ -307,11 +302,13 @@ public partial class TransferDialog
     /// <summary>
     /// Callback for key-pressed signal
     /// </summary>
-    private bool OnKeyPressed(nint sender, uint keyval, uint keycode, nint state, nint data)
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
     {
          if (_controller.InsertSeparator != InsertSeparator.Off)
         {
-            if (keyval == 65454 || keyval == 65452 || keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (keyval == 44 || keyval == 46)))
+            if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 _rowAmount.SetText(_rowAmount.GetText() + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 _rowAmount.SetPosition(_rowAmount.GetText().Length);
