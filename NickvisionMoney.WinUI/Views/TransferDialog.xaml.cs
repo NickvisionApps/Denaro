@@ -108,6 +108,7 @@ public sealed partial class TransferDialog : ContentDialog
         var checkStatus = _controller.UpdateTransfer(TxtDestinationAccount.Text, TxtDestinationPassword.Password, TxtAmount.Text, TxtSourceCurrency.Text, TxtDestCurrency.Text);
         TxtDestinationAccount.Header = _controller.Localizer["DestinationAccount", "Field"];
         TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Field"];
+        TxtAmount.Visibility = Visibility.Visible;
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} - {_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})")}";
         TxtSourceCurrency.Header = _controller.SourceCurrencyCode;
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
@@ -127,10 +128,12 @@ public sealed partial class TransferDialog : ContentDialog
             {
                 BoxDestinationPassword.Visibility = Visibility.Visible;
                 TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Required"];
+                TxtAmount.Visibility = Visibility.Collapsed;
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
             {
                 TxtDestinationPassword.Header = _controller.Localizer["DestinationPassword", "Invalid"];
+                TxtAmount.Visibility = Visibility.Collapsed;
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {

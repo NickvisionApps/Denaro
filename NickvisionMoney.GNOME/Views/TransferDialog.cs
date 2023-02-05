@@ -202,6 +202,7 @@ public partial class TransferDialog
         _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
         _rowAmount.RemoveCssClass("error");
         _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _rowAmount.SetVisible(true);
         _rowSourceCurrency.RemoveCssClass("error");
         _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
         _rowDestCurrency.RemoveCssClass("error");
@@ -223,11 +224,13 @@ public partial class TransferDialog
                 _rowDestinationPassword.SetVisible(true);
                 _rowDestinationPassword.AddCssClass("error");
                 _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Required"]);
+                _rowAmount.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
             {
                 _rowDestinationPassword.AddCssClass("error");
                 _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Invalid"]);
+                _rowAmount.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
