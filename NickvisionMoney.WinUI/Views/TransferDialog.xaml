@@ -18,7 +18,7 @@
             <wct:DockPanel HorizontalAlignment="Stretch" Margin="0,10,0,0" LastChildFill="True">
                 <Button x:Name="BtnRecentAccounts" wct:DockPanel.Dock="Right" Margin="6,26,0,0">
                     <Button.Content>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE823;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE823;"/>
                     </Button.Content>
 
                     <Button.Flyout>
@@ -36,11 +36,21 @@
 
                 <Button x:Name="BtnSelectAccount" wct:DockPanel.Dock="Right" Margin="6,26,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectAccount">
                     <Button.Content>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE838;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
                     </Button.Content>
                 </Button>
 
                 <TextBox Name="TxtDestinationAccount" wct:DockPanel.Dock="Left" IsReadOnly="True"/>
+            </wct:DockPanel>
+
+            <wct:DockPanel x:Name="BoxDestinationPassword" HorizontalAlignment="Stretch" Visibility="Collapsed" LastChildFill="True">
+                <Button x:Name="BtnApplyDestinationPassword" wct:DockPanel.Dock="Right" Margin="6,26,0,0" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Click="ApplyDestinationPassword">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE10B;"/>
+                    </Button.Content>
+                </Button>
+                
+                <PasswordBox Name="TxtDestinationPassword" wct:DockPanel.Dock="Left" PasswordChanged="TxtDestinationPassword_PasswordChanged"/>
             </wct:DockPanel>
 
             <TextBox Name="TxtAmount" HorizontalAlignment="Stretch" TextChanged="TxtAmount_TextChanged"/>
