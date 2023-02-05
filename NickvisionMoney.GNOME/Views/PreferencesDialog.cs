@@ -39,6 +39,7 @@ public partial class PreferencesDialog : Adw.Window
     private readonly Adw.PreferencesPage _page;
     private readonly Adw.PreferencesGroup _grpUserInterface;
     private readonly Adw.ComboRow _rowTheme;
+    private readonly Adw.ExpanderRow _rowColors;
     private readonly Adw.ActionRow _rowTransactionColor;
     private readonly Gtk.ColorButton _btnTransactionColor;
     private readonly Adw.ActionRow _rowTransferColor;
@@ -64,7 +65,7 @@ public partial class PreferencesDialog : Adw.Window
         _controller = controller;
         _application = application;
         SetTransientFor(parent);
-        SetDefaultSize(600, 610);
+        SetDefaultSize(600, 410);
         SetModal(true);
         SetDestroyWithParent(false);
         SetHideOnClose(true);
@@ -85,6 +86,7 @@ public partial class PreferencesDialog : Adw.Window
         //Theme Row
         _rowTheme = Adw.ComboRow.New();
         _rowTheme.SetTitle(_controller.Localizer["Theme"]);
+        _rowTheme.SetIconName("dark-mode-symbolic");
         _rowTheme.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["ThemeLight"], _controller.Localizer["ThemeDark"], _controller.Localizer["ThemeSystem"] }));
         _rowTheme.OnNotify += (sender, e) =>
         {
@@ -94,6 +96,12 @@ public partial class PreferencesDialog : Adw.Window
             }
         };
         _grpUserInterface.Add(_rowTheme);
+        //Colors Row
+        _rowColors = Adw.ExpanderRow.New();
+        _rowColors.SetTitle(_controller.Localizer["Colors"]);
+        _rowColors.SetSubtitle(_controller.Localizer["ColorsDescription"]);
+        _rowColors.SetIconName("preferences-color-symbolic");
+        _grpUserInterface.Add(_rowColors);
         //Transaction Color Row
         _rowTransactionColor = Adw.ActionRow.New();
         _rowTransactionColor.SetTitle(_controller.Localizer["TransactionColor"]);
@@ -103,7 +111,7 @@ public partial class PreferencesDialog : Adw.Window
         _btnTransactionColor.OnColorSet += OnTransactionColorSet;
         _rowTransactionColor.AddSuffix(_btnTransactionColor);
         _rowTransactionColor.SetActivatableWidget(_btnTransactionColor);
-        _grpUserInterface.Add(_rowTransactionColor);
+        _rowColors.AddRow(_rowTransactionColor);
         //Transfer Color Row
         _rowTransferColor = Adw.ActionRow.New();
         _rowTransferColor.SetTitle(_controller.Localizer["TransferColor"]);
@@ -113,7 +121,7 @@ public partial class PreferencesDialog : Adw.Window
         _btnTransferColor.OnColorSet += OnTransferColorSet;
         _rowTransferColor.AddSuffix(_btnTransferColor);
         _rowTransferColor.SetActivatableWidget(_btnTransferColor);
-        _grpUserInterface.Add(_rowTransferColor);
+        _rowColors.AddRow(_rowTransferColor);
         //Account Checking Color Row
         _rowAccountCheckingColor = Adw.ActionRow.New();
         _rowAccountCheckingColor.SetTitle(_controller.Localizer["AccountCheckingColor"]);
@@ -122,7 +130,7 @@ public partial class PreferencesDialog : Adw.Window
         _btnAccountCheckingColor.OnColorSet += OnAccountCheckingColorSet;
         _rowAccountCheckingColor.AddSuffix(_btnAccountCheckingColor);
         _rowAccountCheckingColor.SetActivatableWidget(_btnAccountCheckingColor);
-        _grpUserInterface.Add(_rowAccountCheckingColor);
+        _rowColors.AddRow(_rowAccountCheckingColor);
         //Account Savings Color Row
         _rowAccountSavingsColor = Adw.ActionRow.New();
         _rowAccountSavingsColor.SetTitle(_controller.Localizer["AccountSavingsColor"]);
@@ -131,7 +139,7 @@ public partial class PreferencesDialog : Adw.Window
         _btnAccountSavingsColor.OnColorSet += OnAccountSavingsColorSet;
         _rowAccountSavingsColor.AddSuffix(_btnAccountSavingsColor);
         _rowAccountSavingsColor.SetActivatableWidget(_btnAccountSavingsColor);
-        _grpUserInterface.Add(_rowAccountSavingsColor);
+        _rowColors.AddRow(_rowAccountSavingsColor);
         //Account Business Color Row
         _rowAccountBusinessColor = Adw.ActionRow.New();
         _rowAccountBusinessColor.SetTitle(_controller.Localizer["AccountBusinessColor"]);
@@ -140,18 +148,19 @@ public partial class PreferencesDialog : Adw.Window
         _btnAccountBusinessColor.OnColorSet += OnAccountBusinessColorSet;
         _rowAccountBusinessColor.AddSuffix(_btnAccountBusinessColor);
         _rowAccountBusinessColor.SetActivatableWidget(_btnAccountBusinessColor);
-        _grpUserInterface.Add(_rowAccountBusinessColor);
-        // Locale Group
+        _rowColors.AddRow(_rowAccountBusinessColor);
+        //Locale Group
         _grpLocale = Adw.PreferencesGroup.New();
         _grpLocale.SetTitle(_controller.Localizer["Locale"]);
         _grpLocale.SetDescription(_controller.Localizer["LocaleDescription"]);
         _page.Add(_grpLocale);
-        // Period Replacement Row
+        //Period Replacement Row
         _rowInsertSeparator = Adw.ComboRow.New();
         _rowInsertSeparator.SetModel(Gtk.StringList.New(new string[] { _controller.Localizer["InsertSeparatorOff"], _controller.Localizer["InsertSeparatorNumpad"], _controller.Localizer["InsertSeparatorPeriodComma"] }));
         _rowInsertSeparator.SetTitle(_controller.Localizer["InsertSeparator"]);
         _rowInsertSeparator.SetSubtitle(_controller.Localizer["InsertSeparator", "Description"]);
         _rowInsertSeparator.SetSubtitleLines(3);
+        _rowInsertSeparator.SetIconName("input-keyboard-symbolic");
         _rowInsertSeparator.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
