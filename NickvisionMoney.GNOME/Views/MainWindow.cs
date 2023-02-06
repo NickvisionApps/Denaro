@@ -287,6 +287,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         actKeyboardShortcuts.OnActivate += KeyboardShortcuts;
         AddAction(actKeyboardShortcuts);
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
+        //Quit Action
+        var actQuit = Gio.SimpleAction.New("quit", null);
+        actQuit.OnActivate += Quit;
+        AddAction(actQuit);
+        application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
         actHelp.OnActivate += Help;
@@ -491,6 +496,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, this);
         shortcutsDialog.Show();
     }
+
+    /// <summary>
+    /// Occurs when quit action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void Quit(Gio.SimpleAction sender, EventArgs e) => _application.Quit();
 
     /// <summary>
     /// Occurs when the help action is triggered

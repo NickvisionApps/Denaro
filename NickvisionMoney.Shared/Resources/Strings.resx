@@ -147,6 +147,10 @@
 		<value>Keyboard Shortcuts</value>
 	</data>
 
+	<data name="Quit" xml:space="preserve">
+		<value>Quit</value>
+	</data>
+
 	<!--MainWindow-->
 	<data name="NickvisionMoneyAccount" xml:space="preserve">
 		<value>Nickvision Denaro Account</value>
