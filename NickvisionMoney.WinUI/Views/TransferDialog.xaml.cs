@@ -154,6 +154,11 @@ public sealed partial class TransferDialog : ContentDialog
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
         }
+        if(!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
+        {
+            TxtDestinationPassword.IsEnabled = false;
+            BtnApplyDestinationPassword.IsEnabled = false;
+        }
     }
 
     /// <summary>
@@ -173,6 +178,8 @@ public sealed partial class TransferDialog : ContentDialog
             TxtDestinationAccount.Text = file.Path;
             BoxDestinationPassword.Visibility = Visibility.Collapsed;
             TxtDestinationPassword.Password = "";
+            TxtDestinationPassword.IsEnabled = true;
+            BtnApplyDestinationPassword.IsEnabled = true;
             TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
@@ -195,6 +202,8 @@ public sealed partial class TransferDialog : ContentDialog
             TxtDestinationAccount.Text = _controller.RecentAccounts[ListRecentAccounts.SelectedIndex].Path;
             BoxDestinationPassword.Visibility = Visibility.Collapsed;
             TxtDestinationPassword.Password = "";
+            TxtDestinationPassword.IsEnabled = true;
+            BtnApplyDestinationPassword.IsEnabled = true;
             TxtAmount.Text = "";
             BoxConversionRate.Visibility = Visibility.Collapsed;
             TxtConversionResult.Visibility = Visibility.Collapsed;
