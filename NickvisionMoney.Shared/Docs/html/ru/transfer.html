@@ -25,19 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul></div></div></div>
 <p class="p">Транзакции, созданные с помощью перевода средств, являются простыми транзакциями, которые можно свободно редактировать и удалять. Эти транзакции не связаны: изменение транзакции на исходном счёте не изменит транзакцию на целевом счёте, и наоборот.</p>
 <p class="p">Перевод средств не позволяет создавать повторяющиеся транзакции или задавать какие-либо другие свойства, кроме суммы. Цвет, выбранный в <span class="link"><a href="configuration.html" title="Конфигурация">конфигурации</a></span>, будет использован для созданных транзакций.</p>
-<p class="p">Хотя <span class="app">Denaro</span> позволяет указывать разные валюты для счетов, при переводе средств сумма не конвертируется. Значение будет использоваться как есть. Например, если вы переведёте 100$ (USD) на счёт с валютой € (EUR), будут созданы следующие транзакции:</p>
-<div class="list"><div class="inner"><div class="region"><ul class="list">
-<li class="list"><p class="p">На исходном счёте: расходная транзакция на 100$ (USD).</p></li>
-<li class="list"><p class="p">На целевом счёте: доходная транзакция на 100€ (EUR).</p></li>
-</ul></div></div></div>
-<div class="note" title="Note">
-<svg height="24" width="24" version="1.1">
- <g>
-  <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
-  <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
- </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">В будущем планируется добавить функцию для указания обменного курса при совершении перевода между счетами с разной валютой, смотрите <span class="link"><a href="https://github.com/nlogozzo/NickvisionMoney/issues/144" title="https://github.com/nlogozzo/NickvisionMoney/issues/144">проблему #144</a></span>.</p></div></div></div>
-</div>
+<p class="p">Если вы производите перевод средств между счетами с разными валютами, <span class="app">Denaro</span> попросит вас указать обменный курс.</p>
 </div>
 <section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
