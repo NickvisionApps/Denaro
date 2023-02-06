@@ -1380,27 +1380,43 @@ public class Account : IDisposable
     private async Task<List<uint>> ImportFromQIFAsync(string path)
     {
         var ids = new List<uint>();
-        var qif = QifDocument.Load(File.OpenRead(path));
+        QifDocument? qif = null;
+        try
+        {
+            qif = QifDocument.Load(File.OpenRead(path));
+        }
+        catch
+        {
+            return ids;
+        }
         //Groups
         foreach(var cat in qif.CategoryListTransactions)
         {
-            await AddGroupAsync(new Group(NextAvailableGroupId)
+            if (Groups.Values.FirstOrDefault(x => x.Name == cat.CategoryName) == null)
             {
-                Name = cat.CategoryName,
-                Description = cat.Description
-            });
+                await AddGroupAsync(new Group(NextAvailableGroupId)
+                {
+                    Name = cat.CategoryName,
+                    Description = cat.Description
+                });
+            }
         }
         //Transactions
         foreach(var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
         {
-            ids.Add(NextAvailableTransactionId);
-            await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+            if(transaction.Amount != 0)
             {
-                Description = transaction.Memo,
-                Date = DateOnly.FromDateTime(transaction.Date),
-                Amount = transaction.Amount,
-                GroupId = string.IsNullOrEmpty(transaction.Category) ? -1 : (int)(Groups.First(x => x.Value.Name == transaction.Category).Key),
-            });
+                ids.Add(NextAvailableTransactionId);
+                var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
+                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+                {
+                    Description = string.IsNullOrEmpty(transaction.Memo) ? new Localizer()["NotAvailable"] : transaction.Memo,
+                    Date = DateOnly.FromDateTime(transaction.Date),
+                    Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
+                    Amount = Math.Abs(transaction.Amount),
+                    GroupId = group == null ? -1 : (int)group.Id
+                });
+            }
         }
         return ids;
     }
