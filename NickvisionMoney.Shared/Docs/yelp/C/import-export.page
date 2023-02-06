@@ -20,9 +20,11 @@
 	<list>
 		<item>
 			<p>Open Financial Exchange (<file>.ofx</file>)</p>
+			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
 		</item>
 		<item>
 			<p>Quicken Interchange Format (<file>.qif</file>)</p>
+			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
 		</item>
 		<item>
 			<p>Denaro CSV (<file>.csv</file>)</p>
