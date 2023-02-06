@@ -23,15 +23,75 @@
 	<list>
 		<item>
 			<p>Open Financial Exchange (<file>.ofx</file>)</p>
+			<p>Las fechas deben estar en formato <em>AAAMMDD</em>.</p>
 		</item>
 		<item>
 			<p>Quicken Interchange Format (<file>.qif</file>)</p>
+			<p>Las fechas deben estar en formato inglés (EE. UU.) (<em>MM/DD/AAAA</em>).</p>
 		</item>
 		<item>
 			<p>Denaro CSV (<file>.csv</file>)</p>
 			<p>❗ Si bien CSV es un formato común y algunos bancos permiten a sus usuarios exportar información como CSV, estos archivos son, de hecho, tablas que pueden contener datos arbitrarios. La importación de un archivo CSV creado en otro programa fallará porque sus datos no serán compatibles con lo que <app>Denaro</app> intenta obtener de un archivo. El propósito de importar/exportar CSV es proporcionar una forma de agregar datos a una cuenta mediante programas externos, como editores de texto y paquetes de oficina. La importación solo agregará nuevas transacciones sin anular las existentes. Si desea crear un archivo CSV manualmente, este es el encabezado que incluye todas las columnas que <app>Denaro</app> espera encontrar:</p>
-			<p><code>ID;Fecha;Descripción;Tipo;IntervaloRepetición;RepetirDesde;RepetirFechaFin;Cantidad;RGBA;Grupo;NombreGrupo;DescripciónGrupo</code></p>
-			<p><em>Fecha</em>, <em>RepetirFechaFin</em> y <em>Cantidad</em> deben estar en formato inglés (EE. UU.) (<em>MM/DD/YYYY</em> para fechas y <em>123.456,78</em> para cantidades). <em>RepetirDesde</em> se usa para transacciones repetidas (consulte <em>Intervalo de repetición</em> en la página <link xref="transaction">transacción</link> para obtener más detalles) y debe ser una identificación de fuente transacción o 0 si es una transacción fuente o -1 si no es una transacción repetida.</p>
+			<p><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Group;GroupName;GroupDescription</code></p>
+			<list>
+				<item>
+					<title>ID</title>
+					<p>Id de transacción, debe ser único para una cuenta determinada. Los ids empiezan por 1.</p>
+				</item>
+				<item>
+					<title>Date</title>
+					<p>La fecha de la transacción (o fecha de inicio en caso de transacción repetida), debe estar en formato inglés (EE. UU.) (<em>MM/DD/AAAA</em>).</p>
+				</item>
+				<item>
+					<title>Description</title>
+					<p>Descripción de la transacción, puede contener cualquier carácter excepto punto y coma.</p>
+				</item>
+				<item>
+					<title>Type</title>
+					<p>Tipo de transacción: 0 para ingresos, 1 para gastos.</p>
+				</item>
+				<item>
+					<title>RepeatInterval</title>
+					<p>Un número que representa el intervalo de repetición de la transacción:</p>
+					<p>0 - Nunca</p>
+					<p>1 - Diario</p>
+					<p>2 - Semanal</p>
+					<p>7 - Quincenal</p>
+					<p>3 - Mensual</p>
+					<p>4 - Trimestral</p>
+					<p>5 - Anual</p>
+					<p>6 - Bianual</p>
+					<p>Véase <em>Intervalo de repetición</em> en la página de <link xref="transaction">transacción</link> para obtener más información sobre las transacciones repetidas.</p>
+				</item>
+				<item>
+					<title>RepeatFrom</title>
+					<p>Debe ser un id de transacción de origen o 0 si es una transacción de origen o -1 si no es una transacción repetida.</p>
+				</item>
+				<item>
+					<title>RepeatEndDate</title>
+					<p>Fecha de finalización de la transacción repetida, debe estar en formato inglés (EE. UU.) (<em>MM/DD/AAAA</em>). Déjelo vacío si no es una transacción repetida.</p>
+				</item>
+				<item>
+					<title>Amount</title>
+					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+				</item>
+				<item>
+					<title>RGBA</title>
+					<p>Color de la transacción, debe estar en formato <em>rgb(R,G,B)</em> donde <em>R</em>, <em>G</em> y <em>B</em> son enteros en un rango entre 0 y 255.</p>
+				</item>
+				<item>
+					<title>Group</title>
+					<p>Id de grupo de la transacción. Los ids empiezan por 1. Para una transacción no agrupada debe ser -1 (no 0, este es un valor incorrecto para el id de grupo).</p>
+				</item>
+				<item>
+					<title>GroupName</title>
+					<p>Nombre del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma. Déjelo vacío para transacciones no agrupadas, en cualquier otro caso no debería estar vacío.</p>
+				</item>
+				<item>
+					<title>GroupDescription</title>
+					<p>Descripción del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma y puede estar vacía. Déjelo vacío para transacciones no agrupadas.</p>
+				</item>
+			</list>
 		</item>
 	</list>
 </div>

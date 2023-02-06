@@ -46,7 +46,7 @@
 			<item><p>Si su configuración regional es <em>ruso</em>, el símbolo de moneda se establecerá en <em>₽</em> y se aceptará <em>1000,00</em> como un número válido.</p></item>
 		</list>
 		<note style="advanced">
-			<p>En Linux, es posible establecer diferentes configuraciones regionales para el idioma y los formatos del sistema. <app>Denaro</app> intentará usar la configuración regional de formatos y, en caso de error, recurrirá a la configuración regional del idioma. Este comportamiento no se considera un error. En caso de tal error, use una moneda personalizada (ver más abajo).</p>
+			<p>En Linux, es posible establecer diferentes configuraciones regionales para el idioma y los formatos del sistema. La modificación de estos ajustes varía en función del entorno de escritorio que use. A pesar de las diferencias en la ubicación de estos ajustes en el escritorio, cambiar estos ajustes modifica las variables de entorno del sistema, como <code>LANG</code>, <code>LC_TIME</code> y <code>LC_MONETARY</code>. <app>Denaro</app> intentará usar los formatos de cantidad y fecha de acuerdo a estas variables. Si la aplicación falla al usar los formatos esperados, por favor asegúrese de que las variables están configuradas correctamente a través del comando <code>locale</code> en un terminal. Si ha encontrado un error y desea informar de ello, por favor proporcione la salida del comando <code>locale</code> para permitir a los desarrolladores reproducir su problema con la misma configuración.</p>
 		</note>
 	</item>
 	<item>
@@ -62,8 +62,12 @@
 		<p>Código opcional para su moneda personalizada. Si está configurado, se mostrará en los cuadros de diálogo entre paréntesis junto a <gui>Símbolo de moneda personalizado</gui>. <gui>Código de moneda personalizado</gui> puede contener hasta 3 caracteres o 1 emoji.</p>
 	</item>
 	<item>
-		<title>Ordenar por id o fecha</title>
-		<p>Cada cuenta almacena si ordena las transacciones en la ventana principal por su id o por su fecha. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p>
+		<title>Contraseña</title>
+		<p>Cada cuenta puede protegerse con una contraseña. Si añade una contraseña, la cuenta quedará encriptada (por lo que será imposible leer los datos sin desencriptarlos con la contraseña). Cuidado: si pierde la contraseña, no podrá recuperar los datos. La contraseña también puede cambiarse o eliminarse desde el cuadro de diálogo de configuración de una cuenta abierta. Al eliminar la contraseña, la cuenta quedará descifrada.</p>
+	</item>
+	<item>
+		<title>Ordenar por id, fecha o cantidad</title>
+		<p>Cada cuenta almacena si ordena las transacciones en la ventana principal por su id, fecha o cantidad. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p>
 	</item>
 	<item>
 		<title>Orden de clasificación</title>
