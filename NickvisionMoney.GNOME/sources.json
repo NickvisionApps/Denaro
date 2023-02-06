@@ -127,6 +127,13 @@
     },
     {
         "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/hazzik.qif/1.0.3/hazzik.qif.1.0.3.nupkg",
+        "sha512": "9f957ed3f8cab11d7a371e666f3bed00b0bc354d9e14b74f76adfd1d5d2d0492bbe7aeceb7d6c00f3077d49c9155849643d3539abd09d875743f1d8f2cc4ec18",
+        "dest": "nuget-sources",
+        "dest-filename": "hazzik.qif.1.0.3.nupkg"
+    },
+    {
+        "type": "file",
         "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-arm/7.0.1/microsoft.aspnetcore.app.runtime.linux-arm.7.0.1.nupkg",
         "sha512": "699c9c3f3b529cae97adf0e147ce7f2a45980f7a9793d0e6ff8fbf068a66a06a9c8692e58e7f17f71bf55f4d2118da21840a41408ec1c9ab2661dc8d7b74bc88",
         "dest": "nuget-sources",
