@@ -172,6 +172,7 @@ public partial class TransferDialog
                 _popRecentAccounts.Popdown();
                 _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
                 _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetSensitive(true);
                 _rowDestinationPassword.SetText("");
                 _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
@@ -268,6 +269,10 @@ public partial class TransferDialog
             }
             _dialog.SetResponseEnabled("ok", false);
         }
+        if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
+        {
+            _rowDestinationPassword.SetSensitive(false);
+        }
     }
 
     /// <summary>
@@ -290,6 +295,7 @@ public partial class TransferDialog
                 var path = openFileDialog.GetFile()!.GetPath() ?? "";
                 _rowDestinationAccount.SetSubtitle(path);
                 _rowDestinationPassword.SetVisible(false);
+                _rowDestinationPassword.SetSensitive(true);
                 _rowDestinationPassword.SetText("");
                 _rowAmount.SetText("");
                 _grpConversionRate.SetVisible(false);
