@@ -21,13 +21,77 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="div"><div class="inner">
 <div class="title title-div"><h2><span class="title">Formatos de importación</span></h2></div>
 <div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
-<li class="list"><p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p></li>
-<li class="list"><p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p></li>
+<li class="list">
+<p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p>
+<p class="p">Las fechas deben estar en formato <span class="em">AAAMMDD</span>.</p>
+</li>
+<li class="list">
+<p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p>
+<p class="p">Las fechas deben estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>).</p>
+</li>
 <li class="list">
 <p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
 <p class="p">❗ Si bien CSV es un formato común y algunos bancos permiten a sus usuarios exportar información como CSV, estos archivos son, de hecho, tablas que pueden contener datos arbitrarios. La importación de un archivo CSV creado en otro programa fallará porque sus datos no serán compatibles con lo que <span class="app">Denaro</span> intenta obtener de un archivo. El propósito de importar/exportar CSV es proporcionar una forma de agregar datos a una cuenta mediante programas externos, como editores de texto y paquetes de oficina. La importación solo agregará nuevas transacciones sin anular las existentes. Si desea crear un archivo CSV manualmente, este es el encabezado que incluye todas las columnas que <span class="app">Denaro</span> espera encontrar:</p>
-<p class="p"><span class="code">ID;Fecha;Descripción;Tipo;IntervaloRepetición;RepetirDesde;RepetirFechaFin;Cantidad;RGBA;Grupo;NombreGrupo;DescripciónGrupo</span></p>
-<p class="p"><span class="em">Fecha</span>, <span class="em">RepetirFechaFin</span> y <span class="em">Cantidad</span> deben estar en formato inglés (EE. UU.) (<span class="em">MM/DD/YYYY</span> para fechas y <span class="em">123.456,78</span> para cantidades). <span class="em">RepetirDesde</span> se usa para transacciones repetidas (consulte <span class="em">Intervalo de repetición</span> en la página <span class="link"><a href="transaction.html" title="Transacción">transacción</a></span> para obtener más detalles) y debe ser una identificación de fuente transacción o 0 si es una transacción fuente o -1 si no es una transacción repetida.</p>
+<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Group;GroupName;GroupDescription</span></p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<div class="title title-item"><h2><span class="title">ID</span></h2></div>
+<p class="p">Id de transacción, debe ser único para una cuenta determinada. Los ids empiezan por 1.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Date</span></h2></div>
+<p class="p">La fecha de la transacción (o fecha de inicio en caso de transacción repetida), debe estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Description</span></h2></div>
+<p class="p">Descripción de la transacción, puede contener cualquier carácter excepto punto y coma.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Type</span></h2></div>
+<p class="p">Tipo de transacción: 0 para ingresos, 1 para gastos.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatInterval</span></h2></div>
+<p class="p">Un número que representa el intervalo de repetición de la transacción:</p>
+<p class="p">0 - Nunca</p>
+<p class="p">1 - Diario</p>
+<p class="p">2 - Semanal</p>
+<p class="p">7 - Quincenal</p>
+<p class="p">3 - Mensual</p>
+<p class="p">4 - Trimestral</p>
+<p class="p">5 - Anual</p>
+<p class="p">6 - Bianual</p>
+<p class="p">Véase <span class="em">Intervalo de repetición</span> en la página de <span class="link"><a href="transaction.html" title="Transacción">transacción</a></span> para obtener más información sobre las transacciones repetidas.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatFrom</span></h2></div>
+<p class="p">Debe ser un id de transacción de origen o 0 si es una transacción de origen o -1 si no es una transacción repetida.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatEndDate</span></h2></div>
+<p class="p">Fecha de finalización de la transacción repetida, debe estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>). Déjelo vacío si no es una transacción repetida.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Amount</span></h2></div>
+<p class="p">Transaction amount in English (US) format (<span class="em">123,456.78</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RGBA</span></h2></div>
+<p class="p">Color de la transacción, debe estar en formato <span class="em">rgb(R,G,B)</span> donde <span class="em">R</span>, <span class="em">G</span> y <span class="em">B</span> son enteros en un rango entre 0 y 255.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Group</span></h2></div>
+<p class="p">Id de grupo de la transacción. Los ids empiezan por 1. Para una transacción no agrupada debe ser -1 (no 0, este es un valor incorrecto para el id de grupo).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupName</span></h2></div>
+<p class="p">Nombre del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma. Déjelo vacío para transacciones no agrupadas, en cualquier otro caso no debería estar vacío.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
+<p class="p">Descripción del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma y puede estar vacía. Déjelo vacío para transacciones no agrupadas.</p>
+</li>
+</ul></div></div></div>
 </li>
 </ul></div></div></div></div></div>
 </div></div>

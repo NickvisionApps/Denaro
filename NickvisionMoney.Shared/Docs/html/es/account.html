@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">En Linux, es posible establecer diferentes configuraciones regionales para el idioma y los formatos del sistema. <span class="app">Denaro</span> intentará usar la configuración regional de formatos y, en caso de error, recurrirá a la configuración regional del idioma. Este comportamiento no se considera un error. En caso de tal error, use una moneda personalizada (ver más abajo).</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">En Linux, es posible establecer diferentes configuraciones regionales para el idioma y los formatos del sistema. La modificación de estos ajustes varía en función del entorno de escritorio que use. A pesar de las diferencias en la ubicación de estos ajustes en el escritorio, cambiar estos ajustes modifica las variables de entorno del sistema, como <span class="code">LANG</span>, <span class="code">LC_TIME</span> y <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> intentará usar los formatos de cantidad y fecha de acuerdo a estas variables. Si la aplicación falla al usar los formatos esperados, por favor asegúrese de que las variables están configuradas correctamente a través del comando <span class="code">locale</span> en un terminal. Si ha encontrado un error y desea informar de ello, por favor proporcione la salida del comando <span class="code">locale</span> para permitir a los desarrolladores reproducir su problema con la misma configuración.</p></div></div></div>
 </div>
 </dd>
 <dt class="terms">Usar moneda personalizada</dt>
@@ -63,8 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">Se pueden usar hasta 3 caracteres o 1 emoji como símbolo de moneda.</p></dd>
 <dt class="terms">Código de moneda personalizado</dt>
 <dd class="terms"><p class="p">Código opcional para su moneda personalizada. Si está configurado, se mostrará en los cuadros de diálogo entre paréntesis junto a <span class="gui">Símbolo de moneda personalizado</span>. <span class="gui">Código de moneda personalizado</span> puede contener hasta 3 caracteres o 1 emoji.</p></dd>
-<dt class="terms">Ordenar por id o fecha</dt>
-<dd class="terms"><p class="p">Cada cuenta almacena si ordena las transacciones en la ventana principal por su id o por su fecha. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p></dd>
+<dt class="terms">Contraseña</dt>
+<dd class="terms"><p class="p">Cada cuenta puede protegerse con una contraseña. Si añade una contraseña, la cuenta quedará encriptada (por lo que será imposible leer los datos sin desencriptarlos con la contraseña). Cuidado: si pierde la contraseña, no podrá recuperar los datos. La contraseña también puede cambiarse o eliminarse desde el cuadro de diálogo de configuración de una cuenta abierta. Al eliminar la contraseña, la cuenta quedará descifrada.</p></dd>
+<dt class="terms">Ordenar por id, fecha o cantidad</dt>
+<dd class="terms"><p class="p">Cada cuenta almacena si ordena las transacciones en la ventana principal por su id, fecha o cantidad. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p></dd>
 <dt class="terms">Orden de clasificación</dt>
 <dd class="terms"><p class="p">Cada cuenta almacena información sobre el orden de las transacciones en la ventana principal. Cada vez que cambie esto, se guardará en el archivo de la cuenta y se restaurará cuando vuelva a abrir la cuenta.</p></dd>
 <dt class="terms">Visibilidad de grupos</dt>
