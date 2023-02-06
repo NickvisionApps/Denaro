@@ -125,7 +125,7 @@ public class TransferDialogController
         TransferCheckStatus result = 0;
         var amount = 0m;
         var conversionRate = 0m;
-        if (string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath) != ".nmoney" || Transfer.SourceAccountPath == destPath)
+        if (string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath).ToLower() != ".nmoney" || Transfer.SourceAccountPath == destPath)
         {
             result |= TransferCheckStatus.InvalidDestPath;
         }

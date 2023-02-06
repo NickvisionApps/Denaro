@@ -191,11 +191,11 @@ public class TransactionDialogController : IDisposable
         {
             if (File.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
+                if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
                 {
                     image = await Image.LoadAsync(receiptPath);
                 }
-                else if (Path.GetExtension(receiptPath) == ".pdf")
+                else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
                 {
                     image = ConvertPDFToJPEG(receiptPath);
                 }
@@ -292,11 +292,11 @@ public class TransactionDialogController : IDisposable
         {
             if (Path.Exists(receiptPath))
             {
-                if (Path.GetExtension(receiptPath) == ".jpeg" || Path.GetExtension(receiptPath) == ".jpg" || Path.GetExtension(receiptPath) == ".png")
+                if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
                 {
                     Transaction.Receipt = Image.Load(receiptPath);
                 }
-                else if (Path.GetExtension(receiptPath) == ".pdf")
+                else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
                 {
                     Transaction.Receipt = ConvertPDFToJPEG(receiptPath);
                 }

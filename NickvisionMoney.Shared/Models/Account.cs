@@ -1,10 +1,13 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Hazzik.Qif;
+using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
+using OfxSharp;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
@@ -1069,26 +1072,27 @@ public class Account : IDisposable
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="rgba">The rgba for imported transactions</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    public async Task<List<uint>> ImportFromFileAsync(string path)
+    public async Task<List<uint>> ImportFromFileAsync(string path, string rgba)
     {
         var ids = new List<uint>();
         if (!System.IO.Path.Exists(path))
         {
             return ids;
         }
-        var extension = System.IO.Path.GetExtension(path);
+        var extension = System.IO.Path.GetExtension(path).ToLower();
         if (extension == ".csv")
         {
             return await ImportFromCSVAsync(path);
         }
         else if (extension == ".ofx")
         {
-            return await ImportFromOFXAsync(path);
+            return await ImportFromOFXAsync(path, rgba);
         }
         else if (extension == ".qif")
         {
-            return await ImportFromQIFAsync(path);
+            return await ImportFromQIFAsync(path, rgba);
         }
         return ids;
     }
@@ -1100,7 +1104,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool ExportToFile(string path)
     {
-        var extension = System.IO.Path.GetExtension(path);
+        var extension = System.IO.Path.GetExtension(path).ToLower();
         if (extension == ".csv")
         {
             return ExportToCSV(path);
@@ -1110,6 +1114,239 @@ public class Account : IDisposable
             return ExportToPDF(path);
         }
         return false;
+    }
+
+    /// <summary>
+    /// Imports transactions from a CSV file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromCSVAsync(string path)
+    {
+        var ids = new List<uint>();
+        string[]? lines;
+        try
+        {
+            lines = File.ReadAllLines(path);
+        }
+        catch
+        {
+            return ids;
+        }
+        foreach (var line in lines)
+        {
+            var fields = line.Split(';');
+            if (fields.Length != 12)
+            {
+                continue;
+            }
+            //Get Id
+            var id = 0u;
+            try
+            {
+                id = uint.Parse(fields[0]);
+            }
+            catch
+            {
+                continue;
+            }
+            if (Transactions.ContainsKey(id))
+            {
+                continue;
+            }
+            //Get Date
+            var date = default(DateOnly);
+            try
+            {
+                date = DateOnly.Parse(fields[1], new CultureInfo("en-US"));
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Description
+            var description = fields[2];
+            //Get Type
+            var type = TransactionType.Income;
+            try
+            {
+                type = (TransactionType)int.Parse(fields[3]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Repeat Interval
+            var repeat = TransactionRepeatInterval.Never;
+            try
+            {
+                repeat = (TransactionRepeatInterval)int.Parse(fields[4]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Repeat From
+            var repeatFrom = 0;
+            try
+            {
+                repeatFrom = int.Parse(fields[5]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Repeat End Date
+            var repeatEndDate = default(DateOnly?);
+            try
+            {
+                repeatEndDate = DateOnly.Parse(fields[6]);
+            }
+            catch { }
+            //Get Amount
+            var amount = 0m;
+            try
+            {
+                amount = decimal.Parse(fields[7], NumberStyles.Currency, new CultureInfo("en-US"));
+            }
+            catch
+            {
+                continue;
+            }
+            amount = Math.Abs(amount);
+            //Get RGBA
+            var rgba = fields[8];
+            //Get Group Id
+            var gid = 0;
+            try
+            {
+                gid = int.Parse(fields[9]);
+            }
+            catch
+            {
+                continue;
+            }
+            //Get Group Name
+            var groupName = fields[10];
+            //Get Group Description
+            var groupDescription = fields[11];
+            //Create Group If Needed
+            if (gid != -1 && !Groups.ContainsKey((uint)gid))
+            {
+                var group = new Group((uint)gid)
+                {
+                    Name = groupName,
+                    Description = groupDescription
+                };
+                await AddGroupAsync(group);
+            }
+            //Add Transaction
+            var transaction = new Transaction(id)
+            {
+                Date = date,
+                Description = description,
+                Type = type,
+                RepeatInterval = repeat,
+                Amount = amount,
+                GroupId = gid,
+                RGBA = rgba,
+                RepeatFrom = repeatFrom,
+                RepeatEndDate = repeatEndDate
+            };
+            await AddTransactionAsync(transaction);
+            ids.Add(transaction.Id);
+            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            {
+                foreach (var pair in Transactions)
+                {
+                    if (pair.Value.RepeatFrom == transaction.Id)
+                    {
+                        ids.Add(pair.Value.Id);
+                    }
+                }
+            }
+        }
+        return ids;
+    }
+
+    /// <summary>
+    /// Imports transactions from an OFX file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromOFXAsync(string path, string rgba)
+    {
+        var ids = new List<uint>();
+        var localizer = new Localizer();
+        var ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
+        //Transactions
+        foreach(var transaction in ofx.Transactions)
+        {
+            if(transaction.Amount != 0)
+            {
+                ids.Add(NextAvailableTransactionId);
+                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+                {
+                    Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo) : transaction.Name,
+                    Date = DateOnly.FromDateTime(transaction.Date),
+                    Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
+                    Amount = Math.Abs(transaction.Amount),
+                    RGBA = rgba
+                });
+            }
+        }
+        return ids;
+    }
+
+    /// <summary>
+    /// Imports transactions from a QIF file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
+    /// <returns>The list of Ids of newly imported transactions</returns>
+    private async Task<List<uint>> ImportFromQIFAsync(string path, string rgba)
+    {
+        var ids = new List<uint>();
+        QifDocument? qif = null;
+        try
+        {
+            qif = QifDocument.Load(File.OpenRead(path));
+        }
+        catch
+        {
+            return ids;
+        }
+        //Groups
+        foreach(var group in qif.CategoryListTransactions)
+        {
+            if (Groups.Values.FirstOrDefault(x => x.Name == group.CategoryName) == null)
+            {
+                await AddGroupAsync(new Group(NextAvailableGroupId)
+                {
+                    Name = group.CategoryName,
+                    Description = group.Description
+                });
+            }
+        }
+        //Transactions
+        foreach(var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
+        {
+            if(transaction.Amount != 0)
+            {
+                ids.Add(NextAvailableTransactionId);
+                var localizer = new Localizer();
+                var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
+                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+                {
+                    Description = string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo,
+                    Date = DateOnly.FromDateTime(transaction.Date),
+                    Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
+                    Amount = Math.Abs(transaction.Amount),
+                    GroupId = group == null ? -1 : (int)group.Id,
+                    RGBA = rgba
+                });
+            }
+        }
+        return ids;
     }
 
     /// <summary>
@@ -1420,347 +1657,6 @@ public class Account : IDisposable
             return false;
         }
         return true;
-    }
-
-    /// <summary>
-    /// Imports transactions from a CSV file
-    /// </summary>
-    /// <param name="path">The path of the file</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromCSVAsync(string path)
-    {
-        var ids = new List<uint>();
-        string[]? lines;
-        try
-        {
-            lines = File.ReadAllLines(path);
-        }
-        catch
-        {
-            return ids;
-        }
-        foreach (var line in lines)
-        {
-            var fields = line.Split(';');
-            if (fields.Length != 12)
-            {
-                continue;
-            }
-            //Get Id
-            var id = 0u;
-            try
-            {
-                id = uint.Parse(fields[0]);
-            }
-            catch
-            {
-                continue;
-            }
-            if (Transactions.ContainsKey(id))
-            {
-                continue;
-            }
-            //Get Date
-            var date = default(DateOnly);
-            try
-            {
-                date = DateOnly.Parse(fields[1], new CultureInfo("en-US"));
-            }
-            catch
-            {
-                continue;
-            }
-            //Get Description
-            var description = fields[2];
-            //Get Type
-            var type = TransactionType.Income;
-            try
-            {
-                type = (TransactionType)int.Parse(fields[3]);
-            }
-            catch
-            {
-                continue;
-            }
-            //Get Repeat Interval
-            var repeat = TransactionRepeatInterval.Never;
-            try
-            {
-                repeat = (TransactionRepeatInterval)int.Parse(fields[4]);
-            }
-            catch
-            {
-                continue;
-            }
-            //Get Repeat From
-            var repeatFrom = 0;
-            try
-            {
-                repeatFrom = int.Parse(fields[5]);
-            }
-            catch
-            {
-                continue;
-            }
-            //Get Repeat End Date
-            var repeatEndDate = default(DateOnly?);
-            try
-            {
-                repeatEndDate = DateOnly.Parse(fields[6]);
-            }
-            catch { }
-            //Get Amount
-            var amount = 0m;
-            try
-            {
-                amount = decimal.Parse(fields[7], NumberStyles.Currency, new CultureInfo("en-US"));
-            }
-            catch
-            {
-                continue;
-            }
-            amount = Math.Abs(amount);
-            //Get RGBA
-            var rgba = fields[8];
-            //Get Group Id
-            var gid = 0;
-            try
-            {
-                gid = int.Parse(fields[9]);
-            }
-            catch
-            {
-                continue;
-            }
-            //Get Group Name
-            var groupName = fields[10];
-            //Get Group Description
-            var groupDescription = fields[11];
-            //Create Group If Needed
-            if (gid != -1 && !Groups.ContainsKey((uint)gid))
-            {
-                var group = new Group((uint)gid)
-                {
-                    Name = groupName,
-                    Description = groupDescription
-                };
-                await AddGroupAsync(group);
-            }
-            //Add Transaction
-            var transaction = new Transaction(id)
-            {
-                Date = date,
-                Description = description,
-                Type = type,
-                RepeatInterval = repeat,
-                Amount = amount,
-                GroupId = gid,
-                RGBA = rgba,
-                RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate
-            };
-            await AddTransactionAsync(transaction);
-            ids.Add(transaction.Id);
-            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
-            {
-                foreach (var pair in Transactions)
-                {
-                    if (pair.Value.RepeatFrom == transaction.Id)
-                    {
-                        ids.Add(pair.Value.Id);
-                    }
-                }
-            }
-        }
-        return ids;
-    }
-
-    /// <summary>
-    /// Imports transactions from an OFX file
-    /// </summary>
-    /// <param name="path">The path of the file</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromOFXAsync(string path)
-    {
-        var ids = new List<uint>();
-        string[]? lines;
-        try
-        {
-            lines = File.ReadAllLines(path);
-        }
-        catch
-        {
-            return ids;
-        }
-        var nextId = NextAvailableTransactionId;
-        var xmlTagRegex = new Regex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
-        var transaction = default(Transaction);
-        var skipTransaction = false;
-        foreach (var line in lines)
-        {
-            var match = xmlTagRegex.Match(line);
-            if (match.Success)
-            {
-                var tag = match.Groups[1].Value;
-                var content = match.Groups[2].Value;
-                if (content.Contains('\r'))
-                {
-                    content = content.Remove(content.IndexOf('\r'));
-                }
-                //Add Previous Transaction
-                if (tag == "/STMTTRN" && transaction != null)
-                {
-                    if (!skipTransaction)
-                    {
-                        await AddTransactionAsync(transaction);
-                        ids.Add(transaction.Id);
-                    }
-                    skipTransaction = false;
-                    transaction = null;
-                }
-                //New Transaction
-                if (tag == "STMTTRN")
-                {
-                    transaction = new Transaction(nextId);
-                    nextId++;
-                }
-                if (!skipTransaction)
-                {
-                    //Type
-                    if (tag == "TRNTYPE")
-                    {
-                        if (content == "CREDIT")
-                        {
-                            transaction!.Type = TransactionType.Income;
-                        }
-                        else if (content == "DEBIT")
-                        {
-                            transaction!.Type = TransactionType.Expense;
-                        }
-                        else
-                        {
-                            //Unknown Entry
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                    //Name
-                    if (tag == "MEMO")
-                    {
-                        transaction!.Description = content;
-                    }
-                    //Amount
-                    if (tag == "TRNAMT")
-                    {
-                        try
-                        {
-                            transaction!.Amount = decimal.Parse(content, NumberStyles.Currency);
-                        }
-                        catch
-                        {
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                    //Date
-                    if (tag == "DTPOSTED")
-                    {
-                        try
-                        {
-                            transaction!.Date = DateOnly.Parse(content);
-                        }
-                        catch
-                        {
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                }
-            }
-        }
-        return ids;
-    }
-
-    /// <summary>
-    /// Imports transactions from a QIF file
-    /// </summary>
-    /// <param name="path">The path of the file</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromQIFAsync(string path)
-    {
-        var ids = new List<uint>();
-        string[]? lines;
-        try
-        {
-            lines = File.ReadAllLines(path);
-        }
-        catch
-        {
-            return ids;
-        }
-        var nextId = NextAvailableTransactionId;
-        var transaction = new Transaction(nextId);
-        var skipTransaction = false;
-        foreach (var l in lines)
-        {
-            var line = l;
-            if (line.Contains('\r'))
-            {
-                line = line.Remove(line.IndexOf('\r'));
-            }
-            if (line.Length == 0)
-            {
-                continue;
-            }
-            //Add Previous Transaction
-            if (line[0] == '^')
-            {
-                if (!skipTransaction)
-                {
-                    await AddTransactionAsync(transaction);
-                    ids.Add(transaction.Id);
-                }
-                skipTransaction = false;
-                nextId++;
-                transaction = new Transaction(nextId);
-            }
-            //Date
-            if (line[0] == 'D')
-            {
-                try
-                {
-                    var year = int.Parse(line.Substring(7, 4));
-                    var month = int.Parse(line.Substring(4, 2));
-                    var day = int.Parse(line.Substring(1, 2));
-                    transaction.Date = new DateOnly(year, month, day);
-                }
-                catch
-                {
-                    skipTransaction = true;
-                    continue;
-                }
-            }
-            //Amount and Type
-            if (line[0] == 'T')
-            {
-                try
-                {
-                    transaction.Type = line[1] == '-' ? TransactionType.Expense : TransactionType.Income;
-                    transaction.Amount = decimal.Parse(line.Substring(2), NumberStyles.Currency);
-                }
-                catch
-                {
-                    skipTransaction = true;
-                    continue;
-                }
-            }
-            //Description
-            if (line[0] == 'P')
-            {
-                transaction.Description = line.Substring(1);
-            }
-        }
-        return ids;
     }
 
     /// <summary>

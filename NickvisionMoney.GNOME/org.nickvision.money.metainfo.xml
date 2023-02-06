@@ -56,6 +56,7 @@
 		  <p>- Added the ability to sort transactions by amount</p>
 		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
 		  <p>- Recent accounts are now available to select from the TransferDialog</p>
+		  <p>- Improved importing of qif and ofx files</p>
 		  <p>- Added a "New Window" action to the main menu</p>
       </description>
     </release>

@@ -91,7 +91,7 @@ public class AccountMetadata : ICloneable
     /// <returns>AccountMetadata?</returns>
     public static AccountMetadata? LoadFromAccountFile(string path, string? password)
     {
-        if (Path.GetExtension(path) != ".nmoney")
+        if (Path.GetExtension(path).ToLower() != ".nmoney")
         {
             return null;
         }

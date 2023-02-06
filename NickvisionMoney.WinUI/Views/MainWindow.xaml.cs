@@ -206,7 +206,7 @@ public sealed partial class MainWindow : Window
                 {
                     if (item is StorageFile file)
                     {
-                        if (Path.GetExtension(file.Path) == ".nmoney")
+                        if (Path.GetExtension(file.Path).ToLower() == ".nmoney")
                         {
                             await _controller.AddAccountAsync(file.Path);
                         }

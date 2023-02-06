@@ -37,7 +37,7 @@
             </CheckBox.Content>
         </CheckBox>
 
-        <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Spacing="0">
+        <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,0,10,0" Spacing="0">
             <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
 
             <Button x:Name="BtnEdit" Margin="6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">

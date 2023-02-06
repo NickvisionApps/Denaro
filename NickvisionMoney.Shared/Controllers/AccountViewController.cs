@@ -882,17 +882,17 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        var importedIds = await _account.ImportFromFileAsync(path);
+        var importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor);
+        foreach (var pair in _account.Groups)
+        {
+            if (!_filters.ContainsKey((int)pair.Value.Id))
+            {
+                _filters.Add((int)pair.Value.Id, true);
+                GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
+            }
+        }
         if (importedIds.Count >= 0)
         {
-            foreach (var pair in _account.Groups)
-            {
-                if (!_filters.ContainsKey((int)pair.Value.Id))
-                {
-                    _filters.Add((int)pair.Value.Id, true);
-                    GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
-                }
-            }
             foreach (var id in importedIds)
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
