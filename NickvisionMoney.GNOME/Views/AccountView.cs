@@ -577,7 +577,7 @@ public partial class AccountView
         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
-        row.IsSmall = _parentWindow.DefaultWidth < 450;
+        row.IsSmall = _parentWindow.Handle.DefaultWidth < 450;
         if (index != null)
         {
             _flowBox.Insert(row, index.Value);
@@ -719,7 +719,7 @@ public partial class AccountView
         if (_controller.AccountTodayTotal > 0)
         {
             var transferController = _controller.CreateTransferDialogController();
-            var transferDialog = new TransferDialog(transferController, _parentWindow);
+            var transferDialog = new TransferDialog(transferController, _parentWindow.Handle);
             transferDialog.Show();
             transferDialog.OnResponse += async (sender, e) =>
             {
@@ -743,7 +743,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
     {
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow.Handle, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
@@ -771,7 +771,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
     {
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow.Handle, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
@@ -799,7 +799,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow.Handle, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
@@ -852,7 +852,7 @@ public partial class AccountView
     private void AccountSettings(Gio.SimpleAction sender, EventArgs e)
     {
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
-        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
+        var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow.Handle);
         accountSettingsDialog.Show();
         accountSettingsDialog.OnResponse += async (sender, e) =>
         {
@@ -887,7 +887,7 @@ public partial class AccountView
     private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
         using var transactionController = _controller.CreateTransactionDialogController();
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow.Handle);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
         {
@@ -919,7 +919,7 @@ public partial class AccountView
     private void CopyTransaction(Transaction source)
     {
         using var transactionController = _controller.CreateTransactionDialogController(source);
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow.Handle);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
         {
@@ -952,7 +952,7 @@ public partial class AccountView
     private void EditTransaction(object? sender, uint id)
     {
         using var transactionController = _controller.CreateTransactionDialogController(id);
-        var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
+        var transactionDialog = new TransactionDialog(transactionController, _parentWindow.Handle);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
         {
@@ -967,7 +967,7 @@ public partial class AccountView
                 {
                     if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                     {
-                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                        var dialog = new MessageDialog(_parentWindow.Handle, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
                         dialog.UnsetDestructiveApperance();
                         dialog.UnsetSuggestedApperance();
                         dialog.Show();
@@ -1016,7 +1016,7 @@ public partial class AccountView
                     }
                     else
                     {
-                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                        var dialog = new MessageDialog(_parentWindow.Handle, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
                         dialog.UnsetDestructiveApperance();
                         dialog.UnsetSuggestedApperance();
                         dialog.Show();
@@ -1074,7 +1074,7 @@ public partial class AccountView
     {
         if (_controller.GetIsSourceRepeatTransaction(id))
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+            var dialog = new MessageDialog(_parentWindow.Handle, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
             dialog.Show();
@@ -1102,7 +1102,7 @@ public partial class AccountView
         }
         else
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            var dialog = new MessageDialog(_parentWindow.Handle, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
             dialog.Show();
             dialog.OnResponse += async (sender, e) =>
             {
@@ -1123,7 +1123,7 @@ public partial class AccountView
     private void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
-        var groupDialog = new GroupDialog(groupController, _parentWindow);
+        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle);
         groupDialog.Show();
         groupDialog.OnResponse += async (sender, e) =>
         {
@@ -1156,7 +1156,7 @@ public partial class AccountView
     private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
-        var groupDialog = new GroupDialog(groupController, _parentWindow);
+        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle);
         groupDialog.Show();
         groupDialog.OnResponse += async (sender, e) =>
         {
@@ -1188,7 +1188,7 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void DeleteGroup(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+        var dialog = new MessageDialog(_parentWindow.Handle, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
         dialog.Show();
         dialog.OnResponse += async (sender, e) =>
         {

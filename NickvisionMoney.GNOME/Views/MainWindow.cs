@@ -25,7 +25,7 @@ public class WidthChangedEventArgs : EventArgs
 /// <summary>
 /// The MainWindow for the application
 /// </summary>
-public partial class MainWindow : Adw.ApplicationWindow
+public partial class MainWindow
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
@@ -72,6 +72,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
 
+    public Adw.ApplicationWindow Handle { get; init; }
     public bool CompactMode { get; private set; }
 
     /// <summary>
@@ -92,13 +93,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listRecentAccountsRows = new List<Adw.ActionRow>();
         _listRecentAccountsOnStartRows = new List<Adw.ActionRow>();
         _accountViews = new List<Adw.TabPage>();
-        SetDefaultSize(900, 720);
-        SetSizeRequest(360, -1);
-        SetTitle(_controller.AppInfo.ShortName);
+        Handle = Adw.ApplicationWindow.New(_application);
+        Handle.SetDefaultSize(900, 720);
+        Handle.SetSizeRequest(360, -1);
+        Handle.SetTitle(_controller.AppInfo.ShortName);
         CompactMode = false;
         if (_controller.IsDevVersion)
         {
-            AddCssClass("devel");
+            Handle.AddCssClass("devel");
         }
         //Register Events
         _controller.NotificationSent += NotificationSent;
@@ -109,7 +111,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             UpdateRecentAccounts();
         };
-        OnNotify += (sender, e) =>
+        Handle.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "default-width")
             {
@@ -256,55 +258,55 @@ public partial class MainWindow : Adw.ApplicationWindow
         _viewStack.AddNamed(_pageTabs, "pageTabs");
         _toastOverlay.SetChild(_viewStack);
         //Layout
-        SetContent(_mainBox);
+        Handle.SetContent(_mainBox);
         //New Account Action
         _actNewAccount = Gio.SimpleAction.New("newAccount", null);
         _actNewAccount.OnActivate += OnNewAccount;
-        AddAction(_actNewAccount);
+        Handle.AddAction(_actNewAccount);
         application.SetAccelsForAction("win.newAccount", new string[] { "<Ctrl>N" });
         //Open Account Action
         _actOpenAccount = Gio.SimpleAction.New("openAccount", null);
         _actOpenAccount.OnActivate += OnOpenAccount;
-        AddAction(_actOpenAccount);
+        Handle.AddAction(_actOpenAccount);
         application.SetAccelsForAction("win.openAccount", new string[] { "<Ctrl>O" });
         //Close Account Action
         _actCloseAccount = Gio.SimpleAction.New("closeAccount", null);
         _actCloseAccount.OnActivate += OnCloseAccount;
-        AddAction(_actCloseAccount);
+        Handle.AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
         _actCloseAccount.SetEnabled(false);
         //New Window Action
         var actNewWindow = Gio.SimpleAction.New("newWindow", null);
         actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
-        AddAction(actNewWindow);
+        Handle.AddAction(actNewWindow);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
-        AddAction(actPreferences);
+        Handle.AddAction(actPreferences);
         application.SetAccelsForAction("win.preferences", new string[] { "<Ctrl>comma" });
         //Keyboard Shortcuts Action
         var actKeyboardShortcuts = Gio.SimpleAction.New("keyboardShortcuts", null);
         actKeyboardShortcuts.OnActivate += KeyboardShortcuts;
-        AddAction(actKeyboardShortcuts);
+        Handle.AddAction(actKeyboardShortcuts);
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
         //Quit Action
         var actQuit = Gio.SimpleAction.New("quit", null);
         actQuit.OnActivate += Quit;
-        AddAction(actQuit);
+        Handle.AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
         actHelp.OnActivate += Help;
-        AddAction(actHelp);
+        Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
-        AddAction(actAbout);
+        Handle.AddAction(actAbout);
         //Drop Target
         _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
-        AddController(_dropTarget);
+        Handle.AddController(_dropTarget);
     }
 
     /// <summary>
@@ -312,7 +314,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     public void Start()
     {
-        Show();
+        _application.AddWindow(Handle);
+        Handle.Show();
         if (_controller.RecentAccounts.Count > 0)
         {
             UpdateRecentAccountsOnStart();
@@ -344,7 +347,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_controller.Localizer["Help"]);
-            toast.OnButtonClicked += (sender, e) => gtk_show_uri(Handle, "help:denaro/import-export", 0);
+            toast.OnButtonClicked += (sender, e) => gtk_show_uri(Handle.Handle, "help:denaro/import-export", 0);
         }
         _toastOverlay.AddToast(toast);
     }
@@ -361,7 +364,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="title">The title of the account</param>
     public async Task<string?> AccountLoginAsync(string title)
     {
-        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        var passwordDialog = new PasswordDialog(Handle, title, _controller.Localizer);
         return await passwordDialog.Run();
     }
 
@@ -389,7 +392,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], Handle, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
@@ -425,7 +428,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], Handle, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["NMoneyFilter"]);
@@ -482,7 +485,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Preferences(Gio.SimpleAction sender, EventArgs e)
     {
-        var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, this);
+        var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, Handle);
         preferencesDialog.Show();
     }
 
@@ -493,7 +496,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
-        var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, this);
+        var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, Handle);
         shortcutsDialog.Show();
     }
 
@@ -509,7 +512,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e) => gtk_show_uri(Handle, "help:denaro", 0);
+    private void Help(Gio.SimpleAction sender, EventArgs e) => gtk_show_uri(Handle.Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
@@ -519,7 +522,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = Adw.AboutWindow.New();
-        dialog.SetTransientFor(this);
+        dialog.SetTransientFor(Handle);
         dialog.SetApplicationName(_controller.AppInfo.ShortName);
         dialog.SetApplicationIcon(_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : ""));
         dialog.SetVersion(_controller.AppInfo.Version);
@@ -651,7 +654,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     public void OnWidthChanged()
     {
-        var compactModeNeeded = DefaultWidth < 450;
+        var compactModeNeeded = Handle.DefaultWidth < 450;
         if (compactModeNeeded != CompactMode)
         {
             CompactMode = !CompactMode;
