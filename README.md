@@ -35,7 +35,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 
  ![GNOMELight](NickvisionMoney.GNOME/Screenshots/OpenAccount.png)
  ![GNOMEDark](NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png)
- <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='30%'><img   src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='30%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png'  alt='GNOMECompactMode' width='30%'></p>
+ <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='50%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png'  alt='GNOMECompactMode' width='50%'></p>
+ <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='50%'><img src='NickvisionMoney.GNOME/Screenshots/PasswordDialog.png' alt='GNOMEPasswordDialog' width='50%'></p>
 </details>
 
 <details>
