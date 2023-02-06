@@ -454,7 +454,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when an account page is closing
     /// </summary>
-    /// <param name="page">Adw.TabPage</param>
+    /// <param name="view">Adw.TabView</param>
+    /// <param name="args">Adw.TabView.ClosePageSignalArgs</param>
     private bool OnCloseAccountPage(Adw.TabView view, Adw.TabView.ClosePageSignalArgs args)
     {
         var indexPage = _tabView.GetPagePosition(args.Page);
@@ -470,6 +471,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _grpRecentAccountsOnStart.SetVisible(true);
         }
+        _tabView.ClosePageFinish(args.Page, true);
         return true;
     }
 
