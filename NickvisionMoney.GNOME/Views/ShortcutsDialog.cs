@@ -106,6 +106,12 @@ public class ShortcutsDialog
                                     <property name='accelerator'>F1</property>
                                 </object>
                             </child>
+                            <child>
+                                <object class='GtkShortcutsShortcut'>
+                                    <property name='title'>{localizer["Quit"]}</property>
+                                    <property name='accelerator'>&lt;Control&gt;q</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                 </object>
