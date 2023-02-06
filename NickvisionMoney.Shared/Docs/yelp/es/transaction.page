@@ -27,7 +27,7 @@
 	</item>
 	<item>
 		<title>Descripción</title>
-		<p>Autoexplicativo. Sin límite de longitud.</p>
+		<p>Sin límite de longitud. No puede contener punto y coma.</p>
 	</item>
 	<item>
 		<title>Cantidad</title>
