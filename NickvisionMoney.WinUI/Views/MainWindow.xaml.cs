@@ -125,6 +125,18 @@ public sealed partial class MainWindow : Window
     public void InitializeWithWindow(object target) => WinRT.Interop.InitializeWithWindow.Initialize(target, _hwnd);
 
     /// <summary>
+    /// Opens an account by path
+    /// </summary>
+    /// <param name="path">The path to the account</param>
+    public async Task OpenAccountAsync(string path)
+    {
+        if (Path.Exists(path) && Path.GetExtension(path).ToLower() == ".nmoney")
+        {
+            await _controller.AddAccountAsync(path);
+        }
+    }
+
+    /// <summary>
     /// Updates a NavViewItem's title
     /// </summary>
     /// <param name="path">The path of the nav view item</param>

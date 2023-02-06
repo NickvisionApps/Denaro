@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.Windows.AppLifecycle;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Views;
@@ -11,7 +12,7 @@ namespace NickvisionMoney.WinUI;
 /// </summary>
 public partial class App : Application
 {
-    public static Window? MainWindow { get; private set; } = null;
+    public static MainWindow? MainWindow { get; private set; } = null;
     private readonly MainWindowController _mainWindowController;
 
     /// <summary>
@@ -51,9 +52,15 @@ public partial class App : Application
     /// Occurs when the app is launched
     /// </summary>
     /// <param name="args">LaunchActivatedEventArgs</param>
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new MainWindow(_mainWindowController);
         MainWindow.Activate();
+        var activatedArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
+        if (activatedArgs.Kind == ExtendedActivationKind.File)
+        {
+            var fileArgs = (Windows.ApplicationModel.Activation.IFileActivatedEventArgs)activatedArgs.Data;
+            await MainWindow.OpenAccountAsync(fileArgs.Files[0].Path);
+        }
     }
 }
