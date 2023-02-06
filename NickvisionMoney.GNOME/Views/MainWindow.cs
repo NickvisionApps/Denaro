@@ -395,7 +395,7 @@ public partial class MainWindow
         var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], Handle, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
         saveFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
-        filter.SetName(_controller.Localizer["NMoneyFilter"]);
+        filter.SetName(_controller.Localizer["NickvisionMoneyAccount"]);
         filter.AddPattern("*.nmoney");
         saveFileDialog.AddFilter(filter);
         saveFileDialog.OnResponse += async (sender, e) =>
@@ -431,8 +431,9 @@ public partial class MainWindow
         var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], Handle, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
         openFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
-        filter.SetName(_controller.Localizer["NMoneyFilter"]);
+        filter.SetName(_controller.Localizer["NickvisionMoneyAccount"]);
         filter.AddPattern("*.nmoney");
+        filter.AddPattern("*.NMONEY");
         openFileDialog.AddFilter(filter);
         openFileDialog.OnResponse += async (sender, e) =>
         {

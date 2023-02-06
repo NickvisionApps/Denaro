@@ -804,20 +804,26 @@ public partial class AccountView
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
         filterAll.AddPattern("*.csv");
+        filterAll.AddPattern("*.CSV");
         filterAll.AddPattern("*.ofx");
+        filterAll.AddPattern("*.OFX");
         filterAll.AddPattern("*.qif");
+        filterAll.AddPattern("*.QIF");
         openFileDialog.AddFilter(filterAll);
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
+        filterCsv.AddPattern("*.CSV");
         openFileDialog.AddFilter(filterCsv);
         var filterOfx = Gtk.FileFilter.New();
         filterOfx.SetName("Open Financial Exchange (*.ofx)");
         filterOfx.AddPattern("*.ofx");
+        filterOfx.AddPattern("*.OFX");
         openFileDialog.AddFilter(filterOfx);
         var filterQif = Gtk.FileFilter.New();
         filterQif.SetName("Quicken Format (*.qif)");
         filterQif.AddPattern("*.qif");
+        filterQif.AddPattern("*.QIF");
         openFileDialog.AddFilter(filterQif);
         openFileDialog.OnResponse += async (sender, e) =>
         {
