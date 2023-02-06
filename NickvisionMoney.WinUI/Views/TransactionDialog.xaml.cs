@@ -181,6 +181,11 @@ public sealed partial class TransactionDialog : ContentDialog
     {
         if (!_constructing)
         {
+            while(TxtDescription.Text.Contains(';'))
+            {
+                TxtDescription.Text = TxtDescription.Text.Remove(TxtDescription.Text.IndexOf(';'), 1);
+            }
+            TxtDescription.Select(TxtDescription.Text.Length, 0);
             Validate();
         }
     }

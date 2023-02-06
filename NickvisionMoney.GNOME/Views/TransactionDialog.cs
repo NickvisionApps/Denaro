@@ -99,6 +99,7 @@ public partial class TransactionDialog
     private readonly Gtk.Button _btnReceiptDelete;
     private readonly Gtk.Button _btnReceiptUpload;
     private readonly Adw.ButtonContent _btnReceiptUploadContent;
+    private readonly Gtk.EventControllerKey _descriptionKeyController;
     private readonly Gtk.EventControllerKey _amountKeyController;
 
     /// <summary>
@@ -151,6 +152,10 @@ public partial class TransactionDialog
                 }
             }
         };
+        _descriptionKeyController = Gtk.EventControllerKey.New();
+        _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
+        _rowDescription.AddController(_descriptionKeyController);
         _grpMain.Add(_rowDescription);
         //Amount
         _rowAmount = Adw.EntryRow.New();

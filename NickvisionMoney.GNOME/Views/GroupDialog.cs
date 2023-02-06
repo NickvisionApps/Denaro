@@ -13,6 +13,8 @@ public partial class GroupDialog
     private readonly Adw.PreferencesGroup _grpGroup;
     private readonly Adw.EntryRow _rowName;
     private readonly Adw.EntryRow _rowDescription;
+    private readonly Gtk.EventControllerKey _nameKeyController;
+    private readonly Gtk.EventControllerKey _descriptionKeyController;
 
     /// <summary>
     /// Constructs a GroupDialog
@@ -51,6 +53,10 @@ public partial class GroupDialog
                 }
             }
         };
+        _nameKeyController = Gtk.EventControllerKey.New();
+        _nameKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _nameKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
+        _rowName.AddController(_nameKeyController);
         _grpGroup.Add(_rowName);
         //Description
         _rowDescription = Adw.EntryRow.New();
@@ -67,6 +73,10 @@ public partial class GroupDialog
                 }
             }
         };
+        _descriptionKeyController = Gtk.EventControllerKey.New();
+        _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
+        _rowDescription.AddController(_descriptionKeyController);
         _grpGroup.Add(_rowDescription);
         //Layout
         _dialog.SetExtraChild(_grpGroup);

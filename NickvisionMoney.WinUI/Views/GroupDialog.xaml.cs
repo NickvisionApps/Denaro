@@ -91,6 +91,11 @@ public sealed partial class GroupDialog : ContentDialog
     {
         if (!_constructing)
         {
+            while (TxtName.Text.Contains(';'))
+            {
+                TxtName.Text = TxtName.Text.Remove(TxtName.Text.IndexOf(';'), 1);
+            }
+            TxtName.Select(TxtName.Text.Length, 0);
             Validate();
         }
     }
@@ -104,6 +109,11 @@ public sealed partial class GroupDialog : ContentDialog
     {
         if (!_constructing)
         {
+            while (TxtDescription.Text.Contains(';'))
+            {
+                TxtDescription.Text = TxtDescription.Text.Remove(TxtDescription.Text.IndexOf(';'), 1);
+            }
+            TxtDescription.Select(TxtDescription.Text.Length, 0);
             Validate();
         }
     }
