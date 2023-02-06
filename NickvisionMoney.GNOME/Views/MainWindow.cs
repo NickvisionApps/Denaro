@@ -330,7 +330,7 @@ public partial class MainWindow
     /// <param name="path">The path to the account</param>
     public async Task OpenAccountAsync(string path)
     {
-        if (Path.Exists(path) && Path.GetExtension(path) == ".nmoney")
+        if (Path.Exists(path) && Path.GetExtension(path).ToLower() == ".nmoney")
         {
             await _controller.AddAccountAsync(path);
         }

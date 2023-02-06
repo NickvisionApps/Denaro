@@ -177,7 +177,7 @@ public class MainWindowController : IDisposable
     /// <returns>True if account added, else false (account already added)</returns>
     public async Task<bool> AddAccountAsync(string path, bool showOpenedNotification = true, string? password = null)
     {
-        if (Path.GetExtension(path) != ".nmoney")
+        if (Path.GetExtension(path).ToLower() != ".nmoney")
         {
             path += ".nmoney";
         }

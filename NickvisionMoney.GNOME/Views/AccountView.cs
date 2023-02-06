@@ -754,7 +754,7 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = saveFileDialog.GetFile()!.GetPath();
-                if (Path.GetExtension(path) != ".csv")
+                if (Path.GetExtension(path).ToLower() != ".csv")
                 {
                     path += ".csv";
                 }
@@ -782,7 +782,7 @@ public partial class AccountView
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = saveFileDialog.GetFile()!.GetPath();
-                if (Path.GetExtension(path) != ".pdf")
+                if (Path.GetExtension(path).ToLower() != ".pdf")
                 {
                     path += ".pdf";
                 }
