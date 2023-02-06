@@ -699,4 +699,82 @@
   <data name="AccountActions" xml:space="preserve">
     <value>Действия</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Невозможно открыть счёт. Неправильный пароль.</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Пароль целевого счёта (Требуется)</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Введите пароль, чтобы открыть счёт:</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Пароль счёта был удалён.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Пароль счёта был изменён.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Установите новый пароль или удалите существующий.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Если вы забудете пароль, данные будет невозможно восстановить!</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Повторите новый пароль</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Пароль целевого счёта</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Пароль целевого счёта (Некорректный)</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Выберите, как Denaro будет использовать региональные настройки.</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Региональные настройки</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Только точка на Numpad</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Точка и запятая</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Вставка десятичного разделителя</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Выключено</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Установите, нажатия каких кнопок будут вставлять десятичный разделитель в поля сумм.</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Пароль будет удалён после закрытия этого диалога.</value>
+  </data>
 </root>

@@ -24,7 +24,7 @@
 	</item>
 	<item>
 		<title>Description</title>
-		<p>Self-explanatory. No limit on length.</p>
+		<p>No limit on length. It can't contain semicolon.</p>
 	</item>
 	<item>
 		<title>Amount</title>

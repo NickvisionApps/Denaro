@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux it's possible to set different locales for system language and formats. <span class="app">Denaro</span> will try to use formats locale, and in case of failure it will fallback to language locale. This behavior is not considered a bug. In case of such failure, please use custom currency (see below).</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <span class="code">LANG</span>, <span class="code">LC_TIME</span>, and <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <span class="code">locale</span> command in a terminal. If you found a bug and want to report it, please provide the output of the <span class="code">locale</span> command to allow developers to reproduce your issue with the same settings.</p></div></div></div>
 </div>
 </dd>
 <dt class="terms">Use Custom Currency</dt>
@@ -63,8 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">Up to 3 characters or 1 emoji can be used as currency symbol.</p></dd>
 <dt class="terms">Custom Currency Code</dt>
 <dd class="terms"><p class="p">Optional code for your custom currency. If it's set, it will be shown in dialogs in parentheses next to <span class="gui">Custom Currency Symbol</span>. <span class="gui">Custom Currency Code</span> can contain up to 3 characters or 1 emoji.</p></dd>
-<dt class="terms">Sort by Id or Date</dt>
-<dd class="terms"><p class="p">Each account stores whether to sort transactions in the main window by their id or by their date. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
+<dt class="terms">Password</dt>
+<dd class="terms"><p class="p">Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p></dd>
+<dt class="terms">Sort by Id, Date or Amount</dt>
+<dd class="terms"><p class="p">Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
 <dt class="terms">Sorting Order</dt>
 <dd class="terms"><p class="p">Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
 <dt class="terms">Groups Visibility</dt>

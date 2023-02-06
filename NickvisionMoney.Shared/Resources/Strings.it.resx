@@ -511,7 +511,7 @@ Le nuove transazioni saranno generate in base alla nuova frequenza.</value>
 		<value>Colori</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Personalizza i colori usati da Money.</value>
+		<value>Personalizza i colori usati da Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Colore predefinito delle transazioni</value>
@@ -703,5 +703,65 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
     <value>Fai una copia</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Indietro</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Cancella</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Applica</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>La password dell’account è stata cancellata.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>La password dell’account è stata cambiata.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Cambia Password</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Se perdi la password, non puoi ripristinare l'account!</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Metti una password nuova o cancella quella corrente.</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Password Nuova</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Inserire la password</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Conferma la password</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Password dell’account destinatario</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Le password non sono uguali.</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>La password verrà cancellata dopo aver chiuso il dialog.</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Mettere la password dell’account destinatario</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Mettere la password valida dell’account destinatario</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Spento</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Punto e Virgola</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Punto del tastierino numerico</value>
   </data>
 </root>
