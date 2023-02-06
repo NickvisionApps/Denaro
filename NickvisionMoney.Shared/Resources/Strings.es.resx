@@ -404,7 +404,7 @@ Esta acción es irreversible.</value>
 		<value>Colores</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Personalice los colores usados por Money.</value>
+		<value>Personalice los colores usados por Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Color predeterminado de la transacción</value>
@@ -697,5 +697,86 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   </data>
   <data name="MakeCopy" xml:space="preserve">
     <value>Hacer una copia</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>La contraseña de la cuenta ha sido eliminada.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>La contraseña de la cuenta ha sido cambiada.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Punto final</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Punto y coma</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Insertar separador decimal</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>No se puede acceder a la cuenta. La contraseña proporcionada no es válida.</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Personalizar cómo Denaro usa la configuración regional.</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Apagado</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Establecer una nueva contraseña o eliminar una.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Si se pierde la contraseña, ¡no hay forma de restaurar la cuenta!</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Contraseña de la cuenta de destino (requerida)</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Introduzca aquí la contraseña</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Contraseña de la cuenta de destino</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Contraseña de la cuenta de destino (no válida)</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Establecer para qué teclas pulsadas se insertará el separador decimal de la configuración regional en un campo de importe.</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>La contraseña se eliminará al cerrar este diálogo.</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Introduzca la contraseña para iniciar sesión:</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Localización</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
   </data>
 </root>

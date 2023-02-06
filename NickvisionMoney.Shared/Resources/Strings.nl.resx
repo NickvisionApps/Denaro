@@ -446,7 +446,7 @@ Deze actie is onomkeerbaar..</value>
 		<value>Kleuren</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Pas de gebruikte kleuren aan.</value>
+		<value>Pas de door Denaro gebruikte kleuren aan</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Standaard transactiekleur</value>
@@ -703,5 +703,86 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
     <value>(kopie)</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Toepassen</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Kan niet inloggen met dit account. Opgegeven wachtwoord is ongeldig.</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Het wachtwoord van het account is verwijderd</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Het wachtwoord van het account is gewijzigd</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Wachtwoord wijzigen</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Nieuw wachtwoord</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Voer wachtwoord hier in</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Wachtwoord</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Voer wachtwoord in om in te loggen:</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Het wachtwoord zal worden verwijderd bij het sluiten van deze dialoog</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Regio</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Uitgeschakeld</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Wachtwoord van bestemmingsaccount</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Decimaal scheidingsteken invoegen</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Alleen numpad-punt</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Punt en komma</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>De wachtwoorden komen niet overeen</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Pas aan hoe Denaro regio-instellingen gebruikt</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Stel een nieuw wachtwoord in of verwijder een wachtwoord</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Als het wachtwoord verloren is is er geen manier om uw account te herstellen!</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Sluiten</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Bevestiging wachtwoord</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Wachtwoord van bestemmingsaccount (vereist)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Wachtwoord van bestemmingsaccount (ongeldig)</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Stelt in voor welke toetsen het decimale scheidingsteken zal worden ingevoerd</value>
   </data>
 </root>
