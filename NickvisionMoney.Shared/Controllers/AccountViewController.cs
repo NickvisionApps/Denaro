@@ -882,7 +882,7 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        var importedIds = await _account.ImportFromFileAsync(path);
+        var importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor);
         foreach (var pair in _account.Groups)
         {
             if (!_filters.ContainsKey((int)pair.Value.Id))

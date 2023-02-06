@@ -91,7 +91,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         RepeatInterval = TransactionRepeatInterval.Never;
         Amount = 0m;
         GroupId = -1;
-        RGBA = "";
+        RGBA = "rgb(0,0,0)";
         Receipt = null;
         RepeatFrom = -1;
         RepeatEndDate = null;

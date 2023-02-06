@@ -1,11 +1,13 @@
 ﻿using Hazzik.Qif;
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
+using OfxSharp;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
@@ -1070,8 +1072,9 @@ public class Account : IDisposable
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="rgba">The rgba for imported transactions</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    public async Task<List<uint>> ImportFromFileAsync(string path)
+    public async Task<List<uint>> ImportFromFileAsync(string path, string rgba)
     {
         var ids = new List<uint>();
         if (!System.IO.Path.Exists(path))
@@ -1085,11 +1088,11 @@ public class Account : IDisposable
         }
         else if (extension == ".ofx")
         {
-            return await ImportFromOFXAsync(path);
+            return await ImportFromOFXAsync(path, rgba);
         }
         else if (extension == ".qif")
         {
-            return await ImportFromQIFAsync(path);
+            return await ImportFromQIFAsync(path, rgba);
         }
         return ids;
     }
@@ -1271,102 +1274,25 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path of the file</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromOFXAsync(string path)
+    private async Task<List<uint>> ImportFromOFXAsync(string path, string rgba)
     {
         var ids = new List<uint>();
-        string[]? lines;
-        try
+        var localizer = new Localizer();
+        var ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
+        //Transactions
+        foreach(var transaction in ofx.Transactions)
         {
-            lines = File.ReadAllLines(path);
-        }
-        catch
-        {
-            return ids;
-        }
-        var nextId = NextAvailableTransactionId;
-        var xmlTagRegex = new Regex("^<([^/>]+|/STMTTRN)>(?:[+-])?([^<]+)");
-        var transaction = default(Transaction);
-        var skipTransaction = false;
-        foreach (var line in lines)
-        {
-            var match = xmlTagRegex.Match(line);
-            if (match.Success)
+            if(transaction.Amount != 0)
             {
-                var tag = match.Groups[1].Value;
-                var content = match.Groups[2].Value;
-                if (content.Contains('\r'))
+                ids.Add(NextAvailableTransactionId);
+                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
                 {
-                    content = content.Remove(content.IndexOf('\r'));
-                }
-                //Add Previous Transaction
-                if (tag == "/STMTTRN" && transaction != null)
-                {
-                    if (!skipTransaction)
-                    {
-                        await AddTransactionAsync(transaction);
-                        ids.Add(transaction.Id);
-                    }
-                    skipTransaction = false;
-                    transaction = null;
-                }
-                //New Transaction
-                if (tag == "STMTTRN")
-                {
-                    transaction = new Transaction(nextId);
-                    nextId++;
-                }
-                if (!skipTransaction)
-                {
-                    //Type
-                    if (tag == "TRNTYPE")
-                    {
-                        if (content == "CREDIT")
-                        {
-                            transaction!.Type = TransactionType.Income;
-                        }
-                        else if (content == "DEBIT")
-                        {
-                            transaction!.Type = TransactionType.Expense;
-                        }
-                        else
-                        {
-                            //Unknown Entry
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                    //Name
-                    if (tag == "MEMO")
-                    {
-                        transaction!.Description = content;
-                    }
-                    //Amount
-                    if (tag == "TRNAMT")
-                    {
-                        try
-                        {
-                            transaction!.Amount = decimal.Parse(content, NumberStyles.Currency);
-                        }
-                        catch
-                        {
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                    //Date
-                    if (tag == "DTPOSTED")
-                    {
-                        try
-                        {
-                            transaction!.Date = DateOnly.Parse(content);
-                        }
-                        catch
-                        {
-                            skipTransaction = true;
-                            continue;
-                        }
-                    }
-                }
+                    Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo) : transaction.Name,
+                    Date = DateOnly.FromDateTime(transaction.Date),
+                    Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
+                    Amount = Math.Abs(transaction.Amount),
+                    RGBA = rgba
+                });
             }
         }
         return ids;
@@ -1377,7 +1303,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path of the file</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromQIFAsync(string path)
+    private async Task<List<uint>> ImportFromQIFAsync(string path, string rgba)
     {
         var ids = new List<uint>();
         QifDocument? qif = null;
@@ -1390,14 +1316,14 @@ public class Account : IDisposable
             return ids;
         }
         //Groups
-        foreach(var cat in qif.CategoryListTransactions)
+        foreach(var group in qif.CategoryListTransactions)
         {
-            if (Groups.Values.FirstOrDefault(x => x.Name == cat.CategoryName) == null)
+            if (Groups.Values.FirstOrDefault(x => x.Name == group.CategoryName) == null)
             {
                 await AddGroupAsync(new Group(NextAvailableGroupId)
                 {
-                    Name = cat.CategoryName,
-                    Description = cat.Description
+                    Name = group.CategoryName,
+                    Description = group.Description
                 });
             }
         }
@@ -1407,14 +1333,16 @@ public class Account : IDisposable
             if(transaction.Amount != 0)
             {
                 ids.Add(NextAvailableTransactionId);
+                var localizer = new Localizer();
                 var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
                 await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrEmpty(transaction.Memo) ? new Localizer()["NotAvailable"] : transaction.Memo,
+                    Description = string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
-                    GroupId = group == null ? -1 : (int)group.Id
+                    GroupId = group == null ? -1 : (int)group.Id,
+                    RGBA = rgba
                 });
             }
         }
