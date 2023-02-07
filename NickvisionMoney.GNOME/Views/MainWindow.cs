@@ -33,9 +33,6 @@ public partial class MainWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_show_uri(nint parent, string uri, uint timestamp);
-
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.Box _mainBox;
@@ -519,7 +516,7 @@ public partial class MainWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e) => gtk_show_uri(Handle.Handle, "help:denaro", 0);
+    private void Help(Gio.SimpleAction sender, EventArgs e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
