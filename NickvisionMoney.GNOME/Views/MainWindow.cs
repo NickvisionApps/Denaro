@@ -312,7 +312,7 @@ public partial class MainWindow
     /// <summary>
     /// Starts the MainWindow
     /// </summary>
-    public void Start()
+    public async Task StartAsync()
     {
         _application.AddWindow(Handle);
         Handle.Show();
@@ -322,17 +322,10 @@ public partial class MainWindow
             _pageStatusNoAccounts.SetDescription("");
             _grpRecentAccountsOnStart.SetVisible(true);
         }
-    }
-
-    /// <summary>
-    /// Opens an account by path
-    /// </summary>
-    /// <param name="path">The path to the account</param>
-    public async Task OpenAccountAsync(string path)
-    {
-        if (Path.Exists(path) && Path.GetExtension(path).ToLower() == ".nmoney")
+        if(_controller.FileToLaunch != null)
         {
-            await _controller.AddAccountAsync(path);
+            await _controller.AddAccountAsync(_controller.FileToLaunch);
+            _controller.FileToLaunch = null;
         }
     }
 
