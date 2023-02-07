@@ -447,7 +447,7 @@ Cette action est irréversible.</value>
 		<value>Couleurs</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Personnaliser les couleurs utilisées par Money.</value>
+		<value>Personnaliser les couleurs utilisées par Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Couleur par défaut des transactions</value>
@@ -704,5 +704,86 @@ les transactions individuelles générées seront modifiables.</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
     <value>Faire une copie</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Impossible de se connecter au compte. Le mot de passe fourni n'est pas valide.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Changer le mot de passe</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Paramètres régionaux</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Personnalisez la manière dont Denaro utilise les paramètres linguistiques.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Insérer un séparateur décimale</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Le mot de passe du compte a été modifié.</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Mot de passe du compte de destination</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Mot de passe du compte de destination (obligatoire)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Mot de passe du compte de destination (invalide)</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Entrez le mot de passe pour vous connecter :</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Définit pour quelles touches pressées le séparateur décimal des paramètres régionaux sera inséré dans un champ de montant.</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Point du pavé numérique uniquement</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Point et virgule</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas.</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Le mot de passe du compte a été retiré.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Si le mot de passe est perdu, il n'y a aucun moyen de restaurer votre compte !</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Entrez le mot de passe ici</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Définissez un nouveau mot de passe ou supprimez-en un.</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Le mot de passe sera retiré à la fermeture de cette boîte de dialogue.</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Désactivé</value>
   </data>
 </root>
