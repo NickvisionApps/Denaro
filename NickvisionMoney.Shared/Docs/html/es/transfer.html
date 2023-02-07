@@ -25,19 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul></div></div></div>
 <p class="p">Las transacciones creadas mediante la transferencia son transacciones simples que se pueden editar o eliminar libremente. Estas transacciones no están conectadas: la modificación de la transacción en la cuenta de origen no afectará la transacción en la cuenta de destino y viceversa.</p>
 <p class="p">La transferencia no le permite crear transacciones repetitivas ni establecer ninguna otra propiedad que no sea la cantidad. El color seleccionado en <span class="link"><a href="configuration.html" title="Configuración">configuration</a></span> se usará para las transacciones creadas.</p>
-<p class="p">Aunque <span class="app">Denaro</span> admite cuentas con diferentes monedas, las cantidades de las transferencias no se convierten automáticamente para sus respectivas monedas. El valor numérico se usará tal cual. Por ejemplo: si transfiere 100$ (USD) a una cuenta que utiliza € (EUR), se crearán las siguientes dos transacciones:</p>
-<div class="list"><div class="inner"><div class="region"><ul class="list">
-<li class="list"><p class="p">En cuenta de origen: transacción de gastos por 100$ (USD).</p></li>
-<li class="list"><p class="p">En cuenta destino: transacción de ingreso por 100€ (EUR).</p></li>
-</ul></div></div></div>
-<div class="note" title="Note">
-<svg height="24" width="24" version="1.1">
- <g>
-  <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
-  <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
- </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Estamos buscando implementar una función para establecer una tasa de conversión para diferentes monedas durante la transferencia en una versión futura, consulte <span class="link"><a href="https://github.com/nlogozzo/NickvisionMoney/issues/144" title="https://github.com/nlogozzo/NickvisionMoney/issues/144">incidencia #144</a></span>.</p></div></div></div>
-</div>
+<p class="p">Si crea una transferencia entre cuentas con divisas diferentes, se le pedirá que indique un tipo de conversión.</p>
 </div>
 <section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
