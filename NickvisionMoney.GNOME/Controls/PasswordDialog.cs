@@ -1,4 +1,5 @@
 using NickvisionMoney.Shared.Helpers;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -17,6 +18,12 @@ public enum PasswordDialogResponse
 /// </summary>
 public partial class PasswordDialog
 {
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.StatusPage _statusPassword;
     private readonly Adw.PasswordEntryRow _passwordEntry;
@@ -75,12 +82,13 @@ public partial class PasswordDialog
     /// <summary>
     /// Runs the dialog
     /// </summary>
-    public async Task<string?> Run()
+    public async Task<string?> RunAsync()
     {
         _dialog.Show();
         while (_dialog.GetVisible())
         {
-            await Task.Delay(100);
+            g_main_context_iteration(g_main_context_default(), false);
+            await Task.Delay(50);
         }
         string? password = null;
         if (_response == PasswordDialogResponse.Suggested)

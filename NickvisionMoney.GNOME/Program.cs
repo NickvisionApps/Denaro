@@ -95,7 +95,7 @@ public partial class Program
     /// </summary>
     /// <param name="sedner">Gio.Application</param>
     /// <param name="e">EventArgs</param>
-    private async void OnActivate(Gio.Application sedner, EventArgs e)
+    private void OnActivate(Gio.Application sedner, EventArgs e)
     {
         //Set Adw Theme
         _application.StyleManager!.ColorScheme = _mainWindowController.Theme switch
@@ -107,7 +107,7 @@ public partial class Program
         };
         //Main Window
         _mainWindow = new MainWindow(_mainWindowController, _application);
-        await _mainWindow.StartAsync();
+        _mainWindow.Startup();
     }
 
     /// <summary>

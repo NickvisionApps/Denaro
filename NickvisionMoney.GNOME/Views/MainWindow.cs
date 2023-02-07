@@ -28,6 +28,12 @@ public class WidthChangedEventArgs : EventArgs
 public partial class MainWindow
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -97,6 +103,7 @@ public partial class MainWindow
         Handle.SetDefaultSize(900, 720);
         Handle.SetSizeRequest(360, -1);
         Handle.SetTitle(_controller.AppInfo.ShortName);
+        Handle.OnShow += OnShow;
         CompactMode = false;
         if (_controller.IsDevVersion)
         {
@@ -312,21 +319,16 @@ public partial class MainWindow
     /// <summary>
     /// Starts the MainWindow
     /// </summary>
-    public async Task StartAsync()
+    public void Startup()
     {
         _application.AddWindow(Handle);
-        Handle.Show();
         if (_controller.RecentAccounts.Count > 0)
         {
             UpdateRecentAccountsOnStart();
             _pageStatusNoAccounts.SetDescription("");
             _grpRecentAccountsOnStart.SetVisible(true);
         }
-        if(_controller.FileToLaunch != null)
-        {
-            await _controller.AddAccountAsync(_controller.FileToLaunch);
-            _controller.FileToLaunch = null;
-        }
+        Handle.Show();
     }
 
     /// <summary>
@@ -358,7 +360,7 @@ public partial class MainWindow
     public async Task<string?> AccountLoginAsync(string title)
     {
         var passwordDialog = new PasswordDialog(Handle, title, _controller.Localizer);
-        return await passwordDialog.Run();
+        return await passwordDialog.RunAsync();
     }
 
     /// <summary>
@@ -375,6 +377,20 @@ public partial class MainWindow
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
         await newAccountView.StartupAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the window is shown
+    /// </summary>
+    /// <param name="sender">Gtk.Widget</param>
+    /// <param name="e">EventArgs</param>
+    private async void OnShow(Gtk.Widget sender, EventArgs e)
+    {
+        if (_controller.FileToLaunch != null)
+        {
+            await _controller.AddAccountAsync(_controller.FileToLaunch);
+            _controller.FileToLaunch = null;
+        }
     }
 
     /// <summary>
