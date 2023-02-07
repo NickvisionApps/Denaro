@@ -382,8 +382,11 @@ public partial class MainWindow
     {
         if (_controller.FileToLaunch != null)
         {
-            await _controller.AddAccountAsync(_controller.FileToLaunch);
-            _controller.FileToLaunch = null;
+            GLib.Functions.TimeoutAddFull(0, 250, (data) => {
+                _controller.AddAccountAsync(_controller.FileToLaunch);
+                _controller.FileToLaunch = null;
+                return false;
+            });
         }
     }
 
