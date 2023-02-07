@@ -97,6 +97,7 @@ public partial class MainWindow
         Handle.SetDefaultSize(900, 720);
         Handle.SetSizeRequest(360, -1);
         Handle.SetTitle(_controller.AppInfo.ShortName);
+        Handle.OnShow += OnShow;
         CompactMode = false;
         if (_controller.IsDevVersion)
         {
@@ -312,28 +313,16 @@ public partial class MainWindow
     /// <summary>
     /// Starts the MainWindow
     /// </summary>
-    public void Start()
+    public void Startup()
     {
         _application.AddWindow(Handle);
-        Handle.Show();
         if (_controller.RecentAccounts.Count > 0)
         {
             UpdateRecentAccountsOnStart();
             _pageStatusNoAccounts.SetDescription("");
             _grpRecentAccountsOnStart.SetVisible(true);
         }
-    }
-
-    /// <summary>
-    /// Opens an account by path
-    /// </summary>
-    /// <param name="path">The path to the account</param>
-    public async Task OpenAccountAsync(string path)
-    {
-        if (Path.Exists(path) && Path.GetExtension(path).ToLower() == ".nmoney")
-        {
-            await _controller.AddAccountAsync(path);
-        }
+        Handle.Show();
     }
 
     /// <summary>
@@ -365,7 +354,7 @@ public partial class MainWindow
     public async Task<string?> AccountLoginAsync(string title)
     {
         var passwordDialog = new PasswordDialog(Handle, title, _controller.Localizer);
-        return await passwordDialog.Run();
+        return await passwordDialog.RunAsync();
     }
 
     /// <summary>
@@ -382,6 +371,20 @@ public partial class MainWindow
         _btnMenuAccount.SetVisible(true);
         _btnFlapToggle.SetVisible(true);
         await newAccountView.StartupAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the window is shown
+    /// </summary>
+    /// <param name="sender">Gtk.Widget</param>
+    /// <param name="e">EventArgs</param>
+    private async void OnShow(Gtk.Widget sender, EventArgs e)
+    {
+        if (_controller.FileToLaunch != null)
+        {
+            await _controller.AddAccountAsync(_controller.FileToLaunch);
+            _controller.FileToLaunch = null;
+        }
     }
 
     /// <summary>

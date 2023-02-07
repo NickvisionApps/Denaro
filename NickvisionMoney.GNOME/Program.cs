@@ -7,7 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME;
 
@@ -16,11 +15,6 @@ namespace NickvisionMoney.GNOME;
 /// </summary>
 public partial class Program
 {
-    private delegate void OpenSignal(nint application, nint files, int nfiles, string hint, nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string detailed_signal, [MarshalAs(UnmanagedType.FunctionPtr)] OpenSignal c_handler, nint data, nint destroy_data, int connect_flags);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_resource_load(string path);
 
@@ -33,7 +27,6 @@ public partial class Program
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
     private MainWindowController _mainWindowController;
-    private readonly OpenSignal _openSignal;
 
     /// <summary>
     /// Main method
@@ -64,8 +57,7 @@ public partial class Program
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
         _application.OnActivate += OnActivate;
-        _openSignal = async (nint application, nint files, int nfiles, string hint, nint data) => await OnOpen(files, nfiles);
-        g_signal_connect_data(_application.Handle, "open", _openSignal, IntPtr.Zero, IntPtr.Zero, 0);
+        _application.OnOpen += OnOpen;
         var prefixes = new List<string> {
             Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
             Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
@@ -115,7 +107,7 @@ public partial class Program
         };
         //Main Window
         _mainWindow = new MainWindow(_mainWindowController, _application);
-        _mainWindow.Start();
+        _mainWindow.Startup();
     }
 
     /// <summary>
@@ -123,15 +115,13 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private async Task OnOpen(nint files, int nFiles)
+    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
     {
-        if (nFiles > 0)
+        if (e.NFiles > 0)
         {
-            var filesArray = new IntPtr[1] { IntPtr.Zero };
-            Marshal.Copy(files, filesArray, 0, 1);
-            var pathOfFirstFile = g_file_get_path(filesArray[0]);
+            var pathOfFirstFile = g_file_get_path(e.Files[0].Handle);
+            _mainWindowController.FileToLaunch = pathOfFirstFile;
             OnActivate(_application, EventArgs.Empty);
-            await _mainWindow!.OpenAccountAsync(pathOfFirstFile);
         }
     }
 }
