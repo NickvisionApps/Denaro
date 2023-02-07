@@ -15,6 +15,7 @@ namespace NickvisionMoney.Shared.Controllers;
 public class MainWindowController : IDisposable
 {
     private bool _disposed;
+    private string? _fileToLaunch;
 
     /// <summary>
     /// The localizer to get translated strings from
@@ -69,8 +70,9 @@ public class MainWindowController : IDisposable
     public MainWindowController()
     {
         _disposed = false;
-        OpenAccounts = new List<AccountViewController>();
+        _fileToLaunch = null;
         Localizer = new Localizer();
+        OpenAccounts = new List<AccountViewController>();
     }
 
     /// <summary>
@@ -114,6 +116,16 @@ public class MainWindowController : IDisposable
                 return Localizer["Greeting", "Generic"];
             }
         }
+    }
+
+    /// <summary>
+    /// A file to launch when the window is loaded
+    /// </summary>
+    public string? FileToLaunch
+    {
+        get => _fileToLaunch;
+
+        set => _fileToLaunch = (Path.Exists(value) && Path.GetExtension(value).ToLower() == ".nmoney") ? value : null;
     }
 
     /// <summary>
