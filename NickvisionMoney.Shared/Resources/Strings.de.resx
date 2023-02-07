@@ -646,7 +646,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>ID</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-    <value>Sortiere Nach Datum</value>
+    <value>Nach Datum sortieren</value>
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
     <value>Gruppenname</value>
@@ -655,7 +655,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Seite {0}</value>
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-    <value>Sortiere Nach ID</value>
+    <value>Nach ID sortieren</value>
   </data>
   <data name="Generated.PDF" xml:space="preserve">
     <value>Generiert: {0}</value>
@@ -664,7 +664,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Währung</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-    <value>Suche nach Beschreibung</value>
+    <value>Nach Beschreibung suchen</value>
   </data>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>VORSCHAU</value>
@@ -673,7 +673,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Verwalte deine persönlichen Finanzen</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-    <value>Sortiere Nach Menge</value>
+    <value>Nach Menge sortieren</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Ergebnis</value>
@@ -704,5 +704,59 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
     <value>(Kopie)</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Das Passwort des Kontos wurde geändert.</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Wenn das Passwort verloren geht, gibt es keine Möglichkeit, Ihr Konto wiederherzustellen!</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Passwort hier eingeben</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Zielkonto-Passwort</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Passwort für das Zielkonto (erforderlich)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Passwort des Zielkontos (ungültig)</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Anmeldung zum Konto nicht möglich. Das angegebene Kennwort ist ungültig.</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Das Passwort des Kontos wurde entfernt.</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Legen Sie ein neues Passwort fest oder entfernen Sie eines.</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Passwort zum Anmelden eingeben:</value>
   </data>
 </root>

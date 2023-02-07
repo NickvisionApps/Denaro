@@ -651,7 +651,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Pagina {0}</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-    <value>Colore degli account business</value>
+    <value>Colore dell’account aziendale</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Aiuto</value>
@@ -720,7 +720,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>La password dell’account è stata cambiata.</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-    <value>Cambia Password</value>
+    <value>Cambia la password</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
     <value>Se perdi la password, non puoi ripristinare l'account!</value>
@@ -732,7 +732,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Password</value>
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-    <value>Password Nuova</value>
+    <value>Nuova password</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
     <value>Inserire la password</value>
@@ -759,9 +759,30 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Spento</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-    <value>Punto e Virgola</value>
+    <value>Punto e virgola</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
     <value>Punto del tastierino numerico</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Impossibile accedere all’account. La password fornita non è valida.</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Inserisci la password per accedere:</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Impostazioni regionali</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Personalizza il modo in cui Denaro utilizza le impostazioni di localizzazione.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Inserisci il separatore decimale</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Esci</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Imposta per quali tasti premuti verrà inserito il separatore decimale delle impostazioni regionali in un campo importo.</value>
   </data>
 </root>
