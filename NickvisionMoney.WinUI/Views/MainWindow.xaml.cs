@@ -302,7 +302,8 @@ public sealed partial class MainWindow : Window
     {
         var passwordDialog = new PasswordDialog(title, _controller.Localizer)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = NavView.RequestedTheme
         };
         return await passwordDialog.ShowAsync();
     }

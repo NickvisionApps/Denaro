@@ -351,7 +351,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         using var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await transactionDialog.ShowAsync())
         {
@@ -374,7 +375,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         using var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await transactionDialog.ShowAsync())
         {
@@ -398,7 +400,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         using var transactionController = _controller.CreateTransactionDialogController(transactionId);
         var transactionDialog = new TransactionDialog(transactionController, _initializeWithWindow)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await transactionDialog.ShowAsync())
         {
@@ -419,7 +422,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                         PrimaryButtonText = _controller.Localizer["DeleteExisting"],
                         SecondaryButtonText = _controller.Localizer["DisassociateExisting"],
                         DefaultButton = ContentDialogButton.Close,
-                        XamlRoot = Content.XamlRoot
+                        XamlRoot = Content.XamlRoot,
+                        RequestedTheme = RequestedTheme
                     };
                     var result = await editDialog.ShowAsync();
                     if (result == ContentDialogResult.Primary)
@@ -454,7 +458,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                         PrimaryButtonText = _controller.Localizer["EditSourceGeneratedTransaction"],
                         SecondaryButtonText = _controller.Localizer["EditOnlySourceTransaction"],
                         DefaultButton = ContentDialogButton.Close,
-                        XamlRoot = Content.XamlRoot
+                        XamlRoot = Content.XamlRoot,
+                        RequestedTheme = RequestedTheme
                     };
                     var result = await editDialog.ShowAsync();
                     if (result != ContentDialogResult.None)
@@ -499,7 +504,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                 PrimaryButtonText = _controller.Localizer["DeleteSourceGeneratedTransaction"],
                 SecondaryButtonText = _controller.Localizer["DeleteOnlySourceTransaction"],
                 DefaultButton = ContentDialogButton.Close,
-                XamlRoot = Content.XamlRoot
+                XamlRoot = Content.XamlRoot,
+                RequestedTheme = RequestedTheme
             };
             var result = await deleteDialog.ShowAsync();
             if (result != ContentDialogResult.None)
@@ -522,7 +528,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                 CloseButtonText = _controller.Localizer["No"],
                 PrimaryButtonText = _controller.Localizer["Yes"],
                 DefaultButton = ContentDialogButton.Close,
-                XamlRoot = Content.XamlRoot
+                XamlRoot = Content.XamlRoot,
+                RequestedTheme = RequestedTheme
             };
             if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
             {
@@ -541,7 +548,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await groupDialog.ShowAsync())
         {
@@ -565,7 +573,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var groupController = _controller.CreateGroupDialogController(groupId);
         var groupDialog = new GroupDialog(groupController)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await groupDialog.ShowAsync())
         {
@@ -593,7 +602,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             CloseButtonText = _controller.Localizer["No"],
             PrimaryButtonText = _controller.Localizer["Yes"],
             DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await deleteDialog.ShowAsync() == ContentDialogResult.Primary)
         {
@@ -620,7 +630,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _initializeWithWindow)
             {
-                XamlRoot = Content.XamlRoot
+                XamlRoot = Content.XamlRoot,
+                RequestedTheme = RequestedTheme
             };
             if (await transferDialog.ShowAsync())
             {
@@ -768,7 +779,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController)
         {
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         if (await accountSettingsDialog.ShowAsync())
         {

@@ -216,7 +216,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
             Content = _controller.AppInfo.Changelog,
             CloseButtonText = _controller.Localizer["OK"],
             DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         await changelogDialog.ShowAsync();
     }
@@ -234,7 +235,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
             Content = string.Format(_controller.Localizer["CreditsDialogDescription", "WinUI"], RemoveUrlsFromCredits(_controller.Localizer["Developers", "Credits"]), RemoveUrlsFromCredits(_controller.Localizer["Designers", "Credits"]), RemoveUrlsFromCredits(_controller.Localizer["Artists", "Credits"]), RemoveUrlsFromCredits(_controller.Localizer["Translators", "Credits"])),
             CloseButtonText = _controller.Localizer["OK"],
             DefaultButton = ContentDialogButton.Close,
-            XamlRoot = Content.XamlRoot
+            XamlRoot = Content.XamlRoot,
+            RequestedTheme = RequestedTheme
         };
         await creditsDialog.ShowAsync();
     }
@@ -278,7 +280,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
                 PrimaryButtonText = _controller.Localizer["Yes"],
                 CloseButtonText = _controller.Localizer["No"],
                 DefaultButton = ContentDialogButton.Close,
-                XamlRoot = Content.XamlRoot
+                XamlRoot = Content.XamlRoot,
+                RequestedTheme = RequestedTheme
             };
             var result = await restartDialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
