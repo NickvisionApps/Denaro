@@ -48,6 +48,18 @@
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="nmoney">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.nmoney</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:DisplayName>Nickvision Denaro Account</uap:DisplayName>
+            <uap:Logo>org.nickvision.money.png</uap:Logo>
+            <uap:InfoTip>Nickvision Denaro Account</uap:InfoTip>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 

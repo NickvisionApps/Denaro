@@ -10,7 +10,7 @@
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d" Activated="Window_Activated">
 
-    <Grid x:Name="MainGrid" ActualThemeChanged="Window_ActualThemeChanged" AllowDrop="True" DragOver="Window_DragOver" Drop="Window_Drop">
+    <Grid x:Name="MainGrid" AllowDrop="True" Loaded="Window_Loaded" ActualThemeChanged="Window_ActualThemeChanged" DragOver="Window_DragOver" Drop="Window_Drop">
         <Grid x:Name="TitleBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="32">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="TitleBarLeftPaddingColumn" Width="0"/>

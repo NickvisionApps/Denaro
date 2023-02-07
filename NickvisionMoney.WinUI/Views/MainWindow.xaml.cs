@@ -142,6 +142,21 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the window content is loaded
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        //Launched File
+        if (_controller.FileToLaunch != null)
+        {
+            await _controller.AddAccountAsync(_controller.FileToLaunch);
+            _controller.FileToLaunch = null;
+        }
+    }
+
+    /// <summary>
     /// Occurs when the window is activated
     /// </summary>
     /// <param name="sender">object</param>
@@ -283,7 +298,7 @@ public sealed partial class MainWindow : Window
     /// Occurs when an account needs a login
     /// </summary>
     /// <param name="title">The title of the account</param>
-    public async Task<string?> AccountLoginAsync(string title)
+    private async Task<string?> AccountLoginAsync(string title)
     {
         var passwordDialog = new PasswordDialog(title, _controller.Localizer)
         {
