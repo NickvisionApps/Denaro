@@ -14,13 +14,13 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Aplikacija za osobne financije</value>
+		<value>Program za upravljanje osobnim financijama</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Verzija: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value>O aplikaciji {0}</value>
+		<value>{0} informacije</value>
   </data>
   <data name="Changelog" xml:space="preserve">
 		<value>Dnevnik promjena</value>
@@ -122,7 +122,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nijedan račun nije otvoren</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Započni stvaranjem ili otvarenjem računa. Također možeš povući datoteku u aplikaciju iz preglednika datoteka.</value>
+		<value>Započni stvaranjem ili otvarenjem računa. Također možeš povući datoteku u program iz preglednika datoteka.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
 		<value>Nedavno korišteni računi</value>
@@ -261,7 +261,7 @@ Ovo je nepovratna radnja.</value>
 Ovo je nepovratna radnja.</value>
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value>Na ovom računu nema novca za prijenos.</value>
+		<value>Na ovom računu nema novca za transferiranje.</value>
   </data>
   <data name="Hide" xml:space="preserve">
 		<value>Sakrij</value>
@@ -403,7 +403,7 @@ Ovo je nepovratna radnja.</value>
 		<value>Vrsta</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value>Ponavljanje</value>
+		<value>Interval ponavljanja</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
 		<value>Grupa</value>
@@ -428,7 +428,7 @@ Ovo je nepovratna radnja.</value>
 		<value>Korisničko sučelje</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value>Prilagodi korisničko sučelje aplikacije.</value>
+		<value>Prilagodi korisničko sučelje programa.</value>
   </data>
   <data name="Theme" xml:space="preserve">
 		<value>Tema</value>
@@ -446,7 +446,7 @@ Ovo je nepovratna radnja.</value>
 		<value>Boje</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Prilagodi boje za Money.</value>
+		<value>Prilagodi boje za Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Standardna boja transakcija</value>
@@ -462,7 +462,7 @@ Ovo je nepovratna radnja.</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value>Aplikacija</value>
+		<value>Program</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
@@ -485,7 +485,7 @@ Prevodioci:
 {3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Za mijenjanje teme se aplikacija mora ponovo pokrenuti .</value>
+		<value>Za mijenjanje teme, program se mora ponovo pokrenuti.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Ponovo pokrenuti za primjenjivanje teme?</value>
@@ -514,7 +514,7 @@ Sve nespremljene promjene će se izgubiti.</value>
 		<value>Money račun (*.nmoney)</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-    <value>Ponavljanje promijenjeno</value>
+    <value>Interval ponavljanja promijenjen</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
     <value>Ova transakcija je izvorna ponavljajuća transakcija.
@@ -524,7 +524,7 @@ Aktualiziranje samo izvorne transakcije će odspojiti
 iz izvora generirane transakcije.</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-    <value>Aktualiziraj izvor i generirane</value>
+    <value>Aktualiziraj izvornu transakciju i generirane transakcije</value>
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
     <value>Izbriši transakciju</value>
@@ -537,34 +537,34 @@ Brisanje samo izvorne transakcije omogućit će mijenjanje
 pojedinačno generiranih transakcija.</value>
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-    <value>Izbriši samo izvor</value>
+    <value>Izbriši samo izvornu transakciju</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-    <value>Izriši izvor i generirane</value>
+    <value>Izbriši izvornu transakciju i generirane transakcije</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
     <value>Aktualiziraj transakciju</value>
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-    <value>Aktualiziraj samo izvor</value>
+    <value>Aktualiziraj samo izvornu transakciju</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
     <value>Pregled za danas</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-    <value>Ponovi krajnji datum</value>
+    <value>Krajnji datum ponavljanja</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
     <value>Izbriši krajnji datum</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-    <value>Ponovi krajnji datum (neispravno)</value>
+    <value>Krajnji datum ponavljanja (neispravno)</value>
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
-    <value>Ponavljanje je promijenjen.
+    <value>Interval ponavljanje je promijenjen.
 Što želiš učiniti s postojećim generiranim transakcijama?
 
-Nove ponovljajuće transakcije generirat će se na temelju novog ponavljanja.</value>
+Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</value>
   </data>
   <data name="DeleteExisting" xml:space="preserve">
     <value>Izbriši potojeće</value>
@@ -615,7 +615,7 @@ Nove ponovljajuće transakcije generirat će se na temelju novog ponavljanja.</v
     <value>Postavke računa</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-    <value>Ovo je samo korisna oznaka koja ne utječe na rad aplikacije.</value>
+    <value>Ovo je samo korisna oznaka koja ne utječe na rad programa.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
     <value>--</value>
@@ -661,5 +661,128 @@ Nove ponovljajuće transakcije generirat će se na temelju novog ponavljanja.</v
   </data>
   <data name="SortBy.Date" xml:space="preserve">
     <value>Razvrstaj po datumu</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Izradi kopiju</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(kopija)</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Potrebna je konverzija</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>novac;financije;novčanik;gotovina;banka;GTK;Nickvision;</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Rezultat</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Natrag</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ukloni</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Primijeni</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Neuspjela prijava na račun. Navedena lozinka je neispravna.</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Jezično područje</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Lozinka će se ukloniti nakon zatvaranja dijaloga.</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Zatvori program</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Kôd valute (prazno)</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Za prijavu upiši lozinku:</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Prilagodi postavke jezičnog područja za Denaro.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Umetni decimalni znak</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Odredi decimalni znak za polje iznosa.</value>
+  </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Upravljaj osobnim financijama</value>
+  </data>
+  <data name="MatrixChat" xml:space="preserve">
+    <value>Chat na Matrixu</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Razvrstaj po iznosu</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Ovdje upiši tečaj konverzije</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>Novi prozor</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Pretraži po opisu</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Lozinka računa je uklonjena.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Lozinka računa je promijenjena.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Promijeni lozinku</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Ako izgubiš lozinku, tvoj se račun ne može obnoviti!</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Ovdje upiši lozinku</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Nova lozinka</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Potvrdi lozinku</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Lozinka za odredišni račun</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Lozinka za odredišni račun (obavezno)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Lozinka za odredišni račun (neispravno)</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Isključeno</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Samo točka numeričke tipkovnice</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Točka i zarez</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>PREGLED</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Lozinke se ne poklapaju.</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Postavi novu ili ukloni jednu lozinku.</value>
+  </data>
+  <data name="AccountActions" xml:space="preserve">
+    <value>Radnje</value>
   </data>
 </root>
