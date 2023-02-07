@@ -12,7 +12,7 @@ namespace NickvisionMoney.WinUI;
 /// </summary>
 public partial class App : Application
 {
-    public static MainWindow? MainWindow { get; private set; } = null;
+    public static Window? MainWindow { get; private set; } = null;
     private readonly MainWindowController _mainWindowController;
 
     /// <summary>
