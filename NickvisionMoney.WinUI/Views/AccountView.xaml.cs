@@ -3,6 +3,7 @@ using CommunityToolkit.WinUI.UI;
 using CommunityToolkit.WinUI.UI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
@@ -254,6 +255,11 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             else
             {
                 BtnSortBottomTop.IsChecked = true;
+            }
+            if(CmbSortTransactionsBy.FindChildrenOfType<Popup>().FirstOrDefault() is Popup popup)
+            {
+                popup.PlacementTarget = CmbSortTransactionsBy;
+                popup.DesiredPlacement = PopupPlacementMode.BottomEdgeAlignedLeft;
             }
             //Done Loading
             LoadingCtrl.IsLoading = false;
