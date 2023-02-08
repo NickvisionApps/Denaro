@@ -333,7 +333,7 @@ public partial class MainWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_controller.Localizer["Help"]);
-            toast.OnButtonClicked += (sender, e) => gtk_show_uri(Handle.Handle, "help:denaro/import-export", 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro/import-export", 0);
         }
         _toastOverlay.AddToast(toast);
     }
