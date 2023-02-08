@@ -667,4 +667,70 @@ Aquesta accion se pòt pas anullar.</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>APERCEBUT</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tornar</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Levar</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Se lo senhal es perdut, i a pas cap de biais de restaurar lo compte !</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Confirmar lo senhal</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Senhal del compte de destinacion</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Senhal novèl</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Ponch final</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Desactivat</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Inserir un separador decimal</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Ponch e virgula</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Los senhals correspondon pas.</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Quitar</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Lo senhal del compte es estat tirat.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Lo senhal del compte es estat modificat.</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Causissètz un senhal novèl o suprimissètz-ne un.</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Senhal del compte de destinacion (invalid)</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Cambiar lo senhal</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Connexion al compte impossibla. Lo senhal fornit es invalid.</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Picatz lo senhal per vos connectar :</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Serà tirat lo senhal a la tampadura de la bóstia de dialòg.</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Senhal del compte de destinacion (obligatòri)</value>
+  </data>
 </root>
