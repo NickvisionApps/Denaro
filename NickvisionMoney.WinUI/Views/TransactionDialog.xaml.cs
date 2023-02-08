@@ -53,6 +53,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbType.Header = _controller.Localizer["TransactionType", "Field"];
         CmbType.Items.Add(_controller.Localizer["Income"]);
         CmbType.Items.Add(_controller.Localizer["Expense"]);
+        CalendarDate.Language = _controller.CultureForDateString.Name;
         CalendarDate.Header = _controller.Localizer["Date", "Field"];
         CalendarDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
         CmbGroup.Header = _controller.Localizer["Group", "Field"];
@@ -65,6 +66,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Quarterly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Yearly"]);
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Biyearly"]);
+        CalendarRepeatEndDate.Language = _controller.CultureForDateString.Name;
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
         CalendarRepeatEndDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
         ToolTipService.SetToolTip(BtnRepeatEndDateClear, controller.Localizer["TransactionRepeatEndDate", "Clear"]);

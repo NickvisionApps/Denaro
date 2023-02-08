@@ -72,6 +72,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
         LblGroups.Text = _controller.Localizer["Groups"];
         LblCalendar.Text = _controller.Localizer["Calendar"];
+        Calendar.Language = _controller.CultureForDateString.Name;
         ExpDateRange.Header = _controller.Localizer["SelectRange"];
         DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
         DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
