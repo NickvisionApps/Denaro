@@ -5,7 +5,8 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">Denaro</name>
-  <shortdesc xml:lang="en">A personal finance manager</shortdesc>
+  <shortdesc xml:lang="en">Manage your personal finances</shortdesc>
+  <description xml:lang="en">A personal finance manager</description>
   <homepage rdf:resource="https://github.com/nlogozzo/NickvisionMoney" />
   <bug-database rdf:resource="https://github.com/nlogozzo/NickvisionMoney/issues"/>
   <download-page rdf:resource="https://flathub.org/apps/details/org.nickvision.money" />
