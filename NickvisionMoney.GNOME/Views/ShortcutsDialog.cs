@@ -108,6 +108,12 @@ public class ShortcutsDialog
                             </child>
                             <child>
                                 <object class='GtkShortcutsShortcut'>
+                                    <property name='title'>{localizer["ToggleSidebar.GTK"]}</property>
+                                    <property name='accelerator'>F9</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class='GtkShortcutsShortcut'>
                                     <property name='title'>{localizer["Quit"]}</property>
                                     <property name='accelerator'>&lt;Control&gt;q</property>
                                 </object>
