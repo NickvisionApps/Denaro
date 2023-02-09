@@ -272,7 +272,6 @@ public partial class MainWindow
         _actCloseAccount.OnActivate += OnCloseAccount;
         Handle.AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
-        _actCloseAccount.SetEnabled(false);
         //New Window Action
         var actNewWindow = Gio.SimpleAction.New("newWindow", null);
         actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
@@ -359,7 +358,6 @@ public partial class MainWindow
     /// </summary>
     private async void AccountAdded(object? sender, EventArgs e)
     {
-        _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
         var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
@@ -455,6 +453,11 @@ public partial class MainWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
+	if (_controller.OpenAccounts.Count == 0)
+	{
+		_application.Quit();
+		return;
+	}
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
@@ -471,7 +474,6 @@ public partial class MainWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         if (_controller.OpenAccounts.Count == 0)
         {
-            _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _btnMenuAccount.SetVisible(false);
             _btnFlapToggle.SetVisible(false);
