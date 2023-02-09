@@ -446,7 +446,7 @@ Tindakan ini tidak dapat diurungkan.</value>
 		<value>Warna</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Kustomisasi warna yang digunakan Money.</value>
+		<value>Kustomisasi warna yang digunakan Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Warna Bawaan Transaksi</value>
@@ -703,5 +703,86 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
     <value>(Salin)</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Kembali</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Terapkan</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Tidak dapat masuk ke rekening. Sandi yang diberikan tidak valid.</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Kata Sandi Rekening Tujuan (Tidak Valid)</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>Kata Sandi Baru</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Konfirmasi Kata Sandi</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Kata Sandi Rekening Tujuan</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Kata Sandi Rekening Tujuan (Diperlukan)</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Masukkan Pemisah Desimal</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Mati</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Lokal</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Kustomisasi bagaimana Denaro menggunakan pengaturan lokal.</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Kata sandi tidak cocok.</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Kata sandi akan dihapus setelah menutup dialog ini.</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Kata sandi pada rekening ini telah diubah.</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>Kata sandi pada rekening ini telah dihapus.</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Ubah Kata Sandi</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Buat kata sandi baru atau hapus.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>Jika kata sandi hilang, tidak ada cara untuk mengembalikan rekening anda!</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Kata Sandi</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Masukkan Kata Sandi untuk Masuk:</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Titik numpad saja</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Titik dan Koma</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Atur tombol mana yang akan ditekan oleh pemisah desimal lokal yang akan dimasukkan ke dalam kolom jumlah.</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Masukkan kata sandi disini</value>
   </data>
 </root>
