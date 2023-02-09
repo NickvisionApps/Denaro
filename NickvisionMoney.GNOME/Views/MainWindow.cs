@@ -589,6 +589,7 @@ public partial class MainWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
+        _btnNewAccount.RemoveCssClass("suggested-action");
         foreach (var row in _listRecentAccountsOnStartRows)
         {
             _grpRecentAccountsOnStart.Remove(row);
