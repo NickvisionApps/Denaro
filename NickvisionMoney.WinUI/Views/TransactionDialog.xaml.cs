@@ -56,6 +56,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CalendarDate.Language = _controller.CultureForDateString.Name;
         CalendarDate.Header = _controller.Localizer["Date", "Field"];
         CalendarDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
+        CalendarDate.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         CmbGroup.Header = _controller.Localizer["Group", "Field"];
         CmbRepeatInterval.Header = _controller.Localizer["TransactionRepeatInterval", "Field"];
         CmbRepeatInterval.Items.Add(_controller.Localizer["RepeatInterval", "Never"]);
@@ -69,6 +70,7 @@ public sealed partial class TransactionDialog : ContentDialog
         CalendarRepeatEndDate.Language = _controller.CultureForDateString.Name;
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
         CalendarRepeatEndDate.DateFormat = new DateTimeFormatter("shortdate", new List<string>() { _controller.CultureForDateString.Name }).Patterns[0];
+        CalendarRepeatEndDate.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         ToolTipService.SetToolTip(BtnRepeatEndDateClear, controller.Localizer["TransactionRepeatEndDate", "Clear"]);
         LblColor.Text = _controller.Localizer["Color", "Field"];
         LblReceipt.Text = _controller.Localizer["Receipt", "Field"];
