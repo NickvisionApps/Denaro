@@ -181,6 +181,7 @@ public partial class AccountView
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
+        _chkIncome.SetValign(Gtk.Align.Center);
         _chkIncome.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _chkIncome.GetActive());
         _rowIncome = Adw.ActionRow.New();
         _rowIncome.SetTitle(_controller.Localizer["Income"]);
@@ -194,6 +195,7 @@ public partial class AccountView
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
+        _chkExpense.SetValign(Gtk.Align.Center);
         _chkExpense.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _chkExpense.GetActive());
         _rowExpense = Adw.ActionRow.New();
         _rowExpense.SetTitle(_controller.Localizer["Expense"]);

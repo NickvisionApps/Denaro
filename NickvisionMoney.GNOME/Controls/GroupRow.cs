@@ -53,6 +53,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         SetUseMarkup(false);
         //Filter Checkbox
         _chkFilter = Gtk.CheckButton.New();
+        _chkFilter.SetValign(Gtk.Align.Center);
         _chkFilter.AddCssClass("selection-mode");
         _chkFilter.OnToggled += FilterToggled;
         AddPrefix(_chkFilter);
