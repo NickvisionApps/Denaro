@@ -597,6 +597,7 @@ public partial class TransactionDialog
                 var path = openFileDialog.GetFile()!.GetPath();
                 _receiptPath = path;
                 _btnReceiptView.SetSensitive(true);
+                _btnReceiptDelete.SetSensitive(true);
                 _btnReceiptViewContent.SetLabel(_controller.Localizer["View"]);
                 _btnReceiptUploadContent.SetLabel("");
                 Validate();
