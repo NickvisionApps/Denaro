@@ -39,6 +39,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     private bool _isSmall;
     private readonly Adw.ActionRow _row;
     private readonly Gtk.Button _btnId;
+    private readonly Gtk.Image _iconCompact;
     private readonly Gtk.Button _btnAmount;
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
@@ -79,13 +80,16 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row = Adw.ActionRow.New();
         _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
-        _row.SetSizeRequest(300, 70);
+        _row.SetSizeRequest(300, 78);
         //Button ID
         _btnId = Gtk.Button.New();
         _btnId.SetName("btnId");
         _btnId.AddCssClass("circular");
         _btnId.SetValign(Gtk.Align.Center);
+        _iconCompact = Gtk.Image.NewFromIconName("big-dot-symbolic");
+        _iconCompact.SetName("iconCompact");
         _row.AddPrefix(_btnId);
+        _row.AddPrefix(_iconCompact);
         //Amount
         _btnAmount = Gtk.Button.New();
         _btnAmount.AddCssClass("circular");
@@ -139,17 +143,17 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
             _isSmall = value;
             if (_isSmall)
             {
-                _row.AddCssClass("row-small");
                 _boxSuffix.SetOrientation(Gtk.Orientation.Vertical);
                 _boxSuffix.SetMarginTop(4);
                 _btnId.SetVisible(false);
+                _iconCompact.SetVisible(true);
             }
             else
             {
-                _row.RemoveCssClass("row-small");
                 _boxSuffix.SetOrientation(Gtk.Orientation.Horizontal);
                 _boxSuffix.SetMarginTop(0);
                 _btnId.SetVisible(true);
+                _iconCompact.SetVisible(false);
             }
         }
     }
@@ -174,17 +178,13 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         //Row Settings
         _row.SetTitle(transaction.Description);
         _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
-        var rowCssProvider = Gtk.CssProvider.New();
-        var rowCss = @"row {
-            border-color: " + gdk_rgba_to_string(ref color) + "; }";
-        gtk_css_provider_load_from_data(rowCssProvider.Handle, rowCss, rowCss.Length);
-        _row.GetStyleContext().AddProvider(rowCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Button Id
         _btnId.SetLabel(transaction.Id.ToString());
         var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
+        var btnCss = "#btnId, #iconCompact { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
         gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
         _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        _iconCompact.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
         _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
         _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "success" : "error");

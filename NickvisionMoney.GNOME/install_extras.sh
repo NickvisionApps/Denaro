@@ -26,6 +26,7 @@ do
 done
 mkdir -p "${INSTALL_PREFIX}"/share/icons/hicolor/symbolic/apps
 for icon in bank-symbolic.svg                       \
+                big-dot-symbolic.svg                \
                 dark-mode-symbolic.svg              \
                 larger-brush-symbolic.svg           \
                 money-none-symbolic.svg             \
