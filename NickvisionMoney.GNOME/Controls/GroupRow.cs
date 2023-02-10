@@ -14,6 +14,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private readonly Gtk.CheckButton _chkFilter;
+    private readonly Gtk.Button _btnAmount;
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
     private readonly Gtk.Button _btnDelete;
@@ -53,12 +54,21 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         SetUseMarkup(false);
         //Filter Checkbox
         _chkFilter = Gtk.CheckButton.New();
+        _chkFilter.SetValign(Gtk.Align.Center);
         _chkFilter.AddCssClass("selection-mode");
         _chkFilter.OnToggled += FilterToggled;
         AddPrefix(_chkFilter);
-        //Amount Label
+        //Amount
+        _btnAmount = Gtk.Button.New();
+        _btnAmount.AddCssClass("circular");
+        _btnAmount.SetHalign(Gtk.Align.End);
+        _btnAmount.SetValign(Gtk.Align.Center);
+        _btnAmount.SetMarginEnd(4);
+        _btnAmount.OnClicked += (sender, e) => Activate();
         _lblAmount = Gtk.Label.New(null);
-        _lblAmount.SetValign(Gtk.Align.Center);
+        _lblAmount.SetMarginStart(12);
+        _lblAmount.SetMarginEnd(12);
+        _btnAmount.SetChild(_lblAmount);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
@@ -74,7 +84,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _btnDelete.OnClicked += Delete;
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _box.Append(_lblAmount);
+        _box.Append(_btnAmount);
         _box.Append(_btnEdit);
         _box.Append(_btnDelete);
         AddSuffix(_box);

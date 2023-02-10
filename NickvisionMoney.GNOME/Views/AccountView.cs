@@ -61,11 +61,14 @@ public partial class AccountView
     private readonly Gtk.ScrolledWindow _scrollPane;
     private readonly Gtk.Box _paneBox;
     private readonly Gtk.SearchEntry _txtSearchDescription;
+    private readonly Gtk.Button _btnTotal;
     private readonly Gtk.Label _lblTotal;
     private readonly Adw.ActionRow _rowTotal;
+    private readonly Gtk.Button _btnIncome;
     private readonly Gtk.Label _lblIncome;
     private readonly Gtk.CheckButton _chkIncome;
     private readonly Adw.ActionRow _rowIncome;
+    private readonly Gtk.Button _btnExpense;
     private readonly Gtk.Label _lblExpense;
     private readonly Gtk.CheckButton _chkExpense;
     private readonly Adw.ActionRow _rowExpense;
@@ -105,8 +108,10 @@ public partial class AccountView
     private readonly Gtk.Box _boxSortButtons;
     private readonly Gtk.Box _boxSort;
     private readonly Adw.PreferencesGroup _grpTransactions;
+    private readonly Gtk.Box _boxTransactionsHeader;
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
+    private readonly Gtk.Adjustment _scrollTransactionsAdjustment;
     private readonly Adw.StatusPage _statusPageNoTransactions;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.Bin _binSpinner;
@@ -166,39 +171,59 @@ public partial class AccountView
         _txtSearchDescription.OnSearchChanged += (sender, e) => _controller.SearchDescription = _txtSearchDescription.GetText();
         _paneBox.Append(_txtSearchDescription);
         //Account Total
+        _btnTotal = Gtk.Button.New();
+        _btnTotal.AddCssClass("circular");
+        _btnTotal.SetHalign(Gtk.Align.End);
+        _btnTotal.SetValign(Gtk.Align.Center);
         _lblTotal = Gtk.Label.New("");
-        _lblTotal.SetValign(Gtk.Align.Center);
         _lblTotal.AddCssClass("accent");
         _lblTotal.AddCssClass("denaro-total");
+        _lblTotal.SetMarginStart(12);
+        _lblTotal.SetMarginEnd(12);
+        _btnTotal.SetChild(_lblTotal);
         _rowTotal = Adw.ActionRow.New();
         _rowTotal.SetTitle(_controller.Localizer["Total"]);
-        _rowTotal.AddSuffix(_lblTotal);
+        _rowTotal.AddSuffix(_btnTotal);
         //Account Income
+        _btnIncome = Gtk.Button.New();
+        _btnIncome.AddCssClass("circular");
+        _btnIncome.SetHalign(Gtk.Align.End);
+        _btnIncome.SetValign(Gtk.Align.Center);
         _lblIncome = Gtk.Label.New("");
-        _lblIncome.SetValign(Gtk.Align.Center);
         _lblIncome.AddCssClass("success");
-        _lblTotal.AddCssClass("denaro-income");
+        _lblIncome.AddCssClass("denaro-income");
+        _lblIncome.SetMarginStart(12);
+        _lblIncome.SetMarginEnd(12);
+        _btnIncome.SetChild(_lblIncome);
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
+        _chkIncome.SetValign(Gtk.Align.Center);
         _chkIncome.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _chkIncome.GetActive());
         _rowIncome = Adw.ActionRow.New();
         _rowIncome.SetTitle(_controller.Localizer["Income"]);
         _rowIncome.AddPrefix(_chkIncome);
-        _rowIncome.AddSuffix(_lblIncome);
+        _rowIncome.AddSuffix(_btnIncome);
         //Account Expense
+        _btnExpense = Gtk.Button.New();
+        _btnExpense.AddCssClass("circular");
+        _btnExpense.SetHalign(Gtk.Align.End);
+        _btnExpense.SetValign(Gtk.Align.Center);
         _lblExpense = Gtk.Label.New("");
-        _lblExpense.SetValign(Gtk.Align.Center);
         _lblExpense.AddCssClass("error");
         _lblExpense.AddCssClass("denaro-expense");
+        _lblExpense.SetMarginStart(12);
+        _lblExpense.SetMarginEnd(12);
+        _btnExpense.SetChild(_lblExpense);
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
+        _chkExpense.SetValign(Gtk.Align.Center);
         _chkExpense.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _chkExpense.GetActive());
         _rowExpense = Adw.ActionRow.New();
         _rowExpense.SetTitle(_controller.Localizer["Expense"]);
         _rowExpense.AddPrefix(_chkExpense);
-        _rowExpense.AddSuffix(_lblExpense);
+        _rowExpense.AddSuffix(_btnExpense);
         //Overview Buttons Box
         _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         //Button Menu Account Actions
@@ -430,13 +455,16 @@ public partial class AccountView
         _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxSort.Append(_ddSortTransactionBy);
         _boxSort.Append(_boxSortButtons);
-        //Transaction Group
+        //Transactions Group
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         _grpTransactions.SetHeaderSuffix(_boxSort);
-        _grpTransactions.SetMarginTop(10);
+        _grpTransactions.SetMarginTop(7);
         _grpTransactions.SetMarginStart(10);
         _grpTransactions.SetMarginEnd(10);
+        //Transactions Header Box
+        _boxTransactionsHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxTransactionsHeader.Append(_grpTransactions);
         //Transactions Flow Box
         _flowBox = Gtk.FlowBox.New();
         _flowBox.SetHomogeneous(true);
@@ -455,6 +483,20 @@ public partial class AccountView
         _scrollTransactions.SetVexpand(true);
         _scrollTransactions.SetChild(_flowBox);
         _scrollTransactions.SetVisible(false);
+        _scrollTransactionsAdjustment = _scrollTransactions.GetVadjustment();
+        _scrollTransactionsAdjustment.OnNotify += (sender, e) => {
+            if (e.Pspec.GetName() == "value")
+            {
+                if (_scrollTransactionsAdjustment.GetValue() == 0.0)
+                {
+                    _boxTransactionsHeader.RemoveCssClass("transactions-header");
+                }
+                else
+                {
+                    _boxTransactionsHeader.AddCssClass("transactions-header");
+                }
+            }
+        };
         //Page No Transactions
         _statusPageNoTransactions = Adw.StatusPage.New();
         _statusPageNoTransactions.SetIconName("money-none-symbolic");
@@ -466,7 +508,7 @@ public partial class AccountView
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
         _boxMain.SetVexpand(true);
-        _boxMain.Append(_grpTransactions);
+        _boxMain.Append(_boxTransactionsHeader);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
         //Spinner Box
@@ -526,6 +568,10 @@ public partial class AccountView
         var actAccountSettings = Gio.SimpleAction.New("accountSettings", null);
         actAccountSettings.OnActivate += AccountSettings;
         actionMap.AddAction(actAccountSettings);
+        //Toggle Sidebar Action
+        var actToggleSidebar = Gio.SimpleAction.New("toggleSidebar", null);
+        actToggleSidebar.OnActivate += (sender, e) => _flap.SetRevealFlap(!_flap.GetRevealFlap());
+        actionMap.AddAction(actToggleSidebar);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
@@ -534,6 +580,7 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>I"), Gtk.NamedAction.New("account.importFromFile")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("F9"), Gtk.NamedAction.New("account.toggleSidebar")));
         _flap.AddController(_shortcutController);
     }
 

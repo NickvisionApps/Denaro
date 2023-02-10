@@ -51,10 +51,11 @@ public partial class MainWindow
     private readonly Gtk.MenuButton _btnMainMenu;
     private readonly Adw.ToastOverlay _toastOverlay;
     private readonly Adw.ViewStack _viewStack;
-    private readonly Adw.StatusPage _pageStatusNoAccounts;
-    private readonly Gtk.Box _boxStatusPage;
+    private readonly Gtk.ScrolledWindow _scrollStartPage;
+    private readonly Adw.Clamp _clampStartPage;
+    private readonly Gtk.Box _boxStartPage;
+    private readonly Adw.ButtonContent _greeting;
     private readonly List<Adw.ActionRow> _listRecentAccountsOnStartRows;
-    private readonly Adw.Clamp _clampRecentAccountsOnStart;
     private readonly Adw.PreferencesGroup _grpRecentAccountsOnStart;
     private readonly Gtk.FlowBox _flowBoxStatusButtons;
     private readonly Gtk.Button _btnNewAccount;
@@ -190,25 +191,31 @@ public partial class MainWindow
         _toastOverlay.SetHexpand(true);
         _toastOverlay.SetVexpand(true);
         _mainBox.Append(_toastOverlay);
-        //Status Buttons
-        _flowBoxStatusButtons = Gtk.FlowBox.New();
-        _flowBoxStatusButtons.SetColumnSpacing(12);
-        _flowBoxStatusButtons.SetRowSpacing(6);
-        _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
-        _flowBoxStatusButtons.SetHomogeneous(true);
-        _flowBoxStatusButtons.SetHexpand(true);
-        _flowBoxStatusButtons.SetHalign(Gtk.Align.Center);
-        _flowBoxStatusButtons.SetSelectionMode(Gtk.SelectionMode.None);
-        //List Recent Accounts On The Start Screen
-        _clampRecentAccountsOnStart = Adw.Clamp.New();
-        _clampRecentAccountsOnStart.SetMaximumSize(420);
+        //Greeting
+        _greeting = Adw.ButtonContent.New();
+        _greeting.SetIconName(_controller.ShowSun ? "sun-alt-symbolic" : "moon-symbolic");
+        _greeting.SetLabel(_controller.Greeting);
+        _greeting.AddCssClass("title-2");
+        var image = (Gtk.Image)_greeting.GetFirstChild();
+        image.SetIconSize(Gtk.IconSize.Large);
+        _greeting.SetHalign(Gtk.Align.Center);
+        _greeting.SetMarginBottom(32);
+        //Recent Accounts On Start Page
         _grpRecentAccountsOnStart = Adw.PreferencesGroup.New();
         _grpRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
         _grpRecentAccountsOnStart.SetSizeRequest(200, 55);
         _grpRecentAccountsOnStart.SetMarginTop(24);
         _grpRecentAccountsOnStart.SetMarginBottom(24);
         _grpRecentAccountsOnStart.SetVisible(false);
-        _clampRecentAccountsOnStart.SetChild(_grpRecentAccountsOnStart);
+        //Status Buttons
+        _flowBoxStatusButtons = Gtk.FlowBox.New();
+        _flowBoxStatusButtons.SetColumnSpacing(2);
+        _flowBoxStatusButtons.SetRowSpacing(2);
+        _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
+        _flowBoxStatusButtons.SetHomogeneous(true);
+        _flowBoxStatusButtons.SetHexpand(true);
+        _flowBoxStatusButtons.SetHalign(Gtk.Align.Fill);
+        _flowBoxStatusButtons.SetSelectionMode(Gtk.SelectionMode.None);
         //New Account Button
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
@@ -229,19 +236,24 @@ public partial class MainWindow
         _lblDrag.AddCssClass("dim-label");
         _lblDrag.SetWrap(true);
         _lblDrag.SetJustify(Gtk.Justification.Center);
-        //Status Page Box
-        _boxStatusPage = Gtk.Box.New(Gtk.Orientation.Vertical, 12);
-        _boxStatusPage.SetHexpand(true);
-        _boxStatusPage.SetHalign(Gtk.Align.Fill);
-        _boxStatusPage.Append(_clampRecentAccountsOnStart);
-        _boxStatusPage.Append(_flowBoxStatusButtons);
-        _boxStatusPage.Append(_lblDrag);
-        //Page No Accounts
-        _pageStatusNoAccounts = Adw.StatusPage.New();
-        _pageStatusNoAccounts.SetIconName(_controller.ShowSun ? "sun-alt-symbolic" : "moon-symbolic");
-        _pageStatusNoAccounts.SetTitle(_controller.Greeting);
-        _pageStatusNoAccounts.SetDescription(_controller.Localizer["StartPageDescription"]);
-        _pageStatusNoAccounts.SetChild(_boxStatusPage);
+        //Start Page
+        _scrollStartPage = Gtk.ScrolledWindow.New();
+        _clampStartPage = Adw.Clamp.New();
+        _clampStartPage.SetMaximumSize(450);
+        _clampStartPage.SetValign(Gtk.Align.Center);
+        _clampStartPage.SetMarginStart(12);
+        _clampStartPage.SetMarginEnd(12);
+        _clampStartPage.SetMarginTop(12);
+        _clampStartPage.SetMarginBottom(12);
+        _scrollStartPage.SetChild(_clampStartPage);
+        _boxStartPage = Gtk.Box.New(Gtk.Orientation.Vertical, 12);
+        _boxStartPage.SetHexpand(true);
+        _boxStartPage.SetHalign(Gtk.Align.Fill);
+        _clampStartPage.SetChild(_boxStartPage);
+        _boxStartPage.Append(_greeting);
+        _boxStartPage.Append(_grpRecentAccountsOnStart);
+        _boxStartPage.Append(_flowBoxStatusButtons);
+        _boxStartPage.Append(_lblDrag);
         //Page Tabs
         _pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _tabView = Adw.TabView.New();
@@ -252,7 +264,7 @@ public partial class MainWindow
         _pageTabs.Append(_tabView);
         //View Stack
         _viewStack = Adw.ViewStack.New();
-        _viewStack.AddNamed(_pageStatusNoAccounts, "pageNoAccounts");
+        _viewStack.AddNamed(_scrollStartPage, "pageNoAccounts");
         _viewStack.AddNamed(_pageTabs, "pageTabs");
         _toastOverlay.SetChild(_viewStack);
         //Layout
@@ -272,7 +284,6 @@ public partial class MainWindow
         _actCloseAccount.OnActivate += OnCloseAccount;
         Handle.AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
-        _actCloseAccount.SetEnabled(false);
         //New Window Action
         var actNewWindow = Gio.SimpleAction.New("newWindow", null);
         actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
@@ -289,14 +300,19 @@ public partial class MainWindow
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
         //Quit Action
         var actQuit = Gio.SimpleAction.New("quit", null);
-        actQuit.OnActivate += Quit;
+        actQuit.OnActivate += (sender, e) => _application.Quit();
         Handle.AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += Help;
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
+        //Primary Menu Action
+        var actPrimaryMenu = Gio.SimpleAction.New("primaryMenu", null);
+        actPrimaryMenu.OnActivate += (sender, e) => _btnMainMenu.Popup();
+        Handle.AddAction(actPrimaryMenu);
+        application.SetAccelsForAction("win.primaryMenu", new string[] { "F10" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
@@ -316,7 +332,6 @@ public partial class MainWindow
         if (_controller.RecentAccounts.Count > 0)
         {
             UpdateRecentAccountsOnStart();
-            _pageStatusNoAccounts.SetDescription("");
             _grpRecentAccountsOnStart.SetVisible(true);
         }
         Handle.Show();
@@ -359,7 +374,6 @@ public partial class MainWindow
     /// </summary>
     private async void AccountAdded(object? sender, EventArgs e)
     {
-        _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
         var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
@@ -455,6 +469,11 @@ public partial class MainWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
+	if (_controller.OpenAccounts.Count == 0)
+	{
+		_application.Quit();
+		return;
+	}
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
@@ -471,7 +490,6 @@ public partial class MainWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         if (_controller.OpenAccounts.Count == 0)
         {
-            _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _btnMenuAccount.SetVisible(false);
             _btnFlapToggle.SetVisible(false);
@@ -503,20 +521,6 @@ public partial class MainWindow
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, Handle);
         shortcutsDialog.Show();
     }
-
-    /// <summary>
-    /// Occurs when quit action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Quit(Gio.SimpleAction sender, EventArgs e) => _application.Quit();
-
-    /// <summary>
-    /// Occurs when the help action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
@@ -589,6 +593,7 @@ public partial class MainWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
+        _btnNewAccount.RemoveCssClass("suggested-action");
         foreach (var row in _listRecentAccountsOnStartRows)
         {
             _grpRecentAccountsOnStart.Remove(row);

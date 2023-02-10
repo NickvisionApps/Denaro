@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>org.nickvision.money</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
+  <project_license>MIT</project_license>
   <name>Denaro</name>
   <developer_name>Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
@@ -36,12 +36,13 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
-  <url type="bugtracker">https://github.com/nlogozzo/NickvisionMoney/issues </url>
+  <url type="bugtracker">https://github.com/nlogozzo/NickvisionMoney/issues</url>
   <url type="donation">https://github.com/sponsors/nlogozzo</url>
   <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
   <project_group>Nickvision</project_group>
   <provides>
-    <binary>org.nickvision.money</binary>
+    <binary>NickvisionMoney.GNOME</binary>
+    <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
     <release version="2023.2.0-rc1" date="2023-02-06">
@@ -67,4 +68,8 @@
   <requires>
     <display_length compare="ge">360</display_length>
   </requires>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
 </component>
