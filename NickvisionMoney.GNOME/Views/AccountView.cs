@@ -568,6 +568,10 @@ public partial class AccountView
         var actAccountSettings = Gio.SimpleAction.New("accountSettings", null);
         actAccountSettings.OnActivate += AccountSettings;
         actionMap.AddAction(actAccountSettings);
+        //Toggle Sidebar Action
+        var actToggleSidebar = Gio.SimpleAction.New("toggleSidebar", null);
+        actToggleSidebar.OnActivate += (sender, e) => _flap.SetRevealFlap(!_flap.GetRevealFlap());
+        actionMap.AddAction(actToggleSidebar);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
@@ -576,6 +580,7 @@ public partial class AccountView
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>I"), Gtk.NamedAction.New("account.importFromFile")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("F9"), Gtk.NamedAction.New("account.toggleSidebar")));
         _flap.AddController(_shortcutController);
     }
 

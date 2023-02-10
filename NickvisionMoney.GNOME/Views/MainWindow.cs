@@ -284,7 +284,6 @@ public partial class MainWindow
         _actCloseAccount.OnActivate += OnCloseAccount;
         Handle.AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
-        _actCloseAccount.SetEnabled(false);
         //New Window Action
         var actNewWindow = Gio.SimpleAction.New("newWindow", null);
         actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
@@ -301,14 +300,19 @@ public partial class MainWindow
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
         //Quit Action
         var actQuit = Gio.SimpleAction.New("quit", null);
-        actQuit.OnActivate += Quit;
+        actQuit.OnActivate += (sender, e) => _application.Quit();
         Handle.AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += Help;
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
+        //Primary Menu Action
+        var actPrimaryMenu = Gio.SimpleAction.New("primaryMenu", null);
+        actPrimaryMenu.OnActivate += (sender, e) => _btnMainMenu.Popup();
+        Handle.AddAction(actPrimaryMenu);
+        application.SetAccelsForAction("win.primaryMenu", new string[] { "F10" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
@@ -370,7 +374,6 @@ public partial class MainWindow
     /// </summary>
     private async void AccountAdded(object? sender, EventArgs e)
     {
-        _actCloseAccount.SetEnabled(true);
         _viewStack.SetVisibleChildName("pageTabs");
         var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _btnFlapToggle, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
@@ -466,6 +469,11 @@ public partial class MainWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
+	if (_controller.OpenAccounts.Count == 0)
+	{
+		_application.Quit();
+		return;
+	}
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
@@ -482,7 +490,6 @@ public partial class MainWindow
         _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
         if (_controller.OpenAccounts.Count == 0)
         {
-            _actCloseAccount.SetEnabled(false);
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _btnMenuAccount.SetVisible(false);
             _btnFlapToggle.SetVisible(false);
@@ -514,20 +521,6 @@ public partial class MainWindow
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, Handle);
         shortcutsDialog.Show();
     }
-
-    /// <summary>
-    /// Occurs when quit action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Quit(Gio.SimpleAction sender, EventArgs e) => _application.Quit();
-
-    /// <summary>
-    /// Occurs when the help action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
