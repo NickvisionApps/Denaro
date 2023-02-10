@@ -296,6 +296,11 @@ public partial class MainWindow
         actHelp.OnActivate += Help;
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
+        //Primary Menu Action
+        var actPrimaryMenu = Gio.SimpleAction.New("primaryMenu", null);
+        actPrimaryMenu.OnActivate += (sender, e) => _btnMainMenu.Popup();
+        Handle.AddAction(actPrimaryMenu);
+        application.SetAccelsForAction("win.primaryMenu", new string[] { "F10" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
