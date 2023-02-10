@@ -17,32 +17,32 @@
 		<value />
   </data>
   <data name="Version" xml:space="preserve">
-		<value />
+		<value>Version: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value />
+		<value>Om {0}</value>
   </data>
   <data name="Help" xml:space="preserve">
 		<value>Hjälp</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-		<value />
+		<value>Vad är nytt</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
-		<value />
+		<value>GitHub Repo</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
-		<value />
+		<value>Matrix Chat</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value />
+		<value>Rapportera en Bugg</value>
   </data>
   <data name="Discussions" xml:space="preserve">
-		<value />
+		<value>Diskussioner</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value />
+		<value>Tack till</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -62,163 +62,163 @@
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
-		<value />
+		<value>OK</value>
   </data>
   <data name="Yes" xml:space="preserve">
-		<value />
+		<value>Ja</value>
   </data>
   <data name="No" xml:space="preserve">
-		<value />
+		<value>Nej</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-		<value />
+		<value>Avbryt</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value />
+		<value>Ny</value>
   </data>
   <data name="Open" xml:space="preserve">
-		<value />
+		<value>Öppna</value>
   </data>
   <data name="Close" xml:space="preserve">
-		<value />
+		<value>Stäng</value>
   </data>
   <data name="Save" xml:space="preserve">
-		<value />
+		<value>Spara</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value />
+		<value>Hem</value>
   </data>
   <data name="Account" xml:space="preserve">
-		<value />
+		<value>Konto</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-    <value />
+    <value>Inställningar</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value />
+    <value>Preferenser</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value />
+		<value>Tangentbordsgenvägar</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
 		<value />
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value />
+		<value>Nytt Konto</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>Nytt Konto (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value />
+		<value>Kan inte skriva över ett öppet konto.</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value />
+		<value>Öppna ett konto</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>Öppna ett konto (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value />
+		<value>Inget konto är öppnat</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value />
+		<value>Skapa eller öppna ett konto för att börja. Du kan också dra in en fil från din filhanterare.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value />
+		<value>Senaste Konton</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value />
+		<value>Inga Senaste Konton</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value />
+		<value>Alla filer</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value />
+    <value>God Dag!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value />
+    <value>God Morgon!</value>
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value />
+    <value>God Eftermiddag!</value>
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value />
+    <value>Go kväll!</value>
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value />
+    <value>God Morgon!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value />
+		<value>Detta konto är redan öppet.</value>
   </data>
   <!--AccountView-->
   <data name="AccountActions" xml:space="preserve">
-		<value />
+		<value>Handlingar</value>
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value />
+		<value>Ny Transaktion</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value />
+		<value>Ny Transaktion (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value />
+		<value>Ny Grupp</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value />
+		<value>Ny Grupp (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value />
+		<value>Överför Pengar</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value />
+		<value>Överför Pengar (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value />
+		<value>Importera från Fil</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value />
+		<value>Importera från Fil (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value />
+		<value>Exportera till Fil</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value />
+		<value>Översikt</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value />
+		<value>Dagens Översikt</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value />
+		<value>Total</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value />
+		<value>Inkomst</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value />
+		<value>Kostnad</value>
   </data>
   <data name="Groups" xml:space="preserve">
-		<value />
+		<value>Grupper</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value />
+		<value>Transaktioner</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value />
+		<value>Inga Transaktioner</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value />
+		<value>Hittade Inga Transaktioner</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
 		<value />
@@ -673,5 +673,17 @@
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
 		<value />
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ta bort</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Tillämpa</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Kan inte logga in till konto. Tilldelat lösenord är fel.</value>
   </data>
 </root>
