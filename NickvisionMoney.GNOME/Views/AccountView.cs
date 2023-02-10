@@ -61,11 +61,14 @@ public partial class AccountView
     private readonly Gtk.ScrolledWindow _scrollPane;
     private readonly Gtk.Box _paneBox;
     private readonly Gtk.SearchEntry _txtSearchDescription;
+    private readonly Gtk.Button _btnTotal;
     private readonly Gtk.Label _lblTotal;
     private readonly Adw.ActionRow _rowTotal;
+    private readonly Gtk.Button _btnIncome;
     private readonly Gtk.Label _lblIncome;
     private readonly Gtk.CheckButton _chkIncome;
     private readonly Adw.ActionRow _rowIncome;
+    private readonly Gtk.Button _btnExpense;
     private readonly Gtk.Label _lblExpense;
     private readonly Gtk.CheckButton _chkExpense;
     private readonly Adw.ActionRow _rowExpense;
@@ -166,18 +169,30 @@ public partial class AccountView
         _txtSearchDescription.OnSearchChanged += (sender, e) => _controller.SearchDescription = _txtSearchDescription.GetText();
         _paneBox.Append(_txtSearchDescription);
         //Account Total
+        _btnTotal = Gtk.Button.New();
+        _btnTotal.AddCssClass("circular");
+        _btnTotal.SetHalign(Gtk.Align.End);
+        _btnTotal.SetValign(Gtk.Align.Center);
         _lblTotal = Gtk.Label.New("");
-        _lblTotal.SetValign(Gtk.Align.Center);
         _lblTotal.AddCssClass("accent");
         _lblTotal.AddCssClass("denaro-total");
+        _lblTotal.SetMarginStart(12);
+        _lblTotal.SetMarginEnd(12);
+        _btnTotal.SetChild(_lblTotal);
         _rowTotal = Adw.ActionRow.New();
         _rowTotal.SetTitle(_controller.Localizer["Total"]);
-        _rowTotal.AddSuffix(_lblTotal);
+        _rowTotal.AddSuffix(_btnTotal);
         //Account Income
+        _btnIncome = Gtk.Button.New();
+        _btnIncome.AddCssClass("circular");
+        _btnIncome.SetHalign(Gtk.Align.End);
+        _btnIncome.SetValign(Gtk.Align.Center);
         _lblIncome = Gtk.Label.New("");
-        _lblIncome.SetValign(Gtk.Align.Center);
         _lblIncome.AddCssClass("success");
-        _lblTotal.AddCssClass("denaro-income");
+        _lblIncome.AddCssClass("denaro-income");
+        _lblIncome.SetMarginStart(12);
+        _lblIncome.SetMarginEnd(12);
+        _btnIncome.SetChild(_lblIncome);
         _chkIncome = Gtk.CheckButton.New();
         _chkIncome.SetActive(true);
         _chkIncome.AddCssClass("selection-mode");
@@ -186,12 +201,18 @@ public partial class AccountView
         _rowIncome = Adw.ActionRow.New();
         _rowIncome.SetTitle(_controller.Localizer["Income"]);
         _rowIncome.AddPrefix(_chkIncome);
-        _rowIncome.AddSuffix(_lblIncome);
+        _rowIncome.AddSuffix(_btnIncome);
         //Account Expense
+        _btnExpense = Gtk.Button.New();
+        _btnExpense.AddCssClass("circular");
+        _btnExpense.SetHalign(Gtk.Align.End);
+        _btnExpense.SetValign(Gtk.Align.Center);
         _lblExpense = Gtk.Label.New("");
-        _lblExpense.SetValign(Gtk.Align.Center);
         _lblExpense.AddCssClass("error");
         _lblExpense.AddCssClass("denaro-expense");
+        _lblExpense.SetMarginStart(12);
+        _lblExpense.SetMarginEnd(12);
+        _btnExpense.SetChild(_lblExpense);
         _chkExpense = Gtk.CheckButton.New();
         _chkExpense.SetActive(true);
         _chkExpense.AddCssClass("selection-mode");
@@ -200,7 +221,7 @@ public partial class AccountView
         _rowExpense = Adw.ActionRow.New();
         _rowExpense.SetTitle(_controller.Localizer["Expense"]);
         _rowExpense.AddPrefix(_chkExpense);
-        _rowExpense.AddSuffix(_lblExpense);
+        _rowExpense.AddSuffix(_btnExpense);
         //Overview Buttons Box
         _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         //Button Menu Account Actions
