@@ -45,7 +45,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.2.0-rc1" date="2023-02-06">
+    <release version="2023.2.0" date="2023-02-10">
       <description>
 		  <p>- Added the ability to add a password to an account (This will encrypt the nmoney file)</p>
 		  <p>- Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</p>
