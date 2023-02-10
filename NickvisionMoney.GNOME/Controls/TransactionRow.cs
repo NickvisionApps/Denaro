@@ -145,16 +145,14 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
             {
                 _boxSuffix.SetOrientation(Gtk.Orientation.Vertical);
                 _boxSuffix.SetMarginTop(4);
-                _btnId.SetVisible(false);
-                _iconCompact.SetVisible(true);
             }
             else
             {
                 _boxSuffix.SetOrientation(Gtk.Orientation.Horizontal);
                 _boxSuffix.SetMarginTop(0);
-                _btnId.SetVisible(true);
-                _iconCompact.SetVisible(false);
             }
+            _btnId.SetVisible(!_isSmall);
+            _iconCompact.SetVisible(_isSmall);
         }
     }
 
