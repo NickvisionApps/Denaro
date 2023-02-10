@@ -288,12 +288,12 @@ public partial class MainWindow
         application.SetAccelsForAction("win.keyboardShortcuts", new string[] { "<Ctrl>question" });
         //Quit Action
         var actQuit = Gio.SimpleAction.New("quit", null);
-        actQuit.OnActivate += Quit;
+        actQuit.OnActivate += (sender, e) => _application.Quit();
         Handle.AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += Help;
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //Primary Menu Action
@@ -510,20 +510,6 @@ public partial class MainWindow
         var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, Handle);
         shortcutsDialog.Show();
     }
-
-    /// <summary>
-    /// Occurs when quit action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Quit(Gio.SimpleAction sender, EventArgs e) => _application.Quit();
-
-    /// <summary>
-    /// Occurs when the help action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void Help(Gio.SimpleAction sender, EventArgs e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
 
     /// <summary>
     /// Occurs when the about action is triggered
