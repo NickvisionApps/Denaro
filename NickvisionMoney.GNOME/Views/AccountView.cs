@@ -108,8 +108,10 @@ public partial class AccountView
     private readonly Gtk.Box _boxSortButtons;
     private readonly Gtk.Box _boxSort;
     private readonly Adw.PreferencesGroup _grpTransactions;
+    private readonly Gtk.Box _boxTransactionsHeader;
     private readonly Gtk.FlowBox _flowBox;
     private readonly Gtk.ScrolledWindow _scrollTransactions;
+    private readonly Gtk.Adjustment _scrollTransactionsAdjustment;
     private readonly Adw.StatusPage _statusPageNoTransactions;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.Bin _binSpinner;
@@ -453,13 +455,16 @@ public partial class AccountView
         _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxSort.Append(_ddSortTransactionBy);
         _boxSort.Append(_boxSortButtons);
-        //Transaction Group
+        //Transactions Group
         _grpTransactions = Adw.PreferencesGroup.New();
         _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
         _grpTransactions.SetHeaderSuffix(_boxSort);
-        _grpTransactions.SetMarginTop(10);
+        _grpTransactions.SetMarginTop(7);
         _grpTransactions.SetMarginStart(10);
         _grpTransactions.SetMarginEnd(10);
+        //Transactions Header Box
+        _boxTransactionsHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
+        _boxTransactionsHeader.Append(_grpTransactions);
         //Transactions Flow Box
         _flowBox = Gtk.FlowBox.New();
         _flowBox.SetHomogeneous(true);
@@ -478,6 +483,20 @@ public partial class AccountView
         _scrollTransactions.SetVexpand(true);
         _scrollTransactions.SetChild(_flowBox);
         _scrollTransactions.SetVisible(false);
+        _scrollTransactionsAdjustment = _scrollTransactions.GetVadjustment();
+        _scrollTransactionsAdjustment.OnNotify += (sender, e) => {
+            if (e.Pspec.GetName() == "value")
+            {
+                if (_scrollTransactionsAdjustment.GetValue() == 0.0)
+                {
+                    _boxTransactionsHeader.RemoveCssClass("transactions-header");
+                }
+                else
+                {
+                    _boxTransactionsHeader.AddCssClass("transactions-header");
+                }
+            }
+        };
         //Page No Transactions
         _statusPageNoTransactions = Adw.StatusPage.New();
         _statusPageNoTransactions.SetIconName("money-none-symbolic");
@@ -489,7 +508,7 @@ public partial class AccountView
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _boxMain.SetHexpand(true);
         _boxMain.SetVexpand(true);
-        _boxMain.Append(_grpTransactions);
+        _boxMain.Append(_boxTransactionsHeader);
         _boxMain.Append(_scrollTransactions);
         _boxMain.Append(_statusPageNoTransactions);
         //Spinner Box

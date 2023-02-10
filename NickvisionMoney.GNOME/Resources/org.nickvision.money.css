@@ -79,3 +79,10 @@ row.error button.circular {
   background-color: @accent_bg_color;
   color: @accent_fg_color;
 }
+
+/* Transactions header box */
+.transactions-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: @borders;
+}
