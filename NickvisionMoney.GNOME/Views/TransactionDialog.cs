@@ -343,7 +343,7 @@ public partial class TransactionDialog
         }
         else
         {
-            _rowGroup.SetSelected((uint)groups.IndexOf(_controller.Groups[(uint)_controller.Transaction.GroupId]);
+            _rowGroup.SetSelected((uint)groups.IndexOf(_controller.Groups[(uint)_controller.Transaction.GroupId]));
         }
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
