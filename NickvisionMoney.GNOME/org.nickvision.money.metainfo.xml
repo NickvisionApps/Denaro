@@ -45,17 +45,9 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.2.0" date="2023-02-10">
+    <release version="2023.2.1-next" date="2023-02-10">
       <description>
-		  <p>- Added the ability to add a password to an account (This will encrypt the nmoney file)</p>
-		  <p>- Added the ability to transfer money between accounts with different currencies by providing a conversion rate in TransferDialog</p>
-		  <p>- Added the ability to configure how Denaro uses locale separators in amount fields</p>
-		  <p>- Added the ability to copy individual transactions</p>
-		  <p>- Added the ability to sort transactions by amount</p>
-		  <p>- LC_MONETARY and LC_TIME will now be respected</p>
-		  <p>- Recent accounts are now available to select from the TransferDialog</p>
-		  <p>- Improved importing of qif and ofx files</p>
-		  <p>- Added a "New Window" action to the main menu</p>
+		  <p>- Fixed an issue where the wrong group was selected in TransactionDialog</p>
       </description>
     </release>
   </releases>
