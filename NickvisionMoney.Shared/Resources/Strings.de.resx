@@ -560,7 +560,7 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
 		<value>Farben</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Passe die Farben an die Money verwendet.</value>
+		<value>Passe die Farben an die Denaro verwendet.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Standard-Überweisungsfarbe</value>
@@ -758,5 +758,32 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   </data>
   <data name="EnterPassword" xml:space="preserve">
     <value>Passwort zum Anmelden eingeben:</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Passe an wie Denaro Spracheinstellungen verwendet.</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Stelle ein bei welchen Tastendrücken das Dezimaltrennzeichen der Sprachumgebung in das Mengenfeld eingefügt wird.</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>Das Passwort wird nach dem Schließen dieses Dialogs entfernt werden.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Dezimaltrennzeichen Einfügen</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Nur Ziffernblock-Punkt</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Punkt und Komma</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
   </data>
 </root>
