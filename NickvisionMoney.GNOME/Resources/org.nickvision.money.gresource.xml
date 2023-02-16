@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/org/nickvision/money">
     <file alias="style.css">NickvisionMoney.GNOME/Resources/org.nickvision.money.css</file>
+    <file alias="style-dark.css">NickvisionMoney.GNOME/Resources/org.nickvision.money-dark.css</file>
   </gresource>
 </gresources>
