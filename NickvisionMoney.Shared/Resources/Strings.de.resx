@@ -766,7 +766,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Passe an wie Denaro Spracheinstellungen verwendet.</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-    <value>Stelle ein bei welchen Tastendrücken das Dezimaltrennzeichen der Sprachumgebung in das Mengenfeld eingefügt wird.</value>
+    <value>Stelle ein bei welchen Gedrückten Tasten das Dezimaltrennzeichen der Sprachumgebung in das Mengenfeld eingefügt wird.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>Das Passwort wird nach dem Schließen dieses Dialogs entfernt werden.</value>
