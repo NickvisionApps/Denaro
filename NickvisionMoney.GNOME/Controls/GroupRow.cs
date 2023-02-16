@@ -111,7 +111,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _chkFilter.SetActive(filterActive);
         //Amount Label
         _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
-        _lblAmount.AddCssClass(group.Balance >= 0 ? "success" : "error");
         _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         //Buttons
         _btnEdit.SetVisible(group.Id != 0);
