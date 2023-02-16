@@ -79,6 +79,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row = Adw.ActionRow.New();
         _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
+        _row.SetSubtitleLines(1);
         _row.SetSizeRequest(300, 78);
         //Button ID
         _btnId = Gtk.Button.New();
@@ -93,7 +94,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _lblAmount = Gtk.Label.New(null);
         _lblAmount.SetHalign(Gtk.Align.End);
         _lblAmount.SetValign(Gtk.Align.Center);
-        _lblAmount.SetMarginEnd(5);
+        _lblAmount.SetMarginEnd(6);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
