@@ -1,13 +1,16 @@
 .denaro-total {
-  color: @blue_4;
+  color: @blue_5;
+  font-weight: bold;
 }
 
 .denaro-income {
-  color: @green_4;
+  color: @green_5;
+  font-weight: bold;
 }
 
 .denaro-expense {
-  color: @red_4;
+  color: @red_5;
+  font-weight: bold;
 }
 
 .wallet-button {
