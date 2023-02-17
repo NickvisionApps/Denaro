@@ -461,17 +461,12 @@ public partial class TransactionDialog
     {
         if (_btnIncome.GetActive())
         {
-            _btnIncome.AddCssClass("success");
             _btnIncome.AddCssClass("denaro-income");
-            _btnExpense.RemoveCssClass("error");
             _btnExpense.RemoveCssClass("denaro-expense");
         }
         else
         {
-
-            _btnIncome.RemoveCssClass("success");
             _btnIncome.RemoveCssClass("denaro-income");
-            _btnExpense.AddCssClass("error");
             _btnExpense.AddCssClass("denaro-expense");
         }
         if (!_constructing)

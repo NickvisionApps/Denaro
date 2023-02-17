@@ -14,7 +14,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private readonly Gtk.CheckButton _chkFilter;
-    private readonly Gtk.Button _btnAmount;
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
     private readonly Gtk.Button _btnDelete;
@@ -58,17 +57,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _chkFilter.AddCssClass("selection-mode");
         _chkFilter.OnToggled += FilterToggled;
         AddPrefix(_chkFilter);
-        //Amount
-        _btnAmount = Gtk.Button.New();
-        _btnAmount.AddCssClass("circular");
-        _btnAmount.SetHalign(Gtk.Align.End);
-        _btnAmount.SetValign(Gtk.Align.Center);
-        _btnAmount.SetMarginEnd(4);
-        _btnAmount.OnClicked += (sender, e) => Activate();
+        //Amount Label
         _lblAmount = Gtk.Label.New(null);
-        _lblAmount.SetMarginStart(12);
-        _lblAmount.SetMarginEnd(12);
-        _btnAmount.SetChild(_lblAmount);
+        _lblAmount.SetValign(Gtk.Align.Center);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
@@ -84,7 +75,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _btnDelete.OnClicked += Delete;
         //Box
         _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _box.Append(_btnAmount);
+        _box.Append(_lblAmount);
         _box.Append(_btnEdit);
         _box.Append(_btnDelete);
         AddSuffix(_box);
@@ -120,7 +111,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _chkFilter.SetActive(filterActive);
         //Amount Label
         _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
-        _lblAmount.AddCssClass(group.Balance >= 0 ? "success" : "error");
         _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         //Buttons
         _btnEdit.SetVisible(group.Id != 0);

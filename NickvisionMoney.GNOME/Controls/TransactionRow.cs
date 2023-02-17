@@ -40,7 +40,6 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     private readonly Adw.ActionRow _row;
     private readonly Gtk.Button _btnId;
     private readonly Gtk.Image _iconCompact;
-    private readonly Gtk.Button _btnAmount;
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
     private readonly Gtk.Button _btnDelete;
@@ -80,6 +79,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row = Adw.ActionRow.New();
         _row.SetUseMarkup(false);
         _row.SetTitleLines(1);
+        _row.SetSubtitleLines(1);
         _row.SetSizeRequest(300, 78);
         //Button ID
         _btnId = Gtk.Button.New();
@@ -90,17 +90,11 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _iconCompact.SetName("iconCompact");
         _row.AddPrefix(_btnId);
         _row.AddPrefix(_iconCompact);
-        //Amount
-        _btnAmount = Gtk.Button.New();
-        _btnAmount.AddCssClass("circular");
-        _btnAmount.SetHalign(Gtk.Align.End);
-        _btnAmount.SetValign(Gtk.Align.Center);
-        _btnAmount.SetMarginEnd(4);
-        _btnAmount.OnClicked += (sender, e) => _row.Activate();
+        //Amount Label
         _lblAmount = Gtk.Label.New(null);
-        _lblAmount.SetMarginStart(12);
-        _lblAmount.SetMarginEnd(12);
-        _btnAmount.SetChild(_lblAmount);
+        _lblAmount.SetHalign(Gtk.Align.End);
+        _lblAmount.SetValign(Gtk.Align.Center);
+        _lblAmount.SetMarginEnd(6);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
@@ -117,13 +111,12 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         //Buttons Box
         _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
         _boxButtons.SetHalign(Gtk.Align.End);
-        _boxButtons.SetMarginEnd(4);
         _boxButtons.Append(_btnEdit);
         _boxButtons.Append(_btnDelete);
         //Suffix Box
         _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
         _boxSuffix.SetValign(Gtk.Align.Center);
-        _boxSuffix.Append(_btnAmount);
+        _boxSuffix.Append(_lblAmount);
         _boxSuffix.Append(_boxButtons);
         _row.AddSuffix(_boxSuffix);
         //Group Settings
@@ -185,7 +178,6 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _iconCompact.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
         _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
-        _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "success" : "error");
         _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Buttons Box
         _btnEdit.SetVisible(transaction.RepeatFrom <= 0);

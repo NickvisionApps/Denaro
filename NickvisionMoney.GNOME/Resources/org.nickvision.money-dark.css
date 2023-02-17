@@ -1,0 +1,11 @@
+.denaro-total {
+  color: @blue_1;
+}
+
+.denaro-income {
+  color: @green_1;
+}
+
+.denaro-expense {
+  color: @red_1;
+}
