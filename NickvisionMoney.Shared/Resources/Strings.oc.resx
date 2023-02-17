@@ -500,7 +500,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Colors</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Personalizar las colors utilizadas per Money.</value>
+		<value>Personalizar las colors utilizadas per Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>Color per defaut de las transaccions</value>
@@ -526,7 +526,17 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Qué de nòu ?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Desvolopaires :
+{0}
+
+Designers :
+{1}
+
+Artistas :
+{2}
+
+Traductors :
+{3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Cal una reaviada per aplicar la modificacion del tèma.</value>
@@ -732,5 +742,17 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
     <value>Senhal del compte de destinacion (obligatòri)</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Senhal</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Paramètres regionals</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Picatz lo senhal aquí</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Personalizar coma Denaro utiliza los paramètres regionals.</value>
   </data>
 </root>
