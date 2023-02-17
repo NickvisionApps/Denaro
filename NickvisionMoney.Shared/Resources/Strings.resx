@@ -116,12 +116,20 @@
 		<value>Back</value>
 	</data>
 
+	<data name="Add" xml:space="preserve">
+		<value>Add</value>
+	</data>
+
 	<data name="Remove" xml:space="preserve">
 		<value>Remove</value>
 	</data>
 
 	<data name="Apply" xml:space="preserve">
 		<value>Apply</value>
+	</data>
+
+	<data name="Edit" xml:space="preserve">
+		<value>Edit</value>
 	</data>
 
 	<!--Pages-->
@@ -841,6 +849,10 @@
 	<!--Settings-->
 	<data name="UserInterface" xml:space="preserve">
 		<value>User Interface</value>
+	</data>
+
+	<data name="Unlock" xml:space="preserve">
+		<value>Unlock</value>
 	</data>
 
 	<data name="UserInterfaceDescription" xml:space="preserve">

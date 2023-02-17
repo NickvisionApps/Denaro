@@ -48,7 +48,7 @@ public partial class PasswordDialog
         _dialog.SetHideOnClose(true);
         _response = PasswordDialogResponse.Cancel;
         _dialog.AddResponse("cancel", localizer["Cancel"]);
-        _dialog.AddResponse("suggested", localizer["OK"]);
+        _dialog.AddResponse("suggested", localizer["Unlock"]);
         _dialog.SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);
         _dialog.SetCloseResponse("cancel");
         _dialog.SetDefaultResponse("suggested");

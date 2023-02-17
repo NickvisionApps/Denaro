@@ -52,7 +52,7 @@ public partial class TransferDialog
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.AddResponse("ok", _controller.Localizer["Transfer"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";

@@ -1152,7 +1152,7 @@ public partial class AccountView
     private void NewGroup(Gio.SimpleAction sender, EventArgs e)
     {
         var groupController = _controller.CreateGroupDialogController();
-        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle);
+        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle, false);
         groupDialog.Show();
         groupDialog.OnResponse += async (sender, e) =>
         {
@@ -1185,7 +1185,7 @@ public partial class AccountView
     private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
-        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle);
+        var groupDialog = new GroupDialog(groupController, _parentWindow.Handle, true);
         groupDialog.Show();
         groupDialog.OnResponse += async (sender, e) =>
         {
