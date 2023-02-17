@@ -18,8 +18,6 @@ public partial class AccountSettingsDialog
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
-    private readonly Gtk.Box _boxHeader;
-    private readonly Gtk.Label _lblTitle;
     private readonly Adw.PreferencesGroup _grpAccount;
     private readonly Adw.EntryRow _rowName;
     private readonly Adw.ComboRow _rowAccountType;
@@ -51,7 +49,7 @@ public partial class AccountSettingsDialog
         _constructing = true;
         _controller = controller;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, "", "");
+        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
@@ -66,17 +64,7 @@ public partial class AccountSettingsDialog
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 16);
-        //Header Box
-        _boxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
-        _boxMain.Append(_boxHeader);
-        //Title
-        _lblTitle = Gtk.Label.New(_controller.Localizer["AccountSettings"]);
-        _lblTitle.SetHexpand(true);
-        _lblTitle.SetMarginStart(4);
-        _lblTitle.SetHalign(Gtk.Align.Start);
-        _lblTitle.SetValign(Gtk.Align.Center);
-        _lblTitle.AddCssClass("title-1");
-        _boxHeader.Append(_lblTitle);
+        _boxMain.SetMarginTop(4);
         //Preferences Group
         _grpAccount = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpAccount);
