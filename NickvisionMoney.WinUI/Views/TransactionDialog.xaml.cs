@@ -41,7 +41,7 @@ public sealed partial class TransactionDialog : ContentDialog
         //Localize Strings
         Title = $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}";
         CloseButtonText = _controller.Localizer["Cancel"];
-        PrimaryButtonText = _controller.Localizer["OK"];
+        PrimaryButtonText = _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"];
         if (_controller.CanCopy)
         {
             SecondaryButtonText = _controller.Localizer["MakeCopy"];

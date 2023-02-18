@@ -21,7 +21,7 @@ public partial class GroupDialog
     /// </summary>
     /// <param name="controller">GroupDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow, bool isEditing)
+    public GroupDialog(GroupDialogController controller, Gtk.Window parentWindow)
     {
         _constructing = true;
         _controller = controller;
@@ -32,7 +32,7 @@ public partial class GroupDialog
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer[isEditing ? "Edit" : "Add"]);
+        _dialog.AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";

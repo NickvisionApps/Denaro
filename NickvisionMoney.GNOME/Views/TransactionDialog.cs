@@ -124,7 +124,7 @@ public partial class TransactionDialog
         {
             _dialog.AddResponse("copy", _controller.Localizer["MakeCopy"]);
         }
-        _dialog.AddResponse("ok", _controller.Localizer["Add"]);
+        _dialog.AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) =>
