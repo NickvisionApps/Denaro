@@ -18,10 +18,6 @@ public partial class AccountSettingsDialog
     private readonly AccountSettingsDialogController _controller;
     private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Box _boxMain;
-    private readonly Gtk.Box _boxHeader;
-    private readonly Gtk.Label _lblTitle;
-    private readonly Gtk.Button _btnAvatar;
-    private readonly Gtk.CssProvider _btnAvatarCssProvider;
     private readonly Adw.PreferencesGroup _grpAccount;
     private readonly Adw.EntryRow _rowName;
     private readonly Adw.ComboRow _rowAccountType;
@@ -53,7 +49,7 @@ public partial class AccountSettingsDialog
         _constructing = true;
         _controller = controller;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, "", "");
+        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["AccountSettings"], "");
         _dialog.SetDefaultSize(450, -1);
         _dialog.SetHideOnClose(true);
         _dialog.SetModal(true);
@@ -62,34 +58,13 @@ public partial class AccountSettingsDialog
             _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
             _dialog.SetCloseResponse("cancel");
         }
-        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.AddResponse("ok", _controller.Localizer["Apply"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Box
         _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 16);
-        //Header Box
-        _boxHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 4);
-        _boxMain.Append(_boxHeader);
-        //Title
-        _lblTitle = Gtk.Label.New(_controller.Localizer["AccountSettings"]);
-        _lblTitle.SetHexpand(true);
-        _lblTitle.SetMarginStart(4);
-        _lblTitle.SetHalign(Gtk.Align.Start);
-        _lblTitle.SetValign(Gtk.Align.Center);
-        _lblTitle.AddCssClass("title-1");
-        _boxHeader.Append(_lblTitle);
-        //Avatar
-        _btnAvatar = Gtk.Button.New();
-        _btnAvatar.AddCssClass("circular");
-        _btnAvatar.AddCssClass("title-2");
-        _btnAvatar.SetName("btnAvatar");
-        _btnAvatar.SetHalign(Gtk.Align.End);
-        _btnAvatar.SetValign(Gtk.Align.Center);
-        _btnAvatar.SetSizeRequest(72, 72);
-        _btnAvatarCssProvider = Gtk.CssProvider.New();
-        _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
-        _boxHeader.Append(_btnAvatar);
+        _boxMain.SetMarginTop(4);
         //Preferences Group
         _grpAccount = Adw.PreferencesGroup.New();
         _boxMain.Append(_grpAccount);
@@ -102,7 +77,7 @@ public partial class AccountSettingsDialog
             {
                 if (!_constructing)
                 {
-                    OnNameChanged();
+                    Validate();
                 }
             }
         };
@@ -114,7 +89,7 @@ public partial class AccountSettingsDialog
         {
             if (e.Pspec.GetName() == "selected-item")
             {
-                OnAccountTypeChanged();
+                Validate();
             }
         };
         _rowAccountType.SetTitle(_controller.Localizer["AccountType", "Field"]);
@@ -257,9 +232,7 @@ public partial class AccountSettingsDialog
         _dialog.SetExtraChild(_boxMain);
         //Load
         _rowName.SetText(_controller.Metadata.Name);
-        OnNameChanged();
         _rowAccountType.SetSelected((uint)_controller.Metadata.AccountType);
-        OnAccountTypeChanged();
         _btnIncome.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
         _rowCustomCurrency.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
         _txtCustomSymbol.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
@@ -332,82 +305,6 @@ public partial class AccountSettingsDialog
                 _rowCustomCode.SetTitle(_controller.Localizer["CustomCurrencyCode", "Empty"]);
             }
             _dialog.SetResponseEnabled("ok", false);
-        }
-    }
-
-    /// <summary>
-    /// Occurs when a new name is applied to Adw.EntryRow
-    /// </summary>
-    private void OnNameChanged()
-    {
-        if (_rowName.GetText().Length == 0)
-        {
-            _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);
-        }
-        else
-        {
-            var split = _rowName.GetText().Split(' ');
-            if (split.Length == 1)
-            {
-                _btnAvatar.SetLabel(split[0].Substring(0, split[0].Length > 1 ? 2 : 1));
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(split[0]) && string.IsNullOrEmpty(split[1]))
-                {
-                    _btnAvatar.SetLabel(_controller.Localizer["NotAvailable"]);
-                }
-                else if (string.IsNullOrEmpty(split[0]))
-                {
-                    _btnAvatar.SetLabel(split[1].Substring(0, split[1].Length > 1 ? 2 : 1));
-                }
-                else if (string.IsNullOrEmpty(split[1]))
-                {
-                    _btnAvatar.SetLabel(split[0].Substring(0, split[0].Length > 1 ? 2 : 1));
-                }
-                else
-                {
-                    var emojiPattern = @"\p{Cs}.";
-                    if (Regex.Match(split[0], emojiPattern).Success && Regex.Match(split[1], emojiPattern).Success)
-                    {
-                        _btnAvatar.SetLabel($"{split[0][0]}{split[0][1]}{split[1][0]}{split[1][1]}");
-                    }
-                    else if (Regex.Match(split[0], emojiPattern).Success)
-                    {
-                        _btnAvatar.SetLabel($"{split[0][0]}{split[0][1]}{split[1][0]}");
-                    }
-                    else if (Regex.Match(split[1], emojiPattern).Success)
-                    {
-                        _btnAvatar.SetLabel($"{split[0][0]}{split[1][0]}{split[1][1]}");
-                    }
-                    else
-                    {
-                        _btnAvatar.SetLabel($"{split[0][0]}{split[1][0]}");
-                    }
-                }
-            }
-        }
-        if (!_constructing)
-        {
-            Validate();
-        }
-    }
-
-    /// <summary>
-    /// Occurs when the account type selection in changed
-    /// </summary>
-    private void OnAccountTypeChanged()
-    {
-        var bgColorString = _controller.GetColorForAccountType((AccountType)_rowAccountType.GetSelected());
-        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-        _btnAvatar.GetStyleContext().RemoveProvider(_btnAvatarCssProvider);
-        var btnCss = "#btnAvatar { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-        gtk_css_provider_load_from_data(_btnAvatarCssProvider.Handle, btnCss, btnCss.Length);
-        _btnAvatar.GetStyleContext().AddProvider(_btnAvatarCssProvider, 800);
-        if (!_constructing)
-        {
-            Validate();
         }
     }
 

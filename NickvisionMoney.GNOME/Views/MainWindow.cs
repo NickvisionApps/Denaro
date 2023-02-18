@@ -217,20 +217,26 @@ public partial class MainWindow
         _flowBoxStatusButtons.SetHalign(Gtk.Align.Fill);
         _flowBoxStatusButtons.SetSelectionMode(Gtk.SelectionMode.None);
         //New Account Button
+        var btnNewAccountContainer = Gtk.FlowBoxChild.New();
+        btnNewAccountContainer.SetFocusable(false);
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
         _btnNewAccount.SetSizeRequest(200, 50);
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
-        _flowBoxStatusButtons.Append(_btnNewAccount);
+        btnNewAccountContainer.SetChild(_btnNewAccount);
+        _flowBoxStatusButtons.Append(btnNewAccountContainer);
         //Open Account Button
+        var btnOpenAccountContainer = Gtk.FlowBoxChild.New();
+        btnOpenAccountContainer.SetFocusable(false);
         _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
-        _flowBoxStatusButtons.Append(_btnOpenAccount);
+        btnOpenAccountContainer.SetChild(_btnOpenAccount);
+        _flowBoxStatusButtons.Append(btnOpenAccountContainer);
         //Drag Label
         _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
         _lblDrag.AddCssClass("dim-label");
@@ -619,6 +625,7 @@ public partial class MainWindow
         var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
+        button.SetFocusable(false);
         if (onStartScreen)
         {
             button.AddCssClass("wallet-button");

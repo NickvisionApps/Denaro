@@ -38,7 +38,7 @@ public sealed partial class TransferDialog : ContentDialog
         //Localize Strings
         Title = _controller.Localizer["Transfer"];
         CloseButtonText = _controller.Localizer["Cancel"];
-        PrimaryButtonText = _controller.Localizer["OK"];
+        PrimaryButtonText = _controller.Localizer["Transfer"];
         LblDescription.Text = _controller.Localizer["TransferDescription"];
         ToolTipService.SetToolTip(BtnSelectAccount, _controller.Localizer["DestinationAccount", "Placeholder"]);
         ToolTipService.SetToolTip(BtnRecentAccounts, _controller.Localizer["RecentAccounts"]);

@@ -32,7 +32,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         //Localize Strings
         Title = _controller.Localizer["AccountSettings"];
         CloseButtonText = _controller.Localizer["Cancel"];
-        PrimaryButtonText = _controller.Localizer["OK"];
+        PrimaryButtonText = _controller.Localizer["Apply"];
         TxtName.Header = _controller.Localizer["Name", "Field"];
         TxtName.PlaceholderText = _controller.Localizer["Name", "Placeholder"];
         CmbAccountType.Header = _controller.Localizer["AccountType", "Field"];

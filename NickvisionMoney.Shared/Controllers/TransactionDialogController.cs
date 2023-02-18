@@ -56,6 +56,10 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool Accepted { get; set; }
     /// <summary>
+    /// Whether or not the dialog is editing a transaction
+    /// </summary>
+    public bool IsEditing { get; init; }
+    /// <summary>
     /// Whether or not there was a request to make a copy of transaction
     /// </summary>
     public bool CopyRequested { get; set; }
@@ -107,6 +111,7 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         CanCopy = canCopy;
         Accepted = false;
+        IsEditing = true;
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
@@ -136,6 +141,7 @@ public class TransactionDialogController : IDisposable
         Groups = groups;
         CanCopy = false;
         Accepted = false;
+        IsEditing = false;
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;

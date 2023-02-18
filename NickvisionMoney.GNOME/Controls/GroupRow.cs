@@ -17,7 +17,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     private readonly Gtk.Label _lblAmount;
     private readonly Gtk.Button _btnEdit;
     private readonly Gtk.Button _btnDelete;
-    private readonly Gtk.Box _box;
+    private readonly Gtk.Box _boxButtons;
+    private readonly Gtk.FlowBox _flowBox;
 
     /// <summary>
     /// The Id of the Group the row represents
@@ -51,6 +52,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _cultureDate = cultureDate;
         //Row Settings
         SetUseMarkup(false);
+        SetTitleLines(1);
+        SetSubtitleLines(2);
         //Filter Checkbox
         _chkFilter = Gtk.CheckButton.New();
         _chkFilter.SetValign(Gtk.Align.Center);
@@ -60,6 +63,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         //Amount Label
         _lblAmount = Gtk.Label.New(null);
         _lblAmount.SetValign(Gtk.Align.Center);
+        _lblAmount.SetMarginEnd(6);
         //Edit Button
         _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
         _btnEdit.SetValign(Gtk.Align.Center);
@@ -73,12 +77,18 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _btnDelete.AddCssClass("flat");
         _btnDelete.SetTooltipText(localizer["Delete", "GroupRow"]);
         _btnDelete.OnClicked += Delete;
-        //Box
-        _box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _box.Append(_lblAmount);
-        _box.Append(_btnEdit);
-        _box.Append(_btnDelete);
-        AddSuffix(_box);
+        //Buttons Box
+        _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _boxButtons.SetHalign(Gtk.Align.End);
+        _boxButtons.Append(_btnEdit);
+        _boxButtons.Append(_btnDelete);
+        //Suffix FlowBox
+        _flowBox = Gtk.FlowBox.New();
+        _flowBox.SetOrientation(Gtk.Orientation.Vertical);
+        _flowBox.SetSelectionMode(Gtk.SelectionMode.None);
+        _flowBox.Append(_lblAmount);
+        _flowBox.Append(_boxButtons);
+        AddSuffix(_flowBox);
         UpdateRow(group, cultureAmount, cultureDate, filterActive);
     }
 
@@ -112,11 +122,11 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         //Amount Label
         _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
         _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
-        //Buttons
-        _btnEdit.SetVisible(group.Id != 0);
-        _btnEdit.SetSensitive(group.Id != 0);
-        _btnDelete.SetVisible(group.Id != 0);
-        _btnDelete.SetSensitive(group.Id != 0);
+        if (group.Id == 0)
+        {
+            _flowBox.Remove(_flowBox.GetChildAtIndex(1));
+            _flowBox.SetValign(Gtk.Align.Center);
+        }
     }
 
     /// <summary>

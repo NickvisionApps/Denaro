@@ -20,7 +20,7 @@ public sealed partial class PasswordDialog : ContentDialog
         InitializeComponent();
         //Localize Strings
         CloseButtonText = localizer["Cancel"];
-        PrimaryButtonText = localizer["OK"];
+        PrimaryButtonText = localizer["Unlock"];
         Status.Title = localizer["EnterPassword"];
         Status.Description = title;
         TxtPassword.Header = localizer["Password", "Field"];

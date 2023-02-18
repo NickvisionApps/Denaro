@@ -613,6 +613,7 @@ public partial class AccountView
             g_main_context_iteration(g_main_context_default(), false);
             row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
         }
+        row.Container.SetFocusable(false);
         return row;
     }
 
