@@ -155,10 +155,10 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.2/microsoft.data.sqlite.core.7.0.2.nupkg",
-        "sha512": "d42cd7c91e6afddb7fdb0f6a98540e608221b9276f66119a0e9c92ce5afb3ac950fc40857cf1be7b1a20b1623394f6cb91702c3e366d377587fe1b4c0ecd3936",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.3/microsoft.data.sqlite.core.7.0.3.nupkg",
+        "sha512": "0deb3647480f0ff1044ef5d6ad32c3913b4726776f34cd7a4a72df3127fa14975b7995b1d878a453aa4bd1cf9d436889aaec367f2003582eb223f22c35dffcfc",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.core.7.0.2.nupkg"
+        "dest-filename": "microsoft.data.sqlite.core.7.0.3.nupkg"
     },
     {
         "type": "file",
@@ -397,13 +397,6 @@
         "sha512": "548bc9b7d122f5bf175ee4b910bb29c6cf14a7f34bd4790cca6b3190ebc3c04b527bb25862cb51c33fd9f3ef7a449463c86026d0811f18e25d6a2edf81b29e20",
         "dest": "nuget-sources",
         "dest-filename": "sqlitepclraw.bundle_e_sqlcipher.2.1.4.nupkg"
-    },
-    {
-        "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.core/2.1.2/sqlitepclraw.core.2.1.2.nupkg",
-        "sha512": "0f106d6400863a4c3b7fd5b084d4eae8e99f5e3ea1daafa9d5651eb10c43eea4f3745274e1deb1d0ef9a556789c08b5c5ddba2d00ffa7758abd7d6493fad931e",
-        "dest": "nuget-sources",
-        "dest-filename": "sqlitepclraw.core.2.1.2.nupkg"
     },
     {
         "type": "file",
