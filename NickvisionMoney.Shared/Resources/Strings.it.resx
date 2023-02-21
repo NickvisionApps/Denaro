@@ -785,4 +785,10 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="InsertSeparator.Description" xml:space="preserve">
     <value>Imposta per quali tasti premuti verrà inserito il separatore decimale delle impostazioni regionali in un campo importo.</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Aggiungi</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Sblocca</value>
+  </data>
 </root>
