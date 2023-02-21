@@ -785,4 +785,10 @@ de opeenvolgende losgekoppeld..</value>
   <data name="InsertSeparator.Description" xml:space="preserve">
     <value>Stelt in voor welke toetsen het decimale scheidingsteken zal worden ingevoerd</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Ontgrendelen</value>
+  </data>
 </root>
