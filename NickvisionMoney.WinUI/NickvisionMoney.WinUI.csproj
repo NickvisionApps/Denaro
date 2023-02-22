@@ -18,6 +18,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <ApplicationIcon>Assets\org.nickvision.money.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Controls\ActionRow.xaml" />
