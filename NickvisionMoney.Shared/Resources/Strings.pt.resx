@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Conta Nickvision Money</value>
+		<value>Conta Nickvision Denaro</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Nova Conta</value>
@@ -270,10 +270,10 @@ Esta ação não pode ser desfeita.</value>
 		<value />
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Apagar Apenas Origem</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Apagar Origem e Gerado</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
 		<value>Atualizar Transação</value>
@@ -282,7 +282,7 @@ Esta ação não pode ser desfeita.</value>
 		<value />
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Atualizar Apenas Origem</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
 		<value />
@@ -573,5 +573,23 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   </data>
   <data name="AccountSettings" xml:space="preserve">
     <value>Configurações da Conta</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remover</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Não foi possível conectar em sua conta. Senha inserida está incorreta.</value>
   </data>
 </root>
