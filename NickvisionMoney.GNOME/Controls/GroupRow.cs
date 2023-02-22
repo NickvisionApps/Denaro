@@ -124,7 +124,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         if (group.Id == 0)
         {
-            _flowBox.Remove(_flowBox.GetChildAtIndex(1));
+            _btnEdit.SetVisible(false);
+            _btnDelete.SetVisible(false);
             _flowBox.SetValign(Gtk.Align.Center);
         }
     }
