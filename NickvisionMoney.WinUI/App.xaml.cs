@@ -28,7 +28,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.2.1-next";
-        _mainWindowController.AppInfo.Changelog = "- Fixed an issue where editing text field would always move the cursor\nto the end of the box\n- Various UX improvements";
+        _mainWindowController.AppInfo.Changelog = "- New and improved icon (Thanks @daudix-UFO)!\n- Fixed an issue where editing text field would always move the cursor\nto the end of the box\n- Various UX improvements";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
