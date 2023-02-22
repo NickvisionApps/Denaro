@@ -47,6 +47,7 @@
   <releases>
     <release version="2023.2.1-next" date="2023-02-10">
       <description>
+		  <p>- New and improved icon (Thanks @daudix-UFO)!</p>
 		  <p>- Fixed an issue where the wrong group was selected in TransactionDialog</p>
 		  <p>- Fixed an issue where some LC vars could not be parsed</p>
 		  <p>- Various UX improvements</p>
