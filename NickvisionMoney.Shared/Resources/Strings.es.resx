@@ -779,4 +779,10 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
     <value>Las contraseñas no coinciden.</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Desbloquear</value>
+  </data>
 </root>
