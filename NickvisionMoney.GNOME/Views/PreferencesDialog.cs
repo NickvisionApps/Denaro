@@ -8,7 +8,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// The PreferencesDialog for the application
 /// </summary>
-public partial class PreferencesDialog : Adw.Window
+public partial class PreferencesDialog : Adw.PreferencesWindow
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Color

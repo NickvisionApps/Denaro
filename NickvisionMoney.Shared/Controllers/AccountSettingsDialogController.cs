@@ -77,6 +77,10 @@ public class AccountSettingsDialogController
             {
                 lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
+            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
+            {
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
+            }
             if (lcMonetary != null && lcMonetary.Contains('_'))
             {
                 lcMonetary = lcMonetary.Replace('_', '-');

@@ -1397,6 +1397,10 @@ public class Account : IDisposable
             {
                 lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
             }
+            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
+            {
+                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
+            }
             if (lcMonetary != null && lcMonetary.Contains('_'))
             {
                 lcMonetary = lcMonetary.Replace('_', '-');
@@ -1413,6 +1417,10 @@ public class Account : IDisposable
             if (lcTime != null && lcTime.Contains(".UTF-8"))
             {
                 lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            else if (lcTime != null && lcTime.Contains(".utf8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
             }
             if (lcTime != null && lcTime.Contains('_'))
             {

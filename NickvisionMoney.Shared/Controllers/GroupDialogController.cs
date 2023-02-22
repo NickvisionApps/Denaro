@@ -34,6 +34,10 @@ public class GroupDialogController
     /// Whether or not the dialog was accepted (response)
     /// </summary>
     public bool Accepted { get; set; }
+    /// <summary>
+    /// Whether or not the dialog is editing a group
+    /// </summary>
+    public bool IsEditing { get; init; }
 
     /// <summary>
     /// Creates a GroupDialogController
@@ -48,6 +52,7 @@ public class GroupDialogController
         Localizer = localizer;
         Group = (Group)group.Clone();
         Accepted = false;
+        IsEditing = true;
     }
 
     /// <summary>
@@ -63,6 +68,7 @@ public class GroupDialogController
         Localizer = localizer;
         Group = new Group(id);
         Accepted = false;
+        IsEditing = false;
     }
 
     /// <summary>

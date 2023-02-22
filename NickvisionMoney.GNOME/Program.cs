@@ -52,7 +52,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.2.1-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where the wrong group was selected in TransactionDialog</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where the wrong group was selected in TransactionDialog</li><li>Fixed an issue where some LC vars could not be parsed</li><li>Various UX improvements</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");

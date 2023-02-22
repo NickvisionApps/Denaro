@@ -32,7 +32,7 @@ public partial class GroupDialog
         _dialog.SetModal(true);
         _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
         _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer["OK"]);
+        _dialog.AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _dialog.SetDefaultResponse("ok");
         _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
         _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
