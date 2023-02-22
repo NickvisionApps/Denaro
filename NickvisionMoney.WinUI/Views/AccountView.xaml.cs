@@ -258,7 +258,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             {
                 BtnSortBottomTop.IsChecked = true;
             }
-            if(CmbSortTransactionsBy.FindChildrenOfType<Popup>().FirstOrDefault() is Popup popup)
+            if (CmbSortTransactionsBy.FindChildrenOfType<Popup>().FirstOrDefault() is Popup popup)
             {
                 popup.PlacementTarget = CmbSortTransactionsBy;
                 popup.DesiredPlacement = PopupPlacementMode.BottomEdgeAlignedLeft;

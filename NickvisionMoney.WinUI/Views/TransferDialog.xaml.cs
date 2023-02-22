@@ -154,7 +154,7 @@ public sealed partial class TransferDialog : ContentDialog
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
         }
-        if(!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
+        if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
         {
             TxtDestinationPassword.IsEnabled = false;
             BtnApplyDestinationPassword.IsEnabled = false;
@@ -241,7 +241,7 @@ public sealed partial class TransferDialog : ContentDialog
     {
         if (_controller.InsertSeparator != InsertSeparator.Off)
         {
-            if(e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
+            if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
                 TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
                 TxtAmount.Select(TxtAmount.Text.Length, 0);

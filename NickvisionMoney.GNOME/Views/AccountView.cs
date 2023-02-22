@@ -460,7 +460,8 @@ public partial class AccountView
         _scrollTransactions.SetChild(_flowBox);
         _scrollTransactions.SetVisible(false);
         _scrollTransactionsAdjustment = _scrollTransactions.GetVadjustment();
-        _scrollTransactionsAdjustment.OnNotify += (sender, e) => {
+        _scrollTransactionsAdjustment.OnNotify += (sender, e) =>
+        {
             if (e.Pspec.GetName() == "value")
             {
                 if (_scrollTransactionsAdjustment.GetValue() == 0.0)

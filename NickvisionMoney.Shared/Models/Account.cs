@@ -7,7 +7,6 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
@@ -1280,9 +1278,9 @@ public class Account : IDisposable
         var localizer = new Localizer();
         var ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
         //Transactions
-        foreach(var transaction in ofx.Transactions)
+        foreach (var transaction in ofx.Transactions)
         {
-            if(transaction.Amount != 0)
+            if (transaction.Amount != 0)
             {
                 ids.Add(NextAvailableTransactionId);
                 await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
@@ -1316,7 +1314,7 @@ public class Account : IDisposable
             return ids;
         }
         //Groups
-        foreach(var group in qif.CategoryListTransactions)
+        foreach (var group in qif.CategoryListTransactions)
         {
             if (Groups.Values.FirstOrDefault(x => x.Name == group.CategoryName) == null)
             {
@@ -1328,9 +1326,9 @@ public class Account : IDisposable
             }
         }
         //Transactions
-        foreach(var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
+        foreach (var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
         {
-            if(transaction.Amount != 0)
+            if (transaction.Amount != 0)
             {
                 ids.Add(NextAvailableTransactionId);
                 var localizer = new Localizer();

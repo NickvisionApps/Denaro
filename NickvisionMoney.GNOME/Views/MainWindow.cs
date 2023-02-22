@@ -399,7 +399,8 @@ public partial class MainWindow
     {
         if (_controller.FileToLaunch != null)
         {
-            GLib.Functions.TimeoutAddFull(0, 250, (data) => {
+            GLib.Functions.TimeoutAddFull(0, 250, (data) =>
+            {
                 _controller.AddAccountAsync(_controller.FileToLaunch);
                 _controller.FileToLaunch = null;
                 return false;
@@ -475,11 +476,11 @@ public partial class MainWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _popoverAccount.Popdown();
-	if (_controller.OpenAccounts.Count == 0)
-	{
-		_application.Quit();
-		return;
-	}
+        if (_controller.OpenAccounts.Count == 0)
+        {
+            _application.Quit();
+            return;
+        }
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
     }
 
