@@ -1,4 +1,4 @@
-using NickvisionMoney.GNOME.Controls;
+﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
@@ -185,6 +185,7 @@ public partial class MainWindow
         _btnMainMenu.SetDirection(Gtk.ArrowType.None);
         _btnMainMenu.SetMenuModel(mainMenu);
         _btnMainMenu.SetTooltipText(_controller.Localizer["MainMenu", "GTK"]);
+        _btnMainMenu.SetPrimary(true);
         _headerBar.PackEnd(_btnMainMenu);
         //Toast Overlay
         _toastOverlay = Adw.ToastOverlay.New();
@@ -315,11 +316,6 @@ public partial class MainWindow
         actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
-        //Primary Menu Action
-        var actPrimaryMenu = Gio.SimpleAction.New("primaryMenu", null);
-        actPrimaryMenu.OnActivate += (sender, e) => _btnMainMenu.Popup();
-        Handle.AddAction(actPrimaryMenu);
-        application.SetAccelsForAction("win.primaryMenu", new string[] { "F10" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
