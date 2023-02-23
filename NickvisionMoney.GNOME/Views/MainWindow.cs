@@ -200,6 +200,12 @@ public partial class MainWindow
         image.SetIconSize(Gtk.IconSize.Large);
         _greeting.SetHalign(Gtk.Align.Center);
         _greeting.SetMarginBottom(32);
+        //Drag Label
+        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
+        _lblDrag.AddCssClass("dim-label");
+        _lblDrag.SetWrap(true);
+        _lblDrag.SetJustify(Gtk.Justification.Center);
+        _lblDrag.SetVisible(_controller.RecentAccounts.Count == 0);
         //Recent Accounts On Start Page
         _grpRecentAccountsOnStart = Adw.PreferencesGroup.New();
         _grpRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
@@ -237,12 +243,6 @@ public partial class MainWindow
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
         btnOpenAccountContainer.SetChild(_btnOpenAccount);
         _flowBoxStatusButtons.Append(btnOpenAccountContainer);
-        //Drag Label
-        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
-        _lblDrag.AddCssClass("dim-label");
-        _lblDrag.SetWrap(true);
-        _lblDrag.SetJustify(Gtk.Justification.Center);
-        _lblDrag.SetVisible(_controller.RecentAccounts.Count == 0);
         //Start Page
         _scrollStartPage = Gtk.ScrolledWindow.New();
         _clampStartPage = Adw.Clamp.New();
@@ -258,9 +258,9 @@ public partial class MainWindow
         _boxStartPage.SetHalign(Gtk.Align.Fill);
         _clampStartPage.SetChild(_boxStartPage);
         _boxStartPage.Append(_greeting);
+        _boxStartPage.Append(_lblDrag);
         _boxStartPage.Append(_grpRecentAccountsOnStart);
         _boxStartPage.Append(_flowBoxStatusButtons);
-        _boxStartPage.Append(_lblDrag);
         //Page Tabs
         _pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _tabView = Adw.TabView.New();
