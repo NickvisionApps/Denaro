@@ -178,10 +178,12 @@ public partial class MainWindow
         _btnMainMenu = Gtk.MenuButton.New();
         var mainMenu = Gio.Menu.New();
         mainMenu.Append(_controller.Localizer["NewWindow.GTK"], "win.newWindow");
-        mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
-        mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
-        mainMenu.Append(_controller.Localizer["Help"], "win.help");
-        mainMenu.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
+        var appMenuSection = Gio.Menu.New();
+        appMenuSection.Append(_controller.Localizer["Preferences"], "win.preferences");
+        appMenuSection.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
+        appMenuSection.Append(_controller.Localizer["Help"], "win.help");
+        appMenuSection.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
+        mainMenu.AppendSection(null, appMenuSection);
         _btnMainMenu.SetDirection(Gtk.ArrowType.None);
         _btnMainMenu.SetMenuModel(mainMenu);
         _btnMainMenu.SetTooltipText(_controller.Localizer["MainMenu", "GTK"]);
