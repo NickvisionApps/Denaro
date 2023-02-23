@@ -76,7 +76,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Anuluj</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value>Nowe</value>
+		<value>Nowa</value>
   </data>
   <data name="Open" xml:space="preserve">
 		<value>Otwórz</value>
@@ -718,7 +718,7 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
 		<value>Wyłączone</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-		<value>Tylko kropka klawiatury numerycznej</value>
+		<value>Tylko kropka klaw. num.</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
 		<value>Kropka i przecinek</value>
