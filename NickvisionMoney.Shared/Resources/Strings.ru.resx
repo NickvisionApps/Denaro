@@ -780,4 +780,10 @@
   <data name="Quit" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Разблокировать</value>
+  </data>
 </root>
