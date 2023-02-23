@@ -242,6 +242,7 @@ public partial class MainWindow
         _lblDrag.AddCssClass("dim-label");
         _lblDrag.SetWrap(true);
         _lblDrag.SetJustify(Gtk.Justification.Center);
+        _lblDrag.SetVisible(_controller.RecentAccounts.Count == 0);
         //Start Page
         _scrollStartPage = Gtk.ScrolledWindow.New();
         _clampStartPage = Adw.Clamp.New();
