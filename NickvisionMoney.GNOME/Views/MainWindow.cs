@@ -218,8 +218,8 @@ public partial class MainWindow
         _grpRecentAccountsOnStart.SetVisible(false);
         //Status Buttons
         _flowBoxStatusButtons = Gtk.FlowBox.New();
-        _flowBoxStatusButtons.SetColumnSpacing(2);
-        _flowBoxStatusButtons.SetRowSpacing(2);
+        _flowBoxStatusButtons.SetColumnSpacing(4);
+        _flowBoxStatusButtons.SetRowSpacing(4);
         _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
         _flowBoxStatusButtons.SetHomogeneous(true);
         _flowBoxStatusButtons.SetHexpand(true);
@@ -230,7 +230,6 @@ public partial class MainWindow
         btnNewAccountContainer.SetFocusable(false);
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
-        _btnNewAccount.SetSizeRequest(200, 50);
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
@@ -241,7 +240,6 @@ public partial class MainWindow
         btnOpenAccountContainer.SetFocusable(false);
         _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
-        _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
         btnOpenAccountContainer.SetChild(_btnOpenAccount);
