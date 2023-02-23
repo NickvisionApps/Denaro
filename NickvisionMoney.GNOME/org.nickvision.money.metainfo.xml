@@ -45,13 +45,10 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.2.1" date="2023-02-21">
+    <release version="2023.3.0-next" date="2023-03-01">
       <description>
-		  <p>- New and improved icon (Thanks @daudix-UFO)!</p>
-		  <p>- Fixed an issue where the wrong group was selected in TransactionDialog</p>
-		  <p>- Fixed an issue where some LC vars could not be parsed</p>
 		  <p>- Various UX improvements</p>
-		  <p>- Updated and added translations (Thanks to everyone on Weblate)!</p>
+		  <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
   </releases>
