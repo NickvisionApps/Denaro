@@ -17,6 +17,13 @@
   background-color: #00000000;
 }
 
+.account-tag {
+  border-radius: 20px;
+  font-size: 13px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 /* Calendars colors */
 @define-color denaro_calendar_today_bg_color @headerbar_bg_color;
 @define-color denaro_calendar_today_fg_color @warning_color;

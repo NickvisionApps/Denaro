@@ -634,7 +634,7 @@ public partial class MainWindow
             var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
             var btnType = Gtk.Button.NewWithLabel(strType);
             btnType.SetValign(Gtk.Align.Center);
-            btnType.SetSizeRequest(120, -1);
+            btnType.SetSizeRequest(100, -1);
             btnType.SetFocusable(false);
             btnType.SetCanTarget(false);
             var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
@@ -645,6 +645,7 @@ public partial class MainWindow
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
             btnType.SetName("btnType");
             btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
+            btnType.AddCssClass("account-tag");
             row.AddSuffix(btnType);
         }
         else
