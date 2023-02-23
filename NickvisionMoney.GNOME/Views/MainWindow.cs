@@ -634,7 +634,8 @@ public partial class MainWindow
             var btnType = Gtk.Button.NewWithLabel(strType);
             btnType.SetValign(Gtk.Align.Center);
             btnType.SetSizeRequest(120, -1);
-            btnType.OnClicked += (sender, e) => row.Activate();
+            btnType.SetFocusable(false);
+            btnType.SetCanTarget(false);
             var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
             var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
             var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
