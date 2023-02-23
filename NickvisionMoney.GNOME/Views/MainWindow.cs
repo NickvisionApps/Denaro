@@ -394,6 +394,13 @@ public partial class MainWindow
     /// <param name="e">EventArgs</param>
     private async void OnShow(Gtk.Widget sender, EventArgs e)
     {
+        GLib.Functions.TimeoutAddFull(0, 100, (data) =>
+        {
+            var maxBtnWidth = Math.Max(_btnNewAccount.GetAllocatedWidth(), _btnOpenAccount.GetAllocatedWidth());
+            _btnNewAccount.SetSizeRequest(maxBtnWidth, -1);
+            _btnOpenAccount.SetSizeRequest(maxBtnWidth, -1);
+            return false;
+        });
         if (_controller.FileToLaunch != null)
         {
             GLib.Functions.TimeoutAddFull(0, 250, (data) =>
