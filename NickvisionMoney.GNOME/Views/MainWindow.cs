@@ -1,4 +1,4 @@
-﻿using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
@@ -193,7 +193,7 @@ public partial class MainWindow
         _mainBox.Append(_toastOverlay);
         //Greeting
         _greeting = Adw.ButtonContent.New();
-        _greeting.SetIconName(_controller.ShowSun ? "sun-alt-symbolic" : "moon-symbolic");
+        _greeting.SetIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
         _greeting.SetLabel(_controller.Greeting);
         _greeting.AddCssClass("title-2");
         var image = (Gtk.Image)_greeting.GetFirstChild();

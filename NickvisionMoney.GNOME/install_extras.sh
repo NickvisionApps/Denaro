@@ -30,9 +30,9 @@ for icon in bank-symbolic.svg                       \
                 dark-mode-symbolic.svg              \
                 larger-brush-symbolic.svg           \
                 money-none-symbolic.svg             \
-                moon-symbolic.svg                   \
+                moon-outline-symbolic.svg                   \
                 org.nickvision.money-symbolic.svg   \
-                sun-alt-symbolic.svg                \
+                sun-outline-symbolic.svg                \
                 wallet2-symbolic.svg
 do
     cp ./NickvisionMoney.Shared/Resources/${icon}               \
