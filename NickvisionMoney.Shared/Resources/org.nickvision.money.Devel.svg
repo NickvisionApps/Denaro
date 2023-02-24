@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="128px" viewBox="0 0 128 128" width="128px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="12" x2="116" y1="114" y2="114">
+            <stop offset="0" stop-color="#d5d3cf"/>
+            <stop offset="0.0384615" stop-color="#e4e1de"/>
+            <stop offset="0.0769231" stop-color="#d5d3cf"/>
+            <stop offset="0.923077" stop-color="#d5d3cf"/>
+            <stop offset="0.961538" stop-color="#e4e1de"/>
+            <stop offset="1" stop-color="#d5d3cf"/>
+        </linearGradient>
+        <filter id="b" height="100%" width="100%" x="0%" y="0%">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+        </filter>
+        <mask id="c">
+            <g filter="url(#b)">
+                <rect fill-opacity="0.2" height="128" width="128"/>
+            </g>
+        </mask>
+        <mask id="d">
+            <g filter="url(#b)">
+                <rect fill-opacity="0.3" height="128" width="128"/>
+            </g>
+        </mask>
+        <linearGradient id="e" gradientUnits="userSpaceOnUse" x1="56" x2="120" y1="120" y2="120">
+            <stop offset="0" stop-color="#2ec27e"/>
+            <stop offset="0.03125" stop-color="#57e389"/>
+            <stop offset="0.0625" stop-color="#33d17a"/>
+            <stop offset="0.9375" stop-color="#33d17a"/>
+            <stop offset="0.96875" stop-color="#57e389"/>
+            <stop offset="1" stop-color="#2ec27e"/>
+        </linearGradient>
+        <linearGradient id="f" gradientUnits="userSpaceOnUse" x1="56" x2="120" y1="111" y2="111">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0.2"/>
+        </linearGradient>
+        <mask id="g">
+            <g filter="url(#b)">
+                <rect fill-opacity="0.2" height="128" width="128"/>
+            </g>
+        </mask>
+        <clipPath id="h">
+            <rect height="152" width="192"/>
+        </clipPath>
+        <g id="i" clip-path="url(#h)">
+            <path d="m 20 116 v 2 c 0 4.433594 3.566406 8 8 8 h 88 c 4.433594 0 8 -3.566406 8 -8 v -2 c 0 4.433594 -3.566406 8 -8 8 h -88 c -4.433594 0 -8 -3.566406 -8 -8 z m 0 0" fill="#ffffff"/>
+        </g>
+        <mask id="j">
+            <g filter="url(#b)">
+                <rect fill-opacity="0.3" height="128" width="128"/>
+            </g>
+        </mask>
+        <clipPath id="k">
+            <rect height="152" width="192"/>
+        </clipPath>
+        <g id="l" clip-path="url(#k)">
+            <path d="m 29 94 l 12 -9 l 13 5 l 22 -26 l 15 11 l 23 -26 v 61 h -85 z m 0 0" fill="#8ff0a4"/>
+        </g>
+        <clipPath id="m">
+            <rect height="128" width="128"/>
+        </clipPath>
+        <clipPath id="n">
+            <rect height="128" width="128"/>
+        </clipPath>
+        <mask id="o">
+            <g clip-path="url(#n)" filter="url(#b)">
+                <g clip-path="url(#m)">
+                    <path d="m 20 16 h 88 c 4.417969 0 8 3.582031 8 8 v 84 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -84 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="#26a269"/>
+                    <path d="m 20 14 h 88 c 4.417969 0 8 3.582031 8 8 v 84 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -84 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="url(#a)"/>
+                    <path d="m 20 12 h 88 c 4.417969 0 8 3.582031 8 8 v 78 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -78 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="#f6f5f4"/>
+                    <path d="m 116 94 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 22 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 34 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 70 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 82 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 46 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 116 58 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+                    <use mask="url(#g)" transform="matrix(1 0 0 1 -8 -16)" xlink:href="#i"/>
+                    <path d="m 20 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 32 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 44 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 80 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 104 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 92 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 56 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <path d="m 68 12 h 2 v 94 h -2 z m 0 0" fill="#e5e5e2"/>
+                    <use mask="url(#j)" transform="matrix(1 0 0 1 -8 -16)" xlink:href="#l"/>
+                    <path d="m 21.589844 249.554688 l 11.410156 -8.554688 l 13 5 l 22 -26 l 15 11 l 23 -26" fill="none" stroke="#2ec27e" stroke-linecap="round" stroke-width="3" transform="matrix(1 0 0 1 0 -172)"/>
+                    <path d="m 22 20 v 80 h -2 v -80 z m 0 0" fill="#9a9996"/>
+                    <path d="m 16 94 h 92 v 2 h -92 z m 0 0" fill="#9a9996"/>
+                    <path d="m 60 76 h 56 c 2.210938 0 4 1.789062 4 4 v 36 c 0 2.210938 -1.789062 4 -4 4 h -56 c -2.210938 0 -4 -1.789062 -4 -4 v -36 c 0 -2.210938 1.789062 -4 4 -4 z m 0 0" fill="url(#e)"/>
+                    <path d="m 56 104 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+                    <path d="m 56 108 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+                    <path d="m 56 112 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+                    <path d="m 60 72 h 56 c 2.210938 0 4 1.789062 4 4 v 28 c 0 2.210938 -1.789062 4 -4 4 h -56 c -2.210938 0 -4 -1.789062 -4 -4 v -28 c 0 -2.210938 1.789062 -4 4 -4 z m 0 0" fill="#57e389"/>
+                    <path d="m 64 76 c 0 2.210938 -1.789062 4 -4 4 v 20 c 2.210938 0 4 1.789062 4 4 h 48 c 0 -2.210938 1.789062 -4 4 -4 v -20 c -2.210938 0 -4 -1.789062 -4 -4 z m 0 0" fill="#2ec27e"/>
+                    <path d="m 74 84 h 28 c 1.105469 0 2 0.894531 2 2 v 8 c 0 1.105469 -0.894531 2 -2 2 h -28 c -1.105469 0 -2 -0.894531 -2 -2 v -8 c 0 -1.105469 0.894531 -2 2 -2 z m 0 0" fill="#57e389"/>
+                    <path d="m 98 90 c 0 5.523438 -4.476562 10 -10 10 s -10 -4.476562 -10 -10 s 4.476562 -10 10 -10 s 10 4.476562 10 10 z m 0 0" fill="#57e389"/>
+                    <path d="m 84 72 h 8 v 36 h -8 z m 0 0" fill="#b5835a"/>
+                    <path d="m 84 108 h 8 v 12 h -8 z m 0 0" fill="#865e3c"/>
+                </g>
+            </g>
+        </mask>
+        <mask id="p">
+            <g filter="url(#b)">
+                <rect fill-opacity="0.8" height="128" width="128"/>
+            </g>
+        </mask>
+        <linearGradient id="q" gradientTransform="matrix(0 0.37 -0.98462 0 295.38501 -30.360001)" gradientUnits="userSpaceOnUse" x1="300" x2="428" y1="235" y2="235">
+            <stop offset="0" stop-color="#f9f06b"/>
+            <stop offset="1" stop-color="#f5c211"/>
+        </linearGradient>
+        <clipPath id="r">
+            <rect height="128" width="128"/>
+        </clipPath>
+        <clipPath id="s">
+            <rect height="128" width="128"/>
+        </clipPath>
+    </defs>
+    <path d="m 20 16 h 88 c 4.417969 0 8 3.582031 8 8 v 84 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -84 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="#26a269"/>
+    <path d="m 20 14 h 88 c 4.417969 0 8 3.582031 8 8 v 84 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -84 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="url(#a)"/>
+    <path d="m 20 12 h 88 c 4.417969 0 8 3.582031 8 8 v 78 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -78 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0" fill="#f6f5f4"/>
+    <path d="m 116 94 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 22 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 34 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 70 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 82 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 46 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <path d="m 116 58 v 2 h -104 v -2 z m 0 0" fill="#e5e5e2"/>
+    <use mask="url(#c)" transform="matrix(1 0 0 1 -8 -16)" xlink:href="#i"/>
+    <g fill="#e5e5e2">
+        <path d="m 20 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 32 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 44 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 80 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 104 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 92 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 56 12 h 2 v 94 h -2 z m 0 0"/>
+        <path d="m 68 12 h 2 v 94 h -2 z m 0 0"/>
+    </g>
+    <use mask="url(#d)" transform="matrix(1 0 0 1 -8 -16)" xlink:href="#l"/>
+    <path d="m 21.589844 77.554688 l 11.410156 -8.554688 l 13 5 l 22 -26 l 15 11 l 23 -26" fill="none" stroke="#2ec27e" stroke-linecap="round" stroke-width="3"/>
+    <path d="m 22 20 v 80 h -2 v -80 z m 0 0" fill="#9a9996"/>
+    <path d="m 16 94 h 92 v 2 h -92 z m 0 0" fill="#9a9996"/>
+    <path d="m 60 76 h 56 c 2.210938 0 4 1.789062 4 4 v 36 c 0 2.210938 -1.789062 4 -4 4 h -56 c -2.210938 0 -4 -1.789062 -4 -4 v -36 c 0 -2.210938 1.789062 -4 4 -4 z m 0 0" fill="url(#e)"/>
+    <path d="m 56 104 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+    <path d="m 56 108 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+    <path d="m 56 112 v 2 c 0 2.214844 1.785156 4 4 4 h 56 c 2.214844 0 4 -1.785156 4 -4 v -2 c 0 2.214844 -1.785156 4 -4 4 h -56 c -2.214844 0 -4 -1.785156 -4 -4 z m 0 0" fill="url(#f)"/>
+    <path d="m 60 72 h 56 c 2.210938 0 4 1.789062 4 4 v 28 c 0 2.210938 -1.789062 4 -4 4 h -56 c -2.210938 0 -4 -1.789062 -4 -4 v -28 c 0 -2.210938 1.789062 -4 4 -4 z m 0 0" fill="#57e389"/>
+    <path d="m 64 76 c 0 2.210938 -1.789062 4 -4 4 v 20 c 2.210938 0 4 1.789062 4 4 h 48 c 0 -2.210938 1.789062 -4 4 -4 v -20 c -2.210938 0 -4 -1.789062 -4 -4 z m 0 0" fill="#2ec27e"/>
+    <path d="m 74 84 h 28 c 1.105469 0 2 0.894531 2 2 v 8 c 0 1.105469 -0.894531 2 -2 2 h -28 c -1.105469 0 -2 -0.894531 -2 -2 v -8 c 0 -1.105469 0.894531 -2 2 -2 z m 0 0" fill="#57e389"/>
+    <path d="m 98 90 c 0 5.523438 -4.476562 10 -10 10 s -10 -4.476562 -10 -10 s 4.476562 -10 10 -10 s 10 4.476562 10 10 z m 0 0" fill="#57e389"/>
+    <path d="m 84 72 h 8 v 36 h -8 z m 0 0" fill="#b5835a"/>
+    <path d="m 84 108 h 8 v 12 h -8 z m 0 0" fill="#865e3c"/>
+    <g clip-path="url(#s)" mask="url(#o)">
+        <g clip-path="url(#r)" mask="url(#p)">
+            <path d="m 128 80.640625 v 47.359375 h -128 v -47.359375 z m 0 0" fill="url(#q)"/>
+            <path d="m 13.308594 80.640625 l 47.355468 47.359375 h 21.214844 l -47.359375 -47.359375 z m 42.421875 0 l 47.363281 47.359375 h 21.214844 l -47.363282 -47.359375 z m 42.429687 0 l 29.839844 29.839844 v -21.210938 l -8.628906 -8.628906 z m -98.160156 7.90625 v 21.214844 l 18.238281 18.238281 h 21.214844 z m 0 0"/>
+        </g>
+    </g>
+</svg>
