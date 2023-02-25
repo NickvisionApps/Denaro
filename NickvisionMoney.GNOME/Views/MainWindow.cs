@@ -198,11 +198,13 @@ public partial class MainWindow
         _greeting = Adw.ButtonContent.New();
         _greeting.SetIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
         _greeting.SetLabel(_controller.Greeting);
-        _greeting.AddCssClass("title-2");
         var image = (Gtk.Image)_greeting.GetFirstChild();
-        image.SetIconSize(Gtk.IconSize.Large);
+        image.SetPixelSize(48);
+        var label = (Gtk.Label)_greeting.GetLastChild();
+        label.AddCssClass("greeting-title");
         _greeting.SetHalign(Gtk.Align.Center);
-        _greeting.SetMarginBottom(32);
+        _greeting.SetMarginTop(24);
+        _greeting.SetMarginBottom(14);
         //Drag Label
         _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
         _lblDrag.AddCssClass("dim-label");
@@ -233,6 +235,7 @@ public partial class MainWindow
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
+        _btnNewAccount.SetMarginBottom(12);
         btnNewAccountContainer.SetChild(_btnNewAccount);
         _flowBoxStatusButtons.Append(btnNewAccountContainer);
         //Open Account Button
@@ -242,6 +245,7 @@ public partial class MainWindow
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
+        _btnOpenAccount.SetMarginBottom(12);
         btnOpenAccountContainer.SetChild(_btnOpenAccount);
         _flowBoxStatusButtons.Append(btnOpenAccountContainer);
         //Start Page
@@ -631,19 +635,18 @@ public partial class MainWindow
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
         button.SetFocusable(false);
+        var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+        var btnCssProvider = Gtk.CssProvider.New();
         if (onStartScreen)
         {
             button.AddCssClass("wallet-button");
             var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
             var btnType = Gtk.Button.NewWithLabel(strType);
             btnType.SetValign(Gtk.Align.Center);
-            btnType.SetSizeRequest(100, -1);
             btnType.SetFocusable(false);
             btnType.SetCanTarget(false);
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
             var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
             btnType.SetName("btnType");
@@ -653,10 +656,6 @@ public partial class MainWindow
         }
         else
         {
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
             var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
             button.SetName("btnWallet");
