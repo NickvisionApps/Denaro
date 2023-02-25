@@ -45,10 +45,8 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.2.2" date="2023-02-25">
+    <release version="2023.3.0-next" date="2023-03-01">
       <description>
-		  <p>- Improved icon (Thanks @bertob)!</p>
-		  <p>- Various UX improvements</p>
 		  <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
