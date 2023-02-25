@@ -592,4 +592,184 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   <data name="InvalidPassword" xml:space="preserve">
     <value>Não foi possível conectar em sua conta. Senha inserida está incorreta.</value>
   </data>
+  <data name="SortBy.Id" xml:space="preserve">
+    <value>Sort By Id</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+    <value>Sort By Date</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+    <value>Sort By Amount</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+    <value>Search by description</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+    <value>The password of the account was removed.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>The password of the account was changed.</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+    <value>Make a Copy</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+    <value>(Copy)</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+    <value>Enter conversion here</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+    <value>Conversion Needed</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="AccountType.Checking" xml:space="preserve">
+    <value>Checking</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+    <value>Savings</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+    <value>This is only a useful label that doesn't affect how the app works.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+    <value>Your system reported that your currency is</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+    <value>Set a new password or remove one.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+    <value>If the password is lost, there is no way to restore your account!</value>
+  </data>
+  <data name="Id.Field" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+    <value>Account Type</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+    <value>Default Transaction Type</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+    <value>Use Custom Currency</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Currency Symbol</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Enter symbol here</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Currency Symbol (Empty)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Currency Code</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Currency Code (Empty)</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+    <value>Enter code here</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+    <value>Enter password here</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+    <value>Destination Account Password</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+    <value>Destination Account Password (Required)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+    <value>Destination Account Password (Invalid)</value>
+  </data>
+  <data name="Generated.PDF" xml:space="preserve">
+    <value>Generated: {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+    <value>Group Name</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+    <value>Receipts</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+    <value>Page {0}</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Enter Password To Login:</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+    <value>Checking Account Color</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+    <value>Savings Account Color</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+    <value>Business Account Color</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+    <value>Locale</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+    <value>Customize how Denaro uses locale settings.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+    <value>Insert Decimal Separator</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+    <value>Numpad period only</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+    <value>Period and Comma</value>
+  </data>
+  <data name="Preview.WinUI" xml:space="preserve">
+    <value>PREVIEW</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
+  <data name="Summary.GTK" xml:space="preserve">
+    <value>Manage your personal finances</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+    <value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
+  </data>
+  <data name="NewWindow.GTK" xml:space="preserve">
+    <value>New Window</value>
+  </data>
+  <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
+    <value>The password will be removed upon closing this dialog.</value>
+  </data>
 </root>
