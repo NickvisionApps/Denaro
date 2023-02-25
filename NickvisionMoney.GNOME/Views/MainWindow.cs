@@ -220,6 +220,7 @@ public partial class MainWindow
         _grpRecentAccountsOnStart.SetVisible(false);
         //Status Buttons
         _flowBoxStatusButtons = Gtk.FlowBox.New();
+        _flowBoxStatusButtons.SetMarginBottom(12);
         _flowBoxStatusButtons.SetColumnSpacing(4);
         _flowBoxStatusButtons.SetRowSpacing(4);
         _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
@@ -235,7 +236,6 @@ public partial class MainWindow
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
-        _btnNewAccount.SetMarginBottom(12);
         btnNewAccountContainer.SetChild(_btnNewAccount);
         _flowBoxStatusButtons.Append(btnNewAccountContainer);
         //Open Account Button
@@ -245,7 +245,6 @@ public partial class MainWindow
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
-        _btnOpenAccount.SetMarginBottom(12);
         btnOpenAccountContainer.SetChild(_btnOpenAccount);
         _flowBoxStatusButtons.Append(btnOpenAccountContainer);
         //Start Page
