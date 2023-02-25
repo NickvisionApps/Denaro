@@ -200,6 +200,7 @@ public partial class MainWindow
         _greeting.SetLabel(_controller.Greeting);
         var image = (Gtk.Image)_greeting.GetFirstChild();
         image.SetPixelSize(48);
+        image.SetMarginEnd(6);
         var label = (Gtk.Label)_greeting.GetLastChild();
         label.AddCssClass("greeting-title");
         _greeting.SetHalign(Gtk.Align.Center);

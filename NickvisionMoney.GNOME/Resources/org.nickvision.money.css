@@ -19,9 +19,8 @@
 
 .account-tag {
   border-radius: 20px;
-  font-size: 13px;
-  padding-left: 13px;
-  padding-right: 13px;
+  font-size: 12px;
+  padding: 1px 12px;
 }
 
 .greeting-title {
