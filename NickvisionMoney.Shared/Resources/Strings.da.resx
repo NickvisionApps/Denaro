@@ -14,40 +14,40 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Osobisty menedżer finansów</value>
+		<value>Personlig økonomi håndtering</value>
   </data>
   <data name="Version" xml:space="preserve">
-		<value>Wersja: {0}</value>
+		<value>Version: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value>O {0}</value>
+		<value>Om {0}</value>
   </data>
   <data name="Help" xml:space="preserve">
-		<value>Pomoc</value>
+		<value>Hjælp</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-		<value>Lista zmian</value>
+		<value>Ændringer</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
-		<value>Repozytorium na GitHubie</value>
+		<value>GitHub Depot</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
-		<value>Czat na Matriksie</value>
+		<value>Matrix Chat</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value>Zgłoś błąd</value>
+		<value>Anmeld en fejl</value>
   </data>
   <data name="Discussions" xml:space="preserve">
-		<value>Discussions</value>
+		<value>Diskussioner</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value>Zasługi</value>
+		<value>Kreditter</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Współautorzy z GitHuba ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
+Bidragydere på GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
   </data>
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -60,738 +60,738 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>Tłumacze z Weblate'a ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
+    <value>Oversættere på Weblate ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
 		<value>OK</value>
   </data>
   <data name="Yes" xml:space="preserve">
-		<value>Tak</value>
+		<value>Ja</value>
   </data>
   <data name="No" xml:space="preserve">
-		<value>Nie</value>
+		<value>Nej</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-		<value>Anuluj</value>
+		<value>Afbryd</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value>Nowa</value>
+		<value>Ny</value>
   </data>
   <data name="Open" xml:space="preserve">
-		<value>Otwórz</value>
+		<value>Åbn</value>
   </data>
   <data name="Close" xml:space="preserve">
-		<value>Zamknij</value>
+		<value>Luk</value>
   </data>
   <data name="Save" xml:space="preserve">
-		<value>Zapisz</value>
+		<value>Gem</value>
   </data>
   <data name="Back" xml:space="preserve">
-		<value>Cofnij</value>
+		<value>Tilbage</value>
   </data>
   <data name="Add" xml:space="preserve">
-		<value>Dodaj</value>
+		<value>Tilføj</value>
   </data>
   <data name="Remove" xml:space="preserve">
-		<value>Usuń</value>
+		<value>Fjern</value>
   </data>
   <data name="Apply" xml:space="preserve">
-		<value>Zastosuj</value>
+		<value>Anvend</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value>Strona domowa</value>
+		<value>Hjem</value>
   </data>
   <data name="Account" xml:space="preserve">
 		<value>Konto</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-    <value>Ustawienia</value>
+    <value>Indstillinger</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value>Opcje</value>
+    <value>Præferencer</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value>Skróty klawiszowe</value>
+		<value>Tastatur genveje</value>
   </data>
   <data name="Quit" xml:space="preserve">
-		<value>Wyjdź</value>
+		<value>Afslut</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Konto Nickvision Denaro</value>
+		<value>Nickvision Denaro Konto</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value>Nowe konto</value>
+		<value>Ny konto</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value>Nowe konto (Ctrl+N)</value>
+		<value>Ny konto (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value>Nie można nadpisać otwartego konta.</value>
+		<value>Ude af stand til at overskrive en åbnet konto.</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value>Otwórz konto</value>
+		<value>Åbn konto</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value>Otwórz konto (Ctrl+O)</value>
+		<value>Åbn konto (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value>Nie otwarto konta</value>
+		<value>Ingen konto åbnet</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Stwórz lub otwórz istniejące konto, aby zacząć. Możesz też przeciągnąć tu plik z komputera.</value>
+		<value>Opret eller åbn en konto for at starte. Du kan også trække en fil ind i programmet fra fil browseren.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value>Ostatnie konta</value>
+		<value>Seneste kontier</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value>Brak ostatnich kont</value>
+		<value>Ingen seneste kontier</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value>Wszystkie pliki</value>
+		<value>Alle filer</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value>Dobrego dnia!</value>
+    <value>God dag!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value>Dzień dobry!</value>
+    <value>Godmorgen!</value>
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value>Dzień dobry!</value>
+    <value>God eftermiddag!</value>
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value>Dobry wieczór!</value>
+    <value>Godaften!</value>
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value>Dzień dobry!</value>
+    <value>Godmorgen!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value>To konto jest już otwarte.</value>
+		<value>Denne konto er allerede åben.</value>
   </data>
   <data name="InvalidPassword" xml:space="preserve">
-		<value>Nie można zalogować się na konto. Podane hasło jest nieprawidłowe.</value>
+		<value>Ude af stand til at logge ind på kontoen. Kodeordet er forkert.</value>
   </data>
   <!--AccountView-->
   <data name="AccountActions" xml:space="preserve">
-		<value>Działania</value>
+		<value>Handlinger</value>
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value>Nowa transakcja</value>
+		<value>Ny overførsel</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value>Nowa transakcja (Ctrl+Shift+N)</value>
+		<value>Ny overførsel (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value>Nowa grupa</value>
+		<value>Ny gruppe</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value>Nowa grupa (Ctrl+G)</value>
+		<value>Ny gruppe (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value>Przelew środków</value>
+		<value>Overfør penge</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value>Przelew środków (Ctrl+T)</value>
+		<value>Overfør penge (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value>Import z pliku</value>
+		<value>Importer fra fil</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value>Import z pliku (Ctrl+I)</value>
+		<value>Importer fra fil (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value>Eksport do pliku</value>
+		<value>Eksporter til fil</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value>Przegląd</value>
+		<value>Oversigt</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value>Przegląd za dziś</value>
+		<value>Dagens oversigt</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value>Łącznie</value>
+		<value>Total</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value>Dochód</value>
+		<value>Indkomst</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value>Wydatek</value>
+		<value>Udgift</value>
   </data>
   <data name="Groups" xml:space="preserve">
-		<value>Grupy</value>
+		<value>Grupper</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value>Transakcje</value>
+		<value>Overførsler</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value>Brak transakcji</value>
+		<value>Ingen overførsler</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value>Nie znaleziono transakcji</value>
+		<value>Ingen overførsler fundet</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value>Dodaj nową transakcję lub zaimportuj transakcje z pliku.</value>
+		<value>Tilføj en ny overførsel eller importer overførsler fra en fil.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value>Żadna transakcja nie odpowiada zastosowanym filtrom.</value>
+		<value>Ingen overførsler ud fra de valgte filtre.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value>Sortuj od najnowszych</value>
+		<value>Sorter fra første til sidste</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value>Sortuj od najstarszych</value>
+		<value>Sorter fra sidste til første</value>
   </data>
   <data name="Filters" xml:space="preserve">
-		<value>Filtry</value>
+		<value>Filtre</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value>Usuń filtry przeglądu</value>
+		<value>Nulstil oversigt filtre</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value>Usuń filtry grup</value>
+		<value>Nulstil gruppe filtre</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value>Usuń filtry dat</value>
+		<value>Nulstil dato filtre</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value>Kalendarz</value>
+		<value>Kalender</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value>Wybierz zakres</value>
+		<value>Vælg rækkevidde</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value>Początek</value>
+		<value>Start</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value>Koniec</value>
+		<value>Slut</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value>Usunąć grupę?</value>
+		<value>Slet gruppe?</value>
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value>Czy na pewno chcesz usunąć tę grupę?
-Tej czynności nie można cofnąć.</value>
+		<value>Er du sikker på at du vil slette denne gruppe?
+Handlingen kan ikke fortrydes.</value>
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value>Usunąć transakcję?</value>
+		<value>Slet overførsel?</value>
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
-		<value>Czy na pewno chcesz usunąć tę transakcję?
-Tej czynności nie można cofnąć.</value>
+		<value>Er du sikker på at du vil slette overførslen?
+Handlingen kan ikke fortrydes.</value>
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value>Usuń transakcję</value>
+		<value>Slet overførsel</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value>To jest źródłowa transakcja powtarzalna.
-Co chcesz zrobić z wygenerowanymi przez nią transakcjami?
+		<value>Denne overførsel er en udgangspunktet for gentagende overførsel.
+Hvad vil du gøre med de gentagende overførsler?
 
-Usunięcie tylko transakcji źródłowej pozwoli na to, 
-aby poszczególne wygenerowane transakcje były edytowalne.</value>
+Ved kun at slette udgangspunktet bliver det muligt at 
+ændre i alle individuelt tilføjede overførsler.</value>
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value>Usuń tylko źródłową</value>
+		<value>Slet kun udgangspunktet</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value>Usuń źródłową i wygenerowane</value>
+		<value>Slet udgangspunktet samt alle tilføjede</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
-		<value>Zaktualizuj transakcję</value>
+		<value>Opdater overførsel</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value>To jest źródłowa transakcja powtarzalna.
-Co chcesz zrobić z wygenerowanymi przez nią transakcjami?
+		<value>Denne overførsel er oprettet som en gentagende overførsel.
+HVad vil du gerne gøre med de gentange overførsler?
 
-Zaktualizowanie tylko transakcji źródłowej 
-rozdzieli od niej wygenerowane transakcje.</value>
+Hvis du ændrer i den oprindelig overførsel, vil den 
+fjerne tilknytningen til samtlige gentagelserne.</value>
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value>Zaktualizuj tylko źródłową</value>
+		<value>Kun opdatere kilden</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value>Zaktualizuj źródłową i wygenerowane</value>
+		<value>Opdater kilde og genereret</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-		<value>Zmieniono interwał powtarzania</value>
+		<value>Intervallet for gentagelse er ændret</value>
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
-		<value>Zmieniono interwał powtarzania.
-Co chcesz zrobić z istniejącymi wygenerowanymi transakcjami?
+		<value>Intervallet for gentagelse blev ændret.
+Hvad vil du gerne gøre med de eksisterende genererede overførsler?
 
-Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value>
+Nye gentagende overførsler vil blive genereret ud fra det nye interval.</value>
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value>Usuń istniejące</value>
+		<value>Slet eksisterende</value>
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value>Rozdziel istniejące</value>
+		<value>Fjern eksisterende tilknytning</value>
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value>To konto nie ma dostępnych środków do przelewu.</value>
+		<value>Denne konto har ingen penge tilgængelig til overførsel.</value>
   </data>
   <data name="Hide" xml:space="preserve">
-		<value>Ukryj</value>
+		<value>Skjul</value>
   </data>
   <data name="HideGroups" xml:space="preserve">
-		<value>Ukryj grupy</value>
+		<value>Skjul grupper</value>
   </data>
   <data name="Show" xml:space="preserve">
-		<value>Pokaż</value>
+		<value>Vis</value>
   </data>
   <data name="ShowGroups" xml:space="preserve">
-		<value>Pokaż grupy</value>
+		<value>Vis grupper</value>
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
-		<value>Ustaw widoczność grup</value>
+		<value>Skift gruppers synlighed</value>
   </data>
   <data name="AccountSettings" xml:space="preserve">
-		<value>Ustawienia konta</value>
+		<value>Konto indstillinger</value>
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-		<value>Sortuj po ID</value>
+		<value>Sorter efter Id</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-		<value>Sortuj po dacie</value>
+		<value>Sorter efter dato</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-		<value>Sortuj po kwocie</value>
+		<value>Sorter efter beløb</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-		<value>Szukaj po opisie</value>
+		<value>Søg efter beskrivelse</value>
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-		<value>Usunięto hasło do konta.</value>
+		<value>Kontoens kodeord blev fjernet.</value>
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-		<value>Zmieniono hasło do konta.</value>
+		<value>Kontoens kodeord blev ændret.</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value>Bez grupy</value>
+		<value>Ikke grupperet</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value>Transakcje bez grupy</value>
+		<value>Overførsler uden en gruppe</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value>Zaimportowano {0} transakcję z pliku.</value>
+		<value>Importerede {0} overførsel fra fil.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value>Liczba zaimportowanych transakcji z pliku: {0}.</value>
+		<value>Importerede {0} overførsler fra fil.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value>Nie można zaimportować danych z pliku. Nieobsługiwany typ pliku.</value>
+		<value>Ude af stand til at importere information fra fil. Filetypen understøttes ikke.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value>Poprawnie wyeksportowano konto do pliku.</value>
+		<value>Kontoen blev eksporteret til fil uden fejl.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value>Nie można eksportować konta do pliku.</value>
+		<value>Ude af stand til at eksportere konto til fil.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value>Przelej do {0}</value>
+		<value>Overfør til {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value>Przelej z {0}</value>
+		<value>Overfør fra {0}</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
-		<value>Edytuj transakcję</value>
+		<value>Ret overførsel</value>
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value>Usuń transakcję</value>
+		<value>Slet overførsel</value>
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
-		<value>Edytuj grupę</value>
+		<value>Ret gruppe</value>
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value>Usuń grupę</value>
+		<value>Slet gruppe</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value>Grupa</value>
+		<value>Gruppe</value>
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
-		<value>Transakcja</value>
+		<value>Overførsel</value>
   </data>
   <data name="RepeatInterval.Never" xml:space="preserve">
-		<value>Nigdy</value>
+		<value>Aldrig</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value>Codziennie</value>
+		<value>Daglig</value>
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
-		<value>Co tydzień</value>
+		<value>Ugentlig</value>
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value>Co dwa tygodnie</value>
+		<value>Hver anden uge</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value>Co miesiąc</value>
+		<value>Månedlig</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value>Co kwartał</value>
+		<value>Kvartalsvis</value>
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
-		<value>Co rok</value>
+		<value>Årlig</value>
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value>Co dwa lata</value>
+		<value>Hvert andet år</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
-		<value>Bez daty końca</value>
+		<value>Ingen slutdato</value>
   </data>
   <data name="View" xml:space="preserve">
-		<value>Pokaż</value>
+		<value>Visning</value>
   </data>
   <data name="Delete" xml:space="preserve">
-		<value>Usuń</value>
+		<value>Slet</value>
   </data>
   <data name="Upload" xml:space="preserve">
-		<value>Dodaj</value>
+		<value>Upload</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
-		<value>Stwórz kopię</value>
+		<value>Lav en kopi</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
-		<value>(Kopia)</value>
+		<value>(Kopi)</value>
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
-		<value>Przelew</value>
+		<value>Overførsel</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value>Przelew środków stworzy wydatek o kwocie przelewu na tym koncie oraz dochód o kwocie przelewu na koncie, na które wykonywany jest przelew.</value>
+		<value>Overførsel af penge til lave en udgifts-overførsel med det givne beløb på denne konto og en indkomst-overførsel med det givne beløb på den konto der overføres til.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value>Nie wybrano konta</value>
+		<value>Ingen konto valgt</value>
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-		<value>Wpisz tutaj wymianę</value>
+		<value>Indtast omregning her</value>
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
-		<value>Wymiana jest wymagana</value>
+		<value>Omregning krævet</value>
   </data>
   <data name="Result" xml:space="preserve">
-		<value>Wynik</value>
+		<value>Resultat</value>
   </data>
   <!--AccountSettingsDialog-->
   <data name="AccountType.Checking" xml:space="preserve">
-		<value>Bieżące</value>
+		<value>Indkomst</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-		<value>Oszczędnościowe</value>
+		<value>Opsparing</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
-		<value>Firmowe</value>
+		<value>Virksomhed</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-		<value>To tylko przydatna etykieta, nie ma wpływu na działanie aplikacji.</value>
+		<value>Dette er kun en brugbar label som ikke påvirker programmet.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
-		<value>nd.</value>
+		<value>I/T</value>
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
-		<value>Twój system zgłasza, że twoją walutą jest</value>
+		<value>Dit system fortalte at din valuta er</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-		<value>Zmień hasło</value>
+		<value>Skift kodeord</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-		<value>Ustaw nowe hasło lub usuń stare.</value>
+		<value>Sæt nyt kodeord eller fjern kodeord.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value>Jeśli zapomnisz hasła nie ma możliwości przywrócenia konta!</value>
+		<value>Hvis du glemmer kodeordet kan kontoen ikke blive genskabt!</value>
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
-		<value>Identyfikator (ID)</value>
+		<value>Id</value>
   </data>
   <data name="Name.Field" xml:space="preserve">
-		<value>Nazwa</value>
+		<value>Navn</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj nazwę</value>
+		<value>Indtast navn her</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value>Nazwa (pusta)</value>
+		<value>Navn (tom)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value>Nazwa (już istnieje)</value>
+		<value>Navn (findes allerede)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value>Opis</value>
+		<value>Beskrivelse</value>
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj opis</value>
+		<value>Indtast beskrivelse her</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value>Opis (pusty)</value>
+		<value>Beskrivelse (tom)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value>Kwota</value>
+		<value>Beløb</value>
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj kwotę</value>
+		<value>Indtast beløb her</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value>Kwota (niepoprawna)</value>
+		<value>Beløb (ugyldig)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value>Data</value>
+		<value>Dato</value>
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value>Rodzaj</value>
+		<value>Type</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value>Interwał powtarzania</value>
+		<value>Gentag interval</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value>Data końca powtarzania</value>
+		<value>Gentag slutdato</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value>Usuń datę końca</value>
+		<value>Ryd slutdato</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value>Data końca powtarzania (niepoprawna)</value>
+		<value>Gentag sludato (ugyldig)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value>Grupa</value>
+		<value>Gruppe</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value>Kolor</value>
+		<value>Farve</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value>Potwierdzenie</value>
+		<value>Kvittering</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value>Konto docelowe</value>
+		<value>Modtagerkonto</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value>Wybierz konto docelowe</value>
+		<value>Vælg en modtagerkonto</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value>Konto docelowe (niepoprawne)</value>
+		<value>Modtagerkonto (ugyldig)</value>
   </data>
   <data name="AccountType.Field" xml:space="preserve">
-		<value>Rodzaj konta</value>
+		<value>Kontotype</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-		<value>Rodzaj domyślnej transakcji</value>
+		<value>Standard overførselstype</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
-		<value>Użyj własnej waluty</value>
+		<value>Brug tilpasset valuta</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-		<value>Symbol waluty</value>
+		<value>Valuta symbol</value>
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj symbol</value>
+		<value>Indtast symbol her</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-		<value>Symbol waluty (pusty)</value>
+		<value>Valuta symbol (tom)</value>
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
-		<value>Kod waluty</value>
+		<value>Valutakode</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-		<value>Kod waluty (pusty)</value>
+		<value>Valutakode (tom)</value>
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj kod</value>
+		<value>Indsæt valutakode her</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
-		<value>Hasło</value>
+		<value>Kodeord</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
-		<value>Wpisz tutaj hasło</value>
+		<value>Indtast kodeord</value>
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-		<value>Nowe hasło</value>
+		<value>Ny kodeord</value>
   </data>
   <data name="ConfirmPassword.Field" xml:space="preserve">
-		<value>Potwierdź hasło</value>
+		<value>Bekræft kodeord</value>
   </data>
   <data name="DestinationPassword.Field" xml:space="preserve">
-		<value>Hasło konta docelowego</value>
+		<value>Kodeord på destinations konto</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-		<value>Hasło konta docelowego (wymagane)</value>
+		<value>Kodeord på destinations konto (påkrævet)</value>
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-		<value>Hasło konta docelowego (niepoprawne)</value>
+		<value>Kodeord på destinations konto (ugyldig)</value>
   </data>
   <!--PDF-->
   <data name="Generated.PDF" xml:space="preserve">
-		<value>Stworzono: {0}</value>
+		<value>Genereret: {0}</value>
   </data>
   <data name="Currency.PDF" xml:space="preserve">
-		<value>Waluta</value>
+		<value>Valuta</value>
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
-		<value>Nazwa grupy</value>
+		<value>Gruppenavn</value>
   </data>
   <data name="Receipts.PDF" xml:space="preserve">
-		<value>Potwierdzenia</value>
+		<value>Kvitteringer</value>
   </data>
   <data name="PageNumber.PDF" xml:space="preserve">
-		<value>Strona {0}</value>
+		<value>Side {0}</value>
   </data>
   <!--PasswordDialog-->
   <data name="EnterPassword" xml:space="preserve">
-		<value>Wpisz hasło, aby się zalogować:</value>
+		<value>Indtast kodeord for at logge ind:</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value>Interfejs użytkownika</value>
+		<value>Brugerflade</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-		<value>Odblokuj</value>
+		<value>Lås op</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value>Dostosuj wygląd interfejsu użytkownika aplikacji.</value>
+		<value>Tilpas programmets brugerflade.</value>
   </data>
   <data name="Theme" xml:space="preserve">
-		<value>Motyw</value>
+		<value>Tema</value>
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value>Jasny</value>
+		<value>Lys</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value>Ciemny</value>
+		<value>Mørk</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value>Systemowy</value>
+		<value>System</value>
   </data>
   <data name="Colors" xml:space="preserve">
-		<value>Kolory</value>
+		<value>Farver</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Dostosuj kolory używane przez Denaro.</value>
+		<value>Tilpas farverne som Denaro bruger.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value>Domyślny kolor transakcji</value>
+		<value>Standardfarve for overførsel</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value>Domyślny kolor przelewu</value>
+		<value>Standardfarve for overførsel</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value>Zmiana tej opcji zostanie zastosowana wyłącznie do nowych transakcji.</value>
+		<value>En ændring i indstillinger bliver kun gælde for nyligt tilføjede overførsler.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value>Zmiana tej opcji zostanie zastosowana wyłącznie do nowych przelewów.</value>
+		<value>En ændring i indstillinger vil gælde for nye overførsler.</value>
   </data>
   <data name="AccountCheckingColor" xml:space="preserve">
-		<value>Kolor konta bieżącego</value>
+		<value>Indkomstkonto farve</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-		<value>Kolor konta oszczędnościowego</value>
+		<value>Opsparingskonto farve</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-		<value>Kolor konta firmowego</value>
+		<value>Virksomhedskonto farve</value>
   </data>
   <data name="Locale" xml:space="preserve">
-		<value>Opcje regionalne</value>
+		<value>Lokalitet</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-		<value>Dosotsuj jak Denaro korzysta z ustawień regionalnych.</value>
+		<value>Tilpas hvordan Denaro bruger lokale indstillinger.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-		<value>Wstawianie separatora dziesiętnego</value>
+		<value>Indsæt decimal-seperator</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-		<value>Ustaw klawisze, które będą wstawiać regionalny separator dziesiętny w polu kwoty.</value>
+		<value>Indstil hvilke taster der kan trykkes på for at indsætte lokalitetens decimalseparator i beløbsfeltet.</value>
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
-		<value>Wyłączone</value>
+		<value>Fra</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-		<value>Tylko kropka klaw. num.</value>
+		<value>Kun numerisk tastatur</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-		<value>Kropka i przecinek</value>
+		<value>Punktum og komma</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value>Aplikacja</value>
+		<value>Program</value>
   </data>
   <!--WinUI Specific-->
   <data name="Preview.WinUI" xml:space="preserve">
-		<value>PODGLĄD</value>
+		<value>Forhåndsvisning</value>
   </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Proszę naprawić powyższe błędy.</value>
+		<value>Ret venligst ovenstående fejl.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Co nowego?</value>
+		<value>Hvad er nyt?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Program:
+		<value>Udviklere:
 {0}
 
-Projekt:
+Designere:
 {1}
 
-Grafika:
+Kunstnere:
 {2}
 
-Tłumaczenie:
+Translatører:
 {3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Zmiana motywu wymaga ponownego uruchomienia aplikacji.</value>
+		<value>Genstart af program er nødvendigt for at ændre temaet.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Uruchomić ponownie?</value>
+		<value>Genstart for at påføre tema?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Uruchomić ponownie {0} aby zmienić motyw?
-Niezapisane zmiany zostaną utracone.</value>
+		<value>Vil du gerne genstarte {0} for at påføre det nye tema?
+Alle ikke-gemte ændringer vil gå tabt.</value>
   </data>
   <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>Podane hasła są różne.</value>
+		<value>Kodeordene er ikke ens.</value>
   </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
-		<value>Zarządzaj swoimi finansami</value>
+		<value>Administrer din privatøkonomi</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-		<value>pieniądze;finanse;portfel;bank;GTK;Nickvision;</value>
+		<value>penge;finans;pung;kontanter;bank;GTK;Nickvision;</value>
   </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value>Menu konta</value>
+		<value>Konto menu</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value>Pokaż/ukryj panel boczny</value>
+		<value>Skift sidebjælke</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value>Główne menu</value>
+		<value>Hovedmenu</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value>Ostatnie</value>
+		<value>Seneste</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value>Zamknij konto</value>
+		<value>Luk konto</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value>Konto Money (*.nmoney)</value>
+		<value>Penge konto (*.nmoney)</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-		<value>Nowe okno</value>
+		<value>Nyt vindue</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-		<value>Hasło zostanie usunięte po zamknięciu tego monitu.</value>
+		<value>Kodeordet bliver fjernet når du lukker denne dialog.</value>
   </data>
 </root>

@@ -178,13 +178,16 @@ public partial class MainWindow
         _btnMainMenu = Gtk.MenuButton.New();
         var mainMenu = Gio.Menu.New();
         mainMenu.Append(_controller.Localizer["NewWindow.GTK"], "win.newWindow");
-        mainMenu.Append(_controller.Localizer["Preferences"], "win.preferences");
-        mainMenu.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
-        mainMenu.Append(_controller.Localizer["Help"], "win.help");
-        mainMenu.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
+        var appMenuSection = Gio.Menu.New();
+        appMenuSection.Append(_controller.Localizer["Preferences"], "win.preferences");
+        appMenuSection.Append(_controller.Localizer["KeyboardShortcuts"], "win.keyboardShortcuts");
+        appMenuSection.Append(_controller.Localizer["Help"], "win.help");
+        appMenuSection.Append(string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName), "win.about");
+        mainMenu.AppendSection(null, appMenuSection);
         _btnMainMenu.SetDirection(Gtk.ArrowType.None);
         _btnMainMenu.SetMenuModel(mainMenu);
         _btnMainMenu.SetTooltipText(_controller.Localizer["MainMenu", "GTK"]);
+        _btnMainMenu.SetPrimary(true);
         _headerBar.PackEnd(_btnMainMenu);
         //Toast Overlay
         _toastOverlay = Adw.ToastOverlay.New();
@@ -193,13 +196,21 @@ public partial class MainWindow
         _mainBox.Append(_toastOverlay);
         //Greeting
         _greeting = Adw.ButtonContent.New();
-        _greeting.SetIconName(_controller.ShowSun ? "sun-alt-symbolic" : "moon-symbolic");
+        _greeting.SetIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
         _greeting.SetLabel(_controller.Greeting);
-        _greeting.AddCssClass("title-2");
         var image = (Gtk.Image)_greeting.GetFirstChild();
-        image.SetIconSize(Gtk.IconSize.Large);
+        image.SetPixelSize(48);
+        var label = (Gtk.Label)_greeting.GetLastChild();
+        label.AddCssClass("greeting-title");
         _greeting.SetHalign(Gtk.Align.Center);
-        _greeting.SetMarginBottom(32);
+        _greeting.SetMarginTop(24);
+        _greeting.SetMarginBottom(14);
+        //Drag Label
+        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
+        _lblDrag.AddCssClass("dim-label");
+        _lblDrag.SetWrap(true);
+        _lblDrag.SetJustify(Gtk.Justification.Center);
+        _lblDrag.SetVisible(_controller.RecentAccounts.Count == 0);
         //Recent Accounts On Start Page
         _grpRecentAccountsOnStart = Adw.PreferencesGroup.New();
         _grpRecentAccountsOnStart.SetTitle(_controller.Localizer["RecentAccounts"]);
@@ -209,8 +220,9 @@ public partial class MainWindow
         _grpRecentAccountsOnStart.SetVisible(false);
         //Status Buttons
         _flowBoxStatusButtons = Gtk.FlowBox.New();
-        _flowBoxStatusButtons.SetColumnSpacing(2);
-        _flowBoxStatusButtons.SetRowSpacing(2);
+        _flowBoxStatusButtons.SetMarginBottom(12);
+        _flowBoxStatusButtons.SetColumnSpacing(4);
+        _flowBoxStatusButtons.SetRowSpacing(4);
         _flowBoxStatusButtons.SetMaxChildrenPerLine(2);
         _flowBoxStatusButtons.SetHomogeneous(true);
         _flowBoxStatusButtons.SetHexpand(true);
@@ -221,7 +233,6 @@ public partial class MainWindow
         btnNewAccountContainer.SetFocusable(false);
         _btnNewAccount = Gtk.Button.NewWithLabel(_controller.Localizer["NewAccount"]);
         _btnNewAccount.SetHalign(Gtk.Align.Center);
-        _btnNewAccount.SetSizeRequest(200, 50);
         _btnNewAccount.AddCssClass("pill");
         _btnNewAccount.AddCssClass("suggested-action");
         _btnNewAccount.SetDetailedActionName("win.newAccount");
@@ -232,16 +243,10 @@ public partial class MainWindow
         btnOpenAccountContainer.SetFocusable(false);
         _btnOpenAccount = Gtk.Button.NewWithLabel(_controller.Localizer["OpenAccount"]);
         _btnOpenAccount.SetHalign(Gtk.Align.Center);
-        _btnOpenAccount.SetSizeRequest(200, 50);
         _btnOpenAccount.AddCssClass("pill");
         _btnOpenAccount.SetDetailedActionName("win.openAccount");
         btnOpenAccountContainer.SetChild(_btnOpenAccount);
         _flowBoxStatusButtons.Append(btnOpenAccountContainer);
-        //Drag Label
-        _lblDrag = Gtk.Label.New(_controller.Localizer["NoAccountDescription"]);
-        _lblDrag.AddCssClass("dim-label");
-        _lblDrag.SetWrap(true);
-        _lblDrag.SetJustify(Gtk.Justification.Center);
         //Start Page
         _scrollStartPage = Gtk.ScrolledWindow.New();
         _clampStartPage = Adw.Clamp.New();
@@ -257,9 +262,9 @@ public partial class MainWindow
         _boxStartPage.SetHalign(Gtk.Align.Fill);
         _clampStartPage.SetChild(_boxStartPage);
         _boxStartPage.Append(_greeting);
+        _boxStartPage.Append(_lblDrag);
         _boxStartPage.Append(_grpRecentAccountsOnStart);
         _boxStartPage.Append(_flowBoxStatusButtons);
-        _boxStartPage.Append(_lblDrag);
         //Page Tabs
         _pageTabs = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
         _tabView = Adw.TabView.New();
@@ -314,11 +319,6 @@ public partial class MainWindow
         actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(Handle, "help:denaro", 0);
         Handle.AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
-        //Primary Menu Action
-        var actPrimaryMenu = Gio.SimpleAction.New("primaryMenu", null);
-        actPrimaryMenu.OnActivate += (sender, e) => _btnMainMenu.Popup();
-        Handle.AddAction(actPrimaryMenu);
-        application.SetAccelsForAction("win.primaryMenu", new string[] { "F10" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
@@ -397,6 +397,13 @@ public partial class MainWindow
     /// <param name="e">EventArgs</param>
     private async void OnShow(Gtk.Widget sender, EventArgs e)
     {
+        GLib.Functions.TimeoutAddFull(0, 100, (data) =>
+        {
+            var maxBtnWidth = Math.Max(_btnNewAccount.GetAllocatedWidth(), _btnOpenAccount.GetAllocatedWidth());
+            _btnNewAccount.SetSizeRequest(maxBtnWidth, -1);
+            _btnOpenAccount.SetSizeRequest(maxBtnWidth, -1);
+            return false;
+        });
         if (_controller.FileToLaunch != null)
         {
             GLib.Functions.TimeoutAddFull(0, 250, (data) =>
@@ -627,30 +634,27 @@ public partial class MainWindow
         button.SetHalign(Gtk.Align.Center);
         button.SetValign(Gtk.Align.Center);
         button.SetFocusable(false);
+        var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
+        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
+        var btnCssProvider = Gtk.CssProvider.New();
         if (onStartScreen)
         {
             button.AddCssClass("wallet-button");
             var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
             var btnType = Gtk.Button.NewWithLabel(strType);
             btnType.SetValign(Gtk.Align.Center);
-            btnType.SetSizeRequest(120, -1);
-            btnType.OnClicked += (sender, e) => row.Activate();
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
+            btnType.SetFocusable(false);
+            btnType.SetCanTarget(false);
             var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
             btnType.SetName("btnType");
             btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
+            btnType.AddCssClass("account-tag");
             row.AddSuffix(btnType);
         }
         else
         {
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
             var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
             gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
             button.SetName("btnWallet");

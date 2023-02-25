@@ -618,7 +618,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Simbolo della valuta</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-    <value>Simbolo della valuta (nessuno)</value>
+    <value>Il simbolo della valuta non può essere vuoto</value>
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
     <value>Inserire il codice</value>
@@ -627,7 +627,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Colore degli account del conto corrente</value>
   </data>
   <data name="Id.Field" xml:space="preserve">
-    <value>Id</value>
+    <value>ID</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
     <value>Usa valuta personalizzata</value>
@@ -651,7 +651,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Pagina {0}</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-    <value>Colore dell’account aziendale</value>
+    <value>Colore degli account aziendali</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Aiuto</value>
@@ -666,7 +666,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>ANTEPRIMA</value>
   </data>
   <data name="Summary.GTK" xml:space="preserve">
-    <value>Gestisci le tue finanze personali</value>
+    <value>Gestione finanziaria personale</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Cerca per descrizione</value>
@@ -675,7 +675,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Ordina per importo</value>
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-    <value>Inserisci la conversione qui</value>
+    <value>Inserire la conversione</value>
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
     <value>Conversione necessaria</value>
@@ -684,16 +684,16 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Risultato</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-    <value>Codice valuta (vuoto)</value>
+    <value>Il codice della valuta non può essere vuoto</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-    <value>Finestra nuova</value>
+    <value>Nuova finestra</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
     <value>Chat di Matrix</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-    <value>denaro;soldi;finanza;portafoglio;contante;banca;GTK;Nickvision;</value>
+    <value>denaro;soldi;finanza;portafoglio;contante;banca;GTK;Nickvision;money;finance;wallet;cash;bank;</value>
   </data>
   <data name="AccountActions" xml:space="preserve">
     <value>Azioni</value>
@@ -702,31 +702,31 @@ I cambiamenti non salvati saranno persi.</value>
     <value>(Copia)</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
-    <value>Fai una copia</value>
+    <value>Duplica</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Indietro</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Cancella</value>
+    <value>Elimina</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Applica</value>
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-    <value>La password dell’account è stata cancellata.</value>
+    <value>La password dell’account è stata eliminata.</value>
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-    <value>La password dell’account è stata cambiata.</value>
+    <value>La password dell’account è stata modificata.</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-    <value>Cambia la password</value>
+    <value>Modifica password</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Se perdi la password, non puoi ripristinare l'account!</value>
+    <value>In caso di password dimenticata, non sarà possibile ripristinare l'account!</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-    <value>Metti una password nuova o cancella quella corrente.</value>
+    <value>Inserire una nuova password o cancellare quella attuale.</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
     <value>Password</value>
@@ -744,28 +744,28 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Password dell’account destinatario</value>
   </data>
   <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Le password non sono uguali.</value>
+    <value>Le password non corrispondono.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-    <value>La password verrà cancellata dopo aver chiuso il dialog.</value>
+    <value>La password sarà eliminata chiudendo questa finestra.</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-    <value>Mettere la password dell’account destinatario</value>
+    <value>Inserire la password dell’account destinatario</value>
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-    <value>Mettere la password valida dell’account destinatario</value>
+    <value>Inserire la password valida per l'account destinatario</value>
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
     <value>Spento</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-    <value>Punto e virgola</value>
+    <value>Punto/virgola</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
     <value>Punto del tastierino numerico</value>
   </data>
   <data name="InvalidPassword" xml:space="preserve">
-    <value>Impossibile accedere all’account. La password fornita non è valida.</value>
+    <value>Impossibile accedere all’account. La password non è corretta.</value>
   </data>
   <data name="EnterPassword" xml:space="preserve">
     <value>Inserisci la password per accedere:</value>
@@ -774,16 +774,16 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Impostazioni regionali</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-    <value>Personalizza il modo in cui Denaro utilizza le impostazioni di localizzazione.</value>
+    <value>Personalizza il modo in cui Denaro usa le impostazioni di localizzazione.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-    <value>Inserisci il separatore decimale</value>
+    <value>Separatore decimale</value>
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Esci</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-    <value>Imposta per quali tasti premuti verrà inserito il separatore decimale delle impostazioni regionali in un campo importo.</value>
+    <value>Imposta per quali tasti verrà inserito il separatore decimale predefinito per la lingua.</value>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Aggiungi</value>
