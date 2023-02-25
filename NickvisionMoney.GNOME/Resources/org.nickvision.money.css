@@ -20,8 +20,13 @@
 .account-tag {
   border-radius: 20px;
   font-size: 13px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+.greeting-title {
+  font-size: 32px;
+  font-weight: 900;
 }
 
 /* Calendars colors */
