@@ -786,4 +786,10 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="InsertSeparatorOff" xml:space="preserve">
     <value>Désactivé</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
 </root>

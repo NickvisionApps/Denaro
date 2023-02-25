@@ -785,4 +785,10 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   <data name="Password.Placeholder" xml:space="preserve">
     <value>Masukkan kata sandi disini</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
 </root>

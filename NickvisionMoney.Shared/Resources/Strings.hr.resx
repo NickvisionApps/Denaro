@@ -785,4 +785,10 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
   <data name="AccountActions" xml:space="preserve">
     <value>Radnje</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
 </root>

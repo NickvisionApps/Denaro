@@ -755,4 +755,28 @@ Traductors :
   <data name="LocaleDescription" xml:space="preserve">
     <value>Personalizar coma Denaro utiliza los paramètres regionals.</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+    <value>Currency Symbol</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+    <value>Enter symbol here</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+    <value>Currency Symbol (Empty)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+    <value>Currency Code</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+    <value>Currency Code (Empty)</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+    <value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
+  </data>
 </root>
