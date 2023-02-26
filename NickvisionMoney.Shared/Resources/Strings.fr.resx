@@ -790,6 +790,6 @@ les transactions individuelles générées seront modifiables.</value>
     <value>Add</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-    <value>Unlock</value>
+    <value>Déverrouiller</value>
   </data>
 </root>
