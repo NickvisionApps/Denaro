@@ -14,758 +14,773 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value></value>
+		<value>Henkilökohtainen varainhallinta</value>
   </data>
   <data name="Version" xml:space="preserve">
-		<value></value>
+		<value>Versio: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value></value>
+		<value>Tietoja - {0}</value>
   </data>
   <data name="Help" xml:space="preserve">
-		<value></value>
+		<value>Ohje</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-		<value></value>
+		<value>Muutosloki</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
-		<value></value>
+		<value>GitHub-tietovarasto</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
-		<value></value>
+		<value>Matrix-keskustelu</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value></value>
+		<value>Ilmoita ongelmasta</value>
   </data>
   <data name="Discussions" xml:space="preserve">
-		<value></value>
+		<value>Keskustelut</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value></value>
+		<value>Tekijät</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Avustajat GitHubissa ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/contributors</value>
   </data>
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value>Nicholas Logozzo https://github.com/nlogozzo
+Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value>David Lapshin https://github.com/daudix-UFO</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value>Kääntäjät Weblatessa ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
-		<value></value>
+		<value>OK</value>
   </data>
   <data name="Yes" xml:space="preserve">
-		<value></value>
+		<value>Kyllä</value>
   </data>
   <data name="No" xml:space="preserve">
-		<value></value>
+		<value>Ei</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-		<value></value>
+		<value>Peru</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value></value>
+		<value>Uusi</value>
   </data>
   <data name="Open" xml:space="preserve">
-		<value></value>
+		<value>Avaa</value>
   </data>
   <data name="Close" xml:space="preserve">
-		<value></value>
+		<value>Sulje</value>
   </data>
   <data name="Save" xml:space="preserve">
-		<value></value>
+		<value>Tallenna</value>
   </data>
   <data name="Back" xml:space="preserve">
-		<value></value>
+		<value>Takaisin</value>
   </data>
   <data name="Add" xml:space="preserve">
-		<value></value>
+		<value>Lisää</value>
   </data>
   <data name="Remove" xml:space="preserve">
-		<value></value>
+		<value>Poista</value>
   </data>
   <data name="Apply" xml:space="preserve">
-		<value></value>
+		<value>Toteuta</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value></value>
+		<value>Etusivu</value>
   </data>
   <data name="Account" xml:space="preserve">
-		<value></value>
+		<value>Tili</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-    <value></value>
+    <value>Asetukset</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value></value>
+    <value>Asetukset</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value></value>
+		<value>Pikanäppäimet</value>
   </data>
   <data name="Quit" xml:space="preserve">
-		<value></value>
+		<value>Lopeta</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value></value>
+		<value>Nickvision Denaro -tili</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value></value>
+		<value>Uusi tili</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Uusi tili (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value></value>
+		<value>Avaa tili</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Avaa tili (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value></value>
+		<value>Tiliä ei ole avattu</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value></value>
+		<value>Luo tai avaa tili, jotta pääset alkuun. Voit myös vetää tiedoston tiedostonhallinnasta tähän sovellukseen.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value></value>
+		<value>Viimeisimmät tilit</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value></value>
+		<value>Ei viimeisimpiä tilejä</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value></value>
+		<value>Kaikki tiedostot</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value></value>
+    <value>Hyvää päivää!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value></value>
+    <value>Hyvää huomenta!</value>
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value></value>
+    <value>Hyvää iltapäivää!</value>
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value></value>
+    <value>Hyvää iltaa!</value>
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value></value>
+    <value>Hyvää huomenta!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value></value>
+		<value>Tämä tili on jo avattu.</value>
   </data>
   <data name="InvalidPassword" xml:space="preserve">
-		<value></value>
+		<value>Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen.</value>
   </data>
   <!--AccountView-->
   <data name="AccountActions" xml:space="preserve">
-		<value></value>
+		<value>Toiminnot</value>
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value></value>
+		<value>Uusi tapahtuma</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Uusi tapahtuma (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value></value>
+		<value>Uusi ryhmä</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Uusi ryhmä (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value></value>
+		<value>Siirrä rahaa</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Siirrä rahaa (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value></value>
+		<value>Tuo tiedostosta</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Tuo tiedostosta (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value></value>
+		<value>Vie tiedostoon</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value></value>
+		<value>Yleisnäkymä</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value></value>
+		<value>Päivän yleisnäkymä</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value></value>
+		<value>Yhteensä</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value></value>
+		<value>Tulo</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value></value>
+		<value>Meno</value>
   </data>
   <data name="Groups" xml:space="preserve">
-		<value></value>
+		<value>Ryhmät</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value></value>
+		<value>Tapahtumat</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value></value>
+		<value>Ei tapahtumia</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value></value>
+		<value>Tapahtumia ei löytynyt</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value></value>
+		<value>Lisää uusi tapahtuma tai tuo tapahtumat tiedostosta.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value></value>
+		<value>Suodattimia vastaavia tapahtumia ei löydy.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value></value>
+		<value>Järjestä ensimmäisestä viimeiseen</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value></value>
+		<value>Järjestä viimeisestä ensimmäiseen</value>
   </data>
   <data name="Filters" xml:space="preserve">
-		<value></value>
+		<value>Suodattimet</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value></value>
+		<value>Nollaa yleisnäkymän suodattimet</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value></value>
+		<value>Nollaa ryhmäsuodattimet</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value></value>
+		<value>Nollaa päiväsuodattimet</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value></value>
+		<value>Kalenteri</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value></value>
+		<value>Valitse aikaväli</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value></value>
+		<value>Alku</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value></value>
+		<value>Loppu</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value></value>
+		<value>Poistetaanko ryhmä?</value>
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value></value>
+		<value>Haluatko varmasti poistaa tämän ryhmän?
+Tätä toimintoa ei voi perua.</value>
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value></value>
+		<value>Poistetaanko tapahtuma?</value>
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
-		<value></value>
+		<value>Haluatko varmasti poistaa tämän tapahtuman?
+Tätä toimintoa ei voi perua.</value>
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value>Poista tapahtuma</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value>Päivitä tapahtuma</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value></value>
+		<value>Tällä tilillä ei ole riittävästi rahaa siirtoa varten.</value>
   </data>
   <data name="Hide" xml:space="preserve">
-		<value></value>
+		<value>Piilota</value>
   </data>
   <data name="HideGroups" xml:space="preserve">
-		<value></value>
+		<value>Piilota ryhmät</value>
   </data>
   <data name="Show" xml:space="preserve">
-		<value></value>
+		<value>Näytä</value>
   </data>
   <data name="ShowGroups" xml:space="preserve">
-		<value></value>
+		<value>Näytä ryhmät</value>
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
-		<value></value>
+		<value>Näytä/piilota ryhmät</value>
   </data>
   <data name="AccountSettings" xml:space="preserve">
-		<value></value>
+		<value>Tilin asetukset</value>
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-		<value></value>
+		<value>Järjestä tunnisteen mukaan</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-		<value></value>
+		<value>Järjestä päivän mukaan</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-		<value></value>
+		<value>Järjestä summan mukaan</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Etsi kuvausta</value>
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-		<value></value>
+		<value>Tilin salasana poistettiin.</value>
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-		<value></value>
+		<value>Tilin salasana vaihdettiin.</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value></value>
+		<value>Ryhmittämätön</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value></value>
+		<value>Tapahtumat ilman ryhmää</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value></value>
+		<value>Tuotu {0} tapahtumaa tiedostosta.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value></value>
+		<value>Tuotu {0} tapahtumaa tiedostosta.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value></value>
+		<value>Tiedostosta ei voitu tuoda tietoja. Tiedostotyyppi ei ole tuettu.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value></value>
+		<value>Tili viety tiedostoon onnistuneesti.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value></value>
+		<value>Tiliä ei voitu viedä tiedostoon.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value></value>
+		<value>Siirrä kohteeseen {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value></value>
+		<value>Siirrä kohteesta {0}</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
-		<value></value>
+		<value>Muokkaa tapahtumaa</value>
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value></value>
+		<value>Poista tapahtuma</value>
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
-		<value></value>
+		<value>Muokkaa ryhmää</value>
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value></value>
+		<value>Poista ryhmä</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value></value>
+		<value>Ryhmä</value>
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
-		<value></value>
+		<value>Tapahtuma</value>
   </data>
   <data name="RepeatInterval.Never" xml:space="preserve">
-		<value></value>
+		<value>Ei koskaan</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value></value>
+		<value>Päivittäin</value>
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
-		<value></value>
+		<value>Viikottain</value>
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value></value>
+		<value>Joka toinen viikko</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value></value>
+		<value>Kuukausittain</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value></value>
+		<value>Neljännesvuosittain</value>
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
-		<value></value>
+		<value>Vuosittain</value>
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value></value>
+		<value>Joka toinen vuosi</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
-		<value></value>
+		<value>Ei loppupäivää</value>
   </data>
   <data name="View" xml:space="preserve">
-		<value></value>
+		<value>Näytä</value>
   </data>
   <data name="Delete" xml:space="preserve">
-		<value></value>
+		<value>Poista</value>
   </data>
   <data name="Upload" xml:space="preserve">
-		<value></value>
+		<value>Lähetä</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
-		<value></value>
+		<value>Tee kopio</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
-		<value></value>
+		<value>(Kopio)</value>
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
-		<value></value>
+		<value>Siirto</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value></value>
+		<value>Rahan siirtäminen luo menotapahtuman annetun määrän mukaisesti tälle tilille, ja tulotapahtuman annetun määrän mukaisesti tilille, jolle rahat siirretään.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value></value>
+		<value>Tiliä ei ole valittu</value>
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita muunnos tähän</value>
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
-		<value></value>
+		<value>Muunnos vaaditaan</value>
   </data>
   <data name="Result" xml:space="preserve">
-		<value></value>
+		<value>Tulos</value>
   </data>
   <!--AccountSettingsDialog-->
   <data name="AccountType.Checking" xml:space="preserve">
-		<value></value>
+		<value>Siirto</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-		<value></value>
+		<value>Säästöt</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
-		<value></value>
+		<value>Yritys</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-		<value></value>
+		<value>Tämä on vain hyödyllinen selite, eikä se vaikuta sovelluksen toimintaan.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
-		<value></value>
+		<value>Järjestelmä ilmoitti, että käyttämäsi valuutta on</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-		<value></value>
+		<value>Vaihda salasana</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-		<value></value>
+		<value>Aseta uusi salasana tai poista salasana.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value></value>
+		<value>Jos salasana häviää, tiliä ei ole mahdollista palauttaa!</value>
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
-		<value></value>
+		<value>Tunniste</value>
   </data>
   <data name="Name.Field" xml:space="preserve">
-		<value></value>
+		<value>Nimi</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita nimi tähän</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value></value>
+		<value>Nimi (tyhjä)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value></value>
+		<value>Nimi (olemassa)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value></value>
+		<value>Kuvaus</value>
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita kuvaus tähän</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value></value>
+		<value>Kuvaus (tyhjä)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value></value>
+		<value>Määrä</value>
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita määrä tähän</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value></value>
+		<value>Määrä (virheellinen)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value></value>
+		<value>Päivä</value>
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value></value>
+		<value>Tyyppi</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value></value>
+		<value>Toistumisväli</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value></value>
+		<value>Toistumisen loppupäivä</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value></value>
+		<value>Tyhjennä loppupäivä</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value></value>
+		<value>Toistumisen loppupäivä (virheellinen)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value></value>
+		<value>Ryhmä</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value></value>
+		<value>Väri</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value></value>
+		<value>Kuitti</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value></value>
+		<value>Kohdetili</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Valitse kohdetili</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value></value>
+		<value>Kohdetili (virheellinen)</value>
   </data>
   <data name="AccountType.Field" xml:space="preserve">
-		<value></value>
+		<value>Tilin tyyppi</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-		<value></value>
+		<value>Tapahtuman oletustyyppi</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
-		<value></value>
+		<value>Käytä mukautettua valuuttaa</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-		<value></value>
+		<value>Valuutan symboli</value>
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita symboli tähän</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-		<value></value>
+		<value>Valuutan symboli (tyhjä)</value>
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
-		<value></value>
+		<value>Valuuttakoodi</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-		<value></value>
+		<value>Valuuttakoodi (tyhjä)</value>
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita koodi tähän</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
-		<value></value>
+		<value>Salasana</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita salasana tähän</value>
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-		<value></value>
+		<value>Uusi salasana</value>
   </data>
   <data name="ConfirmPassword.Field" xml:space="preserve">
-		<value></value>
+		<value>Vahvista salasana</value>
   </data>
   <data name="DestinationPassword.Field" xml:space="preserve">
-		<value></value>
+		<value>Kohdetilin salasana</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-		<value></value>
+		<value>Kohdetilin salasana (pakollinen)</value>
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-		<value></value>
+		<value>Kohdetilin salasana (virheellinen)</value>
   </data>
   <!--PDF-->
   <data name="Generated.PDF" xml:space="preserve">
-		<value></value>
+		<value>Luotu: {0}</value>
   </data>
   <data name="Currency.PDF" xml:space="preserve">
-		<value></value>
+		<value>Valuutta</value>
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
-		<value></value>
+		<value>Ryhmän nimi</value>
   </data>
   <data name="Receipts.PDF" xml:space="preserve">
-		<value></value>
+		<value>Kuitit</value>
   </data>
   <data name="PageNumber.PDF" xml:space="preserve">
-		<value></value>
+		<value>Sivu {0}</value>
   </data>
   <!--PasswordDialog-->
   <data name="EnterPassword" xml:space="preserve">
-		<value></value>
+		<value>Kirjoita salasana kirjautuaksesi:</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value></value>
+		<value>Käyttöliittymä</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-		<value></value>
+		<value>Avaa lukitus</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value></value>
+		<value>Mukauta sovelluksen käyttöliittymää.</value>
   </data>
   <data name="Theme" xml:space="preserve">
-		<value></value>
+		<value>Teema</value>
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value></value>
+		<value>Vaalea</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value></value>
+		<value>Tumma</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value></value>
+		<value>Järjestelmä</value>
   </data>
   <data name="Colors" xml:space="preserve">
-		<value></value>
+		<value>Värit</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value></value>
+		<value>Mukauta Denaron käyttämiä värejä.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value></value>
+		<value>Tapahtuman oletusväri</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value></value>
+		<value>Siirron oletusväri</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value></value>
+		<value>Muutos tähän asetukseen toteutetaan vain uusiin tapahtumiin.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value></value>
+		<value>Muutos tähän asetukseen toteutetaan vain uusiin siirtoihin.</value>
   </data>
   <data name="AccountCheckingColor" xml:space="preserve">
-		<value></value>
+		<value>Siirtotilin väri</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-		<value></value>
+		<value>Säästötilin väri</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-		<value></value>
+		<value>Yritystilin väri</value>
   </data>
   <data name="Locale" xml:space="preserve">
-		<value></value>
+		<value>Maa-asetusto</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-		<value></value>
+		<value>Mukauta miten Denaro käyttää maa-asetustoja.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-		<value></value>
+		<value>Syötä desimaalierotin</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
-		<value></value>
+		<value>Pois</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-		<value></value>
+		<value>Piste ja pilkku</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value></value>
+		<value>Sovellus</value>
   </data>
   <!--WinUI Specific-->
   <data name="Preview.WinUI" xml:space="preserve">
-		<value></value>
+		<value>ESIKATSELU</value>
   </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Korjaa yllä olevat virheet.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Mitä uutta?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Kehittäjät:
+{0}
+
+Suunnittelijat:
+{1}
+
+Grafiikka:
+{2}
+
+Kääntäjät:
+{3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Teeman muuttaminen vaatii, että sovellus käynnistetään uudelleen.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Käynnistetäänkö uudelleen teeman toteuttamiseksi?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Haluatko, että {0} käynnistetään uudelleen, jotta uusi teema tulee voimaan?
+Kaikki tallentamattomat muutokset katoavat.</value>
   </data>
   <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value></value>
+		<value>Salasanat eivät täsmää.</value>
   </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
-		<value></value>
+		<value>Hallitse raha-asioitasi</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-		<value></value>
+		<value>money;finance;wallet;cash;bank;GTK;Nickvision;raha;lompakko;käteinen;pankki;varallisuus;</value>
   </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value></value>
+		<value>Tilivalikko</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value></value>
+		<value>Näytä/piilota sivupalkki</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value></value>
+		<value>Päävalikko</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value></value>
+		<value>Viimeisimmät</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value></value>
+		<value>Sulje tili</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value></value>
+		<value>Rahatili (*.nmoney)</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-		<value></value>
+		<value>Uusi ikkuna</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-		<value></value>
+		<value>Salasana poistetaan, kun tämä ikkuna suljetaan.</value>
   </data>
 </root>
