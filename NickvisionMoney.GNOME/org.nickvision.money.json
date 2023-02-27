@@ -24,9 +24,9 @@
         "--filesystem=home"
     ],
     "cleanup":[
-    "/include",
-    "/lib/pkgconfig",
-    "*.a"
+        "/include",
+        "/lib/pkgconfig",
+        "*.a"
     ],
     "modules" : [
         {
@@ -54,6 +54,7 @@
                 "cargo-sources.json"
             ]
         },
+        "nuget-sources.json",
         {
             "name": "org.nickvision.money",
             "buildsystem": "simple",
@@ -64,8 +65,7 @@
                 {
                     "type": "dir",
                     "path": ".."
-                },
-                "nuget-sources.json"
+                }
             ]
         }
     ]
