@@ -35,6 +35,7 @@ publish PREFIX LIB_DIR=lib: && (_occitan_fix PREFIX LIB_DIR) (_install_extras PR
 
     mkdir -p {{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     dotnet publish -c Release {{project_name}}.GNOME.csproj \
+        $([ -d "./nuget-sources" ] && echo "--source ./nuget-sources") \
         $([ "$RUNTIME" ] && echo "--runtime $RUNTIME") \
         --self-contained false -o {{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     mkdir -p {{PREFIX}}/bin
@@ -66,6 +67,7 @@ publish-self-contained PREFIX LIB_DIR=lib: && (_occitan_fix PREFIX LIB_DIR) (_in
 
     mkdir -p {{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     dotnet publish -c Release {{project_name}}.GNOME.csproj \
+        $([ -d "./nuget-sources" ] && echo "--source ./nuget-sources") \
         $([ "$RUNTIME" ] && echo "--runtime $RUNTIME") \
         --self-contained true -o {{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     mkdir -p {{PREFIX}}/bin
@@ -180,3 +182,15 @@ _translate_meta PREFIX:
         new_contents = "".join(new_contents)
         f.write(new_contents)
     print("Done!")
+
+# Generate sources files for Flatpak
+generate-flatpak-sources: _generate-flatpak-sources-just _generate-flatpak-sources-dotnet
+
+_generate-flatpak-sources-just:
+    # Generating sources for just
+    curl "https://raw.githubusercontent.com/casey/just/baa2dfcc6f180d123672544c5ed1aedc32608228/Cargo.lock" -o /tmp/Cargo.lock
+    flatpak-cargo-generator.py -o cargo-sources.json /tmp/Cargo.lock
+
+_generate-flatpak-sources-dotnet:
+    # Generating sources for dotnet
+    flatpak-dotnet-generator.py nuget-sources.json {{project_name}}.GNOME.csproj

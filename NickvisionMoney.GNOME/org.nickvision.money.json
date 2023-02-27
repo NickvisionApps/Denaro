@@ -10,13 +10,9 @@
     "build-options": {
         "append-path": "/usr/lib/sdk/dotnet7/bin:/usr/lib/sdk/rust-stable/bin",
         "append-ld-library-path": "/usr/lib/sdk/dotnet7/lib",
-        "build-args" : [
-            "--share=network"
-        ],
         "env": {
             "PKG_CONFIG_PATH": "/app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/sdk/dotnet7/lib/pkgconfig",
-            "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "rusttest=debug"
+            "RUST_BACKTRACE" : "1"
         }
     },
     "command" : "/app/bin/org.nickvision.money",
@@ -36,8 +32,13 @@
         {
             "name": "just",
             "buildsystem": "simple",
+            "build-options": {
+            "env": {
+                "CARGO_HOME": "/run/build/just/cargo"
+                }
+            },
             "build-commands": [
-                "cargo build --release",
+                "cargo --offline build --release",
                 "install -Dm755 target/release/just /app/bin/just"
             ],
             "cleanup": [
@@ -49,7 +50,8 @@
                     "url": "https://github.com/casey/just.git",
                     "tag": "1.13.0",
                     "commit": "baa2dfcc6f180d123672544c5ed1aedc32608228"
-                }
+                },
+                "cargo-sources.json"
             ]
         },
         {
@@ -62,7 +64,8 @@
                 {
                     "type": "dir",
                     "path": ".."
-                }
+                },
+                "nuget-sources.json"
             ]
         }
     ]
