@@ -54,18 +54,18 @@
                 "cargo-sources.json"
             ]
         },
-        "nuget-sources.json",
         {
             "name": "org.nickvision.money",
             "buildsystem": "simple",
             "build-commands": [
-                "just NickvisionMoney.GNOME/ publish-self-contained /app"
+                "just NickvisionMoney.GNOME/ publish-flatpak"
             ],
             "sources": [
                 {
                     "type": "dir",
                     "path": ".."
-                }
+                },
+                "nuget-sources.json"
             ]
         }
     ]
