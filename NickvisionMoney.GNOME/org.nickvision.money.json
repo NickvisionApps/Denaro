@@ -61,7 +61,6 @@
                 "just NickvisionMoney.GNOME/ publish-flatpak"
             ],
             "sources": [
-                "nuget-sources.json",
                 {
                     "type": "dir",
                     "path": ".."
