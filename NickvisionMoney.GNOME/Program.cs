@@ -58,17 +58,25 @@ public partial class Program
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
         _application.OnActivate += OnActivate;
         _application.OnOpen += OnOpen;
-        var prefixes = new List<string> {
-            Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
-            Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
-            "/usr"
-        };
-        foreach (var prefix in prefixes)
+        if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
         {
-            if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+            //Load file from program directory, required for `dotnet run`
+            g_resources_register(g_resource_load(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"));
+        }
+        else
+        {
+            var prefixes = new List<string> {
+               Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
+               Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+               "/usr"
+            };
+            foreach (var prefix in prefixes)
             {
-                g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
-                break;
+               if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+               {
+                   g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+                   break;
+               }
             }
         }
     }

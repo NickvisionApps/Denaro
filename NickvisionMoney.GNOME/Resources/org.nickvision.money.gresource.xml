@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/nickvision/money">
-    <file alias="style.css">NickvisionMoney.GNOME/Resources/org.nickvision.money.css</file>
-    <file alias="style-dark.css">NickvisionMoney.GNOME/Resources/org.nickvision.money-dark.css</file>
+    <file alias="style.css">org.nickvision.money.css</file>
+    <file alias="style-dark.css">org.nickvision.money-dark.css</file>
+  </gresource>
+  <gresource prefix="/org/nickvision/money/icons/scalable/status/">
+    <file preprocess="xml-stripblanks">bank-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">big-dot-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">larger-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">money-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">moon-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">sun-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>
   </gresource>
 </gresources>
