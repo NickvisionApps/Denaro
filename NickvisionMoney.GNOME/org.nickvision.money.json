@@ -55,6 +55,18 @@
             ]
         },
         {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.6.0",
+                    "commit": "9adcab2d225fd6435edc85c72a0b67e33880e00b"
+                }
+            ]
+        },        
+        {
             "name": "org.nickvision.money",
             "buildsystem": "simple",
             "build-commands": [
