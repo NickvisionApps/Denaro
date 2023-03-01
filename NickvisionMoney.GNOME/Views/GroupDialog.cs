@@ -5,11 +5,10 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Group
 /// </summary>
-public partial class GroupDialog
+public partial class GroupDialog : Adw.MessageDialog
 {
     private bool _constructing;
     private readonly GroupDialogController _controller;
-    private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpGroup;
     private readonly Adw.EntryRow _rowName;
     private readonly Adw.EntryRow _rowDescription;
@@ -26,16 +25,17 @@ public partial class GroupDialog
         _constructing = true;
         _controller = controller;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Group"], "");
-        _dialog.SetDefaultSize(360, -1);
-        _dialog.SetHideOnClose(true);
-        _dialog.SetModal(true);
-        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
-        _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        _dialog.SetDefaultResponse("ok");
-        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
+        SetTitle(_controller.Localizer["Group"]);
+        SetTransientFor(parentWindow);
+        SetDefaultSize(360, -1);
+        SetHideOnClose(true);
+        SetModal(true);
+        AddResponse("cancel", _controller.Localizer["Cancel"]);
+        SetCloseResponse("cancel");
+        AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        SetDefaultResponse("ok");
+        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Preferences Group
         _grpGroup = Adw.PreferencesGroup.New();
         //Name
@@ -79,35 +79,13 @@ public partial class GroupDialog
         _rowDescription.AddController(_descriptionKeyController);
         _grpGroup.Add(_rowDescription);
         //Layout
-        _dialog.SetExtraChild(_grpGroup);
+        SetExtraChild(_grpGroup);
         //Load Group
         _rowName.SetText(_controller.Group.Name);
         _rowDescription.SetText(_controller.Group.Description);
         Validate();
         _constructing = false;
     }
-
-    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
-    {
-        add
-        {
-            _dialog.OnResponse += value;
-        }
-        remove
-        {
-            _dialog.OnResponse -= value;
-        }
-    }
-
-    /// <summary>
-    /// Shows the dialog
-    /// </summary>
-    public void Show() => _dialog.Show();
-
-    /// <summary>
-    /// Destroys the dialog
-    /// </summary>
-    public void Destroy() => _dialog.Destroy();
 
     /// <summary>
     /// Validates the dialog's input
@@ -119,7 +97,7 @@ public partial class GroupDialog
         _rowName.SetTitle(_controller.Localizer["Name", "Field"]);
         if (checkStatus == GroupCheckStatus.Valid)
         {
-            _dialog.SetResponseEnabled("ok", true);
+            SetResponseEnabled("ok", true);
         }
         else
         {
@@ -133,7 +111,7 @@ public partial class GroupDialog
                 _rowName.AddCssClass("error");
                 _rowName.SetTitle(_controller.Localizer["Name", "Exists"]);
             }
-            _dialog.SetResponseEnabled("ok", false);
+            SetResponseEnabled("ok", false);
         }
     }
 }
