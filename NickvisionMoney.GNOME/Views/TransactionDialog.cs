@@ -10,7 +10,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transaction
 /// </summary>
-public partial class TransactionDialog
+public partial class TransactionDialog : Adw.MessageDialog
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -65,7 +65,6 @@ public partial class TransactionDialog
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
-    private readonly Adw.MessageDialog _dialog;
     private readonly Gtk.Window _parentWindow;
     private readonly Gtk.Box _boxMain;
     private readonly Adw.PreferencesGroup _grpMain;
@@ -114,20 +113,21 @@ public partial class TransactionDialog
         _receiptPath = null;
         _parentWindow = parentWindow;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(_parentWindow, $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}", "");
-        _dialog.SetDefaultSize(420, -1);
-        _dialog.SetHideOnClose(true);
-        _dialog.SetModal(true);
-        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
-        _dialog.SetCloseResponse("cancel");
+        SetTitle($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
+        SetTransientFor(parentWindow);
+        SetDefaultSize(420, -1);
+        SetHideOnClose(true);
+        SetModal(true);
+        AddResponse("cancel", _controller.Localizer["Cancel"]);
+        SetCloseResponse("cancel");
         if (_controller.CanCopy)
         {
-            _dialog.AddResponse("copy", _controller.Localizer["MakeCopy"]);
+            AddResponse("copy", _controller.Localizer["MakeCopy"]);
         }
-        _dialog.AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        _dialog.SetDefaultResponse("ok");
-        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) =>
+        AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        SetDefaultResponse("ok");
+        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        OnResponse += (sender, e) =>
         {
             _controller.Accepted = e.Response != "cancel";
             _controller.CopyRequested = e.Response == "copy";
@@ -319,7 +319,7 @@ public partial class TransactionDialog
         _rowReceipt.AddSuffix(_boxReceiptButtons);
         _grpReceipt.Add(_rowReceipt);
         //Layout
-        _dialog.SetExtraChild(_boxMain);
+        SetExtraChild(_boxMain);
         //Load Transaction
         gtk_calendar_select_day(_calendarDate.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_calendarDate, EventArgs.Empty);
@@ -362,18 +362,6 @@ public partial class TransactionDialog
         _constructing = false;
     }
 
-    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
-    {
-        add
-        {
-            _dialog.OnResponse += value;
-        }
-        remove
-        {
-            _dialog.OnResponse -= value;
-        }
-    }
-
     /// <summary>
     /// Callback for key-pressed signal
     /// </summary>
@@ -393,16 +381,6 @@ public partial class TransactionDialog
         }
         return false;
     }
-
-    /// <summary>
-    /// Shows the dialog
-    /// </summary>
-    public void Show() => _dialog.Show();
-
-    /// <summary>
-    /// Destroys the dialog
-    /// </summary>
-    public void Destroy() => _dialog.Destroy();
 
     /// <summary>
     /// Validates the dialog's input
@@ -429,7 +407,7 @@ public partial class TransactionDialog
         _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
         if (checkStatus == TransactionCheckStatus.Valid)
         {
-            _dialog.SetResponseEnabled("ok", true);
+            SetResponseEnabled("ok", true);
         }
         else
         {
@@ -448,7 +426,7 @@ public partial class TransactionDialog
                 _rowRepeatEndDate.AddCssClass("error");
                 _rowRepeatEndDate.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
             }
-            _dialog.SetResponseEnabled("ok", false);
+            SetResponseEnabled("ok", false);
         }
     }
 

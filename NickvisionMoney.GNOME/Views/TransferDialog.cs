@@ -9,14 +9,13 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transfer
 /// </summary>
-public partial class TransferDialog
+public partial class TransferDialog : Adw.MessageDialog
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
-    private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _grpMain;
     private readonly Gtk.Box _boxButtonsAccount;
     private readonly Gtk.Button _btnSelectAccount;
@@ -46,19 +45,20 @@ public partial class TransferDialog
         _controller = controller;
         _parentWindow = parentWindow;
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
-        _dialog.SetDefaultSize(420, -1);
-        _dialog.SetHideOnClose(true);
-        _dialog.SetModal(true);
-        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
-        _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer["Transfer"]);
-        _dialog.SetDefaultResponse("ok");
-        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
+        SetHeading(_controller.Localizer["Transfer"]);
+        SetBody(_controller.Localizer["TransferDescription"]);
+        SetDefaultSize(420, -1);
+        SetHideOnClose(true);
+        SetModal(true);
+        AddResponse("cancel", _controller.Localizer["Cancel"]);
+        SetCloseResponse("cancel");
+        AddResponse("ok", _controller.Localizer["Transfer"]);
+        SetDefaultResponse("ok");
+        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Main Preferences Group
         _grpMain = Adw.PreferencesGroup.New();
-        _dialog.SetExtraChild(_grpMain);
+        SetExtraChild(_grpMain);
         //Destination Account Row
         _rowDestinationAccount = Adw.ActionRow.New();
         _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
@@ -188,28 +188,6 @@ public partial class TransferDialog
         Validate();
     }
 
-    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
-    {
-        add
-        {
-            _dialog.OnResponse += value;
-        }
-        remove
-        {
-            _dialog.OnResponse -= value;
-        }
-    }
-
-    /// <summary>
-    /// Shows the dialog
-    /// </summary>
-    public void Show() => _dialog.Show();
-
-    /// <summary>
-    /// Destroys the dialog
-    /// </summary>
-    public void Destroy() => _dialog.Destroy();
-
     /// <summary>
     /// Validates the dialog's input
     /// </summary>
@@ -230,7 +208,7 @@ public partial class TransferDialog
         if (checkStatus == TransferCheckStatus.Valid)
         {
             _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
-            _dialog.SetResponseEnabled("ok", true);
+            SetResponseEnabled("ok", true);
         }
         else
         {
@@ -267,7 +245,7 @@ public partial class TransferDialog
                 _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode!);
                 _lblConversionResult.SetText(_controller.Localizer["NotAvailable"]);
             }
-            _dialog.SetResponseEnabled("ok", false);
+            SetResponseEnabled("ok", false);
         }
         if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
         {
