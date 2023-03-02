@@ -82,11 +82,6 @@ public partial class Program
     }
 
     /// <summary>
-    /// Finalizes a Program
-    /// </summary>
-    ~Program() => _mainWindowController.Dispose();
-
-    /// <summary>
     /// Runs the program
     /// </summary>
     /// <returns>Return code from Adw.Application.Run()</returns>
