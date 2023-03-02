@@ -176,7 +176,11 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">AppWindow</param>
     /// <param name="e">AppWindowClosingEventArgs</param>
-    private void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e) => _micaController?.Dispose();
+    private void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e)
+    {
+        _controller.Dispose();
+        _micaController?.Dispose();
+    }
 
     /// <summary>
     /// Occurs when the window's theme is changed

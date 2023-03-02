@@ -99,6 +99,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             AddCssClass("devel");
         }
+        Handle.OnCloseRequest += OnCloseRequested;
         //Register Events
         _controller.NotificationSent += NotificationSent;
         _controller.AccountLoginAsync += AccountLoginAsync;
@@ -356,6 +357,18 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:denaro/import-export", 0);
         }
         _toastOverlay.AddToast(toast);
+    }
+
+    /// <summary>
+    /// Occurs when the window tries to close
+    /// </summary>
+    /// <param name="sender">Gtk.Window</param>
+    /// <param name="e">EventArgs</param>
+    /// <returns>True to stop close, else false</returns>
+    private bool OnCloseRequested(Gtk.Window sender, EventArgs e)
+    {
+        _controller.Dispose();
+        return false;
     }
 
     /// <summary>
