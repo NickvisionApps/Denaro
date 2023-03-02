@@ -99,6 +99,7 @@ clean:
 
 # Command to be used in flatpak manifest
 publish-flatpak: (publish-self-contained "/app") install && clean
+    update-mime-database /app/share/mime/
 
 _install_extras PREFIX: && (_translate_meta PREFIX)
     # Installing icons
@@ -127,6 +128,18 @@ _install_extras PREFIX: && (_translate_meta PREFIX)
     # Installing metainfo
     mkdir -p {{builddir}}{{PREFIX}}/share/metainfo
     cp ./{{app_id}}.metainfo.xml {{builddir}}{{PREFIX}}/share/metainfo/
+
+    # Installing mime types
+    mkdir -p {{builddir}}{{PREFIX}}/share/mime/packages
+    cp ./org.nickvision.money.extension.xml \
+    {{builddir}}{{PREFIX}}/share/mime/packages/
+
+    # Installing user docs
+    for lang in $(ls ../NickvisionMoney.Shared/Docs/yelp); do \
+    mkdir -p {{builddir}}{{PREFIX}}/share/help/$lang/denaro/; \
+    cp -r ../NickvisionMoney.Shared/Docs/yelp/$lang/* \
+    {{builddir}}{{PREFIX}}/share/help/$lang/denaro/; \
+    done
 
 _translate_meta PREFIX:
     #!/usr/bin/env python3
