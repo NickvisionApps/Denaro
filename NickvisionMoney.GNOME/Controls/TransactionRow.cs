@@ -1,3 +1,4 @@
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
@@ -37,14 +38,14 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
-    private readonly Adw.ActionRow _row;
-    private readonly Gtk.Button _btnId;
-    private readonly Gtk.Image _iconCompact;
-    private readonly Gtk.Label _lblAmount;
-    private readonly Gtk.Button _btnEdit;
-    private readonly Gtk.Button _btnDelete;
-    private readonly Gtk.Box _boxButtons;
-    private readonly Gtk.Box _boxSuffix;
+
+    [Gtk.Connect] private readonly Adw.ActionRow _row;
+    [Gtk.Connect] private readonly Gtk.Button _idButton;
+    [Gtk.Connect] private readonly Gtk.Image _compactIcon;
+    [Gtk.Connect] private readonly Gtk.Label _amountLabel;
+    [Gtk.Connect] private readonly Gtk.Button _editButton;
+    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
+    [Gtk.Connect] private readonly Gtk.Box _suffixBox;
 
     /// <summary>
     /// The id of the Transaction
@@ -62,6 +63,20 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
+        private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    {
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
+        _localizer = localizer;
+        _isSmall = false;
+        //Build UI
+        builder.Connect(this);
+        _editButton.OnClicked += Edit;
+        _deleteButton.OnClicked += Delete;
+        //Group Settings
+        UpdateRow(transaction, cultureAmount, cultureDate);
+    }
+
     /// <summary>
     /// Constructs a TransactionRow
     /// </summary>
@@ -69,59 +84,8 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer)
+    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : this(Builder.FromFile("transaction_row.ui", localizer), transaction, cultureAmount, cultureDate, localizer)
     {
-        _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
-        _localizer = localizer;
-        _isSmall = false;
-        //Row Settings
-        _row = Adw.ActionRow.New();
-        _row.SetUseMarkup(false);
-        _row.SetTitleLines(1);
-        _row.SetSubtitleLines(1);
-        _row.SetSizeRequest(300, 78);
-        //Button ID
-        _btnId = Gtk.Button.New();
-        _btnId.SetName("btnId");
-        _btnId.AddCssClass("circular");
-        _btnId.SetValign(Gtk.Align.Center);
-        _iconCompact = Gtk.Image.NewFromIconName("big-dot-symbolic");
-        _iconCompact.SetName("iconCompact");
-        _row.AddPrefix(_btnId);
-        _row.AddPrefix(_iconCompact);
-        //Amount Label
-        _lblAmount = Gtk.Label.New(null);
-        _lblAmount.SetHalign(Gtk.Align.End);
-        _lblAmount.SetValign(Gtk.Align.Center);
-        _lblAmount.SetMarginEnd(6);
-        //Edit Button
-        _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
-        _btnEdit.SetValign(Gtk.Align.Center);
-        _btnEdit.AddCssClass("flat");
-        _btnEdit.SetTooltipText(_localizer["Edit", "TransactionRow"]);
-        _btnEdit.OnClicked += Edit;
-        _row.SetActivatableWidget(_btnEdit);
-        //DeleteButton
-        _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
-        _btnDelete.SetValign(Gtk.Align.Center);
-        _btnDelete.AddCssClass("flat");
-        _btnDelete.SetTooltipText(_localizer["Delete", "TransactionRow"]);
-        _btnDelete.OnClicked += Delete;
-        //Buttons Box
-        _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxButtons.SetHalign(Gtk.Align.End);
-        _boxButtons.Append(_btnEdit);
-        _boxButtons.Append(_btnDelete);
-        //Suffix Box
-        _boxSuffix = Gtk.Box.New(Gtk.Orientation.Horizontal, 2);
-        _boxSuffix.SetValign(Gtk.Align.Center);
-        _boxSuffix.Append(_lblAmount);
-        _boxSuffix.Append(_boxButtons);
-        _row.AddSuffix(_boxSuffix);
-        //Group Settings
-        Add(_row);
-        UpdateRow(transaction, cultureAmount, cultureDate);
     }
 
     /// <summary>
@@ -136,16 +100,16 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
             _isSmall = value;
             if (_isSmall)
             {
-                _boxSuffix.SetOrientation(Gtk.Orientation.Vertical);
-                _boxSuffix.SetMarginTop(4);
+                _suffixBox.SetOrientation(Gtk.Orientation.Vertical);
+                _suffixBox.SetMarginTop(4);
             }
             else
             {
-                _boxSuffix.SetOrientation(Gtk.Orientation.Horizontal);
-                _boxSuffix.SetMarginTop(0);
+                _suffixBox.SetOrientation(Gtk.Orientation.Horizontal);
+                _suffixBox.SetMarginTop(0);
             }
-            _btnId.SetVisible(!_isSmall);
-            _iconCompact.SetVisible(_isSmall);
+            _idButton.SetVisible(!_isSmall);
+            _compactIcon.SetVisible(_isSmall);
         }
     }
 
@@ -170,20 +134,20 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _row.SetTitle(transaction.Description);
         _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
         //Button Id
-        _btnId.SetLabel(transaction.Id.ToString());
+        _idButton.SetLabel(transaction.Id.ToString());
         var btnCssProvider = Gtk.CssProvider.New();
         var btnCss = "#btnId, #iconCompact { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
         gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-        _btnId.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
-        _iconCompact.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        _idButton.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        _compactIcon.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
-        _lblAmount.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
-        _lblAmount.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+        _amountLabel.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
+        _amountLabel.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Buttons Box
-        _btnEdit.SetVisible(transaction.RepeatFrom <= 0);
-        _btnEdit.SetSensitive(transaction.RepeatFrom <= 0);
-        _btnDelete.SetVisible(transaction.RepeatFrom <= 0);
-        _btnDelete.SetSensitive(transaction.RepeatFrom <= 0);
+        _editButton.SetVisible(transaction.RepeatFrom <= 0);
+        _editButton.SetSensitive(transaction.RepeatFrom <= 0);
+        _deleteButton.SetVisible(transaction.RepeatFrom <= 0);
+        _deleteButton.SetSensitive(transaction.RepeatFrom <= 0);
     }
 
     public void Show() => Container!.Show();
