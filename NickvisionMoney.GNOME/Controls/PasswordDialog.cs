@@ -1,3 +1,4 @@
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ public enum PasswordDialogResponse
 /// <summary>
 /// A dialog for receiving a password
 /// </summary>
-public partial class PasswordDialog
+public partial class PasswordDialog : Adw.MessageDialog
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
@@ -24,9 +25,7 @@ public partial class PasswordDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
-    private readonly Adw.MessageDialog _dialog;
-    private readonly Adw.StatusPage _statusPassword;
-    private readonly Adw.PasswordEntryRow _passwordEntry;
+    [Gtk.Connect] private readonly Adw.PasswordEntryRow _passwordEntry;
     private PasswordDialogResponse _response;
 
     /// <summary>
@@ -34,49 +33,29 @@ public partial class PasswordDialog
     /// </summary>
     public string Password => _passwordEntry.GetText();
 
+    private PasswordDialog(Gtk.Builder builder, Gtk.Window parent, string accountTitle, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    {
+        builder.Connect(this);
+        //Dialog Settings
+        SetTransientFor(parent);
+        _response = PasswordDialogResponse.Cancel;
+        AddResponse("cancel", localizer["Cancel"]);
+        AddResponse("suggested", localizer["Unlock"]);
+        SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);
+        SetCloseResponse("cancel");
+        SetDefaultResponse("suggested");
+        OnResponse += (sender, e) => SetResponse(e.Response);
+    }
+
+
     /// <summary>
     /// Constructs a MessageDialog
     /// </summary>
     /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="accountTitle">The title of the account requiring the password</param>
     /// <param name="localizer">The localizer for the app</param>
-    public PasswordDialog(Gtk.Window parentWindow, string accountTitle, Localizer localizer)
+    public PasswordDialog(Gtk.Window parent, string accountTitle, Localizer localizer) : this(Builder.FromFile("password_dialog.ui", localizer), parent, accountTitle, localizer)
     {
-        //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, "", "");
-        _dialog.SetDefaultSize(500, -1);
-        _dialog.SetHideOnClose(true);
-        _response = PasswordDialogResponse.Cancel;
-        _dialog.AddResponse("cancel", localizer["Cancel"]);
-        _dialog.AddResponse("suggested", localizer["Unlock"]);
-        _dialog.SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);
-        _dialog.SetCloseResponse("cancel");
-        _dialog.SetDefaultResponse("suggested");
-        _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
-        //Password Page
-        _statusPassword = Adw.StatusPage.New();
-        _statusPassword.SetTitle(localizer["EnterPassword"]);
-        _statusPassword.SetDescription(accountTitle);
-        _statusPassword.SetIconName("dialog-password-symbolic");
-        _dialog.SetExtraChild(_statusPassword);
-        //Password Entry
-        _passwordEntry = Adw.PasswordEntryRow.New();
-        _passwordEntry.AddCssClass("card");
-        _passwordEntry.SetActivatesDefault(true);
-        _passwordEntry.SetTitle(localizer["Password", "Field"]);
-        _statusPassword.SetChild(_passwordEntry);
-    }
-
-    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
-    {
-        add
-        {
-            _dialog.OnResponse += value;
-        }
-        remove
-        {
-            _dialog.OnResponse -= value;
-        }
     }
 
     /// <summary>
@@ -84,8 +63,8 @@ public partial class PasswordDialog
     /// </summary>
     public async Task<string?> RunAsync()
     {
-        _dialog.Show();
-        while (_dialog.GetVisible())
+        Show();
+        while (GetVisible())
         {
             g_main_context_iteration(g_main_context_default(), false);
             await Task.Delay(50);
@@ -95,7 +74,7 @@ public partial class PasswordDialog
         {
             password = _passwordEntry.GetText();
         }
-        _dialog.Destroy();
+        Destroy();
         return password;
     }
 
