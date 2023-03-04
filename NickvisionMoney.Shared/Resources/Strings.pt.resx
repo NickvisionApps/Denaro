@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Tradutores no Weblate ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -94,7 +94,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value>Preferências</value>
+    <value>Configurações</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
 		<value>Atalhos do Teclado</value>
@@ -267,7 +267,11 @@ Esta ação não pode ser desfeita.</value>
 		<value>Apagar Transação</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Esta transação é a origem de transações repetidas.
+O que você gostaria de fazer com as transações repetidas?
+
+Excluir somente a transação de origem permitirá
+modificar as transações geradas.</value>
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
 		<value>Apagar Apenas Origem</value>
@@ -279,13 +283,17 @@ Esta ação não pode ser desfeita.</value>
 		<value>Atualizar Transação</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Esta transação é a origem de transações repetidas.
+O que você gostaria de fazer com as transações repetidas?
+
+Atualizar somente a transação de origem desassociará
+as transações geradas da de origem.</value>
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
 		<value>Atualizar Apenas Origem</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Atualizar as de origem e as geradas</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
 		<value>Intervalo de Repetição Alterado</value>
@@ -408,156 +416,167 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Transferir</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value />
+		<value>Transferir dinheiro criará uma transação de gasto com o valor fornecido nessa conta e uma transação de renda com o valor fornecido na conta para a qual transferir.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value />
+		<value>Nenhuma conta selecionada</value>
   </data>
   <!--Fields-->
   <data name="Name.Field" xml:space="preserve">
 		<value />
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value />
+		<value>Insira o nome aqui</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value />
+		<value>Nome (vazio)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value />
+		<value>Nome (existe)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value />
+		<value>Descrição</value>
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value />
+		<value>Insira a descrição aqui</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value />
+		<value>Descrição (vazia)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value />
+		<value>Valor</value>
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Insira o valor aqui</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value />
+		<value>Valor (inválido)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value />
+		<value>Data</value>
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value />
+		<value>Tipo</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value />
+		<value>Intervalo de recorrência</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value />
+		<value>Data final da recorrência</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value />
+		<value>Limpar data final</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value />
+		<value>Data final da recorrência (inválida)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value />
+		<value>Grupo</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value />
+		<value>Cor</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value />
+		<value>Recibo</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value />
+		<value>Conta de destino</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Selecione uma conta de destino</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value />
+		<value>Conta de destino (inválida)</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value />
+		<value>Interface de usuário</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value />
+		<value>Customizar a interface da aplicação.</value>
   </data>
   <data name="Theme" xml:space="preserve">
-		<value />
+		<value>Tema</value>
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value />
+		<value>Claro</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value />
+		<value>Escuro</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value />
+		<value>Sistema</value>
   </data>
   <data name="Colors" xml:space="preserve">
-		<value />
+		<value>Cores</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value />
+		<value>Customize as cores usadas no Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value />
+		<value>Cor padrão de transações</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value />
+		<value>Cor padrão de transferências</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value />
+		<value>Alterações nessa configuração serão aplicadas somente em novas transações.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value />
+		<value>Alterações nessa configuração serão aplicadas somente em novas transferências.</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value />
+		<value>Aplicação</value>
   </data>
   <!--WinUI Specific-->
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
+		<value>Por favor, corrija os erros acima.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>O que há de novo?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Desenvolvedores:
+{0}
+
+Designers:
+{1}
+
+Artistas:
+{2}
+
+Tradutores:
+{3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Reinicie o aplicativo para mudar o tema.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Reiniciar para aplicar o tema?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Gostaria de reiniciar {0} para aplicar o novo tema?
+Qualquer trabalho não salvo será perdido.</value>
   </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Menu de contas</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value />
+		<value>Alternar barra lateral</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Menu principal</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value />
+		<value>Recente</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value />
+		<value>Fechar conta</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value />
+		<value>Conta Denaro (*.nmoney)</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Ajuda</value>
