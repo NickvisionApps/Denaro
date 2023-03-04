@@ -21,6 +21,8 @@ public partial class GroupDialog : Adw.MessageDialog
     {
         _constructing = true;
         _controller = controller;
+        //Build UI
+        builder.Connect(this);
         //Dialog Settings
         SetTransientFor(parent);
         AddResponse("cancel", _controller.Localizer["Cancel"]);
