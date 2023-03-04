@@ -1,4 +1,5 @@
 using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
@@ -544,8 +545,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
-        var shortcutsDialog = new ShortcutsDialog(_controller.Localizer, this);
-        shortcutsDialog.Show();
+        var builder = Builder.FromFile("shortcuts_dialog.ui", _controller.Localizer);
+        var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_root");
+        shortcutsWindow.SetTransientFor(this);
+        shortcutsWindow.Show();
     }
 
     /// <summary>
