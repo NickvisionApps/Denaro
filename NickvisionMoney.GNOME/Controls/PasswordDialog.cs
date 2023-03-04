@@ -25,6 +25,7 @@ public partial class PasswordDialog : Adw.MessageDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
+    [Gtk.Connect] private readonly Adw.StatusPage _statusPage;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _passwordEntry;
     private PasswordDialogResponse _response;
 
@@ -45,6 +46,7 @@ public partial class PasswordDialog : Adw.MessageDialog
         SetCloseResponse("cancel");
         SetDefaultResponse("suggested");
         OnResponse += (sender, e) => SetResponse(e.Response);
+        _statusPage.SetDescription(accountTitle);
     }
 
 
