@@ -1,0 +1,47 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ActionRow _root {
+  use-markup: false;
+  title-lines: 1;
+  subtitle-lines: 2;
+  activatable-widget: _editButton;
+  
+  [prefix]
+  Gtk.CheckButton _filterCheckButton {
+    valign: center;
+    
+    styles ["selection-mode"]
+  }
+  
+  [suffix]
+  Gtk.FlowBox _flowBox {
+    orientation: vertical;
+    selection-mode: none;
+    
+    Gtk.Label _amountLabel {
+      valign: center;
+      margin-end: 6;
+    }
+    
+    Gtk.Box {
+      halign: end;
+      
+      Gtk.Button _editButton {
+        icon-name: "document-edit-symbolic";
+        valign: center;
+        tooltip-text: _("Edit.GroupRow");
+        
+        styles ["flat"]
+      }
+      
+      Gtk.Button _deleteButton {
+        icon-name: "user-trash-symbolic";
+        valign: center;
+        tooltip-text: _("Delete.GroupRow");
+        
+        styles ["flat"]
+      }
+    }
+  }
+}
