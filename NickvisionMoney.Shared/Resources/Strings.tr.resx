@@ -54,7 +54,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>Weblate'teki Çevirmenler ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -101,7 +101,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Para Hesabı</value>
+		<value>Nickvision Denaro Hesabı</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
 		<value>Yeni Hesap</value>
@@ -110,7 +110,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Yeni Hesap (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value />
+		<value>Açılmış bir hesabın üzerine yazılamıyor.</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
 		<value>Hesap Aç</value>
@@ -119,7 +119,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Hesap Aç (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value />
+		<value>Hesap Açılmadı</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
 		<value />
