@@ -122,8 +122,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Aucun compte ouvert</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Créez ou ouvrez un compte pour commencer.
-Vous pouvez également faire glisser un fichier dans l’application depuis votre navigateur de fichiers.</value>
+		<value>Créez ou ouvrez un compte pour commencer. Vous pouvez également faire glisser un fichier dans l’application depuis votre navigateur de fichiers.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
 		<value>Comptes récents</value>
