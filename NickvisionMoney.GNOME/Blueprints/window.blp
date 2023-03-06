@@ -1,0 +1,187 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu mainMenu {
+  item(_("Preferences"), "win.preferences")
+  item(_("KeyboardShortcuts"), "win.keyboardShortcuts")
+  item(_("Help"), "win.help")
+  item(_("About"), "win.about")
+}
+
+Adw.ApplicationWindow _root {
+  default-width: 900;
+  default-height: 720;
+  width-request: 360;
+  
+  Gtk.Box {
+    orientation: vertical;
+    
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle _windowTitle {};
+      
+      [start]
+      Gtk.MenuButton _accountMenuButton {
+        icon-name: "bank-symbolic";
+        tooltip-text: _("AccountMenu.GTK");
+        visible: false;
+        popover: Gtk.Popover _accountPopover {
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 10;
+            margin-start: 5;
+            margin-end: 5;
+            margin-top: 5;
+            margin-bottom: 5;
+            
+            Adw.PreferencesGroup _recentAccountsGroup {
+              title: _("Recents.GTK");
+              width-request: 200;
+              height-request: 55;
+              header-suffix: Gtk.Box {
+                orientation: horizontal;
+                halign: center;
+                valign: center;
+                
+                Gtk.Button {
+                  tooltip-text: _("NewAccount.Tooltip");
+                  action-name: "win.newAccount";
+                  
+                  Adw.ButtonContent {
+                    label: _("New");
+                    icon-name: "document-new-symbolic";
+                  }
+                
+                  styles ["suggested-action"]
+                }
+                
+                Gtk.Button {
+                  icon-name: "document-open-symbolic";
+                  tooltip-text: _("OpenAccount.Tooltip");
+                  action-name: "win.openAccount";
+                }
+                
+                styles ["linked"]
+              };
+            }
+          }
+        };
+      }
+      
+      [start]
+      Gtk.ToggleButton _flapToggleButton {
+        icon-name: "sidebar-show-symbolic";
+        tooltip-text: _("ToggleSidebar.GTK");
+        active: true;
+        visible: false;
+      }
+      
+      [end]
+      Gtk.MenuButton {
+        direction: none;
+        menu-model: mainMenu;
+        tooltip-text: _("MainMenu.GTK");
+        primary: true;
+      }
+    }
+    
+    Adw.ToastOverlay _toastOverlay {
+      hexpand: true;
+      vexpand: true;
+      
+      Adw.ViewStack _viewStack {
+        Adw.ViewStackPage {
+          name:"pageNoAccounts";
+          child: Gtk.ScrolledWindow {
+            Adw.Clamp {
+              maximum-size: 420;
+              valign: center;
+              margin-start: 12;
+              margin-end: 12;
+              margin-top: 12;
+              margin-bottom: 12;
+              
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 12;
+                hexpand: true;
+                halign: fill;
+                
+                Adw.ButtonContent _greeting {
+                  halign: center;
+                  margin-top: 24;
+                  margin-bottom: 14;
+                }
+                
+                Gtk.Label _dragLabel {
+                  label: _("NoAccountDescription");
+                  wrap: true;
+                  justify: center;
+                  visible: bind _startPageRecentAccountsGroup.visible inverted;
+                  
+                  styles ["dim-label"]
+                }
+                
+                Adw.PreferencesGroup _startPageRecentAccountsGroup {
+                  title: _("RecentAccounts");
+                  width-request: 200;
+                  height-request: 55;
+                  margin-top: 24;
+                  margin-bottom: 24;
+                  visible: false;
+                }
+                
+                Gtk.FlowBox {
+                  margin-bottom: 12;
+                  column-spacing: 4;
+                  row-spacing: 4;
+                  max-children-per-line: 2;
+                  homogeneous: true;
+                  hexpand: true;
+                  halign: fill;
+                  selection-mode: none;
+                  
+                  Gtk.FlowBoxChild {
+                    focusable: false;
+                    
+                    Gtk.Button _newAccountButton {
+                      label: _("NewAccount");
+                      action-name: "win.newAccount";
+                      halign: center;
+                      
+                      styles ["pill", "suggested-action"]
+                    }
+                  }
+                  
+                  Gtk.FlowBoxChild {
+                    focusable: false;
+                    
+                    Gtk.Button _openAccountButton {
+                      label: _("OpenAccount");
+                      action-name: "win.openAccount";
+                      halign: center;
+                      
+                      styles ["pill"]
+                    }
+                  }
+                }
+              }  
+            }
+          };
+        }
+        
+        Adw.ViewStackPage {
+          name: "pageTabs";
+          child: Gtk.Box {
+            orientation: vertical;
+            
+            Adw.TabBar {
+              view: _tabView;
+            }
+            
+            Adw.TabView _tabView {}
+          };
+        }
+      }
+    }
+  }
+}
