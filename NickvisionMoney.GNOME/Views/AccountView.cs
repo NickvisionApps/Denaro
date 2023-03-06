@@ -1,4 +1,5 @@
 ﻿using NickvisionMoney.GNOME.Controls;
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
@@ -15,7 +16,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// The AccountView for the application
 /// </summary>
-public partial class AccountView
+public partial class AccountView : Adw.Bin
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -57,64 +58,42 @@ public partial class AccountView
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
-    private readonly Adw.Flap _flap;
-    private readonly Gtk.ScrolledWindow _scrollPane;
-    private readonly Gtk.Box _paneBox;
-    private readonly Gtk.SearchEntry _txtSearchDescription;
-    private readonly Gtk.Label _lblTotal;
-    private readonly Adw.ActionRow _rowTotal;
-    private readonly Gtk.Label _lblIncome;
-    private readonly Gtk.CheckButton _chkIncome;
-    private readonly Adw.ActionRow _rowIncome;
-    private readonly Gtk.Label _lblExpense;
-    private readonly Gtk.CheckButton _chkExpense;
-    private readonly Adw.ActionRow _rowExpense;
-    private readonly Gtk.Box _boxButtonsOverview;
-    private readonly Gtk.MenuButton _btnMenuAccountActions;
-    private readonly Adw.ButtonContent _btnMenuAccountActionsContent;
-    private readonly Gtk.Button _btnResetOverviewFilter;
-    private readonly Adw.PreferencesGroup _grpOverview;
-    private readonly Gtk.Box _boxButtonsGroups;
-    private readonly Gtk.ToggleButton _btnToggleGroups;
-    private readonly Adw.ButtonContent _btnToggleGroupsContent;
-    private readonly Gtk.Button _btnNewGroup;
-    private readonly Adw.ButtonContent _btnNewGroupContent;
-    private readonly Gtk.Button _btnResetGroupsFilter;
-    private readonly Adw.PreferencesGroup _grpGroups;
-    private readonly Gtk.ListBox _listGroups;
-    private readonly Gtk.Calendar _calendar;
-    private readonly Gtk.Button _btnResetCalendarFilter;
-    private readonly Gtk.DropDown _ddStartYear;
-    private readonly Gtk.DropDown _ddStartMonth;
-    private readonly Gtk.DropDown _ddStartDay;
-    private readonly Gtk.DropDown _ddEndYear;
-    private readonly Gtk.DropDown _ddEndMonth;
-    private readonly Gtk.DropDown _ddEndDay;
-    private readonly Gtk.Box _boxStartRange;
-    private readonly Gtk.Box _boxEndRange;
-    private readonly Adw.ActionRow _rowStartRange;
-    private readonly Adw.ActionRow _rowEndRange;
-    private readonly Adw.PreferencesGroup _grpRange;
-    private readonly Adw.ExpanderRow _expRange;
-    private readonly Adw.PreferencesGroup _grpCalendar;
-    private readonly Gtk.Button _btnNewTransaction;
-    private readonly Adw.ButtonContent _btnNewTransactionContent;
-    private readonly Gtk.DropDown _ddSortTransactionBy;
-    private readonly Gtk.ToggleButton _btnSortFirstToLast;
-    private readonly Gtk.ToggleButton _btnSortLastToFirst;
-    private readonly Gtk.Box _boxSortButtons;
-    private readonly Gtk.Box _boxSort;
-    private readonly Adw.PreferencesGroup _grpTransactions;
-    private readonly Gtk.Box _boxTransactionsHeader;
-    private readonly Gtk.FlowBox _flowBox;
-    private readonly Gtk.ScrolledWindow _scrollTransactions;
-    private readonly Gtk.Adjustment _scrollTransactionsAdjustment;
-    private readonly Adw.StatusPage _statusPageNoTransactions;
-    private readonly Gtk.Box _boxMain;
-    private readonly Adw.Bin _binSpinner;
-    private readonly Gtk.Spinner _spinner;
-    private readonly Gtk.Overlay _overlayLoading;
-    private readonly Gtk.Overlay _overlayMain;
+
+    [Gtk.Connect] private readonly Adw.Flap _flap;
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
+    [Gtk.Connect] private readonly Gtk.SearchEntry _searchDescriptionEntry;
+    [Gtk.Connect] private readonly Gtk.Label _totalLabel;
+    [Gtk.Connect] private readonly Gtk.Label _incomeLabel;
+    [Gtk.Connect] private readonly Gtk.CheckButton _incomeCheck;
+    [Gtk.Connect] private readonly Gtk.Label _expenseLabel;
+    [Gtk.Connect] private readonly Gtk.CheckButton _expenseCheck;
+    [Gtk.Connect] private readonly Gtk.Button _resetOverviewFilterButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _toggleGroupsButton;
+    [Gtk.Connect] private readonly Adw.ButtonContent _toggleGroupsButtonContent;
+    [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
+    [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
+    [Gtk.Connect] private readonly Gtk.Calendar _calendar;
+    [Gtk.Connect] private readonly Gtk.Button _resetCalendarFilterButton;
+    [Gtk.Connect] private readonly Gtk.DropDown _startYearDropDown;
+    [Gtk.Connect] private readonly Gtk.DropDown _startMonthDropDown;
+    [Gtk.Connect] private readonly Gtk.DropDown _startDayDropDown;
+    [Gtk.Connect] private readonly Gtk.DropDown _endYearDropDown;
+    [Gtk.Connect] private readonly Gtk.DropDown _endMonthDropDown;
+    [Gtk.Connect] private readonly Gtk.DropDown _endDayDropDown;
+    [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
+    [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _transactionsGroup;
+    [Gtk.Connect] private readonly Gtk.Box _transactionsHeaderBox;
+    [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _transactionsScroll;
+    [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
+    [Gtk.Connect] private readonly Adw.Bin _spinnerBin;
+    [Gtk.Connect] private readonly Gtk.Spinner _spinner;
+    [Gtk.Connect] private readonly Gtk.Overlay _mainOverlay;
+
+    private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
 
@@ -123,15 +102,7 @@ public partial class AccountView
     /// </summary>
     public Adw.TabPage Page { get; init; }
 
-    /// <summary>
-    /// Constructs an AccountView
-    /// </summary>
-    /// <param name="controller">AccountViewController</param>
-    /// <param name="parentWindow">MainWindow</param>
-    /// <param name="parentTabView">Adw.TabView</param>
-    /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle)
+    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
         _parentWindow = parentWindow;
@@ -145,152 +116,32 @@ public partial class AccountView
         _controller.UICreateTransactionRow = CreateTransactionRow;
         _controller.UIMoveTransactionRow = MoveTransactionRow;
         _controller.UIDeleteTransactionRow = DeleteTransactionRow;
-        //Flap
-        _flap = Adw.Flap.New();
+        //Build UI
+        builder.Connect(this);
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
-        //Left Pane
-        _scrollPane = Gtk.ScrolledWindow.New();
-        _scrollPane.AddCssClass("background");
-        _scrollPane.SetSizeRequest(360, -1);
-        _flap.SetFlap(_scrollPane);
-        //Pane Box
-        _paneBox = Gtk.Box.New(Gtk.Orientation.Vertical, 10);
-        _paneBox.SetHexpand(false);
-        _paneBox.SetVexpand(true);
-        _paneBox.SetMarginTop(10);
-        _paneBox.SetMarginStart(10);
-        _paneBox.SetMarginEnd(10);
-        _paneBox.SetMarginBottom(10);
-        _scrollPane.SetChild(_paneBox);
         //Search Description Text
-        _txtSearchDescription = Gtk.SearchEntry.New();
-        _txtSearchDescription.SetProperty("placeholder-text", GObject.Value.From(_controller.Localizer["SearchDescription", "Placeholder"]));
-        _txtSearchDescription.OnSearchChanged += (sender, e) => _controller.SearchDescription = _txtSearchDescription.GetText();
-        _paneBox.Append(_txtSearchDescription);
-        //Account Total
-        _lblTotal = Gtk.Label.New("");
-        _lblTotal.SetValign(Gtk.Align.Center);
-        _lblTotal.AddCssClass("denaro-total");
-        _rowTotal = Adw.ActionRow.New();
-        _rowTotal.SetTitle(_controller.Localizer["Total"]);
-        _rowTotal.AddSuffix(_lblTotal);
+        _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
-        _lblIncome = Gtk.Label.New("");
-        _lblIncome.SetValign(Gtk.Align.Center);
-        _lblIncome.AddCssClass("denaro-income");
-        _chkIncome = Gtk.CheckButton.New();
-        _chkIncome.SetActive(true);
-        _chkIncome.AddCssClass("selection-mode");
-        _chkIncome.SetValign(Gtk.Align.Center);
-        _chkIncome.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _chkIncome.GetActive());
-        _rowIncome = Adw.ActionRow.New();
-        _rowIncome.SetTitle(_controller.Localizer["Income"]);
-        _rowIncome.AddPrefix(_chkIncome);
-        _rowIncome.AddSuffix(_lblIncome);
+        _incomeCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _incomeCheck.GetActive());
         //Account Expense
-        _lblExpense = Gtk.Label.New("");
-        _lblExpense.SetValign(Gtk.Align.Center);
-        _lblExpense.AddCssClass("denaro-expense");
-        _chkExpense = Gtk.CheckButton.New();
-        _chkExpense.SetActive(true);
-        _chkExpense.AddCssClass("selection-mode");
-        _chkExpense.SetValign(Gtk.Align.Center);
-        _chkExpense.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _chkExpense.GetActive());
-        _rowExpense = Adw.ActionRow.New();
-        _rowExpense.SetTitle(_controller.Localizer["Expense"]);
-        _rowExpense.AddPrefix(_chkExpense);
-        _rowExpense.AddSuffix(_lblExpense);
-        //Overview Buttons Box
-        _boxButtonsOverview = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        //Button Menu Account Actions
-        _btnMenuAccountActions = Gtk.MenuButton.New();
-        _btnMenuAccountActions.AddCssClass("flat");
-        _btnMenuAccountActionsContent = Adw.ButtonContent.New();
-        _btnMenuAccountActionsContent.SetIconName("document-properties-symbolic");
-        _btnMenuAccountActionsContent.SetLabel(_controller.Localizer["AccountActions"]);
-        _btnMenuAccountActions.SetChild(_btnMenuAccountActionsContent);
-        var menuActionsExport = Gio.Menu.New();
-        menuActionsExport.Append("CSV", "account.exportToCSV");
-        menuActionsExport.Append("PDF", "account.exportToPDF");
-        var menuActionsExportImport = Gio.Menu.New();
-        menuActionsExportImport.AppendSubmenu(_controller.Localizer["ExportToFile"], menuActionsExport);
-        menuActionsExportImport.Append(_controller.Localizer["ImportFromFile"], "account.importFromFile");
-        var menuActionsAccount = Gio.Menu.New();
-        menuActionsAccount.Append(_controller.Localizer["AccountSettings"], "account.accountSettings");
-        var menuActions = Gio.Menu.New();
-        menuActions.Append(_controller.Localizer["TransferMoney"], "account.transferMoney");
-        menuActions.AppendSection(null, menuActionsExportImport);
-        menuActions.AppendSection(null, menuActionsAccount);
-        _btnMenuAccountActions.SetMenuModel(menuActions);
-        _boxButtonsOverview.Append(_btnMenuAccountActions);
+        _expenseCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _expenseCheck.GetActive());
         //Button Reset Overview Filter
-        _btnResetOverviewFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
-        _btnResetOverviewFilter.AddCssClass("flat");
-        _btnResetOverviewFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Overview"]);
-        _btnResetOverviewFilter.OnClicked += OnResetOverviewFilter;
-        _boxButtonsOverview.Append(_btnResetOverviewFilter);
-        //Overview Group
-        _grpOverview = Adw.PreferencesGroup.New();
-        _grpOverview.SetTitle(_controller.Localizer["Overview", "Today"]);
-        _grpOverview.Add(_rowTotal);
-        _grpOverview.Add(_rowIncome);
-        _grpOverview.Add(_rowExpense);
-        _grpOverview.SetHeaderSuffix(_boxButtonsOverview);
-        _paneBox.Append(_grpOverview);
-        //Group Buttons Box
-        _boxButtonsGroups = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+        _resetOverviewFilterButton.OnClicked += OnResetOverviewFilter;
         //Button Toggle Groups
-        _btnToggleGroups = Gtk.ToggleButton.New();
-        _btnToggleGroups.AddCssClass("flat");
-        _btnToggleGroups.SetTooltipText(_controller.Localizer["ToggleGroups", "Tooltip"]);
-        _btnToggleGroups.SetActive(!_controller.ShowGroupsList);
-        _btnToggleGroups.OnToggled += OnToggleGroups;
-        _btnToggleGroupsContent = Adw.ButtonContent.New();
-        _btnToggleGroups.SetChild(_btnToggleGroupsContent);
-        _boxButtonsGroups.Append(_btnToggleGroups);
-        //Button New Group
-        _btnNewGroup = Gtk.Button.New();
-        _btnNewGroup.AddCssClass("flat");
-        _btnNewGroupContent = Adw.ButtonContent.New();
-        _btnNewGroupContent.SetIconName("list-add-symbolic");
-        _btnNewGroupContent.SetLabel(_controller.Localizer["New"]);
-        _btnNewGroup.SetChild(_btnNewGroupContent);
-        _btnNewGroup.SetTooltipText(_controller.Localizer["NewGroup", "Tooltip"]);
-        _btnNewGroup.SetDetailedActionName("account.newGroup");
-        _boxButtonsGroups.Append(_btnNewGroup);
+        _toggleGroupsButton.OnToggled += OnToggleGroups;
         //Button Reset Groups Filter
-        _btnResetGroupsFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
-        _btnResetGroupsFilter.AddCssClass("flat");
-        _btnResetGroupsFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Groups"]);
-        _btnResetGroupsFilter.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
-        _boxButtonsGroups.Append(_btnResetGroupsFilter);
-        //Groups Group
-        _listGroups = Gtk.ListBox.New();
-        _listGroups.AddCssClass("boxed-list");
-        _grpGroups = Adw.PreferencesGroup.New();
-        _grpGroups.SetTitle(_controller.Localizer["Groups"]);
-        _grpGroups.SetHeaderSuffix(_boxButtonsGroups);
-        _grpGroups.Add(_listGroups);
-        _paneBox.Append(_grpGroups);
+        _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         //Calendar Widget
-        _calendar = Gtk.Calendar.New();
-        _calendar.SetName("calendarAccount");
-        _calendar.AddCssClass("card");
         _calendar.OnPrevMonth += OnCalendarMonthYearChanged;
         _calendar.OnPrevYear += OnCalendarMonthYearChanged;
         _calendar.OnNextMonth += OnCalendarMonthYearChanged;
         _calendar.OnNextYear += OnCalendarMonthYearChanged;
         _calendar.OnDaySelected += OnCalendarSelectedDateChanged;
         //Button Reset Calendar Filter
-        _btnResetCalendarFilter = Gtk.Button.NewFromIconName("larger-brush-symbolic");
-        _btnResetCalendarFilter.AddCssClass("flat");
-        _btnResetCalendarFilter.SetTooltipText(_controller.Localizer["ResetFilters", "Dates"]);
-        _btnResetCalendarFilter.OnClicked += OnResetCalendarFilter;
+        _resetCalendarFilterButton.OnClicked += OnResetCalendarFilter;
         //Start Range DropDowns
-        _ddStartYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
-        _ddStartYear.SetValign(Gtk.Align.Center);
-        _ddStartYear.SetShowArrow(false);
-        _ddStartYear.OnNotify += (sender, e) =>
+        _startYearDropDown.SetModel(Gtk.StringList.New(new string[1] { "" }));
+        _startYearDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
@@ -298,20 +149,16 @@ public partial class AccountView
             }
         };
         var dtFormatInfo = new DateTimeFormatInfo();
-        _ddStartMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
-        _ddStartMonth.SetValign(Gtk.Align.Center);
-        _ddStartMonth.SetShowArrow(false);
-        _ddStartMonth.OnNotify += (sender, e) =>
+        _startMonthDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray()));
+        _startMonthDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeStartMonthChanged();
             }
         };
-        _ddStartDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
-        _ddStartDay.SetValign(Gtk.Align.Center);
-        _ddStartDay.SetShowArrow(false);
-        _ddStartDay.OnNotify += (sender, e) =>
+        _startDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray()));
+        _startDayDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
@@ -319,200 +166,66 @@ public partial class AccountView
             }
         };
         //End Range DropDowns
-        _ddEndYear = Gtk.DropDown.NewFromStrings(new string[1] { "" });
-        _ddEndYear.SetValign(Gtk.Align.Center);
-        _ddEndYear.SetShowArrow(false);
-        _ddEndYear.OnNotify += (sender, e) =>
+        _endYearDropDown.SetModel(Gtk.StringList.New(new string[1] { "" }));
+        _endYearDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndYearChanged();
             }
         };
-        _ddEndMonth = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray());
-        _ddEndMonth.SetValign(Gtk.Align.Center);
-        _ddEndMonth.SetShowArrow(false);
-        _ddEndMonth.OnNotify += (sender, e) =>
+        _endMonthDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray()));
+        _endMonthDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndMonthChanged();
             }
         };
-        _ddEndDay = Gtk.DropDown.NewFromStrings(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray());
-        _ddEndDay.SetValign(Gtk.Align.Center);
-        _ddEndDay.SetShowArrow(false);
-        _ddEndDay.OnNotify += (sender, e) =>
+        _endDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 31).Select(x => x.ToString()).ToArray()));
+        _endDayDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 OnDateRangeEndDayChanged();
             }
         };
-        //Start Range Boxes
-        _boxStartRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxStartRange.Append(_ddStartYear);
-        _boxStartRange.Append(_ddStartMonth);
-        _boxStartRange.Append(_ddStartDay);
-        //End Range Boxes
-        _boxEndRange = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxEndRange.Append(_ddEndYear);
-        _boxEndRange.Append(_ddEndMonth);
-        _boxEndRange.Append(_ddEndDay);
-        //Start Range Row
-        _rowStartRange = Adw.ActionRow.New();
-        _rowStartRange.SetTitle(controller.Localizer["Start", "DateRange"]);
-        _rowStartRange.AddSuffix(_boxStartRange);
-        //End Range Row
-        _rowEndRange = Adw.ActionRow.New();
-        _rowEndRange.SetTitle(_controller.Localizer["End", "DateRange"]);
-        _rowEndRange.AddSuffix(_boxEndRange);
-        //Select Range Group
-        _grpRange = Adw.PreferencesGroup.New();
         //Expander Row Select Range
-        _expRange = Adw.ExpanderRow.New();
-        _expRange.SetTitle(_controller.Localizer["SelectRange"]);
-        _expRange.SetEnableExpansion(false);
-        _expRange.SetShowEnableSwitch(true);
-        _expRange.AddRow(_rowStartRange);
-        _expRange.AddRow(_rowEndRange);
-        _expRange.OnNotify += (sender, e) =>
+        _rangeExpander.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "enable-expansion")
             {
                 OnDateRangeToggled();
             }
         };
-        _grpRange.Add(_expRange);
-        //Calendar Group
-        _grpCalendar = Adw.PreferencesGroup.New();
-        _grpCalendar.SetTitle(_controller.Localizer["Calendar"]);
-        _grpCalendar.SetHeaderSuffix(_btnResetCalendarFilter);
-        _grpCalendar.Add(_calendar);
-        _paneBox.Append(_grpCalendar);
-        _paneBox.Append(_grpRange);
-        //Separator
-        _flap.SetSeparator(Gtk.Separator.New(Gtk.Orientation.Vertical));
-        //Button New Transaction
-        _btnNewTransaction = Gtk.Button.New();
-        _btnNewTransaction.AddCssClass("pill");
-        _btnNewTransaction.AddCssClass("suggested-action");
-        _btnNewTransactionContent = Adw.ButtonContent.New();
-        _btnNewTransactionContent.SetIconName("list-add-symbolic");
-        _btnNewTransactionContent.SetLabel(_controller.Localizer["New"]);
-        _btnNewTransaction.SetTooltipText(_controller.Localizer["NewTransaction", "Tooltip"]);
-        _btnNewTransaction.SetChild(_btnNewTransactionContent);
-        _btnNewTransaction.SetHalign(Gtk.Align.Center);
-        _btnNewTransaction.SetValign(Gtk.Align.End);
-        _btnNewTransaction.SetMarginBottom(10);
-        _btnNewTransaction.SetDetailedActionName("account.newTransaction");
         //Sort Box And Buttons
-        _ddSortTransactionBy = Gtk.DropDown.NewFromStrings(new string[3] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"], _controller.Localizer["SortBy", "Amount"] });
-        _ddSortTransactionBy.OnNotify += (sender, e) =>
+        _sortTransactionByDropDown.SetModel(Gtk.StringList.New(new string[3] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"], _controller.Localizer["SortBy", "Amount"] }));
+        _sortTransactionByDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
             {
-                _controller.SortTransactionsBy = (SortBy)_ddSortTransactionBy.GetSelected();
+                _controller.SortTransactionsBy = (SortBy)_sortTransactionByDropDown.GetSelected();
             }
         };
-        _btnSortFirstToLast = Gtk.ToggleButton.New();
-        _btnSortFirstToLast.SetIconName("view-sort-descending-symbolic");
-        _btnSortFirstToLast.SetTooltipText(_controller.Localizer["SortFirstLast"]);
-        _btnSortFirstToLast.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _btnSortFirstToLast.GetActive();
-        _btnSortLastToFirst = Gtk.ToggleButton.New();
-        _btnSortLastToFirst.SetIconName("view-sort-ascending-symbolic");
-        _btnSortLastToFirst.SetTooltipText(_controller.Localizer["SortLastFirst"]);
-        _btnSortFirstToLast.BindProperty("active", _btnSortLastToFirst, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
-        _boxSortButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxSortButtons.AddCssClass("linked");
-        _boxSortButtons.SetValign(Gtk.Align.Center);
-        _boxSortButtons.Append(_btnSortFirstToLast);
-        _boxSortButtons.Append(_btnSortLastToFirst);
-        _boxSort = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxSort.Append(_ddSortTransactionBy);
-        _boxSort.Append(_boxSortButtons);
-        //Transactions Group
-        _grpTransactions = Adw.PreferencesGroup.New();
-        _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
-        _grpTransactions.SetHeaderSuffix(_boxSort);
-        _grpTransactions.SetMarginTop(7);
-        _grpTransactions.SetMarginStart(10);
-        _grpTransactions.SetMarginEnd(10);
-        //Transactions Header Box
-        _boxTransactionsHeader = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxTransactionsHeader.Append(_grpTransactions);
-        //Transactions Flow Box
-        _flowBox = Gtk.FlowBox.New();
-        _flowBox.SetHomogeneous(true);
-        _flowBox.SetColumnSpacing(10);
-        _flowBox.SetRowSpacing(10);
-        _flowBox.SetMarginStart(10);
-        _flowBox.SetMarginEnd(10);
-        _flowBox.SetMarginBottom(60);
-        _flowBox.SetHalign(Gtk.Align.Fill);
-        _flowBox.SetValign(Gtk.Align.Start);
-        _flowBox.SetSelectionMode(Gtk.SelectionMode.None);
+        _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
         //Transactions Scrolled Window
-        _scrollTransactions = Gtk.ScrolledWindow.New();
-        _scrollTransactions.SetSizeRequest(300, 360);
-        _scrollTransactions.SetMinContentHeight(360);
-        _scrollTransactions.SetVexpand(true);
-        _scrollTransactions.SetChild(_flowBox);
-        _scrollTransactions.SetVisible(false);
-        _scrollTransactionsAdjustment = _scrollTransactions.GetVadjustment();
-        _scrollTransactionsAdjustment.OnNotify += (sender, e) =>
+        _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
+        _transactionsScrollAdjustment.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "value")
             {
-                if (_scrollTransactionsAdjustment.GetValue() == 0.0)
+                if (_transactionsScrollAdjustment.GetValue() == 0.0)
                 {
-                    _boxTransactionsHeader.RemoveCssClass("transactions-header");
+                    _transactionsHeaderBox.RemoveCssClass("transactions-header");
                 }
                 else
                 {
-                    _boxTransactionsHeader.AddCssClass("transactions-header");
+                    _transactionsHeaderBox.AddCssClass("transactions-header");
                 }
             }
         };
-        //Page No Transactions
-        _statusPageNoTransactions = Adw.StatusPage.New();
-        _statusPageNoTransactions.SetIconName("money-none-symbolic");
-        _statusPageNoTransactions.SetVexpand(true);
-        _statusPageNoTransactions.SetSizeRequest(300, 360);
-        _statusPageNoTransactions.SetMarginBottom(60);
-        _statusPageNoTransactions.SetVisible(false);
-        //Main Box
-        _boxMain = Gtk.Box.New(Gtk.Orientation.Vertical, 0);
-        _boxMain.SetHexpand(true);
-        _boxMain.SetVexpand(true);
-        _boxMain.Append(_boxTransactionsHeader);
-        _boxMain.Append(_scrollTransactions);
-        _boxMain.Append(_statusPageNoTransactions);
-        //Spinner Box
-        _binSpinner = Adw.Bin.New();
-        _binSpinner.SetHexpand(true);
-        _binSpinner.SetVexpand(true);
-        //Spinner
-        _spinner = Gtk.Spinner.New();
-        _spinner.SetSizeRequest(48, 48);
-        _spinner.SetHalign(Gtk.Align.Center);
-        _spinner.SetValign(Gtk.Align.Center);
-        _spinner.SetHexpand(true);
-        _spinner.SetVexpand(true);
-        _binSpinner.SetChild(_spinner);
-        //Loading Overlay
-        _overlayLoading = Gtk.Overlay.New();
-        _overlayLoading.SetVexpand(true);
-        _overlayLoading.AddOverlay(_binSpinner);
-        _flap.SetContent(_overlayLoading);
-        //Main Overlay
-        _overlayMain = Gtk.Overlay.New();
-        _overlayMain.SetVexpand(true);
-        _overlayMain.SetChild(_boxMain);
-        _overlayMain.AddOverlay(_btnNewTransaction);
-        _overlayLoading.SetChild(_overlayMain);
         //Tab Page
-        Page = parentTabView.Append(_flap);
+        Page = parentTabView.Append(this);
         Page.SetTitle(_controller.AccountTitle);
         //Action Map
         var actionMap = Gio.SimpleActionGroup.New();
@@ -562,6 +275,18 @@ public partial class AccountView
     }
 
     /// <summary>
+    /// Constructs an AccountView
+    /// </summary>
+    /// <param name="controller">AccountViewController</param>
+    /// <param name="parentWindow">MainWindow</param>
+    /// <param name="parentTabView">Adw.TabView</param>
+    /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
+    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui", controller.Localizer), controller, parentWindow, parentTabView, btnFlapToggle, updateSubtitle)
+    {
+    }
+
+    /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
     /// <param name="group">The Group model</param>
@@ -575,11 +300,11 @@ public partial class AccountView
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
         {
-            _listGroups.Insert(row, index.Value);
+            _groupsList.Insert(row, index.Value);
         }
         else
         {
-            _listGroups.Append(row);
+            _groupsList.Append(row);
         }
         return row;
     }
@@ -588,7 +313,7 @@ public partial class AccountView
     /// Removes a group row from the view
     /// </summary>
     /// <param name="row">The IGroupRowControl</param>
-    private void DeleteGroupRow(IGroupRowControl row) => _listGroups.Remove((GroupRow)row);
+    private void DeleteGroupRow(IGroupRowControl row) => _groupsList.Remove((GroupRow)row);
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
@@ -651,12 +376,12 @@ public partial class AccountView
     public async Task StartupAsync()
     {
         //Start Spinner
-        _statusPageNoTransactions.SetVisible(false);
-        _scrollTransactions.SetVisible(true);
-        _overlayMain.SetOpacity(0.0);
-        _binSpinner.SetVisible(true);
+        _noTransactionsStatusPage.SetVisible(false);
+        _transactionsScroll.SetVisible(true);
+        _mainOverlay.SetOpacity(0.0);
+        _spinnerBin.SetVisible(true);
         _spinner.Start();
-        _scrollPane.SetSensitive(false);
+        _paneScroll.SetSensitive(false);
         //Work
         await _controller.StartupAsync();
         if (_controller.AccountNeedsSetup)
@@ -669,22 +394,22 @@ public partial class AccountView
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
         //Setup Other UI Elements
-        _ddSortTransactionBy.SetSelected((uint)_controller.SortTransactionsBy);
+        _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
         {
-            _btnSortFirstToLast.SetActive(true);
+            _sortFirstToLastButton.SetActive(true);
         }
         else
         {
-            _btnSortLastToFirst.SetActive(true);
+            _sortLastToFirstButton.SetActive(true);
         }
         OnToggleGroups(null, EventArgs.Empty);
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         //Stop Spinner
         _spinner.Stop();
-        _binSpinner.SetVisible(false);
-        _overlayMain.SetOpacity(1.0);
-        _scrollPane.SetSensitive(true);
+        _spinnerBin.SetVisible(false);
+        _mainOverlay.SetOpacity(1.0);
+        _paneScroll.SetSensitive(true);
     }
 
     /// <summary>
@@ -700,35 +425,35 @@ public partial class AccountView
             //Overview
             Page.SetTitle(_controller.AccountTitle);
             _updateSubtitle(_controller.AccountTitle);
-            _lblTotal.SetLabel(_controller.AccountTodayTotalString);
-            _lblIncome.SetLabel(_controller.AccountTodayIncomeString);
-            _lblExpense.SetLabel(_controller.AccountTodayExpenseString);
+            _totalLabel.SetLabel(_controller.AccountTodayTotalString);
+            _incomeLabel.SetLabel(_controller.AccountTodayIncomeString);
+            _expenseLabel.SetLabel(_controller.AccountTodayExpenseString);
             //Transactions
             if (_controller.TransactionsCount > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
                 if (_controller.HasFilteredTransactions)
                 {
-                    _statusPageNoTransactions.SetVisible(false);
-                    _scrollTransactions.SetVisible(true);
+                    _noTransactionsStatusPage.SetVisible(false);
+                    _transactionsScroll.SetVisible(true);
                 }
                 else
                 {
-                    _statusPageNoTransactions.SetVisible(true);
-                    _scrollTransactions.SetVisible(false);
-                    _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
-                    _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
+                    _noTransactionsStatusPage.SetVisible(true);
+                    _transactionsScroll.SetVisible(false);
+                    _noTransactionsStatusPage.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
+                    _noTransactionsStatusPage.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
                 }
-                _expRange.SetSensitive(true);
+                _rangeExpander.SetSensitive(true);
             }
             else
             {
                 _calendar.ClearMarks();
-                _statusPageNoTransactions.SetVisible(true);
-                _scrollTransactions.SetVisible(false);
-                _statusPageNoTransactions.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
-                _statusPageNoTransactions.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
-                _expRange.SetSensitive(false);
+                _noTransactionsStatusPage.SetVisible(true);
+                _transactionsScroll.SetVisible(false);
+                _noTransactionsStatusPage.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
+                _noTransactionsStatusPage.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
+                _rangeExpander.SetSensitive(false);
             }
             _isAccountLoading = false;
         }
@@ -857,19 +582,19 @@ public partial class AccountView
                 var path = openFileDialog.GetFile()!.GetPath();
                 openFileDialog.Hide();
                 //Start Spinner
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                _overlayMain.SetOpacity(0.0);
-                _binSpinner.SetVisible(true);
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
                 _spinner.Start();
-                _scrollPane.SetSensitive(false);
+                _paneScroll.SetSensitive(false);
                 //Work
                 await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
                 //Stop Spinner
                 _spinner.Stop();
-                _binSpinner.SetVisible(false);
-                _overlayMain.SetOpacity(1.0);
-                _scrollPane.SetSensitive(true);
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
             }
         };
         openFileDialog.Show();
@@ -893,17 +618,17 @@ public partial class AccountView
                 if (accountSettingsController.NewPassword != null)
                 {
                     //Start Spinner
-                    _overlayMain.SetOpacity(0.0);
-                    _binSpinner.SetVisible(true);
+                    _mainOverlay.SetOpacity(0.0);
+                    _spinnerBin.SetVisible(true);
                     _spinner.Start();
-                    _scrollPane.SetSensitive(false);
+                    _paneScroll.SetSensitive(false);
                     //Work
                     await Task.Run(() => _controller.SetPassword(accountSettingsController.NewPassword));
                     //Stop Spinner
                     _spinner.Stop();
-                    _binSpinner.SetVisible(false);
-                    _overlayMain.SetOpacity(1.0);
-                    _scrollPane.SetSensitive(true);
+                    _spinnerBin.SetVisible(false);
+                    _mainOverlay.SetOpacity(1.0);
+                    _paneScroll.SetSensitive(true);
                 }
             }
             accountSettingsDialog.Destroy();
@@ -925,19 +650,19 @@ public partial class AccountView
             if (transactionController.Accepted)
             {
                 //Start Spinner
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                _overlayMain.SetOpacity(0.0);
-                _binSpinner.SetVisible(true);
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
                 _spinner.Start();
-                _scrollPane.SetSensitive(false);
+                _paneScroll.SetSensitive(false);
                 //Work
                 await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
                 //Stop Spinner
                 _spinner.Stop();
-                _binSpinner.SetVisible(false);
-                _overlayMain.SetOpacity(1.0);
-                _scrollPane.SetSensitive(true);
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
             }
             transactionDialog.Destroy();
         };
@@ -957,19 +682,19 @@ public partial class AccountView
             if (transactionController.Accepted)
             {
                 //Start Spinner
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                _overlayMain.SetOpacity(0.0);
-                _binSpinner.SetVisible(true);
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
                 _spinner.Start();
-                _scrollPane.SetSensitive(false);
+                _paneScroll.SetSensitive(false);
                 //Work
                 await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
                 //Stop Spinner
                 _spinner.Stop();
-                _binSpinner.SetVisible(false);
-                _overlayMain.SetOpacity(1.0);
-                _scrollPane.SetSensitive(true);
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
             }
             transactionDialog.Destroy();
         };
@@ -1007,12 +732,12 @@ public partial class AccountView
                             if (dialog.Response == MessageDialogResponse.Suggested)
                             {
                                 //Start Spinner
-                                _statusPageNoTransactions.SetVisible(false);
-                                _scrollTransactions.SetVisible(true);
-                                _overlayMain.SetOpacity(0.0);
-                                _binSpinner.SetVisible(true);
+                                _noTransactionsStatusPage.SetVisible(false);
+                                _transactionsScroll.SetVisible(true);
+                                _mainOverlay.SetOpacity(0.0);
+                                _spinnerBin.SetVisible(true);
                                 _spinner.Start();
-                                _scrollPane.SetSensitive(false);
+                                _paneScroll.SetSensitive(false);
                                 //Work
                                 await Task.Run(async () =>
                                 {
@@ -1021,26 +746,26 @@ public partial class AccountView
                                 });
                                 //Stop Spinner
                                 _spinner.Stop();
-                                _binSpinner.SetVisible(false);
-                                _overlayMain.SetOpacity(1.0);
-                                _scrollPane.SetSensitive(true);
+                                _spinnerBin.SetVisible(false);
+                                _mainOverlay.SetOpacity(1.0);
+                                _paneScroll.SetSensitive(true);
                             }
                             else if (dialog.Response == MessageDialogResponse.Destructive)
                             {
                                 //Start Spinner
-                                _statusPageNoTransactions.SetVisible(false);
-                                _scrollTransactions.SetVisible(true);
-                                _overlayMain.SetOpacity(0.0);
-                                _binSpinner.SetVisible(true);
+                                _noTransactionsStatusPage.SetVisible(false);
+                                _transactionsScroll.SetVisible(true);
+                                _mainOverlay.SetOpacity(0.0);
+                                _spinnerBin.SetVisible(true);
                                 _spinner.Start();
-                                _scrollPane.SetSensitive(false);
+                                _paneScroll.SetSensitive(false);
                                 //Work
                                 await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
                                 //Stop Spinner
                                 _spinner.Stop();
-                                _binSpinner.SetVisible(false);
-                                _overlayMain.SetOpacity(1.0);
-                                _scrollPane.SetSensitive(true);
+                                _spinnerBin.SetVisible(false);
+                                _mainOverlay.SetOpacity(1.0);
+                                _paneScroll.SetSensitive(true);
                             }
                             dialog.Destroy();
                         };
@@ -1056,19 +781,19 @@ public partial class AccountView
                             if (dialog.Response != MessageDialogResponse.Cancel)
                             {
                                 //Start Spinner
-                                _statusPageNoTransactions.SetVisible(false);
-                                _scrollTransactions.SetVisible(true);
-                                _overlayMain.SetOpacity(0.0);
-                                _binSpinner.SetVisible(true);
+                                _noTransactionsStatusPage.SetVisible(false);
+                                _transactionsScroll.SetVisible(true);
+                                _mainOverlay.SetOpacity(0.0);
+                                _spinnerBin.SetVisible(true);
                                 _spinner.Start();
-                                _scrollPane.SetSensitive(false);
+                                _paneScroll.SetSensitive(false);
                                 //Work
                                 await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
                                 //Stop Spinner
                                 _spinner.Stop();
-                                _binSpinner.SetVisible(false);
-                                _overlayMain.SetOpacity(1.0);
-                                _scrollPane.SetSensitive(true);
+                                _spinnerBin.SetVisible(false);
+                                _mainOverlay.SetOpacity(1.0);
+                                _paneScroll.SetSensitive(true);
                             }
                             dialog.Destroy();
                         };
@@ -1077,19 +802,19 @@ public partial class AccountView
                 else
                 {
                     //Start Spinner
-                    _statusPageNoTransactions.SetVisible(false);
-                    _scrollTransactions.SetVisible(true);
-                    _overlayMain.SetOpacity(0.0);
-                    _binSpinner.SetVisible(true);
+                    _noTransactionsStatusPage.SetVisible(false);
+                    _transactionsScroll.SetVisible(true);
+                    _mainOverlay.SetOpacity(0.0);
+                    _spinnerBin.SetVisible(true);
                     _spinner.Start();
-                    _scrollPane.SetSensitive(false);
+                    _paneScroll.SetSensitive(false);
                     //Work
                     await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
                     //Stop Spinner
                     _spinner.Stop();
-                    _binSpinner.SetVisible(false);
-                    _overlayMain.SetOpacity(1.0);
-                    _scrollPane.SetSensitive(true);
+                    _spinnerBin.SetVisible(false);
+                    _mainOverlay.SetOpacity(1.0);
+                    _paneScroll.SetSensitive(true);
                 }
             }
             transactionDialog.Destroy();
@@ -1114,19 +839,19 @@ public partial class AccountView
                 if (dialog.Response != MessageDialogResponse.Cancel)
                 {
                     //Start Spinner
-                    _statusPageNoTransactions.SetVisible(false);
-                    _scrollTransactions.SetVisible(true);
-                    _overlayMain.SetOpacity(0.0);
-                    _binSpinner.SetVisible(true);
+                    _noTransactionsStatusPage.SetVisible(false);
+                    _transactionsScroll.SetVisible(true);
+                    _mainOverlay.SetOpacity(0.0);
+                    _spinnerBin.SetVisible(true);
                     _spinner.Start();
-                    _scrollPane.SetSensitive(false);
+                    _paneScroll.SetSensitive(false);
                     //Work
                     await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
                     //Stop Spinner
                     _spinner.Stop();
-                    _binSpinner.SetVisible(false);
-                    _overlayMain.SetOpacity(1.0);
-                    _scrollPane.SetSensitive(true);
+                    _spinnerBin.SetVisible(false);
+                    _mainOverlay.SetOpacity(1.0);
+                    _paneScroll.SetSensitive(true);
                 }
                 dialog.Destroy();
             };
@@ -1161,19 +886,19 @@ public partial class AccountView
             if (groupController.Accepted)
             {
                 //Start Spinner
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                _overlayMain.SetOpacity(0.0);
-                _binSpinner.SetVisible(true);
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
                 _spinner.Start();
-                _scrollPane.SetSensitive(false);
+                _paneScroll.SetSensitive(false);
                 //Work
                 await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
                 //Stop Spinner
                 _spinner.Stop();
-                _binSpinner.SetVisible(false);
-                _overlayMain.SetOpacity(1.0);
-                _scrollPane.SetSensitive(true);
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
             }
             groupDialog.Destroy();
         };
@@ -1194,19 +919,19 @@ public partial class AccountView
             if (groupController.Accepted)
             {
                 //Start Spinner
-                _statusPageNoTransactions.SetVisible(false);
-                _scrollTransactions.SetVisible(true);
-                _overlayMain.SetOpacity(0.0);
-                _binSpinner.SetVisible(true);
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
                 _spinner.Start();
-                _scrollPane.SetSensitive(false);
+                _paneScroll.SetSensitive(false);
                 //Work
                 await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
                 //Stop Spinner
                 _spinner.Stop();
-                _binSpinner.SetVisible(false);
-                _overlayMain.SetOpacity(1.0);
-                _scrollPane.SetSensitive(true);
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
             }
             groupDialog.Destroy();
         };
@@ -1238,8 +963,8 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void OnResetOverviewFilter(Gtk.Button sender, EventArgs e)
     {
-        _chkIncome.SetActive(true);
-        _chkExpense.SetActive(true);
+        _incomeCheck.SetActive(true);
+        _expenseCheck.SetActive(true);
     }
 
     /// <summary>
@@ -1256,18 +981,18 @@ public partial class AccountView
     /// <param name="e">EventArgs</param>
     private void OnToggleGroups(object? sender, EventArgs e)
     {
-        if (_btnToggleGroups.GetActive())
+        if (_toggleGroupsButton.GetActive())
         {
-            _btnToggleGroupsContent.SetIconName("view-reveal-symbolic");
-            _btnToggleGroupsContent.SetLabel(_controller.Localizer["Show"]);
+            _toggleGroupsButtonContent.SetIconName("view-reveal-symbolic");
+            _toggleGroupsButtonContent.SetLabel(_controller.Localizer["Show"]);
         }
         else
         {
-            _btnToggleGroupsContent.SetIconName("view-conceal-symbolic");
-            _btnToggleGroupsContent.SetLabel(_controller.Localizer["Hide"]);
+            _toggleGroupsButtonContent.SetIconName("view-conceal-symbolic");
+            _toggleGroupsButtonContent.SetLabel(_controller.Localizer["Hide"]);
         }
-        _listGroups.SetVisible(!_btnToggleGroups.GetActive());
-        _controller.ShowGroupsList = !_btnToggleGroups.GetActive();
+        _groupsList.SetVisible(!_toggleGroupsButton.GetActive());
+        _controller.ShowGroupsList = !_toggleGroupsButton.GetActive();
     }
 
     /// <summary>
@@ -1312,7 +1037,7 @@ public partial class AccountView
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
-        _expRange.SetEnableExpansion(false);
+        _rangeExpander.SetEnableExpansion(false);
     }
 
     /// <summary>
@@ -1320,19 +1045,19 @@ public partial class AccountView
     /// </summary>
     private void OnDateRangeToggled()
     {
-        if (_expRange.GetEnableExpansion())
+        if (_rangeExpander.GetEnableExpansion())
         {
             //Years For Date Filter
-            var previousStartYear = _ddStartYear.GetSelected();
-            var previousEndYear = _ddEndYear.GetSelected();
+            var previousStartYear = _startYearDropDown.GetSelected();
+            var previousEndYear = _endYearDropDown.GetSelected();
             var yearsForRangeFilter = _controller.YearsForRangeFilter.ToArray();
-            _ddStartYear.SetModel(Gtk.StringList.New(yearsForRangeFilter));
-            _ddEndYear.SetModel(Gtk.StringList.New(yearsForRangeFilter));
-            _ddStartYear.SetSelected(previousStartYear > yearsForRangeFilter.Length - 1 ? 0 : previousStartYear);
-            _ddEndYear.SetSelected(previousEndYear > yearsForRangeFilter.Length - 1 ? 0 : previousEndYear);
+            _startYearDropDown.SetModel(Gtk.StringList.New(yearsForRangeFilter));
+            _endYearDropDown.SetModel(Gtk.StringList.New(yearsForRangeFilter));
+            _startYearDropDown.SetSelected(previousStartYear > yearsForRangeFilter.Length - 1 ? 0 : previousStartYear);
+            _endYearDropDown.SetSelected(previousEndYear > yearsForRangeFilter.Length - 1 ? 0 : previousEndYear);
             //Set Date
-            _controller.FilterStartDate = new DateOnly(int.Parse(yearsForRangeFilter[_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
-            _controller.FilterEndDate = new DateOnly(int.Parse(yearsForRangeFilter[_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+            _controller.FilterStartDate = new DateOnly(int.Parse(yearsForRangeFilter[_startYearDropDown.GetSelected()]), (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
+            _controller.FilterEndDate = new DateOnly(int.Parse(yearsForRangeFilter[_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
         }
         else
         {
@@ -1343,16 +1068,16 @@ public partial class AccountView
     /// <summary>
     /// Occurs when the date range's start year is changed
     /// </summary>
-    private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+    private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_startYearDropDown.GetSelected()]), (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
 
     /// <summary>
     /// Occurs when the date range's start month is changed
     /// </summary>
     private void OnDateRangeStartMonthChanged()
     {
-        var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]);
-        var previousDay = (int)_ddStartDay.GetSelected() + 1;
-        var newNumberOfDays = ((int)_ddStartMonth.GetSelected() + 1) switch
+        var year = int.Parse(_controller.YearsForRangeFilter[(int)_startYearDropDown.GetSelected()]);
+        var previousDay = (int)_startDayDropDown.GetSelected() + 1;
+        var newNumberOfDays = ((int)_startMonthDropDown.GetSelected() + 1) switch
         {
             1 => 31,
             2 => (year % 400 == 0 || year % 100 != 0) && year % 4 == 0 ? 29 : 28,
@@ -1364,28 +1089,28 @@ public partial class AccountView
             12 => 31,
             _ => 30
         };
-        _ddStartDay.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
-        _ddStartDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
+        _startDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
+        _startDayDropDown.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
     /// <summary>
     /// Occurs when the date range's start day is changed
     /// </summary>
-    private void OnDateRangeStartDayChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddStartYear.GetSelected()]), (int)_ddStartMonth.GetSelected() + 1, (int)_ddStartDay.GetSelected() + 1);
+    private void OnDateRangeStartDayChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_startYearDropDown.GetSelected()]), (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
 
     /// <summary>
     /// Occurs when the date range's end year is changed
     /// </summary>
-    private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+    private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
 
     /// <summary>
     /// Occurs when the date range's end month is changed
     /// </summary>
     private void OnDateRangeEndMonthChanged()
     {
-        var year = int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]);
-        var previousDay = (int)_ddEndDay.GetSelected() + 1;
-        var newNumberOfDays = ((int)_ddEndMonth.GetSelected() + 1) switch
+        var year = int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]);
+        var previousDay = (int)_endDayDropDown.GetSelected() + 1;
+        var newNumberOfDays = ((int)_endMonthDropDown.GetSelected() + 1) switch
         {
             1 => 31,
             2 => (year % 400 == 0 || year % 100 != 0) && year % 4 == 0 ? 29 : 28,
@@ -1397,14 +1122,14 @@ public partial class AccountView
             12 => 31,
             _ => 30
         };
-        _ddEndDay.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
-        _ddEndDay.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
+        _endDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, newNumberOfDays).Select(x => x.ToString()).ToArray()));
+        _endDayDropDown.SetSelected(previousDay > newNumberOfDays ? 0 : (uint)previousDay - 1);
     }
 
     /// <summary>
     /// Occurs when the date range's end day is changed
     /// </summary>
-    private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_ddEndYear.GetSelected()]), (int)_ddEndMonth.GetSelected() + 1, (int)_ddEndDay.GetSelected() + 1);
+    private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
 
     /// <summary>
     /// Occurs when the window's width is changed
@@ -1419,11 +1144,11 @@ public partial class AccountView
         }
         if (e.SmallWidth)
         {
-            _grpTransactions.SetTitle("");
+            _transactionsGroup.SetTitle("");
         }
         else
         {
-            _grpTransactions.SetTitle(_controller.Localizer["Transactions"]);
+            _transactionsGroup.SetTitle(_controller.Localizer["Transactions"]);
         }
     }
 }

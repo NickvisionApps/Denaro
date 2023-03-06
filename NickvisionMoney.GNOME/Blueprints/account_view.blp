@@ -1,0 +1,342 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu actionsMenu {
+  item(_("TransferMoney"), "account.transferMoney")
+  
+  section {
+    submenu {
+      label: _("ExportToFile");
+      
+      item("CSV", "account.exportToCSV")
+      item("PDF", "account.exportToPDF")
+    }
+    item(_("ImportFromFile"), "account.importFromFile")
+  }
+  
+  section {
+    item(_("AccountSettings"), "account.accountSettings")
+  }
+}
+
+Adw.Bin _root {
+  Adw.Flap _flap {
+    flap: Gtk.ScrolledWindow _paneScroll {
+      width-request: 360;
+    
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 10;
+        hexpand: false;
+        vexpand: true;
+        margin-start: 10;
+        margin-end: 10;
+        margin-top: 10;
+        margin-bottom: 10;
+        
+        Gtk.SearchEntry _searchDescriptionEntry {
+          placeholder-text: _("SearchDescription.Placeholder");
+        }
+        
+        Adw.PreferencesGroup {
+          title: _("Overview.Today");
+          header-suffix: Gtk.Box {
+            orientation: horizontal;
+            spacing: 6;
+            
+            Gtk.MenuButton {
+              menu-model: actionsMenu;
+            
+              Adw.ButtonContent {
+                icon-name: "document-properties-symbolic";
+                label: _("AccountActions");
+              }
+            
+              styles ["flat"]
+            }
+            
+            Gtk.Button _resetOverviewFilterButton {
+              icon-name: "larger-brush-symbolic";
+              tooltip-text: _("ResetFilters.Overview");
+              
+              styles ["flat"]
+            }
+          };
+          
+          Adw.ActionRow {
+            title: _("Total");
+            
+            [suffix]
+            Gtk.Label _totalLabel {
+              valign: center;
+              
+              styles ["denaro-total"]
+            }
+          }
+          
+          Adw.ActionRow {
+            title: _("Income");
+            
+            [prefix]
+            Gtk.CheckButton _incomeCheck {
+              active: true;
+              valign: center;
+              
+              styles ["selection-mode"]
+            }
+            
+            [suffix]
+            Gtk.Label _incomeLabel {
+              valign: center;
+              
+              styles ["denaro-income"]
+            }
+          }
+          
+          Adw.ActionRow {
+            title: _("Expense");
+            
+            [prefix]
+            Gtk.CheckButton _expenseCheck {
+              active: true;
+              valign: center;
+              
+              styles ["selection-mode"]
+            }
+            
+            [suffix]
+            Gtk.Label _expenseLabel {
+              valign: center;
+              
+              styles ["denaro-expense"]
+            }
+          }
+        }
+        
+        Adw.PreferencesGroup {
+          title: _("Groups");
+          header-suffix: Gtk.Box {
+            Gtk.ToggleButton _toggleGroupsButton {
+              tooltip-text: _("ToggleGroups.Tooltip");
+              
+              Adw.ButtonContent _toggleGroupsButtonContent {}
+              
+              styles ["flat"]
+            }
+            
+            Gtk.Button {
+              tooltip-text: _("NewGroup.Tooltip");
+              action-name: "account.newGroup";
+              
+              Adw.ButtonContent {
+                icon-name: "list-add-symbolic";
+                label: _("New");
+              }
+            
+              styles ["flat"]
+            }
+            
+            Gtk.Button _resetGroupsFilterButton {
+              icon-name: "larger-brush-symbolic";
+              tooltip-text: _("ResetFilters.Groups");
+            
+              styles ["flat"]
+            }
+          };
+          
+          Gtk.ListBox _groupsList {
+            styles ["boxed-list"]
+          }
+        }
+        
+        Adw.PreferencesGroup {
+          title: _("Calendar");
+          header-suffix: Gtk.Button _resetCalendarFilterButton {
+            icon-name: "larger-brush-symbolic";
+            tooltip-text: _("ResetFilters.Dates");
+            
+            styles ["flat"]
+          };
+          
+          Gtk.Calendar _calendar {
+            name: "calendarAccount";
+            
+            styles ["card"]
+          }
+        }
+        
+        Adw.PreferencesGroup {
+          Adw.ExpanderRow _rangeExpander {
+            title: _("SelectRange");
+            enable-expansion: false;
+            show-enable-switch: true;
+            
+            Adw.ActionRow {
+              title: _("Start.DateRange");
+              
+              [suffix]
+              Gtk.Box {
+                orientation: horizontal;
+                spacing: 6;
+                
+                Gtk.DropDown _startYearDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+                
+                Gtk.DropDown _startMonthDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+                
+                Gtk.DropDown _startDayDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+              }
+            }
+            
+            Adw.ActionRow {
+              title: _("End.DateRange");
+              
+              [suffix]
+              Gtk.Box {
+                orientation: horizontal;
+                spacing: 6;
+                
+                Gtk.DropDown _endYearDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+                
+                Gtk.DropDown _endMonthDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+                
+                Gtk.DropDown _endDayDropDown {
+                  valign: center;
+                  show-arrow: false;
+                }
+              }
+            }
+          }
+        }
+      }  
+      
+      styles ["background"]
+    };
+    separator: Gtk.Separator {
+      orientation: vertical;
+    };
+    
+    Gtk.Overlay {
+      vexpand: true;
+
+      Gtk.Overlay _mainOverlay {
+        vexpand: true;
+        
+        Gtk.Box {
+          orientation: vertical;
+          hexpand: true;
+          vexpand: true;
+          
+          Gtk.Box _transactionsHeaderBox {
+            orientation: horizontal;
+            
+            Adw.PreferencesGroup _transactionsGroup {
+              title: _("Transactions");
+              margin-top: 7;
+              margin-start: 10;
+              margin-end: 10;
+              header-suffix: Gtk.Box {
+                orientation: horizontal;
+                spacing: 6;
+                
+                Gtk.DropDown _sortTransactionByDropDown {}
+                
+                Gtk.Box {
+                  orientation: horizontal;
+                  valign: center;
+                  
+                  Gtk.ToggleButton _sortFirstToLastButton {
+                    icon-name: "view-sort-descending-symbolic";
+                    tooltip-text: _("SortFirstLast");
+                    active: bind _sortLastToFirstButton.active inverted bidirectional;
+                  }
+                  
+                  Gtk.ToggleButton _sortLastToFirstButton {
+                    icon-name: "view-sort-ascending-symbolic";
+                    tooltip-text: _("SortLastFirst");
+                  }
+                  
+                  styles ["linked"]
+                }
+              };
+            }
+          }
+                 
+          Gtk.ScrolledWindow _transactionsScroll {
+            width-request: 300;
+            height-request: 360;
+            min-content-height: 360;      
+            vexpand: true;
+            visible: false;
+            
+            Gtk.FlowBox _flowBox {
+              homogeneous: true;
+              column-spacing: 10;
+              row-spacing: 10;
+              margin-start: 10;
+              margin-end: 10;
+              margin-bottom: 60;
+              halign: fill;
+              valign: start;
+              selection-mode: none;
+            }
+          }
+          
+          Adw.StatusPage _noTransactionsStatusPage {
+            icon-name: "money-none-symbolic";
+            vexpand: true;
+            width-request: 300;
+            height-request: 360;
+            margin-bottom: 60;
+            visible: false;
+          }
+        }
+        
+        [overlay]
+        Gtk.Button {
+          tooltip-text: _("NewTransaction.Tooltip");
+          action-name: "account.newTransaction";
+          halign: center;
+          valign: end;
+          margin-bottom: 10;
+          
+          Adw.ButtonContent {
+            icon-name: "list-add-symbolic";
+            label: _("New");
+          }
+          
+          styles ["pill", "suggested-action"] 
+        }
+      }
+      
+      [overlay]
+      Adw.Bin _spinnerBin {
+        hexpand: true;
+        vexpand: true;
+        
+        Gtk.Spinner _spinner {
+          width-request: 48;
+          height-request: 48;
+          halign: center;
+          valign: center;
+          hexpand: true;
+          vexpand: true;
+        }
+      }
+    }
+  }
+}
