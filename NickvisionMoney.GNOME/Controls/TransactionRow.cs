@@ -142,6 +142,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _compactIcon.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         //Amount Label
         _amountLabel.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToString("C", _cultureAmount)}");
+        _amountLabel.RemoveCssClass(transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
         _amountLabel.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Buttons Box
         _editButton.SetVisible(transaction.RepeatFrom <= 0);
