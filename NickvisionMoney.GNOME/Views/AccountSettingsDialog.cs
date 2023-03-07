@@ -71,6 +71,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         //Default Transaction Type
         _incomeButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.OnToggled += OnTransactionTypeChanged;
+        _expenseButton.BindProperty("active", _incomeButton, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         //Reported Currency
         _reportedCurrencyLabel.SetLabel($"{_controller.Localizer["ReportedCurrency"]}\n<b>{_controller.ReportedCurrencyString}</b>");
         //Custom Currency

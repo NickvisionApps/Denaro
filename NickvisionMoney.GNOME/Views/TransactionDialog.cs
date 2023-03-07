@@ -150,6 +150,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         //Type Box and Buttons
         _incomeButton.OnToggled += OnTypeChanged;
         _expenseButton.OnToggled += OnTypeChanged;
+        _expenseButton.BindProperty("active", _incomeButton, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         //Date
         _dateCalendar.SetName("calendarTransactions");
         _dateCalendar.OnDaySelected += OnDateChanged;
