@@ -18,13 +18,13 @@ default:
 
 # Run the application without installing
 run:
-    #blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
+    blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
     dotnet build
     glib-compile-resources --sourcedir ./Resources \
     ./Resources/{{app_id}}.gresource.xml
     mv ./Resources/{{app_id}}.gresource ./bin/Debug/net7.0/
     dotnet run
-    #rm Blueprints/*.ui
+    rm Blueprints/*.ui
 
 # Publish the app
 publish PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR) (_install_extras PREFIX)
@@ -37,13 +37,13 @@ publish PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR) (_install_ext
     # use NICK_BUILDDIR env var to change it.
 
     mkdir -p {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}
-    #blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
+    blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
     dotnet publish -c Release {{project_name}}.GNOME.csproj \
         --runtime {{dotnet_runtime}} \
         --self-contained false \
         -o {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     success=$?
-    #rm Blueprints/*.ui
+    rm Blueprints/*.ui
     if [ $success != 0 ]
     then
         exit $success
@@ -66,7 +66,7 @@ publish-self-contained PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR
     # use NICK_BUILDDIR env var to change it.
 
     mkdir -p {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}
-    #blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
+    blueprint-compiler batch-compile Blueprints/ Blueprints/ Blueprints/*.blp
     dotnet publish -c Release {{project_name}}.GNOME.csproj \
         $([ -d "$FLATPAK_BUILDER_BUILDDIR/nuget-sources" ] && \
         echo "--source $FLATPAK_BUILDER_BUILDDIR/nuget-sources") \
@@ -74,7 +74,7 @@ publish-self-contained PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR
         --self-contained true \
         -o {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}
     success=$?
-    #rm Blueprints/*.ui
+    rm Blueprints/*.ui
     if [ $success != 0 ]
     then
         exit $success

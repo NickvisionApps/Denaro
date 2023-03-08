@@ -1,3 +1,4 @@
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
@@ -13,12 +14,12 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
-    private readonly Gtk.CheckButton _chkFilter;
-    private readonly Gtk.Label _lblAmount;
-    private readonly Gtk.Button _btnEdit;
-    private readonly Gtk.Button _btnDelete;
-    private readonly Gtk.Box _boxButtons;
-    private readonly Gtk.FlowBox _flowBox;
+    
+    [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
+    [Gtk.Connect] private readonly Gtk.Label _amountLabel;
+    [Gtk.Connect] private readonly Gtk.Button _editButton;
+    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
+    [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
 
     /// <summary>
     /// The Id of the Group the row represents
@@ -38,6 +39,21 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive) : base(builder.GetPointer("_root"), false)
+    {
+        _cultureAmount = cultureAmount;
+        _cultureDate = cultureDate;
+        //Build UI
+        builder.Connect(this);
+        //Filter Checkbox
+        _filterCheckButton.OnToggled += FilterToggled;
+        //Edit Button
+        _editButton.OnClicked += Edit;
+        //Delete Button
+        _deleteButton.OnClicked += Delete;
+        UpdateRow(group, cultureAmount, cultureDate, filterActive);
+    }
+
     /// <summary>
     /// Constructs a group row 
     /// </summary>
@@ -46,50 +62,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive)
+    public GroupRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, cultureDate, localizer, filterActive)
     {
-        _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
-        //Row Settings
-        SetUseMarkup(false);
-        SetTitleLines(1);
-        SetSubtitleLines(2);
-        //Filter Checkbox
-        _chkFilter = Gtk.CheckButton.New();
-        _chkFilter.SetValign(Gtk.Align.Center);
-        _chkFilter.AddCssClass("selection-mode");
-        _chkFilter.OnToggled += FilterToggled;
-        AddPrefix(_chkFilter);
-        //Amount Label
-        _lblAmount = Gtk.Label.New(null);
-        _lblAmount.SetValign(Gtk.Align.Center);
-        _lblAmount.SetMarginEnd(6);
-        //Edit Button
-        _btnEdit = Gtk.Button.NewFromIconName("document-edit-symbolic");
-        _btnEdit.SetValign(Gtk.Align.Center);
-        _btnEdit.AddCssClass("flat");
-        _btnEdit.SetTooltipText(localizer["Edit", "GroupRow"]);
-        _btnEdit.OnClicked += Edit;
-        SetActivatableWidget(_btnEdit);
-        //Delete Button
-        _btnDelete = Gtk.Button.NewFromIconName("user-trash-symbolic");
-        _btnDelete.SetValign(Gtk.Align.Center);
-        _btnDelete.AddCssClass("flat");
-        _btnDelete.SetTooltipText(localizer["Delete", "GroupRow"]);
-        _btnDelete.OnClicked += Delete;
-        //Buttons Box
-        _boxButtons = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-        _boxButtons.SetHalign(Gtk.Align.End);
-        _boxButtons.Append(_btnEdit);
-        _boxButtons.Append(_btnDelete);
-        //Suffix FlowBox
-        _flowBox = Gtk.FlowBox.New();
-        _flowBox.SetOrientation(Gtk.Orientation.Vertical);
-        _flowBox.SetSelectionMode(Gtk.SelectionMode.None);
-        _flowBox.Append(_lblAmount);
-        _flowBox.Append(_boxButtons);
-        AddSuffix(_flowBox);
-        UpdateRow(group, cultureAmount, cultureDate, filterActive);
     }
 
     /// <summary>
@@ -97,9 +71,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public bool FilterChecked
     {
-        get => _chkFilter.GetActive();
+        get => _filterCheckButton.GetActive();
 
-        set => _chkFilter.SetActive(value);
+        set => _filterCheckButton.SetActive(value);
     }
 
     /// <summary>
@@ -118,14 +92,14 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         SetTitle(group.Name);
         SetSubtitle(group.Description);
         //Filter Checkbox
-        _chkFilter.SetActive(filterActive);
+        _filterCheckButton.SetActive(filterActive);
         //Amount Label
-        _lblAmount.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
-        _lblAmount.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
+        _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToString("C", _cultureAmount)}");
+        _amountLabel.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         if (group.Id == 0)
         {
-            _btnEdit.SetVisible(false);
-            _btnDelete.SetVisible(false);
+            _editButton.SetVisible(false);
+            _deleteButton.SetVisible(false);
             _flowBox.SetValign(Gtk.Align.Center);
         }
     }
@@ -135,7 +109,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     /// <param name="sender">Gtk.CheckButton</param>
     /// <param name="e">EventArgs</param>
-    private void FilterToggled(Gtk.CheckButton sender, EventArgs e) => FilterChanged?.Invoke(this, (Id, _chkFilter.GetActive()));
+    private void FilterToggled(Gtk.CheckButton sender, EventArgs e) => FilterChanged?.Invoke(this, (Id, _filterCheckButton.GetActive()));
 
     /// <summary>
     /// Occurs when the edit button is clicked

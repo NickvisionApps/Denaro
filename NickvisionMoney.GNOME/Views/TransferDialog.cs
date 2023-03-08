@@ -1,3 +1,4 @@
+using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -9,99 +10,51 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transfer
 /// </summary>
-public partial class TransferDialog
+public partial class TransferDialog : Adw.MessageDialog
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
-    private readonly Adw.MessageDialog _dialog;
-    private readonly Adw.PreferencesGroup _grpMain;
-    private readonly Gtk.Box _boxButtonsAccount;
-    private readonly Gtk.Button _btnSelectAccount;
-    private readonly Gtk.MenuButton _btnRecentAccounts;
-    private readonly Gtk.Popover _popRecentAccounts;
-    private readonly Adw.PreferencesGroup _grpRecentAccounts;
-    private readonly Adw.ActionRow _rowDestinationAccount;
-    private readonly Adw.PasswordEntryRow _rowDestinationPassword;
-    private readonly Gtk.Label _lblCurrency;
-    private readonly Adw.EntryRow _rowAmount;
-    private readonly Adw.PreferencesGroup _grpConversionRate;
-    private readonly Adw.EntryRow _rowSourceCurrency;
-    private readonly Adw.EntryRow _rowDestCurrency;
-    private readonly Adw.ActionRow _rowConversionResult;
-    private readonly Gtk.Label _lblConversionResult;
+
+    [Gtk.Connect] private readonly Gtk.Button _selectAccountButton;
+    [Gtk.Connect] private readonly Gtk.Popover _recentAccountsPopover;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
+    [Gtk.Connect] private readonly Adw.ActionRow _destinationAccountRow;
+    [Gtk.Connect] private readonly Adw.PasswordEntryRow _destinationPasswordRow;
+    [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
+    [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _conversionRateGroup;
+    [Gtk.Connect] private readonly Adw.EntryRow _sourceCurrencyRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _destinationCurrencyRow;
+    [Gtk.Connect] private readonly Gtk.Label _conversionResultLabel;
+
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
     private readonly Gtk.EventControllerKey _destCurrencyKeyController;
 
-    /// <summary>
-    /// Constructs a TransferDialog
-    /// </summary>
-    /// <param name="controller">TransferDialogController</param>
-    /// <param name="parentWindow">Gtk.Window</param>
-    public TransferDialog(TransferDialogController controller, Gtk.Window parentWindow)
+    private TransferDialog(Gtk.Builder builder, TransferDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
-        _parentWindow = parentWindow;
+        _parentWindow = parent;
+        //Build UI
+        builder.Connect(this);
         //Dialog Settings
-        _dialog = Adw.MessageDialog.New(parentWindow, _controller.Localizer["Transfer"], _controller.Localizer["TransferDescription"]);
-        _dialog.SetDefaultSize(420, -1);
-        _dialog.SetHideOnClose(true);
-        _dialog.SetModal(true);
-        _dialog.AddResponse("cancel", _controller.Localizer["Cancel"]);
-        _dialog.SetCloseResponse("cancel");
-        _dialog.AddResponse("ok", _controller.Localizer["Transfer"]);
-        _dialog.SetDefaultResponse("ok");
-        _dialog.SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        _dialog.OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
-        //Main Preferences Group
-        _grpMain = Adw.PreferencesGroup.New();
-        _dialog.SetExtraChild(_grpMain);
-        //Destination Account Row
-        _rowDestinationAccount = Adw.ActionRow.New();
-        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
-        _rowDestinationAccount.SetSubtitle(_controller.Localizer["NoAccountSelected"]);
-        _grpMain.Add(_rowDestinationAccount);
+        SetTransientFor(parent);
+        AddResponse("cancel", _controller.Localizer["Cancel"]);
+        SetCloseResponse("cancel");
+        AddResponse("ok", _controller.Localizer["Transfer"]);
+        SetDefaultResponse("ok");
+        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
+        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Destination Password Row
-        _rowDestinationPassword = Adw.PasswordEntryRow.New();
-        _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
-        _rowDestinationPassword.SetShowApplyButton(true);
-        _rowDestinationPassword.SetVisible(false);
-        _rowDestinationPassword.OnApply += OnApplyDestinationPassword;
-        _grpMain.Add(_rowDestinationPassword);
+        _destinationPasswordRow.OnApply += OnApplyDestinationPassword;
         //Select Account Button
-        _btnSelectAccount = Gtk.Button.NewFromIconName("document-open-symbolic");
-        _btnSelectAccount.SetTooltipText(_controller.Localizer["DestinationAccount", "Placeholder"]);
-        _btnSelectAccount.OnClicked += OnSelectAccount;
-        //Recent Accounts
-        _grpRecentAccounts = Adw.PreferencesGroup.New();
-        _grpRecentAccounts.SetTitle(_controller.Localizer["Recents", "GTK"]);
-        _grpRecentAccounts.SetSizeRequest(200, 55);
-        _popRecentAccounts = Gtk.Popover.New();
-        _popRecentAccounts.SetChild(_grpRecentAccounts);
-        _btnRecentAccounts = Gtk.MenuButton.New();
-        _btnRecentAccounts.SetIconName("document-open-recent-symbolic");
-        _btnRecentAccounts.SetTooltipText(_controller.Localizer["RecentAccounts"]);
-        _btnRecentAccounts.SetPopover(_popRecentAccounts);
-        //Buttons Account Box
-        _boxButtonsAccount = Gtk.Box.New(Gtk.Orientation.Horizontal, 0);
-        _boxButtonsAccount.SetValign(Gtk.Align.Center);
-        _boxButtonsAccount.AddCssClass("linked");
-        _boxButtonsAccount.Append(_btnSelectAccount);
-        _boxButtonsAccount.Append(_btnRecentAccounts);
-        _rowDestinationAccount.AddSuffix(_boxButtonsAccount);
-        _rowDestinationAccount.SetActivatableWidget(_btnSelectAccount);
+        _selectAccountButton.OnClicked += OnSelectAccount;
         //Amount
-        _lblCurrency = Gtk.Label.New($"{_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})");
-        _lblCurrency.AddCssClass("dim-label");
-        _rowAmount = Adw.EntryRow.New();
-        _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-        _rowAmount.SetInputPurpose(Gtk.InputPurpose.Number);
-        _rowAmount.SetActivatesDefault(true);
-        _rowAmount.AddSuffix(_lblCurrency);
-        _rowAmount.OnNotify += (sender, e) =>
+        _currencyLabel.SetLabel($"{_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})");
+        _amountRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -111,15 +64,9 @@ public partial class TransferDialog
         _amountKeyController = Gtk.EventControllerKey.New();
         _amountKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _amountKeyController.OnKeyPressed += OnKeyPressedSource;
-        _rowAmount.AddController(_amountKeyController);
-        _grpMain.Add(_rowAmount);
+        _amountRow.AddController(_amountKeyController);
         //Conversion Rate
-        _grpConversionRate = Adw.PreferencesGroup.New();
-        _grpConversionRate.SetMarginTop(6);
-        _grpConversionRate.SetTitle(_controller.Localizer["ConversionNeeded"]);
-        _grpConversionRate.SetVisible(false);
-        _rowSourceCurrency = Adw.EntryRow.New();
-        _rowSourceCurrency.OnNotify += (sender, e) =>
+        _sourceCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -129,9 +76,8 @@ public partial class TransferDialog
         _sourceCurrencyKeyController = Gtk.EventControllerKey.New();
         _sourceCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _sourceCurrencyKeyController.OnKeyPressed += OnKeyPressedSource;
-        _rowSourceCurrency.AddController(_sourceCurrencyKeyController);
-        _rowDestCurrency = Adw.EntryRow.New();
-        _rowDestCurrency.OnNotify += (sender, e) =>
+        _sourceCurrencyRow.AddController(_sourceCurrencyKeyController);
+        _destinationCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -141,15 +87,7 @@ public partial class TransferDialog
         _destCurrencyKeyController = Gtk.EventControllerKey.New();
         _destCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
-        _rowDestCurrency.AddController(_destCurrencyKeyController);
-        _rowConversionResult = Adw.ActionRow.New();
-        _lblConversionResult = Gtk.Label.New(null);
-        _rowConversionResult.SetTitle(_controller.Localizer["Result"]);
-        _rowConversionResult.AddSuffix(_lblConversionResult);
-        _grpConversionRate.Add(_rowSourceCurrency);
-        _grpConversionRate.Add(_rowDestCurrency);
-        _grpConversionRate.Add(_rowConversionResult);
-        _grpMain.Add(_grpConversionRate);
+        _destinationCurrencyRow.AddController(_destCurrencyKeyController);
         //Load
         foreach (var recentAccount in _controller.RecentAccounts)
         {
@@ -169,109 +107,96 @@ public partial class TransferDialog
             button.GetStyleContext().AddProvider(btnCssProvider, 800);
             button.OnClicked += (Gtk.Button sender, EventArgs e) =>
             {
-                _popRecentAccounts.Popdown();
-                _rowDestinationAccount.SetSubtitle(row.GetSubtitle() ?? "");
-                _rowDestinationPassword.SetVisible(false);
-                _rowDestinationPassword.SetSensitive(true);
-                _rowDestinationPassword.SetText("");
-                _rowAmount.SetText("");
-                _grpConversionRate.SetVisible(false);
-                _rowSourceCurrency.SetText("");
-                _rowDestCurrency.SetText("");
+                _recentAccountsPopover.Popdown();
+                _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
+                _destinationPasswordRow.SetVisible(false);
+                _destinationPasswordRow.SetSensitive(true);
+                _destinationPasswordRow.SetText("");
+                _amountRow.SetText("");
+                _conversionRateGroup.SetVisible(false);
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
                 Validate();
             };
             row.AddPrefix(button);
             row.SetActivatableWidget(button);
-            _grpRecentAccounts.Add(row);
+            _recentAccountsGroup.Add(row);
         }
-        _rowAmount.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString));
+        _amountRow.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString));
         Validate();
     }
 
-    public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
+    /// <summary>
+    /// Constructs a TransferDialog
+    /// </summary>
+    /// <param name="controller">TransferDialogController</param>
+    /// <param name="parentWindow">Gtk.Window</param>
+    public TransferDialog(TransferDialogController controller, Gtk.Window parent) : this(Builder.FromFile("transfer_dialog.ui", controller.Localizer), controller, parent)
     {
-        add
-        {
-            _dialog.OnResponse += value;
-        }
-        remove
-        {
-            _dialog.OnResponse -= value;
-        }
     }
-
-    /// <summary>
-    /// Shows the dialog
-    /// </summary>
-    public void Show() => _dialog.Show();
-
-    /// <summary>
-    /// Destroys the dialog
-    /// </summary>
-    public void Destroy() => _dialog.Destroy();
 
     /// <summary>
     /// Validates the dialog's input
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransfer(_rowDestinationAccount.GetSubtitle() ?? "", _rowDestinationPassword.GetText(), _rowAmount.GetText(), _rowSourceCurrency.GetText(), _rowDestCurrency.GetText());
-        _rowDestinationAccount.RemoveCssClass("error");
-        _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
-        _rowDestinationPassword.RemoveCssClass("error");
-        _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
-        _rowAmount.RemoveCssClass("error");
-        _rowAmount.SetTitle(_controller.Localizer["Amount", "Field"]);
-        _rowAmount.SetVisible(true);
-        _rowSourceCurrency.RemoveCssClass("error");
-        _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
-        _rowDestCurrency.RemoveCssClass("error");
-        _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode ?? "");
+        var checkStatus = _controller.UpdateTransfer(_destinationAccountRow.GetSubtitle() ?? "", _destinationPasswordRow.GetText(), _amountRow.GetText(), _sourceCurrencyRow.GetText(), _destinationCurrencyRow.GetText());
+        _destinationAccountRow.RemoveCssClass("error");
+        _destinationAccountRow.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
+        _destinationPasswordRow.RemoveCssClass("error");
+        _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
+        _amountRow.RemoveCssClass("error");
+        _amountRow.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _amountRow.SetVisible(true);
+        _sourceCurrencyRow.RemoveCssClass("error");
+        _sourceCurrencyRow.SetTitle(_controller.SourceCurrencyCode);
+        _destinationCurrencyRow.RemoveCssClass("error");
+        _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _lblConversionResult.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
-            _dialog.SetResponseEnabled("ok", true);
+            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
+            SetResponseEnabled("ok", true);
         }
         else
         {
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
-                _rowDestinationAccount.AddCssClass("error");
-                _rowDestinationAccount.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
-                _rowAmount.SetVisible(false);
+                _destinationAccountRow.AddCssClass("error");
+                _destinationAccountRow.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
+                _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
             {
-                _rowDestinationPassword.SetVisible(true);
-                _rowDestinationPassword.AddCssClass("error");
-                _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Required"]);
-                _rowAmount.SetVisible(false);
+                _destinationPasswordRow.SetVisible(true);
+                _destinationPasswordRow.AddCssClass("error");
+                _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Required"]);
+                _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
             {
-                _rowDestinationPassword.AddCssClass("error");
-                _rowDestinationPassword.SetTitle(_controller.Localizer["DestinationPassword", "Invalid"]);
-                _rowAmount.SetVisible(false);
+                _destinationPasswordRow.AddCssClass("error");
+                _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Invalid"]);
+                _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
-                _rowAmount.AddCssClass("error");
-                _rowAmount.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+                _amountRow.AddCssClass("error");
+                _amountRow.SetTitle(_controller.Localizer["Amount", "Invalid"]);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
             {
-                _grpConversionRate.SetVisible(true);
-                _rowSourceCurrency.AddCssClass("error");
-                _rowSourceCurrency.SetTitle(_controller.SourceCurrencyCode);
-                _rowDestCurrency.AddCssClass("error");
-                _rowDestCurrency.SetTitle(_controller.DestinationCurrencyCode!);
-                _lblConversionResult.SetText(_controller.Localizer["NotAvailable"]);
+                _conversionRateGroup.SetVisible(true);
+                _sourceCurrencyRow.AddCssClass("error");
+                _sourceCurrencyRow.SetTitle(_controller.SourceCurrencyCode);
+                _destinationCurrencyRow.AddCssClass("error");
+                _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode!);
+                _conversionResultLabel.SetText(_controller.Localizer["NotAvailable"]);
             }
-            _dialog.SetResponseEnabled("ok", false);
+            SetResponseEnabled("ok", false);
         }
         if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
         {
-            _rowDestinationPassword.SetSensitive(false);
+            _destinationPasswordRow.SetSensitive(false);
         }
     }
 
@@ -293,14 +218,14 @@ public partial class TransferDialog
             if (e.ResponseId == (int)Gtk.ResponseType.Accept)
             {
                 var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                _rowDestinationAccount.SetSubtitle(path);
-                _rowDestinationPassword.SetVisible(false);
-                _rowDestinationPassword.SetSensitive(true);
-                _rowDestinationPassword.SetText("");
-                _rowAmount.SetText("");
-                _grpConversionRate.SetVisible(false);
-                _rowSourceCurrency.SetText("");
-                _rowDestCurrency.SetText("");
+                _destinationAccountRow.SetSubtitle(path);
+                _destinationPasswordRow.SetVisible(false);
+                _destinationPasswordRow.SetSensitive(true);
+                _destinationPasswordRow.SetText("");
+                _amountRow.SetText("");
+                _conversionRateGroup.SetVisible(false);
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
                 Validate();
             }
         };
