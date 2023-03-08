@@ -45,6 +45,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _cultureDate = cultureDate;
         //Build UI
         builder.Connect(this);
+        //Filter Checkbox
+        _filterCheckButton.OnToggled += FilterToggled;
         //Edit Button
         _editButton.OnClicked += Edit;
         //Delete Button
