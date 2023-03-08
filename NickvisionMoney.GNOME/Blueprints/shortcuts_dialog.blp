@@ -1,0 +1,94 @@
+using Gtk 4.0;
+using Adw 1;
+
+Gtk.ShortcutsWindow _root {
+  default-width: 600;
+  default-height: 500;
+  modal: true;
+  resizable: true;
+  destroy-with-parent: false;
+  hide-on-close: true;
+
+  Gtk.ShortcutsSection {
+    Gtk.ShortcutsGroup {
+      title: _("Account");
+
+      Gtk.ShortcutsShortcut {
+        title: _("NewAccount");
+        accelerator: "<Control>n";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("OpenAccount");
+        accelerator: "<Control>o";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("CloseAccount.GTK");
+        accelerator: "<Control>w";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: _("AccountActions.GTK");
+
+      Gtk.ShortcutsShortcut {
+        title: _("Transfer");
+        accelerator: "<Control>t";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("ImportFromFile");
+        accelerator: "<Control>i";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: _("Group");
+
+      Gtk.ShortcutsShortcut {
+        title: _("NewGroup");
+        accelerator: "<Control>g";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: _("Transaction");
+
+      Gtk.ShortcutsShortcut {
+        title: _("NewTransaction");
+        accelerator: "<Control><Shift>n";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: _("Application");
+
+      Gtk.ShortcutsShortcut {
+        title: _("Preferences");
+        accelerator: "<Control>comma";
+      }
+
+
+      Gtk.ShortcutsShortcut {
+        title: _("KeyboardShortcuts");
+        accelerator: "<Control>question";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Help");
+        accelerator: "F1";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("ToggleSidebar.GTK");
+        accelerator: "F9";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Quit");
+        accelerator: "<Control>q";
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.MessageDialog _root {
+  heading: _("AccountSettings");
+  default-width: 450;
+  hide-on-close: true;
+  modal: true;
+  
+  Gtk.Box {
+    orientation: vertical;
+    spacing: 16;
+    margin-top: 4;
+    
+    Adw.PreferencesGroup {
+      Adw.EntryRow _nameRow {
+        title: _("Name.Field");
+      }
+      
+      Adw.ComboRow _accountTypeRow {
+        title: _("AccountType.Field");
+        subtitle: _("AccountType.Description");
+        subtitle-lines: 4;
+        model: Gtk.StringList {
+          strings [_("AccountType.Checking"), _("AccountType.Savings"), _("AccountType.Business")]
+        };
+      }
+      
+      Adw.ActionRow {
+        title: _("DefaultTransactionType.Field");
+        
+        [suffix]
+        Gtk.Box {
+          orientation: horizontal;
+          valign: center;
+          
+          Gtk.ToggleButton _incomeButton {
+            label: _("Income");
+          }
+          
+          Gtk.ToggleButton _expenseButton {
+            label: _("Expense");
+          }
+          
+          styles ["linked"]
+        }
+      }
+    }
+    
+    Gtk.Label _reportedCurrencyLabel {
+      use-markup: true;
+      justify: center;
+    }
+    
+    Adw.PreferencesGroup {
+      Adw.ExpanderRow _customCurrencyRow {
+        title: _("UseCustomCurrency.Field");
+        show-enable-switch: true;
+        enable-expansion: false;
+        
+        Adw.ActionRow _customSymbolRow {
+          title: _("CustomCurrencySymbol.Field");
+          
+          [suffix]
+          Gtk.Entry _customSymbolText {
+            valign: center;
+            max-length: 3;
+            placeholder-text: _("CustomCurrencySymbol.Placeholder");
+            activates-default: true;
+          }
+        }
+        
+        Adw.ActionRow _customCodeRow {
+          title: _("CustomCurrencyCode.Field");
+          
+          [suffix]
+          Gtk.Entry _customCodeText {
+            valign: center;
+            max-length: 3;
+            placeholder-text: _("CustomCurrencyCode.Placeholder");
+            activates-default: true;
+          }
+        }
+      }
+    }
+    
+    Adw.PreferencesGroup {
+      Adw.ExpanderRow _passwordRow {
+        title: _("ManagePassword");
+        subtitle: _("ManagePassword.Description");
+        icon-name: "dialog-password-symbolic";
+        show-enable-switch: true;
+        enable-expansion: false;
+        
+        Adw.PasswordEntryRow _newPasswordRow {
+          title: _("NewPassword.Field");
+        }
+        
+        Adw.PasswordEntryRow _newPasswordConfirmRow {
+          title: _("ConfirmPassword.Field");
+        }
+        
+        Adw.ActionRow {
+          subtitle: _("ManagePassword.Warning");
+       
+          [suffix]
+          Gtk.Button _removePasswordButton {
+            label: _("Remove");
+            valign: center;
+            
+            styles ["destructive-action"]
+          }
+       
+          styles ["warning"]
+        }
+      }
+    }
+  }
+}

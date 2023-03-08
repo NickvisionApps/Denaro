@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.MessageDialog _root {
+  heading: _("Group");
+  default-width: 360;
+  hide-on-close: true;
+  modal: true;
+
+  Adw.PreferencesGroup {
+    Adw.EntryRow _nameRow {
+      title: _("Name.Field");
+      input-hints: spellcheck;
+      activates-default: true;
+    }
+
+    Adw.EntryRow _descriptionRow {
+      title: _("Description.Field");
+      input-hints: spellcheck;
+      activates-default: true;
+    }
+  }
+}

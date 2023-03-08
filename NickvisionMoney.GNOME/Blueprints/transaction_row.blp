@@ -1,0 +1,62 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.PreferencesGroup _root{
+  Adw.ActionRow _row {
+    use-markup: false;
+    title-lines: 1;
+    subtitle-lines: 1;
+    width-request: 300;
+    height-request: 78;
+    activatable-widget: _editButton;
+    
+    [prefix]
+    Gtk.Button _idButton {
+      name: "btnId";
+      valign: center;
+      
+      styles ["circular"]
+    }
+    
+    [prefix]
+    Gtk.Image _compactIcon {
+      name: "iconCompact";
+      icon-name: "big-dot-symbolic";
+    }
+    
+    [suffix]
+    Gtk.Box _suffixBox {
+      orientation: horizontal;
+      spacing: 2;
+      valign: center;
+      
+      Gtk.Label _amountLabel {
+        halign: end;
+        valign: center;
+        margin-end: 6;
+      }
+      
+      Gtk.Box {
+        orientation: horizontal;
+        spacing: 6;
+        halign: end;
+        
+        Gtk.Button _editButton {
+          icon-name: "document-edit-symbolic";
+          valign: center;
+          tooltip-text: _("Edit.TransactionRow");
+          
+          styles ["flat"]
+        }
+        
+        Gtk.Button _deleteButton {
+          icon-name: "user-trash-symbolic";
+          valign: center;
+          tooltip-text: _("Delete.TransactionRow");
+          
+          styles ["flat"]
+        }
+      }
+    }
+  }
+}
