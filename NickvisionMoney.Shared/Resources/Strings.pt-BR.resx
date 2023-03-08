@@ -22,14 +22,20 @@
   <data name="About" xml:space="preserve">
 		<value>Sobre {0}</value>
   </data>
+  <data name="Help" xml:space="preserve">
+		<value>Ajuda</value>
+  </data>
   <data name="Changelog" xml:space="preserve">
-		<value>Registro de mudanças</value>
+		<value>Registro de alterações</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
 		<value>Repositório do GitHub</value>
   </data>
+  <data name="MatrixChat" xml:space="preserve">
+		<value>Chat Matrix</value>
+  </data>
   <data name="ReportABug" xml:space="preserve">
-		<value>Relatar um Erro</value>
+		<value>Reportar um erro</value>
   </data>
   <data name="Discussions" xml:space="preserve">
 		<value>Discussões</value>
@@ -81,6 +87,18 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="Save" xml:space="preserve">
 		<value>Salvar</value>
   </data>
+  <data name="Back" xml:space="preserve">
+		<value>Voltar</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+		<value>Adicionar</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+		<value>Remover</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+		<value>Aplicar</value>
+  </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
 		<value>Página Inicial</value>
@@ -98,6 +116,9 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
 		<value>Atalhos do Teclado</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+		<value>Sair</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
@@ -122,7 +143,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nenhuma Conta Aberta</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Crie ou abra uma conta para iniciar. Você também pode arrastar um ficheiro do seu explorador de ficheiros para o aplicativo.</value>
+		<value>Crie ou abra uma conta para começar. Você também pode arrastar um arquivo do seu gerenciador de arquivos para o aplicativo.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
 		<value>Contas Recentes</value>
@@ -131,12 +152,12 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Nenhuma Conta Recente</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value>Todos os ficheiros</value>
+		<value>Todos os arquivos</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value>Bom Dia!</value>
+    <value>Olá!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
@@ -153,12 +174,18 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value>Bom Dia!</value>
+    <value>Boa Noite!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
 		<value>Esta conta já está aberta.</value>
   </data>
+  <data name="InvalidPassword" xml:space="preserve">
+		<value>Não é possível entrar na conta. A senha fornecida é inválida.</value>
+  </data>
   <!--AccountView-->
+  <data name="AccountActions" xml:space="preserve">
+		<value>Ações</value>
+  </data>
   <data name="NewTransaction" xml:space="preserve">
 		<value>Nova Transação</value>
   </data>
@@ -184,10 +211,10 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Importar de um Arquivo (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value>Exportar para Arquivo</value>
+		<value>Exportar para um Arquivo</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value>Visão Geral</value>
+		<value>Resumo</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
 		<value>Resumo de Hoje</value>
@@ -196,7 +223,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Total</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value>Rendimentos</value>
+		<value>Renda</value>
   </data>
   <data name="Expense" xml:space="preserve">
 		<value>Despesas</value>
@@ -208,34 +235,34 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Transações</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value>Nenhuma Transação</value>
+		<value>Não Há Transações</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
 		<value>Nenhuma Transação Encontrada</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value>Criar uma nova transação ou importar transações de um ficheiro.</value>
+		<value>Crie uma nova transação ou importe transações de um arquivo.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
 		<value>Nenhuma transação corresponde aos filtros especificados.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value>Classificar do Primeiro ao Último</value>
+		<value>Ordenar do Primeiro ao Último</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value>Classificar do Último ao Primeiro</value>
+		<value>Ordenar do Último ao Primeiro</value>
   </data>
   <data name="Filters" xml:space="preserve">
 		<value>Filtros</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value>Redefinir filtros da Visão Geral</value>
+		<value>Limpar Filtros do Resumo</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value>Redefinir filtros dos Grupos</value>
+		<value>Limpar Filtros de Grupos</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value>Redefinir filtros de Datas</value>
+		<value>Limpar Filtros de Datas</value>
   </data>
   <data name="Calendar" xml:space="preserve">
 		<value>Calendário</value>
@@ -247,53 +274,53 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>Início</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value>Fim</value>
+		<value>Final</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value>Apagar Grupo?</value>
+		<value>Excluir Grupo?</value>
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value>Tem certeza de que deseja excluir este grupo?
-Esta ação não pode ser desfeita.</value>
+		<value>Tem certeza de que quer excluir este grupo?
+Esta ação é irreversível.</value>
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value>Apagar Transação?</value>
+		<value>Excluir Transação?</value>
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
-		<value>Tem certeza de que deseja excluir esta transação?
-Esta ação não pode ser desfeita.</value>
+		<value>Tem certeza de que quer excluir esta transação?
+Esta ação é irreversível.</value>
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value>Apagar Transação</value>
+		<value>Excluir Transação</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
 		<value>Esta transação é a origem de transações repetidas.
-O que você gostaria de fazer com as transações repetidas?
+O que você gostaria de fazer com as transações geradas?
 
-Excluir somente a transação de origem permitirá
-modificar as transações geradas.</value>
+Excluir apenas a transação de origem permitirá modificar
+as transações geradas.</value>
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value>Apagar Apenas Origem</value>
+		<value>Excluir Somente a de Origem</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value>Apagar Origem e Gerado</value>
+		<value>Deletar a de Origem e as Geradas</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
 		<value>Atualizar Transação</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
 		<value>Esta transação é a origem de transações repetidas.
-O que você gostaria de fazer com as transações repetidas?
+O que você gostaria de fazer com as transações geradas?
 
-Atualizar somente a transação de origem desassociará
-as transações geradas da de origem.</value>
+Atualizar apenas a transação de origem desassociará
+as transações geradas dela.</value>
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value>Atualizar Apenas Origem</value>
+		<value>Atualizar Somente a de Origem</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value>Atualizar as de origem e as geradas</value>
+		<value>Atualizar a de Origem e as Geradas</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
 		<value>Intervalo de Repetição Alterado</value>
@@ -302,16 +329,16 @@ as transações geradas da de origem.</value>
 		<value>O intervalo de repetição foi alterado.
 O que você gostaria de fazer com as transações geradas existentes?
 
-Novas transações recorrentes irão se basear no novo intervalo.</value>
+Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value>Apagar Existentes</value>
+		<value>Excluir as Existentes</value>
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value>Desassociar Existentes</value>
+		<value>Desassociar as Existentes</value>
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value>Esta conta não possui dinheiro disponível para transferência.</value>
+		<value>Esta conta não tem dinheiro disponível para transferir.</value>
   </data>
   <data name="Hide" xml:space="preserve">
 		<value>Ocultar</value>
@@ -319,53 +346,77 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   <data name="HideGroups" xml:space="preserve">
 		<value>Ocultar Grupos</value>
   </data>
+  <data name="Show" xml:space="preserve">
+		<value>Mostrar</value>
+  </data>
   <data name="ShowGroups" xml:space="preserve">
 		<value>Mostrar Grupos</value>
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
-		<value>Alternar Visibilidade de Grupos</value>
+		<value>Alternar Visibilidade dos Grupos</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+		<value>Configurações da Conta</value>
+  </data>
+  <data name="SortBy.Id" xml:space="preserve">
+		<value>Ordenar por Id</value>
+  </data>
+  <data name="SortBy.Date" xml:space="preserve">
+		<value>Ordenar por Data</value>
+  </data>
+  <data name="SortBy.Amount" xml:space="preserve">
+		<value>Ordenar por Valor</value>
+  </data>
+  <data name="SearchDescription.Placeholder" xml:space="preserve">
+		<value>Pesquisar por descrição</value>
+  </data>
+  <data name="PasswordRemoved" xml:space="preserve">
+		<value>A senha da conta foi removida.</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+		<value>A senha da conta foi alterada.</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value>Sem Grupo</value>
+		<value>Sem grupo</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value>Transações sem grupo</value>
+		<value>Transações sem um grupo</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value>Importada {0} transação do ficheiro.</value>
+		<value>Importada {0} transação do arquivo.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value>Importadas {0} transações do ficheiro.</value>
+		<value>Importadas {0} transações do arquivo.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value>Não foi possível importar dados do ficheiro. Formato de ficheiro não-suportado.</value>
+		<value>Não é possível importar as informações do arquivo. Este tipo de arquivo não é suportado.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value>Conta exportada para ficheiro com sucesso.</value>
+		<value>Conta exportada para o arquivo com sucesso.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value>Não foi possível exportar conta para o ficheiro.</value>
+		<value>Não é possível exportar a conta para um arquivo.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value>Transferir Para {0}</value>
+		<value>Transferir para {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value>Transferir De {0}</value>
+		<value>Transferir de {0}</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Editar Transação</value>
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value>Remover Transação</value>
+		<value>Excluir Transação</value>
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
 		<value>Editar Grupo</value>
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value>Remover Grupo</value>
+		<value>Excluir Grupo</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
@@ -385,54 +436,100 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Semanalmente</value>
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value>A cada duas semanas</value>
+		<value>Quinzenalmente</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
 		<value>Mensalmente</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value>A cada três meses</value>
+		<value>Trimestralmente</value>
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
 		<value>Anualmente</value>
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value>A cada dois anos</value>
+		<value>Bienalmente</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
 		<value>Sem Data Final</value>
   </data>
   <data name="View" xml:space="preserve">
-		<value>Visualizar</value>
+		<value>Abrir</value>
   </data>
   <data name="Delete" xml:space="preserve">
-		<value>Remover</value>
+		<value>Excluir</value>
   </data>
   <data name="Upload" xml:space="preserve">
-		<value>Upload</value>
+		<value>Carregar</value>
+  </data>
+  <data name="MakeCopy" xml:space="preserve">
+		<value>Criar Cópia</value>
+  </data>
+  <data name="Copy.Transaction" xml:space="preserve">
+		<value>(Cópia)</value>
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
 		<value>Transferir</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value>Transferir dinheiro criará uma transação de gasto com o valor fornecido nessa conta e uma transação de renda com o valor fornecido na conta para a qual transferir.</value>
+		<value>Transferir dinheiro criará uma transação de despesa nesta conta com o valor fornecido e uma transação de renda na conta de destino com o valor fornecido.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value>Nenhuma conta selecionada</value>
+		<value>Nenhuma Conta Selecionada</value>
+  </data>
+  <data name="EnterConversionRate" xml:space="preserve">
+		<value>Insira a conversão aqui</value>
+  </data>
+  <data name="ConversionNeeded" xml:space="preserve">
+		<value>Conversão Necessária</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+		<value>Resultado</value>
+  </data>
+  <!--AccountSettingsDialog-->
+  <data name="AccountType.Checking" xml:space="preserve">
+		<value>Corrente</value>
+  </data>
+  <data name="AccountType.Savings" xml:space="preserve">
+		<value>Poupança</value>
+  </data>
+  <data name="AccountType.Business" xml:space="preserve">
+		<value>Comercial</value>
+  </data>
+  <data name="AccountType.Description" xml:space="preserve">
+		<value>Este é só um rótulo útil que não afeta o funcionamento do aplicativo.</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+		<value>N/A</value>
+  </data>
+  <data name="ReportedCurrency" xml:space="preserve">
+		<value>Seu sistema informou que sua moeda é</value>
+  </data>
+  <data name="ManagePassword" xml:space="preserve">
+		<value>Alterar Senha</value>
+  </data>
+  <data name="ManagePassword.Description" xml:space="preserve">
+		<value>Defina uma nova senha ou remova uma.</value>
+  </data>
+  <data name="ManagePassword.Warning" xml:space="preserve">
+		<value>Se a senha for perdida, não será possível restaurar a sua conta!</value>
   </data>
   <!--Fields-->
+  <data name="Id.Field" xml:space="preserve">
+		<value>Id</value>
+  </data>
   <data name="Name.Field" xml:space="preserve">
-		<value />
+		<value>Nome</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
 		<value>Insira o nome aqui</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value>Nome (vazio)</value>
+		<value>Nome (Vazio)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value>Nome (existe)</value>
+		<value>Nome (Existe)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
 		<value>Descrição</value>
@@ -441,7 +538,7 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Insira a descrição aqui</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value>Descrição (vazia)</value>
+		<value>Descrição (Vazia)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
 		<value>Valor</value>
@@ -450,7 +547,7 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Insira o valor aqui</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value>Valor (inválido)</value>
+		<value>Valor (Inválido)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
 		<value>Data</value>
@@ -459,16 +556,16 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Tipo</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value>Intervalo de recorrência</value>
+		<value>Intervalo de Repetição</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value>Data final da recorrência</value>
+		<value>Data Final da Repetição</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value>Limpar data final</value>
+		<value>Limpar Data Final</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value>Data final da recorrência (inválida)</value>
+		<value>Data Final da Repetição (Inválida)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
 		<value>Grupo</value>
@@ -480,20 +577,91 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Recibo</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value>Conta de destino</value>
+		<value>Conta de Destino</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
 		<value>Selecione uma conta de destino</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value>Conta de destino (inválida)</value>
+		<value>Conta de Destino (Inválida)</value>
+  </data>
+  <data name="AccountType.Field" xml:space="preserve">
+		<value>Tipo de Conta</value>
+  </data>
+  <data name="DefaultTransactionType.Field" xml:space="preserve">
+		<value>Tipo Padrão das Transações</value>
+  </data>
+  <data name="UseCustomCurrency.Field" xml:space="preserve">
+		<value>Usar Moeda Personalizada</value>
+  </data>
+  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
+		<value>Símbolo da Moeda</value>
+  </data>
+  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
+		<value>Insira o símbolo aqui</value>
+  </data>
+  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
+		<value>Símbolo da Moeda (Vazio)</value>
+  </data>
+  <data name="CustomCurrencyCode.Field" xml:space="preserve">
+		<value>Código da Moeda</value>
+  </data>
+  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
+		<value>Código da Moeda (Vazio)</value>
+  </data>
+  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
+		<value>Insira o código aqui</value>
+  </data>
+  <data name="Password.Field" xml:space="preserve">
+		<value>Senha</value>
+  </data>
+  <data name="Password.Placeholder" xml:space="preserve">
+		<value>Insira a senha aqui</value>
+  </data>
+  <data name="NewPassword.Field" xml:space="preserve">
+		<value>Nova Senha</value>
+  </data>
+  <data name="ConfirmPassword.Field" xml:space="preserve">
+		<value>Confirmar Senha</value>
+  </data>
+  <data name="DestinationPassword.Field" xml:space="preserve">
+		<value>Senha da Conta de Destino</value>
+  </data>
+  <data name="DestinationPassword.Required" xml:space="preserve">
+		<value>Senha da Conta de Destino (Obrigatória)</value>
+  </data>
+  <data name="DestinationPassword.Invalid" xml:space="preserve">
+		<value>Senha da Conta de Destino (Inválida)</value>
+  </data>
+  <!--PDF-->
+  <data name="Generated.PDF" xml:space="preserve">
+		<value>Gerado: {0}</value>
+  </data>
+  <data name="Currency.PDF" xml:space="preserve">
+		<value>Moeda</value>
+  </data>
+  <data name="GroupName.PDF" xml:space="preserve">
+		<value>Nome do Grupo</value>
+  </data>
+  <data name="Receipts.PDF" xml:space="preserve">
+		<value>Recibos</value>
+  </data>
+  <data name="PageNumber.PDF" xml:space="preserve">
+		<value>Página {0}</value>
+  </data>
+  <!--PasswordDialog-->
+  <data name="EnterPassword" xml:space="preserve">
+		<value>Insira a Senha para Entrar:</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value>Interface de usuário</value>
+		<value>Interface de Usuário</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+		<value>Desbloquear</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value>Customizar a interface da aplicação.</value>
+		<value>Personalize a interface do aplicativo.</value>
   </data>
   <data name="Theme" xml:space="preserve">
 		<value>Tema</value>
@@ -511,30 +679,63 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Cores</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>Customize as cores usadas no Denaro.</value>
+		<value>Personalize as cores usadas no Denaro.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value>Cor padrão de transações</value>
+		<value>Cor Padrão das Transações</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value>Cor padrão de transferências</value>
+		<value>Cor Padrão das Transferências</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value>Alterações nessa configuração serão aplicadas somente em novas transações.</value>
+		<value>Mudanças nessa configuração serão aplicadas somente às transações recém-adicionadas.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value>Alterações nessa configuração serão aplicadas somente em novas transferências.</value>
+		<value>Mudanças nessa configuração serão aplicadas somente a novas transferências.</value>
+  </data>
+  <data name="AccountCheckingColor" xml:space="preserve">
+		<value>Cor de Contas Corrente</value>
+  </data>
+  <data name="AccountSavingsColor" xml:space="preserve">
+		<value>Cor de Contas Poupança</value>
+  </data>
+  <data name="AccountBusinessColor" xml:space="preserve">
+		<value>Cor de Contas Comerciais</value>
+  </data>
+  <data name="Locale" xml:space="preserve">
+		<value>Configurações Regionais</value>
+  </data>
+  <data name="LocaleDescription" xml:space="preserve">
+		<value>Personalize como o Denaro usa as configurações regionais.</value>
+  </data>
+  <data name="InsertSeparator" xml:space="preserve">
+		<value>Inserir Separador de Decimais</value>
+  </data>
+  <data name="InsertSeparator.Description" xml:space="preserve">
+		<value>Defina para quais teclas pressionadas o separador decimal regional será inserido em um campo de valor.</value>
+  </data>
+  <data name="InsertSeparatorOff" xml:space="preserve">
+		<value>Nenhuma</value>
+  </data>
+  <data name="InsertSeparatorNumpad" xml:space="preserve">
+		<value>Somente o ponto do teclado numérico</value>
+  </data>
+  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
+		<value>Ponto e Vírgula</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value>Aplicação</value>
+		<value>Aplicativo</value>
   </data>
   <!--WinUI Specific-->
+  <data name="Preview.WinUI" xml:space="preserve">
+		<value>PREVIEW</value>
+  </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Por favor, corrija os erros acima.</value>
+		<value>Por favor, conserte os erros acima.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>O que há de novo?</value>
+		<value>O Que Há de Novo?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Desenvolvedores:
@@ -553,242 +754,44 @@ Tradutores:
 		<value>Reinicie o aplicativo para mudar o tema.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Reiniciar para aplicar o tema?</value>
+		<value>Reiniciar Para Aplicar o Tema?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Gostaria de reiniciar {0} para aplicar o novo tema?
-Qualquer trabalho não salvo será perdido.</value>
+Quaisquer trabalhos não salvos serão perdidos.</value>
+  </data>
+  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
+		<value>As senhas não coincidem.</value>
   </data>
   <!--GTK Specific-->
+  <data name="Summary.GTK" xml:space="preserve">
+		<value>Gerencie suas finanças pessoais</value>
+  </data>
+  <data name="Keywords.GTK" xml:space="preserve">
+		<value>dinheiro;finanças;carteira;moeda;banco;GTK;Nickvision;</value>
+  </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value>Menu de contas</value>
+		<value>Menu de Contas</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value>Alternar barra lateral</value>
+		<value>Alternar Barra Lateral</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value>Menu principal</value>
+		<value>Menu Principal</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value>Recente</value>
+		<value>Recentes</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value>Fechar conta</value>
+		<value>Fechar Conta</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>Conta Denaro (*.nmoney)</value>
   </data>
-  <data name="Help" xml:space="preserve">
-    <value>Ajuda</value>
-  </data>
-  <data name="MatrixChat" xml:space="preserve">
-    <value>Chat Matrix</value>
-  </data>
-  <data name="AccountActions" xml:space="preserve">
-    <value>Ações</value>
-  </data>
-  <data name="Show" xml:space="preserve">
-    <value>Exibir</value>
-  </data>
-  <data name="AccountSettings" xml:space="preserve">
-    <value>Configurações da Conta</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remover</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Voltar</value>
-  </data>
-  <data name="Apply" xml:space="preserve">
-    <value>Salvar</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Sair</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Adicionar</value>
-  </data>
-  <data name="InvalidPassword" xml:space="preserve">
-    <value>Não foi possível conectar em sua conta. Senha inserida está incorreta.</value>
-  </data>
-  <data name="SortBy.Id" xml:space="preserve">
-    <value>Sort By Id</value>
-  </data>
-  <data name="SortBy.Date" xml:space="preserve">
-    <value>Sort By Date</value>
-  </data>
-  <data name="SortBy.Amount" xml:space="preserve">
-    <value>Sort By Amount</value>
-  </data>
-  <data name="SearchDescription.Placeholder" xml:space="preserve">
-    <value>Search by description</value>
-  </data>
-  <data name="PasswordRemoved" xml:space="preserve">
-    <value>The password of the account was removed.</value>
-  </data>
-  <data name="PasswordUpdated" xml:space="preserve">
-    <value>The password of the account was changed.</value>
-  </data>
-  <data name="MakeCopy" xml:space="preserve">
-    <value>Make a Copy</value>
-  </data>
-  <data name="Copy.Transaction" xml:space="preserve">
-    <value>(Copy)</value>
-  </data>
-  <data name="EnterConversionRate" xml:space="preserve">
-    <value>Enter conversion here</value>
-  </data>
-  <data name="ConversionNeeded" xml:space="preserve">
-    <value>Conversion Needed</value>
-  </data>
-  <data name="Result" xml:space="preserve">
-    <value>Result</value>
-  </data>
-  <data name="AccountType.Checking" xml:space="preserve">
-    <value>Checking</value>
-  </data>
-  <data name="AccountType.Savings" xml:space="preserve">
-    <value>Savings</value>
-  </data>
-  <data name="AccountType.Business" xml:space="preserve">
-    <value>Business</value>
-  </data>
-  <data name="AccountType.Description" xml:space="preserve">
-    <value>This is only a useful label that doesn't affect how the app works.</value>
-  </data>
-  <data name="NotAvailable" xml:space="preserve">
-    <value>N/A</value>
-  </data>
-  <data name="ReportedCurrency" xml:space="preserve">
-    <value>Your system reported that your currency is</value>
-  </data>
-  <data name="ManagePassword" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="ManagePassword.Description" xml:space="preserve">
-    <value>Set a new password or remove one.</value>
-  </data>
-  <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>If the password is lost, there is no way to restore your account!</value>
-  </data>
-  <data name="Id.Field" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="AccountType.Field" xml:space="preserve">
-    <value>Account Type</value>
-  </data>
-  <data name="DefaultTransactionType.Field" xml:space="preserve">
-    <value>Default Transaction Type</value>
-  </data>
-  <data name="UseCustomCurrency.Field" xml:space="preserve">
-    <value>Use Custom Currency</value>
-  </data>
-  <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-    <value>Currency Symbol</value>
-  </data>
-  <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-    <value>Enter symbol here</value>
-  </data>
-  <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-    <value>Currency Symbol (Empty)</value>
-  </data>
-  <data name="CustomCurrencyCode.Field" xml:space="preserve">
-    <value>Currency Code</value>
-  </data>
-  <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-    <value>Currency Code (Empty)</value>
-  </data>
-  <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-    <value>Enter code here</value>
-  </data>
-  <data name="Password.Field" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Password.Placeholder" xml:space="preserve">
-    <value>Enter password here</value>
-  </data>
-  <data name="NewPassword.Field" xml:space="preserve">
-    <value>New Password</value>
-  </data>
-  <data name="ConfirmPassword.Field" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
-  <data name="DestinationPassword.Field" xml:space="preserve">
-    <value>Destination Account Password</value>
-  </data>
-  <data name="DestinationPassword.Required" xml:space="preserve">
-    <value>Destination Account Password (Required)</value>
-  </data>
-  <data name="DestinationPassword.Invalid" xml:space="preserve">
-    <value>Destination Account Password (Invalid)</value>
-  </data>
-  <data name="Generated.PDF" xml:space="preserve">
-    <value>Generated: {0}</value>
-  </data>
-  <data name="Currency.PDF" xml:space="preserve">
-    <value>Currency</value>
-  </data>
-  <data name="GroupName.PDF" xml:space="preserve">
-    <value>Group Name</value>
-  </data>
-  <data name="Receipts.PDF" xml:space="preserve">
-    <value>Receipts</value>
-  </data>
-  <data name="PageNumber.PDF" xml:space="preserve">
-    <value>Page {0}</value>
-  </data>
-  <data name="EnterPassword" xml:space="preserve">
-    <value>Enter Password To Login:</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Unlock</value>
-  </data>
-  <data name="AccountCheckingColor" xml:space="preserve">
-    <value>Checking Account Color</value>
-  </data>
-  <data name="AccountSavingsColor" xml:space="preserve">
-    <value>Savings Account Color</value>
-  </data>
-  <data name="AccountBusinessColor" xml:space="preserve">
-    <value>Business Account Color</value>
-  </data>
-  <data name="Locale" xml:space="preserve">
-    <value>Locale</value>
-  </data>
-  <data name="LocaleDescription" xml:space="preserve">
-    <value>Customize how Denaro uses locale settings.</value>
-  </data>
-  <data name="InsertSeparator" xml:space="preserve">
-    <value>Insert Decimal Separator</value>
-  </data>
-  <data name="InsertSeparator.Description" xml:space="preserve">
-    <value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
-  </data>
-  <data name="InsertSeparatorOff" xml:space="preserve">
-    <value>Off</value>
-  </data>
-  <data name="InsertSeparatorNumpad" xml:space="preserve">
-    <value>Numpad period only</value>
-  </data>
-  <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-    <value>Period and Comma</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREVIEW</value>
-  </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>The passwords do not match.</value>
-  </data>
-  <data name="Summary.GTK" xml:space="preserve">
-    <value>Manage your personal finances</value>
-  </data>
-  <data name="Keywords.GTK" xml:space="preserve">
-    <value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
-  </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-    <value>New Window</value>
+		<value>Nova Janela</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-    <value>The password will be removed upon closing this dialog.</value>
+		<value>A senha será removida ao fechar esta caixa de diálogo.</value>
   </data>
 </root>
