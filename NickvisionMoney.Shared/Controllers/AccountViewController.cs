@@ -186,6 +186,9 @@ public class AccountViewController : IDisposable
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? culture.NumberFormat.CurrencySymbol;
+                culture.NumberFormat.CurrencyDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator ?? culture.NumberFormat.CurrencyDecimalSeparator;
+                culture.NumberFormat.CurrencyGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator ?? culture.NumberFormat.CurrencyGroupSeparator;
+                culture.NumberFormat.CurrencyDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
                 culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? region.ISOCurrencySymbol;
             }
             else

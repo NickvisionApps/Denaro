@@ -50,6 +50,18 @@ public class AccountMetadata : ICloneable
     /// </summary>
     public string? CustomCurrencyCode { get; set; }
     /// <summary>
+    /// Decimal separator for custom currency
+    /// </summary>
+    public string? CustomCurrencyDecimalSeparator { get; set; }
+    /// <summary>
+    /// Group separator for custom currency
+    /// </summary>
+    public string? CustomCurrencyGroupSeparator { get; set; }
+    /// <summary>
+    /// Decimal digits number for custom currency
+    /// </summary>
+    public int? CustomCurrencyDecimalDigits { get; set; }
+    /// <summary>
     /// The default transaction type of the account
     /// </summary>
     public TransactionType DefaultTransactionType { get; set; }
@@ -78,6 +90,9 @@ public class AccountMetadata : ICloneable
         UseCustomCurrency = false;
         CustomCurrencySymbol = null;
         CustomCurrencyCode = null;
+        CustomCurrencyDecimalSeparator = null;
+        CustomCurrencyGroupSeparator = null;
+        CustomCurrencyDecimalDigits = null;
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
         SortFirstToLast = true;
@@ -132,6 +147,9 @@ public class AccountMetadata : ICloneable
             result.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             result.SortFirstToLast = readQueryMetadata.GetBoolean(8);
             result.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
+            result.CustomCurrencyDecimalSeparator = string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10);
+            result.CustomCurrencyGroupSeparator = string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11);
+            result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
         }
         database.Close();
         return result;
@@ -148,6 +166,9 @@ public class AccountMetadata : ICloneable
             UseCustomCurrency = UseCustomCurrency,
             CustomCurrencySymbol = CustomCurrencySymbol,
             CustomCurrencyCode = CustomCurrencyCode,
+            CustomCurrencyDecimalSeparator = CustomCurrencyDecimalSeparator,
+            CustomCurrencyGroupSeparator = CustomCurrencyGroupSeparator,
+            CustomCurrencyDecimalDigits = CustomCurrencyDecimalDigits,
             DefaultTransactionType = DefaultTransactionType,
             ShowGroupsList = ShowGroupsList,
             SortFirstToLast = SortFirstToLast,
