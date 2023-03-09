@@ -15,7 +15,9 @@ public enum AccountMetadataCheckStatus
     EmptyName = 2,
     EmptyCurrencySymbol = 4,
     EmptyCurrencyCode = 8,
-    NonMatchingPasswords = 16,
+    EmptyDecimalSeparator = 16,
+    SameSeparators = 32,
+    NonMatchingPasswords = 64
 }
 
 /// <summary>
@@ -115,11 +117,14 @@ public class AccountSettingsDialogController
     /// <param name="useCustom">Whether or not to use a custom currency</param>
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
+    /// <param name="customDecimalSeparator">The new custom decimal separator</param>
+    /// <param name="customGroupSeparator">The new custom group separator</param>
+    /// <param name="customDecimalDigits">The new custom decimal digits number</param>
     /// <param name="defaultTransactionType">The new default transaction type</param>
     /// <param name="newPassword">The new password</param>
     /// <param name="confirmPassword">The new password confirmed</param>
     /// <returns></returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
         if (string.IsNullOrEmpty(name))
@@ -133,6 +138,14 @@ public class AccountSettingsDialogController
         if (useCustom && string.IsNullOrEmpty(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
+        }
+        if (useCustom && string.IsNullOrEmpty(customDecimalSeparator))
+        {
+            result |= AccountMetadataCheckStatus.EmptyDecimalSeparator;
+        }
+        if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customDecimalSeparator == customGroupSeparator)
+        {
+            result |= AccountMetadataCheckStatus.SameSeparators;
         }
         if (newPassword != confirmPassword)
         {

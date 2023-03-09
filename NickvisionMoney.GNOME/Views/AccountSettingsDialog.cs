@@ -27,6 +27,14 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Adw.ActionRow _customSymbolRow;
     [Gtk.Connect] private readonly Gtk.Entry _customCodeText;
     [Gtk.Connect] private readonly Adw.ActionRow _customCodeRow;
+    [Gtk.Connect] private readonly Gtk.DropDown _customDecimalSeparatorDropDown;
+    [Gtk.Connect] private readonly Gtk.Entry _customDecimalSeparatorText;
+    [Gtk.Connect] private readonly Adw.ActionRow _customDecimalSeparatorRow;
+    [Gtk.Connect] private readonly Gtk.DropDown _customGroupSeparatorDropDown;
+    [Gtk.Connect] private readonly Gtk.Entry _customGroupSeparatorText;
+    [Gtk.Connect] private readonly Adw.ActionRow _customGroupSeparatorRow;
+    [Gtk.Connect] private readonly Gtk.DropDown _customDecimalDigitsDropDown;
+    [Gtk.Connect] private readonly Adw.ActionRow _customDecimalDigitsRow;
     [Gtk.Connect] private readonly Adw.ExpanderRow _passwordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordConfirmRow;
@@ -105,6 +113,61 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
+        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string [3] { ".", ",", _controller.Localizer["CustomCurrencyDecimalSeparator", "Other"] }));
+        _customDecimalSeparatorDropDown.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected")
+            {
+                if (!_constructing)
+                {
+                    _customDecimalSeparatorText.Visible = _customDecimalSeparatorDropDown.GetSelected() == 2;
+                    Validate();
+                }
+            }
+        };
+        _customDecimalSeparatorText.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string [5] { ".", ",", "'", _controller.Localizer["CustomCurrencyGroupSeparator", "None"], _controller.Localizer["CustomCurrencyGroupSeparator", "Other"] }));
+        _customGroupSeparatorDropDown.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected")
+            {
+                if (!_constructing)
+                {
+                    _customGroupSeparatorText.Visible = _customGroupSeparatorDropDown.GetSelected() == 4;
+                    Validate();
+                }
+            }
+        };
+        _customGroupSeparatorText.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
+        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string [6] { "2", "3", "4", "5", "6", _controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"] }));
+        _customDecimalDigitsDropDown.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         //Password Row
         _passwordRow.OnNotify += (sender, e) =>
         {
@@ -171,13 +234,33 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             newPassword = _newPasswordRow.GetText();
             newPasswordConfirm = _newPasswordConfirmRow.GetText();
         }
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _customCurrencyRow.GetEnableExpansion(), _customSymbolText.GetText(), _customCodeText.GetText(), transactionType, newPassword, newPasswordConfirm);
+        var customDecimalSeparator = _customDecimalSeparatorDropDown.GetSelected() switch
+        {
+            0 => ".",
+            1 => ",",
+            2 => _customDecimalSeparatorText.GetText()
+        };
+        var customGroupSeparator = _customGroupSeparatorDropDown.GetSelected() switch
+        {
+            0 => ".",
+            1 => ",",
+            2 => "'",
+            3 => "",
+            4 => _customGroupSeparatorText.GetText()
+        };
+        var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _customCurrencyRow.GetEnableExpansion(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, newPassword, newPasswordConfirm);
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
         _customSymbolRow.RemoveCssClass("error");
         _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
         _customCodeRow.RemoveCssClass("error");
         _customCodeRow.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
+        _customDecimalSeparatorRow.RemoveCssClass("error");
+        _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Field"]);
+        _customGroupSeparatorRow.RemoveCssClass("error");
+        _customDecimalDigitsRow.RemoveCssClass("error");
+        _customDecimalDigitsRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalDigits", "Field"]);
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             SetResponseEnabled("ok", true);
@@ -198,6 +281,16 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             {
                 _customCodeRow.AddCssClass("error");
                 _customCodeRow.SetTitle(_controller.Localizer["CustomCurrencyCode", "Empty"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyDecimalSeparator))
+            {
+                _customDecimalSeparatorRow.AddCssClass("error");
+                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Empty"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
+            {
+                _customDecimalSeparatorRow.AddCssClass("error");
+                _customGroupSeparatorRow.AddCssClass("error");
             }
             SetResponseEnabled("ok", false);
         }

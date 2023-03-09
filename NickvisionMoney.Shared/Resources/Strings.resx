@@ -788,6 +788,46 @@
 		<value>Enter code here</value>
 	</data>
 
+	<data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+		<value>Decimal Separator</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+		<value>Decimal Separator (Empty)</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+		<value>Other</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+		<value>Enter decimal separator here</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+		<value>Group Separator</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+		<value>None</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+		<value>Other</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+		<value>Enter group separator here</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+		<value>Decimal Digits</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+		<value>Unlimited</value>
+	</data>
+
 	<data name="Password.Field" xml:space="preserve">
 		<value>Password</value>
 	</data>

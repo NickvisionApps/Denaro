@@ -81,6 +81,54 @@ Adw.MessageDialog _root {
             activates-default: true;
           }
         }
+
+        Adw.ActionRow _customDecimalSeparatorRow {
+          title: _("CustomCurrencyDecimalSeparator.Field");
+
+          [suffix]
+          Gtk.DropDown _customDecimalSeparatorDropDown {
+            valign: center;
+            show-arrow: false;
+          }
+
+          [suffix]
+          Gtk.Entry _customDecimalSeparatorText {
+            visible: false;
+            valign: center;
+            max-length: 2;
+            placeholder-text: _("CustomCurrencyDecimalSeparator.Placeholder");
+            activates-default: true;
+          }
+        }
+
+        Adw.ActionRow _customGroupSeparatorRow {
+          title: _("CustomCurrencyGroupSeparator.Field");
+
+          [suffix]
+          Gtk.DropDown _customGroupSeparatorDropDown {
+            valign: center;
+            show-arrow: false;
+          }
+
+          [suffix]
+          Gtk.Entry _customGroupSeparatorText {
+            visible: false;
+            valign: center;
+            max-length: 2;
+            placeholder-text: _("CustomCurrencyGroupSeparator.Placeholder");
+            activates-default: true;
+          }
+        }
+
+        Adw.ActionRow _customDecimalDigitsRow {
+          title: _("CustomCurrencyDecimalDigits.Field");
+
+          [suffix]
+          Gtk.DropDown _customDecimalDigitsDropDown {
+            valign: center;
+            show-arrow: false;
+          }
+        }
       }
     }
     
