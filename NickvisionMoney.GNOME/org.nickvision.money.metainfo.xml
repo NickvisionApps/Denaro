@@ -48,6 +48,8 @@
   <releases>
     <release version="2023.3.0-next" date="2023-03-01">
       <description>
+      <p>- Fixed an issue where editing a transaction with a receipt would crash the application</p>
+      <p>- The UI is now built using blueprint</p>
 		  <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
