@@ -170,11 +170,17 @@ public class AccountSettingsDialogController
         {
             Metadata.CustomCurrencySymbol = customSymbol;
             Metadata.CustomCurrencyCode = customCode?.ToUpper();
+            Metadata.CustomCurrencyDecimalSeparator = customDecimalSeparator;
+            Metadata.CustomCurrencyGroupSeparator = customGroupSeparator;
+            Metadata.CustomCurrencyDecimalDigits = (int?)customDecimalDigits;
         }
         else
         {
             Metadata.CustomCurrencySymbol = null;
             Metadata.CustomCurrencyCode = null;
+            Metadata.CustomCurrencyDecimalSeparator = null;
+            Metadata.CustomCurrencyGroupSeparator = null;
+            Metadata.CustomCurrencyDecimalDigits = null;
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
         NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;

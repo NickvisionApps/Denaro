@@ -584,6 +584,9 @@ public class AccountViewController : IDisposable
     public void UpdateMetadata(AccountMetadata metadata)
     {
         var oldSymbol = _account.Metadata.CustomCurrencySymbol;
+        var oldDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator;
+        var oldGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator;
+        var oldDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits;
         _account.UpdateMetadata(metadata);
         Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
         {
@@ -592,7 +595,7 @@ public class AccountViewController : IDisposable
         });
         Configuration.Current.Save();
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-        if (oldSymbol != metadata.CustomCurrencySymbol)
+        if (oldSymbol != metadata.CustomCurrencySymbol || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
         {
             foreach (var row in GroupRows)
             {

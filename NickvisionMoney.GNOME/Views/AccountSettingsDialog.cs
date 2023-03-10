@@ -207,6 +207,38 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _customCurrencyRow.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
         _customSymbolText.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeText.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
+        _customDecimalSeparatorDropDown.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
+        {
+            null => 0,
+            "." => 0,
+            "," => 1,
+            _ => 2
+        });
+        if (_customDecimalSeparatorDropDown.GetSelected() == 2)
+        {
+            _customDecimalSeparatorText.SetVisible(true);
+            _customDecimalSeparatorText.SetText(_controller.Metadata.CustomCurrencyDecimalSeparator);
+        }
+        _customGroupSeparatorDropDown.SetSelected(_controller.Metadata.CustomCurrencyGroupSeparator switch
+        {
+            null => 1,
+            "." => 0,
+            "," => 1,
+            "'" => 2,
+            "" => 3,
+            _ => 4
+        });
+        if (_customGroupSeparatorDropDown.GetSelected() == 4)
+        {
+            _customGroupSeparatorText.SetVisible(true);
+            _customGroupSeparatorText.SetText(_controller.Metadata.CustomCurrencyGroupSeparator);
+        }
+        _customDecimalDigitsDropDown.SetSelected(_controller.Metadata.CustomCurrencyDecimalDigits switch
+        {
+            null => 0,
+            99 => 5,
+            _ => (uint)_controller.Metadata.CustomCurrencyDecimalDigits - 2
+        });
         Validate();
         _constructing = false;
     }
