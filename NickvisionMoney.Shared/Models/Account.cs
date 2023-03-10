@@ -405,9 +405,9 @@ public class Account : IDisposable
             Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);
             Metadata.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
             Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
-            Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : readQueryMetadata.GetString(11);
+            Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) || Metadata.CustomCurrencyDecimalDigits == null);
+            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
         }
         else
         {
@@ -423,7 +423,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$sortFirstToLast", Metadata.SortFirstToLast);
             cmdAddMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)Metadata.SortTransactionsBy);
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalSeparator", Metadata.CustomCurrencyDecimalSeparator ?? "");
-            cmdAddMetadata.Parameters.AddWithValue("$customGroupSeparator", Metadata.CustomCurrencyGroupSeparator ?? "");
+            cmdAddMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? "empty" : Metadata.CustomCurrencyGroupSeparator);
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
             cmdAddMetadata.ExecuteNonQuery();
         }
@@ -615,7 +615,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$sortFirstToLast", metadata.SortFirstToLast);
         cmdUpdateMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)metadata.SortTransactionsBy);
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalSeparator", metadata.CustomCurrencyDecimalSeparator ?? "");
-        cmdUpdateMetadata.Parameters.AddWithValue("$customGroupSeparator", metadata.CustomCurrencyGroupSeparator ?? "");
+        cmdUpdateMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? "empty" : metadata.CustomCurrencyGroupSeparator);
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
@@ -631,7 +631,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) || Metadata.CustomCurrencyDecimalDigits == null);
+            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
             FreeMemory();
             return true;
         }
