@@ -642,7 +642,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void NewTransaction(Gio.SimpleAction sender, EventArgs e)
     {
-        using var transactionController = _controller.CreateTransactionDialogController();
+        var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
@@ -664,6 +664,7 @@ public partial class AccountView : Adw.Bin
                 _mainOverlay.SetOpacity(1.0);
                 _paneScroll.SetSensitive(true);
             }
+            transactionController.Dispose();
             transactionDialog.Destroy();
         };
     }
@@ -674,7 +675,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="source">Source transaction for copy</param>
     private void CopyTransaction(Transaction source)
     {
-        using var transactionController = _controller.CreateTransactionDialogController(source);
+        var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
@@ -696,6 +697,7 @@ public partial class AccountView : Adw.Bin
                 _mainOverlay.SetOpacity(1.0);
                 _paneScroll.SetSensitive(true);
             }
+            transactionController.Dispose();
             transactionDialog.Destroy();
         };
     }
@@ -707,7 +709,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void EditTransaction(object? sender, uint id)
     {
-        using var transactionController = _controller.CreateTransactionDialogController(id);
+        var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Show();
         transactionDialog.OnResponse += async (sender, e) =>
@@ -817,6 +819,7 @@ public partial class AccountView : Adw.Bin
                     _paneScroll.SetSensitive(true);
                 }
             }
+            transactionController.Dispose();
             transactionDialog.Destroy();
         };
     }
