@@ -81,6 +81,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
 
+    private GAsyncReadyCallback _saveCallback { get; set; }
+    private GAsyncReadyCallback _openCallback { get; set; }
+
     public bool CompactMode { get; private set; }
 
     /// <summary>
@@ -311,10 +314,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
             filters.Append(filter);
             gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-            var fileHandle = IntPtr.Zero;
-            GAsyncReadyCallback callback = async (source, res, data) =>
+            _saveCallback = async (source, res, data) =>
             {
-                fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
                 if (fileHandle != IntPtr.Zero)
                 {
                     var path = g_file_get_path(fileHandle);
@@ -332,7 +334,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                 }
             };
-            gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, callback, IntPtr.Zero);
+            gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
         }
         else
         {
@@ -381,17 +383,16 @@ public partial class MainWindow : Adw.ApplicationWindow
             var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
             filters.Append(filter);
             gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            var fileHandle = IntPtr.Zero;
-            GAsyncReadyCallback callback = async (source, res, data) =>
+            _openCallback = async (source, res, data) =>
             {
-                fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
                 if (fileHandle != IntPtr.Zero)
                 {
                     var path = g_file_get_path(fileHandle);
                     await _controller.AddAccountAsync(path);
                 }
             };
-            gtk_file_dialog_open(openFileDialog, this.Handle, IntPtr.Zero, callback, IntPtr.Zero);
+            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
         }
         else
         {
