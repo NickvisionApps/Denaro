@@ -24,6 +24,11 @@ public partial class Program
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
+    private delegate void OpenCallback(nint application, nint[] files, int n_files, nint hint, nint data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial ulong g_signal_connect_data(nint instance, string signal, OpenCallback callback, nint data, nint destroy_data, int flags);
+
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
     private MainWindowController _mainWindowController;
@@ -57,7 +62,7 @@ public partial class Program
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
         _application.OnActivate += OnActivate;
-        _application.OnOpen += OnOpen;
+        g_signal_connect_data(_application.Handle, "open", OnOpen, IntPtr.Zero, IntPtr.Zero, 0);
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
         {
             //Load file from program directory, required for `dotnet run`
@@ -72,11 +77,11 @@ public partial class Program
             };
             foreach (var prefix in prefixes)
             {
-               if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
-               {
-                   g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
-                   break;
-               }
+                if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+                {
+                    g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+                    break;
+                }
             }
         }
     }
@@ -118,12 +123,11 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
+    private void OnOpen(nint application, nint[] files, int n_files, nint hint, nint data)
     {
-        if (e.NFiles > 0)
+        if (n_files > 0)
         {
-            var pathOfFirstFile = g_file_get_path(e.Files[0].Handle);
-            _mainWindowController.FileToLaunch = pathOfFirstFile;
+            _mainWindowController.FileToLaunch = g_file_get_path(files[0]);
             OnActivate(_application, EventArgs.Empty);
         }
     }
