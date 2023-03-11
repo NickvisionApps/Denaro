@@ -55,6 +55,35 @@ public partial class AccountView : Adw.Bin
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_new();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
+
+    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
+
+    private GAsyncReadyCallback _saveCallback { get; set; }
+    private GAsyncReadyCallback _openCallback { get; set; }
+
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
@@ -493,25 +522,50 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
     {
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-        saveFileDialog.SetModal(true);
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
-        saveFileDialog.AddFilter(filterCsv);
-        saveFileDialog.OnResponse += (sender, e) =>
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            var saveFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filterCsv);
+            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+            _saveCallback = async (source, res, data) =>
             {
-                var path = saveFileDialog.GetFile()!.GetPath();
-                if (Path.GetExtension(path).ToLower() != ".csv")
+                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
                 {
-                    path += ".csv";
+                    var path = g_file_get_path(fileHandle);
+                    if (Path.GetExtension(path).ToLower() != ".csv")
+                    {
+                        path += ".csv";
+                    }
+                    _controller.ExportToFile(path ?? "");
                 }
-                _controller.ExportToFile(path ?? "");
-            }
-        };
-        saveFileDialog.Show();
+            };
+            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+            saveFileDialog.SetModal(true);
+            saveFileDialog.AddFilter(filterCsv);
+            saveFileDialog.OnResponse += (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = saveFileDialog.GetFile()!.GetPath();
+                    if (Path.GetExtension(path).ToLower() != ".csv")
+                    {
+                        path += ".csv";
+                    }
+                    _controller.ExportToFile(path ?? "");
+                }
+            };
+            saveFileDialog.Show();
+        }
     }
 
     /// <summary>
@@ -521,25 +575,50 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
     {
-        var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-        saveFileDialog.SetModal(true);
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
-        saveFileDialog.AddFilter(filterPdf);
-        saveFileDialog.OnResponse += (sender, e) =>
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            var saveFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filterPdf);
+            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+            _saveCallback = async (source, res, data) =>
             {
-                var path = saveFileDialog.GetFile()!.GetPath();
-                if (Path.GetExtension(path).ToLower() != ".pdf")
+                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
                 {
-                    path += ".pdf";
+                    var path = g_file_get_path(fileHandle);
+                    if (Path.GetExtension(path).ToLower() != ".pdf")
+                    {
+                        path += ".pdf";
+                    }
+                    _controller.ExportToFile(path ?? "");
                 }
-                _controller.ExportToFile(path ?? "");
-            }
-        };
-        saveFileDialog.Show();
+            };
+            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+            saveFileDialog.SetModal(true);
+            saveFileDialog.AddFilter(filterPdf);
+            saveFileDialog.OnResponse += (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = saveFileDialog.GetFile()!.GetPath();
+                    if (Path.GetExtension(path).ToLower() != ".pdf")
+                    {
+                        path += ".pdf";
+                    }
+                    _controller.ExportToFile(path ?? "");
+                }
+            };
+            saveFileDialog.Show();
+        }
     }
 
     /// <summary>
@@ -549,8 +628,6 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-        openFileDialog.SetModal(true);
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
         filterAll.AddPattern("*.csv");
@@ -559,45 +636,84 @@ public partial class AccountView : Adw.Bin
         filterAll.AddPattern("*.OFX");
         filterAll.AddPattern("*.qif");
         filterAll.AddPattern("*.QIF");
-        openFileDialog.AddFilter(filterAll);
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
         filterCsv.AddPattern("*.CSV");
-        openFileDialog.AddFilter(filterCsv);
         var filterOfx = Gtk.FileFilter.New();
         filterOfx.SetName("Open Financial Exchange (*.ofx)");
         filterOfx.AddPattern("*.ofx");
         filterOfx.AddPattern("*.OFX");
-        openFileDialog.AddFilter(filterOfx);
         var filterQif = Gtk.FileFilter.New();
         filterQif.SetName("Quicken Format (*.qif)");
         filterQif.AddPattern("*.qif");
         filterQif.AddPattern("*.QIF");
-        openFileDialog.AddFilter(filterQif);
-        openFileDialog.OnResponse += async (sender, e) =>
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            var openFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filterAll);
+            filters.Append(filterCsv);
+            filters.Append(filterOfx);
+            filters.Append(filterQif);
+            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+            _openCallback = async (source, res, data) =>
             {
-                var path = openFileDialog.GetFile()!.GetPath();
-                openFileDialog.Hide();
-                //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
-            }
-        };
-        openFileDialog.Show();
+                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
+                {
+                    var path = g_file_get_path(fileHandle);
+                    //Start Spinner
+                    _noTransactionsStatusPage.SetVisible(false);
+                    _transactionsScroll.SetVisible(true);
+                    _mainOverlay.SetOpacity(0.0);
+                    _spinnerBin.SetVisible(true);
+                    _spinner.Start();
+                    _paneScroll.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _spinnerBin.SetVisible(false);
+                    _mainOverlay.SetOpacity(1.0);
+                    _paneScroll.SetSensitive(true);
+                }
+            };
+            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ImportFromFile"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+            openFileDialog.SetModal(true);
+            openFileDialog.AddFilter(filterAll);
+            openFileDialog.AddFilter(filterCsv);
+            openFileDialog.AddFilter(filterOfx);
+            openFileDialog.AddFilter(filterQif);
+            openFileDialog.OnResponse += async (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = openFileDialog.GetFile()!.GetPath();
+                    openFileDialog.Hide();
+                    //Start Spinner
+                    _noTransactionsStatusPage.SetVisible(false);
+                    _transactionsScroll.SetVisible(true);
+                    _mainOverlay.SetOpacity(0.0);
+                    _spinnerBin.SetVisible(true);
+                    _spinner.Start();
+                    _paneScroll.SetSensitive(false);
+                    //Work
+                    await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
+                    //Stop Spinner
+                    _spinner.Stop();
+                    _spinnerBin.SetVisible(false);
+                    _mainOverlay.SetOpacity(1.0);
+                    _paneScroll.SetSensitive(true);
+                }
+            };
+            openFileDialog.Show();
+        }
     }
 
     /// <summary>
