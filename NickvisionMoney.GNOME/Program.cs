@@ -21,9 +21,6 @@ public partial class Program
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_resources_register(nint file);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
     private MainWindowController _mainWindowController;
@@ -122,7 +119,7 @@ public partial class Program
     {
         if (e.NFiles > 0)
         {
-            var pathOfFirstFile = g_file_get_path(e.Files[0].Handle);
+            var pathOfFirstFile = e.Files[0].GetPath();
             _mainWindowController.FileToLaunch = pathOfFirstFile;
             OnActivate(_application, EventArgs.Empty);
         }
