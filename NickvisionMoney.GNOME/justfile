@@ -51,7 +51,7 @@ publish PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR) (_install_ext
     mkdir -p {{builddir}}{{PREFIX}}/bin
     cat > {{builddir}}{{PREFIX}}/bin/{{app_id}} << EOF
     #!/bin/sh
-    exec dotnet {{PREFIX}}/{{LIB_DIR}}/{{app_id}}/{{project_name}}.GNOME.dll
+    exec dotnet {{PREFIX}}/{{LIB_DIR}}/{{app_id}}/{{project_name}}.GNOME.dll \$@
     EOF
     chmod +x {{builddir}}{{PREFIX}}/bin/{{app_id}}
 
@@ -82,7 +82,7 @@ publish-self-contained PREFIX LIB_DIR=lib: clean && (_occitan_fix PREFIX LIB_DIR
     mkdir -p {{builddir}}{{PREFIX}}/bin
     cat > {{builddir}}{{PREFIX}}/bin/{{app_id}} << EOF
     #!/bin/sh
-    exec {{PREFIX}}/{{LIB_DIR}}/{{app_id}}/{{project_name}}.GNOME
+    exec {{PREFIX}}/{{LIB_DIR}}/{{app_id}}/{{project_name}}.GNOME \$@
     EOF
     chmod +x {{builddir}}{{PREFIX}}/bin/{{app_id}}
 
