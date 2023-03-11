@@ -14,7 +14,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
-    
+
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
     [Gtk.Connect] private readonly Gtk.Button _editButton;

@@ -35,9 +35,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial uint gtk_get_minor_version();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -307,7 +304,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
-        if (gtk_get_minor_version() >= 9)
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
             var saveFileDialog = gtk_file_dialog_new();
             gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
@@ -335,7 +332,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                 }
             };
-            gtk_file_dialog_save(saveFileDialog, this.Handle, IntPtr.Zero, callback, IntPtr.Zero);
+            gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, callback, IntPtr.Zero);
         }
         else
         {
@@ -377,7 +374,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         filter.AddPattern("*.NMONEY");
-        if (gtk_get_minor_version() >= 9)
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
             var openFileDialog = gtk_file_dialog_new();
             gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);

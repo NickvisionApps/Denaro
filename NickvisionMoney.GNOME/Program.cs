@@ -69,11 +69,11 @@ public partial class Program
             };
             foreach (var prefix in prefixes)
             {
-               if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
-               {
-                   g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
-                   break;
-               }
+                if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
+                {
+                    g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+                    break;
+                }
             }
         }
     }
