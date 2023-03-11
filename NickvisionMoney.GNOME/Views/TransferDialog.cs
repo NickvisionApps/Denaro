@@ -15,6 +15,28 @@ public partial class TransferDialog : Adw.MessageDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_new();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
+
+    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
+
+    private GAsyncReadyCallback _openCallback { get; set; }
+
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
 
@@ -207,29 +229,58 @@ public partial class TransferDialog : Adw.MessageDialog
     /// <param name="e">EventArgs</param>
     private void OnSelectAccount(Gtk.Button sender, EventArgs e)
     {
-        var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectAccount"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-        openFileDialog.SetModal(true);
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["AccountFileFilter", "GTK"]);
         filter.AddPattern("*.nmoney");
-        openFileDialog.AddFilter(filter);
-        openFileDialog.OnResponse += (sender, e) =>
+        if (Gtk.Functions.GetMinorVersion() >= 9)
         {
-            if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+            var openFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filter);
+            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+            _openCallback = async (source, res, data) =>
             {
-                var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                _destinationAccountRow.SetSubtitle(path);
-                _destinationPasswordRow.SetVisible(false);
-                _destinationPasswordRow.SetSensitive(true);
-                _destinationPasswordRow.SetText("");
-                _amountRow.SetText("");
-                _conversionRateGroup.SetVisible(false);
-                _sourceCurrencyRow.SetText("");
-                _destinationCurrencyRow.SetText("");
-                Validate();
-            }
-        };
-        openFileDialog.Show();
+                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
+                {
+                    var path = g_file_get_path(fileHandle);
+                    _destinationAccountRow.SetSubtitle(path);
+                    _destinationPasswordRow.SetVisible(false);
+                    _destinationPasswordRow.SetSensitive(true);
+                    _destinationPasswordRow.SetText("");
+                    _amountRow.SetText("");
+                    _conversionRateGroup.SetVisible(false);
+                    _sourceCurrencyRow.SetText("");
+                    _destinationCurrencyRow.SetText("");
+                    Validate();
+                }
+            };
+            gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectAccount"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
+            openFileDialog.SetModal(true);
+            openFileDialog.AddFilter(filter);
+            openFileDialog.OnResponse += (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = openFileDialog.GetFile()!.GetPath() ?? "";
+                    _destinationAccountRow.SetSubtitle(path);
+                    _destinationPasswordRow.SetVisible(false);
+                    _destinationPasswordRow.SetSensitive(true);
+                    _destinationPasswordRow.SetText("");
+                    _amountRow.SetText("");
+                    _conversionRateGroup.SetVisible(false);
+                    _sourceCurrencyRow.SetText("");
+                    _destinationCurrencyRow.SetText("");
+                    Validate();
+                }
+            };
+            openFileDialog.Show();
+        }
     }
 
     /// <summary>
