@@ -63,7 +63,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
-        private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
