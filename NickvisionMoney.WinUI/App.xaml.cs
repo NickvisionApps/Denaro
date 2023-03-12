@@ -27,7 +27,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.3.0-next";
+        _mainWindowController.AppInfo.Version = "2023.3.0-beta1";
         _mainWindowController.AppInfo.Changelog = "- Updated and added translations (Thanks to everyone on Weblate)!";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
