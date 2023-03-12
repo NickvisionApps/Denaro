@@ -63,7 +63,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 
 [![Please do not theme this app](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app) 
 
-The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Money. However, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be added to `~/.config/gtk-4.0/gtk.css`. An example (not really pleasant-looking, it's just to show what modifications you can apply):
+The Linux version of this app is designed for GNOME and optimized for the default Adwaita theme. If you customized your system look, it can negatively affect Denaro. However, in case of a breakage, we provide a way to customize some elements using CSS so you can make it look as you need. The CSS code should be added to `~/.config/gtk-4.0/gtk.css`. An example (not really pleasant-looking, it's just to show what modifications you can apply):
 
 ```
 .denaro-total {
