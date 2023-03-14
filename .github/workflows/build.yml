@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v5
         with:
-          bundle: denaro.flatpak
+          bundle: org.nickvision.money.flatpak
           manifest-path: NickvisionMoney.GNOME/org.nickvision.money.json
           cache-key: flatpak-builder-${{ github.sha }}
           arch: ${{ matrix.arch }}
