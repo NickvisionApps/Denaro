@@ -1309,9 +1309,17 @@ public class Account : IDisposable
     {
         var ids = new List<uint>();
         var localizer = new Localizer();
-        var ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
+        OFXDocument? ofx = null;
+        try
+        {
+            ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
+        }
+        catch
+        {
+            return ids;
+        }
         //Transactions
-        foreach (var transaction in ofx.Transactions)
+        foreach (var transaction in ofx!.Transactions)
         {
             if (transaction.Amount != 0)
             {
