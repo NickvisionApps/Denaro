@@ -50,6 +50,7 @@
       <description>
       <p>- Fixed an issue where editing a transaction with a receipt would crash the application</p>
       <p>- Fixed an issue where OFX files with security could not be imported</p>
+      <p>- Fixed an issue where QIF files could not be imported on non-English systems</p>
       <p>- The UI is now built using blueprint</p>
       <p>- Various UI/UX fixes and improvements</p>
       <p>- Updated translations (Thanks to everyone on Weblate)!</p>
