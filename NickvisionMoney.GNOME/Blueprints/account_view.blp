@@ -5,13 +5,14 @@ menu actionsMenu {
   item(_("TransferMoney"), "account.transferMoney")
   
   section {
+    item(_("ImportFromFile"), "account.importFromFile")
+
     submenu {
       label: _("ExportToFile");
       
       item("CSV", "account.exportToCSV")
       item("PDF", "account.exportToPDF")
     }
-    item(_("ImportFromFile"), "account.importFromFile")
   }
   
   section {
