@@ -57,7 +57,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.3.0-beta1";
-        _mainWindowController.AppInfo.Changelog = "<ul<li>Fixed an issue where editing a transaction with a receipt would crash the application</li><li>The UI is now built using blueprint</li><li>Various UI/UX fixes and improvements</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul<li>Fixed an issue where editing a transaction with a receipt would crash the application</li><li>Fixed an issue where OFX files with security could not be imported</li><li>Fixed an issue where QIF files could not be imported on non-English systems</li><li>The UI is now built using blueprint</li><li>Various UI/UX fixes and improvements</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");

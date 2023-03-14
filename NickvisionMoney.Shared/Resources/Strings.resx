@@ -715,6 +715,10 @@
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Repeat Interval</value>
 	</data>
+
+	<data name="TransactionRepeatInterval.Short" xml:space="preserve">
+		<value>Repeat</value>
+	</data>
 	
 	<data name="TransactionRepeatEndDate.Field" xml:space="preserve">
 		<value>Repeat End Date</value>
