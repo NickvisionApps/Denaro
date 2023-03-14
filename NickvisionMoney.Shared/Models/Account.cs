@@ -1551,7 +1551,7 @@ public class Account : IDisposable
                             tbl.ColumnsDefinition(x =>
                             {
                                 //ID, Date, Description, Type, GroupName, RepeatInterval, Amount
-                                x.RelativeColumn(1);
+                                x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
