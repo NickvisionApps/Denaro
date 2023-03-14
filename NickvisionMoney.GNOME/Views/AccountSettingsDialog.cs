@@ -291,8 +291,6 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _customDecimalSeparatorRow.RemoveCssClass("error");
         _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Field"]);
         _customGroupSeparatorRow.RemoveCssClass("error");
-        _customDecimalDigitsRow.RemoveCssClass("error");
-        _customDecimalDigitsRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalDigits", "Field"]);
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             SetResponseEnabled("ok", true);

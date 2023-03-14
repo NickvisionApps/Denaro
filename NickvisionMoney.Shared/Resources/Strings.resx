@@ -800,6 +800,10 @@
 		<value>Decimal Separator (Empty)</value>
 	</data>
 
+	<data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+		<value>Decimal Separator (Invalid)</value>
+	</data>
+
 	<data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
 		<value>Other</value>
 	</data>
@@ -810,6 +814,10 @@
 
 	<data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
 		<value>Group Separator</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+		<value>Group Separator (Invalid)</value>
 	</data>
 
 	<data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
