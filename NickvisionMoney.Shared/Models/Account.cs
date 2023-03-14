@@ -1614,8 +1614,8 @@ public class Account : IDisposable
                             tbl.ColumnsDefinition(x =>
                             {
                                 //ID, Receipt
-                                x.ConstantColumn(30);
-                                x.RelativeColumn();
+                                x.RelativeColumn(.5f);
+                                x.RelativeColumn(2);
                             });
                             //Headers
                             tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Receipts", "PDF"]);
