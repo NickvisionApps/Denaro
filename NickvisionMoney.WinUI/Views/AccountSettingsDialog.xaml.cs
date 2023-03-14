@@ -42,6 +42,9 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbDefaultTransactionType.Header = _controller.Localizer["DefaultTransactionType", "Field"];
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Income"]);
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Expense"]);
+        CardCurrency.Header = _controller.Localizer["Currency"];
+        CardCurrency.Description = _controller.Localizer["ManageCurrency", "Description"];
+        LblCurrencyBack.Text = _controller.Localizer["Back"];
         LblSystemCurrencyDescription.Text = _controller.Localizer["ReportedCurrency"];
         LblSystemCurrency.Text = _controller.ReportedCurrencyString;
         TglUseCustomCurrency.OffContent = _controller.Localizer["UseCustomCurrency", "Field"];
@@ -71,7 +74,6 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbCustomDecimalDigits.Items.Add(_controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"]);
         CardPassword.Header = _controller.Localizer["ManagePassword"];
         CardPassword.Description = _controller.Localizer["ManagePassword", "Description"];
-        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         LblPasswordBack.Text = _controller.Localizer["Back"];
         LblPasswordRemove.Text = _controller.Localizer["Remove"];
         TxtPasswordNew.Header = _controller.Localizer["NewPassword", "Field"];
@@ -80,6 +82,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
         TxtPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
+        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
@@ -87,6 +90,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TglUseCustomCurrency.IsOn = _controller.Metadata.UseCustomCurrency;
         if (_controller.Metadata.UseCustomCurrency)
         {
+            InfoBadgeCurrency.Visibility = Visibility.Visible;
             TxtCustomSymbol.Text = _controller.Metadata.CustomCurrencySymbol;
             TxtCustomCode.Text = _controller.Metadata.CustomCurrencyCode;
             CmbCustomDecimalSeparator.SelectedIndex = _controller.Metadata.CustomCurrencyDecimalSeparator switch
@@ -320,12 +324,35 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     }
 
     /// <summary>
+    /// Occurs when the currency card is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CardCurrency_Click(object sender, RoutedEventArgs e)
+    {
+        Title = $"{_controller.Localizer["AccountSettings"]} - {_controller.Localizer["Currency"]}";
+        ViewStack.ChangePage("Currency");
+    }
+
+    /// <summary>
+    /// Occurs when the back button on the currency page is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnCurrencyBack_Click(object sender, RoutedEventArgs e)
+    {
+        Title = _controller.Localizer["AccountSettings"];
+        ViewStack.ChangePage("Main");
+    }
+
+    /// <summary>
     /// Occurs when the use custom currency toggle is changed
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">RoutedEventArgs</param>
     private void TglUseCustomCurrency_Toggled(object? sender, RoutedEventArgs e)
     {
+        InfoBadgeCurrency.Visibility = TglUseCustomCurrency.IsOn ? Visibility.Visible : Visibility.Collapsed;
         GridCustomCurrency.Visibility = TglUseCustomCurrency.IsOn ? Visibility.Visible : Visibility.Collapsed;
         if (!_constructing)
         {

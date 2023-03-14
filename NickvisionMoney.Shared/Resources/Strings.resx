@@ -658,6 +658,14 @@
 	<data name="ManagePassword.Warning" xml:space="preserve">
 		<value>If the password is lost, there is no way to restore your account!</value>
 	</data>
+
+	<data name="Currency" xml:space="preserve">
+		<value>Currency</value>
+	</data>
+
+	<data name="ManageCurrency.Description" xml:space="preserve">
+		<value>Manage the currency used by the account.</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Id.Field" xml:space="preserve">
@@ -809,7 +817,7 @@
 	</data>
 
 	<data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
-		<value>Enter decimal separator here</value>
+		<value>Enter decimal separator</value>
 	</data>
 
 	<data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
@@ -829,7 +837,7 @@
 	</data>
 
 	<data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
-		<value>Enter group separator here</value>
+		<value>Enter group separator</value>
 	</data>
 
 	<data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
