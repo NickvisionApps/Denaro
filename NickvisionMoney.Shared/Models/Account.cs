@@ -1487,7 +1487,7 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //Type, UseCustomCurrency, CustomSymbol, CustomCode
+                                //Type, Currency
                                 x.RelativeColumn();
                                 x.RelativeColumn();
                             });
@@ -1518,9 +1518,9 @@ public class Account : IDisposable
                             tbl.ColumnsDefinition(x =>
                             {
                                 //Name, Description, Balance
-                                x.RelativeColumn();
-                                x.RelativeColumn();
-                                x.RelativeColumn();
+                                x.RelativeColumn(1);
+                                x.RelativeColumn(2);
+                                x.RelativeColumn(1);
                             });
                             //Headers
                             tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(localizer["Groups"]);
@@ -1543,13 +1543,13 @@ public class Account : IDisposable
                             tbl.ColumnsDefinition(x =>
                             {
                                 //ID, Date, Description, Type, GroupName, RepeatInterval, Amount
-                                x.ConstantColumn(30);
-                                x.ConstantColumn(80);
-                                x.RelativeColumn();
-                                x.ConstantColumn(70);
-                                x.RelativeColumn();
-                                x.ConstantColumn(100);
-                                x.RelativeColumn();
+                                x.RelativeColumn(1);
+                                x.RelativeColumn(2);
+                                x.RelativeColumn(3);
+                                x.RelativeColumn(2);
+                                x.RelativeColumn(2);
+                                x.RelativeColumn(2);
+                                x.RelativeColumn(2);
                             });
                             //Headers
                             tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
@@ -1558,7 +1558,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
-                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Short"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
                             foreach (var pair in Transactions)
@@ -1658,7 +1658,7 @@ public class Account : IDisposable
                 });
             }).GeneratePdf(path);
         }
-        catch
+        catch(Exception e)
         {
             return false;
         }
