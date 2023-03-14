@@ -14,6 +14,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
@@ -1322,7 +1323,10 @@ public class Account : IDisposable
         QifDocument? qif = null;
         try
         {
-            qif = QifDocument.Load(File.OpenRead(path));
+            qif = Task.Run(() => {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                return QifDocument.Load(File.OpenRead(path));
+            }).Result;
         }
         catch
         {
