@@ -908,6 +908,7 @@ public class AccountViewController : IDisposable
                 GroupRows[groupId].UpdateRow(_account.Groups[groupId], CultureForNumberString, CultureForDateString, _filters[(int)groupId]);
             }
             FilterUIUpdate();
+            SortUIUpdate();
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success, importedIds.Count == 0 ? "help-import" : ""));
         }
         else
