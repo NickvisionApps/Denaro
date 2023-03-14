@@ -1323,10 +1323,10 @@ public class Account : IDisposable
         QifDocument? qif = null;
         try
         {
-            qif = Task.Run(() => {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                return QifDocument.Load(File.OpenRead(path));
-            }).Result;
+            var oldCulture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            qif = QifDocument.Load(File.OpenRead(path));
+            Thread.CurrentThread.CurrentCulture = oldCulture;
         }
         catch
         {
