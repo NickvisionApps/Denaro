@@ -1593,7 +1593,7 @@ public class Account : IDisposable
                                 }
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
                                 tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", cultureDate));
-                                tbl.Cell().Background(hex).Text(pair.Value.Description);
+                                tbl.Cell().Background(hex).Text(pair.Value.Description.Trim());
                                 tbl.Cell().Background(hex).Text(pair.Value.Type switch
                                 {
                                     TransactionType.Income => localizer["Income"],
