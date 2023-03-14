@@ -1277,9 +1277,16 @@ public class Account : IDisposable
         var ids = new List<uint>();
         var localizer = new Localizer();
         OFXDocument? ofx = null;
+        //Check For Security
+        var ofxString = File.ReadAllText(path);
+        if(ofxString.Contains("SECURITY:TYPE1"))
+        {
+            ofxString = ofxString.Replace("SECURITY:TYPE1", "SECURITY:NONE");
+        }
+        //Parse OFX
         try
         {
-            ofx = new OFXDocumentParser().Import(new FileStream(path, FileMode.Open));
+            ofx = new OFXDocumentParser().Import(ofxString);
         }
         catch
         {
