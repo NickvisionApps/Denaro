@@ -209,10 +209,10 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>Geen transacties</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value>Er zijn geen transacties gevonden</value>
+		<value>Geen transacties gevonden</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value>Voeg een transactie toe of importeer ze uit een bestand.</value>
+		<value>Voeg een transactie toe of importeer deze uit een bestand</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
 		<value>Er zijn geen transacties gevonden die voldoen aan de opgegeven filters.</value>
@@ -227,25 +227,25 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>Filters</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value>Standaard filterwaarden</value>
+		<value>Overzichtfilters resetten</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value>Standaard filterwaarden</value>
+		<value>Groepfilters resetten</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value>Standaard filterwaarden</value>
+		<value>Datumfilters resetten</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value>Kalender</value>
+		<value>Agenda</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
 		<value>Kies een datumbereik</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value>Van</value>
+		<value>Begindatum</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value>Tot en met</value>
+		<value>Einddatum</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
 		<value>Groep verwijderen?</value>
@@ -404,7 +404,7 @@ Deze actie is onomkeerbaar..</value>
 		<value>Type</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value>Herhaalperiode</value>
+		<value>Herhalingsinterval</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
 		<value>Groep</value>
@@ -429,7 +429,7 @@ Deze actie is onomkeerbaar..</value>
 		<value>Vormgeving</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value>Pas de vormgeving aan.</value>
+		<value>Pas de vormgeving aan</value>
   </data>
   <data name="Theme" xml:space="preserve">
 		<value>Thema</value>
@@ -450,10 +450,10 @@ Deze actie is onomkeerbaar..</value>
 		<value>Pas de door Denaro gebruikte kleuren aan</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value>Standaard transactiekleur</value>
+		<value>Standaardkleur van transacties</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value>Standaard overboekingskleur</value>
+		<value>Standaardkleur van overdrachten</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
 		<value>Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen.</value>
@@ -539,7 +539,7 @@ Welke actie wilt u ondernemen op de huidige opeenvolgende transacties?
 Nieuwe opeenvolgende transacties worden op basis van de nieuwe periode ingepland.</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-    <value>Terugkerende einddatum</value>
+    <value>Einddatum herhaling</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
     <value>Bij deze transactie is een herhaalperiode ingesteld.
@@ -556,7 +556,7 @@ Als u alleen de eerste transactie bijwerkt, worden
 de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-    <value>Terugkerende einddatum (ongeldig)</value>
+    <value>Einddatum herhaling (ongeldig)</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
     <value>Geen einddatum</value>
@@ -586,7 +586,7 @@ de opeenvolgende losgekoppeld..</value>
     <value>Zakelijk</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-    <value>Standaard transactietype</value>
+    <value>Standaardtransactietype</value>
   </data>
   <data name="AccountType.Field" xml:space="preserve">
     <value>Soort rekening</value>
@@ -601,7 +601,7 @@ de opeenvolgende losgekoppeld..</value>
     <value>Spaarrekeningen</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-    <value>Dit is slechts een handig label dat de werking van het programma niet beïnvloedt.</value>
+    <value>Dit is slechts een handig label dat de werking van het programma niet beïnvloedt</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
     <value>Valutasymbool</value>
@@ -791,5 +791,8 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="Unlock" xml:space="preserve">
     <value>Ontgrendelen</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Herhalen</value>
   </data>
 </root>
