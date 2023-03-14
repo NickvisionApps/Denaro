@@ -26,7 +26,7 @@
 		<value>Änderungen</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
-		<value>GitHub Repo</value>
+		<value>GitHub-Repo</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
 		<value>Einen Fehler melden</value>
@@ -692,7 +692,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Aktionen</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
-    <value>Matrix-Unterhaltung</value>
+    <value>Matrix-Chat</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
     <value>Geld;Finanzen;Brieftasche;Bargeld;Bank;GTK;Nickvision;</value>
