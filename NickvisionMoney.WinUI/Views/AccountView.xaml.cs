@@ -712,7 +712,27 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-            _controller.ExportToPDF(file.Path, null);
+            string? password = null;
+            var addPdfPasswordDialog = new ContentDialog()
+            {
+                Title = _controller.Localizer["AddPasswordToPDF"],
+                Content = _controller.Localizer["AddPasswordToPDF", "Description"],
+                CloseButtonText = _controller.Localizer["No"],
+                PrimaryButtonText = _controller.Localizer["Yes"],
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot,
+                RequestedTheme = RequestedTheme
+            };
+            if (await addPdfPasswordDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                var newPasswordDialog = new NewPasswordDialog(_controller.Localizer["PDFPassword"], _controller.Localizer)
+                {
+                    XamlRoot = Content.XamlRoot,
+                    RequestedTheme = RequestedTheme
+                };
+                password = await newPasswordDialog.ShowAsync();
+            }
+            _controller.ExportToPDF(file.Path, password);
         }
     }
 

@@ -60,7 +60,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtPasswordConfirm.Header = _controller.Localizer["ConfirmPassword", "Field"];
         TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
-        TxtPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
+        LblPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
@@ -123,7 +123,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 InfoBadgePassword.Visibility = Visibility.Collapsed;
             }
             TxtErrors.Visibility = Visibility.Collapsed;
-            TxtPasswordErrors.Visibility = Visibility.Collapsed;
+            LblPasswordErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
         else
@@ -144,7 +144,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             {
                 InfoBadgePassword.Visibility = Visibility.Visible;
                 InfoBadgePassword.Style = (Style)App.Current.Resources["CriticalDotInfoBadgeStyle"];
-                TxtPasswordErrors.Visibility = Visibility.Visible;
+                LblPasswordErrors.Visibility = Visibility.Visible;
             }
             TxtErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
