@@ -542,7 +542,7 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".csv";
                     }
-                    _controller.ExportToFile(path ?? "");
+                    _controller.ExportToCSV(path ?? "");
                 }
             };
             gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
@@ -561,7 +561,7 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".csv";
                     }
-                    _controller.ExportToFile(path ?? "");
+                    _controller.ExportToCSV(path ?? "");
                 }
             };
             saveFileDialog.Show();
@@ -595,7 +595,7 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".pdf";
                     }
-                    _controller.ExportToFile(path ?? "");
+                    _controller.ExportToPDF(path ?? "", null);
                 }
             };
             gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
@@ -614,7 +614,7 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".pdf";
                     }
-                    _controller.ExportToFile(path ?? "");
+                    _controller.ExportToPDF(path ?? "", null);
                 }
             };
             saveFileDialog.Show();

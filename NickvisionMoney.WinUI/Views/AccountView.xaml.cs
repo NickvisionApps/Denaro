@@ -693,7 +693,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-            _controller.ExportToFile(file.Path);
+            _controller.ExportToCSV(file.Path);
         }
     }
 
@@ -712,7 +712,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-            _controller.ExportToFile(file.Path);
+            _controller.ExportToPDF(file.Path, null);
         }
     }
 
