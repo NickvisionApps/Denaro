@@ -97,7 +97,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             {
                 null => 0,
                 "." => 0,
-                "," => 2,
+                "," => 1,
                 _ => 2
             };
             if (CmbCustomDecimalSeparator.SelectedIndex == 2)
