@@ -278,8 +278,12 @@ public partial class TransactionDialog : Adw.MessageDialog
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 var row = (Adw.EntryRow)(sender.GetWidget());
-                row.SetText(row.GetText() + _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator);
-                row.SetPosition(row.GetText().Length);
+                if (!row.GetText().Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = row.GetPosition();
+                    row.SetText(row.GetText().Insert(position, _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator));
+                    row.SetPosition(position + Math.Min(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2));
+                }
                 return true;
             }
         }
