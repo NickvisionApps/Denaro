@@ -144,7 +144,7 @@ public partial class TransferDialog : Adw.MessageDialog
             row.SetActivatableWidget(button);
             _recentAccountsGroup.Add(row);
         }
-        _amountRow.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString));
+        _amountRow.SetText(StringHelpers.FormatAmount(_controller.Transfer.SourceAmount, _controller.CultureForSourceNumberString, false));
         Validate();
     }
 
@@ -176,7 +176,7 @@ public partial class TransferDialog : Adw.MessageDialog
         _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
+            _conversionResultLabel.SetText(StringHelpers.FormatAmount(_controller.Transfer.DestinationAmount, _controller.CultureForDestNumberString));
             SetResponseEnabled("ok", true);
         }
         else
