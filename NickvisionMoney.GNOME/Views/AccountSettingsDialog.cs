@@ -102,7 +102,11 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         };
         _switchCustomCurrency.OnNotify += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "active")
+            if (e.Pspec.GetName() == "state")
+            {
+                _switchCustomCurrency.GrabFocus();
+            }
+            else if (e.Pspec.GetName() == "active")
             {
                 if (!_constructing)
                 {
