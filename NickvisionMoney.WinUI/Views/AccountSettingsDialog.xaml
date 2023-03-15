@@ -93,7 +93,7 @@
 
                     <TextBlock x:Name="LblPasswordWarning" Margin="0,10,0,0" Foreground="{ThemeResource SystemFillColorCautionBrush}" TextWrapping="Wrap"/>
 
-                    <TextBlock Name="TxtPasswordErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    <TextBlock Name="LblPasswordErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                 </StackPanel>
             </nickvision:ViewStackPage>
         </nickvision:ViewStack.Pages>

@@ -918,12 +918,29 @@ public class AccountViewController : IDisposable
     }
 
     /// <summary>
-    /// Exports the account to a file
+    /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    public void ExportToFile(string path)
+    public void ExportToCSV(string path)
     {
-        if (_account.ExportToFile(path))
+        if (_account.ExportToCSV(path))
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+        }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
+        }
+    }
+
+    /// <summary>
+    /// Exports the account to a PDF file
+    /// </summary>
+    /// <param name="path">The path of the file</param>
+    /// <param name="password">The password to protect the PDF file with (null for no security)</param>
+    public void ExportToPDF(string path, string? password)
+    {
+        if (_account.ExportToPDF(path, password))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }

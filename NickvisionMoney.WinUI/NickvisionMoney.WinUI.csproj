@@ -23,6 +23,7 @@
   <ItemGroup>
     <None Remove="Controls\ActionRow.xaml" />
     <None Remove="Controls\GroupRow.xaml" />
+    <None Remove="Controls\NewPasswordDialog.xaml" />
     <None Remove="Controls\PasswordDialog.xaml" />
     <None Remove="Controls\StatusPage.xaml" />
     <None Remove="Controls\TransactionRow.xaml" />
@@ -68,6 +69,9 @@
 	<ProjectReference Include="..\NickvisionMoney.Shared\NickvisionMoney.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Controls\NewPasswordDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Controls\PasswordDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
