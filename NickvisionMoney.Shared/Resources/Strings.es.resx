@@ -786,4 +786,7 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="Unlock" xml:space="preserve">
     <value>Desbloquear</value>
   </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Repetir</value>
+  </data>
 </root>
