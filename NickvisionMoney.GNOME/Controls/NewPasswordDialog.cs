@@ -24,7 +24,7 @@ public partial class NewPasswordDialog : Adw.MessageDialog
     {
         builder.Connect(this);
         //Dialog Settings
-        SetTitle(title);
+        SetHeading(title);
         SetTransientFor(parent);
         _response = PasswordDialogResponse.Cancel;
         AddResponse("cancel", localizer["Cancel"]);

@@ -670,24 +670,6 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
     {
-        var getPasswordAsync = new Func<Task<string?>>(async () =>
-        {
-            string? password = null;
-            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
-            dialog.Show();
-            while (dialog.Visible)
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-                await Task.Delay(50);
-            }
-            if (dialog.Response == MessageDialogResponse.Suggested)
-            {
-                var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
-                password = await newPasswordDialog.RunAsync();
-            }
-            dialog.Destroy();
-            return password;
-        });
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
@@ -708,8 +690,19 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".pdf";
                     }
-                    var password = await getPasswordAsync();
-                    _controller.ExportToPDF(path ?? "", password);
+                    string? password = null;
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
+                    dialog.Show();
+                    dialog.OnResponse += async (sender, e) =>
+                    {
+                        if (dialog.Response == MessageDialogResponse.Suggested)
+                        {
+                            var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
+                            password = await newPasswordDialog.RunAsync();
+                        }
+                        _controller.ExportToPDF(path ?? "", password);
+                        dialog.Destroy();
+                    };
                 }
             };
             gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
@@ -728,8 +721,19 @@ public partial class AccountView : Adw.Bin
                     {
                         path += ".pdf";
                     }
-                    var password = await getPasswordAsync();
-                    _controller.ExportToPDF(path ?? "", password);
+                    string? password = null;
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
+                    dialog.Show();
+                    dialog.OnResponse += async (sender, e) =>
+                    {
+                        if (dialog.Response == MessageDialogResponse.Suggested)
+                        {
+                            var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
+                            password = await newPasswordDialog.RunAsync();
+                        }
+                        _controller.ExportToPDF(path ?? "", password);
+                        dialog.Destroy();
+                    };
                 }
             };
             saveFileDialog.Show();
