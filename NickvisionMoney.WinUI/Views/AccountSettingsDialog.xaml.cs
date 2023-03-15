@@ -208,6 +208,10 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             {
                 TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
             }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.InvalidCurrencySymbol))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
+            }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Empty"];
@@ -219,6 +223,16 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
             {
                 CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"];
+                CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
+                CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndGroupSeparator))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
                 CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"];
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))

@@ -14,10 +14,13 @@ public enum AccountMetadataCheckStatus
     Valid = 1,
     EmptyName = 2,
     EmptyCurrencySymbol = 4,
-    EmptyCurrencyCode = 8,
-    EmptyDecimalSeparator = 16,
-    SameSeparators = 32,
-    NonMatchingPasswords = 64
+    InvalidCurrencySymbol = 8,
+    EmptyCurrencyCode = 16,
+    EmptyDecimalSeparator = 32,
+    SameSeparators = 64,
+    SameSymbolAndDecimalSeparator = 128,
+    SameSymbolAndGroupSeparator = 256,
+    NonMatchingPasswords = 512
 }
 
 /// <summary>
@@ -135,6 +138,11 @@ public class AccountSettingsDialogController
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
+        decimal symbolAsNumber;
+        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out symbolAsNumber))
+        {
+            result |= AccountMetadataCheckStatus.InvalidCurrencySymbol;
+        }
         if (useCustom && string.IsNullOrEmpty(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
@@ -146,6 +154,14 @@ public class AccountSettingsDialogController
         if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customDecimalSeparator == customGroupSeparator)
         {
             result |= AccountMetadataCheckStatus.SameSeparators;
+        }
+        if (useCustom && customSymbol.Contains(customDecimalSeparator))
+        {
+            result |= AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator;
+        }
+        if (useCustom && customSymbol.Contains(customGroupSeparator))
+        {
+            result |= AccountMetadataCheckStatus.SameSymbolAndGroupSeparator;
         }
         if (newPassword != confirmPassword)
         {

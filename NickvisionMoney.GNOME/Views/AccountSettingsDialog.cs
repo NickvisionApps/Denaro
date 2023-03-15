@@ -307,6 +307,11 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 _customSymbolRow.AddCssClass("error");
                 _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
             }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.InvalidCurrencySymbol))
+            {
+                _customSymbolRow.AddCssClass("error");
+                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+            }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 _customCodeRow.AddCssClass("error");
@@ -320,7 +325,23 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
             {
                 _customDecimalSeparatorRow.AddCssClass("error");
+                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"]);
                 _customGroupSeparatorRow.AddCssClass("error");
+                _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator))
+            {
+                _customSymbolRow.AddCssClass("error");
+                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+                _customDecimalSeparatorRow.AddCssClass("error");
+                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndGroupSeparator))
+            {
+                _customSymbolRow.AddCssClass("error");
+                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+                _customGroupSeparatorRow.AddCssClass("error");
+                _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"]);
             }
             SetResponseEnabled("ok", false);
         }

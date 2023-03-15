@@ -788,6 +788,10 @@
 		<value>Currency Symbol (Empty)</value>
 	</data>
 
+	<data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+		<value>Currency Symbol (Invalid)</value>
+	</data>
+
 	<data name="CustomCurrencyCode.Field" xml:space="preserve">
 		<value>Currency Code</value>
 	</data>
