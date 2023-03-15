@@ -147,8 +147,8 @@ public class AccountMetadata : ICloneable
             result.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             result.SortFirstToLast = readQueryMetadata.GetBoolean(8);
             result.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
-            result.CustomCurrencyDecimalSeparator = string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10);
-            result.CustomCurrencyGroupSeparator = string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11);
+            result.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10));
+            result.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11));
             result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
         }
         database.Close();
