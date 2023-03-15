@@ -92,10 +92,19 @@ public partial class Program
     /// <returns>Return code from Adw.Application.Run()</returns>
     public int Run(string[] args)
     {
-        var argv = new string[args.Length + 1];
-        argv[0] = "NickvisionMoney.GNOME";
-        args.CopyTo(argv, 1);
-        return _application.Run(args.Length + 1, argv);
+        try
+        {
+            var argv = new string[args.Length + 1];
+            argv[0] = "NickvisionMoney.GNOME";
+            args.CopyTo(argv, 1);
+            return _application.Run(args.Length + 1, argv);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine($"\n\n{ex.StackTrace}");
+            return -1;
+        }
     }
 
     /// <summary>
