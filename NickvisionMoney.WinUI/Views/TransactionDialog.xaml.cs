@@ -206,8 +206,14 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator;
-                TxtAmount.Select(TxtAmount.Text.Length, 0);
+                if(!TxtAmount.Text.Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = TxtAmount.SelectionStart;
+                    TxtAmount.Text = TxtAmount.Text.Remove(position - 1, 1);
+                    TxtAmount.Text = TxtAmount.Text.Insert(position - 1, _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator);
+                    TxtAmount.SelectionLength = 0;
+                    TxtAmount.SelectionStart = position + Math.Min(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2);
+                }
                 e.Handled = true;
             }
         }
