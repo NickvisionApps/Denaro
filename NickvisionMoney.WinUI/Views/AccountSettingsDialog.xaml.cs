@@ -96,7 +96,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             CmbCustomDecimalSeparator.SelectedIndex = _controller.Metadata.CustomCurrencyDecimalSeparator switch
             {
                 null => 0,
-                "." => 1,
+                "." => 0,
                 "," => 2,
                 _ => 2
             };
