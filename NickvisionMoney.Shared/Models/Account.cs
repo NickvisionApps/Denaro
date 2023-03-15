@@ -1262,7 +1262,7 @@ public class Account : IDisposable
         OFXDocument? ofx = null;
         //Check For Security
         var ofxString = File.ReadAllText(path);
-        if(ofxString.Contains("SECURITY:TYPE1"))
+        if (ofxString.Contains("SECURITY:TYPE1"))
         {
             ofxString = ofxString.Replace("SECURITY:TYPE1", "SECURITY:NONE");
         }
@@ -1667,7 +1667,7 @@ public class Account : IDisposable
                 pdf.Save(path);
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return false;
         }
