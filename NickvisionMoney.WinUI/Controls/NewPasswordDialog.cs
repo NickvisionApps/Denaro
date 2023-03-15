@@ -51,12 +51,12 @@ public sealed partial class NewPasswordDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        if(TxtPasswordNew.Password != TxtPasswordConfirm.Password)
+        if (TxtPasswordNew.Password != TxtPasswordConfirm.Password)
         {
             LblPasswordErrors.Visibility = Visibility.Visible;
             IsPrimaryButtonEnabled = false;
         }
-        else if(string.IsNullOrEmpty(TxtPasswordNew.Password))
+        else if (string.IsNullOrEmpty(TxtPasswordNew.Password))
         {
             LblPasswordErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = false;
