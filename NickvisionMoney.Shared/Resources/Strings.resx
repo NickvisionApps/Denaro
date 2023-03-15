@@ -521,6 +521,10 @@
 		<value>Would you like to password-protect the PDF file?&#xA;&#xA;If the password is lost, the PDF will be inaccessible.</value>
 	</data>
 
+	<data name="PDFPassword" xml:space="preserve">
+		<value>PDF Password</value>
+	</data>
+
 	<!--TransactionRow-->
 	<data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Edit Transaction</value>
@@ -664,7 +668,7 @@
 	</data>
 
 	<data name="ManagePassword.Warning" xml:space="preserve">
-		<value>If the password is lost, there is no way to restore your account!</value>
+		<value>If the password is lost, there is no way to restore the file!</value>
 	</data>
 	
 	<!--Fields-->
