@@ -155,11 +155,11 @@ public class AccountSettingsDialogController
         {
             result |= AccountMetadataCheckStatus.SameSeparators;
         }
-        if (useCustom && customSymbol.Contains(customDecimalSeparator))
+        if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customSymbol.Contains(customDecimalSeparator))
         {
             result |= AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator;
         }
-        if (useCustom && customSymbol.Contains(customGroupSeparator))
+        if (useCustom && !string.IsNullOrEmpty(customGroupSeparator) && customSymbol.Contains(customGroupSeparator))
         {
             result |= AccountMetadataCheckStatus.SameSymbolAndGroupSeparator;
         }
