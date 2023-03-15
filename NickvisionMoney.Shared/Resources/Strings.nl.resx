@@ -769,7 +769,7 @@ de opeenvolgende losgekoppeld..</value>
     <value>Stel een nieuw wachtwoord in of verwijder een wachtwoord</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Als het wachtwoord verloren is is er geen manier om uw account te herstellen!</value>
+    <value>Als het wachtwoord verloren is is er geen manier om het bestand te herstellen!</value>
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Sluiten</value>
@@ -794,5 +794,16 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="TransactionRepeatInterval.Short" xml:space="preserve">
     <value>Herhalen</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Wachtwoord toevoegen aan PDF?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Wilt u het PDF-bestand met een wachtwoord beschermen?
+
+Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>PDF-wachtwoord</value>
   </data>
 </root>
