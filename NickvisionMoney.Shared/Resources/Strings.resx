@@ -513,6 +513,14 @@
 		<value>Transfer From {0}</value>
 	</data>
 
+	<data name="AddPasswordToPDF" xml:space="preserve">
+		<value>Add Password To PDF?</value>
+	</data>
+
+	<data name="AddPasswordToPDF.Description" xml:space="preserve">
+		<value>Would you like to password-protect the PDF file?&#xA;&#xA;If the password is lost, the PDF will be inaccessible.</value>
+	</data>
+
 	<!--TransactionRow-->
 	<data name="Edit.TransactionRow" xml:space="preserve">
 		<value>Edit Transaction</value>
