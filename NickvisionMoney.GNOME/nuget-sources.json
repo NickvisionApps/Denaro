@@ -155,10 +155,10 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.3/microsoft.data.sqlite.core.7.0.3.nupkg",
-        "sha512": "0deb3647480f0ff1044ef5d6ad32c3913b4726776f34cd7a4a72df3127fa14975b7995b1d878a453aa4bd1cf9d436889aaec367f2003582eb223f22c35dffcfc",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.4/microsoft.data.sqlite.core.7.0.4.nupkg",
+        "sha512": "bc1730e30a0df204844d22ec450db660458ab4b0b4612440ddb312004ff2ac3a9a2d9da41fe24a6694cc4bac093250ba9b04f2fe251f22b0441dfcd84c623e8d",
         "dest": "nuget-sources",
-        "dest-filename": "microsoft.data.sqlite.core.7.0.3.nupkg"
+        "dest-filename": "microsoft.data.sqlite.core.7.0.4.nupkg"
     },
     {
         "type": "file",
@@ -225,10 +225,17 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2022.12.1/questpdf.2022.12.1.nupkg",
-        "sha512": "92853ee6e3d69e80153927784ea8b8faada88b168acbfc8e688b9b4366540e54a98c5519026a5555f0a7b27b25e932e63d7e2c4c6a8f0d8830d8743097ade378",
+        "url": "https://api.nuget.org/v3-flatcontainer/pdfsharpcore/1.3.47/pdfsharpcore.1.3.47.nupkg",
+        "sha512": "b987be2fbd7f1eb850726ce3c7e08b7183bb03d8844af2bb79e86e4329daaf30d884f980dde7f847fd8cb904c26d655ea884f28d0c7fc8d455d8107b798af4db",
         "dest": "nuget-sources",
-        "dest-filename": "questpdf.2022.12.1.nupkg"
+        "dest-filename": "pdfsharpcore.1.3.47.nupkg"
+    },
+    {
+        "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2022.12.2/questpdf.2022.12.2.nupkg",
+        "sha512": "e57d00cb6ce9ebdb13b938762dada5a131f4d09f1335ddc4718ea595210505e8b857ea211f8ee8a91d1d8a9b64726b702fe6084ac8d38b163c88b7295c95cf57",
+        "dest": "nuget-sources",
+        "dest-filename": "questpdf.2022.12.2.nupkg"
     },
     {
         "type": "file",
@@ -348,6 +355,20 @@
         "sha512": "5dbe6bc007a9b46491e5299602291f5dbf8cc8d51e6c1b08db2fa0efd365990b41b6e181ed6bf82e873a659396427bc0e33e85b47d645d273fef8bf8ec643631",
         "dest": "nuget-sources",
         "dest-filename": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg"
+    },
+    {
+        "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/sharpziplib/1.3.3/sharpziplib.1.3.3.nupkg",
+        "sha512": "5f6996e38a31861449a493b9387e91097abe06f3ca936e618e6b914091699b7319bda7e392a532a96c06287e9b3c28786183c5fbc212ac2bbdd10809151e6dbb",
+        "dest": "nuget-sources",
+        "dest-filename": "sharpziplib.1.3.3.nupkg"
+    },
+    {
+        "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/sixlabors.fonts/1.0.0-beta17/sixlabors.fonts.1.0.0-beta17.nupkg",
+        "sha512": "dd11e872a246b7110e774b8923bb2fafd917b506147769bfb09970c620d96e82e38293a6b072bbc0a683126f9ea3621badce7d661d0d84e67a8770ee345dd823",
+        "dest": "nuget-sources",
+        "dest-filename": "sixlabors.fonts.1.0.0-beta17.nupkg"
     },
     {
         "type": "file",
