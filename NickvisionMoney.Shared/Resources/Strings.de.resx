@@ -793,4 +793,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="Unlock" xml:space="preserve">
     <value>Entsperren</value>
   </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Wiederholung</value>
+  </data>
 </root>
