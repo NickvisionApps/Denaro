@@ -17,12 +17,15 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
 
+    [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _expenseButton;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
-    [Gtk.Connect] private readonly Adw.ExpanderRow _customCurrencyRow;
+    [Gtk.Connect] private readonly Adw.ActionRow _customCurrencyRow;
+    [Gtk.Connect] private readonly Gtk.Button _btnCurrencyPageBack;
+    [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
     [Gtk.Connect] private readonly Gtk.Entry _customSymbolText;
     [Gtk.Connect] private readonly Adw.ActionRow _customSymbolRow;
     [Gtk.Connect] private readonly Gtk.Entry _customCodeText;
@@ -35,7 +38,9 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Adw.ActionRow _customGroupSeparatorRow;
     [Gtk.Connect] private readonly Gtk.DropDown _customDecimalDigitsDropDown;
     [Gtk.Connect] private readonly Adw.ActionRow _customDecimalDigitsRow;
-    [Gtk.Connect] private readonly Adw.ExpanderRow _passwordRow;
+    [Gtk.Connect] private readonly Adw.ActionRow _managePasswordRow;
+    [Gtk.Connect] private readonly Gtk.Button _btnPasswordPageBack;
+    [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordConfirmRow;
     [Gtk.Connect] private readonly Gtk.Button _removePasswordButton;
@@ -83,9 +88,21 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         //Reported Currency
         _reportedCurrencyLabel.SetLabel($"{_controller.Localizer["ReportedCurrency"]}\n<b>{_controller.ReportedCurrencyString}</b>");
         //Custom Currency
-        _customCurrencyRow.OnNotify += (sender, e) =>
+        _customCurrencyRow.OnActivated += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "enable-expansion")
+            _viewStack.GetChildByName("currency").SetVisible(true);
+            _viewStack.SetVisibleChildName("currency");
+            _viewStack.GetChildByName("main").SetVisible(false);
+        };
+        _btnCurrencyPageBack.OnClicked += (sender, e) =>
+        {
+            _viewStack.GetChildByName("main").SetVisible(true);
+            _viewStack.SetVisibleChildName("main");
+            _viewStack.GetChildByName("currency").SetVisible(false);
+        };
+        _switchCustomCurrency.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "active")
             {
                 if (!_constructing)
                 {
@@ -120,7 +137,15 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             {
                 if (!_constructing)
                 {
-                    _customDecimalSeparatorText.Visible = _customDecimalSeparatorDropDown.GetSelected() == 2;
+                    if (_customDecimalSeparatorDropDown.GetSelected() == 2)
+                    {
+                        _customDecimalSeparatorText.SetVisible(true);
+                        _customDecimalSeparatorText.GrabFocus();
+                    }
+                    else
+                    {
+                        _customDecimalSeparatorText.SetVisible(false);
+                    }
                     Validate();
                 }
             }
@@ -142,7 +167,15 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             {
                 if (!_constructing)
                 {
-                    _customGroupSeparatorText.Visible = _customGroupSeparatorDropDown.GetSelected() == 4;
+                    if (_customGroupSeparatorDropDown.GetSelected() == 4)
+                    {
+                        _customGroupSeparatorText.SetVisible(true);
+                        _customGroupSeparatorText.GrabFocus();
+                    }
+                    else
+                    {
+                        _customGroupSeparatorText.SetVisible(false);
+                    }
                     Validate();
                 }
             }
@@ -168,16 +201,18 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
-        //Password Row
-        _passwordRow.OnNotify += (sender, e) =>
+        //Password
+        _managePasswordRow.OnActivated += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "enable-expansion")
-            {
-                if (!_constructing)
-                {
-                    Validate();
-                }
-            }
+            _viewStack.GetChildByName("password").SetVisible(true);
+            _viewStack.SetVisibleChildName("password");
+            _viewStack.GetChildByName("main").SetVisible(false);
+        };
+        _btnPasswordPageBack.OnClicked += (sender, e) =>
+        {
+            _viewStack.GetChildByName("main").SetVisible(true);
+            _viewStack.SetVisibleChildName("main");
+            _viewStack.GetChildByName("password").SetVisible(false);
         };
         _newPasswordRow.OnNotify += (sender, e) =>
         {
@@ -199,12 +234,13 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
+        _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Load
         _nameRow.SetText(_controller.Metadata.Name);
         _accountTypeRow.SetSelected((uint)_controller.Metadata.AccountType);
         _incomeButton.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
-        _customCurrencyRow.SetEnableExpansion(_controller.Metadata.UseCustomCurrency);
+        _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
         _customSymbolText.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeText.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
         _customDecimalSeparatorDropDown.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
@@ -259,13 +295,6 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     private void Validate()
     {
         var transactionType = _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense;
-        var newPassword = "";
-        var newPasswordConfirm = "";
-        if (_passwordRow.GetEnableExpansion())
-        {
-            newPassword = _newPasswordRow.GetText();
-            newPasswordConfirm = _newPasswordConfirmRow.GetText();
-        }
         var customDecimalSeparator = _customDecimalSeparatorDropDown.GetSelected() switch
         {
             0 => ".",
@@ -281,9 +310,10 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             4 => _customGroupSeparatorText.GetText()
         };
         var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _customCurrencyRow.GetEnableExpansion(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, newPassword, newPasswordConfirm);
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
+        _customCurrencyRow.RemoveCssClass("error");
         _customSymbolRow.RemoveCssClass("error");
         _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
         _customCodeRow.RemoveCssClass("error");
@@ -291,6 +321,9 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _customDecimalSeparatorRow.RemoveCssClass("error");
         _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Field"]);
         _customGroupSeparatorRow.RemoveCssClass("error");
+        _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Field"]);
+        _managePasswordRow.RemoveCssClass("error");
+        _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             SetResponseEnabled("ok", true);
@@ -305,25 +338,30 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
             {
                 _customSymbolRow.AddCssClass("error");
+                _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.InvalidCurrencySymbol))
             {
                 _customSymbolRow.AddCssClass("error");
+                _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 _customCodeRow.AddCssClass("error");
+                _customCurrencyRow.AddCssClass("error");
                 _customCodeRow.SetTitle(_controller.Localizer["CustomCurrencyCode", "Empty"]);
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyDecimalSeparator))
             {
                 _customDecimalSeparatorRow.AddCssClass("error");
+                _customCurrencyRow.AddCssClass("error");
                 _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Empty"]);
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
             {
+                _customCurrencyRow.AddCssClass("error");
                 _customDecimalSeparatorRow.AddCssClass("error");
                 _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"]);
                 _customGroupSeparatorRow.AddCssClass("error");
@@ -331,6 +369,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator))
             {
+                _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.AddCssClass("error");
                 _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
                 _customDecimalSeparatorRow.AddCssClass("error");
@@ -338,10 +377,16 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndGroupSeparator))
             {
+                _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.AddCssClass("error");
                 _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
                 _customGroupSeparatorRow.AddCssClass("error");
                 _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"]);
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))
+            {
+                _managePasswordRow.AddCssClass("error");
+                _lblPasswordStatus.SetText(_controller.Localizer["NonMatchingPasswords"]);
             }
             SetResponseEnabled("ok", false);
         }
@@ -378,9 +423,13 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     private void OnRemovePassword(Gtk.Button sender, EventArgs e)
     {
         _controller.SetRemovePassword();
-        _passwordRow.SetEnableExpansion(false);
-        _passwordRow.SetSensitive(false);
-        _passwordRow.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
-        _passwordRow.SetSubtitle("");
+        _newPasswordRow.SetText("");
+        _newPasswordConfirmRow.SetText("");
+        _viewStack.GetChildByName("main").SetVisible(true);
+        _viewStack.SetVisibleChildName("main");
+        _viewStack.GetChildByName("password").SetVisible(false);
+        _managePasswordRow.SetSensitive(false);
+        _managePasswordRow.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
+        _managePasswordRow.SetSubtitle("");
     }
 }

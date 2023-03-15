@@ -81,7 +81,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtPasswordConfirm.Header = _controller.Localizer["ConfirmPassword", "Field"];
         TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
-        LblPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
+        LblPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
