@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
@@ -144,7 +145,7 @@ public partial class TransferDialog : Adw.MessageDialog
             row.SetActivatableWidget(button);
             _recentAccountsGroup.Add(row);
         }
-        _amountRow.SetText(StringHelpers.FormatAmount(_controller.Transfer.SourceAmount, _controller.CultureForSourceNumberString, false));
+        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
         Validate();
     }
 
@@ -176,7 +177,7 @@ public partial class TransferDialog : Adw.MessageDialog
         _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _conversionResultLabel.SetText(StringHelpers.FormatAmount(_controller.Transfer.DestinationAmount, _controller.CultureForDestNumberString));
+            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString));
             SetResponseEnabled("ok", true);
         }
         else

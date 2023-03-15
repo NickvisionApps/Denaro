@@ -94,7 +94,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         //Filter Checkbox
         _filterCheckButton.SetActive(filterActive);
         //Amount Label
-        _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{StringHelpers.FormatAmount(Math.Abs(group.Balance), _cultureAmount)}");
+        _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}");
         _amountLabel.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
         if (group.Id == 0)
         {

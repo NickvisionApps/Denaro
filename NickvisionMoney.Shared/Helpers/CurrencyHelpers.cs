@@ -1,11 +1,13 @@
 using System.Globalization;
 
+namespace NickvisionMoney.Shared.Helpers;
+
 /// <summary>
-/// String formatting helpers
+/// Helper methods for working with currency
 /// </summary>
-public class StringHelpers
+public static class CurrencyHelpers
 {
-    public static string FormatAmount(decimal amount, CultureInfo culture, bool showCurrencySymbol = true)
+    public static string ToAmountString(this decimal amount, CultureInfo culture, bool showCurrencySymbol = true)
     {
         var result = amount.ToString("C", culture);
         if (culture.NumberFormat.CurrencyDecimalDigits == 99)

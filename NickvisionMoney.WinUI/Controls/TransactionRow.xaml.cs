@@ -98,7 +98,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         {
             LblDescription.Text += $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}";
         }
-        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {StringHelpers.FormatAmount(transaction.Amount, _cultureAmount)}";
+        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToAmountString(_cultureAmount)}";
         LblAmount.Foreground = transaction.Type == TransactionType.Income ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 

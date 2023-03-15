@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
@@ -83,7 +84,7 @@ public sealed partial class TransferDialog : ContentDialog
             actionRow.Children.Insert(0, typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
-        TxtAmount.Text = StringHelpers.FormatAmount(_controller.Transfer.SourceAmount, _controller.CultureForSourceNumberString, false);
+        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false);
         Validate();
     }
 
@@ -117,7 +118,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtConversionResult.Text = StringHelpers.FormatAmount(_controller.Transfer.DestinationAmount, _controller.CultureForDestNumberString);
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }

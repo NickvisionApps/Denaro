@@ -100,7 +100,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 "," => 2,
                 _ => 2
             };
-            if(CmbCustomDecimalSeparator.SelectedIndex == 2)
+            if (CmbCustomDecimalSeparator.SelectedIndex == 2)
             {
                 TxtCustomDecimalSeparator.Visibility = Visibility.Visible;
                 TxtCustomDecimalSeparator.Text = _controller.Metadata.CustomCurrencyDecimalSeparator;
@@ -114,7 +114,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
                 "" => 3,
                 _ => 4
             };
-            if(CmbCustomGroupSeparator.SelectedIndex == 4)
+            if (CmbCustomGroupSeparator.SelectedIndex == 4)
             {
                 TxtCustomGroupSeparator.Visibility = Visibility.Visible;
                 TxtCustomGroupSeparator.Text = _controller.Metadata.CustomCurrencyGroupSeparator;

@@ -113,7 +113,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
-        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string [3] { ".", ",", _controller.Localizer["CustomCurrencyDecimalSeparator", "Other"] }));
+        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _controller.Localizer["CustomCurrencyDecimalSeparator", "Other"] }));
         _customDecimalSeparatorDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -135,7 +135,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
-        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string [5] { ".", ",", "'", _controller.Localizer["CustomCurrencyGroupSeparator", "None"], _controller.Localizer["CustomCurrencyGroupSeparator", "Other"] }));
+        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _controller.Localizer["CustomCurrencyGroupSeparator", "None"], _controller.Localizer["CustomCurrencyGroupSeparator", "Other"] }));
         _customGroupSeparatorDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -157,7 +157,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 }
             }
         };
-        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string [6] { "2", "3", "4", "5", "6", _controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"] }));
+        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string[6] { "2", "3", "4", "5", "6", _controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"] }));
         _customDecimalDigitsDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")

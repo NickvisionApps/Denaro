@@ -90,7 +90,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{StringHelpers.FormatAmount(Math.Abs(_account.TodayTotal), CultureForNumberString)}";
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{Math.Abs(_account.TodayTotal).ToAmountString(CultureForNumberString)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -98,7 +98,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => StringHelpers.FormatAmount(_account.TodayIncome, CultureForNumberString);
+    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -106,7 +106,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => StringHelpers.FormatAmount(_account.TodayExpense, CultureForNumberString);
+    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString);
     /// <summary>
     /// The count of transactions in the account
     /// </summary>

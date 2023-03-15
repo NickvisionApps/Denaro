@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -80,7 +81,7 @@ public sealed partial class TransactionDialog : ContentDialog
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
-        TxtAmount.Text = StringHelpers.FormatAmount(_controller.Transaction.Amount, _controller.CultureForNumberString, false);
+        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
         foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
