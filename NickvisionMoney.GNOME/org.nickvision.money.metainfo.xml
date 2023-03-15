@@ -48,12 +48,13 @@
   <releases>
     <release version="2023.3.0-beta1" date="2023-03-11">
       <description>
-      <p>- Fixed an issue where editing a transaction with a receipt would crash the application</p>
-      <p>- Fixed an issue where OFX files with security could not be imported</p>
-      <p>- Fixed an issue where QIF files could not be imported on non-English systems</p>
-      <p>- The UI is now built using blueprint</p>
-      <p>- Various UI/UX fixes and improvements</p>
-      <p>- Updated translations (Thanks to everyone on Weblate)!</p>
+        <p>- Added the ability to customize the decimal and group separators used per account</p>
+        <p>- Fixed an issue where editing a transaction with a receipt would crash the application</p>
+        <p>- Fixed an issue where OFX files with security could not be imported</p>
+        <p>- Fixed an issue where QIF files could not be imported on non-English systems</p>
+        <p>- The UI is now built using blueprint</p>
+        <p>- Various UI/UX fixes and improvements</p>
+        <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
   </releases>

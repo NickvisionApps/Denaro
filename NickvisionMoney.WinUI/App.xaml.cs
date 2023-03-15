@@ -28,7 +28,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.3.0-beta1";
-        _mainWindowController.AppInfo.Changelog = "- Fixed an issue where OFX files with security could not be imported\n- Fixed an issue where QIF files could not be imported on non-English systems\n- Updated and added translations (Thanks to everyone on Weblate)!";
+        _mainWindowController.AppInfo.Changelog = "- Added the ability to customize the decimal and group separators used per account\n- Fixed an issue where OFX files with security could not be imported\n- Fixed an issue where QIF files could not be imported on non-English systems\n- Updated and added translations (Thanks to everyone on Weblate)!";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
