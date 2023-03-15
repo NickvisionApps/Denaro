@@ -20,6 +20,11 @@ public partial class MessageDialog
     public MessageDialogResponse Response { get; private set; }
 
     /// <summary>
+    /// Whether or not the dialog is visible
+    /// </summary>
+    public bool Visible => _dialog.GetVisible();
+
+    /// <summary>
     /// Constructs a MessageDialog
     /// </summary>
     /// <param name="parentWindow">Gtk.Window</param>

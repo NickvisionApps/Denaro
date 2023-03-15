@@ -516,112 +516,6 @@ public partial class AccountView : Adw.Bin
     }
 
     /// <summary>
-    /// Occurs when the export to csv item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
-    {
-        var filterCsv = Gtk.FileFilter.New();
-        filterCsv.SetName("CSV (*.csv)");
-        filterCsv.AddPattern("*.csv");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
-        {
-            var saveFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filterCsv);
-            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-            _saveCallback = async (source, res, data) =>
-            {
-                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    if (Path.GetExtension(path).ToLower() != ".csv")
-                    {
-                        path += ".csv";
-                    }
-                    _controller.ExportToCSV(path ?? "");
-                }
-            };
-            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            saveFileDialog.SetModal(true);
-            saveFileDialog.AddFilter(filterCsv);
-            saveFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = saveFileDialog.GetFile()!.GetPath();
-                    if (Path.GetExtension(path).ToLower() != ".csv")
-                    {
-                        path += ".csv";
-                    }
-                    _controller.ExportToCSV(path ?? "");
-                }
-            };
-            saveFileDialog.Show();
-        }
-    }
-
-    /// <summary>
-    /// Occurs when the export to pdf item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
-    {
-        var filterPdf = Gtk.FileFilter.New();
-        filterPdf.SetName("PDF (*.pdf)");
-        filterPdf.AddPattern("*.pdf");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
-        {
-            var saveFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filterPdf);
-            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-            _saveCallback = async (source, res, data) =>
-            {
-                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    if (Path.GetExtension(path).ToLower() != ".pdf")
-                    {
-                        path += ".pdf";
-                    }
-                    _controller.ExportToPDF(path ?? "", null);
-                }
-            };
-            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            saveFileDialog.SetModal(true);
-            saveFileDialog.AddFilter(filterPdf);
-            saveFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = saveFileDialog.GetFile()!.GetPath();
-                    if (Path.GetExtension(path).ToLower() != ".pdf")
-                    {
-                        path += ".pdf";
-                    }
-                    _controller.ExportToPDF(path ?? "", null);
-                }
-            };
-            saveFileDialog.Show();
-        }
-    }
-
-    /// <summary>
     /// Occurs when the import from file item is activated
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -713,6 +607,132 @@ public partial class AccountView : Adw.Bin
                 }
             };
             openFileDialog.Show();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the export to csv item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
+    {
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        if (Gtk.Functions.GetMinorVersion() >= 9)
+        {
+            var saveFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filterCsv);
+            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+            _saveCallback = async (source, res, data) =>
+            {
+                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
+                {
+                    var path = g_file_get_path(fileHandle);
+                    if (Path.GetExtension(path).ToLower() != ".csv")
+                    {
+                        path += ".csv";
+                    }
+                    _controller.ExportToCSV(path ?? "");
+                }
+            };
+            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+            saveFileDialog.SetModal(true);
+            saveFileDialog.AddFilter(filterCsv);
+            saveFileDialog.OnResponse += (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = saveFileDialog.GetFile()!.GetPath();
+                    if (Path.GetExtension(path).ToLower() != ".csv")
+                    {
+                        path += ".csv";
+                    }
+                    _controller.ExportToCSV(path ?? "");
+                }
+            };
+            saveFileDialog.Show();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the export to pdf item is activated
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
+    {
+        var getPasswordAsync = new Func<Task<string?>>(async () =>
+        {
+            string? password = null;
+            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
+            dialog.Show();
+            while (dialog.Visible)
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+                await Task.Delay(50);
+            }
+            if (dialog.Response == MessageDialogResponse.Suggested)
+            {
+                var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
+                password = await newPasswordDialog.RunAsync();
+            }
+            dialog.Destroy();
+            return password;
+        });
+        var filterPdf = Gtk.FileFilter.New();
+        filterPdf.SetName("PDF (*.pdf)");
+        filterPdf.AddPattern("*.pdf");
+        if (Gtk.Functions.GetMinorVersion() >= 9)
+        {
+            var saveFileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+            filters.Append(filterPdf);
+            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+            _saveCallback = async (source, res, data) =>
+            {
+                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
+                {
+                    var path = g_file_get_path(fileHandle);
+                    if (Path.GetExtension(path).ToLower() != ".pdf")
+                    {
+                        path += ".pdf";
+                    }
+                    var password = await getPasswordAsync();
+                    _controller.ExportToPDF(path ?? "", password);
+                }
+            };
+            gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["ExportToFile"], _parentWindow, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+            saveFileDialog.SetModal(true);
+            saveFileDialog.AddFilter(filterPdf);
+            saveFileDialog.OnResponse += async (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = saveFileDialog.GetFile()!.GetPath();
+                    if (Path.GetExtension(path).ToLower() != ".pdf")
+                    {
+                        path += ".pdf";
+                    }
+                    var password = await getPasswordAsync();
+                    _controller.ExportToPDF(path ?? "", password);
+                }
+            };
+            saveFileDialog.Show();
         }
     }
 
