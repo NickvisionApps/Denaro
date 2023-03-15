@@ -1,4 +1,4 @@
-using NickvisionMoney.GNOME.Helpers;
+﻿using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -6,18 +6,9 @@ using System.Threading.Tasks;
 namespace NickvisionMoney.GNOME.Controls;
 
 /// <summary>
-/// Responses for the PasswordDialog
+/// A dialog for creating a password
 /// </summary>
-public enum PasswordDialogResponse
-{
-    Suggested,
-    Cancel
-}
-
-/// <summary>
-/// A dialog for receiving a password
-/// </summary>
-public partial class PasswordDialog : Adw.MessageDialog
+public partial class NewPasswordDialog : Adw.MessageDialog
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
@@ -25,32 +16,47 @@ public partial class PasswordDialog : Adw.MessageDialog
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
 
-    [Gtk.Connect] private readonly Adw.StatusPage _statusPage;
-    [Gtk.Connect] private readonly Adw.PasswordEntryRow _passwordEntry;
+    [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordEntry;
+    [Gtk.Connect] private readonly Adw.PasswordEntryRow _confirmPasswordEntry;
     private PasswordDialogResponse _response;
 
-    private PasswordDialog(Gtk.Builder builder, Gtk.Window parent, string accountTitle, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    private NewPasswordDialog(Gtk.Builder builder, Gtk.Window parent, string title, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         builder.Connect(this);
         //Dialog Settings
+        SetHeading(title);
         SetTransientFor(parent);
         _response = PasswordDialogResponse.Cancel;
         AddResponse("cancel", localizer["Cancel"]);
-        AddResponse("suggested", localizer["Unlock"]);
+        AddResponse("suggested", localizer["Add"]);
         SetResponseAppearance("suggested", Adw.ResponseAppearance.Suggested);
         SetCloseResponse("cancel");
         SetDefaultResponse("suggested");
         OnResponse += (sender, e) => SetResponse(e.Response);
-        _statusPage.SetDescription(accountTitle);
+        _newPasswordEntry.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
+        _confirmPasswordEntry.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                Validate();
+            }
+        };
+        SetResponseEnabled("suggested", false);
     }
 
     /// <summary>
     /// Constructs a MessageDialog
     /// </summary>
-    /// <param name="parentWindow">Gtk.Window</param>
-    /// <param name="accountTitle">The title of the account requiring the password</param>
+    /// <param name="parent">Gtk.Window</param>
+    /// <param name="title">The title of the dialog</param>
     /// <param name="localizer">The localizer for the app</param>
-    public PasswordDialog(Gtk.Window parent, string accountTitle, Localizer localizer) : this(Builder.FromFile("password_dialog.ui", localizer), parent, accountTitle, localizer)
+    public NewPasswordDialog(Gtk.Window parent, string title, Localizer localizer) : this(Builder.FromFile("new_password_dialog.ui", localizer), parent, title, localizer)
     {
     }
 
@@ -68,7 +74,7 @@ public partial class PasswordDialog : Adw.MessageDialog
         string? password = null;
         if (_response == PasswordDialogResponse.Suggested)
         {
-            password = _passwordEntry.GetText();
+            password = _newPasswordEntry.GetText();
         }
         Destroy();
         return password;
@@ -85,5 +91,20 @@ public partial class PasswordDialog : Adw.MessageDialog
             "suggested" => PasswordDialogResponse.Suggested,
             _ => PasswordDialogResponse.Cancel
         };
+    }
+
+    /// <summary>
+    /// Validates the user input
+    /// </summary>
+    private void Validate()
+    {
+        if (_newPasswordEntry.GetText() != _confirmPasswordEntry.GetText() || string.IsNullOrEmpty(_newPasswordEntry.GetText()))
+        {
+            SetResponseEnabled("suggested", false);
+        }
+        else
+        {
+            SetResponseEnabled("suggested", true);
+        }
     }
 }

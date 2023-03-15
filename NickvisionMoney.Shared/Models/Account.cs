@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
 using OfxSharp;
+using PdfSharpCore.Pdf.IO;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -1130,25 +1131,6 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Exports the account to a file
-    /// </summary>
-    /// <param name="path">The path of the file</param>
-    /// <returns>True if successful, else false</returns>
-    public bool ExportToFile(string path)
-    {
-        var extension = System.IO.Path.GetExtension(path).ToLower();
-        if (extension == ".csv")
-        {
-            return ExportToCSV(path);
-        }
-        else if (extension == ".pdf")
-        {
-            return ExportToPDF(path);
-        }
-        return false;
-    }
-
-    /// <summary>
     /// Imports transactions from a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
@@ -1404,7 +1386,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
     /// <returns>True if successful, else false</returns>
-    private bool ExportToCSV(string path)
+    public bool ExportToCSV(string path)
     {
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;Group(Id Starts At 1);GroupName;GroupDescription\n";
@@ -1435,8 +1417,9 @@ public class Account : IDisposable
     /// Exports the account to a PDF file
     /// </summary>
     /// <param name="path">The path to the PDF file</param>
+    /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     /// <returns>True if successful, else false</returns>
-    private bool ExportToPDF(string path)
+    public bool ExportToPDF(string path, string? password)
     {
         try
         {
@@ -1712,6 +1695,13 @@ public class Account : IDisposable
                     });
                 });
             }).GeneratePdf(path);
+            if (password != null)
+            {
+                var pdf = PdfReader.Open(path);
+                var pdfSecurity = pdf.SecuritySettings;
+                pdfSecurity.UserPassword = password;
+                pdf.Save(path);
+            }
         }
         catch (Exception e)
         {
