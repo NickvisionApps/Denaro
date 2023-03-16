@@ -724,7 +724,7 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Modifica password</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>In caso di password dimenticata, non sarà possibile ripristinare l'account!</value>
+    <value>In caso di password dimenticata, non sarà possibile ripristinare il file!</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
     <value>Inserire una nuova password o cancellare quella attuale.</value>
@@ -788,5 +788,35 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="Unlock" xml:space="preserve">
     <value>Sblocca</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Aggiungi una password al PDF?</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Password PDF</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Inserire un simbolo della valuta valido</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Altro</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Nessuno</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Altro</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Ripetere</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Le password non sono uguali.</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Illimitato</value>
   </data>
 </root>
