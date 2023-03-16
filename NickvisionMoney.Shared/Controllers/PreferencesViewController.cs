@@ -106,6 +106,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// A folder to use to backup accounts as CSV
+    /// </summary>
+    public string CSVBackupFolder
+    {
+        get => Configuration.Current.CSVBackupFolder;
+
+        set => Configuration.Current.CSVBackupFolder = value;
+    }
+
+    /// <summary>
     /// Saves the configuration to disk
     /// </summary>
     public void SaveConfiguration()
