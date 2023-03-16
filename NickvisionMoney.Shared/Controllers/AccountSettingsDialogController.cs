@@ -14,8 +14,13 @@ public enum AccountMetadataCheckStatus
     Valid = 1,
     EmptyName = 2,
     EmptyCurrencySymbol = 4,
-    EmptyCurrencyCode = 8,
-    NonMatchingPasswords = 16,
+    InvalidCurrencySymbol = 8,
+    EmptyCurrencyCode = 16,
+    EmptyDecimalSeparator = 32,
+    SameSeparators = 64,
+    SameSymbolAndDecimalSeparator = 128,
+    SameSymbolAndGroupSeparator = 256,
+    NonMatchingPasswords = 512
 }
 
 /// <summary>
@@ -115,11 +120,14 @@ public class AccountSettingsDialogController
     /// <param name="useCustom">Whether or not to use a custom currency</param>
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
+    /// <param name="customDecimalSeparator">The new custom decimal separator</param>
+    /// <param name="customGroupSeparator">The new custom group separator</param>
+    /// <param name="customDecimalDigits">The new custom decimal digits number</param>
     /// <param name="defaultTransactionType">The new default transaction type</param>
     /// <param name="newPassword">The new password</param>
     /// <param name="confirmPassword">The new password confirmed</param>
     /// <returns></returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
         if (string.IsNullOrEmpty(name))
@@ -130,9 +138,30 @@ public class AccountSettingsDialogController
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
+        decimal symbolAsNumber;
+        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out symbolAsNumber))
+        {
+            result |= AccountMetadataCheckStatus.InvalidCurrencySymbol;
+        }
         if (useCustom && string.IsNullOrEmpty(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
+        }
+        if (useCustom && string.IsNullOrEmpty(customDecimalSeparator))
+        {
+            result |= AccountMetadataCheckStatus.EmptyDecimalSeparator;
+        }
+        if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customDecimalSeparator == customGroupSeparator)
+        {
+            result |= AccountMetadataCheckStatus.SameSeparators;
+        }
+        if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customSymbol.Contains(customDecimalSeparator))
+        {
+            result |= AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator;
+        }
+        if (useCustom && !string.IsNullOrEmpty(customGroupSeparator) && customSymbol.Contains(customGroupSeparator))
+        {
+            result |= AccountMetadataCheckStatus.SameSymbolAndGroupSeparator;
         }
         if (newPassword != confirmPassword)
         {
@@ -157,11 +186,17 @@ public class AccountSettingsDialogController
         {
             Metadata.CustomCurrencySymbol = customSymbol;
             Metadata.CustomCurrencyCode = customCode?.ToUpper();
+            Metadata.CustomCurrencyDecimalSeparator = customDecimalSeparator;
+            Metadata.CustomCurrencyGroupSeparator = customGroupSeparator;
+            Metadata.CustomCurrencyDecimalDigits = (int?)customDecimalDigits;
         }
         else
         {
             Metadata.CustomCurrencySymbol = null;
             Metadata.CustomCurrencyCode = null;
+            Metadata.CustomCurrencyDecimalSeparator = null;
+            Metadata.CustomCurrencyGroupSeparator = null;
+            Metadata.CustomCurrencyDecimalDigits = null;
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
         NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;

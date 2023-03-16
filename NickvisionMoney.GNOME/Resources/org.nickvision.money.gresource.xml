@@ -10,6 +10,7 @@
     <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">larger-brush-symbolic.svg</file>
     <file preprocess="xml-stripblanks">money-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">money-symbolic.svg</file>
     <file preprocess="xml-stripblanks">moon-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">sun-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>

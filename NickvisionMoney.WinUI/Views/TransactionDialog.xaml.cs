@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
@@ -80,7 +81,7 @@ public sealed partial class TransactionDialog : ContentDialog
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
-        TxtAmount.Text = _controller.Transaction.Amount.ToString("N2", _controller.CultureForNumberString);
+        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
         foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
@@ -205,8 +206,14 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator;
-                TxtAmount.Select(TxtAmount.Text.Length, 0);
+                if(!TxtAmount.Text.Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = TxtAmount.SelectionStart;
+                    TxtAmount.Text = TxtAmount.Text.Remove(position - 1, 1);
+                    TxtAmount.Text = TxtAmount.Text.Insert(position - 1, _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator);
+                    TxtAmount.SelectionLength = 0;
+                    TxtAmount.SelectionStart = position + Math.Min(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2);
+                }
                 e.Handled = true;
             }
         }

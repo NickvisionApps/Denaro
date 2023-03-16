@@ -33,24 +33,15 @@
                             <ComboBox x:Name="CmbDefaultTransactionType" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,0,0" SelectionChanged="CmbDefaultTransactionType_SelectionChanged"/>
                         </Grid>
 
-                        <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <labs:SettingsCard x:Name="CardCurrency" Margin="0,10,0,0" IsClickEnabled="True" Click="CardCurrency_Click">
+                            <labs:SettingsCard.HeaderIcon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
+                            </labs:SettingsCard.HeaderIcon>
 
-                        <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-
-                        <ToggleSwitch x:Name="TglUseCustomCurrency" Toggled="TglUseCustomCurrency_Toggled"/>
-
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox x:Name="TxtCustomSymbol" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="3" TextChanged="TxtCustomSymbol_TextChanged"/>
-
-                            <TextBox x:Name="TxtCustomCode" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
-                        </Grid>
-
-                        <labs:SettingsCard x:Name="CardPassword" Margin="0,10,0,0" IsClickEnabled="True" Click="CardPassword_Click">
+                            <InfoBadge x:Name="InfoBadgeCurrency" Width="200" Visibility="Collapsed" Style="{ThemeResource AttentionDotInfoBadgeStyle}"/>
+                        </labs:SettingsCard>
+                        
+                        <labs:SettingsCard x:Name="CardPassword" IsClickEnabled="True" Click="CardPassword_Click">
                             <labs:SettingsCard.HeaderIcon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72E;"/>
                             </labs:SettingsCard.HeaderIcon>
@@ -63,6 +54,54 @@
                 </ScrollViewer>
             </nickvision:ViewStackPage>
 
+            <nickvision:ViewStackPage PageName="Currency">
+                <StackPanel Width="340" Orientation="Vertical" Spacing="6">
+                    <Button x:Name="BtnCurrencyBack" Click="BtnCurrencyBack_Click">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE112;"/>
+
+                                <TextBlock x:Name="LblCurrencyBack"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <TextBlock x:Name="LblSystemCurrencyDescription" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+
+                    <TextBlock x:Name="LblSystemCurrency" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+
+                    <ToggleSwitch x:Name="TglUseCustomCurrency" Margin="0,10,0,0" Toggled="TglUseCustomCurrency_Toggled"/>
+
+                    <Grid x:Name="GridCustomCurrency" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="TxtCustomSymbol" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" MaxLength="3" TextChanged="TxtCustomSymbol_TextChanged"/>
+
+                        <TextBox x:Name="TxtCustomCode" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,0,0,0" MaxLength="3" TextChanged="TxtCustomCode_TextChanged"/>
+
+                        <ComboBox x:Name="CmbCustomDecimalSeparator" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,6,0,0" SelectionChanged="CmbCustomDecimalSeparator_SelectionChanged"/>
+
+                        <TextBox x:Name="TxtCustomDecimalSeparator" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,34,0,0" Visibility="Collapsed" MaxLength="2" TextChanged="TxtCustomDecimalSeparator_TextChanged"/>
+
+                        <ComboBox x:Name="CmbCustomGroupSeparator" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,6,0,0" SelectionChanged="CmbCustomGroupSeparator_SelectionChanged"/>
+
+                        <TextBox x:Name="TxtCustomGroupSeparator" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="6,34,0,0" Visibility="Collapsed" MaxLength="2" TextChanged="TxtCustomGroupSeparator_TextChanged"/>
+
+                        <ComboBox x:Name="CmbCustomDecimalDigits" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,6,0,0" SelectionChanged="CmbCustomDecimalDigits_SelectionChanged"/>
+                    </Grid>
+                </StackPanel>
+            </nickvision:ViewStackPage>
+            
             <nickvision:ViewStackPage PageName="Password">
                 <StackPanel Width="340" Orientation="Vertical" Spacing="6">
                     <wct:DockPanel LastChildFill="False">

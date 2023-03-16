@@ -670,6 +670,14 @@
 	<data name="ManagePassword.Warning" xml:space="preserve">
 		<value>If the password is lost, there is no way to restore the file!</value>
 	</data>
+
+	<data name="Currency" xml:space="preserve">
+		<value>Currency</value>
+	</data>
+
+	<data name="ManageCurrency.Description" xml:space="preserve">
+		<value>Manage the currency used by the account.</value>
+	</data>
 	
 	<!--Fields-->
 	<data name="Id.Field" xml:space="preserve">
@@ -792,6 +800,10 @@
 		<value>Currency Symbol (Empty)</value>
 	</data>
 
+	<data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+		<value>Currency Symbol (Invalid)</value>
+	</data>
+
 	<data name="CustomCurrencyCode.Field" xml:space="preserve">
 		<value>Currency Code</value>
 	</data>
@@ -802,6 +814,54 @@
 
 	<data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
 		<value>Enter code here</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+		<value>Decimal Separator</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+		<value>Decimal Separator (Empty)</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+		<value>Decimal Separator (Invalid)</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+		<value>Other</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+		<value>Enter decimal separator</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+		<value>Group Separator</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+		<value>Group Separator (Invalid)</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+		<value>None</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+		<value>Other</value>
+	</data>
+
+	<data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+		<value>Enter group separator</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+		<value>Decimal Digits</value>
+	</data>
+
+	<data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+		<value>Unlimited</value>
 	</data>
 
 	<data name="Password.Field" xml:space="preserve">
@@ -818,6 +878,10 @@
 
 	<data name="ConfirmPassword.Field" xml:space="preserve">
 		<value>Confirm Password</value>
+	</data>
+
+	<data name="NonMatchingPasswords" xml:space="preserve">
+		<value>The passwords do not match.</value>
 	</data>
 
 	<data name="DestinationPassword.Field" xml:space="preserve">
@@ -983,10 +1047,6 @@
 
 	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
-	</data>
-
-	<data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>The passwords do not match.</value>
 	</data>
 
 	<!--GTK Specific-->

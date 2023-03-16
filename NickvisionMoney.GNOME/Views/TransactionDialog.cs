@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -218,7 +219,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);
         _descriptionRow.SetText(_controller.Transaction.Description);
-        _amountRow.SetText(_controller.Transaction.Amount.ToString("N2", _controller.CultureForNumberString));
+        _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false));
         _incomeButton.SetActive(_controller.Transaction.Type == TransactionType.Income);
         _repeatIntervalRow.SetSelected(_controller.RepeatIntervalIndex);
         _repeatEndDateRow.SetSensitive(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
@@ -277,8 +278,12 @@ public partial class TransactionDialog : Adw.MessageDialog
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 var row = (Adw.EntryRow)(sender.GetWidget());
-                row.SetText(row.GetText() + _controller.CultureForNumberString.NumberFormat.NumberDecimalSeparator);
-                row.SetPosition(row.GetText().Length);
+                if (!row.GetText().Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = row.GetPosition();
+                    row.SetText(row.GetText().Insert(position, _controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator));
+                    row.SetPosition(position + Math.Min(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2));
+                }
                 return true;
             }
         }

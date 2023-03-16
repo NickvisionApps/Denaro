@@ -28,7 +28,7 @@ public sealed partial class NewPasswordDialog : ContentDialog
         TxtPasswordConfirm.Header = localizer["ConfirmPassword", "Field"];
         TxtPasswordConfirm.PlaceholderText = localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = localizer["ManagePassword", "Warning"];
-        LblPasswordErrors.Text = localizer["NonMatchingPasswords", "WinUI"];
+        LblPasswordErrors.Text = localizer["NonMatchingPasswords"];
         IsPrimaryButtonEnabled = false;
     }
 

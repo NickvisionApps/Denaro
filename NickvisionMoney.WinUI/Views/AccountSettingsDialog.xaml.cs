@@ -42,6 +42,9 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbDefaultTransactionType.Header = _controller.Localizer["DefaultTransactionType", "Field"];
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Income"]);
         CmbDefaultTransactionType.Items.Add(_controller.Localizer["Expense"]);
+        CardCurrency.Header = _controller.Localizer["Currency"];
+        CardCurrency.Description = _controller.Localizer["ManageCurrency", "Description"];
+        LblCurrencyBack.Text = _controller.Localizer["Back"];
         LblSystemCurrencyDescription.Text = _controller.Localizer["ReportedCurrency"];
         LblSystemCurrency.Text = _controller.ReportedCurrencyString;
         TglUseCustomCurrency.OffContent = _controller.Localizer["UseCustomCurrency", "Field"];
@@ -50,9 +53,27 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtCustomSymbol.PlaceholderText = _controller.Localizer["CustomCurrencySymbol", "Placeholder"];
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
         TxtCustomCode.PlaceholderText = _controller.Localizer["CustomCurrencyCode", "Placeholder"];
+        CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Field"];
+        CmbCustomDecimalSeparator.Items.Add(".");
+        CmbCustomDecimalSeparator.Items.Add(",");
+        CmbCustomDecimalSeparator.Items.Add(_controller.Localizer["CustomCurrencyDecimalSeparator", "Other"]);
+        TxtCustomDecimalSeparator.PlaceholderText = _controller.Localizer["CustomCurrencyDecimalSeparator", "Placeholder"];
+        CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Field"];
+        CmbCustomGroupSeparator.Items.Add(".");
+        CmbCustomGroupSeparator.Items.Add(",");
+        CmbCustomGroupSeparator.Items.Add("'");
+        CmbCustomGroupSeparator.Items.Add(_controller.Localizer["CustomCurrencyGroupSeparator", "None"]);
+        CmbCustomGroupSeparator.Items.Add(_controller.Localizer["CustomCurrencyGroupSeparator", "Other"]);
+        TxtCustomGroupSeparator.PlaceholderText = _controller.Localizer["CustomCurrencyGroupSeparator", "Placeholder"];
+        CmbCustomDecimalDigits.Header = _controller.Localizer["CustomCurrencyDecimalDigits", "Field"];
+        CmbCustomDecimalDigits.Items.Add("2");
+        CmbCustomDecimalDigits.Items.Add("3");
+        CmbCustomDecimalDigits.Items.Add("4");
+        CmbCustomDecimalDigits.Items.Add("5");
+        CmbCustomDecimalDigits.Items.Add("6");
+        CmbCustomDecimalDigits.Items.Add(_controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"]);
         CardPassword.Header = _controller.Localizer["ManagePassword"];
         CardPassword.Description = _controller.Localizer["ManagePassword", "Description"];
-        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         LblPasswordBack.Text = _controller.Localizer["Back"];
         LblPasswordRemove.Text = _controller.Localizer["Remove"];
         TxtPasswordNew.Header = _controller.Localizer["NewPassword", "Field"];
@@ -60,7 +81,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TxtPasswordConfirm.Header = _controller.Localizer["ConfirmPassword", "Field"];
         TxtPasswordConfirm.PlaceholderText = _controller.Localizer["Password", "Placeholder"];
         LblPasswordWarning.Text = _controller.Localizer["ManagePassword", "Warning"];
-        LblPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords", "WinUI"];
+        LblPasswordErrors.Text = _controller.Localizer["NonMatchingPasswords"];
+        TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Metadata
         TxtName.Text = _controller.Metadata.Name;
         CmbAccountType.SelectedIndex = (int)_controller.Metadata.AccountType;
@@ -68,8 +90,41 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         TglUseCustomCurrency.IsOn = _controller.Metadata.UseCustomCurrency;
         if (_controller.Metadata.UseCustomCurrency)
         {
+            InfoBadgeCurrency.Visibility = Visibility.Visible;
             TxtCustomSymbol.Text = _controller.Metadata.CustomCurrencySymbol;
             TxtCustomCode.Text = _controller.Metadata.CustomCurrencyCode;
+            CmbCustomDecimalSeparator.SelectedIndex = _controller.Metadata.CustomCurrencyDecimalSeparator switch
+            {
+                null => 0,
+                "." => 0,
+                "," => 1,
+                _ => 2
+            };
+            if (CmbCustomDecimalSeparator.SelectedIndex == 2)
+            {
+                TxtCustomDecimalSeparator.Visibility = Visibility.Visible;
+                TxtCustomDecimalSeparator.Text = _controller.Metadata.CustomCurrencyDecimalSeparator;
+            }
+            CmbCustomGroupSeparator.SelectedIndex = _controller.Metadata.CustomCurrencyGroupSeparator switch
+            {
+                null => 1,
+                "." => 0,
+                "," => 1,
+                "'" => 2,
+                "" => 3,
+                _ => 4
+            };
+            if (CmbCustomGroupSeparator.SelectedIndex == 4)
+            {
+                TxtCustomGroupSeparator.Visibility = Visibility.Visible;
+                TxtCustomGroupSeparator.Text = _controller.Metadata.CustomCurrencyGroupSeparator;
+            }
+            CmbCustomDecimalDigits.SelectedIndex = _controller.Metadata.CustomCurrencyDecimalDigits switch
+            {
+                null => 0,
+                99 => 5,
+                _ => (int)_controller.Metadata.CustomCurrencyDecimalDigits - 2
+            };
         }
         BtnPasswordRemove.Visibility = _controller.IsEncrypted ? Visibility.Visible : Visibility.Collapsed;
         TxtName_TextChanged(null, null);
@@ -107,10 +162,27 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, (TransactionType)CmbDefaultTransactionType.SelectedIndex, TxtPasswordNew.Password, TxtPasswordConfirm.Password);
+        var customDecimalSeparator = CmbCustomDecimalSeparator.SelectedIndex switch
+        {
+            0 => ".",
+            1 => ",",
+            2 => TxtCustomDecimalSeparator.Text
+        };
+        var customGroupSeparator = CmbCustomGroupSeparator.SelectedIndex switch
+        {
+            0 => ".",
+            1 => ",",
+            2 => "'",
+            3 => "",
+            4 => TxtCustomGroupSeparator.Text
+        };
+        var customDecimalDigits = CmbCustomDecimalDigits.SelectedIndex == 5 ? 99u : (uint)CmbCustomDecimalDigits.SelectedIndex + 2u;
+        var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, customDecimalSeparator, customGroupSeparator, customDecimalDigits, (TransactionType)CmbDefaultTransactionType.SelectedIndex, TxtPasswordNew.Password, TxtPasswordConfirm.Password);
         TxtName.Header = _controller.Localizer["Name", "Field"];
         TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Field"];
         TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Field"];
+        CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Field"];
+        CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Field"];
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
             if (_controller.NewPassword != null)
@@ -136,9 +208,32 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             {
                 TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Empty"];
             }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.InvalidCurrencySymbol))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
+            }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 TxtCustomCode.Header = _controller.Localizer["CustomCurrencyCode", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyDecimalSeparator))
+            {
+                CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Empty"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
+            {
+                CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"];
+                CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
+                CmbCustomDecimalSeparator.Header = _controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"];
+            }
+            if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndGroupSeparator))
+            {
+                TxtCustomSymbol.Header = _controller.Localizer["CustomCurrencySymbol", "Invalid"];
+                CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"];
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))
             {
@@ -243,22 +338,36 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     }
 
     /// <summary>
+    /// Occurs when the currency card is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CardCurrency_Click(object sender, RoutedEventArgs e)
+    {
+        Title = $"{_controller.Localizer["AccountSettings"]} - {_controller.Localizer["Currency"]}";
+        ViewStack.ChangePage("Currency");
+    }
+
+    /// <summary>
+    /// Occurs when the back button on the currency page is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnCurrencyBack_Click(object sender, RoutedEventArgs e)
+    {
+        Title = _controller.Localizer["AccountSettings"];
+        ViewStack.ChangePage("Main");
+    }
+
+    /// <summary>
     /// Occurs when the use custom currency toggle is changed
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">RoutedEventArgs</param>
     private void TglUseCustomCurrency_Toggled(object? sender, RoutedEventArgs e)
     {
-        if (TglUseCustomCurrency.IsOn)
-        {
-            TxtCustomSymbol.IsEnabled = true;
-            TxtCustomCode.IsEnabled = true;
-        }
-        else
-        {
-            TxtCustomSymbol.IsEnabled = false;
-            TxtCustomCode.IsEnabled = false;
-        }
+        InfoBadgeCurrency.Visibility = TglUseCustomCurrency.IsOn ? Visibility.Visible : Visibility.Collapsed;
+        GridCustomCurrency.Visibility = TglUseCustomCurrency.IsOn ? Visibility.Visible : Visibility.Collapsed;
         if (!_constructing)
         {
             Validate();
@@ -284,6 +393,73 @@ public sealed partial class AccountSettingsDialog : ContentDialog
     /// <param name="sender">sender</param>
     /// <param name="e">TextChangedEventArgs</param>
     private void TxtCustomCode_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom decimal separator combobox's selection is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbCustomDecimalSeparator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            TxtCustomDecimalSeparator.Visibility = CmbCustomDecimalSeparator.SelectedIndex == 2 ? Visibility.Visible : Visibility.Collapsed;
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom decimal separator textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomDecimalSeparator_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom group separator combobox's selection is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbCustomGroupSeparator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            TxtCustomGroupSeparator.Visibility = CmbCustomGroupSeparator.SelectedIndex == 4 ? Visibility.Visible : Visibility.Collapsed;
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom group separator textbox is changed
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtCustomGroupSeparator_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the custom decimal digits combobox's selection is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbCustomDecimalDigits_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!_constructing)
         {

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
 using NickvisionMoney.WinUI.Helpers;
@@ -83,7 +84,7 @@ public sealed partial class TransferDialog : ContentDialog
             actionRow.Children.Insert(0, typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
-        TxtAmount.Text = _controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString);
+        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false);
         Validate();
     }
 
@@ -117,7 +118,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString);
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
@@ -243,8 +244,14 @@ public sealed partial class TransferDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtAmount.Text = TxtAmount.Text.Substring(0, TxtAmount.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
-                TxtAmount.Select(TxtAmount.Text.Length, 0);
+                if(!TxtAmount.Text.Contains(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = TxtAmount.SelectionStart;
+                    TxtAmount.Text = TxtAmount.Text.Remove(position - 1, 1);
+                    TxtAmount.Text = TxtAmount.Text.Insert(position - 1, _controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator);
+                    TxtAmount.SelectionLength = 0;
+                    TxtAmount.SelectionStart = position + Math.Min(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2);
+                }
                 e.Handled = true;
             }
         }
@@ -269,8 +276,14 @@ public sealed partial class TransferDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtSourceCurrency.Text = TxtSourceCurrency.Text.Substring(0, TxtSourceCurrency.Text.Length - 1) + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator;
-                TxtSourceCurrency.Select(TxtSourceCurrency.Text.Length, 0);
+                if (!TxtSourceCurrency.Text.Contains(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = TxtSourceCurrency.SelectionStart;
+                    TxtSourceCurrency.Text = TxtSourceCurrency.Text.Remove(position - 1, 1);
+                    TxtSourceCurrency.Text = TxtSourceCurrency.Text.Insert(position - 1, _controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator);
+                    TxtSourceCurrency.SelectionLength = 0;
+                    TxtSourceCurrency.SelectionStart = position + Math.Min(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2);
+                }
                 e.Handled = true;
             }
         }
@@ -295,8 +308,14 @@ public sealed partial class TransferDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                TxtDestCurrency.Text = TxtDestCurrency.Text.Substring(0, TxtDestCurrency.Text.Length - 1) + _controller.CultureForDestNumberString!.NumberFormat.NumberDecimalSeparator;
-                TxtDestCurrency.Select(TxtDestCurrency.Text.Length, 0);
+                if (!TxtDestCurrency.Text.Contains(_controller.CultureForDestNumberString!.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = TxtDestCurrency.SelectionStart;
+                    TxtDestCurrency.Text = TxtDestCurrency.Text.Remove(position - 1, 1);
+                    TxtDestCurrency.Text = TxtDestCurrency.Text.Insert(position - 1, _controller.CultureForDestNumberString.NumberFormat.CurrencyDecimalSeparator);
+                    TxtDestCurrency.SelectionLength = 0;
+                    TxtDestCurrency.SelectionStart = position + Math.Min(_controller.CultureForDestNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2);
+                }
                 e.Handled = true;
             }
         }

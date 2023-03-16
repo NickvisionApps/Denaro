@@ -90,7 +90,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{Math.Abs(_account.TodayTotal).ToString("C", CultureForNumberString)}";
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{Math.Abs(_account.TodayTotal).ToAmountString(CultureForNumberString)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -98,7 +98,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => _account.TodayIncome.ToString("C", CultureForNumberString);
+    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -106,7 +106,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => _account.TodayExpense.ToString("C", CultureForNumberString);
+    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString);
     /// <summary>
     /// The count of transactions in the account
     /// </summary>
@@ -186,6 +186,9 @@ public class AccountViewController : IDisposable
             if (_account.Metadata.UseCustomCurrency)
             {
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? culture.NumberFormat.CurrencySymbol;
+                culture.NumberFormat.CurrencyDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator ?? culture.NumberFormat.CurrencyDecimalSeparator;
+                culture.NumberFormat.CurrencyGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator ?? culture.NumberFormat.CurrencyGroupSeparator;
+                culture.NumberFormat.CurrencyDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
                 culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? region.ISOCurrencySymbol;
             }
             else
@@ -581,6 +584,9 @@ public class AccountViewController : IDisposable
     public void UpdateMetadata(AccountMetadata metadata)
     {
         var oldSymbol = _account.Metadata.CustomCurrencySymbol;
+        var oldDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator;
+        var oldGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator;
+        var oldDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits;
         _account.UpdateMetadata(metadata);
         Configuration.Current.AddRecentAccount(new RecentAccount(AccountPath)
         {
@@ -589,7 +595,7 @@ public class AccountViewController : IDisposable
         });
         Configuration.Current.Save();
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-        if (oldSymbol != metadata.CustomCurrencySymbol)
+        if (oldSymbol != metadata.CustomCurrencySymbol || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
         {
             foreach (var row in GroupRows)
             {

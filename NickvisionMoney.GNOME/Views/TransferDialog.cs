@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
@@ -144,7 +145,7 @@ public partial class TransferDialog : Adw.MessageDialog
             row.SetActivatableWidget(button);
             _recentAccountsGroup.Add(row);
         }
-        _amountRow.SetText(_controller.Transfer.SourceAmount.ToString("N2", _controller.CultureForSourceNumberString));
+        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
         Validate();
     }
 
@@ -176,7 +177,7 @@ public partial class TransferDialog : Adw.MessageDialog
         _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToString("C", _controller.CultureForDestNumberString));
+            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString));
             SetResponseEnabled("ok", true);
         }
         else
@@ -302,8 +303,12 @@ public partial class TransferDialog : Adw.MessageDialog
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 var row = (Adw.EntryRow)(sender.GetWidget());
-                row.SetText(row.GetText() + _controller.CultureForSourceNumberString.NumberFormat.NumberDecimalSeparator);
-                row.SetPosition(row.GetText().Length);
+                if (!row.GetText().Contains(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = row.GetPosition();
+                    row.SetText(row.GetText().Insert(position, _controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator));
+                    row.SetPosition(position + Math.Min(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2));
+                }
                 return true;
             }
         }
@@ -322,8 +327,12 @@ public partial class TransferDialog : Adw.MessageDialog
             if (e.Keyval == 65454 || e.Keyval == 65452 || e.Keyval == 2749 || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Keyval == 44 || e.Keyval == 46)))
             {
                 var row = (Adw.EntryRow)(sender.GetWidget());
-                row.SetText(row.GetText() + _controller.CultureForDestNumberString.NumberFormat.NumberDecimalSeparator);
-                row.SetPosition(row.GetText().Length);
+                if (!row.GetText().Contains(_controller.CultureForDestNumberString.NumberFormat.CurrencyDecimalSeparator))
+                {
+                    var position = row.GetPosition();
+                    row.SetText(row.GetText().Insert(position, _controller.CultureForDestNumberString.NumberFormat.CurrencyDecimalSeparator));
+                    row.SetPosition(position + Math.Min(_controller.CultureForDestNumberString.NumberFormat.CurrencyDecimalSeparator.Length, 2));
+                }
                 return true;
             }
         }
