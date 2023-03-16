@@ -300,12 +300,16 @@
 		<value>Groups</value>
 	</data>
 
-	<data name="Transaction" xml:space="preserve">
-		<value>Transaction</value>
-	</data>
-
 	<data name="Transactions" xml:space="preserve">
 		<value>Transactions</value>
+	</data>
+
+	<data name="TransactionNumber" xml:space="preserve">
+		<value>{0} Transaction</value>
+	</data>
+
+	<data name="TransactionNumber.Plural" xml:space="preserve">
+		<value>{0} Transactions</value>
 	</data>
 
 	<data name="NoTransactionsTitle" xml:space="preserve">
