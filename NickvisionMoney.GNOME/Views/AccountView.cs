@@ -422,7 +422,6 @@ public partial class AccountView : Adw.Bin
         {
             ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
-        _transactionsGroup.SetTitle($"{_controller.FilteredTransactionsCount} {(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["Transactions"] : _controller.Localizer["Transaction"])}");
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
@@ -1293,7 +1292,7 @@ public partial class AccountView : Adw.Bin
         }
         else
         {
-            _transactionsGroup.SetTitle(_controller.Localizer["Transactions"]);
+            _transactionsGroup.SetTitle($"{_controller.FilteredTransactionsCount} {(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["Transactions"] : _controller.Localizer["Transaction"])}");
         }
     }
 }
