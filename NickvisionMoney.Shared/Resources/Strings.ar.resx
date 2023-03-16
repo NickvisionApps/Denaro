@@ -763,9 +763,6 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>PREVIEW</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>The passwords do not match.</value>
-  </data>
   <data name="Summary.GTK" xml:space="preserve">
     <value>Manage your personal finances</value>
   </data>
