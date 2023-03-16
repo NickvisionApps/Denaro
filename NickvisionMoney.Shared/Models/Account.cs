@@ -1730,7 +1730,7 @@ public class Account : IDisposable
     {
         if(Directory.Exists(Configuration.Current.CSVBackupFolder))
         {
-            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}-{DateTime.Now}.csv");
+            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
         }
     }
 }
