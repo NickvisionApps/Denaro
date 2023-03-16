@@ -1023,6 +1023,34 @@
 		<value>Period and Comma</value>
 	</data>
 
+	<data name="Backup" xml:space="preserve">
+		<value>Backup</value>
+	</data>
+
+	<data name="BackupDescription" xml:space="preserve">
+		<value>Customize backup locations for Denaro accounts.</value>
+	</data>
+
+	<data name="BackupFolder" xml:space="preserve">
+		<value>CSV Backup Folder</value>
+	</data>
+
+	<data name="BackupFolderDescription" xml:space="preserve">
+		<value>Accounts will automatically export as CSV files to this folder when a change is made.</value>
+	</data>
+
+	<data name="NoBackupFolder" xml:space="preserve">
+		<value>No Backup Folder</value>
+	</data>
+
+	<data name="SelectBackupFolder" xml:space="preserve">
+		<value>Select Backup Folder</value>
+	</data>
+
+	<data name="ClearBackupFolder" xml:space="preserve">
+		<value>Clear Backup Folder</value>
+	</data>
+
 	<!--Shortcuts Dialog-->
 	<data name="Application.Shortcut" xml:space="preserve">
 		<value>Application</value>
