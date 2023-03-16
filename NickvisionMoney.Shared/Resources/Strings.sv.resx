@@ -761,9 +761,6 @@
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Period and Comma</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>The passwords do not match.</value>
-  </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>The password will be removed upon closing this dialog.</value>
   </data>
