@@ -759,9 +759,6 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Point et virgule</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Les mots de passe ne correspondent pas.</value>
-  </data>
   <data name="PasswordRemoved" xml:space="preserve">
     <value>Le mot de passe du compte a été retiré.</value>
   </data>
