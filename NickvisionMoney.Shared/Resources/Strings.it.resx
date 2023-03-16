@@ -819,4 +819,10 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
     <value>Illimitato</value>
   </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transazione</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} Transazioni</value>
+  </data>
 </root>
