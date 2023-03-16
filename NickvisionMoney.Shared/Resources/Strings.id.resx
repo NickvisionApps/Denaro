@@ -743,9 +743,6 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   <data name="LocaleDescription" xml:space="preserve">
     <value>Kustomisasi bagaimana Denaro menggunakan pengaturan lokal.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Kata sandi tidak cocok.</value>
-  </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>Kata sandi akan dihapus setelah menutup dialog ini.</value>
   </data>
