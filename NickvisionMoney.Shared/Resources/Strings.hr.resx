@@ -776,9 +776,6 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
   <data name="Preview.WinUI" xml:space="preserve">
     <value>PREGLED</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Lozinke se ne poklapaju.</value>
-  </data>
   <data name="ManagePassword.Description" xml:space="preserve">
     <value>Postavi novu ili ukloni jednu lozinku.</value>
   </data>
