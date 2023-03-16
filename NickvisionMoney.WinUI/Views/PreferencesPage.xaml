@@ -180,13 +180,13 @@
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <TextBlock x:Name="LblBackupFolder" VerticalAlignment="Center"/>
 
-                                    <Button x:Name="BtnSelectBackupFolder" Margin="10,0,0,0" Style="{ThemeResource AccentButtonStyle}">
+                                    <Button x:Name="BtnSelectBackupFolder" Margin="10,0,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectBackupFolder">
                                         <Button.Content>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="BtnClearBackupFolder">
+                                    <Button x:Name="BtnClearBackupFolder" Click="ClearBackupFolder">
                                         <Button.Content>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE106;"/>
                                         </Button.Content>
