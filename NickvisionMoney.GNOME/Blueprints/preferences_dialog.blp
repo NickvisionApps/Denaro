@@ -8,153 +8,144 @@ Adw.PreferencesWindow _root {
   modal: true;
   destroy-with-parent: false;
   hide-on-close: true;
+  title: _("Preferences");
 
-  Gtk.Box {
-    orientation: vertical;
+  Adw.PreferencesPage {
+    vexpand: true;
 
-    Adw.HeaderBar {
-      title-widget: Adw.WindowTitle {
-        title: _("Preferences");
-      };
-    }
+    Adw.PreferencesGroup {
+      title: _("UserInterface");
+      description: _("UserInterfaceDescription");
 
-    Adw.PreferencesPage {
-      vexpand: true;
-
-      Adw.PreferencesGroup {
-        title: _("UserInterface");
-        description: _("UserInterfaceDescription");
-
-        Adw.ComboRow _themeRow {
-          title: _("Theme");
-          icon-name: "dark-mode-symbolic";
-          model: Gtk.StringList {
-            strings [_("ThemeLight"), _("ThemeDark"), _("ThemeSystem")]
-          };
-        }
-        
-        Adw.ExpanderRow {
-          title: _("Colors");
-          subtitle: _("ColorsDescription");
-          icon-name: "preferences-color-symbolic";
-          
-          Adw.ActionRow {
-            title: _("TransactionColor");
-            subtitle: _("TransactionColorDescription");
-            activatable-widget: _transactionColor;
-            
-            [suffix]
-            Gtk.ColorButton _transactionColor {
-              valign: center;
-            }
-          }
-          
-          Adw.ActionRow {
-            title: _("TransferColor");
-            subtitle: _("TransferColorDescription");
-            activatable-widget: _transferColor;
-            
-            [suffix]
-            Gtk.ColorButton _transferColor {
-              valign: center;
-            }
-          }
-          
-          Adw.ActionRow {
-            title: _("AccountCheckingColor");
-            subtitle: _("AccountCheckingColorDescription");
-            activatable-widget: _accountCheckingColor;
-            
-            [suffix]
-            Gtk.ColorButton _accountCheckingColor {
-              valign: center;
-            }
-          }
-          
-          Adw.ActionRow {
-            title: _("AccountSavingsColor");
-            subtitle: _("AccountSavingsColorDescription");
-            activatable-widget: _accountSavingsColor;
-            
-            [suffix]
-            Gtk.ColorButton _accountSavingsColor {
-              valign: center;
-            }
-          }
-          
-          Adw.ActionRow {
-            title: _("AccountBusinessColor");
-            subtitle: _("AccountBusinessColorDescription");
-            activatable-widget: _accountBusinessColor;
-            
-            [suffix]
-            Gtk.ColorButton _accountBusinessColor {
-              valign: center;
-            }
-          }
-        }
-      }
-      
-      Adw.PreferencesGroup {
-        title: _("Locale");
-        description: _("LocaleDescription");
-        
-        Adw.ComboRow _insertSeparatorRow {
-          title: _("InsertSeparator");
-          subtitle: _("InsertSeparator.Description");
-          subtitle-lines: 3;
-          icon-name: "input-keyboard-symbolic";
-          model: Gtk.StringList {
-            strings [_("InsertSeparatorOff"), _("InsertSeparatorNumpad"), _("InsertSeparatorPeriodComma")]
-          };
-        }
+      Adw.ComboRow _themeRow {
+        title: _("Theme");
+        icon-name: "dark-mode-symbolic";
+        model: Gtk.StringList {
+          strings [_("ThemeLight"), _("ThemeDark"), _("ThemeSystem")]
+        };
       }
 
-      Adw.PreferencesGroup {
-        title: _("Backup");
-        description: _("BackupDescription");
+      Adw.ExpanderRow {
+        title: _("Colors");
+        subtitle: _("ColorsDescription");
+        icon-name: "preferences-color-symbolic";
+        
+        Adw.ActionRow {
+          title: _("TransactionColor");
+          subtitle: _("TransactionColorDescription");
+          activatable-widget: _transactionColor;
+          
+          [suffix]
+          Gtk.ColorButton _transactionColor {
+            valign: center;
+          }
+        }
 
         Adw.ActionRow {
-          title: _("BackupFolder");
-          subtitle: _("BackupFolderDescription");
-          icon-name: "folder-download-symbolic";
-
+          title: _("TransferColor");
+          subtitle: _("TransferColorDescription");
+          activatable-widget: _transferColor;
+          
           [suffix]
-          Adw.ViewStack _backupViewStack {
-            Adw.ViewStackPage {
-              name: "no-folder";
-              child: Gtk.Button _selectBackupFolderButton {
-                halign: end;
-                valign: center;
-                child: Adw.ButtonContent {
-                  label: _("SelectBackupFolder");
-                  icon-name: "folder-open-symbolic";
+          Gtk.ColorButton _transferColor {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("AccountCheckingColor");
+          subtitle: _("AccountCheckingColorDescription");
+          activatable-widget: _accountCheckingColor;
+          
+          [suffix]
+          Gtk.ColorButton _accountCheckingColor {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("AccountSavingsColor");
+          subtitle: _("AccountSavingsColorDescription");
+          activatable-widget: _accountSavingsColor;
+          
+          [suffix]
+          Gtk.ColorButton _accountSavingsColor {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("AccountBusinessColor");
+          subtitle: _("AccountBusinessColorDescription");
+          activatable-widget: _accountBusinessColor;
+          
+          [suffix]
+          Gtk.ColorButton _accountBusinessColor {
+            valign: center;
+          }
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Locale");
+      description: _("LocaleDescription");
+      
+      Adw.ComboRow _insertSeparatorRow {
+        title: _("InsertSeparator");
+        subtitle: _("InsertSeparator.Description");
+        subtitle-lines: 3;
+        icon-name: "input-keyboard-symbolic";
+        model: Gtk.StringList {
+          strings [_("InsertSeparatorOff"), _("InsertSeparatorNumpad"), _("InsertSeparatorPeriodComma")]
+        };
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Backup");
+      description: _("BackupDescription");
+
+      Adw.ActionRow {
+        title: _("BackupFolder");
+        subtitle: _("BackupFolderDescription");
+        icon-name: "folder-download-symbolic";
+
+        [suffix]
+        Adw.ViewStack _backupViewStack {
+          Adw.ViewStackPage {
+            name: "no-folder";
+            child: Gtk.Button _selectBackupFolderButton {
+              halign: end;
+              valign: center;
+              child: Adw.ButtonContent {
+                label: _("SelectBackupFolder");
+                icon-name: "folder-open-symbolic";
+              };
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "folder-selected";
+            child: Gtk.Box {
+              orientation: horizontal;
+              halign: end;
+              valign: center;
+
+              Gtk.Button _backupFolderButton {
+                tooltip-text: _("SelectBackupFolder");
+                child: Gtk.Label _backupFolderLabel {
+                  ellipsize: start;
                 };
-              };
-            }
+              }
 
-            Adw.ViewStackPage {
-              name: "folder-selected";
-              child: Gtk.Box {
-                orientation: horizontal;
-                halign: end;
-                valign: center;
+              Gtk.Button _unsetBackupFolderButton {
+                icon-name: "larger-brush-symbolic";
+                tooltip-text: _("ClearBackupFolder");
+              }
 
-                Gtk.Button _backupFolderButton {
-                  tooltip-text: _("SelectBackupFolder");
-                  child: Gtk.Label _backupFolderLabel {
-                    ellipsize: start;
-                  };
-                }
-
-                Gtk.Button _unsetBackupFolderButton {
-                  icon-name: "larger-brush-symbolic";
-                  tooltip-text: _("ClearBackupFolder");
-                }
-
-                styles ["linked"]
-              };
-            }
+              styles ["linked"]
+            };
           }
         }
       }
