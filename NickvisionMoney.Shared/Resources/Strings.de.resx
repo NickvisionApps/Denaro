@@ -784,9 +784,6 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Punkt und Komma</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Die Passwörter stimmen nicht überein.</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
