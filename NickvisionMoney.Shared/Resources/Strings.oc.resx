@@ -711,9 +711,6 @@ Traductors :
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Ponch e virgula</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Los senhals correspondon pas.</value>
-  </data>
   <data name="Quit" xml:space="preserve">
     <value>Quitar</value>
   </data>
