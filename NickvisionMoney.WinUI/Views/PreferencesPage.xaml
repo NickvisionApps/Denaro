@@ -165,6 +165,36 @@
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
+
+                    <labs:SettingsExpander x:Name="CardBackup">
+                        <labs:SettingsExpander.HeaderIcon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
+                        </labs:SettingsExpander.HeaderIcon>
+
+                        <labs:SettingsExpander.Items>
+                            <labs:SettingsCard x:Name="CardBackupFolder">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B7;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock x:Name="LblBackupFolder" VerticalAlignment="Center"/>
+
+                                    <Button x:Name="BtnSelectBackupFolder" Margin="10,0,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SelectBackupFolder">
+                                        <Button.Content>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
+                                        </Button.Content>
+                                    </Button>
+
+                                    <Button x:Name="BtnClearBackupFolder" Click="ClearBackupFolder">
+                                        <Button.Content>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE106;"/>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </labs:SettingsCard>
+                        </labs:SettingsExpander.Items>
+                    </labs:SettingsExpander>
                 </StackPanel>
             </ScrollViewer>
         </wct:DockPanel>

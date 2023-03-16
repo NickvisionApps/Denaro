@@ -5,10 +5,13 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI;
 
@@ -20,6 +23,7 @@ namespace NickvisionMoney.WinUI.Views;
 public sealed partial class PreferencesPage : UserControl, INotifyPropertyChanged
 {
     private readonly PreferencesViewController _controller;
+    private readonly Action<object> _initializeWithWindow;
     private Color _transactionDefaultColor;
     private Color _transferDefaultColor;
     private Color _accountCheckingColor;
@@ -32,10 +36,12 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     /// Constructs a PreferencesPage
     /// </summary>
     /// <param name="controller">PreferencesViewController</param>
-    public PreferencesPage(PreferencesViewController controller)
+    /// <param name="initializeWithWindow">The Action<object> callback for InitializeWithWindow</param>
+    public PreferencesPage(PreferencesViewController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
+        _initializeWithWindow = initializeWithWindow;
         //Localize Strings
         LblTitle.Text = _controller.Localizer["Settings"];
         LblAbout.Text = string.Format(_controller.Localizer["About"], _controller.AppInfo.Name);
@@ -70,6 +76,13 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorOff"]);
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorNumpad"]);
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorPeriodComma"]);
+        CardBackup.Header = _controller.Localizer["Backup"];
+        CardBackup.Description = _controller.Localizer["BackupDescription"];
+        CardBackupFolder.Header = _controller.Localizer["BackupFolder"];
+        CardBackupFolder.Description = _controller.Localizer["BackupFolderDescription"];
+        LblBackupFolder.Text = _controller.Localizer["NoBackupFolder"];
+        ToolTipService.SetToolTip(BtnSelectBackupFolder, _controller.Localizer["SelectBackupFolder"]);
+        ToolTipService.SetToolTip(BtnClearBackupFolder, _controller.Localizer["ClearBackupFolder"]);
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
@@ -78,6 +91,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
         CmbInsertSeparator.SelectedIndex = (int)_controller.InsertSeparator;
+        LblBackupFolder.Text = !Directory.Exists(_controller.CSVBackupFolder) ? _controller.Localizer["NoBackupFolder"] : _controller.CSVBackupFolder;
+        _initializeWithWindow = initializeWithWindow;
     }
 
     /// <summary>
@@ -299,6 +314,38 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     private void CmbInsertSeparator_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         _controller.InsertSeparator = (InsertSeparator)CmbInsertSeparator.SelectedIndex;
+        _controller.SaveConfiguration();
+    }
+
+    /// <summary>
+    /// Occurs when the select backup folder button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void SelectBackupFolder(object sender, RoutedEventArgs e)
+    {
+        var folderPicker = new FolderPicker();
+        _initializeWithWindow(folderPicker);
+        folderPicker.FileTypeFilter.Add("*");
+        folderPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        var folder = await folderPicker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            LblBackupFolder.Text = folder.Path;
+            _controller.CSVBackupFolder = folder.Path;
+            _controller.SaveConfiguration();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the clear backup folder button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ClearBackupFolder(object sender, RoutedEventArgs e)
+    {
+        LblBackupFolder.Text = _controller.Localizer["NoBackupFolder"];
+        _controller.CSVBackupFolder = "";
         _controller.SaveConfiguration();
     }
 

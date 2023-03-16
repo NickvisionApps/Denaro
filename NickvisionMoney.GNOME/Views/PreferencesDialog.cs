@@ -33,6 +33,23 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_file_get_path(nint file);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_new();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
+
+    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
+
     private readonly PreferencesViewController _controller;
     private readonly Adw.Application _application;
 
@@ -43,6 +60,13 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.ColorButton _accountSavingsColor;
     [Gtk.Connect] private readonly Gtk.ColorButton _accountBusinessColor;
     [Gtk.Connect] private readonly Adw.ComboRow _insertSeparatorRow;
+    [Gtk.Connect] private readonly Adw.ViewStack _backupViewStack;
+    [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
+    [Gtk.Connect] private readonly Gtk.Button _backupFolderButton;
+    [Gtk.Connect] private readonly Gtk.Label _backupFolderLabel;
+    [Gtk.Connect] private readonly Gtk.Button _unsetBackupFolderButton;
+
+    private GAsyncReadyCallback _fileDialogCallback { get; set; }
 
     private PreferencesDialog(Gtk.Builder builder, PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -71,6 +95,9 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();
             }
         };
+        _selectBackupFolderButton.OnClicked += SelectBackupFolder;
+        _backupFolderButton.OnClicked += SelectBackupFolder;
+        _unsetBackupFolderButton.OnClicked += UnsetBackupFolder;
         //Layout
         OnHide += Hide;
         //Load Config
@@ -91,6 +118,11 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         gdk_rgba_parse(ref accountBusinessColor, _controller.AccountBusinessColor);
         gtk_color_chooser_set_rgba(_accountBusinessColor.Handle, ref accountBusinessColor);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
+        if (!string.IsNullOrEmpty(_controller.CSVBackupFolder))
+        {
+            _backupViewStack.SetVisibleChildName("folder-selected");
+            _backupFolderLabel.SetText(_controller.CSVBackupFolder);
+        }
     }
 
     /// <summary>
@@ -177,5 +209,69 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         var color = new Color();
         gtk_color_chooser_get_rgba(_accountBusinessColor.Handle, ref color);
         _controller.AccountBusinessColor = gdk_rgba_to_string(ref color);
+    }
+
+    /// <summary>
+    /// Occurs when a button to select backup folder is clicked
+    /// </summary>
+    private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
+    {
+        if (Gtk.Functions.GetMinorVersion() >= 9)
+        {
+            var fileDialog = gtk_file_dialog_new();
+            gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
+            _fileDialogCallback = async (source, res, data) =>
+            {
+                var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
+                if (fileHandle != IntPtr.Zero)
+                {
+                    var path = g_file_get_path(fileHandle);
+                    if (path.StartsWith("/run/user"))
+                    {
+                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
+                    }
+                    else
+                    {
+                        _controller.CSVBackupFolder = path;
+                        _backupViewStack.SetVisibleChildName("folder-selected");
+                        _backupFolderLabel.SetText(path);
+                    }
+                }
+            };
+            gtk_file_dialog_select_folder(fileDialog, Handle, IntPtr.Zero, _fileDialogCallback, IntPtr.Zero);
+        }
+        else
+        {
+            var fileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectBackupFolder"], this, Gtk.FileChooserAction.SelectFolder, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
+            fileDialog.SetModal(true);
+            fileDialog.OnResponse += async (sender, e) =>
+            {
+                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                {
+                    var path = fileDialog.GetFile()!.GetPath() ?? "";
+                    if (path == "") { return; }
+                    if (path.StartsWith("/run/user"))
+                    {
+                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
+                    }
+                    else
+                    {
+                        _controller.CSVBackupFolder = path;
+                        _backupViewStack.SetVisibleChildName("folder-selected");
+                        _backupFolderLabel.SetText(path);
+                    }
+                }
+            };
+            fileDialog.Show();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when a button to disable CSV backup is clicked
+    /// </summary>
+    private void UnsetBackupFolder(Gtk.Button sender, EventArgs e)
+    {
+        _controller.CSVBackupFolder = "";
+        _backupViewStack.SetVisibleChildName("no-folder");
     }
 }

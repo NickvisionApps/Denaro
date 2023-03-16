@@ -254,7 +254,7 @@ public sealed partial class MainWindow : Window
         }
         else if (pageName == "Settings")
         {
-            PageSettings.Content = new PreferencesPage(_controller.PreferencesViewController);
+            PageSettings.Content = new PreferencesPage(_controller.PreferencesViewController, InitializeWithWindow);
         }
         ViewStack.ChangePage(pageName);
     }
