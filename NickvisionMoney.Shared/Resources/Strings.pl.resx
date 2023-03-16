@@ -760,9 +760,6 @@ Tłumaczenie:
 		<value>Uruchomić ponownie {0} aby zmienić motyw?
 Niezapisane zmiany zostaną utracone.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>Podane hasła są różne.</value>
-  </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Zarządzaj swoimi finansami</value>
