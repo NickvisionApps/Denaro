@@ -70,6 +70,13 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorOff"]);
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorNumpad"]);
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorPeriodComma"]);
+        CardBackup.Header = _controller.Localizer["Backup"];
+        CardBackup.Description = _controller.Localizer["BackupDescription"];
+        CardBackupFolder.Header = _controller.Localizer["BackupFolder"];
+        CardBackupFolder.Description = _controller.Localizer["BackupFolderDescription"];
+        LblBackupFolder.Text = _controller.Localizer["NoBackupFolder"];
+        ToolTipService.SetToolTip(BtnSelectBackupFolder, _controller.Localizer["SelectBackupFolder"]);
+        ToolTipService.SetToolTip(BtnClearBackupFolder, _controller.Localizer["ClearBackupFolder"]);
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
