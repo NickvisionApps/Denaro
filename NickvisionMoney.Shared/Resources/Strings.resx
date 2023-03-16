@@ -1125,4 +1125,8 @@
 	<data name="PasswordRemoveRequest.GTK" xml:space="preserve">
 		<value>The password will be removed upon closing this dialog.</value>
 	</data>
+
+	<data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+		<value>Can't access the selected folder, check Flatpak permissions.</value>
+	</data>
 </root>
