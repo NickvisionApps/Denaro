@@ -232,6 +232,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             }
             ScrollSidebar.Height = ActualHeight - 60;
             GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
+            LblTransactions.Text = $"{_controller.FilteredTransactionsCount} {(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["Transactions"] : _controller.Localizer["Transaction"])}";
             //Setup Other UI Elements
             DateRangeStart.Date = DateTimeOffset.Now;
             DateRangeEnd.Date = DateTimeOffset.Now;
@@ -327,7 +328,8 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                 }
             }
             //Transaction Page
-            if (_controller.HasFilteredTransactions)
+            LblTransactions.Text = $"{_controller.FilteredTransactionsCount} {(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["Transactions"] : _controller.Localizer["Transaction"])}";
+            if (_controller.FilteredTransactionsCount > 0)
             {
                 ViewStackTransactions.ChangePage("Transactions");
             }

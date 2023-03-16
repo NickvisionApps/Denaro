@@ -300,6 +300,10 @@
 		<value>Groups</value>
 	</data>
 
+	<data name="Transaction" xml:space="preserve">
+		<value>Transaction</value>
+	</data>
+
 	<data name="Transactions" xml:space="preserve">
 		<value>Transactions</value>
 	</data>

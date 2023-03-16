@@ -28,9 +28,9 @@ public class AccountViewController : IDisposable
     /// </summary>
     public Localizer Localizer { get; init; }
     /// <summary>
-    /// Whether or not filtered transactions are available
+    /// The number of filtered transactions being shown
     /// </summary>
-    public bool HasFilteredTransactions { get; private set; }
+    public int FilteredTransactionsCount { get; private set; }
     /// <summary>
     /// The list of UI transaction row objects
     /// </summary>
@@ -149,7 +149,7 @@ public class AccountViewController : IDisposable
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
         Localizer = localizer;
-        HasFilteredTransactions = false;
+        FilteredTransactionsCount = 0;
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
@@ -455,7 +455,7 @@ public class AccountViewController : IDisposable
             {
                 TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
             }
-            HasFilteredTransactions = transactions.Count > 0;
+            FilteredTransactionsCount = transactions.Count;
             AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             _isOpened = true;
         }
@@ -1036,8 +1036,8 @@ public class AccountViewController : IDisposable
             }
             filteredTransactions.Add(pair.Value.Id);
         }
-        HasFilteredTransactions = filteredTransactions.Count > 0;
-        if (HasFilteredTransactions)
+        FilteredTransactionsCount = filteredTransactions.Count;
+        if (FilteredTransactionsCount > 0)
         {
             //Update UI
             foreach (var pair in TransactionRows)
