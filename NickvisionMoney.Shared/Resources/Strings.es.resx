@@ -777,9 +777,6 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="Locale" xml:space="preserve">
     <value>Localización</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Las contraseñas no coinciden.</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Añadir</value>
   </data>

@@ -759,9 +759,6 @@ de opeenvolgende losgekoppeld..</value>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Punt en komma</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>De wachtwoorden komen niet overeen</value>
-  </data>
   <data name="LocaleDescription" xml:space="preserve">
     <value>Pas aan hoe Denaro regio-instellingen gebruikt</value>
   </data>

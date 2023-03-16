@@ -760,9 +760,6 @@ Translatører:
 		<value>Vil du gerne genstarte {0} for at påføre det nye tema?
 Alle ikke-gemte ændringer vil gå tabt.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>Kodeordene er ikke ens.</value>
-  </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Administrer din privatøkonomi</value>

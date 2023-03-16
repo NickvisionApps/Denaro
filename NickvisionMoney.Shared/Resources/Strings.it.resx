@@ -744,9 +744,6 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="DestinationPassword.Field" xml:space="preserve">
     <value>Password dell’account destinatario</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Le password non corrispondono.</value>
-  </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>La password sarà eliminata chiudendo questa finestra.</value>
   </data>

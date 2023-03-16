@@ -760,9 +760,6 @@ Tradutores:
 		<value>Gostaria de reiniciar {0} para aplicar o novo tema?
 Quaisquer trabalhos não salvos serão perdidos.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>As senhas não coincidem.</value>
-  </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Gerencie suas finanças pessoais</value>

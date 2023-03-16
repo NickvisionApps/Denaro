@@ -749,9 +749,6 @@ Kääntäjät:
 		<value>Haluatko, että {0} käynnistetään uudelleen, jotta uusi teema tulee voimaan?
 Kaikki tallentamattomat muutokset katoavat.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-		<value>Salasanat eivät täsmää.</value>
-  </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
 		<value>Hallitse raha-asioitasi</value>

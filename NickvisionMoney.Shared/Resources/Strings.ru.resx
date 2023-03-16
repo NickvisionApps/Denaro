@@ -771,9 +771,6 @@
   <data name="InsertSeparator.Description" xml:space="preserve">
     <value>Установите, нажатия каких кнопок будут вставлять десятичный разделитель в поля сумм.</value>
   </data>
-  <data name="NonMatchingPasswords.WinUI" xml:space="preserve">
-    <value>Пароли не совпадают.</value>
-  </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>Пароль будет удалён после закрытия этого диалога.</value>
   </data>
