@@ -68,6 +68,10 @@ public class Configuration
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator { get; set; }
+    /// <summary>
+    /// A folder to use to backup accounts as CSV
+    /// </summary>
+    public string CSVBackupFolder { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -93,6 +97,7 @@ public class Configuration
         AccountSavingsColor = "rgb(53,132,228)";
         AccountBusinessColor = "rgb(38,162,105)";
         InsertSeparator = InsertSeparator.NumpadOnly;
+        CSVBackupFolder = "";
     }
 
     /// <summary>

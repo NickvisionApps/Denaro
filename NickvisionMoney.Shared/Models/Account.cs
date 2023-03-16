@@ -854,6 +854,7 @@ public class Account : IDisposable
                 await SyncRepeatTransactionsAsync();
             }
             FreeMemory();
+            BackupAccountToCSV();
             return true;
         }
         return false;
@@ -924,6 +925,7 @@ public class Account : IDisposable
                 await SyncRepeatTransactionsAsync();
             }
             FreeMemory();
+            BackupAccountToCSV();
             return true;
         }
         return false;
@@ -1006,6 +1008,7 @@ public class Account : IDisposable
                 NextAvailableTransactionId--;
             }
             FreeMemory();
+            BackupAccountToCSV();
             return true;
         }
         return false;
@@ -1718,5 +1721,16 @@ public class Account : IDisposable
         using var cmdClean = _database.CreateCommand();
         cmdClean.CommandText = "PRAGMA shrink_memory";
         cmdClean.ExecuteNonQuery();
+    }
+
+    /// <summary>
+    /// Backups the account to CSV backup folder location
+    /// </summary>
+    private void BackupAccountToCSV()
+    {
+        if(Directory.Exists(Configuration.Current.CSVBackupFolder))
+        {
+            ExportToCSV($"{Metadata.Name}-{DateTime.Now}.csv");
+        }
     }
 }
