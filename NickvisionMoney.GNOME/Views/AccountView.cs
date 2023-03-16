@@ -461,7 +461,8 @@ public partial class AccountView : Adw.Bin
             if (_controller.TransactionsCount > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
-                if (_controller.HasFilteredTransactions)
+                _transactionsGroup.SetTitle(string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount));
+                if (_controller.FilteredTransactionsCount > 0)
                 {
                     _noTransactionsStatusPage.SetVisible(false);
                     _transactionsScroll.SetVisible(true);
@@ -1291,7 +1292,7 @@ public partial class AccountView : Adw.Bin
         }
         else
         {
-            _transactionsGroup.SetTitle(_controller.Localizer["Transactions"]);
+            _transactionsGroup.SetTitle(string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount));
         }
     }
 }
