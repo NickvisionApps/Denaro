@@ -763,7 +763,7 @@ les transactions individuelles générées seront modifiables.</value>
     <value>Le mot de passe du compte a été retiré.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Si le mot de passe est perdu, il n'y a aucun moyen de restaurer votre compte !</value>
+    <value>Si le mot de passe est perdu, il n’y a aucun moyen de restaurer le fichier !</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
     <value>Entrez le mot de passe ici</value>
@@ -788,5 +788,73 @@ les transactions individuelles générées seront modifiables.</value>
   </data>
   <data name="Unlock" xml:space="preserve">
     <value>Déverrouiller</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Ajouter un mot de passe au document PDF ?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Souhaitez-vous protéger le fichier PDF par un mot de passe ?
+
+En cas de perte du mot de passe le document sera inaccessible.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Mot de passe PDF</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Répéter</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Symbole monétaire (invalide)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Séparateur des décimales</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Séparateur de décimales (vide)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Séparateur de décimales (invalide)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Entrer un séparateur de décimales</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Séparateur de groupes</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Séparateur de groupes (invalide)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Entrer un séparateur de groupes</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Chiffres des décimales</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Illimités</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transaction</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} Transactions</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Gérer la devise utilisée par le compte.</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas.</value>
   </data>
 </root>
