@@ -433,7 +433,7 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
 		<value>Girokonto</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-		<value>Spaarkonto</value>
+		<value>Sparkonto</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
 		<value>Geschäftskonto</value>
@@ -524,13 +524,13 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
 		<value>Eigene Währung Benutzen</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-		<value>Währungs-Zeichen</value>
+		<value>Währungszeichen</value>
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-		<value>Gebe Zeichen hier ein</value>
+		<value>Zeichen hier eingeben</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-		<value>Währungs-Zeichen (Leer)</value>
+		<value>Währungszeichen (leer)</value>
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
 		<value>Währungs-Code</value>
@@ -579,7 +579,7 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
 		<value>Girokonto-Farbe</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-		<value>Spaarkonto-Farbe</value>
+		<value>Sparkonto-Farbe</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
 		<value>Geschäftskonto-Farbe</value>
@@ -725,7 +725,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>Passwort ändern</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Wenn das Passwort verloren geht, gibt es keine Möglichkeit, Ihr Konto wiederherzustellen!</value>
+    <value>Wenn das Passwort verloren geht, gibt es keine Möglichkeit, die Datei wiederherzustellen!</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
     <value>Passwort</value>
@@ -792,5 +792,70 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   </data>
   <data name="TransactionRepeatInterval.Short" xml:space="preserve">
     <value>Wiederholung</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Passwort zur PDF hinzufügen?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Möchten Sie die PDF-Datei mit einem Passwort schützen?
+
+Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>PDF-Passwort</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Währungszeichen (ungültig)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Dezimaltrennzeichen (leer)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Dezimaltrennzeichen (ungültig)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Dezimaltrennzeichen eingeben</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Gruppentrennzeichen</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Gruppentrennzeichen (ungültig)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Anderes</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Gruppentrennzeichen eingeben</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Dezimalziffern</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transaktion</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} Transaktionen</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Die vom Konto verwendete Währung verwalten.</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Dezimaltrennzeichen</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Keines</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Anderes</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
   </data>
 </root>
