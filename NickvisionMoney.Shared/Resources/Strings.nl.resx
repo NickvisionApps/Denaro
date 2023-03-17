@@ -87,7 +87,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>Overzicht</value>
   </data>
   <data name="Account" xml:space="preserve">
-		<value>Rekening</value>
+		<value>Account</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
@@ -102,34 +102,34 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value>Nickvision Denaro-rekening</value>
+		<value>Nickvision Denaro-account</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value>Nieuwe rekening</value>
+		<value>Nieuw account</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value>Nieuwe rekening (Ctrl+N)</value>
+		<value>Nieuw account (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value>Een rekening kan slechts eenmaal worden geopend.</value>
+		<value>Een account kan slechts eenmaal worden geopend.</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value>Rekening tonen</value>
+		<value>Account openen</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value>Rekening tonen (Ctrl+O)</value>
+		<value>Account openen (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value>Er is geen rekening geopend</value>
+		<value>Er is geen account geopend</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value>Open een rekening of voeg er een toe om aan de slag te gaan. Ook kunt u een rekeningbestand hierheen slepen.</value>
+		<value>Maak een account aan of voeg er een toe om aan de slag te gaan. U kunt ook een bestand naar de app slepen.</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value>Onlangs geopende rekeningen</value>
+		<value>Recente accounts</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value>Geen onlangs gebruikte rekeningen</value>
+		<value>Geen recente accounts</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
 		<value>Alle bestanden</value>
@@ -157,7 +157,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <value>Goedenacht!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value>Deze rekening wordt al getoond.</value>
+		<value>Dit account is al geopend</value>
   </data>
   <!--AccountView-->
   <data name="NewTransaction" xml:space="preserve">
@@ -856,5 +856,29 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
   </data>
   <data name="NonMatchingPasswords" xml:space="preserve">
     <value>Wachtwoorden komen niet overeen</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>CSV-back-up-map</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Geen back-up-map</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Back-up-map selecteren</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Back-up-map wissen</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Back-up</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Pas back-up-locaties aan voor Denaro-accounts</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Accounts worden automatisch als CSV-bestanden naar deze map geëxporteerd wanneer een wijziging wordt aangebracht.</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Geen toegang tot de geselecteerde map, controleer Flatpak-rechten.</value>
   </data>
 </root>

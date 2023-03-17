@@ -52,7 +52,8 @@ Colaboradores no GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graph
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Fyodor Sobolev https://github.com/fsobolev</value>
+Fyodor Sobolev https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -729,7 +730,7 @@ Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
   </data>
   <!--WinUI Specific-->
   <data name="Preview.WinUI" xml:space="preserve">
-		<value>PREVIEW</value>
+		<value>VISUALIZAR</value>
   </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Por favor, conserte os erros acima.</value>
@@ -790,5 +791,73 @@ Quaisquer trabalhos não salvos serão perdidos.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
 		<value>A senha será removida ao fechar esta caixa de diálogo.</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Gostaria de proteger o arquivo PDF com senha?
+
+Se a senha for perdida, o PDF ficará inacessível.</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Adicionar senha ao PDF?</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Senha do PDF</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Repetir</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Moeda</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Gerenciar a moeda usada pela conta.</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Insira o separador decimal</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Símbolo da moeda (inválido)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Separador decimal</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Separador decimal (vazio)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Separador de grupo</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Separador de grupo (inválido)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Separador decimal (inválido)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Insira o separador de grupo</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transação</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} Transações</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Outro</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Dígitos decimais</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Ilimitado</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>As senhas não coincidem.</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Outro</value>
   </data>
 </root>
