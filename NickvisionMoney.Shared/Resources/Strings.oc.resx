@@ -777,4 +777,10 @@ Traductors :
   <data name="InsertSeparator.Description" xml:space="preserve">
     <value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
   </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} transaccions</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} transaccion</value>
+  </data>
 </root>
