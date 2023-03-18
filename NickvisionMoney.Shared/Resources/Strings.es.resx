@@ -851,4 +851,28 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
   <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
     <value>Sin límites</value>
   </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Carpeta de copia de seguridad de CSV</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Sin carpeta de copia de seguridad</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Seleccione la carpeta de copia de seguridad</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Borrar la carpeta de copia de seguridad</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Copia de seguridad</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Personalizar las ubicaciones de la copia de seguridad para las cuentas de Denaro.</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Las cuentas se exportarán automáticamente como archivos CSV a esta carpeta cuando se realice un cambio.</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>No se puede acceder a la carpeta seleccionada, compruebe los permisos de Flatpak.</value>
+  </data>
 </root>
