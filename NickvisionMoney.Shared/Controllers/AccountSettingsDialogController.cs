@@ -29,6 +29,10 @@ public enum AccountMetadataCheckStatus
 public class AccountSettingsDialogController
 {
     /// <summary>
+    /// Gets the AppInfo object
+    /// </summary>
+    public AppInfo AppInfo => AppInfo.Current;
+    /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }

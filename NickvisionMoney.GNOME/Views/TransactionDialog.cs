@@ -123,6 +123,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         //Dialog Settings
         SetHeading($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
         SetTransientFor(parent);
+        SetIconName(_controller.AppInfo.ID);
         AddResponse("cancel", _controller.Localizer["Cancel"]);
         SetCloseResponse("cancel");
         if (_controller.CanCopy)

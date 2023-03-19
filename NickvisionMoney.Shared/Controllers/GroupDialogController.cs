@@ -23,6 +23,10 @@ public class GroupDialogController
     private readonly List<string> _existingNames;
 
     /// <summary>
+    /// Gets the AppInfo object
+    /// </summary>
+    public AppInfo AppInfo => AppInfo.Current;
+    /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }

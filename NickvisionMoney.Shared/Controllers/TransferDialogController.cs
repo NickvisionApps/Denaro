@@ -31,6 +31,10 @@ public class TransferDialogController
     private AccountMetadata? _previousDestMetadata;
 
     /// <summary>
+    /// Gets the AppInfo object
+    /// </summary>
+    public AppInfo AppInfo => AppInfo.Current;
+    /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }

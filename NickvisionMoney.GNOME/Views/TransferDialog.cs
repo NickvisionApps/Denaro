@@ -65,6 +65,7 @@ public partial class TransferDialog : Adw.MessageDialog
         builder.Connect(this);
         //Dialog Settings
         SetTransientFor(parent);
+        SetIconName(_controller.AppInfo.ID);
         AddResponse("cancel", _controller.Localizer["Cancel"]);
         SetCloseResponse("cancel");
         AddResponse("ok", _controller.Localizer["Transfer"]);

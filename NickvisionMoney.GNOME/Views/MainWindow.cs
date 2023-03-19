@@ -102,6 +102,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Build UI
         builder.Connect(this);
         SetTitle(_controller.AppInfo.ShortName);
+        SetIconName(_controller.AppInfo.ID);
         OnShow += OnWindowShow;
         CompactMode = false;
         if (_controller.IsDevVersion)
@@ -253,6 +254,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     public async Task<string?> AccountLoginAsync(string title)
     {
         var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        passwordDialog.SetIconName(_controller.AppInfo.ID);
         return await passwordDialog.RunAsync();
     }
 
@@ -456,6 +458,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void Preferences(Gio.SimpleAction sender, EventArgs e)
     {
         var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, this);
+        preferencesDialog.SetIconName(_controller.AppInfo.ID);
         preferencesDialog.Show();
     }
 
@@ -469,6 +472,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var builder = Builder.FromFile("shortcuts_dialog.ui", _controller.Localizer);
         var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_root");
         shortcutsWindow.SetTransientFor(this);
+        shortcutsWindow.SetIconName(_controller.AppInfo.ID);
         shortcutsWindow.Show();
     }
 
@@ -481,6 +485,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var dialog = Adw.AboutWindow.New();
         dialog.SetTransientFor(this);
+        dialog.SetIconName(_controller.AppInfo.ID);
         dialog.SetApplicationName(_controller.AppInfo.ShortName);
         dialog.SetApplicationIcon(_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : ""));
         dialog.SetVersion(_controller.AppInfo.Version);
