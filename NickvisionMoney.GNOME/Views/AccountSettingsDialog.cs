@@ -51,6 +51,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _controller = controller;
         //Dialog Settings
         SetTransientFor(parent);
+        SetIconName(_controller.AppInfo.ID);
         if (!_controller.NeedsSetup)
         {
             AddResponse("cancel", _controller.Localizer["Cancel"]);
