@@ -133,8 +133,16 @@
 		<value>Home</value>
 	</data>
 
+	<data name="Dashboard" xml:space="preserve">
+		<value>Dashboard</value>
+	</data>
+
 	<data name="Account" xml:space="preserve">
 		<value>Account</value>
+	</data>
+
+	<data name="Accounts" xml:space="preserve">
+		<value>Accounts</value>
 	</data>
 
 	<data name="Settings" xml:space="preserve">
