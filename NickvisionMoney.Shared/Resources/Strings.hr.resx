@@ -742,7 +742,7 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
     <value>Promijeni lozinku</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Ako izgubiš lozinku, tvoj se račun ne može obnoviti!</value>
+    <value>Ako izgubiš lozinku, datoteka se ne može obnoviti!</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
     <value>Lozinka</value>
@@ -788,5 +788,34 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
   </data>
   <data name="Unlock" xml:space="preserve">
     <value>Otključaj</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>PDF-u dodati lozinku?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Želiš li PDF datoteku zaštititi lozinkom?
+
+Ako se lozinka izgubi, PDF neće biti dostupan.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>PDF lozinka</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} transakcija</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} transakcije</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Upravljaj valutom za račun.</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Ponavljanje</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Znak valute (neispravno)</value>
   </data>
 </root>
