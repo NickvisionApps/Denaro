@@ -49,7 +49,6 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         LblVersion.Text = string.Format(_controller.Localizer["Version"], _controller.AppInfo.Version);
         LblBtnChangelog.Text = _controller.Localizer["Changelog"];
         LblBtnCredits.Text = _controller.Localizer["Credits"];
-        LblBtnHelp.Text = _controller.Localizer["Help"];
         LblBtnGitHubRepo.Text = _controller.Localizer["GitHubRepo"];
         LblBtnReportABug.Text = _controller.Localizer["ReportABug"];
         LblBtnDiscussions.Text = _controller.Localizer["Discussions"];
@@ -200,22 +199,6 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
             }
         }
         return result;
-    }
-
-    /// <summary>
-    /// Occurs when the help button is clicked
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private async void Help(object sender, RoutedEventArgs e)
-    {
-        var lang = "C";
-        var availableTranslations = new string[2] { "es", "ru" };
-        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
-        {
-            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-        }
-        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
     /// <summary>

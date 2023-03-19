@@ -5,6 +5,7 @@ using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
@@ -103,6 +104,9 @@ public sealed partial class MainWindow : Window
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         NavViewItemHome.Content = _controller.Localizer["Home"];
+        NavViewItemDashboard.Content = _controller.Localizer["Dashboard"];
+        NavViewItemAccounts.Content = _controller.Localizer["Accounts"];
+        NavViewItemHelp.Content = _controller.Localizer["Help"];
         NavViewItemSettings.Content = _controller.Localizer["Settings"];
         StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xE708";
         StatusPageHome.Title = _controller.Greeting;
@@ -131,12 +135,15 @@ public sealed partial class MainWindow : Window
     /// <param name="title">The new title</param>
     private void UpdateNavViewItemTitle(string path, string title)
     {
-        foreach (NavigationViewItem navViewItem in NavView.MenuItems)
+        foreach (var obj in NavView.MenuItems)
         {
-            if ((string)ToolTipService.GetToolTip(navViewItem) == path)
+            if(obj is NavigationViewItem navViewItem)
             {
-                navViewItem.Content = title;
-                break;
+                if ((string)ToolTipService.GetToolTip(navViewItem) == path)
+                {
+                    navViewItem.Content = title;
+                    break;
+                }
             }
         }
     }
@@ -260,6 +267,22 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the help button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TappedRoutedEventArgs</param>
+    private async void Help(object sender, TappedRoutedEventArgs e)
+    {
+        var lang = "C";
+        var availableTranslations = new string[2] { "es", "ru" };
+        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+        {
+            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        }
+        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
+    }
+
+    /// <summary>
     /// Occurs when a notification is sent from the controller
     /// </summary>
     /// <param name="sender">object?</param>
@@ -329,6 +352,7 @@ public sealed partial class MainWindow : Window
                 Glyph = "\uE8C7",
             }
         };
+        NavViewItemAccounts.Visibility = Visibility.Visible;
         ToolTipService.SetToolTip(newNavItem, _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath);
         NavView.MenuItems.Add(newNavItem);
         NavView.SelectedItem = newNavItem;

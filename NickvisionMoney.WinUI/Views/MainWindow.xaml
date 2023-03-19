@@ -23,35 +23,49 @@
 
                 <TextBlock x:Name="TitleBarTitle" Style="{ThemeResource CaptionTextBlockStyle}"/>
 
-                <TextBlock x:Name="TitlePreview" Grid.Column="1" Margin="10,0,0,0"  Style="{ThemeResource NavigationViewItemHeaderTextStyle}" Foreground="Gray" FontSize="12" Text="PREVIEW"/>
+                <TextBlock x:Name="TitlePreview" Grid.Column="1" Margin="10,0,0,0"  Style="{ThemeResource NavigationViewItemHeaderTextStyle}" Foreground="Gray" FontSize="12"/>
             </StackPanel>
         </Grid>
 
-        <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" PaneDisplayMode="Top"
-                        IsBackButtonVisible="Collapsed" IsSettingsVisible="False" SelectionChanged="NavView_SelectionChanged">
+        <NavigationView x:Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,34,0,0" PaneDisplayMode="Auto"
+                        IsBackButtonVisible="Collapsed" IsSettingsVisible="False" OpenPaneLength= "260" SelectionChanged="NavView_SelectionChanged">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="NavViewItemHome" Tag="Home">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE10F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+
+                <NavigationViewItem x:Name="NavViewItemDashboard" Tag="Dashboard">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF246;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItemHeader x:Name="NavViewItemAccounts" Visibility="Collapsed"/>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="NavViewItemHelp" SelectsOnInvoked="False" Tapped="Help">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11B;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
                 <NavigationViewItem x:Name="NavViewItemSettings" Tag="Settings">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
-
+            
             <Grid>
                 <nickvision:ViewStack x:Name="ViewStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <nickvision:ViewStack.Pages>
                         <nickvision:ViewStackPage x:Name="PageHome" PageName="Home">
                             <nickvision:StatusPage x:Name="StatusPageHome" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <nickvision:StatusPage.Child>
-                                    <StackPanel Margin="0,10,0,0">
+                                    <StackPanel Margin="10,10,10,0">
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="12">
                                             <Button x:Name="BtnHomeNewAccount" Height="40" Style="{ThemeResource AccentButtonStyle}" Click="NewAccount">
                                                 <Button.Content>
@@ -109,6 +123,12 @@
                         <nickvision:ViewStackPage x:Name="PageOpenAccount" PageName="OpenAccount"/>
                         
                         <nickvision:ViewStackPage x:Name="PageSettings" PageName="Settings"/>
+
+                        <nickvision:ViewStackPage x:Name="PageDashboard" PageName="Dashboard">
+                            <Grid>
+                                
+                            </Grid>
+                        </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>
 
