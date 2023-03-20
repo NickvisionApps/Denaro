@@ -87,7 +87,7 @@
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE790;"/>
                                 </labs:SettingsCard.HeaderIcon>
 
-                                <ComboBox x:Name="CmbTheme" Width="60" SelectionChanged="CmbTheme_SelectionChanged"/>
+                                <ComboBox x:Name="CmbTheme" SelectionChanged="CmbTheme_SelectionChanged"/>
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
