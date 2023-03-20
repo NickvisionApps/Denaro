@@ -318,14 +318,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
             foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
-                if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today)
-                {
-                    displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
-                }
-                else
-                {
-                    displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                }
+                displayedDay.IsBlackout = !datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today;
             }
             //Transaction Page
             LblTransactions.Text = string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount);
