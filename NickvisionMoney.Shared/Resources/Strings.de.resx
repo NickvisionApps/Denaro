@@ -858,4 +858,28 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   <data name="NonMatchingPasswords" xml:space="preserve">
     <value>Die Passwörter stimmen nicht überein.</value>
   </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Kann auf den ausgewählten Ordner nicht zugreifen, prüfe Flatpack-Rechte.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Sicherung</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Passe den Sicherungsort der Denaro-Konten an.</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>CSV-Sicherungs-Ordner</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Konten werden automatisch als CSV-Dateien in diesen Ordner exportiert wenn eine Änderung gemacht wird.</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Kein Sicherungs-Ordner</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Wähle Sicherungs-Ordner aus</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Setze Sicherungs-Ordner zurück</value>
+  </data>
 </root>

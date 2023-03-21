@@ -860,4 +860,28 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
   <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
     <value>Outro</value>
   </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Personalize os locais de backup para as contas Denaro.</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>As contas serão exportadas automaticamente como arquivos CSV para esta pasta quando uma alteração for feita.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Pasta de Backup para os CSV</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Nenhuma Pasta de Backup</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Selecione a Pasta de Backup</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Limpar a Pasta de Backup</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Não é possível acessar a pasta selecionada. Verifique as permissões do Flatpak.</value>
+  </data>
 </root>
