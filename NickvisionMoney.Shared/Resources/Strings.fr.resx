@@ -857,4 +857,28 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
   <data name="NonMatchingPasswords" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas.</value>
   </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Les comptes seront automatiquement exportés en fichiers CSV dans ce dossier quand une modification a lieu.</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Impossible d’accéder au dossier sélectionné, vérifiez les permissions Flatpak.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Sauvegarde</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Personnaliser l’emplacement de sauvegarde pour les comptes Denaro.</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Dossier de sauvegarde CSV</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Aucun dossier de sauvegarde</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Sélectionner un dossier de sauvegarde</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Vider le dossier de sauvegarde</value>
+  </data>
 </root>
