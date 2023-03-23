@@ -19,16 +19,24 @@ Adw.PreferencesWindow _root {
 
       Adw.ComboRow _themeRow {
         title: _("Theme");
-        icon-name: "dark-mode-symbolic";
         model: Gtk.StringList {
           strings [_("ThemeLight"), _("ThemeDark"), _("ThemeSystem")]
         };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "dark-mode-symbolic";
+        }
       }
 
       Adw.ExpanderRow {
         title: _("Colors");
         subtitle: _("ColorsDescription");
-        icon-name: "preferences-color-symbolic";
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "preferences-color-symbolic";
+        }
         
         Adw.ActionRow {
           title: _("TransactionColor");
@@ -95,10 +103,14 @@ Adw.PreferencesWindow _root {
         title: _("InsertSeparator");
         subtitle: _("InsertSeparator.Description");
         subtitle-lines: 3;
-        icon-name: "input-keyboard-symbolic";
         model: Gtk.StringList {
           strings [_("InsertSeparatorOff"), _("InsertSeparatorNumpad"), _("InsertSeparatorPeriodComma")]
         };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "input-keyboard-symbolic";
+        }
       }
     }
 
@@ -109,7 +121,11 @@ Adw.PreferencesWindow _root {
       Adw.ActionRow {
         title: _("BackupFolder");
         subtitle: _("BackupFolderDescription");
-        icon-name: "folder-download-symbolic";
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "folder-download-symbolic";
+        }
 
         [suffix]
         Adw.ViewStack _backupViewStack {

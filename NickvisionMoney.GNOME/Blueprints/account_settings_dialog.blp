@@ -54,7 +54,11 @@ Adw.MessageDialog _root {
           Adw.ActionRow _customCurrencyRow {
             title: _("Currency");
             subtitle: _("ManageCurrency.Description");
-            icon-name: "money-symbolic";
+
+            [prefix]
+            Gtk.Image {
+              icon-name: "money-symbolic";
+            }
 
             [suffix]
             Gtk.Button _btnCustomCurrency {
@@ -69,7 +73,11 @@ Adw.MessageDialog _root {
           Adw.ActionRow _managePasswordRow {
             title: _("ManagePassword");
             subtitle: _("ManagePassword.Description");
-            icon-name: "dialog-password-symbolic";
+
+            [prefix]
+            Gtk.Image {
+              icon-name: "dialog-password-symbolic";
+            }
 
             [suffix]
             Gtk.Button _btnManagePassword {
