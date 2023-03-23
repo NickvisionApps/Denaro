@@ -282,6 +282,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         });
         Validate();
         _constructing = false;
+        _nameRow.GrabFocus();
     }
 
 

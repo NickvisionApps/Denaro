@@ -18,6 +18,7 @@ Adw.MessageDialog _root {
         Adw.PreferencesGroup {
           Adw.EntryRow _nameRow {
             title: _("Name.Field");
+            activates-default: true;
           }
           
           Adw.ComboRow _accountTypeRow {
@@ -64,6 +65,7 @@ Adw.MessageDialog _root {
             Gtk.Button _btnCustomCurrency {
               icon-name: "go-next-symbolic";
               valign: center;
+              can-focus: false;
               styles ["flat"]
             }
 
@@ -83,6 +85,7 @@ Adw.MessageDialog _root {
             Gtk.Button _btnManagePassword {
               icon-name: "go-next-symbolic";
               valign: center;
+              can-focus: false;
               styles ["flat"]
             }
 
