@@ -466,54 +466,28 @@ public partial class TransactionDialog : Adw.MessageDialog
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["Receipt", "Field"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filterAll);
+        filters.Append(filterJpeg);
+        filters.Append(filterPng);
+        filters.Append(filterPdf);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["Receipt", "Field"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filterAll);
-            filters.Append(filterJpeg);
-            filters.Append(filterPng);
-            filters.Append(filterPdf);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    _receiptPath = path;
-                    _viewReceiptButton.SetSensitive(true);
-                    _deleteReceiptButton.SetSensitive(true);
-                    _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
-                    _uploadReceiptButtonContent.SetLabel("");
-                    Validate();
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["Receipt", "Field"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filterAll);
-            openFileDialog.AddFilter(filterJpeg);
-            openFileDialog.AddFilter(filterPng);
-            openFileDialog.AddFilter(filterPdf);
-            openFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath();
-                    _receiptPath = path;
-                    _viewReceiptButton.SetSensitive(true);
-                    _deleteReceiptButton.SetSensitive(true);
-                    _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
-                    _uploadReceiptButtonContent.SetLabel("");
-                    Validate();
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                _receiptPath = path;
+                _viewReceiptButton.SetSensitive(true);
+                _deleteReceiptButton.SetSensitive(true);
+                _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
+                _uploadReceiptButtonContent.SetLabel("");
+                Validate();
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 }

@@ -216,54 +216,27 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// </summary>
     private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
     {
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var fileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
+        _fileDialogCallback = async (source, res, data) =>
         {
-            var fileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
-            _fileDialogCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
+                var path = g_file_get_path(fileHandle);
+                if (path.StartsWith("/run/user"))
                 {
-                    var path = g_file_get_path(fileHandle);
-                    if (path.StartsWith("/run/user"))
-                    {
-                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
-                    }
-                    else
-                    {
-                        _controller.CSVBackupFolder = path;
-                        _backupViewStack.SetVisibleChildName("folder-selected");
-                        _backupFolderLabel.SetText(path);
-                    }
+                    AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
                 }
-            };
-            gtk_file_dialog_select_folder(fileDialog, Handle, IntPtr.Zero, _fileDialogCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var fileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectBackupFolder"], this, Gtk.FileChooserAction.SelectFolder, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            fileDialog.SetModal(true);
-            fileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                else
                 {
-                    var path = fileDialog.GetFile()!.GetPath() ?? "";
-                    if (path == "") { return; }
-                    if (path.StartsWith("/run/user"))
-                    {
-                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
-                    }
-                    else
-                    {
-                        _controller.CSVBackupFolder = path;
-                        _backupViewStack.SetVisibleChildName("folder-selected");
-                        _backupFolderLabel.SetText(path);
-                    }
+                    _controller.CSVBackupFolder = path;
+                    _backupViewStack.SetVisibleChildName("folder-selected");
+                    _backupFolderLabel.SetText(path);
                 }
-            };
-            fileDialog.Show();
-        }
+            }
+        };
+        gtk_file_dialog_select_folder(fileDialog, Handle, IntPtr.Zero, _fileDialogCallback, IntPtr.Zero);
     }
 
     /// <summary>

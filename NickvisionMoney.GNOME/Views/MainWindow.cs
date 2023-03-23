@@ -309,61 +309,32 @@ public partial class MainWindow : Adw.ApplicationWindow
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var saveFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+        _saveCallback = async (source, res, data) =>
         {
-            var saveFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-            _saveCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
+                var path = g_file_get_path(fileHandle);
+                if (_controller.IsAccountOpen(path))
                 {
-                    var path = g_file_get_path(fileHandle);
-                    if (_controller.IsAccountOpen(path))
-                    {
-                        _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
-                    }
-                    else
-                    {
-                        if (File.Exists(path))
-                        {
-                            File.Delete(path);
-                        }
-                        await _controller.AddAccountAsync(path);
-                    }
+                    _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
                 }
-            };
-            gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            saveFileDialog.SetModal(true);
-            saveFileDialog.AddFilter(filter);
-            saveFileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                else
                 {
-                    var path = saveFileDialog.GetFile()!.GetPath() ?? "";
-                    if (_controller.IsAccountOpen(path))
+                    if (File.Exists(path))
                     {
-                        _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
+                        File.Delete(path);
                     }
-                    else
-                    {
-                        if (File.Exists(path))
-                        {
-                            File.Delete(path);
-                        }
-                        await _controller.AddAccountAsync(path);
-                    }
+                    await _controller.AddAccountAsync(path);
                 }
-            };
-            saveFileDialog.Show();
-        }
+            }
+        };
+        gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -378,39 +349,21 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         filter.AddPattern("*.NMONEY");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    await _controller.AddAccountAsync(path);
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filter);
-            openFileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                    await _controller.AddAccountAsync(path);
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                await _controller.AddAccountAsync(path);
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>

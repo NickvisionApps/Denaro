@@ -234,55 +234,29 @@ public partial class TransferDialog : Adw.MessageDialog
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["AccountFileFilter", "GTK"]);
         filter.AddPattern("*.nmoney");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    _destinationAccountRow.SetSubtitle(path);
-                    _destinationPasswordRow.SetVisible(false);
-                    _destinationPasswordRow.SetSensitive(true);
-                    _destinationPasswordRow.SetText("");
-                    _amountRow.SetText("");
-                    _conversionRateGroup.SetVisible(false);
-                    _sourceCurrencyRow.SetText("");
-                    _destinationCurrencyRow.SetText("");
-                    Validate();
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectAccount"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filter);
-            openFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                    _destinationAccountRow.SetSubtitle(path);
-                    _destinationPasswordRow.SetVisible(false);
-                    _destinationPasswordRow.SetSensitive(true);
-                    _destinationPasswordRow.SetText("");
-                    _amountRow.SetText("");
-                    _conversionRateGroup.SetVisible(false);
-                    _sourceCurrencyRow.SetText("");
-                    _destinationCurrencyRow.SetText("");
-                    Validate();
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                _destinationAccountRow.SetSubtitle(path);
+                _destinationPasswordRow.SetVisible(false);
+                _destinationPasswordRow.SetSensitive(true);
+                _destinationPasswordRow.SetText("");
+                _amountRow.SetText("");
+                _conversionRateGroup.SetVisible(false);
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
+                Validate();
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>
