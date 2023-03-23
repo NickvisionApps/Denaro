@@ -34,6 +34,25 @@ public partial class TransactionDialog : Adw.MessageDialog
     }
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gdk_rgba_to_string(ref Color rgba);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_button_set_rgba(nint button, ref Color rgba);
+
+    [DllImport("libadwaita-1.so.0")]
+    static extern ref Color gtk_color_dialog_button_get_rgba(nint button);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_button_set_dialog(nint button, nint dialog);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_color_dialog_new();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -45,24 +64,11 @@ public partial class TransactionDialog : Adw.MessageDialog
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gdk_rgba_to_string(ref Color rgba);
-
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
@@ -89,6 +95,7 @@ public partial class TransactionDialog : Adw.MessageDialog
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
+    private nint _colorDialog;
 
     private readonly Gtk.Window _parentWindow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
@@ -104,7 +111,7 @@ public partial class TransactionDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Gtk.MenuButton _repeatEndDateCalendarButton;
     [Gtk.Connect] private readonly Gtk.Button _repeatEndDateClearButton;
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
-    [Gtk.Connect] private readonly Gtk.ColorButton _colorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _colorButton;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _deleteReceiptButton;
@@ -211,7 +218,17 @@ public partial class TransactionDialog : Adw.MessageDialog
             }
         };
         //Color
-        _colorButton.OnColorSet += (sender, e) => Validate();
+        _colorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
+        _colorButton.OnNotify += (sender, e) => {
+            if (e.Pspec.GetName() == "rgba")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         //Receipt
         _viewReceiptButton.OnClicked += OnViewReceipt;
         _deleteReceiptButton.OnClicked += OnDeleteReceipt;
@@ -243,7 +260,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         }
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
-        gtk_color_chooser_set_rgba(_colorButton.Handle, ref transactionColor);
+        gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref transactionColor);
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         if (_controller.Transaction.Receipt != null)
@@ -305,8 +322,7 @@ public partial class TransactionDialog : Adw.MessageDialog
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_colorButton.Handle, ref color);
+        var color = gtk_color_dialog_button_get_rgba(_colorButton.Handle);
         var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _amountRow.GetText(), _receiptPath, repeatEndDate);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_controller.Localizer["Description", "Field"]);
