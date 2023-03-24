@@ -640,10 +640,18 @@ public partial class AccountView : Adw.Bin
                     if (dialog.Response == MessageDialogResponse.Suggested)
                     {
                         var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
-                        password = await newPasswordDialog.RunAsync();
+                        newPasswordDialog.Present();
+                        newPasswordDialog.OnCloseRequest += (sender, e) => {
+                            _controller.ExportToPDF(path ?? "", newPasswordDialog.Password);
+                            newPasswordDialog.Password = null;
+                            return false;
+                        };
                     }
-                    _controller.ExportToPDF(path ?? "", password);
-                    dialog.Destroy();
+                    else
+                    {
+                        _controller.ExportToPDF(path ?? "", null);
+                        dialog.Destroy();
+                    }
                 };
             }
         };

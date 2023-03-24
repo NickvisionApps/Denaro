@@ -8,7 +8,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog to configure account
 /// </summary>
-public partial class AccountSettingsDialog : Adw.MessageDialog
+public partial class AccountSettingsDialog : Adw.Window
 {
     private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
