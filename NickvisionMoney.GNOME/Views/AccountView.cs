@@ -936,23 +936,21 @@ public partial class AccountView : Adw.Bin
         groupDialog.Present();
         groupDialog.OnApply += async (sender, e) =>
         {
-            if (groupController.Accepted)
-            {
-                //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
-            }
+            groupDialog.SetVisible(false);
+            //Start Spinner
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            //Work
+            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+            //Stop Spinner
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
             groupDialog.Close();
         };
     }
@@ -969,23 +967,21 @@ public partial class AccountView : Adw.Bin
         groupDialog.Present();
         groupDialog.OnApply += async (sender, e) =>
         {
-            if (groupController.Accepted)
-            {
-                //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
-            }
+            groupDialog.SetVisible(false);
+            //Start Spinner
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            //Work
+            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
+            //Stop Spinner
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
             groupDialog.Close();
         };
     }

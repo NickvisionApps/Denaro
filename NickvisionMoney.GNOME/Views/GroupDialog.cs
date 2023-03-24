@@ -62,10 +62,7 @@ public partial class GroupDialog : Adw.Window
         _descriptionRow.AddController(_descriptionKeyController);
         //Apply button
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        _applyButton.OnClicked += (sender, e) => {
-            _controller.Accepted = true;
-            OnApply?.Invoke(this, EventArgs.Empty);
-        };
+        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
