@@ -933,8 +933,8 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Show();
-        groupDialog.OnResponse += async (sender, e) =>
+        groupDialog.Present();
+        groupDialog.OnApply += async (sender, e) =>
         {
             if (groupController.Accepted)
             {
@@ -953,7 +953,7 @@ public partial class AccountView : Adw.Bin
                 _mainOverlay.SetOpacity(1.0);
                 _paneScroll.SetSensitive(true);
             }
-            groupDialog.Destroy();
+            groupDialog.Close();
         };
     }
 
@@ -966,8 +966,8 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Show();
-        groupDialog.OnResponse += async (sender, e) =>
+        groupDialog.Present();
+        groupDialog.OnApply += async (sender, e) =>
         {
             if (groupController.Accepted)
             {
@@ -986,7 +986,7 @@ public partial class AccountView : Adw.Bin
                 _mainOverlay.SetOpacity(1.0);
                 _paneScroll.SetSensitive(true);
             }
-            groupDialog.Destroy();
+            groupDialog.Close();
         };
     }
 
