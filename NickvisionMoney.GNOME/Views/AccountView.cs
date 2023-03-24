@@ -635,7 +635,7 @@ public partial class AccountView : Adw.Bin
                 string? password = null;
                 var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
                 dialog.Show();
-                dialog.OnResponse += async (sender, e) =>
+                dialog.OnResponse += (sender, e) =>
                 {
                     if (dialog.Response == MessageDialogResponse.Suggested)
                     {
