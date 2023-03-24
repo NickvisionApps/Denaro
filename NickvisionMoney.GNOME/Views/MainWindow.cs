@@ -253,9 +253,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="title">The title of the account</param>
     public async Task<string?> AccountLoginAsync(string title)
     {
-        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        var tcs = new TaskCompletionSource<string?>();
+        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer, tcs);
         passwordDialog.SetIconName(_controller.AppInfo.ID);
-        return await passwordDialog.RunAsync();
+        passwordDialog.Present();
+        return await tcs.Task;
     }
 
     /// <summary>
