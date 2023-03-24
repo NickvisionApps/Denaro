@@ -635,23 +635,21 @@ public partial class AccountView : Adw.Bin
                 string? password = null;
                 var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
                 dialog.Show();
-                dialog.OnResponse += (sender, e) =>
+                dialog.OnResponse += async (sender, e) =>
                 {
                     if (dialog.Response == MessageDialogResponse.Suggested)
                     {
-                        var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer);
+                        var tcs = new TaskCompletionSource<string?>();
+                        var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer, tcs);
                         newPasswordDialog.Present();
-                        newPasswordDialog.OnCloseRequest += (sender, e) => {
-                            _controller.ExportToPDF(path ?? "", newPasswordDialog.Password);
-                            newPasswordDialog.Password = null;
-                            return false;
-                        };
+                        var password = await tcs.Task;
+                        _controller.ExportToPDF(path ?? "", password);
                     }
                     else
                     {
                         _controller.ExportToPDF(path ?? "", null);
-                        dialog.Destroy();
                     }
+                    dialog.Destroy();
                 };
             }
         };

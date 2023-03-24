@@ -1,6 +1,6 @@
 ﻿using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
-using System;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -14,11 +14,9 @@ public partial class NewPasswordDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _confirmPasswordEntry;
     [Gtk.Connect] private readonly Gtk.Button _addButton;
 
-    public string? Password;
-
-    private NewPasswordDialog(Gtk.Builder builder, Gtk.Window parent, string title) : base(builder.GetPointer("_root"), false)
+    private NewPasswordDialog(Gtk.Builder builder, Gtk.Window parent, string title, TaskCompletionSource<string?> tcs) : base(builder.GetPointer("_root"), false)
     {
-        Password = null;
+        var setPassword = false;
         builder.Connect(this);
         //Dialog Settings
         SetTransientFor(parent);
@@ -38,13 +36,13 @@ public partial class NewPasswordDialog : Adw.Window
             }
         };
         _addButton.SetSensitive(false);
-        _addButton.OnClicked += (sender, e) =>
-        {
-            SetVisible(false);
-            Password = _newPasswordEntry.GetText();
-            _newPasswordEntry.SetText("");
-            _confirmPasswordEntry.SetText("");
+        _addButton.OnClicked += (sender, e) => {
+            setPassword = true;
             Close();
+        };
+        OnCloseRequest += (sender, e) => {
+            tcs.SetResult(setPassword ? _newPasswordEntry.GetText() : null);
+            return false;
         };
     }
 
@@ -53,7 +51,8 @@ public partial class NewPasswordDialog : Adw.Window
     /// </summary>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="title">The title of the dialog</param>
-    public NewPasswordDialog(Gtk.Window parent, string title, Localizer localizer) : this(Builder.FromFile("new_password_dialog.ui", localizer), parent, title)
+    /// <param name="tcs">TaskCompletionSource used to pass result to the controller</param>
+    public NewPasswordDialog(Gtk.Window parent, string title, Localizer localizer, TaskCompletionSource<string?> tcs) : this(Builder.FromFile("new_password_dialog.ui", localizer), parent, title, tcs)
     {
     }
 
