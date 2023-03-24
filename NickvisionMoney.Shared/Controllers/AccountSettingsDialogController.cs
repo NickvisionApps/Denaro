@@ -49,10 +49,6 @@ public class AccountSettingsDialogController
     /// </summary>
     public bool IsEncrypted { get; init; }
     /// <summary>
-    /// Whether or not the dialog was accepted (response)
-    /// </summary>
-    public bool Accepted { get; set; }
-    /// <summary>
     /// The new password for the account, if available
     /// </summary>
     public string? NewPassword { get; private set; }
@@ -70,7 +66,6 @@ public class AccountSettingsDialogController
         Metadata = (AccountMetadata)metadata.Clone();
         NeedsSetup = needsSetup;
         IsEncrypted = isEncrypted;
-        Accepted = false;
         NewPassword = null;
     }
 
