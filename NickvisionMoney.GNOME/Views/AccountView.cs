@@ -698,28 +698,26 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Show();
-        transactionDialog.OnResponse += async (sender, e) =>
+        transactionDialog.Present();
+        transactionDialog.OnApply += async (sender, e) =>
         {
-            if (transactionController.Accepted)
-            {
-                //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
-            }
+            transactionDialog.SetVisible(false);
+            //Start Spinner
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            //Work
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            //Stop Spinner
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
             transactionController.Dispose();
-            transactionDialog.Destroy();
+            transactionDialog.Close();
         };
     }
 
@@ -731,28 +729,26 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Show();
-        transactionDialog.OnResponse += async (sender, e) =>
+        transactionDialog.Present();
+        transactionDialog.OnApply += async (sender, e) =>
         {
-            if (transactionController.Accepted)
-            {
-                //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
-            }
+            transactionDialog.SetVisible(false);
+            //Start Spinner
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            //Work
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            //Stop Spinner
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
             transactionController.Dispose();
-            transactionDialog.Destroy();
+            transactionDialog.Close();
         };
     }
 
@@ -765,116 +761,114 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Show();
-        transactionDialog.OnResponse += async (sender, e) =>
+        transactionDialog.Present();
+        transactionDialog.OnApply += async (sender, e) =>
         {
-            if (transactionController.Accepted)
+            transactionDialog.SetVisible(false);
+            if (transactionController.CopyRequested)
             {
-                if (transactionController.CopyRequested)
+                CopyTransaction(transactionController.Transaction);
+                return;
+            }
+            if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
+            {
+                if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    CopyTransaction(transactionController.Transaction);
-                    return;
-                }
-                if (_controller.GetIsSourceRepeatTransaction(id) && transactionController.OriginalRepeatInterval != TransactionRepeatInterval.Never)
-                {
-                    if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    dialog.Show();
+                    dialog.OnResponse += async (sender, e) =>
                     {
-                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
-                        dialog.UnsetDestructiveApperance();
-                        dialog.UnsetSuggestedApperance();
-                        dialog.Show();
-                        dialog.OnResponse += async (sender, e) =>
+                        if (dialog.Response == MessageDialogResponse.Suggested)
                         {
-                            if (dialog.Response == MessageDialogResponse.Suggested)
+                            //Start Spinner
+                            _noTransactionsStatusPage.SetVisible(false);
+                            _transactionsScroll.SetVisible(true);
+                            _mainOverlay.SetOpacity(0.0);
+                            _spinnerBin.SetVisible(true);
+                            _spinner.Start();
+                            _paneScroll.SetSensitive(false);
+                            //Work
+                            await Task.Run(async () =>
                             {
-                                //Start Spinner
-                                _noTransactionsStatusPage.SetVisible(false);
-                                _transactionsScroll.SetVisible(true);
-                                _mainOverlay.SetOpacity(0.0);
-                                _spinnerBin.SetVisible(true);
-                                _spinner.Start();
-                                _paneScroll.SetSensitive(false);
-                                //Work
-                                await Task.Run(async () =>
-                                {
-                                    await _controller.DeleteGeneratedTransactionsAsync(id);
-                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                                });
-                                //Stop Spinner
-                                _spinner.Stop();
-                                _spinnerBin.SetVisible(false);
-                                _mainOverlay.SetOpacity(1.0);
-                                _paneScroll.SetSensitive(true);
-                            }
-                            else if (dialog.Response == MessageDialogResponse.Destructive)
-                            {
-                                //Start Spinner
-                                _noTransactionsStatusPage.SetVisible(false);
-                                _transactionsScroll.SetVisible(true);
-                                _mainOverlay.SetOpacity(0.0);
-                                _spinnerBin.SetVisible(true);
-                                _spinner.Start();
-                                _paneScroll.SetSensitive(false);
-                                //Work
-                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
-                                //Stop Spinner
-                                _spinner.Stop();
-                                _spinnerBin.SetVisible(false);
-                                _mainOverlay.SetOpacity(1.0);
-                                _paneScroll.SetSensitive(true);
-                            }
-                            dialog.Destroy();
-                        };
-                    }
-                    else
-                    {
-                        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
-                        dialog.UnsetDestructiveApperance();
-                        dialog.UnsetSuggestedApperance();
-                        dialog.Show();
-                        dialog.OnResponse += async (sender, e) =>
+                                await _controller.DeleteGeneratedTransactionsAsync(id);
+                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                            });
+                            //Stop Spinner
+                            _spinner.Stop();
+                            _spinnerBin.SetVisible(false);
+                            _mainOverlay.SetOpacity(1.0);
+                            _paneScroll.SetSensitive(true);
+                        }
+                        else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
-                            if (dialog.Response != MessageDialogResponse.Cancel)
-                            {
-                                //Start Spinner
-                                _noTransactionsStatusPage.SetVisible(false);
-                                _transactionsScroll.SetVisible(true);
-                                _mainOverlay.SetOpacity(0.0);
-                                _spinnerBin.SetVisible(true);
-                                _spinner.Start();
-                                _paneScroll.SetSensitive(false);
-                                //Work
-                                await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
-                                //Stop Spinner
-                                _spinner.Stop();
-                                _spinnerBin.SetVisible(false);
-                                _mainOverlay.SetOpacity(1.0);
-                                _paneScroll.SetSensitive(true);
-                            }
-                            dialog.Destroy();
-                        };
-                    }
+                            //Start Spinner
+                            _noTransactionsStatusPage.SetVisible(false);
+                            _transactionsScroll.SetVisible(true);
+                            _mainOverlay.SetOpacity(0.0);
+                            _spinnerBin.SetVisible(true);
+                            _spinner.Start();
+                            _paneScroll.SetSensitive(false);
+                            //Work
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
+                            //Stop Spinner
+                            _spinner.Stop();
+                            _spinnerBin.SetVisible(false);
+                            _mainOverlay.SetOpacity(1.0);
+                            _paneScroll.SetSensitive(true);
+                        }
+                        dialog.Destroy();
+                    };
                 }
                 else
                 {
-                    //Start Spinner
-                    _noTransactionsStatusPage.SetVisible(false);
-                    _transactionsScroll.SetVisible(true);
-                    _mainOverlay.SetOpacity(0.0);
-                    _spinnerBin.SetVisible(true);
-                    _spinner.Start();
-                    _paneScroll.SetSensitive(false);
-                    //Work
-                    await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
-                    //Stop Spinner
-                    _spinner.Stop();
-                    _spinnerBin.SetVisible(false);
-                    _mainOverlay.SetOpacity(1.0);
-                    _paneScroll.SetSensitive(true);
+                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    dialog.UnsetDestructiveApperance();
+                    dialog.UnsetSuggestedApperance();
+                    dialog.Show();
+                    dialog.OnResponse += async (sender, e) =>
+                    {
+                        if (dialog.Response != MessageDialogResponse.Cancel)
+                        {
+                            //Start Spinner
+                            _noTransactionsStatusPage.SetVisible(false);
+                            _transactionsScroll.SetVisible(true);
+                            _mainOverlay.SetOpacity(0.0);
+                            _spinnerBin.SetVisible(true);
+                            _spinner.Start();
+                            _paneScroll.SetSensitive(false);
+                            //Work
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
+                            //Stop Spinner
+                            _spinner.Stop();
+                            _spinnerBin.SetVisible(false);
+                            _mainOverlay.SetOpacity(1.0);
+                            _paneScroll.SetSensitive(true);
+                        }
+                        dialog.Destroy();
+                    };
                 }
             }
+            else
+            {
+                //Start Spinner
+                _noTransactionsStatusPage.SetVisible(false);
+                _transactionsScroll.SetVisible(true);
+                _mainOverlay.SetOpacity(0.0);
+                _spinnerBin.SetVisible(true);
+                _spinner.Start();
+                _paneScroll.SetSensitive(false);
+                //Work
+                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                //Stop Spinner
+                _spinner.Stop();
+                _spinnerBin.SetVisible(false);
+                _mainOverlay.SetOpacity(1.0);
+                _paneScroll.SetSensitive(true);
+            }
             transactionController.Dispose();
-            transactionDialog.Destroy();
+            transactionDialog.Close();
         };
     }
 

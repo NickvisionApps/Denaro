@@ -106,3 +106,18 @@ row.error button.circular {
   border-bottom-width: 1px;
   border-bottom-color: @borders;
 }
+
+/* Transaction Dialog Rows */
+.transaction-dialog-group list, .transaction-dialog-group row {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.transaction-dialog-color list, .transaction-dialog-color row {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}

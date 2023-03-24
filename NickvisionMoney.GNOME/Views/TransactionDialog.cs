@@ -12,7 +12,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transaction
 /// </summary>
-public partial class TransactionDialog : Adw.MessageDialog
+public partial class TransactionDialog : Adw.Window
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -97,7 +97,7 @@ public partial class TransactionDialog : Adw.MessageDialog
     private string? _receiptPath;
     private nint _colorDialog;
 
-    private readonly Gtk.Window _parentWindow;
+    [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
@@ -117,36 +117,38 @@ public partial class TransactionDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Gtk.Button _deleteReceiptButton;
     [Gtk.Connect] private readonly Gtk.Button _uploadReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
+    [Gtk.Connect] private readonly Gtk.Button _copyButton;
+    [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _descriptionKeyController;
     private readonly Gtk.EventControllerKey _amountKeyController;
+
+    public event EventHandler? OnApply;
 
     private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
         _controller = controller;
         _receiptPath = null;
-        _parentWindow = parent;
         //Dialog Settings
-        SetHeading($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        AddResponse("cancel", _controller.Localizer["Cancel"]);
-        SetCloseResponse("cancel");
-        if (_controller.CanCopy)
-        {
-            AddResponse("copy", _controller.Localizer["MakeCopy"]);
-        }
-        AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) =>
-        {
-            _controller.Accepted = e.Response != "cancel";
-            _controller.CopyRequested = e.Response == "copy";
-        };
         //Build UI
         builder.Connect(this);
+        _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
+        _copyButton.SetVisible(_controller.CanCopy);
+        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.OnClicked += (sender, e) =>
+        {
+            _controller.Accepted = true;
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
+        _copyButton.OnClicked += (sender, e) =>
+        {
+            _controller.Accepted = true;
+            _controller.CopyRequested = true;
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
         //Description
         _descriptionRow.OnNotify += (sender, e) =>
         {
@@ -332,7 +334,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         _repeatEndDateRow.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
         if (checkStatus == TransactionCheckStatus.Valid)
         {
-            SetResponseEnabled("ok", true);
+            _applyButton.SetSensitive(true);
         }
         else
         {
@@ -351,7 +353,7 @@ public partial class TransactionDialog : Adw.MessageDialog
                 _repeatEndDateRow.AddCssClass("error");
                 _repeatEndDateRow.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
             }
-            SetResponseEnabled("ok", false);
+            _applyButton.SetSensitive(false);
         }
     }
 
