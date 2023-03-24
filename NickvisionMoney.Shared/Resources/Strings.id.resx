@@ -83,7 +83,7 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value>Rumah</value>
+		<value>Beranda</value>
   </data>
   <data name="Account" xml:space="preserve">
 		<value>Rekening</value>
