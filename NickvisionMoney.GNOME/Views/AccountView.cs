@@ -500,14 +500,12 @@ public partial class AccountView : Adw.Bin
         {
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
-            transferDialog.Show();
-            transferDialog.OnResponse += async (sender, e) =>
+            transferDialog.Present();
+            transferDialog.OnApply += async (sender, e) =>
             {
-                if (transferController.Accepted)
-                {
-                    await _controller.SendTransferAsync(transferController.Transfer);
-                }
-                transferDialog.Destroy();
+                transferDialog.SetVisible(false);
+                await _controller.SendTransferAsync(transferController.Transfer);
+                transferDialog.Close();
             };
         }
         else

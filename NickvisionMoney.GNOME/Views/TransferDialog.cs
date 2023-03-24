@@ -11,7 +11,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transfer
 /// </summary>
-public partial class TransferDialog : Adw.MessageDialog
+public partial class TransferDialog : Adw.Window
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
@@ -52,10 +52,13 @@ public partial class TransferDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Adw.EntryRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _destinationCurrencyRow;
     [Gtk.Connect] private readonly Gtk.Label _conversionResultLabel;
+    [Gtk.Connect] private readonly Gtk.Button _transferButton;
 
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
     private readonly Gtk.EventControllerKey _destCurrencyKeyController;
+
+    public event EventHandler? OnApply;
 
     private TransferDialog(Gtk.Builder builder, TransferDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -66,16 +69,12 @@ public partial class TransferDialog : Adw.MessageDialog
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        AddResponse("cancel", _controller.Localizer["Cancel"]);
-        SetCloseResponse("cancel");
-        AddResponse("ok", _controller.Localizer["Transfer"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Destination Password Row
         _destinationPasswordRow.OnApply += OnApplyDestinationPassword;
         //Select Account Button
         _selectAccountButton.OnClicked += OnSelectAccount;
+        //Transfer Button
+        _transferButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Amount
         _currencyLabel.SetLabel($"{_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})");
         _amountRow.OnNotify += (sender, e) =>
@@ -179,7 +178,7 @@ public partial class TransferDialog : Adw.MessageDialog
         if (checkStatus == TransferCheckStatus.Valid)
         {
             _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString));
-            SetResponseEnabled("ok", true);
+            _transferButton.SetSensitive(true);
         }
         else
         {
@@ -216,7 +215,7 @@ public partial class TransferDialog : Adw.MessageDialog
                 _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode!);
                 _conversionResultLabel.SetText(_controller.Localizer["NotAvailable"]);
             }
-            SetResponseEnabled("ok", false);
+            _transferButton.SetSensitive(false);
         }
         if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
         {

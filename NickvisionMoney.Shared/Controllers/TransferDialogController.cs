@@ -47,10 +47,6 @@ public class TransferDialogController
     /// </summary>
     public List<RecentAccount> RecentAccounts { get; init; }
     /// <summary>
-    /// Whether or not the dialog was accepted (response)
-    /// </summary>
-    public bool Accepted { get; set; }
-    /// <summary>
     /// The CultureInfo to use when displaying a source number string
     /// </summary>
     public CultureInfo CultureForSourceNumberString { get; init; }
@@ -95,7 +91,6 @@ public class TransferDialogController
                 RecentAccounts.Add(account);
             }
         }
-        Accepted = false;
         CultureForSourceNumberString = culture;
     }
 
