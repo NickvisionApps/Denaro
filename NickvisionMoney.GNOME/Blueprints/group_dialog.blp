@@ -11,38 +11,47 @@ Adw.Window _root {
     spacing: 0;
 
     Adw.HeaderBar {
-      title-widget: Gtk.Label {
-        label: _("Group");
-      };
-
+      title-widget: Gtk.Label {};
       styles ["flat"]
     }
 
-    Adw.PreferencesGroup {
-      margin-top: 6;
-      margin-start: 12;
-      margin-end: 12;
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
 
-      Adw.EntryRow _nameRow {
-        title: _("Name.Field");
-        input-hints: spellcheck;
-        activates-default: true;
+        Gtk.Label {
+          label: _("Group");
+
+          styles ["title-2"]
+        }
+
+        Adw.PreferencesGroup {
+          margin-start: 24;
+          margin-end: 24;
+
+          Adw.EntryRow _nameRow {
+            title: _("Name.Field");
+            input-hints: spellcheck;
+            activates-default: true;
+          }
+
+          Adw.EntryRow _descriptionRow {
+            title: _("Description.Field");
+            input-hints: spellcheck;
+            activates-default: true;
+          }
+        }
+
+        Gtk.Button _applyButton {
+          halign: center;
+          valign: center;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          styles ["pill", "suggested-action"]
+        }
       }
-
-      Adw.EntryRow _descriptionRow {
-        title: _("Description.Field");
-        input-hints: spellcheck;
-        activates-default: true;
-      }
-    }
-
-    Gtk.Button _applyButton {
-      halign: center;
-      valign: center;
-      margin-top: 12;
-      margin-bottom: 12;
-
-      styles ["pill", "suggested-action"]
     }
   };
 }
