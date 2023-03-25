@@ -65,17 +65,16 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}";
         LblGroups.Text = _controller.Localizer["Groups"];
         MenuSort.Label = _controller.Localizer["Sort"];
-        RadioOrderBy.Header = _controller.Localizer["OrderBy"];
-        RadioOrderByIncreasing.Content = _controller.Localizer["OrderBy", "Increasing"];
-        RadioOrderByDecreasing.Content = _controller.Localizer["OrderBy", "Decreasing"];
-        RadioSortBy.Header = _controller.Localizer["SortBy"];
-        RadioSortById.Content = _controller.Localizer["Id", "Field"];
-        RadioSortByDate.Content = _controller.Localizer["Date", "Field"];
-        RadioSortByAmount.Content = _controller.Localizer["Amount", "Field"];
+        MenuOrderBy.Text = _controller.Localizer["OrderBy"];
+        MenuOrderByIncreasing.Text = _controller.Localizer["OrderBy", "Increasing"];
+        MenuOrderByDecreasing.Text = _controller.Localizer["OrderBy", "Decreasing"];
+        MenuSortBy.Text = _controller.Localizer["SortBy"];
+        MenuSortById.Text = _controller.Localizer["Id", "Field"];
+        MenuSortByDate.Text = _controller.Localizer["Date", "Field"];
+        MenuSortByAmount.Text = _controller.Localizer["Amount", "Field"];
         MenuType.Label = _controller.Localizer["TransactionType", "Field"];
-        LblType.Text = _controller.Localizer["TransactionType", "Long"];
-        ChkFilterIncome.Content = _controller.Localizer["Income"];
-        ChkFilterExpense.Content = _controller.Localizer["Expense"];
+        MenuFilterIncome.Text = _controller.Localizer["Income"];
+        MenuFilterExpense.Text = _controller.Localizer["Expense"];
         MenuDate.Label = _controller.Localizer["Date", "Field"];
         Calendar.Language = _controller.CultureForDateString.Name;
         Calendar.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
@@ -252,23 +251,23 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             }
             if (_controller.SortFirstToLast)
             {
-                RadioOrderByIncreasing.IsChecked = true;
+                MenuOrderByIncreasing.IsChecked = true;
             }
             else
             {
-                RadioOrderByDecreasing.IsChecked = true;
+                MenuOrderByDecreasing.IsChecked = true;
             }
             if (_controller.SortTransactionsBy == SortBy.Id)
             {
-                RadioSortById.IsChecked = true;
+                MenuSortById.IsChecked = true;
             }
             else if (_controller.SortTransactionsBy == SortBy.Date)
             {
-                RadioSortByDate.IsChecked = true;
+                MenuSortByDate.IsChecked = true;
             }
             else if (_controller.SortTransactionsBy == SortBy.Amount)
             {
-                RadioSortByAmount.IsChecked = true;
+                MenuSortByAmount.IsChecked = true;
             }
             //Done Loading
             LoadingCtrl.IsLoading = false;
@@ -787,28 +786,28 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Occurs when the order by radio buttons are changed
+    /// Occurs when the selected orderby radio button is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void RadioOrderBy_Changed(object sender, RoutedEventArgs e) => _controller.SortFirstToLast = RadioOrderByIncreasing.IsChecked ?? false ? true : RadioOrderByDecreasing.IsChecked ?? false;
+    private void MenuOrderBy_SelectionChanged(object sender, RoutedEventArgs e) => _controller.SortFirstToLast = MenuOrderByIncreasing.IsChecked;
 
     /// <summary>
-    /// Occurs when the sort by radio buttons are changed
+    /// Occurs when the selected sortby radio button is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void RadioSortBy_Changed(object sender, RoutedEventArgs e)
+    private void MenuSortBy_SelectionChanged(object sender, RoutedEventArgs e)
     {
-        if(RadioSortById.IsChecked ?? false)
+        if (MenuSortById.IsChecked)
         {
             _controller.SortTransactionsBy = SortBy.Id;
         }
-        else if (RadioSortByDate.IsChecked ?? false)
+        else if (MenuSortByDate.IsChecked)
         {
             _controller.SortTransactionsBy = SortBy.Date;
         }
-        else if (RadioSortByAmount.IsChecked ?? false)
+        else if (MenuSortByAmount.IsChecked)
         {
             _controller.SortTransactionsBy = SortBy.Amount;
         }
@@ -819,14 +818,14 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, ChkFilterIncome.IsChecked ?? false);
+    private void MenuFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, MenuFilterIncome.IsChecked);
 
     /// <summary>
     /// Occurs when the expense filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, ChkFilterExpense.IsChecked ?? false);
+    private void MenuFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, MenuFilterExpense.IsChecked);
 
     /// <summary>
     /// Occurs when the calendar's selected date is changed
@@ -863,13 +862,13 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     private void ResetAllFilters(object? sender, RoutedEventArgs e)
     {
         //Overview
-        if (!(ChkFilterIncome.IsChecked ?? false))
+        if (!MenuFilterIncome.IsChecked)
         {
-            ChkFilterIncome.IsChecked = true;
+            MenuFilterIncome.IsChecked = true;
         }
-        if (!(ChkFilterExpense.IsChecked ?? false))
+        if (!MenuFilterExpense.IsChecked)
         {
-            ChkFilterExpense.IsChecked = true;
+            MenuFilterExpense.IsChecked = true;
         }
         //Groups
         _controller.ResetGroupsFilter();

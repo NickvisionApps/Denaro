@@ -213,23 +213,21 @@
                                             </AppBarButton.Icon>
                                             
                                             <AppBarButton.Flyout>
-                                                <Flyout Placement="Bottom">
-                                                    <StackPanel Orientation="Vertical" Spacing="6">
-                                                        <RadioButtons x:Name="RadioOrderBy">
-                                                            <RadioButton x:Name="RadioOrderByIncreasing" Checked="RadioOrderBy_Changed" Unchecked="RadioOrderBy_Changed"/>
+                                                <MenuFlyout Placement="Bottom">
+                                                    <MenuFlyoutSubItem x:Name="MenuOrderBy">
+                                                        <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
 
-                                                            <RadioButton x:Name="RadioOrderByDecreasing" Checked="RadioOrderBy_Changed" Unchecked="RadioOrderBy_Changed"/>
-                                                        </RadioButtons>
+                                                        <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                                    </MenuFlyoutSubItem>
 
-                                                        <RadioButtons x:Name="RadioSortBy">
-                                                            <RadioButton x:Name="RadioSortById" Checked="RadioSortBy_Changed" Unchecked="RadioSortBy_Changed"/>
+                                                    <MenuFlyoutSubItem x:Name="MenuSortBy">
+                                                        <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
 
-                                                            <RadioButton x:Name="RadioSortByDate" Checked="RadioSortBy_Changed" Unchecked="RadioSortBy_Changed"/>
+                                                        <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
 
-                                                            <RadioButton x:Name="RadioSortByAmount" Checked="RadioSortBy_Changed" Unchecked="RadioSortBy_Changed"/>
-                                                        </RadioButtons>
-                                                    </StackPanel>
-                                                </Flyout>
+                                                        <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
+                                                    </MenuFlyoutSubItem>
+                                                </MenuFlyout>
                                             </AppBarButton.Flyout>
                                         </AppBarButton>
 
@@ -241,15 +239,11 @@
                                             </AppBarButton.Icon>
                                             
                                             <AppBarButton.Flyout>
-                                                <Flyout Placement="Bottom">
-                                                    <StackPanel Orientation="Vertical" Spacing="6">
-                                                        <TextBlock x:Name="LblType"/>
+                                                <MenuFlyout Placement="Bottom">
+                                                    <ToggleMenuFlyoutItem x:Name="MenuFilterIncome" IsChecked="True" Click="MenuFilterIncome_Changed"/>
 
-                                                        <CheckBox x:Name="ChkFilterIncome" IsChecked="True" Checked="ChkFilterIncome_Changed" Unchecked="ChkFilterIncome_Changed"/>
-
-                                                        <CheckBox x:Name="ChkFilterExpense" IsChecked="True" Checked="ChkFilterExpense_Changed" Unchecked="ChkFilterExpense_Changed"/>
-                                                    </StackPanel>
-                                                </Flyout>
+                                                    <ToggleMenuFlyoutItem x:Name="MenuFilterExpense" IsChecked="True" Click="MenuFilterExpense_Changed"/>
+                                                </MenuFlyout>
                                             </AppBarButton.Flyout>
                                         </AppBarButton>
 
