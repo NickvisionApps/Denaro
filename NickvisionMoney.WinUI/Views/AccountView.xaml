@@ -124,8 +124,8 @@
             </Border>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="6">
-                <Border MinWidth="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <StackPanel Margin="6,6,6,6" Orientation="Vertical" Spacing="6">
+                <Border MinWidth="220" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <StackPanel Margin="12,6,6,6" Orientation="Vertical" Spacing="6">
                         <TextBlock x:Name="LblIncomeTitle" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
@@ -138,8 +138,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border MinWidth="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <StackPanel Margin="6,6,6,6" Orientation="Vertical" Spacing="6">
+                <Border MinWidth="220" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <StackPanel Margin="12,6,6,6" Orientation="Vertical" Spacing="6">
                         <TextBlock x:Name="LblExpenseTitle" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
@@ -152,8 +152,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border MinWidth="200" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <StackPanel Margin="6,6,6,6" Orientation="Vertical" Spacing="6">
+                <Border MinWidth="220" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                    <StackPanel Margin="12,6,6,6" Orientation="Vertical" Spacing="6">
                         <TextBlock x:Name="LblTotalTitle" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
