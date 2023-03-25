@@ -348,6 +348,10 @@
 		<value>Filters</value>
 	</data>
 
+	<data name="ResetFilters.All" xml:space="preserve">
+		<value>Reset All Filters</value>
+	</data>
+
 	<data name="ResetFilters.Overview" xml:space="preserve">
 		<value>Reset Overview Filters</value>
 	</data>
@@ -466,6 +470,26 @@
 
 	<data name="AccountSettings" xml:space="preserve">
 		<value>Account Settings</value>
+	</data>
+
+	<data name="Sort" xml:space="preserve">
+		<value>Sort</value>
+	</data>
+
+	<data name="OrderBy" xml:space="preserve">
+		<value>Order By</value>
+	</data>
+
+	<data name="OrderBy.Increasing" xml:space="preserve">
+		<value>Increasing</value>
+	</data>
+
+	<data name="OrderBy.Decreasing" xml:space="preserve">
+		<value>Decreasing</value>
+	</data>
+
+	<data name="SortBy" xml:space="preserve">
+		<value>Sort By</value>
 	</data>
 
 	<data name="SortBy.Id" xml:space="preserve">
@@ -746,6 +770,10 @@
 
 	<data name="TransactionType.Field" xml:space="preserve">
 		<value>Type</value>
+	</data>
+
+	<data name="TransactionType.Long" xml:space="preserve">
+		<value>Transaction Type</value>
 	</data>
 
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
