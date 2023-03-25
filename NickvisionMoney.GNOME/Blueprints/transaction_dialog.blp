@@ -79,7 +79,7 @@ Adw.Window _root {
                 }
               };
 
-              styles ["flat"]
+              styles ["flat", "calendar-button"]
             }
           }
           
@@ -103,14 +103,15 @@ Adw.Window _root {
                 }
               };
 
-              styles ["flat"]
+              styles ["flat", "calendar-button"]
             }
 
             [suffix]
             Gtk.Button _repeatEndDateClearButton {
               valign: center;
-              icon-name: "window-close-symbolic";
+              icon-name: "larger-brush-symbolic";
               tooltip-text: _("TransactionRepeatEndDate.Clear");
+              margin-start: 2;
 
               styles ["flat"]
             }
