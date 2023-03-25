@@ -772,10 +772,6 @@
 		<value>Type</value>
 	</data>
 
-	<data name="TransactionType.Long" xml:space="preserve">
-		<value>Transaction Type</value>
-	</data>
-
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Repeat Interval</value>
 	</data>
