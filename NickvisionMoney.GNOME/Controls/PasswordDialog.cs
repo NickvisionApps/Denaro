@@ -20,18 +20,20 @@ public partial class PasswordDialog : Adw.Window
         //Dialog Settings
         SetTransientFor(parent);
         _statusPage.SetDescription(accountTitle);
-        _unlockButton.OnClicked += (sender, e) => {
+        _unlockButton.OnClicked += (sender, e) =>
+        {
             unlock = true;
             Close();
         };
-        OnCloseRequest += (sender, e) => {
+        OnCloseRequest += (sender, e) =>
+        {
             tcs.SetResult(unlock ? _passwordEntry.GetText() : null);
             return false;
         };
     }
 
     /// <summary>
-    /// Constructs a Window
+    /// Constructs a PasswordDialog
     /// </summary>
     /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="accountTitle">The title of the account requiring the password</param>

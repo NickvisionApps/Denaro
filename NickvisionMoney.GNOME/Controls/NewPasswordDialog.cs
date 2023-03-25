@@ -36,18 +36,20 @@ public partial class NewPasswordDialog : Adw.Window
             }
         };
         _addButton.SetSensitive(false);
-        _addButton.OnClicked += (sender, e) => {
+        _addButton.OnClicked += (sender, e) =>
+        {
             setPassword = true;
             Close();
         };
-        OnCloseRequest += (sender, e) => {
+        OnCloseRequest += (sender, e) =>
+        {
             tcs.SetResult(setPassword ? _newPasswordEntry.GetText() : null);
             return false;
         };
     }
 
     /// <summary>
-    /// Constructs a Window
+    /// Constructs a NewPasswordDialog
     /// </summary>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="title">The title of the dialog</param>

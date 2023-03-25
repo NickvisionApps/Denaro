@@ -222,7 +222,8 @@ public partial class TransactionDialog : Adw.Window
         //Color
         _colorDialog = gtk_color_dialog_new();
         gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
-        _colorButton.OnNotify += (sender, e) => {
+        _colorButton.OnNotify += (sender, e) =>
+        {
             if (e.Pspec.GetName() == "rgba")
             {
                 if (!_constructing)
