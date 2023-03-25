@@ -179,11 +179,18 @@
                         </MenuFlyout>
                     </Border.ContextFlyout>
 
-                    <StackPanel Margin="6,6,6,6" Orientation="Vertical" Spacing="6">
-                        <TextBlock x:Name="LblGroups" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                    <Grid Margin="6,6,6,6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
-                    </StackPanel>
+                        <TextBlock x:Name="LblGroups" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
+                        </ScrollViewer>
+                    </Grid>
                 </Border>
 
                 <Border x:Name="SectionTransactions" wct:DockPanel.Dock="Right" VerticalAlignment="Stretch" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
