@@ -200,87 +200,89 @@
                         <TextBlock x:Name="LblTransactions" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                         <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                            <wct:DockPanel LastChildFill="False">
-                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right">
-                                    <CommandBar.PrimaryCommands>
-                                        <AppBarButton x:Name="MenuSort">
-                                            <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
-                                            </AppBarButton.Icon>
-                                            
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout Placement="Bottom">
-                                                    <MenuFlyoutSubItem x:Name="MenuOrderBy">
-                                                        <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
+                            <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                                <CommandBar.Content>
+                                    <AutoSuggestBox x:Name="TxtSearchDescription" Width="300" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
+                                </CommandBar.Content>
 
-                                                        <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
-                                                    </MenuFlyoutSubItem>
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarSeparator Margin="6,0,0,0"/>
 
-                                                    <MenuFlyoutSubItem x:Name="MenuSortBy">
-                                                        <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
+                                    <AppBarButton x:Name="MenuSort">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
+                                        </AppBarButton.Icon>
 
-                                                        <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
+                                        <AppBarButton.Flyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <MenuFlyoutSubItem x:Name="MenuOrderBy">
+                                                    <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
 
-                                                        <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
-                                                    </MenuFlyoutSubItem>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                                    <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                                </MenuFlyoutSubItem>
 
-                                        <AppBarSeparator/>
+                                                <MenuFlyoutSubItem x:Name="MenuSortBy">
+                                                    <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
 
-                                        <AppBarButton x:Name="MenuType">
-                                            <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                            </AppBarButton.Icon>
-                                            
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout Placement="Bottom">
-                                                    <ToggleMenuFlyoutItem x:Name="MenuFilterIncome" IsChecked="True" Click="MenuFilterIncome_Changed"/>
+                                                    <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
 
-                                                    <ToggleMenuFlyoutItem x:Name="MenuFilterExpense" IsChecked="True" Click="MenuFilterExpense_Changed"/>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                                    <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
+                                                </MenuFlyoutSubItem>
+                                            </MenuFlyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
 
-                                        <AppBarSeparator/>
+                                    <AppBarSeparator/>
 
-                                        <AppBarButton x:Name="MenuDate">
-                                            <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC92;"/>
-                                            </AppBarButton.Icon>
-                                            
-                                            <AppBarButton.Flyout>
-                                                <Flyout Placement="Bottom">
-                                                    <StackPanel Orientation="Vertical" Spacing="6">
-                                                        <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+                                    <AppBarButton x:Name="MenuType">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                                        </AppBarButton.Icon>
 
-                                                        <Expander x:Name="ExpDateRange" HorizontalAlignment="Stretch" Header="Select Range">
-                                                            <Expander.Content>
-                                                                <StackPanel Spacing="12">
-                                                                    <DatePicker x:Name="DateRangeStart" DateChanged="DateRangeStart_DateChanged"/>
+                                        <AppBarButton.Flyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <ToggleMenuFlyoutItem x:Name="MenuFilterIncome" IsChecked="True" Click="MenuFilterIncome_Changed"/>
 
-                                                                    <DatePicker x:Name="DateRangeEnd" DateChanged="DateRangeEnd_DateChanged"/>
-                                                                </StackPanel>
-                                                            </Expander.Content>
-                                                        </Expander>
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                                <ToggleMenuFlyoutItem x:Name="MenuFilterExpense" IsChecked="True" Click="MenuFilterExpense_Changed"/>
+                                            </MenuFlyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
 
-                                        <AppBarSeparator/>
+                                    <AppBarSeparator/>
 
-                                        <AppBarButton x:Name="MenuResetAllFilters" Click="ResetAllFilters">
-                                            <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1C5;"/>
-                                            </AppBarButton.Icon>
-                                        </AppBarButton>
-                                    </CommandBar.PrimaryCommands>
-                                </CommandBar>
+                                    <AppBarButton x:Name="MenuDate">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC92;"/>
+                                        </AppBarButton.Icon>
 
-                                <AutoSuggestBox x:Name="TxtSearchDescription" wct:DockPanel.Dock="Right" Margin="0,0,6,0" VerticalAlignment="Center" MinWidth="320" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
-                            </wct:DockPanel>
+                                        <AppBarButton.Flyout>
+                                            <Flyout Placement="Bottom">
+                                                <StackPanel Orientation="Vertical" Spacing="6">
+                                                    <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+
+                                                    <Expander x:Name="ExpDateRange" HorizontalAlignment="Stretch" Header="Select Range">
+                                                        <Expander.Content>
+                                                            <StackPanel Spacing="12">
+                                                                <DatePicker x:Name="DateRangeStart" DateChanged="DateRangeStart_DateChanged"/>
+
+                                                                <DatePicker x:Name="DateRangeEnd" DateChanged="DateRangeEnd_DateChanged"/>
+                                                            </StackPanel>
+                                                        </Expander.Content>
+                                                    </Expander>
+                                                </StackPanel>
+                                            </Flyout>
+                                        </AppBarButton.Flyout>
+                                    </AppBarButton>
+
+                                    <AppBarSeparator/>
+
+                                    <AppBarButton x:Name="MenuResetAllFilters" Click="ResetAllFilters">
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1C5;"/>
+                                        </AppBarButton.Icon>
+                                    </AppBarButton>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
                         </Border>
 
                         <nickvision:ViewStack x:Name="ViewStackTransactions" Grid.Row="2">
