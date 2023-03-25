@@ -202,11 +202,11 @@
                         <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                             <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
                                 <CommandBar.Content>
-                                    <AutoSuggestBox x:Name="TxtSearchDescription" Width="300" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
+                                    <AutoSuggestBox x:Name="TxtSearchDescription" Margin="6,0,6,0" Width="300" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
                                 </CommandBar.Content>
 
                                 <CommandBar.PrimaryCommands>
-                                    <AppBarSeparator Margin="6,0,0,0"/>
+                                    <AppBarSeparator />
 
                                     <AppBarButton x:Name="MenuSort">
                                         <AppBarButton.Icon>
