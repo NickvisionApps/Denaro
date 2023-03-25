@@ -91,8 +91,5 @@ The Linux version of this app is designed for GNOME and optimized for the defaul
 # Dependencies
 - [.NET 7](https://dotnet.microsoft.com/en-us/)
 
-# Special Thanks
-- [daudix-UFO](https://github.com/daudix-UFO) for our application icons
-
 # Code of Conduct
 This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
