@@ -177,7 +177,7 @@ public partial class AccountView : Adw.Bin
                 OnDateRangeStartYearChanged();
             }
         };
-        var dtFormatInfo = new DateTimeFormatInfo();
+        var dtFormatInfo = CultureInfo.CurrentCulture.DateTimeFormat;
         _startMonthDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 12).Select(x => dtFormatInfo.GetMonthName(x)).ToArray()));
         _startMonthDropDown.OnNotify += (sender, e) =>
         {
