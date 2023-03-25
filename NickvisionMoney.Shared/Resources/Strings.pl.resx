@@ -52,7 +52,8 @@ Współautorzy z GitHuba ❤️ https://github.com/nlogozzo/NickvisionMoney/grap
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Fyodor Sobolev https://github.com/fsobolev</value>
+Fyodor Sobolev https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -513,7 +514,7 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
 		<value>Ustaw nowe hasło lub usuń stare.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value>Jeśli zapomnisz hasła nie ma możliwości przywrócenia konta!</value>
+		<value>Jeśli zapomnisz hasła nie ma możliwości przywrócenia pliku!</value>
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
@@ -790,5 +791,77 @@ Niezapisane zmiany zostaną utracone.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
 		<value>Hasło zostanie usunięte po zamknięciu tego monitu.</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Dodać hasło do pliku PDF?</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Hasło do pliku PDF</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transakcji</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Waluta</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Zarządzaj walutą używaną przez konto.</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Powtórz</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Symbol Waluty (niepoprawny)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Separator dziesiętny</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Separator dziesiętny (pusty)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Separator dziesiętny (niepoprawny)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Inny</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Wprowadź separator dziesiętny</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Separator grup</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Separator grup (niepoprawny)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Inny</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Wprowadź separator grup</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Cyfry dziesiętne</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Bez limitu</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Hasła nie są jednakowe.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Kopia zapasowa</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Wyczyść folder kopii zapasowej</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Wybierz folder do kopii zapasowej</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Brak folderu kopii zapasowej</value>
   </data>
 </root>
