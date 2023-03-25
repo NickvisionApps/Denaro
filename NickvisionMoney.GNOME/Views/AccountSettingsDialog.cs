@@ -76,6 +76,7 @@ public partial class AccountSettingsDialog : Adw.Window
             _viewStack.GetChildByName("currency").SetVisible(false);
             _viewStack.GetChildByName("password").SetVisible(false);
             _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+            SetDefaultWidget(_applyButton);
         };
         //Account Name
         _nameRow.OnNotify += (sender, e) =>
@@ -441,6 +442,7 @@ public partial class AccountSettingsDialog : Adw.Window
         _viewStack.SetVisibleChildName("main");
         _viewStack.GetChildByName("password").SetVisible(false);
         _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+        SetDefaultWidget(_applyButton);
         _managePasswordRow.SetSensitive(false);
         _managePasswordRow.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
         _managePasswordRow.SetSubtitle("");

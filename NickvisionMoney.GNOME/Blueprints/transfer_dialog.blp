@@ -87,9 +87,13 @@ Adw.Window _root {
             title: _("ConversionNeeded");
             visible: false;
 
-            Adw.EntryRow _sourceCurrencyRow {}
+            Adw.EntryRow _sourceCurrencyRow {
+              activates-default: true;
+            }
 
-            Adw.EntryRow _destinationCurrencyRow {}
+            Adw.EntryRow _destinationCurrencyRow {
+              activates-default: true;
+            }
 
             Adw.ActionRow {
               title:_("Result");
@@ -112,4 +116,6 @@ Adw.Window _root {
       }
     }
   };
+
+  default-widget: _transferButton;
 }
