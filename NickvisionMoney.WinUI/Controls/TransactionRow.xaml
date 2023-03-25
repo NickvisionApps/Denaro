@@ -27,7 +27,7 @@
     </UserControl.ContextFlyout>
 
     <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-        <Grid Margin="12">
+        <Grid Margin="12,12,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
