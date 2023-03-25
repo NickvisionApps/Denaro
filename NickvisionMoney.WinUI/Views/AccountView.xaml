@@ -19,8 +19,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <StackPanel Grid.Row="0" Margin="10,10,0,0" Orientation="Vertical" Spacing="6">
-                <TextBlock x:Name="LblAccoutTitle" Style="{ThemeResource TitleTextBlockStyle}"/>
+            <StackPanel Grid.Row="0" Margin="10,10,0,6" Orientation="Vertical" Spacing="6">
+                <TextBlock x:Name="LblAccoutTitle" FontSize="24" Style="{ThemeResource TitleTextBlockStyle}"/>
 
                 <TextBlock x:Name="LblAccountPath" Foreground="Gray"/>
             </StackPanel>
@@ -130,7 +130,7 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <Border x:Name="CardIncomeIcon" Width="60" Height="60" CornerRadius="8">
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
+                                <FontIcon x:Name="CardIncomeIconIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="22" Glyph="&#xE8C7;"/>
                             </Border>
                             
                             <TextBlock x:Name="LblIncomeAmount" VerticalAlignment="Center"/>
@@ -144,7 +144,7 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <Border x:Name="CardExpenseIcon" Width="60" Height="60" CornerRadius="8">
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
+                                <FontIcon  x:Name="CardExpenseIconIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="22" Glyph="&#xE8C7;"/>
                             </Border>
 
                             <TextBlock x:Name="LblExpenseAmount" VerticalAlignment="Center"/>
@@ -158,7 +158,7 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <Border x:Name="CardTotalIcon" Width="60" Height="60" CornerRadius="8">
-                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C7;"/>
+                                <FontIcon x:Name="CardTotalIconIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="22" Glyph="&#xE8C7;"/>
                             </Border>
 
                             <TextBlock x:Name="LblTotalAmount" VerticalAlignment="Center"/>
@@ -168,7 +168,7 @@
             </StackPanel>
 
             <wct:DockPanel Grid.Row="3" LastChildFill="True">
-                <Border x:Name="SectionGroups" wct:DockPanel.Dock="Left" VerticalAlignment="Stretch" Width="360" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                <Border x:Name="SectionGroups" wct:DockPanel.Dock="Left" VerticalAlignment="Stretch" MinWidth="360" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                     <Border.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem x:Name="MenuContextNewGroup" Click="NewGroup">

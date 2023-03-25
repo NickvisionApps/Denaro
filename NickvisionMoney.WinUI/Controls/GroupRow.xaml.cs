@@ -101,7 +101,6 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
         LblDescription.Visibility = string.IsNullOrEmpty(group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = group.Description;
         LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}";
-        LblAmount.Foreground = group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
     }
 
     /// <summary>

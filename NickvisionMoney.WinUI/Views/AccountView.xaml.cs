@@ -1,5 +1,6 @@
 using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
@@ -287,21 +288,25 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         LblAccountPath.Text = _controller.AccountPath;
         _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
         LblTotalAmount.Text = _controller.AccountTodayTotalString;
-        CardTotalIcon.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
+        CardTotalIcon.Background = new SolidColorBrush(Color.FromArgb(255, 53, 132, 228));
+        CardTotalIconIcon.Foreground = new SolidColorBrush(Colors.White);
         LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
-        CardIncomeIcon.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
+        CardIncomeIcon.Background = new SolidColorBrush(Color.FromArgb(255, 38, 162, 105));
+        CardIncomeIconIcon.Foreground = new SolidColorBrush(Colors.White);
         LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
-        CardExpenseIcon.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        CardExpenseIcon.Background = new SolidColorBrush(Color.FromArgb(255, 192, 28, 40));
+        CardExpenseIconIcon.Foreground = new SolidColorBrush(Colors.White);
         ///Transactions
         if (_controller.TransactionsCount > 0)
         {
-            //Highlight Days
+            //Mark Days
             var datesInAccount = _controller.DatesInAccount;
             var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
             foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
                 displayedDay.IsBlackout = !datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today;
             }
+            Calendar.UpdateLayout();
             //Transaction Page
             LblTransactions.Text = string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount);
             if (_controller.FilteredTransactionsCount > 0)
