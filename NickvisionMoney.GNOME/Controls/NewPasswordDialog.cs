@@ -47,7 +47,7 @@ public partial class NewPasswordDialog : Adw.Window
     }
 
     /// <summary>
-    /// Constructs a MessageDialog
+    /// Constructs a Window
     /// </summary>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="title">The title of the dialog</param>

@@ -60,7 +60,7 @@ public partial class GroupDialog : Adw.Window
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
         _descriptionRow.AddController(_descriptionKeyController);
-        //Apply button
+        //Apply Button
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load Group

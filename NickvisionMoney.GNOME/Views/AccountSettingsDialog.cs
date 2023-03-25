@@ -245,7 +245,7 @@ public partial class AccountSettingsDialog : Adw.Window
         };
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
-        //Apply button
+        //Apply Button
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load
         _nameRow.SetText(_controller.Metadata.Name);

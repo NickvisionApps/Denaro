@@ -31,7 +31,7 @@ public partial class PasswordDialog : Adw.Window
     }
 
     /// <summary>
-    /// Constructs a MessageDialog
+    /// Constructs a Window
     /// </summary>
     /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="accountTitle">The title of the account requiring the password</param>
