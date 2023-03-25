@@ -121,3 +121,8 @@ row.error button.circular {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
+
+/* Transaction Row */
+.id-image {
+  border-radius: 34px;
+}

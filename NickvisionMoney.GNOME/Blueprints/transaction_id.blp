@@ -1,0 +1,21 @@
+using Gtk 4.0;
+
+Gtk.Overlay _root {
+  width-request: 34;
+  height-request: 34;
+  halign: center;
+  valign: center;
+
+  child: Gtk.Image _colorImage {
+    overflow: hidden;
+    opacity: 0.1;
+    pixel-size: 1;
+
+    styles ["id-image"]
+  };
+
+  [overlay]
+  Gtk.Label _idLabel {
+    use-markup: true;
+  }
+}

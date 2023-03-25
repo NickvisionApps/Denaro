@@ -4,7 +4,6 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -13,35 +12,13 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Transaction>
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Color
-    {
-        public float Red;
-        public float Green;
-        public float Blue;
-        public float Alpha;
-    }
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gdk_rgba_to_string(ref Color rgba);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
-    private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
-
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
+    private TransactionId _idWidget;
 
     [Gtk.Connect] private readonly Adw.ActionRow _row;
-    [Gtk.Connect] private readonly Gtk.Button _idButton;
-    [Gtk.Connect] private readonly Gtk.Image _compactIcon;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
@@ -73,6 +50,8 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         builder.Connect(this);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
+        _idWidget = new TransactionId(transaction.Id, localizer);
+        _row.AddPrefix(_idWidget);
         //Group Settings
         UpdateRow(transaction, cultureAmount, cultureDate);
     }
@@ -108,8 +87,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
                 _suffixBox.SetOrientation(Gtk.Orientation.Horizontal);
                 _suffixBox.SetMarginTop(0);
             }
-            _idButton.SetVisible(!_isSmall);
-            _compactIcon.SetVisible(_isSmall);
+            _idWidget.SetCompact(_isSmall);
         }
     }
 
@@ -124,22 +102,10 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         Id = transaction.Id;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        //Color
-        var color = new Color();
-        if (!gdk_rgba_parse(ref color, transaction.RGBA))
-        {
-            gdk_rgba_parse(ref color, "#3584e4");
-        }
         //Row Settings
         _row.SetTitle(transaction.Description);
         _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
-        //Button Id
-        _idButton.SetLabel(transaction.Id.ToString());
-        var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId, #iconCompact { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
-        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-        _idButton.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
-        _compactIcon.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        _idWidget.UpdateColor(transaction.RGBA);
         //Amount Label
         _amountLabel.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToAmountString(_cultureAmount)}");
         _amountLabel.RemoveCssClass(transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
