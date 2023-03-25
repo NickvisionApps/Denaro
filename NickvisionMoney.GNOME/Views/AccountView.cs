@@ -632,7 +632,7 @@ public partial class AccountView : Adw.Bin
                 }
                 string? password = null;
                 var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
-                dialog.Show();
+                dialog.Present();
                 dialog.OnResponse += async (sender, e) =>
                 {
                     if (dialog.Response == MessageDialogResponse.Suggested)
@@ -775,7 +775,7 @@ public partial class AccountView : Adw.Bin
                     var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
-                    dialog.Show();
+                    dialog.Present();
                     dialog.OnResponse += async (sender, e) =>
                     {
                         if (dialog.Response == MessageDialogResponse.Suggested)
@@ -824,7 +824,7 @@ public partial class AccountView : Adw.Bin
                     var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
-                    dialog.Show();
+                    dialog.Present();
                     dialog.OnResponse += async (sender, e) =>
                     {
                         if (dialog.Response != MessageDialogResponse.Cancel)
@@ -882,7 +882,7 @@ public partial class AccountView : Adw.Bin
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
-            dialog.Show();
+            dialog.Present();
             dialog.OnResponse += async (sender, e) =>
             {
                 if (dialog.Response != MessageDialogResponse.Cancel)
@@ -908,7 +908,7 @@ public partial class AccountView : Adw.Bin
         else
         {
             var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-            dialog.Show();
+            dialog.Present();
             dialog.OnResponse += async (sender, e) =>
             {
                 if (dialog.Response == MessageDialogResponse.Destructive)
@@ -990,7 +990,7 @@ public partial class AccountView : Adw.Bin
     private void DeleteGroup(object? sender, uint id)
     {
         var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        dialog.Show();
+        dialog.Present();
         dialog.OnResponse += async (sender, e) =>
         {
             if (dialog.Response == MessageDialogResponse.Destructive)

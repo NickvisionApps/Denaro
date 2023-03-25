@@ -210,7 +210,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _startPageRecentAccountsGroup.SetVisible(true);
         }
-        Show();
+        Present();
     }
 
     /// <summary>
@@ -414,7 +414,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, this);
         preferencesDialog.SetIconName(_controller.AppInfo.ID);
-        preferencesDialog.Show();
+        preferencesDialog.Present();
     }
 
     /// <summary>
@@ -428,7 +428,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_root");
         shortcutsWindow.SetTransientFor(this);
         shortcutsWindow.SetIconName(_controller.AppInfo.ID);
-        shortcutsWindow.Show();
+        shortcutsWindow.Present();
     }
 
     /// <summary>
@@ -457,7 +457,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
         dialog.SetTranslatorCredits((string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]));
         dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
-        dialog.Show();
+        dialog.Present();
     }
 
     /// <summary>

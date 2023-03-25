@@ -151,9 +151,9 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _deleteButton.SetSensitive(transaction.RepeatFrom <= 0);
     }
 
-    public void Show() => Container!.Show();
+    public void Show() => Container!.SetVisible(true);
 
-    public void Hide() => Container!.Hide();
+    public void Hide() => Container!.SetVisible(false);
 
     /// <summary>
     /// Occurs when the edit button is clicked
