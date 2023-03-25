@@ -36,7 +36,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
-                <NavigationViewItem x:Name="NavViewItemDashboard" Tag="Dashboard">
+                <NavigationViewItem x:Name="NavViewItemDashboard" Tag="Dashboard" Visibility="Collapsed">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF246;"/>
                     </NavigationViewItem.Icon>

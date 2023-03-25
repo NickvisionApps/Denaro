@@ -352,6 +352,7 @@ public sealed partial class MainWindow : Window
                 Glyph = "\uE8C7",
             }
         };
+        NavViewItemDashboard.Visibility = Visibility.Visible;
         NavViewItemAccounts.Visibility = Visibility.Visible;
         ToolTipService.SetToolTip(newNavItem, _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath);
         NavView.MenuItems.Add(newNavItem);
