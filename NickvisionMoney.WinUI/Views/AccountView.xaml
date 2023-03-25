@@ -85,10 +85,6 @@
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
                             </AppBarButton.Icon>
 
-                            <AppBarButton.KeyboardAccelerators>
-                                <KeyboardAccelerator Modifiers="Control" Key="I"/>
-                            </AppBarButton.KeyboardAccelerators>
-
                             <AppBarButton.Flyout>
                                 <MenuFlyout Placement="Bottom">
                                     <MenuFlyoutItem Text="CSV" Click="ExportToCSV">

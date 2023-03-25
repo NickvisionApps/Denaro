@@ -58,8 +58,11 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         MenuTransferMoney.Text = _controller.Localizer["Transfer"];
         MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
         MenuImportFromFile.Label = _controller.Localizer["ImportFromFile"];
+        ToolTipService.SetToolTip(MenuImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         MenuExportToFile.Label = _controller.Localizer["ExportToFile"];
+        ToolTipService.SetToolTip(MenuShowHideGrous, _controller.Localizer["ToggleGroups", "Tooltip"]);
         MenuAccountSettings.Label = _controller.Localizer["AccountSettings"];
+        ToolTipService.SetToolTip(MenuAccountSettings, _controller.Localizer["AccountSettings", "Tooltip"]);
         LblTotalTitle.Text = $"{_controller.Localizer["Total"]}";
         LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}";
         LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}";

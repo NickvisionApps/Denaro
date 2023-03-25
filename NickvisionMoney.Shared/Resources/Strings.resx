@@ -472,6 +472,10 @@
 		<value>Account Settings</value>
 	</data>
 
+	<data name="AccountSettings.Tooltip" xml:space="preserve">
+		<value>Account Settings (Ctrl+.)</value>
+	</data>
+
 	<data name="Sort" xml:space="preserve">
 		<value>Sort</value>
 	</data>
