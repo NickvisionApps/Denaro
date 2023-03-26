@@ -13,7 +13,6 @@ namespace NickvisionMoney.GNOME.Controls;
 public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
     private CultureInfo _cultureAmount;
-    private CultureInfo _cultureDate;
 
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
@@ -39,10 +38,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
-    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive) : base(builder.GetPointer("_root"), false)
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
         //Build UI
         builder.Connect(this);
         //Filter Checkbox
@@ -51,7 +49,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _editButton.OnClicked += Edit;
         //Delete Button
         _deleteButton.OnClicked += Delete;
-        UpdateRow(group, cultureAmount, cultureDate, filterActive);
+        UpdateRow(group, cultureAmount, filterActive);
     }
 
     /// <summary>
@@ -59,10 +57,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     /// <param name="group">The Group to display</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
-    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, cultureDate, localizer, filterActive)
+    public GroupRow(Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, localizer, filterActive)
     {
     }
 
@@ -81,13 +78,11 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     /// <param name="group">The new Group model</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
-    /// <param name="cultureDate">The culture to use for displaying date strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, bool filterActive)
+    public void UpdateRow(Group group, CultureInfo cultureAmount, bool filterActive)
     {
         Id = group.Id;
         _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
         //Row Settings
         SetTitle(group.Name);
         SetSubtitle(group.Description);
