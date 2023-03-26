@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
-                <Button x:Name="BtnId" VerticalAlignment="Center" Width="24" Height="20" CornerRadius="6"/>
+                <Border x:Name="BtnId" VerticalAlignment="Center" Width="24" Height="20" CornerRadius="6"/>
 
                 <CheckBox x:Name="ChkFilter" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
                     <CheckBox.Content>
