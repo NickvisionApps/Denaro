@@ -1010,6 +1010,10 @@
 	<data name="TransferColor" xml:space="preserve">
 		<value>Transfer Default Color</value>
 	</data>
+	
+	<data name="GroupColor" xml:space="preserve">
+		<value>Group Default Color</value>
+	</data>
 
 	<data name="TransactionColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to newly added transactions.</value>
@@ -1017,6 +1021,10 @@
 
 	<data name="TransferColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to new transfers.</value>
+	</data>
+
+	<data name="GroupColorDescription" xml:space="preserve">
+		<value>A change in this setting will only be applied to new groups.</value>
 	</data>
 
 	<data name="AccountCheckingColor" xml:space="preserve">

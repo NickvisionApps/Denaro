@@ -349,7 +349,14 @@ public class Account : IDisposable
         catch { }
         //Setup Groups Table
         using var cmdTableGroups = _database.CreateCommand();
-        cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT)";
+        cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)";
+        try
+        {
+            using var cmdTableGroupsUpdate1 = _database.CreateCommand();
+            cmdTableGroupsUpdate1.CommandText = "ALTER TABLE groups ADD COLUMN rgba TEXT";
+            cmdTableGroupsUpdate1.ExecuteNonQuery();
+        }
+        catch { }
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
         using var cmdTableTransactions = _database.CreateCommand();
@@ -435,7 +442,8 @@ public class Account : IDisposable
         {
             Name = localizer["Ungrouped"],
             Description = localizer["UngroupedDescription"],
-            Balance = 0u
+            Balance = 0m,
+            RGBA = ""
         });
         using var cmdQueryGroups = _database.CreateCommand();
         cmdQueryGroups.CommandText = "SELECT * FROM groups";
@@ -450,7 +458,8 @@ public class Account : IDisposable
             {
                 Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
                 Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
-                Balance = 0m
+                Balance = 0m,
+                RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
             };
             Groups.Add(group.Id, group);
             if (group.Id > NextAvailableGroupId)
@@ -737,10 +746,11 @@ public class Account : IDisposable
     public async Task<bool> AddGroupAsync(Group group)
     {
         using var cmdAddGroup = _database.CreateCommand();
-        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description) VALUES ($id, $name, $description)";
+        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
         cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
         cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
         cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
         if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Add(group.Id, group);
@@ -759,9 +769,10 @@ public class Account : IDisposable
     public async Task<bool> UpdateGroupAsync(Group group)
     {
         using var cmdUpdateGroup = _database.CreateCommand();
-        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description WHERE id = $id";
+        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
         cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
         cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdUpdateGroup.Parameters.AddWithValue("$rgba", group.RGBA);
         cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
         if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
         {

@@ -64,8 +64,9 @@ public class GroupDialogController
     /// </summary>
     /// <param name="id">The id of the new group</param>
     /// <param name="existingNames">The list of existing group names</param>
+    /// <param name="groupDefaultColor">A default color for the group</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal GroupDialogController(uint id, List<string> existingNames, Localizer localizer)
+    internal GroupDialogController(uint id, List<string> existingNames, string groupDefaultColor, Localizer localizer)
     {
         _originalName = "";
         _existingNames = existingNames;
@@ -73,6 +74,8 @@ public class GroupDialogController
         Group = new Group(id);
         Accepted = false;
         IsEditing = false;
+        //Set Defaults For New Group
+        Group.RGBA = groupDefaultColor;
     }
 
     /// <summary>
@@ -80,8 +83,9 @@ public class GroupDialogController
     /// </summary>
     /// <param name="name">The new name for the group</param>
     /// <param name="description">The new description for the group</param>
+    /// <param name="rgba">The new rgba for the group</param>
     /// <returns>GroupCheckStatus</returns>
-    public GroupCheckStatus UpdateGroup(string name, string description)
+    public GroupCheckStatus UpdateGroup(string name, string description, string rgba)
     {
         if (string.IsNullOrEmpty(name))
         {
@@ -93,6 +97,7 @@ public class GroupDialogController
         }
         Group.Name = name;
         Group.Description = description;
+        Group.RGBA = rgba;
         return GroupCheckStatus.Valid;
     }
 }

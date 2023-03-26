@@ -82,7 +82,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
-    public InsertSeparator InsertSeparator => NickvisionMoney.Shared.Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
+    public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
 
     /// <summary>
     /// The repeat interval index used by GUI
@@ -101,13 +101,11 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
-    /// <param name="transactionDefaultType">A default type for the transaction</param>
-    /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, bool canCopy, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, bool canCopy, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
         Localizer = localizer;
@@ -120,11 +118,6 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        if (Transaction.Amount == 0m) //new transaction
-        {
-            Transaction.Type = transactionDefaultType;
-            Transaction.RGBA = transactionDefaultColor;
-        }
     }
 
     /// <summary>
@@ -150,11 +143,9 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        if (Transaction.Amount == 0m) //new transaction
-        {
-            Transaction.Type = transactionDefaultType;
-            Transaction.RGBA = transactionDefaultColor;
-        }
+        //Set Defaults For New Transaction
+        Transaction.Type = transactionDefaultType;
+        Transaction.RGBA = transactionDefaultColor;
     }
 
     /// <summary>

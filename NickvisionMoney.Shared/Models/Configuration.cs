@@ -53,6 +53,10 @@ public class Configuration
     /// </summary>
     public string TransferDefaultColor { get; set; }
     /// <summary>
+    /// The default color of a group
+    /// </summary>
+    public string GroupDefaultColor { get; set; }
+    /// <summary>
     /// The color of accounts with Checking type
     /// </summary>
     public string AccountCheckingColor { get; set; }
@@ -93,6 +97,7 @@ public class Configuration
         RecentAccount3 = new RecentAccount();
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
+        GroupDefaultColor = "rgb(51,209,122)";
         AccountCheckingColor = "rgb(129,61,156)";
         AccountSavingsColor = "rgb(53,132,228)";
         AccountBusinessColor = "rgb(38,162,105)";
