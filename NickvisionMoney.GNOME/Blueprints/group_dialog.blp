@@ -19,5 +19,15 @@ Adw.MessageDialog _root {
       input-hints: spellcheck;
       activates-default: true;
     }
+
+    Adw.ActionRow {
+        title: _("Color.Field");
+        activatable-widget: _colorButton;
+        
+        [suffix]
+        Gtk.ColorButton _colorButton {
+          valign: center;
+        }
+      }
   }
 }

@@ -53,6 +53,17 @@ Adw.PreferencesWindow _root {
         }
 
         Adw.ActionRow {
+          title: _("GroupColor");
+          subtitle: _("GroupColorDescription");
+          activatable-widget: _groupColor;
+          
+          [suffix]
+          Gtk.ColorButton _groupColor {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
           title: _("AccountCheckingColor");
           subtitle: _("AccountCheckingColorDescription");
           activatable-widget: _accountCheckingColor;

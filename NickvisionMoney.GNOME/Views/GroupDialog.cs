@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -8,11 +9,34 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class GroupDialog : Adw.MessageDialog
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Color
+    {
+        public float Red;
+        public float Green;
+        public float Blue;
+        public float Alpha;
+    }
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gdk_rgba_to_string(ref Color rgba);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
+
     private bool _constructing;
     private readonly GroupDialogController _controller;
 
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Gtk.ColorButton _colorButton;
 
     private readonly Gtk.EventControllerKey _nameKeyController;
     private readonly Gtk.EventControllerKey _descriptionKeyController;
@@ -61,9 +85,14 @@ public partial class GroupDialog : Adw.MessageDialog
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
         _descriptionRow.AddController(_descriptionKeyController);
+        //Color
+        _colorButton.OnColorSet += (sender, e) => Validate();
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
+        var groupColor = new Color();
+        gdk_rgba_parse(ref groupColor, _controller.Group.RGBA);
+        gtk_color_chooser_set_rgba(_colorButton.Handle, ref groupColor);
         Validate();
         _constructing = false;
     }
@@ -82,7 +111,9 @@ public partial class GroupDialog : Adw.MessageDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateGroup(_nameRow.GetText(), _descriptionRow.GetText());
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_colorButton.Handle, ref color);
+        var checkStatus = _controller.UpdateGroup(_nameRow.GetText(), _descriptionRow.GetText(), gdk_rgba_to_string(ref color));
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
         if (checkStatus == GroupCheckStatus.Valid)

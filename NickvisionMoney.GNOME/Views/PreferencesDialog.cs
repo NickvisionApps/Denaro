@@ -56,6 +56,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Adw.ComboRow _themeRow;
     [Gtk.Connect] private readonly Gtk.ColorButton _transactionColor;
     [Gtk.Connect] private readonly Gtk.ColorButton _transferColor;
+    [Gtk.Connect] private readonly Gtk.ColorButton _groupColor;
     [Gtk.Connect] private readonly Gtk.ColorButton _accountCheckingColor;
     [Gtk.Connect] private readonly Gtk.ColorButton _accountSavingsColor;
     [Gtk.Connect] private readonly Gtk.ColorButton _accountBusinessColor;
@@ -85,6 +86,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         };
         _transactionColor.OnColorSet += OnTransactionColorSet;
         _transferColor.OnColorSet += OnTransferColorSet;
+        _groupColor.OnColorSet += OnGroupColorSet;
         _accountCheckingColor.OnColorSet += OnAccountCheckingColorSet;
         _accountSavingsColor.OnColorSet += OnAccountSavingsColorSet;
         _accountBusinessColor.OnColorSet += OnAccountBusinessColorSet;
@@ -108,6 +110,9 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         var transferColor = new Color();
         gdk_rgba_parse(ref transferColor, _controller.TransferDefaultColor);
         gtk_color_chooser_set_rgba(_transferColor.Handle, ref transferColor);
+        var groupColor = new Color();
+        gdk_rgba_parse(ref groupColor, _controller.GroupDefaultColor);
+        gtk_color_chooser_set_rgba(_groupColor.Handle, ref groupColor);
         var accountCheckingColor = new Color();
         gdk_rgba_parse(ref accountCheckingColor, _controller.AccountCheckingColor);
         gtk_color_chooser_set_rgba(_accountCheckingColor.Handle, ref accountCheckingColor);
@@ -179,6 +184,16 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         var color = new Color();
         gtk_color_chooser_get_rgba(_transferColor.Handle, ref color);
         _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
+    }
+
+    /// <summary>
+    /// Occurs when the group color is set
+    /// </summary>
+    private void OnGroupColorSet(Gtk.ColorButton sender, EventArgs e)
+    {
+        var color = new Color();
+        gtk_color_chooser_get_rgba(_groupColor.Handle, ref color);
+        _controller.GroupDefaultColor = gdk_rgba_to_string(ref color);
     }
 
     /// <summary>

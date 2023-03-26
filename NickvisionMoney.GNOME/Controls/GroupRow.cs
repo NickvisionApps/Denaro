@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -12,6 +13,27 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Color
+    {
+        public float Red;
+        public float Green;
+        public float Blue;
+        public float Alpha;
+    }
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gdk_rgba_to_string(ref Color rgba);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
+
+    private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
+
     private CultureInfo _cultureAmount;
 
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
@@ -83,10 +105,20 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     {
         Id = group.Id;
         _cultureAmount = cultureAmount;
+        //Color
+        var color = new Color();
+        if (!gdk_rgba_parse(ref color, group.RGBA))
+        {
+            gdk_rgba_parse(ref color, "#33d17a");
+        }
         //Row Settings
         SetTitle(group.Name);
         SetSubtitle(group.Description);
         //Filter Checkbox
+        var checkCssProvider = Gtk.CssProvider.New();
+        var checkCss = "#check { color: " + gdk_rgba_to_string(ref color) + "; }";
+        gtk_css_provider_load_from_data(checkCssProvider.Handle, checkCss, checkCss.Length);
+        _filterCheckButton.GetStyleContext().AddProvider(checkCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _filterCheckButton.SetActive(filterActive);
         //Amount Label
         _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}");
