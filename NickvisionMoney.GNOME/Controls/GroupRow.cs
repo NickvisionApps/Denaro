@@ -116,7 +116,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         SetSubtitle(group.Description);
         //Filter Checkbox
         var checkCssProvider = Gtk.CssProvider.New();
-        var checkCss = "#chkFilter:checked { color: " + gdk_rgba_to_string(ref color) + "; background: " + gdk_rgba_to_string(ref color) + "; }";
+        var checkCss = "#chkFilter:checked check { background: " + gdk_rgba_to_string(ref color) + "; }";
         gtk_css_provider_load_from_data(checkCssProvider.Handle, checkCss, checkCss.Length);
         _filterCheckButton.GetStyleContext().AddProvider(checkCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
         _filterCheckButton.SetActive(filterActive);
