@@ -137,7 +137,7 @@ public sealed partial class MainWindow : Window
     {
         foreach (var obj in NavView.MenuItems)
         {
-            if(obj is NavigationViewItem navViewItem)
+            if (obj is NavigationViewItem navViewItem)
             {
                 if ((string)ToolTipService.GetToolTip(navViewItem) == path)
                 {

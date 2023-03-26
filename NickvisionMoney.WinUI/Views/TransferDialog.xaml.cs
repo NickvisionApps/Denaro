@@ -244,7 +244,7 @@ public sealed partial class TransferDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                if(!TxtAmount.Text.Contains(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator))
+                if (!TxtAmount.Text.Contains(_controller.CultureForSourceNumberString.NumberFormat.CurrencyDecimalSeparator))
                 {
                     var position = TxtAmount.SelectionStart;
                     TxtAmount.Text = TxtAmount.Text.Remove(position - 1, 1);

@@ -1,12 +1,10 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
-using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
 

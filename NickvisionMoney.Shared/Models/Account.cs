@@ -1728,7 +1728,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if(Directory.Exists(Configuration.Current.CSVBackupFolder))
+        if (Directory.Exists(Configuration.Current.CSVBackupFolder))
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
         }
