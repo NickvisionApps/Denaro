@@ -114,6 +114,14 @@
                                 <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{Binding TransferDefaultColor, Mode=TwoWay, ElementName=This}"/>
                             </labs:SettingsCard>
 
+                            <labs:SettingsCard x:Name="CardGroupDefaultColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnGroupDefaultColor" SelectedColor="{Binding GroupDefaultColor, Mode=TwoWay, ElementName=This}"/>
+                            </labs:SettingsCard>
+
                             <labs:SettingsCard x:Name="CardAccountCheckingColor">
                                 <labs:SettingsCard.HeaderIcon>
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>

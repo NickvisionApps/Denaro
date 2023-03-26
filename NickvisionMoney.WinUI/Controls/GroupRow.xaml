@@ -33,15 +33,19 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <CheckBox x:Name="ChkFilter" Grid.Column="0" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
-                <CheckBox.Content>
-                    <StackPanel Margin="6,0,0,0" Orientation="Vertical">
-                        <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+                <Button x:Name="BtnId" VerticalAlignment="Center" Width="24" Height="20" CornerRadius="6"/>
 
-                        <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
-                    </StackPanel>
-                </CheckBox.Content>
-            </CheckBox>
+                <CheckBox x:Name="ChkFilter" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
+                    <CheckBox.Content>
+                        <StackPanel Margin="6,0,0,0" Orientation="Vertical">
+                            <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
+
+                            <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                        </StackPanel>
+                    </CheckBox.Content>
+                </CheckBox>
+            </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,10,0" Spacing="0">
                 <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>

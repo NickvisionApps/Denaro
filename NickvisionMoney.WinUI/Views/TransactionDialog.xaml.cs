@@ -110,6 +110,9 @@ public sealed partial class TransactionDialog : ContentDialog
         _constructing = false;
     }
 
+    /// <summary>
+    /// The selected color for the transaction
+    /// </summary>
     public Color SelectedColor
     {
         get => _selectedColor;

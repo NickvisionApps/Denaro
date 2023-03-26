@@ -23,6 +23,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     private readonly Action<object> _initializeWithWindow;
     private Color _transactionDefaultColor;
     private Color _transferDefaultColor;
+    private Color _groupDefaultColor;
     private Color _accountCheckingColor;
     private Color _accountSavingsColor;
     private Color _accountBusinessColor;
@@ -62,6 +63,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardTransactionDefaultColor.Description = _controller.Localizer["TransactionColorDescription"];
         CardTransferDefaultColor.Header = _controller.Localizer["TransferColor"];
         CardTransferDefaultColor.Description = _controller.Localizer["TransferColorDescription"];
+        CardGroupDefaultColor.Header = _controller.Localizer["GroupColor"];
+        CardGroupDefaultColor.Description = _controller.Localizer["GroupColorDescription"];
         CardAccountCheckingColor.Header = _controller.Localizer["AccountCheckingColor"];
         CardAccountSavingsColor.Header = _controller.Localizer["AccountSavingsColor"];
         CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
@@ -83,6 +86,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
         TransferDefaultColor = ColorHelpers.FromRGBA(_controller.TransferDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
+        GroupDefaultColor = ColorHelpers.FromRGBA(_controller.GroupDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountCheckingColor = ColorHelpers.FromRGBA(_controller.AccountCheckingColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
@@ -118,6 +122,22 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         {
             _transferDefaultColor = value;
             _controller.TransferDefaultColor = _transferDefaultColor.ToRGBA();
+            _controller.SaveConfiguration();
+            NotifyPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// The default color to use for a group
+    /// </summary>
+    public Color GroupDefaultColor
+    {
+        get => _groupDefaultColor;
+
+        set
+        {
+            _groupDefaultColor = value;
+            _controller.GroupDefaultColor = _groupDefaultColor.ToRGBA();
             _controller.SaveConfiguration();
             NotifyPropertyChanged();
         }
