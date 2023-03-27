@@ -313,11 +313,11 @@
 	</data>
 
 	<data name="TransactionNumber" xml:space="preserve">
-		<value>{0} Transaction</value>
+		<value>Transaction ({0})</value>
 	</data>
 
 	<data name="TransactionNumber.Plural" xml:space="preserve">
-		<value>{0} Transactions</value>
+		<value>Transactions ({0})</value>
 	</data>
 
 	<data name="NoTransactionsTitle" xml:space="preserve">
