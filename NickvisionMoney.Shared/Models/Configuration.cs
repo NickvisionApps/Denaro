@@ -130,22 +130,58 @@ public class Configuration
     /// <summary>
     /// Gets the list of recent accounts available
     /// </summary>
+    [JsonIgnore]
     public List<RecentAccount> RecentAccounts
     {
         get
         {
             var recents = new List<RecentAccount>();
+            var update = false;
             if (File.Exists(RecentAccount1.Path))
             {
                 recents.Add(RecentAccount1);
+            }
+            else
+            {
+                update = true;
             }
             if (File.Exists(RecentAccount2.Path))
             {
                 recents.Add(RecentAccount2);
             }
+            else
+            {
+                update = true;
+            }
             if (File.Exists(RecentAccount3.Path))
             {
                 recents.Add(RecentAccount3);
+            }
+            else
+            {
+                update = true;
+            }
+            if(update)
+            {
+                if(recents.Count == 0)
+                {
+                    RecentAccount1 = new RecentAccount();
+                    RecentAccount2 = new RecentAccount();
+                    RecentAccount3 = new RecentAccount();
+                }
+                else if(recents.Count == 1)
+                {
+                    RecentAccount1 = recents[0];
+                    RecentAccount2 = new RecentAccount();
+                    RecentAccount3 = new RecentAccount();
+                }
+                else if (recents.Count == 2)
+                {
+                    RecentAccount1 = recents[0];
+                    RecentAccount2 = recents[1];
+                    RecentAccount3 = new RecentAccount();
+                }
+                Save();
             }
             return recents;
         }
