@@ -144,3 +144,20 @@ row.error button.circular {
 .id-image {
   border-radius: 34px;
 }
+
+/* Recent Account Row */
+.wallet-button {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.wallet-bg {
+  border-radius: 6px;
+}
+
+.tag-light {
+  color: #ffffff;
+}
+
+.tag-dark {
+  color: rgba(0, 0, 0, 0.8);
+}

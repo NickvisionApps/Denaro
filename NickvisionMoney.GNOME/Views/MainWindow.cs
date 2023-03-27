@@ -32,9 +32,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -520,49 +517,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Creates a row for recent accounts lists
     /// </summary>
-    /// <param name="accountPath">string</param>
+    /// <param name="recentAccount">Account to create the row for</param>
+    /// <param name="onStartScreen">Whether the row will appear on start screen or in popover</param>
     private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
-        var row = Adw.ActionRow.New();
-        row.SetTitle(recentAccount.Name);
-        row.SetSubtitle(recentAccount.Path);
-        var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
-        button.SetHalign(Gtk.Align.Center);
-        button.SetValign(Gtk.Align.Center);
-        button.SetFocusable(false);
-        var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-        var btnCssProvider = Gtk.CssProvider.New();
-        if (onStartScreen)
-        {
-            button.AddCssClass("wallet-button");
-            var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
-            var btnType = Gtk.Button.NewWithLabel(strType);
-            btnType.SetValign(Gtk.Align.Center);
-            btnType.SetFocusable(false);
-            btnType.SetCanTarget(false);
-            var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            btnType.SetName("btnType");
-            btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
-            btnType.AddCssClass("account-tag");
-            row.AddSuffix(btnType);
-        }
-        else
-        {
-            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            button.SetName("btnWallet");
-            button.GetStyleContext().AddProvider(btnCssProvider, 800);
-        }
-        button.OnClicked += async (Gtk.Button sender, EventArgs e) =>
+        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen, _controller.Localizer);
+        row.OnOpenAccount += async (sender, e) =>
         {
             _accountPopover.Popdown();
             await _controller.AddAccountAsync(row.GetSubtitle()!);
         };
-        row.AddPrefix(button);
-        row.SetActivatableWidget(button);
         return row;
     }
 
