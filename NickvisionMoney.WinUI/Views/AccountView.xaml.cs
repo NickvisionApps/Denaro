@@ -63,9 +63,10 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         ToolTipService.SetToolTip(MenuShowHideGrous, _controller.Localizer["ToggleGroups", "Tooltip"]);
         MenuAccountSettings.Label = _controller.Localizer["AccountSettings"];
         ToolTipService.SetToolTip(MenuAccountSettings, _controller.Localizer["AccountSettings", "Tooltip"]);
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}";
-        LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}";
-        LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}";
+        LblOverview.Text = _controller.Localizer["Overview", "Today"];
+        LblIncomeTitle.Text = _controller.Localizer["Income"];
+        LblExpenseTitle.Text = _controller.Localizer["Expense"];
+        LblTotalTitle.Text = _controller.Localizer["Total"];
         LblGroups.Text = _controller.Localizer["Groups"];
         MenuSort.Label = _controller.Localizer["Sort"];
         MenuOrderBy.Text = _controller.Localizer["OrderBy"];
