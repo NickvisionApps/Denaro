@@ -167,8 +167,18 @@
             </StackPanel>
 
             <wct:DockPanel Grid.Row="4" LastChildFill="True">
-                <Border x:Name="SectionGroups" wct:DockPanel.Dock="Left" VerticalAlignment="Stretch" MinWidth="360" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <Border.ContextFlyout>
+                <Grid x:Name="SectionGroups" wct:DockPanel.Dock="Left" VerticalAlignment="Stretch" MinWidth="360" RowSpacing="6" ColumnSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem x:Name="MenuContextNewGroup" Click="NewGroup">
                                 <MenuFlyoutItem.Icon>
@@ -176,157 +186,150 @@
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyout>
-                    </Border.ContextFlyout>
+                    </Grid.ContextFlyout>
 
-                    <Grid Margin="6,6,6,6" RowSpacing="6">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <TextBlock x:Name="LblGroups" Grid.Row="0" Grid.Column="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                        <TextBlock x:Name="LblGroups" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                        <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
+                    </ScrollViewer>
 
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                            <ListView x:Name="ListGroups" SelectionMode="Single" SelectionChanged="ListGroups_SelectionChanged"/>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
+                    <AppBarSeparator Grid.Row="1" Grid.Column="1"/>
+                </Grid>
 
-                <Border x:Name="SectionTransactions" wct:DockPanel.Dock="Right" VerticalAlignment="Stretch" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                    <Grid Margin="6,6,6,6" RowSpacing="6">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <TextBlock x:Name="LblTransactions" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                <Grid x:Name="SectionTransactions" wct:DockPanel.Dock="Right" VerticalAlignment="Stretch" Margin="6,6,6,6" RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                        <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                            <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
-                                <CommandBar.Content>
-                                    <AutoSuggestBox x:Name="TxtSearchDescription" Margin="6,0,6,0" Width="300" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
-                                </CommandBar.Content>
+                    <TextBlock x:Name="LblTransactions" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                <CommandBar.PrimaryCommands>
-                                    <AppBarSeparator />
+                    <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                            <CommandBar.Content>
+                                <AutoSuggestBox x:Name="TxtSearchDescription" Margin="6,0,6,0" Width="300" QueryIcon="Find" TextChanged="TxtSearchDescription_TextChanged"/>
+                            </CommandBar.Content>
 
-                                    <AppBarButton x:Name="MenuSort">
-                                        <AppBarButton.Icon>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
-                                        </AppBarButton.Icon>
+                            <CommandBar.PrimaryCommands>
+                                <AppBarSeparator />
 
-                                        <AppBarButton.Flyout>
-                                            <MenuFlyout Placement="Bottom">
-                                                <MenuFlyoutSubItem x:Name="MenuOrderBy">
-                                                    <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                <AppBarButton x:Name="MenuSort">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
+                                    </AppBarButton.Icon>
 
-                                                    <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
-                                                </MenuFlyoutSubItem>
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout Placement="Bottom">
+                                            <MenuFlyoutSubItem x:Name="MenuOrderBy">
+                                                <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
 
-                                                <MenuFlyoutSubItem x:Name="MenuSortBy">
-                                                    <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                            </MenuFlyoutSubItem>
 
-                                                    <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
+                                            <MenuFlyoutSubItem x:Name="MenuSortBy">
+                                                <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
 
-                                                    <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
-                                                </MenuFlyoutSubItem>
-                                            </MenuFlyout>
-                                        </AppBarButton.Flyout>
-                                    </AppBarButton>
+                                                <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
 
-                                    <AppBarSeparator/>
-
-                                    <AppBarButton x:Name="MenuType">
-                                        <AppBarButton.Icon>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
-                                        </AppBarButton.Icon>
-
-                                        <AppBarButton.Flyout>
-                                            <MenuFlyout Placement="Bottom">
-                                                <ToggleMenuFlyoutItem x:Name="MenuFilterIncome" IsChecked="True" Click="MenuFilterIncome_Changed"/>
-
-                                                <ToggleMenuFlyoutItem x:Name="MenuFilterExpense" IsChecked="True" Click="MenuFilterExpense_Changed"/>
-                                            </MenuFlyout>
-                                        </AppBarButton.Flyout>
-                                    </AppBarButton>
-
-                                    <AppBarSeparator/>
-
-                                    <AppBarButton x:Name="MenuDate">
-                                        <AppBarButton.Icon>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC92;"/>
-                                        </AppBarButton.Icon>
-
-                                        <AppBarButton.Flyout>
-                                            <Flyout Placement="Bottom">
-                                                <StackPanel Orientation="Vertical" Spacing="6">
-                                                    <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
-
-                                                    <Expander x:Name="ExpDateRange" HorizontalAlignment="Stretch" Header="Select Range">
-                                                        <Expander.Content>
-                                                            <StackPanel Spacing="12">
-                                                                <DatePicker x:Name="DateRangeStart" DateChanged="DateRangeStart_DateChanged"/>
-
-                                                                <DatePicker x:Name="DateRangeEnd" DateChanged="DateRangeEnd_DateChanged"/>
-                                                            </StackPanel>
-                                                        </Expander.Content>
-                                                    </Expander>
-                                                </StackPanel>
-                                            </Flyout>
-                                        </AppBarButton.Flyout>
-                                    </AppBarButton>
-
-                                    <AppBarSeparator/>
-
-                                    <AppBarButton x:Name="MenuResetAllFilters" Click="ResetAllFilters">
-                                        <AppBarButton.Icon>
-                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1C5;"/>
-                                        </AppBarButton.Icon>
-                                    </AppBarButton>
-                                </CommandBar.PrimaryCommands>
-                            </CommandBar>
-                        </Border>
-
-                        <nickvision:ViewStack x:Name="ViewStackTransactions" Grid.Row="2">
-                            <nickvision:ViewStack.Pages>
-                                <nickvision:ViewStackPage PageName="NoTransactions">
-                                    <nickvision:StatusPage x:Name="StatusPageNoTransactions" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </nickvision:ViewStackPage>
-
-                                <nickvision:ViewStackPage PageName="Transactions">
-                                    <nickvision:ViewStackPage.ContextFlyout>
-                                        <MenuFlyout>
-                                            <MenuFlyoutItem x:Name="MenuContextNewTransaction" Click="NewTransaction">
-                                                <MenuFlyoutItem.Icon>
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
-                                                </MenuFlyoutItem.Icon>
-                                            </MenuFlyoutItem>
-
-                                            <MenuFlyoutSeparator/>
-
-                                            <MenuFlyoutItem x:Name="MenuContextTransferMoney" Click="TransferMoney">
-                                                <MenuFlyoutItem.Icon>
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
-                                                </MenuFlyoutItem.Icon>
-                                            </MenuFlyoutItem>
+                                                <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
+                                            </MenuFlyoutSubItem>
                                         </MenuFlyout>
-                                    </nickvision:ViewStackPage.ContextFlyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
 
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                        <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
-                                            <GridView.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <wct:WrapPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </GridView.ItemsPanel>
-                                        </GridView>
-                                    </ScrollViewer>
-                                </nickvision:ViewStackPage>
-                            </nickvision:ViewStack.Pages>
-                        </nickvision:ViewStack>
-                    </Grid>
-                </Border>
+                                <AppBarSeparator/>
+
+                                <AppBarButton x:Name="MenuType">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                                    </AppBarButton.Icon>
+
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout Placement="Bottom">
+                                            <ToggleMenuFlyoutItem x:Name="MenuFilterIncome" IsChecked="True" Click="MenuFilterIncome_Changed"/>
+
+                                            <ToggleMenuFlyoutItem x:Name="MenuFilterExpense" IsChecked="True" Click="MenuFilterExpense_Changed"/>
+                                        </MenuFlyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+
+                                <AppBarSeparator/>
+
+                                <AppBarButton x:Name="MenuDate">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC92;"/>
+                                    </AppBarButton.Icon>
+
+                                    <AppBarButton.Flyout>
+                                        <Flyout Placement="Bottom">
+                                            <StackPanel Orientation="Vertical" Spacing="6">
+                                                <CalendarView x:Name="Calendar" HorizontalAlignment="Stretch" CornerRadius="8" SelectionMode="Single" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+
+                                                <Expander x:Name="ExpDateRange" HorizontalAlignment="Stretch" Header="Select Range">
+                                                    <Expander.Content>
+                                                        <StackPanel Spacing="12">
+                                                            <DatePicker x:Name="DateRangeStart" DateChanged="DateRangeStart_DateChanged"/>
+
+                                                            <DatePicker x:Name="DateRangeEnd" DateChanged="DateRangeEnd_DateChanged"/>
+                                                        </StackPanel>
+                                                    </Expander.Content>
+                                                </Expander>
+                                            </StackPanel>
+                                        </Flyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+
+                                <AppBarSeparator/>
+
+                                <AppBarButton x:Name="MenuResetAllFilters" Click="ResetAllFilters">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1C5;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
+                            </CommandBar.PrimaryCommands>
+                        </CommandBar>
+                    </Border>
+
+                    <nickvision:ViewStack x:Name="ViewStackTransactions" Grid.Row="2">
+                        <nickvision:ViewStack.Pages>
+                            <nickvision:ViewStackPage PageName="NoTransactions">
+                                <nickvision:StatusPage x:Name="StatusPageNoTransactions" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </nickvision:ViewStackPage>
+
+                            <nickvision:ViewStackPage PageName="Transactions">
+                                <nickvision:ViewStackPage.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Name="MenuContextNewTransaction" Click="NewTransaction">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE14D;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+
+                                        <MenuFlyoutSeparator/>
+
+                                        <MenuFlyoutItem x:Name="MenuContextTransferMoney" Click="TransferMoney">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE140;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </nickvision:ViewStackPage.ContextFlyout>
+
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <GridView x:Name="ListTransactions" SelectionMode="Single" SelectionChanged="ListTransactions_SelectionChanged">
+                                        <GridView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <wct:WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </GridView.ItemsPanel>
+                                    </GridView>
+                                </ScrollViewer>
+                            </nickvision:ViewStackPage>
+                        </nickvision:ViewStack.Pages>
+                    </nickvision:ViewStack>
+                </Grid>
             </wct:DockPanel>
         </Grid>
 
