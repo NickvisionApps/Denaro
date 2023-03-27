@@ -104,6 +104,12 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     public bool Equals(Group? obj) => Equals((object?)obj);
 
     /// <summary>
+    /// Gets a hash code for the object
+    /// </summary>
+    /// <returns>The hash code for the object</returns>
+    public override int GetHashCode() => Id.GetHashCode();
+
+    /// <summary>
     /// Compares two Group objects by ==
     /// </summary>
     /// <param name="a">The first Group object</param>

@@ -115,6 +115,31 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     }
 
     /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the Transaction object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            Receipt?.Dispose();
+        }
+        _disposed = true;
+    }
+
+    /// <summary>
     /// Clones the transaction
     /// </summary>
     /// <returns>A new transaction</returns>
@@ -162,31 +187,6 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     }
 
     /// <summary>
-    /// Frees resources used by the Transaction object
-    /// </summary>
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// Frees resources used by the Transaction object
-    /// </summary>
-    protected virtual void Dispose(bool disposing)
-    {
-        if (_disposed)
-        {
-            return;
-        }
-        if (disposing)
-        {
-            Receipt?.Dispose();
-        }
-        _disposed = true;
-    }
-
-    /// <summary>
     /// Gets whether or not an object is equal to this Transaction
     /// </summary>
     /// <param name="obj">The object to compare</param>
@@ -206,6 +206,12 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// <param name="obj">The Transaction? object to compare</param>
     /// <returns>True if equals, else false</returns>
     public bool Equals(Transaction? obj) => Equals((object?)obj);
+
+    /// <summary>
+    /// Gets a hash code for the object
+    /// </summary>
+    /// <returns>The hash code for the object</returns>
+    public override int GetHashCode() => Id.GetHashCode();
 
     /// <summary>
     /// Compares two Transaction objects by ==

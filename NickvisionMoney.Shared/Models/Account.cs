@@ -229,7 +229,7 @@ public class Account : IDisposable
         {
             //Create Temp Decrypted Database
             var tempPath = $"{Path}.decrypt";
-            using var command = _database.CreateCommand();
+            using var command = _database!.CreateCommand();
             command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
             command.ExecuteNonQuery();
             command.CommandText = $"SELECT sqlcipher_export('plaintext')";
@@ -252,7 +252,7 @@ public class Account : IDisposable
             _database.Open();
             _isEncrypted = false;
         }
-        using var cmdQuote = _database.CreateCommand();
+        using var cmdQuote = _database!.CreateCommand();
         cmdQuote.CommandText = "SELECT quote($password)";
         cmdQuote.Parameters.AddWithValue("$password", password);
         var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
@@ -316,7 +316,7 @@ public class Account : IDisposable
             return false;
         }
         //Setup Metadata Table
-        using var cmdTableMetadata = _database.CreateCommand();
+        using var cmdTableMetadata = _database!.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
@@ -614,7 +614,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool UpdateMetadata(AccountMetadata metadata)
     {
-        using var cmdUpdateMetadata = _database.CreateCommand();
+        using var cmdUpdateMetadata = _database!.CreateCommand();
         cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
@@ -745,7 +745,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddGroupAsync(Group group)
     {
-        using var cmdAddGroup = _database.CreateCommand();
+        using var cmdAddGroup = _database!.CreateCommand();
         cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
         cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
         cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
@@ -768,7 +768,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateGroupAsync(Group group)
     {
-        using var cmdUpdateGroup = _database.CreateCommand();
+        using var cmdUpdateGroup = _database!.CreateCommand();
         cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
         cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
         cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
@@ -790,7 +790,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteGroupAsync(uint id)
     {
-        using var cmdDeleteGroup = _database.CreateCommand();
+        using var cmdDeleteGroup = _database!.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
@@ -821,7 +821,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
-        using var cmdAddTransaction = _database.CreateCommand();
+        using var cmdAddTransaction = _database!.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -878,7 +878,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
-        using var cmdUpdateTransaction = _database.CreateCommand();
+        using var cmdUpdateTransaction = _database!.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
@@ -993,7 +993,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteTransactionAsync(uint id)
     {
-        using var cmdDeleteTransaction = _database.CreateCommand();
+        using var cmdDeleteTransaction = _database!.CreateCommand();
         cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
         cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
@@ -1719,6 +1719,7 @@ public class Account : IDisposable
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return false;
         }
         return true;
@@ -1729,7 +1730,7 @@ public class Account : IDisposable
     /// </summary>
     private void FreeMemory()
     {
-        using var cmdClean = _database.CreateCommand();
+        using var cmdClean = _database!.CreateCommand();
         cmdClean.CommandText = "PRAGMA shrink_memory";
         cmdClean.ExecuteNonQuery();
     }
