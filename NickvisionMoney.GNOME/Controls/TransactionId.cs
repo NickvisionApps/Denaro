@@ -23,6 +23,7 @@ public partial class TransactionId : Gtk.Overlay
     [return: MarshalAs(UnmanagedType.I1)]
     private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
 
+    private readonly Gtk.SizeGroup _sizeGroup;
     private readonly GdkPixbuf.Pixbuf _pixbuf;
     private readonly uint _id;
 
@@ -34,6 +35,9 @@ public partial class TransactionId : Gtk.Overlay
         _id = id;
         builder.Connect(this);
         _pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
+        _sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Horizontal);
+        _sizeGroup.AddWidget(this);
+        _sizeGroup.AddWidget(_idLabel);
     }
 
     /// <summary>
@@ -77,12 +81,14 @@ public partial class TransactionId : Gtk.Overlay
         _idLabel.SetVisible(!isSmall);
         if (isSmall)
         {
-            SetSizeRequest(12, 12);
+            _colorImage.SetSizeRequest(12, 12);
             _colorImage.SetOpacity(1.0);
+            _sizeGroup.RemoveWidget(_idLabel);
         }
         else
         {
-            SetSizeRequest(34, 34);
+            _sizeGroup.AddWidget(_idLabel);
+            _colorImage.SetSizeRequest(34, 34);
             _colorImage.SetOpacity(0.1);
         }
     }
