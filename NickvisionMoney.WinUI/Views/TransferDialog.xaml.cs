@@ -118,7 +118,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString);
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString!);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }
