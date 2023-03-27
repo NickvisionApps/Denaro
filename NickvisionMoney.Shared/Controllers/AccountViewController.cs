@@ -497,7 +497,7 @@ public class AccountViewController : IDisposable
         {
             groups.Add(pair.Key, pair.Value.Name);
         }
-        return new TransactionDialogController(_account.Transactions[id], groups, true, CultureForNumberString, CultureForDateString, Localizer);
+        return new TransactionDialogController(_account.Transactions[id], groups, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
@@ -525,7 +525,7 @@ public class AccountViewController : IDisposable
             RepeatFrom = source.RepeatFrom,
             RepeatEndDate = source.RepeatEndDate
         };
-        return new TransactionDialogController(toCopy, groups, false, CultureForNumberString, CultureForDateString, Localizer);
+        return new TransactionDialogController(toCopy, groups, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
@@ -554,7 +554,7 @@ public class AccountViewController : IDisposable
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(_account.Groups[id], existingNames, Localizer);
+        return new GroupDialogController(_account.Groups[id], existingNames, GroupDefaultColor, Localizer);
     }
 
     /// <summary>

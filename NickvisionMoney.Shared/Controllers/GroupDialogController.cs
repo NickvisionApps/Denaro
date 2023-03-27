@@ -48,8 +48,9 @@ public class GroupDialogController
     /// </summary>
     /// <param name="group">The Group object represented by the controller</param>
     /// <param name="existingNames">The list of existing group names</param>
+    /// <param name="groupDefaultColor">A default color for the group</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal GroupDialogController(Group group, List<string> existingNames, Localizer localizer)
+    internal GroupDialogController(Group group, List<string> existingNames, string groupDefaultColor, Localizer localizer)
     {
         _originalName = group.Name;
         _existingNames = existingNames;
@@ -57,6 +58,10 @@ public class GroupDialogController
         Group = (Group)group.Clone();
         Accepted = false;
         IsEditing = true;
+        if(string.IsNullOrEmpty(Group.RGBA))
+        {
+            Group.RGBA = groupDefaultColor;
+        }
     }
 
     /// <summary>
