@@ -1,3 +1,4 @@
+using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
@@ -13,9 +14,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransferDialog : Adw.Window
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
@@ -114,21 +112,8 @@ public partial class TransferDialog : Adw.Window
         //Load
         foreach (var recentAccount in _controller.RecentAccounts)
         {
-            var row = Adw.ActionRow.New();
-            row.SetTitle(recentAccount.Name);
-            row.SetSubtitle(recentAccount.Path);
-            var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
-            button.SetHalign(Gtk.Align.Center);
-            button.SetValign(Gtk.Align.Center);
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
-            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            button.SetName("btnWallet");
-            button.GetStyleContext().AddProvider(btnCssProvider, 800);
-            button.OnClicked += (Gtk.Button sender, EventArgs e) =>
+            var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, _controller.Localizer);
+            row.OnOpenAccount += (sender, e) =>
             {
                 _recentAccountsPopover.Popdown();
                 _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
@@ -141,8 +126,6 @@ public partial class TransferDialog : Adw.Window
                 _destinationCurrencyRow.SetText("");
                 Validate();
             };
-            row.AddPrefix(button);
-            row.SetActivatableWidget(button);
             _recentAccountsGroup.Add(row);
         }
         _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
