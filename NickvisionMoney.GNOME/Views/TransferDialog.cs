@@ -40,6 +40,7 @@ public partial class TransferDialog : Adw.Window
     private readonly Gtk.Window _parentWindow;
 
     [Gtk.Connect] private readonly Gtk.Button _selectAccountButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _recentAccountsButton;
     [Gtk.Connect] private readonly Gtk.Popover _recentAccountsPopover;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Adw.ActionRow _destinationAccountRow;
@@ -110,23 +111,30 @@ public partial class TransferDialog : Adw.Window
         _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
         _destinationCurrencyRow.AddController(_destCurrencyKeyController);
         //Load
-        foreach (var recentAccount in _controller.RecentAccounts)
+        if (_controller.RecentAccounts.Count > 0)
         {
-            var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, _controller.Localizer);
-            row.OnOpenAccount += (sender, e) =>
+            foreach (var recentAccount in _controller.RecentAccounts)
             {
-                _recentAccountsPopover.Popdown();
-                _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
-                _destinationPasswordRow.SetVisible(false);
-                _destinationPasswordRow.SetSensitive(true);
-                _destinationPasswordRow.SetText("");
-                _amountRow.SetText("");
-                _conversionRateGroup.SetVisible(false);
-                _sourceCurrencyRow.SetText("");
-                _destinationCurrencyRow.SetText("");
-                Validate();
-            };
-            _recentAccountsGroup.Add(row);
+                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, _controller.Localizer);
+                row.OnOpenAccount += (sender, e) =>
+                {
+                    _recentAccountsPopover.Popdown();
+                    _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
+                    _destinationPasswordRow.SetVisible(false);
+                    _destinationPasswordRow.SetSensitive(true);
+                    _destinationPasswordRow.SetText("");
+                    _amountRow.SetText("");
+                    _conversionRateGroup.SetVisible(false);
+                    _sourceCurrencyRow.SetText("");
+                    _destinationCurrencyRow.SetText("");
+                    Validate();
+                };
+                _recentAccountsGroup.Add(row);
+            }
+        }
+        else
+        {
+            _recentAccountsButton.SetSensitive(false);
         }
         _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
         Validate();
