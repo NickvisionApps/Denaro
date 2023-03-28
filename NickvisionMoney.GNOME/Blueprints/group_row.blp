@@ -8,11 +8,27 @@ Adw.ActionRow _root {
   activatable-widget: _editButton;
   
   [prefix]
-  Gtk.CheckButton _filterCheckButton {
-    name: "chkFilter";
+  Gtk.Overlay _filterOverlay {
     valign: center;
-    
-    styles ["selection-mode"]
+
+    child: Gtk.Image _filterCheckBackground {
+      halign: fill;
+      valign: fill;
+      overflow: hidden;
+      margin-top: 2;
+      margin-start: 2;
+      margin-end: 2;
+      margin-bottom: 2;
+
+      styles ["group-filter-bg"]
+    };
+
+    [overlay]
+    Gtk.CheckButton _filterCheckButton {
+      valign: center;
+      
+      styles ["selection-mode", "group-filter-check"]
+    }
   }
   
   [suffix]

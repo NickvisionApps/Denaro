@@ -29,13 +29,10 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
-    private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
-
     private CultureInfo _cultureAmount;
 
+    [Gtk.Connect] private readonly Gtk.Overlay _filterOverlay;
+    [Gtk.Connect] private readonly Gtk.Image _filterCheckBackground;
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
@@ -115,10 +112,33 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         SetTitle(group.Name);
         SetSubtitle(group.Description);
         //Filter Checkbox
-        var checkCssProvider = Gtk.CssProvider.New();
-        var checkCss = "#chkFilter:checked check { background: " + gdk_rgba_to_string(ref color) + "; }";
-        gtk_css_provider_load_from_data(checkCssProvider.Handle, checkCss, checkCss.Length);
-        _filterCheckButton.GetStyleContext().AddProvider(checkCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+        var sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Both);
+        sizeGroup.AddWidget(_filterOverlay);
+        sizeGroup.AddWidget(_filterCheckButton);
+        _filterCheckButton.OnToggled += (sender, e) => {
+            if (_filterCheckButton.GetActive())
+            {
+                _filterCheckBackground.SetVisible(true);
+                _filterCheckButton.RemoveCssClass("group-filter-disabled");
+            }
+            else
+            {
+                _filterCheckBackground.SetVisible(false);
+                _filterCheckButton.AddCssClass("group-filter-disabled");
+            }
+        };
+        var red = (int)(color.Red * 255);
+        var green = (int)(color.Green * 255);
+        var blue = (int)(color.Blue * 255);
+        var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
+        uint colorPixbuf;
+        if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out colorPixbuf))
+        {
+            pixbuf.Fill(colorPixbuf);
+            _filterCheckBackground.SetFromPixbuf(pixbuf);
+        }
+        var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
+        _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
         _filterCheckButton.SetActive(filterActive);
         //Amount Label
         _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}");

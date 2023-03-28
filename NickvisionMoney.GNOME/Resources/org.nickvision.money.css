@@ -106,3 +106,28 @@ row.error button.circular {
   border-bottom-width: 1px;
   border-bottom-color: @borders;
 }
+
+/* Group Checkbutton */
+.group-filter-bg {
+  border-radius: 32px;
+}
+
+.group-filter-check check {
+  background-color: #00000000;
+}
+
+.group-filter-check-light check {
+  color: #ffffff;
+}
+
+.group-filter-check-dark check {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.group-filter-disabled check {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12) inset;
+}
+
+.group-filter-disabled check:hover {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16) inset;
+}
