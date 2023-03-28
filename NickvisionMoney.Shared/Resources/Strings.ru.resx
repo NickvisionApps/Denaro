@@ -89,7 +89,7 @@
     <value>Параметры</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value>Сочетания клавиш</value>
+		<value>Комбинации клавиш</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
