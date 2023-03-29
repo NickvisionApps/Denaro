@@ -563,7 +563,14 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
+                var done = false;
+                GLib.Functions.IdleAddFull(120, (x) =>
+                {
+                    g_main_context_iteration(g_main_context_default(), false);
+                    return !done;
+                });
+                await _controller.ImportFromFileAsync(path ?? "");
+                done = true;
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -708,7 +715,14 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            var done = false;
+            GLib.Functions.IdleAddFull(120, (x) =>
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+                return !done;
+            });
+            await _controller.AddTransactionAsync(transactionController.Transaction);
+            done = true;
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -739,7 +753,14 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            var done = false;
+            GLib.Functions.IdleAddFull(120, (x) =>
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+                return !done;
+            });
+            await _controller.AddTransactionAsync(transactionController.Transaction);
+            done = true;
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -788,11 +809,15 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            await Task.Run(async () =>
+                            var done = false;
+                            GLib.Functions.IdleAddFull(120, (x) =>
                             {
-                                await _controller.DeleteGeneratedTransactionsAsync(id);
-                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                g_main_context_iteration(g_main_context_default(), false);
+                                return !done;
                             });
+                            await _controller.DeleteGeneratedTransactionsAsync(id);
+                            await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                            done = true;
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -809,7 +834,14 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
+                            var done = false;
+                            GLib.Functions.IdleAddFull(120, (x) =>
+                            {
+                                g_main_context_iteration(g_main_context_default(), false);
+                                return !done;
+                            });
+                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                            done = true;
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -837,7 +869,14 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
+                            var done = false;
+                            GLib.Functions.IdleAddFull(120, (x) =>
+                            {
+                                g_main_context_iteration(g_main_context_default(), false);
+                                return !done;
+                            });
+                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
+                            done = true;
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -858,7 +897,14 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                var done = false;
+                GLib.Functions.IdleAddFull(120, (x) =>
+                {
+                    g_main_context_iteration(g_main_context_default(), false);
+                    return !done;
+                });
+                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                done = true;
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -895,7 +941,14 @@ public partial class AccountView : Adw.Bin
                     _spinner.Start();
                     _paneScroll.SetSensitive(false);
                     //Work
-                    await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
+                    var done = false;
+                    GLib.Functions.IdleAddFull(120, (x) =>
+                    {
+                        g_main_context_iteration(g_main_context_default(), false);
+                        return !done;
+                    });
+                    await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                    done = true;
                     //Stop Spinner
                     _spinner.Stop();
                     _spinnerBin.SetVisible(false);
@@ -941,7 +994,14 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+            var done = false;
+            GLib.Functions.IdleAddFull(120, (x) =>
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+                return !done;
+            });
+            await _controller.AddGroupAsync(groupController.Group);
+            done = true;
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -972,7 +1032,14 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
+            var done = false;
+            GLib.Functions.IdleAddFull(120, (x) =>
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+                return !done;
+            });
+            await _controller.UpdateGroupAsync(groupController.Group);
+            done = true;
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
