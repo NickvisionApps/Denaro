@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -12,11 +13,17 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Transaction>
 {
+    private delegate bool GSourceFunc(nint data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
+
+    private Transaction _transaction;
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
     private TransactionId _idWidget;
+    private readonly GSourceFunc _updateRowCallback;
 
     [Gtk.Connect] private readonly Adw.ActionRow _row;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
@@ -27,7 +34,9 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// <summary>
     /// The id of the Transaction
     /// </summary>
-    public uint Id { get; private set; }
+    public uint Id {
+        get => _transaction.Id;
+    }
 
     public Gtk.FlowBoxChild? Container { get; set; }
 
@@ -46,6 +55,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
         _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
+        _updateRowCallback = UpdateRowSync;
         //Build UI
         builder.Connect(this);
         _editButton.OnClicked += Edit;
@@ -98,23 +108,29 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
     public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
-    {
-        Id = transaction.Id;
+    {   
+        _transaction = transaction;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
+        g_main_context_invoke(IntPtr.Zero, _updateRowCallback, IntPtr.Zero);
+    }
+
+    private bool UpdateRowSync(nint data)
+    {
         //Row Settings
-        _row.SetTitle(transaction.Description);
-        _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
-        _idWidget.UpdateColor(transaction.RGBA);
+        _row.SetTitle(_transaction.Description);
+        _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
+        _idWidget.UpdateColor(_transaction.RGBA);
         //Amount Label
-        _amountLabel.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToAmountString(_cultureAmount)}");
-        _amountLabel.RemoveCssClass(transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
-        _amountLabel.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+        _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
+        _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
+        _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
         //Buttons Box
-        _editButton.SetVisible(transaction.RepeatFrom <= 0);
-        _editButton.SetSensitive(transaction.RepeatFrom <= 0);
-        _deleteButton.SetVisible(transaction.RepeatFrom <= 0);
-        _deleteButton.SetSensitive(transaction.RepeatFrom <= 0);
+        _editButton.SetVisible(_transaction.RepeatFrom <= 0);
+        _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
+        _deleteButton.SetVisible(_transaction.RepeatFrom <= 0);
+        _deleteButton.SetSensitive(_transaction.RepeatFrom <= 0);
+        return false;
     }
 
     public void Show() => Container!.SetVisible(true);

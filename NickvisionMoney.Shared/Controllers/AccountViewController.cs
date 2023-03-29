@@ -676,7 +676,7 @@ public class AccountViewController : IDisposable
     {
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-        await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
+        await Task.Run(() => _account.UpdateSourceTransactionAsync(transaction, updateGenerated));
         TransactionRows[transaction.Id].UpdateRow(transaction, CultureForNumberString, CultureForDateString);
         foreach (var pair in _account.Transactions)
         {
