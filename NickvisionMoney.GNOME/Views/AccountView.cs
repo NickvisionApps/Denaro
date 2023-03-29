@@ -677,7 +677,7 @@ public partial class AccountView : Adw.Bin
             _controller.UpdateMetadata(accountSettingsController.Metadata);
             if (accountSettingsController.NewPassword != null)
             {
-                _controller.SetPassword(accountSettingsController.NewPassword)
+                _controller.SetPassword(accountSettingsController.NewPassword);
             }
             accountSettingsDialog.Close();
         };
