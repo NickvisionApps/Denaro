@@ -1,6 +1,5 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
-using System;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;

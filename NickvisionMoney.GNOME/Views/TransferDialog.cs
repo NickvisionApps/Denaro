@@ -5,7 +5,6 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Views;
 

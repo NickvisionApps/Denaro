@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -12,6 +13,13 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
+    private delegate bool GSourceFunc(nint data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
+
+    private Group _group;
+    private bool _filterActive;
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
 
@@ -24,7 +32,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <summary>
     /// The Id of the Group the row represents
     /// </summary>
-    public uint Id { get; private set; }
+    public uint Id => _group.Id;
 
     /// <summary>
     /// Occurs when the filter checkbox is changed on the row
@@ -85,23 +93,30 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
     public void UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, bool filterActive)
     {
-        Id = group.Id;
+        _group = group;
+        _filterActive = filterActive;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
+        g_main_context_invoke(IntPtr.Zero, UpdateRowSync, IntPtr.Zero);
+    }
+
+    private bool UpdateRowSync(nint data)
+    {
         //Row Settings
-        SetTitle(group.Name);
-        SetSubtitle(group.Description);
+        SetTitle(_group.Name);
+        SetSubtitle(_group.Description);
         //Filter Checkbox
-        _filterCheckButton.SetActive(filterActive);
+        _filterCheckButton.SetActive(_filterActive);
         //Amount Label
-        _amountLabel.SetLabel($"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}");
-        _amountLabel.AddCssClass(group.Balance >= 0 ? "denaro-income" : "denaro-expense");
-        if (group.Id == 0)
+        _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToAmountString(_cultureAmount)}");
+        _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
+        if (_group.Id == 0)
         {
             _editButton.SetVisible(false);
             _deleteButton.SetVisible(false);
             _flowBox.SetValign(Gtk.Align.Center);
         }
+        return false;
     }
 
     /// <summary>

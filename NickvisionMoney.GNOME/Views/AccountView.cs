@@ -81,6 +81,11 @@ public partial class AccountView : Adw.Bin
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
 
+    private delegate bool GSourceFunc(nint data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
+
     private GAsyncReadyCallback _saveCallback { get; set; }
     private GAsyncReadyCallback _openCallback { get; set; }
 
@@ -329,11 +334,19 @@ public partial class AccountView : Adw.Bin
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
         {
-            _groupsList.Insert(row, index.Value);
+            g_main_context_invoke(IntPtr.Zero, (x) =>
+            {
+                _groupsList.Insert(row, index.Value);
+                return false;
+            }, IntPtr.Zero);
         }
         else
         {
-            _groupsList.Append(row);
+            g_main_context_invoke(IntPtr.Zero, (x) =>
+            {
+                _groupsList.Append(row);
+                return false;
+            }, IntPtr.Zero);
         }
         return row;
     }
@@ -342,7 +355,14 @@ public partial class AccountView : Adw.Bin
     /// Removes a group row from the view
     /// </summary>
     /// <param name="row">The IGroupRowControl</param>
-    private void DeleteGroupRow(IGroupRowControl row) => _groupsList.Remove((GroupRow)row);
+    private void DeleteGroupRow(IGroupRowControl row)
+    {
+        g_main_context_invoke(IntPtr.Zero, (x) =>
+        {
+            _groupsList.Remove((GroupRow)row);
+            return false;
+        }, IntPtr.Zero);
+    }
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
@@ -355,20 +375,31 @@ public partial class AccountView : Adw.Bin
         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
-        row.IsSmall = _parentWindow.DefaultWidth < 450;
+
         if (index != null)
         {
-            _flowBox.Insert(row, index.Value);
-            g_main_context_iteration(g_main_context_default(), false);
-            row.Container = _flowBox.GetChildAtIndex(index.Value);
+            g_main_context_invoke(IntPtr.Zero, (x) =>
+            {
+                row.IsSmall = _parentWindow.DefaultWidth < 450;
+                _flowBox.Insert(row, index.Value);
+                g_main_context_iteration(g_main_context_default(), false);
+                row.Container = _flowBox.GetChildAtIndex(index.Value);
+                row.Container!.SetFocusable(false);
+                return false;
+            }, IntPtr.Zero);
         }
         else
         {
-            _flowBox.Append(row);
-            g_main_context_iteration(g_main_context_default(), false);
-            row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
+            g_main_context_invoke(IntPtr.Zero, (x) =>
+            {
+                row.IsSmall = _parentWindow.DefaultWidth < 450;
+                _flowBox.Append(row);
+                g_main_context_iteration(g_main_context_default(), false);
+                row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
+                row.Container!.SetFocusable(false);
+                return false;
+            }, IntPtr.Zero);
         }
-        row.Container.SetFocusable(false);
         return row;
     }
 
@@ -379,25 +410,36 @@ public partial class AccountView : Adw.Bin
     /// <param name="index">The new position</param>
     private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
     {
-        var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
-        _flowBox.Remove(((TransactionRow)row).Container!);
-        _flowBox.Insert(((TransactionRow)row).Container!, index);
-        ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
-        if (oldVisisbility)
+        g_main_context_invoke(IntPtr.Zero, (x) =>
         {
-            row.Show();
-        }
-        else
-        {
-            row.Hide();
-        }
+            var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
+            _flowBox.Remove(((TransactionRow)row).Container!);
+            _flowBox.Insert(((TransactionRow)row).Container!, index);
+            ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
+            if (oldVisisbility)
+            {
+                row.Show();
+            }
+            else
+            {
+                row.Hide();
+            }
+            return false;
+        }, IntPtr.Zero);
     }
 
     /// <summary>
     /// Removes a transaction row from the view
     /// </summary>
     /// <param name="row">The IModelRowControl<Transaction></param>
-    private void DeleteTransactionRow(IModelRowControl<Transaction> row) => _flowBox.Remove((TransactionRow)row);
+    private void DeleteTransactionRow(IModelRowControl<Transaction> row)
+    {
+        g_main_context_invoke(IntPtr.Zero, (x) =>
+        {
+            _flowBox.Remove((TransactionRow)row);
+            return false;
+        }, IntPtr.Zero);
+    }
 
     /// <summary>
     /// Starts the account view
@@ -563,14 +605,7 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                var done = false;
-                GLib.Functions.IdleAddFull(120, (x) =>
-                {
-                    g_main_context_iteration(g_main_context_default(), false);
-                    return !done;
-                });
-                await _controller.ImportFromFileAsync(path ?? "");
-                done = true;
+                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -704,14 +739,7 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            var done = false;
-            GLib.Functions.IdleAddFull(120, (x) =>
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-                return !done;
-            });
-            await _controller.AddTransactionAsync(transactionController.Transaction);
-            done = true;
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -742,14 +770,7 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            var done = false;
-            GLib.Functions.IdleAddFull(120, (x) =>
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-                return !done;
-            });
-            await _controller.AddTransactionAsync(transactionController.Transaction);
-            done = true;
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -798,15 +819,11 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            var done = false;
-                            GLib.Functions.IdleAddFull(120, (x) =>
+                            await Task.Run(async () =>
                             {
-                                g_main_context_iteration(g_main_context_default(), false);
-                                return !done;
+                                await _controller.DeleteGeneratedTransactionsAsync(id);
+                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
                             });
-                            await _controller.DeleteGeneratedTransactionsAsync(id);
-                            await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                            done = true;
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -823,14 +840,7 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            var done = false;
-                            GLib.Functions.IdleAddFull(120, (x) =>
-                            {
-                                g_main_context_iteration(g_main_context_default(), false);
-                                return !done;
-                            });
-                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
-                            done = true;
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -858,14 +868,7 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            var done = false;
-                            GLib.Functions.IdleAddFull(120, (x) =>
-                            {
-                                g_main_context_iteration(g_main_context_default(), false);
-                                return !done;
-                            });
-                            await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
-                            done = true;
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -886,14 +889,7 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                var done = false;
-                GLib.Functions.IdleAddFull(120, (x) =>
-                {
-                    g_main_context_iteration(g_main_context_default(), false);
-                    return !done;
-                });
-                await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                done = true;
+                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -930,14 +926,7 @@ public partial class AccountView : Adw.Bin
                     _spinner.Start();
                     _paneScroll.SetSensitive(false);
                     //Work
-                    var done = false;
-                    GLib.Functions.IdleAddFull(120, (x) =>
-                    {
-                        g_main_context_iteration(g_main_context_default(), false);
-                        return !done;
-                    });
-                    await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
-                    done = true;
+                    await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
                     //Stop Spinner
                     _spinner.Stop();
                     _spinnerBin.SetVisible(false);
@@ -983,14 +972,7 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            var done = false;
-            GLib.Functions.IdleAddFull(120, (x) =>
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-                return !done;
-            });
-            await _controller.AddGroupAsync(groupController.Group);
-            done = true;
+            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -1021,14 +1003,7 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            var done = false;
-            GLib.Functions.IdleAddFull(120, (x) =>
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-                return !done;
-            });
-            await _controller.UpdateGroupAsync(groupController.Group);
-            done = true;
+            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
