@@ -671,24 +671,13 @@ public partial class AccountView : Adw.Bin
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         accountSettingsDialog.Present();
-        accountSettingsDialog.OnApply += async (sender, e) =>
+        accountSettingsDialog.OnApply += (sender, e) =>
         {
             accountSettingsDialog.SetVisible(false);
             _controller.UpdateMetadata(accountSettingsController.Metadata);
             if (accountSettingsController.NewPassword != null)
             {
-                //Start Spinner
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
-                //Work
-                await Task.Run(() => _controller.SetPassword(accountSettingsController.NewPassword));
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
+                _controller.SetPassword(accountSettingsController.NewPassword)
             }
             accountSettingsDialog.Close();
         };
