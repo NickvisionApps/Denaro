@@ -47,6 +47,14 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
+    /// <summary>
+    /// Constructs a TransactionRow
+    /// </summary>
+    /// <param name="builder">Gtk.Builder</param>
+    /// <param name="transaction">The Transaction to display</param>
+    /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="localizer">The Localizer for the app</param>
     private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;

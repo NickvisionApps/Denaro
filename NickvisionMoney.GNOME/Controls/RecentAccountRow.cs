@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
+/// <summary>
+/// A row for displaying recent accounts
+/// </summary>
 public partial class RecentAccountRow : Adw.ActionRow
 {
     [StructLayout(LayoutKind.Sequential)]
@@ -30,6 +33,14 @@ public partial class RecentAccountRow : Adw.ActionRow
 
     public event EventHandler? OnOpenAccount;
 
+    /// <summary>
+    /// Constructs a RecentAccountRow
+    /// </summary>
+    /// <param name="builder">Gtk.Builder</param>
+    /// <param name="account">The RecentAccount model</param>
+    /// <param name="colorString">The color string of the recent account</param>
+    /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
+    /// <param name="localizer">The Localizer for the app</param>
     private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         builder.Connect(this);
@@ -64,10 +75,24 @@ public partial class RecentAccountRow : Adw.ActionRow
         }
     }
 
+    /// <summary>
+    /// Constructs a RecentAccountRow
+    /// </summary>
+    /// <param name="account">The RecentAccount model</param>
+    /// <param name="colorString">The color string of the recent account</param>
+    /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
+    /// <param name="localizer">The Localizer for the app</param>
     public RecentAccountRow(RecentAccount account, string colorString, bool onStartScreen, Localizer localizer) : this(Builder.FromFile("recent_account_row.ui", localizer), account, colorString, onStartScreen, localizer)
     {
     }
 
+    /// <summary>
+    /// Draws the tag icon
+    /// </summary>
+    /// <param name="area">Gtk.DrawingArea</param>
+    /// <param name="cr">Cairo.Context</param>
+    /// <param name="width">The width of the tag</param>
+    /// <param name="height">The height of the tag</param>
     private void DrawTag(Gtk.DrawingArea area, Cairo.Context cr, int width, int height)
     {
         cr.SetSourceRgba(_color.Red, _color.Green, _color.Blue, 1);
