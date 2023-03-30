@@ -46,11 +46,13 @@ Kontributor di GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Fyodor Sobolev https://github.com/fsobolev</value>
+Fyodor Sobolev https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -559,7 +561,7 @@ pekerjaan yang tidak disimpan akan hilang.</value>
     <value>Batas Akhir Pengulangan (Tidak Sah)</value>
   </data>
   <data name="AccountType.Field" xml:space="preserve">
-    <value>Tipe Akun</value>
+    <value>Tipe Rekening</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
     <value>Tipe Transaksi Bawaan</value>
@@ -762,7 +764,7 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
     <value>Buat kata sandi baru atau hapus.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>Jika kata sandi hilang, tidak ada cara untuk mengembalikan rekening anda!</value>
+    <value>Jika kata sandi hilang, tidak ada cara untuk mengembalikan berkas ini!</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
     <value>Kata Sandi</value>
@@ -848,7 +850,7 @@ Jika kata sandi hilang, file PDF tidak akan bisa diakses.</value>
     <value>Masukkan lemisah grup</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
-    <value>Atur mata yang yang digunakan akun.</value>
+    <value>Atur mata uang yang digunakan rekening.</value>
   </data>
   <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
     <value>Tak terbatas</value>
@@ -878,6 +880,6 @@ Jika kata sandi hilang, file PDF tidak akan bisa diakses.</value>
     <value>Tidak dapat mengakses folder yang dipilih, periksa perizinan Flatpak.</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Akun akan secara otomatis mengekspor sebagai file CSV ke folder ini jika ada perubahan.</value>
+    <value>Rekening akan secara otomatis mengekspor sebagai file CSV ke folder ini jika ada perubahan.</value>
   </data>
 </root>
