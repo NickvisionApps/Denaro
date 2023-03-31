@@ -87,8 +87,8 @@ public class Account : IDisposable
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
         NeedsAccountSetup = true;
-        NextAvailableGroupId = 0;
-        NextAvailableTransactionId = 0;
+        NextAvailableGroupId = 1;
+        NextAvailableTransactionId = 1;
         TodayIncome = 0;
         TodayExpense = 0;
     }
@@ -462,12 +462,11 @@ public class Account : IDisposable
                 RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
             };
             Groups.Add(group.Id, group);
-            if (group.Id > NextAvailableGroupId)
+            if (group.Id >= NextAvailableGroupId)
             {
-                NextAvailableGroupId = group.Id;
+                NextAvailableGroupId = group.Id + 1;
             }
         }
-        NextAvailableGroupId++;
         //Get Transactions
         using var cmdQueryTransactions = _database.CreateCommand();
         cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
@@ -753,7 +752,10 @@ public class Account : IDisposable
         if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Add(group.Id, group);
-            NextAvailableGroupId++;
+            if(group.Id >= NextAvailableGroupId)
+            {
+                NextAvailableGroupId = group.Id + 1;
+            }
             FreeMemory();
             return true;
         }
