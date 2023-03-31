@@ -32,17 +32,21 @@ Adw.ActionRow _root {
   }
   
   [suffix]
-  Gtk.FlowBox _flowBox {
+  Gtk.Box {
     orientation: vertical;
-    selection-mode: none;
+    valign: center;
+    margin-top: 4;
     
     Gtk.Label _amountLabel {
+      halign: end;
       valign: center;
       margin-end: 6;
     }
     
-    Gtk.Box {
+    Gtk.Box _buttonsBox {
       halign: end;
+      valign: center;
+      spacing: 6;
       
       Gtk.Button _editButton {
         icon-name: "document-edit-symbolic";

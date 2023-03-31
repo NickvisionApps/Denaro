@@ -43,9 +43,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     [Gtk.Connect] private readonly Gtk.Image _filterCheckBackground;
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
+    [Gtk.Connect] private readonly Gtk.Box _buttonsBox;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
-    [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
 
     /// <summary>
     /// The Id of the Group the row represents
@@ -121,14 +121,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
             }
         };
         //Buttons
+        _buttonsBox.SetVisible(group.Id != 0);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
-        if (group.Id == 0)
-        {
-            _editButton.SetVisible(false);
-            _deleteButton.SetVisible(false);
-            _flowBox.SetValign(Gtk.Align.Center);
-        }
         UpdateRow(group, cultureAmount, filterActive);
     }
 
