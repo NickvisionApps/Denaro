@@ -12,7 +12,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// A dialog for managing a Transaction
 /// </summary>
-public partial class TransactionDialog : Adw.MessageDialog
+public partial class TransactionDialog : Adw.Window
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -34,6 +34,25 @@ public partial class TransactionDialog : Adw.MessageDialog
     }
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gdk_rgba_to_string(ref Color rgba);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_button_set_rgba(nint button, ref Color rgba);
+
+    [DllImport("libadwaita-1.so.0")]
+    static extern ref Color gtk_color_dialog_button_get_rgba(nint button);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_button_set_dialog(nint button, nint dialog);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_color_dialog_new();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -45,24 +64,11 @@ public partial class TransactionDialog : Adw.MessageDialog
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gdk_rgba_to_string(ref Color rgba);
-
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
@@ -89,8 +95,9 @@ public partial class TransactionDialog : Adw.MessageDialog
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private string? _receiptPath;
+    private nint _colorDialog;
 
-    private readonly Gtk.Window _parentWindow;
+    [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
@@ -104,42 +111,44 @@ public partial class TransactionDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Gtk.MenuButton _repeatEndDateCalendarButton;
     [Gtk.Connect] private readonly Gtk.Button _repeatEndDateClearButton;
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
-    [Gtk.Connect] private readonly Gtk.ColorButton _colorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _colorButton;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _deleteReceiptButton;
     [Gtk.Connect] private readonly Gtk.Button _uploadReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
+    [Gtk.Connect] private readonly Gtk.Button _copyButton;
+    [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _descriptionKeyController;
     private readonly Gtk.EventControllerKey _amountKeyController;
+
+    public event EventHandler? OnApply;
 
     private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
         _controller = controller;
         _receiptPath = null;
-        _parentWindow = parent;
         //Dialog Settings
-        SetHeading($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        AddResponse("cancel", _controller.Localizer["Cancel"]);
-        SetCloseResponse("cancel");
-        if (_controller.CanCopy)
-        {
-            AddResponse("copy", _controller.Localizer["MakeCopy"]);
-        }
-        AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) =>
-        {
-            _controller.Accepted = e.Response != "cancel";
-            _controller.CopyRequested = e.Response == "copy";
-        };
         //Build UI
         builder.Connect(this);
+        _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
+        _copyButton.SetVisible(_controller.CanCopy);
+        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.OnClicked += (sender, e) =>
+        {
+            _controller.Accepted = true;
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
+        _copyButton.OnClicked += (sender, e) =>
+        {
+            _controller.Accepted = true;
+            _controller.CopyRequested = true;
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
         //Description
         _descriptionRow.OnNotify += (sender, e) =>
         {
@@ -211,7 +220,18 @@ public partial class TransactionDialog : Adw.MessageDialog
             }
         };
         //Color
-        _colorButton.OnColorSet += (sender, e) => Validate();
+        _colorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
+        _colorButton.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "rgba")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         //Receipt
         _viewReceiptButton.OnClicked += OnViewReceipt;
         _deleteReceiptButton.OnClicked += OnDeleteReceipt;
@@ -243,7 +263,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         }
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
-        gtk_color_chooser_set_rgba(_colorButton.Handle, ref transactionColor);
+        gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref transactionColor);
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         if (_controller.Transaction.Receipt != null)
@@ -305,8 +325,7 @@ public partial class TransactionDialog : Adw.MessageDialog
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_colorButton.Handle, ref color);
+        var color = gtk_color_dialog_button_get_rgba(_colorButton.Handle);
         var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _amountRow.GetText(), _receiptPath, repeatEndDate);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_controller.Localizer["Description", "Field"]);
@@ -316,7 +335,7 @@ public partial class TransactionDialog : Adw.MessageDialog
         _repeatEndDateRow.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
         if (checkStatus == TransactionCheckStatus.Valid)
         {
-            SetResponseEnabled("ok", true);
+            _applyButton.SetSensitive(true);
         }
         else
         {
@@ -335,7 +354,7 @@ public partial class TransactionDialog : Adw.MessageDialog
                 _repeatEndDateRow.AddCssClass("error");
                 _repeatEndDateRow.SetTitle(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
             }
-            SetResponseEnabled("ok", false);
+            _applyButton.SetSensitive(false);
         }
     }
 
@@ -466,54 +485,28 @@ public partial class TransactionDialog : Adw.MessageDialog
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["Receipt", "Field"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filterAll);
+        filters.Append(filterJpeg);
+        filters.Append(filterPng);
+        filters.Append(filterPdf);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["Receipt", "Field"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filterAll);
-            filters.Append(filterJpeg);
-            filters.Append(filterPng);
-            filters.Append(filterPdf);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    _receiptPath = path;
-                    _viewReceiptButton.SetSensitive(true);
-                    _deleteReceiptButton.SetSensitive(true);
-                    _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
-                    _uploadReceiptButtonContent.SetLabel("");
-                    Validate();
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["Receipt", "Field"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filterAll);
-            openFileDialog.AddFilter(filterJpeg);
-            openFileDialog.AddFilter(filterPng);
-            openFileDialog.AddFilter(filterPdf);
-            openFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath();
-                    _receiptPath = path;
-                    _viewReceiptButton.SetSensitive(true);
-                    _deleteReceiptButton.SetSensitive(true);
-                    _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
-                    _uploadReceiptButtonContent.SetLabel("");
-                    Validate();
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                _receiptPath = path;
+                _viewReceiptButton.SetSensitive(true);
+                _deleteReceiptButton.SetSensitive(true);
+                _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
+                _uploadReceiptButtonContent.SetLabel("");
+                Validate();
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 }

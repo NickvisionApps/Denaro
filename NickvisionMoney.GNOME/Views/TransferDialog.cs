@@ -1,21 +1,18 @@
+using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace NickvisionMoney.GNOME.Views;
 
 /// <summary>
 /// A dialog for managing a Transfer
 /// </summary>
-public partial class TransferDialog : Adw.MessageDialog
+public partial class TransferDialog : Adw.Window
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
@@ -42,6 +39,7 @@ public partial class TransferDialog : Adw.MessageDialog
     private readonly Gtk.Window _parentWindow;
 
     [Gtk.Connect] private readonly Gtk.Button _selectAccountButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _recentAccountsButton;
     [Gtk.Connect] private readonly Gtk.Popover _recentAccountsPopover;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Adw.ActionRow _destinationAccountRow;
@@ -52,10 +50,13 @@ public partial class TransferDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Adw.EntryRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _destinationCurrencyRow;
     [Gtk.Connect] private readonly Gtk.Label _conversionResultLabel;
+    [Gtk.Connect] private readonly Gtk.Button _transferButton;
 
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
     private readonly Gtk.EventControllerKey _destCurrencyKeyController;
+
+    public event EventHandler? OnApply;
 
     private TransferDialog(Gtk.Builder builder, TransferDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -66,16 +67,12 @@ public partial class TransferDialog : Adw.MessageDialog
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        AddResponse("cancel", _controller.Localizer["Cancel"]);
-        SetCloseResponse("cancel");
-        AddResponse("ok", _controller.Localizer["Transfer"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Destination Password Row
         _destinationPasswordRow.OnApply += OnApplyDestinationPassword;
         //Select Account Button
         _selectAccountButton.OnClicked += OnSelectAccount;
+        //Transfer Button
+        _transferButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Amount
         _currencyLabel.SetLabel($"{_controller.CultureForSourceNumberString.NumberFormat.CurrencySymbol} ({_controller.CultureForSourceNumberString.NumberFormat.NaNSymbol})");
         _amountRow.OnNotify += (sender, e) =>
@@ -113,38 +110,30 @@ public partial class TransferDialog : Adw.MessageDialog
         _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
         _destinationCurrencyRow.AddController(_destCurrencyKeyController);
         //Load
-        foreach (var recentAccount in _controller.RecentAccounts)
+        if (_controller.RecentAccounts.Count > 0)
         {
-            var row = Adw.ActionRow.New();
-            row.SetTitle(recentAccount.Name);
-            row.SetSubtitle(recentAccount.Path);
-            var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
-            button.SetHalign(Gtk.Align.Center);
-            button.SetValign(Gtk.Align.Center);
-            var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-            var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-            var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-            var btnCssProvider = Gtk.CssProvider.New();
-            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            button.SetName("btnWallet");
-            button.GetStyleContext().AddProvider(btnCssProvider, 800);
-            button.OnClicked += (Gtk.Button sender, EventArgs e) =>
+            foreach (var recentAccount in _controller.RecentAccounts)
             {
-                _recentAccountsPopover.Popdown();
-                _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
-                _destinationPasswordRow.SetVisible(false);
-                _destinationPasswordRow.SetSensitive(true);
-                _destinationPasswordRow.SetText("");
-                _amountRow.SetText("");
-                _conversionRateGroup.SetVisible(false);
-                _sourceCurrencyRow.SetText("");
-                _destinationCurrencyRow.SetText("");
-                Validate();
-            };
-            row.AddPrefix(button);
-            row.SetActivatableWidget(button);
-            _recentAccountsGroup.Add(row);
+                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, _controller.Localizer);
+                row.OnOpenAccount += (sender, e) =>
+                {
+                    _recentAccountsPopover.Popdown();
+                    _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
+                    _destinationPasswordRow.SetVisible(false);
+                    _destinationPasswordRow.SetSensitive(true);
+                    _destinationPasswordRow.SetText("");
+                    _amountRow.SetText("");
+                    _conversionRateGroup.SetVisible(false);
+                    _sourceCurrencyRow.SetText("");
+                    _destinationCurrencyRow.SetText("");
+                    Validate();
+                };
+                _recentAccountsGroup.Add(row);
+            }
+        }
+        else
+        {
+            _recentAccountsButton.SetSensitive(false);
         }
         _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
         Validate();
@@ -179,7 +168,7 @@ public partial class TransferDialog : Adw.MessageDialog
         if (checkStatus == TransferCheckStatus.Valid)
         {
             _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString));
-            SetResponseEnabled("ok", true);
+            _transferButton.SetSensitive(true);
         }
         else
         {
@@ -216,7 +205,7 @@ public partial class TransferDialog : Adw.MessageDialog
                 _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode!);
                 _conversionResultLabel.SetText(_controller.Localizer["NotAvailable"]);
             }
-            SetResponseEnabled("ok", false);
+            _transferButton.SetSensitive(false);
         }
         if (!checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword) && !checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
         {
@@ -234,55 +223,29 @@ public partial class TransferDialog : Adw.MessageDialog
         var filter = Gtk.FileFilter.New();
         filter.SetName(_controller.Localizer["AccountFileFilter", "GTK"]);
         filter.AddPattern("*.nmoney");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    _destinationAccountRow.SetSubtitle(path);
-                    _destinationPasswordRow.SetVisible(false);
-                    _destinationPasswordRow.SetSensitive(true);
-                    _destinationPasswordRow.SetText("");
-                    _amountRow.SetText("");
-                    _conversionRateGroup.SetVisible(false);
-                    _sourceCurrencyRow.SetText("");
-                    _destinationCurrencyRow.SetText("");
-                    Validate();
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectAccount"], _parentWindow, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filter);
-            openFileDialog.OnResponse += (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                    _destinationAccountRow.SetSubtitle(path);
-                    _destinationPasswordRow.SetVisible(false);
-                    _destinationPasswordRow.SetSensitive(true);
-                    _destinationPasswordRow.SetText("");
-                    _amountRow.SetText("");
-                    _conversionRateGroup.SetVisible(false);
-                    _sourceCurrencyRow.SetText("");
-                    _destinationCurrencyRow.SetText("");
-                    Validate();
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                _destinationAccountRow.SetSubtitle(path);
+                _destinationPasswordRow.SetVisible(false);
+                _destinationPasswordRow.SetSensitive(true);
+                _destinationPasswordRow.SetText("");
+                _amountRow.SetText("");
+                _conversionRateGroup.SetVisible(false);
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
+                Validate();
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>

@@ -121,7 +121,10 @@ Adw.Bin _root {
             Gtk.ToggleButton _toggleGroupsButton {
               tooltip-text: _("ToggleGroups.Tooltip");
               
-              Adw.ButtonContent _toggleGroupsButtonContent {}
+              Adw.ButtonContent _toggleGroupsButtonContent {
+                icon-name: "view-conceal-symbolic";
+                label: _("Hide");
+              }
               
               styles ["flat"]
             }
@@ -147,6 +150,8 @@ Adw.Bin _root {
           };
           
           Gtk.ListBox _groupsList {
+            selection-mode: none;
+
             styles ["boxed-list"]
           }
         }

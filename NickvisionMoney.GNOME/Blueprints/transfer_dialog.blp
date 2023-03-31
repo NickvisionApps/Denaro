@@ -1,77 +1,121 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.MessageDialog _root {
-  heading: _("Transfer");
-  body: _("TransferDescription");
+Adw.Window _root {
   default-width: 420;
-  hide-on-close: true;
   modal: true;
+  resizable: false;
   
-  Adw.PreferencesGroup {
-    Adw.ActionRow _destinationAccountRow {
-      title: _("DestinationAccount.Field");
-      subtitle: _("NoAccountSelected");
-      activatable-widget: _selectAccountButton;
-      
-      [suffix]
-      Gtk.Box {
-        orientation: horizontal;
-        valign: center;
-        
-        Gtk.Button _selectAccountButton {
-          icon-name: "document-open-symbolic";
-          tooltip-text: _("DestinationAccount.Placeholder");
-        }
-        
-        Gtk.MenuButton {
-          icon-name: "document-open-recent-symbolic";
-          tooltip-text: _("RecentAccounts");
-          popover: Gtk.Popover  _recentAccountsPopover {
-            Adw.PreferencesGroup _recentAccountsGroup {
-              title: _("Recents.GTK");
-              width-request: 200;
-              height-request: 55;
-            }
-          };
-        }
-        
-        styles ["linked"]
-      }
-    }
-      
-    Adw.PasswordEntryRow _destinationPasswordRow {
-      title: _("DestinationPassword.Field");
-      show-apply-button: true;
-      visible: false;
-    }
-    
-    Adw.EntryRow _amountRow {
-      title: _("Amount.Field");
-      input-purpose: number;
-      activates-default: true;
-      
-      [suffix]
-      Gtk.Label _currencyLabel {
-        styles ["dim-label"]
-      }
-    } 
-    
-    Adw.PreferencesGroup _conversionRateGroup {
-      margin-top: 6;
-      title: _("ConversionNeeded");
-      visible: false;
+  content: Gtk.Box {
+    orientation: vertical;
 
-      Adw.EntryRow _sourceCurrencyRow {}
-      
-      Adw.EntryRow _destinationCurrencyRow {}
-      
-      Adw.ActionRow {
-        title:_("Result");
+    Adw.HeaderBar {
+      title-widget: Gtk.Label {};
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-start: 24;
+        margin-end: 24;
+
+        Gtk.Label {
+          label: _("Transfer");
+
+          styles ["title-2"]
+        }
         
-        [suffix]
-        Gtk.Label _conversionResultLabel {}
+        Gtk.Label {
+          label: _("TransferDescription");
+          wrap: true;
+          justify: center;
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow _destinationAccountRow {
+            title: _("DestinationAccount.Field");
+            subtitle: _("NoAccountSelected");
+            activatable-widget: _selectAccountButton;
+
+            [suffix]
+            Gtk.Box {
+              orientation: horizontal;
+              valign: center;
+
+              Gtk.Button _selectAccountButton {
+                icon-name: "document-open-symbolic";
+                tooltip-text: _("DestinationAccount.Placeholder");
+              }
+
+              Gtk.MenuButton _recentAccountsButton {
+                icon-name: "document-open-recent-symbolic";
+                tooltip-text: _("RecentAccounts");
+                popover: Gtk.Popover  _recentAccountsPopover {
+                  Adw.PreferencesGroup _recentAccountsGroup {
+                    title: _("Recents.GTK");
+                    width-request: 200;
+                    height-request: 55;
+                  }
+                };
+              }
+
+              styles ["linked"]
+            }
+          }
+
+          Adw.PasswordEntryRow _destinationPasswordRow {
+            title: _("DestinationPassword.Field");
+            show-apply-button: true;
+            visible: false;
+          }
+
+          Adw.EntryRow _amountRow {
+            title: _("Amount.Field");
+            input-purpose: number;
+            activates-default: true;
+
+            [suffix]
+            Gtk.Label _currencyLabel {
+              styles ["dim-label"]
+            }
+          }
+
+          Adw.PreferencesGroup _conversionRateGroup {
+            margin-top: 24;
+            title: _("ConversionNeeded");
+            visible: false;
+
+            Adw.EntryRow _sourceCurrencyRow {
+              activates-default: true;
+            }
+
+            Adw.EntryRow _destinationCurrencyRow {
+              activates-default: true;
+            }
+
+            Adw.ActionRow {
+              title:_("Result");
+
+              [suffix]
+              Gtk.Label _conversionResultLabel {}
+            }
+          }
+        }
+        
+        Gtk.Button _transferButton {
+          halign: center;
+          valign: center;
+          margin-top: 24;
+          margin-bottom: 24;
+          label: _("Transfer");
+
+          styles ["pill", "suggested-action"]
+        }
       }
     }
-  }  
+  };
+
+  default-widget: _transferButton;
 }

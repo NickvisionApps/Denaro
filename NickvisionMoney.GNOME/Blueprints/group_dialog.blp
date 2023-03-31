@@ -1,23 +1,58 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.MessageDialog _root {
-  heading: _("Group");
+Adw.Window _root {
   default-width: 360;
-  hide-on-close: true;
   modal: true;
+  resizable: false;
 
-  Adw.PreferencesGroup {
-    Adw.EntryRow _nameRow {
-      title: _("Name.Field");
-      input-hints: spellcheck;
-      activates-default: true;
+  content: Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      title-widget: Gtk.Label {};
+      styles ["flat"]
     }
 
-    Adw.EntryRow _descriptionRow {
-      title: _("Description.Field");
-      input-hints: spellcheck;
-      activates-default: true;
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+
+        Gtk.Label {
+          label: _("Group");
+
+          styles ["title-2"]
+        }
+
+        Adw.PreferencesGroup {
+          margin-start: 24;
+          margin-end: 24;
+
+          Adw.EntryRow _nameRow {
+            title: _("Name.Field");
+            input-hints: spellcheck;
+            activates-default: true;
+          }
+
+          Adw.EntryRow _descriptionRow {
+            title: _("Description.Field");
+            input-hints: spellcheck;
+            activates-default: true;
+          }
+        }
+
+        Gtk.Button _applyButton {
+          halign: center;
+          valign: center;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          styles ["pill", "suggested-action"]
+        }
+      }
     }
-  }
+  };
+
+  default-widget: _applyButton;
 }

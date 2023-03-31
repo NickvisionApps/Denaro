@@ -28,10 +28,16 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private static partial string gdk_rgba_to_string(ref Color rgba);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_get_rgba(nint chooser, ref Color rgba);
+    private static partial void gtk_color_dialog_button_set_rgba(nint button, ref Color rgba);
+
+    [DllImport("libadwaita-1.so.0")]
+    static extern ref Color gtk_color_dialog_button_get_rgba(nint button);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_color_chooser_set_rgba(nint chooser, ref Color rgba);
+    private static partial void gtk_color_dialog_button_set_dialog(nint button, nint dialog);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_color_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
@@ -52,13 +58,18 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
 
     private readonly PreferencesViewController _controller;
     private readonly Adw.Application _application;
+    private readonly nint _transactionColorDialog;
+    private readonly nint _transferColorDialog;
+    private readonly nint _accountCheckingColorDialog;
+    private readonly nint _accountSavingsColorDialog;
+    private readonly nint _accountBusinessColorDialog;
 
     [Gtk.Connect] private readonly Adw.ComboRow _themeRow;
-    [Gtk.Connect] private readonly Gtk.ColorButton _transactionColor;
-    [Gtk.Connect] private readonly Gtk.ColorButton _transferColor;
-    [Gtk.Connect] private readonly Gtk.ColorButton _accountCheckingColor;
-    [Gtk.Connect] private readonly Gtk.ColorButton _accountSavingsColor;
-    [Gtk.Connect] private readonly Gtk.ColorButton _accountBusinessColor;
+    [Gtk.Connect] private readonly Gtk.Widget _transactionColorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _transferColorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _accountCheckingColorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _accountSavingsColorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _accountBusinessColorButton;
     [Gtk.Connect] private readonly Adw.ComboRow _insertSeparatorRow;
     [Gtk.Connect] private readonly Adw.ViewStack _backupViewStack;
     [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
@@ -83,11 +94,16 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 OnThemeChanged();
             }
         };
-        _transactionColor.OnColorSet += OnTransactionColorSet;
-        _transferColor.OnColorSet += OnTransferColorSet;
-        _accountCheckingColor.OnColorSet += OnAccountCheckingColorSet;
-        _accountSavingsColor.OnColorSet += OnAccountSavingsColorSet;
-        _accountBusinessColor.OnColorSet += OnAccountBusinessColorSet;
+        _transactionColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_transactionColorButton.Handle, _transactionColorDialog);
+        _transferColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_transferColorButton.Handle, _transferColorDialog);
+        _accountCheckingColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_accountCheckingColorButton.Handle, _accountCheckingColorDialog);
+        _accountSavingsColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_accountSavingsColorButton.Handle, _accountSavingsColorDialog);
+        _accountBusinessColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_button_set_dialog(_accountBusinessColorButton.Handle, _accountBusinessColorDialog);
         _insertSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
@@ -104,19 +120,19 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _themeRow.SetSelected((uint)_controller.Theme);
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.TransactionDefaultColor);
-        gtk_color_chooser_set_rgba(_transactionColor.Handle, ref transactionColor);
+        gtk_color_dialog_button_set_rgba(_transactionColorButton.Handle, ref transactionColor);
         var transferColor = new Color();
         gdk_rgba_parse(ref transferColor, _controller.TransferDefaultColor);
-        gtk_color_chooser_set_rgba(_transferColor.Handle, ref transferColor);
+        gtk_color_dialog_button_set_rgba(_transferColorButton.Handle, ref transferColor);
         var accountCheckingColor = new Color();
         gdk_rgba_parse(ref accountCheckingColor, _controller.AccountCheckingColor);
-        gtk_color_chooser_set_rgba(_accountCheckingColor.Handle, ref accountCheckingColor);
+        gtk_color_dialog_button_set_rgba(_accountCheckingColorButton.Handle, ref accountCheckingColor);
         var accountSavingsColor = new Color();
         gdk_rgba_parse(ref accountSavingsColor, _controller.AccountSavingsColor);
-        gtk_color_chooser_set_rgba(_accountSavingsColor.Handle, ref accountSavingsColor);
+        gtk_color_dialog_button_set_rgba(_accountSavingsColorButton.Handle, ref accountSavingsColor);
         var accountBusinessColor = new Color();
         gdk_rgba_parse(ref accountBusinessColor, _controller.AccountBusinessColor);
-        gtk_color_chooser_set_rgba(_accountBusinessColor.Handle, ref accountBusinessColor);
+        gtk_color_dialog_button_set_rgba(_accountBusinessColorButton.Handle, ref accountBusinessColor);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (!string.IsNullOrEmpty(_controller.CSVBackupFolder))
         {
@@ -142,6 +158,16 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="e">EventArgs</param>
     private void Hide(Gtk.Widget sender, EventArgs e)
     {
+        var color = gtk_color_dialog_button_get_rgba(_transactionColorButton.Handle);
+        _controller.TransactionDefaultColor = gdk_rgba_to_string(ref color);
+        color = gtk_color_dialog_button_get_rgba(_transferColorButton.Handle);
+        _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
+        color = gtk_color_dialog_button_get_rgba(_accountCheckingColorButton.Handle);
+        _controller.AccountCheckingColor = gdk_rgba_to_string(ref color);
+        color = gtk_color_dialog_button_get_rgba(_accountSavingsColorButton.Handle);
+        _controller.AccountSavingsColor = gdk_rgba_to_string(ref color);
+        color = gtk_color_dialog_button_get_rgba(_accountBusinessColorButton.Handle);
+        _controller.AccountBusinessColor = gdk_rgba_to_string(ref color);
         _controller.SaveConfiguration();
         Destroy();
     }
@@ -162,108 +188,31 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     }
 
     /// <summary>
-    /// Occurs when the transaction color is set
-    /// </summary>
-    private void OnTransactionColorSet(Gtk.ColorButton sender, EventArgs e)
-    {
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_transactionColor.Handle, ref color);
-        _controller.TransactionDefaultColor = gdk_rgba_to_string(ref color);
-    }
-
-    /// <summary>
-    /// Occurs when the transfer color is set
-    /// </summary>
-    private void OnTransferColorSet(Gtk.ColorButton sender, EventArgs e)
-    {
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_transferColor.Handle, ref color);
-        _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
-    }
-
-    /// <summary>
-    /// Occurs when the checking account color is set
-    /// </summary>
-    private void OnAccountCheckingColorSet(Gtk.ColorButton sender, EventArgs e)
-    {
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_accountCheckingColor.Handle, ref color);
-        _controller.AccountCheckingColor = gdk_rgba_to_string(ref color);
-    }
-
-    /// <summary>
-    /// Occurs when the savings account color is set
-    /// </summary>
-    private void OnAccountSavingsColorSet(Gtk.ColorButton sender, EventArgs e)
-    {
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_accountSavingsColor.Handle, ref color);
-        _controller.AccountSavingsColor = gdk_rgba_to_string(ref color);
-    }
-
-    /// <summary>
-    /// Occurs when the business account color is set
-    /// </summary>
-    private void OnAccountBusinessColorSet(Gtk.ColorButton sender, EventArgs e)
-    {
-        var color = new Color();
-        gtk_color_chooser_get_rgba(_accountBusinessColor.Handle, ref color);
-        _controller.AccountBusinessColor = gdk_rgba_to_string(ref color);
-    }
-
-    /// <summary>
     /// Occurs when a button to select backup folder is clicked
     /// </summary>
     private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
     {
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var fileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
+        _fileDialogCallback = async (source, res, data) =>
         {
-            var fileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
-            _fileDialogCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
+                var path = g_file_get_path(fileHandle);
+                if (path.StartsWith("/run/user"))
                 {
-                    var path = g_file_get_path(fileHandle);
-                    if (path.StartsWith("/run/user"))
-                    {
-                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
-                    }
-                    else
-                    {
-                        _controller.CSVBackupFolder = path;
-                        _backupViewStack.SetVisibleChildName("folder-selected");
-                        _backupFolderLabel.SetText(path);
-                    }
+                    AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
                 }
-            };
-            gtk_file_dialog_select_folder(fileDialog, Handle, IntPtr.Zero, _fileDialogCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var fileDialog = Gtk.FileChooserNative.New(_controller.Localizer["SelectBackupFolder"], this, Gtk.FileChooserAction.SelectFolder, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            fileDialog.SetModal(true);
-            fileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                else
                 {
-                    var path = fileDialog.GetFile()!.GetPath() ?? "";
-                    if (path == "") { return; }
-                    if (path.StartsWith("/run/user"))
-                    {
-                        AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
-                    }
-                    else
-                    {
-                        _controller.CSVBackupFolder = path;
-                        _backupViewStack.SetVisibleChildName("folder-selected");
-                        _backupFolderLabel.SetText(path);
-                    }
+                    _controller.CSVBackupFolder = path;
+                    _backupViewStack.SetVisibleChildName("folder-selected");
+                    _backupFolderLabel.SetText(path);
                 }
-            };
-            fileDialog.Show();
-        }
+            }
+        };
+        gtk_file_dialog_select_folder(fileDialog, Handle, IntPtr.Zero, _fileDialogCallback, IntPtr.Zero);
     }
 
     /// <summary>

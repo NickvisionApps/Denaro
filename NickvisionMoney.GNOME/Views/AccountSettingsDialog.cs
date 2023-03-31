@@ -2,21 +2,20 @@ using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
 
 /// <summary>
 /// A dialog to configure account
 /// </summary>
-public partial class AccountSettingsDialog : Adw.MessageDialog
+public partial class AccountSettingsDialog : Adw.Window
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
     private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
 
+    [Gtk.Connect] private readonly Adw.HeaderBar _header;
+    [Gtk.Connect] private readonly Gtk.Button _btnBack;
+    [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
@@ -24,7 +23,6 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Gtk.ToggleButton _expenseButton;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
     [Gtk.Connect] private readonly Adw.ActionRow _customCurrencyRow;
-    [Gtk.Connect] private readonly Gtk.Button _btnCurrencyPageBack;
     [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
     [Gtk.Connect] private readonly Gtk.Entry _customSymbolText;
     [Gtk.Connect] private readonly Adw.ActionRow _customSymbolRow;
@@ -39,11 +37,13 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
     [Gtk.Connect] private readonly Gtk.DropDown _customDecimalDigitsDropDown;
     [Gtk.Connect] private readonly Adw.ActionRow _customDecimalDigitsRow;
     [Gtk.Connect] private readonly Adw.ActionRow _managePasswordRow;
-    [Gtk.Connect] private readonly Gtk.Button _btnPasswordPageBack;
     [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordConfirmRow;
     [Gtk.Connect] private readonly Gtk.Button _removePasswordButton;
+    [Gtk.Connect] private readonly Gtk.Button _applyButton;
+
+    public event EventHandler? OnApply;
 
     private AccountSettingsDialog(Gtk.Builder builder, AccountSettingsDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -52,17 +52,32 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        if (!_controller.NeedsSetup)
-        {
-            AddResponse("cancel", _controller.Localizer["Cancel"]);
-            SetCloseResponse("cancel");
-        }
-        AddResponse("ok", _controller.Localizer["Apply"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
         //Build UI
         builder.Connect(this);
+        if (_controller.NeedsSetup)
+        {
+            _header.SetShowStartTitleButtons(false);
+            _header.SetShowEndTitleButtons(false);
+        }
+        _viewStack.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "visible-child")
+            {
+                if (!_constructing)
+                {
+                    _btnBack.SetVisible(_viewStack.GetVisibleChildName() != "main");
+                }
+            }
+        };
+        _btnBack.OnClicked += (sender, e) =>
+        {
+            _viewStack.GetChildByName("main").SetVisible(true);
+            _viewStack.SetVisibleChildName("main");
+            _viewStack.GetChildByName("currency").SetVisible(false);
+            _viewStack.GetChildByName("password").SetVisible(false);
+            _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+            SetDefaultWidget(_applyButton);
+        };
         //Account Name
         _nameRow.OnNotify += (sender, e) =>
         {
@@ -94,12 +109,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             _viewStack.GetChildByName("currency").SetVisible(true);
             _viewStack.SetVisibleChildName("currency");
             _viewStack.GetChildByName("main").SetVisible(false);
-        };
-        _btnCurrencyPageBack.OnClicked += (sender, e) =>
-        {
-            _viewStack.GetChildByName("main").SetVisible(true);
-            _viewStack.SetVisibleChildName("main");
-            _viewStack.GetChildByName("currency").SetVisible(false);
+            _titleLabel.SetLabel(_controller.Localizer["Currency"]);
         };
         _switchCustomCurrency.OnNotify += (sender, e) =>
         {
@@ -212,12 +222,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
             _viewStack.GetChildByName("password").SetVisible(true);
             _viewStack.SetVisibleChildName("password");
             _viewStack.GetChildByName("main").SetVisible(false);
-        };
-        _btnPasswordPageBack.OnClicked += (sender, e) =>
-        {
-            _viewStack.GetChildByName("main").SetVisible(true);
-            _viewStack.SetVisibleChildName("main");
-            _viewStack.GetChildByName("password").SetVisible(false);
+            _titleLabel.SetLabel(_controller.Localizer["ManagePassword"]);
         };
         _newPasswordRow.OnNotify += (sender, e) =>
         {
@@ -241,6 +246,8 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         };
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
+        //Apply Button
+        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load
         _nameRow.SetText(_controller.Metadata.Name);
         _accountTypeRow.SetSelected((uint)_controller.Metadata.AccountType);
@@ -282,6 +289,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         });
         Validate();
         _constructing = false;
+        _nameRow.GrabFocus();
     }
 
 
@@ -331,7 +339,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
-            SetResponseEnabled("ok", true);
+            _applyButton.SetSensitive(true);
         }
         else
         {
@@ -393,7 +401,7 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
                 _managePasswordRow.AddCssClass("error");
                 _lblPasswordStatus.SetText(_controller.Localizer["NonMatchingPasswords"]);
             }
-            SetResponseEnabled("ok", false);
+            _applyButton.SetSensitive(false);
         }
     }
 
@@ -433,6 +441,8 @@ public partial class AccountSettingsDialog : Adw.MessageDialog
         _viewStack.GetChildByName("main").SetVisible(true);
         _viewStack.SetVisibleChildName("main");
         _viewStack.GetChildByName("password").SetVisible(false);
+        _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+        SetDefaultWidget(_applyButton);
         _managePasswordRow.SetSensitive(false);
         _managePasswordRow.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
         _managePasswordRow.SetSubtitle("");

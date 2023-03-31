@@ -1,21 +1,25 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using System;
 
 namespace NickvisionMoney.GNOME.Views;
 
 /// <summary>
 /// A dialog for managing a Group
 /// </summary>
-public partial class GroupDialog : Adw.MessageDialog
+public partial class GroupDialog : Adw.Window
 {
     private bool _constructing;
     private readonly GroupDialogController _controller;
 
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _nameKeyController;
     private readonly Gtk.EventControllerKey _descriptionKeyController;
+
+    public event EventHandler? OnApply;
 
     private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -26,12 +30,7 @@ public partial class GroupDialog : Adw.MessageDialog
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
-        AddResponse("cancel", _controller.Localizer["Cancel"]);
-        SetCloseResponse("cancel");
-        AddResponse("ok", _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        SetDefaultResponse("ok");
-        SetResponseAppearance("ok", Adw.ResponseAppearance.Suggested);
-        OnResponse += (sender, e) => _controller.Accepted = e.Response == "ok";
+        //Name
         _nameRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
@@ -61,6 +60,9 @@ public partial class GroupDialog : Adw.MessageDialog
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
         _descriptionRow.AddController(_descriptionKeyController);
+        //Apply Button
+        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
@@ -87,7 +89,7 @@ public partial class GroupDialog : Adw.MessageDialog
         _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
         if (checkStatus == GroupCheckStatus.Valid)
         {
-            SetResponseEnabled("ok", true);
+            _applyButton.SetSensitive(true);
         }
         else
         {
@@ -101,7 +103,7 @@ public partial class GroupDialog : Adw.MessageDialog
                 _nameRow.AddCssClass("error");
                 _nameRow.SetTitle(_controller.Localizer["Name", "Exists"]);
             }
-            SetResponseEnabled("ok", false);
+            _applyButton.SetSensitive(false);
         }
     }
 }

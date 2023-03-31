@@ -224,7 +224,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool SetPassword(string password)
     {
-        //Remove password if empty (decrypts)
+        //Remove Password If Empty (Decrypts)
         if (string.IsNullOrEmpty(password))
         {
             //Create Temp Decrypted Database
@@ -256,7 +256,7 @@ public class Account : IDisposable
         cmdQuote.CommandText = "SELECT quote($password)";
         cmdQuote.Parameters.AddWithValue("$password", password);
         var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
-        //Change password
+        //Change Password
         if (IsEncrypted)
         {
             using var command = _database.CreateCommand();
@@ -273,7 +273,7 @@ public class Account : IDisposable
             _database.Open();
             _isEncrypted = true;
         }
-        //Sets new password (encrypts for first time)
+        //Sets New Password (Encrypts For First Time)
         else
         {
             //Create Temp Encrypted Database
