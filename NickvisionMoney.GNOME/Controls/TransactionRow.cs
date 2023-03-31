@@ -11,7 +11,7 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A row for displaying a transaction
 /// </summary>
-public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Transaction>
+public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transaction>
 {
     private delegate bool GSourceFunc(nint data);
 
@@ -35,8 +35,6 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// The id of the Transaction
     /// </summary>
     public uint Id => _transaction.Id;
-
-    public Gtk.FlowBoxChild? Container { get; set; }
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked
@@ -123,12 +121,12 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// <summary>
     /// Shows the row
     /// </summary>
-    public void Show() => Container!.SetVisible(true);
+    public void Show() => SetVisible(true);
 
     /// <summary>
     /// Hides the row
     /// </summary>
-    public void Hide() => Container!.SetVisible(false);
+    public void Hide() => SetVisible(false);
 
     /// <summary>
     /// Updates the row

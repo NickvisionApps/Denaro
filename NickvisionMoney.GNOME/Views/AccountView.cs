@@ -383,8 +383,6 @@ public partial class AccountView : Adw.Bin
                 row.IsSmall = _parentWindow.DefaultWidth < 450;
                 _flowBox.Insert(row, index.Value);
                 g_main_context_iteration(g_main_context_default(), false);
-                row.Container = _flowBox.GetChildAtIndex(index.Value);
-                row.Container!.SetFocusable(false);
                 return false;
             }, IntPtr.Zero);
         }
@@ -395,8 +393,6 @@ public partial class AccountView : Adw.Bin
                 row.IsSmall = _parentWindow.DefaultWidth < 450;
                 _flowBox.Append(row);
                 g_main_context_iteration(g_main_context_default(), false);
-                row.Container = _flowBox.GetChildAtIndex(_controller.TransactionRows.Count);
-                row.Container!.SetFocusable(false);
                 return false;
             }, IntPtr.Zero);
         }
@@ -413,9 +409,9 @@ public partial class AccountView : Adw.Bin
         g_main_context_invoke(IntPtr.Zero, (x) =>
         {
             var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
-            _flowBox.Remove(((TransactionRow)row).Container!);
-            _flowBox.Insert(((TransactionRow)row).Container!, index);
-            ((TransactionRow)row).Container = _flowBox.GetChildAtIndex(index);
+            _flowBox.Remove((TransactionRow)row);
+            _flowBox.Insert((TransactionRow)row, index);
+            g_main_context_iteration(g_main_context_default(), false);
             if (oldVisisbility)
             {
                 row.Show();
@@ -458,11 +454,6 @@ public partial class AccountView : Adw.Bin
         if (_controller.AccountNeedsSetup)
         {
             AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-        }
-        //Setup Transactions
-        for (var i = 0; i < _controller.TransactionRows.Count; i++)
-        {
-            ((TransactionRow)_flowBox.GetChildAtIndex(i)!.GetChild()!).Container = _flowBox.GetChildAtIndex(i);
         }
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
