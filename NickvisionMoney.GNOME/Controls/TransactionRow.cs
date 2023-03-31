@@ -121,12 +121,31 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// <summary>
     /// Shows the row
     /// </summary>
-    public void Show() => SetVisible(true);
+    public new void Show() => g_main_context_invoke(IntPtr.Zero, ShowSync, IntPtr.Zero);
 
     /// <summary>
     /// Hides the row
     /// </summary>
-    public void Hide() => SetVisible(false);
+    public new void Hide() => g_main_context_invoke(IntPtr.Zero, HideSync, IntPtr.Zero);
+
+    /// <summary>
+    /// Shows the row
+    /// </summary>
+    public bool ShowSync(nint data)
+    {
+        SetVisible(true);
+        return false;
+    }
+
+    /// <summary>
+    /// Hides the row
+    /// </summary>
+    public bool HideSync(nint data)
+    {
+        SetVisible(false);
+        return false;
+    }
+
 
     /// <summary>
     /// Updates the row
