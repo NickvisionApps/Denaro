@@ -122,6 +122,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         };
         //Buttons
         _buttonsBox.SetVisible(group.Id != 0);
+        _amountLabel.SetVexpand(group.Id == 0);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
         UpdateRow(group, cultureAmount, filterActive);
