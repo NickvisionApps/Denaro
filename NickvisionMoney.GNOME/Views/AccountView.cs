@@ -338,7 +338,15 @@ public partial class AccountView : Adw.Bin
         {
             _rowCallbacks[0] = (x) =>
             {
-                _groupsList.Insert(row, index.Value);
+                try
+                {
+                    _groupsList.Insert(row, index.Value);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
                 return false;
             };
         }
@@ -346,7 +354,15 @@ public partial class AccountView : Adw.Bin
         {
             _rowCallbacks[0] = (x) =>
             {
-                _groupsList.Append(row);
+                try
+                {
+                    _groupsList.Append(row);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
                 return false;
             };
         }
@@ -362,7 +378,15 @@ public partial class AccountView : Adw.Bin
     {
         _rowCallbacks[1] = (x) =>
         {
-            _groupsList.Remove((GroupRow)row);
+            try
+            {
+                _groupsList.Remove((GroupRow)row);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
             return false;
         };
         g_main_context_invoke(IntPtr.Zero, _rowCallbacks[1], IntPtr.Zero);
@@ -383,9 +407,17 @@ public partial class AccountView : Adw.Bin
         {
             _rowCallbacks[2] = (x) =>
             {
-                row.IsSmall = _parentWindow.DefaultWidth < 450;
-                _flowBox.Insert(row, index.Value);
-                g_main_context_iteration(g_main_context_default(), false);
+                try
+                {
+                    row.IsSmall = _parentWindow.DefaultWidth < 450;
+                    _flowBox.Insert(row, index.Value);
+                    g_main_context_iteration(g_main_context_default(), false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
                 return false;
             };
             
@@ -394,9 +426,17 @@ public partial class AccountView : Adw.Bin
         {
             _rowCallbacks[2] = (x) =>
             {
-                row.IsSmall = _parentWindow.DefaultWidth < 450;
-                _flowBox.Append(row);
-                g_main_context_iteration(g_main_context_default(), false);
+                try
+                {
+                    row.IsSmall = _parentWindow.DefaultWidth < 450;
+                    _flowBox.Append(row);
+                    g_main_context_iteration(g_main_context_default(), false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
                 return false;
             };
         }
@@ -413,17 +453,26 @@ public partial class AccountView : Adw.Bin
     {
         _rowCallbacks[3] = (x) =>
         {
-            var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
-            _flowBox.Remove((TransactionRow)row);
-            _flowBox.Insert((TransactionRow)row, index);
-            g_main_context_iteration(g_main_context_default(), false);
-            if (oldVisisbility)
+            try
             {
-                row.Show();
+                var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
+                _flowBox.Remove((TransactionRow)row);
+                _flowBox.Insert((TransactionRow)row, index);
+                g_main_context_iteration(g_main_context_default(), false);
+                if (oldVisisbility)
+                {
+                    row.Show();
+                }
+                else
+                {
+                    row.Hide();
+                }
             }
-            else
+
+            catch(Exception ex)
             {
-                row.Hide();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
             return false;
         };
@@ -438,7 +487,15 @@ public partial class AccountView : Adw.Bin
     {
         _rowCallbacks[4] = (x) =>
         {
-            _flowBox.Remove((TransactionRow)row);
+            try
+            {
+                _flowBox.Remove((TransactionRow)row);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
             return false;
         };
         g_main_context_invoke(IntPtr.Zero, _rowCallbacks[4], IntPtr.Zero);
@@ -603,7 +660,18 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                await Task.Run(async () => await _controller.ImportFromFileAsync(path ?? ""));
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        await _controller.ImportFromFileAsync(path ?? "");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                });
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -737,7 +805,18 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await _controller.AddTransactionAsync(transactionController.Transaction);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }); 
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -768,7 +847,18 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            await Task.Run(async () =>
+            { 
+                try 
+                { 
+                    await _controller.AddTransactionAsync(transactionController.Transaction); 
+                } 
+                catch (Exception ex) 
+                { 
+                    Console.WriteLine(ex.Message); 
+                    Console.WriteLine(ex.StackTrace); 
+                } 
+            });
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -819,8 +909,16 @@ public partial class AccountView : Adw.Bin
                             //Work
                             await Task.Run(async () =>
                             {
-                                await _controller.DeleteGeneratedTransactionsAsync(id);
-                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                try
+                                {
+                                    await _controller.DeleteGeneratedTransactionsAsync(id);
+                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine(ex.StackTrace);
+                                }
                             });
                             //Stop Spinner
                             _spinner.Stop();
@@ -838,7 +936,18 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
+                            await Task.Run(async () =>
+                            {
+                                try
+                                {
+                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine(ex.StackTrace);
+                                }
+                            });
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -866,7 +975,18 @@ public partial class AccountView : Adw.Bin
                             _spinner.Start();
                             _paneScroll.SetSensitive(false);
                             //Work
-                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested));
+                            await Task.Run(async () =>
+                            {
+                                try
+                                {
+                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine(ex.StackTrace);
+                                }
+                            });
                             //Stop Spinner
                             _spinner.Stop();
                             _spinnerBin.SetVisible(false);
@@ -887,7 +1007,18 @@ public partial class AccountView : Adw.Bin
                 _spinner.Start();
                 _paneScroll.SetSensitive(false);
                 //Work
-                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                });
                 //Stop Spinner
                 _spinner.Stop();
                 _spinnerBin.SetVisible(false);
@@ -924,7 +1055,18 @@ public partial class AccountView : Adw.Bin
                     _spinner.Start();
                     _paneScroll.SetSensitive(false);
                     //Work
-                    await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested));
+                    await Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.WriteLine(ex.StackTrace);
+                        }
+                    });
                     //Stop Spinner
                     _spinner.Stop();
                     _spinnerBin.SetVisible(false);
@@ -970,7 +1112,18 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await _controller.AddGroupAsync(groupController.Group);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            });
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -1001,7 +1154,18 @@ public partial class AccountView : Adw.Bin
             _spinner.Start();
             _paneScroll.SetSensitive(false);
             //Work
-            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group));
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await _controller.UpdateGroupAsync(groupController.Group);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            });
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
