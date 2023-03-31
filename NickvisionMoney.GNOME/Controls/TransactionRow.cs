@@ -11,48 +11,32 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A row for displaying a transaction
 /// </summary>
-public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Transaction>
+public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transaction>
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Color
-    {
-        public float Red;
-        public float Green;
-        public float Blue;
-        public float Alpha;
-    }
+    private delegate bool GSourceFunc(nint data);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
+    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gdk_rgba_to_string(ref Color rgba);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
-
-    private const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
-
+    private Transaction _transaction;
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
+    private TransactionId _idWidget;
 
     [Gtk.Connect] private readonly Adw.ActionRow _row;
-    [Gtk.Connect] private readonly Gtk.Button _idButton;
-    [Gtk.Connect] private readonly Gtk.Image _compactIcon;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Box _suffixBox;
 
+    private GSourceFunc[] _callbacks;
+
     /// <summary>
     /// The id of the Transaction
     /// </summary>
-    public uint Id { get; private set; }
-
-    public Gtk.FlowBoxChild? Container { get; set; }
+    public uint Id => _transaction.Id;
 
     /// <summary>
     /// Occurs when the edit button on the row is clicked
@@ -63,16 +47,54 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
+    /// <summary>
+    /// Constructs a TransactionRow
+    /// </summary>
+    /// <param name="builder">Gtk.Builder</param>
+    /// <param name="transaction">The Transaction to display</param>
+    /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="localizer">The Localizer for the app</param>
     private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
+        _callbacks = new GSourceFunc[3];
+        _callbacks[0] = (x) =>
+        {
+            //Row Settings
+            _row.SetTitle(_transaction.Description);
+            _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
+            _idWidget.UpdateColor(_transaction.RGBA);
+            //Amount Label
+            _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
+            _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
+            _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+            //Buttons Box
+            _editButton.SetVisible(_transaction.RepeatFrom <= 0);
+            _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
+            _deleteButton.SetVisible(_transaction.RepeatFrom <= 0);
+            _deleteButton.SetSensitive(_transaction.RepeatFrom <= 0);
+            return false;
+        };
+        _callbacks[1] = (x) =>
+        {
+            SetVisible(true);
+            return false;
+        };
+        _callbacks[2] = (x) =>
+        {
+            SetVisible(false);
+            return false;
+        };
         //Build UI
         builder.Connect(this);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
+        _idWidget = new TransactionId(transaction.Id, localizer);
+        _row.AddPrefix(_idWidget);
         //Group Settings
         UpdateRow(transaction, cultureAmount, cultureDate);
     }
@@ -108,8 +130,7 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
                 _suffixBox.SetOrientation(Gtk.Orientation.Horizontal);
                 _suffixBox.SetMarginTop(0);
             }
-            _idButton.SetVisible(!_isSmall);
-            _compactIcon.SetVisible(_isSmall);
+            _idWidget.SetCompact(_isSmall);
         }
     }
 
@@ -121,39 +142,21 @@ public partial class TransactionRow : Adw.PreferencesGroup, IModelRowControl<Tra
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
     public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
     {
-        Id = transaction.Id;
+        _transaction = transaction;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        //Color
-        var color = new Color();
-        if (!gdk_rgba_parse(ref color, transaction.RGBA))
-        {
-            gdk_rgba_parse(ref color, "#3584e4");
-        }
-        //Row Settings
-        _row.SetTitle(transaction.Description);
-        _row.SetSubtitle($"{transaction.Date.ToString("d", _cultureDate)}{(transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}" : "")}");
-        //Button Id
-        _idButton.SetLabel(transaction.Id.ToString());
-        var btnCssProvider = Gtk.CssProvider.New();
-        var btnCss = "#btnId, #iconCompact { font-size: 14px; color: " + gdk_rgba_to_string(ref color) + "; }";
-        gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-        _idButton.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
-        _compactIcon.GetStyleContext().AddProvider(btnCssProvider, GTK_STYLE_PROVIDER_PRIORITY_USER);
-        //Amount Label
-        _amountLabel.SetLabel($"{(transaction.Type == TransactionType.Income ? "+  " : "-  ")}{transaction.Amount.ToAmountString(_cultureAmount)}");
-        _amountLabel.RemoveCssClass(transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
-        _amountLabel.AddCssClass(transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
-        //Buttons Box
-        _editButton.SetVisible(transaction.RepeatFrom <= 0);
-        _editButton.SetSensitive(transaction.RepeatFrom <= 0);
-        _deleteButton.SetVisible(transaction.RepeatFrom <= 0);
-        _deleteButton.SetSensitive(transaction.RepeatFrom <= 0);
+        g_main_context_invoke(IntPtr.Zero, _callbacks[0], IntPtr.Zero);
     }
 
-    public void Show() => Container!.Show();
+    /// <summary>
+    /// Shows the row
+    /// </summary>
+    public new void Show() => g_main_context_invoke(IntPtr.Zero, _callbacks[1], IntPtr.Zero);
 
-    public void Hide() => Container!.Hide();
+    /// <summary>
+    /// Hides the row
+    /// </summary>
+    public new void Hide() => g_main_context_invoke(IntPtr.Zero, _callbacks[2], IntPtr.Zero);
 
     /// <summary>
     /// Occurs when the edit button is clicked

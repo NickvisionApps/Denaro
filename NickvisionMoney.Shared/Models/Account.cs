@@ -224,7 +224,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool SetPassword(string password)
     {
-        //Remove password if empty (decrypts)
+        //Remove Password If Empty (Decrypts)
         if (string.IsNullOrEmpty(password))
         {
             //Create Temp Decrypted Database
@@ -256,7 +256,7 @@ public class Account : IDisposable
         cmdQuote.CommandText = "SELECT quote($password)";
         cmdQuote.Parameters.AddWithValue("$password", password);
         var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
-        //Change password
+        //Change Password
         if (IsEncrypted)
         {
             using var command = _database.CreateCommand();
@@ -273,7 +273,7 @@ public class Account : IDisposable
             _database.Open();
             _isEncrypted = true;
         }
-        //Sets new password (encrypts for first time)
+        //Sets New Password (Encrypts For First Time)
         else
         {
             //Create Temp Encrypted Database
@@ -509,12 +509,11 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
-            if (transaction.Id > NextAvailableTransactionId)
+            if (transaction.Id >= NextAvailableTransactionId)
             {
-                NextAvailableTransactionId = transaction.Id;
+                NextAvailableTransactionId = transaction.Id + 1;
             }
         }
-        NextAvailableTransactionId++;
         //Repeats
         await SyncRepeatTransactionsAsync();
         //Cleanup
@@ -846,7 +845,10 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
-            NextAvailableTransactionId++;
+            if (transaction.Id >= NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId = transaction.Id + 1;
+            }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;

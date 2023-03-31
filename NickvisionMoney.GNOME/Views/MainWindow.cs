@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -30,9 +29,6 @@ public partial class MainWindow : Adw.ApplicationWindow
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_css_provider_load_from_data(nint provider, string data, int length);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_new();
@@ -210,7 +206,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateRecentAccountsOnStart();
             _startPageRecentAccountsGroup.SetVisible(true);
         }
-        Show();
+        Present();
     }
 
     /// <summary>
@@ -253,9 +249,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="title">The title of the account</param>
     public async Task<string?> AccountLoginAsync(string title)
     {
-        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer);
+        var tcs = new TaskCompletionSource<string?>();
+        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer, tcs);
         passwordDialog.SetIconName(_controller.AppInfo.ID);
-        return await passwordDialog.RunAsync();
+        passwordDialog.Present();
+        return await tcs.Task;
     }
 
     /// <summary>
@@ -309,61 +307,32 @@ public partial class MainWindow : Adw.ApplicationWindow
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var saveFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+        _saveCallback = async (source, res, data) =>
         {
-            var saveFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-            _saveCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
+                var path = g_file_get_path(fileHandle);
+                if (_controller.IsAccountOpen(path))
                 {
-                    var path = g_file_get_path(fileHandle);
-                    if (_controller.IsAccountOpen(path))
-                    {
-                        _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
-                    }
-                    else
-                    {
-                        if (File.Exists(path))
-                        {
-                            File.Delete(path);
-                        }
-                        await _controller.AddAccountAsync(path);
-                    }
+                    _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
                 }
-            };
-            gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var saveFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["NewAccount"], this, Gtk.FileChooserAction.Save, _controller.Localizer["Save"], _controller.Localizer["Cancel"]);
-            saveFileDialog.SetModal(true);
-            saveFileDialog.AddFilter(filter);
-            saveFileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
+                else
                 {
-                    var path = saveFileDialog.GetFile()!.GetPath() ?? "";
-                    if (_controller.IsAccountOpen(path))
+                    if (File.Exists(path))
                     {
-                        _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
+                        File.Delete(path);
                     }
-                    else
-                    {
-                        if (File.Exists(path))
-                        {
-                            File.Delete(path);
-                        }
-                        await _controller.AddAccountAsync(path);
-                    }
+                    await _controller.AddAccountAsync(path);
                 }
-            };
-            saveFileDialog.Show();
-        }
+            }
+        };
+        gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -378,39 +347,21 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         filter.AddPattern("*.NMONEY");
-        if (Gtk.Functions.GetMinorVersion() >= 9)
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
         {
-            var openFileDialog = gtk_file_dialog_new();
-            gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
-            var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-            filters.Append(filter);
-            gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-            _openCallback = async (source, res, data) =>
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
             {
-                var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-                if (fileHandle != IntPtr.Zero)
-                {
-                    var path = g_file_get_path(fileHandle);
-                    await _controller.AddAccountAsync(path);
-                }
-            };
-            gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
-        }
-        else
-        {
-            var openFileDialog = Gtk.FileChooserNative.New(_controller.Localizer["OpenAccount"], this, Gtk.FileChooserAction.Open, _controller.Localizer["Open"], _controller.Localizer["Cancel"]);
-            openFileDialog.SetModal(true);
-            openFileDialog.AddFilter(filter);
-            openFileDialog.OnResponse += async (sender, e) =>
-            {
-                if (e.ResponseId == (int)Gtk.ResponseType.Accept)
-                {
-                    var path = openFileDialog.GetFile()!.GetPath() ?? "";
-                    await _controller.AddAccountAsync(path);
-                }
-            };
-            openFileDialog.Show();
-        }
+                var path = g_file_get_path(fileHandle);
+                await _controller.AddAccountAsync(path);
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -459,7 +410,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, this);
         preferencesDialog.SetIconName(_controller.AppInfo.ID);
-        preferencesDialog.Show();
+        preferencesDialog.Present();
     }
 
     /// <summary>
@@ -473,7 +424,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_root");
         shortcutsWindow.SetTransientFor(this);
         shortcutsWindow.SetIconName(_controller.AppInfo.ID);
-        shortcutsWindow.Show();
+        shortcutsWindow.Present();
     }
 
     /// <summary>
@@ -502,7 +453,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
         dialog.SetTranslatorCredits((string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]));
         dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
-        dialog.Show();
+        dialog.Present();
     }
 
     /// <summary>
@@ -565,49 +516,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Creates a row for recent accounts lists
     /// </summary>
-    /// <param name="accountPath">string</param>
+    /// <param name="recentAccount">Account to create the row for</param>
+    /// <param name="onStartScreen">Whether the row will appear on start screen or in popover</param>
     private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
-        var row = Adw.ActionRow.New();
-        row.SetTitle(recentAccount.Name);
-        row.SetSubtitle(recentAccount.Path);
-        var button = Gtk.Button.NewFromIconName("wallet2-symbolic");
-        button.SetHalign(Gtk.Align.Center);
-        button.SetValign(Gtk.Align.Center);
-        button.SetFocusable(false);
-        var bgColorString = _controller.GetColorForAccountType(recentAccount.Type);
-        var bgColorStrArray = new Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
-        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-        var btnCssProvider = Gtk.CssProvider.New();
-        if (onStartScreen)
-        {
-            button.AddCssClass("wallet-button");
-            var strType = _controller.Localizer["AccountType", recentAccount.Type.ToString()];
-            var btnType = Gtk.Button.NewWithLabel(strType);
-            btnType.SetValign(Gtk.Align.Center);
-            btnType.SetFocusable(false);
-            btnType.SetCanTarget(false);
-            var btnCss = "#btnType { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            btnType.SetName("btnType");
-            btnType.GetStyleContext().AddProvider(btnCssProvider, 800);
-            btnType.AddCssClass("account-tag");
-            row.AddSuffix(btnType);
-        }
-        else
-        {
-            var btnCss = "#btnWallet { color: " + (luma < 0.5 ? "#fff" : "#000") + "; background-color: " + bgColorString + "; }";
-            gtk_css_provider_load_from_data(btnCssProvider.Handle, btnCss, btnCss.Length);
-            button.SetName("btnWallet");
-            button.GetStyleContext().AddProvider(btnCssProvider, 800);
-        }
-        button.OnClicked += async (Gtk.Button sender, EventArgs e) =>
+        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen, _controller.Localizer);
+        row.OnOpenAccount += async (sender, e) =>
         {
             _accountPopover.Popdown();
             await _controller.AddAccountAsync(row.GetSubtitle()!);
         };
-        row.AddPrefix(button);
-        row.SetActivatableWidget(button);
         return row;
     }
 

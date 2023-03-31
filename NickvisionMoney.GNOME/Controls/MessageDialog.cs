@@ -70,9 +70,9 @@ public partial class MessageDialog
     }
 
     /// <summary>
-    /// Shows the dialog
+    /// Presents the dialog
     /// </summary>
-    public void Show() => _dialog.Show();
+    public void Present() => _dialog.Present();
 
     /// <summary>
     /// Destroys the dialog

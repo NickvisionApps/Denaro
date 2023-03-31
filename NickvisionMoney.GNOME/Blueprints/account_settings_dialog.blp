@@ -1,248 +1,282 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.MessageDialog _root {
-  heading: _("AccountSettings");
+Adw.Window _root {
   default-width: 450;
-  hide-on-close: true;
   modal: true;
+  resizable: false;
   
-  Adw.ViewStack _viewStack {
-    Adw.ViewStackPage {
-      name: "main";
-      child: Gtk.Box {
-        orientation: vertical;
-        spacing: 16;
-        margin-top: 4;
-        
-        Adw.PreferencesGroup {
-          Adw.EntryRow _nameRow {
-            title: _("Name.Field");
-          }
-          
-          Adw.ComboRow _accountTypeRow {
-            title: _("AccountType.Field");
-            subtitle: _("AccountType.Description");
-            subtitle-lines: 4;
-            model: Gtk.StringList {
-              strings [_("AccountType.Checking"), _("AccountType.Savings"), _("AccountType.Business")]
-            };
-          }
-          
-          Adw.ActionRow {
-            title: _("DefaultTransactionType.Field");
+  content: Gtk.Box {
+    orientation: vertical;
 
-            [suffix]
-            Gtk.Box {
-              orientation: horizontal;
-              valign: center;
+    Adw.HeaderBar _header {
+      title-widget: Gtk.Label {};
 
-              Gtk.ToggleButton _incomeButton {
-                label: _("Income");
-              }
+      [start]
+      Gtk.Button _btnBack {
+        halign: start;
+        valign: center;
+        visible: false;
+        child: Adw.ButtonContent {
+          icon-name: "go-previous-symbolic";
+          label: _("Back");
+        };
+      }
 
-              Gtk.ToggleButton _expenseButton {
-                label: _("Expense");
-              }
-
-              styles ["linked"]
-            }
-          }
-        }
-
-        Adw.PreferencesGroup {
-          Adw.ActionRow _customCurrencyRow {
-            title: _("Currency");
-            subtitle: _("ManageCurrency.Description");
-            icon-name: "money-symbolic";
-
-            [suffix]
-            Gtk.Button _btnCustomCurrency {
-              icon-name: "go-next-symbolic";
-              valign: center;
-              styles ["flat"]
-            }
-
-            activatable-widget: _btnCustomCurrency;
-          }
-
-          Adw.ActionRow _managePasswordRow {
-            title: _("ManagePassword");
-            subtitle: _("ManagePassword.Description");
-            icon-name: "dialog-password-symbolic";
-
-            [suffix]
-            Gtk.Button _btnManagePassword {
-              icon-name: "go-next-symbolic";
-              valign: center;
-              styles ["flat"]
-            }
-
-            activatable-widget: _btnManagePassword;
-          }
-        }
-      };
+      styles ["flat"]
     }
 
-    Adw.ViewStackPage {
-      name: "currency";
-      child: Gtk.Box {
-        visible: false;
+    Gtk.WindowHandle {
+      Gtk.Box {
         orientation: vertical;
-        spacing: 12;
-
-        Gtk.Button _btnCurrencyPageBack {
-          halign: start;
-          child: Adw.ButtonContent {
-            icon-name: "go-previous-symbolic";
-            label: _("Back");
-          };
-        }
+        spacing: 24;
         
-        Gtk.Label _reportedCurrencyLabel {
-          use-markup: true;
-          justify: center;
+        Gtk.Label _titleLabel {
+          label: _("AccountSettings");
+
+          styles ["title-2"]
         }
 
-        Adw.PreferencesGroup {
-          Adw.ActionRow {
-            title: _("UseCustomCurrency.Field");
+        Adw.ViewStack _viewStack {
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
 
-            [suffix]
-            Gtk.Switch _switchCustomCurrency {
-              valign: center;
-            }
+          Adw.ViewStackPage {
+            name: "main";
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 4;
 
-            activatable-widget: _switchCustomCurrency;
-          }
-        }
+              Adw.PreferencesGroup {
+                Adw.EntryRow _nameRow {
+                  title: _("Name.Field");
+                  activates-default: true;
+                }
 
-        Adw.PreferencesGroup {
-          sensitive: bind _switchCustomCurrency.active;
-          Adw.ActionRow _customSymbolRow {
-            title: _("CustomCurrencySymbol.Field");
+                Adw.ComboRow _accountTypeRow {
+                  title: _("AccountType.Field");
+                  subtitle: _("AccountType.Description");
+                  subtitle-lines: 4;
+                  model: Gtk.StringList {
+                    strings [_("AccountType.Checking"), _("AccountType.Savings"), _("AccountType.Business")]
+                  };
+                }
 
-            [suffix]
-            Gtk.Entry _customSymbolText {
-              valign: center;
-              max-length: 3;
-              placeholder-text: _("CustomCurrencySymbol.Placeholder");
-              activates-default: true;
-            }
-          }
+                Adw.ActionRow {
+                  title: _("DefaultTransactionType.Field");
 
-          Adw.ActionRow _customCodeRow {
-            title: _("CustomCurrencyCode.Field");
+                  [suffix]
+                  Gtk.Box {
+                    orientation: horizontal;
+                    valign: center;
 
-            [suffix]
-            Gtk.Entry _customCodeText {
-              valign: center;
-              max-length: 3;
-              placeholder-text: _("CustomCurrencyCode.Placeholder");
-              activates-default: true;
-            }
-          }
+                    Gtk.ToggleButton _incomeButton {
+                      label: _("Income");
+                    }
 
-          Adw.ActionRow _customDecimalSeparatorRow {
-            title: _("CustomCurrencyDecimalSeparator.Field");
+                    Gtk.ToggleButton _expenseButton {
+                      label: _("Expense");
+                    }
 
-            [suffix]
-            Gtk.DropDown _customDecimalSeparatorDropDown {
-              valign: center;
-            }
+                    styles ["linked"]
+                  }
+                }
+              }
 
-            [suffix]
-            Gtk.Entry _customDecimalSeparatorText {
-              visible: false;
-              valign: center;
-              halign: end;
-              max-length: 2;
-              max-width-chars: 4;
-              activates-default: true;
-            }
-          }
+              Adw.PreferencesGroup {
+                Adw.ActionRow _customCurrencyRow {
+                  title: _("Currency");
+                  subtitle: _("ManageCurrency.Description");
 
-          Adw.ActionRow _customGroupSeparatorRow {
-            title: _("CustomCurrencyGroupSeparator.Field");
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "money-symbolic";
+                  }
 
-            [suffix]
-            Gtk.DropDown _customGroupSeparatorDropDown {
-              valign: center;
-            }
+                  [suffix]
+                  Gtk.Button _btnCustomCurrency {
+                    icon-name: "go-next-symbolic";
+                    valign: center;
+                    can-focus: false;
+                    styles ["flat"]
+                  }
 
-            [suffix]
-            Gtk.Entry _customGroupSeparatorText {
-              visible: false;
-              valign: center;
-              halign: end;
-              max-length: 2;
-              max-width-chars: 4;
-              activates-default: true;
-            }
-          }
+                  activatable-widget: _btnCustomCurrency;
+                }
 
-          Adw.ActionRow _customDecimalDigitsRow {
-            title: _("CustomCurrencyDecimalDigits.Field");
+                Adw.ActionRow _managePasswordRow {
+                  title: _("ManagePassword");
+                  subtitle: _("ManagePassword.Description");
 
-            [suffix]
-            Gtk.DropDown _customDecimalDigitsDropDown {
-              valign: center;
-            }
-          }
-        }
-      };
-    }
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "dialog-password-symbolic";
+                  }
 
-    Adw.ViewStackPage {
-      name: "password";
-      child: Gtk.Box {
-        visible: false;
-        orientation: vertical;
-        spacing: 12;
-        
-        Gtk.Box {
-          orientation: horizontal;
+                  [suffix]
+                  Gtk.Button _btnManagePassword {
+                    icon-name: "go-next-symbolic";
+                    valign: center;
+                    can-focus: false;
+                    styles ["flat"]
+                  }
 
-          Gtk.Button _btnPasswordPageBack {
-            halign: start;
-            child: Adw.ButtonContent {
-              icon-name: "go-previous-symbolic";
-              label: _("Back");
+                  activatable-widget: _btnManagePassword;
+                }
+              }
+
+              Gtk.Button _applyButton {
+                halign: center;
+                valign: center;
+                margin-top: 24;
+                label: _("Apply");
+
+                styles ["pill", "suggested-action"]
+              }
             };
           }
 
-          Gtk.Label _lblPasswordStatus {
-            halign: end;
-            hexpand: true;
+          Adw.ViewStackPage {
+            name: "currency";
+            child: Gtk.Box {
+              visible: false;
+              orientation: vertical;
+              spacing: 24;
 
-            styles ["error"]
+              Gtk.Label _reportedCurrencyLabel {
+                use-markup: true;
+                justify: center;
+              }
+
+              Adw.PreferencesGroup {
+                Adw.ActionRow {
+                  title: _("UseCustomCurrency.Field");
+
+                  [suffix]
+                  Gtk.Switch _switchCustomCurrency {
+                    valign: center;
+                  }
+
+                  activatable-widget: _switchCustomCurrency;
+                }
+              }
+
+              Adw.PreferencesGroup {
+                sensitive: bind _switchCustomCurrency.active;
+                Adw.ActionRow _customSymbolRow {
+                  title: _("CustomCurrencySymbol.Field");
+
+                  [suffix]
+                  Gtk.Entry _customSymbolText {
+                    valign: center;
+                    max-length: 3;
+                    placeholder-text: _("CustomCurrencySymbol.Placeholder");
+                  }
+                }
+
+                Adw.ActionRow _customCodeRow {
+                  title: _("CustomCurrencyCode.Field");
+
+                  [suffix]
+                  Gtk.Entry _customCodeText {
+                    valign: center;
+                    max-length: 3;
+                    placeholder-text: _("CustomCurrencyCode.Placeholder");
+                  }
+                }
+
+                Adw.ActionRow _customDecimalSeparatorRow {
+                  title: _("CustomCurrencyDecimalSeparator.Field");
+
+                  [suffix]
+                  Gtk.DropDown _customDecimalSeparatorDropDown {
+                    valign: center;
+                  }
+
+                  [suffix]
+                  Gtk.Entry _customDecimalSeparatorText {
+                    visible: false;
+                    valign: center;
+                    halign: end;
+                    max-length: 2;
+                    max-width-chars: 4;
+                  }
+                }
+
+                Adw.ActionRow _customGroupSeparatorRow {
+                  title: _("CustomCurrencyGroupSeparator.Field");
+
+                  [suffix]
+                  Gtk.DropDown _customGroupSeparatorDropDown {
+                    valign: center;
+                  }
+
+                  [suffix]
+                  Gtk.Entry _customGroupSeparatorText {
+                    visible: false;
+                    valign: center;
+                    halign: end;
+                    max-length: 2;
+                    max-width-chars: 4;
+                  }
+                }
+
+                Adw.ActionRow _customDecimalDigitsRow {
+                  title: _("CustomCurrencyDecimalDigits.Field");
+
+                  [suffix]
+                  Gtk.DropDown _customDecimalDigitsDropDown {
+                    valign: center;
+                  }
+                }
+              }
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "password";
+            child: Gtk.Box {
+              visible: false;
+              orientation: vertical;
+              spacing: 24;
+
+              Adw.PreferencesGroup {
+                Adw.PasswordEntryRow _newPasswordRow {
+                  title: _("NewPassword.Field");
+                }
+
+                Adw.PasswordEntryRow _newPasswordConfirmRow {
+                  title: _("ConfirmPassword.Field");
+                }
+
+                Adw.ActionRow {
+                  subtitle: _("ManagePassword.Warning");
+
+                  [suffix]
+                  Gtk.Button _removePasswordButton {
+                    label: _("Remove");
+                    valign: center;
+
+                    styles ["destructive-action"]
+                  }
+
+                  styles ["warning"]
+                }
+              }
+
+              Gtk.Label _lblPasswordStatus {
+                hexpand: true;
+
+                styles ["error"]
+              }
+            };
           }
         }
-        
-        Adw.PreferencesGroup {
-          Adw.PasswordEntryRow _newPasswordRow {
-            title: _("NewPassword.Field");
-          }
-
-          Adw.PasswordEntryRow _newPasswordConfirmRow {
-            title: _("ConfirmPassword.Field");
-          }
-
-          Adw.ActionRow {
-            subtitle: _("ManagePassword.Warning");
-
-            [suffix]
-            Gtk.Button _removePasswordButton {
-              label: _("Remove");
-              valign: center;
-
-              styles ["destructive-action"]
-            }
-
-            styles ["warning"]
-          }
-        }
-      };
+      }
     }
-  }
+  };
+
+  default-widget: _applyButton;
 }

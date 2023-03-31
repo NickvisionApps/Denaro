@@ -68,13 +68,7 @@ public sealed partial class GroupDialog : ContentDialog
     public new async Task<bool> ShowAsync()
     {
         var result = await base.ShowAsync();
-        if (result == ContentDialogResult.None)
-        {
-            _controller.Accepted = false;
-            return false;
-        }
-        _controller.Accepted = true;
-        return true;
+        return result != ContentDialogResult.None;
     }
 
     /// <summary>

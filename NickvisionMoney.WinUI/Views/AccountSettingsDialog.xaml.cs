@@ -152,11 +152,9 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             }
             else
             {
-                _controller.Accepted = false;
                 return false;
             }
         }
-        _controller.Accepted = true;
         return true;
     }
 

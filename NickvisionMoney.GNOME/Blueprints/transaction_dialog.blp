@@ -1,166 +1,225 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.MessageDialog _root {
-  default-width: 420;
-  hide-on-close: true;
+Adw.Window _root {
+  default-width: 450;
+  resizable: false;
   modal: true;
 
-  Gtk.Box {
+  content: Gtk.Box {
     orientation: vertical;
-    spacing: 10;
 
-    Adw.PreferencesGroup {
-      Adw.EntryRow _descriptionRow {
-        title: _("Description.Field");
-        input-hints: spellcheck;
-        activates-default: true;
-      }
-      
-      Adw.EntryRow _amountRow {
-        title: _("Amount.Field");
-        input-purpose: number;
-        activates-default: true;
-        
-        [suffix]
-        Gtk.Label _currencyLabel {
-          styles ["dim-label"]
+    Adw.HeaderBar {
+      title-widget: Gtk.Label {};
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-start: 24;
+        margin-end: 24;
+
+        Gtk.Label _titleLabel {
+          styles ["title-2"]
         }
-      }
-      
-      Adw.ActionRow {
-        title: _("TransactionType.Field");
-        
-        
-        [suffix]
-         Gtk.Box {
-          orientation: horizontal;
-          valign: center;
-          
-          Gtk.ToggleButton _incomeButton {
-            label: _("Income");
+
+        Adw.PreferencesGroup {
+          Adw.EntryRow _descriptionRow {
+            title: _("Description.Field");
+            input-hints: spellcheck;
+            activates-default: true;
           }
           
-          Gtk.ToggleButton _expenseButton {
-            label: _("Expense");
+          Adw.EntryRow _amountRow {
+            title: _("Amount.Field");
+            input-purpose: number;
+            activates-default: true;
+
+            [suffix]
+            Gtk.Label _currencyLabel {
+              styles ["dim-label"]
+            }
+          }
+          
+          Adw.ActionRow {
+            title: _("TransactionType.Field");
+
+
+            [suffix]
+             Gtk.Box {
+              orientation: horizontal;
+              valign: center;
+
+              Gtk.ToggleButton _incomeButton {
+                label: _("Income");
+              }
+
+              Gtk.ToggleButton _expenseButton {
+                label: _("Expense");
+              }
+
+              styles ["linked"]
+            }
+          }
+        }
+        
+        Adw.PreferencesGroup {
+          Adw.ActionRow {
+            title: _("Date.Field");
+            activatable-widget: _dateCalendarButton;
+
+            [suffix]
+            Gtk.MenuButton _dateCalendarButton {
+              valign: center;
+              popover: Gtk.Popover {
+                Gtk.Calendar _dateCalendar {
+                  name: "calendarTransactions";
+                }
+              };
+
+              styles ["flat", "calendar-button"]
+            }
+          }
+          
+          Adw.ComboRow _repeatIntervalRow {
+            title: _("TransactionRepeatInterval.Field");
+            model: Gtk.StringList {
+              strings [_("RepeatInterval.Never"), _("RepeatInterval.Daily"), _("RepeatInterval.Weekly"), _("RepeatInterval.Biweekly"), _("RepeatInterval.Monthly"), _("RepeatInterval.Quarterly"), _("RepeatInterval.Yearly"), _("RepeatInterval.Biyearly")]
+            };
+          }
+          
+          Adw.ActionRow _repeatEndDateRow {
+            title: _("TransactionRepeatEndDate.Field");
+            activatable-widget: _repeatEndDateCalendarButton;
+
+            [suffix]
+            Gtk.MenuButton _repeatEndDateCalendarButton {
+              valign: center;
+              popover: Gtk.Popover {
+                Gtk.Calendar _repeatEndDateCalendar {
+                  name: "calendarTransactions";
+                }
+              };
+
+              styles ["flat", "calendar-button"]
+            }
+
+            [suffix]
+            Gtk.Button _repeatEndDateClearButton {
+              valign: center;
+              icon-name: "larger-brush-symbolic";
+              tooltip-text: _("TransactionRepeatEndDate.Clear");
+              margin-start: 2;
+
+              styles ["flat"]
+            }
+          }
+        }
+
+        Gtk.Box {
+          orientation: horizontal;
+          homogeneous: true;
+          
+          Adw.PreferencesGroup {
+            hexpand: true;
+            
+            Adw.ComboRow _groupRow {
+              title: _("Group.Field");
+              title-lines: 1;
+            }
+            
+            styles ["transaction-dialog-group"]
+          }
+          
+          Adw.PreferencesGroup {
+            hexpand: true;
+            
+            Adw.ActionRow _colorRow {
+              title: _("Color.Field");
+
+              [suffix]
+              Gtk.ColorDialogButton _colorButton {
+                valign: center;
+              }
+            }
+            
+            styles ["transaction-dialog-color"]
           }
           
           styles ["linked"]
-        }       
-      }
-    }
-    
-    Adw.PreferencesGroup {
-      Adw.ActionRow {
-        title: _("Date.Field");
-        activatable-widget: _dateCalendarButton;
-        
-        [suffix]
-        Gtk.MenuButton _dateCalendarButton {
-          valign: center;
-          popover: Gtk.Popover {
-            Gtk.Calendar _dateCalendar {
-              name: "calendarTransactions";
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow {
+            title: _("Receipt.Field");
+            
+            [suffix]
+            Gtk.Box {
+              orientation: horizontal;
+              spacing: 6;
+
+              Gtk.Button _viewReceiptButton {
+                valign: center;
+                tooltip-text: _("View");
+
+                Adw.ButtonContent _viewReceiptButtonContent {
+                  icon-name: "image-x-generic-symbolic";
+                }
+
+                styles ["flat"]
+              }
+
+              Gtk.Button _deleteReceiptButton {
+                valign: center;
+                tooltip-text: _("Delete");
+
+                Adw.ButtonContent {
+                  icon-name: "user-trash-symbolic";
+                }
+
+                styles ["flat"]
+              }
+
+              Gtk.Button _uploadReceiptButton {
+                valign: center;
+                tooltip-text: _("Upload");
+
+                Adw.ButtonContent _uploadReceiptButtonContent {
+                  icon-name: "document-send-symbolic";
+                }
+
+                styles ["flat"]
+              }
             }
-          };
-          
-          styles ["flat"]
+          }
         }
-      }
-      
-      Adw.ComboRow _repeatIntervalRow {
-        title: _("TransactionRepeatInterval.Field");
-        model: Gtk.StringList {
-          strings [_("RepeatInterval.Never"), _("RepeatInterval.Daily"), _("RepeatInterval.Weekly"), _("RepeatInterval.Biweekly"), _("RepeatInterval.Monthly"), _("RepeatInterval.Quarterly"), _("RepeatInterval.Yearly"), _("RepeatInterval.Biyearly")]
-        };
-      }
-      
-      Adw.ActionRow _repeatEndDateRow {
-        title: _("TransactionRepeatEndDate.Field");
-        activatable-widget: _repeatEndDateCalendarButton;
-        
-        [suffix]
-        Gtk.MenuButton _repeatEndDateCalendarButton {
-          valign: center;
-          popover: Gtk.Popover {
-            Gtk.Calendar _repeatEndDateCalendar {
-              name: "calendarTransactions";
-            }
-          };
-          
-          styles ["flat"]
-        }
-        
-        [suffix]
-        Gtk.Button _repeatEndDateClearButton {
-          valign: center;
-          icon-name: "window-close-symbolic";
-          tooltip-text: _("TransactionRepeatEndDate.Clear");
-          
-          styles ["flat"]
-        }
-      }
-    }
-    
-    Adw.PreferencesGroup {
-      Adw.ComboRow _groupRow {
-        title: _("Group.Field");
-      }
-      
-      Adw.ActionRow {
-        title: _("Color.Field");
-        activatable-widget: _colorButton;
-        
-        [suffix]
-        Gtk.ColorButton _colorButton {
-          valign: center;
-        }
-      }
-    }
-    
-    Adw.PreferencesGroup {
-      Adw.ActionRow {
-        title: _("Receipt.Field");
-        
-        [suffix]
+
         Gtk.Box {
           orientation: horizontal;
-          spacing: 6;
-          
-          Gtk.Button _viewReceiptButton {
+          spacing: 24;
+          halign: center;
+          homogeneous: true;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          Gtk.Button _copyButton {
             valign: center;
-            tooltip-text: _("View");
+            label: _("MakeCopy");
             
-            Adw.ButtonContent _viewReceiptButtonContent {
-              icon-name: "image-x-generic-symbolic";
-            }
-            
-            styles ["flat"]
+            styles ["pill"]
           }
-          
-          Gtk.Button _deleteReceiptButton {
+
+          Gtk.Button _applyButton {
             valign: center;
-            tooltip-text: _("Delete");
-            
-            Adw.ButtonContent {
-              icon-name: "user-trash-symbolic";
-            }
-            
-            styles ["flat"]
-          }
-          
-          Gtk.Button _uploadReceiptButton {
-            valign: center;
-            tooltip-text: _("Upload");
-            
-            Adw.ButtonContent _uploadReceiptButtonContent {
-              icon-name: "document-send-symbolic";
-            }
-            
-            styles ["flat"]
+
+            styles ["pill", "suggested-action"]
           }
         }
       }
     }
-  }
+  };
+
+  default-widget: _applyButton;
 }

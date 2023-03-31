@@ -97,10 +97,8 @@ public sealed partial class TransferDialog : ContentDialog
         var result = await base.ShowAsync();
         if (result == ContentDialogResult.None)
         {
-            _controller.Accepted = false;
             return false;
         }
-        _controller.Accepted = true;
         return true;
     }
 
