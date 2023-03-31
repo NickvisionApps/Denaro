@@ -342,7 +342,7 @@ public partial class AccountView : Adw.Bin
                 {
                     _groupsList.Insert(row, index.Value);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
@@ -420,7 +420,7 @@ public partial class AccountView : Adw.Bin
                 }
                 return false;
             };
-            
+
         }
         else
         {
@@ -469,7 +469,7 @@ public partial class AccountView : Adw.Bin
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
@@ -816,7 +816,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-            }); 
+            });
             //Stop Spinner
             _spinner.Stop();
             _spinnerBin.SetVisible(false);
@@ -848,16 +848,16 @@ public partial class AccountView : Adw.Bin
             _paneScroll.SetSensitive(false);
             //Work
             await Task.Run(async () =>
-            { 
-                try 
-                { 
-                    await _controller.AddTransactionAsync(transactionController.Transaction); 
-                } 
-                catch (Exception ex) 
-                { 
-                    Console.WriteLine(ex.Message); 
-                    Console.WriteLine(ex.StackTrace); 
-                } 
+            {
+                try
+                {
+                    await _controller.AddTransactionAsync(transactionController.Transaction);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
             });
             //Stop Spinner
             _spinner.Stop();

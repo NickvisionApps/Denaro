@@ -119,7 +119,7 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        if(string.IsNullOrEmpty(Transaction.RGBA))
+        if (string.IsNullOrEmpty(Transaction.RGBA))
         {
             Transaction.RGBA = transactionDefaultColor;
         }

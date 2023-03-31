@@ -161,15 +161,15 @@ public class Configuration
             {
                 update = true;
             }
-            if(update)
+            if (update)
             {
-                if(recents.Count == 0)
+                if (recents.Count == 0)
                 {
                     RecentAccount1 = new RecentAccount();
                     RecentAccount2 = new RecentAccount();
                     RecentAccount3 = new RecentAccount();
                 }
-                else if(recents.Count == 1)
+                else if (recents.Count == 1)
                 {
                     RecentAccount1 = recents[0];
                     RecentAccount2 = new RecentAccount();

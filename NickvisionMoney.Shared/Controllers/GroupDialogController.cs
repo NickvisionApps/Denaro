@@ -53,7 +53,7 @@ public class GroupDialogController
         Localizer = localizer;
         Group = (Group)group.Clone();
         IsEditing = true;
-        if(string.IsNullOrEmpty(Group.RGBA))
+        if (string.IsNullOrEmpty(Group.RGBA))
         {
             Group.RGBA = groupDefaultColor;
         }

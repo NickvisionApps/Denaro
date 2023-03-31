@@ -83,7 +83,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
             var sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Both);
             sizeGroup.AddWidget(_filterOverlay);
             sizeGroup.AddWidget(_filterCheckButton);
-            _filterCheckButton.OnToggled += (sender, e) => {
+            _filterCheckButton.OnToggled += (sender, e) =>
+            {
                 if (_filterCheckButton.GetActive())
                 {
                     _filterCheckBackground.SetVisible(true);

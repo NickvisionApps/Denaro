@@ -752,7 +752,7 @@ public class Account : IDisposable
         if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups.Add(group.Id, group);
-            if(group.Id >= NextAvailableGroupId)
+            if (group.Id >= NextAvailableGroupId)
             {
                 NextAvailableGroupId = group.Id + 1;
             }
