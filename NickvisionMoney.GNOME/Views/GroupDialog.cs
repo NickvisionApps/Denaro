@@ -94,6 +94,16 @@ public partial class GroupDialog : Adw.Window
         //Color
         _colorDialog = gtk_color_dialog_new();
         gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
+        _colorButton.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "rgba")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         //Apply Button
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
