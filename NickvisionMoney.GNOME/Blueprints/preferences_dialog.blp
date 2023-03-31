@@ -63,10 +63,10 @@ Adw.PreferencesWindow _root {
         Adw.ActionRow {
           title: _("GroupColor");
           subtitle: _("GroupColorDescription");
-          activatable-widget: _groupColor;
+          activatable-widget: _groupColorButton;
           
           [suffix]
-          Gtk.ColorButton _groupColor {
+          Gtk.ColorDialogButton _groupColorButton {
             valign: center;
           }
         }

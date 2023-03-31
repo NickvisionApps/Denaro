@@ -162,7 +162,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _group = group;
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
         g_main_context_invoke(IntPtr.Zero, _updateCallback, IntPtr.Zero);
     }
 
