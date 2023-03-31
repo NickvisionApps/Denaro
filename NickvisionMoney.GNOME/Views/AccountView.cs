@@ -130,6 +130,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
+    private readonly GSourceFunc _stopSpinner;
     private GSourceFunc[] _rowCallbacks;
 
     /// <summary>
@@ -145,6 +146,14 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _rowCallbacks = new GSourceFunc[5];
+        _stopSpinner = (x) =>
+        {
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
+            return false;
+        };
         //Register Controller Events
         _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
         _controller.UICreateGroupRow = CreateGroupRow;
@@ -506,6 +515,7 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
+        System.Console.WriteLine(System.Environment.CurrentManagedThreadId);
         //Start Spinner
         _noTransactionsStatusPage.SetVisible(false);
         _transactionsScroll.SetVisible(true);
@@ -531,11 +541,7 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups(null, EventArgs.Empty);
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        //Stop Spinner
-        _spinner.Stop();
-        _spinnerBin.SetVisible(false);
-        _mainOverlay.SetOpacity(1.0);
-        _paneScroll.SetSensitive(true);
+        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
     }
 
     /// <summary>
@@ -672,11 +678,7 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
+                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             }
         };
         gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
@@ -817,11 +819,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             }); 
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -859,11 +857,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace); 
                 } 
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -920,11 +914,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
@@ -948,11 +938,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         dialog.Destroy();
                     };
@@ -987,11 +973,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         dialog.Destroy();
                     };
@@ -1019,11 +1001,7 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
+                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             }
             transactionController.Dispose();
             transactionDialog.Close();
@@ -1067,11 +1045,7 @@ public partial class AccountView : Adw.Bin
                             Console.WriteLine(ex.StackTrace);
                         }
                     });
-                    //Stop Spinner
-                    _spinner.Stop();
-                    _spinnerBin.SetVisible(false);
-                    _mainOverlay.SetOpacity(1.0);
-                    _paneScroll.SetSensitive(true);
+                    g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                 }
                 dialog.Destroy();
             };
@@ -1124,11 +1098,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
     }
@@ -1166,11 +1136,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
     }
