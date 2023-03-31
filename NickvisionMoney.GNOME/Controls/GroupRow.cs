@@ -29,6 +29,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
 
+    private GSourceFunc _updateCallback;
+
     /// <summary>
     /// The Id of the Group the row represents
     /// </summary>
@@ -51,6 +53,24 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     {
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
+        _updateCallback = (x) =>
+        {
+            //Row Settings
+            SetTitle(_group.Name);
+            SetSubtitle(_group.Description);
+            //Filter Checkbox
+            _filterCheckButton.SetActive(_filterActive);
+            //Amount Label
+            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToAmountString(_cultureAmount)}");
+            _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
+            if (_group.Id == 0)
+            {
+                _editButton.SetVisible(false);
+                _deleteButton.SetVisible(false);
+                _flowBox.SetValign(Gtk.Align.Center);
+            }
+            return false;
+        };
         //Build UI
         builder.Connect(this);
         //Filter Checkbox
@@ -97,26 +117,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        g_main_context_invoke(IntPtr.Zero, UpdateRowSync, IntPtr.Zero);
-    }
-
-    private bool UpdateRowSync(nint data)
-    {
-        //Row Settings
-        SetTitle(_group.Name);
-        SetSubtitle(_group.Description);
-        //Filter Checkbox
-        _filterCheckButton.SetActive(_filterActive);
-        //Amount Label
-        _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToAmountString(_cultureAmount)}");
-        _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
-        if (_group.Id == 0)
-        {
-            _editButton.SetVisible(false);
-            _deleteButton.SetVisible(false);
-            _flowBox.SetValign(Gtk.Align.Center);
-        }
-        return false;
+        g_main_context_invoke(IntPtr.Zero, _updateCallback, IntPtr.Zero);
     }
 
     /// <summary>
