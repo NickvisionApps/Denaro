@@ -69,7 +69,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Widget _transactionColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _transferColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _groupColorButton;
-    [Gtk.Connect] private readonly Gtk.ColorButton _groupColor;
     [Gtk.Connect] private readonly Gtk.Widget _accountCheckingColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountSavingsColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountBusinessColorButton;
