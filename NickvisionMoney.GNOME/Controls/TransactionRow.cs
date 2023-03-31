@@ -31,6 +31,8 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Box _suffixBox;
 
+    private GSourceFunc[] _callbacks;
+
     /// <summary>
     /// The id of the Transaction
     /// </summary>
@@ -59,6 +61,34 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
+        _callbacks = new GSourceFunc[3];
+        _callbacks[0] = (x) =>
+        {
+            //Row Settings
+            _row.SetTitle(_transaction.Description);
+            _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
+            _idWidget.UpdateColor(_transaction.RGBA);
+            //Amount Label
+            _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
+            _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
+            _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+            //Buttons Box
+            _editButton.SetVisible(_transaction.RepeatFrom <= 0);
+            _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
+            _deleteButton.SetVisible(_transaction.RepeatFrom <= 0);
+            _deleteButton.SetSensitive(_transaction.RepeatFrom <= 0);
+            return false;
+        };
+        _callbacks[1] = (x) =>
+        {
+            SetVisible(true);
+            return false;
+        };
+        _callbacks[2] = (x) =>
+        {
+            SetVisible(false);
+            return false;
+        };
         //Build UI
         builder.Connect(this);
         _editButton.OnClicked += Edit;
@@ -115,59 +145,18 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         _transaction = transaction;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        g_main_context_invoke(IntPtr.Zero, UpdateRowSync, IntPtr.Zero);
+        g_main_context_invoke(IntPtr.Zero, _callbacks[0], IntPtr.Zero);
     }
 
     /// <summary>
     /// Shows the row
     /// </summary>
-    public new void Show() => g_main_context_invoke(IntPtr.Zero, ShowSync, IntPtr.Zero);
+    public new void Show() => g_main_context_invoke(IntPtr.Zero, _callbacks[1], IntPtr.Zero);
 
     /// <summary>
     /// Hides the row
     /// </summary>
-    public new void Hide() => g_main_context_invoke(IntPtr.Zero, HideSync, IntPtr.Zero);
-
-    /// <summary>
-    /// Shows the row
-    /// </summary>
-    public bool ShowSync(nint data)
-    {
-        SetVisible(true);
-        return false;
-    }
-
-    /// <summary>
-    /// Hides the row
-    /// </summary>
-    public bool HideSync(nint data)
-    {
-        SetVisible(false);
-        return false;
-    }
-
-
-    /// <summary>
-    /// Updates the row
-    /// </summary>
-    /// <param name="data">nint</param>
-    private bool UpdateRowSync(nint data)
-    {
-        //Row Settings
-        _row.SetTitle(_transaction.Description);
-        _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
-        _idWidget.UpdateColor(_transaction.RGBA);
-        //Amount Label
-        _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
-        _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
-        _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
-        //Buttons Box
-        _editButton.SetVisible(_transaction.RepeatFrom <= 0);
-        _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
-        _deleteButton.SetVisible(_transaction.RepeatFrom <= 0);
-        _deleteButton.SetSensitive(_transaction.RepeatFrom <= 0);
-        return false;
-    }
+    public new void Hide() => g_main_context_invoke(IntPtr.Zero, _callbacks[2], IntPtr.Zero);
 
     /// <summary>
     /// Occurs when the edit button is clicked
