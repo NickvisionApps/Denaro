@@ -130,6 +130,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
+    private GSourceFunc[] _rowCallbacks;
 
     /// <summary>
     /// The Page widget
@@ -143,6 +144,7 @@ public partial class AccountView : Adw.Bin
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
+        _rowCallbacks = new GSourceFunc[5];
         //Register Controller Events
         _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
         _controller.UICreateGroupRow = CreateGroupRow;
@@ -334,20 +336,21 @@ public partial class AccountView : Adw.Bin
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
         {
-            g_main_context_invoke(IntPtr.Zero, (x) =>
+            _rowCallbacks[0] = (x) =>
             {
                 _groupsList.Insert(row, index.Value);
                 return false;
-            }, IntPtr.Zero);
+            };
         }
         else
         {
-            g_main_context_invoke(IntPtr.Zero, (x) =>
+            _rowCallbacks[0] = (x) =>
             {
                 _groupsList.Append(row);
                 return false;
-            }, IntPtr.Zero);
+            };
         }
+        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[0], IntPtr.Zero);
         return row;
     }
 
@@ -357,11 +360,12 @@ public partial class AccountView : Adw.Bin
     /// <param name="row">The IGroupRowControl</param>
     private void DeleteGroupRow(IGroupRowControl row)
     {
-        g_main_context_invoke(IntPtr.Zero, (x) =>
+        _rowCallbacks[1] = (x) =>
         {
             _groupsList.Remove((GroupRow)row);
             return false;
-        }, IntPtr.Zero);
+        };
+        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[1], IntPtr.Zero);
     }
 
     /// <summary>
@@ -375,27 +379,28 @@ public partial class AccountView : Adw.Bin
         var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
-
         if (index != null)
         {
-            g_main_context_invoke(IntPtr.Zero, (x) =>
+            _rowCallbacks[2] = (x) =>
             {
                 row.IsSmall = _parentWindow.DefaultWidth < 450;
                 _flowBox.Insert(row, index.Value);
                 g_main_context_iteration(g_main_context_default(), false);
                 return false;
-            }, IntPtr.Zero);
+            };
+            
         }
         else
         {
-            g_main_context_invoke(IntPtr.Zero, (x) =>
+            _rowCallbacks[2] = (x) =>
             {
                 row.IsSmall = _parentWindow.DefaultWidth < 450;
                 _flowBox.Append(row);
                 g_main_context_iteration(g_main_context_default(), false);
                 return false;
-            }, IntPtr.Zero);
+            };
         }
+        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[2], IntPtr.Zero);
         return row;
     }
 
@@ -406,7 +411,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="index">The new position</param>
     private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
     {
-        g_main_context_invoke(IntPtr.Zero, (x) =>
+        _rowCallbacks[3] = (x) =>
         {
             var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
             _flowBox.Remove((TransactionRow)row);
@@ -421,7 +426,8 @@ public partial class AccountView : Adw.Bin
                 row.Hide();
             }
             return false;
-        }, IntPtr.Zero);
+        };
+        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[3], IntPtr.Zero);
     }
 
     /// <summary>
@@ -430,11 +436,12 @@ public partial class AccountView : Adw.Bin
     /// <param name="row">The IModelRowControl<Transaction></param>
     private void DeleteTransactionRow(IModelRowControl<Transaction> row)
     {
-        g_main_context_invoke(IntPtr.Zero, (x) =>
+        _rowCallbacks[4] = (x) =>
         {
             _flowBox.Remove((TransactionRow)row);
             return false;
-        }, IntPtr.Zero);
+        };
+        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[4], IntPtr.Zero);
     }
 
     /// <summary>
