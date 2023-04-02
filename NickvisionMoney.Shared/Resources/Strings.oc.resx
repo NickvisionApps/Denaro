@@ -318,7 +318,7 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value>Pas gropat</value>
+		<value>Pas gropada</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
 		<value>Transaccion sens grop</value>
@@ -360,7 +360,7 @@ Aquesta accion se pòt pas anullar.</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value>Agropar</value>
+		<value>Grop</value>
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
@@ -462,7 +462,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Repetir la data de fin (invalida)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value>Agropar</value>
+		<value>Grop</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
 		<value>Color</value>
@@ -511,7 +511,7 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Color per defaut dels transferiments</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value>Una modifcacion d’aqueste paramètre s’aplicarà sonque a las transaccions apondudas recentament.</value>
+		<value>Una modificacion d’aqueste paramètre s’aplicarà sonque a las transaccions apondudas recentament.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
 		<value />
@@ -755,7 +755,7 @@ Traductors :
     <value>Personalizar coma Denaro utiliza los paramètres regionals.</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Ajustar</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
     <value>Currency Symbol</value>
@@ -783,5 +783,8 @@ Traductors :
   </data>
   <data name="TransactionNumber" xml:space="preserve">
     <value>{0} transaccion</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Ajustar un senhal al document PDF ?</value>
   </data>
 </root>
