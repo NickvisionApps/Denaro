@@ -464,11 +464,10 @@ public partial class AccountView : Adw.Bin
         {
             try
             {
-                var oldVisisbility = _flowBox.GetChildAtIndex(index)!.GetChild()!.IsVisible();
                 _flowBox.Remove((TransactionRow)row);
                 _flowBox.Insert((TransactionRow)row, index);
                 g_main_context_iteration(g_main_context_default(), false);
-                if (oldVisisbility)
+                if (((TransactionRow)row).IsVisible())
                 {
                     row.Show();
                 }
