@@ -36,6 +36,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 
     private Group _group;
     private bool _filterActive;
+    private string _defaultColor;
     private CultureInfo _cultureAmount;
     private GSourceFunc _updateCallback;
 
@@ -65,16 +66,17 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
-    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive) : base(builder.GetPointer("_root"), false)
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
+        _defaultColor = defaultColor;
         _updateCallback = (x) =>
         {
             //Color
             var color = new Color();
             if (!gdk_rgba_parse(ref color, _group.RGBA))
             {
-                gdk_rgba_parse(ref color, "#33d17a");
+                gdk_rgba_parse(ref color, _defaultColor);
             }
             //Row Settings
             SetTitle(_group.Name);
@@ -135,7 +137,8 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, localizer, filterActive)
+    /// <param name="defaultColor">The default group color</param>
+    public GroupRow(Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive, string defaultColor) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, localizer, filterActive, defaultColor)
     {
     }
 
