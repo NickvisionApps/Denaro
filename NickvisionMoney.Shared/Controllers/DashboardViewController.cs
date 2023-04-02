@@ -1,8 +1,36 @@
 ﻿using NickvisionMoney.Shared.Helpers;
+using NickvisionMoney.Shared.Models;
 using System.Collections.Generic;
 
 namespace NickvisionMoney.Shared.Controllers;
 
+/// <summary>
+/// An amount in the dashboard
+/// </summary>
+public class DashboardAmount
+{
+    /// <summary>
+    /// The list of currencies in the amount
+    /// </summary>
+    public List<(string Code, string Symbol)> Currencies { get; init; }
+    /// <summary>
+    /// The breakdown dictionary 
+    /// </summary>
+    public Dictionary<(string Code, string Symbol), (decimal Total, string PerAccount)> Breakdown { get; init; }
+
+    /// <summary>
+    /// Constructs a DashboardAmount
+    /// </summary>
+    public DashboardAmount()
+    {
+        Currencies = new List<(string Code, string Symbol)>();
+        Breakdown = new Dictionary<(string Code, string Symbol), (decimal Total, string PerAccount)>();
+    }
+}
+
+/// <summary>
+/// A controller for the a DashboardView
+/// </summary>
 public class DashboardViewController
 {
     private List<AccountViewController> _openAccounts;
@@ -11,6 +39,18 @@ public class DashboardViewController
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
+    /// <summary>
+    /// The DashboardAmount object for incomes
+    /// </summary>
+    public DashboardAmount Income { get; init; }
+    /// <summary>
+    /// The DashboardAmount object for expenses
+    /// </summary>
+    public DashboardAmount Expense { get; init; }
+    /// <summary>
+    /// The DashboardAmount object for totals
+    /// </summary>
+    public DashboardAmount Total { get; init; }
 
     /// <summary>
     /// Constructs a DashboardViewController
@@ -20,5 +60,39 @@ public class DashboardViewController
     {
         _openAccounts = openAccounts;
         Localizer = localizer;
+        Income = new DashboardAmount();
+        Expense = new DashboardAmount();
+        Total = new DashboardAmount();
+        foreach(var controller in openAccounts)
+        {
+            (string Code, string Symbol) currency = (controller.CultureForNumberString.NumberFormat.NaNSymbol, controller.CultureForNumberString.NumberFormat.CurrencySymbol);
+            if(controller.AccountTodayIncome > 0)
+            {
+                if(!Income.Currencies.Contains(currency))
+                {
+                    Income.Currencies.Add(currency);
+                    Income.Breakdown[currency] = (0, "");
+                }
+                Income.Breakdown[currency] = (Income.Breakdown[currency].Total + controller.AccountTodayIncome, Income.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayIncomeString, controller.AccountTitle)}\n");
+            }
+            if (controller.AccountTodayExpense > 0)
+            {
+                if (!Expense.Currencies.Contains(currency))
+                {
+                    Expense.Currencies.Add(currency);
+                    Expense.Breakdown[currency] = (0, "");
+                }
+                Expense.Breakdown[currency] = (Expense.Breakdown[currency].Total + controller.AccountTodayExpense, Expense.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayExpenseString, controller.AccountTitle)}\n");
+            }
+            if (controller.AccountTodayTotal != 0)
+            {
+                if (!Total.Currencies.Contains(currency))
+                {
+                    Total.Currencies.Add(currency);
+                    Total.Breakdown[currency] = (0, "");
+                }
+                Total.Breakdown[currency] = (Total.Breakdown[currency].Total + controller.AccountTodayTotal, Total.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n");
+            }
+        }
     }
 }

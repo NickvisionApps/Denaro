@@ -242,6 +242,11 @@
 	<data name="InvalidPassword" xml:space="preserve">
 		<value>Unable to login to account. Provided password is invalid.</value>
 	</data>
+	
+	<!--DashboardView-->
+	<data name="AmountFromAccount" xml:space="preserve">
+		<value>{0} from {1}</value>
+	</data>
 
 	<!--AccountView-->
 	<data name="AccountActions" xml:space="preserve">
