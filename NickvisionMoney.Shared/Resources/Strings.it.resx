@@ -51,7 +51,8 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -824,5 +825,22 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
     <value>{0} Transazioni</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Gestisci la valuta del account.</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Vorresti aggiungere una password al file PDF?
+
+In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Cartella backup del CSV</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Nessuna cartella backup</value>
   </data>
 </root>
