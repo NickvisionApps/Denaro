@@ -241,7 +241,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Updates the window's subtitle
     /// </summary>
     /// <param name="s">The new subtitle</param>
-    private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? s : "");
+    private void UpdateSubtitle(string s) => _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? s : "");
 
     /// <summary>
     /// Occurs when an account needs a login
@@ -262,10 +262,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private async void AccountAdded(object? sender, EventArgs e)
     {
         _viewStack.SetVisibleChildName("pageTabs");
-        var newAccountView = new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.Count - 1], this, _tabView, _flapToggleButton, UpdateSubtitle);
+        var newAccountView = new AccountView(_controller.GetMostRecentAccountViewController(), this, _tabView, _flapToggleButton, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
+        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.GetMostRecentAccountViewController().AccountTitle : "");
         _accountMenuButton.SetVisible(true);
         _flapToggleButton.SetVisible(true);
         await newAccountView.StartupAsync();
@@ -370,7 +370,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnCloseAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _accountPopover.Popdown();
-        if (_controller.OpenAccounts.Count == 0)
+        if (_controller.NumberOfOpenAccounts == 0)
         {
             _application.Quit();
             return;
@@ -388,8 +388,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         var indexPage = _tabView.GetPagePosition(args.Page);
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
-        _windowTitle.SetSubtitle(_controller.OpenAccounts.Count == 1 ? _controller.OpenAccounts[0].AccountTitle : "");
-        if (_controller.OpenAccounts.Count == 0)
+        _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.GetMostRecentAccountViewController().AccountTitle : "");
+        if (_controller.NumberOfOpenAccounts == 0)
         {
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _accountMenuButton.SetVisible(false);
@@ -408,7 +408,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Preferences(Gio.SimpleAction sender, EventArgs e)
     {
-        var preferencesDialog = new PreferencesDialog(_controller.PreferencesViewController, _application, this);
+        var preferencesDialog = new PreferencesDialog(_controller.CreatePreferencesViewController(), _application, this);
         preferencesDialog.SetIconName(_controller.AppInfo.ID);
         preferencesDialog.Present();
     }

@@ -255,13 +255,13 @@ public sealed partial class MainWindow : Window
             var path = (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem);
             if (!_accountViews.ContainsKey(path))
             {
-                _accountViews.Add(path, new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == path)], UpdateNavViewItemTitle, InitializeWithWindow));
+                _accountViews.Add(path, new AccountView(_controller.CreateAccountViewController(path)!, UpdateNavViewItemTitle, InitializeWithWindow));
             }
             PageOpenAccount.Content = _accountViews[path];
         }
         else if (pageName == "Settings")
         {
-            PageSettings.Content = new PreferencesPage(_controller.PreferencesViewController, InitializeWithWindow);
+            PageSettings.Content = new PreferencesPage(_controller.CreatePreferencesViewController(), InitializeWithWindow);
         }
         ViewStack.ChangePage(pageName);
     }
@@ -345,7 +345,7 @@ public sealed partial class MainWindow : Window
         var newNavItem = new NavigationViewItem()
         {
             Tag = "OpenAccount",
-            Content = _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountTitle,
+            Content = _controller.GetMostRecentAccountViewController().AccountTitle,
             Icon = new FontIcon()
             {
                 FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
@@ -354,7 +354,7 @@ public sealed partial class MainWindow : Window
         };
         NavViewItemDashboard.Visibility = Visibility.Visible;
         NavViewItemAccounts.Visibility = Visibility.Visible;
-        ToolTipService.SetToolTip(newNavItem, _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath);
+        ToolTipService.SetToolTip(newNavItem, _controller.GetMostRecentAccountViewController().AccountPath);
         NavView.MenuItems.Add(newNavItem);
         NavView.SelectedItem = newNavItem;
     }

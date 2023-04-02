@@ -1,10 +1,12 @@
 ﻿using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
+using System.Collections.Generic;
 
 namespace NickvisionMoney.Shared.Controllers;
 
 public class DashboardViewController
 {
+    private List<AccountViewController> _openAccounts;
+
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -14,13 +16,9 @@ public class DashboardViewController
     /// Constructs a DashboardViewController
     /// </summary>
     ///  <param name="localizer">The Localizer of the app</param>
-    public DashboardViewController(Localizer localizer)
+    public DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer)
     {
+        _openAccounts = openAccounts;
         Localizer = localizer;
-    }
-
-    public void AddAccount(Account account)
-    {
-
     }
 }

@@ -16,24 +16,17 @@ public class MainWindowController : IDisposable
 {
     private bool _disposed;
     private string? _fileToLaunch;
+    private List<AccountViewController> _openAccounts;
 
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
-    /// <summary>
-    /// The list of open accounts
-    /// </summary>
-    public List<AccountViewController> OpenAccounts { get; init; }
 
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// A PreferencesViewController
-    /// </summary>
-    public PreferencesViewController PreferencesViewController => new PreferencesViewController(RecentAccountsChanged, Localizer);
     /// <summary>
     /// Whether or not the version is a development version or not
     /// </summary>
@@ -46,6 +39,10 @@ public class MainWindowController : IDisposable
     /// The list of recent accounts
     /// </summary>
     public List<RecentAccount> RecentAccounts => Configuration.Current.RecentAccounts;
+    /// <summary>
+    /// The number of open accounts
+    /// </summary>
+    public int NumberOfOpenAccounts => _openAccounts.Count;
     /// <summary>
     /// A function for getting a password for an account
     /// </summary>
@@ -71,8 +68,8 @@ public class MainWindowController : IDisposable
     {
         _disposed = false;
         _fileToLaunch = null;
+        _openAccounts = new List<AccountViewController>();
         Localizer = new Localizer();
-        OpenAccounts = new List<AccountViewController>();
     }
 
     /// <summary>
@@ -137,12 +134,47 @@ public class MainWindowController : IDisposable
         if (disposing)
         {
             Localizer.Dispose();
-            foreach (var controller in OpenAccounts)
+            foreach (var controller in _openAccounts)
             {
                 controller.Dispose();
             }
         }
         _disposed = true;
+    }
+
+    /// <summary>
+    /// Creates a new PreferencesViewController
+    /// </summary>
+    /// <returns>The PreferencesViewController</returns>
+    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController(RecentAccountsChanged, Localizer);
+
+    /// <summary>
+    /// Creates a new DashboardViewController
+    /// </summary>
+    /// <returns>The DashboardViewController</returns>
+    public DashboardViewController CreateDashboardViewController() => new DashboardViewController(_openAccounts, Localizer);
+
+    /// <summary>
+    /// Gets an AccountViewController for the most recent account
+    /// </summary>
+    /// <returns>The AccountViewController</returns>
+    public AccountViewController GetMostRecentAccountViewController() => _openAccounts[_openAccounts.Count - 1];
+
+    /// <summary>
+    /// Creates an AccountViewController for the specified path
+    /// </summary>
+    /// <param name="path">The path of the open account</param>
+    /// <returns>The AccountViewController or null if the account path is not open</returns>
+    public AccountViewController? CreateAccountViewController(string path)
+    {
+        try
+        {
+            return _openAccounts[_openAccounts.FindIndex(x => x.AccountPath == path)];
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -166,7 +198,7 @@ public class MainWindowController : IDisposable
     /// </summary>
     /// <param name="path">The path of the account to check</param>
     /// <returns>True if the account is open, else false</returns>
-    public bool IsAccountOpen(string path) => OpenAccounts.Any(x => x.AccountPath == path);
+    public bool IsAccountOpen(string path) => _openAccounts.Any(x => x.AccountPath == path);
 
     /// <summary>
     /// Adds an account to the list of opened accounts
@@ -181,7 +213,7 @@ public class MainWindowController : IDisposable
         {
             path += ".nmoney";
         }
-        if (!OpenAccounts.Any(x => x.AccountPath == path))
+        if (!_openAccounts.Any(x => x.AccountPath == path))
         {
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
@@ -198,7 +230,7 @@ public class MainWindowController : IDisposable
                 }
                 return false;
             }
-            OpenAccounts.Add(controller);
+            _openAccounts.Add(controller);
             AccountAdded?.Invoke(this, EventArgs.Empty);
             return true;
         }
@@ -218,8 +250,8 @@ public class MainWindowController : IDisposable
     /// <param name="index">int</param>
     public void CloseAccount(int index)
     {
-        OpenAccounts[index].Dispose();
-        OpenAccounts.RemoveAt(index);
+        _openAccounts[index].Dispose();
+        _openAccounts.RemoveAt(index);
     }
 
     /// <summary>
@@ -229,7 +261,7 @@ public class MainWindowController : IDisposable
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
         await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
-        var controller = OpenAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
+        var controller = _openAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
         await controller.StartupAsync();
         await controller.ReceiveTransferAsync(transfer);
     }
