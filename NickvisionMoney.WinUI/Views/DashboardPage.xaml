@@ -83,6 +83,14 @@
                 </ScrollViewer>
                 
                 <TextBlock x:Name="LblGroups" Grid.Row="2" Margin="6,-14,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                <GridView x:Name="ListGroups" Grid.Row="3" SelectionMode="None">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <wct:WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
             </Grid>
         </ScrollViewer>
     </Grid>
