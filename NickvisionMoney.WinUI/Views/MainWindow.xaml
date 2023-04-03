@@ -120,15 +120,11 @@
                             </nickvision:StatusPage>
                         </nickvision:ViewStackPage>
 
-                        <nickvision:ViewStackPage x:Name="PageOpenAccount" PageName="OpenAccount"/>
+                        <nickvision:ViewStackPage x:Name="PageDashboard" PageName="Dashboard"/>
                         
-                        <nickvision:ViewStackPage x:Name="PageSettings" PageName="Settings"/>
+                        <nickvision:ViewStackPage x:Name="PageOpenAccount" PageName="OpenAccount"/>
 
-                        <nickvision:ViewStackPage x:Name="PageDashboard" PageName="Dashboard">
-                            <Grid>
-                                
-                            </Grid>
-                        </nickvision:ViewStackPage>
+                        <nickvision:ViewStackPage x:Name="PageSettings" PageName="Settings"/>
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>
 

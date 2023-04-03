@@ -250,7 +250,11 @@ public sealed partial class MainWindow : Window
     private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
     {
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
-        if (pageName == "OpenAccount")
+        if (pageName == "Dashboard")
+        {
+            PageDashboard.Content = new DashboardPage(_controller.CreateDashboardViewController());
+        }
+        else if (pageName == "OpenAccount")
         {
             var path = (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem);
             if (!_accountViews.ContainsKey(path))

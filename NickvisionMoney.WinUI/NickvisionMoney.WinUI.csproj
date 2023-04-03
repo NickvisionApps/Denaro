@@ -31,6 +31,7 @@
     <None Remove="Controls\ViewStackPage.xaml" />
     <None Remove="Views\AccountSettingsDialog.xaml" />
     <None Remove="Views\AccountView.xaml" />
+    <None Remove="Views\DashboardPage.xaml" />
     <None Remove="Views\GroupDialog.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\PreferencesPage.xaml" />
@@ -67,6 +68,11 @@
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\NickvisionMoney.Shared\NickvisionMoney.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\DashboardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\NewPasswordDialog.xaml">
