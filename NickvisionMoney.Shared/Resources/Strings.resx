@@ -248,6 +248,10 @@
 		<value>{0} from {1}</value>
 	</data>
 
+	<data name="AllAccounts" xml:space="preserve">
+		<value>All Accounts</value>
+	</data>
+
 	<!--AccountView-->
 	<data name="AccountActions" xml:space="preserve">
 		<value>Actions</value>
