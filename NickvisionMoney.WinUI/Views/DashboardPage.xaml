@@ -24,8 +24,14 @@
 
                 <TextBlock x:Name="LblAllAccounts" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel Margin="0,0,0,14" Orientation="Horizontal" Spacing="6">
+                <GridView Grid.Row="1" SelectionMode="None">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <wct:WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
+                    <GridView.Items>
                         <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
                             <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
                                 <TextBlock x:Name="LblIncome" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
@@ -79,10 +85,10 @@
                                 <Border x:Name="BorderTotal" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
                             </StackPanel>
                         </Border>
-                    </StackPanel>
-                </ScrollViewer>
-                
-                <TextBlock x:Name="LblGroups" Grid.Row="2" Margin="6,-14,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                    </GridView.Items>
+                </GridView>
+
+                <TextBlock x:Name="LblGroups" Grid.Row="2" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                 <GridView x:Name="ListGroups" Grid.Row="3" SelectionMode="None">
                     <GridView.ItemsPanel>
