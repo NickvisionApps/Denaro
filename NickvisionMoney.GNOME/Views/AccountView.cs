@@ -131,6 +131,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
     private readonly GSourceFunc _stopSpinner;
+    private readonly GSourceFunc _accountTransactionsChangedCallback;
     private GSourceFunc[] _rowCallbacks;
 
     /// <summary>
@@ -155,7 +156,8 @@ public partial class AccountView : Adw.Bin
             return false;
         };
         //Register Controller Events
-        _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
+        _accountTransactionsChangedCallback = OnAccountTransactionsChanged;
+        _controller.AccountTransactionsChanged += (sender, e) => g_main_context_invoke(IntPtr.Zero, _accountTransactionsChangedCallback, IntPtr.Zero);
         _controller.UICreateGroupRow = CreateGroupRow;
         _controller.UIDeleteGroupRow = DeleteGroupRow;
         _controller.UICreateTransactionRow = CreateTransactionRow;
@@ -514,7 +516,6 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
-        System.Console.WriteLine(System.Environment.CurrentManagedThreadId);
         //Start Spinner
         _noTransactionsStatusPage.SetVisible(false);
         _transactionsScroll.SetVisible(true);
@@ -546,9 +547,9 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the account's transactions are changed 
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private void OnAccountTransactionsChanged(object? sender, EventArgs e)
+    /// <param name="data">Pointer to data passed from g_main_context_invoke</param>
+    /// <returns>True to repeat, false otherwise</returns>
+    private bool OnAccountTransactionsChanged(nint data)
     {
         if (!_isAccountLoading)
         {
@@ -589,6 +590,7 @@ public partial class AccountView : Adw.Bin
             }
             _isAccountLoading = false;
         }
+        return false;
     }
 
     /// <summary>
