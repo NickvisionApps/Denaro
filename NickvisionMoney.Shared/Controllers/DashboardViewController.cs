@@ -1,5 +1,8 @@
 ﻿using NickvisionMoney.Shared.Helpers;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -50,18 +53,24 @@ public class DashboardViewController
     /// The DashboardAmount object for totals
     /// </summary>
     public DashboardAmount Total { get; init; }
+    /// <summary>
+    /// The list of DashboardAmounts for groups
+    /// </summary>
+    public Dictionary<string, (DashboardAmount DashboardAmount, string RGBA)> Groups { get; init; }
 
     /// <summary>
     /// Constructs a DashboardViewController
     /// </summary>
-    ///  <param name="localizer">The Localizer of the app</param>
-    public DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer)
+    /// <param name="localizer">The Localizer of the app</param>
+    /// <param name="defaultColor">A default group color</param>
+    public DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer, string defaultColor)
     {
         _openAccounts = openAccounts;
         Localizer = localizer;
         Income = new DashboardAmount();
         Expense = new DashboardAmount();
         Total = new DashboardAmount();
+        Groups = new Dictionary<string, (DashboardAmount DashboardAmount, string RGBA)>();
         foreach (var controller in _openAccounts)
         {
             (string Code, string Symbol) currency = (controller.CultureForNumberString.NumberFormat.NaNSymbol, controller.CultureForNumberString.NumberFormat.CurrencySymbol);
@@ -91,6 +100,26 @@ public class DashboardViewController
                     Total.Breakdowns[currency] = (0, "");
                 }
                 Total.Breakdowns[currency] = (Total.Breakdowns[currency].Total + controller.AccountTodayTotal, Total.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n\n");
+            }
+            foreach(var group in controller.Groups)
+            {
+                if(group.Balance != 0)
+                {
+                    var name = group.Name.ToLower();
+                    var nameBuilder = new StringBuilder(name);
+                    nameBuilder[0] = char.ToUpper(name[0], CultureInfo.CurrentCulture);
+                    name = nameBuilder.ToString();
+                    if (!Groups.ContainsKey(name))
+                    {
+                        Groups[name] = (new DashboardAmount(), string.IsNullOrEmpty(group.RGBA) ? defaultColor : group.RGBA);
+                    }
+                    if (!Groups[name].DashboardAmount.Currencies.Contains(currency))
+                    {
+                        Groups[name].DashboardAmount.Currencies.Add(currency);
+                        Groups[name].DashboardAmount.Breakdowns[currency] = (0, "");
+                    }
+                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{Math.Abs(group.Balance).ToAmountString(controller.CultureForNumberString)}", controller.AccountTitle)}\n\n");
+                }
             }
         }
     }

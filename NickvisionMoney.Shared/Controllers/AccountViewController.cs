@@ -123,6 +123,10 @@ public class AccountViewController : IDisposable
     /// The count of groups in the account
     /// </summary>
     public int GroupsCount => _account.Groups.Count;
+    /// <summary>
+    /// The list of groups in the account
+    /// </summary>
+    public List<Group> Groups => _account.Groups.Values.ToList();
 
     /// <summary>
     /// Occurs when a notification is sent

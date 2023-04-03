@@ -152,7 +152,7 @@ public class MainWindowController : IDisposable
     /// Creates a new DashboardViewController
     /// </summary>
     /// <returns>The DashboardViewController</returns>
-    public DashboardViewController CreateDashboardViewController() => new DashboardViewController(_openAccounts, Localizer);
+    public DashboardViewController CreateDashboardViewController() => new DashboardViewController(_openAccounts, Localizer, Configuration.Current.GroupDefaultColor);
 
     /// <summary>
     /// Gets an AccountViewController for the most recent account
