@@ -130,6 +130,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
+    private readonly GSourceFunc _startSpinner;
     private readonly GSourceFunc _stopSpinner;
     private readonly GSourceFunc _accountTransactionsChangedCallback;
     private GSourceFunc[] _rowCallbacks;
@@ -147,6 +148,16 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _rowCallbacks = new GSourceFunc[5];
+        _startSpinner = (x) =>
+        {
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            return false;
+        };
         _stopSpinner = (x) =>
         {
             _spinner.Stop();
@@ -517,12 +528,7 @@ public partial class AccountView : Adw.Bin
     public async Task StartupAsync()
     {
         //Start Spinner
-        _noTransactionsStatusPage.SetVisible(false);
-        _transactionsScroll.SetVisible(true);
-        _mainOverlay.SetOpacity(0.0);
-        _spinnerBin.SetVisible(true);
-        _spinner.Start();
-        _paneScroll.SetSensitive(false);
+        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
         //Work
         await _controller.StartupAsync();
         if (_controller.AccountNeedsSetup)
@@ -660,12 +666,7 @@ public partial class AccountView : Adw.Bin
             {
                 var path = g_file_get_path(fileHandle);
                 //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
+                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                 //Work
                 await Task.Run(async () =>
                 {
@@ -801,12 +802,7 @@ public partial class AccountView : Adw.Bin
         {
             transactionDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -839,12 +835,7 @@ public partial class AccountView : Adw.Bin
         {
             transactionDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             { 
@@ -895,12 +886,7 @@ public partial class AccountView : Adw.Bin
                         if (dialog.Response == MessageDialogResponse.Suggested)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -920,12 +906,7 @@ public partial class AccountView : Adw.Bin
                         else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -955,12 +936,7 @@ public partial class AccountView : Adw.Bin
                         if (dialog.Response != MessageDialogResponse.Cancel)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -983,12 +959,7 @@ public partial class AccountView : Adw.Bin
             else
             {
                 //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
+                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                 //Work
                 await Task.Run(async () =>
                 {
@@ -1027,12 +998,7 @@ public partial class AccountView : Adw.Bin
                 if (dialog.Response != MessageDialogResponse.Cancel)
                 {
                     //Start Spinner
-                    _noTransactionsStatusPage.SetVisible(false);
-                    _transactionsScroll.SetVisible(true);
-                    _mainOverlay.SetOpacity(0.0);
-                    _spinnerBin.SetVisible(true);
-                    _spinner.Start();
-                    _paneScroll.SetSensitive(false);
+                    g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                     //Work
                     await Task.Run(async () =>
                     {
@@ -1080,12 +1046,7 @@ public partial class AccountView : Adw.Bin
         {
             groupDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -1118,12 +1079,7 @@ public partial class AccountView : Adw.Bin
         {
             groupDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
