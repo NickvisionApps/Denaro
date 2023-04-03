@@ -8,10 +8,57 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
         <TextBlock x:Name="LblTitle" Margin="30,30,0,0" Style="{ThemeResource TitleTextBlockStyle}"/>
+
+        <ScrollViewer Margin="0,90,0,0" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20,0,20,20" RowSpacing="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MinHeight="140" Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="LblAllAccounts" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="6">
+                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                            <TextBlock x:Name="LblIncome" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <MenuFlyoutSeparator/>
+
+                            <TextBlock x:Name="LblIncomeBreakdown" MinHeight="100"/>
+
+                            <Border x:Name="BorderIncome" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                            <TextBlock x:Name="LblExpense" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <MenuFlyoutSeparator/>
+
+                            <TextBlock x:Name="LblExpenseBreakdown" MinHeight="100"/>
+
+                            <Border x:Name="BorderExpense" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                            <TextBlock x:Name="LblTotal" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <MenuFlyoutSeparator/>
+
+                            <TextBlock x:Name="LblTotalBreakdown" MinHeight="100"/>
+
+                            <Border x:Name="BorderTotal" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>
