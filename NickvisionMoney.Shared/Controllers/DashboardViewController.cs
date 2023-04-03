@@ -15,7 +15,7 @@ public class DashboardAmount
     /// <summary>
     /// The breakdown dictionary 
     /// </summary>
-    public Dictionary<(string Code, string Symbol), (decimal Total, string PerAccount)> Breakdown { get; init; }
+    public Dictionary<(string Code, string Symbol), string> Breakdowns { get; init; }
 
     /// <summary>
     /// Constructs a DashboardAmount
@@ -23,7 +23,7 @@ public class DashboardAmount
     public DashboardAmount()
     {
         Currencies = new List<(string Code, string Symbol)>();
-        Breakdown = new Dictionary<(string Code, string Symbol), (decimal Total, string PerAccount)>();
+        Breakdowns = new Dictionary<(string Code, string Symbol), string>();
     }
 }
 
@@ -70,27 +70,27 @@ public class DashboardViewController
                 if (!Income.Currencies.Contains(currency))
                 {
                     Income.Currencies.Add(currency);
-                    Income.Breakdown[currency] = (0, "");
+                    Income.Breakdowns[currency] = "";
                 }
-                Income.Breakdown[currency] = (Income.Breakdown[currency].Total + controller.AccountTodayIncome, Income.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayIncomeString, controller.AccountTitle)}\n");
+                Income.Breakdowns[currency] = Income.Breakdowns[currency] + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayIncomeString, controller.AccountTitle)}\n\n";
             }
             if (controller.AccountTodayExpense > 0)
             {
                 if (!Expense.Currencies.Contains(currency))
                 {
                     Expense.Currencies.Add(currency);
-                    Expense.Breakdown[currency] = (0, "");
+                    Expense.Breakdowns[currency] = "";
                 }
-                Expense.Breakdown[currency] = (Expense.Breakdown[currency].Total + controller.AccountTodayExpense, Expense.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayExpenseString, controller.AccountTitle)}\n");
+                Expense.Breakdowns[currency] = Expense.Breakdowns[currency] + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayExpenseString, controller.AccountTitle)}\n\n";
             }
             if (controller.AccountTodayTotal != 0)
             {
                 if (!Total.Currencies.Contains(currency))
                 {
                     Total.Currencies.Add(currency);
-                    Total.Breakdown[currency] = (0, "");
+                    Total.Breakdowns[currency] = "";
                 }
-                Total.Breakdown[currency] = (Total.Breakdown[currency].Total + controller.AccountTodayTotal, Total.Breakdown[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n");
+                Total.Breakdowns[currency] = Total.Breakdowns[currency] + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n\n";
             }
         }
     }
