@@ -3,8 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NickvisionMoney.WinUI.Views"
+    xmlns:nickvision="using:NickvisionMoney.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d">
 
     <Grid>
@@ -21,43 +24,65 @@
 
                 <TextBlock x:Name="LblAllAccounts" Grid.Row="0" Margin="6,0,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="6">
-                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
-                            <TextBlock x:Name="LblIncome" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel Margin="0,0,0,14" Orientation="Horizontal" Spacing="6">
+                        <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                            <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                                <TextBlock x:Name="LblIncome" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <MenuFlyoutSeparator/>
+                                <MenuFlyoutSeparator/>
 
-                            <TextBlock x:Name="LblIncomeBreakdown" MinHeight="100"/>
+                                <wct:DockPanel MinHeight="100" LastChildFill="True">
+                                    <TextBlock x:Name="LblIncomeTotal" wct:DockPanel.Dock="Right" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <Border x:Name="BorderIncome" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
-                        </StackPanel>
-                    </Border>
+                                    <AppBarSeparator Margin="6,0,6,0" wct:DockPanel.Dock="Right"/>
 
-                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
-                            <TextBlock x:Name="LblExpense" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                    <TextBlock x:Name="LblIncomeBreakdown" wct:DockPanel.Dock="Left" MinHeight="100"/>
+                                </wct:DockPanel>
 
-                            <MenuFlyoutSeparator/>
+                                <Border x:Name="BorderIncome" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                            </StackPanel>
+                        </Border>
 
-                            <TextBlock x:Name="LblExpenseBreakdown" MinHeight="100"/>
+                        <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                            <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                                <TextBlock x:Name="LblExpense" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <Border x:Name="BorderExpense" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
-                        </StackPanel>
-                    </Border>
+                                <MenuFlyoutSeparator/>
 
-                    <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
-                        <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
-                            <TextBlock x:Name="LblTotal" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                <wct:DockPanel MinHeight="100" LastChildFill="True">
+                                    <TextBlock x:Name="LblExpenseTotal" wct:DockPanel.Dock="Right" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                            <MenuFlyoutSeparator/>
+                                    <AppBarSeparator Margin="6,0,6,0" wct:DockPanel.Dock="Right"/>
 
-                            <TextBlock x:Name="LblTotalBreakdown" MinHeight="100"/>
+                                    <TextBlock x:Name="LblExpenseBreakdown" wct:DockPanel.Dock="Left" MinHeight="100"/>
+                                </wct:DockPanel>
 
-                            <Border x:Name="BorderTotal" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
+                                <Border x:Name="BorderExpense" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border MinWidth="300" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+                            <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
+                                <TextBlock x:Name="LblTotal" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                <MenuFlyoutSeparator/>
+
+                                <wct:DockPanel MinHeight="100" LastChildFill="True">
+                                    <TextBlock x:Name="LblTotalTotal" wct:DockPanel.Dock="Right" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                    <AppBarSeparator Margin="6,0,6,0" wct:DockPanel.Dock="Right"/>
+
+                                    <TextBlock x:Name="LblTotalBreakdown" wct:DockPanel.Dock="Left" MinHeight="100"/>
+                                </wct:DockPanel>
+
+                                <Border x:Name="BorderTotal" HorizontalAlignment="Stretch" Height="20" CornerRadius="6"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+                
+                <TextBlock x:Name="LblGroups" Grid.Row="2" Margin="6,-14,0,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
             </Grid>
         </ScrollViewer>
     </Grid>
