@@ -1,5 +1,4 @@
 ﻿using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
 using System.Collections.Generic;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -63,12 +62,12 @@ public class DashboardViewController
         Income = new DashboardAmount();
         Expense = new DashboardAmount();
         Total = new DashboardAmount();
-        foreach(var controller in openAccounts)
+        foreach (var controller in openAccounts)
         {
             (string Code, string Symbol) currency = (controller.CultureForNumberString.NumberFormat.NaNSymbol, controller.CultureForNumberString.NumberFormat.CurrencySymbol);
-            if(controller.AccountTodayIncome > 0)
+            if (controller.AccountTodayIncome > 0)
             {
-                if(!Income.Currencies.Contains(currency))
+                if (!Income.Currencies.Contains(currency))
                 {
                     Income.Currencies.Add(currency);
                     Income.Breakdown[currency] = (0, "");
