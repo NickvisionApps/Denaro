@@ -130,6 +130,9 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
+    private readonly GSourceFunc _startSpinner;
+    private readonly GSourceFunc _stopSpinner;
+    private readonly GSourceFunc _accountTransactionsChangedCallback;
     private GSourceFunc[] _rowCallbacks;
 
     /// <summary>
@@ -145,8 +148,27 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _rowCallbacks = new GSourceFunc[5];
+        _startSpinner = (x) =>
+        {
+            _noTransactionsStatusPage.SetVisible(false);
+            _transactionsScroll.SetVisible(true);
+            _mainOverlay.SetOpacity(0.0);
+            _spinnerBin.SetVisible(true);
+            _spinner.Start();
+            _paneScroll.SetSensitive(false);
+            return false;
+        };
+        _stopSpinner = (x) =>
+        {
+            _spinner.Stop();
+            _spinnerBin.SetVisible(false);
+            _mainOverlay.SetOpacity(1.0);
+            _paneScroll.SetSensitive(true);
+            return false;
+        };
         //Register Controller Events
-        _controller.AccountTransactionsChanged += OnAccountTransactionsChanged;
+        _accountTransactionsChangedCallback = OnAccountTransactionsChanged;
+        _controller.AccountTransactionsChanged += (sender, e) => g_main_context_invoke(IntPtr.Zero, _accountTransactionsChangedCallback, IntPtr.Zero);
         _controller.UICreateGroupRow = CreateGroupRow;
         _controller.UIDeleteGroupRow = DeleteGroupRow;
         _controller.UICreateTransactionRow = CreateTransactionRow;
@@ -506,12 +528,7 @@ public partial class AccountView : Adw.Bin
     public async Task StartupAsync()
     {
         //Start Spinner
-        _noTransactionsStatusPage.SetVisible(false);
-        _transactionsScroll.SetVisible(true);
-        _mainOverlay.SetOpacity(0.0);
-        _spinnerBin.SetVisible(true);
-        _spinner.Start();
-        _paneScroll.SetSensitive(false);
+        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
         //Work
         await _controller.StartupAsync();
         if (_controller.AccountNeedsSetup)
@@ -530,19 +547,15 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups(null, EventArgs.Empty);
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        //Stop Spinner
-        _spinner.Stop();
-        _spinnerBin.SetVisible(false);
-        _mainOverlay.SetOpacity(1.0);
-        _paneScroll.SetSensitive(true);
+        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
     }
 
     /// <summary>
     /// Occurs when the account's transactions are changed 
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private void OnAccountTransactionsChanged(object? sender, EventArgs e)
+    /// <param name="data">Pointer to data passed from g_main_context_invoke</param>
+    /// <returns>True to repeat, false otherwise</returns>
+    private bool OnAccountTransactionsChanged(nint data)
     {
         if (!_isAccountLoading)
         {
@@ -583,6 +596,7 @@ public partial class AccountView : Adw.Bin
             }
             _isAccountLoading = false;
         }
+        return false;
     }
 
     /// <summary>
@@ -652,12 +666,7 @@ public partial class AccountView : Adw.Bin
             {
                 var path = g_file_get_path(fileHandle);
                 //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
+                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                 //Work
                 await Task.Run(async () =>
                 {
@@ -671,11 +680,7 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
+                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             }
         };
         gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
@@ -797,12 +802,7 @@ public partial class AccountView : Adw.Bin
         {
             transactionDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -817,10 +817,7 @@ public partial class AccountView : Adw.Bin
                 }
             });
             //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -839,12 +836,7 @@ public partial class AccountView : Adw.Bin
         {
             transactionDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -858,11 +850,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -899,12 +887,7 @@ public partial class AccountView : Adw.Bin
                         if (dialog.Response == MessageDialogResponse.Suggested)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -919,21 +902,12 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -947,11 +921,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         dialog.Destroy();
                     };
@@ -967,12 +937,7 @@ public partial class AccountView : Adw.Bin
                         if (dialog.Response != MessageDialogResponse.Cancel)
                         {
                             //Start Spinner
-                            _noTransactionsStatusPage.SetVisible(false);
-                            _transactionsScroll.SetVisible(true);
-                            _mainOverlay.SetOpacity(0.0);
-                            _spinnerBin.SetVisible(true);
-                            _spinner.Start();
-                            _paneScroll.SetSensitive(false);
+                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                             //Work
                             await Task.Run(async () =>
                             {
@@ -986,11 +951,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            //Stop Spinner
-                            _spinner.Stop();
-                            _spinnerBin.SetVisible(false);
-                            _mainOverlay.SetOpacity(1.0);
-                            _paneScroll.SetSensitive(true);
+                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                         }
                         dialog.Destroy();
                     };
@@ -999,12 +960,7 @@ public partial class AccountView : Adw.Bin
             else
             {
                 //Start Spinner
-                _noTransactionsStatusPage.SetVisible(false);
-                _transactionsScroll.SetVisible(true);
-                _mainOverlay.SetOpacity(0.0);
-                _spinnerBin.SetVisible(true);
-                _spinner.Start();
-                _paneScroll.SetSensitive(false);
+                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                 //Work
                 await Task.Run(async () =>
                 {
@@ -1018,11 +974,7 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                //Stop Spinner
-                _spinner.Stop();
-                _spinnerBin.SetVisible(false);
-                _mainOverlay.SetOpacity(1.0);
-                _paneScroll.SetSensitive(true);
+                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             }
             transactionController.Dispose();
             transactionDialog.Close();
@@ -1047,12 +999,7 @@ public partial class AccountView : Adw.Bin
                 if (dialog.Response != MessageDialogResponse.Cancel)
                 {
                     //Start Spinner
-                    _noTransactionsStatusPage.SetVisible(false);
-                    _transactionsScroll.SetVisible(true);
-                    _mainOverlay.SetOpacity(0.0);
-                    _spinnerBin.SetVisible(true);
-                    _spinner.Start();
-                    _paneScroll.SetSensitive(false);
+                    g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
                     //Work
                     await Task.Run(async () =>
                     {
@@ -1066,11 +1013,7 @@ public partial class AccountView : Adw.Bin
                             Console.WriteLine(ex.StackTrace);
                         }
                     });
-                    //Stop Spinner
-                    _spinner.Stop();
-                    _spinnerBin.SetVisible(false);
-                    _mainOverlay.SetOpacity(1.0);
-                    _paneScroll.SetSensitive(true);
+                    g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
                 }
                 dialog.Destroy();
             };
@@ -1104,12 +1047,7 @@ public partial class AccountView : Adw.Bin
         {
             groupDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -1123,11 +1061,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
     }
@@ -1146,12 +1080,7 @@ public partial class AccountView : Adw.Bin
         {
             groupDialog.SetVisible(false);
             //Start Spinner
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
+            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
             {
@@ -1165,11 +1094,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
+            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
     }
