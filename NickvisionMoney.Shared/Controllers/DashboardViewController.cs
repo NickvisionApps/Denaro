@@ -81,7 +81,7 @@ public class DashboardViewController
                     Income.Currencies.Add(currency);
                     Income.Breakdowns[currency] = (0, "");
                 }
-                Income.Breakdowns[currency] = (Income.Breakdowns[currency].Total + controller.AccountTodayIncome, Income.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayIncomeString, controller.AccountTitle)}\n\n");
+                Income.Breakdowns[currency] = (Income.Breakdowns[currency].Total + controller.AccountTodayIncome, Income.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayIncomeString, controller.AccountTitle)}\n");
             }
             if (controller.AccountTodayExpense > 0)
             {
@@ -90,7 +90,7 @@ public class DashboardViewController
                     Expense.Currencies.Add(currency);
                     Expense.Breakdowns[currency] = (0, "");
                 }
-                Expense.Breakdowns[currency] = (Expense.Breakdowns[currency].Total + controller.AccountTodayExpense, Expense.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayExpenseString, controller.AccountTitle)}\n\n");
+                Expense.Breakdowns[currency] = (Expense.Breakdowns[currency].Total + controller.AccountTodayExpense, Expense.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayExpenseString, controller.AccountTitle)}\n");
             }
             if (controller.AccountTodayTotal != 0)
             {
@@ -99,7 +99,7 @@ public class DashboardViewController
                     Total.Currencies.Add(currency);
                     Total.Breakdowns[currency] = (0, "");
                 }
-                Total.Breakdowns[currency] = (Total.Breakdowns[currency].Total + controller.AccountTodayTotal, Total.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n\n");
+                Total.Breakdowns[currency] = (Total.Breakdowns[currency].Total + controller.AccountTodayTotal, Total.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n");
             }
             foreach(var group in controller.Groups)
             {
@@ -118,7 +118,7 @@ public class DashboardViewController
                         Groups[name].DashboardAmount.Currencies.Add(currency);
                         Groups[name].DashboardAmount.Breakdowns[currency] = (0, "");
                     }
-                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{Math.Abs(group.Balance).ToAmountString(controller.CultureForNumberString)}", controller.AccountTitle)}\n\n");
+                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{Math.Abs(group.Balance).ToAmountString(controller.CultureForNumberString)}", controller.AccountTitle)}\n");
                 }
             }
         }
