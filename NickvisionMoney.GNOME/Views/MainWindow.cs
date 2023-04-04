@@ -61,6 +61,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Popover _accountPopover;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _dashboardButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.ButtonContent _greeting;
@@ -122,6 +123,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 OnWidthChanged();
             }
         };
+        _dashboardButton.OnToggled += OnToggleDashboard;
         //Header Bar
         _windowTitle.SetTitle(_controller.AppInfo.ShortName);
         //Greeting
@@ -268,6 +270,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.GetMostRecentAccountViewController().AccountTitle : "");
         _accountMenuButton.SetVisible(true);
         _flapToggleButton.SetVisible(true);
+        _dashboardButton.SetVisible(_controller.NumberOfOpenAccounts > 1);
         await newAccountView.StartupAsync();
     }
 
@@ -376,6 +379,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             return;
         }
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
+        _dashboardButton.SetVisible(_controller.NumberOfOpenAccounts > 1);
     }
 
     /// <summary>
@@ -399,6 +403,17 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         _tabView.ClosePageFinish(args.Page, true);
         return true;
+    }
+
+    /// <summary>
+    /// Occurs when dashboard should be opened or closed
+    /// </summary>
+    /// <param name="sender">Gtk.ToggleButton</param>
+    /// <param name="e">EventArgs</param>
+    private void OnToggleDashboard(Gtk.ToggleButton sender, EventArgs e)
+    {
+        _viewStack.SetVisibleChildName(sender.GetActive() ? "dashboard" : "pageTabs");
+        _actCloseAccount.SetEnabled(!sender.GetActive());
     }
 
     /// <summary>

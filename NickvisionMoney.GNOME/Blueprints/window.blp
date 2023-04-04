@@ -74,13 +74,20 @@ Adw.ApplicationWindow _root {
         active: true;
         visible: false;
       }
-      
+
       [end]
       Gtk.MenuButton {
         direction: none;
         menu-model: mainMenu;
         tooltip-text: _("MainMenu.GTK");
         primary: true;
+      }
+
+      [end]
+      Gtk.ToggleButton _dashboardButton {
+        icon-name: "resources-symbolic";
+        tooltip-text: _("Dashboard");
+        visible: false;
       }
     }
     
@@ -179,6 +186,13 @@ Adw.ApplicationWindow _root {
             }
             
             Adw.TabView _tabView {}
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "dashboard";
+          child: Gtk.Box {
+            //
           };
         }
       }
