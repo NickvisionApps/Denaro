@@ -11,3 +11,5 @@ X-GNOME-UsesNotifications=true
 Categories=Office;Finance;
 Keywords=money;finance;wallet;cash;bank;GTK;Nickvision;
 StartupNotify = true
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;
