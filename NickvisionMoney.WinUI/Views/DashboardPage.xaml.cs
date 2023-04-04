@@ -43,19 +43,19 @@ public sealed partial class DashboardPage : UserControl
         var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
         foreach (var currency in _controller.Income.Currencies)
         {
-            LblIncomeBreakdown.Text += _controller.Income.Breakdowns[currency].PerAccount;
+            LblIncomeBreakdown.Text += _controller.Income.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
             LblIncomeTotal.Text += $"{(_controller.Income.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(_controller.Income.Breakdowns[currency].Total).ToAmountString(culture)}\n\n";
         }
         foreach (var currency in _controller.Expense.Currencies)
         {
-            LblExpenseBreakdown.Text += _controller.Expense.Breakdowns[currency].PerAccount;
+            LblExpenseBreakdown.Text += _controller.Expense.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
             LblExpenseTotal.Text += $"{(_controller.Expense.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(_controller.Expense.Breakdowns[currency].Total).ToAmountString(culture)}\n\n";
         }
         foreach (var currency in _controller.Total.Currencies)
         {
-            LblTotalBreakdown.Text += _controller.Total.Breakdowns[currency].PerAccount;
+            LblTotalBreakdown.Text += _controller.Total.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
             LblTotalTotal.Text += $"{(_controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(_controller.Total.Breakdowns[currency].Total).ToAmountString(culture)}\n\n";
         }
@@ -84,7 +84,7 @@ public sealed partial class DashboardPage : UserControl
             DockPanel.SetDock(lblGroupBreakdown, Dock.Right);
             foreach (var currency in pair.Value.DashboardAmount.Currencies)
             {
-                lblGroupBreakdown.Text += pair.Value.DashboardAmount.Breakdowns[currency].PerAccount;
+                lblGroupBreakdown.Text += pair.Value.DashboardAmount.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
                 culture.NumberFormat.CurrencySymbol = currency.Symbol;
                 lblGroupTotal.Text += $"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(pair.Value.DashboardAmount.Breakdowns[currency].Total).ToAmountString(culture)}\n\n";
             }
