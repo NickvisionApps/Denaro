@@ -7,7 +7,8 @@ using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage.Pickers;
@@ -19,13 +20,15 @@ namespace NickvisionMoney.WinUI.Views;
 /// <summary>
 /// A dialog for managing a Transaction
 /// </summary>
-public sealed partial class TransactionDialog : ContentDialog
+public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyChanged
 {
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private readonly Action<object> _initializeWithWindow;
     private Color _selectedColor;
     private string? _receiptPath;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -84,9 +87,9 @@ public sealed partial class TransactionDialog : ContentDialog
         TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
-        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
+        foreach (var name in _controller.GroupNames)
         {
-            CmbGroup.Items.Add(pair.Value);
+            CmbGroup.Items.Add(name);
         }
         if (_controller.Transaction.GroupId == -1)
         {
@@ -94,7 +97,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else
         {
-            CmbGroup.SelectedItem = _controller.Groups[(uint)_controller.Transaction.GroupId];
+            CmbGroup.SelectedItem = _controller.GetGroupNameFromId((uint)_controller.Transaction.GroupId);
         }
         CmbRepeatInterval.SelectedIndex = (int)_controller.RepeatIntervalIndex;
         CalendarRepeatEndDate.IsEnabled = _controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never;
@@ -269,10 +272,8 @@ public sealed partial class TransactionDialog : ContentDialog
     /// <param name="e">SelectionChangedEventArgs</param>
     private void CmbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!_constructing)
-        {
-            Validate();
-        }
+        SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.GetRBAFromGroupName((string)CmbGroup.SelectedItem))!;
+        NotifyPropertyChanged("SelectedColor");
     }
 
     /// <summary>
@@ -353,4 +354,6 @@ public sealed partial class TransactionDialog : ContentDialog
             Validate();
         }
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
