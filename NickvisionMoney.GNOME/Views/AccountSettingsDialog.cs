@@ -94,7 +94,10 @@ public partial class AccountSettingsDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "selected-item")
             {
-                Validate();
+                if (!_constructing)
+                {
+                    Validate();
+                }
             }
         };
         //Default Transaction Type
