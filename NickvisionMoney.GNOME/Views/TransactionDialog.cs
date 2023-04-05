@@ -203,19 +203,17 @@ public partial class TransactionDialog : Adw.Window
         _repeatEndDateCalendar.OnDaySelected += OnRepeatEndDateChanged;
         _repeatEndDateClearButton.OnClicked += OnRepeatEndDateClear;
         //Group
-        var groups = new List<string>();
-        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
-        {
-            groups.Add(pair.Value);
-        }
-        _groupRow.SetModel(Gtk.StringList.New(groups.ToArray()));
+        _groupRow.SetModel(Gtk.StringList.New(_controller.GroupNames.ToArray()));
         _groupRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
             {
                 if (!_constructing)
                 {
-                    Validate();
+                    var groupColor = new Color();
+                    gdk_rgba_parse(ref groupColor, _controller.GetRBAFromGroupName(((Gtk.StringObject)_groupRow.GetSelectedItem()!).GetString()));
+                    gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref groupColor);
+                    //Validate();
                 }
             }
         };
@@ -259,7 +257,7 @@ public partial class TransactionDialog : Adw.Window
         }
         else
         {
-            _groupRow.SetSelected((uint)groups.IndexOf(_controller.Groups[(uint)_controller.Transaction.GroupId]));
+            _groupRow.SetSelected((uint)_controller.GroupNames.IndexOf(_controller.GetGroupNameFromId((uint)_controller.Transaction.GroupId)));
         }
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
