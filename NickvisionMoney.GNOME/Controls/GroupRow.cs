@@ -97,7 +97,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
             _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
             _filterCheckButton.SetActive(filterActive);
             //Amount Label
-            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(_group.Balance).ToAmountString(_cultureAmount)}");
+            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{_group.Balance.ToAmountString(_cultureAmount)}");
             _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
             _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
             return false;

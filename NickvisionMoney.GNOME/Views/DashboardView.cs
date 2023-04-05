@@ -30,7 +30,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Income.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"+ {Math.Abs(controller.Income.Breakdowns[currency].Total).ToAmountString(culture)}\n";
+            suffix += $"+ {controller.Income.Breakdowns[currency].Total.ToAmountString(culture)}\n";
         }
         _incomeRow.SetSubtitle(subtitle.Trim('\n'));
         _incomeSuffix.SetText(suffix.Trim('\n'));
@@ -40,7 +40,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Expense.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"- {Math.Abs(controller.Expense.Breakdowns[currency].Total).ToAmountString(culture)}\n";
+            suffix += $"- {controller.Expense.Breakdowns[currency].Total.ToAmountString(culture)}\n";
         }
         _expenseRow.SetSubtitle(subtitle.Trim('\n'));
         _expenseSuffix.SetText(suffix.Trim('\n'));
@@ -50,7 +50,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Total.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"{(controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(controller.Total.Breakdowns[currency].Total).ToAmountString(culture)}\n";
+            suffix += $"{(controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{controller.Total.Breakdowns[currency].Total.ToAmountString(culture)}\n";
         }
         _totalRow.SetSubtitle(subtitle.Trim('\n'));
         _totalSuffix.SetText(suffix.Trim('\n'));
@@ -71,7 +71,7 @@ public class DashboardView : Gtk.ScrolledWindow
             {
                 subtitle += pair.Value.DashboardAmount.Breakdowns[currency].PerAccount;
                 culture.NumberFormat.CurrencySymbol = currency.Symbol;
-                var suffixLabel = Gtk.Label.New($"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{Math.Abs(pair.Value.DashboardAmount.Breakdowns[currency].Total).ToAmountString(culture)}");
+                var suffixLabel = Gtk.Label.New($"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{pair.Value.DashboardAmount.Breakdowns[currency].Total.ToAmountString(culture)}");
                 suffixLabel.AddCssClass(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "denaro-income" : "denaro-expense");
                 suffixLabel.SetHalign(Gtk.Align.End);
                 suffixBox.Append(suffixLabel);

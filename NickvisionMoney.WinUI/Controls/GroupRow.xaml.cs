@@ -100,7 +100,7 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
         LblName.Text = group.Name;
         LblDescription.Visibility = string.IsNullOrEmpty(group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = group.Description;
-        LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}";
+        LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{group.Balance.ToAmountString(_cultureAmount)}";
     }
 
     /// <summary>
