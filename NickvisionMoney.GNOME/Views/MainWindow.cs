@@ -62,6 +62,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _dashboardButton;
+    [Gtk.Connect] private readonly Adw.Bin _dashboardBin;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.ButtonContent _greeting;
@@ -412,8 +413,21 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void OnToggleDashboard(Gtk.ToggleButton sender, EventArgs e)
     {
-        _viewStack.SetVisibleChildName(sender.GetActive() ? "dashboard" : "pageTabs");
-        _actCloseAccount.SetEnabled(!sender.GetActive());
+        if (sender.GetActive())
+        {
+            _dashboardBin.SetChild(new DashboardView(_controller.CreateDashboardViewController()));
+            _viewStack.SetVisibleChildName("dashboard");
+            _actCloseAccount.SetEnabled(false);
+            _accountMenuButton.SetVisible(false);
+            _flapToggleButton.SetVisible(false);
+        }
+        else
+        {
+            _viewStack.SetVisibleChildName("pageTabs");
+            _actCloseAccount.SetEnabled(true);
+            _accountMenuButton.SetVisible(true);
+            _flapToggleButton.SetVisible(true);
+        }
     }
 
     /// <summary>
