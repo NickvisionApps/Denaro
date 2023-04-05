@@ -34,6 +34,8 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
+    private string _transactionDefaultColor;
+    private Dictionary<uint, Group> _groups;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -47,10 +49,6 @@ public class TransactionDialogController : IDisposable
     /// The transaction represented by the controller
     /// </summary>
     public Transaction Transaction { get; init; }
-    /// <summary>
-    /// The groups in the account
-    /// </summary>
-    public Dictionary<uint, string> Groups { get; init; }
     /// <summary>
     /// Whether or not this transaction can be copied
     /// </summary>
@@ -106,12 +104,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
+        _transactionDefaultColor = transactionDefaultColor;
+        _groups = groups;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
-        Groups = groups;
         CanCopy = canCopy;
         Accepted = false;
         IsEditing = true;
@@ -135,12 +134,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
+        _transactionDefaultColor = transactionDefaultColor;
+        _groups = groups;
         Localizer = localizer;
         Transaction = new Transaction(id);
-        Groups = groups;
         CanCopy = false;
         Accepted = false;
         IsEditing = false;
@@ -151,6 +151,22 @@ public class TransactionDialogController : IDisposable
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
         Transaction.RGBA = transactionDefaultColor;
+    }
+
+    /// <summary>
+    /// The list of group names
+    /// </summary>
+    public List<string> GroupNames
+    {
+        get
+        {
+            var names = new List<string>();
+            foreach (var group in _groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name))
+            {
+                names.Add(group.Name);
+            }
+            return names;
+        }
     }
 
     /// <summary>
@@ -184,6 +200,40 @@ public class TransactionDialogController : IDisposable
             }
         }
         _disposed = true;
+    }
+
+    /// <summary>
+    /// Gets the name of a group from a group id
+    /// </summary>
+    /// <param name="id">The id of the group</param>
+    /// <returns>The name of the group</returns>
+    public string GetGroupNameFromId(uint id)
+    {
+        try
+        {
+            return _groups[id].Name;
+        }
+        catch
+        {
+            return "";
+        }
+    }
+
+    /// <summary>
+    /// Gets the color of a group from a group name
+    /// </summary>
+    /// <param name="name">The name of the group</param>
+    /// <returns>The rgba of the group</returns>
+    public string GetRBAFromGroupName(string name)
+    {
+        foreach(var pair in _groups)
+        {
+            if(pair.Value.Name == name && pair.Value.Name != Localizer["Ungrouped"])
+            {
+                return pair.Value.RGBA;
+            }
+        }
+        return _transactionDefaultColor;
     }
 
     /// <summary>
@@ -292,7 +342,7 @@ public class TransactionDialogController : IDisposable
         }
         Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
-        Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
+        Transaction.GroupId = groupName == Localizer["Ungrouped"] ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
         if (receiptPath != null)
         {

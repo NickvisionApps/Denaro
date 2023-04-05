@@ -483,30 +483,14 @@ public class AccountViewController : IDisposable
     /// Creates a new TransactionDialogController for a new transaction
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
-    public TransactionDialogController CreateTransactionDialogController()
-    {
-        var groups = new Dictionary<uint, string>();
-        foreach (var pair in _account.Groups)
-        {
-            groups.Add(pair.Key, pair.Value.Name);
-        }
-        return new TransactionDialogController(_account.NextAvailableTransactionId, groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
-    }
+    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(_account.NextAvailableTransactionId, _account.Groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController for an existing transaction
     /// </summary>
     /// <param name="id">The id of the existing transaction</param>
     /// <returns>The TransactionDialogController for the existing transaction</returns>
-    public TransactionDialogController CreateTransactionDialogController(uint id)
-    {
-        var groups = new Dictionary<uint, string>();
-        foreach (var pair in _account.Groups)
-        {
-            groups.Add(pair.Key, pair.Value.Name);
-        }
-        return new TransactionDialogController(_account.Transactions[id], groups, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
-    }
+    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Groups, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a copy transaction
@@ -515,11 +499,6 @@ public class AccountViewController : IDisposable
     /// <returns>The TransactionDialogController for the copied transaction</returns>
     public TransactionDialogController CreateTransactionDialogController(Transaction source)
     {
-        var groups = new Dictionary<uint, string>();
-        foreach (var pair in _account.Groups)
-        {
-            groups.Add(pair.Key, pair.Value.Name);
-        }
         var toCopy = new Transaction(_account.NextAvailableTransactionId)
         {
             Date = source.Date,
@@ -533,7 +512,7 @@ public class AccountViewController : IDisposable
             RepeatFrom = source.RepeatFrom,
             RepeatEndDate = source.RepeatEndDate
         };
-        return new TransactionDialogController(toCopy, groups, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
+        return new TransactionDialogController(toCopy, _account.Groups, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
     }
 
     /// <summary>
