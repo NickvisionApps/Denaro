@@ -825,8 +825,8 @@
 		<value>Use group color</value>
 	</data>
 
-	<data name="Color.UseSpecific" xml:space="preserve">
-		<value>Use specific color</value>
+	<data name="Color.UseUnique" xml:space="preserve">
+		<value>Use unique color</value>
 	</data>
 
 	<data name="Receipt.Field" xml:space="preserve">
