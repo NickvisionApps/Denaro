@@ -98,6 +98,7 @@ public partial class TransactionDialog : Adw.Window
     private nint _colorDialog;
 
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
@@ -136,6 +137,20 @@ public partial class TransactionDialog : Adw.Window
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
+        _scrolledWindow.GetVadjustment().OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "page-size")
+            {
+                if (_scrolledWindow.GetVadjustment().GetPageSize() < _scrolledWindow.GetVadjustment().GetUpper())
+                {
+                    _scrolledWindow.AddCssClass("scrolled-dialog");
+                }
+                else
+                {
+                    _scrolledWindow.RemoveCssClass("scrolled-dialog");
+                }
+            }
+        };
         _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
         _copyButton.SetVisible(_controller.CanCopy);
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);

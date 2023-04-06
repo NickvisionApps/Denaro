@@ -131,6 +131,13 @@ row.error button.circular {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16) inset;
 }
 /* Transaction Dialog */
+.scrolled-dialog {
+  border-color: @borders;
+  border-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+
 .transaction-amount {
   background-color: @card_bg_color;
   border-radius: 12px;
@@ -141,8 +148,8 @@ row.error button.circular {
 }
 
 .calendar-button label {
-  margin-left: -10px;
-  margin-right: -10px;
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
 .calendar-button popover label {
