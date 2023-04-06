@@ -9,7 +9,7 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class PasswordDialog : Adw.Window
 {
-    [Gtk.Connect] private readonly Adw.StatusPage _statusPage;
+    [Gtk.Connect] private readonly Gtk.Label _filenameLabel;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _passwordEntry;
     [Gtk.Connect] private readonly Gtk.Button _unlockButton;
 
@@ -19,7 +19,7 @@ public partial class PasswordDialog : Adw.Window
         builder.Connect(this);
         //Dialog Settings
         SetTransientFor(parent);
-        _statusPage.SetDescription(accountTitle);
+        _filenameLabel.SetLabel(accountTitle);
         _unlockButton.OnClicked += (sender, e) =>
         {
             unlock = true;
