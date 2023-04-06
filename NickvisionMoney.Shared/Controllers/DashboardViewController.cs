@@ -101,7 +101,7 @@ public class DashboardViewController
                 }
                 Total.Breakdowns[currency] = (Total.Breakdowns[currency].Total + controller.AccountTodayTotal, Total.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n");
             }
-            foreach(var group in controller.Groups)
+            foreach(var group in controller.Groups.Values)
             {
                 if(group.Balance != 0)
                 {

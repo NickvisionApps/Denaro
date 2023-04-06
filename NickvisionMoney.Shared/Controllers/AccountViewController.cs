@@ -124,9 +124,9 @@ public class AccountViewController : IDisposable
     /// </summary>
     public int GroupsCount => _account.Groups.Count;
     /// <summary>
-    /// The list of groups in the account
+    /// Groups in the account
     /// </summary>
-    public List<Group> Groups => _account.Groups.Values.ToList();
+    public Dictionary<uint, Group> Groups => _account.Groups;
 
     /// <summary>
     /// Occurs when a notification is sent

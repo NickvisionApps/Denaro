@@ -422,7 +422,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)
