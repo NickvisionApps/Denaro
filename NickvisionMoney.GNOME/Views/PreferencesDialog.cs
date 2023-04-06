@@ -40,6 +40,9 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private static partial nint gtk_color_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_set_with_alpha(nint dialog, [MarshalAs(UnmanagedType.I1)]bool with_alpha);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -97,16 +100,22 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
             }
         };
         _transactionColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_transactionColorDialog, false);
         gtk_color_dialog_button_set_dialog(_transactionColorButton.Handle, _transactionColorDialog);
         _transferColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_transferColorDialog, false);
         gtk_color_dialog_button_set_dialog(_transferColorButton.Handle, _transferColorDialog);
         _groupColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_groupColorDialog, false);
         gtk_color_dialog_button_set_dialog(_groupColorButton.Handle, _groupColorDialog);
         _accountCheckingColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountCheckingColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountCheckingColorButton.Handle, _accountCheckingColorDialog);
         _accountSavingsColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountSavingsColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountSavingsColorButton.Handle, _accountSavingsColorDialog);
         _accountBusinessColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountBusinessColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountBusinessColorButton.Handle, _accountBusinessColorDialog);
         _insertSeparatorRow.OnNotify += (sender, e) =>
         {

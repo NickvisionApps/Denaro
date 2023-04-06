@@ -53,6 +53,9 @@ public partial class TransactionDialog : Adw.Window
     private static partial nint gtk_color_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_set_with_alpha(nint dialog, [MarshalAs(UnmanagedType.I1)]bool with_alpha);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -247,6 +250,7 @@ public partial class TransactionDialog : Adw.Window
             }
         };
         _colorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_colorDialog, false);
         gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
         _colorButton.OnNotify += (sender, e) =>
         {

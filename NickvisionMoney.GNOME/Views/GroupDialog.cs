@@ -38,6 +38,9 @@ public partial class GroupDialog : Adw.Window
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_color_dialog_new();
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_set_with_alpha(nint dialog, [MarshalAs(UnmanagedType.I1)]bool with_alpha);
+
     private bool _constructing;
     private readonly GroupDialogController _controller;
     private readonly nint _colorDialog;
@@ -93,6 +96,7 @@ public partial class GroupDialog : Adw.Window
         _descriptionRow.AddController(_descriptionKeyController);
         //Color
         _colorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_colorDialog, false);
         gtk_color_dialog_button_set_dialog(_colorButton.Handle, _colorDialog);
         _colorButton.OnNotify += (sender, e) =>
         {
