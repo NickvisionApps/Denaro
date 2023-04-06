@@ -131,36 +131,29 @@ row.error button.circular {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16) inset;
 }
 /* Transaction Dialog */
-.transaction-dialog-group list:dir(ltr), .transaction-dialog-group row:dir(ltr), .transaction-dialog-color list:dir(rtl), .transaction-dialog-color row:dir(rtl) {
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+.transaction-amount {
+  background-color: @card_bg_color;
+  border-radius: 12px;
 }
 
-.transaction-dialog-group list:dir(rtl), .transaction-dialog-group row:dir(rtl), .transaction-dialog-color list:dir(ltr), .transaction-dialog-color row:dir(ltr) {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+.transaction-amount text {
+  font-size: 15pt;
 }
 
-.calendar-button:dir(ltr) {
-	margin-right: -8px;
+.calendar-button label {
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
-.calendar-button label:dir(ltr) {
-	margin-right: 4px;
-	font-weight: normal;
+.calendar-button popover label {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
-.calendar-button:dir(rtl) {
-	margin-left: -8px;
-}
-
-.calendar-button label:dir(rtl) {
-	margin-left: 4px;
-	font-weight: normal;
+.calendar-button calendar {
+  font-weight: normal;
+  background-color: @popover_bg_color;
+  border: none;
 }
 
 /* Transaction Row */

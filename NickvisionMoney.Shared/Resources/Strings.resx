@@ -821,6 +821,14 @@
 		<value>Color</value>
 	</data>
 
+	<data name="Color.UseGroup" xml:space="preserve">
+		<value>Use group color</value>
+	</data>
+
+	<data name="Color.UseSpecific" xml:space="preserve">
+		<value>Use specific color</value>
+	</data>
+
 	<data name="Receipt.Field" xml:space="preserve">
 		<value>Receipt</value>
 	</data>
