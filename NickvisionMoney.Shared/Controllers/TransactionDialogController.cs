@@ -301,7 +301,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="receiptPath">The new receipt image path</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
@@ -344,6 +344,7 @@ public class TransactionDialogController : IDisposable
         Transaction.Amount = amount;
         Transaction.GroupId = groupName == Localizer["Ungrouped"] ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
+        Transaction.UseGroupColor = useGroupColor;
         if (receiptPath != null)
         {
             if (Path.Exists(receiptPath))

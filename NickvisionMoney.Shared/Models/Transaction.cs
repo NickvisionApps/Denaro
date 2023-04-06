@@ -65,6 +65,10 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     public string RGBA { get; set; }
     /// <summary>
+    /// Whether to use group color for transaction
+    /// </summary>
+    public bool UseGroupColor { get; set; }
+    /// <summary>
     /// The receipt image for the transaction
     /// </summary>
     public Image? Receipt { get; set; }
@@ -92,6 +96,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         Amount = 0m;
         GroupId = -1;
         RGBA = "rgb(0,0,0)";
+        UseGroupColor = true;
         Receipt = null;
         RepeatFrom = -1;
         RepeatEndDate = null;
@@ -154,6 +159,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Amount = Amount,
             GroupId = GroupId,
             RGBA = RGBA,
+            UseGroupColor = UseGroupColor,
             Receipt = Receipt != null ? Receipt.Clone((x) => { }) : null,
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate

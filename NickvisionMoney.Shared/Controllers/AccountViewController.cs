@@ -508,6 +508,7 @@ public class AccountViewController : IDisposable
             Amount = source.Amount,
             GroupId = source.GroupId,
             RGBA = source.RGBA,
+            UseGroupColor = source.UseGroupColor,
             Receipt = source.Receipt,
             RepeatFrom = source.RepeatFrom,
             RepeatEndDate = source.RepeatEndDate
