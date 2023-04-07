@@ -149,7 +149,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
         ViewStackTransactions.ChangePage("Transactions");
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)
