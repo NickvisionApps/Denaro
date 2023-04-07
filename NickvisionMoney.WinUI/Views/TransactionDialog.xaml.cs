@@ -288,6 +288,12 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         if (!_constructing)
         {
             CmbColor.Visibility = (string)CmbGroup.SelectedItem != _controller.Localizer["Ungrouped"] ? Visibility.Visible : Visibility.Collapsed;
+            if(CmbColor.Visibility == Visibility.Visible)
+            {
+                _constructing = true;
+                CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;
+                _constructing = false;
+            }
             BtnColor.Visibility = (CmbColor.Visibility == Visibility.Collapsed || CmbColor.SelectedIndex == 1) ? Visibility.Visible : Visibility.Collapsed;
             Validate();
         }
