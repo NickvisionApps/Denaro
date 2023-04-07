@@ -25,14 +25,13 @@ public interface IGroupRowControl : IModelRowControl<Group>
     /// <param name="group">The new Group model</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
-    void IModelRowControl<Group>.UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate) => UpdateRow(group, cultureAmount, cultureDate, true);
+    void IModelRowControl<Group>.UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate) => UpdateRow(group, cultureAmount, true);
 
     /// <summary>
     /// Updates the row based on the new Group model
     /// </summary>
     /// <param name="group">The new Group model</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
-    /// <param name="cultureAmount">The culture to use for displaying date strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, bool filterActive);
+    public void UpdateRow(Group group, CultureInfo cultureAmount, bool filterActive);
 }

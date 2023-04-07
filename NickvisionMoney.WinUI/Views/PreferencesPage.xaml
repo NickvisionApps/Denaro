@@ -43,17 +43,7 @@
                     </HyperlinkButton.Content>
                 </HyperlinkButton>
 
-                <HyperlinkButton Margin="-12,12,0,0" Click="Help">
-                    <HyperlinkButton.Content>
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE11B;"/>
-
-                            <TextBlock x:Name="LblBtnHelp"/>
-                        </StackPanel>
-                    </HyperlinkButton.Content>
-                </HyperlinkButton>
-                
-                <HyperlinkButton Margin="-12,0,0,0" Click="GitHubRepo">
+                <HyperlinkButton Margin="-12,12,0,0" Click="GitHubRepo">
                     <HyperlinkButton.Content>
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1D3;"/>
@@ -97,7 +87,7 @@
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE790;"/>
                                 </labs:SettingsCard.HeaderIcon>
 
-                                <ComboBox x:Name="CmbTheme" Width="60" SelectionChanged="CmbTheme_SelectionChanged"/>
+                                <ComboBox x:Name="CmbTheme" SelectionChanged="CmbTheme_SelectionChanged"/>
                             </labs:SettingsCard>
                         </labs:SettingsExpander.Items>
                     </labs:SettingsExpander>
@@ -122,6 +112,14 @@
                                 </labs:SettingsCard.HeaderIcon>
 
                                 <wct:ColorPickerButton x:Name="BtnTransferDefaultColor" SelectedColor="{Binding TransferDefaultColor, Mode=TwoWay, ElementName=This}"/>
+                            </labs:SettingsCard>
+
+                            <labs:SettingsCard x:Name="CardGroupDefaultColor">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED66;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <wct:ColorPickerButton x:Name="BtnGroupDefaultColor" SelectedColor="{Binding GroupDefaultColor, Mode=TwoWay, ElementName=This}"/>
                             </labs:SettingsCard>
 
                             <labs:SettingsCard x:Name="CardAccountCheckingColor">

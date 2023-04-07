@@ -53,6 +53,10 @@ public class Configuration
     /// </summary>
     public string TransferDefaultColor { get; set; }
     /// <summary>
+    /// The default color of a group
+    /// </summary>
+    public string GroupDefaultColor { get; set; }
+    /// <summary>
     /// The color of accounts with Checking type
     /// </summary>
     public string AccountCheckingColor { get; set; }
@@ -93,6 +97,7 @@ public class Configuration
         RecentAccount3 = new RecentAccount();
         TransactionDefaultColor = "rgb(53,132,228)";
         TransferDefaultColor = "rgb(192,97,203)";
+        GroupDefaultColor = "rgb(51,209,122)";
         AccountCheckingColor = "rgb(129,61,156)";
         AccountSavingsColor = "rgb(53,132,228)";
         AccountBusinessColor = "rgb(38,162,105)";
@@ -125,22 +130,58 @@ public class Configuration
     /// <summary>
     /// Gets the list of recent accounts available
     /// </summary>
+    [JsonIgnore]
     public List<RecentAccount> RecentAccounts
     {
         get
         {
             var recents = new List<RecentAccount>();
+            var update = false;
             if (File.Exists(RecentAccount1.Path))
             {
                 recents.Add(RecentAccount1);
+            }
+            else
+            {
+                update = true;
             }
             if (File.Exists(RecentAccount2.Path))
             {
                 recents.Add(RecentAccount2);
             }
+            else
+            {
+                update = true;
+            }
             if (File.Exists(RecentAccount3.Path))
             {
                 recents.Add(RecentAccount3);
+            }
+            else
+            {
+                update = true;
+            }
+            if (update)
+            {
+                if (recents.Count == 0)
+                {
+                    RecentAccount1 = new RecentAccount();
+                    RecentAccount2 = new RecentAccount();
+                    RecentAccount3 = new RecentAccount();
+                }
+                else if (recents.Count == 1)
+                {
+                    RecentAccount1 = recents[0];
+                    RecentAccount2 = new RecentAccount();
+                    RecentAccount3 = new RecentAccount();
+                }
+                else if (recents.Count == 2)
+                {
+                    RecentAccount1 = recents[0];
+                    RecentAccount2 = recents[1];
+                    RecentAccount3 = new RecentAccount();
+                }
+                Save();
             }
             return recents;
         }

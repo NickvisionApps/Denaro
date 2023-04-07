@@ -18,6 +18,10 @@
             <TextBox x:Name="TxtDescription" HorizontalAlignment="Stretch" IsSpellCheckEnabled="True" TextChanged="TxtDescription_TextChanged"/>
 
             <TextBlock x:Name="TxtErrors" Visibility="Collapsed" Margin="0,10,0,0" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+
+            <TextBlock x:Name="LblColor"/>
+
+            <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" SelectedColor="{x:Bind SelectedColor, Mode=TwoWay}"/>
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>

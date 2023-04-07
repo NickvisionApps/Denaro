@@ -34,6 +34,8 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
+    private string _transactionDefaultColor;
+    private Dictionary<uint, Group> _groups;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -47,10 +49,6 @@ public class TransactionDialogController : IDisposable
     /// The transaction represented by the controller
     /// </summary>
     public Transaction Transaction { get; init; }
-    /// <summary>
-    /// The groups in the account
-    /// </summary>
-    public Dictionary<uint, string> Groups { get; init; }
     /// <summary>
     /// Whether or not this transaction can be copied
     /// </summary>
@@ -82,7 +80,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
-    public InsertSeparator InsertSeparator => NickvisionMoney.Shared.Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
+    public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
 
     /// <summary>
     /// The repeat interval index used by GUI
@@ -101,18 +99,18 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
-    /// <param name="transactionDefaultType">A default type for the transaction</param>
-    /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
+    /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, bool canCopy, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
+        _transactionDefaultColor = transactionDefaultColor;
+        _groups = groups;
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
-        Groups = groups;
         CanCopy = canCopy;
         Accepted = false;
         IsEditing = true;
@@ -120,9 +118,8 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        if (Transaction.Amount == 0m) //new transaction
+        if (string.IsNullOrEmpty(Transaction.RGBA))
         {
-            Transaction.Type = transactionDefaultType;
             Transaction.RGBA = transactionDefaultColor;
         }
     }
@@ -137,12 +134,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, string> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
     {
         _disposed = false;
+        _transactionDefaultColor = transactionDefaultColor;
+        _groups = groups;
         Localizer = localizer;
         Transaction = new Transaction(id);
-        Groups = groups;
         CanCopy = false;
         Accepted = false;
         IsEditing = false;
@@ -150,10 +148,24 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        if (Transaction.Amount == 0m) //new transaction
+        //Set Defaults For New Transaction
+        Transaction.Type = transactionDefaultType;
+        Transaction.RGBA = transactionDefaultColor;
+    }
+
+    /// <summary>
+    /// The list of group names
+    /// </summary>
+    public List<string> GroupNames
+    {
+        get
         {
-            Transaction.Type = transactionDefaultType;
-            Transaction.RGBA = transactionDefaultColor;
+            var names = new List<string>();
+            foreach (var group in _groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name))
+            {
+                names.Add(group.Name);
+            }
+            return names;
         }
     }
 
@@ -188,6 +200,23 @@ public class TransactionDialogController : IDisposable
             }
         }
         _disposed = true;
+    }
+
+    /// <summary>
+    /// Gets the name of a group from a group id
+    /// </summary>
+    /// <param name="id">The id of the group</param>
+    /// <returns>The name of the group</returns>
+    public string GetGroupNameFromId(uint id)
+    {
+        try
+        {
+            return _groups[id].Name;
+        }
+        catch
+        {
+            return "";
+        }
     }
 
     /// <summary>
@@ -255,7 +284,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="receiptPath">The new receipt image path</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, string amountString, string? receiptPath, DateOnly? repeatEndDate)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, string amountString, string? receiptPath, DateOnly? repeatEndDate)
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
@@ -296,8 +325,9 @@ public class TransactionDialogController : IDisposable
         }
         Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
-        Transaction.GroupId = groupName == "Ungrouped" ? -1 : (int)Groups.FirstOrDefault(x => x.Value == groupName).Key;
+        Transaction.GroupId = groupName == Localizer["Ungrouped"] ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
+        Transaction.UseGroupColor = useGroupColor;
         if (receiptPath != null)
         {
             if (Path.Exists(receiptPath))

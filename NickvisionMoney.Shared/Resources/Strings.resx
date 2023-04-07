@@ -133,8 +133,16 @@
 		<value>Home</value>
 	</data>
 
+	<data name="Dashboard" xml:space="preserve">
+		<value>Dashboard</value>
+	</data>
+
 	<data name="Account" xml:space="preserve">
 		<value>Account</value>
+	</data>
+
+	<data name="Accounts" xml:space="preserve">
+		<value>Accounts</value>
 	</data>
 
 	<data name="Settings" xml:space="preserve">
@@ -234,6 +242,15 @@
 	<data name="InvalidPassword" xml:space="preserve">
 		<value>Unable to login to account. Provided password is invalid.</value>
 	</data>
+	
+	<!--DashboardView-->
+	<data name="AmountFromAccount" xml:space="preserve">
+		<value>{0} from {1}</value>
+	</data>
+
+	<data name="AllAccounts" xml:space="preserve">
+		<value>All Accounts</value>
+	</data>
 
 	<!--AccountView-->
 	<data name="AccountActions" xml:space="preserve">
@@ -305,11 +322,11 @@
 	</data>
 
 	<data name="TransactionNumber" xml:space="preserve">
-		<value>{0} Transaction</value>
+		<value>Transaction ({0})</value>
 	</data>
 
 	<data name="TransactionNumber.Plural" xml:space="preserve">
-		<value>{0} Transactions</value>
+		<value>Transactions ({0})</value>
 	</data>
 
 	<data name="NoTransactionsTitle" xml:space="preserve">
@@ -338,6 +355,10 @@
 
 	<data name="Filters" xml:space="preserve">
 		<value>Filters</value>
+	</data>
+
+	<data name="ResetFilters.All" xml:space="preserve">
+		<value>Reset All Filters</value>
 	</data>
 
 	<data name="ResetFilters.Overview" xml:space="preserve">
@@ -458,6 +479,30 @@
 
 	<data name="AccountSettings" xml:space="preserve">
 		<value>Account Settings</value>
+	</data>
+
+	<data name="AccountSettings.Tooltip" xml:space="preserve">
+		<value>Account Settings (Ctrl+.)</value>
+	</data>
+
+	<data name="Sort" xml:space="preserve">
+		<value>Sort</value>
+	</data>
+
+	<data name="OrderBy" xml:space="preserve">
+		<value>Order By</value>
+	</data>
+
+	<data name="OrderBy.Increasing" xml:space="preserve">
+		<value>Increasing</value>
+	</data>
+
+	<data name="OrderBy.Decreasing" xml:space="preserve">
+		<value>Decreasing</value>
+	</data>
+
+	<data name="SortBy" xml:space="preserve">
+		<value>Sort By</value>
 	</data>
 
 	<data name="SortBy.Id" xml:space="preserve">
@@ -617,6 +662,14 @@
 		<value>(Copy)</value>
 	</data>
 
+	<data name="UseGroupColor" xml:space="preserve">
+		<value>Use Group Color</value>
+	</data>
+
+	<data name="UseUniqueColor" xml:space="preserve">
+		<value>Use Unique Color</value>
+	</data>
+
 	<!--TransferDialog-->
 	<data name="Transfer" xml:space="preserve">
 		<value>Transfer</value>
@@ -766,6 +819,14 @@
 
 	<data name="Color.Field" xml:space="preserve">
 		<value>Color</value>
+	</data>
+
+	<data name="Color.UseGroup" xml:space="preserve">
+		<value>Use group color</value>
+	</data>
+
+	<data name="Color.UseUnique" xml:space="preserve">
+		<value>Use unique color</value>
 	</data>
 
 	<data name="Receipt.Field" xml:space="preserve">
@@ -974,6 +1035,10 @@
 	<data name="TransferColor" xml:space="preserve">
 		<value>Transfer Default Color</value>
 	</data>
+	
+	<data name="GroupColor" xml:space="preserve">
+		<value>Group Default Color</value>
+	</data>
 
 	<data name="TransactionColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to newly added transactions.</value>
@@ -981,6 +1046,10 @@
 
 	<data name="TransferColorDescription" xml:space="preserve">
 		<value>A change in this setting will only be applied to new transfers.</value>
+	</data>
+
+	<data name="GroupColorDescription" xml:space="preserve">
+		<value>A change in this setting will only be applied to new groups.</value>
 	</data>
 
 	<data name="AccountCheckingColor" xml:space="preserve">

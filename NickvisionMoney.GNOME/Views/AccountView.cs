@@ -352,7 +352,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
@@ -364,7 +364,7 @@ public partial class AccountView : Adw.Bin
                 {
                     _groupsList.Insert(row, index.Value);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
@@ -422,7 +422,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.TransactionDefaultColor, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)
@@ -442,7 +442,7 @@ public partial class AccountView : Adw.Bin
                 }
                 return false;
             };
-            
+
         }
         else
         {
@@ -490,7 +490,7 @@ public partial class AccountView : Adw.Bin
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
@@ -743,7 +743,7 @@ public partial class AccountView : Adw.Bin
                     path += ".pdf";
                 }
                 string? password = null;
-                var dialog = new MessageDialog(_parentWindow, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
                 dialog.Present();
                 dialog.OnResponse += async (sender, e) =>
                 {
@@ -815,7 +815,8 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-            }); 
+            });
+            //Stop Spinner
             g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
             transactionDialog.Close();
@@ -838,16 +839,16 @@ public partial class AccountView : Adw.Bin
             g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
             //Work
             await Task.Run(async () =>
-            { 
-                try 
-                { 
-                    await _controller.AddTransactionAsync(transactionController.Transaction); 
-                } 
-                catch (Exception ex) 
-                { 
-                    Console.WriteLine(ex.Message); 
-                    Console.WriteLine(ex.StackTrace); 
-                } 
+            {
+                try
+                {
+                    await _controller.AddTransactionAsync(transactionController.Transaction);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
             });
             g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             transactionController.Dispose();
@@ -877,7 +878,7 @@ public partial class AccountView : Adw.Bin
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
                     dialog.Present();
@@ -927,7 +928,7 @@ public partial class AccountView : Adw.Bin
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
                     dialog.Present();
@@ -989,7 +990,7 @@ public partial class AccountView : Adw.Bin
     {
         if (_controller.GetIsSourceRepeatTransaction(id))
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
             dialog.UnsetDestructiveApperance();
             dialog.UnsetSuggestedApperance();
             dialog.Present();
@@ -1019,7 +1020,7 @@ public partial class AccountView : Adw.Bin
         }
         else
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
             dialog.Present();
             dialog.OnResponse += async (sender, e) =>
             {
@@ -1105,7 +1106,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void DeleteGroup(object? sender, uint id)
     {
-        var dialog = new MessageDialog(_parentWindow, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+        var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
         dialog.Present();
         dialog.OnResponse += async (sender, e) =>
         {

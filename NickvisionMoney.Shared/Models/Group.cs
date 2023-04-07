@@ -23,6 +23,10 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// The balance of the group
     /// </summary>
     public decimal Balance { get; set; }
+    /// <summary>
+    /// The RGBA color of the group
+    /// </summary>
+    public string RGBA { get; set; }
 
     /// <summary>
     /// Constructs a group
@@ -34,6 +38,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         Name = "";
         Description = "";
         Balance = 0m;
+        RGBA = "rgb(0,0,0)";
     }
 
     /// <summary>
@@ -46,7 +51,8 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         {
             Name = Name,
             Description = Description,
-            Balance = Balance
+            Balance = Balance,
+            RGBA = RGBA
         };
     }
 
@@ -96,6 +102,12 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// <param name="obj">The Group? object to compare</param>
     /// <returns>True if equals, else false</returns>
     public bool Equals(Group? obj) => Equals((object?)obj);
+
+    /// <summary>
+    /// Gets a hash code for the object
+    /// </summary>
+    /// <returns>The hash code for the object</returns>
+    public override int GetHashCode() => Id.GetHashCode();
 
     /// <summary>
     /// Compares two Group objects by ==

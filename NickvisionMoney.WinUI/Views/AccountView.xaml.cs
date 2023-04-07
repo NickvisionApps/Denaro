@@ -1,9 +1,8 @@
 using CommunityToolkit.WinUI;
 using CommunityToolkit.WinUI.UI;
-using CommunityToolkit.WinUI.UI.Controls;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
@@ -51,38 +50,44 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         _isOpened = false;
         _transactionRowWidth = -1;
         //Localize Strings
-        LblBtnNew.Text = _controller.Localizer["New"];
+        MenuNew.Label = _controller.Localizer["New"];
         MenuNewTransaction.Text = _controller.Localizer["Transaction"];
         MenuContextNewTransaction.Text = _controller.Localizer["NewTransaction"];
         MenuNewGroup.Text = _controller.Localizer["Group"];
         MenuContextNewGroup.Text = _controller.Localizer["NewGroup"];
         MenuTransferMoney.Text = _controller.Localizer["Transfer"];
         MenuContextTransferMoney.Text = _controller.Localizer["TransferMoney"];
-        ToolTipService.SetToolTip(BtnActions, _controller.Localizer["AccountActions"]);
-        MenuImportFromFile.Text = _controller.Localizer["ImportFromFile"];
-        MenuExportToFile.Text = _controller.Localizer["ExportToFile"];
-        ToolTipService.SetToolTip(BtnResetOverviewFilters, _controller.Localizer["ResetFilters", "Overview"]);
-        ToolTipService.SetToolTip(BtnResetGroupsFilters, _controller.Localizer["ResetFilters", "Groups"]);
-        ToolTipService.SetToolTip(BtnResetDatesFilters, _controller.Localizer["ResetFilters", "Dates"]);
-        MenuAccountSettings.Text = _controller.Localizer["AccountSettings"];
-        TxtSearchDescription.PlaceholderText = _controller.Localizer["SearchDescription", "Placeholder"];
+        MenuImportFromFile.Label = _controller.Localizer["ImportFromFile"];
+        ToolTipService.SetToolTip(MenuImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
+        MenuExportToFile.Label = _controller.Localizer["ExportToFile"];
+        ToolTipService.SetToolTip(MenuShowHideGrous, _controller.Localizer["ToggleGroups", "Tooltip"]);
+        MenuAccountSettings.Label = _controller.Localizer["AccountSettings"];
+        ToolTipService.SetToolTip(MenuAccountSettings, _controller.Localizer["AccountSettings", "Tooltip"]);
         LblOverview.Text = _controller.Localizer["Overview", "Today"];
-        LblTotalTitle.Text = $"{_controller.Localizer["Total"]}:";
-        LblIncomeTitle.Text = $"{_controller.Localizer["Income"]}:";
-        LblExpenseTitle.Text = $"{_controller.Localizer["Expense"]}:";
+        LblIncomeTitle.Text = _controller.Localizer["Income"];
+        LblExpenseTitle.Text = _controller.Localizer["Expense"];
+        LblTotalTitle.Text = _controller.Localizer["Total"];
         LblGroups.Text = _controller.Localizer["Groups"];
-        LblCalendar.Text = _controller.Localizer["Calendar"];
+        MenuSort.Label = _controller.Localizer["Sort"];
+        MenuOrderBy.Text = _controller.Localizer["OrderBy"];
+        MenuOrderByIncreasing.Text = _controller.Localizer["OrderBy", "Increasing"];
+        MenuOrderByDecreasing.Text = _controller.Localizer["OrderBy", "Decreasing"];
+        MenuSortBy.Text = _controller.Localizer["SortBy"];
+        MenuSortById.Text = _controller.Localizer["Id", "Field"];
+        MenuSortByDate.Text = _controller.Localizer["Date", "Field"];
+        MenuSortByAmount.Text = _controller.Localizer["Amount", "Field"];
+        MenuType.Label = _controller.Localizer["TransactionType", "Field"];
+        MenuFilterIncome.Text = _controller.Localizer["Income"];
+        MenuFilterExpense.Text = _controller.Localizer["Expense"];
+        MenuDate.Label = _controller.Localizer["Date", "Field"];
         Calendar.Language = _controller.CultureForDateString.Name;
         Calendar.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         ExpDateRange.Header = _controller.Localizer["SelectRange"];
         DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
         DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
+        MenuResetAllFilters.Label = _controller.Localizer["ResetFilters", "All"];
+        TxtSearchDescription.PlaceholderText = _controller.Localizer["SearchDescription", "Placeholder"];
         LblTransactions.Text = _controller.Localizer["Transactions"];
-        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Id"]);
-        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Date"]);
-        CmbSortTransactionsBy.Items.Add(_controller.Localizer["SortBy", "Amount"]);
-        ToolTipService.SetToolTip(BtnSortTopBottom, _controller.Localizer["SortFirstLast"]);
-        ToolTipService.SetToolTip(BtnSortBottomTop, _controller.Localizer["SortLastFirst"]);
         //Register Events
         _controller.AccountTransactionsChanged += AccountTransactionsChanged;
         _controller.UICreateGroupRow = CreateGroupRow;
@@ -114,7 +119,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id));
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), ColorHelpers.FromRGBA(_controller.GroupDefaultColor) ?? Color.FromArgb(255, 0, 0, 0));
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
@@ -144,7 +149,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
         ViewStackTransactions.ChangePage("Transactions");
-        var row = new TransactionRow(transaction, _controller.CultureForNumberString, _controller.CultureForDateString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 0, 0, 0), _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)
@@ -230,8 +235,6 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             {
                 ((TransactionRow)ListTransactions.Items[i]).Container = (GridViewItem)ListTransactions.ContainerFromIndex(i);
             }
-            ScrollSidebar.Height = ActualHeight - 60;
-            GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
             LblTransactions.Text = string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount);
             //Setup Other UI Elements
             DateRangeStart.Date = DateTimeOffset.Now;
@@ -239,61 +242,42 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             if (_controller.ShowGroupsList)
             {
                 SectionGroups.Visibility = Visibility.Visible;
-                DockPanel.SetDock(SectionCalendar, Dock.Bottom);
-                MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
+                SectionTransactions.Margin = new Thickness(6, 0, 0, 0);
+                MenuShowHideGrous.Label = _controller.Localizer["HideGroups"];
                 MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
             }
             else
             {
                 SectionGroups.Visibility = Visibility.Collapsed;
-                DockPanel.SetDock(SectionCalendar, Dock.Top);
-                MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
+                SectionTransactions.Margin = new Thickness(0, 0, 0, 0);
+                MenuShowHideGrous.Label = _controller.Localizer["ShowGroups"];
                 MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
             }
-            CmbSortTransactionsBy.SelectedIndex = (int)_controller.SortTransactionsBy;
             if (_controller.SortFirstToLast)
             {
-                BtnSortTopBottom.IsChecked = true;
+                MenuOrderByIncreasing.IsChecked = true;
             }
             else
             {
-                BtnSortBottomTop.IsChecked = true;
+                MenuOrderByDecreasing.IsChecked = true;
             }
-            if (CmbSortTransactionsBy.FindChildrenOfType<Popup>().FirstOrDefault() is Popup popup)
+            if (_controller.SortTransactionsBy == SortBy.Id)
             {
-                popup.PlacementTarget = CmbSortTransactionsBy;
-                popup.DesiredPlacement = PopupPlacementMode.BottomEdgeAlignedLeft;
+                MenuSortById.IsChecked = true;
+            }
+            else if (_controller.SortTransactionsBy == SortBy.Date)
+            {
+                MenuSortByDate.IsChecked = true;
+            }
+            else if (_controller.SortTransactionsBy == SortBy.Amount)
+            {
+                MenuSortByAmount.IsChecked = true;
             }
             //Done Loading
             LoadingCtrl.IsLoading = false;
             _isOpened = true;
         }
     }
-
-    /// <summary>
-    /// Occurs when the page size is changed
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">SizeChangedEventArgs</param>
-    private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        ScrollSidebar.Height = e.NewSize.Height < 60 ? 60 : e.NewSize.Height - 60;
-        GridSidebar.Margin = new Thickness(0, 0, ScrollSidebar.Height < GridSidebar.ActualHeight ? 14 : 0, 0);
-    }
-
-    /// <summary>
-    /// Occurs when the NavView's pane is opened
-    /// </summary>
-    /// <param name="sender">NavigationView</param>
-    /// <param name="args">object</param>
-    private void NavView_PaneOpened(NavigationView sender, object args) => ScrollSidebar.Margin = new Thickness(6, 0, 0, 0);
-
-    /// <summary>
-    /// Occurs when the NavView's pane is closed
-    /// </summary>
-    /// <param name="sender">NavigationView</param>
-    /// <param name="args">object</param>
-    private void NavView_PaneClosed(NavigationView sender, object args) => ScrollSidebar.Margin = new Thickness(60, 0, 0, 0);
 
     /// <summary>
     /// Occurs when the account's transactions are changed
@@ -303,30 +287,29 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     private void AccountTransactionsChanged(object? sender, EventArgs e)
     {
         //Overview
+        LblAccoutTitle.Text = _controller.AccountTitle;
+        LblAccountPath.Text = _controller.AccountPath;
         _updateNavViewItemTitle(_controller.AccountPath, _controller.AccountTitle);
         LblTotalAmount.Text = _controller.AccountTodayTotalString;
-        LblTotalAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 28, 113, 216) : Color.FromArgb(255, 120, 174, 237));
+        CardTotalIcon.Background = new SolidColorBrush(Color.FromArgb(255, 53, 132, 228));
+        CardTotalIconIcon.Foreground = new SolidColorBrush(Colors.White);
         LblIncomeAmount.Text = _controller.AccountTodayIncomeString;
-        LblIncomeAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164));
+        CardIncomeIcon.Background = new SolidColorBrush(Color.FromArgb(255, 38, 162, 105));
+        CardIncomeIconIcon.Foreground = new SolidColorBrush(Colors.White);
         LblExpenseAmount.Text = _controller.AccountTodayExpenseString;
-        LblExpenseAmount.Foreground = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        CardExpenseIcon.Background = new SolidColorBrush(Color.FromArgb(255, 192, 28, 40));
+        CardExpenseIconIcon.Foreground = new SolidColorBrush(Colors.White);
         ///Transactions
         if (_controller.TransactionsCount > 0)
         {
-            //Highlight Days
+            //Mark Days
             var datesInAccount = _controller.DatesInAccount;
             var displayedDays = Calendar.FindDescendants().Where(x => x is CalendarViewDayItem);
             foreach (CalendarViewDayItem displayedDay in displayedDays)
             {
-                if (datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today)
-                {
-                    displayedDay.Background = new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 143, 240, 164) : Color.FromArgb(255, 38, 162, 105));
-                }
-                else
-                {
-                    displayedDay.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                }
+                displayedDay.IsBlackout = !datesInAccount.Contains(DateOnly.FromDateTime(displayedDay.Date.Date)) && displayedDay.Date.Date != DateTime.Today;
             }
+            Calendar.UpdateLayout();
             //Transaction Page
             LblTransactions.Text = string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount);
             if (_controller.FilteredTransactionsCount > 0)
@@ -748,55 +731,18 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         if (SectionGroups.Visibility == Visibility.Visible)
         {
             SectionGroups.Visibility = Visibility.Collapsed;
-            RowSidebarGroups.Height = new GridLength(0, GridUnitType.Pixel);
-            MenuShowHideGrous.Text = _controller.Localizer["ShowGroups"];
+            SectionTransactions.Margin = new Thickness(0, 0, 0, 0);
+            MenuShowHideGrous.Label = _controller.Localizer["ShowGroups"];
             MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uE7B3" };
         }
         else
         {
             SectionGroups.Visibility = Visibility.Visible;
-            RowSidebarGroups.Height = new GridLength(1, GridUnitType.Star);
-            MenuShowHideGrous.Text = _controller.Localizer["HideGroups"];
+            SectionTransactions.Margin = new Thickness(6, 0, 0, 0);
+            MenuShowHideGrous.Label = _controller.Localizer["HideGroups"];
             MenuShowHideGrous.Icon = new FontIcon() { FontFamily = (FontFamily)Application.Current.Resources["SymbolThemeFontFamily"], Glyph = "\uED1A" };
         }
         _controller.ShowGroupsList = SectionGroups.Visibility == Visibility.Visible;
-    }
-
-    /// <summary>
-    /// Occurs when the reset overview filters menu item is clicked
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void ResetOverviewFilters(object? sender, RoutedEventArgs e)
-    {
-        if (!(ChkFilterIncome.IsChecked ?? false))
-        {
-            ChkFilterIncome.IsChecked = true;
-        }
-        if (!(ChkFilterExpense.IsChecked ?? false))
-        {
-            ChkFilterExpense.IsChecked = true;
-        }
-    }
-
-    /// <summary>
-    /// Occurs when the reset group filters menu item is clicked
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void ResetGroupsFilters(object? sender, RoutedEventArgs e) => _controller.ResetGroupsFilter();
-
-    /// <summary>
-    /// Occurs when the reset dates filters menu item is clicked
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void ResetDatesFilters(object? sender, RoutedEventArgs e)
-    {
-        Calendar.SelectedDates.Clear();
-        Calendar.SelectedDates.Add(DateTimeOffset.Now);
-        DateRangeStart.Date = DateTimeOffset.Now;
-        DateRangeEnd.Date = DateTimeOffset.Now;
     }
 
     /// <summary>
@@ -829,25 +775,61 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Occurs when the search description textbox is changed
+    /// Occurs when the ListGroups' selection is changed
     /// </summary>
-    /// <param name="sender">AutoSuggestBox</param>
-    /// <param name="args">AutoSuggestBoxTextChangedEventArgs</param>
-    private void TxtSearchDescription_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) => _controller.SearchDescription = TxtSearchDescription.Text;
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ListGroups.SelectedIndex != -1)
+        {
+            var groupRow = (GroupRow)ListGroups.SelectedItem;
+            groupRow.Edit(this, new RoutedEventArgs());
+            ListGroups.SelectedIndex = -1;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the selected orderby radio button is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void MenuOrderBy_SelectionChanged(object sender, RoutedEventArgs e) => _controller.SortFirstToLast = MenuOrderByIncreasing.IsChecked;
+
+    /// <summary>
+    /// Occurs when the selected sortby radio button is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void MenuSortBy_SelectionChanged(object sender, RoutedEventArgs e)
+    {
+        if (MenuSortById.IsChecked)
+        {
+            _controller.SortTransactionsBy = SortBy.Id;
+        }
+        else if (MenuSortByDate.IsChecked)
+        {
+            _controller.SortTransactionsBy = SortBy.Date;
+        }
+        else if (MenuSortByAmount.IsChecked)
+        {
+            _controller.SortTransactionsBy = SortBy.Amount;
+        }
+    }
 
     /// <summary>
     /// Occurs when the income filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, ChkFilterIncome.IsChecked ?? false);
+    private void MenuFilterIncome_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-3, MenuFilterIncome.IsChecked);
 
     /// <summary>
     /// Occurs when the expense filter checkbox is changed
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ChkFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, ChkFilterExpense.IsChecked ?? false);
+    private void MenuFilterExpense_Changed(object sender, RoutedEventArgs e) => _controller?.UpdateFilterValue(-2, MenuFilterExpense.IsChecked);
 
     /// <summary>
     /// Occurs when the calendar's selected date is changed
@@ -877,19 +859,36 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
     private void DateRangeEnd_DateChanged(object sender, DatePickerValueChangedEventArgs e) => _controller.FilterEndDate = DateOnly.FromDateTime(DateRangeEnd.Date.Date);
 
     /// <summary>
-    /// Occurs when the ListGroups' selection is changed
+    /// Occurs when the reset all filters menu item is clicked
     /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">SelectionChangedEventArgs</param>
-    private void ListGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    /// <param name="sender">object?</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ResetAllFilters(object? sender, RoutedEventArgs e)
     {
-        if (ListGroups.SelectedIndex != -1)
+        //Overview
+        if (!MenuFilterIncome.IsChecked)
         {
-            var groupRow = (GroupRow)ListGroups.SelectedItem;
-            groupRow.Edit(this, new RoutedEventArgs());
-            ListGroups.SelectedIndex = -1;
+            MenuFilterIncome.IsChecked = true;
         }
+        if (!MenuFilterExpense.IsChecked)
+        {
+            MenuFilterExpense.IsChecked = true;
+        }
+        //Groups
+        _controller.ResetGroupsFilter();
+        //Date
+        Calendar.SelectedDates.Clear();
+        Calendar.SelectedDates.Add(DateTimeOffset.Now);
+        DateRangeStart.Date = DateTimeOffset.Now;
+        DateRangeEnd.Date = DateTimeOffset.Now;
     }
+
+    /// <summary>
+    /// Occurs when the search description textbox is changed
+    /// </summary>
+    /// <param name="sender">AutoSuggestBox</param>
+    /// <param name="args">AutoSuggestBoxTextChangedEventArgs</param>
+    private void TxtSearchDescription_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) => _controller.SearchDescription = TxtSearchDescription.Text;
 
     /// <summary>
     /// Occurs when the ListTransactions' selection is changed
@@ -904,37 +903,6 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             transactionRow.Edit(this, new RoutedEventArgs());
             ListTransactions.SelectedIndex = -1;
         }
-    }
-
-    /// <summary>
-    /// Occurs when the sort transactions by combobox is changed
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">SelectionChangedEventArgs</param>
-    private void CmbSortTransactionsBy_SelectionChanged(object sender, SelectionChangedEventArgs e) => _controller.SortTransactionsBy = (SortBy)CmbSortTransactionsBy.SelectedIndex;
-
-    /// <summary>
-    /// Occurs when the sort top to bottom button is clicked
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void BtnSortTopBottom_Click(object sender, RoutedEventArgs e)
-    {
-        BtnSortTopBottom.IsChecked = true;
-        BtnSortBottomTop.IsChecked = false;
-        _controller.SortFirstToLast = true;
-    }
-
-    /// <summary>
-    /// Occurs when the sort bottom to top button is clicked
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void BtnSortBottomTop_Click(object sender, RoutedEventArgs e)
-    {
-        BtnSortTopBottom.IsChecked = false;
-        BtnSortBottomTop.IsChecked = true;
-        _controller.SortFirstToLast = false;
     }
 
     private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -40,6 +40,9 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private static partial nint gtk_color_dialog_new();
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_color_dialog_set_with_alpha(nint dialog, [MarshalAs(UnmanagedType.I1)]bool with_alpha);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -60,6 +63,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private readonly Adw.Application _application;
     private readonly nint _transactionColorDialog;
     private readonly nint _transferColorDialog;
+    private readonly nint _groupColorDialog;
     private readonly nint _accountCheckingColorDialog;
     private readonly nint _accountSavingsColorDialog;
     private readonly nint _accountBusinessColorDialog;
@@ -67,6 +71,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Adw.ComboRow _themeRow;
     [Gtk.Connect] private readonly Gtk.Widget _transactionColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _transferColorButton;
+    [Gtk.Connect] private readonly Gtk.Widget _groupColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountCheckingColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountSavingsColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountBusinessColorButton;
@@ -95,14 +100,22 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
             }
         };
         _transactionColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_transactionColorDialog, false);
         gtk_color_dialog_button_set_dialog(_transactionColorButton.Handle, _transactionColorDialog);
         _transferColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_transferColorDialog, false);
         gtk_color_dialog_button_set_dialog(_transferColorButton.Handle, _transferColorDialog);
+        _groupColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_groupColorDialog, false);
+        gtk_color_dialog_button_set_dialog(_groupColorButton.Handle, _groupColorDialog);
         _accountCheckingColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountCheckingColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountCheckingColorButton.Handle, _accountCheckingColorDialog);
         _accountSavingsColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountSavingsColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountSavingsColorButton.Handle, _accountSavingsColorDialog);
         _accountBusinessColorDialog = gtk_color_dialog_new();
+        gtk_color_dialog_set_with_alpha(_accountBusinessColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountBusinessColorButton.Handle, _accountBusinessColorDialog);
         _insertSeparatorRow.OnNotify += (sender, e) =>
         {
@@ -124,6 +137,9 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         var transferColor = new Color();
         gdk_rgba_parse(ref transferColor, _controller.TransferDefaultColor);
         gtk_color_dialog_button_set_rgba(_transferColorButton.Handle, ref transferColor);
+        var groupColor = new Color();
+        gdk_rgba_parse(ref groupColor, _controller.GroupDefaultColor);
+        gtk_color_dialog_button_set_rgba(_groupColorButton.Handle, ref groupColor);
         var accountCheckingColor = new Color();
         gdk_rgba_parse(ref accountCheckingColor, _controller.AccountCheckingColor);
         gtk_color_dialog_button_set_rgba(_accountCheckingColorButton.Handle, ref accountCheckingColor);
@@ -162,6 +178,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _controller.TransactionDefaultColor = gdk_rgba_to_string(ref color);
         color = gtk_color_dialog_button_get_rgba(_transferColorButton.Handle);
         _controller.TransferDefaultColor = gdk_rgba_to_string(ref color);
+        color = gtk_color_dialog_button_get_rgba(_groupColorButton.Handle);
+        _controller.GroupDefaultColor = gdk_rgba_to_string(ref color);
         color = gtk_color_dialog_button_get_rgba(_accountCheckingColorButton.Handle);
         _controller.AccountCheckingColor = gdk_rgba_to_string(ref color);
         color = gtk_color_dialog_button_get_rgba(_accountSavingsColorButton.Handle);

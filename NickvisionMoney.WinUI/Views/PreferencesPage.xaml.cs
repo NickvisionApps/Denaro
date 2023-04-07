@@ -5,11 +5,8 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.Storage.Pickers;
 using Windows.System;
@@ -26,6 +23,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
     private readonly Action<object> _initializeWithWindow;
     private Color _transactionDefaultColor;
     private Color _transferDefaultColor;
+    private Color _groupDefaultColor;
     private Color _accountCheckingColor;
     private Color _accountSavingsColor;
     private Color _accountBusinessColor;
@@ -49,7 +47,6 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         LblVersion.Text = string.Format(_controller.Localizer["Version"], _controller.AppInfo.Version);
         LblBtnChangelog.Text = _controller.Localizer["Changelog"];
         LblBtnCredits.Text = _controller.Localizer["Credits"];
-        LblBtnHelp.Text = _controller.Localizer["Help"];
         LblBtnGitHubRepo.Text = _controller.Localizer["GitHubRepo"];
         LblBtnReportABug.Text = _controller.Localizer["ReportABug"];
         LblBtnDiscussions.Text = _controller.Localizer["Discussions"];
@@ -66,6 +63,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardTransactionDefaultColor.Description = _controller.Localizer["TransactionColorDescription"];
         CardTransferDefaultColor.Header = _controller.Localizer["TransferColor"];
         CardTransferDefaultColor.Description = _controller.Localizer["TransferColorDescription"];
+        CardGroupDefaultColor.Header = _controller.Localizer["GroupColor"];
+        CardGroupDefaultColor.Description = _controller.Localizer["GroupColorDescription"];
         CardAccountCheckingColor.Header = _controller.Localizer["AccountCheckingColor"];
         CardAccountSavingsColor.Header = _controller.Localizer["AccountSavingsColor"];
         CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
@@ -87,6 +86,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TransactionDefaultColor = ColorHelpers.FromRGBA(_controller.TransactionDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
         TransferDefaultColor = ColorHelpers.FromRGBA(_controller.TransferDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
+        GroupDefaultColor = ColorHelpers.FromRGBA(_controller.GroupDefaultColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountCheckingColor = ColorHelpers.FromRGBA(_controller.AccountCheckingColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
@@ -122,6 +122,22 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         {
             _transferDefaultColor = value;
             _controller.TransferDefaultColor = _transferDefaultColor.ToRGBA();
+            _controller.SaveConfiguration();
+            NotifyPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// The default color to use for a group
+    /// </summary>
+    public Color GroupDefaultColor
+    {
+        get => _groupDefaultColor;
+
+        set
+        {
+            _groupDefaultColor = value;
+            _controller.GroupDefaultColor = _groupDefaultColor.ToRGBA();
             _controller.SaveConfiguration();
             NotifyPropertyChanged();
         }
@@ -200,22 +216,6 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
             }
         }
         return result;
-    }
-
-    /// <summary>
-    /// Occurs when the help button is clicked
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private async void Help(object sender, RoutedEventArgs e)
-    {
-        var lang = "C";
-        var availableTranslations = new string[2] { "es", "ru" };
-        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
-        {
-            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-        }
-        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
     /// <summary>

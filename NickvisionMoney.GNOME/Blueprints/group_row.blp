@@ -8,24 +8,45 @@ Adw.ActionRow _root {
   activatable-widget: _editButton;
   
   [prefix]
-  Gtk.CheckButton _filterCheckButton {
+  Gtk.Overlay _filterOverlay {
     valign: center;
-    
-    styles ["selection-mode"]
+
+    child: Gtk.Image _filterCheckBackground {
+      halign: fill;
+      valign: fill;
+      overflow: hidden;
+      margin-top: 2;
+      margin-start: 2;
+      margin-end: 2;
+      margin-bottom: 2;
+
+      styles ["group-filter-bg"]
+    };
+
+    [overlay]
+    Gtk.CheckButton _filterCheckButton {
+      valign: center;
+      
+      styles ["selection-mode", "group-filter-check"]
+    }
   }
   
   [suffix]
-  Gtk.FlowBox _flowBox {
+  Gtk.Box {
     orientation: vertical;
-    selection-mode: none;
+    valign: center;
+    margin-top: 4;
     
     Gtk.Label _amountLabel {
+      halign: end;
       valign: center;
       margin-end: 6;
     }
     
-    Gtk.Box {
+    Gtk.Box _buttonsBox {
       halign: end;
+      valign: center;
+      spacing: 6;
       
       Gtk.Button _editButton {
         icon-name: "document-edit-symbolic";

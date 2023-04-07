@@ -7,7 +7,8 @@ using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Globalization.DateTimeFormatting;
 using Windows.Storage.Pickers;
@@ -19,13 +20,15 @@ namespace NickvisionMoney.WinUI.Views;
 /// <summary>
 /// A dialog for managing a Transaction
 /// </summary>
-public sealed partial class TransactionDialog : ContentDialog
+public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyChanged
 {
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private readonly Action<object> _initializeWithWindow;
     private Color _selectedColor;
     private string? _receiptPath;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Constructs a TransactionDialog
@@ -74,6 +77,8 @@ public sealed partial class TransactionDialog : ContentDialog
         CalendarRepeatEndDate.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         ToolTipService.SetToolTip(BtnRepeatEndDateClear, controller.Localizer["TransactionRepeatEndDate", "Clear"]);
         LblColor.Text = _controller.Localizer["Color", "Field"];
+        CmbColor.Items.Add(_controller.Localizer["Color", "UseGroup"]);
+        CmbColor.Items.Add(_controller.Localizer["Color", "UseUnique"]);
         LblReceipt.Text = _controller.Localizer["Receipt", "Field"];
         LblBtnReceiptView.Text = _controller.Localizer["View"];
         LblBtnReceiptDelete.Text = _controller.Localizer["Delete"];
@@ -84,9 +89,9 @@ public sealed partial class TransactionDialog : ContentDialog
         TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
-        foreach (var pair in _controller.Groups.OrderBy(x => x.Value == _controller.Localizer["Ungrouped"] ? " " : x.Value))
+        foreach (var name in _controller.GroupNames)
         {
-            CmbGroup.Items.Add(pair.Value);
+            CmbGroup.Items.Add(name);
         }
         if (_controller.Transaction.GroupId == -1)
         {
@@ -94,7 +99,7 @@ public sealed partial class TransactionDialog : ContentDialog
         }
         else
         {
-            CmbGroup.SelectedItem = _controller.Groups[(uint)_controller.Transaction.GroupId];
+            CmbGroup.SelectedItem = _controller.GetGroupNameFromId((uint)_controller.Transaction.GroupId);
         }
         CmbRepeatInterval.SelectedIndex = (int)_controller.RepeatIntervalIndex;
         CalendarRepeatEndDate.IsEnabled = _controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never;
@@ -104,12 +109,26 @@ public sealed partial class TransactionDialog : ContentDialog
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
         _selectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
+        if(_controller.Transaction.GroupId > 0)
+        {
+            CmbColor.Visibility = Visibility.Visible;
+            CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;
+            BtnColor.Visibility = !_controller.Transaction.UseGroupColor ? Visibility.Visible : Visibility.Collapsed;
+        }
+        else
+        {
+            CmbColor.Visibility = Visibility.Collapsed;
+            BtnColor.Visibility = Visibility.Visible;
+        }
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
         Validate();
         _constructing = false;
     }
 
+    /// <summary>
+    /// The selected color for the transaction
+    /// </summary>
     public Color SelectedColor
     {
         get => _selectedColor;
@@ -149,7 +168,7 @@ public sealed partial class TransactionDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), CmbColor.SelectedIndex == 0, TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
@@ -206,7 +225,7 @@ public sealed partial class TransactionDialog : ContentDialog
         {
             if (e.Key == VirtualKey.Decimal || e.Key == VirtualKey.Separator || (_controller.InsertSeparator == InsertSeparator.PeriodComma && (e.Key == (VirtualKey)188 || e.Key == (VirtualKey)190)))
             {
-                if(!TxtAmount.Text.Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
+                if (!TxtAmount.Text.Contains(_controller.CultureForNumberString.NumberFormat.CurrencyDecimalSeparator))
                 {
                     var position = TxtAmount.SelectionStart;
                     TxtAmount.Text = TxtAmount.Text.Remove(position - 1, 1);
@@ -268,6 +287,14 @@ public sealed partial class TransactionDialog : ContentDialog
     {
         if (!_constructing)
         {
+            CmbColor.Visibility = (string)CmbGroup.SelectedItem != _controller.Localizer["Ungrouped"] ? Visibility.Visible : Visibility.Collapsed;
+            if(CmbColor.Visibility == Visibility.Visible)
+            {
+                _constructing = true;
+                CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;
+                _constructing = false;
+            }
+            BtnColor.Visibility = (CmbColor.Visibility == Visibility.Collapsed || CmbColor.SelectedIndex == 1) ? Visibility.Visible : Visibility.Collapsed;
             Validate();
         }
     }
@@ -284,6 +311,20 @@ public sealed partial class TransactionDialog : ContentDialog
         BtnRepeatEndDateClear.IsEnabled = !isRepeatIntervalNever;
         if (!_constructing)
         {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the color combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            BtnColor.Visibility = CmbColor.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
             Validate();
         }
     }
@@ -350,4 +391,6 @@ public sealed partial class TransactionDialog : ContentDialog
             Validate();
         }
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

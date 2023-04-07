@@ -66,6 +66,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// The default color of a group
+    /// </summary>
+    public string GroupDefaultColor
+    {
+        get => Configuration.Current.GroupDefaultColor;
+
+        set => Configuration.Current.GroupDefaultColor = value;
+    }
+
+    /// <summary>
     /// The color of accounts with Checking type
     /// </summary>
     public string AccountCheckingColor

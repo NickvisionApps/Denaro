@@ -48,6 +48,8 @@
   <releases>
     <release version="2023.4.0-beta1" date="2023-04-03">
       <description>
+        <p>- Added a new Dashboard page to view quick information about all accounts</p>
+        <p>- Added the ability to assign a color to groups</p>
         <p>- Added the ability to customize the decimal and group separators used per account</p>
         <p>- Added the ability to password protect a PDF file</p>
         <p>- Added a preference option to automatically backup unencrypted account files to a specific folder</p>

@@ -1,8 +1,10 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Views;
 
@@ -13,6 +15,7 @@ public sealed partial class GroupDialog : ContentDialog
 {
     private bool _constructing;
     private readonly GroupDialogController _controller;
+    private Color _selectedColor;
 
     /// <summary>
     /// Constructs a GroupDialog
@@ -31,12 +34,31 @@ public sealed partial class GroupDialog : ContentDialog
         TxtName.PlaceholderText = _controller.Localizer["Name", "Placeholder"];
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtDescription.PlaceholderText = _controller.Localizer["Description", "Placeholder"];
+        LblColor.Text = _controller.Localizer["Color", "Field"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Group
         TxtName.Text = _controller.Group.Name;
         TxtDescription.Text = _controller.Group.Description;
+        _selectedColor = (Color)ColorHelpers.FromRGBA(_controller.Group.RGBA)!;
         Validate();
         _constructing = false;
+    }
+
+    /// <summary>
+    /// The selected color for the group
+    /// </summary>
+    public Color SelectedColor
+    {
+        get => _selectedColor;
+
+        set
+        {
+            _selectedColor = value;
+            if (!_constructing)
+            {
+                Validate();
+            }
+        }
     }
 
     /// <summary>
@@ -54,7 +76,7 @@ public sealed partial class GroupDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text);
+        var checkStatus = _controller.UpdateGroup(TxtName.Text, TxtDescription.Text, ColorHelpers.ToRGBA(SelectedColor));
         TxtName.Header = _controller.Localizer["Name", "Field"];
         if (checkStatus == GroupCheckStatus.Valid)
         {

@@ -5,6 +5,7 @@ Adw.Window _root {
   default-width: 360;
   modal: true;
   resizable: false;
+  default-widget: _applyButton;
 
   content: Gtk.Box {
     orientation: vertical;
@@ -40,6 +41,16 @@ Adw.Window _root {
             input-hints: spellcheck;
             activates-default: true;
           }
+
+          Adw.ActionRow {
+            title: _("Color.Field");
+            activatable-widget: _colorButton;
+        
+            [suffix]
+            Gtk.ColorDialogButton _colorButton {
+              valign: center;
+            }
+          }
         }
 
         Gtk.Button _applyButton {
@@ -53,6 +64,4 @@ Adw.Window _root {
       }
     }
   };
-
-  default-widget: _applyButton;
 }

@@ -56,11 +56,20 @@
                 </wct:DockPanel>
             </Grid>
 
-            <StackPanel HorizontalAlignment="Stretch" Spacing="6">
-                <TextBlock x:Name="LblColor"/>
+            <Grid HorizontalAlignment="Stretch" RowSpacing="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="32"/>
+                </Grid.RowDefinitions>
 
-                <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" Margin="0,2,0,0" Height="32" SelectedColor="{x:Bind SelectedColor, Mode=TwoWay}"/>
-            </StackPanel>
+                <TextBlock x:Name="LblColor" Grid.Row="0"/>
+
+                <wct:DockPanel Grid.Row="1" HorizontalAlignment="Stretch" LastChildFill="True">
+                    <ComboBox x:Name="CmbColor" HorizontalAlignment="Stretch" wct:DockPanel.Dock="Left" Margin="0,0,6,0" Visibility="Collapsed" SelectionChanged="CmbColor_SelectionChanged"/>
+
+                    <wct:ColorPickerButton x:Name="BtnColor" HorizontalAlignment="Stretch" wct:DockPanel.Dock="Right" Visibility="Collapsed" SelectedColor="{x:Bind SelectedColor, Mode=TwoWay}"/>
+                </wct:DockPanel>
+            </Grid>
 
             <StackPanel HorizontalAlignment="Stretch" Spacing="6">
                 <TextBlock x:Name="LblReceipt" VerticalAlignment="Center"/>

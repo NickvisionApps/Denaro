@@ -57,6 +57,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbCustomDecimalSeparator.Items.Add(".");
         CmbCustomDecimalSeparator.Items.Add(",");
         CmbCustomDecimalSeparator.Items.Add(_controller.Localizer["CustomCurrencyDecimalSeparator", "Other"]);
+        CmbCustomDecimalSeparator.SelectedIndex = 0;
         TxtCustomDecimalSeparator.PlaceholderText = _controller.Localizer["CustomCurrencyDecimalSeparator", "Placeholder"];
         CmbCustomGroupSeparator.Header = _controller.Localizer["CustomCurrencyGroupSeparator", "Field"];
         CmbCustomGroupSeparator.Items.Add(".");
@@ -64,6 +65,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbCustomGroupSeparator.Items.Add("'");
         CmbCustomGroupSeparator.Items.Add(_controller.Localizer["CustomCurrencyGroupSeparator", "None"]);
         CmbCustomGroupSeparator.Items.Add(_controller.Localizer["CustomCurrencyGroupSeparator", "Other"]);
+        CmbCustomGroupSeparator.SelectedIndex = 1;
         TxtCustomGroupSeparator.PlaceholderText = _controller.Localizer["CustomCurrencyGroupSeparator", "Placeholder"];
         CmbCustomDecimalDigits.Header = _controller.Localizer["CustomCurrencyDecimalDigits", "Field"];
         CmbCustomDecimalDigits.Items.Add("2");
@@ -72,6 +74,7 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         CmbCustomDecimalDigits.Items.Add("5");
         CmbCustomDecimalDigits.Items.Add("6");
         CmbCustomDecimalDigits.Items.Add(_controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"]);
+        CmbCustomDecimalDigits.SelectedIndex = 0;
         CardPassword.Header = _controller.Localizer["ManagePassword"];
         CardPassword.Description = _controller.Localizer["ManagePassword", "Description"];
         LblPasswordBack.Text = _controller.Localizer["Back"];
@@ -164,7 +167,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
         {
             0 => ".",
             1 => ",",
-            2 => TxtCustomDecimalSeparator.Text
+            2 => TxtCustomDecimalSeparator.Text,
+            _ => "."
         };
         var customGroupSeparator = CmbCustomGroupSeparator.SelectedIndex switch
         {
@@ -172,7 +176,8 @@ public sealed partial class AccountSettingsDialog : ContentDialog
             1 => ",",
             2 => "'",
             3 => "",
-            4 => TxtCustomGroupSeparator.Text
+            4 => TxtCustomGroupSeparator.Text,
+            _ => ","
         };
         var customDecimalDigits = CmbCustomDecimalDigits.SelectedIndex == 5 ? 99u : (uint)CmbCustomDecimalDigits.SelectedIndex + 2u;
         var checkStatus = _controller.UpdateMetadata(TxtName.Text, (AccountType)CmbAccountType.SelectedIndex, TglUseCustomCurrency.IsOn, TxtCustomSymbol.Text, TxtCustomCode.Text, customDecimalSeparator, customGroupSeparator, customDecimalDigits, (TransactionType)CmbDefaultTransactionType.SelectedIndex, TxtPasswordNew.Password, TxtPasswordConfirm.Password);

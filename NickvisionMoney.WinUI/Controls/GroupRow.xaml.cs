@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Globalization;
 using Windows.UI;
@@ -16,7 +17,7 @@ namespace NickvisionMoney.WinUI.Controls;
 public sealed partial class GroupRow : UserControl, IGroupRowControl
 {
     private CultureInfo _cultureAmount;
-    private CultureInfo _cultureDate;
+    private Color _defaultColor;
 
     /// <summary>
     /// The Id of the Group the row represents
@@ -41,20 +42,20 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// </summary>
     /// <param name="group">The Group to display</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
-    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer, bool filterActive)
+    /// <param name="defaultColor">The default group color</param>
+    public GroupRow(Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive, Color defaultColor)
     {
         InitializeComponent();
         _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
+        _defaultColor = defaultColor;
         //Localize Strings
         MenuEdit.Text = localizer["Edit", "GroupRow"];
         MenuDelete.Text = localizer["Delete", "GroupRow"];
         ToolTipService.SetToolTip(BtnEdit, localizer["Edit", "GroupRow"]);
         ToolTipService.SetToolTip(BtnDelete, localizer["Delete", "GroupRow"]);
-        UpdateRow(group, cultureAmount, cultureDate, filterActive);
+        UpdateRow(group, cultureAmount, filterActive);
     }
 
     /// <summary>
@@ -82,13 +83,11 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
     /// </summary>
     /// <param name="group">The new Group model</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
-    /// <param name="cultureDate">The culture to use for displaying date strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, CultureInfo cultureAmount, CultureInfo cultureDate, bool filterActive)
+    public void UpdateRow(Group group, CultureInfo cultureAmount, bool filterActive)
     {
         Id = group.Id;
         _cultureAmount = cultureAmount;
-        _cultureDate = cultureDate;
         if (group.Id == 0)
         {
             MenuEdit.IsEnabled = false;
@@ -96,12 +95,12 @@ public sealed partial class GroupRow : UserControl, IGroupRowControl
             MenuDelete.IsEnabled = false;
             BtnDelete.Visibility = Visibility.Collapsed;
         }
+        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(group.RGBA) ?? _defaultColor);
         ChkFilter.IsChecked = filterActive;
         LblName.Text = group.Name;
         LblDescription.Visibility = string.IsNullOrEmpty(group.Description) ? Visibility.Collapsed : Visibility.Visible;
         LblDescription.Text = group.Description;
-        LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{Math.Abs(group.Balance).ToAmountString(_cultureAmount)}";
-        LblAmount.Foreground = group.Balance >= 0 ? new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 38, 162, 105) : Color.FromArgb(255, 143, 240, 164)) : new SolidColorBrush(ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 192, 28, 40) : Color.FromArgb(255, 255, 123, 99));
+        LblAmount.Text = $"{(group.Balance >= 0 ? "+  " : "-  ")}{group.Balance.ToAmountString(_cultureAmount)}";
     }
 
     /// <summary>

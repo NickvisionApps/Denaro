@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
@@ -23,6 +24,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
+    private Dictionary<uint, Group> _groups;
     private TransactionId _idWidget;
 
     [Gtk.Connect] private readonly Adw.ActionRow _row;
@@ -52,22 +54,25 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="defaultColor">Default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    private TransactionRow(Gtk.Builder builder, Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
+        _groups = groups;
         _callbacks = new GSourceFunc[3];
         _callbacks[0] = (x) =>
         {
             //Row Settings
             _row.SetTitle(_transaction.Description);
             _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
-            _idWidget.UpdateColor(_transaction.RGBA);
+            _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA);
             //Amount Label
             _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
             _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
@@ -93,7 +98,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         builder.Connect(this);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
-        _idWidget = new TransactionId(transaction.Id, localizer);
+        _idWidget = new TransactionId(transaction.Id, defaultColor, localizer);
         _row.AddPrefix(_idWidget);
         //Group Settings
         UpdateRow(transaction, cultureAmount, cultureDate);
@@ -103,10 +108,12 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="defaultColor">Default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : this(Builder.FromFile("transaction_row.ui", localizer), transaction, cultureAmount, cultureDate, localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer) : this(Builder.FromFile("transaction_row.ui", localizer), transaction, groups, cultureAmount, cultureDate, defaultColor, localizer)
     {
     }
 

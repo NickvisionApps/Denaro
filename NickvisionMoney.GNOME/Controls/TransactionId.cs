@@ -25,13 +25,15 @@ public partial class TransactionId : Gtk.Overlay
     private readonly Gtk.SizeGroup _sizeGroup;
     private readonly GdkPixbuf.Pixbuf _pixbuf;
     private readonly uint _id;
+    private readonly string _defaultColor;
 
     [Gtk.Connect] private readonly Gtk.Image _colorImage;
     [Gtk.Connect] private readonly Gtk.Label _idLabel;
 
-    private TransactionId(Gtk.Builder builder, uint id) : base(builder.GetPointer("_root"), false)
+    private TransactionId(Gtk.Builder builder, uint id, string defaultColor) : base(builder.GetPointer("_root"), false)
     {
         _id = id;
+        _defaultColor = defaultColor;
         builder.Connect(this);
         _pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
         _sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Horizontal);
@@ -43,8 +45,9 @@ public partial class TransactionId : Gtk.Overlay
     /// Constructs a TransactionId widget
     /// </summary>
     /// <param name="id">Transaction Id</param>
+    /// <param name="defaultColor">Default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionId(uint id, Localizer localizer) : this(Builder.FromFile("transaction_id.ui", localizer), id)
+    public TransactionId(uint id, string defaultColor, Localizer localizer) : this(Builder.FromFile("transaction_id.ui", localizer), id, defaultColor)
     {
     }
 
@@ -57,7 +60,7 @@ public partial class TransactionId : Gtk.Overlay
         var color = new Color();
         if (!gdk_rgba_parse(ref color, colorString))
         {
-            gdk_rgba_parse(ref color, "#3584e4");
+            gdk_rgba_parse(ref color, _defaultColor);
         }
         var red = (int)(color.Red * 255);
         var green = (int)(color.Green * 255);

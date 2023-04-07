@@ -99,7 +99,6 @@ row.error button.circular {
   color: @accent_fg_color;
 }
 
-
 /* Transactions header box */
 .transactions-header {
   border-bottom-style: solid;
@@ -107,37 +106,71 @@ row.error button.circular {
   border-bottom-color: @borders;
 }
 
+/* Group Checkbutton */
+.group-filter-bg {
+  border-radius: 32px;
+}
+
+.group-filter-check check {
+  background-color: #00000000;
+}
+
+.group-filter-check-light check {
+  color: #ffffff;
+}
+
+.group-filter-check-dark check {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.group-filter-disabled check {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12) inset;
+}
+
+.group-filter-disabled check:hover {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16) inset;
+}
 /* Transaction Dialog */
-.transaction-dialog-group list:dir(ltr), .transaction-dialog-group row:dir(ltr), .transaction-dialog-color list:dir(rtl), .transaction-dialog-color row:dir(rtl) {
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+.scrolled-dialog {
+  border-color: @borders;
+  border-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
 }
 
-.transaction-dialog-group list:dir(rtl), .transaction-dialog-group row:dir(rtl), .transaction-dialog-color list:dir(ltr), .transaction-dialog-color row:dir(ltr) {
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+.transaction-amount {
+  background-color: @card_bg_color;
+  border-radius: 12px;
 }
 
-.calendar-button:dir(ltr) {
-	margin-right: -8px;
+.transaction-amount text {
+  font-size: 15pt;
 }
 
-.calendar-button label:dir(ltr) {
-	margin-right: 4px;
-	font-weight: normal;
+.calendar-button label {
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
-.calendar-button:dir(rtl) {
-	margin-left: -8px;
+.calendar-button popover label {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
-.calendar-button label:dir(rtl) {
-	margin-left: 4px;
-	font-weight: normal;
+.calendar-button calendar {
+  font-weight: normal;
+  background-color: @popover_bg_color;
+  border: none;
+}
+
+.color-dropdown {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.color-dropdown button {
+  background-color: #00000000;
+  font-weight: normal;
 }
 
 /* Transaction Row */

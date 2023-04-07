@@ -52,6 +52,12 @@ public class RecentAccount : IEquatable<RecentAccount>
     public bool Equals(RecentAccount? other) => Equals(other);
 
     /// <summary>
+    /// Gets a hash code for the object
+    /// </summary>
+    /// <returns>The hash code for the object</returns>
+    public override int GetHashCode() => Path.GetHashCode();
+
+    /// <summary>
     /// Compares two RecentAccount objects by ==
     /// </summary>
     /// <param name="a">The first RecentAccount object</param>

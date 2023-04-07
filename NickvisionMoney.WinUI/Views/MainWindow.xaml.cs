@@ -5,6 +5,7 @@ using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
@@ -103,6 +104,9 @@ public sealed partial class MainWindow : Window
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         NavViewItemHome.Content = _controller.Localizer["Home"];
+        NavViewItemDashboard.Content = _controller.Localizer["Dashboard"];
+        NavViewItemAccounts.Content = _controller.Localizer["Accounts"];
+        NavViewItemHelp.Content = _controller.Localizer["Help"];
         NavViewItemSettings.Content = _controller.Localizer["Settings"];
         StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xE708";
         StatusPageHome.Title = _controller.Greeting;
@@ -131,12 +135,15 @@ public sealed partial class MainWindow : Window
     /// <param name="title">The new title</param>
     private void UpdateNavViewItemTitle(string path, string title)
     {
-        foreach (NavigationViewItem navViewItem in NavView.MenuItems)
+        foreach (var obj in NavView.MenuItems)
         {
-            if ((string)ToolTipService.GetToolTip(navViewItem) == path)
+            if (obj is NavigationViewItem navViewItem)
             {
-                navViewItem.Content = title;
-                break;
+                if ((string)ToolTipService.GetToolTip(navViewItem) == path)
+                {
+                    navViewItem.Content = title;
+                    break;
+                }
             }
         }
     }
@@ -243,20 +250,40 @@ public sealed partial class MainWindow : Window
     private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
     {
         var pageName = (string)((NavigationViewItem)e.SelectedItem).Tag;
-        if (pageName == "OpenAccount")
+        if (pageName == "Dashboard")
+        {
+            PageDashboard.Content = new DashboardPage(_controller.CreateDashboardViewController());
+        }
+        else if (pageName == "OpenAccount")
         {
             var path = (string)ToolTipService.GetToolTip((NavigationViewItem)e.SelectedItem);
             if (!_accountViews.ContainsKey(path))
             {
-                _accountViews.Add(path, new AccountView(_controller.OpenAccounts[_controller.OpenAccounts.FindIndex(x => x.AccountPath == path)], UpdateNavViewItemTitle, InitializeWithWindow));
+                _accountViews.Add(path, new AccountView(_controller.CreateAccountViewController(path)!, UpdateNavViewItemTitle, InitializeWithWindow));
             }
             PageOpenAccount.Content = _accountViews[path];
         }
         else if (pageName == "Settings")
         {
-            PageSettings.Content = new PreferencesPage(_controller.PreferencesViewController, InitializeWithWindow);
+            PageSettings.Content = new PreferencesPage(_controller.CreatePreferencesViewController(), InitializeWithWindow);
         }
         ViewStack.ChangePage(pageName);
+    }
+
+    /// <summary>
+    /// Occurs when the help button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TappedRoutedEventArgs</param>
+    private async void Help(object sender, TappedRoutedEventArgs e)
+    {
+        var lang = "C";
+        var availableTranslations = new string[2] { "es", "ru" };
+        if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+        {
+            lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        }
+        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
     /// <summary>
@@ -322,14 +349,16 @@ public sealed partial class MainWindow : Window
         var newNavItem = new NavigationViewItem()
         {
             Tag = "OpenAccount",
-            Content = _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountTitle,
+            Content = _controller.GetMostRecentAccountViewController().AccountTitle,
             Icon = new FontIcon()
             {
                 FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["SymbolThemeFontFamily"],
                 Glyph = "\uE8C7",
             }
         };
-        ToolTipService.SetToolTip(newNavItem, _controller.OpenAccounts[_controller.OpenAccounts.Count - 1].AccountPath);
+        NavViewItemDashboard.Visibility = Visibility.Visible;
+        NavViewItemAccounts.Visibility = Visibility.Visible;
+        ToolTipService.SetToolTip(newNavItem, _controller.GetMostRecentAccountViewController().AccountPath);
         NavView.MenuItems.Add(newNavItem);
         NavView.SelectedItem = newNavItem;
     }

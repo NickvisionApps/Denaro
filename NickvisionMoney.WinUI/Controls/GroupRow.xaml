@@ -24,33 +24,44 @@
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
         </MenuFlyout>
-    </UserControl.ContextFlyout>    
-    
-    <wct:DockPanel Margin="6" LastChildFill="False">
-        <CheckBox x:Name="ChkFilter" wct:DockPanel.Dock="Left" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
-            <CheckBox.Content>
-                <StackPanel Margin="6,0,0,0" Orientation="Vertical">
-                    <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
+    </UserControl.ContextFlyout>
 
-                    <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
-                </StackPanel>
-            </CheckBox.Content>
-        </CheckBox>
+    <Border Margin="-12,0,-10,6" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+        <Grid Margin="10,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel wct:DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,0,10,0" Spacing="0">
-            <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+                <Border x:Name="BtnId" VerticalAlignment="Center" Width="24" Height="20" CornerRadius="6"/>
 
-            <Button x:Name="BtnEdit" Margin="6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
-                <Button.Content>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE104;"/>
-                </Button.Content>
-            </Button>
+                <CheckBox x:Name="ChkFilter" Checked="ChkFilterChanged" Unchecked="ChkFilterChanged">
+                    <CheckBox.Content>
+                        <StackPanel Margin="6,0,0,0" Orientation="Vertical">
+                            <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
 
-            <Button x:Name="BtnDelete" Margin="-6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
-                <Button.Content>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE107;"/>
-                </Button.Content>
-            </Button>
-        </StackPanel>
-    </wct:DockPanel>
+                            <TextBlock x:Name="LblDescription" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                        </StackPanel>
+                    </CheckBox.Content>
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,10,0" Spacing="0">
+                <TextBlock x:Name="LblAmount" VerticalAlignment="Center"/>
+
+                <Button x:Name="BtnEdit" Margin="6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Edit">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE104;"/>
+                    </Button.Content>
+                </Button>
+
+                <Button x:Name="BtnDelete" Margin="-6,0,0,0" Style="{ThemeResource AlternateCloseButtonStyle}" Click="Delete">
+                    <Button.Content>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE107;"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
