@@ -57,8 +57,9 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="defaultColor">Default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
@@ -97,7 +98,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         builder.Connect(this);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
-        _idWidget = new TransactionId(transaction.Id, localizer);
+        _idWidget = new TransactionId(transaction.Id, defaultColor, localizer);
         _row.AddPrefix(_idWidget);
         //Group Settings
         UpdateRow(transaction, cultureAmount, cultureDate);
@@ -110,8 +111,9 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="defaultColor">Default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, Localizer localizer) : this(Builder.FromFile("transaction_row.ui", localizer), transaction, groups, cultureAmount, cultureDate, localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer) : this(Builder.FromFile("transaction_row.ui", localizer), transaction, groups, cultureAmount, cultureDate, defaultColor, localizer)
     {
     }
 

@@ -59,7 +59,7 @@ public class DashboardView : Gtk.ScrolledWindow
             var row = Adw.ActionRow.New();
             row.SetTitle(pair.Key);
             row.AddCssClass("card");
-            var prefix = new TransactionId(0, controller.Localizer);
+            var prefix = new TransactionId(0, "", controller.Localizer);
             prefix.UpdateColor(pair.Value.RGBA);
             prefix.SetCompact(true);
             row.AddPrefix(prefix);
