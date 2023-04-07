@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -360,7 +361,7 @@ public class Account : IDisposable
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
         using var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -395,6 +396,13 @@ public class Account : IDisposable
             using var cmdTableTransactionsUpdate5 = _database.CreateCommand();
             cmdTableTransactionsUpdate5.CommandText = "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT";
             cmdTableTransactionsUpdate5.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableTransactionsUpdate6 = _database.CreateCommand();
+            cmdTableTransactionsUpdate6.CommandText = "ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER";
+            cmdTableTransactionsUpdate6.ExecuteNonQuery();
         }
         catch { }
         //Get Metadata
@@ -486,6 +494,7 @@ public class Account : IDisposable
                 Amount = readQueryTransactions.IsDBNull(5) ? 0m : readQueryTransactions.GetDecimal(5),
                 GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
+                UseGroupColor = readQueryTransactions.IsDBNull(11) ? false : readQueryTransactions.GetBoolean(11),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
                 RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false)))
             };
@@ -715,6 +724,7 @@ public class Account : IDisposable
                         Amount = transaction.Amount,
                         GroupId = transaction.GroupId,
                         RGBA = transaction.RGBA,
+                        UseGroupColor = transaction.UseGroupColor,
                         Receipt = transaction.Receipt,
                         RepeatFrom = (int)transaction.Id,
                         RepeatEndDate = transaction.RepeatEndDate
@@ -823,7 +833,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -832,6 +842,7 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
         cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -883,7 +894,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -892,6 +903,7 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
         cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -966,6 +978,7 @@ public class Account : IDisposable
                     tt.Amount = transaction.Amount;
                     tt.GroupId = transaction.GroupId;
                     tt.RGBA = transaction.RGBA;
+                    tt.UseGroupColor = transaction.UseGroupColor;
                     tt.Receipt = transaction.Receipt;
                     tt.RepeatEndDate = transaction.RepeatEndDate;
                     await UpdateTransactionAsync(tt);
@@ -1168,7 +1181,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 12)
+            if (fields.Length != 14)
             {
                 continue;
             }
@@ -1248,27 +1261,40 @@ public class Account : IDisposable
             amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
+            //Get UseGroupColor
+            var useGroupColor = false;
+            try
+            {
+                useGroupColor = bool.Parse(fields[9]);
+            }
+            catch
+            {
+                continue;
+            }
             //Get Group Id
             var gid = 0;
             try
             {
-                gid = int.Parse(fields[9]);
+                gid = int.Parse(fields[10]);
             }
             catch
             {
                 continue;
             }
             //Get Group Name
-            var groupName = fields[10];
+            var groupName = fields[11];
             //Get Group Description
-            var groupDescription = fields[11];
+            var groupDescription = fields[12];
+            //Get Group RGBA
+            var groupRGBA = fields[13];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
                 var group = new Group((uint)gid)
                 {
                     Name = groupName,
-                    Description = groupDescription
+                    Description = groupDescription,
+                    RGBA = groupRGBA
                 };
                 await AddGroupAsync(group);
             }
@@ -1282,6 +1308,7 @@ public class Account : IDisposable
                 Amount = amount,
                 GroupId = gid,
                 RGBA = rgba,
+                UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
                 RepeatEndDate = repeatEndDate
             };
@@ -1407,7 +1434,7 @@ public class Account : IDisposable
     public bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;Group(Id Starts At 1);GroupName;GroupDescription\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
         foreach (var pair in Transactions)
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
@@ -1622,7 +1649,7 @@ public class Account : IDisposable
                             foreach (var pair in Transactions)
                             {
                                 var hex = "#32"; //120
-                                var rgba = pair.Value.RGBA;
+                                var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
                                 if (rgba.StartsWith("#"))
                                 {
                                     rgba = rgba.Remove(0, 1);
