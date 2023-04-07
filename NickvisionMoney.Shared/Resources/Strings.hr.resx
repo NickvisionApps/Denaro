@@ -51,7 +51,8 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -817,5 +818,68 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
   </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Znak valute (neispravno)</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Nešifrirani računi će se automatski izvesti kao CSV datoteke u ovu mapu kada se napravi promjena.</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Decimalni znak</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Decimalni znak (prazan)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Decimalni znak (neispravan)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Drugi</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Upiši decimalni znak</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Znak odvajanja grupe</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Znak odvajanja grupe (neispravan)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Ništa</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Drugi</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Upiši znak odvajanja grupe</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Decimale</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Neograničeno</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Lozinke se ne poklapaju.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Sigurnosna kopija</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Prilagodi lokacije sigurnosne kopije za Denaro račune.</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Mapa CSV sigurnosne kopije</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Nema mape sigurnosne kopije</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Odaberi mapu sigurnosne kopije</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Izbriši mapu sigurnosne kopije</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Nije moguće pristupiti odabranoj mapi, provjeri dozvole za Flatpak.</value>
   </data>
 </root>
