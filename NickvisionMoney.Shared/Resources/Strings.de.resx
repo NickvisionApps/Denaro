@@ -836,10 +836,10 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
     <value>Dezimalziffern</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transaktion</value>
+    <value>Transaktion {0}</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transaktionen</value>
+    <value>Transaktionen ({0})</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Die vom Konto verwendete Währung verwalten.</value>
@@ -872,7 +872,7 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
     <value>CSV-Sicherungs-Ordner</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Konten werden automatisch als CSV-Dateien in diesen Ordner exportiert wenn eine Änderung gemacht wird.</value>
+    <value>Unverschlüsselte Konten werden automatisch als CSV-Dateien in diesen Ordner exportiert wenn eine Änderung gemacht wird.</value>
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
     <value>Kein Sicherungs-Ordner</value>
@@ -882,5 +882,56 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   </data>
   <data name="ClearBackupFolder" xml:space="preserve">
     <value>Setze Sicherungs-Ordner zurück</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Konten</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} von {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Alle Konten</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>All Filter Zurücksetzen</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Kontoeinstellungen (Strg+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sortieren</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Sortieren Nach</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Steigend</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Abnehmend</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sortieren Nach</value>
+  </data>
+  <data name="UseGroupColor" xml:space="preserve">
+    <value>Gruppenfarbe verwenden</value>
+  </data>
+  <data name="UseUniqueColor" xml:space="preserve">
+    <value>Einzigartige Farbe verwenden</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Gruppenfarbe verwenden</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Einzigartige Farbe verwenden</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Standardfarbe der Gruppe</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Eine Änderung dieser Einstellung wird nur auf neue Gruppen angewendet.</value>
   </data>
 </root>
