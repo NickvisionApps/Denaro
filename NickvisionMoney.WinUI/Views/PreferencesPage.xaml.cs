@@ -64,7 +64,6 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardTransferDefaultColor.Header = _controller.Localizer["TransferColor"];
         CardTransferDefaultColor.Description = _controller.Localizer["TransferColorDescription"];
         CardGroupDefaultColor.Header = _controller.Localizer["GroupColor"];
-        CardGroupDefaultColor.Description = _controller.Localizer["GroupColorDescription"];
         CardAccountCheckingColor.Header = _controller.Localizer["AccountCheckingColor"];
         CardAccountSavingsColor.Header = _controller.Localizer["AccountSavingsColor"];
         CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
