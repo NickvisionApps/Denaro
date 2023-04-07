@@ -380,7 +380,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             return;
         }
         _tabView.ClosePage(_tabView.GetSelectedPage()!);
-        _dashboardButton.SetVisible(_controller.NumberOfOpenAccounts > 1);
     }
 
     /// <summary>
@@ -394,6 +393,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.CloseAccount(indexPage);
         _accountViews.RemoveAt(indexPage);
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.GetMostRecentAccountViewController().AccountTitle : "");
+        _dashboardButton.SetVisible(_controller.NumberOfOpenAccounts > 1);
         if (_controller.NumberOfOpenAccounts == 0)
         {
             _viewStack.SetVisibleChildName("pageNoAccounts");
