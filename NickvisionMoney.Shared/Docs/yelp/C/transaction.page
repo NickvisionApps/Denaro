@@ -48,11 +48,11 @@
 	</item>
 	<item>
 		<title>Group</title>
-		<p>Each transaction can belong to only one group or none.</p>
+		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
 	</item>
 	<item>
 		<title>Color</title>
-		<p>A color for transaction. By default the one chosen in <link xref="configuration">configuration</link> will be selected when you open a dialog to add new transaction.</p>
+		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
 	</item>
 	<item>
 		<title>Receipt</title>

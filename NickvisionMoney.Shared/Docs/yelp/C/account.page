@@ -52,11 +52,20 @@
 	</item>
 	<item>
 		<title>Custom Currency Symbol</title>
-		<p>Up to 3 characters or 1 emoji can be used as currency symbol.</p>
+		<p>Up to 3 characters or 1 emoji. It can't be a number.</p>
 	</item>
 	<item>
 		<title>Custom Currency Code</title>
-		<p>Optional code for your custom currency. If it's set, it will be shown in dialogs in parentheses next to <gui>Custom Currency Symbol</gui>. <gui>Custom Currency Code</gui> can contain up to 3 characters or 1 emoji.</p>
+		<p>Up to 3 characters or 1 emoji.</p>
+		<p>An example to understand the difference between a symbol and a code: <em>$</em> is a symbol, <em>USD</em> is a code.</p>
+	</item>
+	<item>
+		<title>Custom Currency Decimal and Group Separators</title>
+		<p>Up to 2 characters or 1 emoji.</p>
+	</item>
+	<item>
+		<title>Custom Currency Decimal Digits</title>
+		<p>The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p>
 	</item>
 	<item>
 		<title>Password</title>
