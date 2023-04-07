@@ -115,7 +115,7 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.MenuButton _repeatEndDateCalendarButton;
     [Gtk.Connect] private readonly Gtk.Button _repeatEndDateClearButton;
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
-    [Gtk.Connect] private readonly Adw.ComboRow _colorRow;
+    [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
@@ -227,6 +227,11 @@ public partial class TransactionDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "selected-item")
             {
+                if (_groupRow.GetSelected() == 0)
+                {
+                    _colorDropDown.SetSelected(1);
+                }
+                _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 if (!_constructing)
                 {
                     Validate();
@@ -234,14 +239,14 @@ public partial class TransactionDialog : Adw.Window
             }
         };
         //Color
-        ((Gtk.Box)_colorButton.GetParent()).ReorderChildAfter(_colorButton, null);
-        _colorRow.OnNotify += (sender, e) =>
+        ((Gtk.Box)_colorButton.GetParent()).SetSpacing(4);
+        _colorDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
             {
                 if (!_constructing)
                 {
-                    _colorButton.SetVisible(_colorRow.GetSelected() == 1);
+                    _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
                     Validate();
                 }
             }
@@ -289,8 +294,9 @@ public partial class TransactionDialog : Adw.Window
         {
             _groupRow.SetSelected((uint)_controller.GroupNames.IndexOf(_controller.GetGroupNameFromId((uint)_controller.Transaction.GroupId)));
         }
-        _colorRow.SetSelected(_controller.Transaction.UseGroupColor ? 0u : 1u);
-        _colorButton.SetVisible(_colorRow.GetSelected() == 1);
+        _colorDropDown.SetSelected((_controller.Transaction.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
+        _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
+        _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
         var transactionColor = new Color();
         gdk_rgba_parse(ref transactionColor, _controller.Transaction.RGBA);
         gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref transactionColor);
@@ -356,7 +362,7 @@ public partial class TransactionDialog : Adw.Window
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var color = gtk_color_dialog_button_get_rgba(_colorButton.Handle);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _colorRow.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate);
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _colorDropDown.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_controller.Localizer["Description", "Field"]);
         _amountRow.RemoveCssClass("error");

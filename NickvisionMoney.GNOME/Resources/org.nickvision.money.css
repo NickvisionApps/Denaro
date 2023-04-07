@@ -163,6 +163,16 @@ row.error button.circular {
   border: none;
 }
 
+.color-dropdown {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.color-dropdown button {
+  background-color: #00000000;
+  font-weight: normal;
+}
+
 /* Transaction Row */
 .id-image {
   border-radius: 34px;

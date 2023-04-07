@@ -147,17 +147,24 @@ Adw.Window _root {
                 title-lines: 1;
               }
 
-              Adw.ComboRow _colorRow {
+              Adw.ActionRow {
                 title: _("Color.Field");
-                model: Gtk.StringList {
-                  strings [_("Color.UseGroup"), _("Color.UseUnique")]
-                };
 
                 [suffix]
                 Gtk.ColorDialogButton _colorButton {
                   valign: center;
                   margin-start: 4;
                   margin-end: 4;
+                }
+
+                [suffix]
+                Gtk.DropDown _colorDropDown {
+                  valign: center;
+                  model: Gtk.StringList {
+                    strings [_("Color.UseGroup"), _("Color.UseUnique")]
+                  };
+
+                  styles ["color-dropdown"]
                 }
               }
             }
