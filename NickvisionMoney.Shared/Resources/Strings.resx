@@ -1036,7 +1036,7 @@
 	</data>
 
 	<data name="BackupFolderDescription" xml:space="preserve">
-		<value>Accounts will automatically export as CSV files to this folder when a change is made.</value>
+		<value>Unencrypted accounts will automatically export as CSV files to this folder when a change is made.</value>
 	</data>
 
 	<data name="NoBackupFolder" xml:space="preserve">
