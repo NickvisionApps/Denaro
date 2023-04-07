@@ -46,11 +46,13 @@ Colaboradores no GitHub ❤️ https://github.com/nlogozzo/NickvisionMoney/graph
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Fyodor Sobolev https://github.com/fsobolev</value>
+Fyodor Sobolev https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -423,7 +425,7 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   </data>
   <!--Fields-->
   <data name="Name.Field" xml:space="preserve">
-		<value />
+		<value>Nome</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
 		<value>Insira o nome aqui</value>
@@ -669,7 +671,7 @@ Qualquer trabalho não salvo será perdido.</value>
     <value>Set a new password or remove one.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-    <value>If the password is lost, there is no way to restore your account!</value>
+    <value>Se a palavra-passe for perdida, não será possível restaurar o ficheiro!</value>
   </data>
   <data name="Id.Field" xml:space="preserve">
     <value>Id</value>
@@ -787,5 +789,97 @@ Qualquer trabalho não salvo será perdido.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
     <value>The password will be removed upon closing this dialog.</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Adicionar palavra-passe ao PDF?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Gostaria de proteger o ficheiro PDF com palavra-passe?
+
+Se a palavra-passe for perdida, o PDF ficará inacessível.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Palavra-passe do PDF</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Moeda</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Gerir a moeda usada pela conta.</value>
+  </data>
+  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
+    <value>Repetir</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Símbolo da moeda (inválido)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Separador decimal</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Separador decimal (vazio)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Separador decimal (inválido)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Outro</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Insira o separador decimal</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Separador de grupo</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Separador de grupo (inválido)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Outro</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Insira o separador de grupo</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Dígitos decimais</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Ilimitado</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>As palavras-passe não coincidem.</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Selecione a Pasta de Backup</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Limpar a Pasta de Backup</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Não é possível acessar a pasta selecionada. Verifique as permissões do Flatpak.</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>{0} Transação</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>{0} Transações</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Personalize os locais de backup para as contas Denaro.</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Pasta de Backup para os CSV</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>As contas serão exportadas automaticamente como ficheiros CSV para esta pasta quando uma alteração for feita.</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Nenhuma Pasta de Backup</value>
   </data>
 </root>

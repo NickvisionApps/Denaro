@@ -1422,6 +1422,7 @@ public class Account : IDisposable
         }
         try
         {
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
             File.WriteAllText(path, result);
             return true;
         }
@@ -1441,6 +1442,7 @@ public class Account : IDisposable
     {
         try
         {
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
             using var localizer = new Localizer();
             //Amount Culture
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
@@ -1744,7 +1746,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if (Directory.Exists(Configuration.Current.CSVBackupFolder))
+        if(!_isEncrypted.GetValueOrDefault())
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
         }
