@@ -77,6 +77,8 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         CalendarRepeatEndDate.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         ToolTipService.SetToolTip(BtnRepeatEndDateClear, controller.Localizer["TransactionRepeatEndDate", "Clear"]);
         LblColor.Text = _controller.Localizer["Color", "Field"];
+        CmbColor.Items.Add(_controller.Localizer["Color", "UseGroup"]);
+        CmbColor.Items.Add(_controller.Localizer["Color", "UseUnique"]);
         LblReceipt.Text = _controller.Localizer["Receipt", "Field"];
         LblBtnReceiptView.Text = _controller.Localizer["View"];
         LblBtnReceiptDelete.Text = _controller.Localizer["Delete"];
@@ -107,6 +109,17 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
         _selectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
+        if(_controller.Transaction.GroupId > 0)
+        {
+            CmbColor.Visibility = Visibility.Visible;
+            CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;
+            BtnColor.Visibility = !_controller.Transaction.UseGroupColor ? Visibility.Visible : Visibility.Collapsed;
+        }
+        else
+        {
+            CmbColor.Visibility = Visibility.Collapsed;
+            BtnColor.Visibility = Visibility.Visible;
+        }
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
         Validate();
@@ -155,7 +168,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), CmbColor.SelectedIndex == 0, TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
@@ -272,8 +285,12 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
     /// <param name="e">SelectionChangedEventArgs</param>
     private void CmbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        SelectedColor = (Color)ColorHelpers.FromRGBA(_controller.GetRBAFromGroupName((string)CmbGroup.SelectedItem))!;
-        NotifyPropertyChanged("SelectedColor");
+        if (!_constructing)
+        {
+            CmbColor.Visibility = (string)CmbGroup.SelectedItem != _controller.Localizer["Ungrouped"] ? Visibility.Visible : Visibility.Collapsed;
+            BtnColor.Visibility = (CmbColor.Visibility == Visibility.Collapsed || CmbColor.SelectedIndex == 1) ? Visibility.Visible : Visibility.Collapsed;
+            Validate();
+        }
     }
 
     /// <summary>
@@ -288,6 +305,20 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         BtnRepeatEndDateClear.IsEnabled = !isRepeatIntervalNever;
         if (!_constructing)
         {
+            Validate();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the color combobox is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void CmbColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_constructing)
+        {
+            BtnColor.Visibility = CmbColor.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
             Validate();
         }
     }
