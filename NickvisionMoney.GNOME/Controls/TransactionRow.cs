@@ -24,6 +24,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     private CultureInfo _cultureDate;
     private Localizer _localizer;
     private bool _isSmall;
+    private Dictionary<uint, Group> _groups;
     private TransactionId _idWidget;
 
     [Gtk.Connect] private readonly Adw.ActionRow _row;
@@ -53,6 +54,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>
@@ -62,13 +64,14 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         _cultureDate = cultureDate;
         _localizer = localizer;
         _isSmall = false;
+        _groups = groups;
         _callbacks = new GSourceFunc[3];
         _callbacks[0] = (x) =>
         {
             //Row Settings
             _row.SetTitle(_transaction.Description);
             _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
-            _idWidget.UpdateColor(_transaction.UseGroupColor ? groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA);
+            _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA);
             //Amount Label
             _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
             _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
@@ -104,6 +107,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction to display</param>
+    /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="localizer">The Localizer for the app</param>

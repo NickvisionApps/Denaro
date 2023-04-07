@@ -6,6 +6,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Windows.UI;
 
@@ -21,6 +22,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     private Color _defaultColor;
     private Localizer _localizer;
     private int _repeatFrom;
+    private Dictionary<uint, Group> _groups;
 
     /// <summary>
     /// The Id of the Transaction the row represents
@@ -44,11 +46,12 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// Constructs a TransactionRow
     /// </summary>
     /// <param name="transaction">The Transaction model to represent</param>
+    /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
     /// <param name="defaultColor">The default transaction color</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate, Color defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, Color defaultColor, Localizer localizer)
     {
         InitializeComponent();
         _cultureAmount = cultureAmount;
@@ -56,6 +59,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         _defaultColor = defaultColor;
         _localizer = localizer;
         _repeatFrom = 0;
+        _groups = groups;
         //Localize Strings
         MenuEdit.Text = _localizer["Edit", "TransactionRow"];
         MenuDelete.Text = _localizer["Delete", "TransactionRow"];
@@ -91,7 +95,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         MenuDelete.IsEnabled = _repeatFrom <= 0;
         BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         BtnId.Content = transaction.Id;
-        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.RGBA) ?? _defaultColor);
+        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? _defaultColor);
         LblName.Text = transaction.Description;
         LblDescription.Text = transaction.Date.ToString("d", _cultureDate);
         if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
