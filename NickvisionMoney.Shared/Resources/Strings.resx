@@ -1036,6 +1036,10 @@
 		<value>A change in this setting will only be applied to new transfers.</value>
 	</data>
 
+	<data name="GroupColorDescription" xml:space="preserve">
+		<value>A change in this setting will only be applied to new groups.</value>
+	</data>
+
 	<data name="AccountCheckingColor" xml:space="preserve">
 		<value>Checking Account Color</value>
 	</data>
