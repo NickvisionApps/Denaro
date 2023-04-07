@@ -877,7 +877,7 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
     <value>Pas back-up-locaties aan voor Denaro-accounts</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Accounts worden automatisch als CSV-bestanden naar deze map geëxporteerd wanneer een wijziging wordt aangebracht.</value>
+    <value>Onversleutelde acounts worden automatisch als CSV-bestanden naar deze map geëxporteerd wanneer een wijziging wordt aangebracht.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Geen toegang tot de geselecteerde map, controleer Flatpak-rechten.</value>
