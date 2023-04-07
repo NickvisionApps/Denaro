@@ -50,7 +50,7 @@
       <description>
         <p>- Added the ability to customize the decimal and group separators used per account</p>
         <p>- Added the ability to password protect a PDF file</p>
-        <p>- Added a preference option to automatically backup account files to a specific folder</p>
+        <p>- Added a preference option to automatically backup unencrypted account files to a specific folder</p>
         <p>- Fixed an issue where editing a transaction with a receipt would crash the application</p>
         <p>- Fixed an issue where OFX files with security could not be imported</p>
         <p>- Fixed an issue where QIF files could not be imported on non-English systems</p>
