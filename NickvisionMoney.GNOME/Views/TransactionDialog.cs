@@ -229,9 +229,6 @@ public partial class TransactionDialog : Adw.Window
             {
                 if (!_constructing)
                 {
-                    var groupColor = new Color();
-                    gdk_rgba_parse(ref groupColor, _controller.GetRBAFromGroupName(((Gtk.StringObject)_groupRow.GetSelectedItem()!).GetString()));
-                    gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref groupColor);
                     Validate();
                 }
             }

@@ -220,23 +220,6 @@ public class TransactionDialogController : IDisposable
     }
 
     /// <summary>
-    /// Gets the color of a group from a group name
-    /// </summary>
-    /// <param name="name">The name of the group</param>
-    /// <returns>The rgba of the group</returns>
-    public string GetRBAFromGroupName(string name)
-    {
-        foreach(var pair in _groups)
-        {
-            if(pair.Value.Name == name && pair.Value.Name != Localizer["Ungrouped"])
-            {
-                return pair.Value.RGBA;
-            }
-        }
-        return _transactionDefaultColor;
-    }
-
-    /// <summary>
     /// Opens the receipt image of the transaction in the default viewer application
     /// </summary>
     /// <param name="receiptPath">A possible path of a new receipt image</param>
