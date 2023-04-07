@@ -832,10 +832,10 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
     <value>Las contraseñas no concuerdan.</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transacción</value>
+    <value>Transacción ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transacciones</value>
+    <value>Transacciones ({0})</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Gestionar la moneda utilizada por la cuenta.</value>
@@ -871,9 +871,60 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
     <value>Personalizar las ubicaciones de la copia de seguridad para las cuentas de Denaro.</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Las cuentas se exportarán automáticamente como archivos CSV a esta carpeta cuando se realice un cambio.</value>
+    <value>Las cuentas no cifradas se exportarán automáticamente como archivos CSV a esta carpeta cuando se realice un cambio.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>No se puede acceder a la carpeta seleccionada, compruebe los permisos de Flatpak.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Cuentas</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} de {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Todas las cuentas</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Restablecer todos los filtros</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Configuración de la cuenta (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Ascendente</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Descendente</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="UseGroupColor" xml:space="preserve">
+    <value>Usar color de grupo</value>
+  </data>
+  <data name="UseUniqueColor" xml:space="preserve">
+    <value>Usar color único</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Usar color único</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Color predeterminado del grupo</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Un cambio en esta configuración sólo se aplicará a los grupos nuevos.</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Usar color de grupo</value>
   </data>
 </root>
