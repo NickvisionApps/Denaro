@@ -51,7 +51,8 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -858,7 +859,7 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
     <value>Les mots de passe ne correspondent pas.</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Les comptes seront automatiquement exportés en fichiers CSV dans ce dossier quand une modification a lieu.</value>
+    <value>Les comptes non cryptés seront automatiquement exportés en fichiers CSV dans ce dossier lors d’une modification.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Impossible d’accéder au dossier sélectionné, vérifiez les permissions Flatpak.</value>
