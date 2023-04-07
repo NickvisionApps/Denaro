@@ -43,7 +43,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
  <summary>WinUI</summary>
 
  ![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
- ![PasswordDialog](NickvisionMoney.WinUI/Screenshots/PasswordDialog.png)
+ ![DashboardPage](NickvisionMoney.WinUI/Screenshots/DashboardPage.png)
  ![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
  ![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
  ![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
