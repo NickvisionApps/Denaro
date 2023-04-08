@@ -791,9 +791,6 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="Unlock" xml:space="preserve">
     <value>Entsperren</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Wiederholung</value>
-  </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
     <value>Passwort zur PDF hinzufügen?</value>
   </data>
@@ -915,9 +912,6 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   </data>
   <data name="SortBy" xml:space="preserve">
     <value>Sortieren Nach</value>
-  </data>
-  <data name="UseGroupColor" xml:space="preserve">
-    <value>Gruppenfarbe verwenden</value>
   </data>
   <data name="UseUniqueColor" xml:space="preserve">
     <value>Einzigartige Farbe verwenden</value>
