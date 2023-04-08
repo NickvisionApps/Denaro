@@ -813,9 +813,6 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Upravljaj valutom za račun.</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Ponavljanje</value>
-  </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Znak valute (neispravno)</value>
   </data>
