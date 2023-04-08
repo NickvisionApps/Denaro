@@ -100,7 +100,7 @@
 	<list>
 		<item>
 			<p>Portable Document Format (<file>.pdf</file>)</p>
-			<p>Un archivo contendrá la información de una cuenta, una lista de transacciones e imágenes de recibos. Las transacciones están coloreadas como en la aplicación, pero los colores se modifican haciéndolos semitransparentes para que el texto negro siempre sea claramente visible.</p>
+			<p>Un archivo contendrá la información de una cuenta, una lista de transacciones e imágenes de recibos. Las transacciones están coloreadas como en la aplicación, pero los colores se modifican haciéndolos semitransparentes para que el texto negro siempre sea claramente visible. Puede establecer una contraseña para un archivo exportado.</p>
 		</item>
 		<item>
 			<p>Denaro CSV (<file>.csv</file>)</p>

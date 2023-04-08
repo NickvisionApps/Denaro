@@ -51,11 +51,11 @@
 	</item>
 	<item>
 		<title>Grupo</title>
-		<p>Cada transacción puede pertenecer a un solo grupo o a ninguno.</p>
+		<p>Cada transacción puede pertenecer a un solo grupo o a ninguno (grupo "No agrupado").</p>
 	</item>
 	<item>
 		<title>Color</title>
-		<p>Un color para la transacción. De forma predeterminada, el elegido en <link xref="configuration">configuration</link> se seleccionará cuando abra un cuadro de diálogo para agregar una transacción nueva.</p>
+		<p>Un color para la transacción. Puede configurarse para usar un color de grupo o un color único. Al seleccionar un color único, se establecerá por defecto el color seleccionado en la <link xref="configuration">configuración</link>, pero puede cambiarse a cualquier color.</p>
 	</item>
 	<item>
 		<title>Recibo</title>
