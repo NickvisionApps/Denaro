@@ -784,9 +784,6 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
   <data name="Unlock" xml:space="preserve">
     <value>Desbloquear</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Repetir</value>
-  </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
     <value>¿Añadir contraseña a un PDF?</value>
   </data>
@@ -908,9 +905,6 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
   </data>
   <data name="SortBy" xml:space="preserve">
     <value>Ordenar por</value>
-  </data>
-  <data name="UseGroupColor" xml:space="preserve">
-    <value>Usar color de grupo</value>
   </data>
   <data name="UseUniqueColor" xml:space="preserve">
     <value>Usar color único</value>
