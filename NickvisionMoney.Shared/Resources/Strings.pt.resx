@@ -807,9 +807,6 @@ Se a palavra-passe for perdida, o PDF ficará inacessível.</value>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Gerir a moeda usada pela conta.</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Repetir</value>
-  </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Símbolo da moeda (inválido)</value>
   </data>
