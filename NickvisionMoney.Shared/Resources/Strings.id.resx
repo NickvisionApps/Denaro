@@ -813,9 +813,6 @@ Jika kata sandi hilang, file PDF tidak akan bisa diakses.</value>
   <data name="Currency" xml:space="preserve">
     <value>Mata Uang</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Ulangi</value>
-  </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Simbol Mata Uang (Tidak sah)</value>
   </data>
