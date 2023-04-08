@@ -804,9 +804,6 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
   <data name="Currency" xml:space="preserve">
     <value>Devise</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Répéter</value>
-  </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Symbole monétaire (invalide)</value>
   </data>

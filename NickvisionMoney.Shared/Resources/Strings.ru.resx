@@ -37,11 +37,13 @@
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Фёдор Соболев https://github.com/fsobolev</value>
+Фёдор Соболев https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -782,5 +784,142 @@
   </data>
   <data name="Unlock" xml:space="preserve">
     <value>Разблокировать</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Счета</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} в {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Все счета</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>Транзакция ({0})</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Сбросить все фильтры</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Настройки счёта (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Сортировать</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Свойство</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Зашифровать PDF паролем?</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Пароль PDF</value>
+  </data>
+  <data name="UseUniqueColor" xml:space="preserve">
+    <value>Использовать собственный цвет</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Управляйте валютой, используемой для этого счёта.</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Использовать цвет группы</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Десятичный разделитель (Пустой)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Десятичный разделитель (Некорректный)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Другой</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Разделитель групп разрядов</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Разделитель групп разрядов (Некорректный)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>Отсутствует</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Введите разделитель групп разрядов</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Цифры в дробной части</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Неограниченно</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Цвет группы по умолчанию</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Папка резервных копий CSV</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Папка не указана</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Сбросить папку для резервных копий</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Использовать собственный цвет</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Символ валюты (Некорректный)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Десятичный разделитель</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Введите десятичный разделитель</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Другой</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Счета, не зашифрованные паролем, будут автоматически экспортироваться в CSV в указанную папку после каждого изменения.</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Выбрать папку для резервных копий</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Изменение этой настройки затронет только новые группы.</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>Транзакции ({0})</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Порядок</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>По возрастанию</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Обзор</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Хотите ли вы защитить PDF-файл с помощью пароля?
+
+Если пароль будет утерян, содержимое файла будет недоступно.</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>По убыванию</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Резервные копии</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Настройте создание резервных копий для счетов Denaro.</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Невозможно получить доступ к папке, проверьте разрешения Flatpak.</value>
   </data>
 </root>

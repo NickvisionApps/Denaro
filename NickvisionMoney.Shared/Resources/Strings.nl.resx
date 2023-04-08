@@ -790,9 +790,6 @@ de opeenvolgende losgekoppeld..</value>
   <data name="Unlock" xml:space="preserve">
     <value>Ontgrendelen</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Herhalen</value>
-  </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
     <value>Wachtwoord toevoegen aan PDF?</value>
   </data>
