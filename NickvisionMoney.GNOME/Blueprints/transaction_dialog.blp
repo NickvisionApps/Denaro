@@ -47,18 +47,22 @@ Adw.Window _root {
             Gtk.Box {
               spacing: 12;
 
-              Adw.EntryRow _amountRow {
-                title: _("Amount.Field");
-                input-purpose: number;
-                activates-default: true;
-                hexpand: true;
+              Adw.Bin {
+                Adw.EntryRow _amountRow {
+                  title: _("Amount.Field");
+                  input-purpose: number;
+                  activates-default: true;
+                  hexpand: true;
 
-                [suffix]
-                Gtk.Label _currencyLabel {
-                  styles ["dim-label"]
+                  [suffix]
+                  Gtk.Label _currencyLabel {
+                    styles ["dim-label"]
+                  }
+
+                  styles ["transaction-amount"]
                 }
 
-                styles ["transaction-amount"]
+                styles ["card"]
               }
 
               Gtk.Box {

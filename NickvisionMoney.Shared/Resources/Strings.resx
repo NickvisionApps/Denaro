@@ -662,14 +662,6 @@
 		<value>(Copy)</value>
 	</data>
 
-	<data name="UseGroupColor" xml:space="preserve">
-		<value>Use Group Color</value>
-	</data>
-
-	<data name="UseUniqueColor" xml:space="preserve">
-		<value>Use Unique Color</value>
-	</data>
-
 	<!--TransferDialog-->
 	<data name="Transfer" xml:space="preserve">
 		<value>Transfer</value>
@@ -795,10 +787,6 @@
 
 	<data name="TransactionRepeatInterval.Field" xml:space="preserve">
 		<value>Repeat Interval</value>
-	</data>
-
-	<data name="TransactionRepeatInterval.Short" xml:space="preserve">
-		<value>Repeat</value>
 	</data>
 	
 	<data name="TransactionRepeatEndDate.Field" xml:space="preserve">

@@ -139,7 +139,6 @@ row.error button.circular {
 }
 
 .transaction-amount {
-  background-color: @card_bg_color;
   border-radius: 12px;
 }
 
