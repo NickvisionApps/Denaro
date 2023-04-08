@@ -906,9 +906,6 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
   <data name="SortBy" xml:space="preserve">
     <value>Ordenar por</value>
   </data>
-  <data name="UseUniqueColor" xml:space="preserve">
-    <value>Usar color único</value>
-  </data>
   <data name="Color.UseUnique" xml:space="preserve">
     <value>Usar color único</value>
   </data>
