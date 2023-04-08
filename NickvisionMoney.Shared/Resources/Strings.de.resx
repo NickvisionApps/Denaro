@@ -913,9 +913,6 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   <data name="SortBy" xml:space="preserve">
     <value>Sortieren Nach</value>
   </data>
-  <data name="UseUniqueColor" xml:space="preserve">
-    <value>Einzigartige Farbe verwenden</value>
-  </data>
   <data name="Color.UseGroup" xml:space="preserve">
     <value>Gruppenfarbe verwenden</value>
   </data>

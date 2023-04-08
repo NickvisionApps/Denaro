@@ -815,9 +815,6 @@ Tobias Bernard https://github.com/bertob</value>
   <data name="PDFPassword" xml:space="preserve">
     <value>Пароль PDF</value>
   </data>
-  <data name="UseUniqueColor" xml:space="preserve">
-    <value>Использовать собственный цвет</value>
-  </data>
   <data name="Currency" xml:space="preserve">
     <value>Валюта</value>
   </data>
