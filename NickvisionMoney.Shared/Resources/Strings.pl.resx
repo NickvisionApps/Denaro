@@ -807,9 +807,6 @@ Niezapisane zmiany zostaną utracone.</value>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Zarządzaj walutą używaną przez konto.</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Powtórz</value>
-  </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Symbol Waluty (niepoprawny)</value>
   </data>
