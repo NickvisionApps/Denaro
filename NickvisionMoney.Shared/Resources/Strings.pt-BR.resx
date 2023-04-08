@@ -803,9 +803,6 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
   <data name="PDFPassword" xml:space="preserve">
     <value>Senha do PDF</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Repetir</value>
-  </data>
   <data name="Currency" xml:space="preserve">
     <value>Moeda</value>
   </data>
