@@ -811,9 +811,6 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
     <value>Altro</value>
   </data>
-  <data name="TransactionRepeatInterval.Short" xml:space="preserve">
-    <value>Ripetere</value>
-  </data>
   <data name="NonMatchingPasswords" xml:space="preserve">
     <value>Le password non sono uguali.</value>
   </data>
