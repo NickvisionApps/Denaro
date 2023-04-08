@@ -829,10 +829,10 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
     <value>Decimaal scheidingsteken</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} transacties</value>
+    <value>Transacties ({0})</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} transactie</value>
+    <value>Transactie ({0})</value>
   </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Valutasymbool (ongeldig)</value>
@@ -878,5 +878,50 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Geen toegang tot de geselecteerde map, controleer Flatpak-rechten.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} van {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Alle accounts</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Alle filters resetten</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sorteren</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Oplopend</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Volgorde</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sorteren op</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Een wijziging in deze instelling wordt alleen toegepast op nieuwe groepen.</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Accountinstellingen (Ctrl+.)</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Groepskleur gebruiken</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Unieke kleur gebruiken</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Aflopend</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Standaardgroepskleur</value>
   </data>
 </root>
