@@ -26,12 +26,16 @@
 		<p>Establezca un tema claro u oscuro, o haga que <app>Denaro</app> siga el tema de su sistema. Cambiar esto en Windows requiere que se reinicie la aplicación para aplicar.</p>
 	</item>
 	<item>
-		<title>Color predeterminado de la transacción</title>
-		<p>Un color que se seleccionará de forma predeterminada al agregar una <link xref="transaction">transacción</link> nueva. Cambiar esto no afectará las transacciones existentes, incluso si usa el color predeterminado seleccionado previamente.</p>
+		<title>Color de la transacción predeterminado</title>
+		<p>Un color que se seleccionará por defecto al agregar una <link xref="transaction">transacción</link> nueva con color único. Cambiar esto no afectará las transacciones existentes, incluso si usa el color predeterminado seleccionado previamente.</p>
 	</item>
 	<item>
-		<title>Color predeterminado de la transferencia</title>
-		<p>Un color que se usará para transacciones creadas usando <link xref="transfer">transfer</link>. Cambiar esto no afectará las transacciones existentes.</p>
+		<title>Color de la transferencia predeterminado</title>
+		<p>Un color que se usará para transacciones creadas usando <link xref="transfer">transferencia</link>. Cambiar esto no afectará las transacciones existentes.</p>
+	</item>
+	<item>
+		<title>Color del grupo predeterminado</title>
+		<p>Color que se seleccionará por defecto al añadir un grupo nuevo. También es un color para el grupo "No agrupado".</p>
 	</item>
 	<item>
 		<title>Color de la cuenta corriente</title>
@@ -44,6 +48,10 @@
 	<item>
 		<title>Color de la cuenta de empresas</title>
 		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Empresas</em> en una lista de cuentas recientes.</p>
+	</item>
+	<item>
+		<title>Carpeta de copia de seguridad CSV</title>
+		<p>Una carpeta donde sus datos se <link xref="import-export">exportarán a CSV</link> después de cada cambio. Esta función no funciona con cuentas protegidas con contraseña, ya que los archivos CSV no pueden protegerse con contraseña.</p>
 	</item>
 </terms>
 </page>

@@ -55,11 +55,20 @@
 	</item>
 	<item>
 		<title>Símbolo de moneda personalizado</title>
-		<p>Se pueden usar hasta 3 caracteres o 1 emoji como símbolo de moneda.</p>
+		<p>Hasta 3 caracteres o 1 emoji. No puede ser un número.</p>
 	</item>
 	<item>
 		<title>Código de moneda personalizado</title>
-		<p>Código opcional para su moneda personalizada. Si está configurado, se mostrará en los cuadros de diálogo entre paréntesis junto a <gui>Símbolo de moneda personalizado</gui>. <gui>Código de moneda personalizado</gui> puede contener hasta 3 caracteres o 1 emoji.</p>
+		<p>Hasta 3 caracteres o 1 emoji.</p>
+		<p>Un ejemplo para entender la diferencia entre un símbolo y un código: <em>$</em> es un símbolo, <em>USD</em> es un código.</p>
+	</item>
+	<item>
+		<title>Separadores decimales y de grupo personalizados</title>
+		<p>Hasta 2 caracteres o 1 emoji.</p>
+	</item>
+	<item>
+		<title>Dígitos decimales de moneda personalizados</title>
+		<p>El tamaño de la parte decimal de los valores de importe. Con dígitos "ilimitados" habrá tantos números en la parte decimal como sean necesarios para mostrar el importe exacto, pero no habrá parte decimal si el importe es un número entero.</p>
 	</item>
 	<item>
 		<title>Contraseña</title>
