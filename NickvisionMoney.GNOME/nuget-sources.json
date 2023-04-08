@@ -225,10 +225,10 @@
     },
     {
         "type": "file",
-        "url": "https://api.nuget.org/v3-flatcontainer/pdfsharpcore/1.3.47/pdfsharpcore.1.3.47.nupkg",
-        "sha512": "b987be2fbd7f1eb850726ce3c7e08b7183bb03d8844af2bb79e86e4329daaf30d884f980dde7f847fd8cb904c26d655ea884f28d0c7fc8d455d8107b798af4db",
+        "url": "https://api.nuget.org/v3-flatcontainer/pdfsharpcore/1.3.49/pdfsharpcore.1.3.49.nupkg",
+        "sha512": "427885280f19f642eb51a902e5c6c6fb13b102f6554d920d4e30e8532536b761cad9894781e19565847152b43a89eb16278088fbe941bfb2a4bb1ef63c8f8d0a",
         "dest": "nuget-sources",
-        "dest-filename": "pdfsharpcore.1.3.47.nupkg"
+        "dest-filename": "pdfsharpcore.1.3.49.nupkg"
     },
     {
         "type": "file",
