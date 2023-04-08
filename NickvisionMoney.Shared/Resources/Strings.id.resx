@@ -805,10 +805,10 @@ Jika kata sandi hilang, file PDF tidak akan bisa diakses.</value>
     <value>Kata Sandi PDF</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transaksi</value>
+    <value>Transaksi ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transaksi</value>
+    <value>Transaksi ({0})</value>
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Mata Uang</value>
@@ -877,6 +877,48 @@ Jika kata sandi hilang, file PDF tidak akan bisa diakses.</value>
     <value>Tidak dapat mengakses folder yang dipilih, periksa perizinan Flatpak.</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>Rekening akan secara otomatis mengekspor sebagai file CSV ke folder ini jika ada perubahan.</value>
+    <value>Rekening tidak terenkripsi akan secara otomatis mengekspor sebagai file CSV ke folder ini jika ada perubahan.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dasbor</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} dari {1}</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Atur Ulang Semua Filter</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Rekening</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Semua Rekening</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Urutkan</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Meningkat</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Menurun</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Urutkan Berdasarkan</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Gunakan warna grup</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Gunakan warna unik</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Perubahan dalam setelan ini hanya akan diterapkan ke grup baru.</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Pengaturan Rekening(Ctrl+.)</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Warna Bawaan Grup</value>
   </data>
 </root>

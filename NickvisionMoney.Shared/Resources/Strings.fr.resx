@@ -844,10 +844,10 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
     <value>Illimités</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transaction</value>
+    <value>Transaction ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transactions</value>
+    <value>Transactions ({0})</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Gérer la devise utilisée par le compte.</value>
@@ -878,5 +878,50 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
   </data>
   <data name="ClearBackupFolder" xml:space="preserve">
     <value>Vider le dossier de sauvegarde</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Comptes</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Réinitialiser tous les filtres</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} de {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Tous les comptes</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Trier</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordre</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Croissant</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Décroissant</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Utiliser une couleur de groupe</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Utiliser une couleur unique</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Couleur de groupe par défaut</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Un changement de ce paramètre ne sera appliqué qu’aux nouveaux groupes.</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Paramètres du compte (Ctrl+.)</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Trier par</value>
   </data>
 </root>
