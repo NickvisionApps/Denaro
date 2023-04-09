@@ -231,10 +231,6 @@ public partial class TransactionDialog : Adw.Window
                 {
                     _colorDropDown.SetSelected(1);
                 }
-                else if (!_colorDropDown.GetVisible())
-                {
-                    _colorDropDown.SetSelected(0);
-                }
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 if (!_constructing)
                 {
