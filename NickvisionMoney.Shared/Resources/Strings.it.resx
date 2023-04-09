@@ -840,4 +840,10 @@ In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
   <data name="NoBackupFolder" xml:space="preserve">
     <value>Nessuna cartella backup</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Account</value>
+  </data>
 </root>
