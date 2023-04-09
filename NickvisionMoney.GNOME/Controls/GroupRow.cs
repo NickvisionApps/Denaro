@@ -127,7 +127,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _amountLabel.SetVexpand(group.Id == 0);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
-        UpdateRow(group, cultureAmount, filterActive);
+        UpdateRow(group, defaultColor, cultureAmount, filterActive);
     }
 
     /// <summary>
@@ -156,11 +156,13 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Updates the row with the new model
     /// </summary>
     /// <param name="group">The new Group model</param>
+    /// <param name="defaultColor">The default color for the row</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="filterActive">Whether or not the filter checkbox is active</param>
-    public void UpdateRow(Group group, CultureInfo cultureAmount, bool filterActive)
+    public void UpdateRow(Group group, string defaultColor, CultureInfo cultureAmount, bool filterActive)
     {
         _group = group;
+        _defaultColor = defaultColor;
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
         g_main_context_invoke(IntPtr.Zero, _updateCallback, IntPtr.Zero);

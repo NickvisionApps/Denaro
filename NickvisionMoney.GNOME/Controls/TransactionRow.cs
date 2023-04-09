@@ -20,6 +20,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
 
     private Transaction _transaction;
+    private string _defaultColor;
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
     private Localizer _localizer;
@@ -61,6 +62,8 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// <param name="localizer">The Localizer for the app</param>
     private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer) : base(builder.GetPointer("_root"), false)
     {
+        _transaction = transaction;
+        _defaultColor = defaultColor;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
         _localizer = localizer;
@@ -72,7 +75,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
             //Row Settings
             _row.SetTitle(_transaction.Description);
             _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
-            _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA);
+            _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA, _defaultColor);
             //Amount Label
             _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount)}");
             _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
@@ -98,10 +101,10 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         builder.Connect(this);
         _editButton.OnClicked += Edit;
         _deleteButton.OnClicked += Delete;
-        _idWidget = new TransactionId(transaction.Id, defaultColor, localizer);
+        _idWidget = new TransactionId(transaction.Id, localizer);
         _row.AddPrefix(_idWidget);
         //Group Settings
-        UpdateRow(transaction, cultureAmount, cultureDate);
+        UpdateRow(transaction, defaultColor, cultureAmount, cultureDate);
     }
 
     /// <summary>
@@ -145,11 +148,13 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
+    /// <param name="defaultColor">The default color for the row</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
-    public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
+    public void UpdateRow(Transaction transaction, string defaultColor, CultureInfo cultureAmount, CultureInfo cultureDate)
     {
         _transaction = transaction;
+        _defaultColor = defaultColor;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
         g_main_context_invoke(IntPtr.Zero, _callbacks[0], IntPtr.Zero);
