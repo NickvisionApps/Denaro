@@ -1448,7 +1448,7 @@ public class Account : IDisposable
         }
         try
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
             File.WriteAllText(path, result);
             return true;
         }
@@ -1468,7 +1468,7 @@ public class Account : IDisposable
     {
         try
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
             using var localizer = new Localizer();
             //Amount Culture
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");

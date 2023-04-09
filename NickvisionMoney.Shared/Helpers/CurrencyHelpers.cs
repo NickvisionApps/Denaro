@@ -34,7 +34,8 @@ public static class CurrencyHelpers
                 0 => $"{culture.NumberFormat.CurrencySymbol}{{0}}",
                 1 => $"{{0}}{culture.NumberFormat.CurrencySymbol}",
                 2 => $"{culture.NumberFormat.CurrencySymbol} {{0}}",
-                3 => $"{{0}} {culture.NumberFormat.CurrencySymbol}"
+                3 => $"{{0}} {culture.NumberFormat.CurrencySymbol}",
+                _ => $"{culture.NumberFormat.CurrencySymbol}{{0}}"
             };
             result = string.Format(formatString, result);
         }

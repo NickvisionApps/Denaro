@@ -19,8 +19,8 @@ public enum GroupCheckStatus
 /// </summary>
 public class GroupDialogController
 {
-    private string _originalName;
-    private string _originalRGBA;
+    private readonly string _originalName;
+    private readonly string _originalRGBA;
     private readonly List<string> _existingNames;
 
     /// <summary>
@@ -76,6 +76,7 @@ public class GroupDialogController
     internal GroupDialogController(uint id, List<string> existingNames, string groupDefaultColor, Localizer localizer)
     {
         _originalName = "";
+        _originalRGBA = groupDefaultColor;
         _existingNames = existingNames;
         Localizer = localizer;
         Group = new Group(id);
