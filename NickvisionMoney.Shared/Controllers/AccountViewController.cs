@@ -831,7 +831,7 @@ public class AccountViewController : IDisposable
             {
                 if (pair.Value.GroupId == group.Id)
                 {
-                    TransactionRows[pair.Key].UpdateRow(pair.Value, TransactionDefaultColor, CultureForNumberString.Parent, CultureForDateString);
+                    TransactionRows[pair.Key].UpdateRow(pair.Value, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
                 }
             }
         }
