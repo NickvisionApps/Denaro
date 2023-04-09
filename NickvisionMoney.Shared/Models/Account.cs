@@ -797,14 +797,16 @@ public class Account : IDisposable
     /// Deletes a group from the account
     /// </summary>
     /// <param name="id">The id of the group to delete</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> DeleteGroupAsync(uint id)
+    /// <param name="defaultTransactionColor">A new transaction color for transactions belonging to deleted group</param>
+    /// <returns>(Result, BelongingTransactions)</returns>
+    public async Task<(bool Result, List<uint> BelongingTransactions)> DeleteGroupAsync(uint id, string defaultTransactionColor)
     {
         using var cmdDeleteGroup = _database!.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
+            var belongingTransactions = new List<uint>();
             Groups.Remove(id);
             if (id + 1 == NextAvailableGroupId)
             {
@@ -815,13 +817,19 @@ public class Account : IDisposable
                 if (pair.Value.GroupId == id)
                 {
                     pair.Value.GroupId = -1;
+                    if (pair.Value.UseGroupColor)
+                    {
+                        pair.Value.UseGroupColor = false;
+                        pair.Value.RGBA = defaultTransactionColor;
+                        belongingTransactions.Add(pair.Key);
+                    }
                     await UpdateTransactionAsync(pair.Value);
                 }
             }
             FreeMemory();
-            return true;
+            return (true, belongingTransactions);
         }
-        return false;
+        return (false, new List<uint>());
     }
 
     /// <summary>

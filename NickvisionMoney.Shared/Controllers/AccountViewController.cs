@@ -843,10 +843,14 @@ public class AccountViewController : IDisposable
     /// <param name="id">The id of the group to delete</param>
     public async Task DeleteGroupAsync(uint id)
     {
-        await _account.DeleteGroupAsync(id);
+        var result = await _account.DeleteGroupAsync(id, TransactionDefaultColor);
         _filters.Remove((int)id);
         UIDeleteGroupRow!(GroupRows[id]);
         GroupRows.Remove(id);
+        foreach(var transaction in result.BelongingTransactions)
+        {
+            TransactionRows[transaction].UpdateRow(_account.Transactions[transaction], TransactionDefaultColor, CultureForNumberString, CultureForDateString);
+        }
     }
 
     /// <summary>
