@@ -63,7 +63,7 @@ public class DashboardViewController
     /// </summary>
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="defaultColor">A default group color</param>
-    public DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer, string defaultColor)
+    internal DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer, string defaultColor)
     {
         _openAccounts = openAccounts;
         Localizer = localizer;
