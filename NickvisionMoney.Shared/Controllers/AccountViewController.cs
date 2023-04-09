@@ -809,10 +809,20 @@ public class AccountViewController : IDisposable
     /// Updates a group in the account
     /// </summary>
     /// <param name="group">The group to update</param>
-    public async Task UpdateGroupAsync(Group group)
+    public async Task UpdateGroupAsync(Group group, bool hasColorChanged)
     {
         await _account.UpdateGroupAsync(group);
         GroupRows[group.Id].UpdateRow(group, CultureForNumberString, _filters[(int)group.Id]);
+        if(hasColorChanged)
+        {
+            foreach(var pair in _account.Transactions)
+            {
+                if (pair.Value.GroupId == group.Id)
+                {
+                    TransactionRows[pair.Key].UpdateRow(pair.Value, CultureForNumberString.Parent, CultureForDateString);
+                }
+            }
+        }
     }
 
     /// <summary>

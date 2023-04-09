@@ -575,7 +575,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
             LoadingCtrl.IsLoading = true;
             //Work
             await Task.Delay(50);
-            await _controller.UpdateGroupAsync(groupController.Group);
+            await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged);
             //Done Loading
             LoadingCtrl.IsLoading = false;
         }

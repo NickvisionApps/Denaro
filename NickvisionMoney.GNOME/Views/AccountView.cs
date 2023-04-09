@@ -1086,7 +1086,7 @@ public partial class AccountView : Adw.Bin
             {
                 try
                 {
-                    await _controller.UpdateGroupAsync(groupController.Group);
+                    await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged);
                 }
                 catch (Exception ex)
                 {
