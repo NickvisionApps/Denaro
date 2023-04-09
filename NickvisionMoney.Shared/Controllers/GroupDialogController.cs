@@ -19,13 +19,10 @@ public enum GroupCheckStatus
 /// </summary>
 public class GroupDialogController
 {
-    private string _originalName;
+    private readonly string _originalName;
+    private readonly string _originalRGBA;
     private readonly List<string> _existingNames;
 
-    /// <summary>
-    /// Gets the AppInfo object
-    /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
@@ -40,6 +37,15 @@ public class GroupDialogController
     public bool IsEditing { get; init; }
 
     /// <summary>
+    /// Gets the AppInfo object
+    /// </summary>
+    public AppInfo AppInfo => AppInfo.Current;
+    /// <summary>
+    /// Whether or not the group color has changed
+    /// </summary>
+    public bool HasColorChanged => _originalRGBA != Group.RGBA;
+
+    /// <summary>
     /// Creates a GroupDialogController
     /// </summary>
     /// <param name="group">The Group object represented by the controller</param>
@@ -49,6 +55,7 @@ public class GroupDialogController
     internal GroupDialogController(Group group, List<string> existingNames, string groupDefaultColor, Localizer localizer)
     {
         _originalName = group.Name;
+        _originalRGBA = group.RGBA;
         _existingNames = existingNames;
         Localizer = localizer;
         Group = (Group)group.Clone();
@@ -69,6 +76,7 @@ public class GroupDialogController
     internal GroupDialogController(uint id, List<string> existingNames, string groupDefaultColor, Localizer localizer)
     {
         _originalName = "";
+        _originalRGBA = groupDefaultColor;
         _existingNames = existingNames;
         Localizer = localizer;
         Group = new Group(id);

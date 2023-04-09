@@ -1,5 +1,4 @@
 ﻿using NickvisionMoney.Shared.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -63,7 +62,7 @@ public class DashboardViewController
     /// </summary>
     /// <param name="localizer">The Localizer of the app</param>
     /// <param name="defaultColor">A default group color</param>
-    public DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer, string defaultColor)
+    internal DashboardViewController(List<AccountViewController> openAccounts, Localizer localizer, string defaultColor)
     {
         _openAccounts = openAccounts;
         Localizer = localizer;
@@ -101,9 +100,9 @@ public class DashboardViewController
                 }
                 Total.Breakdowns[currency] = (Total.Breakdowns[currency].Total + controller.AccountTodayTotal, Total.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], controller.AccountTodayTotalString, controller.AccountTitle)}\n");
             }
-            foreach(var group in controller.Groups.Values)
+            foreach (var group in controller.Groups.Values)
             {
-                if(group.Balance != 0)
+                if (group.Balance != 0)
                 {
                     var name = group.Name.ToLower();
                     var nameBuilder = new StringBuilder(name);

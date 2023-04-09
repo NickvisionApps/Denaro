@@ -8,7 +8,6 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
 
@@ -19,7 +18,6 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
 {
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
-    private Color _defaultColor;
     private Localizer _localizer;
     private int _repeatFrom;
     private Dictionary<uint, Group> _groups;
@@ -49,14 +47,13 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="defaultColor">The default transaction color</param>
+    /// <param name="defaultColor">The default color for the row</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, Color defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer)
     {
         InitializeComponent();
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        _defaultColor = defaultColor;
         _localizer = localizer;
         _repeatFrom = 0;
         _groups = groups;
@@ -65,7 +62,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         MenuDelete.Text = _localizer["Delete", "TransactionRow"];
         ToolTipService.SetToolTip(BtnEdit, _localizer["Edit", "TransactionRow"]);
         ToolTipService.SetToolTip(BtnDelete, _localizer["Delete", "TransactionRow"]);
-        UpdateRow(transaction, cultureAmount, cultureDate);
+        UpdateRow(transaction, defaultColor, cultureAmount, cultureDate);
     }
 
     /// <summary>
@@ -82,9 +79,10 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// Updates the row with the new model
     /// </summary>
     /// <param name="transaction">The new Transaction model</param>
+    /// <param name="defaultColor">The default color for the row</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
-    public void UpdateRow(Transaction transaction, CultureInfo cultureAmount, CultureInfo cultureDate)
+    public void UpdateRow(Transaction transaction, string defaultColor, CultureInfo cultureAmount, CultureInfo cultureDate)
     {
         Id = transaction.Id;
         _repeatFrom = transaction.RepeatFrom;
@@ -95,7 +93,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         MenuDelete.IsEnabled = _repeatFrom <= 0;
         BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         BtnId.Content = transaction.Id;
-        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? _defaultColor);
+        BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? ColorHelpers.FromRGBA(defaultColor)!.Value);
         LblName.Text = transaction.Description;
         LblDescription.Text = transaction.Date.ToString("d", _cultureDate);
         if (transaction.RepeatInterval != TransactionRepeatInterval.Never)

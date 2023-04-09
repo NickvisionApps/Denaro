@@ -17,7 +17,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -798,14 +797,15 @@ public class Account : IDisposable
     /// Deletes a group from the account
     /// </summary>
     /// <param name="id">The id of the group to delete</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> DeleteGroupAsync(uint id)
+    /// <returns>(Result, BelongingTransactions)</returns>
+    public async Task<(bool Result, List<uint> BelongingTransactions)> DeleteGroupAsync(uint id)
     {
         using var cmdDeleteGroup = _database!.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
+            var belongingTransactions = new List<uint>();
             Groups.Remove(id);
             if (id + 1 == NextAvailableGroupId)
             {
@@ -816,13 +816,18 @@ public class Account : IDisposable
                 if (pair.Value.GroupId == id)
                 {
                     pair.Value.GroupId = -1;
+                    if (pair.Value.UseGroupColor)
+                    {
+                        pair.Value.UseGroupColor = false;
+                        belongingTransactions.Add(pair.Key);
+                    }
                     await UpdateTransactionAsync(pair.Value);
                 }
             }
             FreeMemory();
-            return true;
+            return (true, belongingTransactions);
         }
-        return false;
+        return (false, new List<uint>());
     }
 
     /// <summary>
@@ -1449,7 +1454,7 @@ public class Account : IDisposable
         }
         try
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
             File.WriteAllText(path, result);
             return true;
         }
@@ -1469,7 +1474,7 @@ public class Account : IDisposable
     {
         try
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
             using var localizer = new Localizer();
             //Amount Culture
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
@@ -1773,7 +1778,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if(!_isEncrypted.GetValueOrDefault())
+        if (!_isEncrypted.GetValueOrDefault())
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
         }

@@ -120,7 +120,7 @@ public class TransactionDialogController : IDisposable
         CultureForDateString = cultureDate;
         if (string.IsNullOrEmpty(Transaction.RGBA))
         {
-            Transaction.RGBA = transactionDefaultColor;
+            Transaction.RGBA = _transactionDefaultColor;
         }
     }
 

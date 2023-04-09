@@ -2,7 +2,6 @@ using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
-using System;
 using System.Globalization;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -59,8 +58,8 @@ public class DashboardView : Gtk.ScrolledWindow
             var row = Adw.ActionRow.New();
             row.SetTitle(pair.Key);
             row.AddCssClass("card");
-            var prefix = new TransactionId(0, "", controller.Localizer);
-            prefix.UpdateColor(pair.Value.RGBA);
+            var prefix = new TransactionId(0, controller.Localizer);
+            prefix.UpdateColor(pair.Value.RGBA, "");
             prefix.SetCompact(true);
             row.AddPrefix(prefix);
             var suffixBox = Gtk.Box.New(Gtk.Orientation.Vertical, 1);

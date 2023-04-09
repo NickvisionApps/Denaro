@@ -37,7 +37,8 @@ public interface IModelRowControl<T>
     /// Updates the row based on the new model
     /// </summary>
     /// <param name="newModel">The new model T</param>
+    /// <param name="defaultColor">The default color for the row</param>
     /// <param name="cultureAmount">The culture to use for displaying amount strings</param>
     /// <param name="cultureDate">The culture to use for displaying date strings</param>
-    public void UpdateRow(T newModel, CultureInfo cultureAmount, CultureInfo cultureDate);
+    public void UpdateRow(T newModel, string defaultColor, CultureInfo cultureAmount, CultureInfo cultureDate);
 }
