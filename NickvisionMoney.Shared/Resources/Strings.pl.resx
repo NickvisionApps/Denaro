@@ -57,7 +57,8 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -799,7 +800,7 @@ Niezapisane zmiany zostaną utracone.</value>
     <value>Hasło do pliku PDF</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transakcji</value>
+    <value>Transakcja ({0})</value>
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Waluta</value>
@@ -860,5 +861,70 @@ Niezapisane zmiany zostaną utracone.</value>
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
     <value>Brak folderu kopii zapasowej</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Konta</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} z {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Wszystkie konta</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Usuń wszystkie filtry</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ułóż</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Malejąco</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sortuj</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sortuj po</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Użyj koloru grupy</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Folder Kopii Zapasowych CSV</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Domyślny kolor grupy</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Ustawienia konta (Ctrl+.)</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Zmiana tego ustawienia zostanie zastosowana tylko do nowych grup.</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Dostosuje lokalizację kopii zapasowych kont Denaro.</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Nieszyfrowane konta będą automatycznie eksportowane jako pliki CSV do tego folderu po wprowadzeniu zmiany.</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Rosnąco</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Brak dostępu do wybranego folderu, sprawdź uprawnienia Flatpaka.</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Użyj unikalnego koloru</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Czy chcesz zabezpieczyć plik PDF hasłem?
+
+Jeśli utracisz hasło, PDF będzie niedostępny.</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>Transakcje ({0})</value>
   </data>
 </root>
