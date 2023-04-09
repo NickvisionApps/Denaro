@@ -14,888 +14,888 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value></value>
+		<value>ذاتی مالیات کا منتظم</value>
   </data>
   <data name="Version" xml:space="preserve">
-		<value></value>
+		<value>ورژن: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value></value>
+		<value>{0} کے متعلق</value>
   </data>
   <data name="Help" xml:space="preserve">
-		<value></value>
+		<value>مدد</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-		<value></value>
+		<value>تبدیلیاں</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
-		<value></value>
+		<value>گٹہب ریپو</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">
-		<value></value>
+		<value>میٹرکس چیٹ</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value></value>
+		<value>ایک خرابی کی رپورٹ کریں</value>
   </data>
   <data name="Discussions" xml:space="preserve">
-		<value></value>
+		<value>بحث</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value />
   </data>
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value />
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value />
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value></value>
+    <value />
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
-		<value></value>
+		<value>ٹھیک ہے</value>
   </data>
   <data name="Yes" xml:space="preserve">
-		<value></value>
+		<value>ہاں</value>
   </data>
   <data name="No" xml:space="preserve">
-		<value></value>
+		<value>نہیں</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-		<value></value>
+		<value>منسوخ کریں</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value></value>
+		<value>نیا</value>
   </data>
   <data name="Open" xml:space="preserve">
-		<value></value>
+		<value>کھولیں</value>
   </data>
   <data name="Close" xml:space="preserve">
-		<value></value>
+		<value>بند کریں</value>
   </data>
   <data name="Save" xml:space="preserve">
-		<value></value>
+		<value>محفوظ کریں</value>
   </data>
   <data name="Back" xml:space="preserve">
-		<value></value>
+		<value>پیچھے</value>
   </data>
   <data name="Add" xml:space="preserve">
-		<value></value>
+		<value>شامل کریں</value>
   </data>
   <data name="Remove" xml:space="preserve">
-		<value></value>
+		<value>اڑا دیں</value>
   </data>
   <data name="Apply" xml:space="preserve">
-		<value></value>
+		<value>لاگو کریں</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
-		<value></value>
+		<value>مرکز</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
-		<value></value>
+		<value>ڈیش بورڈ</value>
   </data>
   <data name="Account" xml:space="preserve">
-		<value></value>
+		<value>میزان</value>
   </data>
   <data name="Accounts" xml:space="preserve">
-		<value></value>
+		<value>میزانیں</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-    <value></value>
+    <value>ترتیبات</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value></value>
+    <value />
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Quit" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value></value>
+    <value />
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value></value>
+    <value />
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value></value>
+    <value />
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value></value>
+    <value />
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value></value>
+    <value />
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InvalidPassword" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--DashboardView-->
   <data name="AmountFromAccount" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AllAccounts" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--AccountView-->
   <data name="AccountActions" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Overview" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Total" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Income" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Expense" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Groups" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Filters" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ResetFilters.All" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Hide" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="HideGroups" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Show" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ShowGroups" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountSettings" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountSettings.Tooltip" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Sort" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OrderBy" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OrderBy.Increasing" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="OrderBy.Decreasing" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortBy" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Imported" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Exported" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AddPasswordToPDF.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="PDFPassword" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Never" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoEndDate" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="View" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Delete" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Upload" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="MakeCopy" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Result" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--AccountSettingsDialog-->
   <data name="AccountType.Checking" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountType.Business" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NotAvailable" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ManagePassword" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Currency" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Name.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Color.UseGroup" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Color.UseUnique" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountType.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Password.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ConfirmPassword.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NonMatchingPasswords" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationPassword.Field" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--PDF-->
   <data name="Generated.PDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Currency.PDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Receipts.PDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="PageNumber.PDF" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--PasswordDialog-->
   <data name="EnterPassword" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Unlock" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Theme" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Colors" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="GroupColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="GroupColorDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountCheckingColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Locale" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Backup" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="BackupDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="BackupFolder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="SelectBackupFolder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ClearBackupFolder" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--WinUI Specific-->
   <data name="Preview.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <!--GTK Specific-->
   <data name="Summary.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
-		<value></value>
+		<value />
   </data>
 </root>
