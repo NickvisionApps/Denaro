@@ -2,7 +2,6 @@ using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
-using System;
 using System.Globalization;
 
 namespace NickvisionMoney.GNOME.Views;

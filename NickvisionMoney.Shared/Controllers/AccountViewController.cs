@@ -825,9 +825,9 @@ public class AccountViewController : IDisposable
     {
         await _account.UpdateGroupAsync(group);
         GroupRows[group.Id].UpdateRow(group, GroupDefaultColor, CultureForNumberString, _filters[(int)group.Id]);
-        if(hasColorChanged)
+        if (hasColorChanged)
         {
-            foreach(var pair in _account.Transactions)
+            foreach (var pair in _account.Transactions)
             {
                 if (pair.Value.GroupId == group.Id)
                 {

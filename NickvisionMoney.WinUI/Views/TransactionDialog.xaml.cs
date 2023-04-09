@@ -109,7 +109,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
             CalendarRepeatEndDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day));
         }
         _selectedColor = (Color)ColorHelpers.FromRGBA(_controller.Transaction.RGBA)!;
-        if(_controller.Transaction.GroupId > 0)
+        if (_controller.Transaction.GroupId > 0)
         {
             CmbColor.Visibility = Visibility.Visible;
             CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;
@@ -288,7 +288,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         if (!_constructing)
         {
             CmbColor.Visibility = (string)CmbGroup.SelectedItem != _controller.Localizer["Ungrouped"] ? Visibility.Visible : Visibility.Collapsed;
-            if(CmbColor.Visibility == Visibility.Visible)
+            if (CmbColor.Visibility == Visibility.Visible)
             {
                 _constructing = true;
                 CmbColor.SelectedIndex = _controller.Transaction.UseGroupColor ? 0 : 1;

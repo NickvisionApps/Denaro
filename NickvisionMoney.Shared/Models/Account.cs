@@ -17,7 +17,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -1773,7 +1772,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if(!_isEncrypted.GetValueOrDefault())
+        if (!_isEncrypted.GetValueOrDefault())
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
         }

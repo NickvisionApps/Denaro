@@ -10,7 +10,6 @@ using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Controls;
-using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
