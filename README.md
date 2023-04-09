@@ -1,7 +1,4 @@
-# Denaro
-<img src="NickvisionMoney.Shared/Resources/org.nickvision.money.svg" width="100" height="100"/>
-
- **A personal finance manager**
+![](NickvisionMoney.Shared/Resources/banner.png)
  
  [![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/) ✨Powered by [Weblate](https://weblate.org/en/)✨
 
