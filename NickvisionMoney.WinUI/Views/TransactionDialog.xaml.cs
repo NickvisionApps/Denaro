@@ -118,7 +118,6 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         else
         {
             CmbColor.Visibility = Visibility.Collapsed;
-            CmbColor.SelectedIndex = 0;
             BtnColor.Visibility = Visibility.Visible;
         }
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
