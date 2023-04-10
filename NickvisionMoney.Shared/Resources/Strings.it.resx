@@ -818,10 +818,10 @@ I cambiamenti non salvati saranno persi.</value>
     <value>Illimitato</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transazione</value>
+    <value>Transazione ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transazioni</value>
+    <value>Transazioni ({0})</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
     <value>Gestisci la valuta del account.</value>
@@ -845,5 +845,83 @@ In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
   </data>
   <data name="Accounts" xml:space="preserve">
     <value>Account</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} da {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Tutti gli account</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Impostazioni account (Ctrl+.)</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordina per</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Ascendente</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Discendente</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordina per</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Usa colore gruppo</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Inserire un separatore decimale valido</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Inserire il separatore decimale</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Colore dei gruppi predefinito</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Personalizza le posizioni di backup per gli account Denaro.</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Rimuovi cartella di backup</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Impossibile accedere alla cartella selezionata, controllare i permessi di Flatpak.</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Usa colore unico</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Il separatore decimale non può essere vuoto</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Cifre decimali</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Ordina</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Reimposta tutti i filtri</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Inserire il separatore dei gruppi</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Gli account non criptati saranno esportati automaticamente come file CSV in questa cartella quando viene applicata una modifica.</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Le modifiche saranno applicate solo ai nuovi gruppi.</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Seleziona cartella di backup</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Separatore decimale</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Separatore dei gruppi</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Inserire un separatore dei gruppi valido</value>
   </data>
 </root>
