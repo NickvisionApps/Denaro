@@ -782,9 +782,21 @@ Traductors :
     <value>{0} transaccions</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} transaccion</value>
+    <value>Transaccion ({0})</value>
   </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
     <value>Ajustar un senhal al document PDF ?</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tablèu de bòrd</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Comptes</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} de {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Totes los comptes</value>
   </data>
 </root>
