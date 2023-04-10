@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Henkilökohtainen varainhallinta</value>
+		<value>Hallitse raha-asioitasi</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versio: {0}</value>

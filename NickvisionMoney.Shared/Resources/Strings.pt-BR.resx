@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Um gestor de finanças pessoais</value>
+		<value>Gerencie suas finanças pessoais</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versão: {0}</value>
