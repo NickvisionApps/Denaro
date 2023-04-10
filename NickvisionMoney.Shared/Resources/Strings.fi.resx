@@ -52,11 +52,13 @@ Avustajat GitHubissa ❤️ https://github.com/nlogozzo/NickvisionMoney/graphs/c
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
     <value>Nicholas Logozzo https://github.com/nlogozzo
-Fyodor Sobolev https://github.com/fsobolev</value>
+Fyodor Sobolev https://github.com/fsobolev
+DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -490,7 +492,7 @@ Tätä toimintoa ei voi perua.</value>
 		<value>Tämä on vain hyödyllinen selite, eikä se vaikuta sovelluksen toimintaan.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
-		<value />
+		<value>-</value>
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
 		<value>Järjestelmä ilmoitti, että käyttämäsi valuutta on</value>
@@ -502,7 +504,7 @@ Tätä toimintoa ei voi perua.</value>
 		<value>Aseta uusi salasana tai poista salasana.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value>Jos salasana häviää, tiliä ei ole mahdollista palauttaa!</value>
+		<value>Jos salasana häviää, tiedostoa ei ole mahdollista palauttaa!</value>
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
@@ -779,5 +781,103 @@ Kaikki tallentamattomat muutokset katoavat.</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
 		<value>Salasana poistetaan, kun tämä ikkuna suljetaan.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Kojelauta</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Tilit</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Kaikki tilit</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Käytä ryhmän väriä</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>CSV-varmuuskopion kansio</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Muu</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Ryhmän oletusväri</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Muutos tähän asetukseen toteutetaan vain uusiin ryhmiin.</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Mukauta Denaro-tilien varmuuskopioiden sijainnit.</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>Ei varmuuskopiokansiota</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Valitse varmuuskopiokansio</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Tyhjennä varmuuskopiokansio</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Nollaa kaikki suodattimet</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Tilin asetukset (Ctrl+.)</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Käytä yksilöllistä väriä</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Kirjoita ryhmäerotin</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>Salasanat eivät täsmää.</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Ei pääsyä valittuun kansioon, tarkista Flatpak-oikeudet.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>PDF-salasana</value>
+  </data>
+  <data name="AddPasswordToPDF" xml:space="preserve">
+    <value>Lisätäänkö salasana PDF:ään?</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Haluatko suojata PDF-tiedoston salasanalla?
+
+Jos salasana katoaa, PDF-tiedosto ei ole käytettävissä.</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>Tapahtumat ({0})</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>Tapahtuma ({0})</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Valuutta</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Hallitse tilillä käytettävää valuuttaa.</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Desimaalierotin</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Desimaalierotin (tyhjä)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Desimaalierotin (virheellinen)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Muu</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Kirjoita desimaalierotin</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Ryhmäerotin</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Ryhmäerotin (virheellinen)</value>
   </data>
 </root>
