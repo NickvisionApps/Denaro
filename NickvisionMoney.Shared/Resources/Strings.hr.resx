@@ -802,10 +802,10 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
     <value>PDF lozinka</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} transakcija</value>
+    <value>Transakcija ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} transakcije</value>
+    <value>Transakcije ({0})</value>
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Valuta</value>
@@ -878,5 +878,50 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Nije moguće pristupiti odabranoj mapi, provjeri dozvole za Flatpak.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Pregledna ploča</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Računi</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} od {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Svi računi</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Postavke računa (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Razvrstaj</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Redoslijed</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Uzlazno</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Razvrstaj po</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Koristi boju grupe</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Koristi jedinstvenu boju</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Standardna boja grupe</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Promjena u ovoj postavki će se primijeniti samo na nove grupe.</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Resetiraj sve filtre</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Silazno</value>
   </data>
 </root>
