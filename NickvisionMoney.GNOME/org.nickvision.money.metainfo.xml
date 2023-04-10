@@ -6,11 +6,6 @@
   <name>Denaro</name>
   <developer_name>Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
-  <description>
-    <p>
-      A personal finance manager
-    </p>
-  </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
     <screenshot type="default">
