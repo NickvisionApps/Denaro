@@ -24,6 +24,7 @@ jobs:
           manifest-path: NickvisionMoney.GNOME/org.nickvision.money.json
           cache-key: flatpak-builder-${{ github.sha }}
           arch: ${{ matrix.arch }}
+          restore-cache: true
   winui:
     name: "WinUI"
     strategy:
