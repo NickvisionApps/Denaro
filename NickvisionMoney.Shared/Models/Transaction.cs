@@ -80,6 +80,10 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// The date of when to end the repeat sequence
     /// </summary>
     public DateOnly? RepeatEndDate { get; set; }
+    /// <summary>
+    /// The notes for the transaction
+    /// </summary>
+    public string Notes { get; set; }
 
     /// <summary>
     /// Constructs a Transaction
@@ -100,6 +104,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         Receipt = null;
         RepeatFrom = -1;
         RepeatEndDate = null;
+        Notes = "";
     }
 
     /// <summary>
@@ -162,7 +167,8 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             UseGroupColor = UseGroupColor,
             Receipt = Receipt != null ? Receipt.Clone((x) => { }) : null,
             RepeatFrom = RepeatFrom,
-            RepeatEndDate = RepeatEndDate
+            RepeatEndDate = RepeatEndDate,
+            Notes = Notes
         };
     }
 

@@ -821,6 +821,10 @@
 		<value>Receipt</value>
 	</data>
 
+	<data name="Notes.Field" xml:space="preserve">
+		<value>Notes</value>
+	</data>
+
 	<data name="DestinationAccount.Field" xml:space="preserve">
 		<value>Destination Account</value>
 	</data>
