@@ -752,7 +752,7 @@ Kääntäjät:
 Kaikki tallentamattomat muutokset katoavat.</value>
   </data>
   <!--GTK Specific-->
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Hallitse raha-asioitasi</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

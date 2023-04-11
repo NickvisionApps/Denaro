@@ -8,7 +8,13 @@
   <summary>Manage your personal finances</summary>
   <description>
     <p>
-      Manage your personal finances
+      <ul>
+        <li>Manage multiple accounts at a time, with a familiar tab interface</li>
+        <li>Easily filter transactions by type, group, or date</li>
+        <li>Easily repeat transactions, such as bills that occur every month</li>
+        <li>Transfer money from one account to another</li>
+        <li>Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</li>
+      </ul>
     </p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>

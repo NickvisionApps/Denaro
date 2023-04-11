@@ -715,7 +715,7 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
   <data name="InsertSeparator.Description" xml:space="preserve">
     <value>Odredi decimalni znak za polje iznosa.</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Upravljaj osobnim financijama</value>
   </data>
   <data name="MatrixChat" xml:space="preserve">

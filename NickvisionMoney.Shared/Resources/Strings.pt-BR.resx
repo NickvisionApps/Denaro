@@ -762,7 +762,7 @@ Tradutores:
 Quaisquer trabalhos não salvos serão perdidos.</value>
   </data>
   <!--GTK Specific-->
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Gerencie suas finanças pessoais</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

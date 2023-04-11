@@ -462,8 +462,14 @@ Tobias Bernard https://github.com/bertob</value>
 Несохранённые данные будут утеряны.</value>
   </data>
   <!--GTK Specific-->
-  <data name="Summary.GTK" xml:space="preserve">
-		<value>Управляйте своими личными финансами</value>
+  <data name="MetadataDescription.GTK" xml:space="preserve">
+		<value><ul>
+			<li>Управляйте несколькими счетами одновременно, используя привычный интерфейс с вкладками</li>
+			<li>Легко сортируйте транзакции по типу, группе или дате</li>
+			<li>Создавайте повторяющиеся транзакции, например, по ежемесячным платежам</li>
+			<li>Переводите деньги с одного счёта на другой</li>
+			<li>Экспортируйте данные в файл CSV и импортируйте из CSV, OFX или QIF файла для массового добавления транзакций на счёт</li>
+		</ul></value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
 		<value>деньги;финансы;кошелёк;наличные;банк;GTK;Nickvision;</value>

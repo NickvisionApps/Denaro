@@ -679,7 +679,7 @@ de opeenvolgende losgekoppeld..</value>
   <data name="EnterConversionRate" xml:space="preserve">
     <value>Voer conversie hier in</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Beheer uw persoonlijke financiën</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

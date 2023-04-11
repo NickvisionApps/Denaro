@@ -670,7 +670,7 @@ Transaksi berulang yang baru akan dihasilkan berdasarkan interval pengulangan ya
   <data name="Preview.WinUI" xml:space="preserve">
     <value>Pratinjau</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Kelola keuangan pribadi anda</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">

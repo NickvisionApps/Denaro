@@ -671,7 +671,7 @@ Alle ungespeicherte Arbeit wird verloren.</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>VORSCHAU</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Verwalte deine persönlichen Finanzen</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">

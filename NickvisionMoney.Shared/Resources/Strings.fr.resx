@@ -667,7 +667,7 @@ les transactions individuelles générées seront modifiables.</value>
   <data name="Id.Field" xml:space="preserve">
     <value>Id</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Gérez vos finances personnelles</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">

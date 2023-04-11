@@ -667,7 +667,7 @@ I cambiamenti non salvati saranno persi.</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>ANTEPRIMA</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Gestione finanziaria personale</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
