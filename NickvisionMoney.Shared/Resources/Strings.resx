@@ -662,6 +662,14 @@
 		<value>(Copy)</value>
 	</data>
 
+	<data name="Extras" xml:space="preserve">
+		<value>Extras</value>
+	</data>
+
+	<data name="Extras.Description" xml:space="preserve">
+		<value>Manage extra fields of the transaction.</value>
+	</data>
+
 	<!--TransferDialog-->
 	<data name="Transfer" xml:space="preserve">
 		<value>Transfer</value>
@@ -823,6 +831,10 @@
 
 	<data name="Notes.Field" xml:space="preserve">
 		<value>Notes</value>
+	</data>
+
+	<data name="Notes.Placeholder" xml:space="preserve">
+		<value>Enter notes here</value>
 	</data>
 
 	<data name="DestinationAccount.Field" xml:space="preserve">
