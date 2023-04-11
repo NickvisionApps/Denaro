@@ -46,7 +46,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.4.0-rc1" date="2023-04-07">
+    <release version="2023.4.0" date="2023-04-10">
       <description>
         <p>- Added a new Dashboard page to view quick information about all accounts</p>
         <p>- Added the ability to assign a color to groups</p>
