@@ -27,8 +27,8 @@ public partial class App : Application
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.4.0";
-        _mainWindowController.AppInfo.Changelog = "- Added a new Dashboard page to view quick information about all accounts\n- Added the ability to add a color to groups\n- Added the ability to customize the decimal and group separators used per account\n- Added the ability to password protect a PDF file\n- Added a preference option to automatically backup unencrypted account files to a specific folder\n- Redesigned the AccountView for a more fluent design\n- Fixed an issue where OFX files with security could not be imported\n- Fixed an issue where QIF files could not be imported on non-English systems\n- Updated and added translations (Thanks to everyone on Weblate)!";
+        _mainWindowController.AppInfo.Version = "2023.4.1-next";
+        _mainWindowController.AppInfo.Changelog = "- Updated and added translations (Thanks to everyone on Weblate)!";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");

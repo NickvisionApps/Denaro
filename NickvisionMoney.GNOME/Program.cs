@@ -56,8 +56,8 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.4.0";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added a new Dashboard page to view quick information about all accounts</li><li>Added the ability to add a color to groups</li><li>Added the ability to customize the decimal and group separators used per account</li><li>Added the ability to password protect a PDF file</li><li>Added a preference option to automatically backup unencrypted account files to a specific folder</li><li>Fixed an issue where editing a transaction with a receipt would crash the application</li><li>Fixed an issue where OFX files with security could not be imported</li><li>Fixed an issue where QIF files could not be imported on non-English systems</li><li>Updated to GNOME 44 platform, fixed many GTK issues</li><li>The UI is now built using blueprint</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Version = "2023.4.1-next";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
