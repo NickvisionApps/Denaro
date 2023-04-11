@@ -6,7 +6,7 @@
 
   <name xml:lang="en">Denaro</name>
   <shortdesc xml:lang="en">Manage your personal finances</shortdesc>
-  <description xml:lang="en">A personal finance manager</description>
+  <description xml:lang="en">Manage your personal finances</description>
   <homepage rdf:resource="https://github.com/nlogozzo/NickvisionMoney" />
   <bug-database rdf:resource="https://github.com/nlogozzo/NickvisionMoney/issues"/>
   <download-page rdf:resource="https://flathub.org/apps/details/org.nickvision.money" />

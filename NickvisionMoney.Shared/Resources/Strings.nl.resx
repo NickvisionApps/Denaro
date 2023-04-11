@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Een financiënbeheerder</value>
+		<value>Beheer uw persoonlijke financiën</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versie: {0}</value>
@@ -679,7 +679,7 @@ de opeenvolgende losgekoppeld..</value>
   <data name="EnterConversionRate" xml:space="preserve">
     <value>Voer conversie hier in</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Beheer uw persoonlijke financiën</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

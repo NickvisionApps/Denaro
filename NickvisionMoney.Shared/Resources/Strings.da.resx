@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Personlig økonomi håndtering</value>
+		<value>Administrer din privatøkonomi</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Version: {0}</value>
@@ -761,7 +761,7 @@ Translatører:
 Alle ikke-gemte ændringer vil gå tabt.</value>
   </data>
   <!--GTK Specific-->
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Administrer din privatøkonomi</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

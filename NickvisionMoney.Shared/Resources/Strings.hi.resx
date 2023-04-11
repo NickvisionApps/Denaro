@@ -763,7 +763,7 @@ New repeat transactions will be generated based off the new interval.</value>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>PREVIEW</value>
   </data>
-  <data name="Summary.GTK" xml:space="preserve">
+  <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Manage your personal finances</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">

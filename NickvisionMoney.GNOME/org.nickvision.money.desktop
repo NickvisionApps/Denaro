@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Denaro
-Comment=A personal finance manager
+Comment=Manage your personal finances
 Exec=/usr/bin/org.nickvision.money
 Icon=org.nickvision.money
 Terminal=false
