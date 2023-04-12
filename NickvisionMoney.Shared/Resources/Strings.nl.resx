@@ -924,4 +924,16 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
   <data name="GroupColor" xml:space="preserve">
     <value>Standaardgroepskleur</value>
   </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extra's</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Beheer extra velden van de transactie</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Aantekeningen</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Voer aantekeningen hier in</value>
+  </data>
 </root>
