@@ -57,7 +57,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.4.1-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to add extra notes to a transaction</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");

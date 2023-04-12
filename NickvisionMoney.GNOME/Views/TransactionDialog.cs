@@ -31,6 +31,24 @@ public partial class TransactionDialog : Adw.Window
         public float Alpha;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TextIter {
+        public nint dummy1;
+        public nint dummy2;
+        public int dummy3;
+        public int dummy4;
+        public int dummy5;
+        public int dummy6;
+        public int dummy7;
+        public int dummy8;
+        public nint dummy9;
+        public nint dummy10;
+        public int dummy11;
+        public int dummy12;
+        public int dummy13;
+        public nint dummy14;
+    }
+
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.I1)]
     private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
@@ -91,6 +109,12 @@ public partial class TransactionDialog : Adw.Window
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)]bool include_hidden_chars);
+
     private GAsyncReadyCallback _openCallback { get; set; }
 
     private bool _constructing;
@@ -98,6 +122,8 @@ public partial class TransactionDialog : Adw.Window
     private string? _receiptPath;
     private nint _colorDialog;
 
+    [Gtk.Connect] private readonly Adw.ViewStack _stack;
+    [Gtk.Connect] private readonly Gtk.Button _backButton;
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
@@ -115,11 +141,13 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
     [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
+    [Gtk.Connect] private readonly Gtk.Button _extrasButton;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _deleteReceiptButton;
     [Gtk.Connect] private readonly Gtk.Button _uploadReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
+    [Gtk.Connect] private readonly Gtk.TextView _notesView;
     [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
@@ -165,6 +193,17 @@ public partial class TransactionDialog : Adw.Window
             _controller.Accepted = true;
             _controller.CopyRequested = true;
             OnApply?.Invoke(this, EventArgs.Empty);
+        };
+        _backButton.OnClicked += (sender, e) =>
+        {
+            _stack.SetVisibleChildName("main");
+            _backButton.SetVisible(false);
+            SetDefaultWidget(_applyButton);
+        };
+        _extrasButton.OnClicked += (sender, e) =>
+        {
+            _stack.SetVisibleChildName("extras");
+            _backButton.SetVisible(true);
         };
         //Description
         _descriptionRow.OnNotify += (sender, e) =>
@@ -266,6 +305,14 @@ public partial class TransactionDialog : Adw.Window
         _viewReceiptButton.OnClicked += OnViewReceipt;
         _deleteReceiptButton.OnClicked += OnDeleteReceipt;
         _uploadReceiptButton.OnClicked += OnUploadReceipt;
+        //Notes
+        _notesView.GetBuffer().OnChanged += (sender, e) =>
+        {
+            if (!_constructing)
+            {
+                Validate();
+            }
+        };
         //Load Transaction
         gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);
@@ -308,6 +355,7 @@ public partial class TransactionDialog : Adw.Window
         {
             _uploadReceiptButtonContent.SetLabel(_controller.Localizer["Upload"]);
         }
+        _notesView.GetBuffer().SetText(_controller.Transaction.Notes, _controller.Transaction.Notes.Length);
         Validate();
         _constructing = false;
     }
@@ -360,7 +408,10 @@ public partial class TransactionDialog : Adw.Window
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var color = gtk_color_dialog_button_get_rgba(_colorButton.Handle);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _colorDropDown.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate);
+        var iterStart = new TextIter();
+        var iterEnd = new TextIter();
+        gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _colorDropDown.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_controller.Localizer["Description", "Field"]);
         _amountRow.RemoveCssClass("error");

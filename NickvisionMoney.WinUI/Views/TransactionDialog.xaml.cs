@@ -79,10 +79,15 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         LblColor.Text = _controller.Localizer["Color", "Field"];
         CmbColor.Items.Add(_controller.Localizer["Color", "UseGroup"]);
         CmbColor.Items.Add(_controller.Localizer["Color", "UseUnique"]);
+        CardExtras.Header = _controller.Localizer["Extras"];
+        CardExtras.Description = _controller.Localizer["Extras", "Description"];
+        LblExtrasBack.Text = _controller.Localizer["Back"];
         LblReceipt.Text = _controller.Localizer["Receipt", "Field"];
         LblBtnReceiptView.Text = _controller.Localizer["View"];
         LblBtnReceiptDelete.Text = _controller.Localizer["Delete"];
         LblBtnReceiptUpload.Text = _controller.Localizer["Upload"];
+        TxtNotes.Header = _controller.Localizer["Notes", "Field"];
+        TxtNotes.PlaceholderText = _controller.Localizer["Notes", "Placeholder"];
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
@@ -123,6 +128,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         BtnReceiptView.IsEnabled = _controller.Transaction.Receipt != null;
         BtnReceiptDelete.IsEnabled = _controller.Transaction.Receipt != null;
         Validate();
+        ViewStack.ChangePage("Main");
         _constructing = false;
     }
 
@@ -168,7 +174,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
     /// </summary>
     private void Validate()
     {
-        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), CmbColor.SelectedIndex == 0, TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date));
+        var checkStatus = _controller.UpdateTransaction(DateOnly.FromDateTime(CalendarDate.Date!.Value.Date), TxtDescription.Text, (TransactionType)CmbType.SelectedIndex, CmbRepeatInterval.SelectedIndex, (string)CmbGroup.SelectedItem, ColorHelpers.ToRGBA(SelectedColor), CmbColor.SelectedIndex == 0, TxtAmount.Text, _receiptPath, CalendarRepeatEndDate.Date == null ? null : DateOnly.FromDateTime(CalendarRepeatEndDate.Date!.Value.Date), TxtNotes.Text);
         TxtDescription.Header = _controller.Localizer["Description", "Field"];
         TxtAmount.Header = $"{_controller.Localizer["Amount", "Field"]} -  {_controller.CultureForNumberString.NumberFormat.CurrencySymbol} {(string.IsNullOrEmpty(_controller.CultureForNumberString.NumberFormat.NaNSymbol) ? "" : $"({_controller.CultureForNumberString.NumberFormat.NaNSymbol})")}";
         CalendarRepeatEndDate.Header = _controller.Localizer["TransactionRepeatEndDate", "Field"];
@@ -348,6 +354,20 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
     private void ClearRepeatEndDate(object sender, RoutedEventArgs e) => CalendarRepeatEndDate.Date = null;
+
+    /// <summary>
+    /// Occurs when the extras card is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CardExtras_Click(object sender, RoutedEventArgs e) => ViewStack.ChangePage("Extras");
+
+    /// <summary>
+    /// Occurs when the back button on the extras page is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void BtnExtrasBack_Click(object sender, RoutedEventArgs e) => ViewStack.ChangePage("Main");
 
     /// <summary>
     /// Occurs when the view receipt button is clicked

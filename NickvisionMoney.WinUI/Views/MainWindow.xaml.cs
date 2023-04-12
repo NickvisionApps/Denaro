@@ -66,6 +66,7 @@ public sealed partial class MainWindow : Window
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         _appWindow.Title = TitleBarTitle.Text;
+        _appWindow.SetIcon(@"Assets\org.nickvision.money.ico");
         TitlePreview.Text = _controller.IsDevVersion ? _controller.Localizer["Preview", "WinUI"] : "";
         if (AppWindowTitleBar.IsCustomizationSupported())
         {

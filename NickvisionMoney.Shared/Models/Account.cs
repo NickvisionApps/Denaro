@@ -360,7 +360,7 @@ public class Account : IDisposable
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
         using var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -402,6 +402,13 @@ public class Account : IDisposable
             using var cmdTableTransactionsUpdate6 = _database.CreateCommand();
             cmdTableTransactionsUpdate6.CommandText = "ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER";
             cmdTableTransactionsUpdate6.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableTransactionsUpdate7 = _database.CreateCommand();
+            cmdTableTransactionsUpdate7.CommandText = "ALTER TABLE transactions ADD COLUMN notes TEXT";
+            cmdTableTransactionsUpdate7.ExecuteNonQuery();
         }
         catch { }
         //Get Metadata
@@ -495,7 +502,8 @@ public class Account : IDisposable
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
                 UseGroupColor = readQueryTransactions.IsDBNull(11) ? false : readQueryTransactions.GetBoolean(11),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
-                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false)))
+                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
+                Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
             };
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
@@ -838,7 +846,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -848,6 +856,7 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
+        cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -899,7 +908,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -909,6 +918,7 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
         cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
+        cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -986,6 +996,7 @@ public class Account : IDisposable
                     tt.UseGroupColor = transaction.UseGroupColor;
                     tt.Receipt = transaction.Receipt;
                     tt.RepeatEndDate = transaction.RepeatEndDate;
+                    tt.Notes = transaction.Notes;
                     await UpdateTransactionAsync(tt);
                 }
             }
@@ -1141,9 +1152,10 @@ public class Account : IDisposable
     /// Imports transactions from a file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    /// <param name="rgba">The rgba for imported transactions</param>
+    /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
+    /// <param name="defaultGroupRGBA">The default color for a group</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    public async Task<List<uint>> ImportFromFileAsync(string path, string rgba)
+    public async Task<List<uint>> ImportFromFileAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         var ids = new List<uint>();
         if (!System.IO.Path.Exists(path))
@@ -1157,11 +1169,11 @@ public class Account : IDisposable
         }
         else if (extension == ".ofx")
         {
-            return await ImportFromOFXAsync(path, rgba);
+            return await ImportFromOFXAsync(path, defaultTransactionRGBA);
         }
         else if (extension == ".qif")
         {
-            return await ImportFromQIFAsync(path, rgba);
+            return await ImportFromQIFAsync(path, defaultTransactionRGBA, defaultGroupRGBA);
         }
         return ids;
     }
@@ -1186,7 +1198,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 14)
+            if (fields.Length != 15)
             {
                 continue;
             }
@@ -1292,6 +1304,8 @@ public class Account : IDisposable
             var groupDescription = fields[12];
             //Get Group RGBA
             var groupRGBA = fields[13];
+            //Get Notes
+            var notes = fields[14];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
@@ -1315,7 +1329,8 @@ public class Account : IDisposable
                 RGBA = rgba,
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate
+                RepeatEndDate = repeatEndDate,
+                Notes = notes
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
@@ -1337,8 +1352,9 @@ public class Account : IDisposable
     /// Imports transactions from an OFX file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromOFXAsync(string path, string rgba)
+    private async Task<List<uint>> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
     {
         var ids = new List<uint>();
         var localizer = new Localizer();
@@ -1370,7 +1386,7 @@ public class Account : IDisposable
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
-                    RGBA = rgba
+                    RGBA = defaultTransactionRGBA
                 });
             }
         }
@@ -1381,8 +1397,10 @@ public class Account : IDisposable
     /// Imports transactions from a QIF file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
+    /// <param name="defaultGroupRGBA">The default color for a group</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromQIFAsync(string path, string rgba)
+    private async Task<List<uint>> ImportFromQIFAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         var ids = new List<uint>();
         QifDocument? qif = null;
@@ -1405,7 +1423,8 @@ public class Account : IDisposable
                 await AddGroupAsync(new Group(NextAvailableGroupId)
                 {
                     Name = group.CategoryName,
-                    Description = group.Description
+                    Description = group.Description,
+                    RGBA = defaultGroupRGBA
                 });
             }
         }
@@ -1424,7 +1443,8 @@ public class Account : IDisposable
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
                     GroupId = group == null ? -1 : (int)group.Id,
-                    RGBA = rgba
+                    UseGroupColor = group == null ? false : true,
+                    RGBA = defaultTransactionRGBA
                 });
             }
         }
@@ -1439,7 +1459,7 @@ public class Account : IDisposable
     public bool ExportToCSV(string path)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Notes\n";
         foreach (var pair in Transactions)
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
@@ -1632,13 +1652,14 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, GroupName, RepeatInterval, Amount
+                                //ID, Date, Description, Type, GroupName, RepeatInterval, Notes, Amount
                                 x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
+                                x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                             });
                             //Headers
@@ -1649,6 +1670,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionRepeatInterval", "Short"]).SemiBold();
+                            tbl.Cell().Text(localizer["Notes", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
                             foreach (var pair in Transactions)
@@ -1695,6 +1717,7 @@ public class Account : IDisposable
                                     TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
                                     _ => ""
                                 });
+                                tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{pair.Value.Amount.ToAmountString(cultureAmount)}");
                             }
                         });

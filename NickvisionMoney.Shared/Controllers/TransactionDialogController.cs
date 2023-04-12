@@ -280,11 +280,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="selectedRepeat">The new selected repeat index</param>
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
+    /// <param name="useGroupColor">Whether or not to use the group's color instead of the transaction's color</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
+    /// <param name="notes">The new notes</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, string amountString, string? receiptPath, DateOnly? repeatEndDate)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, string amountString, string? receiptPath, DateOnly? repeatEndDate, string notes)
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
@@ -359,6 +361,7 @@ public class TransactionDialogController : IDisposable
             Transaction.RepeatFrom = 0;
         }
         Transaction.RepeatEndDate = Transaction.RepeatInterval == TransactionRepeatInterval.Never ? null : repeatEndDate;
+        Transaction.Notes = notes;
         return TransactionCheckStatus.Valid;
     }
 
