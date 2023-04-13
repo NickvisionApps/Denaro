@@ -463,13 +463,15 @@ Tobias Bernard https://github.com/bertob</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
-		<value><ul>
-			<li>Управляйте несколькими счетами одновременно, используя привычный интерфейс с вкладками</li>
-			<li>Легко сортируйте транзакции по типу, группе или дате</li>
-			<li>Создавайте повторяющиеся транзакции, например, по ежемесячным платежам</li>
-			<li>Переводите деньги с одного счёта на другой</li>
-			<li>Экспортируйте данные в файл CSV и импортируйте из CSV, OFX или QIF файла для массового добавления транзакций на счёт</li>
-		</ul></value>
+		<value>
+      <ul>
+        <li>Управляйте несколькими счетами одновременно, используя привычный интерфейс с вкладками</li>
+        <li>Легко сортируйте транзакции по типу, группе или дате</li>
+        <li>Создавайте повторяющиеся транзакции, например, по ежемесячным платежам</li>
+        <li>Переводите деньги с одного счёта на другой</li>
+        <li>Экспортируйте данные в файл CSV и импортируйте из CSV, OFX или QIF файла для массового добавления транзакций на счёт</li>
+      </ul>
+    </value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
 		<value>деньги;финансы;кошелёк;наличные;банк;GTK;Nickvision;</value>
@@ -924,5 +926,17 @@ Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Невозможно получить доступ к папке, проверьте разрешения Flatpak.</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Заметки</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Введите здесь ваши заметки</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Управление дополнительными данными транзакции.</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Прочее</value>
   </data>
 </root>
