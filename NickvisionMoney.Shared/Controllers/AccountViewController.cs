@@ -197,6 +197,7 @@ public class AccountViewController : IDisposable
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
+                culture.NumberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? culture.NumberFormat.CurrencySymbol;
                 culture.NumberFormat.CurrencyDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator ?? culture.NumberFormat.CurrencyDecimalSeparator;
                 culture.NumberFormat.CurrencyGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator ?? culture.NumberFormat.CurrencyGroupSeparator;
