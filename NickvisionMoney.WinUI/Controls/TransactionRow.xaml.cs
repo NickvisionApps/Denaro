@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -92,7 +93,11 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuDelete.IsEnabled = _repeatFrom <= 0;
         BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
+        var bgColorString = transaction.RGBA;
+        var bgColorStrArray = new System.Text.RegularExpressions.Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         BtnId.Content = transaction.Id;
+        BtnId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? ColorHelpers.FromRGBA(defaultColor)!.Value);
         LblName.Text = transaction.Description;
         LblDescription.Text = transaction.Date.ToString("d", _cultureDate);
