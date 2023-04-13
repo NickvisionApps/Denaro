@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -7,14 +8,17 @@ using NickvisionMoney.Shared.Models;
 using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+using Windows.UI;
 
 namespace NickvisionMoney.WinUI.Controls;
 
 /// <summary>
 /// A row to display a Transaction model
 /// </summary>
-public sealed partial class TransactionRow : UserControl, IModelRowControl<Transaction>
+public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged, IModelRowControl<Transaction>
 {
     private CultureInfo _cultureAmount;
     private CultureInfo _cultureDate;
@@ -40,6 +44,8 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     /// <summary>
     /// Constructs a TransactionRow
     /// </summary>
@@ -52,6 +58,7 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
     public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer)
     {
         InitializeComponent();
+        DataContext = this;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
         _localizer = localizer;
@@ -64,6 +71,32 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         ToolTipService.SetToolTip(BtnDelete, _localizer["Delete", "TransactionRow"]);
         UpdateRow(transaction, defaultColor, cultureAmount, cultureDate);
     }
+
+
+    public Color BtnIdBackground
+    {
+        get
+        {
+            if(BtnId.Background is SolidColorBrush brush)
+            {
+                return brush.Color;
+            }
+            return Colors.White;
+        }
+    }
+
+    public Color BtnIdForeground
+    {
+        get
+        {
+            if (BtnId.Foreground is SolidColorBrush brush)
+            {
+                return brush.Color;
+            }
+            return Colors.White;
+        }
+    }
+
 
     /// <summary>
     /// Shows the row
@@ -92,8 +125,14 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
         BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuDelete.IsEnabled = _repeatFrom <= 0;
         BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
+        var bgColorString = transaction.RGBA;
+        var bgColorStrArray = new System.Text.RegularExpressions.Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
+        var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         BtnId.Content = transaction.Id;
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? ColorHelpers.FromRGBA(defaultColor)!.Value);
+        BtnId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
+        NotifyPropertyChanged("BtnIdBackground");
+        NotifyPropertyChanged("BtnIdForeground");
         LblName.Text = transaction.Description;
         LblDescription.Text = transaction.Date.ToString("d", _cultureDate);
         if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
@@ -128,4 +167,6 @@ public sealed partial class TransactionRow : UserControl, IModelRowControl<Trans
             DeleteTriggered?.Invoke(this, Id);
         }
     }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

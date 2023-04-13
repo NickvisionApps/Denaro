@@ -83,7 +83,9 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         Calendar.FirstDayOfWeek = (Windows.Globalization.DayOfWeek)_controller.CultureForDateString.DateTimeFormat.FirstDayOfWeek;
         ExpDateRange.Header = _controller.Localizer["SelectRange"];
         DateRangeStart.Header = _controller.Localizer["Start", "DateRange"];
+        DateRangeStart.Language = _controller.CultureForDateString.Name;
         DateRangeEnd.Header = _controller.Localizer["End", "DateRange"];
+        DateRangeEnd.Language = _controller.CultureForDateString.Name;
         MenuResetAllFilters.Label = _controller.Localizer["ResetFilters", "All"];
         TxtSearchDescription.PlaceholderText = _controller.Localizer["SearchDescription", "Placeholder"];
         LblTransactions.Text = _controller.Localizer["Transactions"];

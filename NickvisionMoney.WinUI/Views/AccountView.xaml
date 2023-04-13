@@ -223,17 +223,17 @@
                                     <AppBarButton.Flyout>
                                         <MenuFlyout Placement="Bottom">
                                             <MenuFlyoutSubItem x:Name="MenuOrderBy">
-                                                <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuOrderByIncreasing" GroupName="MenuOrderBy" Click="MenuOrderBy_SelectionChanged"/>
 
-                                                <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" Click="MenuOrderBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuOrderByDecreasing" GroupName="MenuOrderBy" Click="MenuOrderBy_SelectionChanged"/>
                                             </MenuFlyoutSubItem>
 
                                             <MenuFlyoutSubItem x:Name="MenuSortBy">
-                                                <RadioMenuFlyoutItem x:Name="MenuSortById" Click="MenuSortBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuSortById" GroupName="MenuSortBy" Click="MenuSortBy_SelectionChanged"/>
 
-                                                <RadioMenuFlyoutItem x:Name="MenuSortByDate" Click="MenuSortBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuSortByDate" GroupName="MenuSortBy" Click="MenuSortBy_SelectionChanged"/>
 
-                                                <RadioMenuFlyoutItem x:Name="MenuSortByAmount" Click="MenuSortBy_SelectionChanged"/>
+                                                <RadioMenuFlyoutItem x:Name="MenuSortByAmount" GroupName="MenySortBy" Click="MenuSortBy_SelectionChanged"/>
                                             </MenuFlyoutSubItem>
                                         </MenuFlyout>
                                     </AppBarButton.Flyout>
