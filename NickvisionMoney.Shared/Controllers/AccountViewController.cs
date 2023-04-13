@@ -197,11 +197,13 @@ public class AccountViewController : IDisposable
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             if (_account.Metadata.UseCustomCurrency)
             {
-                culture.NumberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
                 culture.NumberFormat.CurrencySymbol = _account.Metadata.CustomCurrencySymbol ?? culture.NumberFormat.CurrencySymbol;
                 culture.NumberFormat.CurrencyDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator ?? culture.NumberFormat.CurrencyDecimalSeparator;
+                culture.NumberFormat.NumberDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator ?? culture.NumberFormat.NumberDecimalSeparator;
                 culture.NumberFormat.CurrencyGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator ?? culture.NumberFormat.CurrencyGroupSeparator;
+                culture.NumberFormat.NumberGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator ?? culture.NumberFormat.NumberGroupSeparator;
                 culture.NumberFormat.CurrencyDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
+                culture.NumberFormat.NumberDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
                 culture.NumberFormat.NaNSymbol = _account.Metadata.CustomCurrencyCode ?? region.ISOCurrencySymbol;
             }
             else
