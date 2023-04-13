@@ -34,7 +34,22 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="BtnId" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0" CornerRadius="10" Click="Edit"/>
+            <Button x:Name="BtnId" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0" CornerRadius="10" Click="Edit">
+                <Button.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.ThemeDictionaries>
+                            <ResourceDictionary x:Key="Dark">
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding BtnIdForeground, Mode=OneWay}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding BtnIdBackground, Mode=OneWay}"/>
+                            </ResourceDictionary>
+                            <ResourceDictionary x:Key="Light">
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding BtnIdForeground, Mode=OneWay}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding BtnIdBackground, Mode=OneWay}"/>
+                            </ResourceDictionary>
+                        </ResourceDictionary.ThemeDictionaries>
+                    </ResourceDictionary>
+                </Button.Resources>
+            </Button>
 
             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,20,0" Orientation="Vertical">
                 <TextBlock x:Name="LblName" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
