@@ -58,9 +58,9 @@ public partial class Program
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.4.1-next";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to add extra notes to a transaction</li><li>Fixed an issue where using custom separators wouldn't parse correctly</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
-        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/nlogozzo/NickvisionMoney");
-        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/nlogozzo/NickvisionMoney/issues/new");
-        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/nlogozzo/NickvisionMoney/discussions");
+        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
+        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
+        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
         _application.OnActivate += OnActivate;
         g_signal_connect_data(_application.Handle, "open", OnOpen, IntPtr.Zero, IntPtr.Zero, 0);
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
