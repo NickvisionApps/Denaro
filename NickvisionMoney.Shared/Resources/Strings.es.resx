@@ -918,4 +918,16 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
   <data name="Color.UseGroup" xml:space="preserve">
     <value>Usar color de grupo</value>
   </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Gestionar los campos adicionales de la transacción.</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Escriba aquí las notas</value>
+  </data>
 </root>
