@@ -799,4 +799,33 @@ Traductors :
   <data name="AllAccounts" xml:space="preserve">
     <value>Totes los comptes</value>
   </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Configuracion del compte (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Triar</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Triar per</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Ascendent</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Descendent</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Triar per</value>
+  </data>
+  <data name="AddPasswordToPDF.Description" xml:space="preserve">
+    <value>Volètz protegir aqueste fichièr PDF amb un senhal ?
+
+En cas de pèrda del senhal lo document serà inaccessible.</value>
+  </data>
+  <data name="PDFPassword" xml:space="preserve">
+    <value>Senhal PDF</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
 </root>
