@@ -948,9 +948,10 @@ public class AccountViewController : IDisposable
     /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    public void ExportToCSV(string path)
+    /// <param name="exportMode">The information to export</param>
+    public void ExportToCSV(string path, ExportMode exportMode)
     {
-        if (_account.ExportToCSV(path))
+        if (_account.ExportToCSV(path, exportMode))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
@@ -964,10 +965,11 @@ public class AccountViewController : IDisposable
     /// Exports the account to a PDF file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="exportMode">The information to export</param>
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
-    public void ExportToPDF(string path, string? password)
+    public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        if (_account.ExportToPDF(path, password))
+        if (_account.ExportToPDF(path, exportMode, password))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }

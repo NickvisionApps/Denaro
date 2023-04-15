@@ -293,6 +293,14 @@
 		<value>Export to File</value>
 	</data>
 
+	<data name="ExportToFile.All" xml:space="preserve">
+		<value>Export All Information</value>
+	</data>
+
+	<data name="ExportToFile.Current" xml:space="preserve">
+		<value>Export Current View</value>
+	</data>
+
 	<data name="Overview" xml:space="preserve">
 		<value>Overview</value>
 	</data>

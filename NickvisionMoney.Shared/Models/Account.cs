@@ -20,6 +20,12 @@ using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
 
+public enum ExportMode
+{
+    All,
+    CurrentView
+};
+
 /// <summary>
 /// A model of an account
 /// </summary>
@@ -1455,8 +1461,9 @@ public class Account : IDisposable
     /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
+    /// <param name="exportMode">The information to export</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToCSV(string path)
+    public bool ExportToCSV(string path, ExportMode exportMode)
     {
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Notes\n";
@@ -1488,9 +1495,10 @@ public class Account : IDisposable
     /// Exports the account to a PDF file
     /// </summary>
     /// <param name="path">The path to the PDF file</param>
+    /// <param name="exportMode">The information to export</param>
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToPDF(string path, string? password)
+    public bool ExportToPDF(string path, ExportMode exportMode, string? password)
     {
         try
         {
@@ -1803,7 +1811,7 @@ public class Account : IDisposable
     {
         if (!_isEncrypted.GetValueOrDefault())
         {
-            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
+            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All);
         }
     }
 }
