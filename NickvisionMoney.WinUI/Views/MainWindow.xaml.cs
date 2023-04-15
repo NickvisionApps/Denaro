@@ -284,7 +284,7 @@ public sealed partial class MainWindow : Window
         {
             lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         }
-        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
+        await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Denaro/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/index.html"));
     }
 
     /// <summary>
@@ -319,7 +319,7 @@ public sealed partial class MainWindow : Window
                 {
                     lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
                 }
-                await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/import-export.html"));
+                await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Denaro/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/import-export.html"));
             };
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }

@@ -7,8 +7,8 @@
   <name xml:lang="en">Denaro</name>
   <shortdesc xml:lang="en">Manage your personal finances</shortdesc>
   <description xml:lang="en">Manage your personal finances</description>
-  <homepage rdf:resource="https://github.com/nlogozzo/NickvisionMoney" />
-  <bug-database rdf:resource="https://github.com/nlogozzo/NickvisionMoney/issues"/>
+  <homepage rdf:resource="https://github.com/NickvisionApps/Denaro" />
+  <bug-database rdf:resource="https://github.com/NickvisionApps/Denaro/issues"/>
   <download-page rdf:resource="https://flathub.org/apps/details/org.nickvision.money" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
   <programming-language>C#</programming-language>
