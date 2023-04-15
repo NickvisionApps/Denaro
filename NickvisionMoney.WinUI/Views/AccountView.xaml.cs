@@ -59,6 +59,10 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         MenuImportFromFile.Label = _controller.Localizer["ImportFromFile"];
         ToolTipService.SetToolTip(MenuImportFromFile, _controller.Localizer["ImportFromFile", "Tooltip"]);
         MenuExportToFile.Label = _controller.Localizer["ExportToFile"];
+        MenuCSVExportAll.Text = _controller.Localizer["ExportToFile", "All"];
+        MenuCSVExportCurrent.Text = _controller.Localizer["ExportToFile", "Current"];
+        MenuPDFExportAll.Text = _controller.Localizer["ExportToFile", "All"];
+        MenuPDFExportCurrent.Text = _controller.Localizer["ExportToFile", "Current"];
         ToolTipService.SetToolTip(MenuShowHideGrous, _controller.Localizer["ToggleGroups", "Tooltip"]);
         MenuAccountSettings.Label = _controller.Localizer["AccountSettings"];
         ToolTipService.SetToolTip(MenuAccountSettings, _controller.Localizer["AccountSettings", "Tooltip"]);
@@ -679,7 +683,12 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         var file = await fileSavePicker.PickSaveFileAsync();
         if (file != null)
         {
-            _controller.ExportToCSV(file.Path);
+            var exportMode = ExportMode.All;
+            if(((Button)sender!).Name == "MenuCSVExportCurrent")
+            {
+                exportMode = ExportMode.CurrentView;
+            }
+            _controller.ExportToCSV(file.Path, exportMode);
         }
     }
 
@@ -718,7 +727,12 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                 };
                 password = await newPasswordDialog.ShowAsync();
             }
-            _controller.ExportToPDF(file.Path, password);
+            var exportMode = ExportMode.All;
+            if (((Button)sender!).Name == "MenuPDFExportCurrent")
+            {
+                exportMode = ExportMode.CurrentView;
+            }
+            _controller.ExportToPDF(file.Path, exportMode, password);
         }
     }
 
