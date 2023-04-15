@@ -20,29 +20,29 @@
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/MainWindow.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/MainWindow.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/Transaction.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/Transaction.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/AccountSettings.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/AccountSettings.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/nlogozzo/NickvisionMoney/master/NickvisionMoney.GNOME/Screenshots/PasswordDialog.png</image>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/PasswordDialog.png</image>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://github.com/nlogozzo/NickvisionMoney</url>
-  <url type="bugtracker">https://github.com/nlogozzo/NickvisionMoney/issues</url>
+  <url type="homepage">https://github.com/NickvisionApps/Denaro</url>
+  <url type="bugtracker">https://github.com/NickvisionApps/Denaro/issues</url>
   <url type="donation">https://github.com/sponsors/nlogozzo</url>
   <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
   <project_group>Nickvision</project_group>
