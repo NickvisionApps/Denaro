@@ -18,6 +18,7 @@ public class AccountViewController : IDisposable
     private bool _isOpened;
     private bool _disposed;
     private readonly Account _account;
+    private List<uint>? _filteredIds;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
@@ -76,6 +77,7 @@ public class AccountViewController : IDisposable
     /// The path of the account
     /// </summary>
     public string AccountPath => _account.Path;
+    /// <summary>
     /// Whether or not the account needs a password
     /// </summary>
     public bool AccountNeedsPassword => _account.IsEncrypted;
@@ -951,7 +953,7 @@ public class AccountViewController : IDisposable
     /// <param name="exportMode">The information to export</param>
     public void ExportToCSV(string path, ExportMode exportMode)
     {
-        if (_account.ExportToCSV(path, exportMode))
+        if (_account.ExportToCSV(path, exportMode, _filteredIds))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
@@ -969,7 +971,7 @@ public class AccountViewController : IDisposable
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        if (_account.ExportToPDF(path, exportMode, password))
+        if (_account.ExportToPDF(path, exportMode, _filteredIds, password))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
         }
@@ -1028,7 +1030,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     private void FilterUIUpdate()
     {
-        var filteredTransactions = new List<uint>();
+        _filteredIds = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1057,15 +1059,15 @@ public class AccountViewController : IDisposable
                     continue;
                 }
             }
-            filteredTransactions.Add(pair.Value.Id);
+            _filteredIds.Add(pair.Value.Id);
         }
-        FilteredTransactionsCount = filteredTransactions.Count;
+        FilteredTransactionsCount = _filteredIds.Count;
         if (FilteredTransactionsCount > 0)
         {
             //Update UI
             foreach (var pair in TransactionRows)
             {
-                if (filteredTransactions.Contains(pair.Value.Id))
+                if (_filteredIds.Contains(pair.Value.Id))
                 {
                     pair.Value.Show();
                 }

@@ -56,7 +56,6 @@ public class Account : IDisposable
     /// Whether or not an account needs to be setup
     /// </summary>
     public bool NeedsAccountSetup { get; private set; }
-
     /// <summary>
     /// The next available group id
     /// </summary>
@@ -1462,12 +1461,13 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
     /// <param name="exportMode">The information to export</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToCSV(string path, ExportMode exportMode)
+    public bool ExportToCSV(string path, ExportMode exportMode, List<uint> filteredIds)
     {
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Notes\n";
-        foreach (var pair in Transactions)
+        foreach (var pair in (exportMode == ExportMode.All ? Transactions : Transactions.Where(x => filteredIds!.Contains(x.Key))))
         {
             result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
             if (pair.Value.GroupId != -1)
@@ -1496,9 +1496,10 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path to the PDF file</param>
     /// <param name="exportMode">The information to export</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToPDF(string path, ExportMode exportMode, string? password)
+    public bool ExportToPDF(string path, ExportMode exportMode, List<uint>? filteredIds, string? password)
     {
         try
         {
@@ -1681,7 +1682,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["Notes", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
-                            foreach (var pair in Transactions)
+                            foreach (var pair in (exportMode == ExportMode.All ? Transactions : Transactions.Where(x => filteredIds!.Contains(x.Key))))
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
@@ -1744,7 +1745,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["Receipt", "Field"]).SemiBold();
                             //Data
                             var i = 0;
-                            foreach (var pair in Transactions)
+                            foreach (var pair in (exportMode == ExportMode.All ? Transactions : Transactions.Where(x => filteredIds!.Contains(x.Key))))
                             {
                                 if (pair.Value.Receipt != null)
                                 {
@@ -1811,7 +1812,7 @@ public class Account : IDisposable
     {
         if (!_isEncrypted.GetValueOrDefault())
         {
-            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All);
+            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All, new List<uint>());
         }
     }
 }
