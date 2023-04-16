@@ -924,4 +924,16 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
   <data name="OrderBy.Decreasing" xml:space="preserve">
     <value>Silazno</value>
   </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Dodatno</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Upravljaj dodatnim poljima transakcije.</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Bilješke</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Upiši bilješke ovdje</value>
+  </data>
 </root>
