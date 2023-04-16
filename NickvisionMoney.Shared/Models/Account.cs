@@ -1672,7 +1672,7 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
+                            tbl.Cell().ColumnSpan(8).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
