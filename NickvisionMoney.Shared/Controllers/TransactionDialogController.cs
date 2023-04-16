@@ -296,7 +296,7 @@ public class TransactionDialogController : IDisposable
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString.NumberFormat);
+            amount = decimal.Parse(CurrencyHelpers.ReplaceNativeDigits(amountString, CultureForNumberString), NumberStyles.Currency, CultureForNumberString.NumberFormat);
         }
         catch
         {

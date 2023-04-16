@@ -176,7 +176,7 @@ public class TransferDialogController
                     {
                         try
                         {
-                            conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                            conversionRate = decimal.Parse(CurrencyHelpers.ReplaceNativeDigits(sourceConversionAmountString, CultureForSourceNumberString), NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(CurrencyHelpers.ReplaceNativeDigits(destConversionAmountString, CultureForSourceNumberString), NumberStyles.Number, CultureForSourceNumberString);
                             if (conversionRate == 0)
                             {
                                 throw new ArgumentException();
@@ -196,7 +196,7 @@ public class TransferDialogController
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForSourceNumberString);
+            amount = decimal.Parse(CurrencyHelpers.ReplaceNativeDigits(amountString, CultureForSourceNumberString), NumberStyles.Currency, CultureForSourceNumberString);
         }
         catch
         {

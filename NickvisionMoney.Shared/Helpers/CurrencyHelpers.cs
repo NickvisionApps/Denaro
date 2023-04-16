@@ -55,4 +55,14 @@ public static class CurrencyHelpers
         }
         return result;
     }
+
+    public static string ReplaceNativeDigits(string amountString, CultureInfo culture)
+    {
+        var result = amountString;
+        foreach (var digit in culture.NumberFormat.NativeDigits)
+        {
+            result = result.Replace(digit, Array.FindIndex(culture.NumberFormat.NativeDigits, c => c == digit).ToString());
+        }
+        return result;
+    }
 }
