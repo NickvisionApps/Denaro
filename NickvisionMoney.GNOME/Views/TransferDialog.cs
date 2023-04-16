@@ -135,7 +135,7 @@ public partial class TransferDialog : Adw.Window
         {
             _recentAccountsButton.SetSensitive(false);
         }
-        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
+        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false, false));
         Validate();
     }
 

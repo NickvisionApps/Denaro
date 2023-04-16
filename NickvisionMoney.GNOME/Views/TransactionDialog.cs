@@ -317,7 +317,7 @@ public partial class TransactionDialog : Adw.Window
         gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);
         _descriptionRow.SetText(_controller.Transaction.Description);
-        _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false));
+        _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false, false));
         _incomeButton.SetActive(_controller.Transaction.Type == TransactionType.Income);
         _repeatIntervalRow.SetSelected(_controller.RepeatIntervalIndex);
         _dateDashLabel.SetVisible(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);

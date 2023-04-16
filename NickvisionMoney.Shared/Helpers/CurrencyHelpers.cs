@@ -14,8 +14,9 @@ public static class CurrencyHelpers
     /// <param name="amount">Amount decimal value</param>
     /// <param name="culture">Culture used for formatting</param>
     /// <param name="showCurrencySymbol">Whether to add currency symbol</param>
+    /// <paramref name="convertNativeDigits">Whether to convert Latin digits to native digits</paramref>
     /// <returns>Formatted amount string</returns>
-    public static string ToAmountString(this decimal amount, CultureInfo culture, bool showCurrencySymbol = true)
+    public static string ToAmountString(this decimal amount, CultureInfo culture, bool showCurrencySymbol = true, bool convertNativeDigits = true)
     {
         var result = Math.Abs(amount).ToString("C", culture);
         result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
@@ -39,7 +40,7 @@ public static class CurrencyHelpers
             };
             result = string.Format(formatString, result);
         }
-        if("0" != culture.NumberFormat.NativeDigits[0])
+        if(convertNativeDigits && "0" != culture.NumberFormat.NativeDigits[0])
         {
             result = result.Replace("0", culture.NumberFormat.NativeDigits[0])
                            .Replace("1", culture.NumberFormat.NativeDigits[1])

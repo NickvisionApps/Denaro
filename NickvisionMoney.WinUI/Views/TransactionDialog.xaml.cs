@@ -91,7 +91,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
-        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
+        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false, false);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
         foreach (var name in _controller.GroupNames)
