@@ -684,7 +684,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
         if (file != null)
         {
             var exportMode = ExportMode.All;
-            if(((Button)sender!).Name == "MenuCSVExportCurrent")
+            if(((MenuFlyoutItem)sender!).Name == "MenuCSVExportCurrent")
             {
                 exportMode = ExportMode.CurrentView;
             }
@@ -728,7 +728,7 @@ public sealed partial class AccountView : UserControl, INotifyPropertyChanged
                 password = await newPasswordDialog.ShowAsync();
             }
             var exportMode = ExportMode.All;
-            if (((Button)sender!).Name == "MenuPDFExportCurrent")
+            if (((MenuFlyoutItem)sender!).Name == "MenuPDFExportCurrent")
             {
                 exportMode = ExportMode.CurrentView;
             }
