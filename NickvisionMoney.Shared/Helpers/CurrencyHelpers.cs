@@ -39,6 +39,19 @@ public static class CurrencyHelpers
             };
             result = string.Format(formatString, result);
         }
+        if("0" != CultureInfo.CurrentCulture.NumberFormat.NativeDigits[0])
+        {
+            result = result.Replace("0", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[0])
+                           .Replace("1", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[1])
+                           .Replace("2", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[2])
+                           .Replace("3", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[3])
+                           .Replace("4", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[4])
+                           .Replace("5", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[5])
+                           .Replace("6", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[6])
+                           .Replace("7", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[7])
+                           .Replace("8", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[8])
+                           .Replace("9", CultureInfo.CurrentCulture.NumberFormat.NativeDigits[9]);
+        }
         return result;
     }
 }
