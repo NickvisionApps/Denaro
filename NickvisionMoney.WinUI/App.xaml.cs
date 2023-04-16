@@ -28,7 +28,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.ShortName = "Denaro";
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.4.1-next";
-        _mainWindowController.AppInfo.Changelog = "- Added the ability to add extra notes to a transaction\n- Fixed an issue where using custom separators wouldn't parse correctly\n- UI/UX tweaks\n- Updated and added translations (Thanks to everyone on Weblate)!";
+        _mainWindowController.AppInfo.Changelog = "- Added the ability to add extra notes to a transaction\n- Added the ability to choose to export all account information or the current filtered view\n- Fixed an issue where using custom separators wouldn't parse correctly\n- UI/UX tweaks\n- Updated and added translations (Thanks to everyone on Weblate)!";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");

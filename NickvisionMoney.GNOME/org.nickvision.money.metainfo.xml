@@ -55,6 +55,7 @@
     <release version="2023.4.1-next" date="2023-04-10">
       <description>
         <p>- Added the ability to add extra notes to a transaction</p>
+        <p>- Added the ability to choose to export all account information or the current filtered view</p>
         <p>- Fixed an issue where using custom separators wouldn't parse correctly</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
