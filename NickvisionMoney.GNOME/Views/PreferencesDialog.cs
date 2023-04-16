@@ -75,6 +75,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Widget _accountCheckingColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountSavingsColorButton;
     [Gtk.Connect] private readonly Gtk.Widget _accountBusinessColorButton;
+    [Gtk.Connect] private readonly Gtk.Switch _nativeDigitsSwitch;
     [Gtk.Connect] private readonly Adw.ComboRow _insertSeparatorRow;
     [Gtk.Connect] private readonly Adw.ViewStack _backupViewStack;
     [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
@@ -117,13 +118,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _accountBusinessColorDialog = gtk_color_dialog_new();
         gtk_color_dialog_set_with_alpha(_accountBusinessColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountBusinessColorButton.Handle, _accountBusinessColorDialog);
-        _insertSeparatorRow.OnNotify += (sender, e) =>
-        {
-            if (e.Pspec.GetName() == "selected-item")
-            {
-                _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();
-            }
-        };
         _selectBackupFolderButton.OnClicked += SelectBackupFolder;
         _backupFolderButton.OnClicked += SelectBackupFolder;
         _unsetBackupFolderButton.OnClicked += UnsetBackupFolder;
@@ -149,6 +143,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         var accountBusinessColor = new Color();
         gdk_rgba_parse(ref accountBusinessColor, _controller.AccountBusinessColor);
         gtk_color_dialog_button_set_rgba(_accountBusinessColorButton.Handle, ref accountBusinessColor);
+        _nativeDigitsSwitch.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (!string.IsNullOrEmpty(_controller.CSVBackupFolder))
         {
@@ -186,6 +181,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _controller.AccountSavingsColor = gdk_rgba_to_string(ref color);
         color = gtk_color_dialog_button_get_rgba(_accountBusinessColorButton.Handle);
         _controller.AccountBusinessColor = gdk_rgba_to_string(ref color);
+        _controller.UseNativeDigits = _nativeDigitsSwitch.GetActive();
+        _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();
         _controller.SaveConfiguration();
         Destroy();
     }

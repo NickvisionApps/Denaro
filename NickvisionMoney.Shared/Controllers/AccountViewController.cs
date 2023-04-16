@@ -66,6 +66,10 @@ public class AccountViewController : IDisposable
     public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
 
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
+    /// <summary>
     /// The default color to use for a transaction
     /// </summary>
     public string TransactionDefaultColor => Configuration.Current.TransactionDefaultColor;
@@ -100,7 +104,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{_account.TodayTotal.ToAmountString(CultureForNumberString)}";
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{_account.TodayTotal.ToAmountString(CultureForNumberString, UseNativeDigits)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -108,7 +112,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString);
+    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString, UseNativeDigits);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -116,7 +120,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString);
+    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString, UseNativeDigits);
     /// <summary>
     /// The count of transactions in the account
     /// </summary>

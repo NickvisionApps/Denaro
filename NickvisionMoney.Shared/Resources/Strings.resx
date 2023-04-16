@@ -1084,6 +1084,14 @@
 		<value>Customize how Denaro uses locale settings.</value>
 	</data>
 
+	<data name="UseNativeDigits" xml:space="preserve">
+		<value>Use Native Digits</value>
+	</data>
+
+	<data name="UseNativeDigits.Description" xml:space="preserve">
+		<value>Whether to use numerals that are native for your locale instead of latin digits.</value>
+	</data>
+
 	<data name="InsertSeparator" xml:space="preserve">
 		<value>Insert Decimal Separator</value>
 	</data>

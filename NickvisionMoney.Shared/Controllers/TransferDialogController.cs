@@ -64,6 +64,10 @@ public class TransferDialogController
     /// </summary>
     public string? DestinationCurrencyCode => CultureForDestNumberString == null ? null : CultureForDestNumberString.NumberFormat.NaNSymbol;
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
+    /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Configuration.Current.InsertSeparator;

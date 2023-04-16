@@ -69,6 +69,10 @@ public class Configuration
     /// </summary>
     public string AccountBusinessColor { get; set; }
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits { get; set; }
+    /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator { get; set; }
@@ -101,6 +105,7 @@ public class Configuration
         AccountCheckingColor = "rgb(129,61,156)";
         AccountSavingsColor = "rgb(53,132,228)";
         AccountBusinessColor = "rgb(38,162,105)";
+        UseNativeDigits = true;
         InsertSeparator = InsertSeparator.NumpadOnly;
         CSVBackupFolder = "";
     }

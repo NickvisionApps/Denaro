@@ -106,6 +106,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits
+    {
+        get => Configuration.Current.UseNativeDigits;
+
+        set => Configuration.Current.UseNativeDigits = value;
+    }
+
+    /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator

@@ -54,7 +54,7 @@ public partial class TransactionId : Gtk.Overlay
     /// </summary>
     /// <param name="colorString">Transaction color</param>
     /// <param name="defaultColor">A default color</param>
-    public void UpdateColor(string colorString, string defaultColor, bool convertNativeDigits = true)
+    public void UpdateColor(string colorString, string defaultColor, bool useNativeDigits)
     {
         var color = new Color();
         if (!gdk_rgba_parse(ref color, colorString))
@@ -66,7 +66,7 @@ public partial class TransactionId : Gtk.Overlay
         var blue = (int)(color.Blue * 255);
         var idString = _id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(convertNativeDigits && "0" != nativeDigits[0])
+        if(useNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])

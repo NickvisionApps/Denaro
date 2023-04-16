@@ -3,7 +3,7 @@ using Adw 1;
 
 Adw.PreferencesWindow _root {
   default-width: 600;
-  default-height: 550;
+  default-height: 610;
   width-request: 360;
   modal: true;
   destroy-with-parent: false;
@@ -110,6 +110,22 @@ Adw.PreferencesWindow _root {
       title: _("Locale");
       description: _("LocaleDescription");
       
+      Adw.ActionRow {
+        title: _("UseNativeDigits");
+        subtitle: _("UseNativeDigits.Description");
+        activatable-widget: _nativeDigitsSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "preferences-desktop-locale-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _nativeDigitsSwitch {
+          valign: center;
+        }
+      }
+
       Adw.ComboRow _insertSeparatorRow {
         title: _("InsertSeparator");
         subtitle: _("InsertSeparator.Description");

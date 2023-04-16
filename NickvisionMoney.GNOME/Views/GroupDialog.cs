@@ -57,7 +57,7 @@ public partial class GroupDialog : Adw.Window
 
     public event EventHandler? OnApply;
 
-    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent, bool convertNativeDigits = true) : base(builder.GetPointer("_root"), false)
+    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
         _controller = controller;
@@ -65,7 +65,7 @@ public partial class GroupDialog : Adw.Window
         builder.Connect(this);
         var idString = _controller.Group.Id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(convertNativeDigits && "0" != nativeDigits[0])
+        if(_controller.UseNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])

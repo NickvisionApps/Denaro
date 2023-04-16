@@ -29,7 +29,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Income.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"+ {controller.Income.Breakdowns[currency].Total.ToAmountString(culture)}\n";
+            suffix += $"+ {controller.Income.Breakdowns[currency].Total.ToAmountString(culture, controller.UseNativeDigits)}\n";
         }
         _incomeRow.SetSubtitle(subtitle.Trim('\n'));
         _incomeSuffix.SetText(suffix.Trim('\n'));
@@ -39,7 +39,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Expense.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"- {controller.Expense.Breakdowns[currency].Total.ToAmountString(culture)}\n";
+            suffix += $"- {controller.Expense.Breakdowns[currency].Total.ToAmountString(culture, controller.UseNativeDigits)}\n";
         }
         _expenseRow.SetSubtitle(subtitle.Trim('\n'));
         _expenseSuffix.SetText(suffix.Trim('\n'));
@@ -49,7 +49,7 @@ public class DashboardView : Gtk.ScrolledWindow
         {
             subtitle += controller.Total.Breakdowns[currency].PerAccount;
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            suffix += $"{(controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{controller.Total.Breakdowns[currency].Total.ToAmountString(culture)}\n";
+            suffix += $"{(controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{controller.Total.Breakdowns[currency].Total.ToAmountString(culture, controller.UseNativeDigits)}\n";
         }
         _totalRow.SetSubtitle(subtitle.Trim('\n'));
         _totalSuffix.SetText(suffix.Trim('\n'));
@@ -59,7 +59,7 @@ public class DashboardView : Gtk.ScrolledWindow
             row.SetTitle(pair.Key);
             row.AddCssClass("card");
             var prefix = new TransactionId(0, controller.Localizer);
-            prefix.UpdateColor(pair.Value.RGBA, "");
+            prefix.UpdateColor(pair.Value.RGBA, "", controller.UseNativeDigits);
             prefix.SetCompact(true);
             row.AddPrefix(prefix);
             var suffixBox = Gtk.Box.New(Gtk.Orientation.Vertical, 1);
@@ -70,7 +70,7 @@ public class DashboardView : Gtk.ScrolledWindow
             {
                 subtitle += pair.Value.DashboardAmount.Breakdowns[currency].PerAccount;
                 culture.NumberFormat.CurrencySymbol = currency.Symbol;
-                var suffixLabel = Gtk.Label.New($"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{pair.Value.DashboardAmount.Breakdowns[currency].Total.ToAmountString(culture)}");
+                var suffixLabel = Gtk.Label.New($"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{pair.Value.DashboardAmount.Breakdowns[currency].Total.ToAmountString(culture, controller.UseNativeDigits)}");
                 suffixLabel.AddCssClass(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "denaro-income" : "denaro-expense");
                 suffixLabel.SetHalign(Gtk.Align.End);
                 suffixBox.Append(suffixLabel);
