@@ -17,32 +17,32 @@
 		<value />
   </data>
   <data name="Version" xml:space="preserve">
-		<value />
+		<value>Versioon: {0}</value>
   </data>
   <data name="About" xml:space="preserve">
-		<value />
+		<value>Teave - {0}</value>
   </data>
   <data name="Help" xml:space="preserve">
-		<value />
+		<value>Abi</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-		<value />
+		<value>Muudatused</value>
   </data>
   <data name="GitHubRepo" xml:space="preserve">
 		<value />
   </data>
   <data name="MatrixChat" xml:space="preserve">
-		<value />
+		<value>Matrixi jututuba</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-		<value />
+		<value>Teata veast</value>
   </data>
   <data name="Discussions" xml:space="preserve">
-		<value />
+		<value>Vestlused</value>
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value />
+		<value>Tegijad</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -62,71 +62,71 @@
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
-		<value />
+		<value>OK</value>
   </data>
   <data name="Yes" xml:space="preserve">
-		<value />
+		<value>Jah</value>
   </data>
   <data name="No" xml:space="preserve">
-		<value />
+		<value>Ei</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-		<value />
+		<value>Tühista</value>
   </data>
   <data name="New" xml:space="preserve">
-		<value />
+		<value>Uus</value>
   </data>
   <data name="Open" xml:space="preserve">
-		<value />
+		<value>Ava</value>
   </data>
   <data name="Close" xml:space="preserve">
-		<value />
+		<value>Sulge</value>
   </data>
   <data name="Save" xml:space="preserve">
-		<value />
+		<value>Salvesta</value>
   </data>
   <data name="Back" xml:space="preserve">
-		<value />
+		<value>Tagasi</value>
   </data>
   <data name="Add" xml:space="preserve">
-		<value />
+		<value>Lisa</value>
   </data>
   <data name="Remove" xml:space="preserve">
-		<value />
+		<value>Eemalda</value>
   </data>
   <data name="Apply" xml:space="preserve">
-		<value />
+		<value>Rakenda</value>
   </data>
   <!--Pages-->
   <data name="Home" xml:space="preserve">
 		<value />
   </data>
   <data name="Account" xml:space="preserve">
-		<value />
+		<value>Konto</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
-    <value />
+    <value>Sätted</value>
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value />
+    <value>Eelistused</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value />
+		<value>Kiirklahvid</value>
   </data>
   <data name="Quit" xml:space="preserve">
-		<value />
+		<value>Lahku</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value />
+		<value>Nickvision Denaro konto</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value />
+		<value>Uus konto</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>Uus konto (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
 		<value />
@@ -150,29 +150,29 @@
 		<value />
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value />
+		<value>Kõik failid</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value />
+    <value>Tere päevast!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value />
+    <value>Tere hommikust!</value>
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value />
+    <value>Tere päevast!</value>
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value />
+    <value>Tere õhtust!</value>
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value />
+    <value>Head ööd!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
 		<value />
@@ -212,28 +212,28 @@
 		<value />
   </data>
   <data name="Overview" xml:space="preserve">
-		<value />
+		<value>Ülevaade</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value />
+		<value>Tänane ülevaade</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value />
+		<value>Kokku</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value />
+		<value>Tulu</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value />
+		<value>Kulu</value>
   </data>
   <data name="Groups" xml:space="preserve">
 		<value />
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value />
+		<value>Tehingud</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value />
+		<value>Pole tehinguid</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
 		<value />
@@ -251,7 +251,7 @@
 		<value />
   </data>
   <data name="Filters" xml:space="preserve">
-		<value />
+		<value>Filtrid</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
 		<value />
@@ -263,7 +263,7 @@
 		<value />
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value />
+		<value>Kalender</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
 		<value />
@@ -287,7 +287,7 @@
 		<value />
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Kustuta tehing</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
 		<value />
@@ -326,7 +326,7 @@
 		<value />
   </data>
   <data name="Hide" xml:space="preserve">
-		<value />
+		<value>Peida</value>
   </data>
   <data name="HideGroups" xml:space="preserve">
 		<value />
@@ -764,5 +764,17 @@
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
 		<value />
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Kontod</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>Tehing ({0})</value>
+  </data>
+  <data name="TransactionNumber.Plural" xml:space="preserve">
+    <value>Tehingud ({0})</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sorteeri</value>
   </data>
 </root>
