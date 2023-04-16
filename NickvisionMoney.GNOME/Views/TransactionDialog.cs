@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -156,7 +157,7 @@ public partial class TransactionDialog : Adw.Window
 
     public event EventHandler? OnApply;
 
-    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent, bool convertNativeDigits = true) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
         _controller = controller;
@@ -180,7 +181,22 @@ public partial class TransactionDialog : Adw.Window
                 }
             }
         };
-        _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}");
+        var idString = _controller.Transaction.Id.ToString();
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if(convertNativeDigits && "0" != nativeDigits[0])
+        {
+            idString = idString.Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {idString}");
         _copyButton.SetVisible(_controller.CanCopy);
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) =>

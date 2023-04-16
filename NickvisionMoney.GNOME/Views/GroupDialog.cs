@@ -1,6 +1,7 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -45,6 +46,7 @@ public partial class GroupDialog : Adw.Window
     private readonly GroupDialogController _controller;
     private readonly nint _colorDialog;
 
+    [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
@@ -55,12 +57,28 @@ public partial class GroupDialog : Adw.Window
 
     public event EventHandler? OnApply;
 
-    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent, bool convertNativeDigits = true) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
         _controller = controller;
         //Build UI
         builder.Connect(this);
+        var idString = _controller.Group.Id.ToString();
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if(convertNativeDigits && "0" != nativeDigits[0])
+        {
+            idString = idString.Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        _titleLabel.SetLabel($"{_controller.Localizer["Group"]} - {idString}");
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
