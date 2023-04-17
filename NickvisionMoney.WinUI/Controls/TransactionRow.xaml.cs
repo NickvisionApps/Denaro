@@ -25,6 +25,7 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
     private Localizer _localizer;
     private int _repeatFrom;
     private Dictionary<uint, Group> _groups;
+    private bool _useNativeDigits;
 
     /// <summary>
     /// The Id of the Transaction the row represents
@@ -53,14 +54,16 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
     /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="useNativeDigits">Whether to use native digits</param>
     /// <param name="defaultColor">The default color for the row</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, bool useNativeDigits, string defaultColor, Localizer localizer)
     {
         InitializeComponent();
         DataContext = this;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
+        _useNativeDigits = useNativeDigits;
         _localizer = localizer;
         _repeatFrom = 0;
         _groups = groups;
@@ -139,7 +142,7 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
         {
             LblDescription.Text += $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}";
         }
-        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToAmountString(_cultureAmount)}";
+        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}";
     }
 
     /// <summary>

@@ -45,19 +45,19 @@ public sealed partial class DashboardPage : UserControl
         {
             LblIncomeBreakdown.Text += _controller.Income.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            LblIncomeTotal.Text += $"{(_controller.Income.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Income.Breakdowns[currency].Total.ToAmountString(culture)}\n\n";
+            LblIncomeTotal.Text += $"{(_controller.Income.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Income.Breakdowns[currency].Total.ToAmountString(culture, _controller.UseNativeDigits)}\n\n";
         }
         foreach (var currency in _controller.Expense.Currencies)
         {
             LblExpenseBreakdown.Text += _controller.Expense.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            LblExpenseTotal.Text += $"{(_controller.Expense.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Expense.Breakdowns[currency].Total.ToAmountString(culture)}\n\n";
+            LblExpenseTotal.Text += $"{(_controller.Expense.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Expense.Breakdowns[currency].Total.ToAmountString(culture, _controller.UseNativeDigits)}\n\n";
         }
         foreach (var currency in _controller.Total.Currencies)
         {
             LblTotalBreakdown.Text += _controller.Total.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
             culture.NumberFormat.CurrencySymbol = currency.Symbol;
-            LblTotalTotal.Text += $"{(_controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Total.Breakdowns[currency].Total.ToAmountString(culture)}\n\n";
+            LblTotalTotal.Text += $"{(_controller.Total.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{_controller.Total.Breakdowns[currency].Total.ToAmountString(culture, _controller.UseNativeDigits)}\n\n";
         }
         BorderIncome.Background = new SolidColorBrush(Color.FromArgb(255, 38, 162, 105));
         BorderExpense.Background = new SolidColorBrush(Color.FromArgb(255, 192, 28, 40));
@@ -86,7 +86,7 @@ public sealed partial class DashboardPage : UserControl
             {
                 lblGroupBreakdown.Text += pair.Value.DashboardAmount.Breakdowns[currency].PerAccount.Replace("\n", "\n\n");
                 culture.NumberFormat.CurrencySymbol = currency.Symbol;
-                lblGroupTotal.Text += $"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{pair.Value.DashboardAmount.Breakdowns[currency].Total.ToAmountString(culture)}\n\n";
+                lblGroupTotal.Text += $"{(pair.Value.DashboardAmount.Breakdowns[currency].Total >= 0 ? "+ " : "- ")}{pair.Value.DashboardAmount.Breakdowns[currency].Total.ToAmountString(culture, _controller.UseNativeDigits)}\n\n";
             }
             dockPanel.Children.Add(lblGroupTotal);
             dockPanel.Children.Add(groupSeparator);
