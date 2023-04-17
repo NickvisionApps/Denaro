@@ -930,4 +930,20 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
   <data name="Notes.Placeholder" xml:space="preserve">
     <value>Escriba aquí las notas</value>
   </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Exportar toda la información</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Exportar vista actual</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Usar dígitos nativos</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Si usar numerales que son nativos para su localización en lugar de dígitos latinos.</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
 </root>
