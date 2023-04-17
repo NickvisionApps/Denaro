@@ -939,4 +939,16 @@ Tobias Bernard https://github.com/bertob</value>
   <data name="Extras" xml:space="preserve">
     <value>Прочее</value>
   </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Экспортировать всю информацию</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Экспортировать текущий вид</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Использовать местные цифры</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Должно приложение использовать цифры, родные для вашего региона, вместо арабских цифр.</value>
+  </data>
 </root>
