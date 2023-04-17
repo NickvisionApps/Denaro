@@ -924,4 +924,16 @@ In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
   <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
     <value>Inserire un separatore dei gruppi valido</value>
   </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extra</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Gestisci i campi extra della transazione.</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Inserisci note qui</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Note</value>
+  </data>
 </root>

@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>Um gestor de finanças pessoais</value>
+		<value>Gerencie suas finanças pessoais</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>Versão: {0}</value>
@@ -614,61 +614,61 @@ Qualquer trabalho não salvo será perdido.</value>
     <value>Não foi possível conectar em sua conta. Senha inserida está incorreta.</value>
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-    <value>Sort By Id</value>
+    <value>Organizar por Id</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-    <value>Sort By Date</value>
+    <value>Organizar por Data</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-    <value>Sort By Amount</value>
+    <value>Organizar por Quantidade</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-    <value>Search by description</value>
+    <value>Pesquisar por descrição</value>
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-    <value>The password of the account was removed.</value>
+    <value>A senha da conta foi removida.</value>
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-    <value>The password of the account was changed.</value>
+    <value>A senha da conta foi alterada.</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
-    <value>Make a Copy</value>
+    <value>Criar uma Cópia</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
-    <value>(Copy)</value>
+    <value>(Copiar)</value>
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-    <value>Enter conversion here</value>
+    <value>Insira a conversão aqui</value>
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
-    <value>Conversion Needed</value>
+    <value>Conversão Necessária</value>
   </data>
   <data name="Result" xml:space="preserve">
-    <value>Result</value>
+    <value>Resultado</value>
   </data>
   <data name="AccountType.Checking" xml:space="preserve">
-    <value>Checking</value>
+    <value>Verificando</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-    <value>Savings</value>
+    <value>Economias</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
-    <value>Business</value>
+    <value>Negócio</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-    <value>This is only a useful label that doesn't affect how the app works.</value>
+    <value>Esta é apenas uma etiqueta útil que não afeta o funcionamento do aplicativo.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
     <value>N/A</value>
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
-    <value>Your system reported that your currency is</value>
+    <value>Seu sistema relatou que sua moeda é</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-    <value>Change Password</value>
+    <value>Alterar Senha</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-    <value>Set a new password or remove one.</value>
+    <value>Definir uma nova senha ou remover uma.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
     <value>Se a palavra-passe for perdida, não será possível restaurar o ficheiro!</value>
@@ -680,61 +680,61 @@ Qualquer trabalho não salvo será perdido.</value>
     <value>Account Type</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-    <value>Default Transaction Type</value>
+    <value>Tipo de Transação Padrão</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
-    <value>Use Custom Currency</value>
+    <value>Usar Moeda Personalizada</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
     <value>Currency Symbol</value>
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-    <value>Enter symbol here</value>
+    <value>Insira o símbolo aqui</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-    <value>Currency Symbol (Empty)</value>
+    <value>Símbolo da Moeda (Vazio)</value>
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
     <value>Currency Code</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-    <value>Currency Code (Empty)</value>
+    <value>Código da Moeda (Vazio)</value>
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-    <value>Enter code here</value>
+    <value>Insira o código aqui</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
-    <value>Enter password here</value>
+    <value>Insira a senha aqui</value>
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-    <value>New Password</value>
+    <value>Nova Senha</value>
   </data>
   <data name="ConfirmPassword.Field" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>Confirmar Senha</value>
   </data>
   <data name="DestinationPassword.Field" xml:space="preserve">
     <value>Destination Account Password</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-    <value>Destination Account Password (Required)</value>
+    <value>Senha da Conta de Destino (Obrigatório)</value>
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-    <value>Destination Account Password (Invalid)</value>
+    <value>Senha da Conta de Destino (Inválida)</value>
   </data>
   <data name="Generated.PDF" xml:space="preserve">
-    <value>Generated: {0}</value>
+    <value>Gerados: {0}</value>
   </data>
   <data name="Currency.PDF" xml:space="preserve">
     <value>Currency</value>
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
-    <value>Group Name</value>
+    <value>Nome do Grupo</value>
   </data>
   <data name="Receipts.PDF" xml:space="preserve">
-    <value>Receipts</value>
+    <value>Recibos</value>
   </data>
   <data name="PageNumber.PDF" xml:space="preserve">
     <value>Page {0}</value>
@@ -743,37 +743,37 @@ Qualquer trabalho não salvo será perdido.</value>
     <value>Enter Password To Login:</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-    <value>Unlock</value>
+    <value>Desbloquear</value>
   </data>
   <data name="AccountCheckingColor" xml:space="preserve">
-    <value>Checking Account Color</value>
+    <value>Cor da Conta Corrente</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-    <value>Savings Account Color</value>
+    <value>Cor da Conta de Poupança</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-    <value>Business Account Color</value>
+    <value>Cor da Conta Empresarial</value>
   </data>
   <data name="Locale" xml:space="preserve">
-    <value>Locale</value>
+    <value>Localidade</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-    <value>Customize how Denaro uses locale settings.</value>
+    <value>Personalizar como o Denaro utiliza as configurações de localidade.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-    <value>Insert Decimal Separator</value>
+    <value>Inserir Separador Decimal</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-    <value>Set for which keys pressed will the locale's decimal separator be inserted into an amount field.</value>
+    <value>Definir para quais teclas pressionadas o separador decimal da localidade será inserido em um campo de valor.</value>
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
-    <value>Off</value>
+    <value>Desligado</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-    <value>Numpad period only</value>
+    <value>Apenas ponto do teclado numérico</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-    <value>Period and Comma</value>
+    <value>Ponto Final e Vírgula</value>
   </data>
   <data name="Preview.WinUI" xml:space="preserve">
     <value>PREVIEW</value>
@@ -782,13 +782,13 @@ Qualquer trabalho não salvo será perdido.</value>
     <value>Manage your personal finances</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-    <value>money;finance;wallet;cash;bank;GTK;Nickvision;</value>
+    <value>dinheiro;finanças;carteira;dinheiro em espécie;banco;GTK;Nickvision;</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-    <value>New Window</value>
+    <value>Nova Janela</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-    <value>The password will be removed upon closing this dialog.</value>
+    <value>A senha será removida ao fechar esta caixa de diálogo.</value>
   </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
     <value>Adicionar palavra-passe ao PDF?</value>
@@ -859,10 +859,10 @@ Se a palavra-passe for perdida, o PDF ficará inacessível.</value>
     <value>Não é possível acessar a pasta selecionada. Verifique as permissões do Flatpak.</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transação</value>
+    <value>Transação ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transações</value>
+    <value>Transações ({0})</value>
   </data>
   <data name="Backup" xml:space="preserve">
     <value>Backup</value>
@@ -874,9 +874,66 @@ Se a palavra-passe for perdida, o PDF ficará inacessível.</value>
     <value>Pasta de Backup para os CSV</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>As contas serão exportadas automaticamente como ficheiros CSV para esta pasta quando uma alteração for feita.</value>
+    <value>Contas não criptografadas serão exportadas automaticamente como arquivos CSV para esta pasta quando uma alteração for feita.</value>
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
     <value>Nenhuma Pasta de Backup</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Painel</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Contas</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} de {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Todas as Contas</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Redefinir Todos os Filtros</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Configurações de Conta (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Usar cor do grupo</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Cor Padrão do Grupo</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Gerenciar campos extras da transação.</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Usar cor específica</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Insira notas aqui</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Mudanças nesta configuração apenas serão aplicadas em novos grupos.</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Ordem Crescente</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Ordem Decrescente</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
   </data>
 </root>

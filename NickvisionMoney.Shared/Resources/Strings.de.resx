@@ -925,4 +925,16 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   <data name="GroupColorDescription" xml:space="preserve">
     <value>Eine Änderung dieser Einstellung wird nur auf neue Gruppen angewendet.</value>
   </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Verwalte Extra-Felder der Transaktion.</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Notizen hier eingeben</value>
+  </data>
 </root>
