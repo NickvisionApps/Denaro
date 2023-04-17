@@ -54,7 +54,7 @@ public partial class Program
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.ID = "org.nickvision.money";
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
-        _mainWindowController.AppInfo.ShortName = "Denaro";
+        _mainWindowController.AppInfo.ShortName = _mainWindowController.Localizer["ShortName"];
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
         _mainWindowController.AppInfo.Version = "2023.4.1-beta1";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to add extra notes to a transaction</li><li>Added the ability to choose to export all account information or the current filtered view</li><li>Added support for using native digits (instead of just Latin digits) when working with numeric amounts</li><li>Fixed an issue where using custom separators wouldn't parse correctly</li><li>Fixed an issue where CSV files were not exported in the correct format</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";

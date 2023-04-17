@@ -155,8 +155,10 @@ _translate_meta PREFIX:
     print("\033[1m# Translating desktop and metainfo files\033[0m")
     resx_dir = (Path(os.getcwd()) / '../{{project_name}}.Shared/Resources/').resolve()
     regex = re.compile(r'Strings\.(.+)\.resx')
+    desktop_names = []
     desktop_comments = []
     desktop_keywords = []
+    meta_names = {}
     meta_summaries = {}
     meta_descriptions = {}
     for filename in os.listdir(resx_dir):
@@ -166,6 +168,11 @@ _translate_meta PREFIX:
             tree = ET.parse(f'{resx_dir}/{filename}')
             root = tree.getroot()
             for item in root.findall('./data'):
+                if item.attrib['name'] == 'ShortName':
+                    text = item.find('value').text
+                    if text:
+                        desktop_names.append(f'Name[{lang_code}]={text}')
+                        meta_names[lang_code] = ET.fromstring(f'<name xml:lang="{lang_code}">{text}</name>')
                 if item.attrib['name'] == 'Description':
                     text = item.find('value').text
                     if text:
@@ -189,6 +196,9 @@ _translate_meta PREFIX:
         new_contents = contents.copy()
     j = 0
     for i in range(len(contents)):
+        if contents[i].startswith('Name='):
+            new_contents.insert(j + 1, "\n".join(desktop_names) + "\n")
+            j += 1
         if contents[i].startswith('Comment='):
             new_contents.insert(j + 1, "\n".join(desktop_comments) + "\n")
             j += 1
@@ -202,6 +212,8 @@ _translate_meta PREFIX:
 
     with open('{{builddir}}{{PREFIX}}/share/metainfo/{{app_id}}.metainfo.xml', 'r') as f:
         metainfo = ET.fromstring(''.join(f.readlines()))
+        for i, v in enumerate(meta_names.values()):
+            metainfo.insert(list(metainfo).index(metainfo.find('name')) + i + 1, v)
         for i, v in enumerate(meta_summaries.values()):
             metainfo.insert(list(metainfo).index(metainfo.find('summary')) + i + 1, v)
         for v in meta_descriptions.values():
