@@ -57,7 +57,8 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value>David Lapshin https://github.com/daudix-UFO</value>
+    <value>David Lapshin https://github.com/daudix-UFO
+Tobias Bernard https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
@@ -834,13 +835,13 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
     <value>Insira o separador de grupo</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-    <value>{0} Transação</value>
+    <value>Transação ({0})</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
     <value>Nenhum</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-    <value>{0} Transações</value>
+    <value>Transações ({0})</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
     <value>Outro</value>
@@ -880,5 +881,47 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
     <value>Não é possível acessar a pasta selecionada. Verifique as permissões do Flatpak.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Painel</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Contas</value>
+  </data>
+  <data name="AmountFromAccount" xml:space="preserve">
+    <value>{0} de {1}</value>
+  </data>
+  <data name="AllAccounts" xml:space="preserve">
+    <value>Todas as Contas</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Usar cor do grupo</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Usar cor específica</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Redefinir Todos os Filtros</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Insira notas aqui</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="AccountSettings.Tooltip" xml:space="preserve">
+    <value>Configurações de Conta (Ctrl+.)</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Ordenar</value>
   </data>
 </root>
