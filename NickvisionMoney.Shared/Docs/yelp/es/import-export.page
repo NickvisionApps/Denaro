@@ -80,6 +80,10 @@
 					<p>Color de la transacción, debe estar en formato <em>rgb(R,G,B)</em> donde <em>R</em>, <em>G</em> y <em>B</em> son enteros en un rango entre 0 y 255.</p>
 				</item>
 				<item>
+					<title>UseGroupColor</title>
+					<p>Si una transacción debe usar el color de grupo: 0 - falso, 1 - verdadero.</p>
+				</item>
+				<item>
 					<title>Group</title>
 					<p>Id de grupo de la transacción. Los ids empiezan por 1. Para una transacción no agrupada debe ser -1 (no 0, este es un valor incorrecto para el id de grupo).</p>
 				</item>
@@ -91,12 +95,17 @@
 					<title>GroupDescription</title>
 					<p>Descripción del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma y puede estar vacía. Déjelo vacío para transacciones no agrupadas.</p>
 				</item>
+				<item>
+					<title>GroupRGBA</title>
+					<p>Color del grupo, debe estar en formato <em>rgb(R,G,B)</em> donde <em>R</em>, <em>G</em> y <em>B</em> son números enteros comprendidos entre 0 y 255.</p>
+				</item>
 			</list>
 		</item>
 	</list>
 </div>
 <div>
 	<title>Formatos de exportación</title>
+	<p>Puede seleccionar si desea exportar toda la información o sólo la de la vista actual. Si selecciona la vista actual, las transacciones mostradas actualmente se exportarán en el mismo orden en que se muestran.</p>
 	<list>
 		<item>
 			<p>Portable Document Format (<file>.pdf</file>)</p>
