@@ -416,6 +416,36 @@ public class AccountViewController : IDisposable
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// The sorting function for transactions
+    /// </summary>
+    /// <param name="a">The id of the first transaction</param>
+    /// <param name="b">The id of the second transaction</param>
+    /// <returns>-1 if a < b, 0 if a = b, 1 if a > b</returns>
+    private int SortTransactions(uint a, uint b)
+    {
+        int compareTo = 0;
+        if (SortTransactionsBy == SortBy.Id)
+        {
+            compareTo = a.CompareTo(b);
+        }
+        else if (SortTransactionsBy == SortBy.Date)
+        {
+            compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+        }
+        else if (SortTransactionsBy == SortBy.Amount)
+        {
+            var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
+            var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
+            compareTo = aAmount.CompareTo(bAmount);
+        }
+        if (!SortFirstToLast)
+        {
+            compareTo *= -1;
+        }
+        return compareTo;
+    }
+
+    /// <summary>
     /// Logins into an account
     /// </summary>
     /// <param name="password">The password of the account</param>
@@ -448,35 +478,13 @@ public class AccountViewController : IDisposable
             }
             //Transactions
             TransactionRows.Clear();
-            var transactions = _account.Transactions.Values.ToList();
-            transactions.Sort((a, b) =>
+            _filteredIds = _account.Transactions.Keys.ToList();
+            _filteredIds.Sort(SortTransactions);
+            FilteredTransactionsCount = _filteredIds.Count;
+            foreach (var id in _filteredIds)
             {
-                int compareTo = 0;
-                if (SortTransactionsBy == SortBy.Id)
-                {
-                    compareTo = a.CompareTo(b);
-                }
-                else if (SortTransactionsBy == SortBy.Date)
-                {
-                    compareTo = a.Date.CompareTo(b.Date);
-                }
-                else if (SortTransactionsBy == SortBy.Amount)
-                {
-                    var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
-                    var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
-                    compareTo = aAmount.CompareTo(bAmount);
-                }
-                if (!SortFirstToLast)
-                {
-                    compareTo *= -1;
-                }
-                return compareTo;
-            });
-            foreach (var transaction in transactions)
-            {
-                TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+                TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
             }
-            FilteredTransactionsCount = transactions.Count;
             AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             //Register Events
             Configuration.Current.Saved += ConfigurationChanged;
@@ -1090,29 +1098,8 @@ public class AccountViewController : IDisposable
     private void SortUIUpdate()
     {
         var transactions = _account.Transactions.Keys.ToList();
-        transactions.Sort((a, b) =>
-        {
-            int compareTo = 0;
-            if (SortTransactionsBy == SortBy.Id)
-            {
-                compareTo = a.CompareTo(b);
-            }
-            else if (SortTransactionsBy == SortBy.Date)
-            {
-                compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
-            }
-            else if (SortTransactionsBy == SortBy.Amount)
-            {
-                var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
-                var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
-                compareTo = aAmount.CompareTo(bAmount);
-            }
-            if (!SortFirstToLast)
-            {
-                compareTo *= -1;
-            }
-            return compareTo;
-        });
+        transactions!.Sort(SortTransactions);
+        _filteredIds!.Sort(SortTransactions);
         for (var i = 0; i < transactions.Count; i++)
         {
             UIMoveTransactionRow!(TransactionRows[transactions[i]], i);
