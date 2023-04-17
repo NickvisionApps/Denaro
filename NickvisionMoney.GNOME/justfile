@@ -240,3 +240,23 @@ _occitan_fix PREFIX LIB_DIR:
     mkdir -p {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}/oc
     cp ./oc-workaround/{{project_name}}.Shared.resources.dll \
     {{builddir}}{{PREFIX}}/{{LIB_DIR}}/{{app_id}}/oc/
+
+docs_html_gen:
+    #!/bin/sh
+    cd ../{{project_name}}.Shared/Docs
+    for lang_code in $(ls yelp)
+    do
+        echo -e "\033[1m# Converting pages for $lang_code locale\033[0m"
+        yelp-build html -o html/$lang_code/ yelp/$lang_code/
+        if [ $lang_code == "C" ]
+        then
+            continue
+        fi
+        echo -e "\033[1m# — Removing duplicate files\033[0m"
+        rm -r html/$lang_code/{figures,C.css,highlight.pack.js,yelp.js}
+        echo -e "\033[1m# — Replacing links\033[0m"
+        sed -i 's/href="C.css"/href="..\/C\/C.css"/g' html/$lang_code/*.html
+        sed -i 's/src="highlight.pack.js"/src="..\/C\/highlight.pack.js"/g' html/$lang_code/*.html
+        sed -i 's/src="yelp.js"/src="..\/C\/yelp.js"/g' html/$lang_code/*.html
+        sed -i 's/src="figures\/denaro.png"/src="..\/C\/figures\/denaro.png"/g' html/$lang_code/*.html
+    done

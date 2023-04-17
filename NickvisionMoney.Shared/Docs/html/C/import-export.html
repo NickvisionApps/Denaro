@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list">
 <p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
 <p class="p">❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <span class="app">Denaro</span> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <span class="app">Denaro</span> expects to find:</p>
-<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Group;GroupName;GroupDescription</span></p>
+<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <div class="title title-item"><h2><span class="title">Id</span></h2></div>
@@ -80,6 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p">Transaction color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
 </li>
 <li class="list">
+<div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
+<p class="p">Whether a transaction should use group color: 0 — false, 1 — true.</p>
+</li>
+<li class="list">
 <div class="title title-item"><h2><span class="title">Group</span></h2></div>
 <p class="p">Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
 </li>
@@ -91,19 +95,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
 <p class="p">Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
 </li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
+<p class="p">Group color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+</li>
 </ul></div></div></div>
+<p class="p">Receipt and notes are not present in CSV.</p>
 </li>
 </ul></div></div></div></div></div>
 </div></div>
 <div class="div"><div class="inner">
 <div class="title title-div"><h2><span class="title">Export Formats</span></h2></div>
-<div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
+<div class="region"><div class="contents">
+<p class="p">You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
 <p class="p">A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
 </li>
 <li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
-</ul></div></div></div></div></div>
+</ul></div></div></div>
+</div></div>
 </div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list">
 <p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
 <p class="p">❗ Хотя CSV является распространённым форматом, и некоторые банки предоставляют возможность своим клиентам экспортировать данные в формате CSV, такие файлы фактически являются таблицами, которые могут содержать произвольные данные. Импорт CSV файла, созданного в другой программе, не удастся, т.к. данные не будут совместимы с тем, что <span class="app">Denaro</span> ожидает получить из файла. Смысл импорта/экспорта CSV в том, чтобы предоставить возможность добавлять новые данные в счёт, используя сторонние программы, например, текстовые редакторы или офисные приложения. При импорте только создаются новые транзакции, существующие не перезаписываются. Если вы хотите создать CSV файл вручную, заголовок таблицы со всеми столбцами, которые <span class="app">Denaro</span> ожидает найти, выглядит следующим образом:</p>
-<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Group;GroupName;GroupDescription</span></p>
+<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <div class="title title-item"><h2><span class="title">Id</span></h2></div>
@@ -80,6 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p">Цвет транзакции, должен быть в формате <span class="em">rgb(R,G,B)</span>, где <span class="em">R</span> (красный), <span class="em">G</span> (зелёный) и <span class="em">B</span> (синий) — это целые числа в диапазоне от 0 до 255.</p>
 </li>
 <li class="list">
+<div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
+<p class="p">Должен ли для транзакции использоваться цвет группы: 0 — нет, 1 — да.</p>
+</li>
+<li class="list">
 <div class="title title-item"><h2><span class="title">Group</span></h2></div>
 <p class="p">Номер группы транзакции. Номера начинаются с 1. Для транзакции без группы укажите -1 (не 0, это некорректное значение для номера группы).</p>
 </li>
@@ -91,19 +95,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
 <p class="p">Описание группы транзакции, должно соответствовать номеру группы. Может содержать любые символы, кроме точки с запятой, и может быть пустым. Оставьте это поле постым для транзакции без группы.</p>
 </li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
+<p class="p">Цвет группы, должен быть в формате <span class="em">rgb(R,G,B)</span>, где <span class="em">R</span> (красный), <span class="em">G</span> (зелёный) и <span class="em">B</span> (синий) — это целые числа в диапазоне от 0 до 255.</p>
+</li>
 </ul></div></div></div>
+<p class="p">Чек и заметки не присутствуют в формате CSV.</p>
 </li>
 </ul></div></div></div></div></div>
 </div></div>
 <div class="div"><div class="inner">
 <div class="title title-div"><h2><span class="title">Форматы экспорта</span></h2></div>
-<div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
+<div class="region"><div class="contents">
+<p class="p">Вы можете выбрать, следует ли экспортировать всю информацию или только из текущего вида. Если выберите текущий вид, отображаемые в данный момент транзакции будут экспортированы в том же порядке, в котором они показаны.</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
 <p class="p">Файл будет содержать информацию о счёте, список транзакций и изображения чеков. Транзакции окрашены цветами так же, как в приложении, но цвета сделаны полупрозрачными, чтобы на них всегда был отчётливо виден чёрный текст. Вы можете защитить экспортируемый файл паролем.</p>
 </li>
 <li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
-</ul></div></div></div></div></div>
+</ul></div></div></div>
+</div></div>
 </div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">
