@@ -936,4 +936,16 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
   <data name="Notes.Placeholder" xml:space="preserve">
     <value>Voer aantekeningen hier in</value>
   </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Inheemse cijfers gebruiken</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Of cijfertekens van uw taal moeten worden gebruikt in plaats van latijnse cijfers.</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Alle informatie exporteren</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Huidige weergave exporteren</value>
+  </data>
 </root>
