@@ -58,6 +58,7 @@
         <p>- Added the ability to choose to export all account information or the current filtered view</p>
         <p>- Added support for using native digits (instead of just Latin digits) when working with numeric amounts</p>
         <p>- Fixed an issue where using custom separators wouldn't parse correctly</p>
+        <p>- Fixed an issue where CSV files were not exported in the correct format</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
