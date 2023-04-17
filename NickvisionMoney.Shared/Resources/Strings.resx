@@ -18,6 +18,11 @@
 
 	<!--Use: &#xA; for newline-->
 
+	<data name="ShortName" xml:space="preserve">
+		<!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+		<value>Denaro</value>
+	</data>
+
 	<data name="Description" xml:space="preserve">
 		<value>Manage your personal finances</value>
 	</data>
