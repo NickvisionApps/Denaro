@@ -198,10 +198,10 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>الإجماليُّ</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value>الدخل</value>
+		<value>دخل</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value>النفقة</value>
+		<value>نفقة</value>
   </data>
   <data name="Groups" xml:space="preserve">
 		<value>المجموعات</value>
@@ -329,7 +329,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value>أُزيل من المجموعة</value>
+		<value>دون مجموعة</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
 		<value>المعاملات خارج المجموعات</value>
@@ -390,7 +390,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>كلَّ نصف شهر</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value>كلَّ ضهر</value>
+		<value>كلَّ شهر</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
 		<value>كلَّ ربع سنة</value>
@@ -575,13 +575,13 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>الحديثة</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value>إغلاق الحساب</value>
+		<value>أغلق الحساب</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
 		<value>حساب مال (*.nmoney)</value>
   </data>
   <data name="AccountType.Checking" xml:space="preserve">
-    <value>التحقق</value>
+    <value>جارٍ</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
     <value>استخدم عملةً مخصَّصةً</value>
@@ -626,7 +626,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <value>غير متوفر</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-    <value>المدَّخرات</value>
+    <value>ادِّخار</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
     <value>أعمال</value>
@@ -935,5 +935,17 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="ClearBackupFolder" xml:space="preserve">
     <value>امحُ مجلَّد النسخ الاحتياطيِّ</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>صدِّر كلَّ المعلومات</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>صدِّر المنظور الحاليَّ</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>استخدم أرقام اللغة</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>ما إن كان ينبغي استخدام الأرقام المستخدمة في لغتك (مثلًا الأرقام العربية المشرقية) أم الأرقام العربية المغربية.</value>
   </data>
 </root>
