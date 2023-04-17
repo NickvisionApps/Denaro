@@ -1203,7 +1203,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 15)
+            if (fields.Length != 14)
             {
                 continue;
             }
@@ -1309,8 +1309,6 @@ public class Account : IDisposable
             var groupDescription = fields[12];
             //Get Group RGBA
             var groupRGBA = fields[13];
-            //Get Notes
-            var notes = fields[14];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
@@ -1334,8 +1332,7 @@ public class Account : IDisposable
                 RGBA = rgba,
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate,
-                Notes = notes
+                RepeatEndDate = repeatEndDate
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
