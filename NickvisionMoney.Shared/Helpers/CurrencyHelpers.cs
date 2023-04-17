@@ -56,7 +56,13 @@ public static class CurrencyHelpers
         return result;
     }
 
-    public static string ReplaceNativeDigits(string amountString, CultureInfo culture)
+    /// <summary>
+    /// Replaces native digits in a string with Latin digits
+    /// </summary>
+    /// <param name="amountString">The amount string</param>
+    /// <param name="culture">Culture used for formatting</param>
+    /// <returns>A new string with native digits replaced with Latin digits</returns>
+    public static string ReplaceNativeDigits(this string amountString, CultureInfo culture)
     {
         var result = amountString;
         foreach (var digit in culture.NumberFormat.NativeDigits)
