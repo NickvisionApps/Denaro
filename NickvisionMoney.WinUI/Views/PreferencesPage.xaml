@@ -150,10 +150,18 @@
 
                     <labs:SettingsExpander x:Name="CardLocale">
                         <labs:SettingsExpander.HeaderIcon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE12B;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF2B7;"/>
                         </labs:SettingsExpander.HeaderIcon>
 
                         <labs:SettingsExpander.Items>
+                            <labs:SettingsCard x:Name="CardUseNativeDigits">
+                                <labs:SettingsCard.HeaderIcon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE75F;"/>
+                                </labs:SettingsCard.HeaderIcon>
+
+                                <ToggleSwitch x:Name="ToggleUseNativeDigits" OnContent="" OffContent="" Toggled="ToggleUseNativeDigits_Toggled"/>
+                            </labs:SettingsCard>
+                            
                             <labs:SettingsCard x:Name="CardInsertSeparator">
                                 <labs:SettingsCard.HeaderIcon>
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE144;"/>
