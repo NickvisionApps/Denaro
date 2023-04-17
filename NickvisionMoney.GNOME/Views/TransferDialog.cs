@@ -135,7 +135,7 @@ public partial class TransferDialog : Adw.Window
         {
             _recentAccountsButton.SetSensitive(false);
         }
-        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false));
+        _amountRow.SetText(_controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, false));
         Validate();
     }
 
@@ -167,7 +167,7 @@ public partial class TransferDialog : Adw.Window
         _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString));
+            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString, _controller.UseNativeDigits));
             _transferButton.SetSensitive(true);
         }
         else

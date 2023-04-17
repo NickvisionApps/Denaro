@@ -84,7 +84,7 @@ public sealed partial class TransferDialog : ContentDialog
             actionRow.Children.Insert(0, typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
-        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false);
+        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, true);
         Validate();
     }
 
@@ -116,7 +116,7 @@ public sealed partial class TransferDialog : ContentDialog
         TxtDestCurrency.Header = _controller.DestinationCurrencyCode ?? "";
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString!);
+            TxtConversionResult.Text = _controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString!, _controller.UseNativeDigits);
             TxtErrors.Visibility = Visibility.Collapsed;
             IsPrimaryButtonEnabled = true;
         }

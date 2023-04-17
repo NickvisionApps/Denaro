@@ -8,6 +8,7 @@ using NickvisionMoney.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Globalization.DateTimeFormatting;
@@ -43,7 +44,22 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         _initializeWithWindow = initializeWithWindow;
         _receiptPath = null;
         //Localize Strings
-        Title = $"{_controller.Localizer["Transaction"]} - {_controller.Transaction.Id}";
+        var idString = _controller.Transaction.Id.ToString();
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if (_controller.UseNativeDigits && "0" != nativeDigits[0])
+        {
+            idString = idString.Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        Title = $"{_controller.Localizer["Transaction"]} - {idString}";
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"];
         if (_controller.CanCopy)
@@ -91,7 +107,7 @@ public sealed partial class TransactionDialog : ContentDialog, INotifyPropertyCh
         TxtErrors.Text = _controller.Localizer["FixErrors", "WinUI"];
         //Load Transaction
         TxtDescription.Text = _controller.Transaction.Description;
-        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, false);
+        TxtAmount.Text = _controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, _controller.UseNativeDigits, true);
         CmbType.SelectedIndex = (int)_controller.Transaction.Type;
         CalendarDate.Date = new DateTimeOffset(new DateTime(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day));
         foreach (var name in _controller.GroupNames)

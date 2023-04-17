@@ -1,4 +1,5 @@
 ﻿using NickvisionMoney.Shared.Helpers;
+using NickvisionMoney.Shared.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -40,6 +41,10 @@ public class DashboardViewController
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
+    /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
     /// <summary>
     /// The DashboardAmount object for incomes
     /// </summary>
@@ -117,7 +122,7 @@ public class DashboardViewController
                         Groups[name].DashboardAmount.Currencies.Add(currency);
                         Groups[name].DashboardAmount.Breakdowns[currency] = (0, "");
                     }
-                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{group.Balance.ToAmountString(controller.CultureForNumberString)}", controller.AccountTitle)}\n");
+                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{group.Balance.ToAmountString(controller.CultureForNumberString, UseNativeDigits)}", controller.AccountTitle)}\n");
                 }
             }
         }

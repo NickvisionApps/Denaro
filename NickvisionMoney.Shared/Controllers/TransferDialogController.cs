@@ -64,6 +64,10 @@ public class TransferDialogController
     /// </summary>
     public string? DestinationCurrencyCode => CultureForDestNumberString == null ? null : CultureForDestNumberString.NumberFormat.NaNSymbol;
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
+    /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Configuration.Current.InsertSeparator;
@@ -176,7 +180,7 @@ public class TransferDialogController
                     {
                         try
                         {
-                            conversionRate = decimal.Parse(sourceConversionAmountString, NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString, NumberStyles.Number, CultureForSourceNumberString);
+                            conversionRate = decimal.Parse(sourceConversionAmountString.ReplaceNativeDigits(CultureForSourceNumberString), NumberStyles.Number, CultureForSourceNumberString) / decimal.Parse(destConversionAmountString.ReplaceNativeDigits(CultureForSourceNumberString), NumberStyles.Number, CultureForSourceNumberString);
                             if (conversionRate == 0)
                             {
                                 throw new ArgumentException();
@@ -196,7 +200,7 @@ public class TransferDialogController
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForSourceNumberString);
+            amount = decimal.Parse(amountString.ReplaceNativeDigits(CultureForSourceNumberString), NumberStyles.Currency, CultureForSourceNumberString);
         }
         catch
         {

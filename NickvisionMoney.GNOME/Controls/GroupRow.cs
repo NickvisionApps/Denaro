@@ -39,6 +39,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     private string _defaultColor;
     private CultureInfo _cultureAmount;
     private GSourceFunc _updateCallback;
+    private bool _useNativeDigits;
 
     [Gtk.Connect] private readonly Gtk.Overlay _filterOverlay;
     [Gtk.Connect] private readonly Gtk.Image _filterCheckBackground;
@@ -66,10 +67,11 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public event EventHandler<uint>? DeleteTriggered;
 
-    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, Localizer localizer, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _defaultColor = defaultColor;
+        _useNativeDigits = useNativeDigits;
         _updateCallback = (x) =>
         {
             //Color
@@ -97,7 +99,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
             _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
             _filterCheckButton.SetActive(filterActive);
             //Amount Label
-            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{_group.Balance.ToAmountString(_cultureAmount)}");
+            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "-  ")}{_group.Balance.ToAmountString(_cultureAmount, _useNativeDigits)}");
             _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
             _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
             return false;
@@ -135,10 +137,11 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     /// <param name="group">The Group to display</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
+    /// <param name="useNativeDigits">Whether to use native digits</param>
     /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
     /// <param name="defaultColor">The default group color</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, Localizer localizer, bool filterActive, string defaultColor) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, localizer, filterActive, defaultColor)
+    public GroupRow(Group group, CultureInfo cultureAmount, bool useNativeDigits, Localizer localizer, bool filterActive, string defaultColor) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, useNativeDigits, localizer, filterActive, defaultColor)
     {
     }
 

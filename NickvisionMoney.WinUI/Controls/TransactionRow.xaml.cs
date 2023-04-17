@@ -25,6 +25,7 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
     private Localizer _localizer;
     private int _repeatFrom;
     private Dictionary<uint, Group> _groups;
+    private bool _useNativeDigits;
 
     /// <summary>
     /// The Id of the Transaction the row represents
@@ -53,14 +54,16 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
     /// <param name="groups">The groups in the account</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
+    /// <param name="useNativeDigits">Whether to use native digits</param>
     /// <param name="defaultColor">The default color for the row</param>
     /// <param name="localizer">The Localizer for the app</param>
-    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, string defaultColor, Localizer localizer)
+    public TransactionRow(Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, CultureInfo cultureDate, bool useNativeDigits, string defaultColor, Localizer localizer)
     {
         InitializeComponent();
         DataContext = this;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
+        _useNativeDigits = useNativeDigits;
         _localizer = localizer;
         _repeatFrom = 0;
         _groups = groups;
@@ -128,7 +131,25 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
         var bgColorString = transaction.RGBA;
         var bgColorStrArray = new System.Text.RegularExpressions.Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-        BtnId.Content = transaction.Id;
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if (_useNativeDigits && "0" != nativeDigits[0])
+        {
+            BtnId.Content = transaction.Id.ToString()
+                               .Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        else
+        {
+            BtnId.Content = transaction.Id;
+        }
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? ColorHelpers.FromRGBA(defaultColor)!.Value);
         BtnId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
         NotifyPropertyChanged("BtnIdBackground");
@@ -139,7 +160,7 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
         {
             LblDescription.Text += $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", transaction.RepeatInterval.ToString()]}";
         }
-        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToAmountString(_cultureAmount)}";
+        LblAmount.Text = $"{(transaction.Type == TransactionType.Income ? "+" : "-")}  {transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}";
     }
 
     /// <summary>

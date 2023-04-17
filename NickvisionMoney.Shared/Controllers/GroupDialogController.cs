@@ -35,6 +35,10 @@ public class GroupDialogController
     /// Whether or not the dialog is editing a group
     /// </summary>
     public bool IsEditing { get; init; }
+    /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
 
     /// <summary>
     /// Gets the AppInfo object

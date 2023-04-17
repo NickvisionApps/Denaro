@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.WinUI.Helpers;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Windows.UI;
 
@@ -27,7 +28,22 @@ public sealed partial class GroupDialog : ContentDialog
         _constructing = true;
         _controller = controller;
         //Localize Strings
-        Title = _controller.Localizer["Group"];
+        var idString = _controller.Group.Id.ToString();
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if (_controller.UseNativeDigits && "0" != nativeDigits[0])
+        {
+            idString = idString.Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        Title = $"{_controller.Localizer["Group"]} - {idString}";
         CloseButtonText = _controller.Localizer["Cancel"];
         PrimaryButtonText = _controller.Localizer[_controller.IsEditing ? "Apply" : "Add"];
         TxtName.Header = _controller.Localizer["Name", "Field"];

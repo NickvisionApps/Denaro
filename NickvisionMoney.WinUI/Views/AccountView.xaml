@@ -88,17 +88,41 @@
 
                             <AppBarButton.Flyout>
                                 <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem Text="CSV" Click="ExportToCSV">
-                                        <MenuFlyoutItem.Icon>
+                                    <MenuFlyoutSubItem Text="CSV">
+                                        <MenuFlyoutSubItem.Icon>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
+                                        </MenuFlyoutSubItem.Icon>
 
-                                    <MenuFlyoutItem Text="PDF" Click="ExportToPDF">
-                                        <MenuFlyoutItem.Icon>
+                                        <MenuFlyoutItem x:Name="MenuCSVExportAll" Click="ExportToCSV">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+
+                                        <MenuFlyoutItem x:Name="MenuCSVExportCurrent" Click="ExportToCSV">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE762;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyoutSubItem>
+
+                                    <MenuFlyoutSubItem Text="PDF">
+                                        <MenuFlyoutSubItem.Icon>
                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F9;"/>
-                                        </MenuFlyoutItem.Icon>
-                                    </MenuFlyoutItem>
+                                        </MenuFlyoutSubItem.Icon>
+
+                                        <MenuFlyoutItem x:Name="MenuPDFExportAll" Click="ExportToPDF">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE138;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+
+                                        <MenuFlyoutItem x:Name="MenuPDFExportCurrent" Click="ExportToPDF">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE762;"/>
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyoutSubItem>
                                 </MenuFlyout>
                             </AppBarButton.Flyout>
                         </AppBarButton>

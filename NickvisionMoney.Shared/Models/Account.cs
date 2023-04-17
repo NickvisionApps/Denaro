@@ -20,6 +20,12 @@ using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Models;
 
+public enum ExportMode
+{
+    All,
+    CurrentView
+};
+
 /// <summary>
 /// A model of an account
 /// </summary>
@@ -50,7 +56,6 @@ public class Account : IDisposable
     /// Whether or not an account needs to be setup
     /// </summary>
     public bool NeedsAccountSetup { get; private set; }
-
     /// <summary>
     /// The next available group id
     /// </summary>
@@ -1198,7 +1203,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 15)
+            if (fields.Length != 14)
             {
                 continue;
             }
@@ -1304,8 +1309,6 @@ public class Account : IDisposable
             var groupDescription = fields[12];
             //Get Group RGBA
             var groupRGBA = fields[13];
-            //Get Notes
-            var notes = fields[14];
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
@@ -1329,8 +1332,7 @@ public class Account : IDisposable
                 RGBA = rgba,
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate,
-                Notes = notes
+                RepeatEndDate = repeatEndDate
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
@@ -1455,21 +1457,33 @@ public class Account : IDisposable
     /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path to the CSV file</param>
+    /// <param name="exportMode">The information to export</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToCSV(string path)
+    public bool ExportToCSV(string path, ExportMode exportMode, List<uint> filteredIds)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Notes\n";
-        foreach (var pair in Transactions)
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
+        var transactions = Transactions;
+        if(exportMode == ExportMode.CurrentView)
         {
-            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            transactions = new Dictionary<uint, Transaction>();
+            foreach (var id in filteredIds)
+            {
+                transactions.Add(id, Transactions[id]);
+            }
+        }
+        foreach (var pair in transactions)
+        {
+            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{(pair.Value.UseGroupColor ? "1" : "0")};{pair.Value.GroupId};";
             if (pair.Value.GroupId != -1)
             {
-                result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
+                var group = Groups[(uint)pair.Value.GroupId];
+                result += $"{group.Name};{group.Description};{group.RGBA}\n";
             }
             else
             {
-                result += ";\n";
+                result += ";;\n";
             }
         }
         try
@@ -1488,9 +1502,11 @@ public class Account : IDisposable
     /// Exports the account to a PDF file
     /// </summary>
     /// <param name="path">The path to the PDF file</param>
+    /// <param name="exportMode">The information to export</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     /// <returns>True if successful, else false</returns>
-    public bool ExportToPDF(string path, string? password)
+    public bool ExportToPDF(string path, ExportMode exportMode, List<uint> filteredIds, string? password)
     {
         try
         {
@@ -1577,7 +1593,16 @@ public class Account : IDisposable
                             tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Overview"]);
                             //Data
                             var maxDate = DateOnly.FromDateTime(DateTime.Today);
-                            foreach (var pair in Transactions)
+                            var transactions = Transactions;
+                            if (exportMode == ExportMode.CurrentView)
+                            {
+                                transactions = new Dictionary<uint, Transaction>();
+                                foreach (var id in filteredIds)
+                                {
+                                    transactions.Add(id, Transactions[id]);
+                                }
+                            }
+                            foreach (var pair in transactions)
                             {
                                 if (pair.Value.Date > maxDate)
                                 {
@@ -1586,11 +1611,11 @@ public class Account : IDisposable
                             }
                             tbl.Cell().Text(localizer["Total"]);
                             var total = GetTotal(maxDate);
-                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount)}");
+                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(localizer["Expense"]);
-                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount));
+                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1639,11 +1664,11 @@ public class Account : IDisposable
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
                             var i = 0;
-                            foreach (var pair in Groups)
+                            foreach (var pair in Groups.OrderBy(x => x.Value.Name == localizer["Ungrouped"] ? " " : x.Value.Name))
                             {
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "-  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount)}");
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "-  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
                         });
@@ -1663,17 +1688,26 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
+                            tbl.Cell().ColumnSpan(8).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
-                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Short"]).SemiBold();
+                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Notes", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
-                            foreach (var pair in Transactions)
+                            var transactions = Transactions;
+                            if (exportMode == ExportMode.CurrentView)
+                            {
+                                transactions = new Dictionary<uint, Transaction>();
+                                foreach (var id in filteredIds)
+                                {
+                                    transactions.Add(id, Transactions[id]);
+                                }
+                            }
+                            foreach (var pair in transactions)
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
@@ -1718,7 +1752,7 @@ public class Account : IDisposable
                                     _ => ""
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
-                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{pair.Value.Amount.ToAmountString(cultureAmount)}");
+                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
                         });
                         //Receipts
@@ -1735,8 +1769,17 @@ public class Account : IDisposable
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Receipt", "Field"]).SemiBold();
                             //Data
+                            var transactions = Transactions;
+                            if (exportMode == ExportMode.CurrentView)
+                            {
+                                transactions = new Dictionary<uint, Transaction>();
+                                foreach (var id in filteredIds)
+                                {
+                                    transactions.Add(id, Transactions[id]);
+                                }
+                            }
                             var i = 0;
-                            foreach (var pair in Transactions)
+                            foreach (var pair in transactions)
                             {
                                 if (pair.Value.Receipt != null)
                                 {
@@ -1803,7 +1846,7 @@ public class Account : IDisposable
     {
         if (!_isEncrypted.GetValueOrDefault())
         {
-            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv");
+            ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All, new List<uint>());
         }
     }
 }

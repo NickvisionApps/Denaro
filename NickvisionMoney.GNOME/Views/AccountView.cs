@@ -300,14 +300,22 @@ public partial class AccountView : Adw.Bin
         var actTransfer = Gio.SimpleAction.New("transferMoney", null);
         actTransfer.OnActivate += TransferMoney;
         actionMap.AddAction(actTransfer);
-        //Export To CSV Action
-        var actExportCSV = Gio.SimpleAction.New("exportToCSV", null);
-        actExportCSV.OnActivate += ExportToCSV;
-        actionMap.AddAction(actExportCSV);
-        //Export To PDF Action
-        var actExportPDF = Gio.SimpleAction.New("exportToPDF", null);
-        actExportPDF.OnActivate += ExportToPDF;
-        actionMap.AddAction(actExportPDF);
+        //Export To CSV All Action
+        var actExportCSVAll = Gio.SimpleAction.New("exportToCSVAll", null);
+        actExportCSVAll.OnActivate += (sender, e) => ExportToCSV(ExportMode.All);
+        actionMap.AddAction(actExportCSVAll);
+        //Export To CSV Current Action
+        var actExportCSVCurrent = Gio.SimpleAction.New("exportToCSVCurrent", null);
+        actExportCSVCurrent.OnActivate += (sender, e) => ExportToCSV(ExportMode.CurrentView);
+        actionMap.AddAction(actExportCSVCurrent);
+        //Export To PDF All Action
+        var actExportPDFAll = Gio.SimpleAction.New("exportToPDFAll", null);
+        actExportPDFAll.OnActivate += (sender, e) => ExportToPDF(ExportMode.All);
+        actionMap.AddAction(actExportPDFAll);
+        //Export To PDF Current Action
+        var actExportPDFCurrent = Gio.SimpleAction.New("exportToPDFCurrent", null);
+        actExportPDFCurrent.OnActivate += (sender, e) => ExportToPDF(ExportMode.CurrentView);
+        actionMap.AddAction(actExportPDFCurrent);
         //Import Action
         var actImport = Gio.SimpleAction.New("importFromFile", null);
         actImport.OnActivate += ImportFromFile;
@@ -324,7 +332,6 @@ public partial class AccountView : Adw.Bin
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>T"), Gtk.NamedAction.New("account.transferMoney")));
-        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>E"), Gtk.NamedAction.New("account.exportToFile")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>I"), Gtk.NamedAction.New("account.importFromFile")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
@@ -352,7 +359,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
         row.EditTriggered += EditGroup;
         row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
@@ -422,7 +429,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.TransactionDefaultColor, _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor, _controller.Localizer);
         row.EditTriggered += EditTransaction;
         row.DeleteTriggered += DeleteTransaction;
         if (index != null)
@@ -689,9 +696,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the export to csv item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void ExportToCSV(Gio.SimpleAction sender, EventArgs e)
+    /// <param name="exportMode">The information to export</param>
+    private void ExportToCSV(ExportMode exportMode)
     {
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
@@ -711,7 +717,7 @@ public partial class AccountView : Adw.Bin
                 {
                     path += ".csv";
                 }
-                _controller.ExportToCSV(path ?? "");
+                _controller.ExportToCSV(path ?? "", exportMode);
             }
         };
         gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
@@ -720,9 +726,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the export to pdf item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void ExportToPDF(Gio.SimpleAction sender, EventArgs e)
+    /// <param name="exportMode">The information to export</param>
+    private void ExportToPDF(ExportMode exportMode)
     {
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
@@ -753,11 +758,11 @@ public partial class AccountView : Adw.Bin
                         var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer, tcs);
                         newPasswordDialog.Present();
                         var password = await tcs.Task;
-                        _controller.ExportToPDF(path ?? "", password);
+                        _controller.ExportToPDF(path ?? "", exportMode, password);
                     }
                     else
                     {
-                        _controller.ExportToPDF(path ?? "", null);
+                        _controller.ExportToPDF(path ?? "", exportMode, null);
                     }
                     dialog.Destroy();
                 };

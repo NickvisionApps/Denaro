@@ -18,6 +18,7 @@ public class AccountViewController : IDisposable
     private bool _isOpened;
     private bool _disposed;
     private readonly Account _account;
+    private List<uint>? _filteredIds;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
@@ -65,6 +66,10 @@ public class AccountViewController : IDisposable
     public Action<IModelRowControl<Transaction>>? UIDeleteTransactionRow { get; set; }
 
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
+    /// <summary>
     /// The default color to use for a transaction
     /// </summary>
     public string TransactionDefaultColor => Configuration.Current.TransactionDefaultColor;
@@ -76,6 +81,7 @@ public class AccountViewController : IDisposable
     /// The path of the account
     /// </summary>
     public string AccountPath => _account.Path;
+    /// <summary>
     /// Whether or not the account needs a password
     /// </summary>
     public bool AccountNeedsPassword => _account.IsEncrypted;
@@ -98,7 +104,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{_account.TodayTotal.ToAmountString(CultureForNumberString)}";
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{_account.TodayTotal.ToAmountString(CultureForNumberString, UseNativeDigits)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -106,7 +112,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The income amount of the account for today as a string
     /// </summary>
-    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString);
+    public string AccountTodayIncomeString => _account.TodayIncome.ToAmountString(CultureForNumberString, UseNativeDigits);
     /// <summary>
     /// The expense amount of the account for today
     /// </summary>
@@ -114,7 +120,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The expense amount of the account for today as a string
     /// </summary>
-    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString);
+    public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString, UseNativeDigits);
     /// <summary>
     /// The count of transactions in the account
     /// </summary>
@@ -410,6 +416,36 @@ public class AccountViewController : IDisposable
     public void SendNotification(string message, NotificationSeverity severity) => NotificationSent?.Invoke(this, new NotificationSentEventArgs(message, severity));
 
     /// <summary>
+    /// The sorting function for transactions
+    /// </summary>
+    /// <param name="a">The id of the first transaction</param>
+    /// <param name="b">The id of the second transaction</param>
+    /// <returns>-1 if a < b, 0 if a = b, 1 if a > b</returns>
+    private int SortTransactions(uint a, uint b)
+    {
+        int compareTo = 0;
+        if (SortTransactionsBy == SortBy.Id)
+        {
+            compareTo = a.CompareTo(b);
+        }
+        else if (SortTransactionsBy == SortBy.Date)
+        {
+            compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+        }
+        else if (SortTransactionsBy == SortBy.Amount)
+        {
+            var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
+            var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
+            compareTo = aAmount.CompareTo(bAmount);
+        }
+        if (!SortFirstToLast)
+        {
+            compareTo *= -1;
+        }
+        return compareTo;
+    }
+
+    /// <summary>
     /// Logins into an account
     /// </summary>
     /// <param name="password">The password of the account</param>
@@ -442,35 +478,13 @@ public class AccountViewController : IDisposable
             }
             //Transactions
             TransactionRows.Clear();
-            var transactions = _account.Transactions.Values.ToList();
-            transactions.Sort((a, b) =>
+            _filteredIds = _account.Transactions.Keys.ToList();
+            _filteredIds.Sort(SortTransactions);
+            FilteredTransactionsCount = _filteredIds.Count;
+            foreach (var id in _filteredIds)
             {
-                int compareTo = 0;
-                if (SortTransactionsBy == SortBy.Id)
-                {
-                    compareTo = a.CompareTo(b);
-                }
-                else if (SortTransactionsBy == SortBy.Date)
-                {
-                    compareTo = a.Date.CompareTo(b.Date);
-                }
-                else if (SortTransactionsBy == SortBy.Amount)
-                {
-                    var aAmount = a.Amount * (a.Type == TransactionType.Income ? 1m : -1m);
-                    var bAmount = b.Amount * (b.Type == TransactionType.Income ? 1m : -1m);
-                    compareTo = aAmount.CompareTo(bAmount);
-                }
-                if (!SortFirstToLast)
-                {
-                    compareTo *= -1;
-                }
-                return compareTo;
-            });
-            foreach (var transaction in transactions)
-            {
-                TransactionRows.Add(transaction.Id, UICreateTransactionRow!(transaction, null));
+                TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
             }
-            FilteredTransactionsCount = transactions.Count;
             AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
             //Register Events
             Configuration.Current.Saved += ConfigurationChanged;
@@ -948,11 +962,12 @@ public class AccountViewController : IDisposable
     /// Exports the account to a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
-    public void ExportToCSV(string path)
+    /// <param name="exportMode">The information to export</param>
+    public void ExportToCSV(string path, ExportMode exportMode)
     {
-        if (_account.ExportToCSV(path))
+        if (_account.ExportToCSV(path, exportMode, _filteredIds!))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
         }
         else
         {
@@ -964,12 +979,13 @@ public class AccountViewController : IDisposable
     /// Exports the account to a PDF file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="exportMode">The information to export</param>
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
-    public void ExportToPDF(string path, string? password)
+    public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        if (_account.ExportToPDF(path, password))
+        if (_account.ExportToPDF(path, exportMode, _filteredIds!, password))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
         }
         else
         {
@@ -1026,7 +1042,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     private void FilterUIUpdate()
     {
-        var filteredTransactions = new List<uint>();
+        _filteredIds = new List<uint>();
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1055,15 +1071,15 @@ public class AccountViewController : IDisposable
                     continue;
                 }
             }
-            filteredTransactions.Add(pair.Value.Id);
+            _filteredIds.Add(pair.Value.Id);
         }
-        FilteredTransactionsCount = filteredTransactions.Count;
+        FilteredTransactionsCount = _filteredIds.Count;
         if (FilteredTransactionsCount > 0)
         {
             //Update UI
             foreach (var pair in TransactionRows)
             {
-                if (filteredTransactions.Contains(pair.Value.Id))
+                if (_filteredIds.Contains(pair.Value.Id))
                 {
                     pair.Value.Show();
                 }
@@ -1082,29 +1098,8 @@ public class AccountViewController : IDisposable
     private void SortUIUpdate()
     {
         var transactions = _account.Transactions.Keys.ToList();
-        transactions.Sort((a, b) =>
-        {
-            int compareTo = 0;
-            if (SortTransactionsBy == SortBy.Id)
-            {
-                compareTo = a.CompareTo(b);
-            }
-            else if (SortTransactionsBy == SortBy.Date)
-            {
-                compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
-            }
-            else if (SortTransactionsBy == SortBy.Amount)
-            {
-                var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
-                var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
-                compareTo = aAmount.CompareTo(bAmount);
-            }
-            if (!SortFirstToLast)
-            {
-                compareTo *= -1;
-            }
-            return compareTo;
-        });
+        transactions!.Sort(SortTransactions);
+        _filteredIds!.Sort(SortTransactions);
         for (var i = 0; i < transactions.Count; i++)
         {
             UIMoveTransactionRow!(TransactionRows[transactions[i]], i);

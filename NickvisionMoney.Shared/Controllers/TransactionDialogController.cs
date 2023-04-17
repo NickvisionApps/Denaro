@@ -78,6 +78,10 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public CultureInfo CultureForDateString { get; init; }
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Models.Configuration.Current.UseNativeDigits; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
+    /// <summary>
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
@@ -296,7 +300,7 @@ public class TransactionDialogController : IDisposable
         }
         try
         {
-            amount = decimal.Parse(amountString, NumberStyles.Currency, CultureForNumberString.NumberFormat);
+            amount = decimal.Parse(amountString.ReplaceNativeDigits(CultureForNumberString), NumberStyles.Currency, CultureForNumberString.NumberFormat);
         }
         catch
         {

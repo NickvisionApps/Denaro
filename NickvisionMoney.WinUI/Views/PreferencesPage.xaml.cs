@@ -70,6 +70,8 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         CardAccountBusinessColor.Header = _controller.Localizer["AccountBusinessColor"];
         CardLocale.Header = _controller.Localizer["Locale"];
         CardLocale.Description = _controller.Localizer["LocaleDescription"];
+        CardUseNativeDigits.Header = _controller.Localizer["UseNativeDigits"];
+        CardUseNativeDigits.Description = _controller.Localizer["UseNativeDigits", "Description"];
         CardInsertSeparator.Header = _controller.Localizer["InsertSeparator"];
         CardInsertSeparator.Description = _controller.Localizer["InsertSeparator", "Description"];
         CmbInsertSeparator.Items.Add(_controller.Localizer["InsertSeparatorOff"]);
@@ -90,6 +92,7 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
         AccountCheckingColor = ColorHelpers.FromRGBA(_controller.AccountCheckingColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountSavingsColor = ColorHelpers.FromRGBA(_controller.AccountSavingsColor) ?? Color.FromArgb(255, 255, 255, 255);
         AccountBusinessColor = ColorHelpers.FromRGBA(_controller.AccountBusinessColor) ?? Color.FromArgb(255, 255, 255, 255);
+        ToggleUseNativeDigits.IsOn = _controller.UseNativeDigits;
         CmbInsertSeparator.SelectedIndex = (int)_controller.InsertSeparator;
         LblBackupFolder.Text = !Directory.Exists(_controller.CSVBackupFolder) ? _controller.Localizer["NoBackupFolder"] : _controller.CSVBackupFolder;
         _initializeWithWindow = initializeWithWindow;
@@ -304,6 +307,17 @@ public sealed partial class PreferencesPage : UserControl, INotifyPropertyChange
                 AppInstance.Restart("Apply new theme");
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when the ToggleUseNativeDigits toggle is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ToggleUseNativeDigits_Toggled(object sender, RoutedEventArgs e)
+    {
+        _controller.UseNativeDigits = ToggleUseNativeDigits.IsOn;
+        _controller.SaveConfiguration();
     }
 
     /// <summary>

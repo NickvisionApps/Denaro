@@ -10,8 +10,19 @@ menu actionsMenu {
     submenu {
       label: _("ExportToFile");
       
-      item("CSV", "account.exportToCSV")
-      item("PDF", "account.exportToPDF")
+      submenu {
+        label: "CSV";
+        
+        item(_("ExportToFile.All"), "account.exportToCSVAll")
+        item(_("ExportToFile.Current"), "account.exportToCSVCurrent")
+      }
+
+      submenu {
+        label: "PDF";
+
+        item(_("ExportToFile.All"), "account.exportToPDFAll")
+        item(_("ExportToFile.Current"), "account.exportToPDFCurrent")
+      }
     }
   }
   

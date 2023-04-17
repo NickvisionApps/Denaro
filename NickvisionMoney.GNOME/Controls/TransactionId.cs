@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -53,7 +54,7 @@ public partial class TransactionId : Gtk.Overlay
     /// </summary>
     /// <param name="colorString">Transaction color</param>
     /// <param name="defaultColor">A default color</param>
-    public void UpdateColor(string colorString, string defaultColor)
+    public void UpdateColor(string colorString, string defaultColor, bool useNativeDigits)
     {
         var color = new Color();
         if (!gdk_rgba_parse(ref color, colorString))
@@ -63,7 +64,22 @@ public partial class TransactionId : Gtk.Overlay
         var red = (int)(color.Red * 255);
         var green = (int)(color.Green * 255);
         var blue = (int)(color.Blue * 255);
-        _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"#{red.ToString("x2")}{green.ToString("x2")}{blue.ToString("x2")}\">{_id.ToString()}</span>");
+        var idString = _id.ToString();
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if(useNativeDigits && "0" != nativeDigits[0])
+        {
+            idString = idString.Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"#{red.ToString("x2")}{green.ToString("x2")}{blue.ToString("x2")}\">{idString}</span>");
         uint colorPixbuf;
         if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out colorPixbuf))
         {
