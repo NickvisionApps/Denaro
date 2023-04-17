@@ -1466,7 +1466,7 @@ public class Account : IDisposable
     public bool ExportToCSV(string path, ExportMode exportMode, List<uint> filteredIds)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Notes\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
         var transactions = Transactions;
         if(exportMode == ExportMode.CurrentView)
         {
@@ -1478,14 +1478,15 @@ public class Account : IDisposable
         }
         foreach (var pair in transactions)
         {
-            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{pair.Value.GroupId};";
+            result += $"{pair.Value.Id};{pair.Value.Date.ToString("d", new CultureInfo("en-US"))};{pair.Value.Description};{(int)pair.Value.Type};{(int)pair.Value.RepeatInterval};{pair.Value.RepeatFrom};{(pair.Value.RepeatEndDate != null ? pair.Value.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "")};{pair.Value.Amount};{pair.Value.RGBA};{(pair.Value.UseGroupColor ? "1" : "0")};{pair.Value.GroupId};";
             if (pair.Value.GroupId != -1)
             {
-                result += $"{Groups[(uint)pair.Value.GroupId].Name};{Groups[(uint)pair.Value.GroupId].Description}\n";
+                var group = Groups[(uint)pair.Value.GroupId];
+                result += $"{group.Name};{group.Description};{group.RGBA}\n";
             }
             else
             {
-                result += ";\n";
+                result += ";;\n";
             }
         }
         try
