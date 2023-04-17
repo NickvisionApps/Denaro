@@ -84,7 +84,7 @@ public sealed partial class TransferDialog : ContentDialog
             actionRow.Children.Insert(0, typeBox);
             ListRecentAccounts.Items.Add(actionRow);
         }
-        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, false, true);
+        TxtAmount.Text = _controller.Transfer.SourceAmount.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, true);
         Validate();
     }
 
