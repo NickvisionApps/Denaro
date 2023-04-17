@@ -131,7 +131,25 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
         var bgColorString = transaction.RGBA;
         var bgColorStrArray = new System.Text.RegularExpressions.Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
-        BtnId.Content = transaction.Id;
+        var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
+        if (_useNativeDigits && "0" != nativeDigits[0])
+        {
+            BtnId.Content = transaction.Id.ToString()
+                               .Replace("0", nativeDigits[0])
+                               .Replace("1", nativeDigits[1])
+                               .Replace("2", nativeDigits[2])
+                               .Replace("3", nativeDigits[3])
+                               .Replace("4", nativeDigits[4])
+                               .Replace("5", nativeDigits[5])
+                               .Replace("6", nativeDigits[6])
+                               .Replace("7", nativeDigits[7])
+                               .Replace("8", nativeDigits[8])
+                               .Replace("9", nativeDigits[9]);
+        }
+        else
+        {
+            BtnId.Content = transaction.Id;
+        }
         BtnId.Background = new SolidColorBrush(ColorHelpers.FromRGBA(transaction.UseGroupColor ? _groups[transaction.GroupId <= 0 ? 0u : (uint)transaction.GroupId].RGBA : transaction.RGBA) ?? ColorHelpers.FromRGBA(defaultColor)!.Value);
         BtnId.Foreground = new SolidColorBrush(luma < 0.5 ? Colors.White : Colors.Black);
         NotifyPropertyChanged("BtnIdBackground");
