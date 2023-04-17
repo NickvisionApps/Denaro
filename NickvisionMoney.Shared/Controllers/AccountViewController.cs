@@ -965,9 +965,9 @@ public class AccountViewController : IDisposable
     /// <param name="exportMode">The information to export</param>
     public void ExportToCSV(string path, ExportMode exportMode)
     {
-        if (_account.ExportToCSV(path, exportMode, _filteredIds))
+        if (_account.ExportToCSV(path, exportMode, _filteredIds!))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
         }
         else
         {
@@ -983,9 +983,9 @@ public class AccountViewController : IDisposable
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        if (_account.ExportToPDF(path, exportMode, _filteredIds, password))
+        if (_account.ExportToPDF(path, exportMode, _filteredIds!, password))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
         }
         else
         {

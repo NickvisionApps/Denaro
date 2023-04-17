@@ -27,6 +27,8 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
+
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
 
@@ -39,8 +41,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
 
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
 
@@ -52,6 +52,18 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_launcher_new(nint file);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_launcher_launch(nint fileLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_uri_launcher_new(string uri);
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -222,8 +234,16 @@ public partial class MainWindow : Adw.ApplicationWindow
         var toast = Adw.Toast.New(e.Message);
         if (e.Action == "help-import")
         {
+            var uriLauncher = gtk_uri_launcher_new("help:denaro/import-export");
             toast.SetButtonLabel(_controller.Localizer["Help"]);
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:denaro/import-export", 0);
+            toast.OnButtonClicked += (sender, e) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+        }
+        else if (e.Action == "open-export")
+        {
+            var file = Gio.FileHelper.NewForPath(e.ActionParam);
+            var fileLauncher = gtk_file_launcher_new(file.Handle);
+            toast.SetButtonLabel(_controller.Localizer["Open"]);
+            toast.OnButtonClicked += (sender, e) => gtk_file_launcher_launch(fileLauncher, 0, 0, (source, res, data) => { }, 0);
         }
         _toastOverlay.AddToast(toast);
     }

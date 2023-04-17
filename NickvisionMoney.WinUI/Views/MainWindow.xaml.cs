@@ -311,7 +311,7 @@ public sealed partial class MainWindow : Window
         if (e.Action == "help-import")
         {
             BtnInfoBar.Content = _controller.Localizer["Help"];
-            _notificationButtonClickEvent = async (sender, e) =>
+            _notificationButtonClickEvent = async (sender, ex) =>
             {
                 var lang = "C";
                 var availableTranslations = new string[2] { "es", "ru" };
@@ -320,6 +320,15 @@ public sealed partial class MainWindow : Window
                     lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
                 }
                 await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Denaro/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/import-export.html"));
+            };
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "open-export")
+        {
+            BtnInfoBar.Content = _controller.Localizer["Open"];
+            _notificationButtonClickEvent = async (sender, ex) =>
+            {
+                await Launcher.LaunchFileAsync(await StorageFile.GetFileFromPathAsync(e.ActionParam));
             };
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
