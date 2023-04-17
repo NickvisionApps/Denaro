@@ -61,5 +61,9 @@
 		<title>Recibo</title>
 		<p>Una imagen de un recibo de transacción. Puede cargar una imagen JPEG o PNG o un documento PDF, pero sin importar el formato, se convertirá y se guardará como una imagen JPEG. En caso de PDF, solo se guardará la primera página. Puede eliminar o cargar otro archivo en cualquier momento.</p>
 	</item>
+	<item>
+		<title>Notas</title>
+		<p>Una nota de texto libre para adjuntar a la transacción.</p>
+	</item>
 </terms>
 </page>
