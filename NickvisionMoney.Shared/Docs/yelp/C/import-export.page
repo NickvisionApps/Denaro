@@ -77,6 +77,10 @@
 					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
 				</item>
 				<item>
+					<title>UseGroupColor</title>
+					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+				</item>
+				<item>
 					<title>Group</title>
 					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
 				</item>
@@ -88,12 +92,18 @@
 					<title>GroupDescription</title>
 					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
 				</item>
+				<item>
+					<title>GroupRGBA</title>
+					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+				</item>
 			</list>
+			<p>Receipt and notes are not present in CSV.</p>
 		</item>
 	</list>
 </div>
 <div>
 	<title>Export Formats</title>
+	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
 	<list>
 		<item>
 			<p>Portable Document Format (<file>.pdf</file>)</p>
