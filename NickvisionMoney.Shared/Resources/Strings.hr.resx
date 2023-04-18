@@ -936,4 +936,20 @@ Ako se lozinka izgubi, PDF neće biti dostupan.</value>
   <data name="Notes.Placeholder" xml:space="preserve">
     <value>Upiši bilješke ovdje</value>
   </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Izvezi sve informacije</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Izvezi trenutačni prikaz</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Da li umjesto latiničnih brojki koristiti brojke tvog jezika.</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Koristi lokalne brojke</value>
+  </data>
 </root>
