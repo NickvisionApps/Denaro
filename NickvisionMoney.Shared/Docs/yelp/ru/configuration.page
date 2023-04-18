@@ -1,17 +1,15 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="configuration">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="ru">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Конфигурация 🔧</title>
-	<title type="text">Конфигурация</title>
 	<credit type="author">
 		<name>Фёдор Соболев</name>
 	</credit>
 	<credit type="publisher">
 		<name>Nicholas Logozzo</name>
 	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Конфигурация</title>
@@ -20,7 +18,7 @@
 <terms>
 	<item>
 		<title>Тема</title>
-		<p>Установите, должен ли <app>Denaro</app> использовать светлую или тёмную тему, либо следовать настройкам вашей системы. Для применения темы в ОС Windows требуется перезапуск программы.</p>
+		<p>Установите, должно ли приложение использовать светлую или тёмную тему, либо следовать настройкам вашей системы. Для применения темы в ОС Windows требуется перезапуск программы.</p>
 	</item>
 	<item>
 		<title>Цвет транзакции по умолчанию</title>

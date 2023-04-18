@@ -1,20 +1,15 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="account">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Cuenta 🏦</title>
-	<title type="text">Cuenta</title>
 	<credit type="author">
 		<name>Fyodor Sobolev</name>
 	</credit>
 	<credit type="publisher">
 		<name>Nicholas Logozzo</name>
 	</credit>
-	<credit type="translator">
-		<name>Óscar Fernández Díaz</name>
-	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Cuenta</title>
