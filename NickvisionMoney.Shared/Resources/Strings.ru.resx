@@ -13,9 +13,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <!--Use: &#xA; for newline-->
-	<data name="ShortName" xml:space="preserve">
+  <data name="ShortName" xml:space="preserve">
 		<value>Denaro</value>
-	</data>
+  </data>
   <data name="Description" xml:space="preserve">
 		<value>Управляйте своими личными финансами</value>
   </data>
@@ -952,6 +952,6 @@ Tobias Bernard https://github.com/bertob</value>
     <value>Использовать местные цифры</value>
   </data>
   <data name="UseNativeDigits.Description" xml:space="preserve">
-    <value>Должно приложение использовать цифры, родные для вашего региона, вместо арабских цифр.</value>
+    <value>Должно ли приложение использовать цифры, родные для вашего региона, вместо арабских цифр.</value>
   </data>
 </root>
