@@ -1,21 +1,24 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="configuration">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Configuración 🔧</title>
-	<title type="text">Configuración</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<credit type="translator">
-		<name>Óscar Fernández Díaz</name>
-	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Configuración</title>
 <p>Esta página describe lo que puede cambiar en la configuración de la aplicación.</p>
@@ -48,6 +51,14 @@
 	<item>
 		<title>Color de la cuenta de empresas</title>
 		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Empresas</em> en una lista de cuentas recientes.</p>
+	</item>
+	<item>
+		<title>Usar dígitos nativos</title>
+		<p>Si usar numerales que son nativos para su localización en lugar de dígitos latinos. Por ejemplo, si esta opción está activada <em>٠١٢</em> se usará en lugar de <em>012</em> para las localizaciones que usan numerales arábigos orientales.</p>
+	</item>
+	<item>
+		<title>Insertar separador decimal</title>
+		<p>Establece para qué teclas pulsadas se insertará el separador decimal de la configuración regional en un campo de importe: punto del teclado numérico, cualquier punto y coma, o ninguno. Si el separador decimal ya aparece en un campo, no se insertará.</p>
 	</item>
 	<item>
 		<title>Carpeta de copia de seguridad CSV</title>

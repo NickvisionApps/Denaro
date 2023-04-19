@@ -1,17 +1,17 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="transaction">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="ru">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Транзакция 🧾</title>
-	<title type="text">Транзакция</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Фёдор Соболев</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Транзакция</title>
@@ -57,6 +57,10 @@
 	<item>
 		<title>Чек</title>
 		<p>Изображение чека транзакции. Вы можете загрузить изображение в формате JPEG или PNG, либо PDF документ, но независимо от формата файл будет конвертирован и сохранён как изображение JPEG. Если вы загрузил PDF, только первая страница будет сохранена. Удалить или загрузить другой файл можно в любой момент.</p>
+	</item>
+	<item>
+		<title>Заметки</title>
+		<p>Текстовая заметка в свободной форме для прикрепления к транзакции.</p>
 	</item>
 </terms>
 </page>

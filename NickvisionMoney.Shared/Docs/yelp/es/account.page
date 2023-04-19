@@ -1,21 +1,24 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="account">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Cuenta 🏦</title>
-	<title type="text">Cuenta</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<credit type="translator">
-		<name>Óscar Fernández Díaz</name>
-	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Cuenta</title>
 <p>Esta página explica todas las propiedades de las cuentas en <app>Denaro</app>. La mayoría de ellas se muestran en <gui>Diálogo de configuración de la cuenta</gui>. Este cuadro de diálogo también se abre automáticamente después de crear una cuenta nueva.</p>

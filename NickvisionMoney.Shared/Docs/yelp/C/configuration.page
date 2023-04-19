@@ -1,17 +1,20 @@
 <page xmlns="http://projectmallard.org/1.0/"
 	type="topic"
-	id="configuration">
+	id="configuration"
+	its:version="2.0"
+	xmlns:its="http://www.w3.org/2005/11/its">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Configuration 🔧</title>
-	<title type="text">Configuration</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Configuration</title>
@@ -45,6 +48,14 @@
 	<item>
 		<title>Business Account Color</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
+	</item>
+	<item>
+		<title>Use Native Digits</title>
+		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numberals.</p>
+	</item>
+	<item>
+		<title>Insert Decimal Separator</title>
+		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
 	</item>
 	<item>
 		<title>CSV Backup Folder</title>

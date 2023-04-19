@@ -1,22 +1,26 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="guide"
-	id="index">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="es">
 <info>
 	<title type="link">Ayuda de Denaro</title>
 	<title type="text">Ayuda de Denaro</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<credit type="translator">
-		<name>Óscar Fernández Díaz</name>
-	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 
-<title><media type="image" src="figures/denaro.png" /> Ayuda de Denaro</title>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title><media its:translate="no" type="image" src="figures/denaro.png"/> Ayuda de Denaro</title>
 <p>Esta documentación lo ayudará a comprender cómo configurar y administrar datos en <app>Denaro</app> para aprovechar al máximo la aplicación.</p>
-<p>Para obtener soporte, use <link href="https://github.com/NickvisionApps/Denaro/issues">incidencias</link> o <link href="https://github.com/NickvisionApps/Denaro/discussions" >discusiones</link> en Github, o <link href="https://bit.ly/3GrfEid">únase a nuestro canal Matrix</link>.</p>
+<p>Para obtener soporte, use <link href="https://github.com/NickvisionApps/Denaro/issues">incidencias</link> o <link href="https://github.com/NickvisionApps/Denaro/discussions">discusiones</link> en Github, o <link href="https://bit.ly/3GrfEid">únase a nuestro canal Matrix</link>.</p>
 </page>

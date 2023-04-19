@@ -1,28 +1,31 @@
-<page xmlns="http://projectmallard.org/1.0/"
-	type="topic"
-	id="transaction">
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Transacción 🧾</title>
-	<title type="text">Transacción</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
-	<credit type="translator">
-		<name>Óscar Fernández Díaz</name>
-	</credit>
-	<license href="http://creativecommons.org/licenses/by/4.0/"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Transacción</title>
 <p>Esta página explica todas las propiedades de las transacciones en <app>Denaro</app>.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
+		<title>ID</title>
 		<p>Cada transacción tiene una identificación que es única para una cuenta determinada. Los identificadores comienzan con 1 y aumentan con cada transacción agregada. Los ID no se pueden cambiar, los ID de las transacciones eliminadas no se reusan.</p>
 	</item>
 	<item>
@@ -60,6 +63,10 @@
 	<item>
 		<title>Recibo</title>
 		<p>Una imagen de un recibo de transacción. Puede cargar una imagen JPEG o PNG o un documento PDF, pero sin importar el formato, se convertirá y se guardará como una imagen JPEG. En caso de PDF, solo se guardará la primera página. Puede eliminar o cargar otro archivo en cualquier momento.</p>
+	</item>
+	<item>
+		<title>Notas</title>
+		<p>Una nota de texto libre para adjuntar a la transacción.</p>
 	</item>
 </terms>
 </page>
