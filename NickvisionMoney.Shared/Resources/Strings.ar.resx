@@ -513,7 +513,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>الألوان</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value>خصِّص الألوان التي يستخدمها دنارو.</value>
+		<value>خصِّص الألوان التي يستخدمها دينار.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
 		<value>اللون المبدئيُّ للمعاملات</value>
@@ -758,7 +758,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <value>الإعدادات المحلية</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-    <value>خصِّص كيف يستخدم دنارو الإعدادات المحلية.</value>
+    <value>خصِّص كيف يستخدم دينار الإعدادات المحلية.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
     <value>أدرج فاصلًا عشريًّا</value>
@@ -868,7 +868,7 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <value>لم تتطابق كلمتا السرِّ.</value>
   </data>
   <data name="BackupDescription" xml:space="preserve">
-    <value>خصِّص مواضع النسخ الاحتياطيِّ لحسابات دنارو.</value>
+    <value>خصِّص مواضع النسخ الاحتياطيِّ لحسابات دينار.</value>
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
     <value>لا يوجد مجلَّد نسخ احتياطيٍّ</value>
@@ -947,5 +947,9 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="UseNativeDigits.Description" xml:space="preserve">
     <value>ما إن كان ينبغي استخدام الأرقام المستخدمة في لغتك (مثلًا الأرقام العربية المشرقية) أم الأرقام العربية المغربية.</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>دينار</value>
   </data>
 </root>

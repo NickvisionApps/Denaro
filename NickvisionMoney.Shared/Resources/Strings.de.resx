@@ -937,4 +937,20 @@ Wenn das Passwort verloren geht, ist die PDF-Datei unzugänglich.</value>
   <data name="Notes.Placeholder" xml:space="preserve">
     <value>Notizen hier eingeben</value>
   </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Native Ziffern verwenden</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Ob Sie anstelle von lateinischen Ziffern die für Ihre Sprachumgebung typischen Ziffern verwenden wollen.</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Aktuelle Ansicht exportieren</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Alle Informationen exportieren</value>
+  </data>
 </root>
