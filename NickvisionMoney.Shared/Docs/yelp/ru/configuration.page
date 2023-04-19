@@ -3,11 +3,13 @@
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Конфигурация 🔧</title>
-	<credit type="author">
+	<credit type="author copyright">
 		<name>Фёдор Соболев</name>
+		<years>2023</years>
 	</credit>
-	<credit type="publisher">
+	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
+		<years>2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
