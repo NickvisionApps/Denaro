@@ -862,7 +862,7 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
     <value>Personalize os locais de backup para as contas Denaro.</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-    <value>As contas serão exportadas automaticamente como arquivos CSV para esta pasta quando uma alteração for feita.</value>
+    <value>Contas não criptografadas serão exportadas automaticamente como arquivos CSV para esta pasta quando uma alteração for feita.</value>
   </data>
   <data name="Backup" xml:space="preserve">
     <value>Backup</value>
@@ -923,5 +923,36 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Ordenar</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Gerenciar campos extras da transação.</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Cor Padrão do Grupo</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>Mudanças nesta configuração apenas serão aplicadas em novos grupos.</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Exportar Todas as Informações</value>
+  </data>
+  <data name="OrderBy.Increasing" xml:space="preserve">
+    <value>Ordem Crescente</value>
+  </data>
+  <data name="OrderBy.Decreasing" xml:space="preserve">
+    <value>Ordem Decrescente</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Exportar Visualização Atual</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Usar Dígitos Nativos</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Caso deseja usar numerais que são nativos para sua localidade em vez de dígitos latinos.</value>
   </data>
 </root>
