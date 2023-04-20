@@ -948,4 +948,8 @@ Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk zijn.<
   <data name="ExportToFile.Current" xml:space="preserve">
     <value>Huidige weergave exporteren</value>
   </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
 </root>

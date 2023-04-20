@@ -936,4 +936,20 @@ Se a palavra-passe for perdida, o PDF ficará inacessível.</value>
   <data name="SortBy" xml:space="preserve">
     <value>Ordenar por</value>
   </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Exportar Todas as Informações</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Exportar Visualização Atual</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Usar Dígitos Nativos</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Caso deseja usar numerais que são nativos para sua localidade em vez de dígitos latinos.</value>
+  </data>
 </root>
