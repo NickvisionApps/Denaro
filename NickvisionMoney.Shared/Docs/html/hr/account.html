@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Account</title>
+<link rel="stylesheet" type="text/css" href="../C/C.css">
+<script type="text/javascript" src="../C/highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
+</head>
+<body lang="hr" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Account</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">This page explains all properties of accounts in <span class="app">Denaro</span>. Most of them are shown in <span class="gui">Account Settings Dialog</span>. This dialog also opens automatically after you create a new account.</p>
+<p class="p">Each account is stored in a single <span class="file">*.nmoney</span> file. Files created in an older <span class="em">stable</span> version of <span class="app">Denaro</span> can be safely opened in a more recent <span class="em">stable</span> version of the application. Although the app can run on different platforms (Windows and Linux), the <span class="file">*.nmoney</span> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<div class="note note-warning" title="Upozorenje">
+<svg height="24" width="24" version="1.1">
+ <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p></div></div></div>
+</div>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms">Name</dt>
+<dd class="terms"><p class="p">Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p></dd>
+<dt class="terms">Account Type</dt>
+<dd class="terms"><p class="p">There are 3 account types available: 🟣<span class="em">Checking</span>, 🔵<span class="em">Savings</span> and 🟢<span class="em">Business</span>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <span class="link"><a href="configuration.html" title="Configuration">global settings</a></span>.</p></dd>
+<dt class="terms">Default Transaction Type</dt>
+<dd class="terms"><p class="p">When you create a new transaction its type by default will be the same as in this setting.</p></dd>
+<dt class="terms">System Currency</dt>
+<dd class="terms">
+<p class="p">Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">If your locale is <span class="em">English (US)</span>, currency symbol will be set to <span class="em">$</span> and <span class="em">1,000.00</span> will be accepted as a valid number.</p></li>
+<li class="list"><p class="p">If your locale is <span class="em">Italian</span>, currency symbol will be set to <span class="em">€</span> and <span class="em">1.000,00</span> will be accepted as a valid number.</p></li>
+<li class="list"><p class="p">If your locale is <span class="em">Russian</span>, currency symbol will be set to <span class="em">₽</span> and <span class="em">1000,00</span> will be accepted as a valid number.</p></li>
+</ul></div></div></div>
+<div class="note note-advanced" title="Napredna">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
+  <path class="yelp-svg-fill" d="m12 3a5 5 0 0 0 -5 5 5 5 0 0 0 5 5 5 5 0 0 0 5 -5 5 5 0 0 0 -5 -5zm0 3a2 2 0 0 1 2 2 2 2 0 0 1 -2 2 2 2 0 0 1 -2 -2 2 2 0 0 1 2 -2z"></path>
+  <path class="yelp-svg-fill" d="m15.312 6 3.688 1v2l-3.4688 1z"></path>
+  <path class="yelp-svg-fill" d="m14 11.312-1 3.688h-2l-1-3.469z"></path>
+  <path class="yelp-svg-fill" d="m10 4.6875 1-3.6875h2l1 3.4688z"></path>
+  <path class="yelp-svg-fill" d="m8.6875 10-3.6875-1v-2l3.4688-1z"></path>
+  <path class="yelp-svg-fill" d="m12.928 4.2435 3.3146-1.9003 1.4142 1.4142-1.7457 3.1599z"></path>
+  <path class="yelp-svg-fill" d="m15.757 8.9281 1.9003 3.3146-1.4142 1.4142-3.1599-1.7457z"></path>
+  <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
+  <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <span class="code">LANG</span>, <span class="code">LC_TIME</span>, and <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <span class="code">locale</span> command in a terminal. If you found a bug and want to report it, please provide the output of the <span class="code">locale</span> command to allow developers to reproduce your issue with the same settings.</p></div></div></div>
+</div>
+</dd>
+<dt class="terms">Use Custom Currency</dt>
+<dd class="terms"><p class="p">If this option is enabled, <span class="gui">Custom Currency Symbol</span> will be used instead of currency symbol provided by your system locale.</p></dd>
+<dt class="terms">Custom Currency Symbol</dt>
+<dd class="terms"><p class="p">Up to 3 characters or 1 emoji. It can't be a number.</p></dd>
+<dt class="terms">Custom Currency Code</dt>
+<dd class="terms">
+<p class="p">Up to 3 characters or 1 emoji.</p>
+<p class="p">An example to understand the difference between a symbol and a code: <span class="em">$</span> is a symbol, <span class="em">USD</span> is a code.</p>
+</dd>
+<dt class="terms">Custom Currency Decimal and Group Separators</dt>
+<dd class="terms"><p class="p">Up to 2 characters or 1 emoji.</p></dd>
+<dt class="terms">Custom Currency Decimal Digits</dt>
+<dd class="terms"><p class="p">The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p></dd>
+<dt class="terms">Password</dt>
+<dd class="terms"><p class="p">Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p></dd>
+<dt class="terms">Sort by Id, Date or Amount</dt>
+<dd class="terms"><p class="p">Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
+<dt class="terms">Sorting Order</dt>
+<dd class="terms"><p class="p">Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
+<dt class="terms">Groups Visibility</dt>
+<dd class="terms"><p class="p">Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p></dd>
+</dl></div></div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">Više informacija</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">O programu</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Napisao/la</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Objavio</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="pt-BR">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Transaction 🧾</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years>2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years>2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Transaction</title>
+<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+
+<terms>
+	<item>
+		<title>Id</title>
+		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+	</item>
+	<item>
+		<title>Description</title>
+		<p>No limit on length. It can't contain semicolon.</p>
+	</item>
+	<item>
+		<title>Amount</title>
+		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+	</item>
+	<item>
+		<title>Type</title>
+		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+	</item>
+	<item>
+		<title>Date</title>
+		<p>Any date can be selected, you can also create transactions for future dates.</p>
+	</item>
+	<item>
+		<title>Repeat Interval</title>
+		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+	</item>
+	<item>
+		<title>Repeat End Date</title>
+		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+	</item>
+	<item>
+		<title>Group</title>
+		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+	</item>
+	<item>
+		<title>Color</title>
+		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+	</item>
+	<item>
+		<title>Receipt</title>
+		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+	</item>
+	<item>
+		<title>Notes</title>
+		<p>A freeform text note to attach to transaction.</p>
+	</item>
+</terms>
+</page>

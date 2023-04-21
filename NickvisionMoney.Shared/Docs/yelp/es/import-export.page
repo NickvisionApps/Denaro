@@ -76,7 +76,7 @@
 				</item>
 				<item>
 					<title its:translate="no">Amount</title>
-					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+					<p>Importe de la transacción en formato inglés (US) (<em>123,456.78</em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">RGBA</title>
@@ -103,7 +103,7 @@
 					<p>Color del grupo, debe estar en formato <em>rgb(R,G,B)</em> donde <em>R</em>, <em>G</em> y <em>B</em> son números enteros comprendidos entre 0 y 255.</p>
 				</item>
 			</list>
-			<p>Receipt and notes are not present in CSV.</p>
+			<p>Los recibos y notas no están presentes en CSV.</p>
 		</item>
 	</list>
 </div>

@@ -278,10 +278,14 @@ public sealed partial class MainWindow : Window
             _notificationButtonClickEvent = async (sender, ex) =>
             {
                 var lang = "C";
-                var availableTranslations = new string[2] { "es", "ru" };
+                var availableTranslations = new string[21] { "ar", "da", "de", "es", "et", "fi", "fr", "hi", "hr", "id", "it", "nl", "oc", "pl", "pt", "pt_BR", "ru", "sv", "tr", "ur", "zh_Hans" };
                 if (availableTranslations.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
                 {
                     lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+                }
+                if (availableTranslations.Contains(CultureInfo.CurrentCulture.Name.Replace("-", "_")))
+                {
+                    lang = CultureInfo.CurrentCulture.Name.Replace("-", "_");
                 }
                 await Launcher.LaunchUriAsync(new Uri($"https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Denaro/{_controller.AppInfo.Version}/NickvisionMoney.Shared/Docs/html/{lang}/import-export.html"));
             };

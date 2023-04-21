@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="pt-BR">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Import/Export 📤</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years>2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years>2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Import/Export</title>
+<div>
+	<title>Import Formats</title>
+	<list>
+		<item>
+			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
+			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+		</item>
+		<item>
+			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
+			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+		</item>
+		<item>
+			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
+			<p>❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <app>Denaro</app> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <app>Denaro</app> expects to find:</p>
+			<p its:translate="no"><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</code></p>
+			<list>
+				<item>
+					<title its:translate="no">ID</title>
+					<p>Transaction Id, should be unique for a given account. Ids start with 1.</p>
+				</item>
+				<item>
+					<title its:translate="no">Date</title>
+					<p>Transaction date (or start date in case of repeat transaction), should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+				</item>
+				<item>
+					<title its:translate="no">Description</title>
+					<p>Transaction description, it can contain any characters except semicolon.</p>
+				</item>
+				<item>
+					<title its:translate="no">Type</title>
+					<p>Transaction type: 0 for income, 1 for expense.</p>
+				</item>
+				<item>
+					<title its:translate="no">RepeatInterval</title>
+					<p>A number representing transaction repeat interval:</p>
+					<p>0 - Never</p>
+					<p>1 - Daily</p>
+					<p>2 - Weekly</p>
+					<p>7 - Biweekly</p>
+					<p>3 - Monthly</p>
+					<p>4 - Quarterly</p>
+					<p>5 - Yearly</p>
+					<p>6 - Biyearly</p>
+					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
+				</item>
+				<item>
+					<title its:translate="no">RepeatFrom</title>
+					<p>Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+				</item>
+				<item>
+					<title its:translate="no">RepeatEndDate</title>
+					<p>End date for repeat transaction, should be in English (US) format (<em>MM/DD/YYYY</em>). Leave it empty if it's not repeat transaction.</p>
+				</item>
+				<item>
+					<title its:translate="no">Amount</title>
+					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+				</item>
+				<item>
+					<title its:translate="no">RGBA</title>
+					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+				</item>
+				<item>
+					<title its:translate="no">UseGroupColor</title>
+					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+				</item>
+				<item>
+					<title its:translate="no">Group</title>
+					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+				</item>
+				<item>
+					<title its:translate="no">GroupName</title>
+					<p>Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+				</item>
+				<item>
+					<title its:translate="no">GroupDescription</title>
+					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+				</item>
+				<item>
+					<title its:translate="no">GroupRGBA</title>
+					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+				</item>
+			</list>
+			<p>Receipt and notes are not present in CSV.</p>
+		</item>
+	</list>
+</div>
+<div>
+	<title>Export Formats</title>
+	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+	<list>
+		<item>
+			<p its:translate="no">Portable Document Format (<file>.pdf</file>)</p>
+			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+		</item>
+		<item>
+			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
+		</item>
+	</list>
+</div>
+</page>
