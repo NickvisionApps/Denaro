@@ -2,24 +2,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-04-19 17:12+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-04-21 01:38+0000\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
+"docs/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Philip Goto https://flipflop97.github.io/"
 
 #. (itstool) path: info/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:8
 msgctxt "link"
 msgid "Account 🏦"
-msgstr ""
+msgstr "Account 🏦"
 
 #. (itstool) path: credit/name
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:10
@@ -29,7 +32,7 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:10
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:10
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #. (itstool) path: credit/years
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:11
@@ -45,7 +48,7 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:11
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:15
 msgid "2023"
-msgstr ""
+msgstr "2023"
 
 #. (itstool) path: credit/name
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:14
@@ -55,12 +58,12 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:14
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:14
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:20
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:21
@@ -80,7 +83,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:30
@@ -90,7 +93,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:33
 msgid "Account Type"
-msgstr ""
+msgstr "Accounttype"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:34
@@ -100,7 +103,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "Standaaardtransactietype"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:38
@@ -110,7 +113,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:41
 msgid "System Currency"
-msgstr ""
+msgstr "Systeemvaluta"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:42
@@ -140,7 +143,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:53
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "Aangepaste valuta gebruiken"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:54
@@ -150,7 +153,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:57
 msgid "Custom Currency Symbol"
-msgstr ""
+msgstr "Aangepast valutasymbool"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:58
@@ -160,7 +163,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:61
 msgid "Custom Currency Code"
-msgstr ""
+msgstr "Aangepaste valutacode"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:62
@@ -195,7 +198,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:74
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:75
@@ -215,7 +218,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:82
 msgid "Sorting Order"
-msgstr ""
+msgstr "Sorteervolgorde"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:83
@@ -225,7 +228,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:86
 msgid "Groups Visibility"
-msgstr ""
+msgstr "Groepszichtbaarheid"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:87
@@ -236,12 +239,12 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr ""
+msgstr "Configuratie 🔧"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr ""
+msgstr "Configuratie"
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:21
@@ -256,7 +259,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:25
 msgid "Theme"
-msgstr ""
+msgstr "Thema"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:26
@@ -266,7 +269,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "Standaard­transactiekleur"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:30
@@ -276,7 +279,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "Standaard­overdrachtkleur"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:34
@@ -286,7 +289,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr ""
+msgstr "Standaard­groepskleur"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:38
@@ -357,17 +360,17 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
-msgstr ""
+msgstr "Importeren/exporteren 📤"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:20
 msgid "Import/Export"
-msgstr ""
+msgstr "Importeren/exporteren"
 
 #. (itstool) path: div/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:22
 msgid "Import Formats"
-msgstr ""
+msgstr "Formaten importeren"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:26
@@ -507,7 +510,7 @@ msgstr ""
 #. (itstool) path: div/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:108
 msgid "Export Formats"
-msgstr ""
+msgstr "Formaten exporteren"
 
 #. (itstool) path: div/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:109
@@ -523,13 +526,13 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:7
 msgctxt "link"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Hulp voor Denaro"
 
 #. (itstool) path: info/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:8
 msgctxt "text"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Hulp voor Denaro"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:20
@@ -550,12 +553,12 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:8
 msgctxt "link"
 msgid "Transaction 🧾"
-msgstr ""
+msgstr "Transactie 🧾"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr ""
+msgstr "Transactie"
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:21
@@ -565,7 +568,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:25
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:26
@@ -575,7 +578,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:29
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:30
@@ -585,7 +588,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:33
 msgid "Amount"
-msgstr ""
+msgstr "Hoeveelheid"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:34
@@ -595,7 +598,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:38
@@ -605,7 +608,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:41
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:42
@@ -615,7 +618,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "Herhalingsinterval"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:46
@@ -635,7 +638,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:53
 msgid "Group"
-msgstr ""
+msgstr "Groep"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:54
@@ -645,7 +648,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:57
 msgid "Color"
-msgstr ""
+msgstr "Kleur"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:58
@@ -655,7 +658,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:61
 msgid "Receipt"
-msgstr ""
+msgstr "Factuur"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:62
@@ -665,7 +668,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:65
 msgid "Notes"
-msgstr ""
+msgstr "Aantekeningen"
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:66
@@ -676,12 +679,12 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:8
 msgctxt "link"
 msgid "Transfer 💸"
-msgstr ""
+msgstr "Overdracht 💸"
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:20
 msgid "Transfer"
-msgstr ""
+msgstr "Overdracht"
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:21
