@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Import/Export</title>
+<link rel="stylesheet" type="text/css" href="../C/C.css">
+<script type="text/javascript" src="../C/highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
+</head>
+<body lang="ur" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Import/Export</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<div class="div"><div class="inner">
+<div class="title title-div"><h2><span class="title">Import Formats</span></h2></div>
+<div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p>
+<p class="p">Dates should be in <span class="em">YYYYMMDD</span> format.</p>
+</li>
+<li class="list">
+<p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p>
+<p class="p">Dates should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+</li>
+<li class="list">
+<p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
+<p class="p">❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <span class="app">Denaro</span> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <span class="app">Denaro</span> expects to find:</p>
+<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<div class="title title-item"><h2><span class="title">ID</span></h2></div>
+<p class="p">Transaction Id, should be unique for a given account. Ids start with 1.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Date</span></h2></div>
+<p class="p">Transaction date (or start date in case of repeat transaction), should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Description</span></h2></div>
+<p class="p">Transaction description, it can contain any characters except semicolon.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Type</span></h2></div>
+<p class="p">Transaction type: 0 for income, 1 for expense.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatInterval</span></h2></div>
+<p class="p">A number representing transaction repeat interval:</p>
+<p class="p">0 - Never</p>
+<p class="p">1 - Daily</p>
+<p class="p">2 - Weekly</p>
+<p class="p">7 - Biweekly</p>
+<p class="p">3 - Monthly</p>
+<p class="p">4 - Quarterly</p>
+<p class="p">5 - Yearly</p>
+<p class="p">6 - Biyearly</p>
+<p class="p">See <span class="em">Repeat Interval</span> in <span class="link"><a href="transaction.html" title="Transaction">transaction</a></span> page for details about repeat transactions.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatFrom</span></h2></div>
+<p class="p">Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatEndDate</span></h2></div>
+<p class="p">End date for repeat transaction, should be in English (US) format (<span class="em">MM/DD/YYYY</span>). Leave it empty if it's not repeat transaction.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Amount</span></h2></div>
+<p class="p">Transaction amount in English (US) format (<span class="em">123,456.78</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RGBA</span></h2></div>
+<p class="p">Transaction color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
+<p class="p">Whether a transaction should use group color: 0 — false, 1 — true.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Group</span></h2></div>
+<p class="p">Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupName</span></h2></div>
+<p class="p">Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
+<p class="p">Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
+<p class="p">Group color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+</li>
+</ul></div></div></div>
+<p class="p">Receipt and notes are not present in CSV.</p>
+</li>
+</ul></div></div></div></div></div>
+</div></div>
+<div class="div"><div class="inner">
+<div class="title title-div"><h2><span class="title">Export Formats</span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
+<p class="p">A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+</li>
+<li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
+</ul></div></div></div>
+</div></div>
+</div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">About</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Written By</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Published By</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>
