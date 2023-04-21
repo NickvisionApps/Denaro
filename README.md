@@ -14,8 +14,11 @@
 
 # Installation
 
+<p>
 <a href='https://flathub.org/apps/details/org.nickvision.money'><img width='140' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<p>
 <a href="https://snapcraft.io/denaro"><img width='140' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" /></a>
+<p>
 <a href='https://apps.microsoft.com/store/detail/nickvision-denaro/9NJD9Q23NFGH'><img width='140' alt='Download from Microsoft Store' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/1024px-Get_it_from_Microsoft_Badge.svg.png'/></a>
 
 # Chat
