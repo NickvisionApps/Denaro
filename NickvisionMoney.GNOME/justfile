@@ -182,7 +182,7 @@ _translate_meta PREFIX:
                 elif item.attrib['name'] == 'MetadataDescription.GTK':
                     text = ET.tostring(item.find('value'), encoding='unicode').strip()[7:-8]
                     if text:
-                        meta_descriptions[lang_code] = ET.fromstring(f'<description xml:lang="{lang_code}">{text}</description>')
+                        meta_descriptions[lang_code] = ET.fromstring(f'<p xml:lang="{lang_code}">{text}</p>')
                 elif item.attrib['name'] == 'Keywords.GTK':
                     text = item.find('value').text
                     if text:
@@ -217,8 +217,8 @@ _translate_meta PREFIX:
             metainfo.insert(list(metainfo).index(metainfo.find('name')) + i + 1, v)
         for i, v in enumerate(meta_summaries.values()):
             metainfo.insert(list(metainfo).index(metainfo.find('summary')) + i + 1, v)
-        for i, v in enumerate(meta_descriptions.values()):
-            metainfo.insert(list(metainfo).index(metainfo.find('description')) + i + 1, v)
+        for v in meta_descriptions.values():
+            metainfo.find('description[1]').append(v)
         ET.indent(metainfo, '  ')
     with open('{{builddir}}{{PREFIX}}/share/metainfo/{{app_id}}.metainfo.xml', 'w') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(metainfo, encoding='unicode'))
