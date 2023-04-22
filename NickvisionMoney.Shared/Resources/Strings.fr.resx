@@ -331,7 +331,7 @@ Cette action est irréversible.</value>
 		<value>Jamais</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value>Quotidienne</value>
+		<value>Quotidien</value>
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
 		<value>Hebdomadaire</value>
@@ -923,5 +923,33 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
   </data>
   <data name="SortBy" xml:space="preserve">
     <value>Trier par</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Champs supplémentaires de la transaction.</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Entrez vos notes ici</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Exporter toutes les informations</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Exporter la vue actuelle</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Utiliser des chiffres natifs</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Indique s’il faut utiliser des chiffres natifs de votre langue à la place de chiffres latins.</value>
   </data>
 </root>
