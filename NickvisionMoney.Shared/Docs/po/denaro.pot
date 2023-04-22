@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-04-19 17:12+0300\n"
+"POT-Creation-Date: 2023-04-22 07:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,22 +28,6 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:10
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:10
 msgid "Fyodor Sobolev"
-msgstr ""
-
-#. (itstool) path: credit/years
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:15
-msgid "2023"
 msgstr ""
 
 #. (itstool) path: credit/name
