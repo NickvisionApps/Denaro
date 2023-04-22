@@ -828,4 +828,7 @@ En cas de pèrda del senhal lo document serà inaccessible.</value>
   <data name="Extras" xml:space="preserve">
     <value>Extras</value>
   </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Nòtas</value>
+  </data>
 </root>
