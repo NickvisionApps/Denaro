@@ -45,7 +45,7 @@ public partial class Program
     /// </summary>
     public Program()
     {
-        if (string.IsNullOrEmpty(CultureInfo.CurrentCulture.ToString()))
+        if (CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture))
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US"); // Fix #465
         }
