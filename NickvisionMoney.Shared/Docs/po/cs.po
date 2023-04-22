@@ -2,16 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-04-19 17:12+0300\n"
-"PO-Revision-Date: 2023-04-22 16:21+0000\n"
-"Last-Translator: Ysujy <ysujy.mail@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
-"docs/de/>\n"
-"Language: de\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -22,7 +19,7 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:8
 msgctxt "link"
 msgid "Account 🏦"
-msgstr "Konto 🏦"
+msgstr ""
 
 #. (itstool) path: credit/name
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:10
@@ -32,7 +29,7 @@ msgstr "Konto 🏦"
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:10
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:10
 msgid "Fyodor Sobolev"
-msgstr "Fyodor Sobolev"
+msgstr ""
 
 #. (itstool) path: credit/years
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:11
@@ -48,7 +45,7 @@ msgstr "Fyodor Sobolev"
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:11
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:15
 msgid "2023"
-msgstr "2023"
+msgstr ""
 
 #. (itstool) path: credit/name
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:14
@@ -58,12 +55,12 @@ msgstr "2023"
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:14
 #: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:14
 msgid "Nicholas Logozzo"
-msgstr "Nicholas Logozzo"
+msgstr ""
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:20
 msgid "Account"
-msgstr "Konto"
+msgstr ""
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:21
@@ -83,20 +80,17 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:29
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:30
 msgid "Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis."
 msgstr ""
-"Der Kontoname wird in der Liste der zuletzt verwendeten Konten und in den "
-"Registerkarten angezeigt. Ein Name hat keine Längenbeschränkung und kann "
-"beliebige Zeichen enthalten, einschließlich Emojis."
 
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:33
 msgid "Account Type"
-msgstr "Konto Typ"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:34
@@ -116,7 +110,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:41
 msgid "System Currency"
-msgstr "Systemwährung"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:42
@@ -146,7 +140,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:53
 msgid "Use Custom Currency"
-msgstr "Benutzerdefinierte Währung verwenden"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:54
@@ -166,7 +160,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:61
 msgid "Custom Currency Code"
-msgstr "Benutzerdefinierter Währungscode"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:62
@@ -201,19 +195,12 @@ msgstr ""
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:74
 msgid "Password"
-msgstr "Passwort"
+msgstr ""
 
 #. (itstool) path: item/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:75
 msgid "Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account."
 msgstr ""
-"Jedes Konto kann durch ein Passwort geschützt werden. Das Hinzufügen eines "
-"Passworts führt zur Verschlüsselung des Kontos (wodurch es unmöglich wird, "
-"die Daten ohne Entschlüsselung mit dem Passwort zu lesen). Vorsicht: Wenn "
-"das Passwort verloren geht, können die Daten nicht wiederhergestellt werden! "
-"Ein Passwort kann auch über den Kontoeinstellungen-Dialog eines offenen "
-"Kontos geändert oder entfernt werden. Das Entfernen eines Passworts "
-"entschlüsselt das Konto."
 
 #. (itstool) path: item/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:78
@@ -249,18 +236,17 @@ msgstr ""
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr "Konfiguration 🔧"
+msgstr ""
 
 #. (itstool) path: page/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr "Konfiguration"
+msgstr ""
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:21
 msgid "This page describes what you can change in the application configuration."
 msgstr ""
-"Diese Seite beschreibt, was Sie in der Anwendungskonfiguration ändern können."
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:22
