@@ -7,13 +7,11 @@
   <developer_name>Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
   <description>
-    <p>
-      — Manage multiple accounts at a time, with a familiar tab interface
-      — Easily filter transactions by type, group, or date
-      — Easily repeat transactions, such as bills that occur every month
-      — Transfer money from one account to another
-      — Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account
-    </p>
+    <p>— Manage multiple accounts at a time, with a familiar tab interface</p>
+    <p>— Easily filter transactions by type, group, or date</p>
+    <p>— Easily repeat transactions, such as bills that occur every month</p>
+    <p>— Transfer money from one account to another</p>
+    <p>— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</p>
   </description>
   <launchable type="desktop-id">org.nickvision.money.desktop</launchable>
   <screenshots>
