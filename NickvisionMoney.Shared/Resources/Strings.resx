@@ -1181,13 +1181,11 @@
 
 	<!--GTK Specific-->
 	<data name="MetadataDescription.GTK" xml:space="preserve">
-		<value><ul>
-		<li>Manage multiple accounts at a time, with a familiar tab interface</li>
-		<li>Easily filter transactions by type, group, or date</li>
-		<li>Easily repeat transactions, such as bills that occur every month</li>
-		<li>Transfer money from one account to another</li>
-		<li>Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</li>
-		</ul></value>
+		<value><p>— Manage multiple accounts at a time, with a familiar tab interface</p>
+<p>— Easily filter transactions by type, group, or date</p>
+<p>— Easily repeat transactions, such as bills that occur every month</p>
+<p>— Transfer money from one account to another</p>
+<p>— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</p></value>
 	</data>
 
 	<data name="Keywords.GTK" xml:space="preserve">
