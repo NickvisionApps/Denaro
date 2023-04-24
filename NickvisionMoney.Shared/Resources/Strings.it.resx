@@ -940,4 +940,16 @@ In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
     <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
     <value>Denaro</value>
   </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Esporta tutte le informazioni</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Esporta vista corrente</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Usa cifre native</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Se utilizzare numeri nativi per la propria lingua anziché cifre latine.</value>
+  </data>
 </root>

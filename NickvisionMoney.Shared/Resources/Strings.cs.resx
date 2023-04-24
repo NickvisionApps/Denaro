@@ -206,732 +206,758 @@ Tobias Bernard https://github.com/bertob</value>
 		<value>Akce</value>
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value />
+		<value>Nová transakce</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value />
+		<value>Nová transakce (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value />
+		<value>Nová skupina</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value />
+		<value>Nová skupina (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value />
+		<value>Převod peněz</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value />
+		<value>Převod peněz (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value />
+		<value>Import ze souboru</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value />
+		<value>Import ze souboru (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value />
+		<value>Export do souboru</value>
   </data>
   <data name="ExportToFile.All" xml:space="preserve">
-		<value />
+		<value>Exportovat všechny informace</value>
   </data>
   <data name="ExportToFile.Current" xml:space="preserve">
-		<value />
+		<value>Exportovat aktuální zobrazení</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value />
+		<value>Přehled</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value />
+		<value>Dnešní přehled</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value />
+		<value>Celkem</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value />
+		<value>Příjem</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value />
+		<value>Výdaj</value>
   </data>
   <data name="Groups" xml:space="preserve">
-		<value />
+		<value>Skupiny</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value />
+		<value>Transakce</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-		<value />
+		<value>Transakce ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-		<value />
+		<value>Transakce ({0})</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value />
+		<value>Žádné transakce</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value />
+		<value>Nenalezeny žádné transakce</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value />
+		<value>Přidejte novou transakci nebo importujte transakce ze souboru.</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value />
+		<value>Žádné transakce neodpovídají zadaným filtrům.</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value />
+		<value>Řazení od prvního do posledního</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value />
+		<value>Řazení od posledního k prvnímu</value>
   </data>
   <data name="Filters" xml:space="preserve">
-		<value />
+		<value>Filtry</value>
   </data>
   <data name="ResetFilters.All" xml:space="preserve">
-		<value />
+		<value>Obnovit všechny filtry</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value />
+		<value>Obnovit filtry přehledu</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value />
+		<value>Obnovit filtry skupin</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value />
+		<value>Obnovit filtry dat</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value />
+		<value>Kalendář</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
-		<value />
+		<value>Zvolte rozsah</value>
   </data>
   <data name="Start.DateRange" xml:space="preserve">
-		<value />
+		<value>Začátek</value>
   </data>
   <data name="End.DateRange" xml:space="preserve">
-		<value />
+		<value>Konec</value>
   </data>
   <data name="DeleteGroup" xml:space="preserve">
-		<value />
+		<value>Odstranit skupinu?</value>
   </data>
   <data name="DeleteGroupDescription" xml:space="preserve">
-		<value />
+		<value>Opravdu chcete odstranit tuto skupinu?
+Tato akce je nevratná.</value>
   </data>
   <data name="DeleteTransaction" xml:space="preserve">
-		<value />
+		<value>Odstranit transakci?</value>
   </data>
   <data name="DeleteTransactionDescription" xml:space="preserve">
-		<value />
+		<value>Opravdu chcete odstranit tuto transakci?
+Tato akce je nevratná.</value>
   </data>
   <data name="DeleteTransaction.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Odstranit transakci</value>
   </data>
   <data name="DeleteTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Tato transakce je opakovanou transakcí zdroje.
+Co chcete s opakovanými transakcemi udělat?
+
+Odstraněním pouze zdrojové transakce umožníte
+úpravu vygenerovaných transakcí.</value>
   </data>
   <data name="DeleteOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Odstranit pouze zdroj</value>
   </data>
   <data name="DeleteSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Odstranit zdroj a generované</value>
   </data>
   <data name="EditTransaction.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Aktualizovat transakci</value>
   </data>
   <data name="EditTransactionDescription.SourceRepeat" xml:space="preserve">
-		<value />
+		<value>Tato transakce je opakovanou transakcí zdroje.
+Co chcete s opakovanými transakcemi udělat?
+
+Aktualizací pouze zdrojové transakce dojde k odpojení
+vygenerovaných transakcí od zdroje.</value>
   </data>
   <data name="EditOnlySourceTransaction" xml:space="preserve">
-		<value />
+		<value>Aktualizovat pouze zdroj</value>
   </data>
   <data name="EditSourceGeneratedTransaction" xml:space="preserve">
-		<value />
+		<value>Aktualizovat zdroj a generované</value>
   </data>
   <data name="RepeatIntervalChanged" xml:space="preserve">
-		<value />
+		<value>Interval opakování změněn</value>
   </data>
   <data name="RepeatIntervalChangedDescription" xml:space="preserve">
-		<value />
+		<value>Interval opakování byl změněn.
+Co chcete udělat se stávajícími vygenerovanými transakcemi?
+
+Nové opakované transakce budou generovány na základě nového intervalu.</value>
   </data>
   <data name="DeleteExisting" xml:space="preserve">
-		<value />
+		<value>Odstranit stávající</value>
   </data>
   <data name="DisassociateExisting" xml:space="preserve">
-		<value />
+		<value>Odpojit stávající</value>
   </data>
   <data name="NoMoneyToTransfer" xml:space="preserve">
-		<value />
+		<value>Tento účet nemá žádné peníze k převodu.</value>
   </data>
   <data name="Hide" xml:space="preserve">
-		<value />
+		<value>Skrýt</value>
   </data>
   <data name="HideGroups" xml:space="preserve">
-		<value />
+		<value>Skrýt skupiny</value>
   </data>
   <data name="Show" xml:space="preserve">
-		<value />
+		<value>Zobrazit</value>
   </data>
   <data name="ShowGroups" xml:space="preserve">
-		<value />
+		<value>Zobrazit skupiny</value>
   </data>
   <data name="ToggleGroups.Tooltip" xml:space="preserve">
-		<value />
+		<value>Přepnout viditelnost skupin</value>
   </data>
   <data name="AccountSettings" xml:space="preserve">
-		<value />
+		<value>Nastavení účtu</value>
   </data>
   <data name="AccountSettings.Tooltip" xml:space="preserve">
-		<value />
+		<value>Nastavení účtu (Ctrl+.)</value>
   </data>
   <data name="Sort" xml:space="preserve">
-		<value />
+		<value>Řazení</value>
   </data>
   <data name="OrderBy" xml:space="preserve">
-		<value />
+		<value>Řadit podle</value>
   </data>
   <data name="OrderBy.Increasing" xml:space="preserve">
-		<value />
+		<value>Vzestupně</value>
   </data>
   <data name="OrderBy.Decreasing" xml:space="preserve">
-		<value />
+		<value>Sestupně</value>
   </data>
   <data name="SortBy" xml:space="preserve">
-		<value />
+		<value>Řadit podle</value>
   </data>
   <data name="SortBy.Id" xml:space="preserve">
-		<value />
+		<value>Seřadit podle ID</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
-		<value />
+		<value>Seřadit podle data</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
-		<value />
+		<value>Seřadit podle množství</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
-		<value />
+		<value>Vyhledávání podle popisu</value>
   </data>
   <data name="PasswordRemoved" xml:space="preserve">
-		<value />
+		<value>Heslo účtu bylo odstraněno.</value>
   </data>
   <data name="PasswordUpdated" xml:space="preserve">
-		<value />
+		<value>Heslo účtu bylo změněno.</value>
   </data>
   <!--AccountViewController-->
   <data name="Ungrouped" xml:space="preserve">
-		<value />
+		<value>Neseskupené</value>
   </data>
   <data name="UngroupedDescription" xml:space="preserve">
-		<value />
+		<value>Transakce bez skupiny</value>
   </data>
   <data name="Imported" xml:space="preserve">
-		<value />
+		<value>Importována {0} transakce ze souboru.</value>
   </data>
   <data name="Imported.Plural" xml:space="preserve">
-		<value />
+		<value>Importováno {0} transakcí ze souboru.</value>
   </data>
   <data name="UnableToImport" xml:space="preserve">
-		<value />
+		<value>Nepodařilo se importovat informace ze souboru. Nepodporovaný typ souboru.</value>
   </data>
   <data name="Exported" xml:space="preserve">
-		<value />
+		<value>Účet byl úspěšně exportován do souboru.</value>
   </data>
   <data name="UnableToExport" xml:space="preserve">
-		<value />
+		<value>Nepodařilo se exportovat účet do souboru.</value>
   </data>
   <data name="Transfer.To" xml:space="preserve">
-		<value />
+		<value>Převést na {0}</value>
   </data>
   <data name="Transfer.From" xml:space="preserve">
-		<value />
+		<value>Převést z {0}</value>
   </data>
   <data name="AddPasswordToPDF" xml:space="preserve">
-		<value />
+		<value>Přidat heslo do PDF?</value>
   </data>
   <data name="AddPasswordToPDF.Description" xml:space="preserve">
-		<value />
+		<value>Chcete soubor PDF chránit heslem?
+
+Pokud heslo ztratíte, soubor PDF bude nepřístupný.</value>
   </data>
   <data name="PDFPassword" xml:space="preserve">
-		<value />
+		<value>Heslo PDF</value>
   </data>
   <!--TransactionRow-->
   <data name="Edit.TransactionRow" xml:space="preserve">
-		<value />
+		<value>Upravit transakci</value>
   </data>
   <data name="Delete.TransactionRow" xml:space="preserve">
-		<value />
+		<value>Odstranit transakci</value>
   </data>
   <!--GroupRow-->
   <data name="Edit.GroupRow" xml:space="preserve">
-		<value />
+		<value>Upravit skupinu</value>
   </data>
   <data name="Delete.GroupRow" xml:space="preserve">
-		<value />
+		<value>Odstranit skupinu</value>
   </data>
   <!--GroupDialog-->
   <data name="Group" xml:space="preserve">
-		<value />
+		<value>Skupina</value>
   </data>
   <!--TransactionDialog-->
   <data name="Transaction" xml:space="preserve">
-		<value />
+		<value>Transakce</value>
   </data>
   <data name="RepeatInterval.Never" xml:space="preserve">
-		<value />
+		<value>Nikdy</value>
   </data>
   <data name="RepeatInterval.Daily" xml:space="preserve">
-		<value />
+		<value>Denně</value>
   </data>
   <data name="RepeatInterval.Weekly" xml:space="preserve">
-		<value />
+		<value>Týdně</value>
   </data>
   <data name="RepeatInterval.Biweekly" xml:space="preserve">
-		<value />
+		<value>Dvakrát týdně</value>
   </data>
   <data name="RepeatInterval.Monthly" xml:space="preserve">
-		<value />
+		<value>Měsíčně</value>
   </data>
   <data name="RepeatInterval.Quarterly" xml:space="preserve">
-		<value />
+		<value>Čtvrtletně</value>
   </data>
   <data name="RepeatInterval.Yearly" xml:space="preserve">
-		<value />
+		<value>Ročně</value>
   </data>
   <data name="RepeatInterval.Biyearly" xml:space="preserve">
-		<value />
+		<value>Dvakrát ročně</value>
   </data>
   <data name="NoEndDate" xml:space="preserve">
-		<value />
+		<value>Žádné datum ukončení</value>
   </data>
   <data name="View" xml:space="preserve">
-		<value />
+		<value>Zobrazit</value>
   </data>
   <data name="Delete" xml:space="preserve">
-		<value />
+		<value>Odstranit</value>
   </data>
   <data name="Upload" xml:space="preserve">
-		<value />
+		<value>Nahrát</value>
   </data>
   <data name="MakeCopy" xml:space="preserve">
-		<value />
+		<value>Vytvořit kopii</value>
   </data>
   <data name="Copy.Transaction" xml:space="preserve">
-		<value />
+		<value>(Kopírovat)</value>
   </data>
   <data name="Extras" xml:space="preserve">
-		<value />
+		<value>Další</value>
   </data>
   <data name="Extras.Description" xml:space="preserve">
-		<value />
+		<value>Spravovat další pole transakce.</value>
   </data>
   <!--TransferDialog-->
   <data name="Transfer" xml:space="preserve">
-		<value />
+		<value>Převod</value>
   </data>
   <data name="TransferDescription" xml:space="preserve">
-		<value />
+		<value>Převodem peněz se vytvoří nákladová transakce s danou částkou na tomto účtu a příjmová transakce s danou částkou na účtu, na který je prováděn převod.</value>
   </data>
   <data name="NoAccountSelected" xml:space="preserve">
-		<value />
+		<value>Není vybrán žádný účet</value>
   </data>
   <data name="EnterConversionRate" xml:space="preserve">
-		<value />
+		<value>Sem zadejte konverzi</value>
   </data>
   <data name="ConversionNeeded" xml:space="preserve">
-		<value />
+		<value>Nutná konverze</value>
   </data>
   <data name="Result" xml:space="preserve">
-		<value />
+		<value>Výsledek</value>
   </data>
   <!--AccountSettingsDialog-->
   <data name="AccountType.Checking" xml:space="preserve">
-		<value />
+		<value>Běžný</value>
   </data>
   <data name="AccountType.Savings" xml:space="preserve">
-		<value />
+		<value>Úspory</value>
   </data>
   <data name="AccountType.Business" xml:space="preserve">
-		<value />
+		<value>Podnikání</value>
   </data>
   <data name="AccountType.Description" xml:space="preserve">
-		<value />
+		<value>Jedná se pouze o užitečné označení, které nemá vliv na fungování aplikace.</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
-		<value />
+		<value>N/A</value>
   </data>
   <data name="ReportedCurrency" xml:space="preserve">
-		<value />
+		<value>Váš systém hlásí, že vaší měnou je</value>
   </data>
   <data name="ManagePassword" xml:space="preserve">
-		<value />
+		<value>Změnit heslo</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
-		<value />
+		<value>Nastavte nové heslo nebo jej odstraňte.</value>
   </data>
   <data name="ManagePassword.Warning" xml:space="preserve">
-		<value />
+		<value>Pokud dojde ke ztrátě hesla, není možné soubor obnovit!</value>
   </data>
   <data name="Currency" xml:space="preserve">
-		<value />
+		<value>Měna</value>
   </data>
   <data name="ManageCurrency.Description" xml:space="preserve">
-		<value />
+		<value>Správa měny používané účtem.</value>
   </data>
   <!--Fields-->
   <data name="Id.Field" xml:space="preserve">
-		<value />
+		<value>ID</value>
   </data>
   <data name="Name.Field" xml:space="preserve">
-		<value />
+		<value>Název</value>
   </data>
   <data name="Name.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte název</value>
   </data>
   <data name="Name.Empty" xml:space="preserve">
-		<value />
+		<value>Název (prázdný)</value>
   </data>
   <data name="Name.Exists" xml:space="preserve">
-		<value />
+		<value>Název (existuje)</value>
   </data>
   <data name="Description.Field" xml:space="preserve">
-		<value />
+		<value>Popis</value>
   </data>
   <data name="Description.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte popis</value>
   </data>
   <data name="Description.Empty" xml:space="preserve">
-		<value />
+		<value>Popis (prázdný)</value>
   </data>
   <data name="Amount.Field" xml:space="preserve">
-		<value />
+		<value>Částka</value>
   </data>
   <data name="Amount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte částku</value>
   </data>
   <data name="Amount.Invalid" xml:space="preserve">
-		<value />
+		<value>Částka (neplatná)</value>
   </data>
   <data name="Date.Field" xml:space="preserve">
-		<value />
+		<value>Datum</value>
   </data>
   <data name="TransactionType.Field" xml:space="preserve">
-		<value />
+		<value>Typ</value>
   </data>
   <data name="TransactionRepeatInterval.Field" xml:space="preserve">
-		<value />
+		<value>Interval opakování</value>
   </data>
   <data name="TransactionRepeatEndDate.Field" xml:space="preserve">
-		<value />
+		<value>Datum ukončení opakování</value>
   </data>
   <data name="TransactionRepeatEndDate.Clear" xml:space="preserve">
-		<value />
+		<value>Vymazat datum ukončení</value>
   </data>
   <data name="TransactionRepeatEndDate.Invalid" xml:space="preserve">
-		<value />
+		<value>Datum ukončení opakování (neplatné)</value>
   </data>
   <data name="Group.Field" xml:space="preserve">
-		<value />
+		<value>Skupina</value>
   </data>
   <data name="Color.Field" xml:space="preserve">
-		<value />
+		<value>Barva</value>
   </data>
   <data name="Color.UseGroup" xml:space="preserve">
-		<value />
+		<value>Použít barvu skupiny</value>
   </data>
   <data name="Color.UseUnique" xml:space="preserve">
-		<value />
+		<value>Použít unikátní barvu</value>
   </data>
   <data name="Receipt.Field" xml:space="preserve">
-		<value />
+		<value>Účtenka</value>
   </data>
   <data name="Notes.Field" xml:space="preserve">
-		<value />
+		<value>Poznámky</value>
   </data>
   <data name="Notes.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte poznámky</value>
   </data>
   <data name="DestinationAccount.Field" xml:space="preserve">
-		<value />
+		<value>Cílový účet</value>
   </data>
   <data name="DestinationAccount.Placeholder" xml:space="preserve">
-		<value />
+		<value>Vyberte cílový účet</value>
   </data>
   <data name="DestinationAccount.Invalid" xml:space="preserve">
-		<value />
+		<value>Cílový účet (neplatný)</value>
   </data>
   <data name="AccountType.Field" xml:space="preserve">
-		<value />
+		<value>Typ účtu</value>
   </data>
   <data name="DefaultTransactionType.Field" xml:space="preserve">
-		<value />
+		<value>Výchozí typ transakce</value>
   </data>
   <data name="UseCustomCurrency.Field" xml:space="preserve">
-		<value />
+		<value>Použít vlastní měnu</value>
   </data>
   <data name="CustomCurrencySymbol.Field" xml:space="preserve">
-		<value />
+		<value>Symbol měny</value>
   </data>
   <data name="CustomCurrencySymbol.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte symbol</value>
   </data>
   <data name="CustomCurrencySymbol.Empty" xml:space="preserve">
-		<value />
+		<value>Symbol měny (prázdný)</value>
   </data>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
-		<value />
+		<value>Symbol měny (neplatný)</value>
   </data>
   <data name="CustomCurrencyCode.Field" xml:space="preserve">
-		<value />
+		<value>Kód měny</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
-		<value />
+		<value>Kód měny (prázdný)</value>
   </data>
   <data name="CustomCurrencyCode.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte kód</value>
   </data>
   <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
-		<value />
+		<value>Oddělovač desetinných míst</value>
   </data>
   <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
-		<value />
+		<value>Oddělovač desetinných míst (prázdný)</value>
   </data>
   <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
-		<value />
+		<value>Oddělovač desetinných míst (neplatný)</value>
   </data>
   <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
-		<value />
+		<value>Jiný</value>
   </data>
   <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
-		<value />
+		<value>Zadejte oddělovač desetinných míst</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
-		<value />
+		<value>Oddělovač skupin</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
-		<value />
+		<value>Oddělovač skupin (neplatný)</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
-		<value />
+		<value>Žádný</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
-		<value />
+		<value>Jiný</value>
   </data>
   <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
-		<value />
+		<value>Zadejte oddělovač skupin</value>
   </data>
   <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
-		<value />
+		<value>Desetinné číslice</value>
   </data>
   <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
-		<value />
+		<value>Neomezeně</value>
   </data>
   <data name="Password.Field" xml:space="preserve">
-		<value />
+		<value>Heslo</value>
   </data>
   <data name="Password.Placeholder" xml:space="preserve">
-		<value />
+		<value>Sem zadejte heslo</value>
   </data>
   <data name="NewPassword.Field" xml:space="preserve">
-		<value />
+		<value>Nové heslo</value>
   </data>
   <data name="ConfirmPassword.Field" xml:space="preserve">
-		<value />
+		<value>Potvrzení hesla</value>
   </data>
   <data name="NonMatchingPasswords" xml:space="preserve">
-		<value />
+		<value>Hesla se neshodují.</value>
   </data>
   <data name="DestinationPassword.Field" xml:space="preserve">
-		<value />
+		<value>Heslo cílového účtu</value>
   </data>
   <data name="DestinationPassword.Required" xml:space="preserve">
-		<value />
+		<value>Heslo cílového účtu (povinné)</value>
   </data>
   <data name="DestinationPassword.Invalid" xml:space="preserve">
-		<value />
+		<value>Heslo cílového účtu (neplatné)</value>
   </data>
   <!--PDF-->
   <data name="Generated.PDF" xml:space="preserve">
-		<value />
+		<value>Vygenerováno: {0}</value>
   </data>
   <data name="Currency.PDF" xml:space="preserve">
-		<value />
+		<value>Měna</value>
   </data>
   <data name="GroupName.PDF" xml:space="preserve">
-		<value />
+		<value>Název skupiny</value>
   </data>
   <data name="Receipts.PDF" xml:space="preserve">
-		<value />
+		<value>Účtenky</value>
   </data>
   <data name="PageNumber.PDF" xml:space="preserve">
-		<value />
+		<value>Strana {0}</value>
   </data>
   <!--PasswordDialog-->
   <data name="EnterPassword" xml:space="preserve">
-		<value />
+		<value>Pro přihlášení zadejte heslo:</value>
   </data>
   <!--Settings-->
   <data name="UserInterface" xml:space="preserve">
-		<value />
+		<value>Uživatelské rozhraní</value>
   </data>
   <data name="Unlock" xml:space="preserve">
-		<value />
+		<value>Odemknout</value>
   </data>
   <data name="UserInterfaceDescription" xml:space="preserve">
-		<value />
+		<value>Přizpůsobit uživatelské rozhraní aplikace.</value>
   </data>
   <data name="Theme" xml:space="preserve">
-		<value />
+		<value>Motiv</value>
   </data>
   <data name="ThemeLight" xml:space="preserve">
-		<value />
+		<value>Světlý</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
-		<value />
+		<value>Tmavý</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
-		<value />
+		<value>Systémový</value>
   </data>
   <data name="Colors" xml:space="preserve">
-		<value />
+		<value>Barvy</value>
   </data>
   <data name="ColorsDescription" xml:space="preserve">
-		<value />
+		<value>Přizpůsobit barvy používané Denarem.</value>
   </data>
   <data name="TransactionColor" xml:space="preserve">
-		<value />
+		<value>Výchozí barva transakce</value>
   </data>
   <data name="TransferColor" xml:space="preserve">
-		<value />
+		<value>Výchozí barva převodu</value>
   </data>
   <data name="GroupColor" xml:space="preserve">
-		<value />
+		<value>Výchozí barva skupiny</value>
   </data>
   <data name="TransactionColorDescription" xml:space="preserve">
-		<value />
+		<value>Změna tohoto nastavení se projeví pouze u nově přidaných transakcí.</value>
   </data>
   <data name="TransferColorDescription" xml:space="preserve">
-		<value />
+		<value>Změna tohoto nastavení se projeví pouze u nových převodů.</value>
   </data>
   <data name="GroupColorDescription" xml:space="preserve">
-		<value />
+		<value>Změna tohoto nastavení se projeví pouze u nových skupin.</value>
   </data>
   <data name="AccountCheckingColor" xml:space="preserve">
-		<value />
+		<value>Barva běžného účtu</value>
   </data>
   <data name="AccountSavingsColor" xml:space="preserve">
-		<value />
+		<value>Barva spořicího účtu</value>
   </data>
   <data name="AccountBusinessColor" xml:space="preserve">
-		<value />
+		<value>Barva firemního účtu</value>
   </data>
   <data name="Locale" xml:space="preserve">
-		<value />
+		<value>Národní prostředí</value>
   </data>
   <data name="LocaleDescription" xml:space="preserve">
-		<value />
+		<value>Přizpůsobte si, jak Denaro využívá nastavení národního prostředí.</value>
   </data>
   <data name="UseNativeDigits" xml:space="preserve">
-		<value />
+		<value>Použít nativní číslice</value>
   </data>
   <data name="UseNativeDigits.Description" xml:space="preserve">
-		<value />
+		<value>Zda se mají místo latinských číslic používat číslice, které jsou pro danou oblast přirozené.</value>
   </data>
   <data name="InsertSeparator" xml:space="preserve">
-		<value />
+		<value>Vložení desetinného oddělovače</value>
   </data>
   <data name="InsertSeparator.Description" xml:space="preserve">
-		<value />
+		<value>Nastavte, pro které stisknuté klávesy se do pole částky vloží desetinný oddělovač místního jazyka.</value>
   </data>
   <data name="InsertSeparatorOff" xml:space="preserve">
-		<value />
+		<value>Vypnout</value>
   </data>
   <data name="InsertSeparatorNumpad" xml:space="preserve">
-		<value />
+		<value>Pouze čárka na numerické klávesnici</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
-		<value />
+		<value>Tečka a čárka</value>
   </data>
   <data name="Backup" xml:space="preserve">
-		<value />
+		<value>Záloha</value>
   </data>
   <data name="BackupDescription" xml:space="preserve">
-		<value />
+		<value>Přizpůsobte si umístění záloh pro účty Denaro.</value>
   </data>
   <data name="BackupFolder" xml:space="preserve">
-		<value />
+		<value>Složka zálohy CSV</value>
   </data>
   <data name="BackupFolderDescription" xml:space="preserve">
-		<value />
+		<value>Nezašifrované účty se při změně automaticky exportují do této složky jako soubory CSV.</value>
   </data>
   <data name="NoBackupFolder" xml:space="preserve">
-		<value />
+		<value>Žádná složka záloh</value>
   </data>
   <data name="SelectBackupFolder" xml:space="preserve">
-		<value />
+		<value>Vyberte složku záloh</value>
   </data>
   <data name="ClearBackupFolder" xml:space="preserve">
-		<value />
+		<value>Vymazat složku záloh</value>
   </data>
   <!--Shortcuts Dialog-->
   <data name="Application.Shortcut" xml:space="preserve">
-		<value />
+		<value>Aplikace</value>
   </data>
   <!--WinUI Specific-->
   <data name="Preview.WinUI" xml:space="preserve">
-		<value />
+		<value>NÁHLED</value>
   </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
+		<value>Opravte prosím výše uvedené chyby.</value>
   </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Co je nového?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Naprogramovali:
+{0}
+
+Navrhli:
+{1}
+
+Ztvárnili:
+{2}
+
+Přeložili:
+{3}</value>
   </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Pro změnu motivu je nutné restartovat aplikaci.</value>
   </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value />
+		<value>Restartovat pro použití motivu?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value />
+		<value>Chcete restartovat {0} a použít nový motiv?
+Veškerá neuložená práce bude ztracena.</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
-		<value>— Manage multiple accounts at a time, with a familiar tab interface
-— Easily filter transactions by type, group, or date
-— Easily repeat transactions, such as bills that occur every month
-— Transfer money from one account to another
-— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</value>
+		<value>— Správa více účtů najednou pomocí známého rozhraní karet
+— Snadné filtrování transakcí podle typu, skupiny nebo data
+— Snadné opakování transakcí, například účtů, které se objevují každý měsíc.
+— Převod peněz z jednoho účtu na druhý
+— Export účtu jako soubor CSV a import souboru CSV, OFX nebo QIF pro hromadné přidávání transakcí na účet</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
-		<value />
+		<value>peníze;finance;peněženka;hotovost;banka;GTK;Nickvision;</value>
   </data>
   <data name="AccountMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Nabídka účtu</value>
   </data>
   <data name="ToggleSidebar.GTK" xml:space="preserve">
-		<value />
+		<value>Přepnout postranní panel</value>
   </data>
   <data name="MainMenu.GTK" xml:space="preserve">
-		<value />
+		<value>Hlavní nabídka</value>
   </data>
   <data name="Recents.GTK" xml:space="preserve">
-		<value />
+		<value>Nedávné</value>
   </data>
   <data name="CloseAccount.GTK" xml:space="preserve">
-		<value />
+		<value>Uzavřít účet</value>
   </data>
   <data name="AccountFileFilter.GTK" xml:space="preserve">
-		<value />
+		<value>Peněžní účet (*.nmoney)</value>
   </data>
   <data name="NewWindow.GTK" xml:space="preserve">
-		<value />
+		<value>Nové okno</value>
   </data>
   <data name="PasswordRemoveRequest.GTK" xml:space="preserve">
-		<value />
+		<value>Heslo bude odstraněno po zavření tohoto dialogu.</value>
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
-		<value />
+		<value>Nelze získat přístup k vybrané složce, zkontrolujte oprávnění Flatpaku.</value>
   </data>
 </root>
