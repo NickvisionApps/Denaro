@@ -665,7 +665,11 @@ Se generarán nuevas transacciones de repetición basadas en el nuevo intervalo.
     <value>Buscar por las descripciones</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Administre sus finanzas personales</value>
+    <value>— Administra varias cuentas simultáneamente, ya que la interfaz de la aplicación es una interfaz de pestañas
+— Ordenar transacciones por sus tipos, grupos o fechas
+— Repita las transacciones con facilidad, por ejemplo, puede repetir las transacciones todos los meses
+Transferir dinero de una cuenta a otra
+— Exporte cuentas como archivos CSV e importe archivos CSV, OFX o QIF para agregar transacciones a una cuenta</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Ordenar por cantidad</value>
