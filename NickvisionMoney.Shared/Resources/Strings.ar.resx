@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>اقتصد في مالك</value>
+		<value>احفظ مالك</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>الإصدار: {0}</value>
@@ -779,7 +779,11 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <value>PREVIEW</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Manage your personal finances</value>
+    <value>— أدر عدَّة حسابات آنًا، فواجهة التطبيق واجهة ألسنة
+— افرز المعاملات حسب أنواعها أو مجموعاتها أو تواريخها
+— كرِّر المعاملات بكلِّ يسر، فلك مثلًا أن تكرِّر المعاملات كلَّ شهر
+— حوِّل المال من حساب لآخر
+— صدِّر الحسابات على صورة ملفات سي‌إس‌في، واستورد ملفات سي‌إس‌في أو أو‌إف‌إكس أو كيو‌آي‌إف لتضيف معاملات لحساب</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
     <value>money;finance;wallet;cash;bank;GTK;Nickvision;مال;مالية;محفظة;بنك;مصرف;جيتيكي;نكفجن;</value>
