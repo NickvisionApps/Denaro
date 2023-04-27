@@ -672,7 +672,11 @@ Alle ungespeicherte Arbeit wird verloren.</value>
     <value>VORSCHAU</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Verwalte deine persönlichen Finanzen</value>
+    <value>- Verwalte mehrere Konten gleichzeitig, mit einer bekannten Registerkartenoberfläche
+- Einfaches Filtern von Transaktionen nach Typ, Gruppe oder Datum
+- Einfaches Wiederholen von Transaktionen, z. B. von Rechnungen, die jeden Monat anfallen
+- Geld von einem Konto auf ein anderes übertragen
+- Exportiere ein Konto als CSV-Datei und importieren Sie eine CSV-, OFX- oder QIF-Datei, um einem Konto massenhaft Transaktionen hinzuzufügen</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Nach Menge sortieren</value>
