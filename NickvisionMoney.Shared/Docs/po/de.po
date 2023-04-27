@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-04-19 17:12+0300\n"
-"PO-Revision-Date: 2023-04-22 16:21+0000\n"
-"Last-Translator: Ysujy <ysujy.mail@gmail.com>\n"
+"PO-Revision-Date: 2023-04-27 01:43+0000\n"
+"Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/de/>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Jummit <jummit@web.de>, 2023"
 
 #. (itstool) path: info/title
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:8
@@ -69,6 +69,10 @@ msgstr "Konto"
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:21
 msgid "This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account."
 msgstr ""
+"Auf dieser Seite werden alle Eigenschaften von Konten in <app>Denaro</app> "
+"erläutert. Die meisten von ihnen werden im Dialog <gui>Kontoeinstellungen</"
+"gui> angezeigt. Dieser Dialog wird auch automatisch geöffnet, nachdem du ein "
+"neues Konto erstellt hast."
 
 #. (itstool) path: page/p
 #: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:22
