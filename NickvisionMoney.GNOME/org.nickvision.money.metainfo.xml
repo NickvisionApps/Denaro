@@ -48,13 +48,9 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.4.1" date="2023-04-21">
+    <release version="2023.5.0-next" date="2023-05-01">
       <description>
-        <p>- Added the ability to add extra notes to a transaction</p>
-        <p>- Added the ability to choose to export all account information or the current filtered view</p>
-        <p>- Added support for using native digits (instead of just Latin digits) when working with numeric amounts</p>
-        <p>- Fixed an issue where using custom separators wouldn't parse correctly</p>
-        <p>- Fixed an issue where CSV files were not exported in the correct format</p>
+        <p>- Fixed an issue where Denaro would crash on systems with unconfigured locales</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

@@ -5,6 +5,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Windows.AppNotifications.Builder;
+using Microsoft.Windows.AppNotifications;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.WinUI.Controls;
@@ -301,6 +303,16 @@ public sealed partial class MainWindow : Window
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         InfoBar.IsOpen = true;
+    }
+
+    /// <summary>
+    /// Sends a shell notification
+    /// </summary>
+    /// <param name="e">ShellNotificationSentEventArgs</param>
+    private void SendShellNotification(ShellNotificationSentEventArgs e)
+    {
+        var notificationBuilder = new AppNotificationBuilder().AddText(e.Title, new AppNotificationTextProperties().SetMaxLines(1)).AddText(e.Message);
+        AppNotificationManager.Default.Show(notificationBuilder.BuildNotification());
     }
 
     /// <summary>

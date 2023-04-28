@@ -16,6 +16,9 @@ namespace NickvisionMoney.GNOME;
 public partial class Program
 {
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nuint gtk_file_chooser_cell_get_type();
+
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_resource_load(string path);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -45,6 +48,7 @@ public partial class Program
     /// </summary>
     public Program()
     {
+        gtk_file_chooser_cell_get_type();
         if (CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture))
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US"); // Fix #465
@@ -60,8 +64,8 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = _mainWindowController.Localizer["ShortName"];
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.4.1";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to add extra notes to a transaction</li><li>Added the ability to choose to export all account information or the current filtered view</li><li>Added support for using native digits (instead of just Latin digits) when working with numeric amounts</li><li>Fixed an issue where using custom separators wouldn't parse correctly</li><li>Fixed an issue where CSV files were not exported in the correct format</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Version = "2023.5.0-next";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where Denaro would crash on systems with unconfigured locales</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
