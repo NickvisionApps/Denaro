@@ -680,7 +680,11 @@ de opeenvolgende losgekoppeld..</value>
     <value>Voer conversie hier in</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Beheer uw persoonlijke financiën</value>
+    <value>— Beheer meerdere accounts tegelijk, met een vertrouwde tabblad-interface
+— Filter eenvoudig transacties op type, groep of datum
+— Herhaal eenvoudig transacties, zoals maandelijkse facturen
+— Maak geld over van de ene rekening naar de andere
+— Exporteer een account als een CSV-bestand of importeer een CSV-, OFX- of QIF-bestand om meerdere transacties in één keer aan een account toe te voegen</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
     <value>money;finance;wallet;cash;bank;GTK;Nickvision;geld;financie;portemonnee;contant;pin;</value>
