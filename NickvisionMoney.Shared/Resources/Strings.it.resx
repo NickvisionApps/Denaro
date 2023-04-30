@@ -668,7 +668,11 @@ I cambiamenti non salvati saranno persi.</value>
     <value>ANTEPRIMA</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Gestione finanziaria personale</value>
+    <value>— Gestisci più account contemporaneamente, con un'interfaccia a schede familiare
+— Filtra facilmente le transazioni per tipo, gruppo o data
+— Ripeti facilmente le transazioni, come le fatture che si verificano ogni mese
+— Trasferire denaro da un conto all'altro
+— Esporta un account come file CSV e importa un file CSV, OFX o QIF per aggiungere transazioni in blocco a un account</value>
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Cerca per descrizione</value>
