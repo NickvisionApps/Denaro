@@ -51,7 +51,7 @@
 	</item>
 	<item>
 		<title>Use Native Digits</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numberals.</p>
+		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>
 		<title>Insert Decimal Separator</title>

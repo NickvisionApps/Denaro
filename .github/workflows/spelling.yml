@@ -13,5 +13,5 @@ jobs:
       - uses: codespell-project/actions-codespell@master
         with:
           check_filenames: true
-          skip: cargo-sources.json,.git,Strings.*.resx,*.svg,*.html,*.js,*.po,*.pot,NickvisionMoney.Shared/Docs/yelp/[!C]/*.page
+          skip: cargo-sources.json,.git,Strings.*.resx,*.svg,*.html,*.js,*.po,*.pot,*.page
           ignore_words_list: gir
