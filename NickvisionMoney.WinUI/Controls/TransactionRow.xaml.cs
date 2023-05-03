@@ -128,7 +128,7 @@ public sealed partial class TransactionRow : UserControl, INotifyPropertyChanged
         BtnEdit.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuDelete.IsEnabled = _repeatFrom <= 0;
         BtnDelete.Visibility = _repeatFrom <= 0 ? Visibility.Visible : Visibility.Collapsed;
-        var bgColorString = transaction.RGBA;
+        var bgColorString = ColorHelpers.FromRGBA(transaction.RGBA)!.Value.ToRGBA();
         var bgColorStrArray = new System.Text.RegularExpressions.Regex(@"[0-9]+,[0-9]+,[0-9]+").Match(bgColorString).Value.Split(",");
         var luma = int.Parse(bgColorStrArray[0]) / 255.0 * 0.2126 + int.Parse(bgColorStrArray[1]) / 255.0 * 0.7152 + int.Parse(bgColorStrArray[2]) / 255.0 * 0.0722;
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
