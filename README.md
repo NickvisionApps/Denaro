@@ -10,6 +10,7 @@
 - Easily filter transactions by type, group, or date
 - Easily repeat transactions, such as bills that occur every month
 - Transfer money from one account to another
+- Encrypted cloud sync via Dropbox, OneDrive, MEGA, or other services
 - Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account
 
 # Installation
