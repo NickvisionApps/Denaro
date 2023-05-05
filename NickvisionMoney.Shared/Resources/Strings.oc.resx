@@ -831,4 +831,113 @@ En cas de pèrda del senhal lo document serà inaccessible.</value>
   <data name="Notes.Field" xml:space="preserve">
     <value>Nòtas</value>
   </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Export All Information</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Export Current View</value>
+  </data>
+  <data name="ResetFilters.All" xml:space="preserve">
+    <value>Reset All Filters</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Manage extra fields of the transaction.</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="ManageCurrency.Description" xml:space="preserve">
+    <value>Manage the currency used by the account.</value>
+  </data>
+  <data name="Color.UseGroup" xml:space="preserve">
+    <value>Use group color</value>
+  </data>
+  <data name="Color.UseUnique" xml:space="preserve">
+    <value>Use unique color</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Enter notes here</value>
+  </data>
+  <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
+    <value>Currency Symbol (Invalid)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Field" xml:space="preserve">
+    <value>Decimal Separator</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Empty" xml:space="preserve">
+    <value>Decimal Separator (Empty)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Invalid" xml:space="preserve">
+    <value>Decimal Separator (Invalid)</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="CustomCurrencyDecimalSeparator.Placeholder" xml:space="preserve">
+    <value>Enter decimal separator</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Field" xml:space="preserve">
+    <value>Group Separator</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
+    <value>Group Separator (Invalid)</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="CustomCurrencyGroupSeparator.Placeholder" xml:space="preserve">
+    <value>Enter group separator</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Field" xml:space="preserve">
+    <value>Decimal Digits</value>
+  </data>
+  <data name="CustomCurrencyDecimalDigits.Unlimited" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+  <data name="NonMatchingPasswords" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Group Default Color</value>
+  </data>
+  <data name="GroupColorDescription" xml:space="preserve">
+    <value>A change in this setting will only be applied to new groups.</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Use Native Digits</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Whether to use numerals that are native for your locale instead of latin digits.</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="BackupDescription" xml:space="preserve">
+    <value>Customize backup locations for Denaro accounts.</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>CSV Backup Folder</value>
+  </data>
+  <data name="BackupFolderDescription" xml:space="preserve">
+    <value>Unencrypted accounts will automatically export as CSV files to this folder when a change is made.</value>
+  </data>
+  <data name="NoBackupFolder" xml:space="preserve">
+    <value>No Backup Folder</value>
+  </data>
+  <data name="SelectBackupFolder" xml:space="preserve">
+    <value>Select Backup Folder</value>
+  </data>
+  <data name="ClearBackupFolder" xml:space="preserve">
+    <value>Clear Backup Folder</value>
+  </data>
+  <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
+    <value>Can't access the selected folder, check Flatpak permissions.</value>
+  </data>
 </root>
