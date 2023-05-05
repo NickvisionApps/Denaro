@@ -898,4 +898,32 @@
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
 		<value />
   </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Export All Information</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Export Current View</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Manage extra fields of the transaction.</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Enter notes here</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Use Native Digits</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Whether to use numerals that are native for your locale instead of latin digits.</value>
+  </data>
 </root>
