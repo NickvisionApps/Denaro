@@ -108,6 +108,11 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     }
 
     /// <summary>
+    /// Finalizes the Transaction
+    /// </summary>
+    ~Transaction() => Dispose(false);
+
+    /// <summary>
     /// The group id of the transaction
     /// </summary>
     public int GroupId

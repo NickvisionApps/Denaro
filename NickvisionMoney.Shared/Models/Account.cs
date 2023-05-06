@@ -99,6 +99,11 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// Finalizes the Account
+    /// </summary>
+    ~Account() => Dispose(false);
+
+    /// <summary>
     /// Whether or not the account is encrypted (requiring a password)
     /// </summary>
     public bool IsEncrypted

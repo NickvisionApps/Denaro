@@ -180,6 +180,11 @@ public class AccountViewController : IDisposable
     }
 
     /// <summary>
+    /// Finalizes the AccountViewController
+    /// </summary>
+    ~AccountViewController() => Dispose(false);
+
+    /// <summary>
     /// The CultureInfo to use when displaying a number string
     /// </summary>
     public CultureInfo CultureForNumberString

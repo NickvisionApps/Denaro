@@ -129,6 +129,11 @@ public class TransactionDialogController : IDisposable
     }
 
     /// <summary>
+    /// Finalizes the TransactionDialogController
+    /// </summary>
+    ~TransactionDialogController() => Dispose(false);
+
+    /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
@@ -193,15 +198,15 @@ public class TransactionDialogController : IDisposable
         }
         if (disposing)
         {
-            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-            if (File.Exists(jpgPath))
-            {
-                File.Delete(jpgPath);
-            }
             if (!Accepted)
             {
                 Transaction.Dispose();
             }
+        }
+        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+        if (File.Exists(jpgPath))
+        {
+            File.Delete(jpgPath);
         }
         _disposed = true;
     }

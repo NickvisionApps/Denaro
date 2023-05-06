@@ -41,6 +41,11 @@ public class Localizer : IDisposable
     }
 
     /// <summary>
+    /// Finalizes the Localizer
+    /// </summary>
+    ~Localizer() => Dispose(false);
+
+    /// <summary>
     /// Frees resources used by the Account object
     /// </summary>
     public void Dispose()
