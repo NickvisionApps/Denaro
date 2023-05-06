@@ -55,7 +55,7 @@ Tobias Bernard https://github.com/bertob</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
-		<value>Ок</value>
+		<value>ОК</value>
   </data>
   <data name="Yes" xml:space="preserve">
 		<value>Да</value>
