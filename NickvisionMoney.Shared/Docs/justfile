@@ -1,0 +1,41 @@
+project_name := "NickvisionMoney"
+short_name := "denaro"
+
+docs-update-pot:
+    itstool -o po/{{short_name}}.pot yelp/C/*.page
+
+docs-update-yelp:
+    #!/bin/sh
+    set -eu
+    cd po
+    for lang_file in $(ls *.po)
+    do
+        lang_code=${lang_file:0:-3}
+        echo -e "\033[1m# Generating yelp pages for $lang_code locale\033[0m"
+        msgfmt $lang_file -o $lang_code.mo
+        mkdir -p ../yelp/$lang_code
+        itstool -m $lang_code.mo -o ../yelp/$lang_code/ ../yelp/C/*.page
+        cp -r ../yelp/C/figures ../yelp/$lang_code/
+        rm $lang_code.mo
+    done
+
+docs-update-html:
+    #!/bin/sh
+    set -eu
+    for lang_code in $(ls yelp)
+    do
+        echo -e "\033[1m# Converting pages to html for $lang_code locale\033[0m"
+        mkdir -p html/$lang_code
+        yelp-build html -o html/$lang_code/ yelp/$lang_code/
+        if [ $lang_code == "C" ]
+        then
+            continue
+        fi
+        echo -e "\033[1m# — Removing duplicate files\033[0m"
+        rm -r html/$lang_code/{figures,*.css,highlight.pack.js,yelp.js}
+        echo -e "\033[1m# — Replacing links\033[0m"
+        sed -i 's/href=".*.css"/href="..\/C\/C.css"/g' html/$lang_code/*.html
+        sed -i 's/src="highlight.pack.js"/src="..\/C\/highlight.pack.js"/g' html/$lang_code/*.html
+        sed -i 's/src="yelp.js"/src="..\/C\/yelp.js"/g' html/$lang_code/*.html
+        sed -i 's/src="figures\/{{short_name}}.png"/src="..\/C\/figures\/{{short_name}}.png"/g' html/$lang_code/*.html
+    done
