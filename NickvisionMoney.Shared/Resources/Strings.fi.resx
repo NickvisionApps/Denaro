@@ -880,4 +880,10 @@ Jos salasana katoaa, PDF-tiedosto ei ole käytettävissä.</value>
   <data name="CustomCurrencyGroupSeparator.Invalid" xml:space="preserve">
     <value>Ryhmäerotin (virheellinen)</value>
   </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Vie nykyinen näkymä</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Vie kaikki tiedot</value>
+  </data>
 </root>
