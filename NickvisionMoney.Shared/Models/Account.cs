@@ -7,7 +7,6 @@ using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
@@ -31,10 +30,9 @@ public enum ExportMode
 /// </summary>
 public class Account : IDisposable
 {
-    private bool _loggedIn;
     private bool _disposed;
-    private SqliteConnection? _database;
-    private bool? _isEncrypted;
+    private SqliteConnection _database { get => _accountRepository.Database; }
+    private AccountRepository _accountRepository;
 
     /// <summary>
     /// The path of the account
@@ -43,27 +41,27 @@ public class Account : IDisposable
     /// <summary>
     /// The metadata of the account
     /// </summary>
-    public AccountMetadata Metadata { get; init; }
+    public AccountMetadata Metadata { get; set; }
     /// <summary>
     /// A map of groups in the account
     /// </summary>
-    public Dictionary<uint, Group> Groups { get; init; }
+    public Dictionary<uint, Group> Groups { get; set; }
     /// <summary>
     /// A map of transactions in the account
     /// </summary>
-    public Dictionary<uint, Transaction> Transactions { get; init; }
+    public Dictionary<uint, Transaction> Transactions { get; set; }
     /// <summary>
     /// Whether or not an account needs to be setup
     /// </summary>
-    public bool NeedsAccountSetup { get; private set; }
-    /// <summary>
+    public bool NeedsAccountSetup { get => _accountRepository.NeedsAccountSetup; }
+      /// <summary>
     /// The next available group id
     /// </summary>
-    public uint NextAvailableGroupId { get; private set; }
+    public uint NextAvailableGroupId { get => _accountRepository.NextAvailableGroupId; }
     /// <summary>
     /// The next available transaction id
     /// </summary>
-    public uint NextAvailableTransactionId { get; private set; }
+    public uint NextAvailableTransactionId { get => _accountRepository.NextAvailableTransactionId; }
     /// <summary>
     /// The income amount of the account for today
     /// </summary>
@@ -84,18 +82,12 @@ public class Account : IDisposable
     /// <param name="path">The path of the account</param>
     public Account(string path)
     {
-        _loggedIn = false;
         _disposed = false;
-        _isEncrypted = null;
         Path = path;
-        Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
-        Transactions = new Dictionary<uint, Transaction>();
-        NeedsAccountSetup = true;
-        NextAvailableGroupId = 1;
-        NextAvailableTransactionId = 1;
         TodayIncome = 0;
         TodayExpense = 0;
+        _accountRepository = new AccountRepository(path);
     }
 
     /// <summary>
@@ -108,43 +100,7 @@ public class Account : IDisposable
     /// </summary>
     public bool IsEncrypted
     {
-        get
-        {
-            if (_isEncrypted == null)
-            {
-                if (!File.Exists(Path))
-                {
-                    _isEncrypted = false;
-                }
-                else
-                {
-                    var tempConnectionString = new SqliteConnectionStringBuilder()
-                    {
-                        DataSource = Path,
-                        Mode = SqliteOpenMode.ReadOnly,
-                        Pooling = false
-                    };
-                    using var tempDatabase = new SqliteConnection(tempConnectionString.ConnectionString);
-                    tempDatabase.Open();
-                    try
-                    {
-                        using var tempCmd = tempDatabase.CreateCommand();
-                        tempCmd.CommandText = "PRAGMA schema_version";
-                        tempCmd.ExecuteScalar();
-                        _isEncrypted = false;
-                    }
-                    catch
-                    {
-                        _isEncrypted = true;
-                    }
-                    finally
-                    {
-                        tempDatabase.Close();
-                    }
-                }
-            }
-            return _isEncrypted.Value;
-        }
+        get => _accountRepository.IsEncrypted;
     }
 
     /// <summary>
@@ -174,9 +130,7 @@ public class Account : IDisposable
             if (_database != null)
             {
                 FreeMemory();
-                _database.Close();
-                _database.Dispose();
-                _database = null;
+                _accountRepository.Dispose();
             }
         }
         _disposed = true;
@@ -187,45 +141,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="password">The password of the account, if needed</param>
     /// <returns>True if logged in, else false</returns>
-    public bool Login(string? password)
-    {
-        if (!_loggedIn)
-        {
-            var connectionStringBuilder = new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false
-            };
-            //Set Password
-            if (IsEncrypted)
-            {
-                if (string.IsNullOrEmpty(password))
-                {
-                    _loggedIn = false;
-                    return false;
-                }
-                else
-                {
-                    connectionStringBuilder.Password = password;
-                }
-            }
-            _database = new SqliteConnection(connectionStringBuilder.ConnectionString);
-            try
-            {
-                _database.Open();
-                _loggedIn = true;
-            }
-            catch
-            {
-                _database.Close();
-                _database.Dispose();
-                _database = null;
-                _loggedIn = false;
-            }
-        }
-        return _loggedIn;
-    }
+    public bool Login(string? password) => _accountRepository.Login(password);
 
     /// <summary>
     /// Sets the password of the account. Specifying a null/empty string will remove the password and decrypt the database
@@ -234,85 +150,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool SetPassword(string password)
     {
-        //Remove Password If Empty (Decrypts)
-        if (string.IsNullOrEmpty(password))
-        {
-            //Create Temp Decrypted Database
-            var tempPath = $"{Path}.decrypt";
-            using var command = _database!.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('plaintext')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE plaintext";
-            command.ExecuteNonQuery();
-            //Remove Old Encrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Decrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = false;
-        }
-        using var cmdQuote = _database!.CreateCommand();
-        cmdQuote.CommandText = "SELECT quote($password)";
-        cmdQuote.Parameters.AddWithValue("$password", password);
-        var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
-        //Change Password
-        if (IsEncrypted)
-        {
-            using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey = {quotedPassword}";
-            command.ExecuteNonQuery();
-            _database.Close();
-            _database.ConnectionString = new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString;
-            _database.Open();
-            _isEncrypted = true;
-        }
-        //Sets New Password (Encrypts For First Time)
-        else
-        {
-            //Create Temp Encrypted Database
-            var tempPath = $"{Path}.ecrypt";
-            using var command = _database.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('encrypted')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE encrypted";
-            command.ExecuteNonQuery();
-            //Remove Old Unencrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Encrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = true;
-        }
-        return true;
+        return _accountRepository.SetPassword(password);
     }
 
     /// <summary>
@@ -321,206 +159,18 @@ public class Account : IDisposable
     /// <returns>True if loaded, else false</returns>
     public async Task<bool> LoadAsync()
     {
-        if (!_loggedIn)
+        if (!_accountRepository.LoggedIn)
         {
             return false;
         }
-        //Setup Metadata Table
-        using var cmdTableMetadata = _database!.CreateCommand();
-        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER)";
-        cmdTableMetadata.ExecuteNonQuery();
-        try
+        _accountRepository.Migrate();
+
+        Metadata = _accountRepository.GetMetadata();
+
+        Transactions = _accountRepository.GetTransactions();
+
+        foreach (var transaction in Transactions.Values)
         {
-            using var cmdTableMetadataUpdate1 = _database.CreateCommand();
-            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
-            cmdTableMetadataUpdate1.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate2 = _database.CreateCommand();
-            cmdTableMetadataUpdate2.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT";
-            cmdTableMetadataUpdate2.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate3 = _database.CreateCommand();
-            cmdTableMetadataUpdate3.CommandText = "ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT";
-            cmdTableMetadataUpdate3.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate4 = _database.CreateCommand();
-            cmdTableMetadataUpdate4.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER";
-            cmdTableMetadataUpdate4.ExecuteNonQuery();
-        }
-        catch { }
-        //Setup Groups Table
-        using var cmdTableGroups = _database.CreateCommand();
-        cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)";
-        try
-        {
-            using var cmdTableGroupsUpdate1 = _database.CreateCommand();
-            cmdTableGroupsUpdate1.CommandText = "ALTER TABLE groups ADD COLUMN rgba TEXT";
-            cmdTableGroupsUpdate1.ExecuteNonQuery();
-        }
-        catch { }
-        cmdTableGroups.ExecuteNonQuery();
-        //Setup Transactions Table
-        using var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT)";
-        cmdTableTransactions.ExecuteNonQuery();
-        try
-        {
-            using var cmdTableTransactionsUpdate1 = _database.CreateCommand();
-            cmdTableTransactionsUpdate1.CommandText = "ALTER TABLE transactions ADD COLUMN gid INTEGER";
-            cmdTableTransactionsUpdate1.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate2 = _database.CreateCommand();
-            cmdTableTransactionsUpdate2.CommandText = "ALTER TABLE transactions ADD COLUMN rgba TEXT";
-            cmdTableTransactionsUpdate2.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate3 = _database.CreateCommand();
-            cmdTableTransactionsUpdate3.CommandText = "ALTER TABLE transactions ADD COLUMN receipt TEXT";
-            cmdTableTransactionsUpdate3.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate4 = _database.CreateCommand();
-            cmdTableTransactionsUpdate4.CommandText = "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER";
-            cmdTableTransactionsUpdate4.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate5 = _database.CreateCommand();
-            cmdTableTransactionsUpdate5.CommandText = "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT";
-            cmdTableTransactionsUpdate5.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate6 = _database.CreateCommand();
-            cmdTableTransactionsUpdate6.CommandText = "ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER";
-            cmdTableTransactionsUpdate6.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableTransactionsUpdate7 = _database.CreateCommand();
-            cmdTableTransactionsUpdate7.CommandText = "ALTER TABLE transactions ADD COLUMN notes TEXT";
-            cmdTableTransactionsUpdate7.ExecuteNonQuery();
-        }
-        catch { }
-        //Get Metadata
-        using var cmdQueryMetadata = _database.CreateCommand();
-        cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
-        using var readQueryMetadata = cmdQueryMetadata.ExecuteReader();
-        if (readQueryMetadata.HasRows)
-        {
-            readQueryMetadata.Read();
-            Metadata.Name = readQueryMetadata.GetString(1);
-            Metadata.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
-            Metadata.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
-            Metadata.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
-            Metadata.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
-            Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
-            Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
-            Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);
-            Metadata.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
-            Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
-            Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
-            Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
-        }
-        else
-        {
-            using var cmdAddMetadata = _database.CreateCommand();
-            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits)";
-            cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
-            cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
-            cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
-            cmdAddMetadata.Parameters.AddWithValue("$customSymbol", Metadata.CustomCurrencySymbol ?? "");
-            cmdAddMetadata.Parameters.AddWithValue("$customCode", Metadata.CustomCurrencyCode ?? "");
-            cmdAddMetadata.Parameters.AddWithValue("$defaultTransactionType", (int)Metadata.DefaultTransactionType);
-            cmdAddMetadata.Parameters.AddWithValue("$showGroupsList", Metadata.ShowGroupsList);
-            cmdAddMetadata.Parameters.AddWithValue("$sortFirstToLast", Metadata.SortFirstToLast);
-            cmdAddMetadata.Parameters.AddWithValue("$sortTransactionsBy", (int)Metadata.SortTransactionsBy);
-            cmdAddMetadata.Parameters.AddWithValue("$customDecimalSeparator", Metadata.CustomCurrencyDecimalSeparator ?? "");
-            cmdAddMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? "empty" : Metadata.CustomCurrencyGroupSeparator);
-            cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
-            cmdAddMetadata.ExecuteNonQuery();
-        }
-        //Get Groups
-        using var localizer = new Localizer();
-        Groups.Add(0, new Group(0)
-        {
-            Name = localizer["Ungrouped"],
-            Description = localizer["UngroupedDescription"],
-            Balance = 0m,
-            RGBA = ""
-        });
-        using var cmdQueryGroups = _database.CreateCommand();
-        cmdQueryGroups.CommandText = "SELECT * FROM groups";
-        using var readQueryGroups = cmdQueryGroups.ExecuteReader();
-        while (readQueryGroups.Read())
-        {
-            if (readQueryGroups.IsDBNull(0))
-            {
-                continue;
-            }
-            var group = new Group((uint)readQueryGroups.GetInt32(0))
-            {
-                Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
-                Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
-                Balance = 0m,
-                RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
-            };
-            Groups.Add(group.Id, group);
-            if (group.Id >= NextAvailableGroupId)
-            {
-                NextAvailableGroupId = group.Id + 1;
-            }
-        }
-        //Get Transactions
-        using var cmdQueryTransactions = _database.CreateCommand();
-        cmdQueryTransactions.CommandText = "SELECT * FROM transactions";
-        using var readQueryTransactions = cmdQueryTransactions.ExecuteReader();
-        while (readQueryTransactions.Read())
-        {
-            if (readQueryTransactions.IsDBNull(0))
-            {
-                continue;
-            }
-            var transaction = new Transaction((uint)readQueryTransactions.GetInt32(0))
-            {
-                Date = readQueryTransactions.IsDBNull(1) ? DateOnly.FromDateTime(DateTime.Today) : DateOnly.Parse(readQueryTransactions.GetString(1), new CultureInfo("en-US", false)),
-                Description = readQueryTransactions.IsDBNull(2) ? "" : readQueryTransactions.GetString(2),
-                Type = readQueryTransactions.IsDBNull(3) ? TransactionType.Income : (TransactionType)readQueryTransactions.GetInt32(3),
-                RepeatInterval = readQueryTransactions.IsDBNull(4) ? TransactionRepeatInterval.Never : (TransactionRepeatInterval)readQueryTransactions.GetInt32(4),
-                Amount = readQueryTransactions.IsDBNull(5) ? 0m : readQueryTransactions.GetDecimal(5),
-                GroupId = readQueryTransactions.IsDBNull(6) ? -1 : readQueryTransactions.GetInt32(6),
-                RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
-                UseGroupColor = readQueryTransactions.IsDBNull(11) ? false : readQueryTransactions.GetBoolean(11),
-                RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
-                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
-                Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
-            };
-            var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
-            if (!string.IsNullOrEmpty(receiptString))
-            {
-                transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
-            }
-            Transactions.Add(transaction.Id, transaction);
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
@@ -533,10 +183,6 @@ public class Account : IDisposable
                 {
                     TodayExpense += transaction.Amount;
                 }
-            }
-            if (transaction.Id >= NextAvailableTransactionId)
-            {
-                NextAvailableTransactionId = transaction.Id + 1;
             }
         }
         //Repeats
@@ -666,7 +312,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
+            _accountRepository.NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
             FreeMemory();
             return true;
         }
@@ -781,7 +427,7 @@ public class Account : IDisposable
             Groups.Add(group.Id, group);
             if (group.Id >= NextAvailableGroupId)
             {
-                NextAvailableGroupId = group.Id + 1;
+                _accountRepository.NextAvailableGroupId = group.Id + 1;
             }
             FreeMemory();
             return true;
@@ -827,7 +473,7 @@ public class Account : IDisposable
             Groups.Remove(id);
             if (id + 1 == NextAvailableGroupId)
             {
-                NextAvailableGroupId--;
+                _accountRepository.NextAvailableGroupId--;
             }
             foreach (var pair in Transactions)
             {
@@ -884,7 +530,7 @@ public class Account : IDisposable
             Transactions.Add(transaction.Id, transaction);
             if (transaction.Id >= NextAvailableTransactionId)
             {
-                NextAvailableTransactionId = transaction.Id + 1;
+                _accountRepository.NextAvailableTransactionId = transaction.Id + 1;
             }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
@@ -1059,7 +705,7 @@ public class Account : IDisposable
             Transactions.Remove(id);
             if (id + 1 == NextAvailableTransactionId)
             {
-                NextAvailableTransactionId--;
+                _accountRepository.NextAvailableTransactionId--;
             }
             FreeMemory();
             BackupAccountToCSV();
@@ -1470,7 +1116,7 @@ public class Account : IDisposable
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
         var transactions = Transactions;
-        if(exportMode == ExportMode.CurrentView)
+        if (exportMode == ExportMode.CurrentView)
         {
             transactions = new Dictionary<uint, Transaction>();
             foreach (var id in filteredIds)
@@ -1849,7 +1495,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if (!_isEncrypted.GetValueOrDefault())
+        if (!IsEncrypted)
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All, new List<uint>());
         }
