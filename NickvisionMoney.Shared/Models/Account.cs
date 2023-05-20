@@ -426,7 +426,7 @@ public class Account : IDisposable
         var updatedGroup = await _accountRepository.UpdateGroupAsync(group);
         if (updatedGroup != null)
         {
-            Groups[group.Id] = group;
+            Groups[group.Id] = updatedGroup;
             FreeMemory();
             return true;
         }
@@ -477,30 +477,30 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
-        var newTransaction = _accountRepository.AddTransactionAsync(transaction);
+        var newTransaction = await _accountRepository.AddTransactionAsync(transaction);
         if (newTransaction == null)
         {
             return false;
         }
-        Transactions.Add(transaction.Id, transaction);
-        if (transaction.Id >= NextAvailableTransactionId)
+        Transactions.Add(newTransaction.Id, newTransaction);
+        if (newTransaction.Id >= NextAvailableTransactionId)
         {
-            _accountRepository.NextAvailableTransactionId = transaction.Id + 1;
+            _accountRepository.NextAvailableTransactionId = newTransaction.Id + 1;
         }
-        if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+        if (newTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
         {
-            var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-            Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-            if (transaction.Type == TransactionType.Income)
+            var groupId = newTransaction.GroupId == -1 ? 0u : (uint)newTransaction.GroupId;
+            Groups[groupId].Balance += (newTransaction.Type == TransactionType.Income ? 1 : -1) * newTransaction.Amount;
+            if (newTransaction.Type == TransactionType.Income)
             {
-                TodayIncome += transaction.Amount;
+                TodayIncome += newTransaction.Amount;
             }
             else
             {
-                TodayExpense += transaction.Amount;
+                TodayExpense += newTransaction.Amount;
             }
         }
-        if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
+        if (newTransaction.RepeatInterval != TransactionRepeatInterval.Never && newTransaction.RepeatFrom == 0)
         {
             await SyncRepeatTransactionsAsync();
         }
@@ -516,70 +516,48 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
-        using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
-        cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
-        cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
-        cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
-        cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
-        cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
-        cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
-        cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
-        cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
-        if (transaction.Receipt != null)
+        var updatedTransaction = await _accountRepository.UpdateTransactionAsync(transaction);
+        if (updatedTransaction == null)
         {
-            using var memoryStream = new MemoryStream();
-            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
-            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+            return false;
         }
-        else
+
+        var oldTransaction = Transactions[transaction.Id];
+        if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
         {
-            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
+            var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
+            Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
+            if (oldTransaction.Type == TransactionType.Income)
+            {
+                TodayIncome -= oldTransaction.Amount;
+            }
+            else
+            {
+                TodayExpense -= oldTransaction.Amount;
+            }
         }
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
-        if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
+        Transactions[transaction.Id].Dispose();
+        Transactions[transaction.Id] = transaction;
+        if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
         {
-            var oldTransaction = Transactions[transaction.Id];
-            if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+            Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+            if (transaction.Type == TransactionType.Income)
             {
-                var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
-                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
-                if (oldTransaction.Type == TransactionType.Income)
-                {
-                    TodayIncome -= oldTransaction.Amount;
-                }
-                else
-                {
-                    TodayExpense -= oldTransaction.Amount;
-                }
+                TodayIncome += transaction.Amount;
             }
-            Transactions[transaction.Id].Dispose();
-            Transactions[transaction.Id] = transaction;
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            else
             {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome += transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense += transaction.Amount;
-                }
+                TodayExpense += transaction.Amount;
             }
-            if (transaction.RepeatFrom == 0)
-            {
-                await SyncRepeatTransactionsAsync();
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
         }
-        return false;
+        if (transaction.RepeatFrom == 0)
+        {
+            await SyncRepeatTransactionsAsync();
+        }
+        FreeMemory();
+        BackupAccountToCSV();
+        return true;
     }
 
     /// <summary>
