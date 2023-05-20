@@ -452,6 +452,21 @@ class AccountRepository : IDisposable
         return groups;
     }
 
+    internal async Task<Group?> AddGroupAsync(Group group)
+    {
+        using var cmdAddGroup = _database!.CreateCommand();
+        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
+        cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
+        cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
+        if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
+        {
+            return group;
+        }
+        return null;
+    }
+
     internal async Task<Group?> UpdateGroupAsync(Group group)
     {
         using var cmdUpdateGroup = _database!.CreateCommand();

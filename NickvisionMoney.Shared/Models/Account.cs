@@ -401,13 +401,8 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddGroupAsync(Group group)
     {
-        using var cmdAddGroup = _database!.CreateCommand();
-        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
-        cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
-        cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
-        cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
-        cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
-        if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
+        var newGroup = await _accountRepository.AddGroupAsync(group);
+        if (newGroup != null)
         {
             Groups.Add(group.Id, group);
             if (group.Id >= NextAvailableGroupId)
