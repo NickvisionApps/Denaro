@@ -482,6 +482,40 @@ class AccountRepository : IDisposable
         return null;
     }
 
+    internal async Task<Transaction?> AddTransactionAsync(Transaction transaction)
+    {
+        using var cmdAddTransaction = _database!.CreateCommand();
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
+        cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
+        cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
+        cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
+        cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
+        cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
+        cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
+        cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
+        cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        if (transaction.Receipt != null)
+        {
+            using var memoryStream = new MemoryStream();
+            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+        }
+        else
+        {
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
+        }
+        cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
+        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
+        if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
+        {
+            return transaction;
+        }
+        return null;
+    }
+
+
     public void Dispose()
     {
         if (_database != null)

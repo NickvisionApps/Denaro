@@ -54,7 +54,7 @@ public class Account : IDisposable
     /// Whether or not an account needs to be setup
     /// </summary>
     public bool NeedsAccountSetup { get => _accountRepository.NeedsAccountSetup; }
-      /// <summary>
+    /// <summary>
     /// The next available group id
     /// </summary>
     public uint NextAvailableGroupId { get => _accountRepository.NextAvailableGroupId; }
@@ -284,7 +284,8 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool UpdateMetadata(AccountMetadata metadata)
     {
-        if (_accountRepository.UpdateMetadata(metadata)) {        
+        if (_accountRepository.UpdateMetadata(metadata))
+        {
             Metadata.Name = metadata.Name;
             Metadata.AccountType = metadata.AccountType;
             Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
@@ -476,59 +477,36 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
-        using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
-        cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
-        cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
-        cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
-        cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
-        cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
-        cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
-        cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
-        cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
-        cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
-        if (transaction.Receipt != null)
+        var newTransaction = _accountRepository.AddTransactionAsync(transaction);
+        if (newTransaction == null)
         {
-            using var memoryStream = new MemoryStream();
-            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
-            cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+            return false;
         }
-        else
+        Transactions.Add(transaction.Id, transaction);
+        if (transaction.Id >= NextAvailableTransactionId)
         {
-            cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
+            _accountRepository.NextAvailableTransactionId = transaction.Id + 1;
         }
-        cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
-        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
-        if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
+        if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
         {
-            Transactions.Add(transaction.Id, transaction);
-            if (transaction.Id >= NextAvailableTransactionId)
+            var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+            Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+            if (transaction.Type == TransactionType.Income)
             {
-                _accountRepository.NextAvailableTransactionId = transaction.Id + 1;
+                TodayIncome += transaction.Amount;
             }
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            else
             {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome += transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense += transaction.Amount;
-                }
+                TodayExpense += transaction.Amount;
             }
-            if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
-            {
-                await SyncRepeatTransactionsAsync();
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
         }
-        return false;
+        if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
+        {
+            await SyncRepeatTransactionsAsync();
+        }
+        FreeMemory();
+        BackupAccountToCSV();
+        return true;
     }
 
     /// <summary>
