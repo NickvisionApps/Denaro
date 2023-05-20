@@ -31,7 +31,6 @@ public enum ExportMode
 public class Account : IDisposable
 {
     private bool _disposed;
-    private SqliteConnection _database { get => _accountRepository.Database; }
     private AccountRepository _accountRepository;
 
     /// <summary>
@@ -127,10 +126,7 @@ public class Account : IDisposable
             {
                 pair.Value.Dispose();
             }
-            if (_database != null)
-            {
-                _accountRepository.Dispose();
-            }
+            _accountRepository.Dispose();
         }
         _disposed = true;
     }
