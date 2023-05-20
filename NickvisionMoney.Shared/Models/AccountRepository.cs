@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
 using SixLabors.ImageSharp;
@@ -449,6 +450,21 @@ class AccountRepository : IDisposable
             }
         }
         return groups;
+    }
+
+    internal async Task<Group?> UpdateGroupAsync(Group group)
+    {
+        using var cmdUpdateGroup = _database!.CreateCommand();
+        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
+        cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdUpdateGroup.Parameters.AddWithValue("$rgba", group.RGBA);
+        cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
+        if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
+        {
+            return group;
+        }
+        return null;
     }
 
     public void Dispose()

@@ -427,13 +427,8 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> UpdateGroupAsync(Group group)
     {
-        using var cmdUpdateGroup = _database!.CreateCommand();
-        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
-        cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
-        cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
-        cmdUpdateGroup.Parameters.AddWithValue("$rgba", group.RGBA);
-        cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
-        if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
+        var updatedGroup = await _accountRepository.UpdateGroupAsync(group);
+        if (updatedGroup != null)
         {
             Groups[group.Id] = group;
             FreeMemory();
