@@ -482,6 +482,18 @@ class AccountRepository : IDisposable
         return null;
     }
 
+    public async Task<bool> DeleteGroupAsync(uint id) {
+        using var cmdDeleteGroup = _database!.CreateCommand();
+        cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
+        cmdDeleteGroup.Parameters.AddWithValue("$id", id);
+        if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     public void Dispose()
     {
         if (_database != null)

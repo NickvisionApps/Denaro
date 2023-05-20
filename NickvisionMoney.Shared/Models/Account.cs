@@ -54,7 +54,7 @@ public class Account : IDisposable
     /// Whether or not an account needs to be setup
     /// </summary>
     public bool NeedsAccountSetup { get => _accountRepository.NeedsAccountSetup; }
-      /// <summary>
+    /// <summary>
     /// The next available group id
     /// </summary>
     public uint NextAvailableGroupId { get => _accountRepository.NextAvailableGroupId; }
@@ -284,7 +284,8 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool UpdateMetadata(AccountMetadata metadata)
     {
-        if (_accountRepository.UpdateMetadata(metadata)) {        
+        if (_accountRepository.UpdateMetadata(metadata))
+        {
             Metadata.Name = metadata.Name;
             Metadata.AccountType = metadata.AccountType;
             Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
@@ -439,34 +440,32 @@ public class Account : IDisposable
     /// <returns>(Result, BelongingTransactions)</returns>
     public async Task<(bool Result, List<uint> BelongingTransactions)> DeleteGroupAsync(uint id)
     {
-        using var cmdDeleteGroup = _database!.CreateCommand();
-        cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
-        cmdDeleteGroup.Parameters.AddWithValue("$id", id);
-        if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
+        if (!await _accountRepository.DeleteGroupAsync(id))
         {
-            var belongingTransactions = new List<uint>();
-            Groups.Remove(id);
-            if (id + 1 == NextAvailableGroupId)
-            {
-                _accountRepository.NextAvailableGroupId--;
-            }
-            foreach (var pair in Transactions)
-            {
-                if (pair.Value.GroupId == id)
-                {
-                    pair.Value.GroupId = -1;
-                    if (pair.Value.UseGroupColor)
-                    {
-                        pair.Value.UseGroupColor = false;
-                        belongingTransactions.Add(pair.Key);
-                    }
-                    await UpdateTransactionAsync(pair.Value);
-                }
-            }
-            FreeMemory();
-            return (true, belongingTransactions);
+            return (false, new List<uint>());
         }
-        return (false, new List<uint>());
+
+        var belongingTransactions = new List<uint>();
+        Groups.Remove(id);
+        if (id + 1 == NextAvailableGroupId)
+        {
+            _accountRepository.NextAvailableGroupId--;
+        }
+        foreach (var pair in Transactions)
+        {
+            if (pair.Value.GroupId == id)
+            {
+                pair.Value.GroupId = -1;
+                if (pair.Value.UseGroupColor)
+                {
+                    pair.Value.UseGroupColor = false;
+                    belongingTransactions.Add(pair.Key);
+                }
+                await UpdateTransactionAsync(pair.Value);
+            }
+        }
+        FreeMemory();
+        return (true, belongingTransactions);
     }
 
     /// <summary>
