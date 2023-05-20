@@ -129,7 +129,6 @@ public class Account : IDisposable
             }
             if (_database != null)
             {
-                FreeMemory();
                 _accountRepository.Dispose();
             }
         }
@@ -188,7 +187,7 @@ public class Account : IDisposable
         //Repeats
         await SyncRepeatTransactionsAsync();
         //Cleanup
-        FreeMemory();
+        _accountRepository.FreeMemory();
         return true;
     }
 
@@ -299,7 +298,6 @@ public class Account : IDisposable
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
             _accountRepository.NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
-            FreeMemory();
             return true;
         }
         return false;
@@ -410,7 +408,6 @@ public class Account : IDisposable
             {
                 _accountRepository.NextAvailableGroupId = group.Id + 1;
             }
-            FreeMemory();
             return true;
         }
         return false;
@@ -427,7 +424,6 @@ public class Account : IDisposable
         if (updatedGroup != null)
         {
             Groups[group.Id] = updatedGroup;
-            FreeMemory();
             return true;
         }
         return false;
@@ -464,7 +460,6 @@ public class Account : IDisposable
                 await UpdateTransactionAsync(pair.Value);
             }
         }
-        FreeMemory();
         return (true, belongingTransactions);
     }
 
@@ -502,7 +497,6 @@ public class Account : IDisposable
         {
             await SyncRepeatTransactionsAsync();
         }
-        FreeMemory();
         BackupAccountToCSV();
         return true;
     }
@@ -553,7 +547,6 @@ public class Account : IDisposable
         {
             await SyncRepeatTransactionsAsync();
         }
-        FreeMemory();
         BackupAccountToCSV();
         return true;
     }
@@ -635,7 +628,6 @@ public class Account : IDisposable
         {
             _accountRepository.NextAvailableTransactionId--;
         }
-        FreeMemory();
         BackupAccountToCSV();
         return true;
     }
@@ -1404,16 +1396,6 @@ public class Account : IDisposable
             return false;
         }
         return true;
-    }
-
-    /// <summary>
-    /// Frees up memory used by the database
-    /// </summary>
-    private void FreeMemory()
-    {
-        using var cmdClean = _database!.CreateCommand();
-        cmdClean.CommandText = "PRAGMA shrink_memory";
-        cmdClean.ExecuteNonQuery();
     }
 
     /// <summary>

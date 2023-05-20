@@ -241,6 +241,7 @@ class AccountRepository : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
+            FreeMemory();
             return true;
         }
         return false;
@@ -462,6 +463,7 @@ class AccountRepository : IDisposable
         cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
         if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return group;
         }
         return null;
@@ -477,6 +479,7 @@ class AccountRepository : IDisposable
         cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
         if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return group;
         }
         return null;
@@ -489,6 +492,7 @@ class AccountRepository : IDisposable
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return true;
         }
         return false;
@@ -523,6 +527,7 @@ class AccountRepository : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return transaction;
         }
         return null;
@@ -556,6 +561,7 @@ class AccountRepository : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
         if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return transaction;
         }
         return null;
@@ -568,6 +574,7 @@ class AccountRepository : IDisposable
         cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
         if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
         {
+            FreeMemory();
             return true;
         }
         return false;
@@ -578,9 +585,20 @@ class AccountRepository : IDisposable
     {
         if (_database != null)
         {
+            FreeMemory();
             _database.Close();
             _database.Dispose();
             _database = null;
         }
+    }
+
+    /// <summary>
+    /// Frees up memory used by the database
+    /// </summary>
+    internal void FreeMemory()
+    {
+        using var cmdClean = _database!.CreateCommand();
+        cmdClean.CommandText = "PRAGMA shrink_memory";
+        cmdClean.ExecuteNonQuery();
     }
 }
