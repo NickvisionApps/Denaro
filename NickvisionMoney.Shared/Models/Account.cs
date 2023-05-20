@@ -611,36 +611,33 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DeleteTransactionAsync(uint id)
     {
-        using var cmdDeleteTransaction = _database!.CreateCommand();
-        cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
-        cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
-        if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
+        if (!await _accountRepository.DeleteTransactionAsync(id))
         {
-            var transaction = Transactions[id];
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome -= transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense -= transaction.Amount;
-                }
-            }
-            Transactions[id].Dispose();
-            Transactions.Remove(id);
-            if (id + 1 == NextAvailableTransactionId)
-            {
-                _accountRepository.NextAvailableTransactionId--;
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
+            return false;
         }
-        return false;
+        var transaction = Transactions[id];
+        if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+        {
+            var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+            Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+            if (transaction.Type == TransactionType.Income)
+            {
+                TodayIncome -= transaction.Amount;
+            }
+            else
+            {
+                TodayExpense -= transaction.Amount;
+            }
+        }
+        Transactions[id].Dispose();
+        Transactions.Remove(id);
+        if (id + 1 == NextAvailableTransactionId)
+        {
+            _accountRepository.NextAvailableTransactionId--;
+        }
+        FreeMemory();
+        BackupAccountToCSV();
+        return true;
     }
 
     /// <summary>

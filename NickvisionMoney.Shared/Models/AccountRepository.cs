@@ -482,7 +482,8 @@ class AccountRepository : IDisposable
         return null;
     }
 
-    public async Task<bool> DeleteGroupAsync(uint id) {
+    public async Task<bool> DeleteGroupAsync(uint id)
+    {
         using var cmdDeleteGroup = _database!.CreateCommand();
         cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
         cmdDeleteGroup.Parameters.AddWithValue("$id", id);
@@ -558,6 +559,18 @@ class AccountRepository : IDisposable
             return transaction;
         }
         return null;
+    }
+
+    public async Task<bool> DeleteTransactionAsync(uint id)
+    {
+        using var cmdDeleteTransaction = _database!.CreateCommand();
+        cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
+        cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
+        if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
 
