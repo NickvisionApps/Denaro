@@ -87,6 +87,7 @@ public class Account : IDisposable
         Groups = new Dictionary<uint, Group>();
         TodayIncome = 0;
         TodayExpense = 0;
+        Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         _accountRepository = new AccountRepository(path);
     }
 
