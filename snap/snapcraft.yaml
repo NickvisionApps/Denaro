@@ -24,10 +24,8 @@ parts:
     build-packages:
       - blueprint-compiler
       - wget
-      - cargo
     override-pull: |
       craftctl default
-      cargo install just
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
       chmod +x ./dotnet-install.sh
       ./dotnet-install.sh --channel 7.0
@@ -35,8 +33,9 @@ parts:
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
       cd $CRAFT_PART_SRC_WORK
-      just publish-self-contained /usr
-      just install $CRAFT_PRIME
+      dotnet tool restore
+      dotnet cake --target=Publish --prefix=/usr --ui=gnome --self-contained
+      dotnet cake --target=Install --destdir=$CRAFT_PRIME
       sed -i "s|exec /usr/lib/org.nickvision.money/NickvisionMoney.GNOME|exec /snap/denaro/current/usr/lib/org.nickvision.money/NickvisionMoney.GNOME|" $CRAFT_PRIME/usr/bin/org.nickvision.money
       sed -e 's|Icon=org.nickvision.money|Icon=$SNAP/usr/share/icons/hicolor/scalable/apps/org.nickvision.money.svg|' -i $CRAFT_PRIME/usr/share/applications/org.nickvision.money.desktop
       mkdir $CRAFT_PRIME/usr/share/appdata/
