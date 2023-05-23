@@ -18,9 +18,7 @@ parts:
   denaro:
     # See 'snapcraft plugins'
     plugin: nil
-    source: https://github.com/NickvisionApps/Denaro.git
-    source-tag: $SNAPCRAFT_PROJECT_VERSION
-    source-subdir: NickvisionMoney.GNOME
+    source: .
     build-packages:
       - blueprint-compiler
       - wget
