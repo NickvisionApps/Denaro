@@ -168,6 +168,8 @@ public class Account : IDisposable
 
         Metadata = _accountRepository.GetMetadata();
 
+        Groups = _accountRepository.GetGroups();
+
         Transactions = _accountRepository.GetTransactions();
 
         foreach (var transaction in Transactions.Values)
