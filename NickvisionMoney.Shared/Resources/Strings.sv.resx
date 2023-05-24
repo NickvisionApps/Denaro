@@ -625,9 +625,6 @@
 		<value />
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value />
