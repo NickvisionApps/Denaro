@@ -719,19 +719,6 @@ Tätä toimintoa ei voi perua.</value>
 		<value>Sovellus</value>
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Kehittäjät:
-{0}
-
-Suunnittelijat:
-{1}
-
-Grafiikka:
-{2}
-
-Kääntäjät:
-{3}</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Hallitse raha-asioitasi</value>
