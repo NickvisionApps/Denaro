@@ -890,19 +890,6 @@ Pokud heslo ztratíte, soubor PDF bude nepřístupný.</value>
 		<value>Aplikace</value>
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Naprogramovali:
-{0}
-
-Navrhli:
-{1}
-
-Ztvárnili:
-{2}
-
-Přeložili:
-{3}</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>— Správa více účtů najednou pomocí známého rozhraní karet
