@@ -1512,6 +1512,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool ExportToPDF(string path, ExportMode exportMode, List<uint> filteredIds, string? password)
     {
+        QuestPDF.Settings.License = LicenseType.Community;
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
@@ -1576,7 +1577,7 @@ public class Account : IDisposable
                     page.Header().Row(row =>
                     {
                         row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16).Fallback(x => x.FontFamily("Noto Emoji").FontSize(16));
-                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream, ImageScaling.FitArea);
+                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream).FitArea();
                     });
                     //Content
                     page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
