@@ -532,30 +532,11 @@ Yeni aralık baz alınarak yeni tekrarlama işlemleri oluşturulacaktır.</value
 		<value>Uygulama</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Lütfen yukarıdaki hataları düzeltin.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Neler Yeni?</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Geliştiriciler:
-{0}
-
-Tasarımcılar:
-{1}
-
-Sanatçılar:
-{2}
-
-Çevirmenler:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Temayı değiştirmek için uygulamanın yeniden başlatılması gerekir.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Temayı Uygulamak İçin Yeniden Başlatılsın mı?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Yeni temayı uygulamak için {0} uygulamasını yeniden başlatmak ister misiniz?
@@ -774,9 +755,6 @@ Kaydedilmemiş tüm çalışmalar kaybolacaktır.</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Nokta ve Virgül</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>ÖNİZLE</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>- Tanıdık bir sekme arayüzü ile aynı anda birden fazla hesabı yönetin
