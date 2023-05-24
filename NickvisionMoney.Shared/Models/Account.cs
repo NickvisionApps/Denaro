@@ -34,6 +34,7 @@ public class Account : IDisposable
     private bool _disposed;
     private SqliteConnection? _database;
     private bool? _isEncrypted;
+    private TransactionFilter _transactionFilter;
 
     /// <summary>
     /// The path of the account
@@ -81,7 +82,7 @@ public class Account : IDisposable
     /// Constructs an Account
     /// </summary>
     /// <param name="path">The path of the account</param>
-    public Account(string path)
+    public Account(string path, TransactionFilter transactionFilter)
     {
         _loggedIn = false;
         _disposed = false;
@@ -90,6 +91,7 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
+        _transactionFilter = transactionFilter;
         NeedsAccountSetup = true;
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
@@ -523,7 +525,7 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                Groups[groupId].AddTransaction(transaction);
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -888,7 +890,7 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                Groups[groupId].AddTransaction(transaction);
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -946,7 +948,7 @@ public class Account : IDisposable
             if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
-                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
+                Groups[groupId].RemoveTransaction(oldTransaction.Id);
                 if (oldTransaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= oldTransaction.Amount;
@@ -961,7 +963,7 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                Groups[groupId].AddTransaction(transaction);
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome += transaction.Amount;
@@ -1044,7 +1046,7 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+                Groups[groupId].RemoveTransaction(id);
                 if (transaction.Type == TransactionType.Income)
                 {
                     TodayIncome -= transaction.Amount;
@@ -1469,7 +1471,7 @@ public class Account : IDisposable
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
         var transactions = Transactions;
-        if(exportMode == ExportMode.CurrentView)
+        if (exportMode == ExportMode.CurrentView)
         {
             transactions = new Dictionary<uint, Transaction>();
             foreach (var id in filteredIds)

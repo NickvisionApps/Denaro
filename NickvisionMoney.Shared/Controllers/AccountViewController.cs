@@ -158,7 +158,7 @@ public class AccountViewController : IDisposable
     {
         _isOpened = false;
         _disposed = false;
-        _account = new Account(path);
+        _account = new Account(path, transactionFilter);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         Localizer = localizer;

@@ -7,6 +7,7 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
 {
+    private TransactionFilter _transactionFilter;
     /// <summary>
     /// The id of the group
     /// </summary>
@@ -22,23 +23,53 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// <summary>
     /// The balance of the group
     /// </summary>
-    public decimal Balance { get; set; }
+    public decimal Balance { get; private set; } = 0m;
     /// <summary>
     /// The RGBA color of the group
     /// </summary>
     public string RGBA { get; set; }
 
+    private Dictionary<uint, Transaction> Transactions { get; set; }
+
     /// <summary>
     /// Constructs a group
     /// </summary>
     /// <param name="id">The id of the group</param>
-    public Group(uint id)
+    public Group(uint id, TransactionFilter filter)
     {
         Id = id;
+        _transactionFilter = filter;
         Name = "";
         Description = "";
         Balance = 0m;
         RGBA = "rgb(0,0,0)";
+    }
+
+    public void AddTransaction(Transaction transaction)
+    {
+        Transactions.Add(transaction.Id, transaction);
+        UpdateBalance();
+    }
+
+    public void RemoveTransaction(uint id)
+    {
+        Transactions.Remove(id);
+        UpdateBalance();
+    }
+
+    private void UpdateBalance()
+    {
+        var transactions = Transactions.Values.ToList();
+        if (_transactionFilter == null)
+        {
+            Balance = transactions
+                .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+        }
+        else
+        {
+            _transactionFilter.Filter(transactions)
+                .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+        }
     }
 
     /// <summary>
