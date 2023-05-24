@@ -532,9 +532,6 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Aplicação</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Reinicie o aplicativo para mudar o tema.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Menu de contas</value>

@@ -730,19 +730,6 @@ Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
 		<value>Aplicativo</value>
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Desenvolvedores:
-{0}
-
-Designers:
-{1}
-
-Artistas:
-{2}
-
-Tradutores:
-{3}</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Gerencie suas finanças pessoais</value>

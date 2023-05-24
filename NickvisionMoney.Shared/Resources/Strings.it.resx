@@ -532,9 +532,6 @@ Le nuove transazioni saranno generate in base alla nuova frequenza.</value>
 		<value>Applicazione</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>È necessario riavviare l'applicazione per cambiare il tema.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Menu account</value>

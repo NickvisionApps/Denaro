@@ -429,9 +429,6 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>軟體</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>請重啟以應用設定</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>帳戶選單</value>

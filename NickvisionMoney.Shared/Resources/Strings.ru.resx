@@ -435,9 +435,6 @@ Tobias Bernard https://github.com/bertob</value>
 		<value>Приложение</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Для применения темы потребуется перезапуск приложения.</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>— Управляйте несколькими счетами одновременно, используя привычный интерфейс с вкладками
