@@ -463,19 +463,10 @@
 		<value>एप्लिकेशन</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value />
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value />
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
@@ -759,9 +750,6 @@ New repeat transactions will be generated based off the new interval.</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Period and Comma</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREVIEW</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Manage your personal finances</value>

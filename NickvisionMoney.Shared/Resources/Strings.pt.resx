@@ -532,30 +532,11 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
 		<value>Aplicação</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Por favor, corrija os erros acima.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>O que há de novo?</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Desenvolvedores:
-{0}
-
-Designers:
-{1}
-
-Artistas:
-{2}
-
-Tradutores:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Reinicie o aplicativo para mudar o tema.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Reiniciar para aplicar o tema?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Gostaria de reiniciar {0} para aplicar o novo tema?
@@ -774,9 +755,6 @@ Qualquer trabalho não salvo será perdido.</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Ponto Final e Vírgula</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREVIEW</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Manage your personal finances</value>
