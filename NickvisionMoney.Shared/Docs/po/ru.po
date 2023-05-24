@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-04-19 17:12+0300\n"
+"POT-Creation-Date: 2023-05-24 04:01+0300\n"
 "PO-Revision-Date: 2023-04-29 22:14+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,54 +20,32 @@ msgid "translator-credits"
 msgstr ""
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:8
+#: yelp/C/account.page:8
 msgctxt "link"
 msgid "Account 🏦"
 msgstr "Счёт 🏦"
 
 #. (itstool) path: credit/name
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:10
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:10
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:10
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:10
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:10
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:10
+#: yelp/C/account.page:10 yelp/C/configuration.page:10
+#: yelp/C/import-export.page:10 yelp/C/index.page:10 yelp/C/transaction.page:10
+#: yelp/C/transfer.page:10
 msgid "Fyodor Sobolev"
 msgstr "Фёдор Соболев"
 
-#. (itstool) path: credit/years
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:15
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:11
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:15
-msgid "2023"
-msgstr ""
-
 #. (itstool) path: credit/name
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:14
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:14
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:14
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:14
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:14
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:14
+#: yelp/C/account.page:14 yelp/C/configuration.page:14
+#: yelp/C/import-export.page:14 yelp/C/index.page:14 yelp/C/transaction.page:14
+#: yelp/C/transfer.page:14
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:20
+#: yelp/C/account.page:20
 msgid "Account"
 msgstr "Счёт"
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:21
+#: yelp/C/account.page:21
 msgid ""
 "This page explains all properties of accounts in <app>Denaro</app>. Most of "
 "them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
@@ -78,7 +56,7 @@ msgstr ""
 "диалог открывается автоматически, когда вы создаёте новый счёт."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:22
+#: yelp/C/account.page:22
 msgid ""
 "Each account is stored in a single <file>*.nmoney</file> file. Files created "
 "in an older <em>stable</em> version of <app>Denaro</app> can be safely "
@@ -95,7 +73,7 @@ msgstr ""
 "версия приложения (например, V2023.1.0)."
 
 #. (itstool) path: note/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:24
+#: yelp/C/account.page:24
 msgid ""
 "Unstable (Beta and RC) versions of the application can contain bugs or "
 "unfinished modifications that can cause data loss. DO NOT use account files "
@@ -107,12 +85,12 @@ msgstr ""
 "приложения!"
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:29
+#: yelp/C/account.page:29
 msgid "Name"
 msgstr "Имя"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:30
+#: yelp/C/account.page:30
 msgid ""
 "Account name is shown in the list of recent accounts and in tabs. A name "
 "doesn't have a length limit and it can contain any characters, including "
@@ -123,12 +101,12 @@ msgstr ""
 "включая эмодзи."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:33
+#: yelp/C/account.page:33
 msgid "Account Type"
 msgstr "Тип счёта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:34
+#: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
 "and 🟢<em>Business</em>. Account type is only a useful label that is shown "
@@ -145,12 +123,12 @@ msgstr ""
 "xref=\"configuration\">глобальной конфигурации</link>."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:37
+#: yelp/C/account.page:37
 msgid "Default Transaction Type"
 msgstr "Тип транзакции по умолчанию"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:38
+#: yelp/C/account.page:38
 msgid ""
 "When you create a new transaction its type by default will be the same as in "
 "this setting."
@@ -159,12 +137,12 @@ msgstr ""
 "указан этой настройкой."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:41
+#: yelp/C/account.page:41
 msgid "System Currency"
 msgstr "Системная валюта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:42
+#: yelp/C/account.page:42
 msgid ""
 "Every time the application starts, it gets data about currency and numbers "
 "formatting from your system locale, and this data is used to show currency "
@@ -180,7 +158,7 @@ msgstr ""
 "примеров:"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:44
+#: yelp/C/account.page:44
 msgid ""
 "If your locale is <em>English (US)</em>, currency symbol will be set to "
 "<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
@@ -189,7 +167,7 @@ msgstr ""
 "валюты, а <em>1,000.00</em> будет приниматься как корректное число."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:45
+#: yelp/C/account.page:45
 msgid ""
 "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
 "em> and <em>1.000,00</em> will be accepted as a valid number."
@@ -198,7 +176,7 @@ msgstr ""
 "а <em>1.000,00</em> будет приниматься как корректное число."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:46
+#: yelp/C/account.page:46
 msgid ""
 "If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
 "em> and <em>1000,00</em> will be accepted as a valid number."
@@ -207,7 +185,7 @@ msgstr ""
 "а <em>1000,00</em> будет приниматься как корректное число."
 
 #. (itstool) path: note/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:49
+#: yelp/C/account.page:49
 msgid ""
 "On Linux, it is possible to set different locales for system language and "
 "formats. Changing these settings varies depending on the desktop environment "
@@ -235,12 +213,12 @@ msgstr ""
 "разработчики смогли воспроизвести ошибку, установив идентичные настройки."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:53
+#: yelp/C/account.page:53
 msgid "Use Custom Currency"
 msgstr "Использование своей валюты"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:54
+#: yelp/C/account.page:54
 msgid ""
 "If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
 "instead of currency symbol provided by your system locale."
@@ -249,27 +227,27 @@ msgstr ""
 "вместо символа, предоставленного региональными настройками вашей системы."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:57
+#: yelp/C/account.page:57
 msgid "Custom Currency Symbol"
 msgstr "Свой символ валюты"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:58
+#: yelp/C/account.page:58
 msgid "Up to 3 characters or 1 emoji. It can't be a number."
 msgstr "До 3 текстовых символов, либо 1 эмодзи. Не может быть числом."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:61
+#: yelp/C/account.page:61
 msgid "Custom Currency Code"
 msgstr "Свой код валюты"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:62
+#: yelp/C/account.page:62
 msgid "Up to 3 characters or 1 emoji."
 msgstr "До 3 текстовых символов, либо 1 эмодзи."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:63
+#: yelp/C/account.page:63
 msgid ""
 "An example to understand the difference between a symbol and a code: <em>$</"
 "em> is a symbol, <em>USD</em> is a code."
@@ -278,22 +256,22 @@ msgstr ""
 "<em>USD</em> — код."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:66
+#: yelp/C/account.page:66
 msgid "Custom Currency Decimal and Group Separators"
 msgstr "Десятичный разделитель и разделитель групп разрядов"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:67
+#: yelp/C/account.page:67
 msgid "Up to 2 characters or 1 emoji."
 msgstr "До 2 текстовых символов, либо 1 эмодзи."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:70
+#: yelp/C/account.page:70
 msgid "Custom Currency Decimal Digits"
 msgstr "Цифры в дробной части"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:71
+#: yelp/C/account.page:71
 msgid ""
 "The size of decimal part of amount values. With \"Unlimited\" digits there "
 "will be as many numbers in decimal part as required to show the precise "
@@ -304,12 +282,12 @@ msgstr ""
 "значения, но дробной части не будет, если число целое."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:74
+#: yelp/C/account.page:74
 msgid "Password"
 msgstr "Пароль"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:75
+#: yelp/C/account.page:75
 msgid ""
 "Each account can be password-protected. Adding a password causes an account "
 "to become encrypted (making it impossible to read the data without "
@@ -325,12 +303,12 @@ msgstr ""
 "счёта. Удаление пароля расшифровывает данные."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:78
+#: yelp/C/account.page:78
 msgid "Sort by Id, Date or Amount"
 msgstr "Сортировка по номеру, дате или сумме"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:79
+#: yelp/C/account.page:79
 msgid ""
 "Each account stores whether to sort transactions in the main window by their "
 "id, date or amount. Every time you change this, it will be saved to the "
@@ -342,12 +320,12 @@ msgstr ""
 "вы снова откроете этот счёт."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:82
+#: yelp/C/account.page:82
 msgid "Sorting Order"
 msgstr "Порядок сортировки"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:83
+#: yelp/C/account.page:83
 msgid ""
 "Each account stores information about the order of transactions in the main "
 "window. Every time you change this, it will be saved to the account file and "
@@ -359,12 +337,12 @@ msgstr ""
 "откроете этот счёт."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:86
+#: yelp/C/account.page:86
 msgid "Groups Visibility"
 msgstr "Видимость групп"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/account.page:87
+#: yelp/C/account.page:87
 msgid ""
 "Each account stores information about whether the groups list in the main "
 "window is hidden or not. Every time you change groups list visibility, it's "
@@ -376,18 +354,18 @@ msgstr ""
 "будет восстановлено, когда вы снова откроете этот счёт."
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:8
+#: yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
 msgstr "Конфигурация 🔧"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:20
+#: yelp/C/configuration.page:20
 msgid "Configuration"
 msgstr "Конфигурация"
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:21
+#: yelp/C/configuration.page:21
 msgid ""
 "This page describes what you can change in the application configuration."
 msgstr ""
@@ -395,7 +373,7 @@ msgstr ""
 "конфигурации приложения."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:22
+#: yelp/C/configuration.page:22
 msgid ""
 "Depending on your platform, in the application interface the configuration "
 "is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
@@ -404,12 +382,12 @@ msgstr ""
 "другим термином: <gui>Параметры</gui> или <gui>Настройки</gui>."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:25
+#: yelp/C/configuration.page:25
 msgid "Theme"
 msgstr "Тема"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:26
+#: yelp/C/configuration.page:26
 msgid ""
 "Set light or dark theme, or make <app>Denaro</app> follow your system theme. "
 "Changing this on Windows requires the application restart to apply."
@@ -419,12 +397,12 @@ msgstr ""
 "требуется перезапуск программы."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:29
+#: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
 msgstr "Цвет транзакции по умолчанию"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:30
+#: yelp/C/configuration.page:30
 msgid ""
 "A color that will be selected by default when adding a new <link "
 "xref=\"transaction\">transaction</link> with unique color. Changing this "
@@ -437,12 +415,12 @@ msgstr ""
 "ранее был цветом по умолчанию."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:33
+#: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
 msgstr "Цвет перевода средств по умолчанию"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:34
+#: yelp/C/configuration.page:34
 msgid ""
 "A color that will be used for transactions created using <link "
 "xref=\"transfer\">transfer</link>. Changing this will not affect existing "
@@ -453,12 +431,12 @@ msgstr ""
 "существующие транзакции."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:37
+#: yelp/C/configuration.page:37
 msgid "Group Default Color"
 msgstr "Цвет группы по умолчанию"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:38
+#: yelp/C/configuration.page:38
 msgid ""
 "A color that will be selected by default when adding a new group. This is "
 "also a color for «Ungrouped» group."
@@ -467,12 +445,12 @@ msgstr ""
 "цвет группы «Несгруппированные»."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:41
+#: yelp/C/configuration.page:41
 msgid "Checking Account Color"
 msgstr "Цвет расчётного счёта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:42
+#: yelp/C/configuration.page:42
 msgid ""
 "A color used to mark <link xref=\"account\">accounts</link> with the "
 "<em>Checking</em> type in a recent accounts list."
@@ -481,26 +459,26 @@ msgstr ""
 "link> в списке недавних счетов."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:45
+#: yelp/C/configuration.page:45
 msgid "Savings Account Color"
 msgstr "Цвет сберегательного счёта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:46
+#: yelp/C/configuration.page:46
 msgid ""
 "A color used to mark <link xref=\"account\">accounts</link> with the "
 "<em>Savings</em> type in a recent accounts list."
 msgstr ""
-"Цвет, которым отмечаются <em>Сберегательные</em> <link xref=\"account\""
-">счета</link> в списке недавних счетов."
+"Цвет, которым отмечаются <em>Сберегательные</em> <link "
+"xref=\"account\">счета</link> в списке недавних счетов."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:49
+#: yelp/C/configuration.page:49
 msgid "Business Account Color"
 msgstr "Цвет бизнес счёта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:50
+#: yelp/C/configuration.page:50
 msgid ""
 "A color used to mark <link xref=\"account\">accounts</link> with the "
 "<em>Business</em> type in a recent accounts list."
@@ -509,16 +487,16 @@ msgstr ""
 "в списке недавних счетов."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:53
+#: yelp/C/configuration.page:53
 msgid "Use Native Digits"
 msgstr "Использовать местные цифры"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:54
+#: yelp/C/configuration.page:54
 msgid ""
 "Whether to use numerals that are native for your locale instead of latin "
 "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numberals."
+"instead of <em>012</em> for locales that use Eastern Arabic numerals."
 msgstr ""
 "Должно ли приложение использовать цифры, родные для вашего региона, вместо "
 "арабских цифр. Например, если эта настройка включена, <em>٠١٢</em> будут "
@@ -526,12 +504,12 @@ msgstr ""
 "используют восточные арабские цифры."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:57
+#: yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "Вставка десятичного разделителя"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:58
+#: yelp/C/configuration.page:58
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -543,12 +521,12 @@ msgstr ""
 "будет добавлен."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:61
+#: yelp/C/configuration.page:61
 msgid "CSV Backup Folder"
 msgstr "Папка резервных копий CSV"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/configuration.page:62
+#: yelp/C/configuration.page:62
 msgid ""
 "A folder where your data will be automatically <link xref=\"import-"
 "export\">exported to CSV</link> after every change. This feature doesn't "
@@ -561,33 +539,33 @@ msgstr ""
 "быть защищены паролем."
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:8
+#: yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
 msgstr "Импорт/Экспорт 📤"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:20
+#: yelp/C/import-export.page:20
 msgid "Import/Export"
 msgstr "Импорт/Экспорт"
 
 #. (itstool) path: div/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:22
+#: yelp/C/import-export.page:22
 msgid "Import Formats"
 msgstr "Форматы импорта"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:26
+#: yelp/C/import-export.page:26
 msgid "Dates should be in <em>YYYYMMDD</em> format."
 msgstr "Даты должны быть в формате <em>ГГГГММДД</em>."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:30
+#: yelp/C/import-export.page:30
 msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
 msgstr "Даты должны быть в Английском (США) формате (<em>ММ/ДД/ГГГГ</em>)."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:34
+#: yelp/C/import-export.page:34
 msgid ""
 "❗ While CSV is a common format and some banks allow their users to export "
 "information as CSV, these files are in fact tables that can contain "
@@ -612,14 +590,14 @@ msgstr ""
 "которые <app>Denaro</app> ожидает найти, выглядит следующим образом:"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:39
+#: yelp/C/import-export.page:39
 msgid "Transaction Id, should be unique for a given account. Ids start with 1."
 msgstr ""
 "Номер транзакции, должен быть уникальным для данного счёта. Номера "
 "начинаются с 1."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:43
+#: yelp/C/import-export.page:43
 msgid ""
 "Transaction date (or start date in case of repeat transaction), should be in "
 "English (US) format (<em>MM/DD/YYYY</em>)."
@@ -628,64 +606,64 @@ msgstr ""
 "в Английском (США) формате (<em>ММ/ДД/ГГГГ</em>)."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:47
+#: yelp/C/import-export.page:47
 msgid ""
 "Transaction description, it can contain any characters except semicolon."
 msgstr ""
 "Описание транзакции, может содержать любые символы, кроме точки с запятой."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:51
+#: yelp/C/import-export.page:51
 msgid "Transaction type: 0 for income, 1 for expense."
 msgstr "Тип транзакции: 0 - доход, 1 - расход."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:55
+#: yelp/C/import-export.page:55
 msgid "A number representing transaction repeat interval:"
 msgstr "Число, соответствующее интервалу повтора транзакции:"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:56
+#: yelp/C/import-export.page:56
 msgid "0 - Never"
 msgstr "0 - Никогда"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:57
+#: yelp/C/import-export.page:57
 msgid "1 - Daily"
 msgstr "1 - Ежедневно"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:58
+#: yelp/C/import-export.page:58
 msgid "2 - Weekly"
 msgstr "2 - Еженедельно"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:59
+#: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
 msgstr "7 - Раз в 2 недели"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:60
+#: yelp/C/import-export.page:60
 msgid "3 - Monthly"
 msgstr "3 - Ежемесячно"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:61
+#: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
 msgstr "4 - Ежеквартально"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:62
+#: yelp/C/import-export.page:62
 msgid "5 - Yearly"
 msgstr "5 - Ежегодно"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:63
+#: yelp/C/import-export.page:63
 msgid "6 - Biyearly"
 msgstr "6 - Раз в два года"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:64
+#: yelp/C/import-export.page:64
 msgid ""
 "See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
 "link> page for details about repeat transactions."
@@ -694,7 +672,7 @@ msgstr ""
 "Повтора</em> на странице <link xref=\"transaction\">о транзакциях</link>."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:68
+#: yelp/C/import-export.page:68
 msgid ""
 "Should be either an Id of source transaction or 0 if it's a source "
 "transaction or -1 if it's not repeat transaction."
@@ -703,7 +681,7 @@ msgstr ""
 "-1, если это не повторящаяся транзакция."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:72
+#: yelp/C/import-export.page:72
 msgid ""
 "End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
 "YYYY</em>). Leave it empty if it's not repeat transaction."
@@ -713,12 +691,12 @@ msgstr ""
 "повторяющаяся."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:76
+#: yelp/C/import-export.page:76
 msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
 msgstr "Сумма транзакции в Английском (США) формате (<em>123,456.78</em>)."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:80
+#: yelp/C/import-export.page:80
 msgid ""
 "Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
 "<em>G</em> and <em>B</em> are integers in range between 0 and 255."
@@ -728,12 +706,12 @@ msgstr ""
 "диапазоне от 0 до 255."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:84
+#: yelp/C/import-export.page:84
 msgid "Whether a transaction should use group color: 0 — false, 1 — true."
 msgstr "Должен ли для транзакции использоваться цвет группы: 0 — нет, 1 — да."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:88
+#: yelp/C/import-export.page:88
 msgid ""
 "Transaction's group Id. Ids start with 1. For ungrouped transaction it "
 "should be -1 (not 0, this is incorrect value for group Id)."
@@ -742,7 +720,7 @@ msgstr ""
 "укажите -1 (не 0, это некорректное значение для номера группы)."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:92
+#: yelp/C/import-export.page:92
 msgid ""
 "Transaction's group name, should match group Id. It can contain any "
 "characters except semicolon. Leave it empty for ungrouped transaction, in "
@@ -754,7 +732,7 @@ msgstr ""
 "имя не должно быть пустым."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:96
+#: yelp/C/import-export.page:96
 msgid ""
 "Transaction's group description, should match group Id. It can contain any "
 "characters except semicolon and can be empty. Leave it empty for ungrouped "
@@ -765,7 +743,7 @@ msgstr ""
 "Оставьте это поле постым для транзакции без группы."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:100
+#: yelp/C/import-export.page:100
 msgid ""
 "Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
 "<em>G</em> and <em>B</em> are integers in range between 0 and 255."
@@ -775,17 +753,17 @@ msgstr ""
 "диапазоне от 0 до 255."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:103
+#: yelp/C/import-export.page:103
 msgid "Receipt and notes are not present in CSV."
 msgstr "Чек и заметки не присутствуют в формате CSV."
 
 #. (itstool) path: div/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:108
+#: yelp/C/import-export.page:108
 msgid "Export Formats"
 msgstr "Форматы экспорта"
 
 #. (itstool) path: div/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:109
+#: yelp/C/import-export.page:109
 msgid ""
 "You can select whether to export all information or only from the current "
 "view. If you select the current view, currently displayed transactions will "
@@ -796,7 +774,7 @@ msgstr ""
 "транзакции будут экспортированы в том же порядке, в котором они показаны."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/import-export.page:113
+#: yelp/C/import-export.page:113
 msgid ""
 "A file will contain an account information, a list of transactions and "
 "images of receipts. Transactions are colored like in the application, but "
@@ -809,24 +787,24 @@ msgstr ""
 "текст. Вы можете защитить экспортируемый файл паролем."
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:7
+#: yelp/C/index.page:7
 msgctxt "link"
 msgid "Denaro Help"
 msgstr "Справка Denaro"
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:8
+#: yelp/C/index.page:8
 msgctxt "text"
 msgid "Denaro Help"
 msgstr "Справка Denaro"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:20
+#: yelp/C/index.page:20
 msgid "<_:media-1/> Denaro Help"
 msgstr "<_:media-1/> Справка Denaro"
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:21
+#: yelp/C/index.page:21
 msgid ""
 "This documentation will help you understand how to configure and manage data "
 "in <app>Denaro</app> to get the most of the application."
@@ -835,7 +813,7 @@ msgstr ""
 "<app>Denaro</app>, чтобы использовать приложение максимально эффективно."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/index.page:22
+#: yelp/C/index.page:22
 msgid ""
 "To get support, use <link href=\"https://github.com/NickvisionApps/Denaro/"
 "issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
@@ -849,29 +827,29 @@ msgstr ""
 "Matrix</link>."
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:8
+#: yelp/C/transaction.page:8
 msgctxt "link"
 msgid "Transaction 🧾"
 msgstr "Транзакция 🧾"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:20
+#: yelp/C/transaction.page:20
 msgid "Transaction"
 msgstr "Транзакция"
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:21
+#: yelp/C/transaction.page:21
 msgid "This page explains all properties of transactions in <app>Denaro</app>."
 msgstr ""
 "На этой странице перечислены все свойства транзакций в <app>Denaro</app>."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:25
+#: yelp/C/transaction.page:25
 msgid "Id"
 msgstr "Номер"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:26
+#: yelp/C/transaction.page:26
 msgid ""
 "Each transaction has an Id that is unique for a given account. Ids start "
 "with 1 and increase for every transaction added. Ids can't be changed, ids "
@@ -883,24 +861,24 @@ msgstr ""
 "используются повторно."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:29
+#: yelp/C/transaction.page:29
 msgid "Description"
 msgstr "Описание"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:30
+#: yelp/C/transaction.page:30
 msgid "No limit on length. It can't contain semicolon."
 msgstr ""
 "Нет ограничений по длине. Может содержать любые символы, кроме точки с "
 "запятой."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:33
+#: yelp/C/transaction.page:33
 msgid "Amount"
 msgstr "Сумма"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:34
+#: yelp/C/transaction.page:34
 msgid ""
 "A number in a format that is valid for your locale, see <em>System Currency</"
 "em> in <link xref=\"account\">Account page</link> for details."
@@ -910,12 +888,12 @@ msgstr ""
 "xref=\"account\">о счетах</link>."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:37
+#: yelp/C/transaction.page:37
 msgid "Type"
 msgstr "Тип"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:38
+#: yelp/C/transaction.page:38
 msgid ""
 "<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
 "xref=\"account\">account settings</link> will be selected when you open a "
@@ -926,12 +904,12 @@ msgstr ""
 "xref=\"account\">настройках счёта</link>."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:41
+#: yelp/C/transaction.page:41
 msgid "Date"
 msgstr "Дата"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:42
+#: yelp/C/transaction.page:42
 msgid ""
 "Any date can be selected, you can also create transactions for future dates."
 msgstr ""
@@ -939,12 +917,12 @@ msgstr ""
 "будущих дат."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:45
+#: yelp/C/transaction.page:45
 msgid "Repeat Interval"
 msgstr "Интервал повтора"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:46
+#: yelp/C/transaction.page:46
 msgid ""
 "Use this option to create a recurring transaction. After you add transaction "
 "with repeat interval, this transaction will become a <em>source</em> "
@@ -969,12 +947,12 @@ msgstr ""
 "будет по отдельности редактировать и удалять."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:49
+#: yelp/C/transaction.page:49
 msgid "Repeat End Date"
 msgstr "Дата окончания повтора"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:50
+#: yelp/C/transaction.page:50
 msgid ""
 "End date for a transaction with repeat. It can't be earlier than or on the "
 "same day as start date."
@@ -983,12 +961,12 @@ msgstr ""
 "же день что и дата начала."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:53
+#: yelp/C/transaction.page:53
 msgid "Group"
 msgstr "Группа"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:54
+#: yelp/C/transaction.page:54
 msgid ""
 "Each transaction can belong to only one group or none («Ungrouped» group)."
 msgstr ""
@@ -996,12 +974,12 @@ msgstr ""
 "группы (т.е. принадлежать к группе «Несгруппированные»)."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:57
+#: yelp/C/transaction.page:57
 msgid "Color"
 msgstr "Цвет"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:58
+#: yelp/C/transaction.page:58
 msgid ""
 "A color for transaction. Can be set to use either a group color or a unique "
 "color. When selecting unique color, it will be set by default to the color "
@@ -1015,12 +993,12 @@ msgstr ""
 "любой другой цвет."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:61
+#: yelp/C/transaction.page:61
 msgid "Receipt"
 msgstr "Чек"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:62
+#: yelp/C/transaction.page:62
 msgid ""
 "An image of a receipt for transaction. You can upload JPEG or PNG image or "
 "PDF document, but no matter the format it will be converted and saved as "
@@ -1034,28 +1012,28 @@ msgstr ""
 "любой момент."
 
 #. (itstool) path: item/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:65
+#: yelp/C/transaction.page:65
 msgid "Notes"
 msgstr "Заметки"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transaction.page:66
+#: yelp/C/transaction.page:66
 msgid "A freeform text note to attach to transaction."
 msgstr "Текстовая заметка в свободной форме для прикрепления к транзакции."
 
 #. (itstool) path: info/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:8
+#: yelp/C/transfer.page:8
 msgctxt "link"
 msgid "Transfer 💸"
 msgstr "Перевод средств"
 
 #. (itstool) path: page/title
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:20
+#: yelp/C/transfer.page:20
 msgid "Transfer"
 msgstr "Перевод средств"
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:21
+#: yelp/C/transfer.page:21
 msgid ""
 "Transfer is a way to move money from one account to another. After running a "
 "transfer 2 transactions will be created with the following descriptions:"
@@ -1065,19 +1043,19 @@ msgstr ""
 "описаниями:"
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:24
+#: yelp/C/transfer.page:24
 msgid ""
 "«Transfer to <input>Destination Account Name</input>» on source account."
 msgstr "«Перевод на <input>Имя целевого счёта</input>» на исходном счёте."
 
 #. (itstool) path: item/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:27
+#: yelp/C/transfer.page:27
 msgid ""
 "«Transfer from <input>Source Account Name</input>» on destination account."
 msgstr "«Перевод с <input>Имя исходного счёта</input>» на целевом счёте."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:30
+#: yelp/C/transfer.page:30
 msgid ""
 "Transactions created using transfer are simple transactions that can be "
 "freely edited or deleted. These transactions are not connected: modifying "
@@ -1090,7 +1068,7 @@ msgstr ""
 "целевом счёте, и наоборот."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:31
+#: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
 "properties other than the amount. The color selected in <link "
@@ -1103,7 +1081,7 @@ msgstr ""
 "транзакций."
 
 #. (itstool) path: page/p
-#: ../NickvisionMoney.Shared/Docs/yelp/C/transfer.page:32
+#: yelp/C/transfer.page:32
 msgid ""
 "If you create a transfer between accounts with different currencies, you "
 "will be asked to provide a conversion rate."
