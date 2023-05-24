@@ -5,14 +5,20 @@
 	<title type="link">Transaction 🧾</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jummit</mal:name>
+      <mal:email>jummit@web.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Transaction</title>
 <p>This page explains all properties of transactions in <app>Denaro</app>.</p>

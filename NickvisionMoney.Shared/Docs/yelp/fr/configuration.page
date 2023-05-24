@@ -5,58 +5,58 @@
 	<title type="link">Configuration 🔧</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
-<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<p>Cette page décrit ce que vous pouvez modifier dans la configuration de l’application.</p>
+<p>Dépendant de votre plateforme, la configuration apparaît dans l’interface de l’application sous le vocable <gui>Préférences</gui> ou <gui>Paramètres</gui>.</p>
 <terms>
 	<item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+		<title>Thème</title>
+		<p>Définissez un thème sombre ou clair, ou faites en sorte que <app>Denaro</app> suive celui du système. Le changement de ce paramètre sous Windows requiert un redémarrage de l’application.</p>
 	</item>
 	<item>
-		<title>Transaction Default Color</title>
-		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
+		<title>Couleur par défaut des transactions</title>
+		<p>Une couleur qui sera sélectionnée par défaut lors de l’ajout d’une nouvelle <link xref="transaction">transaction</link> avec une couleur unique. Changer ce paramètre n’affectera pas les transactions existantes, même si elles utilisaient la couleur par défaut précédemment sélectionnée.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
-		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+		<title>Couleur par défaut des transferts</title>
+		<p>Une couleur qui sera utilisée pour les transactions créées par un <link xref="transfer">transfert</link>. Changer ce paramètre n’affectera pas les transactions existantes.</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
-		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
+		<title>Couleur de groupe par défaut</title>
+		<p>Couleur sélectionnée par défaut lorsqu’un nouveau groupe sera ajouté. C’est également la couleur du groupe « Sans groupe ».</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
+		<title>Couleur des comptes de chèques</title>
+		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>Chèques</em> dans une liste des comptes récents.</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
+		<title>Couleur des comptes d’épargne</title>
+		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>Épargne</em> dans une liste des comptes récents.</p>
 	</item>
 	<item>
-		<title>Business Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
+		<title>Couleur des comptes d’affaires</title>
+		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>affaires</em> dans une liste des comptes récents.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numberals.</p>
+		<title>Utiliser des chiffres natifs</title>
+		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
-		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
+		<title>Insérer un séparateur de décimales</title>
+		<p>Définissez pour quelles touches pressées le séparateur décimal de la langue locale sera inséré lors de la saisie d’un montant : point du pavé numérique, n’importe quel point ou virgule du clavier, ou aucune. Si le séparateur des décimales est déjà présent dans le champ de saisie, il ne sera pas inséré.</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
-		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
+		<title>Dossier de sauvegarde CSV</title>
+		<p>Un dossier où vos données seront automatiquement <link xref="import-export">exportées au format CSV</link> après chaque modification. Cette fonctionnalité ne fonctionne pas pour les comptes protégés par mot de passe, car les fichiers CSV ne peuvent être protégés par un mot de passe.</p>
 	</item>
 </terms>
 </page>

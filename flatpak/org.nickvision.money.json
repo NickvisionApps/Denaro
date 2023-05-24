@@ -1,0 +1,59 @@
+{
+    "app-id" : "org.nickvision.money",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "44",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.dotnet7"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/dotnet7/bin",
+        "append-ld-library-path": "/usr/lib/sdk/dotnet7/lib",
+        "env": {
+            "PKG_CONFIG_PATH": "/app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/sdk/dotnet7/lib/pkgconfig"
+        }
+    },
+    "command" : "/app/bin/org.nickvision.money",
+    "finish-args":[
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--share=ipc",
+        "--filesystem=home"
+    ],
+    "cleanup":[
+        "/include",
+        "/lib/pkgconfig",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.6.0",
+                    "commit": "9adcab2d225fd6435edc85c72a0b67e33880e00b"
+                }
+            ]
+        },        
+        {
+            "name": "org.nickvision.money",
+            "buildsystem": "simple",
+            "build-commands": [
+                "chmod +x ./flatpak/build.sh",
+                "./flatpak/build.sh gnome"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": ".."
+                },
+                "cake-sources.json",
+                "../NickvisionMoney.GNOME/nuget-sources.json"
+            ]
+        }
+    ]
+}

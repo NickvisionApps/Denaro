@@ -2,29 +2,29 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transfer" its:version="2.0" xml:lang="fr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transfer 💸</title>
+	<title type="link">Transfert 💸</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transfer</title>
-<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+<title>Transfert</title>
+<p>Le transfert est un moyen de déplacer de l’argent d’un compte à un autre. Après avoir opéré un transfert, 2 transactions seront créées avec les descriptions suivantes :</p>
 <list>
 	<item>
-		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
+		<p>« Transfert vers <input>Nom du compte récipiendaire</input> » dans le compte source.</p>
 	</item>
 	<item>
-		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
+		<p>« Transfert depuis <input>Nom du compte source</input> » dans le compte destinataire.</p>
 	</item>
 </list>
-<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
-<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
-<p>If you create a transfer between accounts with different currencies, you will be asked to provide a conversion rate.</p>
+<p>Les transactions créées par un transfert sont de simples transactions qui peuvent être supprimées ou modifiées sans risque. Ces transactions ne sont pas connectées : la modification de la transaction sur le compte source n’affectera pas la celle sur le compte destinataire, et vice versa.</p>
+<p>Le transfert ne vous permet pas de créer des transactions répétées ou de définir une autre propriété que le montant. La couleur sélectionnée dans la <link xref="configuration">configuration</link> sera utilisée pour les transactions créées.</p>
+<p>Si vous créez un transfert entre des comptes avec différentes devises, il vous sera demander de fournir un taux de change.</p>
 </page>

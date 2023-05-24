@@ -3,9 +3,6 @@
  [![Translation status](https://hosted.weblate.org/widgets/nickvision-money/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-money/) ✨Powered by [Weblate](https://weblate.org/en/)✨
 
 # Features
-- A cross-platform C# application
-  - Windows UI in Windows App SDK (WinUI 3)
-  - GNOME UI in [gir.core](https://gircore.github.io/) (Gtk4/Libadwaita)
 - Manage multiple accounts at a time, with a familiar tab interface
 - Easily filter transactions by type, group, or date
 - Easily repeat transactions, such as bills that occur every month
@@ -18,7 +15,10 @@
 
 <a href="https://snapcraft.io/denaro"><img width='140' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" /></a>
 
-<a href='https://apps.microsoft.com/store/detail/nickvision-denaro/9NJD9Q23NFGH'><img width='140' alt='Download from Microsoft Store' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/1024px-Get_it_from_Microsoft_Badge.svg.png'/></a>
+## What happened to Windows?
+> Windows is no longer a supported platform by Nickvision due to many issues with publishing our apps on the Microsoft Store and many issues with Microsoft as a whole.
+
+> Nickvision apps can still by used by Windows users via Flatpak on WSL (recommended distro: OpenSuse)
 
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
@@ -37,18 +37,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
  ![GNOMEDashboard](NickvisionMoney.GNOME/Screenshots/Dashboard.png)
  <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/Transaction.png' alt='GNOMETransaction' width='50%'><img src='NickvisionMoney.GNOME/Screenshots/CompactMode.png'  alt='GNOMECompactMode' width='50%'></p>
  <p align='center'><img src='NickvisionMoney.GNOME/Screenshots/AccountSettings.png' alt='GNOMEAccountSettings' width='50%'><img src='NickvisionMoney.GNOME/Screenshots/PasswordDialog.png' alt='GNOMEPasswordDialog' width='50%'></p>
-</details>
-
-<details>
- <summary>WinUI</summary>
-
- ![HomePage](NickvisionMoney.WinUI/Screenshots/HomePage.png)
- ![DashboardPage](NickvisionMoney.WinUI/Screenshots/DashboardPage.png)
- ![OpenAccount](NickvisionMoney.WinUI/Screenshots/OpenAccount.png)
- ![DarkMode](NickvisionMoney.WinUI/Screenshots/DarkMode.png)
- ![AccountSettingsDialog](NickvisionMoney.WinUI/Screenshots/AccountSettingsDialog.png)
- ![TransactionDialog](NickvisionMoney.WinUI/Screenshots/TransactionDialog.png)
- ![TransferDialog](NickvisionMoney.WinUI/Screenshots/TransferDialog.png)
 </details>
 
 <details>

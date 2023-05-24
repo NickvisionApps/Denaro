@@ -15,40 +15,40 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="fr" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Transaction</span></h1></div>
+<a class="trail" href="index.html" title="Aide de Denaro">Aide de Denaro</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Transaction</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page explains all properties of transactions in <span class="app">Denaro</span>.</p>
+<p class="p">Cette page explique toutes les propriétés des transactions dans <span class="app">Denaro</span>.</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Id</dt>
-<dd class="terms"><p class="p">Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p></dd>
+<dt class="terms">Identifiant</dt>
+<dd class="terms"><p class="p">Chaque transaction a un identifiant unique pour un compte donné. Les identifiants commencent avec 1 et augmentent pour chaque transaction ajoutée. Les identifiants ne peuvent être modifiés, et les identifiants des transactions supprimées ne sont pas réutilisés.</p></dd>
 <dt class="terms">Description</dt>
-<dd class="terms"><p class="p">No limit on length. It can't contain semicolon.</p></dd>
-<dt class="terms">Amount</dt>
-<dd class="terms"><p class="p">A number in a format that is valid for your locale, see <span class="em">System Currency</span> in <span class="link"><a href="account.html" title="Account">Account page</a></span> for details.</p></dd>
+<dd class="terms"><p class="p">Pas de limite de taille. Elle ne peut contenir des points-virgules.</p></dd>
+<dt class="terms">Montant</dt>
+<dd class="terms"><p class="p">Un nombre dans un format valide pour votre langue locale, voir <span class="em">Devise du système</span> dans la <span class="link"><a href="account.html" title="Compte">page du compte</a></span> pour plus de détails.</p></dd>
 <dt class="terms">Type</dt>
-<dd class="terms"><p class="p"><span class="em">Income</span> or <span class="em">Expense</span>. By default the one chosen in <span class="link"><a href="account.html" title="Account">account settings</a></span> will be selected when you open a dialog to add new transaction.</p></dd>
+<dd class="terms"><p class="p"><span class="em">Revenu</span> ou <span class="em">Dépense</span>. Par défaut la valeur choisie dans les <span class="link"><a href="account.html" title="Compte">Paramètres du compte</a></span> sera sélectionnée lorsque vous ouvrirez une boîte de dialogue pour ajouter une nouvelle transaction.</p></dd>
 <dt class="terms">Date</dt>
-<dd class="terms"><p class="p">Any date can be selected, you can also create transactions for future dates.</p></dd>
-<dt class="terms">Repeat Interval</dt>
-<dd class="terms"><p class="p">Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <span class="em">source</span> transaction. <span class="app">Denaro</span> will automatically generate <span class="em">repeat</span> transactions for the dates up until today or a provided end date if set in the past. <span class="em">Repeat</span> transactions can't be edited or deleted, only <span class="em">source</span> can be modified. When you modify <span class="em">source</span> transaction <span class="app">Denaro</span> will ask if you want to modify or disassociate <span class="em">repeat</span> transactions. If you choose to disassociate, <span class="em">repeat</span> transactions become normal transactions and can be edited or deleted separately.</p></dd>
-<dt class="terms">Repeat End Date</dt>
-<dd class="terms"><p class="p">End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p></dd>
-<dt class="terms">Group</dt>
-<dd class="terms"><p class="p">Each transaction can belong to only one group or none («Ungrouped» group).</p></dd>
-<dt class="terms">Color</dt>
-<dd class="terms"><p class="p">A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <span class="link"><a href="configuration.html" title="Configuration">configuration</a></span>, but can be changed to any color.</p></dd>
-<dt class="terms">Receipt</dt>
-<dd class="terms"><p class="p">An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p></dd>
+<dd class="terms"><p class="p">N’importe quelle date peut être sélectionnée, vous pouvez aussi créer des transactions pour des dates futures.</p></dd>
+<dt class="terms">Intervalle de répétition</dt>
+<dd class="terms"><p class="p">Utilisez cette option pour créer une transaction récurrente. Après avoir ajouté la transaction avec l’intervalle de répétition, celle-ci deviendra une transaction <span class="em">source</span>. <span class="app">Denaro</span> générera automatiquement des transactions <span class="em">répétées</span> pour les dates indiquées à partir d’aujourdhui ou jusqu’à la date de fin définie. Les transactions <span class="em">répétées</span> ne peuvent pas être modifiées ou supprimées, mais seulement leur <span class="em">source</span>. Lorsque vous modifierez la transaction <span class="em">source</span>, <span class="app">Denaro</span> vous demandera si vous souhaiter modifier ou dissocier les transactions <span class="em">répétées</span>. Si vous choisissez la dissociation, les transactions <span class="em">répétées</span> deviendront des transactions normales et pourront être modifiées ou supprimées séparément.</p></dd>
+<dt class="terms">Date de fin de répétition</dt>
+<dd class="terms"><p class="p">Date de fin d’une transaction récurrente. Elle ne peut pas être avant ou le même jour que la date de début.</p></dd>
+<dt class="terms">Groupe</dt>
+<dd class="terms"><p class="p">Chaque transaction peut appartenir à un ou bien à aucun groupe (groupe « Sans groupe »).</p></dd>
+<dt class="terms">Couleur</dt>
+<dd class="terms"><p class="p">Une couleur pour les transactions. Elle peut être définie pour utiliser un groupe de couleur ou une couleur unique. Lors de la sélection d’une couleur unique, elle sera définie par défaut comme la couleur sélectionnée dans la <span class="link"><a href="configuration.html" title="Configuration">configuration</a></span>, mais peut être modifiée en n’importe quelle couleur.</p></dd>
+<dt class="terms">Reçu</dt>
+<dd class="terms"><p class="p">Image d’un reçu pour une transaction. Vous pouvez téléverser des images JPEG, PNG ou un document PDF, mais peut importe le format il sera converti et enregistré en tant qu’image JPEG. Dans le cas d’un PDF, seule la première page sera enregistrée. Vous pouvez supprimer le fichier ou en téléverser un autre à tout moment.</p></dd>
 <dt class="terms">Notes</dt>
-<dd class="terms"><p class="p">A freeform text note to attach to transaction.</p></dd>
+<dd class="terms"><p class="p">Un texte de forme libre qui peut être joint à la transaction.</p></dd>
 </dl></div></div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Plus d’informations</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Aide de Denaro">Aide de Denaro</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>

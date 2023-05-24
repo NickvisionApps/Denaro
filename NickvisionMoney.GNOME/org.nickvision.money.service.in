@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.nickvision.money
+Exec=@PREFIX@/bin/org.nickvision.money --gapplication-service
