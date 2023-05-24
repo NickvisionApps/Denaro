@@ -532,30 +532,11 @@ Le nuove transazioni saranno generate in base alla nuova frequenza.</value>
 		<value>Applicazione</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Correggere gli errori indicati.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Novità</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Sviluppatori:
-{0}
-
-Grafici:
-{1}
-
-Artisti:
-{2}
-
-Traduttori:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>È necessario riavviare l'applicazione per cambiare il tema.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Riavviare l'applicazione per cambiare il tema?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Riavviare l'applicazione per applicare il nuovo tema?
@@ -663,9 +644,6 @@ I cambiamenti non salvati saranno persi.</value>
   </data>
   <data name="SortBy.Date" xml:space="preserve">
     <value>Ordina per data</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>ANTEPRIMA</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>— Gestisci più account contemporaneamente, con un'interfaccia a schede familiare
