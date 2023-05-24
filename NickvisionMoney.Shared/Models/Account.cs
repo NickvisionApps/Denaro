@@ -34,7 +34,7 @@ public class Account : IDisposable
     private bool _disposed;
     private SqliteConnection? _database;
     private bool? _isEncrypted;
-    private TransactionFilter _transactionFilter;
+    private TransactionFilter? _transactionFilter;
 
     /// <summary>
     /// The path of the account
@@ -82,7 +82,15 @@ public class Account : IDisposable
     /// Constructs an Account
     /// </summary>
     /// <param name="path">The path of the account</param>
-    public Account(string path, TransactionFilter transactionFilter)
+    public Account(string path, TransactionFilter transactionFilter) : this(path)
+    {
+        _transactionFilter = transactionFilter;
+    }
+    /// <summary>
+    /// Constructs an Account
+    /// </summary>
+    /// <param name="path">The path of the account</param>
+    public Account(string path)
     {
         _loggedIn = false;
         _disposed = false;
@@ -91,7 +99,6 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        _transactionFilter = transactionFilter;
         NeedsAccountSetup = true;
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
