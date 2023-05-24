@@ -1777,7 +1777,7 @@ public class Account : IDisposable
                                     using var memoryStream = new MemoryStream();
                                     pair.Value.Receipt.Save(memoryStream, new JpegEncoder());
                                     tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray()).FitArea();
+                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MinWidth(300).MinHeight(300).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray()).FitArea();
                                     i++;
                                 }
                             }
