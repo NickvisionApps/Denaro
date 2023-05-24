@@ -921,4 +921,10 @@ In caso di password dimenticata, non sarà possibile aprire il PDF.</value>
   <data name="UseNativeDigits.Description" xml:space="preserve">
     <value>Se utilizzare numeri nativi per la propria lingua anziché cifre latine.</value>
   </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Impossibile importare informazioni dal file. Il tipo di file non è supportato.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Ricevuta (File inaccessibile)</value>
+  </data>
 </root>
