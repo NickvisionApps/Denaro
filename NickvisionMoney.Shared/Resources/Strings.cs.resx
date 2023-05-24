@@ -441,9 +441,6 @@ Nové opakované transakce budou generovány na základě nového intervalu.</va
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Importováno {0} transakcí ze souboru.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Nepodařilo se importovat informace ze souboru. Nepodporovaný typ souboru.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Účet byl úspěšně exportován do souboru.</value>
   </data>
