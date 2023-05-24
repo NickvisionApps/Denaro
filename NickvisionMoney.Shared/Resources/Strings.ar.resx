@@ -340,9 +340,6 @@ DaPigGuy https://github.com/DaPigGuy</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>اُستوردت {0} معاملة من الملفِّ.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>تعذَّر استيراد معلومات من الملفِّ، وذلك لأنه نوعه غير مدعوم.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>صُدِّر الحساب للملفِّ بنجاح.</value>
   </data>
