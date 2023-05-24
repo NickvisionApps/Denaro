@@ -264,9 +264,6 @@ Fyodor Sobolev https://github.com/fsobolev</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>從檔案中導入 {0} 筆交易</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>無法從檔案中導入資料, 格式未被支援</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>成功導出帳戶至檔案</value>
   </data>
