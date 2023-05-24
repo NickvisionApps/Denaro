@@ -340,9 +340,6 @@ Novas transações recorrentes irão se basear no novo intervalo.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Importadas {0} transações do ficheiro.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Não foi possível importar dados do ficheiro. Formato de ficheiro não-suportado.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Conta exportada para ficheiro com sucesso.</value>
   </data>
