@@ -730,9 +730,6 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
 		<value>Aplikacja</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Proszę naprawić powyższe błędy.</value>
-  </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Program:
 {0}
@@ -745,9 +742,6 @@ Grafika:
 
 Tłumaczenie:
 {3}</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Uruchomić ponownie?</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
