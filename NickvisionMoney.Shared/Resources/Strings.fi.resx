@@ -719,14 +719,8 @@ Tätä toimintoa ei voi perua.</value>
 		<value>Sovellus</value>
   </data>
   <!--WinUI Specific-->
-  <data name="Preview.WinUI" xml:space="preserve">
-		<value>ESIKATSELU</value>
-  </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Korjaa yllä olevat virheet.</value>
-  </data>
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Mitä uutta?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Kehittäjät:
@@ -741,15 +735,8 @@ Grafiikka:
 Kääntäjät:
 {3}</value>
   </data>
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Teeman muuttaminen vaatii, että sovellus käynnistetään uudelleen.</value>
-  </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Käynnistetäänkö uudelleen teeman toteuttamiseksi?</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Haluatko, että {0} käynnistetään uudelleen, jotta uusi teema tulee voimaan?
-Kaikki tallentamattomat muutokset katoavat.</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
