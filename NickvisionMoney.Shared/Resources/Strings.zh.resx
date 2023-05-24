@@ -429,15 +429,8 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>軟體</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>新增功能</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>請重啟以應用設定</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>確認重啟 {0} 以應用新主題?
-任何未儲存的進展都將丟失</value>
   </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
