@@ -890,14 +890,8 @@ Pokud heslo ztratíte, soubor PDF bude nepřístupný.</value>
 		<value>Aplikace</value>
   </data>
   <!--WinUI Specific-->
-  <data name="Preview.WinUI" xml:space="preserve">
-		<value>NÁHLED</value>
-  </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Opravte prosím výše uvedené chyby.</value>
-  </data>
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Co je nového?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Naprogramovali:
@@ -912,15 +906,8 @@ Ztvárnili:
 Přeložili:
 {3}</value>
   </data>
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Pro změnu motivu je nutné restartovat aplikaci.</value>
-  </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Restartovat pro použití motivu?</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Chcete restartovat {0} a použít nový motiv?
-Veškerá neuložená práce bude ztracena.</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">

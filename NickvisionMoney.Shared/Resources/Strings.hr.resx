@@ -467,30 +467,11 @@ Ovo je nepovratna radnja.</value>
 		<value>Program</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Ispravi gornje greške.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Što je novo?</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Programeri:
-{0}
-
-Dizajneri:
-{1}
-
-Umjetnici:
-{2}
-
-Prevodioci:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Za mijenjanje teme, program se mora ponovo pokrenuti.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Ponovo pokrenuti za primjenjivanje teme?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Želiš li ponovo pokrenuti {0} za primjenjivanje nove teme?
@@ -774,9 +755,6 @@ Nove ponovljajuće transakcije generirat će se na temelju novog intervala.</val
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Točka i zarez</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREGLED</value>
   </data>
   <data name="ManagePassword.Description" xml:space="preserve">
     <value>Postavi novu ili ukloni jednu lozinku.</value>

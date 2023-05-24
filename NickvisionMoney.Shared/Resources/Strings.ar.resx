@@ -532,30 +532,11 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>التطبيق</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>يرجى تصحيح الأخطاء أعلاه.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>ما الجديد؟</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>المطورون:
-{0}
-
-المصممون:
-{1}
-
-الفنانون:
-{2}
-
-المترجمون:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>يلزم إعادة تشغيل التطبيق لتغيير السمة.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>إعادة التشغيل لتطبيق السمة؟</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>هل تود أن تعيد تشغيل {0} لتفعيل السمة الجديدة؟
@@ -774,9 +755,6 @@ DaPigGuy https://github.com/DaPigGuy</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>النقطة والفاصلة</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREVIEW</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>— أدر عدَّة حسابات آنًا، فواجهة التطبيق واجهة ألسنة

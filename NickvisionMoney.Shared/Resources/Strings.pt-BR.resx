@@ -730,14 +730,8 @@ Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
 		<value>Aplicativo</value>
   </data>
   <!--WinUI Specific-->
-  <data name="Preview.WinUI" xml:space="preserve">
-		<value>VISUALIZAR</value>
-  </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Por favor, conserte os erros acima.</value>
-  </data>
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>O Que Há de Novo?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Desenvolvedores:
@@ -752,15 +746,8 @@ Artistas:
 Tradutores:
 {3}</value>
   </data>
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Reinicie o aplicativo para mudar o tema.</value>
-  </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Reiniciar Para Aplicar o Tema?</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Gostaria de reiniciar {0} para aplicar o novo tema?
-Quaisquer trabalhos não salvos serão perdidos.</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">

@@ -521,30 +521,11 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Aplicacion</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Volgatz corregir las errors çai-jos.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Qué de nòu ?</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Desvolopaires :
-{0}
-
-Designers :
-{1}
-
-Artistas :
-{2}
-
-Traductors :
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Cal una reaviada per aplicar la modificacion del tèma.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Reaviar l’aplicacion per aplicar lo tèma ?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value />
@@ -675,9 +656,6 @@ Traductors :
   </data>
   <data name="SearchDescription.Placeholder" xml:space="preserve">
     <value>Recercar per descripcion</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>APERCEBUT</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Tornar</value>
