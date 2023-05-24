@@ -7,7 +7,6 @@ using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using System;
 using System.Collections.Generic;
@@ -518,7 +517,7 @@ public class Account : IDisposable
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
-                transaction.Receipt = Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
+                transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
@@ -1513,6 +1512,7 @@ public class Account : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool ExportToPDF(string path, ExportMode exportMode, List<uint> filteredIds, string? password)
     {
+        QuestPDF.Settings.License = LicenseType.Community;
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
@@ -1577,7 +1577,7 @@ public class Account : IDisposable
                     page.Header().Row(row =>
                     {
                         row.RelativeItem(2).Text(Metadata.Name).SemiBold().FontSize(16).Fallback(x => x.FontFamily("Noto Emoji").FontSize(16));
-                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream, ImageScaling.FitArea);
+                        row.RelativeItem(1).AlignRight().Width(32, Unit.Point).Height(32, Unit.Point).Image(appiconStream).FitArea();
                     });
                     //Content
                     page.Content().PaddingVertical(0.4f, Unit.Centimetre).Column(col =>
@@ -1682,24 +1682,22 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, GroupName, RepeatInterval, Notes, Amount
+                                //ID, Date, Description, Type, GroupName, Notes, Amount
                                 x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
-                                x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(8).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
+                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
                             tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
-                            tbl.Cell().Text(localizer["TransactionRepeatInterval", "Field"]).SemiBold();
                             tbl.Cell().Text(localizer["Notes", "Field"]).SemiBold();
                             tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
                             //Data
@@ -1744,18 +1742,6 @@ public class Account : IDisposable
                                     _ => ""
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
-                                tbl.Cell().Background(hex).Text(pair.Value.RepeatInterval switch
-                                {
-                                    TransactionRepeatInterval.Never => localizer["RepeatInterval", "Never"],
-                                    TransactionRepeatInterval.Daily => localizer["RepeatInterval", "Daily"],
-                                    TransactionRepeatInterval.Weekly => localizer["RepeatInterval", "Weekly"],
-                                    TransactionRepeatInterval.Biweekly => localizer["RepeatInterval", "Biweekly"],
-                                    TransactionRepeatInterval.Monthly => localizer["RepeatInterval", "Monthly"],
-                                    TransactionRepeatInterval.Quarterly => localizer["RepeatInterval", "Quarterly"],
-                                    TransactionRepeatInterval.Yearly => localizer["RepeatInterval", "Yearly"],
-                                    TransactionRepeatInterval.Biyearly => localizer["RepeatInterval", "Biyearly"],
-                                    _ => ""
-                                });
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
@@ -1791,7 +1777,7 @@ public class Account : IDisposable
                                     using var memoryStream = new MemoryStream();
                                     pair.Value.Receipt.Save(memoryStream, new JpegEncoder());
                                     tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray());
+                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MinWidth(300).MinHeight(300).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray()).FitArea();
                                     i++;
                                 }
                             }
