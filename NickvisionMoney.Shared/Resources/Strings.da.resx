@@ -728,9 +728,6 @@ Nye gentagende overførsler vil blive genereret ud fra det nye interval.</value>
 		<value>Program</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Ret venligst ovenstående fejl.</value>
-  </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Udviklere:
 {0}
@@ -743,9 +740,6 @@ Kunstnere:
 
 Translatører:
 {3}</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Genstart for at påføre tema?</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">

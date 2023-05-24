@@ -719,9 +719,6 @@ Tätä toimintoa ei voi perua.</value>
 		<value>Sovellus</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Korjaa yllä olevat virheet.</value>
-  </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Kehittäjät:
 {0}
@@ -734,9 +731,6 @@ Grafiikka:
 
 Kääntäjät:
 {3}</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Käynnistetäänkö uudelleen teeman toteuttamiseksi?</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">

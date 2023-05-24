@@ -843,13 +843,7 @@
 		<value />
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value />
-  </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value />
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value />
   </data>
   <!--GTK Specific-->

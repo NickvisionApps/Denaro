@@ -730,9 +730,6 @@ Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
 		<value>Aplicativo</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Por favor, conserte os erros acima.</value>
-  </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Desenvolvedores:
 {0}
@@ -745,9 +742,6 @@ Artistas:
 
 Tradutores:
 {3}</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Reiniciar Para Aplicar o Tema?</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">

@@ -463,13 +463,7 @@
 		<value>एप्लिकेशन</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value />
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value />
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value />
   </data>
   <!--GTK Specific-->

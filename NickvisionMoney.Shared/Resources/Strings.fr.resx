@@ -467,15 +467,8 @@ Cette action est irréversible.</value>
 		<value>Application</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Quoi de neuf ?</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Un redémarrage de l’application est requis pour modifier le thème.</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Souhaitez-vous redémarrer {0} pour appliquer le nouveau thème ?
-Tout changement non sauvegardé sera perdu.</value>
   </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
