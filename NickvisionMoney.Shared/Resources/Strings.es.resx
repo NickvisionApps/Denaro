@@ -425,9 +425,6 @@ Esta acción es irreversible.</value>
 		<value>Aplicación</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Para cambiar el tema es necesario reiniciar la aplicación.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Menú de la cuenta</value>
