@@ -391,9 +391,6 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Liczba zaimportowanych transakcji z pliku: {0}.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Nie można zaimportować danych z pliku. Nieobsługiwany typ pliku.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Poprawnie wyeksportowano konto do pliku.</value>
   </data>
