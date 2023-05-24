@@ -290,9 +290,6 @@ Cette action est irréversible.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>{0} transactions importées depuis le fichier.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Impossible d’importer des informations depuis le fichier. Type de fichier non pris en charge.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Compte exporté dans le fichier avec succès.</value>
   </data>
