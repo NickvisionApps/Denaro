@@ -5,11 +5,11 @@
 	<title type="link">Configuración 🔧</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 
@@ -54,7 +54,7 @@
 	</item>
 	<item>
 		<title>Usar dígitos nativos</title>
-		<p>Si usar numerales que son nativos para su localización en lugar de dígitos latinos. Por ejemplo, si esta opción está activada <em>٠١٢</em> se usará en lugar de <em>012</em> para las localizaciones que usan numerales arábigos orientales.</p>
+		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>
 		<title>Insertar separador decimal</title>

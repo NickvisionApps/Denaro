@@ -5,62 +5,62 @@
 	<title type="link">Transaction 🧾</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
 		<name>Nicholas Logozzo</name>
-		<years>2023</years>
+		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
 <title>Transaction</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+<p>Cette page explique toutes les propriétés des transactions dans <app>Denaro</app>.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>Identifiant</title>
+		<p>Chaque transaction a un identifiant unique pour un compte donné. Les identifiants commencent avec 1 et augmentent pour chaque transaction ajoutée. Les identifiants ne peuvent être modifiés, et les identifiants des transactions supprimées ne sont pas réutilisés.</p>
 	</item>
 	<item>
 		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<p>Pas de limite de taille. Elle ne peut contenir des points-virgules.</p>
 	</item>
 	<item>
-		<title>Amount</title>
-		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+		<title>Montant</title>
+		<p>Un nombre dans un format valide pour votre langue locale, voir <em>Devise du système</em> dans la <link xref="account">page du compte</link> pour plus de détails.</p>
 	</item>
 	<item>
 		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<p><em>Revenu</em> ou <em>Dépense</em>. Par défaut la valeur choisie dans les <link xref="account">Paramètres du compte</link> sera sélectionnée lorsque vous ouvrirez une boîte de dialogue pour ajouter une nouvelle transaction.</p>
 	</item>
 	<item>
 		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<p>N’importe quelle date peut être sélectionnée, vous pouvez aussi créer des transactions pour des dates futures.</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<title>Intervalle de répétition</title>
+		<p>Utilisez cette option pour créer une transaction récurrente. Après avoir ajouté la transaction avec l’intervalle de répétition, celle-ci deviendra une transaction <em>source</em>. <app>Denaro</app> générera automatiquement des transactions <em>répétées</em> pour les dates indiquées à partir d’aujourdhui ou jusqu’à la date de fin définie. Les transactions <em>répétées</em> ne peuvent pas être modifiées ou supprimées, mais seulement leur <em>source</em>. Lorsque vous modifierez la transaction <em>source</em>, <app>Denaro</app> vous demandera si vous souhaiter modifier ou dissocier les transactions <em>répétées</em>. Si vous choisissez la dissociation, les transactions <em>répétées</em> deviendront des transactions normales et pourront être modifiées ou supprimées séparément.</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>Date de fin de répétition</title>
+		<p>Date de fin d’une transaction récurrente. Elle ne peut pas être avant ou le même jour que la date de début.</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>Groupe</title>
+		<p>Chaque transaction peut appartenir à un ou bien à aucun groupe (groupe « Sans groupe »).</p>
 	</item>
 	<item>
-		<title>Color</title>
-		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+		<title>Couleur</title>
+		<p>Une couleur pour les transactions. Elle peut être définie pour utiliser un groupe de couleur ou une couleur unique. Lors de la sélection d’une couleur unique, elle sera définie par défaut comme la couleur sélectionnée dans la <link xref="configuration">configuration</link>, mais peut être modifiée en n’importe quelle couleur.</p>
 	</item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>Reçu</title>
+		<p>Image d’un reçu pour une transaction. Vous pouvez téléverser des images JPEG, PNG ou un document PDF, mais peut importe le format il sera converti et enregistré en tant qu’image JPEG. Dans le cas d’un PDF, seule la première page sera enregistrée. Vous pouvez supprimer le fichier ou en téléverser un autre à tout moment.</p>
 	</item>
 	<item>
 		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<p>Un texte de forme libre qui peut être joint à la transaction.</p>
 	</item>
 </terms>
 </page>
