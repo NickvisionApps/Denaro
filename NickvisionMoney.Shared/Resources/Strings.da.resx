@@ -728,14 +728,8 @@ Nye gentagende overførsler vil blive genereret ud fra det nye interval.</value>
 		<value>Program</value>
   </data>
   <!--WinUI Specific-->
-  <data name="Preview.WinUI" xml:space="preserve">
-		<value>Forhåndsvisning</value>
-  </data>
   <data name="FixErrors.WinUI" xml:space="preserve">
 		<value>Ret venligst ovenstående fejl.</value>
-  </data>
-  <data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>Hvad er nyt?</value>
   </data>
   <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
 		<value>Udviklere:
@@ -750,15 +744,8 @@ Kunstnere:
 Translatører:
 {3}</value>
   </data>
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Genstart af program er nødvendigt for at ændre temaet.</value>
-  </data>
   <data name="RestartThemeTitle.WinUI" xml:space="preserve">
 		<value>Genstart for at påføre tema?</value>
-  </data>
-  <data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Vil du gerne genstarte {0} for at påføre det nye tema?
-Alle ikke-gemte ændringer vil gå tabt.</value>
   </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
