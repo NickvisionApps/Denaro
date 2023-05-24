@@ -143,6 +143,7 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
     [Gtk.Connect] private readonly Gtk.Button _extrasButton;
+    [Gtk.Connect] private readonly Adw.ActionRow _receiptRow;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _deleteReceiptButton;
@@ -434,6 +435,8 @@ public partial class TransactionDialog : Adw.Window
         _amountRow.SetTitle(_controller.Localizer["Amount", "Field"]);
         _repeatEndDateCalendarButton.RemoveCssClass("error");
         _repeatEndDateCalendarButton.SetTooltipText(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
+        _receiptRow.RemoveCssClass("error");
+        _receiptRow.SetTitle(_controller.Localizer["Receipt", "Field"]);
         if (checkStatus == TransactionCheckStatus.Valid)
         {
             _applyButton.SetSensitive(true);
@@ -456,6 +459,12 @@ public partial class TransactionDialog : Adw.Window
                 _repeatEndDateCalendarButton.SetTooltipText(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
             }
             _applyButton.SetSensitive(false);
+            if (checkStatus.HasFlag(TransactionCheckStatus.CannotAccessReceipt))
+            {
+                _receiptRow.AddCssClass("error");
+                _receiptRow.SetTitle(_controller.Localizer["Receipt", "Inaccessible"]);
+                _applyButton.SetSensitive(true);
+            }
         }
     }
 

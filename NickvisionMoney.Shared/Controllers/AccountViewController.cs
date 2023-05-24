@@ -936,7 +936,16 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        var importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
+        List<uint>? importedIds;
+        try
+        {
+            importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
+        }
+        catch
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport", "FileIO"], NotificationSeverity.Error));
+            return;
+        }
         foreach (var pair in _account.Groups)
         {
             if (!_filters.ContainsKey((int)pair.Value.Id))
@@ -959,7 +968,7 @@ public class AccountViewController : IDisposable
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport"], NotificationSeverity.Error, "help-import"));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport", "NoFileType"], NotificationSeverity.Error, "help-import"));
         }
     }
 
