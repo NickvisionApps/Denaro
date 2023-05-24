@@ -51,6 +51,7 @@
       <description>
         <p>- Fixed an issue where Denaro would crash on systems with unconfigured locales</p>
         <p>- Fixed an issue where PDF exporting failed for accounts with many receipts</p>
+        <p>- Fixed an issue where a group's filter was reactivated when a transaction was added to that group</p>
         <p>- Error messages will be shown if Denaro attempts to access inaccessible files instead of crashing</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
