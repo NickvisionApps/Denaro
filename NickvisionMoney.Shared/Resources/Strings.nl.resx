@@ -290,9 +290,6 @@ Deze actie is onomkeerbaar..</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Er zijn {0} transacties geïmporteerd.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Er kan geen informatie worden geïmporteerd omdat het bestandstype niet ondersteund wordt.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>De rekening is geëxporteerd naar een bestand.</value>
   </data>

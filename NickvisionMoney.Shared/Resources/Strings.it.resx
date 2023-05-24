@@ -340,9 +340,6 @@ Le nuove transazioni saranno generate in base alla nuova frequenza.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>{0} transazioni sono state importate dal file.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Impossibile importare informazioni dal file. Il tipo di file non è supportato.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>L'account è stato esportato.</value>
   </data>

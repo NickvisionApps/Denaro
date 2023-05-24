@@ -346,9 +346,6 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
   <data name="Imported.Plural" xml:space="preserve">
 		<value>{0} Überweisungen von Datei importiert.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Information von Datei konnte nicht importiert werden. Dateityp nicht unterstützt.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Konto erfolgreich zu Datei exportiert.</value>
   </data>

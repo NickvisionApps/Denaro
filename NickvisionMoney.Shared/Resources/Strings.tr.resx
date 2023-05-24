@@ -340,9 +340,6 @@ Yeni aralık baz alınarak yeni tekrarlama işlemleri oluşturulacaktır.</value
   <data name="Imported.Plural" xml:space="preserve">
 		<value>{0} işlem dosyadan içe aktarıldı.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Dosyadan bilgi içe aktarılamadı. Desteklenmeyen dosya türü.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Hesap dosyaya başarıyla dışa aktarıldı.</value>
   </data>

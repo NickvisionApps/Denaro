@@ -290,9 +290,6 @@ Tindakan ini tidak dapat diurungkan.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Mengimpor {0} transactions from file.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Tidak dapat mengimpor informasi dari berkas. Berkas tidak didukung.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Ekspor rekening ke berkas berhasil.</value>
   </data>

@@ -389,9 +389,6 @@ Nye gentagende overførsler vil blive genereret ud fra det nye interval.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Importerede {0} overførsler fra fil.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Ude af stand til at importere information fra fil. Filetypen understøttes ikke.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Kontoen blev eksporteret til fil uden fejl.</value>
   </data>

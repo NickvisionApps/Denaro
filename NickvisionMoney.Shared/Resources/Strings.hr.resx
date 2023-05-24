@@ -290,9 +290,6 @@ Ovo je nepovratna radnja.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Uvezene su {0} transakcije iz datoteke.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Nije moguće uvesti podatke iz datoteke. Nepodržana vrsta datoteke.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Račun je uspješno izvezen u datoteku.</value>
   </data>
