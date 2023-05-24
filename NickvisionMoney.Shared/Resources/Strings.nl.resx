@@ -467,30 +467,11 @@ Deze actie is onomkeerbaar..</value>
 		<value>App</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Los bovenstaande problemen op.</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>Wat is er nieuw?</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Ontwikkelaars:
-{0}
-
-Ontwerpers:
-{1}
-
-Artiesten:
-{2}
-
-Vertalers:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>Herstart de app om het thema te wijzigen.</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Programma herstarten?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>Wilt u {0} herstarten om het nieuwe thema toe te passen?
@@ -663,9 +644,6 @@ de opeenvolgende losgekoppeld..</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Hulp</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>VOORVERTONING</value>
   </data>
   <data name="CustomCurrencyCode.Empty" xml:space="preserve">
     <value>Valutacode (leeg)</value>
