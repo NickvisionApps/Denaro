@@ -728,19 +728,6 @@ Nye gentagende overførsler vil blive genereret ud fra det nye interval.</value>
 		<value>Program</value>
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Udviklere:
-{0}
-
-Designere:
-{1}
-
-Kunstnere:
-{2}
-
-Translatører:
-{3}</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Administrer din privatøkonomi</value>
