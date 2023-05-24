@@ -532,9 +532,6 @@ Yeni aralık baz alınarak yeni tekrarlama işlemleri oluşturulacaktır.</value
 		<value>Uygulama</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Temayı değiştirmek için uygulamanın yeniden başlatılması gerekir.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Hesap Menüsü</value>
