@@ -414,9 +414,6 @@
   <data name="Imported.Plural" xml:space="preserve">
 		<value />
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value />
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value />
   </data>
