@@ -590,9 +590,6 @@ Neue wiederholte Überweisungen werden basierend auf dem neuen Intervall generie
 		<value>Programm</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Um das Theme zu ändern ist ein Programm-Neustart benötigt.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Konto-Menü</value>
