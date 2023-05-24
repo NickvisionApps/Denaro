@@ -329,9 +329,6 @@ Aquesta accion se pòt pas anullar.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>{0} transaccions importadas del fichièr estant.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Impossible d’importar las informacions del fichièrs. Tipe de fichièr pas pres en carga.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Compte corrèctament exportat dins un fichièr.</value>
   </data>
