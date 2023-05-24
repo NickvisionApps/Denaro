@@ -521,9 +521,6 @@ Aquesta accion se pòt pas anullar.</value>
 		<value>Aplicacion</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Cal una reaviada per aplicar la modificacion del tèma.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Menú del compte</value>
