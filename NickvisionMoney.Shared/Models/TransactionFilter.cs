@@ -10,7 +10,7 @@ enum Filters {
     NoGroup = -1,
 }
 
-class TransactionFilter
+public class TransactionFilter
 {
     public DateOnly FilterStartDate { get; private set; }
     public DateOnly FilterEndDate { get; private set; }

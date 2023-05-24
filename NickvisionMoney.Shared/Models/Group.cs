@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -7,7 +9,9 @@ namespace NickvisionMoney.Shared.Models;
 /// </summary>
 public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
 {
-    private TransactionFilter _transactionFilter;
+    private TransactionFilter? _transactionFilter;
+    private Dictionary<uint, Transaction> _transactions;
+
     /// <summary>
     /// The id of the group
     /// </summary>
@@ -29,16 +33,23 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// </summary>
     public string RGBA { get; set; }
 
-    private Dictionary<uint, Transaction> Transactions { get; set; }
+    /// <summary>
+    /// Constructs a group with a transaction filter
+    /// </summary>
+    /// <param name="id">The id of the group</param>
+    public Group(uint id, TransactionFilter filter) : this(id)
+    {
+        _transactionFilter = filter;
+    }
 
     /// <summary>
     /// Constructs a group
     /// </summary>
     /// <param name="id">The id of the group</param>
-    public Group(uint id, TransactionFilter filter)
+    public Group(uint id)
     {
+        _transactions = new Dictionary<uint, Transaction>();
         Id = id;
-        _transactionFilter = filter;
         Name = "";
         Description = "";
         Balance = 0m;
@@ -47,19 +58,19 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
 
     public void AddTransaction(Transaction transaction)
     {
-        Transactions.Add(transaction.Id, transaction);
+        _transactions.Add(transaction.Id, transaction);
         UpdateBalance();
     }
 
     public void RemoveTransaction(uint id)
     {
-        Transactions.Remove(id);
+        _transactions.Remove(id);
         UpdateBalance();
     }
 
     private void UpdateBalance()
     {
-        var transactions = Transactions.Values.ToList();
+        var transactions = _transactions.Values.ToList();
         if (_transactionFilter == null)
         {
             Balance = transactions

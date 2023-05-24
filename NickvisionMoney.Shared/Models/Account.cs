@@ -467,7 +467,6 @@ public class Account : IDisposable
         {
             Name = localizer["Ungrouped"],
             Description = localizer["UngroupedDescription"],
-            Balance = 0m,
             RGBA = ""
         });
         using var cmdQueryGroups = _database.CreateCommand();
@@ -483,7 +482,6 @@ public class Account : IDisposable
             {
                 Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
                 Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
-                Balance = 0m,
                 RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
             };
             Groups.Add(group.Id, group);
