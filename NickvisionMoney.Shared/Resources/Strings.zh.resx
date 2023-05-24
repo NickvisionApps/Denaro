@@ -429,30 +429,11 @@ Fyodor Sobolev https://github.com/fsobolev</value>
 		<value>軟體</value>
   </data>
   <!--WinUI Specific-->
-  <data name="FixErrors.WinUI" xml:space="preserve">
-		<value>請修復上述錯誤</value>
-  </data>
   <data name="ChangelogTitle.WinUI" xml:space="preserve">
 		<value>新增功能</value>
   </data>
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>開發人員:
-{0}
-
-設計師:
-{1}
-
-藝術家:
-{2}
-
-翻譯人員:
-{3}</value>
-  </data>
   <data name="ThemeDescription.WinUI" xml:space="preserve">
 		<value>請重啟以應用設定</value>
-  </data>
-  <data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>重啟以應用新主題?</value>
   </data>
   <data name="RestartThemeDescription.WinUI" xml:space="preserve">
 		<value>確認重啟 {0} 以應用新主題?
@@ -766,9 +747,6 @@ New repeat transactions will be generated based off the new interval.</value>
   </data>
   <data name="InsertSeparatorPeriodComma" xml:space="preserve">
     <value>Period and Comma</value>
-  </data>
-  <data name="Preview.WinUI" xml:space="preserve">
-    <value>PREVIEW</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
     <value>Manage your personal finances</value>
