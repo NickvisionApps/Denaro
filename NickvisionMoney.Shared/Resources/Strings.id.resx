@@ -467,9 +467,6 @@ Tindakan ini tidak dapat diurungkan.</value>
 		<value>Aplikasi</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Mulai ulang diperlukan untuk perubahan tema.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Menu Rekening</value>
