@@ -1150,35 +1150,6 @@
 		<value>Application</value>
 	</data>
 
-	<!--WinUI Specific-->
-	<data name="Preview.WinUI" xml:space="preserve">
-		<value>PREVIEW</value>
-	</data>
-
-	<data name="FixErrors.WinUI" xml:space="preserve">
-		<value>Please fix the errors above.</value>
-	</data>
-
-	<data name="ChangelogTitle.WinUI" xml:space="preserve">
-		<value>What's New?</value>
-	</data>
-
-	<data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Developers:&#xA;{0}&#xA;&#xA;Designers:&#xA;{1}&#xA;&#xA;Artists:&#xA;{2}&#xA;&#xA;Translators:&#xA;{3}</value>
-	</data>
-
-	<data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>An application restart is required to change the theme.</value>
-	</data>
-
-	<data name="RestartThemeTitle.WinUI" xml:space="preserve">
-		<value>Restart To Apply Theme?</value>
-	</data>
-
-	<data name="RestartThemeDescription.WinUI" xml:space="preserve">
-		<value>Would you like to restart {0} to apply the new theme?&#xA;Any unsaved work will be lost.</value>
-	</data>
-
 	<!--GTK Specific-->
 	<data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>— Manage multiple accounts at a time, with a familiar tab interface
