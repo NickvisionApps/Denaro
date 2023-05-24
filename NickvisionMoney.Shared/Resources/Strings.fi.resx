@@ -380,9 +380,6 @@ Tätä toimintoa ei voi perua.</value>
   <data name="Imported.Plural" xml:space="preserve">
 		<value>Tuotu {0} tapahtumaa tiedostosta.</value>
   </data>
-  <data name="UnableToImport" xml:space="preserve">
-		<value>Tiedostosta ei voitu tuoda tietoja. Tiedostotyyppi ei ole tuettu.</value>
-  </data>
   <data name="Exported" xml:space="preserve">
 		<value>Tili viety tiedostoon onnistuneesti.</value>
   </data>
