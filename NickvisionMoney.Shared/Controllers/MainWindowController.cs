@@ -222,17 +222,25 @@ public class MainWindowController : IDisposable
         {
             var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
-            if (controller.AccountNeedsPassword && string.IsNullOrEmpty(password))
+            try
             {
-                password = await AccountLoginAsync!(controller.AccountPath);
-            }
-            if (!controller.Login(password))
-            {
-                controller.Dispose();
-                if (password != null)
+                if (controller.AccountNeedsPassword && string.IsNullOrEmpty(password))
                 {
-                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
+                    password = await AccountLoginAsync!(controller.AccountPath);
                 }
+                if (!controller.Login(password))
+                {
+                    controller.Dispose();
+                    if (password != null)
+                    {
+                        NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
+                    }
+                    return false;
+                }
+            }
+            catch
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToOpenAccount"], NotificationSeverity.Error));
                 return false;
             }
             _openAccounts.Add(controller);

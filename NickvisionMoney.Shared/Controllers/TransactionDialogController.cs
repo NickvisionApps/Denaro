@@ -25,7 +25,8 @@ public enum TransactionCheckStatus
     Valid = 1,
     EmptyDescription = 2,
     InvalidAmount = 4,
-    InvalidRepeatEndDate = 8
+    InvalidRepeatEndDate = 8,
+    CannotAccessReceipt = 16
 }
 
 /// <summary>
@@ -77,6 +78,7 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a date string
     /// </summary>
     public CultureInfo CultureForDateString { get; init; }
+    
     /// <summary>
     /// Whether to use native digits
     /// </summary>
@@ -85,18 +87,6 @@ public class TransactionDialogController : IDisposable
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
-
-    /// <summary>
-    /// The repeat interval index used by GUI
-    /// </summary>
-    public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
-    {
-        0 => (uint)Transaction.RepeatInterval,
-        1 => (uint)Transaction.RepeatInterval,
-        2 => (uint)Transaction.RepeatInterval,
-        7 => 3,
-        _ => (uint)Transaction.RepeatInterval + 1
-    };
 
     /// <summary>
     /// Constructs a TransactionDialogController
@@ -129,11 +119,6 @@ public class TransactionDialogController : IDisposable
     }
 
     /// <summary>
-    /// Finalizes the TransactionDialogController
-    /// </summary>
-    ~TransactionDialogController() => Dispose(false);
-
-    /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
@@ -161,6 +146,23 @@ public class TransactionDialogController : IDisposable
         Transaction.Type = transactionDefaultType;
         Transaction.RGBA = transactionDefaultColor;
     }
+    
+    /// <summary>
+    /// Finalizes the TransactionDialogController
+    /// </summary>
+    ~TransactionDialogController() => Dispose(false);
+    
+    /// <summary>
+    /// The repeat interval index used by GUI
+    /// </summary>
+    public uint RepeatIntervalIndex => (uint)Transaction.RepeatInterval switch
+    {
+        0 => (uint)Transaction.RepeatInterval,
+        1 => (uint)Transaction.RepeatInterval,
+        2 => (uint)Transaction.RepeatInterval,
+        7 => 3,
+        _ => (uint)Transaction.RepeatInterval + 1
+    };
 
     /// <summary>
     /// The list of group names
@@ -234,7 +236,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="receiptPath">A possible path of a new receipt image</param>
     public async Task OpenReceiptImageAsync(string? receiptPath = null)
     {
-        Image? image;
+        Image? image = null;
         if (receiptPath != null)
         {
             if (File.Exists(receiptPath))
@@ -247,14 +249,6 @@ public class TransactionDialogController : IDisposable
                 {
                     image = ConvertPDFToJPEG(receiptPath);
                 }
-                else
-                {
-                    image = null;
-                }
-            }
-            else
-            {
-                image = null;
             }
         }
         else
@@ -339,26 +333,26 @@ public class TransactionDialogController : IDisposable
         Transaction.GroupId = groupName == Localizer["Ungrouped"] ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
         Transaction.UseGroupColor = useGroupColor;
+        Transaction.Receipt = null;
         if (receiptPath != null)
         {
-            if (Path.Exists(receiptPath))
+            try
             {
-                if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
+                if (Path.Exists(receiptPath))
                 {
-                    Transaction.Receipt = Image.Load(receiptPath);
-                }
-                else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
-                {
-                    Transaction.Receipt = ConvertPDFToJPEG(receiptPath);
-                }
-                else
-                {
-                    Transaction.Receipt = null;
+                    if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
+                    {
+                        Transaction.Receipt = Image.Load(receiptPath);
+                    }
+                    else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
+                    {
+                        Transaction.Receipt = ConvertPDFToJPEG(receiptPath);
+                    }
                 }
             }
-            else
+            catch
             {
-                Transaction.Receipt = null;
+                return TransactionCheckStatus.CannotAccessReceipt;
             }
         }
         if (Transaction.RepeatInterval == TransactionRepeatInterval.Never)

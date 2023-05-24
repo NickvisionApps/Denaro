@@ -181,6 +181,10 @@
 		<value>New Account (Ctrl+N)</value>
 	</data>
 
+	<data name="UnableToOpenAccount" xml:space="preserve">
+		<value>Unable to open the account. Please ensure that the app has permissions to access the file and try again.</value>
+	</data>
+
 	<data name="UnableToOverride" xml:space="preserve">
 		<value>Unable to override an opened account.</value>
 	</data>
@@ -559,7 +563,11 @@
 		<value>Imported {0} transactions from file.</value>
 	</data>
 
-	<data name="UnableToImport" xml:space="preserve">
+	<data name="UnableToImport.FileIO" xml:space="preserve">
+		<value>Unable to import information from the file. Please ensure that the app has permissions to access the file and try again.</value>
+	</data>
+	
+	<data name="UnableToImport.NoFileType" xml:space="preserve">
 		<value>Unable to import information from the file. Unsupported file type.</value>
 	</data>
 
@@ -840,6 +848,10 @@
 
 	<data name="Receipt.Field" xml:space="preserve">
 		<value>Receipt</value>
+	</data>
+
+	<data name="Receipt.Inaccessible" xml:space="preserve">
+		<value>Receipt (File Inaccessible)</value>
 	</data>
 
 	<data name="Notes.Field" xml:space="preserve">
