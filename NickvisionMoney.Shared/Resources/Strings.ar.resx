@@ -921,4 +921,16 @@ DaPigGuy https://github.com/DaPigGuy</value>
     <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
     <value>دينار</value>
   </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>تعذَّر استيراد المعلومات من الملف، فنوعه ليس مدعومًا.</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>تعذَّر فتح الحساب. تأكد من حصول التطبيق على صلاحية الوصول للملف وجرب مرةً أخرى.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>تعذَّر استيراد المعلومات من الملف. تأكد من حصول التطبيق على صلاحية الوصول للملف وجرب مرةً أخرى.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>الإيصال (لا يمكن الوصول للملف)</value>
+  </data>
 </root>
