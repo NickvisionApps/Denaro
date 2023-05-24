@@ -467,9 +467,6 @@ Deze actie is onomkeerbaar..</value>
 		<value>App</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Herstart de app om het thema te wijzigen.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Rekeningmenu</value>
