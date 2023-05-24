@@ -532,9 +532,6 @@ DaPigGuy https://github.com/DaPigGuy</value>
 		<value>التطبيق</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>يلزم إعادة تشغيل التطبيق لتغيير السمة.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>قائمة الحساب</value>

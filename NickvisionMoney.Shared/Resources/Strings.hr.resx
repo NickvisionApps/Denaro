@@ -467,9 +467,6 @@ Ovo je nepovratna radnja.</value>
 		<value>Program</value>
   </data>
   <!--WinUI Specific-->
-  <data name="ThemeDescription.WinUI" xml:space="preserve">
-		<value>Za mijenjanje teme, program se mora ponovo pokrenuti.</value>
-  </data>
   <!--GTK Specific-->
   <data name="AccountMenu.GTK" xml:space="preserve">
 		<value>Izbornik računa</value>

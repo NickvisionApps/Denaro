@@ -730,19 +730,6 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
 		<value>Aplikacja</value>
   </data>
   <!--WinUI Specific-->
-  <data name="CreditsDialogDescription.WinUI" xml:space="preserve">
-		<value>Program:
-{0}
-
-Projekt:
-{1}
-
-Grafika:
-{2}
-
-Tłumaczenie:
-{3}</value>
-  </data>
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
 		<value>Zarządzaj swoimi finansami</value>
