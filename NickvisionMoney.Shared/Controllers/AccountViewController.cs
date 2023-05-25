@@ -158,12 +158,12 @@ public class AccountViewController : IDisposable
     {
         _isOpened = false;
         _disposed = false;
+        transactionFilter = new TransactionFilter();
         _account = new Account(path, transactionFilter);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         Localizer = localizer;
         FilteredTransactionsCount = 0;
-        transactionFilter = new TransactionFilter();
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
     }
@@ -1056,6 +1056,10 @@ public class AccountViewController : IDisposable
                     pair.Value.Hide();
                 }
             }
+        }
+        foreach (var groupId in _account.Groups.Keys)
+        {
+            GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }

@@ -27,7 +27,23 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// <summary>
     /// The balance of the group
     /// </summary>
-    public decimal Balance { get; private set; } = 0m;
+    public decimal Balance
+    {
+        get
+        {
+            var transactions = _transactions.Values.ToList() ?? new List<Transaction>();
+            if (_transactionFilter == null)
+            {
+                return transactions
+                    .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+            }
+            else
+            {
+                return _transactionFilter.Filter(transactions)
+                    .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+            }
+        }
+    }
     /// <summary>
     /// The RGBA color of the group
     /// </summary>
@@ -52,7 +68,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         Id = id;
         Name = "";
         Description = "";
-        Balance = 0m;
+        //Balance = 0m;
         RGBA = "rgb(0,0,0)";
     }
 
@@ -70,17 +86,17 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
 
     private void UpdateBalance()
     {
-        var transactions = _transactions.Values.ToList();
-        if (_transactionFilter == null)
-        {
-            Balance = transactions
-                .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
-        }
-        else
-        {
-            _transactionFilter.Filter(transactions)
-                .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
-        }
+        // var transactions = _transactions.Values.ToList();
+        // if (_transactionFilter == null)
+        // {
+        //     Balance = transactions
+        //         .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+        // }
+        // else
+        // {
+        //     _transactionFilter.Filter(transactions)
+        //         .Sum((t) => (t.Type == TransactionType.Income ? 1 : -1) * t.Amount);
+        // }
     }
 
     /// <summary>
@@ -93,7 +109,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         {
             Name = Name,
             Description = Description,
-            Balance = Balance,
+            //Balance = Balance,
             RGBA = RGBA
         };
     }
