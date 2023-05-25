@@ -921,4 +921,16 @@ Parola kaybedilirse PDFʼye erişilemez.</value>
   <data name="CustomCurrencySymbol.Invalid" xml:space="preserve">
     <value>Para Birimi Simgesi (Geçersiz)</value>
   </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>Hesap açılamadı. Uygulamanın dosyaya erişim izni olduğundan emin olun ve tekrar deneyin.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>Dosyadan bilgiler içe aktarılamadı. Lütfen uygulamanın dosyaya erişim izni olduğundan emin olun ve tekrar deneyin.</value>
+  </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Dosyadan bilgiler içe aktarılamadı. Desteklenmeyen dosya türü.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Makbuz (Dosyaya Erişilemez)</value>
+  </data>
 </root>
