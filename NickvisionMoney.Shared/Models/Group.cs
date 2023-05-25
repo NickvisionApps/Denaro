@@ -37,7 +37,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// Constructs a group with a transaction filter
     /// </summary>
     /// <param name="id">The id of the group</param>
-    public Group(uint id, TransactionFilter filter) : this(id)
+    public Group(uint id, TransactionFilter? filter) : this(id)
     {
         _transactionFilter = filter;
     }
@@ -89,7 +89,7 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// <returns>A new Group</returns>
     public object Clone()
     {
-        return new Group(Id)
+        return new Group(Id, _transactionFilter)
         {
             Name = Name,
             Description = Description,

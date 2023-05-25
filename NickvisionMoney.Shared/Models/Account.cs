@@ -470,7 +470,7 @@ public class Account : IDisposable
         }
         //Get Groups
         using var localizer = new Localizer();
-        Groups.Add(0, new Group(0)
+        Groups.Add(0, new Group(0, _transactionFilter)
         {
             Name = localizer["Ungrouped"],
             Description = localizer["UngroupedDescription"],
@@ -485,7 +485,7 @@ public class Account : IDisposable
             {
                 continue;
             }
-            var group = new Group((uint)readQueryGroups.GetInt32(0))
+            var group = new Group((uint)readQueryGroups.GetInt32(0), _transactionFilter)
             {
                 Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
                 Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
@@ -1323,7 +1323,7 @@ public class Account : IDisposable
             //Create Group If Needed
             if (gid != -1 && !Groups.ContainsKey((uint)gid))
             {
-                var group = new Group((uint)gid)
+                var group = new Group((uint)gid, _transactionFilter)
                 {
                     Name = groupName,
                     Description = groupDescription,
@@ -1433,7 +1433,7 @@ public class Account : IDisposable
         {
             if (Groups.Values.FirstOrDefault(x => x.Name == group.CategoryName) == null)
             {
-                await AddGroupAsync(new Group(NextAvailableGroupId)
+                await AddGroupAsync(new Group(NextAvailableGroupId, _transactionFilter)
                 {
                     Name = group.CategoryName,
                     Description = group.Description,

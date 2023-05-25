@@ -40,15 +40,15 @@ public class TransactionFilter
                     continue;
                 }
             }
-            if (transaction.Type == TransactionType.Income && !_filters[-3])
+            if (transaction.Type == TransactionType.Income && !_filters[(int)Filters.Income])
             {
                 continue;
             }
-            if (transaction.Type == TransactionType.Expense && !_filters[-2])
+            if (transaction.Type == TransactionType.Expense && !_filters[(int)Filters.Expense])
             {
                 continue;
             }
-            if (!_filters[transaction.GroupId])
+            if (_filters.ContainsKey(transaction.GroupId) && !_filters[transaction.GroupId])
             {
                 continue;
             }
