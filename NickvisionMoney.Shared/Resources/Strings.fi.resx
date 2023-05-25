@@ -851,4 +851,8 @@ Jos salasana katoaa, PDF-tiedosto ei ole käytettävissä.</value>
   <data name="ExportToFile.All" xml:space="preserve">
     <value>Vie kaikki tiedot</value>
   </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -83,7 +84,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Label _backupFolderLabel;
     [Gtk.Connect] private readonly Gtk.Button _unsetBackupFolderButton;
 
-    private GAsyncReadyCallback _fileDialogCallback { get; set; }
+    private GAsyncReadyCallback _fileDialogCallback;
 
     private PreferencesDialog(Gtk.Builder builder, PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -145,7 +146,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         gtk_color_dialog_button_set_rgba(_accountBusinessColorButton.Handle, ref accountBusinessColor);
         _nativeDigitsSwitch.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
-        if (!string.IsNullOrEmpty(_controller.CSVBackupFolder))
+        if (File.Exists(_controller.CSVBackupFolder))
         {
             _backupViewStack.SetVisibleChildName("folder-selected");
             _backupFolderLabel.SetText(_controller.CSVBackupFolder);
@@ -205,6 +206,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <summary>
     /// Occurs when a button to select backup folder is clicked
     /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
     {
         var fileDialog = gtk_file_dialog_new();
@@ -233,6 +236,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <summary>
     /// Occurs when a button to disable CSV backup is clicked
     /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void UnsetBackupFolder(Gtk.Button sender, EventArgs e)
     {
         _controller.CSVBackupFolder = "";
