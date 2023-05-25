@@ -1084,6 +1084,7 @@ public class AccountViewController : IDisposable
 
     private void GroupRowUIUpdate(uint groupId)
     {
+        _account.Groups[groupId].UpdateBalance();
         GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)groupId));
     }
 }
