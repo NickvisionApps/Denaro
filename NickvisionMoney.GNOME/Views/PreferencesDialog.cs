@@ -84,7 +84,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Label _backupFolderLabel;
     [Gtk.Connect] private readonly Gtk.Button _unsetBackupFolderButton;
 
-    private GAsyncReadyCallback _fileDialogCallback { get; set; }
+    private GAsyncReadyCallback _fileDialogCallback;
 
     private PreferencesDialog(Gtk.Builder builder, PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -206,6 +206,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <summary>
     /// Occurs when a button to select backup folder is clicked
     /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
     {
         var fileDialog = gtk_file_dialog_new();
@@ -234,6 +236,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <summary>
     /// Occurs when a button to disable CSV backup is clicked
     /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
     private void UnsetBackupFolder(Gtk.Button sender, EventArgs e)
     {
         _controller.CSVBackupFolder = "";
