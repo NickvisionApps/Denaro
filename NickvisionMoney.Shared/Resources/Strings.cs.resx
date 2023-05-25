@@ -925,4 +925,16 @@ Pokud heslo ztratíte, soubor PDF bude nepřístupný.</value>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
 		<value>Nelze získat přístup k vybrané složce, zkontrolujte oprávnění Flatpaku.</value>
   </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Faktura (soubor nedostupný)</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>Nepodařilo se otevřít účet. Ujistěte se, že má aplikace oprávnění k přístupu k vašemu souboru a zkuste to znovu.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>Nepodařilo se importovat informace ze souboru. Ujistěte se, že má aplikace oprávnění k přístupu k vašemu souboru a zkuste to znovu.</value>
+  </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Nepodařilo se importovat informace ze souboru. Nepodporovaný typ souboru.</value>
+  </data>
 </root>
