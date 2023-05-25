@@ -729,7 +729,11 @@ Nowe transakcje powtarzane będą generowane zgodnie z nowym interwałem.</value
   <!--WinUI Specific-->
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
-		<value>Zarządzaj swoimi finansami</value>
+		<value>— Zarządzaj wieloma kontami jednocześnie, korzystając ze znajomego interfejsu zakładek
+— Łatwo filtruj transakcje według typu, grupy lub daty
+— Łatwo powtarzaj transakcje, takie jak rachunki, które pojawiają się co miesiąc
+— Przelewaj pieniądze z jednego konta na drugie
+— Eksportuj konto jako plik CSV i importuj pliki CSV, OFX lub QIF, aby zbiorczo dodawać transakcje do konta</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
 		<value>pieniądze;finanse;portfel;bank;GTK;Nickvision;</value>
@@ -891,5 +895,45 @@ Jeśli utracisz hasło, PDF będzie niedostępny.</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
     <value>Transakcje ({0})</value>
+  </data>
+  <data name="Notes.Field" xml:space="preserve">
+    <value>Uwagi</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>Denaro</value>
+  </data>
+  <data name="Extras.Description" xml:space="preserve">
+    <value>Zarządzaj dodatkowymi polami transakcji.</value>
+  </data>
+  <data name="Extras" xml:space="preserve">
+    <value>Dodatkowe</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Potwierdzenie (plik niedostępny)</value>
+  </data>
+  <data name="UseNativeDigits" xml:space="preserve">
+    <value>Używaj cyfr rodzimych</value>
+  </data>
+  <data name="Notes.Placeholder" xml:space="preserve">
+    <value>Wpisz tu uwagi</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>Nie można utworzyć konta. Upewnij się, że aplikacja ma uprawnienia dostępu do pliku i spróbuj ponownie.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>Nie można zaimportować informacji z pliku. Upewnij się, że aplikacja ma uprawnienia dostępu do pliku i spróbuj ponownie.</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>Eksportuj wszystkie informacje</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>Eksportuj obecny widok</value>
+  </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Nie można zaimportować informacji z pliku. Nieobsługiwany typ pliku.</value>
+  </data>
+  <data name="UseNativeDigits.Description" xml:space="preserve">
+    <value>Zamiast cyfr łacińskich używaj cyfr rodzimych dla danego regionu.</value>
   </data>
 </root>
