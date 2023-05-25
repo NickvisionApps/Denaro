@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -145,7 +146,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         gtk_color_dialog_button_set_rgba(_accountBusinessColorButton.Handle, ref accountBusinessColor);
         _nativeDigitsSwitch.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
-        if (!string.IsNullOrEmpty(_controller.CSVBackupFolder))
+        if (File.Exists(_controller.CSVBackupFolder))
         {
             _backupViewStack.SetVisibleChildName("folder-selected");
             _backupFolderLabel.SetText(_controller.CSVBackupFolder);
