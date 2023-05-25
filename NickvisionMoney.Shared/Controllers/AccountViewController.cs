@@ -18,7 +18,7 @@ public class AccountViewController : IDisposable
     private bool _isOpened;
     private bool _disposed;
     private readonly Account _account;
-    private readonly TransactionFilter transactionFilter;
+    private readonly TransactionFilter _transactionFilter;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -158,8 +158,8 @@ public class AccountViewController : IDisposable
     {
         _isOpened = false;
         _disposed = false;
-        transactionFilter = new TransactionFilter();
-        _account = new Account(path, transactionFilter);
+        _transactionFilter = new TransactionFilter();
+        _account = new Account(path, _transactionFilter);
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         Localizer = localizer;
@@ -340,12 +340,13 @@ public class AccountViewController : IDisposable
     /// </summary>
     public string SearchDescription
     {
-        get => transactionFilter.SearchDescription;
+        get => _transactionFilter.SearchDescription;
 
         set
         {
-            transactionFilter.SearchDescription = value;
+            _transactionFilter.SearchDescription = value;
             FilterUIUpdate();
+            GroupRowsUIUpdate();
         }
     }
 
@@ -354,11 +355,11 @@ public class AccountViewController : IDisposable
     /// </summary>
     public DateOnly FilterStartDate
     {
-        get => transactionFilter.FilterStartDate;
+        get => _transactionFilter.FilterStartDate;
 
         set
         {
-            transactionFilter.SetStartDate(value);
+            _transactionFilter.SetStartDate(value);
             FilterUIUpdate();
         }
     }
@@ -368,11 +369,11 @@ public class AccountViewController : IDisposable
     /// </summary>
     public DateOnly FilterEndDate
     {
-        get => transactionFilter.FilterEndDate;
+        get => _transactionFilter.FilterEndDate;
 
         set
         {
-            transactionFilter.SetEndDate(value);
+            _transactionFilter.SetEndDate(value);
             FilterUIUpdate();
         }
     }
@@ -466,7 +467,7 @@ public class AccountViewController : IDisposable
             GroupRows.Clear();
             foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
             {
-                transactionFilter.AddFilter((int)pair.Value.Id);
+                _transactionFilter.AddFilter((int)pair.Value.Id);
                 GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
             }
             //Transactions
@@ -570,7 +571,7 @@ public class AccountViewController : IDisposable
     /// <param name="e">EventArgs</param>
     private void ConfigurationChanged(object? sender, EventArgs e)
     {
-        GroupRows[0].UpdateRow(Groups[0], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)Filters.NoGroup));
+        GroupRowUIUpdate(0);
     }
 
     /// <summary>
@@ -613,7 +614,7 @@ public class AccountViewController : IDisposable
         {
             foreach (var row in GroupRows)
             {
-                row.Value.UpdateRow(_account.Groups[row.Key], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)row.Key));
+                row.Value.UpdateRow(_account.Groups[row.Key], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)row.Key));
             }
             foreach (var row in TransactionRows)
             {
@@ -676,8 +677,8 @@ public class AccountViewController : IDisposable
                 }
             }
         }
-        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)originalGroupId));
-        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)newGroupId));
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)originalGroupId));
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)newGroupId));
         FilterUIUpdate();
     }
 
@@ -722,8 +723,8 @@ public class AccountViewController : IDisposable
                 TransactionRows.Remove(pair.Key);
             }
         }
-        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)originalGroupId));
-        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)newGroupId));
+        GroupRows[originalGroupId].UpdateRow(_account.Groups[originalGroupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)originalGroupId));
+        GroupRows[newGroupId].UpdateRow(_account.Groups[newGroupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)newGroupId));
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
         FilterUIUpdate();
     }
@@ -823,7 +824,7 @@ public class AccountViewController : IDisposable
     {
         await _account.AddGroupAsync(group);
         var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
-        transactionFilter.AddFilter((int)group.Id);
+        _transactionFilter.AddFilter((int)group.Id);
         GroupRows.Add(group.Id, UICreateGroupRow!(group, groups.IndexOf(group)));
     }
 
@@ -834,7 +835,7 @@ public class AccountViewController : IDisposable
     public async Task UpdateGroupAsync(Group group, bool hasColorChanged)
     {
         await _account.UpdateGroupAsync(group);
-        GroupRows[group.Id].UpdateRow(group, GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)group.Id));
+        GroupRows[group.Id].UpdateRow(group, GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)group.Id));
         if (hasColorChanged)
         {
             foreach (var pair in _account.Transactions)
@@ -854,7 +855,7 @@ public class AccountViewController : IDisposable
     public async Task DeleteGroupAsync(uint id)
     {
         var result = await _account.DeleteGroupAsync(id);
-        transactionFilter.RemoveFilter((int)id);
+        _transactionFilter.RemoveFilter((int)id);
         UIDeleteGroupRow!(GroupRows[id]);
         GroupRows.Remove(id);
         foreach (var transaction in result.BelongingTransactions)
@@ -927,9 +928,9 @@ public class AccountViewController : IDisposable
         var importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
         foreach (var pair in _account.Groups)
         {
-            if (!transactionFilter.IsFilterActive((int)pair.Value.Id))//_filters.ContainsKey((int)pair.Value.Id))
+            if (!_transactionFilter.IsFilterActive((int)pair.Value.Id))
             {
-                transactionFilter.AddFilter((int)pair.Value.Id);
+                _transactionFilter.AddFilter((int)pair.Value.Id);
                 GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
             }
         }
@@ -958,7 +959,7 @@ public class AccountViewController : IDisposable
     /// <param name="exportMode">The information to export</param>
     public void ExportToCSV(string path, ExportMode exportMode)
     {
-        var filteredIds = transactionFilter.Filter(_account.Transactions.Values.ToList()).Select(t => t.Id).ToList();
+        var filteredIds = _transactionFilter.Filter(_account.Transactions.Values.ToList()).Select(t => t.Id).ToList();
         if (_account.ExportToCSV(path, exportMode, filteredIds))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
@@ -977,7 +978,7 @@ public class AccountViewController : IDisposable
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        var filteredIds = transactionFilter.Filter(_account.Transactions.Values.ToList()).Select(t => t.Id).ToList();
+        var filteredIds = _transactionFilter.Filter(_account.Transactions.Values.ToList()).Select(t => t.Id).ToList();
         if (_account.ExportToPDF(path, exportMode, filteredIds!, password))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
@@ -993,7 +994,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     /// <param name="key">The id of the filter</param>
     /// <returns>True if active, else false</returns>
-    public bool IsFilterActive(int key) => transactionFilter.IsFilterActive(key);
+    public bool IsFilterActive(int key) => _transactionFilter.IsFilterActive(key);
 
     /// <summary>
     /// Updates whether or not a filter is active
@@ -1002,7 +1003,7 @@ public class AccountViewController : IDisposable
     /// <param name="value">The value of the filter</param>
     public void UpdateFilterValue(int key, bool value)
     {
-        transactionFilter.UpdateFilter(key, value);
+        _transactionFilter.UpdateFilter(key, value);
         FilterUIUpdate();
     }
 
@@ -1012,8 +1013,8 @@ public class AccountViewController : IDisposable
     /// <param name="date">The date to set</param>
     public void SetSingleDateFilter(DateOnly date)
     {
-        transactionFilter.SetStartDate(date);
-        transactionFilter.SetEndDate(date);
+        _transactionFilter.SetStartDate(date);
+        _transactionFilter.SetEndDate(date);
         FilterUIUpdate();
     }
 
@@ -1022,11 +1023,11 @@ public class AccountViewController : IDisposable
     /// </summary>
     public void ResetGroupsFilter()
     {
-        transactionFilter.AddFilter((int)Filters.NoGroup); //Ungrouped
+        _transactionFilter.AddFilter((int)Filters.NoGroup);
         GroupRows[0].FilterChecked = true;
         foreach (var pair in _account.Groups)
         {
-            transactionFilter.AddFilter((int)pair.Key);
+            _transactionFilter.AddFilter((int)pair.Key);
             GroupRows[pair.Key].FilterChecked = true;
         }
         FilterUIUpdate();
@@ -1037,7 +1038,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     private void FilterUIUpdate()
     {
-        var filteredIds = transactionFilter.Filter(_account.Transactions.Values.ToList())
+        var filteredIds = _transactionFilter.Filter(_account.Transactions.Values.ToList())
                                 .Select(t => t.Id)
                                 .ToList();
 
@@ -1045,21 +1046,17 @@ public class AccountViewController : IDisposable
         if (FilteredTransactionsCount > 0)
         {
             //Update UI
-            foreach (var pair in TransactionRows)
+            foreach (var transactionRow in TransactionRows.Values)
             {
-                if (filteredIds.Contains(pair.Value.Id))
+                if (filteredIds.Contains(transactionRow.Id))
                 {
-                    pair.Value.Show();
+                    transactionRow.Show();
                 }
                 else
                 {
-                    pair.Value.Hide();
+                    transactionRow.Hide();
                 }
             }
-        }
-        foreach (var groupId in _account.Groups.Keys)
-        {
-            GroupRowUIUpdate(groupId);
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -1077,8 +1074,16 @@ public class AccountViewController : IDisposable
         }
     }
 
+    private void GroupRowsUIUpdate()
+    {
+        foreach (var groupId in _account.Groups.Keys)
+        {
+            GroupRowUIUpdate(groupId);
+        }
+    }
+
     private void GroupRowUIUpdate(uint groupId)
     {
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, _transactionFilter.IsFilterActive((int)groupId));
     }
 }
