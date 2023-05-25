@@ -652,7 +652,7 @@ public class AccountViewController : IDisposable
                 TransactionRows.Add(_account.Transactions[transactions[i]].Id, UICreateTransactionRow!(_account.Transactions[transactions[i]], i));
             }
         }
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+        GroupRowUIUpdate(groupId);
         FilterUIUpdate();
     }
 
@@ -738,7 +738,7 @@ public class AccountViewController : IDisposable
         await _account.DeleteTransactionAsync(id);
         UIDeleteTransactionRow!(TransactionRows[id]);
         TransactionRows.Remove(id);
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+        GroupRowUIUpdate(groupId);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -774,7 +774,7 @@ public class AccountViewController : IDisposable
                 }
             }
         }
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+        GroupRowUIUpdate(groupId);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -794,7 +794,7 @@ public class AccountViewController : IDisposable
             }
         }
         await _account.DeleteGeneratedTransactionsAsync(id);
-        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+        GroupRowUIUpdate(groupId);
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -939,7 +939,7 @@ public class AccountViewController : IDisposable
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
                 TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
-                GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+                GroupRowUIUpdate(groupId);
             }
             FilterUIUpdate();
             SortUIUpdate();
@@ -1059,7 +1059,7 @@ public class AccountViewController : IDisposable
         }
         foreach (var groupId in _account.Groups.Keys)
         {
-            GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
+            GroupRowUIUpdate(groupId);
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -1075,5 +1075,10 @@ public class AccountViewController : IDisposable
         {
             UIMoveTransactionRow!(TransactionRows[transactions[i]], i);
         }
+    }
+
+    private void GroupRowUIUpdate(uint groupId)
+    {
+        GroupRows[groupId].UpdateRow(_account.Groups[groupId], GroupDefaultColor, CultureForNumberString, transactionFilter.IsFilterActive((int)groupId));
     }
 }
