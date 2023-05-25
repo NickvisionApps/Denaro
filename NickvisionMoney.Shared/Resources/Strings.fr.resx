@@ -633,7 +633,11 @@ les transactions individuelles générées seront modifiables.</value>
     <value>Id</value>
   </data>
   <data name="MetadataDescription.GTK" xml:space="preserve">
-    <value>Gérez vos finances personnelles</value>
+    <value>— Gérez plusieurs comptes à la fois, avec une interface à onglets familière
+— Filtrez facilement les transactions par type, groupe, ou date
+— Répétez facilement des transactions mensuelles récurrentes, comme les factures
+— Transférez de l’argent d’un compte à un autre
+— Exportez vos comptes en fichiers de format CSV et importez des fichiers CSV, OFX ou QIF pour ajouter des transactions en masse dans un compte</value>
   </data>
   <data name="SortBy.Amount" xml:space="preserve">
     <value>Trier par montant</value>
@@ -916,5 +920,17 @@ En cas de perte du mot de passe le document sera inaccessible.</value>
   </data>
   <data name="UseNativeDigits.Description" xml:space="preserve">
     <value>Indique s’il faut utiliser des chiffres natifs de votre langue à la place de chiffres latins.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>Impossible d’importer les informations depuis le fichier. Assurez vous que l’application a les permissions d’accès au fichier, et réessayez.</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>Impossible d’ouvrir le compte. Assurez-vous que l’application dispose des permissions d’accès au fichier, et réessayez.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Reçu (fichier inaccessible)</value>
+  </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Impossible d’importer les informations depuis le fichier. Type de fichier non pris en charge.</value>
   </data>
 </root>
