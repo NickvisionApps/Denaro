@@ -64,7 +64,7 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
         _mainWindowController.AppInfo.ShortName = _mainWindowController.Localizer["ShortName"];
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.5.0-rc1";
+        _mainWindowController.AppInfo.Version = "2023.5.0";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where Denaro would crash on systems with unconfigured locales</li><li>Fixed an issue where PDF exporting failed for accounts with many receipts</li><li>Fixed an issue where a group's filter was reactivated when a transaction was added to that group</li><li>Error messages will be shown if Denaro attempts to access inaccessible files instead of crashing</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");

@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.5.0-rc1" date="2023-05-24">
+    <release version="2023.5.0" date="2023-05-26">
       <description>
         <p>- Fixed an issue where Denaro would crash on systems with unconfigured locales</p>
         <p>- Fixed an issue where PDF exporting failed for accounts with many receipts</p>
