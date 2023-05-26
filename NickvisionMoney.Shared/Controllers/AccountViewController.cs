@@ -360,6 +360,7 @@ public class AccountViewController : IDisposable
         set
         {
             _transactionFilter.SetStartDate(value);
+            GroupRowsUIUpdate();
             FilterUIUpdate();
         }
     }
@@ -374,6 +375,7 @@ public class AccountViewController : IDisposable
         set
         {
             _transactionFilter.SetEndDate(value);
+            GroupRowsUIUpdate();
             FilterUIUpdate();
         }
     }
