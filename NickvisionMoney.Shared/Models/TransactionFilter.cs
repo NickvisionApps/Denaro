@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace NickvisionMoney.Shared.Models;
 
-enum Filters {
+enum Filters
+{
     Income = -3,
     Expense = -2,
     NoGroup = -1,
@@ -28,40 +29,54 @@ public class TransactionFilter
         _filters.Add((int)Filters.NoGroup, true);
     }
 
+    /// <summary>
+    /// Returns the list of transaction that match the filter
+    /// </summary>
     internal List<Transaction> Filter(List<Transaction> transactions)
     {
         List<Transaction> filteredTransactions = new List<Transaction>();
         foreach (var transaction in transactions)
         {
-            if (!string.IsNullOrEmpty(SearchDescription))
+            if (Filter(transaction))
             {
-                if (!transaction.Description.ToLower().Contains(SearchDescription.ToLower()))
-                {
-                    continue;
-                }
+                filteredTransactions.Add(transaction);
             }
-            if (transaction.Type == TransactionType.Income && !_filters[(int)Filters.Income])
-            {
-                continue;
-            }
-            if (transaction.Type == TransactionType.Expense && !_filters[(int)Filters.Expense])
-            {
-                continue;
-            }
-            if (_filters.ContainsKey(transaction.GroupId) && !_filters[transaction.GroupId])
-            {
-                continue;
-            }
-            if (FilterStartDate != DateOnly.FromDateTime(DateTime.Today) || FilterEndDate != DateOnly.FromDateTime(DateTime.Today))
-            {
-                if (transaction.Date < FilterStartDate || transaction.Date > FilterEndDate)
-                {
-                    continue;
-                }
-            }
-            filteredTransactions.Add(transaction);
         }
         return filteredTransactions;
+    }
+
+    /// <summary>
+    /// Returns if a transaction matches the filter
+    /// </summary>
+    internal bool Filter(Transaction transaction)
+    {
+        if (!string.IsNullOrEmpty(SearchDescription))
+        {
+            if (!transaction.Description.ToLower().Contains(SearchDescription.ToLower()))
+            {
+                return false;
+            }
+        }
+        if (transaction.Type == TransactionType.Income && !_filters[(int)Filters.Income])
+        {
+            return false;
+        }
+        if (transaction.Type == TransactionType.Expense && !_filters[(int)Filters.Expense])
+        {
+            return false;
+        }
+        if (_filters.ContainsKey(transaction.GroupId) && !_filters[transaction.GroupId])
+        {
+            return false;
+        }
+        if (FilterStartDate != DateOnly.FromDateTime(DateTime.Today) || FilterEndDate != DateOnly.FromDateTime(DateTime.Today))
+        {
+            if (transaction.Date < FilterStartDate || transaction.Date > FilterEndDate)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     internal void SetStartDate(DateOnly value)

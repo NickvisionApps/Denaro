@@ -59,13 +59,20 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     public void AddTransaction(Transaction transaction)
     {
         _transactions.Add(transaction.Id, transaction);
-        UpdateBalance();
+        if (_transactionFilter == null || _transactionFilter.Filter(transaction))
+        {
+            Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+        }
     }
 
     public void RemoveTransaction(uint id)
     {
+        var transaction = _transactions.GetValueOrDefault(id);
         _transactions.Remove(id);
-        UpdateBalance();
+        if (_transactionFilter == null || _transactionFilter.Filter(transaction))
+        {
+            Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
+        }
     }
 
     public void UpdateBalance()
