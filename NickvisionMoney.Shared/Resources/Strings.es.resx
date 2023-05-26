@@ -915,4 +915,16 @@ Si pierde la contraseña, el PDF será inaccesible.</value>
     <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
     <value>Denaro</value>
   </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>No se ha podido importar información del fichero. Tipo de archivo no compatible.</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>No se ha podido abrir la cuenta. Asegúrese de que la aplicación tiene los permisos para acceder al archivo e inténtelo de nuevo.</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>No se ha podido importar la información del archivo. Asegúrese de que la aplicación tiene permisos para acceder al archivo e inténtelo de nuevo.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Recibo (Archivo inaccesible)</value>
+  </data>
 </root>
