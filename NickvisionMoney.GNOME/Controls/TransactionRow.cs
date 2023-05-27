@@ -80,7 +80,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
             _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_localizer["TransactionRepeatInterval", "Field"]}: {_localizer["RepeatInterval", _transaction.RepeatInterval.ToString()]}" : "")}");
             _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA, _defaultColor, _useNativeDigits);
             //Amount Label
-            _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "-  ")}{_transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}");
+            _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "−  ")}{_transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}");
             _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
             _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
             //Buttons Box
