@@ -1616,7 +1616,7 @@ public class Account : IDisposable
                             }
                             tbl.Cell().Text(localizer["Total"]);
                             var total = GetTotal(maxDate);
-                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "−  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(localizer["Expense"]);
@@ -1673,7 +1673,7 @@ public class Account : IDisposable
                             {
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "-  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
                         });
@@ -1743,7 +1743,7 @@ public class Account : IDisposable
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
-                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "-  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "−  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
                         });
                         //Receipts
