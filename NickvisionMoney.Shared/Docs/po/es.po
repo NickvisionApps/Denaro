@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-04-20 11:34+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2023-05-26 02:08+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/es/>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "Óscar Fernández Díaz <>, 2023"
+msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2023"
 
 #. (itstool) path: info/title
 #: yelp/C/account.page:8
@@ -499,7 +499,6 @@ msgstr "Usar dígitos nativos"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
-#, fuzzy
 msgid ""
 "Whether to use numerals that are native for your locale instead of latin "
 "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "

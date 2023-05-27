@@ -100,7 +100,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
-    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "- ")}{_account.TodayTotal.ToAmountString(CultureForNumberString, UseNativeDigits)}";
+    public string AccountTodayTotalString => $"{(_account.TodayTotal >= 0 ? "+ " : "− ")}{_account.TodayTotal.ToAmountString(CultureForNumberString, UseNativeDigits)}";
     /// <summary>
     /// The income amount of the account for today
     /// </summary>

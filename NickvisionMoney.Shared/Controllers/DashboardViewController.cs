@@ -122,7 +122,7 @@ public class DashboardViewController
                         Groups[name].DashboardAmount.Currencies.Add(currency);
                         Groups[name].DashboardAmount.Breakdowns[currency] = (0, "");
                     }
-                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "- ")}{group.Balance.ToAmountString(controller.CultureForNumberString, UseNativeDigits)}", controller.AccountTitle)}\n");
+                    Groups[name].DashboardAmount.Breakdowns[currency] = (Groups[name].DashboardAmount.Breakdowns[currency].Total + group.Balance, Groups[name].DashboardAmount.Breakdowns[currency].PerAccount + $"{string.Format(Localizer["AmountFromAccount"], $"{(group.Balance >= 0 ? "+ " : "− ")}{group.Balance.ToAmountString(controller.CultureForNumberString, UseNativeDigits)}", controller.AccountTitle)}\n");
                 }
             }
         }
