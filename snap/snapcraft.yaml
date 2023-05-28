@@ -24,7 +24,7 @@ parts:
     # See 'snapcraft plugins'
     plugin: nil
     source: https://github.com/NickvisionApps/Denaro.git
-    source-tag: '2023.5.0'
+    #source-tag: 
     build-packages:
       - blueprint-compiler
       - wget
