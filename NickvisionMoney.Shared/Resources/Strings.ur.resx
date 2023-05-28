@@ -14,7 +14,7 @@
   </resheader>
   <!--Use: &#xA; for newline-->
   <data name="Description" xml:space="preserve">
-		<value>ذاتی مالیات کا منتظم</value>
+		<value>اپنی ذاتی مالیات کا انتظام کریں</value>
   </data>
   <data name="Version" xml:space="preserve">
 		<value>ورژن: {0}</value>
@@ -42,23 +42,27 @@
   </data>
   <!--Credits-->
   <data name="Credits" xml:space="preserve">
-		<value />
+		<value>منسوب</value>
   </data>
   <data name="Developers.Credits" xml:space="preserve">
 		<!--DEVELOPER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>نکولس لوگوزو https://github.com/nlogozzo
+گِٹ ہَب پر تعاون کرنے والے ❤️ https://github.com/NickvisionApps/Denaro/graphs/contributors</value>
   </data>
   <data name="Designers.Credits" xml:space="preserve">
 		<!--DESIGNER NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>نکولس لوگوزو https://github.com/nlogozzo
+فیوڈور سوبولیف https://github.com/fsobolev
+دا پگ گائی https://github.com/DaPigGuy</value>
   </data>
   <data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>ڈیوڈ لیپشین https://github.com/daudix-UFO
+ٹوبیاس برنارڈ https://github.com/bertob</value>
   </data>
   <data name="Translators.Credits" xml:space="preserve">
 		<!--TRANSLATOR NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-    <value />
+    <value>ویبلیٹ پر مترجم ❤️ https://hosted.weblate.org/projects/nickvision-money/app/</value>
   </data>
   <!--Actions-->
   <data name="OK" xml:space="preserve">
@@ -105,10 +109,10 @@
 		<value>ڈیش بورڈ</value>
   </data>
   <data name="Account" xml:space="preserve">
-		<value>میزان</value>
+		<value>حساب کتاب</value>
   </data>
   <data name="Accounts" xml:space="preserve">
-		<value>میزانیں</value>
+		<value>حساب کتاب</value>
   </data>
   <data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
@@ -116,176 +120,176 @@
   </data>
   <data name="Preferences" xml:space="preserve">
 		<!--Mostly used in GNOME-->
-    <value />
+    <value>ترجیحات</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-		<value />
+		<value>کی بورڈ شارٹ کٹس</value>
   </data>
   <data name="Quit" xml:space="preserve">
-		<value />
+		<value>بند کریں</value>
   </data>
   <!--MainWindow-->
   <data name="NickvisionMoneyAccount" xml:space="preserve">
-		<value />
+		<value>نک ویژن دینارو اکاؤنٹ</value>
   </data>
   <data name="NewAccount" xml:space="preserve">
-		<value />
+		<value>نیا کھاتہ</value>
   </data>
   <data name="NewAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>نیا کھاتہ (Ctrl+N)</value>
   </data>
   <data name="UnableToOverride" xml:space="preserve">
-		<value />
+		<value>کھولے گئے اکاؤنٹ کو اووررائڈ کرنے میں ناکام۔</value>
   </data>
   <data name="OpenAccount" xml:space="preserve">
-		<value />
+		<value>کھاتہ کھولیں</value>
   </data>
   <data name="OpenAccount.Tooltip" xml:space="preserve">
-		<value />
+		<value>کھاتہ کھولیں (Ctrl+O)</value>
   </data>
   <data name="NoAccountOpened" xml:space="preserve">
-		<value />
+		<value>کوئی اکاؤنٹ نہیں کھولا گیا</value>
   </data>
   <data name="NoAccountDescription" xml:space="preserve">
-		<value />
+		<value>شروع کرنے کے لئے اکاؤنٹ بنائیں یا کھولیں۔ آپ اپنے فائل براؤزر سے بھی ایپ میں فائل کھینچ سکتے ہیں۔</value>
   </data>
   <data name="RecentAccounts" xml:space="preserve">
-		<value />
+		<value>حالیہ اکاؤنٹس</value>
   </data>
   <data name="NoRecentAccounts" xml:space="preserve">
-		<value />
+		<value>کوئی حالیہ اکاؤنٹس نہیں</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-		<value />
+		<value>تمام فائلیں</value>
   </data>
   <!--MainWindowController-->
   <data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
-    <value />
+    <value>روز بخیر!</value>
   </data>
   <data name="Greeting.Morning" xml:space="preserve">
 		<!-- Shown from 6am to noon -->
-    <value />
+    <value>صبح بخیر!</value>
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
 		<!-- Shown from noon to 6pm -->
-    <value />
+    <value>دوپہر بخیر!</value>
   </data>
   <data name="Greeting.Evening" xml:space="preserve">
 		<!-- Shown from 6pm to mignight -->
-    <value />
+    <value>شام بخیر!</value>
   </data>
   <data name="Greeting.Night" xml:space="preserve">
 		<!-- Shown from midnight to 6am -->
     <!-- IMPORTANT: do not just translate literally, use whatever is natural for your language -->
-    <value />
+    <value>صبح بخیر!</value>
   </data>
   <data name="AccountOpenedAlready" xml:space="preserve">
-		<value />
+		<value>یہ اکاؤنٹ پہلے ہی کھولا جا چکا ہے.</value>
   </data>
   <data name="InvalidPassword" xml:space="preserve">
-		<value />
+		<value>اکاؤنٹ میں لاگ ان نہیں کر سکتے۔ فراہم کردہ پاس ورڈ غلط ہے۔</value>
   </data>
   <!--DashboardView-->
   <data name="AmountFromAccount" xml:space="preserve">
-		<value />
+		<value>{0} سے {1}</value>
   </data>
   <data name="AllAccounts" xml:space="preserve">
-		<value />
+		<value>تمام اکاؤنٹس</value>
   </data>
   <!--AccountView-->
   <data name="AccountActions" xml:space="preserve">
-		<value />
+		<value>اعمال</value>
   </data>
   <data name="NewTransaction" xml:space="preserve">
-		<value />
+		<value>نیا لین دین</value>
   </data>
   <data name="NewTransaction.Tooltip" xml:space="preserve">
-		<value />
+		<value>نیا لین دین (Ctrl+Shift+N)</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-		<value />
+		<value>نیا گروہ</value>
   </data>
   <data name="NewGroup.Tooltip" xml:space="preserve">
-		<value />
+		<value>نیا گروہ (Ctrl+G)</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-		<value />
+		<value>پیسے کی منتقلی</value>
   </data>
   <data name="TransferMoney.Tooltip" xml:space="preserve">
-		<value />
+		<value>پیسے کی منتقلی (Ctrl+T)</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
-		<value />
+		<value>فائل سے درآمد</value>
   </data>
   <data name="ImportFromFile.Tooltip" xml:space="preserve">
-		<value />
+		<value>فائل سے درآمد (Ctrl+I)</value>
   </data>
   <data name="ExportToFile" xml:space="preserve">
-		<value />
+		<value>فائل میں برآمد کریں</value>
   </data>
   <data name="Overview" xml:space="preserve">
-		<value />
+		<value>عمومی جائزہ</value>
   </data>
   <data name="Overview.Today" xml:space="preserve">
-		<value />
+		<value>آج کا جائزہ</value>
   </data>
   <data name="Total" xml:space="preserve">
-		<value />
+		<value>مجموعہ</value>
   </data>
   <data name="Income" xml:space="preserve">
-		<value />
+		<value>آمدنی</value>
   </data>
   <data name="Expense" xml:space="preserve">
-		<value />
+		<value>اخراجات</value>
   </data>
   <data name="Groups" xml:space="preserve">
-		<value />
+		<value>گروہ</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-		<value />
+		<value>لین دین</value>
   </data>
   <data name="TransactionNumber" xml:space="preserve">
-		<value />
+		<value>لین دین ({0})</value>
   </data>
   <data name="TransactionNumber.Plural" xml:space="preserve">
-		<value />
+		<value>لین دین ({0})</value>
   </data>
   <data name="NoTransactionsTitle" xml:space="preserve">
-		<value />
+		<value>کوئی ٹرانزیکشن نہیں</value>
   </data>
   <data name="NoTransactionsTitle.Filter" xml:space="preserve">
-		<value />
+		<value>کوئی ٹرانزیکشن نہیں ملی</value>
   </data>
   <data name="NoTransactionsDescription" xml:space="preserve">
-		<value />
+		<value>نئے ٹرانزیکشن کو شامل کریں یا فائل سے ٹرانزیکشن درآمد کریں۔</value>
   </data>
   <data name="NoTransactionsDescription.Filter" xml:space="preserve">
-		<value />
+		<value>کوئی ٹرانزیکشن منتخب کردہ فلٹرز سے مماثل نہیں ہے ۔</value>
   </data>
   <data name="SortFirstLast" xml:space="preserve">
-		<value />
+		<value>پہلے سے آخر تک ترتیب دیں</value>
   </data>
   <data name="SortLastFirst" xml:space="preserve">
-		<value />
+		<value>آخر سے پہلےتک ترتیب دیں</value>
   </data>
   <data name="Filters" xml:space="preserve">
-		<value />
+		<value>فلٹر</value>
   </data>
   <data name="ResetFilters.All" xml:space="preserve">
-		<value />
+		<value>تمام فلٹرز کو ختم کریں</value>
   </data>
   <data name="ResetFilters.Overview" xml:space="preserve">
-		<value />
+		<value>خلاصہ فلٹرز کو ختم کریں</value>
   </data>
   <data name="ResetFilters.Groups" xml:space="preserve">
-		<value />
+		<value>گروپ فلٹرز کو ختم کریں</value>
   </data>
   <data name="ResetFilters.Dates" xml:space="preserve">
-		<value />
+		<value>تاریخوں کے فلٹرز کو ختم کریں</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-		<value />
+		<value>کلینڈر</value>
   </data>
   <data name="SelectRange" xml:space="preserve">
 		<value />
@@ -873,5 +877,18 @@
   </data>
   <data name="FolderFlatpakUnavailable.GTK" xml:space="preserve">
 		<value />
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <!--Follow guidelines and/or common practices for your language translations to decide whether the app name should be translated/transliterated-->
+    <value>پیسہ</value>
+  </data>
+  <data name="ExportToFile.All" xml:space="preserve">
+    <value>تمام معلومات برآمد کریں</value>
+  </data>
+  <data name="ExportToFile.Current" xml:space="preserve">
+    <value>موجودہ منظر برآمد کریں</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>اکاؤنٹ کھولنے سے قاصر۔ براہ کرم یقینی بنائیں کہ ایپ کو فائل تک رسائی کی اجازت ہے اور دوبارہ کوشش کریں۔</value>
   </data>
 </root>

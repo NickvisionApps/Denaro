@@ -729,7 +729,11 @@ Novas transações repetidas serão geradas baseadas no novo intervalo.</value>
   <!--WinUI Specific-->
   <!--GTK Specific-->
   <data name="MetadataDescription.GTK" xml:space="preserve">
-		<value>Gerencie suas finanças pessoais</value>
+		<value>— Gerencie várias contas ao mesmo tempo, com uma interface de abas familiar
+— Filtre facilmente as transações por tipo, grupo ou data
+— Crie transações recorrentes com facilidade, como pagamentos que ocorrem todos os meses
+— Transfira dinheiro de uma conta para outra
+— Exporte uma conta como um arquivo CSV e importe um arquivo CSV, OFX ou QIF para adicionar transações em massa a uma conta</value>
   </data>
   <data name="Keywords.GTK" xml:space="preserve">
 		<value>dinheiro;finanças;carteira;moeda;banco;GTK;Nickvision;</value>
@@ -919,5 +923,17 @@ Se a senha for perdida, o PDF ficará inacessível.</value>
   </data>
   <data name="UseNativeDigits.Description" xml:space="preserve">
     <value>Caso deseja usar numerais que são nativos para sua localidade em vez de dígitos latinos.</value>
+  </data>
+  <data name="UnableToOpenAccount" xml:space="preserve">
+    <value>Não foi possível abrir a conta. Por favor, certifique-se de que o app tem permissões para acessar o arquivo e tente novamente.</value>
+  </data>
+  <data name="Receipt.Inaccessible" xml:space="preserve">
+    <value>Recibo (Arquivo Inacessível)</value>
+  </data>
+  <data name="UnableToImport.FileIO" xml:space="preserve">
+    <value>Não foi possível importar informações do arquivo. Por favor, certifique-se de que o app tem permissões para acessar o arquivo e tente novamente.</value>
+  </data>
+  <data name="UnableToImport.NoFileType" xml:space="preserve">
+    <value>Não foi possível importar informações do arquivo. Tipo de arquivo não suportado.</value>
   </data>
 </root>
