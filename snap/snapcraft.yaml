@@ -23,7 +23,7 @@ parts:
   denaro:
     # See 'snapcraft plugins'
     plugin: nil
-    source: .
+    source: https://github.com/NickvisionApps/Denaro.git
     source-tag: '2023.5.0'
     build-packages:
       - blueprint-compiler
