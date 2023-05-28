@@ -155,6 +155,7 @@ public partial class TransactionDialog : Adw.Window
 
     private readonly Gtk.EventControllerKey _descriptionKeyController;
     private readonly Gtk.EventControllerKey _amountKeyController;
+    private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
 
@@ -330,6 +331,15 @@ public partial class TransactionDialog : Adw.Window
                 Validate();
             }
         };
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
+        {
+            Close();
+            return true;
+        })));
+        AddController(_shortcutController);
         //Load Transaction
         gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);

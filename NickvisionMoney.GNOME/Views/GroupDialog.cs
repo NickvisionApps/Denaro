@@ -54,6 +54,7 @@ public partial class GroupDialog : Adw.Window
 
     private readonly Gtk.EventControllerKey _nameKeyController;
     private readonly Gtk.EventControllerKey _descriptionKeyController;
+    private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
 
@@ -129,6 +130,15 @@ public partial class GroupDialog : Adw.Window
         //Apply Button
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
+        {
+            Close();
+            return true;
+        })));
+        AddController(_shortcutController);
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);

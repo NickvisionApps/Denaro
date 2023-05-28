@@ -55,6 +55,7 @@ public partial class TransferDialog : Adw.Window
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
     private readonly Gtk.EventControllerKey _destCurrencyKeyController;
+    private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
 
@@ -109,6 +110,15 @@ public partial class TransferDialog : Adw.Window
         _destCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
         _destinationCurrencyRow.AddController(_destCurrencyKeyController);
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
+        {
+            Close();
+            return true;
+        })));
+        AddController(_shortcutController);
         //Load
         if (_controller.RecentAccounts.Count > 0)
         {
