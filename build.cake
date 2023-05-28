@@ -223,7 +223,7 @@ private void PostPublishGNOME(string outDir, string prefix, string libDir)
     ReplaceTextInFiles($"{servicesDir}{sep}{appId}.service.in", "@PREFIX@", $"{prefix}");
     MoveFile($"{servicesDir}{sep}{appId}.service.in", $"{servicesDir}{sep}{appId}.service");
 
-    FileAppendLines($"{shareDir}{sep}applications{sep}{appId}.desktop" , new string[] { "\nDBusActivatable=true" });
+    //FileAppendLines($"{shareDir}{sep}applications{sep}{appId}.desktop" , new string[] { "DBusActivatable=true" });
 
     foreach (var dir in GetSubDirectories($".{sep}{projectName}.Shared{sep}Docs{sep}yelp"))
     {

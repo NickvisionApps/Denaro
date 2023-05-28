@@ -2,7 +2,7 @@
 Version=1.0
 Name=Denaro
 Comment=Manage your personal finances
-Exec=@EXEC@
+Exec=@EXEC@ %F
 Icon=org.nickvision.money
 Terminal=false
 Type=Application
