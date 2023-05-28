@@ -132,6 +132,7 @@ public partial class GroupDialog : Adw.Window
         //Buttons
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        _deleteButton.SetVisible(_controller.IsEditing);
         _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
