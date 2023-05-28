@@ -60,10 +60,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Occurs when the edit button on the row is clicked
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
-    /// <summary>
-    /// Occurs when the delete button on the row is clicked
-    /// </summary>
-    public event EventHandler<uint>? DeleteTriggered;
 
     private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, Localizer localizer, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
     {

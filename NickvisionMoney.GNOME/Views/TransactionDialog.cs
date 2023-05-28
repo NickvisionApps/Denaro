@@ -150,6 +150,7 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _uploadReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.TextView _notesView;
+    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
@@ -158,6 +159,7 @@ public partial class TransactionDialog : Adw.Window
     private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
+    public event EventHandler? OnDelete;
 
     private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -199,19 +201,16 @@ public partial class TransactionDialog : Adw.Window
                                .Replace("9", nativeDigits[9]);
         }
         _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {idString}");
+        _deleteButton.SetVisible(_controller.IsEditing);
+        _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         _copyButton.SetVisible(_controller.CanCopy);
-        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
-        _applyButton.OnClicked += (sender, e) =>
-        {
-            _controller.Accepted = true;
-            OnApply?.Invoke(this, EventArgs.Empty);
-        };
         _copyButton.OnClicked += (sender, e) =>
         {
-            _controller.Accepted = true;
             _controller.CopyRequested = true;
             OnApply?.Invoke(this, EventArgs.Empty);
         };
+        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         _backButton.OnClicked += (sender, e) =>
         {
             _stack.SetVisibleChildName("main");

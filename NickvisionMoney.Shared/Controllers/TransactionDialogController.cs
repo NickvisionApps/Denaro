@@ -55,10 +55,6 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public bool CanCopy { get; init; }
     /// <summary>
-    /// Whether or not the dialog was accepted (response)
-    /// </summary>
-    public bool Accepted { get; set; }
-    /// <summary>
     /// Whether or not the dialog is editing a transaction
     /// </summary>
     public bool IsEditing { get; init; }
@@ -106,7 +102,6 @@ public class TransactionDialogController : IDisposable
         Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
-        Accepted = false;
         IsEditing = true;
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
@@ -136,7 +131,6 @@ public class TransactionDialogController : IDisposable
         Localizer = localizer;
         Transaction = new Transaction(id);
         CanCopy = false;
-        Accepted = false;
         IsEditing = false;
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
@@ -200,10 +194,7 @@ public class TransactionDialogController : IDisposable
         }
         if (disposing)
         {
-            if (!Accepted)
-            {
-                Transaction.Dispose();
-            }
+            Transaction.Dispose();
         }
         var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
         if (File.Exists(jpgPath))

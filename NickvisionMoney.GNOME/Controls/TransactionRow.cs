@@ -32,7 +32,6 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     [Gtk.Connect] private readonly Adw.ActionRow _row;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
-    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Box _suffixBox;
 
     private GSourceFunc[] _callbacks;
@@ -46,10 +45,6 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// Occurs when the edit button on the row is clicked
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
-    /// <summary>
-    /// Occurs when the delete button on the row is clicked
-    /// </summary>
-    public event EventHandler<uint>? DeleteTriggered;
 
     /// <summary>
     /// Constructs a TransactionRow
@@ -86,8 +81,6 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
             //Buttons Box
             _editButton.SetVisible(_transaction.RepeatFrom <= 0);
             _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
-            _deleteButton.SetVisible(_transaction.RepeatFrom <= 0);
-            _deleteButton.SetSensitive(_transaction.RepeatFrom <= 0);
             return false;
         };
         _callbacks[1] = (x) =>
@@ -103,7 +96,6 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         //Build UI
         builder.Connect(this);
         _editButton.OnClicked += Edit;
-        _deleteButton.OnClicked += Delete;
         _idWidget = new TransactionId(transaction.Id, localizer);
         _row.AddPrefix(_idWidget);
         //Group Settings
@@ -180,11 +172,4 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void Edit(Gtk.Button sender, EventArgs e) => EditTriggered?.Invoke(this, Id);
-
-    /// <summary>
-    /// Occurs when the delete button is clicked
-    /// </summary>
-    /// <param name="sender">Gtk.Button</param>
-    /// <param name="e">EventArgs</param>
-    private void Delete(Gtk.Button sender, EventArgs e) => DeleteTriggered?.Invoke(this, Id);
 }

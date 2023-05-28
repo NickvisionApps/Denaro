@@ -220,8 +220,17 @@ Adw.Window _root {
               spacing: 24;
               halign: center;
               homogeneous: true;
+              margin-start: 24;
               margin-top: 24;
+              margin-end: 24;
               margin-bottom: 24;
+
+              Gtk.Button _deleteButton {
+                valign: center;
+                label: _("Delete");
+
+                styles ["pill", "destructive-action"]
+              }
 
               Gtk.Button _copyButton {
                 valign: center;

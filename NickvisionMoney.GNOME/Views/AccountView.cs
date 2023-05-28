@@ -430,7 +430,6 @@ public partial class AccountView : Adw.Bin
     {
         var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor, _controller.Localizer);
         row.EditTriggered += EditTransaction;
-        row.DeleteTriggered += DeleteTransaction;
         if (index != null)
         {
             _rowCallbacks[2] = (x) =>
@@ -983,58 +982,65 @@ public partial class AccountView : Adw.Bin
             transactionController.Dispose();
             transactionDialog.Close();
         };
-    }
-
-    /// <summary>
-    /// Occurs when the delete transaction item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void DeleteTransaction(object? sender, uint id)
-    {
-        if (_controller.GetIsSourceRepeatTransaction(id))
+        transactionDialog.OnDelete += (sender, e) =>
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
-            dialog.UnsetDestructiveApperance();
-            dialog.UnsetSuggestedApperance();
-            dialog.Present();
-            dialog.OnResponse += async (sender, e) =>
+            transactionDialog.SetVisible(false);
+            if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                if (dialog.Response != MessageDialogResponse.Cancel)
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+                dialog.UnsetDestructiveApperance();
+                dialog.UnsetSuggestedApperance();
+                dialog.Present();
+                dialog.OnResponse += async (sender, e) =>
                 {
-                    //Start Spinner
-                    g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                    //Work
-                    await Task.Run(async () =>
+                    if (dialog.Response != MessageDialogResponse.Cancel)
                     {
-                        try
+                        //Start Spinner
+                        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
+                        //Work
+                        await Task.Run(async () =>
                         {
-                            await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                            Console.WriteLine(ex.StackTrace);
-                        }
-                    });
-                    g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
-                }
-                dialog.Destroy();
-            };
-        }
-        else
-        {
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-            dialog.Present();
-            dialog.OnResponse += async (sender, e) =>
+                            try
+                            {
+                                await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine(ex.StackTrace);
+                            }
+                        });
+                        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                        transactionController.Dispose();
+                        transactionDialog.Close();
+                    }
+                    else
+                    {
+                        transactionDialog.SetVisible(true);
+                    }
+                    dialog.Destroy();
+                };
+            }
+            else
             {
-                if (dialog.Response == MessageDialogResponse.Destructive)
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+                dialog.Present();
+                dialog.OnResponse += async (sender, e) =>
                 {
-                    await _controller.DeleteTransactionAsync(id);
-                }
-                dialog.Destroy();
-            };
-        }
+                    if (dialog.Response == MessageDialogResponse.Destructive)
+                    {
+                        await _controller.DeleteTransactionAsync(id);
+                        transactionController.Dispose();
+                        transactionDialog.Close();
+                    }
+                    else
+                    {
+                        transactionDialog.SetVisible(true);
+                    }
+                    dialog.Destroy();
+                };
+            }
+        };
     }
 
     /// <summary>
