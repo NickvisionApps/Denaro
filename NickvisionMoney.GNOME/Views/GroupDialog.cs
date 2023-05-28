@@ -50,6 +50,7 @@ public partial class GroupDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
+    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _nameKeyController;
@@ -57,6 +58,7 @@ public partial class GroupDialog : Adw.Window
     private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
+    public event EventHandler? OnDelete;
 
     private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -127,9 +129,10 @@ public partial class GroupDialog : Adw.Window
                 }
             }
         };
-        //Apply Button
+        //Buttons
         _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);

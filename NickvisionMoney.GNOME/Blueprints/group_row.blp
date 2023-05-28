@@ -33,36 +33,23 @@ Adw.ActionRow _root {
   
   [suffix]
   Gtk.Box {
-    orientation: vertical;
+    orientation: horizontal;
     valign: center;
     margin-top: 4;
+    spacing: 6;
     
     Gtk.Label _amountLabel {
       halign: end;
       valign: center;
       margin-end: 6;
     }
-    
-    Gtk.Box _buttonsBox {
-      halign: end;
+
+    Gtk.Button _editButton {
+      icon-name: "document-edit-symbolic";
       valign: center;
-      spacing: 6;
-      
-      Gtk.Button _editButton {
-        icon-name: "document-edit-symbolic";
-        valign: center;
-        tooltip-text: _("Edit.GroupRow");
-        
-        styles ["flat"]
-      }
-      
-      Gtk.Button _deleteButton {
-        icon-name: "user-trash-symbolic";
-        valign: center;
-        tooltip-text: _("Delete.GroupRow");
-        
-        styles ["flat"]
-      }
+      tooltip-text: _("Edit.GroupRow");
+
+      styles ["flat"]
     }
   }
 }

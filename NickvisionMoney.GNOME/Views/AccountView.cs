@@ -361,7 +361,6 @@ public partial class AccountView : Adw.Bin
     {
         var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
         row.EditTriggered += EditGroup;
-        row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
         {
@@ -1102,24 +1101,24 @@ public partial class AccountView : Adw.Bin
             g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
-    }
-
-    /// <summary>
-    /// Occurs when the delete group item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void DeleteGroup(object? sender, uint id)
-    {
-        var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
-        dialog.Present();
-        dialog.OnResponse += async (sender, e) =>
+        groupDialog.OnDelete += (sender, e) =>
         {
-            if (dialog.Response == MessageDialogResponse.Destructive)
+            groupDialog.SetVisible(false);
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            dialog.Present();
+            dialog.OnResponse += async (s, ex) =>
             {
-                await _controller.DeleteGroupAsync(id);
-            }
-            dialog.Destroy();
+                if (dialog.Response == MessageDialogResponse.Destructive)
+                {
+                    await _controller.DeleteGroupAsync(id);
+                    groupDialog.Close();
+                }
+                else
+                {
+                    groupDialog.SetVisible(true);
+                }
+                dialog.Destroy();
+            };
         };
     }
 
