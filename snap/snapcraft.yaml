@@ -24,6 +24,7 @@ parts:
     # See 'snapcraft plugins'
     plugin: nil
     source: .
+    source-tag: '2023.5.0'
     build-packages:
       - blueprint-compiler
       - wget
