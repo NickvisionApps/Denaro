@@ -29,6 +29,7 @@ parts:
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
       chmod +x ./dotnet-install.sh
       ./dotnet-install.sh --channel 7.0
+      sed -i 's|Icon=org.nickvision.money|Icon=snap.denaro.org.nickvision.money|' NickvisionMoney.Shared/org.nickvision.money.desktop.in
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
@@ -36,15 +37,19 @@ parts:
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/usr --ui=gnome --self-contained
       dotnet cake --target=Install --destdir=$CRAFT_PART_INSTALL
+      cp -r $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/usr
       mkdir -p $CRAFT_PART_INSTALL/meta/gui
       mv $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/meta/gui/
+      for i in `find $CRAFT_PART_INSTALL/meta/gui/icons -name "*.svg" -o -name "*.png"`; do
+        mv $i "`dirname $i`/snap.$CRAFT_PROJECT_NAME.`basename $i`"
+      done
     parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
   symbolic-fix:
     after: [denaro]
     plugin: nil
     override-prime:
       set -eux
-      cp -r $CRAFT_STAGE/meta/gui/icons $CRAFT_PRIME/usr/share/
+      mv $CRAFT_STAGE/usr/icons $CRAFT_PRIME/usr/share/
 apps:
   denaro:
     command: usr/bin/org.nickvision.money
