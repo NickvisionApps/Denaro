@@ -1,0 +1,25 @@
+diff -Naur a/NickvisionMoney.Shared/org.nickvision.money.desktop.in b/NickvisionMoney.Shared/org.nickvision.money.desktop.in
+--- a/NickvisionMoney.Shared/org.nickvision.money.desktop.in	2023-05-29 20:10:18.596480871 +0530
++++ b/NickvisionMoney.Shared/org.nickvision.money.desktop.in	2023-05-30 01:22:49.204730305 +0530
+@@ -2,8 +2,8 @@
+ Version=1.0
+ Name=Denaro
+ Comment=Manage your personal finances
+-Exec=@EXEC@
+-Icon=org.nickvision.money
++Exec=denaro
++Icon=snap.denaro.org.nickvision.money
+ Terminal=false
+ Type=Application
+ MimeType=application/x-nmoney
+diff -Naur a/NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in b/NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in
+--- a/NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in	2023-05-29 20:10:18.596480871 +0530
++++ b/NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in	2023-05-30 01:22:02.823825383 +0530
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <component type="desktop-application">
+   <id>org.nickvision.money</id>
++  <icon type="stock">snap.denaro.org.nickvision.money</icon>
+   <metadata_license>CC0-1.0</metadata_license>
+   <project_license>MIT</project_license>
+   <name>Denaro</name>
