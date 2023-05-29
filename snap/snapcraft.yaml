@@ -48,7 +48,6 @@ parts:
 apps:
   denaro:
     command: usr/bin/org.nickvision.money
-    desktop: usr/share/applications/org.nickvision.money.desktop
     extensions: [gnome]
     common-id: org.nickvision.money
     plugs:
