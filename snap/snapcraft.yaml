@@ -37,7 +37,7 @@ parts:
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/usr --ui=gnome --self-contained
       dotnet cake --target=Install --destdir=$CRAFT_PART_INSTALL
-      cp -r $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/usr
+      cp -r $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/meta
       mkdir -p $CRAFT_PART_INSTALL/meta/gui
       mv $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/meta/gui/
       for i in `find $CRAFT_PART_INSTALL/meta/gui/icons -name "*.svg" -o -name "*.png"`; do
@@ -49,7 +49,7 @@ parts:
     plugin: nil
     override-prime:
       set -eux
-      mv $CRAFT_STAGE/usr/icons $CRAFT_PRIME/usr/share/
+      mv $CRAFT_STAGE/meta/icons $CRAFT_PRIME/usr/share/
 apps:
   denaro:
     command: usr/bin/org.nickvision.money
