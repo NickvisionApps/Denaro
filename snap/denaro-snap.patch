@@ -8,7 +8,7 @@ diff -Naur a/NickvisionMoney.Shared/org.nickvision.money.desktop.in b/Nickvision
 -Exec=@EXEC@
 -Icon=org.nickvision.money
 +Exec=denaro
-+Icon=snap.denaro.org.nickvision.money
++Icon=denaro
  Terminal=false
  Type=Application
  MimeType=application/x-nmoney
@@ -19,7 +19,7 @@ diff -Naur a/NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in b/Nickv
  <?xml version="1.0" encoding="UTF-8"?>
  <component type="desktop-application">
    <id>org.nickvision.money</id>
-+  <icon type="stock">snap.denaro.org.nickvision.money</icon>
++  <icon type="stock">denaro</icon>
    <metadata_license>CC0-1.0</metadata_license>
    <project_license>MIT</project_license>
    <name>Denaro</name>
