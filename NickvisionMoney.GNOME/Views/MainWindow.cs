@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -215,7 +216,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="controller">The MainWindowController</param>
     /// <param name="application">The Adw.Application</param>
-    public MainWindow(MainWindowController controller, Adw.Application application) : this(Builder.FromFile("window.ui", controller.Localizer, (s) => s == "About" ? string.Format(controller.Localizer[s], controller.AppInfo.ShortName) : controller.Localizer[s]), controller, application)
+    public MainWindow(MainWindowController controller, Adw.Application application) : this(Builder.FromFile("window.ui"), controller, application)
     {
     }
 
@@ -244,14 +245,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             var uriLauncher = gtk_uri_launcher_new("help:denaro/import-export");
-            toast.SetButtonLabel(_controller.Localizer["Help"]);
+            toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
         }
         else if (e.Action == "open-export")
         {
             var file = Gio.FileHelper.NewForPath(e.ActionParam);
             var fileLauncher = gtk_file_launcher_new(file.Handle);
-            toast.SetButtonLabel(_controller.Localizer["Open"]);
+            toast.SetButtonLabel(_("Open"));
             toast.OnButtonClicked += (sender, ex) => gtk_file_launcher_launch(fileLauncher, 0, 0, (source, res, data) => { }, 0);
         }
         _toastOverlay.AddToast(toast);
@@ -309,7 +310,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     public async Task<string?> AccountLoginAsync(string title)
     {
         var tcs = new TaskCompletionSource<string?>();
-        var passwordDialog = new PasswordDialog(this, title, _controller.Localizer, tcs);
+        var passwordDialog = new PasswordDialog(this, title, tcs);
         passwordDialog.SetIconName(_controller.AppInfo.ID);
         passwordDialog.Present();
         return await tcs.Task;
@@ -365,10 +366,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _accountPopover.Popdown();
         var filter = Gtk.FileFilter.New();
-        filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
+        filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["NewAccount"]);
+        gtk_file_dialog_set_title(saveFileDialog, _("New Account"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
         gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
@@ -380,7 +381,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 var path = g_file_get_path(fileHandle);
                 if (_controller.IsAccountOpen(path))
                 {
-                    _toastOverlay.AddToast(Adw.Toast.New(_controller.Localizer["UnableToOverride"]));
+                    _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an opened account.")));
                 }
                 else
                 {
@@ -404,11 +405,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _accountPopover.Popdown();
         var filter = Gtk.FileFilter.New();
-        filter.SetName($"{_controller.Localizer["NickvisionMoneyAccount"]} (*.nmoney)");
+        filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         filter.AddPattern("*.NMONEY");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
+        gtk_file_dialog_set_title(openFileDialog, _("Open Account"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
         gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
@@ -505,7 +506,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
-        var builder = Builder.FromFile("shortcuts_dialog.ui", _controller.Localizer);
+        var builder = Builder.FromFile("shortcuts_dialog.ui");
         var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_root");
         shortcutsWindow.SetTransientFor(this);
         shortcutsWindow.SetIconName(_controller.AppInfo.ID);
@@ -532,11 +533,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         dialog.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
         dialog.SetIssueUrl(_controller.AppInfo.IssueTracker.ToString());
         dialog.SetSupportUrl(_controller.AppInfo.SupportUrl.ToString());
-        dialog.AddLink(_controller.Localizer["MatrixChat"], "https://matrix.to/#/#nickvision:matrix.org");
-        dialog.SetDevelopers(_controller.Localizer["Developers", "Credits"].Split(Environment.NewLine));
-        dialog.SetDesigners(_controller.Localizer["Designers", "Credits"].Split(Environment.NewLine));
-        dialog.SetArtists(_controller.Localizer["Artists", "Credits"].Split(Environment.NewLine));
-        dialog.SetTranslatorCredits((string.IsNullOrEmpty(_controller.Localizer["Translators", "Credits"]) ? "" : _controller.Localizer["Translators", "Credits"]));
+        dialog.AddLink(_("Matrix Chat"), "https://matrix.to/#/#nickvision:matrix.org");
+        dialog.SetDevelopers(_("Nicholas Logozzo {0}\nContributors on GitHub ❤️ {1}", "https://github.com/nlogozzo", "https://github.com/NickvisionApps/Denaro/graphs/contributors").Split("\n"));
+        dialog.SetDesigners(_("Nicholas Logozzo {0}\nFyodor Sobolev {1}\nDaPigGuy {2}", "https://github.com/nlogozzo", "https://github.com/fsobolev", "https://github.com/DaPigGuy").Split("\n"));
+        dialog.SetArtists(_("David Lapshin {0}\nTobias Bernard {1}", "https://github.com/daudix-UFO", "https://github.com/bertob").Split("\n"));
+        dialog.SetTranslatorCredits(_("translator-credits"));
         dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
         dialog.Present();
     }
@@ -605,7 +606,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="onStartScreen">Whether the row will appear on start screen or in popover</param>
     private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
-        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen, _controller.Localizer);
+        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen);
         row.OnOpenAccount += async (sender, e) =>
         {
             _accountPopover.Popdown();

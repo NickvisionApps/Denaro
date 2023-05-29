@@ -1,5 +1,4 @@
-﻿using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
+﻿using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 
@@ -33,10 +32,6 @@ public class AccountSettingsDialogController
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
     /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
-    /// <summary>
     /// The metadata represented by the controller
     /// </summary>
     public AccountMetadata Metadata { get; init; }
@@ -59,10 +54,8 @@ public class AccountSettingsDialogController
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
     /// <param name="needsSetup">Whether or not the dialog should be used for necessary account setup</param>
     /// <param name="isEncrypted">Whether or not the account is encrypted</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, bool isEncrypted, Localizer localizer)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, bool isEncrypted)
     {
-        Localizer = localizer;
         Metadata = (AccountMetadata)metadata.Clone();
         NeedsSetup = needsSetup;
         IsEncrypted = isEncrypted;

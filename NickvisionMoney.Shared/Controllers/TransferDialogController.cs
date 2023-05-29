@@ -35,10 +35,6 @@ public class TransferDialogController
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
     /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
-    /// <summary>
     /// The transfer represented by the controller
     /// </summary>
     public Transfer Transfer { get; init; }
@@ -79,13 +75,11 @@ public class TransferDialogController
     /// <param name="sourceAmount">The amount of the source account</param>
     /// <param name="recentAccounts">The recent accounts of the app</param>
     /// <param name="culture">The CultureInfo to use for the amount string</param>
-    /// <param name="localizer">The Localizer for the app</param>
-    internal TransferDialogController(Transfer transfer, decimal sourceAmount, List<RecentAccount> recentAccounts, CultureInfo culture, Localizer localizer)
+    internal TransferDialogController(Transfer transfer, decimal sourceAmount, List<RecentAccount> recentAccounts, CultureInfo culture)
     {
         _sourceAmount = sourceAmount;
         _previousDestPath = null;
         _previousDestMetadata = null;
-        Localizer = localizer;
         Transfer = transfer;
         RecentAccounts = new List<RecentAccount>();
         foreach (var account in recentAccounts)

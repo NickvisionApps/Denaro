@@ -1,8 +1,8 @@
 using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -40,8 +40,7 @@ public partial class RecentAccountRow : Adw.ActionRow
     /// <param name="account">The RecentAccount model</param>
     /// <param name="colorString">The color string of the recent account</param>
     /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
-    /// <param name="localizer">The Localizer for the app</param>
-    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen, Localizer localizer) : base(builder.GetPointer("_root"), false)
+    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen) : base(builder.GetPointer("_root"), false)
     {
         builder.Connect(this);
         SetTitle(account.Name);
@@ -55,7 +54,7 @@ public partial class RecentAccountRow : Adw.ActionRow
             var sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Horizontal);
             sizeGroup.AddWidget(_tagArea);
             sizeGroup.AddWidget(_tagLabel);
-            _tagLabel.SetLabel($"<span weight=\"bold\" size=\"9pt\">{localizer["AccountType", account.Type.ToString()]}</span>");
+            _tagLabel.SetLabel($"<span weight=\"bold\" size=\"9pt\">{_(account.Type.ToString())}</span>");
             _tagLabel.AddCssClass(luma > 0.5 ? "tag-dark" : "tag-light");
             _tagArea.SetDrawFunc(DrawTag);
         }
@@ -81,8 +80,7 @@ public partial class RecentAccountRow : Adw.ActionRow
     /// <param name="account">The RecentAccount model</param>
     /// <param name="colorString">The color string of the recent account</param>
     /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
-    /// <param name="localizer">The Localizer for the app</param>
-    public RecentAccountRow(RecentAccount account, string colorString, bool onStartScreen, Localizer localizer) : this(Builder.FromFile("recent_account_row.ui", localizer), account, colorString, onStartScreen, localizer)
+    public RecentAccountRow(RecentAccount account, string colorString, bool onStartScreen) : this(Builder.FromFile("recent_account_row.ui"), account, colorString, onStartScreen)
     {
     }
 

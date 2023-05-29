@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -78,7 +79,7 @@ public partial class GroupDialog : Adw.Window
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _titleLabel.SetLabel($"{_controller.Localizer["Group"]} - {idString}");
+        _titleLabel.SetLabel($"{_("Group")} - {idString}");
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
@@ -127,7 +128,7 @@ public partial class GroupDialog : Adw.Window
             }
         };
         //Apply Button
-        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
@@ -144,7 +145,7 @@ public partial class GroupDialog : Adw.Window
     /// </summary>
     /// <param name="controller">GroupDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public GroupDialog(GroupDialogController controller, Gtk.Window parent) : this(Builder.FromFile("group_dialog.ui", controller.Localizer), controller, parent)
+    public GroupDialog(GroupDialogController controller, Gtk.Window parent) : this(Builder.FromFile("group_dialog.ui"), controller, parent)
     {
     }
 
@@ -156,7 +157,7 @@ public partial class GroupDialog : Adw.Window
         var color = gtk_color_dialog_button_get_rgba(_colorButton.Handle);
         var checkStatus = _controller.UpdateGroup(_nameRow.GetText(), _descriptionRow.GetText(), gdk_rgba_to_string(ref color));
         _nameRow.RemoveCssClass("error");
-        _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
+        _nameRow.SetTitle(_("Name"));
         if (checkStatus == GroupCheckStatus.Valid)
         {
             _applyButton.SetSensitive(true);
@@ -166,12 +167,12 @@ public partial class GroupDialog : Adw.Window
             if (checkStatus == GroupCheckStatus.EmptyName)
             {
                 _nameRow.AddCssClass("error");
-                _nameRow.SetTitle(_controller.Localizer["Name", "Empty"]);
+                _nameRow.SetTitle(_("Name (Empty)"));
             }
             else if (checkStatus == GroupCheckStatus.NameExists)
             {
                 _nameRow.AddCssClass("error");
-                _nameRow.SetTitle(_controller.Localizer["Name", "Exists"]);
+                _nameRow.SetTitle(_("Name (Exists)"));
             }
             _applyButton.SetSensitive(false);
         }

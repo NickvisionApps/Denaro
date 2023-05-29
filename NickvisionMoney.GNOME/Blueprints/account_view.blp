@@ -2,32 +2,32 @@ using Gtk 4.0;
 using Adw 1;
 
 menu actionsMenu {
-  item(_("TransferMoney"), "account.transferMoney")
+  item(_("Transfer Money"), "account.transferMoney")
   
   section {
-    item(_("ImportFromFile"), "account.importFromFile")
+    item(_("Import from File"), "account.importFromFile")
 
     submenu {
-      label: _("ExportToFile");
+      label: _("Export to File");
       
       submenu {
         label: "CSV";
         
-        item(_("ExportToFile.All"), "account.exportToCSVAll")
-        item(_("ExportToFile.Current"), "account.exportToCSVCurrent")
+        item(_("Export All Information"), "account.exportToCSVAll")
+        item(_("Export Current View"), "account.exportToCSVCurrent")
       }
 
       submenu {
         label: "PDF";
 
-        item(_("ExportToFile.All"), "account.exportToPDFAll")
-        item(_("ExportToFile.Current"), "account.exportToPDFCurrent")
+        item(_("Export All Information"), "account.exportToPDFAll")
+        item(_("Export Current View"), "account.exportToPDFCurrent")
       }
     }
   }
   
   section {
-    item(_("AccountSettings"), "account.accountSettings")
+    item(_("Account Settings"), "account.accountSettings")
   }
 }
 
@@ -48,11 +48,11 @@ Adw.Bin _root {
         margin-bottom: 10;
         
         Gtk.SearchEntry _searchDescriptionEntry {
-          placeholder-text: _("SearchDescription.Placeholder");
+          placeholder-text: _("Search by description");
         }
         
         Adw.PreferencesGroup {
-          title: _("Overview.Today");
+          title: _("Today's Overview");
           header-suffix: Gtk.Box {
             orientation: horizontal;
             spacing: 6;
@@ -62,7 +62,7 @@ Adw.Bin _root {
             
               Adw.ButtonContent {
                 icon-name: "document-properties-symbolic";
-                label: _("AccountActions");
+                label: _("Actions");
               }
             
               styles ["flat"]
@@ -70,7 +70,7 @@ Adw.Bin _root {
             
             Gtk.Button _resetOverviewFilterButton {
               icon-name: "larger-brush-symbolic";
-              tooltip-text: _("ResetFilters.Overview");
+              tooltip-text: _("Reset Overview Filters");
               
               styles ["flat"]
             }
@@ -130,7 +130,7 @@ Adw.Bin _root {
           title: _("Groups");
           header-suffix: Gtk.Box {
             Gtk.ToggleButton _toggleGroupsButton {
-              tooltip-text: _("ToggleGroups.Tooltip");
+              tooltip-text: _("Toggle Groups Visibility");
               
               Adw.ButtonContent _toggleGroupsButtonContent {
                 icon-name: "view-conceal-symbolic";
@@ -141,12 +141,12 @@ Adw.Bin _root {
             }
             
             Gtk.Button {
-              tooltip-text: _("NewGroup.Tooltip");
+              tooltip-text: _("New Group (Ctrl+G)");
               action-name: "account.newGroup";
               
               Adw.ButtonContent {
                 icon-name: "list-add-symbolic";
-                label: _("New");
+                label: C_("Group", "New");
               }
             
               styles ["flat"]
@@ -154,7 +154,7 @@ Adw.Bin _root {
             
             Gtk.Button _resetGroupsFilterButton {
               icon-name: "larger-brush-symbolic";
-              tooltip-text: _("ResetFilters.Groups");
+              tooltip-text: _("Reset Groups Filters");
             
               styles ["flat"]
             }
@@ -171,7 +171,7 @@ Adw.Bin _root {
           title: _("Calendar");
           header-suffix: Gtk.Button _resetCalendarFilterButton {
             icon-name: "larger-brush-symbolic";
-            tooltip-text: _("ResetFilters.Dates");
+            tooltip-text: _("Reset Dates Filters");
             
             styles ["flat"]
           };
@@ -185,12 +185,12 @@ Adw.Bin _root {
         
         Adw.PreferencesGroup {
           Adw.ExpanderRow _rangeExpander {
-            title: _("SelectRange");
+            title: _("Select Range");
             enable-expansion: false;
             show-enable-switch: true;
             
             Adw.ActionRow {
-              title: _("Start.DateRange");
+              title: C_("DateRange", "Start");
               
               [suffix]
               Gtk.Box {
@@ -215,7 +215,7 @@ Adw.Bin _root {
             }
             
             Adw.ActionRow {
-              title: _("End.DateRange");
+              title: C_("DateRange", "End");
               
               [suffix]
               Gtk.Box {
@@ -279,13 +279,13 @@ Adw.Bin _root {
                   
                   Gtk.ToggleButton _sortFirstToLastButton {
                     icon-name: "view-sort-descending-symbolic";
-                    tooltip-text: _("SortFirstLast");
+                    tooltip-text: _("Sort From First To Last");
                     active: bind _sortLastToFirstButton.active inverted bidirectional;
                   }
                   
                   Gtk.ToggleButton _sortLastToFirstButton {
                     icon-name: "view-sort-ascending-symbolic";
-                    tooltip-text: _("SortLastFirst");
+                    tooltip-text: _("Sort From Last To First");
                   }
                   
                   styles ["linked"]
@@ -297,7 +297,7 @@ Adw.Bin _root {
           Gtk.ScrolledWindow _transactionsScroll {
             width-request: 300;
             height-request: 360;
-            min-content-height: 360;      
+            min-content-height: 360;
             vexpand: true;
             visible: false;
             
@@ -326,7 +326,7 @@ Adw.Bin _root {
         
         [overlay]
         Gtk.Button {
-          tooltip-text: _("NewTransaction.Tooltip");
+          tooltip-text: _("New Transaction (Ctrl+Shift+N)");
           action-name: "account.newTransaction";
           halign: center;
           valign: end;
@@ -334,7 +334,7 @@ Adw.Bin _root {
           
           Adw.ButtonContent {
             icon-name: "list-add-symbolic";
-            label: _("New");
+            label: C_("Transaction", "New");
           }
           
           styles ["pill", "suggested-action"] 

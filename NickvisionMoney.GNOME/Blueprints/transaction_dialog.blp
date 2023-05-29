@@ -54,7 +54,7 @@ Adw.Window _root {
 
                 Adw.PreferencesGroup {
                   Adw.EntryRow _descriptionRow {
-                    title: _("Description.Field");
+                    title: _("Description");
                     input-hints: spellcheck;
                     activates-default: true;
                   }
@@ -65,7 +65,7 @@ Adw.Window _root {
 
                   Adw.Bin {
                     Adw.EntryRow _amountRow {
-                      title: _("Amount.Field");
+                      title: _("Amount");
                       input-purpose: number;
                       activates-default: true;
                       hexpand: true;
@@ -99,7 +99,7 @@ Adw.Window _root {
 
                 Adw.PreferencesGroup {
                   Adw.ActionRow {
-                    title: _("Date.Field");
+                    title: _("Date");
                     activatable-widget: _dateCalendarButton;
 
                     [suffix]
@@ -125,7 +125,7 @@ Adw.Window _root {
                       Gtk.MenuButton _repeatEndDateCalendarButton {
                         valign: center;
                         direction: none;
-                        tooltip-text: _("TransactionRepeatEndDate.Field");
+                        tooltip-text: _("Repeat End Date");
                         popover: Gtk.Popover {
                           Gtk.Box {
                             orientation: vertical;
@@ -136,7 +136,7 @@ Adw.Window _root {
 
                               child: Adw.ButtonContent {
                                 icon-name: "larger-brush-symbolic";
-                                label: _("TransactionRepeatEndDate.Clear");
+                                label: _("Clear End Date");
                               };
                             }
 
@@ -152,9 +152,9 @@ Adw.Window _root {
                   }
 
                   Adw.ComboRow _repeatIntervalRow {
-                    title: _("TransactionRepeatInterval.Field");
+                    title: _("Repeat Interval");
                     model: Gtk.StringList {
-                      strings [_("RepeatInterval.Never"), _("RepeatInterval.Daily"), _("RepeatInterval.Weekly"), _("RepeatInterval.Biweekly"), _("RepeatInterval.Monthly"), _("RepeatInterval.Quarterly"), _("RepeatInterval.Yearly"), _("RepeatInterval.Biyearly")]
+                      strings [_("Never"), _("Daily"), _("Weekly"), _("Biweekly"), _("Monthly"), _("Quarterly"), _("Yearly"), _("Biyearly")]
                     };
                   }
                 }
@@ -163,12 +163,12 @@ Adw.Window _root {
                   hexpand: true;
 
                   Adw.ComboRow _groupRow {
-                    title: _("Group.Field");
+                    title: _("Group");
                     title-lines: 1;
                   }
 
                   Adw.ActionRow {
-                    title: _("Color.Field");
+                    title: _("Color");
 
                     [suffix]
                     Gtk.ColorDialogButton _colorButton {
@@ -181,7 +181,7 @@ Adw.Window _root {
                     Gtk.DropDown _colorDropDown {
                       valign: center;
                       model: Gtk.StringList {
-                        strings [_("Color.UseGroup"), _("Color.UseUnique")]
+                        strings [_("Use group color"), _("Use unique color")]
                       };
 
                       styles ["color-dropdown"]
@@ -194,7 +194,7 @@ Adw.Window _root {
 
                   Adw.ActionRow {
                     title: _("Extras");
-                    subtitle: _("Extras.Description");
+                    subtitle: _("Manage extra fields of the transaction.");
 
                     [prefix]
                     Gtk.Image {
@@ -225,7 +225,7 @@ Adw.Window _root {
 
               Gtk.Button _copyButton {
                 valign: center;
-                label: _("MakeCopy");
+                label: _("Make a Copy");
 
                 styles ["pill"]
               }
@@ -258,7 +258,7 @@ Adw.Window _root {
 
             Adw.PreferencesGroup {
               Adw.ActionRow _receiptRow {
-                title: _("Receipt.Field");
+                title: _("Receipt");
 
                 [suffix]
                 Gtk.Box {
@@ -302,8 +302,8 @@ Adw.Window _root {
             }
 
             Adw.PreferencesGroup {
-              title: _("Notes.Field");
-              description: _("Notes.Placeholder");
+              title: _("Notes");
+              description: _("Enter notes here");
 
               Gtk.TextView _notesView {
                 vexpand: true;

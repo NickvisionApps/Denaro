@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -28,10 +29,6 @@ public class AccountViewController : IDisposable
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
     /// <summary>
     /// The number of filtered transactions being shown
     /// </summary>
@@ -155,10 +152,9 @@ public class AccountViewController : IDisposable
     /// Creates an AccountViewController
     /// </summary>
     /// <param name="path">The path of the account</param>
-    /// <param name="localizer">The Localizer of the app</param>
     /// <param name="notificationSent">The notification sent event</param>
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
-    internal AccountViewController(string path, Localizer localizer, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
+    internal AccountViewController(string path, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler? recentAccountsChanged)
     {
         _isOpened = false;
         _disposed = false;
@@ -166,7 +162,6 @@ public class AccountViewController : IDisposable
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
-        Localizer = localizer;
         FilteredTransactionsCount = 0;
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
@@ -476,7 +471,7 @@ public class AccountViewController : IDisposable
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
             //Groups
             GroupRows.Clear();
-            foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == Localizer["Ungrouped"] ? " " : x.Value.Name))
+            foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
             {
                 _filters.Add((int)pair.Value.Id, true);
                 GroupRows.Add(pair.Value.Id, UICreateGroupRow!(pair.Value, null));
@@ -501,20 +496,20 @@ public class AccountViewController : IDisposable
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, _account.IsEncrypted, Localizer);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, _account.IsEncrypted);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a new transaction
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
-    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(_account.NextAvailableTransactionId, _account.Groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
+    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(_account.NextAvailableTransactionId, _account.Groups, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
 
     /// <summary>
     /// Creates a new TransactionDialogController for an existing transaction
     /// </summary>
     /// <param name="id">The id of the existing transaction</param>
     /// <returns>The TransactionDialogController for the existing transaction</returns>
-    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Groups, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
+    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Groups, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a copy transaction
@@ -526,7 +521,7 @@ public class AccountViewController : IDisposable
         var toCopy = new Transaction(_account.NextAvailableTransactionId)
         {
             Date = source.Date,
-            Description = $"{source.Description} {Localizer["Copy", "Transaction"]}",
+            Description = $"{source.Description} {_("(Copy)")}",
             Type = source.Type,
             RepeatInterval = source.RepeatInterval,
             Amount = source.Amount,
@@ -537,7 +532,7 @@ public class AccountViewController : IDisposable
             RepeatFrom = source.RepeatFrom,
             RepeatEndDate = source.RepeatEndDate
         };
-        return new TransactionDialogController(toCopy, _account.Groups, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString, Localizer);
+        return new TransactionDialogController(toCopy, _account.Groups, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
     }
 
     /// <summary>
@@ -551,7 +546,7 @@ public class AccountViewController : IDisposable
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(_account.NextAvailableGroupId, existingNames, GroupDefaultColor, Localizer);
+        return new GroupDialogController(_account.NextAvailableGroupId, existingNames, GroupDefaultColor);
     }
 
     /// <summary>
@@ -566,14 +561,14 @@ public class AccountViewController : IDisposable
         {
             existingNames.Add(pair.Value.Name);
         }
-        return new GroupDialogController(_account.Groups[id], existingNames, GroupDefaultColor, Localizer);
+        return new GroupDialogController(_account.Groups[id], existingNames, GroupDefaultColor);
     }
 
     /// <summary>
     /// Creates a new TransferDialogController
     /// </summary>
     /// <returns>The new TransferDialogController</returns>
-    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString, Localizer);
+    public TransferDialogController CreateTransferDialogController() => new TransferDialogController(new Transfer(AccountPath, AccountTitle), _account.TodayTotal, Configuration.Current.RecentAccounts, CultureForNumberString);
 
     /// <summary>
     /// Occurs when the configuration is changed
@@ -594,11 +589,11 @@ public class AccountViewController : IDisposable
         _account.SetPassword(password);
         if (string.IsNullOrEmpty(password))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordRemoved"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was removed."), NotificationSeverity.Success));
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["PasswordUpdated"], NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was changed."), NotificationSeverity.Success));
         }
     }
 
@@ -834,7 +829,7 @@ public class AccountViewController : IDisposable
     public async Task AddGroupAsync(Group group)
     {
         await _account.AddGroupAsync(group);
-        var groups = _account.Groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name).ToList();
+        var groups = _account.Groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).ToList();
         _filters.Add((int)group.Id, true);
         GroupRows.Add(group.Id, UICreateGroupRow!(group, groups.IndexOf(group)));
     }
@@ -881,7 +876,7 @@ public class AccountViewController : IDisposable
     /// <param name="transfer">The transfer to send</param>
     public async Task SendTransferAsync(Transfer transfer)
     {
-        var newTransaction = await _account.SendTransferAsync(transfer, string.Format(Localizer["Transfer", "To"], transfer.DestinationAccountName));
+        var newTransaction = await _account.SendTransferAsync(transfer, _("Transfer To {0}", transfer.DestinationAccountName));
         var transactions = _account.Transactions.Keys.ToList();
         transactions.Sort((a, b) =>
         {
@@ -909,7 +904,7 @@ public class AccountViewController : IDisposable
     /// <param name="transfer">The transfer to receive</param>
     public async Task ReceiveTransferAsync(Transfer transfer)
     {
-        var newTransaction = await _account.ReceiveTransferAsync(transfer, string.Format(Localizer["Transfer", "From"], transfer.SourceAccountName));
+        var newTransaction = await _account.ReceiveTransferAsync(transfer, _("Transfer From {0}", transfer.SourceAccountName));
         var transactions = _account.Transactions.Keys.ToList();
         transactions.Sort((a, b) =>
         {
@@ -943,7 +938,7 @@ public class AccountViewController : IDisposable
         }
         catch
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport", "FileIO"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
             return;
         }
         foreach (var pair in _account.Groups)
@@ -964,11 +959,11 @@ public class AccountViewController : IDisposable
             }
             FilterUIUpdate();
             SortUIUpdate();
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(importedIds.Count == 1 ? string.Format(Localizer["Imported"], importedIds.Count) : string.Format(Localizer["Imported", true], importedIds.Count), NotificationSeverity.Success, importedIds.Count == 0 ? "help-import" : ""));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Imported {0} transaction from file.", "Imported {0} transactions from file.", importedIds.Count, importedIds.Count), NotificationSeverity.Success, importedIds.Count == 0 ? "help-import" : ""));
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToImport", "NoFileType"], NotificationSeverity.Error, "help-import"));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Unsupported file type."), NotificationSeverity.Error, "help-import"));
         }
     }
 
@@ -981,11 +976,11 @@ public class AccountViewController : IDisposable
     {
         if (_account.ExportToCSV(path, exportMode, _filteredIds!))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported account to file successfully."), NotificationSeverity.Success, "open-export", path));
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to export account to file."), NotificationSeverity.Error));
         }
     }
 
@@ -999,11 +994,11 @@ public class AccountViewController : IDisposable
     {
         if (_account.ExportToPDF(path, exportMode, _filteredIds!, password))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Exported"], NotificationSeverity.Success, "open-export", path));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported account to file successfully."), NotificationSeverity.Success, "open-export", path));
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToExport"], NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to export account to file."), NotificationSeverity.Error));
         }
     }
 

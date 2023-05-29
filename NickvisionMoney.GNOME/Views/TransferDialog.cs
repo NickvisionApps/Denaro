@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -114,7 +115,7 @@ public partial class TransferDialog : Adw.Window
         {
             foreach (var recentAccount in _controller.RecentAccounts)
             {
-                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, _controller.Localizer);
+                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false);
                 row.OnOpenAccount += (sender, e) =>
                 {
                     _recentAccountsPopover.Popdown();
@@ -144,7 +145,7 @@ public partial class TransferDialog : Adw.Window
     /// </summary>
     /// <param name="controller">TransferDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public TransferDialog(TransferDialogController controller, Gtk.Window parent) : this(Builder.FromFile("transfer_dialog.ui", controller.Localizer), controller, parent)
+    public TransferDialog(TransferDialogController controller, Gtk.Window parent) : this(Builder.FromFile("transfer_dialog.ui"), controller, parent)
     {
     }
 
@@ -155,11 +156,11 @@ public partial class TransferDialog : Adw.Window
     {
         var checkStatus = _controller.UpdateTransfer(_destinationAccountRow.GetSubtitle() ?? "", _destinationPasswordRow.GetText(), _amountRow.GetText(), _sourceCurrencyRow.GetText(), _destinationCurrencyRow.GetText());
         _destinationAccountRow.RemoveCssClass("error");
-        _destinationAccountRow.SetTitle(_controller.Localizer["DestinationAccount", "Field"]);
+        _destinationAccountRow.SetTitle(_("Destination Account"));
         _destinationPasswordRow.RemoveCssClass("error");
-        _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Field"]);
+        _destinationPasswordRow.SetTitle(_("Destination Account Password"));
         _amountRow.RemoveCssClass("error");
-        _amountRow.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _amountRow.SetTitle(_("Amount"));
         _amountRow.SetVisible(true);
         _sourceCurrencyRow.RemoveCssClass("error");
         _sourceCurrencyRow.SetTitle(_controller.SourceCurrencyCode);
@@ -175,26 +176,26 @@ public partial class TransferDialog : Adw.Window
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidDestPath))
             {
                 _destinationAccountRow.AddCssClass("error");
-                _destinationAccountRow.SetTitle(_controller.Localizer["DestinationAccount", "Invalid"]);
+                _destinationAccountRow.SetTitle(_("Destination Account (Invalid)"));
                 _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountRequiresPassword))
             {
                 _destinationPasswordRow.SetVisible(true);
                 _destinationPasswordRow.AddCssClass("error");
-                _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Required"]);
+                _destinationPasswordRow.SetTitle(_("Destination Account Password (Required)"));
                 _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.DestAccountPasswordInvalid))
             {
                 _destinationPasswordRow.AddCssClass("error");
-                _destinationPasswordRow.SetTitle(_controller.Localizer["DestinationPassword", "Invalid"]);
+                _destinationPasswordRow.SetTitle(_("Destination Account Password (Invalid)"));
                 _amountRow.SetVisible(false);
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidAmount))
             {
                 _amountRow.AddCssClass("error");
-                _amountRow.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+                _amountRow.SetTitle(_("Amount (Invalid)"));
             }
             if (checkStatus.HasFlag(TransferCheckStatus.InvalidConversionRate))
             {
@@ -203,7 +204,7 @@ public partial class TransferDialog : Adw.Window
                 _sourceCurrencyRow.SetTitle(_controller.SourceCurrencyCode);
                 _destinationCurrencyRow.AddCssClass("error");
                 _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode!);
-                _conversionResultLabel.SetText(_controller.Localizer["NotAvailable"]);
+                _conversionResultLabel.SetText(_("N/A"));
             }
             _transferButton.SetSensitive(false);
         }
@@ -221,10 +222,10 @@ public partial class TransferDialog : Adw.Window
     private void OnSelectAccount(Gtk.Button sender, EventArgs e)
     {
         var filter = Gtk.FileFilter.New();
-        filter.SetName(_controller.Localizer["AccountFileFilter", "GTK"]);
+        filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["SelectAccount"]);
+        gtk_file_dialog_set_title(openFileDialog, _("Select Account"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
         gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
