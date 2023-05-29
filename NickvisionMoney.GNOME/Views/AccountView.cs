@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -257,7 +258,7 @@ public partial class AccountView : Adw.Bin
             }
         };
         //Sort Box And Buttons
-        _sortTransactionByDropDown.SetModel(Gtk.StringList.New(new string[3] { _controller.Localizer["SortBy", "Id"], _controller.Localizer["SortBy", "Date"], _controller.Localizer["SortBy", "Amount"] }));
+        _sortTransactionByDropDown.SetModel(Gtk.StringList.New(new string[3] { _("Sort By Id"), _("Sort By Date"), _("Sort By Amount") }));
         _sortTransactionByDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
@@ -347,7 +348,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
     /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui", controller.Localizer), controller, parentWindow, parentTabView, btnFlapToggle, updateSubtitle)
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui"), controller, parentWindow, parentTabView, btnFlapToggle, updateSubtitle)
     {
     }
 
@@ -359,7 +360,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IGroupRowControl</returns>
     private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.Localizer, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
         row.EditTriggered += EditGroup;
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
@@ -428,7 +429,7 @@ public partial class AccountView : Adw.Bin
     /// <returns>The IModelRowControl<Transaction></returns>
     private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor, _controller.Localizer);
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
         row.EditTriggered += EditTransaction;
         if (index != null)
         {
@@ -575,7 +576,7 @@ public partial class AccountView : Adw.Bin
             if (_controller.TransactionsCount > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
-                _transactionsGroup.SetTitle(string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount));
+                _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
                 if (_controller.FilteredTransactionsCount > 0)
                 {
                     _noTransactionsStatusPage.SetVisible(false);
@@ -585,8 +586,8 @@ public partial class AccountView : Adw.Bin
                 {
                     _noTransactionsStatusPage.SetVisible(true);
                     _transactionsScroll.SetVisible(false);
-                    _noTransactionsStatusPage.SetTitle(_controller.Localizer["NoTransactionsTitle", "Filter"]);
-                    _noTransactionsStatusPage.SetDescription(_controller.Localizer["NoTransactionsDescription", "Filter"]);
+                    _noTransactionsStatusPage.SetTitle(_("No Transactions Found"));
+                    _noTransactionsStatusPage.SetDescription(_("No transactions match the specified filters."));
                 }
                 _rangeExpander.SetSensitive(true);
             }
@@ -595,8 +596,8 @@ public partial class AccountView : Adw.Bin
                 _calendar.ClearMarks();
                 _noTransactionsStatusPage.SetVisible(true);
                 _transactionsScroll.SetVisible(false);
-                _noTransactionsStatusPage.SetTitle(_controller.Localizer["NoTransactionsTitle"]);
-                _noTransactionsStatusPage.SetDescription(_controller.Localizer["NoTransactionsDescription"]);
+                _noTransactionsStatusPage.SetTitle(_("No Transactions"));
+                _noTransactionsStatusPage.SetDescription(_("Add a new transaction or import transactions from a file."));
                 _rangeExpander.SetSensitive(false);
             }
             _isAccountLoading = false;
@@ -625,7 +626,7 @@ public partial class AccountView : Adw.Bin
         }
         else
         {
-            _controller.SendNotification(_controller.Localizer["NoMoneyToTransfer"], NotificationSeverity.Error);
+            _controller.SendNotification(_("This account has no money available to transfer."), NotificationSeverity.Error);
         }
     }
 
@@ -637,7 +638,7 @@ public partial class AccountView : Adw.Bin
     private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.csv, *.ofx, *.qif)");
+        filterAll.SetName($"{_("All files")} (*.csv, *.ofx, *.qif)");
         filterAll.AddPattern("*.csv");
         filterAll.AddPattern("*.CSV");
         filterAll.AddPattern("*.ofx");
@@ -657,7 +658,7 @@ public partial class AccountView : Adw.Bin
         filterQif.AddPattern("*.qif");
         filterQif.AddPattern("*.QIF");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["OpenAccount"]);
+        gtk_file_dialog_set_title(openFileDialog, _("Open Account"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterCsv);
@@ -701,7 +702,7 @@ public partial class AccountView : Adw.Bin
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
         var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+        gtk_file_dialog_set_title(saveFileDialog, _("Export to File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterCsv);
         gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
@@ -731,7 +732,7 @@ public partial class AccountView : Adw.Bin
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
         var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _controller.Localizer["ExportToFile"]);
+        gtk_file_dialog_set_title(saveFileDialog, _("Export to File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterPdf);
         gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
@@ -746,14 +747,14 @@ public partial class AccountView : Adw.Bin
                     path += ".pdf";
                 }
                 string? password = null;
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["AddPasswordToPDF"], _controller.Localizer["AddPasswordToPDF", "Description"], _controller.Localizer["No"], null, _controller.Localizer["Yes"]);
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
                 dialog.Present();
                 dialog.OnResponse += async (sender, e) =>
                 {
                     if (dialog.Response == MessageDialogResponse.Suggested)
                     {
                         var tcs = new TaskCompletionSource<string?>();
-                        var newPasswordDialog = new NewPasswordDialog(_parentWindow, _controller.Localizer["PDFPassword"], _controller.Localizer, tcs);
+                        var newPasswordDialog = new NewPasswordDialog(_parentWindow, _("PDF Password"), tcs);
                         newPasswordDialog.Present();
                         var password = await tcs.Task;
                         _controller.ExportToPDF(path ?? "", exportMode, password);
@@ -881,7 +882,7 @@ public partial class AccountView : Adw.Bin
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["RepeatIntervalChanged"], _controller.Localizer["RepeatIntervalChangedDescription"], _controller.Localizer["Cancel"], _controller.Localizer["DisassociateExisting"], _controller.Localizer["DeleteExisting"]);
+                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."), _("Cancel"), _("Disassociate Existing"), _("DeleteExisting"));
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
                     dialog.Present();
@@ -931,7 +932,7 @@ public partial class AccountView : Adw.Bin
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["EditTransaction", "SourceRepeat"], _controller.Localizer["EditTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["EditOnlySourceTransaction"], _controller.Localizer["EditSourceGeneratedTransaction"]);
+                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Update Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nUpdating only the source transaction will disassociate\ngenerated transactions from the source."), _("Cancel"), _("Update Only Source"), _("Update Source and Generated"));
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
                     dialog.Present();
@@ -987,7 +988,7 @@ public partial class AccountView : Adw.Bin
             transactionDialog.SetVisible(false);
             if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction", "SourceRepeat"], _controller.Localizer["DeleteTransactionDescription", "SourceRepeat"], _controller.Localizer["Cancel"], _controller.Localizer["DeleteOnlySourceTransaction"], _controller.Localizer["DeleteSourceGeneratedTransaction"]);
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual&#xA;generated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
                 dialog.UnsetDestructiveApperance();
                 dialog.UnsetSuggestedApperance();
                 dialog.Present();
@@ -1023,7 +1024,7 @@ public partial class AccountView : Adw.Bin
             }
             else
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteTransaction"], _controller.Localizer["DeleteTransactionDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes"));
                 dialog.Present();
                 dialog.OnResponse += async (sender, e) =>
                 {
@@ -1110,7 +1111,7 @@ public partial class AccountView : Adw.Bin
         groupDialog.OnDelete += (sender, e) =>
         {
             groupDialog.SetVisible(false);
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _controller.Localizer["DeleteGroup"], _controller.Localizer["DeleteGroupDescription"], _controller.Localizer["No"], _controller.Localizer["Yes"]);
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes"));
             dialog.Present();
             dialog.OnResponse += async (s, ex) =>
             {
@@ -1156,12 +1157,12 @@ public partial class AccountView : Adw.Bin
         if (_toggleGroupsButton.GetActive())
         {
             _toggleGroupsButtonContent.SetIconName("view-reveal-symbolic");
-            _toggleGroupsButtonContent.SetLabel(_controller.Localizer["Show"]);
+            _toggleGroupsButtonContent.SetLabel(_("Show"));
         }
         else
         {
             _toggleGroupsButtonContent.SetIconName("view-conceal-symbolic");
-            _toggleGroupsButtonContent.SetLabel(_controller.Localizer["Hide"]);
+            _toggleGroupsButtonContent.SetLabel(_("Hide"));
         }
         _groupsList.SetVisible(!_toggleGroupsButton.GetActive());
         _controller.ShowGroupsList = !_toggleGroupsButton.GetActive();
@@ -1320,7 +1321,7 @@ public partial class AccountView : Adw.Bin
         }
         else
         {
-            _transactionsGroup.SetTitle(string.Format(_controller.FilteredTransactionsCount != 1 ? _controller.Localizer["TransactionNumber", "Plural"] : _controller.Localizer["TransactionNumber"], _controller.FilteredTransactionsCount));
+            _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
         }
     }
 }

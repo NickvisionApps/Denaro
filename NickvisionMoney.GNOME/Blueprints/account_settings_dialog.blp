@@ -32,7 +32,7 @@ Adw.Window _root {
         spacing: 24;
         
         Gtk.Label _titleLabel {
-          label: _("AccountSettings");
+          label: _("Account Settings");
 
           styles ["title-2"]
         }
@@ -51,21 +51,21 @@ Adw.Window _root {
 
               Adw.PreferencesGroup {
                 Adw.EntryRow _nameRow {
-                  title: _("Name.Field");
+                  title: _("Name");
                   activates-default: true;
                 }
 
                 Adw.ComboRow _accountTypeRow {
-                  title: _("AccountType.Field");
-                  subtitle: _("AccountType.Description");
+                  title: _("Account Type");
+                  subtitle: _("This is only a useful label that doesn't affect how the app works.");
                   subtitle-lines: 4;
                   model: Gtk.StringList {
-                    strings [_("AccountType.Checking"), _("AccountType.Savings"), _("AccountType.Business")]
+                    strings [_("Checking"), _("Savings"), _("Business")]
                   };
                 }
 
                 Adw.ActionRow {
-                  title: _("DefaultTransactionType.Field");
+                  title: _("Default Transaction Type");
 
                   [suffix]
                   Gtk.Box {
@@ -88,7 +88,7 @@ Adw.Window _root {
               Adw.PreferencesGroup {
                 Adw.ActionRow _customCurrencyRow {
                   title: _("Currency");
-                  subtitle: _("ManageCurrency.Description");
+                  subtitle: _("Manage the currency used by the account.");
 
                   [prefix]
                   Gtk.Image {
@@ -105,8 +105,8 @@ Adw.Window _root {
                 }
 
                 Adw.ActionRow _managePasswordRow {
-                  title: _("ManagePassword");
-                  subtitle: _("ManagePassword.Description");
+                  title: _("Change Password");
+                  subtitle: _("Set a new password or remove one.");
 
                   [prefix]
                   Gtk.Image {
@@ -148,7 +148,7 @@ Adw.Window _root {
 
               Adw.PreferencesGroup {
                 Adw.ActionRow {
-                  title: _("UseCustomCurrency.Field");
+                  title: _("Use Custom Currency");
 
                   [suffix]
                   Gtk.Switch _switchCustomCurrency {
@@ -162,29 +162,29 @@ Adw.Window _root {
               Adw.PreferencesGroup {
                 sensitive: bind _switchCustomCurrency.active;
                 Adw.ActionRow _customSymbolRow {
-                  title: _("CustomCurrencySymbol.Field");
+                  title: _("Currency Symbol");
 
                   [suffix]
                   Gtk.Entry _customSymbolText {
                     valign: center;
                     max-length: 3;
-                    placeholder-text: _("CustomCurrencySymbol.Placeholder");
+                    placeholder-text: _("Enter symbol here");
                   }
                 }
 
                 Adw.ActionRow _customCodeRow {
-                  title: _("CustomCurrencyCode.Field");
+                  title: _("Currency Code");
 
                   [suffix]
                   Gtk.Entry _customCodeText {
                     valign: center;
                     max-length: 3;
-                    placeholder-text: _("CustomCurrencyCode.Placeholder");
+                    placeholder-text: _("Enter code here");
                   }
                 }
 
                 Adw.ActionRow _customDecimalSeparatorRow {
-                  title: _("CustomCurrencyDecimalSeparator.Field");
+                  title: _("Decimal Separator");
 
                   [suffix]
                   Gtk.DropDown _customDecimalSeparatorDropDown {
@@ -202,7 +202,7 @@ Adw.Window _root {
                 }
 
                 Adw.ActionRow _customGroupSeparatorRow {
-                  title: _("CustomCurrencyGroupSeparator.Field");
+                  title: _("Group Separator");
 
                   [suffix]
                   Gtk.DropDown _customGroupSeparatorDropDown {
@@ -220,7 +220,7 @@ Adw.Window _root {
                 }
 
                 Adw.ActionRow _customDecimalDigitsRow {
-                  title: _("CustomCurrencyDecimalDigits.Field");
+                  title: _("Decimal Digits");
 
                   [suffix]
                   Gtk.DropDown _customDecimalDigitsDropDown {
@@ -240,15 +240,15 @@ Adw.Window _root {
 
               Adw.PreferencesGroup {
                 Adw.PasswordEntryRow _newPasswordRow {
-                  title: _("NewPassword.Field");
+                  title: _("New Password");
                 }
 
                 Adw.PasswordEntryRow _newPasswordConfirmRow {
-                  title: _("ConfirmPassword.Field");
+                  title: _("Confirm Password");
                 }
 
                 Adw.ActionRow {
-                  subtitle: _("ManagePassword.Warning");
+                  subtitle: _("If the password is lost, there is no way to restore the file!");
 
                   [suffix]
                   Gtk.Button _removePasswordButton {

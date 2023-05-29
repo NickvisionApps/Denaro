@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME;
 
@@ -62,8 +63,8 @@ public partial class Program
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.ID = "org.nickvision.money";
         _mainWindowController.AppInfo.Name = "Nickvision Denaro";
-        _mainWindowController.AppInfo.ShortName = _mainWindowController.Localizer["ShortName"];
-        _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
+        _mainWindowController.AppInfo.ShortName = _("Denaro");
+        _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
         _mainWindowController.AppInfo.Version = "2023.6.0-next";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");

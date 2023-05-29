@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -460,11 +461,10 @@ public class Account : IDisposable
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
-        using var localizer = new Localizer();
         Groups.Add(0, new Group(0)
         {
-            Name = localizer["Ungrouped"],
-            Description = localizer["UngroupedDescription"],
+            Name = _("Ungrouped"),
+            Description = _("Transactions without a group"),
             Balance = 0m,
             RGBA = ""
         });
@@ -1363,7 +1363,6 @@ public class Account : IDisposable
     private async Task<List<uint>> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
     {
         var ids = new List<uint>();
-        var localizer = new Localizer();
         OFXDocument? ofx = null;
         //Check For Security
         var ofxString = File.ReadAllText(path);
@@ -1388,7 +1387,7 @@ public class Account : IDisposable
                 ids.Add(NextAvailableTransactionId);
                 await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo) : transaction.Name,
+                    Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo) : transaction.Name,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
@@ -1440,11 +1439,10 @@ public class Account : IDisposable
             if (transaction.Amount != 0)
             {
                 ids.Add(NextAvailableTransactionId);
-                var localizer = new Localizer();
                 var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
                 await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrEmpty(transaction.Memo) ? localizer["NotAvailable"] : transaction.Memo,
+                    Description = string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
@@ -1516,7 +1514,6 @@ public class Account : IDisposable
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
-            using var localizer = new Localizer();
             //Amount Culture
             var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
             if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
@@ -1584,7 +1581,7 @@ public class Account : IDisposable
                     {
                         col.Spacing(15);
                         //Generated Date
-                        col.Item().Text(string.Format(localizer["Generated", "PDF"], DateTime.Now.ToString("g", cultureDate)));
+                        col.Item().Text(_("Generated: {0}", DateTime.Now.ToString("g", cultureDate)));
                         //Overview
                         col.Item().Table(tbl =>
                         {
@@ -1595,7 +1592,7 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Overview"]);
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Overview"));
                             //Data
                             var maxDate = DateOnly.FromDateTime(DateTime.Today);
                             var transactions = Transactions;
@@ -1614,12 +1611,12 @@ public class Account : IDisposable
                                     maxDate = pair.Value.Date;
                                 }
                             }
-                            tbl.Cell().Text(localizer["Total"]);
+                            tbl.Cell().Text(_("Total"));
                             var total = GetTotal(maxDate);
-                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "−  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(localizer["Income"]);
+                            tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
-                            tbl.Cell().Text(localizer["Expense"]);
+                            tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                         });
                         //Metadata
@@ -1632,15 +1629,15 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["AccountSettings"]);
-                            tbl.Cell().Text(localizer["AccountType", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["Currency", "PDF"]).SemiBold();
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Account Settings"));
+                            tbl.Cell().Text(_("Account Type")).SemiBold();
+                            tbl.Cell().Text(_("Currency")).SemiBold();
                             //Data
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.AccountType switch
                             {
-                                AccountType.Checking => localizer["AccountType", "Checking"],
-                                AccountType.Savings => localizer["AccountType", "Savings"],
-                                AccountType.Business => localizer["AccountType", "Business"],
+                                AccountType.Checking => _("Checking"),
+                                AccountType.Savings => _("Savings"),
+                                AccountType.Business => _("Business"),
                                 _ => ""
                             });
                             if (Metadata.UseCustomCurrency)
@@ -1663,13 +1660,13 @@ public class Account : IDisposable
                                 x.RelativeColumn(1);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(localizer["Groups"]);
-                            tbl.Cell().Text(localizer["Name", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
-                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(_("Groups"));
+                            tbl.Cell().Text(_("Name")).SemiBold();
+                            tbl.Cell().Text(_("Description")).SemiBold();
+                            tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
                             var i = 0;
-                            foreach (var pair in Groups.OrderBy(x => x.Value.Name == localizer["Ungrouped"] ? " " : x.Value.Name))
+                            foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
@@ -1692,14 +1689,14 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(localizer["Transactions"]);
-                            tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["Date", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["Description", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["TransactionType", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["GroupName", "PDF"]).SemiBold();
-                            tbl.Cell().Text(localizer["Notes", "Field"]).SemiBold();
-                            tbl.Cell().AlignRight().Text(localizer["Amount", "Field"]).SemiBold();
+                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
+                            tbl.Cell().Text(_("Id")).SemiBold();
+                            tbl.Cell().Text(_("Date")).SemiBold();
+                            tbl.Cell().Text(_("Description")).SemiBold();
+                            tbl.Cell().Text(_("Type")).SemiBold();
+                            tbl.Cell().Text(_("Group Name")).SemiBold();
+                            tbl.Cell().Text(_("Notes")).SemiBold();
+                            tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
                             var transactions = Transactions;
                             if (exportMode == ExportMode.CurrentView)
@@ -1737,11 +1734,11 @@ public class Account : IDisposable
                                 tbl.Cell().Background(hex).Text(pair.Value.Description.Trim());
                                 tbl.Cell().Background(hex).Text(pair.Value.Type switch
                                 {
-                                    TransactionType.Income => localizer["Income"],
-                                    TransactionType.Expense => localizer["Expense"],
+                                    TransactionType.Income => _("Income"),
+                                    TransactionType.Expense => _("Expense"),
                                     _ => ""
                                 });
-                                tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? localizer["Ungrouped"] : Groups[(uint)pair.Value.GroupId].Name);
+                                tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? _("Ungrouped") : Groups[(uint)pair.Value.GroupId].Name);
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "−  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
@@ -1756,9 +1753,9 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(localizer["Receipts", "PDF"]);
-                            tbl.Cell().Text(localizer["Id", "Field"]).SemiBold();
-                            tbl.Cell().Text(localizer["Receipt", "Field"]).SemiBold();
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Receipts"));
+                            tbl.Cell().Text(_("Id")).SemiBold();
+                            tbl.Cell().Text(_("Receipt")).SemiBold();
                             //Data
                             var transactions = Transactions;
                             if (exportMode == ExportMode.CurrentView)
@@ -1786,10 +1783,10 @@ public class Account : IDisposable
                     //Footer
                     page.Footer().Row(row =>
                     {
-                        row.RelativeItem(2).Text(localizer["NickvisionMoneyAccount"]).FontColor(Colors.Grey.Medium);
+                        row.RelativeItem(2).Text(_("Nickvision Denaro Account")).FontColor(Colors.Grey.Medium);
                         row.RelativeItem(1).Text(x =>
                         {
-                            var pageString = localizer["PageNumber", "PDF"];
+                            var pageString = _("Page {0}");
                             if (pageString.EndsWith("{0}"))
                             {
                                 x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);

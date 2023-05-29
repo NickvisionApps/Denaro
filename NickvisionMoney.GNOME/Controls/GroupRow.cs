@@ -61,7 +61,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
 
-    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, Localizer localizer, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
     {
         _cultureAmount = cultureAmount;
         _defaultColor = defaultColor;
@@ -131,10 +131,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="group">The Group to display</param>
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="useNativeDigits">Whether to use native digits</param>
-    /// <param name="localizer">The Localizer for the app</param>
     /// <param name="filterActive">Whether or not the filter checkbutton should be active</param>
     /// <param name="defaultColor">The default group color</param>
-    public GroupRow(Group group, CultureInfo cultureAmount, bool useNativeDigits, Localizer localizer, bool filterActive, string defaultColor) : this(Builder.FromFile("group_row.ui", localizer), group, cultureAmount, useNativeDigits, localizer, filterActive, defaultColor)
+    public GroupRow(Group group, CultureInfo cultureAmount, bool useNativeDigits, bool filterActive, string defaultColor) : this(Builder.FromFile("group_row.ui"), group, cultureAmount, useNativeDigits, filterActive, defaultColor)
     {
     }
 

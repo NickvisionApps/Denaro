@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -42,10 +43,6 @@ public class TransactionDialogController : IDisposable
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
     /// <summary>
     /// The transaction represented by the controller
     /// </summary>
@@ -93,13 +90,11 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _groups = groups;
-        Localizer = localizer;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
         IsEditing = true;
@@ -122,13 +117,11 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, Localizer localizer)
+    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _groups = groups;
-        Localizer = localizer;
         Transaction = new Transaction(id);
         CanCopy = false;
         IsEditing = false;
@@ -166,7 +159,7 @@ public class TransactionDialogController : IDisposable
         get
         {
             var names = new List<string>();
-            foreach (var group in _groups.Values.OrderBy(x => x.Name == Localizer["Ungrouped"] ? " " : x.Name))
+            foreach (var group in _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name))
             {
                 names.Add(group.Name);
             }
@@ -321,7 +314,7 @@ public class TransactionDialogController : IDisposable
         }
         Transaction.RepeatInterval = (TransactionRepeatInterval)selectedRepeat;
         Transaction.Amount = amount;
-        Transaction.GroupId = groupName == Localizer["Ungrouped"] ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
+        Transaction.GroupId = groupName == _("Ungrouped") ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
         Transaction.UseGroupColor = useGroupColor;
         Transaction.Receipt = null;

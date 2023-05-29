@@ -1,5 +1,4 @@
 ﻿using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Helpers;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -65,7 +64,7 @@ public partial class NewPasswordDialog : Adw.Window
     /// <param name="parent">Gtk.Window</param>
     /// <param name="title">The title of the dialog</param>
     /// <param name="tcs">TaskCompletionSource used to pass result to the controller</param>
-    public NewPasswordDialog(Gtk.Window parent, string title, Localizer localizer, TaskCompletionSource<string?> tcs) : this(Builder.FromFile("new_password_dialog.ui", localizer), parent, title, tcs)
+    public NewPasswordDialog(Gtk.Window parent, string title, TaskCompletionSource<string?> tcs) : this(Builder.FromFile("new_password_dialog.ui"), parent, title, tcs)
     {
     }
 

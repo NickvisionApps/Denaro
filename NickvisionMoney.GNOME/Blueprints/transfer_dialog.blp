@@ -22,21 +22,21 @@ Adw.Window _root {
         margin-end: 24;
 
         Gtk.Label {
-          label: _("Transfer");
+          label: C_("Title", "Transfer");
 
           styles ["title-2"]
         }
         
         Gtk.Label {
-          label: _("TransferDescription");
+          label: _("Transferring money will create an expense transaction with the given amount in this account and an income transaction with the given amount in the account to transfer to.");
           wrap: true;
           justify: center;
         }
 
         Adw.PreferencesGroup {
           Adw.ActionRow _destinationAccountRow {
-            title: _("DestinationAccount.Field");
-            subtitle: _("NoAccountSelected");
+            title: _("Destination Account");
+            subtitle: _("No Account Selected");
             activatable-widget: _selectAccountButton;
 
             [suffix]
@@ -46,15 +46,15 @@ Adw.Window _root {
 
               Gtk.Button _selectAccountButton {
                 icon-name: "document-open-symbolic";
-                tooltip-text: _("DestinationAccount.Placeholder");
+                tooltip-text: _("Select a destination account");
               }
 
               Gtk.MenuButton _recentAccountsButton {
                 icon-name: "document-open-recent-symbolic";
-                tooltip-text: _("RecentAccounts");
+                tooltip-text: _("Recent Accounts");
                 popover: Gtk.Popover  _recentAccountsPopover {
                   Adw.PreferencesGroup _recentAccountsGroup {
-                    title: _("Recents.GTK");
+                    title: _("Recents");
                     width-request: 200;
                     height-request: 55;
                   }
@@ -66,13 +66,13 @@ Adw.Window _root {
           }
 
           Adw.PasswordEntryRow _destinationPasswordRow {
-            title: _("DestinationPassword.Field");
+            title: _("Destination Account Password");
             show-apply-button: true;
             visible: false;
           }
 
           Adw.EntryRow _amountRow {
-            title: _("Amount.Field");
+            title: _("Amount");
             input-purpose: number;
             activates-default: true;
 
@@ -84,7 +84,7 @@ Adw.Window _root {
 
           Adw.PreferencesGroup _conversionRateGroup {
             margin-top: 24;
-            title: _("ConversionNeeded");
+            title: _("Conversion Needed");
             visible: false;
 
             Adw.EntryRow _sourceCurrencyRow {
@@ -109,7 +109,7 @@ Adw.Window _root {
           valign: center;
           margin-top: 24;
           margin-bottom: 24;
-          label: _("Transfer");
+          label: C_("Button", "Transfer");
 
           styles ["pill", "suggested-action"]
         }

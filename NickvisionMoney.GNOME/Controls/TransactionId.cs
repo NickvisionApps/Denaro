@@ -1,5 +1,4 @@
 using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Helpers;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
@@ -44,8 +43,7 @@ public partial class TransactionId : Gtk.Overlay
     /// Constructs a TransactionId widget
     /// </summary>
     /// <param name="id">Transaction Id</param>
-    /// <param name="localizer">The Localizer for the app</param>
-    public TransactionId(uint id, Localizer localizer) : this(Builder.FromFile("transaction_id.ui", localizer), id)
+    public TransactionId(uint id) : this(Builder.FromFile("transaction_id.ui"), id)
     {
     }
 

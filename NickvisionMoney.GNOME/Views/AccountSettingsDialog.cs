@@ -2,6 +2,7 @@ using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -76,7 +77,7 @@ public partial class AccountSettingsDialog : Adw.Window
             _viewStack.SetVisibleChildName("main");
             _viewStack.GetChildByName("currency").SetVisible(false);
             _viewStack.GetChildByName("password").SetVisible(false);
-            _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+            _titleLabel.SetLabel(_("Account Settings"));
             SetDefaultWidget(_applyButton);
         };
         //Account Name
@@ -106,14 +107,14 @@ public partial class AccountSettingsDialog : Adw.Window
         _expenseButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.BindProperty("active", _incomeButton, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         //Reported Currency
-        _reportedCurrencyLabel.SetLabel($"{_controller.Localizer["ReportedCurrency"]}\n<b>{_controller.ReportedCurrencyString}</b>");
+        _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
         //Custom Currency
         _customCurrencyRow.OnActivated += (sender, e) =>
         {
             _viewStack.GetChildByName("currency").SetVisible(true);
             _viewStack.SetVisibleChildName("currency");
             _viewStack.GetChildByName("main").SetVisible(false);
-            _titleLabel.SetLabel(_controller.Localizer["Currency"]);
+            _titleLabel.SetLabel(_("Currency"));
         };
         _switchCustomCurrency.OnNotify += (sender, e) =>
         {
@@ -149,7 +150,7 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _controller.Localizer["CustomCurrencyDecimalSeparator", "Other"] }));
+        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _p("DecimalSeparator", "Other") }));
         _customDecimalSeparatorDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -179,7 +180,7 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _controller.Localizer["CustomCurrencyGroupSeparator", "None"], _controller.Localizer["CustomCurrencyGroupSeparator", "Other"] }));
+        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
         _customGroupSeparatorDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -209,7 +210,7 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string[6] { "2", "3", "4", "5", "6", _controller.Localizer["CustomCurrencyDecimalDigits", "Unlimited"] }));
+        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string[6] { "2", "3", "4", "5", "6", _("Unlimited") }));
         _customDecimalDigitsDropDown.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -226,7 +227,7 @@ public partial class AccountSettingsDialog : Adw.Window
             _viewStack.GetChildByName("password").SetVisible(true);
             _viewStack.SetVisibleChildName("password");
             _viewStack.GetChildByName("main").SetVisible(false);
-            _titleLabel.SetLabel(_controller.Localizer["ManagePassword"]);
+            _titleLabel.SetLabel(_("Change Password"));
         };
         _newPasswordRow.OnNotify += (sender, e) =>
         {
@@ -311,7 +312,7 @@ public partial class AccountSettingsDialog : Adw.Window
     /// </summary>
     /// <param name="controller">AccountSettingsDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public AccountSettingsDialog(AccountSettingsDialogController controller, Gtk.Window parent) : this(Builder.FromFile("account_settings_dialog.ui", controller.Localizer), controller, parent)
+    public AccountSettingsDialog(AccountSettingsDialogController controller, Gtk.Window parent) : this(Builder.FromFile("account_settings_dialog.ui"), controller, parent)
     {
     }
 
@@ -338,16 +339,16 @@ public partial class AccountSettingsDialog : Adw.Window
         var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
         var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
-        _nameRow.SetTitle(_controller.Localizer["Name", "Field"]);
+        _nameRow.SetTitle(_("Name"));
         _customCurrencyRow.RemoveCssClass("error");
         _customSymbolRow.RemoveCssClass("error");
-        _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Field"]);
+        _customSymbolRow.SetTitle(_("Currency Symbol"));
         _customCodeRow.RemoveCssClass("error");
-        _customCodeRow.SetTitle(_controller.Localizer["CustomCurrencyCode", "Field"]);
+        _customCodeRow.SetTitle(_("Currency Code"));
         _customDecimalSeparatorRow.RemoveCssClass("error");
-        _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Field"]);
+        _customDecimalSeparatorRow.SetTitle(_("Decimal Separator"));
         _customGroupSeparatorRow.RemoveCssClass("error");
-        _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Field"]);
+        _customGroupSeparatorRow.SetTitle(_("Group Separator"));
         _managePasswordRow.RemoveCssClass("error");
         _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
@@ -359,60 +360,60 @@ public partial class AccountSettingsDialog : Adw.Window
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyName))
             {
                 _nameRow.AddCssClass("error");
-                _nameRow.SetTitle(_controller.Localizer["Name", "Empty"]);
+                _nameRow.SetTitle(_("Name (Empty)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencySymbol))
             {
                 _customSymbolRow.AddCssClass("error");
                 _customCurrencyRow.AddCssClass("error");
-                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Empty"]);
+                _customSymbolRow.SetTitle(_("Currency Symbol (Empty)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.InvalidCurrencySymbol))
             {
                 _customSymbolRow.AddCssClass("error");
                 _customCurrencyRow.AddCssClass("error");
-                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+                _customSymbolRow.SetTitle(_("Currency Symbol (Invalid)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyCurrencyCode))
             {
                 _customCodeRow.AddCssClass("error");
                 _customCurrencyRow.AddCssClass("error");
-                _customCodeRow.SetTitle(_controller.Localizer["CustomCurrencyCode", "Empty"]);
+                _customCodeRow.SetTitle(_("Currency Code (Empty)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.EmptyDecimalSeparator))
             {
                 _customDecimalSeparatorRow.AddCssClass("error");
                 _customCurrencyRow.AddCssClass("error");
-                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Empty"]);
+                _customDecimalSeparatorRow.SetTitle(_("Decimal Separator (Empty)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSeparators))
             {
                 _customCurrencyRow.AddCssClass("error");
                 _customDecimalSeparatorRow.AddCssClass("error");
-                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"]);
+                _customDecimalSeparatorRow.SetTitle(_("Decimal Separator (Invalid)"));
                 _customGroupSeparatorRow.AddCssClass("error");
-                _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"]);
+                _customGroupSeparatorRow.SetTitle(_("Group Separator (Invalid)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator))
             {
                 _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.AddCssClass("error");
-                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+                _customSymbolRow.SetTitle(_("Currency Symbol (Invalid)"));
                 _customDecimalSeparatorRow.AddCssClass("error");
-                _customDecimalSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyDecimalSeparator", "Invalid"]);
+                _customDecimalSeparatorRow.SetTitle(_("Decimal Separator (Invalid)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.SameSymbolAndGroupSeparator))
             {
                 _customCurrencyRow.AddCssClass("error");
                 _customSymbolRow.AddCssClass("error");
-                _customSymbolRow.SetTitle(_controller.Localizer["CustomCurrencySymbol", "Invalid"]);
+                _customSymbolRow.SetTitle(_("Currency Symbol (Invalid)"));
                 _customGroupSeparatorRow.AddCssClass("error");
-                _customGroupSeparatorRow.SetTitle(_controller.Localizer["CustomCurrencyGroupSeparator", "Invalid"]);
+                _customGroupSeparatorRow.SetTitle(_("Group Separator (Invalid)"));
             }
             if (checkStatus.HasFlag(AccountMetadataCheckStatus.NonMatchingPasswords))
             {
                 _managePasswordRow.AddCssClass("error");
-                _lblPasswordStatus.SetText(_controller.Localizer["NonMatchingPasswords"]);
+                _lblPasswordStatus.SetText(_("The passwords do not match."));
             }
             _applyButton.SetSensitive(false);
         }
@@ -454,10 +455,10 @@ public partial class AccountSettingsDialog : Adw.Window
         _viewStack.GetChildByName("main").SetVisible(true);
         _viewStack.SetVisibleChildName("main");
         _viewStack.GetChildByName("password").SetVisible(false);
-        _titleLabel.SetLabel(_controller.Localizer["AccountSettings"]);
+        _titleLabel.SetLabel(_("Account Settings"));
         SetDefaultWidget(_applyButton);
         _managePasswordRow.SetSensitive(false);
-        _managePasswordRow.SetTitle(_controller.Localizer["PasswordRemoveRequest.GTK"]);
+        _managePasswordRow.SetTitle(_("The password will be removed upon closing this dialog."));
         _managePasswordRow.SetSubtitle("");
     }
 }

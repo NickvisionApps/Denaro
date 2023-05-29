@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -200,7 +201,7 @@ public partial class TransactionDialog : Adw.Window
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _titleLabel.SetLabel($"{_controller.Localizer["Transaction"]} - {idString}");
+        _titleLabel.SetLabel($"{_("Transaction")} - {idString}");
         _deleteButton.SetVisible(_controller.IsEditing);
         _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         _copyButton.SetVisible(_controller.CanCopy);
@@ -209,7 +210,7 @@ public partial class TransactionDialog : Adw.Window
             _controller.CopyRequested = true;
             OnApply?.Invoke(this, EventArgs.Empty);
         };
-        _applyButton.SetLabel(_controller.Localizer[_controller.IsEditing ? "Apply" : "Add"]);
+        _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         _backButton.OnClicked += (sender, e) =>
         {
@@ -355,7 +356,7 @@ public partial class TransactionDialog : Adw.Window
         }
         else
         {
-            _repeatEndDateCalendarButton.SetLabel(_controller.Localizer["NoEndDate"]);
+            _repeatEndDateCalendarButton.SetLabel(_("No End Date"));
         }
         if (_controller.Transaction.GroupId == -1)
         {
@@ -375,11 +376,11 @@ public partial class TransactionDialog : Adw.Window
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         if (_controller.Transaction.Receipt != null)
         {
-            _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
+            _viewReceiptButtonContent.SetLabel(_("View"));
         }
         else
         {
-            _uploadReceiptButtonContent.SetLabel(_controller.Localizer["Upload"]);
+            _uploadReceiptButtonContent.SetLabel(_("Upload"));
         }
         _notesView.GetBuffer().SetText(_controller.Transaction.Notes, _controller.Transaction.Notes.Length);
         Validate();
@@ -391,7 +392,7 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     /// <param name="controller">TransactionDialogController</param>
     /// <param name="parentWindow">Gtk.Window</param>
-    public TransactionDialog(TransactionDialogController controller, Gtk.Window parent) : this(Builder.FromFile("transaction_dialog.ui", controller.Localizer), controller, parent)
+    public TransactionDialog(TransactionDialogController controller, Gtk.Window parent) : this(Builder.FromFile("transaction_dialog.ui"), controller, parent)
     {
     }
 
@@ -427,7 +428,7 @@ public partial class TransactionDialog : Adw.Window
         var selectedDay = gtk_calendar_get_date(_dateCalendar.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         var repeatEndDate = default(DateOnly?);
-        if (_repeatEndDateCalendarButton.GetLabel() != _controller.Localizer["NoEndDate"])
+        if (_repeatEndDateCalendarButton.GetLabel() != _("No End Date"))
         {
             var selectedEndDay = gtk_calendar_get_date(_repeatEndDateCalendar.Handle);
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
@@ -439,13 +440,13 @@ public partial class TransactionDialog : Adw.Window
         gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
         var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), gdk_rgba_to_string(ref color), _colorDropDown.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
-        _descriptionRow.SetTitle(_controller.Localizer["Description", "Field"]);
+        _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
-        _amountRow.SetTitle(_controller.Localizer["Amount", "Field"]);
+        _amountRow.SetTitle(_("Amount"));
         _repeatEndDateCalendarButton.RemoveCssClass("error");
-        _repeatEndDateCalendarButton.SetTooltipText(_controller.Localizer["TransactionRepeatEndDate", "Field"]);
+        _repeatEndDateCalendarButton.SetTooltipText(_("Repeat End Date"));
         _receiptRow.RemoveCssClass("error");
-        _receiptRow.SetTitle(_controller.Localizer["Receipt", "Field"]);
+        _receiptRow.SetTitle(_("Receipt"));
         if (checkStatus == TransactionCheckStatus.Valid)
         {
             _applyButton.SetSensitive(true);
@@ -455,23 +456,23 @@ public partial class TransactionDialog : Adw.Window
             if (checkStatus.HasFlag(TransactionCheckStatus.EmptyDescription))
             {
                 _descriptionRow.AddCssClass("error");
-                _descriptionRow.SetTitle(_controller.Localizer["Description", "Empty"]);
+                _descriptionRow.SetTitle(_("Description (Empty)"));
             }
             if (checkStatus.HasFlag(TransactionCheckStatus.InvalidAmount))
             {
                 _amountRow.AddCssClass("error");
-                _amountRow.SetTitle(_controller.Localizer["Amount", "Invalid"]);
+                _amountRow.SetTitle(_("Amount (Invalid)"));
             }
             if (checkStatus.HasFlag(TransactionCheckStatus.InvalidRepeatEndDate))
             {
                 _repeatEndDateCalendarButton.AddCssClass("error");
-                _repeatEndDateCalendarButton.SetTooltipText(_controller.Localizer["TransactionRepeatEndDate", "Invalid"]);
+                _repeatEndDateCalendarButton.SetTooltipText(_("Repeat End Date (Invalid)"));
             }
             _applyButton.SetSensitive(false);
             if (checkStatus.HasFlag(TransactionCheckStatus.CannotAccessReceipt))
             {
                 _receiptRow.AddCssClass("error");
-                _receiptRow.SetTitle(_controller.Localizer["Receipt", "Inaccessible"]);
+                _receiptRow.SetTitle(_("Receipt (File Inaccessible)"));
                 _applyButton.SetSensitive(true);
             }
         }
@@ -521,7 +522,7 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void OnRepeatIntervalChanged()
     {
-        var isRepeatIntervalNever = ((Gtk.StringObject)_repeatIntervalRow.SelectedItem!).String == _controller.Localizer["RepeatInterval", "Never"];
+        var isRepeatIntervalNever = ((Gtk.StringObject)_repeatIntervalRow.SelectedItem!).String == _("Never");
         _dateDashLabel.SetVisible(!isRepeatIntervalNever);
         _repeatEndDateCalendarButton.SetVisible(!isRepeatIntervalNever);
         if (!_constructing)
@@ -553,7 +554,7 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnRepeatEndDateClear(Gtk.Button sender, EventArgs e)
     {
-        _repeatEndDateCalendarButton.SetLabel(_controller.Localizer["NoEndDate"]);
+        _repeatEndDateCalendarButton.SetLabel(_("No End Date"));
         _repeatEndDateCalendarButton.GetPopover().Popdown();
         if (!_constructing)
         {
@@ -579,7 +580,7 @@ public partial class TransactionDialog : Adw.Window
         _viewReceiptButton.SetSensitive(false);
         _viewReceiptButtonContent.SetLabel("");
         _deleteReceiptButton.SetSensitive(false);
-        _uploadReceiptButtonContent.SetLabel(_controller.Localizer["Upload"]);
+        _uploadReceiptButtonContent.SetLabel(_("Upload"));
         Validate();
     }
 
@@ -591,7 +592,7 @@ public partial class TransactionDialog : Adw.Window
     private void OnUploadReceipt(Gtk.Button sender, EventArgs e)
     {
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName($"{_controller.Localizer["AllFiles"]} (*.jpg, *.jpeg, *.png, *.pdf)");
+        filterAll.SetName($"{_("All files")} (*.jpg, *.jpeg, *.png, *.pdf)");
         filterAll.AddPattern("*.jpg");
         filterAll.AddPattern("*.jpeg");
         filterAll.AddPattern("*.png");
@@ -607,7 +608,7 @@ public partial class TransactionDialog : Adw.Window
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _controller.Localizer["Receipt", "Field"]);
+        gtk_file_dialog_set_title(openFileDialog, _("Receipt"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterJpeg);
@@ -623,7 +624,7 @@ public partial class TransactionDialog : Adw.Window
                 _receiptPath = path;
                 _viewReceiptButton.SetSensitive(true);
                 _deleteReceiptButton.SetSensitive(true);
-                _viewReceiptButtonContent.SetLabel(_controller.Localizer["View"]);
+                _viewReceiptButtonContent.SetLabel(_("View"));
                 _uploadReceiptButtonContent.SetLabel("");
                 Validate();
             }

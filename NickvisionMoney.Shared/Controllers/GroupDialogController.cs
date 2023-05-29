@@ -1,5 +1,4 @@
-﻿using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
+﻿using NickvisionMoney.Shared.Models;
 using System.Collections.Generic;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -23,10 +22,6 @@ public class GroupDialogController
     private readonly string _originalRGBA;
     private readonly List<string> _existingNames;
 
-    /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
     /// <summary>
     /// The group represented by the controller
     /// </summary>
@@ -55,13 +50,11 @@ public class GroupDialogController
     /// <param name="group">The Group object represented by the controller</param>
     /// <param name="existingNames">The list of existing group names</param>
     /// <param name="groupDefaultColor">A default color for the group</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal GroupDialogController(Group group, List<string> existingNames, string groupDefaultColor, Localizer localizer)
+    internal GroupDialogController(Group group, List<string> existingNames, string groupDefaultColor)
     {
         _originalName = group.Name;
         _originalRGBA = group.RGBA;
         _existingNames = existingNames;
-        Localizer = localizer;
         Group = (Group)group.Clone();
         IsEditing = true;
         if (string.IsNullOrEmpty(Group.RGBA))
@@ -76,13 +69,11 @@ public class GroupDialogController
     /// <param name="id">The id of the new group</param>
     /// <param name="existingNames">The list of existing group names</param>
     /// <param name="groupDefaultColor">A default color for the group</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal GroupDialogController(uint id, List<string> existingNames, string groupDefaultColor, Localizer localizer)
+    internal GroupDialogController(uint id, List<string> existingNames, string groupDefaultColor)
     {
         _originalName = "";
         _originalRGBA = groupDefaultColor;
         _existingNames = existingNames;
-        Localizer = localizer;
         Group = new Group(id);
         IsEditing = false;
         //Set Defaults For New Group
