@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-04-30 17:02+0000\n"
+"PO-Revision-Date: 2023-05-29 20:53+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/tr/>\n"
@@ -333,7 +333,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "Öntanımlı Aktarım Rengi"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -346,7 +346,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr ""
+msgstr "Öntanımlı Grup Rengi"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -394,7 +394,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:53
 msgid "Use Native Digits"
-msgstr ""
+msgstr "Yerel Rakamları Kullan"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
@@ -745,7 +745,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "Tekrarlama Aralığı"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -765,7 +765,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "Tekrarlama Bitiş Tarihi"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
