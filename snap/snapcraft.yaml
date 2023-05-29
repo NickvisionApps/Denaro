@@ -1,7 +1,6 @@
 name: denaro # you probably want to 'snapcraft register <name>'
 base: core22 # the base snap is the execution environment for this snap
 adopt-info: denaro
-#icon: NickvisionMoney.Shared/Resources/org.nickvision.money.png
 source-code: https://github.com/nlogozzo/NickvisionMoney
 issues: https://github.com/nlogozzo/NickvisionMoney/issues
 grade: stable # must be 'stable' to release into candidate/stable channels
@@ -36,15 +35,7 @@ parts:
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/usr --ui=gnome --self-contained
       dotnet cake --target=Install --destdir=$CRAFT_PART_INSTALL
-      mkdir -p $CRAFT_PART_INSTALL/meta/gui
-      mv $CRAFT_PART_INSTALL/usr/share/icons $CRAFT_PART_INSTALL/meta/gui/
     parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
-  symbolic-fix:
-    after: [denaro]
-    plugin: nil
-    override-prime:
-      set -eux
-      cp -r $CRAFT_STAGE/meta/gui/icons $CRAFT_PRIME/usr/share/
 apps:
   denaro:
     command: usr/bin/org.nickvision.money
