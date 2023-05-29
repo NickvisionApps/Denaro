@@ -192,7 +192,7 @@ Adw.Window _root {
                 Adw.PreferencesGroup {
                   hexpand: true;
 
-                  Adw.ActionRow {
+                  Adw.ActionRow _extrasRow {
                     title: _("Extras");
                     subtitle: _("Extras.Description");
 
@@ -202,14 +202,12 @@ Adw.Window _root {
                     }
 
                     [suffix]
-                    Gtk.Button _extrasButton {
+                    Gtk.Image _imgExtras {
                       icon-name: "go-next-symbolic";
                       valign: center;
-                      can-focus: false;
-                      styles ["flat"]
                     }
 
-                    activatable-widget: _extrasButton;
+                    activatable-widget: _imgExtras;
                   }
                 }
               }

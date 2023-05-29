@@ -142,7 +142,7 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
     [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
-    [Gtk.Connect] private readonly Gtk.Button _extrasButton;
+    [Gtk.Connect] private readonly Adw.ActionRow _extrasRow;
     [Gtk.Connect] private readonly Adw.ActionRow _receiptRow;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
@@ -217,7 +217,7 @@ public partial class TransactionDialog : Adw.Window
             _backButton.SetVisible(false);
             SetDefaultWidget(_applyButton);
         };
-        _extrasButton.OnClicked += (sender, e) =>
+        _extrasRow.OnActivated += (sender, e) =>
         {
             _stack.SetVisibleChildName("extras");
             _backButton.SetVisible(true);
