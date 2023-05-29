@@ -8,13 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-05-29 20:53+0000\n"
+"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
+"app/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:524
 msgid "(Copy)"
@@ -30,11 +34,15 @@ msgstr "{0} من {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:581
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1319
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "المعاملة"
-msgstr[1] "المعاملة"
+msgstr[0] "لا معاملة"
+msgstr[1] "معاملة واحدة"
+msgstr[2] "معاملتان"
+msgstr[3] "{0} معاملات"
+msgstr[4] "{0} معاملةً"
+msgstr[5] "{0} معاملة"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:79
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
@@ -169,6 +177,8 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"ديفد لابشن {0}\n"
+"توبايس برنارد {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
@@ -206,7 +216,6 @@ msgid "Delete Transaction?"
 msgstr "أأحذف المعاملة؟"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:887
-#, fuzzy
 msgid "DeleteExisting"
 msgstr "احذف المعاملات الموجودة"
 
@@ -331,11 +340,15 @@ msgid "Id"
 msgstr "المعرِّف"
 
 #: ../../../Controllers/AccountViewController.cs:962
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "اُستوردت {0} معاملة من الملفِّ."
-msgstr[1] "اُستوردت {0} معاملة من الملفِّ."
+msgstr[0] "لم تستورد من الملف أي معاملة."
+msgstr[1] "اُستوردت من الملف معاملة واحدة."
+msgstr[2] "اُستوردت من الملف معاملتان."
+msgstr[3] "اُستوردت من الملف {0} معاملات"
+msgstr[4] "اُستوردت من الملف {0} معاملة"
+msgstr[5] "اُستوردت من الملف {0} معاملة"
 
 #: ../../../Models/Account.cs:1617 ../../../Models/Account.cs:1737
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:76
@@ -394,6 +407,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"نيكولاس لوجوزو {0}\n"
+"مساهمو جت‌هب ❤️ {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:538
 #, csharp-format
@@ -402,6 +417,9 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"نيكولاس لوجوزو {0}\n"
+"فيودور سوبليف {1}\n"
+"دا‌بج‌جاي {2}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:408
@@ -501,9 +519,8 @@ msgid "Savings"
 msgstr "ادِّخار"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:228
-#, fuzzy
 msgid "Select Account"
-msgstr "الحسابات المستخدمة مؤخَّرًا"
+msgstr "حدِّد حسابًا"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:215
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
@@ -623,7 +640,7 @@ msgstr "حوِّل إلى {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:540
 msgid "translator-credits"
-msgstr ""
+msgstr "علي الجشي <ahj696@hotmail.com>"
 
 #: ../../../Models/Account.cs:1696
 msgid "Type"
@@ -719,19 +736,16 @@ msgid "Your system reported that your currency is"
 msgstr "يقول نظامك أن عملتك هي"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:152
-#, fuzzy
 msgctxt "DecimalSeparator"
 msgid "Other"
 msgstr "غير ذلك"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "None"
 msgstr "لا يوجد"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "Other"
 msgstr "غير ذلك"
@@ -846,7 +860,6 @@ msgid "New Group (Ctrl+G)"
 msgstr "مجموعة جديدة (Ctrl+G)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:149
-#, fuzzy
 msgctxt "Group"
 msgid "New"
 msgstr "جديد"
@@ -868,13 +881,11 @@ msgid "Select Range"
 msgstr "اختر مدًى"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:193
-#, fuzzy
 msgctxt "DateRange"
 msgid "Start"
 msgstr "البداية"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
-#, fuzzy
 msgctxt "DateRange"
 msgid "End"
 msgstr "النهاية"
@@ -892,7 +903,6 @@ msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "معاملة جديدة (Ctrl+Shift+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:337
-#, fuzzy
 msgctxt "Transaction"
 msgid "New"
 msgstr "جديد"
@@ -945,19 +955,16 @@ msgid "Theme"
 msgstr "السمة"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "فاتحة"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "داكنة"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "نفس سمة النظام"
@@ -1040,7 +1047,6 @@ msgstr ""
 "المحلية."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
-#, fuzzy
 msgctxt "InsertSeparator"
 msgid "Off"
 msgstr "معطَّل"
@@ -1087,7 +1093,6 @@ msgstr "أغلق الحساب"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:25
-#, fuzzy
 msgctxt "Title"
 msgid "Transfer"
 msgstr "حوِّل"
@@ -1220,15 +1225,13 @@ msgid "Result"
 msgstr "النتيجة"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:112
-#, fuzzy
 msgctxt "Button"
 msgid "Transfer"
 msgstr "حوِّل"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:8
-#, fuzzy
 msgid "About Denaro"
-msgstr "دينار"
+msgstr "عن دينار"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:25
 msgid "Account Menu"
@@ -1239,7 +1242,6 @@ msgid "New Account (Ctrl+N)"
 msgstr "حساب جديد (Ctrl + N)"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:50
-#, fuzzy
 msgctxt "Account"
 msgid "New"
 msgstr "جديد"
@@ -1272,56 +1274,60 @@ msgstr ""
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:7
 msgid "Nickvision"
-msgstr ""
+msgstr "نكفجن"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
-msgstr ""
+msgstr "— إدارة عدة حسابات آنًا في واجهة ألسنة"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr ""
+msgstr "— فرز المعاملات حسب نوعها ومجموعتها وتاريخها"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
-msgstr ""
+msgstr "— تكرار المعاملات، مثل دفع الفواتير كلَّ شهر"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
 msgid "— Transfer money from one account to another"
-msgstr ""
+msgstr "— تحويل المال من حساب لآخر"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:14
 msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+"— تصدير الحسابات في صورة ملفات سي‌إس‌في، واستيراد ملفات سي‌إس‌في وأو‌إف‌إكس "
+"وكيو‌آي‌إف لإضافة الكثير من المعاملات لحساب آنًا"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:52
 msgid ""
 "- Fixed an issue where Denaro would crash on systems with unconfigured "
 "locales"
-msgstr ""
+msgstr "- أصلحت مشكلة تسبب انهيار دينار في الأنظمة التي لم تضبط إعدادات توطينها"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:53
 msgid ""
 "- Fixed an issue where PDF exporting failed for accounts with many receipts"
-msgstr ""
+msgstr "- أصلحت مشكلة فشل تصدير ملفات بي‌دي‌إف من الحسابات كثيرة الإيصالات"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:54
 msgid ""
 "- Fixed an issue where a group's filter was reactivated when a transaction "
 "was added to that group"
-msgstr ""
+msgstr "- أصلحت مشكلة إعادة تفعيل مرشح مجموعة إن أضيفت لها معاملة"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:55
 msgid ""
 "- Error messages will be shown if Denaro attempts to access inaccessible "
 "files instead of crashing"
 msgstr ""
+"- سوف تظهر رسالة خطأ حالما حاول دينار الوصول لملفات ليس له أن يصل لها، وذلك "
+"عوضًا عن انهياره"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:56
 msgid "- Updated translations (Thanks to everyone on Weblate)!"
-msgstr ""
+msgstr "- تحديث الترجمات (شكرًا لكل المساهمين من وبليت)!"
 
 #, fuzzy
 #~ msgid "AccountSettings"
