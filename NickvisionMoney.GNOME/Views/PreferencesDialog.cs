@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Runtime.InteropServices;
 using System.IO;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -159,7 +160,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="controller">PreferencesViewController</param>
     /// <param name="application">Adw.Application</param>
     /// <param name="parent">Gtk.Window</param>
-    public PreferencesDialog(PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : this(Builder.FromFile("preferences_dialog.ui", controller.Localizer), controller, application, parent)
+    public PreferencesDialog(PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : this(Builder.FromFile("preferences_dialog.ui"), controller, application, parent)
     {
     }
 
@@ -211,7 +212,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private void SelectBackupFolder(Gtk.Button sender, EventArgs e)
     {
         var fileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(fileDialog, _controller.Localizer["SelectBackupFolder"]);
+        gtk_file_dialog_set_title(fileDialog, _("Select Backup Folder"));
         _fileDialogCallback = async (source, res, data) =>
         {
             var fileHandle = gtk_file_dialog_select_folder_finish(fileDialog, res, IntPtr.Zero);
@@ -220,7 +221,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 var path = g_file_get_path(fileHandle);
                 if (path.StartsWith("/run/user"))
                 {
-                    AddToast(Adw.Toast.New(_controller.Localizer["FolderFlatpakUnavailable", "GTK"]));
+                    AddToast(Adw.Toast.New(_("Can't access the selected folder, check Flatpak permissions.")));
                 }
                 else
                 {

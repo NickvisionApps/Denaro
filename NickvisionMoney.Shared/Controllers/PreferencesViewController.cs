@@ -1,5 +1,4 @@
-﻿using NickvisionMoney.Shared.Helpers;
-using NickvisionMoney.Shared.Models;
+﻿using NickvisionMoney.Shared.Models;
 using System;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -9,11 +8,6 @@ namespace NickvisionMoney.Shared.Controllers;
 /// </summary>
 public class PreferencesViewController
 {
-    /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
-
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -28,10 +22,8 @@ public class PreferencesViewController
     /// Creates a PreferencesViewController
     /// </summary>
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
-    /// <param name="localizer">The Localizer of the app</param>
-    internal PreferencesViewController(EventHandler? recentAccountsChanged, Localizer localizer)
+    internal PreferencesViewController(EventHandler? recentAccountsChanged)
     {
-        Localizer = localizer;
         RecentAccountsChanged = recentAccountsChanged;
     }
 

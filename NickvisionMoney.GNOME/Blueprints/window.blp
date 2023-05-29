@@ -3,9 +3,9 @@ using Adw 1;
 
 menu mainMenu {
   item(_("Preferences"), "win.preferences")
-  item(_("KeyboardShortcuts"), "win.keyboardShortcuts")
+  item(_("Keyboard Shortcuts"), "win.keyboardShortcuts")
   item(_("Help"), "win.help")
-  item(_("About"), "win.about")
+  item(_("About Denaro"), "win.about")
 }
 
 Adw.ApplicationWindow _root {
@@ -22,7 +22,7 @@ Adw.ApplicationWindow _root {
       [start]
       Gtk.MenuButton _accountMenuButton {
         icon-name: "bank-symbolic";
-        tooltip-text: _("AccountMenu.GTK");
+        tooltip-text: _("Account Menu");
         visible: false;
         popover: Gtk.Popover _accountPopover {
           Gtk.Box {
@@ -34,7 +34,7 @@ Adw.ApplicationWindow _root {
             margin-bottom: 5;
             
             Adw.PreferencesGroup _recentAccountsGroup {
-              title: _("Recents.GTK");
+              title: _("Recents");
               width-request: 200;
               height-request: 55;
               header-suffix: Gtk.Box {
@@ -43,11 +43,11 @@ Adw.ApplicationWindow _root {
                 valign: center;
                 
                 Gtk.Button {
-                  tooltip-text: _("NewAccount.Tooltip");
+                  tooltip-text: _("New Account (Ctrl+N)");
                   action-name: "win.newAccount";
                   
                   Adw.ButtonContent {
-                    label: _("New");
+                    label: C_("Account", "New");
                     icon-name: "document-new-symbolic";
                   }
                 
@@ -56,7 +56,7 @@ Adw.ApplicationWindow _root {
                 
                 Gtk.Button {
                   icon-name: "document-open-symbolic";
-                  tooltip-text: _("OpenAccount.Tooltip");
+                  tooltip-text: _("Open Account (Ctrl+O)");
                   action-name: "win.openAccount";
                 }
                 
@@ -70,7 +70,7 @@ Adw.ApplicationWindow _root {
       [start]
       Gtk.ToggleButton _flapToggleButton {
         icon-name: "sidebar-show-symbolic";
-        tooltip-text: _("ToggleSidebar.GTK");
+        tooltip-text: _("Toggle Sidebar");
         active: true;
         visible: false;
       }
@@ -79,7 +79,7 @@ Adw.ApplicationWindow _root {
       Gtk.MenuButton {
         direction: none;
         menu-model: mainMenu;
-        tooltip-text: _("MainMenu.GTK");
+        tooltip-text: _("Main Menu");
         primary: true;
       }
 
@@ -120,7 +120,7 @@ Adw.ApplicationWindow _root {
                 }
                 
                 Gtk.Label _dragLabel {
-                  label: _("NoAccountDescription");
+                  label: _("Create or open an account to get started. You may also drag a file into the app from your file browser.");
                   wrap: true;
                   justify: center;
                   visible: bind _startPageRecentAccountsGroup.visible inverted;
@@ -129,7 +129,7 @@ Adw.ApplicationWindow _root {
                 }
                 
                 Adw.PreferencesGroup _startPageRecentAccountsGroup {
-                  title: _("RecentAccounts");
+                  title: _("Recent Accounts");
                   width-request: 200;
                   height-request: 55;
                   margin-top: 24;
@@ -151,7 +151,7 @@ Adw.ApplicationWindow _root {
                     focusable: false;
                     
                     Gtk.Button _newAccountButton {
-                      label: _("NewAccount");
+                      label: _("New Account");
                       action-name: "win.newAccount";
                       halign: center;
                       
@@ -163,7 +163,7 @@ Adw.ApplicationWindow _root {
                     focusable: false;
                     
                     Gtk.Button _openAccountButton {
-                      label: _("OpenAccount");
+                      label: _("Open Account");
                       action-name: "win.openAccount";
                       halign: center;
                       

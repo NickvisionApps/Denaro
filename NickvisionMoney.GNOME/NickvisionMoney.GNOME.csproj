@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -21,6 +21,11 @@
     <Exec Command="echo Compiling extra resources..." />
     <Exec Command="blueprint-compiler batch-compile ./Blueprints ./Blueprints ./Blueprints/*.blp" />
     <Exec Command="glib-compile-resources --sourcedir ./Resources ./Resources/org.nickvision.money.gresource.xml --target=$(OutDir)/org.nickvision.money.gresource" />
+    <Exec Command="
+      while read lang_code; do \
+        mkdir -p $(OutDir)/${lang_code}; \
+        msgfmt ../NickvisionMoney.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/denaro.mo; \
+      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -28,13 +33,17 @@
   </Target>
 
   <Target Name="PostPublish" AfterTargets="Publish">
-    <Exec Command="mv $(OutDir)/org.nickvision.money.gresource $(PublishDir)/org.nickvision.money.gresource" />
+    <Exec Command="cp $(OutDir)/org.nickvision.money.gresource $(PublishDir)/org.nickvision.money.gresource" />
+    <Exec Command="
+      while read lang_code; do \
+        cp -r $(OutDir)/${lang_code} $(PublishDir)/; \
+      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
-	<Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">
-	  <ItemGroup>
-      	<EmbeddedResource Include="Blueprints\*.ui" Type="Non-Resx" WithCulture="false" />
-	  </ItemGroup>
-	</Target>
+  <Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">
+    <ItemGroup>
+        <EmbeddedResource Include="Blueprints\*.ui" Type="Non-Resx" WithCulture="false" />
+    </ItemGroup>
+  </Target>
 
 </Project>

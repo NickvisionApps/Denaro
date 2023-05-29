@@ -1,11 +1,11 @@
 ﻿using NickvisionMoney.Shared.Events;
-using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -17,11 +17,6 @@ public class MainWindowController : IDisposable
     private bool _disposed;
     private string? _fileToLaunch;
     private List<AccountViewController> _openAccounts;
-
-    /// <summary>
-    /// The localizer to get translated strings from
-    /// </summary>
-    public Localizer Localizer { get; init; }
 
     /// <summary>
     /// Gets the AppInfo object
@@ -69,7 +64,6 @@ public class MainWindowController : IDisposable
         _disposed = false;
         _fileToLaunch = null;
         _openAccounts = new List<AccountViewController>();
-        Localizer = new Localizer();
     }
 
     /// <summary>
@@ -96,15 +90,14 @@ public class MainWindowController : IDisposable
     {
         get
         {
-            var greeting = DateTime.Now.Hour switch
+            return DateTime.Now.Hour switch
             {
-                >= 0 and < 6 => "Night",
-                < 12 => "Morning",
-                < 18 => "Afternoon",
-                < 24 => "Evening",
-                _ => "Generic"
+                >= 0 and < 6 => _p("Night", "Good Morning!"),
+                < 12 => _p("Morning", "Good Morning!"),
+                < 18 => _("Good Afternoon!"),
+                < 24 => _("Good Evening!"),
+                _ => _("Good Day!")
             };
-            return Localizer["Greeting", greeting];
         }
     }
 
@@ -138,7 +131,6 @@ public class MainWindowController : IDisposable
         }
         if (disposing)
         {
-            Localizer.Dispose();
             foreach (var controller in _openAccounts)
             {
                 controller.Dispose();
@@ -151,13 +143,13 @@ public class MainWindowController : IDisposable
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController(RecentAccountsChanged, Localizer);
+    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController(RecentAccountsChanged);
 
     /// <summary>
     /// Creates a new DashboardViewController
     /// </summary>
     /// <returns>The DashboardViewController</returns>
-    public DashboardViewController CreateDashboardViewController() => new DashboardViewController(_openAccounts, Localizer, Configuration.Current.GroupDefaultColor);
+    public DashboardViewController CreateDashboardViewController() => new DashboardViewController(_openAccounts, Configuration.Current.GroupDefaultColor);
 
     /// <summary>
     /// Gets an AccountViewController for the most recent account
@@ -220,7 +212,7 @@ public class MainWindowController : IDisposable
         }
         if (!_openAccounts.Any(x => x.AccountPath == path))
         {
-            var controller = new AccountViewController(path, Localizer, NotificationSent, RecentAccountsChanged);
+            var controller = new AccountViewController(path, NotificationSent, RecentAccountsChanged);
             controller.TransferSent += OnTransferSent;
             try
             {
@@ -233,14 +225,14 @@ public class MainWindowController : IDisposable
                     controller.Dispose();
                     if (password != null)
                     {
-                        NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["InvalidPassword"], NotificationSeverity.Error));
+                        NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to login to account. Provided password is invalid."), NotificationSeverity.Error));
                     }
                     return false;
                 }
             }
             catch
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["UnableToOpenAccount"], NotificationSeverity.Error));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
                 return false;
             }
             _openAccounts.Add(controller);
@@ -251,7 +243,7 @@ public class MainWindowController : IDisposable
         {
             if (showOpenedNotification)
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["AccountOpenedAlready"], NotificationSeverity.Warning));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("This account is already opened."), NotificationSeverity.Warning));
             }
             return false;
         }

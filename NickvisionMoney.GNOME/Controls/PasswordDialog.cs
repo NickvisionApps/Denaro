@@ -1,5 +1,4 @@
 using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Helpers;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -37,9 +36,8 @@ public partial class PasswordDialog : Adw.Window
     /// </summary>
     /// <param name="parentWindow">Gtk.Window</param>
     /// <param name="accountTitle">The title of the account requiring the password</param>
-    /// <param name="localizer">The localizer for the app</param>
     /// <param name="tcs">TaskCompletionSource used to pass result to the controller</param>
-    public PasswordDialog(Gtk.Window parent, string accountTitle, Localizer localizer, TaskCompletionSource<string?> tcs) : this(Builder.FromFile("password_dialog.ui", localizer), parent, accountTitle, tcs)
+    public PasswordDialog(Gtk.Window parent, string accountTitle, TaskCompletionSource<string?> tcs) : this(Builder.FromFile("password_dialog.ui"), parent, accountTitle, tcs)
     {
     }
 }

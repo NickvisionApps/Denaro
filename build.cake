@@ -101,6 +101,34 @@ Task("FlatpakSourcesGen")
     });
 });
 
+Task("GeneratePot")
+    .Does(() =>
+{
+    StartProcess("GetText.Extractor", new ProcessSettings {
+        Arguments = $"-o -s ./{projectName}.GNOME -s ./{projectName}.Shared -as \"_\" -ad \"_p\" -ap \"_n\" -adp \"_pn\" -t ./{projectName}.Shared/Resources/po/{shortName}.pot"
+    });
+    StartProcess("sh", new ProcessSettings {
+        Arguments = $"-c \"xgettext --from-code=UTF-8 --add-comments --keyword=_ --keyword=C_:1c,2 -o ./{projectName}.Shared/Resources/po/{shortName}.pot -j ./{projectName}.GNOME/Blueprints/*.blp\""
+    });
+    StartProcess("xgettext", new ProcessSettings {
+        Arguments = $"-o ./{projectName}.Shared/Resources/po/{shortName}.pot -j ./{projectName}.Shared/{appId}.desktop.in"
+    });
+    StartProcess("xgettext", new ProcessSettings {
+        Arguments = $"-o ./{projectName}.Shared/Resources/po/{shortName}.pot -j ./{projectName}.Shared/{appId}.metainfo.xml.in"
+    });
+});
+
+Task("UpdatePo")
+    .Does(() =>
+{
+    foreach (var lang in FileReadLines($"./{projectName}.Shared/Resources/po/LINGUAS"))
+    {
+        StartProcess("msgmerge", new ProcessSettings {
+            Arguments = $"-U ./{projectName}.Shared/Resources/po/{lang}.po ./{projectName}.Shared/Resources/po/{shortName}.pot"
+        });
+    }
+});
+
 Task("DocsGeneratePot")
     .Does(() =>
 {
@@ -197,17 +225,19 @@ private void FinishPublishLinux(string outDir, string prefix, string libDir, boo
     CreateDirectory(desktopDir);
     CopyFileToDirectory($"./{projectName}.Shared/{appId}.desktop.in", desktopDir);
     ReplaceTextInFiles($"{desktopDir}/{appId}.desktop.in", "@EXEC@", $"{prefix}/bin/{appId}");
-    MoveFile($"{desktopDir}/{appId}.desktop.in", $"{desktopDir}/{appId}.desktop");
+    StartProcess("msgfmt", new ProcessSettings {
+        Arguments = $"--desktop --template={desktopDir}/{appId}.desktop.in -o {desktopDir}/{appId}.desktop -d ./{projectName}.Shared/Resources/po/"
+    });
+    DeleteFile($"{desktopDir}/{appId}.desktop.in");
 
     var metainfoDir = $"{shareDir}/metainfo";
     CreateDirectory(metainfoDir);
     CopyFileToDirectory($"./{projectName}.Shared/{appId}.metainfo.xml.in", metainfoDir);
     ReplaceTextInFiles($"{metainfoDir}/{appId}.metainfo.xml.in", "@PROJECT@", $"{projectName}.{projectSuffix}");
-    MoveFile($"{metainfoDir}/{appId}.metainfo.xml.in", $"{metainfoDir}/{appId}.metainfo.xml");
-
-    var mimeDir = $"{shareDir}/mime/packages";
-    CreateDirectory(mimeDir);
-    CopyFileToDirectory($"./{projectName}.Shared/{appId}.extension.xml", mimeDir);
+    StartProcess("msgfmt", new ProcessSettings {
+        Arguments = $"--xml --template={metainfoDir}/{appId}.metainfo.xml.in -o {metainfoDir}/{appId}.metainfo.xml -d ./{projectName}.Shared/Resources/po/"
+    });
+    DeleteFile($"{metainfoDir}/{appId}.metainfo.xml.in");
 }
 
 private void PostPublishGNOME(string outDir, string prefix, string libDir)
@@ -217,17 +247,14 @@ private void PostPublishGNOME(string outDir, string prefix, string libDir)
     CreateDirectory($"{shareDir}{sep}{appId}");
     MoveFileToDirectory($"{outDir}{libDir}{sep}{appId}{sep}{appId}.gresource", $"{shareDir}{sep}{appId}");
 
-    var servicesDir = $"{shareDir}{sep}dbus-1{sep}services";
-    CreateDirectory(servicesDir);
-    CopyFileToDirectory($".{sep}{projectName}.GNOME{sep}{appId}.service.in", servicesDir);
-    ReplaceTextInFiles($"{servicesDir}{sep}{appId}.service.in", "@PREFIX@", $"{prefix}");
-    MoveFile($"{servicesDir}{sep}{appId}.service.in", $"{servicesDir}{sep}{appId}.service");
-
-    FileAppendLines($"{shareDir}{sep}applications{sep}{appId}.desktop" , new string[] { "\nDBusActivatable=true" });
-
-    foreach (var dir in GetSubDirectories($".{sep}{projectName}.Shared{sep}Docs{sep}yelp"))
+    if (FileExists($".{sep}{projectName}.GNOME{sep}{appId}.service.in"))
     {
-        CopyDirectory(dir, $"{shareDir}{sep}help{sep}{dir.Segments[dir.Segments.Length-1]}{sep}{shortName}");
+        var servicesDir = $"{shareDir}{sep}dbus-1{sep}services";
+        CreateDirectory(servicesDir);
+        CopyFileToDirectory($".{sep}{projectName}.GNOME{sep}{appId}.service.in", servicesDir);
+        ReplaceTextInFiles($"{servicesDir}{sep}{appId}.service.in", "@PREFIX@", $"{prefix}");
+        MoveFile($"{servicesDir}{sep}{appId}.service.in", $"{servicesDir}{sep}{appId}.service");
+        FileAppendLines($"{shareDir}{sep}applications{sep}{appId}.desktop" , new string[] { "DBusActivatable=true" });
     }
 }
 
