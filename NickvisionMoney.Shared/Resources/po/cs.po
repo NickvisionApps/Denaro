@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-05-30 19:56+0000\n"
+"Last-Translator: Fjuro <ifjuro@proton.me>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
+"app/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:524
 msgid "(Copy)"
@@ -30,11 +33,12 @@ msgstr "{0} z {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:581
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1319
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "Transakce"
-msgstr[1] "Transakce"
+msgstr[0] "{0} transakce"
+msgstr[1] "{0} transakce"
+msgstr[2] "{0} transakcí"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:79
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
@@ -170,6 +174,8 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"David Lapshin {0}\n"
+"Tobias Bernard {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
@@ -207,9 +213,8 @@ msgid "Delete Transaction?"
 msgstr "Odstranit transakci?"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:887
-#, fuzzy
 msgid "DeleteExisting"
-msgstr "Odstranit stávající"
+msgstr "OdstranitStávající"
 
 #: ../../../../NickvisionMoney.GNOME/Program.cs:66
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
@@ -332,11 +337,12 @@ msgid "Id"
 msgstr "ID"
 
 #: ../../../Controllers/AccountViewController.cs:962
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
 msgstr[0] "Importována {0} transakce ze souboru."
-msgstr[1] "Importována {0} transakce ze souboru."
+msgstr[1] "Importovány {0} transakce ze souboru."
+msgstr[2] "Importováno {0} transakcí ze souboru."
 
 #: ../../../Models/Account.cs:1617 ../../../Models/Account.cs:1737
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:76
@@ -395,6 +401,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Přispěvatelé na GitHubu ❤️ {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:538
 #, csharp-format
@@ -403,6 +411,9 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:408
@@ -502,9 +513,8 @@ msgid "Savings"
 msgstr "Úspory"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:228
-#, fuzzy
 msgid "Select Account"
-msgstr "Nedávné účty"
+msgstr "Vybrat účet"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:215
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
@@ -624,7 +634,7 @@ msgstr "Převést na {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:540
 msgid "translator-credits"
-msgstr ""
+msgstr "translator-credits"
 
 #: ../../../Models/Account.cs:1696
 msgid "Type"
@@ -722,19 +732,16 @@ msgid "Your system reported that your currency is"
 msgstr "Váš systém hlásí, že vaší měnou je"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:152
-#, fuzzy
 msgctxt "DecimalSeparator"
 msgid "Other"
 msgstr "Jiný"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "None"
 msgstr "Žádný"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "Other"
 msgstr "Jiný"
@@ -850,7 +857,6 @@ msgid "New Group (Ctrl+G)"
 msgstr "Nová skupina (Ctrl+G)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:149
-#, fuzzy
 msgctxt "Group"
 msgid "New"
 msgstr "Nová"
@@ -872,13 +878,11 @@ msgid "Select Range"
 msgstr "Zvolte rozsah"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:193
-#, fuzzy
 msgctxt "DateRange"
 msgid "Start"
 msgstr "Začátek"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
-#, fuzzy
 msgctxt "DateRange"
 msgid "End"
 msgstr "Konec"
@@ -896,7 +900,6 @@ msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Nová transakce (Ctrl+Shift+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:337
-#, fuzzy
 msgctxt "Transaction"
 msgid "New"
 msgstr "Nová"
@@ -949,19 +952,16 @@ msgid "Theme"
 msgstr "Motiv"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "Světlý"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tmavý"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "Systémový"
@@ -1044,7 +1044,6 @@ msgstr ""
 "oddělovač místního jazyka."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
-#, fuzzy
 msgctxt "InsertSeparator"
 msgid "Off"
 msgstr "Vypnout"
@@ -1091,7 +1090,6 @@ msgstr "Uzavřít účet"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:25
-#, fuzzy
 msgctxt "Title"
 msgid "Transfer"
 msgstr "Převod"
@@ -1223,15 +1221,13 @@ msgid "Result"
 msgstr "Výsledek"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:112
-#, fuzzy
 msgctxt "Button"
 msgid "Transfer"
 msgstr "Převod"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:8
-#, fuzzy
 msgid "About Denaro"
-msgstr "Denaro"
+msgstr "O aplikaci Denaro"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:25
 msgid "Account Menu"
@@ -1242,7 +1238,6 @@ msgid "New Account (Ctrl+N)"
 msgstr "Nový účet (Ctrl+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:50
-#, fuzzy
 msgctxt "Account"
 msgid "New"
 msgstr "Nová"
@@ -1273,56 +1268,68 @@ msgstr "peníze;finance;peněženka;hotovost;banka;GTK;Nickvision;"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:7
 msgid "Nickvision"
-msgstr ""
+msgstr "Nickvision"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
-msgstr ""
+msgstr "— Správa několika účtů najednou pomocí intuitivního rozhraní"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr ""
+msgstr "— Snadné filtrování transakcí podle typu, skupiny nebo data"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
 msgstr ""
+"— Snadné opakované transakce, například účtování, ke kterým dochází každý "
+"měsíc"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
 msgid "— Transfer money from one account to another"
-msgstr ""
+msgstr "— Převod peněz z jednoho účtu na druhý"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:14
 msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+"— Export účtu do souboru CSV a import souboru CSV, OFX nebo QIF pro hromadné "
+"přidání transakcí na účet"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:52
 msgid ""
 "- Fixed an issue where Denaro would crash on systems with unconfigured "
 "locales"
 msgstr ""
+"- Opraven problém, při kterém Denaro padalo na systémech s nenastavenými "
+"místními nastaveními"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:53
 msgid ""
 "- Fixed an issue where PDF exporting failed for accounts with many receipts"
 msgstr ""
+"- Opraven problém, kdy se nezdařil export do PDF u účtů s velkým počtem "
+"faktur"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:54
 msgid ""
 "- Fixed an issue where a group's filter was reactivated when a transaction "
 "was added to that group"
 msgstr ""
+"- Opraven problém, kdy se filtr skupiny znovu aktivoval, když byla do dané "
+"skupiny přidána transakce"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:55
 msgid ""
 "- Error messages will be shown if Denaro attempts to access inaccessible "
 "files instead of crashing"
 msgstr ""
+"- Pokud se Denaro pokusí o přístup k nedostupným souborům, místo pádu se "
+"zobrazí chybové zprávy"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:56
 msgid "- Updated translations (Thanks to everyone on Weblate)!"
-msgstr ""
+msgstr "- Aktualizovány překlady (Díky všem na Weblate)!"
 
 #, fuzzy
 #~ msgid "AccountSettings"
