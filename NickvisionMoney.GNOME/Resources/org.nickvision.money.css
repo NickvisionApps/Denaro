@@ -30,6 +30,7 @@
 
 /* Calendars colors */
 @define-color denaro_calendar_today_bg_color @headerbar_bg_color;
+@define-color denaro_calendar_today_fg_color @view_fg_color;
 @define-color denaro_calendar_marked_day_fg_color @accent_color;
 @define-color denaro_calendar_selected_day_bg_color @accent_bg_color;
 @define-color denaro_calendar_delected_day_fg_color @fg_color;
@@ -51,6 +52,7 @@
 
 #calendarAccount .today {
   background-color: @denaro_calendar_today_bg_color;
+  color: @denaro_calendar_today_fg_color;
   box-shadow: none;
 }
 
@@ -86,6 +88,7 @@
 
 #calendarTransactions .today {
   background-color: @denaro_calendar_today_bg_color;
+  color: @denaro_calendar_today_fg_color;
   box-shadow: none;
 }
 
