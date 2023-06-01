@@ -103,7 +103,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Label _expenseLabel;
     [Gtk.Connect] private readonly Gtk.CheckButton _expenseCheck;
     [Gtk.Connect] private readonly Gtk.Button _resetOverviewFilterButton;
-    [Gtk.Connect] private readonly Gtk.ToggleButton _toggleGroupsButton;
+    [Gtk.Connect] private readonly Gtk.Button _toggleGroupsButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _toggleGroupsButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
@@ -187,7 +187,11 @@ public partial class AccountView : Adw.Bin
         //Button Reset Overview Filter
         _resetOverviewFilterButton.OnClicked += OnResetOverviewFilter;
         //Button Toggle Groups
-        _toggleGroupsButton.OnToggled += OnToggleGroups;
+        _toggleGroupsButton.OnClicked += (sender, e) =>
+        {
+            _controller.ShowGroupsList = !_controller.ShowGroupsList;
+            OnToggleGroups();
+        };
         //Button Reset Groups Filter
         _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         //Calendar Widget
@@ -551,7 +555,7 @@ public partial class AccountView : Adw.Bin
         {
             _sortLastToFirstButton.SetActive(true);
         }
-        OnToggleGroups(null, EventArgs.Empty);
+        OnToggleGroups();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
     }
@@ -1150,11 +1154,9 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private void OnToggleGroups(object? sender, EventArgs e)
+    private void OnToggleGroups()
     {
-        if (_toggleGroupsButton.GetActive())
+        if (!_controller.ShowGroupsList)
         {
             _toggleGroupsButtonContent.SetIconName("view-reveal-symbolic");
             _toggleGroupsButtonContent.SetLabel(_("Show"));
@@ -1164,8 +1166,7 @@ public partial class AccountView : Adw.Bin
             _toggleGroupsButtonContent.SetIconName("view-conceal-symbolic");
             _toggleGroupsButtonContent.SetLabel(_("Hide"));
         }
-        _groupsList.SetVisible(!_toggleGroupsButton.GetActive());
-        _controller.ShowGroupsList = !_toggleGroupsButton.GetActive();
+        _groupsList.SetVisible(_controller.ShowGroupsList);
     }
 
     /// <summary>
