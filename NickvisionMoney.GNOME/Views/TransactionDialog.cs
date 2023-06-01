@@ -201,7 +201,7 @@ public partial class TransactionDialog : Adw.Window
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _titleLabel.SetLabel($"{_("Transaction")} - {idString}");
+        _titleLabel.SetLabel($"{_("Transaction")} — {idString}");
         _deleteButton.SetVisible(_controller.IsEditing);
         _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         _copyButton.SetVisible(_controller.CanCopy);

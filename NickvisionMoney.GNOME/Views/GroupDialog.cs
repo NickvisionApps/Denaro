@@ -82,7 +82,7 @@ public partial class GroupDialog : Adw.Window
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _titleLabel.SetLabel($"{_("Group")} - {idString}");
+        _titleLabel.SetLabel($"{_("Group")} — {idString}");
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
