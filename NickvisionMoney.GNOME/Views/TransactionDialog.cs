@@ -126,6 +126,7 @@ public partial class TransactionDialog : Adw.Window
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
+    [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
@@ -152,7 +153,6 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.TextView _notesView;
     [Gtk.Connect] private readonly Gtk.Button _deleteButton;
-    [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _descriptionKeyController;
@@ -216,12 +216,14 @@ public partial class TransactionDialog : Adw.Window
         {
             _stack.SetVisibleChildName("main");
             _backButton.SetVisible(false);
+            _copyButton.SetVisible(true);
             SetDefaultWidget(_applyButton);
         };
         _extrasRow.OnActivated += (sender, e) =>
         {
             _stack.SetVisibleChildName("extras");
             _backButton.SetVisible(true);
+            _copyButton.SetVisible(false);
         };
         //Description
         _descriptionRow.OnNotify += (sender, e) =>

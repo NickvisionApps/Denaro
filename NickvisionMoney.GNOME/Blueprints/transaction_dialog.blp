@@ -14,12 +14,18 @@ Adw.Window _root {
 
       [start]
       Gtk.Button _backButton {
-        halign: start;
-        valign: center;
         visible: false;
         child: Adw.ButtonContent {
           icon-name: "go-previous-symbolic";
           label: _("Back");
+        };
+      }
+
+      [start]
+      Gtk.Button _copyButton {
+        child: Adw.ButtonContent {
+          icon-name: "edit-copy-symbolic";
+          label: _("Make a Copy");
         };
       }
 
@@ -228,13 +234,6 @@ Adw.Window _root {
                 label: _("Delete");
 
                 styles ["pill", "destructive-action"]
-              }
-
-              Gtk.Button _copyButton {
-                valign: center;
-                label: _("Make a Copy");
-
-                styles ["pill"]
               }
 
               Gtk.Button _applyButton {
