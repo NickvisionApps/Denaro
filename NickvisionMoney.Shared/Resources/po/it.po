@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-06-01 17:46+0000\n"
+"Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
+"app/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:524
 msgid "(Copy)"
@@ -30,11 +33,11 @@ msgstr "{0} da {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:581
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1319
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "Transazione"
-msgstr[1] "Transazione"
+msgstr[0] "{0} transazione"
+msgstr[1] "{0} transazioni"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:79
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
@@ -47,7 +50,7 @@ msgstr "Impostazioni account"
 #: ../../../Models/Account.cs:1633
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:59
 msgid "Account Type"
-msgstr "Tipo di account"
+msgstr "Tipo di conto"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:131
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:203
@@ -1087,7 +1090,7 @@ msgstr "Rimuovi cartella di backup"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"
-msgstr "Account"
+msgstr "Conto"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:27
 msgid "Close Account"
