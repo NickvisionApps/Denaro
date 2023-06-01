@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-29 11:57-0400\n"
+"POT-Creation-Date: 2023-06-01 10:19-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:539
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:534
 #, csharp-format
 msgid ""
 "David Lapshin {0}\n"
@@ -308,7 +308,7 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:248
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:245
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
@@ -344,7 +344,7 @@ msgstr ""
 msgid "Manage your personal finances"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:536
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:531
 msgid "Matrix Chat"
 msgstr ""
 
@@ -375,20 +375,20 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:372
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionMoney.GNOME/Blueprints/window.blp:154
+#: NickvisionMoney.GNOME/Blueprints/window.blp:183
 msgid "New Account"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:537
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:532
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:538
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:533
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -396,8 +396,8 @@ msgid ""
 "DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:408
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:366
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:405
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../Models/Account.cs:1786
 msgid "Nickvision Denaro Account"
@@ -432,14 +432,14 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:255
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:252
 msgid "Open"
 msgstr ""
 
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:409
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:661
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:412
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
-#: NickvisionMoney.GNOME/Blueprints/window.blp:166
+#: NickvisionMoney.GNOME/Blueprints/window.blp:195
 msgid "Open Account"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Transfer To {0}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:540
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:535
 msgid "translator-credits"
 msgstr ""
 
@@ -632,7 +632,7 @@ msgid ""
 "access the file and try again."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:384
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:381
 msgid "Unable to override an opened account."
 msgstr ""
 
@@ -767,6 +767,7 @@ msgid "If the password is lost, there is no way to restore the file!"
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:255
+#: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
 msgid "Remove"
 msgstr ""
 
@@ -1066,7 +1067,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:84
-#: NickvisionMoney.GNOME/Blueprints/window.blp:73
+#: NickvisionMoney.GNOME/Blueprints/window.blp:102
 msgid "Toggle Sidebar"
 msgstr ""
 
@@ -1151,12 +1152,12 @@ msgid "Select a destination account"
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:54
-#: NickvisionMoney.GNOME/Blueprints/window.blp:132
+#: NickvisionMoney.GNOME/Blueprints/window.blp:161
 msgid "Recent Accounts"
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:57
-#: NickvisionMoney.GNOME/Blueprints/window.blp:37
+#: NickvisionMoney.GNOME/Blueprints/window.blp:44
 msgid "Recents"
 msgstr ""
 
@@ -1181,28 +1182,32 @@ msgstr ""
 msgid "Account Menu"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:46
+#: NickvisionMoney.GNOME/Blueprints/window.blp:54
 msgid "New Account (Ctrl+N)"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:50
+#: NickvisionMoney.GNOME/Blueprints/window.blp:58
 msgctxt "Account"
 msgid "New"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:59
+#: NickvisionMoney.GNOME/Blueprints/window.blp:67
 msgid "Open Account (Ctrl+O)"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:82
+#: NickvisionMoney.GNOME/Blueprints/window.blp:83
+msgid "No Recent Accounts"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/window.blp:111
 msgid "Main Menu"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:89
+#: NickvisionMoney.GNOME/Blueprints/window.blp:118
 msgid "Dashboard"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:123
+#: NickvisionMoney.GNOME/Blueprints/window.blp:152
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."

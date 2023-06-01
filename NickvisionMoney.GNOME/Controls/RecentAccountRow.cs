@@ -28,10 +28,13 @@ public partial class RecentAccountRow : Adw.ActionRow
     [Gtk.Connect] private readonly Gtk.Button _prefixButton;
     [Gtk.Connect] private readonly Gtk.DrawingArea _tagArea;
     [Gtk.Connect] private readonly Gtk.Label _tagLabel;
+    [Gtk.Connect] private readonly Gtk.Button _removeButton;
 
+    private readonly RecentAccount _recentAccount;
     private readonly Color _color;
 
-    public event EventHandler? OnOpenAccount;
+    public event EventHandler<RecentAccount>? Selected;
+    public event EventHandler<RecentAccount>? RemoveRequested;
 
     /// <summary>
     /// Constructs a RecentAccountRow
@@ -40,12 +43,16 @@ public partial class RecentAccountRow : Adw.ActionRow
     /// <param name="account">The RecentAccount model</param>
     /// <param name="colorString">The color string of the recent account</param>
     /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
-    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen) : base(builder.GetPointer("_root"), false)
+    /// <param name="canRemove">Whether or not the recent account can be removed</param>
+    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen, bool canRemove) : base(builder.GetPointer("_root"), false)
     {
+        _recentAccount = account;
         builder.Connect(this);
         SetTitle(account.Name);
         SetSubtitle(account.Path);
-        _prefixButton.OnClicked += (sender, e) => OnOpenAccount?.Invoke(this, EventArgs.Empty);
+        _prefixButton.OnClicked += (sender, e) => Selected?.Invoke(this, _recentAccount);
+        _removeButton.SetVisible(canRemove);
+        _removeButton.OnClicked += (sender, e) => RemoveRequested?.Invoke(this, _recentAccount);
         _color = new Color();
         gdk_rgba_parse(ref _color, colorString);
         var luma = _color.Red * 0.2126 + _color.Green * 0.7152 + _color.Blue * 0.0722;
@@ -80,7 +87,8 @@ public partial class RecentAccountRow : Adw.ActionRow
     /// <param name="account">The RecentAccount model</param>
     /// <param name="colorString">The color string of the recent account</param>
     /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
-    public RecentAccountRow(RecentAccount account, string colorString, bool onStartScreen) : this(Builder.FromFile("recent_account_row.ui"), account, colorString, onStartScreen)
+    /// <param name="canRemove">Whether or not the recent account can be removed</param>
+    public RecentAccountRow(RecentAccount account, string colorString, bool onStartScreen, bool canRemove) : this(Builder.FromFile("recent_account_row.ui"), account, colorString, onStartScreen, canRemove)
     {
     }
 

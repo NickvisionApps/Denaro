@@ -49,6 +49,8 @@
   <releases>
     <release version="2023.6.0-next" date="2023-06-01">
       <description translatable="no">
+        <p>- Added the ability to remove recent accounts from the list</p>
+        <p>- Moved deleting groups and transactions from their rows to their dialogs</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

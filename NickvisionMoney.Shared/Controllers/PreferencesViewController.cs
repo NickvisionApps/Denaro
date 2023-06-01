@@ -14,17 +14,11 @@ public class PreferencesViewController
     public AppInfo AppInfo => AppInfo.Current;
 
     /// <summary>
-    /// Occurs when the recent accounts list is changed
-    /// </summary>
-    private event EventHandler? RecentAccountsChanged;
-
-    /// <summary>
     /// Creates a PreferencesViewController
     /// </summary>
-    /// <param name="recentAccountsChanged">The recent accounts changed event</param>
-    internal PreferencesViewController(EventHandler? recentAccountsChanged)
+    internal PreferencesViewController()
     {
-        RecentAccountsChanged = recentAccountsChanged;
+
     }
 
     /// <summary>
@@ -130,9 +124,5 @@ public class PreferencesViewController
     /// <summary>
     /// Saves the configuration to disk
     /// </summary>
-    public void SaveConfiguration()
-    {
-        Configuration.Current.Save();
-        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-    }
+    public void SaveConfiguration() => Configuration.Current.Save();
 }

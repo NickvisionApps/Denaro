@@ -143,7 +143,7 @@ public class MainWindowController : IDisposable
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController(RecentAccountsChanged);
+    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
 
     /// <summary>
     /// Creates a new DashboardViewController
@@ -257,6 +257,17 @@ public class MainWindowController : IDisposable
     {
         _openAccounts[index].Dispose();
         _openAccounts.RemoveAt(index);
+    }
+
+    /// <summary>
+    /// Removes a recent account from the list
+    /// </summary>
+    /// <param name="recentAccount">The RecentAccount to remove</param>
+    public void RemoveRecentAccount(RecentAccount recentAccount)
+    {
+        Configuration.Current.RemoveRecentAccount(recentAccount);
+        Configuration.Current.Save();
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

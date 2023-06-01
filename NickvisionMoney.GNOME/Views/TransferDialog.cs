@@ -125,11 +125,11 @@ public partial class TransferDialog : Adw.Window
         {
             foreach (var recentAccount in _controller.RecentAccounts)
             {
-                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false);
-                row.OnOpenAccount += (sender, e) =>
+                var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), false, false);
+                row.Selected += (sender, e) =>
                 {
                     _recentAccountsPopover.Popdown();
-                    _destinationAccountRow.SetSubtitle(row.GetSubtitle() ?? "");
+                    _destinationAccountRow.SetSubtitle(e.Path);
                     _destinationPasswordRow.SetVisible(false);
                     _destinationPasswordRow.SetSensitive(true);
                     _destinationPasswordRow.SetText("");
