@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-04-22 04:15+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2023-06-01 17:46+0000\n"
+"Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/it/>\n"
 "Language: it\n"
@@ -36,12 +36,12 @@ msgstr "Fyodor Sobolev"
 #: yelp/C/import-export.page:14 yelp/C/index.page:14 yelp/C/transaction.page:14
 #: yelp/C/transfer.page:14
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #. (itstool) path: page/title
 #: yelp/C/account.page:20
 msgid "Account"
-msgstr ""
+msgstr "Conto"
 
 #. (itstool) path: page/p
 #: yelp/C/account.page:21
@@ -50,6 +50,10 @@ msgid ""
 "them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
 "automatically after you create a new account."
 msgstr ""
+"In questa pagina vengono spiegate tutte le proprietà degli account in "
+"<app>Denaro</app>. La maggior parte di esse è mostrata nella finestra di "
+"dialogo <gui>Impostazioni conto</gui>. Questa finestra viene aperta "
+"automaticamente alla creazione di un nuovo conto."
 
 #. (itstool) path: page/p
 #: yelp/C/account.page:22
@@ -61,6 +65,13 @@ msgid ""
 "nmoney</file> files are 100% compatible between platforms as long as they "
 "are from the same application version (i.e. V2023.1.0)."
 msgstr ""
+"Ciascun conto è registrato in un singolo file <file>*.nmoney</file>. I file "
+"creati da una vecchia versione <em>stabile</em> di <app>Denaro</app> possono "
+"essere aperti senza rischi con una versione <em>stabile</em> più recente "
+"dell'applicazione. Anche se l'applicazione può girare su più piattaforme ("
+"Windows e Linux), i file <file>*.nmoney</file> sono compatibili al 100% tra "
+"le piattaforme purché provengano dalla stessa versione dell'applicazione ("
+"per esempio V2023.1.0)."
 
 #. (itstool) path: note/p
 #: yelp/C/account.page:24
@@ -69,11 +80,15 @@ msgid ""
 "unfinished modifications that can cause data loss. DO NOT use account files "
 "that contain real data in unstable versions of the app!"
 msgstr ""
+"Le versioni instabili (beta ed RC) dell'applicazione possono contenere "
+"errori o modifiche non terminate, che possono causare la perdita di dati. È "
+"sconsigliato usare versioni instabili l'applicazione con file conto che "
+"contengono i propri dati veri."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:30
@@ -82,11 +97,14 @@ msgid ""
 "doesn't have a length limit and it can contain any characters, including "
 "emojis."
 msgstr ""
+"Il nome del conto viene mostrato nella lista dei conti più recenti e nelle "
+"schede. I nomi non hanno un limite di lunghezza e possono contenere "
+"qualsiasi carattere, anche gli emoji."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:33
 msgid "Account Type"
-msgstr ""
+msgstr "Tipo di conto"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:34
@@ -98,11 +116,17 @@ msgid ""
 "these colors can be configured in <link xref=\"configuration\">global "
 "settings</link>."
 msgstr ""
+"Sono disponibili tre tipi di conto: 🟣<em>conto corrente</em>, "
+"🔵<em>deposito</em> and 🟢<em>aziendale</em>. Il tipo di conto è solo "
+"un'etichetta, mostrata nella lista dei conti recenti, che non influisce sul "
+"funzionamento dell'applicazione o sulle azioni disponibili per ciascun "
+"conto. Ciascun tipo di conto ha il suo colore, che può essere configurato "
+"nelle <link xref=\"configuration\">impostazioni generali</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "Tipo di transazione predefinito"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:38
@@ -110,11 +134,13 @@ msgid ""
 "When you create a new transaction its type by default will be the same as in "
 "this setting."
 msgstr ""
+"Questo parametro determina il tipo predefinito di una nuova transazione alla "
+"sua creazione."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "System Currency"
-msgstr ""
+msgstr "Valuta di sistema"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
@@ -125,6 +151,11 @@ msgid ""
 "format the numbers will be accepted as values for transaction amounts. A few "
 "examples:"
 msgstr ""
+"Ad ogni avvio, l'applicazione recupera i dati sulla valuta e la "
+"formattazione dei numeri dai formati di sistema, e usa questi dati per "
+"mostrare i simboli delle valute (a meno che sia stata scelta una valuta "
+"personalizzata, vedere più sotto) e per determinare in quale formato "
+"accettare i valori per l'ammontare delle transazioni. Alcuni esempi:"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:44
@@ -132,6 +163,9 @@ msgid ""
 "If your locale is <em>English (US)</em>, currency symbol will be set to "
 "<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
+"Se il proprio formato è <em>Inglese (US)</em>, il simbolo della valuta sarà "
+"impostato su <em>$</em> e <em>1,000.00</em> verrà accettato come un valore "
+"numerico valido."
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:45
@@ -139,6 +173,9 @@ msgid ""
 "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
 "em> and <em>1.000,00</em> will be accepted as a valid number."
 msgstr ""
+"Se il proprio formato è <em>Italiano</em>, il simbolo della valuta sarà "
+"impostato su <em>€</em> e <em>1.000,00</em> verrà accettato come un valore "
+"numerico valido."
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:46
@@ -146,6 +183,9 @@ msgid ""
 "If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
 "em> and <em>1000,00</em> will be accepted as a valid number."
 msgstr ""
+"Se il proprio formato è <em>Russo</em>, il simbolo della valuta sarà "
+"impostato su <em>₽</em> e <em>1000,00</em> verrà accettato come un valore "
+"numerico valido."
 
 #. (itstool) path: note/p
 #: yelp/C/account.page:49
@@ -162,6 +202,18 @@ msgid ""
 "output of the <code>locale</code> command to allow developers to reproduce "
 "your issue with the same settings."
 msgstr ""
+"Su Linux è possibile impostare diversi formati per la lingua e i valori "
+"numerici. Il modo per modificare queste impostazioni varia a seconda "
+"dell'ambiente desktop usato. Nonostante queste impostazioni si possano "
+"trovare in luoghi diversi del desktop, la loro modifica influisce su alcune "
+"variabili d'ambiente di sistema come <code>LANG</code>, <code>LC_TIME</"
+"code>, e <code>LC_MONETARY</code>. <app>Denaro</app> tenterà di usare i "
+"formati numerici e di data specificati da queste variabili. Se non vengono "
+"usati i formati che ci si aspetta, assicurarsi che le variabili siano "
+"impostate correttamente usando il comando <code>locale</code> in un "
+"terminale. Se si verifica un errore e lo si vuole segnalare, fornire "
+"l'output del comando <code>locale</code> per permettere agli sviluppatori di "
+"riprodurre tale errore con le medesime impostazioni."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:53
