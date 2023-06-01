@@ -51,6 +51,7 @@
       <description translatable="no">
         <p>- Added the ability to remove recent accounts from the list</p>
         <p>- Moved deleting groups and transactions from their rows to their dialogs</p>
+        <p>- Changed the default sorting order of new accounts to last to first by date</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
