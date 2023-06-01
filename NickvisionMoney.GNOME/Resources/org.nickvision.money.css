@@ -182,11 +182,3 @@ row.error button.circular {
 .wallet-bg {
   border-radius: 6px;
 }
-
-.tag-light {
-  color: #ffffff;
-}
-
-.tag-dark {
-  color: rgba(0, 0, 0, 0.8);
-}

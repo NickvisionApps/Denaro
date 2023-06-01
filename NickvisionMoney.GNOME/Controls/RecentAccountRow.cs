@@ -61,8 +61,8 @@ public partial class RecentAccountRow : Adw.ActionRow
             var sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Horizontal);
             sizeGroup.AddWidget(_tagArea);
             sizeGroup.AddWidget(_tagLabel);
-            _tagLabel.SetLabel($"<span weight=\"bold\" size=\"9pt\">{_(account.Type.ToString())}</span>");
-            _tagLabel.AddCssClass(luma > 0.5 ? "tag-dark" : "tag-light");
+            var fgcolor = luma > 0.5 ? "#000000cc" : "#ffffff";
+            _tagLabel.SetLabel($"<span weight=\"bold\" size=\"9pt\" color=\"{fgcolor}\">{_(account.Type.ToString())}</span>");
             _tagArea.SetDrawFunc(DrawTag);
         }
         else
