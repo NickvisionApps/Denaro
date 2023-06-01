@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-05-30 19:56+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
+"app/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:524
 msgid "(Copy)"
@@ -30,11 +33,11 @@ msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:581
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1319
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "Tapahtuma"
-msgstr[1] "Tapahtuma"
+msgstr[0] "{0} tapahtuma"
+msgstr[1] "{0} tapahtumaa"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:79
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
@@ -155,9 +158,8 @@ msgstr "Valuutan symboli (tyhjä)"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:365
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:391
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:399
-#, fuzzy
 msgid "Currency Symbol (Invalid)"
-msgstr "Valuutan symboli (tyhjä)"
+msgstr "Valuutan symboli (virheellinen)"
 
 #: ../../../Models/Account.cs:1694
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:102
@@ -170,6 +172,8 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"David Lapshin {0}\n"
+"Tobias Bernard {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
@@ -333,10 +337,10 @@ msgid "Id"
 msgstr "Tunniste"
 
 #: ../../../Controllers/AccountViewController.cs:962
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "Tuotu {0} tapahtumaa tiedostosta."
+msgstr[0] "Tuotu {0} tapahtuma tiedostosta."
 msgstr[1] "Tuotu {0} tapahtumaa tiedostosta."
 
 #: ../../../Models/Account.cs:1617 ../../../Models/Account.cs:1737
@@ -396,6 +400,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Avustajat GitHubissa ❤️ {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:538
 #, csharp-format
@@ -404,6 +410,9 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:408
@@ -504,9 +513,8 @@ msgid "Savings"
 msgstr "Säästöt"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:228
-#, fuzzy
 msgid "Select Account"
-msgstr "Viimeisimmät tilit"
+msgstr "Valitse tili"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:215
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
@@ -706,7 +714,6 @@ msgid "Your system reported that your currency is"
 msgstr "Järjestelmä ilmoitti, että käyttämäsi valuutta on"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:152
-#, fuzzy
 msgctxt "DecimalSeparator"
 msgid "Other"
 msgstr "Muu"
@@ -714,10 +721,9 @@ msgstr "Muu"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
 msgctxt "GroupSeparator"
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "Other"
 msgstr "Muu"
@@ -833,7 +839,6 @@ msgid "New Group (Ctrl+G)"
 msgstr "Uusi ryhmä (Ctrl+G)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:149
-#, fuzzy
 msgctxt "Group"
 msgid "New"
 msgstr "Uusi"
@@ -855,13 +860,11 @@ msgid "Select Range"
 msgstr "Valitse aikaväli"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:193
-#, fuzzy
 msgctxt "DateRange"
 msgid "Start"
 msgstr "Alku"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
-#, fuzzy
 msgctxt "DateRange"
 msgid "End"
 msgstr "Loppu"
@@ -879,7 +882,6 @@ msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Uusi tapahtuma (Ctrl+Shift+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:337
-#, fuzzy
 msgctxt "Transaction"
 msgid "New"
 msgstr "Uusi"
@@ -932,19 +934,16 @@ msgid "Theme"
 msgstr "Teema"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "Vaalea"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tumma"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "Järjestelmä"
@@ -1209,9 +1208,8 @@ msgid "Transfer"
 msgstr "Siirto"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:8
-#, fuzzy
 msgid "About Denaro"
-msgstr "Denaro"
+msgstr "Tietoja - Denaro"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:25
 msgid "Account Menu"
@@ -1222,7 +1220,6 @@ msgid "New Account (Ctrl+N)"
 msgstr "Uusi tili (Ctrl+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:50
-#, fuzzy
 msgctxt "Account"
 msgid "New"
 msgstr "Uusi"
@@ -1255,7 +1252,7 @@ msgstr ""
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:7
 msgid "Nickvision"
-msgstr ""
+msgstr "Nickvision"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
