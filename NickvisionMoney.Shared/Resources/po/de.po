@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-06-02 03:47+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
+"app/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:524
 msgid "(Copy)"
@@ -30,11 +33,11 @@ msgstr "{0} von {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:581
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1319
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "Überweisung"
-msgstr[1] "Überweisung"
+msgstr[0] "{0} Überweisung"
+msgstr[1] "{0} Überweisungen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:79
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
@@ -170,6 +173,8 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"David Lapshin {0}\n"
+"Tobias Bernard {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
@@ -332,11 +337,11 @@ msgid "Id"
 msgstr "ID"
 
 #: ../../../Controllers/AccountViewController.cs:962
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "Eine Überweisung von Datei importiert."
-msgstr[1] "Eine Überweisung von Datei importiert."
+msgstr[0] "{0} Überweisung aus Datei importiert."
+msgstr[1] "{0} Überweisungen aus Datei importiert."
 
 #: ../../../Models/Account.cs:1617 ../../../Models/Account.cs:1737
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:76
@@ -395,6 +400,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Mitwirkende auf GitHub ❤️ {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:538
 #, csharp-format
@@ -403,6 +410,9 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:408
@@ -472,7 +482,7 @@ msgstr "Beleg"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:466
 msgid "Receipt (File Inaccessible)"
-msgstr ""
+msgstr "Beleg (Datei unzugänglich)"
 
 #: ../../../Models/Account.cs:1756
 msgid "Receipts"
@@ -502,9 +512,8 @@ msgid "Savings"
 msgstr "Sparkonto"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:228
-#, fuzzy
 msgid "Select Account"
-msgstr "Kürzliche Konten"
+msgstr "Konto auswählen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:215
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
@@ -641,10 +650,15 @@ msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
+"Die Informationen aus der Datei können nicht importiert werden. Bitte "
+"stellen Sie sicher, dass die App die Berechtigungen für den Zugriff auf die "
+"Datei hat und versuchen Sie es erneut."
 
 #: ../../../Controllers/AccountViewController.cs:966
 msgid "Unable to import information from the file. Unsupported file type."
 msgstr ""
+"Die Informationen aus der Datei können nicht importiert werden. Nicht "
+"unterstützter Dateityp."
 
 #: ../../../Controllers/MainWindowController.cs:228
 msgid "Unable to login to account. Provided password is invalid."
@@ -656,6 +670,9 @@ msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
+"Das Konto kann nicht eröffnet werden. Bitte stellen Sie sicher, dass die App "
+"die Berechtigungen für den Zugriff auf die Datei hat und versuchen Sie es "
+"erneut."
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:384
 msgid "Unable to override an opened account."
@@ -719,19 +736,16 @@ msgid "Your system reported that your currency is"
 msgstr "Dein System meldete deine Währung sei"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:152
-#, fuzzy
 msgctxt "DecimalSeparator"
 msgid "Other"
 msgstr "Anderes"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "None"
 msgstr "Keines"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:182
-#, fuzzy
 msgctxt "GroupSeparator"
 msgid "Other"
 msgstr "Anderes"
@@ -850,7 +864,6 @@ msgid "New Group (Ctrl+G)"
 msgstr "Neue Gruppe (Strg+G)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:149
-#, fuzzy
 msgctxt "Group"
 msgid "New"
 msgstr "Neu"
@@ -872,13 +885,11 @@ msgid "Select Range"
 msgstr "Wähle Zeitspanne Aus"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:193
-#, fuzzy
 msgctxt "DateRange"
 msgid "Start"
-msgstr "Anfang"
+msgstr "Beginn"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
-#, fuzzy
 msgctxt "DateRange"
 msgid "End"
 msgstr "Ende"
@@ -896,7 +907,6 @@ msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Neue Überweisung (Strg+Umschalt+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:337
-#, fuzzy
 msgctxt "Transaction"
 msgid "New"
 msgstr "Neu"
@@ -949,19 +959,16 @@ msgid "Theme"
 msgstr "Theme"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "Hell"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Dunkel"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
-#, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "System"
@@ -1048,7 +1055,6 @@ msgstr ""
 "Sprachumgebung in das Mengenfeld eingefügt wird."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
-#, fuzzy
 msgctxt "InsertSeparator"
 msgid "Off"
 msgstr "Aus"
@@ -1095,7 +1101,6 @@ msgstr "Konto Schließen"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:25
-#, fuzzy
 msgctxt "Title"
 msgid "Transfer"
 msgstr "Überweisen"
@@ -1228,15 +1233,13 @@ msgid "Result"
 msgstr "Ergebnis"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:112
-#, fuzzy
 msgctxt "Button"
 msgid "Transfer"
 msgstr "Überweisen"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:8
-#, fuzzy
 msgid "About Denaro"
-msgstr "Denaro"
+msgstr "Über Denaro"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:25
 msgid "Account Menu"
@@ -1247,7 +1250,6 @@ msgid "New Account (Ctrl+N)"
 msgstr "Neues Konto (Strg+N)"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:50
-#, fuzzy
 msgctxt "Account"
 msgid "New"
 msgstr "Neu"
@@ -1278,56 +1280,70 @@ msgstr "Geld;Finanzen;Brieftasche;Bargeld;Bank;GTK;Nickvision;"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:7
 msgid "Nickvision"
-msgstr ""
+msgstr "Nickvision"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
 msgstr ""
+"— Verwalten von mehreren Konten gleichzeitig, mit einer vertrauten "
+"Registerkartenoberfläche"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr ""
+msgstr "— Einfaches Filtern von Transaktionen nach Typ, Gruppe oder Datum"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
 msgstr ""
+"— Einfaches Wiederholen von Überweisungen, beispielsweise von Rechnungen, "
+"die jeden Monat anfallen"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
 msgid "— Transfer money from one account to another"
-msgstr ""
+msgstr "— Geld von einem Konto auf ein anderes überweisen"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:14
 msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+"— Ein Konto als CSV-Datei exportieren und eine CSV-, OFX- oder QIF-Datei "
+"importieren, um einem Konto massenhaft Überweisungen hinzuzufügen"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:52
 msgid ""
 "- Fixed an issue where Denaro would crash on systems with unconfigured "
 "locales"
 msgstr ""
+"- Ein Problem behoben, bei dem Denaro auf Systemen mit nicht konfigurierten "
+"Gebietsschemata abstürzte"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:53
 msgid ""
 "- Fixed an issue where PDF exporting failed for accounts with many receipts"
 msgstr ""
+"- Ein Problem behoben, bei dem der PDF-Export für Konten mit vielen Belegen "
+"fehlschlug"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:54
 msgid ""
 "- Fixed an issue where a group's filter was reactivated when a transaction "
 "was added to that group"
 msgstr ""
+"- Ein Problem behoben, bei dem der Filter einer Gruppe reaktiviert wurde, "
+"wenn eine Überweisung zu dieser Gruppe hinzugefügt wurde"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:55
 msgid ""
 "- Error messages will be shown if Denaro attempts to access inaccessible "
 "files instead of crashing"
 msgstr ""
+"- Fehlermeldungen werden angezeigt, wenn Denaro versucht, auf unzugängliche "
+"Dateien zuzugreifen, anstatt abzustürzen"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:56
 msgid "- Updated translations (Thanks to everyone on Weblate)!"
-msgstr ""
+msgstr "- Aktualisierte Übersetzungen (Dank an alle auf Weblate)!"
 
 #, fuzzy
 #~ msgid "AccountSettings"
