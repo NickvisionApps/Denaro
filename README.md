@@ -13,12 +13,9 @@
 
 <a href='https://flathub.org/apps/details/org.nickvision.money'><img width='140' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-<a href="https://snapcraft.io/denaro"><img width='140' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" /></a>
+<a href="https://snapcraft.io/denaro"><img width='140' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"/></a>
 
-## What happened to Windows?
-> Windows is no longer a supported platform by Nickvision due to many issues with publishing our apps on the Microsoft Store and many issues with Microsoft as a whole.
-
-> Nickvision apps can still by used by Windows users via Flatpak on WSL (recommended distro: OpenSuse)
+<a href="https://aur.archlinux.org/packages/denaro"><img width='140' alt="Download from AUR" src="https://aur.archlinux.org/static/css/archnavbar/aurlogo.png"/></a>
 
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
