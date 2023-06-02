@@ -18,8 +18,8 @@ parts:
   denaro:
     # See 'snapcraft plugins'
     plugin: nil
-    source: .
-    #source-tag: 
+    source: https://github.com/NickvisionApps/Denaro.git
+    source-branch: snap
     build-packages:
       - blueprint-compiler
       - wget
