@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-29 17:18+0300\n"
-"PO-Revision-Date: 2023-06-01 18:21+0000\n"
+"PO-Revision-Date: 2023-06-02 03:47+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
 "app/ru/>\n"
@@ -1268,29 +1268,35 @@ msgstr "деньги;финансы;кошелёк;наличные;банк;GTK
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:7
 msgid "Nickvision"
-msgstr ""
+msgstr "Nickvision"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
 msgstr ""
+"— Управляйте несколькими счетами одновременно, используя знакомый интерфейс "
+"с вкладками"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr ""
+msgstr "— С лёгкостью фильтруйте транзакции по типу, группе или дате"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
 msgstr ""
+"— Создавайте повторяющиеся транзакции, например для счетов, которые приходят "
+"каждый месяц"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
 msgid "— Transfer money from one account to another"
-msgstr ""
+msgstr "— Переводите средства с одного счёта на другой"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:14
 msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+"— Экспортируйте данный в CSV и импортируйте из CSV, OFX или QIF файла для "
+"массового добавления транзакций"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:52
 msgid ""
