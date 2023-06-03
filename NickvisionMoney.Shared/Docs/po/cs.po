@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-01 17:46+0000\n"
+"PO-Revision-Date: 2023-06-03 07:50+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/cs/>\n"
@@ -510,7 +510,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
 msgid "CSV Backup Folder"
-msgstr ""
+msgstr "Složka zálohy CSV"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
@@ -520,32 +520,35 @@ msgid ""
 "work for password-protected accounts, because CSV files can't be password-"
 "protected."
 msgstr ""
+"Složka, do které budou vaše data po každé změně automaticky <link xref"
+"=\"import-export\">exportována jako soubor CSV</link>. Tato funkce nefunguje "
+"pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
 
 #. (itstool) path: info/title
 #: yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
-msgstr ""
+msgstr "Import/export 📤"
 
 #. (itstool) path: page/title
 #: yelp/C/import-export.page:20
 msgid "Import/Export"
-msgstr ""
+msgstr "Import/export"
 
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:22
 msgid "Import Formats"
-msgstr ""
+msgstr "Formáty importu"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:26
 msgid "Dates should be in <em>YYYYMMDD</em> format."
-msgstr ""
+msgstr "Data by měla být ve formátu <em>RRRRMMDD</em>."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:30
 msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
-msgstr ""
+msgstr "Data by měla být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:34
@@ -560,11 +563,22 @@ msgid ""
 "ones. If you want to create a CSV file manually, this is the header that "
 "includes all columns <app>Denaro</app> expects to find:"
 msgstr ""
+"❗ Formát CSV je sice běžný a některé banky umožňují svým uživatelům "
+"exportovat informace ve formátu CSV, ale tyto soubory jsou ve skutečnosti "
+"tabulky, které mohou obsahovat libovolná data. Import souboru CSV "
+"vytvořeného v jiném programu selže, protože jeho data nebudou kompatibilní s "
+"tím, co se aplikace <app>Denaro</app> snaží ze souboru získat. Účelem "
+"importu/exportu CSV je poskytnout způsob, jak přidávat data do účtu pomocí "
+"externích programů, jako jsou textové editory a kancelářské balíky. Import "
+"přidá pouze nové transakce, aniž by přepsal ty stávající. Pokud chcete "
+"soubor CSV vytvořit ručně, toto je hlavička, která obsahuje všechny sloupce, "
+"které aplikace <app>Denaro</app> očekává, že najde:"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:39
 msgid "Transaction Id, should be unique for a given account. Ids start with 1."
 msgstr ""
+"ID transakce, mělo by být pro daný účet jedinečné. ID začínají číslem 1."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:43
@@ -572,62 +586,64 @@ msgid ""
 "Transaction date (or start date in case of repeat transaction), should be in "
 "English (US) format (<em>MM/DD/YYYY</em>)."
 msgstr ""
+"Datum transakce (nebo datum zahájení v případě opakované transakce) by mělo "
+"být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:47
 msgid ""
 "Transaction description, it can contain any characters except semicolon."
-msgstr ""
+msgstr "Popis transakce, může obsahovat libovolné znaky kromě středníku."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:51
 msgid "Transaction type: 0 for income, 1 for expense."
-msgstr ""
+msgstr "Typ transakce: 0 pro příjem, 1 pro výdaj."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:55
 msgid "A number representing transaction repeat interval:"
-msgstr ""
+msgstr "Číslo představující interval opakování transakce:"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:56
 msgid "0 - Never"
-msgstr ""
+msgstr "0 - Nikdy"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:57
 msgid "1 - Daily"
-msgstr ""
+msgstr "1 - Denně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:58
 msgid "2 - Weekly"
-msgstr ""
+msgstr "2 - Týdně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
-msgstr ""
+msgstr "7 - Dvakrát týdně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:60
 msgid "3 - Monthly"
-msgstr ""
+msgstr "3 - Měsíčně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
-msgstr ""
+msgstr "4 - Čtvrtletně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:62
 msgid "5 - Yearly"
-msgstr ""
+msgstr "5 - Ročně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:63
 msgid "6 - Biyearly"
-msgstr ""
+msgstr "6 - Dvakrát ročně"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:64
@@ -635,6 +651,8 @@ msgid ""
 "See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
 "link> page for details about repeat transactions."
 msgstr ""
+"Podrobnosti o opakovaných transakcích naleznete v části <em>Interval "
+"opakování</em> na stránce <link xref=\"transaction\">transakce</link>."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:68
@@ -642,6 +660,8 @@ msgid ""
 "Should be either an Id of source transaction or 0 if it's a source "
 "transaction or -1 if it's not repeat transaction."
 msgstr ""
+"Mělo by to být buď ID zdrojové transakce nebo 0, pokud se jedná o zdrojovou "
+"transakci, nebo -1, pokud se nejedná o opakovanou transakci."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:72
@@ -649,11 +669,14 @@ msgid ""
 "End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
 "YYYY</em>). Leave it empty if it's not repeat transaction."
 msgstr ""
+"Datum ukončení opakované transakce by mělo být v anglickém (americkém) "
+"formátu (<em>MM/DD/RRRR</em>). Pokud se nejedná o opakovanou transakci, "
+"ponechte jej prázdný."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:76
 msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
-msgstr ""
+msgstr "Částka transakce v anglickém (americkém) formátu (<em>123,456.78</em>)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:80
@@ -661,11 +684,13 @@ msgid ""
 "Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
 "<em>G</em> and <em>B</em> are integers in range between 0 and 255."
 msgstr ""
+"Barva transakce, by měla být ve formátu <em>rgb(R,G,B)</em>, kde <em>R</em>, "
+"<em>G</em> a <em>B</em> jsou celá čísla v rozsahu 0 až 255."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:84
 msgid "Whether a transaction should use group color: 0 — false, 1 — true."
-msgstr ""
+msgstr "Zda má transakce používat skupinovou barvu: 0 — ne, 1 — ano."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:88
@@ -673,6 +698,8 @@ msgid ""
 "Transaction's group Id. Ids start with 1. For ungrouped transaction it "
 "should be -1 (not 0, this is incorrect value for group Id)."
 msgstr ""
+"ID skupiny transakce. ID začíná číslem 1. U neseskupených transakcí by mělo "
+"být -1 (ne 0, to je nesprávná hodnota pro ID skupiny)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:92
@@ -681,6 +708,9 @@ msgid ""
 "characters except semicolon. Leave it empty for ungrouped transaction, in "
 "any other cases it shouldn't be empty."
 msgstr ""
+"Název skupiny transakce, měl by odpovídat ID skupiny. Může obsahovat "
+"libovolné znaky kromě středníku. Pro transakce bez skupiny jej ponechte "
+"prázdný, v ostatních případech by neměl být prázdný."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:96
@@ -689,6 +719,9 @@ msgid ""
 "characters except semicolon and can be empty. Leave it empty for ungrouped "
 "transaction."
 msgstr ""
+"Popis skupiny transakce, měl by odpovídat identifikačnímu číslu skupiny. "
+"Může obsahovat libovolné znaky kromě středníku a může být prázdný. Pro "
+"transakce bez skupiny jej ponechte prázdný."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:100
@@ -696,16 +729,18 @@ msgid ""
 "Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
 "<em>G</em> and <em>B</em> are integers in range between 0 and 255."
 msgstr ""
+"Barva skupiny, měla by být ve formátu <em>rgb(R,G,B)</em>, kde <em>R</em>, "
+"<em>G</em> a <em>B</em> jsou celá čísla v rozsahu 0 až 255."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:103
 msgid "Receipt and notes are not present in CSV."
-msgstr ""
+msgstr "Faktura a poznámky se v souboru CSV nenachází."
 
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:108
 msgid "Export Formats"
-msgstr ""
+msgstr "Formáty exportu"
 
 #. (itstool) path: div/p
 #: yelp/C/import-export.page:109
@@ -776,7 +811,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
@@ -835,7 +870,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "Interval opakování"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -855,7 +890,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "Datum ukončení opakování"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
