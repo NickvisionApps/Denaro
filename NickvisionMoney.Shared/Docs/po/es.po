@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-05-26 02:08+0000\n"
+"PO-Revision-Date: 2023-06-04 16:26+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
 ".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -855,7 +855,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr "ID"
+msgstr "Id"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
