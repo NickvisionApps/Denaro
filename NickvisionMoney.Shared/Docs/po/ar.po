@@ -2,13 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-06-04 09:50+0000\n"
+"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
+"docs/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -330,7 +334,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "اللون المبدئيُّ للتحويلات"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -343,7 +347,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr ""
+msgstr "اللون المبدئيُّ للمجموعات"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -391,7 +395,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:53
 msgid "Use Native Digits"
-msgstr ""
+msgstr "استخدم أرقام اللغة"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
@@ -673,7 +677,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr ""
+msgstr "المعاملة"
 
 #. (itstool) path: page/p
 #: yelp/C/transaction.page:21
@@ -683,7 +687,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr ""
+msgstr "المعرِّف"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
@@ -742,7 +746,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "مدَّة التكرار"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -762,7 +766,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "تاريخ انتهاء التكرار"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
