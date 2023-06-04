@@ -97,7 +97,7 @@ public class TransactionDialogController : IDisposable
         _groups = groups;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
-        IsEditing = true;
+        IsEditing = canCopy;
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
