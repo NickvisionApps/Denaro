@@ -146,6 +146,12 @@ public class MainWindowController : IDisposable
     public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
 
     /// <summary>
+    /// Creates a new NewAccountDialogController
+    /// </summary>
+    /// <returns>The PreferencesViewController</returns>
+    public NewAccountDialogController CreateNewAccountDialogController() => new NewAccountDialogController();
+
+    /// <summary>
     /// Creates a new DashboardViewController
     /// </summary>
     /// <returns>The DashboardViewController</returns>

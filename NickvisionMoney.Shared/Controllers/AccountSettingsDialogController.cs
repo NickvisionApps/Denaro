@@ -118,7 +118,7 @@ public class AccountSettingsDialogController
     /// <param name="defaultTransactionType">The new default transaction type</param>
     /// <param name="newPassword">The new password</param>
     /// <param name="confirmPassword">The new password confirmed</param>
-    /// <returns></returns>
+    /// <returns>AccountMetadataCheckStatus</returns>
     public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;

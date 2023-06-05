@@ -2,18 +2,20 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window _root {
-  default-width: 450;
+  width-request: 320;
+  default-width: 460;
   modal: true;
-  resizable: false;
   
   content: Gtk.Box {
     orientation: vertical;
 
-    Adw.HeaderBar _header {
-      title-widget: Gtk.Label {};
+    Adw.HeaderBar {
+      title-widget: Adw.CarouselIndicatorDots {
+        carousel: _carousel;
+      };
 
       [start]
-      Gtk.Button _btnBack {
+      Gtk.Button _backButton {
         halign: start;
         valign: center;
         visible: false;
@@ -27,36 +29,105 @@ Adw.Window _root {
     }
 
     Gtk.WindowHandle {
-      Gtk.Box {
-        orientation: vertical;
-        spacing: 24;
-        
-        Gtk.Label _titleLabel {
-          label: _("Account Settings");
-
-          styles ["title-2"]
-        }
-
-        Adw.ViewStack _viewStack {
+      Adw.ToastOverlay _toastOverlay {
+        Gtk.Box {
+          orientation: vertical;
+          vexpand: true;
+          hexpand: true;
+          spacing: 24;
           margin-start: 24;
           margin-end: 24;
-          margin-bottom: 24;
+  
+          Adw.Carousel _carousel {
+            allow-scroll-wheel: false;
+            allow-mouse-drag: false;
+            allow-long-swipes: false;
 
-          Adw.ViewStackPage {
-            name: "main";
-            child: Gtk.Box {
+            Adw.StatusPage _page1 {
+              vexpand: true;
+              hexpand: true;
+              icon-name: "org.nickvision.money";
+              title: _("New Account");
+              description: _("Use this wizard to get the most out of your account");
+
+              child: Gtk.Button _startButton {
+                halign: center;
+                valign: center;
+                label: _("Let's Start");
+      
+                styles ["pill", "suggested-action"]
+              };
+
+              styles ["icon-dropshadow"]
+            }
+
+            Gtk.Box _page2 {
+              vexpand: true;
+              hexpand: true;
               orientation: vertical;
               spacing: 24;
-              margin-top: 4;
+
+              Gtk.Label {
+                label: _("Storage Location");
+      
+                styles ["title-2"]
+              }
 
               Adw.PreferencesGroup {
-                Adw.EntryRow _nameRow {
-                  title: _("Name");
-                  activates-default: true;
+                vexpand: true;
+
+                Adw.EntryRow _accountNameRow {
+                  title: _("Account Name");
                 }
+
+                Adw.PasswordEntryRow _accountPasswordRow {
+                  title: _("Account Password (Optional)");
+                }
+
+                Adw.EntryRow _folderRow {
+                  title: _("Folder");
+                  editable: false;
+
+                  [suffix]
+                  Gtk.Button _selectFolderButton {
+                    valign: center;
+                    icon-name: "folder-open-symbolic";
+                    tooltip-text: _("Select Folder");
+
+                    styles ["flat"]
+                  }
+                }
+              }
+
+              Gtk.Button _saveButton {
+                halign: center;
+                valign: center;
+                margin-bottom: 24;
+                sensitive: false;
+                label: _("Save");
+      
+                styles ["pill", "suggested-action"]
+              }
+            }
+
+            Gtk.Box _page3 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+
+              Gtk.Label {
+                label: _("Account Options");
+      
+                styles ["title-2"]
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
 
                 Adw.ComboRow _accountTypeRow {
                   title: _("Account Type");
+                  subtitle: _("This is only a useful label that doesn't affect how the app works.");
                   subtitle-lines: 4;
                   model: Gtk.StringList {
                     strings [_("Checking"), _("Savings"), _("Business")]
@@ -84,61 +155,27 @@ Adw.Window _root {
                 }
               }
 
-              Adw.PreferencesGroup {
-                Adw.ActionRow _customCurrencyRow {
-                  title: _("Currency");
-                  subtitle: _("Manage the currency used by the account.");
-
-                  [prefix]
-                  Gtk.Image {
-                    icon-name: "money-symbolic";
-                  }
-
-                  [suffix]
-                  Gtk.Image _imgCustomCurrency {
-                    icon-name: "go-next-symbolic";
-                    valign: center;
-                  }
-
-                  activatable-widget: _imgCustomCurrency;
-                }
-
-                Adw.ActionRow _managePasswordRow {
-                  title: _("Change Password");
-                  subtitle: _("Set a new password or remove one.");
-
-                  [prefix]
-                  Gtk.Image {
-                    icon-name: "dialog-password-symbolic";
-                  }
-
-                  [suffix]
-                  Gtk.Image _imgManagePassword {
-                    icon-name: "go-next-symbolic";
-                    valign: center;
-                  }
-
-                  activatable-widget: _imgManagePassword;
-                }
-              }
-
-              Gtk.Button _applyButton {
+              Gtk.Button _nextButton {
                 halign: center;
                 valign: center;
-                margin-top: 24;
-                label: _("Apply");
-
+                margin-bottom: 24;
+                label: _("Next");
+      
                 styles ["pill", "suggested-action"]
               }
-            };
-          }
+            }
 
-          Adw.ViewStackPage {
-            name: "currency";
-            child: Gtk.Box {
-              visible: false;
+            Gtk.Box _page4 {
+              vexpand: true;
+              hexpand: true;
               orientation: vertical;
               spacing: 24;
+
+              Gtk.Label {
+                label: _("Account Currency");
+      
+                styles ["title-2"]
+              }
 
               Gtk.Label _reportedCurrencyLabel {
                 use-markup: true;
@@ -227,51 +264,19 @@ Adw.Window _root {
                   }
                 }
               }
-            };
-          }
 
-          Adw.ViewStackPage {
-            name: "password";
-            child: Gtk.Box {
-              visible: false;
-              orientation: vertical;
-              spacing: 24;
-
-              Adw.PreferencesGroup {
-                Adw.PasswordEntryRow _newPasswordRow {
-                  title: _("New Password");
-                }
-
-                Adw.PasswordEntryRow _newPasswordConfirmRow {
-                  title: _("Confirm Password");
-                }
-
-                Adw.ActionRow {
-                  subtitle: _("If the password is lost, there is no way to restore the file!");
-
-                  [suffix]
-                  Gtk.Button _removePasswordButton {
-                    label: _("Remove");
-                    valign: center;
-
-                    styles ["destructive-action"]
-                  }
-
-                  styles ["warning"]
-                }
+              Gtk.Button _createButton {
+                halign: center;
+                valign: center;
+                margin-bottom: 24;
+                label: _("Create");
+      
+                styles ["pill", "suggested-action"]
               }
-
-              Gtk.Label _lblPasswordStatus {
-                hexpand: true;
-
-                styles ["error"]
-              }
-            };
+            }
           }
         }
       }
     }
   };
-
-  default-widget: _applyButton;
 }

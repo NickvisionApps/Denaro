@@ -362,6 +362,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _accountPopover.Popdown();
+        var newAccountController = _controller.CreateNewAccountDialogController();
+        var newAccountDialog = new NewAccountDialog(newAccountController, this);
+        newAccountDialog.OnApply += (sender, e) =>
+        {
+            newAccountDialog.SetVisible(false);
+            
+            newAccountDialog.Close();
+        };
+        newAccountDialog.Present();
+        /*
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
@@ -391,6 +401,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        */
     }
 
     /// <summary>
