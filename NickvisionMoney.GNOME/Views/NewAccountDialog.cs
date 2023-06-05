@@ -27,6 +27,8 @@ public partial class NewAccountDialog : Adw.Window
     private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial string g_get_user_special_dir(int dir);
     
     private readonly NewAccountDialogController _controller;
     private uint _currentPageNumber;
@@ -173,7 +175,7 @@ public partial class NewAccountDialog : Adw.Window
         };
         _createButton.OnClicked += Apply;
         //Load
-        _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/Documents";
+        _controller.Folder = g_get_user_special_dir(1); // XDG_DOCUMENTS_DIR
         if(!Directory.Exists(_controller.Folder))
         {
             _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
