@@ -45,7 +45,7 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.ToggleButton _expenseButton;
     [Gtk.Connect] private readonly Gtk.Button _nextButton;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
-    [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
+    [Gtk.Connect] private readonly Adw.ExpanderRow _rowCustomCurrency;
     [Gtk.Connect] private readonly Gtk.Entry _customSymbolText;
     [Gtk.Connect] private readonly Adw.ActionRow _customSymbolRow;
     [Gtk.Connect] private readonly Gtk.Entry _customCodeText;
@@ -92,13 +92,9 @@ public partial class NewAccountDialog : Adw.Window
         _expenseButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.BindProperty("active", _incomeButton, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
         _nextButton.OnClicked += GoForward;
-        _switchCustomCurrency.OnNotify += (sender, e) =>
+        _rowCustomCurrency.OnNotify += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "state")
-            {
-                _switchCustomCurrency.GrabFocus();
-            }
-            else if (e.Pspec.GetName() == "active")
+            if (e.Pspec.GetName() == "expanded")
             {
                 ValidateCurrency();
             }
@@ -286,7 +282,7 @@ public partial class NewAccountDialog : Adw.Window
             4 => _customGroupSeparatorText.GetText()
         };
         var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
-        var checkStatus = _controller.UpdateCurrency(_switchCustomCurrency.GetActive(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits);
+        var checkStatus = _controller.UpdateCurrency(_rowCustomCurrency.GetExpanded(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits);
         _customSymbolRow.RemoveCssClass("error");
         _customSymbolRow.SetTitle(_("Currency Symbol"));
         _customCodeRow.RemoveCssClass("error");

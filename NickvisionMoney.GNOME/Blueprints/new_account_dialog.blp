@@ -2,6 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window _root {
+  height-request: 440;
   width-request: 320;
   default-width: 460;
   modal: true;
@@ -29,14 +30,14 @@ Adw.Window _root {
     }
 
     Gtk.WindowHandle {
+      vexpand: true;
+
       Adw.ToastOverlay _toastOverlay {
         Gtk.Box {
           orientation: vertical;
           vexpand: true;
           hexpand: true;
           spacing: 24;
-          margin-start: 24;
-          margin-end: 24;
   
           Adw.Carousel _carousel {
             allow-scroll-wheel: false;
@@ -66,6 +67,10 @@ Adw.Window _root {
               hexpand: true;
               orientation: vertical;
               spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
 
               Gtk.Label {
                 label: _("Storage Location");
@@ -102,7 +107,7 @@ Adw.Window _root {
               Gtk.Button _saveButton {
                 halign: center;
                 valign: center;
-                margin-bottom: 24;
+                margin-bottom: 12;
                 sensitive: false;
                 label: _("Save");
       
@@ -115,6 +120,10 @@ Adw.Window _root {
               hexpand: true;
               orientation: vertical;
               spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
 
               Gtk.Label {
                 label: _("Account Options");
@@ -158,7 +167,7 @@ Adw.Window _root {
               Gtk.Button _nextButton {
                 halign: center;
                 valign: center;
-                margin-bottom: 24;
+                margin-bottom: 12;
                 label: _("Next");
       
                 styles ["pill", "suggested-action"]
@@ -170,6 +179,10 @@ Adw.Window _root {
               hexpand: true;
               orientation: vertical;
               spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
 
               Gtk.Label {
                 label: _("Account Currency");
@@ -183,84 +196,78 @@ Adw.Window _root {
               }
 
               Adw.PreferencesGroup {
-                Adw.ActionRow {
+                vexpand: true;
+
+                Adw.ExpanderRow _rowCustomCurrency {
                   title: _("Use Custom Currency");
-
-                  [suffix]
-                  Gtk.Switch _switchCustomCurrency {
-                    valign: center;
+                  show-enable-switch: true;
+                  enable-expansion: false;
+  
+                  Adw.ActionRow _customSymbolRow {
+                    title: _("Currency Symbol");
+  
+                    [suffix]
+                    Gtk.Entry _customSymbolText {
+                      valign: center;
+                      max-length: 3;
+                      placeholder-text: _("Enter symbol here");
+                    }
                   }
-
-                  activatable-widget: _switchCustomCurrency;
-                }
-              }
-
-              Adw.PreferencesGroup {
-                sensitive: bind _switchCustomCurrency.active;
-                Adw.ActionRow _customSymbolRow {
-                  title: _("Currency Symbol");
-
-                  [suffix]
-                  Gtk.Entry _customSymbolText {
-                    valign: center;
-                    max-length: 3;
-                    placeholder-text: _("Enter symbol here");
+  
+                  Adw.ActionRow _customCodeRow {
+                    title: _("Currency Code");
+  
+                    [suffix]
+                    Gtk.Entry _customCodeText {
+                      valign: center;
+                      max-length: 3;
+                      placeholder-text: _("Enter code here");
+                    }
                   }
-                }
-
-                Adw.ActionRow _customCodeRow {
-                  title: _("Currency Code");
-
-                  [suffix]
-                  Gtk.Entry _customCodeText {
-                    valign: center;
-                    max-length: 3;
-                    placeholder-text: _("Enter code here");
+  
+                  Adw.ActionRow _customDecimalSeparatorRow {
+                    title: _("Decimal Separator");
+  
+                    [suffix]
+                    Gtk.DropDown _customDecimalSeparatorDropDown {
+                      valign: center;
+                    }
+  
+                    [suffix]
+                    Gtk.Entry _customDecimalSeparatorText {
+                      visible: false;
+                      valign: center;
+                      halign: end;
+                      max-length: 2;
+                      max-width-chars: 4;
+                    }
                   }
-                }
-
-                Adw.ActionRow _customDecimalSeparatorRow {
-                  title: _("Decimal Separator");
-
-                  [suffix]
-                  Gtk.DropDown _customDecimalSeparatorDropDown {
-                    valign: center;
+  
+                  Adw.ActionRow _customGroupSeparatorRow {
+                    title: _("Group Separator");
+  
+                    [suffix]
+                    Gtk.DropDown _customGroupSeparatorDropDown {
+                      valign: center;
+                    }
+  
+                    [suffix]
+                    Gtk.Entry _customGroupSeparatorText {
+                      visible: false;
+                      valign: center;
+                      halign: end;
+                      max-length: 2;
+                      max-width-chars: 4;
+                    }
                   }
-
-                  [suffix]
-                  Gtk.Entry _customDecimalSeparatorText {
-                    visible: false;
-                    valign: center;
-                    halign: end;
-                    max-length: 2;
-                    max-width-chars: 4;
-                  }
-                }
-
-                Adw.ActionRow _customGroupSeparatorRow {
-                  title: _("Group Separator");
-
-                  [suffix]
-                  Gtk.DropDown _customGroupSeparatorDropDown {
-                    valign: center;
-                  }
-
-                  [suffix]
-                  Gtk.Entry _customGroupSeparatorText {
-                    visible: false;
-                    valign: center;
-                    halign: end;
-                    max-length: 2;
-                    max-width-chars: 4;
-                  }
-                }
-
-                Adw.ActionRow _customDecimalDigitsRow {
-                  title: _("Decimal Digits");
-
-                  [suffix]
-                  Gtk.DropDown _customDecimalDigitsDropDown {
-                    valign: center;
+  
+                  Adw.ActionRow _customDecimalDigitsRow {
+                    title: _("Decimal Digits");
+  
+                    [suffix]
+                    Gtk.DropDown _customDecimalDigitsDropDown {
+                      valign: center;
+                    }
                   }
                 }
               }
@@ -268,7 +275,7 @@ Adw.Window _root {
               Gtk.Button _createButton {
                 halign: center;
                 valign: center;
-                margin-bottom: 24;
+                margin-bottom: 12;
                 label: _("Create");
       
                 styles ["pill", "suggested-action"]
