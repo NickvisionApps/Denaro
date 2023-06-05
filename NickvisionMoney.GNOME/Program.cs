@@ -66,7 +66,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Denaro");
         _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
         _mainWindowController.AppInfo.Version = "2023.6.0-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the ability to remove recent accounts from the list</li><li>Moved deleting groups and transactions from their rows to their dialogs</li><li>Changed the default sorting order of new accounts to last to first by date</li><li>Improved UI/UX</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added a new account setup dialog to make it easier to configure new accounts</li><li>Added the ability to remove recent accounts from the list</li><li>Moved deleting groups and transactions from their rows to their dialogs</li><li>Changed the default sorting order of new accounts to last to first by date</li><li>Improved UI/UX</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");

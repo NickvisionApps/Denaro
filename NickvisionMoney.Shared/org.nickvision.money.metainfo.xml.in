@@ -49,6 +49,7 @@
   <releases>
     <release version="2023.6.0-next" date="2023-06-01">
       <description translatable="no">
+        <p>- Added a new account setup dialog to make it easier to configure new accounts</p>
         <p>- Added the ability to remove recent accounts from the list</p>
         <p>- Moved deleting groups and transactions from their rows to their dialogs</p>
         <p>- Changed the default sorting order of new accounts to last to first by date</p>
