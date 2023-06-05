@@ -176,23 +176,7 @@ public partial class NewAccountDialog : Adw.Window
             }
         };
         _createButton.OnClicked += Apply;
-    }
-    
-    /// <summary>
-    /// Constructs a NewAccountDialog
-    /// </summary>
-    /// <param name="controller">NewAccountDialogController</param>
-    /// <param name="parent">Gtk.Window</param>
-    public NewAccountDialog(NewAccountDialogController controller, Gtk.Window parent) : this(Builder.FromFile("new_account_dialog.ui"), controller, parent)
-    {
-    }
-    
-    /// <summary>
-    /// Presents the dialog
-    /// </summary>
-    public new void Present()
-    {
-        base.Present();
+        //Load
         _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/Documents";
         if(!Directory.Exists(_controller.Folder))
         {
@@ -202,6 +186,15 @@ public partial class NewAccountDialog : Adw.Window
         _accountTypeRow.SetSelected(0);
         _incomeButton.SetActive(true);
         _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
+    }
+    
+    /// <summary>
+    /// Constructs a NewAccountDialog
+    /// </summary>
+    /// <param name="controller">NewAccountDialogController</param>
+    /// <param name="parent">Gtk.Window</param>
+    public NewAccountDialog(NewAccountDialogController controller, Gtk.Window parent) : this(Builder.FromFile("new_account_dialog.ui"), controller, parent)
+    {
     }
     
     /// <summary>
