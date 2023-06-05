@@ -194,6 +194,10 @@ public partial class NewAccountDialog : Adw.Window
     {
         base.Present();
         _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/Documents";
+        if(!Directory.Exists(_controller.Folder))
+        {
+            _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
         _folderRow.SetText(Path.GetFileName(_controller.Folder));
         _accountTypeRow.SetSelected(0);
         _incomeButton.SetActive(true);
