@@ -356,6 +356,7 @@ public partial class NewAccountDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void Apply(object? sender, EventArgs e)
     {
+        _controller.Password = _accountPasswordRow.GetText();
         _controller.Metadata.Name = _accountNameRow.GetText();
         _controller.Metadata.AccountType = (AccountType)_accountTypeRow.GetSelected();
         _controller.Metadata.DefaultTransactionType = _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense;

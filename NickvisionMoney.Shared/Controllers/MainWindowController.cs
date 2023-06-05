@@ -204,6 +204,34 @@ public class MainWindowController : IDisposable
     public bool IsAccountOpen(string path) => _openAccounts.Any(x => x.AccountPath == path);
 
     /// <summary>
+    /// Creates a new account and adds it to the list of opened accounts
+    /// </summary>
+    public async Task<bool> NewAccountAsync(string path, string? password, AccountMetadata metadata)
+    {
+        var controller = new AccountViewController(path, NotificationSent, RecentAccountsChanged);
+        controller.TransferSent += OnTransferSent;
+        try
+        {
+            controller.Login(null);
+        }
+        catch
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
+            return false;
+        }
+        _openAccounts.Add(controller);
+        AccountAdded?.Invoke(this, EventArgs.Empty);
+        await Task.Delay(100);
+        controller.UpdateMetadata(metadata);
+        if(!string.IsNullOrEmpty(password))
+        {
+            controller.SetPassword(password, false);
+        }
+        return true;
+
+    }
+
+    /// <summary>
     /// Adds an account to the list of opened accounts
     /// </summary>
     /// <param name="path">The path of the account</param>

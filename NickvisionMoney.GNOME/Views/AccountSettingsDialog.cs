@@ -56,11 +56,6 @@ public partial class AccountSettingsDialog : Adw.Window
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
-        if (_controller.NeedsSetup)
-        {
-            _header.SetShowStartTitleButtons(false);
-            _header.SetShowEndTitleButtons(false);
-        }
         _viewStack.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "visible-child")

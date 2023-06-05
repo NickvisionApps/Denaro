@@ -53,10 +53,6 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
     /// <summary>
-    /// Whether or not an account needs to be setup
-    /// </summary>
-    public bool NeedsAccountSetup { get; private set; }
-    /// <summary>
     /// The next available group id
     /// </summary>
     public uint NextAvailableGroupId { get; private set; }
@@ -91,7 +87,6 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        NeedsAccountSetup = true;
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
         TodayIncome = 0;
@@ -440,7 +435,6 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
             Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
         }
         else
         {
@@ -665,7 +659,6 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
-            NeedsAccountSetup = Metadata.UseCustomCurrency && (string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) || string.IsNullOrEmpty(Metadata.CustomCurrencyCode) || string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) || Metadata.CustomCurrencyGroupSeparator == null || Metadata.CustomCurrencyDecimalDigits == null);
             FreeMemory();
             return true;
         }

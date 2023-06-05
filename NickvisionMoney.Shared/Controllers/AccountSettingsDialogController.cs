@@ -36,10 +36,6 @@ public class AccountSettingsDialogController
     /// </summary>
     public AccountMetadata Metadata { get; init; }
     /// <summary>
-    /// Whether or not the dialog should be used for necessary account setup
-    /// </summary>
-    public bool NeedsSetup { get; init; }
-    /// <summary>
     /// Whether or not the account is encrypted
     /// </summary>
     public bool IsEncrypted { get; init; }
@@ -52,12 +48,10 @@ public class AccountSettingsDialogController
     /// Creates an AccountSettingsDialogController
     /// </summary>
     /// <param name="metadata">The AccountMetadata object represented by the controller</param>
-    /// <param name="needsSetup">Whether or not the dialog should be used for necessary account setup</param>
     /// <param name="isEncrypted">Whether or not the account is encrypted</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool needsSetup, bool isEncrypted)
+    internal AccountSettingsDialogController(AccountMetadata metadata, bool isEncrypted)
     {
         Metadata = (AccountMetadata)metadata.Clone();
-        NeedsSetup = needsSetup;
         IsEncrypted = isEncrypted;
         NewPassword = null;
     }

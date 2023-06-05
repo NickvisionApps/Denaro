@@ -83,10 +83,6 @@ public class AccountViewController : IDisposable
     /// </summary>
     public bool AccountNeedsPassword => _account.IsEncrypted;
     /// <summary>
-    /// Whether or not the account needs to be setup
-    /// </summary>
-    public bool AccountNeedsSetup => _account.NeedsAccountSetup;
-    /// <summary>
     /// The title (filename without extension) of the account
     /// </summary>
     public string AccountTitle => _account.Metadata.Name;
@@ -496,7 +492,7 @@ public class AccountViewController : IDisposable
     /// Creates a new AccountSettingsDialogController
     /// </summary>
     /// <returns>The new AccountSettingsDialogController</returns>
-    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.NeedsAccountSetup, _account.IsEncrypted);
+    public AccountSettingsDialogController CreateAccountSettingsDialogController() => new AccountSettingsDialogController(_account.Metadata, _account.IsEncrypted);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a new transaction
@@ -584,16 +580,20 @@ public class AccountViewController : IDisposable
     /// Sets the new password of the account
     /// </summary>
     /// <param name="password">The new password</param>
-    public void SetPassword(string password)
+    /// <param name="showNotification">Whether or not to show the notification</param>
+    public void SetPassword(string password, bool showNotification = true)
     {
         _account.SetPassword(password);
-        if (string.IsNullOrEmpty(password))
+        if(showNotification)
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was removed."), NotificationSeverity.Success));
-        }
-        else
-        {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was changed."), NotificationSeverity.Success));
+            if (string.IsNullOrEmpty(password))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was removed."), NotificationSeverity.Success));
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was changed."), NotificationSeverity.Success));
+            }
         }
     }
 

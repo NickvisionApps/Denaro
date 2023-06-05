@@ -1,6 +1,7 @@
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -42,7 +43,11 @@ public class NewAccountDialogController
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
-    
+    /// <summary>
+    /// The path of the new account
+    /// </summary>
+    public string Path => $"{Folder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.nmoney";
+
     /// <summary>
     /// Constructs a NewAccountDialogController
     /// </summary>

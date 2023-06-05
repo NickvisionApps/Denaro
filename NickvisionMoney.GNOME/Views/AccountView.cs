@@ -541,10 +541,6 @@ public partial class AccountView : Adw.Bin
         g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
         //Work
         await _controller.StartupAsync();
-        if (_controller.AccountNeedsSetup)
-        {
-            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-        }
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
