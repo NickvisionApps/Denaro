@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-04 09:50+0000\n"
+"PO-Revision-Date: 2023-06-06 18:53+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/ar/>\n"
@@ -722,7 +722,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38

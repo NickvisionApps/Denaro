@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 10:49-0400\n"
-"PO-Revision-Date: 2023-06-04 09:50+0000\n"
+"PO-Revision-Date: 2023-06-06 18:53+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
 "app/ar/>\n"
@@ -212,8 +212,6 @@ msgid "Decimal Separator (Invalid)"
 msgstr "الفاصل العشري (غير صالح)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
-#, fuzzy
-#| msgid "DeleteExisting"
 msgid "Delete Existing"
 msgstr "احذف المعاملات الموجودة"
 
@@ -545,10 +543,8 @@ msgstr "حدِّد مجلَّد النسخ الاحتياطيِّ"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:230
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
-#, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select Folder"
-msgstr "حدِّد مجلَّد النسخ الاحتياطيِّ"
+msgstr "حدِّد مجلدًا"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1158
 msgid "Show"
@@ -603,13 +599,6 @@ msgid "This account is already opened."
 msgstr "هذا الحساب مفتوح بالفعل."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
-#, fuzzy
-#| msgid ""
-#| "This transaction is a source repeat transaction.\n"
-#| "What would you like to do with the repeat transactions?\n"
-#| "\n"
-#| "Deleting only the source transaction will allow individual\n"
-#| "generated transactions to be modifiable."
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -620,8 +609,7 @@ msgstr ""
 "هذه المعاملة معاملة تكرار مصدر.\n"
 "ما تفعل بالمعاملات المكرَّرة؟\n"
 "\n"
-"إن حذف معاملة المصدر فقط يتيح تعديل\n"
-"المعاملات المولَّدة."
+"إن حذف معاملة المصدر فقط يتيح تعديل&#xA;المعاملات المولَّدة."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
 msgid ""
@@ -972,44 +960,35 @@ msgstr "حساب جديد"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:52
 msgid "Use this wizard to get the most out of your account"
-msgstr ""
+msgstr "يرشدك هذا المرشد نحو أحسن استفادة من حسابك"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
-#, fuzzy
-#| msgctxt "DateRange"
-#| msgid "Start"
 msgid "Let's Start"
-msgstr "البداية"
+msgstr "بسم الله نبدأ"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:76
 msgid "Storage Location"
-msgstr ""
+msgstr "مكان التخزين"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-#, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
-msgstr "نوع الحساب"
+msgstr "اسم الحساب"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
-#, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
-msgstr "كلمة سرِّ حساب الوجهة (غير صالح)"
+msgstr "كلمة سرِّ الحساب (اختياري)"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
 msgid "Folder"
-msgstr ""
+msgstr "مجلد"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:112
 msgid "Save"
 msgstr "احفظ"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:129
-#, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
-msgstr "إعدادات الحساب"
+msgstr "خيارات الحساب"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "This is only a useful label that doesn't affect how the app works."
@@ -1017,17 +996,15 @@ msgstr "هذه ليست سوى تسمية مفيدة لا تؤثر على كيف
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:171
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:188
-#, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
-msgstr "قائمة الحساب"
+msgstr "عملة الحساب"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
 msgid "Create"
-msgstr ""
+msgstr "أنشئ"
 
 #: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:32
 msgid "Enter Password To Login:"

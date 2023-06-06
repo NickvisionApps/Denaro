@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 10:49-0400\n"
-"PO-Revision-Date: 2023-06-02 03:47+0000\n"
+"PO-Revision-Date: 2023-06-06 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "app/de/>\n"
@@ -532,14 +532,12 @@ msgstr "Konto auswählen"
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:176
 msgid "Select Backup Folder"
-msgstr "Wähle Sicherungs-Ordner aus"
+msgstr "Sicherungsordner auswählen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:230
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
-#, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select Folder"
-msgstr "Wähle Sicherungs-Ordner aus"
+msgstr "Ordner auswählen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1158
 msgid "Show"
@@ -972,7 +970,7 @@ msgstr "Neues Konto"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:52
 msgid "Use this wizard to get the most out of your account"
-msgstr ""
+msgstr "Nutzen Sie diesen Assistenten, um Ihr Konto optimal zu nutzen"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
 #, fuzzy
@@ -983,33 +981,27 @@ msgstr "Beginn"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:76
 msgid "Storage Location"
-msgstr ""
+msgstr "Speicherort"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-#, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
-msgstr "Kontotyp"
+msgstr "Kontoname"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
-#, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
-msgstr "Passwort des Zielkontos (ungültig)"
+msgstr "Kontopasswort (optional)"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
 msgid "Folder"
-msgstr ""
+msgstr "Ordner"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:112
 msgid "Save"
 msgstr "Speichern"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:129
-#, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
-msgstr "Konto-Einstellungen"
+msgstr "Kontooptionen"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "This is only a useful label that doesn't affect how the app works."
@@ -1019,17 +1011,15 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:171
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:188
-#, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
-msgstr "Konto-Menü"
+msgstr "Kontowährung"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 #: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:32
 msgid "Enter Password To Login:"
@@ -1359,7 +1349,7 @@ msgstr "Konto öffnen (Strg+O)"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:83
 msgid "No Recent Accounts"
-msgstr "Keine Kürzlichen Konten"
+msgstr "Keine kürzlichen Konten"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:111
 msgid "Main Menu"
