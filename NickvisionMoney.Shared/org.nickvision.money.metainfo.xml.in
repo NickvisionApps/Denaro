@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.6.0-next" date="2023-06-01">
+    <release version="2023.6.0-beta1" date="2023-06-05">
       <description translatable="no">
         <p>- Added a new account setup dialog to make it easier to configure new accounts</p>
         <p>- Added the ability to remove recent accounts from the list</p>
