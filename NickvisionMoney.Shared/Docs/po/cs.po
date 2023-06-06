@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-03 07:50+0000\n"
+"PO-Revision-Date: 2023-06-06 00:02+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/cs/>\n"
@@ -749,6 +749,9 @@ msgid ""
 "view. If you select the current view, currently displayed transactions will "
 "be exported in the same order in which they are shown."
 msgstr ""
+"Můžete si vybrat, zda chcete exportovat všechny informace, nebo pouze "
+"aktuální zobrazení. Pokud vyberete aktuální zobrazení, budou aktuálně "
+"zobrazené transakce exportovány ve stejném pořadí, v jakém jsou zobrazeny."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:113
@@ -758,23 +761,27 @@ msgid ""
 "colors are modified by making them half-transparent in order to make black "
 "text always clearly visible. You can set a password for an exported file."
 msgstr ""
+"Soubor bude obsahovat informace o účtu, seznam transakcí a obrázky faktur. "
+"Transakce jsou barevné jako v aplikaci, ale barvy jsou upraveny tak, že jsou "
+"poloprůhledné, aby byl černý text vždy dobře viditelný. Pro exportovaný "
+"soubor můžete nastavit heslo."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Nápověda aplikace Denaro"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Nápověda aplikace Denaro"
 
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Denaro Help"
-msgstr ""
+msgstr "<_:media-1/> Nápověda aplikace Denaro"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -782,6 +789,8 @@ msgid ""
 "This documentation will help you understand how to configure and manage data "
 "in <app>Denaro</app> to get the most of the application."
 msgstr ""
+"Tato dokumentace vám pomůže pochopit, jak konfigurovat a spravovat data v "
+"aplikaci <app>Denaro</app>, abyste z ní mohli vytěžit maximum."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
@@ -791,12 +800,17 @@ msgid ""
 "Denaro/discussions\">discussions</link> on Github, or <link href=\"https://"
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
+"Potřebujete-li podporu, použijte <link href=\"https://github.com/"
+"NickvisionApps/Denaro/issues\">problémy</link> nebo <link href=\"https"
+"://github.com/NickvisionApps/Denaro/discussions\">diskuze</link> na GitHubu "
+"nebo se <link href=\"https://bit.ly/3GrfEid\">připojte k našemu kanálu "
+"Matrix</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/transaction.page:8
 msgctxt "link"
 msgid "Transaction 🧾"
-msgstr ""
+msgstr "Transakce 🧾"
 
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
@@ -807,6 +821,8 @@ msgstr "Transakce"
 #: yelp/C/transaction.page:21
 msgid "This page explains all properties of transactions in <app>Denaro</app>."
 msgstr ""
+"Na této stránce jsou vysvětleny všechny vlastnosti transakcí v aplikaci "
+"<app>Denaro</app>."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
@@ -820,21 +836,24 @@ msgid ""
 "with 1 and increase for every transaction added. Ids can't be changed, ids "
 "of removed transactions are not reused."
 msgstr ""
+"Každá transakce má ID, které je pro daný účet jedinečné. ID začíná číslem 1 "
+"a zvyšuje se s každou přidanou transakcí. ID nelze měnit, identifikátory "
+"odstraněných transakcí se znovu nepoužívají."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:29
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:30
 msgid "No limit on length. It can't contain semicolon."
-msgstr ""
+msgstr "Délka není omezena. Nesmí obsahovat středník."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:33
 msgid "Amount"
-msgstr ""
+msgstr "Množství"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:34
@@ -842,11 +861,13 @@ msgid ""
 "A number in a format that is valid for your locale, see <em>System Currency</"
 "em> in <link xref=\"account\">Account page</link> for details."
 msgstr ""
+"Číslo ve formátu platném pro vaše místní prostředí, podrobnosti viz "
+"<em>Systémová měna</em> na stránce <link xref=\"account\">Účet</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
@@ -855,17 +876,21 @@ msgid ""
 "xref=\"account\">account settings</link> will be selected when you open a "
 "dialog to add new transaction."
 msgstr ""
+"<em>Příjem</em> nebo <em>Výdaj</em>. Ve výchozím nastavení se při otevření "
+"dialogu pro přidání nové transakce vybere ta, která byla zvolena v <link "
+"xref=\"account\">nastavení účtu</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:41
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:42
 msgid ""
 "Any date can be selected, you can also create transactions for future dates."
 msgstr ""
+"Lze vybrat libovolné datum, můžete také vytvářet transakce pro budoucí data."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
@@ -886,6 +911,16 @@ msgid ""
 "transactions become normal transactions and can be edited or deleted "
 "separately."
 msgstr ""
+"Tuto možnost použijte k vytvoření opakující se transakce. Po přidání "
+"transakce s intervalem opakování se tato transakce stane <em>zdrojovou</em> "
+"transakcí. Aplikace <app>Denaro</app> bude automaticky generovat "
+"<em>opakované</em> transakce pro data do dnešního dne nebo zadaného data "
+"ukončení, pokud je nastaveno v minulosti. <em>Opakované</em> transakce nelze "
+"upravovat ani mazat, upravovat lze pouze <em>zdrojové</em> transakce. Při "
+"úpravě <em>zdrojové</em> transakce se aplikace <app>Denaro</app> zeptá, zda "
+"chcete upravit nebo zrušit přiřazení <em>opakovaných</em> transakcí. Pokud "
+"se rozhodnete pro zrušení přiřazení, <em>opakované</em> transakce se stanou "
+"normálními transakcemi a lze je upravovat nebo mazat samostatně."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
@@ -898,22 +933,26 @@ msgid ""
 "End date for a transaction with repeat. It can't be earlier than or on the "
 "same day as start date."
 msgstr ""
+"Datum ukončení transakce s opakováním. Nemůže být dřívější nebo stejné jako "
+"datum zahájení."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:53
 msgid "Group"
-msgstr ""
+msgstr "Skupina"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:54
 msgid ""
 "Each transaction can belong to only one group or none («Ungrouped» group)."
 msgstr ""
+"Každá transakce může patřit pouze do jedné skupiny nebo do žádné (skupina "
+"„Neseskupené“)."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:57
 msgid "Color"
-msgstr ""
+msgstr "Barva"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:58
@@ -923,11 +962,15 @@ msgid ""
 "selected in <link xref=\"configuration\">configuration</link>, but can be "
 "changed to any color."
 msgstr ""
+"Barva pro transakce. Lze nastavit použití barvy skupiny nebo jedinečné "
+"barvy. Při výběru jedinečné barvy bude ve výchozím nastavení nastavena na "
+"barvu vybranou v <link xref=\"configuration\">nastavení</link>, lze ji ale "
+"změnit na libovolnou barvu."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Receipt"
-msgstr ""
+msgstr "Faktura"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62
@@ -937,27 +980,31 @@ msgid ""
 "JPEG image. In case of PDF, only the first page will be saved. You can "
 "delete or upload another file anytime."
 msgstr ""
+"Obrázek faktury za transakci. Můžete nahrát obrázek JPEG nebo PNG nebo "
+"dokument PDF, ale bez ohledu na formát bude převeden a uložen jako obrázek "
+"JPEG. V případě PDF bude uložena pouze první stránka. Soubor můžete kdykoli "
+"odstranit nebo nahrát jiný."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
 msgid "Notes"
-msgstr ""
+msgstr "Poznámky"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:66
 msgid "A freeform text note to attach to transaction."
-msgstr ""
+msgstr "Volně formulovaná textová poznámka, která se připojí k transakci."
 
 #. (itstool) path: info/title
 #: yelp/C/transfer.page:8
 msgctxt "link"
 msgid "Transfer 💸"
-msgstr ""
+msgstr "Převod 💸"
 
 #. (itstool) path: page/title
 #: yelp/C/transfer.page:20
 msgid "Transfer"
-msgstr ""
+msgstr "Převod"
 
 #. (itstool) path: page/p
 #: yelp/C/transfer.page:21
@@ -965,18 +1012,20 @@ msgid ""
 "Transfer is a way to move money from one account to another. After running a "
 "transfer 2 transactions will be created with the following descriptions:"
 msgstr ""
+"Převod je způsob, jak lze přenést peníze z jednoho účtu na druhý. Po "
+"provedení převodu se vytvoří 2 transakce s následujícími popisy:"
 
 #. (itstool) path: item/p
 #: yelp/C/transfer.page:24
 msgid ""
 "«Transfer to <input>Destination Account Name</input>» on source account."
-msgstr ""
+msgstr "„Převod na <input>Název cílového účtu</input>“ na zdrojovém účtu."
 
 #. (itstool) path: item/p
 #: yelp/C/transfer.page:27
 msgid ""
 "«Transfer from <input>Source Account Name</input>» on destination account."
-msgstr ""
+msgstr "„Převod z <input>Název zdrojového účtu</input>“ na cílovém účtu."
 
 #. (itstool) path: page/p
 #: yelp/C/transfer.page:30
@@ -986,6 +1035,9 @@ msgid ""
 "transaction on source account will not affect transaction on destination "
 "account, and vice versa."
 msgstr ""
+"Transakce vytvořené pomocí převodu jsou jednoduché transakce, které lze "
+"libovolně upravovat nebo mazat. Tyto transakce nejsou propojené: úprava "
+"transakce na zdrojovém účtu neovlivní transakci na cílovém účtu a naopak."
 
 #. (itstool) path: page/p
 #: yelp/C/transfer.page:31
@@ -995,6 +1047,9 @@ msgid ""
 "xref=\"configuration\">configuration</link> will be used for created "
 "transactions."
 msgstr ""
+"Převod neumožňuje vytvářet opakující se transakce ani nastavovat jiné "
+"vlastnosti než částku. Pro vytvořené transakce se použije barva vybraná v "
+"<link xref=\"configuration\">nastavení</link> ."
 
 #. (itstool) path: page/p
 #: yelp/C/transfer.page:32
@@ -1002,3 +1057,5 @@ msgid ""
 "If you create a transfer between accounts with different currencies, you "
 "will be asked to provide a conversion rate."
 msgstr ""
+"Pokud vytváříte převod mezi účty v různých měnách, budete vyzváni k zadání "
+"převodního kurzu."
