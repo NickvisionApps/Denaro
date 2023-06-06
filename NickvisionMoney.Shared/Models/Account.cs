@@ -1284,7 +1284,7 @@ public class Account : IDisposable
             var useGroupColor = false;
             try
             {
-                useGroupColor = bool.Parse(fields[9]);
+                useGroupColor = Convert.ToBoolean(int.Parse(fields[9]));
             }
             catch
             {
