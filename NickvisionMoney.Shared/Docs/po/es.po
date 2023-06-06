@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-04 16:26+0000\n"
+"PO-Revision-Date: 2023-06-06 00:02+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
 ".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -423,7 +423,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr "Color de la transferencia predeterminado"
+msgstr "Color predeterminado de la transferencia"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -439,7 +439,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr "Color del grupo predeterminado"
+msgstr "Color predeterminado del grupo"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -957,7 +957,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr "Fecha de fin de repetición"
+msgstr "Repetir fecha final"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
