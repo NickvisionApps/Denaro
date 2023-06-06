@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 10:49-0400\n"
-"PO-Revision-Date: 2023-06-06 00:02+0000\n"
+"PO-Revision-Date: 2023-06-06 18:53+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -209,10 +209,8 @@ msgid "Decimal Separator (Invalid)"
 msgstr "Oddělovač desetinných míst (neplatný)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
-#, fuzzy
-#| msgid "DeleteExisting"
 msgid "Delete Existing"
-msgstr "OdstranitStávající"
+msgstr "Odstranit stávající"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
 msgid "Delete Group"
@@ -539,10 +537,8 @@ msgstr "Vyberte složku záloh"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:230
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
-#, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select Folder"
-msgstr "Vyberte složku záloh"
+msgstr "Vybrat složku"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1158
 msgid "Show"
@@ -597,13 +593,6 @@ msgid "This account is already opened."
 msgstr "Tento účet je již otevřen."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
-#, fuzzy
-#| msgid ""
-#| "This transaction is a source repeat transaction.\n"
-#| "What would you like to do with the repeat transactions?\n"
-#| "\n"
-#| "Deleting only the source transaction will allow individual\n"
-#| "generated transactions to be modifiable."
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -614,8 +603,8 @@ msgstr ""
 "Tato transakce je opakovanou transakcí zdroje.\n"
 "Co chcete s opakovanými transakcemi udělat?\n"
 "\n"
-"Odstraněním pouze zdrojové transakce umožníte\n"
-"úpravu vygenerovaných transakcí."
+"Odstraněním pouze zdrojové transakce umožníte&#xA;úpravu vygenerovaných "
+"transakcí."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
 msgid ""
@@ -968,44 +957,35 @@ msgstr "Nový účet"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:52
 msgid "Use this wizard to get the most out of your account"
-msgstr ""
+msgstr "Pomocí tohoto průvodce získáte ze svého účtu maximum"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
-#, fuzzy
-#| msgctxt "DateRange"
-#| msgid "Start"
 msgid "Let's Start"
-msgstr "Začátek"
+msgstr "Začínáme"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:76
 msgid "Storage Location"
-msgstr ""
+msgstr "Umístění úložiště"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-#, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
-msgstr "Typ účtu"
+msgstr "Název účtu"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
-#, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
-msgstr "Heslo cílového účtu (neplatné)"
+msgstr "Heslo účtu (volitelné)"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
 msgid "Folder"
-msgstr ""
+msgstr "Složka"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:112
 msgid "Save"
 msgstr "Uložit"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:129
-#, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
-msgstr "Nastavení účtu"
+msgstr "Možnosti účtu"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "This is only a useful label that doesn't affect how the app works."
@@ -1014,17 +994,15 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:171
 msgid "Next"
-msgstr ""
+msgstr "Další"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:188
-#, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
-msgstr "Nabídka účtu"
+msgstr "Měna účtu"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:32
 msgid "Enter Password To Login:"
