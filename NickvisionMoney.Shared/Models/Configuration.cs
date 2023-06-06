@@ -238,4 +238,30 @@ public class Configuration
             RecentAccount1 = newRecentAccount;
         }
     }
+
+    /// <summary>
+    /// Removes a recent account
+    /// </summary>
+    /// <param name="recentAccount">The RecentAccount to remove</param>
+    public void RemoveRecentAccount(RecentAccount recentAccount)
+    {
+        var ra1 = RecentAccount1;
+        var ra2 = RecentAccount2;
+        var ra3 = RecentAccount3;
+        RecentAccount1 = new RecentAccount();
+        RecentAccount2 = new RecentAccount();
+        RecentAccount3 = new RecentAccount();
+        if(ra3.Path != recentAccount.Path)
+        {
+            AddRecentAccount(ra3);
+        }
+        if(ra2.Path != recentAccount.Path)
+        {
+            AddRecentAccount(ra2);
+        }
+        if(ra1.Path != recentAccount.Path)
+        {
+            AddRecentAccount(ra1);
+        }
+    }
 }

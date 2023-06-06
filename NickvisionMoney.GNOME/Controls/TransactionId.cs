@@ -77,7 +77,9 @@ public partial class TransactionId : Gtk.Overlay
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"#{red.ToString("x2")}{green.ToString("x2")}{blue.ToString("x2")}\">{idString}</span>");
+        var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
+        var fgcolor = luma > 0.5 ? "#000000cc" : "#ffffff";
+        _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"{fgcolor}\">{idString}</span>");
         uint colorPixbuf;
         if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out colorPixbuf))
         {
@@ -96,14 +98,12 @@ public partial class TransactionId : Gtk.Overlay
         if (isSmall)
         {
             _colorImage.SetSizeRequest(12, 12);
-            _colorImage.SetOpacity(1.0);
             _sizeGroup.RemoveWidget(_idLabel);
         }
         else
         {
             _sizeGroup.AddWidget(_idLabel);
             _colorImage.SetSizeRequest(34, 34);
-            _colorImage.SetOpacity(0.1);
         }
     }
 }

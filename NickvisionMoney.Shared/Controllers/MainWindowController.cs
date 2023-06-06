@@ -143,7 +143,13 @@ public class MainWindowController : IDisposable
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController(RecentAccountsChanged);
+    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
+
+    /// <summary>
+    /// Creates a new NewAccountDialogController
+    /// </summary>
+    /// <returns>The PreferencesViewController</returns>
+    public NewAccountDialogController CreateNewAccountDialogController() => new NewAccountDialogController();
 
     /// <summary>
     /// Creates a new DashboardViewController
@@ -196,6 +202,34 @@ public class MainWindowController : IDisposable
     /// <param name="path">The path of the account to check</param>
     /// <returns>True if the account is open, else false</returns>
     public bool IsAccountOpen(string path) => _openAccounts.Any(x => x.AccountPath == path);
+
+    /// <summary>
+    /// Creates a new account and adds it to the list of opened accounts
+    /// </summary>
+    public async Task<bool> NewAccountAsync(string path, string? password, AccountMetadata metadata)
+    {
+        var controller = new AccountViewController(path, NotificationSent, RecentAccountsChanged);
+        controller.TransferSent += OnTransferSent;
+        try
+        {
+            controller.Login(null);
+        }
+        catch
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
+            return false;
+        }
+        _openAccounts.Add(controller);
+        AccountAdded?.Invoke(this, EventArgs.Empty);
+        await Task.Delay(100);
+        controller.UpdateMetadata(metadata);
+        if(!string.IsNullOrEmpty(password))
+        {
+            controller.SetPassword(password, false);
+        }
+        return true;
+
+    }
 
     /// <summary>
     /// Adds an account to the list of opened accounts
@@ -257,6 +291,17 @@ public class MainWindowController : IDisposable
     {
         _openAccounts[index].Dispose();
         _openAccounts.RemoveAt(index);
+    }
+
+    /// <summary>
+    /// Removes a recent account from the list
+    /// </summary>
+    /// <param name="recentAccount">The RecentAccount to remove</param>
+    public void RemoveRecentAccount(RecentAccount recentAccount)
+    {
+        Configuration.Current.RemoveRecentAccount(recentAccount);
+        Configuration.Current.Save();
+        RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

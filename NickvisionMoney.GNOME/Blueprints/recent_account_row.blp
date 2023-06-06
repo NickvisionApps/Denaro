@@ -43,5 +43,14 @@ Adw.ActionRow _root {
     }
   }
 
+  [suffix]
+  Gtk.Button _removeButton {
+    valign: center;
+    icon-name: "cross-symbolic";
+    tooltip-text: _("Remove");
+
+    styles ["flat"]
+  }
+
   activatable-widget: _prefixButton;
 }

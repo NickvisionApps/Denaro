@@ -14,12 +14,18 @@ Adw.Window _root {
 
       [start]
       Gtk.Button _backButton {
-        halign: start;
-        valign: center;
         visible: false;
         child: Adw.ButtonContent {
           icon-name: "go-previous-symbolic";
           label: _("Back");
+        };
+      }
+
+      [start]
+      Gtk.Button _copyButton {
+        child: Adw.ButtonContent {
+          icon-name: "edit-copy-symbolic";
+          label: _("Make a Copy");
         };
       }
 
@@ -192,7 +198,7 @@ Adw.Window _root {
                 Adw.PreferencesGroup {
                   hexpand: true;
 
-                  Adw.ActionRow {
+                  Adw.ActionRow _extrasRow {
                     title: _("Extras");
                     subtitle: _("Manage extra fields of the transaction.");
 
@@ -202,14 +208,12 @@ Adw.Window _root {
                     }
 
                     [suffix]
-                    Gtk.Button _extrasButton {
+                    Gtk.Image _imgExtras {
                       icon-name: "go-next-symbolic";
                       valign: center;
-                      can-focus: false;
-                      styles ["flat"]
                     }
 
-                    activatable-widget: _extrasButton;
+                    activatable-widget: _imgExtras;
                   }
                 }
               }
@@ -220,14 +224,16 @@ Adw.Window _root {
               spacing: 24;
               halign: center;
               homogeneous: true;
+              margin-start: 24;
               margin-top: 24;
+              margin-end: 24;
               margin-bottom: 24;
 
-              Gtk.Button _copyButton {
+              Gtk.Button _deleteButton {
                 valign: center;
-                label: _("Make a Copy");
+                label: _("Delete");
 
-                styles ["pill"]
+                styles ["pill", "destructive-action"]
               }
 
               Gtk.Button _applyButton {

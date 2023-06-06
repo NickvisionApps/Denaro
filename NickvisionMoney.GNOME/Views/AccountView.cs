@@ -103,7 +103,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Label _expenseLabel;
     [Gtk.Connect] private readonly Gtk.CheckButton _expenseCheck;
     [Gtk.Connect] private readonly Gtk.Button _resetOverviewFilterButton;
-    [Gtk.Connect] private readonly Gtk.ToggleButton _toggleGroupsButton;
+    [Gtk.Connect] private readonly Gtk.Button _toggleGroupsButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _toggleGroupsButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
@@ -187,7 +187,11 @@ public partial class AccountView : Adw.Bin
         //Button Reset Overview Filter
         _resetOverviewFilterButton.OnClicked += OnResetOverviewFilter;
         //Button Toggle Groups
-        _toggleGroupsButton.OnToggled += OnToggleGroups;
+        _toggleGroupsButton.OnClicked += (sender, e) =>
+        {
+            _controller.ShowGroupsList = !_controller.ShowGroupsList;
+            OnToggleGroups();
+        };
         //Button Reset Groups Filter
         _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         //Calendar Widget
@@ -362,7 +366,6 @@ public partial class AccountView : Adw.Bin
     {
         var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
         row.EditTriggered += EditGroup;
-        row.DeleteTriggered += DeleteGroup;
         row.FilterChanged += UpdateGroupFilter;
         if (index != null)
         {
@@ -432,7 +435,6 @@ public partial class AccountView : Adw.Bin
     {
         var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
         row.EditTriggered += EditTransaction;
-        row.DeleteTriggered += DeleteTransaction;
         if (index != null)
         {
             _rowCallbacks[2] = (x) =>
@@ -539,10 +541,6 @@ public partial class AccountView : Adw.Bin
         g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
         //Work
         await _controller.StartupAsync();
-        if (_controller.AccountNeedsSetup)
-        {
-            AccountSettings(Gio.SimpleAction.New("ignore", null), EventArgs.Empty);
-        }
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
@@ -553,7 +551,7 @@ public partial class AccountView : Adw.Bin
         {
             _sortLastToFirstButton.SetActive(true);
         }
-        OnToggleGroups(null, EventArgs.Empty);
+        OnToggleGroups();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
     }
@@ -884,7 +882,7 @@ public partial class AccountView : Adw.Bin
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."), _("Cancel"), _("Disassociate Existing"), _("DeleteExisting"));
+                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."), _("Cancel"), _("Disassociate Existing"), _("Delete Existing"));
                     dialog.UnsetDestructiveApperance();
                     dialog.UnsetSuggestedApperance();
                     dialog.Present();
@@ -985,58 +983,65 @@ public partial class AccountView : Adw.Bin
             transactionController.Dispose();
             transactionDialog.Close();
         };
-    }
-
-    /// <summary>
-    /// Occurs when the delete transaction item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void DeleteTransaction(object? sender, uint id)
-    {
-        if (_controller.GetIsSourceRepeatTransaction(id))
+        transactionDialog.OnDelete += (sender, e) =>
         {
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
-            dialog.UnsetDestructiveApperance();
-            dialog.UnsetSuggestedApperance();
-            dialog.Present();
-            dialog.OnResponse += async (sender, e) =>
+            transactionDialog.SetVisible(false);
+            if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                if (dialog.Response != MessageDialogResponse.Cancel)
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual&#xA;generated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
+                dialog.UnsetDestructiveApperance();
+                dialog.UnsetSuggestedApperance();
+                dialog.Present();
+                dialog.OnResponse += async (sender, e) =>
                 {
-                    //Start Spinner
-                    g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                    //Work
-                    await Task.Run(async () =>
+                    if (dialog.Response != MessageDialogResponse.Cancel)
                     {
-                        try
+                        //Start Spinner
+                        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
+                        //Work
+                        await Task.Run(async () =>
                         {
-                            await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                            Console.WriteLine(ex.StackTrace);
-                        }
-                    });
-                    g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
-                }
-                dialog.Destroy();
-            };
-        }
-        else
-        {
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction?"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes"));
-            dialog.Present();
-            dialog.OnResponse += async (sender, e) =>
+                            try
+                            {
+                                await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine(ex.StackTrace);
+                            }
+                        });
+                        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                        transactionController.Dispose();
+                        transactionDialog.Close();
+                    }
+                    else
+                    {
+                        transactionDialog.SetVisible(true);
+                    }
+                    dialog.Destroy();
+                };
+            }
+            else
             {
-                if (dialog.Response == MessageDialogResponse.Destructive)
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes"));
+                dialog.Present();
+                dialog.OnResponse += async (sender, e) =>
                 {
-                    await _controller.DeleteTransactionAsync(id);
-                }
-                dialog.Destroy();
-            };
-        }
+                    if (dialog.Response == MessageDialogResponse.Destructive)
+                    {
+                        await _controller.DeleteTransactionAsync(id);
+                        transactionController.Dispose();
+                        transactionDialog.Close();
+                    }
+                    else
+                    {
+                        transactionDialog.SetVisible(true);
+                    }
+                    dialog.Destroy();
+                };
+            }
+        };
     }
 
     /// <summary>
@@ -1103,24 +1108,24 @@ public partial class AccountView : Adw.Bin
             g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
             groupDialog.Close();
         };
-    }
-
-    /// <summary>
-    /// Occurs when the delete group item is activated
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void DeleteGroup(object? sender, uint id)
-    {
-        var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Group?"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes"));
-        dialog.Present();
-        dialog.OnResponse += async (sender, e) =>
+        groupDialog.OnDelete += (sender, e) =>
         {
-            if (dialog.Response == MessageDialogResponse.Destructive)
+            groupDialog.SetVisible(false);
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes"));
+            dialog.Present();
+            dialog.OnResponse += async (s, ex) =>
             {
-                await _controller.DeleteGroupAsync(id);
-            }
-            dialog.Destroy();
+                if (dialog.Response == MessageDialogResponse.Destructive)
+                {
+                    await _controller.DeleteGroupAsync(id);
+                    groupDialog.Close();
+                }
+                else
+                {
+                    groupDialog.SetVisible(true);
+                }
+                dialog.Destroy();
+            };
         };
     }
 
@@ -1145,11 +1150,9 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private void OnToggleGroups(object? sender, EventArgs e)
+    private void OnToggleGroups()
     {
-        if (_toggleGroupsButton.GetActive())
+        if (!_controller.ShowGroupsList)
         {
             _toggleGroupsButtonContent.SetIconName("view-reveal-symbolic");
             _toggleGroupsButtonContent.SetLabel(_("Show"));
@@ -1159,8 +1162,7 @@ public partial class AccountView : Adw.Bin
             _toggleGroupsButtonContent.SetIconName("view-conceal-symbolic");
             _toggleGroupsButtonContent.SetLabel(_("Hide"));
         }
-        _groupsList.SetVisible(!_toggleGroupsButton.GetActive());
-        _controller.ShowGroupsList = !_toggleGroupsButton.GetActive();
+        _groupsList.SetVisible(_controller.ShowGroupsList);
     }
 
     /// <summary>

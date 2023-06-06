@@ -18,10 +18,6 @@ public interface IModelRowControl<T>
     /// Occurs when the edit button on the row is clicked 
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
-    /// <summary>
-    /// Occurs when the delete button on the row is clicked 
-    /// </summary>
-    public event EventHandler<uint>? DeleteTriggered;
 
     /// <summary>
     /// Shows the row

@@ -1,61 +1,63 @@
-﻿using NickvisionMoney.Shared.Models;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace NickvisionMoney.Shared.Controllers;
 
 /// <summary>
-/// Statuses for when account metadata is validated
+/// Statuses for when account currency is validated
 /// </summary>
 [Flags]
-public enum AccountMetadataCheckStatus
+public enum CurrencyCheckStatus
 {
     Valid = 1,
-    EmptyName = 2,
-    EmptyCurrencySymbol = 4,
-    InvalidCurrencySymbol = 8,
-    EmptyCurrencyCode = 16,
-    EmptyDecimalSeparator = 32,
-    SameSeparators = 64,
-    SameSymbolAndDecimalSeparator = 128,
-    SameSymbolAndGroupSeparator = 256,
-    NonMatchingPasswords = 512
+    EmptyCurrencySymbol = 2,
+    InvalidCurrencySymbol = 4,
+    EmptyCurrencyCode = 8,
+    EmptyDecimalSeparator = 16,
+    SameSeparators = 32,
+    SameSymbolAndDecimalSeparator = 64,
+    SameSymbolAndGroupSeparator = 128,
 }
 
 /// <summary>
-/// A controller for an AccountSettingsDialog
+/// A controller for a NewAccountDialog
 /// </summary>
-public class AccountSettingsDialogController
+public class NewAccountDialogController
 {
+    /// <summary>
+    /// The password of the new account
+    /// </summary>
+    public string? Password { get; set; }
+    /// <summary>
+    /// The folder to save the new account
+    /// </summary>
+    public string Folder { get; set; }
+    /// <summary>
+    /// The metadata represented by the controller
+    /// </summary>
+    public AccountMetadata Metadata { get; init; }
+    
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
     /// <summary>
-    /// The metadata represented by the controller
+    /// The path of the new account
     /// </summary>
-    public AccountMetadata Metadata { get; init; }
-    /// <summary>
-    /// Whether or not the account is encrypted
-    /// </summary>
-    public bool IsEncrypted { get; init; }
-    /// <summary>
-    /// The new password for the account, if available
-    /// </summary>
-    public string? NewPassword { get; private set; }
+    public string Path => $"{Folder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.nmoney";
 
     /// <summary>
-    /// Creates an AccountSettingsDialogController
+    /// Constructs a NewAccountDialogController
     /// </summary>
-    /// <param name="metadata">The AccountMetadata object represented by the controller</param>
-    /// <param name="isEncrypted">Whether or not the account is encrypted</param>
-    internal AccountSettingsDialogController(AccountMetadata metadata, bool isEncrypted)
+    public NewAccountDialogController()
     {
-        Metadata = (AccountMetadata)metadata.Clone();
-        IsEncrypted = isEncrypted;
-        NewPassword = null;
+        Password = null;
+        Folder = "";
+        Metadata = new AccountMetadata("", AccountType.Checking);
     }
-
+    
     /// <summary>
     /// The system reported currency string (Ex: "$ (USD)")
     /// </summary>
@@ -81,77 +83,48 @@ public class AccountSettingsDialogController
             return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
         }
     }
-
-    /// <summary>
-    /// Gets a color for an account type
-    /// </summary>
-    /// <param name="accountType">The account type</param>
-    /// <returns>The rgb color for the account type</returns>
-    public string GetColorForAccountType(AccountType accountType)
-    {
-        return accountType switch
-        {
-            AccountType.Checking => Configuration.Current.AccountCheckingColor,
-            AccountType.Savings => Configuration.Current.AccountSavingsColor,
-            AccountType.Business => Configuration.Current.AccountBusinessColor,
-            _ => Configuration.Current.AccountSavingsColor
-        };
-    }
-
+    
     /// <summary>
     /// Updates the Metadata object
     /// </summary>
-    /// <param name="name">The new name of the account</param>
-    /// <param name="type">The new type of the account</param>
     /// <param name="useCustom">Whether or not to use a custom currency</param>
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
     /// <param name="customDecimalSeparator">The new custom decimal separator</param>
     /// <param name="customGroupSeparator">The new custom group separator</param>
     /// <param name="customDecimalDigits">The new custom decimal digits number</param>
-    /// <param name="defaultTransactionType">The new default transaction type</param>
-    /// <param name="newPassword">The new password</param>
-    /// <param name="confirmPassword">The new password confirmed</param>
-    /// <returns>AccountMetadataCheckStatus</returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
+    /// <returns>CurrencyCheckStatus</returns>
+    public CurrencyCheckStatus UpdateCurrency(bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits)
     {
-        AccountMetadataCheckStatus result = 0;
-        if (string.IsNullOrEmpty(name))
-        {
-            result |= AccountMetadataCheckStatus.EmptyName;
-        }
+        CurrencyCheckStatus result = 0;
         if (useCustom && string.IsNullOrEmpty(customSymbol))
         {
-            result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
+            result |= CurrencyCheckStatus.EmptyCurrencySymbol;
         }
         decimal symbolAsNumber;
         if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out symbolAsNumber))
         {
-            result |= AccountMetadataCheckStatus.InvalidCurrencySymbol;
+            result |= CurrencyCheckStatus.InvalidCurrencySymbol;
         }
         if (useCustom && string.IsNullOrEmpty(customCode))
         {
-            result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
+            result |= CurrencyCheckStatus.EmptyCurrencyCode;
         }
         if (useCustom && string.IsNullOrEmpty(customDecimalSeparator))
         {
-            result |= AccountMetadataCheckStatus.EmptyDecimalSeparator;
+            result |= CurrencyCheckStatus.EmptyDecimalSeparator;
         }
         if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customDecimalSeparator == customGroupSeparator)
         {
-            result |= AccountMetadataCheckStatus.SameSeparators;
+            result |= CurrencyCheckStatus.SameSeparators;
         }
         if (useCustom && !string.IsNullOrEmpty(customDecimalSeparator) && customSymbol!.Contains(customDecimalSeparator))
         {
-            result |= AccountMetadataCheckStatus.SameSymbolAndDecimalSeparator;
+            result |= CurrencyCheckStatus.SameSymbolAndDecimalSeparator;
         }
         if (useCustom && !string.IsNullOrEmpty(customGroupSeparator) && customSymbol!.Contains(customGroupSeparator))
         {
-            result |= AccountMetadataCheckStatus.SameSymbolAndGroupSeparator;
-        }
-        if (newPassword != confirmPassword)
-        {
-            result |= AccountMetadataCheckStatus.NonMatchingPasswords;
+            result |= CurrencyCheckStatus.SameSymbolAndGroupSeparator;
         }
         if (result != 0)
         {
@@ -165,8 +138,6 @@ public class AccountSettingsDialogController
         {
             customCode = customCode.Substring(0, 3);
         }
-        Metadata.Name = name;
-        Metadata.AccountType = type;
         Metadata.UseCustomCurrency = useCustom;
         if (Metadata.UseCustomCurrency)
         {
@@ -184,13 +155,6 @@ public class AccountSettingsDialogController
             Metadata.CustomCurrencyGroupSeparator = null;
             Metadata.CustomCurrencyDecimalDigits = null;
         }
-        Metadata.DefaultTransactionType = defaultTransactionType;
-        NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
-        return AccountMetadataCheckStatus.Valid;
+        return CurrencyCheckStatus.Valid;
     }
-
-    /// <summary>
-    /// Sets the password to be removed from the account
-    /// </summary>
-    public void SetRemovePassword() => NewPassword = "";
 }

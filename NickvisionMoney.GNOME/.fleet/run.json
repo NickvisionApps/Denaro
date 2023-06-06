@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "dotnet",
+            "name": "Denaro GNOME",
+            "projectPath": "NickvisionMoney.GNOME.csproj",
+            "args": [],
+        },
+        
+    ]
+}

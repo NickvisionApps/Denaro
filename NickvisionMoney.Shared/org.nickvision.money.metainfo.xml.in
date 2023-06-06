@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Denaro</name>
-  <developer_name>Nickvision</developer_name>
+  <developer_name translatable="no">Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
   <description>
     <p>— Manage multiple accounts at a time, with a familiar tab interface</p>
@@ -48,7 +48,12 @@
   </provides>
   <releases>
     <release version="2023.6.0-next" date="2023-06-01">
-      <description>
+      <description translatable="no">
+        <p>- Added a new account setup dialog to make it easier to configure new accounts</p>
+        <p>- Added the ability to remove recent accounts from the list</p>
+        <p>- Moved deleting groups and transactions from their rows to their dialogs</p>
+        <p>- Changed the default sorting order of new accounts to last to first by date</p>
+        <p>- Improved UI/UX</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

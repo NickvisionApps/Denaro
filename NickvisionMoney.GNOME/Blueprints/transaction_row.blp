@@ -20,31 +20,16 @@ Gtk.FlowBoxChild _root {
         valign: center;
       
         Gtk.Label _amountLabel {
-          halign: end;
           valign: center;
           margin-end: 6;
         }
       
-        Gtk.Box {
-          orientation: horizontal;
-          spacing: 6;
-          halign: end;
+        Gtk.Button _editButton {
+          icon-name: "document-edit-symbolic";
+          valign: center;
+          tooltip-text: _("Edit Transaction");
         
-          Gtk.Button _editButton {
-            icon-name: "document-edit-symbolic";
-            valign: center;
-            tooltip-text: _("Edit Transaction");
-          
-            styles ["flat"]
-          }
-        
-          Gtk.Button _deleteButton {
-            icon-name: "user-trash-symbolic";
-            valign: center;
-            tooltip-text: _("Delete Transaction");
-          
-            styles ["flat"]
-          }
+          styles ["flat"]
         }
       }
     }

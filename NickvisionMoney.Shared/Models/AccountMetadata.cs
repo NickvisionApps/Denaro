@@ -95,8 +95,8 @@ public class AccountMetadata : ICloneable
         CustomCurrencyDecimalDigits = null;
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
-        SortFirstToLast = true;
-        SortTransactionsBy = SortBy.Id;
+        SortFirstToLast = false;
+        SortTransactionsBy = SortBy.Date;
     }
 
     /// <summary>

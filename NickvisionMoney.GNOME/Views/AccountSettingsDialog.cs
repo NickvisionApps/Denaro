@@ -13,6 +13,7 @@ public partial class AccountSettingsDialog : Adw.Window
 {
     private bool _constructing;
     private readonly AccountSettingsDialogController _controller;
+    private readonly Gtk.ShortcutController _shortcutController;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _header;
     [Gtk.Connect] private readonly Gtk.Button _btnBack;
@@ -55,11 +56,6 @@ public partial class AccountSettingsDialog : Adw.Window
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
-        if (_controller.NeedsSetup)
-        {
-            _header.SetShowStartTitleButtons(false);
-            _header.SetShowEndTitleButtons(false);
-        }
         _viewStack.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "visible-child")
@@ -252,6 +248,15 @@ public partial class AccountSettingsDialog : Adw.Window
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Apply Button
         _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
+        {
+            Close();
+            return true;
+        })));
+        AddController(_shortcutController);
         //Load
         _nameRow.SetText(_controller.Metadata.Name);
         _accountTypeRow.SetSelected((uint)_controller.Metadata.AccountType);

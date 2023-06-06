@@ -45,9 +45,7 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     [Gtk.Connect] private readonly Gtk.Image _filterCheckBackground;
     [Gtk.Connect] private readonly Gtk.CheckButton _filterCheckButton;
     [Gtk.Connect] private readonly Gtk.Label _amountLabel;
-    [Gtk.Connect] private readonly Gtk.Box _buttonsBox;
     [Gtk.Connect] private readonly Gtk.Button _editButton;
-    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
 
     /// <summary>
     /// The Id of the Group the row represents
@@ -62,10 +60,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// Occurs when the edit button on the row is clicked
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
-    /// <summary>
-    /// Occurs when the delete button on the row is clicked
-    /// </summary>
-    public event EventHandler<uint>? DeleteTriggered;
 
     private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
     {
@@ -125,10 +119,9 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
             }
         };
         //Buttons
-        _buttonsBox.SetVisible(group.Id != 0);
+        _editButton.SetVisible(group.Id != 0);
         _amountLabel.SetVexpand(group.Id == 0);
         _editButton.OnClicked += Edit;
-        _deleteButton.OnClicked += Delete;
         UpdateRow(group, defaultColor, cultureAmount, filterActive);
     }
 
@@ -183,11 +176,4 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void Edit(Gtk.Button sender, EventArgs e) => EditTriggered?.Invoke(this, Id);
-
-    /// <summary>
-    /// Occurs when the delete button is clicked
-    /// </summary>
-    /// <param name="sender">Gtk.Button</param>
-    /// <param name="e">EventArgs</param>
-    private void Delete(Gtk.Button sender, EventArgs e) => DeleteTriggered?.Invoke(this, Id);
 }

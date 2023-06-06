@@ -1,0 +1,289 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window _root {
+  height-request: 440;
+  width-request: 320;
+  default-width: 460;
+  modal: true;
+  
+  content: Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      title-widget: Adw.CarouselIndicatorDots {
+        carousel: _carousel;
+      };
+
+      [start]
+      Gtk.Button _backButton {
+        halign: start;
+        valign: center;
+        visible: false;
+        child: Adw.ButtonContent {
+          icon-name: "go-previous-symbolic";
+          label: _("Back");
+        };
+      }
+
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      vexpand: true;
+
+      Adw.ToastOverlay _toastOverlay {
+        Gtk.Box {
+          orientation: vertical;
+          vexpand: true;
+          hexpand: true;
+          spacing: 24;
+  
+          Adw.Carousel _carousel {
+            allow-scroll-wheel: false;
+            allow-mouse-drag: false;
+            allow-long-swipes: false;
+
+            Adw.StatusPage _page1 {
+              vexpand: true;
+              hexpand: true;
+              icon-name: "org.nickvision.money";
+              title: _("New Account");
+              description: _("Use this wizard to get the most out of your account");
+
+              child: Gtk.Button _startButton {
+                halign: center;
+                valign: center;
+                label: _("Let's Start");
+      
+                styles ["pill", "suggested-action"]
+              };
+
+              styles ["icon-dropshadow"]
+            }
+
+            Gtk.Box _page2 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
+
+              Gtk.Label {
+                label: _("Storage Location");
+      
+                styles ["title-2"]
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
+
+                Adw.EntryRow _accountNameRow {
+                  title: _("Account Name");
+                }
+
+                Adw.PasswordEntryRow _accountPasswordRow {
+                  title: _("Account Password (Optional)");
+                }
+
+                Adw.EntryRow _folderRow {
+                  title: _("Folder");
+                  editable: false;
+
+                  [suffix]
+                  Gtk.Button _selectFolderButton {
+                    valign: center;
+                    icon-name: "folder-open-symbolic";
+                    tooltip-text: _("Select Folder");
+
+                    styles ["flat"]
+                  }
+                }
+              }
+
+              Gtk.Button _saveButton {
+                halign: center;
+                valign: center;
+                margin-bottom: 12;
+                sensitive: false;
+                label: _("Save");
+      
+                styles ["pill", "suggested-action"]
+              }
+            }
+
+            Gtk.Box _page3 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
+
+              Gtk.Label {
+                label: _("Account Options");
+      
+                styles ["title-2"]
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
+
+                Adw.ComboRow _accountTypeRow {
+                  title: _("Account Type");
+                  subtitle: _("This is only a useful label that doesn't affect how the app works.");
+                  subtitle-lines: 4;
+                  model: Gtk.StringList {
+                    strings [_("Checking"), _("Savings"), _("Business")]
+                  };
+                }
+
+                Adw.ActionRow {
+                  title: _("Default Transaction Type");
+
+                  [suffix]
+                  Gtk.Box {
+                    orientation: horizontal;
+                    valign: center;
+
+                    Gtk.ToggleButton _incomeButton {
+                      label: _("Income");
+                    }
+
+                    Gtk.ToggleButton _expenseButton {
+                      label: _("Expense");
+                    }
+
+                    styles ["linked"]
+                  }
+                }
+              }
+
+              Gtk.Button _nextButton {
+                halign: center;
+                valign: center;
+                margin-bottom: 12;
+                label: _("Next");
+      
+                styles ["pill", "suggested-action"]
+              }
+            }
+
+            Gtk.Box _page4 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
+
+              Gtk.Label {
+                label: _("Account Currency");
+      
+                styles ["title-2"]
+              }
+
+              Gtk.Label _reportedCurrencyLabel {
+                use-markup: true;
+                justify: center;
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
+
+                Adw.ExpanderRow _rowCustomCurrency {
+                  title: _("Use Custom Currency");
+                  show-enable-switch: true;
+                  enable-expansion: false;
+  
+                  Adw.ActionRow _customSymbolRow {
+                    title: _("Currency Symbol");
+  
+                    [suffix]
+                    Gtk.Entry _customSymbolText {
+                      valign: center;
+                      max-length: 3;
+                      placeholder-text: _("Enter symbol here");
+                    }
+                  }
+  
+                  Adw.ActionRow _customCodeRow {
+                    title: _("Currency Code");
+  
+                    [suffix]
+                    Gtk.Entry _customCodeText {
+                      valign: center;
+                      max-length: 3;
+                      placeholder-text: _("Enter code here");
+                    }
+                  }
+  
+                  Adw.ActionRow _customDecimalSeparatorRow {
+                    title: _("Decimal Separator");
+  
+                    [suffix]
+                    Gtk.DropDown _customDecimalSeparatorDropDown {
+                      valign: center;
+                    }
+  
+                    [suffix]
+                    Gtk.Entry _customDecimalSeparatorText {
+                      visible: false;
+                      valign: center;
+                      halign: end;
+                      max-length: 2;
+                      max-width-chars: 4;
+                    }
+                  }
+  
+                  Adw.ActionRow _customGroupSeparatorRow {
+                    title: _("Group Separator");
+  
+                    [suffix]
+                    Gtk.DropDown _customGroupSeparatorDropDown {
+                      valign: center;
+                    }
+  
+                    [suffix]
+                    Gtk.Entry _customGroupSeparatorText {
+                      visible: false;
+                      valign: center;
+                      halign: end;
+                      max-length: 2;
+                      max-width-chars: 4;
+                    }
+                  }
+  
+                  Adw.ActionRow _customDecimalDigitsRow {
+                    title: _("Decimal Digits");
+  
+                    [suffix]
+                    Gtk.DropDown _customDecimalDigitsDropDown {
+                      valign: center;
+                    }
+                  }
+                }
+              }
+
+              Gtk.Button _createButton {
+                halign: center;
+                valign: center;
+                margin-bottom: 12;
+                label: _("Create");
+      
+                styles ["pill", "suggested-action"]
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+}

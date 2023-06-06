@@ -32,36 +32,65 @@ Adw.ApplicationWindow _root {
             margin-end: 5;
             margin-top: 5;
             margin-bottom: 5;
-            
-            Adw.PreferencesGroup _recentAccountsGroup {
-              title: _("Recents");
-              width-request: 200;
-              height-request: 55;
-              header-suffix: Gtk.Box {
-                orientation: horizontal;
-                halign: center;
-                valign: center;
-                
+            width-request: 300;
+
+            Gtk.Box {
+              orientation: horizontal;
+              hexpand: true;
+
+              Gtk.Label {
+                halign: start;
+                hexpand: true;
+                label: _("Recents");
+
+                styles ["title-4"]
+              }
+
+              Gtk.Box {
+                halign: end;
+                margin-start: 6;
+
                 Gtk.Button {
                   tooltip-text: _("New Account (Ctrl+N)");
                   action-name: "win.newAccount";
-                  
+
                   Adw.ButtonContent {
                     label: C_("Account", "New");
                     icon-name: "document-new-symbolic";
                   }
-                
+
                   styles ["suggested-action"]
                 }
-                
+
                 Gtk.Button {
                   icon-name: "document-open-symbolic";
                   tooltip-text: _("Open Account (Ctrl+O)");
                   action-name: "win.openAccount";
                 }
-                
+
                 styles ["linked"]
-              };
+              }
+            }
+
+            Gtk.Separator {
+
+            }
+
+            Adw.ViewStack _viewStackAccountPopover {
+              Adw.ViewStackPage {
+                name: "no-recents";
+                child: Adw.StatusPage {
+                  title: _("No Recent Accounts");
+                  icon-name: "document-open-recent-symbolic";
+                };
+              }
+
+              Adw.ViewStackPage {
+                name: "recents";
+                child: Adw.PreferencesGroup _recentAccountsGroup {
+
+                };
+              }
             }
           }
         };

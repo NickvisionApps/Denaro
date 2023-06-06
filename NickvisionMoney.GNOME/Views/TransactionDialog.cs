@@ -126,6 +126,7 @@ public partial class TransactionDialog : Adw.Window
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
+    [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
@@ -143,7 +144,7 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
     [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.Widget _colorButton;
-    [Gtk.Connect] private readonly Gtk.Button _extrasButton;
+    [Gtk.Connect] private readonly Adw.ActionRow _extrasRow;
     [Gtk.Connect] private readonly Adw.ActionRow _receiptRow;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _viewReceiptButtonContent;
@@ -151,13 +152,15 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _uploadReceiptButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _uploadReceiptButtonContent;
     [Gtk.Connect] private readonly Gtk.TextView _notesView;
-    [Gtk.Connect] private readonly Gtk.Button _copyButton;
+    [Gtk.Connect] private readonly Gtk.Button _deleteButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
     private readonly Gtk.EventControllerKey _descriptionKeyController;
     private readonly Gtk.EventControllerKey _amountKeyController;
+    private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
+    public event EventHandler? OnDelete;
 
     private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -198,30 +201,29 @@ public partial class TransactionDialog : Adw.Window
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        _titleLabel.SetLabel($"{_("Transaction")} - {idString}");
+        _titleLabel.SetLabel($"{_("Transaction")} — {idString}");
+        _deleteButton.SetVisible(_controller.IsEditing);
+        _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
         _copyButton.SetVisible(_controller.CanCopy);
-        _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
-        _applyButton.OnClicked += (sender, e) =>
-        {
-            _controller.Accepted = true;
-            OnApply?.Invoke(this, EventArgs.Empty);
-        };
         _copyButton.OnClicked += (sender, e) =>
         {
-            _controller.Accepted = true;
             _controller.CopyRequested = true;
             OnApply?.Invoke(this, EventArgs.Empty);
         };
+        _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
+        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
         _backButton.OnClicked += (sender, e) =>
         {
             _stack.SetVisibleChildName("main");
             _backButton.SetVisible(false);
+            _copyButton.SetVisible(true);
             SetDefaultWidget(_applyButton);
         };
-        _extrasButton.OnClicked += (sender, e) =>
+        _extrasRow.OnActivated += (sender, e) =>
         {
             _stack.SetVisibleChildName("extras");
             _backButton.SetVisible(true);
+            _copyButton.SetVisible(false);
         };
         //Description
         _descriptionRow.OnNotify += (sender, e) =>
@@ -331,6 +333,15 @@ public partial class TransactionDialog : Adw.Window
                 Validate();
             }
         };
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
+        {
+            Close();
+            return true;
+        })));
+        AddController(_shortcutController);
         //Load Transaction
         gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);

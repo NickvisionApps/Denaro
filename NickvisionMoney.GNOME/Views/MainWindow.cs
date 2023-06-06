@@ -81,6 +81,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _windowTitle;
     [Gtk.Connect] private readonly Gtk.MenuButton _accountMenuButton;
     [Gtk.Connect] private readonly Gtk.Popover _accountPopover;
+    [Gtk.Connect] private readonly Adw.ViewStack _viewStackAccountPopover;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _dashboardButton;
@@ -226,11 +227,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     public void Startup()
     {
         _application.AddWindow(this);
-        if (_controller.RecentAccounts.Count > 0)
-        {
-            UpdateRecentAccountsOnStart();
-            _startPageRecentAccountsGroup.SetVisible(true);
-        }
+        UpdateRecentAccountsOnStart();
         Present();
     }
 
@@ -365,6 +362,27 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void OnNewAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _accountPopover.Popdown();
+        var newAccountController = _controller.CreateNewAccountDialogController();
+        var newAccountDialog = new NewAccountDialog(newAccountController, this);
+        newAccountDialog.OnApply += async (sender, e) =>
+        {
+            newAccountDialog.SetVisible(false);
+            if (_controller.IsAccountOpen(newAccountController.Path))
+            {
+                _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an opened account.")));
+            }
+            else
+            {
+                if (File.Exists(newAccountController.Path))
+                {
+                    File.Delete(newAccountController.Path);
+                }
+                await _controller.NewAccountAsync(newAccountController.Path, newAccountController.Password, newAccountController.Metadata);
+            }
+            newAccountDialog.Close();
+        };
+        newAccountDialog.Present();
+        /*
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
@@ -394,6 +412,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        */
     }
 
     /// <summary>
@@ -456,8 +475,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             _viewStack.SetVisibleChildName("pageNoAccounts");
             _accountMenuButton.SetVisible(false);
             _flapToggleButton.SetVisible(false);
-            UpdateRecentAccountsOnStart();
-            _startPageRecentAccountsGroup.SetVisible(true);
         }
         _tabView.ClosePageFinish(args.Page, true);
         return true;
@@ -567,6 +584,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccounts()
     {
+        _viewStackAccountPopover.SetVisibleChildName(_controller.RecentAccounts.Count > 0 ? "recents" : "no-recents");
         foreach (var row in _listRecentAccountsRows)
         {
             _recentAccountsGroup.Remove(row);
@@ -585,7 +603,15 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
-        _newAccountButton.RemoveCssClass("suggested-action");
+        if(_controller.RecentAccounts.Count > 0)
+        {
+            _newAccountButton.RemoveCssClass("suggested-action");
+        }
+        else
+        {
+            _newAccountButton.AddCssClass("suggested-action");
+        }
+        _startPageRecentAccountsGroup.SetVisible(_controller.RecentAccounts.Count > 0);
         foreach (var row in _listRecentAccountsOnStartRows)
         {
             _startPageRecentAccountsGroup.Remove(row);
@@ -606,11 +632,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="onStartScreen">Whether the row will appear on start screen or in popover</param>
     private Adw.ActionRow CreateRecentAccountRow(RecentAccount recentAccount, bool onStartScreen)
     {
-        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen);
-        row.OnOpenAccount += async (sender, e) =>
+        var row = new RecentAccountRow(recentAccount, _controller.GetColorForAccountType(recentAccount.Type), onStartScreen, true);
+        row.Selected += async (sender, e) =>
         {
             _accountPopover.Popdown();
-            await _controller.AddAccountAsync(row.GetSubtitle()!);
+            await _controller.AddAccountAsync(e.Path);
+        };
+        row.RemoveRequested += (sender, e) =>
+        {
+            _accountPopover.Popdown();
+            _controller.RemoveRecentAccount(e);
         };
         return row;
     }

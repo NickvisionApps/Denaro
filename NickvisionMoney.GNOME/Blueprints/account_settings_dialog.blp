@@ -57,7 +57,6 @@ Adw.Window _root {
 
                 Adw.ComboRow _accountTypeRow {
                   title: _("Account Type");
-                  subtitle: _("This is only a useful label that doesn't affect how the app works.");
                   subtitle-lines: 4;
                   model: Gtk.StringList {
                     strings [_("Checking"), _("Savings"), _("Business")]
@@ -96,14 +95,12 @@ Adw.Window _root {
                   }
 
                   [suffix]
-                  Gtk.Button _btnCustomCurrency {
+                  Gtk.Image _imgCustomCurrency {
                     icon-name: "go-next-symbolic";
                     valign: center;
-                    can-focus: false;
-                    styles ["flat"]
                   }
 
-                  activatable-widget: _btnCustomCurrency;
+                  activatable-widget: _imgCustomCurrency;
                 }
 
                 Adw.ActionRow _managePasswordRow {
@@ -116,14 +113,12 @@ Adw.Window _root {
                   }
 
                   [suffix]
-                  Gtk.Button _btnManagePassword {
+                  Gtk.Image _imgManagePassword {
                     icon-name: "go-next-symbolic";
                     valign: center;
-                    can-focus: false;
-                    styles ["flat"]
                   }
 
-                  activatable-widget: _btnManagePassword;
+                  activatable-widget: _imgManagePassword;
                 }
               }
 

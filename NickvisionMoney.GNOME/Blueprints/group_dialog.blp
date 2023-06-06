@@ -51,13 +51,26 @@ Adw.Window _root {
           }
         }
 
-        Gtk.Button _applyButton {
+        Gtk.Box {
+          orientation: horizontal;
+          spacing: 24;
           halign: center;
-          valign: center;
+          homogeneous: true;
           margin-top: 24;
           margin-bottom: 24;
 
-          styles ["pill", "suggested-action"]
+          Gtk.Button _deleteButton {
+            valign: center;
+            label: _("Delete");
+
+            styles ["pill", "destructive-action"]
+          }
+
+          Gtk.Button _applyButton {
+            valign: center;
+
+            styles ["pill", "suggested-action"]
+          }
         }
       }
     }
