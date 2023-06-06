@@ -142,7 +142,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         };
         OnNotify += (sender, e) =>
         {
-            if (e.Pspec.GetName() == "default-width")
+            if (e.Pspec.GetName() == "default-width" || e.Pspec.GetName() == "maximized")
             {
                 OnWidthChanged();
             }
@@ -651,7 +651,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     public void OnWidthChanged()
     {
-        var compactModeNeeded = DefaultWidth < 450;
+        var compactModeNeeded = DefaultWidth < 450 && !IsMaximized();
         if (compactModeNeeded != CompactMode)
         {
             CompactMode = !CompactMode;
