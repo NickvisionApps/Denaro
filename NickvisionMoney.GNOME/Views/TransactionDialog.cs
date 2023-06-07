@@ -105,6 +105,7 @@ public partial class TransactionDialog : Adw.Window
     private nint _colorDialog;
     private GAsyncReadyCallback _openCallback;
     private AutocompleteBox<Transaction> _autocompleteBox;
+    private bool _canHideAutobox;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
@@ -150,6 +151,7 @@ public partial class TransactionDialog : Adw.Window
         _constructing = true;
         _controller = controller;
         _receiptPath = null;
+        _canHideAutobox = true;
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
@@ -244,10 +246,14 @@ public partial class TransactionDialog : Adw.Window
         };
         _descriptionRow.OnStateFlagsChanged += (sender, e) =>
         {
-            if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin) && _canHideAutobox)
             {
                 _descriptionRow.SetActivatesDefault(true);
                 _autocompleteBox.SetVisible(false);
+            }
+            if(!_canHideAutobox)
+            {
+                _canHideAutobox = true;
             }
         };
         _descriptionKeyController = Gtk.EventControllerKey.New();
@@ -270,6 +276,7 @@ public partial class TransactionDialog : Adw.Window
             {
                 if(_autocompleteBox.GetVisible())
                 {
+                    _canHideAutobox = false;
                     _autocompleteBox.GrabFocus();
                     return true;
                 }
