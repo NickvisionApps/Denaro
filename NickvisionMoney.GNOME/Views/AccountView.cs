@@ -103,8 +103,8 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.CheckButton _expenseCheck;
     [Gtk.Connect] private readonly Gtk.Button _resetOverviewFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _toggleGroupsButton;
-    [Gtk.Connect] private readonly Adw.ButtonContent _toggleGroupsButtonContent;
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
+    [Gtk.Connect] private readonly Gtk.Button _unselectAllGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
     [Gtk.Connect] private readonly Gtk.Calendar _calendar;
     [Gtk.Connect] private readonly Gtk.Button _resetCalendarFilterButton;
@@ -193,6 +193,8 @@ public partial class AccountView : Adw.Bin
         };
         //Button Reset Groups Filter
         _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
+        //Button Reset Groups Filter
+        _unselectAllGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllGroupsFilter();
         //Calendar Widget
         _calendar.OnPrevMonth += OnCalendarMonthYearChanged;
         _calendar.OnPrevYear += OnCalendarMonthYearChanged;
@@ -1153,13 +1155,11 @@ public partial class AccountView : Adw.Bin
     {
         if (!_controller.ShowGroupsList)
         {
-            _toggleGroupsButtonContent.SetIconName("view-reveal-symbolic");
-            _toggleGroupsButtonContent.SetLabel(_("Show"));
+            _toggleGroupsButton.SetIconName("view-reveal-symbolic");
         }
         else
         {
-            _toggleGroupsButtonContent.SetIconName("view-conceal-symbolic");
-            _toggleGroupsButtonContent.SetLabel(_("Hide"));
+            _toggleGroupsButton.SetIconName("view-conceal-symbolic");
         }
         _groupsList.SetVisible(_controller.ShowGroupsList);
     }

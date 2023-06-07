@@ -1050,12 +1050,23 @@ public class AccountViewController : IDisposable
     /// </summary>
     public void ResetGroupsFilter()
     {
-        _filters[-1] = true; //Ungrouped
-        GroupRows[0].FilterChecked = true;
         foreach (var pair in _account.Groups)
         {
-            _filters[(int)pair.Key] = true;
+            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = true;
             GroupRows[pair.Key].FilterChecked = true;
+        }
+        FilterUIUpdate();
+    }
+
+    /// <summary>
+    /// Unselect all groups filter
+    /// </summary>
+    public void UnselectAllGroupsFilter()
+    {
+        foreach (var pair in _account.Groups)
+        {
+            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = false;
+            GroupRows[pair.Key].FilterChecked = false;
         }
         FilterUIUpdate();
     }
