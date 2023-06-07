@@ -53,10 +53,6 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
     /// <summary>
-    /// A list of transaction descriptions in the account
-    /// </summary>
-    public List<string> TransactionDescriptions { get; init; }
-    /// <summary>
     /// The next available group id
     /// </summary>
     public uint NextAvailableGroupId { get; private set; }
@@ -91,7 +87,6 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        TransactionDescriptions = new List<string>();
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
         TodayIncome = 0;
@@ -519,10 +514,6 @@ public class Account : IDisposable
                 transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
-            if(!TransactionDescriptions.Contains(transaction.Description))
-            {
-                TransactionDescriptions.Add(transaction.Description);
-            }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
@@ -883,10 +874,6 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
-            if(!TransactionDescriptions.Contains(transaction.Description))
-            {
-                TransactionDescriptions.Add(transaction.Description);
-            }
             if (transaction.Id >= NextAvailableTransactionId)
             {
                 NextAvailableTransactionId = transaction.Id + 1;
@@ -964,10 +951,6 @@ public class Account : IDisposable
             }
             Transactions[transaction.Id].Dispose();
             Transactions[transaction.Id] = transaction;
-            if(!TransactionDescriptions.Contains(transaction.Description))
-            {
-                TransactionDescriptions.Add(transaction.Description);
-            }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;

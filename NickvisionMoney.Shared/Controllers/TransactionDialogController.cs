@@ -37,8 +37,8 @@ public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
     private readonly string _transactionDefaultColor;
+    private readonly Dictionary<uint, Transaction> _transactions;
     private readonly Dictionary<uint, Group> _groups;
-    private readonly List<string> _transactionDescriptions;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -87,17 +87,17 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="descriptions">A list of all transaction descriptions</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, List<string> descriptions)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
+        _transactions = transactions;
         _groups = groups;
-        _transactionDescriptions = descriptions;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
         IsEditing = canCopy;
@@ -116,17 +116,17 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="descriptions">A list of all transaction descriptions</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, List<string> descriptions)
+    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
+        _transactions = transactions;
         _groups = groups;
-        _transactionDescriptions = descriptions;
         Transaction = new Transaction(id);
         CanCopy = false;
         IsEditing = false;
@@ -207,7 +207,15 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="description">The description to get suggestions for</param>
     /// <returns>The list of suggestions</returns>
-    public List<string> GetDescriptionSuggestions(string description) => _transactionDescriptions.Where(x => x.Contains(description)).OrderByDescending(x => x.StartsWith(description)).Take(5).ToList();
+    public List<string> GetDescriptionSuggestions(string description)
+    {
+        return _transactions
+            .Where(x => x.Value.Description.Contains(description, StringComparison.InvariantCulture))
+            .GroupBy(x => x.Value.Description)
+            .Select(x => x.First().Value.Description)
+            .OrderByDescending(x => x.StartsWith(description))
+            .Take(5).ToList();
+    }
 
     /// <summary>
     /// Gets the name of a group from a group id

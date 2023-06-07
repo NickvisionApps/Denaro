@@ -495,7 +495,7 @@ public partial class TransactionDialog : Adw.Window
                 return;
             }
         }
-        _autocompleteBox.SetVisible(true);
+        _autocompleteBox.SetVisible(false);
     }
 
     /// <summary>
