@@ -485,16 +485,10 @@ public partial class TransactionDialog : Adw.Window
                     _descriptionRow.SetText(e);
                 };
                 _autocompleteDialog.Present();
-            }
-            else
-            {
-                _autocompleteDialog.Hide();
+                return;
             }
         }
-        else
-        {
-            _autocompleteDialog.Hide();
-        }
+        _autocompleteDialog.Hide();
     }
 
     /// <summary>
