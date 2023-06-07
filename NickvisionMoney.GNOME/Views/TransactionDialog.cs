@@ -155,6 +155,11 @@ public partial class TransactionDialog : Adw.Window
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
+        OnCloseRequest += (sender, e) =>
+        {
+            _autocompleteDialog.Close();
+            return false;
+        };
         _scrolledWindow.GetVadjustment().OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "page-size")
@@ -479,7 +484,7 @@ public partial class TransactionDialog : Adw.Window
                 {
                     _descriptionRow.SetText(e);
                 };
-                _autocompleteDialog.Present();
+                _autocompleteDialog.Show();
             }
             else
             {
