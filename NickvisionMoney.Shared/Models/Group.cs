@@ -57,6 +57,22 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     }
 
     /// <summary>
+    /// Clones the group but replaces the balance
+    /// </summary>
+    /// <param name="newBalance">A new balance to use</param>
+    /// <returns>A new Group</returns>
+    public Group Clone(decimal newBalance)
+    {
+        return new Group(Id)
+        {
+            Name = Name,
+            Description = Description,
+            Balance = newBalance,
+            RGBA = RGBA
+        };
+    }
+
+    /// <summary>
     /// Compares this with other
     /// </summary>
     /// <param name="other">The Group object to compare to</param>

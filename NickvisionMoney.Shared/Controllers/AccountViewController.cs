@@ -1068,6 +1068,7 @@ public class AccountViewController : IDisposable
         _filteredIds = new List<uint>();
         _filteredIncome = 0;
         _filteredExpense = 0;
+        var groupBalances = new Dictionary<uint, decimal>();
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1105,6 +1106,12 @@ public class AccountViewController : IDisposable
             {
                 _filteredExpense += pair.Value.Amount;
             }
+            var groupKey = pair.Value.GroupId == -1 ? 0u : (uint)pair.Value.GroupId;
+            if(!groupBalances.ContainsKey(groupKey))
+            {
+                groupBalances[groupKey] = 0m;
+            }
+            groupBalances[groupKey] += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : -1 * pair.Value.Amount;
         }
         if (_filteredIds.Count > 0)
         {
@@ -1119,6 +1126,11 @@ public class AccountViewController : IDisposable
                 {
                     pair.Value.Hide();
                 }
+            }
+            foreach(var pair in GroupRows)
+            {
+                var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key] : 0m);
+                GroupRows[pair.Key].UpdateRow(newGroup, GroupDefaultColor, CultureForNumberString, _filters[pair.Key == 0 ? -1 : (int)pair.Key]);
             }
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
