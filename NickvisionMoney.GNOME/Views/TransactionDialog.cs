@@ -266,6 +266,14 @@ public partial class TransactionDialog : Adw.Window
                     return true;
                 }
             }
+            if(e.Keyval == 65364) //down arrow
+            {
+                if(_autocompleteBox.GetVisible())
+                {
+                    _autocompleteBox.GrabFocus();
+                    return true;
+                }
+            }
             return false;
         };
         _descriptionRow.AddController(_descriptionKeyController);

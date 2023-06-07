@@ -34,6 +34,15 @@ public class AutocompleteBox<T> : Gtk.Box
     }
     
     /// <summary>
+    /// Grabs focus for the box
+    /// </summary>
+    public new void GrabFocus()
+    {
+        _group.GrabFocus();
+        _rows[0].GrabFocus();
+    }
+
+    /// <summary>
     /// Updates the list of suggestions
     /// </summary>
     /// <param name="suggestions">A list of suggestions and their subtext and models</param>
