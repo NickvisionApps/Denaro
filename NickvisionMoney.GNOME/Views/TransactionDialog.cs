@@ -357,7 +357,7 @@ public partial class TransactionDialog : Adw.Window
         {
             if (_autocompleteBox.GetVisible())
             {
-                _autocompleteBox.SetVisible((false));
+                _autocompleteBox.SetVisible(false);
             }
             else
             {
