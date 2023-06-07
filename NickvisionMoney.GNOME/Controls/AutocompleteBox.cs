@@ -7,13 +7,13 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A dialog for showing autocomplete suggestions
 /// </summary>
-public class AutocompleteBox : Gtk.Box
+public class AutocompleteBox<T> : Gtk.Box
 {
     private readonly List<Gtk.Widget> _rows;
     
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
     
-    public event EventHandler<string>? SuggestionClicked;
+    public event EventHandler<(string, T)>? SuggestionClicked;
     
     /// <summary>
     /// Constructs an AutocompleteDialog
@@ -36,8 +36,8 @@ public class AutocompleteBox : Gtk.Box
     /// <summary>
     /// Updates the list of suggestions
     /// </summary>
-    /// <param name="suggestions">A list of suggestions</param>
-    public void UpdateSuggestions(List<string> suggestions)
+    /// <param name="suggestions">A list of suggestions and their models</param>
+    public void UpdateSuggestions(List<(string, T)> suggestions)
     {
         foreach(var row in _rows)
         {
@@ -47,11 +47,11 @@ public class AutocompleteBox : Gtk.Box
         foreach(var suggestion in suggestions)
         {
             var row = Adw.ActionRow.New();
-            row.SetTitle(suggestion);
+            row.SetTitle(suggestion.Item1);
             row.SetActivatable(true);
             row.OnActivated += (sender, e) =>
             {
-                SuggestionClicked?.Invoke(this, row.GetTitle());
+                SuggestionClicked?.Invoke(this, suggestion);
                 SetVisible(false);
             };
             if(_rows.Count == 0)

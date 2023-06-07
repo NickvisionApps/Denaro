@@ -103,7 +103,7 @@ public partial class TransactionDialog : Adw.Window
     private string? _receiptPath;
     private nint _colorDialog;
     private GAsyncReadyCallback _openCallback;
-    private AutocompleteBox _autocompleteBox;
+    private AutocompleteBox<Transaction> _autocompleteBox;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
@@ -208,11 +208,21 @@ public partial class TransactionDialog : Adw.Window
             _copyButton.SetVisible(false);
         };
         //Description
-        _autocompleteBox = new AutocompleteBox();
+        _autocompleteBox = new AutocompleteBox<Transaction>();
         _autocompleteBox.SuggestionClicked += (sender, e) =>
         {
-            _descriptionRow.SetText(e);
+            _descriptionRow.SetText(e.Item1.Replace($" [{_("Group")}: {_controller.GetGroupNameFromId((uint)e.Item2.GroupId)}]", ""));
             _descriptionRow.SetPosition(-1);
+            if(e.Item2.GroupId != -1)
+            {
+                _groupRow.SetSelected((uint)_controller.GroupNames.IndexOf(_controller.GetGroupNameFromId((uint)e.Item2.GroupId)));
+                _colorDropDown.SetSelected((e.Item2.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
+                _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
+                _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
+                var transactionColor = new Color();
+                gdk_rgba_parse(ref transactionColor, e.Item2.RGBA);
+                gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref transactionColor);
+            }
         };
         _autocompleteBox.SetMarginTop(66);
         _autocompleteBox.SetHalign(Gtk.Align.Center);
@@ -502,7 +512,7 @@ public partial class TransactionDialog : Adw.Window
         if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
         {
             var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
-            if(matchingDescriptions.Count != 0 && matchingDescriptions[0] != _descriptionRow.GetText())
+            if(matchingDescriptions.Count != 0)
             {
                 _autocompleteBox.UpdateSuggestions(matchingDescriptions);
                 _autocompleteBox.SetVisible(true);

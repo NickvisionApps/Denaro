@@ -63,7 +63,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// The original repeat interval of a transaction
     /// </summary>
-    public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
+    public TransactionRepeatInterval OriginalRepeatInterval { get; init; }
     /// <summary>
     /// The CultureInfo to use when displaying a number string
     /// </summary>
@@ -81,6 +81,10 @@ public class TransactionDialogController : IDisposable
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
+    /// <summary>
+    /// The list of group names
+    /// </summary>
+    public List<string> GroupNames => _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).Select(x => x.Name).ToList();
 
     /// <summary>
     /// Constructs a TransactionDialogController
@@ -157,22 +161,6 @@ public class TransactionDialogController : IDisposable
     };
 
     /// <summary>
-    /// The list of group names
-    /// </summary>
-    public List<string> GroupNames
-    {
-        get
-        {
-            var names = new List<string>();
-            foreach (var group in _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name))
-            {
-                names.Add(group.Name);
-            }
-            return names;
-        }
-    }
-
-    /// <summary>
     /// Frees resources used by the TransactionDialogController object
     /// </summary>
     public void Dispose()
@@ -206,14 +194,19 @@ public class TransactionDialogController : IDisposable
     /// Gets a list of suggestions to finish a description
     /// </summary>
     /// <param name="description">The description to get suggestions for</param>
-    /// <returns>The list of suggestions</returns>
-    public List<string> GetDescriptionSuggestions(string description)
+    /// <returns>The list of suggestions and their transactions</returns>
+    public List<(string, Transaction)> GetDescriptionSuggestions(string description)
     {
         return _transactions
             .Where(x => x.Value.Description.Contains(description, StringComparison.InvariantCulture))
             .GroupBy(x => x.Value.Description)
-            .Select(x => x.First().Value.Description)
-            .OrderByDescending(x => x.StartsWith(description))
+            .Select(x =>
+            {
+                var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
+                (string, Transaction) result = ($"{first.Description}{(first.GroupId != -1 ? $" [{_("Group")}: {_groups[(uint)first.GroupId].Name}]" : "")}", first);
+                return result;
+            })
+            .OrderByDescending(x => x.Item1.StartsWith(description))
             .Take(5).ToList();
     }
 
