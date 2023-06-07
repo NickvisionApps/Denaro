@@ -101,6 +101,7 @@ Adw.Bin _root {
             [suffix]
             Gtk.Label _incomeLabel {
               valign: center;
+              visible: bind _incomeCheck.active;
               
               styles ["denaro-income"]
             }
@@ -120,6 +121,7 @@ Adw.Bin _root {
             [suffix]
             Gtk.Label _expenseLabel {
               valign: center;
+              visible: bind _expenseCheck.active;
               
               styles ["denaro-expense"]
             }
