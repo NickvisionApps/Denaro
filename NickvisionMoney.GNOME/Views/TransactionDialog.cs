@@ -1,9 +1,9 @@
+using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -104,14 +104,13 @@ public partial class TransactionDialog : Adw.Window
     private string? _receiptPath;
     private nint _colorDialog;
     private GAsyncReadyCallback _openCallback;
-    private readonly List<Gtk.Widget> _descriptionCompleteRows;
+    private AutocompleteDialog _autocompleteDialog;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
     [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
-    [Gtk.Connect] private readonly Adw.PreferencesGroup _descriptionGroup;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
@@ -150,7 +149,7 @@ public partial class TransactionDialog : Adw.Window
         _constructing = true;
         _controller = controller;
         _receiptPath = null;
-        _descriptionCompleteRows = new List<Gtk.Widget>();
+        _autocompleteDialog = new AutocompleteDialog(this);
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
@@ -470,28 +469,20 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void AutocompleteDescription()
     {
-        foreach(var row in _descriptionCompleteRows)
-        {
-            _descriptionGroup.Remove(row);
-        }
-        _descriptionCompleteRows.Clear();
+        _autocompleteDialog.Close();
         if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
         {
             var matchingDescriptions = _controller.DescriptionsForCompletion.Where(x => x.Contains(_descriptionRow.GetText())).ToList();
             if(!(matchingDescriptions.Count == 1 && matchingDescriptions[0] == _descriptionRow.GetText()))
             {
-                foreach(var description in matchingDescriptions)
+                _autocompleteDialog.UpdateSuggestions(matchingDescriptions);
+                _autocompleteDialog.SuggestionClicked += (sender, e) =>
                 {
-                    var row = Adw.ActionRow.New();
-                    row.SetTitle(description);
-                    row.SetActivatable(true);
-                    row.OnActivated += (sender, e) =>
-                    {
-                        _descriptionRow.SetText(row.GetTitle());
-                    };
-                    _descriptionGroup.Add(row);
-                    _descriptionCompleteRows.Add(row);
-                }
+                    _descriptionRow.SetText(e);
+                };
+                _autocompleteDialog.Present();
+                _descriptionRow.GrabFocus();
+                _descriptionRow.SetPosition(-1);
             }
         }
     }
