@@ -484,7 +484,7 @@ public partial class TransactionDialog : Adw.Window
                 {
                     _descriptionRow.SetText(e);
                 };
-                _autocompleteDialog.Show();
+                _autocompleteDialog.Present();
             }
             else
             {
