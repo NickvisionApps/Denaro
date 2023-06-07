@@ -198,7 +198,7 @@ public class TransactionDialogController : IDisposable
     public List<(string, string, Transaction)> GetDescriptionSuggestions(string description)
     {
         return _transactions
-            .Where(x => x.Value.Description.Contains(description, StringComparison.InvariantCulture))
+            .Where(x => x.Value.Description.ToLower().Contains(description.ToLower(), StringComparison.InvariantCulture))
             .GroupBy(x => x.Value.Description)
             .Select(x =>
             {

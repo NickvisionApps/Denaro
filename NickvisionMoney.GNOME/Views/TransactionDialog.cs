@@ -246,14 +246,14 @@ public partial class TransactionDialog : Adw.Window
         };
         _descriptionRow.OnStateFlagsChanged += (sender, e) =>
         {
-            if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin) && _canHideAutobox)
-            {
-                _descriptionRow.SetActivatesDefault(true);
-                _autocompleteBox.SetVisible(false);
-            }
             if(!_canHideAutobox)
             {
                 _canHideAutobox = true;
+            }
+            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            {
+                _descriptionRow.SetActivatesDefault(true);
+                _autocompleteBox.SetVisible(false);
             }
         };
         _descriptionKeyController = Gtk.EventControllerKey.New();
