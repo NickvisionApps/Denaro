@@ -469,11 +469,10 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void AutocompleteDescription()
     {
-        _autocompleteDialog.Close();
         if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
         {
-            var matchingDescriptions = _controller.DescriptionsForCompletion.Where(x => x.Contains(_descriptionRow.GetText())).ToList();
-            if(!(matchingDescriptions.Count == 1 && matchingDescriptions[0] == _descriptionRow.GetText()))
+            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
+            if(matchingDescriptions.Count != 0 && matchingDescriptions[0] != _descriptionRow.GetText())
             {
                 _autocompleteDialog.UpdateSuggestions(matchingDescriptions);
                 _autocompleteDialog.SuggestionClicked += (sender, e) =>
@@ -481,9 +480,15 @@ public partial class TransactionDialog : Adw.Window
                     _descriptionRow.SetText(e);
                 };
                 _autocompleteDialog.Present();
-                _descriptionRow.GrabFocus();
-                _descriptionRow.SetPosition(-1);
             }
+            else
+            {
+                _autocompleteDialog.Close();
+            }
+        }
+        else
+        {
+            _autocompleteDialog.Close();
         }
     }
 

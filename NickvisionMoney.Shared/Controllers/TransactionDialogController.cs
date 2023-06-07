@@ -36,8 +36,9 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
-    private string _transactionDefaultColor;
-    private Dictionary<uint, Group> _groups;
+    private readonly string _transactionDefaultColor;
+    private readonly Dictionary<uint, Group> _groups;
+    private readonly List<string> _transactionDescriptions;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -71,10 +72,6 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a date string
     /// </summary>
     public CultureInfo CultureForDateString { get; init; }
-    /// <summary>
-    /// A list of strings to use for description completion
-    /// </summary>
-    public List<string> DescriptionsForCompletion { get; init; }
     
     /// <summary>
     /// Whether to use native digits
@@ -94,12 +91,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="descriptions">A list of strings to use for description completion</param>
+    /// <param name="descriptions">A list of all transaction descriptions</param>
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, List<string> descriptions)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _groups = groups;
+        _transactionDescriptions = descriptions;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
         IsEditing = canCopy;
@@ -107,7 +105,6 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        DescriptionsForCompletion = descriptions;
         if (string.IsNullOrEmpty(Transaction.RGBA))
         {
             Transaction.RGBA = _transactionDefaultColor;
@@ -123,12 +120,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    /// <param name="descriptions">A list of strings to use for description completion</param>
+    /// <param name="descriptions">A list of all transaction descriptions</param>
     internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate, List<string> descriptions)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _groups = groups;
+        _transactionDescriptions = descriptions;
         Transaction = new Transaction(id);
         CanCopy = false;
         IsEditing = false;
@@ -136,7 +134,6 @@ public class TransactionDialogController : IDisposable
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
         CultureForDateString = cultureDate;
-        DescriptionsForCompletion = descriptions;
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
         Transaction.RGBA = transactionDefaultColor;
@@ -204,6 +201,13 @@ public class TransactionDialogController : IDisposable
         }
         _disposed = true;
     }
+
+    /// <summary>
+    /// Gets a list of suggestions to finish a description
+    /// </summary>
+    /// <param name="description">The description to get suggestions for</param>
+    /// <returns>The list of suggestions</returns>
+    public List<string> GetDescriptionSuggestions(string description) => _transactionDescriptions.Where(x => x.Contains(description)).OrderByDescending(x => x.StartsWith(description)).ToList();
 
     /// <summary>
     /// Gets the name of a group from a group id

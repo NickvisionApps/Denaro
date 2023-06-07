@@ -53,7 +53,7 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
     /// <summary>
-    /// A list of descriptions in the account
+    /// A list of transaction descriptions in the account
     /// </summary>
     public List<string> Descriptions { get; init; }
     /// <summary>
