@@ -13,7 +13,7 @@ public class AutocompleteBox<T> : Gtk.Box
     
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
     
-    public event EventHandler<(string, T)>? SuggestionClicked;
+    public event EventHandler<(string, T)>? SuggestionAccepted;
     
     /// <summary>
     /// Constructs an AutocompleteDialog
@@ -52,11 +52,17 @@ public class AutocompleteBox<T> : Gtk.Box
             row.SetActivatable(true);
             row.OnActivated += (sender, e) =>
             {
-                SuggestionClicked?.Invoke(this, (suggestion.Item1, suggestion.Item3));
+                SuggestionAccepted?.Invoke(this, (suggestion.Item1, suggestion.Item3));
                 SetVisible(false);
             };
             _rows.Add(row);
             _group.Add(row);
         }
     }
+
+    /// <summary>
+    /// Accepts a suggestion
+    /// </summary>
+    /// <param name="index">The index of the suggestion to accept</param>
+    public void AcceptSuggestion(int index) => _rows[index].Activate();
 }

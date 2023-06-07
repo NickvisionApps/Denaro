@@ -210,10 +210,11 @@ public partial class TransactionDialog : Adw.Window
         };
         //Description
         _autocompleteBox = new AutocompleteBox<Transaction>();
-        _autocompleteBox.SuggestionClicked += (sender, e) =>
+        _autocompleteBox.SuggestionAccepted += (sender, e) =>
         {
             _descriptionRow.SetText(e.Item1);
             _descriptionRow.SetPosition(-1);
+            _descriptionRow.SetActivatesDefault(true);
             if(e.Item2.GroupId != -1)
             {
                 _groupRow.SetSelected((uint)_controller.GroupNames.IndexOf(_controller.GetGroupNameFromId((uint)e.Item2.GroupId)));
@@ -245,12 +246,28 @@ public partial class TransactionDialog : Adw.Window
         {
             if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
             {
+                _descriptionRow.SetActivatesDefault(true);
                 _autocompleteBox.SetVisible(false);
             }
         };
         _descriptionKeyController = Gtk.EventControllerKey.New();
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
-        _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
+        _descriptionKeyController.OnKeyPressed += (sender, e) =>
+        {
+            if (e.Keyval == 59)
+            {
+                return true;
+            }
+            if(e.Keyval == 65293 || e.Keyval == 65421)
+            {
+                if(_autocompleteBox.GetVisible())
+                {
+                    _autocompleteBox.AcceptSuggestion(0);
+                    return true;
+                }
+            }
+            return false;
+        };
         _descriptionRow.AddController(_descriptionKeyController);
         OnNotify += (sender, e) =>
         {
@@ -359,6 +376,7 @@ public partial class TransactionDialog : Adw.Window
         {
             if (_autocompleteBox.GetVisible())
             {
+                _descriptionRow.SetActivatesDefault(true);
                 _autocompleteBox.SetVisible(false);
             }
             else
@@ -516,11 +534,13 @@ public partial class TransactionDialog : Adw.Window
             var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
             if(matchingDescriptions.Count != 0)
             {
+                _descriptionRow.SetActivatesDefault(false);
                 _autocompleteBox.UpdateSuggestions(matchingDescriptions);
                 _autocompleteBox.SetVisible(true);
                 return;
             }
         }
+        _descriptionRow.SetActivatesDefault(true);
         _autocompleteBox.SetVisible(false);
     }
 
