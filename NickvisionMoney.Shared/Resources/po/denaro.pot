@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-07 05:29-0400\n"
+"POT-Creation-Date: 2023-06-07 17:15-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../../../Controllers/AccountViewController.cs:520
+#: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
 msgstr ""
 
@@ -66,21 +66,21 @@ msgstr ""
 msgid "Add Password To PDF?"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:640
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:677
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:640
 msgid "All files"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:507
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:507
 #: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:526
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:526
 msgid "Amount (Invalid)"
 msgstr ""
 
@@ -278,8 +278,8 @@ msgstr ""
 msgid "Export to File"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:979
-#: ../../../Controllers/AccountViewController.cs:997
+#: ../../../Controllers/AccountViewController.cs:993
+#: ../../../Controllers/AccountViewController.cs:1011
 msgid "Exported account to file successfully."
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:962
+#: ../../../Controllers/AccountViewController.cs:976
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -453,8 +453,8 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:660
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:660
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:195
 msgid "Open Account"
@@ -542,11 +542,11 @@ msgstr ""
 msgid "Sort By Id"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:595
+#: ../../../Controllers/AccountViewController.cs:609
 msgid "The password of the account was changed."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:591
+#: ../../../Controllers/AccountViewController.cs:605
 msgid "The password of the account was removed."
 msgstr ""
 
@@ -612,12 +612,12 @@ msgstr ""
 msgid "Transactions without a group"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:907
+#: ../../../Controllers/AccountViewController.cs:921
 #, csharp-format
 msgid "Transfer From {0}"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:879
+#: ../../../Controllers/AccountViewController.cs:893
 #, csharp-format
 msgid "Transfer To {0}"
 msgstr ""
@@ -630,18 +630,18 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:983
-#: ../../../Controllers/AccountViewController.cs:1001
+#: ../../../Controllers/AccountViewController.cs:997
+#: ../../../Controllers/AccountViewController.cs:1015
 msgid "Unable to export account to file."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:941
+#: ../../../Controllers/AccountViewController.cs:955
 msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:966
+#: ../../../Controllers/AccountViewController.cs:980
 msgid "Unable to import information from the file. Unsupported file type."
 msgstr ""
 
@@ -660,10 +660,10 @@ msgstr ""
 msgid "Unable to override an opened account."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:470
-#: ../../../Controllers/AccountViewController.cs:832
 #: ../../../Controllers/TransactionDialogController.cs:87
 #: ../../../Controllers/TransactionDialogController.cs:330
+#: ../../../Controllers/AccountViewController.cs:483
+#: ../../../Controllers/AccountViewController.cs:846
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1662
 #: ../../../Models/Account.cs:1734
 msgid "Ungrouped"
