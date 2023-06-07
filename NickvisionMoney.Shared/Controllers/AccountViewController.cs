@@ -20,6 +20,8 @@ public class AccountViewController : IDisposable
     private bool _disposed;
     private readonly Account _account;
     private List<uint>? _filteredIds;
+    private decimal _filteredIncome;
+    private decimal _filteredExpense;
     private readonly Dictionary<int, bool> _filters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
@@ -29,10 +31,6 @@ public class AccountViewController : IDisposable
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// The number of filtered transactions being shown
-    /// </summary>
-    public int FilteredTransactionsCount { get; private set; }
     /// <summary>
     /// The list of UI transaction row objects
     /// </summary>
@@ -115,6 +113,22 @@ public class AccountViewController : IDisposable
     /// </summary>
     public string AccountTodayExpenseString => _account.TodayExpense.ToAmountString(CultureForNumberString, UseNativeDigits);
     /// <summary>
+    /// The number of filtered transactions being shown
+    /// </summary>
+    public int FilteredTransactionsCount => _filteredIds?.Count ?? 0;
+    /// <summary>
+    /// The total amount of the account for today as a string
+    /// </summary>
+    public string AccountFilteredTotalString => $"{((_filteredIncome - _filteredExpense) >= 0 ? "+ " : "− ")}{(_filteredIncome - _filteredExpense).ToAmountString(CultureForNumberString, UseNativeDigits)}";
+    /// <summary>
+    /// The income amount of the account for today as a string
+    /// </summary>
+    public string AccountFilteredIncomeString => _filteredIncome.ToAmountString(CultureForNumberString, UseNativeDigits);
+    /// <summary>
+    /// The expense amount of the account for today as a string
+    /// </summary>
+    public string AccountFilteredExpenseString => _filteredExpense.ToAmountString(CultureForNumberString, UseNativeDigits);
+    /// <summary>
     /// The count of transactions in the account
     /// </summary>
     public int TransactionsCount => _account.Transactions.Count;
@@ -158,7 +172,6 @@ public class AccountViewController : IDisposable
         TransactionRows = new Dictionary<uint, IModelRowControl<Transaction>>();
         GroupRows = new Dictionary<uint, IGroupRowControl>();
         _filters = new Dictionary<int, bool>();
-        FilteredTransactionsCount = 0;
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
@@ -475,8 +488,9 @@ public class AccountViewController : IDisposable
             //Transactions
             TransactionRows.Clear();
             _filteredIds = _account.Transactions.Keys.ToList();
+            _filteredIncome = _account.TodayIncome;
+            _filteredExpense = _account.TodayExpense;
             _filteredIds.Sort(SortTransactions);
-            FilteredTransactionsCount = _filteredIds.Count;
             foreach (var id in _filteredIds)
             {
                 TransactionRows.Add(id, UICreateTransactionRow!(_account.Transactions[id], null));
@@ -1052,6 +1066,8 @@ public class AccountViewController : IDisposable
     private void FilterUIUpdate()
     {
         _filteredIds = new List<uint>();
+        _filteredIncome = 0;
+        _filteredExpense = 0;
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1081,9 +1097,16 @@ public class AccountViewController : IDisposable
                 }
             }
             _filteredIds.Add(pair.Value.Id);
+            if(pair.Value.Type == TransactionType.Income)
+            {
+                _filteredIncome += pair.Value.Amount;
+            }
+            else
+            {
+                _filteredExpense += pair.Value.Amount;
+            }
         }
-        FilteredTransactionsCount = _filteredIds.Count;
-        if (FilteredTransactionsCount > 0)
+        if (_filteredIds.Count > 0)
         {
             //Update UI
             foreach (var pair in TransactionRows)

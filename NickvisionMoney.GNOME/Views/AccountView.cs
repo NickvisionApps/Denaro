@@ -568,9 +568,9 @@ public partial class AccountView : Adw.Bin
             //Overview
             Page.SetTitle(_controller.AccountTitle);
             _updateSubtitle(_controller.AccountTitle);
-            _totalLabel.SetLabel(_controller.AccountTodayTotalString);
-            _incomeLabel.SetLabel(_controller.AccountTodayIncomeString);
-            _expenseLabel.SetLabel(_controller.AccountTodayExpenseString);
+            _totalLabel.SetLabel(_controller.AccountFilteredTotalString);
+            _incomeLabel.SetLabel(_controller.AccountFilteredIncomeString);
+            _expenseLabel.SetLabel(_controller.AccountFilteredExpenseString);
             //Transactions
             if (_controller.TransactionsCount > 0)
             {
