@@ -215,6 +215,7 @@ public partial class TransactionDialog : Adw.Window
         _autocompleteBox.SuggestionAccepted += (sender, e) =>
         {
             _descriptionRow.SetText(e.Item1);
+            _descriptionRow.GrabFocus();
             _descriptionRow.SetPosition(-1);
             _descriptionRow.SetActivatesDefault(true);
             if(e.Item2.GroupId != -1)
