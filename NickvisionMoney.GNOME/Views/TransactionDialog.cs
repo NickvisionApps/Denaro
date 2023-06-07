@@ -483,12 +483,12 @@ public partial class TransactionDialog : Adw.Window
             }
             else
             {
-                _autocompleteDialog.Close();
+                _autocompleteDialog.Hide();
             }
         }
         else
         {
-            _autocompleteDialog.Close();
+            _autocompleteDialog.Hide();
         }
     }
 

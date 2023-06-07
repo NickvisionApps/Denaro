@@ -55,7 +55,7 @@ public class AutocompleteDialog : Adw.Window
             row.OnActivated += (sender, e) =>
             {
                 SuggestionClicked?.Invoke(this, row.GetTitle());
-                Close();
+                Hide();
             };
             _rows.Add(row);
             _group.Add(row);
