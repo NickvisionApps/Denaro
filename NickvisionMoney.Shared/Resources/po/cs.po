@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 05:29-0400\n"
-"PO-Revision-Date: 2023-06-06 18:53+0000\n"
+"PO-Revision-Date: 2023-06-07 16:54+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -933,7 +933,7 @@ msgstr "Nová"
 
 #: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:13
 msgid "Suggestions"
-msgstr ""
+msgstr "Návrhy"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
