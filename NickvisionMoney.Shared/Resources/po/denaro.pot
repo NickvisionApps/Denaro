@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-07 03:07-0400\n"
+"POT-Creation-Date: 2023-06-07 04:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,20 +67,20 @@ msgid "Add Password To PDF?"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:640
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:641
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:661
 msgid "All files"
 msgstr ""
 
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:491
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:473
 #: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr ""
 
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
 msgid "Amount (Invalid)"
 msgstr ""
 
@@ -226,14 +226,14 @@ msgstr ""
 msgid "Denaro"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:471
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:489
 #: ../../../Models/Account.cs:1658 ../../../Models/Account.cs:1688
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:487
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:505
 msgid "Description (Empty)"
 msgstr ""
 
@@ -394,7 +394,7 @@ msgstr ""
 msgid "Name (Exists)"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:571
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:591
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Never"
 msgstr ""
@@ -414,8 +414,8 @@ msgid ""
 "DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:427
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
 msgstr ""
@@ -426,9 +426,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:387
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:459
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:603
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:405
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:477
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:623
 msgid "No End Date"
 msgstr ""
 
@@ -453,8 +453,8 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:660
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:195
 msgid "Open Account"
@@ -472,14 +472,14 @@ msgstr ""
 msgid "PDF Password"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:477
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:657
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:495
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:677
 #: ../../../Models/Account.cs:1751
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:503
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:521
 msgid "Receipt (File Inaccessible)"
 msgstr ""
 
@@ -487,12 +487,12 @@ msgstr ""
 msgid "Receipts"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:475
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:135
 msgid "Repeat End Date"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:497
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:515
 msgid "Repeat End Date (Invalid)"
 msgstr ""
 
@@ -686,14 +686,14 @@ msgstr ""
 msgid "Update Transaction"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:411
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:629
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:429
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:649
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:300
 msgid "Upload"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:407
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:673
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:425
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:693
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:278
 msgid "View"
 msgstr ""
@@ -894,7 +894,7 @@ msgctxt "Transaction"
 msgid "New"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:15
+#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:13
 msgid "Suggestions"
 msgstr ""
 
