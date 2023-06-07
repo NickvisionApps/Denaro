@@ -194,8 +194,8 @@ public class TransactionDialogController : IDisposable
     /// Gets a list of suggestions to finish a description
     /// </summary>
     /// <param name="description">The description to get suggestions for</param>
-    /// <returns>The list of suggestions and their transactions</returns>
-    public List<(string, Transaction)> GetDescriptionSuggestions(string description)
+    /// <returns>The list of suggestions and their subtext and transactions</returns>
+    public List<(string, string, Transaction)> GetDescriptionSuggestions(string description)
     {
         return _transactions
             .Where(x => x.Value.Description.Contains(description, StringComparison.InvariantCulture))
@@ -203,7 +203,7 @@ public class TransactionDialogController : IDisposable
             .Select(x =>
             {
                 var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
-                (string, Transaction) result = ($"{first.Description}{(first.GroupId != -1 ? $" [_GROUP_: {_groups[(uint)first.GroupId].Name}" : "")}", first);
+                (string, string, Transaction) result = (first.Description, first.GroupId != -1 ? $"{_("Group")}: {_groups[(uint)first.GroupId].Name}" : "", first);
                 return result;
             })
             .OrderByDescending(x => x.Item1.StartsWith(description))

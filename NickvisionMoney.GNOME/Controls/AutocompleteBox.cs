@@ -55,10 +55,6 @@ public class AutocompleteBox<T> : Gtk.Box
                 SuggestionClicked?.Invoke(this, (suggestion.Item1, suggestion.Item3));
                 SetVisible(false);
             };
-            if(_rows.Count == 0)
-            {
-                row.SetSizeRequest(240, -1);
-            }
             _rows.Add(row);
             _group.Add(row);
         }

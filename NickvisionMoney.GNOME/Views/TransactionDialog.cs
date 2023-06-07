@@ -225,6 +225,7 @@ public partial class TransactionDialog : Adw.Window
                 gtk_color_dialog_button_set_rgba(_colorButton.Handle, ref transactionColor);
             }
         };
+        _autocompleteBox.SetSizeRequest(378, -1);
         _autocompleteBox.SetMarginTop(66);
         _autocompleteBox.SetHalign(Gtk.Align.Center);
         _autocompleteBox.SetValign(Gtk.Align.Start);
@@ -255,7 +256,7 @@ public partial class TransactionDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "default-width")
             {
-                _autocompleteBox.SetSizeRequest(_descriptionRow.GetAllocatedWidth(), -1);
+                _autocompleteBox.SetSizeRequest(_descriptionRow.GetAllocatedWidth() - 24, -1);
             }
         };
         //Amount
@@ -512,18 +513,7 @@ public partial class TransactionDialog : Adw.Window
     {
         if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
         {
-            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText())
-                .Select(x =>
-                {
-                    var split = x.Item1.Split(" [_GROUP_: ");
-                    var subtext = "";
-                    try
-                    {
-                        subtext = !string.IsNullOrEmpty(split[1]) ? $"{_("Group")}: {split[1]}" : "";
-                    }
-                    catch { }
-                    return (split[0], subtext, x.Item2);
-                }).ToList();
+            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
             if(matchingDescriptions.Count != 0)
             {
                 _autocompleteBox.UpdateSuggestions(matchingDescriptions);

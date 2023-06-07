@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-07 02:43-0400\n"
+"POT-Creation-Date: 2023-06-07 03:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgid "Account Type"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:195
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:196
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:46
 msgid "Add"
 msgstr ""
@@ -67,12 +67,12 @@ msgid "Add Password To PDF?"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:640
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:639
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:641
 msgid "All files"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:471
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:473
 #: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
@@ -80,12 +80,12 @@ msgid "Amount"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:490
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
 msgid "Amount (Invalid)"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:195
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:196
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:129
 msgid "Apply"
 msgstr ""
@@ -226,14 +226,14 @@ msgstr ""
 msgid "Denaro"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:469
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:471
 #: ../../../Models/Account.cs:1658 ../../../Models/Account.cs:1688
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:485
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:487
 msgid "Description (Empty)"
 msgstr ""
 
@@ -301,7 +301,6 @@ msgid "Good Evening!"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:85
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:214
 #: ../../../Controllers/TransactionDialogController.cs:206
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:47
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:173
@@ -395,7 +394,7 @@ msgstr ""
 msgid "Name (Exists)"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:569
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:571
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Never"
 msgstr ""
@@ -427,9 +426,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:385
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:457
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:601
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:459
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:603
 msgid "No End Date"
 msgstr ""
 
@@ -473,14 +472,14 @@ msgstr ""
 msgid "PDF Password"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:475
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:655
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:477
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:657
 #: ../../../Models/Account.cs:1751
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:501
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:503
 msgid "Receipt (File Inaccessible)"
 msgstr ""
 
@@ -488,12 +487,12 @@ msgstr ""
 msgid "Receipts"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:473
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:475
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:135
 msgid "Repeat End Date"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:495
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:497
 msgid "Repeat End Date (Invalid)"
 msgstr ""
 
@@ -599,7 +598,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:186
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:187
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Transaction"
 msgstr ""
@@ -687,14 +686,14 @@ msgstr ""
 msgid "Update Transaction"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:409
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:627
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:629
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:300
 msgid "Upload"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:405
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:671
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:407
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:673
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:278
 msgid "View"
 msgstr ""
@@ -895,7 +894,7 @@ msgctxt "Transaction"
 msgid "New"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:16
+#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
 msgstr ""
 
