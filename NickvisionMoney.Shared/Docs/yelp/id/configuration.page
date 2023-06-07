@@ -47,7 +47,7 @@
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
+		<title>Gunakan Digit Bawaan</title>
 		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>

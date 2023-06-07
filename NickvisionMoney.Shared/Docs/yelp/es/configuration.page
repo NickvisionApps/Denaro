@@ -15,7 +15,7 @@
 
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Óscar Fernández Díaz</mal:name>
-      <mal:email/>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
       <mal:years>2023</mal:years>
     </mal:credit>
   </info>
@@ -33,11 +33,11 @@
 		<p>Un color que se seleccionará por defecto al agregar una <link xref="transaction">transacción</link> nueva con color único. Cambiar esto no afectará las transacciones existentes, incluso si usa el color predeterminado seleccionado previamente.</p>
 	</item>
 	<item>
-		<title>Color de la transferencia predeterminado</title>
+		<title>Color predeterminado de la transferencia</title>
 		<p>Un color que se usará para transacciones creadas usando <link xref="transfer">transferencia</link>. Cambiar esto no afectará las transacciones existentes.</p>
 	</item>
 	<item>
-		<title>Color del grupo predeterminado</title>
+		<title>Color predeterminado del grupo</title>
 		<p>Color que se seleccionará por defecto al añadir un grupo nuevo. También es un color para el grupo "No agrupado".</p>
 	</item>
 	<item>
@@ -54,7 +54,7 @@
 	</item>
 	<item>
 		<title>Usar dígitos nativos</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
+		<p>Si usar numerales que son nativos para su localización en lugar de dígitos latinos. Por ejemplo, si esta opción está activada <em>٠١٢</em> se usará en lugar de <em>012</em> para las localizaciones que usan numerales arábigos orientales.</p>
 	</item>
 	<item>
 		<title>Insertar separador decimal</title>

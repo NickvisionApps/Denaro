@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="cs">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transaction 🧾</title>
+	<title type="link">Transakce 🧾</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,55 +12,61 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jonáš Loskot</mal:name>
+      <mal:email>jonas.loskot@pm.me</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Transakce</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+<p>Na této stránce jsou vysvětleny všechny vlastnosti transakcí v aplikaci <app>Denaro</app>.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>ID</title>
+		<p>Každá transakce má ID, které je pro daný účet jedinečné. ID začíná číslem 1 a zvyšuje se s každou přidanou transakcí. ID nelze měnit, identifikátory odstraněných transakcí se znovu nepoužívají.</p>
 	</item>
 	<item>
-		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<title>Popis</title>
+		<p>Délka není omezena. Nesmí obsahovat středník.</p>
 	</item>
 	<item>
-		<title>Amount</title>
-		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+		<title>Množství</title>
+		<p>Číslo ve formátu platném pro vaše místní prostředí, podrobnosti viz <em>Systémová měna</em> na stránce <link xref="account">Účet</link>.</p>
 	</item>
 	<item>
-		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<title>Typ</title>
+		<p><em>Příjem</em> nebo <em>Výdaj</em>. Ve výchozím nastavení se při otevření dialogu pro přidání nové transakce vybere ta, která byla zvolena v <link xref="account">nastavení účtu</link>.</p>
 	</item>
 	<item>
-		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<title>Datum</title>
+		<p>Lze vybrat libovolné datum, můžete také vytvářet transakce pro budoucí data.</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<title>Interval opakování</title>
+		<p>Tuto možnost použijte k vytvoření opakující se transakce. Po přidání transakce s intervalem opakování se tato transakce stane <em>zdrojovou</em> transakcí. Aplikace <app>Denaro</app> bude automaticky generovat <em>opakované</em> transakce pro data do dnešního dne nebo zadaného data ukončení, pokud je nastaveno v minulosti. <em>Opakované</em> transakce nelze upravovat ani mazat, upravovat lze pouze <em>zdrojové</em> transakce. Při úpravě <em>zdrojové</em> transakce se aplikace <app>Denaro</app> zeptá, zda chcete upravit nebo zrušit přiřazení <em>opakovaných</em> transakcí. Pokud se rozhodnete pro zrušení přiřazení, <em>opakované</em> transakce se stanou normálními transakcemi a lze je upravovat nebo mazat samostatně.</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>Datum ukončení opakování</title>
+		<p>Datum ukončení transakce s opakováním. Nemůže být dřívější nebo stejné jako datum zahájení.</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>Skupina</title>
+		<p>Každá transakce může patřit pouze do jedné skupiny nebo do žádné (skupina „Neseskupené“).</p>
 	</item>
 	<item>
-		<title>Color</title>
-		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+		<title>Barva</title>
+		<p>Barva pro transakce. Lze nastavit použití barvy skupiny nebo jedinečné barvy. Při výběru jedinečné barvy bude ve výchozím nastavení nastavena na barvu vybranou v <link xref="configuration">nastavení</link>, lze ji ale změnit na libovolnou barvu.</p>
 	</item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>Faktura</title>
+		<p>Obrázek faktury za transakci. Můžete nahrát obrázek JPEG nebo PNG nebo dokument PDF, ale bez ohledu na formát bude převeden a uložen jako obrázek JPEG. V případě PDF bude uložena pouze první stránka. Soubor můžete kdykoli odstranit nebo nahrát jiný.</p>
 	</item>
 	<item>
-		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<title>Poznámky</title>
+		<p>Volně formulovaná textová poznámka, která se připojí k transakci.</p>
 	</item>
 </terms>
 </page>

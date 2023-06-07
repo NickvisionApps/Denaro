@@ -27,11 +27,11 @@
 		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
+		<title>اللون المبدئيُّ للتحويلات</title>
 		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
+		<title>اللون المبدئيُّ للمجموعات</title>
 		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
 	</item>
 	<item>
@@ -47,7 +47,7 @@
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
+		<title>استخدم أرقام اللغة</title>
 		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>

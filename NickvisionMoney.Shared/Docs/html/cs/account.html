@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Account</title>
+<title>Účet</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,30 +15,30 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="cs" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Account</span></h1></div>
+<a class="trail" href="index.html" title="Nápověda aplikace Denaro">Nápověda aplikace Denaro</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Účet</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page explains all properties of accounts in <span class="app">Denaro</span>. Most of them are shown in <span class="gui">Account Settings Dialog</span>. This dialog also opens automatically after you create a new account.</p>
-<p class="p">Each account is stored in a single <span class="file">*.nmoney</span> file. Files created in an older <span class="em">stable</span> version of <span class="app">Denaro</span> can be safely opened in a more recent <span class="em">stable</span> version of the application. Although the app can run on different platforms (Windows and Linux), the <span class="file">*.nmoney</span> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<p class="p">Na této stránce jsou vysvětleny všechny vlastnosti účtů v aplikaci <span class="app">Denaro</span>. Většina z nich je uvedena v <span class="gui">dialogovém okně Nastavení účtu</span>. Toto okno se také automaticky otevře po vytvoření nového účtu.</p>
+<p class="p">Každý účet je uložen v jednom souboru <span class="file">*.nmoney</span>. Soubory vytvořené ve starší <span class="em">stabilní</span> verzi aplikace <span class="app">Denaro</span> lze bezpečně otevřít v novější <span class="em">stabilní</span> verzi aplikace. Přestože aplikace může běžet na různých platformách (Windows a Linux), soubory <span class="file">*.nmoney</span> jsou mezi platformami 100% kompatibilní, pokud pocházejí ze stejné verze aplikace (např. V2023.1.0).</p>
 <div class="note note-warning" title="Varování">
 <svg height="24" width="24" version="1.1">
  <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Nestabilní (beta a RC) verze aplikace mohou obsahovat chyby nebo nedokončené úpravy, které mohou způsobit ztrátu dat. NEPOUŽÍVEJTE soubory účtů, které obsahují skutečná data, v nestabilních verzích aplikace!</p></div></div></div>
 </div>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Name</dt>
-<dd class="terms"><p class="p">Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p></dd>
-<dt class="terms">Account Type</dt>
-<dd class="terms"><p class="p">There are 3 account types available: 🟣<span class="em">Checking</span>, 🔵<span class="em">Savings</span> and 🟢<span class="em">Business</span>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <span class="link"><a href="configuration.html" title="Configuration">global settings</a></span>.</p></dd>
-<dt class="terms">Default Transaction Type</dt>
-<dd class="terms"><p class="p">When you create a new transaction its type by default will be the same as in this setting.</p></dd>
-<dt class="terms">System Currency</dt>
+<dt class="terms">Název</dt>
+<dd class="terms"><p class="p">Název účtu se zobrazuje v seznamu posledních účtů a na kartách. Název nemá omezenou délku a může obsahovat libovolné znaky včetně emotikonů.</p></dd>
+<dt class="terms">Typ účtu</dt>
+<dd class="terms"><p class="p">K dispozici jsou 3 typy účtů: 🟣<span class="em">Běžný</span>, 🔵<span class="em">Spořicí</span> a 🟢<span class="em">Firemní</span>. Typ účtu je pouze užitečné označení, které se zobrazuje v seznamu posledních účtů a nemá vliv na to, jak aplikace funguje nebo co můžete s účtem dělat. Každý typ účtu má svou vlastní barvu, tyto barvy lze nakonfigurovat v <span class="link"><a href="configuration.html" title="Nastavení">globálním nastavení</a></span> .</p></dd>
+<dt class="terms">Výchozí typ transakce</dt>
+<dd class="terms"><p class="p">Při vytváření nové transakce bude její typ ve výchozím nastavení stejný jako v tomto nastavení.</p></dd>
+<dt class="terms">Systémová měna</dt>
 <dd class="terms">
-<p class="p">Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+<p class="p">Při každém spuštění získá aplikace údaje o měně a formátování čísel z vašich systémových místních nastavení. Tyto údaje se použijí k zobrazení symbolu měny (pokud není použita vlastní měna, viz níže) a k určení, v jakém formátu budou čísla přijímána jako hodnoty částek transakcí. Několik příkladů:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
-<li class="list"><p class="p">If your locale is <span class="em">English (US)</span>, currency symbol will be set to <span class="em">$</span> and <span class="em">1,000.00</span> will be accepted as a valid number.</p></li>
-<li class="list"><p class="p">If your locale is <span class="em">Italian</span>, currency symbol will be set to <span class="em">€</span> and <span class="em">1.000,00</span> will be accepted as a valid number.</p></li>
-<li class="list"><p class="p">If your locale is <span class="em">Russian</span>, currency symbol will be set to <span class="em">₽</span> and <span class="em">1000,00</span> will be accepted as a valid number.</p></li>
+<li class="list"><p class="p">Pokud je vaše místní prostředí <span class="em">Angličtina (Spojené státy)</span>, symbol měny bude nastaven na <span class="em">$</span> a <span class="em">1,000.00</span> bude akceptováno jako platné číslo.</p></li>
+<li class="list"><p class="p">Pokud je vaše místní prostředí <span class="em">Čeština</span>, symbol měny bude nastaven na <span class="em">Kč</span> a <span class="em">1 000,00</span> bude akceptováno jako platné číslo.</p></li>
+<li class="list"><p class="p">Pokud je vaše místní prostředí <span class="em">Ruština</span>, symbol měny bude nastaven na <span class="em">₽</span> a <span class="em">1000,00</span> bude akceptováno jako platné číslo.</p></li>
 </ul></div></div></div>
 <div class="note note-advanced" title="Pokročilé">
 <svg height="24" width="24" version="1.1">
@@ -54,37 +54,37 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <span class="code">LANG</span>, <span class="code">LC_TIME</span>, and <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <span class="code">locale</span> command in a terminal. If you found a bug and want to report it, please provide the output of the <span class="code">locale</span> command to allow developers to reproduce your issue with the same settings.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">V systému Linux je možné nastavit různé místní jazyky a formáty systému. Změna těchto nastavení se liší v závislosti na používaném desktopovém prostředí. Navzdory rozdílům v umístění těchto nastavení jejich změna upraví proměnné systémového prostředí, například <span class="code">LANG</span>, <span class="code">LC_TIME</span> a <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> se pokusí použít formáty částek a dat podle těchto proměnných. Pokud aplikace očekávané formáty nepoužívá, zkontrolujte, zda jsou proměnné správně nastaveny pomocí příkazu <span class="code">locale</span> v terminálu. Pokud jste našli chybu a chcete ji nahlásit, poskytněte prosím výstup příkazu <span class="code">locale</span>, aby mohli vývojáři reprodukovat váš problém se stejným nastavením.</p></div></div></div>
 </div>
 </dd>
-<dt class="terms">Use Custom Currency</dt>
-<dd class="terms"><p class="p">If this option is enabled, <span class="gui">Custom Currency Symbol</span> will be used instead of currency symbol provided by your system locale.</p></dd>
-<dt class="terms">Custom Currency Symbol</dt>
-<dd class="terms"><p class="p">Up to 3 characters or 1 emoji. It can't be a number.</p></dd>
-<dt class="terms">Custom Currency Code</dt>
+<dt class="terms">Použití vlastní měny</dt>
+<dd class="terms"><p class="p">Pokud je tato možnost povolena, bude místo symbolu měny, který poskytuje vaše systémové prostředí, použit <span class="gui">vlastní symbol měny</span>.</p></dd>
+<dt class="terms">Vlastní symbol měny</dt>
+<dd class="terms"><p class="p">Až 3 znaky nebo 1 emotikon. Nemůže to být číslo.</p></dd>
+<dt class="terms">Vlastní kód měny</dt>
 <dd class="terms">
-<p class="p">Up to 3 characters or 1 emoji.</p>
-<p class="p">An example to understand the difference between a symbol and a code: <span class="em">$</span> is a symbol, <span class="em">USD</span> is a code.</p>
+<p class="p">Až 3 znaky nebo 1 emotikon.</p>
+<p class="p">Příklad pro pochopení rozdílu mezi symbolem a kódem: <span class="em">Kč</span> je symbol, <span class="em">CZK</span> je kód.</p>
 </dd>
-<dt class="terms">Custom Currency Decimal and Group Separators</dt>
-<dd class="terms"><p class="p">Up to 2 characters or 1 emoji.</p></dd>
-<dt class="terms">Custom Currency Decimal Digits</dt>
-<dd class="terms"><p class="p">The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p></dd>
-<dt class="terms">Password</dt>
-<dd class="terms"><p class="p">Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p></dd>
-<dt class="terms">Sort by Id, Date or Amount</dt>
-<dd class="terms"><p class="p">Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
-<dt class="terms">Sorting Order</dt>
-<dd class="terms"><p class="p">Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
-<dt class="terms">Groups Visibility</dt>
-<dd class="terms"><p class="p">Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p></dd>
+<dt class="terms">Vlastní oddělovače desetinných míst a skupin měn</dt>
+<dd class="terms"><p class="p">Až 2 znaky nebo 1 emotikon.</p></dd>
+<dt class="terms">Vlastní desetinné číslice měny</dt>
+<dd class="terms"><p class="p">Velikost desetinné části hodnot částek. Při „neomezeném“ počtu číslic bude v desetinné části tolik čísel, kolik je potřeba k zobrazení přesné částky, ale pokud je částka celým číslem, nebude desetinná část žádná.</p></dd>
+<dt class="terms">Heslo</dt>
+<dd class="terms"><p class="p">Každý účet může být chráněn heslem. Přidáním hesla se účet zašifruje (bez dešifrování pomocí hesla není možné data číst). Buďte opatrní: pokud heslo ztratíte, nebudete moci data obnovit! Heslo lze také změnit nebo odstranit pomocí dialogového okna nastavení otevřeného účtu. Odstraněním hesla dojde k dešifrování účtu.</p></dd>
+<dt class="terms">Řazení podle ID, data nebo částky</dt>
+<dd class="terms"><p class="p">U každého účtu je uloženo, zda se mají transakce v hlavním okně řadit podle ID, data nebo částky. Pokaždé, když toto nastavení změníte, bude uloženo do souboru účtu a obnoví se při jeho opětovném otevření.</p></dd>
+<dt class="terms">Pořadí řazení</dt>
+<dd class="terms"><p class="p">Každý účet uchovává informace o pořadí transakcí v hlavním okně. Pokaždé, když je změníte, uloží se do souboru účtu a obnoví se při jeho opětovném otevření.</p></dd>
+<dt class="terms">Viditelnost skupin</dt>
+<dd class="terms"><p class="p">Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato informace uložena a poté obnovena při opětovném otevření účtu.</p></dd>
 </dl></div></div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Další informace</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Nápověda aplikace Denaro">Nápověda aplikace Denaro</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
@@ -96,11 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="copyrights">
 <div class="copyright">© 2023 Fyodor Sobolev</div>
 <div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 Jonáš Loskot</div>
 </div>
 <div class="credits">
 <div class="credits-authors">
 <div class="title"><span class="title">Napsali</span></div>
 <ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-translators">
+<div class="title"><span class="title">Přeložili</span></div>
+<ul class="credits"><li>Jonáš Loskot</li></ul>
 </div>
 <div class="credits-publishers">
 <div class="title"><span class="title">Vydali</span></div>

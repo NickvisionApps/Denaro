@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="it">
 <info>
-	<title type="link">Denaro Help</title>
-	<title type="text">Denaro Help</title>
+	<title type="link">Aiuto di Denaro</title>
+	<title type="text">Aiuto di Denaro</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,7 +14,7 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title><media its:translate="no" type="image" src="figures/denaro.png"/> Denaro Help</title>
-<p>This documentation will help you understand how to configure and manage data in <app>Denaro</app> to get the most of the application.</p>
-<p>To get support, use <link href="https://github.com/NickvisionApps/Denaro/issues">issues</link> or <link href="https://github.com/NickvisionApps/Denaro/discussions">discussions</link> on Github, or <link href="https://bit.ly/3GrfEid">join our Matrix channel</link>.</p>
+<title><media its:translate="no" type="image" src="figures/denaro.png"/> Aiuto di Denaro</title>
+<p>Questa guida aiuta gli utenti a capire come configurare e gestire i dati in <app>Denaro</app> per sfruttare l'applicazione al meglio.</p>
+<p>Per ottenere supporto, usare le <link href="https://github.com/NickvisionApps/Denaro/issues">issues</link> o le <link href="https://github.com/NickvisionApps/Denaro/discussions">discussioni</link> su Github, oppure <link href="https://bit.ly/3GrfEid">unirsi al nostro canale di Matrix</link>.</p>
 </page>

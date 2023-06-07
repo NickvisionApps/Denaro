@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transfer" its:version="2.0" xml:lang="it">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transfer 💸</title>
+	<title type="link">Trasferimenti 💸</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,17 +14,17 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transfer</title>
-<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+<title>Trasferimenti</title>
+<p>I trasferimenti sono un modo per spostare denaro da un conto all'altro. Una volta creato un trasferimento, verranno create due transazioni con le seguenti descrizioni:</p>
 <list>
 	<item>
-		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
+		<p>«Trasferimento a <input>Conto di destinazione</input>» sul conto di origine.</p>
 	</item>
 	<item>
-		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
+		<p>«Trasferimento da <input>Conto di origine</input>» sul conto di destinazione.</p>
 	</item>
 </list>
-<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
-<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
-<p>If you create a transfer between accounts with different currencies, you will be asked to provide a conversion rate.</p>
+<p>Le transazioni create da un trasferimento sono delle semplici transazioni che possono essere modificate o eliminate liberamente. Non sono connesse tra loro: modificare la transazione sul conto di origine non avrà effetto sul conto di destinazione, e viceversa.</p>
+<p>I trasferimenti non permettono di creare transazioni ricorrenti o di impostare altre proprietà oltre all'importo. Il colore scelto nella <link xref="configuration">configurazione</link> sarà usato per le transazioni generate.</p>
+<p>Se si crea un trasferimento tra conti in valute diverse, verrà chiesto di specificare un tasso di conversione.</p>
 </page>
