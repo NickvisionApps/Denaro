@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="it">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">Importazione ed esportazione 📤</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,100 +14,100 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Import/Export</title>
+<title>Importazione ed esportazione</title>
 <div>
-	<title>Import Formats</title>
+	<title>Formati per l'importazione</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+			<p>Le date devono essere in formato <em>YYYYMMDD</em>.</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+			<p>Le date devono essere nel formato americano (<em>MM/DD/YYYY</em>).</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
-			<p>❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <app>Denaro</app> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <app>Denaro</app> expects to find:</p>
+			<p>❗ Per quanto CSV sia un formato comune e alcune banche permettano ai loro utenti di esportare le informazioni in file CSV, tali file sono a tutti gli effetti tabelle che possono contenere dati arbitrari. Importare un file CSV creato con altri programmi non sarà possibile, perché i dati non saranno compatibili con ciò che <app>Denaro</app> tenta di leggere in un file. Lo scopo dell'importazione ed esportazione in CSV è quello di fornire un modo di aggiungere dati ad un conto usando programmi esterni come editor di testo e suite per ufficio. L'importazione aggiungerà soltanto nuove transazioni, senza sovrascrivere quelle già esistenti. Per creare un file CSV a mano, questa è la riga dei titoli delle colonne che <app>Denaro</app> si aspetta di trovare:</p>
 			<p its:translate="no"><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</code></p>
 			<list>
 				<item>
 					<title its:translate="no">ID</title>
-					<p>Transaction Id, should be unique for a given account. Ids start with 1.</p>
+					<p>L'ID della transazione, che deve essere univoco all'interno di ciascun conto. Gli ID partono da 1.</p>
 				</item>
 				<item>
 					<title its:translate="no">Date</title>
-					<p>Transaction date (or start date in case of repeat transaction), should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+					<p>La data della transazione (o la data d'inizio per quelle ricorrenti) deve essere in formato americano (<em>MM/DD/YYYY</em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">Description</title>
-					<p>Transaction description, it can contain any characters except semicolon.</p>
+					<p>La descrizione della transizione; può contenere qualsiasi carattere tranne il punto e virgola.</p>
 				</item>
 				<item>
 					<title its:translate="no">Type</title>
-					<p>Transaction type: 0 for income, 1 for expense.</p>
+					<p>Tipo di transazione: 0 per le entrate, 1 per le uscite.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatInterval</title>
-					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
-					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
+					<p>Un numero che rappresenta la frequenza di ripetizione della transazione:</p>
+					<p>0 - Mai</p>
+					<p>1 - Ogni giorno</p>
+					<p>2 - Ogni settimana</p>
+					<p>7 - Ogni due settimane</p>
+					<p>3 - Ogni mese</p>
+					<p>4 - Ogni tre mesi</p>
+					<p>5 - Ogni anno</p>
+					<p>6 - Ogni due anni</p>
+					<p>Consultare <em>Frequenza</em> in <link xref="transaction">transazioni</link> per dettagli sulle transazioni ricorrenti.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatFrom</title>
-					<p>Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+					<p>Deve essere o l'ID di una transazione originale, oppure 0 se è una transazione “sorgente” o -1 se non è ricorrente.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatEndDate</title>
-					<p>End date for repeat transaction, should be in English (US) format (<em>MM/DD/YYYY</em>). Leave it empty if it's not repeat transaction.</p>
+					<p>La data di termine per una transazione ricorrente, in formato americano (<em>MM/DD/YYYY</em>). Lasciare vuoto per le transazioni non ricorrenti.</p>
 				</item>
 				<item>
 					<title its:translate="no">Amount</title>
-					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+					<p>Importo della transazione in formato americano (<em>123,456.78</em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">RGBA</title>
-					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>Il colore della transazione, in formato <em>rgb(R,G,B)</em> dove <em>R</em>, <em>G</em> e <em>B</em> sono numeri interi tra 0 e 255.</p>
 				</item>
 				<item>
 					<title its:translate="no">UseGroupColor</title>
-					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+					<p>Se una transazione deve usare il colore del gruppo: 0 — falso, 1 — vero.</p>
 				</item>
 				<item>
 					<title its:translate="no">Group</title>
-					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+					<p>L'ID del gruppo della transazione. Gli ID partono da 1. Usare il valore -1 per le transazioni che non sono in alcun gruppo (non si usi 0, è un valore incorretto per l'ID del gruppo).</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupName</title>
-					<p>Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+					<p>Il nome del gruppo della transazione, che deve corrispondere all'ID del gruppo. Può contenere qualsiasi carattere tranne il punto e virgola. Lasciare vuoto per una transazione che non è in alcun gruppo; in tutti gli altri casi non deve essere vuoto.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupDescription</title>
-					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+					<p>La descrizione del gruppo della transazione, che deve corrispondere all'ID del gruppo. Può contenere qualsiasi carattere tranne il punto e virgola, e può anche essere vuota. Lasciarla vuota per una transazione che non è in alcun gruppo.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupRGBA</title>
-					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>Il colore del gruppo, in formato <em>rgb(R,G,B)</em> dove <em>R</em>, <em>G</em> e <em>B</em> sono numeri interi tra 0 e 255.</p>
 				</item>
 			</list>
-			<p>Receipt and notes are not present in CSV.</p>
+			<p>Ricevute e annotazioni non si trovano nel file CSV.</p>
 		</item>
 	</list>
 </div>
 <div>
-	<title>Export Formats</title>
-	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+	<title>Formati per l'esportazione</title>
+	<p>È possibile selezionare se esportare tutte le informazioni oppure solo quelle nella vista corrente. Se si seleziona la vista corrente, le transazioni visualizzare verranno esportate nello stesso ordine in cui sono mostrate.</p>
 	<list>
 		<item>
 			<p its:translate="no">Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+			<p>Un file conterrà le informazioni sul conto, una lista di transazioni e le immagini delle ricevute. Le transazioni sono colorate come nell'applicazione, ma i colori sono resi semitrasparenti in modo che il testo nero sia sempre visibile chiaramente. È possibile impostare una password per il file esportato.</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>

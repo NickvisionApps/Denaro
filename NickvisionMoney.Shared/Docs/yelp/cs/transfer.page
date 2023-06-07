@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transfer" its:version="2.0" xml:lang="cs">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transfer 💸</title>
+	<title type="link">Převod 💸</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,19 +12,25 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Transfer</title>
-<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jonáš Loskot</mal:name>
+      <mal:email>jonas.loskot@pm.me</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Převod</title>
+<p>Převod je způsob, jak lze přenést peníze z jednoho účtu na druhý. Po provedení převodu se vytvoří 2 transakce s následujícími popisy:</p>
 <list>
 	<item>
-		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
+		<p>„Převod na <input>Název cílového účtu</input>“ na zdrojovém účtu.</p>
 	</item>
 	<item>
-		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
+		<p>„Převod z <input>Název zdrojového účtu</input>“ na cílovém účtu.</p>
 	</item>
 </list>
-<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
-<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
-<p>If you create a transfer between accounts with different currencies, you will be asked to provide a conversion rate.</p>
+<p>Transakce vytvořené pomocí převodu jsou jednoduché transakce, které lze libovolně upravovat nebo mazat. Tyto transakce nejsou propojené: úprava transakce na zdrojovém účtu neovlivní transakci na cílovém účtu a naopak.</p>
+<p>Převod neumožňuje vytvářet opakující se transakce ani nastavovat jiné vlastnosti než částku. Pro vytvořené transakce se použije barva vybraná v <link xref="configuration">nastavení</link> .</p>
+<p>Pokud vytváříte převod mezi účty v různých měnách, budete vyzváni k zadání převodního kurzu.</p>
 </page>

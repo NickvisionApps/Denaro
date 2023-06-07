@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Import/Export</title>
+<title>Import/export</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,103 +15,103 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="cs" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Import/Export</span></h1></div>
+<a class="trail" href="index.html" title="Nápověda aplikace Denaro">Nápověda aplikace Denaro</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Import/export</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
 <div class="div"><div class="inner">
-<div class="title title-div"><h2><span class="title">Import Formats</span></h2></div>
+<div class="title title-div"><h2><span class="title">Formáty importu</span></h2></div>
 <div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p>
-<p class="p">Dates should be in <span class="em">YYYYMMDD</span> format.</p>
+<p class="p">Data by měla být ve formátu <span class="em">RRRRMMDD</span>.</p>
 </li>
 <li class="list">
 <p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p>
-<p class="p">Dates should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+<p class="p">Data by měla být v anglickém (americkém) formátu (<span class="em">MM/DD/RRRR</span>).</p>
 </li>
 <li class="list">
 <p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
-<p class="p">❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <span class="app">Denaro</span> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <span class="app">Denaro</span> expects to find:</p>
+<p class="p">❗ Formát CSV je sice běžný a některé banky umožňují svým uživatelům exportovat informace ve formátu CSV, ale tyto soubory jsou ve skutečnosti tabulky, které mohou obsahovat libovolná data. Import souboru CSV vytvořeného v jiném programu selže, protože jeho data nebudou kompatibilní s tím, co se aplikace <span class="app">Denaro</span> snaží ze souboru získat. Účelem importu/exportu CSV je poskytnout způsob, jak přidávat data do účtu pomocí externích programů, jako jsou textové editory a kancelářské balíky. Import přidá pouze nové transakce, aniž by přepsal ty stávající. Pokud chcete soubor CSV vytvořit ručně, toto je hlavička, která obsahuje všechny sloupce, které aplikace <span class="app">Denaro</span> očekává, že najde:</p>
 <p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <div class="title title-item"><h2><span class="title">ID</span></h2></div>
-<p class="p">Transaction Id, should be unique for a given account. Ids start with 1.</p>
+<p class="p">ID transakce, mělo by být pro daný účet jedinečné. ID začínají číslem 1.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Date</span></h2></div>
-<p class="p">Transaction date (or start date in case of repeat transaction), should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+<p class="p">Datum transakce (nebo datum zahájení v případě opakované transakce) by mělo být v anglickém (americkém) formátu (<span class="em">MM/DD/RRRR</span>).</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Description</span></h2></div>
-<p class="p">Transaction description, it can contain any characters except semicolon.</p>
+<p class="p">Popis transakce, může obsahovat libovolné znaky kromě středníku.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Type</span></h2></div>
-<p class="p">Transaction type: 0 for income, 1 for expense.</p>
+<p class="p">Typ transakce: 0 pro příjem, 1 pro výdaj.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatInterval</span></h2></div>
-<p class="p">A number representing transaction repeat interval:</p>
-<p class="p">0 - Never</p>
-<p class="p">1 - Daily</p>
-<p class="p">2 - Weekly</p>
-<p class="p">7 - Biweekly</p>
-<p class="p">3 - Monthly</p>
-<p class="p">4 - Quarterly</p>
-<p class="p">5 - Yearly</p>
-<p class="p">6 - Biyearly</p>
-<p class="p">See <span class="em">Repeat Interval</span> in <span class="link"><a href="transaction.html" title="Transakce">transaction</a></span> page for details about repeat transactions.</p>
+<p class="p">Číslo představující interval opakování transakce:</p>
+<p class="p">0 - Nikdy</p>
+<p class="p">1 - Denně</p>
+<p class="p">2 - Týdně</p>
+<p class="p">7 - Dvakrát týdně</p>
+<p class="p">3 - Měsíčně</p>
+<p class="p">4 - Čtvrtletně</p>
+<p class="p">5 - Ročně</p>
+<p class="p">6 - Dvakrát ročně</p>
+<p class="p">Podrobnosti o opakovaných transakcích naleznete v části <span class="em">Interval opakování</span> na stránce <span class="link"><a href="transaction.html" title="Transakce">transakce</a></span>.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatFrom</span></h2></div>
-<p class="p">Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+<p class="p">Mělo by to být buď ID zdrojové transakce nebo 0, pokud se jedná o zdrojovou transakci, nebo -1, pokud se nejedná o opakovanou transakci.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatEndDate</span></h2></div>
-<p class="p">End date for repeat transaction, should be in English (US) format (<span class="em">MM/DD/YYYY</span>). Leave it empty if it's not repeat transaction.</p>
+<p class="p">Datum ukončení opakované transakce by mělo být v anglickém (americkém) formátu (<span class="em">MM/DD/RRRR</span>). Pokud se nejedná o opakovanou transakci, ponechte jej prázdný.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Amount</span></h2></div>
-<p class="p">Transaction amount in English (US) format (<span class="em">123,456.78</span>).</p>
+<p class="p">Částka transakce v anglickém (americkém) formátu (<span class="em">123,456.78</span>).</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RGBA</span></h2></div>
-<p class="p">Transaction color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+<p class="p">Barva transakce, by měla být ve formátu <span class="em">rgb(R,G,B)</span>, kde <span class="em">R</span>, <span class="em">G</span> a <span class="em">B</span> jsou celá čísla v rozsahu 0 až 255.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
-<p class="p">Whether a transaction should use group color: 0 — false, 1 — true.</p>
+<p class="p">Zda má transakce používat skupinovou barvu: 0 — ne, 1 — ano.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Group</span></h2></div>
-<p class="p">Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+<p class="p">ID skupiny transakce. ID začíná číslem 1. U neseskupených transakcí by mělo být -1 (ne 0, to je nesprávná hodnota pro ID skupiny).</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupName</span></h2></div>
-<p class="p">Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+<p class="p">Název skupiny transakce, měl by odpovídat ID skupiny. Může obsahovat libovolné znaky kromě středníku. Pro transakce bez skupiny jej ponechte prázdný, v ostatních případech by neměl být prázdný.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
-<p class="p">Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+<p class="p">Popis skupiny transakce, měl by odpovídat identifikačnímu číslu skupiny. Může obsahovat libovolné znaky kromě středníku a může být prázdný. Pro transakce bez skupiny jej ponechte prázdný.</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
-<p class="p">Group color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+<p class="p">Barva skupiny, měla by být ve formátu <span class="em">rgb(R,G,B)</span>, kde <span class="em">R</span>, <span class="em">G</span> a <span class="em">B</span> jsou celá čísla v rozsahu 0 až 255.</p>
 </li>
 </ul></div></div></div>
-<p class="p">Receipt and notes are not present in CSV.</p>
+<p class="p">Faktura a poznámky se v souboru CSV nenachází.</p>
 </li>
 </ul></div></div></div></div></div>
 </div></div>
 <div class="div"><div class="inner">
-<div class="title title-div"><h2><span class="title">Export Formats</span></h2></div>
+<div class="title title-div"><h2><span class="title">Formáty exportu</span></h2></div>
 <div class="region"><div class="contents">
-<p class="p">You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+<p class="p">Můžete si vybrat, zda chcete exportovat všechny informace, nebo pouze aktuální zobrazení. Pokud vyberete aktuální zobrazení, budou aktuálně zobrazené transakce exportovány ve stejném pořadí, v jakém jsou zobrazeny.</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
-<p class="p">A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+<p class="p">Soubor bude obsahovat informace o účtu, seznam transakcí a obrázky faktur. Transakce jsou barevné jako v aplikaci, ale barvy jsou upraveny tak, že jsou poloprůhledné, aby byl černý text vždy dobře viditelný. Pro exportovaný soubor můžete nastavit heslo.</p>
 </li>
 <li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
 </ul></div></div></div>
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Další informace</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Nápověda aplikace Denaro">Nápověda aplikace Denaro</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
@@ -134,11 +134,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="copyrights">
 <div class="copyright">© 2023 Fyodor Sobolev</div>
 <div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 Jonáš Loskot</div>
 </div>
 <div class="credits">
 <div class="credits-authors">
 <div class="title"><span class="title">Napsali</span></div>
 <ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-translators">
+<div class="title"><span class="title">Přeložili</span></div>
+<ul class="credits"><li>Jonáš Loskot</li></ul>
 </div>
 <div class="credits-publishers">
 <div class="title"><span class="title">Vydali</span></div>

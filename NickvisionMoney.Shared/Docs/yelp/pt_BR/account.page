@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="pt-BR">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Account 🏦</title>
+	<title type="link">Conta 🏦</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,29 +14,29 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Account</title>
-<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
-<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<title>Conta</title>
+<p>Esta página explica todas as propriedades das contas no <app>Denaro</app>. A maioria deles é mostrada na <gui>Caixa de Diálogo de Configurações da Conta</gui>. Essa caixa de diálogo também abre automaticamente depois de criar uma nova conta.</p>
+<p>Cada conta é armazenada em um único arquivo <file>*.nmoney</file>. Os arquivos criados em uma versão <em>estável</em> mais antiga do <app>Denaro</app> podem ser abertos com segurança em uma versão <em>estável</em> mais recente do aplicativo. Embora, o app possa ser executado em diferentes plataformas (Windows e Linux), os arquivos <file>*.nmoney</file> são 100% compatíveis entre as plataformas, desde que sejam da mesma versão do aplicativo (V2023.1.0, por exemplo).</p>
 <note style="warning">
-	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
+	<p>As versões instáveis (Beta e RC) do aplicativo podem conter bugs ou modificações inacabadas que podem causar perda de dados. NÃO use arquivos de conta que contêm dados reais em versões instáveis do app!</p>
 </note>
 
 <terms>
 	<item>
-		<title>Name</title>
-		<p>Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p>
+		<title>Nome</title>
+		<p>O nome da conta é mostrado na lista de contas recentes e nas abas. Um nome não possui limite de tamanho e pode conter quaisquer caracteres, incluindo emojis.</p>
 	</item>
 	<item>
-		<title>Account Type</title>
-		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
+		<title>Tipo de Conta</title>
+		<p>Existem 3 tipos de conta disponíveis: 🟣<em>Corrente</em>, 🔵<em>Poupança</em> e 🟢<em>Comercial</em>. O tipo da conta é so um rótulo útil que é mostrado na lista de contas recentes e não afeta o funcionamento do aplicativo ou o que pode ser feito com uma conta. Cada tipo de conta possui sua própria cor. Essas cores podem ser configuradas nas <link xref="configuration">configurações globais</link>.</p>
 	</item>
 	<item>
-		<title>Default Transaction Type</title>
-		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
+		<title>Tipo Padrão das Transações</title>
+		<p>Quando você cria uma nova transação, o seu tipo, por padrão, será o mesmo que nesta configuração.</p>
 	</item>
 	<item>
-		<title>System Currency</title>
-		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+		<title>Moeda do Sistema</title>
+		<p>Sempre que o aplicativo é iniciado, ele obtém os dados sobre a moeda e formatação de números do seu sistema e os usa para mostrar o símbolo da moeda (a menos que uma moeda personalizada seja usada. Veja abaixo) e para determinar em que formato os números serão aceitos como valor para as transações. Alguns exemplos:</p>
 		<list>
 			<item><p>If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number.</p></item>
 			<item><p>If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number.</p></item>

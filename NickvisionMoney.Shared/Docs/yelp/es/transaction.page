@@ -15,7 +15,7 @@
 
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
       <mal:name>Óscar Fernández Díaz</mal:name>
-      <mal:email/>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
       <mal:years>2023</mal:years>
     </mal:credit>
   </info>
@@ -25,7 +25,7 @@
 
 <terms>
 	<item>
-		<title>ID</title>
+		<title>Id</title>
 		<p>Cada transacción tiene una identificación que es única para una cuenta determinada. Los identificadores comienzan con 1 y aumentan con cada transacción agregada. Los ID no se pueden cambiar, los ID de las transacciones eliminadas no se reusan.</p>
 	</item>
 	<item>
@@ -49,7 +49,7 @@
 		<p>Use esta opción para crear una transacción recurrente. Después de agregar una transacción con un intervalo de repetición, esta transacción se convertirá en una transacción de <em>origen</em>. <app>Denaro</app> generará automáticamente transacciones <em>repetidas</em> para las fechas hasta hoy o una fecha de finalización proporcionada si se estableció en el pasado. Las transacciones <em>repetidas</em> no se pueden editar ni eliminar, solo se puede modificar <em>origen</em>. Cuando modifique la transacción <em>fuente</em>, <app>Denaro</app> le preguntará si desea modificar o desasociar las transacciones <em>repetidas</em>. Si elige desasociar, las transacciones <em>repetidas</em> se convierten en transacciones normales y se pueden editar o eliminar por separado.</p>
 	</item>
 	<item>
-		<title>Fecha de fin de repetición</title>
+		<title>Repetir fecha final</title>
 		<p>Fecha de finalización de una transacción con repetición. No puede ser anterior o el mismo día que la fecha de inicio.</p>
 	</item>
 	<item>

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="contents pagewide">
 <p class="p">Esta página explica todas las propiedades de las transacciones en <span class="app">Denaro</span>.</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">ID</dt>
+<dt class="terms">Id</dt>
 <dd class="terms"><p class="p">Cada transacción tiene una identificación que es única para una cuenta determinada. Los identificadores comienzan con 1 y aumentan con cada transacción agregada. Los ID no se pueden cambiar, los ID de las transacciones eliminadas no se reusan.</p></dd>
 <dt class="terms">Descripción</dt>
 <dd class="terms"><p class="p">Sin límite de longitud. No puede contener punto y coma.</p></dd>
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">Se puede seleccionar cualquier fecha, también puede crear transacciones para fechas futuras.</p></dd>
 <dt class="terms">Intervalo de repetición</dt>
 <dd class="terms"><p class="p">Use esta opción para crear una transacción recurrente. Después de agregar una transacción con un intervalo de repetición, esta transacción se convertirá en una transacción de <span class="em">origen</span>. <span class="app">Denaro</span> generará automáticamente transacciones <span class="em">repetidas</span> para las fechas hasta hoy o una fecha de finalización proporcionada si se estableció en el pasado. Las transacciones <span class="em">repetidas</span> no se pueden editar ni eliminar, solo se puede modificar <span class="em">origen</span>. Cuando modifique la transacción <span class="em">fuente</span>, <span class="app">Denaro</span> le preguntará si desea modificar o desasociar las transacciones <span class="em">repetidas</span>. Si elige desasociar, las transacciones <span class="em">repetidas</span> se convierten en transacciones normales y se pueden editar o eliminar por separado.</p></dd>
-<dt class="terms">Fecha de fin de repetición</dt>
+<dt class="terms">Repetir fecha final</dt>
 <dd class="terms"><p class="p">Fecha de finalización de una transacción con repetición. No puede ser anterior o el mismo día que la fecha de inicio.</p></dd>
 <dt class="terms">Grupo</dt>
 <dd class="terms"><p class="p">Cada transacción puede pertenecer a un solo grupo o a ninguno (grupo "No agrupado").</p></dd>

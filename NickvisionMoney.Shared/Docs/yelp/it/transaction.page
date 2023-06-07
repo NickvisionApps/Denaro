@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="it">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transaction 🧾</title>
+	<title type="link">Transazioni 🧾</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,53 +14,53 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transaction</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+<title>Transazioni</title>
+<p>Questa pagina spiega tutte le proprietà delle transazioni in <app>Denaro</app>.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>ID</title>
+		<p>Ciascuna transazione possiede un ID, che è univoco all'interno di ciascun conto. L'ID parte da 1 e viene incrementato ad ogni transazione aggiunta. Gli ID non possono essere cambiati, e quelli delle transazioni rimosse non vengono riusati.</p>
 	</item>
 	<item>
-		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<title>Descrizione</title>
+		<p>Nessun limite di lunghezza. Non può contenere punti e virgola.</p>
 	</item>
 	<item>
-		<title>Amount</title>
-		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+		<title>Importo</title>
+		<p>Un numero valido per le proprie impostazioni regionali; si veda <em>Valuta di sistema</em> nella pagina <link xref="account">Conti</link> per dettagli.</p>
 	</item>
 	<item>
-		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<title>Tipo</title>
+		<p><em>Entrate</em> o <em>Uscite</em>. All'apertura della finestra per creare una nuova transazione, sarà selezionata l'opzione predefinita scelta nelle <link xref="account">impostazioni conto</link>.</p>
 	</item>
 	<item>
-		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<title>Data</title>
+		<p>Si può selezionare qualsiasi data, e creare transazioni anche per date future.</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<title>Frequenza</title>
+		<p>Usare questa opzione per creare una transazione ricorrente. Una volta aggiunta una transazione impostando una frequenza di ricorsione, essa diventerà una transazione <em>sorgente</em>. <app>Denaro</app> genererà automaticamente le transazioni <em>collegate</em> per le date fino ad oggi o fino alla data di termine indicata se è nel passato. Le transazioni <em>collegate</em> non possono essere modificate o eliminate, solo la <em>sorgente</em> può esserlo. Quando si modifica la transazione <em>sorgente</em>, <app>Denaro</app> chiederà se si desidera modificare anche le transazioni <em>collegate</em> o se scollegarle. Se si sceglie di scollegarle, esse diventeranno delle normali transazioni e potranno essere modificate o eliminate individualmente.</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>Fine ripetizione</title>
+		<p>La data di termine di una transazione ricorrente. Non può essere uguale alla data di inizio o precederla.</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>Gruppo</title>
+		<p>Ciascuna transazione può appartenere a un solo gruppo, oppure nessuno (cioè appartiene al gruppo «Senza gruppo»).</p>
 	</item>
 	<item>
-		<title>Color</title>
-		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+		<title>Colore</title>
+		<p>Un colore per la transazione. Si può impostare affinché la transazione usi il colore del gruppo a cui appartiene, oppure un colore speciale. Se si sceglie il secondo, verrà inizialmente impostato al colore predefinito selezionato nella <link xref="configuration">configurazione</link>, ma può essere cambiato in qualsiasi altro colore.</p>
 	</item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>Ricevuta</title>
+		<p>L'immagine di una ricevuta per la transazione. È possibile caricare immagini in formato JPEG o PNG, oppure documenti PDF, ma a prescindere dal formato verrà convertita e salvata come immagine JPEG. Nel caso del PDF, verrà salvata solo la prima pagina. È possibile eliminare o caricare un altro file in qualsiasi momento.</p>
 	</item>
 	<item>
-		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<title>Annotazioni</title>
+		<p>Un testo libero da allegare alla transazione.</p>
 	</item>
 </terms>
 </page>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="cs">
 <info>
-	<title type="link">Denaro Help</title>
-	<title type="text">Denaro Help</title>
+	<title type="link">Nápověda aplikace Denaro</title>
+	<title type="text">Nápověda aplikace Denaro</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,9 +12,15 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title><media its:translate="no" type="image" src="figures/denaro.png"/> Denaro Help</title>
-<p>This documentation will help you understand how to configure and manage data in <app>Denaro</app> to get the most of the application.</p>
-<p>To get support, use <link href="https://github.com/NickvisionApps/Denaro/issues">issues</link> or <link href="https://github.com/NickvisionApps/Denaro/discussions">discussions</link> on Github, or <link href="https://bit.ly/3GrfEid">join our Matrix channel</link>.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jonáš Loskot</mal:name>
+      <mal:email>jonas.loskot@pm.me</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title><media its:translate="no" type="image" src="figures/denaro.png"/> Nápověda aplikace Denaro</title>
+<p>Tato dokumentace vám pomůže pochopit, jak konfigurovat a spravovat data v aplikaci <app>Denaro</app>, abyste z ní mohli vytěžit maximum.</p>
+<p>Potřebujete-li podporu, použijte <link href="https://github.com/NickvisionApps/Denaro/issues">problémy</link> nebo <link href="https://github.com/NickvisionApps/Denaro/discussions">diskuze</link> na GitHubu nebo se <link href="https://bit.ly/3GrfEid">připojte k našemu kanálu Matrix</link>.</p>
 </page>
