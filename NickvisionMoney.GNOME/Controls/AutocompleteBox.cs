@@ -36,8 +36,8 @@ public class AutocompleteBox<T> : Gtk.Box
     /// <summary>
     /// Updates the list of suggestions
     /// </summary>
-    /// <param name="suggestions">A list of suggestions and their models</param>
-    public void UpdateSuggestions(List<(string, T)> suggestions)
+    /// <param name="suggestions">A list of suggestions and their subtext and models</param>
+    public void UpdateSuggestions(List<(string, string, T)> suggestions)
     {
         foreach(var row in _rows)
         {
@@ -48,10 +48,11 @@ public class AutocompleteBox<T> : Gtk.Box
         {
             var row = Adw.ActionRow.New();
             row.SetTitle(suggestion.Item1);
+            row.SetSubtitle(suggestion.Item2);
             row.SetActivatable(true);
             row.OnActivated += (sender, e) =>
             {
-                SuggestionClicked?.Invoke(this, suggestion);
+                SuggestionClicked?.Invoke(this, (suggestion.Item1, suggestion.Item3));
                 SetVisible(false);
             };
             if(_rows.Count == 0)

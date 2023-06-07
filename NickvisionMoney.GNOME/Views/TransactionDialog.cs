@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -211,7 +212,7 @@ public partial class TransactionDialog : Adw.Window
         _autocompleteBox = new AutocompleteBox<Transaction>();
         _autocompleteBox.SuggestionClicked += (sender, e) =>
         {
-            _descriptionRow.SetText(e.Item1.Replace($" [{_("Group")}: {_controller.GetGroupNameFromId((uint)e.Item2.GroupId)}]", ""));
+            _descriptionRow.SetText(e.Item1);
             _descriptionRow.SetPosition(-1);
             if(e.Item2.GroupId != -1)
             {
@@ -511,7 +512,18 @@ public partial class TransactionDialog : Adw.Window
     {
         if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
         {
-            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
+            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText())
+                .Select(x =>
+                {
+                    var split = x.Item1.Split(" [_GROUP_: ");
+                    var subtext = "";
+                    try
+                    {
+                        subtext = !string.IsNullOrEmpty(split[1]) ? $"{_("Group")}: {split[1]}" : "";
+                    }
+                    catch { }
+                    return (split[0], subtext, x.Item2);
+                }).ToList();
             if(matchingDescriptions.Count != 0)
             {
                 _autocompleteBox.UpdateSuggestions(matchingDescriptions);

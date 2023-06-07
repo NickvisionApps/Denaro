@@ -203,7 +203,7 @@ public class TransactionDialogController : IDisposable
             .Select(x =>
             {
                 var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
-                (string, Transaction) result = ($"{first.Description}{(first.GroupId != -1 ? $" [{_("Group")}: {_groups[(uint)first.GroupId].Name}]" : "")}", first);
+                (string, Transaction) result = ($"{first.Description}{(first.GroupId != -1 ? $" [_GROUP_: {_groups[(uint)first.GroupId].Name}" : "")}", first);
                 return result;
             })
             .OrderByDescending(x => x.Item1.StartsWith(description))
