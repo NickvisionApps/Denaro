@@ -60,6 +60,18 @@ public class AutocompleteBox<T> : Gtk.Box
                 SuggestionAccepted?.Invoke(this, (suggestion.Item1, suggestion.Item3));
                 SetVisible(false);
             };
+            var keyController = Gtk.EventControllerKey.New();
+            keyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+            keyController.OnKeyPressed += (sender, e) =>
+            {
+                if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+                {
+                    row.Activate();
+                    return true;
+                }
+                return false;
+            };
+            row.AddController(keyController);
             _rows.Add(row);
             _group.Add(row);
         }
