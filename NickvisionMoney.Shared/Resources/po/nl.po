@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 10:49-0400\n"
+"POT-Creation-Date: 2023-06-07 03:07-0400\n"
 "PO-Revision-Date: 2023-05-29 20:53+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
@@ -31,8 +31,8 @@ msgstr "(kopie)"
 msgid "{0} from {1}"
 msgstr "{0} van {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:579
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1321
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:578
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1320
 #, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
@@ -54,44 +54,44 @@ msgid "Account Type"
 msgstr "Soort rekening"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:213
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:196
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:46
 msgid "Add"
 msgstr "Toevoegen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:600
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:599
 msgid "Add a new transaction or import transactions from a file."
 msgstr "Voeg een transactie toe of importeer deze uit een bestand"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:750
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:749
 msgid "Add Password To PDF?"
 msgstr "Wachtwoord toevoegen aan PDF?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:597
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:641
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:640
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:641
 msgid "All files"
 msgstr "Alle bestanden"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:447
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:473
 #: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:74
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "Bedrag"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:466
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
 msgid "Amount (Invalid)"
 msgstr "Bedrag (ongeldig)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:213
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:196
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:129
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1113
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -99,7 +99,7 @@ msgstr ""
 "Weet u zeker dat u deze groep wilt verwijderen?\n"
 "Deze actie is onomkeerbaar."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1027
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1026
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -117,9 +117,9 @@ msgstr "Zakelijk"
 msgid "Can't access the selected folder, check Flatpak permissions."
 msgstr "Geen toegang tot de geselecteerde map, controleer Flatpak-rechten."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:884
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:934
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:990
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -174,7 +174,7 @@ msgid "Currency Symbol (Invalid)"
 msgstr "Valutasymbool (ongeldig)"
 
 #: ../../../Models/Account.cs:1687
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:108
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:109
 msgid "Date"
 msgstr "Datum"
 
@@ -206,25 +206,25 @@ msgstr "Decimaal scheidingsteken (leeg)"
 msgid "Decimal Separator (Invalid)"
 msgstr "Decimaal scheidingsteken (ongeldig)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:884
 #, fuzzy
 msgid "Delete Existing"
 msgstr "Huidige verwijderen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1113
 msgid "Delete Group"
 msgstr "Groep verwijderen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:990
 msgid "Delete Only Source"
 msgstr "Alleen eerste verwijderen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:990
 msgid "Delete Source and Generated"
 msgstr "Ook alle opeenvolgende verwijderen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1027
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:990
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1026
 msgid "Delete Transaction"
 msgstr "Transactie verwijderen"
 
@@ -234,14 +234,14 @@ msgstr "Transactie verwijderen"
 msgid "Denaro"
 msgstr "Denaro"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:445
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:471
 #: ../../../Models/Account.cs:1658 ../../../Models/Account.cs:1688
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:63
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
 msgstr "Beschrijving"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:461
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:487
 msgid "Description (Empty)"
 msgstr "Beschrijving (blanco)"
 
@@ -267,7 +267,7 @@ msgstr "Wachtwoord van bestemmingsaccount (ongeldig)"
 msgid "Destination Account Password (Required)"
 msgstr "Wachtwoord van bestemmingsaccount (vereist)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:884
 msgid "Disassociate Existing"
 msgstr "Huidige loskoppelen"
 
@@ -276,12 +276,12 @@ msgstr "Huidige loskoppelen"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:110
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:159
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:99
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:100
 msgid "Expense"
 msgstr "Uitgave"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:705
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:735
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:704
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:734
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
 msgid "Export to File"
 msgstr "Exporteren naar bestand"
@@ -309,8 +309,9 @@ msgid "Good Evening!"
 msgstr "Goedenavond!"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:85
+#: ../../../Controllers/TransactionDialogController.cs:206
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:47
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:172
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:173
 msgid "Group"
 msgstr "Groep"
 
@@ -344,7 +345,7 @@ msgstr "Groepen"
 msgid "Help"
 msgstr "Hulp"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1163
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1162
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:137
 msgid "Hide"
 msgstr "Verbergen"
@@ -365,7 +366,7 @@ msgstr[1] "Er is {0} transactie geïmporteerd."
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:91
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:155
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:95
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:96
 msgid "Income"
 msgstr "Inkomst"
 
@@ -401,8 +402,8 @@ msgstr "Naam (blanco)"
 msgid "Name (Exists)"
 msgstr "Naam (bestaat)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:527
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:571
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Never"
 msgstr "Nooit"
 
@@ -427,33 +428,33 @@ msgstr ""
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision Denaro-account"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:750
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1027
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:749
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1026
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1113
 msgid "No"
 msgstr "Nee"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:361
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:433
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:559
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:459
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:603
 msgid "No End Date"
 msgstr "Geen einddatum"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:599
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:598
 msgid "No Transactions"
 msgstr "Geen transacties"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:589
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:588
 msgid "No Transactions Found"
 msgstr "Geen transacties gevonden"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:590
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:589
 msgid "No transactions match the specified filters."
 msgstr ""
 "Er zijn geen transacties gevonden die voldoen aan de opgegeven filters."
 
 #: ../../../Models/Account.cs:1691
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:311
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:313
 msgid "Notes"
 msgstr "Aantekeningen"
 
@@ -462,7 +463,7 @@ msgid "Open"
 msgstr "Openen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:661
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:660
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:195
 msgid "Open Account"
@@ -476,18 +477,18 @@ msgstr "Overzicht"
 msgid "Page {0}"
 msgstr "Pagina {0}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:757
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:756
 msgid "PDF Password"
 msgstr "PDF-wachtwoord"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:451
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:613
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:477
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:657
 #: ../../../Models/Account.cs:1751
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:267
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
 msgstr "Factuur"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:477
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:503
 msgid "Receipt (File Inaccessible)"
 msgstr ""
 
@@ -495,21 +496,21 @@ msgstr ""
 msgid "Receipts"
 msgstr "Facturen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:449
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:134
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:475
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:135
 msgid "Repeat End Date"
 msgstr "Einddatum herhaling"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:471
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:497
 msgid "Repeat End Date (Invalid)"
 msgstr "Einddatum herhaling (ongeldig)"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/TransactionRow.cs:73
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:162
 msgid "Repeat Interval"
 msgstr "Herhalingsinterval"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:884
 msgid "Repeat Interval Changed"
 msgstr "De herhaalperiode is gewijzigd"
 
@@ -537,19 +538,19 @@ msgstr "Back-up-map selecteren"
 msgid "Select Folder"
 msgstr "Back-up-map selecteren"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1158
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1157
 msgid "Show"
 msgstr "Tonen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:265
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:264
 msgid "Sort By Amount"
 msgstr "Sorteren op hoeveelheid"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:265
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:264
 msgid "Sort By Date"
 msgstr "Sorteren op datum"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:265
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:264
 msgid "Sort By Id"
 msgstr "Sorteren op id"
 
@@ -569,7 +570,7 @@ msgstr "Het wachtwoord zal worden verwijderd bij het sluiten van deze dialoog"
 msgid "The passwords do not match."
 msgstr "Wachtwoorden komen niet overeen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:885
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:884
 msgid ""
 "The repeat interval was changed.\n"
 "What would you like to do with existing generated transactions?\n"
@@ -582,7 +583,7 @@ msgstr ""
 "Nieuwe opeenvolgende transacties worden op basis van de nieuwe periode "
 "ingepland."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:629
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:628
 msgid "This account has no money available to transfer."
 msgstr "Er staat geen geld op deze rekening."
 
@@ -590,7 +591,7 @@ msgstr "Er staat geen geld op deze rekening."
 msgid "This account is already opened."
 msgstr "Dit account is al geopend"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:991
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:990
 #, fuzzy
 #| msgid ""
 #| "This transaction is a source repeat transaction.\n"
@@ -611,7 +612,7 @@ msgstr ""
 "Als u alleen de eerste transactie verwijdert, blijven\n"
 "de opeenvolgende aanpasbaar."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:934
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -631,7 +632,7 @@ msgstr ""
 msgid "Total"
 msgstr "Totaal"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:204
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:187
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Transaction"
 msgstr "Transactie"
@@ -695,8 +696,8 @@ msgstr "Een account kan slechts eenmaal worden geopend."
 
 #: ../../../Controllers/AccountViewController.cs:470
 #: ../../../Controllers/AccountViewController.cs:832
-#: ../../../Controllers/TransactionDialogController.cs:162
-#: ../../../Controllers/TransactionDialogController.cs:317
+#: ../../../Controllers/TransactionDialogController.cs:87
+#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1662
 #: ../../../Models/Account.cs:1734
 msgid "Ungrouped"
@@ -707,31 +708,31 @@ msgstr "Ongegroepeerd"
 msgid "Unlimited"
 msgstr "Ongelimiteerd"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:934
 msgid "Update Only Source"
 msgstr "Alleen eerste bijwerken"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:934
 msgid "Update Source and Generated"
 msgstr "Ook alle opeenvolgende transacties bijwerken"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:935
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:934
 msgid "Update Transaction"
 msgstr "Transactie bijwerken"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:385
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:585
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:298
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:629
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:300
 msgid "Upload"
 msgstr "Uploaden"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:381
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:629
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:276
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:407
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:673
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:278
 msgid "View"
 msgstr "Bekijken"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:750
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:749
 msgid ""
 "Would you like to password-protect the PDF file?\n"
 "\n"
@@ -742,9 +743,9 @@ msgstr ""
 "Als het wachtwoord verloren is zal het PDF-bestand niet meer toegankelijk "
 "zijn."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:750
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1027
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:749
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1026
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1113
 msgid "Yes"
 msgstr "Ja"
 
@@ -940,18 +941,22 @@ msgctxt "Transaction"
 msgid "New"
 msgstr "Nieuw"
 
+#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:15
+msgid "Suggestions"
+msgstr ""
+
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
 msgstr "Alle accounts"
 
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:44
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:177
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:178
 msgid "Color"
 msgstr "Kleur"
 
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:64
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:234
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:287
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:236
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:289
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -1232,56 +1237,56 @@ msgstr "Sluiten"
 msgid "Make a Copy"
 msgstr "Kopie maken"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:145
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:146
 msgid "Clear End Date"
 msgstr "Einddatum wissen"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Daily"
 msgstr "Iedere dag"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Weekly"
 msgstr "Iedere week"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Biweekly"
 msgstr "Iedere twee weken"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Monthly"
 msgstr "Iedere maand"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Quarterly"
 msgstr "Ieder kwartaal"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Yearly"
 msgstr "Ieder jaar"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:163
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Biyearly"
 msgstr "Iedere twee jaar"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:190
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:191
 msgid "Use group color"
 msgstr "Groepskleur gebruiken"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:190
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:191
 msgid "Use unique color"
 msgstr "Unieke kleur gebruiken"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:202
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:259
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:203
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:261
 msgid "Extras"
 msgstr "Extra's"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:203
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:204
 msgid "Manage extra fields of the transaction."
 msgstr "Beheer extra velden van de transactie"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:314
 msgid "Enter notes here"
 msgstr "Voer aantekeningen hier in"
 
