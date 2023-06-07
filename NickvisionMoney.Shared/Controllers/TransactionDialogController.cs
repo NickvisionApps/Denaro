@@ -207,7 +207,7 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="description">The description to get suggestions for</param>
     /// <returns>The list of suggestions</returns>
-    public List<string> GetDescriptionSuggestions(string description) => _transactionDescriptions.Where(x => x.Contains(description)).OrderByDescending(x => x.StartsWith(description)).ToList();
+    public List<string> GetDescriptionSuggestions(string description) => _transactionDescriptions.Where(x => x.Contains(description)).Take(5).OrderByDescending(x => x.StartsWith(description)).ToList();
 
     /// <summary>
     /// Gets the name of a group from a group id

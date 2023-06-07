@@ -154,6 +154,16 @@ public partial class TransactionDialog : Adw.Window
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
+        OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "is-active")
+            {
+                if(GetIsActive())
+                {
+                    _autocompleteDialog.Hide();
+                }
+            }
+        };
         OnCloseRequest += (sender, e) =>
         {
             _autocompleteDialog.Close();
@@ -482,6 +492,7 @@ public partial class TransactionDialog : Adw.Window
                 _autocompleteDialog.SuggestionClicked += (sender, e) =>
                 {
                     _descriptionRow.SetText(e);
+                    _descriptionRow.SetPosition(-1);
                 };
                 _autocompleteDialog.Present();
                 return;

@@ -7,8 +7,26 @@ Adw.Window _root {
   focusable: false;
   can-focus: false;
 
-  content: Adw.PreferencesGroup _group {
-    
+  content: Gtk.Box {
+    orientation: vertical;
+    spacing: 12;
+
+    Gtk.Label {
+      margin-start: 12;
+      margin-top: 12;
+      halign: start;
+      label: _("Suggestions");
+
+      styles ["dim-label"]
+    }
+
+    Adw.PreferencesGroup _group {
+      margin-start: 12;
+      margin-end: 12;
+      margin-bottom: 12;
+    }
+
+    styles ["view"]
   };
 
   styles ["popup"]
