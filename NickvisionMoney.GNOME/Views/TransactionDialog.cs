@@ -103,13 +103,14 @@ public partial class TransactionDialog : Adw.Window
     private string? _receiptPath;
     private nint _colorDialog;
     private GAsyncReadyCallback _openCallback;
-    private AutocompleteDialog _autocompleteDialog;
+    private AutocompleteBox _autocompleteBox;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
     [Gtk.Connect] private readonly Gtk.Button _copyButton;
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
+    [Gtk.Connect] private readonly Gtk.Overlay _overlay;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
@@ -148,27 +149,11 @@ public partial class TransactionDialog : Adw.Window
         _constructing = true;
         _controller = controller;
         _receiptPath = null;
-        _autocompleteDialog = new AutocompleteDialog(this);
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
         //Build UI
         builder.Connect(this);
-        OnNotify += (sender, e) =>
-        {
-            if(e.Pspec.GetName() == "is-active")
-            {
-                if(GetIsActive())
-                {
-                    _autocompleteDialog.Hide();
-                }
-            }
-        };
-        OnCloseRequest += (sender, e) =>
-        {
-            _autocompleteDialog.Close();
-            return false;
-        };
         _scrolledWindow.GetVadjustment().OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "page-size")
@@ -223,6 +208,16 @@ public partial class TransactionDialog : Adw.Window
             _copyButton.SetVisible(false);
         };
         //Description
+        _autocompleteBox = new AutocompleteBox();
+        _autocompleteBox.SuggestionClicked += (sender, e) =>
+        {
+            _descriptionRow.SetText(e);
+            _descriptionRow.SetPosition(-1);
+        };
+        _autocompleteBox.SetMarginTop(66);
+        _autocompleteBox.SetHalign(Gtk.Align.Center);
+        _autocompleteBox.SetValign(Gtk.Align.Start);
+        _overlay.AddOverlay(_autocompleteBox);
         _descriptionRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
@@ -232,6 +227,13 @@ public partial class TransactionDialog : Adw.Window
                     AutocompleteDescription();
                     Validate();
                 }
+            }
+        };
+        _descriptionRow.OnStateFlagsChanged += (sender, e) =>
+        {
+            if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            {
+                _autocompleteBox.SetVisible(false);
             }
         };
         _descriptionKeyController = Gtk.EventControllerKey.New();
@@ -488,17 +490,12 @@ public partial class TransactionDialog : Adw.Window
             var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
             if(matchingDescriptions.Count != 0 && matchingDescriptions[0] != _descriptionRow.GetText())
             {
-                _autocompleteDialog.UpdateSuggestions(matchingDescriptions);
-                _autocompleteDialog.SuggestionClicked += (sender, e) =>
-                {
-                    _descriptionRow.SetText(e);
-                    _descriptionRow.SetPosition(-1);
-                };
-                _autocompleteDialog.Present();
+                _autocompleteBox.UpdateSuggestions(matchingDescriptions);
+                _autocompleteBox.SetVisible(true);
                 return;
             }
         }
-        _autocompleteDialog.Hide();
+        _autocompleteBox.SetVisible(true);
     }
 
     /// <summary>

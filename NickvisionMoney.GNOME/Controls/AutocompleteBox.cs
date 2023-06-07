@@ -7,7 +7,7 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A dialog for showing autocomplete suggestions
 /// </summary>
-public class AutocompleteDialog : Adw.Window
+public class AutocompleteBox : Gtk.Box
 {
     private readonly List<Gtk.Widget> _rows;
     
@@ -19,20 +19,17 @@ public class AutocompleteDialog : Adw.Window
     /// Constructs an AutocompleteDialog
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
-    /// <param name="parent">Gtk.Window</param>
-    private AutocompleteDialog(Gtk.Builder builder, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private AutocompleteBox(Gtk.Builder builder) : base(builder.GetPointer("_root"), false)
     {
         _rows = new List<Gtk.Widget>();
         //Build UI
         builder.Connect(this);
-        SetTransientFor(parent);
     }
     
     /// <summary>
     /// Constructs an AutocompleteDialog
     /// </summary>
-    /// <param name="parent">Gtk.Window</param>
-    public AutocompleteDialog(Gtk.Window parent) : this(Builder.FromFile("autocomplete_dialog.ui"), parent)
+    public AutocompleteBox() : this(Builder.FromFile("autocomplete_box.ui"))
     {
     }
     
@@ -55,8 +52,12 @@ public class AutocompleteDialog : Adw.Window
             row.OnActivated += (sender, e) =>
             {
                 SuggestionClicked?.Invoke(this, row.GetTitle());
-                Hide();
+                SetVisible(false);
             };
+            if(_rows.Count == 0)
+            {
+                row.SetSizeRequest(240, -1);
+            }
             _rows.Add(row);
             _group.Add(row);
         }

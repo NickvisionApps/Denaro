@@ -50,170 +50,172 @@ Adw.Window _root {
               propagate-natural-height: true;
               hscrollbar-policy: never;
 
-              Gtk.Box {
-                orientation: vertical;
-                spacing: 24;
-                margin-top: 6;
-                margin-start: 24;
-                margin-end: 24;
-                margin-bottom: 6;
-
-                Adw.PreferencesGroup {
-                  Adw.EntryRow _descriptionRow {
-                    title: _("Description");
-                    input-hints: spellcheck;
-                    activates-default: true;
-                  }
-                }
-
+              Gtk.Overlay _overlay {
                 Gtk.Box {
-                  spacing: 12;
+                  orientation: vertical;
+                  spacing: 24;
+                  margin-top: 6;
+                  margin-start: 24;
+                  margin-end: 24;
+                  margin-bottom: 6;
 
-                  Adw.Bin {
-                    Adw.EntryRow _amountRow {
-                      title: _("Amount");
-                      input-purpose: number;
+                  Adw.PreferencesGroup {
+                    Adw.EntryRow _descriptionRow {
+                      title: _("Description");
+                      input-hints: spellcheck;
                       activates-default: true;
-                      hexpand: true;
-
-                      [suffix]
-                      Gtk.Label _currencyLabel {
-                        styles ["dim-label"]
-                      }
-
-                      styles ["transaction-amount"]
                     }
-
-                    styles ["card"]
                   }
 
                   Gtk.Box {
-                    orientation: vertical;
-                    halign: center;
+                    spacing: 12;
 
-                    Gtk.ToggleButton _incomeButton {
-                      label: _("Income");
+                    Adw.Bin {
+                      Adw.EntryRow _amountRow {
+                        title: _("Amount");
+                        input-purpose: number;
+                        activates-default: true;
+                        hexpand: true;
+
+                        [suffix]
+                        Gtk.Label _currencyLabel {
+                          styles ["dim-label"]
+                        }
+
+                        styles ["transaction-amount"]
+                      }
+
+                      styles ["card"]
                     }
 
-                    Gtk.ToggleButton _expenseButton {
-                      label: _("Expense");
-                    }
-
-                    styles ["linked"]
-                  }
-                }
-
-                Adw.PreferencesGroup {
-                  Adw.ActionRow {
-                    title: _("Date");
-                    activatable-widget: _dateCalendarButton;
-
-                    [suffix]
                     Gtk.Box {
-                      spacing: 4;
+                      orientation: vertical;
+                      halign: center;
 
-                      Gtk.MenuButton _dateCalendarButton {
-                        valign: center;
-                        direction: none;
-                        popover: Gtk.Popover {
-                          Gtk.Calendar _dateCalendar {
-                            name: "calendarTransactions";
-                          }
-                        };
-
-                        styles ["calendar-button"]
+                      Gtk.ToggleButton _incomeButton {
+                        label: _("Income");
                       }
 
-                      Gtk.Label _dateDashLabel {
-                        label: " — ";
+                      Gtk.ToggleButton _expenseButton {
+                        label: _("Expense");
                       }
 
-                      Gtk.MenuButton _repeatEndDateCalendarButton {
-                        valign: center;
-                        direction: none;
-                        tooltip-text: _("Repeat End Date");
-                        popover: Gtk.Popover {
-                          Gtk.Box {
-                            orientation: vertical;
-                            spacing: 6;
+                      styles ["linked"]
+                    }
+                  }
 
-                            Gtk.Button _repeatEndDateClearButton {
-                              halign: center;
+                  Adw.PreferencesGroup {
+                    Adw.ActionRow {
+                      title: _("Date");
+                      activatable-widget: _dateCalendarButton;
 
-                              child: Adw.ButtonContent {
-                                icon-name: "larger-brush-symbolic";
-                                label: _("Clear End Date");
-                              };
-                            }
+                      [suffix]
+                      Gtk.Box {
+                        spacing: 4;
 
-                            Gtk.Calendar _repeatEndDateCalendar {
+                        Gtk.MenuButton _dateCalendarButton {
+                          valign: center;
+                          direction: none;
+                          popover: Gtk.Popover {
+                            Gtk.Calendar _dateCalendar {
                               name: "calendarTransactions";
                             }
-                          }
+                          };
+
+                          styles ["calendar-button"]
+                        }
+
+                        Gtk.Label _dateDashLabel {
+                          label: " — ";
+                        }
+
+                        Gtk.MenuButton _repeatEndDateCalendarButton {
+                          valign: center;
+                          direction: none;
+                          tooltip-text: _("Repeat End Date");
+                          popover: Gtk.Popover {
+                            Gtk.Box {
+                              orientation: vertical;
+                              spacing: 6;
+
+                              Gtk.Button _repeatEndDateClearButton {
+                                halign: center;
+
+                                child: Adw.ButtonContent {
+                                  icon-name: "larger-brush-symbolic";
+                                  label: _("Clear End Date");
+                                };
+                              }
+
+                              Gtk.Calendar _repeatEndDateCalendar {
+                                name: "calendarTransactions";
+                              }
+                            }
+                          };
+
+                          styles ["calendar-button"]
+                        }
+                      }
+                    }
+
+                    Adw.ComboRow _repeatIntervalRow {
+                      title: _("Repeat Interval");
+                      model: Gtk.StringList {
+                        strings [_("Never"), _("Daily"), _("Weekly"), _("Biweekly"), _("Monthly"), _("Quarterly"), _("Yearly"), _("Biyearly")]
+                      };
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    hexpand: true;
+
+                    Adw.ComboRow _groupRow {
+                      title: _("Group");
+                      title-lines: 1;
+                    }
+
+                    Adw.ActionRow {
+                      title: _("Color");
+
+                      [suffix]
+                      Gtk.ColorDialogButton _colorButton {
+                        valign: center;
+                        margin-start: 4;
+                        margin-end: 4;
+                      }
+
+                      [suffix]
+                      Gtk.DropDown _colorDropDown {
+                        valign: center;
+                        model: Gtk.StringList {
+                          strings [_("Use group color"), _("Use unique color")]
                         };
 
-                        styles ["calendar-button"]
+                        styles ["color-dropdown"]
                       }
                     }
                   }
 
-                  Adw.ComboRow _repeatIntervalRow {
-                    title: _("Repeat Interval");
-                    model: Gtk.StringList {
-                      strings [_("Never"), _("Daily"), _("Weekly"), _("Biweekly"), _("Monthly"), _("Quarterly"), _("Yearly"), _("Biyearly")]
-                    };
-                  }
-                }
+                  Adw.PreferencesGroup {
+                    hexpand: true;
 
-                Adw.PreferencesGroup {
-                  hexpand: true;
+                    Adw.ActionRow _extrasRow {
+                      title: _("Extras");
+                      subtitle: _("Manage extra fields of the transaction.");
 
-                  Adw.ComboRow _groupRow {
-                    title: _("Group");
-                    title-lines: 1;
-                  }
+                      [prefix]
+                      Gtk.Image {
+                        icon-name: "view-grid-symbolic";
+                      }
 
-                  Adw.ActionRow {
-                    title: _("Color");
+                      [suffix]
+                      Gtk.Image _imgExtras {
+                        icon-name: "go-next-symbolic";
+                        valign: center;
+                      }
 
-                    [suffix]
-                    Gtk.ColorDialogButton _colorButton {
-                      valign: center;
-                      margin-start: 4;
-                      margin-end: 4;
+                      activatable-widget: _imgExtras;
                     }
-
-                    [suffix]
-                    Gtk.DropDown _colorDropDown {
-                      valign: center;
-                      model: Gtk.StringList {
-                        strings [_("Use group color"), _("Use unique color")]
-                      };
-
-                      styles ["color-dropdown"]
-                    }
-                  }
-                }
-
-                Adw.PreferencesGroup {
-                  hexpand: true;
-
-                  Adw.ActionRow _extrasRow {
-                    title: _("Extras");
-                    subtitle: _("Manage extra fields of the transaction.");
-
-                    [prefix]
-                    Gtk.Image {
-                      icon-name: "view-grid-symbolic";
-                    }
-
-                    [suffix]
-                    Gtk.Image _imgExtras {
-                      icon-name: "go-next-symbolic";
-                      valign: center;
-                    }
-
-                    activatable-widget: _imgExtras;
                   }
                 }
               }
