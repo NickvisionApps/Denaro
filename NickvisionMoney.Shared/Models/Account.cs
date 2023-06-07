@@ -55,7 +55,7 @@ public class Account : IDisposable
     /// <summary>
     /// A list of transaction descriptions in the account
     /// </summary>
-    public List<string> Descriptions { get; init; }
+    public List<string> TransactionDescriptions { get; init; }
     /// <summary>
     /// The next available group id
     /// </summary>
@@ -91,7 +91,7 @@ public class Account : IDisposable
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
         Transactions = new Dictionary<uint, Transaction>();
-        Descriptions = new List<string>();
+        TransactionDescriptions = new List<string>();
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
         TodayIncome = 0;
@@ -519,9 +519,9 @@ public class Account : IDisposable
                 transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
             }
             Transactions.Add(transaction.Id, transaction);
-            if(!Descriptions.Contains(transaction.Description))
+            if(!TransactionDescriptions.Contains(transaction.Description))
             {
-                Descriptions.Add(transaction.Description);
+                TransactionDescriptions.Add(transaction.Description);
             }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
@@ -883,9 +883,9 @@ public class Account : IDisposable
         if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
         {
             Transactions.Add(transaction.Id, transaction);
-            if(!Descriptions.Contains(transaction.Description))
+            if(!TransactionDescriptions.Contains(transaction.Description))
             {
-                Descriptions.Add(transaction.Description);
+                TransactionDescriptions.Add(transaction.Description);
             }
             if (transaction.Id >= NextAvailableTransactionId)
             {
@@ -964,9 +964,9 @@ public class Account : IDisposable
             }
             Transactions[transaction.Id].Dispose();
             Transactions[transaction.Id] = transaction;
-            if(!Descriptions.Contains(transaction.Description))
+            if(!TransactionDescriptions.Contains(transaction.Description))
             {
-                Descriptions.Add(transaction.Description);
+                TransactionDescriptions.Add(transaction.Description);
             }
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
