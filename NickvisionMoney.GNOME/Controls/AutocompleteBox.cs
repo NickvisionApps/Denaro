@@ -13,7 +13,7 @@ public class AutocompleteBox<T> : Gtk.Box
     
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
     
-    public event EventHandler<(string, T)>? SuggestionClicked;
+    public event EventHandler<(string, T)>? SuggestionAccepted;
     
     /// <summary>
     /// Constructs an AutocompleteDialog
@@ -34,6 +34,11 @@ public class AutocompleteBox<T> : Gtk.Box
     }
     
     /// <summary>
+    /// Grabs focus for the box
+    /// </summary>
+    public new void GrabFocus() => _rows[0].GrabFocus();
+
+    /// <summary>
     /// Updates the list of suggestions
     /// </summary>
     /// <param name="suggestions">A list of suggestions and their subtext and models</param>
@@ -52,11 +57,29 @@ public class AutocompleteBox<T> : Gtk.Box
             row.SetActivatable(true);
             row.OnActivated += (sender, e) =>
             {
-                SuggestionClicked?.Invoke(this, (suggestion.Item1, suggestion.Item3));
+                SuggestionAccepted?.Invoke(this, (suggestion.Item1, suggestion.Item3));
                 SetVisible(false);
             };
+            var keyController = Gtk.EventControllerKey.New();
+            keyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+            keyController.OnKeyPressed += (sender, e) =>
+            {
+                if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+                {
+                    row.Activate();
+                    return true;
+                }
+                return false;
+            };
+            row.AddController(keyController);
             _rows.Add(row);
             _group.Add(row);
         }
     }
+
+    /// <summary>
+    /// Accepts a suggestion
+    /// </summary>
+    /// <param name="index">The index of the suggestion to accept</param>
+    public void AcceptSuggestion(int index) => _rows[index].Activate();
 }
