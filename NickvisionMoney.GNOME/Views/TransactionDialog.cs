@@ -240,6 +240,13 @@ public partial class TransactionDialog : Adw.Window
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) => { if (e.Keyval == 59) { return true; } return false; };
         _descriptionRow.AddController(_descriptionKeyController);
+        OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "default-width")
+            {
+                _autocompleteBox.SetSizeRequest(_descriptionRow.GetAllocatedWidth(), -1);
+            }
+        };
         //Amount
         _amountRow.OnNotify += (sender, e) =>
         {
@@ -338,7 +345,14 @@ public partial class TransactionDialog : Adw.Window
         _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
         {
-            Close();
+            if (_autocompleteBox.GetVisible())
+            {
+                _autocompleteBox.SetVisible((false));
+            }
+            else
+            {
+                Close();
+            }
             return true;
         })));
         AddController(_shortcutController);
