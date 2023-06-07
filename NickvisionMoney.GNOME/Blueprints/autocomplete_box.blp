@@ -1,0 +1,27 @@
+using Gtk 4.0;
+using Adw 1;
+
+Gtk.Box _root {
+  focusable: false;
+  can-focus: false;
+  orientation: vertical;
+  spacing: 12;
+  visible: false;
+
+  Gtk.Label {
+    margin-start: 12;
+    margin-top: 12;
+    halign: start;
+    label: _("Suggestions");
+
+    styles ["dim-label"]
+  }
+
+  Adw.PreferencesGroup _group {
+    margin-start: 12;
+    margin-end: 12;
+    margin-bottom: 12;
+  }
+
+  styles ["card", "view"]
+}

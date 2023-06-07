@@ -87,12 +87,11 @@ public partial class AccountView : Adw.Bin
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
 
-    private GAsyncReadyCallback _saveCallback { get; set; }
-    private GAsyncReadyCallback _openCallback { get; set; }
-
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
+    private GAsyncReadyCallback _saveCallback;
+    private GAsyncReadyCallback _openCallback;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;

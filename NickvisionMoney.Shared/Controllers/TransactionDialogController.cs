@@ -36,8 +36,9 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
-    private string _transactionDefaultColor;
-    private Dictionary<uint, Group> _groups;
+    private readonly string _transactionDefaultColor;
+    private readonly Dictionary<uint, Transaction> _transactions;
+    private readonly Dictionary<uint, Group> _groups;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -62,7 +63,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// The original repeat interval of a transaction
     /// </summary>
-    public TransactionRepeatInterval OriginalRepeatInterval { get; private set; }
+    public TransactionRepeatInterval OriginalRepeatInterval { get; init; }
     /// <summary>
     /// The CultureInfo to use when displaying a number string
     /// </summary>
@@ -80,20 +81,26 @@ public class TransactionDialogController : IDisposable
     /// Decimal Separator Inserting
     /// <summary>
     public InsertSeparator InsertSeparator => Models.Configuration.Current.InsertSeparator; // Full name is required to avoid error because of ambiguous reference (there's also SixLabors.ImageSharp.Configuration)
+    /// <summary>
+    /// The list of group names
+    /// </summary>
+    public List<string> GroupNames => _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).Select(x => x.Name).ToList();
 
     /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
+        _transactions = transactions;
         _groups = groups;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
@@ -113,14 +120,16 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
+        _transactions = transactions;
         _groups = groups;
         Transaction = new Transaction(id);
         CanCopy = false;
@@ -152,22 +161,6 @@ public class TransactionDialogController : IDisposable
     };
 
     /// <summary>
-    /// The list of group names
-    /// </summary>
-    public List<string> GroupNames
-    {
-        get
-        {
-            var names = new List<string>();
-            foreach (var group in _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name))
-            {
-                names.Add(group.Name);
-            }
-            return names;
-        }
-    }
-
-    /// <summary>
     /// Frees resources used by the TransactionDialogController object
     /// </summary>
     public void Dispose()
@@ -195,6 +188,26 @@ public class TransactionDialogController : IDisposable
             File.Delete(jpgPath);
         }
         _disposed = true;
+    }
+
+    /// <summary>
+    /// Gets a list of suggestions to finish a description
+    /// </summary>
+    /// <param name="description">The description to get suggestions for</param>
+    /// <returns>The list of suggestions and their subtext and transactions</returns>
+    public List<(string, string, Transaction)> GetDescriptionSuggestions(string description)
+    {
+        return _transactions
+            .Where(x => x.Value.Description.Contains(description, StringComparison.InvariantCulture))
+            .GroupBy(x => x.Value.Description)
+            .Select(x =>
+            {
+                var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
+                (string, string, Transaction) result = (first.Description, first.GroupId != -1 ? $"{_("Group")}: {_groups[(uint)first.GroupId].Name}" : "", first);
+                return result;
+            })
+            .OrderByDescending(x => x.Item1.StartsWith(description))
+            .Take(5).ToList();
     }
 
     /// <summary>
