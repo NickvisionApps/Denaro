@@ -254,11 +254,11 @@ public partial class TransactionDialog : Adw.Window
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) =>
         {
-            if (e.Keyval == 59)
+            if (e.Keyval == 59) //semicolon
             {
                 return true;
             }
-            if(e.Keyval == 65293 || e.Keyval == 65421)
+            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
             {
                 if(_autocompleteBox.GetVisible())
                 {
