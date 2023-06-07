@@ -1113,9 +1113,9 @@ public class AccountViewController : IDisposable
             }
             groupBalances[groupKey] += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : -1 * pair.Value.Amount;
         }
+        //Update UI
         if (_filteredIds.Count > 0)
         {
-            //Update UI
             foreach (var pair in TransactionRows)
             {
                 if (_filteredIds.Contains(pair.Value.Id))
@@ -1127,11 +1127,11 @@ public class AccountViewController : IDisposable
                     pair.Value.Hide();
                 }
             }
-            foreach(var pair in GroupRows)
-            {
-                var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key] : 0m);
-                GroupRows[pair.Key].UpdateRow(newGroup, GroupDefaultColor, CultureForNumberString, _filters[pair.Key == 0 ? -1 : (int)pair.Key]);
-            }
+        }
+        foreach(var pair in GroupRows)
+        {
+            var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key] : 0m);
+            GroupRows[pair.Key].UpdateRow(newGroup, GroupDefaultColor, CultureForNumberString, _filters[pair.Key == 0 ? -1 : (int)pair.Key]);
         }
         AccountTransactionsChanged?.Invoke(this, EventArgs.Empty);
     }
