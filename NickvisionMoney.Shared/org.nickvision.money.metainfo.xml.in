@@ -47,13 +47,14 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.6.0-beta1" date="2023-06-05">
+    <release version="2023.6.0-beta2" date="2023-06-07">
       <description translatable="no">
         <p>- Added a new account setup dialog to make it easier to configure new accounts</p>
         <p>- Added the ability to remove recent accounts from the list</p>
         <p>- Denaro will now suggest autocompletions for transaction descriptions</p>
         <p>- Moved deleting groups and transactions from their rows to their dialogs</p>
         <p>- Changed the default sorting order of new accounts to last to first by date</p>
+        <p>- Amounts shown in the sidebar will now reflect that of the transactions shown in view</p>
         <p>- Fixed an issue importing CSV files</p>
         <p>- Improved UI/UX</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
