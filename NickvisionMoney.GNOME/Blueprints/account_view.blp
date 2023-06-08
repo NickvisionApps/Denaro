@@ -55,7 +55,6 @@ Adw.Bin _root {
           title: _("Today's Overview");
           header-suffix: Gtk.Box {
             orientation: horizontal;
-            spacing: 6;
             
             Gtk.MenuButton {
               menu-model: actionsMenu;
@@ -69,8 +68,8 @@ Adw.Bin _root {
             }
             
             Gtk.Button _resetOverviewFilterButton {
-              icon-name: "larger-brush-symbolic";
-              tooltip-text: _("Reset Overview Filters");
+              icon-name: "edit-select-all-symbolic";
+              tooltip-text: _("Select All Overview Filters");
               
               styles ["flat"]
             }
@@ -89,6 +88,7 @@ Adw.Bin _root {
           
           Adw.ActionRow {
             title: _("Income");
+            activatable-widget: _incomeCheck;
             
             [prefix]
             Gtk.CheckButton _incomeCheck {
@@ -101,6 +101,7 @@ Adw.Bin _root {
             [suffix]
             Gtk.Label _incomeLabel {
               valign: center;
+              visible: bind _incomeCheck.active;
               
               styles ["denaro-income"]
             }
@@ -108,6 +109,7 @@ Adw.Bin _root {
           
           Adw.ActionRow {
             title: _("Expense");
+            activatable-widget: _expenseCheck;
             
             [prefix]
             Gtk.CheckButton _expenseCheck {
@@ -120,6 +122,7 @@ Adw.Bin _root {
             [suffix]
             Gtk.Label _expenseLabel {
               valign: center;
+              visible: bind _expenseCheck.active;
               
               styles ["denaro-expense"]
             }
@@ -129,17 +132,6 @@ Adw.Bin _root {
         Adw.PreferencesGroup {
           title: _("Groups");
           header-suffix: Gtk.Box {
-            Gtk.Button _toggleGroupsButton {
-              tooltip-text: _("Toggle Groups Visibility");
-              
-              Adw.ButtonContent _toggleGroupsButtonContent {
-                icon-name: "view-conceal-symbolic";
-                label: _("Hide");
-              }
-              
-              styles ["flat"]
-            }
-            
             Gtk.Button {
               tooltip-text: _("New Group (Ctrl+G)");
               action-name: "account.newGroup";
@@ -151,10 +143,24 @@ Adw.Bin _root {
             
               styles ["flat"]
             }
-            
+
+            Gtk.Button _toggleGroupsButton {
+              tooltip-text: _("Toggle Groups Visibility");
+              icon-name: "view-conceal-symbolic";
+
+              styles ["flat"]
+            }
+
             Gtk.Button _resetGroupsFilterButton {
-              icon-name: "larger-brush-symbolic";
-              tooltip-text: _("Reset Groups Filters");
+              icon-name: "edit-select-all-symbolic";
+              tooltip-text: _("Select All Groups Filters");
+
+              styles ["flat"]
+            }
+
+            Gtk.Button _unselectAllGroupsFilterButton {
+              icon-name: "edit-select-none-symbolic";
+              tooltip-text: _("Unselect Groups Filters");
             
               styles ["flat"]
             }
@@ -170,8 +176,12 @@ Adw.Bin _root {
         Adw.PreferencesGroup {
           title: _("Calendar");
           header-suffix: Gtk.Button _resetCalendarFilterButton {
-            icon-name: "larger-brush-symbolic";
-            tooltip-text: _("Reset Dates Filters");
+            tooltip-text: _("Reset To Today");
+
+            Adw.ButtonContent {
+              icon-name: "today-symbolic";
+              label: _("Today");
+            }
             
             styles ["flat"]
           };
