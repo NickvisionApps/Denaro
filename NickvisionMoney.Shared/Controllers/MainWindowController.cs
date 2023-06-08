@@ -19,6 +19,11 @@ public class MainWindowController : IDisposable
     private List<AccountViewController> _openAccounts;
 
     /// <summary>
+    /// A function for getting a password for an account
+    /// </summary>
+    public Func<string, Task<string?>>? AccountLoginAsync { get; set; }
+
+    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => AppInfo.Current;
@@ -38,10 +43,6 @@ public class MainWindowController : IDisposable
     /// The number of open accounts
     /// </summary>
     public int NumberOfOpenAccounts => _openAccounts.Count;
-    /// <summary>
-    /// A function for getting a password for an account
-    /// </summary>
-    public Func<string, Task<string?>>? AccountLoginAsync;
 
     /// <summary>
     /// Occurs when a notification is sent
