@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 17:47-0400\n"
-"PO-Revision-Date: 2023-06-07 16:54+0000\n"
+"PO-Revision-Date: 2023-06-08 09:34+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -863,10 +863,8 @@ msgid "Actions"
 msgstr "Akce"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:72
-#, fuzzy
-#| msgid "Reset Overview Filters"
 msgid "Select All Overview Filters"
-msgstr "Obnovit filtry přehledu"
+msgstr "Vybrat všechny filtry přehledu"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:136
 msgid "New Group (Ctrl+G)"
@@ -882,16 +880,12 @@ msgid "Toggle Groups Visibility"
 msgstr "Přepnout viditelnost skupin"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Select All Groups Filters"
-msgstr "Obnovit filtry skupin"
+msgstr "Vybrat všechny filtry skupin"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:163
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Unselect Groups Filters"
-msgstr "Obnovit filtry skupin"
+msgstr "Zrušit výběr filtrů skupin"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 msgid "Calendar"
@@ -899,11 +893,11 @@ msgstr "Kalendář"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:179
 msgid "Reset To Today"
-msgstr ""
+msgstr "Obnovit na dnešek"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:198
 msgid "Select Range"
