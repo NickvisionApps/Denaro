@@ -238,6 +238,13 @@ private void FinishPublishLinux(string outDir, string prefix, string libDir, boo
         Arguments = $"--xml --template={metainfoDir}/{appId}.metainfo.xml.in -o {metainfoDir}/{appId}.metainfo.xml -d ./{projectName}.Shared/Resources/po/"
     });
     DeleteFile($"{metainfoDir}/{appId}.metainfo.xml.in");
+
+    if (FileExists($"{projectName}.Shared/{appId}.extension.xml"))
+    {
+        var mimeDir = $"{shareDir}/mime/packages";
+        CreateDirectory(mimeDir);
+        CopyFileToDirectory($"{projectName}.Shared/{appId}.extension.xml", mimeDir);
+    }
 }
 
 private void PostPublishGNOME(string outDir, string prefix, string libDir)
@@ -255,6 +262,16 @@ private void PostPublishGNOME(string outDir, string prefix, string libDir)
         ReplaceTextInFiles($"{servicesDir}{sep}{appId}.service.in", "@PREFIX@", $"{prefix}");
         MoveFile($"{servicesDir}{sep}{appId}.service.in", $"{servicesDir}{sep}{appId}.service");
         FileAppendLines($"{shareDir}{sep}applications{sep}{appId}.desktop" , new string[] { "DBusActivatable=true" });
+    }
+
+    if (DirectoryExists($"{projectName}.Shared{sep}Docs"))
+    {
+        var docsDir = $"{shareDir}{sep}help";
+        foreach (var lang in FileReadLines($"{projectName}.Shared{sep}Docs{sep}po{sep}LINGUAS"))
+        {
+            CreateDirectory($"{docsDir}{sep}{lang}{sep}{shortName}");
+            CopyDirectory($"{projectName}.Shared{sep}Docs{sep}yelp{sep}{lang}", $"{docsDir}{sep}{lang}{sep}{shortName}");
+        }
     }
 }
 
