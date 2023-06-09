@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 17:47-0400\n"
-"PO-Revision-Date: 2023-06-06 18:53+0000\n"
+"PO-Revision-Date: 2023-06-09 10:50+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "app/de/>\n"
@@ -876,10 +876,8 @@ msgid "Actions"
 msgstr "Aktionen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:72
-#, fuzzy
-#| msgid "Reset Overview Filters"
 msgid "Select All Overview Filters"
-msgstr "Übersichts-Filter Zurücksetzen"
+msgstr "Alle Übersichtsfilter auswählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:136
 msgid "New Group (Ctrl+G)"
@@ -895,16 +893,12 @@ msgid "Toggle Groups Visibility"
 msgstr "Gruppen-Sichtbarkeit Umschalten"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Select All Groups Filters"
-msgstr "Gruppen-Filter Zurücksetzen"
+msgstr "Alle Gruppenfilter auswählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:163
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Unselect Groups Filters"
-msgstr "Gruppen-Filter Zurücksetzen"
+msgstr "Gruppenfilter abwählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 msgid "Calendar"
@@ -912,11 +906,11 @@ msgstr "Kalender"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:179
 msgid "Reset To Today"
-msgstr ""
+msgstr "Für heute zurücksetzen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:198
 msgid "Select Range"
@@ -951,7 +945,7 @@ msgstr "Neu"
 
 #: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:13
 msgid "Suggestions"
-msgstr ""
+msgstr "Vorschläge"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -983,11 +977,8 @@ msgid "Use this wizard to get the most out of your account"
 msgstr "Nutzen Sie diesen Assistenten, um Ihr Konto optimal zu nutzen"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
-#, fuzzy
-#| msgctxt "DateRange"
-#| msgid "Start"
 msgid "Let's Start"
-msgstr "Beginn"
+msgstr "Los geht's"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:76
 msgid "Storage Location"
