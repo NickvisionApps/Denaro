@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-04-27 01:43+0000\n"
+"PO-Revision-Date: 2023-06-11 05:58+0000\n"
 "Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/de/>\n"
@@ -691,7 +691,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr ""
+msgstr "Überweisung"
 
 #. (itstool) path: page/p
 #: yelp/C/transaction.page:21
@@ -701,7 +701,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
@@ -760,7 +760,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "Wiederholungs-Intervall"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -780,7 +780,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "Wiederholungs-Ende"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
