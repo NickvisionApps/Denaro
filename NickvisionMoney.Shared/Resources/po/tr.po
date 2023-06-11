@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 17:47-0400\n"
-"PO-Revision-Date: 2023-05-29 20:53+0000\n"
+"PO-Revision-Date: 2023-06-11 05:58+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/tr/>\n"
@@ -207,8 +207,6 @@ msgid "Decimal Separator (Invalid)"
 msgstr "Ondalık Ayırıcı (Geçersiz)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
-#, fuzzy
-#| msgid "DeleteExisting"
 msgid "Delete Existing"
 msgstr "Mevcut Olanı Sil"
 
@@ -532,10 +530,8 @@ msgstr "Yedekleme Klasörü Seç"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:230
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
-#, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select Folder"
-msgstr "Yedekleme Klasörü Seç"
+msgstr "Klasör Seç"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:266
 msgid "Sort By Amount"
@@ -586,13 +582,6 @@ msgid "This account is already opened."
 msgstr "Bu hesap zaten açıldı."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
-#, fuzzy
-#| msgid ""
-#| "This transaction is a source repeat transaction.\n"
-#| "What would you like to do with the repeat transactions?\n"
-#| "\n"
-#| "Deleting only the source transaction will allow individual\n"
-#| "generated transactions to be modifiable."
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -603,8 +592,8 @@ msgstr ""
 "Bu işlem bir kaynak tekrarlama işlemidir.\n"
 "Tekrarlanan işlemlerle ne yapmak istersiniz?\n"
 "\n"
-"Yalnızca kaynak işlemin silinmesi, \n"
-"bireysel olarak oluşturulan işlemlerin düzenlenmesine izin verecektir."
+"Yalnızca kaynak işlemin silinmesi, bireysel olarak oluşturulan işlemlerin "
+"düzenlenebilir olmasını sağlayacaktır."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
 msgid ""
@@ -872,10 +861,8 @@ msgid "Actions"
 msgstr "Eylemler"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:72
-#, fuzzy
-#| msgid "Reset Overview Filters"
 msgid "Select All Overview Filters"
-msgstr "Genel Görünüm Süzgeçlerini Sıfırla"
+msgstr "Tüm Genel Görünüm Süzgeçlerini Seç"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:136
 msgid "New Group (Ctrl+G)"
@@ -891,16 +878,12 @@ msgid "Toggle Groups Visibility"
 msgstr "Grupların Görünürlüğünü Değiştir"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Select All Groups Filters"
-msgstr "Grup Süzgeçlerini Sıfırla"
+msgstr "Tüm Grup Süzgeçlerini Seç"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:163
-#, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Unselect Groups Filters"
-msgstr "Grup Süzgeçlerini Sıfırla"
+msgstr "Tüm Grup Süzgeçlerinin Seçimini Kaldır"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 msgid "Calendar"
@@ -908,11 +891,11 @@ msgstr "Takvim"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:179
 msgid "Reset To Today"
-msgstr ""
+msgstr "Bugüne Sıfırla"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Today"
-msgstr ""
+msgstr "Bugün"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:198
 msgid "Select Range"
@@ -947,7 +930,7 @@ msgstr "Yeni"
 
 #: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:13
 msgid "Suggestions"
-msgstr ""
+msgstr "Öneriler"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -976,44 +959,35 @@ msgstr "Yeni Hesap"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:52
 msgid "Use this wizard to get the most out of your account"
-msgstr ""
+msgstr "Hesabınızdan en iyi şekilde yararlanmak için bu sihirbazı kullanın"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
-#, fuzzy
-#| msgctxt "DateRange"
-#| msgid "Start"
 msgid "Let's Start"
-msgstr "Başlangıç"
+msgstr "Hadi Başlayalım"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:76
 msgid "Storage Location"
-msgstr ""
+msgstr "Depolama Konumu"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-#, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
-msgstr "Hesap Türü"
+msgstr "Hesap Adı"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
-#, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
-msgstr "Hedef Hesap Parolası (Geçersiz)"
+msgstr "Hesap Parolası (İsteğe bağlı)"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
 msgid "Folder"
-msgstr ""
+msgstr "Klasör"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:112
 msgid "Save"
 msgstr "Kaydet"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:129
-#, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
-msgstr "Hesap Ayarları"
+msgstr "Hesap Seçenekleri"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "This is only a useful label that doesn't affect how the app works."
@@ -1022,17 +996,15 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:171
 msgid "Next"
-msgstr ""
+msgstr "Sonraki"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:188
-#, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
-msgstr "Hesap Menüsü"
+msgstr "Hesap Para Birimi"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
 msgid "Create"
-msgstr ""
+msgstr "Oluştur"
 
 #: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:32
 msgid "Enter Password To Login:"
