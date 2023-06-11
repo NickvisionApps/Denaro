@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-06 18:53+0000\n"
+"PO-Revision-Date: 2023-06-11 05:58+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/ar/>\n"
@@ -320,7 +320,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "اللون المبدئيُّ للمعاملات"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30

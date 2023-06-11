@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 17:47-0400\n"
-"PO-Revision-Date: 2023-06-09 10:50+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2023-06-11 05:58+0000\n"
+"Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "app/de/>\n"
 "Language: de\n"
@@ -208,7 +208,6 @@ msgid "Decimal Separator (Invalid)"
 msgstr "Dezimaltrennzeichen (ungültig)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
-#, fuzzy
 msgid "Delete Existing"
 msgstr "Bestehende Löschen"
 
@@ -585,13 +584,6 @@ msgid "This account is already opened."
 msgstr "Dieses Konto ist schon geöffnet."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
-#, fuzzy
-#| msgid ""
-#| "This transaction is a source repeat transaction.\n"
-#| "What would you like to do with the repeat transactions?\n"
-#| "\n"
-#| "Deleting only the source transaction will allow individual\n"
-#| "generated transactions to be modifiable."
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -602,8 +594,8 @@ msgstr ""
 "Diese Überweisung ist eine wiederholte Überweisung.\n"
 "Was möchtest du mit wiederholten Überweisungen machen?\n"
 "\n"
-"Nur die Ursprungs-Überweisung zu löschen macht es möglich\n"
-"die generierten Überweisungen zu modifizieren."
+"Nur die Ursprungs-Überweisung zu löschen macht es möglich&#xA;die "
+"generierten Überweisungen zu modifizieren."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
 msgid ""
@@ -651,7 +643,7 @@ msgstr "Zu {0} Überweisen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:557
 msgid "translator-credits"
-msgstr ""
+msgstr "Jummit"
 
 #: ../../../Models/Account.cs:1689
 msgid "Type"

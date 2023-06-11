@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-05-29 20:53+0000\n"
+"PO-Revision-Date: 2023-06-11 05:58+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/tr/>\n"
@@ -319,7 +319,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "Öntanımlı İşlem Rengi"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -721,7 +721,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
