@@ -10,10 +10,9 @@ architectures:
   - build-on: arm64
   - build-on: armhf
 layout:
-  /usr/lib/org.nickvision.money:
-    symlink: $SNAP/usr/lib/org.nickvision.money
-  /usr/share/org.nickvision.money:
-    symlink: $SNAP/usr/share/org.nickvision.money
+  /usr/share/help:
+    symlink: $SNAP/usr/share/help
+
 parts:
   denaro:
     # See 'snapcraft plugins'
@@ -28,13 +27,19 @@ parts:
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
       chmod +x ./dotnet-install.sh
       ./dotnet-install.sh --channel 7.0
+      patch -p1 < $CRAFT_PROJECT_DIR/snap/denaro.patch
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
       cd $CRAFT_PART_SRC
       dotnet tool restore
-      dotnet cake --target=Publish --prefix=/usr --ui=gnome --self-contained
+      dotnet cake --target=Publish --prefix=/snap/denaro/current/usr --ui=gnome --self-contained
       dotnet cake --target=Install --destdir=$CRAFT_PART_INSTALL
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui
+      cp -r $CRAFT_PART_INSTALL/snap/denaro/current/usr/share/icons $CRAFT_PART_INSTALL/meta/gui/
+      for i in `find $CRAFT_PART_INSTALL/meta/gui/icons -name "*.svg" -o -name "*.png"`; do
+        mv $i "`dirname $i`/snap.$CRAFT_PROJECT_NAME.`basename $i`"
+      done
     parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
 apps:
   denaro:
@@ -43,4 +48,3 @@ apps:
     common-id: org.nickvision.money
     plugs:
       - home
-      - removable-media
