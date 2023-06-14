@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-04-22 04:15+0000\n"
+"PO-Revision-Date: 2023-06-14 01:22+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/fr/>\n"
@@ -501,7 +501,6 @@ msgstr "Utiliser des chiffres natifs"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
-#, fuzzy
 msgid ""
 "Whether to use numerals that are native for your locale instead of latin "
 "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
