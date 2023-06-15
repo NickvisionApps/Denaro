@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-11 05:58+0000\n"
-"Last-Translator: Jummit <jummit@web.de>\n"
+"PO-Revision-Date: 2023-06-15 18:28+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/de/>\n"
 "Language: de\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 4.18.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -109,7 +109,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "Standard-Transaktionsart"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:38
@@ -117,6 +117,8 @@ msgid ""
 "When you create a new transaction its type by default will be the same as in "
 "this setting."
 msgstr ""
+"Wenn Sie eine neue Transaktion erstellen, ist ihr Typ standardmäßig derselbe "
+"wie in dieser Einstellung."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
