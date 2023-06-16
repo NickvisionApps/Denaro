@@ -48,7 +48,7 @@
 	</item>
 	<item>
 		<title>Utiliser des chiffres natifs</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
+		<p>Indique s’il faut utiliser des chiffres natifs de votre langue à la place de chiffres latins. Par exemple, si ce paramètre est activé <em>٠١٢</em> sera utilisé à la place de <em>012</em> pour les langues locales utilisant des chiffres de l’arabe oriental.</p>
 	</item>
 	<item>
 		<title>Insérer un séparateur de décimales</title>
