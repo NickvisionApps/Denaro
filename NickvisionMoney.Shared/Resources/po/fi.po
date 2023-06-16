@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-07 17:47-0400\n"
+"POT-Creation-Date: 2023-06-15 22:10-0400\n"
 "PO-Revision-Date: 2023-05-30 19:56+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -31,8 +31,8 @@ msgstr "(Kopio)"
 msgid "{0} from {1}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:580
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1320
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:593
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1333
 #, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
@@ -59,16 +59,16 @@ msgstr "Tilin tyyppi"
 msgid "Add"
 msgstr "Lisää"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:601
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:614
 msgid "Add a new transaction or import transactions from a file."
 msgstr "Lisää uusi tapahtuma tai tuo tapahtumat tiedostosta."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:751
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:764
 msgid "Add Password To PDF?"
 msgstr "Lisätäänkö salasana PDF:ään?"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:677
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:642
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
@@ -91,7 +91,7 @@ msgstr "Määrä (virheellinen)"
 msgid "Apply"
 msgstr "Toteuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1115
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
@@ -99,7 +99,7 @@ msgstr ""
 "Haluatko varmasti poistaa tämän ryhmän?\n"
 "Tätä toimintoa ei voi perua."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1028
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -117,9 +117,9 @@ msgstr "Yritys"
 msgid "Can't access the selected folder, check Flatpak permissions."
 msgstr "Ei pääsyä valittuun kansioon, tarkista Flatpak-oikeudet."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:899
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid "Cancel"
 msgstr "Peru"
 
@@ -140,36 +140,36 @@ msgstr "Siirto"
 msgid "Currency"
 msgstr "Valuutta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:342
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:291
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:342
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:218
 msgid "Currency Code"
 msgstr "Valuuttakoodi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:376
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:315
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:376
 msgid "Currency Code (Empty)"
 msgstr "Valuuttakoodi (tyhjä)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:340
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:340
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:164
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:207
 msgid "Currency Symbol"
 msgstr "Valuutan symboli"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:364
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:364
 msgid "Currency Symbol (Empty)"
 msgstr "Valuutan symboli (tyhjä)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:370
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:396
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:404
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:310
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:332
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:339
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:370
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:396
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:404
 msgid "Currency Symbol (Invalid)"
 msgstr "Valuutan symboli (virheellinen)"
 
@@ -187,45 +187,45 @@ msgstr ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:344
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:293
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:344
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:186
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:229
 msgid "Decimal Separator"
 msgstr "Desimaalierotin"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:320
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
 msgid "Decimal Separator (Empty)"
 msgstr "Desimaalierotin (tyhjä)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:334
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
 msgid "Decimal Separator (Invalid)"
 msgstr "Desimaalierotin (virheellinen)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:899
 #, fuzzy
 msgid "Delete Existing"
 msgstr "Poista tapahtuma"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1115
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid "Delete Group"
 msgstr "Poista ryhmä"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 #, fuzzy
 msgid "Delete Only Source"
 msgstr "Poista ryhmä"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid "Delete Source and Generated"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1028
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
 msgid "Delete Transaction"
 msgstr "Poista tapahtuma"
 
@@ -268,7 +268,7 @@ msgstr "Kohdetilin salasana (virheellinen)"
 msgid "Destination Account Password (Required)"
 msgstr "Kohdetilin salasana (pakollinen)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:899
 msgid "Disassociate Existing"
 msgstr ""
 
@@ -281,8 +281,8 @@ msgstr ""
 msgid "Expense"
 msgstr "Meno"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:706
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:736
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:719
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:749
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
 msgid "Export to File"
 msgstr "Vie tiedostoon"
@@ -297,15 +297,15 @@ msgstr "Tili viety tiedostoon onnistuneesti."
 msgid "Generated: {0}"
 msgstr "Luotu: {0}"
 
-#: ../../../Controllers/MainWindowController.cs:97
+#: ../../../Controllers/MainWindowController.cs:98
 msgid "Good Afternoon!"
 msgstr "Hyvää iltapäivää!"
 
-#: ../../../Controllers/MainWindowController.cs:99
+#: ../../../Controllers/MainWindowController.cs:100
 msgid "Good Day!"
 msgstr "Hyvää päivää!"
 
-#: ../../../Controllers/MainWindowController.cs:98
+#: ../../../Controllers/MainWindowController.cs:99
 msgid "Good Evening!"
 msgstr "Hyvää iltaa!"
 
@@ -320,17 +320,17 @@ msgstr "Ryhmä"
 msgid "Group Name"
 msgstr "Ryhmän nimi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:346
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:295
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:346
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:247
 msgid "Group Separator"
 msgstr "Ryhmäerotin"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:341
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
 msgid "Group Separator (Invalid)"
 msgstr "Ryhmäerotin (virheellinen)"
 
@@ -381,16 +381,16 @@ msgstr "Matrix-keskustelu"
 msgid "N/A"
 msgstr "-"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:337
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:174
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:337
 #: ../../../Models/Account.cs:1657
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:54
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:32
 msgid "Name"
 msgstr "Nimi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:358
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:184
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:358
 msgid "Name (Empty)"
 msgstr "Nimi (tyhjä)"
 
@@ -423,15 +423,15 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:427
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:427
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision Denaro -tili"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:751
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1028
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1115
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:764
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid "No"
 msgstr "Ei"
 
@@ -441,15 +441,15 @@ msgstr "Ei"
 msgid "No End Date"
 msgstr "Ei loppupäivää"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:600
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:613
 msgid "No Transactions"
 msgstr "Ei tapahtumia"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:590
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:603
 msgid "No Transactions Found"
 msgstr "Tapahtumia ei löytynyt"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:591
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:604
 msgid "No transactions match the specified filters."
 msgstr "Suodattimia vastaavia tapahtumia ei löydy."
 
@@ -463,9 +463,9 @@ msgid "Open"
 msgstr "Avaa"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:662
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
-#: NickvisionMoney.GNOME/Blueprints/window.blp:195
+#: NickvisionMoney.GNOME/Blueprints/window.blp:197
 msgid "Open Account"
 msgstr "Avaa tili"
 
@@ -477,7 +477,7 @@ msgstr "Yleisnäkymä"
 msgid "Page {0}"
 msgstr "Sivu {0}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:758
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:771
 msgid "PDF Password"
 msgstr "PDF-salasana"
 
@@ -510,7 +510,7 @@ msgstr "Toistumisen loppupäivä (virheellinen)"
 msgid "Repeat Interval"
 msgstr "Toistumisväli"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:899
 #, fuzzy
 msgid "Repeat Interval Changed"
 msgstr "Toistumisväli"
@@ -538,15 +538,15 @@ msgstr "Valitse varmuuskopiokansio"
 msgid "Select Folder"
 msgstr "Valitse varmuuskopiokansio"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:266
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:280
 msgid "Sort By Amount"
 msgstr "Järjestä summan mukaan"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:266
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:280
 msgid "Sort By Date"
 msgstr "Järjestä päivän mukaan"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:266
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:280
 msgid "Sort By Id"
 msgstr "Järjestä tunnisteen mukaan"
 
@@ -566,7 +566,7 @@ msgstr "Salasana poistetaan, kun tämä ikkuna suljetaan."
 msgid "The passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:886
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:899
 msgid ""
 "The repeat interval was changed.\n"
 "What would you like to do with existing generated transactions?\n"
@@ -574,15 +574,15 @@ msgid ""
 "New repeat transactions will be generated based off the new interval."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:630
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:643
 msgid "This account has no money available to transfer."
 msgstr "Tällä tilillä ei ole riittävästi rahaa siirtoa varten."
 
-#: ../../../Controllers/MainWindowController.cs:280
+#: ../../../Controllers/MainWindowController.cs:281
 msgid "This account is already opened."
 msgstr "Tämä tili on jo avattu."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:992
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -591,7 +591,7 @@ msgid ""
 "transactions to be modifiable."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -653,12 +653,12 @@ msgstr ""
 msgid "Unable to import information from the file. Unsupported file type."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:262
+#: ../../../Controllers/MainWindowController.cs:263
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen."
 
-#: ../../../Controllers/MainWindowController.cs:219
-#: ../../../Controllers/MainWindowController.cs:269
+#: ../../../Controllers/MainWindowController.cs:220
+#: ../../../Controllers/MainWindowController.cs:270
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -678,20 +678,20 @@ msgstr "Tiliä ei voitu viedä tiedostoon."
 msgid "Ungrouped"
 msgstr "Ryhmittämätön"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:208
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:168
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:208
 msgid "Unlimited"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid "Update Only Source"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid "Update Source and Generated"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:936
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid "Update Transaction"
 msgstr "Päivitä tapahtuma"
 
@@ -707,7 +707,7 @@ msgstr "Lähetä"
 msgid "View"
 msgstr "Näytä"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:751
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:764
 msgid ""
 "Would you like to password-protect the PDF file?\n"
 "\n"
@@ -717,41 +717,41 @@ msgstr ""
 "\n"
 "Jos salasana katoaa, PDF-tiedosto ei ole käytettävissä."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:751
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1028
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1115
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:764
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid "Yes"
 msgstr "Kyllä"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:105
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:186
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:105
 msgid "Your system reported that your currency is"
 msgstr "Järjestelmä ilmoitti, että käyttämäsi valuutta on"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:148
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:118
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:148
 msgctxt "DecimalSeparator"
 msgid "Other"
 msgstr "Muu"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:143
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
 msgctxt "GroupSeparator"
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:143
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
 msgctxt "GroupSeparator"
 msgid "Other"
 msgstr "Muu"
 
-#: ../../../Controllers/MainWindowController.cs:96
+#: ../../../Controllers/MainWindowController.cs:97
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Hyvää huomenta!"
 
-#: ../../../Controllers/MainWindowController.cs:95
+#: ../../../Controllers/MainWindowController.cs:96
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Hyvää huomenta!"
@@ -945,7 +945,7 @@ msgstr "Muokkaa ryhmää"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:51
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionMoney.GNOME/Blueprints/window.blp:183
+#: NickvisionMoney.GNOME/Blueprints/window.blp:185
 msgid "New Account"
 msgstr "Uusi tili"
 
@@ -1197,7 +1197,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:84
-#: NickvisionMoney.GNOME/Blueprints/window.blp:102
+#: NickvisionMoney.GNOME/Blueprints/window.blp:104
 msgid "Toggle Sidebar"
 msgstr "Näytä/piilota sivupalkki"
 
@@ -1286,7 +1286,7 @@ msgid "Select a destination account"
 msgstr "Valitse kohdetili"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:54
-#: NickvisionMoney.GNOME/Blueprints/window.blp:161
+#: NickvisionMoney.GNOME/Blueprints/window.blp:163
 msgid "Recent Accounts"
 msgstr "Viimeisimmät tilit"
 
@@ -1334,15 +1334,15 @@ msgstr "Avaa tili (Ctrl+O)"
 msgid "No Recent Accounts"
 msgstr "Ei viimeisimpiä tilejä"
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:111
+#: NickvisionMoney.GNOME/Blueprints/window.blp:113
 msgid "Main Menu"
 msgstr "Päävalikko"
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:118
+#: NickvisionMoney.GNOME/Blueprints/window.blp:120
 msgid "Dashboard"
 msgstr "Kojelauta"
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:152
+#: NickvisionMoney.GNOME/Blueprints/window.blp:154
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
@@ -1351,7 +1351,9 @@ msgstr ""
 "tiedostonhallinnasta tähän sovellukseen."
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
-msgid "money;finance;wallet;cash;bank;GTK;Nickvision;"
+#, fuzzy
+#| msgid "money;finance;wallet;cash;bank;GTK;Nickvision;"
+msgid "money;finance;wallet;cash;bank;Nickvision;"
 msgstr ""
 "money;finance;wallet;cash;bank;GTK;Nickvision;raha;lompakko;käteinen;pankki;"
 "varallisuus;"
