@@ -56,6 +56,7 @@
         <p>- Changed the default sorting order of new accounts to last to first by date</p>
         <p>- Amounts shown in the sidebar will now reflect that of the transactions shown in view</p>
         <p>- Fixed an issue importing CSV files</p>
+        <p>- Fixed an isssue causing Denaro to crash when working with a large number of transactions</p>
         <p>- Improved UI/UX</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>

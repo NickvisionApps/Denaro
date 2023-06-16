@@ -31,7 +31,7 @@
 		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
 	</item>
 	<item>
-		<title>Type</title>
+		<title>Tür</title>
 		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
 	</item>
 	<item>

@@ -5,7 +5,6 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
