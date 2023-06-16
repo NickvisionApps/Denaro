@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -19,6 +20,9 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class AccountView : Adw.Bin
 {
+    private delegate bool GSourceFunc(nint data);
+    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
@@ -31,65 +35,57 @@ public partial class AccountView : Adw.Bin
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_main_context_default();
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
-
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
-
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
-
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_new();
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
-
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
-
-    private delegate bool GSourceFunc(nint data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
 
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
+    private IGroupRowControl? _lastGroupRow;
+    private IModelRowControl<Transaction>? _lastTransactionRow;
     private readonly MainWindow _parentWindow;
+    private readonly Gtk.Adjustment _transactionsScrollAdjustment;
+    private readonly Gtk.ShortcutController _shortcutController;
+    private readonly Action<string> _updateSubtitle;
+    private readonly GSourceFunc _startSpinner;
+    private readonly GSourceFunc _stopSpinner;
+    private readonly GSourceFunc _createGroupRowFunc;
+    private readonly GSourceFunc _deleteGroupRowFunc;
+    private readonly GSourceFunc _createTransactionRowFunc;
+    private readonly GSourceFunc _moveTransactionRowFunc;
+    private readonly GSourceFunc _deleteTransactionRowFunc;
+    private readonly GSourceFunc _accountTransactionsChangedFunc;
     private GAsyncReadyCallback _saveCallback;
     private GAsyncReadyCallback _openCallback;
 
@@ -127,14 +123,6 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Spinner _spinner;
     [Gtk.Connect] private readonly Gtk.Overlay _mainOverlay;
 
-    private readonly Gtk.Adjustment _transactionsScrollAdjustment;
-    private readonly Gtk.ShortcutController _shortcutController;
-    private readonly Action<string> _updateSubtitle;
-    private readonly GSourceFunc _startSpinner;
-    private readonly GSourceFunc _stopSpinner;
-    private readonly GSourceFunc _accountTransactionsChangedCallback;
-    private GSourceFunc[] _rowCallbacks;
-
     /// <summary>
     /// The Page widget
     /// </summary>
@@ -147,7 +135,6 @@ public partial class AccountView : Adw.Bin
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
-        _rowCallbacks = new GSourceFunc[5];
         _startSpinner = (x) =>
         {
             _noTransactionsStatusPage.SetVisible(false);
@@ -167,13 +154,40 @@ public partial class AccountView : Adw.Bin
             return false;
         };
         //Register Controller Events
-        _accountTransactionsChangedCallback = OnAccountTransactionsChanged;
-        _controller.AccountTransactionsChanged += (sender, e) => g_main_context_invoke(IntPtr.Zero, _accountTransactionsChangedCallback, IntPtr.Zero);
-        _controller.UICreateGroupRow = CreateGroupRow;
-        _controller.UIDeleteGroupRow = DeleteGroupRow;
-        _controller.UICreateTransactionRow = CreateTransactionRow;
-        _controller.UIMoveTransactionRow = MoveTransactionRow;
-        _controller.UIDeleteTransactionRow = DeleteTransactionRow;
+        _createGroupRowFunc = CreateGroupRow;
+        _deleteGroupRowFunc = DeleteGroupRow;
+        _createTransactionRowFunc = CreateTransactionRow;
+        _moveTransactionRowFunc = MoveTransactionRow;
+        _deleteTransactionRowFunc = DeleteTransactionRow;
+        _accountTransactionsChangedFunc = (x) => OnAccountTransactionsChanged();
+        _controller.AccountTransactionsChanged += (sender, e) => g_main_context_invoke(IntPtr.Zero, _accountTransactionsChangedFunc, IntPtr.Zero);
+        _controller.UICreateGroupRow = (group, index) =>
+        {
+            g_main_context_invoke(IntPtr.Zero, _createGroupRowFunc, (IntPtr)GCHandle.Alloc((group, index)));
+            //Wait for _createGroupRowFunc to finish
+            while(_lastGroupRow == null)
+            {
+                Thread.Sleep(10);
+            }
+            var toReturn = _lastGroupRow;
+            _lastGroupRow = null;
+            return toReturn;
+        };
+        _controller.UIDeleteGroupRow =  (row) => g_main_context_invoke(IntPtr.Zero, _deleteGroupRowFunc, (IntPtr)GCHandle.Alloc(row));
+        _controller.UICreateTransactionRow =  (transaction, index) =>
+        {
+            g_main_context_invoke(IntPtr.Zero, _createTransactionRowFunc, (IntPtr)GCHandle.Alloc((transaction, index)));
+            //Wait for _createTransactionRowFunc to finish
+            while(_lastTransactionRow == null)
+            {
+                Thread.Sleep(10);
+            }
+            var toReturn = _lastTransactionRow;
+            _lastTransactionRow = null;
+            return toReturn;
+        };
+        _controller.UIMoveTransactionRow =  (row, index) => g_main_context_invoke(IntPtr.Zero, _moveTransactionRowFunc, (IntPtr)GCHandle.Alloc((row, index)));
+        _controller.UIDeleteTransactionRow = (row) => g_main_context_invoke(IntPtr.Zero, _deleteTransactionRowFunc, (IntPtr)GCHandle.Alloc(row));
         //Build UI
         builder.Connect(this);
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -360,33 +374,30 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
-    /// <param name="group">The Group model</param>
-    /// <param name="index">The optional index to insert</param>
-    /// <returns>The IGroupRowControl</returns>
-    private IGroupRowControl CreateGroupRow(Group group, int? index)
+    /// <param name="data">(Group, int?)</param>
+    private bool CreateGroupRow(IntPtr data)
     {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
-        row.EditTriggered += EditGroup;
-        row.FilterChanged += UpdateGroupFilter;
-        if (index != null)
+        var handle = GCHandle.FromIntPtr(data);
+        var target = ((Group, int?)?)handle.Target;
+        if(target != null)
         {
-            _rowCallbacks[0] = (x) =>
+            var e = target.Value;
+            var row = new GroupRow(e.Item1, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(e.Item1.Id == 0 ? -1 : (int)e.Item1.Id), _controller.GroupDefaultColor);
+            row.EditTriggered += EditGroup;
+            row.FilterChanged += UpdateGroupFilter;
+            if (e.Item2 != null)
             {
                 try
                 {
-                    _groupsList.Insert(row, index.Value);
+                    _groupsList.Insert(row, e.Item2.Value);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-                return false;
-            };
-        }
-        else
-        {
-            _rowCallbacks[0] = (x) =>
+            }
+            else
             {
                 try
                 {
@@ -397,53 +408,57 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-                return false;
-            };
+            }
+            _lastGroupRow = row;
         }
-        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[0], IntPtr.Zero);
-        return row;
+        handle.Free();
+        return false;
     }
 
     /// <summary>
     /// Removes a group row from the view
     /// </summary>
-    /// <param name="row">The IGroupRowControl</param>
-    private void DeleteGroupRow(IGroupRowControl row)
+    /// <param name="data">IGroupRowControl</param>
+    private bool DeleteGroupRow(IntPtr data)
     {
-        _rowCallbacks[1] = (x) =>
+        var handle = GCHandle.FromIntPtr(data);
+        var target = (IGroupRowControl?)handle.Target;
+        if(target != null)
         {
             try
             {
-                _groupsList.Remove((GroupRow)row);
+                _groupsList.Remove((GroupRow)target);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-            return false;
-        };
-        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[1], IntPtr.Zero);
+
+        }
+        handle.Free();
+        return false;
     }
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
     /// </summary>
-    /// <param name="transaction">The Transaction model</param>
-    /// <param name="index">The optional index to insert</param>
-    /// <returns>The IModelRowControl<Transaction></returns>
-    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
+    /// <param name="data">(Transaction, int?)</param>
+    private bool CreateTransactionRow(IntPtr data)
     {
-        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
-        row.EditTriggered += EditTransaction;
-        if (index != null)
+        var handle = GCHandle.FromIntPtr(data);
+        var target = ((Transaction, int?)?)handle.Target;
+        if(target != null)
         {
-            _rowCallbacks[2] = (x) =>
+            var e = target.Value;
+            var row = new TransactionRow(e.Item1, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+            row.EditTriggered += EditTransaction;
+            if (e.Item2 != null)
             {
                 try
                 {
                     row.IsSmall = _parentWindow.DefaultWidth < 450;
-                    _flowBox.Insert(row, index.Value);
+                    _flowBox.Insert(row, e.Item2.Value);
                     g_main_context_iteration(g_main_context_default(), false);
                 }
                 catch (Exception ex)
@@ -451,13 +466,8 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-                return false;
-            };
-
-        }
-        else
-        {
-            _rowCallbacks[2] = (x) =>
+            }
+            else
             {
                 try
                 {
@@ -470,34 +480,36 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.StackTrace);
                 }
-                return false;
-            };
+            }
+            _lastTransactionRow = row;
         }
-        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[2], IntPtr.Zero);
-        return row;
+        handle.Free();
+        return false;
     }
 
     /// <summary>
     /// Moves a row in the list
     /// </summary>
-    /// <param name="row">The row to move</param>
-    /// <param name="index">The new position</param>
-    private void MoveTransactionRow(IModelRowControl<Transaction> row, int index)
+    /// <param name="data">(IModelRowControl<Transaction>, int)</param>
+    private bool MoveTransactionRow(IntPtr data)
     {
-        _rowCallbacks[3] = (x) =>
+        var handle = GCHandle.FromIntPtr(data);
+        var target = ((IModelRowControl<Transaction>, int)?)handle.Target;
+        if(target != null)
         {
+            var e = target.Value;
             try
             {
-                _flowBox.Remove((TransactionRow)row);
-                _flowBox.Insert((TransactionRow)row, index);
+                _flowBox.Remove((TransactionRow)e.Item1);
+                _flowBox.Insert((TransactionRow)e.Item1, e.Item2);
                 g_main_context_iteration(g_main_context_default(), false);
-                if (((TransactionRow)row).IsVisible())
+                if (((TransactionRow)e.Item1).IsVisible())
                 {
-                    row.Show();
+                    e.Item1.Show();
                 }
                 else
                 {
-                    row.Hide();
+                    e.Item1.Hide();
                 }
             }
 
@@ -506,31 +518,33 @@ public partial class AccountView : Adw.Bin
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-            return false;
-        };
-        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[3], IntPtr.Zero);
+        }
+        handle.Free();
+        return false;
     }
 
     /// <summary>
     /// Removes a transaction row from the view
     /// </summary>
-    /// <param name="row">The IModelRowControl<Transaction></param>
-    private void DeleteTransactionRow(IModelRowControl<Transaction> row)
+    /// <param name="data">IModelRowControl<Transaction></param>
+    private bool DeleteTransactionRow(IntPtr data)
     {
-        _rowCallbacks[4] = (x) =>
+        var handle = GCHandle.FromIntPtr(data);
+        var target = (IModelRowControl<Transaction>?)handle.Target;
+        if(target != null)
         {
             try
             {
-                _flowBox.Remove((TransactionRow)row);
+                _flowBox.Remove((TransactionRow)target);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-            return false;
-        };
-        g_main_context_invoke(IntPtr.Zero, _rowCallbacks[4], IntPtr.Zero);
+        }
+        handle.Free();
+        return false;
     }
 
     /// <summary>
@@ -560,9 +574,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the account's transactions are changed 
     /// </summary>
-    /// <param name="data">Pointer to data passed from g_main_context_invoke</param>
     /// <returns>True to repeat, false otherwise</returns>
-    private bool OnAccountTransactionsChanged(nint data)
+    private bool OnAccountTransactionsChanged()
     {
         if (!_isAccountLoading)
         {
