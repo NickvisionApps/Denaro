@@ -171,6 +171,9 @@ Adw.Window _root {
 
                 Adw.ComboRow _customDecimalSeparatorRow {
                   title: _("Decimal Separator");
+                  model: Gtk.StringList {
+                    strings [". ", ", ", _("Other")]
+                  };
 
                   [suffix]
                   Gtk.Entry _customDecimalSeparatorText {
@@ -184,6 +187,9 @@ Adw.Window _root {
 
                 Adw.ComboRow _customGroupSeparatorRow {
                   title: _("Group Separator");
+                  model: Gtk.StringList {
+                    strings [". ", ", ", "' ", _("None"), _("Other")]
+                  };
 
                   [suffix]
                   Gtk.Entry _customGroupSeparatorText {

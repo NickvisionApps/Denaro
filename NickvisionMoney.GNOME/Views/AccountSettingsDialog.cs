@@ -150,7 +150,6 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customDecimalSeparatorRow.SetModel(Gtk.StringList.New(new string[3] { ". ", ", ", _p("DecimalSeparator", "Other") }));
         _customDecimalSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -180,7 +179,6 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customGroupSeparatorRow.SetModel(Gtk.StringList.New(new string[5] { ". ", ", ", "' ", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
         _customGroupSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
