@@ -16,7 +16,7 @@ Adw.ApplicationWindow _root {
   Gtk.Box {
     orientation: vertical;
     
-    Adw.HeaderBar {
+    Adw.HeaderBar _headerBar {
       title-widget: Adw.WindowTitle _windowTitle {};
       
       [start]
@@ -120,6 +120,8 @@ Adw.ApplicationWindow _root {
         tooltip-text: _("Dashboard");
         visible: false;
       }
+
+      styles ["flat"]
     }
     
     Adw.ToastOverlay _toastOverlay {
