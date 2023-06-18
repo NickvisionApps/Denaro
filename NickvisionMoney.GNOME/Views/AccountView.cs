@@ -672,7 +672,7 @@ public partial class AccountView : Adw.Bin
         filterQif.AddPattern("*.qif");
         filterQif.AddPattern("*.QIF");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Open Account"));
+        gtk_file_dialog_set_title(openFileDialog, _("Import from File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterCsv);

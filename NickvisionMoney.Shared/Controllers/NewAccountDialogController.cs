@@ -42,6 +42,10 @@ public class NewAccountDialogController
     private List<string> _openAccountNames;
 
     /// <summary>
+    /// The metadata represented by the controller
+    /// </summary>
+    public AccountMetadata Metadata { get; init; }
+    /// <summary>
     /// The password of the new account
     /// </summary>
     public string? Password { get; set; }
@@ -50,13 +54,13 @@ public class NewAccountDialogController
     /// </summary>
     public string Folder { get; set; }
     /// <summary>
-    /// The metadata represented by the controller
-    /// </summary>
-    public AccountMetadata Metadata { get; init; }
-    /// <summary>
     /// Whether or not to overwrite existing accounts
     /// </summary>
     public bool OverwriteExisting { get; set; }
+    /// <summary>
+    /// A file to use to import data from
+    /// </summary>
+    public string ImportFile { get; set; }
     
     /// <summary>
     /// Gets the AppInfo object
@@ -74,10 +78,11 @@ public class NewAccountDialogController
     public NewAccountDialogController(IEnumerable<string> openAccountPaths)
     {
         _openAccountNames = openAccountPaths.Select(x => System.IO.Path.GetFileNameWithoutExtension(x)).ToList();
+        Metadata = new AccountMetadata("", AccountType.Checking);
         Password = null;
         Folder = "";
-        Metadata = new AccountMetadata("", AccountType.Checking);
         OverwriteExisting = true;
+        ImportFile = "";
     }
     
     /// <summary>

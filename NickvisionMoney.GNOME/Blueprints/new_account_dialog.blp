@@ -114,12 +114,12 @@ Adw.Window _root {
                 }
               }
 
-              Gtk.Button _saveButton {
+              Gtk.Button _nextButton1 {
                 halign: center;
                 valign: center;
                 margin-bottom: 12;
                 sensitive: false;
-                label: _("Save");
+                label: _("Next");
       
                 styles ["pill", "suggested-action"]
               }
@@ -174,7 +174,7 @@ Adw.Window _root {
                 }
               }
 
-              Gtk.Button _nextButton {
+              Gtk.Button _nextButton2 {
                 halign: center;
                 valign: center;
                 margin-bottom: 12;
@@ -278,6 +278,67 @@ Adw.Window _root {
                     Gtk.DropDown _customDecimalDigitsDropDown {
                       valign: center;
                     }
+                  }
+                }
+              }
+
+              Gtk.Button _nextButton3 {
+                halign: center;
+                valign: center;
+                margin-bottom: 12;
+                label: _("Next");
+
+                styles ["pill", "suggested-action"]
+              }
+            }
+
+            Gtk.Box _page5 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
+
+              Gtk.Label {
+                label: _("Import Existing Information");
+
+                styles ["title-2"]
+              }
+
+              Gtk.Label {
+                justify: center;
+                wrap: true;
+                wrap-mode: char;
+                label: _("Upload a valid file to use to import existing information into the new account.");
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
+
+                Adw.EntryRow _importRow {
+                  title: _("Import File");
+                  editable: false;
+
+                  [suffix]
+                  Gtk.Button _selectImportFileButton {
+                    valign: center;
+                    icon-name: "document-open-symbolic";
+                    tooltip-text: _("Select File");
+
+                    styles ["flat"]
+                  }
+
+                  [suffix]
+                  Gtk.Button _clearImportFileButton {
+                    valign: center;
+                    visible: false;
+                    icon-name: "larger-brush-symbolic";
+                    tooltip-text: _("Clear File");
+
+                    styles ["flat"]
                   }
                 }
               }

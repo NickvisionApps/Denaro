@@ -22,7 +22,13 @@ public partial class NewAccountDialog : Adw.Window
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_title(nint dialog, string title);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_initial_folder(nint dialog, nint folder);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -33,6 +39,7 @@ public partial class NewAccountDialog : Adw.Window
     private readonly NewAccountDialogController _controller;
     private uint _currentPageNumber;
     private GAsyncReadyCallback? _saveCallback;
+    private GAsyncReadyCallback? _openCallback;
     
     [Gtk.Connect] private readonly Gtk.Button _backButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
@@ -43,11 +50,11 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _selectFolderButton;
     [Gtk.Connect] private readonly Adw.ActionRow _overwriteRow;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteSwitch;
-    [Gtk.Connect] private readonly Gtk.Button _saveButton;
+    [Gtk.Connect] private readonly Gtk.Button _nextButton1;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _expenseButton;
-    [Gtk.Connect] private readonly Gtk.Button _nextButton;
+    [Gtk.Connect] private readonly Gtk.Button _nextButton2;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
     [Gtk.Connect] private readonly Adw.ExpanderRow _rowCustomCurrency;
     [Gtk.Connect] private readonly Gtk.Entry _customSymbolText;
@@ -62,6 +69,10 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ActionRow _customGroupSeparatorRow;
     [Gtk.Connect] private readonly Gtk.DropDown _customDecimalDigitsDropDown;
     [Gtk.Connect] private readonly Adw.ActionRow _customDecimalDigitsRow;
+    [Gtk.Connect] private readonly Gtk.Button _nextButton3;
+    [Gtk.Connect] private readonly Adw.EntryRow _importRow;
+    [Gtk.Connect] private readonly Gtk.Button _selectImportFileButton;
+    [Gtk.Connect] private readonly Gtk.Button _clearImportFileButton;
     [Gtk.Connect] private readonly Gtk.Button _createButton;
     
     public event EventHandler? OnApply;
@@ -99,11 +110,11 @@ public partial class NewAccountDialog : Adw.Window
                 ValidateName();
             }
         };
-        _saveButton.OnClicked += GoForward;
+        _nextButton1.OnClicked += GoForward;
         _incomeButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.BindProperty("active", _incomeButton, "active", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate | GObject.BindingFlags.InvertBoolean));
-        _nextButton.OnClicked += GoForward;
+        _nextButton2.OnClicked += GoForward;
         _rowCustomCurrency.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "expanded")
@@ -182,6 +193,13 @@ public partial class NewAccountDialog : Adw.Window
             {
                 ValidateCurrency();
             }
+        };
+        _nextButton3.OnClicked += GoForward;
+        _selectImportFileButton.OnClicked += SelectImportFile;
+        _clearImportFileButton.OnClicked += (sender, e) =>
+        {
+            _controller.ImportFile = "";
+            _importRow.SetText("");
         };
         _createButton.OnClicked += Apply;
         //Load
@@ -270,7 +288,7 @@ public partial class NewAccountDialog : Adw.Window
         var checkStatus = _controller.UpdateName(_accountNameRow.GetText());
         if(checkStatus == NameCheckStatus.Valid)
         {
-            _saveButton.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
+            _nextButton1.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
         }
         else
         {
@@ -284,7 +302,7 @@ public partial class NewAccountDialog : Adw.Window
                 _accountNameRow.AddCssClass("error");
                 _accountNameRow.SetTitle(_("Account Name (Exists)"));
             }
-            _saveButton.SetSensitive(false);
+            _nextButton1.SetSensitive(false);
         }
     }
 
@@ -387,6 +405,53 @@ public partial class NewAccountDialog : Adw.Window
         }
     }
     
+    /// <summary>
+    /// Selects a file to import data from
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
+    private void SelectImportFile(object? sender, EventArgs e)
+    {
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName($"{_("All files")} (*.csv, *.ofx, *.qif)");
+        filterAll.AddPattern("*.csv");
+        filterAll.AddPattern("*.CSV");
+        filterAll.AddPattern("*.ofx");
+        filterAll.AddPattern("*.OFX");
+        filterAll.AddPattern("*.qif");
+        filterAll.AddPattern("*.QIF");
+        var filterCsv = Gtk.FileFilter.New();
+        filterCsv.SetName("CSV (*.csv)");
+        filterCsv.AddPattern("*.csv");
+        filterCsv.AddPattern("*.CSV");
+        var filterOfx = Gtk.FileFilter.New();
+        filterOfx.SetName("Open Financial Exchange (*.ofx)");
+        filterOfx.AddPattern("*.ofx");
+        filterOfx.AddPattern("*.OFX");
+        var filterQif = Gtk.FileFilter.New();
+        filterQif.SetName("Quicken Format (*.qif)");
+        filterQif.AddPattern("*.qif");
+        filterQif.AddPattern("*.QIF");
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _("Import from Account"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filterAll);
+        filters.Append(filterCsv);
+        filters.Append(filterOfx);
+        filters.Append(filterQif);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
+        {
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
+            {
+                _controller.ImportFile = g_file_get_path(fileHandle);
+                _importRow.SetText(_controller.ImportFile);
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+    }
+
     /// <summary>
     /// Applies the dialog
     /// </summary>
