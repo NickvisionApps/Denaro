@@ -187,6 +187,10 @@ public partial class NewAccountDialog : Adw.Window
         _controller.Folder = g_get_user_special_dir(1); // XDG_DOCUMENTS_DIR
         if(!Directory.Exists(_controller.Folder))
         {
+            _controller.Folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}{Path.DirectorySeparatorChar}Doccuments";
+        }
+        if(!Directory.Exists(_controller.Folder))
+        {
             _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
         _folderRow.SetText(Path.GetFileName(_controller.Folder));
