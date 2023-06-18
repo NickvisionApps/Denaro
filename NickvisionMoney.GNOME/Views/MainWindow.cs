@@ -373,37 +373,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             newAccountDialog.Close();
         };
         newAccountDialog.Present();
-        /*
-        var filter = Gtk.FileFilter.New();
-        filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
-        filter.AddPattern("*.nmoney");
-        var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _("New Account"));
-        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-        filters.Append(filter);
-        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-        _saveCallback = async (source, res, data) =>
-        {
-            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                if (_controller.IsAccountOpen(path))
-                {
-                    _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an opened account.")));
-                }
-                else
-                {
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
-                    await _controller.AddAccountAsync(path);
-                }
-            }
-        };
-        gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-        */
     }
 
     /// <summary>
