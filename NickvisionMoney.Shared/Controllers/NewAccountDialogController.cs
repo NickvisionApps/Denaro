@@ -118,7 +118,7 @@ public class NewAccountDialogController
         {
             return NameCheckStatus.AlreadyOpen;
         }
-        else if(File.Exists($"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney"))
+        else if(File.Exists($"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney") && !OverwriteExisting)
         {
             return NameCheckStatus.Exists;
         }

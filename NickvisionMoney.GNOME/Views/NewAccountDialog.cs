@@ -96,6 +96,7 @@ public partial class NewAccountDialog : Adw.Window
             if(e.Pspec.GetName() == "active")
             {
                 _controller.OverwriteExisting = _overwriteSwitch.GetActive();
+                ValidateName();
             }
         };
         _saveButton.OnClicked += GoForward;
