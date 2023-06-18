@@ -207,29 +207,47 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Creates a new account and adds it to the list of opened accounts
     /// </summary>
-    public async Task<bool> NewAccountAsync(string path, string? password, AccountMetadata metadata)
+    /// <param name="controller">NewAccountDialogController</param>
+    /// <returns>True if new account created and opened, else false</returns>
+    public async Task<bool> NewAccountAsync(NewAccountDialogController controller)
     {
-        var controller = new AccountViewController(path, NotificationSent, RecentAccountsChanged);
-        controller.TransferSent += OnTransferSent;
+        if(IsAccountOpen(controller.Path))
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to overwrite an opened account."), NotificationSeverity.Error));
+            return false;
+        }
+        if (File.Exists(controller.Path))
+        {
+            if(controller.OverwriteExisting)
+            {
+                File.Delete(controller.Path);
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to overwrite an existing account."), NotificationSeverity.Error));
+                return false;
+            }
+        }
+        var accountViewController = new AccountViewController(controller.Path, NotificationSent, RecentAccountsChanged);
+        accountViewController.TransferSent += OnTransferSent;
         try
         {
-            controller.Login(null);
+            accountViewController.Login(null);
         }
         catch
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
             return false;
         }
-        _openAccounts.Add(controller);
+        _openAccounts.Add(accountViewController);
         AccountAdded?.Invoke(this, EventArgs.Empty);
         await Task.Delay(100);
-        controller.UpdateMetadata(metadata);
-        if(!string.IsNullOrEmpty(password))
+        accountViewController.UpdateMetadata(controller.Metadata);
+        if(!string.IsNullOrEmpty(controller.Password))
         {
-            controller.SetPassword(password, false);
+            accountViewController.SetPassword(controller.Password, false);
         }
         return true;
-
     }
 
     /// <summary>

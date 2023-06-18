@@ -369,27 +369,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         newAccountDialog.OnApply += async (sender, e) =>
         {
             newAccountDialog.SetVisible(false);
-            if (_controller.IsAccountOpen(newAccountController.Path))
-            {
-                _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an opened account.")));
-            }
-            else
-            {
-                if (File.Exists(newAccountController.Path))
-                {
-                    if(newAccountController.OverwriteExisting)
-                    {
-                        File.Delete(newAccountController.Path);
-                    }
-                    else
-                    {
-                        _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an existing account.")));
-                        newAccountDialog.Close();
-                        return;
-                    }
-                }
-                await _controller.NewAccountAsync(newAccountController.Path, newAccountController.Password, newAccountController.Metadata);
-            }
+            await _controller.NewAccountAsync(newAccountController);
             newAccountDialog.Close();
         };
         newAccountDialog.Present();
