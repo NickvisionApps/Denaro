@@ -142,9 +142,10 @@ Adw.PreferencesWindow _root {
       title: _("Backup");
       description: _("Customize backup locations for Denaro accounts.");
 
-      Adw.ActionRow {
+      Adw.EntryRow _csvBackupRow {
         title: _("CSV Backup Folder");
-        subtitle: _("Unencrypted accounts will automatically export as CSV files to this folder when a change is made.");
+        tooltip-text: _("Unencrypted accounts will automatically export as CSV files to this folder when a change is made.");
+        editable: false;
 
         [prefix]
         Gtk.Image {
@@ -152,41 +153,21 @@ Adw.PreferencesWindow _root {
         }
 
         [suffix]
-        Adw.ViewStack _backupViewStack {
-          Adw.ViewStackPage {
-            name: "no-folder";
-            child: Gtk.Button _selectBackupFolderButton {
-              halign: end;
-              valign: center;
-              child: Adw.ButtonContent {
-                label: _("Select Backup Folder");
-                icon-name: "folder-open-symbolic";
-              };
-            };
-          }
+        Gtk.Button _selectBackupFolderButton {
+          valign: center;
+          tooltip-text: _("Select Backup Folder");
+          icon-name: "folder-open-symbolic";
 
-          Adw.ViewStackPage {
-            name: "folder-selected";
-            child: Gtk.Box {
-              orientation: horizontal;
-              halign: end;
-              valign: center;
+          styles ["flat"]
+        }
 
-              Gtk.Button _backupFolderButton {
-                tooltip-text: _("Select Backup Folder");
-                child: Gtk.Label _backupFolderLabel {
-                  ellipsize: start;
-                };
-              }
+        [suffix]
+        Gtk.Button _unsetBackupFolderButton {
+          valign: center;
+          icon-name: "larger-brush-symbolic";
+          tooltip-text: _("Clear Backup Folder");
 
-              Gtk.Button _unsetBackupFolderButton {
-                icon-name: "larger-brush-symbolic";
-                tooltip-text: _("Clear Backup Folder");
-              }
-
-              styles ["linked"]
-            };
-          }
+          styles ["flat"]
         }
       }
     }
