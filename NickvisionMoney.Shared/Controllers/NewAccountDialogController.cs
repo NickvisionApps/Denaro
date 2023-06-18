@@ -39,7 +39,7 @@ public enum CurrencyCheckStatus
 /// </summary>
 public class NewAccountDialogController
 {
-    private List<string> _openAccountNames;
+    private List<string> _openAccountPaths;
 
     /// <summary>
     /// The metadata represented by the controller
@@ -77,7 +77,7 @@ public class NewAccountDialogController
     /// <param name="openAccountPaths">The list of open account paths</param>
     public NewAccountDialogController(IEnumerable<string> openAccountPaths)
     {
-        _openAccountNames = openAccountPaths.Select(x => System.IO.Path.GetFileNameWithoutExtension(x)).ToList();
+        _openAccountPaths = openAccountPaths.ToList();
         Metadata = new AccountMetadata("", AccountType.Checking);
         Password = null;
         Folder = "";
@@ -119,11 +119,12 @@ public class NewAccountDialogController
     public NameCheckStatus UpdateName(string name)
     {
         NameCheckStatus result = 0;
-        if(_openAccountNames.Contains(name))
+        var tempPath = $"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney";
+        if(_openAccountPaths.Contains(tempPath))
         {
             return NameCheckStatus.AlreadyOpen;
         }
-        else if(File.Exists($"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney") && !OverwriteExisting)
+        else if(File.Exists(tempPath) && !OverwriteExisting)
         {
             return NameCheckStatus.Exists;
         }
