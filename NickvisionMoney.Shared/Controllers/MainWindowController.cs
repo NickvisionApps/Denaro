@@ -150,7 +150,7 @@ public class MainWindowController : IDisposable
     /// Creates a new NewAccountDialogController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public NewAccountDialogController CreateNewAccountDialogController() => new NewAccountDialogController();
+    public NewAccountDialogController CreateNewAccountDialogController() => new NewAccountDialogController(_openAccounts.Select(x => x.AccountPath));
 
     /// <summary>
     /// Creates a new DashboardViewController

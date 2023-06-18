@@ -1,12 +1,25 @@
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace NickvisionMoney.Shared.Controllers;
 
 /// <summary>
-/// Statuses for when account currency is validated
+/// Statuses for when the account name is validated
+/// </summary>
+[Flags]
+public enum NameCheckStatus
+{
+    Valid = 1,
+    AlreadyOpen = 2,
+    Exists = 4
+}
+
+/// <summary>
+/// Statuses for when the account currency is validated
 /// </summary>
 [Flags]
 public enum CurrencyCheckStatus
@@ -26,6 +39,8 @@ public enum CurrencyCheckStatus
 /// </summary>
 public class NewAccountDialogController
 {
+    private List<string> _openAccountNames;
+
     /// <summary>
     /// The password of the new account
     /// </summary>
@@ -55,8 +70,10 @@ public class NewAccountDialogController
     /// <summary>
     /// Constructs a NewAccountDialogController
     /// </summary>
-    public NewAccountDialogController()
+    /// <param name="openAccountPaths">The list of open account paths</param>
+    public NewAccountDialogController(IEnumerable<string> openAccountPaths)
     {
+        _openAccountNames = openAccountPaths.Select(x => System.IO.Path.GetFileNameWithoutExtension(x)).ToList();
         Password = null;
         Folder = "";
         Metadata = new AccountMetadata("", AccountType.Checking);
@@ -89,6 +106,26 @@ public class NewAccountDialogController
         }
     }
     
+    /// <summary>
+    /// Updates the account name
+    /// </summary>
+    /// <param name="name">The new name</param>
+    /// <returns>NameCheckStatus</returns>
+    public NameCheckStatus UpdateName(string name)
+    {
+        NameCheckStatus result = 0;
+        if(_openAccountNames.Contains(name))
+        {
+            return NameCheckStatus.AlreadyOpen;
+        }
+        else if(File.Exists($"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney"))
+        {
+            return NameCheckStatus.Exists;
+        }
+        Metadata.Name = name;
+        return NameCheckStatus.Valid;
+    }
+
     /// <summary>
     /// Updates the Metadata object
     /// </summary>

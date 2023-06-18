@@ -87,7 +87,7 @@ public partial class NewAccountDialog : Adw.Window
         {
             if(e.Pspec.GetName() == "text")
             {
-                _saveButton.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
+                ValidateName();
             }
         };
         _selectFolderButton.OnClicked += SelectFolder;
@@ -253,11 +253,40 @@ public partial class NewAccountDialog : Adw.Window
             {
                 _controller.Folder = g_file_get_path(fileHandle);
                 _folderRow.SetText(Path.GetFileName(_controller.Folder));
+                ValidateName();
             }
         };
         gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
     }
     
+    /// <summary>
+    /// Validates the name of the account
+    /// </summary>
+    private void ValidateName()
+    {
+        _accountNameRow.RemoveCssClass("error");
+        _accountNameRow.SetTitle(_("Account Name"));
+        var checkStatus = _controller.UpdateName(_accountNameRow.GetText());
+        if(checkStatus == NameCheckStatus.Valid)
+        {
+            _saveButton.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
+        }
+        else
+        {
+            if(checkStatus.HasFlag(NameCheckStatus.AlreadyOpen))
+            {
+                _accountNameRow.AddCssClass("error");
+                _accountNameRow.SetTitle(_("Account Name (Opened)"));
+            }
+            if(checkStatus.HasFlag(NameCheckStatus.Exists))
+            {
+                _accountNameRow.AddCssClass("error");
+                _accountNameRow.SetTitle(_("Account Name (Exists)"));
+            }
+            _saveButton.SetSensitive(false);
+        }
+    }
+
     /// <summary>
     /// Occurs when either Income or Expense button is toggled
     /// </summary>
@@ -297,7 +326,6 @@ public partial class NewAccountDialog : Adw.Window
             4 => _customGroupSeparatorText.GetText()
         };
         var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
-        var checkStatus = _controller.UpdateCurrency(_rowCustomCurrency.GetExpanded(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits);
         _customSymbolRow.RemoveCssClass("error");
         _customSymbolRow.SetTitle(_("Currency Symbol"));
         _customCodeRow.RemoveCssClass("error");
@@ -306,6 +334,7 @@ public partial class NewAccountDialog : Adw.Window
         _customDecimalSeparatorRow.SetTitle(_("Decimal Separator"));
         _customGroupSeparatorRow.RemoveCssClass("error");
         _customGroupSeparatorRow.SetTitle(_("Group Separator"));
+        var checkStatus = _controller.UpdateCurrency(_rowCustomCurrency.GetExpanded(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits);
         if (checkStatus == CurrencyCheckStatus.Valid)
         {
             _createButton.SetSensitive(true);
@@ -365,7 +394,6 @@ public partial class NewAccountDialog : Adw.Window
     private void Apply(object? sender, EventArgs e)
     {
         _controller.Password = _accountPasswordRow.GetText();
-        _controller.Metadata.Name = _accountNameRow.GetText();
         _controller.Metadata.AccountType = (AccountType)_accountTypeRow.GetSelected();
         _controller.Metadata.DefaultTransactionType = _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense;
         OnApply?.Invoke(this, EventArgs.Empty);
