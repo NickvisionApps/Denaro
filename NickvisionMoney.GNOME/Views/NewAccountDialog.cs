@@ -41,6 +41,8 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _accountPasswordRow;
     [Gtk.Connect] private readonly Adw.EntryRow _folderRow;
     [Gtk.Connect] private readonly Gtk.Button _selectFolderButton;
+    [Gtk.Connect] private readonly Adw.ActionRow _overwriteRow;
+    [Gtk.Connect] private readonly Gtk.Switch _overwriteSwitch;
     [Gtk.Connect] private readonly Gtk.Button _saveButton;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
@@ -89,6 +91,13 @@ public partial class NewAccountDialog : Adw.Window
             }
         };
         _selectFolderButton.OnClicked += SelectFolder;
+        _overwriteSwitch.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "active")
+            {
+                _controller.OverwriteExisting = _overwriteSwitch.GetActive();
+            }
+        };
         _saveButton.OnClicked += GoForward;
         _incomeButton.OnToggled += OnTransactionTypeChanged;
         _expenseButton.OnToggled += OnTransactionTypeChanged;
@@ -218,7 +227,7 @@ public partial class NewAccountDialog : Adw.Window
         _carousel.ScrollTo(_carousel.GetNthPage(_currentPageNumber), true);
         _backButton.SetVisible(_currentPageNumber > 0);
     }
-    
+
     /// <summary>
     /// Selects a folder to save the account
     /// </summary>

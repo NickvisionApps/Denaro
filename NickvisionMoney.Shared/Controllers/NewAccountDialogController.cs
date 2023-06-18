@@ -38,6 +38,10 @@ public class NewAccountDialogController
     /// The metadata represented by the controller
     /// </summary>
     public AccountMetadata Metadata { get; init; }
+    /// <summary>
+    /// Whether or not to overwrite existing accounts
+    /// </summary>
+    public bool OverwriteExisting { get; set; }
     
     /// <summary>
     /// Gets the AppInfo object
@@ -56,6 +60,7 @@ public class NewAccountDialogController
         Password = null;
         Folder = "";
         Metadata = new AccountMetadata("", AccountType.Checking);
+        OverwriteExisting = true;
     }
     
     /// <summary>

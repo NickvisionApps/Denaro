@@ -102,6 +102,16 @@ Adw.Window _root {
                     styles ["flat"]
                   }
                 }
+
+                Adw.ActionRow _overwriteRow {
+                  title: _("Overwrite existing accounts");
+
+                  [suffix]
+                  Gtk.Switch _overwriteSwitch {
+                    valign: center;
+                    active: true;
+                  }
+                }
               }
 
               Gtk.Button _saveButton {

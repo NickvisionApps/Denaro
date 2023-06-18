@@ -377,7 +377,16 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (File.Exists(newAccountController.Path))
                 {
-                    File.Delete(newAccountController.Path);
+                    if(newAccountController.OverwriteExisting)
+                    {
+                        File.Delete(newAccountController.Path);
+                    }
+                    else
+                    {
+                        _toastOverlay.AddToast(Adw.Toast.New(_("Unable to override an existing account.")));
+                        newAccountDialog.Close();
+                        return;
+                    }
                 }
                 await _controller.NewAccountAsync(newAccountController.Path, newAccountController.Password, newAccountController.Metadata);
             }
