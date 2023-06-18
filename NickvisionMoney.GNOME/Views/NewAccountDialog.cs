@@ -141,7 +141,7 @@ public partial class NewAccountDialog : Adw.Window
                 ValidateCurrency();
             }
         };
-        _customDecimalSeparatorRow.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _p("DecimalSeparator", "Other") }));
+        _customDecimalSeparatorRow.SetModel(Gtk.StringList.New(new string[3] { ". ", ", ", _p("DecimalSeparator", "Other") }));
         _customDecimalSeparatorRow.SetSelected(0);
         _customDecimalSeparatorRow.OnNotify += (sender, e) =>
         {
@@ -166,7 +166,7 @@ public partial class NewAccountDialog : Adw.Window
                 ValidateCurrency();
             }
         };
-        _customGroupSeparatorRow.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
+        _customGroupSeparatorRow.SetModel(Gtk.StringList.New(new string[5] { ". ", ", ", "' ", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
         _customGroupSeparatorRow.SetSelected(1);
         _customGroupSeparatorRow.OnNotify += (sender, e) =>
         {
