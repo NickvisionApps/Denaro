@@ -26,18 +26,13 @@ public partial class AccountSettingsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
     [Gtk.Connect] private readonly Adw.ActionRow _customCurrencyRow;
     [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
-    [Gtk.Connect] private readonly Gtk.Entry _customSymbolText;
-    [Gtk.Connect] private readonly Adw.ActionRow _customSymbolRow;
-    [Gtk.Connect] private readonly Gtk.Entry _customCodeText;
-    [Gtk.Connect] private readonly Adw.ActionRow _customCodeRow;
-    [Gtk.Connect] private readonly Gtk.DropDown _customDecimalSeparatorDropDown;
+    [Gtk.Connect] private readonly Adw.EntryRow _customSymbolRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _customCodeRow;
     [Gtk.Connect] private readonly Gtk.Entry _customDecimalSeparatorText;
-    [Gtk.Connect] private readonly Adw.ActionRow _customDecimalSeparatorRow;
-    [Gtk.Connect] private readonly Gtk.DropDown _customGroupSeparatorDropDown;
+    [Gtk.Connect] private readonly Adw.ComboRow _customDecimalSeparatorRow;
     [Gtk.Connect] private readonly Gtk.Entry _customGroupSeparatorText;
-    [Gtk.Connect] private readonly Adw.ActionRow _customGroupSeparatorRow;
-    [Gtk.Connect] private readonly Gtk.DropDown _customDecimalDigitsDropDown;
-    [Gtk.Connect] private readonly Adw.ActionRow _customDecimalDigitsRow;
+    [Gtk.Connect] private readonly Adw.ComboRow _customGroupSeparatorRow;
+    [Gtk.Connect] private readonly Adw.ComboRow _customDecimalDigitsRow;
     [Gtk.Connect] private readonly Adw.ActionRow _managePasswordRow;
     [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
@@ -125,34 +120,44 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customSymbolText.OnNotify += (sender, e) =>
+        _customSymbolRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
+                if(_customSymbolRow.GetText().Length > 3)
+                {
+                    _customSymbolRow.SetText(_customSymbolRow.GetText().Substring(0, 3));
+                    _customSymbolRow.SetPosition(-1);
+                }
                 if (!_constructing)
                 {
                     Validate();
                 }
             }
         };
-        _customCodeText.OnNotify += (sender, e) =>
+        _customCodeRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
+                if(_customCodeRow.GetText().Length > 3)
+                {
+                    _customCodeRow.SetText(_customCodeRow.GetText().Substring(0, 3));
+                    _customCodeRow.SetPosition(-1);
+                }
                 if (!_constructing)
                 {
                     Validate();
                 }
             }
         };
-        _customDecimalSeparatorDropDown.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _p("DecimalSeparator", "Other") }));
-        _customDecimalSeparatorDropDown.OnNotify += (sender, e) =>
+        _customDecimalSeparatorRow.SetModel(Gtk.StringList.New(new string[3] { ".", ",", _p("DecimalSeparator", "Other") }));
+        _customDecimalSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 if (!_constructing)
                 {
-                    if (_customDecimalSeparatorDropDown.GetSelected() == 2)
+                    if (_customDecimalSeparatorRow.GetSelected() == 2)
                     {
                         _customDecimalSeparatorText.SetVisible(true);
                         _customDecimalSeparatorText.GrabFocus();
@@ -175,14 +180,14 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customGroupSeparatorDropDown.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
-        _customGroupSeparatorDropDown.OnNotify += (sender, e) =>
+        _customGroupSeparatorRow.SetModel(Gtk.StringList.New(new string[5] { ".", ",", "'", _p("GroupSeparator", "None"), _p("GroupSeparator", "Other") }));
+        _customGroupSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
                 if (!_constructing)
                 {
-                    if (_customGroupSeparatorDropDown.GetSelected() == 4)
+                    if (_customGroupSeparatorRow.GetSelected() == 4)
                     {
                         _customGroupSeparatorText.SetVisible(true);
                         _customGroupSeparatorText.GrabFocus();
@@ -205,8 +210,7 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _customDecimalDigitsDropDown.SetModel(Gtk.StringList.New(new string[6] { "2", "3", "4", "5", "6", _("Unlimited") }));
-        _customDecimalDigitsDropDown.OnNotify += (sender, e) =>
+        _customDecimalDigitsRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
             {
@@ -262,21 +266,21 @@ public partial class AccountSettingsDialog : Adw.Window
         _accountTypeRow.SetSelected((uint)_controller.Metadata.AccountType);
         _incomeButton.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
         _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
-        _customSymbolText.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
-        _customCodeText.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
-        _customDecimalSeparatorDropDown.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
+        _customSymbolRow.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
+        _customCodeRow.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
+        _customDecimalSeparatorRow.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
         {
             null => 0,
             "." => 0,
             "," => 1,
             _ => 2
         });
-        if (_customDecimalSeparatorDropDown.GetSelected() == 2)
+        if (_customDecimalSeparatorRow.GetSelected() == 2)
         {
             _customDecimalSeparatorText.SetVisible(true);
             _customDecimalSeparatorText.SetText(_controller.Metadata.CustomCurrencyDecimalSeparator);
         }
-        _customGroupSeparatorDropDown.SetSelected(_controller.Metadata.CustomCurrencyGroupSeparator switch
+        _customGroupSeparatorRow.SetSelected(_controller.Metadata.CustomCurrencyGroupSeparator switch
         {
             null => 1,
             "." => 0,
@@ -285,12 +289,12 @@ public partial class AccountSettingsDialog : Adw.Window
             "" => 3,
             _ => 4
         });
-        if (_customGroupSeparatorDropDown.GetSelected() == 4)
+        if (_customGroupSeparatorRow.GetSelected() == 4)
         {
             _customGroupSeparatorText.SetVisible(true);
             _customGroupSeparatorText.SetText(_controller.Metadata.CustomCurrencyGroupSeparator);
         }
-        _customDecimalDigitsDropDown.SetSelected(_controller.Metadata.CustomCurrencyDecimalDigits switch
+        _customDecimalDigitsRow.SetSelected(_controller.Metadata.CustomCurrencyDecimalDigits switch
         {
             null => 0,
             99 => 5,
@@ -317,13 +321,13 @@ public partial class AccountSettingsDialog : Adw.Window
     private void Validate()
     {
         var transactionType = _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense;
-        var customDecimalSeparator = _customDecimalSeparatorDropDown.GetSelected() switch
+        var customDecimalSeparator = _customDecimalSeparatorRow.GetSelected() switch
         {
             0 => ".",
             1 => ",",
             2 => _customDecimalSeparatorText.GetText()
         };
-        var customGroupSeparator = _customGroupSeparatorDropDown.GetSelected() switch
+        var customGroupSeparator = _customGroupSeparatorRow.GetSelected() switch
         {
             0 => ".",
             1 => ",",
@@ -331,8 +335,8 @@ public partial class AccountSettingsDialog : Adw.Window
             3 => "",
             4 => _customGroupSeparatorText.GetText()
         };
-        var customDecimalDigits = _customDecimalDigitsDropDown.GetSelected() == 5 ? 99 : _customDecimalDigitsDropDown.GetSelected() + 2;
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolText.GetText(), _customCodeText.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
+        var customDecimalDigits = _customDecimalDigitsRow.GetSelected() == 5 ? 99 : _customDecimalDigitsRow.GetSelected() + 2;
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
         _customCurrencyRow.RemoveCssClass("error");

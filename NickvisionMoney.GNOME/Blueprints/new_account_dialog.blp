@@ -213,35 +213,16 @@ Adw.Window _root {
                   show-enable-switch: true;
                   enable-expansion: false;
   
-                  Adw.ActionRow _customSymbolRow {
+                  Adw.EntryRow _customSymbolRow {
                     title: _("Currency Symbol");
-  
-                    [suffix]
-                    Gtk.Entry _customSymbolText {
-                      valign: center;
-                      max-length: 3;
-                      placeholder-text: _("Enter symbol here");
-                    }
                   }
   
-                  Adw.ActionRow _customCodeRow {
+                  Adw.EntryRow _customCodeRow {
                     title: _("Currency Code");
-  
-                    [suffix]
-                    Gtk.Entry _customCodeText {
-                      valign: center;
-                      max-length: 3;
-                      placeholder-text: _("Enter code here");
-                    }
                   }
   
-                  Adw.ActionRow _customDecimalSeparatorRow {
+                  Adw.ComboRow _customDecimalSeparatorRow {
                     title: _("Decimal Separator");
-  
-                    [suffix]
-                    Gtk.DropDown _customDecimalSeparatorDropDown {
-                      valign: center;
-                    }
   
                     [suffix]
                     Gtk.Entry _customDecimalSeparatorText {
@@ -253,13 +234,8 @@ Adw.Window _root {
                     }
                   }
   
-                  Adw.ActionRow _customGroupSeparatorRow {
+                  Adw.ComboRow _customGroupSeparatorRow {
                     title: _("Group Separator");
-  
-                    [suffix]
-                    Gtk.DropDown _customGroupSeparatorDropDown {
-                      valign: center;
-                    }
   
                     [suffix]
                     Gtk.Entry _customGroupSeparatorText {
@@ -271,13 +247,11 @@ Adw.Window _root {
                     }
                   }
   
-                  Adw.ActionRow _customDecimalDigitsRow {
+                  Adw.ComboRow _customDecimalDigitsRow {
                     title: _("Decimal Digits");
-  
-                    [suffix]
-                    Gtk.DropDown _customDecimalDigitsDropDown {
-                      valign: center;
-                    }
+                    model: Gtk.StringList {
+                      strings [_("Two"), _("Three"), _("Four"), _("Five"), _("Six"), _("Unlimited")]
+                    };
                   }
                 }
               }
