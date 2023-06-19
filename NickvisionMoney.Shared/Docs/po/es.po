@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: 2023-06-06 00:02+0000\n"
+"PO-Revision-Date: 2023-06-19 19:49+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
 ".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -405,7 +405,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr "Color de la transacción predeterminado"
+msgstr "Color de transacción predeterminado"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
