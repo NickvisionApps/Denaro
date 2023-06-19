@@ -49,6 +49,8 @@
   <releases>
     <release version="2023.6.1-next" date="2023-06-16">
       <description translatable="no">
+        <p>- Added the ability to select a file to import existing data from in the new account setup dialog</p>
+        <p>- Improved custom currency preferences design</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

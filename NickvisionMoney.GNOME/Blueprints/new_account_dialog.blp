@@ -102,14 +102,24 @@ Adw.Window _root {
                     styles ["flat"]
                   }
                 }
+
+                Adw.ActionRow _overwriteRow {
+                  title: _("Overwrite Existing Accounts");
+
+                  [suffix]
+                  Gtk.Switch _overwriteSwitch {
+                    valign: center;
+                    active: true;
+                  }
+                }
               }
 
-              Gtk.Button _saveButton {
+              Gtk.Button _nextButton1 {
                 halign: center;
                 valign: center;
                 margin-bottom: 12;
                 sensitive: false;
-                label: _("Save");
+                label: _("Next");
       
                 styles ["pill", "suggested-action"]
               }
@@ -164,7 +174,7 @@ Adw.Window _root {
                 }
               }
 
-              Gtk.Button _nextButton {
+              Gtk.Button _nextButton2 {
                 halign: center;
                 valign: center;
                 margin-bottom: 12;
@@ -203,35 +213,19 @@ Adw.Window _root {
                   show-enable-switch: true;
                   enable-expansion: false;
   
-                  Adw.ActionRow _customSymbolRow {
+                  Adw.EntryRow _customSymbolRow {
                     title: _("Currency Symbol");
-  
-                    [suffix]
-                    Gtk.Entry _customSymbolText {
-                      valign: center;
-                      max-length: 3;
-                      placeholder-text: _("Enter symbol here");
-                    }
                   }
   
-                  Adw.ActionRow _customCodeRow {
+                  Adw.EntryRow _customCodeRow {
                     title: _("Currency Code");
-  
-                    [suffix]
-                    Gtk.Entry _customCodeText {
-                      valign: center;
-                      max-length: 3;
-                      placeholder-text: _("Enter code here");
-                    }
                   }
   
-                  Adw.ActionRow _customDecimalSeparatorRow {
+                  Adw.ComboRow _customDecimalSeparatorRow {
                     title: _("Decimal Separator");
-  
-                    [suffix]
-                    Gtk.DropDown _customDecimalSeparatorDropDown {
-                      valign: center;
-                    }
+                    model: Gtk.StringList {
+                      strings [". ", ", ", _("Other")]
+                    };
   
                     [suffix]
                     Gtk.Entry _customDecimalSeparatorText {
@@ -243,13 +237,11 @@ Adw.Window _root {
                     }
                   }
   
-                  Adw.ActionRow _customGroupSeparatorRow {
+                  Adw.ComboRow _customGroupSeparatorRow {
                     title: _("Group Separator");
-  
-                    [suffix]
-                    Gtk.DropDown _customGroupSeparatorDropDown {
-                      valign: center;
-                    }
+                    model: Gtk.StringList {
+                      strings [". ", ", ", "' ", _("None"), _("Other")]
+                    };
   
                     [suffix]
                     Gtk.Entry _customGroupSeparatorText {
@@ -261,13 +253,72 @@ Adw.Window _root {
                     }
                   }
   
-                  Adw.ActionRow _customDecimalDigitsRow {
+                  Adw.ComboRow _customDecimalDigitsRow {
                     title: _("Decimal Digits");
-  
-                    [suffix]
-                    Gtk.DropDown _customDecimalDigitsDropDown {
-                      valign: center;
-                    }
+                    model: Gtk.StringList {
+                      strings [_("Two"), _("Three"), _("Four"), _("Five"), _("Six"), _("Unlimited")]
+                    };
+                  }
+                }
+              }
+
+              Gtk.Button _nextButton3 {
+                halign: center;
+                valign: center;
+                margin-bottom: 12;
+                label: _("Next");
+
+                styles ["pill", "suggested-action"]
+              }
+            }
+
+            Gtk.Box _page5 {
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+              spacing: 24;
+              margin-top: 24;
+              margin-start: 24;
+              margin-end: 24;
+              margin-bottom: 24;
+
+              Gtk.Label {
+                label: _("Import Existing Information");
+
+                styles ["title-2"]
+              }
+
+              Gtk.Label {
+                justify: center;
+                wrap: true;
+                wrap-mode: char;
+                label: _("Upload a valid file to use to import existing information into the new account.");
+              }
+
+              Adw.PreferencesGroup {
+                vexpand: true;
+
+                Adw.EntryRow _importRow {
+                  title: _("Import File");
+                  editable: false;
+
+                  [suffix]
+                  Gtk.Button _selectImportFileButton {
+                    valign: center;
+                    icon-name: "document-open-symbolic";
+                    tooltip-text: _("Select File");
+
+                    styles ["flat"]
+                  }
+
+                  [suffix]
+                  Gtk.Button _clearImportFileButton {
+                    valign: center;
+                    visible: false;
+                    icon-name: "larger-brush-symbolic";
+                    tooltip-text: _("Clear File");
+
+                    styles ["flat"]
                   }
                 }
               }

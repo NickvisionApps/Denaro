@@ -79,10 +79,8 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Widget _accountBusinessColorButton;
     [Gtk.Connect] private readonly Gtk.Switch _nativeDigitsSwitch;
     [Gtk.Connect] private readonly Adw.ComboRow _insertSeparatorRow;
-    [Gtk.Connect] private readonly Adw.ViewStack _backupViewStack;
+    [Gtk.Connect] private readonly Adw.EntryRow _csvBackupRow;
     [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
-    [Gtk.Connect] private readonly Gtk.Button _backupFolderButton;
-    [Gtk.Connect] private readonly Gtk.Label _backupFolderLabel;
     [Gtk.Connect] private readonly Gtk.Button _unsetBackupFolderButton;
 
     private GAsyncReadyCallback _fileDialogCallback;
@@ -121,7 +119,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         gtk_color_dialog_set_with_alpha(_accountBusinessColorDialog, false);
         gtk_color_dialog_button_set_dialog(_accountBusinessColorButton.Handle, _accountBusinessColorDialog);
         _selectBackupFolderButton.OnClicked += SelectBackupFolder;
-        _backupFolderButton.OnClicked += SelectBackupFolder;
         _unsetBackupFolderButton.OnClicked += UnsetBackupFolder;
         //Layout
         OnHide += Hide;
@@ -149,8 +146,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (File.Exists(_controller.CSVBackupFolder))
         {
-            _backupViewStack.SetVisibleChildName("folder-selected");
-            _backupFolderLabel.SetText(_controller.CSVBackupFolder);
+            _csvBackupRow.SetText(_controller.CSVBackupFolder);
         }
     }
 
@@ -226,8 +222,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 else
                 {
                     _controller.CSVBackupFolder = path;
-                    _backupViewStack.SetVisibleChildName("folder-selected");
-                    _backupFolderLabel.SetText(path);
+                    _csvBackupRow.SetText(path);
                 }
             }
         };
@@ -242,6 +237,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private void UnsetBackupFolder(Gtk.Button sender, EventArgs e)
     {
         _controller.CSVBackupFolder = "";
-        _backupViewStack.SetVisibleChildName("no-folder");
+        _csvBackupRow.SetText("");
     }
 }
