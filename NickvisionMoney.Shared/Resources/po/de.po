@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 22:10-0400\n"
+"POT-Creation-Date: 2023-06-18 08:36-0400\n"
 "PO-Revision-Date: 2023-06-17 02:34+0000\n"
 "Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -39,8 +39,25 @@ msgid_plural "{0} transactions"
 msgstr[0] "{0} Überweisung"
 msgstr[1] "{0} Überweisungen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:75
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:453
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
+msgid "Account Name"
+msgstr "Kontoname"
+
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
+#, fuzzy
+#| msgid "Name (Exists)"
+msgid "Account Name (Exists)"
+msgstr "Name (Existiert)"
+
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
+#, fuzzy
+#| msgid "No Account Opened"
+msgid "Account Name (Opened)"
+msgstr "Kein Konto geöffnet"
+
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
 #: ../../../Models/Account.cs:1625
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:35
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
@@ -49,12 +66,12 @@ msgstr "Konto-Einstellungen"
 
 #: ../../../Models/Account.cs:1626
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:59
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:138
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:148
 msgid "Account Type"
 msgstr "Kontotyp"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:198
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:197
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:46
 msgid "Add"
 msgstr "Hinzufügen"
@@ -67,13 +84,14 @@ msgstr "Füge eine neue Überweisung hinzu oder importiere eine von einer Datei.
 msgid "Add Password To PDF?"
 msgstr "Passwort zur PDF hinzufügen?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:677
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:676
 msgid "All files"
 msgstr "Alle dateien"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:507
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
 #: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
@@ -81,12 +99,12 @@ msgid "Amount"
 msgstr "Betrag"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:526
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
 msgid "Amount (Invalid)"
 msgstr "Betrag (Ungültig)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:134
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:198
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:197
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:129
 msgid "Apply"
 msgstr "Anwenden"
@@ -109,11 +127,11 @@ msgstr ""
 
 #: ../../../Models/Account.cs:1633
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:142
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Business"
 msgstr "Geschäftskonto"
 
-#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:224
+#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:220
 msgid "Can't access the selected folder, check Flatpak permissions."
 msgstr ""
 "Kann auf den ausgewählten Ordner nicht zugreifen, prüfe Flatpack-Rechte."
@@ -124,53 +142,53 @@ msgstr ""
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:225
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:227
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:107
 msgid "Change Password"
 msgstr "Passwort ändern"
 
 #: ../../../Models/Account.cs:1631
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:142
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Checking"
 msgstr "Girokonto"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:112
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:107
 #: ../../../Models/Account.cs:1627
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:89
 msgid "Currency"
 msgstr "Währung"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:291
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:342
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:218
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:344
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:353
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:221
 msgid "Currency Code"
 msgstr "Währungs-Code"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:315
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:376
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:378
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 msgid "Currency Code (Empty)"
 msgstr "Währungs-Code (Leer)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:340
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:164
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:207
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:342
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:351
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:165
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:217
 msgid "Currency Symbol"
 msgstr "Währungszeichen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:364
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:366
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:368
 msgid "Currency Symbol (Empty)"
 msgstr "Währungszeichen (leer)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:310
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:332
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:339
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:370
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:396
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:404
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:372
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:395
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:402
 msgid "Currency Symbol (Invalid)"
 msgstr "Währungszeichen (ungültig)"
 
@@ -179,7 +197,7 @@ msgstr "Währungszeichen (ungültig)"
 msgid "Date"
 msgstr "Datum"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:556
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:517
 #, csharp-format
 msgid ""
 "David Lapshin {0}\n"
@@ -188,22 +206,22 @@ msgstr ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:293
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:344
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:186
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:229
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:346
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:355
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:173
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:225
 msgid "Decimal Separator"
 msgstr "Dezimaltrennzeichen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:320
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:384
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:383
 msgid "Decimal Separator (Empty)"
 msgstr "Dezimaltrennzeichen (leer)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:334
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:400
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:388
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:397
 msgid "Decimal Separator (Invalid)"
 msgstr "Dezimaltrennzeichen (ungültig)"
 
@@ -234,14 +252,14 @@ msgstr "Überweisung Löschen"
 msgid "Denaro"
 msgstr "Denaro"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:505
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:504
 #: ../../../Models/Account.cs:1658 ../../../Models/Account.cs:1688
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
 msgstr "Beschreibung"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:521
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:520
 msgid "Description (Empty)"
 msgstr "Beschreibung (Leer)"
 
@@ -275,7 +293,7 @@ msgstr "Bestehende Trennen"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:111
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:159
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:100
 msgid "Expense"
 msgstr "Ausgaben"
@@ -319,17 +337,17 @@ msgstr "Gruppe"
 msgid "Group Name"
 msgstr "Gruppenname"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:295
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:346
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:247
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:348
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:189
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Group Separator"
 msgstr "Gruppentrennzeichen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:341
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:392
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:408
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:390
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
 msgid "Group Separator (Invalid)"
 msgstr "Gruppentrennzeichen (ungültig)"
 
@@ -339,7 +357,7 @@ msgstr "Gruppentrennzeichen (ungültig)"
 msgid "Groups"
 msgstr "Gruppen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:245
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:246
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
@@ -348,6 +366,18 @@ msgstr "Hilfe"
 #: ../../../Models/Account.cs:1686 ../../../Models/Account.cs:1750
 msgid "Id"
 msgstr "ID"
+
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
+#, fuzzy
+#| msgid "Import from File"
+msgid "Import from Account"
+msgstr "Von Datei importieren"
+
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
+#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:41
+msgid "Import from File"
+msgstr "Von Datei importieren"
 
 #: ../../../Controllers/AccountViewController.cs:976
 #, csharp-format
@@ -360,7 +390,7 @@ msgstr[1] "{0} Überweisungen aus Datei importiert."
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:90
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:155
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:165
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:96
 msgid "Income"
 msgstr "Einkommen"
@@ -371,7 +401,7 @@ msgstr "Einkommen"
 msgid "Manage your personal finances"
 msgstr "Verwalte deine persönlichen Finanzen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:553
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:514
 msgid "Matrix Chat"
 msgstr "Matrix-Chat"
 
@@ -380,16 +410,16 @@ msgstr "Matrix-Chat"
 msgid "N/A"
 msgstr "Entfällt"
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:174
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:337
 #: ../../../Models/Account.cs:1657
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:54
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:32
 msgid "Name"
 msgstr "Name"
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:360
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:184
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:358
 msgid "Name (Empty)"
 msgstr "Name (Leer)"
 
@@ -397,12 +427,12 @@ msgstr "Name (Leer)"
 msgid "Name (Exists)"
 msgstr "Name (Existiert)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:607
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:606
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
 msgid "Never"
 msgstr "Nie"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:554
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:515
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -411,7 +441,7 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "Mitwirkende auf GitHub ❤️ {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:555
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:516
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -422,8 +452,8 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:387
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:427
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision Denaro-Konto"
@@ -434,9 +464,9 @@ msgstr "Nickvision Denaro-Konto"
 msgid "No"
 msgstr "Nein"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:421
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:639
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:420
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:638
 msgid "No End Date"
 msgstr "Kein End-Datum"
 
@@ -457,14 +487,13 @@ msgstr "Keine Überweisung entsprechen den angegebenen Filtern."
 msgid "Notes"
 msgstr "Notizen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:252
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:253
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:431
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:391
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
-#: NickvisionMoney.GNOME/Blueprints/window.blp:197
+#: NickvisionMoney.GNOME/Blueprints/window.blp:199
 msgid "Open Account"
 msgstr "Konto öffnen"
 
@@ -480,14 +509,18 @@ msgstr "Seite {0}"
 msgid "PDF Password"
 msgstr "PDF-Passwort"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:511
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:693
+#: ../../../Controllers/MainWindowController.cs:252
+msgid "Please wait while transactions import..."
+msgstr ""
+
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:692
 #: ../../../Models/Account.cs:1751
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
 msgstr "Beleg"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:537
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:536
 msgid "Receipt (File Inaccessible)"
 msgstr "Beleg (Datei unzugänglich)"
 
@@ -495,12 +528,12 @@ msgstr "Beleg (Datei unzugänglich)"
 msgid "Receipts"
 msgstr "Beleg"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:509
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:508
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:135
 msgid "Repeat End Date"
 msgstr "Wiederholungs-Ende"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:531
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:530
 msgid "Repeat End Date (Invalid)"
 msgstr "Wiederholungs-Ende (Ungültig)"
 
@@ -515,7 +548,7 @@ msgstr "Wiederholungs-Intervall Wurde Geändert"
 
 #: ../../../Models/Account.cs:1632
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:142
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Savings"
 msgstr "Sparkonto"
 
@@ -523,13 +556,12 @@ msgstr "Sparkonto"
 msgid "Select Account"
 msgstr "Konto auswählen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:215
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:162
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:176
+#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:211
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:158
 msgid "Select Backup Folder"
 msgstr "Sicherungsordner auswählen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:230
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:264
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
 msgid "Select Folder"
 msgstr "Ordner auswählen"
@@ -554,11 +586,11 @@ msgstr "Das Passwort des Kontos wurde geändert."
 msgid "The password of the account was removed."
 msgstr "Das Passwort des Kontos wurde entfernt."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:456
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:458
 msgid "The password will be removed upon closing this dialog."
 msgstr "Das Passwort wird nach dem Schließen dieses Dialogs entfernt werden."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:413
 msgid "The passwords do not match."
 msgstr "Die Passwörter stimmen nicht überein."
 
@@ -579,7 +611,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Dieses Konto hat kein Geld zum überweisen mehr."
 
-#: ../../../Controllers/MainWindowController.cs:281
+#: ../../../Controllers/MainWindowController.cs:304
 msgid "This account is already opened."
 msgstr "Dieses Konto ist schon geöffnet."
 
@@ -617,7 +649,7 @@ msgstr ""
 msgid "Total"
 msgstr "Insgesamt"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:189
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:188
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Transaction"
 msgstr "Überweisung"
@@ -641,7 +673,7 @@ msgstr "Von {0} Überweisen"
 msgid "Transfer To {0}"
 msgstr "Zu {0} Überweisen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:557
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:518
 msgid "translator-credits"
 msgstr "Jummit"
 
@@ -669,13 +701,13 @@ msgstr ""
 "Die Informationen aus der Datei können nicht importiert werden. Nicht "
 "unterstützter Dateityp."
 
-#: ../../../Controllers/MainWindowController.cs:263
+#: ../../../Controllers/MainWindowController.cs:286
 msgid "Unable to login to account. Provided password is invalid."
 msgstr ""
 "Anmeldung zum Konto nicht möglich. Das angegebene Kennwort ist ungültig."
 
-#: ../../../Controllers/MainWindowController.cs:220
-#: ../../../Controllers/MainWindowController.cs:270
+#: ../../../Controllers/MainWindowController.cs:239
+#: ../../../Controllers/MainWindowController.cs:293
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -684,8 +716,16 @@ msgstr ""
 "die Berechtigungen für den Zugriff auf die Datei hat und versuchen Sie es "
 "erneut."
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:372
-msgid "Unable to override an opened account."
+#: ../../../Controllers/MainWindowController.cs:227
+#, fuzzy
+#| msgid "Unable to override an opened account."
+msgid "Unable to overwrite an existing account."
+msgstr "Geöffnetes Konto konnte nicht überschrieben werden."
+
+#: ../../../Controllers/MainWindowController.cs:216
+#, fuzzy
+#| msgid "Unable to override an opened account."
+msgid "Unable to overwrite an opened account."
 msgstr "Geöffnetes Konto konnte nicht überschrieben werden."
 
 #: ../../../Controllers/TransactionDialogController.cs:87
@@ -696,11 +736,6 @@ msgstr "Geöffnetes Konto konnte nicht überschrieben werden."
 #: ../../../Models/Account.cs:1734
 msgid "Ungrouped"
 msgstr "Ungruppiert"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:168
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:208
-msgid "Unlimited"
-msgstr "Unbegrenzt"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid "Update Only Source"
@@ -714,14 +749,14 @@ msgstr "Ursprung und Generierte Aktualisieren"
 msgid "Update Transaction"
 msgstr "Überweisung Aktualisieren"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:445
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:665
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:444
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:664
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:300
 msgid "Upload"
 msgstr "Hochladen"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:441
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:709
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:440
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:708
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:278
 msgid "View"
 msgstr "Ansehen"
@@ -742,28 +777,10 @@ msgstr ""
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:186
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:105
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:100
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:220
 msgid "Your system reported that your currency is"
 msgstr "Dein System meldete deine Währung sei"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:118
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:148
-msgctxt "DecimalSeparator"
-msgid "Other"
-msgstr "Anderes"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:143
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
-msgctxt "GroupSeparator"
-msgid "None"
-msgstr "Keines"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:143
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:178
-msgctxt "GroupSeparator"
-msgid "Other"
-msgstr "Anderes"
 
 #: ../../../Controllers/MainWindowController.cs:97
 msgctxt "Morning"
@@ -782,7 +799,7 @@ msgid "Back"
 msgstr "Zurück"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:67
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:147
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:157
 msgid "Default Transaction Type"
 msgstr "Standard-Transaktionsart"
 
@@ -795,42 +812,80 @@ msgid "Set a new password or remove one."
 msgstr "Legen Sie ein neues Passwort fest oder entfernen Sie eines."
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:150
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:202
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:212
 msgid "Use Custom Currency"
 msgstr "Eigene Währung Benutzen"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:170
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:213
-msgid "Enter symbol here"
-msgstr "Zeichen hier eingeben"
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
+#, fuzzy
+#| msgctxt "DecimalSeparator"
+#| msgid "Other"
+msgid "Other"
+msgstr "Anderes"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:181
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:224
-msgid "Enter code here"
-msgstr "Code hier eingeben"
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
+#, fuzzy
+#| msgctxt "GroupSeparator"
+#| msgid "None"
+msgid "None"
+msgstr "Keines"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:222
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:265
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:205
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:257
 msgid "Decimal Digits"
 msgstr "Dezimalziffern"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:242
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Two"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Three"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Four"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Five"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Six"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
+msgid "Unlimited"
+msgstr "Unbegrenzt"
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:223
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:31
 msgid "New Password"
 msgstr "Neues Passwort"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:246
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:36
 msgid "Confirm Password"
 msgstr "Passwort bestätigen"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:250
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:231
 msgid "If the password is lost, there is no way to restore the file!"
 msgstr ""
 "Wenn das Passwort verloren geht, gibt es keine Möglichkeit, die Datei "
 "wiederherzustellen!"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:254
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:235
 #: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
 msgid "Remove"
 msgstr "Entfernen"
@@ -838,11 +893,6 @@ msgstr "Entfernen"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:5
 msgid "Transfer Money"
 msgstr "Geld Überweisen"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:41
-msgid "Import from File"
-msgstr "Von Datei importieren"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
@@ -960,7 +1010,7 @@ msgstr "Gruppe Editieren"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:51
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionMoney.GNOME/Blueprints/window.blp:185
+#: NickvisionMoney.GNOME/Blueprints/window.blp:187
 msgid "New Account"
 msgstr "Neues Konto"
 
@@ -976,10 +1026,6 @@ msgstr "Los geht's"
 msgid "Storage Location"
 msgstr "Speicherort"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-msgid "Account Name"
-msgstr "Kontoname"
-
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
 msgid "Account Password (Optional)"
 msgstr "Kontopasswort (optional)"
@@ -988,29 +1034,63 @@ msgstr "Kontopasswort (optional)"
 msgid "Folder"
 msgstr "Ordner"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:112
-msgid "Save"
-msgstr "Speichern"
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
+#, fuzzy
+#| msgid "Destination Account"
+msgid "Overwrite Existing Accounts"
+msgstr "Zielkonto"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:129
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:269
+msgid "Next"
+msgstr "Weiter"
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "Account Options"
 msgstr "Kontooptionen"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:149
 msgid "This is only a useful label that doesn't affect how the app works."
 msgstr ""
 "Dies ist nur eine nützliche Bezeichnung die nicht beeinflusst wie das "
 "Programm funktioniert."
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:171
-msgid "Next"
-msgstr "Weiter"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:188
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:198
 msgid "Account Currency"
 msgstr "Kontowährung"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
+#, fuzzy
+#| msgid "Export All Information"
+msgid "Import Existing Information"
+msgstr "Alle Informationen exportieren"
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:295
+msgid ""
+"Upload a valid file to use to import existing information into the new "
+"account."
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
+#, fuzzy
+#| msgid "Import from File"
+msgid "Import File"
+msgstr "Von Datei importieren"
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
+#, fuzzy
+#| msgid "Select Folder"
+msgid "Select File"
+msgstr "Ordner auswählen"
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
+#, fuzzy
+#| msgid "Clear Backup Folder"
+msgid "Clear File"
+msgstr "Setze Sicherungs-Ordner zurück"
+
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:330
 msgid "Create"
 msgstr "Erstellen"
 
@@ -1173,7 +1253,7 @@ msgstr ""
 "Unverschlüsselte Konten werden automatisch als CSV-Dateien in diesen Ordner "
 "exportiert wenn eine Änderung gemacht wird."
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:184
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:168
 msgid "Clear Backup Folder"
 msgstr "Setze Sicherungs-Ordner zurück"
 
@@ -1297,7 +1377,7 @@ msgid "Select a destination account"
 msgstr "Wähle ein Zielkonto aus"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:54
-#: NickvisionMoney.GNOME/Blueprints/window.blp:163
+#: NickvisionMoney.GNOME/Blueprints/window.blp:165
 msgid "Recent Accounts"
 msgstr "Kürzliche Konten"
 
@@ -1352,7 +1432,7 @@ msgstr "Hauptmenü"
 msgid "Dashboard"
 msgstr "Übersicht"
 
-#: NickvisionMoney.GNOME/Blueprints/window.blp:154
+#: NickvisionMoney.GNOME/Blueprints/window.blp:156
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
@@ -1391,6 +1471,19 @@ msgid ""
 msgstr ""
 "— Ein Konto als CSV-Datei exportieren und eine CSV-, OFX- oder QIF-Datei "
 "importieren, um einem Konto massenhaft Überweisungen hinzuzufügen"
+
+#~ msgctxt "GroupSeparator"
+#~ msgid "Other"
+#~ msgstr "Anderes"
+
+#~ msgid "Enter symbol here"
+#~ msgstr "Zeichen hier eingeben"
+
+#~ msgid "Enter code here"
+#~ msgstr "Code hier eingeben"
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
 
 #~ msgid "Hide"
 #~ msgstr "Ausblenden"
@@ -1509,9 +1602,6 @@ msgstr ""
 
 #~ msgid "Settings"
 #~ msgstr "Einstellungen"
-
-#~ msgid "No Account Opened"
-#~ msgstr "Kein Konto geöffnet"
 
 #~ msgid "Transfer Money (Ctrl+T)"
 #~ msgstr "Geld Überweisen (Strg+T)"
