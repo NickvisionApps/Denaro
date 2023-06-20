@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-18 08:36-0400\n"
-"PO-Revision-Date: 2023-06-18 02:58+0000\n"
+"PO-Revision-Date: 2023-06-20 14:44+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
 "app/ar/>\n"
@@ -50,16 +50,12 @@ msgid "Account Name"
 msgstr "اسم الحساب"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
-#, fuzzy
-#| msgid "Name (Exists)"
 msgid "Account Name (Exists)"
-msgstr "الاسم (موجود)"
+msgstr "اسم الحساب (موجود)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
-#, fuzzy
-#| msgid "No Account Opened"
 msgid "Account Name (Opened)"
-msgstr "لم يُفتح حساب"
+msgstr "اسم الحساب (مفتوح)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
@@ -372,10 +368,8 @@ msgid "Id"
 msgstr "المعرِّف"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
-#, fuzzy
-#| msgid "Import from File"
 msgid "Import from Account"
-msgstr "استورد من ملفٍّ"
+msgstr "استورد من حساب"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -519,7 +513,7 @@ msgstr "كلمة سرِّ بي‌دي‌إف"
 
 #: ../../../Controllers/MainWindowController.cs:252
 msgid "Please wait while transactions import..."
-msgstr ""
+msgstr "اصبر ريثما تُستورد المعاملات..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:692
@@ -717,16 +711,12 @@ msgstr ""
 "تعذَّر فتح الحساب. تأكد من حصول التطبيق على صلاحية الوصول للملف وجرب مرةً أخرى."
 
 #: ../../../Controllers/MainWindowController.cs:227
-#, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an existing account."
-msgstr "يتعذَّر تجاوز حساب مفتوح."
+msgstr "تتعذَّر الكتابة على حساب موجود."
 
 #: ../../../Controllers/MainWindowController.cs:216
-#, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an opened account."
-msgstr "يتعذَّر تجاوز حساب مفتوح."
+msgstr "تتعذَّر الكتابة على حساب مفتوح."
 
 #: ../../../Controllers/TransactionDialogController.cs:87
 #: ../../../Controllers/TransactionDialogController.cs:330
@@ -820,17 +810,11 @@ msgstr "استخدم عملةً مخصَّصةً"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
-#| msgctxt "DecimalSeparator"
-#| msgid "Other"
 msgid "Other"
 msgstr "غير ذلك"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
-#| msgctxt "GroupSeparator"
-#| msgid "None"
 msgid "None"
 msgstr "لا يوجد"
 
@@ -842,27 +826,27 @@ msgstr "الأرقام بعد الفاصل العشريِّ"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Two"
-msgstr ""
+msgstr "إثنان"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Three"
-msgstr ""
+msgstr "ثلاثة"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Four"
-msgstr ""
+msgstr "أربعة"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Five"
-msgstr ""
+msgstr "خمسة"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Six"
-msgstr ""
+msgstr "ستة"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
@@ -1033,10 +1017,8 @@ msgid "Folder"
 msgstr "مجلد"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
-#, fuzzy
-#| msgid "Destination Account"
 msgid "Overwrite Existing Accounts"
-msgstr "حساب الوجهة"
+msgstr "اكتب على حسابات موجودة"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
@@ -1057,34 +1039,26 @@ msgid "Account Currency"
 msgstr "عملة الحساب"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
-#, fuzzy
-#| msgid "Export All Information"
 msgid "Import Existing Information"
-msgstr "صدِّر كلَّ المعلومات"
+msgstr "استورد معلومات موجودةً"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:295
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
-msgstr ""
+msgstr "ارفع ملفًّا صالحًا يُستخدم لاستيراد معلومات إلى حساب جديد."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
-#, fuzzy
-#| msgid "Import from File"
 msgid "Import File"
-msgstr "استورد من ملفٍّ"
+msgstr "استورد ملفًّا"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select File"
-msgstr "حدِّد مجلدًا"
+msgstr "حدِّد ملفًّا"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
-#, fuzzy
-#| msgid "Clear Backup Folder"
 msgid "Clear File"
-msgstr "امحُ مجلَّد النسخ الاحتياطيِّ"
+msgstr "امحُ ملفًّا"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:330
 msgid "Create"
