@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-18 08:36-0400\n"
-"PO-Revision-Date: 2023-06-08 09:34+0000\n"
+"PO-Revision-Date: 2023-06-21 15:57+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
@@ -46,16 +46,12 @@ msgid "Account Name"
 msgstr "Název účtu"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
-#, fuzzy
-#| msgid "Name (Exists)"
 msgid "Account Name (Exists)"
-msgstr "Název (existuje)"
+msgstr "Název účtu (existuje)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
-#, fuzzy
-#| msgid "No Account Opened"
 msgid "Account Name (Opened)"
-msgstr "Není otevřen žádný účet"
+msgstr "Název účtu (otevřený)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
@@ -369,10 +365,8 @@ msgid "Id"
 msgstr "ID"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
-#, fuzzy
-#| msgid "Import from File"
 msgid "Import from Account"
-msgstr "Import ze souboru"
+msgstr "Import z účtu"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -513,7 +507,7 @@ msgstr "Heslo PDF"
 
 #: ../../../Controllers/MainWindowController.cs:252
 msgid "Please wait while transactions import..."
-msgstr ""
+msgstr "Počkejte prosím na import transakcí..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:692
@@ -714,14 +708,10 @@ msgstr ""
 "k vašemu souboru a zkuste to znovu."
 
 #: ../../../Controllers/MainWindowController.cs:227
-#, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an existing account."
-msgstr "Nelze přepsat otevřený účet."
+msgstr "Nelze přepsat existující účet."
 
 #: ../../../Controllers/MainWindowController.cs:216
-#, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an opened account."
 msgstr "Nelze přepsat otevřený účet."
 
@@ -817,17 +807,11 @@ msgstr "Použití vlastní měny"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
-#| msgctxt "DecimalSeparator"
-#| msgid "Other"
 msgid "Other"
 msgstr "Jiný"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
-#| msgctxt "GroupSeparator"
-#| msgid "None"
 msgid "None"
 msgstr "Žádný"
 
@@ -839,27 +823,27 @@ msgstr "Desetinné číslice"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Two"
-msgstr ""
+msgstr "Dva"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Three"
-msgstr ""
+msgstr "Tři"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Four"
-msgstr ""
+msgstr "Čtyři"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Five"
-msgstr ""
+msgstr "Pět"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Six"
-msgstr ""
+msgstr "Šest"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
@@ -1030,10 +1014,8 @@ msgid "Folder"
 msgstr "Složka"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
-#, fuzzy
-#| msgid "Destination Account"
 msgid "Overwrite Existing Accounts"
-msgstr "Cílový účet"
+msgstr "Přepsat existující účty"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
@@ -1055,34 +1037,27 @@ msgid "Account Currency"
 msgstr "Měna účtu"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
-#, fuzzy
-#| msgid "Export All Information"
 msgid "Import Existing Information"
-msgstr "Exportovat všechny informace"
+msgstr "Importovat existující informace"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:295
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
+"Pro importování existujících informací do nového účtu nahrajte platný soubor."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
-#, fuzzy
-#| msgid "Import from File"
 msgid "Import File"
-msgstr "Import ze souboru"
+msgstr "Import souboru"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select File"
-msgstr "Vybrat složku"
+msgstr "Vybrat soubor"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
-#, fuzzy
-#| msgid "Clear Backup Folder"
 msgid "Clear File"
-msgstr "Vymazat složku záloh"
+msgstr "Vymazat soubor"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:330
 msgid "Create"
@@ -1430,10 +1405,8 @@ msgstr ""
 "přetáhnout soubor z prohlížeče souborů."
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
-#, fuzzy
-#| msgid "money;finance;wallet;cash;bank;GTK;Nickvision;"
 msgid "money;finance;wallet;cash;bank;Nickvision;"
-msgstr "peníze;finance;peněženka;hotovost;banka;GTK;Nickvision;"
+msgstr "peníze;finance;peněženka;hotovost;banka;Nickvision;"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
