@@ -186,10 +186,6 @@ Task("DocsUpdateHtml")
             Arguments = $"html -o html{sep}{lang}{sep} yelp{sep}{lang}{sep}",
             WorkingDirectory = $"{projectName}.Shared{sep}Docs"
         });
-        if (lang == "C")
-        {
-            continue;
-        }
         DeleteDirectory($"{projectName}.Shared{sep}Docs{sep}html{sep}{lang}{sep}figures", new DeleteDirectorySettings {
             Force = true,
             Recursive = true
