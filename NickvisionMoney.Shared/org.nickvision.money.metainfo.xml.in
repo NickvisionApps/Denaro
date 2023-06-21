@@ -51,6 +51,7 @@
       <description translatable="no">
         <p>- Added the ability to select a file to import existing data from in the new account setup dialog</p>
         <p>- Improved custom currency preferences design</p>
+        <p>- Fixed an issue where the Help docs were not installed on an English system</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
