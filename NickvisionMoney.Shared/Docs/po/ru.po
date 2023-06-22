@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.18-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -109,18 +109,18 @@ msgstr "Тип счёта"
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
-"in the list of recent accounts and doesn't affect how the application works "
-"or what you can do with an account. Each account type has its own color, "
-"these colors can be configured in <link xref=\"configuration\">global "
-"settings</link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
+"the list of recent accounts and doesn't affect how the application works or "
+"what you can do with an account. Each account type has its own color, these "
+"colors can be configured in <link xref=\"configuration\">global settings</"
+"link>."
 msgstr ""
 "Доступно 3 типа счетов: 🟣<em>Расчётный</em>, 🔵<em>Сберегательный</em> и 🟢"
 "<em>Бизнес</em>. Тип счёта представляет собой лишь полезную метку, которая "
 "отображается в списке недавних счетов, и никак не влияет на работу "
 "приложения, не меняет ничего в том, как вы можете использовать счёт. У "
-"каждого типа счёта есть свой цвет, цвета можно настроить в <link "
-"xref=\"configuration\">глобальной конфигурации</link>."
+"каждого типа счёта есть свой цвет, цвета можно настроить в <link xref="
+"\"configuration\">глобальной конфигурации</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
@@ -160,8 +160,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:44
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to "
-"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
+"$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 "Если ваш регион <em>Английский (США)</em>, знак <em>$</em> будет символом "
 "валюты, а <em>1,000.00</em> будет приниматься как корректное число."
@@ -404,14 +404,14 @@ msgstr "Цвет транзакции по умолчанию"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link "
-"xref=\"transaction\">transaction</link> with unique color. Changing this "
-"will not affect existing transactions, even if they use previously selected "
-"default color."
+"A color that will be selected by default when adding a new <link xref="
+"\"transaction\">transaction</link> with unique color. Changing this will not "
+"affect existing transactions, even if they use previously selected default "
+"color."
 msgstr ""
-"Цвет, который будет выбран по умолчанию при создании новой <link "
-"xref=\"transaction\">транзакции</link> с собственным цветом. Изменение цвета "
-"не затронет существующие транзакции, даже если они используют цвет, который "
+"Цвет, который будет выбран по умолчанию при создании новой <link xref="
+"\"transaction\">транзакции</link> с собственным цветом. Изменение цвета не "
+"затронет существующие транзакции, даже если они используют цвет, который "
 "ранее был цветом по умолчанию."
 
 #. (itstool) path: item/title
@@ -422,8 +422,8 @@ msgstr "Цвет перевода средств по умолчанию"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link "
-"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link xref="
+"\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
 "Цвет, который будет использован для транзакций, созданных с помощью <link "
@@ -469,8 +469,8 @@ msgid ""
 "A color used to mark <link xref=\"account\">accounts</link> with the "
 "<em>Savings</em> type in a recent accounts list."
 msgstr ""
-"Цвет, которым отмечаются <em>Сберегательные</em> <link "
-"xref=\"account\">счета</link> в списке недавних счетов."
+"Цвет, которым отмечаются <em>Сберегательные</em> <link xref=\"account"
+"\">счета</link> в списке недавних счетов."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
@@ -528,13 +528,12 @@ msgstr "Папка резервных копий CSV"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
+"A folder where your data will be automatically <link xref=\"import-export"
+"\">exported to CSV</link> after every change. This feature doesn't work for "
+"password-protected accounts, because CSV files can't be password-protected."
 msgstr ""
-"Папка, в которую ваши данные будут автоматически <link xref=\"import-"
-"export\">экспортироваться в формате CSV</link> после каждого изменения. Эта "
+"Папка, в которую ваши данные будут автоматически <link xref=\"import-export"
+"\">экспортироваться в формате CSV</link> после каждого изменения. Эта "
 "функция не работает для счетов, защищённых паролем, т.к. CSV файлы не могут "
 "быть защищены паролем."
 
@@ -821,10 +820,10 @@ msgid ""
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
 "Для получения дополнительной помощи посетите <link href=\"https://github.com/"
-"NickvisionApps/Denaro/issues\">раздел проблем</link> или <link "
-"href=\"https://github.com/NickvisionApps/Denaro/discussions\">обсуждения</"
-"link> на Github, либо <link href=\"https://bit.ly/3GrfEid\">наш канал в "
-"Matrix</link>."
+"NickvisionApps/Denaro/issues\">раздел проблем</link> или <link href="
+"\"https://github.com/NickvisionApps/Denaro/discussions\">обсуждения</link> "
+"на Github, либо <link href=\"https://bit.ly/3GrfEid\">наш канал в Matrix</"
+"link>."
 
 #. (itstool) path: info/title
 #: yelp/C/transaction.page:8
@@ -884,8 +883,8 @@ msgid ""
 "em> in <link xref=\"account\">Account page</link> for details."
 msgstr ""
 "Число в формате, корректном для ваших региональных настроек, для "
-"подробностей почитайте о <em>Системной валюте</em> на странице <link "
-"xref=\"account\">о счетах</link>."
+"подробностей почитайте о <em>Системной валюте</em> на странице <link xref="
+"\"account\">о счетах</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
@@ -895,13 +894,13 @@ msgstr "Тип"
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
-"xref=\"account\">account settings</link> will be selected when you open a "
-"dialog to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
+"\"account\">account settings</link> will be selected when you open a dialog "
+"to add new transaction."
 msgstr ""
 "<em>Доходы</em> или <em>Расходы</em>. По умолчанию при открытии диалога "
-"добавления новой транзакции будет выбран тот тип, что указан в <link "
-"xref=\"account\">настройках счёта</link>."
+"добавления новой транзакции будет выбран тот тип, что указан в <link xref="
+"\"account\">настройках счёта</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:41
@@ -988,9 +987,8 @@ msgid ""
 msgstr ""
 "Цвет транзакции. Можно либо использовать цвет группы, либо указать "
 "собственный цвет. При выборе собственного цвета, по умолчанию он будет "
-"соответствовать цвету, указанному в <link "
-"xref=\"configuration\">конфигурации</link>, но он может быть изменён на "
-"любой другой цвет."
+"соответствовать цвету, указанному в <link xref=\"configuration"
+"\">конфигурации</link>, но он может быть изменён на любой другой цвет."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
@@ -1071,13 +1069,12 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link "
-"xref=\"configuration\">configuration</link> will be used for created "
-"transactions."
+"properties other than the amount. The color selected in <link xref="
+"\"configuration\">configuration</link> will be used for created transactions."
 msgstr ""
 "Перевод средств не позволяет создавать повторяющиеся транзакции или задавать "
-"какие-либо другие свойства, кроме суммы. Цвет, выбранный в <link "
-"xref=\"configuration\">конфигурации</link>, будет использован для созданных "
+"какие-либо другие свойства, кроме суммы. Цвет, выбранный в <link xref="
+"\"configuration\">конфигурации</link>, будет использован для созданных "
 "транзакций."
 
 #. (itstool) path: page/p
