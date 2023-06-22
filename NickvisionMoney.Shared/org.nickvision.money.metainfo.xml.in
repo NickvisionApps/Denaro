@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.6.1-next" date="2023-06-16">
+    <release version="2023.6.1" date="2023-06-22">
       <description translatable="no">
         <p>- Added the ability to select a file to import existing data from in the new account setup dialog</p>
         <p>- Improved custom currency preferences design</p>
