@@ -68,9 +68,9 @@ msgstr ""
 "Každý účet je uložen v jednom souboru <file>*.nmoney</file>. Soubory "
 "vytvořené ve starší <em>stabilní</em> verzi aplikace <app>Denaro</app> lze "
 "bezpečně otevřít v novější <em>stabilní</em> verzi aplikace. Přestože "
-"aplikace může běžet na různých platformách (Windows a Linux), soubory <file>*"
-".nmoney</file> jsou mezi platformami 100% kompatibilní, pokud pocházejí ze "
-"stejné verze aplikace (např. V2023.1.0)."
+"aplikace může běžet na různých platformách (Windows a Linux), soubory "
+"<file>*.nmoney</file> jsou mezi platformami 100% kompatibilní, pokud "
+"pocházejí ze stejné verze aplikace (např. V2023.1.0)."
 
 #. (itstool) path: note/p
 #: yelp/C/account.page:24
@@ -107,15 +107,15 @@ msgstr "Typ účtu"
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
-"in the list of recent accounts and doesn't affect how the application works "
-"or what you can do with an account. Each account type has its own color, "
-"these colors can be configured in <link xref=\"configuration\">global "
-"settings</link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
+"the list of recent accounts and doesn't affect how the application works or "
+"what you can do with an account. Each account type has its own color, these "
+"colors can be configured in <link xref=\"configuration\">global settings</"
+"link>."
 msgstr ""
-"K dispozici jsou 3 typy účtů: 🟣<em>Běžný</em>, 🔵<em>Spořicí</em> a "
-"🟢<em>Firemní</em>. Typ účtu je pouze užitečné označení, které se zobrazuje "
-"v seznamu posledních účtů a nemá vliv na to, jak aplikace funguje nebo co "
+"K dispozici jsou 3 typy účtů: 🟣<em>Běžný</em>, 🔵<em>Spořicí</em> a 🟢"
+"<em>Firemní</em>. Typ účtu je pouze užitečné označení, které se zobrazuje v "
+"seznamu posledních účtů a nemá vliv na to, jak aplikace funguje nebo co "
 "můžete s účtem dělat. Každý typ účtu má svou vlastní barvu, tyto barvy lze "
 "nakonfigurovat v <link xref=\"configuration\">globálním nastavení</link> ."
 
@@ -155,8 +155,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:44
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to "
-"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
+"$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 "Pokud je vaše místní prostředí <em>Angličtina (Spojené státy)</em>, symbol "
 "měny bude nastaven na <em>$</em> a <em>1,000.00</em> bude akceptováno jako "
@@ -393,10 +393,10 @@ msgstr "Výchozí barva transakce"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link "
-"xref=\"transaction\">transaction</link> with unique color. Changing this "
-"will not affect existing transactions, even if they use previously selected "
-"default color."
+"A color that will be selected by default when adding a new <link xref="
+"\"transaction\">transaction</link> with unique color. Changing this will not "
+"affect existing transactions, even if they use previously selected default "
+"color."
 msgstr ""
 "Barva, která bude vybrána jako výchozí při přidání nové <link xref="
 "\"transaction\">transakce</link> s jedinečnou barvou. Její změna neovlivní "
@@ -410,8 +410,8 @@ msgstr "Výchozí barva převodu"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link "
-"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link xref="
+"\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
 "Barva, která bude použita pro transakce vytvořené pomocí <link xref="
@@ -515,13 +515,12 @@ msgstr "Složka zálohy CSV"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
+"A folder where your data will be automatically <link xref=\"import-export"
+"\">exported to CSV</link> after every change. This feature doesn't work for "
+"password-protected accounts, because CSV files can't be password-protected."
 msgstr ""
-"Složka, do které budou vaše data po každé změně automaticky <link xref"
-"=\"import-export\">exportována jako soubor CSV</link>. Tato funkce nefunguje "
+"Složka, do které budou vaše data po každé změně automaticky <link xref="
+"\"import-export\">exportována jako soubor CSV</link>. Tato funkce nefunguje "
 "pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
 
 #. (itstool) path: info/title
@@ -548,7 +547,8 @@ msgstr "Data by měla být ve formátu <em>RRRRMMDD</em>."
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:30
 msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
-msgstr "Data by měla být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
+msgstr ""
+"Data by měla být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:34
@@ -676,7 +676,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:76
 msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
-msgstr "Částka transakce v anglickém (americkém) formátu (<em>123,456.78</em>)."
+msgstr ""
+"Částka transakce v anglickém (americkém) formátu (<em>123,456.78</em>)."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:80
@@ -801,8 +802,8 @@ msgid ""
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
 "Potřebujete-li podporu, použijte <link href=\"https://github.com/"
-"NickvisionApps/Denaro/issues\">problémy</link> nebo <link href=\"https"
-"://github.com/NickvisionApps/Denaro/discussions\">diskuze</link> na GitHubu "
+"NickvisionApps/Denaro/issues\">problémy</link> nebo <link href=\"https://"
+"github.com/NickvisionApps/Denaro/discussions\">diskuze</link> na GitHubu "
 "nebo se <link href=\"https://bit.ly/3GrfEid\">připojte k našemu kanálu "
 "Matrix</link>."
 
@@ -872,9 +873,9 @@ msgstr "Typ"
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
-"xref=\"account\">account settings</link> will be selected when you open a "
-"dialog to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
+"\"account\">account settings</link> will be selected when you open a dialog "
+"to add new transaction."
 msgstr ""
 "<em>Příjem</em> nebo <em>Výdaj</em>. Ve výchozím nastavení se při otevření "
 "dialogu pro přidání nové transakce vybere ta, která byla zvolena v <link "
@@ -1043,9 +1044,8 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link "
-"xref=\"configuration\">configuration</link> will be used for created "
-"transactions."
+"properties other than the amount. The color selected in <link xref="
+"\"configuration\">configuration</link> will be used for created transactions."
 msgstr ""
 "Převod neumožňuje vytvářet opakující se transakce ani nastavovat jiné "
 "vlastnosti než částku. Pro vytvořené transakce se použije barva vybraná v "
