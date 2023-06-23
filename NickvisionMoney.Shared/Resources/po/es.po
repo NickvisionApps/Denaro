@@ -315,7 +315,7 @@ msgstr "Generado: {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:551
 msgid "GitHub Repo"
-msgstr "Repo de GitHub"
+msgstr "Repositorio de GitHub"
 
 #: ../../../Controllers/MainWindowController.cs:98
 msgid "Good Afternoon!"
