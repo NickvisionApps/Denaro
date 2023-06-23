@@ -50,6 +50,7 @@
     <release version="2023.6.2-next" date="2023-06-22">
       <description translatable="no">
         <p>- Fixed an issue where amounts were not updated when a transaction was deleted</p>
+        <p>- Fixed an issue where some accounts could not Export To PDF</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

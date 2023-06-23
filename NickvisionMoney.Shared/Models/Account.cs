@@ -1167,7 +1167,7 @@ public class Account : IDisposable
         var extension = System.IO.Path.GetExtension(path).ToLower();
         if (extension == ".csv")
         {
-            return await ImportFromCSVAsync(path);
+            return await ImportFromCSVAsync(path, defaultTransactionRGBA, defaultGroupRGBA);
         }
         else if (extension == ".ofx")
         {
@@ -1184,8 +1184,10 @@ public class Account : IDisposable
     /// Imports transactions from a CSV file
     /// </summary>
     /// <param name="path">The path of the file</param>
+    /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
+    /// <param name="defaultGroupRGBA">The default color for a group</param>
     /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromCSVAsync(string path)
+    private async Task<List<uint>> ImportFromCSVAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         var ids = new List<uint>();
         string[]? lines;
@@ -1280,6 +1282,10 @@ public class Account : IDisposable
             amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
+            if(string.IsNullOrEmpty(rgba))
+            {
+                rgba = defaultTransactionRGBA;
+            }
             //Get UseGroupColor
             var useGroupColor = false;
             try
@@ -1313,7 +1319,7 @@ public class Account : IDisposable
                 {
                     Name = groupName,
                     Description = groupDescription,
-                    RGBA = groupRGBA
+                    RGBA = string.IsNullOrEmpty(groupRGBA) ? defaultGroupRGBA : groupRGBA
                 };
                 await AddGroupAsync(group);
             }
@@ -1704,23 +1710,30 @@ public class Account : IDisposable
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
-                                if (rgba.StartsWith("#"))
+                                if(string.IsNullOrEmpty(rgba))
                                 {
-                                    rgba = rgba.Remove(0, 1);
-                                    if (rgba.Length == 8)
-                                    {
-                                        rgba = rgba.Remove(rgba.Length - 2);
-                                    }
-                                    hex += rgba;
+                                    hex = "#32FFFFFF";
                                 }
                                 else
                                 {
-                                    rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
-                                    rgba = rgba.Remove(rgba.Length - 1);
-                                    var fields = rgba.Split(',');
-                                    hex += byte.Parse(fields[0]).ToString("X2");
-                                    hex += byte.Parse(fields[1]).ToString("X2");
-                                    hex += byte.Parse(fields[2]).ToString("X2");
+                                    if (rgba.StartsWith("#"))
+                                    {
+                                        rgba = rgba.Remove(0, 1);
+                                        if (rgba.Length == 8)
+                                        {
+                                            rgba = rgba.Remove(rgba.Length - 2);
+                                        }
+                                        hex += rgba;
+                                    }
+                                    else
+                                    {
+                                        rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                                        rgba = rgba.Remove(rgba.Length - 1);
+                                        var fields = rgba.Split(',');
+                                        hex += byte.Parse(fields[0]).ToString("X2");
+                                        hex += byte.Parse(fields[1]).ToString("X2");
+                                        hex += byte.Parse(fields[2]).ToString("X2");
+                                    }
                                 }
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
                                 tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", cultureDate));
