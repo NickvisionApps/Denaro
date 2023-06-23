@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-18 08:36-0400\n"
+"POT-Creation-Date: 2023-06-22 23:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,7 +196,7 @@ msgstr "Currency Symbol (Empty)"
 msgid "Date"
 msgstr "日期"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:517
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:555
 #, csharp-format
 msgid ""
 "David Lapshin {0}\n"
@@ -315,6 +315,10 @@ msgstr "成功導出帳戶至檔案"
 msgid "Generated: {0}"
 msgstr "Generated: {0}"
 
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:551
+msgid "GitHub Repo"
+msgstr "GitHub Repo"
+
 #: ../../../Controllers/MainWindowController.cs:98
 msgid "Good Afternoon!"
 msgstr "下午好!"
@@ -359,7 +363,7 @@ msgstr "數額 (無效)"
 msgid "Groups"
 msgstr "群組"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:246
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:248
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
@@ -403,7 +407,7 @@ msgstr "收入"
 msgid "Manage your personal finances"
 msgstr "個人財政記錄軟體"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:514
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:552
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
@@ -434,14 +438,14 @@ msgstr "名稱 (已存在)"
 msgid "Never"
 msgstr "永不"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:515
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:553
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:516
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:554
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -449,7 +453,7 @@ msgid ""
 "DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
@@ -484,11 +488,11 @@ msgstr "沒有符合條件的交易"
 msgid "Notes"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:253
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:255
 msgid "Open"
 msgstr "開啟"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:391
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:393
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:199
 msgid "Open Account"
@@ -681,7 +685,7 @@ msgstr "從 {0} 轉帳"
 msgid "Transfer To {0}"
 msgstr "轉帳到 {0}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:518
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:556
 msgid "translator-credits"
 msgstr ""
 
@@ -1562,9 +1566,6 @@ msgstr ""
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "軟體Money的帳戶 (*.nmoney)"
-
-#~ msgid "GitHub Repo"
-#~ msgstr "GitHub Repo"
 
 #~ msgid "Report a Bug"
 #~ msgstr "Report a Bug"
