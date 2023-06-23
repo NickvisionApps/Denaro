@@ -6,8 +6,10 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -498,19 +500,55 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void About(Gio.SimpleAction sender, EventArgs e)
     {
+        var debugInfo = new StringBuilder();
+        debugInfo.AppendLine(_controller.AppInfo.ID);
+        debugInfo.AppendLine(_controller.AppInfo.Version);
+        debugInfo.AppendLine($"GTK {Gtk.Functions.GetMajorVersion()}.{Gtk.Functions.GetMinorVersion()}.{Gtk.Functions.GetMicroVersion()}");
+        debugInfo.AppendLine($"libadwaita {Adw.Functions.GetMajorVersion()}.{Adw.Functions.GetMinorVersion()}.{Adw.Functions.GetMicroVersion()}");
+        if (File.Exists("/.flatpak-info"))
+        {
+            debugInfo.AppendLine("Flatpak");
+        }
+        else if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")))
+        {
+            debugInfo.AppendLine("Snap");
+        }
+        debugInfo.AppendLine(CultureInfo.CurrentCulture.ToString());
+        var localeProcess = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "locale",
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            }
+        };
+        try
+        {
+            localeProcess.Start();
+            var localeString = localeProcess.StandardOutput.ReadToEnd().Trim();
+            localeProcess.WaitForExit();
+            debugInfo.AppendLine(localeString);
+        }
+        catch
+        {
+            debugInfo.AppendLine("Unknown locale");
+        }
         var dialog = Adw.AboutWindow.New();
         dialog.SetTransientFor(this);
         dialog.SetIconName(_controller.AppInfo.ID);
         dialog.SetApplicationName(_controller.AppInfo.ShortName);
         dialog.SetApplicationIcon(_controller.AppInfo.ID + (_controller.AppInfo.GetIsDevelVersion() ? "-devel" : ""));
         dialog.SetVersion(_controller.AppInfo.Version);
+        dialog.SetDebugInfo(debugInfo.ToString());
         dialog.SetComments(_controller.AppInfo.Description);
         dialog.SetDeveloperName("Nickvision");
         dialog.SetLicenseType(Gtk.License.MitX11);
         dialog.SetCopyright("© Nickvision 2021-2023");
-        dialog.SetWebsite(_controller.AppInfo.GitHubRepo.ToString());
+        dialog.SetWebsite("https://nickvision.org/");
         dialog.SetIssueUrl(_controller.AppInfo.IssueTracker.ToString());
         dialog.SetSupportUrl(_controller.AppInfo.SupportUrl.ToString());
+        dialog.AddLink(_("GitHub Repo"), _controller.AppInfo.GitHubRepo.ToString());
         dialog.AddLink(_("Matrix Chat"), "https://matrix.to/#/#nickvision:matrix.org");
         dialog.SetDevelopers(_("Nicholas Logozzo {0}\nContributors on GitHub ❤️ {1}", "https://github.com/nlogozzo", "https://github.com/NickvisionApps/Denaro/graphs/contributors").Split("\n"));
         dialog.SetDesigners(_("Nicholas Logozzo {0}\nFyodor Sobolev {1}\nDaPigGuy {2}", "https://github.com/nlogozzo", "https://github.com/fsobolev", "https://github.com/DaPigGuy").Split("\n"));
