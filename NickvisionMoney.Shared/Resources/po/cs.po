@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-18 08:36-0400\n"
+"POT-Creation-Date: 2023-06-22 23:17-0400\n"
 "PO-Revision-Date: 2023-06-21 15:57+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -194,7 +194,7 @@ msgstr "Symbol měny (neplatný)"
 msgid "Date"
 msgstr "Datum"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:517
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:555
 #, csharp-format
 msgid ""
 "David Lapshin {0}\n"
@@ -311,6 +311,10 @@ msgstr "Účet byl úspěšně exportován do souboru."
 msgid "Generated: {0}"
 msgstr "Vygenerováno: {0}"
 
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:551
+msgid "GitHub Repo"
+msgstr "Repozitář GitHub"
+
 #: ../../../Controllers/MainWindowController.cs:98
 msgid "Good Afternoon!"
 msgstr "Dobré odpoledne!"
@@ -354,7 +358,7 @@ msgstr "Oddělovač skupin (neplatný)"
 msgid "Groups"
 msgstr "Skupiny"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:246
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:248
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
@@ -397,7 +401,7 @@ msgstr "Příjem"
 msgid "Manage your personal finances"
 msgstr "Správa osobních financí"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:514
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:552
 msgid "Matrix Chat"
 msgstr "Matrix chat"
 
@@ -428,7 +432,7 @@ msgstr "Název (existuje)"
 msgid "Never"
 msgstr "Nikdy"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:515
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:553
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -437,7 +441,7 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "Přispěvatelé na GitHubu ❤️ {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:516
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:554
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -448,7 +452,7 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
@@ -483,11 +487,11 @@ msgstr "Žádné transakce neodpovídají zadaným filtrům."
 msgid "Notes"
 msgstr "Poznámky"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:253
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:255
 msgid "Open"
 msgstr "Otevřít"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:391
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:393
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:199
 msgid "Open Account"
@@ -668,7 +672,7 @@ msgstr "Převést z {0}"
 msgid "Transfer To {0}"
 msgstr "Převést na {0}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:518
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:556
 msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
@@ -1508,9 +1512,6 @@ msgstr ""
 
 #~ msgid "Changelog"
 #~ msgstr "Seznam změn"
-
-#~ msgid "GitHub Repo"
-#~ msgstr "Repozitář GitHub"
 
 #~ msgid "Report a Bug"
 #~ msgstr "Nahlásit chybu"
