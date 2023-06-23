@@ -66,7 +66,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Denaro");
         _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
         _mainWindowController.AppInfo.Version = "2023.6.2-next";
-        _mainWindowController.AppInfo.Changelog = "<ul<li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where amounts were not updated when a transaction was deleted</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
