@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-18 08:36-0400\n"
+"POT-Creation-Date: 2023-06-22 23:17-0400\n"
 "PO-Revision-Date: 2023-06-17 02:34+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -198,7 +198,7 @@ msgstr "Simbolo della valuta (non valido)"
 msgid "Date"
 msgstr "Data"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:517
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:555
 #, csharp-format
 msgid ""
 "David Lapshin {0}\n"
@@ -315,6 +315,10 @@ msgstr "L'account è stato esportato su file."
 msgid "Generated: {0}"
 msgstr "Generate: {0}"
 
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:551
+msgid "GitHub Repo"
+msgstr "Repository GitHub"
+
 #: ../../../Controllers/MainWindowController.cs:98
 msgid "Good Afternoon!"
 msgstr "Buon pomeriggio!"
@@ -358,7 +362,7 @@ msgstr "Separatore dei gruppi (non valido)"
 msgid "Groups"
 msgstr "Gruppi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:246
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:248
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
@@ -402,7 +406,7 @@ msgstr "Entrata"
 msgid "Manage your personal finances"
 msgstr "Gestisci le tue finanze"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:514
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:552
 msgid "Matrix Chat"
 msgstr "Chat di Matrix"
 
@@ -433,7 +437,7 @@ msgstr "Nome (esistente)"
 msgid "Never"
 msgstr "Mai"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:515
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:553
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -442,7 +446,7 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "I collaboratori di GitHub ❤️ {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:516
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:554
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -453,7 +457,7 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
 #: ../../../Models/Account.cs:1779
 msgid "Nickvision Denaro Account"
@@ -489,11 +493,11 @@ msgstr ""
 msgid "Notes"
 msgstr "Annotazioni"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:253
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:255
 msgid "Open"
 msgstr "Apri"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:391
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:393
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:199
 msgid "Open Account"
@@ -674,7 +678,7 @@ msgstr "Trasferimento da {0}"
 msgid "Transfer To {0}"
 msgstr "Trasferimento a {0}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:518
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:556
 msgid "translator-credits"
 msgstr ""
 "Mattia Borda\n"
@@ -1538,9 +1542,6 @@ msgstr ""
 
 #~ msgid "Changelog"
 #~ msgstr "Novità"
-
-#~ msgid "GitHub Repo"
-#~ msgstr "Repository GitHub"
 
 #~ msgid "Report a Bug"
 #~ msgstr "Segnala un problema"
