@@ -3,7 +3,8 @@
         {
             "type": "dotnet",
             "name": "Denaro GNOME",
-            "projectPath": "NickvisionMoney.GNOME.csproj",
+            "workingDir": "$PROJECT_DIR$/bin/Debug/net7.0",
+            "projectPath": "$PROJECT_DIR$/NickvisionMoney.GNOME.csproj",
             "args": [],
         },
         
