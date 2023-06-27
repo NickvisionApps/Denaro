@@ -3,7 +3,7 @@ using Adw 1;
 
 Adw.PreferencesWindow _root {
   default-width: 600;
-  default-height: 610;
+  default-height: 540;
   width-request: 360;
   modal: true;
   destroy-with-parent: false;
@@ -15,7 +15,6 @@ Adw.PreferencesWindow _root {
 
     Adw.PreferencesGroup {
       title: _("User Interface");
-      description: _("Customize the application's user interface.");
 
       Adw.ComboRow _themeRow {
         title: _("Theme");
@@ -105,7 +104,6 @@ Adw.PreferencesWindow _root {
 
     Adw.PreferencesGroup {
       title: _("Locale");
-      description: _("Customize how Denaro uses locale settings.");
       
       Adw.ActionRow {
         title: _("Use Native Digits");
@@ -140,7 +138,6 @@ Adw.PreferencesWindow _root {
 
     Adw.PreferencesGroup {
       title: _("Backup");
-      description: _("Customize backup locations for Denaro accounts.");
 
       Adw.EntryRow _csvBackupRow {
         title: _("CSV Backup Folder");
