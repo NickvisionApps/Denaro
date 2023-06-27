@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 23:17-0400\n"
+"POT-Creation-Date: 2023-06-26 20:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,13 +57,13 @@ msgstr "沒有曾開啟的帳戶"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
-#: ../../../Models/Account.cs:1625
+#: ../../../Models/Account.cs:1631
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:35
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
 msgid "Account Settings"
 msgstr "Account Settings"
 
-#: ../../../Models/Account.cs:1626
+#: ../../../Models/Account.cs:1632
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:59
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:148
 msgid "Account Type"
@@ -91,7 +91,7 @@ msgstr "All files"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
-#: ../../../Models/Account.cs:1659 ../../../Models/Account.cs:1692
+#: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
@@ -124,7 +124,7 @@ msgstr ""
 "確認刪除交易?\n"
 "此操作不可逆轉"
 
-#: ../../../Models/Account.cs:1633
+#: ../../../Models/Account.cs:1639
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Business"
@@ -145,14 +145,14 @@ msgstr "取消"
 msgid "Change Password"
 msgstr "Change Password"
 
-#: ../../../Models/Account.cs:1631
+#: ../../../Models/Account.cs:1637
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Checking"
 msgstr "Checking"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:107
-#: ../../../Models/Account.cs:1627
+#: ../../../Models/Account.cs:1633
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:89
 msgid "Currency"
 msgstr "Currency"
@@ -191,7 +191,7 @@ msgstr "Currency Symbol (Empty)"
 msgid "Currency Symbol (Invalid)"
 msgstr "Currency Symbol (Empty)"
 
-#: ../../../Models/Account.cs:1687
+#: ../../../Models/Account.cs:1693
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:109
 msgid "Date"
 msgstr "日期"
@@ -254,7 +254,7 @@ msgid "Denaro"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:504
-#: ../../../Models/Account.cs:1658 ../../../Models/Account.cs:1688
+#: ../../../Models/Account.cs:1664 ../../../Models/Account.cs:1694
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
@@ -290,7 +290,7 @@ msgstr "Destination Account Password (Required)"
 msgid "Disassociate Existing"
 msgstr "Disassociate Existing"
 
-#: ../../../Models/Account.cs:1612 ../../../Models/Account.cs:1731
+#: ../../../Models/Account.cs:1618 ../../../Models/Account.cs:1744
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:111
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
@@ -305,12 +305,12 @@ msgstr "支出"
 msgid "Export to File"
 msgstr "導出到檔案"
 
-#: ../../../Controllers/AccountViewController.cs:993
-#: ../../../Controllers/AccountViewController.cs:1011
+#: ../../../Controllers/AccountViewController.cs:992
+#: ../../../Controllers/AccountViewController.cs:1010
 msgid "Exported account to file successfully."
 msgstr "成功導出帳戶至檔案"
 
-#: ../../../Models/Account.cs:1577
+#: ../../../Models/Account.cs:1583
 #, csharp-format
 msgid "Generated: {0}"
 msgstr "Generated: {0}"
@@ -338,7 +338,7 @@ msgstr "晚上好!"
 msgid "Group"
 msgstr "組群"
 
-#: ../../../Models/Account.cs:1690
+#: ../../../Models/Account.cs:1696
 msgid "Group Name"
 msgstr "Group Name"
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Group Separator (Invalid)"
 msgstr "數額 (無效)"
 
-#: ../../../Models/Account.cs:1656
+#: ../../../Models/Account.cs:1662
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:133
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:76
 msgid "Groups"
@@ -369,7 +369,7 @@ msgstr "群組"
 msgid "Help"
 msgstr "Help"
 
-#: ../../../Models/Account.cs:1686 ../../../Models/Account.cs:1750
+#: ../../../Models/Account.cs:1692 ../../../Models/Account.cs:1763
 msgid "Id"
 msgstr "Id"
 
@@ -385,14 +385,14 @@ msgstr "從檔案導入"
 msgid "Import from File"
 msgstr "從檔案導入"
 
-#: ../../../Controllers/AccountViewController.cs:976
+#: ../../../Controllers/AccountViewController.cs:975
 #, fuzzy, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
 msgstr[0] "從檔案中導入 {0} 筆交易"
 msgstr[1] "從檔案中導入 {0} 筆交易"
 
-#: ../../../Models/Account.cs:1610 ../../../Models/Account.cs:1730
+#: ../../../Models/Account.cs:1616 ../../../Models/Account.cs:1743
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:90
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
@@ -412,13 +412,13 @@ msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:217
-#: ../../../Models/Account.cs:1383 ../../../Models/Account.cs:1438
+#: ../../../Models/Account.cs:1389 ../../../Models/Account.cs:1444
 msgid "N/A"
 msgstr "N/A"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:174
-#: ../../../Models/Account.cs:1657
+#: ../../../Models/Account.cs:1663
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:54
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:32
 msgid "Name"
@@ -455,7 +455,7 @@ msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:235
-#: ../../../Models/Account.cs:1779
+#: ../../../Models/Account.cs:1792
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision的軟體--Money的帳戶"
 
@@ -483,7 +483,7 @@ msgstr "沒有找到交易"
 msgid "No transactions match the specified filters."
 msgstr "沒有符合條件的交易"
 
-#: ../../../Models/Account.cs:1691
+#: ../../../Models/Account.cs:1697
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:313
 msgid "Notes"
 msgstr ""
@@ -498,11 +498,11 @@ msgstr "開啟"
 msgid "Open Account"
 msgstr "開啟帳戶"
 
-#: ../../../Models/Account.cs:1588
+#: ../../../Models/Account.cs:1594
 msgid "Overview"
 msgstr "概要"
 
-#: ../../../Models/Account.cs:1782
+#: ../../../Models/Account.cs:1795
 msgid "Page {0}"
 msgstr "Page {0}"
 
@@ -517,7 +517,7 @@ msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:692
-#: ../../../Models/Account.cs:1751
+#: ../../../Models/Account.cs:1764
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
 msgstr "Receipt"
@@ -526,7 +526,7 @@ msgstr "Receipt"
 msgid "Receipt (File Inaccessible)"
 msgstr ""
 
-#: ../../../Models/Account.cs:1749
+#: ../../../Models/Account.cs:1762
 msgid "Receipts"
 msgstr "Receipts"
 
@@ -548,7 +548,7 @@ msgstr "重複"
 msgid "Repeat Interval Changed"
 msgstr "Repeat Interval Changed"
 
-#: ../../../Models/Account.cs:1632
+#: ../../../Models/Account.cs:1638
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Savings"
@@ -560,7 +560,7 @@ msgid "Select Account"
 msgstr "最近開啟的帳戶"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:211
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:158
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:155
 msgid "Select Backup Folder"
 msgstr ""
 
@@ -655,7 +655,7 @@ msgstr ""
 "Updating only the source transaction will disassociate\n"
 "generated transactions from the source."
 
-#: ../../../Models/Account.cs:1607
+#: ../../../Models/Account.cs:1613
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:79
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:61
 msgid "Total"
@@ -666,7 +666,7 @@ msgstr "總額"
 msgid "Transaction"
 msgstr "交易"
 
-#: ../../../Models/Account.cs:1685
+#: ../../../Models/Account.cs:1691
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:276
 msgid "Transactions"
 msgstr "交易"
@@ -675,12 +675,12 @@ msgstr "交易"
 msgid "Transactions without a group"
 msgstr "暫無組群之交易"
 
-#: ../../../Controllers/AccountViewController.cs:921
+#: ../../../Controllers/AccountViewController.cs:920
 #, csharp-format
 msgid "Transfer From {0}"
 msgstr "從 {0} 轉帳"
 
-#: ../../../Controllers/AccountViewController.cs:893
+#: ../../../Controllers/AccountViewController.cs:892
 #, csharp-format
 msgid "Transfer To {0}"
 msgstr "轉帳到 {0}"
@@ -689,22 +689,22 @@ msgstr "轉帳到 {0}"
 msgid "translator-credits"
 msgstr ""
 
-#: ../../../Models/Account.cs:1689
+#: ../../../Models/Account.cs:1695
 msgid "Type"
 msgstr "種類"
 
-#: ../../../Controllers/AccountViewController.cs:997
-#: ../../../Controllers/AccountViewController.cs:1015
+#: ../../../Controllers/AccountViewController.cs:996
+#: ../../../Controllers/AccountViewController.cs:1014
 msgid "Unable to export account to file."
 msgstr "無法導出帳戶"
 
-#: ../../../Controllers/AccountViewController.cs:955
+#: ../../../Controllers/AccountViewController.cs:954
 msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:980
+#: ../../../Controllers/AccountViewController.cs:979
 msgid "Unable to import information from the file. Unsupported file type."
 msgstr ""
 
@@ -734,9 +734,9 @@ msgstr "無法淩駕已開啟的帳戶."
 #: ../../../Controllers/TransactionDialogController.cs:87
 #: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Controllers/AccountViewController.cs:483
-#: ../../../Controllers/AccountViewController.cs:846
-#: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1662
-#: ../../../Models/Account.cs:1734
+#: ../../../Controllers/AccountViewController.cs:845
+#: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668
+#: ../../../Models/Account.cs:1747
 msgid "Ungrouped"
 msgstr "無組群"
 
@@ -1121,102 +1121,94 @@ msgstr "偏好設定"
 msgid "User Interface"
 msgstr "介面"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:18
-msgid "Customize the application's user interface."
-msgstr "自訂介面"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:21
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:20
 msgid "Theme"
 msgstr "主題"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 #, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "淺色主題"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 #, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "暗色主題"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:23
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 #, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "按系統主題"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:32
 msgid "Colors"
 msgstr "顏色"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:34
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
 msgid "Customize the colors used by Denaro."
 msgstr "自訂介面的顏色"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:42
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:41
 msgid "Transaction Default Color"
 msgstr "預設交易顏色"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:43
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:42
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
 msgstr "改變此設定僅會影響新增之交易"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:52
 msgid "Transfer Default Color"
 msgstr "預設轉帳顏色"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:54
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
 msgid "A change in this setting will only be applied to new transfers."
 msgstr "改變此設定僅會影響新增之轉帳"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:64
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:63
 #, fuzzy
 msgid "Group Default Color"
 msgstr "預設轉帳顏色"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:65
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:64
 #, fuzzy
 msgid "A change in this setting will only be applied to new groups."
 msgstr "改變此設定僅會影響新增之轉帳"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:75
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:74
 msgid "Checking Account Color"
 msgstr "Checking Account Color"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:85
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:84
 msgid "Savings Account Color"
 msgstr "Savings Account Color"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:95
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:94
 msgid "Business Account Color"
 msgstr "Business Account Color"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:107
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:106
 msgid "Locale"
 msgstr "Locale"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:108
-msgid "Customize how Denaro uses locale settings."
-msgstr "Customize how Denaro uses locale settings."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:111
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:109
 msgid "Use Native Digits"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:112
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:110
 msgid ""
 "Whether to use numerals that are native for your locale instead of latin "
 "digits."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:127
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:125
 msgid "Insert Decimal Separator"
 msgstr "Insert Decimal Separator"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:128
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:126
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field."
@@ -1224,41 +1216,36 @@ msgstr ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field."
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:129
 #, fuzzy
 msgctxt "InsertSeparator"
 msgid "Off"
 msgstr "Off"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:129
 msgid "Numpad period only"
 msgstr "Numpad period only"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:131
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:129
 msgid "Period and Comma"
 msgstr "Period and Comma"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:142
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:140
 #, fuzzy
 msgid "Backup"
 msgstr "Back"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:143
-#, fuzzy
-msgid "Customize backup locations for Denaro accounts."
-msgstr "自訂介面"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:146
 msgid "CSV Backup Folder"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:147
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:144
 msgid ""
 "Unencrypted accounts will automatically export as CSV files to this folder "
 "when a change is made."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:168
+#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:165
 msgid "Clear Backup Folder"
 msgstr ""
 
@@ -1471,6 +1458,16 @@ msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+
+#~ msgid "Customize the application's user interface."
+#~ msgstr "自訂介面"
+
+#~ msgid "Customize how Denaro uses locale settings."
+#~ msgstr "Customize how Denaro uses locale settings."
+
+#, fuzzy
+#~ msgid "Customize backup locations for Denaro accounts."
+#~ msgstr "自訂介面"
 
 #~ msgid "Enter symbol here"
 #~ msgstr "Enter symbol here"
