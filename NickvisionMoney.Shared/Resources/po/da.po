@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 20:02-0400\n"
+"POT-Creation-Date: 2023-06-29 20:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,19 +39,16 @@ msgstr[1] "Overførsel"
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
 #, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
 msgstr "Kontotype"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
 #, fuzzy
-#| msgid "Name (Exists)"
 msgid "Account Name (Exists)"
 msgstr "Navn (findes allerede)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
 #, fuzzy
-#| msgid "No Account Opened"
 msgid "Account Name (Opened)"
 msgstr "Ingen konto åbnet"
 
@@ -83,22 +80,22 @@ msgstr "Tilføj en ny overførsel eller importer overførsler fra en fil."
 msgid "Add Password To PDF?"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:676
 msgid "All files"
 msgstr "Alle filer"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "Beløb"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 msgid "Amount (Invalid)"
 msgstr "Beløb (ugyldig)"
 
@@ -375,7 +372,6 @@ msgstr "Id"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
 #, fuzzy
-#| msgid "Import from File"
 msgid "Import from Account"
 msgstr "Importer fra fil"
 
@@ -567,7 +563,6 @@ msgstr ""
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:264
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
 #, fuzzy
-#| msgid "Select Range"
 msgid "Select Folder"
 msgstr "Vælg rækkevidde"
 
@@ -622,18 +617,12 @@ msgstr "Denne konto er allerede åben."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 #, fuzzy
-#| msgid ""
-#| "This transaction is a source repeat transaction.\n"
-#| "What would you like to do with the repeat transactions?\n"
-#| "\n"
-#| "Deleting only the source transaction will allow individual\n"
-#| "generated transactions to be modifiable."
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
 "\n"
-"Deleting only the source transaction will allow individual&#xA;generated "
-"transactions to be modifiable."
+"Deleting only the source transaction will allow individual\n"
+"generated transactions to be modifiable."
 msgstr ""
 "Denne overførsel er en udgangspunktet for gentagende overførsel.\n"
 "Hvad vil du gøre med de gentagende overførsler?\n"
@@ -721,20 +710,18 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:227
 #, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an existing account."
 msgstr "Ude af stand til at overskrive en åbnet konto."
 
 #: ../../../Controllers/MainWindowController.cs:216
 #, fuzzy
-#| msgid "Unable to override an opened account."
 msgid "Unable to overwrite an opened account."
 msgstr "Ude af stand til at overskrive en åbnet konto."
 
-#: ../../../Controllers/TransactionDialogController.cs:87
-#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Controllers/AccountViewController.cs:483
 #: ../../../Controllers/AccountViewController.cs:845
+#: ../../../Controllers/TransactionDialogController.cs:87
+#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668
 #: ../../../Models/Account.cs:1747
 msgid "Ungrouped"
@@ -912,7 +899,6 @@ msgstr "Handlinger"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:72
 #, fuzzy
-#| msgid "Reset Overview Filters"
 msgid "Select All Overview Filters"
 msgstr "Nulstil oversigt filtre"
 
@@ -932,13 +918,11 @@ msgstr "Skift gruppers synlighed"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
 #, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Select All Groups Filters"
 msgstr "Nulstil gruppe filtre"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:163
 #, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Unselect Groups Filters"
 msgstr "Nulstil gruppe filtre"
 
@@ -1033,7 +1017,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
 #, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
 msgstr "Kodeord på destinations konto (ugyldig)"
 
@@ -1043,7 +1026,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
 #, fuzzy
-#| msgid "Destination Account"
 msgid "Overwrite Existing Accounts"
 msgstr "Modtagerkonto"
 
@@ -1055,7 +1037,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 #, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
 msgstr "Konto indstillinger"
 
@@ -1065,7 +1046,6 @@ msgstr "Dette er kun en brugbar label som ikke påvirker programmet."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:198
 #, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
 msgstr "Konto menu"
 
@@ -1081,13 +1061,11 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
 #, fuzzy
-#| msgid "Import from File"
 msgid "Import File"
 msgstr "Importer fra fil"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
 #, fuzzy
-#| msgid "Select Range"
 msgid "Select File"
 msgstr "Vælg rækkevidde"
 
@@ -1439,7 +1417,6 @@ msgstr ""
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
 #, fuzzy
-#| msgid "money;finance;wallet;cash;bank;GTK;Nickvision;"
 msgid "money;finance;wallet;cash;bank;Nickvision;"
 msgstr "penge;finans;pung;kontanter;bank;GTK;Nickvision;"
 

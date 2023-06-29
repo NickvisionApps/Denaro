@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 20:02-0400\n"
+"POT-Creation-Date: 2023-06-29 20:19+0300\n"
 "PO-Revision-Date: 2023-06-21 15:56+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -82,22 +82,22 @@ msgstr ""
 msgid "Add Password To PDF?"
 msgstr "¿Añadir contraseña a un PDF?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:676
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "Importe"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 msgid "Amount (Invalid)"
 msgstr "Importe (no válido)"
 
@@ -617,12 +617,13 @@ msgid "This account is already opened."
 msgstr "Esta cuenta ya está abierta."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
+#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
 "\n"
-"Deleting only the source transaction will allow individual&#xA;generated "
-"transactions to be modifiable."
+"Deleting only the source transaction will allow individual\n"
+"generated transactions to be modifiable."
 msgstr ""
 "Esta transacción es una transacción repetida en origen.\n"
 "¿Qué desea hacer con las transacciones repetidas?\n"
@@ -723,10 +724,10 @@ msgstr "No se puede sobrescribir una cuenta existente."
 msgid "Unable to overwrite an opened account."
 msgstr "No se puede sobrescribir una cuenta abierta."
 
-#: ../../../Controllers/TransactionDialogController.cs:87
-#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Controllers/AccountViewController.cs:483
 #: ../../../Controllers/AccountViewController.cs:845
+#: ../../../Controllers/TransactionDialogController.cs:87
+#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668
 #: ../../../Models/Account.cs:1747
 msgid "Ungrouped"
@@ -1437,6 +1438,9 @@ msgstr ""
 "— Exporte una cuenta como archivo CSV e importe un archivo CSV, OFX o QIF "
 "para añadir transacciones en bloque a una cuenta"
 
+#~ msgid "Nickvision"
+#~ msgstr "Nickvision"
+
 #~ msgid "Customize the application's user interface."
 #~ msgstr "Personalice la interfaz de usuario de la aplicación."
 
@@ -1475,9 +1479,6 @@ msgstr ""
 
 #~ msgid "Delete Transaction?"
 #~ msgstr "¿Eliminar transacción?"
-
-#~ msgid "Nickvision"
-#~ msgstr "Nickvision"
 
 #~ msgid ""
 #~ "- Fixed an issue where Denaro would crash on systems with unconfigured "

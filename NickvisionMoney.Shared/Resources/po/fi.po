@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 20:02-0400\n"
+"POT-Creation-Date: 2023-06-29 20:19+0300\n"
 "PO-Revision-Date: 2023-05-30 19:56+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -42,19 +42,16 @@ msgstr[1] "{0} tapahtumaa"
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
 #, fuzzy
-#| msgid "Account Type"
 msgid "Account Name"
 msgstr "Tilin tyyppi"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
 #, fuzzy
-#| msgid "Name (Exists)"
 msgid "Account Name (Exists)"
 msgstr "Nimi (olemassa)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
 #, fuzzy
-#| msgid "No Account Opened"
 msgid "Account Name (Opened)"
 msgstr "Tiliä ei ole avattu"
 
@@ -86,22 +83,22 @@ msgstr "Lisää uusi tapahtuma tai tuo tapahtumat tiedostosta."
 msgid "Add Password To PDF?"
 msgstr "Lisätäänkö salasana PDF:ään?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:676
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
 #: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "Määrä"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
 msgid "Amount (Invalid)"
 msgstr "Määrä (virheellinen)"
 
@@ -376,7 +373,6 @@ msgstr "Tunniste"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
 #, fuzzy
-#| msgid "Import from File"
 msgid "Import from Account"
 msgstr "Tuo tiedostosta"
 
@@ -572,7 +568,6 @@ msgstr "Valitse varmuuskopiokansio"
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:264
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
 #, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select Folder"
 msgstr "Valitse varmuuskopiokansio"
 
@@ -625,8 +620,8 @@ msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
 "\n"
-"Deleting only the source transaction will allow individual&#xA;generated "
-"transactions to be modifiable."
+"Deleting only the source transaction will allow individual\n"
+"generated transactions to be modifiable."
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
@@ -712,10 +707,10 @@ msgstr "Tiliä ei voitu viedä tiedostoon."
 msgid "Unable to overwrite an opened account."
 msgstr "Tiliä ei voitu viedä tiedostoon."
 
-#: ../../../Controllers/TransactionDialogController.cs:87
-#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Controllers/AccountViewController.cs:483
 #: ../../../Controllers/AccountViewController.cs:845
+#: ../../../Controllers/TransactionDialogController.cs:87
+#: ../../../Controllers/TransactionDialogController.cs:330
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668
 #: ../../../Models/Account.cs:1747
 msgid "Ungrouped"
@@ -805,16 +800,12 @@ msgstr "Käytä mukautettua valuuttaa"
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
 #, fuzzy
-#| msgctxt "DecimalSeparator"
-#| msgid "Other"
 msgid "Other"
 msgstr "Muu"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
 #, fuzzy
-#| msgctxt "GroupSeparator"
-#| msgid "None"
 msgid "None"
 msgstr "Ei mitään"
 
@@ -901,7 +892,6 @@ msgstr "Toiminnot"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:72
 #, fuzzy
-#| msgid "Reset Overview Filters"
 msgid "Select All Overview Filters"
 msgstr "Nollaa yleisnäkymän suodattimet"
 
@@ -920,13 +910,11 @@ msgstr "Näytä/piilota ryhmät"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
 #, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Select All Groups Filters"
 msgstr "Nollaa ryhmäsuodattimet"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:163
 #, fuzzy
-#| msgid "Reset Groups Filters"
 msgid "Unselect Groups Filters"
 msgstr "Nollaa ryhmäsuodattimet"
 
@@ -1008,8 +996,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:57
 #, fuzzy
-#| msgctxt "DateRange"
-#| msgid "Start"
 msgid "Let's Start"
 msgstr "Alku"
 
@@ -1019,7 +1005,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:89
 #, fuzzy
-#| msgid "Destination Account Password (Invalid)"
 msgid "Account Password (Optional)"
 msgstr "Kohdetilin salasana (virheellinen)"
 
@@ -1029,7 +1014,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
 #, fuzzy
-#| msgid "Destination Account"
 msgid "Overwrite Existing Accounts"
 msgstr "Kohdetili"
 
@@ -1041,7 +1025,6 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 #, fuzzy
-#| msgid "Account Settings"
 msgid "Account Options"
 msgstr "Tilin asetukset"
 
@@ -1052,13 +1035,11 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:198
 #, fuzzy
-#| msgid "Account Menu"
 msgid "Account Currency"
 msgstr "Tilivalikko"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 #, fuzzy
-#| msgid "Export All Information"
 msgid "Import Existing Information"
 msgstr "Vie kaikki tiedot"
 
@@ -1070,19 +1051,16 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
 #, fuzzy
-#| msgid "Import from File"
 msgid "Import File"
 msgstr "Tuo tiedostosta"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
 #, fuzzy
-#| msgid "Select Backup Folder"
 msgid "Select File"
 msgstr "Valitse varmuuskopiokansio"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
 #, fuzzy
-#| msgid "Clear Backup Folder"
 msgid "Clear File"
 msgstr "Tyhjennä varmuuskopiokansio"
 
@@ -1421,7 +1399,6 @@ msgstr ""
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
 #, fuzzy
-#| msgid "money;finance;wallet;cash;bank;GTK;Nickvision;"
 msgid "money;finance;wallet;cash;bank;Nickvision;"
 msgstr ""
 "money;finance;wallet;cash;bank;GTK;Nickvision;raha;lompakko;käteinen;pankki;"
@@ -1448,6 +1425,9 @@ msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+
+#~ msgid "Nickvision"
+#~ msgstr "Nickvision"
 
 #~ msgid "Customize the application's user interface."
 #~ msgstr "Mukauta sovelluksen käyttöliittymää."
@@ -1485,9 +1465,6 @@ msgstr ""
 
 #~ msgid "Delete Transaction?"
 #~ msgstr "Poistetaanko tapahtuma?"
-
-#~ msgid "Nickvision"
-#~ msgstr "Nickvision"
 
 #, fuzzy
 #~ msgid "AccountSettings"
