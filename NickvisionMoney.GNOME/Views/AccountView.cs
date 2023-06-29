@@ -1002,7 +1002,7 @@ public partial class AccountView : Adw.Bin
             transactionDialog.SetVisible(false);
             if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual&#xA;generated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
+                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
                 dialog.UnsetDestructiveApperance();
                 dialog.UnsetSuggestedApperance();
                 dialog.Present();
