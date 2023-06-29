@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 20:19+0300\n"
-"PO-Revision-Date: 2023-06-19 02:46+0000\n"
+"POT-Creation-Date: 2023-06-26 20:02-0400\n"
+"PO-Revision-Date: 2023-06-29 18:15+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
 "app/ru/>\n"
@@ -47,14 +47,12 @@ msgid "Account Name"
 msgstr "Имя счёта"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "Имя (Занято)"
+msgstr "Имя счёта (Занято)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "Нет открытых счетов"
+msgstr "Имя счёта (Открыт)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
@@ -84,22 +82,22 @@ msgstr "Добавьте транзакцию или импортируйте т
 msgid "Add Password To PDF?"
 msgstr "Зашифровать PDF паролем?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:655
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:676
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:506
 #: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "Сумма"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:208
+#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:525
 msgid "Amount (Invalid)"
 msgstr "Сумма (Некорректная)"
 
@@ -371,9 +369,8 @@ msgid "Id"
 msgstr "Номер"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
-#, fuzzy
 msgid "Import from Account"
-msgstr "Импорт из файла"
+msgstr "Импорт из счёта"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -514,7 +511,7 @@ msgstr "Пароль PDF"
 
 #: ../../../Controllers/MainWindowController.cs:252
 msgid "Please wait while transactions import..."
-msgstr ""
+msgstr "Пожалуйста, подождите окончания импорта транзакций..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:510
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:692
@@ -623,14 +620,14 @@ msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
 "\n"
-"Deleting only the source transaction will allow individual\n"
-"generated transactions to be modifiable."
+"Deleting only the source transaction will allow individual&#xA;generated "
+"transactions to be modifiable."
 msgstr ""
 "Эта транзакция является источником повторяющихся транзакций.\n"
 "Что вы хотите сделать с повторяющимися тразакциями?\n"
 "\n"
-"Удаление только источника позволит изменять\n"
-"сгенерированные транзакции индивидуально."
+"Удаление только источника позволит изменять&#xA;сгенерированные транзакции "
+"индивидуально."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid ""
@@ -715,19 +712,17 @@ msgstr ""
 "разрешения и попробуйте снова."
 
 #: ../../../Controllers/MainWindowController.cs:227
-#, fuzzy
 msgid "Unable to overwrite an existing account."
-msgstr "Невозможно перезаписать открытый счёт."
+msgstr "Невозможно перезаписать существующий счёт."
 
 #: ../../../Controllers/MainWindowController.cs:216
-#, fuzzy
 msgid "Unable to overwrite an opened account."
 msgstr "Невозможно перезаписать открытый счёт."
 
-#: ../../../Controllers/AccountViewController.cs:483
-#: ../../../Controllers/AccountViewController.cs:845
 #: ../../../Controllers/TransactionDialogController.cs:87
 #: ../../../Controllers/TransactionDialogController.cs:330
+#: ../../../Controllers/AccountViewController.cs:483
+#: ../../../Controllers/AccountViewController.cs:845
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668
 #: ../../../Models/Account.cs:1747
 msgid "Ungrouped"
@@ -816,13 +811,11 @@ msgstr "Использовать свою валюту"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "Other"
 msgstr "Другой"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "None"
 msgstr "Отсутствует"
 
@@ -834,27 +827,27 @@ msgstr "Цифры в дробной части"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Two"
-msgstr ""
+msgstr "Две"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Three"
-msgstr ""
+msgstr "Три"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Four"
-msgstr ""
+msgstr "Четыре"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Five"
-msgstr ""
+msgstr "Пять"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Six"
-msgstr ""
+msgstr "Шесть"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
@@ -1027,9 +1020,8 @@ msgid "Folder"
 msgstr "Папка"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
-#, fuzzy
 msgid "Overwrite Existing Accounts"
-msgstr "Целевой счёт"
+msgstr "Перезаписывать существующие счета"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
@@ -1051,30 +1043,26 @@ msgid "Account Currency"
 msgstr "Валюта счёта"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
-#, fuzzy
 msgid "Import Existing Information"
-msgstr "Экспортировать всю информацию"
+msgstr "Импорт существующей информации"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:295
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
-msgstr ""
+msgstr "Загрузите файл для импорта существующей информации в новый счёт."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
-#, fuzzy
 msgid "Import File"
-msgstr "Импорт из файла"
+msgstr "Импортируемый файл"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
-#, fuzzy
 msgid "Select File"
-msgstr "Выбрать папку"
+msgstr "Выбрать файл"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
-#, fuzzy
 msgid "Clear File"
-msgstr "Сбросить папку для резервных копий"
+msgstr "Сбросить файл"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:330
 msgid "Create"
@@ -1441,9 +1429,6 @@ msgstr ""
 "— Экспортируйте данный в CSV и импортируйте из CSV, OFX или QIF файла для "
 "массового добавления транзакций"
 
-#~ msgid "Nickvision"
-#~ msgstr "Nickvision"
-
 #~ msgid "Customize the application's user interface."
 #~ msgstr "Настройте интерфейс приложения."
 
@@ -1480,6 +1465,9 @@ msgstr ""
 
 #~ msgid "Delete Transaction?"
 #~ msgstr "Удалить транзакцию?"
+
+#~ msgid "Nickvision"
+#~ msgstr "Nickvision"
 
 #, fuzzy
 #~ msgid "AccountSettings"
