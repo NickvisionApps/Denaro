@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-29 20:19+0300\n"
-"PO-Revision-Date: 2023-06-25 23:41+0000\n"
+"PO-Revision-Date: 2023-07-01 02:14+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
@@ -615,7 +615,6 @@ msgid "This account is already opened."
 msgstr "Tento účet je již otevřen."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -626,8 +625,8 @@ msgstr ""
 "Tato transakce je opakovanou transakcí zdroje.\n"
 "Co chcete s opakovanými transakcemi udělat?\n"
 "\n"
-"Odstraněním pouze zdrojové transakce umožníte&#xA;úpravu vygenerovaných "
-"transakcí."
+"Odstraněním pouze zdrojové transakce umožníte\n"
+"individuální úpravu vygenerovaných transakcí."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 msgid ""
