@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-29 20:19+0300\n"
-"PO-Revision-Date: 2023-06-18 02:58+0000\n"
+"PO-Revision-Date: 2023-07-05 16:50+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
@@ -45,14 +45,12 @@ msgid "Account Name"
 msgstr "Accountnaam"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:305
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "Naam (bestaat)"
+msgstr "Accountnaam (bestaat)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:300
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "Er is geen account geopend"
+msgstr "Accountnaam (geopend)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:455
@@ -366,12 +364,11 @@ msgstr "Hulp"
 
 #: ../../../Models/Account.cs:1692 ../../../Models/Account.cs:1763
 msgid "Id"
-msgstr "Id"
+msgstr "ID"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
-#, fuzzy
 msgid "Import from Account"
-msgstr "Importeren uit bestand"
+msgstr "Importeren uit account"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:675
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -380,11 +377,11 @@ msgid "Import from File"
 msgstr "Importeren uit bestand"
 
 #: ../../../Controllers/AccountViewController.cs:975
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "Er is {0} transactie geïmporteerd."
-msgstr[1] "Er is {0} transactie geïmporteerd."
+msgstr[0] "{0} transactie uit bestand geïmporteerd"
+msgstr[1] "{0} transacties uit bestand geïmporteerd"
 
 #: ../../../Models/Account.cs:1616 ../../../Models/Account.cs:1743
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
@@ -812,13 +809,11 @@ msgstr "Aangepaste valuta gebruiken"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "Other"
 msgstr "Andere"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "None"
 msgstr "Geen"
 
@@ -830,27 +825,27 @@ msgstr "Decimale cijfers"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Two"
-msgstr ""
+msgstr "Twee"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Three"
-msgstr ""
+msgstr "Drie"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Four"
-msgstr ""
+msgstr "Vier"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Five"
-msgstr ""
+msgstr "Vijf"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
 msgid "Six"
-msgstr ""
+msgstr "Zes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:207
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
@@ -1059,19 +1054,16 @@ msgid ""
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
-#, fuzzy
 msgid "Import File"
-msgstr "Importeren uit bestand"
+msgstr "Bestand importeren"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
-#, fuzzy
 msgid "Select File"
-msgstr "Map selecteren"
+msgstr "Bestand selecteren"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:319
-#, fuzzy
 msgid "Clear File"
-msgstr "Back-up-map wissen"
+msgstr "Bestand wissen"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:330
 msgid "Create"
