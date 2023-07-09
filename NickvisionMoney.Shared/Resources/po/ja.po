@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-29 20:19+0300\n"
-"PO-Revision-Date: 2023-06-12 02:55+0000\n"
-"Last-Translator: Scott Anecito <scott.anecito@linux.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/nickvision-"
-"money/app/ja/>\n"
+"PO-Revision-Date: 2023-07-09 22:27+0000\n"
+"Last-Translator: Luci Draws <dpkg.luci@protonmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/"
+"nickvision-money/app/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
@@ -131,7 +131,7 @@ msgstr ""
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:949
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:227
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:107
@@ -186,7 +186,7 @@ msgstr ""
 #: ../../../Models/Account.cs:1693
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:109
 msgid "Date"
-msgstr ""
+msgstr "デーツ"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:555
 #, csharp-format
@@ -194,6 +194,8 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"David Lapshin {0}\n"
+"Tobias Bernard {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:346
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:355
@@ -239,7 +241,7 @@ msgstr ""
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
-msgstr ""
+msgstr "デナロ"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:504
 #: ../../../Models/Account.cs:1664 ../../../Models/Account.cs:1694
@@ -394,12 +396,12 @@ msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:552
 msgid "Matrix Chat"
-msgstr ""
+msgstr "Matrix チャット"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:217
 #: ../../../Models/Account.cs:1389 ../../../Models/Account.cs:1444
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:339
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:174
@@ -448,7 +450,7 @@ msgstr ""
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid "No"
-msgstr ""
+msgstr "いいえ"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:420
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
@@ -730,7 +732,7 @@ msgstr ""
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1041
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1128
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:100
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:220
@@ -1053,7 +1055,7 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:20
 msgid "Theme"
-msgstr ""
+msgstr "テーマ"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 msgctxt "Theme"
@@ -1068,7 +1070,7 @@ msgstr ""
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 msgctxt "Theme"
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:32
 msgid "Colors"
@@ -1142,7 +1144,7 @@ msgstr ""
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:129
 msgctxt "InsertSeparator"
 msgid "Off"
-msgstr ""
+msgstr "オフ"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:129
 msgid "Numpad period only"
