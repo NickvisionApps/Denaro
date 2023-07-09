@@ -19,7 +19,7 @@
 <p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
 <terms>
 	<item>
-		<title>Theme</title>
+		<title>テーマ</title>
 		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
 	</item>
 	<item>
