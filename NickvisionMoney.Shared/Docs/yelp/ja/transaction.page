@@ -35,7 +35,7 @@
 		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
 	</item>
 	<item>
-		<title>Date</title>
+		<title>デーツ</title>
 		<p>Any date can be selected, you can also create transactions for future dates.</p>
 	</item>
 	<item>

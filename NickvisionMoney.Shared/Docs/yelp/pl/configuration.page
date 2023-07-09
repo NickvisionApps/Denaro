@@ -55,7 +55,7 @@
 		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
+		<title>Folder kopii zapasowych CSV</title>
 		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
 	</item>
 </terms>
