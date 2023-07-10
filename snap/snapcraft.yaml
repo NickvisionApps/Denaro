@@ -9,16 +9,12 @@ architectures:
   - build-on: amd64
   - build-on: arm64
   - build-on: armhf
-layout:
-  /usr/share/help:
-    symlink: $SNAP/usr/share/help
 
 parts:
   denaro:
     # See 'snapcraft plugins'
     plugin: nil
     source: https://github.com/NickvisionApps/Denaro.git
-    source-tag: '2023.6.2'
     build-packages:
       - blueprint-compiler
       - wget
