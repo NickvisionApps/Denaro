@@ -27,5 +27,5 @@ jobs:
           snapcraft-args: "-v"
       - uses: actions/upload-artifact@v3
         with:
-          name: org.nickvision.money-snap-x86_64
+          name: denaro-amd64-snap
           path: ${{ steps.snapcraft-build.outputs.snap }} 
