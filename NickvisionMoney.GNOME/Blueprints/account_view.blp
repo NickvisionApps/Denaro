@@ -175,16 +175,27 @@ Adw.Bin _root {
         
         Adw.PreferencesGroup {
           title: _("Calendar");
-          header-suffix: Gtk.Button _resetCalendarFilterButton {
-            tooltip-text: _("Reset To Today");
+          header-suffix: Gtk.Box 
+          {
+            orientation: horizontal;
 
-            Adw.ButtonContent {
-              icon-name: "today-symbolic";
-              label: _("Today");
+            Gtk.Button _selectMonthButton {
+              tooltip-text: _("Select Current Month");
+              icon-name: "month-symbolic";
+              styles ["flat"]
             }
             
-            styles ["flat"]
+            Gtk.Button _resetCalendarFilterButton {
+              tooltip-text: _("Reset To Today");
+              Adw.ButtonContent {
+                icon-name: "today-symbolic";
+                label: _("Today");
+              }
+            
+              styles ["flat"]
+            }
           };
+           
           
           Gtk.Calendar _calendar {
             name: "calendarAccount";
