@@ -14,11 +14,11 @@
     <file preprocess="xml-stripblanks">larger-brush-symbolic.svg</file>
     <file preprocess="xml-stripblanks">money-none-symbolic.svg</file>
     <file preprocess="xml-stripblanks">money-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">month-symbolic.svg</file>
     <file preprocess="xml-stripblanks">moon-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">resources-symbolic.svg</file>
     <file preprocess="xml-stripblanks">sun-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">today-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">month-symbolic.svg</file>
     <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="denaro-upload-symbolic.svg">document-send-symbolic.svg</file>
   </gresource>

@@ -1225,14 +1225,7 @@ public partial class AccountView : Adw.Bin
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
         var selectedMonth = (uint)(g_date_time_get_month(ref selectedDay) - 1);
         var selectedYear = g_date_time_get_year(ref selectedDay);
-        var yearsForRangeFilter = _controller.YearsForRangeFilter.ToArray();
-        var selectedYearIndex = 0u;
-        for (var yearPosition = 0u; yearPosition < yearsForRangeFilter.Length; yearPosition++) {
-            if (yearsForRangeFilter[yearPosition] == selectedYear.ToString()) {
-                selectedYearIndex = yearPosition;
-                break;
-            }
-        }
+        var selectedYearIndex = (uint)_controller.YearsForRangeFilter.IndexOf(selectedYear.ToString());
         _startYearDropDown.SetSelected(selectedYearIndex);
         _endYearDropDown.SetSelected(selectedYearIndex);
         _startMonthDropDown.SetSelected(selectedMonth);
