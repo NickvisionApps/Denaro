@@ -47,11 +47,8 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.6.2" date="2023-06-23">
+    <release version="2023.8.0-next" date="2023-08-01">
       <description translatable="no">
-        <p>- Fixed an issue where amounts were not updated when a transaction was deleted</p>
-        <p>- Fixed an issue where some accounts could not Export To PDF</p>
-        <p>- Fixed an issue importing transactions and groups from CSV with empty RGBA strings</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
