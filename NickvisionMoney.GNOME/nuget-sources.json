@@ -232,6 +232,13 @@
     },
     {
         "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/nickvision.girext/2023.7.1/nickvision.girext.2023.7.1.nupkg",
+        "sha512": "fa55e3402bd6d9c46834dbc7c117230a6304a04a54ba7cf86fa4b4383d83862dc455dce6a175b590a20021c288760980905a24fc07e282e351fad3a13d202d75",
+        "dest": "nuget-sources",
+        "dest-filename": "nickvision.girext.2023.7.1.nupkg"
+    },
+    {
+        "type": "file",
         "url": "https://api.nuget.org/v3-flatcontainer/ofxsharp.netstandard/1.0.0/ofxsharp.netstandard.1.0.0.nupkg",
         "sha512": "766f755be7aa37621d1a5f825d9cc747b8f87b4c48c92f70580983bb9c73d38a7dc7bb6c8552ba1f53f6c9e9f423e48d530ea41071d8e5a7a74d385bd06afd5a",
         "dest": "nuget-sources",

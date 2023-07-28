@@ -1,7 +1,7 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -11,27 +11,14 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class RecentAccountRow : Adw.ActionRow
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Color
-    {
-        public float Red;
-        public float Green;
-        public float Blue;
-        public float Alpha;
-    }
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
+    private readonly RecentAccount _recentAccount;
+    private readonly GdkExt.RGBA _color;
+    
     [Gtk.Connect] private readonly Gtk.Image _prefixColor;
     [Gtk.Connect] private readonly Gtk.Button _prefixButton;
     [Gtk.Connect] private readonly Gtk.DrawingArea _tagArea;
     [Gtk.Connect] private readonly Gtk.Label _tagLabel;
     [Gtk.Connect] private readonly Gtk.Button _removeButton;
-
-    private readonly RecentAccount _recentAccount;
-    private readonly Color _color;
 
     public event EventHandler<RecentAccount>? Selected;
     public event EventHandler<RecentAccount>? RemoveRequested;
@@ -53,8 +40,8 @@ public partial class RecentAccountRow : Adw.ActionRow
         _prefixButton.OnClicked += (sender, e) => Selected?.Invoke(this, _recentAccount);
         _removeButton.SetVisible(canRemove);
         _removeButton.OnClicked += (sender, e) => RemoveRequested?.Invoke(this, _recentAccount);
-        _color = new Color();
-        gdk_rgba_parse(ref _color, colorString);
+        GdkExt.RGBA.Parse(out var color, colorString);
+        _color = color!.Value;
         var luma = _color.Red * 0.2126 + _color.Green * 0.7152 + _color.Blue * 0.0722;
         if (onStartScreen)
         {
@@ -67,12 +54,11 @@ public partial class RecentAccountRow : Adw.ActionRow
         }
         else
         {
-            var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
+            using var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
             var red = (int)(_color.Red * 255);
             var green = (int)(_color.Green * 255);
             var blue = (int)(_color.Blue * 255);
-            uint colorPixbuf;
-            if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out colorPixbuf))
+            if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out var colorPixbuf))
             {
                 pixbuf.Fill(colorPixbuf);
                 _prefixColor.SetFromPixbuf(pixbuf);

@@ -8,8 +8,6 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class NewPasswordDialog : Adw.Window
 {
-    private readonly Gtk.ShortcutController _shortcutController;
-
     [Gtk.Connect] private readonly Gtk.Label _titleLabel;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordEntry;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _confirmPasswordEntry;
@@ -47,15 +45,6 @@ public partial class NewPasswordDialog : Adw.Window
             tcs.SetResult(setPassword ? _newPasswordEntry.GetText() : null);
             return false;
         };
-        //Shortcut Controller
-        _shortcutController = Gtk.ShortcutController.New();
-        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
-        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
-        {
-            Close();
-            return true;
-        })));
-        AddController(_shortcutController);
     }
 
     /// <summary>

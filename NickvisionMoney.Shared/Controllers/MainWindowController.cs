@@ -165,6 +165,19 @@ public class MainWindowController : IDisposable
     public AccountViewController GetMostRecentAccountViewController() => _openAccounts[_openAccounts.Count - 1];
 
     /// <summary>
+    /// Starts the application
+    /// </summary>
+    public async Task StartupAsync()
+    {
+        if (FileToLaunch != null)
+        {
+            await AddAccountAsync(FileToLaunch);
+            FileToLaunch = null;
+        }
+    }
+
+    
+    /// <summary>
     /// Creates an AccountViewController for the specified path
     /// </summary>
     /// <param name="path">The path of the open account</param>
