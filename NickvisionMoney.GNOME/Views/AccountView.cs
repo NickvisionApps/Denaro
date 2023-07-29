@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.GNOME.Controls;
+﻿using Nickvision.GirExt;
+using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Controls;
@@ -20,9 +21,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class AccountView : Adw.Bin
 {
-    private delegate bool GSourceFunc(nint data);
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
     {
@@ -31,12 +29,8 @@ public partial class AccountView : Adw.Bin
         int Interval;
         int Days;
         int RefCount;
-    };
+    }
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool blocking);
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -51,43 +45,13 @@ public partial class AccountView : Adw.Bin
     private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
     [DllImport("libadwaita-1.so.0")]
     private static extern ref MoneyDateTime g_date_time_new_now_local();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_new();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
 
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
-    private IGroupRowControl? _lastGroupRow;
-    private IModelRowControl<Transaction>? _lastTransactionRow;
     private readonly MainWindow _parentWindow;
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
-    private readonly GSourceFunc _startSpinner;
-    private readonly GSourceFunc _stopSpinner;
-    private readonly GSourceFunc _createGroupRowFunc;
-    private readonly GSourceFunc _deleteGroupRowFunc;
-    private readonly GSourceFunc _createTransactionRowFunc;
-    private readonly GSourceFunc _moveTransactionRowFunc;
-    private readonly GSourceFunc _deleteTransactionRowFunc;
-    private readonly GSourceFunc _accountTransactionsChangedFunc;
-    private GAsyncReadyCallback _saveCallback;
-    private GAsyncReadyCallback _openCallback;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
@@ -136,59 +100,13 @@ public partial class AccountView : Adw.Bin
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
-        _startSpinner = (x) =>
-        {
-            _noTransactionsStatusPage.SetVisible(false);
-            _transactionsScroll.SetVisible(true);
-            _mainOverlay.SetOpacity(0.0);
-            _spinnerBin.SetVisible(true);
-            _spinner.Start();
-            _paneScroll.SetSensitive(false);
-            return false;
-        };
-        _stopSpinner = (x) =>
-        {
-            _spinner.Stop();
-            _spinnerBin.SetVisible(false);
-            _mainOverlay.SetOpacity(1.0);
-            _paneScroll.SetSensitive(true);
-            return false;
-        };
         //Register Controller Events
-        _createGroupRowFunc = CreateGroupRow;
-        _deleteGroupRowFunc = DeleteGroupRow;
-        _createTransactionRowFunc = CreateTransactionRow;
-        _moveTransactionRowFunc = MoveTransactionRow;
-        _deleteTransactionRowFunc = DeleteTransactionRow;
-        _accountTransactionsChangedFunc = (x) => OnAccountTransactionsChanged();
-        _controller.AccountTransactionsChanged += (sender, e) => g_main_context_invoke(IntPtr.Zero, _accountTransactionsChangedFunc, IntPtr.Zero);
-        _controller.UICreateGroupRow = (group, index) =>
-        {
-            g_main_context_invoke(IntPtr.Zero, _createGroupRowFunc, (IntPtr)GCHandle.Alloc((group, index)));
-            //Wait for _createGroupRowFunc to finish
-            while(_lastGroupRow == null)
-            {
-                Thread.Sleep(10);
-            }
-            var toReturn = _lastGroupRow;
-            _lastGroupRow = null;
-            return toReturn;
-        };
-        _controller.UIDeleteGroupRow =  (row) => g_main_context_invoke(IntPtr.Zero, _deleteGroupRowFunc, (IntPtr)GCHandle.Alloc(row));
-        _controller.UICreateTransactionRow =  (transaction, index) =>
-        {
-            g_main_context_invoke(IntPtr.Zero, _createTransactionRowFunc, (IntPtr)GCHandle.Alloc((transaction, index)));
-            //Wait for _createTransactionRowFunc to finish
-            while(_lastTransactionRow == null)
-            {
-                Thread.Sleep(10);
-            }
-            var toReturn = _lastTransactionRow;
-            _lastTransactionRow = null;
-            return toReturn;
-        };
-        _controller.UIMoveTransactionRow =  (row, index) => g_main_context_invoke(IntPtr.Zero, _moveTransactionRowFunc, (IntPtr)GCHandle.Alloc((row, index)));
-        _controller.UIDeleteTransactionRow = (row) => g_main_context_invoke(IntPtr.Zero, _deleteTransactionRowFunc, (IntPtr)GCHandle.Alloc(row));
+        _controller.AccountTransactionsChanged += (sender, e) => GLib.Functions.IdleAdd(0, OnAccountTransactionsChanged);
+        _controller.UICreateGroupRow = CreateGroupRow;
+        _controller.UIDeleteGroupRow =  (row) => GLib.Functions.IdleAdd(0, () => DeleteGroupRow(row));
+        _controller.UICreateTransactionRow =  CreateTransactionRow;
+        _controller.UIMoveTransactionRow =  (row, index) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(row, index));
+        _controller.UIDeleteTransactionRow = (row) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(row));
         //Build UI
         builder.Connect(this);
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -325,19 +243,19 @@ public partial class AccountView : Adw.Bin
         actionMap.AddAction(actTransfer);
         //Export To CSV All Action
         var actExportCSVAll = Gio.SimpleAction.New("exportToCSVAll", null);
-        actExportCSVAll.OnActivate += (sender, e) => ExportToCSV(ExportMode.All);
+        actExportCSVAll.OnActivate += async (sender, e) => await ExportToCSVAsync(ExportMode.All);
         actionMap.AddAction(actExportCSVAll);
         //Export To CSV Current Action
         var actExportCSVCurrent = Gio.SimpleAction.New("exportToCSVCurrent", null);
-        actExportCSVCurrent.OnActivate += (sender, e) => ExportToCSV(ExportMode.CurrentView);
+        actExportCSVCurrent.OnActivate += async (sender, e) => await ExportToCSVAsync(ExportMode.CurrentView);
         actionMap.AddAction(actExportCSVCurrent);
         //Export To PDF All Action
         var actExportPDFAll = Gio.SimpleAction.New("exportToPDFAll", null);
-        actExportPDFAll.OnActivate += (sender, e) => ExportToPDF(ExportMode.All);
+        actExportPDFAll.OnActivate += async (sender, e) => await ExportToPDFAsync(ExportMode.All);
         actionMap.AddAction(actExportPDFAll);
         //Export To PDF Current Action
         var actExportPDFCurrent = Gio.SimpleAction.New("exportToPDFCurrent", null);
-        actExportPDFCurrent.OnActivate += (sender, e) => ExportToPDF(ExportMode.CurrentView);
+        actExportPDFCurrent.OnActivate += async (sender, e) => await ExportToPDFAsync(ExportMode.CurrentView);
         actionMap.AddAction(actExportPDFCurrent);
         //Import Action
         var actImport = Gio.SimpleAction.New("importFromFile", null);
@@ -377,177 +295,114 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
-    /// <param name="data">(Group, int?)</param>
-    private bool CreateGroupRow(IntPtr data)
+    /// <param name="group">The Group model</param>
+    /// <param name="index">int?</param>
+    /// <returns>The newly created row</returns>
+    private IGroupRowControl CreateGroupRow(Group group, int? index)
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = ((Group, int?)?)handle.Target;
-        if(target != null)
+        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
+        row.EditTriggered += EditGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        GLib.Functions.IdleAdd(0, () =>
         {
-            var e = target.Value;
-            var row = new GroupRow(e.Item1, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(e.Item1.Id == 0 ? -1 : (int)e.Item1.Id), _controller.GroupDefaultColor);
-            row.EditTriggered += EditGroup;
-            row.FilterChanged += UpdateGroupFilter;
-            if (e.Item2 != null)
+            if (index != null)
             {
-                try
-                {
-                    _groupsList.Insert(row, e.Item2.Value);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
+                _groupsList.Insert(row, index.Value);
             }
             else
             {
-                try
-                {
-                    _groupsList.Append(row);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
+                _groupsList.Append(row);
             }
-            _lastGroupRow = row;
-        }
-        handle.Free();
-        return false;
+            return false;
+        });
+        return row;
     }
 
     /// <summary>
     /// Removes a group row from the view
     /// </summary>
-    /// <param name="data">IGroupRowControl</param>
-    private bool DeleteGroupRow(IntPtr data)
+    /// <param name="row">IGroupRowControl</param>
+    private bool DeleteGroupRow(IGroupRowControl row)
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = (IGroupRowControl?)handle.Target;
-        if(target != null)
-        {
-            try
-            {
-                _groupsList.Remove((GroupRow)target);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-
-        }
-        handle.Free();
+        _groupsList.Remove((GroupRow)row);
         return false;
     }
 
     /// <summary>
     /// Creates a transaction row and adds it to the view
     /// </summary>
-    /// <param name="data">(Transaction, int?)</param>
-    private bool CreateTransactionRow(IntPtr data)
+    /// <param name="transaction">The Transaction model</param>
+    /// <param name="index">int?</param>
+    /// <returns>The newly created row</returns>
+    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = ((Transaction, int?)?)handle.Target;
-        if(target != null)
+        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+        row.EditTriggered += EditTransaction;
+        GLib.Functions.IdleAdd(0, () =>
         {
-            var e = target.Value;
-            var row = new TransactionRow(e.Item1, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
-            row.EditTriggered += EditTransaction;
-            if (e.Item2 != null)
+            row.IsSmall = _parentWindow.DefaultWidth < 450;
+            if (index != null)
             {
-                try
-                {
-                    row.IsSmall = _parentWindow.DefaultWidth < 450;
-                    _flowBox.Insert(row, e.Item2.Value);
-                    g_main_context_iteration(g_main_context_default(), false);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
+                _flowBox.Insert(row, index.Value);
             }
             else
             {
-                try
-                {
-                    row.IsSmall = _parentWindow.DefaultWidth < 450;
-                    _flowBox.Append(row);
-                    g_main_context_iteration(g_main_context_default(), false);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
+
+                _flowBox.Append(row);
             }
-            _lastTransactionRow = row;
-        }
-        handle.Free();
-        return false;
+            GLib.Internal.MainContext.Iteration(GLib.MainContext.Default().Handle, false);
+            return false;
+        });
+        return row;
     }
 
     /// <summary>
     /// Moves a row in the list
     /// </summary>
-    /// <param name="data">(IModelRowControl<Transaction>, int)</param>
-    private bool MoveTransactionRow(IntPtr data)
+    /// <param name="row">IModelRowControl<Transaction></param>
+    /// <param name="index">int</param>
+    private bool MoveTransactionRow(IModelRowControl<Transaction> row, int index)
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = ((IModelRowControl<Transaction>, int)?)handle.Target;
-        if(target != null)
+        _flowBox.Remove((TransactionRow)row);
+        _flowBox.Insert((TransactionRow)row, index);
+        GLib.Internal.MainContext.Iteration(GLib.MainContext.Default().Handle, false);
+        if (((TransactionRow)row).IsVisible())
         {
-            var e = target.Value;
-            try
-            {
-                _flowBox.Remove((TransactionRow)e.Item1);
-                _flowBox.Insert((TransactionRow)e.Item1, e.Item2);
-                g_main_context_iteration(g_main_context_default(), false);
-                if (((TransactionRow)e.Item1).IsVisible())
-                {
-                    e.Item1.Show();
-                }
-                else
-                {
-                    e.Item1.Hide();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
+            row.Show();
         }
-        handle.Free();
+        else
+        {
+            row.Hide();
+        }
         return false;
     }
 
     /// <summary>
     /// Removes a transaction row from the view
     /// </summary>
-    /// <param name="data">IModelRowControl<Transaction></param>
-    private bool DeleteTransactionRow(IntPtr data)
+    /// <param name="row">IModelRowControl<Transaction></param>
+    private bool DeleteTransactionRow(IModelRowControl<Transaction> row)
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = (IModelRowControl<Transaction>?)handle.Target;
-        if(target != null)
-        {
-            try
-            {
-                _flowBox.Remove((TransactionRow)target);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-        handle.Free();
+        _flowBox.Remove((TransactionRow)row);
         return false;
+    }
+
+    private void StartSpinner()
+    {
+        _noTransactionsStatusPage.SetVisible(false);
+        _transactionsScroll.SetVisible(true);
+        _mainOverlay.SetOpacity(0.0);
+        _spinnerBin.SetVisible(true);
+        _spinner.Start();
+        _paneScroll.SetSensitive(false);
+    }
+
+    private void StopSpinner()
+    {
+        _spinner.Stop();
+        _spinnerBin.SetVisible(false);
+        _mainOverlay.SetOpacity(1.0);
+        _paneScroll.SetSensitive(true);
     }
 
     /// <summary>
@@ -555,9 +410,8 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
-        //Start Spinner
-        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-        //Work
+
+        StartSpinner();
         await _controller.StartupAsync();
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
@@ -571,7 +425,7 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+        StopSpinner();
     }
 
     /// <summary>
@@ -652,8 +506,10 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
+    private async void ImportFromFile(Gio.SimpleAction sender, EventArgs e)
     {
+        var openFileDialog = Gtk.FileDialog.New();
+        openFileDialog.SetTitle(_("Import from File"));
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName($"{_("All files")} (*.csv, *.ofx, *.qif)");
         filterAll.AddPattern("*.csv");
@@ -674,117 +530,103 @@ public partial class AccountView : Adw.Bin
         filterQif.SetName("Quicken Format (*.qif)");
         filterQif.AddPattern("*.qif");
         filterQif.AddPattern("*.QIF");
-        var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Import from File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterCsv);
         filters.Append(filterOfx);
         filters.Append(filterQif);
-        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-        _openCallback = async (source, res, data) =>
+        openFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
+            var file = await openFileDialog.OpenAsync(_parentWindow);
+            StartSpinner();
+            await Task.Run(async () =>
             {
-                var path = g_file_get_path(fileHandle);
-                //Start Spinner
-                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                //Work
-                await Task.Run(async () =>
+                try
                 {
-                    try
-                    {
-                        await _controller.ImportFromFileAsync(path ?? "");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine(ex.StackTrace);
-                    }
-                });
-                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
-            }
-        };
-        gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+                    await _controller.ImportFromFileAsync(file!.GetPath() ?? "");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            });
+            StopSpinner();
+        }
+        catch { }
     }
 
     /// <summary>
     /// Occurs when the export to csv item is activated
     /// </summary>
     /// <param name="exportMode">The information to export</param>
-    private void ExportToCSV(ExportMode exportMode)
+    private async Task ExportToCSVAsync(ExportMode exportMode)
     {
+        var saveFileDialog = Gtk.FileDialog.New();
+        saveFileDialog.SetTitle(_("Export to File"));
         var filterCsv = Gtk.FileFilter.New();
         filterCsv.SetName("CSV (*.csv)");
         filterCsv.AddPattern("*.csv");
-        var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _("Export to File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterCsv);
-        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-        _saveCallback = async (source, res, data) =>
+        saveFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
+            var file = await saveFileDialog.SaveAsync(_parentWindow);
+            var path = file!.GetPath();
+            if (Path.GetExtension(path).ToLower() != ".csv")
             {
-                var path = g_file_get_path(fileHandle);
-                if (Path.GetExtension(path).ToLower() != ".csv")
-                {
-                    path += ".csv";
-                }
-                _controller.ExportToCSV(path ?? "", exportMode);
+                path += ".csv";
             }
-        };
-        gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+            _controller.ExportToCSV(path ?? "", exportMode);
+        }
+        catch { }
     }
 
     /// <summary>
     /// Occurs when the export to pdf item is activated
     /// </summary>
     /// <param name="exportMode">The information to export</param>
-    private void ExportToPDF(ExportMode exportMode)
+    private async Task ExportToPDFAsync(ExportMode exportMode)
     {
+        var saveFileDialog = Gtk.FileDialog.New();
+        saveFileDialog.SetTitle(_("Export to File"));
         var filterPdf = Gtk.FileFilter.New();
         filterPdf.SetName("PDF (*.pdf)");
         filterPdf.AddPattern("*.pdf");
-        var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, _("Export to File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterPdf);
-        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
-        _saveCallback = async (source, res, data) =>
+        saveFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
+            var file = await saveFileDialog.SaveAsync(_parentWindow);
+            var path = file!.GetPath();
+            if (Path.GetExtension(path).ToLower() != ".pdf")
             {
-                var path = g_file_get_path(fileHandle);
-                if (Path.GetExtension(path).ToLower() != ".pdf")
-                {
-                    path += ".pdf";
-                }
-                string? password = null;
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
-                dialog.Present();
-                dialog.OnResponse += async (sender, e) =>
-                {
-                    if (dialog.Response == MessageDialogResponse.Suggested)
-                    {
-                        var tcs = new TaskCompletionSource<string?>();
-                        var newPasswordDialog = new NewPasswordDialog(_parentWindow, _("PDF Password"), tcs);
-                        newPasswordDialog.Present();
-                        var password = await tcs.Task;
-                        _controller.ExportToPDF(path ?? "", exportMode, password);
-                    }
-                    else
-                    {
-                        _controller.ExportToPDF(path ?? "", exportMode, null);
-                    }
-                    dialog.Destroy();
-                };
+                path += ".pdf";
             }
-        };
-        gtk_file_dialog_save(saveFileDialog, _parentWindow.Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+            string? password = null;
+            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
+            dialog.Present();
+            dialog.OnResponse += async (sender, e) =>
+            {
+                if (dialog.Response == MessageDialogResponse.Suggested)
+                {
+                    var tcs = new TaskCompletionSource<string?>();
+                    var newPasswordDialog = new NewPasswordDialog(_parentWindow, _("PDF Password"), tcs);
+                    newPasswordDialog.Present();
+                    var password = await tcs.Task;
+                    _controller.ExportToPDF(path ?? "", exportMode, password);
+                }
+                else
+                {
+                    _controller.ExportToPDF(path ?? "", exportMode, null);
+                }
+                dialog.Destroy();
+            };
+        }
+        catch { }
     }
 
     /// <summary>
@@ -822,9 +664,7 @@ public partial class AccountView : Adw.Bin
         transactionDialog.OnApply += async (sender, e) =>
         {
             transactionDialog.SetVisible(false);
-            //Start Spinner
-            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-            //Work
+            StartSpinner();
             await Task.Run(async () =>
             {
                 try
@@ -837,8 +677,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            //Stop Spinner
-            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+            StopSpinner();
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -856,9 +695,7 @@ public partial class AccountView : Adw.Bin
         transactionDialog.OnApply += async (sender, e) =>
         {
             transactionDialog.SetVisible(false);
-            //Start Spinner
-            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-            //Work
+            StartSpinner();
             await Task.Run(async () =>
             {
                 try
@@ -871,7 +708,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+            StopSpinner();
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -907,9 +744,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (dialog.Response == MessageDialogResponse.Suggested)
                         {
-                            //Start Spinner
-                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                            //Work
+                            StartSpinner();
                             await Task.Run(async () =>
                             {
                                 try
@@ -923,13 +758,11 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                            StopSpinner();
                         }
                         else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
-                            //Start Spinner
-                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                            //Work
+                            StartSpinner();
                             await Task.Run(async () =>
                             {
                                 try
@@ -942,7 +775,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                            StopSpinner();
                         }
                         dialog.Destroy();
                     };
@@ -957,9 +790,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (dialog.Response != MessageDialogResponse.Cancel)
                         {
-                            //Start Spinner
-                            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                            //Work
+                            StartSpinner();
                             await Task.Run(async () =>
                             {
                                 try
@@ -972,7 +803,7 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                            StopSpinner();
                         }
                         dialog.Destroy();
                     };
@@ -980,9 +811,7 @@ public partial class AccountView : Adw.Bin
             }
             else
             {
-                //Start Spinner
-                g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                //Work
+                StartSpinner();
                 await Task.Run(async () =>
                 {
                     try
@@ -995,7 +824,7 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                StopSpinner();
             }
             transactionController.Dispose();
             transactionDialog.Close();
@@ -1013,9 +842,7 @@ public partial class AccountView : Adw.Bin
                 {
                     if (dialog.Response != MessageDialogResponse.Cancel)
                     {
-                        //Start Spinner
-                        g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-                        //Work
+                        StartSpinner();
                         await Task.Run(async () =>
                         {
                             try
@@ -1028,7 +855,7 @@ public partial class AccountView : Adw.Bin
                                 Console.WriteLine(ex.StackTrace);
                             }
                         });
-                        g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+                        StopSpinner();
                         transactionController.Dispose();
                         transactionDialog.Close();
                     }
@@ -1074,9 +901,7 @@ public partial class AccountView : Adw.Bin
         groupDialog.OnApply += async (sender, e) =>
         {
             groupDialog.SetVisible(false);
-            //Start Spinner
-            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-            //Work
+            StartSpinner();
             await Task.Run(async () =>
             {
                 try
@@ -1089,7 +914,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+            StopSpinner();
             groupDialog.Close();
         };
     }
@@ -1107,9 +932,7 @@ public partial class AccountView : Adw.Bin
         groupDialog.OnApply += async (sender, e) =>
         {
             groupDialog.SetVisible(false);
-            //Start Spinner
-            g_main_context_invoke(IntPtr.Zero, _startSpinner, IntPtr.Zero);
-            //Work
+            StartSpinner();
             await Task.Run(async () =>
             {
                 try
@@ -1122,7 +945,7 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            g_main_context_invoke(IntPtr.Zero, _stopSpinner, IntPtr.Zero);
+            StopSpinner();
             groupDialog.Close();
         };
         groupDialog.OnDelete += (sender, e) =>
