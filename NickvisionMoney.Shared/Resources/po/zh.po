@@ -8,17 +8,20 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-28 21:19-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-07-29 12:14+0000\n"
+"Last-Translator: Yuxin Ren <yx_Ren2018@outlook.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"nickvision-money/app/zh_Hans/>\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:534
 msgid "(Copy)"
-msgstr "(Copy)"
+msgstr "(复制)"
 
 #: ../../../Controllers/DashboardViewController.cs:83
 #: ../../../Controllers/DashboardViewController.cs:92
@@ -26,7 +29,7 @@ msgstr "(Copy)"
 #: ../../../Controllers/DashboardViewController.cs:121
 #, csharp-format
 msgid "{0} from {1}"
-msgstr ""
+msgstr "{0} 从 {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:450
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1179
@@ -38,19 +41,16 @@ msgstr[1] "交易"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:261
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
-#, fuzzy
 msgid "Account Name"
-msgstr "Account Type"
+msgstr "账户名称"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:277
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "名稱 (已存在)"
+msgstr "账户名称 (已存在)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:272
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "沒有曾開啟的帳戶"
+msgstr "账户名称(已启用)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:69
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:445
@@ -58,33 +58,33 @@ msgstr "沒有曾開啟的帳戶"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:35
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
 msgid "Account Settings"
-msgstr "Account Settings"
+msgstr "账户设置"
 
 #: ../../../Models/Account.cs:1632
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:59
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:148
 msgid "Account Type"
-msgstr "Account Type"
+msgstr "账户类型"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:102
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:160
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:46
 msgid "Add"
-msgstr "Add"
+msgstr "添加"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:471
 msgid "Add a new transaction or import transactions from a file."
-msgstr "新增交易或從檔案中導入"
+msgstr "添加交易或从文件中导入交易。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:610
 msgid "Add Password To PDF?"
-msgstr ""
+msgstr "添加密码至PDF?"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:392
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:638
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:514
 msgid "All files"
-msgstr "All files"
+msgstr "所有文件"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:141
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:466
@@ -92,26 +92,26 @@ msgstr "All files"
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
-msgstr "數額"
+msgstr "金额"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:176
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:485
 msgid "Amount (Invalid)"
-msgstr "數額 (無效)"
+msgstr "金额 (无效)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:102
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:160
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:129
 msgid "Apply"
-msgstr "Apply"
+msgstr "应用"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:954
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
 msgstr ""
-"確認刪除組群?\n"
-"此操作不可逆轉"
+"是否确认删除此组？\n"
+"该操作不可逆。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:871
 msgid ""
@@ -119,17 +119,17 @@ msgid ""
 "This action is irreversible."
 msgstr ""
 "確認刪除交易?\n"
-"此操作不可逆轉"
+"此操作不可逆轉。"
 
 #: ../../../Models/Account.cs:1639
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Business"
-msgstr "Business"
+msgstr "商务"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:162
 msgid "Can't access the selected folder, check Flatpak permissions."
-msgstr ""
+msgstr "没有所选文件夹的权限，请检查Flatpak权限。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:739
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:785
@@ -140,43 +140,43 @@ msgstr "取消"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:226
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:107
 msgid "Change Password"
-msgstr "Change Password"
+msgstr "更改密码"
 
 #: ../../../Models/Account.cs:1637
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Checking"
-msgstr "Checking"
+msgstr "支票"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:106
 #: ../../../Models/Account.cs:1633
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:89
 msgid "Currency"
-msgstr "Currency"
+msgstr "货币"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:334
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:221
 msgid "Currency Code"
-msgstr "Currency Code"
+msgstr "货币代码"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:368
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:350
 msgid "Currency Code (Empty)"
-msgstr "Currency Code (Empty)"
+msgstr "货币代码 (空)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:332
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:323
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:165
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:217
 msgid "Currency Symbol"
-msgstr "Currency Symbol"
+msgstr "货币符号"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:356
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:340
 msgid "Currency Symbol (Empty)"
-msgstr "Currency Symbol (Empty)"
+msgstr "货币符号 (空)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:362
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
@@ -184,9 +184,8 @@ msgstr "Currency Symbol (Empty)"
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:345
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:374
-#, fuzzy
 msgid "Currency Symbol (Invalid)"
-msgstr "Currency Symbol (Empty)"
+msgstr "货币符号 (无效)"
 
 #: ../../../Models/Account.cs:1693
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:109
@@ -199,89 +198,87 @@ msgid ""
 "David Lapshin {0}\n"
 "Tobias Bernard {1}"
 msgstr ""
+"David Lapshin {0}\n"
+"Tobias Bernard {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:336
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:173
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:225
-#, fuzzy
 msgid "Decimal Separator"
-msgstr "Insert Decimal Separator"
+msgstr "小数点分隔符"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:374
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:355
-#, fuzzy
 msgid "Decimal Separator (Empty)"
-msgstr "Insert Decimal Separator"
+msgstr "小数点分隔符 (空)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:380
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:360
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
-#, fuzzy
 msgid "Decimal Separator (Invalid)"
-msgstr "Insert Decimal Separator"
+msgstr "小数点分隔符 (无效)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:739
-#, fuzzy
 msgid "Delete Existing"
-msgstr "Delete Existing"
+msgstr "删除已存在的"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:954
 msgid "Delete Group"
-msgstr "刪除組群"
+msgstr "删除组"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:837
 msgid "Delete Only Source"
-msgstr "Delete Only Source"
+msgstr "删除唯一源"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:837
 msgid "Delete Source and Generated"
-msgstr "Delete Source and Generated"
+msgstr "删除源和内容"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:837
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:871
 msgid "Delete Transaction"
-msgstr "刪除交易"
+msgstr "删除交易"
 
 #: ../../../../NickvisionMoney.GNOME/Program.cs:47
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
-msgstr ""
+msgstr "Denaro"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:464
 #: ../../../Models/Account.cs:1664 ../../../Models/Account.cs:1694
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:38
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:64
 msgid "Description"
-msgstr "資訊欄"
+msgstr "描述"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:480
 msgid "Description (Empty)"
-msgstr "資訊欄 (空)"
+msgstr "描述 (空)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:137
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:38
 msgid "Destination Account"
-msgstr "目標戶口"
+msgstr "目标账户"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:157
 msgid "Destination Account (Invalid)"
-msgstr "目標戶口 (無效)"
+msgstr "目标账户 (无效)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:139
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:69
 msgid "Destination Account Password"
-msgstr "Destination Account Password"
+msgstr "目标账户密码"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:170
 msgid "Destination Account Password (Invalid)"
-msgstr "Destination Account Password (Invalid)"
+msgstr "目标账户密码 (无效)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:164
 msgid "Destination Account Password (Required)"
-msgstr "Destination Account Password (Required)"
+msgstr "目标账户密码 (必要)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:739
 msgid "Disassociate Existing"
@@ -300,17 +297,17 @@ msgstr "支出"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:594
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
 msgid "Export to File"
-msgstr "導出到檔案"
+msgstr "导出到文件"
 
 #: ../../../Controllers/AccountViewController.cs:992
 #: ../../../Controllers/AccountViewController.cs:1010
 msgid "Exported account to file successfully."
-msgstr "成功導出帳戶至檔案"
+msgstr "成功将账户导出到文件。"
 
 #: ../../../Models/Account.cs:1583
 #, csharp-format
 msgid "Generated: {0}"
-msgstr "Generated: {0}"
+msgstr "已生成: {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:478
 msgid "GitHub Repo"
@@ -333,60 +330,57 @@ msgstr "晚上好!"
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:47
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:173
 msgid "Group"
-msgstr "組群"
+msgstr "群组"
 
 #: ../../../Models/Account.cs:1696
 msgid "Group Name"
-msgstr "Group Name"
+msgstr "组名"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:338
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:189
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Group Separator"
-msgstr ""
+msgstr "组别分隔符"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
-#, fuzzy
 msgid "Group Separator (Invalid)"
-msgstr "數額 (無效)"
+msgstr "组别分隔符 (无效)"
 
 #: ../../../Models/Account.cs:1662
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:133
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:76
 msgid "Groups"
-msgstr "群組"
+msgstr "群组"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:197
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/window.blp:7
 msgid "Help"
-msgstr "Help"
+msgstr "帮助"
 
 #: ../../../Models/Account.cs:1692 ../../../Models/Account.cs:1763
 msgid "Id"
-msgstr "Id"
+msgstr "ID"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:390
-#, fuzzy
 msgid "Import from Account"
-msgstr "從檔案導入"
+msgstr "从账户导入"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:512
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:41
 msgid "Import from File"
-msgstr "從檔案導入"
+msgstr "从文件导入"
 
 #: ../../../Controllers/AccountViewController.cs:975
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "從檔案中導入 {0} 筆交易"
-msgstr[1] "從檔案中導入 {0} 筆交易"
+msgstr[0] "从文件导入 {0} 笔交易"
 
 #: ../../../Models/Account.cs:1616 ../../../Models/Account.cs:1743
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
@@ -401,7 +395,7 @@ msgstr "收入"
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:5
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:8
 msgid "Manage your personal finances"
-msgstr "個人財政記錄軟體"
+msgstr "管理你的个人财务"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:479
 msgid "Matrix Chat"
@@ -418,16 +412,16 @@ msgstr "N/A"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:54
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:32
 msgid "Name"
-msgstr "名稱"
+msgstr "名称"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:350
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:142
 msgid "Name (Empty)"
-msgstr "名稱 (空)"
+msgstr "名称 (空)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:147
 msgid "Name (Exists)"
-msgstr "名稱 (已存在)"
+msgstr "名称 (已存在)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:566
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:164
@@ -440,6 +434,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"GitHub 贡献者 ❤️ {1}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:481
 #, csharp-format
@@ -448,12 +444,15 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:322
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../Models/Account.cs:1792
 msgid "Nickvision Denaro Account"
-msgstr "Nickvision的軟體--Money的帳戶"
+msgstr "Nickvision的Denaro账户"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:610
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:871
@@ -465,34 +464,34 @@ msgstr "否"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:453
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:598
 msgid "No End Date"
-msgstr "No End Date"
+msgstr "没有结束日期"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:470
 msgid "No Transactions"
-msgstr "沒有交易"
+msgstr "没有交易"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:460
 msgid "No Transactions Found"
-msgstr "沒有找到交易"
+msgstr "没有找到交易"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:461
 msgid "No transactions match the specified filters."
-msgstr "沒有符合條件的交易"
+msgstr "没有符合条件的交易"
 
 #: ../../../Models/Account.cs:1697
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:313
 msgid "Notes"
-msgstr ""
+msgstr "注释"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:204
 msgid "Open"
-msgstr "開啟"
+msgstr "开启"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:320
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:22
 #: NickvisionMoney.GNOME/Blueprints/window.blp:199
 msgid "Open Account"
-msgstr "開啟帳戶"
+msgstr "开设账户"
 
 #: ../../../Models/Account.cs:1594
 msgid "Overview"
@@ -500,100 +499,96 @@ msgstr "概要"
 
 #: ../../../Models/Account.cs:1795
 msgid "Page {0}"
-msgstr "Page {0}"
+msgstr "第 {0} 页"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:617
-#, fuzzy
 msgid "PDF Password"
-msgstr "Password"
+msgstr "PDF 密码"
 
 #: ../../../Controllers/MainWindowController.cs:265
 msgid "Please wait while transactions import..."
-msgstr ""
+msgstr "正在导入交易，请稍候..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:470
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:636
 #: ../../../Models/Account.cs:1764
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:269
 msgid "Receipt"
-msgstr "Receipt"
+msgstr "收据"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:496
 msgid "Receipt (File Inaccessible)"
-msgstr ""
+msgstr "收据（文件无法访问）"
 
 #: ../../../Models/Account.cs:1762
 msgid "Receipts"
-msgstr "Receipts"
+msgstr "收据"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:468
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:135
 msgid "Repeat End Date"
-msgstr "Repeat End Date"
+msgstr "重复结束日期"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:490
 msgid "Repeat End Date (Invalid)"
-msgstr "Repeat End Date (Invalid)"
+msgstr "重复结束日期（无效）"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/TransactionRow.cs:123
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:162
 msgid "Repeat Interval"
-msgstr "重複"
+msgstr "重复间隔"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:739
 msgid "Repeat Interval Changed"
-msgstr "Repeat Interval Changed"
+msgstr "重复间隔已更改"
 
 #: ../../../Models/Account.cs:1638
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:62
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Savings"
-msgstr "Savings"
+msgstr "储蓄"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:203
-#, fuzzy
 msgid "Select Account"
-msgstr "最近開啟的帳戶"
+msgstr "选择账户"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:155
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:155
 msgid "Select Backup Folder"
-msgstr ""
+msgstr "选择备份文件夹"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:239
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:100
-#, fuzzy
 msgid "Select Folder"
-msgstr "選擇範圍"
+msgstr "选择文件夹"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:201
 msgid "Sort By Amount"
-msgstr "Sort By Amount"
+msgstr "按金额排序"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:201
 msgid "Sort By Date"
-msgstr "Sort By Date"
+msgstr "按日期排序"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:201
 msgid "Sort By Id"
-msgstr "Sort By Id"
+msgstr "按 ID 排序"
 
 #: ../../../Controllers/AccountViewController.cs:609
 msgid "The password of the account was changed."
-msgstr "The password of the account was changed."
+msgstr "账户密码已更改。"
 
 #: ../../../Controllers/AccountViewController.cs:605
 msgid "The password of the account was removed."
-msgstr "The password of the account was removed."
+msgstr "账户密码已被删除。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:448
 msgid "The password will be removed upon closing this dialog."
-msgstr "The password will be removed upon closing this dialog."
+msgstr "关闭此对话框后，密码将被删除。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
-#, fuzzy
 msgid "The passwords do not match."
-msgstr "The password of the account was changed."
+msgstr "密码不匹配。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:739
 msgid ""
@@ -602,18 +597,18 @@ msgid ""
 "\n"
 "New repeat transactions will be generated based off the new interval."
 msgstr ""
-"The repeat interval was changed.\n"
-"What would you like to do with existing generated transactions?\n"
+"重复间隔已更改。\n"
+"您想如何处理已生成的交易？\n"
 "\n"
-"New repeat transactions will be generated based off the new interval."
+"新的重复交易将是使用新的间隔。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:500
 msgid "This account has no money available to transfer."
-msgstr "此帳戶沒有足夠的結餘以完成此次轉帳"
+msgstr "该账户没有足够资金完成转账。"
 
 #: ../../../Controllers/MainWindowController.cs:317
 msgid "This account is already opened."
-msgstr "此帳戶已被開啟"
+msgstr "此账户已经开启"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:837
 #, fuzzy
@@ -624,11 +619,10 @@ msgid ""
 "Deleting only the source transaction will allow individual\n"
 "generated transactions to be modifiable."
 msgstr ""
-"This transaction is a source repeat transaction.\n"
-"What would you like to do with the repeat transactions?\n"
+"此交易是重复交易的源。\n"
+"你希望如何更改重复交易?\n"
 "\n"
-"Deleting only the source transaction will allow individual\n"
-"generated transactions to be modifiable."
+"只删去此源交易，将允许后续生成的交易的更改。"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:785
 msgid ""
