@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-05-24 04:01+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-07-29 12:14+0000\n"
+"Last-Translator: Yuxin Ren <yx_Ren2018@outlook.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"nickvision-money/docs/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -70,7 +73,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:30
@@ -83,7 +86,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:33
 msgid "Account Type"
-msgstr ""
+msgstr "账户类型"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:34
@@ -672,7 +675,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr ""
+msgstr "交易"
 
 #. (itstool) path: page/p
 #: yelp/C/transaction.page:21
@@ -682,7 +685,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
@@ -695,7 +698,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:29
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:30
@@ -705,7 +708,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:33
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:34
@@ -730,7 +733,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:41
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:42
@@ -741,7 +744,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "重复间隔"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -761,7 +764,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "重复结束日期"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
@@ -773,7 +776,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:53
 msgid "Group"
-msgstr ""
+msgstr "群组"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:54
@@ -798,7 +801,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Receipt"
-msgstr ""
+msgstr "收据"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62
@@ -812,7 +815,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
 msgid "Notes"
-msgstr ""
+msgstr "注释"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:66
