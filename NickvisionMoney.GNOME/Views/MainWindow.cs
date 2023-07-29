@@ -151,7 +151,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:denaro", 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -195,7 +195,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, "help:denaro/import-export", 0);
+            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, Help.GetHelpURL("import-export"), 0);
         }
         else if (e.Action == "open-export")
         {
