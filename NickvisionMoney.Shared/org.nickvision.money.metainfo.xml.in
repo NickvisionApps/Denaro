@@ -49,6 +49,8 @@
   <releases>
     <release version="2023.8.0-next" date="2023-08-01">
       <description translatable="no">
+        <p>- Fixed an issue where the help button in the import toast was not working</p>
+        <p>- Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

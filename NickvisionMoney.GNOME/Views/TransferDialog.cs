@@ -1,10 +1,10 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -14,28 +14,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransferDialog : Adw.Window
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_new();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
-
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-
-    private GAsyncReadyCallback _openCallback { get; set; }
-
     private readonly TransferDialogController _controller;
     private readonly Gtk.Window _parentWindow;
 
@@ -56,7 +34,6 @@ public partial class TransferDialog : Adw.Window
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.EventControllerKey _sourceCurrencyKeyController;
     private readonly Gtk.EventControllerKey _destCurrencyKeyController;
-    private readonly Gtk.ShortcutController _shortcutController;
 
     public event EventHandler? OnApply;
 
@@ -111,15 +88,6 @@ public partial class TransferDialog : Adw.Window
         _destCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _destCurrencyKeyController.OnKeyPressed += OnKeyPressedDest;
         _destinationCurrencyRow.AddController(_destCurrencyKeyController);
-        //Shortcut Controller
-        _shortcutController = Gtk.ShortcutController.New();
-        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
-        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New((sender, e) =>
-        {
-            Close();
-            return true;
-        })));
-        AddController(_shortcutController);
         //Load
         if (_controller.RecentAccounts.Count > 0)
         {
@@ -229,34 +197,31 @@ public partial class TransferDialog : Adw.Window
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void OnSelectAccount(Gtk.Button sender, EventArgs e)
+    private async void OnSelectAccount(Gtk.Button sender, EventArgs e)
     {
+        var openFileDialog = Gtk.FileDialog.New();
+        openFileDialog.SetTitle(_("Select Account"));
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
-        var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Select Account"));
+        filter.AddPattern("*.NMONEY");
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
-        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-        _openCallback = async (source, res, data) =>
+        openFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                _destinationAccountRow.SetSubtitle(path);
-                _destinationPasswordRow.SetVisible(false);
-                _destinationPasswordRow.SetSensitive(true);
-                _destinationPasswordRow.SetText("");
-                _amountRow.SetText("");
-                _conversionRateGroup.SetVisible(false);
-                _sourceCurrencyRow.SetText("");
-                _destinationCurrencyRow.SetText("");
-                Validate();
-            }
-        };
-        gtk_file_dialog_open(openFileDialog, _parentWindow.Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+            var file = await openFileDialog.OpenAsync(this);
+            _destinationAccountRow.SetSubtitle(file!.GetPath() ?? "");
+            _destinationPasswordRow.SetVisible(false);
+            _destinationPasswordRow.SetSensitive(true);
+            _destinationPasswordRow.SetText("");
+            _amountRow.SetText("");
+            _conversionRateGroup.SetVisible(false);
+            _sourceCurrencyRow.SetText("");
+            _destinationCurrencyRow.SetText("");
+            Validate();
+        }
+        catch { }
     }
 
     /// <summary>

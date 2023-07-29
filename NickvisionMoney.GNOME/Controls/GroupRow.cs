@@ -1,10 +1,10 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -13,32 +13,10 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class GroupRow : Adw.ActionRow, IGroupRowControl
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Color
-    {
-        public float Red;
-        public float Green;
-        public float Blue;
-        public float Alpha;
-    }
-
-    private delegate bool GSourceFunc(nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gdk_rgba_to_string(ref Color rgba);
-
     private Group _group;
     private bool _filterActive;
     private string _defaultColor;
     private CultureInfo _cultureAmount;
-    private GSourceFunc _updateCallback;
     private bool _useNativeDigits;
 
     [Gtk.Connect] private readonly Gtk.Overlay _filterOverlay;
@@ -66,38 +44,6 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _cultureAmount = cultureAmount;
         _defaultColor = defaultColor;
         _useNativeDigits = useNativeDigits;
-        _updateCallback = (x) =>
-        {
-            //Color
-            var color = new Color();
-            if (!gdk_rgba_parse(ref color, _group.RGBA))
-            {
-                gdk_rgba_parse(ref color, _defaultColor);
-            }
-            //Row Settings
-            SetTitle(_group.Name);
-            SetSubtitle(_group.Description);
-            //Filter Checkbox
-            var red = (int)(color.Red * 255);
-            var green = (int)(color.Green * 255);
-            var blue = (int)(color.Blue * 255);
-            var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
-            uint colorPixbuf;
-            if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out colorPixbuf))
-            {
-                pixbuf.Fill(colorPixbuf);
-                _filterCheckBackground.SetFromPixbuf(pixbuf);
-            }
-            var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
-            _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
-            _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
-            _filterCheckButton.SetActive(_filterActive);
-            //Amount Label
-            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "−  ")}{_group.Balance.ToAmountString(_cultureAmount, _useNativeDigits)}");
-            _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
-            _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
-            return false;
-        };
         //Build UI
         builder.Connect(this);
         var sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Both);
@@ -160,7 +106,36 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _defaultColor = defaultColor;
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
-        g_main_context_invoke(IntPtr.Zero, _updateCallback, IntPtr.Zero);
+        GLib.Functions.IdleAdd(0, () =>
+        {
+            //Color
+            if (!GdkExt.RGBA.Parse(out var color, _group.RGBA))
+            {
+                GdkExt.RGBA.Parse(out color, _defaultColor);
+            }
+            //Row Settings
+            SetTitle(_group.Name);
+            SetSubtitle(_group.Description);
+            //Filter Checkbox
+            var red = (int)(color!.Value.Red * 255);
+            var green = (int)(color.Value.Green * 255);
+            var blue = (int)(color.Value.Blue * 255);
+            using var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
+            if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out var colorPixbuf))
+            {
+                pixbuf.Fill(colorPixbuf);
+                _filterCheckBackground.SetFromPixbuf(pixbuf);
+            }
+            var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
+            _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
+            _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
+            _filterCheckButton.SetActive(_filterActive);
+            //Amount Label
+            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "−  ")}{_group.Balance.ToAmountString(_cultureAmount, _useNativeDigits)}");
+            _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
+            _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
+            return false;
+        });
     }
 
     /// <summary>

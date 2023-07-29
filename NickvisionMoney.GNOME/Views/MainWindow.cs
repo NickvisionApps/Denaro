@@ -1,3 +1,4 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
@@ -30,53 +30,6 @@ public class WidthChangedEventArgs : EventArgs
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_new();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_launcher_new(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_launcher_launch(nint fileLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_uri_launcher_new(string uri);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_file_new_for_path(string path);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_file_icon_new(nint gfile);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_notification_set_icon(nint notification, nint icon);
-
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
 
@@ -105,9 +58,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actOpenAccount;
     private readonly Gio.SimpleAction _actCloseAccount;
 
-    private GAsyncReadyCallback _saveCallback { get; set; }
-    private GAsyncReadyCallback _openCallback { get; set; }
-
     public bool CompactMode { get; private set; }
 
     /// <summary>
@@ -127,7 +77,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         builder.Connect(this);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
-        OnShow += OnWindowShow;
         CompactMode = false;
         if (_controller.IsDevVersion)
         {
@@ -227,11 +176,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Starts the MainWindow
     /// </summary>
-    public void Startup()
+    public async Task StartupAsync()
     {
         _application.AddWindow(this);
         UpdateRecentAccountsOnStart();
         Present();
+        await _controller.StartupAsync();
     }
 
     /// <summary>
@@ -244,16 +194,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         var toast = Adw.Toast.New(e.Message);
         if (e.Action == "help-import")
         {
-            var uriLauncher = gtk_uri_launcher_new("help:denaro/import-export");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, "help:denaro/import-export", 0);
         }
         else if (e.Action == "open-export")
         {
             var file = Gio.FileHelper.NewForPath(e.ActionParam);
-            var fileLauncher = gtk_file_launcher_new(file.Handle);
+            var fileLauncher = Gtk.FileLauncher.New(file);
             toast.SetButtonLabel(_("Open"));
-            toast.OnButtonClicked += (sender, ex) => gtk_file_launcher_launch(fileLauncher, 0, 0, (source, res, data) => { }, 0);
+            toast.OnButtonClicked += async (s, ex) =>
+            {
+                try
+                {
+                    await fileLauncher.LaunchAsync(this);
+                }
+                catch { }
+            };
         }
         _toastOverlay.AddToast(toast);
     }
@@ -279,8 +235,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            var iconHandle = g_file_icon_new(g_file_new_for_path($"{Environment.GetEnvironmentVariable("SNAP")}/usr/share/icons/hicolor/symbolic/apps/{_controller.AppInfo.ID}-symbolic.svg"));
-            g_notification_set_icon(notification.Handle, iconHandle);
+            var fileIcon = Gio.FileIcon.New(Gio.FileHelper.NewForPath($"{Environment.GetEnvironmentVariable("SNAP")}/usr/share/icons/hicolor/symbolic/apps/{_controller.AppInfo.ID}-symbolic.svg"));
+            notification.SetIcon(fileIcon);
         }
         _application.SendNotification(_controller.AppInfo.ID, notification);
     }
@@ -334,31 +290,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Occurs when the window is shown
-    /// </summary>
-    /// <param name="sender">Gtk.Widget</param>
-    /// <param name="e">EventArgs</param>
-    private async void OnWindowShow(Gtk.Widget sender, EventArgs e)
-    {
-        GLib.Functions.TimeoutAddFull(0, 100, (data) =>
-        {
-            var maxBtnWidth = Math.Max(_newAccountButton.GetAllocatedWidth(), _openAccountButton.GetAllocatedWidth());
-            _newAccountButton.SetSizeRequest(maxBtnWidth, -1);
-            _openAccountButton.SetSizeRequest(maxBtnWidth, -1);
-            return false;
-        });
-        if (_controller.FileToLaunch != null)
-        {
-            GLib.Functions.TimeoutAddFull(0, 250, (data) =>
-            {
-                _controller.AddAccountAsync(_controller.FileToLaunch);
-                _controller.FileToLaunch = null;
-                return false;
-            });
-        }
-    }
-
-    /// <summary>
     /// Creates a new account
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -382,28 +313,24 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
+    private async void OnOpenAccount(Gio.SimpleAction sender, EventArgs e)
     {
         _accountPopover.Popdown();
+        var openFileDialog = Gtk.FileDialog.New();
+        openFileDialog.SetTitle(_("Open Account"));
         var filter = Gtk.FileFilter.New();
         filter.SetName($"{_("Nickvision Denaro Account")} (*.nmoney)");
         filter.AddPattern("*.nmoney");
         filter.AddPattern("*.NMONEY");
-        var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Open Account"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
-        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-        _openCallback = async (source, res, data) =>
+        openFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                await _controller.AddAccountAsync(path);
-            }
-        };
-        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+            var file = await openFileDialog.OpenAsync(this);
+            await _controller.AddAccountAsync(file.GetPath());
+        }
+        catch { }
     }
 
     /// <summary>
@@ -568,7 +495,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var obj = e.Value.GetObject();
         if (obj != null)
         {
-            var path = g_file_get_path(obj.Handle);
+            var path = ((Gio.File)obj).GetPath();
             if (File.Exists(path))
             {
                 _controller.AddAccountAsync(path).Wait();

@@ -1,6 +1,6 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using System.Globalization;
-using System.Runtime.InteropServices;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -9,19 +9,6 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public partial class TransactionId : Gtk.Overlay
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Color
-    {
-        public float Red;
-        public float Green;
-        public float Blue;
-        public float Alpha;
-    }
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static partial bool gdk_rgba_parse(ref Color rgba, string spec);
-
     private readonly Gtk.SizeGroup _sizeGroup;
     private readonly GdkPixbuf.Pixbuf _pixbuf;
     private readonly uint _id;
@@ -33,6 +20,7 @@ public partial class TransactionId : Gtk.Overlay
     {
         _id = id;
         builder.Connect(this);
+        OnDestroy += (sender, e) => _pixbuf.Dispose();
         _pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
         _sizeGroup = Gtk.SizeGroup.New(Gtk.SizeGroupMode.Horizontal);
         _sizeGroup.AddWidget(this);
@@ -54,14 +42,13 @@ public partial class TransactionId : Gtk.Overlay
     /// <param name="defaultColor">A default color</param>
     public void UpdateColor(string colorString, string defaultColor, bool useNativeDigits)
     {
-        var color = new Color();
-        if (!gdk_rgba_parse(ref color, colorString))
+        if (!GdkExt.RGBA.Parse(out var color, colorString))
         {
-            gdk_rgba_parse(ref color, defaultColor);
+            GdkExt.RGBA.Parse(out color, defaultColor);
         }
-        var red = (int)(color.Red * 255);
-        var green = (int)(color.Green * 255);
-        var blue = (int)(color.Blue * 255);
+        var red = (int)(color!.Value.Red * 255);
+        var green = (int)(color.Value.Green * 255);
+        var blue = (int)(color.Value.Blue * 255);
         var idString = _id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
         if(useNativeDigits && "0" != nativeDigits[0])
@@ -77,11 +64,10 @@ public partial class TransactionId : Gtk.Overlay
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
+        var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
         var fgcolor = luma > 0.5 ? "#000000cc" : "#ffffff";
         _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"{fgcolor}\">{idString}</span>");
-        uint colorPixbuf;
-        if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out colorPixbuf))
+        if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out var colorPixbuf))
         {
             _pixbuf.Fill(colorPixbuf);
             _colorImage.SetFromPixbuf(_pixbuf);

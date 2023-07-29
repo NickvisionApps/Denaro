@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME;
@@ -16,23 +15,6 @@ namespace NickvisionMoney.GNOME;
 /// </summary>
 public partial class Program
 {
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nuint gtk_file_chooser_cell_get_type();
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_resource_load(string path);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_resources_register(nint file);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-
-    private delegate void OpenCallback(nint application, nint[] files, int n_files, nint hint, nint data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial ulong g_signal_connect_data(nint instance, string signal, OpenCallback callback, nint data, nint destroy_data, int flags);
-
     private readonly Adw.Application _application;
     private MainWindow? _mainWindow;
     private MainWindowController _mainWindowController;
@@ -49,7 +31,6 @@ public partial class Program
     /// </summary>
     public Program()
     {
-        gtk_file_chooser_cell_get_type();
         if (CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture))
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US"); // Fix #465
@@ -66,16 +47,16 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Denaro");
         _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
         _mainWindowController.AppInfo.Version = "2023.8.0-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Fixed an issue where the help button in the import toast was not working</li><li>Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
         _application.OnActivate += OnActivate;
-        g_signal_connect_data(_application.Handle, "open", OnOpen, IntPtr.Zero, IntPtr.Zero, 0);
+        _application.OnOpen += OnOpen;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
         {
             //Load file from program directory, required for `dotnet run`
-            g_resources_register(g_resource_load(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"));
+            Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"));
         }
         else
         {
@@ -88,7 +69,7 @@ public partial class Program
             {
                 if (File.Exists(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource"))
                 {
-                    g_resources_register(g_resource_load(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
+                    Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(prefix + "/share/org.nickvision.money/org.nickvision.money.gresource")));
                     break;
                 }
             }
@@ -103,10 +84,7 @@ public partial class Program
     {
         try
         {
-            var argv = new string[args.Length + 1];
-            argv[0] = "NickvisionMoney.GNOME";
-            args.CopyTo(argv, 1);
-            return _application.Run(args.Length + 1, argv);
+            return _application.RunWithSynchronizationContext();
         }
         catch (Exception ex)
         {
@@ -121,7 +99,7 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">EventArgs</param>
-    private void OnActivate(Gio.Application sender, EventArgs e)
+    private async void OnActivate(Gio.Application sender, EventArgs e)
     {
         //Set Adw Theme
         _application.StyleManager!.ColorScheme = _mainWindowController.Theme switch
@@ -133,7 +111,7 @@ public partial class Program
         };
         //Main Window
         _mainWindow = new MainWindow(_mainWindowController, _application);
-        _mainWindow.Startup();
+        await _mainWindow.StartupAsync();
     }
 
     /// <summary>
@@ -141,11 +119,11 @@ public partial class Program
     /// </summary>
     /// <param name="sender">Gio.Application</param>
     /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(nint application, nint[] files, int n_files, nint hint, nint data)
+    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
     {
-        if (n_files > 0)
+        if (e.NFiles > 0)
         {
-            _mainWindowController.FileToLaunch = g_file_get_path(files[0]);
+            _mainWindowController.FileToLaunch = e.Files[0].GetPath();
             OnActivate(_application, EventArgs.Empty);
         }
     }

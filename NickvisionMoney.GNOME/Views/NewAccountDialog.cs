@@ -1,9 +1,9 @@
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -13,34 +13,9 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class NewAccountDialog : Adw.Window
 {
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-    
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_new();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_initial_folder(nint dialog, nint folder);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_get_user_special_dir(int dir);
-    
     private readonly NewAccountDialogController _controller;
     private uint _currentPageNumber;
-    private GAsyncReadyCallback? _saveCallback;
-    private GAsyncReadyCallback? _openCallback;
-    
+
     [Gtk.Connect] private readonly Gtk.Button _backButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
     [Gtk.Connect] private readonly Gtk.Button _startButton;
@@ -205,7 +180,7 @@ public partial class NewAccountDialog : Adw.Window
         };
         _createButton.OnClicked += Apply;
         //Load
-        _controller.Folder = g_get_user_special_dir(1); // XDG_DOCUMENTS_DIR
+        _controller.Folder = GLib.Functions.GetUserSpecialDir(GLib.UserDirectory.DirectoryDocuments) ?? "";
         if(!Directory.Exists(_controller.Folder))
         {
             _controller.Folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}{Path.DirectorySeparatorChar}Documents";
@@ -258,26 +233,23 @@ public partial class NewAccountDialog : Adw.Window
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void SelectFolder(object? sender, EventArgs e)
+    private async void SelectFolder(object? sender, EventArgs e)
     {
-        var folderDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(folderDialog, _("Select Folder"));
+        var folderDialog = Gtk.FileDialog.New();
+        folderDialog.SetTitle(_("Select Folder"));
         if (Directory.Exists(_controller.Folder) && _controller.Folder != "/")
         {
             var folder = Gio.FileHelper.NewForPath(_controller.Folder);
-            gtk_file_dialog_set_initial_folder(folderDialog, folder.Handle);
+            folderDialog.SetInitialFolder(folder);
         }
-        _saveCallback = (source, res, data) =>
+        try
         {
-            var fileHandle = gtk_file_dialog_select_folder_finish(folderDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                _controller.Folder = g_file_get_path(fileHandle);
-                _folderRow.SetText(Path.GetFileName(_controller.Folder));
-                ValidateName();
-            }
-        };
-        gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+            var file = await folderDialog.SelectFolderAsync(this);
+            _controller.Folder = file.GetPath();
+            _folderRow.SetText(Path.GetFileName(_controller.Folder));
+            ValidateName();
+        }
+        catch { }
     }
     
     /// <summary>
@@ -412,8 +384,10 @@ public partial class NewAccountDialog : Adw.Window
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void SelectImportFile(object? sender, EventArgs e)
+    private async void SelectImportFile(object? sender, EventArgs e)
     {
+        var openFileDialog = Gtk.FileDialog.New();
+        openFileDialog.SetTitle(_("Import from Account"));
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName($"{_("All files")} (*.csv, *.ofx, *.qif)");
         filterAll.AddPattern("*.csv");
@@ -433,25 +407,20 @@ public partial class NewAccountDialog : Adw.Window
         var filterQif = Gtk.FileFilter.New();
         filterQif.SetName("Quicken Format (*.qif)");
         filterQif.AddPattern("*.qif");
-        filterQif.AddPattern("*.QIF");
-        var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Import from Account"));
+        filterQif.AddPattern("*.QIF");    
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterCsv);
         filters.Append(filterOfx);
         filters.Append(filterQif);
-        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-        _openCallback = async (source, res, data) =>
+        openFileDialog.SetFilters(filters);
+        try
         {
-            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                _controller.ImportFile = g_file_get_path(fileHandle);
-                _importRow.SetText(_controller.ImportFile);
-            }
-        };
-        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+            var file = await openFileDialog.OpenAsync(this);
+            _controller.ImportFile = file.GetPath();
+            _importRow.SetText(_controller.ImportFile);
+        }
+        catch { }
     }
 
     /// <summary>
