@@ -198,15 +198,14 @@ public class TransactionDialogController : IDisposable
     public List<(string, string, Transaction)> GetDescriptionSuggestions(string description)
     {
         return _transactions
-            .Where(x => x.Value.Description.ToLower().Contains(description.ToLower(), StringComparison.InvariantCulture))
+            .Where(x => FuzzySharp.Fuzz.PartialRatio(x.Value.Description, description) > 60)
             .GroupBy(x => x.Value.Description)
             .Select(x =>
             {
                 var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
-                (string, string, Transaction) result = (first.Description, first.GroupId != -1 ? $"{_("Group")}: {_groups[(uint)first.GroupId].Name}" : "", first);
-                return result;
+                return (first.Description, first.GroupId != -1 ? $"{_("Group")}: {_groups[(uint)first.GroupId].Name}" : "", first);
             })
-            .OrderByDescending(x => x.Item1.StartsWith(description))
+            .OrderByDescending(x => FuzzySharp.Fuzz.PartialRatio(x.Item1, description))
             .Take(5).ToList();
     }
 

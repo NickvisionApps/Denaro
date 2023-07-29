@@ -8,6 +8,13 @@
     },
     {
         "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/fuzzysharp/2.0.2/fuzzysharp.2.0.2.nupkg",
+        "sha512": "fc87869a485d5d1dbf63aeac7a96ef783b15667afb106b8a68afcb7ff8df9e1e4b1dcf7a3dbacec4fb01588ec6c551281a2bf833a8b07d373fc5189c5262c49a",
+        "dest": "nuget-sources",
+        "dest-filename": "fuzzysharp.2.0.2.nupkg"
+    },
+    {
+        "type": "file",
         "url": "https://api.nuget.org/v3-flatcontainer/gettext.net/1.8.7/gettext.net.1.8.7.nupkg",
         "sha512": "f998a8437b52b406141c65f0d132ddc5dd04b85635b5b410f508b851ad7a5108b623ea615aa58a0dec2825e6e0420cd2f9f6f2689646aa71afafb172303dceaa",
         "dest": "nuget-sources",
