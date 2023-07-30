@@ -47,11 +47,12 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.8.0-next" date="2023-08-01">
+    <release version="2023.8.0-beta1" date="2023-07-29">
       <description translatable="no">
         <p>- Improved the transaction description suggestion algorithm with fuzzy search</p>
         <p>- Fixed an issue where the help button in the import toast was not working</p>
         <p>- Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</p>
+        <p>- Fixed an issue where docs were not available when running Denaro via snap</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
