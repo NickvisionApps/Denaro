@@ -47,7 +47,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Denaro");
         _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
         _mainWindowController.AppInfo.Version = "2023.8.0-beta1";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Improved the transaction description suggestion algorithm with fuzzy search</li><li>Fixed an issue where the help button in the import toast was not working</li><li>Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</li><li>Fixed an issue where docs were not available when running Denaro via snap</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the option to select the entire current month as the date range filter </li><li>Improved the transaction description suggestion algorithm with fuzzy search</li><li>Fixed an issue where the help button in the import toast was not working</li><li>Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</li><li>Fixed an issue where docs were not available when running Denaro via snap</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
