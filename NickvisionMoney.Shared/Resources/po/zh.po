@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 21:19-0400\n"
+"POT-Creation-Date: 2023-07-29 22:42-0400\n"
 "PO-Revision-Date: 2023-07-29 12:14+0000\n"
 "Last-Translator: Yuxin Ren <yx_Ren2018@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -80,22 +80,22 @@ msgstr "添加交易或从文件中导入交易。"
 msgid "Add Password To PDF?"
 msgstr "添加密码至PDF?"
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:514
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:392
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:638
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:514
 msgid "All files"
 msgstr "所有文件"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:141
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:466
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:141
 #: ../../../Models/Account.cs:1665 ../../../Models/Account.cs:1698
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
 msgstr "金额"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:176
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:485
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:176
 msgid "Amount (Invalid)"
 msgstr "金额 (无效)"
 
@@ -448,8 +448,8 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:322
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:322
 #: ../../../Models/Account.cs:1792
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision的Denaro账户"
@@ -713,7 +713,7 @@ msgid "Unable to overwrite an opened account."
 msgstr "無法淩駕已開啟的帳戶."
 
 #: ../../../Controllers/TransactionDialogController.cs:87
-#: ../../../Controllers/TransactionDialogController.cs:330
+#: ../../../Controllers/TransactionDialogController.cs:329
 #: ../../../Controllers/AccountViewController.cs:483
 #: ../../../Controllers/AccountViewController.cs:845
 #: ../../../Models/Account.cs:460 ../../../Models/Account.cs:1668

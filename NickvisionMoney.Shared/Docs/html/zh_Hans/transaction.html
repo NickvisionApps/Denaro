@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Transaction</title>
+<title>交易</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,32 +15,32 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="zh-HANS" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Transaction</span></h1></div>
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">交易</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
 <p class="p">This page explains all properties of transactions in <span class="app">Denaro</span>.</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Id</dt>
+<dt class="terms">ID</dt>
 <dd class="terms"><p class="p">Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p></dd>
-<dt class="terms">Description</dt>
+<dt class="terms">描述</dt>
 <dd class="terms"><p class="p">No limit on length. It can't contain semicolon.</p></dd>
-<dt class="terms">Amount</dt>
+<dt class="terms">金额</dt>
 <dd class="terms"><p class="p">A number in a format that is valid for your locale, see <span class="em">System Currency</span> in <span class="link"><a href="account.html" title="Account">Account page</a></span> for details.</p></dd>
 <dt class="terms">Type</dt>
 <dd class="terms"><p class="p"><span class="em">Income</span> or <span class="em">Expense</span>. By default the one chosen in <span class="link"><a href="account.html" title="Account">account settings</a></span> will be selected when you open a dialog to add new transaction.</p></dd>
-<dt class="terms">Date</dt>
+<dt class="terms">日期</dt>
 <dd class="terms"><p class="p">Any date can be selected, you can also create transactions for future dates.</p></dd>
-<dt class="terms">Repeat Interval</dt>
+<dt class="terms">重复间隔</dt>
 <dd class="terms"><p class="p">Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <span class="em">source</span> transaction. <span class="app">Denaro</span> will automatically generate <span class="em">repeat</span> transactions for the dates up until today or a provided end date if set in the past. <span class="em">Repeat</span> transactions can't be edited or deleted, only <span class="em">source</span> can be modified. When you modify <span class="em">source</span> transaction <span class="app">Denaro</span> will ask if you want to modify or disassociate <span class="em">repeat</span> transactions. If you choose to disassociate, <span class="em">repeat</span> transactions become normal transactions and can be edited or deleted separately.</p></dd>
-<dt class="terms">Repeat End Date</dt>
+<dt class="terms">重复结束日期</dt>
 <dd class="terms"><p class="p">End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p></dd>
-<dt class="terms">Group</dt>
+<dt class="terms">群组</dt>
 <dd class="terms"><p class="p">Each transaction can belong to only one group or none («Ungrouped» group).</p></dd>
 <dt class="terms">Color</dt>
 <dd class="terms"><p class="p">A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <span class="link"><a href="configuration.html" title="Configuration">configuration</a></span>, but can be changed to any color.</p></dd>
-<dt class="terms">Receipt</dt>
+<dt class="terms">收据</dt>
 <dd class="terms"><p class="p">An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p></dd>
-<dt class="terms">Notes</dt>
+<dt class="terms">注释</dt>
 <dd class="terms"><p class="p">A freeform text note to attach to transaction.</p></dd>
 </dl></div></div></div>
 </div>
