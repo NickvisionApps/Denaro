@@ -49,7 +49,6 @@
                     "type": "dir",
                     "path": ".."
                 },
-                "cake-sources.json",
                 "../NickvisionMoney.GNOME/nuget-sources.json"
             ]
         }
