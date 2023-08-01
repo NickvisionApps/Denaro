@@ -585,7 +585,7 @@ public class AccountViewController : IDisposable
     /// <param name="showNotification">Whether or not to show the notification</param>
     public void SetPassword(string password, bool showNotification = true)
     {
-        _account.SetPassword(password);
+        _account.Password = password;
         if(showNotification)
         {
             if (string.IsNullOrEmpty(password))

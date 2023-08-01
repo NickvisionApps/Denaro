@@ -24,7 +24,7 @@ public enum ExportMode
 {
     All,
     CurrentView
-};
+}
 
 /// <summary>
 /// A model of an account
@@ -143,6 +143,94 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// The password of the account. Specifying a null/empty string will remove the password and decrypt the database
+    /// </summary>
+    public string Password
+    {
+        set
+        {
+            //Remove Password If Empty (Decrypts)
+            if (string.IsNullOrEmpty(value))
+            {
+                //Create Temp Decrypted Database
+                var tempPath = $"{Path}.decrypt";
+                using var command = _database!.CreateCommand();
+                command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
+                command.ExecuteNonQuery();
+                command.CommandText = $"SELECT sqlcipher_export('plaintext')";
+                command.ExecuteNonQuery();
+                command.CommandText = $"DETACH DATABASE plaintext";
+                command.ExecuteNonQuery();
+                //Remove Old Encrypted Database
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                File.Delete(Path);
+                File.Move(tempPath, Path, true);
+                //Open New Decrypted Database
+                _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false
+                }.ConnectionString);
+                _database.Open();
+                _isEncrypted = false;
+            }
+            using var cmdQuote = _database!.CreateCommand();
+            cmdQuote.CommandText = "SELECT quote($password)";
+            cmdQuote.Parameters.AddWithValue("$password", value);
+            var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
+            //Change Password
+            if (IsEncrypted)
+            {
+                using var command = _database.CreateCommand();
+                command.CommandText = $"PRAGMA rekey = {quotedPassword}";
+                command.ExecuteNonQuery();
+                _database.Close();
+                _database.ConnectionString = new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false,
+                    Password = value
+                }.ConnectionString;
+                _database.Open();
+                _isEncrypted = true;
+            }
+            //Sets New Password (Encrypts For First Time)
+            else
+            {
+                //Create Temp Encrypted Database
+                var tempPath = $"{Path}.ecrypt";
+                using var command = _database.CreateCommand();
+                command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
+                command.ExecuteNonQuery();
+                command.CommandText = $"SELECT sqlcipher_export('encrypted')";
+                command.ExecuteNonQuery();
+                command.CommandText = $"DETACH DATABASE encrypted";
+                command.ExecuteNonQuery();
+                //Remove Old Unencrypted Database
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                File.Delete(Path);
+                File.Move(tempPath, Path, true);
+                //Open New Encrypted Database
+                _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false,
+                    Password = value
+                }.ConnectionString);
+                _database.Open();
+                _isEncrypted = true;
+            }
+        }
+    }
+
+    /// <summary>
     /// Frees resources used by the Account object
     /// </summary>
     public void Dispose()
@@ -219,94 +307,6 @@ public class Account : IDisposable
             }
         }
         return _loggedIn;
-    }
-
-    /// <summary>
-    /// Sets the password of the account. Specifying a null/empty string will remove the password and decrypt the database
-    /// </summary>
-    /// <param name="password">The password to set</param>
-    /// <returns>True if successful, else false</returns>
-    public bool SetPassword(string password)
-    {
-        //Remove Password If Empty (Decrypts)
-        if (string.IsNullOrEmpty(password))
-        {
-            //Create Temp Decrypted Database
-            var tempPath = $"{Path}.decrypt";
-            using var command = _database!.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('plaintext')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE plaintext";
-            command.ExecuteNonQuery();
-            //Remove Old Encrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Decrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = false;
-        }
-        using var cmdQuote = _database!.CreateCommand();
-        cmdQuote.CommandText = "SELECT quote($password)";
-        cmdQuote.Parameters.AddWithValue("$password", password);
-        var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
-        //Change Password
-        if (IsEncrypted)
-        {
-            using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey = {quotedPassword}";
-            command.ExecuteNonQuery();
-            _database.Close();
-            _database.ConnectionString = new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString;
-            _database.Open();
-            _isEncrypted = true;
-        }
-        //Sets New Password (Encrypts For First Time)
-        else
-        {
-            //Create Temp Encrypted Database
-            var tempPath = $"{Path}.ecrypt";
-            using var command = _database.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('encrypted')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE encrypted";
-            command.ExecuteNonQuery();
-            //Remove Old Unencrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Encrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = true;
-        }
-        return true;
     }
 
     /// <summary>
@@ -662,96 +662,6 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Syncs repeat transactions in the account
-    /// </summary>
-    /// <returns>True if transactions were modified, else false</returns>
-    public async Task<bool> SyncRepeatTransactionsAsync()
-    {
-        var transactionsModified = false;
-        var transactions = Transactions.Values.ToList();
-        var i = 0;
-        foreach (var transaction in transactions)
-        {
-            if (transaction.RepeatFrom == 0)
-            {
-                var dates = new List<DateOnly>();
-                var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
-                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
-                {
-                    if (date != transaction.Date)
-                    {
-                        dates.Add(date);
-                    }
-                    if (transaction.RepeatInterval == TransactionRepeatInterval.Daily)
-                    {
-                        date = date.AddDays(1);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
-                    {
-                        date = date.AddDays(7);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biweekly)
-                    {
-                        date = date.AddDays(14);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
-                    {
-                        date = date.AddMonths(1);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
-                    {
-                        date = date.AddMonths(3);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
-                    {
-                        date = date.AddYears(1);
-                    }
-                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
-                    {
-                        date = date.AddYears(2);
-                    }
-                }
-                for (var j = i; j < transactions.Count; j++)
-                {
-                    if (transactions[j].RepeatFrom == transaction.Id)
-                    {
-                        dates.Remove(transactions[j].Date);
-                    }
-                }
-                foreach (var date in dates)
-                {
-                    var newTransaction = new Transaction(NextAvailableTransactionId)
-                    {
-                        Date = date,
-                        Description = transaction.Description,
-                        Type = transaction.Type,
-                        RepeatInterval = transaction.RepeatInterval,
-                        Amount = transaction.Amount,
-                        GroupId = transaction.GroupId,
-                        RGBA = transaction.RGBA,
-                        UseGroupColor = transaction.UseGroupColor,
-                        Receipt = transaction.Receipt,
-                        RepeatFrom = (int)transaction.Id,
-                        RepeatEndDate = transaction.RepeatEndDate
-                    };
-                    await AddTransactionAsync(newTransaction);
-                    transactionsModified = true;
-                }
-            }
-            else if (transaction.RepeatFrom > 0)
-            {
-                if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
-                {
-                    await DeleteTransactionAsync(transaction.Id);
-                    transactionsModified = true;
-                }
-            }
-            i++;
-        }
-        return transactionsModified;
-    }
-
-    /// <summary>
     /// Adds a group to the account
     /// </summary>
     /// <param name="group">The group to add</param>
@@ -1100,6 +1010,96 @@ public class Account : IDisposable
                 await DeleteTransactionAsync(transaction.Id);
             }
         }
+    }
+    
+        /// <summary>
+    /// Syncs repeat transactions in the account
+    /// </summary>
+    /// <returns>True if transactions were modified, else false</returns>
+    public async Task<bool> SyncRepeatTransactionsAsync()
+    {
+        var transactionsModified = false;
+        var transactions = Transactions.Values.ToList();
+        var i = 0;
+        foreach (var transaction in transactions)
+        {
+            if (transaction.RepeatFrom == 0)
+            {
+                var dates = new List<DateOnly>();
+                var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
+                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
+                {
+                    if (date != transaction.Date)
+                    {
+                        dates.Add(date);
+                    }
+                    if (transaction.RepeatInterval == TransactionRepeatInterval.Daily)
+                    {
+                        date = date.AddDays(1);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
+                    {
+                        date = date.AddDays(7);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biweekly)
+                    {
+                        date = date.AddDays(14);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
+                    {
+                        date = date.AddMonths(1);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                    {
+                        date = date.AddMonths(3);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
+                    {
+                        date = date.AddYears(1);
+                    }
+                    else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                    {
+                        date = date.AddYears(2);
+                    }
+                }
+                for (var j = i; j < transactions.Count; j++)
+                {
+                    if (transactions[j].RepeatFrom == transaction.Id)
+                    {
+                        dates.Remove(transactions[j].Date);
+                    }
+                }
+                foreach (var date in dates)
+                {
+                    var newTransaction = new Transaction(NextAvailableTransactionId)
+                    {
+                        Date = date,
+                        Description = transaction.Description,
+                        Type = transaction.Type,
+                        RepeatInterval = transaction.RepeatInterval,
+                        Amount = transaction.Amount,
+                        GroupId = transaction.GroupId,
+                        RGBA = transaction.RGBA,
+                        UseGroupColor = transaction.UseGroupColor,
+                        Receipt = transaction.Receipt,
+                        RepeatFrom = (int)transaction.Id,
+                        RepeatEndDate = transaction.RepeatEndDate
+                    };
+                    await AddTransactionAsync(newTransaction);
+                    transactionsModified = true;
+                }
+            }
+            else if (transaction.RepeatFrom > 0)
+            {
+                if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
+                {
+                    await DeleteTransactionAsync(transaction.Id);
+                    transactionsModified = true;
+                }
+            }
+            i++;
+        }
+        return transactionsModified;
     }
 
     /// <summary>
@@ -1812,6 +1812,8 @@ public class Account : IDisposable
         }
         return true;
     }
+    
+    
 
     /// <summary>
     /// Backups the account to CSV backup folder location
