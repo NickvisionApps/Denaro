@@ -51,11 +51,11 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Occurs when an account is added
     /// </summary>
-    public event EventHandler? AccountAdded;
+    public event EventHandler<EventArgs>? AccountAdded;
     /// <summary>
     /// Occurs when the recent accounts list is changed
     /// </summary>
-    public event EventHandler? RecentAccountsChanged;
+    public event EventHandler<EventArgs>? RecentAccountsChanged;
 
     /// <summary>
     /// Constructs a MainWindowController
