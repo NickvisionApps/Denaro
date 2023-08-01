@@ -1,6 +1,5 @@
 using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -11,7 +10,7 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A row for displaying a group
 /// </summary>
-public partial class GroupRow : Adw.ActionRow, IGroupRowControl
+public partial class GroupRow : Adw.ActionRow
 {
     private Group _group;
     private bool _filterActive;
@@ -106,36 +105,32 @@ public partial class GroupRow : Adw.ActionRow, IGroupRowControl
         _defaultColor = defaultColor;
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
-        GLib.Functions.IdleAdd(0, () =>
+        //Color
+        if (!GdkExt.RGBA.Parse(out var color, _group.RGBA))
         {
-            //Color
-            if (!GdkExt.RGBA.Parse(out var color, _group.RGBA))
-            {
-                GdkExt.RGBA.Parse(out color, _defaultColor);
-            }
-            //Row Settings
-            SetTitle(_group.Name);
-            SetSubtitle(_group.Description);
-            //Filter Checkbox
-            var red = (int)(color!.Value.Red * 255);
-            var green = (int)(color.Value.Green * 255);
-            var blue = (int)(color.Value.Blue * 255);
-            using var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
-            if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out var colorPixbuf))
-            {
-                pixbuf.Fill(colorPixbuf);
-                _filterCheckBackground.SetFromPixbuf(pixbuf);
-            }
-            var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
-            _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
-            _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
-            _filterCheckButton.SetActive(_filterActive);
-            //Amount Label
-            _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "−  ")}{_group.Balance.ToAmountString(_cultureAmount, _useNativeDigits)}");
-            _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
-            _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
-            return false;
-        });
+            GdkExt.RGBA.Parse(out color, _defaultColor);
+        }
+        //Row Settings
+        SetTitle(_group.Name);
+        SetSubtitle(_group.Description);
+        //Filter Checkbox
+        var red = (int)(color!.Value.Red * 255);
+        var green = (int)(color.Value.Green * 255);
+        var blue = (int)(color.Value.Blue * 255);
+        using var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
+        if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out var colorPixbuf))
+        {
+            pixbuf.Fill(colorPixbuf);
+            _filterCheckBackground.SetFromPixbuf(pixbuf);
+        }
+        var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
+        _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
+        _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
+        _filterCheckButton.SetActive(_filterActive);
+        //Amount Label
+        _amountLabel.SetLabel($"{(_group.Balance >= 0 ? "+  " : "−  ")}{_group.Balance.ToAmountString(_cultureAmount, _useNativeDigits)}");
+        _amountLabel.AddCssClass(_group.Balance >= 0 ? "denaro-income" : "denaro-expense");
+        _amountLabel.RemoveCssClass(_group.Balance >= 0 ? "denaro-expense" : "denaro-income");
     }
 
     /// <summary>
