@@ -394,7 +394,7 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
-    /// <param name="e">ModelEventArgs<Group></param>
+    /// <param name="e">ModelEventArgs</param>
     private bool CreateGroupRow(ModelEventArgs<Group> e)
     {
         var row = new GroupRow(e.Model, _controller.CultureForNumberString, _controller.UseNativeDigits, e.Active, _controller.GroupDefaultColor);
@@ -426,7 +426,7 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Updates a group row
     /// </summary>
-    /// <param name="e">ModelEventArgs<Group></param>
+    /// <param name="e">ModelEventArgs</param>
     private bool UpdateGroupRow(ModelEventArgs<Group> e)
     {
         if (!_groupRows.ContainsKey(e.Model.Id))
@@ -443,7 +443,7 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Creates a transaction row and adds it to the view
     /// </summary>
-    /// <param name="e">ModelEventArgs<Transaction></param>
+    /// <param name="e">ModelEventArgs</param>
     private bool CreateTransactionRow(ModelEventArgs<Transaction> e)
     {
         var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
@@ -466,7 +466,7 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Moves a transaction row in the list
     /// </summary>
-    /// <param name="e">ModelEventArgs<Transaction></param>
+    /// <param name="e">ModelEventArgs</param>
     private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
     {
         var oldVisibility = _transactionRows[e.Model.Id].IsVisible();
@@ -490,7 +490,7 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Updates a transaction row
     /// </summary>
-    /// <param name="e">ModelEventArgs<Transaction></param>
+    /// <param name="e">ModelEventArgs</param>
     private bool UpdateTransactionRow(ModelEventArgs<Transaction> e)
     {
         if (!_transactionRows.ContainsKey(e.Model.Id))
@@ -635,7 +635,6 @@ public partial class AccountView : Adw.Bin
             {
                 path += ".pdf";
             }
-            string? password = null;
             var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
             dialog.Present();
             dialog.OnResponse += async (sender, e) =>
@@ -746,8 +745,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the edit transaction item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
+    /// <param name="sender">object?</param>
+    /// <param name="id">uint</param>
     private void EditTransaction(object? sender, uint id)
     {
         var transactionController = _controller.CreateTransactionDialogController(id);
@@ -951,8 +950,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the edit group item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
+    /// <param name="sender">object?</param>
+    /// <param name="id">uint</param>
     private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
@@ -1191,8 +1190,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">object?</param>
+    /// <param name="e">WidthChangedEventArgs</param>
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
         foreach (var pair in _transactionRows)
