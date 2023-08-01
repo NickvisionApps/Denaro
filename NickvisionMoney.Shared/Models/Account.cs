@@ -168,7 +168,6 @@ public class Account : IDisposable
             }
             if (_database != null)
             {
-                FreeMemory();
                 _database.Close();
                 _database.Dispose();
                 _database = null;
@@ -534,8 +533,6 @@ public class Account : IDisposable
         }
         //Repeats
         await SyncRepeatTransactionsAsync();
-        //Cleanup
-        FreeMemory();
         return true;
     }
 
@@ -659,7 +656,6 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
-            FreeMemory();
             return true;
         }
         return false;
@@ -775,7 +771,6 @@ public class Account : IDisposable
             {
                 NextAvailableGroupId = group.Id + 1;
             }
-            FreeMemory();
             return true;
         }
         return false;
@@ -797,7 +792,6 @@ public class Account : IDisposable
         if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
         {
             Groups[group.Id] = group;
-            FreeMemory();
             return true;
         }
         return false;
@@ -834,7 +828,6 @@ public class Account : IDisposable
                     await UpdateTransactionAsync(pair.Value);
                 }
             }
-            FreeMemory();
             return (true, belongingTransactions);
         }
         return (false, new List<uint>());
@@ -895,7 +888,6 @@ public class Account : IDisposable
             {
                 await SyncRepeatTransactionsAsync();
             }
-            FreeMemory();
             BackupAccountToCSV();
             return true;
         }
@@ -968,7 +960,6 @@ public class Account : IDisposable
             {
                 await SyncRepeatTransactionsAsync();
             }
-            FreeMemory();
             BackupAccountToCSV();
             return true;
         }
@@ -1053,7 +1044,6 @@ public class Account : IDisposable
             {
                 NextAvailableTransactionId--;
             }
-            FreeMemory();
             BackupAccountToCSV();
             return true;
         }
@@ -1824,21 +1814,11 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Frees up memory used by the database
-    /// </summary>
-    private void FreeMemory()
-    {
-        using var cmdClean = _database!.CreateCommand();
-        cmdClean.CommandText = "PRAGMA shrink_memory";
-        cmdClean.ExecuteNonQuery();
-    }
-
-    /// <summary>
     /// Backups the account to CSV backup folder location
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if (!_isEncrypted.GetValueOrDefault())
+        if (!(_isEncrypted ?? false) && Directory.Exists(Configuration.Current.CSVBackupFolder))
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All, new List<uint>());
         }
