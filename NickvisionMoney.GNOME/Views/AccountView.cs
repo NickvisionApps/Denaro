@@ -2,15 +2,14 @@
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
-using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -52,6 +51,8 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
+    private Dictionary<uint, GroupRow> _groupRows;
+    private Dictionary<uint, TransactionRow> _transactionRows;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
@@ -100,13 +101,17 @@ public partial class AccountView : Adw.Bin
         _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
+        _groupRows = new Dictionary<uint, GroupRow>();
+        _transactionRows = new Dictionary<uint, TransactionRow>();
         //Register Controller Events
-        _controller.AccountTransactionsChanged += (sender, e) => GLib.Functions.IdleAdd(0, OnAccountTransactionsChanged);
-        _controller.UICreateGroupRow = CreateGroupRow;
-        _controller.UIDeleteGroupRow =  (row) => GLib.Functions.IdleAdd(0, () => DeleteGroupRow(row));
-        _controller.UICreateTransactionRow =  CreateTransactionRow;
-        _controller.UIMoveTransactionRow =  (row, index) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(row, index));
-        _controller.UIDeleteTransactionRow = (row) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(row));
+        _controller.AccountInformationChanged += (sender, e) => GLib.Functions.IdleAdd(0, AccountInformationChanged);
+        _controller.GroupCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateGroupRow(e));
+        _controller.GroupDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteGroupRow(e));
+        _controller.GroupUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateGroupRow(e));
+        _controller.TransactionCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateTransactionRow(e));
+        _controller.TransactionMoved += (sender, e) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(e));
+        _controller.TransactionDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(e));
+        _controller.TransactionUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateTransactionRow(e));
         //Build UI
         builder.Connect(this);
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -293,100 +298,8 @@ public partial class AccountView : Adw.Bin
     }
 
     /// <summary>
-    /// Creates a group row and adds it to the view
+    /// Starts the view's spinner
     /// </summary>
-    /// <param name="group">The Group model</param>
-    /// <param name="index">int?</param>
-    /// <returns>The newly created row</returns>
-    private IGroupRowControl CreateGroupRow(Group group, int? index)
-    {
-        var row = new GroupRow(group, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.IsFilterActive(group.Id == 0 ? -1 : (int)group.Id), _controller.GroupDefaultColor);
-        row.EditTriggered += EditGroup;
-        row.FilterChanged += UpdateGroupFilter;
-        GLib.Functions.IdleAdd(0, () =>
-        {
-            if (index != null)
-            {
-                _groupsList.Insert(row, index.Value);
-            }
-            else
-            {
-                _groupsList.Append(row);
-            }
-            return false;
-        });
-        return row;
-    }
-
-    /// <summary>
-    /// Removes a group row from the view
-    /// </summary>
-    /// <param name="row">IGroupRowControl</param>
-    private bool DeleteGroupRow(IGroupRowControl row)
-    {
-        _groupsList.Remove((GroupRow)row);
-        return false;
-    }
-
-    /// <summary>
-    /// Creates a transaction row and adds it to the view
-    /// </summary>
-    /// <param name="transaction">The Transaction model</param>
-    /// <param name="index">int?</param>
-    /// <returns>The newly created row</returns>
-    private IModelRowControl<Transaction> CreateTransactionRow(Transaction transaction, int? index)
-    {
-        var row = new TransactionRow(transaction, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
-        row.EditTriggered += EditTransaction;
-        GLib.Functions.IdleAdd(0, () =>
-        {
-            row.IsSmall = _parentWindow.DefaultWidth < 450;
-            if (index != null)
-            {
-                _flowBox.Insert(row, index.Value);
-            }
-            else
-            {
-
-                _flowBox.Append(row);
-            }
-            GLib.Internal.MainContext.Iteration(GLib.MainContext.Default().Handle, false);
-            return false;
-        });
-        return row;
-    }
-
-    /// <summary>
-    /// Moves a row in the list
-    /// </summary>
-    /// <param name="row">IModelRowControl<Transaction></param>
-    /// <param name="index">int</param>
-    private bool MoveTransactionRow(IModelRowControl<Transaction> row, int index)
-    {
-        _flowBox.Remove((TransactionRow)row);
-        _flowBox.Insert((TransactionRow)row, index);
-        GLib.Internal.MainContext.Iteration(GLib.MainContext.Default().Handle, false);
-        if (((TransactionRow)row).IsVisible())
-        {
-            row.Show();
-        }
-        else
-        {
-            row.Hide();
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Removes a transaction row from the view
-    /// </summary>
-    /// <param name="row">IModelRowControl<Transaction></param>
-    private bool DeleteTransactionRow(IModelRowControl<Transaction> row)
-    {
-        _flowBox.Remove((TransactionRow)row);
-        return false;
-    }
-
     private void StartSpinner()
     {
         _noTransactionsStatusPage.SetVisible(false);
@@ -397,6 +310,9 @@ public partial class AccountView : Adw.Bin
         _paneScroll.SetSensitive(false);
     }
 
+    /// <summary>
+    /// Stops the view's spinner
+    /// </summary>
     private void StopSpinner()
     {
         _spinner.Stop();
@@ -429,10 +345,9 @@ public partial class AccountView : Adw.Bin
     }
 
     /// <summary>
-    /// Occurs when the account's transactions are changed 
+    /// Occurs when the account's information is changed
     /// </summary>
-    /// <returns>True to repeat, false otherwise</returns>
-    private bool OnAccountTransactionsChanged()
+    private bool AccountInformationChanged()
     {
         if (!_isAccountLoading)
         {
@@ -444,7 +359,7 @@ public partial class AccountView : Adw.Bin
             _incomeLabel.SetLabel(_controller.AccountFilteredIncomeString);
             _expenseLabel.SetLabel(_controller.AccountFilteredExpenseString);
             //Transactions
-            if (_controller.TransactionsCount > 0)
+            if (_controller.Transactions.Count > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
                 _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
@@ -472,6 +387,118 @@ public partial class AccountView : Adw.Bin
                 _rangeExpander.SetSensitive(false);
             }
             _isAccountLoading = false;
+        }
+        return false;
+    }
+    
+    /// <summary>
+    /// Creates a group row and adds it to the view
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool CreateGroupRow(ModelEventArgs<Group> e)
+    {
+        var row = new GroupRow(e.Model, _controller.CultureForNumberString, _controller.UseNativeDigits, e.Active, _controller.GroupDefaultColor);
+        row.EditTriggered += EditGroup;
+        row.FilterChanged += UpdateGroupFilter;
+        if (e.Position != null)
+        {
+            _groupsList.Insert(row, e.Position.Value);
+        }
+        else
+        {
+            _groupsList.Append(row);
+        }
+        _groupRows.Add(e.Model.Id, row);
+        return false;
+    }
+
+    /// <summary>
+    /// Removes a group row from the view
+    /// </summary>
+    /// <param name="id">The id of the group</param>
+    private bool DeleteGroupRow(uint id)
+    {
+        _groupsList.Remove(_groupRows[id]);
+        _groupRows.Remove(id);
+        return false;
+    }
+    
+    /// <summary>
+    /// Updates a group row
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool UpdateGroupRow(ModelEventArgs<Group> e)
+    {
+        if (!_groupRows.ContainsKey(e.Model.Id))
+        {
+            CreateGroupRow(e);
+        }
+        else
+        {
+            _groupRows[e.Model.Id].UpdateRow(e.Model, _controller.GroupDefaultColor, _controller.CultureForNumberString, e.Active);
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Creates a transaction row and adds it to the view
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool CreateTransactionRow(ModelEventArgs<Transaction> e)
+    {
+        var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+        row.EditTriggered += EditTransaction;
+        row.IsSmall = _parentWindow.DefaultWidth < 450;
+        row.SetVisible(e.Active);
+        if (e.Position != null)
+        {
+            _flowBox.Insert(row, e.Position.Value);
+        }
+        else
+        {
+
+            _flowBox.Append(row);
+        }
+        _transactionRows.Add(e.Model.Id, row);
+        return false;
+    }
+
+    /// <summary>
+    /// Moves a transaction row in the list
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
+    {
+        _flowBox.Remove(_transactionRows[e.Model.Id]);
+        _flowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
+        return false;
+    }
+
+    /// <summary>
+    /// Removes a transaction row from the view
+    /// </summary>
+    /// <param name="id">uint</param>
+    private bool DeleteTransactionRow(uint id)
+    {
+        _flowBox.Remove(_transactionRows[id]);
+        _transactionRows.Remove(id);
+        return false;
+    }
+    
+    /// <summary>
+    /// Updates a transaction row
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool UpdateTransactionRow(ModelEventArgs<Transaction> e)
+    {
+        if (!_transactionRows.ContainsKey(e.Model.Id))
+        {
+            CreateTransactionRow(e);
+        }
+        else
+        {
+            _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString, _controller.CultureForDateString);
+            _transactionRows[e.Model.Id].SetVisible(e.Active);
         }
         return false;
     }
@@ -606,7 +633,6 @@ public partial class AccountView : Adw.Bin
             {
                 path += ".pdf";
             }
-            string? password = null;
             var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
             dialog.Present();
             dialog.OnResponse += async (sender, e) =>
@@ -717,8 +743,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the edit transaction item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
+    /// <param name="sender">object?</param>
+    /// <param name="id">uint</param>
     private void EditTransaction(object? sender, uint id)
     {
         var transactionController = _controller.CreateTransactionDialogController(id);
@@ -922,8 +948,8 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the edit group item is activated
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
+    /// <param name="sender">object?</param>
+    /// <param name="id">uint</param>
     private void EditGroup(object? sender, uint id)
     {
         var groupController = _controller.CreateGroupDialogController(id);
@@ -985,7 +1011,7 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller?.UpdateFilterValue(e.Id == 0 ? -1 : (int)e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller.UpdateFilterValue((int)e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
@@ -1162,13 +1188,13 @@ public partial class AccountView : Adw.Bin
     /// <summary>
     /// Occurs when the window's width is changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">object?</param>
+    /// <param name="e">WidthChangedEventArgs</param>
     private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
     {
-        foreach (TransactionRow row in _controller.TransactionRows.Values)
+        foreach (var pair in _transactionRows)
         {
-            row.IsSmall = e.SmallWidth;
+            pair.Value.IsSmall = e.SmallWidth;
         }
         if (e.SmallWidth)
         {

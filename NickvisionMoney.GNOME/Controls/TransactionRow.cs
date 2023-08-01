@@ -1,5 +1,4 @@
 using NickvisionMoney.GNOME.Helpers;
-using NickvisionMoney.Shared.Controls;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -12,7 +11,7 @@ namespace NickvisionMoney.GNOME.Controls;
 /// <summary>
 /// A row for displaying a transaction
 /// </summary>
-public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transaction>
+public partial class TransactionRow : Gtk.FlowBoxChild
 {
     private Transaction _transaction;
     private string _defaultColor;
@@ -116,47 +115,19 @@ public partial class TransactionRow : Gtk.FlowBoxChild, IModelRowControl<Transac
         _defaultColor = defaultColor;
         _cultureAmount = cultureAmount;
         _cultureDate = cultureDate;
-        GLib.Functions.IdleAdd(0, () =>
-        {
-            //Row Settings
-            _row.SetTitle(_transaction.Description);
-            _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_("Repeat Interval")}: {_(_transaction.RepeatInterval.ToString())}" : "")}");
-            _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA, _defaultColor, _useNativeDigits);
-            //Amount Label
-            _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "−  ")}{_transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}");
-            _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
-            _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
-            //Buttons Box
-            _editButton.SetVisible(_transaction.RepeatFrom <= 0);
-            _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
-            return false;
-        });
+        //Row Settings
+        _row.SetTitle(_transaction.Description);
+        _row.SetSubtitle($"{_transaction.Date.ToString("d", _cultureDate)}{(_transaction.RepeatInterval != TransactionRepeatInterval.Never ? $"\n{_("Repeat Interval")}: {_(_transaction.RepeatInterval.ToString())}" : "")}");
+        _idWidget.UpdateColor(_transaction.UseGroupColor ? _groups[_transaction.GroupId <= 0 ? 0u : (uint)_transaction.GroupId].RGBA : _transaction.RGBA, _defaultColor, _useNativeDigits);
+        //Amount Label
+        _amountLabel.SetLabel($"{(_transaction.Type == TransactionType.Income ? "+  " : "−  ")}{_transaction.Amount.ToAmountString(_cultureAmount, _useNativeDigits)}");
+        _amountLabel.RemoveCssClass(_transaction.Type == TransactionType.Income ? "denaro-expense" : "denaro-income");
+        _amountLabel.AddCssClass(_transaction.Type == TransactionType.Income ? "denaro-income" : "denaro-expense");
+        //Buttons Box
+        _editButton.SetVisible(_transaction.RepeatFrom <= 0);
+        _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
     }
-
-    /// <summary>
-    /// Shows the row
-    /// </summary>
-    public new void Show()
-    {
-        GLib.Functions.IdleAdd(0, () =>
-        {
-            SetVisible(true);
-            return false;
-        });
-    }
-
-    /// <summary>
-    /// Hides the row
-    /// </summary>
-    public new void Hide()
-    {
-        GLib.Functions.IdleAdd(0, () =>
-        {
-            SetVisible(false);
-            return false;
-        });
-    }
-
+    
     /// <summary>
     /// Occurs when the edit button is clicked
     /// </summary>
