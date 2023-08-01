@@ -1071,7 +1071,7 @@ public class AccountViewController : IDisposable
             {
                 continue;
             }
-            if (!_filters[pair.Value.GroupId])
+            if (!_filters[pair.Value.GroupId == -1 ? 0 : pair.Value.GroupId])
             {
                 continue;
             }
