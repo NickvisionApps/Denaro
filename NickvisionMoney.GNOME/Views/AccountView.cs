@@ -469,10 +469,8 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
     {
-        var oldVisibility = _transactionRows[e.Model.Id].IsVisible();
         _flowBox.Remove(_transactionRows[e.Model.Id]);
         _flowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
-        _transactionRows[e.Model.Id].SetVisible(oldVisibility);
         return false;
     }
 
