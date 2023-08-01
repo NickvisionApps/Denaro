@@ -24,7 +24,7 @@ public class ModelEventArgs<T>
     /// <param name="model">The model of the event</param>
     /// <param name="position">The position index representing the model</param>
     /// <param name="active">Whether or not the model is active</param>
-    public ModelEventArgs(T model, int? position = null, bool active = false)
+    public ModelEventArgs(T model, int? position, bool active)
     {
         Model = model;
         Position = position;

@@ -475,7 +475,7 @@ public class AccountViewController : IDisposable
             foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
             {
                 _filters.Add((int)pair.Value.Id, true);
-                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value));
+                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
             }
             //Transactions
             _filteredIds = _account.Transactions.Keys.ToList();
@@ -484,7 +484,7 @@ public class AccountViewController : IDisposable
             _filteredIds.Sort(SortTransactions);
             foreach (var id in _filteredIds)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id]));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
             }
             AccountInformationChanged?.Invoke(this, EventArgs.Empty);
             //Register Events
@@ -626,7 +626,7 @@ public class AccountViewController : IDisposable
             }
             foreach (var pair in _account.Transactions)
             {
-                TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
             }
         }
         AccountInformationChanged?.Invoke(this, EventArgs.Empty);
@@ -654,11 +654,11 @@ public class AccountViewController : IDisposable
         {
             if (transactions[i] == transaction.Id)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, i));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, i, true));
             }
             if (_account.Transactions[transactions[i]].RepeatFrom == transaction.Id)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
             }
         }
         GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
@@ -674,14 +674,14 @@ public class AccountViewController : IDisposable
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateTransactionAsync(transaction);
-        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction));
+        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
         if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
         {
             foreach (var pair in _account.Transactions)
             {
                 if (pair.Value.RepeatFrom == transaction.Id)
                 {
-                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
             }
         }
@@ -700,22 +700,22 @@ public class AccountViewController : IDisposable
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
         await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
-        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction));
+        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
         foreach (var pair in _account.Transactions)
         {
             if (updateGenerated && pair.Value.RepeatFrom == transaction.Id)
             {
-                TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
             }
             else if (!updateGenerated)
             {
                 if (pair.Value.RepeatFrom == -1)
                 {
-                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
                 else if (pair.Value.RepeatFrom == transaction.Id)
                 {
-                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
             }
             if (!_account.Transactions.ContainsKey(pair.Key))
@@ -767,7 +767,7 @@ public class AccountViewController : IDisposable
             {
                 if (pair.Value.RepeatFrom == -1)
                 {
-                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
             }
         }
@@ -820,7 +820,7 @@ public class AccountViewController : IDisposable
         await _account.AddGroupAsync(group);
         var groups = _account.Groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).ToList();
         _filters.Add((int)group.Id, true);
-        GroupCreated?.Invoke(this, new ModelEventArgs<Group>(group, groups.IndexOf(group)));
+        GroupCreated?.Invoke(this, new ModelEventArgs<Group>(group, groups.IndexOf(group), true));
     }
 
     /// <summary>
@@ -837,7 +837,7 @@ public class AccountViewController : IDisposable
             {
                 if (pair.Value.GroupId == group.Id)
                 {
-                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value));
+                    TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
             }
         }
@@ -854,7 +854,7 @@ public class AccountViewController : IDisposable
         GroupDeleted?.Invoke(this, id);
         foreach(var transaction in result.BelongingTransactions)
         {
-            TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transaction]));
+            TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transaction], null, true));
         }
     }
 
@@ -879,7 +879,7 @@ public class AccountViewController : IDisposable
         {
             if (transactions[i] == newTransaction.Id)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(newTransaction, i));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(newTransaction, i, true));
             }
         }
         FilterUIUpdate();
@@ -907,7 +907,7 @@ public class AccountViewController : IDisposable
         {
             if (transactions[i] == newTransaction.Id)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(newTransaction, i));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(newTransaction, i, true));
             }
         }
         FilterUIUpdate();
@@ -934,7 +934,7 @@ public class AccountViewController : IDisposable
             if (!_filters.ContainsKey((int)pair.Value.Id))
             {
                 _filters.Add((int)pair.Value.Id, true);
-                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value));
+                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
             }
         }
         if (importedIds.Count >= 0)
@@ -942,7 +942,7 @@ public class AccountViewController : IDisposable
             foreach (var id in importedIds)
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id]));
+                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
                 GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
             }
             FilterUIUpdate();
@@ -1124,7 +1124,7 @@ public class AccountViewController : IDisposable
         _filteredIds!.Sort(SortTransactions);
         for (var i = 0; i < transactions.Count; i++)
         {
-            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i));
+            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
         }
     }
 }
