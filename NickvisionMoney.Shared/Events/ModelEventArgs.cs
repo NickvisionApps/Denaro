@@ -28,6 +28,6 @@ public class ModelEventArgs<T>
     {
         Model = model;
         Position = position;
-        Active = false;
+        Active = active;
     }
 }
