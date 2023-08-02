@@ -388,7 +388,7 @@ public partial class AccountView : Adw.Bin
                 _rangeExpander.SetSensitive(false);
             }
             //IncomeExpensePie Graph
-            var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 300, 300);
+            var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 300, 300, Adw.StyleManager.GetDefault().GetDark());
             using var bytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
             using var texture = Gdk.Texture.NewFromBytes(bytes);
             _incomeExpensePieImage.SetPaintable(texture);

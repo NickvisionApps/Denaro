@@ -996,8 +996,9 @@ public class AccountViewController : IDisposable
     /// <param name="type">GraphType</param>
     /// <param name="width">The width of the graph</param>
     /// <param name="height">The height of the graph</param>
+    /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
     /// <returns>The byte[] of the graph</returns>
-    public byte[] GenerateGraph(GraphType type, int width, int height) => _account.GenerateGraph(type, width, height);
+    public byte[] GenerateGraph(GraphType type, int width, int height, bool darkMode) => _account.GenerateGraph(type, width, height, darkMode);
 
     /// <summary>
     /// Gets whether or not a filter is active
