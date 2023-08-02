@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="GirCore.Adw-1" Version="0.4.0" />
+    <PackageReference Include="Nickvision.Aura" Version="2023.8.0" />
     <PackageReference Include="Nickvision.GirExt" Version="2023.7.3" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="2.8.2.3" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
@@ -30,11 +31,7 @@
     <Exec Command="echo Compiling extra resources..." />
     <Exec Command="blueprint-compiler batch-compile ./Blueprints ./Blueprints ./Blueprints/*.blp" />
     <Exec Command="glib-compile-resources --sourcedir ./Resources ./Resources/org.nickvision.money.gresource.xml --target=$(OutDir)/org.nickvision.money.gresource" />
-    <Exec Command="
-      while read lang_code; do \
-        mkdir -p $(OutDir)/${lang_code}; \
-        msgfmt ../NickvisionMoney.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/denaro.mo; \
-      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
+    <Exec Command="while read lang_code; do \&#xA;  mkdir -p $(OutDir)/${lang_code}; \&#xA;  msgfmt ../NickvisionMoney.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/denaro.mo; \&#xA;done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -43,10 +40,7 @@
 
   <Target Name="PostPublish" AfterTargets="Publish">
     <Exec Command="cp $(OutDir)/org.nickvision.money.gresource $(PublishDir)/org.nickvision.money.gresource" />
-    <Exec Command="
-      while read lang_code; do \
-        cp -r $(OutDir)/${lang_code} $(PublishDir)/; \
-      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
+    <Exec Command="while read lang_code; do \&#xA;  cp -r $(OutDir)/${lang_code} $(PublishDir)/; \&#xA;done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
   <Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">

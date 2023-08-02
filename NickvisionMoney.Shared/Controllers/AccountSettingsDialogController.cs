@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Models;
+﻿using Nickvision.Aura;
+using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
 
@@ -30,7 +31,7 @@ public class AccountSettingsDialogController
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The metadata represented by the controller
     /// </summary>

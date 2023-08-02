@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Events;
+﻿using Nickvision.Aura;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,13 @@ public class MainWindowController : IDisposable
     public Func<string, Task<string?>>? AccountLoginAsync { get; set; }
 
     /// <summary>
+    /// Application's Aura
+    /// </summary>
+    public Aura Aura { get; init; }
+    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// Whether or not the version is a development version or not
-    /// </summary>
-    public bool IsDevVersion => AppInfo.Current.Version.IndexOf('-') != -1;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The preferred theme of the application
     /// </summary>
@@ -60,11 +61,42 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Constructs a MainWindowController
     /// </summary>
-    public MainWindowController()
+    /// <param name="args">Command-line arguments</param>
+    public MainWindowController(string[] args)
     {
         _disposed = false;
-        _fileToLaunch = null;
+        if (args.Length > 0)
+        {
+            _fileToLaunch = (Path.Exists(args[0]) && Path.GetExtension(args[0]).ToLower() == ".nmoney") ? args[0] : null;
+        }
         _openAccounts = new List<AccountViewController>();
+        Aura = new Aura("org.nickvision.money", "Nickvision Denaro", _("Denaro"), _("Manage your personal finances"));
+        if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+        {
+            // Move or delete config files from older versions
+            try
+            {
+                Directory.Move($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", ConfigurationLoader.ConfigDir);
+            }
+            catch (IOException)
+            {
+                Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
+            }
+        }
+        Aura.Active.SetConfig<Configuration>("config");
+        AppInfo.Version = "2023.8.0-beta1";
+        AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
+        AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
+        AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
+        AppInfo.ExtraLinks[_("Matrix Chat")] = new Uri("https://matrix.to/#/#nickvision:matrix.org");
+        AppInfo.Developers[_("Nicholas Logozzo")] = new Uri("https://github.com/nlogozzo");
+        AppInfo.Developers[_("Contributors on GitHub ❤️")] = new Uri("https://github.com/NickvisionApps/Denaro/graphs/contributors");
+        AppInfo.Designers[_("Nicholas Logozzo")] = new Uri("https://github.com/nlogozzo");
+        AppInfo.Designers[_("Fyodor Sobolev")] = new Uri("https://github.com/fsobolev");
+        AppInfo.Designers[_("DaPigGuy")] = new Uri("https://github.com/DaPigGuy");
+        AppInfo.Artists[_("David Lapshin")] = new Uri("https://github.com/daudix-UFO");
+        AppInfo.Artists[_("Tobias Bernard")] = new Uri("https://github.com/bertob");
+        AppInfo.TranslatorCredits = _("translator-credits");
     }
 
     /// <summary>
@@ -100,16 +132,6 @@ public class MainWindowController : IDisposable
                 _ => _("Good Day!")
             };
         }
-    }
-
-    /// <summary>
-    /// A file to launch when the window is loaded
-    /// </summary>
-    public string? FileToLaunch
-    {
-        get => _fileToLaunch;
-
-        set => _fileToLaunch = (Path.Exists(value) && Path.GetExtension(value).ToLower() == ".nmoney") ? value : null;
     }
 
     /// <summary>
@@ -169,10 +191,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public async Task StartupAsync()
     {
-        if (FileToLaunch != null)
+        if (_fileToLaunch != null)
         {
-            await AddAccountAsync(FileToLaunch);
-            FileToLaunch = null;
+            await AddAccountAsync(_fileToLaunch);
+            _fileToLaunch = null;
         }
     }
 
@@ -337,7 +359,7 @@ public class MainWindowController : IDisposable
     public void RemoveRecentAccount(RecentAccount recentAccount)
     {
         Configuration.Current.RemoveRecentAccount(recentAccount);
-        Configuration.Current.Save();
+        Aura.Active.SaveConfig("config");
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 
