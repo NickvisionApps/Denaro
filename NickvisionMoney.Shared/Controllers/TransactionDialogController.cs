@@ -13,6 +13,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -199,14 +200,14 @@ public class TransactionDialogController : IDisposable
     public List<(string, string, Transaction)> GetDescriptionSuggestions(string description)
     {
         return _transactions
-            .Where(x => FuzzySharp.Fuzz.PartialRatio(x.Value.Description, description) > 60)
-            .GroupBy(x => x.Value.Description)
+            .Where(x => FuzzySharp.Fuzz.PartialRatio(x.Value.Description.ToLower().Normalize(NormalizationForm.FormKD), description.ToLower().Normalize(NormalizationForm.FormKD)) > 75)
+            .GroupBy(x => x.Value.Description.ToLower())
             .Select(x =>
             {
                 var first = x.FirstOrDefault(y => y.Value.GroupId != -1, x.First()).Value;
                 return (first.Description, first.GroupId != -1 ? $"{_("Group")}: {_groups[(uint)first.GroupId].Name}" : "", first);
             })
-            .OrderByDescending(x => FuzzySharp.Fuzz.PartialRatio(x.Item1, description))
+            .OrderByDescending(x => FuzzySharp.Fuzz.PartialRatio(x.Item1.ToLower().Normalize(NormalizationForm.FormKD), description.ToLower().Normalize(NormalizationForm.FormKD)))
             .Take(5).ToList();
     }
 
