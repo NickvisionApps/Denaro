@@ -31,7 +31,7 @@
     <Exec Command="echo Compiling extra resources..." />
     <Exec Command="blueprint-compiler batch-compile ./Blueprints ./Blueprints ./Blueprints/*.blp" />
     <Exec Command="glib-compile-resources --sourcedir ./Resources ./Resources/org.nickvision.money.gresource.xml --target=$(OutDir)/org.nickvision.money.gresource" />
-    <Exec Command="&#xA;      while read lang_code; do \&#xA;        mkdir -p $(OutDir)/${lang_code}; \&#xA;        msgfmt ../NickvisionMoney.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/denaro.mo; \&#xA;      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
+    <Exec Command="while read lang_code; do \&#xA;  mkdir -p $(OutDir)/${lang_code}; \&#xA;  msgfmt ../NickvisionMoney.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/denaro.mo; \&#xA;done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -40,7 +40,7 @@
 
   <Target Name="PostPublish" AfterTargets="Publish">
     <Exec Command="cp $(OutDir)/org.nickvision.money.gresource $(PublishDir)/org.nickvision.money.gresource" />
-    <Exec Command="&#xA;      while read lang_code; do \&#xA;        cp -r $(OutDir)/${lang_code} $(PublishDir)/; \&#xA;      done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
+    <Exec Command="while read lang_code; do \&#xA;  cp -r $(OutDir)/${lang_code} $(PublishDir)/; \&#xA;done %3C ../NickvisionMoney.Shared/Resources/po/LINGUAS" />
   </Target>
 
   <Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">
