@@ -1854,7 +1854,7 @@ public class Account : IDisposable
                 LegendPosition = LegendPosition.Top,
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
             }.GetImage().Encode().ToArray(),
-            _ => new byte[width]
+            _ => Array.Empty<byte>()
         };
     }
 
