@@ -77,19 +77,17 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.DropDown _endMonthDropDown;
     [Gtk.Connect] private readonly Gtk.DropDown _endDayDropDown;
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
+    [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
+    [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
     [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _transactionsGroup;
     [Gtk.Connect] private readonly Gtk.Box _transactionsHeaderBox;
-    [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _transactionsScroll;
-    [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
-    [Gtk.Connect] private readonly Adw.Bin _spinnerBin;
-    [Gtk.Connect] private readonly Gtk.Spinner _spinner;
-    [Gtk.Connect] private readonly Gtk.Overlay _mainOverlay;
-
+    [Gtk.Connect] private readonly Gtk.FlowBox _transactionsFlowBox;
+    
     /// <summary>
     /// The Page widget
     /// </summary>
@@ -299,36 +297,11 @@ public partial class AccountView : Adw.Bin
     }
 
     /// <summary>
-    /// Starts the view's spinner
-    /// </summary>
-    private void StartSpinner()
-    {
-        _noTransactionsStatusPage.SetVisible(false);
-        _transactionsScroll.SetVisible(true);
-        _mainOverlay.SetOpacity(0.0);
-        _spinnerBin.SetVisible(true);
-        _spinner.Start();
-        _paneScroll.SetSensitive(false);
-    }
-
-    /// <summary>
-    /// Stops the view's spinner
-    /// </summary>
-    private void StopSpinner()
-    {
-        _spinner.Stop();
-        _spinnerBin.SetVisible(false);
-        _mainOverlay.SetOpacity(1.0);
-        _paneScroll.SetSensitive(true);
-    }
-
-    /// <summary>
     /// Starts the account view
     /// </summary>
     public async Task StartupAsync()
     {
-
-        StartSpinner();
+        _viewStack.SetVisibleChildName("spinner");
         await _controller.StartupAsync();
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
@@ -342,7 +315,6 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        StopSpinner();
     }
 
     /// <summary>
@@ -366,13 +338,16 @@ public partial class AccountView : Adw.Bin
                 _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
                 if (_controller.FilteredTransactionsCount > 0)
                 {
-                    _noTransactionsStatusPage.SetVisible(false);
-                    _transactionsScroll.SetVisible(true);
+                    _viewStack.SetVisibleChildName("transactions");
+                    //IncomeExpensePie Graph
+                    var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 240, 240, Adw.StyleManager.GetDefault().GetDark());
+                    using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
+                    using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
+                    _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
                 }
                 else
                 {
-                    _noTransactionsStatusPage.SetVisible(true);
-                    _transactionsScroll.SetVisible(false);
+                    _viewStack.SetVisibleChildName("no-transactions");
                     _noTransactionsStatusPage.SetTitle(_("No Transactions Found"));
                     _noTransactionsStatusPage.SetDescription(_("No transactions match the specified filters."));
                 }
@@ -381,17 +356,11 @@ public partial class AccountView : Adw.Bin
             else
             {
                 _calendar.ClearMarks();
-                _noTransactionsStatusPage.SetVisible(true);
-                _transactionsScroll.SetVisible(false);
+                _viewStack.SetVisibleChildName("no-transactions");
                 _noTransactionsStatusPage.SetTitle(_("No Transactions"));
                 _noTransactionsStatusPage.SetDescription(_("Add a new transaction or import transactions from a file."));
                 _rangeExpander.SetSensitive(false);
             }
-            //IncomeExpensePie Graph
-            var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 240, 240, Adw.StyleManager.GetDefault().GetDark());
-            using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
-            using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
-            _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
             _isAccountLoading = false;
         }
         return false;
@@ -458,12 +427,12 @@ public partial class AccountView : Adw.Bin
         row.SetVisible(e.Active);
         if (e.Position != null)
         {
-            _flowBox.Insert(row, e.Position.Value);
+            _transactionsFlowBox.Insert(row, e.Position.Value);
         }
         else
         {
 
-            _flowBox.Append(row);
+            _transactionsFlowBox.Append(row);
         }
         _transactionRows.Add(e.Model.Id, row);
         return false;
@@ -475,8 +444,8 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
     {
-        _flowBox.Remove(_transactionRows[e.Model.Id]);
-        _flowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
+        _transactionsFlowBox.Remove(_transactionRows[e.Model.Id]);
+        _transactionsFlowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
         return false;
     }
 
@@ -486,7 +455,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="id">uint</param>
     private bool DeleteTransactionRow(uint id)
     {
-        _flowBox.Remove(_transactionRows[id]);
+        _transactionsFlowBox.Remove(_transactionRows[id]);
         _transactionRows.Remove(id);
         return false;
     }
@@ -572,7 +541,7 @@ public partial class AccountView : Adw.Bin
         try
         {
             var file = await openFileDialog.OpenAsync(_parentWindow);
-            StartSpinner();
+            _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
                 try
@@ -585,7 +554,6 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            StopSpinner();
         }
         catch { }
     }
@@ -696,7 +664,7 @@ public partial class AccountView : Adw.Bin
         transactionDialog.OnApply += async (sender, e) =>
         {
             transactionDialog.SetVisible(false);
-            StartSpinner();
+            _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
                 try
@@ -709,7 +677,6 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            StopSpinner();
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -727,7 +694,7 @@ public partial class AccountView : Adw.Bin
         transactionDialog.OnApply += async (sender, e) =>
         {
             transactionDialog.SetVisible(false);
-            StartSpinner();
+            _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
                 try
@@ -740,7 +707,6 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            StopSpinner();
             transactionController.Dispose();
             transactionDialog.Close();
         };
@@ -776,7 +742,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (dialog.Response == MessageDialogResponse.Suggested)
                         {
-                            StartSpinner();
+                            _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
                                 try
@@ -790,11 +756,10 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            StopSpinner();
                         }
                         else if (dialog.Response == MessageDialogResponse.Destructive)
                         {
-                            StartSpinner();
+                            _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
                                 try
@@ -807,7 +772,6 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            StopSpinner();
                         }
                         dialog.Destroy();
                     };
@@ -822,7 +786,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (dialog.Response != MessageDialogResponse.Cancel)
                         {
-                            StartSpinner();
+                            _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
                                 try
@@ -835,7 +799,6 @@ public partial class AccountView : Adw.Bin
                                     Console.WriteLine(ex.StackTrace);
                                 }
                             });
-                            StopSpinner();
                         }
                         dialog.Destroy();
                     };
@@ -843,7 +806,7 @@ public partial class AccountView : Adw.Bin
             }
             else
             {
-                StartSpinner();
+                _viewStack.SetVisibleChildName("spinner");
                 await Task.Run(async () =>
                 {
                     try
@@ -856,7 +819,6 @@ public partial class AccountView : Adw.Bin
                         Console.WriteLine(ex.StackTrace);
                     }
                 });
-                StopSpinner();
             }
             transactionController.Dispose();
             transactionDialog.Close();
@@ -874,7 +836,7 @@ public partial class AccountView : Adw.Bin
                 {
                     if (dialog.Response != MessageDialogResponse.Cancel)
                     {
-                        StartSpinner();
+                        _viewStack.SetVisibleChildName("spinner");
                         await Task.Run(async () =>
                         {
                             try
@@ -887,7 +849,6 @@ public partial class AccountView : Adw.Bin
                                 Console.WriteLine(ex.StackTrace);
                             }
                         });
-                        StopSpinner();
                         transactionController.Dispose();
                         transactionDialog.Close();
                     }
@@ -933,7 +894,7 @@ public partial class AccountView : Adw.Bin
         groupDialog.OnApply += async (sender, e) =>
         {
             groupDialog.SetVisible(false);
-            StartSpinner();
+            _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
                 try
@@ -946,7 +907,6 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            StopSpinner();
             groupDialog.Close();
         };
     }
@@ -964,7 +924,7 @@ public partial class AccountView : Adw.Bin
         groupDialog.OnApply += async (sender, e) =>
         {
             groupDialog.SetVisible(false);
-            StartSpinner();
+            _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
                 try
@@ -977,7 +937,6 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            StopSpinner();
             groupDialog.Close();
         };
         groupDialog.OnDelete += (sender, e) =>
