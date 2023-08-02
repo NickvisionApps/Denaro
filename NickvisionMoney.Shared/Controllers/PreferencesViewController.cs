@@ -1,5 +1,5 @@
-﻿using NickvisionMoney.Shared.Models;
-using System;
+﻿using Nickvision.Aura;
+using NickvisionMoney.Shared.Models;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -11,7 +11,7 @@ public class PreferencesViewController
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
 
     /// <summary>
     /// Creates a PreferencesViewController
@@ -124,5 +124,5 @@ public class PreferencesViewController
     /// <summary>
     /// Saves the configuration to disk
     /// </summary>
-    public void SaveConfiguration() => Configuration.Current.Save();
+    public void SaveConfiguration() => Aura.Active.SaveConfig("config");
 }

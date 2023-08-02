@@ -24,12 +24,12 @@ public partial class Program
     /// </summary>
     /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public static int Main(string[] args) => new Program().Run(args);
+    public static int Main(string[] args) => new Program(args).Run();
 
     /// <summary>
     /// Constructs a Program
     /// </summary>
-    public Program()
+    public Program(string[] args)
     {
         if (CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture))
         {
@@ -39,30 +39,27 @@ public partial class Program
         {
             CultureInfo.CurrentCulture = new CultureInfo("ar-EG"); // Fix #211
         }
-        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.HandlesOpen | Gio.ApplicationFlags.NonUnique);
+        _application = Adw.Application.New("org.nickvision.money", Gio.ApplicationFlags.NonUnique);
         _mainWindow = null;
-        _mainWindowController = new MainWindowController();
-        _mainWindowController.AppInfo.ID = "org.nickvision.money";
-        _mainWindowController.AppInfo.Name = "Nickvision Denaro";
-        _mainWindowController.AppInfo.ShortName = _("Denaro");
-        _mainWindowController.AppInfo.Description = $"{_("Manage your personal finances")}.";
-        _mainWindowController.AppInfo.Version = "2023.8.0-beta1";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added the option to select the entire current month as the date range filter </li><li>Improved the transaction description suggestion algorithm with fuzzy search</li><li>Fixed an issue where the help button in the import toast was not working</li><li>Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</li><li>Fixed an issue where docs were not available when running Denaro via snap</li><li>Updated and added translations (Thanks to everyone on Weblate)!</li></ul>";
-        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Denaro");
-        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
-        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
+        _mainWindowController = new MainWindowController(args);
+        _mainWindowController.AppInfo.Changelog =
+            @"* Added the option to select the entire current month as the date range filter
+              * Improved the transaction description suggestion algorithm with fuzzy search
+              * Fixed an issue where the help button in the import toast was not working
+              * Fixed an issue where Denaro would crash if an account had incorrect formatted metadata
+              * Fixed an issue where docs were not available when running Denaro via snap
+              * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
-        _application.OnOpen += OnOpen;
-        if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
+        if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
         {
             //Load file from program directory, required for `dotnet run`
-            Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"));
+            Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"));
         }
         else
         {
             var prefixes = new List<string> {
-               Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
-               Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+               Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
+               Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
                "/usr"
             };
             foreach (var prefix in prefixes)
@@ -80,7 +77,7 @@ public partial class Program
     /// Runs the program
     /// </summary>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public int Run(string[] args)
+    public int Run()
     {
         try
         {
@@ -112,19 +109,5 @@ public partial class Program
         //Main Window
         _mainWindow = new MainWindow(_mainWindowController, _application);
         await _mainWindow.StartupAsync();
-    }
-
-    /// <summary>
-    /// Occurs when an nmoney file is double clicked to open the app
-    /// </summary>
-    /// <param name="sender">Gio.Application</param>
-    /// <param name="e">Gio.Application.OpenSignalArgs</param>
-    private void OnOpen(Gio.Application sender, Gio.Application.OpenSignalArgs e)
-    {
-        if (e.NFiles > 0)
-        {
-            _mainWindowController.FileToLaunch = e.Files[0].GetPath();
-            OnActivate(_application, EventArgs.Empty);
-        }
     }
 }

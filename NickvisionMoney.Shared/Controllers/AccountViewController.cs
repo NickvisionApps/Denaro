@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Events;
+﻿using Nickvision.Aura;
+using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -29,7 +30,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
 
     /// <summary>
     /// Whether to use native digits
@@ -469,7 +470,7 @@ public class AccountViewController : IDisposable
                 Name = AccountTitle,
                 Type = AccountType
             });
-            Configuration.Current.Save();
+            Aura.Active.SaveConfig("config");
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
             //Groups
             foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
@@ -616,7 +617,7 @@ public class AccountViewController : IDisposable
             Name = AccountTitle,
             Type = AccountType
         });
-        Configuration.Current.Save();
+        Aura.Active.SaveConfig("config");
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
         if (oldSymbol != metadata.CustomCurrencySymbol || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
         {

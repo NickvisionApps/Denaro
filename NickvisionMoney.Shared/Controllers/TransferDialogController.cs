@@ -1,4 +1,5 @@
-﻿using NickvisionMoney.Shared.Helpers;
+﻿using Nickvision.Aura;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ public class TransferDialogController
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The transfer represented by the controller
     /// </summary>
