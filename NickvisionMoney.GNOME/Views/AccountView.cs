@@ -77,6 +77,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.DropDown _endMonthDropDown;
     [Gtk.Connect] private readonly Gtk.DropDown _endDayDropDown;
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
+    [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -386,6 +387,11 @@ public partial class AccountView : Adw.Bin
                 _noTransactionsStatusPage.SetDescription(_("Add a new transaction or import transactions from a file."));
                 _rangeExpander.SetSensitive(false);
             }
+            //IncomeExpensePie Graph
+            var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 300, 300);
+            using var bytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
+            using var texture = Gdk.Texture.NewFromBytes(bytes);
+            _incomeExpensePieImage.SetPaintable(texture);
             _isAccountLoading = false;
         }
         return false;

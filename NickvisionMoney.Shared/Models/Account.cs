@@ -1,4 +1,7 @@
 ﻿using Hazzik.Qif;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.SKCharts;
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
 using OfxSharp;
@@ -24,6 +27,12 @@ public enum ExportMode
 {
     All,
     CurrentView
+}
+
+public enum GraphType
+{
+    IncomeExpensePie,
+    IncomeExpenseGroupBar
 }
 
 /// <summary>
@@ -1815,8 +1824,31 @@ public class Account : IDisposable
         }
         return true;
     }
-    
-    
+
+    /// <summary>
+    /// Generates a graph based on the type
+    /// </summary>
+    /// <param name="type">GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    /// <returns>The byte[] of the graph</returns>
+    public byte[] GenerateGraph(GraphType type, int width, int height)
+    {
+        return type switch
+        {
+            GraphType.IncomeExpensePie => new SKPieChart()
+            {
+                Width = width,
+                Height = height,
+                Series = new ISeries[]
+                {
+                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { TodayIncome } },
+                    new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { TodayExpense } }
+                }
+            }.GetImage().Encode().ToArray(),
+            _ => new byte[width]
+        };
+    }
 
     /// <summary>
     /// Backups the account to CSV backup folder location

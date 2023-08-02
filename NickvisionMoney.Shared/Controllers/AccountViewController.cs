@@ -989,6 +989,15 @@ public class AccountViewController : IDisposable
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to export account to file."), NotificationSeverity.Error));
         }
     }
+    
+    /// <summary>
+    /// Generates a graph based on the type
+    /// </summary>
+    /// <param name="type">GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    /// <returns>The byte[] of the graph</returns>
+    public byte[] GenerateGraph(GraphType type, int width, int height) => _account.GenerateGraph(type, width, height);
 
     /// <summary>
     /// Gets whether or not a filter is active
