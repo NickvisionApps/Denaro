@@ -1,3 +1,4 @@
+using Nickvision.Aura;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -65,7 +66,7 @@ public class NewAccountDialogController
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The path of the new account
     /// </summary>

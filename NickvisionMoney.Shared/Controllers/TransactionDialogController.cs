@@ -1,6 +1,7 @@
 ﻿using Docnet.Core;
 using Docnet.Core.Converters;
 using Docnet.Core.Models;
+using Nickvision.Aura;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using SixLabors.ImageSharp;
@@ -43,7 +44,7 @@ public class TransactionDialogController : IDisposable
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The transaction represented by the controller
     /// </summary>
