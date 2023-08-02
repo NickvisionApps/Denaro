@@ -29,3 +29,10 @@ jobs:
         with:
           name: denaro-amd64-snap
           path: ${{ steps.snapcraft-build.outputs.snap }} 
+      - name: Upload and release Denaro Snap
+        uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+        with:
+          snap: ${{ steps.snapcraft-build.outputs.snap }}
+          release: ${{'edge'}}
