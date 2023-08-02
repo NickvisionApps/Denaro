@@ -1053,7 +1053,7 @@ public class AccountViewController : IDisposable
         _filteredIds = new List<uint>();
         _filteredIncome = 0;
         _filteredExpense = 0;
-        var groupBalances = new Dictionary<uint, decimal>();
+        var groupBalances = new Dictionary<uint, (decimal Income, decimal Expense)>();
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1094,9 +1094,19 @@ public class AccountViewController : IDisposable
             var groupKey = pair.Value.GroupId == -1 ? 0u : (uint)pair.Value.GroupId;
             if(!groupBalances.ContainsKey(groupKey))
             {
-                groupBalances[groupKey] = 0m;
+                groupBalances[groupKey] = (0m, 0m);
             }
-            groupBalances[groupKey] += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : -1 * pair.Value.Amount;
+            var income = groupBalances[groupKey].Income;
+            var expense = groupBalances[groupKey].Expense;
+            if (pair.Value.Type == TransactionType.Income)
+            {
+                income += pair.Value.Amount;
+            }
+            else
+            {
+                expense += pair.Value.Amount;
+            }
+            groupBalances[groupKey] = (income, expense);
         }
         //Update UI
         if (_filteredIds.Count > 0)
@@ -1108,7 +1118,7 @@ public class AccountViewController : IDisposable
         }
         foreach(var pair in _account.Groups)
         {
-            var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key] : 0m);
+            var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Income : 0m, groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Expense : 0m);
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(newGroup, null, _filters[(int)pair.Key]));
         }
         AccountInformationChanged?.Invoke(this, EventArgs.Empty);

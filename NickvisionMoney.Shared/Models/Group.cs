@@ -20,13 +20,22 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// </summary>
     public string Description { get; set; }
     /// <summary>
-    /// The balance of the group
+    /// The income of the group
     /// </summary>
-    public decimal Balance { get; set; }
+    public decimal Income { get; set; }
+    /// <summary>
+    /// The expense of the group
+    /// </summary>
+    public decimal Expense { get; set; }
     /// <summary>
     /// The RGBA color of the group
     /// </summary>
     public string RGBA { get; set; }
+
+    /// <summary>
+    /// The balance of the group
+    /// </summary>
+    public decimal Balance => Income - Expense;
 
     /// <summary>
     /// Constructs a group
@@ -37,7 +46,8 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         Id = id;
         Name = "";
         Description = "";
-        Balance = 0m;
+        Income = 0m;
+        Expense = 0m;
         RGBA = "rgb(0,0,0)";
     }
 
@@ -51,7 +61,8 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
         {
             Name = Name,
             Description = Description,
-            Balance = Balance,
+            Income = Income,
+            Expense = Expense,
             RGBA = RGBA
         };
     }
@@ -59,15 +70,17 @@ public class Group : ICloneable, IComparable<Group>, IEquatable<Group>
     /// <summary>
     /// Clones the group but replaces the balance
     /// </summary>
-    /// <param name="newBalance">A new balance to use</param>
+    /// <param name="newIncome">A new income to use</param>
+    /// <param name="newExpense">A new expense to use</param>
     /// <returns>A new Group</returns>
-    public Group Clone(decimal newBalance)
+    public Group Clone(decimal newIncome, decimal newExpense)
     {
         return new Group(Id)
         {
             Name = Name,
             Description = Description,
-            Balance = newBalance,
+            Income = newIncome,
+            Expense = newExpense,
             RGBA = RGBA
         };
     }

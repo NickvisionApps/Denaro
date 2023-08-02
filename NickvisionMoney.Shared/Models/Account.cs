@@ -458,7 +458,6 @@ public class Account : IDisposable
         {
             Name = _("Ungrouped"),
             Description = _("Transactions without a group"),
-            Balance = 0m,
             RGBA = ""
         });
         using var cmdQueryGroups = _database.CreateCommand();
@@ -474,7 +473,6 @@ public class Account : IDisposable
             {
                 Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
                 Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
-                Balance = 0m,
                 RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
             };
             Groups.Add(group.Id, group);
@@ -516,13 +514,14 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income += transaction.Amount;
                     TodayIncome += transaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense += transaction.Amount;
                     TodayExpense += transaction.Amount;
                 }
             }
@@ -784,13 +783,14 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income += transaction.Amount;
                     TodayIncome += transaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense += transaction.Amount;
                     TodayExpense += transaction.Amount;
                 }
             }
@@ -841,13 +841,14 @@ public class Account : IDisposable
             if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
-                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
                 if (oldTransaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income -= transaction.Amount;
                     TodayIncome -= oldTransaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense -= transaction.Amount;
                     TodayExpense -= oldTransaction.Amount;
                 }
             }
@@ -856,13 +857,14 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income += transaction.Amount;
                     TodayIncome += transaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense += transaction.Amount;
                     TodayExpense += transaction.Amount;
                 }
             }
@@ -938,13 +940,14 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income -= transaction.Amount;
                     TodayIncome -= transaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense -= transaction.Amount;
                     TodayExpense -= transaction.Amount;
                 }
             }
@@ -1557,7 +1560,7 @@ public class Account : IDisposable
                     //Settings
                     page.Size(PageSizes.Letter);
                     page.Margin(1, Unit.Centimetre);
-                    page.PageColor(Colors.White);
+                    page.PageColor(QuestPDF.Helpers.Colors.White);
                     page.DefaultTextStyle(TextStyle.Default.FontFamily("Inter").FontSize(12).Fallback(x => x.FontFamily("Noto Emoji")));
                     //Header
                     page.Header().Row(row =>
@@ -1581,7 +1584,7 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Overview"));
+                            tbl.Cell().ColumnSpan(2).Background(QuestPDF.Helpers.Colors.Grey.Lighten1).Text(_("Overview"));
                             //Data
                             var maxDate = DateOnly.FromDateTime(DateTime.Today);
                             var transactions = Transactions;
@@ -1603,8 +1606,8 @@ public class Account : IDisposable
                             tbl.Cell().Text(_("Total"));
                             var total = GetTotal(maxDate);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().Background(QuestPDF.Helpers.Colors.Grey.Lighten3).Text(_("Income"));
+                            tbl.Cell().Background(QuestPDF.Helpers.Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                         });
@@ -1618,11 +1621,11 @@ public class Account : IDisposable
                                 x.RelativeColumn();
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Account Settings"));
+                            tbl.Cell().ColumnSpan(2).Background(QuestPDF.Helpers.Colors.Grey.Lighten1).Text(_("Account Settings"));
                             tbl.Cell().Text(_("Account Type")).SemiBold();
                             tbl.Cell().Text(_("Currency")).SemiBold();
                             //Data
-                            tbl.Cell().Background(Colors.Grey.Lighten3).Text(Metadata.AccountType switch
+                            tbl.Cell().Background(QuestPDF.Helpers.Colors.Grey.Lighten3).Text(Metadata.AccountType switch
                             {
                                 AccountType.Checking => _("Checking"),
                                 AccountType.Savings => _("Savings"),
@@ -1631,11 +1634,11 @@ public class Account : IDisposable
                             });
                             if (Metadata.UseCustomCurrency)
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} ({Metadata.CustomCurrencyCode})");
+                                tbl.Cell().Background(QuestPDF.Helpers.Colors.Grey.Lighten3).Text($"{Metadata.CustomCurrencySymbol} ({Metadata.CustomCurrencyCode})");
                             }
                             else
                             {
-                                tbl.Cell().Background(Colors.Grey.Lighten3).Text($"{cultureAmount.NumberFormat.CurrencySymbol} ({regionAmount.ISOCurrencySymbol})");
+                                tbl.Cell().Background(QuestPDF.Helpers.Colors.Grey.Lighten3).Text($"{cultureAmount.NumberFormat.CurrencySymbol} ({regionAmount.ISOCurrencySymbol})");
                             }
                         });
                         //Groups
@@ -1649,7 +1652,7 @@ public class Account : IDisposable
                                 x.RelativeColumn(1);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(_("Groups"));
+                            tbl.Cell().ColumnSpan(3).Background(QuestPDF.Helpers.Colors.Grey.Lighten1).Text(_("Groups"));
                             tbl.Cell().Text(_("Name")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
@@ -1657,9 +1660,9 @@ public class Account : IDisposable
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(i % 2 == 0 ? QuestPDF.Helpers.Colors.Grey.Lighten3 : QuestPDF.Helpers.Colors.White).Text(pair.Value.Name);
+                                tbl.Cell().Background(i % 2 == 0 ? QuestPDF.Helpers.Colors.Grey.Lighten3 : QuestPDF.Helpers.Colors.White).Text(pair.Value.Description);
+                                tbl.Cell().Background(i % 2 == 0 ? QuestPDF.Helpers.Colors.Grey.Lighten3 : QuestPDF.Helpers.Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
                         });
@@ -1678,7 +1681,7 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
+                            tbl.Cell().ColumnSpan(7).Background(QuestPDF.Helpers.Colors.Grey.Lighten1).Text(_("Transactions"));
                             tbl.Cell().Text(_("Id")).SemiBold();
                             tbl.Cell().Text(_("Date")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
@@ -1749,7 +1752,7 @@ public class Account : IDisposable
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Receipts"));
+                            tbl.Cell().ColumnSpan(2).Background(QuestPDF.Helpers.Colors.Grey.Lighten1).Text(_("Receipts"));
                             tbl.Cell().Text(_("Id")).SemiBold();
                             tbl.Cell().Text(_("Receipt")).SemiBold();
                             //Data
@@ -1769,8 +1772,8 @@ public class Account : IDisposable
                                 {
                                     using var memoryStream = new MemoryStream();
                                     pair.Value.Receipt.Save(memoryStream, new JpegEncoder());
-                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Id.ToString());
-                                    tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).MinWidth(300).MinHeight(300).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray()).FitArea();
+                                    tbl.Cell().Background(i % 2 == 0 ? QuestPDF.Helpers.Colors.Grey.Lighten3 : QuestPDF.Helpers.Colors.White).Text(pair.Value.Id.ToString());
+                                    tbl.Cell().Background(i % 2 == 0 ? QuestPDF.Helpers.Colors.Grey.Lighten3 : QuestPDF.Helpers.Colors.White).MinWidth(300).MinHeight(300).MaxWidth(300).MaxHeight(300).Image(memoryStream.ToArray()).FitArea();
                                     i++;
                                 }
                             }
@@ -1779,18 +1782,18 @@ public class Account : IDisposable
                     //Footer
                     page.Footer().Row(row =>
                     {
-                        row.RelativeItem(2).Text(_("Nickvision Denaro Account")).FontColor(Colors.Grey.Medium);
+                        row.RelativeItem(2).Text(_("Nickvision Denaro Account")).FontColor(QuestPDF.Helpers.Colors.Grey.Medium);
                         row.RelativeItem(1).Text(x =>
                         {
                             var pageString = _("Page {0}");
                             if (pageString.EndsWith("{0}"))
                             {
-                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(QuestPDF.Helpers.Colors.Grey.Medium);
                             }
-                            x.CurrentPageNumber().FontColor(Colors.Grey.Medium);
+                            x.CurrentPageNumber().FontColor(QuestPDF.Helpers.Colors.Grey.Medium);
                             if (pageString.StartsWith("{0}"))
                             {
-                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(Colors.Grey.Medium);
+                                x.Span(pageString.Remove(pageString.IndexOf("{0}"), 3)).FontColor(QuestPDF.Helpers.Colors.Grey.Medium);
                             }
                             x.AlignRight();
                         });
