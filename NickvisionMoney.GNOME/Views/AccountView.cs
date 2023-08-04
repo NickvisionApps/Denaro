@@ -79,6 +79,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
+    [Gtk.Connect] private readonly Gtk.FlowBoxChild _incomeExpensePieFlow;
     [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
