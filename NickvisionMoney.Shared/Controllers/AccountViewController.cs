@@ -1037,7 +1037,7 @@ public class AccountViewController : IDisposable
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = true;
+            _filters[(int)pair.Key] = true;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
         }
         FilterUIUpdate();
@@ -1050,7 +1050,7 @@ public class AccountViewController : IDisposable
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = false;
+            _filters[(int)pair.Key] = false;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, false));
         }
         FilterUIUpdate();
