@@ -1836,9 +1836,24 @@ public class Account : IDisposable
     /// <param name="width">The width of the graph</param>
     /// <param name="height">The height of the graph</param>
     /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
     /// <returns>The byte[] of the graph</returns>
-    public byte[] GenerateGraph(GraphType type, int width, int height, bool darkMode)
+    public byte[] GenerateGraph(GraphType type, int width, int height, bool darkMode, List<uint> filteredIds)
     {
+        var income = 0m;
+        var expense = 0m;
+        foreach (var id in filteredIds)
+        {
+            var transaction = Transactions[id];
+            if (transaction.Type == TransactionType.Income)
+            {
+                income += transaction.Amount;
+            }
+            else
+            {
+                expense += transaction.Amount;
+            }
+        }
         return type switch
         {
             GraphType.IncomeExpensePie => new SKPieChart()
@@ -1848,8 +1863,8 @@ public class Account : IDisposable
                 Background = SKColor.Empty,
                 Series = new ISeries[]
                 {
-                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { TodayIncome }, Fill = new SolidColorPaint(SKColors.Green)},
-                    new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { TodayExpense }, Fill = new SolidColorPaint(SKColors.Red) }
+                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { income }, Fill = new SolidColorPaint(SKColors.Green)},
+                    new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { expense }, Fill = new SolidColorPaint(SKColors.Red) }
                 },
                 LegendPosition = LegendPosition.Top,
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
