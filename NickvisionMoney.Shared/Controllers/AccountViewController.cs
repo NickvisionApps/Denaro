@@ -1148,7 +1148,7 @@ public class AccountViewController : IDisposable
         _filteredIds.Sort(SortTransactions);
         for (var i = 0; i < transactions.Count; i++)
         {
-            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
+            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, _filteredIds.Contains(transactions[i])));
         }
     }
 }
