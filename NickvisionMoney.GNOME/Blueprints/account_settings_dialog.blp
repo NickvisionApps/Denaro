@@ -6,9 +6,8 @@ Adw.Window _root {
   modal: true;
   resizable: false;
   
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar _header {
       title-widget: Gtk.Label {};
 
@@ -22,8 +21,6 @@ Adw.Window _root {
           label: _("Back");
         };
       }
-
-      styles ["flat"]
     }
 
     Gtk.WindowHandle {

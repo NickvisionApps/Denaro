@@ -17,9 +17,8 @@ Adw.ApplicationWindow _root {
   default-height: 720;
   width-request: 360;
   
-  Gtk.Box {
-    orientation: vertical;
-    
+  Adw.ToolbarView {
+    [top]
     Adw.HeaderBar _headerBar {
       title-widget: Adw.WindowTitle _windowTitle {};
       
@@ -137,7 +136,7 @@ Adw.ApplicationWindow _root {
       styles ["flat"]
     }
     
-    Adw.ToastOverlay _toastOverlay {
+    content: Adw.ToastOverlay _toastOverlay {
       hexpand: true;
       vexpand: true;
       
@@ -241,6 +240,6 @@ Adw.ApplicationWindow _root {
           };
         }
       }
-    }
+    };
   }
 }

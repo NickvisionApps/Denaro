@@ -7,12 +7,10 @@ Adw.Window _root {
   resizable: false;
   default-widget: _applyButton;
 
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
       title-widget: Gtk.Label {};
-      styles ["flat"]
     }
 
     Gtk.WindowHandle {
