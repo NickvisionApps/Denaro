@@ -111,6 +111,13 @@ public partial class AccountView : Adw.Bin
         _controller.TransactionMoved += (sender, e) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(e));
         _controller.TransactionDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(e));
         _controller.TransactionUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateTransactionRow(e));
+        Adw.StyleManager.GetDefault().OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "dark")
+            {
+                GenerateGraphs();
+            }
+        };
         //Build UI
         builder.Connect(this);
         btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
@@ -339,11 +346,7 @@ public partial class AccountView : Adw.Bin
                 if (_controller.FilteredTransactionsCount > 0)
                 {
                     _viewStack.SetVisibleChildName("transactions");
-                    //IncomeExpensePie Graph
-                    var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 240, 240, Adw.StyleManager.GetDefault().GetDark());
-                    using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
-                    using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
-                    _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
+                    GenerateGraphs();
                 }
                 else
                 {
@@ -364,6 +367,18 @@ public partial class AccountView : Adw.Bin
             _isAccountLoading = false;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Generates graphs for the account
+    /// </summary>
+    private void GenerateGraphs()
+    {
+        //IncomeExpensePie Graph
+        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 240, 240, Adw.StyleManager.GetDefault().GetDark());
+        using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
+        using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
+        _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
     }
     
     /// <summary>
