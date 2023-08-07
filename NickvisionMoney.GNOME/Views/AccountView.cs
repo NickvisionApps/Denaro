@@ -53,6 +53,7 @@ public partial class AccountView : Adw.Bin
     private readonly Action<string> _updateSubtitle;
     private Dictionary<uint, GroupRow> _groupRows;
     private Dictionary<uint, TransactionRow> _transactionRows;
+    private uint _currentGraphPage;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
@@ -79,6 +80,9 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
+    [Gtk.Connect] private readonly Gtk.Button _graphBackButton;
+    [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
+    [Gtk.Connect] private readonly Adw.Carousel _carousel;
     [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.Picture _incomeExpenseGroupBarImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
@@ -103,6 +107,7 @@ public partial class AccountView : Adw.Bin
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
+        _currentGraphPage = 0;
         //Register Controller Events
         _controller.AccountInformationChanged += (sender, e) => GLib.Functions.IdleAdd(0, AccountInformationChanged);
         _controller.GroupCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateGroupRow(e));
@@ -219,6 +224,23 @@ public partial class AccountView : Adw.Bin
             }
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
+        //Graph Carousel Buttons
+        _graphBackButton.OnClicked += (sender, e) =>
+        {
+            if (_currentGraphPage > 0)
+            {
+                _currentGraphPage--;
+                _carousel.ScrollTo(_carousel.GetNthPage(_currentGraphPage), true);
+            }
+        };
+        _graphNextButton.OnClicked += (sender, e) =>
+        {
+            if (_currentGraphPage < _carousel.GetNPages() - 1)
+            {
+                _currentGraphPage++;
+                _carousel.ScrollTo(_carousel.GetNthPage(_currentGraphPage), true);
+            }
+        };
         //Transactions Scrolled Window
         _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
         _transactionsScrollAdjustment.OnNotify += (sender, e) =>
