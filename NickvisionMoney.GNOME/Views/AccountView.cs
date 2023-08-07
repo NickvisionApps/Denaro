@@ -232,9 +232,27 @@ public partial class AccountView : Adw.Bin
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
         //Graphs images
-        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height));
-        _incomeExpensePieImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpensePie, width, height));
-        _incomeExpenseByGroupImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseByGroup, width, height));
+        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 0)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height);
+            }
+        });
+        _incomeExpensePieImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 1)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpensePie, width, height);
+            }
+        });
+        _incomeExpenseByGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 2)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpenseByGroup, width, height);
+            }
+        });
         //Graph Carousel Buttons
         _graphBackButton.OnClicked += (sender, e) =>
         {
@@ -251,6 +269,13 @@ public partial class AccountView : Adw.Bin
                 _currentGraphPage++;
                 _carousel.ScrollTo(_carousel.GetNthPage(_currentGraphPage), true);
             }
+        };
+        _carousel.OnPageChanged += (sender, e) =>
+        {
+            _currentGraphPage = e.Index;
+            _incomeExpenseOverTimeImage.QueueDraw();
+            _incomeExpensePieImage.QueueDraw();
+            _incomeExpenseByGroupImage.QueueDraw();
         };
         //Transactions Scrolled Window
         _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
