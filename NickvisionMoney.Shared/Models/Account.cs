@@ -1623,6 +1623,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).MaxHeight(100).Image(GenerateGraph(GraphType.IncomeExpensePie, false, filteredIds, -1, -1, false)).FitHeight();
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1663,14 +1664,12 @@ public class Account : IDisposable
                                 x.RelativeColumn(1);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(1);
-                                x.RelativeColumn(1);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(4).Background(Colors.Grey.Lighten1).Text(_("Groups"));
+                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(_("Groups"));
                             tbl.Cell().Text(_("Name")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
-                            tbl.Cell().AlignRight().Text(_("Visualize")).SemiBold();
                             //Data
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
@@ -1678,18 +1677,9 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Image(new SKPieChart()
-                                {
-                                    Background = SKColor.Empty,
-                                    Series = new ISeries[]
-                                    {
-                                        new PieSeries<decimal> { Values = new decimal[] { pair.Value.Income }, Fill = new SolidColorPaint(SKColors.Green)},
-                                        new PieSeries<decimal> { Values = new decimal[] { pair.Value.Expense }, Fill = new SolidColorPaint(SKColors.Red) }
-                                    },
-                                    LegendTextPaint = new SolidColorPaint(SKColors.Black)
-                                }.GetImage().Encode().ToArray());
                                 i++;
                             }
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpenseGroupBar, false, filteredIds));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
@@ -1849,8 +1839,9 @@ public class Account : IDisposable
     /// <param name="filteredIds">A list of filtered ids</param>
     /// <param name="width">The width of the graph</param>
     /// <param name="height">The height of the graph</param>
+    /// <param name="showLegend">Whether or not to show the legend</param>
     /// <returns>The byte[] of the graph</returns>
-    public byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, int width = -1, int height = -1)
+    public byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, int width = -1, int height = -1, bool showLegend = true)
     {
         InMemorySkiaSharpChart? chart = null;
         if (type == GraphType.IncomeExpensePie)
@@ -1874,11 +1865,11 @@ public class Account : IDisposable
                 Background = SKColor.Empty,
                 Series = new ISeries[]
                 {
-                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { income }, Fill = new SolidColorPaint(SKColors.Green)},
+                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { income }, Fill = new SolidColorPaint(SKColors.Green) },
                     new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { expense }, Fill = new SolidColorPaint(SKColors.Red) }
                 },
-                LegendPosition = LegendPosition.Top,
-                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
             };
         }
         if (type == GraphType.IncomeExpenseGroupBar)
@@ -1897,34 +1888,19 @@ public class Account : IDisposable
                 Background = SKColor.Empty,
                 Series = new ISeries[]
                 {
-                    new ColumnSeries<decimal>()
-                    {
-                        Name = _("Income"),
-                        Values = incomeValues.ToArray()
-                    },
-                    new ColumnSeries<decimal>()
-                    {
-                        Name = _("Expense"),
-                        Values = expenseValues.ToArray()
-                    }
+                    new ColumnSeries<decimal>() { Name = _("Income"), Values = incomeValues.ToArray(), Fill = new SolidColorPaint(SKColors.Green) },
+                    new ColumnSeries<decimal>() { Name = _("Expense"), Values = expenseValues.ToArray(), Fill = new SolidColorPaint(SKColors.Red) },
                 },
                 XAxes = new Axis[]
                 {
-                    new Axis()
-                    {
-                        Labels = groupNames.ToArray(),
-                        LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
-                    }
+                    new Axis() { Labels = groupNames.ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
                 },
                 YAxes = new Axis[]
                 {
-                    new Axis()
-                    {
-                        LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
-                    }
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
                 },
-                LegendPosition = LegendPosition.Top,
-                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
             };
         }
         if (chart != null)
