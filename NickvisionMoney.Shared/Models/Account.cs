@@ -36,7 +36,8 @@ public enum ExportMode
 public enum GraphType
 {
     IncomeExpensePie,
-    IncomeExpenseGroupBar
+    IncomeExpenseByGroup,
+    IncomeExpenseOverTime
 }
 
 /// <summary>
@@ -1623,7 +1624,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).MaxHeight(100).Image(GenerateGraph(GraphType.IncomeExpensePie, false, filteredIds, -1, -1, false)).FitHeight();
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, -1, -1, false));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1679,7 +1680,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
-                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpenseGroupBar, false, filteredIds));
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpenseByGroup, false, filteredIds));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
@@ -1872,7 +1873,7 @@ public class Account : IDisposable
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
             };
         }
-        if (type == GraphType.IncomeExpenseGroupBar)
+        else if (type == GraphType.IncomeExpenseByGroup)
         {
             var groupNames = new List<string>();
             var incomeValues = new List<decimal>();
@@ -1894,6 +1895,61 @@ public class Account : IDisposable
                 XAxes = new Axis[]
                 {
                     new Axis() { Labels = groupNames.ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeExpenseOverTime)
+        {
+            //Date Culture
+            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            if (lcTime != null && lcTime.Contains(".UTF-8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            else if (lcTime != null && lcTime.Contains(".utf8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
+            }
+            if (lcTime != null && lcTime.Contains('_'))
+            {
+                lcTime = lcTime.Replace('_', '-');
+            }
+            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+            //Graph
+            var data = new Dictionary<DateOnly, decimal[]>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                if (!data.ContainsKey(transaction.Date))
+                {
+                    data.Add(transaction.Date, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[transaction.Date][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[transaction.Date][1] += transaction.Amount;
+                }
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new LineSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[0]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Green), GeometryStroke = new SolidColorPaint(SKColors.Green), Fill = null, Stroke = new SolidColorPaint(SKColors.Green) },
+                    new LineSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[1]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Red), GeometryStroke = new SolidColorPaint(SKColors.Red), Fill = null, Stroke = new SolidColorPaint(SKColors.Red) }
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", cultureDate)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
                 },
                 YAxes = new Axis[]
                 {

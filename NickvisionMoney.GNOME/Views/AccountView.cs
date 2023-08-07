@@ -83,9 +83,9 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _graphBackButton;
     [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseByGroupImage;
-    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -122,9 +122,9 @@ public partial class AccountView : Adw.Bin
         {
             if (e.Pspec.GetName() == "dark")
             {
+                _incomeExpenseOverTimeImage.QueueDraw();
                 _incomeExpensePieImage.QueueDraw();
                 _incomeExpenseByGroupImage.QueueDraw();
-                _incomeExpenseOverTimeImage.QueueDraw();
             }
         };
         //Build UI
@@ -228,9 +228,9 @@ public partial class AccountView : Adw.Bin
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
         //Graphs images
+        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height));
         _incomeExpensePieImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpensePie, width, height));
         _incomeExpenseByGroupImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseByGroup, width, height));
-        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height));
         //Graph Carousel Buttons
         _graphBackButton.OnClicked += (sender, e) =>
         {
@@ -378,9 +378,9 @@ public partial class AccountView : Adw.Bin
                 if (_controller.FilteredTransactionsCount > 0)
                 {
                     _viewStack.SetVisibleChildName("transactions");
+                    _incomeExpenseOverTimeImage.QueueDraw();
                     _incomeExpensePieImage.QueueDraw();
                     _incomeExpenseByGroupImage.QueueDraw();
-                    _incomeExpenseOverTimeImage.QueueDraw();
                 }
                 else
                 {
