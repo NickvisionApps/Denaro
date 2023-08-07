@@ -378,12 +378,12 @@ public partial class AccountView : Adw.Bin
     private void GenerateGraphs()
     {
         //IncomeExpensePie Graph
-        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), -1, 400);
+        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), -1, 300);
         using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
         using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
         _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
         //IncomeExpenseGroupBar Graph
-        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), -1, 400);
+        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), -1, 300);
         using var incomeExpenseGroupBarGraphBytes = GLib.Bytes.From(incomeExpenseGroupBarGraph.AsSpan());
         using var incomeExpenseGroupBarGraphTexture = Gdk.Texture.NewFromBytes(incomeExpenseGroupBarGraphBytes);
         _incomeExpenseGroupBarImage.SetPaintable(incomeExpenseGroupBarGraphTexture);

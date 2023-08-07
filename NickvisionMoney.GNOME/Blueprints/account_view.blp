@@ -309,28 +309,30 @@ Adw.Bin _root {
               margin-start: 10;
               margin-end: 10;
               
-              Gtk.FlowBox {
-                row-spacing: 6;
-                column-spacing: 6;
-                selection-mode: none;
-
-                Gtk.FlowBoxChild {
-                  child: Gtk.Picture _incomeExpensePieImage { 
-                    height-request: 240;
-                    tooltip-text: _("Income and Expense");
-                  };
+              Gtk.Overlay {              
+                child: Gtk.Box {
+                  orientation: vertical;
+                  spacing: 6;
                   
-                  styles ["card"]
-                }
+                  Adw.Carousel _carousel {
+                    Gtk.Picture _incomeExpensePieImage {
+                      tooltip-text: _("Income and Expense");
+                    }
+                    
+                    Gtk.Picture _incomeExpenseGroupBarImage {
+                      tooltip-text: _("Income and Expense by Group");
+                    }
+                    
+                    styles ["card"]
+                  }
+                  
+                  Adw.CarouselIndicatorDots {
+                    halign: center;
+                    carousel: _carousel;
+                  }
+                };
                 
-                Gtk.FlowBoxChild {
-                  child: Gtk.Picture _incomeExpenseGroupBarImage {
-                    height-request: 240;
-                    tooltip-text: _("Income and Expense by Group");
-                  };
-                  
-                  styles ["card"]
-                }
+                
               }
             }
             
