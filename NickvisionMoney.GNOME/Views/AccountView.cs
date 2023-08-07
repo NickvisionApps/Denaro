@@ -84,7 +84,8 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
-    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseGroupBarImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseByGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -121,7 +122,9 @@ public partial class AccountView : Adw.Bin
         {
             if (e.Pspec.GetName() == "dark")
             {
-                GenerateGraphs();
+                _incomeExpensePieImage.QueueDraw();
+                _incomeExpenseByGroupImage.QueueDraw();
+                _incomeExpenseOverTimeImage.QueueDraw();
             }
         };
         //Build UI
@@ -225,8 +228,9 @@ public partial class AccountView : Adw.Bin
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
         //Graphs images
-        _incomeExpensePieImage.SetDrawFunc(DrawPieGraph);
-        _incomeExpenseGroupBarImage.SetDrawFunc(DrawGroupBarGraph);
+        _incomeExpensePieImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpensePie, width, height));
+        _incomeExpenseByGroupImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseByGroup, width, height));
+        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) => DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height));
         //Graph Carousel Buttons
         _graphBackButton.OnClicked += (sender, e) =>
         {
@@ -374,7 +378,9 @@ public partial class AccountView : Adw.Bin
                 if (_controller.FilteredTransactionsCount > 0)
                 {
                     _viewStack.SetVisibleChildName("transactions");
-                    GenerateGraphs();
+                    _incomeExpensePieImage.QueueDraw();
+                    _incomeExpenseByGroupImage.QueueDraw();
+                    _incomeExpenseOverTimeImage.QueueDraw();
                 }
                 else
                 {
@@ -398,47 +404,20 @@ public partial class AccountView : Adw.Bin
     }
 
     /// <summary>
-    /// Generates graphs for the account
+    /// Drawing function for graph images
     /// </summary>
-    private void GenerateGraphs()
+    /// <param name="ctx">Cairo.Context</param>
+    /// <param name="type">GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    private void DrawGraph(Cairo.Context ctx, GraphType type, int width, int height)
     {
-        _incomeExpensePieImage.QueueDraw();
-        _incomeExpenseGroupBarImage.QueueDraw();
-    }
-
-    /// <summary>
-    /// Drawing function for _incomeExpensePieImage
-    /// </summary>
-    /// <param name="area">Drawing area</param>
-    /// <param name="ctx">Cairo context</param>
-    /// <param name="width">Area width</param>
-    /// <param name="height">Area height</param>
-    private void DrawPieGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
-    {
-        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), width, height);
+        var graph = _controller.GenerateGraph(type, Adw.StyleManager.GetDefault().GetDark(), width, height);
         using var loader = GdkPixbuf.PixbufLoader.New();
-        loader.Write(incomeExpensePieGraph);
+        loader.Write(graph);
         loader.Close();
-        var pixbuf = loader.GetPixbuf();
-        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf!, 0, 0);
-        ctx.Paint();
-    }
-
-    /// <summary>
-    /// Drawing function for _incomeExpenseGroupBarImage
-    /// </summary>
-    /// <param name="area">Drawing area</param>
-    /// <param name="ctx">Cairo context</param>
-    /// <param name="width">Area width</param>
-    /// <param name="height">Area height</param>
-    private void DrawGroupBarGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
-    {
-        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), width, height);
-        using var loader = GdkPixbuf.PixbufLoader.New();
-        loader.Write(incomeExpenseGroupBarGraph);
-        loader.Close();
-        var pixbuf = loader.GetPixbuf();
-        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf!, 0, 0);
+        var pixbuf = loader.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf, 0, 0);
         ctx.Paint();
     }
     
