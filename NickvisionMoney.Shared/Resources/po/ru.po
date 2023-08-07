@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-06 23:18-0400\n"
+"POT-Creation-Date: 2023-08-06 23:28-0400\n"
 "PO-Revision-Date: 2023-06-29 18:15+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -656,7 +656,7 @@ msgid "Transaction"
 msgstr "Транзакция"
 
 #: ../../../Models/Account.cs:1699
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:366
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:361
 msgid "Transactions"
 msgstr "Транзакции"
 
@@ -785,7 +785,7 @@ msgid "Good Morning!"
 msgstr "Доброй ночи!"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:22
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:319
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:317
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:25
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:20
 msgid "Back"
@@ -961,26 +961,26 @@ msgstr "Конец"
 msgid "Visualize"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:330
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:325
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:269
 msgid "Next"
 msgstr "Далее"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:383
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:378
 msgid "Sort From First To Last"
 msgstr "Сортировать от первой к последней"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:389
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:384
 msgid "Sort From Last To First"
 msgstr "Сортировать от последней к первой"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:419
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:414
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Новая транзакция (Ctrl+Shift+N)"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:427
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:422
 msgctxt "Transaction"
 msgid "New"
 msgstr "Новая"

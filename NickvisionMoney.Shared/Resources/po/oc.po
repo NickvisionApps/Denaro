@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-06 23:18-0400\n"
+"POT-Creation-Date: 2023-08-06 23:28-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -647,7 +647,7 @@ msgid "Transaction"
 msgstr "Transaccion"
 
 #: ../../../Models/Account.cs:1699
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:366
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:361
 msgid "Transactions"
 msgstr "Transaccions"
 
@@ -774,7 +774,7 @@ msgid "Good Morning!"
 msgstr "Bonjorn"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:22
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:319
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:317
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:25
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:20
 msgid "Back"
@@ -957,26 +957,26 @@ msgstr "Fin"
 msgid "Visualize"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:330
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:325
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:269
 msgid "Next"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:383
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:378
 msgid "Sort From First To Last"
 msgstr "Triar del primièr al darnièr"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:389
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:384
 msgid "Sort From Last To First"
 msgstr "Triar del darnièr al primièr"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:419
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:414
 msgid "New Transaction (Ctrl+Shift+N)"
 msgstr "Transaccion novèla (Ctrl+Maj+N)"
 
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:427
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:422
 #, fuzzy
 msgctxt "Transaction"
 msgid "New"
