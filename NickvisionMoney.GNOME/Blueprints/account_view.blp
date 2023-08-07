@@ -310,13 +310,24 @@ Adw.Bin _root {
               Gtk.FlowBox {
                 row-spacing: 6;
                 column-spacing: 6;
+                selection-mode: none;
 
-                Gtk.FlowBoxChild _incomeExpensePieFlow {
-                  child: Gtk.Picture _incomeExpensePieImage {
+                Gtk.FlowBoxChild {
+                  child: Gtk.Picture _incomeExpensePieImage { 
+                    height-request: 240;
                     tooltip-text: _("Income and Expense");
-                    
-                    styles ["card"]
                   };
+                  
+                  styles ["card"]
+                }
+                
+                Gtk.FlowBoxChild {
+                  child: Gtk.Picture _incomeExpenseGroupBarImage {
+                    height-request: 240;
+                    tooltip-text: _("Income and Expense by Group");
+                  };
+                  
+                  styles ["card"]
                 }
               }
             }

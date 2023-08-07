@@ -80,6 +80,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
     [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
+    [Gtk.Connect] private readonly Gtk.Picture _incomeExpenseGroupBarImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -375,10 +376,15 @@ public partial class AccountView : Adw.Bin
     private void GenerateGraphs()
     {
         //IncomeExpensePie Graph
-        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, 240, 240, Adw.StyleManager.GetDefault().GetDark());
+        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), -1, 400);
         using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
         using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
         _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
+        //IncomeExpenseGroupBar Graph
+        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), -1, 400);
+        using var incomeExpenseGroupBarGraphBytes = GLib.Bytes.From(incomeExpenseGroupBarGraph.AsSpan());
+        using var incomeExpenseGroupBarGraphTexture = Gdk.Texture.NewFromBytes(incomeExpenseGroupBarGraphBytes);
+        _incomeExpenseGroupBarImage.SetPaintable(incomeExpenseGroupBarGraphTexture);
     }
     
     /// <summary>

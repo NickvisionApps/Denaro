@@ -1833,33 +1833,32 @@ public class Account : IDisposable
     /// Generates a graph based on the type
     /// </summary>
     /// <param name="type">GraphType</param>
-    /// <param name="width">The width of the graph</param>
-    /// <param name="height">The height of the graph</param>
     /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
     /// <param name="filteredIds">A list of filtered ids</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
     /// <returns>The byte[] of the graph</returns>
-    public byte[] GenerateGraph(GraphType type, int width, int height, bool darkMode, List<uint> filteredIds)
+    public byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, int width = -1, int height = -1)
     {
-        var income = 0m;
-        var expense = 0m;
-        foreach (var id in filteredIds)
+        InMemorySkiaSharpChart? chart = null;
+        if (type == GraphType.IncomeExpensePie)
         {
-            var transaction = Transactions[id];
-            if (transaction.Type == TransactionType.Income)
+            var income = 0m;
+            var expense = 0m;
+            foreach (var id in filteredIds)
             {
-                income += transaction.Amount;
+                var transaction = Transactions[id];
+                if (transaction.Type == TransactionType.Income)
+                {
+                    income += transaction.Amount;
+                }
+                else
+                {
+                    expense += transaction.Amount;
+                }
             }
-            else
+            chart = new SKPieChart()
             {
-                expense += transaction.Amount;
-            }
-        }
-        return type switch
-        {
-            GraphType.IncomeExpensePie => new SKPieChart()
-            {
-                Width = width,
-                Height = height,
                 Background = SKColor.Empty,
                 Series = new ISeries[]
                 {
@@ -1868,9 +1867,67 @@ public class Account : IDisposable
                 },
                 LegendPosition = LegendPosition.Top,
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
-            }.GetImage().Encode().ToArray(),
-            _ => Array.Empty<byte>()
-        };
+            };
+        }
+        if (type == GraphType.IncomeExpenseGroupBar)
+        {
+            var groupNames = new List<string>();
+            var incomeValues = new List<decimal>();
+            var expenseValues = new List<decimal>();
+            foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
+            {
+                groupNames.Add(pair.Value.Name);
+                incomeValues.Add(pair.Value.Income);
+                expenseValues.Add(pair.Value.Expense);
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<decimal>()
+                    {
+                        Name = _("Income"),
+                        Values = incomeValues.ToArray()
+                    },
+                    new ColumnSeries<decimal>()
+                    {
+                        Name = _("Expense"),
+                        Values = expenseValues.ToArray()
+                    }
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis()
+                    {
+                        Labels = groupNames.ToArray(),
+                        LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
+                    }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis()
+                    {
+                        LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
+                    }
+                },
+                LegendPosition = LegendPosition.Top,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black)
+            };
+        }
+        if (chart != null)
+        {
+            if (width > 0)
+            {
+                chart.Width = width;
+            }
+            if (height > 0)
+            {
+                chart.Height = height;
+            }
+            return chart.GetImage().Encode().ToArray();
+        }
+        return Array.Empty<byte>();
     }
 
     /// <summary>
