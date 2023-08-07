@@ -105,6 +105,15 @@ Adw.ApplicationWindow _root {
         active: true;
         visible: false;
       }
+      
+      [start]
+      Gtk.ToggleButton _graphToggleButton {
+        icon-name: "dock-top-symbolic";
+        tooltip-text: _("Toggle Graphs");
+        active: true;
+        visible: false;
+      }
+
 
       [end]
       Gtk.MenuButton {

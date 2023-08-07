@@ -80,12 +80,14 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _visualizeGroup;
     [Gtk.Connect] private readonly Gtk.Button _graphBackButton;
     [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseByGroupImage;
+    [Gtk.Connect] private readonly Gtk.Separator _visualizeSeparator;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -99,7 +101,7 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public Adw.TabPage Page { get; init; }
 
-    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
+    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
         _parentWindow = parentWindow;
@@ -129,7 +131,9 @@ public partial class AccountView : Adw.Bin
         };
         //Build UI
         builder.Connect(this);
-        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
+        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnGraphToggle.BindProperty("active", _visualizeGroup, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
@@ -328,8 +332,9 @@ public partial class AccountView : Adw.Bin
     /// <param name="parentWindow">MainWindow</param>
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui"), controller, parentWindow, parentTabView, btnFlapToggle, updateSubtitle)
+    /// <param name="btnGraphToggle">Gtk.ToggleButton</param>
+    /// <param name="updateSubtitle">An Action callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui"), controller, parentWindow, parentTabView, btnFlapToggle, btnGraphToggle, updateSubtitle)
     {
     }
 
