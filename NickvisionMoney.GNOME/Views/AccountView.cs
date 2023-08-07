@@ -506,11 +506,10 @@ public partial class AccountView : Adw.Bin
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
             transferDialog.Present();
-            transferDialog.OnApply += async (sender, e) =>
+            transferDialog.OnApply += async (s, ex) =>
             {
-                transferDialog.SetVisible(false);
                 await _controller.SendTransferAsync(transferController.Transfer);
-                transferDialog.Close();
+                transferDialog.Destroy();
             };
         }
         else
@@ -623,11 +622,16 @@ public partial class AccountView : Adw.Bin
             {
                 path += ".pdf";
             }
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
-            dialog.Present();
+            var dialog = Adw.MessageDialog.New(_parentWindow, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("no", _("No"));
+            dialog.SetDefaultResponse("no");
+            dialog.SetCloseResponse("no");
+            dialog.AddResponse("yes", _("Yes"));
+            dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Suggested);
             dialog.OnResponse += async (sender, e) =>
             {
-                if (dialog.Response == MessageDialogResponse.Suggested)
+                if (e.Response == "yes")
                 {
                     var tcs = new TaskCompletionSource<string?>();
                     var newPasswordDialog = new NewPasswordDialog(_parentWindow, _("PDF Password"), tcs);
@@ -641,6 +645,7 @@ public partial class AccountView : Adw.Bin
                 }
                 dialog.Destroy();
             };
+            dialog.Present();
         }
         catch { }
     }
@@ -655,15 +660,14 @@ public partial class AccountView : Adw.Bin
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         accountSettingsDialog.Present();
-        accountSettingsDialog.OnApply += (sender, e) =>
+        accountSettingsDialog.OnApply += (s, ex) =>
         {
-            accountSettingsDialog.SetVisible(false);
             _controller.UpdateMetadata(accountSettingsController.Metadata);
             if (accountSettingsController.NewPassword != null)
             {
                 _controller.SetPassword(accountSettingsController.NewPassword);
             }
-            accountSettingsDialog.Close();
+            accountSettingsDialog.Destroy();
         };
     }
 
@@ -677,9 +681,8 @@ public partial class AccountView : Adw.Bin
         var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Present();
-        transactionDialog.OnApply += async (sender, e) =>
+        transactionDialog.OnApply += async (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -687,15 +690,15 @@ public partial class AccountView : Adw.Bin
                 {
                     await _controller.AddTransactionAsync(transactionController.Transaction);
                 }
-                catch (Exception ex)
+                catch (Exception x)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(x.Message);
+                    Console.WriteLine(x.StackTrace);
                 }
             });
-            transactionController.Dispose();
-            transactionDialog.Close();
+            transactionDialog.Destroy();
         };
+        transactionDialog.OnDestroy += (s, ex) => transactionController.Dispose();
     }
 
     /// <summary>
@@ -706,10 +709,8 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Present();
         transactionDialog.OnApply += async (sender, e) =>
         {
-            transactionDialog.SetVisible(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -723,9 +724,10 @@ public partial class AccountView : Adw.Bin
                     Console.WriteLine(ex.StackTrace);
                 }
             });
-            transactionController.Dispose();
-            transactionDialog.Close();
+            transactionDialog.Destroy();
         };
+        transactionDialog.OnDestroy += (sender, e) => transactionController.Dispose();
+        transactionDialog.Present();
     }
 
     /// <summary>
@@ -737,10 +739,8 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Present();
-        transactionDialog.OnApply += async (sender, e) =>
+        transactionDialog.OnApply += async (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
             if (transactionController.CopyRequested)
             {
                 CopyTransaction(transactionController.Transaction);
@@ -750,13 +750,16 @@ public partial class AccountView : Adw.Bin
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."), _("Cancel"), _("Disassociate Existing"), _("Delete Existing"));
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    dialog.Present();
-                    dialog.OnResponse += async (sender, e) =>
+                    var dialog = Adw.MessageDialog.New(_parentWindow, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."));
+                    dialog.SetIconName(_controller.AppInfo.ID);
+                    dialog.AddResponse("cancel", _("Cancel"));
+                    dialog.SetDefaultResponse("cancel");
+                    dialog.SetCloseResponse("cancel");
+                    dialog.AddResponse("disassociate", _("Disassociate Existing"));
+                    dialog.AddResponse("delete", _("Delete Existing"));
+                    dialog.OnResponse += async (ss, exx) =>
                     {
-                        if (dialog.Response == MessageDialogResponse.Suggested)
+                        if (exx.Response == "delete")
                         {
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
@@ -766,14 +769,14 @@ public partial class AccountView : Adw.Bin
                                     await _controller.DeleteGeneratedTransactionsAsync(id);
                                     await _controller.UpdateTransactionAsync(transactionController.Transaction);
                                 }
-                                catch (Exception ex)
+                                catch (Exception x)
                                 {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
+                                    Console.WriteLine(x.Message);
+                                    Console.WriteLine(x.StackTrace);
                                 }
                             });
                         }
-                        else if (dialog.Response == MessageDialogResponse.Destructive)
+                        else if (exx.Response == "disassociate")
                         {
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
@@ -782,42 +785,49 @@ public partial class AccountView : Adw.Bin
                                 {
                                     await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
                                 }
-                                catch (Exception ex)
+                                catch (Exception x)
                                 {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
+                                    Console.WriteLine(x.Message);
+                                    Console.WriteLine(x.StackTrace);
                                 }
                             });
                         }
                         dialog.Destroy();
+                        transactionDialog.Destroy();
                     };
+                    dialog.Present();
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Update Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nUpdating only the source transaction will disassociate\ngenerated transactions from the source."), _("Cancel"), _("Update Only Source"), _("Update Source and Generated"));
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    dialog.Present();
-                    dialog.OnResponse += async (sender, e) =>
+                    var dialog = Adw.MessageDialog.New(_parentWindow, _("Update Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nUpdating only the source transaction will disassociate\ngenerated transactions from the source."));
+                    dialog.SetIconName(_controller.AppInfo.ID);
+                    dialog.AddResponse("cancel", _("Cancel"));
+                    dialog.SetDefaultResponse("cancel");
+                    dialog.SetCloseResponse("cancel");
+                    dialog.AddResponse("source", _("Update Only Source"));
+                    dialog.AddResponse("gen", _("Update Source and Generated"));
+                    dialog.OnResponse += async (ss, exx) =>
                     {
-                        if (dialog.Response != MessageDialogResponse.Cancel)
+                        if (exx.Response != "cancel")
                         {
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
                                 try
                                 {
-                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
+                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, exx.Response == "gen");
                                 }
-                                catch (Exception ex)
+                                catch (Exception x)
                                 {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
+                                    Console.WriteLine(x.Message);
+                                    Console.WriteLine(x.StackTrace);
                                 }
                             });
                         }
                         dialog.Destroy();
+                        transactionDialog.Destroy();
                     };
+                    dialog.Present();
                 }
             }
             else
@@ -829,72 +839,80 @@ public partial class AccountView : Adw.Bin
                     {
                         await _controller.UpdateTransactionAsync(transactionController.Transaction);
                     }
-                    catch (Exception ex)
+                    catch (Exception x)
                     {
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine(ex.StackTrace);
+                        Console.WriteLine(x.Message);
+                        Console.WriteLine(x.StackTrace);
                     }
                 });
+                transactionDialog.Destroy();
             }
-            transactionController.Dispose();
-            transactionDialog.Close();
         };
-        transactionDialog.OnDelete += (sender, e) =>
+        transactionDialog.OnDelete += (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
             if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
-                dialog.UnsetDestructiveApperance();
-                dialog.UnsetSuggestedApperance();
-                dialog.Present();
-                dialog.OnResponse += async (sender, e) =>
+                var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."));
+                dialog.SetIconName(_controller.AppInfo.ID);
+                dialog.AddResponse("cancel", _("Cancel"));
+                dialog.SetDefaultResponse("cancel");
+                dialog.SetCloseResponse("cancel");
+                dialog.AddResponse("source", _("Delete Only Source"));
+                dialog.AddResponse("gen", _("Delete Source and Generated"));
+                dialog.OnResponse += async (ss, exx) =>
                 {
-                    if (dialog.Response != MessageDialogResponse.Cancel)
+                    if (exx.Response != "cancel")
                     {
                         _viewStack.SetVisibleChildName("spinner");
                         await Task.Run(async () =>
                         {
                             try
                             {
-                                await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
+                                await _controller.DeleteSourceTransactionAsync(id, exx.Response == "gen");
                             }
-                            catch (Exception ex)
+                            catch (Exception x)
                             {
-                                Console.WriteLine(ex.Message);
-                                Console.WriteLine(ex.StackTrace);
+                                Console.WriteLine(x.Message);
+                                Console.WriteLine(x.StackTrace);
                             }
                         });
-                        transactionController.Dispose();
-                        transactionDialog.Close();
+                        transactionDialog.Destroy();
                     }
                     else
                     {
-                        transactionDialog.SetVisible(true);
+                        transactionDialog.Present();
                     }
                     dialog.Destroy();
                 };
+                dialog.Present();
             }
             else
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes"));
-                dialog.Present();
-                dialog.OnResponse += async (sender, e) =>
+                var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."));
+                dialog.SetIconName(_controller.AppInfo.ID);
+                dialog.AddResponse("no", _("No"));
+                dialog.SetDefaultResponse("no");
+                dialog.SetCloseResponse("no");
+                dialog.AddResponse("yes", _("Yes"));
+                dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Suggested);
+                dialog.OnResponse += async (ss, exx) =>
                 {
-                    if (dialog.Response == MessageDialogResponse.Destructive)
+                    if (exx.Response == "yes")
                     {
                         await _controller.DeleteTransactionAsync(id);
-                        transactionController.Dispose();
-                        transactionDialog.Close();
+                        transactionDialog.Destroy();
                     }
                     else
                     {
-                        transactionDialog.SetVisible(true);
+                        transactionDialog.Present();
                     }
                     dialog.Destroy();
                 };
+                dialog.Present();
             }
         };
+        transactionDialog.OnDestroy += (s, ex) => transactionController.Dispose();
+        transactionDialog.Present();
     }
 
     /// <summary>
@@ -906,10 +924,8 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Present();
-        groupDialog.OnApply += async (sender, e) =>
+        groupDialog.OnApply += async (s, ex) =>
         {
-            groupDialog.SetVisible(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -917,14 +933,15 @@ public partial class AccountView : Adw.Bin
                 {
                     await _controller.AddGroupAsync(groupController.Group);
                 }
-                catch (Exception ex)
+                catch (Exception x)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(x.Message);
+                    Console.WriteLine(x.StackTrace);
                 }
             });
-            groupDialog.Close();
+            groupDialog.Destroy();
         };
+        groupDialog.Present();
     }
 
     /// <summary>
@@ -936,10 +953,8 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Present();
-        groupDialog.OnApply += async (sender, e) =>
+        groupDialog.OnApply += async (s, ex) =>
         {
-            groupDialog.SetVisible(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -947,33 +962,39 @@ public partial class AccountView : Adw.Bin
                 {
                     await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged);
                 }
-                catch (Exception ex)
+                catch (Exception x)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(x.Message);
+                    Console.WriteLine(x.StackTrace);
                 }
             });
-            groupDialog.Close();
+            groupDialog.Destroy();
         };
-        groupDialog.OnDelete += (sender, e) =>
+        groupDialog.OnDelete += (s, ex) =>
         {
-            groupDialog.SetVisible(false);
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes"));
-            dialog.Present();
-            dialog.OnResponse += async (s, ex) =>
+            var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("no", _("No"));
+            dialog.SetDefaultResponse("no");
+            dialog.SetCloseResponse("no");
+            dialog.AddResponse("yes", _("Yes"));
+            dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Destructive);
+            dialog.OnResponse += async (ss, exx) =>
             {
-                if (dialog.Response == MessageDialogResponse.Destructive)
+                if (exx.Response == "yes")
                 {
                     await _controller.DeleteGroupAsync(id);
-                    groupDialog.Close();
+                    groupDialog.Destroy();
                 }
                 else
                 {
-                    groupDialog.SetVisible(true);
+                    groupDialog.Present();
                 }
                 dialog.Destroy();
             };
+            dialog.Present();
         };
+        groupDialog.Present();
     }
 
     /// <summary>

@@ -26,7 +26,13 @@ public partial class GroupDialog : Adw.Window
     private readonly Gtk.EventControllerKey _nameKeyController;
     private readonly Gtk.EventControllerKey _descriptionKeyController;
 
+    /// <summary>
+    /// Occurs when the apply button is clicked
+    /// </summary>
     public event EventHandler? OnApply;
+    /// <summary>
+    /// Occurs when the delete button is clicked
+    /// </summary>
     public event EventHandler? OnDelete;
 
     private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
@@ -100,9 +106,17 @@ public partial class GroupDialog : Adw.Window
         };
         //Buttons
         _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
-        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        _applyButton.OnClicked += (sender, e) =>
+        {
+            Close();
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
         _deleteButton.SetVisible(_controller.IsEditing);
-        _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
+        _deleteButton.OnClicked += (sender, e) =>
+        {
+            Close();
+            OnDelete?.Invoke(this, EventArgs.Empty);
+        };
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);

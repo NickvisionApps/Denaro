@@ -105,8 +105,14 @@ public partial class TransactionDialog : Adw.Window
     private readonly Gtk.EventControllerKey _amountKeyController;
     private readonly Gtk.ShortcutController _shortcutController;
 
-    public event EventHandler? OnApply;
-    public event EventHandler? OnDelete;
+    /// <summary>
+    /// Occurs when the apply button is clicked
+    /// </summary>
+    public event EventHandler<EventArgs>? OnApply;
+    /// <summary>
+    /// Occurs when the delete button is clicked
+    /// </summary>
+    public event EventHandler<EventArgs>? OnDelete;
 
     private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
@@ -150,15 +156,24 @@ public partial class TransactionDialog : Adw.Window
         }
         _titleLabel.SetLabel($"{_("Transaction")} — {idString}");
         _deleteButton.SetVisible(_controller.IsEditing);
-        _deleteButton.OnClicked += (sender, e) => OnDelete?.Invoke(this, EventArgs.Empty);
+        _deleteButton.OnClicked += (sender, e) =>
+        {
+            Close();
+            OnDelete?.Invoke(this, EventArgs.Empty);
+        };
         _copyButton.SetVisible(_controller.CanCopy);
         _copyButton.OnClicked += (sender, e) =>
         {
             _controller.CopyRequested = true;
+            Close();
             OnApply?.Invoke(this, EventArgs.Empty);
         };
         _applyButton.SetLabel(_controller.IsEditing ? _("Apply") : _("Add"));
-        _applyButton.OnClicked += (sender, e) => OnApply?.Invoke(this, EventArgs.Empty);
+        _applyButton.OnClicked += (sender, e) =>
+        {
+            Close();
+            OnApply?.Invoke(this, EventArgs.Empty);
+        };
         _backButton.OnClicked += (sender, e) =>
         {
             _stack.SetVisibleChildName("main");
