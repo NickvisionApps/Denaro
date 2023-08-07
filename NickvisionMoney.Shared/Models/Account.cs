@@ -1663,12 +1663,14 @@ public class Account : IDisposable
                                 x.RelativeColumn(1);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(1);
+                                x.RelativeColumn(1);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(3).Background(Colors.Grey.Lighten1).Text(_("Groups"));
+                            tbl.Cell().ColumnSpan(4).Background(Colors.Grey.Lighten1).Text(_("Groups"));
                             tbl.Cell().Text(_("Name")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
+                            tbl.Cell().AlignRight().Text(_("Visualize")).SemiBold();
                             //Data
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
@@ -1676,6 +1678,16 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Image(new SKPieChart()
+                                {
+                                    Background = SKColor.Empty,
+                                    Series = new ISeries[]
+                                    {
+                                        new PieSeries<decimal> { Values = new decimal[] { pair.Value.Income }, Fill = new SolidColorPaint(SKColors.Green)},
+                                        new PieSeries<decimal> { Values = new decimal[] { pair.Value.Expense }, Fill = new SolidColorPaint(SKColors.Red) }
+                                    },
+                                    LegendTextPaint = new SolidColorPaint(SKColors.Black)
+                                }.GetImage().Encode().ToArray());
                                 i++;
                             }
                         });
