@@ -333,10 +333,16 @@ Adw.Bin _root {
                 spacing: 6;
                 
                 Adw.Carousel _carousel {
-                  Gtk.Picture _incomeExpensePieImage {
+                  Gtk.DrawingArea _incomeExpensePieImage {
+                    height-request: 220;
+                    hexpand: true;
+                    vexpand: true;
                   }
                   
-                  Gtk.Picture _incomeExpenseGroupBarImage {
+                  Gtk.DrawingArea _incomeExpenseGroupBarImage {
+                    height-request: 220;
+                    hexpand: true;
+                    vexpand: true;
                   }
                   
                   styles ["card"]

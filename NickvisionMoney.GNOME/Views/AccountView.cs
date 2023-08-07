@@ -83,8 +83,8 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _graphBackButton;
     [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
-    [Gtk.Connect] private readonly Gtk.Picture _incomeExpensePieImage;
-    [Gtk.Connect] private readonly Gtk.Picture _incomeExpenseGroupBarImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseGroupBarImage;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
@@ -224,6 +224,9 @@ public partial class AccountView : Adw.Bin
             }
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
+        //Graphs images
+        _incomeExpensePieImage.SetDrawFunc(DrawPieGraph);
+        _incomeExpenseGroupBarImage.SetDrawFunc(DrawGroupBarGraph);
         //Graph Carousel Buttons
         _graphBackButton.OnClicked += (sender, e) =>
         {
@@ -399,16 +402,44 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     private void GenerateGraphs()
     {
-        //IncomeExpensePie Graph
-        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), -1, 300);
-        using var incomeExpensePieGraphBytes = GLib.Bytes.From(incomeExpensePieGraph.AsSpan());
-        using var incomeExpensePieGraphTexture = Gdk.Texture.NewFromBytes(incomeExpensePieGraphBytes);
-        _incomeExpensePieImage.SetPaintable(incomeExpensePieGraphTexture);
-        //IncomeExpenseGroupBar Graph
-        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), -1, 300);
-        using var incomeExpenseGroupBarGraphBytes = GLib.Bytes.From(incomeExpenseGroupBarGraph.AsSpan());
-        using var incomeExpenseGroupBarGraphTexture = Gdk.Texture.NewFromBytes(incomeExpenseGroupBarGraphBytes);
-        _incomeExpenseGroupBarImage.SetPaintable(incomeExpenseGroupBarGraphTexture);
+        _incomeExpensePieImage.QueueDraw();
+        _incomeExpenseGroupBarImage.QueueDraw();
+    }
+
+    /// <summary>
+    /// Drawing function for _incomeExpensePieImage
+    /// </summary>
+    /// <param name="area">Drawing area</param>
+    /// <param name="ctx">Cairo context</param>
+    /// <param name="width">Area width</param>
+    /// <param name="height">Area height</param>
+    private void DrawPieGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
+    {
+        var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), width, height);
+        var loader = GdkPixbuf.PixbufLoader.New();
+        loader.Write(incomeExpensePieGraph);
+        loader.Close();
+        var pixbuf = loader.GetPixbuf();
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf!, 0, 0);
+        ctx.Paint();
+    }
+
+    /// <summary>
+    /// Drawing function for _incomeExpenseGroupBarImage
+    /// </summary>
+    /// <param name="area">Drawing area</param>
+    /// <param name="ctx">Cairo context</param>
+    /// <param name="width">Area width</param>
+    /// <param name="height">Area height</param>
+    private void DrawGroupBarGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
+    {
+        var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), width, height);
+        var loader = GdkPixbuf.PixbufLoader.New();
+        loader.Write(incomeExpenseGroupBarGraph);
+        loader.Close();
+        var pixbuf = loader.GetPixbuf();
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf!, 0, 0);
+        ctx.Paint();
     }
     
     /// <summary>
