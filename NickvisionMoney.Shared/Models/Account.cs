@@ -1875,26 +1875,35 @@ public class Account : IDisposable
         }
         else if (type == GraphType.IncomeExpenseByGroup)
         {
-            var groupNames = new List<string>();
-            var incomeValues = new List<decimal>();
-            var expenseValues = new List<decimal>();
-            foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
+            var data = new Dictionary<string, decimal[]>();
+            foreach (var id in filteredIds)
             {
-                groupNames.Add(pair.Value.Name);
-                incomeValues.Add(pair.Value.Income);
-                expenseValues.Add(pair.Value.Expense);
+                var transaction = Transactions[id];
+                var groupName = Groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
+                if (!data.ContainsKey(groupName))
+                {
+                    data.Add(groupName, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[groupName][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[groupName][1] += transaction.Amount;
+                }
             }
             chart = new SKCartesianChart()
             {
                 Background = SKColor.Empty,
                 Series = new ISeries[]
                 {
-                    new ColumnSeries<decimal>() { Name = _("Income"), Values = incomeValues.ToArray(), Fill = new SolidColorPaint(SKColors.Green) },
-                    new ColumnSeries<decimal>() { Name = _("Expense"), Values = expenseValues.ToArray(), Fill = new SolidColorPaint(SKColors.Red) },
+                    new ColumnSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[0]).ToArray(), Fill = new SolidColorPaint(SKColors.Green) },
+                    new ColumnSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[1]).ToArray(), Fill = new SolidColorPaint(SKColors.Red) },
                 },
                 XAxes = new Axis[]
                 {
-                    new Axis() { Labels = groupNames.ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                    new Axis() { Labels = data.Keys.OrderBy(x => x == _("Ungrouped") ? " " : x).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
                 },
                 YAxes = new Axis[]
                 {
