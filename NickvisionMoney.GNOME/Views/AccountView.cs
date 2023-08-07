@@ -416,7 +416,7 @@ public partial class AccountView : Adw.Bin
     private void DrawPieGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
     {
         var incomeExpensePieGraph = _controller.GenerateGraph(GraphType.IncomeExpensePie, Adw.StyleManager.GetDefault().GetDark(), width, height);
-        var loader = GdkPixbuf.PixbufLoader.New();
+        using var loader = GdkPixbuf.PixbufLoader.New();
         loader.Write(incomeExpensePieGraph);
         loader.Close();
         var pixbuf = loader.GetPixbuf();
@@ -434,7 +434,7 @@ public partial class AccountView : Adw.Bin
     private void DrawGroupBarGraph(Gtk.DrawingArea area, Cairo.Context ctx, int width, int height)
     {
         var incomeExpenseGroupBarGraph = _controller.GenerateGraph(GraphType.IncomeExpenseGroupBar, Adw.StyleManager.GetDefault().GetDark(), width, height);
-        var loader = GdkPixbuf.PixbufLoader.New();
+        using var loader = GdkPixbuf.PixbufLoader.New();
         loader.Write(incomeExpenseGroupBarGraph);
         loader.Close();
         var pixbuf = loader.GetPixbuf();
@@ -616,9 +616,12 @@ public partial class AccountView : Adw.Bin
         try
         {
             var file = await openFileDialog.OpenAsync(_parentWindow);
+            var oldPage = _viewStack.GetVisibleChildName();
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
         }
         catch { }
     }
@@ -909,9 +912,12 @@ public partial class AccountView : Adw.Bin
         var groupDialog = new GroupDialog(groupController, _parentWindow);
         groupDialog.OnApply += async (s, ex) =>
         {
+            var oldPage = _viewStack.GetVisibleChildName();
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
             groupDialog.Destroy();
         };
         groupDialog.Present();
@@ -928,9 +934,12 @@ public partial class AccountView : Adw.Bin
         var groupDialog = new GroupDialog(groupController, _parentWindow);
         groupDialog.OnApply += async (s, ex) =>
         {
+            var oldPage = _viewStack.GetVisibleChildName();
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
             groupDialog.Destroy();
         };
         groupDialog.OnDelete += (s, ex) =>
