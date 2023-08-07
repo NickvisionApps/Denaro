@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-07 08:59-0400\n"
+"POT-Creation-Date: 2023-08-07 10:12-0400\n"
 "PO-Revision-Date: 2023-07-29 12:14+0000\n"
 "Last-Translator: Yuxin Ren <yx_Ren2018@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -161,36 +161,36 @@ msgstr ""
 msgid "Currency"
 msgstr "货币"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:334
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:334
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:221
 msgid "Currency Code"
 msgstr "货币代码"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:368
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:350
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:368
 msgid "Currency Code (Empty)"
 msgstr "货币代码 (空)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:332
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:323
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:332
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:165
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:217
 msgid "Currency Symbol"
 msgstr "货币符号"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:356
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:340
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:356
 msgid "Currency Symbol (Empty)"
 msgstr "货币符号 (空)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:362
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:396
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:345
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:374
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:362
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:388
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:396
 msgid "Currency Symbol (Invalid)"
 msgstr "货币符号 (无效)"
 
@@ -207,22 +207,22 @@ msgstr "日期"
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:336
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:336
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:173
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:225
 msgid "Decimal Separator"
 msgstr "小数点分隔符"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:374
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:355
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:374
 msgid "Decimal Separator (Empty)"
 msgstr "小数点分隔符 (空)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:380
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:360
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:380
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:390
 msgid "Decimal Separator (Invalid)"
 msgstr "小数点分隔符 (无效)"
 
@@ -291,8 +291,8 @@ msgid "Disassociate Existing"
 msgstr "Disassociate Existing"
 
 #: ../../../Models/Account.cs:1625 ../../../Models/Account.cs:1753
-#: ../../../Models/Account.cs:1870 ../../../Models/Account.cs:1893
-#: ../../../Models/Account.cs:1948
+#: ../../../Models/Account.cs:1870 ../../../Models/Account.cs:1902
+#: ../../../Models/Account.cs:1957
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:111
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
@@ -348,17 +348,17 @@ msgstr "群组"
 msgid "Group Name"
 msgstr "组名"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:338
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:338
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:189
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Group Separator"
 msgstr "组别分隔符"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:382
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:398
 msgid "Group Separator (Invalid)"
 msgstr "组别分隔符 (无效)"
 
@@ -395,8 +395,8 @@ msgid_plural "Imported {0} transactions from file."
 msgstr[0] "从文件导入 {0} 笔交易"
 
 #: ../../../Models/Account.cs:1623 ../../../Models/Account.cs:1752
-#: ../../../Models/Account.cs:1869 ../../../Models/Account.cs:1892
-#: ../../../Models/Account.cs:1947
+#: ../../../Models/Account.cs:1869 ../../../Models/Account.cs:1901
+#: ../../../Models/Account.cs:1956
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:90
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
@@ -447,8 +447,8 @@ msgstr "永不"
 msgid "Nicholas Logozzo"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:328
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
+#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:328
 #: ../../../Models/Account.cs:1801
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision的Denaro账户"
@@ -720,7 +720,8 @@ msgstr "無法淩駕已開啟的帳戶."
 #: ../../../Controllers/AccountViewController.cs:479
 #: ../../../Controllers/AccountViewController.cs:825
 #: ../../../Models/Account.cs:473 ../../../Models/Account.cs:1676
-#: ../../../Models/Account.cs:1756 ../../../Models/Account.cs:1881
+#: ../../../Models/Account.cs:1756 ../../../Models/Account.cs:1901
+#: ../../../Models/Account.cs:1902 ../../../Models/Account.cs:1906
 msgid "Ungrouped"
 msgstr "無組群"
 
@@ -761,8 +762,8 @@ msgstr ""
 msgid "Yes"
 msgstr "是"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:99
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:195
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:99
 msgid "Your system reported that your currency is"
 msgstr "Your system reported that your currency is"
 
