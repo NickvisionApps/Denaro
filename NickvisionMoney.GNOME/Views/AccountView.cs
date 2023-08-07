@@ -565,18 +565,7 @@ public partial class AccountView : Adw.Bin
             var file = await openFileDialog.OpenAsync(_parentWindow);
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.ImportFromFileAsync(file!.GetPath() ?? "");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
+            await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
         }
         catch { }
     }
@@ -693,18 +682,7 @@ public partial class AccountView : Adw.Bin
         {
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddTransactionAsync(transactionController.Transaction);
-                }
-                catch (Exception x)
-                {
-                    Console.WriteLine(x.Message);
-                    Console.WriteLine(x.StackTrace);
-                }
-            });
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
             transactionDialog.Destroy();
         };
         transactionDialog.OnDestroy += (s, ex) => transactionController.Dispose();
@@ -722,18 +700,7 @@ public partial class AccountView : Adw.Bin
         {
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddTransactionAsync(transactionController.Transaction);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
             transactionDialog.Destroy();
         };
         transactionDialog.OnDestroy += (sender, e) => transactionController.Dispose();
@@ -775,34 +742,15 @@ public partial class AccountView : Adw.Bin
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
-                                try
-                                {
-                                    await _controller.DeleteGeneratedTransactionsAsync(id);
-                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                                }
-                                catch (Exception x)
-                                {
-                                    Console.WriteLine(x.Message);
-                                    Console.WriteLine(x.StackTrace);
-                                }
+                                await _controller.DeleteGeneratedTransactionsAsync(id);
+                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
                             });
                         }
                         else if (exx.Response == "disassociate")
                         {
                             _paneScroll.SetSensitive(false);
                             _viewStack.SetVisibleChildName("spinner");
-                            await Task.Run(async () =>
-                            {
-                                try
-                                {
-                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
-                                }
-                                catch (Exception x)
-                                {
-                                    Console.WriteLine(x.Message);
-                                    Console.WriteLine(x.StackTrace);
-                                }
-                            });
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
                         }
                         dialog.Destroy();
                         transactionDialog.Destroy();
@@ -824,18 +772,7 @@ public partial class AccountView : Adw.Bin
                         {
                             _paneScroll.SetSensitive(false);
                             _viewStack.SetVisibleChildName("spinner");
-                            await Task.Run(async () =>
-                            {
-                                try
-                                {
-                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, exx.Response == "gen");
-                                }
-                                catch (Exception x)
-                                {
-                                    Console.WriteLine(x.Message);
-                                    Console.WriteLine(x.StackTrace);
-                                }
-                            });
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, exx.Response == "gen"));
                         }
                         dialog.Destroy();
                         transactionDialog.Destroy();
@@ -847,18 +784,7 @@ public partial class AccountView : Adw.Bin
             {
                 _paneScroll.SetSensitive(false);
                 _viewStack.SetVisibleChildName("spinner");
-                await Task.Run(async () =>
-                {
-                    try
-                    {
-                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                    }
-                    catch (Exception x)
-                    {
-                        Console.WriteLine(x.Message);
-                        Console.WriteLine(x.StackTrace);
-                    }
-                });
+                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
                 transactionDialog.Destroy();
             }
         };
@@ -879,18 +805,7 @@ public partial class AccountView : Adw.Bin
                     {
                         _paneScroll.SetSensitive(false);
                         _viewStack.SetVisibleChildName("spinner");
-                        await Task.Run(async () =>
-                        {
-                            try
-                            {
-                                await _controller.DeleteSourceTransactionAsync(id, exx.Response == "gen");
-                            }
-                            catch (Exception x)
-                            {
-                                Console.WriteLine(x.Message);
-                                Console.WriteLine(x.StackTrace);
-                            }
-                        });
+                        await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, exx.Response == "gen"));
                         transactionDialog.Destroy();
                     }
                     else
@@ -943,18 +858,7 @@ public partial class AccountView : Adw.Bin
         {
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddGroupAsync(groupController.Group);
-                }
-                catch (Exception x)
-                {
-                    Console.WriteLine(x.Message);
-                    Console.WriteLine(x.StackTrace);
-                }
-            });
+            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
             groupDialog.Destroy();
         };
         groupDialog.Present();
@@ -973,18 +877,7 @@ public partial class AccountView : Adw.Bin
         {
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged);
-                }
-                catch (Exception x)
-                {
-                    Console.WriteLine(x.Message);
-                    Console.WriteLine(x.StackTrace);
-                }
-            });
+            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged));
             groupDialog.Destroy();
         };
         groupDialog.OnDelete += (s, ex) =>
