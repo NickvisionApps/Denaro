@@ -309,8 +309,9 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
+        _paneScroll.SetSensitive(false);
         _viewStack.SetVisibleChildName("spinner");
-        await _controller.StartupAsync();
+        await Task.Run(async () => await _controller.StartupAsync());
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
@@ -340,6 +341,7 @@ public partial class AccountView : Adw.Bin
             _incomeLabel.SetLabel(_controller.AccountFilteredIncomeString);
             _expenseLabel.SetLabel(_controller.AccountFilteredExpenseString);
             //Transactions
+            _paneScroll.SetSensitive(true);
             if (_controller.Transactions.Count > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
@@ -561,6 +563,7 @@ public partial class AccountView : Adw.Bin
         try
         {
             var file = await openFileDialog.OpenAsync(_parentWindow);
+            _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -688,6 +691,7 @@ public partial class AccountView : Adw.Bin
         transactionDialog.Present();
         transactionDialog.OnApply += async (s, ex) =>
         {
+            _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -716,6 +720,7 @@ public partial class AccountView : Adw.Bin
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.OnApply += async (sender, e) =>
         {
+            _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -766,6 +771,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (exx.Response == "delete")
                         {
+                            _paneScroll.SetSensitive(false);
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
@@ -783,6 +789,7 @@ public partial class AccountView : Adw.Bin
                         }
                         else if (exx.Response == "disassociate")
                         {
+                            _paneScroll.SetSensitive(false);
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
@@ -815,6 +822,7 @@ public partial class AccountView : Adw.Bin
                     {
                         if (exx.Response != "cancel")
                         {
+                            _paneScroll.SetSensitive(false);
                             _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
@@ -837,6 +845,7 @@ public partial class AccountView : Adw.Bin
             }
             else
             {
+                _paneScroll.SetSensitive(false);
                 _viewStack.SetVisibleChildName("spinner");
                 await Task.Run(async () =>
                 {
@@ -868,6 +877,7 @@ public partial class AccountView : Adw.Bin
                 {
                     if (exx.Response != "cancel")
                     {
+                        _paneScroll.SetSensitive(false);
                         _viewStack.SetVisibleChildName("spinner");
                         await Task.Run(async () =>
                         {
@@ -931,6 +941,7 @@ public partial class AccountView : Adw.Bin
         var groupDialog = new GroupDialog(groupController, _parentWindow);
         groupDialog.OnApply += async (s, ex) =>
         {
+            _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {
@@ -960,6 +971,7 @@ public partial class AccountView : Adw.Bin
         var groupDialog = new GroupDialog(groupController, _parentWindow);
         groupDialog.OnApply += async (s, ex) =>
         {
+            _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () =>
             {

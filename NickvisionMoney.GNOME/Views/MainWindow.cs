@@ -87,10 +87,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.AccountLoginAsync += AccountLoginAsync;
         _controller.AccountAdded += AccountAdded;
-        _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
+        _controller.RecentAccountsChanged += (sender, e) =>
         {
-            UpdateRecentAccountsOnStart();
-            UpdateRecentAccounts();
+            GLib.Functions.IdleAdd(0, () =>
+            {
+                UpdateRecentAccountsOnStart();
+                UpdateRecentAccounts();
+                return false;
+            });
         };
         OnNotify += (sender, e) =>
         {
