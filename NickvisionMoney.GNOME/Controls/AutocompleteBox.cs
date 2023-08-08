@@ -9,7 +9,10 @@ namespace NickvisionMoney.GNOME.Controls;
 /// </summary>
 public class AutocompleteBox<T> : Gtk.Box
 {
+    private readonly Adw.EntryRow _parent;
     private readonly List<Gtk.Widget> _rows;
+    private readonly Gtk.EventControllerKey _parentKeyController;
+    private bool _canHide;
     
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
     
@@ -19,17 +22,57 @@ public class AutocompleteBox<T> : Gtk.Box
     /// Constructs an AutocompleteDialog
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
-    private AutocompleteBox(Gtk.Builder builder) : base(builder.GetPointer("_root"), false)
+    /// <param name="parent">Adw.EntryRow</param>
+    private AutocompleteBox(Gtk.Builder builder, Adw.EntryRow parent) : base(builder.GetPointer("_root"), false)
     {
+        _parent = parent;
         _rows = new List<Gtk.Widget>();
+        _canHide = true;
         //Build UI
         builder.Connect(this);
+        _parentKeyController = Gtk.EventControllerKey.New();
+        _parentKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _parentKeyController.OnKeyPressed += (sender, e) =>
+        {
+            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+            {
+                if(GetVisible())
+                {
+                    AcceptSuggestion(0);
+                    return true;
+                }
+            }
+            if(e.Keyval == 65364) //down arrow
+            {
+                if(GetVisible())
+                {
+                    _canHide = false;
+                    GrabFocus();
+                    return true;
+                }
+            }
+            return false;
+        };
+        _parent.AddController(_parentKeyController);
+        _parent.OnStateFlagsChanged += (sender, e) =>
+        {
+            if(!_canHide)
+            {
+                _canHide = true;
+            }
+            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            {
+                _parent.SetActivatesDefault(true);
+                SetVisible(false);
+            }
+        };
     }
     
     /// <summary>
     /// Constructs an AutocompleteDialog
     /// </summary>
-    public AutocompleteBox() : this(Builder.FromFile("autocomplete_box.ui"))
+    /// <param name="parent">Adw.EntryRow</param>
+    public AutocompleteBox(Adw.EntryRow parent) : this(Builder.FromFile("autocomplete_box.ui"), parent)
     {
     }
     

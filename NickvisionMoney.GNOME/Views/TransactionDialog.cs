@@ -188,7 +188,7 @@ public partial class TransactionDialog : Adw.Window
             _copyButton.SetVisible(false);
         };
         //Description
-        _autocompleteBox = new AutocompleteBox<Transaction>();
+        _autocompleteBox = new AutocompleteBox<Transaction>(_descriptionRow);
         _autocompleteBox.SetSizeRequest(378, -1);
         _autocompleteBox.SetMarginTop(66);
         _autocompleteBox.SuggestionAccepted += (sender, e) =>
@@ -225,18 +225,6 @@ public partial class TransactionDialog : Adw.Window
                 }
             }
         };
-        _descriptionRow.OnStateFlagsChanged += (sender, e) =>
-        {
-            if(!_canHideAutobox)
-            {
-                _canHideAutobox = true;
-            }
-            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_descriptionRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
-            {
-                _descriptionRow.SetActivatesDefault(true);
-                _autocompleteBox.SetVisible(false);
-            }
-        };
         _descriptionKeyController = Gtk.EventControllerKey.New();
         _descriptionKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _descriptionKeyController.OnKeyPressed += (sender, e) =>
@@ -244,23 +232,6 @@ public partial class TransactionDialog : Adw.Window
             if (e.Keyval == 59) //semicolon
             {
                 return true;
-            }
-            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
-            {
-                if(_autocompleteBox.GetVisible())
-                {
-                    _autocompleteBox.AcceptSuggestion(0);
-                    return true;
-                }
-            }
-            if(e.Keyval == 65364) //down arrow
-            {
-                if(_autocompleteBox.GetVisible())
-                {
-                    _canHideAutobox = false;
-                    _autocompleteBox.GrabFocus();
-                    return true;
-                }
             }
             return false;
         };
