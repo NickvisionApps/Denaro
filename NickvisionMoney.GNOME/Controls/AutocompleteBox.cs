@@ -13,6 +13,7 @@ public class AutocompleteBox<T> : Gtk.Box
     private readonly List<Gtk.Widget> _rows;
     private readonly Gtk.EventControllerKey _parentKeyController;
     private bool _canHide;
+    private int _downCount;
     
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
     
@@ -28,6 +29,7 @@ public class AutocompleteBox<T> : Gtk.Box
         _parent = parent;
         _rows = new List<Gtk.Widget>();
         _canHide = true;
+        _downCount = 0;
         //Build UI
         builder.Connect(this);
         _parentKeyController = Gtk.EventControllerKey.New();
@@ -46,6 +48,7 @@ public class AutocompleteBox<T> : Gtk.Box
             {
                 if(GetVisible())
                 {
+                    _downCount = 1;
                     _canHide = false;
                     GrabFocus();
                     return true;
@@ -92,6 +95,7 @@ public class AutocompleteBox<T> : Gtk.Box
             _group.Remove(row);
         }
         _rows.Clear();
+        _downCount = 0;
         foreach(var suggestion in suggestions)
         {
             var row = Adw.ActionRow.New();
@@ -112,9 +116,25 @@ public class AutocompleteBox<T> : Gtk.Box
                     row.Activate();
                     return true;
                 }
+                if(e.Keyval == 65364) //down arrow
+                {
+                    _downCount++;
+                    _canHide = _downCount > _rows.Count;
+                }
                 return false;
             };
             row.AddController(keyController);
+            row.OnStateFlagsChanged += (sender, e) =>
+            {
+                if(!_canHide)
+                {
+                    _canHide = true;
+                }
+                else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+                {
+                    SetVisible(false);
+                }
+            };
             _rows.Add(row);
             _group.Add(row);
         }
