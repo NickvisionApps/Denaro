@@ -43,7 +43,8 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Added the option to select the entire current month as the date range filter
+            @"* Added graph visuals to the Account view as well as in exported PDFs
+              * Added the option to select the entire current month as the date range filter
               * Improved the transaction description suggestion algorithm with fuzzy search
               * Fixed an issue where the help button in the import toast was not working
               * Fixed an issue where Denaro would crash if an account had incorrect formatted metadata

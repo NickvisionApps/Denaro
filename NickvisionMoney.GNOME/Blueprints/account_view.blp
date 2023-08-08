@@ -265,117 +265,179 @@ Adw.Bin _root {
       
       styles ["background"]
     };
+    
     separator: Gtk.Separator {
       orientation: vertical;
     };
     
-    Gtk.Overlay {
+    content: Gtk.Overlay {
       vexpand: true;
-
-      Gtk.Overlay _mainOverlay {
-        vexpand: true;
+      
+      child: Adw.ViewStack _viewStack {
+        Adw.ViewStackPage {
+          name: "spinner";
+          child: Gtk.Spinner {
+            hexpand: true;
+            vexpand: true;
+            halign: center;
+            valign: center;
+            spinning: true;
+            width-request: 40;
+            height-request: 40;
+          };
+        }
+      
+        Adw.ViewStackPage {
+          name: "no-transactions";
+          child: Adw.StatusPage _noTransactionsStatusPage {
+            icon-name: "money-none-symbolic";
+            hexpand: true;
+            vexpand: true;
+          };
+        }
         
-        Gtk.Box {
-          orientation: vertical;
-          hexpand: true;
-          vexpand: true;
-          
-          Gtk.Box _transactionsHeaderBox {
-            orientation: horizontal;
+        Adw.ViewStackPage {
+          name: "transactions";
+          child: Gtk.Box {
+            orientation: vertical;
+            hexpand: true;
+            vexpand: true;
             
-            Adw.PreferencesGroup _transactionsGroup {
-              title: _("Transactions");
-              margin-top: 7;
+            Adw.PreferencesGroup _visualizeGroup {
+              title: _("Visualize");
+              margin-top: 4;
               margin-start: 10;
               margin-end: 10;
               header-suffix: Gtk.Box {
                 orientation: horizontal;
-                spacing: 6;
                 
-                Gtk.DropDown _sortTransactionByDropDown {}
-                
-                Gtk.Box {
-                  orientation: horizontal;
+                Gtk.Button _graphBackButton {
                   valign: center;
+                  icon-name: "go-previous-symbolic";
+                  tooltip-text: _("Back");
                   
-                  Gtk.ToggleButton _sortFirstToLastButton {
-                    icon-name: "view-sort-descending-symbolic";
-                    tooltip-text: _("Sort From First To Last");
-                    active: bind _sortLastToFirstButton.active inverted bidirectional;
-                  }
+                  styles ["flat"]
+                }
+                
+                Gtk.Button _graphNextButton {
+                  valign: center;
+                  icon-name: "go-next-symbolic";
+                  tooltip-text: _("Next");
                   
-                  Gtk.ToggleButton _sortLastToFirstButton {
-                    icon-name: "view-sort-ascending-symbolic";
-                    tooltip-text: _("Sort From Last To First");
-                  }
-                  
-                  styles ["linked"]
+                  styles ["flat"]
                 }
               };
+              
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 6;
+                
+                Adw.Carousel _carousel {
+                  Gtk.DrawingArea _incomeExpenseOverTimeImage {
+                    height-request: 300;
+                    hexpand: true;
+                  }
+                  
+                  Gtk.DrawingArea _incomeExpensePieImage {
+                    height-request: 200;
+                    hexpand: true;
+                  }
+                  
+                  Gtk.DrawingArea _incomeExpensePerGroupImage {
+                    height-request: 300;
+                    hexpand: true;
+                  }
+
+                  Gtk.DrawingArea _incomeExpensePerGroupPieImage {
+                    height-request: 300;
+                    hexpand: true;
+                  }
+                  
+                  styles ["card"]
+                }
+                
+                Adw.CarouselIndicatorDots {
+                  halign: center;
+                  carousel: _carousel;
+                }
+              }
             }
-          }
-                 
-          Gtk.ScrolledWindow _transactionsScroll {
-            width-request: 300;
-            height-request: 360;
-            min-content-height: 360;
-            vexpand: true;
-            visible: false;
             
-            Gtk.FlowBox _flowBox {
-              homogeneous: true;
-              column-spacing: 10;
-              row-spacing: 10;
-              margin-start: 10;
-              margin-end: 10;
-              margin-bottom: 60;
-              halign: fill;
-              valign: start;
-              selection-mode: none;
+            Gtk.Separator _visualizeSeparator {
+              orientation: horizontal;
+              margin-top: 10;
             }
-          }
-          
-          Adw.StatusPage _noTransactionsStatusPage {
-            icon-name: "money-none-symbolic";
-            vexpand: true;
-            width-request: 300;
-            height-request: 360;
-            margin-bottom: 60;
-            visible: false;
-          }
+            
+            Gtk.Box {
+              orientation: horizontal;
+              
+              Adw.PreferencesGroup _transactionsGroup {
+                title: _("Transactions");
+                margin-top: 6;
+                margin-start: 10;
+                margin-end: 10;
+                margin-bottom: 10;
+                header-suffix: Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+                  
+                  Gtk.DropDown _sortTransactionByDropDown {}
+                  
+                  Gtk.Box _transactionsHeaderBox {
+                    orientation: horizontal;
+                    valign: center;
+                    
+                    Gtk.ToggleButton _sortFirstToLastButton {
+                      icon-name: "view-sort-descending-symbolic";
+                      tooltip-text: _("Sort From First To Last");
+                      active: bind _sortLastToFirstButton.active inverted bidirectional;
+                    }
+                    
+                    Gtk.ToggleButton _sortLastToFirstButton {
+                      icon-name: "view-sort-ascending-symbolic";
+                      tooltip-text: _("Sort From Last To First");
+                    }
+                    
+                    styles ["linked"]
+                  }
+                };
+                
+                Gtk.ScrolledWindow _transactionsScroll {
+                  width-request: 300;
+                  height-request: 360;
+                  min-content-height: 360;
+                  vexpand: true;
+                  
+                  Gtk.FlowBox _transactionsFlowBox {
+                    homogeneous: true;
+                    column-spacing: 10;
+                    row-spacing: 10;
+                    halign: fill;
+                    valign: start;
+                    selection-mode: none;
+                  }
+                }
+              }
+            }
+          };
         }
-        
-        [overlay]
-        Gtk.Button {
-          tooltip-text: _("New Transaction (Ctrl+Shift+N)");
-          action-name: "account.newTransaction";
-          halign: center;
-          valign: end;
-          margin-bottom: 10;
-          
-          Adw.ButtonContent {
-            icon-name: "list-add-symbolic";
-            label: C_("Transaction", "New");
-          }
-          
-          styles ["pill", "suggested-action"] 
-        }
-      }
+      };
       
       [overlay]
-      Adw.Bin _spinnerBin {
-        hexpand: true;
-        vexpand: true;
+      Gtk.Button {
+        tooltip-text: _("New Transaction (Ctrl+Shift+N)");
+        action-name: "account.newTransaction";
+        halign: center;
+        valign: end;
+        margin-bottom: 10;
         
-        Gtk.Spinner _spinner {
-          width-request: 48;
-          height-request: 48;
-          halign: center;
-          valign: center;
-          hexpand: true;
-          vexpand: true;
+        Adw.ButtonContent {
+          icon-name: "list-add-symbolic";
+          label: C_("Transaction", "New");
         }
+        
+        styles ["pill", "suggested-action"] 
       }
-    }
+    };
   }
 }

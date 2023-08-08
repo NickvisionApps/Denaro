@@ -40,6 +40,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _viewStackAccountPopover;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _recentAccountsGroup;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _graphToggleButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _dashboardButton;
     [Gtk.Connect] private readonly Adw.Bin _dashboardBin;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
@@ -87,10 +88,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.AccountLoginAsync += AccountLoginAsync;
         _controller.AccountAdded += AccountAdded;
-        _controller.RecentAccountsChanged += (object? sender, EventArgs e) =>
+        _controller.RecentAccountsChanged += (sender, e) =>
         {
-            UpdateRecentAccountsOnStart();
-            UpdateRecentAccounts();
+            GLib.Functions.IdleAdd(0, () =>
+            {
+                UpdateRecentAccountsOnStart();
+                UpdateRecentAccounts();
+                return false;
+            });
         };
         OnNotify += (sender, e) =>
         {
@@ -279,12 +284,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("pageTabs");
         _headerBar.RemoveCssClass("flat");
-        var newAccountView = new AccountView(_controller.GetMostRecentAccountViewController(), this, _tabView, _flapToggleButton, UpdateSubtitle);
+        var newAccountView = new AccountView(_controller.GetMostRecentAccountViewController(), this, _tabView, _flapToggleButton, _graphToggleButton, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
         _windowTitle.SetSubtitle(_controller.NumberOfOpenAccounts == 1 ? _controller.GetMostRecentAccountViewController().AccountTitle : "");
         _accountMenuButton.SetVisible(true);
         _flapToggleButton.SetVisible(true);
+        _graphToggleButton.SetVisible(true);
         _dashboardButton.SetVisible(_controller.NumberOfOpenAccounts > 1);
         await newAccountView.StartupAsync();
     }
@@ -365,6 +371,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _headerBar.AddCssClass("flat");
             _accountMenuButton.SetVisible(false);
             _flapToggleButton.SetVisible(false);
+            _graphToggleButton.SetVisible(false);
         }
         _tabView.ClosePageFinish(args.Page, true);
         return true;
@@ -384,6 +391,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _actCloseAccount.SetEnabled(false);
             _accountMenuButton.SetVisible(false);
             _flapToggleButton.SetVisible(false);
+            _graphToggleButton.SetVisible(false);
         }
         else
         {
@@ -391,6 +399,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _actCloseAccount.SetEnabled(true);
             _accountMenuButton.SetVisible(true);
             _flapToggleButton.SetVisible(true);
+            _graphToggleButton.SetVisible(true);
         }
     }
 

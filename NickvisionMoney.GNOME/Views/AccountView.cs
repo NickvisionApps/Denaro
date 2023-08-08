@@ -53,6 +53,7 @@ public partial class AccountView : Adw.Bin
     private readonly Action<string> _updateSubtitle;
     private Dictionary<uint, GroupRow> _groupRows;
     private Dictionary<uint, TransactionRow> _transactionRows;
+    private uint _currentGraphPage;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
@@ -77,24 +78,31 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.DropDown _endMonthDropDown;
     [Gtk.Connect] private readonly Gtk.DropDown _endDayDropDown;
     [Gtk.Connect] private readonly Adw.ExpanderRow _rangeExpander;
+    [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
+    [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _visualizeGroup;
+    [Gtk.Connect] private readonly Gtk.Button _graphBackButton;
+    [Gtk.Connect] private readonly Gtk.Button _graphNextButton;
+    [Gtk.Connect] private readonly Adw.Carousel _carousel;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePerGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePerGroupPieImage;
+    [Gtk.Connect] private readonly Gtk.Separator _visualizeSeparator;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortLastToFirstButton;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _transactionsGroup;
     [Gtk.Connect] private readonly Gtk.Box _transactionsHeaderBox;
-    [Gtk.Connect] private readonly Gtk.FlowBox _flowBox;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _transactionsScroll;
-    [Gtk.Connect] private readonly Adw.StatusPage _noTransactionsStatusPage;
-    [Gtk.Connect] private readonly Adw.Bin _spinnerBin;
-    [Gtk.Connect] private readonly Gtk.Spinner _spinner;
-    [Gtk.Connect] private readonly Gtk.Overlay _mainOverlay;
-
+    [Gtk.Connect] private readonly Gtk.FlowBox _transactionsFlowBox;
+    
     /// <summary>
     /// The Page widget
     /// </summary>
     public Adw.TabPage Page { get; init; }
 
-    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
+    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
         _parentWindow = parentWindow;
@@ -103,6 +111,7 @@ public partial class AccountView : Adw.Bin
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
+        _currentGraphPage = 0;
         //Register Controller Events
         _controller.AccountInformationChanged += (sender, e) => GLib.Functions.IdleAdd(0, AccountInformationChanged);
         _controller.GroupCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateGroupRow(e));
@@ -112,9 +121,21 @@ public partial class AccountView : Adw.Bin
         _controller.TransactionMoved += (sender, e) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(e));
         _controller.TransactionDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(e));
         _controller.TransactionUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateTransactionRow(e));
+        Adw.StyleManager.GetDefault().OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "dark")
+            {
+                _incomeExpenseOverTimeImage.QueueDraw();
+                _incomeExpensePieImage.QueueDraw();
+                _incomeExpensePerGroupImage.QueueDraw();
+                _incomeExpensePerGroupPieImage.QueueDraw();
+            }
+        };
         //Build UI
         builder.Connect(this);
-        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", (GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate));
+        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnGraphToggle.BindProperty("active", _visualizeGroup, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
@@ -212,6 +233,60 @@ public partial class AccountView : Adw.Bin
             }
         };
         _sortFirstToLastButton.OnToggled += (Gtk.ToggleButton sender, EventArgs e) => _controller.SortFirstToLast = _sortFirstToLastButton.GetActive();
+        //Graphs images
+        _incomeExpenseOverTimeImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 0)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpenseOverTime, width, height);
+            }
+        });
+        _incomeExpensePieImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 1)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpensePie, width, height);
+            }
+        });
+        _incomeExpensePerGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 2)
+            {
+                DrawGraph(ctx, GraphType.IncomeExpensePerGroup, width, height);
+            }
+        });
+        _incomeExpensePerGroupPieImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 3)
+            {
+                DrawDoubleGraphs(ctx, GraphType.IncomeByGroup, GraphType.ExpenseByGroup, width, height);
+            }
+        });
+        //Graph Carousel Buttons
+        _graphBackButton.OnClicked += (sender, e) =>
+        {
+            if (_currentGraphPage > 0)
+            {
+                _currentGraphPage--;
+                _carousel.ScrollTo(_carousel.GetNthPage(_currentGraphPage), true);
+            }
+        };
+        _graphNextButton.OnClicked += (sender, e) =>
+        {
+            if (_currentGraphPage < _carousel.GetNPages() - 1)
+            {
+                _currentGraphPage++;
+                _carousel.ScrollTo(_carousel.GetNthPage(_currentGraphPage), true);
+            }
+        };
+        _carousel.OnPageChanged += (sender, e) =>
+        {
+            _currentGraphPage = e.Index;
+            _incomeExpenseOverTimeImage.QueueDraw();
+            _incomeExpensePieImage.QueueDraw();
+            _incomeExpensePerGroupImage.QueueDraw();
+            _incomeExpensePerGroupPieImage.QueueDraw();
+        };
         //Transactions Scrolled Window
         _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
         _transactionsScrollAdjustment.OnNotify += (sender, e) =>
@@ -292,33 +367,10 @@ public partial class AccountView : Adw.Bin
     /// <param name="parentWindow">MainWindow</param>
     /// <param name="parentTabView">Adw.TabView</param>
     /// <param name="btnFlapToggle">Gtk.ToggleButton</param>
-    /// <param name="updateSubtitle">A Action<string> callback to update the MainWindow's subtitle</param>
-    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui"), controller, parentWindow, parentTabView, btnFlapToggle, updateSubtitle)
+    /// <param name="btnGraphToggle">Gtk.ToggleButton</param>
+    /// <param name="updateSubtitle">An Action callback to update the MainWindow's subtitle</param>
+    public AccountView(AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : this(Builder.FromFile("account_view.ui"), controller, parentWindow, parentTabView, btnFlapToggle, btnGraphToggle, updateSubtitle)
     {
-    }
-
-    /// <summary>
-    /// Starts the view's spinner
-    /// </summary>
-    private void StartSpinner()
-    {
-        _noTransactionsStatusPage.SetVisible(false);
-        _transactionsScroll.SetVisible(true);
-        _mainOverlay.SetOpacity(0.0);
-        _spinnerBin.SetVisible(true);
-        _spinner.Start();
-        _paneScroll.SetSensitive(false);
-    }
-
-    /// <summary>
-    /// Stops the view's spinner
-    /// </summary>
-    private void StopSpinner()
-    {
-        _spinner.Stop();
-        _spinnerBin.SetVisible(false);
-        _mainOverlay.SetOpacity(1.0);
-        _paneScroll.SetSensitive(true);
     }
 
     /// <summary>
@@ -326,9 +378,9 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
-
-        StartSpinner();
-        await _controller.StartupAsync();
+        _paneScroll.SetSensitive(false);
+        _viewStack.SetVisibleChildName("spinner");
+        await Task.Run(async () => await _controller.StartupAsync());
         //Setup Other UI Elements
         _sortTransactionByDropDown.SetSelected((uint)_controller.SortTransactionsBy);
         if (_controller.SortFirstToLast)
@@ -341,7 +393,6 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        StopSpinner();
     }
 
     /// <summary>
@@ -359,19 +410,22 @@ public partial class AccountView : Adw.Bin
             _incomeLabel.SetLabel(_controller.AccountFilteredIncomeString);
             _expenseLabel.SetLabel(_controller.AccountFilteredExpenseString);
             //Transactions
+            _paneScroll.SetSensitive(true);
             if (_controller.Transactions.Count > 0)
             {
                 OnCalendarMonthYearChanged(null, EventArgs.Empty);
                 _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
                 if (_controller.FilteredTransactionsCount > 0)
                 {
-                    _noTransactionsStatusPage.SetVisible(false);
-                    _transactionsScroll.SetVisible(true);
+                    _viewStack.SetVisibleChildName("transactions");
+                    _incomeExpenseOverTimeImage.QueueDraw();
+                    _incomeExpensePieImage.QueueDraw();
+                    _incomeExpensePerGroupImage.QueueDraw();
+                    _incomeExpensePerGroupPieImage.QueueDraw();
                 }
                 else
                 {
-                    _noTransactionsStatusPage.SetVisible(true);
-                    _transactionsScroll.SetVisible(false);
+                    _viewStack.SetVisibleChildName("no-transactions");
                     _noTransactionsStatusPage.SetTitle(_("No Transactions Found"));
                     _noTransactionsStatusPage.SetDescription(_("No transactions match the specified filters."));
                 }
@@ -380,8 +434,7 @@ public partial class AccountView : Adw.Bin
             else
             {
                 _calendar.ClearMarks();
-                _noTransactionsStatusPage.SetVisible(true);
-                _transactionsScroll.SetVisible(false);
+                _viewStack.SetVisibleChildName("no-transactions");
                 _noTransactionsStatusPage.SetTitle(_("No Transactions"));
                 _noTransactionsStatusPage.SetDescription(_("Add a new transaction or import transactions from a file."));
                 _rangeExpander.SetSensitive(false);
@@ -389,6 +442,50 @@ public partial class AccountView : Adw.Bin
             _isAccountLoading = false;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Drawing function for graph images
+    /// </summary>
+    /// <param name="ctx">Cairo.Context</param>
+    /// <param name="type">GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    private void DrawGraph(Cairo.Context ctx, GraphType type, int width, int height)
+    {
+        var graph = _controller.GenerateGraph(type, Adw.StyleManager.GetDefault().GetDark(), width, height);
+        using var loader = GdkPixbuf.PixbufLoader.New();
+        loader.Write(graph);
+        loader.Close();
+        var pixbuf = loader.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf, 0, 0);
+        ctx.Paint();
+    }
+
+    /// <summary>
+    /// Drawing function for double graph images
+    /// </summary>
+    /// <param name="ctx">Cairo.Context</param>
+    /// <param name="type1">First GraphType</param>
+    /// <param name="type2">Second GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    private void DrawDoubleGraphs(Cairo.Context ctx, GraphType type1, GraphType type2, int width, int height)
+    {
+        var graph1 = _controller.GenerateGraph(type1, Adw.StyleManager.GetDefault().GetDark(), width / 2, height);
+        using var loader1 = GdkPixbuf.PixbufLoader.New();
+        loader1.Write(graph1);
+        loader1.Close();
+        var pixbuf1 = loader1.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf1, 0, 0);
+        ctx.Paint();
+        var graph2 = _controller.GenerateGraph(type2, Adw.StyleManager.GetDefault().GetDark(), width / 2, height);
+        using var loader2 = GdkPixbuf.PixbufLoader.New();
+        loader2.Write(graph2);
+        loader2.Close();
+        var pixbuf2 = loader2.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf2, width / 2, 0);
+        ctx.Paint();
     }
     
     /// <summary>
@@ -452,12 +549,12 @@ public partial class AccountView : Adw.Bin
         row.SetVisible(e.Active);
         if (e.Position != null)
         {
-            _flowBox.Insert(row, e.Position.Value);
+            _transactionsFlowBox.Insert(row, e.Position.Value);
         }
         else
         {
 
-            _flowBox.Append(row);
+            _transactionsFlowBox.Append(row);
         }
         _transactionRows.Add(e.Model.Id, row);
         return false;
@@ -469,8 +566,8 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
     {
-        _flowBox.Remove(_transactionRows[e.Model.Id]);
-        _flowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
+        _transactionsFlowBox.Remove(_transactionRows[e.Model.Id]);
+        _transactionsFlowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
         return false;
     }
 
@@ -480,7 +577,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="id">uint</param>
     private bool DeleteTransactionRow(uint id)
     {
-        _flowBox.Remove(_transactionRows[id]);
+        _transactionsFlowBox.Remove(_transactionRows[id]);
         _transactionRows.Remove(id);
         return false;
     }
@@ -515,11 +612,10 @@ public partial class AccountView : Adw.Bin
             var transferController = _controller.CreateTransferDialogController();
             var transferDialog = new TransferDialog(transferController, _parentWindow);
             transferDialog.Present();
-            transferDialog.OnApply += async (sender, e) =>
+            transferDialog.OnApply += async (s, ex) =>
             {
-                transferDialog.SetVisible(false);
                 await _controller.SendTransferAsync(transferController.Transfer);
-                transferDialog.Close();
+                transferDialog.Destroy();
             };
         }
         else
@@ -566,20 +662,12 @@ public partial class AccountView : Adw.Bin
         try
         {
             var file = await openFileDialog.OpenAsync(_parentWindow);
-            StartSpinner();
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.ImportFromFileAsync(file!.GetPath() ?? "");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
-            StopSpinner();
+            var oldPage = _viewStack.GetVisibleChildName();
+            _paneScroll.SetSensitive(false);
+            _viewStack.SetVisibleChildName("spinner");
+            await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
         }
         catch { }
     }
@@ -633,11 +721,16 @@ public partial class AccountView : Adw.Bin
             {
                 path += ".pdf";
             }
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."), _("No"), null, _("Yes"));
-            dialog.Present();
+            var dialog = Adw.MessageDialog.New(_parentWindow, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("no", _("No"));
+            dialog.SetDefaultResponse("no");
+            dialog.SetCloseResponse("no");
+            dialog.AddResponse("yes", _("Yes"));
+            dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Suggested);
             dialog.OnResponse += async (sender, e) =>
             {
-                if (dialog.Response == MessageDialogResponse.Suggested)
+                if (e.Response == "yes")
                 {
                     var tcs = new TaskCompletionSource<string?>();
                     var newPasswordDialog = new NewPasswordDialog(_parentWindow, _("PDF Password"), tcs);
@@ -651,6 +744,7 @@ public partial class AccountView : Adw.Bin
                 }
                 dialog.Destroy();
             };
+            dialog.Present();
         }
         catch { }
     }
@@ -665,15 +759,14 @@ public partial class AccountView : Adw.Bin
         var accountSettingsController = _controller.CreateAccountSettingsDialogController();
         var accountSettingsDialog = new AccountSettingsDialog(accountSettingsController, _parentWindow);
         accountSettingsDialog.Present();
-        accountSettingsDialog.OnApply += (sender, e) =>
+        accountSettingsDialog.OnApply += (s, ex) =>
         {
-            accountSettingsDialog.SetVisible(false);
             _controller.UpdateMetadata(accountSettingsController.Metadata);
             if (accountSettingsController.NewPassword != null)
             {
                 _controller.SetPassword(accountSettingsController.NewPassword);
             }
-            accountSettingsDialog.Close();
+            accountSettingsDialog.Destroy();
         };
     }
 
@@ -687,26 +780,14 @@ public partial class AccountView : Adw.Bin
         var transactionController = _controller.CreateTransactionDialogController();
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
         transactionDialog.Present();
-        transactionDialog.OnApply += async (sender, e) =>
+        transactionDialog.OnApply += async (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
-            StartSpinner();
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddTransactionAsync(transactionController.Transaction);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
-            StopSpinner();
-            transactionController.Dispose();
-            transactionDialog.Close();
+            _paneScroll.SetSensitive(false);
+            _viewStack.SetVisibleChildName("spinner");
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            transactionDialog.Destroy();
         };
+        transactionDialog.OnDestroy += (s, ex) => transactionController.Dispose();
     }
 
     /// <summary>
@@ -717,27 +798,15 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(source);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Present();
         transactionDialog.OnApply += async (sender, e) =>
         {
-            transactionDialog.SetVisible(false);
-            StartSpinner();
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddTransactionAsync(transactionController.Transaction);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
-            StopSpinner();
-            transactionController.Dispose();
-            transactionDialog.Close();
+            _paneScroll.SetSensitive(false);
+            _viewStack.SetVisibleChildName("spinner");
+            await Task.Run(async () => await _controller.AddTransactionAsync(transactionController.Transaction));
+            transactionDialog.Destroy();
         };
+        transactionDialog.OnDestroy += (sender, e) => transactionController.Dispose();
+        transactionDialog.Present();
     }
 
     /// <summary>
@@ -749,10 +818,8 @@ public partial class AccountView : Adw.Bin
     {
         var transactionController = _controller.CreateTransactionDialogController(id);
         var transactionDialog = new TransactionDialog(transactionController, _parentWindow);
-        transactionDialog.Present();
-        transactionDialog.OnApply += async (sender, e) =>
+        transactionDialog.OnApply += async (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
             if (transactionController.CopyRequested)
             {
                 CopyTransaction(transactionController.Transaction);
@@ -762,156 +829,122 @@ public partial class AccountView : Adw.Bin
             {
                 if (transactionController.OriginalRepeatInterval != transactionController.Transaction.RepeatInterval)
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."), _("Cancel"), _("Disassociate Existing"), _("Delete Existing"));
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    dialog.Present();
-                    dialog.OnResponse += async (sender, e) =>
+                    var dialog = Adw.MessageDialog.New(_parentWindow, _("Repeat Interval Changed"), _("The repeat interval was changed.\nWhat would you like to do with existing generated transactions?\n\nNew repeat transactions will be generated based off the new interval."));
+                    dialog.SetIconName(_controller.AppInfo.ID);
+                    dialog.AddResponse("cancel", _("Cancel"));
+                    dialog.SetDefaultResponse("cancel");
+                    dialog.SetCloseResponse("cancel");
+                    dialog.AddResponse("disassociate", _("Disassociate Existing"));
+                    dialog.AddResponse("delete", _("Delete Existing"));
+                    dialog.OnResponse += async (ss, exx) =>
                     {
-                        if (dialog.Response == MessageDialogResponse.Suggested)
+                        if (exx.Response == "delete")
                         {
-                            StartSpinner();
+                            _paneScroll.SetSensitive(false);
+                            _viewStack.SetVisibleChildName("spinner");
                             await Task.Run(async () =>
                             {
-                                try
-                                {
-                                    await _controller.DeleteGeneratedTransactionsAsync(id);
-                                    await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
-                                }
+                                await _controller.DeleteGeneratedTransactionsAsync(id);
+                                await _controller.UpdateTransactionAsync(transactionController.Transaction);
                             });
-                            StopSpinner();
                         }
-                        else if (dialog.Response == MessageDialogResponse.Destructive)
+                        else if (exx.Response == "disassociate")
                         {
-                            StartSpinner();
-                            await Task.Run(async () =>
-                            {
-                                try
-                                {
-                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
-                                }
-                            });
-                            StopSpinner();
+                            _paneScroll.SetSensitive(false);
+                            _viewStack.SetVisibleChildName("spinner");
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, false));
                         }
                         dialog.Destroy();
+                        transactionDialog.Destroy();
                     };
+                    dialog.Present();
                 }
                 else
                 {
-                    var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Update Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nUpdating only the source transaction will disassociate\ngenerated transactions from the source."), _("Cancel"), _("Update Only Source"), _("Update Source and Generated"));
-                    dialog.UnsetDestructiveApperance();
-                    dialog.UnsetSuggestedApperance();
-                    dialog.Present();
-                    dialog.OnResponse += async (sender, e) =>
+                    var dialog = Adw.MessageDialog.New(_parentWindow, _("Update Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nUpdating only the source transaction will disassociate\ngenerated transactions from the source."));
+                    dialog.SetIconName(_controller.AppInfo.ID);
+                    dialog.AddResponse("cancel", _("Cancel"));
+                    dialog.SetDefaultResponse("cancel");
+                    dialog.SetCloseResponse("cancel");
+                    dialog.AddResponse("source", _("Update Only Source"));
+                    dialog.AddResponse("gen", _("Update Source and Generated"));
+                    dialog.OnResponse += async (ss, exx) =>
                     {
-                        if (dialog.Response != MessageDialogResponse.Cancel)
+                        if (exx.Response != "cancel")
                         {
-                            StartSpinner();
-                            await Task.Run(async () =>
-                            {
-                                try
-                                {
-                                    await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, dialog.Response == MessageDialogResponse.Suggested);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.StackTrace);
-                                }
-                            });
-                            StopSpinner();
+                            _paneScroll.SetSensitive(false);
+                            _viewStack.SetVisibleChildName("spinner");
+                            await Task.Run(async () => await _controller.UpdateSourceTransactionAsync(transactionController.Transaction, exx.Response == "gen"));
                         }
                         dialog.Destroy();
+                        transactionDialog.Destroy();
                     };
+                    dialog.Present();
                 }
             }
             else
             {
-                StartSpinner();
-                await Task.Run(async () =>
-                {
-                    try
-                    {
-                        await _controller.UpdateTransactionAsync(transactionController.Transaction);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine(ex.StackTrace);
-                    }
-                });
-                StopSpinner();
+                _paneScroll.SetSensitive(false);
+                _viewStack.SetVisibleChildName("spinner");
+                await Task.Run(async () => await _controller.UpdateTransactionAsync(transactionController.Transaction));
+                transactionDialog.Destroy();
             }
-            transactionController.Dispose();
-            transactionDialog.Close();
         };
-        transactionDialog.OnDelete += (sender, e) =>
+        transactionDialog.OnDelete += (s, ex) =>
         {
-            transactionDialog.SetVisible(false);
             if (_controller.GetIsSourceRepeatTransaction(id))
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."), _("Cancel"), _("Delete Only Source"), _("Delete Source and Generated"));
-                dialog.UnsetDestructiveApperance();
-                dialog.UnsetSuggestedApperance();
-                dialog.Present();
-                dialog.OnResponse += async (sender, e) =>
+                var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Transaction"), _("This transaction is a source repeat transaction.\nWhat would you like to do with the repeat transactions?\n\nDeleting only the source transaction will allow individual\ngenerated transactions to be modifiable."));
+                dialog.SetIconName(_controller.AppInfo.ID);
+                dialog.AddResponse("cancel", _("Cancel"));
+                dialog.SetDefaultResponse("cancel");
+                dialog.SetCloseResponse("cancel");
+                dialog.AddResponse("source", _("Delete Only Source"));
+                dialog.AddResponse("gen", _("Delete Source and Generated"));
+                dialog.OnResponse += async (ss, exx) =>
                 {
-                    if (dialog.Response != MessageDialogResponse.Cancel)
+                    if (exx.Response != "cancel")
                     {
-                        StartSpinner();
-                        await Task.Run(async () =>
-                        {
-                            try
-                            {
-                                await _controller.DeleteSourceTransactionAsync(id, dialog.Response == MessageDialogResponse.Suggested);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                                Console.WriteLine(ex.StackTrace);
-                            }
-                        });
-                        StopSpinner();
-                        transactionController.Dispose();
-                        transactionDialog.Close();
+                        _paneScroll.SetSensitive(false);
+                        _viewStack.SetVisibleChildName("spinner");
+                        await Task.Run(async () => await _controller.DeleteSourceTransactionAsync(id, exx.Response == "gen"));
+                        transactionDialog.Destroy();
                     }
                     else
                     {
-                        transactionDialog.SetVisible(true);
+                        transactionDialog.Present();
                     }
                     dialog.Destroy();
                 };
+                dialog.Present();
             }
             else
             {
-                var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."), _("No"), _("Yes"));
-                dialog.Present();
-                dialog.OnResponse += async (sender, e) =>
+                var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Transaction"), _("Are you sure you want to delete this transaction?\nThis action is irreversible."));
+                dialog.SetIconName(_controller.AppInfo.ID);
+                dialog.AddResponse("no", _("No"));
+                dialog.SetDefaultResponse("no");
+                dialog.SetCloseResponse("no");
+                dialog.AddResponse("yes", _("Yes"));
+                dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Suggested);
+                dialog.OnResponse += async (ss, exx) =>
                 {
-                    if (dialog.Response == MessageDialogResponse.Destructive)
+                    if (exx.Response == "yes")
                     {
                         await _controller.DeleteTransactionAsync(id);
-                        transactionController.Dispose();
-                        transactionDialog.Close();
+                        transactionDialog.Destroy();
                     }
                     else
                     {
-                        transactionDialog.SetVisible(true);
+                        transactionDialog.Present();
                     }
                     dialog.Destroy();
                 };
+                dialog.Present();
             }
         };
+        transactionDialog.OnDestroy += (s, ex) => transactionController.Dispose();
+        transactionDialog.Present();
     }
 
     /// <summary>
@@ -923,26 +956,17 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController();
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Present();
-        groupDialog.OnApply += async (sender, e) =>
+        groupDialog.OnApply += async (s, ex) =>
         {
-            groupDialog.SetVisible(false);
-            StartSpinner();
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.AddGroupAsync(groupController.Group);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
-            StopSpinner();
-            groupDialog.Close();
+            var oldPage = _viewStack.GetVisibleChildName();
+            _paneScroll.SetSensitive(false);
+            _viewStack.SetVisibleChildName("spinner");
+            await Task.Run(async () => await _controller.AddGroupAsync(groupController.Group));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
+            groupDialog.Destroy();
         };
+        groupDialog.Present();
     }
 
     /// <summary>
@@ -954,45 +978,41 @@ public partial class AccountView : Adw.Bin
     {
         var groupController = _controller.CreateGroupDialogController(id);
         var groupDialog = new GroupDialog(groupController, _parentWindow);
-        groupDialog.Present();
-        groupDialog.OnApply += async (sender, e) =>
+        groupDialog.OnApply += async (s, ex) =>
         {
-            groupDialog.SetVisible(false);
-            StartSpinner();
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-                }
-            });
-            StopSpinner();
-            groupDialog.Close();
+            var oldPage = _viewStack.GetVisibleChildName();
+            _paneScroll.SetSensitive(false);
+            _viewStack.SetVisibleChildName("spinner");
+            await Task.Run(async () => await _controller.UpdateGroupAsync(groupController.Group, groupController.HasColorChanged));
+            _viewStack.SetVisibleChildName(oldPage);
+            _paneScroll.SetSensitive(true);
+            groupDialog.Destroy();
         };
-        groupDialog.OnDelete += (sender, e) =>
+        groupDialog.OnDelete += (s, ex) =>
         {
-            groupDialog.SetVisible(false);
-            var dialog = new MessageDialog(_parentWindow, _controller.AppInfo.ID, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."), _("No"), _("Yes"));
-            dialog.Present();
-            dialog.OnResponse += async (s, ex) =>
+            var dialog = Adw.MessageDialog.New(_parentWindow, _("Delete Group"), _("Are you sure you want to delete this group?\nThis action is irreversible."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("no", _("No"));
+            dialog.SetDefaultResponse("no");
+            dialog.SetCloseResponse("no");
+            dialog.AddResponse("yes", _("Yes"));
+            dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Destructive);
+            dialog.OnResponse += async (ss, exx) =>
             {
-                if (dialog.Response == MessageDialogResponse.Destructive)
+                if (exx.Response == "yes")
                 {
                     await _controller.DeleteGroupAsync(id);
-                    groupDialog.Close();
+                    groupDialog.Destroy();
                 }
                 else
                 {
-                    groupDialog.SetVisible(true);
+                    groupDialog.Present();
                 }
                 dialog.Destroy();
             };
+            dialog.Present();
         };
+        groupDialog.Present();
     }
 
     /// <summary>

@@ -19,7 +19,7 @@ public class AccountViewController : IDisposable
     private bool _isOpened;
     private bool _disposed;
     private readonly Account _account;
-    private List<uint>? _filteredIds;
+    private List<uint> _filteredIds;
     private decimal _filteredIncome;
     private decimal _filteredExpense;
     private readonly Dictionary<int, bool> _filters;
@@ -95,7 +95,7 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// The number of filtered transactions being shown
     /// </summary>
-    public int FilteredTransactionsCount => _filteredIds?.Count ?? 0;
+    public int FilteredTransactionsCount => _filteredIds.Count;
     /// <summary>
     /// The total amount of the account for today as a string
     /// </summary>
@@ -166,6 +166,9 @@ public class AccountViewController : IDisposable
         _isOpened = false;
         _disposed = false;
         _account = new Account(path);
+        _filteredIds = new List<uint>();
+        _filteredIncome = 0;
+        _filteredExpense = 0;
         _filters = new Dictionary<int, bool>();
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
@@ -586,7 +589,7 @@ public class AccountViewController : IDisposable
     /// <param name="showNotification">Whether or not to show the notification</param>
     public void SetPassword(string password, bool showNotification = true)
     {
-        _account.SetPassword(password);
+        _account.Password = password;
         if(showNotification)
         {
             if (string.IsNullOrEmpty(password))
@@ -963,7 +966,7 @@ public class AccountViewController : IDisposable
     /// <param name="exportMode">The information to export</param>
     public void ExportToCSV(string path, ExportMode exportMode)
     {
-        if (_account.ExportToCSV(path, exportMode, _filteredIds!))
+        if (_account.ExportToCSV(path, exportMode, _filteredIds))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported account to file successfully."), NotificationSeverity.Success, "open-export", path));
         }
@@ -981,7 +984,7 @@ public class AccountViewController : IDisposable
     /// <param name="password">The password to protect the PDF file with (null for no security)</param>
     public void ExportToPDF(string path, ExportMode exportMode, string? password)
     {
-        if (_account.ExportToPDF(path, exportMode, _filteredIds!, password))
+        if (_account.ExportToPDF(path, exportMode, _filteredIds, password))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported account to file successfully."), NotificationSeverity.Success, "open-export", path));
         }
@@ -990,6 +993,16 @@ public class AccountViewController : IDisposable
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to export account to file."), NotificationSeverity.Error));
         }
     }
+    
+    /// <summary>
+    /// Generates a graph based on the type
+    /// </summary>
+    /// <param name="type">GraphType</param>
+    /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    /// <returns>The byte[] of the graph</returns>
+    public byte[] GenerateGraph(GraphType type, bool darkMode, int width, int height) => _account.GenerateGraph(type, darkMode, _filteredIds, width, height);
 
     /// <summary>
     /// Gets whether or not a filter is active
@@ -1027,7 +1040,7 @@ public class AccountViewController : IDisposable
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = true;
+            _filters[(int)pair.Key] = true;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
         }
         FilterUIUpdate();
@@ -1040,7 +1053,7 @@ public class AccountViewController : IDisposable
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[pair.Key == 0 ? -1 : (int)pair.Key] = false;
+            _filters[(int)pair.Key] = false;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, false));
         }
         FilterUIUpdate();
@@ -1051,10 +1064,10 @@ public class AccountViewController : IDisposable
     /// </summary>
     private void FilterUIUpdate()
     {
-        _filteredIds = new List<uint>();
+        _filteredIds.Clear();
         _filteredIncome = 0;
         _filteredExpense = 0;
-        var groupBalances = new Dictionary<uint, decimal>();
+        var groupBalances = new Dictionary<uint, (decimal Income, decimal Expense)>();
         foreach (var pair in _account.Transactions)
         {
             if (!string.IsNullOrEmpty(SearchDescription))
@@ -1095,9 +1108,19 @@ public class AccountViewController : IDisposable
             var groupKey = pair.Value.GroupId == -1 ? 0u : (uint)pair.Value.GroupId;
             if(!groupBalances.ContainsKey(groupKey))
             {
-                groupBalances[groupKey] = 0m;
+                groupBalances[groupKey] = (0m, 0m);
             }
-            groupBalances[groupKey] += pair.Value.Type == TransactionType.Income ? pair.Value.Amount : -1 * pair.Value.Amount;
+            var income = groupBalances[groupKey].Income;
+            var expense = groupBalances[groupKey].Expense;
+            if (pair.Value.Type == TransactionType.Income)
+            {
+                income += pair.Value.Amount;
+            }
+            else
+            {
+                expense += pair.Value.Amount;
+            }
+            groupBalances[groupKey] = (income, expense);
         }
         //Update UI
         if (_filteredIds.Count > 0)
@@ -1109,7 +1132,7 @@ public class AccountViewController : IDisposable
         }
         foreach(var pair in _account.Groups)
         {
-            var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key] : 0m);
+            var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Income : 0m, groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Expense : 0m);
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(newGroup, null, _filters[(int)pair.Key]));
         }
         AccountInformationChanged?.Invoke(this, EventArgs.Empty);
@@ -1122,10 +1145,10 @@ public class AccountViewController : IDisposable
     {
         var transactions = _account.Transactions.Keys.ToList();
         transactions!.Sort(SortTransactions);
-        _filteredIds!.Sort(SortTransactions);
+        _filteredIds.Sort(SortTransactions);
         for (var i = 0; i < transactions.Count; i++)
         {
-            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
+            TransactionMoved?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, _filteredIds.Contains(transactions[i])));
         }
     }
 }

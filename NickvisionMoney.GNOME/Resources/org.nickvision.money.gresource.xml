@@ -8,6 +8,7 @@
     <file preprocess="xml-stripblanks">bank-symbolic.svg</file>
     <file preprocess="xml-stripblanks">cross-symbolic.svg</file>
     <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">dock-top-symbolic.svg</file>
     <file preprocess="xml-stripblanks">document-send-symbolic.svg</file>
     <file preprocess="xml-stripblanks">edit-select-all-symbolic.svg</file>
     <file preprocess="xml-stripblanks">edit-select-none-symbolic.svg</file>

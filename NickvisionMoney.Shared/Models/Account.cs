@@ -1,4 +1,10 @@
 ﻿using Hazzik.Qif;
+using LiveChartsCore;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.SKCharts;
+using LiveChartsCore.SkiaSharpView.VisualElements;
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
 using OfxSharp;
@@ -8,6 +14,7 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +31,16 @@ public enum ExportMode
 {
     All,
     CurrentView
-};
+}
+
+public enum GraphType
+{
+    IncomeExpensePie,
+    IncomeExpensePerGroup,
+    IncomeExpenseOverTime,
+    IncomeByGroup,
+    ExpenseByGroup,
+}
 
 /// <summary>
 /// A model of an account
@@ -143,6 +159,94 @@ public class Account : IDisposable
     }
 
     /// <summary>
+    /// The password of the account. Specifying a null/empty string will remove the password and decrypt the database
+    /// </summary>
+    public string Password
+    {
+        set
+        {
+            //Remove Password If Empty (Decrypts)
+            if (string.IsNullOrEmpty(value))
+            {
+                //Create Temp Decrypted Database
+                var tempPath = $"{Path}.decrypt";
+                using var command = _database!.CreateCommand();
+                command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
+                command.ExecuteNonQuery();
+                command.CommandText = $"SELECT sqlcipher_export('plaintext')";
+                command.ExecuteNonQuery();
+                command.CommandText = $"DETACH DATABASE plaintext";
+                command.ExecuteNonQuery();
+                //Remove Old Encrypted Database
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                File.Delete(Path);
+                File.Move(tempPath, Path, true);
+                //Open New Decrypted Database
+                _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false
+                }.ConnectionString);
+                _database.Open();
+                _isEncrypted = false;
+            }
+            using var cmdQuote = _database!.CreateCommand();
+            cmdQuote.CommandText = "SELECT quote($password)";
+            cmdQuote.Parameters.AddWithValue("$password", value);
+            var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
+            //Change Password
+            if (IsEncrypted)
+            {
+                using var command = _database.CreateCommand();
+                command.CommandText = $"PRAGMA rekey = {quotedPassword}";
+                command.ExecuteNonQuery();
+                _database.Close();
+                _database.ConnectionString = new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false,
+                    Password = value
+                }.ConnectionString;
+                _database.Open();
+                _isEncrypted = true;
+            }
+            //Sets New Password (Encrypts For First Time)
+            else
+            {
+                //Create Temp Encrypted Database
+                var tempPath = $"{Path}.ecrypt";
+                using var command = _database.CreateCommand();
+                command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
+                command.ExecuteNonQuery();
+                command.CommandText = $"SELECT sqlcipher_export('encrypted')";
+                command.ExecuteNonQuery();
+                command.CommandText = $"DETACH DATABASE encrypted";
+                command.ExecuteNonQuery();
+                //Remove Old Unencrypted Database
+                _database.Close();
+                _database.Dispose();
+                _database = null;
+                File.Delete(Path);
+                File.Move(tempPath, Path, true);
+                //Open New Encrypted Database
+                _database = new SqliteConnection(new SqliteConnectionStringBuilder()
+                {
+                    DataSource = Path,
+                    Mode = SqliteOpenMode.ReadWriteCreate,
+                    Pooling = false,
+                    Password = value
+                }.ConnectionString);
+                _database.Open();
+                _isEncrypted = true;
+            }
+        }
+    }
+
+    /// <summary>
     /// Frees resources used by the Account object
     /// </summary>
     public void Dispose()
@@ -168,7 +272,6 @@ public class Account : IDisposable
             }
             if (_database != null)
             {
-                FreeMemory();
                 _database.Close();
                 _database.Dispose();
                 _database = null;
@@ -220,94 +323,6 @@ public class Account : IDisposable
             }
         }
         return _loggedIn;
-    }
-
-    /// <summary>
-    /// Sets the password of the account. Specifying a null/empty string will remove the password and decrypt the database
-    /// </summary>
-    /// <param name="password">The password to set</param>
-    /// <returns>True if successful, else false</returns>
-    public bool SetPassword(string password)
-    {
-        //Remove Password If Empty (Decrypts)
-        if (string.IsNullOrEmpty(password))
-        {
-            //Create Temp Decrypted Database
-            var tempPath = $"{Path}.decrypt";
-            using var command = _database!.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS plaintext KEY ''";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('plaintext')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE plaintext";
-            command.ExecuteNonQuery();
-            //Remove Old Encrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Decrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = false;
-        }
-        using var cmdQuote = _database!.CreateCommand();
-        cmdQuote.CommandText = "SELECT quote($password)";
-        cmdQuote.Parameters.AddWithValue("$password", password);
-        var quotedPassword = (string)cmdQuote.ExecuteScalar()!;
-        //Change Password
-        if (IsEncrypted)
-        {
-            using var command = _database.CreateCommand();
-            command.CommandText = $"PRAGMA rekey = {quotedPassword}";
-            command.ExecuteNonQuery();
-            _database.Close();
-            _database.ConnectionString = new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString;
-            _database.Open();
-            _isEncrypted = true;
-        }
-        //Sets New Password (Encrypts For First Time)
-        else
-        {
-            //Create Temp Encrypted Database
-            var tempPath = $"{Path}.ecrypt";
-            using var command = _database.CreateCommand();
-            command.CommandText = $"ATTACH DATABASE '{tempPath}' AS encrypted KEY {quotedPassword}";
-            command.ExecuteNonQuery();
-            command.CommandText = $"SELECT sqlcipher_export('encrypted')";
-            command.ExecuteNonQuery();
-            command.CommandText = $"DETACH DATABASE encrypted";
-            command.ExecuteNonQuery();
-            //Remove Old Unencrypted Database
-            _database.Close();
-            _database.Dispose();
-            _database = null;
-            File.Delete(Path);
-            File.Move(tempPath, Path, true);
-            //Open New Encrypted Database
-            _database = new SqliteConnection(new SqliteConnectionStringBuilder()
-            {
-                DataSource = Path,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Pooling = false,
-                Password = password
-            }.ConnectionString);
-            _database.Open();
-            _isEncrypted = true;
-        }
-        return true;
     }
 
     /// <summary>
@@ -459,7 +474,6 @@ public class Account : IDisposable
         {
             Name = _("Ungrouped"),
             Description = _("Transactions without a group"),
-            Balance = 0m,
             RGBA = ""
         });
         using var cmdQueryGroups = _database.CreateCommand();
@@ -475,7 +489,6 @@ public class Account : IDisposable
             {
                 Name = readQueryGroups.IsDBNull(1) ? "" : readQueryGroups.GetString(1),
                 Description = readQueryGroups.IsDBNull(2) ? "" : readQueryGroups.GetString(2),
-                Balance = 0m,
                 RGBA = readQueryGroups.IsDBNull(3) ? "" : readQueryGroups.GetString(3)
             };
             Groups.Add(group.Id, group);
@@ -517,13 +530,14 @@ public class Account : IDisposable
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
             {
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
                 if (transaction.Type == TransactionType.Income)
                 {
+                    Groups[groupId].Income += transaction.Amount;
                     TodayIncome += transaction.Amount;
                 }
                 else
                 {
+                    Groups[groupId].Expense += transaction.Amount;
                     TodayExpense += transaction.Amount;
                 }
             }
@@ -534,8 +548,6 @@ public class Account : IDisposable
         }
         //Repeats
         await SyncRepeatTransactionsAsync();
-        //Cleanup
-        FreeMemory();
         return true;
     }
 
@@ -659,13 +671,367 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
-            FreeMemory();
             return true;
         }
         return false;
     }
 
     /// <summary>
+    /// Adds a group to the account
+    /// </summary>
+    /// <param name="group">The group to add</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> AddGroupAsync(Group group)
+    {
+        using var cmdAddGroup = _database!.CreateCommand();
+        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
+        cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
+        cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
+        if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
+        {
+            Groups.Add(group.Id, group);
+            if (group.Id >= NextAvailableGroupId)
+            {
+                NextAvailableGroupId = group.Id + 1;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Updates a group in the account
+    /// </summary>
+    /// <param name="group">The group to update</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> UpdateGroupAsync(Group group)
+    {
+        using var cmdUpdateGroup = _database!.CreateCommand();
+        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
+        cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
+        cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
+        cmdUpdateGroup.Parameters.AddWithValue("$rgba", group.RGBA);
+        cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
+        if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
+        {
+            Groups[group.Id] = group;
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Deletes a group from the account
+    /// </summary>
+    /// <param name="id">The id of the group to delete</param>
+    /// <returns>(Result, BelongingTransactions)</returns>
+    public async Task<(bool Result, List<uint> BelongingTransactions)> DeleteGroupAsync(uint id)
+    {
+        using var cmdDeleteGroup = _database!.CreateCommand();
+        cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
+        cmdDeleteGroup.Parameters.AddWithValue("$id", id);
+        if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
+        {
+            var belongingTransactions = new List<uint>();
+            Groups.Remove(id);
+            if (id + 1 == NextAvailableGroupId)
+            {
+                NextAvailableGroupId--;
+            }
+            foreach (var pair in Transactions)
+            {
+                if (pair.Value.GroupId == id)
+                {
+                    pair.Value.GroupId = -1;
+                    if (pair.Value.UseGroupColor)
+                    {
+                        pair.Value.UseGroupColor = false;
+                        belongingTransactions.Add(pair.Key);
+                    }
+                    await UpdateTransactionAsync(pair.Value);
+                }
+            }
+            return (true, belongingTransactions);
+        }
+        return (false, new List<uint>());
+    }
+
+    /// <summary>
+    /// Adds a transaction to the account
+    /// </summary>
+    /// <param name="transaction">The transaction to add</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> AddTransactionAsync(Transaction transaction)
+    {
+        using var cmdAddTransaction = _database!.CreateCommand();
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
+        cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
+        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
+        cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
+        cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
+        cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
+        cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
+        cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
+        cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
+        cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        if (transaction.Receipt != null)
+        {
+            using var memoryStream = new MemoryStream();
+            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+        }
+        else
+        {
+            cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
+        }
+        cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
+        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
+        if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
+        {
+            Transactions.Add(transaction.Id, transaction);
+            if (transaction.Id >= NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId = transaction.Id + 1;
+            }
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (transaction.Type == TransactionType.Income)
+                {
+                    Groups[groupId].Income += transaction.Amount;
+                    TodayIncome += transaction.Amount;
+                }
+                else
+                {
+                    Groups[groupId].Expense += transaction.Amount;
+                    TodayExpense += transaction.Amount;
+                }
+            }
+            if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
+            {
+                await SyncRepeatTransactionsAsync();
+            }
+            BackupAccountToCSV();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Updates a transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> UpdateTransactionAsync(Transaction transaction)
+    {
+        using var cmdUpdateTransaction = _database!.CreateCommand();
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
+        cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
+        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
+        cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
+        cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
+        cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
+        cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
+        cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
+        cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
+        cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        if (transaction.Receipt != null)
+        {
+            using var memoryStream = new MemoryStream();
+            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
+            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
+        }
+        else
+        {
+            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
+        }
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
+        cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
+        if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
+        {
+            var oldTransaction = Transactions[transaction.Id];
+            if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
+                if (oldTransaction.Type == TransactionType.Income)
+                {
+                    Groups[groupId].Income -= transaction.Amount;
+                    TodayIncome -= oldTransaction.Amount;
+                }
+                else
+                {
+                    Groups[groupId].Expense -= transaction.Amount;
+                    TodayExpense -= oldTransaction.Amount;
+                }
+            }
+            Transactions[transaction.Id].Dispose();
+            Transactions[transaction.Id] = transaction;
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (transaction.Type == TransactionType.Income)
+                {
+                    Groups[groupId].Income += transaction.Amount;
+                    TodayIncome += transaction.Amount;
+                }
+                else
+                {
+                    Groups[groupId].Expense += transaction.Amount;
+                    TodayExpense += transaction.Amount;
+                }
+            }
+            if (transaction.RepeatFrom == 0)
+            {
+                await SyncRepeatTransactionsAsync();
+            }
+            BackupAccountToCSV();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Updates a source transaction in the account
+    /// </summary>
+    /// <param name="transaction">The transaction to update</param>
+    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
+    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    {
+        var transactions = Transactions.Values.ToList();
+        if (updateGenerated)
+        {
+            foreach (var t in transactions)
+            {
+                if (t.RepeatFrom == (int)transaction.Id)
+                {
+                    var tt = (Transaction)t.Clone();
+                    tt.Description = transaction.Description;
+                    tt.Type = transaction.Type;
+                    tt.Amount = transaction.Amount;
+                    tt.GroupId = transaction.GroupId;
+                    tt.RGBA = transaction.RGBA;
+                    tt.UseGroupColor = transaction.UseGroupColor;
+                    tt.Receipt = transaction.Receipt;
+                    tt.RepeatEndDate = transaction.RepeatEndDate;
+                    tt.Notes = transaction.Notes;
+                    await UpdateTransactionAsync(tt);
+                }
+            }
+            await UpdateTransactionAsync(transaction);
+        }
+        else
+        {
+            foreach (var t in transactions)
+            {
+                if (t.RepeatFrom == (int)transaction.Id)
+                {
+                    var tt = (Transaction)t.Clone();
+                    tt.RepeatInterval = TransactionRepeatInterval.Never;
+                    tt.RepeatFrom = -1;
+                    tt.RepeatEndDate = null;
+                    await UpdateTransactionAsync(tt);
+                }
+            }
+            await UpdateTransactionAsync(transaction);
+        }
+    }
+
+    /// <summary>
+    /// The transaction to delete from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> DeleteTransactionAsync(uint id)
+    {
+        using var cmdDeleteTransaction = _database!.CreateCommand();
+        cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
+        cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
+        if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
+        {
+            var transaction = Transactions[id];
+            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (transaction.Type == TransactionType.Income)
+                {
+                    Groups[groupId].Income -= transaction.Amount;
+                    TodayIncome -= transaction.Amount;
+                }
+                else
+                {
+                    Groups[groupId].Expense -= transaction.Amount;
+                    TodayExpense -= transaction.Amount;
+                }
+            }
+            Transactions[id].Dispose();
+            Transactions.Remove(id);
+            if (id + 1 == NextAvailableTransactionId)
+            {
+                NextAvailableTransactionId--;
+            }
+            BackupAccountToCSV();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Removes a source transaction from the account
+    /// </summary>
+    /// <param name="id">The id of the transaction to delete</param>
+    /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
+    public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
+    {
+        var transactions = Transactions.Values.ToList();
+        if (deleteGenerated)
+        {
+            await DeleteTransactionAsync(id);
+            foreach (var transaction in transactions)
+            {
+                if (transaction.RepeatFrom == (int)id)
+                {
+                    await DeleteTransactionAsync(transaction.Id);
+                }
+            }
+        }
+        else
+        {
+            await DeleteTransactionAsync(id);
+            foreach (var transaction in transactions)
+            {
+                if (transaction.RepeatFrom == (int)id)
+                {
+                    var t = (Transaction)transaction.Clone();
+                    t.RepeatInterval = TransactionRepeatInterval.Never;
+                    t.RepeatFrom = -1;
+                    t.RepeatEndDate = null;
+                    await UpdateTransactionAsync(t);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes generated repeat transactions from the account
+    /// </summary>
+    /// <param name="id">The id of the source transaction</param>
+    public async Task DeleteGeneratedTransactionsAsync(uint id)
+    {
+        var transactions = Transactions.Values.ToList();
+        foreach (var transaction in transactions)
+        {
+            if (transaction.RepeatFrom == (int)id)
+            {
+                await DeleteTransactionAsync(transaction.Id);
+            }
+        }
+    }
+    
+        /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
     /// <returns>True if transactions were modified, else false</returns>
@@ -753,363 +1119,6 @@ public class Account : IDisposable
             i++;
         }
         return transactionsModified;
-    }
-
-    /// <summary>
-    /// Adds a group to the account
-    /// </summary>
-    /// <param name="group">The group to add</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> AddGroupAsync(Group group)
-    {
-        using var cmdAddGroup = _database!.CreateCommand();
-        cmdAddGroup.CommandText = "INSERT INTO groups (id, name, description, rgba) VALUES ($id, $name, $description, $rgba)";
-        cmdAddGroup.Parameters.AddWithValue("$id", group.Id);
-        cmdAddGroup.Parameters.AddWithValue("$name", group.Name);
-        cmdAddGroup.Parameters.AddWithValue("$description", group.Description);
-        cmdAddGroup.Parameters.AddWithValue("$rgba", group.RGBA);
-        if (await cmdAddGroup.ExecuteNonQueryAsync() > 0)
-        {
-            Groups.Add(group.Id, group);
-            if (group.Id >= NextAvailableGroupId)
-            {
-                NextAvailableGroupId = group.Id + 1;
-            }
-            FreeMemory();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Updates a group in the account
-    /// </summary>
-    /// <param name="group">The group to update</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> UpdateGroupAsync(Group group)
-    {
-        using var cmdUpdateGroup = _database!.CreateCommand();
-        cmdUpdateGroup.CommandText = "UPDATE groups SET name = $name, description = $description, rgba = $rgba WHERE id = $id";
-        cmdUpdateGroup.Parameters.AddWithValue("$name", group.Name);
-        cmdUpdateGroup.Parameters.AddWithValue("$description", group.Description);
-        cmdUpdateGroup.Parameters.AddWithValue("$rgba", group.RGBA);
-        cmdUpdateGroup.Parameters.AddWithValue("$id", group.Id);
-        if (await cmdUpdateGroup.ExecuteNonQueryAsync() > 0)
-        {
-            Groups[group.Id] = group;
-            FreeMemory();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Deletes a group from the account
-    /// </summary>
-    /// <param name="id">The id of the group to delete</param>
-    /// <returns>(Result, BelongingTransactions)</returns>
-    public async Task<(bool Result, List<uint> BelongingTransactions)> DeleteGroupAsync(uint id)
-    {
-        using var cmdDeleteGroup = _database!.CreateCommand();
-        cmdDeleteGroup.CommandText = "DELETE FROM groups WHERE id = $id";
-        cmdDeleteGroup.Parameters.AddWithValue("$id", id);
-        if (await cmdDeleteGroup.ExecuteNonQueryAsync() > 0)
-        {
-            var belongingTransactions = new List<uint>();
-            Groups.Remove(id);
-            if (id + 1 == NextAvailableGroupId)
-            {
-                NextAvailableGroupId--;
-            }
-            foreach (var pair in Transactions)
-            {
-                if (pair.Value.GroupId == id)
-                {
-                    pair.Value.GroupId = -1;
-                    if (pair.Value.UseGroupColor)
-                    {
-                        pair.Value.UseGroupColor = false;
-                        belongingTransactions.Add(pair.Key);
-                    }
-                    await UpdateTransactionAsync(pair.Value);
-                }
-            }
-            FreeMemory();
-            return (true, belongingTransactions);
-        }
-        return (false, new List<uint>());
-    }
-
-    /// <summary>
-    /// Adds a transaction to the account
-    /// </summary>
-    /// <param name="transaction">The transaction to add</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> AddTransactionAsync(Transaction transaction)
-    {
-        using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
-        cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
-        cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
-        cmdAddTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
-        cmdAddTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
-        cmdAddTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
-        cmdAddTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
-        cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
-        cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
-        cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
-        if (transaction.Receipt != null)
-        {
-            using var memoryStream = new MemoryStream();
-            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
-            cmdAddTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
-        }
-        else
-        {
-            cmdAddTransaction.Parameters.AddWithValue("$receipt", "");
-        }
-        cmdAddTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
-        cmdAddTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
-        if (await cmdAddTransaction.ExecuteNonQueryAsync() > 0)
-        {
-            Transactions.Add(transaction.Id, transaction);
-            if (transaction.Id >= NextAvailableTransactionId)
-            {
-                NextAvailableTransactionId = transaction.Id + 1;
-            }
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome += transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense += transaction.Amount;
-                }
-            }
-            if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
-            {
-                await SyncRepeatTransactionsAsync();
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Updates a transaction in the account
-    /// </summary>
-    /// <param name="transaction">The transaction to update</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> UpdateTransactionAsync(Transaction transaction)
-    {
-        using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
-        cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
-        cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
-        cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
-        cmdUpdateTransaction.Parameters.AddWithValue("$type", (int)transaction.Type);
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeat", (int)transaction.RepeatInterval);
-        cmdUpdateTransaction.Parameters.AddWithValue("$amount", transaction.Amount);
-        cmdUpdateTransaction.Parameters.AddWithValue("$gid", transaction.GroupId);
-        cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
-        cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
-        cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
-        if (transaction.Receipt != null)
-        {
-            using var memoryStream = new MemoryStream();
-            await transaction.Receipt.SaveAsync(memoryStream, new JpegEncoder());
-            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", Convert.ToBase64String(memoryStream.ToArray()));
-        }
-        else
-        {
-            cmdUpdateTransaction.Parameters.AddWithValue("$receipt", "");
-        }
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeatFrom", transaction.RepeatFrom);
-        cmdUpdateTransaction.Parameters.AddWithValue("$repeatEndDate", transaction.RepeatEndDate != null ? transaction.RepeatEndDate.Value.ToString("d", new CultureInfo("en-US")) : "");
-        if (await cmdUpdateTransaction.ExecuteNonQueryAsync() > 0)
-        {
-            var oldTransaction = Transactions[transaction.Id];
-            if (oldTransaction.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                var groupId = oldTransaction.GroupId == -1 ? 0u : (uint)oldTransaction.GroupId;
-                Groups[groupId].Balance -= (oldTransaction.Type == TransactionType.Income ? 1 : -1) * oldTransaction.Amount;
-                if (oldTransaction.Type == TransactionType.Income)
-                {
-                    TodayIncome -= oldTransaction.Amount;
-                }
-                else
-                {
-                    TodayExpense -= oldTransaction.Amount;
-                }
-            }
-            Transactions[transaction.Id].Dispose();
-            Transactions[transaction.Id] = transaction;
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance += (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome += transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense += transaction.Amount;
-                }
-            }
-            if (transaction.RepeatFrom == 0)
-            {
-                await SyncRepeatTransactionsAsync();
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Updates a source transaction in the account
-    /// </summary>
-    /// <param name="transaction">The transaction to update</param>
-    /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
-    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
-    {
-        var transactions = Transactions.Values.ToList();
-        if (updateGenerated)
-        {
-            foreach (var t in transactions)
-            {
-                if (t.RepeatFrom == (int)transaction.Id)
-                {
-                    var tt = (Transaction)t.Clone();
-                    tt.Description = transaction.Description;
-                    tt.Type = transaction.Type;
-                    tt.Amount = transaction.Amount;
-                    tt.GroupId = transaction.GroupId;
-                    tt.RGBA = transaction.RGBA;
-                    tt.UseGroupColor = transaction.UseGroupColor;
-                    tt.Receipt = transaction.Receipt;
-                    tt.RepeatEndDate = transaction.RepeatEndDate;
-                    tt.Notes = transaction.Notes;
-                    await UpdateTransactionAsync(tt);
-                }
-            }
-            await UpdateTransactionAsync(transaction);
-        }
-        else
-        {
-            foreach (var t in transactions)
-            {
-                if (t.RepeatFrom == (int)transaction.Id)
-                {
-                    var tt = (Transaction)t.Clone();
-                    tt.RepeatInterval = TransactionRepeatInterval.Never;
-                    tt.RepeatFrom = -1;
-                    tt.RepeatEndDate = null;
-                    await UpdateTransactionAsync(tt);
-                }
-            }
-            await UpdateTransactionAsync(transaction);
-        }
-    }
-
-    /// <summary>
-    /// The transaction to delete from the account
-    /// </summary>
-    /// <param name="id">The id of the transaction to delete</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> DeleteTransactionAsync(uint id)
-    {
-        using var cmdDeleteTransaction = _database!.CreateCommand();
-        cmdDeleteTransaction.CommandText = "DELETE FROM transactions WHERE id = $id";
-        cmdDeleteTransaction.Parameters.AddWithValue("$id", id);
-        if (await cmdDeleteTransaction.ExecuteNonQueryAsync() > 0)
-        {
-            var transaction = Transactions[id];
-            if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))
-            {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                Groups[groupId].Balance -= (transaction.Type == TransactionType.Income ? 1 : -1) * transaction.Amount;
-                if (transaction.Type == TransactionType.Income)
-                {
-                    TodayIncome -= transaction.Amount;
-                }
-                else
-                {
-                    TodayExpense -= transaction.Amount;
-                }
-            }
-            Transactions[id].Dispose();
-            Transactions.Remove(id);
-            if (id + 1 == NextAvailableTransactionId)
-            {
-                NextAvailableTransactionId--;
-            }
-            FreeMemory();
-            BackupAccountToCSV();
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Removes a source transaction from the account
-    /// </summary>
-    /// <param name="id">The id of the transaction to delete</param>
-    /// <param name="deleteGenerated">Whether or not to delete generated transactions associated with the source</param>
-    public async Task DeleteSourceTransactionAsync(uint id, bool deleteGenerated)
-    {
-        var transactions = Transactions.Values.ToList();
-        if (deleteGenerated)
-        {
-            await DeleteTransactionAsync(id);
-            foreach (var transaction in transactions)
-            {
-                if (transaction.RepeatFrom == (int)id)
-                {
-                    await DeleteTransactionAsync(transaction.Id);
-                }
-            }
-        }
-        else
-        {
-            await DeleteTransactionAsync(id);
-            foreach (var transaction in transactions)
-            {
-                if (transaction.RepeatFrom == (int)id)
-                {
-                    var t = (Transaction)transaction.Clone();
-                    t.RepeatInterval = TransactionRepeatInterval.Never;
-                    t.RepeatFrom = -1;
-                    t.RepeatEndDate = null;
-                    await UpdateTransactionAsync(t);
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Removes generated repeat transactions from the account
-    /// </summary>
-    /// <param name="id">The id of the source transaction</param>
-    public async Task DeleteGeneratedTransactionsAsync(uint id)
-    {
-        var transactions = Transactions.Values.ToList();
-        foreach (var transaction in transactions)
-        {
-            if (transaction.RepeatFrom == (int)id)
-            {
-                await DeleteTransactionAsync(transaction.Id);
-            }
-        }
     }
 
     /// <summary>
@@ -1617,6 +1626,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, -1, -1, false));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1672,6 +1682,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
@@ -1824,13 +1835,223 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Frees up memory used by the database
+    /// Generates a graph based on the type
     /// </summary>
-    private void FreeMemory()
+    /// <param name="type">GraphType</param>
+    /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    /// <param name="showLegend">Whether or not to show the legend</param>
+    /// <returns>The byte[] of the graph</returns>
+    public byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, int width = -1, int height = -1, bool showLegend = true)
     {
-        using var cmdClean = _database!.CreateCommand();
-        cmdClean.CommandText = "PRAGMA shrink_memory";
-        cmdClean.ExecuteNonQuery();
+        InMemorySkiaSharpChart? chart = null;
+        if (type == GraphType.IncomeExpensePie)
+        {
+            var income = 0m;
+            var expense = 0m;
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                if (transaction.Type == TransactionType.Income)
+                {
+                    income += transaction.Amount;
+                }
+                else
+                {
+                    expense += transaction.Amount;
+                }
+            }
+            chart = new SKPieChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { income }, Fill = new SolidColorPaint(SKColors.Green) },
+                    new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { expense }, Fill = new SolidColorPaint(SKColors.Red) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeExpensePerGroup)
+        {
+            var data = new Dictionary<string, decimal[]>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                var groupName = Groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
+                if (!data.ContainsKey(groupName))
+                {
+                    data.Add(groupName, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[groupName][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[groupName][1] += transaction.Amount;
+                }
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[0]).ToArray(), Fill = new SolidColorPaint(SKColors.Green) },
+                    new ColumnSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[1]).ToArray(), Fill = new SolidColorPaint(SKColors.Red) },
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis() { Labels = data.Keys.OrderBy(x => x == _("Ungrouped") ? " " : x).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeExpenseOverTime)
+        {
+            //Date Culture
+            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
+            if (lcTime != null && lcTime.Contains(".UTF-8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
+            }
+            else if (lcTime != null && lcTime.Contains(".utf8"))
+            {
+                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
+            }
+            if (lcTime != null && lcTime.Contains('_'))
+            {
+                lcTime = lcTime.Replace('_', '-');
+            }
+            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+            //Graph
+            var data = new Dictionary<DateOnly, decimal[]>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                if (!data.ContainsKey(transaction.Date))
+                {
+                    data.Add(transaction.Date, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[transaction.Date][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[transaction.Date][1] += transaction.Amount;
+                }
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new LineSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[0]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Green), GeometryStroke = new SolidColorPaint(SKColors.Green), Fill = null, Stroke = new SolidColorPaint(SKColors.Green) },
+                    new LineSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[1]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Red), GeometryStroke = new SolidColorPaint(SKColors.Red), Fill = null, Stroke = new SolidColorPaint(SKColors.Red) }
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", cultureDate)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
+        {
+            var data = new Dictionary<uint, decimal>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+            }
+            var series = new List<ISeries>(data.Count);
+            foreach (var pair in data.OrderBy(x => Groups[x.Key].Name == _("Ungrouped") ? " " : Groups[x.Key].Name))
+            {
+                var hex = "#FF"; //255
+                var rgba = string.IsNullOrEmpty(Groups[pair.Key].RGBA) ? Configuration.Current.GroupDefaultColor : Groups[pair.Key].RGBA;
+                if (rgba.StartsWith("#"))
+                {
+                    rgba = rgba.Remove(0, 1);
+                    if (rgba.Length == 8)
+                    {
+                        rgba = rgba.Remove(rgba.Length - 2);
+                    }
+                    hex += rgba;
+                }
+                else
+                {
+                    rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                    rgba = rgba.Remove(rgba.Length - 1);
+                    var fields = rgba.Split(',');
+                    hex += byte.Parse(fields[0]).ToString("X2");
+                    hex += byte.Parse(fields[1]).ToString("X2");
+                    hex += byte.Parse(fields[2]).ToString("X2");
+                }
+                series.Add(new PieSeries<decimal>()
+                {
+                    Name = Groups[pair.Key].Name,
+                    Values = new decimal[] { pair.Value },
+                    Fill = new SolidColorPaint(SKColor.Parse(hex))
+                });
+            }
+            chart = new SKPieChart()
+            {
+                Title = new LabelVisual()
+                {
+                    Text = type == GraphType.IncomeByGroup ? _("Income") : _("Expense"),
+                    Paint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+                    Padding = new LiveChartsCore.Drawing.Padding(15),
+                    TextSize = 16
+                },
+                Background = SKColor.Empty,
+                Series = series,
+                LegendPosition = showLegend ? LegendPosition.Bottom : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        if (chart != null)
+        {
+            if (width > 0)
+            {
+                chart.Width = width;
+            }
+            if (height > 0)
+            {
+                chart.Height = height;
+            }
+            return chart.GetImage().Encode().ToArray();
+        }
+        return Array.Empty<byte>();
     }
 
     /// <summary>
@@ -1838,7 +2059,7 @@ public class Account : IDisposable
     /// </summary>
     private void BackupAccountToCSV()
     {
-        if (!_isEncrypted.GetValueOrDefault())
+        if (!(_isEncrypted ?? false) && Directory.Exists(Configuration.Current.CSVBackupFolder))
         {
             ExportToCSV($"{Configuration.Current.CSVBackupFolder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.csv", ExportMode.All, new List<uint>());
         }

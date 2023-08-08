@@ -49,6 +49,7 @@
   <releases>
     <release version="2023.8.0-beta1" date="2023-07-29">
       <description translatable="no">
+        <p>- Added graph visuals to the Account view as well as in exported PDFs</p>
         <p>- Added the option to select the entire current month as the date range filter </p>
         <p>- Improved the transaction description suggestion algorithm with fuzzy search</p>
         <p>- Fixed an issue where the help button in the import toast was not working</p>
