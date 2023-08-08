@@ -189,6 +189,8 @@ public partial class TransactionDialog : Adw.Window
         };
         //Description
         _autocompleteBox = new AutocompleteBox<Transaction>();
+        _autocompleteBox.SetSizeRequest(378, -1);
+        _autocompleteBox.SetMarginTop(66);
         _autocompleteBox.SuggestionAccepted += (sender, e) =>
         {
             _descriptionRow.SetText(e.Item1);
@@ -205,10 +207,6 @@ public partial class TransactionDialog : Adw.Window
                 _colorButton.SetExtRgba(transactionColor!.Value);
             }
         };
-        _autocompleteBox.SetSizeRequest(378, -1);
-        _autocompleteBox.SetMarginTop(66);
-        _autocompleteBox.SetHalign(Gtk.Align.Center);
-        _autocompleteBox.SetValign(Gtk.Align.Start);
         _overlay.AddOverlay(_autocompleteBox);
         _descriptionRow.OnNotify += (sender, e) =>
         {
@@ -216,7 +214,13 @@ public partial class TransactionDialog : Adw.Window
             {
                 if (!_constructing)
                 {
-                    AutocompleteDescription();
+                    var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
+                    if(matchingDescriptions.Count > 0)
+                    {
+                        _autocompleteBox.UpdateSuggestions(matchingDescriptions);
+                    }
+                    _descriptionRow.SetActivatesDefault(matchingDescriptions.Count == 0);
+                    _autocompleteBox.SetVisible(matchingDescriptions.Count > 0);
                     Validate();
                 }
             }
@@ -512,26 +516,6 @@ public partial class TransactionDialog : Adw.Window
                 _applyButton.SetSensitive(true);
             }
         }
-    }
-
-    /// <summary>
-    /// Sets up autocomplete for description
-    /// </summary>
-    private void AutocompleteDescription()
-    {
-        if(!string.IsNullOrEmpty(_descriptionRow.GetText()))
-        {
-            var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
-            if(matchingDescriptions.Count != 0)
-            {
-                _descriptionRow.SetActivatesDefault(false);
-                _autocompleteBox.UpdateSuggestions(matchingDescriptions);
-                _autocompleteBox.SetVisible(true);
-                return;
-            }
-        }
-        _descriptionRow.SetActivatesDefault(true);
-        _autocompleteBox.SetVisible(false);
     }
 
     /// <summary>
