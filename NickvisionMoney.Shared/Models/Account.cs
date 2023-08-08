@@ -36,7 +36,7 @@ public enum ExportMode
 public enum GraphType
 {
     IncomeExpensePie,
-    IncomeExpenseByGroup,
+    IncomeExpensePerGroup,
     IncomeExpenseOverTime,
     IncomeByGroup,
     ExpenseByGroup,
@@ -1682,7 +1682,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
-                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpenseByGroup, false, filteredIds));
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
@@ -1875,7 +1875,7 @@ public class Account : IDisposable
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
             };
         }
-        else if (type == GraphType.IncomeExpenseByGroup)
+        else if (type == GraphType.IncomeExpensePerGroup)
         {
             var data = new Dictionary<string, decimal[]>();
             foreach (var id in filteredIds)

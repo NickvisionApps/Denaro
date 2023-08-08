@@ -343,9 +343,27 @@ Adw.Bin _root {
                     hexpand: true;
                   }
                   
-                  Gtk.DrawingArea _incomeExpenseByGroupImage {
+                  Gtk.DrawingArea _incomeExpensePerGroupImage {
                     height-request: 300;
                     hexpand: true;
+                  }
+                  
+                  Gtk.Box {
+                    orientation: horizontal;
+                    
+                    Gtk.DrawingArea _incomeByGroupImage {
+                      height-request: 300;
+                      hexpand: true;
+                    }
+                    
+                    Gtk.Separator {
+                      orientation: vertical;
+                    }
+                    
+                    Gtk.DrawingArea _expenseByGroupImage {
+                      height-request: 300;
+                      hexpand: true;
+                    }
                   }
                   
                   styles ["card"]

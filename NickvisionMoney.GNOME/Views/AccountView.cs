@@ -86,7 +86,9 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Adw.Carousel _carousel;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
-    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseByGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePerGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeByGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _expenseByGroupImage;
     [Gtk.Connect] private readonly Gtk.Separator _visualizeSeparator;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
@@ -126,7 +128,9 @@ public partial class AccountView : Adw.Bin
             {
                 _incomeExpenseOverTimeImage.QueueDraw();
                 _incomeExpensePieImage.QueueDraw();
-                _incomeExpenseByGroupImage.QueueDraw();
+                _incomeExpensePerGroupImage.QueueDraw();
+                _incomeByGroupImage.QueueDraw();
+                _expenseByGroupImage.QueueDraw();
             }
         };
         //Build UI
@@ -246,11 +250,25 @@ public partial class AccountView : Adw.Bin
                 DrawGraph(ctx, GraphType.IncomeExpensePie, width, height);
             }
         });
-        _incomeExpenseByGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        _incomeExpensePerGroupImage.SetDrawFunc((area, ctx, width, height) =>
         {
             if (_currentGraphPage == 2)
             {
-                DrawGraph(ctx, GraphType.IncomeExpenseByGroup, width, height);
+                DrawGraph(ctx, GraphType.IncomeExpensePerGroup, width, height);
+            }
+        });
+        _incomeByGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 3)
+            {
+                DrawGraph(ctx, GraphType.IncomeByGroup, width, height);
+            }
+        });
+        _expenseByGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        {
+            if (_currentGraphPage == 3)
+            {
+                DrawGraph(ctx, GraphType.ExpenseByGroup, width, height);
             }
         });
         //Graph Carousel Buttons
@@ -275,7 +293,9 @@ public partial class AccountView : Adw.Bin
             _currentGraphPage = e.Index;
             _incomeExpenseOverTimeImage.QueueDraw();
             _incomeExpensePieImage.QueueDraw();
-            _incomeExpenseByGroupImage.QueueDraw();
+            _incomeExpensePerGroupImage.QueueDraw();
+            _incomeByGroupImage.QueueDraw();
+            _expenseByGroupImage.QueueDraw();
         };
         //Transactions Scrolled Window
         _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
@@ -410,7 +430,9 @@ public partial class AccountView : Adw.Bin
                     _viewStack.SetVisibleChildName("transactions");
                     _incomeExpenseOverTimeImage.QueueDraw();
                     _incomeExpensePieImage.QueueDraw();
-                    _incomeExpenseByGroupImage.QueueDraw();
+                    _incomeExpensePerGroupImage.QueueDraw();
+                    _incomeByGroupImage.QueueDraw();
+                    _expenseByGroupImage.QueueDraw();
                 }
                 else
                 {
