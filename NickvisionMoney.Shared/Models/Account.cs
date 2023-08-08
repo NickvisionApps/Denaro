@@ -1,10 +1,10 @@
 ﻿using Hazzik.Qif;
 using LiveChartsCore;
-using LiveChartsCore.Kernel;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.SKCharts;
+using LiveChartsCore.SkiaSharpView.VisualElements;
 using Microsoft.Data.Sqlite;
 using NickvisionMoney.Shared.Helpers;
 using OfxSharp;
@@ -37,7 +37,9 @@ public enum GraphType
 {
     IncomeExpensePie,
     IncomeExpenseByGroup,
-    IncomeExpenseOverTime
+    IncomeExpenseOverTime,
+    IncomeByGroup,
+    ExpenseByGroup,
 }
 
 /// <summary>
@@ -1965,6 +1967,75 @@ public class Account : IDisposable
                     new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
                 },
                 LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
+        {
+            var data = new Dictionary<uint, decimal>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = Transactions[id];
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+            }
+            var series = new List<ISeries>(data.Count);
+            foreach (var pair in data.OrderBy(x => Groups[x.Key].Name == _("Ungrouped") ? " " : Groups[x.Key].Name))
+            {
+                var hex = "#FF"; //255
+                var rgba = string.IsNullOrEmpty(Groups[pair.Key].RGBA) ? Configuration.Current.GroupDefaultColor : Groups[pair.Key].RGBA;
+                if (rgba.StartsWith("#"))
+                {
+                    rgba = rgba.Remove(0, 1);
+                    if (rgba.Length == 8)
+                    {
+                        rgba = rgba.Remove(rgba.Length - 2);
+                    }
+                    hex += rgba;
+                }
+                else
+                {
+                    rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                    rgba = rgba.Remove(rgba.Length - 1);
+                    var fields = rgba.Split(',');
+                    hex += byte.Parse(fields[0]).ToString("X2");
+                    hex += byte.Parse(fields[1]).ToString("X2");
+                    hex += byte.Parse(fields[2]).ToString("X2");
+                }
+                series.Add(new PieSeries<decimal>()
+                {
+                    Name = Groups[pair.Key].Name,
+                    Values = new decimal[] { pair.Value },
+                    Fill = new SolidColorPaint(SKColor.Parse(hex))
+                });
+            }
+            chart = new SKPieChart()
+            {
+                Title = new LabelVisual()
+                {
+                    Text = type == GraphType.IncomeByGroup ? _("Income") : _("Expense"),
+                    Paint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+                    Padding = new LiveChartsCore.Drawing.Padding(15),
+                    TextSize = 16
+                },
+                Background = SKColor.Empty,
+                Series = series,
+                LegendPosition = showLegend ? LegendPosition.Bottom : LegendPosition.Hidden,
                 LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
             };
         }
