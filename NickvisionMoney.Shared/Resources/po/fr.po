@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-31 21:08-0400\n"
-"PO-Revision-Date: 2023-06-25 23:41+0000\n"
+"PO-Revision-Date: 2023-08-08 18:32+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
 "app/fr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:525
 msgid "(Copy)"
@@ -617,7 +617,6 @@ msgid "This account is already opened."
 msgstr "Ce compte est déjà ouvert."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:866
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -628,8 +627,8 @@ msgstr ""
 "Cette transaction est une transaction répétée à partir de la source.\n"
 "Que voulez-vous faire avec les transactions répétées ?\n"
 "\n"
-"En supprimant uniquement la transaction source, les transactions "
-"individuelles générées seront modifiables."
+"En supprimant uniquement la transaction source, les transactions\n"
+"individuelles générées deviendront modifiables."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:814
 msgid ""
@@ -938,7 +937,7 @@ msgstr "Calendrier"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Select Current Month"
-msgstr ""
+msgstr "Sélectionner le mois actuel"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:189
 msgid "Reset To Today"
