@@ -87,8 +87,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpenseOverTimeImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePieImage;
     [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePerGroupImage;
-    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeByGroupImage;
-    [Gtk.Connect] private readonly Gtk.DrawingArea _expenseByGroupImage;
+    [Gtk.Connect] private readonly Gtk.DrawingArea _incomeExpensePerGroupPieImage;
     [Gtk.Connect] private readonly Gtk.Separator _visualizeSeparator;
     [Gtk.Connect] private readonly Gtk.DropDown _sortTransactionByDropDown;
     [Gtk.Connect] private readonly Gtk.ToggleButton _sortFirstToLastButton;
@@ -129,8 +128,7 @@ public partial class AccountView : Adw.Bin
                 _incomeExpenseOverTimeImage.QueueDraw();
                 _incomeExpensePieImage.QueueDraw();
                 _incomeExpensePerGroupImage.QueueDraw();
-                _incomeByGroupImage.QueueDraw();
-                _expenseByGroupImage.QueueDraw();
+                _incomeExpensePerGroupPieImage.QueueDraw();
             }
         };
         //Build UI
@@ -257,18 +255,11 @@ public partial class AccountView : Adw.Bin
                 DrawGraph(ctx, GraphType.IncomeExpensePerGroup, width, height);
             }
         });
-        _incomeByGroupImage.SetDrawFunc((area, ctx, width, height) =>
+        _incomeExpensePerGroupPieImage.SetDrawFunc((area, ctx, width, height) =>
         {
             if (_currentGraphPage == 3)
             {
-                DrawGraph(ctx, GraphType.IncomeByGroup, width, height);
-            }
-        });
-        _expenseByGroupImage.SetDrawFunc((area, ctx, width, height) =>
-        {
-            if (_currentGraphPage == 3)
-            {
-                DrawGraph(ctx, GraphType.ExpenseByGroup, width, height);
+                DrawDoubleGraphs(ctx, GraphType.IncomeByGroup, GraphType.ExpenseByGroup, width, height);
             }
         });
         //Graph Carousel Buttons
@@ -294,8 +285,7 @@ public partial class AccountView : Adw.Bin
             _incomeExpenseOverTimeImage.QueueDraw();
             _incomeExpensePieImage.QueueDraw();
             _incomeExpensePerGroupImage.QueueDraw();
-            _incomeByGroupImage.QueueDraw();
-            _expenseByGroupImage.QueueDraw();
+            _incomeExpensePerGroupPieImage.QueueDraw();
         };
         //Transactions Scrolled Window
         _transactionsScrollAdjustment = _transactionsScroll.GetVadjustment();
@@ -431,8 +421,7 @@ public partial class AccountView : Adw.Bin
                     _incomeExpenseOverTimeImage.QueueDraw();
                     _incomeExpensePieImage.QueueDraw();
                     _incomeExpensePerGroupImage.QueueDraw();
-                    _incomeByGroupImage.QueueDraw();
-                    _expenseByGroupImage.QueueDraw();
+                    _incomeExpensePerGroupPieImage.QueueDraw();
                 }
                 else
                 {
@@ -470,6 +459,32 @@ public partial class AccountView : Adw.Bin
         loader.Close();
         var pixbuf = loader.GetPixbuf()!;
         Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf, 0, 0);
+        ctx.Paint();
+    }
+
+    /// <summary>
+    /// Drawing function for double graph images
+    /// </summary>
+    /// <param name="ctx">Cairo.Context</param>
+    /// <param name="type1">First GraphType</param>
+    /// <param name="type2">Second GraphType</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    private void DrawDoubleGraphs(Cairo.Context ctx, GraphType type1, GraphType type2, int width, int height)
+    {
+        var graph1 = _controller.GenerateGraph(type1, Adw.StyleManager.GetDefault().GetDark(), width / 2, height);
+        using var loader1 = GdkPixbuf.PixbufLoader.New();
+        loader1.Write(graph1);
+        loader1.Close();
+        var pixbuf1 = loader1.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf1, 0, 0);
+        ctx.Paint();
+        var graph2 = _controller.GenerateGraph(type2, Adw.StyleManager.GetDefault().GetDark(), width / 2, height);
+        using var loader2 = GdkPixbuf.PixbufLoader.New();
+        loader2.Write(graph2);
+        loader2.Close();
+        var pixbuf2 = loader2.GetPixbuf()!;
+        Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf2, width / 2, 0);
         ctx.Paint();
     }
     
