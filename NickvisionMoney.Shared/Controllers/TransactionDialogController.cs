@@ -87,23 +87,29 @@ public class TransactionDialogController : IDisposable
     /// The list of group names
     /// </summary>
     public List<string> GroupNames => _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).Select(x => x.Name).ToList();
+    /// <summary>
+    /// The list of tags in the account
+    /// </summary>
+    public List<string> AccountTags;
 
     /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="tags">The list of tags in the account</params>
     /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> tags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
+        AccountTags = tags;
         Transaction = (Transaction)transaction.Clone();
         CanCopy = canCopy;
         IsEditing = canCopy;
@@ -122,17 +128,19 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
     /// <param name="groups">The list of groups in the account</param>
+    /// <param name="tags">The list of tags in the account</params>
     /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> tags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
+        AccountTags = tags;
         Transaction = new Transaction(id);
         CanCopy = false;
         IsEditing = false;
@@ -282,12 +290,13 @@ public class TransactionDialogController : IDisposable
     /// <param name="groupName">The new Group name</param>
     /// <param name="rgba">The new rgba string</param>
     /// <param name="useGroupColor">Whether or not to use the group's color instead of the transaction's color</param>
+    /// <param name="tags">List of transaction tags</param>
     /// <param name="amountString">The new amount string</param>
     /// <param name="receiptPath">The new receipt image path</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <param name="notes">The new notes</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, string amountString, string? receiptPath, DateOnly? repeatEndDate, string notes)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, List<string> tags, string amountString, string? receiptPath, DateOnly? repeatEndDate, string notes)
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
@@ -331,6 +340,7 @@ public class TransactionDialogController : IDisposable
         Transaction.GroupId = groupName == _("Ungrouped") ? -1 : (int)_groups.FirstOrDefault(x => x.Value.Name == groupName).Key;
         Transaction.RGBA = rgba;
         Transaction.UseGroupColor = useGroupColor;
+        Transaction.Tags = tags;
         Transaction.Receipt = null;
         if (receiptPath != null)
         {

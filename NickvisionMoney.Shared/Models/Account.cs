@@ -65,6 +65,10 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Group> Groups { get; init; }
     /// <summary>
+    /// A list of tags in the account
+    /// </summary>
+    public List<string> Tags { get; init; }
+    /// <summary>
     /// A map of transactions in the account
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
@@ -102,6 +106,7 @@ public class Account : IDisposable
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
+        Tags = new List<string>();
         Transactions = new Dictionary<uint, Transaction>();
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
@@ -380,7 +385,7 @@ public class Account : IDisposable
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
         using var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -429,6 +434,13 @@ public class Account : IDisposable
             using var cmdTableTransactionsUpdate7 = _database.CreateCommand();
             cmdTableTransactionsUpdate7.CommandText = "ALTER TABLE transactions ADD COLUMN notes TEXT";
             cmdTableTransactionsUpdate7.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableTransactionsUpdate8 = _database.CreateCommand();
+            cmdTableTransactionsUpdate8.CommandText = "ALTER TABLE transactions ADD COLUMN tags TEXT";
+            cmdTableTransactionsUpdate8.ExecuteNonQuery();
         }
         catch { }
         //Get Metadata
@@ -520,7 +532,10 @@ public class Account : IDisposable
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
                 RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
                 Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
+                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList()
             };
+            Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
+            Tags.Sort();
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
@@ -766,7 +781,7 @@ public class Account : IDisposable
     public async Task<bool> AddTransactionAsync(Transaction transaction)
     {
         using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes, tags) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes, $tags)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -777,6 +792,9 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        cmdAddTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
+        Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
+        Tags.Sort();
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -828,7 +846,7 @@ public class Account : IDisposable
     public async Task<bool> UpdateTransactionAsync(Transaction transaction)
     {
         using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes, tags = $tags WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -839,6 +857,9 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        cmdUpdateTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
+        Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
+        Tags.Sort();
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -918,6 +939,7 @@ public class Account : IDisposable
                     tt.Receipt = transaction.Receipt;
                     tt.RepeatEndDate = transaction.RepeatEndDate;
                     tt.Notes = transaction.Notes;
+                    tt.Tags = transaction.Tags;
                     await UpdateTransactionAsync(tt);
                 }
             }
@@ -1211,7 +1233,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 14)
+            if (fields.Length != 15)
             {
                 continue;
             }
@@ -1332,6 +1354,7 @@ public class Account : IDisposable
                 };
                 await AddGroupAsync(group);
             }
+            var tags = fields[14].Split(',').ToList();
             //Add Transaction
             var transaction = new Transaction(id)
             {
@@ -1344,7 +1367,8 @@ public class Account : IDisposable
                 RGBA = rgba,
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate
+                RepeatEndDate = repeatEndDate,
+                Tags = tags
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
@@ -1473,7 +1497,7 @@ public class Account : IDisposable
     public bool ExportToCSV(string path, ExportMode exportMode, List<uint> filteredIds)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Tags\n";
         var transactions = Transactions;
         if(exportMode == ExportMode.CurrentView)
         {
@@ -1489,12 +1513,13 @@ public class Account : IDisposable
             if (pair.Value.GroupId != -1)
             {
                 var group = Groups[(uint)pair.Value.GroupId];
-                result += $"{group.Name};{group.Description};{group.RGBA}\n";
+                result += $"{group.Name};{group.Description};{group.RGBA};";
             }
             else
             {
-                result += ";;\n";
+                result += ";;;";
             }
+            result += $"{string.Join(',', pair.Value.Tags)}\n";
         }
         try
         {
@@ -1689,13 +1714,14 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, GroupName, Notes, Amount
+                                //ID, Date, Description, Type, GroupName, Notes, Tags, Amount
                                 x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
+                                x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                             });
                             //Headers
@@ -1706,6 +1732,7 @@ public class Account : IDisposable
                             tbl.Cell().Text(_("Type")).SemiBold();
                             tbl.Cell().Text(_("Group Name")).SemiBold();
                             tbl.Cell().Text(_("Notes")).SemiBold();
+                            tbl.Cell().Text(_("Tags")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
                             var transactions = Transactions;
@@ -1757,6 +1784,7 @@ public class Account : IDisposable
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? _("Ungrouped") : Groups[(uint)pair.Value.GroupId].Name);
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
+                                tbl.Cell().Background(hex).Text(string.Join(", ", pair.Value.Tags));
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "−  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
                         });
