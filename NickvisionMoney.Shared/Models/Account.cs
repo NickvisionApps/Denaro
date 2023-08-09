@@ -1714,25 +1714,25 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, GroupName, Notes, Tags, Amount
+                                //ID, Date, Description, Type, GroupName, Tags, Notes, Amount
                                 x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
-                                x.RelativeColumn(3);
                                 x.RelativeColumn(2);
+                                x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
+                            tbl.Cell().ColumnSpan(8).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
                             tbl.Cell().Text(_("Id")).SemiBold();
                             tbl.Cell().Text(_("Date")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
                             tbl.Cell().Text(_("Type")).SemiBold();
                             tbl.Cell().Text(_("Group Name")).SemiBold();
-                            tbl.Cell().Text(_("Notes")).SemiBold();
                             tbl.Cell().Text(_("Tags")).SemiBold();
+                            tbl.Cell().Text(_("Notes")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
                             var transactions = Transactions;
@@ -1783,8 +1783,8 @@ public class Account : IDisposable
                                     _ => ""
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? _("Ungrouped") : Groups[(uint)pair.Value.GroupId].Name);
-                                tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).Text(string.Join(", ", pair.Value.Tags));
+                                tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "−  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }
                         });
