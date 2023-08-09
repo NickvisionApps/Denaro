@@ -17,10 +17,9 @@
   background-color: #00000000;
 }
 
-.account-tag {
+.tag {
   border-radius: 20px;
   font-size: 12px;
-  padding: 1px 12px;
 }
 
 .greeting-title {
@@ -100,10 +99,10 @@ row.error button.circular {
 }
 
 /* Transactions header box */
-.transactions-header {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: @borders;
+.transactions-scroll {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: @borders;
 }
 
 /* Group Checkbutton */
