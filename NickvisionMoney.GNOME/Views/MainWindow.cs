@@ -107,6 +107,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _dashboardButton.OnToggled += OnToggleDashboard;
         //Header Bar
         _windowTitle.SetTitle(_controller.AppInfo.ShortName);
+        _graphToggleButton.SetActive(_controller.ShowGraphs);
         //Greeting
         _greeting.SetIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
         _greeting.SetLabel(_controller.Greeting);
@@ -254,6 +255,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <returns>True to stop close, else false</returns>
     private bool OnCloseRequested(Gtk.Window sender, EventArgs e)
     {
+        _controller.ShowGraphs = _graphToggleButton.GetActive();
         _controller.Dispose();
         return false;
     }

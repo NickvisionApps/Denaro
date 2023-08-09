@@ -1,8 +1,6 @@
 ﻿using Nickvision.Aura;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace NickvisionMoney.Shared.Models;
@@ -77,6 +75,10 @@ public class Configuration : ConfigurationBase
     /// A folder to use to backup accounts as CSV
     /// </summary>
     public string CSVBackupFolder { get; set; }
+    /// <summary>
+    /// Whether or not to show graphs
+    /// </summary>
+    public bool ShowGraphs { get; set; }
 
     /// <summary>
     /// Constructs a Configuration
@@ -96,6 +98,7 @@ public class Configuration : ConfigurationBase
         UseNativeDigits = true;
         InsertSeparator = InsertSeparator.NumpadOnly;
         CSVBackupFolder = "";
+        ShowGraphs = true;
     }
 
     /// <summary>
