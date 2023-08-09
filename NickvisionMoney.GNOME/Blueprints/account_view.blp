@@ -369,53 +369,54 @@ Adw.Bin _root {
             }
             
             Gtk.Box {
-              orientation: horizontal;
+              orientation: vertical;
               
               Adw.PreferencesGroup _transactionsGroup {
                 title: _("Transactions");
-                margin-top: 6;
+                margin-top: 8;
                 margin-start: 10;
                 margin-end: 10;
-                margin-bottom: 10;
                 header-suffix: Gtk.Box {
                   orientation: horizontal;
                   spacing: 6;
-                  
+
                   Gtk.DropDown _sortTransactionByDropDown {}
-                  
+
                   Gtk.Box _transactionsHeaderBox {
                     orientation: horizontal;
                     valign: center;
-                    
+
                     Gtk.ToggleButton _sortFirstToLastButton {
                       icon-name: "view-sort-descending-symbolic";
                       tooltip-text: _("Sort From First To Last");
                       active: bind _sortLastToFirstButton.active inverted bidirectional;
                     }
-                    
+
                     Gtk.ToggleButton _sortLastToFirstButton {
                       icon-name: "view-sort-ascending-symbolic";
                       tooltip-text: _("Sort From Last To First");
                     }
-                    
+
                     styles ["linked"]
                   }
                 };
-                
-                Gtk.ScrolledWindow _transactionsScroll {
-                  width-request: 300;
-                  height-request: 360;
-                  min-content-height: 360;
-                  vexpand: true;
-                  
-                  Gtk.FlowBox _transactionsFlowBox {
-                    homogeneous: true;
-                    column-spacing: 10;
-                    row-spacing: 10;
-                    halign: fill;
-                    valign: start;
-                    selection-mode: none;
-                  }
+              }
+
+              Gtk.ScrolledWindow _transactionsScroll {
+                width-request: 300;
+                min-content-height: 142;
+                vexpand: true;
+
+                Gtk.FlowBox _transactionsFlowBox {
+                  margin-start: 10;
+                  margin-end: 10;
+                  margin-bottom: 62;
+                  homogeneous: true;
+                  column-spacing: 10;
+                  row-spacing: 10;
+                  halign: fill;
+                  valign: start;
+                  selection-mode: none;
                 }
               }
             }

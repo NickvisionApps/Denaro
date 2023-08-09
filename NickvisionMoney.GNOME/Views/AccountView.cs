@@ -295,11 +295,11 @@ public partial class AccountView : Adw.Bin
             {
                 if (_transactionsScrollAdjustment.GetValue() == 0.0)
                 {
-                    _transactionsHeaderBox.RemoveCssClass("transactions-header");
+                    _transactionsScroll.RemoveCssClass("transactions-scroll");
                 }
                 else
                 {
-                    _transactionsHeaderBox.AddCssClass("transactions-header");
+                    _transactionsScroll.AddCssClass("transactions-scroll");
                 }
             }
         };
