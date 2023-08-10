@@ -22,9 +22,8 @@ public class AccountViewController : IDisposable
     private List<uint> _filteredIds;
     private decimal _filteredIncome;
     private decimal _filteredExpense;
-    private readonly Dictionary<int, bool> _filters;
-    private bool _filterUntagged;
-    private List<string> _filterTags;
+    private readonly Dictionary<int, bool> _groupFilters;
+    private readonly Dictionary<string, bool> _tagFilters;
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
     private string _searchDescription;
@@ -183,13 +182,13 @@ public class AccountViewController : IDisposable
         _filteredIds = new List<uint>();
         _filteredIncome = 0;
         _filteredExpense = 0;
-        _filters = new Dictionary<int, bool>();
+        _groupFilters = new Dictionary<int, bool>();
+        _tagFilters = new Dictionary<string, bool>();
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
-        _filters.Add(-3, true); //Income 
-        _filters.Add(-2, true); //Expense
-        _filterTags = new List<string>();
+        _groupFilters.Add(-3, true); //Income 
+        _groupFilters.Add(-2, true); //Expense
         _filterStartDate = DateOnly.FromDateTime(DateTime.Today);
         _filterEndDate = DateOnly.FromDateTime(DateTime.Today);
         _searchDescription = "";
@@ -493,15 +492,14 @@ public class AccountViewController : IDisposable
             //Groups
             foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
             {
-                _filters.Add((int)pair.Value.Id, true);
+                _groupFilters.Add((int)pair.Value.Id, true);
                 GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
             }
             //Tags
-            TagCreated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, true));
             foreach (var tag in _account.Tags)
             {
-                _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
+                _tagFilters.Add(tag, true);
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
             }
             //Transactions
             _filteredIds = _account.Transactions.Keys.ToList();
@@ -602,7 +600,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">EventArgs</param>
-    private void ConfigurationChanged(object? sender, EventArgs e) => GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(Groups[0], null, _filters[0]));
+    private void ConfigurationChanged(object? sender, EventArgs e) => GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(Groups[0], null, _groupFilters[0]));
 
     /// <summary>
     /// Sets the new password of the account
@@ -648,7 +646,7 @@ public class AccountViewController : IDisposable
         {
             foreach (var pair in _account.Groups)
             {
-                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, _filters[(int)pair.Key]));
+                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, _groupFilters[(int)pair.Key]));
             }
             foreach (var pair in _account.Transactions)
             {
@@ -689,11 +687,11 @@ public class AccountViewController : IDisposable
                     TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
                 }
             }
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
             foreach (var tag in res.NewTags)
             {
-                _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
+                _tagFilters.Add(tag, true);
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
             }
             FilterUIUpdate();
         }
@@ -721,12 +719,12 @@ public class AccountViewController : IDisposable
                     }
                 }
             }
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _groupFilters[(int)originalGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _groupFilters[(int)newGroupId]));
             foreach (var tag in res.NewTags)
             {
-                _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
+                _tagFilters.Add(tag, true);
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
             }
             FilterUIUpdate();
         }
@@ -767,12 +765,12 @@ public class AccountViewController : IDisposable
                     TransactionDeleted?.Invoke(this, pair.Key);
                 }
             }
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _groupFilters[(int)originalGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _groupFilters[(int)newGroupId]));
             foreach (var tag in res.NewTags)
             {
-                _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
+                _tagFilters.Add(tag, true);
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
             }
             FilterUIUpdate();
         }
@@ -787,7 +785,7 @@ public class AccountViewController : IDisposable
         var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
         await _account.DeleteTransactionAsync(id);
         TransactionDeleted?.Invoke(this, id);
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
         FilterUIUpdate();
     }
 
@@ -821,7 +819,7 @@ public class AccountViewController : IDisposable
                 }
             }
         }
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
         FilterUIUpdate();
     }
 
@@ -840,7 +838,7 @@ public class AccountViewController : IDisposable
             }
         }
         await _account.DeleteGeneratedTransactionsAsync(id);
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
         FilterUIUpdate();
     }
 
@@ -869,7 +867,7 @@ public class AccountViewController : IDisposable
     {
         await _account.AddGroupAsync(group);
         var groups = _account.Groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).ToList();
-        _filters.Add((int)group.Id, true);
+        _groupFilters.Add((int)group.Id, true);
         GroupCreated?.Invoke(this, new ModelEventArgs<Group>(group, groups.IndexOf(group), true));
     }
 
@@ -880,7 +878,7 @@ public class AccountViewController : IDisposable
     public async Task UpdateGroupAsync(Group group, bool hasColorChanged)
     {
         await _account.UpdateGroupAsync(group);
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(group, null, _filters[(int)group.Id]));
+        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(group, null, _groupFilters[(int)group.Id]));
         if (hasColorChanged)
         {
             foreach (var pair in _account.Transactions)
@@ -900,7 +898,7 @@ public class AccountViewController : IDisposable
     public async Task DeleteGroupAsync(uint id)
     {
         var result = await _account.DeleteGroupAsync(id);
-        _filters.Remove((int)id);
+        _groupFilters.Remove((int)id);
         GroupDeleted?.Invoke(this, id);
         foreach(var transaction in result.BelongingTransactions)
         {
@@ -981,9 +979,9 @@ public class AccountViewController : IDisposable
         }
         foreach (var pair in _account.Groups)
         {
-            if (!_filters.ContainsKey((int)pair.Value.Id))
+            if (!_groupFilters.ContainsKey((int)pair.Value.Id))
             {
-                _filters.Add((int)pair.Value.Id, true);
+                _groupFilters.Add((int)pair.Value.Id, true);
                 GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
             }
         }
@@ -993,7 +991,7 @@ public class AccountViewController : IDisposable
             {
                 var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
                 TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
-                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
             }
             FilterUIUpdate();
             SortUIUpdate();
@@ -1051,55 +1049,44 @@ public class AccountViewController : IDisposable
     public byte[] GenerateGraph(GraphType type, bool darkMode, int width, int height) => _account.GenerateGraph(type, darkMode, _filteredIds, width, height);
 
     /// <summary>
-    /// Gets whether or not a filter is active
+    /// Gets whether or not a group filter is active
     /// </summary>
     /// <param name="key">The id of the filter</param>
     /// <returns>True if active, else false</returns>
-    public bool IsFilterActive(int key) => _filters[key];
+    public bool IsGroupFilterActive(int key) => _groupFilters[key];
 
     /// <summary>
     /// Updates whether or not a filter is active
     /// </summary>
     /// <param name="key">The id of the filter</param>
     /// <param name="value">The value of the filter</param>
-    public void UpdateFilterValue(int key, bool value)
+    public void UpdateGroupFilterValue(int key, bool value)
     {
-        _filters[key] = value;
+        _groupFilters[key] = value;
         FilterUIUpdate();
     }
 
     /// <summary>
-    /// Sets the start and end date of the filter to the same date
+    /// Resets group filters
     /// </summary>
-    /// <param name="date">The date to set</param>
-    public void SetSingleDateFilter(DateOnly date)
-    {
-        _filterStartDate = date;
-        _filterEndDate = date;
-        FilterUIUpdate();
-    }
-
-    /// <summary>
-    /// Resets groups filter
-    /// </summary>
-    public void ResetGroupsFilter()
+    public void ResetGroupFilters()
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[(int)pair.Key] = true;
+            _groupFilters[(int)pair.Key] = true;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
         }
         FilterUIUpdate();
     }
 
     /// <summary>
-    /// Unselect all groups filter
+    /// Unselect all group filters
     /// </summary>
-    public void UnselectAllGroupsFilter()
+    public void UnselectAllGroupFilters()
     {
         foreach (var pair in _account.Groups)
         {
-            _filters[(int)pair.Key] = false;
+            _groupFilters[(int)pair.Key] = false;
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, false));
         }
         FilterUIUpdate();
@@ -1108,55 +1095,48 @@ public class AccountViewController : IDisposable
     /// <summary>
     /// Updates whether or not a tag filter is active
     /// </summary>
-    /// <param name="index">Index of the tag</param>
+    /// <param name="tag">The tag</param>
     /// <param name="active">Whether or not the tag filter is active</param>
-    public void UpdateTagFilter(int index, bool active)
+    public void UpdateTagFilter(string tag, bool active)
     {
-        if (index > 0)
+        _tagFilters[tag] = active;
+        FilterUIUpdate();
+    }
+
+    /// <summary>
+    /// Reset tag filters, setting all tags to enabled state
+    /// </summary>
+    public void ResetTagFilters()
+    {
+        foreach (var tag in _account.Tags)
         {
-            if (active)
-            {
-                _filterTags.Add(_account.Tags[index - 1]);
-            }
-            else
-            {
-                _filterTags.Remove(_account.Tags[index - 1]);
-            }
-        }
-        else
-        {
-            _filterUntagged = active;
+            _tagFilters[tag] = true;
+            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
         }
         FilterUIUpdate();
     }
 
     /// <summary>
-    /// Reset tags filter, setting all tags to enabled state
+    /// Unselect all tag filters
     /// </summary>
-    public void ResetTagsFilter()
+    public void UnselectAllTagFilters()
     {
-        _filterUntagged = true;
-        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, true));
-        _filterTags = new List<string>(_account.Tags);
         foreach (var tag in _account.Tags)
         {
-            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
+            _tagFilters[tag] = false;
+            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, null, false));
         }
         FilterUIUpdate();
     }
-
+    
     /// <summary>
-    /// Unselect all tags filter
+    /// Sets the start and end date of the filter to the same date
     /// </summary>
-    public void UnselectAllTagsFilter()
+    /// <param name="date">The date to set</param>
+    public void SetSingleDateFilter(DateOnly date)
     {
-        _filterUntagged = false;
-        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, false));
-        _filterTags.Clear();
-        foreach (var tag in _account.Tags)
-        {
-            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, false));
-        }
+        _filterStartDate = date;
+        _filterEndDate = date;
         FilterUIUpdate();
     }
 
@@ -1178,23 +1158,23 @@ public class AccountViewController : IDisposable
                     continue;
                 }
             }
-            if (pair.Value.Type == TransactionType.Income && !_filters[-3])
+            if (pair.Value.Type == TransactionType.Income && !_groupFilters[-3])
             {
                 continue;
             }
-            if (pair.Value.Type == TransactionType.Expense && !_filters[-2])
+            if (pair.Value.Type == TransactionType.Expense && !_groupFilters[-2])
             {
                 continue;
             }
-            if (!_filters[pair.Value.GroupId == -1 ? 0 : pair.Value.GroupId])
+            if (!_groupFilters[pair.Value.GroupId == -1 ? 0 : pair.Value.GroupId])
             {
                 continue;
             }
-            if (!_filterUntagged && pair.Value.Tags.Count == 0)
+            if (!_tagFilters[_("Untagged")] && pair.Value.Tags.Count == 0)
             {
                 continue;
             }
-            if (!pair.Value.Tags.Any(x => _filterTags.Contains(x)) && pair.Value.Tags.Count > 0)
+            if (!pair.Value.Tags.Any(x => _tagFilters[x]) && pair.Value.Tags.Count > 0)
             {
                 continue;
             }
@@ -1242,7 +1222,7 @@ public class AccountViewController : IDisposable
         foreach(var pair in _account.Groups)
         {
             var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Income : 0m, groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Expense : 0m);
-            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(newGroup, null, _filters[(int)pair.Key]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(newGroup, null, _groupFilters[(int)pair.Key]));
         }
         AccountInformationChanged?.Invoke(this, EventArgs.Empty);
     }

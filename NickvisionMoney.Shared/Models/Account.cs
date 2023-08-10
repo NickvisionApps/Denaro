@@ -106,7 +106,7 @@ public class Account : IDisposable
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
-        Tags = new List<string>();
+        Tags = new List<string>() { _("Untagged") };
         Transactions = new Dictionary<uint, Transaction>();
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;

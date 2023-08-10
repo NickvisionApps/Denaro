@@ -146,9 +146,9 @@ public partial class AccountView : Adw.Bin
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
-        _incomeCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-3, _incomeCheck.GetActive());
+        _incomeCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateGroupFilterValue(-3, _incomeCheck.GetActive());
         //Account Expense
-        _expenseCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateFilterValue(-2, _expenseCheck.GetActive());
+        _expenseCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateGroupFilterValue(-2, _expenseCheck.GetActive());
         //Button Reset Overview Filter
         _resetOverviewFilterButton.OnClicked += OnResetOverviewFilter;
         //Button Toggle Groups
@@ -158,9 +158,9 @@ public partial class AccountView : Adw.Bin
             OnToggleGroups();
         };
         //Button Reset Groups Filter
-        _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
+        _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupFilters();
         //Button Reset Groups Filter
-        _unselectAllGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllGroupsFilter();
+        _unselectAllGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllGroupFilters();
         //Tags FlowBox
         _tagsFlowBox.SetSortFunc((box1, box2) =>
         {
@@ -173,9 +173,9 @@ public partial class AccountView : Adw.Bin
             return string.Compare(tag1.Tag, tag2.Tag);
         });
         //Button Reset Tags Filter
-        _resetTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetTagsFilter();
+        _resetTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetTagFilters();
         //Button Reset Tags Filter
-        _unselectAllTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllTagsFilter();
+        _unselectAllTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllTagFilters();
         //Calendar Widget
         _calendar.OnPrevMonth += OnCalendarMonthYearChanged;
         _calendar.OnPrevYear += OnCalendarMonthYearChanged;
@@ -565,7 +565,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool CreateTagButton(ModelEventArgs<string> e)
     {
-        var tagButton = new TagButton(e.Position!.Value, e.Model);
+        var tagButton = new TagButton(e.Model);
         _tagButtons.Add(tagButton);
         tagButton.SetActive(true);
         tagButton.FilterChanged += UpdateTagFilter;
@@ -1078,14 +1078,14 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
-    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller.UpdateFilterValue((int)e.Id, e.Filter);
+    private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller.UpdateGroupFilterValue((int)e.Id, e.Filter);
 
     /// <summary>
     /// Occurs when the tagfilter is changed
     /// </summary>
     /// <param name="sender">object?</param>
-    /// <param name="e">The index of the tag who's filter changed and whether to filter or not</param>
-    private void UpdateTagFilter(object? sender, (int Index, bool Filter) e) => _controller.UpdateTagFilter(e.Index, e.Filter);
+    /// <param name="e">The tag and whether to filter or not</param>
+    private void UpdateTagFilter(object? sender, (string Tag, bool Filter) e) => _controller.UpdateTagFilter(e.Tag, e.Filter);
 
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups
