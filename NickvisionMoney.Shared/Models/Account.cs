@@ -776,8 +776,8 @@ public class Account : IDisposable
     /// Adds a transaction to the account
     /// </summary>
     /// <param name="transaction">The transaction to add</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> AddTransactionAsync(Transaction transaction)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> AddTransactionAsync(Transaction transaction)
     {
         using var cmdAddTransaction = _database!.CreateCommand();
         cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes, tags) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes, $tags)";
@@ -825,22 +825,32 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            var newTags = new List<string>();
+            Tags.AddRange(transaction.Tags.Where(t =>
+            {
+                if (!Tags.Contains(t))
+                {
+                    newTags.Add(t);
+                    return true;
+                }
+                return false;
+            }));
             if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
             BackupAccountToCSV();
-            return true;
+            return (true, newTags);
         }
-        return false;
+        return (false, new List<string>());
     }
 
     /// <summary>
     /// Updates a transaction in the account
     /// </summary>
     /// <param name="transaction">The transaction to update</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> UpdateTransactionAsync(Transaction transaction)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> UpdateTransactionAsync(Transaction transaction)
     {
         using var cmdUpdateTransaction = _database!.CreateCommand();
         cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes, tags = $tags WHERE id = $id";
@@ -900,14 +910,24 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            var newTags = new List<string>();
+            Tags.AddRange(transaction.Tags.Where(t =>
+            {
+                if (!Tags.Contains(t))
+                {
+                    newTags.Add(t);
+                    return true;
+                }
+                return false;
+            }));
             if (transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
             BackupAccountToCSV();
-            return true;
+            return (true, newTags);
         }
-        return false;
+        return (false, new List<string>());
     }
 
     /// <summary>
@@ -915,9 +935,12 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transaction">The transaction to update</param>
     /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
-    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
     {
         var transactions = Transactions.Values.ToList();
+        var success = true;
+        var newTags = new List<string>();
         if (updateGenerated)
         {
             foreach (var t in transactions)
@@ -935,10 +958,14 @@ public class Account : IDisposable
                     tt.RepeatEndDate = transaction.RepeatEndDate;
                     tt.Notes = transaction.Notes;
                     tt.Tags = transaction.Tags;
-                    await UpdateTransactionAsync(tt);
+                    var r = await UpdateTransactionAsync(tt);
+                    success &= r.Successful;
+                    newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
-            await UpdateTransactionAsync(transaction);
+            var res = await UpdateTransactionAsync(transaction);
+            success &= res.Successful;
+            newTags = newTags.Union(res.NewTags).ToList();
         }
         else
         {
@@ -950,11 +977,16 @@ public class Account : IDisposable
                     tt.RepeatInterval = TransactionRepeatInterval.Never;
                     tt.RepeatFrom = -1;
                     tt.RepeatEndDate = null;
-                    await UpdateTransactionAsync(tt);
+                    var r = await UpdateTransactionAsync(tt);
+                    success &= r.Successful;
+                    newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
-            await UpdateTransactionAsync(transaction);
+            var res = await UpdateTransactionAsync(transaction);
+            success &= res.Successful;
+            newTags = newTags.Union(res.NewTags).ToList();
         }
+        return (success, newTags);
     }
 
     /// <summary>

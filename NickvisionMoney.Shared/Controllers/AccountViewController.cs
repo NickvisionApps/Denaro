@@ -665,39 +665,38 @@ public class AccountViewController : IDisposable
     public async Task AddTransactionAsync(Transaction transaction)
     {
         var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-        await _account.AddTransactionAsync(transaction);
-        var transactions = _account.Transactions.Keys.ToList();
-        transactions.Sort((a, b) =>
+        var res = await _account.AddTransactionAsync(transaction);
+        if (res.Successful)
         {
-            var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-            if (!SortFirstToLast)
+            var transactions = _account.Transactions.Keys.ToList();
+            transactions.Sort((a, b) =>
             {
-                compareTo *= -1;
+                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
+                if (!SortFirstToLast)
+                {
+                    compareTo *= -1;
+                }
+                return compareTo;
+            });
+            for (var i = 0; i < transactions.Count; i++)
+            {
+                if (transactions[i] == transaction.Id)
+                {
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, i, true));
+                }
+                if (_account.Transactions[transactions[i]].RepeatFrom == transaction.Id)
+                {
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
+                }
             }
-            return compareTo;
-        });
-        for (var i = 0; i < transactions.Count; i++)
-        {
-            if (transactions[i] == transaction.Id)
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
+            foreach (var tag in res.NewTags)
             {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, i, true));
-            }
-            if (_account.Transactions[transactions[i]].RepeatFrom == transaction.Id)
-            {
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transactions[i]], i, true));
-            }
-        }
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _filters[(int)groupId]));
-        foreach (var tag in transaction.Tags)
-        {
-            if (!_account.Tags.Contains(tag))
-            {
-                _account.Tags.Add(tag);
                 _filterTags.Add(tag);
                 TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
+            FilterUIUpdate();
         }
-        FilterUIUpdate();
     }
 
     /// <summary>
@@ -708,30 +707,29 @@ public class AccountViewController : IDisposable
     {
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-        await _account.UpdateTransactionAsync(transaction);
-        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
-        if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
+        var res = await _account.UpdateTransactionAsync(transaction);
+        if (res.Successful)
         {
-            foreach (var pair in _account.Transactions)
+            TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
+            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
             {
-                if (pair.Value.RepeatFrom == transaction.Id)
+                foreach (var pair in _account.Transactions)
                 {
-                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
+                    if (pair.Value.RepeatFrom == transaction.Id)
+                    {
+                        TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
+                    }
                 }
             }
-        }
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
-        foreach (var tag in transaction.Tags)
-        {
-            if (!_account.Tags.Contains(tag))
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
+            foreach (var tag in res.NewTags)
             {
-                _account.Tags.Add(tag);
                 _filterTags.Add(tag);
                 TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
+            FilterUIUpdate();
         }
-        FilterUIUpdate();
     }
 
     /// <summary>
@@ -743,42 +741,41 @@ public class AccountViewController : IDisposable
     {
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-        await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
-        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
-        foreach (var pair in _account.Transactions)
+        var res = await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
+        if (res.Successful)
         {
-            if (updateGenerated && pair.Value.RepeatFrom == transaction.Id)
+            TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
+            foreach (var pair in _account.Transactions)
             {
-                TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
-            }
-            else if (!updateGenerated)
-            {
-                if (pair.Value.RepeatFrom == -1)
+                if (updateGenerated && pair.Value.RepeatFrom == transaction.Id)
                 {
                     TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                 }
-                else if (pair.Value.RepeatFrom == transaction.Id)
+                else if (!updateGenerated)
                 {
-                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
+                    if (pair.Value.RepeatFrom == -1)
+                    {
+                        TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
+                    }
+                    else if (pair.Value.RepeatFrom == transaction.Id)
+                    {
+                        TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
+                    }
+                }
+                if (!_account.Transactions.ContainsKey(pair.Key))
+                {
+                    TransactionDeleted?.Invoke(this, pair.Key);
                 }
             }
-            if (!_account.Transactions.ContainsKey(pair.Key))
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
+            GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
+            foreach (var tag in res.NewTags)
             {
-                TransactionDeleted?.Invoke(this, pair.Key);
-            }
-        }
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _filters[(int)originalGroupId]));
-        GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _filters[(int)newGroupId]));
-        foreach (var tag in transaction.Tags)
-        {
-            if (!_account.Tags.Contains(tag))
-            {
-                _account.Tags.Add(tag);
                 _filterTags.Add(tag);
                 TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
+            FilterUIUpdate();
         }
-        FilterUIUpdate();
     }
 
     /// <summary>
