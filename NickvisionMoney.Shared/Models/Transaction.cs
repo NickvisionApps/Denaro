@@ -179,7 +179,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             Receipt = Receipt?.Clone((x) => { }) ?? null,
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate,
-            Tags = Tags,
+            Tags = new List<string>(Tags),
             Notes = Notes
         };
     }

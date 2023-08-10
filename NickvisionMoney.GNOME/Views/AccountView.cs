@@ -52,6 +52,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
     private Dictionary<uint, GroupRow> _groupRows;
+    private List<TagButton> _tagButtons;
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
 
@@ -68,6 +69,9 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _unselectAllGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
+    [Gtk.Connect] private readonly Gtk.Button _resetTagsFilterButton;
+    [Gtk.Connect] private readonly Gtk.Button _unselectAllTagsFilterButton;
+    [Gtk.Connect] private readonly Gtk.FlowBox _tagsFlowBox;
     [Gtk.Connect] private readonly Gtk.Calendar _calendar;
     [Gtk.Connect] private readonly Gtk.Button _selectMonthButton;
     [Gtk.Connect] private readonly Gtk.Button _resetCalendarFilterButton;
@@ -110,6 +114,7 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
+        _tagButtons = new List<TagButton>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
         _currentGraphPage = 0;
         //Register Controller Events
@@ -117,6 +122,8 @@ public partial class AccountView : Adw.Bin
         _controller.GroupCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateGroupRow(e));
         _controller.GroupDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteGroupRow(e));
         _controller.GroupUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateGroupRow(e));
+        _controller.TagCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateTagButton(e));
+        _controller.TagUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () => UpdateTagButton(e));
         _controller.TransactionCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateTransactionRow(e));
         _controller.TransactionMoved += (sender, e) => GLib.Functions.IdleAdd(0, () => MoveTransactionRow(e));
         _controller.TransactionDeleted += (sender, e) => GLib.Functions.IdleAdd(0, () => DeleteTransactionRow(e));
@@ -154,6 +161,21 @@ public partial class AccountView : Adw.Bin
         _resetGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetGroupsFilter();
         //Button Reset Groups Filter
         _unselectAllGroupsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllGroupsFilter();
+        //Tags FlowBox
+        _tagsFlowBox.SetSortFunc((box1, box2) =>
+        {
+            var tag1 = (TagButton)box1.GetChild();
+            var tag2 = (TagButton)box2.GetChild();
+            if (tag1.Tag == _("Untagged"))
+            {
+                return -1;
+            }
+            return string.Compare(tag1.Tag, tag2.Tag);
+        });
+        //Button Reset Tags Filter
+        _resetTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetTagsFilter();
+        //Button Reset Tags Filter
+        _unselectAllTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.UnselectAllTagsFilter();
         //Calendar Widget
         _calendar.OnPrevMonth += OnCalendarMonthYearChanged;
         _calendar.OnPrevYear += OnCalendarMonthYearChanged;
@@ -534,6 +556,31 @@ public partial class AccountView : Adw.Bin
         {
             _groupRows[e.Model.Id].UpdateRow(e.Model, _controller.GroupDefaultColor, _controller.CultureForNumberString, e.Active);
         }
+        return false;
+    }
+
+    /// <summary>
+    /// Creates a tag and adds it to the view
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool CreateTagButton(ModelEventArgs<string> e)
+    {
+        var tagButton = new TagButton(e.Position!.Value, e.Model);
+        _tagButtons.Add(tagButton);
+        tagButton.SetActive(true);
+        tagButton.FilterChanged += UpdateTagFilter;
+        _tagsFlowBox.Append(tagButton);
+        _tagsFlowBox.InvalidateSort();
+        return false;
+    }
+
+    /// <summary>
+    /// Updates a tag button
+    /// </summary>
+    /// <param name="e">ModelEventArgs</param>
+    private bool UpdateTagButton(ModelEventArgs<string> e)
+    {
+        _tagButtons[e.Position!.Value + 1].SetActive(e.Active);
         return false;
     }
 
@@ -1032,6 +1079,13 @@ public partial class AccountView : Adw.Bin
     /// <param name="sender">object?</param>
     /// <param name="e">The id of the group who's filter changed and whether to filter or not</param>
     private void UpdateGroupFilter(object? sender, (uint Id, bool Filter) e) => _controller.UpdateFilterValue((int)e.Id, e.Filter);
+
+    /// <summary>
+    /// Occurs when the tagfilter is changed
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">The index of the tag who's filter changed and whether to filter or not</param>
+    private void UpdateTagFilter(object? sender, (int Index, bool Filter) e) => _controller.UpdateTagFilter(e.Index, e.Filter);
 
     /// <summary>
     /// Occurs when the user presses the button to show/hide groups

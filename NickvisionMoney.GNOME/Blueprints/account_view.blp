@@ -172,7 +172,41 @@ Adw.Bin _root {
             styles ["boxed-list"]
           }
         }
-        
+
+        Adw.PreferencesGroup {
+          title: _("Tags");
+          header-suffix: Gtk.Box {
+            Gtk.Button _resetTagsFilterButton {
+              icon-name: "edit-select-all-symbolic";
+              tooltip-text: _("Select All Tags Filters");
+
+              styles ["flat"]
+            }
+
+            Gtk.Button _unselectAllTagsFilterButton {
+              icon-name: "edit-select-none-symbolic";
+              tooltip-text: _("Unselect Tags Filters");
+
+              styles ["flat"]
+            }
+          };
+
+          Adw.Bin {
+            Gtk.FlowBox _tagsFlowBox {
+              valign: start;
+              margin-top: 6;
+              margin-start: 6;
+              margin-end: 6;
+              margin-bottom: 6;
+              column-spacing: 2;
+              row-spacing: 2;
+              selection-mode: none;
+            }
+
+            styles ["card"]
+          }
+        }
+
         Adw.PreferencesGroup {
           title: _("Calendar");
           header-suffix: Gtk.Box 

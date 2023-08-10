@@ -2,27 +2,33 @@ using System;
 
 namespace NickvisionMoney.GNOME.Controls;
 
+/// <summary>
+/// Tag toggle button
+/// </summary>
 public class TagButton : Gtk.ToggleButton
 {
-    public int Index;
+    /// <summary>
+    /// Tag index in a list of all tags in an account
+    /// </summary>
+    public int Index { get; init; }
+    /// <summary>
+    /// Tag string
+    /// </summary>
+    public string Tag { get; init; }
     
-    public event EventHandler<int> OnAddTag;
-    public event EventHandler<int> OnRemoveTag;
+    /// <summary>
+    /// Occurs when toggle state has changed
+    /// </summary>
+    public event EventHandler<(int Index, bool Filter)> FilterChanged;
     
+    /// <summary>
+    /// Construct TagButton
+    /// </summary>
     public TagButton(int index, string tag)
     {
         Index = index;
+        Tag = tag;
         SetLabel(tag);
-        OnToggled += (sender, e) =>
-        {
-            if (GetActive())
-            {
-                OnAddTag?.Invoke(this, Index);
-            }
-            else
-            {
-                OnRemoveTag?.Invoke(this, Index);
-            }
-        };
+        OnToggled += (sender, e) => FilterChanged?.Invoke(this, (Index, GetActive()));
     }
 }

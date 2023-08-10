@@ -65,6 +65,7 @@ public partial class TransactionDialog : Adw.Window
 
     private bool _constructing;
     private readonly TransactionDialogController _controller;
+    private List<string> _accountTags;
     private List<string> _tags;
     private string? _receiptPath;
     private Gtk.ColorDialog _colorDialog;
@@ -332,6 +333,7 @@ public partial class TransactionDialog : Adw.Window
             }
         };
         //Tags
+        _accountTags = new List<string>(_controller.AccountTags);
         var addTagKeyController = Gtk.EventControllerKey.New();
         addTagKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         addTagKeyController.OnKeyPressed += (sender, e) =>
@@ -346,10 +348,10 @@ public partial class TransactionDialog : Adw.Window
         _addTagButton.OnClicked += (sender, e) =>
         {
             var tag = _addTagEntry.GetBuffer().GetText().Trim();
-            if (!string.IsNullOrEmpty(tag) && !_controller.AccountTags.Contains(tag))
+            if (!string.IsNullOrEmpty(tag) && !_accountTags.Contains(tag))
             {
-                _controller.AccountTags.Add(tag);
-                _controller.AccountTags.Sort();
+                _accountTags.Add(tag);
+                _accountTags.Sort();
                 _tags.Add(tag);
                 UpdateTagsList();
             }
@@ -609,27 +611,29 @@ public partial class TransactionDialog : Adw.Window
     private void UpdateTagsList()
     {
         _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count, _tags.Count));
-        _tagsScrolledWindow.SetVisible(_controller.AccountTags.Count > 0);
+        _tagsScrolledWindow.SetVisible(_accountTags.Count > 0);
         while (_tagsFlowBox.GetFirstChild() != null)
         {
             _tagsFlowBox.Remove(_tagsFlowBox.GetFirstChild()!);
         }
-        for (var i = 0; i < _controller.AccountTags.Count; i++)
+        for (var i = 0; i < _accountTags.Count; i++)
         {
-            var tagButton = new TagButton(i, _controller.AccountTags[i]);
+            var tagButton = new TagButton(i, _accountTags[i]);
             _tagsFlowBox.Append(tagButton);
-            if (_tags.Contains(_controller.AccountTags[i]))
+            if (_tags.Contains(_accountTags[i]))
             {
                 tagButton.SetActive(true);
             }
-            tagButton.OnAddTag += (sender, index) =>
+            tagButton.FilterChanged += (sender, e) =>
             {
-                _tags.Add(_controller.AccountTags[index]);
-                _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count, _tags.Count));
-            };
-            tagButton.OnRemoveTag += (sender, index) =>
-            {
-                _tags.Remove(_controller.AccountTags[index]);
+                if (e.Filter)
+                {
+                    _tags.Add(_accountTags[e.Index]);
+                }
+                else
+                {
+                    _tags.Remove(_accountTags[e.Index]);
+                }
                 _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count, _tags.Count));
             };
         }

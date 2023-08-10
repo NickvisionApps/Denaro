@@ -532,10 +532,9 @@ public class Account : IDisposable
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
                 RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
                 Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
-                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList()
+                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : (string.IsNullOrEmpty(readQueryTransactions.GetString(13)) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList())
             };
             Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
-            Tags.Sort();
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
@@ -793,8 +792,6 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
         cmdAddTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
-        Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
-        Tags.Sort();
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -858,8 +855,6 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
         cmdUpdateTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
-        Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
-        Tags.Sort();
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
