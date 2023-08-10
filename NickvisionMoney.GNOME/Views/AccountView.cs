@@ -580,7 +580,7 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool UpdateTagButton(ModelEventArgs<string> e)
     {
-        _tagButtons[e.Position!.Value + 1].SetActive(e.Active);
+        _tagButtons[e.Position!.Value].SetActive(e.Active);
         return false;
     }
 

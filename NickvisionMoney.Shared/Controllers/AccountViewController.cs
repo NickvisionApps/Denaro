@@ -497,11 +497,11 @@ public class AccountViewController : IDisposable
                 GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
             }
             //Tags
-            TagCreated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), -1, true));
+            TagCreated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, true));
             foreach (var tag in _account.Tags)
             {
                 _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), true));
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
             //Transactions
             _filteredIds = _account.Transactions.Keys.ToList();
@@ -694,7 +694,7 @@ public class AccountViewController : IDisposable
             {
                 _account.Tags.Add(tag);
                 _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), true));
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
         }
         FilterUIUpdate();
@@ -728,7 +728,7 @@ public class AccountViewController : IDisposable
             {
                 _account.Tags.Add(tag);
                 _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), true));
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
         }
         FilterUIUpdate();
@@ -775,7 +775,7 @@ public class AccountViewController : IDisposable
             {
                 _account.Tags.Add(tag);
                 _filterTags.Add(tag);
-                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), true));
+                TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
             }
         }
         FilterUIUpdate();
@@ -1115,15 +1115,15 @@ public class AccountViewController : IDisposable
     /// <param name="active">Whether or not the tag filter is active</param>
     public void UpdateTagFilter(int index, bool active)
     {
-        if (index > -1)
+        if (index > 0)
         {
             if (active)
             {
-                _filterTags.Add(_account.Tags[index]);
+                _filterTags.Add(_account.Tags[index - 1]);
             }
             else
             {
-                _filterTags.Remove(_account.Tags[index]);
+                _filterTags.Remove(_account.Tags[index - 1]);
             }
         }
         else
@@ -1139,11 +1139,11 @@ public class AccountViewController : IDisposable
     public void ResetTagsFilter()
     {
         _filterUntagged = true;
-        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), -1, true));
+        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, true));
         _filterTags = new List<string>(_account.Tags);
         foreach (var tag in _account.Tags)
         {
-            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), true));
+            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, true));
         }
         FilterUIUpdate();
     }
@@ -1154,11 +1154,11 @@ public class AccountViewController : IDisposable
     public void UnselectAllTagsFilter()
     {
         _filterUntagged = false;
-        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), -1, false));
+        TagUpdated?.Invoke(this, new ModelEventArgs<string>(_("Untagged"), 0, false));
         _filterTags.Clear();
         foreach (var tag in _account.Tags)
         {
-            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag), false));
+            TagUpdated?.Invoke(this, new ModelEventArgs<string>(tag, _account.Tags.IndexOf(tag) + 1, false));
         }
         FilterUIUpdate();
     }
@@ -1197,7 +1197,7 @@ public class AccountViewController : IDisposable
             {
                 continue;
             }
-            if (!_filterTags.Intersect(pair.Value.Tags).Any() && pair.Value.Tags.Count > 0)
+            if (!pair.Value.Tags.Any(x => _filterTags.Contains(x)) && pair.Value.Tags.Count > 0)
             {
                 continue;
             }
