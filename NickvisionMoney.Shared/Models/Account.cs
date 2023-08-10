@@ -959,13 +959,13 @@ public class Account : IDisposable
                     tt.Notes = transaction.Notes;
                     tt.Tags = transaction.Tags;
                     var r = await UpdateTransactionAsync(tt);
-                    success &= r.Successful;
+                    success = success && r.Successful;
                     newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
             var res = await UpdateTransactionAsync(transaction);
-            success &= res.Successful;
-            newTags = newTags.Union(res.NewTags).ToList();
+            success = success && res.Successful;
+            newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
         }
         else
         {
@@ -978,13 +978,13 @@ public class Account : IDisposable
                     tt.RepeatFrom = -1;
                     tt.RepeatEndDate = null;
                     var r = await UpdateTransactionAsync(tt);
-                    success &= r.Successful;
+                    success = success && r.Successful;
                     newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
             var res = await UpdateTransactionAsync(transaction);
-            success &= res.Successful;
-            newTags = newTags.Union(res.NewTags).ToList();
+            success = success && res.Successful;
+            newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
         }
         return (success, newTags);
     }
