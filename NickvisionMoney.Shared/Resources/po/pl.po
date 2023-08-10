@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-07 20:27-0400\n"
-"PO-Revision-Date: 2023-07-01 02:14+0000\n"
+"PO-Revision-Date: 2023-08-10 15:58+0000\n"
 "Last-Translator: Dominik Gęgotek <ioutora@disroot.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/pl/>\n"
@@ -151,11 +151,8 @@ msgid "Checking"
 msgstr "Bieżące"
 
 #: ../../../Controllers/MainWindowController.cs:93
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"Współautorzy z GitHuba ❤️ {1}"
+msgstr "Współautorzy z GitHuba ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:106
 #: ../../../Models/Account.cs:1643
@@ -198,7 +195,7 @@ msgstr "Symbol waluty (niepoprawny)"
 
 #: ../../../Controllers/MainWindowController.cs:96
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Models/Account.cs:1704
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
@@ -207,7 +204,7 @@ msgstr "Data"
 
 #: ../../../Controllers/MainWindowController.cs:97
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:336
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
@@ -316,7 +313,7 @@ msgstr "Poprawnie wyeksportowano konto do pliku."
 
 #: ../../../Controllers/MainWindowController.cs:95
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: ../../../Models/Account.cs:1592
 #, csharp-format
@@ -449,7 +446,7 @@ msgstr "Nigdy"
 #: ../../../Controllers/MainWindowController.cs:92
 #: ../../../Controllers/MainWindowController.cs:94
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:328
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
@@ -643,7 +640,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:98
 msgid "Tobias Bernard"
-msgstr ""
+msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:1622
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:79
@@ -936,7 +933,7 @@ msgstr "Kalendarz"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Select Current Month"
-msgstr ""
+msgstr "Wybierz obecny miesiąc"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:189
 msgid "Reset To Today"
@@ -962,7 +959,7 @@ msgstr "Koniec"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:307
 msgid "Visualize"
-msgstr ""
+msgstr "Wizualizuj"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:325
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
@@ -1394,7 +1391,7 @@ msgstr "Brak ostatnich kont"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:112
 msgid "Toggle Graphs"
-msgstr ""
+msgstr "Włącz wykresy"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:122
 msgid "Main Menu"
