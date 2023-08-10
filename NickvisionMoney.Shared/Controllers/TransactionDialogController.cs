@@ -51,6 +51,10 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     public Transaction Transaction { get; init; }
     /// <summary>
+    /// The list of tags in the account
+    /// </summary>
+    public List<string> AccountTags { get; init; }
+    /// <summary>
     /// Whether or not this transaction can be copied
     /// </summary>
     public bool CanCopy { get; init; }
@@ -87,30 +91,26 @@ public class TransactionDialogController : IDisposable
     /// The list of group names
     /// </summary>
     public List<string> GroupNames => _groups.Values.OrderBy(x => x.Name == _("Ungrouped") ? " " : x.Name).Select(x => x.Name).ToList();
-    /// <summary>
-    /// The list of tags in the account
-    /// </summary>
-    public List<string> AccountTags;
 
     /// <summary>
     /// Constructs a TransactionDialogController
     /// </summary>
     /// <param name="transaction">The Transaction object represented by the controller</param>
     /// <param name="groups">The list of groups in the account</param>
-    /// <param name="tags">The list of tags in the account</params>
+    /// <param name="accountTags">The list of tags in the account</param>
     /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> tags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
-        AccountTags = tags;
         Transaction = (Transaction)transaction.Clone();
+        AccountTags = new List<string>(accountTags);
         CanCopy = canCopy;
         IsEditing = canCopy;
         CopyRequested = false;
@@ -121,6 +121,7 @@ public class TransactionDialogController : IDisposable
         {
             Transaction.RGBA = _transactionDefaultColor;
         }
+        AccountTags.Remove(AccountTags[0]); //remove untagged
     }
 
     /// <summary>
@@ -128,19 +129,19 @@ public class TransactionDialogController : IDisposable
     /// </summary>
     /// <param name="id">The id of the new transaction</param>
     /// <param name="groups">The list of groups in the account</param>
-    /// <param name="tags">The list of tags in the account</params>
+    /// <param name="accountTags">The list of tags in the account</param>
     /// <param name="transactions">The list of transactions in the account</param>
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
     /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> tags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
-        AccountTags = tags;
+        AccountTags = new List<string>(accountTags);
         Transaction = new Transaction(id);
         CanCopy = false;
         IsEditing = false;
@@ -151,6 +152,7 @@ public class TransactionDialogController : IDisposable
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
         Transaction.RGBA = transactionDefaultColor;
+        AccountTags.Remove(AccountTags[0]); //remove untagged
     }
     
     /// <summary>

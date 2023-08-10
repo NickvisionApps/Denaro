@@ -7,6 +7,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -65,12 +66,11 @@ public partial class TransactionDialog : Adw.Window
 
     private bool _constructing;
     private readonly TransactionDialogController _controller;
-    private List<string> _accountTags;
-    private List<string> _tags;
     private string? _receiptPath;
     private Gtk.ColorDialog _colorDialog;
     private AutocompleteBox<Transaction> _autocompleteBox;
     private bool _canHideAutobox;
+    private Dictionary<string, bool> _tags;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
@@ -128,6 +128,7 @@ public partial class TransactionDialog : Adw.Window
         _controller = controller;
         _receiptPath = null;
         _canHideAutobox = true;
+        _tags = new Dictionary<string, bool>();
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
@@ -333,7 +334,6 @@ public partial class TransactionDialog : Adw.Window
             }
         };
         //Tags
-        _accountTags = new List<string>(_controller.AccountTags);
         var addTagKeyController = Gtk.EventControllerKey.New();
         addTagKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         addTagKeyController.OnKeyPressed += (sender, e) =>
@@ -348,11 +348,9 @@ public partial class TransactionDialog : Adw.Window
         _addTagButton.OnClicked += (sender, e) =>
         {
             var tag = _addTagEntry.GetBuffer().GetText().Trim();
-            if (!string.IsNullOrEmpty(tag) && !_accountTags.Contains(tag))
+            if (!string.IsNullOrEmpty(tag) && !_controller.AccountTags.Contains(tag))
             {
-                _accountTags.Add(tag);
-                _accountTags.Sort();
-                _tags.Add(tag);
+                _controller.AccountTags.Add(tag);
                 UpdateTagsList();
             }
             _addTagEntry.GetBuffer().SetText("", 0);
@@ -417,7 +415,6 @@ public partial class TransactionDialog : Adw.Window
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
         GdkExt.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
         _colorButton.SetExtRgba(transactionColor!.Value);
-        _tags = new List<string>(_controller.Transaction.Tags);
         UpdateTagsList();
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
@@ -481,10 +478,11 @@ public partial class TransactionDialog : Adw.Window
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
+        var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
         var iterStart = new TextIter();
         var iterEnd = new TextIter();
         gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, _tags, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
@@ -608,35 +606,33 @@ public partial class TransactionDialog : Adw.Window
         }
     }
 
+    /// <summary>
+    /// Updates the list of tags
+    /// </summary>
     private void UpdateTagsList()
     {
-        _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count, _tags.Count));
-        _tagsScrolledWindow.SetVisible(_accountTags.Count > 0);
-        while (_tagsFlowBox.GetFirstChild() != null)
+        foreach (var tag in _controller.AccountTags)
         {
-            _tagsFlowBox.Remove(_tagsFlowBox.GetFirstChild()!);
-        }
-        for (var i = 0; i < _accountTags.Count; i++)
-        {
-            var tagButton = new TagButton(i, _accountTags[i]);
-            _tagsFlowBox.Append(tagButton);
-            if (_tags.Contains(_accountTags[i]))
+            if (!_tags.ContainsKey(tag))
             {
-                tagButton.SetActive(true);
+                var tagButton = new TagButton(tag);
+                _tagsFlowBox.Append(tagButton);
+                _tags.Add(tag, false);
+                if (_controller.Transaction.Tags.Contains(tag))
+                {
+                    tagButton.SetActive(true);
+                    _tags[tag] = true;
+                }
+                tagButton.FilterChanged += (sender, e) =>
+                {
+                    _tags[tag] = e.Filter;
+                    _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count(x => x.Value), _tags.Count(x => x.Value)));
+                    Validate();
+                };
             }
-            tagButton.FilterChanged += (sender, e) =>
-            {
-                if (e.Filter)
-                {
-                    _tags.Add(_accountTags[e.Index]);
-                }
-                else
-                {
-                    _tags.Remove(_accountTags[e.Index]);
-                }
-                _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count, _tags.Count));
-            };
         }
+        _tagsScrolledWindow.SetVisible(_tags.Count > 0);
+        _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count(x => x.Value), _tags.Count(x => x.Value)));
     }
 
     /// <summary>
