@@ -280,6 +280,23 @@ public class AccountViewController : IDisposable
             }
         }
     }
+    
+    /// <summary>
+    /// Whether or not to show the tags section on the account view
+    /// </summary>
+    public bool ShowTagsList
+    {
+        get => _account.Metadata.ShowTagsList;
+
+        set
+        {
+            if (_account.Metadata.ShowTagsList != value)
+            {
+                _account.Metadata.ShowTagsList = value;
+                _account.UpdateMetadata(_account.Metadata);
+            }
+        }
+    }
 
     /// <summary>
     /// The way in which to sort transactions

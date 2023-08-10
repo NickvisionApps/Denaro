@@ -176,6 +176,13 @@ Adw.Bin _root {
         Adw.PreferencesGroup {
           title: _("Tags");
           header-suffix: Gtk.Box {
+            Gtk.Button _toggleTagsButton {
+              tooltip-text: _("Toggle Tags Visibility");
+              icon-name: "view-conceal-symbolic";
+
+              styles ["flat"]
+            }
+          
             Gtk.Button _resetTagsFilterButton {
               icon-name: "edit-select-all-symbolic";
               tooltip-text: _("Select All Tags Filters");

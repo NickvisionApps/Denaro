@@ -69,6 +69,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _unselectAllGroupsFilterButton;
     [Gtk.Connect] private readonly Gtk.ListBox _groupsList;
+    [Gtk.Connect] private readonly Gtk.Button _toggleTagsButton;
     [Gtk.Connect] private readonly Gtk.Button _resetTagsFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _unselectAllTagsFilterButton;
     [Gtk.Connect] private readonly Gtk.FlowBox _tagsFlowBox;
@@ -172,6 +173,12 @@ public partial class AccountView : Adw.Bin
             }
             return string.Compare(tag1.Tag, tag2.Tag);
         });
+        //Button Toggle Tags
+        _toggleTagsButton.OnClicked += (sender, e) =>
+        {
+            _controller.ShowTagsList = !_controller.ShowTagsList;
+            OnToggleTags();
+        };
         //Button Reset Tags Filter
         _resetTagsFilterButton.OnClicked += (Gtk.Button sender, EventArgs e) => _controller.ResetTagFilters();
         //Button Reset Tags Filter
@@ -414,6 +421,7 @@ public partial class AccountView : Adw.Bin
             _sortLastToFirstButton.SetActive(true);
         }
         OnToggleGroups();
+        OnToggleTags();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
     }
 
@@ -1092,15 +1100,17 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     private void OnToggleGroups()
     {
-        if (!_controller.ShowGroupsList)
-        {
-            _toggleGroupsButton.SetIconName("view-reveal-symbolic");
-        }
-        else
-        {
-            _toggleGroupsButton.SetIconName("view-conceal-symbolic");
-        }
+        _toggleGroupsButton.SetIconName(!_controller.ShowGroupsList ? "view-reveal-symbolic" : "view-conceal-symbolic");
         _groupsList.SetVisible(_controller.ShowGroupsList);
+    }
+    
+    /// <summary>
+    /// Occurs when the user presses the button to show/hide tags
+    /// </summary>
+    private void OnToggleTags()
+    {
+        _toggleTagsButton.SetIconName(!_controller.ShowTagsList ? "view-reveal-symbolic" : "view-conceal-symbolic");
+        _tagsFlowBox.SetVisible(_controller.ShowTagsList);
     }
 
     /// <summary>
