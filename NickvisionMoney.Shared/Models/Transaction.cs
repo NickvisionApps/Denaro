@@ -1,6 +1,7 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System;
+using System.Collections.Generic;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -81,6 +82,10 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     public DateOnly? RepeatEndDate { get; set; }
     /// <summary>
+    /// A tags list for the Transaction
+    /// </summary>
+    public List<string> Tags { get; set; }
+    /// <summary>
     /// The notes for the transaction
     /// </summary>
     public string Notes { get; set; }
@@ -104,6 +109,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         Receipt = null;
         RepeatFrom = -1;
         RepeatEndDate = null;
+        Tags = new List<string>();
         Notes = "";
     }
 
@@ -170,9 +176,10 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
             GroupId = GroupId,
             RGBA = RGBA,
             UseGroupColor = UseGroupColor,
-            Receipt = Receipt != null ? Receipt.Clone((x) => { }) : null,
+            Receipt = Receipt?.Clone((x) => { }) ?? null,
             RepeatFrom = RepeatFrom,
             RepeatEndDate = RepeatEndDate,
+            Tags = new List<string>(Tags),
             Notes = Notes
         };
     }
@@ -193,14 +200,11 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         {
             return -1;
         }
-        else if (this == other)
+        if (this == other)
         {
             return 0;
         }
-        else
-        {
-            return 1;
-        }
+        return 1;
     }
 
     /// <summary>

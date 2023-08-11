@@ -54,6 +54,10 @@
 		<title>Цвет</title>
 		<p>Цвет транзакции. Можно либо использовать цвет группы, либо указать собственный цвет. При выборе собственного цвета, по умолчанию он будет соответствовать цвету, указанному в <link xref="configuration">конфигурации</link>, но он может быть изменён на любой другой цвет.</p>
 	</item>
+    <item>
+        <title>Tags</title>
+        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+    </item>
 	<item>
 		<title>Чек</title>
 		<p>Изображение чека транзакции. Вы можете загрузить изображение в формате JPEG или PNG, либо PDF документ, но независимо от формата файл будет конвертирован и сохранён как изображение JPEG. Если вы загрузил PDF, только первая страница будет сохранена. Удалить или загрузить другой файл можно в любой момент.</p>

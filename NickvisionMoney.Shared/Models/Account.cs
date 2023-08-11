@@ -65,6 +65,10 @@ public class Account : IDisposable
     /// </summary>
     public Dictionary<uint, Group> Groups { get; init; }
     /// <summary>
+    /// A list of tags in the account
+    /// </summary>
+    public List<string> Tags { get; init; }
+    /// <summary>
     /// A map of transactions in the account
     /// </summary>
     public Dictionary<uint, Transaction> Transactions { get; init; }
@@ -102,6 +106,7 @@ public class Account : IDisposable
         Path = path;
         Metadata = new AccountMetadata(System.IO.Path.GetFileNameWithoutExtension(Path), AccountType.Checking);
         Groups = new Dictionary<uint, Group>();
+        Tags = new List<string>() { _("Untagged") };
         Transactions = new Dictionary<uint, Transaction>();
         NextAvailableGroupId = 1;
         NextAvailableTransactionId = 1;
@@ -337,7 +342,7 @@ public class Account : IDisposable
         }
         //Setup Metadata Table
         using var cmdTableMetadata = _database!.CreateCommand();
-        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER)";
+        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
@@ -367,6 +372,13 @@ public class Account : IDisposable
             cmdTableMetadataUpdate4.ExecuteNonQuery();
         }
         catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate5 = _database.CreateCommand();
+            cmdTableMetadataUpdate5.CommandText = "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER";
+            cmdTableMetadataUpdate5.ExecuteNonQuery();
+        }
+        catch { }
         //Setup Groups Table
         using var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)";
@@ -380,7 +392,7 @@ public class Account : IDisposable
         cmdTableGroups.ExecuteNonQuery();
         //Setup Transactions Table
         using var cmdTableTransactions = _database.CreateCommand();
-        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT)";
+        cmdTableTransactions.CommandText = "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)";
         cmdTableTransactions.ExecuteNonQuery();
         try
         {
@@ -431,6 +443,13 @@ public class Account : IDisposable
             cmdTableTransactionsUpdate7.ExecuteNonQuery();
         }
         catch { }
+        try
+        {
+            using var cmdTableTransactionsUpdate8 = _database.CreateCommand();
+            cmdTableTransactionsUpdate8.CommandText = "ALTER TABLE transactions ADD COLUMN tags TEXT";
+            cmdTableTransactionsUpdate8.ExecuteNonQuery();
+        }
+        catch { }
         //Get Metadata
         using var cmdQueryMetadata = _database.CreateCommand();
         cmdQueryMetadata.CommandText = "SELECT * FROM metadata where id = 0";
@@ -450,11 +469,12 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
             Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
+            Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
         }
         else
         {
             using var cmdAddMetadata = _database.CreateCommand();
-            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits)";
+            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits, $showTagsList)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
             cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
@@ -467,6 +487,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalSeparator", Metadata.CustomCurrencyDecimalSeparator ?? "");
             cmdAddMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? "empty" : Metadata.CustomCurrencyGroupSeparator);
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
+            cmdAddMetadata.Parameters.AddWithValue("$showTagsList", Metadata.ShowGroupsList);
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
@@ -520,7 +541,9 @@ public class Account : IDisposable
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
                 RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
                 Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
+                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : (string.IsNullOrEmpty(readQueryTransactions.GetString(13)) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList())
             };
+            Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
@@ -644,7 +667,7 @@ public class Account : IDisposable
     public bool UpdateMetadata(AccountMetadata metadata)
     {
         using var cmdUpdateMetadata = _database!.CreateCommand();
-        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits WHERE id = 0";
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits, showTagsList = $showTagsList WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
         cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
@@ -657,6 +680,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalSeparator", metadata.CustomCurrencyDecimalSeparator ?? "");
         cmdUpdateMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? "empty" : metadata.CustomCurrencyGroupSeparator);
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
+        cmdUpdateMetadata.Parameters.AddWithValue("$showTagsList", metadata.ShowTagsList);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
             Metadata.Name = metadata.Name;
@@ -666,6 +690,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
             Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
             Metadata.ShowGroupsList = metadata.ShowGroupsList;
+            Metadata.ShowTagsList = metadata.ShowTagsList;
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
             Metadata.SortTransactionsBy = metadata.SortTransactionsBy;
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
@@ -762,11 +787,11 @@ public class Account : IDisposable
     /// Adds a transaction to the account
     /// </summary>
     /// <param name="transaction">The transaction to add</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> AddTransactionAsync(Transaction transaction)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> AddTransactionAsync(Transaction transaction)
     {
         using var cmdAddTransaction = _database!.CreateCommand();
-        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes)";
+        cmdAddTransaction.CommandText = "INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes, tags) VALUES ($id, $date, $description, $type, $repeat, $amount, $gid, $rgba, $receipt, $repeatFrom, $repeatEndDate, $useGroupColor, $notes, $tags)";
         cmdAddTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdAddTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdAddTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -777,6 +802,7 @@ public class Account : IDisposable
         cmdAddTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdAddTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdAddTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        cmdAddTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -810,25 +836,35 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            var newTags = new List<string>();
+            Tags.AddRange(transaction.Tags.Where(t =>
+            {
+                if (!Tags.Contains(t))
+                {
+                    newTags.Add(t);
+                    return true;
+                }
+                return false;
+            }));
             if (transaction.RepeatInterval != TransactionRepeatInterval.Never && transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
             BackupAccountToCSV();
-            return true;
+            return (true, newTags);
         }
-        return false;
+        return (false, new List<string>());
     }
 
     /// <summary>
     /// Updates a transaction in the account
     /// </summary>
     /// <param name="transaction">The transaction to update</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> UpdateTransactionAsync(Transaction transaction)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> UpdateTransactionAsync(Transaction transaction)
     {
         using var cmdUpdateTransaction = _database!.CreateCommand();
-        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes WHERE id = $id";
+        cmdUpdateTransaction.CommandText = "UPDATE transactions SET date = $date, description = $description, type = $type, repeat = $repeat, amount = $amount, gid = $gid, rgba = $rgba, receipt = $receipt, repeatFrom = $repeatFrom, repeatEndDate = $repeatEndDate, useGroupColor = $useGroupColor, notes = $notes, tags = $tags WHERE id = $id";
         cmdUpdateTransaction.Parameters.AddWithValue("$id", transaction.Id);
         cmdUpdateTransaction.Parameters.AddWithValue("$date", transaction.Date.ToString("d", new CultureInfo("en-US")));
         cmdUpdateTransaction.Parameters.AddWithValue("$description", transaction.Description);
@@ -839,6 +875,7 @@ public class Account : IDisposable
         cmdUpdateTransaction.Parameters.AddWithValue("$rgba", transaction.RGBA);
         cmdUpdateTransaction.Parameters.AddWithValue("$useGroupColor", transaction.UseGroupColor);
         cmdUpdateTransaction.Parameters.AddWithValue("$notes", transaction.Notes);
+        cmdUpdateTransaction.Parameters.AddWithValue("$tags", string.Join(',', transaction.Tags));
         if (transaction.Receipt != null)
         {
             using var memoryStream = new MemoryStream();
@@ -884,14 +921,24 @@ public class Account : IDisposable
                     TodayExpense += transaction.Amount;
                 }
             }
+            var newTags = new List<string>();
+            Tags.AddRange(transaction.Tags.Where(t =>
+            {
+                if (!Tags.Contains(t))
+                {
+                    newTags.Add(t);
+                    return true;
+                }
+                return false;
+            }));
             if (transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
             }
             BackupAccountToCSV();
-            return true;
+            return (true, newTags);
         }
-        return false;
+        return (false, new List<string>());
     }
 
     /// <summary>
@@ -899,9 +946,12 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transaction">The transaction to update</param>
     /// <param name="updateGenerated">Whether or not to update generated transactions associated with the source</param>
-    public async Task UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
+    /// <returns>(bool Successful, List NewTags)</returns>
+    public async Task<(bool Successful, List<string> NewTags)> UpdateSourceTransactionAsync(Transaction transaction, bool updateGenerated)
     {
         var transactions = Transactions.Values.ToList();
+        var success = true;
+        var newTags = new List<string>();
         if (updateGenerated)
         {
             foreach (var t in transactions)
@@ -918,10 +968,15 @@ public class Account : IDisposable
                     tt.Receipt = transaction.Receipt;
                     tt.RepeatEndDate = transaction.RepeatEndDate;
                     tt.Notes = transaction.Notes;
-                    await UpdateTransactionAsync(tt);
+                    tt.Tags = transaction.Tags;
+                    var r = await UpdateTransactionAsync(tt);
+                    success = success && r.Successful;
+                    newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
-            await UpdateTransactionAsync(transaction);
+            var res = await UpdateTransactionAsync(transaction);
+            success = success && res.Successful;
+            newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
         }
         else
         {
@@ -933,11 +988,16 @@ public class Account : IDisposable
                     tt.RepeatInterval = TransactionRepeatInterval.Never;
                     tt.RepeatFrom = -1;
                     tt.RepeatEndDate = null;
-                    await UpdateTransactionAsync(tt);
+                    var r = await UpdateTransactionAsync(tt);
+                    success = success && r.Successful;
+                    newTags = newTags.Union(r.NewTags).ToList();
                 }
             }
-            await UpdateTransactionAsync(transaction);
+            var res = await UpdateTransactionAsync(transaction);
+            success = success && res.Successful;
+            newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
         }
+        return (success, newTags);
     }
 
     /// <summary>
@@ -1211,7 +1271,7 @@ public class Account : IDisposable
         foreach (var line in lines)
         {
             var fields = line.Split(';');
-            if (fields.Length != 14)
+            if (fields.Length != 15)
             {
                 continue;
             }
@@ -1332,6 +1392,7 @@ public class Account : IDisposable
                 };
                 await AddGroupAsync(group);
             }
+            var tags = fields[14].Split(',').ToList();
             //Add Transaction
             var transaction = new Transaction(id)
             {
@@ -1344,7 +1405,8 @@ public class Account : IDisposable
                 RGBA = rgba,
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
-                RepeatEndDate = repeatEndDate
+                RepeatEndDate = repeatEndDate,
+                Tags = tags
             };
             await AddTransactionAsync(transaction);
             ids.Add(transaction.Id);
@@ -1473,7 +1535,7 @@ public class Account : IDisposable
     public bool ExportToCSV(string path, ExportMode exportMode, List<uint> filteredIds)
     {
         string result = "";
-        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA\n";
+        result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Tags\n";
         var transactions = Transactions;
         if(exportMode == ExportMode.CurrentView)
         {
@@ -1489,12 +1551,13 @@ public class Account : IDisposable
             if (pair.Value.GroupId != -1)
             {
                 var group = Groups[(uint)pair.Value.GroupId];
-                result += $"{group.Name};{group.Description};{group.RGBA}\n";
+                result += $"{group.Name};{group.Description};{group.RGBA};";
             }
             else
             {
-                result += ";;\n";
+                result += ";;;";
             }
+            result += $"{string.Join(',', pair.Value.Tags)}\n";
         }
         try
         {
@@ -1689,22 +1752,24 @@ public class Account : IDisposable
                         {
                             tbl.ColumnsDefinition(x =>
                             {
-                                //ID, Date, Description, Type, GroupName, Notes, Amount
+                                //ID, Date, Description, Type, GroupName, Tags, Notes, Amount
                                 x.RelativeColumn(1.5f);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
+                                x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(2);
                                 x.RelativeColumn(3);
                                 x.RelativeColumn(2);
                             });
                             //Headers
-                            tbl.Cell().ColumnSpan(7).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
+                            tbl.Cell().ColumnSpan(8).Background(Colors.Grey.Lighten1).Text(_("Transactions"));
                             tbl.Cell().Text(_("Id")).SemiBold();
                             tbl.Cell().Text(_("Date")).SemiBold();
                             tbl.Cell().Text(_("Description")).SemiBold();
                             tbl.Cell().Text(_("Type")).SemiBold();
                             tbl.Cell().Text(_("Group Name")).SemiBold();
+                            tbl.Cell().Text(_("Tags")).SemiBold();
                             tbl.Cell().Text(_("Notes")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
@@ -1756,6 +1821,7 @@ public class Account : IDisposable
                                     _ => ""
                                 });
                                 tbl.Cell().Background(hex).Text(pair.Value.GroupId == -1 ? _("Ungrouped") : Groups[(uint)pair.Value.GroupId].Name);
+                                tbl.Cell().Background(hex).Text(string.Join(", ", pair.Value.Tags));
                                 tbl.Cell().Background(hex).Text(pair.Value.Notes);
                                 tbl.Cell().Background(hex).AlignRight().Text($"{(pair.Value.Type == TransactionType.Income ? "+  " : "−  ")}{pair.Value.Amount.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             }

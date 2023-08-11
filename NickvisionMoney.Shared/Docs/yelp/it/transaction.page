@@ -54,6 +54,10 @@
 		<title>Colore</title>
 		<p>Un colore per la transazione. Si può impostare affinché la transazione usi il colore del gruppo a cui appartiene, oppure un colore speciale. Se si sceglie il secondo, verrà inizialmente impostato al colore predefinito selezionato nella <link xref="configuration">configurazione</link>, ma può essere cambiato in qualsiasi altro colore.</p>
 	</item>
+    <item>
+        <title>Tags</title>
+        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+    </item>
 	<item>
 		<title>Ricevuta</title>
 		<p>L'immagine di una ricevuta per la transazione. È possibile caricare immagini in formato JPEG o PNG, oppure documenti PDF, ma a prescindere dal formato verrà convertita e salvata come immagine JPEG. Nel caso del PDF, verrà salvata solo la prima pagina. È possibile eliminare o caricare un altro file in qualsiasi momento.</p>

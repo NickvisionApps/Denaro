@@ -60,6 +60,10 @@
 		<title>Barva</title>
 		<p>Barva pro transakce. Lze nastavit použití barvy skupiny nebo jedinečné barvy. Při výběru jedinečné barvy bude ve výchozím nastavení nastavena na barvu vybranou v <link xref="configuration">nastavení</link>, lze ji ale změnit na libovolnou barvu.</p>
 	</item>
+    <item>
+        <title>Tags</title>
+        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+    </item>
 	<item>
 		<title>Faktura</title>
 		<p>Obrázek faktury za transakci. Můžete nahrát obrázek JPEG nebo PNG nebo dokument PDF, ale bez ohledu na formát bude převeden a uložen jako obrázek JPEG. V případě PDF bude uložena pouze první stránka. Soubor můžete kdykoli odstranit nebo nahrát jiný.</p>

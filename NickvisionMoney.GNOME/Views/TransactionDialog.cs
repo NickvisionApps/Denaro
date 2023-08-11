@@ -5,7 +5,9 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
@@ -68,6 +70,7 @@ public partial class TransactionDialog : Adw.Window
     private Gtk.ColorDialog _colorDialog;
     private AutocompleteBox<Transaction> _autocompleteBox;
     private bool _canHideAutobox;
+    private Dictionary<string, bool> _tags;
 
     [Gtk.Connect] private readonly Adw.ViewStack _stack;
     [Gtk.Connect] private readonly Gtk.Button _backButton;
@@ -90,6 +93,11 @@ public partial class TransactionDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _groupRow;
     [Gtk.Connect] private readonly Gtk.DropDown _colorDropDown;
     [Gtk.Connect] private readonly Gtk.ColorDialogButton _colorButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _tagsButton;
+    [Gtk.Connect] private readonly Gtk.Entry _addTagEntry;
+    [Gtk.Connect] private readonly Gtk.Button _addTagButton;
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _tagsScrolledWindow;
+    [Gtk.Connect] private readonly Gtk.FlowBox _tagsFlowBox;
     [Gtk.Connect] private readonly Adw.ActionRow _extrasRow;
     [Gtk.Connect] private readonly Adw.ActionRow _receiptRow;
     [Gtk.Connect] private readonly Gtk.Button _viewReceiptButton;
@@ -120,6 +128,7 @@ public partial class TransactionDialog : Adw.Window
         _controller = controller;
         _receiptPath = null;
         _canHideAutobox = true;
+        _tags = new Dictionary<string, bool>();
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_controller.AppInfo.ID);
@@ -324,6 +333,28 @@ public partial class TransactionDialog : Adw.Window
                 }
             }
         };
+        //Tags
+        var addTagKeyController = Gtk.EventControllerKey.New();
+        addTagKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        addTagKeyController.OnKeyPressed += (sender, e) =>
+        {
+            if (e.Keyval == 44) // Comma
+            {
+                return true;
+            }
+            return false;
+        };
+        _addTagEntry.AddController(addTagKeyController);
+        _addTagButton.OnClicked += (sender, e) =>
+        {
+            var tag = _addTagEntry.GetBuffer().GetText().Trim();
+            if (!string.IsNullOrEmpty(tag) && !_controller.AccountTags.Contains(tag))
+            {
+                _controller.AccountTags.Add(tag);
+                UpdateTagsList();
+            }
+            _addTagEntry.GetBuffer().SetText("", 0);
+        };
         //Receipt
         _viewReceiptButton.OnClicked += OnViewReceipt;
         _deleteReceiptButton.OnClicked += OnDeleteReceipt;
@@ -384,6 +415,7 @@ public partial class TransactionDialog : Adw.Window
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
         GdkExt.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
         _colorButton.SetExtRgba(transactionColor!.Value);
+        UpdateTagsList();
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         if (_controller.Transaction.Receipt != null)
@@ -446,10 +478,11 @@ public partial class TransactionDialog : Adw.Window
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
+        var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
         var iterStart = new TextIter();
         var iterEnd = new TextIter();
         gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
@@ -571,6 +604,35 @@ public partial class TransactionDialog : Adw.Window
         {
             Validate();
         }
+    }
+
+    /// <summary>
+    /// Updates the list of tags
+    /// </summary>
+    private void UpdateTagsList()
+    {
+        foreach (var tag in _controller.AccountTags)
+        {
+            if (!_tags.ContainsKey(tag))
+            {
+                var tagButton = new TagButton(tag);
+                _tagsFlowBox.Append(tagButton);
+                _tags.Add(tag, false);
+                if (_controller.Transaction.Tags.Contains(tag))
+                {
+                    tagButton.SetActive(true);
+                    _tags[tag] = true;
+                }
+                tagButton.FilterChanged += (sender, e) =>
+                {
+                    _tags[tag] = e.Filter;
+                    _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count(x => x.Value), _tags.Count(x => x.Value)));
+                    Validate();
+                };
+            }
+        }
+        _tagsScrolledWindow.SetVisible(_tags.Count > 0);
+        _tagsButton.SetLabel(_n("{0} tag", "{0} tags", _tags.Count(x => x.Value), _tags.Count(x => x.Value)));
     }
 
     /// <summary>

@@ -44,6 +44,19 @@ public class MainWindowController : IDisposable
     /// The number of open accounts
     /// </summary>
     public int NumberOfOpenAccounts => _openAccounts.Count;
+    /// <summary>
+    /// Whether or not to show graphs
+    /// </summary>
+    public bool ShowGraphs
+    {
+        get => Configuration.Current.ShowGraphs;
+
+        set
+        {
+            Configuration.Current.ShowGraphs = value;
+            Aura.SaveConfig("config");
+        }
+    }
 
     /// <summary>
     /// Occurs when a notification is sent

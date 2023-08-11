@@ -70,6 +70,10 @@ public class AccountMetadata : ICloneable
     /// </summary>
     public bool ShowGroupsList { get; set; }
     /// <summary>
+    /// Whether or not to show the tags section on the account view
+    /// </summary>
+    public bool ShowTagsList { get; set; }
+    /// <summary>
     /// Whether or not to sort transactions from first to last
     /// </summary>
     public bool SortFirstToLast { get; set; }
@@ -95,6 +99,7 @@ public class AccountMetadata : ICloneable
         CustomCurrencyDecimalDigits = null;
         DefaultTransactionType = TransactionType.Income;
         ShowGroupsList = true;
+        ShowTagsList = true;
         SortFirstToLast = false;
         SortTransactionsBy = SortBy.Date;
     }
@@ -150,6 +155,7 @@ public class AccountMetadata : ICloneable
             result.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10));
             result.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11));
             result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
+            result.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
         }
         database.Close();
         return result;
@@ -171,6 +177,7 @@ public class AccountMetadata : ICloneable
             CustomCurrencyDecimalDigits = CustomCurrencyDecimalDigits,
             DefaultTransactionType = DefaultTransactionType,
             ShowGroupsList = ShowGroupsList,
+            ShowTagsList = ShowTagsList,
             SortFirstToLast = SortFirstToLast,
             SortTransactionsBy = SortTransactionsBy
         };

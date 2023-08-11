@@ -195,6 +195,56 @@ Adw.Window _root {
                         styles ["color-dropdown"]
                       }
                     }
+
+                    Adw.ActionRow {
+                      title: _("Tags");
+
+                      [suffix]
+                      Gtk.MenuButton _tagsButton {
+                        valign: center;
+                        direction: none;
+                        popover: Gtk.Popover {
+                          Gtk.Box {
+                            orientation: vertical;
+                            spacing: 6;
+
+                            Gtk.ScrolledWindow _tagsScrolledWindow {
+                              hscrollbar-policy: never;
+                              height-request: 124;
+                              width-request: 300;
+
+                              Gtk.FlowBox _tagsFlowBox {
+                                valign: start;
+                                margin-top: 4;
+                                margin-start: 4;
+                                margin-end: 4;
+                                column-spacing: 2;
+                                row-spacing: 2;
+                                selection-mode: none;
+                              }
+
+                              styles ["card"]
+                            }
+
+                            Gtk.Box {
+                              Gtk.Entry _addTagEntry {
+                                hexpand: true;
+                                placeholder-text: "Enter a new tag name...";
+                              }
+
+                              Gtk.Button _addTagButton {
+                                child: Adw.ButtonContent {
+                                  label: _("Add Tag");
+                                  icon-name: "list-add-symbolic";
+                                };
+                              }
+
+                              styles ["linked"]
+                            }
+                          }
+                        };
+                      }
+                    }
                   }
 
                   Adw.PreferencesGroup {

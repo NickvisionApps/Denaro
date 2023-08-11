@@ -172,7 +172,48 @@ Adw.Bin _root {
             styles ["boxed-list"]
           }
         }
-        
+
+        Adw.PreferencesGroup {
+          title: _("Tags");
+          header-suffix: Gtk.Box {
+            Gtk.Button _toggleTagsButton {
+              tooltip-text: _("Toggle Tags Visibility");
+              icon-name: "view-conceal-symbolic";
+
+              styles ["flat"]
+            }
+          
+            Gtk.Button _resetTagsFilterButton {
+              icon-name: "edit-select-all-symbolic";
+              tooltip-text: _("Select All Tags Filters");
+
+              styles ["flat"]
+            }
+
+            Gtk.Button _unselectAllTagsFilterButton {
+              icon-name: "edit-select-none-symbolic";
+              tooltip-text: _("Unselect Tags Filters");
+
+              styles ["flat"]
+            }
+          };
+
+          Adw.Bin _tagsBin {
+            Gtk.FlowBox _tagsFlowBox {
+              valign: start;
+              margin-top: 6;
+              margin-start: 6;
+              margin-end: 6;
+              margin-bottom: 6;
+              column-spacing: 2;
+              row-spacing: 2;
+              selection-mode: none;
+            }
+
+            styles ["card"]
+          }
+        }
+
         Adw.PreferencesGroup {
           title: _("Calendar");
           header-suffix: Gtk.Box 
@@ -369,53 +410,54 @@ Adw.Bin _root {
             }
             
             Gtk.Box {
-              orientation: horizontal;
+              orientation: vertical;
               
               Adw.PreferencesGroup _transactionsGroup {
                 title: _("Transactions");
-                margin-top: 6;
+                margin-top: 8;
                 margin-start: 10;
                 margin-end: 10;
-                margin-bottom: 10;
                 header-suffix: Gtk.Box {
                   orientation: horizontal;
                   spacing: 6;
-                  
+
                   Gtk.DropDown _sortTransactionByDropDown {}
-                  
+
                   Gtk.Box _transactionsHeaderBox {
                     orientation: horizontal;
                     valign: center;
-                    
+
                     Gtk.ToggleButton _sortFirstToLastButton {
                       icon-name: "view-sort-descending-symbolic";
                       tooltip-text: _("Sort From First To Last");
                       active: bind _sortLastToFirstButton.active inverted bidirectional;
                     }
-                    
+
                     Gtk.ToggleButton _sortLastToFirstButton {
                       icon-name: "view-sort-ascending-symbolic";
                       tooltip-text: _("Sort From Last To First");
                     }
-                    
+
                     styles ["linked"]
                   }
                 };
-                
-                Gtk.ScrolledWindow _transactionsScroll {
-                  width-request: 300;
-                  height-request: 360;
-                  min-content-height: 360;
-                  vexpand: true;
-                  
-                  Gtk.FlowBox _transactionsFlowBox {
-                    homogeneous: true;
-                    column-spacing: 10;
-                    row-spacing: 10;
-                    halign: fill;
-                    valign: start;
-                    selection-mode: none;
-                  }
+              }
+
+              Gtk.ScrolledWindow _transactionsScroll {
+                width-request: 300;
+                min-content-height: 142;
+                vexpand: true;
+
+                Gtk.FlowBox _transactionsFlowBox {
+                  margin-start: 10;
+                  margin-end: 10;
+                  margin-bottom: 62;
+                  homogeneous: true;
+                  column-spacing: 10;
+                  row-spacing: 10;
+                  halign: fill;
+                  valign: start;
+                  selection-mode: none;
                 }
               }
             }
