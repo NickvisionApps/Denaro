@@ -72,6 +72,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Button _toggleTagsButton;
     [Gtk.Connect] private readonly Gtk.Button _resetTagsFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _unselectAllTagsFilterButton;
+    [Gtk.Connect] private readonly Adw.Bin _tagsBin;
     [Gtk.Connect] private readonly Gtk.FlowBox _tagsFlowBox;
     [Gtk.Connect] private readonly Gtk.Calendar _calendar;
     [Gtk.Connect] private readonly Gtk.Button _selectMonthButton;
@@ -1110,7 +1111,7 @@ public partial class AccountView : Adw.Bin
     private void OnToggleTags()
     {
         _toggleTagsButton.SetIconName(!_controller.ShowTagsList ? "view-reveal-symbolic" : "view-conceal-symbolic");
-        _tagsFlowBox.SetVisible(_controller.ShowTagsList);
+        _tagsBin.SetVisible(_controller.ShowTagsList);
     }
 
     /// <summary>
