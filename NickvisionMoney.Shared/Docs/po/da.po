@@ -89,11 +89,11 @@ msgstr ""
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
-"in the list of recent accounts and doesn't affect how the application works "
-"or what you can do with an account. Each account type has its own color, "
-"these colors can be configured in <link xref=\"configuration\">global "
-"settings</link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
+"the list of recent accounts and doesn't affect how the application works or "
+"what you can do with an account. Each account type has its own color, these "
+"colors can be configured in <link xref=\"configuration\">global settings</"
+"link>."
 msgstr ""
 
 #. (itstool) path: item/title
@@ -126,8 +126,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:44
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to "
-"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
+"$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 
 #. (itstool) path: item/p
@@ -321,10 +321,10 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link "
-"xref=\"transaction\">transaction</link> with unique color. Changing this "
-"will not affect existing transactions, even if they use previously selected "
-"default color."
+"A color that will be selected by default when adding a new <link xref="
+"\"transaction\">transaction</link> with unique color. Changing this will not "
+"affect existing transactions, even if they use previously selected default "
+"color."
 msgstr ""
 
 #. (itstool) path: item/title
@@ -335,8 +335,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link "
-"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link xref="
+"\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
 
@@ -422,10 +422,9 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
+"A folder where your data will be automatically <link xref=\"import-export"
+"\">exported to CSV</link> after every change. This feature doesn't work for "
+"password-protected accounts, because CSV files can't be password-protected."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -723,9 +722,9 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
-"xref=\"account\">account settings</link> will be selected when you open a "
-"dialog to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
+"\"account\">account settings</link> will be selected when you open a dialog "
+"to add new transaction."
 msgstr ""
 
 #. (itstool) path: item/title
@@ -879,9 +878,8 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link "
-"xref=\"configuration\">configuration</link> will be used for created "
-"transactions."
+"properties other than the amount. The color selected in <link xref="
+"\"configuration\">configuration</link> will be used for created transactions."
 msgstr ""
 
 #. (itstool) path: page/p
