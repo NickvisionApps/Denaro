@@ -54,6 +54,10 @@
 		<title>Couleur</title>
 		<p>Une couleur pour les transactions. Elle peut être définie pour utiliser un groupe de couleur ou une couleur unique. Lors de la sélection d’une couleur unique, elle sera définie par défaut comme la couleur sélectionnée dans la <link xref="configuration">configuration</link>, mais peut être modifiée en n’importe quelle couleur.</p>
 	</item>
+    <item>
+        <title>Tags</title>
+        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+    </item>
 	<item>
 		<title>Reçu</title>
 		<p>Image d’un reçu pour une transaction. Vous pouvez téléverser des images JPEG, PNG ou un document PDF, mais peut importe le format il sera converti et enregistré en tant qu’image JPEG. Dans le cas d’un PDF, seule la première page sera enregistrée. Vous pouvez supprimer le fichier ou en téléverser un autre à tout moment.</p>

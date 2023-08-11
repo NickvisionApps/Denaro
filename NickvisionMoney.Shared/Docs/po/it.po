@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-05-24 04:01+0300\n"
+"POT-Creation-Date: 2023-08-12 00:30+0300\n"
 "PO-Revision-Date: 2023-06-03 07:50+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -112,18 +112,18 @@ msgstr "Tipo di conto"
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
-"the list of recent accounts and doesn't affect how the application works or "
-"what you can do with an account. Each account type has its own color, these "
-"colors can be configured in <link xref=\"configuration\">global settings</"
-"link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
 msgstr ""
-"Sono disponibili tre tipi di conto: 🟣<em>conto corrente</em>, 🔵<em>deposito</"
-"em> and 🟢<em>aziendale</em>. Il tipo di conto è solo un'etichetta, mostrata "
-"nella lista dei conti recenti, che non influisce sul funzionamento "
-"dell'applicazione o sulle azioni disponibili per ciascun conto. Ciascun tipo "
-"di conto ha il suo colore, che può essere configurato nelle <link xref="
-"\"configuration\">impostazioni generali</link>."
+"Sono disponibili tre tipi di conto: 🟣<em>conto corrente</em>, "
+"🔵<em>deposito</em> and 🟢<em>aziendale</em>. Il tipo di conto è solo "
+"un'etichetta, mostrata nella lista dei conti recenti, che non influisce sul "
+"funzionamento dell'applicazione o sulle azioni disponibili per ciascun "
+"conto. Ciascun tipo di conto ha il suo colore, che può essere configurato "
+"nelle <link xref=\"configuration\">impostazioni generali</link>."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
@@ -162,8 +162,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:44
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
-"$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 "Se il proprio formato è <em>Inglese (US)</em>, il simbolo della valuta sarà "
 "impostato su <em>$</em> e <em>1,000.00</em> verrà accettato come un valore "
@@ -409,10 +409,10 @@ msgstr "Colore predefinito delle transazioni"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link xref="
-"\"transaction\">transaction</link> with unique color. Changing this will not "
-"affect existing transactions, even if they use previously selected default "
-"color."
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
 msgstr ""
 "Un colore che verrà selezionato inizialmente all'aggiunta di una nuova <link "
 "xref=\"transaction\">transazione</link> con colore speciale. Cambiare questo "
@@ -427,13 +427,13 @@ msgstr "Colore predefinito delle transazioni"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link xref="
-"\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
-"Un colore che verrà usato per le transazioni create usando i <link xref="
-"\"transfer\">trasferimenti</link>. Cambiare questo colore non avrà effetto "
-"sulle transazioni esistenti."
+"Un colore che verrà usato per le transazioni create usando i <link "
+"xref=\"transfer\">trasferimenti</link>. Cambiare questo colore non avrà "
+"effetto sulle transazioni esistenti."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
@@ -533,14 +533,15 @@ msgstr "Cartella di backup in CSV"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-export"
-"\">exported to CSV</link> after every change. This feature doesn't work for "
-"password-protected accounts, because CSV files can't be password-protected."
+"A folder where your data will be automatically <link xref=\"import-"
+"export\">exported to CSV</link> after every change. This feature doesn't "
+"work for password-protected accounts, because CSV files can't be password-"
+"protected."
 msgstr ""
-"Una cartella in cui i propri dati verranno automaticamente <link xref="
-"\"import-export\">esportati in formato CSV</link> dopo ogni modifica. Questa "
-"funzionalità non è attiva per i file protetti da password, poiché i file CSV "
-"non possono essere protetti in tale modo."
+"Una cartella in cui i propri dati verranno automaticamente <link "
+"xref=\"import-export\">esportati in formato CSV</link> dopo ogni modifica. "
+"Questa funzionalità non è attiva per i file protetti da password, poiché i "
+"file CSV non possono essere protetti in tale modo."
 
 #. (itstool) path: info/title
 #: yelp/C/import-export.page:8
@@ -902,9 +903,9 @@ msgstr "Tipo"
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
-"\"account\">account settings</link> will be selected when you open a dialog "
-"to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
 msgstr ""
 "<em>Entrate</em> o <em>Uscite</em>. All'apertura della finestra per creare "
 "una nuova transazione, sarà selezionata l'opzione predefinita scelta nelle "
@@ -1002,11 +1003,27 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
+msgid "Tags"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/transaction.page:62
+msgid ""
+"A list of tags for transaction. A transaction can have unlimited number of "
+"tags (or have no tags). Tags can contain any characters except comma (<code>,"
+"</code>), and have any length, but they are expected to be short keywords. "
+"Tags are meant to be used for additional filtering when using groups is not "
+"enough. Tags are only saved in transactions themselves, and as result unused "
+"tags disappear automatically on account closing."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/transaction.page:65
 msgid "Receipt"
 msgstr "Ricevuta"
 
 #. (itstool) path: item/p
-#: yelp/C/transaction.page:62
+#: yelp/C/transaction.page:66
 msgid ""
 "An image of a receipt for transaction. You can upload JPEG or PNG image or "
 "PDF document, but no matter the format it will be converted and saved as "
@@ -1020,12 +1037,12 @@ msgstr ""
 "in qualsiasi momento."
 
 #. (itstool) path: item/title
-#: yelp/C/transaction.page:65
+#: yelp/C/transaction.page:69
 msgid "Notes"
 msgstr "Annotazioni"
 
 #. (itstool) path: item/p
-#: yelp/C/transaction.page:66
+#: yelp/C/transaction.page:70
 msgid "A freeform text note to attach to transaction."
 msgstr "Un testo libero da allegare alla transazione."
 
@@ -1081,8 +1098,9 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link xref="
-"\"configuration\">configuration</link> will be used for created transactions."
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
 msgstr ""
 "I trasferimenti non permettono di creare transazioni ricorrenti o di "
 "impostare altre proprietà oltre all'importo. Il colore scelto nella <link "
