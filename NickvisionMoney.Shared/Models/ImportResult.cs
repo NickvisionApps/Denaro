@@ -55,5 +55,5 @@ public class ImportResult
     /// </summary>
     /// <param name="tags">IEnumerable</param>
     /// <remarks>Will only add non-existing tags. Existing tags will just be skipped to avoid duplicates</remarks>
-    public void AddTags(IEnumerable<string> tags) => NewTags.AddRange(tags.Where(t => !NewTags.Contains(t)));
+    internal void AddTags(IEnumerable<string> tags) => NewTags.AddRange(tags.Where(t => !NewTags.Contains(t)));
 }
