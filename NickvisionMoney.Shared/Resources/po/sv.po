@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 15:41-0400\n"
+"POT-Creation-Date: 2023-08-11 23:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgid_plural "{0} tags"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:447
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1289
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:448
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1290
 #, fuzzy, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
@@ -82,16 +82,16 @@ msgstr "Konto"
 msgid "Add"
 msgstr "Add"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:469
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:470
 msgid "Add a new transaction or import transactions from a file."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:779
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:780
 msgid "Add Password To PDF?"
 msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:392
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:692
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:693
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:670
 msgid "All files"
 msgstr "Alla filer"
@@ -116,13 +116,13 @@ msgstr ""
 msgid "Apply"
 msgstr "Tillämpa"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1048
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1049
 msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:978
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:979
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
@@ -138,9 +138,9 @@ msgstr ""
 msgid "Can't access the selected folder, check Flatpak permissions."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:889
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:921
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:954
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:890
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:922
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:955
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -233,26 +233,26 @@ msgstr "Insert Decimal Separator"
 msgid "Decimal Separator (Invalid)"
 msgstr "Insert Decimal Separator"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:893
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:894
 #, fuzzy
 msgid "Delete Existing"
 msgstr "Ny Transaktion"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1048
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1049
 #, fuzzy
 msgid "Delete Group"
 msgstr "Ny Grupp"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:957
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:958
 msgid "Delete Only Source"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:958
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:959
 msgid "Delete Source and Generated"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:952
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:978
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:953
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:979
 #, fuzzy
 msgid "Delete Transaction"
 msgstr "Ny Transaktion"
@@ -298,7 +298,7 @@ msgstr "Destination Account Password (Invalid)"
 msgid "Destination Account Password (Required)"
 msgstr "Destination Account Password (Required)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:892
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:893
 msgid "Disassociate Existing"
 msgstr ""
 
@@ -313,8 +313,8 @@ msgstr ""
 msgid "Expense"
 msgstr "Kostnad"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:737
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:764
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:738
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:765
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
 msgid "Export to File"
 msgstr "Exportera till Fil"
@@ -397,7 +397,7 @@ msgstr ""
 msgid "Import from Account"
 msgstr "Importera från Fil"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:690
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:691
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:41
 msgid "Import from File"
@@ -470,9 +470,9 @@ msgstr ""
 msgid "Nickvision Denaro Account"
 msgstr "Inga Senaste Konton"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:781
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:980
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1050
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:782
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:981
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1051
 msgid "No"
 msgstr "Nej"
 
@@ -482,15 +482,15 @@ msgstr "Nej"
 msgid "No End Date"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:468
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:469
 msgid "No Transactions"
 msgstr "Inga Transaktioner"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:459
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:460
 msgid "No Transactions Found"
 msgstr "Hittade Inga Transaktioner"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:460
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:461
 msgid "No transactions match the specified filters."
 msgstr ""
 
@@ -517,7 +517,7 @@ msgstr "Översikt"
 msgid "Page {0}"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:791
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:792
 #, fuzzy
 msgid "PDF Password"
 msgstr "Password"
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Repeat Interval"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:887
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:888
 msgid "Repeat Interval Changed"
 msgstr ""
 
@@ -581,15 +581,15 @@ msgstr ""
 msgid "Select Folder"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:256
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:257
 msgid "Sort By Amount"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:256
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:257
 msgid "Sort By Date"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:256
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:257
 msgid "Sort By Id"
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr "The password will be removed upon closing this dialog."
 msgid "The passwords do not match."
 msgstr "The password of the account was changed."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:887
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:888
 msgid ""
 "The repeat interval was changed.\n"
 "What would you like to do with existing generated transactions?\n"
@@ -624,7 +624,7 @@ msgid ""
 "New repeat transactions will be generated based off the new interval."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:678
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:679
 msgid "This account has no money available to transfer."
 msgstr ""
 
@@ -632,7 +632,7 @@ msgstr ""
 msgid "This account is already opened."
 msgstr "Detta konto är redan öppet."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:952
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:953
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -641,7 +641,7 @@ msgid ""
 "generated transactions to be modifiable."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:919
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:920
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -731,10 +731,10 @@ msgstr "Kan inte skriva över ett öppet konto."
 msgid "Unable to overwrite an opened account."
 msgstr "Kan inte skriva över ett öppet konto."
 
-#: ../../../Controllers/TransactionDialogController.cs:93
-#: ../../../Controllers/TransactionDialogController.cs:342
 #: ../../../Controllers/AccountViewController.cs:510
 #: ../../../Controllers/AccountViewController.cs:886
+#: ../../../Controllers/TransactionDialogController.cs:93
+#: ../../../Controllers/TransactionDialogController.cs:342
 #: ../../../Models/Account.cs:496 ../../../Models/Account.cs:1741
 #: ../../../Models/Account.cs:1823 ../../../Models/Account.cs:1969
 #: ../../../Models/Account.cs:1970 ../../../Models/Account.cs:1974
@@ -742,21 +742,21 @@ msgstr "Kan inte skriva över ett öppet konto."
 msgid "Ungrouped"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:170
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
 #: ../../../Controllers/AccountViewController.cs:1190
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:924
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:925
 msgid "Update Only Source"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:925
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:926
 msgid "Update Source and Generated"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:919
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:920
 #, fuzzy
 msgid "Update Transaction"
 msgstr "Ny Transaktion"
@@ -773,16 +773,16 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:779
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:780
 msgid ""
 "Would you like to password-protect the PDF file?\n"
 "\n"
 "If the password is lost, the PDF will be inaccessible."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:784
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:983
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1053
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:785
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:984
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1054
 msgid "Yes"
 msgstr "Ja"
 
