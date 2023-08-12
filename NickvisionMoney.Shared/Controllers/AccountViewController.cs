@@ -984,7 +984,7 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        (List<uint> Ids, List<string> Tags) res = (new List<uint>(), new List<string>());
+        ImportResult res;
         try
         {
             res = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
@@ -994,42 +994,47 @@ public class AccountViewController : IDisposable
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
             return;
         }
-        var groups = _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name).ToDictionary(x => x.Key, x => x.Value);
-        var groupValues = groups.Values.ToList();
-        foreach (var pair in groups)
+        if (!res.IsEmpty)
         {
-            if (!_groupFilters.ContainsKey((int)pair.Value.Id))
+            if (res.NewGroupIds.Count > 0)
             {
-                _groupFilters.Add((int)pair.Value.Id, true);
-                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, groupValues.IndexOf(pair.Value), true));
-            }
-        }
-        if (res.Tags.Count >= 0)
-        {
-            foreach (var tag in res.Tags)
-            {
-                if (!_tagFilters.ContainsKey(tag))
+                var groupValues = _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name).ToDictionary(x => x.Key, x => x.Value).Values.ToList();
+                foreach (var id in res.NewGroupIds)
                 {
-                    _tagFilters.Add(tag, true);
-                    TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
+                    if (!_groupFilters.ContainsKey((int)id))
+                    {
+                        _groupFilters.Add((int)id, true);
+                        GroupCreated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[id], groupValues.IndexOf(_account.Groups[id]), true));
+                    }
                 }
             }
-        }
-        if (res.Ids.Count >= 0)
-        {
-            foreach (var id in res.Ids)
+            if (res.NewTags.Count >= 0)
             {
-                var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
-                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
+                foreach (var tag in res.NewTags)
+                {
+                    if (!_tagFilters.ContainsKey(tag))
+                    {
+                        _tagFilters.Add(tag, true);
+                        TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
+                    }
+                }
             }
-            FilterUIUpdate();
-            SortUIUpdate();
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Imported {0} transaction from file.", "Imported {0} transactions from file.", res.Tags.Count, res.Tags.Count), NotificationSeverity.Success, res.Tags.Count == 0 ? "help-import" : ""));
-        }
-        else
-        {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Unsupported file type."), NotificationSeverity.Error, "help-import"));
+            if (res.NewTransactionIds.Count >= 0)
+            {
+                foreach (var id in res.NewTransactionIds)
+                {
+                    var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
+                    GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
+                }
+                FilterUIUpdate();
+                SortUIUpdate();
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Imported {0} transaction from file.", "Imported {0} transactions from file.", res.NewTransactionIds.Count, res.NewTransactionIds.Count), NotificationSeverity.Success, res.NewTransactionIds.Count == 0 ? "help-import" : ""));
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Unsupported file type."), NotificationSeverity.Error, "help-import"));
+            }
         }
     }
 

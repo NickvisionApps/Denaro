@@ -1225,12 +1225,12 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
-    public async Task<(List<uint> Ids, List<string> Tags)> ImportFromFileAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>ImportResult</returns>
+    public async Task<ImportResult> ImportFromFileAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         if (!System.IO.Path.Exists(path))
         {
-            return (new List<uint>(), new List<string>());
+            return ImportResult.Empty;
         }
         var extension = System.IO.Path.GetExtension(path).ToLower();
         if (extension == ".csv")
@@ -1245,7 +1245,7 @@ public class Account : IDisposable
         {
             return await ImportFromQIFAsync(path, defaultTransactionRGBA, defaultGroupRGBA);
         }
-        return (new List<uint>(), new List<string>());
+        return ImportResult.Empty;
     }
 
     /// <summary>
@@ -1254,11 +1254,9 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
-    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromCSVAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>ImportResult</returns>
+    private async Task<ImportResult> ImportFromCSVAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
-        var ids = new List<uint>();
-        var newTags = new List<string>();
         string[]? lines;
         try
         {
@@ -1266,8 +1264,9 @@ public class Account : IDisposable
         }
         catch
         {
-            return (ids, newTags);
+            return ImportResult.Empty;
         }
+        var importResult = new ImportResult();
         foreach (var line in lines)
         {
             var fields = line.Split(';');
@@ -1390,7 +1389,10 @@ public class Account : IDisposable
                     Description = groupDescription,
                     RGBA = string.IsNullOrEmpty(groupRGBA) ? defaultGroupRGBA : groupRGBA
                 };
-                await AddGroupAsync(group);
+                if (await AddGroupAsync(group))
+                {
+                    importResult.NewGroupIds.Add(group.Id);
+                }
             }
             var tags = fields[14].Split(',').ToList();
             //Add Transaction
@@ -1411,21 +1413,21 @@ public class Account : IDisposable
             var res = await AddTransactionAsync(transaction);
             if (res.Successful)
             {
-                ids.Add(transaction.Id);
-                newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
+                importResult.NewTransactionIds.Add(transaction.Id);
+                importResult.AddTags(res.NewTags);
                 if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
                 {
                     foreach (var pair in Transactions)
                     {
                         if (pair.Value.RepeatFrom == transaction.Id)
                         {
-                            ids.Add(pair.Value.Id);
+                            importResult.NewTransactionIds.Add(pair.Value.Id);
                         }
                     }
                 }
             }
         }
-        return (ids, newTags);
+        return importResult;
     }
 
     /// <summary>
@@ -1433,8 +1435,8 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
-    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
-    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
+    /// <returns>ImportResult</returns>
+    private async Task<ImportResult> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
     {
         OFXDocument? ofx = null;
         //Check For Security
@@ -1450,26 +1452,29 @@ public class Account : IDisposable
         }
         catch
         {
-            return (new List<uint>(), new List<string>());
+            return ImportResult.Empty;
         }
         //Transactions
-        var ids = new List<uint>();
+        var importResult = new ImportResult();
         foreach (var transaction in ofx!.Transactions)
         {
             if (transaction.Amount != 0)
             {
-                ids.Add(NextAvailableTransactionId);
-                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+                var t = new Transaction(NextAvailableTransactionId)
                 {
                     Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo) : transaction.Name,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
                     RGBA = defaultTransactionRGBA
-                });
+                };
+                if ((await AddTransactionAsync(t)).Successful)
+                {
+                    importResult.NewTransactionIds.Add(t.Id);
+                }
             }
         }
-        return (ids, new List<string>());
+        return importResult;
     }
 
     /// <summary>
@@ -1478,8 +1483,8 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
-    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromQIFAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>ImportResult</returns>
+    private async Task<ImportResult> ImportFromQIFAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         QifDocument? qif = null;
         try
@@ -1491,42 +1496,49 @@ public class Account : IDisposable
         }
         catch
         {
-            return (new List<uint>(), new List<string>());
+            return ImportResult.Empty;
         }
+        var importResult = new ImportResult();
         //Groups
         foreach (var group in qif.CategoryListTransactions)
         {
             if (Groups.Values.FirstOrDefault(x => x.Name == group.CategoryName) == null)
             {
-                await AddGroupAsync(new Group(NextAvailableGroupId)
+                var g = new Group(NextAvailableGroupId)
                 {
                     Name = group.CategoryName,
                     Description = group.Description,
                     RGBA = defaultGroupRGBA
-                });
+                };
+                if (await AddGroupAsync(g))
+                {
+                    importResult.NewGroupIds.Add(g.Id);
+                }
             }
         }
         //Transactions
-        var ids = new List<uint>();
         foreach (var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
         {
             if (transaction.Amount != 0)
             {
-                ids.Add(NextAvailableTransactionId);
                 var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
-                await AddTransactionAsync(new Transaction(NextAvailableTransactionId)
+                var t = new Transaction(NextAvailableTransactionId)
                 {
                     Description = string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
                     GroupId = group == null ? -1 : (int)group.Id,
-                    UseGroupColor = group == null ? false : true,
+                    UseGroupColor = group != null,
                     RGBA = defaultTransactionRGBA
-                });
+                };
+                if ((await AddTransactionAsync(t)).Successful)
+                {
+                    importResult.NewTransactionIds.Add(t.Id);
+                }
             }
         }
-        return (ids, new List<string>());
+        return importResult;
     }
 
     /// <summary>
