@@ -44,7 +44,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Added graph visuals to the Account view as well as in exported PDFs
-              * Added tags that can be added to transactions for better management and filtering
+              * Added tags that can be used with transactions for finer management and filtering
               * Added the option to select the entire current month as the date range filter
               * Improved the transaction description suggestion algorithm with fuzzy search
               * Fixed an issue where the help button in the import toast was not working

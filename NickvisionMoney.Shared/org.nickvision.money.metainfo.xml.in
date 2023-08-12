@@ -47,10 +47,10 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.8.0-beta2" date="2023-08-08">
+    <release version="2023.8.0-beta3" date="2023-08-11">
       <description translatable="no">
         <p>- Added graph visuals to the Account view as well as in exported PDFs</p>
-        <p>- Added tags that can be added to transactions for better management and filtering</p>
+        <p>- Added tags that can be used with transactions for finer management and filtering</p>
         <p>- Added the option to select the entire current month as the date range filter </p>
         <p>- Improved the transaction description suggestion algorithm with fuzzy search</p>
         <p>- Fixed an issue where the help button in the import toast was not working</p>
