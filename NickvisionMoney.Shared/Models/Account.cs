@@ -1225,13 +1225,12 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    public async Task<List<uint>> ImportFromFileAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
+    public async Task<(List<uint> Ids, List<string> Tags)> ImportFromFileAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
-        var ids = new List<uint>();
         if (!System.IO.Path.Exists(path))
         {
-            return ids;
+            return (new List<uint>(), new List<string>());
         }
         var extension = System.IO.Path.GetExtension(path).ToLower();
         if (extension == ".csv")
@@ -1246,7 +1245,7 @@ public class Account : IDisposable
         {
             return await ImportFromQIFAsync(path, defaultTransactionRGBA, defaultGroupRGBA);
         }
-        return ids;
+        return (new List<uint>(), new List<string>());
     }
 
     /// <summary>
@@ -1255,10 +1254,11 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromCSVAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
+    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromCSVAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
         var ids = new List<uint>();
+        var newTags = new List<string>();
         string[]? lines;
         try
         {
@@ -1266,7 +1266,7 @@ public class Account : IDisposable
         }
         catch
         {
-            return ids;
+            return (ids, newTags);
         }
         foreach (var line in lines)
         {
@@ -1408,20 +1408,24 @@ public class Account : IDisposable
                 RepeatEndDate = repeatEndDate,
                 Tags = tags
             };
-            await AddTransactionAsync(transaction);
-            ids.Add(transaction.Id);
-            if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
+            var res = await AddTransactionAsync(transaction);
+            if (res.Successful)
             {
-                foreach (var pair in Transactions)
+                ids.Add(transaction.Id);
+                newTags.AddRange(res.NewTags.Where(t => !newTags.Contains(t)));
+                if (transaction.RepeatInterval != TransactionRepeatInterval.Never)
                 {
-                    if (pair.Value.RepeatFrom == transaction.Id)
+                    foreach (var pair in Transactions)
                     {
-                        ids.Add(pair.Value.Id);
+                        if (pair.Value.RepeatFrom == transaction.Id)
+                        {
+                            ids.Add(pair.Value.Id);
+                        }
                     }
                 }
             }
         }
-        return ids;
+        return (ids, newTags);
     }
 
     /// <summary>
@@ -1429,10 +1433,9 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
+    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
+    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromOFXAsync(string path, string defaultTransactionRGBA)
     {
-        var ids = new List<uint>();
         OFXDocument? ofx = null;
         //Check For Security
         var ofxString = File.ReadAllText(path);
@@ -1447,9 +1450,10 @@ public class Account : IDisposable
         }
         catch
         {
-            return ids;
+            return (new List<uint>(), new List<string>());
         }
         //Transactions
+        var ids = new List<uint>();
         foreach (var transaction in ofx!.Transactions)
         {
             if (transaction.Amount != 0)
@@ -1465,7 +1469,7 @@ public class Account : IDisposable
                 });
             }
         }
-        return ids;
+        return (ids, new List<string>());
     }
 
     /// <summary>
@@ -1474,10 +1478,9 @@ public class Account : IDisposable
     /// <param name="path">The path of the file</param>
     /// <param name="defaultTransactionRGBA">The default color for a transaction</param>
     /// <param name="defaultGroupRGBA">The default color for a group</param>
-    /// <returns>The list of Ids of newly imported transactions</returns>
-    private async Task<List<uint>> ImportFromQIFAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
+    /// <returns>The list of Ids of newly imported transactions and the list of newly created tags</returns>
+    private async Task<(List<uint> Ids, List<string> Tags)> ImportFromQIFAsync(string path, string defaultTransactionRGBA, string defaultGroupRGBA)
     {
-        var ids = new List<uint>();
         QifDocument? qif = null;
         try
         {
@@ -1488,7 +1491,7 @@ public class Account : IDisposable
         }
         catch
         {
-            return ids;
+            return (new List<uint>(), new List<string>());
         }
         //Groups
         foreach (var group in qif.CategoryListTransactions)
@@ -1504,6 +1507,7 @@ public class Account : IDisposable
             }
         }
         //Transactions
+        var ids = new List<uint>();
         foreach (var transaction in qif.BankTransactions.Concat(qif.CashTransactions).Concat(qif.CreditCardTransactions))
         {
             if (transaction.Amount != 0)
@@ -1522,7 +1526,7 @@ public class Account : IDisposable
                 });
             }
         }
-        return ids;
+        return (ids, new List<string>());
     }
 
     /// <summary>
