@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-11 23:48-0400\n"
-"PO-Revision-Date: 2023-06-25 23:41+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2023-08-12 17:19+0000\n"
+"Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "app/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:566
 msgid "(Copy)"
@@ -36,8 +36,8 @@ msgstr "{0} von {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} Tag"
+msgstr[1] "{0} Tags"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:448
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1290
@@ -158,11 +158,8 @@ msgid "Checking"
 msgstr "Girokonto"
 
 #: ../../../Controllers/MainWindowController.cs:106
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"Mitwirkende auf GitHub ❤️ {1}"
+msgstr "Beitragende auf Github ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:106
 #: ../../../Models/Account.cs:1706
@@ -205,7 +202,7 @@ msgstr "Währungszeichen (ungültig)"
 
 #: ../../../Controllers/MainWindowController.cs:109
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Models/Account.cs:1768
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
@@ -214,7 +211,7 @@ msgstr "Datum"
 
 #: ../../../Controllers/MainWindowController.cs:110
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:336
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
@@ -323,7 +320,7 @@ msgstr "Konto erfolgreich zu Datei exportiert."
 
 #: ../../../Controllers/MainWindowController.cs:108
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: ../../../Models/Account.cs:1655
 #, csharp-format
@@ -455,7 +452,7 @@ msgstr "Nie"
 #: ../../../Controllers/MainWindowController.cs:105
 #: ../../../Controllers/MainWindowController.cs:107
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
@@ -587,7 +584,7 @@ msgstr "Nach ID sortieren"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: ../../../Controllers/AccountViewController.cs:638
 msgid "The password of the account was changed."
@@ -627,7 +624,6 @@ msgid "This account is already opened."
 msgstr "Dieses Konto ist schon geöffnet."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:953
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -638,8 +634,8 @@ msgstr ""
 "Diese Überweisung ist eine wiederholte Überweisung.\n"
 "Was möchtest du mit wiederholten Überweisungen machen?\n"
 "\n"
-"Nur die Ursprungs-Überweisung zu löschen macht es möglich&#xA;die "
-"generierten Überweisungen zu modifizieren."
+"Nur die Ursprungs-Überweisung zu löschen macht es möglich\n"
+"die generierten Überweisungen zu modifizieren."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:920
 msgid ""
@@ -657,7 +653,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:111
 msgid "Tobias Bernard"
-msgstr ""
+msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:1685
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:79
@@ -755,7 +751,7 @@ msgstr "Ungruppiert"
 #: ../../../Controllers/AccountViewController.cs:1190
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
-msgstr ""
+msgstr "Nicht gekennzeichnet"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:925
 msgid "Update Only Source"
@@ -841,15 +837,13 @@ msgstr "Eigene Währung Benutzen"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:227
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "Other"
-msgstr "Anderes"
+msgstr "Andere"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:191
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-#, fuzzy
 msgid "None"
-msgstr "Keines"
+msgstr "Keine"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:205
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:257
@@ -960,19 +954,16 @@ msgid "Unselect Groups Filters"
 msgstr "Gruppenfilter abwählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:180
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Gruppen-Sichtbarkeit Umschalten"
+msgstr "Tag-Sichtbarkeit Umschalten"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:188
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Alle Gruppenfilter auswählen"
+msgstr "Alle Tagfilter auswählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Gruppenfilter abwählen"
+msgstr "Tagfilter abwählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
 msgid "Calendar"
@@ -980,7 +971,7 @@ msgstr "Kalender"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:224
 msgid "Select Current Month"
-msgstr ""
+msgstr "Jetzigen Monat auswählen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:230
 msgid "Reset To Today"
@@ -1006,7 +997,7 @@ msgstr "Ende"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:348
 msgid "Visualize"
-msgstr ""
+msgstr "Veranschaulichen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:366
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
@@ -1364,7 +1355,7 @@ msgstr "Einzigartige Farbe verwenden"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Tag hinzufügen"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
@@ -1451,7 +1442,7 @@ msgstr "Keine kürzlichen Konten"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:112
 msgid "Toggle Graphs"
-msgstr ""
+msgstr "Diagramm umschalten"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:122
 msgid "Main Menu"
