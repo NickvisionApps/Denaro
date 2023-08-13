@@ -52,7 +52,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
     private Dictionary<uint, GroupRow> _groupRows;
-    private List<TagButton> _tagButtons;
+    private Dictionary<string, TagButton> _tagButtons;
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
 
@@ -116,7 +116,7 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
-        _tagButtons = new List<TagButton>();
+        _tagButtons = new Dictionary<string, TagButton>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
         _currentGraphPage = 0;
         //Register Controller Events
@@ -525,18 +525,21 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool CreateGroupRow(ModelEventArgs<Group> e)
     {
-        var row = new GroupRow(e.Model, _controller.CultureForNumberString, _controller.UseNativeDigits, e.Active, _controller.GroupDefaultColor);
-        row.EditTriggered += EditGroup;
-        row.FilterChanged += UpdateGroupFilter;
-        if (e.Position != null)
+        if (!_groupRows.ContainsKey(e.Model.Id))
         {
-            _groupsList.Insert(row, e.Position.Value);
+            var row = new GroupRow(e.Model, _controller.CultureForNumberString, _controller.UseNativeDigits, e.Active, _controller.GroupDefaultColor);
+            row.EditTriggered += EditGroup;
+            row.FilterChanged += UpdateGroupFilter;
+            if (e.Position != null)
+            {
+                _groupsList.Insert(row, e.Position.Value);
+            }
+            else
+            {
+                _groupsList.Append(row);
+            }
+            _groupRows.Add(e.Model.Id, row);
         }
-        else
-        {
-            _groupsList.Append(row);
-        }
-        _groupRows.Add(e.Model.Id, row);
         return false;
     }
 
@@ -546,8 +549,11 @@ public partial class AccountView : Adw.Bin
     /// <param name="id">The id of the group</param>
     private bool DeleteGroupRow(uint id)
     {
-        _groupsList.Remove(_groupRows[id]);
-        _groupRows.Remove(id);
+        if (_groupRows.ContainsKey(id))
+        {
+            _groupsList.Remove(_groupRows[id]);
+            _groupRows.Remove(id);
+        }
         return false;
     }
     
@@ -557,13 +563,13 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool UpdateGroupRow(ModelEventArgs<Group> e)
     {
-        if (!_groupRows.ContainsKey(e.Model.Id))
+        if (_groupRows.ContainsKey(e.Model.Id))
         {
-            CreateGroupRow(e);
+            _groupRows[e.Model.Id].UpdateRow(e.Model, _controller.GroupDefaultColor, _controller.CultureForNumberString, e.Active);
         }
         else
         {
-            _groupRows[e.Model.Id].UpdateRow(e.Model, _controller.GroupDefaultColor, _controller.CultureForNumberString, e.Active);
+            CreateGroupRow(e);
         }
         return false;
     }
@@ -574,12 +580,15 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool CreateTagButton(ModelEventArgs<string> e)
     {
-        var tagButton = new TagButton(e.Model);
-        _tagButtons.Add(tagButton);
-        tagButton.SetActive(true);
-        tagButton.FilterChanged += UpdateTagFilter;
-        _tagsFlowBox.Append(tagButton);
-        _tagsFlowBox.InvalidateSort();
+        if (!_tagButtons.ContainsKey(e.Model))
+        {
+            var tagButton = new TagButton(e.Model);
+            tagButton.SetActive(true);
+            tagButton.FilterChanged += UpdateTagFilter;
+            _tagsFlowBox.Append(tagButton);
+            _tagsFlowBox.InvalidateSort();
+            _tagButtons.Add(e.Model, tagButton);
+        }
         return false;
     }
 
@@ -589,7 +598,10 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool UpdateTagButton(ModelEventArgs<string> e)
     {
-        _tagButtons[e.Position!.Value].SetActive(e.Active);
+        if (_tagButtons.ContainsKey(e.Model))
+        {
+            _tagButtons[e.Model].SetActive(e.Active);
+        }
         return false;
     }
 
@@ -599,20 +611,23 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool CreateTransactionRow(ModelEventArgs<Transaction> e)
     {
-        var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
-        row.EditTriggered += EditTransaction;
-        row.IsSmall = _parentWindow.DefaultWidth < 450;
-        row.SetVisible(e.Active);
-        if (e.Position != null)
+        if (!_transactionRows.ContainsKey(e.Model.Id))
         {
-            _transactionsFlowBox.Insert(row, e.Position.Value);
-        }
-        else
-        {
+            var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+            row.EditTriggered += EditTransaction;
+            row.IsSmall = _parentWindow.DefaultWidth < 450;
+            row.SetVisible(e.Active);
+            if (e.Position != null)
+            {
+                _transactionsFlowBox.Insert(row, e.Position.Value);
+            }
+            else
+            {
 
-            _transactionsFlowBox.Append(row);
+                _transactionsFlowBox.Append(row);
+            }
+            _transactionRows.Add(e.Model.Id, row);
         }
-        _transactionRows.Add(e.Model.Id, row);
         return false;
     }
 
@@ -622,8 +637,11 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool MoveTransactionRow(ModelEventArgs<Transaction> e)
     {
-        _transactionsFlowBox.Remove(_transactionRows[e.Model.Id]);
-        _transactionsFlowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
+        if (_transactionRows.ContainsKey(e.Model.Id))
+        {
+            _transactionsFlowBox.Remove(_transactionRows[e.Model.Id]);
+            _transactionsFlowBox.Insert(_transactionRows[e.Model.Id], e.Position ?? -1);
+        }
         return false;
     }
 
@@ -633,8 +651,11 @@ public partial class AccountView : Adw.Bin
     /// <param name="id">uint</param>
     private bool DeleteTransactionRow(uint id)
     {
-        _transactionsFlowBox.Remove(_transactionRows[id]);
-        _transactionRows.Remove(id);
+        if (_transactionRows.ContainsKey(id))
+        {
+            _transactionsFlowBox.Remove(_transactionRows[id]);
+            _transactionRows.Remove(id);
+        }
         return false;
     }
     
@@ -644,14 +665,14 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool UpdateTransactionRow(ModelEventArgs<Transaction> e)
     {
-        if (!_transactionRows.ContainsKey(e.Model.Id))
-        {
-            CreateTransactionRow(e);
-        }
-        else
+        if (_transactionRows.ContainsKey(e.Model.Id))
         {
             _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString, _controller.CultureForDateString);
             _transactionRows[e.Model.Id].SetVisible(e.Active);
+        }
+        else
+        {
+            CreateTransactionRow(e);
         }
         return false;
     }
@@ -722,7 +743,7 @@ public partial class AccountView : Adw.Bin
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
-            _viewStack.SetVisibleChildName(oldPage);
+            _viewStack.SetVisibleChildName(_viewStack.GetVisibleChildName() == "spinner" ? oldPage : _viewStack.GetVisibleChildName());
             _paneScroll.SetSensitive(true);
         }
         catch { }

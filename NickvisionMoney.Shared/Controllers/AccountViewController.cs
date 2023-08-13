@@ -663,7 +663,7 @@ public class AccountViewController : IDisposable
         {
             foreach (var pair in _account.Groups)
             {
-                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, _groupFilters[(int)pair.Key]));
+                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, _groupFilters.ContainsKey((int)pair.Key) ? _groupFilters[(int)pair.Key] : true));
             }
             foreach (var pair in _account.Transactions)
             {
@@ -984,39 +984,55 @@ public class AccountViewController : IDisposable
     /// <param name="path">The path of the file</param>
     public async Task ImportFromFileAsync(string path)
     {
-        List<uint>? importedIds;
+        ImportResult res;
         try
         {
-            importedIds = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
+            res = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
         }
         catch
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
             return;
         }
-        foreach (var pair in _account.Groups)
+        if (!res.IsEmpty)
         {
-            if (!_groupFilters.ContainsKey((int)pair.Value.Id))
+            if (res.NewGroupIds.Count > 0)
             {
-                _groupFilters.Add((int)pair.Value.Id, true);
-                GroupCreated?.Invoke(this, new ModelEventArgs<Group>(pair.Value, null, true));
+                var groupValues = _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name).ToDictionary(x => x.Key, x => x.Value).Values.ToList();
+                foreach (var id in res.NewGroupIds)
+                {
+                    _groupFilters[(int)id] = true;
+                    GroupCreated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[id], groupValues.IndexOf(_account.Groups[id]), true));
+                }
             }
-        }
-        if (importedIds.Count >= 0)
-        {
-            foreach (var id in importedIds)
+            if (res.NewTags.Count >= 0)
             {
-                var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
-                TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
-                GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
+                foreach (var tag in res.NewTags)
+                {
+                    _tagFilters[tag] = true;
+                    TagCreated?.Invoke(this, new ModelEventArgs<string>(tag, null, true));
+                }
             }
-            FilterUIUpdate();
-            SortUIUpdate();
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Imported {0} transaction from file.", "Imported {0} transactions from file.", importedIds.Count, importedIds.Count), NotificationSeverity.Success, importedIds.Count == 0 ? "help-import" : ""));
+            if (res.NewTransactionIds.Count >= 0)
+            {
+                foreach (var id in res.NewTransactionIds)
+                {
+                    var groupId = _account.Transactions[id].GroupId == -1 ? 0u : (uint)_account.Transactions[id].GroupId;
+                    TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[id], null, true));
+                    GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[groupId], null, _groupFilters[(int)groupId]));
+                }
+                FilterUIUpdate();
+                SortUIUpdate();
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Imported {0} transaction from file.", "Imported {0} transactions from file.", res.NewTransactionIds.Count, res.NewTransactionIds.Count), NotificationSeverity.Success, res.NewTransactionIds.Count == 0 ? "help-import" : ""));
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import transactions from the file."), NotificationSeverity.Error, "help-import"));
+            }
         }
         else
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Unsupported file type."), NotificationSeverity.Error, "help-import"));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Nothing to import from the file."), NotificationSeverity.Error, "help-import"));
         }
     }
 
