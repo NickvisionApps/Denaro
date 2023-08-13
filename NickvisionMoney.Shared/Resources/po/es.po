@@ -37,8 +37,8 @@ msgstr "{0} de {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} etiqueta"
+msgstr[1] "{0} etiquetas"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:448
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1311
@@ -587,7 +587,7 @@ msgstr "Ordenar por id"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: ../../../Controllers/AccountViewController.cs:638
 msgid "The password of the account was changed."
@@ -753,7 +753,7 @@ msgstr "Sin agrupar"
 #: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
-msgstr ""
+msgstr "Sin etiqueta"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:946
 msgid "Update Only Source"
@@ -954,19 +954,16 @@ msgid "Unselect Groups Filters"
 msgstr "Desmarcar los filtros de los grupos"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:180
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Conmutar visibilidad de grupos"
+msgstr "Alternar la visibilidad de las etiquetas"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:188
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Seleccionar todos los grupos de Filtros"
+msgstr "Seleccionar todas los filtros para las etiquetas"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Desmarcar los filtros de los grupos"
+msgstr "Deseleccionar los filtros para las etiquetas"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
 msgid "Calendar"
@@ -1357,7 +1354,7 @@ msgstr "Usar color único"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Añadir una etiqueta"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
