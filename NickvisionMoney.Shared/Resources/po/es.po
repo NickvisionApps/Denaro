@@ -8,9 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-13 01:01-0400\n"
-"PO-Revision-Date: 2023-08-09 12:21+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2023-08-13 23:35+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/es/>\n"
 "Language: es\n"
@@ -494,7 +493,7 @@ msgstr "Notas"
 
 #: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Nada que importar del archivo."
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -710,10 +709,8 @@ msgstr ""
 "aplicación tiene permisos para acceder al archivo e inténtelo de nuevo."
 
 #: ../../../Controllers/AccountViewController.cs:1030
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr ""
-"Añadir una transacción nueva o importar transacciones desde un archivo."
+msgstr "No se pueden importar las transacciones del archivo."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
