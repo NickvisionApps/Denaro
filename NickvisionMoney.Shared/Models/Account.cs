@@ -1378,7 +1378,7 @@ public class Account : IDisposable
                     importResult.NewGroupIds.Add(group.Id);
                 }
             }
-            var tags = fields[14].Split(',');
+            var tags = fields[14].Split(',').Where(x => !string.IsNullOrEmpty(x));
             //Add Transaction
             var transaction = new Transaction(id)
             {

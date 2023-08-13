@@ -297,7 +297,6 @@ public class MainWindowController : IDisposable
         }
         if(File.Exists(controller.ImportFile))
         {
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Please wait while transactions import..."), NotificationSeverity.Informational));
             await accountViewController.ImportFromFileAsync(controller.ImportFile);
         }
         return true;

@@ -743,7 +743,7 @@ public partial class AccountView : Adw.Bin
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
-            _viewStack.SetVisibleChildName(oldPage);
+            _viewStack.SetVisibleChildName(_viewStack.GetVisibleChildName() == "spinner" ? oldPage : _viewStack.GetVisibleChildName());
             _paneScroll.SetSensitive(true);
         }
         catch { }
