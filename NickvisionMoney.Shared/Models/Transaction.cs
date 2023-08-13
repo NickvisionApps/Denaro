@@ -159,6 +159,32 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         }
         _disposed = true;
     }
+    
+    /// <summary>
+    /// Creates a repeat transaction from this transaction
+    /// </summary>
+    /// <param name="newId">The new id to use</param>
+    /// <param name="newDate">The new date to use</param>
+    /// <returns>A new transaction</returns>
+    public Transaction Repeat(uint newId, DateOnly newDate)
+    {
+        return new Transaction(newId)
+        {
+            Date = newDate,
+            Description = Description,
+            Type = Type,
+            RepeatInterval = RepeatInterval,
+            Amount = Amount,
+            GroupId = GroupId,
+            RGBA = RGBA,
+            UseGroupColor = UseGroupColor,
+            Receipt = Receipt?.Clone((x) => { }) ?? null,
+            RepeatFrom = (int)Id,
+            RepeatEndDate = RepeatEndDate,
+            Tags = new List<string>(Tags),
+            Notes = Notes
+        };
+    }
 
     /// <summary>
     /// Clones the transaction

@@ -1150,30 +1150,14 @@ public class Account : IDisposable
                 }
                 foreach (var date in dates)
                 {
-                    var newTransaction = new Transaction(NextAvailableTransactionId)
-                    {
-                        Date = date,
-                        Description = transaction.Description,
-                        Type = transaction.Type,
-                        RepeatInterval = transaction.RepeatInterval,
-                        Amount = transaction.Amount,
-                        GroupId = transaction.GroupId,
-                        RGBA = transaction.RGBA,
-                        UseGroupColor = transaction.UseGroupColor,
-                        Receipt = transaction.Receipt,
-                        RepeatFrom = (int)transaction.Id,
-                        RepeatEndDate = transaction.RepeatEndDate
-                    };
-                    await AddTransactionAsync(newTransaction);
-                    transactionsModified = true;
+                    transactionsModified = transactionsModified || (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
                 }
             }
             else if (transaction.RepeatFrom > 0)
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
-                    await DeleteTransactionAsync(transaction.Id);
-                    transactionsModified = true;
+                    transactionsModified = transactionsModified || await DeleteTransactionAsync(transaction.Id);
                 }
             }
             i++;
