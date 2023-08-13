@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 00:43-0400\n"
+"POT-Creation-Date: 2023-08-13 01:01-0400\n"
 "PO-Revision-Date: 2023-06-17 02:34+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -319,8 +319,8 @@ msgstr "Uscita"
 msgid "Export to File"
 msgstr "Esporta su file"
 
-#: ../../../Controllers/AccountViewController.cs:1054
-#: ../../../Controllers/AccountViewController.cs:1072
+#: ../../../Controllers/AccountViewController.cs:1048
+#: ../../../Controllers/AccountViewController.cs:1066
 msgid "Exported account to file successfully."
 msgstr "L'account è stato esportato su file."
 
@@ -401,7 +401,7 @@ msgstr "Importa da file"
 msgid "Import from File"
 msgstr "Importa da file"
 
-#: ../../../Controllers/AccountViewController.cs:1032
+#: ../../../Controllers/AccountViewController.cs:1026
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -497,7 +497,7 @@ msgstr ""
 msgid "Notes"
 msgstr "Annotazioni"
 
-#: ../../../Controllers/AccountViewController.cs:1041
+#: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
 msgstr ""
 
@@ -522,10 +522,6 @@ msgstr "Pagina {0}"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:813
 msgid "PDF Password"
 msgstr "Password del PDF"
-
-#: ../../../Controllers/MainWindowController.cs:300
-msgid "Please wait while transactions import..."
-msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:668
@@ -630,7 +626,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Questo conto non ha sufficiente denaro per il trasferimento."
 
-#: ../../../Controllers/MainWindowController.cs:352
+#: ../../../Controllers/MainWindowController.cs:351
 msgid "This account is already opened."
 msgstr "Questo account è già aperto."
 
@@ -707,8 +703,8 @@ msgstr ""
 msgid "Type"
 msgstr "Tipo"
 
-#: ../../../Controllers/AccountViewController.cs:1058
-#: ../../../Controllers/AccountViewController.cs:1076
+#: ../../../Controllers/AccountViewController.cs:1052
+#: ../../../Controllers/AccountViewController.cs:1070
 msgid "Unable to export account to file."
 msgstr "Esportazione su file del conto non riuscita."
 
@@ -720,17 +716,17 @@ msgstr ""
 "Importazione delle informazioni dal file non riuscita. Assicurarsi che "
 "l'applicazione abbia i permessi di accedere al file e riprovare."
 
-#: ../../../Controllers/AccountViewController.cs:1036
+#: ../../../Controllers/AccountViewController.cs:1030
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr "Creare una nuova transazione o importare le transazioni da un file."
 
-#: ../../../Controllers/MainWindowController.cs:334
+#: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Accesso al conto non riuscito. La password non è corretta."
 
 #: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:341
+#: ../../../Controllers/MainWindowController.cs:340
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -761,7 +757,7 @@ msgid "Ungrouped"
 msgstr "Senza gruppo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
-#: ../../../Controllers/AccountViewController.cs:1212
+#: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""

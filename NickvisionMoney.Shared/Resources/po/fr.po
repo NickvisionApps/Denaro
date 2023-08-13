@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 00:43-0400\n"
+"POT-Creation-Date: 2023-08-13 01:01-0400\n"
 "PO-Revision-Date: 2023-08-09 12:21+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -316,8 +316,8 @@ msgstr "Dépenses"
 msgid "Export to File"
 msgstr "Exporter vers un fichier"
 
-#: ../../../Controllers/AccountViewController.cs:1054
-#: ../../../Controllers/AccountViewController.cs:1072
+#: ../../../Controllers/AccountViewController.cs:1048
+#: ../../../Controllers/AccountViewController.cs:1066
 msgid "Exported account to file successfully."
 msgstr "Compte exporté dans le fichier avec succès."
 
@@ -397,7 +397,7 @@ msgstr "Importer à partir d’un compte"
 msgid "Import from File"
 msgstr "Importer à partir d’un fichier"
 
-#: ../../../Controllers/AccountViewController.cs:1032
+#: ../../../Controllers/AccountViewController.cs:1026
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -492,7 +492,7 @@ msgstr "Aucune transaction ne correspond aux critères spécifiés."
 msgid "Notes"
 msgstr "Notes"
 
-#: ../../../Controllers/AccountViewController.cs:1041
+#: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
 msgstr ""
 
@@ -517,10 +517,6 @@ msgstr "Page {0}"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:813
 msgid "PDF Password"
 msgstr "Mot de passe PDF"
-
-#: ../../../Controllers/MainWindowController.cs:300
-msgid "Please wait while transactions import..."
-msgstr "Veuillez patienter pendant l’importation des transactions…"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:668
@@ -626,7 +622,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Ce compte n’a pas d’argent disponible à transférer."
 
-#: ../../../Controllers/MainWindowController.cs:352
+#: ../../../Controllers/MainWindowController.cs:351
 msgid "This account is already opened."
 msgstr "Ce compte est déjà ouvert."
 
@@ -700,8 +696,8 @@ msgstr "Irénée Thirion"
 msgid "Type"
 msgstr "Type"
 
-#: ../../../Controllers/AccountViewController.cs:1058
-#: ../../../Controllers/AccountViewController.cs:1076
+#: ../../../Controllers/AccountViewController.cs:1052
+#: ../../../Controllers/AccountViewController.cs:1070
 msgid "Unable to export account to file."
 msgstr "Impossible d’exporter le compte dans un fichier."
 
@@ -713,21 +709,21 @@ msgstr ""
 "Impossible d’importer les informations depuis le fichier. Assurez vous que "
 "l’application a les permissions d’accès au fichier, et réessayez."
 
-#: ../../../Controllers/AccountViewController.cs:1036
+#: ../../../Controllers/AccountViewController.cs:1030
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr ""
 "Ajoutez une nouvelle transaction ou importez des transactions depuis un "
 "fichier."
 
-#: ../../../Controllers/MainWindowController.cs:334
+#: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
 msgstr ""
 "Impossible de se connecter au compte. Le mot de passe fourni n'est pas "
 "valide."
 
 #: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:341
+#: ../../../Controllers/MainWindowController.cs:340
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -756,7 +752,7 @@ msgid "Ungrouped"
 msgstr "Sans groupe"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
-#: ../../../Controllers/AccountViewController.cs:1212
+#: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""
@@ -1499,6 +1495,9 @@ msgid ""
 msgstr ""
 "— Exportez un compte en fichier CSV et importez un fichier CSV, OFX ou QIF "
 "pour importer en masse des transactions dans un compte"
+
+#~ msgid "Please wait while transactions import..."
+#~ msgstr "Veuillez patienter pendant l’importation des transactions…"
 
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr ""

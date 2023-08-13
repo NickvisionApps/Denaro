@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 00:43-0400\n"
+"POT-Creation-Date: 2023-08-13 01:01-0400\n"
 "PO-Revision-Date: 2023-07-29 12:14+0000\n"
 "Last-Translator: Yuxin Ren <yx_Ren2018@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -314,8 +314,8 @@ msgstr "支出"
 msgid "Export to File"
 msgstr "导出到文件"
 
-#: ../../../Controllers/AccountViewController.cs:1054
-#: ../../../Controllers/AccountViewController.cs:1072
+#: ../../../Controllers/AccountViewController.cs:1048
+#: ../../../Controllers/AccountViewController.cs:1066
 msgid "Exported account to file successfully."
 msgstr "成功将账户导出到文件。"
 
@@ -395,7 +395,7 @@ msgstr "从账户导入"
 msgid "Import from File"
 msgstr "从文件导入"
 
-#: ../../../Controllers/AccountViewController.cs:1032
+#: ../../../Controllers/AccountViewController.cs:1026
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -489,7 +489,7 @@ msgstr "没有符合条件的交易"
 msgid "Notes"
 msgstr "注释"
 
-#: ../../../Controllers/AccountViewController.cs:1041
+#: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
 msgstr ""
 
@@ -514,10 +514,6 @@ msgstr "第 {0} 页"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:813
 msgid "PDF Password"
 msgstr "PDF 密码"
-
-#: ../../../Controllers/MainWindowController.cs:300
-msgid "Please wait while transactions import..."
-msgstr "正在导入交易，请稍候..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:668
@@ -622,7 +618,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "该账户没有足够资金完成转账。"
 
-#: ../../../Controllers/MainWindowController.cs:352
+#: ../../../Controllers/MainWindowController.cs:351
 msgid "This account is already opened."
 msgstr "此账户已经开启"
 
@@ -696,8 +692,8 @@ msgstr ""
 msgid "Type"
 msgstr "種類"
 
-#: ../../../Controllers/AccountViewController.cs:1058
-#: ../../../Controllers/AccountViewController.cs:1076
+#: ../../../Controllers/AccountViewController.cs:1052
+#: ../../../Controllers/AccountViewController.cs:1070
 msgid "Unable to export account to file."
 msgstr "無法導出帳戶"
 
@@ -707,17 +703,17 @@ msgid ""
 "permissions to access the file and try again."
 msgstr ""
 
-#: ../../../Controllers/AccountViewController.cs:1036
+#: ../../../Controllers/AccountViewController.cs:1030
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr "添加交易或从文件中导入交易。"
 
-#: ../../../Controllers/MainWindowController.cs:334
+#: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Unable to login to account. Provided password is invalid."
 
 #: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:341
+#: ../../../Controllers/MainWindowController.cs:340
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -746,7 +742,7 @@ msgid "Ungrouped"
 msgstr "無組群"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
-#: ../../../Controllers/AccountViewController.cs:1212
+#: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""
@@ -1492,6 +1488,9 @@ msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
+
+#~ msgid "Please wait while transactions import..."
+#~ msgstr "正在导入交易，请稍候..."
 
 #, csharp-format
 #~ msgid ""

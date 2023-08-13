@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 00:43-0400\n"
+"POT-Creation-Date: 2023-08-13 01:01-0400\n"
 "PO-Revision-Date: 2023-06-29 18:15+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -318,8 +318,8 @@ msgstr "Расходы"
 msgid "Export to File"
 msgstr "Экспорт в файл"
 
-#: ../../../Controllers/AccountViewController.cs:1054
-#: ../../../Controllers/AccountViewController.cs:1072
+#: ../../../Controllers/AccountViewController.cs:1048
+#: ../../../Controllers/AccountViewController.cs:1066
 msgid "Exported account to file successfully."
 msgstr "Счёт успешно экспортирован в файл."
 
@@ -399,7 +399,7 @@ msgstr "Импорт из счёта"
 msgid "Import from File"
 msgstr "Импорт из файла"
 
-#: ../../../Controllers/AccountViewController.cs:1032
+#: ../../../Controllers/AccountViewController.cs:1026
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -495,7 +495,7 @@ msgstr "Нет транзакций, соответствующих заданн
 msgid "Notes"
 msgstr "Заметки"
 
-#: ../../../Controllers/AccountViewController.cs:1041
+#: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
 msgstr ""
 
@@ -520,10 +520,6 @@ msgstr "Страница {0}"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:813
 msgid "PDF Password"
 msgstr "Пароль PDF"
-
-#: ../../../Controllers/MainWindowController.cs:300
-msgid "Please wait while transactions import..."
-msgstr "Пожалуйста, подождите окончания импорта транзакций..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:668
@@ -629,7 +625,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "На этом счёте нет средств для перевода."
 
-#: ../../../Controllers/MainWindowController.cs:352
+#: ../../../Controllers/MainWindowController.cs:351
 msgid "This account is already opened."
 msgstr "Этот счёт уже открыт."
 
@@ -703,8 +699,8 @@ msgstr "Фёдор Соболев https://github.com/fsobolev"
 msgid "Type"
 msgstr "Тип"
 
-#: ../../../Controllers/AccountViewController.cs:1058
-#: ../../../Controllers/AccountViewController.cs:1076
+#: ../../../Controllers/AccountViewController.cs:1052
+#: ../../../Controllers/AccountViewController.cs:1070
 msgid "Unable to export account to file."
 msgstr "Невозможно экспортировать счёт в файл."
 
@@ -716,17 +712,17 @@ msgstr ""
 "Невозможно импортировать данные из файла. Убедитесь, что у приложения есть "
 "необходимые разрешения и попробуйте снова."
 
-#: ../../../Controllers/AccountViewController.cs:1036
+#: ../../../Controllers/AccountViewController.cs:1030
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr "Добавьте транзакцию или импортируйте транзакции из файла."
 
-#: ../../../Controllers/MainWindowController.cs:334
+#: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Невозможно открыть счёт. Неправильный пароль."
 
 #: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:341
+#: ../../../Controllers/MainWindowController.cs:340
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -755,7 +751,7 @@ msgid "Ungrouped"
 msgstr "Несгруппированные"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
-#: ../../../Controllers/AccountViewController.cs:1212
+#: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""
@@ -1493,6 +1489,9 @@ msgid ""
 msgstr ""
 "— Экспортируйте данный в CSV и импортируйте из CSV, OFX или QIF файла для "
 "массового добавления транзакций"
+
+#~ msgid "Please wait while transactions import..."
+#~ msgstr "Пожалуйста, подождите окончания импорта транзакций..."
 
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr ""

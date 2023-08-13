@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 00:43-0400\n"
+"POT-Creation-Date: 2023-08-13 01:01-0400\n"
 "PO-Revision-Date: 2023-07-01 02:14+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
@@ -324,8 +324,8 @@ msgstr "نفقة"
 msgid "Export to File"
 msgstr "صدِّر إلى ملفٍّ"
 
-#: ../../../Controllers/AccountViewController.cs:1054
-#: ../../../Controllers/AccountViewController.cs:1072
+#: ../../../Controllers/AccountViewController.cs:1048
+#: ../../../Controllers/AccountViewController.cs:1066
 msgid "Exported account to file successfully."
 msgstr "صُدِّر الحساب للملفِّ بنجاح."
 
@@ -405,7 +405,7 @@ msgstr "استورد من حساب"
 msgid "Import from File"
 msgstr "استورد من ملفٍّ"
 
-#: ../../../Controllers/AccountViewController.cs:1032
+#: ../../../Controllers/AccountViewController.cs:1026
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
@@ -504,7 +504,7 @@ msgstr "لا توجد معاملات حسب التصفية المحدَّدة."
 msgid "Notes"
 msgstr "الملاحظات"
 
-#: ../../../Controllers/AccountViewController.cs:1041
+#: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
 msgstr ""
 
@@ -529,10 +529,6 @@ msgstr "الصفحة {0}"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:813
 msgid "PDF Password"
 msgstr "كلمة سرِّ بي‌دي‌إف"
-
-#: ../../../Controllers/MainWindowController.cs:300
-msgid "Please wait while transactions import..."
-msgstr "اصبر ريثما تُستورد المعاملات..."
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:668
@@ -637,7 +633,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "ليس في هذا الحساب مال ليحوِّله."
 
-#: ../../../Controllers/MainWindowController.cs:352
+#: ../../../Controllers/MainWindowController.cs:351
 msgid "This account is already opened."
 msgstr "هذا الحساب مفتوح بالفعل."
 
@@ -711,8 +707,8 @@ msgstr "علي الجشي <ahj696@hotmail.com>"
 msgid "Type"
 msgstr "النوع"
 
-#: ../../../Controllers/AccountViewController.cs:1058
-#: ../../../Controllers/AccountViewController.cs:1076
+#: ../../../Controllers/AccountViewController.cs:1052
+#: ../../../Controllers/AccountViewController.cs:1070
 msgid "Unable to export account to file."
 msgstr "تعذَّر تصدير الحساب للملفِّ."
 
@@ -724,17 +720,17 @@ msgstr ""
 "تعذَّر استيراد المعلومات من الملف. تأكد من حصول التطبيق على صلاحية الوصول "
 "للملف وجرب مرةً أخرى."
 
-#: ../../../Controllers/AccountViewController.cs:1036
+#: ../../../Controllers/AccountViewController.cs:1030
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr "أضف معاملةً جديدةً أو استورد معاملات من ملفٍّ."
 
-#: ../../../Controllers/MainWindowController.cs:334
+#: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "تعذَّر الدخول للحساب، فكلمة السرِّ المدخلة خاطئة."
 
 #: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:341
+#: ../../../Controllers/MainWindowController.cs:340
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -762,7 +758,7 @@ msgid "Ungrouped"
 msgstr "دون مجموعة"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:171
-#: ../../../Controllers/AccountViewController.cs:1212
+#: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
 msgstr ""
@@ -1495,6 +1491,9 @@ msgid ""
 msgstr ""
 "— تصدير الحسابات في صورة ملفات سي‌إس‌في، واستيراد ملفات سي‌إس‌في وأو‌إف‌إكس "
 "وكيو‌آي‌إف لإضافة الكثير من المعاملات لحساب آنًا"
+
+#~ msgid "Please wait while transactions import..."
+#~ msgstr "اصبر ريثما تُستورد المعاملات..."
 
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr "تعذَّر استيراد المعلومات من الملف، فنوعه ليس مدعومًا."
