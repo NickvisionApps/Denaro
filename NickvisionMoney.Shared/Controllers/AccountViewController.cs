@@ -1033,8 +1033,12 @@ public class AccountViewController : IDisposable
             }
             else
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Unsupported file type."), NotificationSeverity.Error, "help-import"));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import transactions from the file."), NotificationSeverity.Error, "help-import"));
             }
+        }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Nothing to import from the file."), NotificationSeverity.Error, "help-import"));
         }
     }
 
