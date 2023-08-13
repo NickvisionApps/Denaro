@@ -52,7 +52,7 @@ public partial class AccountView : Adw.Bin
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
     private Dictionary<uint, GroupRow> _groupRows;
-    private List<TagButton> _tagButtons;
+    private Dictionary<string, TagButton> _tagButtons;
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
 
@@ -116,7 +116,7 @@ public partial class AccountView : Adw.Bin
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
-        _tagButtons = new List<TagButton>();
+        _tagButtons = new Dictionary<string, TagButton>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
         _currentGraphPage = 0;
         //Register Controller Events
@@ -575,7 +575,7 @@ public partial class AccountView : Adw.Bin
     private bool CreateTagButton(ModelEventArgs<string> e)
     {
         var tagButton = new TagButton(e.Model);
-        _tagButtons.Add(tagButton);
+        _tagButtons.Add(e.Model, tagButton);
         tagButton.SetActive(true);
         tagButton.FilterChanged += UpdateTagFilter;
         _tagsFlowBox.Append(tagButton);
@@ -589,7 +589,10 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">ModelEventArgs</param>
     private bool UpdateTagButton(ModelEventArgs<string> e)
     {
-        _tagButtons[e.Position!.Value].SetActive(e.Active);
+        if (_tagButtons.ContainsKey(e.Model))
+        {
+            _tagButtons[e.Model].SetActive(e.Active);
+        }
         return false;
     }
 
