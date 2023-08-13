@@ -2,9 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-12 00:30+0300\n"
-"PO-Revision-Date: 2023-06-19 19:49+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2023-08-13 09:50+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/es/>\n"
 "Language: es\n"
@@ -12,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -1001,7 +1000,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62
@@ -1013,6 +1012,14 @@ msgid ""
 "enough. Tags are only saved in transactions themselves, and as result unused "
 "tags disappear automatically on account closing."
 msgstr ""
+"Una lista de etiquetas para la transacción. Una transacción puede tener un "
+"número ilimitado de etiquetas (o no tener etiquetas). Las etiquetas pueden "
+"contener cualquier carácter excepto una coma (<code>,</code>) y tener "
+"cualquier longitud, pero se espera que sean palabras clave cortas. Las "
+"etiquetas están destinadas a usarse para el filtrado adicional cuando el uso "
+"de los grupos no es suficiente. Las etiquetas solo se guardan en las "
+"transacciones mismas y, como un resultado, las etiquetas no utilizadas "
+"desaparecen automáticamente al cerrar la cuenta."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
