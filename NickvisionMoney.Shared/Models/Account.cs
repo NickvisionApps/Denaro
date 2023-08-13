@@ -1378,7 +1378,7 @@ public class Account : IDisposable
                     importResult.NewGroupIds.Add(group.Id);
                 }
             }
-            var tags = fields[14].Split(',').ToList();
+            var tags = fields[14].Split(',');
             //Add Transaction
             var transaction = new Transaction(id)
             {
@@ -1392,7 +1392,7 @@ public class Account : IDisposable
                 UseGroupColor = useGroupColor,
                 RepeatFrom = repeatFrom,
                 RepeatEndDate = repeatEndDate,
-                Tags = tags
+                Tags = tags.ToList()
             };
             var res = await AddTransactionAsync(transaction);
             if (res.Successful)
