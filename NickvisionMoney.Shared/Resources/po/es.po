@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-13 01:01-0400\n"
-"PO-Revision-Date: 2023-08-13 23:35+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-08-15 16:47+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/es/>\n"
 "Language: es\n"
@@ -952,7 +953,7 @@ msgstr "Desmarcar los filtros de los grupos"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:180
 msgid "Toggle Tags Visibility"
-msgstr "Alternar la visibilidad de las etiquetas"
+msgstr "Conmutar la visibilidad de las etiquetas"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:188
 msgid "Select All Tags Filters"
