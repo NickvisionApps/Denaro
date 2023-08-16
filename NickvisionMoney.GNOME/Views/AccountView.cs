@@ -3,6 +3,7 @@ using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -617,7 +618,7 @@ public partial class AccountView : Adw.Bin
     {
         if (!_transactionRows.ContainsKey(e.Model.Id))
         {
-            var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+            var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
             row.EditTriggered += EditTransaction;
             row.IsSmall = _parentWindow.DefaultWidth < 450;
             row.SetVisible(e.Active);
@@ -671,7 +672,7 @@ public partial class AccountView : Adw.Bin
     {
         if (_transactionRows.ContainsKey(e.Model.Id))
         {
-            _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString, _controller.CultureForDateString);
+            _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString);
             _transactionRows[e.Model.Id].SetVisible(e.Active);
         }
         else

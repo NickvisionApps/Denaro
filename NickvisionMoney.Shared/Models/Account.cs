@@ -1609,45 +1609,8 @@ public class Account : IDisposable
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
-            //Amount Culture
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            var cultureAmount = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var regionAmount = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            if (Metadata.UseCustomCurrency)
-            {
-                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? cultureAmount.NumberFormat.CurrencySymbol;
-                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? regionAmount.ISOCurrencySymbol;
-                cultureAmount.NumberFormat.CurrencyDecimalSeparator = Metadata.CustomCurrencyDecimalSeparator ?? cultureAmount.NumberFormat.CurrencyDecimalSeparator;
-                cultureAmount.NumberFormat.CurrencyGroupSeparator = Metadata.CustomCurrencyGroupSeparator ?? cultureAmount.NumberFormat.CurrencyGroupSeparator;
-                cultureAmount.NumberFormat.CurrencyDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? cultureAmount.NumberFormat.CurrencyDecimalDigits;
-            }
-            //Date Culture
-            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
-            if (lcTime != null && lcTime.Contains(".UTF-8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcTime != null && lcTime.Contains(".utf8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
-            }
-            if (lcTime != null && lcTime.Contains('_'))
-            {
-                lcTime = lcTime.Replace('_', '-');
-            }
-            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+            var cultureAmount = CultureHelpers.GetNumberCulture(Metadata);
+            var regionAmount = new RegionInfo(cultureAmount.Name);
             using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
             using var interRegularFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-Regular.otf")!;
             using var interSemiBoldFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-SemiBold.otf")!;
@@ -1676,7 +1639,7 @@ public class Account : IDisposable
                     {
                         col.Spacing(15);
                         //Generated Date
-                        col.Item().Text(_("Generated: {0}", DateTime.Now.ToString("g", cultureDate)));
+                        col.Item().Text(_("Generated: {0}", DateTime.Now.ToString("g", CultureHelpers.DateCulture)));
                         //Overview
                         col.Item().Table(tbl =>
                         {
@@ -1836,7 +1799,7 @@ public class Account : IDisposable
                                     }
                                 }
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
-                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", cultureDate));
+                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", CultureHelpers.DateCulture));
                                 tbl.Cell().Background(hex).Text(pair.Value.Description.Trim());
                                 tbl.Cell().Background(hex).Text(pair.Value.Type switch
                                 {
@@ -2201,38 +2164,7 @@ public class Account : IDisposable
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 if (nextRepeatDate > today)
                 {
-                    //Get Number Culture
-                    var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-                    if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-                    {
-                        lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-                    }
-                    else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-                    {
-                        lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-                    }
-                    if (lcMonetary != null && lcMonetary.Contains('_'))
-                    {
-                        lcMonetary = lcMonetary.Replace('_', '-');
-                    }
-                    var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-                    var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-                    if (Metadata.UseCustomCurrency)
-                    {
-                        culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : Metadata.CustomCurrencySymbol;
-                        culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : Metadata.CustomCurrencyDecimalSeparator;
-                        culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : Metadata.CustomCurrencyDecimalSeparator;
-                        culture.NumberFormat.CurrencyGroupSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.CurrencyGroupSeparator : Metadata.CustomCurrencyGroupSeparator;
-                        culture.NumberFormat.NumberGroupSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.NumberGroupSeparator : Metadata.CustomCurrencyGroupSeparator;
-                        culture.NumberFormat.CurrencyDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
-                        culture.NumberFormat.NumberDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
-                        culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(Metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : Metadata.CustomCurrencyCode;
-                    }
-                    else
-                    {
-                        culture.NumberFormat.NaNSymbol = region.ISOCurrencySymbol;
-                    }
-                    //Add reminders
+                    var culture = CultureHelpers.GetNumberCulture(Metadata);
                     if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && nextRepeatDate.AddDays(-1) == today)
                     {
                         TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));

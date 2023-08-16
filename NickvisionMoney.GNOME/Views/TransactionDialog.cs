@@ -554,7 +554,7 @@ public partial class TransactionDialog : Adw.Window
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _dateCalendarButton.SetLabel(date.ToString("d", _controller.CultureForDateString));
+        _dateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {
             Validate();
@@ -584,7 +584,7 @@ public partial class TransactionDialog : Adw.Window
     {
         var selectedDay = gtk_calendar_get_date(sender.Handle);
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
-        _repeatEndDateCalendarButton.SetLabel(date.ToString("d", _controller.CultureForDateString));
+        _repeatEndDateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {
             Validate();

@@ -74,10 +74,6 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a number string
     /// </summary>
     public CultureInfo CultureForNumberString { get; init; }
-    /// <summary>
-    /// The CultureInfo to use when displaying a date string
-    /// </summary>
-    public CultureInfo CultureForDateString { get; init; }
     
     /// <summary>
     /// Whether to use native digits
@@ -102,8 +98,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="canCopy">Whether or not the transaction can be copied</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
-    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
@@ -116,7 +111,6 @@ public class TransactionDialogController : IDisposable
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
-        CultureForDateString = cultureDate;
         if (string.IsNullOrEmpty(Transaction.RGBA))
         {
             Transaction.RGBA = _transactionDefaultColor;
@@ -134,8 +128,7 @@ public class TransactionDialogController : IDisposable
     /// <param name="transactionDefaultType">A default type for the transaction</param>
     /// <param name="transactionDefaultColor">A default color for the transaction</param>
     /// <param name="cultureNumber">The CultureInfo to use for the amount string</param>
-    /// <param name="cultureDate">The CultureInfo to use for the date string</param>
-    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber, CultureInfo cultureDate)
+    internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
         _transactionDefaultColor = transactionDefaultColor;
@@ -148,7 +141,6 @@ public class TransactionDialogController : IDisposable
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
-        CultureForDateString = cultureDate;
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
         Transaction.RGBA = transactionDefaultColor;
