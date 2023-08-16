@@ -52,6 +52,7 @@
         <p>- Added graph visuals to the Account view as well as in exported PDFs</p>
         <p>- Added tags that can be used with transactions for finer management and filtering</p>
         <p>- Added the option to select the entire current month as the date range filter </p>
+        <p>- Added reminders for upcoming transactions</p>
         <p>- Improved the transaction description suggestion algorithm with fuzzy search</p>
         <p>- Fixed an issue where the help button in the import toast was not working</p>
         <p>- Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</p>

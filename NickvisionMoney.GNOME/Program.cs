@@ -46,6 +46,7 @@ public partial class Program
             @"* Added graph visuals to the Account view as well as in exported PDFs
               * Added tags that can be used with transactions for finer management and filtering
               * Added the option to select the entire current month as the date range filter
+              * Added reminders for upcoming transactions
               * Improved the transaction description suggestion algorithm with fuzzy search
               * Fixed an issue where the help button in the import toast was not working
               * Fixed an issue where Denaro would crash if an account had incorrect formatted metadata
