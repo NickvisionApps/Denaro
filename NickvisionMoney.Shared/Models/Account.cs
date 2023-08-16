@@ -2169,15 +2169,15 @@ public class Account : IDisposable
                     {
                         TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));
                     }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) == today)
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) <= today)
                     {
                         TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One week from now")));
                     }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) == today)
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) <= today)
                     {
                         TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One month from now")));
                     }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) == today)
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) <= today)
                     {
                         TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Two months from now")));
                     }
