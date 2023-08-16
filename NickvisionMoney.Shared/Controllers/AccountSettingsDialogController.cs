@@ -111,10 +111,11 @@ public class AccountSettingsDialogController
     /// <param name="customGroupSeparator">The new custom group separator</param>
     /// <param name="customDecimalDigits">The new custom decimal digits number</param>
     /// <param name="defaultTransactionType">The new default transaction type</param>
+    /// <param name="transactionReminder">The new reminder threshold for transactions</param>
     /// <param name="newPassword">The new password</param>
     /// <param name="confirmPassword">The new password confirmed</param>
     /// <returns>AccountMetadataCheckStatus</returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, string newPassword, string confirmPassword)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, RemindersThreshold transactionReminder, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
         if (string.IsNullOrEmpty(name))
@@ -186,6 +187,7 @@ public class AccountSettingsDialogController
             Metadata.CustomCurrencyDecimalDigits = null;
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
+        Metadata.TransactionRemindersThreshold = transactionReminder;
         NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
         return AccountMetadataCheckStatus.Valid;
     }

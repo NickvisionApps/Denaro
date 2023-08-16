@@ -29,6 +29,7 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _expenseButton;
+    [Gtk.Connect] private readonly Adw.ComboRow _transactionRemindersRow;
     [Gtk.Connect] private readonly Gtk.Button _nextButton2;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
     [Gtk.Connect] private readonly Adw.ExpanderRow _rowCustomCurrency;
@@ -192,6 +193,7 @@ public partial class NewAccountDialog : Adw.Window
         _folderRow.SetText(Path.GetFileName(_controller.Folder));
         _accountTypeRow.SetSelected(0);
         _incomeButton.SetActive(true);
+        _transactionRemindersRow.SetSelected(0);
         _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
     }
     
@@ -433,6 +435,7 @@ public partial class NewAccountDialog : Adw.Window
         _controller.Password = _accountPasswordRow.GetText();
         _controller.Metadata.AccountType = (AccountType)_accountTypeRow.GetSelected();
         _controller.Metadata.DefaultTransactionType = _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense;
+        _controller.Metadata.TransactionRemindersThreshold = (RemindersThreshold)_transactionRemindersRow.GetSelected();
         OnApply?.Invoke(this, EventArgs.Empty);
     }
 }
