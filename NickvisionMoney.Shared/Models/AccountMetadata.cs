@@ -29,6 +29,7 @@ public enum SortBy
 /// </summary>
 public enum RemindersThreshold
 {
+    Never,
     OneDayBefore,
     OneWeekBefore,
     OneMonthBefore,
