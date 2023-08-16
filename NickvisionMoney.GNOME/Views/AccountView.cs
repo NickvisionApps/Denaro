@@ -428,6 +428,11 @@ public partial class AccountView : Adw.Bin
         OnToggleGroups();
         OnToggleTags();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
+        if(_controller.TransactionReminders.Count > 0)
+        {
+            var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
+            remindersDialog.Present();
+        }
     }
 
     /// <summary>
