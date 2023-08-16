@@ -2201,21 +2201,53 @@ public class Account : IDisposable
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 if (nextRepeatDate > today)
                 {
+                    //Get Number Culture
+                    var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+                    if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+                    {
+                        lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+                    }
+                    else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
+                    {
+                        lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
+                    }
+                    if (lcMonetary != null && lcMonetary.Contains('_'))
+                    {
+                        lcMonetary = lcMonetary.Replace('_', '-');
+                    }
+                    var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+                    var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+                    if (Metadata.UseCustomCurrency)
+                    {
+                        culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(Metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : Metadata.CustomCurrencySymbol;
+                        culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : Metadata.CustomCurrencyDecimalSeparator;
+                        culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : Metadata.CustomCurrencyDecimalSeparator;
+                        culture.NumberFormat.CurrencyGroupSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.CurrencyGroupSeparator : Metadata.CustomCurrencyGroupSeparator;
+                        culture.NumberFormat.NumberGroupSeparator = string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.NumberGroupSeparator : Metadata.CustomCurrencyGroupSeparator;
+                        culture.NumberFormat.CurrencyDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
+                        culture.NumberFormat.NumberDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
+                        culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(Metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : Metadata.CustomCurrencyCode;
+                    }
+                    else
+                    {
+                        culture.NumberFormat.NaNSymbol = region.ISOCurrencySymbol;
+                    }
+                    //Add reminders
                     if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && nextRepeatDate.AddDays(-1) == today)
                     {
-                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("Tomorrow")));
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));
                     }
                     else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) == today)
                     {
-                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("One week from now")));
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One week from now")));
                     }
                     else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) == today)
                     {
-                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("One month from now")));
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One month from now")));
                     }
                     else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) == today)
                     {
-                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("Two months from now")));
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Two months from now")));
                     }
                 }
             }
