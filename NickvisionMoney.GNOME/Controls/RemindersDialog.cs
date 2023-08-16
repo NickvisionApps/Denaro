@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace NickvisionMoney.GNOME.Controls;
 
 /// <summary>
-/// A dialog showing the list of corrupted files
+/// A dialog showing a list of reminders
 /// </summary>
 public partial class RemindersDialog : Adw.Window
 {
