@@ -88,6 +88,10 @@ public class Account : IDisposable
     /// The expense amount of the account for today
     /// </summary>
     public decimal TodayExpense { get; private set; }
+    /// <summary>
+    /// The list of upcoming transaction reminders
+    /// </summary>
+    public List<(string Title, string Subtitle)> TransactionReminders { get; private set; }
 
     /// <summary>
     /// The total amount of the account for today
@@ -112,6 +116,7 @@ public class Account : IDisposable
         NextAvailableTransactionId = 1;
         TodayIncome = 0;
         TodayExpense = 0;
+        TransactionReminders = new List<(string Title, string Subtitle)>();
     }
 
     /// <summary>
@@ -693,6 +698,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)metadata.TransactionRemindersThreshold);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
+            var needsRemindersUpdate = Metadata.TransactionRemindersThreshold != metadata.TransactionRemindersThreshold;
             Metadata.Name = metadata.Name;
             Metadata.AccountType = metadata.AccountType;
             Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
@@ -707,6 +713,10 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
+            if (needsRemindersUpdate)
+            {
+                CalculateTransactionReminders();
+            }
             return true;
         }
         return false;
@@ -1102,7 +1112,7 @@ public class Account : IDisposable
         }
     }
     
-        /// <summary>
+    /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
     /// <returns>True if transactions were modified, else false</returns>
@@ -1117,7 +1127,7 @@ public class Account : IDisposable
             {
                 var dates = new List<DateOnly>();
                 var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
-                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
+                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0)) //calculate needed repeat transaction dates up until today
                 {
                     if (date != transaction.Date)
                     {
@@ -1152,19 +1162,19 @@ public class Account : IDisposable
                         date = date.AddYears(2);
                     }
                 }
-                for (var j = i; j < transactions.Count; j++)
+                for (var j = i; j < transactions.Count; j++) //remove dates of existing repeat transactions
                 {
                     if (transactions[j].RepeatFrom == transaction.Id)
                     {
                         dates.Remove(transactions[j].Date);
                     }
                 }
-                foreach (var date in dates)
+                foreach (var date in dates) //create missing repeat transactions
                 {
                     transactionsModified = transactionsModified || (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
                 }
             }
-            else if (transaction.RepeatFrom > 0)
+            else if (transaction.RepeatFrom > 0) //delete repeat transactions if the date from the original transaction was changed to a smaller date
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
@@ -1173,6 +1183,7 @@ public class Account : IDisposable
             }
             i++;
         }
+        CalculateTransactionReminders();
         return transactionsModified;
     }
 
@@ -2129,6 +2140,84 @@ public class Account : IDisposable
             return chart.GetImage().Encode().ToArray();
         }
         return Array.Empty<byte>();
+    }
+
+    /// <summary>
+    /// Populates the TransactionReminders list
+    /// </summary>
+    private void CalculateTransactionReminders()
+    {
+        TransactionReminders.Clear();
+        if (Metadata.TransactionRemindersThreshold == RemindersThreshold.Never)
+        {
+            return;
+        }
+        foreach (var pair in Transactions)
+        {
+            if (pair.Value.RepeatFrom == 0)
+            {
+                var latestRepeat = pair.Value;
+                foreach (var pair2 in Transactions)
+                {
+                    if (pair2.Value.RepeatFrom == pair.Value.Id)
+                    {
+                        if (pair2.Value.Date > latestRepeat.Date)
+                        {
+                            latestRepeat = pair2.Value;
+                        }
+                    }
+                }
+                var nextRepeatDate = latestRepeat.Date;
+                if (pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(7);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biweekly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(14);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddMonths(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddMonths(3);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddYears(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddYears(2);
+                }
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                if (nextRepeatDate > today)
+                {
+                    if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && nextRepeatDate.AddDays(-1) == today)
+                    {
+                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("Tomorrow")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) == today)
+                    {
+                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("One week from now")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) == today)
+                    {
+                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("One month from now")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) == today)
+                    {
+                        TransactionReminders.Add((string.Format(_("Upcoming: {0}"), pair.Value.Description), _("Two months from now")));
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>

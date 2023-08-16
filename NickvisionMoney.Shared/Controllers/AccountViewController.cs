@@ -70,9 +70,9 @@ public class AccountViewController : IDisposable
     /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
     /// <summary>
-    /// Tags in the account
+    /// The list of upcoming transaction reminders in the account
     /// </summary>
-    public List<string> AccountTags => _account.Tags;
+    public List<(string Title, string Subtitle)> TransactionReminders => _account.TransactionReminders;
     /// <summary>
     /// The total amount of the account for today
     /// </summary>
