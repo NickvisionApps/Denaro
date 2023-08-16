@@ -1094,6 +1094,7 @@ public class Account : IDisposable
                 }
             }
         }
+        CalculateTransactionReminders();
     }
 
     /// <summary>
@@ -1110,6 +1111,7 @@ public class Account : IDisposable
                 await DeleteTransactionAsync(transaction.Id);
             }
         }
+        CalculateTransactionReminders();
     }
     
     /// <summary>
