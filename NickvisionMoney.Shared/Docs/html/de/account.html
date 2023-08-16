@@ -19,19 +19,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="region">
 <div class="contents pagewide">
 <p class="p">Auf dieser Seite werden alle Eigenschaften von Konten in <span class="app">Denaro</span> erläutert. Die meisten von ihnen werden im Dialog <span class="gui">Kontoeinstellungen</span> angezeigt. Dieser Dialog wird auch automatisch geöffnet, nachdem du ein neues Konto erstellt hast.</p>
-<p class="p">Each account is stored in a single <span class="file">*.nmoney</span> file. Files created in an older <span class="em">stable</span> version of <span class="app">Denaro</span> can be safely opened in a more recent <span class="em">stable</span> version of the application. Although the app can run on different platforms (Windows and Linux), the <span class="file">*.nmoney</span> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<p class="p">Jedes Konto wird in einer einzelnen <span class="file">*.nmoney</span> Datei gespeichert. Dateien, die in einer älteren <span class="em">stabilen</span> Version von <span class="app">Denaro</span> erstellt worden sind, können unbedenklich in einer aktuelleren <span class="em">stabilen</span> Version der Anwendung geöffnet werden. Obwohl die Anwendung auf verschiedenen Betriebssystemen laufen kann (Windows und Linux), sind die <span class="file">*.nmoney</span> Dateien nur dann 100% kompatibel zwischen den Betriebssystemen, wenn sie von derselben Anwendungsversion stammen (z. B. V2023.1.0).</p>
 <div class="note note-warning" title="Warnung">
 <svg height="24" width="24" version="1.1">
  <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Instabile (Beta und RC) Anwendungsversionen können Fehler oder nicht fertiggestellte Anpassungen enthalten, die zu Datenverlust führen können. Benutze KEINE Kontodateien, die echte Daten enthalten, in einer instabilen Version der Anwendung!</p></div></div></div>
 </div>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
 <dt class="terms">Name</dt>
 <dd class="terms"><p class="p">Der Kontoname wird in der Liste der zuletzt verwendeten Konten und in den Registerkarten angezeigt. Ein Name hat keine Längenbeschränkung und kann beliebige Zeichen enthalten, einschließlich Emojis.</p></dd>
 <dt class="terms">Konto Typ</dt>
-<dd class="terms"><p class="p">There are 3 account types available: 🟣<span class="em">Checking</span>, 🔵<span class="em">Savings</span> and 🟢<span class="em">Business</span>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <span class="link"><a href="configuration.html" title="Konfiguration">global settings</a></span>.</p></dd>
+<dd class="terms"><p class="p">Es sind 3 Konto - Typen verfügbar: 🟣<span class="em">Girokonto</span>, 🔵<span class="em">Sparkonto</span> und 🟢<span class="em">Geschäftskonto</span>. Der Konto - Typ ist nur ein nützliches Kennzeichnung, welche keine Auswirkungen auf die Funktion der Anwendung haben. Der Konto - Typ wird in der Liste der kürzlich bearbeiteten Konten angezeigt. Jeder Konto - Typ hat eine eigene Farbe, welche in den <span class="link"><a href="configuration.html" title="Konfiguration">Globalen Einstellungen</a></span> bearbeitet werden können.</p></dd>
 <dt class="terms">Standard-Transaktionsart</dt>
 <dd class="terms"><p class="p">Wenn Sie eine neue Transaktion erstellen, ist ihr Typ standardmäßig derselbe wie in dieser Einstellung.</p></dd>
+<dt class="terms">Transaction Reminders Threshold</dt>
+<dd class="terms"><p class="p">The threshold used when showing reminders about upcoming transactions.</p></dd>
 <dt class="terms">Systemwährung</dt>
 <dd class="terms">
 <p class="p">Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
@@ -78,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>
 <dt class="terms">Groups Visibility</dt>
 <dd class="terms"><p class="p">Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p></dd>
+<dt class="terms">Tags Visibility</dt>
+<dd class="terms"><p class="p">Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p></dd>
 </dl></div></div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">

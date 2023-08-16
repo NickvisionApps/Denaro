@@ -41,6 +41,10 @@
 		<p>Cuando crea una transacción nueva, su tipo predeterminado será el mismo que en esta configuración.</p>
 	</item>
 	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
+	<item>
 		<title>Moneda del sistema</title>
 		<p>Cada vez que se inicia la aplicación, obtiene datos sobre el formato de la moneda y los números de la configuración regional de su sistema, y estos datos se usan para mostrar el símbolo de la moneda (a menos que se use una moneda personalizada, consulte a continuación) y para determinar en qué formato se aceptarán los valores para los importes de las transacciones. Algunos ejemplos:</p>
 		<list>
@@ -89,5 +93,9 @@
 		<title>Visibilidad de grupos</title>
 		<p>Cada cuenta almacena información sobre si la lista de grupos en la ventana principal está oculta o no. Cada vez que cambia la visibilidad de la lista de grupos, se guarda y luego se restaura cuando vuelve a abrir la cuenta.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>

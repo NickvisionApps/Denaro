@@ -41,6 +41,10 @@
 		<p>Při vytváření nové transakce bude její typ ve výchozím nastavení stejný jako v tomto nastavení.</p>
 	</item>
 	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
+	<item>
 		<title>Systémová měna</title>
 		<p>Při každém spuštění získá aplikace údaje o měně a formátování čísel z vašich systémových místních nastavení. Tyto údaje se použijí k zobrazení symbolu měny (pokud není použita vlastní měna, viz níže) a k určení, v jakém formátu budou čísla přijímána jako hodnoty částek transakcí. Několik příkladů:</p>
 		<list>
@@ -89,5 +93,9 @@
 		<title>Viditelnost skupin</title>
 		<p>Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato informace uložena a poté obnovena při opětovném otevření účtu.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>

@@ -22,9 +22,9 @@
 
 <title>Konto</title>
 <p>Auf dieser Seite werden alle Eigenschaften von Konten in <app>Denaro</app> erläutert. Die meisten von ihnen werden im Dialog <gui>Kontoeinstellungen</gui> angezeigt. Dieser Dialog wird auch automatisch geöffnet, nachdem du ein neues Konto erstellt hast.</p>
-<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<p>Jedes Konto wird in einer einzelnen <file>*.nmoney</file> Datei gespeichert. Dateien, die in einer älteren <em>stabilen</em> Version von <app>Denaro</app> erstellt worden sind, können unbedenklich in einer aktuelleren <em>stabilen</em> Version der Anwendung geöffnet werden. Obwohl die Anwendung auf verschiedenen Betriebssystemen laufen kann (Windows und Linux), sind die <file>*.nmoney</file> Dateien nur dann 100% kompatibel zwischen den Betriebssystemen, wenn sie von derselben Anwendungsversion stammen (z. B. V2023.1.0).</p>
 <note style="warning">
-	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
+	<p>Instabile (Beta und RC) Anwendungsversionen können Fehler oder nicht fertiggestellte Anpassungen enthalten, die zu Datenverlust führen können. Benutze KEINE Kontodateien, die echte Daten enthalten, in einer instabilen Version der Anwendung!</p>
 </note>
 
 <terms>
@@ -34,12 +34,16 @@
 	</item>
 	<item>
 		<title>Konto Typ</title>
-		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
+		<p>Es sind 3 Konto - Typen verfügbar: 🟣<em>Girokonto</em>, 🔵<em>Sparkonto</em> und 🟢<em>Geschäftskonto</em>. Der Konto - Typ ist nur ein nützliches Kennzeichnung, welche keine Auswirkungen auf die Funktion der Anwendung haben. Der Konto - Typ wird in der Liste der kürzlich bearbeiteten Konten angezeigt. Jeder Konto - Typ hat eine eigene Farbe, welche in den <link xref="configuration">Globalen Einstellungen</link> bearbeitet werden können.</p>
 	</item>
 	<item>
 		<title>Standard-Transaktionsart</title>
 		<p>Wenn Sie eine neue Transaktion erstellen, ist ihr Typ standardmäßig derselbe wie in dieser Einstellung.</p>
 	</item>
+	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
 	<item>
 		<title>Systemwährung</title>
 		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
@@ -89,5 +93,9 @@
 		<title>Groups Visibility</title>
 		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>

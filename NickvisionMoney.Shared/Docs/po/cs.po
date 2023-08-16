@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-12 00:30+0300\n"
+"POT-Creation-Date: 2023-08-16 00:27-0400\n"
 "PO-Revision-Date: 2023-08-12 17:19+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -107,11 +107,11 @@ msgstr "Typ účtu"
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
-"the list of recent accounts and doesn't affect how the application works or "
-"what you can do with an account. Each account type has its own color, these "
-"colors can be configured in <link xref=\"configuration\">global settings</"
-"link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
 msgstr ""
 "K dispozici jsou 3 typy účtů: 🟣<em>Běžný</em>, 🔵<em>Spořicí</em> a 🟢"
 "<em>Firemní</em>. Typ účtu je pouze užitečné označení, které se zobrazuje v "
@@ -135,11 +135,21 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
+msgid "Transaction Reminders Threshold"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:42
+msgid "The threshold used when showing reminders about upcoming transactions."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:45
 msgid "System Currency"
 msgstr "Systémová měna"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:42
+#: yelp/C/account.page:46
 msgid ""
 "Every time the application starts, it gets data about currency and numbers "
 "formatting from your system locale, and this data is used to show currency "
@@ -153,17 +163,17 @@ msgstr ""
 "budou čísla přijímána jako hodnoty částek transakcí. Několik příkladů:"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:44
+#: yelp/C/account.page:48
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
-"$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 "Pokud je vaše místní prostředí <em>Angličtina (Spojené státy)</em>, symbol "
 "měny bude nastaven na <em>$</em> a <em>1,000.00</em> bude akceptováno jako "
 "platné číslo."
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:45
+#: yelp/C/account.page:49
 msgid ""
 "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
 "em> and <em>1.000,00</em> will be accepted as a valid number."
@@ -172,7 +182,7 @@ msgstr ""
 "na <em>Kč</em> a <em>1 000,00</em> bude akceptováno jako platné číslo."
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:46
+#: yelp/C/account.page:50
 msgid ""
 "If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
 "em> and <em>1000,00</em> will be accepted as a valid number."
@@ -181,7 +191,7 @@ msgstr ""
 "na <em>₽</em> a <em>1000,00</em> bude akceptováno jako platné číslo."
 
 #. (itstool) path: note/p
-#: yelp/C/account.page:49
+#: yelp/C/account.page:53
 msgid ""
 "On Linux, it is possible to set different locales for system language and "
 "formats. Changing these settings varies depending on the desktop environment "
@@ -207,12 +217,12 @@ msgstr ""
 "vývojáři reprodukovat váš problém se stejným nastavením."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:53
+#: yelp/C/account.page:57
 msgid "Use Custom Currency"
 msgstr "Použití vlastní měny"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:54
+#: yelp/C/account.page:58
 msgid ""
 "If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
 "instead of currency symbol provided by your system locale."
@@ -221,27 +231,27 @@ msgstr ""
 "vaše systémové prostředí, použit <gui>vlastní symbol měny</gui>."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:57
+#: yelp/C/account.page:61
 msgid "Custom Currency Symbol"
 msgstr "Vlastní symbol měny"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:58
+#: yelp/C/account.page:62
 msgid "Up to 3 characters or 1 emoji. It can't be a number."
 msgstr "Až 3 znaky nebo 1 emotikon. Nemůže to být číslo."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:61
+#: yelp/C/account.page:65
 msgid "Custom Currency Code"
 msgstr "Vlastní kód měny"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:62
+#: yelp/C/account.page:66
 msgid "Up to 3 characters or 1 emoji."
 msgstr "Až 3 znaky nebo 1 emotikon."
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:63
+#: yelp/C/account.page:67
 msgid ""
 "An example to understand the difference between a symbol and a code: <em>$</"
 "em> is a symbol, <em>USD</em> is a code."
@@ -250,22 +260,22 @@ msgstr ""
 "<em>CZK</em> je kód."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:66
+#: yelp/C/account.page:70
 msgid "Custom Currency Decimal and Group Separators"
 msgstr "Vlastní oddělovače desetinných míst a skupin měn"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:67
+#: yelp/C/account.page:71
 msgid "Up to 2 characters or 1 emoji."
 msgstr "Až 2 znaky nebo 1 emotikon."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:70
+#: yelp/C/account.page:74
 msgid "Custom Currency Decimal Digits"
 msgstr "Vlastní desetinné číslice měny"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:71
+#: yelp/C/account.page:75
 msgid ""
 "The size of decimal part of amount values. With \"Unlimited\" digits there "
 "will be as many numbers in decimal part as required to show the precise "
@@ -276,12 +286,12 @@ msgstr ""
 "pokud je částka celým číslem, nebude desetinná část žádná."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:74
+#: yelp/C/account.page:78
 msgid "Password"
 msgstr "Heslo"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:75
+#: yelp/C/account.page:79
 msgid ""
 "Each account can be password-protected. Adding a password causes an account "
 "to become encrypted (making it impossible to read the data without "
@@ -297,12 +307,12 @@ msgstr ""
 "dešifrování účtu."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:78
+#: yelp/C/account.page:82
 msgid "Sort by Id, Date or Amount"
 msgstr "Řazení podle ID, data nebo částky"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:79
+#: yelp/C/account.page:83
 msgid ""
 "Each account stores whether to sort transactions in the main window by their "
 "id, date or amount. Every time you change this, it will be saved to the "
@@ -313,12 +323,12 @@ msgstr ""
 "souboru účtu a obnoví se při jeho opětovném otevření."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:82
+#: yelp/C/account.page:86
 msgid "Sorting Order"
 msgstr "Pořadí řazení"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:83
+#: yelp/C/account.page:87
 msgid ""
 "Each account stores information about the order of transactions in the main "
 "window. Every time you change this, it will be saved to the account file and "
@@ -329,15 +339,33 @@ msgstr ""
 "otevření."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:86
+#: yelp/C/account.page:90
 msgid "Groups Visibility"
 msgstr "Viditelnost skupin"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:87
+#: yelp/C/account.page:91
 msgid ""
 "Each account stores information about whether the groups list in the main "
 "window is hidden or not. Every time you change groups list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně "
+"skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato "
+"informace uložena a poté obnovena při opětovném otevření účtu."
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:94
+#, fuzzy
+msgid "Tags Visibility"
+msgstr "Viditelnost skupin"
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:95
+#, fuzzy
+msgid ""
+"Each account stores information about whether the tags list in the main "
+"window is hidden or not. Every time you change tags list visibility, it's "
 "saved and then restored when you reopen the account."
 msgstr ""
 "Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně "
@@ -393,14 +421,15 @@ msgstr "Výchozí barva transakce"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link xref="
-"\"transaction\">transaction</link> with unique color. Changing this will not "
-"affect existing transactions, even if they use previously selected default "
-"color."
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
 msgstr ""
-"Barva, která bude vybrána jako výchozí při přidání nové <link xref="
-"\"transaction\">transakce</link> s jedinečnou barvou. Její změna neovlivní "
-"existující transakce, i když používají dříve zvolenou výchozí barvu."
+"Barva, která bude vybrána jako výchozí při přidání nové <link "
+"xref=\"transaction\">transakce</link> s jedinečnou barvou. Její změna "
+"neovlivní existující transakce, i když používají dříve zvolenou výchozí "
+"barvu."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
@@ -410,13 +439,13 @@ msgstr "Výchozí barva převodu"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link xref="
-"\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
-"Barva, která bude použita pro transakce vytvořené pomocí <link xref="
-"\"transfer\">převodu</link> . Změna tohoto parametru neovlivní existující "
-"transakce."
+"Barva, která bude použita pro transakce vytvořené pomocí <link "
+"xref=\"transfer\">převodu</link> . Změna tohoto parametru neovlivní "
+"existující transakce."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
@@ -515,13 +544,14 @@ msgstr "Složka zálohy CSV"
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-export"
-"\">exported to CSV</link> after every change. This feature doesn't work for "
-"password-protected accounts, because CSV files can't be password-protected."
+"A folder where your data will be automatically <link xref=\"import-"
+"export\">exported to CSV</link> after every change. This feature doesn't "
+"work for password-protected accounts, because CSV files can't be password-"
+"protected."
 msgstr ""
-"Složka, do které budou vaše data po každé změně automaticky <link xref="
-"\"import-export\">exportována jako soubor CSV</link>. Tato funkce nefunguje "
-"pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
+"Složka, do které budou vaše data po každé změně automaticky <link "
+"xref=\"import-export\">exportována jako soubor CSV</link>. Tato funkce "
+"nefunguje pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
 
 #. (itstool) path: info/title
 #: yelp/C/import-export.page:8
@@ -873,9 +903,9 @@ msgstr "Typ"
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
-"\"account\">account settings</link> will be selected when you open a dialog "
-"to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
 msgstr ""
 "<em>Příjem</em> nebo <em>Výdaj</em>. Ve výchozím nastavení se při otevření "
 "dialogu pro přidání nové transakce vybere ta, která byla zvolena v <link "
@@ -1067,8 +1097,9 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link xref="
-"\"configuration\">configuration</link> will be used for created transactions."
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
 msgstr ""
 "Převod neumožňuje vytvářet opakující se transakce ani nastavovat jiné "
 "vlastnosti než částku. Pro vytvořené transakce se použije barva vybraná v "

@@ -35,6 +35,10 @@
 		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
 	</item>
 	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
+	<item>
 		<title>Systeemvaluta</title>
 		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
 		<list>
@@ -83,5 +87,9 @@
 		<title>Groepszichtbaarheid</title>
 		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-12 00:30+0300\n"
+"POT-Creation-Date: 2023-08-16 00:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,127 +92,147 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
-msgid "System Currency"
+msgid "Transaction Reminders Threshold"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
-msgid "Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:"
+msgid "The threshold used when showing reminders about upcoming transactions."
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/account.page:44
-msgid "If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
-msgstr ""
-
-#. (itstool) path: item/p
+#. (itstool) path: item/title
 #: yelp/C/account.page:45
-msgid "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number."
+msgid "System Currency"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:46
+msgid "Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:48
+msgid "If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:49
+msgid "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number."
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:50
 msgid "If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</em> and <em>1000,00</em> will be accepted as a valid number."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/account.page:49
+#: yelp/C/account.page:53
 msgid "On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. <app>Denaro</app> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <code>locale</code> command in a terminal. If you found a bug and want to report it, please provide the output of the <code>locale</code> command to allow developers to reproduce your issue with the same settings."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:53
+#: yelp/C/account.page:57
 msgid "Use Custom Currency"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:54
+#: yelp/C/account.page:58
 msgid "If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:57
+#: yelp/C/account.page:61
 msgid "Custom Currency Symbol"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:58
+#: yelp/C/account.page:62
 msgid "Up to 3 characters or 1 emoji. It can't be a number."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:61
+#: yelp/C/account.page:65
 msgid "Custom Currency Code"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:62
+#: yelp/C/account.page:66
 msgid "Up to 3 characters or 1 emoji."
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:63
+#: yelp/C/account.page:67
 msgid "An example to understand the difference between a symbol and a code: <em>$</em> is a symbol, <em>USD</em> is a code."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:66
+#: yelp/C/account.page:70
 msgid "Custom Currency Decimal and Group Separators"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:67
+#: yelp/C/account.page:71
 msgid "Up to 2 characters or 1 emoji."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:70
+#: yelp/C/account.page:74
 msgid "Custom Currency Decimal Digits"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:71
+#: yelp/C/account.page:75
 msgid "The size of decimal part of amount values. With \"Unlimited\" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:74
+#: yelp/C/account.page:78
 msgid "Password"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:75
+#: yelp/C/account.page:79
 msgid "Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:78
+#: yelp/C/account.page:82
 msgid "Sort by Id, Date or Amount"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:79
+#: yelp/C/account.page:83
 msgid "Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:82
+#: yelp/C/account.page:86
 msgid "Sorting Order"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:83
+#: yelp/C/account.page:87
 msgid "Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:86
+#: yelp/C/account.page:90
 msgid "Groups Visibility"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:87
+#: yelp/C/account.page:91
 msgid "Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:94
+msgid "Tags Visibility"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:95
+msgid "Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: info/title

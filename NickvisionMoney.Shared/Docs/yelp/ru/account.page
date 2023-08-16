@@ -35,6 +35,10 @@
 		<p>Когда вы создаёте новую транзакцию, её тип по умолчанию будет тем же, что указан этой настройкой.</p>
 	</item>
 	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
+	<item>
 		<title>Системная валюта</title>
 		<p>Каждый раз, когда приложение запускается, оно получает данные о валюте и формате чисел из региональных настроек вашей системы, и эти данные используются для отображения символа валюты (если только вы не указали свою валюту, смотрите ниже), а также для определения того, в каком формате числа будут приниматься в качестве значения суммы для транзакций. Несколько примеров:</p>
 		<list>
@@ -83,5 +87,9 @@
 		<title>Видимость групп</title>
 		<p>Каждый счёт хранит информацию о том, должен ли список групп быть показан в главном окне. Каждый раз, когда вы меняете видимость списка групп, информация об этом сохраняется для открытого счёта и состояние списка групп будет восстановлено, когда вы снова откроете этот счёт.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>
