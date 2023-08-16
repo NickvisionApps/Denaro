@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-13 01:01-0400\n"
-"PO-Revision-Date: 2023-08-10 15:58+0000\n"
+"PO-Revision-Date: 2023-08-16 16:52+0000\n"
 "Last-Translator: Dominik Gęgotek <ioutora@disroot.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/pl/>\n"
@@ -37,9 +37,9 @@ msgstr "{0} z {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{0} tag"
+msgstr[1] "{0} tagi"
+msgstr[2] "{0} tagów"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:448
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1311
@@ -494,7 +494,7 @@ msgstr "Uwagi"
 
 #: ../../../Controllers/AccountViewController.cs:1035
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "W pliku nie ma nic do zaimportowania."
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -587,7 +587,7 @@ msgstr "Sortuj po ID"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:177
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Tagi"
 
 #: ../../../Controllers/AccountViewController.cs:638
 msgid "The password of the account was changed."
@@ -709,9 +709,8 @@ msgstr ""
 "uprawnienia dostępu do pliku i spróbuj ponownie."
 
 #: ../../../Controllers/AccountViewController.cs:1030
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr "Dodaj nową transakcję lub zaimportuj transakcje z pliku."
+msgstr "Nie można zaimportować transakcji z pliku."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
@@ -750,7 +749,7 @@ msgstr "Bez grupy"
 #: ../../../Controllers/AccountViewController.cs:1206
 #: ../../../Models/Account.cs:109
 msgid "Untagged"
-msgstr ""
+msgstr "Nieotagowane"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:946
 msgid "Update Only Source"
@@ -951,19 +950,16 @@ msgid "Unselect Groups Filters"
 msgstr "Odznacz filtry grup"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:180
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Ustaw widoczność grup"
+msgstr "Ustaw widoczność tagów"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:188
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Wybierz wszystkie filtry grup"
+msgstr "Wybierz wszystkie filtry tagów"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Odznacz filtry grup"
+msgstr "Odznacz filtry tagów"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:218
 msgid "Calendar"
@@ -1347,7 +1343,7 @@ msgstr "Użyj unikalnego koloru"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Dodaj tag"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
