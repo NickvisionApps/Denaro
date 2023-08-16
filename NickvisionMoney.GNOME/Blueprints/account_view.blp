@@ -56,6 +56,13 @@ Adw.Bin _root {
           header-suffix: Gtk.Box {
             orientation: horizontal;
             
+            Gtk.Button _remindersButton {
+              icon-name: "bell-symbolic";
+              tooltip-text: _("Reminders");
+              
+              styles ["flat"]
+            }            
+            
             Gtk.MenuButton {
               menu-model: actionsMenu;
             
@@ -125,44 +132,6 @@ Adw.Bin _root {
               visible: bind _expenseCheck.active;
               
               styles ["denaro-expense"]
-            }
-          }
-        }
-        
-        Adw.PreferencesGroup {
-          title: _("Reminders");
-          header-suffix: Gtk.Box {
-            orientation: horizontal;
-            
-            Gtk.Button {
-              tooltip-text: _("Clear Reminders");
-              
-              Adw.ButtonContent {
-                icon-name: "user-trash-symbolic";
-                label: _("Clear");
-              }
-            
-              styles ["flat"]
-            }
-          };
-          
-          Adw.ViewStack _reminderViewStack {
-            vexpand: true;
-            Adw.ViewStackPage {
-              name: "no-reminder";
-              child: Adw.StatusPage {
-                height-request: 200;
-                title: _("No Reminders");
-                icon-name: "document-open-recent-symbolic";
-                styles ["compact", "card"]
-              };
-            }
-            
-            Adw.ViewStackPage {
-              name: "reminders";
-              child: Gtk.ListBox _remindersList {
-                
-              };
             }
           }
         }
