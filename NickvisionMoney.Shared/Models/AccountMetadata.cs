@@ -25,6 +25,17 @@ public enum SortBy
 }
 
 /// <summary>
+/// Thresholds for when to show a reminder
+/// </summary>
+public enum RemindersThreshold
+{
+    OneDayBefore,
+    OneWeekBefore,
+    OneMonthBefore,
+    TwoMonthsBefore
+}
+
+/// <summary>
 /// A model of metadata for an account
 /// </summary>
 public class AccountMetadata : ICloneable
@@ -66,6 +77,10 @@ public class AccountMetadata : ICloneable
     /// </summary>
     public TransactionType DefaultTransactionType { get; set; }
     /// <summary>
+    /// The threshold for showing transaction reminders
+    /// </summary>
+    public RemindersThreshold TransactionRemindersThreshold { get; set; }
+    /// <summary>
     /// Whether or not to show the groups section on the account view
     /// </summary>
     public bool ShowGroupsList { get; set; }
@@ -98,6 +113,7 @@ public class AccountMetadata : ICloneable
         CustomCurrencyGroupSeparator = null;
         CustomCurrencyDecimalDigits = null;
         DefaultTransactionType = TransactionType.Income;
+        TransactionRemindersThreshold = RemindersThreshold.OneDayBefore;
         ShowGroupsList = true;
         ShowTagsList = true;
         SortFirstToLast = false;
@@ -156,6 +172,7 @@ public class AccountMetadata : ICloneable
             result.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11));
             result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             result.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
+            result.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
         }
         database.Close();
         return result;
@@ -176,6 +193,7 @@ public class AccountMetadata : ICloneable
             CustomCurrencyGroupSeparator = CustomCurrencyGroupSeparator,
             CustomCurrencyDecimalDigits = CustomCurrencyDecimalDigits,
             DefaultTransactionType = DefaultTransactionType,
+            TransactionRemindersThreshold = TransactionRemindersThreshold,
             ShowGroupsList = ShowGroupsList,
             ShowTagsList = ShowTagsList,
             SortFirstToLast = SortFirstToLast,
