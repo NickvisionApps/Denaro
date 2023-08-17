@@ -871,6 +871,10 @@ public class Account : IDisposable
             {
                 await SyncRepeatTransactionsAsync();
             }
+            else if (transaction.Date > DateOnly.FromDateTime(DateTime.Today))
+            {
+                CalculateTransactionReminders();
+            }
             BackupAccountToCSV();
             return (true, newTags);
         }
@@ -955,6 +959,10 @@ public class Account : IDisposable
             if (transaction.RepeatFrom == 0)
             {
                 await SyncRepeatTransactionsAsync();
+            }
+            else if (transaction.Date > DateOnly.FromDateTime(DateTime.Today))
+            {
+                CalculateTransactionReminders();
             }
             BackupAccountToCSV();
             return (true, newTags);
@@ -1047,6 +1055,10 @@ public class Account : IDisposable
                     Groups[groupId].Expense -= transaction.Amount;
                     TodayExpense -= transaction.Amount;
                 }
+            }
+            else
+            {
+                CalculateTransactionReminders();
             }
             Transactions[id].Dispose();
             Transactions.Remove(id);
@@ -2117,9 +2129,11 @@ public class Account : IDisposable
         {
             return;
         }
+        var today = DateOnly.FromDateTime(DateTime.Today);
         foreach (var pair in Transactions)
         {
-            if (pair.Value.RepeatFrom == 0)
+            var upcomingDate = today;
+            if (pair.Value.RepeatFrom == 0 && pair.Value.Date <= today) //repeat transactions
             {
                 var latestRepeat = pair.Value;
                 foreach (var pair2 in Transactions)
@@ -2161,26 +2175,33 @@ public class Account : IDisposable
                 {
                     nextRepeatDate = nextRepeatDate.AddYears(2);
                 }
-                var today = DateOnly.FromDateTime(DateTime.Today);
                 if (nextRepeatDate > today)
                 {
-                    var culture = CultureHelpers.GetNumberCulture(Metadata);
-                    if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && nextRepeatDate.AddDays(-1) == today)
-                    {
-                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));
-                    }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) <= today)
-                    {
-                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One week from now")));
-                    }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) <= today)
-                    {
-                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One month from now")));
-                    }
-                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) <= today)
-                    {
-                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Two months from now")));
-                    }
+                    upcomingDate = nextRepeatDate;
+                }
+            }
+            else if (pair.Value.Date > today) //future transactions
+            {
+                upcomingDate = pair.Value.Date;
+            }
+            if (upcomingDate != today) //add reminder
+            {
+                var culture = CultureHelpers.GetNumberCulture(Metadata);
+                if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && upcomingDate.AddDays(-1) == today)
+                {
+                    TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));
+                }
+                else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && upcomingDate.AddDays(-7) <= today)
+                {
+                    TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One week from now")));
+                }
+                else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && upcomingDate.AddMonths(-1) <= today)
+                {
+                    TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One month from now")));
+                }
+                else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && upcomingDate.AddMonths(-2) <= today)
+                {
+                    TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Two months from now")));
                 }
             }
         }
