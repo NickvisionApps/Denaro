@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-16 00:27-0400\n"
-"PO-Revision-Date: 2023-06-14 01:22+0000\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/fr/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -140,12 +140,12 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Seuil de rappel des transactions"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
 msgid "The threshold used when showing reminders about upcoming transactions."
-msgstr ""
+msgstr "Le seuil utilisé pour afficher des rappels des transactions à venir."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
@@ -370,21 +370,19 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:94
-#, fuzzy
 msgid "Tags Visibility"
-msgstr "Visibilité des groupes"
+msgstr "Visibilité des étiquettes"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:95
-#, fuzzy
 msgid ""
 "Each account stores information about whether the tags list in the main "
 "window is hidden or not. Every time you change tags list visibility, it's "
 "saved and then restored when you reopen the account."
 msgstr ""
-"Chaque compte enregistre l’état affiché ou masqué de la liste des groupes "
+"Chaque compte enregistre l’état affiché ou masqué de la liste des étiquettes "
 "dans la fenêtre principale. Chaque fois que vous modifierez la visibilité de "
-"la liste des groupes, ce paramètre sera enregistré puis restauré à la "
+"la liste des étiquettes, ce paramètre sera enregistré puis restauré à la "
 "prochaine ouverture."
 
 #. (itstool) path: info/title
@@ -1038,7 +1036,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Tags"
-msgstr ""
+msgstr "Étiquettes"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62
@@ -1050,6 +1048,15 @@ msgid ""
 "enough. Tags are only saved in transactions themselves, and as result unused "
 "tags disappear automatically on account closing."
 msgstr ""
+"Une liste d’étiquettes pour les transactions. Une transaction peut avoir un "
+"nombre illimité d’étiquettes (ou ne pas en avoir). Les étiquettes peuvent "
+"contenir n’importe quel caractère sauf des virgules (<code>,</code>), et "
+"peuvent avoir n’importe quelle longueur, bien qu’elles soient conçues pour "
+"de courts mots-clés. Les étiquettes sont conçues pour être utilisées pour "
+"obtenir un filtrage additionnel quand l’utilisation des groupes ne suffit "
+"pas. Les étiquettes sont uniquement enregistrées dans les transactions elles-"
+"mêmes, et ainsi celles non utilisées disparaissent automatiquement à la "
+"fermeture du compte."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
