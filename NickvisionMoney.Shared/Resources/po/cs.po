@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:24-0400\n"
-"PO-Revision-Date: 2023-08-13 23:35+0000\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -500,11 +500,11 @@ msgstr "Nic k importování ze souboru."
 
 #: ../../../Models/Account.cs:2178
 msgid "One month from now"
-msgstr ""
+msgstr "Jeden měsíc ode dneška"
 
 #: ../../../Models/Account.cs:2174
 msgid "One week from now"
-msgstr ""
+msgstr "Jeden týden ode dneška"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -669,7 +669,7 @@ msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2170
 msgid "Tomorrow"
-msgstr ""
+msgstr "Zítra"
 
 #: ../../../Models/Account.cs:1672
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -707,7 +707,7 @@ msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
 #: ../../../Models/Account.cs:2182
 msgid "Two months from now"
-msgstr ""
+msgstr "Dva měsíce ode dneška"
 
 #: ../../../Models/Account.cs:1757
 msgid "Type"
@@ -770,9 +770,8 @@ msgid "Untagged"
 msgstr "Bez štítku"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1107
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Žádné transakce"
+msgstr "Nadcházející transakce"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:951
 msgid "Update Only Source"
@@ -844,27 +843,27 @@ msgstr "Výchozí typ transakce"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:177
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Hranice pro připomenutí transakcí"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Day Before"
-msgstr ""
+msgstr "Jeden den před"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Week Before"
-msgstr ""
+msgstr "Jeden týden před"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Month Before"
-msgstr ""
+msgstr "Jeden měsíc před"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "Two Months Before"
-msgstr ""
+msgstr "Dva měsíce před"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -970,7 +969,7 @@ msgstr "Dnešní přehled"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Připomínky"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1314,7 +1313,7 @@ msgstr "Vymazat složku záloh"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Žádné připomínky"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"

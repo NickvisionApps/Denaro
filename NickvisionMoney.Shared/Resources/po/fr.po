@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:24-0400\n"
-"PO-Revision-Date: 2023-08-09 12:21+0000\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
 "app/fr/>\n"
@@ -36,8 +36,8 @@ msgstr "{0} de {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} étiquette"
+msgstr[1] "{0} étiquettes"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:452
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1327
@@ -78,7 +78,7 @@ msgstr "Type de compte"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:180
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:46
 msgid "Add"
-msgstr "Add"
+msgstr "Ajouter"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:475
 msgid "Add a new transaction or import transactions from a file."
@@ -496,15 +496,15 @@ msgstr "Notes"
 
 #: ../../../Controllers/AccountViewController.cs:974
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Rien à importer depuis le fichier."
 
 #: ../../../Models/Account.cs:2178
 msgid "One month from now"
-msgstr ""
+msgstr "Dans un mois"
 
 #: ../../../Models/Account.cs:2174
 msgid "One week from now"
-msgstr ""
+msgstr "Dans une semaine"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -597,7 +597,7 @@ msgstr "Trier par identifiant"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:184
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Étiquettes"
 
 #: ../../../Controllers/AccountViewController.cs:577
 msgid "The password of the account was changed."
@@ -670,7 +670,7 @@ msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2170
 msgid "Tomorrow"
-msgstr ""
+msgstr "Demain"
 
 #: ../../../Models/Account.cs:1672
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -708,7 +708,7 @@ msgstr "Irénée Thirion"
 
 #: ../../../Models/Account.cs:2182
 msgid "Two months from now"
-msgstr ""
+msgstr "Dans deux mois"
 
 #: ../../../Models/Account.cs:1757
 msgid "Type"
@@ -728,11 +728,8 @@ msgstr ""
 "l’application a les permissions d’accès au fichier, et réessayez."
 
 #: ../../../Controllers/AccountViewController.cs:969
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr ""
-"Ajoutez une nouvelle transaction ou importez des transactions depuis un "
-"fichier."
+msgstr "Impossible d’importer des transactions depuis le fichier."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
@@ -773,12 +770,11 @@ msgstr "Sans groupe"
 #: ../../../Controllers/AccountViewController.cs:1145
 #: ../../../Models/Account.cs:113
 msgid "Untagged"
-msgstr ""
+msgstr "Sans étiquette"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1107
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Aucune transaction"
+msgstr "Transactions à venir"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:951
 msgid "Update Only Source"
@@ -850,27 +846,27 @@ msgstr "Type de transaction par défaut"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:177
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Seuil de rappel des transactions"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Day Before"
-msgstr ""
+msgstr "Un jour avant"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Week Before"
-msgstr ""
+msgstr "Une semaine avant"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Month Before"
-msgstr ""
+msgstr "Un mois avant"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "Two Months Before"
-msgstr ""
+msgstr "Deux mois avant"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -977,7 +973,7 @@ msgstr "Vue d’aujourd’hui"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Rappels"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1010,19 +1006,16 @@ msgid "Unselect Groups Filters"
 msgstr "Désélectionner les filtres de groupes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:187
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Basculer la visibilité des groupes"
+msgstr "Basculer la visibilité des étiquettes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Sélectionner tous les filtres de groupes"
+msgstr "Sélectionner tous les filtres d’étiquettes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:202
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Désélectionner les filtres de groupes"
+msgstr "Désélectionner les filtres d’étiquettes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:225
 msgid "Calendar"
@@ -1151,7 +1144,7 @@ msgstr "Devise du compte"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:293
 msgid "Import Existing Information"
-msgstr "Importer les informations existantes"
+msgstr "Importer des informations existantes"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
 msgid ""
@@ -1331,7 +1324,7 @@ msgstr "Vider le dossier de sauvegarde"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Aucun rappel"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"
@@ -1419,7 +1412,7 @@ msgstr "Utiliser une couleur unique"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Ajouter une étiquette"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
