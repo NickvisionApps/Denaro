@@ -2,9 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-16 00:27-0400\n"
-"PO-Revision-Date: 2023-08-15 16:47+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/es/>\n"
 "Language: es\n"
@@ -141,12 +140,14 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Umbral de recordatorios de las transacciones"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
 msgid "The threshold used when showing reminders about upcoming transactions."
 msgstr ""
+"El umbral utilizado cuando se muestran los recordatorios de las próximas "
+"transacciones."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
@@ -371,21 +372,20 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:94
-#, fuzzy
 msgid "Tags Visibility"
-msgstr "Visibilidad de grupos"
+msgstr "Visibilidad de las etiquetas"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:95
-#, fuzzy
 msgid ""
 "Each account stores information about whether the tags list in the main "
 "window is hidden or not. Every time you change tags list visibility, it's "
 "saved and then restored when you reopen the account."
 msgstr ""
-"Cada cuenta almacena información sobre si la lista de grupos en la ventana "
-"principal está oculta o no. Cada vez que cambia la visibilidad de la lista "
-"de grupos, se guarda y luego se restaura cuando vuelve a abrir la cuenta."
+"Cada cuenta almacena información sobre si la lista de las etiquetas de la "
+"ventana principal está oculta o no. Cada vez que cambias la visibilidad de "
+"la lista de las etiquetas, se guarda y después se restaura cuando vuelves a "
+"abrir la cuenta."
 
 #. (itstool) path: info/title
 #: yelp/C/configuration.page:8
