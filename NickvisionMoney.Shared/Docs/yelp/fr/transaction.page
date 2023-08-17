@@ -55,8 +55,8 @@
 		<p>Une couleur pour les transactions. Elle peut être définie pour utiliser un groupe de couleur ou une couleur unique. Lors de la sélection d’une couleur unique, elle sera définie par défaut comme la couleur sélectionnée dans la <link xref="configuration">configuration</link>, mais peut être modifiée en n’importe quelle couleur.</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>Étiquettes</title>
+        <p>Une liste d’étiquettes pour les transactions. Une transaction peut avoir un nombre illimité d’étiquettes (ou ne pas en avoir). Les étiquettes peuvent contenir n’importe quel caractère sauf des virgules (<code>,</code>), et peuvent avoir n’importe quelle longueur, bien qu’elles soient conçues pour de courts mots-clés. Les étiquettes sont conçues pour être utilisées pour obtenir un filtrage additionnel quand l’utilisation des groupes ne suffit pas. Les étiquettes sont uniquement enregistrées dans les transactions elles-mêmes, et ainsi celles non utilisées disparaissent automatiquement à la fermeture du compte.</p>
     </item>
 	<item>
 		<title>Reçu</title>

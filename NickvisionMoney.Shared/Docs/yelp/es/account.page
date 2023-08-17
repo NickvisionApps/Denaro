@@ -41,8 +41,8 @@
 		<p>Cuando crea una transacción nueva, su tipo predeterminado será el mismo que en esta configuración.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
-        <p>The threshold used when showing reminders about upcoming transactions.</p>
+        <title>Umbral de recordatorios de las transacciones</title>
+        <p>El umbral utilizado cuando se muestran los recordatorios de las próximas transacciones.</p>
     </item>
 	<item>
 		<title>Moneda del sistema</title>
@@ -94,8 +94,8 @@
 		<p>Cada cuenta almacena información sobre si la lista de grupos en la ventana principal está oculta o no. Cada vez que cambia la visibilidad de la lista de grupos, se guarda y luego se restaura cuando vuelve a abrir la cuenta.</p>
 	</item>
 	<item>
-        <title>Tags Visibility</title>
-        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+        <title>Visibilidad de las etiquetas</title>
+        <p>Cada cuenta almacena información sobre si la lista de las etiquetas de la ventana principal está oculta o no. Cada vez que cambias la visibilidad de la lista de las etiquetas, se guarda y después se restaura cuando vuelves a abrir la cuenta.</p>
     </item>
 </terms>
 </page>
