@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-16 00:27-0400\n"
-"PO-Revision-Date: 2023-08-12 17:19+0000\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/cs/>\n"
@@ -136,12 +136,13 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Hranice pro připomenutí transakcí"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
 msgid "The threshold used when showing reminders about upcoming transactions."
 msgstr ""
+"Hranice použitá při zobrazování připomínek o nadcházejících transakcích."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
@@ -356,20 +357,18 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:94
-#, fuzzy
 msgid "Tags Visibility"
-msgstr "Viditelnost skupin"
+msgstr "Viditelnost štítků"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:95
-#, fuzzy
 msgid ""
 "Each account stores information about whether the tags list in the main "
 "window is hidden or not. Every time you change tags list visibility, it's "
 "saved and then restored when you reopen the account."
 msgstr ""
-"Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně "
-"skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato "
+"Každý účet ukládá informace o tom, zda je seznam štítků v hlavním okně "
+"skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu štítků, je tato "
 "informace uložena a poté obnovena při opětovném otevření účtu."
 
 #. (itstool) path: info/title
