@@ -70,9 +70,13 @@ public class AccountViewController : IDisposable
     /// </summary>
     public Dictionary<uint, Group> Groups => _account.Groups;
     /// <summary>
-    /// Tags in the account
+    /// The list of upcoming transaction reminders in the account
     /// </summary>
-    public List<string> AccountTags => _account.Tags;
+    public List<(string Title, string Subtitle)> TransactionReminders => _account.TransactionReminders;
+    /// <summary>
+    /// The CultureInfo to use when displaying a number string
+    /// </summary>
+    public CultureInfo CultureForNumberString => CultureHelpers.GetNumberCulture(_account.Metadata);
     /// <summary>
     /// The total amount of the account for today
     /// </summary>
@@ -198,71 +202,6 @@ public class AccountViewController : IDisposable
     /// Finalizes the AccountViewController
     /// </summary>
     ~AccountViewController() => Dispose(false);
-
-    /// <summary>
-    /// The CultureInfo to use when displaying a number string
-    /// </summary>
-    public CultureInfo CultureForNumberString
-    {
-        get
-        {
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            if (_account.Metadata.UseCustomCurrency)
-            {
-                culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(_account.Metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : _account.Metadata.CustomCurrencySymbol;
-                culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(_account.Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : _account.Metadata.CustomCurrencyDecimalSeparator;
-                culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(_account.Metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : _account.Metadata.CustomCurrencyDecimalSeparator;
-                culture.NumberFormat.CurrencyGroupSeparator = string.IsNullOrEmpty(_account.Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.CurrencyGroupSeparator : _account.Metadata.CustomCurrencyGroupSeparator;
-                culture.NumberFormat.NumberGroupSeparator = string.IsNullOrEmpty(_account.Metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.NumberGroupSeparator : _account.Metadata.CustomCurrencyGroupSeparator;
-                culture.NumberFormat.CurrencyDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
-                culture.NumberFormat.NumberDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
-                culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(_account.Metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : _account.Metadata.CustomCurrencyCode;
-            }
-            else
-            {
-                culture.NumberFormat.NaNSymbol = region.ISOCurrencySymbol;
-            }
-            return culture;
-        }
-    }
-
-    /// <summary>
-    /// The CultureInfo to use when displaying a date string
-    /// </summary>
-    public CultureInfo CultureForDateString
-    {
-        get
-        {
-            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
-            if (lcTime != null && lcTime.Contains(".UTF-8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcTime != null && lcTime.Contains(".utf8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
-            }
-            if (lcTime != null && lcTime.Contains('_'))
-            {
-                lcTime = lcTime.Replace('_', '-');
-            }
-            return new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
-        }
-    }
 
     /// <summary>
     /// Whether or not to show the groups section on the account view
@@ -544,14 +483,14 @@ public class AccountViewController : IDisposable
     /// Creates a new TransactionDialogController for a new transaction
     /// </summary>
     /// <returns>The new TransactionDialogController</returns>
-    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(_account.NextAvailableTransactionId, _account.Transactions, _account.Groups, _account.Tags, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
+    public TransactionDialogController CreateTransactionDialogController() => new TransactionDialogController(_account.NextAvailableTransactionId, _account.Transactions, _account.Groups, _account.Tags, _account.Metadata.DefaultTransactionType, TransactionDefaultColor, CultureForNumberString);
 
     /// <summary>
     /// Creates a new TransactionDialogController for an existing transaction
     /// </summary>
     /// <param name="id">The id of the existing transaction</param>
     /// <returns>The TransactionDialogController for the existing transaction</returns>
-    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Transactions, _account.Groups, _account.Tags, true, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
+    public TransactionDialogController CreateTransactionDialogController(uint id) => new TransactionDialogController(_account.Transactions[id], _account.Transactions, _account.Groups, _account.Tags, true, TransactionDefaultColor, CultureForNumberString);
 
     /// <summary>
     /// Creates a new TransactionDialogController for a copy transaction
@@ -574,7 +513,7 @@ public class AccountViewController : IDisposable
             RepeatFrom = source.RepeatFrom,
             RepeatEndDate = source.RepeatEndDate
         };
-        return new TransactionDialogController(toCopy, _account.Transactions, _account.Groups, _account.Tags, false, TransactionDefaultColor, CultureForNumberString, CultureForDateString);
+        return new TransactionDialogController(toCopy, _account.Transactions, _account.Groups, _account.Tags, false, TransactionDefaultColor, CultureForNumberString);
     }
 
     /// <summary>

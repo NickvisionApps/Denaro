@@ -88,6 +88,10 @@ public class Account : IDisposable
     /// The expense amount of the account for today
     /// </summary>
     public decimal TodayExpense { get; private set; }
+    /// <summary>
+    /// The list of upcoming transaction reminders
+    /// </summary>
+    public List<(string Title, string Subtitle)> TransactionReminders { get; private set; }
 
     /// <summary>
     /// The total amount of the account for today
@@ -112,6 +116,7 @@ public class Account : IDisposable
         NextAvailableTransactionId = 1;
         TodayIncome = 0;
         TodayExpense = 0;
+        TransactionReminders = new List<(string Title, string Subtitle)>();
     }
 
     /// <summary>
@@ -342,7 +347,7 @@ public class Account : IDisposable
         }
         //Setup Metadata Table
         using var cmdTableMetadata = _database!.CreateCommand();
-        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER)";
+        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
@@ -377,6 +382,13 @@ public class Account : IDisposable
             using var cmdTableMetadataUpdate5 = _database.CreateCommand();
             cmdTableMetadataUpdate5.CommandText = "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER";
             cmdTableMetadataUpdate5.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate6 = _database.CreateCommand();
+            cmdTableMetadataUpdate6.CommandText = "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER";
+            cmdTableMetadataUpdate6.ExecuteNonQuery();
         }
         catch { }
         //Setup Groups Table
@@ -470,11 +482,12 @@ public class Account : IDisposable
             Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
+            Metadata.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
         }
         else
         {
             using var cmdAddMetadata = _database.CreateCommand();
-            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits, $showTagsList)";
+            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList, transactionRemindersThreshold) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits, $showTagsList, $transactionRemindersThreshold)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
             cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
@@ -488,6 +501,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(Metadata.CustomCurrencyGroupSeparator) ? "empty" : Metadata.CustomCurrencyGroupSeparator);
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
             cmdAddMetadata.Parameters.AddWithValue("$showTagsList", Metadata.ShowGroupsList);
+            cmdAddMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)Metadata.TransactionRemindersThreshold);
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
@@ -667,7 +681,7 @@ public class Account : IDisposable
     public bool UpdateMetadata(AccountMetadata metadata)
     {
         using var cmdUpdateMetadata = _database!.CreateCommand();
-        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits, showTagsList = $showTagsList WHERE id = 0";
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits, showTagsList = $showTagsList, transactionRemindersThreshold = $transactionRemindersThreshold WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
         cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
@@ -681,14 +695,17 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$customGroupSeparator", string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? "empty" : metadata.CustomCurrencyGroupSeparator);
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
         cmdUpdateMetadata.Parameters.AddWithValue("$showTagsList", metadata.ShowTagsList);
+        cmdUpdateMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)metadata.TransactionRemindersThreshold);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
+            var needsRemindersUpdate = Metadata.TransactionRemindersThreshold != metadata.TransactionRemindersThreshold;
             Metadata.Name = metadata.Name;
             Metadata.AccountType = metadata.AccountType;
             Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
             Metadata.CustomCurrencySymbol = metadata.CustomCurrencySymbol;
             Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
             Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
+            Metadata.TransactionRemindersThreshold = metadata.TransactionRemindersThreshold;
             Metadata.ShowGroupsList = metadata.ShowGroupsList;
             Metadata.ShowTagsList = metadata.ShowTagsList;
             Metadata.SortFirstToLast = metadata.SortFirstToLast;
@@ -696,6 +713,10 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = metadata.CustomCurrencyDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = metadata.CustomCurrencyGroupSeparator;
             Metadata.CustomCurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits;
+            if (needsRemindersUpdate)
+            {
+                CalculateTransactionReminders();
+            }
             return true;
         }
         return false;
@@ -1073,6 +1094,7 @@ public class Account : IDisposable
                 }
             }
         }
+        CalculateTransactionReminders();
     }
 
     /// <summary>
@@ -1089,9 +1111,10 @@ public class Account : IDisposable
                 await DeleteTransactionAsync(transaction.Id);
             }
         }
+        CalculateTransactionReminders();
     }
     
-        /// <summary>
+    /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
     /// <returns>True if transactions were modified, else false</returns>
@@ -1106,7 +1129,7 @@ public class Account : IDisposable
             {
                 var dates = new List<DateOnly>();
                 var endDate = (transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Now)) < DateOnly.FromDateTime(DateTime.Now) ? transaction.RepeatEndDate : DateOnly.FromDateTime(DateTime.Now);
-                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0))
+                for (var date = transaction.Date; date <= endDate; date = date.AddDays(0)) //calculate needed repeat transaction dates up until today
                 {
                     if (date != transaction.Date)
                     {
@@ -1141,19 +1164,19 @@ public class Account : IDisposable
                         date = date.AddYears(2);
                     }
                 }
-                for (var j = i; j < transactions.Count; j++)
+                for (var j = i; j < transactions.Count; j++) //remove dates of existing repeat transactions
                 {
                     if (transactions[j].RepeatFrom == transaction.Id)
                     {
                         dates.Remove(transactions[j].Date);
                     }
                 }
-                foreach (var date in dates)
+                foreach (var date in dates) //create missing repeat transactions
                 {
                     transactionsModified = transactionsModified || (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
                 }
             }
-            else if (transaction.RepeatFrom > 0)
+            else if (transaction.RepeatFrom > 0) //delete repeat transactions if the date from the original transaction was changed to a smaller date
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
@@ -1162,6 +1185,7 @@ public class Account : IDisposable
             }
             i++;
         }
+        CalculateTransactionReminders();
         return transactionsModified;
     }
 
@@ -1585,45 +1609,8 @@ public class Account : IDisposable
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
-            //Amount Culture
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            var cultureAmount = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var regionAmount = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            if (Metadata.UseCustomCurrency)
-            {
-                cultureAmount.NumberFormat.CurrencySymbol = Metadata.CustomCurrencySymbol ?? cultureAmount.NumberFormat.CurrencySymbol;
-                cultureAmount.NumberFormat.NaNSymbol = Metadata.CustomCurrencyCode ?? regionAmount.ISOCurrencySymbol;
-                cultureAmount.NumberFormat.CurrencyDecimalSeparator = Metadata.CustomCurrencyDecimalSeparator ?? cultureAmount.NumberFormat.CurrencyDecimalSeparator;
-                cultureAmount.NumberFormat.CurrencyGroupSeparator = Metadata.CustomCurrencyGroupSeparator ?? cultureAmount.NumberFormat.CurrencyGroupSeparator;
-                cultureAmount.NumberFormat.CurrencyDecimalDigits = Metadata.CustomCurrencyDecimalDigits ?? cultureAmount.NumberFormat.CurrencyDecimalDigits;
-            }
-            //Date Culture
-            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
-            if (lcTime != null && lcTime.Contains(".UTF-8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcTime != null && lcTime.Contains(".utf8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
-            }
-            if (lcTime != null && lcTime.Contains('_'))
-            {
-                lcTime = lcTime.Replace('_', '-');
-            }
-            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+            var cultureAmount = CultureHelpers.GetNumberCulture(Metadata);
+            var regionAmount = new RegionInfo(cultureAmount.Name);
             using var appiconStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.org.nickvision.money-symbolic.png")!;
             using var interRegularFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-Regular.otf")!;
             using var interSemiBoldFontStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionMoney.Shared.Resources.Inter-SemiBold.otf")!;
@@ -1652,7 +1639,7 @@ public class Account : IDisposable
                     {
                         col.Spacing(15);
                         //Generated Date
-                        col.Item().Text(_("Generated: {0}", DateTime.Now.ToString("g", cultureDate)));
+                        col.Item().Text(_("Generated: {0}", DateTime.Now.ToString("g", CultureHelpers.DateCulture)));
                         //Overview
                         col.Item().Table(tbl =>
                         {
@@ -1812,7 +1799,7 @@ public class Account : IDisposable
                                     }
                                 }
                                 tbl.Cell().Background(hex).Text(pair.Value.Id.ToString());
-                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", cultureDate));
+                                tbl.Cell().Background(hex).Text(pair.Value.Date.ToString("d", CultureHelpers.DateCulture));
                                 tbl.Cell().Background(hex).Text(pair.Value.Description.Trim());
                                 tbl.Cell().Background(hex).Text(pair.Value.Type switch
                                 {
@@ -2118,6 +2105,85 @@ public class Account : IDisposable
             return chart.GetImage().Encode().ToArray();
         }
         return Array.Empty<byte>();
+    }
+
+    /// <summary>
+    /// Populates the TransactionReminders list
+    /// </summary>
+    private void CalculateTransactionReminders()
+    {
+        TransactionReminders.Clear();
+        if (Metadata.TransactionRemindersThreshold == RemindersThreshold.Never)
+        {
+            return;
+        }
+        foreach (var pair in Transactions)
+        {
+            if (pair.Value.RepeatFrom == 0)
+            {
+                var latestRepeat = pair.Value;
+                foreach (var pair2 in Transactions)
+                {
+                    if (pair2.Value.RepeatFrom == pair.Value.Id)
+                    {
+                        if (pair2.Value.Date > latestRepeat.Date)
+                        {
+                            latestRepeat = pair2.Value;
+                        }
+                    }
+                }
+                var nextRepeatDate = latestRepeat.Date;
+                if (pair.Value.RepeatInterval == TransactionRepeatInterval.Daily)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Weekly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(7);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biweekly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddDays(14);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Monthly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddMonths(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddMonths(3);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Yearly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddYears(1);
+                }
+                else if (pair.Value.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                {
+                    nextRepeatDate = nextRepeatDate.AddYears(2);
+                }
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                if (nextRepeatDate > today)
+                {
+                    var culture = CultureHelpers.GetNumberCulture(Metadata);
+                    if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneDayBefore && nextRepeatDate.AddDays(-1) == today)
+                    {
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Tomorrow")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneWeekBefore && nextRepeatDate.AddDays(-7) <= today)
+                    {
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One week from now")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.OneMonthBefore && nextRepeatDate.AddMonths(-1) <= today)
+                    {
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("One month from now")));
+                    }
+                    else if (Metadata.TransactionRemindersThreshold == RemindersThreshold.TwoMonthsBefore && nextRepeatDate.AddMonths(-2) <= today)
+                    {
+                        TransactionReminders.Add(($"{pair.Value.Description} - {pair.Value.Amount.ToAmountString(culture, Configuration.Current.UseNativeDigits)}", _("Two months from now")));
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>

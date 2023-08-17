@@ -172,6 +172,13 @@ Adw.Window _root {
                     styles ["linked"]
                   }
                 }
+                
+                Adw.ComboRow _transactionRemindersRow {
+                  title: _("Transaction Reminders Threshold");
+                  model: Gtk.StringList {
+                    strings [_("Never"), _("One Day Before"), _("One Week Before"), _("One Month Before"), _("Two Months Before")]
+                  };
+                }
               }
 
               Gtk.Button _nextButton2 {

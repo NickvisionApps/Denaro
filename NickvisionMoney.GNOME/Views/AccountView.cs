@@ -3,6 +3,7 @@ using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.CheckButton _incomeCheck;
     [Gtk.Connect] private readonly Gtk.Label _expenseLabel;
     [Gtk.Connect] private readonly Gtk.CheckButton _expenseCheck;
+    [Gtk.Connect] private readonly Gtk.Button _remindersButton;
     [Gtk.Connect] private readonly Gtk.Button _resetOverviewFilterButton;
     [Gtk.Connect] private readonly Gtk.Button _toggleGroupsButton;
     [Gtk.Connect] private readonly Gtk.Button _resetGroupsFilterButton;
@@ -148,9 +150,11 @@ public partial class AccountView : Adw.Bin
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
-        _incomeCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateGroupFilterValue(-3, _incomeCheck.GetActive());
+        _incomeCheck.OnToggled += (sender, e) => _controller.UpdateGroupFilterValue(-3, _incomeCheck.GetActive());
         //Account Expense
-        _expenseCheck.OnToggled += (Gtk.CheckButton sender, EventArgs e) => _controller.UpdateGroupFilterValue(-2, _expenseCheck.GetActive());
+        _expenseCheck.OnToggled += (sender, e) => _controller.UpdateGroupFilterValue(-2, _expenseCheck.GetActive());
+        //Reminders
+        _remindersButton.OnClicked += OnTransactionReminders;
         //Button Reset Overview Filter
         _resetOverviewFilterButton.OnClicked += OnResetOverviewFilter;
         //Button Toggle Groups
@@ -424,6 +428,11 @@ public partial class AccountView : Adw.Bin
         OnToggleGroups();
         OnToggleTags();
         OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
+        if(_controller.TransactionReminders.Count > 0)
+        {
+            var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
+            remindersDialog.Present();
+        }
     }
 
     /// <summary>
@@ -453,6 +462,7 @@ public partial class AccountView : Adw.Bin
                     _incomeExpensePieImage.QueueDraw();
                     _incomeExpensePerGroupImage.QueueDraw();
                     _incomeExpensePerGroupPieImage.QueueDraw();
+                    _remindersButton.SetIconName(_controller.TransactionReminders.Count > 0 ? "bell-symbolic" : "bell-outline-symbolic");
                 }
                 else
                 {
@@ -613,7 +623,7 @@ public partial class AccountView : Adw.Bin
     {
         if (!_transactionRows.ContainsKey(e.Model.Id))
         {
-            var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.CultureForDateString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
+            var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
             row.EditTriggered += EditTransaction;
             row.IsSmall = _parentWindow.DefaultWidth < 450;
             row.SetVisible(e.Active);
@@ -667,7 +677,7 @@ public partial class AccountView : Adw.Bin
     {
         if (_transactionRows.ContainsKey(e.Model.Id))
         {
-            _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString, _controller.CultureForDateString);
+            _transactionRows[e.Model.Id].UpdateRow(e.Model, _controller.TransactionDefaultColor, _controller.CultureForNumberString);
             _transactionRows[e.Model.Id].SetVisible(e.Active);
         }
         else
@@ -1090,6 +1100,17 @@ public partial class AccountView : Adw.Bin
             dialog.Present();
         };
         groupDialog.Present();
+    }
+
+    /// <summary>
+    /// Occurs when the transaction reminders button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void OnTransactionReminders(Gtk.Button sender, EventArgs e)
+    {
+        var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
+        remindersDialog.Present();
     }
 
     /// <summary>

@@ -61,8 +61,8 @@
 		<p>Un color para la transacción. Puede configurarse para usar un color de grupo o un color único. Al seleccionar un color único, se establecerá por defecto el color seleccionado en la <link xref="configuration">configuración</link>, pero puede cambiarse a cualquier color.</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>Etiquetas</title>
+        <p>Una lista de etiquetas para la transacción. Una transacción puede tener un número ilimitado de etiquetas (o no tener etiquetas). Las etiquetas pueden contener cualquier carácter excepto una coma (<code>,</code>) y tener cualquier longitud, pero se espera que sean palabras clave cortas. Las etiquetas están destinadas a usarse para el filtrado adicional cuando el uso de los grupos no es suficiente. Las etiquetas solo se guardan en las transacciones mismas y, como un resultado, las etiquetas no usadas desaparecen automáticamente al cerrar la cuenta.</p>
     </item>
 	<item>
 		<title>Recibo</title>

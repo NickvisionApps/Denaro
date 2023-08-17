@@ -35,6 +35,10 @@
 		<p>Lorsque vous créerez une nouvelle transaction, son type par défaut sera le même que dans ce paramètre.</p>
 	</item>
 	<item>
+        <title>Transaction Reminders Threshold</title>
+        <p>The threshold used when showing reminders about upcoming transactions.</p>
+    </item>
+	<item>
 		<title>Devise du système</title>
 		<p>Chaque fois que l’application est lancée, elle récupère les données sur la monnaie et le format numérique de la langue locale de votre système ; ces données sont utilisées pour afficher le symbole monétaire (à moins qu’une devise personnalisée soit spécifiée, voir ci-dessous) et pour déterminer dans quel format les nombres seront acceptés comme des valeurs pour des montants de transactions. Quelques exemples :</p>
 		<list>
@@ -83,5 +87,9 @@
 		<title>Visibilité des groupes</title>
 		<p>Chaque compte enregistre l’état affiché ou masqué de la liste des groupes dans la fenêtre principale. Chaque fois que vous modifierez la visibilité de la liste des groupes, ce paramètre sera enregistré puis restauré à la prochaine ouverture.</p>
 	</item>
+	<item>
+        <title>Tags Visibility</title>
+        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+    </item>
 </terms>
 </page>

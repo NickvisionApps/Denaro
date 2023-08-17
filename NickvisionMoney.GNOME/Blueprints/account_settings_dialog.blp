@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window _root {
-  default-width: 420;
+  default-width: 440;
   modal: true;
   resizable: false;
   
@@ -57,7 +57,6 @@ Adw.Window _root {
 
                 Adw.ComboRow _accountTypeRow {
                   title: _("Account Type");
-                  subtitle-lines: 4;
                   model: Gtk.StringList {
                     strings [_("Checking"), _("Savings"), _("Business")]
                   };
@@ -81,6 +80,13 @@ Adw.Window _root {
 
                     styles ["linked"]
                   }
+                }
+                
+                Adw.ComboRow _transactionRemindersRow {
+                  title: _("Transaction Reminders Threshold");
+                  model: Gtk.StringList {
+                    strings [_("Never"), _("One Day Before"), _("One Week Before"), _("One Month Before"), _("Two Months Before")]
+                  };
                 }
               }
 
