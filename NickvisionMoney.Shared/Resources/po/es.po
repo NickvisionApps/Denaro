@@ -8,9 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:24-0400\n"
-"PO-Revision-Date: 2023-08-15 16:47+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2023-08-17 14:58+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/es/>\n"
 "Language: es\n"
@@ -500,11 +499,11 @@ msgstr "Nada que importar del archivo."
 
 #: ../../../Models/Account.cs:2178
 msgid "One month from now"
-msgstr ""
+msgstr "Dentro de un mes"
 
 #: ../../../Models/Account.cs:2174
 msgid "One week from now"
-msgstr ""
+msgstr "Dentro de una semana"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -670,7 +669,7 @@ msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2170
 msgid "Tomorrow"
-msgstr ""
+msgstr "Mañana"
 
 #: ../../../Models/Account.cs:1672
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -708,7 +707,7 @@ msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
 #: ../../../Models/Account.cs:2182
 msgid "Two months from now"
-msgstr ""
+msgstr "Dentro de dos meses"
 
 #: ../../../Models/Account.cs:1757
 msgid "Type"
@@ -772,9 +771,8 @@ msgid "Untagged"
 msgstr "Sin etiqueta"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1107
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Sin transacciones"
+msgstr "Próximas transacciones"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:951
 msgid "Update Only Source"
@@ -846,27 +844,27 @@ msgstr "Tipo de transacción predeterminado"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:177
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Umbral de recordatorios de las transacciones"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Day Before"
-msgstr ""
+msgstr "Un día antes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Week Before"
-msgstr ""
+msgstr "Una semana antes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Month Before"
-msgstr ""
+msgstr "Un mes antes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "Two Months Before"
-msgstr ""
+msgstr "Dos meses antes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -972,7 +970,7 @@ msgstr "Resumen de hoy"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Recordatorios"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1321,7 +1319,7 @@ msgstr "Borrar la carpeta de copia de seguridad"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Sin recordatorios"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"
