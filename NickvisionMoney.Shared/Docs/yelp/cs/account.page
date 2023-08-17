@@ -41,8 +41,8 @@
 		<p>Při vytváření nové transakce bude její typ ve výchozím nastavení stejný jako v tomto nastavení.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
-        <p>The threshold used when showing reminders about upcoming transactions.</p>
+        <title>Hranice pro připomenutí transakcí</title>
+        <p>Hranice použitá při zobrazování připomínek o nadcházejících transakcích.</p>
     </item>
 	<item>
 		<title>Systémová měna</title>
@@ -94,8 +94,8 @@
 		<p>Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato informace uložena a poté obnovena při opětovném otevření účtu.</p>
 	</item>
 	<item>
-        <title>Tags Visibility</title>
-        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+        <title>Viditelnost štítků</title>
+        <p>Každý účet ukládá informace o tom, zda je seznam štítků v hlavním okně skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu štítků, je tato informace uložena a poté obnovena při opětovném otevření účtu.</p>
     </item>
 </terms>
 </page>
