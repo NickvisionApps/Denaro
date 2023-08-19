@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 12:20-0400\n"
+"POT-Creation-Date: 2023-08-19 18:07+0300\n"
 "PO-Revision-Date: 2023-06-11 05:58+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -90,9 +90,9 @@ msgstr "Yeni bir işlem ekleyin veya bir dosyadan işlemleri içe aktarın."
 msgid "Add Password To PDF?"
 msgstr "PDFʼye Parola Eklensin mi?"
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:670
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -171,36 +171,36 @@ msgstr ""
 msgid "Currency"
 msgstr "Para Birimi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:228
 msgid "Currency Code"
 msgstr "Para Birimi Kodu"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:381
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 msgid "Currency Code (Empty)"
 msgstr "Para Birimi Kodu (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:345
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:224
 msgid "Currency Symbol"
 msgstr "Para Birimi Simgesi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 msgid "Currency Symbol (Empty)"
 msgstr "Para Birimi Simgesi (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:375
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:401
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 msgid "Currency Symbol (Invalid)"
 msgstr "Para Birimi Simgesi (Geçersiz)"
 
@@ -217,22 +217,22 @@ msgstr "Tarih"
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:349
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:232
 msgid "Decimal Separator"
 msgstr "Ondalık Ayırıcı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 msgid "Decimal Separator (Empty)"
 msgstr "Ondalık Ayırıcı (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:393
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 msgid "Decimal Separator (Invalid)"
 msgstr "Ondalık Ayırıcı (Geçersiz)"
 
@@ -358,17 +358,17 @@ msgstr "Grup"
 msgid "Group Name"
 msgstr "Grup Adı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:351
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:195
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:248
 msgid "Group Separator"
 msgstr "Grup Ayırıcı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:395
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 msgid "Group Separator (Invalid)"
 msgstr "Grup Ayırıcı (Geçersiz)"
 
@@ -759,11 +759,11 @@ msgstr "Açılmış bir hesabın üzerine yazılamıyor."
 msgid "Unable to overwrite an opened account."
 msgstr "Açılmış bir hesabın üzerine yazılamıyor."
 
-#: ../../../Controllers/TransactionDialogController.cs:89
-#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Controllers/AccountViewController.cs:449
 #: ../../../Controllers/AccountViewController.cs:825
 #: ../../../Controllers/AccountViewController.cs:940
+#: ../../../Controllers/TransactionDialogController.cs:89
+#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Models/Account.cs:510 ../../../Models/Account.cs:1740
 #: ../../../Models/Account.cs:1822 ../../../Models/Account.cs:1968
 #: ../../../Models/Account.cs:1969 ../../../Models/Account.cs:1973
@@ -823,8 +823,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Evet"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:111
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 msgid "Your system reported that your currency is"
 msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
 
@@ -960,6 +960,10 @@ msgstr "Kaldır"
 msgid "Transfer Money"
 msgstr "Para Aktarımı"
 
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
+msgid "CSV"
+msgstr ""
+
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
 msgid "Export All Information"
@@ -969,6 +973,10 @@ msgstr "Tüm Bilgileri Dışa Aktar"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:24
 msgid "Export Current View"
 msgstr "Geçerli Görünümü Dışa Aktar"
+
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
+msgid "PDF"
+msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -1418,6 +1426,10 @@ msgstr "Grup rengini kullan"
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:192
 msgid "Use unique color"
 msgstr "Benzersiz renk kullan"
+
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
+msgid "Enter a new tag name..."
+msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"

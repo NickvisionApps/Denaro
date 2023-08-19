@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 12:20-0400\n"
+"POT-Creation-Date: 2023-08-19 18:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,9 +88,9 @@ msgstr "Dodaj novu transakciju ili uvezi transakciju iz datoteke."
 msgid "Add Password To PDF?"
 msgstr "PDF-u dodati lozinku?"
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:670
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 msgid "All files"
 msgstr "Sve datoteke"
 
@@ -166,36 +166,36 @@ msgstr ""
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:228
 msgid "Currency Code"
 msgstr "Kôd valute"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:381
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 msgid "Currency Code (Empty)"
 msgstr "Kôd valute (prazno)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:345
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:224
 msgid "Currency Symbol"
 msgstr "Znak valute"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 msgid "Currency Symbol (Empty)"
 msgstr "Znak valute (prazno)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:375
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:401
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 msgid "Currency Symbol (Invalid)"
 msgstr "Znak valute (neispravno)"
 
@@ -212,22 +212,22 @@ msgstr "Datum"
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:349
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:232
 msgid "Decimal Separator"
 msgstr "Decimalni znak"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 msgid "Decimal Separator (Empty)"
 msgstr "Decimalni znak (prazan)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:393
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 msgid "Decimal Separator (Invalid)"
 msgstr "Decimalni znak (neispravan)"
 
@@ -354,17 +354,17 @@ msgstr "Grupa"
 msgid "Group Name"
 msgstr "Ime grupe"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:351
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:195
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:248
 msgid "Group Separator"
 msgstr "Znak odvajanja grupe"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:395
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 msgid "Group Separator (Invalid)"
 msgstr "Znak odvajanja grupe (neispravan)"
 
@@ -751,11 +751,11 @@ msgstr "Nije moguće prepisati otvoreni račun."
 msgid "Unable to overwrite an opened account."
 msgstr "Nije moguće prepisati otvoreni račun."
 
-#: ../../../Controllers/TransactionDialogController.cs:89
-#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Controllers/AccountViewController.cs:449
 #: ../../../Controllers/AccountViewController.cs:825
 #: ../../../Controllers/AccountViewController.cs:940
+#: ../../../Controllers/TransactionDialogController.cs:89
+#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Models/Account.cs:510 ../../../Models/Account.cs:1740
 #: ../../../Models/Account.cs:1822 ../../../Models/Account.cs:1968
 #: ../../../Models/Account.cs:1969 ../../../Models/Account.cs:1973
@@ -815,8 +815,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Da"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:111
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 msgid "Your system reported that your currency is"
 msgstr "Tvoj sustav je prijavio da je tvoja valuta"
 
@@ -952,6 +952,10 @@ msgstr "Ukloni"
 msgid "Transfer Money"
 msgstr "Transferiraj novac"
 
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
+msgid "CSV"
+msgstr ""
+
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
 msgid "Export All Information"
@@ -961,6 +965,10 @@ msgstr "Izvezi sve informacije"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:24
 msgid "Export Current View"
 msgstr "Izvezi trenutačni prikaz"
+
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
+msgid "PDF"
+msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -1421,6 +1429,10 @@ msgstr "Koristi boju grupe"
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:192
 msgid "Use unique color"
 msgstr "Koristi jedinstvenu boju"
+
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
+msgid "Enter a new tag name..."
+msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
