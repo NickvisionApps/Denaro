@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 12:20-0400\n"
+"POT-Creation-Date: 2023-08-19 18:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,9 +88,9 @@ msgstr "Tilføj en ny overførsel eller importer overførsler fra en fil."
 msgid "Add Password To PDF?"
 msgstr ""
 
+#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:670
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 msgid "All files"
 msgstr "Alle filer"
 
@@ -166,36 +166,36 @@ msgstr ""
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:327
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:228
 msgid "Currency Code"
 msgstr "Valutakode"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:381
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:352
 msgid "Currency Code (Empty)"
 msgstr "Valutakode (tom)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:345
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:325
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:224
 msgid "Currency Symbol"
 msgstr "Valuta symbol"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:342
 msgid "Currency Symbol (Empty)"
 msgstr "Valuta symbol (tom)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:375
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:401
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:347
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:376
 #, fuzzy
 msgid "Currency Symbol (Invalid)"
 msgstr "Valuta symbol (tom)"
@@ -213,24 +213,24 @@ msgstr "Dato"
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:349
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:232
 #, fuzzy
 msgid "Decimal Separator"
 msgstr "Indsæt decimal-seperator"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:387
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
 #, fuzzy
 msgid "Decimal Separator (Empty)"
 msgstr "Indsæt decimal-seperator"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:393
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:362
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #, fuzzy
 msgid "Decimal Separator (Invalid)"
 msgstr "Indsæt decimal-seperator"
@@ -358,17 +358,17 @@ msgstr "Gruppe"
 msgid "Group Name"
 msgstr "Gruppenavn"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:351
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:331
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:195
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:248
 msgid "Group Separator"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:395
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:364
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:378
 #, fuzzy
 msgid "Group Separator (Invalid)"
 msgstr "Beløb (ugyldig)"
@@ -758,11 +758,11 @@ msgstr "Ude af stand til at overskrive en åbnet konto."
 msgid "Unable to overwrite an opened account."
 msgstr "Ude af stand til at overskrive en åbnet konto."
 
-#: ../../../Controllers/TransactionDialogController.cs:89
-#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Controllers/AccountViewController.cs:449
 #: ../../../Controllers/AccountViewController.cs:825
 #: ../../../Controllers/AccountViewController.cs:940
+#: ../../../Controllers/TransactionDialogController.cs:89
+#: ../../../Controllers/TransactionDialogController.cs:334
 #: ../../../Models/Account.cs:510 ../../../Models/Account.cs:1740
 #: ../../../Models/Account.cs:1822 ../../../Models/Account.cs:1968
 #: ../../../Models/Account.cs:1969 ../../../Models/Account.cs:1973
@@ -819,8 +819,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:111
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:197
 msgid "Your system reported that your currency is"
 msgstr "Dit system fortalte at din valuta er"
 
@@ -954,6 +954,10 @@ msgstr "Fjern"
 msgid "Transfer Money"
 msgstr "Overfør penge"
 
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
+msgid "CSV"
+msgstr ""
+
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
 msgid "Export All Information"
@@ -964,6 +968,10 @@ msgstr ""
 #, fuzzy
 msgid "Export Current View"
 msgstr "Eksporter til fil"
+
+#: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
+msgid "PDF"
+msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -1425,6 +1433,10 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:192
 msgid "Use unique color"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
+msgid "Enter a new tag name..."
 msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
