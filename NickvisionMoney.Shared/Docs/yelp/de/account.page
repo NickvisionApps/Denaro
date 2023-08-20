@@ -41,7 +41,7 @@
 		<p>Wenn Sie eine neue Transaktion erstellen, ist ihr Typ standardmäßig derselbe wie in dieser Einstellung.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
+        <title>Schwellenwert für Überweisungserinnerungen</title>
         <p>The threshold used when showing reminders about upcoming transactions.</p>
     </item>
 	<item>

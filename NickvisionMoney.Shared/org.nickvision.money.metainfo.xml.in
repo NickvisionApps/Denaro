@@ -47,16 +47,8 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.8.0" date="2023-08-18">
+    <release version="2023.8.1-next" date="2023-08-18">
       <description translatable="no">
-        <p>- Added graph visuals to the Account view as well as in exported PDFs</p>
-        <p>- Added tags that can be used with transactions for finer management and filtering</p>
-        <p>- Added the option to select the entire current month as the date range filter </p>
-        <p>- Added reminders for upcoming transactions</p>
-        <p>- Improved the transaction description suggestion algorithm with fuzzy search</p>
-        <p>- Fixed an issue where the help button in the import toast was not working</p>
-        <p>- Fixed an issue where Denaro would crash if an account had incorrect formatted metadata</p>
-        <p>- Fixed an issue where docs were not available when running Denaro via snap</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
