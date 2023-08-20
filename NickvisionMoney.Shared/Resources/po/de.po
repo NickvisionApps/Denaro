@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 18:07+0300\n"
-"PO-Revision-Date: 2023-08-12 17:19+0000\n"
-"Last-Translator: Jummit <jummit@web.de>\n"
+"PO-Revision-Date: 2023-08-20 18:26+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "app/de/>\n"
 "Language: de\n"
@@ -497,11 +497,11 @@ msgstr ""
 
 #: ../../../Models/Account.cs:2200
 msgid "One month from now"
-msgstr ""
+msgstr "In einem Monat ab jetzt"
 
 #: ../../../Models/Account.cs:2196
 msgid "One week from now"
-msgstr ""
+msgstr "In einer Woche ab jetzt"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -667,7 +667,7 @@ msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2192
 msgid "Tomorrow"
-msgstr ""
+msgstr "Morgen"
 
 #: ../../../Models/Account.cs:1684
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -705,7 +705,7 @@ msgstr "Jummit"
 
 #: ../../../Models/Account.cs:2204
 msgid "Two months from now"
-msgstr ""
+msgstr "In zwei Monaten"
 
 #: ../../../Models/Account.cs:1769
 msgid "Type"
@@ -726,9 +726,8 @@ msgstr ""
 "Datei hat und versuchen Sie es erneut."
 
 #: ../../../Controllers/AccountViewController.cs:969
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr "Füge eine neue Überweisung hinzu oder importiere eine von einer Datei."
+msgstr "Es können keine Überweisungen aus der Datei importiert werden."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
@@ -773,9 +772,8 @@ msgstr "Nicht gekennzeichnet"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:433
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1112
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Keine Überweisungen"
+msgstr "Bevorstehende Überweisungen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:956
 msgid "Update Only Source"
@@ -847,27 +845,27 @@ msgstr "Standard-Transaktionsart"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:177
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Schwellenwert für Überweisungserinnerungen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Day Before"
-msgstr ""
+msgstr "Einen Tag vorher"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Week Before"
-msgstr ""
+msgstr "Eine Woche vorher"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Month Before"
-msgstr ""
+msgstr "Einen Monat vorher"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "Two Months Before"
-msgstr ""
+msgstr "Zwei Monate vorher"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -956,7 +954,7 @@ msgstr "Geld Überweisen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
@@ -970,7 +968,7 @@ msgstr "Aktuelle Ansicht exportieren"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -983,7 +981,7 @@ msgstr "Heutige Übersicht"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Erinnerungen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1333,7 +1331,7 @@ msgstr "Setze Sicherungs-Ordner zurück"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Keine Erinnerungen"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"

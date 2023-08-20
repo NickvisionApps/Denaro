@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 18:07+0300\n"
-"PO-Revision-Date: 2023-08-17 14:58+0000\n"
+"PO-Revision-Date: 2023-08-20 18:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -951,7 +951,7 @@ msgstr "Převod peněz"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
@@ -965,7 +965,7 @@ msgstr "Exportovat aktuální zobrazení"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -1410,7 +1410,7 @@ msgstr "Použít unikátní barvu"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
 msgid "Enter a new tag name..."
-msgstr ""
+msgstr "Zadejte nový název štítku..."
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"

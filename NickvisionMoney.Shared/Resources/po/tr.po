@@ -36,8 +36,8 @@ msgstr "{0} / {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} etiket"
+msgstr[1] "{0} tags"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:457
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1332
@@ -53,14 +53,12 @@ msgid "Account Name"
 msgstr "Hesap Adı"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:279
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "Ad (Var)"
+msgstr "Hesap Adı (Var)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:274
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "Hesap Açılmadı"
+msgstr "Hesap Adı (Açıldı)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:70
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:458
@@ -159,11 +157,8 @@ msgid "Checking"
 msgstr "Çek"
 
 #: ../../../Controllers/MainWindowController.cs:106
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"Contributors on GitHub ❤️ {1}"
+msgstr "Github Katkıcıları ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:118
 #: ../../../Models/Account.cs:1705
@@ -206,7 +201,7 @@ msgstr "Para Birimi Simgesi (Geçersiz)"
 
 #: ../../../Controllers/MainWindowController.cs:109
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Models/Account.cs:1767
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
@@ -215,7 +210,7 @@ msgstr "Tarih"
 
 #: ../../../Controllers/MainWindowController.cs:110
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:349
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:329
@@ -324,7 +319,7 @@ msgstr "Hesap dosyaya başarıyla dışa aktarıldı."
 
 #: ../../../Controllers/MainWindowController.cs:108
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: ../../../Models/Account.cs:1654
 #, csharp-format
@@ -389,9 +384,8 @@ msgid "Id"
 msgstr "Id"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:392
-#, fuzzy
 msgid "Import from Account"
-msgstr "Dosyadan İçe Aktar"
+msgstr "Hesaptan İçe Aktar"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:722
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -459,7 +453,7 @@ msgstr "Asla"
 #: ../../../Controllers/MainWindowController.cs:105
 #: ../../../Controllers/MainWindowController.cs:107
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
@@ -498,15 +492,15 @@ msgstr "Notlar"
 
 #: ../../../Controllers/AccountViewController.cs:974
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Dosyadan içe aktarılacak bir şey yok."
 
 #: ../../../Models/Account.cs:2200
 msgid "One month from now"
-msgstr ""
+msgstr "Bu günden, bir ay sonra"
 
 #: ../../../Models/Account.cs:2196
 msgid "One week from now"
-msgstr ""
+msgstr "Bu günden, bir hafta sonra"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -599,7 +593,7 @@ msgstr "Kimliğe Göre Sırala"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:184
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Etiketler"
 
 #: ../../../Controllers/AccountViewController.cs:577
 msgid "The password of the account was changed."
@@ -638,7 +632,6 @@ msgid "This account is already opened."
 msgstr "Bu hesap zaten açıldı."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:984
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -649,8 +642,8 @@ msgstr ""
 "Bu işlem bir kaynak tekrarlama işlemidir.\n"
 "Tekrarlanan işlemlerle ne yapmak istersiniz?\n"
 "\n"
-"Yalnızca kaynak işlemin silinmesi, bireysel olarak oluşturulan işlemlerin "
-"düzenlenebilir olmasını sağlayacaktır."
+"Yalnızca kaynak işlemin silinmesi, bireysel olarak oluşturulan\n"
+"işlemlerin düzenlenebilir olmasını sağlayacaktır."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:951
 msgid ""
@@ -668,11 +661,11 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:111
 msgid "Tobias Bernard"
-msgstr ""
+msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2192
 msgid "Tomorrow"
-msgstr ""
+msgstr "Yarın"
 
 #: ../../../Models/Account.cs:1684
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -712,7 +705,7 @@ msgstr ""
 
 #: ../../../Models/Account.cs:2204
 msgid "Two months from now"
-msgstr ""
+msgstr "Bu günden, iki ay sonra"
 
 #: ../../../Models/Account.cs:1769
 msgid "Type"
@@ -728,13 +721,12 @@ msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
-"Dosyadan bilgiler içe aktarılamadı. Lütfen uygulamanın dosyaya erişim izni "
+"Dosyadan bilgiler içe aktarılamıyor. Lütfen uygulamanın dosyaya erişim izni "
 "olduğundan emin olun ve tekrar deneyin."
 
 #: ../../../Controllers/AccountViewController.cs:969
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr "Yeni bir işlem ekleyin veya bir dosyadan işlemleri içe aktarın."
+msgstr "İşlemler dosyadan içe aktarılamıyor."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
@@ -746,16 +738,14 @@ msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
-"Hesap açılamadı. Uygulamanın dosyaya erişim izni olduğundan emin olun ve "
+"Hesap açılamıyor. Uygulamanın dosyaya erişim izni olduğundan emin olun ve "
 "tekrar deneyin."
 
 #: ../../../Controllers/MainWindowController.cs:275
-#, fuzzy
 msgid "Unable to overwrite an existing account."
-msgstr "Açılmış bir hesabın üzerine yazılamıyor."
+msgstr "Var olan hesabın üzerine yazılamıyor."
 
 #: ../../../Controllers/MainWindowController.cs:264
-#, fuzzy
 msgid "Unable to overwrite an opened account."
 msgstr "Açılmış bir hesabın üzerine yazılamıyor."
 
@@ -775,13 +765,12 @@ msgstr "Grupsuz"
 #: ../../../Controllers/AccountViewController.cs:1145
 #: ../../../Models/Account.cs:113
 msgid "Untagged"
-msgstr ""
+msgstr "Etiketsiz"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:433
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1112
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "İşlem Yok"
+msgstr "Yaklaşan işlemler"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:956
 msgid "Update Only Source"
@@ -853,27 +842,27 @@ msgstr "Öntanımlı İşlem Türü"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:177
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "İşlem Hatırlatma Eşiği"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Day Before"
-msgstr ""
+msgstr "Bir Gün Önce"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Week Before"
-msgstr ""
+msgstr "Bir Hafta Önce"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "One Month Before"
-msgstr ""
+msgstr "Bir Ay Önce"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:179
 msgid "Two Months Before"
-msgstr ""
+msgstr "İki Ay Önce"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -892,13 +881,11 @@ msgstr "Özel Para Birimi Kullan"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:197
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:234
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:250
-#, fuzzy
 msgid "Other"
 msgstr "Diğer"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:197
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:250
-#, fuzzy
 msgid "None"
 msgstr "Hiçbiri"
 
@@ -910,27 +897,27 @@ msgstr "Ondalık Basamaklar"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
 msgid "Two"
-msgstr ""
+msgstr "İki"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
 msgid "Three"
-msgstr ""
+msgstr "Üç"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
 msgid "Four"
-msgstr ""
+msgstr "Dört"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
 msgid "Five"
-msgstr ""
+msgstr "Beş"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
 msgid "Six"
-msgstr ""
+msgstr "Altı"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:266
@@ -989,7 +976,7 @@ msgstr "Bugünün Genel Görünümü"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Hatırlatıcılar"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1022,19 +1009,16 @@ msgid "Unselect Groups Filters"
 msgstr "Tüm Grup Süzgeçlerinin Seçimini Kaldır"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:187
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Grupların Görünürlüğünü Değiştir"
+msgstr "Etiketlerin Görünürlüğünü Değiştir"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Tüm Grup Süzgeçlerini Seç"
+msgstr "Tüm Etiket Süzgeçlerini Seç"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:202
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Tüm Grup Süzgeçlerinin Seçimini Kaldır"
+msgstr "Etiket Süzgeçlerinin Seçimini Kaldır"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:225
 msgid "Calendar"
@@ -1042,7 +1026,7 @@ msgstr "Takvim"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:230
 msgid "Select Current Month"
-msgstr ""
+msgstr "Geçerli Ayı Seç"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:236
 msgid "Reset To Today"
@@ -1068,7 +1052,7 @@ msgstr "Bitiş"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:354
 msgid "Visualize"
-msgstr ""
+msgstr "Görselleştir"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:372
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:122
@@ -1144,9 +1128,8 @@ msgid "Folder"
 msgstr "Klasör"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:107
-#, fuzzy
 msgid "Overwrite Existing Accounts"
-msgstr "Hedef Hesap"
+msgstr "Var Olan Hesapların Üzerine Yaz"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:139
 msgid "Account Options"
@@ -1162,30 +1145,28 @@ msgid "Account Currency"
 msgstr "Hesap Para Birimi"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:293
-#, fuzzy
 msgid "Import Existing Information"
-msgstr "Tüm Bilgileri Dışa Aktar"
+msgstr "Var Olan Bilgileri İçe Aktar"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:302
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
+"Var olan bilgileri yeni hesaba içe aktarmak için kullanılacak geçerli bir "
+"dosya yükleyin."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:309
-#, fuzzy
 msgid "Import File"
-msgstr "Dosyadan İçe Aktar"
+msgstr "Dosya İçe Aktar"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:316
-#, fuzzy
 msgid "Select File"
-msgstr "Klasör Seç"
+msgstr "Dosya Seç"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:326
-#, fuzzy
 msgid "Clear File"
-msgstr "Yedekleme Klasörünü Temizle"
+msgstr "Dosya Temizle"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:337
 msgid "Create"
@@ -1341,7 +1322,7 @@ msgstr "Yedekleme Klasörünü Temizle"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Hatırlatıcı Yok"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"
@@ -1433,7 +1414,7 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Etiket Ekle"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
@@ -1519,7 +1500,7 @@ msgstr "Son Hesap Yok"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:112
 msgid "Toggle Graphs"
-msgstr ""
+msgstr "Grafikleri Aç/Kapa"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:122
 msgid "Main Menu"
@@ -1538,9 +1519,10 @@ msgstr ""
 "tarayıcınızdan uygulamaya da sürükleyebilirsiniz."
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
-#, fuzzy
 msgid "money;finance;wallet;cash;bank;Nickvision;"
-msgstr "para;finans;cüzdan;nakit;banka;GTK;Nickvision;"
+msgstr ""
+"para;finans;cüzdan;nakit;banka;Nickvision;money;finance;wallet;cash;bank;"
+"Nickvision;"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
