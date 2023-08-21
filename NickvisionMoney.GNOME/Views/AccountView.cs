@@ -470,6 +470,7 @@ public partial class AccountView : Adw.Bin
                     _noTransactionsStatusPage.SetTitle(_("No Transactions Found"));
                     _noTransactionsStatusPage.SetDescription(_("No transactions match the specified filters."));
                 }
+                _selectMonthButton.SetSensitive(true);
                 _rangeExpander.SetSensitive(true);
             }
             else
@@ -478,6 +479,7 @@ public partial class AccountView : Adw.Bin
                 _viewStack.SetVisibleChildName("no-transactions");
                 _noTransactionsStatusPage.SetTitle(_("No Transactions"));
                 _noTransactionsStatusPage.SetDescription(_("Add a new transaction or import transactions from a file."));
+                _selectMonthButton.SetSensitive(false);
                 _rangeExpander.SetSensitive(false);
             }
             _isAccountLoading = false;
