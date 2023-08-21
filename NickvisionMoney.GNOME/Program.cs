@@ -44,6 +44,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where selecting the current month on an empty account in the calendar would crash Denaro
+              * Improved UI/UX
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
