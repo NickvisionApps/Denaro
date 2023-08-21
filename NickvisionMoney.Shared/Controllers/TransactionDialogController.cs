@@ -187,7 +187,10 @@ public class TransactionDialogController : IDisposable
         }
         if (disposing)
         {
-            Transaction.Dispose();
+            if (IsEditing)
+            {
+                Transaction.Dispose();
+            }
         }
         var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
         if (File.Exists(jpgPath))
