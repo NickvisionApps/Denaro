@@ -38,7 +38,6 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
-    private readonly string _transactionDefaultColor;
     private readonly Dictionary<uint, Transaction> _transactions;
     private readonly Dictionary<uint, Group> _groups;
 
@@ -50,6 +49,10 @@ public class TransactionDialogController : IDisposable
     /// The transaction represented by the controller
     /// </summary>
     public Transaction Transaction { get; init; }
+    /// <summary>
+    /// The default color for transactions
+    /// </summary>
+    public string DefaultTransactionColor { get; init; }
     /// <summary>
     /// The list of tags in the account
     /// </summary>
@@ -101,7 +104,7 @@ public class TransactionDialogController : IDisposable
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
-        _transactionDefaultColor = transactionDefaultColor;
+        DefaultTransactionColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
         Transaction = (Transaction)transaction.Clone();
@@ -113,7 +116,7 @@ public class TransactionDialogController : IDisposable
         CultureForNumberString = cultureNumber;
         if (string.IsNullOrEmpty(Transaction.RGBA))
         {
-            Transaction.RGBA = _transactionDefaultColor;
+            Transaction.RGBA = DefaultTransactionColor;
         }
         AccountTags.Remove(AccountTags[0]); //remove untagged
     }
@@ -131,7 +134,7 @@ public class TransactionDialogController : IDisposable
     internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
-        _transactionDefaultColor = transactionDefaultColor;
+        DefaultTransactionColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
         AccountTags = new List<string>(accountTags);
@@ -143,7 +146,7 @@ public class TransactionDialogController : IDisposable
         CultureForNumberString = cultureNumber;
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
-        Transaction.RGBA = transactionDefaultColor;
+        Transaction.RGBA = DefaultTransactionColor;
         AccountTags.Remove(AccountTags[0]); //remove untagged
     }
     

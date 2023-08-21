@@ -300,6 +300,10 @@ public partial class TransactionDialog : Adw.Window
                 {
                     _colorDropDown.SetSelected(1);
                 }
+                else
+                {
+                    _colorDropDown.SetSelected(_controller.Transaction.RGBA == _controller.DefaultTransactionColor ? 0u : 1u);
+                }
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 if (!_constructing)
                 {
