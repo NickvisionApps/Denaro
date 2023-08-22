@@ -1,3 +1,4 @@
+using Nickvision.Aura.Keyring;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
@@ -37,6 +38,7 @@ public partial class AccountSettingsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordConfirmRow;
+    [Gtk.Connect] private readonly Gtk.LevelBar _passwordStrengthBar;
     [Gtk.Connect] private readonly Gtk.Button _removePasswordButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
@@ -243,6 +245,7 @@ public partial class AccountSettingsDialog : Adw.Window
             {
                 if (!_constructing)
                 {
+                    ShowPasswordStrength();
                     Validate();
                 }
             }
@@ -257,6 +260,8 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
+        _passwordStrengthBar.SetMinValue((double)PasswordStrength.Blank);
+        _passwordStrengthBar.SetMaxValue((double)PasswordStrength.VeryStrong);
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Apply Button
@@ -417,6 +422,16 @@ public partial class AccountSettingsDialog : Adw.Window
             }
             _applyButton.SetSensitive(false);
         }
+    }
+
+    /// <summary>
+    /// Calculates and shows the password's strength
+    /// </summary>
+    private void ShowPasswordStrength()
+    {
+        var strength = Credential.GetPasswordStrength(_newPasswordRow.GetText());
+        Console.WriteLine(strength.ToString());
+        _passwordStrengthBar.SetValue((double)strength);
     }
 
     /// <summary>

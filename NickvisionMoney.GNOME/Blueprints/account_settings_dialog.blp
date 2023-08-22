@@ -232,6 +232,16 @@ Adw.Window _root {
                 Adw.PasswordEntryRow _newPasswordConfirmRow {
                   title: _("Confirm Password");
                 }
+                
+                Adw.ActionRow {
+                  title: _("Password Strength");
+                  
+                  [suffix]
+                  Gtk.LevelBar _passwordStrengthBar {
+                    hexpand: true;
+                    valign: center;
+                  }
+                }
 
                 Adw.ActionRow {
                   subtitle: _("If the password is lost, there is no way to restore the file!");
