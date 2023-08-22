@@ -38,7 +38,6 @@ public enum TransactionCheckStatus
 public class TransactionDialogController : IDisposable
 {
     private bool _disposed;
-    private readonly string _transactionDefaultColor;
     private readonly Dictionary<uint, Transaction> _transactions;
     private readonly Dictionary<uint, Group> _groups;
 
@@ -50,6 +49,10 @@ public class TransactionDialogController : IDisposable
     /// The transaction represented by the controller
     /// </summary>
     public Transaction Transaction { get; init; }
+    /// <summary>
+    /// The default color for transactions
+    /// </summary>
+    public string DefaultTransactionColor { get; init; }
     /// <summary>
     /// The list of tags in the account
     /// </summary>
@@ -101,7 +104,7 @@ public class TransactionDialogController : IDisposable
     internal TransactionDialogController(Transaction transaction, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, bool canCopy, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
-        _transactionDefaultColor = transactionDefaultColor;
+        DefaultTransactionColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
         Transaction = (Transaction)transaction.Clone();
@@ -113,7 +116,7 @@ public class TransactionDialogController : IDisposable
         CultureForNumberString = cultureNumber;
         if (string.IsNullOrEmpty(Transaction.RGBA))
         {
-            Transaction.RGBA = _transactionDefaultColor;
+            Transaction.RGBA = DefaultTransactionColor;
         }
         AccountTags.Remove(AccountTags[0]); //remove untagged
     }
@@ -131,7 +134,7 @@ public class TransactionDialogController : IDisposable
     internal TransactionDialogController(uint id, Dictionary<uint, Transaction> transactions, Dictionary<uint, Group> groups, List<string> accountTags, TransactionType transactionDefaultType, string transactionDefaultColor, CultureInfo cultureNumber)
     {
         _disposed = false;
-        _transactionDefaultColor = transactionDefaultColor;
+        DefaultTransactionColor = transactionDefaultColor;
         _transactions = transactions;
         _groups = groups;
         AccountTags = new List<string>(accountTags);
@@ -143,7 +146,7 @@ public class TransactionDialogController : IDisposable
         CultureForNumberString = cultureNumber;
         //Set Defaults For New Transaction
         Transaction.Type = transactionDefaultType;
-        Transaction.RGBA = transactionDefaultColor;
+        Transaction.RGBA = DefaultTransactionColor;
         AccountTags.Remove(AccountTags[0]); //remove untagged
     }
     
@@ -184,12 +187,15 @@ public class TransactionDialogController : IDisposable
         }
         if (disposing)
         {
-            Transaction.Dispose();
-        }
-        var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (File.Exists(jpgPath))
-        {
-            File.Delete(jpgPath);
+            if (IsEditing)
+            {
+                Transaction.Dispose();
+            }
+            var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            if (File.Exists(jpgPath))
+            {
+                File.Delete(jpgPath);
+            }
         }
         _disposed = true;
     }
@@ -231,46 +237,46 @@ public class TransactionDialogController : IDisposable
     }
 
     /// <summary>
-    /// Opens the receipt image of the transaction in the default viewer application
+    /// Gets an Image object for a file
     /// </summary>
-    /// <param name="receiptPath">A possible path of a new receipt image</param>
-    public async Task OpenReceiptImageAsync(string? receiptPath = null)
+    /// <param name="path">The image file path</param>
+    /// <returns>Image?</returns>
+    public async Task<Image?> GetImageFromPathAsync(string? path)
     {
-        Image? image = null;
-        if (receiptPath != null)
+        if (File.Exists(path))
         {
-            if (File.Exists(receiptPath))
+            if (Path.GetExtension(path).ToLower() == ".jpeg" || Path.GetExtension(path).ToLower() == ".jpg" || Path.GetExtension(path).ToLower() == ".png")
             {
-                if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
-                {
-                    image = await Image.LoadAsync(receiptPath);
-                }
-                else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
-                {
-                    image = ConvertPDFToJPEG(receiptPath);
-                }
+                return await Image.LoadAsync(path);
+            }
+            if (Path.GetExtension(path).ToLower() == ".pdf")
+            {
+                using var library = DocLib.Instance;
+                using var docReader = library.GetDocReader(path, new PageDimensions(1080, 1920));
+                using var pageReader = docReader.GetPageReader(0);
+                return Image.LoadPixelData<Bgra32>(pageReader.GetImage(new NaiveTransparencyRemover(255, 255, 255)), pageReader.GetPageWidth(), pageReader.GetPageHeight());
             }
         }
-        else
+        return null;
+    }
+
+    /// <summary>
+    /// Opens the receipt image of the transaction in the default viewer application
+    /// </summary>
+    public async Task OpenReceiptImageAsync()
+    {
+        if (Transaction.Receipt != null)
         {
-            image = Transaction.Receipt;
-        }
-        if (image != null)
-        {
-            var jpgPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-            await image.SaveAsJpegAsync(jpgPath);
+            var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            await Transaction.Receipt.SaveAsJpegAsync(jpgPath);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Process.Start(new ProcessStartInfo("explorer", $"\"{jpgPath}\"") { CreateNoWindow = true });
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Process.Start(new ProcessStartInfo("xdg-open", jpgPath));
+                Process.Start(new ProcessStartInfo("xdg-open", $"\"{jpgPath}\""));
             }
-        }
-        if (receiptPath != null)
-        {
-            image?.Dispose();
         }
     }
 
@@ -286,11 +292,11 @@ public class TransactionDialogController : IDisposable
     /// <param name="useGroupColor">Whether or not to use the group's color instead of the transaction's color</param>
     /// <param name="tags">List of transaction tags</param>
     /// <param name="amountString">The new amount string</param>
-    /// <param name="receiptPath">The new receipt image path</param>
+    /// <param name="receipt">The new receipt image</param>
     /// <param name="repeatEndDate">The new repeat end date DateOnly object</param>
     /// <param name="notes">The new notes</param>
     /// <returns>TransactionCheckStatus</returns>
-    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, List<string> tags, string amountString, string? receiptPath, DateOnly? repeatEndDate, string notes)
+    public TransactionCheckStatus UpdateTransaction(DateOnly date, string description, TransactionType type, int selectedRepeat, string groupName, string rgba, bool useGroupColor, List<string> tags, string amountString, Image? receipt, DateOnly? repeatEndDate, string notes)
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
@@ -335,27 +341,10 @@ public class TransactionDialogController : IDisposable
         Transaction.RGBA = rgba;
         Transaction.UseGroupColor = useGroupColor;
         Transaction.Tags = tags;
-        Transaction.Receipt = null;
-        if (receiptPath != null)
+        if (Transaction.Receipt != receipt)
         {
-            try
-            {
-                if (Path.Exists(receiptPath))
-                {
-                    if (Path.GetExtension(receiptPath).ToLower() == ".jpeg" || Path.GetExtension(receiptPath).ToLower() == ".jpg" || Path.GetExtension(receiptPath).ToLower() == ".png")
-                    {
-                        Transaction.Receipt = Image.Load(receiptPath);
-                    }
-                    else if (Path.GetExtension(receiptPath).ToLower() == ".pdf")
-                    {
-                        Transaction.Receipt = ConvertPDFToJPEG(receiptPath);
-                    }
-                }
-            }
-            catch
-            {
-                return TransactionCheckStatus.CannotAccessReceipt;
-            }
+            Transaction.Receipt?.Dispose();
+            Transaction.Receipt = receipt;
         }
         if (Transaction.RepeatInterval == TransactionRepeatInterval.Never)
         {
@@ -368,18 +357,5 @@ public class TransactionDialogController : IDisposable
         Transaction.RepeatEndDate = Transaction.RepeatInterval == TransactionRepeatInterval.Never ? null : repeatEndDate;
         Transaction.Notes = notes;
         return TransactionCheckStatus.Valid;
-    }
-
-    /// <summary>
-    /// Converts a PDF to a JPEG Image
-    /// </summary>
-    /// <param name="pathToPDF">The path to the pdf file</param>
-    /// <returns>The JPEG Image</returns>
-    private Image ConvertPDFToJPEG(string pathToPDF)
-    {
-        using var library = DocLib.Instance;
-        using var docReader = library.GetDocReader(pathToPDF, new PageDimensions(1080, 1920));
-        using var pageReader = docReader.GetPageReader(0);
-        return Image.LoadPixelData<Bgra32>(pageReader.GetImage(new NaiveTransparencyRemover(255, 255, 255)), pageReader.GetPageWidth(), pageReader.GetPageHeight());
     }
 }

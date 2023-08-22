@@ -4,6 +4,7 @@ using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -66,7 +67,7 @@ public partial class TransactionDialog : Adw.Window
 
     private bool _constructing;
     private readonly TransactionDialogController _controller;
-    private string? _receiptPath;
+    private Image? _receipt;
     private Gtk.ColorDialog _colorDialog;
     private AutocompleteBox<Transaction> _autocompleteBox;
     private bool _canHideAutobox;
@@ -126,7 +127,6 @@ public partial class TransactionDialog : Adw.Window
     {
         _constructing = true;
         _controller = controller;
-        _receiptPath = null;
         _canHideAutobox = true;
         _tags = new Dictionary<string, bool>();
         //Dialog Settings
@@ -300,6 +300,10 @@ public partial class TransactionDialog : Adw.Window
                 {
                     _colorDropDown.SetSelected(1);
                 }
+                else
+                {
+                    _colorDropDown.SetSelected(_controller.Transaction.RGBA == _controller.DefaultTransactionColor ? 0u : 1u);
+                }
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 if (!_constructing)
                 {
@@ -416,6 +420,7 @@ public partial class TransactionDialog : Adw.Window
         GdkExt.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
         _colorButton.SetExtRgba(transactionColor!.Value);
         UpdateTagsList();
+        _receipt = _controller.Transaction.Receipt;
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         _deleteReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
         if (_controller.Transaction.Receipt != null)
@@ -482,7 +487,7 @@ public partial class TransactionDialog : Adw.Window
         var iterStart = new TextIter();
         var iterEnd = new TextIter();
         gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receiptPath, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
@@ -640,7 +645,7 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private async void OnViewReceipt(Gtk.Button sender, EventArgs e) => await _controller.OpenReceiptImageAsync(_receiptPath);
+    private async void OnViewReceipt(Gtk.Button sender, EventArgs e) => await _controller.OpenReceiptImageAsync();
 
     /// <summary>
     /// Occurs when the delete receipt button is clicked
@@ -649,7 +654,7 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnDeleteReceipt(Gtk.Button sender, EventArgs e)
     {
-        _receiptPath = "";
+        _receipt = null;
         _viewReceiptButton.SetSensitive(false);
         _viewReceiptButtonContent.SetLabel("");
         _deleteReceiptButton.SetSensitive(false);
@@ -691,11 +696,17 @@ public partial class TransactionDialog : Adw.Window
         try
         {
             var file = await openFileDialog.OpenAsync(this);
-            _receiptPath = file!.GetPath();
-            _viewReceiptButton.SetSensitive(true);
-            _deleteReceiptButton.SetSensitive(true);
-            _viewReceiptButtonContent.SetLabel(_("View"));
-            _uploadReceiptButtonContent.SetLabel("");
+            _receipt = await _controller.GetImageFromPathAsync(file!.GetPath());
+            _viewReceiptButton.SetSensitive(_receipt != null);
+            _deleteReceiptButton.SetSensitive(_receipt != null);
+            if (_receipt != null)
+            {
+                _viewReceiptButtonContent.SetLabel(_("View"));
+            }
+            else
+            {
+                _uploadReceiptButtonContent.SetLabel(_("Upload"));
+            }
             Validate();
         }
         catch { }
