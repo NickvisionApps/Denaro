@@ -191,11 +191,11 @@ public class TransactionDialogController : IDisposable
             {
                 Transaction.Dispose();
             }
-        }
-        var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
-        if (File.Exists(jpgPath))
-        {
-            File.Delete(jpgPath);
+            var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            if (File.Exists(jpgPath))
+            {
+                File.Delete(jpgPath);
+            }
         }
         _disposed = true;
     }
