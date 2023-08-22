@@ -341,7 +341,6 @@ public class TransactionDialogController : IDisposable
         Transaction.RGBA = rgba;
         Transaction.UseGroupColor = useGroupColor;
         Transaction.Tags = tags;
-        Transaction.Receipt = null;
         if (receiptPath != null)
         {
             try
