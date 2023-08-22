@@ -1199,17 +1199,20 @@ public partial class AccountView : Adw.Bin
     /// <param name="e">EventArgs</param>
     private void OnSelectCurrentMonth(Gtk.Button sender, EventArgs e)
     {
-        _rangeExpander.SetEnableExpansion(true);
         var selectedDay = gtk_calendar_get_date(_calendar.Handle);
         var selectedMonth = (uint)(g_date_time_get_month(ref selectedDay) - 1);
         var selectedYear = g_date_time_get_year(ref selectedDay);
-        var selectedYearIndex = (uint)_controller.YearsForRangeFilter.IndexOf(selectedYear.ToString());
-        _startYearDropDown.SetSelected(selectedYearIndex);
-        _endYearDropDown.SetSelected(selectedYearIndex);
-        _startMonthDropDown.SetSelected(selectedMonth);
-        _endMonthDropDown.SetSelected(selectedMonth);
-        _startDayDropDown.SetSelected(0);
-        _endDayDropDown.SetSelected(_endDayDropDown.Model.GetNItems() - 1);
+        var selectedYearIndex = _controller.YearsForRangeFilter.IndexOf(selectedYear.ToString());
+        if (selectedYearIndex != -1)
+        {
+            _rangeExpander.SetEnableExpansion(true);
+            _startYearDropDown.SetSelected((uint)selectedYearIndex);
+            _endYearDropDown.SetSelected((uint)selectedYearIndex);
+            _startMonthDropDown.SetSelected(selectedMonth);
+            _endMonthDropDown.SetSelected(selectedMonth);
+            _startDayDropDown.SetSelected(0);
+            _endDayDropDown.SetSelected(_endDayDropDown.Model.GetNItems() - 1);
+        }
     }
 
     /// <summary>
