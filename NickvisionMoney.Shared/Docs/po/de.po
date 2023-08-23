@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-16 00:27-0400\n"
+"POT-Creation-Date: 2023-08-23 18:35-0400\n"
 "PO-Revision-Date: 2023-08-20 18:26+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -111,18 +111,19 @@ msgstr "Konto Typ"
 #: yelp/C/account.page:34
 msgid ""
 "There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
-"and 🟢<em>Business</em>. Account type is only a useful label that is shown in "
-"the list of recent accounts and doesn't affect how the application works or "
-"what you can do with an account. Each account type has its own color, these "
-"colors can be configured in <link xref=\"configuration\">global settings</"
-"link>."
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
 msgstr ""
-"Es sind 3 Konto - Typen verfügbar: 🟣<em>Girokonto</em>, 🔵<em>Sparkonto</em> "
-"und 🟢<em>Geschäftskonto</em>. Der Konto - Typ ist nur ein nützliches "
+"Es sind 3 Konto - Typen verfügbar: 🟣<em>Girokonto</em>, 🔵<em>Sparkonto</"
+"em> und 🟢<em>Geschäftskonto</em>. Der Konto - Typ ist nur ein nützliches "
 "Kennzeichnung, welche keine Auswirkungen auf die Funktion der Anwendung "
 "haben. Der Konto - Typ wird in der Liste der kürzlich bearbeiteten Konten "
-"angezeigt. Jeder Konto - Typ hat eine eigene Farbe, welche in den <link xref="
-"\"configuration\">Globalen Einstellungen</link> bearbeitet werden können."
+"angezeigt. Jeder Konto - Typ hat eine eigene Farbe, welche in den <link "
+"xref=\"configuration\">Globalen Einstellungen</link> bearbeitet werden "
+"können."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
@@ -166,8 +167,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:48
 msgid ""
-"If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
-"$</em> and <em>1,000.00</em> will be accepted as a valid number."
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
 
 #. (itstool) path: item/p
@@ -241,21 +242,52 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:70
-msgid "Custom Currency Decimal and Group Separators"
-msgstr ""
+#, fuzzy
+msgid "Custom Currency Amount Style"
+msgstr "Benutzerdefinierter Währungscode"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:71
-msgid "Up to 2 characters or 1 emoji."
+msgid "A choice of displaying an amount in one of the following ways:"
 msgstr ""
 
-#. (itstool) path: item/title
+#. (itstool) path: item/p
+#: yelp/C/account.page:73
+msgid "$n"
+msgstr ""
+
+#. (itstool) path: item/p
 #: yelp/C/account.page:74
-msgid "Custom Currency Decimal Digits"
+msgid "n$"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
+msgid "$ n"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:76
+msgid "n $"
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:85
 msgid ""
 "The size of decimal part of amount values. With \"Unlimited\" digits there "
 "will be as many numbers in decimal part as required to show the precise "
@@ -263,12 +295,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:78
+#: yelp/C/account.page:88
 msgid "Password"
 msgstr "Passwort"
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:79
+#: yelp/C/account.page:89
 msgid ""
 "Each account can be password-protected. Adding a password causes an account "
 "to become encrypted (making it impossible to read the data without "
@@ -286,12 +318,12 @@ msgstr ""
 "entschlüsselt das Konto."
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:82
+#: yelp/C/account.page:92
 msgid "Sort by Id, Date or Amount"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:83
+#: yelp/C/account.page:93
 msgid ""
 "Each account stores whether to sort transactions in the main window by their "
 "id, date or amount. Every time you change this, it will be saved to the "
@@ -299,12 +331,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:86
+#: yelp/C/account.page:96
 msgid "Sorting Order"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:87
+#: yelp/C/account.page:97
 msgid ""
 "Each account stores information about the order of transactions in the main "
 "window. Every time you change this, it will be saved to the account file and "
@@ -312,12 +344,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:90
+#: yelp/C/account.page:100
 msgid "Groups Visibility"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:91
+#: yelp/C/account.page:101
 msgid ""
 "Each account stores information about whether the groups list in the main "
 "window is hidden or not. Every time you change groups list visibility, it's "
@@ -325,12 +357,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:94
+#: yelp/C/account.page:104
 msgid "Tags Visibility"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:95
+#: yelp/C/account.page:105
 msgid ""
 "Each account stores information about whether the tags list in the main "
 "window is hidden or not. Every time you change tags list visibility, it's "
@@ -382,10 +414,10 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
 msgid ""
-"A color that will be selected by default when adding a new <link xref="
-"\"transaction\">transaction</link> with unique color. Changing this will not "
-"affect existing transactions, even if they use previously selected default "
-"color."
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
 msgstr ""
 
 #. (itstool) path: item/title
@@ -396,8 +428,8 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
 msgid ""
-"A color that will be used for transactions created using <link xref="
-"\"transfer\">transfer</link>. Changing this will not affect existing "
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
 "transactions."
 msgstr ""
 
@@ -483,9 +515,10 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
 msgid ""
-"A folder where your data will be automatically <link xref=\"import-export"
-"\">exported to CSV</link> after every change. This feature doesn't work for "
-"password-protected accounts, because CSV files can't be password-protected."
+"A folder where your data will be automatically <link xref=\"import-"
+"export\">exported to CSV</link> after every change. This feature doesn't "
+"work for password-protected accounts, because CSV files can't be password-"
+"protected."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -783,9 +816,9 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
 msgid ""
-"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="
-"\"account\">account settings</link> will be selected when you open a dialog "
-"to add new transaction."
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
 msgstr ""
 
 #. (itstool) path: item/title
@@ -939,8 +972,9 @@ msgstr ""
 #: yelp/C/transfer.page:31
 msgid ""
 "Transfer doesn't allow you to create repeating transactions or set any "
-"properties other than the amount. The color selected in <link xref="
-"\"configuration\">configuration</link> will be used for created transactions."
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
 msgstr ""
 
 #. (itstool) path: page/p

@@ -42,7 +42,7 @@
 	</item>
 	<item>
         <title>Umbral de recordatorios de las transacciones</title>
-        <p>El umbral utilizado cuando se muestran los recordatorios de las próximas transacciones.</p>
+        <p>El umbral usado cuando se muestran los recordatorios de las próximas transacciones.</p>
     </item>
 	<item>
 		<title>Moneda del sistema</title>
@@ -70,6 +70,16 @@
 		<p>Un ejemplo para entender la diferencia entre un símbolo y un código: <em>$</em> es un símbolo, <em>USD</em> es un código.</p>
 	</item>
 	<item>
+        <title>Custom Currency Amount Style</title>
+        <p>A choice of displaying an amount in one of the following ways: </p>
+        <list>
+            <item><p>$n</p></item>
+            <item><p>n$</p></item>
+            <item><p>$ n</p></item>
+            <item><p>n $</p></item>
+        </list>
+    </item>
+	<item>
 		<title>Separadores decimales y de grupo personalizados</title>
 		<p>Hasta 2 caracteres o 1 emoji.</p>
 	</item>
@@ -95,7 +105,7 @@
 	</item>
 	<item>
         <title>Visibilidad de las etiquetas</title>
-        <p>Cada cuenta almacena información sobre si la lista de las etiquetas de la ventana principal está oculta o no. Cada vez que cambias la visibilidad de la lista de las etiquetas, se guarda y después se restaura cuando vuelves a abrir la cuenta.</p>
+        <p>Cada cuenta almacena información sobre si la lista de las etiquetas de la ventana principal está oculta o no. Cada vez que cambie la visibilidad de la lista de las etiquetas, se guarda y después se restaura cuando vuelva a abrir la cuenta.</p>
     </item>
 </terms>
 </page>

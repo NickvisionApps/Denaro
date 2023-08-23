@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-16 00:27-0400\n"
+"POT-Creation-Date: 2023-08-23 18:35-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,71 +167,101 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:70
-msgid "Custom Currency Decimal and Group Separators"
+msgid "Custom Currency Amount Style"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:71
-msgid "Up to 2 characters or 1 emoji."
+msgid "A choice of displaying an amount in one of the following ways:"
 msgstr ""
 
-#. (itstool) path: item/title
+#. (itstool) path: item/p
+#: yelp/C/account.page:73
+msgid "$n"
+msgstr ""
+
+#. (itstool) path: item/p
 #: yelp/C/account.page:74
-msgid "Custom Currency Decimal Digits"
+msgid "n$"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
+msgid "$ n"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:76
+msgid "n $"
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/account.page:85
 msgid "The size of decimal part of amount values. With \"Unlimited\" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:78
+#: yelp/C/account.page:88
 msgid "Password"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:79
+#: yelp/C/account.page:89
 msgid "Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:82
+#: yelp/C/account.page:92
 msgid "Sort by Id, Date or Amount"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:83
+#: yelp/C/account.page:93
 msgid "Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:86
+#: yelp/C/account.page:96
 msgid "Sorting Order"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:87
+#: yelp/C/account.page:97
 msgid "Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:90
+#: yelp/C/account.page:100
 msgid "Groups Visibility"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:91
+#: yelp/C/account.page:101
 msgid "Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/account.page:94
+#: yelp/C/account.page:104
 msgid "Tags Visibility"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/account.page:95
+#: yelp/C/account.page:105
 msgid "Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account."
 msgstr ""
 

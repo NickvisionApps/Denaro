@@ -64,6 +64,16 @@
 		<p>Пример для понимания разницы между символом и кодом: <em>$</em> — символ, <em>USD</em> — код.</p>
 	</item>
 	<item>
+        <title>Custom Currency Amount Style</title>
+        <p>A choice of displaying an amount in one of the following ways: </p>
+        <list>
+            <item><p>$n</p></item>
+            <item><p>n$</p></item>
+            <item><p>$ n</p></item>
+            <item><p>n $</p></item>
+        </list>
+    </item>
+	<item>
 		<title>Десятичный разделитель и разделитель групп разрядов</title>
 		<p>До 2 текстовых символов, либо 1 эмодзи.</p>
 	</item>

@@ -70,6 +70,16 @@
 		<p>Příklad pro pochopení rozdílu mezi symbolem a kódem: <em>Kč</em> je symbol, <em>CZK</em> je kód.</p>
 	</item>
 	<item>
+        <title>Custom Currency Amount Style</title>
+        <p>A choice of displaying an amount in one of the following ways: </p>
+        <list>
+            <item><p>$n</p></item>
+            <item><p>n$</p></item>
+            <item><p>$ n</p></item>
+            <item><p>n $</p></item>
+        </list>
+    </item>
+	<item>
 		<title>Vlastní oddělovače desetinných míst a skupin měn</title>
 		<p>Až 2 znaky nebo 1 emotikon.</p>
 	</item>
