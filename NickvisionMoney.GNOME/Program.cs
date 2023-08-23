@@ -44,6 +44,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Added a password strength indicator when creating an account password
+              * Added an Amount Display Style option to custom currency settings
               * Fixed an issue where selecting the current month on an empty account in the calendar would cause a crash
               * Fixed an issue where adding receipts to a new transaction would cause a crash
               * Improved UI/UX
