@@ -1,3 +1,4 @@
+using Nickvision.Aura.Keyring;
 using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -21,6 +22,8 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _startButton;
     [Gtk.Connect] private readonly Adw.EntryRow _accountNameRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _accountPasswordRow;
+    [Gtk.Connect] private readonly Adw.ActionRow _accountPasswordStrengthRow;
+    [Gtk.Connect] private readonly Gtk.LevelBar _accountPasswordStrengthBar;
     [Gtk.Connect] private readonly Adw.EntryRow _folderRow;
     [Gtk.Connect] private readonly Gtk.Button _selectFolderButton;
     [Gtk.Connect] private readonly Adw.ActionRow _overwriteRow;
@@ -72,6 +75,18 @@ public partial class NewAccountDialog : Adw.Window
                 ValidateName();
             }
         };
+        _accountPasswordRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                ShowPasswordStrength();
+            }
+        };
+        _accountPasswordStrengthBar.SetMinValue(Convert.ToDouble((int)PasswordStrength.Blank));
+        _accountPasswordStrengthBar.SetMaxValue(Convert.ToDouble((int)PasswordStrength.VeryStrong));
+        _accountPasswordStrengthBar.AddOffsetValue("weak", 1);
+        _accountPasswordStrengthBar.AddOffsetValue("medium", 3);
+        _accountPasswordStrengthBar.AddOffsetValue("strong", 4);
         _selectFolderButton.OnClicked += SelectFolder;
         _overwriteSwitch.OnNotify += (sender, e) =>
         {
@@ -279,6 +294,23 @@ public partial class NewAccountDialog : Adw.Window
                 _accountNameRow.SetTitle(_("Account Name (Exists)"));
             }
             _nextButton1.SetSensitive(false);
+        }
+    }
+    
+    /// <summary>
+    /// Calculates and shows the account password's strength
+    /// </summary>
+    private void ShowPasswordStrength()
+    {
+        if (!string.IsNullOrEmpty(_accountPasswordRow.GetText()))
+        {
+            var strength = Credential.GetPasswordStrength(_accountPasswordRow.GetText());
+            _accountPasswordStrengthRow.SetVisible(true);
+            _accountPasswordStrengthBar.SetValue((double)strength);
+        }
+        else
+        {
+            _accountPasswordStrengthRow.SetVisible(false);
         }
     }
 

@@ -432,20 +432,8 @@ public partial class AccountSettingsDialog : Adw.Window
     /// </summary>
     private void ShowPasswordStrength()
     {
-        //_passwordStrengthBar.RemoveCssClass("strength-weak");
-        //_passwordStrengthBar.RemoveCssClass("strength-medium");
-        //_passwordStrengthBar.RemoveCssClass("strength-strong");
         var strength = Credential.GetPasswordStrength(_newPasswordRow.GetText());
         _passwordStrengthBar.SetValue((double)strength);
-        /*
-        _passwordStrengthBar.AddCssClass(strength switch
-        {
-            PasswordStrength.Medium => "strength-medium",
-            PasswordStrength.Strong => "strength-high",
-            PasswordStrength.VeryStrong => "strength-high",
-            _ => "strength-weak"
-        });
-        */
     }
 
     /// <summary>
