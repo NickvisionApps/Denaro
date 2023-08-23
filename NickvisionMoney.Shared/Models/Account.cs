@@ -347,7 +347,7 @@ public class Account : IDisposable
         }
         //Setup Metadata Table
         using var cmdTableMetadata = _database!.CreateCommand();
-        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER)";
+        cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
         try
         {
@@ -389,6 +389,13 @@ public class Account : IDisposable
             using var cmdTableMetadataUpdate6 = _database.CreateCommand();
             cmdTableMetadataUpdate6.CommandText = "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER";
             cmdTableMetadataUpdate6.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate7 = _database.CreateCommand();
+            cmdTableMetadataUpdate7.CommandText = "ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER";
+            cmdTableMetadataUpdate7.ExecuteNonQuery();
         }
         catch { }
         //Setup Groups Table
@@ -483,11 +490,12 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             Metadata.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
+            Metadata.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? 0 : readQueryMetadata.GetInt32(15);
         }
         else
         {
             using var cmdAddMetadata = _database.CreateCommand();
-            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList, transactionRemindersThreshold) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits, $showTagsList, $transactionRemindersThreshold)";
+            cmdAddMetadata.CommandText = "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList, transactionRemindersThreshold, customAmountStyle) VALUES (0, $name, $type, $useCustomCurrency, $customSymbol, $customCode, $defaultTransactionType, $showGroupsList, $sortFirstToLast, $sortTransactionsBy, $customDecimalSeparator, $customGroupSeparator, $customDecimalDigits, $showTagsList, $transactionRemindersThreshold, $customAmountStyle)";
             cmdAddMetadata.Parameters.AddWithValue("$name", Metadata.Name);
             cmdAddMetadata.Parameters.AddWithValue("$type", (int)Metadata.AccountType);
             cmdAddMetadata.Parameters.AddWithValue("$useCustomCurrency", Metadata.UseCustomCurrency);
@@ -502,6 +510,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
             cmdAddMetadata.Parameters.AddWithValue("$showTagsList", Metadata.ShowGroupsList);
             cmdAddMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)Metadata.TransactionRemindersThreshold);
+            cmdAddMetadata.Parameters.AddWithValue("$customAmountStyle", Metadata.CustomCurrencyAmountStyle);
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
@@ -681,7 +690,7 @@ public class Account : IDisposable
     public bool UpdateMetadata(AccountMetadata metadata)
     {
         using var cmdUpdateMetadata = _database!.CreateCommand();
-        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits, showTagsList = $showTagsList, transactionRemindersThreshold = $transactionRemindersThreshold WHERE id = 0";
+        cmdUpdateMetadata.CommandText = "UPDATE metadata SET name = $name, type = $type, useCustomCurrency = $useCustomCurrency, customSymbol = $customSymbol, customCode = $customCode, defaultTransactionType = $defaultTransactionType, showGroupsList = $showGroupsList, sortFirstToLast = $sortFirstToLast, sortTransactionsBy = $sortTransactionsBy, customDecimalSeparator = $customDecimalSeparator, customGroupSeparator = $customGroupSeparator, customDecimalDigits = $customDecimalDigits, showTagsList = $showTagsList, transactionRemindersThreshold = $transactionRemindersThreshold, customAmountStyle = $customAmountStyle WHERE id = 0";
         cmdUpdateMetadata.Parameters.AddWithValue("$name", metadata.Name);
         cmdUpdateMetadata.Parameters.AddWithValue("$type", (int)metadata.AccountType);
         cmdUpdateMetadata.Parameters.AddWithValue("$useCustomCurrency", metadata.UseCustomCurrency);
@@ -696,6 +705,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
         cmdUpdateMetadata.Parameters.AddWithValue("$showTagsList", metadata.ShowTagsList);
         cmdUpdateMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)metadata.TransactionRemindersThreshold);
+        cmdUpdateMetadata.Parameters.AddWithValue("$customAmountStyle", metadata.CustomCurrencyAmountStyle);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
             var needsRemindersUpdate = Metadata.TransactionRemindersThreshold != metadata.TransactionRemindersThreshold;
@@ -704,6 +714,7 @@ public class Account : IDisposable
             Metadata.UseCustomCurrency = metadata.UseCustomCurrency;
             Metadata.CustomCurrencySymbol = metadata.CustomCurrencySymbol;
             Metadata.CustomCurrencyCode = metadata.CustomCurrencyCode;
+            Metadata.CustomCurrencyAmountStyle = metadata.CustomCurrencyAmountStyle;
             Metadata.DefaultTransactionType = metadata.DefaultTransactionType;
             Metadata.TransactionRemindersThreshold = metadata.TransactionRemindersThreshold;
             Metadata.ShowGroupsList = metadata.ShowGroupsList;

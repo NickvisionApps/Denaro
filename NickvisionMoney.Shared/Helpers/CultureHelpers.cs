@@ -60,13 +60,14 @@ public static class CultureHelpers
         if (metadata.UseCustomCurrency)
         {
             culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
+            culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
+            culture.NumberFormat.CurrencyPositivePattern = metadata.CustomCurrencyAmountStyle;
             culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.CurrencyGroupSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.CurrencyGroupSeparator : metadata.CustomCurrencyGroupSeparator;
             culture.NumberFormat.NumberGroupSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.NumberGroupSeparator : metadata.CustomCurrencyGroupSeparator;
             culture.NumberFormat.CurrencyDecimalDigits = metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
             culture.NumberFormat.NumberDecimalDigits = metadata.CustomCurrencyDecimalDigits ?? culture.NumberFormat.CurrencyDecimalDigits;
-            culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
         }
         else
         {
