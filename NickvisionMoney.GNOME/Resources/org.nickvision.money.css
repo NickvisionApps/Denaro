@@ -75,7 +75,6 @@
   font-weight: normal;
 }
 
-
 /* Transaction Dialog Calendar */
 #calendarTransactions button {
   border-radius: 12px;
@@ -90,7 +89,6 @@
   color: @denaro_calendar_today_fg_color;
   box-shadow: none;
 }
-
 
 /* Make apply button in TransferDialog's password row to ignore error class */
 row.error button.circular {
@@ -129,6 +127,7 @@ row.error button.circular {
 .group-filter-disabled check:hover {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16) inset;
 }
+
 /* Transaction Dialog */
 .scrolled-dialog {
   border-color: @borders;
@@ -183,4 +182,17 @@ row.error button.circular {
 
 .wallet-bg {
   border-radius: 6px;
+}
+
+/* Password Strength */
+.strength block.weak {
+  background-color: @warning_bg_color;
+}
+
+.strength block.medium {
+  background-color: @accent_bg_color;
+}
+
+.strength block.strong {
+  background-color: @success_bg_color;
 }

@@ -260,8 +260,11 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
-        _passwordStrengthBar.SetMinValue((double)PasswordStrength.Blank);
-        _passwordStrengthBar.SetMaxValue((double)PasswordStrength.VeryStrong);
+        _passwordStrengthBar.SetMinValue(Convert.ToDouble((int)PasswordStrength.Blank));
+        _passwordStrengthBar.SetMaxValue(Convert.ToDouble((int)PasswordStrength.VeryStrong));
+        _passwordStrengthBar.AddOffsetValue("weak", 1);
+        _passwordStrengthBar.AddOffsetValue("medium", 3);
+        _passwordStrengthBar.AddOffsetValue("strong", 4);
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Apply Button
@@ -429,9 +432,20 @@ public partial class AccountSettingsDialog : Adw.Window
     /// </summary>
     private void ShowPasswordStrength()
     {
+        //_passwordStrengthBar.RemoveCssClass("strength-weak");
+        //_passwordStrengthBar.RemoveCssClass("strength-medium");
+        //_passwordStrengthBar.RemoveCssClass("strength-strong");
         var strength = Credential.GetPasswordStrength(_newPasswordRow.GetText());
-        Console.WriteLine(strength.ToString());
         _passwordStrengthBar.SetValue((double)strength);
+        /*
+        _passwordStrengthBar.AddCssClass(strength switch
+        {
+            PasswordStrength.Medium => "strength-medium",
+            PasswordStrength.Strong => "strength-high",
+            PasswordStrength.VeryStrong => "strength-high",
+            _ => "strength-weak"
+        });
+        */
     }
 
     /// <summary>
