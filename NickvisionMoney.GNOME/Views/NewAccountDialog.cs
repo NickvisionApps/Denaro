@@ -84,9 +84,11 @@ public partial class NewAccountDialog : Adw.Window
         };
         _accountPasswordStrengthBar.SetMinValue(Convert.ToDouble((int)PasswordStrength.Blank));
         _accountPasswordStrengthBar.SetMaxValue(Convert.ToDouble((int)PasswordStrength.VeryStrong));
-        _accountPasswordStrengthBar.AddOffsetValue("weak", 1);
+        _accountPasswordStrengthBar.AddOffsetValue("veryweak", 1);
+        _accountPasswordStrengthBar.AddOffsetValue("weak", 2);
         _accountPasswordStrengthBar.AddOffsetValue("medium", 3);
         _accountPasswordStrengthBar.AddOffsetValue("strong", 4);
+        _accountPasswordStrengthBar.AddOffsetValue("verystrong", 5);
         _selectFolderButton.OnClicked += SelectFolder;
         _overwriteSwitch.OnNotify += (sender, e) =>
         {

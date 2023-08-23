@@ -262,9 +262,11 @@ public partial class AccountSettingsDialog : Adw.Window
         };
         _passwordStrengthBar.SetMinValue(Convert.ToDouble((int)PasswordStrength.Blank));
         _passwordStrengthBar.SetMaxValue(Convert.ToDouble((int)PasswordStrength.VeryStrong));
-        _passwordStrengthBar.AddOffsetValue("weak", 1);
+        _passwordStrengthBar.AddOffsetValue("veryweak", 1);
+        _passwordStrengthBar.AddOffsetValue("weak", 2);
         _passwordStrengthBar.AddOffsetValue("medium", 3);
         _passwordStrengthBar.AddOffsetValue("strong", 4);
+        _passwordStrengthBar.AddOffsetValue("verystrong", 5);
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Apply Button

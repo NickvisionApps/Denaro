@@ -185,6 +185,10 @@ row.error button.circular {
 }
 
 /* Password Strength */
+.strength block.veryweak {
+  background-color: @warning_bg_color;
+}
+
 .strength block.weak {
   background-color: @warning_bg_color;
 }
@@ -194,5 +198,9 @@ row.error button.circular {
 }
 
 .strength block.strong {
+  background-color: @success_bg_color;
+}
+
+.strength block.verystrong {
   background-color: @success_bg_color;
 }
