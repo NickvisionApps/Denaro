@@ -1,3 +1,4 @@
+using Nickvision.Aura.Keyring;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
@@ -37,6 +38,7 @@ public partial class AccountSettingsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordRow;
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _newPasswordConfirmRow;
+    [Gtk.Connect] private readonly Gtk.LevelBar _passwordStrengthBar;
     [Gtk.Connect] private readonly Gtk.Button _removePasswordButton;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
 
@@ -243,6 +245,7 @@ public partial class AccountSettingsDialog : Adw.Window
             {
                 if (!_constructing)
                 {
+                    ShowPasswordStrength();
                     Validate();
                 }
             }
@@ -257,6 +260,13 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
+        _passwordStrengthBar.SetMinValue(Convert.ToDouble((int)PasswordStrength.Blank));
+        _passwordStrengthBar.SetMaxValue(Convert.ToDouble((int)PasswordStrength.VeryStrong));
+        _passwordStrengthBar.AddOffsetValue("veryweak", 1);
+        _passwordStrengthBar.AddOffsetValue("weak", 2);
+        _passwordStrengthBar.AddOffsetValue("medium", 3);
+        _passwordStrengthBar.AddOffsetValue("strong", 4);
+        _passwordStrengthBar.AddOffsetValue("verystrong", 5);
         _removePasswordButton.SetVisible(_controller.IsEncrypted);
         _removePasswordButton.OnClicked += OnRemovePassword;
         //Apply Button
@@ -417,6 +427,15 @@ public partial class AccountSettingsDialog : Adw.Window
             }
             _applyButton.SetSensitive(false);
         }
+    }
+
+    /// <summary>
+    /// Calculates and shows the password's strength
+    /// </summary>
+    private void ShowPasswordStrength()
+    {
+        var strength = Credential.GetPasswordStrength(_newPasswordRow.GetText());
+        _passwordStrengthBar.SetValue((double)strength);
     }
 
     /// <summary>

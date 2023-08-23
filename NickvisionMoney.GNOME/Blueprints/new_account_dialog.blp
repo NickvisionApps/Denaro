@@ -88,6 +88,19 @@ Adw.Window _root {
                 Adw.PasswordEntryRow _accountPasswordRow {
                   title: _("Account Password (Optional)");
                 }
+                
+                Adw.ActionRow _accountPasswordStrengthRow {
+                  title: _("Password Strength");
+                  visible: false;
+                  
+                  [suffix]
+                  Gtk.LevelBar _accountPasswordStrengthBar {
+                    hexpand: true;
+                    valign: center;
+                    
+                    styles ["strength"]
+                  }
+                }
 
                 Adw.EntryRow _folderRow {
                   title: _("Folder");

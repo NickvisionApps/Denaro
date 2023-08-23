@@ -49,6 +49,7 @@
   <releases>
     <release version="2023.8.1-next" date="2023-08-18">
       <description translatable="no">
+        <p>- Added a password strength indicator when creating an account password</p>
         <p>- Fixed an issue where selecting the current month on an empty account in the calendar would cause a crash</p>
         <p>- Fixed an issue where adding receipts to a new transaction would cause a crash</p>
         <p>- Improved UI/UX</p>
