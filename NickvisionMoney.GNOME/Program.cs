@@ -43,7 +43,8 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where selecting the current month on an empty account in the calendar would cause a crash
+            @"* Added a password strength indicator when creating an account password
+              * Fixed an issue where selecting the current month on an empty account in the calendar would cause a crash
               * Fixed an issue where adding receipts to a new transaction would cause a crash
               * Improved UI/UX
               * Updated and added translations (Thanks to everyone on Weblate)!";
