@@ -41,7 +41,7 @@ public enum RemindersThreshold
 /// </summary>
 public class AccountMetadata : ICloneable
 {
-    private int _customCurrencyAmountStyle;
+    private int? _customCurrencyAmountStyle;
     
     /// <summary>
     /// The name of the account
@@ -112,7 +112,7 @@ public class AccountMetadata : ICloneable
         UseCustomCurrency = false;
         CustomCurrencySymbol = null;
         CustomCurrencyCode = null;
-        CustomCurrencyAmountStyle = 0;
+        CustomCurrencyAmountStyle = null;
         CustomCurrencyDecimalSeparator = null;
         CustomCurrencyGroupSeparator = null;
         CustomCurrencyDecimalDigits = null;
@@ -128,13 +128,13 @@ public class AccountMetadata : ICloneable
     /// The style to use for displaying an amount
     /// </summary>
     /// <remarks>Must be a value between 0 and 4. See https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberformatinfo.currencypositivepattern?view=net-7.0#remarks for the values' meaning</remarks>
-    public int CustomCurrencyAmountStyle
+    public int? CustomCurrencyAmountStyle
     {
         get => _customCurrencyAmountStyle;
 
         set
         {
-            if (value < 0 || value > 4)
+            if (value != null && (value < 0 || value > 4))
             {
                 value = 0;
             }
@@ -195,7 +195,7 @@ public class AccountMetadata : ICloneable
             result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             result.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             result.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
-            result.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? 0 : readQueryMetadata.GetInt32(15);
+            result.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
         database.Close();
         return result;

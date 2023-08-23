@@ -61,7 +61,7 @@ public static class CultureHelpers
         {
             culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
             culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
-            culture.NumberFormat.CurrencyPositivePattern = metadata.CustomCurrencyAmountStyle;
+            culture.NumberFormat.CurrencyPositivePattern = metadata.CustomCurrencyAmountStyle ?? culture.NumberFormat.CurrencyPositivePattern;
             culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.CurrencyGroupSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyGroupSeparator) ? culture.NumberFormat.CurrencyGroupSeparator : metadata.CustomCurrencyGroupSeparator;

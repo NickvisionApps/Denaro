@@ -107,6 +107,7 @@ public class AccountSettingsDialogController
     /// <param name="useCustom">Whether or not to use a custom currency</param>
     /// <param name="customSymbol">The new custom currency symbol</param>
     /// <param name="customCode">The new custom currency code</param>
+    /// <param name="customAmountStyle">The new custom currency amount style</param>
     /// <param name="customDecimalSeparator">The new custom decimal separator</param>
     /// <param name="customGroupSeparator">The new custom group separator</param>
     /// <param name="customDecimalDigits">The new custom decimal digits number</param>
@@ -115,7 +116,7 @@ public class AccountSettingsDialogController
     /// <param name="newPassword">The new password</param>
     /// <param name="confirmPassword">The new password confirmed</param>
     /// <returns>AccountMetadataCheckStatus</returns>
-    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, string? customDecimalSeparator, string? customGroupSeparator, uint customDecimalDigits, TransactionType defaultTransactionType, RemindersThreshold transactionReminder, string newPassword, string confirmPassword)
+    public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, int? customAmountStyle, string? customDecimalSeparator, string? customGroupSeparator, int? customDecimalDigits, TransactionType defaultTransactionType, RemindersThreshold transactionReminder, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
         if (string.IsNullOrEmpty(name))
@@ -174,14 +175,16 @@ public class AccountSettingsDialogController
         {
             Metadata.CustomCurrencySymbol = customSymbol;
             Metadata.CustomCurrencyCode = customCode?.ToUpper();
+            Metadata.CustomCurrencyAmountStyle = customAmountStyle;
             Metadata.CustomCurrencyDecimalSeparator = customDecimalSeparator;
             Metadata.CustomCurrencyGroupSeparator = customGroupSeparator;
-            Metadata.CustomCurrencyDecimalDigits = (int?)customDecimalDigits;
+            Metadata.CustomCurrencyDecimalDigits = customDecimalDigits;
         }
         else
         {
             Metadata.CustomCurrencySymbol = null;
             Metadata.CustomCurrencyCode = null;
+            Metadata.CustomCurrencyAmountStyle = null;
             Metadata.CustomCurrencyDecimalSeparator = null;
             Metadata.CustomCurrencyGroupSeparator = null;
             Metadata.CustomCurrencyDecimalDigits = null;

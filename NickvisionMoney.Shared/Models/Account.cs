@@ -490,7 +490,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             Metadata.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
-            Metadata.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? 0 : readQueryMetadata.GetInt32(15);
+            Metadata.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
         else
         {
@@ -510,7 +510,7 @@ public class Account : IDisposable
             cmdAddMetadata.Parameters.AddWithValue("$customDecimalDigits", Metadata.CustomCurrencyDecimalDigits ?? 2);
             cmdAddMetadata.Parameters.AddWithValue("$showTagsList", Metadata.ShowGroupsList);
             cmdAddMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)Metadata.TransactionRemindersThreshold);
-            cmdAddMetadata.Parameters.AddWithValue("$customAmountStyle", Metadata.CustomCurrencyAmountStyle);
+            cmdAddMetadata.Parameters.AddWithValue("$customAmountStyle", Metadata.CustomCurrencyAmountStyle ?? 0);
             cmdAddMetadata.ExecuteNonQuery();
         }
         //Get Groups
@@ -705,7 +705,7 @@ public class Account : IDisposable
         cmdUpdateMetadata.Parameters.AddWithValue("$customDecimalDigits", metadata.CustomCurrencyDecimalDigits ?? 2);
         cmdUpdateMetadata.Parameters.AddWithValue("$showTagsList", metadata.ShowTagsList);
         cmdUpdateMetadata.Parameters.AddWithValue("$transactionRemindersThreshold", (int)metadata.TransactionRemindersThreshold);
-        cmdUpdateMetadata.Parameters.AddWithValue("$customAmountStyle", metadata.CustomCurrencyAmountStyle);
+        cmdUpdateMetadata.Parameters.AddWithValue("$customAmountStyle", metadata.CustomCurrencyAmountStyle ?? 0);
         if (cmdUpdateMetadata.ExecuteNonQuery() > 0)
         {
             var needsRemindersUpdate = Metadata.TransactionRemindersThreshold != metadata.TransactionRemindersThreshold;

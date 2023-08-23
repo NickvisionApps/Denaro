@@ -240,6 +240,13 @@ Adw.Window _root {
                   Adw.EntryRow _customCodeRow {
                     title: _("Currency Code");
                   }
+                  
+                  Adw.ComboRow _customAmountStyleRow {
+                    title: _("Amount Display Style");
+                    model: Gtk.StringList {
+                      strings ["$n", "n$", "$ n", "n $"]
+                    };
+                  }
   
                   Adw.ComboRow _customDecimalSeparatorRow {
                     title: _("Decimal Separator");
