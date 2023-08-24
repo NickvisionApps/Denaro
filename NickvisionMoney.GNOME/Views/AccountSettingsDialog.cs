@@ -29,10 +29,11 @@ public partial class AccountSettingsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
     [Gtk.Connect] private readonly Adw.EntryRow _customSymbolRow;
     [Gtk.Connect] private readonly Adw.EntryRow _customCodeRow;
-    [Gtk.Connect] private readonly Gtk.Entry _customDecimalSeparatorText;
+    [Gtk.Connect] private readonly Adw.ComboRow _customAmountStyleRow;
     [Gtk.Connect] private readonly Adw.ComboRow _customDecimalSeparatorRow;
-    [Gtk.Connect] private readonly Gtk.Entry _customGroupSeparatorText;
+    [Gtk.Connect] private readonly Gtk.Entry _customDecimalSeparatorText;
     [Gtk.Connect] private readonly Adw.ComboRow _customGroupSeparatorRow;
+    [Gtk.Connect] private readonly Gtk.Entry _customGroupSeparatorText;
     [Gtk.Connect] private readonly Adw.ComboRow _customDecimalDigitsRow;
     [Gtk.Connect] private readonly Adw.ActionRow _managePasswordRow;
     [Gtk.Connect] private readonly Gtk.Label _lblPasswordStatus;
@@ -163,6 +164,16 @@ public partial class AccountSettingsDialog : Adw.Window
                 }
             }
         };
+        _customAmountStyleRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected")
+            {
+                if (!_constructing)
+                {
+                    Validate();
+                }
+            }
+        };
         _customDecimalSeparatorRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected")
@@ -279,6 +290,7 @@ public partial class AccountSettingsDialog : Adw.Window
         _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
         _customSymbolRow.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeRow.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
+        _customAmountStyleRow.SetSelected(_controller.Metadata.CustomCurrencyAmountStyle.HasValue ? (uint)_controller.Metadata.CustomCurrencyAmountStyle.Value : 0u);
         _customDecimalSeparatorRow.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
         {
             null => 0,
@@ -347,7 +359,7 @@ public partial class AccountSettingsDialog : Adw.Window
             4 => _customGroupSeparatorText.GetText()
         };
         var customDecimalDigits = _customDecimalDigitsRow.GetSelected() == 5 ? 99 : _customDecimalDigitsRow.GetSelected() + 2;
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), customDecimalSeparator, customGroupSeparator, customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
         _customCurrencyRow.RemoveCssClass("error");
@@ -363,7 +375,12 @@ public partial class AccountSettingsDialog : Adw.Window
         _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
+            _constructing = true;
+            var oldSelection = _customAmountStyleRow.GetSelected();
+            _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+            _customAmountStyleRow.SetSelected(oldSelection);
             _applyButton.SetSensitive(true);
+            _constructing = false;
         }
         else
         {

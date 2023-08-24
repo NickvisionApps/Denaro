@@ -587,6 +587,7 @@ public class AccountViewController : IDisposable
     public void UpdateMetadata(AccountMetadata metadata)
     {
         var oldSymbol = _account.Metadata.CustomCurrencySymbol;
+        var oldStyle = _account.Metadata.CustomCurrencyAmountStyle;
         var oldDecimalSeparator = _account.Metadata.CustomCurrencyDecimalSeparator;
         var oldGroupSeparator = _account.Metadata.CustomCurrencyGroupSeparator;
         var oldDecimalDigits = _account.Metadata.CustomCurrencyDecimalDigits;
@@ -598,7 +599,7 @@ public class AccountViewController : IDisposable
         });
         Aura.Active.SaveConfig("config");
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
-        if (oldSymbol != metadata.CustomCurrencySymbol || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
+        if (oldSymbol != metadata.CustomCurrencySymbol || oldStyle != metadata.CustomCurrencyAmountStyle || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
         {
             foreach (var pair in _account.Groups)
             {

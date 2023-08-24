@@ -41,6 +41,8 @@ public enum RemindersThreshold
 /// </summary>
 public class AccountMetadata : ICloneable
 {
+    private int? _customCurrencyAmountStyle;
+    
     /// <summary>
     /// The name of the account
     /// </summary>
@@ -110,6 +112,7 @@ public class AccountMetadata : ICloneable
         UseCustomCurrency = false;
         CustomCurrencySymbol = null;
         CustomCurrencyCode = null;
+        CustomCurrencyAmountStyle = null;
         CustomCurrencyDecimalSeparator = null;
         CustomCurrencyGroupSeparator = null;
         CustomCurrencyDecimalDigits = null;
@@ -121,6 +124,24 @@ public class AccountMetadata : ICloneable
         SortTransactionsBy = SortBy.Date;
     }
 
+    /// <summary>
+    /// The style to use for displaying an amount
+    /// </summary>
+    /// <remarks>Must be a value between 0 and 3. See https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberformatinfo.currencypositivepattern?view=net-7.0#remarks for the values' meaning</remarks>
+    public int? CustomCurrencyAmountStyle
+    {
+        get => _customCurrencyAmountStyle;
+
+        set
+        {
+            if (value != null && (value < 0 || value > 3))
+            {
+                value = 0;
+            }
+            _customCurrencyAmountStyle = value;
+        }
+    }
+    
     /// <summary>
     /// Loads metadata from an account file
     /// </summary>
@@ -174,6 +195,7 @@ public class AccountMetadata : ICloneable
             result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
             result.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             result.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
+            result.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
         database.Close();
         return result;
@@ -190,6 +212,7 @@ public class AccountMetadata : ICloneable
             UseCustomCurrency = UseCustomCurrency,
             CustomCurrencySymbol = CustomCurrencySymbol,
             CustomCurrencyCode = CustomCurrencyCode,
+            CustomCurrencyAmountStyle = CustomCurrencyAmountStyle,
             CustomCurrencyDecimalSeparator = CustomCurrencyDecimalSeparator,
             CustomCurrencyGroupSeparator = CustomCurrencyGroupSeparator,
             CustomCurrencyDecimalDigits = CustomCurrencyDecimalDigits,

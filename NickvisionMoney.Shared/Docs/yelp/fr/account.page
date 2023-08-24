@@ -64,6 +64,16 @@
 		<p>Un exemple pour comprendre la différence entre un symbole et un code : <em>$</em> est un symbole, <em>USD</em> est un code.</p>
 	</item>
 	<item>
+        <title>Custom Currency Amount Style</title>
+        <p>A choice of displaying an amount in one of the following ways: </p>
+        <list>
+            <item><p>$n</p></item>
+            <item><p>n$</p></item>
+            <item><p>$ n</p></item>
+            <item><p>n $</p></item>
+        </list>
+    </item>
+	<item>
 		<title>Séparateur de décimales et de groupes personnalisé</title>
 		<p>Jusqu’à 2 caractères ou 1 émoji.</p>
 	</item>

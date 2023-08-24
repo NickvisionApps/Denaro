@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 20:15-0400\n"
+"POT-Creation-Date: 2023-08-23 18:31-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -45,30 +45,30 @@ msgid "{0} transaction"
 msgid_plural "{0} transactions"
 msgstr[0] "{0} transaksi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:278
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:288
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:85
 msgid "Account Name"
 msgstr "Nama Rekening"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:294
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:304
 #, fuzzy
 msgid "Account Name (Exists)"
 msgstr "Nama (Telah digunakan)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:289
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:299
 #, fuzzy
 msgid "Account Name (Opened)"
 msgstr "Tidak Ada Rekening yang Terbuka"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:72
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:475
-#: ../../../Models/Account.cs:1703
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:73
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:489
+#: ../../../Models/Account.cs:1714
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:35
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
 msgid "Account Settings"
 msgstr "Pengaturan Rekening"
 
-#: ../../../Models/Account.cs:1704
+#: ../../../Models/Account.cs:1715
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:59
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:161
 msgid "Account Type"
@@ -88,15 +88,15 @@ msgstr "Tambahkan transaksi baru atau impor transaksi dari berkas."
 msgid "Add Password To PDF?"
 msgstr "Tambahkan kata sandi ke PDF?"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:426
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:726
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:675
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:436
 msgid "All files"
 msgstr "Semua Berkas"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:141
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:494
-#: ../../../Models/Account.cs:1737 ../../../Models/Account.cs:1773
+#: ../../../Models/Account.cs:1748 ../../../Models/Account.cs:1784
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:76
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
 msgid "Amount"
@@ -129,7 +129,7 @@ msgstr ""
 "Apakah anda yakin ingin menghapus transaksi ini?\n"
 "Tindakan ini tidak dapat diurungkan."
 
-#: ../../../Models/Account.cs:1711
+#: ../../../Models/Account.cs:1722
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:165
 msgid "Business"
@@ -145,12 +145,12 @@ msgstr "Tidak dapat mengakses folder yang dipilih, periksa perizinan Flatpak."
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:240
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:251
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:113
 msgid "Change Password"
 msgstr "Ubah Kata Sandi"
 
-#: ../../../Models/Account.cs:1709
+#: ../../../Models/Account.cs:1720
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:165
 msgid "Checking"
@@ -163,42 +163,42 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "Kontributor di GitHub ❤️ {1}"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:120
-#: ../../../Models/Account.cs:1705
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
+#: ../../../Models/Account.cs:1716
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
 msgid "Currency"
 msgstr "Mata Uang"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:359
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:355
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:369
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Currency Code"
 msgstr "Kode Mata Uang"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:384
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:389
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
 msgid "Currency Code (Empty)"
 msgstr "Kode mata uang (kosong)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:357
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:353
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:367
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:237
 msgid "Currency Symbol"
 msgstr "Simbol Mata Uang"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:374
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:377
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:391
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:384
 msgid "Currency Symbol (Empty)"
 msgstr "Simbol Mata Uang (kosong)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:379
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:401
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:408
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:383
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:409
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:417
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:397
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:423
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:431
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 msgid "Currency Symbol (Invalid)"
 msgstr "Simbol Mata Uang (Tidak sah)"
 
@@ -206,7 +206,7 @@ msgstr "Simbol Mata Uang (Tidak sah)"
 msgid "DaPigGuy"
 msgstr ""
 
-#: ../../../Models/Account.cs:1767
+#: ../../../Models/Account.cs:1778
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
 msgid "Date"
 msgstr "Tanggal"
@@ -215,22 +215,22 @@ msgstr "Tanggal"
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:361
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:357
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:371
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:186
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:252
 msgid "Decimal Separator"
 msgstr "Pemisah desimal"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:395
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:399
 msgid "Decimal Separator (Empty)"
 msgstr "pemisah Desimal (kosong)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:403
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:401
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:415
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:425
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:413
 msgid "Decimal Separator (Invalid)"
 msgstr "Pemisah Desimal (Tidak sah)"
 
@@ -257,12 +257,11 @@ msgstr "Hapus Transaksi"
 
 #: ../../../Controllers/MainWindowController.cs:86
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
 msgstr "Denaro"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:492
-#: ../../../Models/Account.cs:1736 ../../../Models/Account.cs:1768
+#: ../../../Models/Account.cs:1747 ../../../Models/Account.cs:1779
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:39
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:65
 msgid "Description"
@@ -298,9 +297,9 @@ msgstr "Kata Sandi Rekening Tujuan (Diperlukan)"
 msgid "Disassociate Existing"
 msgstr "Pisahkan yang Ada"
 
-#: ../../../Models/Account.cs:1689 ../../../Models/Account.cs:1819
-#: ../../../Models/Account.cs:1937 ../../../Models/Account.cs:1969
-#: ../../../Models/Account.cs:2024 ../../../Models/Account.cs:2096
+#: ../../../Models/Account.cs:1700 ../../../Models/Account.cs:1830
+#: ../../../Models/Account.cs:1948 ../../../Models/Account.cs:1980
+#: ../../../Models/Account.cs:2035 ../../../Models/Account.cs:2107
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:118
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
@@ -315,8 +314,8 @@ msgstr "Pengeluaran"
 msgid "Export to File"
 msgstr "Ekspor ke Berkas\t"
 
-#: ../../../Controllers/AccountViewController.cs:987
-#: ../../../Controllers/AccountViewController.cs:1005
+#: ../../../Controllers/AccountViewController.cs:988
+#: ../../../Controllers/AccountViewController.cs:1006
 msgid "Exported account to file successfully."
 msgstr "Ekspor rekening ke berkas berhasil."
 
@@ -324,7 +323,7 @@ msgstr "Ekspor rekening ke berkas berhasil."
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: ../../../Models/Account.cs:1654
+#: ../../../Models/Account.cs:1665
 #, csharp-format
 msgid "Generated: {0}"
 msgstr "Dihasilkan: {0}"
@@ -352,25 +351,25 @@ msgstr "Selamat Malam!"
 msgid "Group"
 msgstr "Grup"
 
-#: ../../../Models/Account.cs:1770
+#: ../../../Models/Account.cs:1781
 msgid "Group Name"
 msgstr "Nama Grup"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:363
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:359
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:195
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:261
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:373
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:202
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:268
 msgid "Group Separator"
 msgstr "Pemisah Grup"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:396
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:410
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:403
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:419
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:417
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:433
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:406
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:420
 msgid "Group Separator (Invalid)"
 msgstr "Pemisah Grup (tidak sah)"
 
-#: ../../../Models/Account.cs:1734
+#: ../../../Models/Account.cs:1745
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:140
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:76
 msgid "Groups"
@@ -382,11 +381,11 @@ msgstr "Grup"
 msgid "Help"
 msgstr "Bantuan"
 
-#: ../../../Models/Account.cs:1766 ../../../Models/Account.cs:1839
+#: ../../../Models/Account.cs:1777 ../../../Models/Account.cs:1850
 msgid "Id"
 msgstr "Id"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:424
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:434
 #, fuzzy
 msgid "Import from Account"
 msgstr "Impor dari Berkas"
@@ -397,15 +396,15 @@ msgstr "Impor dari Berkas"
 msgid "Import from File"
 msgstr "Impor dari Berkas"
 
-#: ../../../Controllers/AccountViewController.cs:965
+#: ../../../Controllers/AccountViewController.cs:966
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
 msgstr[0] "Mengimpor {0} transaksi dari berkas."
 
-#: ../../../Models/Account.cs:1687 ../../../Models/Account.cs:1818
-#: ../../../Models/Account.cs:1936 ../../../Models/Account.cs:1968
-#: ../../../Models/Account.cs:2023 ../../../Models/Account.cs:2096
+#: ../../../Models/Account.cs:1698 ../../../Models/Account.cs:1829
+#: ../../../Models/Account.cs:1947 ../../../Models/Account.cs:1979
+#: ../../../Models/Account.cs:2034 ../../../Models/Account.cs:2107
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:74
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:97
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
@@ -416,7 +415,6 @@ msgstr "Pemasukan"
 
 #: ../../../Controllers/MainWindowController.cs:86
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:5
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:8
 msgid "Manage your personal finances"
 msgstr "Kelola keuangan pribadi anda"
 
@@ -425,20 +423,20 @@ msgid "Matrix Chat"
 msgstr "Obrolan Matrix"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:185
-#: ../../../Models/Account.cs:1485 ../../../Models/Account.cs:1547
+#: ../../../Models/Account.cs:1496 ../../../Models/Account.cs:1558
 msgid "N/A"
 msgstr "N/A"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:146
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:350
-#: ../../../Models/Account.cs:1735
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:364
+#: ../../../Models/Account.cs:1746
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:54
 #: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:33
 msgid "Name"
 msgstr "Nama"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:156
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:371
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:385
 msgid "Name (Empty)"
 msgstr "Nama (Kosong)"
 
@@ -460,7 +458,7 @@ msgstr ""
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
-#: ../../../Models/Account.cs:1868
+#: ../../../Models/Account.cs:1879
 msgid "Nickvision Denaro Account"
 msgstr "Rekening Nickvision Denaro"
 
@@ -488,20 +486,20 @@ msgstr "Tidak Ada Transaksi yang Ditemukan"
 msgid "No transactions match the specified filters."
 msgstr "Tidak ada transaksi yang sesuai dengan filter."
 
-#: ../../../Models/Account.cs:1772
+#: ../../../Models/Account.cs:1783
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:364
 msgid "Notes"
 msgstr "Catatan"
 
-#: ../../../Controllers/AccountViewController.cs:974
+#: ../../../Controllers/AccountViewController.cs:975
 msgid "Nothing to import from the file."
 msgstr ""
 
-#: ../../../Models/Account.cs:2200
+#: ../../../Models/Account.cs:2211
 msgid "One month from now"
 msgstr ""
 
-#: ../../../Models/Account.cs:2196
+#: ../../../Models/Account.cs:2207
 msgid "One week from now"
 msgstr ""
 
@@ -515,11 +513,11 @@ msgstr "Buka"
 msgid "Open Account"
 msgstr "Buka Rekening"
 
-#: ../../../Models/Account.cs:1665
+#: ../../../Models/Account.cs:1676
 msgid "Overview"
 msgstr "Gambaran"
 
-#: ../../../Models/Account.cs:1871
+#: ../../../Models/Account.cs:1882
 msgid "Page {0}"
 msgstr "Halaman"
 
@@ -529,7 +527,7 @@ msgstr "Kata Sandi PDF"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:498
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:673
-#: ../../../Models/Account.cs:1840
+#: ../../../Models/Account.cs:1851
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:320
 msgid "Receipt"
 msgstr "Kuitansi"
@@ -538,7 +536,7 @@ msgstr "Kuitansi"
 msgid "Receipt (File Inaccessible)"
 msgstr "Kwitansi (Berkas tidak dapat diakses)"
 
-#: ../../../Models/Account.cs:1838
+#: ../../../Models/Account.cs:1849
 msgid "Receipts"
 msgstr "Kuitansi"
 
@@ -560,7 +558,7 @@ msgstr "Interval Pengulangan"
 msgid "Repeat Interval Changed"
 msgstr "Interval Pengulangan diubah"
 
-#: ../../../Models/Account.cs:1710
+#: ../../../Models/Account.cs:1721
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:165
 msgid "Savings"
@@ -575,7 +573,7 @@ msgstr "Pilih Rekening"
 msgid "Select Backup Folder"
 msgstr "Pilih Folder Cadangan"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:256
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:266
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:113
 msgid "Select Folder"
 msgstr "Pilih Folder"
@@ -592,7 +590,7 @@ msgstr "Urutkan Berdasarkan Tanggal"
 msgid "Sort By Id"
 msgstr "Urutkan Berdasarkan Id"
 
-#: ../../../Models/Account.cs:1771
+#: ../../../Models/Account.cs:1782
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:184
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
@@ -606,11 +604,11 @@ msgstr "Kata sandi pada rekening ini telah diubah."
 msgid "The password of the account was removed."
 msgstr "Kata sandi pada rekening ini telah dihapus."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:478
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:492
 msgid "The password will be removed upon closing this dialog."
 msgstr "Kata sandi akan dihapus setelah menutup dialog ini."
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:424
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:438
 msgid "The passwords do not match."
 msgstr "Kata sandi tidak cocok."
 
@@ -668,11 +666,11 @@ msgstr ""
 msgid "Tobias Bernard"
 msgstr ""
 
-#: ../../../Models/Account.cs:2192
+#: ../../../Models/Account.cs:2203
 msgid "Tomorrow"
 msgstr ""
 
-#: ../../../Models/Account.cs:1684
+#: ../../../Models/Account.cs:1695
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:61
 msgid "Total"
@@ -683,21 +681,21 @@ msgstr "Total"
 msgid "Transaction"
 msgstr "Transaksi"
 
-#: ../../../Models/Account.cs:1765
+#: ../../../Models/Account.cs:1776
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:422
 msgid "Transactions"
 msgstr "Transaksi"
 
-#: ../../../Models/Account.cs:511
+#: ../../../Models/Account.cs:520
 msgid "Transactions without a group"
 msgstr "Transaksi Tanpa Grup"
 
-#: ../../../Controllers/AccountViewController.cs:899
+#: ../../../Controllers/AccountViewController.cs:900
 #, csharp-format
 msgid "Transfer From {0}"
 msgstr "Transfer dari {0}"
 
-#: ../../../Controllers/AccountViewController.cs:871
+#: ../../../Controllers/AccountViewController.cs:872
 #, csharp-format
 msgid "Transfer To {0}"
 msgstr "Transfer ke {0}"
@@ -706,20 +704,20 @@ msgstr "Transfer ke {0}"
 msgid "translator-credits"
 msgstr ""
 
-#: ../../../Models/Account.cs:2204
+#: ../../../Models/Account.cs:2215
 msgid "Two months from now"
 msgstr ""
 
-#: ../../../Models/Account.cs:1769
+#: ../../../Models/Account.cs:1780
 msgid "Type"
 msgstr "Tipe"
 
-#: ../../../Controllers/AccountViewController.cs:991
-#: ../../../Controllers/AccountViewController.cs:1009
+#: ../../../Controllers/AccountViewController.cs:992
+#: ../../../Controllers/AccountViewController.cs:1010
 msgid "Unable to export account to file."
 msgstr "Tidak dapat mengekspor rekening ke berkas."
 
-#: ../../../Controllers/AccountViewController.cs:933
+#: ../../../Controllers/AccountViewController.cs:934
 msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
@@ -727,7 +725,7 @@ msgstr ""
 "Tidak dapat mengimpor informasi dari berkas. Pastikan aplikasi memiliki izin "
 "untuk mengakses file dan coba lagi."
 
-#: ../../../Controllers/AccountViewController.cs:969
+#: ../../../Controllers/AccountViewController.cs:970
 #, fuzzy
 msgid "Unable to import transactions from the file."
 msgstr "Tambahkan transaksi baru atau impor transaksi dari berkas."
@@ -756,19 +754,19 @@ msgid "Unable to overwrite an opened account."
 msgstr "Tidak dapat mengesampingkan rekening yang terbuka."
 
 #: ../../../Controllers/AccountViewController.cs:449
-#: ../../../Controllers/AccountViewController.cs:825
-#: ../../../Controllers/AccountViewController.cs:940
+#: ../../../Controllers/AccountViewController.cs:826
+#: ../../../Controllers/AccountViewController.cs:941
 #: ../../../Controllers/TransactionDialogController.cs:92
 #: ../../../Controllers/TransactionDialogController.cs:340
-#: ../../../Models/Account.cs:510 ../../../Models/Account.cs:1740
-#: ../../../Models/Account.cs:1822 ../../../Models/Account.cs:1968
-#: ../../../Models/Account.cs:1969 ../../../Models/Account.cs:1973
-#: ../../../Models/Account.cs:2063
+#: ../../../Models/Account.cs:519 ../../../Models/Account.cs:1751
+#: ../../../Models/Account.cs:1833 ../../../Models/Account.cs:1979
+#: ../../../Models/Account.cs:1980 ../../../Models/Account.cs:1984
+#: ../../../Models/Account.cs:2074
 msgid "Ungrouped"
 msgstr "Tidak digrup"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:175
-#: ../../../Controllers/AccountViewController.cs:1145
+#: ../../../Controllers/AccountViewController.cs:1146
 #: ../../../Models/Account.cs:113
 msgid "Untagged"
 msgstr ""
@@ -820,8 +818,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Ya"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:212
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:113
+#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:114
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:222
 msgid "Your system reported that your currency is"
 msgstr "Sistem anda melaporkan bahwa mata uang anda adalah"
 
@@ -885,76 +883,81 @@ msgstr "Buat kata sandi baru atau hapus."
 msgid "Use Custom Currency"
 msgstr "Gunakan Mata Uang Kustom"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:181
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:197
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:247
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:263
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
+msgid "Amount Display Style"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:188
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:254
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:270
 #, fuzzy
 msgid "Other"
 msgstr "Lainnya"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:197
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:263
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:270
 #, fuzzy
 msgid "None"
 msgstr "Tidak ada"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:211
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:218
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:284
 msgid "Decimal Digits"
 msgstr "Digit desimal"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Two"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Three"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Four"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Five"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Six"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:213
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:279
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Unlimited"
 msgstr "Tak terbatas"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:229
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:236
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:31
 msgid "New Password"
 msgstr "Kata Sandi Baru"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:233
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:240
 #: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:36
 msgid "Confirm Password"
 msgstr "Konfirmasi Kata Sandi"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:237
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
 #, fuzzy
 msgid "Password Strength"
 msgstr "Kata Sandi"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:249
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
 msgstr "Jika kata sandi hilang, tidak ada cara untuk mengembalikan berkas ini!"
 
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:253
+#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:260
 #: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
 msgid "Remove"
 msgstr "Hapus"
@@ -1079,7 +1082,7 @@ msgstr ""
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:372
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:135
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:201
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:289
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:296
 msgid "Next"
 msgstr "Selanjutnya"
 
@@ -1168,33 +1171,33 @@ msgstr ""
 msgid "Account Currency"
 msgstr "Mata Uang Rekening"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:306
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:313
 #, fuzzy
 msgid "Import Existing Information"
 msgstr "Ekspor Semua Informasi"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:315
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:322
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:322
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:329
 #, fuzzy
 msgid "Import File"
 msgstr "Impor dari Berkas"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:329
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:336
 #, fuzzy
 msgid "Select File"
 msgstr "Pilih Folder"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:339
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:346
 #, fuzzy
 msgid "Clear File"
 msgstr "Bersihkan Folder Cadangan"
 
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:350
+#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:357
 msgid "Create"
 msgstr "Buat"
 
@@ -1551,32 +1554,28 @@ msgstr ""
 "money;finance;wallet;cash;bank;GTK;Nickvision;uang;finansial;dompet;tunai;"
 "bank;"
 
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
-msgid "— Manage multiple accounts at a time, with a familiar tab interface"
-msgstr ""
-"— Kelola beberapa rekening bersamaan, dengan antarmuka tab yang familiar"
+#~ msgid "— Manage multiple accounts at a time, with a familiar tab interface"
+#~ msgstr ""
+#~ "— Kelola beberapa rekening bersamaan, dengan antarmuka tab yang familiar"
 
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
-msgid "— Easily filter transactions by type, group, or date"
-msgstr "— Filter transaksi berdasarkan tipe, grup, atau tanggal dengan mudah"
+#~ msgid "— Easily filter transactions by type, group, or date"
+#~ msgstr ""
+#~ "— Filter transaksi berdasarkan tipe, grup, atau tanggal dengan mudah"
 
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
-msgid "— Easily repeat transactions, such as bills that occur every month"
-msgstr ""
-"— Lakukan transaksi berulang dengan mudah, seperti tagihan yang terjadi "
-"setiap bulan"
+#~ msgid "— Easily repeat transactions, such as bills that occur every month"
+#~ msgstr ""
+#~ "— Lakukan transaksi berulang dengan mudah, seperti tagihan yang terjadi "
+#~ "setiap bulan"
 
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
-msgid "— Transfer money from one account to another"
-msgstr "— Transfer uang dari rekening ke rekening lain"
+#~ msgid "— Transfer money from one account to another"
+#~ msgstr "— Transfer uang dari rekening ke rekening lain"
 
-#: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:14
-msgid ""
-"— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
-"add transactions to an account"
-msgstr ""
-"— Ekspor rekening sebagai berkas CSV dan impor berkas CSV, OFX, atau QIF "
-"untuk menambahkan transaksi secara massal ke akun"
+#~ msgid ""
+#~ "— Export an account as a CSV file and import a CSV, OFX or QIF file to "
+#~ "bulk add transactions to an account"
+#~ msgstr ""
+#~ "— Ekspor rekening sebagai berkas CSV dan impor berkas CSV, OFX, atau QIF "
+#~ "untuk menambahkan transaksi secara massal ke akun"
 
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr ""
