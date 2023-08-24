@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-08-17 14:58+0000\n"
+"PO-Revision-Date: 2023-08-24 10:19+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/cs/>\n"
@@ -262,34 +262,33 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:70
-#, fuzzy
 msgid "Custom Currency Amount Style"
-msgstr "Vlastní symbol měny"
+msgstr "Vlastní styl množství měny"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:71
 msgid "A choice of displaying an amount in one of the following ways:"
-msgstr ""
+msgstr "Výběr mezi zobrazením množství jedním z následujících způsobů:"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:73
 msgid "$n"
-msgstr ""
+msgstr "$n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:74
 msgid "n$"
-msgstr ""
+msgstr "n$"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
 msgid "$ n"
-msgstr ""
+msgstr "$ n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:76
 msgid "n $"
-msgstr ""
+msgstr "n $"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:80
