@@ -73,6 +73,15 @@ public partial class TransferDialog : Adw.Window
                 Validate();
             }
         };
+        
+        _conversionRateGroup.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "visible")
+            {
+                PopulateRateFields();
+            }
+        };
+        
         _sourceCurrencyKeyController = Gtk.EventControllerKey.New();
         _sourceCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _sourceCurrencyKeyController.OnKeyPressed += OnKeyPressedSource;
@@ -277,5 +286,29 @@ public partial class TransferDialog : Adw.Window
             }
         }
         return false;
+    }
+
+
+    private void PopulateRateFields()
+    {
+        if (_conversionRateGroup.Visible)
+        {
+            var rates = _controller.GetConversionRatesAsync().Result;
+            if (rates != null)
+            {
+                _sourceCurrencyRow.SetText(
+                    rates.Value.Item1.ToAmountString(_controller.CultureForSourceNumberString, 
+                        _controller.UseNativeDigits, 
+                        showCurrencySymbol: false));
+                
+                _controller.Transfer.ConversionRate = 1 / rates.Value.Item2;
+
+                var text = rates.Value.Item2.ToAmountString(_controller.CultureForSourceNumberString, 
+                    _controller.UseNativeDigits, 
+                    showCurrencySymbol: false);
+                
+                _destinationCurrencyRow.SetText(text);
+            }
+        }
     }
 }
