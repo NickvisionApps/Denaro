@@ -127,14 +127,14 @@ public class AccountMetadata : ICloneable
     /// <summary>
     /// The style to use for displaying an amount
     /// </summary>
-    /// <remarks>Must be a value between 0 and 4. See https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberformatinfo.currencypositivepattern?view=net-7.0#remarks for the values' meaning</remarks>
+    /// <remarks>Must be a value between 0 and 3. See https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberformatinfo.currencypositivepattern?view=net-7.0#remarks for the values' meaning</remarks>
     public int? CustomCurrencyAmountStyle
     {
         get => _customCurrencyAmountStyle;
 
         set
         {
-            if (value != null && (value < 0 || value > 4))
+            if (value != null && (value < 0 || value > 3))
             {
                 value = 0;
             }
