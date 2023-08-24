@@ -70,8 +70,8 @@
 		<p>Un ejemplo para entender la diferencia entre un símbolo y un código: <em>$</em> es un símbolo, <em>USD</em> es un código.</p>
 	</item>
 	<item>
-        <title>Custom Currency Amount Style</title>
-        <p>A choice of displaying an amount in one of the following ways: </p>
+        <title>Estilo del total de monedas personalizado</title>
+        <p>Elige entre mostrar las cantidades de una de las siguientes maneras:</p>
         <list>
             <item><p>$n</p></item>
             <item><p>n$</p></item>
