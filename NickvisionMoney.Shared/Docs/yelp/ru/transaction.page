@@ -55,8 +55,8 @@
 		<p>Цвет транзакции. Можно либо использовать цвет группы, либо указать собственный цвет. При выборе собственного цвета, по умолчанию он будет соответствовать цвету, указанному в <link xref="configuration">конфигурации</link>, но он может быть изменён на любой другой цвет.</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>Метки</title>
+        <p>Список меток для транзакции. У транзакции может быть сколько угодно меток (либо не быть меток вовсе). Метки могут содержать любые символы, кроме запятой (<code>,</code>), и у них может быть любая длина, но предполагается что это буду короткие ключевые слова. Метки предназначены для дополнительной фильтрации, когда использования групп недостаточно. Метки сохраняются в самих транзакциях, в результате чего неиспользованные метки исчезают автоматически при закрытии счёта.</p>
     </item>
 	<item>
 		<title>Чек</title>
