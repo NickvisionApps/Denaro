@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 18:31-0400\n"
-"PO-Revision-Date: 2023-08-20 18:26+0000\n"
+"PO-Revision-Date: 2023-08-24 10:19+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -881,7 +881,7 @@ msgstr "Použití vlastní měny"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
 msgid "Amount Display Style"
-msgstr ""
+msgstr "Styl zobrazení množství"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:188
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
@@ -942,9 +942,8 @@ msgstr "Potvrzení hesla"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
-#, fuzzy
 msgid "Password Strength"
-msgstr "Heslo"
+msgstr "Síla hesla"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
