@@ -219,6 +219,7 @@ public class TransferDialogController
         return TransferCheckStatus.Valid;
     }
 
+    private static Dictionary<string, string> tmpCacheSoIDontGetRateLimited = new();
     
     public async Task<(decimal, decimal)?> GetConversionRatesAsync()
     {
@@ -237,14 +238,26 @@ public class TransferDialogController
         try
         {
             var httpClient = new HttpClient();
-            
-            //TODO: See why this doesn't work with await
-            var response = httpClient.GetAsync(apiUrl).Result;
 
-            if (!response.IsSuccessStatusCode)
-                return null;
+            string json;
+            if (!tmpCacheSoIDontGetRateLimited.ContainsKey(SourceCurrencyCode))
+            {
+                //TODO: See why this doesn't work with await
+                var response = httpClient.GetAsync(apiUrl).Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
             
-            var json = await response.Content.ReadAsStringAsync();
+                json = await response.Content.ReadAsStringAsync();
+                tmpCacheSoIDontGetRateLimited.Add(SourceCurrencyCode, json);
+            }
+            else
+            {
+                json = tmpCacheSoIDontGetRateLimited[SourceCurrencyCode];
+            }
+            
+            httpClient.Dispose();
+            
             var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
             var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(data["rates"].ToString());
                 
