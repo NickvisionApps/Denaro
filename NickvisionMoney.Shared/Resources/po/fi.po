@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 18:31-0400\n"
-"PO-Revision-Date: 2023-08-06 14:49+0000\n"
+"PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/fi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0\n"
 
 #: ../../../Controllers/AccountViewController.cs:505
 msgid "(Copy)"
@@ -157,11 +157,8 @@ msgid "Checking"
 msgstr "Siirto"
 
 #: ../../../Controllers/MainWindowController.cs:106
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"Avustajat GitHubissa ❤️ {1}"
+msgstr "Avustajat GitHubissa ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1716
@@ -204,7 +201,7 @@ msgstr "Valuutan symboli (virheellinen)"
 
 #: ../../../Controllers/MainWindowController.cs:109
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Models/Account.cs:1778
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
@@ -213,7 +210,7 @@ msgstr "Päivä"
 
 #: ../../../Controllers/MainWindowController.cs:110
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
@@ -322,7 +319,7 @@ msgstr "Tili viety tiedostoon onnistuneesti."
 
 #: ../../../Controllers/MainWindowController.cs:108
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: ../../../Models/Account.cs:1665
 #, csharp-format
@@ -455,7 +452,7 @@ msgstr "Ei koskaan"
 #: ../../../Controllers/MainWindowController.cs:105
 #: ../../../Controllers/MainWindowController.cs:107
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
@@ -494,15 +491,15 @@ msgstr ""
 
 #: ../../../Controllers/AccountViewController.cs:975
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Ei mitään tuotavaa tiedostosta."
 
 #: ../../../Models/Account.cs:2211
 msgid "One month from now"
-msgstr ""
+msgstr "Yksi kuukausi tästä hetkestä"
 
 #: ../../../Models/Account.cs:2207
 msgid "One week from now"
-msgstr ""
+msgstr "Yksi viikko tästä hetkestä"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -596,7 +593,7 @@ msgstr "Järjestä tunnisteen mukaan"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:184
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Tunnisteet"
 
 #: ../../../Controllers/AccountViewController.cs:577
 msgid "The password of the account was changed."
@@ -650,11 +647,11 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:111
 msgid "Tobias Bernard"
-msgstr ""
+msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2203
 msgid "Tomorrow"
-msgstr ""
+msgstr "Huomenna"
 
 #: ../../../Models/Account.cs:1695
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -692,7 +689,7 @@ msgstr "Jiri Grönroos"
 
 #: ../../../Models/Account.cs:2215
 msgid "Two months from now"
-msgstr ""
+msgstr "Kaksi kuukautta tästä hetkestä"
 
 #: ../../../Models/Account.cs:1780
 msgid "Type"
@@ -930,9 +927,8 @@ msgstr "Vahvista salasana"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
-#, fuzzy
 msgid "Password Strength"
-msgstr "Salasana"
+msgstr "Salasanan vahvuus"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
@@ -949,7 +945,7 @@ msgstr "Siirrä rahaa"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
@@ -963,7 +959,7 @@ msgstr "Vie nykyinen näkymä"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -976,7 +972,7 @@ msgstr "Päivän yleisnäkymä"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Muistutukset"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1409,20 +1405,20 @@ msgstr "Käytä yksilöllistä väriä"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
 msgid "Enter a new tag name..."
-msgstr ""
+msgstr "Kirjoita uuden tunnisteen nimi..."
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Lisää tunniste"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
 msgid "Extras"
-msgstr ""
+msgstr "Lisäkentät"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:255
 msgid "Manage extra fields of the transaction."
-msgstr ""
+msgstr "Hallitse tapahtuman lisäkenttiä."
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:365
 #, fuzzy
@@ -1521,11 +1517,10 @@ msgstr ""
 "tiedostonhallinnasta tähän sovellukseen."
 
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:13
-#, fuzzy
 msgid "money;finance;wallet;cash;bank;Nickvision;"
 msgstr ""
-"money;finance;wallet;cash;bank;GTK;Nickvision;raha;lompakko;käteinen;pankki;"
-"varallisuus;"
+"money;finance;wallet;cash;bank;GTK;Nickvision;raha;lompakko;käteinen;pankki;v"
+"arallisuus;"
 
 #, csharp-format
 #~ msgid ""

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 18:31-0400\n"
-"PO-Revision-Date: 2023-08-21 15:14+0000\n"
+"PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0\n"
 
 #: ../../../Controllers/AccountViewController.cs:505
 msgid "(Copy)"
@@ -879,7 +879,7 @@ msgstr "Özel Para Birimi Kullan"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
 msgid "Amount Display Style"
-msgstr ""
+msgstr "Miktar Gösterim Biçimi"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:188
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
@@ -940,9 +940,8 @@ msgstr "Parolayı Onayla"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
-#, fuzzy
 msgid "Password Strength"
-msgstr "Parola"
+msgstr "Parola Kuvveti"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
