@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -214,5 +217,44 @@ public class TransferDialogController
         Transfer.SourceAmount = amount;
         Transfer.ConversionRate = conversionRate;
         return TransferCheckStatus.Valid;
+    }
+
+    
+    public async Task<(decimal, decimal)?> GetConversionRatesAsync()
+    {
+        if(DestinationCurrencyCode is null)
+        {
+            return null;
+        }
+        
+        if(SourceCurrencyCode == DestinationCurrencyCode)
+        {
+            return (1.0m, 1.0m);
+        }
+        
+        var apiUrl = $"https://open.er-api.com/v6/latest/{SourceCurrencyCode}";
+        
+        try
+        {
+            var httpClient = new HttpClient();
+            
+            //TODO: See why this doesn't work with await
+            var response = httpClient.GetAsync(apiUrl).Result;
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+            
+            var json = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+            var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(data["rates"].ToString());
+                
+            var destConversionAmount = rates[DestinationCurrencyCode];
+            return (1.0m, destConversionAmount);
+
+        }
+        catch
+        {
+            return null;
+        }
     }
 }
