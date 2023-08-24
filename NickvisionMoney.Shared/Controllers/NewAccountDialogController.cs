@@ -113,6 +113,21 @@ public class NewAccountDialogController
     }
     
     /// <summary>
+    /// Strings to show for a custom currency's amount styles if available
+    /// </summary>
+    public string[]? CustomCurrencyAmountStyleStrings
+    {
+        get
+        {
+            if (Metadata.CustomCurrencySymbol != null)
+            {
+                return new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
+            }
+            return null;
+        }
+    }
+    
+    /// <summary>
     /// Updates the account name
     /// </summary>
     /// <param name="name">The new name</param>
@@ -151,8 +166,7 @@ public class NewAccountDialogController
         {
             result |= CurrencyCheckStatus.EmptyCurrencySymbol;
         }
-        decimal symbolAsNumber;
-        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out symbolAsNumber))
+        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out _))
         {
             result |= CurrencyCheckStatus.InvalidCurrencySymbol;
         }

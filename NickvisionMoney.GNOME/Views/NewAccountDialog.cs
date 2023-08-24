@@ -15,6 +15,7 @@ namespace NickvisionMoney.GNOME.Views;
 public partial class NewAccountDialog : Adw.Window
 {
     private readonly NewAccountDialogController _controller;
+    private bool _constructing = false;
     private uint _currentPageNumber;
 
     [Gtk.Connect] private readonly Gtk.Button _backButton;
@@ -61,6 +62,7 @@ public partial class NewAccountDialog : Adw.Window
     private NewAccountDialog(Gtk.Builder builder, NewAccountDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
+        _constructing = true;
         _currentPageNumber = 0;
         //Dialog Settings
         SetTransientFor(parent);
@@ -139,7 +141,10 @@ public partial class NewAccountDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "selected")
             {
-                ValidateCurrency();
+                if (!_constructing)
+                {
+                    ValidateCurrency();
+                }
             }
         };
         _customDecimalSeparatorRow.SetSelected(0);
@@ -220,6 +225,7 @@ public partial class NewAccountDialog : Adw.Window
         _incomeButton.SetActive(true);
         _transactionRemindersRow.SetSelected(0);
         _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
+        _constructing = false;
     }
     
     /// <summary>
@@ -374,7 +380,12 @@ public partial class NewAccountDialog : Adw.Window
         var checkStatus = _controller.UpdateCurrency(_rowCustomCurrency.GetExpanded(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits);
         if (checkStatus == CurrencyCheckStatus.Valid)
         {
+            _constructing = true;
+            var oldSelection = _customAmountStyleRow.GetSelected();
+            _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+            _customAmountStyleRow.SetSelected(oldSelection);
             _createButton.SetSensitive(true);
+            _constructing = false;
         }
         else
         {

@@ -375,7 +375,12 @@ public partial class AccountSettingsDialog : Adw.Window
         _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
+            _constructing = true;
+            var oldSelection = _customAmountStyleRow.GetSelected();
+            _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+            _customAmountStyleRow.SetSelected(oldSelection);
             _applyButton.SetSensitive(true);
+            _constructing = false;
         }
         else
         {
