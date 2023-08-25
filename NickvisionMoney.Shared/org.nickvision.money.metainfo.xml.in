@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.8.1-rc1" date="2023-08-24">
+    <release version="2023.8.1" date="2023-08-25">
       <description translatable="no">
         <p>- Added a password strength indicator when creating an account password</p>
         <p>- Added an Amount Display Style option to custom currency settings</p>
