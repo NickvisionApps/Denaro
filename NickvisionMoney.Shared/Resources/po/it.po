@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 18:31-0400\n"
-"PO-Revision-Date: 2023-06-17 02:34+0000\n"
+"PO-Revision-Date: 2023-08-26 11:02+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
 "app/it/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:505
 msgid "(Copy)"
@@ -36,8 +36,8 @@ msgstr "{0} da {1}"
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} etichetta"
+msgstr[1] "{0} etichette"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:457
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1337
@@ -53,14 +53,12 @@ msgid "Account Name"
 msgstr "Nome del conto"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:304
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "Nome (esistente)"
+msgstr "Nome del conto (esistente)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:299
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "Nessun account aperto"
+msgstr "Nome del conto (aperto)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:73
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:489
@@ -161,11 +159,8 @@ msgid "Checking"
 msgstr "Conto corrente"
 
 #: ../../../Controllers/MainWindowController.cs:106
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"I collaboratori di GitHub ❤️ {1}"
+msgstr "I collaboratori di GitHub ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1716
@@ -208,7 +203,7 @@ msgstr "Simbolo della valuta (non valido)"
 
 #: ../../../Controllers/MainWindowController.cs:109
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Models/Account.cs:1778
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:110
@@ -217,7 +212,7 @@ msgstr "Data"
 
 #: ../../../Controllers/MainWindowController.cs:110
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
@@ -325,7 +320,7 @@ msgstr "L'account è stato esportato su file."
 
 #: ../../../Controllers/MainWindowController.cs:108
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: ../../../Models/Account.cs:1665
 #, csharp-format
@@ -390,9 +385,8 @@ msgid "Id"
 msgstr "ID"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:434
-#, fuzzy
 msgid "Import from Account"
-msgstr "Importa da file"
+msgstr "Importa da un conto"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:724
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
@@ -459,7 +453,7 @@ msgstr "Mai"
 #: ../../../Controllers/MainWindowController.cs:105
 #: ../../../Controllers/MainWindowController.cs:107
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:205
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
@@ -499,15 +493,15 @@ msgstr "Annotazioni"
 
 #: ../../../Controllers/AccountViewController.cs:975
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Nulla da importare dal file."
 
 #: ../../../Models/Account.cs:2211
 msgid "One month from now"
-msgstr ""
+msgstr "Tra un mese"
 
 #: ../../../Models/Account.cs:2207
 msgid "One week from now"
-msgstr ""
+msgstr "Tra una settimana"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:210
 msgid "Open"
@@ -600,7 +594,7 @@ msgstr "Ordina per ID"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:184
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:200
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #: ../../../Controllers/AccountViewController.cs:577
 msgid "The password of the account was changed."
@@ -639,7 +633,6 @@ msgid "This account is already opened."
 msgstr "Questo account è già aperto."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:986
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -669,11 +662,11 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:111
 msgid "Tobias Bernard"
-msgstr ""
+msgstr "Tobias Bernard"
 
 #: ../../../Models/Account.cs:2203
 msgid "Tomorrow"
-msgstr ""
+msgstr "Domani"
 
 #: ../../../Models/Account.cs:1695
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:86
@@ -684,7 +677,7 @@ msgstr "Totale"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:166
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Transaction"
-msgstr "Transazioni"
+msgstr "Transazione"
 
 #: ../../../Models/Account.cs:1776
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:422
@@ -713,7 +706,7 @@ msgstr ""
 
 #: ../../../Models/Account.cs:2215
 msgid "Two months from now"
-msgstr ""
+msgstr "Tra due mesi"
 
 #: ../../../Models/Account.cs:1780
 msgid "Type"
@@ -733,9 +726,8 @@ msgstr ""
 "l'applicazione abbia i permessi di accedere al file e riprovare."
 
 #: ../../../Controllers/AccountViewController.cs:970
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr "Creare una nuova transazione o importare le transazioni da un file."
+msgstr "Importazione delle transazioni dal file non riuscita."
 
 #: ../../../Controllers/MainWindowController.cs:333
 msgid "Unable to login to account. Provided password is invalid."
@@ -751,14 +743,12 @@ msgstr ""
 "permessi di accedere al file e riprovare."
 
 #: ../../../Controllers/MainWindowController.cs:275
-#, fuzzy
 msgid "Unable to overwrite an existing account."
-msgstr "Non è possibile sovrascrivere un account aperto."
+msgstr "Non è possibile sovrascrivere un conto aperto."
 
 #: ../../../Controllers/MainWindowController.cs:264
-#, fuzzy
 msgid "Unable to overwrite an opened account."
-msgstr "Non è possibile sovrascrivere un account aperto."
+msgstr "Non è possibile sovrascrivere un conto aperto."
 
 #: ../../../Controllers/AccountViewController.cs:449
 #: ../../../Controllers/AccountViewController.cs:826
@@ -776,13 +766,12 @@ msgstr "Senza gruppo"
 #: ../../../Controllers/AccountViewController.cs:1146
 #: ../../../Models/Account.cs:113
 msgid "Untagged"
-msgstr ""
+msgstr "Senza etichetta"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:433
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1114
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Nessuna transazione"
+msgstr "Prossime transazioni"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:958
 msgid "Update Only Source"
@@ -855,27 +844,27 @@ msgstr "Tipo di transazione predefinito"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:86
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:190
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Soglia per i promemoria delle transazioni"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:192
 msgid "One Day Before"
-msgstr ""
+msgstr "Un giorno prima"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:192
 msgid "One Week Before"
-msgstr ""
+msgstr "Una settimana prima"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:192
 msgid "One Month Before"
-msgstr ""
+msgstr "Un mese prima"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:88
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:192
 msgid "Two Months Before"
-msgstr ""
+msgstr "Due mesi prima"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:96
 msgid "Manage the currency used by the account."
@@ -893,19 +882,17 @@ msgstr "Usa valuta personalizzata"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:179
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
 msgid "Amount Display Style"
-msgstr ""
+msgstr "Stile visualizzazione importo"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:188
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:270
-#, fuzzy
 msgid "Other"
 msgstr "Altro"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:204
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:270
-#, fuzzy
 msgid "None"
 msgstr "Nessuno"
 
@@ -917,27 +904,27 @@ msgstr "Cifre decimali"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Two"
-msgstr ""
+msgstr "Due"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Three"
-msgstr ""
+msgstr "Tre"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Four"
-msgstr ""
+msgstr "Quattro"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Five"
-msgstr ""
+msgstr "Cinque"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
 msgid "Six"
-msgstr ""
+msgstr "Sei"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:220
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:286
@@ -956,9 +943,8 @@ msgstr "Conferma password"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
-#, fuzzy
 msgid "Password Strength"
-msgstr "Password"
+msgstr "Robustezza della password"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
@@ -968,7 +954,7 @@ msgstr ""
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:260
 #: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
 msgid "Remove"
-msgstr "Elimina"
+msgstr "Rimuovi"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:5
 msgid "Transfer Money"
@@ -976,7 +962,7 @@ msgstr "Trasferisci denaro"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
@@ -990,7 +976,7 @@ msgstr "Esporta vista corrente"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:51
 msgid "Search by description"
@@ -1003,7 +989,7 @@ msgstr "Panoramica di oggi"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:61
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:23
 msgid "Reminders"
-msgstr ""
+msgstr "Promemoria"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:71
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:33
@@ -1036,19 +1022,16 @@ msgid "Unselect Groups Filters"
 msgstr "Deseleziona filtri dei gruppi"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:187
-#, fuzzy
 msgid "Toggle Tags Visibility"
-msgstr "Mostra/nascondi gruppi"
+msgstr "Mostra/nascondi etichette"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:195
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Seleziona tutti i filtri dei gruppi"
+msgstr "Seleziona tutti i filtri delle etichette"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:202
-#, fuzzy
 msgid "Unselect Tags Filters"
-msgstr "Deseleziona filtri dei gruppi"
+msgstr "Deseleziona filtri delle etichette"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:225
 msgid "Calendar"
@@ -1056,7 +1039,7 @@ msgstr "Calendario"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:230
 msgid "Select Current Month"
-msgstr ""
+msgstr "Seleziona il mese corrente"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:236
 msgid "Reset To Today"
@@ -1082,7 +1065,7 @@ msgstr "Fine"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:354
 msgid "Visualize"
-msgstr ""
+msgstr "Visualizza"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:372
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:135
@@ -1158,9 +1141,8 @@ msgid "Folder"
 msgstr "Cartella"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:120
-#, fuzzy
 msgid "Overwrite Existing Accounts"
-msgstr "Conto di destinazione"
+msgstr "Sovrascrivi conti esistenti"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
 msgid "Account Options"
@@ -1177,30 +1159,28 @@ msgid "Account Currency"
 msgstr "Valuta del conto"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:313
-#, fuzzy
 msgid "Import Existing Information"
-msgstr "Esporta tutte le informazioni"
+msgstr "Importa informazioni esistenti"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:322
 msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
+"Caricare un file valido da cui importare le informazioni esistenti nel nuovo "
+"conto."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:329
-#, fuzzy
 msgid "Import File"
-msgstr "Importa da file"
+msgstr "Importa file"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:336
-#, fuzzy
 msgid "Select File"
-msgstr "Seleziona cartella"
+msgstr "Selezionare un file"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:346
-#, fuzzy
 msgid "Clear File"
-msgstr "Rimuovi cartella di backup"
+msgstr "Rimuovi file"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:357
 msgid "Create"
@@ -1266,7 +1246,7 @@ msgstr "Le modifiche saranno applicate solo alle nuove transazioni."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:52
 msgid "Transfer Default Color"
-msgstr "Colore predefinito delle transazioni"
+msgstr "Colore predefinito dei trasferimenti"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
 msgid "A change in this setting will only be applied to new transfers."
@@ -1354,7 +1334,7 @@ msgstr "Rimuovi cartella di backup"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:42
 msgid "No Reminders"
-msgstr ""
+msgstr "Nessun promemoria"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgid "Account"
@@ -1442,11 +1422,11 @@ msgstr "Usa colore speciale"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
 msgid "Enter a new tag name..."
-msgstr ""
+msgstr "Inserire il nome per una nuova etichetta…"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
-msgstr ""
+msgstr "Aggiungi etichetta"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:254
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:312
@@ -1532,7 +1512,7 @@ msgstr "Nessun account recente"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:112
 msgid "Toggle Graphs"
-msgstr ""
+msgstr "Mostra/nascondi grafico"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:122
 msgid "Main Menu"
