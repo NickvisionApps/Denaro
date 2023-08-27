@@ -27,7 +27,7 @@
 		<p>Un colore che verrà selezionato inizialmente all'aggiunta di una nuova <link xref="transaction">transazione</link> con colore speciale. Cambiare questo colore non avrà effetto sulle transazioni esistenti, anche se usavano un colore predefinito precedentemente selezionato.</p>
 	</item>
 	<item>
-		<title>Colore predefinito delle transazioni</title>
+		<title>Colore predefinito dei trasferimenti</title>
 		<p>Un colore che verrà usato per le transazioni create usando i <link xref="transfer">trasferimenti</link>. Cambiare questo colore non avrà effetto sulle transazioni esistenti.</p>
 	</item>
 	<item>
