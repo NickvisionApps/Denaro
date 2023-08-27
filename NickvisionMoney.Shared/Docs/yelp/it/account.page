@@ -35,7 +35,7 @@
 		<p>Questo parametro determina il tipo predefinito di una nuova transazione alla sua creazione.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
+        <title>Soglia per i promemoria delle transazioni</title>
         <p>The threshold used when showing reminders about upcoming transactions.</p>
     </item>
 	<item>
