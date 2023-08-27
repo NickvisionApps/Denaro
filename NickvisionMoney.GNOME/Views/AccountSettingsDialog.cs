@@ -168,10 +168,7 @@ public partial class AccountSettingsDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "selected")
             {
-                if (!_constructing)
-                {
-                    Validate();
-                }
+                Validate();
             }
         };
         _customDecimalSeparatorRow.OnNotify += (sender, e) =>
@@ -290,6 +287,7 @@ public partial class AccountSettingsDialog : Adw.Window
         _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
         _customSymbolRow.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeRow.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
+        _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
         _customAmountStyleRow.SetSelected(_controller.Metadata.CustomCurrencyAmountStyle.HasValue ? (uint)_controller.Metadata.CustomCurrencyAmountStyle.Value : 0u);
         _customDecimalSeparatorRow.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
         {
@@ -359,6 +357,7 @@ public partial class AccountSettingsDialog : Adw.Window
             4 => _customGroupSeparatorText.GetText()
         };
         var customDecimalDigits = _customDecimalDigitsRow.GetSelected() == 5 ? 99 : _customDecimalDigitsRow.GetSelected() + 2;
+        var oldSymbol = _controller.Metadata.CustomCurrencySymbol;
         var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
@@ -375,12 +374,11 @@ public partial class AccountSettingsDialog : Adw.Window
         _lblPasswordStatus.SetText("");
         if (checkStatus == AccountMetadataCheckStatus.Valid)
         {
-            _constructing = true;
-            var oldSelection = _customAmountStyleRow.GetSelected();
-            _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
-            _customAmountStyleRow.SetSelected(oldSelection);
+            if (oldSymbol != _controller.Metadata.CustomCurrencySymbol)
+            {
+                _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+            }
             _applyButton.SetSensitive(true);
-            _constructing = false;
         }
         else
         {
