@@ -56,6 +56,8 @@ public partial class AccountView : Adw.Bin
     private Dictionary<string, TagButton> _tagButtons;
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
+    private object _startupLock;
+    private bool _startupCalled;
 
     [Gtk.Connect] private readonly Adw.Flap _flap;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
@@ -121,6 +123,8 @@ public partial class AccountView : Adw.Bin
         _tagButtons = new Dictionary<string, TagButton>();
         _transactionRows = new Dictionary<uint, TransactionRow>();
         _currentGraphPage = 0;
+        _startupLock = new object();
+        _startupCalled = false;
         //Register Controller Events
         _controller.AccountInformationChanged += (sender, e) => GLib.Functions.IdleAdd(0, AccountInformationChanged);
         _controller.GroupCreated += (sender, e) => GLib.Functions.IdleAdd(0, () => CreateGroupRow(e));
@@ -412,6 +416,11 @@ public partial class AccountView : Adw.Bin
     /// </summary>
     public async Task StartupAsync()
     {
+        lock (_startupLock)
+        {
+            if (_startupCalled) return;
+            _startupCalled = true;
+        }
         _paneScroll.SetSensitive(false);
         _viewStack.SetVisibleChildName("spinner");
         await Task.Run(async () => await _controller.StartupAsync());
