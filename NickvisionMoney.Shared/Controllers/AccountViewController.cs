@@ -27,6 +27,8 @@ public class AccountViewController : IDisposable
     private DateOnly _filterStartDate;
     private DateOnly _filterEndDate;
     private string _searchDescription;
+    private object _startupLock;
+    private bool _startupCalled;
 
     /// <summary>
     /// Gets the AppInfo object
@@ -188,6 +190,8 @@ public class AccountViewController : IDisposable
         _filteredExpense = 0;
         _groupFilters = new Dictionary<int, bool>();
         _tagFilters = new Dictionary<string, bool>();
+        _startupLock = new object();
+        _startupCalled = false;
         NotificationSent = notificationSent;
         RecentAccountsChanged = recentAccountsChanged;
         //Setup Filters
@@ -435,6 +439,11 @@ public class AccountViewController : IDisposable
     {
         if (!_isOpened)
         {
+            lock (_startupLock)
+            {
+                if (_startupCalled) return;
+                _startupCalled = true;
+            }
             await _account.LoadAsync();
             _searchDescription = "";
             //Metadata
