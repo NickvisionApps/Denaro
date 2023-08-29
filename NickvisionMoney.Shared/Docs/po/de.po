@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-08-20 18:26+0000\n"
+"PO-Revision-Date: 2023-08-29 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/de/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -215,12 +215,12 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:61
 msgid "Custom Currency Symbol"
-msgstr ""
+msgstr "Benutzerdefiniertes Währungssymbol"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:62
 msgid "Up to 3 characters or 1 emoji. It can't be a number."
-msgstr ""
+msgstr "Bis zu 3 Zeichen oder 1 Emoji. Es darf keine Zahl sein."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:65
@@ -230,7 +230,7 @@ msgstr "Benutzerdefinierter Währungscode"
 #. (itstool) path: item/p
 #: yelp/C/account.page:66
 msgid "Up to 3 characters or 1 emoji."
-msgstr ""
+msgstr "Bis zu 3 Zeichen oder 1 Emoji."
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:67
@@ -238,12 +238,13 @@ msgid ""
 "An example to understand the difference between a symbol and a code: <em>$</"
 "em> is a symbol, <em>USD</em> is a code."
 msgstr ""
+"Ein Beispiel zum Verständnis des Unterschieds zwischen einem Symbol und "
+"einem Code: <em>$</em> ist ein Symbol, <em>USD</em> ist ein Code."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:70
-#, fuzzy
 msgid "Custom Currency Amount Style"
-msgstr "Benutzerdefinierter Währungscode"
+msgstr "Benutzerdefinierter Währungsbetragsstil"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:71
@@ -253,37 +254,37 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:73
 msgid "$n"
-msgstr ""
+msgstr "$n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:74
 msgid "n$"
-msgstr ""
+msgstr "n$"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
 msgid "$ n"
-msgstr ""
+msgstr "$ n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:76
 msgid "n $"
-msgstr ""
+msgstr "n $"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:80
 msgid "Custom Currency Decimal and Group Separators"
-msgstr ""
+msgstr "Benutzerdefinierte Dezimal- und Gruppentrennzeichen für Währungen"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:81
 msgid "Up to 2 characters or 1 emoji."
-msgstr ""
+msgstr "Bis zu 2 Zeichen oder 1 Emoji."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:84
 msgid "Custom Currency Decimal Digits"
-msgstr ""
+msgstr "Benutzerdefinierte Währungsdezimalziffern"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:85
@@ -319,7 +320,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:92
 msgid "Sort by Id, Date or Amount"
-msgstr ""
+msgstr "Nach Kennung, Datum oder Betrag sortieren"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:93
@@ -332,7 +333,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:96
 msgid "Sorting Order"
-msgstr ""
+msgstr "Sortierreihenfolge"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:97
@@ -345,7 +346,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:100
 msgid "Groups Visibility"
-msgstr ""
+msgstr "Gruppen-Sichtbarkeit"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:101
@@ -358,7 +359,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:104
 msgid "Tags Visibility"
-msgstr ""
+msgstr "Schlagwörter-Sichtbarkeit"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:105
@@ -396,7 +397,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:25
 msgid "Theme"
-msgstr ""
+msgstr "Thema"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:26
@@ -408,7 +409,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "Standardfarbe für Überweisungen"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -435,7 +436,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr ""
+msgstr "Standardfarbe der Gruppe"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -471,7 +472,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr ""
+msgstr "Geschäftskontofarbe"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -483,7 +484,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:53
 msgid "Use Native Digits"
-msgstr ""
+msgstr "Native Ziffern verwenden"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
@@ -496,7 +497,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
-msgstr ""
+msgstr "Dezimaltrennzeichen einfügen"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:58
@@ -509,7 +510,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
 msgid "CSV Backup Folder"
-msgstr ""
+msgstr "CSV-Sicherungsordner"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
@@ -523,27 +524,27 @@ msgstr ""
 #: yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
-msgstr ""
+msgstr "Importieren/Exportieren 📤"
 
 #. (itstool) path: page/title
 #: yelp/C/import-export.page:20
 msgid "Import/Export"
-msgstr ""
+msgstr "Importieren/Exportieren"
 
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:22
 msgid "Import Formats"
-msgstr ""
+msgstr "Importformate"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:26
 msgid "Dates should be in <em>YYYYMMDD</em> format."
-msgstr ""
+msgstr "Die Daten sollten im Format <em>JJJJMMTT</em> sein."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:30
 msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
-msgstr ""
+msgstr "Die Daten sollten im englischen (US) Format (<em>MM/TT/JJJJ</em>) sein."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:34
