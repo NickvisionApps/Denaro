@@ -189,20 +189,13 @@ public class AccountMetadata : ICloneable
             result.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             result.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             result.SortFirstToLast = readQueryMetadata.GetBoolean(8);
-            if (readQueryMetadata.FieldCount > 9)
-                result.SortTransactionsBy = readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
-            if (readQueryMetadata.FieldCount > 10)
-                result.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10));
-            if (readQueryMetadata.FieldCount > 11)
-                result.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11));
-            if (readQueryMetadata.FieldCount > 12)
-                result.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            if (readQueryMetadata.FieldCount > 13)
-                result.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
-            if (readQueryMetadata.FieldCount > 14)
-                result.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
-            if (readQueryMetadata.FieldCount > 15)
-                result.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
+            result.SortTransactionsBy = readQueryMetadata.FieldCount <= 9 || readQueryMetadata.IsDBNull(9) ? SortBy.Id : (SortBy)readQueryMetadata.GetInt32(9);
+            result.CustomCurrencyDecimalSeparator = readQueryMetadata.FieldCount <= 10 || readQueryMetadata.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(10)) ? null : readQueryMetadata.GetString(10));
+            result.CustomCurrencyGroupSeparator = readQueryMetadata.FieldCount <= 11 || readQueryMetadata.IsDBNull(11) ? null : (string.IsNullOrEmpty(readQueryMetadata.GetString(11)) ? null : readQueryMetadata.GetString(11));
+            result.CustomCurrencyDecimalDigits = readQueryMetadata.FieldCount <= 12 || readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
+            result.ShowTagsList = readQueryMetadata.FieldCount <= 13 || readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
+            result.TransactionRemindersThreshold = readQueryMetadata.FieldCount <= 14 || readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
+            result.CustomCurrencyAmountStyle = readQueryMetadata.FieldCount <= 15 || readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
         database.Close();
         return result;
