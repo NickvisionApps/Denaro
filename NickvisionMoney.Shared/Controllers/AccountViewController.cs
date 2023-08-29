@@ -441,7 +441,12 @@ public class AccountViewController : IDisposable
         {
             lock (_startupLock)
             {
-                if (_startupCalled) return;
+                if (_startupCalled)
+                {
+                    while (!_isOpened)
+                        Task.Delay(100).Wait();
+                    return;
+                }
                 _startupCalled = true;
             }
             await _account.LoadAsync();
