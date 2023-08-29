@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="de">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">Importieren/Exportieren 📤</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -20,17 +20,17 @@
     </mal:credit>
   </info>
 
-<title>Import/Export</title>
+<title>Importieren/Exportieren</title>
 <div>
-	<title>Import Formats</title>
+	<title>Importformate</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+			<p>Die Daten sollten im Format <em>JJJJMMTT</em> sein.</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+			<p>Die Daten sollten im englischen (US) Format (<em>MM/TT/JJJJ</em>) sein.</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>

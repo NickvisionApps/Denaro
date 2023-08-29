@@ -61,16 +61,16 @@
 		<p>If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale.</p>
 	</item>
 	<item>
-		<title>Custom Currency Symbol</title>
-		<p>Up to 3 characters or 1 emoji. It can't be a number.</p>
+		<title>Benutzerdefiniertes Währungssymbol</title>
+		<p>Bis zu 3 Zeichen oder 1 Emoji. Es darf keine Zahl sein.</p>
 	</item>
 	<item>
 		<title>Benutzerdefinierter Währungscode</title>
-		<p>Up to 3 characters or 1 emoji.</p>
-		<p>An example to understand the difference between a symbol and a code: <em>$</em> is a symbol, <em>USD</em> is a code.</p>
+		<p>Bis zu 3 Zeichen oder 1 Emoji.</p>
+		<p>Ein Beispiel zum Verständnis des Unterschieds zwischen einem Symbol und einem Code: <em>$</em> ist ein Symbol, <em>USD</em> ist ein Code.</p>
 	</item>
 	<item>
-        <title>Custom Currency Amount Style</title>
+        <title>Benutzerdefinierter Währungsbetragsstil</title>
         <p>A choice of displaying an amount in one of the following ways: </p>
         <list>
             <item><p>$n</p></item>
@@ -80,11 +80,11 @@
         </list>
     </item>
 	<item>
-		<title>Custom Currency Decimal and Group Separators</title>
-		<p>Up to 2 characters or 1 emoji.</p>
+		<title>Benutzerdefinierte Dezimal- und Gruppentrennzeichen für Währungen</title>
+		<p>Bis zu 2 Zeichen oder 1 Emoji.</p>
 	</item>
 	<item>
-		<title>Custom Currency Decimal Digits</title>
+		<title>Benutzerdefinierte Währungsdezimalziffern</title>
 		<p>The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p>
 	</item>
 	<item>
@@ -92,19 +92,19 @@
 		<p>Jedes Konto kann durch ein Passwort geschützt werden. Das Hinzufügen eines Passworts führt zur Verschlüsselung des Kontos (wodurch es unmöglich wird, die Daten ohne Entschlüsselung mit dem Passwort zu lesen). Vorsicht: Wenn das Passwort verloren geht, können die Daten nicht wiederhergestellt werden! Ein Passwort kann auch über den Kontoeinstellungen-Dialog eines offenen Kontos geändert oder entfernt werden. Das Entfernen eines Passworts entschlüsselt das Konto.</p>
 	</item>
 	<item>
-		<title>Sort by Id, Date or Amount</title>
+		<title>Nach Kennung, Datum oder Betrag sortieren</title>
 		<p>Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
-		<title>Sorting Order</title>
+		<title>Sortierreihenfolge</title>
 		<p>Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
-		<title>Groups Visibility</title>
+		<title>Gruppen-Sichtbarkeit</title>
 		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
 	<item>
-        <title>Tags Visibility</title>
+        <title>Schlagwörter-Sichtbarkeit</title>
         <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
     </item>
 </terms>
