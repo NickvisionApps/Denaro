@@ -383,7 +383,6 @@ public class MainWindowController : IDisposable
     {
         await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
         var controller = _openAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.StartupAsync();
         await controller.ReceiveTransferAsync(transfer);
     }
 }
