@@ -141,39 +141,13 @@ public class AccountMetadata : ICloneable
             _customCurrencyAmountStyle = value;
         }
     }
-    
+
     /// <summary>
-    /// Loads metadata from an account file
+    /// Updates the metadata database table with new properties
     /// </summary>
-    /// <param name="path">The path to the account file</param>
-    /// <returns>AccountMetadata?</returns>
-    public static AccountMetadata? LoadFromAccountFile(string path, string? password)
+    /// <param name="database">SqliteConnection</param>
+    internal static void UpdateMetadataDatabaseTable(SqliteConnection database)
     {
-        if (Path.GetExtension(path).ToLower() != ".nmoney")
-        {
-            return null;
-        }
-        var connectionString = new SqliteConnectionStringBuilder()
-        {
-            DataSource = path,
-            Mode = SqliteOpenMode.ReadOnly,
-            Pooling = false
-        };
-        if (!string.IsNullOrEmpty(password))
-        {
-            connectionString.Password = password;
-        }
-        using var database = new SqliteConnection(connectionString.ConnectionString);
-        try
-        {
-            database.Open();
-        }
-        catch
-        {
-            database.Close();
-            return null;
-        }
-        // Update Metadata Table
         try
         {
             using var cmdTableMetadataUpdate1 = database.CreateCommand();
@@ -223,6 +197,41 @@ public class AccountMetadata : ICloneable
             cmdTableMetadataUpdate7.ExecuteNonQuery();
         }
         catch { }
+    }
+    
+    /// <summary>
+    /// Loads metadata from an account file
+    /// </summary>
+    /// <param name="path">The path to the account file</param>
+    /// <returns>AccountMetadata?</returns>
+    public static AccountMetadata? LoadFromAccountFile(string path, string? password)
+    {
+        if (Path.GetExtension(path).ToLower() != ".nmoney")
+        {
+            return null;
+        }
+        var connectionString = new SqliteConnectionStringBuilder()
+        {
+            DataSource = path,
+            Mode = SqliteOpenMode.ReadOnly,
+            Pooling = false
+        };
+        if (!string.IsNullOrEmpty(password))
+        {
+            connectionString.Password = password;
+        }
+        using var database = new SqliteConnection(connectionString.ConnectionString);
+        try
+        {
+            database.Open();
+        }
+        catch
+        {
+            database.Close();
+            return null;
+        }
+        // Update Metadata Table
+        UpdateMetadataDatabaseTable(database);
         // Get Metadata
         var result = new AccountMetadata(Path.GetFileNameWithoutExtension(path), AccountType.Checking);
         var cmdQueryMetadata = database.CreateCommand();
