@@ -173,6 +173,56 @@ public class AccountMetadata : ICloneable
             database.Close();
             return null;
         }
+        // Update Metadata Table
+        try
+        {
+            using var cmdTableMetadataUpdate1 = database.CreateCommand();
+            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
+            cmdTableMetadataUpdate1.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate2 = database.CreateCommand();
+            cmdTableMetadataUpdate2.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT";
+            cmdTableMetadataUpdate2.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate3 = database.CreateCommand();
+            cmdTableMetadataUpdate3.CommandText = "ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT";
+            cmdTableMetadataUpdate3.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate4 = database.CreateCommand();
+            cmdTableMetadataUpdate4.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER";
+            cmdTableMetadataUpdate4.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate5 = database.CreateCommand();
+            cmdTableMetadataUpdate5.CommandText = "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER";
+            cmdTableMetadataUpdate5.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate6 = database.CreateCommand();
+            cmdTableMetadataUpdate6.CommandText = "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER";
+            cmdTableMetadataUpdate6.ExecuteNonQuery();
+        }
+        catch { }
+        try
+        {
+            using var cmdTableMetadataUpdate7 = database.CreateCommand();
+            cmdTableMetadataUpdate7.CommandText = "ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER";
+            cmdTableMetadataUpdate7.ExecuteNonQuery();
+        }
+        catch { }
         // Get Metadata
         var result = new AccountMetadata(Path.GetFileNameWithoutExtension(path), AccountType.Checking);
         var cmdQueryMetadata = database.CreateCommand();
