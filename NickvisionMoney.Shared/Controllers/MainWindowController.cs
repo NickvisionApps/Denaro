@@ -382,6 +382,7 @@ public class MainWindowController : IDisposable
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
         await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
+        await Task.Delay(500);
         var controller = _openAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
         await controller.ReceiveTransferAsync(transfer);
     }
