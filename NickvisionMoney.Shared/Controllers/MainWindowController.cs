@@ -378,12 +378,16 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Occurs when a transfer is sent from an account
     /// </summary>
+    /// <param name="sender">object?</param>
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
         await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
-        await Task.Delay(500);
         var controller = _openAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
+        while (!controller.IsOpened)
+        {
+            await Task.Delay(200);
+        }
         await controller.ReceiveTransferAsync(transfer);
     }
 }

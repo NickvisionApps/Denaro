@@ -16,7 +16,6 @@ namespace NickvisionMoney.Shared.Controllers;
 /// </summary>
 public class AccountViewController : IDisposable
 {
-    private bool _isOpened;
     private bool _disposed;
     private readonly Account _account;
     private List<uint> _filteredIds;
@@ -29,10 +28,14 @@ public class AccountViewController : IDisposable
     private string _searchDescription;
 
     /// <summary>
+    /// Whether or not the account has been fully opened and loaded
+    /// </summary>
+    public bool IsOpened { get; private set; }
+    
+    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => Aura.Active.AppInfo;
-
     /// <summary>
     /// Whether to use native digits
     /// </summary>
@@ -180,7 +183,7 @@ public class AccountViewController : IDisposable
     /// <param name="recentAccountsChanged">The recent accounts changed event</param>
     internal AccountViewController(string path, EventHandler<NotificationSentEventArgs>? notificationSent, EventHandler<EventArgs>? recentAccountsChanged)
     {
-        _isOpened = false;
+        IsOpened = false;
         _disposed = false;
         _account = new Account(path);
         _filteredIds = new List<uint>();
@@ -433,7 +436,7 @@ public class AccountViewController : IDisposable
     /// </summary>
     public async Task StartupAsync()
     {
-        if (!_isOpened)
+        if (!IsOpened)
         {
             await _account.LoadAsync();
             _searchDescription = "";
@@ -469,7 +472,7 @@ public class AccountViewController : IDisposable
             AccountInformationChanged?.Invoke(this, EventArgs.Empty);
             //Register Events
             Configuration.Current.Saved += ConfigurationChanged;
-            _isOpened = true;
+            IsOpened = true;
         }
     }
 
