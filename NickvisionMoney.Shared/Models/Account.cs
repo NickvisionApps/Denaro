@@ -349,55 +349,7 @@ public class Account : IDisposable
         using var cmdTableMetadata = _database!.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
-        try
-        {
-            using var cmdTableMetadataUpdate1 = _database.CreateCommand();
-            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
-            cmdTableMetadataUpdate1.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate2 = _database.CreateCommand();
-            cmdTableMetadataUpdate2.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT";
-            cmdTableMetadataUpdate2.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate3 = _database.CreateCommand();
-            cmdTableMetadataUpdate3.CommandText = "ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT";
-            cmdTableMetadataUpdate3.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate4 = _database.CreateCommand();
-            cmdTableMetadataUpdate4.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER";
-            cmdTableMetadataUpdate4.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate5 = _database.CreateCommand();
-            cmdTableMetadataUpdate5.CommandText = "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER";
-            cmdTableMetadataUpdate5.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate6 = _database.CreateCommand();
-            cmdTableMetadataUpdate6.CommandText = "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER";
-            cmdTableMetadataUpdate6.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate7 = _database.CreateCommand();
-            cmdTableMetadataUpdate7.CommandText = "ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER";
-            cmdTableMetadataUpdate7.ExecuteNonQuery();
-        }
-        catch { }
+        AccountMetadata.UpdateMetadataDatabaseTable(_database);
         //Setup Groups Table
         using var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)";
