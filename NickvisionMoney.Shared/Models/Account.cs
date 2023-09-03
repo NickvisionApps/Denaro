@@ -1148,14 +1148,16 @@ public class Account : IDisposable
                 }
                 foreach (var date in dates) //create missing repeat transactions
                 {
-                    transactionsModified = transactionsModified || (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
+                    var res = (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
+                    transactionsModified = transactionsModified || res;
                 }
             }
             else if (transaction.RepeatFrom > 0) //delete repeat transactions if the date from the original transaction was changed to a smaller date
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
-                    transactionsModified = transactionsModified || await DeleteTransactionAsync(transaction.Id);
+                    var res = await DeleteTransactionAsync(transaction.Id);
+                    transactionsModified = transactionsModified || res;
                 }
             }
             i++;

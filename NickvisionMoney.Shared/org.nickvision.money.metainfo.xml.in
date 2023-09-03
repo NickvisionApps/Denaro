@@ -51,6 +51,7 @@
       <description translatable="no">
         <p>- Fixed an issue where choosing an Amount Display Style would crash the app</p>
         <p>- Fixed an issue where transferring to another account would sometimes crash the app</p>
+        <p>- Fixed an issue where some repeat transactions would not be created</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
