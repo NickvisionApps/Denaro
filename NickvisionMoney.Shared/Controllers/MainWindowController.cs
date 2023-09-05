@@ -97,7 +97,7 @@ public class MainWindowController : IDisposable
             }
         }
         Aura.Active.SetConfig<Configuration>("config");
-        AppInfo.Version = "2023.9.0";
+        AppInfo.Version = "2023.9.1-next";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");

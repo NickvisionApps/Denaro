@@ -47,11 +47,8 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.9.0" date="2023-09-02">
+    <release version="2023.9.1-next" date="2023-09-02">
       <description translatable="no">
-        <p>- Fixed an issue where choosing an Amount Display Style would crash the app</p>
-        <p>- Fixed an issue where transferring to another account would sometimes crash the app</p>
-        <p>- Fixed an issue where some repeat transactions would not be created</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
