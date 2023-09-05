@@ -43,7 +43,9 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where dates in the IncomeExpenseOverTime graph would overlap
+            @"* Added a currency conversion tool into Denaro. This tool can also be accessed when transferring between accounts
+              * Fixed an issue where dates in the IncomeExpenseOverTime graph would overlap
+              * Fixed an issue where accessing account settings would sometimes crash
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
