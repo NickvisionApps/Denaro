@@ -46,3 +46,5 @@ apps:
     common-id: org.nickvision.money
     plugs:
       - home
+      - network
+      - network-status
