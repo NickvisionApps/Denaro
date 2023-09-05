@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-06-03 07:50+0000\n"
+"PO-Revision-Date: 2023-08-26 07:30+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/it/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -142,7 +142,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Soglia per i promemoria delle transazioni"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
@@ -481,7 +481,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr "Colore predefinito delle transazioni"
+msgstr "Colore predefinito dei trasferimenti"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -902,7 +902,7 @@ msgstr "Transazioni 🧾"
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr "Transazioni"
+msgstr "Transazione"
 
 #. (itstool) path: page/p
 #: yelp/C/transaction.page:21
@@ -1062,7 +1062,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62

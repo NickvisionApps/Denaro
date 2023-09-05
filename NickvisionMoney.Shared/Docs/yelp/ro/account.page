@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="de">
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="ro">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Konto 🏦</title>
+	<title type="link">Account 🏦</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,40 +12,34 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
 
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Jummit</mal:name>
-      <mal:email>jummit@web.de</mal:email>
-      <mal:years>2023</mal:years>
-    </mal:credit>
-  </info>
-
-<title>Konto</title>
-<p>Auf dieser Seite werden alle Eigenschaften von Konten in <app>Denaro</app> erläutert. Die meisten von ihnen werden im Dialog <gui>Kontoeinstellungen</gui> angezeigt. Dieser Dialog wird auch automatisch geöffnet, nachdem du ein neues Konto erstellt hast.</p>
-<p>Jedes Konto wird in einer einzelnen <file>*.nmoney</file> Datei gespeichert. Dateien, die in einer älteren <em>stabilen</em> Version von <app>Denaro</app> erstellt worden sind, können unbedenklich in einer aktuelleren <em>stabilen</em> Version der Anwendung geöffnet werden. Obwohl die Anwendung auf verschiedenen Betriebssystemen laufen kann (Windows und Linux), sind die <file>*.nmoney</file> Dateien nur dann 100% kompatibel zwischen den Betriebssystemen, wenn sie von derselben Anwendungsversion stammen (z. B. V2023.1.0).</p>
+<title>Account</title>
+<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
+<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
 <note style="warning">
-	<p>Instabile (Beta und RC) Anwendungsversionen können Fehler oder nicht fertiggestellte Anpassungen enthalten, die zu Datenverlust führen können. Benutze KEINE Kontodateien, die echte Daten enthalten, in einer instabilen Version der Anwendung!</p>
+	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
 </note>
 
 <terms>
 	<item>
-		<title>Name</title>
-		<p>Der Kontoname wird in der Liste der zuletzt verwendeten Konten und in den Registerkarten angezeigt. Ein Name hat keine Längenbeschränkung und kann beliebige Zeichen enthalten, einschließlich Emojis.</p>
+		<title>Nume</title>
+		<p>Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p>
 	</item>
 	<item>
-		<title>Konto Typ</title>
-		<p>Es sind 3 Konto - Typen verfügbar: 🟣<em>Girokonto</em>, 🔵<em>Sparkonto</em> und 🟢<em>Geschäftskonto</em>. Der Konto - Typ ist nur ein nützliches Kennzeichnung, welche keine Auswirkungen auf die Funktion der Anwendung haben. Der Konto - Typ wird in der Liste der kürzlich bearbeiteten Konten angezeigt. Jeder Konto - Typ hat eine eigene Farbe, welche in den <link xref="configuration">Globalen Einstellungen</link> bearbeitet werden können.</p>
+		<title>Tipul contului</title>
+		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
 	</item>
 	<item>
-		<title>Standard-Transaktionsart</title>
-		<p>Wenn Sie eine neue Transaktion erstellen, ist ihr Typ standardmäßig derselbe wie in dieser Einstellung.</p>
+		<title>Default Transaction Type</title>
+		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
 	</item>
 	<item>
-        <title>Schwellenwert für Überweisungserinnerungen</title>
+        <title>Transaction Reminders Threshold</title>
         <p>The threshold used when showing reminders about upcoming transactions.</p>
     </item>
 	<item>
-		<title>Systemwährung</title>
+		<title>System Currency</title>
 		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
 		<list>
 			<item><p>If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number.</p></item>
@@ -57,20 +51,20 @@
 		</note>
 	</item>
 	<item>
-		<title>Benutzerdefinierte Währung verwenden</title>
+		<title>Use Custom Currency</title>
 		<p>If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale.</p>
 	</item>
 	<item>
-		<title>Benutzerdefiniertes Währungssymbol</title>
-		<p>Bis zu 3 Zeichen oder 1 Emoji. Es darf keine Zahl sein.</p>
+		<title>Custom Currency Symbol</title>
+		<p>Up to 3 characters or 1 emoji. It can't be a number.</p>
 	</item>
 	<item>
-		<title>Benutzerdefinierter Währungscode</title>
-		<p>Bis zu 3 Zeichen oder 1 Emoji.</p>
-		<p>Ein Beispiel zum Verständnis des Unterschieds zwischen einem Symbol und einem Code: <em>$</em> ist ein Symbol, <em>USD</em> ist ein Code.</p>
+		<title>Custom Currency Code</title>
+		<p>Up to 3 characters or 1 emoji.</p>
+		<p>An example to understand the difference between a symbol and a code: <em>$</em> is a symbol, <em>USD</em> is a code.</p>
 	</item>
 	<item>
-        <title>Benutzerdefinierter Währungsbetragsstil</title>
+        <title>Custom Currency Amount Style</title>
         <p>A choice of displaying an amount in one of the following ways: </p>
         <list>
             <item><p>$n</p></item>
@@ -80,31 +74,31 @@
         </list>
     </item>
 	<item>
-		<title>Benutzerdefinierte Dezimal- und Gruppentrennzeichen für Währungen</title>
-		<p>Bis zu 2 Zeichen oder 1 Emoji.</p>
+		<title>Custom Currency Decimal and Group Separators</title>
+		<p>Up to 2 characters or 1 emoji.</p>
 	</item>
 	<item>
-		<title>Benutzerdefinierte Währungsdezimalziffern</title>
+		<title>Custom Currency Decimal Digits</title>
 		<p>The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p>
 	</item>
 	<item>
-		<title>Passwort</title>
-		<p>Jedes Konto kann durch ein Passwort geschützt werden. Das Hinzufügen eines Passworts führt zur Verschlüsselung des Kontos (wodurch es unmöglich wird, die Daten ohne Entschlüsselung mit dem Passwort zu lesen). Vorsicht: Wenn das Passwort verloren geht, können die Daten nicht wiederhergestellt werden! Ein Passwort kann auch über den Kontoeinstellungen-Dialog eines offenen Kontos geändert oder entfernt werden. Das Entfernen eines Passworts entschlüsselt das Konto.</p>
+		<title>Password</title>
+		<p>Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p>
 	</item>
 	<item>
-		<title>Nach Kennung, Datum oder Betrag sortieren</title>
+		<title>Sort by Id, Date or Amount</title>
 		<p>Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
-		<title>Sortierreihenfolge</title>
+		<title>Sorting Order</title>
 		<p>Each account stores information about the order of transactions in the main window. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p>
 	</item>
 	<item>
-		<title>Gruppen-Sichtbarkeit</title>
+		<title>Groups Visibility</title>
 		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
 	<item>
-        <title>Schlagwörter-Sichtbarkeit</title>
+        <title>Tags Visibility</title>
         <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
     </item>
 </terms>

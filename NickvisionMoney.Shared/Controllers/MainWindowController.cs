@@ -97,7 +97,7 @@ public class MainWindowController : IDisposable
             }
         }
         Aura.Active.SetConfig<Configuration>("config");
-        AppInfo.Version = "2023.8.1-rc1";
+        AppInfo.Version = "2023.9.1-next";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
@@ -378,12 +378,16 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Occurs when a transfer is sent from an account
     /// </summary>
+    /// <param name="sender">object?</param>
     /// <param name="transfer">The transfer sent</param>
     private async void OnTransferSent(object? sender, Transfer transfer)
     {
         await AddAccountAsync(transfer.DestinationAccountPath, false, transfer.DestinationAccountPassword);
         var controller = _openAccounts.Find(x => x.AccountPath == transfer.DestinationAccountPath)!;
-        await controller.StartupAsync();
+        while (!controller.IsOpened)
+        {
+            await Task.Delay(200);
+        }
         await controller.ReceiveTransferAsync(transfer);
     }
 }

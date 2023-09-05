@@ -349,55 +349,7 @@ public class Account : IDisposable
         using var cmdTableMetadata = _database!.CreateCommand();
         cmdTableMetadata.CommandText = "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)";
         cmdTableMetadata.ExecuteNonQuery();
-        try
-        {
-            using var cmdTableMetadataUpdate1 = _database.CreateCommand();
-            cmdTableMetadataUpdate1.CommandText = "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER";
-            cmdTableMetadataUpdate1.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate2 = _database.CreateCommand();
-            cmdTableMetadataUpdate2.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT";
-            cmdTableMetadataUpdate2.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate3 = _database.CreateCommand();
-            cmdTableMetadataUpdate3.CommandText = "ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT";
-            cmdTableMetadataUpdate3.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate4 = _database.CreateCommand();
-            cmdTableMetadataUpdate4.CommandText = "ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER";
-            cmdTableMetadataUpdate4.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate5 = _database.CreateCommand();
-            cmdTableMetadataUpdate5.CommandText = "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER";
-            cmdTableMetadataUpdate5.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate6 = _database.CreateCommand();
-            cmdTableMetadataUpdate6.CommandText = "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER";
-            cmdTableMetadataUpdate6.ExecuteNonQuery();
-        }
-        catch { }
-        try
-        {
-            using var cmdTableMetadataUpdate7 = _database.CreateCommand();
-            cmdTableMetadataUpdate7.CommandText = "ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER";
-            cmdTableMetadataUpdate7.ExecuteNonQuery();
-        }
-        catch { }
+        AccountMetadata.UpdateMetadataDatabaseTable(_database);
         //Setup Groups Table
         using var cmdTableGroups = _database.CreateCommand();
         cmdTableGroups.CommandText = "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)";
@@ -1196,14 +1148,16 @@ public class Account : IDisposable
                 }
                 foreach (var date in dates) //create missing repeat transactions
                 {
-                    transactionsModified = transactionsModified || (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
+                    var res = (await AddTransactionAsync(transaction.Repeat(NextAvailableTransactionId, date))).Successful;
+                    transactionsModified = transactionsModified || res;
                 }
             }
             else if (transaction.RepeatFrom > 0) //delete repeat transactions if the date from the original transaction was changed to a smaller date
             {
                 if (Transactions[(uint)transaction.RepeatFrom].RepeatEndDate < transaction.Date)
                 {
-                    transactionsModified = transactionsModified || await DeleteTransactionAsync(transaction.Id);
+                    var res = await DeleteTransactionAsync(transaction.Id);
+                    transactionsModified = transactionsModified || res;
                 }
             }
             i++;
@@ -1993,21 +1947,6 @@ public class Account : IDisposable
         }
         else if (type == GraphType.IncomeExpenseOverTime)
         {
-            //Date Culture
-            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
-            if (lcTime != null && lcTime.Contains(".UTF-8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcTime != null && lcTime.Contains(".utf8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
-            }
-            if (lcTime != null && lcTime.Contains('_'))
-            {
-                lcTime = lcTime.Replace('_', '-');
-            }
-            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
             //Graph
             var data = new Dictionary<DateOnly, decimal[]>();
             foreach (var id in filteredIds)
@@ -2036,7 +1975,7 @@ public class Account : IDisposable
                 },
                 XAxes = new Axis[]
                 {
-                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", cultureDate)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", CultureHelpers.DateCulture)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black), LabelsRotation = 50 }
                 },
                 YAxes = new Axis[]
                 {

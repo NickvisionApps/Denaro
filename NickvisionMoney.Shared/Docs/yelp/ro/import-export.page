@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="de">
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="ro">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Importieren/Exportieren 📤</title>
+	<title type="link">Import/Export 📤</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,25 +12,19 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
 
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Jummit</mal:name>
-      <mal:email>jummit@web.de</mal:email>
-      <mal:years>2023</mal:years>
-    </mal:credit>
-  </info>
-
-<title>Importieren/Exportieren</title>
+<title>Import/Export</title>
 <div>
-	<title>Importformate</title>
+	<title>Import Formats</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Die Daten sollten im Format <em>JJJJMMTT</em> sein.</p>
+			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Die Daten sollten im englischen (US) Format (<em>MM/TT/JJJJ</em>) sein.</p>
+			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
