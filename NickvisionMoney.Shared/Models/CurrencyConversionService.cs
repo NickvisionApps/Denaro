@@ -80,7 +80,7 @@ public class CurrencyConversionService
         {
             return new CurrencyConversion(sourceCurrency, sourceAmount, resultCurrency, sourceAmount);
         }
-        var rates = await GetCurrnecyRatesAsync(sourceCurrency);
+        var rates = await GetConversionRatesAsync(sourceCurrency);
         if (rates == null || !rates.ContainsKey(resultCurrency))
         {
             return null;
@@ -94,7 +94,7 @@ public class CurrencyConversionService
     /// <param name="sourceCurrency">The currency code to get converting rates for</param>
     /// <returns>Dictionary&lt;string, decimal&gt; is successful, else false</returns>
     /// <remarks>This method will cache the data for the sourceCurrency on disk</remarks>
-    private static async Task<Dictionary<string, decimal>?> GetCurrnecyRatesAsync(string sourceCurrency)
+    public static async Task<Dictionary<string, decimal>?> GetConversionRatesAsync(string sourceCurrency)
     {
         var path = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
         var needsUpdate = false;
