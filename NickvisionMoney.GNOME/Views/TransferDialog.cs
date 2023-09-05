@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -73,15 +74,13 @@ public partial class TransferDialog : Adw.Window
                 Validate();
             }
         };
-        
-        _conversionRateGroup.OnNotify += (sender, e) =>
+        _conversionRateGroup.OnNotify += async (sender, e) =>
         {
             if (e.Pspec.GetName() == "visible")
             {
-                PopulateRateFields();
+                await PopulateRateFields();
             }
         };
-        
         _sourceCurrencyKeyController = Gtk.EventControllerKey.New();
         _sourceCurrencyKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _sourceCurrencyKeyController.OnKeyPressed += OnKeyPressedSource;
@@ -289,25 +288,21 @@ public partial class TransferDialog : Adw.Window
     }
 
 
-    private void PopulateRateFields()
+    private async Task PopulateRateFields()
     {
         if (_conversionRateGroup.Visible)
         {
-            var rates = _controller.GetConversionRatesAsync().Result;
+            var rates = await _controller.GetConversionRatesAsync();
             if (rates != null)
             {
-                _sourceCurrencyRow.SetText(
-                    rates.Value.Item1.ToAmountString(_controller.CultureForSourceNumberString, 
-                        _controller.UseNativeDigits, 
-                        showCurrencySymbol: false));
-                
                 _controller.Transfer.ConversionRate = 1 / rates.Value.Item2;
-
-                var text = rates.Value.Item2.ToAmountString(_controller.CultureForSourceNumberString, 
-                    _controller.UseNativeDigits, 
-                    showCurrencySymbol: false);
-                
-                _destinationCurrencyRow.SetText(text);
+                var text = rates.Value.Item2.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, showCurrencySymbol: false);
+                GLib.Functions.IdleAdd(0, () =>
+                {
+                    _sourceCurrencyRow.SetText(rates.Value.Item1.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, showCurrencySymbol: false));
+                    _destinationCurrencyRow.SetText(text);
+                    return false;
+                });
             }
         }
     }

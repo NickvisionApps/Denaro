@@ -227,18 +227,14 @@ public class TransferDialogController
         {
             return null;
         }
-        
         if(SourceCurrencyCode == DestinationCurrencyCode)
         {
             return (1.0m, 1.0m);
         }
-        
         var apiUrl = $"https://open.er-api.com/v6/latest/{SourceCurrencyCode}";
-        
         try
         {
-            var httpClient = new HttpClient();
-
+            using var httpClient = new HttpClient();
             string json;
             if (!tmpCacheSoIDontGetRateLimited.ContainsKey(SourceCurrencyCode))
             {
@@ -255,15 +251,10 @@ public class TransferDialogController
             {
                 json = tmpCacheSoIDontGetRateLimited[SourceCurrencyCode];
             }
-            
-            httpClient.Dispose();
-            
             var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
             var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(data["rates"].ToString());
-                
             var destConversionAmount = rates[DestinationCurrencyCode];
             return (1.0m, destConversionAmount);
-
         }
         catch
         {
