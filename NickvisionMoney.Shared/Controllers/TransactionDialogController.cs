@@ -191,7 +191,7 @@ public class TransactionDialogController : IDisposable
             {
                 Transaction.Dispose();
             }
-            var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            var jpgPath = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
             if (File.Exists(jpgPath))
             {
                 File.Delete(jpgPath);
@@ -267,7 +267,7 @@ public class TransactionDialogController : IDisposable
     {
         if (Transaction.Receipt != null)
         {
-            var jpgPath = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
+            var jpgPath = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}Denaro_ViewReceipt_TEMP.jpg";
             await Transaction.Receipt.SaveAsJpegAsync(jpgPath);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

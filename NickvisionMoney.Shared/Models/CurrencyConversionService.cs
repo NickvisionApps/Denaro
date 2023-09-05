@@ -96,7 +96,7 @@ public class CurrencyConversionService
     /// <remarks>This method will cache the data for the sourceCurrency on disk</remarks>
     public static async Task<Dictionary<string, decimal>?> GetConversionRatesAsync(string sourceCurrency)
     {
-        var path = $"{ConfigurationLoader.ConfigDir}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
+        var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
         var needsUpdate = false;
         JsonDocument? json = null;
         if (File.Exists(path))
