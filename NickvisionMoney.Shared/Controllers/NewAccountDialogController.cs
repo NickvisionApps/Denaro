@@ -115,7 +115,7 @@ public class NewAccountDialogController
     /// <summary>
     /// Strings to show for a custom currency's amount styles if available
     /// </summary>
-    public string[]? CustomCurrencyAmountStyleStrings
+    public string[] CustomCurrencyAmountStyleStrings
     {
         get
         {
@@ -123,7 +123,7 @@ public class NewAccountDialogController
             {
                 return new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
             }
-            return null;
+            return Array.Empty<string>();
         }
     }
     

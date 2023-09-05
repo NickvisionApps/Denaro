@@ -287,7 +287,7 @@ public partial class AccountSettingsDialog : Adw.Window
         _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
         _customSymbolRow.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeRow.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
-        _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+        _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings));
         _customAmountStyleRow.SetSelected(_controller.Metadata.CustomCurrencyAmountStyle.HasValue ? (uint)_controller.Metadata.CustomCurrencyAmountStyle.Value : 0u);
         _customDecimalSeparatorRow.SetSelected(_controller.Metadata.CustomCurrencyDecimalSeparator switch
         {
@@ -376,7 +376,7 @@ public partial class AccountSettingsDialog : Adw.Window
         {
             if (oldSymbol != _controller.Metadata.CustomCurrencySymbol)
             {
-                _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+                _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings));
             }
             _applyButton.SetSensitive(true);
         }

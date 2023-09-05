@@ -377,7 +377,7 @@ public partial class NewAccountDialog : Adw.Window
         {
             if (oldSymbol != _controller.Metadata.CustomCurrencySymbol)
             {
-                _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings!));
+                _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings));
             }
             _createButton.SetSensitive(true);
         }
