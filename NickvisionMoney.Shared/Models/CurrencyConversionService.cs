@@ -97,7 +97,7 @@ public class CurrencyConversionService
     public static async Task<Dictionary<string, decimal>?> GetConversionRatesAsync(string sourceCurrency)
     {
         var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
-        var needsUpdate = false;
+        var needsUpdate = !File.Exists(path);
         JsonDocument? json = null;
         if (File.Exists(path))
         {
