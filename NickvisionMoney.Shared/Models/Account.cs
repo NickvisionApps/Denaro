@@ -1975,7 +1975,7 @@ public class Account : IDisposable
                 },
                 XAxes = new Axis[]
                 {
-                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", CultureHelpers.DateCulture)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black), LabelsRotation = 20 }
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", CultureHelpers.DateCulture)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black), LabelsRotation = 50 }
                 },
                 YAxes = new Axis[]
                 {
