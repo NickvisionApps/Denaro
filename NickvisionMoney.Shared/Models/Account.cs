@@ -1947,21 +1947,6 @@ public class Account : IDisposable
         }
         else if (type == GraphType.IncomeExpenseOverTime)
         {
-            //Date Culture
-            var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
-            if (lcTime != null && lcTime.Contains(".UTF-8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcTime != null && lcTime.Contains(".utf8"))
-            {
-                lcTime = lcTime.Remove(lcTime.IndexOf(".utf8"), 5);
-            }
-            if (lcTime != null && lcTime.Contains('_'))
-            {
-                lcTime = lcTime.Replace('_', '-');
-            }
-            var cultureDate = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
             //Graph
             var data = new Dictionary<DateOnly, decimal[]>();
             foreach (var id in filteredIds)
@@ -1990,7 +1975,7 @@ public class Account : IDisposable
                 },
                 XAxes = new Axis[]
                 {
-                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", cultureDate)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", CultureHelpers.DateCulture)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black), LabelsRotation = 50 }
                 },
                 YAxes = new Axis[]
                 {
