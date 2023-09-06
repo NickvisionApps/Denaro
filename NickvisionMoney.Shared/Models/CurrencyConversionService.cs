@@ -52,7 +52,7 @@ public class CurrencyConversion
 }
 
 /// <summary>
-/// A service for getting currnecy conversions
+/// A service for getting currency conversions
 /// </summary>
 public class CurrencyConversionService
 {
