@@ -2,9 +2,8 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window _root {
-  width-request: 320;
+  width-request: 360;
   default-width: 440;
-  default-height: 400;
   modal: true;
   resizable: true;
   
@@ -79,21 +78,38 @@ Adw.Window _root {
             Adw.ComboRow _resultCurrencyRow {
               title: _("Result");
             }
+          }
+
+          Gtk.CenterBox {
+            margin-start: 24;
+            margin-end: 24;
+            margin-bottom: 24;
             
-            Adw.EntryRow _sourceAmountRow {
-            
+            [start]
+            Adw.PreferencesGroup {
+              Adw.EntryRow _sourceAmountRow { }
             }
-            
-            Adw.EntryRow _resultAmountRow {
-              editable: false;
-              
-              [suffix]
-              Gtk.Button _copyResultButton {
-                valign: center;
-                tooltip-text: _("Copy Result Amount");
-                icon-name: "edit-copy-symbolic";
-              
-                styles ["flat"]
+
+            [center]
+            Gtk.Image {
+              margin-start: 12;
+              margin-end: 12;
+              icon-name: "arrow1-right-symbolic";
+            }
+
+            [end]
+            Adw.PreferencesGroup {
+              Adw.EntryRow _resultAmountRow {
+                editable: false;
+
+                [suffix]
+                Gtk.Button _copyResultButton {
+                  valign: center;
+                  tooltip-text: _("Copy Result Amount");
+                  icon-name: "edit-copy-symbolic";
+
+                  styles ["flat"]
+                }
               }
             }
           }
