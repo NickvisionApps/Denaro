@@ -44,6 +44,11 @@ public class AccountSettingsDialogController
     /// The new password for the account, if available
     /// </summary>
     public string? NewPassword { get; private set; }
+    
+    /// <summary>
+    /// Strings to show for a custom currency's amount styles if available
+    /// </summary>
+    public string[] CustomCurrencyAmountStyleStrings => Metadata.CustomCurrencySymbol == null ? Array.Empty<string>() : new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
 
     /// <summary>
     /// Creates an AccountSettingsDialogController
@@ -80,21 +85,6 @@ public class AccountSettingsDialogController
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
-        }
-    }
-
-    /// <summary>
-    /// Strings to show for a custom currency's amount styles if available
-    /// </summary>
-    public string[]? CustomCurrencyAmountStyleStrings
-    {
-        get
-        {
-            if (Metadata.CustomCurrencySymbol != null)
-            {
-                return new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
-            }
-            return null;
         }
     }
 

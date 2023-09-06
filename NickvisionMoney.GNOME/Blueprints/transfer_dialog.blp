@@ -87,12 +87,19 @@ Adw.Window _root {
             title: _("Conversion Needed");
             visible: false;
 
-            Adw.EntryRow _sourceCurrencyRow {
-              activates-default: true;
-            }
+            Adw.ExpanderRow _rowUseCustomRates {
+              title: _("Use Custom Rates");
+              subtitle: _("Enter the conversion rates manually");
+              enable-expansion: false;
+              show-enable-switch: true;
+                  
+              Adw.EntryRow _sourceCurrencyRow {
+                activates-default: true;
+              }
 
-            Adw.EntryRow _destinationCurrencyRow {
-              activates-default: true;
+              Adw.EntryRow _destinationCurrencyRow {
+                activates-default: true;
+              }
             }
 
             Adw.ActionRow {

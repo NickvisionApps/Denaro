@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using System.Threading.Tasks;
 using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -26,6 +27,7 @@ public partial class TransferDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _conversionRateGroup;
+    [Gtk.Connect] private readonly Adw.ExpanderRow _rowUseCustomRates;
     [Gtk.Connect] private readonly Adw.EntryRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _destinationCurrencyRow;
     [Gtk.Connect] private readonly Gtk.Label _conversionResultLabel;
@@ -66,6 +68,23 @@ public partial class TransferDialog : Adw.Window
         _amountKeyController.OnKeyPressed += OnKeyPressedSource;
         _amountRow.AddController(_amountKeyController);
         //Conversion Rate
+        _conversionRateGroup.OnNotify += async (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "visible")
+            {
+                await SetupConversionRateGroupAsync();
+            }
+        };
+        _rowUseCustomRates.OnNotify += async (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "enable-expansion")
+            {
+                if (_rowUseCustomRates.GetEnableExpansion() == false)
+                {
+                    await SetupConversionRateGroupAsync();
+                }
+            }
+        };
         _sourceCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
@@ -277,5 +296,29 @@ public partial class TransferDialog : Adw.Window
             }
         }
         return false;
+    }
+    
+    /// <summary>
+    /// Sets up the ConversionRateGroup
+    /// </summary>
+    private async Task SetupConversionRateGroupAsync()
+    {
+        if (_conversionRateGroup.Visible)
+        {
+            var res = await _controller.GetConversionRateOnlineAsync();
+            if (string.IsNullOrEmpty(res.Source) || string.IsNullOrEmpty(res.Destination))
+            {
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
+                _rowUseCustomRates.SetShowEnableSwitch(false);
+                _rowUseCustomRates.SetEnableExpansion(true);
+            }
+            else
+            {
+                _sourceCurrencyRow.SetText(res.Source);
+                _destinationCurrencyRow.SetText(res.Destination);
+                _rowUseCustomRates.SetShowEnableSwitch(true);
+            }
+        }
     }
 }

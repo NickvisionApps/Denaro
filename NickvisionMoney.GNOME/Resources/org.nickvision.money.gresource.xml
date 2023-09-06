@@ -5,6 +5,7 @@
     <file alias="style-dark.css">org.nickvision.money-dark.css</file>
   </gresource>
   <gresource prefix="/org/nickvision/money/icons/scalable/status/">
+    <file preprocess="xml-stripblanks">arrow1-right-symbolic.svg</file>
     <file preprocess="xml-stripblanks">bank-symbolic.svg</file>
     <file preprocess="xml-stripblanks">bell-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">bell-symbolic.svg</file>
@@ -22,6 +23,7 @@
     <file preprocess="xml-stripblanks">resources-symbolic.svg</file>
     <file preprocess="xml-stripblanks">sun-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">today-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">update-symbolic.svg</file>
     <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="denaro-upload-symbolic.svg">document-send-symbolic.svg</file>
   </gresource>

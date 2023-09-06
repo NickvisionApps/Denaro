@@ -136,10 +136,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         _actCloseAccount.OnActivate += OnCloseAccount;
         AddAction(_actCloseAccount);
         application.SetAccelsForAction("win.closeAccount", new string[] { "<Ctrl>W" });
-        //New Window Action
-        var actNewWindow = Gio.SimpleAction.New("newWindow", null);
-        actNewWindow.OnActivate += (sender, e) => Process.Start(new ProcessStartInfo(Process.GetCurrentProcess().MainModule!.FileName) { UseShellExecute = true });
-        AddAction(actNewWindow);
+        //Currency Converter Action
+        var actCurrencyConverter = Gio.SimpleAction.New("currencyConverter", null);
+        actCurrencyConverter.OnActivate += CurrencyConverter;
+        AddAction(actCurrencyConverter);
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -403,6 +403,17 @@ public partial class MainWindow : Adw.ApplicationWindow
             _flapToggleButton.SetVisible(true);
             _graphToggleButton.SetVisible(true);
         }
+    }
+
+    /// <summary>
+    /// Occurs when the currency converter action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void CurrencyConverter(Gio.SimpleAction sender, EventArgs e)
+    {
+        var currencyConverterDialog = new CurrencyConverterDialog(this, _controller.AppInfo.ID, _controller.UseNativeDigits);
+        await currencyConverterDialog.PresentAsync();
     }
 
     /// <summary>

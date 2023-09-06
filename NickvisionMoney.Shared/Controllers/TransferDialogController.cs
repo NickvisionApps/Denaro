@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -107,6 +110,24 @@ public class TransferDialogController
             AccountType.Business => Configuration.Current.AccountBusinessColor,
             _ => Configuration.Current.AccountSavingsColor
         };
+    }
+
+    /// <summary>
+    /// Gets the conversion rate from the source currency to the destination currency using the internet
+    /// </summary>
+    /// <returns>(string Source, string Destination)</returns>
+    public async Task<(string Source, string Destination)> GetConversionRateOnlineAsync()
+    {
+        if (string.IsNullOrEmpty(DestinationCurrencyCode))
+        {
+            return ("", "");
+        }
+        var rates = await CurrencyConversionService.GetConversionRatesAsync(SourceCurrencyCode);
+        if (rates != null && rates.ContainsKey(DestinationCurrencyCode))
+        {
+            return (rates[SourceCurrencyCode].ToAmountString(CultureForSourceNumberString, UseNativeDigits, false), rates[DestinationCurrencyCode].ToAmountString(CultureForDestNumberString!, UseNativeDigits, false));
+        }
+        return ("", "");
     }
 
     /// <summary>

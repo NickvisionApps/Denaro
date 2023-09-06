@@ -1,0 +1,126 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window _root {
+  width-request: 360;
+  default-width: 440;
+  modal: true;
+  resizable: true;
+  
+  content: Adw.ToastOverlay _toastOverlay {
+    Gtk.Box {
+      hexpand: true;
+      vexpand: true;
+      orientation: vertical;
+      
+      Adw.HeaderBar _header {
+        title-widget: Gtk.Label {};
+  
+        styles ["flat"]
+      }
+      
+      Gtk.WindowHandle {
+        Gtk.Box {
+          orientation: vertical;
+          spacing: 24;
+          
+          Gtk.Label _titleLabel {
+            label: _("Converter");
+  
+            styles ["title-2"]
+          }
+          
+          Adw.PreferencesGroup {
+            margin-start: 24;
+            margin-end: 24;
+            title: _("Currency");
+          
+            header-suffix: Gtk.Box {
+              orientation: horizontal;
+              spacing: 6;
+              
+              Gtk.Button _switchButton {
+                valign: center;
+                tooltip-text: _("Switch currencies");
+                
+                Adw.ButtonContent {
+                  label: _("Switch");
+                  icon-name: "update-symbolic";
+                }
+                
+                styles ["flat"]
+              }
+              
+              Gtk.Box _loadingBox {
+                orientation: horizontal;
+                spacing: 6;
+                visible: false;
+                
+                Gtk.Separator {
+                  orientation: vertical;
+                }
+                
+                Gtk.Label {
+                  label: _("Loading...");
+                }
+                
+                Gtk.Spinner {
+                  spinning: true;
+                }
+              }
+            };
+            
+            Adw.ComboRow _sourceCurrencyRow {
+              title: _("Source");
+            }
+            
+            Adw.ComboRow _resultCurrencyRow {
+              title: _("Result");
+            }
+          }
+
+          Gtk.CenterBox {
+            margin-start: 24;
+            margin-end: 24;
+            margin-bottom: 24;
+            
+            [start]
+            Adw.PreferencesGroup {
+              Adw.EntryRow _sourceAmountRow { }
+            }
+
+            [center]
+            Gtk.Image {
+              margin-start: 12;
+              margin-end: 12;
+              icon-name: "arrow1-right-symbolic";
+            }
+
+            [end]
+            Adw.PreferencesGroup {
+              Adw.EntryRow _resultAmountRow {
+                editable: false;
+
+                [suffix]
+                Gtk.Button _copyResultButton {
+                  valign: center;
+                  tooltip-text: _("Copy Result Amount");
+                  icon-name: "edit-copy-symbolic";
+
+                  styles ["flat"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+  
+  Gtk.ShortcutController {
+    Gtk.Shortcut {
+      trigger: "Escape";
+      action: "action(window.close)";
+    }
+  }
+}

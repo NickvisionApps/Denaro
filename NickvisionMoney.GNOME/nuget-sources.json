@@ -239,10 +239,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.8.8/nickvision.aura.2023.8.8.nupkg",
-    "sha512": "42e22a175b75fa2acb7b2c2d92ea36dbcc80180df94e78a802dc6d7f75879287e806e38da1202866593c073faf20acc9a9fb7c835134a8ab925cd6e793c478a2",
+    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.9.1/nickvision.aura.2023.9.1.nupkg",
+    "sha512": "2e4a8517aa7b5b4b73775049ca17d74c0e6ddbf93381ecbf9dc466be66bb9534167426851f2c1a0b4c23202c5b7f4cfffcd248589988f06b68831391bc3335ec",
     "dest": "nuget-sources",
-    "dest-filename": "nickvision.aura.2023.8.8.nupkg"
+    "dest-filename": "nickvision.aura.2023.9.1.nupkg"
   },
   {
     "type": "file",

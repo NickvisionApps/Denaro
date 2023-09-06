@@ -71,6 +71,10 @@ public class NewAccountDialogController
     /// The path of the new account
     /// </summary>
     public string Path => $"{Folder}{System.IO.Path.DirectorySeparatorChar}{Metadata.Name}.nmoney";
+    /// <summary>
+    /// Strings to show for a custom currency's amount styles if available
+    /// </summary>
+    public string[] CustomCurrencyAmountStyleStrings => Metadata.CustomCurrencySymbol == null ? Array.Empty<string>() : new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
 
     /// <summary>
     /// Constructs a NewAccountDialogController
@@ -109,21 +113,6 @@ public class NewAccountDialogController
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
-        }
-    }
-    
-    /// <summary>
-    /// Strings to show for a custom currency's amount styles if available
-    /// </summary>
-    public string[]? CustomCurrencyAmountStyleStrings
-    {
-        get
-        {
-            if (Metadata.CustomCurrencySymbol != null)
-            {
-                return new string[] { $"{Metadata.CustomCurrencySymbol}100", $"100{Metadata.CustomCurrencySymbol}", $"{Metadata.CustomCurrencySymbol} 100", $"100 {Metadata.CustomCurrencySymbol}" };
-            }
-            return null;
         }
     }
     

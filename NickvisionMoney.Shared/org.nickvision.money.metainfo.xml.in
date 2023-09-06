@@ -49,7 +49,9 @@
   <releases>
     <release version="2023.9.1-next" date="2023-09-02">
       <description translatable="no">
+        <p>- Added a currency conversion tool into Denaro, accesable from the main menu. This tool is also integrated into the Transfer dialog when currency conversion is required</p>
         <p>- Fixed an issue where dates in the IncomeExpenseOverTime graph would overlap</p>
+        <p>- Fixed an issue where accessing account settings would sometimes crash</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

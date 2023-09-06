@@ -25,10 +25,6 @@ public class MainWindowController : IDisposable
     public Func<string, Task<string?>>? AccountLoginAsync { get; set; }
 
     /// <summary>
-    /// Application's Aura
-    /// </summary>
-    public Aura Aura { get; init; }
-    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => Aura.Active.AppInfo;
@@ -37,6 +33,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>
+    /// Whether to use native digits
+    /// </summary>
+    public bool UseNativeDigits => Configuration.Current.UseNativeDigits;
+    /// <summary>
     /// The list of recent accounts
     /// </summary>
     public List<RecentAccount> RecentAccounts => Configuration.Current.RecentAccounts;
@@ -44,19 +44,6 @@ public class MainWindowController : IDisposable
     /// The number of open accounts
     /// </summary>
     public int NumberOfOpenAccounts => _openAccounts.Count;
-    /// <summary>
-    /// Whether or not to show graphs
-    /// </summary>
-    public bool ShowGraphs
-    {
-        get => Configuration.Current.ShowGraphs;
-
-        set
-        {
-            Configuration.Current.ShowGraphs = value;
-            Aura.SaveConfig("config");
-        }
-    }
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -83,18 +70,19 @@ public class MainWindowController : IDisposable
             _fileToLaunch = (Path.Exists(args[0]) && Path.GetExtension(args[0]).ToLower() == ".nmoney") ? args[0] : null;
         }
         _openAccounts = new List<AccountViewController>();
-        Aura = new Aura("org.nickvision.money", "Nickvision Denaro", _("Denaro"), _("Manage your personal finances"));
-        if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+        Aura.Init("org.nickvision.money", "Nickvision Denaro", _("Denaro"), _("Manage your personal finances"));
+        if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
-            // Move or delete config files from older versions
+            // Move config files from older versions and delete old directory
             try
             {
-                Directory.Move($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", ConfigurationLoader.ConfigDir);
+                foreach (var file in Directory.GetFiles($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+                {
+                    File.Move(file, $"{UserDirectories.ApplicationConfig}{Path.DirectorySeparatorChar}{Path.GetFileName(file)}");
+                }
             }
-            catch (IOException)
-            {
-                Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
-            }
+            catch (IOException) { }
+            Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
         Aura.Active.SetConfig<Configuration>("config");
         AppInfo.Version = "2023.9.1-next";
@@ -144,6 +132,20 @@ public class MainWindowController : IDisposable
                 < 24 => _("Good Evening!"),
                 _ => _("Good Day!")
             };
+        }
+    }
+    
+    /// <summary>
+    /// Whether or not to show graphs
+    /// </summary>
+    public bool ShowGraphs
+    {
+        get => Configuration.Current.ShowGraphs;
+
+        set
+        {
+            Configuration.Current.ShowGraphs = value;
+            Aura.Active.SaveConfig("config");
         }
     }
 
