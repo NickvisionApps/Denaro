@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.9.1-next" date="2023-09-02">
+    <release version="2023.9.1-rc1" date="2023-09-06">
       <description translatable="no">
         <p>- Added a currency conversion tool into Denaro, accesable from the main menu. This tool is also integrated into the Transfer dialog when currency conversion is required</p>
         <p>- Fixed an issue where dates in the IncomeExpenseOverTime graph would overlap</p>
