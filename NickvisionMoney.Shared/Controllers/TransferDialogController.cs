@@ -113,6 +113,24 @@ public class TransferDialogController
     }
 
     /// <summary>
+    /// Gets the conversion rate from the source currency to the destination currency using the internet
+    /// </summary>
+    /// <returns>(string Source, string Destination)</returns>
+    public async Task<(string Source, string Destination)> GetConversionRateOnlineAsync()
+    {
+        if (string.IsNullOrEmpty(DestinationCurrencyCode))
+        {
+            return ("", "");
+        }
+        var rates = await CurrencyConversionService.GetConversionRatesAsync(SourceCurrencyCode);
+        if (rates != null && rates.ContainsKey(DestinationCurrencyCode))
+        {
+            return (rates[SourceCurrencyCode].ToAmountString(CultureForSourceNumberString, UseNativeDigits, false), rates[DestinationCurrencyCode].ToAmountString(CultureForDestNumberString!, UseNativeDigits, false));
+        }
+        return ("", "");
+    }
+
+    /// <summary>
     /// Updates the Transfer object
     /// </summary>
     /// <param name="destPath">The new path of the destination account</param>
@@ -217,48 +235,5 @@ public class TransferDialogController
         Transfer.SourceAmount = amount;
         Transfer.ConversionRate = conversionRate;
         return TransferCheckStatus.Valid;
-    }
-
-    private static Dictionary<string, string> tmpCacheSoIDontGetRateLimited = new();
-    
-    public async Task<(decimal, decimal)?> GetConversionRatesAsync()
-    {
-        if(DestinationCurrencyCode is null)
-        {
-            return null;
-        }
-        if(SourceCurrencyCode == DestinationCurrencyCode)
-        {
-            return (1.0m, 1.0m);
-        }
-        var apiUrl = $"https://open.er-api.com/v6/latest/{SourceCurrencyCode}";
-        try
-        {
-            using var httpClient = new HttpClient();
-            string json;
-            if (!tmpCacheSoIDontGetRateLimited.ContainsKey(SourceCurrencyCode))
-            {
-                //TODO: See why this doesn't work with await
-                var response = httpClient.GetAsync(apiUrl).Result;
-
-                if (!response.IsSuccessStatusCode)
-                    return null;
-            
-                json = await response.Content.ReadAsStringAsync();
-                tmpCacheSoIDontGetRateLimited.Add(SourceCurrencyCode, json);
-            }
-            else
-            {
-                json = tmpCacheSoIDontGetRateLimited[SourceCurrencyCode];
-            }
-            var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-            var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(data["rates"].ToString());
-            var destConversionAmount = rates[DestinationCurrencyCode];
-            return (1.0m, destConversionAmount);
-        }
-        catch
-        {
-            return null;
-        }
     }
 }

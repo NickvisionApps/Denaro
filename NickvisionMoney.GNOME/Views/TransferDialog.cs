@@ -27,6 +27,7 @@ public partial class TransferDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Label _currencyLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _amountRow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _conversionRateGroup;
+    [Gtk.Connect] private readonly Adw.ExpanderRow _rowUseCustomRates;
     [Gtk.Connect] private readonly Adw.EntryRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _destinationCurrencyRow;
     [Gtk.Connect] private readonly Gtk.Label _conversionResultLabel;
@@ -67,18 +68,18 @@ public partial class TransferDialog : Adw.Window
         _amountKeyController.OnKeyPressed += OnKeyPressedSource;
         _amountRow.AddController(_amountKeyController);
         //Conversion Rate
+        _conversionRateGroup.OnNotify += async (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "visible")
+            {
+                await SetupConversionRateGroupAsync();
+            }
+        };
         _sourceCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
                 Validate();
-            }
-        };
-        _conversionRateGroup.OnNotify += async (sender, e) =>
-        {
-            if (e.Pspec.GetName() == "visible")
-            {
-                await PopulateRateFields();
             }
         };
         _sourceCurrencyKeyController = Gtk.EventControllerKey.New();
@@ -286,23 +287,28 @@ public partial class TransferDialog : Adw.Window
         }
         return false;
     }
-
-
-    private async Task PopulateRateFields()
+    
+    /// <summary>
+    /// Sets up the ConversionRateGroup
+    /// </summary>
+    private async Task SetupConversionRateGroupAsync()
     {
         if (_conversionRateGroup.Visible)
         {
-            var rates = await _controller.GetConversionRatesAsync();
-            if (rates != null)
+            var res = await _controller.GetConversionRateOnlineAsync();
+            if (string.IsNullOrEmpty(res.Source) || string.IsNullOrEmpty(res.Destination))
             {
-                _controller.Transfer.ConversionRate = 1 / rates.Value.Item2;
-                var text = rates.Value.Item2.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, showCurrencySymbol: false);
-                GLib.Functions.IdleAdd(0, () =>
-                {
-                    _sourceCurrencyRow.SetText(rates.Value.Item1.ToAmountString(_controller.CultureForSourceNumberString, _controller.UseNativeDigits, showCurrencySymbol: false));
-                    _destinationCurrencyRow.SetText(text);
-                    return false;
-                });
+                _sourceCurrencyRow.SetText("");
+                _destinationCurrencyRow.SetText("");
+                _rowUseCustomRates.SetShowEnableSwitch(false);
+                _rowUseCustomRates.SetEnableExpansion(true);
+            }
+            else
+            {
+                _sourceCurrencyRow.SetText(res.Source);
+                _destinationCurrencyRow.SetText(res.Destination);
+                _rowUseCustomRates.SetShowEnableSwitch(true);
+                _rowUseCustomRates.SetEnableExpansion(false);
             }
         }
     }

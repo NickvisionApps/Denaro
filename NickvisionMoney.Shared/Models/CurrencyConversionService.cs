@@ -142,7 +142,7 @@ public class CurrencyConversionService
         {
             try
             {
-                var rates = json.RootElement.GetProperty("rates").GetString() ?? "";
+                var rates = json.RootElement.GetProperty("rates").ToString() ?? "";
                 return JsonSerializer.Deserialize<Dictionary<string, decimal>>(rates);
             }
             catch (Exception e)
