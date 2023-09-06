@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 16:30-0400\n"
+"POT-Creation-Date: 2023-09-06 17:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,7 +303,7 @@ msgstr "Senhal del compte de destinacion (obligatòri)"
 msgid "Disassociate Existing"
 msgstr "Dissociar l’existent"
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:82
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
 msgid "Error"
 msgstr ""
 
@@ -508,7 +508,7 @@ msgstr "Nòtas"
 msgid "Nothing to import from the file."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:84
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:101
 msgid "OK"
 msgstr "D'acòrdi"
 
@@ -739,7 +739,7 @@ msgstr ""
 "Ajustatz una transaccion novèla o importatz de transaccions a partir d’un "
 "fichièr."
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:82
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
 msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
@@ -1127,15 +1127,19 @@ msgstr ""
 msgid "Converter"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:43
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
+msgid "Switch"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:62
 msgid "Loading..."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:52
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:72
 msgid "Source"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:56
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Resultat"

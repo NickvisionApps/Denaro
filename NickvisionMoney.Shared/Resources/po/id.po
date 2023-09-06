@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 16:30-0400\n"
+"POT-Creation-Date: 2023-09-06 17:49-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -299,7 +299,7 @@ msgstr "Kata Sandi Rekening Tujuan (Diperlukan)"
 msgid "Disassociate Existing"
 msgstr "Pisahkan yang Ada"
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:82
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
 msgid "Error"
 msgstr ""
 
@@ -502,7 +502,7 @@ msgstr "Catatan"
 msgid "Nothing to import from the file."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:84
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:101
 msgid "OK"
 msgstr "OK"
 
@@ -746,7 +746,7 @@ msgstr ""
 msgid "Unable to import transactions from the file."
 msgstr "Tambahkan transaksi baru atau impor transaksi dari berkas."
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:82
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
 msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
@@ -1133,15 +1133,19 @@ msgstr "Saran"
 msgid "Converter"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:43
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
+msgid "Switch"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:62
 msgid "Loading..."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:52
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:72
 msgid "Source"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:56
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Hasil"
