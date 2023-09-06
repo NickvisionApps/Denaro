@@ -36,11 +36,12 @@ public class CurrencyConverterDialog : Adw.Window
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_iconName);
-        _sourceCurrencyRow.OnNotify += (sender, e) =>
+        _sourceCurrencyRow.OnNotify += async (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
             {
                 _sourceAmountRow.SetTitle(_currencies[_sourceCurrencyRow.GetSelected()]);
+                await OnAmountRowChangedAsync();
             }
         };
         _sourceAmountRow.OnNotify += async (sender, e) =>
@@ -50,11 +51,12 @@ public class CurrencyConverterDialog : Adw.Window
                 await OnAmountRowChangedAsync();
             }
         };
-        _resultCurrencyRow.OnNotify += (sender, e) =>
+        _resultCurrencyRow.OnNotify += async (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
             {
                 _resultAmountRow.SetTitle(_currencies[_resultCurrencyRow.GetSelected()]);
+                await OnAmountRowChangedAsync();
             }
         };
     }
