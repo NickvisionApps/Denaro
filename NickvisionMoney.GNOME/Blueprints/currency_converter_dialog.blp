@@ -1,0 +1,39 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window _root {
+  default-width: 440;
+  default-height: 400;
+  modal: true;
+  resizable: false;
+  
+  content: Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar _header {
+      title-widget: Gtk.Label {};
+
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+        
+        Gtk.Label _titleLabel {
+          label: _("Currency Converter");
+
+          styles ["title-2"]
+        }
+      }
+    }
+  };
+  
+  Gtk.ShortcutController {
+    Gtk.Shortcut {
+      trigger: "Escape";
+      action: "action(window.close)";
+    }
+  }
+}
