@@ -78,7 +78,7 @@ public class CurrencyConversionService
     {
         if (sourceCurrency == resultCurrency)
         {
-            return new CurrencyConversion(sourceCurrency, sourceAmount, resultCurrency, sourceAmount);
+            return new CurrencyConversion(sourceCurrency, sourceAmount, resultCurrency, 1);
         }
         var rates = await GetConversionRatesAsync(sourceCurrency);
         if (rates == null || !rates.ContainsKey(resultCurrency))
