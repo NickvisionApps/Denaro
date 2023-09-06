@@ -75,6 +75,16 @@ public partial class TransferDialog : Adw.Window
                 await SetupConversionRateGroupAsync();
             }
         };
+        _rowUseCustomRates.OnNotify += async (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "enable-expansion")
+            {
+                if (_rowUseCustomRates.GetEnableExpansion() == false)
+                {
+                    await SetupConversionRateGroupAsync();
+                }
+            }
+        };
         _sourceCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
@@ -308,7 +318,6 @@ public partial class TransferDialog : Adw.Window
                 _sourceCurrencyRow.SetText(res.Source);
                 _destinationCurrencyRow.SetText(res.Destination);
                 _rowUseCustomRates.SetShowEnableSwitch(true);
-                _rowUseCustomRates.SetEnableExpansion(false);
             }
         }
     }
