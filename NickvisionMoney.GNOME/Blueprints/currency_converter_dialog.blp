@@ -2,10 +2,11 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.Window _root {
+  width-request: 320;
   default-width: 440;
   default-height: 400;
   modal: true;
-  resizable: false;
+  resizable: true;
   
   content: Gtk.Box {
     orientation: vertical;
@@ -22,9 +23,46 @@ Adw.Window _root {
         spacing: 24;
         
         Gtk.Label _titleLabel {
-          label: _("Currency Converter");
+          label: _("Converter");
 
           styles ["title-2"]
+        }
+        
+        Adw.PreferencesGroup {
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+          title: _("Currency");
+        
+          header-suffix: Gtk.Box _loadingBox {
+            orientation: horizontal;
+            spacing: 6;
+            visible: false;
+            
+            Gtk.Label {
+              label: _("Loading...");
+            }
+            
+            Gtk.Spinner {
+              spinning: true;
+            }
+          };
+          
+          Adw.ComboRow _sourceCurrencyRow {
+            title: _("Source");
+          }
+          
+          Adw.ComboRow _resultCurrencyRow {
+            title: _("Result");
+          }
+          
+          Adw.EntryRow _sourceAmountRow {
+          
+          }
+          
+          Adw.EntryRow _resultAmountRow {
+            editable: false;
+          }
         }
       }
     }

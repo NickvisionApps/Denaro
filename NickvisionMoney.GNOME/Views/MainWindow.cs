@@ -410,10 +410,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void CurrencyConverter(Gio.SimpleAction sender, EventArgs e)
+    private async void CurrencyConverter(Gio.SimpleAction sender, EventArgs e)
     {
-        var currencyConverterDialog = new CurrencyConverterDialog(this, _controller.AppInfo.ID);
-        currencyConverterDialog.Present();
+        var currencyConverterDialog = new CurrencyConverterDialog(this, _controller.AppInfo.ID, _controller.UseNativeDigits);
+        await currencyConverterDialog.PresentAsync();
     }
 
     /// <summary>
