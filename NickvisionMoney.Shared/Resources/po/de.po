@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 17:49-0400\n"
+"POT-Creation-Date: 2023-09-06 18:00-0400\n"
 "PO-Revision-Date: 2023-08-29 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -164,7 +164,7 @@ msgstr "Beitragende auf Github ❤️"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:35
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:38
 msgid "Currency"
 msgstr "Währung"
 
@@ -297,7 +297,7 @@ msgstr "Passwort für das Zielkonto (erforderlich)"
 msgid "Disassociate Existing"
 msgstr "Bestehende Trennen"
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
 msgstr ""
 
@@ -500,7 +500,7 @@ msgstr "Notizen"
 msgid "Nothing to import from the file."
 msgstr ""
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:101
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
 msgid "OK"
 msgstr "OK"
 
@@ -571,6 +571,10 @@ msgstr "Wiederholungs-Intervall Wurde Geändert"
 #, fuzzy
 msgid "result"
 msgstr "Ergebnis"
+
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
+msgid "Result was copied to clipboard."
+msgstr ""
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -743,7 +747,7 @@ msgstr ""
 msgid "Unable to import transactions from the file."
 msgstr "Es können keine Überweisungen aus der Datei importiert werden."
 
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:99
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
@@ -1119,26 +1123,35 @@ msgstr "Neu"
 msgid "Suggestions"
 msgstr "Vorschläge"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:26
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:29
 msgid "Converter"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:46
+msgid "Switch currencies"
+msgstr ""
+
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:49
 msgid "Switch"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:62
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:66
 msgid "Loading..."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:72
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
 msgid "Source"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:80
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Ergebnis"
+
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:93
+#, fuzzy
+msgid "Copy Result Amount"
+msgstr "Keine kürzlichen Konten"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"

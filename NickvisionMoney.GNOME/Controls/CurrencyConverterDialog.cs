@@ -15,12 +15,14 @@ public class CurrencyConverterDialog : Adw.Window
     private readonly bool _useNativeDigits;
     private string[]? _currencies;
 
+    [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Gtk.Button _switchButton;
     [Gtk.Connect] private readonly Gtk.Box _loadingBox;
     [Gtk.Connect] private readonly Adw.ComboRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.ComboRow _resultCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _sourceAmountRow;
     [Gtk.Connect] private readonly Adw.EntryRow _resultAmountRow;
+    [Gtk.Connect] private readonly Gtk.Button _copyResultButton;
     
     /// <summary>
     /// Constructs a CurrencyConverterDialog
@@ -64,6 +66,14 @@ public class CurrencyConverterDialog : Adw.Window
             {
                 _resultAmountRow.SetTitle(_currencies[_resultCurrencyRow.GetSelected()]);
                 await OnAmountRowChangedAsync();
+            }
+        };
+        _copyResultButton.OnClicked += (sender, e) =>
+        {
+            if (!string.IsNullOrEmpty(_resultAmountRow.GetText()))
+            {
+                _resultAmountRow.GetClipboard().SetText(_resultAmountRow.GetText());
+                _toastOverlay.AddToast(Adw.Toast.New(_("Result was copied to clipboard.")));
             }
         };
     }
