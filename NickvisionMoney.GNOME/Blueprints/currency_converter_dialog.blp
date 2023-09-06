@@ -34,17 +34,37 @@ Adw.Window _root {
           margin-bottom: 24;
           title: _("Currency");
         
-          header-suffix: Gtk.Box _loadingBox {
+          header-suffix: Gtk.Box {
             orientation: horizontal;
             spacing: 6;
-            visible: false;
             
-            Gtk.Label {
-              label: _("Loading...");
+            Gtk.Button _switchButton {
+              valign: center;
+              
+              Adw.ButtonContent {
+                label: _("Switch");
+                icon-name: "update-symbolic";
+              }
+              
+              styles ["flat"]
             }
             
-            Gtk.Spinner {
-              spinning: true;
+            Gtk.Box _loadingBox {
+              orientation: horizontal;
+              spacing: 6;
+              visible: false;
+              
+              Gtk.Separator {
+                orientation: vertical;
+              }
+              
+              Gtk.Label {
+                label: _("Loading...");
+              }
+              
+              Gtk.Spinner {
+                spinning: true;
+              }
             }
           };
           

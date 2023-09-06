@@ -14,7 +14,8 @@ public class CurrencyConverterDialog : Adw.Window
     private readonly string _iconName;
     private readonly bool _useNativeDigits;
     private string[]? _currencies;
-    
+
+    [Gtk.Connect] private readonly Gtk.Button _switchButton;
     [Gtk.Connect] private readonly Gtk.Box _loadingBox;
     [Gtk.Connect] private readonly Adw.ComboRow _sourceCurrencyRow;
     [Gtk.Connect] private readonly Adw.ComboRow _resultCurrencyRow;
@@ -36,6 +37,12 @@ public class CurrencyConverterDialog : Adw.Window
         //Dialog Settings
         SetTransientFor(parent);
         SetIconName(_iconName);
+        _switchButton.OnClicked += (sender, e) =>
+        {
+            var temp = _sourceCurrencyRow.GetSelected();
+            _sourceCurrencyRow.SetSelected(_resultCurrencyRow.GetSelected());
+            _resultCurrencyRow.SetSelected(temp);
+        };
         _sourceCurrencyRow.OnNotify += async (sender, e) =>
         {
             if (e.Pspec.GetName() == "selected-item")
@@ -78,7 +85,15 @@ public class CurrencyConverterDialog : Adw.Window
     {
         base.Present();
         _loadingBox.SetVisible(true);
-        _currencies = (await CurrencyConversionService.GetConversionRatesAsync("USD") ?? new Dictionary<string, decimal>()).Keys.ToArray();
+        _currencies = (await CurrencyConversionService.GetConversionRatesAsync("USD") ?? new Dictionary<string, decimal>()).Keys
+            .OrderByDescending(x => x == "USD")
+            .ThenByDescending(x => x == "EUR")
+            .ThenByDescending(x => x == "JPY")
+            .ThenByDescending(x => x == "GBP")
+            .ThenByDescending(x => x == "CNY")
+            .ThenByDescending(x => x == "CAD")
+            .ThenByDescending(x => x == "AUD")
+            .ToArray();
         if (_currencies.Length == 0)
         {
             var messageDialog = Adw.MessageDialog.New(this, _("Error"), _("Unable to load currency data. Please try again. If the error still persists, report a bug."));
