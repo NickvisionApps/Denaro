@@ -118,13 +118,16 @@ public class CurrencyConverterDialog : Adw.Window
             };
             messageDialog.Present();
         }
-        var currenciesList = Gtk.StringList.New(_currencies);
-        _loadingBox.SetVisible(false);
-        _sourceCurrencyRow.SetModel(currenciesList);
-        _resultCurrencyRow.SetModel(currenciesList);
-        _resultCurrencyRow.SetSelected(1);
-        _sourceAmountRow.SetText("1");
-        _sourceAmountRow.SetPosition(-1);
+        else
+        {
+            var currenciesList = Gtk.StringList.New(_currencies);
+            _loadingBox.SetVisible(false);
+            _sourceCurrencyRow.SetModel(currenciesList);
+            _resultCurrencyRow.SetModel(currenciesList);
+            _resultCurrencyRow.SetSelected(1);
+            _sourceAmountRow.SetText("1");
+            _sourceAmountRow.SetPosition(-1);
+        }
     }
 
     /// <summary>
