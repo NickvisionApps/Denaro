@@ -135,6 +135,7 @@ public class CurrencyConverterDialog : Adw.Window
     /// </summary>
     private async Task OnAmountRowChangedAsync()
     {
+        _sourceAmountRow.RemoveCssClass("error");
         if (string.IsNullOrEmpty(_sourceAmountRow.GetText()))
         {
             _resultAmountRow.SetText("");
@@ -149,6 +150,11 @@ public class CurrencyConverterDialog : Adw.Window
                 {
                     _resultAmountRow.SetText(res.ResultAmount.ToAmountString(CultureInfo.CurrentCulture, _useNativeDigits, false));
                 }
+            }
+            else
+            {
+                _sourceAmountRow.AddCssClass("error");
+                _resultAmountRow.SetText("");
             }
             _loadingBox.SetVisible(false);
         }
