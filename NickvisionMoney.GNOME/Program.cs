@@ -43,7 +43,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Added a currency conversion tool into Denaro, accesable from the main menu. This tool is also integrated into the Transfer dialog when currency conversion is required
+            @"* Added a currency conversion tool into Denaro, accessible from the main menu. This tool is also integrated into the Transfer dialog when currency conversion is required
               * Fixed an issue where dates in the IncomeExpenseOverTime graph would overlap
               * Fixed an issue where accessing account settings would sometimes crash
               * Updated and added translations (Thanks to everyone on Weblate)!";
