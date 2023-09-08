@@ -49,7 +49,7 @@
 		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Ahorros</em> en una lista de cuentas recientes.</p>
 	</item>
 	<item>
-		<title>Color de la cuenta de empresas</title>
+		<title>Color de la cuenta de la empresa</title>
 		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Empresas</em> en una lista de cuentas recientes.</p>
 	</item>
 	<item>
