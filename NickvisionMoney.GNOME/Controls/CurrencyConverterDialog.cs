@@ -108,9 +108,9 @@ public class CurrencyConverterDialog : Adw.Window
         {
             var messageDialog = Adw.MessageDialog.New(this, _("Error"), _("Unable to load currency data. Please try again. If the error still persists, report a bug."));
             messageDialog.SetIconName(_iconName);
-            messageDialog.AddResponse("ok", _("OK"));
-            messageDialog.SetDefaultResponse("ok");
-            messageDialog.SetCloseResponse("ok");
+            messageDialog.AddResponse("close", _("Close"));
+            messageDialog.SetDefaultResponse("close");
+            messageDialog.SetCloseResponse("close");
             messageDialog.OnResponse += async (ss, exx) =>
             {
                 messageDialog.Destroy();
