@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 18:00-0400\n"
+"POT-Creation-Date: 2023-09-08 13:18-0400\n"
 "PO-Revision-Date: 2023-09-07 11:48+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -95,7 +95,7 @@ msgid "All files"
 msgstr "Tutti i file"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:494
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:150
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:160
 #: ../../../Models/Account.cs:1702 ../../../Models/Account.cs:1738
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:76
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
@@ -103,7 +103,7 @@ msgid "Amount"
 msgstr "Importo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:513
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:185
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:195
 msgid "Amount (Invalid)"
 msgstr "Importo (non valido)"
 
@@ -158,6 +158,10 @@ msgstr "Modifica password"
 msgid "Checking"
 msgstr "Conto corrente"
 
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
+msgid "Close"
+msgstr "Chiudi"
+
 #: ../../../Controllers/MainWindowController.cs:94
 msgid "Contributors on GitHub ❤️"
 msgstr "I collaboratori di GitHub ❤️"
@@ -165,40 +169,40 @@ msgstr "I collaboratori di GitHub ❤️"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:38
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:36
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:368
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Currency Code"
 msgstr "Codice della valuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:399
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:399
 msgid "Currency Code (Empty)"
 msgstr "Codice della valuta (vuoto)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:366
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:237
 msgid "Currency Symbol"
 msgstr "Simbolo della valuta"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:394
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
 msgid "Currency Symbol (Empty)"
 msgstr "Simbolo della valuta (vuoto)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:416
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:423
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:400
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:426
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:434
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:416
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:423
 msgid "Currency Symbol (Invalid)"
 msgstr "Simbolo della valuta (non valido)"
 
@@ -215,22 +219,22 @@ msgstr "Data"
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:370
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:186
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:252
 msgid "Decimal Separator"
 msgstr "Separatore decimale"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:412
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
 msgid "Decimal Separator (Empty)"
 msgstr "Separatore decimale (vuoto)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:409
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:428
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 msgid "Decimal Separator (Invalid)"
 msgstr "Separatore decimale (non valido)"
 
@@ -272,25 +276,25 @@ msgstr "Descrizione"
 msgid "Description (Empty)"
 msgstr "Descrizione (vuota)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:146
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:156
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:38
 msgid "Destination Account"
 msgstr "Conto di destinazione"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:166
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:176
 msgid "Destination Account (Invalid)"
 msgstr "Conto di destinazione (non valido)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:148
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:158
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:69
 msgid "Destination Account Password"
 msgstr "Password del conto di destinazione"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:179
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:189
 msgid "Destination Account Password (Invalid)"
 msgstr "Password del conto di destinazione (non valida)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:183
 msgid "Destination Account Password (Required)"
 msgstr "Password del conto di destinazione (richiesta)"
 
@@ -360,17 +364,17 @@ msgstr "Gruppo"
 msgid "Group Name"
 msgstr "Nome gruppo"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:372
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:202
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:268
 msgid "Group Separator"
 msgstr "Separatore dei gruppi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:411
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:425
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:420
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:436
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:425
 msgid "Group Separator (Invalid)"
 msgstr "Separatore dei gruppi (non valido)"
 
@@ -428,7 +432,7 @@ msgstr "Gestisci le tue finanze"
 msgid "Matrix Chat"
 msgstr "Chat di Matrix"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:194
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:204
 #: ../../../Models/Account.cs:1450 ../../../Models/Account.cs:1512
 msgid "N/A"
 msgstr "N/A"
@@ -463,7 +467,7 @@ msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:214
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:224
 #: ../../../Models/Account.cs:1833
 msgid "Nickvision Denaro Account"
 msgstr "Conto di Nickvision Denaro"
@@ -501,10 +505,6 @@ msgstr "Annotazioni"
 #: ../../../Controllers/AccountViewController.cs:978
 msgid "Nothing to import from the file."
 msgstr "Nulla da importare dal file."
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
-msgid "OK"
-msgstr "Ok"
 
 #: ../../../Models/Account.cs:2150
 msgid "One month from now"
@@ -583,7 +583,7 @@ msgstr ""
 msgid "Savings"
 msgstr "Conto deposito"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:212
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:222
 msgid "Select Account"
 msgstr "Seleziona conto"
 
@@ -839,8 +839,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Sì"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:222
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:114
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:222
 msgid "Your system reported that your currency is"
 msgstr "Il sistema riferisce che la valuta di sistema è"
 
@@ -1120,32 +1120,32 @@ msgstr "Nuova"
 msgid "Suggestions"
 msgstr "Suggerimenti"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:29
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
 msgid "Converter"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:46
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
 msgid "Switch currencies"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:49
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
 msgid "Switch"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:66
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
 msgid "Loading..."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
 msgid "Source"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:80
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Risultato"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:93
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
 #, fuzzy
 msgid "Copy Result Amount"
 msgstr "Nessun account recente"
@@ -1627,6 +1627,9 @@ msgstr ""
 "— Esportare un conto come file CSV e importare file CSV, OFX e QIF per "
 "aggiungere a un conto tante transazioni in una sola volta"
 
+#~ msgid "OK"
+#~ msgstr "Ok"
+
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr ""
 #~ "Importazione delle informazioni dal file non riuscita. Il tipo di file "
@@ -1774,9 +1777,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Traduttori su Weblate ❤️ https://hosted.weblate.org/projects/nickvision-"
 #~ "money/app/"
-
-#~ msgid "Close"
-#~ msgstr "Chiudi"
 
 #~ msgid "Home"
 #~ msgstr "Home"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-06 18:00-0400\n"
+"POT-Creation-Date: 2023-09-08 13:18-0400\n"
 "PO-Revision-Date: 2023-09-06 23:46+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -95,7 +95,7 @@ msgid "All files"
 msgstr "Tüm dosyalar"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:494
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:150
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:160
 #: ../../../Models/Account.cs:1702 ../../../Models/Account.cs:1738
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:76
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:75
@@ -103,7 +103,7 @@ msgid "Amount"
 msgstr "Tutar"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:513
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:185
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:195
 msgid "Amount (Invalid)"
 msgstr "Tutar (Geçersiz)"
 
@@ -156,6 +156,10 @@ msgstr "Parola Değiştir"
 msgid "Checking"
 msgstr "Çek"
 
+#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
+msgid "Close"
+msgstr "Kapat"
+
 #: ../../../Controllers/MainWindowController.cs:94
 msgid "Contributors on GitHub ❤️"
 msgstr "Github Katkıcıları ❤️"
@@ -163,40 +167,40 @@ msgstr "Github Katkıcıları ❤️"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:38
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:36
 msgid "Currency"
 msgstr "Para Birimi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:368
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:369
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:175
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:241
 msgid "Currency Code"
 msgstr "Para Birimi Kodu"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:399
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:406
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:399
 msgid "Currency Code (Empty)"
 msgstr "Para Birimi Kodu (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:366
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:367
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:171
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:237
 msgid "Currency Symbol"
 msgstr "Para Birimi Simgesi"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:394
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:389
 msgid "Currency Symbol (Empty)"
 msgstr "Para Birimi Simgesi (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:416
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:423
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:400
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:426
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:434
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:394
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:416
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:423
 msgid "Currency Symbol (Invalid)"
 msgstr "Para Birimi Simgesi (Geçersiz)"
 
@@ -213,22 +217,22 @@ msgstr "Tarih"
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:370
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:371
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:186
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:252
 msgid "Decimal Separator"
 msgstr "Ondalık Ayırıcı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:412
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:404
 msgid "Decimal Separator (Empty)"
 msgstr "Ondalık Ayırıcı (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:409
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:418
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:428
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:409
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:418
 msgid "Decimal Separator (Invalid)"
 msgstr "Ondalık Ayırıcı (Geçersiz)"
 
@@ -270,25 +274,25 @@ msgstr "Açıklama"
 msgid "Description (Empty)"
 msgstr "Açıklama (Boş)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:146
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:156
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:38
 msgid "Destination Account"
 msgstr "Hedef Hesap"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:166
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:176
 msgid "Destination Account (Invalid)"
 msgstr "Hedef Hesap (Geçersiz)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:148
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:158
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:69
 msgid "Destination Account Password"
 msgstr "Hedef Hesap Parolası"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:179
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:189
 msgid "Destination Account Password (Invalid)"
 msgstr "Hedef Hesap Parolası (Geçersiz)"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:173
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:183
 msgid "Destination Account Password (Required)"
 msgstr "Hedef Hesap Parolası (Gerekli)"
 
@@ -358,17 +362,17 @@ msgstr "Grup"
 msgid "Group Name"
 msgstr "Grup Adı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:372
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:373
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:202
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:268
 msgid "Group Separator"
 msgstr "Grup Ayırıcı"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:411
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:425
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:420
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:436
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:411
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:425
 msgid "Group Separator (Invalid)"
 msgstr "Grup Ayırıcı (Geçersiz)"
 
@@ -426,7 +430,7 @@ msgstr "Kişisel mali durumunuzu yönetin"
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:194
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:204
 #: ../../../Models/Account.cs:1450 ../../../Models/Account.cs:1512
 msgid "N/A"
 msgstr "Yok"
@@ -461,7 +465,7 @@ msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:330
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:214
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:224
 #: ../../../Models/Account.cs:1833
 msgid "Nickvision Denaro Account"
 msgstr "Nickvision Denaro Hesabı"
@@ -498,10 +502,6 @@ msgstr "Notlar"
 #: ../../../Controllers/AccountViewController.cs:978
 msgid "Nothing to import from the file."
 msgstr "Dosyadan içe aktarılacak bir şey yok."
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
-msgid "OK"
-msgstr "Tamam"
 
 #: ../../../Models/Account.cs:2150
 msgid "One month from now"
@@ -580,7 +580,7 @@ msgstr "Sonuç panoya kopyalandı."
 msgid "Savings"
 msgstr "Tasarruf"
 
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:212
+#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:222
 msgid "Select Account"
 msgstr "Hesap Seç"
 
@@ -838,8 +838,8 @@ msgstr ""
 msgid "Yes"
 msgstr "Evet"
 
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:222
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:114
+#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:222
 msgid "Your system reported that your currency is"
 msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
 
@@ -1118,32 +1118,32 @@ msgstr "Yeni"
 msgid "Suggestions"
 msgstr "Öneriler"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:29
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
 msgid "Converter"
 msgstr "Dönüştürücü"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:46
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
 msgid "Switch currencies"
 msgstr "Para birimleri arasında geçiş yap"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:49
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
 msgid "Switch"
 msgstr "Geçiş yap"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:66
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
 msgid "Source"
 msgstr "Kaynak"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:80
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Sonuç"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:93
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
 msgid "Copy Result Amount"
 msgstr "Sonuç Miktarı Kopyala"
 
@@ -1621,6 +1621,9 @@ msgstr ""
 "— Hesabı CSV dosyası olarak dışa aktarın ya da hesaba toplu işlem eklemek "
 "için CSV, OFX veya QIF dosyası kullanın"
 
+#~ msgid "OK"
+#~ msgstr "Tamam"
+
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr "Dosyadan bilgiler içe aktarılamadı. Desteklenmeyen dosya türü."
 
@@ -1766,9 +1769,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Weblateʼteki Çevirmenler ❤️ https://hosted.weblate.org/projects/nickvision-"
 #~ "money/app/"
-
-#~ msgid "Close"
-#~ msgstr "Kapat"
 
 #~ msgid "Home"
 #~ msgstr "Ev"
