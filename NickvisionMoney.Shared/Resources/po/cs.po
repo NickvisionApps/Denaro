@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-06 18:00-0400\n"
-"PO-Revision-Date: 2023-08-24 10:19+0000\n"
+"PO-Revision-Date: 2023-09-08 13:56+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -301,7 +301,7 @@ msgstr "Odpojit stávající"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: ../../../Models/Account.cs:1654 ../../../Models/Account.cs:1784
 #: ../../../Models/Account.cs:1902 ../../../Models/Account.cs:1934
@@ -571,13 +571,12 @@ msgid "Repeat Interval Changed"
 msgstr "Interval opakování změněn"
 
 #: ../../../Models/CurrencyConversionService.cs:126
-#, fuzzy
 msgid "result"
-msgstr "Výsledek"
+msgstr "výsledek"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "Výsledek zkopírován do schránky."
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -753,6 +752,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"Nepodařilo se načíst informace o měnách. Zkuste to prosím znovu. Pokud chyba "
+"nezmizí, nahlaste to prosím jako chybu."
 
 #: ../../../Controllers/MainWindowController.cs:335
 msgid "Unable to login to account. Provided password is invalid."
@@ -1121,23 +1122,23 @@ msgstr "Návrhy"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:29
 msgid "Converter"
-msgstr ""
+msgstr "Převodník"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:46
 msgid "Switch currencies"
-msgstr ""
+msgstr "Vyměnit měny"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:49
 msgid "Switch"
-msgstr ""
+msgstr "Vyměnit"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:66
 msgid "Loading..."
-msgstr ""
+msgstr "Načítání..."
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
 msgid "Source"
-msgstr ""
+msgstr "Zdroj"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:80
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
@@ -1145,9 +1146,8 @@ msgid "Result"
 msgstr "Výsledek"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:93
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Žádné nedávné účty"
+msgstr "Zkopírovat množství výsledku"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1530,14 +1530,12 @@ msgid "Conversion Needed"
 msgstr "Nutná konverze"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:91
-#, fuzzy
 msgid "Use Custom Rates"
-msgstr "Použití vlastní měny"
+msgstr "Použít vlastní kurzy"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:92
-#, fuzzy
 msgid "Enter the conversion rates manually"
-msgstr "Sem zadejte konverzi"
+msgstr "Ručně zadejte kurzy"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:119
 msgctxt "Button"
@@ -1545,9 +1543,8 @@ msgid "Transfer"
 msgstr "Převod"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:5
-#, fuzzy
 msgid "Currency Converter"
-msgstr "Kód měny"
+msgstr "Převodník měn"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
@@ -1600,7 +1597,7 @@ msgstr "peníze;finance;peněženka;hotovost;banka;Nickvision;"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
-msgstr "— Správa několika účtů najednou pomocí intuitivního rozhraní"
+msgstr "— Správa několika účtů najednou pomocí intuitivního rozhraní s kartami"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
