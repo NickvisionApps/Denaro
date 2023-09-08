@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-06 18:00-0400\n"
-"PO-Revision-Date: 2023-08-24 20:09+0000\n"
+"PO-Revision-Date: 2023-09-08 13:56+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/es/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -301,7 +301,7 @@ msgstr "Disociar existente"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: ../../../Models/Account.cs:1654 ../../../Models/Account.cs:1784
 #: ../../../Models/Account.cs:1902 ../../../Models/Account.cs:1934
@@ -504,7 +504,7 @@ msgstr "Nada que importar del archivo."
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
 msgid "OK"
-msgstr "Vale"
+msgstr "De acuerdo"
 
 #: ../../../Models/Account.cs:2150
 msgid "One month from now"
@@ -570,13 +570,12 @@ msgid "Repeat Interval Changed"
 msgstr "Intervalo de repetición modificado"
 
 #: ../../../Models/CurrencyConversionService.cs:126
-#, fuzzy
 msgid "result"
-msgstr "Resultado"
+msgstr "resultado"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "El resultado se ha copiado en el portapapeles."
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -753,6 +752,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"No se han podido cargar los datos de la divisa. Por favor, vuelve a "
+"intentarlo. Si el error persiste, notifica un error."
 
 #: ../../../Controllers/MainWindowController.cs:335
 msgid "Unable to login to account. Provided password is invalid."
@@ -1122,23 +1123,23 @@ msgstr "Sugerencias"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:29
 msgid "Converter"
-msgstr ""
+msgstr "Conversor"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:46
 msgid "Switch currencies"
-msgstr ""
+msgstr "Cambiar de divisa"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:49
 msgid "Switch"
-msgstr ""
+msgstr "Cambiar"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:66
 msgid "Loading..."
-msgstr ""
+msgstr "Cargando..."
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:76
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:80
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
@@ -1146,9 +1147,8 @@ msgid "Result"
 msgstr "Resultado"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:93
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Sin cuentas recientes"
+msgstr "Copiar el Resultado del Importe"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1328,7 +1328,7 @@ msgstr "Color de la cuenta de ahorro"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:94
 msgid "Business Account Color"
-msgstr "Color de la cuenta de empresa"
+msgstr "Color de la cuenta de la empresa"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:106
 msgid "Locale"
@@ -1537,14 +1537,12 @@ msgid "Conversion Needed"
 msgstr "Se necesita la conversión"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:91
-#, fuzzy
 msgid "Use Custom Rates"
-msgstr "Usar moneda personalizada"
+msgstr "Utilizar tarifas personalizadas"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:92
-#, fuzzy
 msgid "Enter the conversion rates manually"
-msgstr "Escribe aquí la conversión"
+msgstr "Introducir manualmente los índices para la conversión"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:119
 msgctxt "Button"
@@ -1552,9 +1550,8 @@ msgid "Transfer"
 msgstr "Transferir"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:5
-#, fuzzy
 msgid "Currency Converter"
-msgstr "Código de moneda"
+msgstr "Conversor de divisas"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
@@ -1608,17 +1605,17 @@ msgstr "dinero;finanzas;cartera;efectivo;banco;Nickvision;"
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
 msgstr ""
-"— Gestione varias cuentas a la vez, con una interfaz de pestañas familiar"
+"— Gestiona varias cuentas a la vez, con una interfaz de pestañas intuitiva"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr "— Filtre fácilmente las transacciones por tipo, grupo o fecha"
+msgstr "— Filtra fácilmente las transacciones por tipo, grupo o fecha"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
 msgstr ""
-"— Repetir fácilmente transacciones, como facturas que se producen todos los "
-"meses"
+"— Repetir fácilmente las transacciones, como facturas que se producen todos "
+"los meses"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:13
 msgid "— Transfer money from one account to another"
@@ -1629,8 +1626,8 @@ msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
-"— Exporte una cuenta como archivo CSV e importe un archivo CSV, OFX o QIF "
-"para añadir transacciones en bloque a una cuenta"
+"— Exporta una cuenta como un archivo CSV e importaun archivo CSV, OFX o QIF "
+"para añadir las transacciones en bloque a una cuenta"
 
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "Espere mientras se importan las transacciones..."
