@@ -104,14 +104,19 @@ public class CurrencyConversionService
             try
             {
                 json = JsonDocument.Parse(await File.ReadAllTextAsync(path));
-                if (json.RootElement.GetProperty("time_next_update_utc").GetDateTime() <= DateTime.Today)
+                var seconds = json.RootElement.GetProperty("time_next_update_unix").GetInt64();
+                var nextUpdate = DateTimeOffset.FromUnixTimeSeconds(seconds).ToLocalTime();
+                if (nextUpdate <= DateTime.Now)
                 {
                     needsUpdate = true;
                     json.Dispose();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                // Couldn't get the cached rates
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 needsUpdate = true;
                 json?.Dispose();
             }
