@@ -303,7 +303,7 @@ msgstr "Bestehende Trennen"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #: ../../../Models/Account.cs:1654 ../../../Models/Account.cs:1784
 #: ../../../Models/Account.cs:1902 ../../../Models/Account.cs:1934
@@ -568,13 +568,12 @@ msgid "Repeat Interval Changed"
 msgstr "Wiederholungs-Intervall Wurde Geändert"
 
 #: ../../../Models/CurrencyConversionService.cs:126
-#, fuzzy
 msgid "result"
 msgstr "Ergebnis"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "Ergebnis wurde in die Zwischenablage kopiert."
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -752,6 +751,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"Währungsdaten können nicht geladen werden. Bitte versuchen Sie es erneut. "
+"Wenn der Fehler weiterhin auftritt, melden Sie einen Fehler."
 
 #: ../../../Controllers/MainWindowController.cs:335
 msgid "Unable to login to account. Provided password is invalid."
@@ -969,9 +970,8 @@ msgstr "Passwort bestätigen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:244
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:93
-#, fuzzy
 msgid "Password Strength"
-msgstr "Passwort"
+msgstr "Passwortstärke"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:256
 msgid "If the password is lost, there is no way to restore the file!"
@@ -1125,23 +1125,23 @@ msgstr "Vorschläge"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
 msgid "Converter"
-msgstr ""
+msgstr "Umrechner"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
 msgid "Switch currencies"
-msgstr ""
+msgstr "Währungen wechseln"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
 msgid "Switch"
-msgstr ""
+msgstr "Wechseln"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
 msgid "Loading..."
-msgstr ""
+msgstr "Wird geladen..."
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
@@ -1149,9 +1149,8 @@ msgid "Result"
 msgstr "Ergebnis"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Keine kürzlichen Konten"
+msgstr "Ergebnisbetrag kopieren"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1485,7 +1484,7 @@ msgstr "Einzigartige Farbe verwenden"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:232
 msgid "Enter a new tag name..."
-msgstr ""
+msgstr "Geben Sie einen neuen Schlagwortnamen ein..."
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:237
 msgid "Add Tag"
@@ -1541,14 +1540,12 @@ msgid "Conversion Needed"
 msgstr "Umwechslung Benötigt"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:91
-#, fuzzy
 msgid "Use Custom Rates"
-msgstr "Eigene Währung Benutzen"
+msgstr "Benutzerdefinierte Kurse verwenden"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:92
-#, fuzzy
 msgid "Enter the conversion rates manually"
-msgstr "Gebe Umwechslung hier ein"
+msgstr "Geben Sie die Umrechnungskurse manuell ein"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:119
 msgctxt "Button"
@@ -1556,9 +1553,8 @@ msgid "Transfer"
 msgstr "Überweisen"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:5
-#, fuzzy
 msgid "Currency Converter"
-msgstr "Währungs-Code"
+msgstr "Währungsumrechner"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
@@ -1612,12 +1608,12 @@ msgstr "Geld;Finanzen;Brieftasche;Bargeld;Bank;Nickvision;"
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
 msgstr ""
-"— Verwalten von mehreren Konten gleichzeitig, mit einer vertrauten "
+"— Mehrere Konten gleichzeitig verwalten, mit einer vertrauten "
 "Registerkartenoberfläche"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr "— Einfaches Filtern von Transaktionen nach Typ, Gruppe oder Datum"
+msgstr "— Transaktionen einfach nach Typ, Gruppe oder Datum filtern"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
