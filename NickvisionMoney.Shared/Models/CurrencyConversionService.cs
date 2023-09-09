@@ -121,19 +121,19 @@ public class CurrencyConversionService
                 json?.Dispose();
             }
         }
+        string response = null;
         if (needsUpdate)
         {
             var apiUrl = $"https://open.er-api.com/v6/latest/{sourceCurrency}";
             try
             {
-                var response = await _http.GetStringAsync(apiUrl);
+                response = await _http.GetStringAsync(apiUrl);
                 json = JsonDocument.Parse(response);
                 if (json.RootElement.GetProperty("result").GetString() != "success")
                 {
                     json.Dispose();
                     return null;
                 }
-                await File.WriteAllTextAsync(path, response);
             }
             catch (Exception e)
             {
@@ -143,12 +143,13 @@ public class CurrencyConversionService
                 return null;
             }
         }
+        Dictionary<string, decimal> rates = null;
         if (json != null)
         {
             try
             {
-                var rates = json.RootElement.GetProperty("rates").ToString() ?? "";
-                return JsonSerializer.Deserialize<Dictionary<string, decimal>>(rates);
+                var ratesJson = json.RootElement.GetProperty("rates").ToString() ?? "";
+                rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(ratesJson);
             }
             catch (Exception e)
             {
@@ -161,6 +162,18 @@ public class CurrencyConversionService
                 json.Dispose();
             }
         }
-        return null;
+        if (needsUpdate)
+        {
+            try
+            {
+                await File.WriteAllTextAsync(path, response);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+        return rates;
     }
 }
