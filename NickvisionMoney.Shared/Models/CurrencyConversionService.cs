@@ -99,7 +99,7 @@ public class CurrencyConversionService
         var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
         var needsUpdate = !File.Exists(path);
         JsonDocument? json = null;
-        if (File.Exists(path))
+        if (!needsUpdate)
         {
             try
             {
