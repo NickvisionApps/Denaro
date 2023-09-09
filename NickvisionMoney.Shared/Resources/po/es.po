@@ -575,7 +575,7 @@ msgstr "resultado"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr "El resultado se ha copiado en el portapapeles."
+msgstr "Resultado copiado al portapapeles."
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -752,8 +752,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
-"No se han podido cargar los datos de la divisa. Por favor, vuelve a "
-"intentarlo. Si el error persiste, notifica un error."
+"No se han podido cargar los datos de la divisa. Por favor, vuelva a "
+"intentarlo. Si el error persiste, notifique un error."
 
 #: ../../../Controllers/MainWindowController.cs:335
 msgid "Unable to login to account. Provided password is invalid."
@@ -1148,7 +1148,7 @@ msgstr "Resultado"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
 msgid "Copy Result Amount"
-msgstr "Copiar el Resultado del Importe"
+msgstr "Copiar el resultado del importe"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1538,7 +1538,7 @@ msgstr "Se necesita la conversión"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:91
 msgid "Use Custom Rates"
-msgstr "Utilizar tarifas personalizadas"
+msgstr "Usar tarifas personalizadas"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:92
 msgid "Enter the conversion rates manually"
@@ -1605,11 +1605,11 @@ msgstr "dinero;finanzas;cartera;efectivo;banco;Nickvision;"
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:10
 msgid "— Manage multiple accounts at a time, with a familiar tab interface"
 msgstr ""
-"— Gestiona varias cuentas a la vez, con una interfaz de pestañas intuitiva"
+"— Gestione varias cuentas a la vez, con una interfaz de pestañas intuitiva"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:11
 msgid "— Easily filter transactions by type, group, or date"
-msgstr "— Filtra fácilmente las transacciones por tipo, grupo o fecha"
+msgstr "— Filtre fácilmente las transacciones por tipo, grupo o fecha"
 
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:12
 msgid "— Easily repeat transactions, such as bills that occur every month"
@@ -1626,11 +1626,11 @@ msgid ""
 "— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk "
 "add transactions to an account"
 msgstr ""
-"— Exporta una cuenta como un archivo CSV e importaun archivo CSV, OFX o QIF "
+"— Exporte una cuenta como un archivo CSV e importe un archivo CSV, OFX o QIF "
 "para añadir las transacciones en bloque a una cuenta"
 
 #~ msgid "OK"
-#~ msgstr "De acuerdo"
+#~ msgstr "Aceptar"
 
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "Espere mientras se importan las transacciones..."
