@@ -33,7 +33,7 @@ public class CurrencyConversion
     /// <summary>
     /// The result amount
     /// </summary>
-    public decimal ResultAmount => SourceAmount / ConversionRate;
+    public decimal ResultAmount => SourceAmount * ConversionRate;
     
     /// <summary>
     /// Constructs a CurrencyConversion
