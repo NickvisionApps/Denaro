@@ -89,55 +89,116 @@ public class CurrencyConversionService
     }
 
     /// <summary>
-    /// Gets a dictionary of conversion rates from the source currency
+    /// Gets a dictionary of conversion rates for the source currency
     /// </summary>
     /// <param name="sourceCurrency">The currency code to get converting rates for</param>
-    /// <returns>Dictionary&lt;string, decimal&gt; is successful, else false</returns>
+    /// <returns>Dictionary&lt;string, decimal&gt; is successful, else null</returns>
     /// <remarks>This method will cache the data for the sourceCurrency on disk</remarks>
     public static async Task<Dictionary<string, decimal>?> GetConversionRatesAsync(string sourceCurrency)
     {
-        var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
-        var needsUpdate = !File.Exists(path);
-        JsonDocument? json = null;
-        if (File.Exists(path))
+        var cache = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
+        var rates = await GetCachedConversionRatesAsync(cache);
+        if (rates != null)
         {
-            try
-            {
-                json = JsonDocument.Parse(await File.ReadAllTextAsync(path));
-                if (json.RootElement.GetProperty("time_next_update_utc").GetDateTime() <= DateTime.Today)
-                {
-                    needsUpdate = true;
-                    json.Dispose();
-                }
-            }
-            catch
-            {
-                needsUpdate = true;
-                json?.Dispose();
-            }
+            return rates;
         }
-        if (needsUpdate)
+        string jsonData;
+        (jsonData, rates) = await GetConversionRatesFromServiceAsync(sourceCurrency) ?? default;
+        if (rates != null)
         {
-            var apiUrl = $"https://open.er-api.com/v6/latest/{sourceCurrency}";
+            CacheRates(cache, jsonData);
+            return rates;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Gets a dictionary of conversion rates from file cache
+    /// </summary>
+    /// <param name="cache">Path to cache file with conversion rates</param>
+    /// <returns>Dictionary&lt;string, decimal&gt; is successful, else null</returns>
+    private static async Task<Dictionary<string, decimal>?> GetCachedConversionRatesAsync(string cache)
+    {
+        if (File.Exists(cache))
+        {
             try
             {
-                var response = await _http.GetStringAsync(apiUrl);
-                json = JsonDocument.Parse(response);
-                if (json.RootElement.GetProperty("result").GetString() != "success")
+                using var json = JsonDocument.Parse(await File.ReadAllTextAsync(cache));
+                var seconds = json.RootElement.GetProperty("time_next_update_unix").GetInt64();
+                var nextUpdate = DateTimeOffset.FromUnixTimeSeconds(seconds).ToLocalTime();
+                if (nextUpdate > DateTime.Now)
                 {
-                    json.Dispose();
-                    return null;
+                    return GetConversionRates(json);
                 }
-                await File.WriteAllTextAsync(path, response);
             }
             catch (Exception e)
             {
+                // Couldn't get the cached rates
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
-                json?.Dispose();
-                return null;
             }
         }
+        return null;
+    }
+
+    /// <summary>
+    /// Gets a dictionary of conversion rates for the source currency from
+    /// web service
+    /// </summary>
+    /// <param name="sourceCurrency">The currency code to get converting rates for</param>
+    /// <returns>(string, Dictionary&lt;string, decimal&gt); is successful, else null</returns>
+    private static async Task<(string, Dictionary<string, decimal>)?> GetConversionRatesFromServiceAsync(string sourceCurrency)
+    {
+        var apiUrl = $"https://open.er-api.com/v6/latest/{sourceCurrency}";
+        try
+        {
+            var response = await _http.GetStringAsync(apiUrl);
+            using var json = JsonDocument.Parse(response);
+            if (json.RootElement.GetProperty("result").GetString() != "success")
+            {
+                return null;
+            }
+            var rates = GetConversionRates(json);
+            if (rates != null)
+            {
+                return (response, rates);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+            return null;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Cache conversion rates in file
+    /// </summary>
+    /// <param name="cache">Path to cache file</param>
+    /// <param name="json">JSON string with rate data</param>
+    private static async Task CacheRates(string cache, string json)
+    {
+        try
+        {
+            await File.WriteAllTextAsync(cache, json);
+        }
+        catch (Exception e)
+        {
+            // Couldn't cache the rates
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+        }
+    }
+
+    /// <summary>
+    /// Gets a dictionary of conversion rates from JsonDocument
+    /// </summary>
+    /// <param name="json">The JsonDocument with converting rates</param>
+    /// <returns>Dictionary&lt;string, decimal&gt; is successful, else null</returns>
+    private static Dictionary<string, decimal>? GetConversionRates(JsonDocument json)
+    {
         if (json != null)
         {
             try
@@ -150,10 +211,6 @@ public class CurrencyConversionService
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 return null;
-            }
-            finally
-            {
-                json.Dispose();
             }
         }
         return null;
