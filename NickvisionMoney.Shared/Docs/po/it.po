@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-08-26 07:30+0000\n"
-"Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
+"PO-Revision-Date: 2023-09-10 21:21+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/it/>\n"
 "Language: it\n"
@@ -148,6 +148,8 @@ msgstr "Soglia per i promemoria delle transazioni"
 #: yelp/C/account.page:42
 msgid "The threshold used when showing reminders about upcoming transactions."
 msgstr ""
+"La soglia utilizzata quando vengono visualizzati promemoria sulle "
+"transazioni imminenti."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
@@ -272,34 +274,33 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:70
-#, fuzzy
 msgid "Custom Currency Amount Style"
-msgstr "Simbolo valuta personalizzato"
+msgstr "Stile importo valuta personalizzato"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:71
 msgid "A choice of displaying an amount in one of the following ways:"
-msgstr ""
+msgstr "Possibilità di visualizzare un importo in uno dei seguenti modi:"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:73
 msgid "$n"
-msgstr ""
+msgstr "$n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:74
 msgid "n$"
-msgstr ""
+msgstr "n$"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
 msgid "$ n"
-msgstr ""
+msgstr "$ n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:76
 msgid "n $"
-msgstr ""
+msgstr "n $"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:80
@@ -400,21 +401,20 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:104
-#, fuzzy
 msgid "Tags Visibility"
-msgstr "Visibilità dei gruppi"
+msgstr "Visibilità dei tag"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:105
-#, fuzzy
 msgid ""
 "Each account stores information about whether the tags list in the main "
 "window is hidden or not. Every time you change tags list visibility, it's "
 "saved and then restored when you reopen the account."
 msgstr ""
-"Ogni conto registra se la lista dei gruppi nella finestra principale è "
-"nascosta o no. Quando si modifica la visibilità dei gruppi, viene salvata e "
-"ripristinata alla riapertura del conto."
+"Ogni account memorizza informazioni sul fatto che l'elenco dei tag nella "
+"finestra principale sia nascosto o meno. Ogni volta che modifichi la "
+"visibilità dell'elenco dei tag, questo viene salvato e quindi ripristinato "
+"quando riapri l'account."
 
 #. (itstool) path: info/title
 #: yelp/C/configuration.page:8
@@ -1074,6 +1074,14 @@ msgid ""
 "enough. Tags are only saved in transactions themselves, and as result unused "
 "tags disappear automatically on account closing."
 msgstr ""
+"Un elenco di tag per la transazione. Una transazione può avere un numero "
+"illimitato di tag (o non avere tag). I tag possono contenere qualsiasi "
+"carattere tranne la virgola (<code>,</code>) e avere qualsiasi lunghezza, ma "
+"si prevede che siano parole chiave brevi. I tag sono pensati per essere "
+"utilizzati per ulteriori filtri quando l'utilizzo dei gruppi non è "
+"sufficiente. I tag vengono salvati solo nelle transazioni stesse e, di "
+"conseguenza, i tag non utilizzati scompaiono automaticamente alla chiusura "
+"del conto."
 
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
