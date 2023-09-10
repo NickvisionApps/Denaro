@@ -54,7 +54,7 @@ public class CurrencyConversion
 /// <summary>
 /// A service for getting currency conversions
 /// </summary>
-public class CurrencyConversionService
+public static class CurrencyConversionService
 {
     private static readonly HttpClient _http;
     
@@ -99,14 +99,13 @@ public class CurrencyConversionService
         var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
         var needsUpdate = !File.Exists(path);
         JsonDocument? json = null;
-        if (!needsUpdate)
+        if (!needsUpdate) //File.Exists(path)
         {
             try
             {
                 json = JsonDocument.Parse(await File.ReadAllTextAsync(path));
                 var seconds = json.RootElement.GetProperty("time_next_update_unix").GetInt64();
-                var nextUpdate = DateTimeOffset.FromUnixTimeSeconds(seconds).ToLocalTime();
-                if (nextUpdate <= DateTime.Now)
+                if (DateTimeOffset.FromUnixTimeSeconds(seconds).ToLocalTime() <= DateTime.Now)
                 {
                     needsUpdate = true;
                     json.Dispose();
@@ -121,13 +120,12 @@ public class CurrencyConversionService
                 json?.Dispose();
             }
         }
-        string response = null;
         if (needsUpdate)
         {
             var apiUrl = $"https://open.er-api.com/v6/latest/{sourceCurrency}";
             try
             {
-                response = await _http.GetStringAsync(apiUrl);
+                var response = await _http.GetStringAsync(apiUrl);
                 json = JsonDocument.Parse(response);
                 if (json.RootElement.GetProperty("result").GetString() != "success")
                 {
@@ -143,13 +141,25 @@ public class CurrencyConversionService
                 return null;
             }
         }
-        Dictionary<string, decimal> rates = null;
         if (json != null)
         {
             try
             {
                 var ratesJson = json.RootElement.GetProperty("rates").ToString() ?? "";
-                rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(ratesJson);
+                var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(ratesJson);
+                if (needsUpdate)
+                {
+                    try
+                    {
+                        await File.WriteAllTextAsync(path, json.ToString() ?? "");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
+                }
+                return rates;
             }
             catch (Exception e)
             {
@@ -162,18 +172,6 @@ public class CurrencyConversionService
                 json.Dispose();
             }
         }
-        if (needsUpdate)
-        {
-            try
-            {
-                await File.WriteAllTextAsync(path, response);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
-        }
-        return rates;
+        return null;
     }
 }
