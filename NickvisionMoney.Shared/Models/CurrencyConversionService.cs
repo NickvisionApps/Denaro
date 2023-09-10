@@ -151,7 +151,7 @@ public static class CurrencyConversionService
                 {
                     try
                     {
-                        await File.WriteAllTextAsync(path, json.ToString() ?? "");
+                        await File.WriteAllTextAsync(path, json.RootElement.ToString() ?? "");
                     }
                     catch (Exception e)
                     {
