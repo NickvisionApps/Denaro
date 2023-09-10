@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-08 13:18-0400\n"
-"PO-Revision-Date: 2023-09-07 11:48+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
+"PO-Revision-Date: 2023-09-10 21:21+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
 "app/it/>\n"
 "Language: it\n"
@@ -575,7 +575,7 @@ msgstr "risultato"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "Il risultato è stato copiato negli appunti."
 
 #: ../../../Models/Account.cs:1675
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:61
@@ -753,6 +753,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"Impossibile caricare i dati sulla valuta. Per favore riprova. Se l'errore "
+"persiste ancora, segnala un bug."
 
 #: ../../../Controllers/MainWindowController.cs:335
 msgid "Unable to login to account. Provided password is invalid."
@@ -1122,23 +1124,23 @@ msgstr "Suggerimenti"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
 msgid "Converter"
-msgstr ""
+msgstr "Convertitore"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
 msgid "Switch currencies"
-msgstr ""
+msgstr "Cambia valuta"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
 msgid "Switch"
-msgstr ""
+msgstr "Cambia"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento..."
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
 msgid "Source"
-msgstr ""
+msgstr "Sorgente"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
@@ -1146,9 +1148,8 @@ msgid "Result"
 msgstr "Risultato"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Nessun account recente"
+msgstr "Copia importo risultato"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1532,14 +1533,12 @@ msgid "Conversion Needed"
 msgstr "Conversione necessaria"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:91
-#, fuzzy
 msgid "Use Custom Rates"
-msgstr "Usa valuta personalizzata"
+msgstr "Utilizza tassi personalizzate"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:92
-#, fuzzy
 msgid "Enter the conversion rates manually"
-msgstr "Inserire la conversione"
+msgstr "Inserisci manualmente i tassi di conversione"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:119
 msgctxt "Button"
@@ -1547,9 +1546,8 @@ msgid "Transfer"
 msgstr "Trasferisci"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:5
-#, fuzzy
 msgid "Currency Converter"
-msgstr "Codice della valuta"
+msgstr "Convertitore di valuta"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
