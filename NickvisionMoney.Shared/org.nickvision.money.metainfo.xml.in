@@ -49,6 +49,7 @@
   <releases>
     <release version="2023.9.2-next" date="2023-09-08">
       <description translatable="no">
+        <p>- Fixed an issue where the currency conversion service would provide the wrong conversion rate</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
