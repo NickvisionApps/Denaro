@@ -54,7 +54,7 @@ public class CurrencyConversion
 /// <summary>
 /// A service for getting currency conversions
 /// </summary>
-public class CurrencyConversionService
+public static class CurrencyConversionService
 {
     private static readonly HttpClient _http;
     
@@ -99,19 +99,23 @@ public class CurrencyConversionService
         var path = $"{UserDirectories.ApplicationCache}{Path.DirectorySeparatorChar}currency_{sourceCurrency}.json";
         var needsUpdate = !File.Exists(path);
         JsonDocument? json = null;
-        if (File.Exists(path))
+        if (!needsUpdate) //File.Exists(path)
         {
             try
             {
                 json = JsonDocument.Parse(await File.ReadAllTextAsync(path));
-                if (json.RootElement.GetProperty("time_next_update_utc").GetDateTime() <= DateTime.Today)
+                var seconds = json.RootElement.GetProperty("time_next_update_unix").GetInt64();
+                if (DateTimeOffset.FromUnixTimeSeconds(seconds).ToLocalTime() <= DateTime.Now)
                 {
                     needsUpdate = true;
                     json.Dispose();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                // Couldn't get the cached rates
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 needsUpdate = true;
                 json?.Dispose();
             }
@@ -128,7 +132,6 @@ public class CurrencyConversionService
                     json.Dispose();
                     return null;
                 }
-                await File.WriteAllTextAsync(path, response);
             }
             catch (Exception e)
             {
@@ -142,8 +145,21 @@ public class CurrencyConversionService
         {
             try
             {
-                var rates = json.RootElement.GetProperty("rates").ToString() ?? "";
-                return JsonSerializer.Deserialize<Dictionary<string, decimal>>(rates);
+                var ratesJson = json.RootElement.GetProperty("rates").ToString() ?? "";
+                var rates = JsonSerializer.Deserialize<Dictionary<string, decimal>>(ratesJson);
+                if (needsUpdate)
+                {
+                    try
+                    {
+                        await File.WriteAllTextAsync(path, json.RootElement.ToString() ?? "");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
+                }
+                return rates;
             }
             catch (Exception e)
             {
