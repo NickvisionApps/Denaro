@@ -1,6 +1,13 @@
 [
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/ace4896.dbus.services.secrets/1.1.0/ace4896.dbus.services.secrets.1.1.0.nupkg",
+    "sha512": "f886b36f49c3bb651d4aeea8ed666e2dd362997b3af02cba3ed5c3866c0c06d55949ba4dafdf445c8778f2bba2fb0fd10a71fe5ecf531b2d02613e4d260950f3",
+    "dest": "nuget-sources",
+    "dest-filename": "ace4896.dbus.services.secrets.1.1.0.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/docnet.core/2.3.1/docnet.core.2.3.1.nupkg",
     "sha512": "dae36686a986adf20da74e93b1c94a68703ece815ae59fd4efc02c4bf87f7d10feabaee078f1a25fa3d950cfa7cbd3e327414756fca7cdd6b51ecd9012b9dcdf",
     "dest": "nuget-sources",
@@ -197,6 +204,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/meziantou.framework.win32.credentialmanager/1.4.2/meziantou.framework.win32.credentialmanager.1.4.2.nupkg",
+    "sha512": "75c861c9f4ea0eb3ec84f4dd6f369c57240975acc67f10d03913c969618f299adbc4e4be5d295db388d09a44b501c561f02f1aa78f2edea99f8cdefbafc2edfd",
+    "dest": "nuget-sources",
+    "dest-filename": "meziantou.framework.win32.credentialmanager.1.4.2.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.5/microsoft.data.sqlite.core.7.0.5.nupkg",
     "sha512": "319cc8ad58d2133f850404bf40bdf6fba64781565913a482b055403c12180ace43e5d12098b5b68f7d170eff57ed15c9ca70f5801150d94b892ffe012ecf7f5c",
     "dest": "nuget-sources",
@@ -239,10 +253,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.9.1/nickvision.aura.2023.9.1.nupkg",
-    "sha512": "2e4a8517aa7b5b4b73775049ca17d74c0e6ddbf93381ecbf9dc466be66bb9534167426851f2c1a0b4c23202c5b7f4cfffcd248589988f06b68831391bc3335ec",
+    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.9.3/nickvision.aura.2023.9.3.nupkg",
+    "sha512": "4f2d37373baf8a86ab30ddb5aea90e0ce905cb660cc1978a10d59c422d5f501227bcdf492fa57bfe853eabb5fc6248ae20ab933ec1dd1d773bb54088f329a5ca",
     "dest": "nuget-sources",
-    "dest-filename": "nickvision.aura.2023.9.1.nupkg"
+    "dest-filename": "nickvision.aura.2023.9.3.nupkg"
   },
   {
     "type": "file",
@@ -631,6 +645,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/system.io.pipelines/6.0.0/system.io.pipelines.6.0.0.nupkg",
+    "sha512": "c5983b4510bc8ae4116133ffb9b280fe61d99d47ef52dd78e5bfd03e090901896d5d5fd738dae57006b971840a4d9422bded33ddefa5e927d75d309ef1f70dea",
+    "dest": "nuget-sources",
+    "dest-filename": "system.io.pipelines.6.0.0.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/system.linq/4.3.0/system.linq.4.3.0.nupkg",
     "sha512": "eacc7fe1ec526f405f5ba0e671f616d0e5be9c1828d543a9e2f8c65df4099d6b2ea4a9fa2cdae4f34b170dc37142f60e267e137ca39f350281ed70d2dc620458",
     "dest": "nuget-sources",
@@ -922,6 +943,13 @@
     "sha512": "6384602b2691a1ded0cad96f38b2a9bab09d5993fffa28c5904ac355643732ba71bf5a11f07102390dcd2936044e7b8187d81fecbc85504dbd31cfe5191e065a",
     "dest": "nuget-sources",
     "dest-filename": "tmds.dbus.0.15.0.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/tmds.dbus.protocol/0.15.0/tmds.dbus.protocol.0.15.0.nupkg",
+    "sha512": "45958a88536d1daa769934986b3ac514cdc1104a936bc404dbdec550c958847e7408af621350c09fa51bc4b837fb88471ec6e6056c4aaa2cebf30f044cd834e9",
+    "dest": "nuget-sources",
+    "dest-filename": "tmds.dbus.protocol.0.15.0.nupkg"
   },
   {
     "type": "file",
