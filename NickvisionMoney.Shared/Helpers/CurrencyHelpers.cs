@@ -19,18 +19,9 @@ public static class CurrencyHelpers
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true)
     {
         var minimumSupportedByCulture = Math.Pow(10, -culture.NumberFormat.CurrencyDecimalDigits);
-        string result;
-        if (minimumSupportedByCulture > (double)amount)
-        {
-            result = Math.Abs(amount).ToString("0.######", CultureInfo.InvariantCulture);
-            result = result.Replace(".", culture.NumberFormat.CurrencyDecimalSeparator);
-        }
-        else
-        {
-            result = Math.Abs(amount).ToString("C", culture);
-            result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        }
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99)
+        var result = Math.Abs(amount).ToString(minimumSupportedByCulture > (double)amount ? "C6" : "C", culture);
+        result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
+        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || minimumSupportedByCulture > (double)amount)
         {
             result = result.TrimEnd('0');
             if (result.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
