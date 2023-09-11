@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 13:18-0400\n"
+"POT-Creation-Date: 2023-09-11 16:58-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -160,14 +160,14 @@ msgstr "Çek"
 msgid "Close"
 msgstr "Kapat"
 
-#: ../../../Controllers/MainWindowController.cs:94
+#: ../../../Controllers/MainWindowController.cs:96
 msgid "Contributors on GitHub ❤️"
 msgstr "Github Katkıcıları ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:36
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:37
 msgid "Currency"
 msgstr "Para Birimi"
 
@@ -204,7 +204,7 @@ msgstr "Para Birimi Simgesi (Boş)"
 msgid "Currency Symbol (Invalid)"
 msgstr "Para Birimi Simgesi (Geçersiz)"
 
-#: ../../../Controllers/MainWindowController.cs:97
+#: ../../../Controllers/MainWindowController.cs:99
 msgid "DaPigGuy"
 msgstr "DaPigGuy"
 
@@ -213,7 +213,7 @@ msgstr "DaPigGuy"
 msgid "Date"
 msgstr "Tarih"
 
-#: ../../../Controllers/MainWindowController.cs:98
+#: ../../../Controllers/MainWindowController.cs:100
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
@@ -257,7 +257,7 @@ msgstr "Kaynağı ve Oluşturulanı Sil"
 msgid "Delete Transaction"
 msgstr "İşlemi Sil"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:89
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
@@ -326,7 +326,7 @@ msgstr "Dosyaya Dışa Aktar"
 msgid "Exported account to file successfully."
 msgstr "Hesap dosyaya başarıyla dışa aktarıldı."
 
-#: ../../../Controllers/MainWindowController.cs:96
+#: ../../../Controllers/MainWindowController.cs:98
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
@@ -339,15 +339,15 @@ msgstr "Oluşturuldu: {0}"
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
 
-#: ../../../Controllers/MainWindowController.cs:131
+#: ../../../Controllers/MainWindowController.cs:133
 msgid "Good Afternoon!"
 msgstr "Tünaydın!"
 
-#: ../../../Controllers/MainWindowController.cs:133
+#: ../../../Controllers/MainWindowController.cs:135
 msgid "Good Day!"
 msgstr "İyi Günler!"
 
-#: ../../../Controllers/MainWindowController.cs:132
+#: ../../../Controllers/MainWindowController.cs:134
 msgid "Good Evening!"
 msgstr "İyi Akşamlar!"
 
@@ -420,13 +420,13 @@ msgstr[1] "{0} işlem dosyadan içe aktarıldı."
 msgid "Income"
 msgstr "Gelir"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:90
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:5
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:8
 msgid "Manage your personal finances"
 msgstr "Kişisel mali durumunuzu yönetin"
 
-#: ../../../Controllers/MainWindowController.cs:92
+#: ../../../Controllers/MainWindowController.cs:94
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
@@ -459,8 +459,8 @@ msgstr "Ad (Var)"
 msgid "Never"
 msgstr "Asla"
 
-#: ../../../Controllers/MainWindowController.cs:93
 #: ../../../Controllers/MainWindowController.cs:95
+#: ../../../Controllers/MainWindowController.cs:97
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
@@ -566,7 +566,7 @@ msgstr "Tekrarlama Aralığı"
 msgid "Repeat Interval Changed"
 msgstr "Tekrarlama Aralığı Değiştirildi"
 
-#: ../../../Models/CurrencyConversionService.cs:126
+#: ../../../Models/CurrencyConversionService.cs:130
 msgid "result"
 msgstr "sonuç"
 
@@ -644,7 +644,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Bu hesapta aktarılacak para yok."
 
-#: ../../../Controllers/MainWindowController.cs:353
+#: ../../../Controllers/MainWindowController.cs:355
 msgid "This account is already opened."
 msgstr "Bu hesap zaten açıldı."
 
@@ -676,7 +676,7 @@ msgstr ""
 "Yalnızca kaynak işlemin güncellenmesi, \n"
 "oluşturulan işlemlerin kaynakla ilişkisini kesecektir."
 
-#: ../../../Controllers/MainWindowController.cs:99
+#: ../../../Controllers/MainWindowController.cs:101
 msgid "Tobias Bernard"
 msgstr "Tobias Bernard"
 
@@ -714,7 +714,7 @@ msgstr "Şuradan Aktar: {0}"
 msgid "Transfer To {0}"
 msgstr "Şuraya Aktar: {0}"
 
-#: ../../../Controllers/MainWindowController.cs:100
+#: ../../../Controllers/MainWindowController.cs:102
 msgid "translator-credits"
 msgstr ""
 "Sabri Ünal <libreajans@gmail.com>\n"
@@ -753,12 +753,12 @@ msgstr ""
 "Para birimi verileri yüklenemedi. Lütfen tekrar deneyin. Hata devam ediyorsa "
 "hatayı bildirin."
 
-#: ../../../Controllers/MainWindowController.cs:335
+#: ../../../Controllers/MainWindowController.cs:337
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Hesaba giriş yapılamıyor. Sağlanan parola geçersiz."
 
-#: ../../../Controllers/MainWindowController.cs:289
-#: ../../../Controllers/MainWindowController.cs:342
+#: ../../../Controllers/MainWindowController.cs:291
+#: ../../../Controllers/MainWindowController.cs:344
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -766,11 +766,11 @@ msgstr ""
 "Hesap açılamıyor. Uygulamanın dosyaya erişim izni olduğundan emin olun ve "
 "tekrar deneyin."
 
-#: ../../../Controllers/MainWindowController.cs:277
+#: ../../../Controllers/MainWindowController.cs:279
 msgid "Unable to overwrite an existing account."
 msgstr "Var olan hesabın üzerine yazılamıyor."
 
-#: ../../../Controllers/MainWindowController.cs:266
+#: ../../../Controllers/MainWindowController.cs:268
 msgid "Unable to overwrite an opened account."
 msgstr "Açılmış bir hesabın üzerine yazılamıyor."
 
@@ -843,12 +843,12 @@ msgstr "Evet"
 msgid "Your system reported that your currency is"
 msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
 
-#: ../../../Controllers/MainWindowController.cs:130
+#: ../../../Controllers/MainWindowController.cs:132
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Günaydın!"
 
-#: ../../../Controllers/MainWindowController.cs:129
+#: ../../../Controllers/MainWindowController.cs:131
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Günaydın!"
@@ -1118,32 +1118,32 @@ msgstr "Yeni"
 msgid "Suggestions"
 msgstr "Öneriler"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:31
 msgid "Converter"
 msgstr "Dönüştürücü"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
 msgid "Switch currencies"
 msgstr "Para birimleri arasında geçiş yap"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:48
 msgid "Switch"
 msgstr "Geçiş yap"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:65
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:75
 msgid "Source"
 msgstr "Kaynak"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Sonuç"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:92
 msgid "Copy Result Amount"
 msgstr "Sonuç Miktarı Kopyala"
 
