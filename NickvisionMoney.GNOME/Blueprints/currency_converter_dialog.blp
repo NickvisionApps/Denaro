@@ -23,6 +23,9 @@ Adw.Window _root {
         Gtk.Box {
           orientation: vertical;
           spacing: 24;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
           
           Gtk.Label _titleLabel {
             label: _("Converter");
@@ -31,8 +34,6 @@ Adw.Window _root {
           }
           
           Adw.PreferencesGroup {
-            margin-start: 24;
-            margin-end: 24;
             title: _("Currency");
           
             header-suffix: Gtk.Box {
@@ -79,36 +80,19 @@ Adw.Window _root {
             }
           }
 
-          Gtk.CenterBox {
-            margin-start: 24;
-            margin-end: 24;
-            margin-bottom: 24;
-            
-            [start]
-            Adw.PreferencesGroup {
-              Adw.EntryRow _sourceAmountRow { }
-            }
+          Adw.PreferencesGroup {
+            Adw.EntryRow _sourceAmountRow { }
 
-            [center]
-            Gtk.Image {
-              margin-start: 12;
-              margin-end: 12;
-              icon-name: "arrow1-right-symbolic";
-            }
+            Adw.EntryRow _resultAmountRow {
+              editable: false;
 
-            [end]
-            Adw.PreferencesGroup {
-              Adw.EntryRow _resultAmountRow {
-                editable: false;
+              [suffix]
+              Gtk.Button _copyResultButton {
+                valign: center;
+                tooltip-text: _("Copy Result Amount");
+                icon-name: "edit-copy-symbolic";
 
-                [suffix]
-                Gtk.Button _copyResultButton {
-                  valign: center;
-                  tooltip-text: _("Copy Result Amount");
-                  icon-name: "edit-copy-symbolic";
-
-                  styles ["flat"]
-                }
+                styles ["flat"]
               }
             }
           }
