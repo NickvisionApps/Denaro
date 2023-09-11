@@ -15,7 +15,7 @@ public static class CurrencyHelpers
     /// <param name="culture">Culture used for formatting</param>
     /// <param name="useNativeDigits">Whether to convert Latin digits to native digits</param>
     /// <param name="showCurrencySymbol">Whether to add currency symbol</param>
-    /// <param name="overwriteDecimal">Whether to keep more digist in decimal part to increase precision</param>
+    /// <param name="overwriteDecimal">Whether to keep more digits in decimal part to increase precision</param>
     /// <returns>Formatted amount string</returns>
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
