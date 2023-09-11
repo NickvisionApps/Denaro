@@ -16,12 +16,20 @@ public static class CurrencyHelpers
     /// <param name="showCurrencySymbol">Whether to add currency symbol</param>
     /// <paramref name="useNativeDigits">Whether to convert Latin digits to native digits</paramref>
     /// <returns>Formatted amount string</returns>
-    public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true)
+    public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
         var isSmallerThanMinimum = (double)Math.Abs(amount) < Math.Pow(10, -culture.NumberFormat.CurrencyDecimalDigits);
-        var result = Math.Abs(amount).ToString(isSmallerThanMinimum ? "C6" : "C", culture);
+        string result;
+        if (overwriteDecimal && isSmallerThanMinimum)
+        {
+            result = Math.Abs(amount).ToString("C6", culture);
+        }
+        else
+        {
+            result = Math.Abs(amount).ToString("C", culture);
+        }
         result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || isSmallerThanMinimum)
+        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || (overwriteDecimal && isSmallerThanMinimum))
         {
             result = result.TrimEnd('0');
             if (result.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
