@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 13:18-0400\n"
+"POT-Creation-Date: 2023-09-11 16:58-0400\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -160,14 +160,14 @@ msgstr "Siirto"
 msgid "Close"
 msgstr "Sulje"
 
-#: ../../../Controllers/MainWindowController.cs:94
+#: ../../../Controllers/MainWindowController.cs:96
 msgid "Contributors on GitHub ❤️"
 msgstr "Avustajat GitHubissa ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:36
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:37
 msgid "Currency"
 msgstr "Valuutta"
 
@@ -204,7 +204,7 @@ msgstr "Valuutan symboli (tyhjä)"
 msgid "Currency Symbol (Invalid)"
 msgstr "Valuutan symboli (virheellinen)"
 
-#: ../../../Controllers/MainWindowController.cs:97
+#: ../../../Controllers/MainWindowController.cs:99
 msgid "DaPigGuy"
 msgstr "DaPigGuy"
 
@@ -213,7 +213,7 @@ msgstr "DaPigGuy"
 msgid "Date"
 msgstr "Päivä"
 
-#: ../../../Controllers/MainWindowController.cs:98
+#: ../../../Controllers/MainWindowController.cs:100
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Delete Transaction"
 msgstr "Poista tapahtuma"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:89
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
@@ -327,7 +327,7 @@ msgstr "Vie tiedostoon"
 msgid "Exported account to file successfully."
 msgstr "Tili viety tiedostoon onnistuneesti."
 
-#: ../../../Controllers/MainWindowController.cs:96
+#: ../../../Controllers/MainWindowController.cs:98
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
@@ -340,15 +340,15 @@ msgstr "Luotu: {0}"
 msgid "GitHub Repo"
 msgstr "GitHub-tietovarasto"
 
-#: ../../../Controllers/MainWindowController.cs:131
+#: ../../../Controllers/MainWindowController.cs:133
 msgid "Good Afternoon!"
 msgstr "Hyvää iltapäivää!"
 
-#: ../../../Controllers/MainWindowController.cs:133
+#: ../../../Controllers/MainWindowController.cs:135
 msgid "Good Day!"
 msgstr "Hyvää päivää!"
 
-#: ../../../Controllers/MainWindowController.cs:132
+#: ../../../Controllers/MainWindowController.cs:134
 msgid "Good Evening!"
 msgstr "Hyvää iltaa!"
 
@@ -421,13 +421,13 @@ msgstr[1] "Tuotu {0} tapahtumaa tiedostosta."
 msgid "Income"
 msgstr "Tulo"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:90
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:5
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:8
 msgid "Manage your personal finances"
 msgstr "Hallitse raha-asioitasi"
 
-#: ../../../Controllers/MainWindowController.cs:92
+#: ../../../Controllers/MainWindowController.cs:94
 msgid "Matrix Chat"
 msgstr "Matrix-keskustelu"
 
@@ -460,8 +460,8 @@ msgstr "Nimi (olemassa)"
 msgid "Never"
 msgstr "Ei koskaan"
 
-#: ../../../Controllers/MainWindowController.cs:93
 #: ../../../Controllers/MainWindowController.cs:95
+#: ../../../Controllers/MainWindowController.cs:97
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
@@ -568,7 +568,7 @@ msgstr "Toistumisväli"
 msgid "Repeat Interval Changed"
 msgstr "Toistumisväli"
 
-#: ../../../Models/CurrencyConversionService.cs:126
+#: ../../../Models/CurrencyConversionService.cs:130
 #, fuzzy
 msgid "result"
 msgstr "Tulos"
@@ -643,7 +643,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Tällä tilillä ei ole riittävästi rahaa siirtoa varten."
 
-#: ../../../Controllers/MainWindowController.cs:353
+#: ../../../Controllers/MainWindowController.cs:355
 msgid "This account is already opened."
 msgstr "Tämä tili on jo avattu."
 
@@ -665,7 +665,7 @@ msgid ""
 "generated transactions from the source."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:99
+#: ../../../Controllers/MainWindowController.cs:101
 msgid "Tobias Bernard"
 msgstr "Tobias Bernard"
 
@@ -703,7 +703,7 @@ msgstr "Siirrä kohteesta {0}"
 msgid "Transfer To {0}"
 msgstr "Siirrä kohteeseen {0}"
 
-#: ../../../Controllers/MainWindowController.cs:100
+#: ../../../Controllers/MainWindowController.cs:102
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
@@ -737,22 +737,22 @@ msgid ""
 "report a bug."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:335
+#: ../../../Controllers/MainWindowController.cs:337
 msgid "Unable to login to account. Provided password is invalid."
 msgstr "Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen."
 
-#: ../../../Controllers/MainWindowController.cs:289
-#: ../../../Controllers/MainWindowController.cs:342
+#: ../../../Controllers/MainWindowController.cs:291
+#: ../../../Controllers/MainWindowController.cs:344
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:277
+#: ../../../Controllers/MainWindowController.cs:279
 msgid "Unable to overwrite an existing account."
 msgstr "Olemassa olevan tilin korvaaminen ei onnistu."
 
-#: ../../../Controllers/MainWindowController.cs:266
+#: ../../../Controllers/MainWindowController.cs:268
 #, fuzzy
 msgid "Unable to overwrite an opened account."
 msgstr "Tiliä ei voitu viedä tiedostoon."
@@ -827,12 +827,12 @@ msgstr "Kyllä"
 msgid "Your system reported that your currency is"
 msgstr "Järjestelmä ilmoitti, että käyttämäsi valuutta on"
 
-#: ../../../Controllers/MainWindowController.cs:130
+#: ../../../Controllers/MainWindowController.cs:132
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Hyvää huomenta!"
 
-#: ../../../Controllers/MainWindowController.cs:129
+#: ../../../Controllers/MainWindowController.cs:131
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Hyvää huomenta!"
@@ -1110,32 +1110,32 @@ msgstr "Uusi"
 msgid "Suggestions"
 msgstr "Ehdotukset"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:31
 msgid "Converter"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
 msgid "Switch currencies"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:48
 msgid "Switch"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:65
 msgid "Loading..."
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:75
 msgid "Source"
 msgstr ""
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Tulos"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:92
 #, fuzzy
 msgid "Copy Result Amount"
 msgstr "Ei viimeisimpiä tilejä"

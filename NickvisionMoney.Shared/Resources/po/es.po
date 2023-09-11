@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 13:18-0400\n"
+"POT-Creation-Date: 2023-09-11 16:58-0400\n"
 "PO-Revision-Date: 2023-09-10 10:55+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -163,14 +163,14 @@ msgstr "Corriente"
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../../../Controllers/MainWindowController.cs:94
+#: ../../../Controllers/MainWindowController.cs:96
 msgid "Contributors on GitHub ❤️"
 msgstr "Contribuidores on GitHub ❤️"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:121
 #: ../../../Models/Account.cs:1670
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:95
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:36
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:37
 msgid "Currency"
 msgstr "Moneda"
 
@@ -207,7 +207,7 @@ msgstr "Símbolo de moneda (vacío)"
 msgid "Currency Symbol (Invalid)"
 msgstr "Símbolo de la moneda (no válido)"
 
-#: ../../../Controllers/MainWindowController.cs:97
+#: ../../../Controllers/MainWindowController.cs:99
 msgid "DaPigGuy"
 msgstr "DaPigGuy"
 
@@ -216,7 +216,7 @@ msgstr "DaPigGuy"
 msgid "Date"
 msgstr "Fecha"
 
-#: ../../../Controllers/MainWindowController.cs:98
+#: ../../../Controllers/MainWindowController.cs:100
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
@@ -260,7 +260,7 @@ msgstr "Borrar origen y generadas"
 msgid "Delete Transaction"
 msgstr "Borrar transacción"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:89
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:4
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:6
 msgid "Denaro"
@@ -329,7 +329,7 @@ msgstr "Exportar a archivo"
 msgid "Exported account to file successfully."
 msgstr "Cuenta exportada a archivo correctamente."
 
-#: ../../../Controllers/MainWindowController.cs:96
+#: ../../../Controllers/MainWindowController.cs:98
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
@@ -342,15 +342,15 @@ msgstr "Generado: {0}"
 msgid "GitHub Repo"
 msgstr "Repositorio de GitHub"
 
-#: ../../../Controllers/MainWindowController.cs:131
+#: ../../../Controllers/MainWindowController.cs:133
 msgid "Good Afternoon!"
 msgstr "¡Buenas tardes!"
 
-#: ../../../Controllers/MainWindowController.cs:133
+#: ../../../Controllers/MainWindowController.cs:135
 msgid "Good Day!"
 msgstr "¡Buen día!"
 
-#: ../../../Controllers/MainWindowController.cs:132
+#: ../../../Controllers/MainWindowController.cs:134
 msgid "Good Evening!"
 msgstr "¡Buenas noches!"
 
@@ -423,13 +423,13 @@ msgstr[1] "Importadas {0} transacciones del archivo."
 msgid "Income"
 msgstr "Ingresos"
 
-#: ../../../Controllers/MainWindowController.cs:73
+#: ../../../Controllers/MainWindowController.cs:90
 #: NickvisionMoney.Shared/org.nickvision.money.desktop.in:5
 #: NickvisionMoney.Shared/org.nickvision.money.metainfo.xml.in:8
 msgid "Manage your personal finances"
 msgstr "Administre sus finanzas personales"
 
-#: ../../../Controllers/MainWindowController.cs:92
+#: ../../../Controllers/MainWindowController.cs:94
 msgid "Matrix Chat"
 msgstr "Chat de Matrix"
 
@@ -462,8 +462,8 @@ msgstr "Nombre (existente)"
 msgid "Never"
 msgstr "Nunca"
 
-#: ../../../Controllers/MainWindowController.cs:93
 #: ../../../Controllers/MainWindowController.cs:95
+#: ../../../Controllers/MainWindowController.cs:97
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
@@ -569,7 +569,7 @@ msgstr "Intervalo de repetición"
 msgid "Repeat Interval Changed"
 msgstr "Intervalo de repetición modificado"
 
-#: ../../../Models/CurrencyConversionService.cs:126
+#: ../../../Models/CurrencyConversionService.cs:130
 msgid "result"
 msgstr "resultado"
 
@@ -648,7 +648,7 @@ msgstr ""
 msgid "This account has no money available to transfer."
 msgstr "Esta cuenta no tiene dinero disponible para transferir."
 
-#: ../../../Controllers/MainWindowController.cs:353
+#: ../../../Controllers/MainWindowController.cs:355
 msgid "This account is already opened."
 msgstr "Esta cuenta ya está abierta."
 
@@ -680,7 +680,7 @@ msgstr ""
 "Al actualizar sólo la transacción de origen se disociarán\n"
 "las transacciones generadas en origen."
 
-#: ../../../Controllers/MainWindowController.cs:99
+#: ../../../Controllers/MainWindowController.cs:101
 msgid "Tobias Bernard"
 msgstr "Tobias Bernard"
 
@@ -718,7 +718,7 @@ msgstr "Transferir desde {0}"
 msgid "Transfer To {0}"
 msgstr "Transferir a {0}"
 
-#: ../../../Controllers/MainWindowController.cs:100
+#: ../../../Controllers/MainWindowController.cs:102
 msgid "translator-credits"
 msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
@@ -755,13 +755,13 @@ msgstr ""
 "No se han podido cargar los datos de la divisa. Por favor, vuelva a "
 "intentarlo. Si el error persiste, notifique un error."
 
-#: ../../../Controllers/MainWindowController.cs:335
+#: ../../../Controllers/MainWindowController.cs:337
 msgid "Unable to login to account. Provided password is invalid."
 msgstr ""
 "No se puede acceder a la cuenta. La contraseña proporcionada no es válida."
 
-#: ../../../Controllers/MainWindowController.cs:289
-#: ../../../Controllers/MainWindowController.cs:342
+#: ../../../Controllers/MainWindowController.cs:291
+#: ../../../Controllers/MainWindowController.cs:344
 msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
@@ -769,11 +769,11 @@ msgstr ""
 "No se ha podido abrir la cuenta. Asegúrese de que la aplicación tiene los "
 "permisos para acceder al archivo e inténtelo de nuevo."
 
-#: ../../../Controllers/MainWindowController.cs:277
+#: ../../../Controllers/MainWindowController.cs:279
 msgid "Unable to overwrite an existing account."
 msgstr "No se puede sobrescribir una cuenta existente."
 
-#: ../../../Controllers/MainWindowController.cs:266
+#: ../../../Controllers/MainWindowController.cs:268
 msgid "Unable to overwrite an opened account."
 msgstr "No se puede sobrescribir una cuenta abierta."
 
@@ -846,12 +846,12 @@ msgstr "Sí"
 msgid "Your system reported that your currency is"
 msgstr "Su sistema informó de que su moneda es"
 
-#: ../../../Controllers/MainWindowController.cs:130
+#: ../../../Controllers/MainWindowController.cs:132
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "¡Buenos días!"
 
-#: ../../../Controllers/MainWindowController.cs:129
+#: ../../../Controllers/MainWindowController.cs:131
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "¡Buenos días!"
@@ -1121,32 +1121,32 @@ msgstr "Nueva"
 msgid "Suggestions"
 msgstr "Sugerencias"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:28
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:31
 msgid "Converter"
 msgstr "Conversor"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:44
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:45
 msgid "Switch currencies"
 msgstr "Cambiar de divisa"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:47
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:48
 msgid "Switch"
 msgstr "Cambiar"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:64
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:65
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:75
 msgid "Source"
 msgstr "Fuente"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:78
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:79
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:106
 msgid "Result"
 msgstr "Resultado"
 
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:107
+#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:92
 msgid "Copy Result Amount"
 msgstr "Copiar el resultado del importe"
 

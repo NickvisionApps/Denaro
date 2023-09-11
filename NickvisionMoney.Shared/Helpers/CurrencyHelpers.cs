@@ -13,14 +13,15 @@ public static class CurrencyHelpers
     /// <summary>
     /// <param name="amount">Amount decimal value</param>
     /// <param name="culture">Culture used for formatting</param>
+    /// <param name="useNativeDigits">Whether to convert Latin digits to native digits</param>
     /// <param name="showCurrencySymbol">Whether to add currency symbol</param>
-    /// <paramref name="useNativeDigits">Whether to convert Latin digits to native digits</paramref>
+    /// <param name="overwriteDecimal">Whether to keep more digits in decimal part to increase precision</param>
     /// <returns>Formatted amount string</returns>
-    public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true)
+    public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
-        var result = Math.Abs(amount).ToString("C", culture);
+        var result = Math.Abs(amount).ToString(overwriteDecimal ? "C6" : "C", culture);
         result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99)
+        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || overwriteDecimal)
         {
             result = result.TrimEnd('0');
             if (result.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))

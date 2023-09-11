@@ -70,7 +70,7 @@ public class MainWindowController : IDisposable
             _fileToLaunch = (Path.Exists(args[0]) && Path.GetExtension(args[0]).ToLower() == ".nmoney") ? args[0] : null;
         }
         _openAccounts = new List<AccountViewController>();
-        Aura.Init("org.nickvision.money", "Nickvision Denaro", _("Denaro"), _("Manage your personal finances"));
+        Aura.Init("org.nickvision.money", "Nickvision Denaro");
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
@@ -86,6 +86,8 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         AppInfo.Version = "2023.9.2-next";
+        AppInfo.ShortName = _("Denaro");
+        AppInfo.Description = _("Manage your personal finances");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Denaro/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Denaro/discussions");
