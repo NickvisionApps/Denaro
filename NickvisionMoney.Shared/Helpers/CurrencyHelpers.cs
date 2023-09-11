@@ -19,15 +19,7 @@ public static class CurrencyHelpers
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
         var isSmallerThanMinimum = (double)Math.Abs(amount) < Math.Pow(10, -culture.NumberFormat.CurrencyDecimalDigits);
-        string result;
-        if (overwriteDecimal && isSmallerThanMinimum)
-        {
-            result = Math.Abs(amount).ToString("C6", culture);
-        }
-        else
-        {
-            result = Math.Abs(amount).ToString("C", culture);
-        }
+        var result = Math.Abs(amount).ToString(overwriteDecimal && isSmallerThanMinimum ? "C6" : "C", culture);
         result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
         if (culture.NumberFormat.CurrencyDecimalDigits == 99 || (overwriteDecimal && isSmallerThanMinimum))
         {
