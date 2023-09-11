@@ -22,7 +22,7 @@ public static class CurrencyHelpers
         string result;
         if (minimumSupportedByCulture > (double)amount)
         {
-            result = Math.Abs(amount).ToString("0.##########", CultureInfo.InvariantCulture);
+            result = Math.Abs(amount).ToString("0.######", CultureInfo.InvariantCulture);
             result = result.Replace(".", culture.NumberFormat.CurrencyDecimalSeparator);
         }
         else
