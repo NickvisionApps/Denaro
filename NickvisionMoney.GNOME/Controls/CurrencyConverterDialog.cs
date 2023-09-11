@@ -148,7 +148,7 @@ public class CurrencyConverterDialog : Adw.Window
                 var res = await CurrencyConversionService.ConvertAsync(_currencies![_sourceCurrencyRow.GetSelected()], amount, _currencies[_resultCurrencyRow.GetSelected()]);
                 if (res != null)
                 {
-                    _resultAmountRow.SetText(res.ResultAmount.ToAmountString(CultureInfo.CurrentCulture, _useNativeDigits, false));
+                    _resultAmountRow.SetText(res.ResultAmount.ToAmountString(CultureInfo.CurrentCulture, _useNativeDigits, false, true));
                 }
             }
             else

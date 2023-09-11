@@ -165,7 +165,7 @@ public partial class TransferDialog : Adw.Window
         _destinationCurrencyRow.SetTitle(_controller.DestinationCurrencyCode ?? "");
         if (checkStatus == TransferCheckStatus.Valid)
         {
-            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString, _controller.UseNativeDigits));
+            _conversionResultLabel.SetText(_controller.Transfer.DestinationAmount.ToAmountString(_controller.CultureForDestNumberString, _controller.UseNativeDigits, overwriteDecimal: true));
             _transferButton.SetSensitive(true);
         }
         else
