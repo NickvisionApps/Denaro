@@ -125,7 +125,7 @@ public class TransferDialogController
         var rates = await CurrencyConversionService.GetConversionRatesAsync(SourceCurrencyCode);
         if (rates != null && rates.ContainsKey(DestinationCurrencyCode))
         {
-            return (rates[SourceCurrencyCode].ToAmountString(CultureForSourceNumberString, UseNativeDigits, false), rates[DestinationCurrencyCode].ToAmountString(CultureForDestNumberString!, UseNativeDigits, false));
+            return (rates[SourceCurrencyCode].ToAmountString(CultureForSourceNumberString, UseNativeDigits, false), rates[DestinationCurrencyCode].ToAmountString(CultureForDestNumberString!, UseNativeDigits, false, true));
         }
         return ("", "");
     }
