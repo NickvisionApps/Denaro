@@ -18,10 +18,10 @@ public static class CurrencyHelpers
     /// <returns>Formatted amount string</returns>
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true)
     {
-        var minimumSupportedByCulture = Math.Pow(10, -culture.NumberFormat.CurrencyDecimalDigits);
-        var result = Math.Abs(amount).ToString(minimumSupportedByCulture > (double)amount ? "C6" : "C", culture);
+        var isSmallerThanMinimum = (double)Math.Abs(amount) < Math.Pow(10, -culture.NumberFormat.CurrencyDecimalDigits);
+        var result = Math.Abs(amount).ToString(isSmallerThanMinimum ? "C6" : "C", culture);
         result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || minimumSupportedByCulture > (double)amount)
+        if (culture.NumberFormat.CurrencyDecimalDigits == 99 || isSmallerThanMinimum)
         {
             result = result.TrimEnd('0');
             if (result.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
