@@ -28,6 +28,10 @@ public static class CurrencyHelpers
             {
                 result = culture.Name is "kea-CV" or "pt-CV" ? $"{result}00" : result.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
             }
+            else if (result.Substring(result.IndexOf(culture.NumberFormat.CurrencyDecimalSeparator) + 1).Length == 1 && culture.Name is "kea-CV" or "pt-CV")
+            {
+                result = $"{result}0";
+            }
         }
         if (showCurrencySymbol)
         {
