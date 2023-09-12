@@ -106,10 +106,7 @@ public class CurrencyHelperTests
     public void ToAmountString_RealCulturesShouldWorkWithoutCurrencySymbol(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        if(culture.NumberFormat.CurrencyDecimalSeparator != culture.NumberFormat.CurrencySymbol)
-        { 
-            expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
-        }
+        expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
         var result = amount.ToAmountString(culture, false, false);
         Assert.Equal(expected, result);
     }
@@ -130,30 +127,21 @@ public class CurrencyHelperTests
     public void ToAmountString_AllCulturesShouldWorkWithOverwriteDecimal(CultureInfo culture, decimal amount)
     {
         //Arrange
-        var expected = amount.ToString("C6", culture).Replace("\u200b", "").Trim();
-        if (culture.Name is "kea-CV" or "pt-CV")
+        var expected = amount.ToString("C6", culture).Trim();
+        RemoveSymbol(ref expected, culture);
+        if (culture.Name is "kea-CV" or "pt-CV" && expected.EndsWith('0'))
         {
             expected = expected.TrimEnd('0');
-            // Make the currency decomal separator be in the center of the string
             if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-                expected += "00";
+                expected = $"{expected}00";
             else if (expected.Substring(expected.IndexOf(culture.NumberFormat.CurrencyDecimalSeparator) + 1).Length == 1)
                 expected += "0";
-            expected = $"{expected} \u200b";
         }
         else
         {
-            var symbolAtEnd = expected.EndsWith(culture.NumberFormat.CurrencySymbol);
-            if(symbolAtEnd)
-                expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-            {
-                expected = expected.Remove(expected.LastIndexOf(culture.NumberFormat.CurrencyDecimalSeparator));
-            }
-            if (symbolAtEnd)
-                expected += (culture.NumberFormat.CurrencyPositivePattern == 3 ? " " : "") + culture.NumberFormat.CurrencySymbol;
+            FormatUnlimitedDecimals(ref expected, culture, true);
         }
+        AddSymbol(ref expected, culture);
         //Act
         var result = amount.ToAmountString(culture, false, overwriteDecimal: true);
         //Assert
@@ -162,25 +150,17 @@ public class CurrencyHelperTests
 
     private static void RemoveSymbol(ref string amount, CultureInfo culture)
     {
-        amount = amount.Remove(amount.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99)
-        {
-            amount = amount.TrimEnd('0');
-            if (amount.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-            {
-                amount = amount.Remove(amount.LastIndexOf(culture.NumberFormat.CurrencyDecimalSeparator));
-            }
-        }
+        amount = amount.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
     }
     
-    private static void FormatUnlimitedDecimals(ref string number, CultureInfo culture)
+    private static void FormatUnlimitedDecimals(ref string number, CultureInfo culture, bool force = false)
     {
-        if (culture.NumberFormat.NumberDecimalDigits == 99)
-        {
-            number = number
-                .Replace(culture.NumberFormat.CurrencySymbol, "")
-                .TrimEnd('0');
-        }
+        if (culture.NumberFormat.CurrencyDecimalDigits != 99 && !force) 
+            return;
+        
+        number = number.TrimEnd('0');
+        if(number.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
+            number = number.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
     }
 
     private static void AddSymbol(ref string amount, CultureInfo culture)
