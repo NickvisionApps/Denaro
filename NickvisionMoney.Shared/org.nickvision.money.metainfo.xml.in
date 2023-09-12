@@ -52,6 +52,7 @@
         <p>- Fixed an issue where the currency conversion service would provide the wrong conversion rate</p>
         <p>- Fixed an issue where small converted currency amounts would show as 0</p>
         <p>- Improved UX in Currency Converter dialog</p>
+        <p>- Fixed incorrect display of amounts for locales that use Cape Verdean escudo as currency</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

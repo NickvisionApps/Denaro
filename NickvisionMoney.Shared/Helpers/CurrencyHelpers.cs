@@ -19,14 +19,18 @@ public static class CurrencyHelpers
     /// <returns>Formatted amount string</returns>
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
-        var result = Math.Abs(amount).ToString(overwriteDecimal ? "C6" : "C", culture);
-        result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
+        var result = Math.Abs(amount).ToString(overwriteDecimal ? "C6" : culture.Name is "kea-CV" or "pt-CV" ? "C2" : "C", culture);
+        result = result.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
         if (culture.NumberFormat.CurrencyDecimalDigits == 99 || overwriteDecimal)
         {
             result = result.TrimEnd('0');
             if (result.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
             {
-                result = result.Remove(result.LastIndexOf(culture.NumberFormat.CurrencyDecimalSeparator));
+                result = culture.Name is "kea-CV" or "pt-CV" ? $"{result}00" : result.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
+            }
+            else if (result.Substring(result.IndexOf(culture.NumberFormat.CurrencyDecimalSeparator) + 1).Length == 1 && culture.Name is "kea-CV" or "pt-CV")
+            {
+                result = $"{result}0";
             }
         }
         if (showCurrencySymbol)
