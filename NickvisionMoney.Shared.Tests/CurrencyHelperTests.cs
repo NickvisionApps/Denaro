@@ -134,8 +134,12 @@ public class CurrencyHelperTests
         if (culture.Name is "kea-CV" or "pt-CV")
         {
             expected = expected.TrimEnd('0');
+            // Make the currency decomal separator be in the center of the string
             if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-                expected += "00"; // Make the currency symbol be in the center of the string
+                expected += "00";
+            else if (expected.Substring(expected.IndexOf(culture.NumberFormat.CurrencyDecimalSeparator) + 1).Length == 1)
+                expected += "0";
+            expected = $"{expected} \u200b";
         }
         else
         {
