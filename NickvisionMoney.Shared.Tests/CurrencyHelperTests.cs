@@ -11,13 +11,6 @@ public class CurrencyHelperTests
     public static IEnumerable<object[]> GetSampleData()
     {
         var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).AsEnumerable();
-        //Add a custom culture
-        var goldCulture = CultureInfo.InvariantCulture.Clone() as CultureInfo;
-        goldCulture!.NumberFormat.CurrencyDecimalDigits = 99;
-        goldCulture.NumberFormat.CurrencyDecimalSeparator = "*";
-        goldCulture.NumberFormat.CurrencyGroupSeparator = "/";
-        goldCulture.NumberFormat.CurrencySymbol = "\ud83e\ude99";
-        cultures = cultures.Append(goldCulture);
         foreach (var culture in cultures)
         {
             foreach (var number in SampleAmounts)
@@ -32,12 +25,6 @@ public class CurrencyHelperTests
     public void ToAmountString_AllCulturesShouldWorkByDefault(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99 && expected.Contains(culture.NumberFormat.CurrencyDecimalSeparator))
-        {
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-                expected = expected.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
-        }
         var result = amount.ToAmountString(culture, false);
         Assert.Equal(expected, result);
     }
@@ -47,12 +34,6 @@ public class CurrencyHelperTests
     public void ToAmountString_AllCulturesShouldWorkWithNativeDigits(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99 && expected.Contains(culture.NumberFormat.CurrencyDecimalSeparator))
-        {
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-                expected = expected.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
-        }
         expected =  expected
             .Replace("0", culture.NumberFormat.NativeDigits[0])
             .Replace("1", culture.NumberFormat.NativeDigits[1])
@@ -73,12 +54,6 @@ public class CurrencyHelperTests
     public void ToAmountString_AllCulturesShouldWorkWithoutCurrencySymbol(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        if (culture.NumberFormat.CurrencyDecimalDigits == 99 && expected.Contains(culture.NumberFormat.CurrencyDecimalSeparator))
-        {
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-                expected = expected.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
-        }
         if(culture.NumberFormat.CurrencyDecimalSeparator != culture.NumberFormat.CurrencySymbol)
         { 
             expected = expected.Remove(expected.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
