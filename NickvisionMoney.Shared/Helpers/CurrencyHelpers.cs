@@ -20,7 +20,7 @@ public static class CurrencyHelpers
     public static string ToAmountString(this decimal amount, CultureInfo culture, bool useNativeDigits, bool showCurrencySymbol = true, bool overwriteDecimal = false)
     {
         var result = Math.Abs(amount).ToString(overwriteDecimal ? "C6" : "C", culture);
-        result = result.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
+        result = result.Remove(result.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
         if (culture.NumberFormat.CurrencyDecimalDigits == 99 || overwriteDecimal)
         {
             result = result.TrimEnd('0');
