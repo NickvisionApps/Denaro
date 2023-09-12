@@ -108,7 +108,7 @@ public class CurrencyHelperTests
         var expected = amount.ToString("C", culture);
         if(culture.NumberFormat.CurrencyDecimalSeparator != culture.NumberFormat.CurrencySymbol)
         { 
-            expected = expected.Remove(expected.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
+            expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
         }
         var result = amount.ToAmountString(culture, false, false);
         Assert.Equal(expected, result);
@@ -134,7 +134,7 @@ public class CurrencyHelperTests
         if (culture.Name is "kea-CV" or "pt-CV")
         {
             expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencySymbol))
+            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
                 expected += "00"; // Make the currency symbol be in the center of the string
         }
         else
