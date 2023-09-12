@@ -106,10 +106,7 @@ public class CurrencyHelperTests
     public void ToAmountString_RealCulturesShouldWorkWithoutCurrencySymbol(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        if(culture.NumberFormat.CurrencyDecimalSeparator != culture.NumberFormat.CurrencySymbol)
-        { 
-            expected = expected.Remove(expected.IndexOf(culture.NumberFormat.CurrencySymbol), culture.NumberFormat.CurrencySymbol.Length).Trim();
-        }
+        expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
         var result = amount.ToAmountString(culture, false, false);
         Assert.Equal(expected, result);
     }
@@ -131,25 +128,16 @@ public class CurrencyHelperTests
     {
         //Arrange
         var expected = amount.ToString("C6", culture).Replace("\u200b", "").Trim();
-        if (culture.Name is "kea-CV" or "pt-CV")
+        var symbolAtEnd = expected.EndsWith(culture.NumberFormat.CurrencySymbol);
+        if(symbolAtEnd)
+            expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
+        expected = expected.TrimEnd('0');
+        if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
         {
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencySymbol))
-                expected += "00"; // Make the currency symbol be in the center of the string
+            expected = expected.Remove(expected.LastIndexOf(culture.NumberFormat.CurrencyDecimalSeparator));
         }
-        else
-        {
-            var symbolAtEnd = expected.EndsWith(culture.NumberFormat.CurrencySymbol);
-            if(symbolAtEnd)
-                expected = expected.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
-            expected = expected.TrimEnd('0');
-            if (expected.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
-            {
-                expected = expected.Remove(expected.LastIndexOf(culture.NumberFormat.CurrencyDecimalSeparator));
-            }
-            if (symbolAtEnd)
-                expected += (culture.NumberFormat.CurrencyPositivePattern == 3 ? " " : "") + culture.NumberFormat.CurrencySymbol;
-        }
+        if (symbolAtEnd)
+            expected += (culture.NumberFormat.CurrencyPositivePattern == 3 ? " " : "") + culture.NumberFormat.CurrencySymbol;
         //Act
         var result = amount.ToAmountString(culture, false, overwriteDecimal: true);
         //Assert
