@@ -45,8 +45,8 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where the currency conversion service would provide the wrong conversion rate
               * Fixed an issue where small converted currency amounts would show as 0
-              * Improved UX in Currency Converter dialog
               * Fixed incorrect display of amounts for locales that use Cape Verdean escudo as currency
+              * Improved UX in Currency Converter dialog
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
