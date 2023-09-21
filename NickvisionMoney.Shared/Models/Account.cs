@@ -1560,7 +1560,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(AccountHelper.GetIncome(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(AccountHelper.GetExpense(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, transactions, Groups, -1, -1, false));
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpenseOverTime, false, transactions, Groups, -1, -1, false));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1616,7 +1616,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
-                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds, transactions, Groups));
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpensePerGroup, false, transactions, Groups));
                         });
                         //Transactions
                         col.Item().Table(tbl =>

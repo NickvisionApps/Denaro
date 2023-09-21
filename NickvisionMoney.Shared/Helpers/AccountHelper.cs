@@ -75,7 +75,7 @@ public class AccountHelper
     /// <param name="height">The height of the graph</param>
     /// <param name="showLegend">Whether or not to show the legend</param>
     /// <returns>The byte[] of the graph</returns>
-    public static byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, IDictionary<uint, Transaction> transactions, IDictionary<uint, Group> groups, int width = -1, int height = -1, bool showLegend = true)
+    public static byte[] GenerateGraph(GraphType type, bool darkMode, IDictionary<uint, Transaction> transactions, IDictionary<uint, Group> groups, int width = -1, int height = -1, bool showLegend = true)
     {
         InMemorySkiaSharpChart? chart = null;
         if (type == GraphType.IncomeExpensePie)
