@@ -548,92 +548,7 @@ public class Account : IDisposable
         await SyncRepeatTransactionsAsync();
         return true;
     }
-
-    /// <summary>
-    /// Gets the income amount for the date range
-    /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The income amount for the date range</returns>
-    public decimal GetIncome(DateOnly endDate, DateOnly? startDate = null)
-    {
-        var income = 0m;
-        foreach (var pair in Transactions)
-        {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Type == TransactionType.Income && pair.Value.Date <= endDate)
-            {
-                income += pair.Value.Amount;
-            }
-        }
-        return income;
-    }
-
-    /// <summary>
-    /// Gets the expense amount for the date range
-    /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The expense amount for the date range</returns>
-    public decimal GetExpense(DateOnly endDate, DateOnly? startDate = null)
-    {
-        var expense = 0m;
-        foreach (var pair in Transactions)
-        {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Type == TransactionType.Expense && pair.Value.Date <= endDate)
-            {
-                expense += pair.Value.Amount;
-            }
-        }
-        return expense;
-    }
-
-    /// <summary>
-    /// Gets the total amount for the date range
-    /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The total amount for the date range</returns>
-    public decimal GetTotal(DateOnly endDate, DateOnly? startDate = null)
-    {
-        var total = 0m;
-        foreach (var pair in Transactions)
-        {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Date <= endDate)
-            {
-                if (pair.Value.Type == TransactionType.Income)
-                {
-                    total += pair.Value.Amount;
-                }
-                else
-                {
-                    total -= pair.Value.Amount;
-                }
-            }
-        }
-        return total;
-    }
-
+    
     /// <summary>
     /// Updates the metadata of the account
     /// </summary>
@@ -1647,12 +1562,12 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(_("Total"));
-                            var total = GetTotal(maxDate);
+                            var total = AccountHelper.GetTotal(transactions);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(AccountHelper.GetIncome(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
-                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().AlignRight().Text(AccountHelper.GetExpense(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, -1, -1, false));
                         });
                         //Metadata
