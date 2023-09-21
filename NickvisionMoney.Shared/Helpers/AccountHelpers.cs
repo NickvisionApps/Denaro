@@ -17,10 +17,10 @@ namespace NickvisionMoney.Shared.Helpers;
 public static class AccountHelpers
 {
     /// <summary>
-    /// Gets the total amount for the date range
+    /// Gets the total amount for the transactions given
     /// </summary>
     /// <param name="transactions">The collection of transactions to consider</param>
-    /// <returns>The total amount for the date range</returns>
+    /// <returns>The total amount</returns>
     public static decimal GetTotal(IDictionary<uint, Transaction> transactions)
     {
         var income = GetIncome(transactions);
@@ -29,10 +29,10 @@ public static class AccountHelpers
     }
 
     /// <summary>
-    /// Gets the expense amount for the date range
+    /// Gets the total expense amount for a given set of transactions
     /// </summary>
     /// <param name="transactions">The collection of transactions to consider</param>
-    /// <returns>The expense amount for the date range</returns>
+    /// <returns>The total expense amount</returns>
     public static decimal GetExpense(IDictionary<uint, Transaction> transactions)
     {
         var expense = 0m;
@@ -47,10 +47,10 @@ public static class AccountHelpers
     }
 
     /// <summary>
-    /// Gets the income amount for the date range
+    /// Gets the total income amount for a given set of transactions
     /// </summary>
     /// <param name="transactions">The collection of transactions to consider</param>
-    /// <returns>The income amount for the date range</returns>
+    /// <returns>The total income amount</returns>
     public static decimal GetIncome(IDictionary<uint, Transaction> transactions)
     {
         var income = 0m;
@@ -64,6 +64,12 @@ public static class AccountHelpers
         return income;
     }
 
+    /// <summary>
+    /// Gets the total income and expense for a group
+    /// </summary>
+    /// <param name="transactions">The collection of transactions to consider</param>
+    /// <param name="group">The group to get income and expense for</param>
+    /// <returns>The total income and expense tuple</returns>
     public static (decimal, decimal) GetGroupIncomeExpense(IDictionary<uint, Transaction> transactions, Group group)
     {
         return transactions.Values
@@ -72,13 +78,14 @@ public static class AccountHelpers
                 transaction.Type == TransactionType.Income ? (data.Item1 + transaction.Amount, data.Item2) : (data.Item1, data.Item2 + transaction.Amount));
             
     }
-    
+
     /// <summary>
     /// Generates a graph based on the type
     /// </summary>
     /// <param name="type">GraphType</param>
     /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
-    /// <param name="filteredIds">A list of filtered ids</param>
+    /// <param name="transactions">The transactions to generate graph from</param>
+    /// <param name="groups">The groups to consider</param>
     /// <param name="width">The width of the graph</param>
     /// <param name="height">The height of the graph</param>
     /// <param name="showLegend">Whether or not to show the legend</param>
