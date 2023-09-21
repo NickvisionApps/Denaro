@@ -14,7 +14,7 @@ using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.Shared.Helpers;
 
-public static class AccountHelper
+public static class AccountHelpers
 {
     /// <summary>
     /// Gets the total amount for the date range

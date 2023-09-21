@@ -1554,13 +1554,13 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(_("Total"));
-                            var total = AccountHelper.GetTotal(transactions);
+                            var total = AccountHelpers.GetTotal(transactions);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(AccountHelper.GetIncome(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(AccountHelpers.GetIncome(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
-                            tbl.Cell().AlignRight().Text(AccountHelper.GetExpense(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpenseOverTime, false, transactions, Groups, -1, -1, false));
+                            tbl.Cell().AlignRight().Text(AccountHelpers.GetExpense(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(AccountHelpers.GenerateGraph(GraphType.IncomeExpenseOverTime, false, transactions, Groups, -1, -1, false));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1616,7 +1616,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
-                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpensePerGroup, false, transactions, Groups));
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelpers.GenerateGraph(GraphType.IncomeExpensePerGroup, false, transactions, Groups));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
@@ -1784,7 +1784,7 @@ public class Account : IDisposable
     public byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, int width = -1, int height = -1, bool showLegend = true)
     {
         var transactions = filteredIds.ToDictionary(id => id, id => Transactions[id]);
-        return AccountHelper.GenerateGraph(type, darkMode, transactions, Groups, width, height, showLegend);
+        return AccountHelpers.GenerateGraph(type, darkMode, transactions, Groups, width, height, showLegend);
     }
 
     /// <summary>
