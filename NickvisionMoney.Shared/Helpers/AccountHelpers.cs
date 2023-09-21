@@ -63,7 +63,15 @@ public static class AccountHelpers
         }
         return income;
     }
-    
+
+    public static (decimal, decimal) GetGroupIncomeExpense(IDictionary<uint, Transaction> transactions, Group group)
+    {
+        return transactions.Values
+            .Where(x => x.GroupId == group.Id || (x.GroupId == -1 && group.Id == 0))
+            .Aggregate((0m, 0m), (data, transaction) => 
+                transaction.Type == TransactionType.Income ? (data.Item1 + transaction.Amount, data.Item2) : (data.Item1, data.Item2 + transaction.Amount));
+            
+    }
     
     /// <summary>
     /// Generates a graph based on the type
@@ -97,21 +105,12 @@ public static class AccountHelpers
         else if (type == GraphType.IncomeExpensePerGroup)
         {
             var data = new Dictionary<string, decimal[]>();
-            foreach (var transaction in transactions.Values)
+            foreach (var group in groups.Values)
             {
-                var groupName = groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
-                if (!data.ContainsKey(groupName))
-                {
-                    data.Add(groupName, new decimal[2] { 0m, 0m });
-                }
-                if (transaction.Type == TransactionType.Income)
-                {
-                    data[groupName][0] += transaction.Amount;
-                }
-                else
-                {
-                    data[groupName][1] += transaction.Amount;
-                }
+                var incomeExpense = GetGroupIncomeExpense(transactions, group);
+                if(incomeExpense == (0m, 0m))
+                    continue;
+                data.Add(group.Name, new[] { incomeExpense.Item1, incomeExpense.Item2 });
             }
             chart = new SKCartesianChart()
             {
