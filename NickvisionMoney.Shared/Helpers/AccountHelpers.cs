@@ -180,27 +180,9 @@ public static class AccountHelpers
         }
         else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
         {
-            var data = new Dictionary<uint, decimal>();
-            foreach (var transaction in transactions.Values)
-            {
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
-                {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
-                }
-                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
-                {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
-                }
-            }
+            var data = groups.ToDictionary(
+                    x => x.Key, 
+                    x => type == GraphType.IncomeByGroup ? GetGroupIncomeExpense(transactions, x.Value).Income : GetGroupIncomeExpense(transactions, x.Value).Expense);
             var series = new List<ISeries>(data.Count);
             foreach (var pair in data.OrderBy(x => groups[x.Key].Name == _("Ungrouped") ? " " : groups[x.Key].Name))
             {
