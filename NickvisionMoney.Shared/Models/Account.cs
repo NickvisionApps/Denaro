@@ -1611,9 +1611,11 @@ public class Account : IDisposable
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
+                                var incomeExpense = AccountHelpers.GetGroupIncomeExpense(transactions, pair.Value);
+                                var balance = incomeExpense.Item1 - incomeExpense.Item2;
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(balance < 0 ? "−  " : "+  ")}{balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
                             tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelpers.GenerateGraph(GraphType.IncomeExpensePerGroup, false, transactions, Groups));
@@ -1644,15 +1646,6 @@ public class Account : IDisposable
                             tbl.Cell().Text(_("Notes")).SemiBold();
                             tbl.Cell().AlignRight().Text(_("Amount")).SemiBold();
                             //Data
-                            var transactions = Transactions;
-                            if (exportMode == ExportMode.CurrentView)
-                            {
-                                transactions = new Dictionary<uint, Transaction>();
-                                foreach (var id in filteredIds)
-                                {
-                                    transactions.Add(id, Transactions[id]);
-                                }
-                            }
                             foreach (var pair in transactions)
                             {
                                 var hex = "#32"; //120
@@ -1711,15 +1704,6 @@ public class Account : IDisposable
                             tbl.Cell().Text(_("Id")).SemiBold();
                             tbl.Cell().Text(_("Receipt")).SemiBold();
                             //Data
-                            var transactions = Transactions;
-                            if (exportMode == ExportMode.CurrentView)
-                            {
-                                transactions = new Dictionary<uint, Transaction>();
-                                foreach (var id in filteredIds)
-                                {
-                                    transactions.Add(id, Transactions[id]);
-                                }
-                            }
                             var i = 0;
                             foreach (var pair in transactions)
                             {
