@@ -80,20 +80,8 @@ public class AccountHelper
         InMemorySkiaSharpChart? chart = null;
         if (type == GraphType.IncomeExpensePie)
         {
-            var income = 0m;
-            var expense = 0m;
-            foreach (var id in filteredIds)
-            {
-                var transaction = transactions[id];
-                if (transaction.Type == TransactionType.Income)
-                {
-                    income += transaction.Amount;
-                }
-                else
-                {
-                    expense += transaction.Amount;
-                }
-            }
+            var income = GetIncome(transactions);
+            var expense = GetExpense(transactions);
             chart = new SKPieChart()
             {
                 Background = SKColor.Empty,
@@ -109,9 +97,8 @@ public class AccountHelper
         else if (type == GraphType.IncomeExpensePerGroup)
         {
             var data = new Dictionary<string, decimal[]>();
-            foreach (var id in filteredIds)
+            foreach (var transaction in transactions.Values)
             {
-                var transaction = transactions[id];
                 var groupName = groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
                 if (!data.ContainsKey(groupName))
                 {
@@ -150,9 +137,8 @@ public class AccountHelper
         {
             //Graph
             var data = new Dictionary<DateOnly, decimal[]>();
-            foreach (var id in filteredIds)
+            foreach (var transaction in transactions.Values)
             {
-                var transaction = transactions[id];
                 if (!data.ContainsKey(transaction.Date))
                 {
                     data.Add(transaction.Date, new decimal[2] { 0m, 0m });
@@ -189,9 +175,8 @@ public class AccountHelper
         else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
         {
             var data = new Dictionary<uint, decimal>();
-            foreach (var id in filteredIds)
+            foreach (var transaction in transactions.Values)
             {
-                var transaction = transactions[id];
                 var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
                 if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
                 {
