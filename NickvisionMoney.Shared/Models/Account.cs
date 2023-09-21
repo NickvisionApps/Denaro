@@ -1498,6 +1498,7 @@ public class Account : IDisposable
     public bool ExportToPDF(string path, ExportMode exportMode, List<uint> filteredIds, string? password)
     {
         QuestPDF.Settings.License = LicenseType.Community;
+        var transactions = exportMode == ExportMode.CurrentView ? filteredIds.ToDictionary(id => id, id => Transactions[id]) : Transactions;
         try
         {
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
@@ -1545,15 +1546,6 @@ public class Account : IDisposable
                             tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten1).Text(_("Overview"));
                             //Data
                             var maxDate = DateOnly.FromDateTime(DateTime.Today);
-                            var transactions = Transactions;
-                            if (exportMode == ExportMode.CurrentView)
-                            {
-                                transactions = new Dictionary<uint, Transaction>();
-                                foreach (var id in filteredIds)
-                                {
-                                    transactions.Add(id, Transactions[id]);
-                                }
-                            }
                             foreach (var pair in transactions)
                             {
                                 if (pair.Value.Date > maxDate)
@@ -1568,7 +1560,7 @@ public class Account : IDisposable
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(AccountHelper.GetIncome(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
                             tbl.Cell().AlignRight().Text(AccountHelper.GetExpense(transactions).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
-                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, -1, -1, false));
+                            tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, transactions, Groups, -1, -1, false));
                         });
                         //Metadata
                         col.Item().Table(tbl =>
@@ -1624,7 +1616,7 @@ public class Account : IDisposable
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
-                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds));
+                            tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(AccountHelper.GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds, transactions, Groups));
                         });
                         //Transactions
                         col.Item().Table(tbl =>
