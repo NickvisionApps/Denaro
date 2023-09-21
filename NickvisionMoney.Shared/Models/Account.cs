@@ -1612,7 +1612,7 @@ public class Account : IDisposable
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
                                 var incomeExpense = AccountHelpers.GetGroupIncomeExpense(transactions, pair.Value);
-                                var balance = incomeExpense.Item1 - incomeExpense.Item2;
+                                var balance = incomeExpense.Income - incomeExpense.Expense;
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(balance < 0 ? "−  " : "+  ")}{balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");

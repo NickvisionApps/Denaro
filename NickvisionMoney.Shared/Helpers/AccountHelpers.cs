@@ -69,8 +69,8 @@ public static class AccountHelpers
     /// </summary>
     /// <param name="transactions">The collection of transactions to consider</param>
     /// <param name="group">The group to get income and expense for</param>
-    /// <returns>The total income and expense tuple</returns>
-    public static (decimal, decimal) GetGroupIncomeExpense(IDictionary<uint, Transaction> transactions, Group group)
+    /// <returns>The total income and expense as a tuple</returns>
+    public static (decimal Income, decimal Expense) GetGroupIncomeExpense(IDictionary<uint, Transaction> transactions, Group group)
     {
         return transactions.Values
             .Where(x => x.GroupId == group.Id || (x.GroupId == -1 && group.Id == 0))
@@ -117,7 +117,7 @@ public static class AccountHelpers
                 var incomeExpense = GetGroupIncomeExpense(transactions, group);
                 if(incomeExpense == (0m, 0m))
                     continue;
-                data.Add(group.Name, new[] { incomeExpense.Item1, incomeExpense.Item2 });
+                data.Add(group.Name, new[] { incomeExpense.Income, incomeExpense.Expense });
             }
             chart = new SKCartesianChart()
             {
