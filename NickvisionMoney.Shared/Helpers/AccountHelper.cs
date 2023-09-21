@@ -1,5 +1,15 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using LiveChartsCore;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.SKCharts;
+using LiveChartsCore.SkiaSharpView.VisualElements;
 using NickvisionMoney.Shared.Models;
+using SkiaSharp;
+using static NickvisionMoney.Shared.Helpers.Gettext;
 
 
 namespace NickvisionMoney.Shared.Helpers;
@@ -52,5 +62,211 @@ public class AccountHelper
             }
         }
         return income;
+    }
+    
+    
+    /// <summary>
+    /// Generates a graph based on the type
+    /// </summary>
+    /// <param name="type">GraphType</param>
+    /// <param name="darkMode">Whether or not to draw the graph in dark mode</param>
+    /// <param name="filteredIds">A list of filtered ids</param>
+    /// <param name="width">The width of the graph</param>
+    /// <param name="height">The height of the graph</param>
+    /// <param name="showLegend">Whether or not to show the legend</param>
+    /// <returns>The byte[] of the graph</returns>
+    public static byte[] GenerateGraph(GraphType type, bool darkMode, List<uint> filteredIds, IDictionary<uint, Transaction> transactions, IDictionary<uint, Group> groups, int width = -1, int height = -1, bool showLegend = true)
+    {
+        InMemorySkiaSharpChart? chart = null;
+        if (type == GraphType.IncomeExpensePie)
+        {
+            var income = 0m;
+            var expense = 0m;
+            foreach (var id in filteredIds)
+            {
+                var transaction = transactions[id];
+                if (transaction.Type == TransactionType.Income)
+                {
+                    income += transaction.Amount;
+                }
+                else
+                {
+                    expense += transaction.Amount;
+                }
+            }
+            chart = new SKPieChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new PieSeries<decimal> { Name = _("Income"), Values = new decimal[] { income }, Fill = new SolidColorPaint(SKColors.Green) },
+                    new PieSeries<decimal> { Name = _("Expense"), Values = new decimal[] { expense }, Fill = new SolidColorPaint(SKColors.Red) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeExpensePerGroup)
+        {
+            var data = new Dictionary<string, decimal[]>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = transactions[id];
+                var groupName = groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
+                if (!data.ContainsKey(groupName))
+                {
+                    data.Add(groupName, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[groupName][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[groupName][1] += transaction.Amount;
+                }
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[0]).ToArray(), Fill = new SolidColorPaint(SKColors.Green) },
+                    new ColumnSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key == _("Ungrouped") ? " " : x.Key).Select(x => x.Value[1]).ToArray(), Fill = new SolidColorPaint(SKColors.Red) },
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis() { Labels = data.Keys.OrderBy(x => x == _("Ungrouped") ? " " : x).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeExpenseOverTime)
+        {
+            //Graph
+            var data = new Dictionary<DateOnly, decimal[]>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = transactions[id];
+                if (!data.ContainsKey(transaction.Date))
+                {
+                    data.Add(transaction.Date, new decimal[2] { 0m, 0m });
+                }
+                if (transaction.Type == TransactionType.Income)
+                {
+                    data[transaction.Date][0] += transaction.Amount;
+                }
+                else
+                {
+                    data[transaction.Date][1] += transaction.Amount;
+                }
+            }
+            chart = new SKCartesianChart()
+            {
+                Background = SKColor.Empty,
+                Series = new ISeries[]
+                {
+                    new LineSeries<decimal>() { Name = _("Income"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[0]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Green), GeometryStroke = new SolidColorPaint(SKColors.Green), Fill = null, Stroke = new SolidColorPaint(SKColors.Green) },
+                    new LineSeries<decimal>() { Name = _("Expense"), Values = data.OrderBy(x => x.Key).Select(x => x.Value[1]).ToArray(), GeometryFill = new SolidColorPaint(SKColors.Red), GeometryStroke = new SolidColorPaint(SKColors.Red), Fill = null, Stroke = new SolidColorPaint(SKColors.Red) }
+                },
+                XAxes = new Axis[]
+                {
+                    new Axis() { Labels = data.Keys.Order().Select(x => x.ToString("d", CultureHelpers.DateCulture)).ToArray(), LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black), LabelsRotation = 50 }
+                },
+                YAxes = new Axis[]
+                {
+                    new Axis() { LabelsPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black) }
+                },
+                LegendPosition = showLegend ? LegendPosition.Top : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
+        {
+            var data = new Dictionary<uint, decimal>();
+            foreach (var id in filteredIds)
+            {
+                var transaction = transactions[id];
+                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
+                {
+                    if (!data.ContainsKey(groupId))
+                    {
+                        data.Add(groupId, 0m);
+                    }
+                    data[groupId] += transaction.Amount;
+                }
+            }
+            var series = new List<ISeries>(data.Count);
+            foreach (var pair in data.OrderBy(x => groups[x.Key].Name == _("Ungrouped") ? " " : groups[x.Key].Name))
+            {
+                var hex = "#FF"; //255
+                var rgba = string.IsNullOrEmpty(groups[pair.Key].RGBA) ? Configuration.Current.GroupDefaultColor : groups[pair.Key].RGBA;
+                if (rgba.StartsWith("#"))
+                {
+                    rgba = rgba.Remove(0, 1);
+                    if (rgba.Length == 8)
+                    {
+                        rgba = rgba.Remove(rgba.Length - 2);
+                    }
+                    hex += rgba;
+                }
+                else
+                {
+                    rgba = rgba.Remove(0, rgba.StartsWith("rgb(") ? 4 : 5);
+                    rgba = rgba.Remove(rgba.Length - 1);
+                    var fields = rgba.Split(',');
+                    hex += byte.Parse(fields[0]).ToString("X2");
+                    hex += byte.Parse(fields[1]).ToString("X2");
+                    hex += byte.Parse(fields[2]).ToString("X2");
+                }
+                series.Add(new PieSeries<decimal>()
+                {
+                    Name = groups[pair.Key].Name,
+                    Values = new decimal[] { pair.Value },
+                    Fill = new SolidColorPaint(SKColor.Parse(hex))
+                });
+            }
+            chart = new SKPieChart()
+            {
+                Title = new LabelVisual()
+                {
+                    Text = type == GraphType.IncomeByGroup ? _("Income") : _("Expense"),
+                    Paint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+                    Padding = new LiveChartsCore.Drawing.Padding(15),
+                    TextSize = 16
+                },
+                Background = SKColor.Empty,
+                Series = series,
+                LegendPosition = showLegend ? LegendPosition.Bottom : LegendPosition.Hidden,
+                LegendTextPaint = new SolidColorPaint(darkMode ? SKColors.White : SKColors.Black),
+            };
+        }
+        if (chart != null)
+        {
+            if (width > 0)
+            {
+                chart.Width = width;
+            }
+            if (height > 0)
+            {
+                chart.Height = height;
+            }
+            return chart.GetImage().Encode().ToArray();
+        }
+        return Array.Empty<byte>();
     }
 }
