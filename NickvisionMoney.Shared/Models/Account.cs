@@ -554,39 +554,29 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The income amount</returns>
-    public decimal GetIncome(IEnumerable<uint>? transactionIds = null)
-    {
-        transactionIds ??= Transactions.Keys;
-        return transactionIds
-            .Select(id => Transactions[id])
-            .Where(transaction => transaction.Type == TransactionType.Income)
-            .Sum(transaction => transaction.Amount);
-    }
+    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) => 
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.Type == TransactionType.Income)
+        .Sum(transaction => transaction.Amount);
 
     /// <summary>
     /// Gets the total expense amount for transactions given
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The total expense amount</returns>
-    public decimal GetExpense(IEnumerable<uint>? transactionIds = null)
-    {
-        transactionIds ??= Transactions.Keys;
-        return transactionIds
-            .Select(id => Transactions[id])
-            .Where(transaction => transaction.Type == TransactionType.Expense)
-            .Sum(transaction => transaction.Amount);
-    }
+    public decimal GetExpense(IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.Type == TransactionType.Expense)
+        .Sum(transaction => transaction.Amount);
 
     /// <summary>
     /// Gets the balance amount left after income and expense for the transactions given
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The balance amount after the transactions</returns>
-    public decimal GetTotal(IEnumerable<uint>? transactionIds = null)
-    {
-        var ids = transactionIds?.ToList();
-        return GetIncome(ids) - GetExpense(ids);
-    }
+    public decimal GetTotal(IList<uint>? transactionIds = null) => GetIncome(transactionIds) - GetExpense(transactionIds);
 
     /// <summary>
     /// Gets the total income for a group
@@ -632,12 +622,8 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The balance amount for the group</returns>
-    public decimal GetGroupTotal(Group group, IEnumerable<uint>? transactionIds = null)
-    {
-        var ids = transactionIds?.ToList();
-        return GetGroupIncome(group, ids) - GetGroupExpense(group, ids);
-    }
-    
+    public decimal GetGroupTotal(Group group, IList<uint>? transactionIds = null) => GetGroupIncome(group, transactionIds) - GetGroupExpense(group, transactionIds);
+
     /// <summary>
     /// Updates the metadata of the account
     /// </summary>
