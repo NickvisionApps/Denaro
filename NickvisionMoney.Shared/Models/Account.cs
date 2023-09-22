@@ -582,7 +582,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The balance amount after the transactions</returns>
-    public decimal GetBalance(IEnumerable<uint>? transactionIds = null)
+    public decimal GetTotal(IEnumerable<uint>? transactionIds = null)
     {
         var ids = transactionIds?.ToList();
         return GetIncome(ids) - GetExpense(ids);
@@ -632,7 +632,7 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The balance amount for the group</returns>
-    public decimal GetGroupBalance(Group group, IEnumerable<uint>? transactionIds = null)
+    public decimal GetGroupTotal(Group group, IEnumerable<uint>? transactionIds = null)
     {
         var ids = transactionIds?.ToList();
         return GetGroupIncome(group, ids) - GetGroupExpense(group, ids);
@@ -1651,7 +1651,7 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(_("Total"));
-                            var total = GetBalance(filteredIds);
+                            var total = GetTotal(filteredIds);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
                             tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(filteredIds).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
@@ -1708,7 +1708,7 @@ public class Account : IDisposable
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
-                                var balance = GetGroupBalance(pair.Value, filteredIds);
+                                var balance = GetGroupTotal(pair.Value, filteredIds);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(balance < 0 ? "−  " : "+  ")}{balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
