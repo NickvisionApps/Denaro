@@ -1870,20 +1870,8 @@ public class Account : IDisposable
         InMemorySkiaSharpChart? chart = null;
         if (type == GraphType.IncomeExpensePie)
         {
-            var income = 0m;
-            var expense = 0m;
-            foreach (var id in filteredIds)
-            {
-                var transaction = Transactions[id];
-                if (transaction.Type == TransactionType.Income)
-                {
-                    income += transaction.Amount;
-                }
-                else
-                {
-                    expense += transaction.Amount;
-                }
-            }
+            var income = GetIncome(filteredIds);
+            var expense = GetExpense(filteredIds);
             chart = new SKPieChart()
             {
                 Background = SKColor.Empty,
@@ -1899,22 +1887,10 @@ public class Account : IDisposable
         else if (type == GraphType.IncomeExpensePerGroup)
         {
             var data = new Dictionary<string, decimal[]>();
-            foreach (var id in filteredIds)
+            foreach (var groupId in Groups.Keys)
             {
-                var transaction = Transactions[id];
-                var groupName = Groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
-                if (!data.ContainsKey(groupName))
-                {
-                    data.Add(groupName, new decimal[2] { 0m, 0m });
-                }
-                if (transaction.Type == TransactionType.Income)
-                {
-                    data[groupName][0] += transaction.Amount;
-                }
-                else
-                {
-                    data[groupName][1] += transaction.Amount;
-                }
+                var group = Groups[groupId];
+                data[group.Name] = new[] { GetGroupIncome(group, filteredIds), GetGroupExpense(group, filteredIds) };
             }
             chart = new SKCartesianChart()
             {
@@ -1979,25 +1955,20 @@ public class Account : IDisposable
         else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
         {
             var data = new Dictionary<uint, decimal>();
-            foreach (var id in filteredIds)
+            if (type == GraphType.IncomeByGroup)
             {
-                var transaction = Transactions[id];
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
+                foreach (var groupId in Groups.Keys)
                 {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
+                    var group = Groups[groupId];
+                    data[groupId] = GetGroupIncome(group, filteredIds);
                 }
-                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
+            }
+            else
+            {
+                foreach (var groupId in Groups.Keys)
                 {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
+                    var group = Groups[groupId];
+                    data[groupId] = GetGroupExpense(group, filteredIds);
                 }
             }
             var series = new List<ISeries>(data.Count);
