@@ -550,89 +550,79 @@ public class Account : IDisposable
     }
 
     /// <summary>
-    /// Gets the income amount for the date range
+    /// Gets the total income amount for the transactions given
     /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The income amount for the date range</returns>
-    public decimal GetIncome(DateOnly endDate, DateOnly? startDate = null)
+    /// <param name="transactionIds">The ids of transactions to consider</param>
+    /// <returns>The income amount</returns>
+    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) => 
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.Type == TransactionType.Income)
+        .Sum(transaction => transaction.Amount);
+
+    /// <summary>
+    /// Gets the total expense amount for transactions given
+    /// </summary>
+    /// <param name="transactionIds">The ids of transactions to consider</param>
+    /// <returns>The total expense amount</returns>
+    public decimal GetExpense(IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.Type == TransactionType.Expense)
+        .Sum(transaction => transaction.Amount);
+
+    /// <summary>
+    /// Gets the balance amount left after income and expense for the transactions given
+    /// </summary>
+    /// <param name="transactionIds">The ids of transactions to consider</param>
+    /// <returns>The balance amount after the transactions</returns>
+    public decimal GetTotal(IList<uint>? transactionIds = null) => GetIncome(transactionIds) - GetExpense(transactionIds);
+
+    /// <summary>
+    /// Gets the total income for a group
+    /// </summary>
+    /// <param name="group">The group to consider</param>
+    /// <param name="transactionIds">The ids of the transactions to consider</param>
+    /// <returns>The total income amount</returns>
+    public decimal GetGroupIncome(Group group, IEnumerable<uint>? transactionIds)
     {
-        var income = 0m;
-        foreach (var pair in Transactions)
+        var transactions = Transactions;
+        if (transactionIds != null)
         {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Type == TransactionType.Income && pair.Value.Date <= endDate)
-            {
-                income += pair.Value.Amount;
-            }
+            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
         }
-        return income;
+        return transactions.Values
+            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+            .Where(transaction => transaction.Type == TransactionType.Income)
+            .Sum(transaction => transaction.Amount);
     }
 
     /// <summary>
-    /// Gets the expense amount for the date range
+    /// Gets the total expense for a group
     /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The expense amount for the date range</returns>
-    public decimal GetExpense(DateOnly endDate, DateOnly? startDate = null)
+    /// <param name="group">The group to consider</param>
+    /// <param name="transactionIds">The ids of the transactions to consider</param>
+    /// <returns>The total expense amount</returns>
+    public decimal GetGroupExpense(Group group, IEnumerable<uint>? transactionIds = null)
     {
-        var expense = 0m;
-        foreach (var pair in Transactions)
+        var transactions = Transactions;
+        if (transactionIds != null)
         {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Type == TransactionType.Expense && pair.Value.Date <= endDate)
-            {
-                expense += pair.Value.Amount;
-            }
+            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
         }
-        return expense;
+        return transactions.Values
+            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+            .Where(transaction => transaction.Type == TransactionType.Expense)
+            .Sum(transaction => transaction.Amount);
     }
-
+    
     /// <summary>
-    /// Gets the total amount for the date range
+    /// Gets the balance amount left after income and expense for a group
     /// </summary>
-    /// <param name="endDate">The end date</param>
-    /// <param name="startDate">The start date</param>
-    /// <returns>The total amount for the date range</returns>
-    public decimal GetTotal(DateOnly endDate, DateOnly? startDate = null)
-    {
-        var total = 0m;
-        foreach (var pair in Transactions)
-        {
-            if (startDate != null)
-            {
-                if (pair.Value.Date < startDate)
-                {
-                    continue;
-                }
-            }
-            if (pair.Value.Date <= endDate)
-            {
-                if (pair.Value.Type == TransactionType.Income)
-                {
-                    total += pair.Value.Amount;
-                }
-                else
-                {
-                    total -= pair.Value.Amount;
-                }
-            }
-        }
-        return total;
-    }
+    /// <param name="group">The group to consider</param>
+    /// <param name="transactionIds">The ids of the transactions to consider</param>
+    /// <returns>The balance amount for the group</returns>
+    public decimal GetGroupTotal(Group group, IList<uint>? transactionIds = null) => GetGroupIncome(group, transactionIds) - GetGroupExpense(group, transactionIds);
 
     /// <summary>
     /// Updates the metadata of the account
@@ -1647,12 +1637,12 @@ public class Account : IDisposable
                                 }
                             }
                             tbl.Cell().Text(_("Total"));
-                            var total = GetTotal(maxDate);
+                            var total = GetTotal(filteredIds);
                             tbl.Cell().AlignRight().Text($"{(total < 0 ? "-  " : "+  ")}{total.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                             tbl.Cell().Background(Colors.Grey.Lighten3).Text(_("Income"));
-                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().Background(Colors.Grey.Lighten3).AlignRight().Text(GetIncome(filteredIds).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().Text(_("Expense"));
-                            tbl.Cell().AlignRight().Text(GetExpense(maxDate).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
+                            tbl.Cell().AlignRight().Text(GetExpense(filteredIds).ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits));
                             tbl.Cell().ColumnSpan(2).Background(Colors.Grey.Lighten3).Image(GenerateGraph(GraphType.IncomeExpenseOverTime, false, filteredIds, -1, -1, false));
                         });
                         //Metadata
@@ -1704,9 +1694,10 @@ public class Account : IDisposable
                             var i = 0;
                             foreach (var pair in Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
                             {
+                                var balance = GetGroupTotal(pair.Value, filteredIds);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Name);
                                 tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Text(pair.Value.Description);
-                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(pair.Value.Balance < 0 ? "−  " : "+  ")}{pair.Value.Balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
+                                tbl.Cell().Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).AlignRight().Text($"{(balance < 0 ? "−  " : "+  ")}{balance.ToAmountString(cultureAmount, Configuration.Current.UseNativeDigits)}");
                                 i++;
                             }
                             tbl.Cell().ColumnSpan(3).Background(i % 2 == 0 ? Colors.Grey.Lighten3 : Colors.White).Image(GenerateGraph(GraphType.IncomeExpensePerGroup, false, filteredIds));
@@ -1879,20 +1870,8 @@ public class Account : IDisposable
         InMemorySkiaSharpChart? chart = null;
         if (type == GraphType.IncomeExpensePie)
         {
-            var income = 0m;
-            var expense = 0m;
-            foreach (var id in filteredIds)
-            {
-                var transaction = Transactions[id];
-                if (transaction.Type == TransactionType.Income)
-                {
-                    income += transaction.Amount;
-                }
-                else
-                {
-                    expense += transaction.Amount;
-                }
-            }
+            var income = GetIncome(filteredIds);
+            var expense = GetExpense(filteredIds);
             chart = new SKPieChart()
             {
                 Background = SKColor.Empty,
@@ -1908,22 +1887,10 @@ public class Account : IDisposable
         else if (type == GraphType.IncomeExpensePerGroup)
         {
             var data = new Dictionary<string, decimal[]>();
-            foreach (var id in filteredIds)
+            foreach (var groupId in Groups.Keys)
             {
-                var transaction = Transactions[id];
-                var groupName = Groups[transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId].Name;
-                if (!data.ContainsKey(groupName))
-                {
-                    data.Add(groupName, new decimal[2] { 0m, 0m });
-                }
-                if (transaction.Type == TransactionType.Income)
-                {
-                    data[groupName][0] += transaction.Amount;
-                }
-                else
-                {
-                    data[groupName][1] += transaction.Amount;
-                }
+                var group = Groups[groupId];
+                data[group.Name] = new[] { GetGroupIncome(group, filteredIds), GetGroupExpense(group, filteredIds) };
             }
             chart = new SKCartesianChart()
             {
@@ -1988,25 +1955,20 @@ public class Account : IDisposable
         else if (type == GraphType.IncomeByGroup || type == GraphType.ExpenseByGroup)
         {
             var data = new Dictionary<uint, decimal>();
-            foreach (var id in filteredIds)
+            if (type == GraphType.IncomeByGroup)
             {
-                var transaction = Transactions[id];
-                var groupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
-                if (type == GraphType.IncomeByGroup && transaction.Type == TransactionType.Income)
+                foreach (var groupId in Groups.Keys)
                 {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
+                    var group = Groups[groupId];
+                    data[groupId] = GetGroupIncome(group, filteredIds);
                 }
-                if (type == GraphType.ExpenseByGroup && transaction.Type == TransactionType.Expense)
+            }
+            else
+            {
+                foreach (var groupId in Groups.Keys)
                 {
-                    if (!data.ContainsKey(groupId))
-                    {
-                        data.Add(groupId, 0m);
-                    }
-                    data[groupId] += transaction.Amount;
+                    var group = Groups[groupId];
+                    data[groupId] = GetGroupExpense(group, filteredIds);
                 }
             }
             var series = new List<ISeries>(data.Count);
