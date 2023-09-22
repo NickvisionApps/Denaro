@@ -522,7 +522,7 @@ public class Account : IDisposable
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
             if (!string.IsNullOrEmpty(receiptString))
             {
-                transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString), new JpegDecoder());
+                transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString));
             }
             Transactions.Add(transaction.Id, transaction);
             if (transaction.Date <= DateOnly.FromDateTime(DateTime.Now))

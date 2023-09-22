@@ -8,10 +8,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/docnet.core/2.3.1/docnet.core.2.3.1.nupkg",
-    "sha512": "dae36686a986adf20da74e93b1c94a68703ece815ae59fd4efc02c4bf87f7d10feabaee078f1a25fa3d950cfa7cbd3e327414756fca7cdd6b51ecd9012b9dcdf",
+    "url": "https://api.nuget.org/v3-flatcontainer/docnet.core/2.6.0/docnet.core.2.6.0.nupkg",
+    "sha512": "0a11668cbc07fc20a18277f8a6aa7d4540185d560a0ba35a2e63af27d0e25c906766f77371deffd22d031e0494f51325f1fa55e2a3eba05b5d00bf30fa8cb9c0",
     "dest": "nuget-sources",
-    "dest-filename": "docnet.core.2.3.1.nupkg"
+    "dest-filename": "docnet.core.2.6.0.nupkg"
   },
   {
     "type": "file",
@@ -22,10 +22,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/gettext.net/1.8.7/gettext.net.1.8.7.nupkg",
-    "sha512": "f998a8437b52b406141c65f0d132ddc5dd04b85635b5b410f508b851ad7a5108b623ea615aa58a0dec2825e6e0420cd2f9f6f2689646aa71afafb172303dceaa",
+    "url": "https://api.nuget.org/v3-flatcontainer/gettext.net/1.9.14/gettext.net.1.9.14.nupkg",
+    "sha512": "41a61edfe82c11c029150748b641e80b59cfc447eb91f0f030ae9e345e54f46fc901946e12684476fa43d024f4145a3a2377861a619587643cb5fa5d5145cb4a",
     "dest": "nuget-sources",
-    "dest-filename": "gettext.net.1.8.7.nupkg"
+    "dest-filename": "gettext.net.1.9.14.nupkg"
   },
   {
     "type": "file",
@@ -141,10 +141,17 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.linux/2.8.2.3/harfbuzzsharp.nativeassets.linux.2.8.2.3.nupkg",
-    "sha512": "fde70d49dc1e90c9ac171b643f6e3939071cb2197bc8101ede4c3ce7f1ab7581d945d4c91d103bc63243c017ec2688d791880e348c24908bb7651e983f0f0b13",
+    "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp/7.3.0/harfbuzzsharp.7.3.0.nupkg",
+    "sha512": "5d1887b3cdc22334132f8fff8b2ac1f57cb54e9fcd25d21d32f8f86c7c694e86739c067e8b1ae3da10c1b1b3417f27b640b0e7890101ee2d420fba3feba580b5",
     "dest": "nuget-sources",
-    "dest-filename": "harfbuzzsharp.nativeassets.linux.2.8.2.3.nupkg"
+    "dest-filename": "harfbuzzsharp.7.3.0.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.linux/7.3.0/harfbuzzsharp.nativeassets.linux.7.3.0.nupkg",
+    "sha512": "48a4bf98b9f59181ef1885a3d4d3ee605b63aeab3b49248a3e49a6bbbdcdae4bcb974073492319789f17eb92edebc1ddf050c5d0724eddc5ea3277d5c2054731",
+    "dest": "nuget-sources",
+    "dest-filename": "harfbuzzsharp.nativeassets.linux.7.3.0.nupkg"
   },
   {
     "type": "file",
@@ -162,6 +169,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.macos/7.3.0/harfbuzzsharp.nativeassets.macos.7.3.0.nupkg",
+    "sha512": "803ace4c95a3ae0c69e30003d3f6dc1b409ff0390b94c37d8dbc1a5321dca74b5d7b2a8aefaab0a792cd47d4e3c2d24e733ed313e0597d80a7ef81b67bc413ee",
+    "dest": "nuget-sources",
+    "dest-filename": "harfbuzzsharp.nativeassets.macos.7.3.0.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.win32/2.8.2.3/harfbuzzsharp.nativeassets.win32.2.8.2.3.nupkg",
     "sha512": "f51176b5bf944d8cee7b17269a43d43bd2297506ced8d16c87d3e8d421d68d71f85e8eb20982e5af902f53e20382709a9a0500140e5a74b758af35193f1bb771",
     "dest": "nuget-sources",
@@ -173,6 +187,13 @@
     "sha512": "f9742ebe94f36d5f8f0c97cac85a726b4fdcfa386b3f73fe917a4e543036bf962c371ef0f4dda976230cc44cf56b803e0dd7873197cd17a4c45845fa808effd0",
     "dest": "nuget-sources",
     "dest-filename": "harfbuzzsharp.nativeassets.win32.2.8.2.4-preview.84.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.win32/7.3.0/harfbuzzsharp.nativeassets.win32.7.3.0.nupkg",
+    "sha512": "3f477b5cb4d70df1333f69272c885c31dc43118ebf4edc990ae6ea8f29db0a3d4886a74b6d7ad2778d1db6bf7660bf0ae0eb23030c0b9c65710c5baa2389b00c",
+    "dest": "nuget-sources",
+    "dest-filename": "harfbuzzsharp.nativeassets.win32.7.3.0.nupkg"
   },
   {
     "type": "file",
@@ -211,6 +232,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.11/microsoft.data.sqlite.core.7.0.11.nupkg",
+    "sha512": "05a8f233ac786f632b89af3600a0be216e84aa42f91bdf3ea59c1ab68435e9d6a44c0517aae2498680e70bcb658e26289b4919e7d4d306d9389c975deb72660f",
+    "dest": "nuget-sources",
+    "dest-filename": "microsoft.data.sqlite.core.7.0.11.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/microsoft.data.sqlite.core/7.0.5/microsoft.data.sqlite.core.7.0.5.nupkg",
     "sha512": "319cc8ad58d2133f850404bf40bdf6fba64781565913a482b055403c12180ace43e5d12098b5b68f7d170eff57ed15c9ca70f5801150d94b892ffe012ecf7f5c",
     "dest": "nuget-sources",
@@ -222,13 +250,6 @@
     "sha512": "6bf892c274596fe2c7164e3d8503b24e187f64d0b7bec6d9b05eb95f04086fceb7a85ea6b2685d42dc465c52f6f0e6f636c0b3fddac48f6f0125dfd83e92d106",
     "dest": "nuget-sources",
     "dest-filename": "microsoft.netcore.platforms.1.1.0.nupkg"
-  },
-  {
-    "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg",
-    "sha512": "8493fe11648c7ecc20b6530490d30fd63744961345c0501a7a10b11046661da09b783ddceb8b3208ae52a72a8a94cafdce8dc1bd6073c32081e30d0e7407f174",
-    "dest": "nuget-sources",
-    "dest-filename": "microsoft.netcore.platforms.5.0.0.nupkg"
   },
   {
     "type": "file",
@@ -274,17 +295,17 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/pdfsharpcore/1.3.56/pdfsharpcore.1.3.56.nupkg",
-    "sha512": "488157c45da832ac6e2a3a2ca41aff917ba2937db1ae2c59f48cf22d419b1b05486555d9a579a532830a8cc364da924617689db874eb85b32e85ca26d34138d9",
+    "url": "https://api.nuget.org/v3-flatcontainer/pdfsharpcore/1.3.60/pdfsharpcore.1.3.60.nupkg",
+    "sha512": "070389422180cb39f31c13f0b63b51f7af98b7caa33f11c012d9394f7f6a51005b859ffd2a1cf9c7ba2f2aed5e33bcad25039800a5114dd5b0aa990d374b1966",
     "dest": "nuget-sources",
-    "dest-filename": "pdfsharpcore.1.3.56.nupkg"
+    "dest-filename": "pdfsharpcore.1.3.60.nupkg"
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2023.5.1/questpdf.2023.5.1.nupkg",
-    "sha512": "d6710b084e6c428bc21044bf6170a94619a8381754911a34d60932a42c5ad1af94b0e2836d21efb4b279dc7eca1fe9afa693f433f9bbcca9f33f8006f2cf03d6",
+    "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2023.6.3/questpdf.2023.6.3.nupkg",
+    "sha512": "79f127b4dea3f19f90df2b5362d401d27125be92ad52b24f2d7960b075a88b4b32745e23ab2b8bc8406c68ebc8fc8947777bca8efa3413c6e95d15c99dbe0c2c",
     "dest": "nuget-sources",
-    "dest-filename": "questpdf.2023.5.1.nupkg"
+    "dest-filename": "questpdf.2023.6.3.nupkg"
   },
   {
     "type": "file",
@@ -421,10 +442,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/sixlabors.imagesharp/2.1.3/sixlabors.imagesharp.2.1.3.nupkg",
-    "sha512": "07854efb0b1705d2847b436929ae2ca23592faa6031375b8d3b8ea1470b14051503e98a2bd76aeffccd3ae3508369888cb99c46a230bfca3dc9ab6895f4cce59",
+    "url": "https://api.nuget.org/v3-flatcontainer/sixlabors.imagesharp/3.0.2/sixlabors.imagesharp.3.0.2.nupkg",
+    "sha512": "bc24490da6f0bbba03c1724681698418045534ce5f14bf4a1088de53c65a9b81adf3842ae9430a1e33f0dc68fda83cfacc3ddf9a849b9ac2195293d3239876e6",
     "dest": "nuget-sources",
-    "dest-filename": "sixlabors.imagesharp.2.1.3.nupkg"
+    "dest-filename": "sixlabors.imagesharp.3.0.2.nupkg"
   },
   {
     "type": "file",
@@ -442,6 +463,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/skiasharp/2.88.6/skiasharp.2.88.6.nupkg",
+    "sha512": "5b989f52d9e7efa557bf60e13c1ba329b63670bc66d07bf237e2c8f9bdf28634eeb1e3a735c17c0f7d5b6cb8e290bda0b139540a8b0b99343367f9710f81dffd",
+    "dest": "nuget-sources",
+    "dest-filename": "skiasharp.2.88.6.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.harfbuzz/2.88.3/skiasharp.harfbuzz.2.88.3.nupkg",
     "sha512": "1e189b0a5db58abd3c1c09969abc0f4445fbbd6d691b8f65ad667d99593f189ef42573d696e7733a1fa6eafcaf4f6f9496b7bd7ed09b53f02fd3b54ea8d5be1d",
     "dest": "nuget-sources",
@@ -456,10 +484,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.linux/2.88.3/skiasharp.nativeassets.linux.2.88.3.nupkg",
-    "sha512": "544ef5b9e0a9d97214e743a93b0147364a767e5a31374dfb8dcd069f14a424b54db56fce85f28d14157b7493930d7408f99afbc383994cd2243e9bb27bf57813",
+    "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.linux/2.88.6/skiasharp.nativeassets.linux.2.88.6.nupkg",
+    "sha512": "9a52cb0a6cbc69a1e888efcb70df4e08d20e7d1ab848eb07ba6fd1c8a3500b63e1c97d7579c40c23c7231f08028d7d22ad61851334a09f6e498b409385881bd0",
     "dest": "nuget-sources",
-    "dest-filename": "skiasharp.nativeassets.linux.2.88.3.nupkg"
+    "dest-filename": "skiasharp.nativeassets.linux.2.88.6.nupkg"
   },
   {
     "type": "file",
@@ -477,6 +505,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.macos/2.88.6/skiasharp.nativeassets.macos.2.88.6.nupkg",
+    "sha512": "a9abf36aadd48c8a9e0ea35f95acdbe3a354091b37f97c1df97499213894f662e798687bad36da71fcfa05b6fdbc68aaff2e8a8ddbeec4ca2820bfe7cf5a9ed7",
+    "dest": "nuget-sources",
+    "dest-filename": "skiasharp.nativeassets.macos.2.88.6.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.win32/2.88.3/skiasharp.nativeassets.win32.2.88.3.nupkg",
     "sha512": "91711dda228905361393a39754dd08611b69b556af4725cbe9aef92ec8f11dac822338108aaeb1866e149c1e8b9dfc2dbd70c8f64fef11686ad59f69fc7f4420",
     "dest": "nuget-sources",
@@ -491,10 +526,24 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.win32/2.88.6/skiasharp.nativeassets.win32.2.88.6.nupkg",
+    "sha512": "02087547abd840806105270d43cc3a61b417f331192498571e2cff1382dfd15a1bf6b1552610c7579bf06da69b6e9a80b042ae980d0475da8acf3f7dab7334f4",
+    "dest": "nuget-sources",
+    "dest-filename": "skiasharp.nativeassets.win32.2.88.6.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.bundle_e_sqlcipher/2.1.5/sqlitepclraw.bundle_e_sqlcipher.2.1.5.nupkg",
     "sha512": "c86a1641f66f54565ff7750b3a6f21bcfdfc59c4cc633dab0f1410e5b0ee8c15b81e9d18130c3a13e47e7a29ee75e179082885f421342a4e6560df39962b6246",
     "dest": "nuget-sources",
     "dest-filename": "sqlitepclraw.bundle_e_sqlcipher.2.1.5.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.bundle_e_sqlcipher/2.1.6/sqlitepclraw.bundle_e_sqlcipher.2.1.6.nupkg",
+    "sha512": "e048023e511f00823c680a441696e003feeb76a1f673bb28124b999ce437051a1ae472673b89b22d89cbd5dc687fb51472b8bc643e97d2edd86fd33cd36cda19",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.bundle_e_sqlcipher.2.1.6.nupkg"
   },
   {
     "type": "file",
@@ -512,6 +561,13 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.core/2.1.6/sqlitepclraw.core.2.1.6.nupkg",
+    "sha512": "16bc39cd5325dea37e1564fc328a35966d6d820878290d945dc57496b716d4935b534285989af32fa7bd25ef9a8ac795b63e6a19044d3f84a104d643319473be",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.core.2.1.6.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.lib.e_sqlcipher/2.1.5/sqlitepclraw.lib.e_sqlcipher.2.1.5.nupkg",
     "sha512": "570f8c23f5fe20d742ccb05128ac0b45cf55ab1912d89dbeabca44036ae161e25c73d803be629d4186a0db75fb52898b221b4de21dde886557c8ed5f4b8d545a",
     "dest": "nuget-sources",
@@ -519,10 +575,24 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.lib.e_sqlcipher/2.1.6/sqlitepclraw.lib.e_sqlcipher.2.1.6.nupkg",
+    "sha512": "0772e6626ab9b6c911eb86f4b54e2b5114a47650e40b7198094fa517dafa6dc2d17f15698e9df27311379162c880fa1ede53e62161ee1e9f6ea99b63df987449",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.lib.e_sqlcipher.2.1.6.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.provider.e_sqlcipher/2.1.5/sqlitepclraw.provider.e_sqlcipher.2.1.5.nupkg",
     "sha512": "01e5db3a24867b4b563604a3b8aee0fac044354550ea80f8a836b3ad6bbc9949d4dfca358eb9294301e96220e1319463fac84b4099c99a54470ab7a92a6e8eb2",
     "dest": "nuget-sources",
     "dest-filename": "sqlitepclraw.provider.e_sqlcipher.2.1.5.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.provider.e_sqlcipher/2.1.6/sqlitepclraw.provider.e_sqlcipher.2.1.6.nupkg",
+    "sha512": "b8eba767cc1376d2db0997d78a47f93108be4dc9305cfed5abc8819ce27ad5da80ea538e06056540c7c3303e54ee1fcccfa9763981b7da20787fe0d621e9e4d3",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.provider.e_sqlcipher.2.1.6.nupkg"
   },
   {
     "type": "file",
@@ -778,13 +848,6 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg",
-    "sha512": "23226c503b06abecee5a9604a6e4dd3dabcdf921f55d6aa6dad2bab1ca12a001c7866af5a6de01cc9b4ace54e5c8ee1d5c2fd29dd9dfd7eda3ed86f9b35fa59f",
-    "dest": "nuget-sources",
-    "dest-filename": "system.runtime.compilerservices.unsafe.5.0.0.nupkg"
-  },
-  {
-    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/system.runtime.extensions/4.3.0/system.runtime.extensions.4.3.0.nupkg",
     "sha512": "680a32b19c2bd5026f8687aa5382aea4f432b4f032f8bde299facb618c56d57369adef7f7cc8e60ad82ae3c12e5dd50772491363bf8044c778778628a6605bbc",
     "dest": "nuget-sources",
@@ -873,13 +936,6 @@
     "sha512": "6ff7feec7313a7121f795ec7d376e4b8728c17294219fafdfd4ea078f9df1455b4685f0b3962c3810098e95d68594a8392c0b799d36ec8284cd6fcbd4cfe2c67",
     "dest": "nuget-sources",
     "dest-filename": "system.text.encoding.4.3.0.nupkg"
-  },
-  {
-    "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/system.text.encoding.codepages/5.0.0/system.text.encoding.codepages.5.0.0.nupkg",
-    "sha512": "4f32c801b3dc8b3d287c17310e8eaecbb7d3d0e311e39e1c428439fea7276860febc38422a61abc93d3cbbcd97bf511835b316553e931e04f6333a80629dc746",
-    "dest": "nuget-sources",
-    "dest-filename": "system.text.encoding.codepages.5.0.0.nupkg"
   },
   {
     "type": "file",

@@ -47,12 +47,8 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.9.2" date="2023-09-12">
+    <release version="2023.9.3-next" date="2023-09-12">
       <description translatable="no">
-        <p>- Fixed an issue where the currency conversion service would provide the wrong conversion rate</p>
-        <p>- Fixed an issue where small converted currency amounts would show as 0</p>
-        <p>- Fixed incorrect display of amounts for locales that use Cape Verdean escudo as currency</p>
-        <p>- Improved UX in Currency Converter dialog</p>
         <p>- Fixed an issue where exported PDF values were incorrect</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
