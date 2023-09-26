@@ -12,19 +12,25 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Milo Ivir</mal:name>
+      <mal:email>mail@milotype.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Transfer</title>
-<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+<p>Transfer je način premještanja novca s jednog računa na drugi. Nakon pokretanja transfera stvorit će se 2 transakcije sa sljedećim opisima:</p>
 <list>
 	<item>
-		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
+		<p>„Transfer na <input>Ime odredišnog računa</input>” na izvornom računu.</p>
 	</item>
 	<item>
-		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
+		<p>„Transfer iz <input>Ime izvornog računa</input>” na odredišni račun.</p>
 	</item>
 </list>
-<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
-<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
-<p>If you create a transfer between accounts with different currencies, you will be asked to provide a conversion rate.</p>
+<p>Transakcije koje su stvorene korištenjem tranfera su jednostavne transakcije koje se mogu slobodno urediti ili izbrisati. Ove transakcije nisu povezane: mijenjanje transakcije u izvornom računu neće utjecati na transakciju u odredišnom računu, i obratno.</p>
+<p>Transfer ne dozvoljava stvaranje ponavljajućih transakcija niti postavljanje bilo kojih svojstava osim iznosa. Za stvaranje transakcije će se koristiti boja koja je odabrana u <link xref="configuration">konfiguraciji</link>.</p>
+<p>Ako stvoriš transfer između računa s različitim valutama morat ćeš zadati stopu konverzije.</p>
 </page>

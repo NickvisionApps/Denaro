@@ -20,7 +20,7 @@
     </mal:credit>
   </info>
 
-<title>Transfer</title>
+<title>Überweisung</title>
 <p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
 <list>
 	<item>

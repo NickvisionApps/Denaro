@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transaction 🧾</title>
+	<title type="link">Transakcija 🧾</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,59 +12,65 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Transaction</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Milo Ivir</mal:name>
+      <mal:email>mail@milotype.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Transakcija</title>
+<p>Ova stranica objašnjava sva svojstva transakcija u aplikaciji <app>Denaro</app>.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>ID</title>
+		<p>Svaka transakcija ima ID koji je jedinstven za određeni račun. ID-ovi počinju s 1 i povećavaju se sa svakom dodanom transakcijom. ID-ovi se ne mogu mijenjati. ID-ovi uklonjenih transakcija se ne koriste ponovo.</p>
 	</item>
 	<item>
-		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<title>Opis</title>
+		<p>Dužina opisa nije ograničena. Ne smije sadržati znak točke sa zarezom (;).</p>
 	</item>
 	<item>
-		<title>Amount</title>
-		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+		<title>Iznos</title>
+		<p>Broj u ispravnom formatu za tvoje jezično područje. Za detalje pogledaj <em>Valuta sustava</em> u <link xref="account">Stranica računa</link>.</p>
 	</item>
 	<item>
-		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<title>Vrsta</title>
+		<p><em>Prihod</em> ili <em>Rashod</em>. Odabrana opcija u <link xref="account">postavkama računa</link> će se standardno odabrati kada otvoriš dijalog za dodavanje nove transakcije.</p>
 	</item>
 	<item>
-		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<title>Datum</title>
+		<p>Možeš odabrati bilo koji datum. Također možeš stvoriti transakcije za buduće datume.</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<title>Interval ponavljanja</title>
+		<p>Koristi ovu opciju za stvaranje ponavljajuće transakcije. Nakon što dodaš transakciju s intervalom ponavljanja, ova će transakcija postati <em>izvorna</em> transakcija. <app>Denaro</app> će automatski generirati <em>ponovljajuće</em> transakcije za datume do danas ili za navedeni krajnji datum ako je postavljen u prošlosti. <em>Ponovljajuće</em> transakcije se ne mogu uređivati ili izbrisati, samo se <em>izvor</em> može promijeniti. Kada promijeniš <em>izvornu</em> transakciju, <app>Denaro</app> će te pitati želiš li promijeniti ili poništiti vezu <em>ponovljajućih</em> transakcija. Ako odlučiš poništiti vezu, <em>ponovljajuće</em> transakcije postaju normalne transakcije i mogu se zasebno uređivati ili brisati.</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>Krajnji datum ponavljanja</title>
+		<p>Krajnji datum za ponavljajuću transakciju. Ne može biti prije ili na isti dan kao početni datum.</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>Grupa</title>
+		<p>Svaka transakcija može pripadati samo jednoj grupi ili nijednoj („Negrupirana” grupa).</p>
 	</item>
 	<item>
-		<title>Color</title>
-		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+		<title>Boja</title>
+		<p>Boja za transakciju. Može se postaviti da koristi boju grupe ili jedinstvene boje. Prilikom biranja jedinstvene boje, boja će se standardno postaviti na odabranu boju u <link xref="configuration">konfiguraciji</link>, ali se može promijeniti u bilo koju boju.</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>Oznake</title>
+        <p>Popis oznaka za transakciju. Transakcija može imati neograničen broj oznaka (ili ne imati oznake). Oznake mogu sadržati bilo koje znakove osim zareza (<code>,</code>) i imati bilo koju dužinu, ali se očekuje da budu kratke ključne riječi. Oznake su namijenjene za dodatno filtriranje kada korištenje grupa nije dovoljno. Oznake se spremaju samo u samim transakcijama, a kao rezultat toga nekorištene oznake automatski nestaju pri zatvaranju računa.</p>
     </item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>Priznanica</title>
+		<p>Slika priznanice za transakciju. Možeš učitati JPEG ili PNG sliku ili PDF dokument, ali bez obzira na format slika će se pretvorit i spremiti kao JPEG slika. U slučaju PDF-a će se spremiti samo prva stranica. U bilo kojem trenutku možeš izbrisati ili prenijeti jednu drugu datoteku.</p>
 	</item>
 	<item>
-		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<title>Bilješke</title>
+		<p>Tekstna bilješka za prilaganje transakciji.</p>
 	</item>
 </terms>
 </page>

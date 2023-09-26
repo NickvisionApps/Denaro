@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">Konfiguracija 🔧</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,51 +12,57 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
-<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Milo Ivir</mal:name>
+      <mal:email>mail@milotype.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Konfiguracija</title>
+<p>Ova stranica opisuje što možeš promijeniti u konfiguraciji aplikacije.</p>
+<p>Ovisno o platformi, u sučelju aplikacije se konfiguracija zove <gui>Osobitosti</gui> ili <gui>Postavke</gui>.</p>
 <terms>
 	<item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+		<title>Tema</title>
+		<p>Postavi svijetlu ili tamnu temu ili neka <app>Denaro</app> slijedi temu tvog sustava. Za primjenu promjene teme u Windows sustavu zahtijeva ponovno pokretanje aplikacije.</p>
 	</item>
 	<item>
-		<title>Transaction Default Color</title>
-		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
+		<title>Standardna boja transakcija</title>
+		<p>Standardna boja prilikom dodavanja nove <link xref="transaction">transakcije</link> s jedinstvenom bojom. Mijenjanje boje neće utjecati na postojeće transakcije, čak i ako koriste prethodno odabranu standardnu boju.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
-		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+		<title>Standardna boja transfera</title>
+		<p>Standardna boja za transakcije stvorene pomoću <link xref="transfer">transfera</link>. Mijenjanje boje neće utjecati na postojeće transakcije.</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
-		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
+		<title>Standardna boja grupa</title>
+		<p>Standardna boja prilikom dodavanja nove grupe. Koristi se i za „negrupirane” grupe.</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
+		<title>Boja žiro računa</title>
+		<p>Boja za označavanje <link xref="account">računa</link> vrste <em>žiro račun</em> u popisu nedavnih računa.</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
+		<title>Boja štednog računa</title>
+		<p>Boja za označavanje <link xref="account">računa</link> vrste <em>štedni račun</em> u popisu nedavnih računa.</p>
 	</item>
 	<item>
-		<title>Business Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
+		<title>Boja poslovnog računa</title>
+		<p>Boja za označavanje <link xref="account">računa</link> vrste <em>poslovni račun</em> u popisu nedavnih računa.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
+		<title>Koristi brojke jezika</title>
+		<p>Da li umjesto arapskih brojki koristiti brojke tvog tvoje jezičnog područja. Na primjer, ako je ova postavka deaktivirana, umjesto <em>012</em> će se koristiti <em>٠١٢</em> za jezična područja koja koriste istočnoarapske brojeve.</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
-		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
+		<title>Umetni decimalni znak</title>
+		<p>Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju iznosa: točka na numeričkoj tipkovnici, bilo koja točka i zarez ili ništa. Ako decimalni znak već postoji u polju onda se on neće umetnuti.</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
-		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
+		<title>Mapa sigurnosnih kopija u CSV formatu</title>
+		<p>Mapa u kojoj će se tvoji podaci automatski <link xref="import-export">izvesti u CSV datoteku</link> nakon svake promjene. Ova funkcija ne radi za račune koji su zaštićeni lozinkom jer CSV datoteke ne mogu biti zaštićene lozinkom.</p>
 	</item>
 </terms>
 </page>

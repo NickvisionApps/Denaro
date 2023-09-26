@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="hr">
 <info>
-	<title type="link">Denaro Help</title>
-	<title type="text">Denaro Help</title>
+	<title type="link">Denaro pomoć</title>
+	<title type="text">Denaro pomoć</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,9 +12,15 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title><media its:translate="no" type="image" src="figures/denaro.png"/> Denaro Help</title>
-<p>This documentation will help you understand how to configure and manage data in <app>Denaro</app> to get the most of the application.</p>
-<p>To get support, use <link href="https://github.com/NickvisionApps/Denaro/issues">issues</link> or <link href="https://github.com/NickvisionApps/Denaro/discussions">discussions</link> on Github, or <link href="https://bit.ly/3GrfEid">join our Matrix channel</link>.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Milo Ivir</mal:name>
+      <mal:email>mail@milotype.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title><media its:translate="no" type="image" src="figures/denaro.png"/> Denaro pomoć</title>
+<p>Ova dokumentacija će ti pomoći konfigurirati i upravljati podacima u aplikaciji <app>Denaro</app> za najbolje iskorištavanje aplikacije.</p>
+<p>Za dobivanje pomoći koristi <link href="https://github.com/NickvisionApps/Denaro/issues">probleme</link> ili <link href="https://github.com/NickvisionApps/Denaro/discussions">rasprave</link> na Githubu ili se <link href="https://bit.ly/3GrfEid">pridruži našem Matrix kanalu</link>.</p>
 </page>

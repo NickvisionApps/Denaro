@@ -56,7 +56,7 @@
 	</item>
     <item>
         <title>Etichette</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <p>Un elenco di tag per la transazione. Una transazione può avere un numero illimitato di tag (o non avere tag). I tag possono contenere qualsiasi carattere tranne la virgola (<code>,</code>) e avere qualsiasi lunghezza, ma si prevede che siano parole chiave brevi. I tag sono pensati per essere utilizzati per ulteriori filtri quando l'utilizzo dei gruppi non è sufficiente. I tag vengono salvati solo nelle transazioni stesse e, di conseguenza, i tag non utilizzati scompaiono automaticamente alla chiusura del conto.</p>
     </item>
 	<item>
 		<title>Ricevuta</title>

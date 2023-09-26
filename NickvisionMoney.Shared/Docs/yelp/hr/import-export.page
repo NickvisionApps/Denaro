@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">Uvoz/Izvoz 📤</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,102 +12,108 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Import/Export</title>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Milo Ivir</mal:name>
+      <mal:email>mail@milotype.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Uvoz/Izvoz</title>
 <div>
-	<title>Import Formats</title>
+	<title>Formati uvoza</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+			<p>Datumi bi trebali biti u formatu <em>YYYYMMDD</em>.</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+			<p>Datumi bi trebali biti u engleskom (SAD) formatu (<em>MM/DD/YYYY</em>).</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
-			<p>❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <app>Denaro</app> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <app>Denaro</app> expects to find:</p>
+			<p>❗ Iako je CSV uobičajeni format i neke banke dopuštaju svojim korisnicima izvoz podataka u CSV formatu, te su datoteke zapravo tablice koje mogu sadržati proizvoljne podatke. Uvoz CSV datoteke stvorene u jednom drugom programu neće uspjeti jer njezini podaci neće biti kompatibilni s onim što <app>Denaro</app> pokušava dobiti iz datoteke. Svrha uvoza/izvoza CSV datoteka je omogućiti način dodavanja podataka računu pomoću programa kao što su uređivači teksta i uredski paketi. Uvoz će samo dodati nove transakcije bez prepisivanja postojećih. Ako želiš ručno izraditi CSV datoteku, ovo je zaglavlje koje uključuje sve stupce koje <app>Denaro</app> očekuje pronaći:</p>
 			<p its:translate="no"><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</code></p>
 			<list>
 				<item>
 					<title its:translate="no">ID</title>
-					<p>Transaction Id, should be unique for a given account. Ids start with 1.</p>
+					<p>ID transakcije. Mora biti jedinstven za određeni račun. ID-ovi počinju s 1.</p>
 				</item>
 				<item>
 					<title its:translate="no">Date</title>
-					<p>Transaction date (or start date in case of repeat transaction), should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+					<p>Datum transakcije (ili početni datum u slučaju ponovljajuće transakcije). Mora biti u engleskom (SAD) formatu (<em>MM/DD/YYYY</em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">Description</title>
-					<p>Transaction description, it can contain any characters except semicolon.</p>
+					<p>Opis transakcije. Može sadržati bilo koje znakove osim točke sa zarezom (;).</p>
 				</item>
 				<item>
 					<title its:translate="no">Type</title>
-					<p>Transaction type: 0 for income, 1 for expense.</p>
+					<p>Vrsta transakcije: 0 za prihod, 1 za rashod.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatInterval</title>
-					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
-					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
+					<p>Broj koji predstavlja interval ponavljanja transakcije:</p>
+					<p>0 – Nikada</p>
+					<p>1 – Dnevno</p>
+					<p>2 – Tjedno</p>
+					<p>7 – Dvotjeno</p>
+					<p>3 – Mjesečno</p>
+					<p>4 – Kvartalno</p>
+					<p>5 – Godišnje</p>
+					<p>6 – Dvogodišnje</p>
+					<p>Za detalje o ponovljajućim transakcijama pogledaj <em>Interval ponavljanja</em> na stranici <link xref="transaction">transakcija</link>.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatFrom</title>
-					<p>Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+					<p>Treba biti ID izvorne transakcije ili 0 ako je izvorna transakcija ili -1 ako nije ponavljajuća transakcija.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatEndDate</title>
-					<p>End date for repeat transaction, should be in English (US) format (<em>MM/DD/YYYY</em>). Leave it empty if it's not repeat transaction.</p>
+					<p>Krajnji datum ponavljajuće transakcije. Mora biti u engleskom (SAD) formatu (<em>MM/DD/YYYY</em>). Ostavi polje praznim ako nije ponavljajuća transakcija.</p>
 				</item>
 				<item>
 					<title its:translate="no">Amount</title>
-					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+					<p>Iznos transakcije u engleskom (SAD) formatu (<em>123,456.78</em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">RGBA</title>
-					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>Boja transakcije u <em>rgb(R,G,B)</em> formatu, gdje su <em>R</em>, <em>G</em> i <em>B</em> cijeli brojevi od 0 do 255.</p>
 				</item>
 				<item>
 					<title its:translate="no">UseGroupColor</title>
-					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+					<p>Treba li transakcija koristiti boju grupe: 0 – ne, 1 – da.</p>
 				</item>
 				<item>
 					<title its:translate="no">Group</title>
-					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+					<p>ID grupe transakcije. ID-ovi počinju s brojem 1. Za negrupirane transakcije trebao bi biti -1 (ne 0, jer to nije valjana vrijednost za ID grupe).</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupName</title>
-					<p>Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+					<p>Ime grupe transakcije treba odgovarati ID-u grupe. Može sadržati bilo koje znakove osim točke sa zarezom (;). Ostavi polje prazno za negrupirane transakcije. U svim drugim slučajevima polje ne bi trebalo biti prazno.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupDescription</title>
-					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+					<p>Opis grupe transakcije trebao bi odgovarati ID-u grupe. Može sadržati bilo koje znakove osim točke sa zarezom (;) i može biti prazan. Ostavi polje prazno za negrupiranu transakciju.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupRGBA</title>
-					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>Boja grupe u <em>rgb(R,G,B)</em> formatu, gdje su <em>R</em>, <em>G</em> i <em>B</em> cijeli brojevi od 0 do 255.</p>
 				</item>
 			</list>
-			<p>Receipt and notes are not present in CSV.</p>
+			<p>CSV datoteka ne sadrži podatke o priznanici i bilješke.</p>
 		</item>
 	</list>
 </div>
 <div>
-	<title>Export Formats</title>
-	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+	<title>Formati izvoza</title>
+	<p>Odaberi želiš li izvesti sve podatke ili samo podatke iz trenutačnog prikaza. Ako odabereš trenutačni prikaz, trenutačno prikazane transakcije će se izvesti u prikazanom redoslijedu.</p>
 	<list>
 		<item>
 			<p its:translate="no">Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+			<p>Datoteka će sadržati podatke o računu, popis transakcija i slike priznanica. Transakcije su obojene kao u aplikaciji, ali su boje poluprozirne, kako bi crni tekst uvijek bio jasno vidljiv. Za izvezenu datoteku možeš postaviti lozinku.</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>

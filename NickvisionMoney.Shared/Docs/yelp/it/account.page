@@ -36,7 +36,7 @@
 	</item>
 	<item>
         <title>Soglia per i promemoria delle transazioni</title>
-        <p>The threshold used when showing reminders about upcoming transactions.</p>
+        <p>La soglia utilizzata quando vengono visualizzati promemoria sulle transazioni imminenti.</p>
     </item>
 	<item>
 		<title>Valuta di sistema</title>
@@ -64,8 +64,8 @@
 		<p>Un esempio per capire la differenza tra simbolo e codice: <em>$</em> è un simbolo, <em>USD</em> è un codice.</p>
 	</item>
 	<item>
-        <title>Custom Currency Amount Style</title>
-        <p>A choice of displaying an amount in one of the following ways: </p>
+        <title>Stile importo valuta personalizzato</title>
+        <p>Possibilità di visualizzare un importo in uno dei seguenti modi:</p>
         <list>
             <item><p>$n</p></item>
             <item><p>n$</p></item>
@@ -98,8 +98,8 @@
 		<p>Ogni conto registra se la lista dei gruppi nella finestra principale è nascosta o no. Quando si modifica la visibilità dei gruppi, viene salvata e ripristinata alla riapertura del conto.</p>
 	</item>
 	<item>
-        <title>Tags Visibility</title>
-        <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
+        <title>Visibilità dei tag</title>
+        <p>Ogni account memorizza informazioni sul fatto che l'elenco dei tag nella finestra principale sia nascosto o meno. Ogni volta che modifichi la visibilità dell'elenco dei tag, questo viene salvato e quindi ripristinato quando riapri l'account.</p>
     </item>
 </terms>
 </page>

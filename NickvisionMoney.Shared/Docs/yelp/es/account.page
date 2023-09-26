@@ -71,7 +71,7 @@
 	</item>
 	<item>
         <title>Estilo del total de monedas personalizado</title>
-        <p>Elige entre mostrar las cantidades de una de las siguientes maneras:</p>
+        <p>Elija entre mostrar las cantidades de una de las siguientes maneras:</p>
         <list>
             <item><p>$n</p></item>
             <item><p>n$</p></item>
