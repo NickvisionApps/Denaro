@@ -42,7 +42,7 @@ public class Transfer
     public decimal DestinationAmount => SourceAmount / ConversionRate;
 
     /// <summary>
-    /// Constructs a Tansfer
+    /// Constructs a Transfer
     /// </summary>
     /// <param name="sourceAccountPath">The path to the source account</param>
     /// <param name="sourceAccountName">The name of the source account</param>

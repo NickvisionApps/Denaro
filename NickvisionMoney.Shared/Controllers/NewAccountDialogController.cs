@@ -110,6 +110,10 @@ public class NewAccountDialogController
             {
                 lcMonetary = lcMonetary.Replace('_', '-');
             }
+            if (lcMonetary != null && lcMonetary.Contains('@'))
+            {
+                lcMonetary = lcMonetary.Replace('@', '-');
+            }
             var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
             var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
             return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
@@ -123,7 +127,6 @@ public class NewAccountDialogController
     /// <returns>NameCheckStatus</returns>
     public NameCheckStatus UpdateName(string name)
     {
-        NameCheckStatus result = 0;
         var tempPath = $"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney";
         if(_openAccountPaths.Contains(tempPath))
         {
