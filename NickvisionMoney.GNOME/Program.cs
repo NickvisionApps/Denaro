@@ -44,6 +44,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where exported PDF values were incorrect
+              * Fixed an issue where some system cultures were not read properly
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))

@@ -50,6 +50,7 @@
     <release version="2023.9.3-next" date="2023-09-12">
       <description translatable="no">
         <p>- Fixed an issue where exported PDF values were incorrect</p>
+        <p>- Fixed an issue where some system cultures were not read properly</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
