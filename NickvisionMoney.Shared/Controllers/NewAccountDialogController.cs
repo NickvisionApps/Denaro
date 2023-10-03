@@ -127,7 +127,6 @@ public class NewAccountDialogController
     /// <returns>NameCheckStatus</returns>
     public NameCheckStatus UpdateName(string name)
     {
-        NameCheckStatus result = 0;
         var tempPath = $"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney";
         if(_openAccountPaths.Contains(tempPath))
         {
