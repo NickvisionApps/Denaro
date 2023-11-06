@@ -90,7 +90,7 @@ public class GroupDialogController
     /// <returns>GroupCheckStatus</returns>
     public GroupCheckStatus UpdateGroup(string name, string description, string rgba)
     {
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrWhiteSpace(name))
         {
             return GroupCheckStatus.EmptyName;
         }
