@@ -47,10 +47,11 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.9.3-next" date="2023-09-12">
+    <release version="2023.11.0-next" date="2023-11-14">
       <description translatable="no">
         <p>- Fixed an issue where exported PDF values were incorrect</p>
         <p>- Fixed an issue where some system cultures were not read properly</p>
+        <p>- Updated to GNOME 45 runtime with latest libadwaita design</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

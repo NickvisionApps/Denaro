@@ -45,6 +45,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where exported PDF values were incorrect
               * Fixed an issue where some system cultures were not read properly
+              * Updated to GNOME 45 runtime with latest libadwaita design
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
