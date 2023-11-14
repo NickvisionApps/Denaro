@@ -1,4 +1,4 @@
-using Nickvision.GirExt;
+﻿using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -49,6 +49,7 @@ public partial class AccountView : Adw.BreakpointBin
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
+    private readonly Adw.Breakpoint _compactBreakpoint;
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
@@ -114,7 +115,6 @@ public partial class AccountView : Adw.BreakpointBin
     {
         _controller = controller;
         _parentWindow = parentWindow;
-        _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
@@ -147,6 +147,24 @@ public partial class AccountView : Adw.BreakpointBin
         btnFlapToggle.BindProperty("active", _splitView, "show-sidebar", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeGroup, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        //Compact Breakpoint
+        _compactBreakpoint = Adw.Breakpoint.New(Adw.BreakpointCondition.Parse("max-width: 450sp"));
+        _compactBreakpoint.AddSetter(_splitView, "collapsed", GObject.Value.From(true));
+        _compactBreakpoint.OnApply += (sender, e) => {
+            _transactionsGroup.SetTitle("");
+            foreach (var pair in _transactionRows)
+            {
+                pair.Value.IsSmall = true;
+            }
+        };
+        _compactBreakpoint.OnUnapply += (sender, e) => {
+            _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
+            foreach (var pair in _transactionRows)
+            {
+                pair.Value.IsSmall = false;
+            }
+        };
+        this.AddBreakpoint(_compactBreakpoint);
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
@@ -427,7 +445,6 @@ public partial class AccountView : Adw.BreakpointBin
         }
         OnToggleGroups();
         OnToggleTags();
-        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
         if(_controller.TransactionReminders.Count > 0)
         {
             var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
@@ -627,7 +644,7 @@ public partial class AccountView : Adw.BreakpointBin
         {
             var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
             row.EditTriggered += EditTransaction;
-            row.IsSmall = _parentWindow.DefaultWidth < 450;
+            row.IsSmall = this.GetCurrentBreakpoint() == _compactBreakpoint;
             row.SetVisible(e.Active);
             if (e.Position != null)
             {
@@ -1316,25 +1333,4 @@ public partial class AccountView : Adw.BreakpointBin
     /// Occurs when the date range's end day is changed
     /// </summary>
     private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
-
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">WidthChangedEventArgs</param>
-    private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
-    {
-        foreach (var pair in _transactionRows)
-        {
-            pair.Value.IsSmall = e.SmallWidth;
-        }
-        if (e.SmallWidth)
-        {
-            _transactionsGroup.SetTitle("");
-        }
-        else
-        {
-            _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
-        }
-    }
 }

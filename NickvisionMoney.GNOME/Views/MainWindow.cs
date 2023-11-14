@@ -16,16 +16,6 @@ using static NickvisionMoney.Shared.Helpers.Gettext;
 namespace NickvisionMoney.GNOME.Views;
 
 /// <summary>
-/// EventArgs for WidthChanged Event
-/// </summary>
-public class WidthChangedEventArgs : EventArgs
-{
-    public bool SmallWidth { get; init; }
-
-    public WidthChangedEventArgs(bool smallWidth) => SmallWidth = smallWidth;
-}
-
-/// <summary>
 /// The MainWindow for the application
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
@@ -61,11 +51,6 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     public bool CompactMode { get; private set; }
 
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    public event EventHandler<WidthChangedEventArgs>? WidthChanged;
-
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
         //Window Settings
@@ -96,13 +81,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 UpdateRecentAccounts();
                 return false;
             });
-        };
-        OnNotify += (sender, e) =>
-        {
-            if (e.Pspec.GetName() == "default-width" || e.Pspec.GetName() == "maximized")
-            {
-                OnWidthChanged();
-            }
         };
         _dashboardButton.OnToggled += OnToggleDashboard;
         //Header Bar
@@ -595,18 +573,5 @@ public partial class MainWindow : Adw.ApplicationWindow
             _controller.RemoveRecentAccount(e);
         };
         return row;
-    }
-
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    public void OnWidthChanged()
-    {
-        var compactModeNeeded = DefaultWidth < 450 && !IsMaximized();
-        if (compactModeNeeded != CompactMode)
-        {
-            CompactMode = !CompactMode;
-            WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));
-        }
     }
 }
