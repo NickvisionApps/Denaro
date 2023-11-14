@@ -1,5 +1,4 @@
-﻿using Nickvision.GirExt;
-using NickvisionMoney.GNOME.Helpers;
+﻿using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
@@ -74,17 +73,17 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         OnHide += Hide;
         //Load Config
         _themeRow.SetSelected((uint)_controller.Theme);
-        GdkExt.RGBA.Parse(out var transactionColor, _controller.TransactionDefaultColor);
+        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.TransactionDefaultColor);
         _transactionColorButton.SetExtRgba(transactionColor!.Value);
-        GdkExt.RGBA.Parse(out var transferColor, _controller.TransferDefaultColor);
+        GdkHelpers.RGBA.Parse(out var transferColor, _controller.TransferDefaultColor);
         _transferColorButton.SetExtRgba(transferColor!.Value);
-        GdkExt.RGBA.Parse(out var groupColor, _controller.GroupDefaultColor);
+        GdkHelpers.RGBA.Parse(out var groupColor, _controller.GroupDefaultColor);
         _groupColorButton.SetExtRgba(groupColor!.Value);
-        GdkExt.RGBA.Parse(out var accountCheckingColor, _controller.AccountCheckingColor);
+        GdkHelpers.RGBA.Parse(out var accountCheckingColor, _controller.AccountCheckingColor);
         _accountCheckingColorButton.SetExtRgba(accountCheckingColor!.Value);
-        GdkExt.RGBA.Parse(out var accountSavingsColor, _controller.AccountSavingsColor);
+        GdkHelpers.RGBA.Parse(out var accountSavingsColor, _controller.AccountSavingsColor);
         _accountSavingsColorButton.SetExtRgba(accountSavingsColor!.Value);
-        GdkExt.RGBA.Parse(out var accountBusinessColor, _controller.AccountBusinessColor);
+        GdkHelpers.RGBA.Parse(out var accountBusinessColor, _controller.AccountBusinessColor);
         _accountBusinessColorButton.SetExtRgba(accountBusinessColor!.Value);
         _nativeDigitsRow.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);

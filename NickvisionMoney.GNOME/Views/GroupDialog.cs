@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using System;
@@ -120,7 +119,7 @@ public partial class GroupDialog : Adw.Window
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
-        GdkExt.RGBA.Parse(out var color, _controller.Group.RGBA);
+        GdkHelpers.RGBA.Parse(out var color, _controller.Group.RGBA);
         _colorButton.SetExtRgba(color!.Value);
         Validate();
         _constructing = false;

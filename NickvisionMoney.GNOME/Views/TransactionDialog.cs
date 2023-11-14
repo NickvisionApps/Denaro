@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -212,7 +211,7 @@ public partial class TransactionDialog : Adw.Window
                 _colorDropDown.SetSelected((e.Item2.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-                GdkExt.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
+                GdkHelpers.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
                 _colorButton.SetExtRgba(transactionColor!.Value);
             }
         };
@@ -417,7 +416,7 @@ public partial class TransactionDialog : Adw.Window
         _colorDropDown.SetSelected((_controller.Transaction.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
         _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-        GdkExt.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
+        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
         _colorButton.SetExtRgba(transactionColor!.Value);
         UpdateTagsList();
         _receipt = _controller.Transaction.Receipt;

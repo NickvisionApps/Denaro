@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="GirCore.Adw-1" Version="0.5.0-preview.3" />
     <PackageReference Include="Nickvision.Aura" Version="2023.11.2" />
-    <PackageReference Include="Nickvision.GirExt" Version="2023.7.3" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="7.3.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.6" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using Nickvision.GirExt;
-using NickvisionMoney.GNOME.Controls;
+﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;

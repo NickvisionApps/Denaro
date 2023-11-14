@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
@@ -106,9 +105,9 @@ public partial class GroupRow : Adw.ActionRow
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
         //Color
-        if (!GdkExt.RGBA.Parse(out var color, _group.RGBA))
+        if (!GdkHelpers.RGBA.Parse(out var color, _group.RGBA))
         {
-            GdkExt.RGBA.Parse(out color, _defaultColor);
+            GdkHelpers.RGBA.Parse(out color, _defaultColor);
         }
         //Row Settings
         SetTitle(_group.Name);
