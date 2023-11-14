@@ -1,4 +1,4 @@
-﻿using Nickvision.GirExt;
+using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -19,7 +19,7 @@ namespace NickvisionMoney.GNOME.Views;
 /// <summary>
 /// The AccountView for the application
 /// </summary>
-public partial class AccountView : Adw.Bin
+public partial class AccountView : Adw.BreakpointBin
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -57,7 +57,7 @@ public partial class AccountView : Adw.Bin
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
 
-    [Gtk.Connect] private readonly Adw.Flap _flap;
+    [Gtk.Connect] private readonly Adw.OverlaySplitView _splitView;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
     [Gtk.Connect] private readonly Gtk.SearchEntry _searchDescriptionEntry;
     [Gtk.Connect] private readonly Gtk.Label _totalLabel;
@@ -144,7 +144,7 @@ public partial class AccountView : Adw.Bin
         };
         //Build UI
         builder.Connect(this);
-        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnFlapToggle.BindProperty("active", _splitView, "show-sidebar", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeGroup, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         //Search Description Text
@@ -342,7 +342,7 @@ public partial class AccountView : Adw.Bin
         Page.SetTitle(_controller.AccountTitle);
         //Action Map
         var actionMap = Gio.SimpleActionGroup.New();
-        _flap.InsertActionGroup("account", actionMap);
+        _splitView.InsertActionGroup("account", actionMap);
         //New Transaction Action
         var actNewTransaction = Gio.SimpleAction.New("newTransaction", null);
         actNewTransaction.OnActivate += NewTransaction;
@@ -381,7 +381,7 @@ public partial class AccountView : Adw.Bin
         actionMap.AddAction(actAccountSettings);
         //Toggle Sidebar Action
         var actToggleSidebar = Gio.SimpleAction.New("toggleSidebar", null);
-        actToggleSidebar.OnActivate += (sender, e) => _flap.SetRevealFlap(!_flap.GetRevealFlap());
+        actToggleSidebar.OnActivate += (sender, e) => _splitView.SetCollapsed(!_splitView.GetCollapsed());
         actionMap.AddAction(actToggleSidebar);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
@@ -391,7 +391,7 @@ public partial class AccountView : Adw.Bin
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("F9"), Gtk.NamedAction.New("account.toggleSidebar")));
-        _flap.AddController(_shortcutController);
+        _splitView.AddController(_shortcutController);
     }
 
     /// <summary>

@@ -31,10 +31,23 @@ menu actionsMenu {
   }
 }
 
-Adw.Bin _root {
-  Adw.Flap _flap {
-    flap: Gtk.ScrolledWindow _paneScroll {
-      width-request: 360;
+Adw.BreakpointBin _root {
+  width-request: 360;
+  height-request: 420;
+
+  Adw.Breakpoint {
+    condition ("max-width: 660sp")
+
+    setters {
+      _splitView.collapsed: true;
+    }
+  }
+
+  child: Adw.OverlaySplitView _splitView {
+    min-sidebar-width: 320;
+    max-sidebar-width: 360;
+
+    sidebar: Gtk.ScrolledWindow _paneScroll {
       hscrollbar-policy: never;
     
       Gtk.Box {
@@ -308,13 +321,7 @@ Adw.Bin _root {
             }
           }
         }
-      }  
-      
-      styles ["background"]
-    };
-    
-    separator: Gtk.Separator {
-      orientation: vertical;
+      }
     };
     
     content: Gtk.Overlay {
@@ -487,5 +494,5 @@ Adw.Bin _root {
         styles ["pill", "suggested-action"] 
       }
     };
-  }
+  };
 }
