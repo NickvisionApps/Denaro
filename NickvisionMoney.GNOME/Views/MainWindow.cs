@@ -33,7 +33,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
 
-    [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
+    [Gtk.Connect] private readonly Adw.ToolbarView _toolbarView;
     [Gtk.Connect] private readonly Adw.WindowTitle _windowTitle;
     [Gtk.Connect] private readonly Gtk.MenuButton _accountMenuButton;
     [Gtk.Connect] private readonly Gtk.Popover _accountPopover;
@@ -285,7 +285,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private async void AccountAdded(object? sender, EventArgs e)
     {
         _viewStack.SetVisibleChildName("pageTabs");
-        _headerBar.RemoveCssClass("flat");
+        _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Raised);
         var newAccountView = new AccountView(_controller.GetMostRecentAccountViewController(), this, _tabView, _flapToggleButton, _graphToggleButton, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
@@ -370,7 +370,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (_controller.NumberOfOpenAccounts == 0)
         {
             _viewStack.SetVisibleChildName("pageNoAccounts");
-            _headerBar.AddCssClass("flat");
+            _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Flat);
             _accountMenuButton.SetVisible(false);
             _flapToggleButton.SetVisible(false);
             _graphToggleButton.SetVisible(false);

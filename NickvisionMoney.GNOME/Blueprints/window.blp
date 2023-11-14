@@ -17,11 +17,9 @@ Adw.ApplicationWindow _root {
   default-height: 720;
   width-request: 360;
   
-  Adw.ToolbarView {
-    top-bar-style: raised;
-
+  Adw.ToolbarView _toolbarView {
     [top]
-    Adw.HeaderBar _headerBar {
+    Adw.HeaderBar {
       title-widget: Adw.WindowTitle _windowTitle {};
       
       [start]
