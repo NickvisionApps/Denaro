@@ -29,7 +29,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.ColorDialogButton _accountCheckingColorButton;
     [Gtk.Connect] private readonly Gtk.ColorDialogButton _accountSavingsColorButton;
     [Gtk.Connect] private readonly Gtk.ColorDialogButton _accountBusinessColorButton;
-    [Gtk.Connect] private readonly Gtk.Switch _nativeDigitsSwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _nativeDigitsRow;
     [Gtk.Connect] private readonly Adw.ComboRow _insertSeparatorRow;
     [Gtk.Connect] private readonly Adw.EntryRow _csvBackupRow;
     [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
@@ -86,7 +86,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _accountSavingsColorButton.SetExtRgba(accountSavingsColor!.Value);
         GdkExt.RGBA.Parse(out var accountBusinessColor, _controller.AccountBusinessColor);
         _accountBusinessColorButton.SetExtRgba(accountBusinessColor!.Value);
-        _nativeDigitsSwitch.SetActive(_controller.UseNativeDigits);
+        _nativeDigitsRow.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (File.Exists(_controller.CSVBackupFolder))
         {
@@ -123,7 +123,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _controller.AccountSavingsColor = color.ToString();
         color = _accountBusinessColorButton.GetExtRgba();
         _controller.AccountBusinessColor = color.ToString();
-        _controller.UseNativeDigits = _nativeDigitsSwitch.GetActive();
+        _controller.UseNativeDigits = _nativeDigitsRow.GetActive();
         _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();
         _controller.SaveConfiguration();
         Destroy();

@@ -105,19 +105,13 @@ Adw.PreferencesWindow _root {
     Adw.PreferencesGroup {
       title: _("Locale");
       
-      Adw.ActionRow {
+      Adw.SwitchRow _nativeDigitsSwitch { 
         title: _("Use Native Digits");
         subtitle: _("Whether to use numerals that are native for your locale instead of latin digits.");
-        activatable-widget: _nativeDigitsSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "preferences-desktop-locale-symbolic";
-        }
-
-        [suffix]
-        Gtk.Switch _nativeDigitsSwitch {
-          valign: center;
         }
       }
 

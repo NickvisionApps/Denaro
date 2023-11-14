@@ -26,8 +26,7 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.LevelBar _accountPasswordStrengthBar;
     [Gtk.Connect] private readonly Adw.EntryRow _folderRow;
     [Gtk.Connect] private readonly Gtk.Button _selectFolderButton;
-    [Gtk.Connect] private readonly Adw.ActionRow _overwriteRow;
-    [Gtk.Connect] private readonly Gtk.Switch _overwriteSwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _overwriteRow;
     [Gtk.Connect] private readonly Gtk.Button _nextButton1;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
@@ -91,11 +90,11 @@ public partial class NewAccountDialog : Adw.Window
         _accountPasswordStrengthBar.AddOffsetValue("strong", 4);
         _accountPasswordStrengthBar.AddOffsetValue("verystrong", 5);
         _selectFolderButton.OnClicked += SelectFolder;
-        _overwriteSwitch.OnNotify += (sender, e) =>
+        _overwriteRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "active")
             {
-                _controller.OverwriteExisting = _overwriteSwitch.GetActive();
+                _controller.OverwriteExisting = _overwriteRow.GetActive();
                 ValidateName();
             }
         };

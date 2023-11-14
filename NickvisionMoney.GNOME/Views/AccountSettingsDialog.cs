@@ -26,7 +26,7 @@ public partial class AccountSettingsDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.ComboRow _transactionRemindersRow;
     [Gtk.Connect] private readonly Gtk.Label _reportedCurrencyLabel;
     [Gtk.Connect] private readonly Adw.ActionRow _customCurrencyRow;
-    [Gtk.Connect] private readonly Gtk.Switch _switchCustomCurrency;
+    [Gtk.Connect] private readonly Adw.SwitchRow _useCustomCurrencyRow;
     [Gtk.Connect] private readonly Adw.EntryRow _customSymbolRow;
     [Gtk.Connect] private readonly Adw.EntryRow _customCodeRow;
     [Gtk.Connect] private readonly Adw.ComboRow _customAmountStyleRow;
@@ -120,11 +120,11 @@ public partial class AccountSettingsDialog : Adw.Window
             _viewStack.GetChildByName("main").SetVisible(false);
             _titleLabel.SetLabel(_("Currency"));
         };
-        _switchCustomCurrency.OnNotify += (sender, e) =>
+        _useCustomCurrencyRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "state")
             {
-                _switchCustomCurrency.GrabFocus();
+                _useCustomCurrencyRow.GrabFocus();
             }
             else if (e.Pspec.GetName() == "active")
             {
@@ -284,7 +284,7 @@ public partial class AccountSettingsDialog : Adw.Window
         _accountTypeRow.SetSelected((uint)_controller.Metadata.AccountType);
         _incomeButton.SetActive(_controller.Metadata.DefaultTransactionType == TransactionType.Income);
         _transactionRemindersRow.SetSelected((uint)_controller.Metadata.TransactionRemindersThreshold);
-        _switchCustomCurrency.SetActive(_controller.Metadata.UseCustomCurrency);
+        _useCustomCurrencyRow.SetActive(_controller.Metadata.UseCustomCurrency);
         _customSymbolRow.SetText(_controller.Metadata.CustomCurrencySymbol ?? "");
         _customCodeRow.SetText(_controller.Metadata.CustomCurrencyCode ?? "");
         _customAmountStyleRow.SetModel(Gtk.StringList.New(_controller.CustomCurrencyAmountStyleStrings));
@@ -358,7 +358,7 @@ public partial class AccountSettingsDialog : Adw.Window
         };
         var customDecimalDigits = _customDecimalDigitsRow.GetSelected() == 5 ? 99 : _customDecimalDigitsRow.GetSelected() + 2;
         var oldSymbol = _controller.Metadata.CustomCurrencySymbol;
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _switchCustomCurrency.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _useCustomCurrencyRow.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
         _customCurrencyRow.RemoveCssClass("error");
