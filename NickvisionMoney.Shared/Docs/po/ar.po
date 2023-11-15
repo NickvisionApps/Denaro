@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-06-11 05:58+0000\n"
-"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
+"PO-Revision-Date: 2023-11-15 11:53+0000\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/ar/>\n"
 "Language: ar\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -37,7 +37,7 @@ msgstr ""
 #: yelp/C/import-export.page:14 yelp/C/index.page:14 yelp/C/transaction.page:14
 #: yelp/C/transfer.page:14
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #. (itstool) path: page/title
 #: yelp/C/account.page:20
@@ -436,7 +436,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr ""
+msgstr "لون حساب الأعمال"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -762,7 +762,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:33
 msgid "Amount"
-msgstr ""
+msgstr "المَبلغ"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:34
@@ -855,7 +855,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Tags"
-msgstr ""
+msgstr "الوسوم"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62
