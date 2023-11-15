@@ -440,7 +440,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
             Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
+            Metadata.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             Metadata.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
             Metadata.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
@@ -554,7 +554,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The income amount</returns>
-    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) => 
+    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) =>
         (transactionIds ?? Transactions.Keys)
         .Select(id => Transactions[id])
         .Where(transaction => transaction.Type == TransactionType.Income)
@@ -615,7 +615,7 @@ public class Account : IDisposable
             .Where(transaction => transaction.Type == TransactionType.Expense)
             .Sum(transaction => transaction.Amount);
     }
-    
+
     /// <summary>
     /// Gets the balance amount left after income and expense for a group
     /// </summary>
@@ -1078,7 +1078,7 @@ public class Account : IDisposable
         }
         CalculateTransactionReminders();
     }
-    
+
     /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
@@ -1325,7 +1325,7 @@ public class Account : IDisposable
             amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
-            if(string.IsNullOrEmpty(rgba))
+            if (string.IsNullOrEmpty(rgba))
             {
                 rgba = defaultTransactionRGBA;
             }
@@ -1528,7 +1528,7 @@ public class Account : IDisposable
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Tags\n";
         var transactions = Transactions;
-        if(exportMode == ExportMode.CurrentView)
+        if (exportMode == ExportMode.CurrentView)
         {
             transactions = new Dictionary<uint, Transaction>();
             foreach (var id in filteredIds)
@@ -1741,7 +1741,7 @@ public class Account : IDisposable
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
-                                if(string.IsNullOrEmpty(rgba))
+                                if (string.IsNullOrEmpty(rgba))
                                 {
                                     hex = "#32FFFFFF";
                                 }

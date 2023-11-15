@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME;
 

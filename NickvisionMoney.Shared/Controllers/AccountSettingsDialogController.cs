@@ -1,7 +1,6 @@
 ﻿using Nickvision.Aura;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Globalization;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -44,7 +43,7 @@ public class AccountSettingsDialogController
     /// The new password for the account, if available
     /// </summary>
     public string? NewPassword { get; private set; }
-    
+
     /// <summary>
     /// Strings to show for a custom currency's amount styles if available
     /// </summary>

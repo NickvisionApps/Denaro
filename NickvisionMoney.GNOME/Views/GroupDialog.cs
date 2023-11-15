@@ -42,7 +42,7 @@ public partial class GroupDialog : Adw.Window
         builder.Connect(this);
         var idString = _controller.Group.Id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(_controller.UseNativeDigits && "0" != nativeDigits[0])
+        if (_controller.UseNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])

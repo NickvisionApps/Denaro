@@ -159,7 +159,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
         }
         _disposed = true;
     }
-    
+
     /// <summary>
     /// Creates a repeat transaction from this transaction
     /// </summary>

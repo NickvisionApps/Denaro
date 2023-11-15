@@ -121,7 +121,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild
         _editButton.SetVisible(_transaction.RepeatFrom <= 0);
         _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
     }
-    
+
     /// <summary>
     /// Occurs when the edit button is clicked
     /// </summary>

@@ -23,7 +23,7 @@ public class CurrencyConverterDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.EntryRow _sourceAmountRow;
     [Gtk.Connect] private readonly Adw.EntryRow _resultAmountRow;
     [Gtk.Connect] private readonly Gtk.Button _copyResultButton;
-    
+
     /// <summary>
     /// Constructs a CurrencyConverterDialog
     /// </summary>
@@ -77,7 +77,7 @@ public class CurrencyConverterDialog : Adw.Window
             }
         };
     }
-    
+
     /// <summary>
     /// Constructs a CurrencyConverterDialog
     /// </summary>

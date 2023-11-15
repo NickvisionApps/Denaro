@@ -137,7 +137,7 @@ public class MainWindowController : IDisposable
             };
         }
     }
-    
+
     /// <summary>
     /// Whether or not to show graphs
     /// </summary>
@@ -216,7 +216,7 @@ public class MainWindowController : IDisposable
         }
     }
 
-    
+
     /// <summary>
     /// Creates an AccountViewController for the specified path
     /// </summary>
@@ -264,14 +264,14 @@ public class MainWindowController : IDisposable
     /// <returns>True if new account created and opened, else false</returns>
     public async Task<bool> NewAccountAsync(NewAccountDialogController controller)
     {
-        if(IsAccountOpen(controller.Path))
+        if (IsAccountOpen(controller.Path))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to overwrite an opened account."), NotificationSeverity.Error));
             return false;
         }
         if (File.Exists(controller.Path))
         {
-            if(controller.OverwriteExisting)
+            if (controller.OverwriteExisting)
             {
                 File.Delete(controller.Path);
             }
@@ -296,11 +296,11 @@ public class MainWindowController : IDisposable
         AccountAdded?.Invoke(this, EventArgs.Empty);
         await Task.Delay(100);
         accountViewController.UpdateMetadata(controller.Metadata);
-        if(!string.IsNullOrEmpty(controller.Password))
+        if (!string.IsNullOrEmpty(controller.Password))
         {
             accountViewController.SetPassword(controller.Password, false);
         }
-        if(File.Exists(controller.ImportFile))
+        if (File.Exists(controller.ImportFile))
         {
             await accountViewController.ImportFromFileAsync(controller.ImportFile);
         }

@@ -139,7 +139,7 @@ public partial class AccountSettingsDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(_customSymbolRow.GetText().Length > 3)
+                if (_customSymbolRow.GetText().Length > 3)
                 {
                     _customSymbolRow.SetText(_customSymbolRow.GetText().Substring(0, 3));
                     _customSymbolRow.SetPosition(-1);
@@ -154,7 +154,7 @@ public partial class AccountSettingsDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(_customCodeRow.GetText().Length > 3)
+                if (_customCodeRow.GetText().Length > 3)
                 {
                     _customCodeRow.SetText(_customCodeRow.GetText().Substring(0, 3));
                     _customCodeRow.SetPosition(-1);

@@ -34,7 +34,7 @@ public class CurrencyConversion
     /// The result amount
     /// </summary>
     public decimal ResultAmount => SourceAmount * ConversionRate;
-    
+
     /// <summary>
     /// Constructs a CurrencyConversion
     /// </summary>
@@ -57,7 +57,7 @@ public class CurrencyConversion
 public static class CurrencyConversionService
 {
     private static readonly HttpClient _http;
-    
+
     /// <summary>
     /// Constructs a static CurrencyConversionService
     /// </summary>

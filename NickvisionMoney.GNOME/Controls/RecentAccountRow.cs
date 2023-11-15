@@ -12,7 +12,7 @@ public partial class RecentAccountRow : Adw.ActionRow
 {
     private readonly RecentAccount _recentAccount;
     private readonly GdkHelpers.RGBA _color;
-    
+
     [Gtk.Connect] private readonly Gtk.Image _prefixColor;
     [Gtk.Connect] private readonly Gtk.Button _prefixButton;
     [Gtk.Connect] private readonly Gtk.DrawingArea _tagArea;

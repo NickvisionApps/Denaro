@@ -42,7 +42,7 @@ public enum RemindersThreshold
 public class AccountMetadata : ICloneable
 {
     private int? _customCurrencyAmountStyle;
-    
+
     /// <summary>
     /// The name of the account
     /// </summary>
@@ -198,7 +198,7 @@ public class AccountMetadata : ICloneable
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Loads metadata from an account file
     /// </summary>

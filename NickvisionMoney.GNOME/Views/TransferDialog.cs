@@ -296,7 +296,7 @@ public partial class TransferDialog : Adw.Window
         }
         return false;
     }
-    
+
     /// <summary>
     /// Sets up the ConversionRateGroup
     /// </summary>

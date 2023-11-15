@@ -11,12 +11,12 @@ public class TagButton : Gtk.ToggleButton
     /// Tag string
     /// </summary>
     public string Tag { get; init; }
-    
+
     /// <summary>
     /// Occurs when toggle state has changed
     /// </summary>
     public event EventHandler<(string Tag, bool Filter)>? FilterChanged;
-    
+
     /// <summary>
     /// Construct TagButton
     /// </summary>

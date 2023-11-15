@@ -2,7 +2,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
-using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -104,7 +103,7 @@ public partial class AccountView : Adw.BreakpointBin
     [Gtk.Connect] private readonly Gtk.Box _transactionsHeaderBox;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _transactionsScroll;
     [Gtk.Connect] private readonly Gtk.FlowBox _transactionsFlowBox;
-    
+
     /// <summary>
     /// The Page widget
     /// </summary>
@@ -149,7 +148,7 @@ public partial class AccountView : Adw.BreakpointBin
         //Compact Breakpoint
         _compactBreakpoint = Adw.Breakpoint.New(Adw.BreakpointCondition.Parse("max-width: 450sp"));
         _compactBreakpoint.AddSetter(_splitView, "collapsed", GObject.Value.From(true));
-        _compactBreakpoint.OnApply += (sender, e) => 
+        _compactBreakpoint.OnApply += (sender, e) =>
         {
             _transactionsGroup.SetTitle("");
             foreach (var pair in _transactionRows)
@@ -157,7 +156,7 @@ public partial class AccountView : Adw.BreakpointBin
                 pair.Value.IsSmall = true;
             }
         };
-        _compactBreakpoint.OnUnapply += (sender, e) => 
+        _compactBreakpoint.OnUnapply += (sender, e) =>
         {
             _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
             foreach (var pair in _transactionRows)
@@ -446,7 +445,7 @@ public partial class AccountView : Adw.BreakpointBin
         }
         OnToggleGroups();
         OnToggleTags();
-        if(_controller.TransactionReminders.Count > 0)
+        if (_controller.TransactionReminders.Count > 0)
         {
             var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
             remindersDialog.Present();
@@ -548,7 +547,7 @@ public partial class AccountView : Adw.BreakpointBin
         Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf2, width / 2, 0);
         ctx.Paint();
     }
-    
+
     /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
@@ -586,7 +585,7 @@ public partial class AccountView : Adw.BreakpointBin
         }
         return false;
     }
-    
+
     /// <summary>
     /// Updates a group row
     /// </summary>
@@ -688,7 +687,7 @@ public partial class AccountView : Adw.BreakpointBin
         }
         return false;
     }
-    
+
     /// <summary>
     /// Updates a transaction row
     /// </summary>
@@ -1166,7 +1165,7 @@ public partial class AccountView : Adw.BreakpointBin
         _toggleGroupsButton.SetIconName(!_controller.ShowGroupsList ? "view-reveal-symbolic" : "view-conceal-symbolic");
         _groupsList.SetVisible(_controller.ShowGroupsList);
     }
-    
+
     /// <summary>
     /// Occurs when the user presses the button to show/hide tags
     /// </summary>

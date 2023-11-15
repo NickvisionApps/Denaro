@@ -2,7 +2,6 @@ using Nickvision.Aura;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -62,7 +61,7 @@ public class NewAccountDialogController
     /// A file to use to import data from
     /// </summary>
     public string ImportFile { get; set; }
-    
+
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -89,7 +88,7 @@ public class NewAccountDialogController
         OverwriteExisting = true;
         ImportFile = "";
     }
-    
+
     /// <summary>
     /// Updates the account name
     /// </summary>
@@ -98,11 +97,11 @@ public class NewAccountDialogController
     public NameCheckStatus UpdateName(string name)
     {
         var tempPath = $"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney";
-        if(_openAccountPaths.Contains(tempPath))
+        if (_openAccountPaths.Contains(tempPath))
         {
             return NameCheckStatus.AlreadyOpen;
         }
-        else if(File.Exists(tempPath) && !OverwriteExisting)
+        else if (File.Exists(tempPath) && !OverwriteExisting)
         {
             return NameCheckStatus.Exists;
         }

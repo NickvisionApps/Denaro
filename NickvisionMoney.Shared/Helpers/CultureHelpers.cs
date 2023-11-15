@@ -52,7 +52,7 @@ public static class CultureHelpers
         {
             lcMonetary = lcMonetary.Replace('_', '-');
         }
-            if (lcMonetary != null && lcMonetary.Contains('@'))
+        if (lcMonetary != null && lcMonetary.Contains('@'))
         {
             lcMonetary = lcMonetary.Replace('@', '-');
         }

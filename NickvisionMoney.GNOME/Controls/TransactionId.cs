@@ -50,7 +50,7 @@ public partial class TransactionId : Gtk.Overlay
         var blue = (int)(color.Value.Blue * 255);
         var idString = _id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(useNativeDigits && "0" != nativeDigits[0])
+        if (useNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])

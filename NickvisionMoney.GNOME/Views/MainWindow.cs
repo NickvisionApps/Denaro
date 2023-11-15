@@ -179,7 +179,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("import-export"), 0);
+            toast.OnButtonClicked += (s, ex) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("import-export"), 0);
         }
         else if (e.Action == "open-export")
         {
@@ -532,7 +532,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
-        if(_controller.RecentAccounts.Count > 0)
+        if (_controller.RecentAccounts.Count > 0)
         {
             _newAccountButton.RemoveCssClass("suggested-action");
         }

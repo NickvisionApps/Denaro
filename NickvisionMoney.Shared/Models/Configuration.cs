@@ -1,5 +1,5 @@
 ﻿using Nickvision.Aura;
-﻿using Nickvision.Aura.Configuration;
+using Nickvision.Aura.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json.Serialization;
@@ -216,15 +216,15 @@ public class Configuration : ConfigurationBase
         RecentAccount1 = new RecentAccount();
         RecentAccount2 = new RecentAccount();
         RecentAccount3 = new RecentAccount();
-        if(ra3.Path != recentAccount.Path)
+        if (ra3.Path != recentAccount.Path)
         {
             AddRecentAccount(ra3);
         }
-        if(ra2.Path != recentAccount.Path)
+        if (ra2.Path != recentAccount.Path)
         {
             AddRecentAccount(ra2);
         }
-        if(ra1.Path != recentAccount.Path)
+        if (ra1.Path != recentAccount.Path)
         {
             AddRecentAccount(ra1);
         }

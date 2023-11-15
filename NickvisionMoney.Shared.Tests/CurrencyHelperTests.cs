@@ -1,5 +1,5 @@
-using System.Globalization;
 using NickvisionMoney.Shared.Helpers;
+using System.Globalization;
 using Xunit;
 
 namespace NickvisionMoney.Shared.Tests;
@@ -7,7 +7,7 @@ namespace NickvisionMoney.Shared.Tests;
 public class CurrencyHelperTests
 {
     private static decimal[] SampleAmounts = { 0M, 109M, 100M, 10920M, 0.002M, 1.2M, 12.00000004M, 1.0234567890M };
-    
+
     public static IEnumerable<object[]> GetSampleDataWithRealCultures()
     {
         var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).AsEnumerable();
@@ -19,7 +19,7 @@ public class CurrencyHelperTests
             }
         }
     }
-    
+
     public static IEnumerable<object[]> GetSampleDataWithCustomCultures()
     {
         var culture1 = (CultureInfo)CultureInfo.InvariantCulture.Clone();
@@ -59,7 +59,7 @@ public class CurrencyHelperTests
             yield return new object[] { culture4, amount };
         }
     }
-    
+
     [Theory]
     [MemberData(nameof(GetSampleDataWithRealCultures))]
     public void ToAmountString_RealCulturesShouldWorkByDefault(CultureInfo culture, decimal amount)
@@ -68,7 +68,7 @@ public class CurrencyHelperTests
         var result = amount.ToAmountString(culture, false);
         Assert.Equal(expected, result);
     }
-    
+
     [Theory]
     [MemberData(nameof(GetSampleDataWithCustomCultures))]
     public void ToAmountString_CustomCulturesShouldWorkByDefault(CultureInfo culture, decimal amount)
@@ -86,7 +86,7 @@ public class CurrencyHelperTests
     public void ToAmountString_RealCulturesShouldWorkWithNativeDigits(CultureInfo culture, decimal amount)
     {
         var expected = amount.ToString("C", culture);
-        expected =  expected
+        expected = expected
             .Replace("0", culture.NumberFormat.NativeDigits[0])
             .Replace("1", culture.NumberFormat.NativeDigits[1])
             .Replace("2", culture.NumberFormat.NativeDigits[2])
@@ -100,7 +100,7 @@ public class CurrencyHelperTests
         var result = amount.ToAmountString(culture, true);
         Assert.Equal(expected, result);
     }
-    
+
     [Theory]
     [MemberData(nameof(GetSampleDataWithRealCultures))]
     public void ToAmountString_RealCulturesShouldWorkWithoutCurrencySymbol(CultureInfo culture, decimal amount)
@@ -110,7 +110,7 @@ public class CurrencyHelperTests
         var result = amount.ToAmountString(culture, false, false);
         Assert.Equal(expected, result);
     }
-    
+
     [Theory]
     [MemberData(nameof(GetSampleDataWithCustomCultures))]
     public void ToAmountString_CustomCulturesShouldWorkWithoutCurrencySymbol(CultureInfo culture, decimal amount)
@@ -121,7 +121,7 @@ public class CurrencyHelperTests
         var result = amount.ToAmountString(culture, false, false);
         Assert.Equal(expected, result);
     }
-    
+
     [Theory]
     [MemberData(nameof(GetSampleDataWithRealCultures))]
     public void ToAmountString_AllCulturesShouldWorkWithOverwriteDecimal(CultureInfo culture, decimal amount)
@@ -152,14 +152,14 @@ public class CurrencyHelperTests
     {
         amount = amount.Replace(culture.NumberFormat.CurrencySymbol, "").Trim();
     }
-    
+
     private static void FormatUnlimitedDecimals(ref string number, CultureInfo culture, bool force = false)
     {
-        if (culture.NumberFormat.CurrencyDecimalDigits != 99 && !force) 
+        if (culture.NumberFormat.CurrencyDecimalDigits != 99 && !force)
             return;
-        
+
         number = number.TrimEnd('0');
-        if(number.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
+        if (number.EndsWith(culture.NumberFormat.CurrencyDecimalSeparator))
             number = number.Replace(culture.NumberFormat.CurrencyDecimalSeparator, "");
     }
 
