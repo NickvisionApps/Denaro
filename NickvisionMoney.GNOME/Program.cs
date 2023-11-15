@@ -44,6 +44,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where exported PDF values were incorrect
               * Fixed an issue where some system cultures were not read properly
+              * Fixed an issue where scrolling the sidebar with the mouse over the calendar would scroll the calendar instead
               * Updated to GNOME 45 runtime with latest libadwaita design
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
