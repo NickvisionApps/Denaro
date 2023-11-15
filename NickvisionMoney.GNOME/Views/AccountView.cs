@@ -149,21 +149,23 @@ public partial class AccountView : Adw.BreakpointBin
         //Compact Breakpoint
         _compactBreakpoint = Adw.Breakpoint.New(Adw.BreakpointCondition.Parse("max-width: 450sp"));
         _compactBreakpoint.AddSetter(_splitView, "collapsed", GObject.Value.From(true));
-        _compactBreakpoint.OnApply += (sender, e) => {
+        _compactBreakpoint.OnApply += (sender, e) => 
+        {
             _transactionsGroup.SetTitle("");
             foreach (var pair in _transactionRows)
             {
                 pair.Value.IsSmall = true;
             }
         };
-        _compactBreakpoint.OnUnapply += (sender, e) => {
+        _compactBreakpoint.OnUnapply += (sender, e) => 
+        {
             _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
             foreach (var pair in _transactionRows)
             {
                 pair.Value.IsSmall = false;
             }
         };
-        this.AddBreakpoint(_compactBreakpoint);
+        AddBreakpoint(_compactBreakpoint);
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
@@ -643,7 +645,7 @@ public partial class AccountView : Adw.BreakpointBin
         {
             var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
             row.EditTriggered += EditTransaction;
-            row.IsSmall = this.GetCurrentBreakpoint() == _compactBreakpoint;
+            row.IsSmall = GetCurrentBreakpoint() == _compactBreakpoint;
             row.SetVisible(e.Active);
             if (e.Position != null)
             {
