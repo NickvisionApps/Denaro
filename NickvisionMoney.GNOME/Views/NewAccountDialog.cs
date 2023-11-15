@@ -90,6 +90,7 @@ public partial class NewAccountDialog : Adw.Window
         _accountPasswordStrengthBar.AddOffsetValue("strong", 4);
         _accountPasswordStrengthBar.AddOffsetValue("verystrong", 5);
         _selectFolderButton.OnClicked += SelectFolder;
+        _overwriteRow.SetActive(_controller.OverwriteExisting);
         _overwriteRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "active")

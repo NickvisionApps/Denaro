@@ -85,7 +85,7 @@ public class NewAccountDialogController
         Metadata = new AccountMetadata("", AccountType.Checking);
         Password = null;
         Folder = "";
-        OverwriteExisting = true;
+        OverwriteExisting = false;
         ImportFile = "";
     }
 
