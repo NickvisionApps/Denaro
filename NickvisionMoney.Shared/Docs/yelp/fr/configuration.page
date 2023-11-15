@@ -43,7 +43,7 @@
 		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>Épargne</em> dans une liste des comptes récents.</p>
 	</item>
 	<item>
-		<title>Couleur des comptes d’affaires</title>
+		<title>Couleur du compte d’affaires</title>
 		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>affaires</em> dans une liste des comptes récents.</p>
 	</item>
 	<item>

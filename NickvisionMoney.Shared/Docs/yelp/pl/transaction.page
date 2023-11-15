@@ -27,7 +27,7 @@
 		<p>No limit on length. It can't contain semicolon.</p>
 	</item>
 	<item>
-		<title>Amount</title>
+		<title>Kwota</title>
 		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
 	</item>
 	<item>
