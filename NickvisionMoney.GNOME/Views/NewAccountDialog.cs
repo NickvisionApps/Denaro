@@ -288,7 +288,7 @@ public partial class NewAccountDialog : Adw.Window
         var checkStatus = _controller.UpdateName(_accountNameRow.GetText());
         if (checkStatus == NameCheckStatus.Valid)
         {
-            _nextButton1.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
+            _nextButton1.SetSensitive(!string.IsNullOrWhiteSpace(_accountNameRow.GetText()));
         }
         else
         {
@@ -311,7 +311,7 @@ public partial class NewAccountDialog : Adw.Window
     /// </summary>
     private void ShowPasswordStrength()
     {
-        if (!string.IsNullOrEmpty(_accountPasswordRow.GetText()))
+        if (!string.IsNullOrWhiteSpace(_accountPasswordRow.GetText()))
         {
             var strength = Credential.GetPasswordStrength(_accountPasswordRow.GetText());
             _accountPasswordStrengthRow.SetVisible(true);

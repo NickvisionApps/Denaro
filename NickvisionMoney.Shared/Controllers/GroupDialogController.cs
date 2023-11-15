@@ -58,7 +58,7 @@ public class GroupDialogController
         _existingNames = existingNames;
         Group = (Group)group.Clone();
         IsEditing = true;
-        if (string.IsNullOrEmpty(Group.RGBA))
+        if (string.IsNullOrWhiteSpace(Group.RGBA))
         {
             Group.RGBA = groupDefaultColor;
         }
@@ -90,7 +90,7 @@ public class GroupDialogController
     /// <returns>GroupCheckStatus</returns>
     public GroupCheckStatus UpdateGroup(string name, string description, string rgba)
     {
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrWhiteSpace(name))
         {
             return GroupCheckStatus.EmptyName;
         }

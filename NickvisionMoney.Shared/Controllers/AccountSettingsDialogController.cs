@@ -81,7 +81,7 @@ public class AccountSettingsDialogController
     public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, int? customAmountStyle, string? customDecimalSeparator, string? customGroupSeparator, int? customDecimalDigits, TransactionType defaultTransactionType, RemindersThreshold transactionReminder, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrWhiteSpace(name))
         {
             result |= AccountMetadataCheckStatus.EmptyName;
         }
@@ -152,7 +152,7 @@ public class AccountSettingsDialogController
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
         Metadata.TransactionRemindersThreshold = transactionReminder;
-        NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
+        NewPassword = string.IsNullOrWhiteSpace(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
         return AccountMetadataCheckStatus.Valid;
     }
 

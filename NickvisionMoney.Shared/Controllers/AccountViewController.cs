@@ -571,7 +571,7 @@ public class AccountViewController : IDisposable
         _account.Password = password;
         if (showNotification)
         {
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrWhiteSpace(password))
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was removed."), NotificationSeverity.Success));
             }
@@ -1127,7 +1127,7 @@ public class AccountViewController : IDisposable
         var groupBalances = new Dictionary<uint, (decimal Income, decimal Expense)>();
         foreach (var pair in _account.Transactions)
         {
-            if (!string.IsNullOrEmpty(SearchDescription))
+            if (!string.IsNullOrWhiteSpace(SearchDescription))
             {
                 if (!pair.Value.Description.ToLower().Contains(SearchDescription.ToLower()))
                 {

@@ -114,7 +114,7 @@ public class TransactionDialogController : IDisposable
         CopyRequested = false;
         OriginalRepeatInterval = Transaction.RepeatInterval;
         CultureForNumberString = cultureNumber;
-        if (string.IsNullOrEmpty(Transaction.RGBA))
+        if (string.IsNullOrWhiteSpace(Transaction.RGBA))
         {
             Transaction.RGBA = DefaultTransactionColor;
         }
@@ -300,7 +300,7 @@ public class TransactionDialogController : IDisposable
     {
         TransactionCheckStatus result = 0;
         var amount = 0m;
-        if (string.IsNullOrEmpty(description))
+        if (string.IsNullOrWhiteSpace(description))
         {
             result |= TransactionCheckStatus.EmptyDescription;
         }

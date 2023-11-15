@@ -110,7 +110,7 @@ public class DashboardViewController
                     name = nameBuilder.ToString();
                     if (!Groups.ContainsKey(name))
                     {
-                        Groups[name] = (new DashboardAmount(), string.IsNullOrEmpty(group.RGBA) ? defaultColor : group.RGBA);
+                        Groups[name] = (new DashboardAmount(), string.IsNullOrWhiteSpace(group.RGBA) ? defaultColor : group.RGBA);
                     }
                     if (!Groups[name].DashboardAmount.Currencies.Contains(currency))
                     {

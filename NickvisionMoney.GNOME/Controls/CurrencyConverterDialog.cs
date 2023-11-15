@@ -70,7 +70,7 @@ public class CurrencyConverterDialog : Adw.Window
         };
         _copyResultButton.OnClicked += (sender, e) =>
         {
-            if (!string.IsNullOrEmpty(_resultAmountRow.GetText()))
+            if (!string.IsNullOrWhiteSpace(_resultAmountRow.GetText()))
             {
                 _resultAmountRow.GetClipboard().SetText(_resultAmountRow.GetText());
                 _toastOverlay.AddToast(Adw.Toast.New(_("Result was copied to clipboard.")));
@@ -136,7 +136,7 @@ public class CurrencyConverterDialog : Adw.Window
     private async Task OnAmountRowChangedAsync()
     {
         _sourceAmountRow.RemoveCssClass("error");
-        if (string.IsNullOrEmpty(_sourceAmountRow.GetText()))
+        if (string.IsNullOrWhiteSpace(_sourceAmountRow.GetText()))
         {
             _resultAmountRow.SetText("");
         }

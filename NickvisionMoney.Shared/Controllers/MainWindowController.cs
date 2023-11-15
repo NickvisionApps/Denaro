@@ -296,7 +296,7 @@ public class MainWindowController : IDisposable
         AccountAdded?.Invoke(this, EventArgs.Empty);
         await Task.Delay(100);
         accountViewController.UpdateMetadata(controller.Metadata);
-        if (!string.IsNullOrEmpty(controller.Password))
+        if (!string.IsNullOrWhiteSpace(controller.Password))
         {
             accountViewController.SetPassword(controller.Password, false);
         }
@@ -326,7 +326,7 @@ public class MainWindowController : IDisposable
             controller.TransferSent += OnTransferSent;
             try
             {
-                if (controller.AccountNeedsPassword && string.IsNullOrEmpty(password))
+                if (controller.AccountNeedsPassword && string.IsNullOrWhiteSpace(password))
                 {
                     password = await AccountLoginAsync!(controller.AccountPath);
                 }
