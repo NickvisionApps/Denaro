@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-11-15 07:06+0000\n"
-"Last-Translator: Michał Dominik <fancy0duck@duck.com>\n"
+"PO-Revision-Date: 2023-11-15 13:38+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/pl/>\n"
 "Language: pl\n"
@@ -17,13 +17,13 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "ewm"
 
 #. (itstool) path: info/title
 #: yelp/C/account.page:8
 msgctxt "link"
 msgid "Account 🏦"
-msgstr ""
+msgstr "Konto 🏦"
 
 #. (itstool) path: credit/name
 #: yelp/C/account.page:10 yelp/C/configuration.page:10
@@ -42,7 +42,7 @@ msgstr "Nicholas Logozzo"
 #. (itstool) path: page/title
 #: yelp/C/account.page:20
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. (itstool) path: page/p
 #: yelp/C/account.page:21
@@ -74,7 +74,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:30
@@ -87,7 +87,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:33
 msgid "Account Type"
-msgstr ""
+msgstr "Rodzaj konta"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:34
@@ -103,7 +103,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "Rodzaj domyślnej transakcji"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:38
@@ -177,7 +177,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:57
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "Użyj własnej waluty"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:58
@@ -189,7 +189,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:61
 msgid "Custom Currency Symbol"
-msgstr ""
+msgstr "Niestandardowy symbol waluty"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:62
@@ -199,7 +199,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:65
 msgid "Custom Currency Code"
-msgstr ""
+msgstr "Niestandardowy kod waluty"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:66
@@ -226,22 +226,22 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:73
 msgid "$n"
-msgstr ""
+msgstr "$n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:74
 msgid "n$"
-msgstr ""
+msgstr "n$"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
 msgid "$ n"
-msgstr ""
+msgstr "$ n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:76
 msgid "n $"
-msgstr ""
+msgstr "n $"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:80
@@ -269,7 +269,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:88
 msgid "Password"
-msgstr ""
+msgstr "Hasło"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:89
@@ -298,7 +298,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:96
 msgid "Sorting Order"
-msgstr ""
+msgstr "Kolejność sortowania"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:97
@@ -311,7 +311,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:100
 msgid "Groups Visibility"
-msgstr ""
+msgstr "Widzialność grup"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:101
@@ -324,7 +324,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:104
 msgid "Tags Visibility"
-msgstr ""
+msgstr "Widoczność tagów"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:105
@@ -338,7 +338,7 @@ msgstr ""
 #: yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr ""
+msgstr "Konfiguracja 🔧"
 
 #. (itstool) path: page/title
 #: yelp/C/configuration.page:20
@@ -373,7 +373,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "Domyślny kolor transakcji"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -387,7 +387,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "Domyślny kolor przelewu"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -400,7 +400,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr ""
+msgstr "Domyślny kolor grupy"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -412,7 +412,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:41
 msgid "Checking Account Color"
-msgstr ""
+msgstr "Kolor konta bieżącego"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
@@ -424,7 +424,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:45
 msgid "Savings Account Color"
-msgstr ""
+msgstr "Kolor konta oszczędnościowego"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:46
@@ -448,7 +448,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:53
 msgid "Use Native Digits"
-msgstr ""
+msgstr "Używaj cyfr rodzimych"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
@@ -461,7 +461,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
-msgstr ""
+msgstr "Wstawianie separatora dziesiętnego"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:58
@@ -488,17 +488,17 @@ msgstr ""
 #: yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
-msgstr ""
+msgstr "Import/Eksport 📤"
 
 #. (itstool) path: page/title
 #: yelp/C/import-export.page:20
 msgid "Import/Export"
-msgstr ""
+msgstr "Import/Eksport"
 
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:22
 msgid "Import Formats"
-msgstr ""
+msgstr "Formaty importu"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:26
@@ -555,42 +555,42 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:56
 msgid "0 - Never"
-msgstr ""
+msgstr "0 - Nigdy"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:57
 msgid "1 - Daily"
-msgstr ""
+msgstr "1 - Codziennie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:58
 msgid "2 - Weekly"
-msgstr ""
+msgstr "2 - Tygodniowo"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
-msgstr ""
+msgstr "7 - Co dwa tygodnie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:60
 msgid "3 - Monthly"
-msgstr ""
+msgstr "3 - Miesięcznie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
-msgstr ""
+msgstr "4 - Kwartalnie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:62
 msgid "5 - Yearly"
-msgstr ""
+msgstr "5 - Rocznie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:63
 msgid "6 - Biyearly"
-msgstr ""
+msgstr "6 - Co dwa lata"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:64
@@ -668,7 +668,7 @@ msgstr ""
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:108
 msgid "Export Formats"
-msgstr ""
+msgstr "Formaty eksportu"
 
 #. (itstool) path: div/p
 #: yelp/C/import-export.page:109
@@ -691,18 +691,18 @@ msgstr ""
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Pomoc Denaro"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Pomoc Denaro"
 
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Denaro Help"
-msgstr ""
+msgstr "<_:media-1/> Pomoc Denaro"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -724,12 +724,12 @@ msgstr ""
 #: yelp/C/transaction.page:8
 msgctxt "link"
 msgid "Transaction 🧾"
-msgstr ""
+msgstr "Transakcja 🧾"
 
 #. (itstool) path: page/title
 #: yelp/C/transaction.page:20
 msgid "Transaction"
-msgstr ""
+msgstr "Transakcja"
 
 #. (itstool) path: page/p
 #: yelp/C/transaction.page:21
@@ -752,7 +752,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:29
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:30
@@ -774,7 +774,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "Rodzaj"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
@@ -787,7 +787,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:41
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:42
@@ -798,7 +798,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr ""
+msgstr "Interwał powtarzania"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -818,7 +818,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "Data końca powtarzania"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
@@ -830,7 +830,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:53
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:54
@@ -841,7 +841,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:57
 msgid "Color"
-msgstr ""
+msgstr "Kolor"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:58
@@ -871,7 +871,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:65
 msgid "Receipt"
-msgstr ""
+msgstr "Potwierdzenie"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:66
@@ -885,7 +885,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:69
 msgid "Notes"
-msgstr ""
+msgstr "Uwagi"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:70
@@ -896,12 +896,12 @@ msgstr ""
 #: yelp/C/transfer.page:8
 msgctxt "link"
 msgid "Transfer 💸"
-msgstr ""
+msgstr "Przelew 💸"
 
 #. (itstool) path: page/title
 #: yelp/C/transfer.page:20
 msgid "Transfer"
-msgstr ""
+msgstr "Przelew"
 
 #. (itstool) path: page/p
 #: yelp/C/transfer.page:21
