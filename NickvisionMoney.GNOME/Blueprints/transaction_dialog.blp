@@ -6,9 +6,8 @@ Adw.Window _root {
   resizable: false;
   modal: true;
 
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
       title-widget: Gtk.Label {};
 
@@ -28,8 +27,6 @@ Adw.Window _root {
           label: _("Make a Copy");
         };
       }
-
-      styles ["flat"]
     }
 
     Gtk.WindowHandle {

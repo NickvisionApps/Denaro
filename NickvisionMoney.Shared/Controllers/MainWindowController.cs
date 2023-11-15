@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -71,6 +71,7 @@ public class MainWindowController : IDisposable
         }
         _openAccounts = new List<AccountViewController>();
         Aura.Init("org.nickvision.money", "Nickvision Denaro");
+        AppInfo.EnglishShortName = "Denaro";
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
@@ -85,7 +86,7 @@ public class MainWindowController : IDisposable
             Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
         Aura.Active.SetConfig<Configuration>("config");
-        AppInfo.Version = "2023.9.3-next";
+        AppInfo.Version = "2023.11.0-next";
         AppInfo.ShortName = _("Denaro");
         AppInfo.Description = _("Manage your personal finances");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
@@ -136,7 +137,7 @@ public class MainWindowController : IDisposable
             };
         }
     }
-    
+
     /// <summary>
     /// Whether or not to show graphs
     /// </summary>
@@ -215,7 +216,7 @@ public class MainWindowController : IDisposable
         }
     }
 
-    
+
     /// <summary>
     /// Creates an AccountViewController for the specified path
     /// </summary>
@@ -263,14 +264,14 @@ public class MainWindowController : IDisposable
     /// <returns>True if new account created and opened, else false</returns>
     public async Task<bool> NewAccountAsync(NewAccountDialogController controller)
     {
-        if(IsAccountOpen(controller.Path))
+        if (IsAccountOpen(controller.Path))
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to overwrite an opened account."), NotificationSeverity.Error));
             return false;
         }
         if (File.Exists(controller.Path))
         {
-            if(controller.OverwriteExisting)
+            if (controller.OverwriteExisting)
             {
                 File.Delete(controller.Path);
             }
@@ -295,11 +296,11 @@ public class MainWindowController : IDisposable
         AccountAdded?.Invoke(this, EventArgs.Empty);
         await Task.Delay(100);
         accountViewController.UpdateMetadata(controller.Metadata);
-        if(!string.IsNullOrEmpty(controller.Password))
+        if (!string.IsNullOrEmpty(controller.Password))
         {
             accountViewController.SetPassword(controller.Password, false);
         }
-        if(File.Exists(controller.ImportFile))
+        if (File.Exists(controller.ImportFile))
         {
             await accountViewController.ImportFromFileAsync(controller.ImportFile);
         }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using static NickvisionMoney.Shared.Helpers.Gettext;
 
 namespace NickvisionMoney.GNOME;
 
@@ -24,7 +23,7 @@ public partial class Program
     /// </summary>
     /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public static int Main(string[] args) => new Program(args).Run();
+    public static int Main(string[] args) => new Program(args).Run(args);
 
     /// <summary>
     /// Constructs a Program
@@ -45,6 +44,8 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where exported PDF values were incorrect
               * Fixed an issue where some system cultures were not read properly
+              * Fixed an issue where scrolling the sidebar with the mouse over the calendar would scroll the calendar instead
+              * Updated to GNOME 45 runtime with latest libadwaita design
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
@@ -73,12 +74,16 @@ public partial class Program
     /// <summary>
     /// Runs the program
     /// </summary>
+    /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public int Run()
+    public int Run(string[] args)
     {
         try
         {
-            return _application.RunWithSynchronizationContext();
+            var argv = new string[args.Length + 1];
+            argv[0] = "org.nickvision.money";
+            args.CopyTo(argv, 1);
+            return _application.RunWithSynchronizationContext(argv);
         }
         catch (Exception ex)
         {

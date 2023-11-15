@@ -2,7 +2,6 @@ using Nickvision.Aura;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -62,7 +61,7 @@ public class NewAccountDialogController
     /// A file to use to import data from
     /// </summary>
     public string ImportFile { get; set; }
-    
+
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -89,37 +88,7 @@ public class NewAccountDialogController
         OverwriteExisting = true;
         ImportFile = "";
     }
-    
-    /// <summary>
-    /// The system reported currency string (Ex: "$ (USD)")
-    /// </summary>
-    public string ReportedCurrencyString
-    {
-        get
-        {
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            if (lcMonetary != null && lcMonetary.Contains('@'))
-            {
-                lcMonetary = lcMonetary.Replace('@', '-');
-            }
-            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
-        }
-    }
-    
+
     /// <summary>
     /// Updates the account name
     /// </summary>
@@ -128,11 +97,11 @@ public class NewAccountDialogController
     public NameCheckStatus UpdateName(string name)
     {
         var tempPath = $"{Folder}{System.IO.Path.DirectorySeparatorChar}{name}.nmoney";
-        if(_openAccountPaths.Contains(tempPath))
+        if (_openAccountPaths.Contains(tempPath))
         {
             return NameCheckStatus.AlreadyOpen;
         }
-        else if(File.Exists(tempPath) && !OverwriteExisting)
+        else if (File.Exists(tempPath) && !OverwriteExisting)
         {
             return NameCheckStatus.Exists;
         }

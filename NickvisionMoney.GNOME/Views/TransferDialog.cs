@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -6,7 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -297,7 +296,7 @@ public partial class TransferDialog : Adw.Window
         }
         return false;
     }
-    
+
     /// <summary>
     /// Sets up the ConversionRateGroup
     /// </summary>

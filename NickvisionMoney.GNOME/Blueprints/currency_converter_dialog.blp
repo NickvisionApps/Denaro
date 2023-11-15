@@ -8,15 +8,10 @@ Adw.Window _root {
   resizable: true;
   
   content: Adw.ToastOverlay _toastOverlay {
-    Gtk.Box {
-      hexpand: true;
-      vexpand: true;
-      orientation: vertical;
-      
+    Adw.ToolbarView {
+      [top]
       Adw.HeaderBar _header {
         title-widget: Gtk.Label {};
-  
-        styles ["flat"]
       }
       
       Gtk.WindowHandle {

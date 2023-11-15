@@ -1,11 +1,11 @@
 using Nickvision.Aura.Keyring;
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -26,8 +26,7 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.LevelBar _accountPasswordStrengthBar;
     [Gtk.Connect] private readonly Adw.EntryRow _folderRow;
     [Gtk.Connect] private readonly Gtk.Button _selectFolderButton;
-    [Gtk.Connect] private readonly Adw.ActionRow _overwriteRow;
-    [Gtk.Connect] private readonly Gtk.Switch _overwriteSwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _overwriteRow;
     [Gtk.Connect] private readonly Gtk.Button _nextButton1;
     [Gtk.Connect] private readonly Adw.ComboRow _accountTypeRow;
     [Gtk.Connect] private readonly Gtk.ToggleButton _incomeButton;
@@ -49,9 +48,9 @@ public partial class NewAccountDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _selectImportFileButton;
     [Gtk.Connect] private readonly Gtk.Button _clearImportFileButton;
     [Gtk.Connect] private readonly Gtk.Button _createButton;
-    
+
     public event EventHandler? OnApply;
-    
+
     /// <summary>
     /// Constructs a NewAccountDialog
     /// </summary>
@@ -71,14 +70,14 @@ public partial class NewAccountDialog : Adw.Window
         _startButton.OnClicked += GoForward;
         _accountNameRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 ValidateName();
             }
         };
         _accountPasswordRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 ShowPasswordStrength();
             }
@@ -91,11 +90,11 @@ public partial class NewAccountDialog : Adw.Window
         _accountPasswordStrengthBar.AddOffsetValue("strong", 4);
         _accountPasswordStrengthBar.AddOffsetValue("verystrong", 5);
         _selectFolderButton.OnClicked += SelectFolder;
-        _overwriteSwitch.OnNotify += (sender, e) =>
+        _overwriteRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "active")
+            if (e.Pspec.GetName() == "active")
             {
-                _controller.OverwriteExisting = _overwriteSwitch.GetActive();
+                _controller.OverwriteExisting = _overwriteRow.GetActive();
                 ValidateName();
             }
         };
@@ -115,7 +114,7 @@ public partial class NewAccountDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(_customSymbolRow.GetText().Length > 3)
+                if (_customSymbolRow.GetText().Length > 3)
                 {
                     _customSymbolRow.SetText(_customSymbolRow.GetText().Substring(0, 3));
                     _customSymbolRow.SetPosition(-1);
@@ -127,7 +126,7 @@ public partial class NewAccountDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "text")
             {
-                if(_customCodeRow.GetText().Length > 3)
+                if (_customCodeRow.GetText().Length > 3)
                 {
                     _customCodeRow.SetText(_customCodeRow.GetText().Substring(0, 3));
                     _customCodeRow.SetPosition(-1);
@@ -207,11 +206,11 @@ public partial class NewAccountDialog : Adw.Window
         _createButton.OnClicked += Apply;
         //Load
         _controller.Folder = GLib.Functions.GetUserSpecialDir(GLib.UserDirectory.DirectoryDocuments) ?? "";
-        if(!Directory.Exists(_controller.Folder))
+        if (!Directory.Exists(_controller.Folder))
         {
             _controller.Folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}{Path.DirectorySeparatorChar}Documents";
         }
-        if(!Directory.Exists(_controller.Folder))
+        if (!Directory.Exists(_controller.Folder))
         {
             _controller.Folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
@@ -219,9 +218,9 @@ public partial class NewAccountDialog : Adw.Window
         _accountTypeRow.SetSelected(0);
         _incomeButton.SetActive(true);
         _transactionRemindersRow.SetSelected(0);
-        _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
+        _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{CultureHelpers.ReportedCurrencyString}</b>");
     }
-    
+
     /// <summary>
     /// Constructs a NewAccountDialog
     /// </summary>
@@ -230,7 +229,7 @@ public partial class NewAccountDialog : Adw.Window
     public NewAccountDialog(NewAccountDialogController controller, Gtk.Window parent) : this(Builder.FromFile("new_account_dialog.ui"), controller, parent)
     {
     }
-    
+
     /// <summary>
     /// Navigates the carousel backwards
     /// </summary>
@@ -242,7 +241,7 @@ public partial class NewAccountDialog : Adw.Window
         _carousel.ScrollTo(_carousel.GetNthPage(_currentPageNumber), true);
         _backButton.SetVisible(_currentPageNumber > 0);
     }
-    
+
     /// <summary>
     /// Navigates the carousel forwards
     /// </summary>
@@ -278,7 +277,7 @@ public partial class NewAccountDialog : Adw.Window
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Validates the name of the account
     /// </summary>
@@ -287,18 +286,18 @@ public partial class NewAccountDialog : Adw.Window
         _accountNameRow.RemoveCssClass("error");
         _accountNameRow.SetTitle(_("Account Name"));
         var checkStatus = _controller.UpdateName(_accountNameRow.GetText());
-        if(checkStatus == NameCheckStatus.Valid)
+        if (checkStatus == NameCheckStatus.Valid)
         {
             _nextButton1.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
         }
         else
         {
-            if(checkStatus.HasFlag(NameCheckStatus.AlreadyOpen))
+            if (checkStatus.HasFlag(NameCheckStatus.AlreadyOpen))
             {
                 _accountNameRow.AddCssClass("error");
                 _accountNameRow.SetTitle(_("Account Name (Opened)"));
             }
-            if(checkStatus.HasFlag(NameCheckStatus.Exists))
+            if (checkStatus.HasFlag(NameCheckStatus.Exists))
             {
                 _accountNameRow.AddCssClass("error");
                 _accountNameRow.SetTitle(_("Account Name (Exists)"));
@@ -306,7 +305,7 @@ public partial class NewAccountDialog : Adw.Window
             _nextButton1.SetSensitive(false);
         }
     }
-    
+
     /// <summary>
     /// Calculates and shows the account password's strength
     /// </summary>
@@ -342,7 +341,7 @@ public partial class NewAccountDialog : Adw.Window
             _expenseButton.AddCssClass("denaro-expense");
         }
     }
-    
+
     /// <summary>
     /// Validates the custom currency of the account
     /// </summary>
@@ -427,7 +426,7 @@ public partial class NewAccountDialog : Adw.Window
             _createButton.SetSensitive(false);
         }
     }
-    
+
     /// <summary>
     /// Selects a file to import data from
     /// </summary>
@@ -456,7 +455,7 @@ public partial class NewAccountDialog : Adw.Window
         var filterQif = Gtk.FileFilter.New();
         filterQif.SetName("Quicken Format (*.qif)");
         filterQif.AddPattern("*.qif");
-        filterQif.AddPattern("*.QIF");    
+        filterQif.AddPattern("*.QIF");
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterAll);
         filters.Append(filterCsv);

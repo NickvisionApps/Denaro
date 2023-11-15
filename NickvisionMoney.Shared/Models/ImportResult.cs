@@ -9,12 +9,12 @@ namespace NickvisionMoney.Shared.Models;
 public class ImportResult
 {
     private static readonly ImportResult _empty;
-    
+
     /// <summary>
     /// An empty ImportResult
     /// </summary>
     public static ImportResult Empty => _empty;
-    
+
     /// <summary>
     /// The list of newly added transaction ids
     /// </summary>
@@ -31,7 +31,7 @@ public class ImportResult
     /// Whether or not the ImportResult is empty
     /// </summary>
     public bool IsEmpty => NewTransactionIds.Count == 0 && NewGroupIds.Count == 0 && NewTags.Count == 0;
-    
+
     /// <summary>
     /// Static constructor for ImportResult
     /// </summary>
@@ -39,7 +39,7 @@ public class ImportResult
     {
         _empty = new ImportResult();
     }
-        
+
     /// <summary>
     /// Creates an ImportResult
     /// </summary>

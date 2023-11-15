@@ -1,8 +1,8 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -11,19 +11,9 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
-
-/// <summary>
-/// EventArgs for WidthChanged Event
-/// </summary>
-public class WidthChangedEventArgs : EventArgs
-{
-    public bool SmallWidth { get; init; }
-
-    public WidthChangedEventArgs(bool smallWidth) => SmallWidth = smallWidth;
-}
 
 /// <summary>
 /// The MainWindow for the application
@@ -33,7 +23,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
 
-    [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
+    [Gtk.Connect] private readonly Adw.ToolbarView _toolbarView;
     [Gtk.Connect] private readonly Adw.WindowTitle _windowTitle;
     [Gtk.Connect] private readonly Gtk.MenuButton _accountMenuButton;
     [Gtk.Connect] private readonly Gtk.Popover _accountPopover;
@@ -60,11 +50,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _actCloseAccount;
 
     public bool CompactMode { get; private set; }
-
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    public event EventHandler<WidthChangedEventArgs>? WidthChanged;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -96,13 +81,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 UpdateRecentAccounts();
                 return false;
             });
-        };
-        OnNotify += (sender, e) =>
-        {
-            if (e.Pspec.GetName() == "default-width" || e.Pspec.GetName() == "maximized")
-            {
-                OnWidthChanged();
-            }
         };
         _dashboardButton.OnToggled += OnToggleDashboard;
         //Header Bar
@@ -157,7 +135,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -201,7 +179,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, Help.GetHelpURL("import-export"), 0);
+            toast.OnButtonClicked += (s, ex) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("import-export"), 0);
         }
         else if (e.Action == "open-export")
         {
@@ -285,7 +263,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private async void AccountAdded(object? sender, EventArgs e)
     {
         _viewStack.SetVisibleChildName("pageTabs");
-        _headerBar.RemoveCssClass("flat");
+        _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Raised);
         var newAccountView = new AccountView(_controller.GetMostRecentAccountViewController(), this, _tabView, _flapToggleButton, _graphToggleButton, UpdateSubtitle);
         _tabView.SetSelectedPage(newAccountView.Page);
         _accountViews.Add(newAccountView.Page);
@@ -370,7 +348,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (_controller.NumberOfOpenAccounts == 0)
         {
             _viewStack.SetVisibleChildName("pageNoAccounts");
-            _headerBar.AddCssClass("flat");
+            _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Flat);
             _accountMenuButton.SetVisible(false);
             _flapToggleButton.SetVisible(false);
             _graphToggleButton.SetVisible(false);
@@ -554,7 +532,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void UpdateRecentAccountsOnStart()
     {
-        if(_controller.RecentAccounts.Count > 0)
+        if (_controller.RecentAccounts.Count > 0)
         {
             _newAccountButton.RemoveCssClass("suggested-action");
         }
@@ -595,18 +573,5 @@ public partial class MainWindow : Adw.ApplicationWindow
             _controller.RemoveRecentAccount(e);
         };
         return row;
-    }
-
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    public void OnWidthChanged()
-    {
-        var compactModeNeeded = DefaultWidth < 450 && !IsMaximized();
-        if (compactModeNeeded != CompactMode)
-        {
-            CompactMode = !CompactMode;
-            WidthChanged?.Invoke(this, new WidthChangedEventArgs(compactModeNeeded));
-        }
     }
 }

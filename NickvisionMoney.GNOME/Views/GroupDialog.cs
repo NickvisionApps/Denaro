@@ -1,9 +1,8 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Globalization;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -43,7 +42,7 @@ public partial class GroupDialog : Adw.Window
         builder.Connect(this);
         var idString = _controller.Group.Id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(_controller.UseNativeDigits && "0" != nativeDigits[0])
+        if (_controller.UseNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])
@@ -120,7 +119,7 @@ public partial class GroupDialog : Adw.Window
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
-        GdkExt.RGBA.Parse(out var color, _controller.Group.RGBA);
+        GdkHelpers.RGBA.Parse(out var color, _controller.Group.RGBA);
         _colorButton.SetExtRgba(color!.Value);
         Validate();
         _constructing = false;

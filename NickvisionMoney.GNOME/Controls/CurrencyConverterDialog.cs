@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -23,7 +23,7 @@ public class CurrencyConverterDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.EntryRow _sourceAmountRow;
     [Gtk.Connect] private readonly Adw.EntryRow _resultAmountRow;
     [Gtk.Connect] private readonly Gtk.Button _copyResultButton;
-    
+
     /// <summary>
     /// Constructs a CurrencyConverterDialog
     /// </summary>
@@ -77,7 +77,7 @@ public class CurrencyConverterDialog : Adw.Window
             }
         };
     }
-    
+
     /// <summary>
     /// Constructs a CurrencyConverterDialog
     /// </summary>

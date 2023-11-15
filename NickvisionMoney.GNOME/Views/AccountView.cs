@@ -1,9 +1,7 @@
-﻿using Nickvision.GirExt;
-using NickvisionMoney.GNOME.Controls;
+﻿using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
-using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -12,14 +10,14 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
 /// <summary>
 /// The AccountView for the application
 /// </summary>
-public partial class AccountView : Adw.Bin
+public partial class AccountView : Adw.BreakpointBin
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct MoneyDateTime
@@ -49,6 +47,7 @@ public partial class AccountView : Adw.Bin
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
+    private readonly Adw.Breakpoint _compactBreakpoint;
     private readonly Gtk.Adjustment _transactionsScrollAdjustment;
     private readonly Gtk.ShortcutController _shortcutController;
     private readonly Action<string> _updateSubtitle;
@@ -57,7 +56,7 @@ public partial class AccountView : Adw.Bin
     private Dictionary<uint, TransactionRow> _transactionRows;
     private uint _currentGraphPage;
 
-    [Gtk.Connect] private readonly Adw.Flap _flap;
+    [Gtk.Connect] private readonly Adw.OverlaySplitView _splitView;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _paneScroll;
     [Gtk.Connect] private readonly Gtk.SearchEntry _searchDescriptionEntry;
     [Gtk.Connect] private readonly Gtk.Label _totalLabel;
@@ -104,7 +103,7 @@ public partial class AccountView : Adw.Bin
     [Gtk.Connect] private readonly Gtk.Box _transactionsHeaderBox;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _transactionsScroll;
     [Gtk.Connect] private readonly Gtk.FlowBox _transactionsFlowBox;
-    
+
     /// <summary>
     /// The Page widget
     /// </summary>
@@ -114,7 +113,6 @@ public partial class AccountView : Adw.Bin
     {
         _controller = controller;
         _parentWindow = parentWindow;
-        _parentWindow.WidthChanged += OnWindowWidthChanged;
         _isAccountLoading = false;
         _updateSubtitle = updateSubtitle;
         _groupRows = new Dictionary<uint, GroupRow>();
@@ -144,9 +142,29 @@ public partial class AccountView : Adw.Bin
         };
         //Build UI
         builder.Connect(this);
-        btnFlapToggle.BindProperty("active", _flap, "reveal-flap", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        btnFlapToggle.BindProperty("active", _splitView, "show-sidebar", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeGroup, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
+        //Compact Breakpoint
+        _compactBreakpoint = Adw.Breakpoint.New(Adw.BreakpointCondition.Parse("max-width: 450sp"));
+        _compactBreakpoint.AddSetter(_splitView, "collapsed", GObject.Value.From(true));
+        _compactBreakpoint.OnApply += (sender, e) =>
+        {
+            _transactionsGroup.SetTitle("");
+            foreach (var pair in _transactionRows)
+            {
+                pair.Value.IsSmall = true;
+            }
+        };
+        _compactBreakpoint.OnUnapply += (sender, e) =>
+        {
+            _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
+            foreach (var pair in _transactionRows)
+            {
+                pair.Value.IsSmall = false;
+            }
+        };
+        AddBreakpoint(_compactBreakpoint);
         //Search Description Text
         _searchDescriptionEntry.OnSearchChanged += (sender, e) => _controller.SearchDescription = _searchDescriptionEntry.GetText();
         //Account Income
@@ -342,7 +360,7 @@ public partial class AccountView : Adw.Bin
         Page.SetTitle(_controller.AccountTitle);
         //Action Map
         var actionMap = Gio.SimpleActionGroup.New();
-        _flap.InsertActionGroup("account", actionMap);
+        _splitView.InsertActionGroup("account", actionMap);
         //New Transaction Action
         var actNewTransaction = Gio.SimpleAction.New("newTransaction", null);
         actNewTransaction.OnActivate += NewTransaction;
@@ -381,7 +399,7 @@ public partial class AccountView : Adw.Bin
         actionMap.AddAction(actAccountSettings);
         //Toggle Sidebar Action
         var actToggleSidebar = Gio.SimpleAction.New("toggleSidebar", null);
-        actToggleSidebar.OnActivate += (sender, e) => _flap.SetRevealFlap(!_flap.GetRevealFlap());
+        actToggleSidebar.OnActivate += (sender, e) => _splitView.SetCollapsed(!_splitView.GetCollapsed());
         actionMap.AddAction(actToggleSidebar);
         //Shortcut Controller
         _shortcutController = Gtk.ShortcutController.New();
@@ -391,7 +409,7 @@ public partial class AccountView : Adw.Bin
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl>G"), Gtk.NamedAction.New("account.newGroup")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("<Ctrl><Shift>N"), Gtk.NamedAction.New("account.newTransaction")));
         _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("F9"), Gtk.NamedAction.New("account.toggleSidebar")));
-        _flap.AddController(_shortcutController);
+        _splitView.AddController(_shortcutController);
     }
 
     /// <summary>
@@ -427,8 +445,7 @@ public partial class AccountView : Adw.Bin
         }
         OnToggleGroups();
         OnToggleTags();
-        OnWindowWidthChanged(null, new WidthChangedEventArgs(_parentWindow.CompactMode));
-        if(_controller.TransactionReminders.Count > 0)
+        if (_controller.TransactionReminders.Count > 0)
         {
             var remindersDialog = new RemindersDialog(_parentWindow, _controller.AppInfo.ID, _("Upcoming transactions"), _controller.TransactionReminders);
             remindersDialog.Present();
@@ -530,7 +547,7 @@ public partial class AccountView : Adw.Bin
         Gdk.Functions.CairoSetSourcePixbuf(ctx, pixbuf2, width / 2, 0);
         ctx.Paint();
     }
-    
+
     /// <summary>
     /// Creates a group row and adds it to the view
     /// </summary>
@@ -568,7 +585,7 @@ public partial class AccountView : Adw.Bin
         }
         return false;
     }
-    
+
     /// <summary>
     /// Updates a group row
     /// </summary>
@@ -627,7 +644,7 @@ public partial class AccountView : Adw.Bin
         {
             var row = new TransactionRow(e.Model, _controller.Groups, _controller.CultureForNumberString, _controller.UseNativeDigits, _controller.TransactionDefaultColor);
             row.EditTriggered += EditTransaction;
-            row.IsSmall = _parentWindow.DefaultWidth < 450;
+            row.IsSmall = GetCurrentBreakpoint() == _compactBreakpoint;
             row.SetVisible(e.Active);
             if (e.Position != null)
             {
@@ -670,7 +687,7 @@ public partial class AccountView : Adw.Bin
         }
         return false;
     }
-    
+
     /// <summary>
     /// Updates a transaction row
     /// </summary>
@@ -1148,7 +1165,7 @@ public partial class AccountView : Adw.Bin
         _toggleGroupsButton.SetIconName(!_controller.ShowGroupsList ? "view-reveal-symbolic" : "view-conceal-symbolic");
         _groupsList.SetVisible(_controller.ShowGroupsList);
     }
-    
+
     /// <summary>
     /// Occurs when the user presses the button to show/hide tags
     /// </summary>
@@ -1316,25 +1333,4 @@ public partial class AccountView : Adw.Bin
     /// Occurs when the date range's end day is changed
     /// </summary>
     private void OnDateRangeEndDayChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
-
-    /// <summary>
-    /// Occurs when the window's width is changed
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">WidthChangedEventArgs</param>
-    private void OnWindowWidthChanged(object? sender, WidthChangedEventArgs e)
-    {
-        foreach (var pair in _transactionRows)
-        {
-            pair.Value.IsSmall = e.SmallWidth;
-        }
-        if (e.SmallWidth)
-        {
-            _transactionsGroup.SetTitle("");
-        }
-        else
-        {
-            _transactionsGroup.SetTitle(_n("{0} transaction", "{0} transactions", _controller.FilteredTransactionsCount, _controller.FilteredTransactionsCount));
-        }
-    }
 }

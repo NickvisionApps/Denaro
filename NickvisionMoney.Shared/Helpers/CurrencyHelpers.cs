@@ -45,7 +45,7 @@ public static class CurrencyHelpers
             };
             result = string.Format(formatString, result);
         }
-        if(useNativeDigits && "0" != culture.NumberFormat.NativeDigits[0])
+        if (useNativeDigits && "0" != culture.NumberFormat.NativeDigits[0])
         {
             result = result.Replace("0", culture.NumberFormat.NativeDigits[0])
                            .Replace("1", culture.NumberFormat.NativeDigits[1])

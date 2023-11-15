@@ -15,7 +15,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -77,7 +77,7 @@ public class TransactionDialogController : IDisposable
     /// The CultureInfo to use when displaying a number string
     /// </summary>
     public CultureInfo CultureForNumberString { get; init; }
-    
+
     /// <summary>
     /// Whether to use native digits
     /// </summary>
@@ -149,12 +149,12 @@ public class TransactionDialogController : IDisposable
         Transaction.RGBA = DefaultTransactionColor;
         AccountTags.Remove(AccountTags[0]); //remove untagged
     }
-    
+
     /// <summary>
     /// Finalizes the TransactionDialogController
     /// </summary>
     ~TransactionDialogController() => Dispose(false);
-    
+
     /// <summary>
     /// The repeat interval index used by GUI
     /// </summary>

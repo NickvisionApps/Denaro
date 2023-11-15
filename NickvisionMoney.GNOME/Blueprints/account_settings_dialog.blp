@@ -6,9 +6,8 @@ Adw.Window _root {
   modal: true;
   resizable: false;
   
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar _header {
       title-widget: Gtk.Label {};
 
@@ -22,8 +21,6 @@ Adw.Window _root {
           label: _("Back");
         };
       }
-
-      styles ["flat"]
     }
 
     Gtk.WindowHandle {
@@ -152,20 +149,13 @@ Adw.Window _root {
               }
 
               Adw.PreferencesGroup {
-                Adw.ActionRow {
+                Adw.SwitchRow _useCustomCurrencyRow {
                   title: _("Use Custom Currency");
-
-                  [suffix]
-                  Gtk.Switch _switchCustomCurrency {
-                    valign: center;
-                  }
-
-                  activatable-widget: _switchCustomCurrency;
                 }
               }
 
               Adw.PreferencesGroup {
-                sensitive: bind _switchCustomCurrency.active;
+                sensitive: bind _useCustomCurrencyRow.active;
 
                 Adw.EntryRow _customSymbolRow {
                   title: _("Currency Symbol");

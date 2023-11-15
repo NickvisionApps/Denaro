@@ -1,7 +1,6 @@
 ﻿using Nickvision.Aura;
 using NickvisionMoney.Shared.Models;
 using System;
-using System.Globalization;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -44,7 +43,7 @@ public class AccountSettingsDialogController
     /// The new password for the account, if available
     /// </summary>
     public string? NewPassword { get; private set; }
-    
+
     /// <summary>
     /// Strings to show for a custom currency's amount styles if available
     /// </summary>
@@ -60,32 +59,6 @@ public class AccountSettingsDialogController
         Metadata = (AccountMetadata)metadata.Clone();
         IsEncrypted = isEncrypted;
         NewPassword = null;
-    }
-
-    /// <summary>
-    /// The system reported currency string (Ex: "$ (USD)")
-    /// </summary>
-    public string ReportedCurrencyString
-    {
-        get
-        {
-            var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
-            if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
-            }
-            else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
-            {
-                lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
-            }
-            if (lcMonetary != null && lcMonetary.Contains('_'))
-            {
-                lcMonetary = lcMonetary.Replace('_', '-');
-            }
-            var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-            var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
-            return $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
-        }
     }
 
     /// <summary>

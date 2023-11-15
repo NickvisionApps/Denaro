@@ -1,8 +1,7 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -12,8 +11,8 @@ namespace NickvisionMoney.GNOME.Controls;
 public partial class RecentAccountRow : Adw.ActionRow
 {
     private readonly RecentAccount _recentAccount;
-    private readonly GdkExt.RGBA _color;
-    
+    private readonly GdkHelpers.RGBA _color;
+
     [Gtk.Connect] private readonly Gtk.Image _prefixColor;
     [Gtk.Connect] private readonly Gtk.Button _prefixButton;
     [Gtk.Connect] private readonly Gtk.DrawingArea _tagArea;
@@ -40,7 +39,7 @@ public partial class RecentAccountRow : Adw.ActionRow
         _prefixButton.OnClicked += (sender, e) => Selected?.Invoke(this, _recentAccount);
         _removeButton.SetVisible(canRemove);
         _removeButton.OnClicked += (sender, e) => RemoveRequested?.Invoke(this, _recentAccount);
-        GdkExt.RGBA.Parse(out var color, colorString);
+        GdkHelpers.RGBA.Parse(out var color, colorString);
         _color = color!.Value;
         var luma = _color.Red * 0.2126 + _color.Green * 0.7152 + _color.Blue * 0.0722;
         if (onStartScreen)

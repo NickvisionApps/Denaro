@@ -14,11 +14,11 @@ public class AutocompleteBox<T> : Gtk.Box
     private readonly Gtk.EventControllerKey _parentKeyController;
     private bool _canHide;
     private int _downCount;
-    
+
     [Gtk.Connect] private readonly Adw.PreferencesGroup _group;
-    
+
     public event EventHandler<(string, T)>? SuggestionAccepted;
-    
+
     /// <summary>
     /// Constructs an AutocompleteDialog
     /// </summary>
@@ -36,17 +36,17 @@ public class AutocompleteBox<T> : Gtk.Box
         _parentKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _parentKeyController.OnKeyPressed += (sender, e) =>
         {
-            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+            if (e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
             {
-                if(GetVisible())
+                if (GetVisible())
                 {
                     AcceptSuggestion(0);
                     return true;
                 }
             }
-            if(e.Keyval == 65364) //down arrow
+            if (e.Keyval == 65364) //down arrow
             {
-                if(GetVisible())
+                if (GetVisible())
                 {
                     _downCount = 1;
                     _canHide = false;
@@ -59,18 +59,18 @@ public class AutocompleteBox<T> : Gtk.Box
         _parent.AddController(_parentKeyController);
         _parent.OnStateFlagsChanged += (sender, e) =>
         {
-            if(!_canHide)
+            if (!_canHide)
             {
                 _canHide = true;
             }
-            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            else if (e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
             {
                 _parent.SetActivatesDefault(true);
                 SetVisible(false);
             }
         };
     }
-    
+
     /// <summary>
     /// Constructs an AutocompleteDialog
     /// </summary>
@@ -78,7 +78,7 @@ public class AutocompleteBox<T> : Gtk.Box
     public AutocompleteBox(Adw.EntryRow parent) : this(Builder.FromFile("autocomplete_box.ui"), parent)
     {
     }
-    
+
     /// <summary>
     /// Grabs focus for the box
     /// </summary>
@@ -90,13 +90,13 @@ public class AutocompleteBox<T> : Gtk.Box
     /// <param name="suggestions">A list of suggestions and their subtext and models</param>
     public void UpdateSuggestions(List<(string, string, T)> suggestions)
     {
-        foreach(var row in _rows)
+        foreach (var row in _rows)
         {
             _group.Remove(row);
         }
         _rows.Clear();
         _downCount = 0;
-        foreach(var suggestion in suggestions)
+        foreach (var suggestion in suggestions)
         {
             var row = Adw.ActionRow.New();
             row.SetTitle(suggestion.Item1);
@@ -111,12 +111,12 @@ public class AutocompleteBox<T> : Gtk.Box
             keyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
             keyController.OnKeyPressed += (sender, e) =>
             {
-                if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+                if (e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
                 {
                     row.Activate();
                     return true;
                 }
-                if(e.Keyval == 65364) //down arrow
+                if (e.Keyval == 65364) //down arrow
                 {
                     _downCount++;
                     _canHide = _downCount > _rows.Count;
@@ -126,11 +126,11 @@ public class AutocompleteBox<T> : Gtk.Box
             row.AddController(keyController);
             row.OnStateFlagsChanged += (sender, e) =>
             {
-                if(!_canHide)
+                if (!_canHide)
                 {
                     _canHide = true;
                 }
-                else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+                else if (e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_parent.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
                 {
                     SetVisible(false);
                 }

@@ -4,7 +4,7 @@ using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -121,7 +121,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild
         _editButton.SetVisible(_transaction.RepeatFrom <= 0);
         _editButton.SetSensitive(_transaction.RepeatFrom <= 0);
     }
-    
+
     /// <summary>
     /// Occurs when the edit button is clicked
     /// </summary>

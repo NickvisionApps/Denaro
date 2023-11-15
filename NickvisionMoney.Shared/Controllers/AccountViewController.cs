@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -31,7 +31,7 @@ public class AccountViewController : IDisposable
     /// Whether or not the account has been fully opened and loaded
     /// </summary>
     public bool IsOpened { get; private set; }
-    
+
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -129,7 +129,7 @@ public class AccountViewController : IDisposable
     /// Occurs when the recent accounts list is changed
     /// </summary>
     private event EventHandler<EventArgs>? RecentAccountsChanged;
-    
+
     /// <summary>
     /// Occurs when the account's information is changed
     /// </summary>
@@ -222,7 +222,7 @@ public class AccountViewController : IDisposable
             }
         }
     }
-    
+
     /// <summary>
     /// Whether or not to show the tags section on the account view
     /// </summary>
@@ -569,7 +569,7 @@ public class AccountViewController : IDisposable
     public void SetPassword(string password, bool showNotification = true)
     {
         _account.Password = password;
-        if(showNotification)
+        if (showNotification)
         {
             if (string.IsNullOrEmpty(password))
             {
@@ -860,7 +860,7 @@ public class AccountViewController : IDisposable
         var result = await _account.DeleteGroupAsync(id);
         _groupFilters.Remove((int)id);
         GroupDeleted?.Invoke(this, id);
-        foreach(var transaction in result.BelongingTransactions)
+        foreach (var transaction in result.BelongingTransactions)
         {
             TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(_account.Transactions[transaction], null, true));
         }
@@ -1013,7 +1013,7 @@ public class AccountViewController : IDisposable
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to export account to file."), NotificationSeverity.Error));
         }
     }
-    
+
     /// <summary>
     /// Generates a graph based on the type
     /// </summary>
@@ -1104,7 +1104,7 @@ public class AccountViewController : IDisposable
         }
         FilterUIUpdate();
     }
-    
+
     /// <summary>
     /// Sets the start and end date of the filter to the same date
     /// </summary>
@@ -1162,7 +1162,7 @@ public class AccountViewController : IDisposable
                 }
             }
             _filteredIds.Add(pair.Value.Id);
-            if(pair.Value.Type == TransactionType.Income)
+            if (pair.Value.Type == TransactionType.Income)
             {
                 _filteredIncome += pair.Value.Amount;
             }
@@ -1171,7 +1171,7 @@ public class AccountViewController : IDisposable
                 _filteredExpense += pair.Value.Amount;
             }
             var groupKey = pair.Value.GroupId == -1 ? 0u : (uint)pair.Value.GroupId;
-            if(!groupBalances.ContainsKey(groupKey))
+            if (!groupBalances.ContainsKey(groupKey))
             {
                 groupBalances[groupKey] = (0m, 0m);
             }
@@ -1195,7 +1195,7 @@ public class AccountViewController : IDisposable
                 TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, _filteredIds.Contains(pair.Value.Id)));
             }
         }
-        foreach(var pair in _account.Groups)
+        foreach (var pair in _account.Groups)
         {
             var newGroup = Groups[pair.Key].Clone(groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Income : 0m, groupBalances.ContainsKey(pair.Key) ? groupBalances[pair.Key].Expense : 0m);
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(newGroup, null, _groupFilters[(int)pair.Key]));

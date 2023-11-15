@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
@@ -10,7 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -28,9 +27,9 @@ public partial class TransactionDialog : Adw.Window
         int Days;
         int RefCount;
     }
-    
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct TextIter 
+    public struct TextIter
     {
         public nint dummy1;
         public nint dummy2;
@@ -47,7 +46,7 @@ public partial class TransactionDialog : Adw.Window
         public int dummy13;
         public nint dummy14;
     }
-    
+
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -63,7 +62,7 @@ public partial class TransactionDialog : Adw.Window
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)]bool include_hidden_chars);
+    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)] bool include_hidden_chars);
 
     private bool _constructing;
     private readonly TransactionDialogController _controller;
@@ -150,7 +149,7 @@ public partial class TransactionDialog : Adw.Window
         };
         var idString = _controller.Transaction.Id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(_controller.UseNativeDigits && "0" != nativeDigits[0])
+        if (_controller.UseNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])
@@ -206,13 +205,13 @@ public partial class TransactionDialog : Adw.Window
             _descriptionRow.GrabFocus();
             _descriptionRow.SetPosition(-1);
             _descriptionRow.SetActivatesDefault(true);
-            if(e.Item2.GroupId != -1)
+            if (e.Item2.GroupId != -1)
             {
                 _groupRow.SetSelected((uint)_controller.GroupNames.IndexOf(_controller.GetGroupNameFromId((uint)e.Item2.GroupId)));
                 _colorDropDown.SetSelected((e.Item2.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-                GdkExt.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
+                GdkHelpers.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
                 _colorButton.SetExtRgba(transactionColor!.Value);
             }
         };
@@ -224,7 +223,7 @@ public partial class TransactionDialog : Adw.Window
                 if (!_constructing)
                 {
                     var matchingDescriptions = _controller.GetDescriptionSuggestions(_descriptionRow.GetText());
-                    if(matchingDescriptions.Count > 0)
+                    if (matchingDescriptions.Count > 0)
                     {
                         _autocompleteBox.UpdateSuggestions(matchingDescriptions);
                     }
@@ -417,7 +416,7 @@ public partial class TransactionDialog : Adw.Window
         _colorDropDown.SetSelected((_controller.Transaction.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
         _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-        GdkExt.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
+        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
         _colorButton.SetExtRgba(transactionColor!.Value);
         UpdateTagsList();
         _receipt = _controller.Transaction.Receipt;

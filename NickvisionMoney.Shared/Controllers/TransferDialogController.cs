@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace NickvisionMoney.Shared.Controllers;
@@ -169,6 +167,10 @@ public class TransferDialogController
                 if (lcMonetary != null && lcMonetary.Contains('_'))
                 {
                     lcMonetary = lcMonetary.Replace('_', '-');
+                }
+                if (lcMonetary != null && lcMonetary.Contains('@'))
+                {
+                    lcMonetary = lcMonetary.Replace('@', '-');
                 }
                 CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
                 var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);

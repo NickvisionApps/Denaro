@@ -23,7 +23,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Models;
 
@@ -440,7 +440,7 @@ public class Account : IDisposable
             Metadata.CustomCurrencyDecimalSeparator = readQueryMetadata.IsDBNull(10) ? null : readQueryMetadata.GetString(10);
             Metadata.CustomCurrencyGroupSeparator = readQueryMetadata.IsDBNull(11) ? null : (readQueryMetadata.GetString(11) == "empty" ? "" : readQueryMetadata.GetString(11));
             Metadata.CustomCurrencyDecimalDigits = readQueryMetadata.IsDBNull(12) ? null : readQueryMetadata.GetInt32(12);
-            Metadata.ShowTagsList =  readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
+            Metadata.ShowTagsList = readQueryMetadata.IsDBNull(13) ? true : readQueryMetadata.GetBoolean(13);
             Metadata.TransactionRemindersThreshold = readQueryMetadata.IsDBNull(14) ? RemindersThreshold.OneDayBefore : (RemindersThreshold)readQueryMetadata.GetInt32(14);
             Metadata.CustomCurrencyAmountStyle = readQueryMetadata.IsDBNull(15) ? null : readQueryMetadata.GetInt32(15);
         }
@@ -554,7 +554,7 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The income amount</returns>
-    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) => 
+    public decimal GetIncome(IEnumerable<uint>? transactionIds = null) =>
         (transactionIds ?? Transactions.Keys)
         .Select(id => Transactions[id])
         .Where(transaction => transaction.Type == TransactionType.Income)
@@ -576,7 +576,10 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The balance amount after the transactions</returns>
-    public decimal GetTotal(IList<uint>? transactionIds = null) => GetIncome(transactionIds) - GetExpense(transactionIds);
+    public decimal GetTotal(IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Sum(transaction => transaction.Type == TransactionType.Income ? transaction.Amount : (-1 * transaction.Amount));
 
     /// <summary>
     /// Gets the total income for a group
@@ -584,18 +587,12 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The total income amount</returns>
-    public decimal GetGroupIncome(Group group, IEnumerable<uint>? transactionIds)
-    {
-        var transactions = Transactions;
-        if (transactionIds != null)
-        {
-            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
-        }
-        return transactions.Values
-            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
-            .Where(transaction => transaction.Type == TransactionType.Income)
-            .Sum(transaction => transaction.Amount);
-    }
+    public decimal GetGroupIncome(Group group, IEnumerable<uint>? transactionIds) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Where(transaction => transaction.Type == TransactionType.Income)
+        .Sum(transaction => transaction.Amount);
 
     /// <summary>
     /// Gets the total expense for a group
@@ -603,26 +600,24 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The total expense amount</returns>
-    public decimal GetGroupExpense(Group group, IEnumerable<uint>? transactionIds = null)
-    {
-        var transactions = Transactions;
-        if (transactionIds != null)
-        {
-            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
-        }
-        return transactions.Values
-            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
-            .Where(transaction => transaction.Type == TransactionType.Expense)
-            .Sum(transaction => transaction.Amount);
-    }
-    
+    public decimal GetGroupExpense(Group group, IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Where(transaction => transaction.Type == TransactionType.Expense)
+        .Sum(transaction => transaction.Amount);
+
     /// <summary>
     /// Gets the balance amount left after income and expense for a group
     /// </summary>
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The balance amount for the group</returns>
-    public decimal GetGroupTotal(Group group, IList<uint>? transactionIds = null) => GetGroupIncome(group, transactionIds) - GetGroupExpense(group, transactionIds);
+    public decimal GetGroupTotal(Group group, IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Sum(transaction => transaction.Type == TransactionType.Income ? transaction.Amount : (-1 * transaction.Amount));
 
     /// <summary>
     /// Updates the metadata of the account
@@ -1078,7 +1073,7 @@ public class Account : IDisposable
         }
         CalculateTransactionReminders();
     }
-    
+
     /// <summary>
     /// Syncs repeat transactions in the account
     /// </summary>
@@ -1325,7 +1320,7 @@ public class Account : IDisposable
             amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
-            if(string.IsNullOrEmpty(rgba))
+            if (string.IsNullOrEmpty(rgba))
             {
                 rgba = defaultTransactionRGBA;
             }
@@ -1528,7 +1523,7 @@ public class Account : IDisposable
         string result = "";
         result += "ID;Date (en_US Format);Description;Type;RepeatInterval;RepeatFrom (-1=None,0=Original,Other=Id Of Source);RepeatEndDate (en_US Format);Amount (en_US Format);RGBA;UseGroupColor (0 for false, 1 for true);Group(Id Starts At 1);GroupName;GroupDescription;GroupRGBA;Tags\n";
         var transactions = Transactions;
-        if(exportMode == ExportMode.CurrentView)
+        if (exportMode == ExportMode.CurrentView)
         {
             transactions = new Dictionary<uint, Transaction>();
             foreach (var id in filteredIds)
@@ -1741,7 +1736,7 @@ public class Account : IDisposable
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
-                                if(string.IsNullOrEmpty(rgba))
+                                if (string.IsNullOrEmpty(rgba))
                                 {
                                     hex = "#32FFFFFF";
                                 }

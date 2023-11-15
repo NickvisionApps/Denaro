@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionMoney.GNOME.Helpers;
 using System.Globalization;
 
@@ -42,16 +41,16 @@ public partial class TransactionId : Gtk.Overlay
     /// <param name="defaultColor">A default color</param>
     public void UpdateColor(string colorString, string defaultColor, bool useNativeDigits)
     {
-        if (!GdkExt.RGBA.Parse(out var color, colorString))
+        if (!GdkHelpers.RGBA.Parse(out var color, colorString))
         {
-            GdkExt.RGBA.Parse(out color, defaultColor);
+            GdkHelpers.RGBA.Parse(out color, defaultColor);
         }
         var red = (int)(color!.Value.Red * 255);
         var green = (int)(color.Value.Green * 255);
         var blue = (int)(color.Value.Blue * 255);
         var idString = _id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
-        if(useNativeDigits && "0" != nativeDigits[0])
+        if (useNativeDigits && "0" != nativeDigits[0])
         {
             idString = idString.Replace("0", nativeDigits[0])
                                .Replace("1", nativeDigits[1])

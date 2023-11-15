@@ -192,8 +192,8 @@ You may also make your changes via any code editor and use [`flatpak-builder`](h
 
 You may also build the app manually without using flatpak. List of dependencies:
 - dotnet >=7.0
-- GTK >=4.10
-- libadwaita >=1.2
+- GTK >=4.12
+- libadwaita >=1.4
 - yelp (optional)
 - [cake](https://cakebuild.net/) (build only)
     - `dotnet tool install --global Cake.Tool` or `dotnet tool restore` (in repository root folder)

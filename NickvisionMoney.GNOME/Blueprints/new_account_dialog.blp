@@ -7,9 +7,8 @@ Adw.Window _root {
   default-width: 460;
   modal: true;
   
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
       title-widget: Adw.CarouselIndicatorDots {
         carousel: _carousel;
@@ -25,8 +24,6 @@ Adw.Window _root {
           label: _("Back");
         };
       }
-
-      styles ["flat"]
     }
 
     Gtk.WindowHandle {
@@ -116,14 +113,8 @@ Adw.Window _root {
                   }
                 }
 
-                Adw.ActionRow _overwriteRow {
+                Adw.SwitchRow _overwriteRow {
                   title: _("Overwrite Existing Accounts");
-
-                  [suffix]
-                  Gtk.Switch _overwriteSwitch {
-                    valign: center;
-                    active: true;
-                  }
                 }
               }
 
