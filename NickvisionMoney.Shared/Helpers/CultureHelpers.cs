@@ -89,8 +89,8 @@ public static class CultureHelpers
         var region = new RegionInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
         if (metadata.UseCustomCurrency)
         {
-            culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
-            culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
+            culture.NumberFormat.CurrencySymbol = string.IsNullOrWhiteSpace(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
+            culture.NumberFormat.NaNSymbol = string.IsNullOrWhiteSpace(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
             culture.NumberFormat.CurrencyPositivePattern = metadata.CustomCurrencyAmountStyle ?? culture.NumberFormat.CurrencyPositivePattern;
             culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;

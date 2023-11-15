@@ -431,8 +431,8 @@ public class Account : IDisposable
             Metadata.Name = readQueryMetadata.GetString(1);
             Metadata.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
             Metadata.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
-            Metadata.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
-            Metadata.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
+            Metadata.CustomCurrencySymbol = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
+            Metadata.CustomCurrencyCode = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
             Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);

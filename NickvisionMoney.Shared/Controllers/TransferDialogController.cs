@@ -116,7 +116,7 @@ public class TransferDialogController
     /// <returns>(string Source, string Destination)</returns>
     public async Task<(string Source, string Destination)> GetConversionRateOnlineAsync()
     {
-        if (string.IsNullOrEmpty(DestinationCurrencyCode))
+        if (string.IsNullOrWhiteSpace(DestinationCurrencyCode))
         {
             return ("", "");
         }

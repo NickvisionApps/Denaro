@@ -85,15 +85,15 @@ public class AccountSettingsDialogController
         {
             result |= AccountMetadataCheckStatus.EmptyName;
         }
-        if (useCustom && string.IsNullOrEmpty(customSymbol))
+        if (useCustom && string.IsNullOrWhiteSpace(customSymbol))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
-        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out _))
+        if (useCustom && !string.IsNullOrWhiteSpace(customSymbol) && Decimal.TryParse(customSymbol, out _))
         {
             result |= AccountMetadataCheckStatus.InvalidCurrencySymbol;
         }
-        if (useCustom && string.IsNullOrEmpty(customCode))
+        if (useCustom && string.IsNullOrWhiteSpace(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
         }
