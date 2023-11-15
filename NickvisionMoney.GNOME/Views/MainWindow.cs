@@ -35,7 +35,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.Bin _dashboardBin;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
-    [Gtk.Connect] private readonly Adw.ButtonContent _greeting;
+    [Gtk.Connect] private readonly Gtk.Image _greetingIcon;
+    [Gtk.Connect] private readonly Gtk.Label _greetingLabel;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _startPageRecentAccountsGroup;
     [Gtk.Connect] private readonly Gtk.Button _newAccountButton;
     [Gtk.Connect] private readonly Gtk.Button _openAccountButton;
@@ -87,16 +88,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _windowTitle.SetTitle(_controller.AppInfo.ShortName);
         _graphToggleButton.SetActive(_controller.ShowGraphs);
         //Greeting
-        _greeting.SetIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
-        _greeting.SetLabel(_controller.Greeting);
-        var image = (Gtk.Image)_greeting.GetFirstChild();
-        image.SetPixelSize(48);
-        image.SetMarginEnd(6);
-        var label = (Gtk.Label)_greeting.GetLastChild();
-        label.AddCssClass("greeting-title");
-        _greeting.SetHalign(Gtk.Align.Center);
-        _greeting.SetMarginTop(24);
-        _greeting.SetMarginBottom(14);
+        _greetingIcon.SetFromIconName(_controller.ShowSun ? "sun-outline-symbolic" : "moon-outline-symbolic");
+        _greetingLabel.SetLabel(_controller.Greeting);
         //Page Tabs
         _tabView.OnClosePage += OnCloseAccountPage;
         //New Account Action
