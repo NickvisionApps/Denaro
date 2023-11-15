@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Docs\po\LINGUAS" />
     <None Remove="Resources\Inter-Regular.otf" />
     <None Remove="Resources\Inter-SemiBold.otf" />
     <None Remove="Resources\NotoEmoji-VariableFont_wght.ttf" />
@@ -14,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Docs\po\LINGUAS" />
     <EmbeddedResource Include="Resources\Inter-Regular.otf" />
     <EmbeddedResource Include="Resources\Inter-SemiBold.otf" />
     <EmbeddedResource Include="Resources\NotoEmoji-VariableFont_wght.ttf" />

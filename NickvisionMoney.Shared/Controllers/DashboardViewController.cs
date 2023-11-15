@@ -3,7 +3,7 @@ using NickvisionMoney.Shared.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 

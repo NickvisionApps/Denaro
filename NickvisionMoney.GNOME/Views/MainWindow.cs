@@ -2,6 +2,7 @@ using NickvisionMoney.GNOME.Controls;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Events;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -134,7 +135,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -178,7 +179,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "help-import")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, Help.GetHelpURL("import-export"), 0);
+            toast.OnButtonClicked += (s, ex) =>  Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("import-export"), 0);
         }
         else if (e.Action == "open-export")
         {

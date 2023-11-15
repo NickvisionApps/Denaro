@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static NickvisionMoney.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.Shared.Controllers;
 
@@ -71,6 +71,7 @@ public class MainWindowController : IDisposable
         }
         _openAccounts = new List<AccountViewController>();
         Aura.Init("org.nickvision.money", "Nickvision Denaro");
+        AppInfo.EnglishShortName = "Denaro";
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
