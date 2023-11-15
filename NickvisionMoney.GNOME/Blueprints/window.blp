@@ -158,10 +158,19 @@ Adw.ApplicationWindow _root {
                 hexpand: true;
                 halign: fill;
                 
-                Adw.ButtonContent _greeting {
+                Gtk.Box {
                   halign: center;
                   margin-top: 24;
                   margin-bottom: 14;
+                
+                  Gtk.Image _greetingIcon {
+                    pixel-size: 48;
+                    margin-end: 12;
+                  }  
+                  
+                  Gtk.Label _greetingLabel {                  
+                    styles ["greeting-title"]
+                  }
                 }
                 
                 Gtk.Label _dragLabel {
