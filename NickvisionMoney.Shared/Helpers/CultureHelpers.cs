@@ -13,12 +13,17 @@ public static class CultureHelpers
     /// A culture to use for date strings
     /// </summary>
     public static CultureInfo DateCulture { get; }
+    /// <summary>
+    /// The system reported currency string (Ex: "$ (USD)")
+    /// </summary>
+    public static string ReportedCurrencyString { get; }
 
     /// <summary>
     /// Constructs CultureHelpers
     /// </summary>
     static CultureHelpers()
     {
+        //Date Culture
         var lcTime = Environment.GetEnvironmentVariable("LC_TIME");
         if (lcTime != null && lcTime.Contains(".UTF-8"))
         {
@@ -33,10 +38,31 @@ public static class CultureHelpers
             lcTime = lcTime.Replace('_', '-');
         }
         DateCulture = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+        //Reported Currency String
+        var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
+        if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
+        {
+            lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".UTF-8"), 6);
+        }
+        else if (lcMonetary != null && lcMonetary.Contains(".utf8"))
+        {
+            lcMonetary = lcMonetary.Remove(lcMonetary.IndexOf(".utf8"), 5);
+        }
+        if (lcMonetary != null && lcMonetary.Contains('_'))
+        {
+            lcMonetary = lcMonetary.Replace('_', '-');
+        }
+            if (lcMonetary != null && lcMonetary.Contains('@'))
+        {
+            lcMonetary = lcMonetary.Replace('@', '-');
+        }
+        var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+        var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+        ReportedCurrencyString = $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
     }
 
     /// <summary>
-    /// Gets a culture to use for number strings
+    /// Gets a culture to use for number strings based on AccountMetadata
     /// </summary>
     /// <param name="metadata">AccountMetadata</param>
     /// <returns>CultureInfo</returns>
@@ -54,6 +80,10 @@ public static class CultureHelpers
         if (lcMonetary != null && lcMonetary.Contains('_'))
         {
             lcMonetary = lcMonetary.Replace('_', '-');
+        }
+        if (lcMonetary != null && lcMonetary.Contains('@'))
+        {
+            lcMonetary = lcMonetary.Replace('@', '-');
         }
         var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
         var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);

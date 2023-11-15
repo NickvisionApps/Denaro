@@ -170,6 +170,10 @@ public class TransferDialogController
                 {
                     lcMonetary = lcMonetary.Replace('_', '-');
                 }
+                if (lcMonetary != null && lcMonetary.Contains('@'))
+                {
+                    lcMonetary = lcMonetary.Replace('@', '-');
+                }
                 CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
                 var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
                 if (_previousDestMetadata == null)

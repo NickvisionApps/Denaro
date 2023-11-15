@@ -1,6 +1,7 @@
 using Nickvision.Aura.Keyring;
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
+using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using static Nickvision.Aura.Localization.Gettext;
@@ -111,7 +112,7 @@ public partial class AccountSettingsDialog : Adw.Window
             }
         };
         //Reported Currency
-        _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{_controller.ReportedCurrencyString}</b>");
+        _reportedCurrencyLabel.SetLabel($"{_("Your system reported that your currency is")}\n<b>{CultureHelpers.ReportedCurrencyString}</b>");
         //Custom Currency
         _customCurrencyRow.OnActivated += (sender, e) =>
         {
