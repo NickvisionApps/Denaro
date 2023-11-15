@@ -1,25 +1,23 @@
 diff --git a/NickvisionMoney.Shared/Linux/org.nickvision.money.desktop.in b/NickvisionMoney.Shared/Linux/org.nickvision.money.desktop.in
-index bed7377c..969c8b4a 100644
 --- a/NickvisionMoney.Shared/Linux/org.nickvision.money.desktop.in
 +++ b/NickvisionMoney.Shared/Linux/org.nickvision.money.desktop.in
-@@ -3,7 +3,7 @@ Version=1.0
+@@ -3,7 +3,7 @@
  Name=Denaro
  Comment=Manage your personal finances
  Exec=@EXEC@ %F
 -Icon=org.nickvision.money
-++Icon=snap.denaro.org.nickvision.money
++Icon=snap.denaro.org.nickvision.money
  Terminal=false
  Type=Application
  MimeType=application/x-nmoney
 diff --git a/NickvisionMoney.Shared/Linux/org.nickvision.money.metainfo.xml.in b/NickvisionMoney.Shared/Linux/org.nickvision.money.metainfo.xml.in
-index c53b0ffc..53beb5b6 100644
 --- a/NickvisionMoney.Shared/Linux/org.nickvision.money.metainfo.xml.in
 +++ b/NickvisionMoney.Shared/Linux/org.nickvision.money.metainfo.xml.in
 @@ -1,6 +1,7 @@
  <?xml version="1.0" encoding="UTF-8"?>
  <component type="desktop-application">
    <id>org.nickvision.money</id>
-++ <icon type="stock">snap.denaro.org.nickvision.money</icon>
++  <icon type="stock">snap.denaro.org.nickvision.money</icon>
    <metadata_license>CC0-1.0</metadata_license>
    <project_license>MIT</project_license>
    <name>Denaro</name>
