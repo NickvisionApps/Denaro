@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="pl">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">Import/Eksport 📤</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,9 +14,9 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Import/Export</title>
+<title>Import/Eksport</title>
 <div>
-	<title>Import Formats</title>
+	<title>Formaty importu</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
@@ -50,14 +50,14 @@
 				<item>
 					<title its:translate="no">RepeatInterval</title>
 					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
+					<p>0 - Nigdy</p>
+					<p>1 - Codziennie</p>
+					<p>2 - Tygodniowo</p>
+					<p>7 - Co dwa tygodnie</p>
+					<p>3 - Miesięcznie</p>
+					<p>4 - Kwartalnie</p>
+					<p>5 - Rocznie</p>
+					<p>6 - Co dwa lata</p>
 					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
 				</item>
 				<item>
@@ -102,7 +102,7 @@
 	</list>
 </div>
 <div>
-	<title>Export Formats</title>
+	<title>Formaty eksportu</title>
 	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
 	<list>
 		<item>
