@@ -576,7 +576,10 @@ public class Account : IDisposable
     /// </summary>
     /// <param name="transactionIds">The ids of transactions to consider</param>
     /// <returns>The balance amount after the transactions</returns>
-    public decimal GetTotal(IList<uint>? transactionIds = null) => GetIncome(transactionIds) - GetExpense(transactionIds);
+    public decimal GetTotal(IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Sum(transaction => transaction.Type == TransactionType.Income ? transaction.Amount : (-1 * transaction.Amount));
 
     /// <summary>
     /// Gets the total income for a group
@@ -584,18 +587,12 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The total income amount</returns>
-    public decimal GetGroupIncome(Group group, IEnumerable<uint>? transactionIds)
-    {
-        var transactions = Transactions;
-        if (transactionIds != null)
-        {
-            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
-        }
-        return transactions.Values
-            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
-            .Where(transaction => transaction.Type == TransactionType.Income)
-            .Sum(transaction => transaction.Amount);
-    }
+    public decimal GetGroupIncome(Group group, IEnumerable<uint>? transactionIds) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Where(transaction => transaction.Type == TransactionType.Income)
+        .Sum(transaction => transaction.Amount);
 
     /// <summary>
     /// Gets the total expense for a group
@@ -603,18 +600,12 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The total expense amount</returns>
-    public decimal GetGroupExpense(Group group, IEnumerable<uint>? transactionIds = null)
-    {
-        var transactions = Transactions;
-        if (transactionIds != null)
-        {
-            transactions = transactionIds.ToDictionary(id => id, id => Transactions[id]);
-        }
-        return transactions.Values
-            .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
-            .Where(transaction => transaction.Type == TransactionType.Expense)
-            .Sum(transaction => transaction.Amount);
-    }
+    public decimal GetGroupExpense(Group group, IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Where(transaction => transaction.Type == TransactionType.Expense)
+        .Sum(transaction => transaction.Amount);
 
     /// <summary>
     /// Gets the balance amount left after income and expense for a group
@@ -622,7 +613,11 @@ public class Account : IDisposable
     /// <param name="group">The group to consider</param>
     /// <param name="transactionIds">The ids of the transactions to consider</param>
     /// <returns>The balance amount for the group</returns>
-    public decimal GetGroupTotal(Group group, IList<uint>? transactionIds = null) => GetGroupIncome(group, transactionIds) - GetGroupExpense(group, transactionIds);
+    public decimal GetGroupTotal(Group group, IEnumerable<uint>? transactionIds = null) =>
+        (transactionIds ?? Transactions.Keys)
+        .Select(id => Transactions[id])
+        .Where(transaction => transaction.GroupId == group.Id || (transaction.GroupId == -1 && group.Id == 0))
+        .Sum(transaction => transaction.Type == TransactionType.Income ? transaction.Amount : (-1 * transaction.Amount));
 
     /// <summary>
     /// Updates the metadata of the account
