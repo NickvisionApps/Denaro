@@ -1,4 +1,5 @@
 ﻿using Nickvision.Aura;
+using Nickvision.Aura.Events;
 using NickvisionMoney.Shared.Events;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
