@@ -152,7 +152,7 @@ public class AccountSettingsDialogController
         }
         Metadata.DefaultTransactionType = defaultTransactionType;
         Metadata.TransactionRemindersThreshold = transactionReminder;
-        NewPassword = string.IsNullOrWhiteSpace(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
+        NewPassword = string.IsNullOrEmpty(newPassword) ? (NewPassword == "" ? "" : null) : newPassword;
         return AccountMetadataCheckStatus.Valid;
     }
 

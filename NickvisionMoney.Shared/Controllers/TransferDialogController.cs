@@ -148,7 +148,7 @@ public class TransferDialogController
         }
         else
         {
-            if (new Account(destPath).IsEncrypted && string.IsNullOrWhiteSpace(destPassword))
+            if (new Account(destPath).IsEncrypted && string.IsNullOrEmpty(destPassword))
             {
                 result |= TransferCheckStatus.DestAccountRequiresPassword;
             }

@@ -216,7 +216,7 @@ public class AccountMetadata : ICloneable
             Mode = SqliteOpenMode.ReadOnly,
             Pooling = false
         };
-        if (!string.IsNullOrWhiteSpace(password))
+        if (!string.IsNullOrEmpty(password))
         {
             connectionString.Password = password;
         }

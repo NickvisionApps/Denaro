@@ -571,7 +571,7 @@ public class AccountViewController : IDisposable
         _account.Password = password;
         if (showNotification)
         {
-            if (string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrEmpty(password))
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("The password of the account was removed."), NotificationSeverity.Success));
             }

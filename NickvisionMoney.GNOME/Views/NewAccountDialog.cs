@@ -311,7 +311,7 @@ public partial class NewAccountDialog : Adw.Window
     /// </summary>
     private void ShowPasswordStrength()
     {
-        if (!string.IsNullOrWhiteSpace(_accountPasswordRow.GetText()))
+        if (!string.IsNullOrEmpty(_accountPasswordRow.GetText()))
         {
             var strength = Credential.GetPasswordStrength(_accountPasswordRow.GetText());
             _accountPasswordStrengthRow.SetVisible(true);

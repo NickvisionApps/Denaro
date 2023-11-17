@@ -176,7 +176,7 @@ public class Account : IDisposable
         set
         {
             //Remove Password If Empty (Decrypts)
-            if (string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrEmpty(value))
             {
                 //Create Temp Decrypted Database
                 var tempPath = $"{Path}.decrypt";
@@ -308,7 +308,7 @@ public class Account : IDisposable
             //Set Password
             if (IsEncrypted)
             {
-                if (string.IsNullOrWhiteSpace(password))
+                if (string.IsNullOrEmpty(password))
                 {
                     _loggedIn = false;
                     return false;

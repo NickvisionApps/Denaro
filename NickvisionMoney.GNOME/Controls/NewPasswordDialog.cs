@@ -62,7 +62,7 @@ public partial class NewPasswordDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        if (_newPasswordEntry.GetText() != _confirmPasswordEntry.GetText() || string.IsNullOrWhiteSpace(_newPasswordEntry.GetText()))
+        if (_newPasswordEntry.GetText() != _confirmPasswordEntry.GetText() || string.IsNullOrEmpty(_newPasswordEntry.GetText()))
         {
             _addButton.SetSensitive(false);
         }
