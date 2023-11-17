@@ -24,6 +24,8 @@ parts:
       - blueprint-compiler
     plugin: nil
     source: .
+    build-environment:
+      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
     #build-snaps: # when available
     #- blueprint-compiler
     build-packages:
