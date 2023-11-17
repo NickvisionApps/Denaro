@@ -86,7 +86,7 @@ public class MainWindowController : IDisposable
             Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
         Aura.Active.SetConfig<Configuration>("config");
-        AppInfo.Version = "2023.11.0-next";
+        AppInfo.Version = "2023.11.0";
         AppInfo.ShortName = _("Denaro");
         AppInfo.Description = _("Manage your personal finances");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");

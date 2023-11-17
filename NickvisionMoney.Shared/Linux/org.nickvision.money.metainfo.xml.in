@@ -4,7 +4,8 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Denaro</name>
-  <developer_name translatable="no">Nickvision</developer_name>
+  <project_group>Nickvision</project_group>
+  <developer_name>Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
   <description>
     <p>— Manage multiple accounts at a time, with a familiar tab interface</p>
@@ -41,13 +42,12 @@
   <url type="bugtracker">https://github.com/NickvisionApps/Denaro/issues</url>
   <url type="donation">https://github.com/sponsors/nlogozzo</url>
   <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
-  <project_group>Nickvision</project_group>
   <provides>
     <binary>org.nickvision.money</binary>
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2023.11.0-next" date="2023-11-14">
+    <release version="2023.11.0" date="2023-11-17">
       <description translatable="no">
         <p>- Disallowed whitespace-only group and account names</p>
         <p>- Fixed an issue where exported PDF values were incorrect</p>
