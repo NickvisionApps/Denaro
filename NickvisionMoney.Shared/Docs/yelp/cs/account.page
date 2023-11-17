@@ -57,7 +57,7 @@
 		</note>
 	</item>
 	<item>
-		<title>Použití vlastní měny</title>
+		<title>Použít vlastní měnu</title>
 		<p>Pokud je tato možnost povolena, bude místo symbolu měny, který poskytuje vaše systémové prostředí, použit <gui>vlastní symbol měny</gui>.</p>
 	</item>
 	<item>

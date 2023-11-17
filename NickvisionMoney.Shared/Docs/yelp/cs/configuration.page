@@ -53,7 +53,7 @@
 		<p>Barva používaná k označení <link xref="account">účtů</link> s typem <em>Firemní</em> v seznamu nedávných účtů.</p>
 	</item>
 	<item>
-		<title>Použití nativních číslic</title>
+		<title>Použít nativní číslice</title>
 		<p>Nastavení, zda se mají místo latinských číslic používat číslice, které jsou pro vaši oblast přirozené. Pokud je toto nastavení povoleno, bude například <em>٠١٢</em> použito místo <em>012</em> pro lokality, které používají východoarabské číslice.</p>
 	</item>
 	<item>
