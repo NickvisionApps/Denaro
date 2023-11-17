@@ -74,7 +74,7 @@ The Linux version of this app is designed for GNOME and optimized for the defaul
 ```
 
 # Dependencies
-- [.NET 7](https://dotnet.microsoft.com/en-us/)
+- [.NET 8](https://dotnet.microsoft.com/en-us/)
 
 # Code of Conduct
 This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).

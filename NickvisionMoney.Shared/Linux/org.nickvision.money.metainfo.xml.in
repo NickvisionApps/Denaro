@@ -49,12 +49,13 @@
   <releases>
     <release version="2023.11.0-next" date="2023-11-14">
       <description translatable="no">
+        <p>- Disallowed whitespace-only group and account names</p>
         <p>- Fixed an issue where exported PDF values were incorrect</p>
         <p>- Fixed an issue where some system cultures were not read properly</p>
         <p>- Fixed an issue where scrolling the sidebar with the mouse over the calendar would scroll the calendar instead</p>
-        <p>- Disallowed whitespace-only group and account names</p>
         <p>- Fixed an issue where leading or trailing spaces in group/account names aren't discarded</p>
         <p>- Updated to GNOME 45 runtime with latest libadwaita design</p>
+        <p>- Updated to .NET 8.0</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
