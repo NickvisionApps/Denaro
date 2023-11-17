@@ -359,7 +359,7 @@ public partial class AccountSettingsDialog : Adw.Window
         };
         var customDecimalDigits = _customDecimalDigitsRow.GetSelected() == 5 ? 99 : _customDecimalDigitsRow.GetSelected() + 2;
         var oldSymbol = _controller.Metadata.CustomCurrencySymbol;
-        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText(), (AccountType)_accountTypeRow.GetSelected(), _useCustomCurrencyRow.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
+        var checkStatus = _controller.UpdateMetadata(_nameRow.GetText().Trim(), (AccountType)_accountTypeRow.GetSelected(), _useCustomCurrencyRow.GetActive(), _customSymbolRow.GetText(), _customCodeRow.GetText(), (int?)_customAmountStyleRow.GetSelected(), customDecimalSeparator, customGroupSeparator, (int?)customDecimalDigits, transactionType, (RemindersThreshold)_transactionRemindersRow.GetSelected(), _newPasswordRow.GetText(), _newPasswordConfirmRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
         _customCurrencyRow.RemoveCssClass("error");

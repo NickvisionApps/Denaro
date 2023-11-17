@@ -140,7 +140,7 @@ public partial class GroupDialog : Adw.Window
     private void Validate()
     {
         var color = _colorButton.GetExtRgba();
-        var checkStatus = _controller.UpdateGroup(_nameRow.GetText(), _descriptionRow.GetText(), color.ToString());
+        var checkStatus = _controller.UpdateGroup(_nameRow.GetText().Trim(), _descriptionRow.GetText().Trim(), color.ToString());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
         if (checkStatus == GroupCheckStatus.Valid)
