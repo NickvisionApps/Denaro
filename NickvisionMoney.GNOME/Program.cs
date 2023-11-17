@@ -45,6 +45,8 @@ public partial class Program
             @"* Fixed an issue where exported PDF values were incorrect
               * Fixed an issue where some system cultures were not read properly
               * Fixed an issue where scrolling the sidebar with the mouse over the calendar would scroll the calendar instead
+              * Disallowed whitespace-only group and account names
+              * Fixed an issue where leading or trailing spaces in group/account names aren't discarded
               * Updated to GNOME 45 runtime with latest libadwaita design
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
