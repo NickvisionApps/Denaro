@@ -23,14 +23,13 @@ parts:
     after:  # remove this and next line too when the snap of `blueprint-compiler` comes up
       - blueprint-compiler
     plugin: nil
-    source: .
-    build-environment:
-      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
+    source: . 
+      #build-environment:
+      # - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
+      # - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
     #build-snaps: # when available
     #- blueprint-compiler
-    build-packages:
-      - blueprint-compiler
+    build-packages: 
       - wget
     override-pull: |
       craftctl default
@@ -40,6 +39,8 @@ parts:
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
+      export PYTHONPATH=$CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
+      export GI_TYPELIB_PATH=/snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
       cd $CRAFT_PART_SRC
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/snap/denaro/current/usr --ui=gnome --self-contained
