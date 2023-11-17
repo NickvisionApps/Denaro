@@ -1,20 +1,31 @@
-name: denaro # you probably want to 'snapcraft register <name>'
-base: core22 # the base snap is the execution environment for this snap
+name: denaro
+base: core22 
 adopt-info: denaro
 source-code: https://github.com/nlogozzo/NickvisionMoney
 issues: https://github.com/nlogozzo/NickvisionMoney/issues
-grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+grade: stable 
+confinement: strict 
 architectures:
   - build-on: amd64
   - build-on: arm64
   - build-on: armhf
 
 parts:
+  # When the snap of `blueprint-compiler` comes up, we can remove this part upto L21
+  blueprint-compiler:
+    source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
+    source-tag: 'v0.10.0'
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+    override-prime: ''
   denaro:
-    # See 'snapcraft plugins'
+    after:  # remove this and next line too when the snap of `blueprint-compiler` comes up
+      - blueprint-compiler
     plugin: nil
     source: .
+    #build-snaps: # when available
+    #- blueprint-compiler
     build-packages:
       - blueprint-compiler
       - wget
@@ -23,7 +34,6 @@ parts:
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
       chmod +x ./dotnet-install.sh
       ./dotnet-install.sh --channel 8.0
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/denaro.patch
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
