@@ -37,7 +37,7 @@ public static class CultureHelpers
         {
             lcTime = lcTime.Replace('_', '-');
         }
-        DateCulture = new CultureInfo(!string.IsNullOrEmpty(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
+        DateCulture = new CultureInfo(!string.IsNullOrWhiteSpace(lcTime) ? lcTime : CultureInfo.CurrentCulture.Name, true);
         //Reported Currency String
         var lcMonetary = Environment.GetEnvironmentVariable("LC_MONETARY");
         if (lcMonetary != null && lcMonetary.Contains(".UTF-8"))
@@ -56,8 +56,8 @@ public static class CultureHelpers
         {
             lcMonetary = lcMonetary.Replace('@', '-');
         }
-        var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-        var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+        var culture = new CultureInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+        var region = new RegionInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
         ReportedCurrencyString = $"{culture.NumberFormat.CurrencySymbol} ({region.ISOCurrencySymbol})";
     }
 
@@ -85,12 +85,12 @@ public static class CultureHelpers
         {
             lcMonetary = lcMonetary.Replace('@', '-');
         }
-        var culture = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-        var region = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+        var culture = new CultureInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+        var region = new RegionInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
         if (metadata.UseCustomCurrency)
         {
-            culture.NumberFormat.CurrencySymbol = string.IsNullOrEmpty(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
-            culture.NumberFormat.NaNSymbol = string.IsNullOrEmpty(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
+            culture.NumberFormat.CurrencySymbol = string.IsNullOrWhiteSpace(metadata.CustomCurrencySymbol) ? culture.NumberFormat.CurrencySymbol : metadata.CustomCurrencySymbol;
+            culture.NumberFormat.NaNSymbol = string.IsNullOrWhiteSpace(metadata.CustomCurrencyCode) ? region.ISOCurrencySymbol : metadata.CustomCurrencyCode;
             culture.NumberFormat.CurrencyPositivePattern = metadata.CustomCurrencyAmountStyle ?? culture.NumberFormat.CurrencyPositivePattern;
             culture.NumberFormat.CurrencyDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.CurrencyDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;
             culture.NumberFormat.NumberDecimalSeparator = string.IsNullOrEmpty(metadata.CustomCurrencyDecimalSeparator) ? culture.NumberFormat.NumberDecimalSeparator : metadata.CustomCurrencyDecimalSeparator;

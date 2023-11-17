@@ -1127,7 +1127,7 @@ public class AccountViewController : IDisposable
         var groupBalances = new Dictionary<uint, (decimal Income, decimal Expense)>();
         foreach (var pair in _account.Transactions)
         {
-            if (!string.IsNullOrEmpty(SearchDescription))
+            if (!string.IsNullOrWhiteSpace(SearchDescription))
             {
                 if (!pair.Value.Description.ToLower().Contains(SearchDescription.ToLower()))
                 {

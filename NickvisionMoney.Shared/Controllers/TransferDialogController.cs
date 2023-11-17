@@ -116,7 +116,7 @@ public class TransferDialogController
     /// <returns>(string Source, string Destination)</returns>
     public async Task<(string Source, string Destination)> GetConversionRateOnlineAsync()
     {
-        if (string.IsNullOrEmpty(DestinationCurrencyCode))
+        if (string.IsNullOrWhiteSpace(DestinationCurrencyCode))
         {
             return ("", "");
         }
@@ -142,7 +142,7 @@ public class TransferDialogController
         TransferCheckStatus result = 0;
         var amount = 0m;
         var conversionRate = 0m;
-        if (string.IsNullOrEmpty(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath).ToLower() != ".nmoney" || Transfer.SourceAccountPath == destPath)
+        if (string.IsNullOrWhiteSpace(destPath) || !Path.Exists(destPath) || Path.GetExtension(destPath).ToLower() != ".nmoney" || Transfer.SourceAccountPath == destPath)
         {
             result |= TransferCheckStatus.InvalidDestPath;
         }
@@ -172,8 +172,8 @@ public class TransferDialogController
                 {
                     lcMonetary = lcMonetary.Replace('@', '-');
                 }
-                CultureForDestNumberString = new CultureInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
-                var destRegion = new RegionInfo(!string.IsNullOrEmpty(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
+                CultureForDestNumberString = new CultureInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name, true);
+                var destRegion = new RegionInfo(!string.IsNullOrWhiteSpace(lcMonetary) ? lcMonetary : CultureInfo.CurrentCulture.Name);
                 if (_previousDestMetadata == null)
                 {
                     _previousDestMetadata = AccountMetadata.LoadFromAccountFile(destPath, destPassword)!;

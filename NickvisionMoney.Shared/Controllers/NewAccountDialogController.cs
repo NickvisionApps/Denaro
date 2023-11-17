@@ -123,15 +123,15 @@ public class NewAccountDialogController
     public CurrencyCheckStatus UpdateCurrency(bool useCustom, string? customSymbol, string? customCode, int? customAmountStyle, string? customDecimalSeparator, string? customGroupSeparator, int? customDecimalDigits)
     {
         CurrencyCheckStatus result = 0;
-        if (useCustom && string.IsNullOrEmpty(customSymbol))
+        if (useCustom && string.IsNullOrWhiteSpace(customSymbol))
         {
             result |= CurrencyCheckStatus.EmptyCurrencySymbol;
         }
-        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out _))
+        if (useCustom && !string.IsNullOrWhiteSpace(customSymbol) && Decimal.TryParse(customSymbol, out _))
         {
             result |= CurrencyCheckStatus.InvalidCurrencySymbol;
         }
-        if (useCustom && string.IsNullOrEmpty(customCode))
+        if (useCustom && string.IsNullOrWhiteSpace(customCode))
         {
             result |= CurrencyCheckStatus.EmptyCurrencyCode;
         }

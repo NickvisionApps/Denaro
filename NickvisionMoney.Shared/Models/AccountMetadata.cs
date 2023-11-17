@@ -243,8 +243,8 @@ public class AccountMetadata : ICloneable
             result.Name = readQueryMetadata.GetString(1);
             result.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
             result.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
-            result.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
-            result.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
+            result.CustomCurrencySymbol = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
+            result.CustomCurrencyCode = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
             result.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             result.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             result.SortFirstToLast = readQueryMetadata.GetBoolean(8);

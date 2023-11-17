@@ -206,7 +206,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             NotificationSeverity.Error => Gio.NotificationPriority.Urgent,
             _ => Gio.NotificationPriority.Normal
         });
-        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")))
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("SNAP")))
         {
             notification.SetIcon(Gio.ThemedIcon.New($"{_controller.AppInfo.ID}-symbolic"));
         }
@@ -429,7 +429,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             debugInfo.AppendLine("Flatpak");
         }
-        else if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")))
+        else if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("SNAP")))
         {
             debugInfo.AppendLine("Snap");
         }

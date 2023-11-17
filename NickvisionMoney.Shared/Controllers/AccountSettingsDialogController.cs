@@ -81,19 +81,19 @@ public class AccountSettingsDialogController
     public AccountMetadataCheckStatus UpdateMetadata(string name, AccountType type, bool useCustom, string? customSymbol, string? customCode, int? customAmountStyle, string? customDecimalSeparator, string? customGroupSeparator, int? customDecimalDigits, TransactionType defaultTransactionType, RemindersThreshold transactionReminder, string newPassword, string confirmPassword)
     {
         AccountMetadataCheckStatus result = 0;
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrWhiteSpace(name))
         {
             result |= AccountMetadataCheckStatus.EmptyName;
         }
-        if (useCustom && string.IsNullOrEmpty(customSymbol))
+        if (useCustom && string.IsNullOrWhiteSpace(customSymbol))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencySymbol;
         }
-        if (useCustom && !string.IsNullOrEmpty(customSymbol) && Decimal.TryParse(customSymbol, out _))
+        if (useCustom && !string.IsNullOrWhiteSpace(customSymbol) && Decimal.TryParse(customSymbol, out _))
         {
             result |= AccountMetadataCheckStatus.InvalidCurrencySymbol;
         }
-        if (useCustom && string.IsNullOrEmpty(customCode))
+        if (useCustom && string.IsNullOrWhiteSpace(customCode))
         {
             result |= AccountMetadataCheckStatus.EmptyCurrencyCode;
         }

@@ -305,7 +305,7 @@ public partial class TransferDialog : Adw.Window
         if (_conversionRateGroup.Visible)
         {
             var res = await _controller.GetConversionRateOnlineAsync();
-            if (string.IsNullOrEmpty(res.Source) || string.IsNullOrEmpty(res.Destination))
+            if (string.IsNullOrWhiteSpace(res.Source) || string.IsNullOrWhiteSpace(res.Destination))
             {
                 _sourceCurrencyRow.SetText("");
                 _destinationCurrencyRow.SetText("");

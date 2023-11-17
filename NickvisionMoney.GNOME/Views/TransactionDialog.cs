@@ -351,7 +351,7 @@ public partial class TransactionDialog : Adw.Window
         _addTagButton.OnClicked += (sender, e) =>
         {
             var tag = _addTagEntry.GetBuffer().GetText().Trim();
-            if (!string.IsNullOrEmpty(tag) && !_controller.AccountTags.Contains(tag))
+            if (!string.IsNullOrWhiteSpace(tag) && !_controller.AccountTags.Contains(tag))
             {
                 _controller.AccountTags.Add(tag);
                 UpdateTagsList();

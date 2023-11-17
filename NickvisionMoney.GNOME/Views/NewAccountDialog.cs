@@ -286,10 +286,10 @@ public partial class NewAccountDialog : Adw.Window
     {
         _accountNameRow.RemoveCssClass("error");
         _accountNameRow.SetTitle(_("Account Name"));
-        var checkStatus = _controller.UpdateName(_accountNameRow.GetText());
+        var checkStatus = _controller.UpdateName(_accountNameRow.GetText().Trim());
         if (checkStatus == NameCheckStatus.Valid)
         {
-            _nextButton1.SetSensitive(!string.IsNullOrEmpty(_accountNameRow.GetText()));
+            _nextButton1.SetSensitive(!string.IsNullOrWhiteSpace(_accountNameRow.GetText()));
         }
         else
         {

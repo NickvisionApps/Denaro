@@ -19,7 +19,7 @@ public static class DocumentationHelpers
     /// <returns>URL to either yelp or web page</returns>
     public static string GetHelpURL(string pageName)
     {
-        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")) && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("SNAP")) && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             return $"help:tagger/{pageName}";
         }

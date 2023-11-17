@@ -431,8 +431,8 @@ public class Account : IDisposable
             Metadata.Name = readQueryMetadata.GetString(1);
             Metadata.AccountType = (AccountType)readQueryMetadata.GetInt32(2);
             Metadata.UseCustomCurrency = readQueryMetadata.GetBoolean(3);
-            Metadata.CustomCurrencySymbol = string.IsNullOrEmpty(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
-            Metadata.CustomCurrencyCode = string.IsNullOrEmpty(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
+            Metadata.CustomCurrencySymbol = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(4)) ? null : readQueryMetadata.GetString(4);
+            Metadata.CustomCurrencyCode = string.IsNullOrWhiteSpace(readQueryMetadata.GetString(5)) ? null : readQueryMetadata.GetString(5);
             Metadata.DefaultTransactionType = (TransactionType)readQueryMetadata.GetInt32(6);
             Metadata.ShowGroupsList = readQueryMetadata.GetBoolean(7);
             Metadata.SortFirstToLast = readQueryMetadata.GetBoolean(8);
@@ -514,13 +514,13 @@ public class Account : IDisposable
                 RGBA = readQueryTransactions.IsDBNull(7) ? "" : readQueryTransactions.GetString(7),
                 UseGroupColor = readQueryTransactions.IsDBNull(11) ? false : readQueryTransactions.GetBoolean(11),
                 RepeatFrom = readQueryTransactions.IsDBNull(9) ? -1 : readQueryTransactions.GetInt32(9),
-                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrEmpty(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
+                RepeatEndDate = readQueryTransactions.IsDBNull(10) ? null : (string.IsNullOrWhiteSpace(readQueryTransactions.GetString(10)) ? null : DateOnly.Parse(readQueryTransactions.GetString(10), new CultureInfo("en-US", false))),
                 Notes = readQueryTransactions.IsDBNull(12) ? "" : readQueryTransactions.GetString(12),
-                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : (string.IsNullOrEmpty(readQueryTransactions.GetString(13)) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList())
+                Tags = readQueryTransactions.IsDBNull(13) ? new List<string>() : (string.IsNullOrWhiteSpace(readQueryTransactions.GetString(13)) ? new List<string>() : readQueryTransactions.GetString(13).Split(',').ToList())
             };
             Tags.AddRange(transaction.Tags.Where(t => !Tags.Contains(t)));
             var receiptString = readQueryTransactions.IsDBNull(8) ? "" : readQueryTransactions.GetString(8);
-            if (!string.IsNullOrEmpty(receiptString))
+            if (!string.IsNullOrWhiteSpace(receiptString))
             {
                 transaction.Receipt = SixLabors.ImageSharp.Image.Load(Convert.FromBase64String(receiptString));
             }
@@ -1320,7 +1320,7 @@ public class Account : IDisposable
             amount = Math.Abs(amount);
             //Get RGBA
             var rgba = fields[8];
-            if (string.IsNullOrEmpty(rgba))
+            if (string.IsNullOrWhiteSpace(rgba))
             {
                 rgba = defaultTransactionRGBA;
             }
@@ -1357,14 +1357,14 @@ public class Account : IDisposable
                 {
                     Name = groupName,
                     Description = groupDescription,
-                    RGBA = string.IsNullOrEmpty(groupRGBA) ? defaultGroupRGBA : groupRGBA
+                    RGBA = string.IsNullOrWhiteSpace(groupRGBA) ? defaultGroupRGBA : groupRGBA
                 };
                 if (await AddGroupAsync(group))
                 {
                     importResult.NewGroupIds.Add(group.Id);
                 }
             }
-            var tags = fields[14].Split(',').Where(x => !string.IsNullOrEmpty(x));
+            var tags = fields[14].Split(',').Where(x => !string.IsNullOrWhiteSpace(x));
             //Add Transaction
             var transaction = new Transaction(id)
             {
@@ -1432,7 +1432,7 @@ public class Account : IDisposable
             {
                 var t = new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrEmpty(transaction.Name) ? (string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo) : transaction.Name,
+                    Description = string.IsNullOrWhiteSpace(transaction.Name) ? (string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : transaction.Memo) : transaction.Name,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
@@ -1494,7 +1494,7 @@ public class Account : IDisposable
                 var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
                 var t = new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrEmpty(transaction.Memo) ? _("N/A") : transaction.Memo,
+                    Description = string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : transaction.Memo,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
@@ -1736,7 +1736,7 @@ public class Account : IDisposable
                             {
                                 var hex = "#32"; //120
                                 var rgba = pair.Value.UseGroupColor ? Groups[pair.Value.GroupId <= 0 ? 0u : (uint)pair.Value.GroupId].RGBA : pair.Value.RGBA;
-                                if (string.IsNullOrEmpty(rgba))
+                                if (string.IsNullOrWhiteSpace(rgba))
                                 {
                                     hex = "#32FFFFFF";
                                 }
@@ -1970,7 +1970,7 @@ public class Account : IDisposable
             foreach (var pair in data.OrderBy(x => Groups[x.Key].Name == _("Ungrouped") ? " " : Groups[x.Key].Name))
             {
                 var hex = "#FF"; //255
-                var rgba = string.IsNullOrEmpty(Groups[pair.Key].RGBA) ? Configuration.Current.GroupDefaultColor : Groups[pair.Key].RGBA;
+                var rgba = string.IsNullOrWhiteSpace(Groups[pair.Key].RGBA) ? Configuration.Current.GroupDefaultColor : Groups[pair.Key].RGBA;
                 if (rgba.StartsWith("#"))
                 {
                     rgba = rgba.Remove(0, 1);
