@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-11-16 18:17+0000\n"
+"PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
@@ -1067,7 +1067,7 @@ msgstr "Dnes"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:270
 msgid "Select Range"
-msgstr "Zvolte rozsah"
+msgstr "Zvolit rozsah"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:275
 msgctxt "DateRange"
