@@ -1,8 +1,10 @@
-name: denaro
+name: denaro 
 base: core22 
 adopt-info: denaro
 source-code: https://github.com/nlogozzo/NickvisionMoney
 issues: https://github.com/nlogozzo/NickvisionMoney/issues
+donation: https://github.com/sponsors/nlogozzo
+contact: https://matrix.to/#/#nickvision:matrix.org
 grade: stable 
 confinement: strict 
 architectures:
@@ -13,6 +15,7 @@ architectures:
 parts:
   # When the snap of `blueprint-compiler` comes up, we can remove this part upto L21
   blueprint-compiler:
+    source-depth: 1
     source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
     source-tag: 'v0.10.0'
     plugin: meson
@@ -23,13 +26,17 @@ parts:
     after:  # remove this and next line too when the snap of `blueprint-compiler` comes up
       - blueprint-compiler
     plugin: nil
-    source: . 
-      #build-environment:
-      # - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      # - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
-    #build-snaps: # when available
-    #- blueprint-compiler
-    build-packages: 
+    source: https://github.com/NickvisionApps/Denaro.git
+    source-tag: '2023.11.0'
+    source-depth: 1
+    parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
+    build-environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      - PATH: $HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin:$PATH
+      - DOTNET_ROOT: $HOME/.dotnet
+      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
+      - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0 
+    build-packages:
       - wget
     override-pull: |
       craftctl default
@@ -38,10 +45,7 @@ parts:
       ./dotnet-install.sh --channel 8.0
       patch -p1 < $CRAFT_PROJECT_DIR/snap/denaro.patch
     override-build: |
-      export DOTNET_ROOT=$HOME/.dotnet
-      export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
-      export PYTHONPATH=$CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      export GI_TYPELIB_PATH=/snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
+      craftctl default
       cd $CRAFT_PART_SRC
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/snap/denaro/current/usr --ui=gnome --self-contained
@@ -53,7 +57,16 @@ parts:
       done
     organize:
       snap/denaro/current: .
-    parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
+    prime:
+      - -snap/current
+
+slots:
+  denaro:
+    interface: dbus
+    bus: session
+    name: org.nickvision.denaro
+
+
 apps:
   denaro:
     command: usr/bin/org.nickvision.money
