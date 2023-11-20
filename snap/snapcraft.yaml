@@ -26,9 +26,7 @@ parts:
     after:  # remove this and next line too when the snap of `blueprint-compiler` comes up
       - blueprint-compiler
     plugin: nil
-    source: https://github.com/NickvisionApps/Denaro.git
-    source-tag: '2023.11.0'
-    source-depth: 1
+    source: .
     parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
     build-environment:
       - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
