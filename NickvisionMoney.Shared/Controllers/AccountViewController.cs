@@ -410,19 +410,31 @@ public class AccountViewController : IDisposable
         }
         else if (SortTransactionsBy == SortBy.Date)
         {
-            compareTo = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+            compareTo = GetCompareToByDate();
         }
         else if (SortTransactionsBy == SortBy.Amount)
         {
-            var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
-            var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
-            compareTo = aAmount.CompareTo(bAmount);
+            compareTo = GetCompareToByAmount();
         }
         if (!SortFirstToLast)
         {
             compareTo *= -1;
         }
         return compareTo;
+
+        int GetCompareToByDate()
+        {
+            var result = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
+            return result == 0 ? a.CompareTo(b) : result; // If dates are equal, sort by id
+        }
+
+        int GetCompareToByAmount()
+        {
+            var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
+            var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
+            var result  = aAmount.CompareTo(bAmount);
+            return result == 0 ? GetCompareToByDate() : result; // If amounts are equal, sort by date
+        }
     }
 
     /// <summary>
@@ -628,15 +640,7 @@ public class AccountViewController : IDisposable
         if (res.Successful)
         {
             var transactions = _account.Transactions.Keys.ToList();
-            transactions.Sort((a, b) =>
-            {
-                var compareTo = SortTransactionsBy == SortBy.Date ? _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date) : a.CompareTo(b);
-                if (!SortFirstToLast)
-                {
-                    compareTo *= -1;
-                }
-                return compareTo;
-            });
+            transactions.Sort(SortTransactions);
             for (var i = 0; i < transactions.Count; i++)
             {
                 if (transactions[i] == transaction.Id)
