@@ -1012,7 +1012,10 @@ public class Account : IDisposable
             Transactions.Remove(id);
             if (id + 1 == NextAvailableTransactionId)
             {
-                NextAvailableTransactionId--;
+                if(Transactions.Count == 0)
+                    NextAvailableTransactionId = 1;
+                else
+                    NextAvailableTransactionId = Transactions.Max(x => x.Key) + 1;
             }
             BackupAccountToCSV();
             return true;
