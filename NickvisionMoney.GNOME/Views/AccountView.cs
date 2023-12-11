@@ -1241,6 +1241,7 @@ public partial class AccountView : Adw.BreakpointBin
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
         gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
+        OnCalendarMonthYearChanged(null, e);
         _rangeExpander.SetEnableExpansion(false);
     }
 
