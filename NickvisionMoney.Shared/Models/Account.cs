@@ -1013,9 +1013,13 @@ public class Account : IDisposable
             if (id + 1 == NextAvailableTransactionId)
             {
                 if(Transactions.Count == 0)
+                {
                     NextAvailableTransactionId = 1;
+                }
                 else
+                {
                     NextAvailableTransactionId = Transactions.Max(x => x.Key) + 1;
+                }
             }
             BackupAccountToCSV();
             return true;
