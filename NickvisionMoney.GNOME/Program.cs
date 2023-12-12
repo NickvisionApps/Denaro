@@ -43,7 +43,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where the generated ids of new transactions were incorrect.
-              * Fixed an issue that causes sort to behave inconsistently.
+              * Fixed an issue that caused sort to behave inconsistently.
               * Fixed calendar not showing marks for transactions after pressing the ""Today"" button.
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
