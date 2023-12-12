@@ -429,20 +429,6 @@ public class AccountViewController : IDisposable
             compareTo *= -1;
         }
         return compareTo;
-
-        int GetCompareToByDate()
-        {
-            var result = _account.Transactions[a].Date.CompareTo(_account.Transactions[b].Date);
-            return result == 0 ? a.CompareTo(b) : result; // If dates are equal, sort by id
-        }
-
-        int GetCompareToByAmount()
-        {
-            var aAmount = _account.Transactions[a].Amount * (_account.Transactions[a].Type == TransactionType.Income ? 1m : -1m);
-            var bAmount = _account.Transactions[b].Amount * (_account.Transactions[b].Type == TransactionType.Income ? 1m : -1m);
-            var result  = aAmount.CompareTo(bAmount);
-            return result == 0 ? GetCompareToByDate() : result; // If amounts are equal, sort by date
-        }
     }
 
     /// <summary>
