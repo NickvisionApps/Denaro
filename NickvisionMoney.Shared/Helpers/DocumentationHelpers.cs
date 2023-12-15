@@ -21,7 +21,7 @@ public static class DocumentationHelpers
     {
         if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("SNAP")) && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            return $"help:tagger/{pageName}";
+            return $"help:denaro/{pageName}";
         }
         var lang = "C";
         if (!CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture) && CultureInfo.CurrentCulture.Name != "en-US")
