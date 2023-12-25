@@ -1427,8 +1427,9 @@ public class Account : IDisposable
         {
             ofx = new OFXDocumentParser().Import(ofxString);
         }
-        catch
+        catch(Exception e)
         {
+            Console.WriteLine(e);
             return ImportResult.Empty;
         }
         //Transactions
