@@ -776,7 +776,10 @@ public partial class AccountView : Adw.BreakpointBin
             _viewStack.SetVisibleChildName(_viewStack.GetVisibleChildName() == "spinner" ? oldPage : _viewStack.GetVisibleChildName());
             _paneScroll.SetSensitive(true);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine(ex);
+        }
     }
 
     /// <summary>
@@ -803,7 +806,10 @@ public partial class AccountView : Adw.BreakpointBin
             }
             _controller.ExportToCSV(path ?? "", exportMode);
         }
-        catch { }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e);
+        }
     }
 
     /// <summary>
@@ -853,7 +859,10 @@ public partial class AccountView : Adw.BreakpointBin
             };
             dialog.Present();
         }
-        catch { }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e);
+        }
     }
 
     /// <summary>

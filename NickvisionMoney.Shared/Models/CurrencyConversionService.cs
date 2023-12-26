@@ -16,7 +16,7 @@ public class CurrencyConversion
     /// <summary>
     /// The currency code of the source amount
     /// </summary>
-    public string SourceCurrnecy { get; init; }
+    public string SourceCurrency { get; init; }
     /// <summary>
     /// The source amount to convert
     /// </summary>
@@ -44,7 +44,7 @@ public class CurrencyConversion
     /// <param name="conversionRate">The rate of conversion from the source currency to the result currency</param>
     public CurrencyConversion(string sourceCurrency, decimal sourceAmount, string resultCurrency, decimal conversionRate)
     {
-        SourceCurrnecy = sourceCurrency;
+        SourceCurrency = sourceCurrency;
         SourceAmount = sourceAmount;
         ResultCurrency = resultCurrency;
         ConversionRate = conversionRate;
@@ -114,8 +114,7 @@ public static class CurrencyConversionService
             catch (Exception e)
             {
                 // Couldn't get the cached rates
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 needsUpdate = true;
                 json?.Dispose();
             }
@@ -135,8 +134,7 @@ public static class CurrencyConversionService
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 json?.Dispose();
                 return null;
             }
@@ -155,16 +153,14 @@ public static class CurrencyConversionService
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine(e.StackTrace);
+                        Console.Error.WriteLine(e);
                     }
                 }
                 return rates;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 return null;
             }
             finally

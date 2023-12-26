@@ -931,8 +931,9 @@ public class AccountViewController : IDisposable
         {
             res = await _account.ImportFromFileAsync(path, TransactionDefaultColor, GroupDefaultColor);
         }
-        catch
+        catch (Exception e)
         {
+            Console.Error.WriteLine(e);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to import information from the file. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
             return;
         }

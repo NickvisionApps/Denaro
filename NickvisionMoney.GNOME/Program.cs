@@ -45,6 +45,7 @@ public partial class Program
             @"* Fixed an issue where the generated ids of new transactions were incorrect.
               * Fixed an issue that caused sort to behave inconsistently.
               * Fixed calendar not showing marks for transactions after pressing the ""Today"" button.
+              * Added more logging to help debug issues.
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))
@@ -86,8 +87,7 @@ public partial class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine($"\n\n{ex.StackTrace}");
+            Console.Error.WriteLine(ex);
             return -1;
         }
     }

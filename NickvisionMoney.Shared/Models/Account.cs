@@ -324,8 +324,9 @@ public class Account : IDisposable
                 _database.Open();
                 _loggedIn = true;
             }
-            catch
+            catch (Exception e)
             {
+                Console.Error.WriteLine(e);
                 _database.Close();
                 _database.Dispose();
                 _database = null;
@@ -1207,6 +1208,7 @@ public class Account : IDisposable
     {
         if (!System.IO.Path.Exists(path))
         {
+            Console.Error.WriteLine($"File not found: {path}");
             return ImportResult.Empty;
         }
         var extension = System.IO.Path.GetExtension(path).ToLower();
@@ -1222,6 +1224,7 @@ public class Account : IDisposable
         {
             return await ImportFromQIFAsync(path, defaultTransactionRGBA, defaultGroupRGBA);
         }
+        Console.Error.WriteLine($"Unsupported file extension: {extension}");
         return ImportResult.Empty;
     }
 
@@ -1239,8 +1242,9 @@ public class Account : IDisposable
         {
             lines = File.ReadAllLines(path);
         }
-        catch
+        catch (Exception e)
         {
+            Console.Error.WriteLine(e);
             return ImportResult.Empty;
         }
         var importResult = new ImportResult();
@@ -1427,8 +1431,9 @@ public class Account : IDisposable
         {
             ofx = new OFXDocumentParser().Import(ofxString);
         }
-        catch
+        catch (Exception e)
         {
+            Console.Error.WriteLine(e);
             return ImportResult.Empty;
         }
         //Transactions
@@ -1471,8 +1476,9 @@ public class Account : IDisposable
             qif = QifDocument.Load(File.OpenRead(path));
             Thread.CurrentThread.CurrentCulture = oldCulture;
         }
-        catch
+        catch (Exception e)
         {
+            Console.Error.WriteLine(e);
             return ImportResult.Empty;
         }
         var importResult = new ImportResult();
@@ -1558,8 +1564,9 @@ public class Account : IDisposable
             File.WriteAllText(path, result);
             return true;
         }
-        catch
+        catch (Exception e)
         {
+            Console.Error.WriteLine(e);
             return false;
         }
     }
@@ -1851,7 +1858,7 @@ public class Account : IDisposable
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.Error.WriteLine(e);
             return false;
         }
         return true;
