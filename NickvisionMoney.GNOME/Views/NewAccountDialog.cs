@@ -269,6 +269,7 @@ public partial class NewAccountDialog : Adw.Window
             var folder = Gio.FileHelper.NewForPath(_controller.Folder);
             folderDialog.SetInitialFolder(folder);
         }
+
         try
         {
             var file = await folderDialog.SelectFolderAsync(this);
@@ -276,7 +277,10 @@ public partial class NewAccountDialog : Adw.Window
             _folderRow.SetText(Path.GetFileName(_controller.Folder));
             ValidateName();
         }
-        catch { }
+        catch(Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+        }
     }
 
     /// <summary>
@@ -469,7 +473,10 @@ public partial class NewAccountDialog : Adw.Window
             _controller.ImportFile = file.GetPath();
             _importRow.SetText(_controller.ImportFile);
         }
-        catch { }
+        catch(Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+        }
     }
 
     /// <summary>
