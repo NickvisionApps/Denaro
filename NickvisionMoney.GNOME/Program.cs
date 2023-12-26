@@ -86,8 +86,7 @@ public partial class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine($"\n\n{ex.StackTrace}");
+            Console.Error.WriteLine(ex);
             return -1;
         }
     }
