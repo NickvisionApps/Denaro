@@ -708,6 +708,9 @@ public partial class TransactionDialog : Adw.Window
             }
             Validate();
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine(ex);
+        }
     }
 }

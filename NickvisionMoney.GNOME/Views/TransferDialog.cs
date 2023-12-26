@@ -239,7 +239,10 @@ public partial class TransferDialog : Adw.Window
             _destinationCurrencyRow.SetText("");
             Validate();
         }
-        catch { }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+        }
     }
 
     /// <summary>

@@ -166,7 +166,10 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 _csvBackupRow.SetText(path);
             }
         }
-        catch { }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+        }
     }
 
     /// <summary>
