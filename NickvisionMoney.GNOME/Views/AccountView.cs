@@ -773,9 +773,7 @@ public partial class AccountView : Adw.BreakpointBin
             _paneScroll.SetSensitive(false);
             _viewStack.SetVisibleChildName("spinner");
             await Task.Run(async () => await _controller.ImportFromFileAsync(file!.GetPath() ?? ""));
-            _viewStack.SetVisibleChildName(_viewStack.GetVisibleChildName() == "spinner"
-                ? oldPage
-                : _viewStack.GetVisibleChildName());
+            _viewStack.SetVisibleChildName(_viewStack.GetVisibleChildName() == "spinner" ? oldPage : _viewStack.GetVisibleChildName());
             _paneScroll.SetSensitive(true);
         }
         catch (Exception ex)
@@ -837,9 +835,7 @@ public partial class AccountView : Adw.BreakpointBin
                 path += ".pdf";
             }
 
-            var dialog = Adw.MessageDialog.New(_parentWindow, _("Add Password To PDF?"),
-                _(
-                    "Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."));
+            var dialog = Adw.MessageDialog.New(_parentWindow, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."));
             dialog.SetIconName(_controller.AppInfo.ID);
             dialog.AddResponse("no", _("No"));
             dialog.SetDefaultResponse("no");
