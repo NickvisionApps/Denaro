@@ -269,7 +269,6 @@ public partial class NewAccountDialog : Adw.Window
             var folder = Gio.FileHelper.NewForPath(_controller.Folder);
             folderDialog.SetInitialFolder(folder);
         }
-
         try
         {
             var file = await folderDialog.SelectFolderAsync(this);

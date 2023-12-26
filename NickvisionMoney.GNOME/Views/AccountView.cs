@@ -834,7 +834,6 @@ public partial class AccountView : Adw.BreakpointBin
             {
                 path += ".pdf";
             }
-
             var dialog = Adw.MessageDialog.New(_parentWindow, _("Add Password To PDF?"), _("Would you like to password-protect the PDF file?\n\nIf the password is lost, the PDF will be inaccessible."));
             dialog.SetIconName(_controller.AppInfo.ID);
             dialog.AddResponse("no", _("No"));
@@ -856,7 +855,6 @@ public partial class AccountView : Adw.BreakpointBin
                 {
                     _controller.ExportToPDF(path ?? "", exportMode, null);
                 }
-
                 dialog.Destroy();
             };
             dialog.Present();
