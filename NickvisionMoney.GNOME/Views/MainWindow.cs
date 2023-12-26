@@ -185,7 +185,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     await fileLauncher.LaunchAsync(this);
                 }
-                catch { }
+                catch (Exception exception)
+                {
+                    Console.Error.WriteLine(exception);
+                }
             };
         }
         _toastOverlay.AddToast(toast);
@@ -309,7 +312,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             var file = await openFileDialog.OpenAsync(this);
             await _controller.AddAccountAsync(file.GetPath());
         }
-        catch { }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+        }
     }
 
     /// <summary>
