@@ -277,7 +277,7 @@ public partial class NewAccountDialog : Adw.Window
             _folderRow.SetText(Path.GetFileName(_controller.Folder));
             ValidateName();
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             Console.Error.WriteLine(exception);
         }
@@ -473,7 +473,7 @@ public partial class NewAccountDialog : Adw.Window
             _controller.ImportFile = file.GetPath();
             _importRow.SetText(_controller.ImportFile);
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             Console.Error.WriteLine(exception);
         }

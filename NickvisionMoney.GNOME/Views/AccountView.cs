@@ -808,7 +808,7 @@ public partial class AccountView : Adw.BreakpointBin
             }
             _controller.ExportToCSV(path ?? "", exportMode);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.Error.WriteLine(e);
         }

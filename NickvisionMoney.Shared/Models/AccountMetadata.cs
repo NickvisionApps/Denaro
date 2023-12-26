@@ -225,7 +225,7 @@ public class AccountMetadata : ICloneable
         {
             database.Open();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.Error.WriteLine(e);
             database.Close();

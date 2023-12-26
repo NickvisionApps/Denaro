@@ -287,7 +287,7 @@ public class MainWindowController : IDisposable
         {
             accountViewController.Login(null);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.Error.WriteLine(e);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
@@ -341,7 +341,7 @@ public class MainWindowController : IDisposable
                     return false;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Error.WriteLine(e);
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to open the account. Please ensure that the app has permissions to access the file and try again."), NotificationSeverity.Error));
