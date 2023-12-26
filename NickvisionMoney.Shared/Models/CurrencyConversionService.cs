@@ -114,8 +114,7 @@ public static class CurrencyConversionService
             catch (Exception e)
             {
                 // Couldn't get the cached rates
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 needsUpdate = true;
                 json?.Dispose();
             }
@@ -135,8 +134,7 @@ public static class CurrencyConversionService
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 json?.Dispose();
                 return null;
             }
@@ -155,16 +153,14 @@ public static class CurrencyConversionService
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine(e.StackTrace);
+                        Console.Error.WriteLine(e);
                     }
                 }
                 return rates;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
+                Console.Error.WriteLine(e);
                 return null;
             }
             finally
