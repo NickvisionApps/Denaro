@@ -16,7 +16,7 @@ public class CurrencyConversion
     /// <summary>
     /// The currency code of the source amount
     /// </summary>
-    public string SourceCurrnecy { get; init; }
+    public string SourceCurrency { get; init; }
     /// <summary>
     /// The source amount to convert
     /// </summary>
@@ -44,7 +44,7 @@ public class CurrencyConversion
     /// <param name="conversionRate">The rate of conversion from the source currency to the result currency</param>
     public CurrencyConversion(string sourceCurrency, decimal sourceAmount, string resultCurrency, decimal conversionRate)
     {
-        SourceCurrnecy = sourceCurrency;
+        SourceCurrency = sourceCurrency;
         SourceAmount = sourceAmount;
         ResultCurrency = resultCurrency;
         ConversionRate = conversionRate;
