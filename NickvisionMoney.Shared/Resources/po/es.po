@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-10-20 04:03+0000\n"
-"Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
+"PO-Revision-Date: 2023-12-29 06:12+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/es/>\n"
 "Language: es\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -1533,7 +1534,7 @@ msgstr "Usar tarifas personalizadas"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:90
 msgid "Enter the conversion rates manually"
-msgstr "Introducir manualmente los índices para la conversión"
+msgstr "Introduzca manualmente los índices para la conversión"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:117
 msgctxt "Button"
