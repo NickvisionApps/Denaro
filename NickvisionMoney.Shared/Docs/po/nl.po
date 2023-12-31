@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-09-03 23:01+0000\n"
+"PO-Revision-Date: 2023-12-31 00:09+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/nl/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -226,22 +226,22 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/account.page:73
 msgid "$n"
-msgstr ""
+msgstr "$n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:74
 msgid "n$"
-msgstr ""
+msgstr "n$"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:75
 msgid "$ n"
-msgstr ""
+msgstr "$ n"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:76
 msgid "n $"
-msgstr ""
+msgstr "n $"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:80
@@ -323,9 +323,8 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:104
-#, fuzzy
 msgid "Tags Visibility"
-msgstr "Groepszichtbaarheid"
+msgstr "Label­zichtbaarheid"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:105
@@ -413,7 +412,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:41
 msgid "Checking Account Color"
-msgstr ""
+msgstr "Kleur van betaal­rekening"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
@@ -425,7 +424,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:45
 msgid "Savings Account Color"
-msgstr ""
+msgstr "Kleur van spaar­rekening"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:46
@@ -437,7 +436,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr ""
+msgstr "Kleur van bedrijfs­rekening"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -449,7 +448,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:53
 msgid "Use Native Digits"
-msgstr ""
+msgstr "Lokale decimale notatie gebruiken"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:54
@@ -462,7 +461,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
-msgstr ""
+msgstr "Decimaal scheidings­teken invoegen"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:58
@@ -475,7 +474,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
 msgid "CSV Backup Folder"
-msgstr ""
+msgstr "CSV-back-up­map"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:62
@@ -556,42 +555,42 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:56
 msgid "0 - Never"
-msgstr ""
+msgstr "0 - Nooit"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:57
 msgid "1 - Daily"
-msgstr ""
+msgstr "1 - Dagelijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:58
 msgid "2 - Weekly"
-msgstr ""
+msgstr "2 - Wekelijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
-msgstr ""
+msgstr "7 - Twee­wekelijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:60
 msgid "3 - Monthly"
-msgstr ""
+msgstr "3 - Maandelijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
-msgstr ""
+msgstr "4 - Eén keer per kwartaal"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:62
 msgid "5 - Yearly"
-msgstr ""
+msgstr "5 - Jaarlijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:63
 msgid "6 - Biyearly"
-msgstr ""
+msgstr "6 - Twee­jaarlijks"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:64
@@ -703,7 +702,7 @@ msgstr "Hulp voor Denaro"
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Denaro Help"
-msgstr ""
+msgstr "<_:media-1/> Denaro-hulp"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -819,7 +818,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr ""
+msgstr "Einddatum herhalen"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
