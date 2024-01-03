@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-09-03 23:01+0000\n"
+"PO-Revision-Date: 2023-12-31 00:09+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -548,7 +548,7 @@ msgstr "Facturen"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:495
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:132
 msgid "Repeat End Date"
-msgstr "Einddatum herhaling"
+msgstr "Einddatum herhalen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:517
 msgid "Repeat End Date (Invalid)"
@@ -1307,15 +1307,15 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:74
 msgid "Checking Account Color"
-msgstr "Kleur van chequerekening"
+msgstr "Kleur van betaal­rekening"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:84
 msgid "Savings Account Color"
-msgstr "Kleur van spaarrekening"
+msgstr "Kleur van spaar­rekening"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:94
 msgid "Business Account Color"
-msgstr "Kleur van zakelijke rekening"
+msgstr "Kleur van bedrijfs­rekening"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:106
 msgid "Locale"
@@ -1323,7 +1323,7 @@ msgstr "Regio"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:109
 msgid "Use Native Digits"
-msgstr "Inheemse cijfers gebruiken"
+msgstr "Lokale decimale notatie gebruiken"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:110
 msgid ""
@@ -1335,7 +1335,7 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:119
 msgid "Insert Decimal Separator"
-msgstr "Decimaal scheidingsteken invoegen"
+msgstr "Decimaal scheidings­teken invoegen"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:120
 msgid ""
@@ -1363,7 +1363,7 @@ msgstr "Back-up"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:137
 msgid "CSV Backup Folder"
-msgstr "CSV-back-up-map"
+msgstr "CSV-back-up­map"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:138
 msgid ""
