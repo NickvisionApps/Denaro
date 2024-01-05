@@ -232,10 +232,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.11.3/nickvision.aura.2023.11.3.nupkg",
-    "sha512": "80a7d1514433de2b08fce0f5315b722b1b3f8bda679ed38654ad1a14af065d5e31d284a19c975e208cd8a27aec5af52db644969fff3243334749a236cfc1ecfc",
+    "url": "https://api.nuget.org/v3-flatcontainer/nickvision.aura/2023.11.4/nickvision.aura.2023.11.4.nupkg",
+    "sha512": "ddf2502d83d4957ef4acecfb472f697360daa487d4c721969e94741bed24087f107478618b717209bd4c35186f0666cffbcf64dc240785dae7b21180dc2b0bcb",
     "dest": "nuget-sources",
-    "dest-filename": "nickvision.aura.2023.11.3.nupkg"
+    "dest-filename": "nickvision.aura.2023.11.4.nupkg"
   },
   {
     "type": "file",
@@ -260,10 +260,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2023.10.2/questpdf.2023.10.2.nupkg",
-    "sha512": "e8eca44bd71cadbafc39dffe6ec74ba5507897e8e14bdb6433d529af51b9a52e9a46ee1cece82f0d0ef64c2741ae697692f6a6bf5cccf1ee34ec09a6c81992f4",
+    "url": "https://api.nuget.org/v3-flatcontainer/questpdf/2023.12.2/questpdf.2023.12.2.nupkg",
+    "sha512": "c0a10d05c180bb99d7271688bf2832553a3c3bee385fdb501be7a86e1d98c18224b9e087933667ab95357c6e7108d756b188ab2f3b2a75b09a1aafcc71a56f70",
     "dest": "nuget-sources",
-    "dest-filename": "questpdf.2023.10.2.nupkg"
+    "dest-filename": "questpdf.2023.12.2.nupkg"
   },
   {
     "type": "file",
@@ -400,10 +400,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/sixlabors.imagesharp/3.0.2/sixlabors.imagesharp.3.0.2.nupkg",
-    "sha512": "bc24490da6f0bbba03c1724681698418045534ce5f14bf4a1088de53c65a9b81adf3842ae9430a1e33f0dc68fda83cfacc3ddf9a849b9ac2195293d3239876e6",
+    "url": "https://api.nuget.org/v3-flatcontainer/sixlabors.imagesharp/3.1.2/sixlabors.imagesharp.3.1.2.nupkg",
+    "sha512": "1f83ed320aed2b9fb42e02f89ffcc2274ca22b944655dcff226670c85997e6ed16444ca44430d8a2d78016833c165c1f86414dd3b72f6a6a30f71d75174a982e",
     "dest": "nuget-sources",
-    "dest-filename": "sixlabors.imagesharp.3.0.2.nupkg"
+    "dest-filename": "sixlabors.imagesharp.3.1.2.nupkg"
   },
   {
     "type": "file",
@@ -449,10 +449,24 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.bundle_e_sqlcipher/2.1.7/sqlitepclraw.bundle_e_sqlcipher.2.1.7.nupkg",
+    "sha512": "76231e411ec8d702a0c6d538fe233dada4ba4b338595ee04aa4438f1428525ded7f686863f39cbfd0b71c0560b544f609ea6c51b5956406c58c47c40811c75b5",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.bundle_e_sqlcipher.2.1.7.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.core/2.1.6/sqlitepclraw.core.2.1.6.nupkg",
     "sha512": "16bc39cd5325dea37e1564fc328a35966d6d820878290d945dc57496b716d4935b534285989af32fa7bd25ef9a8ac795b63e6a19044d3f84a104d643319473be",
     "dest": "nuget-sources",
     "dest-filename": "sqlitepclraw.core.2.1.6.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.core/2.1.7/sqlitepclraw.core.2.1.7.nupkg",
+    "sha512": "dfdb0f13dee0076ef2aec7bd991269e27539f431dd797eb029739ab9e365211ce2cfbb209cc5ab1512168db789e454920fa594aa1bbd2c314f166753de55e328",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.core.2.1.7.nupkg"
   },
   {
     "type": "file",
@@ -463,10 +477,24 @@
   },
   {
     "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.lib.e_sqlcipher/2.1.7/sqlitepclraw.lib.e_sqlcipher.2.1.7.nupkg",
+    "sha512": "0940d0c374c7136ead2ec74cf5b0d8639f277a8bae12ccd67d1bfe245e916252be364348ce3dea7019040f37d27eb8f2d67bc419c593ce1dce7a0cf60dc41eb1",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.lib.e_sqlcipher.2.1.7.nupkg"
+  },
+  {
+    "type": "file",
     "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.provider.e_sqlcipher/2.1.6/sqlitepclraw.provider.e_sqlcipher.2.1.6.nupkg",
     "sha512": "b8eba767cc1376d2db0997d78a47f93108be4dc9305cfed5abc8819ce27ad5da80ea538e06056540c7c3303e54ee1fcccfa9763981b7da20787fe0d621e9e4d3",
     "dest": "nuget-sources",
     "dest-filename": "sqlitepclraw.provider.e_sqlcipher.2.1.6.nupkg"
+  },
+  {
+    "type": "file",
+    "url": "https://api.nuget.org/v3-flatcontainer/sqlitepclraw.provider.e_sqlcipher/2.1.7/sqlitepclraw.provider.e_sqlcipher.2.1.7.nupkg",
+    "sha512": "32385104d8156d964733b75ecee998c86964a36291c33279114eaa318895689567c70035e7bb49800a11ffd246bc3b93b1a1bae1302b489749698a465fa1cf1d",
+    "dest": "nuget-sources",
+    "dest-filename": "sqlitepclraw.provider.e_sqlcipher.2.1.7.nupkg"
   },
   {
     "type": "file",
@@ -897,10 +925,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/cake.tool/3.2.0/cake.tool.3.2.0.nupkg",
-    "sha512": "d83ba507bf930833817462e20f1413dfbd88b7c6c15876e774641aed08deeb15e39db17bc931248510e833823b4a833faaaee8c138a055a109273d1c368bf77a",
+    "url": "https://api.nuget.org/v3-flatcontainer/cake.tool/4.0.0/cake.tool.4.0.0.nupkg",
+    "sha512": "63b5049577afda8b70f7586582a1971452d767b2f771f2f3d1c0e4367ca3d6406a1b7e3a6ee81c7392e7b1a0ce98eb1f6494de9b7539a75fa9327140685b2b7d",
     "dest": "nuget-sources",
-    "dest-filename": "cake.tool.3.2.0.nupkg"
+    "dest-filename": "cake.tool.4.0.0.nupkg"
   },
   {
     "type": "file",

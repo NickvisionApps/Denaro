@@ -45,6 +45,7 @@ public partial class Program
             @"* Fixed an issue where the generated ids of new transactions were incorrect
               * Fixed an issue that caused sort to behave inconsistently
               * Fixed an issue where dragging and dropping an account file was not working
+              * Fixed an issue where help documentation was not showing in-app
               * Fixed calendar not showing marks for transactions after pressing the ""Today"" button
               * Added more logging to help debug issues
               * Updated and added translations (Thanks to everyone on Weblate)!";
