@@ -494,7 +494,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
     private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
-        var file = new Gio.FileHlper(e.Value.GetObject()!.Handle, false);
+        var file = new Gio.FileHelper(e.Value.GetObject()!.Handle, false);
         var path = file.GetPath() ?? "";
         if (File.Exists(path))
         {

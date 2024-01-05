@@ -85,7 +85,6 @@ public class MainWindowController : IDisposable
             catch (IOException) { }
             Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
-        Aura.Active.SetConfig<Configuration>("config");
         AppInfo.Version = "2024.1.0-next";
         AppInfo.ShortName = _("Denaro");
         AppInfo.Description = _("Manage your personal finances");
@@ -148,7 +147,7 @@ public class MainWindowController : IDisposable
         set
         {
             Configuration.Current.ShowGraphs = value;
-            Aura.Active.SaveConfig("config");
+            Configuration.Current.Save();
         }
     }
 
@@ -378,7 +377,7 @@ public class MainWindowController : IDisposable
     public void RemoveRecentAccount(RecentAccount recentAccount)
     {
         Configuration.Current.RemoveRecentAccount(recentAccount);
-        Aura.Active.SaveConfig("config");
+        Configuration.Current.Save();
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
     }
 

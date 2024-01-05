@@ -50,14 +50,14 @@
 				<item>
 					<title its:translate="no">RepeatInterval</title>
 					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
+					<p>0 - Nooit</p>
+					<p>1 - Dagelijks</p>
+					<p>2 - Wekelijks</p>
+					<p>7 - Twee­wekelijks</p>
+					<p>3 - Maandelijks</p>
+					<p>4 - Eén keer per kwartaal</p>
+					<p>5 - Jaarlijks</p>
+					<p>6 - Twee­jaarlijks</p>
 					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
 				</item>
 				<item>

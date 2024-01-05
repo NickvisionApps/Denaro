@@ -453,7 +453,7 @@ public class AccountViewController : IDisposable
                 Name = AccountTitle,
                 Type = AccountType
             });
-            Aura.Active.SaveConfig("config");
+            Configuration.Current.Save();
             RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
             //Groups
             foreach (var pair in _account.Groups.OrderBy(x => x.Value.Name == _("Ungrouped") ? " " : x.Value.Name))
@@ -607,7 +607,7 @@ public class AccountViewController : IDisposable
             Name = AccountTitle,
             Type = AccountType
         });
-        Aura.Active.SaveConfig("config");
+        Configuration.Current.Save();
         RecentAccountsChanged?.Invoke(this, EventArgs.Empty);
         if (oldSymbol != metadata.CustomCurrencySymbol || oldStyle != metadata.CustomCurrencyAmountStyle || oldDecimalSeparator != metadata.CustomCurrencyDecimalSeparator || oldGroupSeparator != metadata.CustomCurrencyGroupSeparator || oldDecimalDigits != metadata.CustomCurrencyDecimalDigits)
         {

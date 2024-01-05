@@ -1,5 +1,4 @@
 ﻿using Nickvision.Aura;
-using Nickvision.Aura.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json.Serialization;
@@ -105,7 +104,7 @@ public class Configuration : ConfigurationBase
     /// <summary>
     /// Gets the singleton object
     /// </summary>
-    internal static Configuration Current => (Configuration)Aura.Active.ConfigFiles["config"];
+    internal static Configuration Current => Aura.Active.GetConfig<Configuration>("config");
 
     /// <summary>
     /// Gets the list of recent accounts available
@@ -161,7 +160,7 @@ public class Configuration : ConfigurationBase
                     RecentAccount2 = recents[1];
                     RecentAccount3 = new RecentAccount();
                 }
-                Aura.Active.SaveConfig("config");
+                Configuration.Current.Save();
             }
             return recents;
         }

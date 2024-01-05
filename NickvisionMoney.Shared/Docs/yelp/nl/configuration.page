@@ -35,27 +35,27 @@
 		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
+		<title>Kleur van betaal­rekening</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
+		<title>Kleur van spaar­rekening</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Business Account Color</title>
+		<title>Kleur van bedrijfs­rekening</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
+		<title>Lokale decimale notatie gebruiken</title>
 		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
+		<title>Decimaal scheidings­teken invoegen</title>
 		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
+		<title>CSV-back-up­map</title>
 		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
 	</item>
 </terms>

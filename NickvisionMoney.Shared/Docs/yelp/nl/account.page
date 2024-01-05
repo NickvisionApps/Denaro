@@ -98,7 +98,7 @@
 		<p>Each account stores information about whether the groups list in the main window is hidden or not. Every time you change groups list visibility, it's saved and then restored when you reopen the account.</p>
 	</item>
 	<item>
-        <title>Tags Visibility</title>
+        <title>Label­zichtbaarheid</title>
         <p>Each account stores information about whether the tags list in the main window is hidden or not. Every time you change tags list visibility, it's saved and then restored when you reopen the account.</p>
     </item>
 </terms>

@@ -55,7 +55,7 @@
 		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
 	</item>
     <item>
-        <title>Tags</title>
+        <title>标签</title>
         <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
     </item>
 	<item>
