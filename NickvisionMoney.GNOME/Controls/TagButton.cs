@@ -25,6 +25,7 @@ public class TagButton : Gtk.ToggleButton
     {
         Tag = tag;
         SetLabel(tag);
+        SetCanShrink(true);
         OnToggled += (sender, e) => FilterChanged?.Invoke(this, (Tag, GetActive()));
     }
 }

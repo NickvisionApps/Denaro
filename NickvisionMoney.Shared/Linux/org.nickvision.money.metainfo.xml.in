@@ -55,6 +55,7 @@
         <p>- Fixed an issue where help documentation was not showing in-app</p>
         <p>- Fixed an issue where some ofx files could not be imported</p>
         <p>- Fixed an issue where the calendar was not showing marked days after pressing the "Today" button</p>
+        <p>- Fixed an issue where tag buttons would grow to super long sizes</p>
         <p>- Added more logging to help debug issues</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>

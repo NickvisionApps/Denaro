@@ -48,6 +48,7 @@ public partial class Program
               * Fixed an issue where help documentation was not showing in-app
               * Fixed an issue where some ofx files could not be imported
               * Fixed an issue where the calendar was not showing marked days after pressing the ""Today"" button
+              * Fixed an issue where tag buttons would grow to super long sizes
               * Added more logging to help debug issues
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
