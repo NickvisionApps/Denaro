@@ -1422,6 +1422,29 @@ public class Account : IDisposable
         OFXDocument? ofx = null;
         //Check For Security
         var ofxString = File.ReadAllText(path);
+        if (!ofxString.Contains("SIGNONMSGSRQV1") && !ofxString.Contains("SIGNONMSGSRSV1"))
+        {
+            ofxString = ofxString.Insert(ofxString.IndexOf("<OFX>") + 5, @"
+<SIGNONMSGSRSV1>
+    <SONRS>
+        <STATUS>
+            <CODE>0</CODE>
+            <SEVERITY>INFO</SEVERITY>
+            <MESSAGE>OK</MESSAGE>
+        </STATUS>
+        <DTSERVER>20230302112111[-8:PST]</DTSERVER>
+        <LANGUAGE>ENG</LANGUAGE>
+    </SONRS>
+</SIGNONMSGSRSV1>");
+        }
+        if(!ofxString.Contains("LEDGERBAL"))
+        {
+            ofxString = ofxString.Insert(ofxString.IndexOf("</BANKTRANLIST>") + 15, @"
+<LEDGERBAL>
+    <BALAMT>0.00</BALAMT>
+    <DTASOF>20230302112111[-8:PST]</DTASOF>
+</LEDGERBAL>");
+        }
         if (ofxString.Contains("SECURITY:TYPE1"))
         {
             ofxString = ofxString.Replace("SECURITY:TYPE1", "SECURITY:NONE");

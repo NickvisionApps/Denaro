@@ -46,7 +46,8 @@ public partial class Program
               * Fixed an issue that caused sort to behave inconsistently
               * Fixed an issue where dragging and dropping an account file was not working
               * Fixed an issue where help documentation was not showing in-app
-              * Fixed calendar not showing marks for transactions after pressing the ""Today"" button
+              * Fixed an issue where some ofx files could not be imported
+              * Fixed an issue where the calendar was not showing marked days after pressing the ""Today"" button
               * Added more logging to help debug issues
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
