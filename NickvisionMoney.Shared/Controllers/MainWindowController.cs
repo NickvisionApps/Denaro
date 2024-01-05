@@ -97,6 +97,7 @@ public class MainWindowController : IDisposable
         AppInfo.Designers[_("Nicholas Logozzo")] = new Uri("https://github.com/nlogozzo");
         AppInfo.Designers[_("Fyodor Sobolev")] = new Uri("https://github.com/fsobolev");
         AppInfo.Designers[_("DaPigGuy")] = new Uri("https://github.com/DaPigGuy");
+        AppInfo.Designers[_("JoseBritto")] = new Uri("https://github.com/JoseBritto");
         AppInfo.Artists[_("David Lapshin")] = new Uri("https://github.com/daudix-UFO");
         AppInfo.Artists[_("Tobias Bernard")] = new Uri("https://github.com/bertob");
         AppInfo.TranslatorCredits = _("translator-credits");
