@@ -42,10 +42,11 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where the generated ids of new transactions were incorrect.
-              * Fixed an issue that caused sort to behave inconsistently.
-              * Fixed calendar not showing marks for transactions after pressing the ""Today"" button.
-              * Added more logging to help debug issues.
+            @"* Fixed an issue where the generated ids of new transactions were incorrect
+              * Fixed an issue that caused sort to behave inconsistently
+              * Fixed an issue where dragging and dropping an account file was not working
+              * Fixed calendar not showing marks for transactions after pressing the ""Today"" button
+              * Added more logging to help debug issues
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))

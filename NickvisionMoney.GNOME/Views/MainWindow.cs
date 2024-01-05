@@ -494,15 +494,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
     private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
-        var obj = e.Value.GetObject();
-        if (obj is Gio.FileHelper file)
+        var file = new Gio.FileHlper(e.Value.GetObject()!.Handle, false);
+        var path = file.GetPath() ?? "";
+        if (File.Exists(path))
         {
-            var path = file.GetPath() ?? "";
-            if (File.Exists(path))
-            {
-                _controller.AddAccountAsync(path).Wait();
-                return true;
-            }
+            Task.Run(async () => await _controller.AddAccountAsync(path));
+            return true;
         }
         return false;
     }
