@@ -47,7 +47,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2024.1.0-next" date="2024-01-01">
+    <release version="2024.1.0" date="2024-01-04">
       <description translatable="no">
         <p>- Fixed an issue where the generated ids of new transactions were incorrect</p>
         <p>- Fixed an issue that caused sort to behave inconsistently</p>
