@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-10-08 04:03+0000\n"
+"PO-Revision-Date: 2024-01-08 06:00+0000\n"
 "Last-Translator: Cassio Gomes Pereira <cassiogomes00@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "nickvision-money/app/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -209,7 +209,6 @@ msgid "Currency Symbol (Invalid)"
 msgstr "Símbolo da moeda (inválido)"
 
 #: ../../../Controllers/MainWindowController.cs:100
-#, fuzzy
 msgid "DaPigGuy"
 msgstr "DaPigGuy"
 
@@ -219,7 +218,6 @@ msgid "Date"
 msgstr "Data"
 
 #: ../../../Controllers/MainWindowController.cs:101
-#, fuzzy
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
@@ -243,7 +241,6 @@ msgid "Decimal Separator (Invalid)"
 msgstr "Separador decimal (inválido)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:944
-#, fuzzy
 msgid "Delete Existing"
 msgstr "Excluir as Existentes"
 
@@ -332,7 +329,6 @@ msgid "Exported account to file successfully."
 msgstr "Conta exportada para o arquivo com sucesso."
 
 #: ../../../Controllers/MainWindowController.cs:99
-#, fuzzy
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
@@ -465,7 +461,6 @@ msgstr "Nunca"
 
 #: ../../../Controllers/MainWindowController.cs:96
 #: ../../../Controllers/MainWindowController.cs:98
-#, fuzzy
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
@@ -610,7 +605,6 @@ msgstr "Ordenar por Id"
 #: ../../../Models/Account.cs:1722
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:197
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:196
-#, fuzzy
 msgid "Tags"
 msgstr "Tags"
 
