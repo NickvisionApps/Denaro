@@ -5,7 +5,7 @@
   <project_license>MIT</project_license>
   <name>Denaro</name>
   <project_group>Nickvision</project_group>
-  <developer_name>Nickvision</developer_name>
+  <developer_name translatable="no">Nickvision</developer_name>
   <summary>Manage your personal finances</summary>
   <description>
     <p>— Manage multiple accounts at a time, with a familiar tab interface</p>
@@ -41,6 +41,7 @@
   <url type="homepage">https://github.com/NickvisionApps/Denaro</url>
   <url type="bugtracker">https://github.com/NickvisionApps/Denaro/issues</url>
   <url type="donation">https://github.com/sponsors/nlogozzo</url>
+  <url type="vcs-browser">https://github.com/NickvisionApps/Denaro</url>
   <url type="translate">https://hosted.weblate.org/engage/nickvision-money/</url>
   <provides>
     <binary>org.nickvision.money</binary>
@@ -71,7 +72,6 @@
     <display_length compare="ge">360</display_length>
   </requires>
   <custom>
-    <value key="Purism::form_factor">workstation</value>
     <value key="Purism::form_factor">mobile</value>
   </custom>
 </component>
