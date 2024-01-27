@@ -42,14 +42,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where the generated ids of new transactions were incorrect
-              * Fixed an issue that caused sort to behave inconsistently
-              * Fixed an issue where dragging and dropping an account file was not working
-              * Fixed an issue where help documentation was not showing in-app
-              * Fixed an issue where some ofx files could not be imported
-              * Fixed an issue where the calendar was not showing marked days after pressing the ""Today"" button
-              * Fixed an issue where tag buttons would grow to super long sizes
-              * Added more logging to help debug issues
+            @"* Improved importing of QIF files
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))

@@ -1530,7 +1530,6 @@ public class Account : IDisposable
                 var group = Groups.Values.FirstOrDefault(x => x.Name == transaction.Category);
                 var t = new Transaction(NextAvailableTransactionId)
                 {
-                    Description = string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : transaction.Memo,
                     Date = DateOnly.FromDateTime(transaction.Date),
                     Type = transaction.Amount > 0 ? TransactionType.Income : TransactionType.Expense,
                     Amount = Math.Abs(transaction.Amount),
@@ -1538,6 +1537,15 @@ public class Account : IDisposable
                     UseGroupColor = group != null,
                     RGBA = defaultTransactionRGBA
                 };
+                if(!string.IsNullOrWhiteSpace(transaction.Payee) && !string.IsNullOrWhiteSpace(transaction.Memo))
+                {
+                    t.Description = transaction.Payee;
+                    t.Notes = transaction.Memo;
+                }
+                else
+                {
+                    t.Description = string.IsNullOrWhiteSpace(transaction.Payee) ? (string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : string.IsNullOrWhiteSpace(transaction.Memo)) : transaction.Payee;
+                }
                 if ((await AddTransactionAsync(t)).Successful)
                 {
                     importResult.NewTransactionIds.Add(t.Id);
