@@ -1544,7 +1544,7 @@ public class Account : IDisposable
                 }
                 else
                 {
-                    t.Description = string.IsNullOrWhiteSpace(transaction.Payee) ? (string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : string.IsNullOrWhiteSpace(transaction.Memo)) : transaction.Payee;
+                    t.Description = string.IsNullOrWhiteSpace(transaction.Payee) ? (string.IsNullOrWhiteSpace(transaction.Memo) ? _("N/A") : transaction.Memo) : transaction.Payee;
                 }
                 if ((await AddTransactionAsync(t)).Successful)
                 {
