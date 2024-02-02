@@ -44,6 +44,46 @@ namespace Nickvision::Money::Shared::Models
          */
         bool empty() const;
         /**
+         * @brief Gets the R color value.
+         * @return The R color value 
+         */
+        int getR() const;
+        /**
+         * @brief Sets the R color value.
+         * @param r The new R color value 
+         */
+        void setR(int r);
+        /**
+         * @brief Gets the G color value.
+         * @return The G color value 
+         */
+        int getG() const;
+        /**
+         * @brief Sets the G color value.
+         * @param g The new G color value 
+         */
+        void setG(int g);
+        /**
+         * @brief Gets the B color value.
+         * @return The B color value 
+         */
+        int getB() const;
+        /**
+         * @brief Sets the B color value.
+         * @param b The new B color value 
+         */
+        void setB(int b);
+        /**
+         * @brief Gets the A color value.
+         * @return The A color value 
+         */
+        int getA() const;
+        /**
+         * @brief Sets the A color value.
+         * @param a The new A color value 
+         */
+        void setA(int a);
+        /**
          * @brief Gets the rgb string for this Color object.
          * @param header Whether or not to wrap the string in the header: rgb()
          * @return If header is true, "rgb(r,g,b)" else "r,g,b" 

@@ -33,6 +33,10 @@ namespace Nickvision::Money::Shared::Models
     }
 
     Color::Color(const std::string& s)
+        : m_r{ 0 },
+        m_g{ 0 },
+        m_b{ 0 },
+        m_a{ 0 }
     {
         if(s[0] == '#')
         {
@@ -126,6 +130,46 @@ namespace Nickvision::Money::Shared::Models
         return m_r == 0 && m_g == 0 && m_b == 0 && m_a == 0;
     }
 
+    int Color::getR() const
+    {
+        return m_r;
+    }
+
+    void Color::setR(int r)
+    {
+        m_r = r;
+    }
+
+    int Color::getG() const
+    {
+        return m_g;
+    }
+
+    void Color::setG(int g)
+    {
+        m_g = g;
+    }
+
+    int Color::getB() const
+    {
+        return m_b;
+    }
+
+    void Color::setB(int b)
+    {
+        m_b = b;
+    }
+
+    int Color::getA() const
+    {
+        return m_a;
+    }
+
+    void Color::setA(int a)
+    {
+        m_a = a;
+    }
+
     std::string Color::toRGBString(bool header) const
     {
         std::stringstream builder;
@@ -165,9 +209,9 @@ namespace Nickvision::Money::Shared::Models
     {
         std::stringstream builder;
         builder << "#";
-        builder << std::hex << m_r;
-        builder << std::hex << m_g;
-        builder << std::hex << m_b;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_r;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_g;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_b;
         return builder.str();
     }
 
@@ -175,10 +219,10 @@ namespace Nickvision::Money::Shared::Models
     {
         std::stringstream builder;
         builder << "#";
-        builder << std::hex << m_r;
-        builder << std::hex << m_g;
-        builder << std::hex << m_b;
-        builder << std::hex << m_a;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_r;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_g;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_b;
+        builder << std::setfill ('0') << std::setw(2) << std::hex << m_a;
         return builder.str();
     }
 

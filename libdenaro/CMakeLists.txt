@@ -7,6 +7,8 @@ add_library(libdenaro
     "src/controllers/preferencesviewcontroller.cpp"
     "src/models/color.cpp"
     "src/models/configuration.cpp"
+    "src/models/currencyconversion.cpp"
+    "src/models/currencyconversionservice.cpp"
     "src/models/recentaccount.cpp")
 target_include_directories(libdenaro PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libdenaro PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")
