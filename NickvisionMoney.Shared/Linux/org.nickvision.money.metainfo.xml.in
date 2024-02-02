@@ -48,7 +48,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2024.1.1-next" date="2024-01-04">
+    <release version="2024.2.0" date="2024-02-02">
       <description translatable="no">
         <p>- Improved importing of QIF files</p>
         <p>- Fixed a bug where the app would crash when filtering transactions for certain dates</p>
