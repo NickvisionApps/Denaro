@@ -4,9 +4,9 @@
 namespace Nickvision::Money::Shared::Models
 {
     /**
-     * @brief Keys that allow for inserting decimal separator.
+     * @brief Triggers that allow for inserting decimal separators.
      */
-    enum class InsertSeparator
+    enum class InsertSeparatorTrigger
     {
         Off = 0,
         NumpadOnly,

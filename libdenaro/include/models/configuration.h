@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include <libnick/app/configurationbase.h>
-#include "insertseparator.h"
+#include "color.h"
+#include "insertseparatortrigger.h"
 #include "recentaccount.h"
 #include "theme.h"
 
@@ -59,15 +60,104 @@ namespace Nickvision::Money::Shared::Models
         void removeRecentAccount(const RecentAccount& recent);
         /**
          * @brief Gets the default color for transactions.
-         * @brief In format: rgb(r, g, b)
          * @return The default color for transactions 
          */
-        std::string getTransactionDefaultColor() const;
+        Color getTransactionDefaultColor() const;
         /**
          * @brief Sets the default color for transactions.
-         * @param transaction The new default color in the format: rgb(r, g, b) 
+         * @param color The new default color
          */
-        void setTransactionDefaultColor(const std::string& transaction);
+        void setTransactionDefaultColor(const Color& color);
+        /**
+         * @brief Gets the default color for transfers.
+         * @return The default color for transfers 
+         */
+        Color getTransferDefaultColor() const;
+        /**
+         * @brief Sets the default color for transfers.
+         * @param color The new default color
+         */
+        void setTransferDefaultColor(const Color& color);
+        /**
+         * @brief Gets the default color for groups.
+         * @return The default color for groups 
+         */
+        Color getGroupDefaultColor() const;
+        /**
+         * @brief Sets the default color for groups.
+         * @param color The new default color
+         */
+        void setGroupDefaultColor(const Color& color);
+        /**
+         * @brief Gets the color for checking accounts.
+         * @return The color for checking accounts 
+         */
+        Color getAccountCheckingColor() const;
+        /**
+         * @brief Sets the color for checking accounts.
+         * @param color The new checking accounts color
+         */
+        void setAccountCheckingColor(const Color& color);
+        /**
+         * @brief Gets the color for savings accounts.
+         * @return The color for savings accounts 
+         */
+        Color getAccountSavingsColor() const;
+        /**
+         * @brief Sets the color for savings accounts.
+         * @param color The new savings accounts color
+         */
+        void setAccountSavingsColor(const Color& color);
+        /**
+         * @brief Gets the color for business accounts.
+         * @return The color for business accounts 
+         */
+        Color getAccountBusinessColor() const;
+        /**
+         * @brief Sets the color for business accounts.
+         * @param color The new business accounts color
+         */
+        void setAccountBusinessColor(const Color& color);
+        /**
+         * @brief Gets whether or not to use native digits for amount values.
+         * @return True for native digits, else false 
+         */
+        bool getUseNativeDigits() const;
+        /**
+         * @brief Sets whether or not to use native digits for amount values.
+         * @param useNativeDigits True to use native digits, else false 
+         */
+        void setUseNativeDigits(bool useNativeDigits);
+        /**
+         * @brief Gets the trigger for inserting decimal separators.
+         * @return InsertSeparatorTrigger
+         */
+        InsertSeparatorTrigger getInsertSeparator() const;
+        /**
+         * @brief Sets the trigger for inserting decimal separators.
+         * @param separator InsertSeparatorTrigger
+         */
+        void setInsertSeparator(InsertSeparatorTrigger separator);
+        /**
+         * @brief Gets the CSV backup folder path.
+         * @return The CSV backup folder path 
+         */
+        std::string getCSVBackupFolder() const;
+        /**
+         * @brief Sets the csv backup folder path.
+         * @param csv The new csv backup folder path 
+         */
+        void setCSVBackupFolder(const std::string& csv);
+        /**
+         * @brief Gets whether or not to show graphs by default.
+         * @return True to show graphs by default, else false
+         */
+        bool getShowGraphs() const;
+        /**
+         * @brief Sets whether or not to show graphs by default.
+         * @param showGraphs True to show graphs, else false 
+         */
+        void setShowGraphs(bool showGraphs);
 
     private:
         /**

@@ -133,14 +133,104 @@ namespace Nickvision::Money::Shared::Models
         }
     }
 
-    std::string Configuration::getTransactionDefaultColor() const
+    Color Configuration::getTransactionDefaultColor() const
     {
-        return m_json.get("TransactionDefaultColor", "rgb(53,132,228)").asString();
+        return { m_json.get("TransactionDefaultColor", "53,132,228").asString() };
     }
 
-    void Configuration::setTransactionDefaultColor(const std::string& transaction)
+    void Configuration::setTransactionDefaultColor(const Color& color)
     {
-        m_json["TransactionDefaultColor"] = transaction;
+        m_json["TransactionDefaultColor"] = color.toRGBAString(false);
+    }
+
+    Color Configuration::getTransferDefaultColor() const
+    {
+        return { m_json.get("TransferDefaultColor", "192,97,203").asString() };
+    }
+
+    void Configuration::setTransferDefaultColor(const Color& color)
+    {
+        m_json["TransferDefaultColor"] = color.toRGBAString(false);
+    }
+
+    Color Configuration::getGroupDefaultColor() const
+    {
+        return { m_json.get("GroupDefaultColor", "51,209,122").asString() };
+    }
+
+    void Configuration::setGroupDefaultColor(const Color& color)
+    {
+        m_json["GroupDefaultColor"] = color.toRGBAString(false);
+    }
+
+    Color Configuration::getAccountCheckingColor() const
+    {
+        return { m_json.get("AccountCheckingColor", "129,61,156").asString() };
+    }
+
+    void Configuration::setAccountCheckingColor(const Color& color)
+    {
+        m_json["AccountCheckingColor"] = color.toRGBAString(false);
+    }
+
+    Color Configuration::getAccountSavingsColor() const
+    {
+        return { m_json.get("AccountSavingsColor", "53,132,228").asString() };
+    }
+
+    void Configuration::setAccountSavingsColor(const Color& color)
+    {
+        m_json["AccountSavingsColor"] = color.toRGBAString(false);
+    }
+
+    Color Configuration::getAccountBusinessColor() const
+    {
+        return { m_json.get("AccountBusinessColor", "38,162,10").asString() };
+    }
+
+    void Configuration::setAccountBusinessColor(const Color& color)
+    {
+        m_json["AccountBusinessColor"] = color.toRGBAString(false);
+    }
+
+    bool Configuration::getUseNativeDigits() const
+    {
+        return m_json.get("UseNativeDigits", true).asBool();
+    }
+
+    void Configuration::setUseNativeDigits(bool useNativeDigits)
+    {
+        m_json["UseNativeDigits"] = useNativeDigits;
+    }
+
+    InsertSeparatorTrigger Configuration::getInsertSeparator() const
+    {
+        return static_cast<InsertSeparatorTrigger>(m_json.get("InsertSeparator", static_cast<int>(InsertSeparatorTrigger::NumpadOnly)).asInt());
+    }
+
+    void Configuration::setInsertSeparator(InsertSeparatorTrigger separator)
+    {
+        m_json["InsertSeparator"] = static_cast<int>(separator);
+    }
+
+    std::string Configuration::getCSVBackupFolder() const
+    {
+        return m_json.get("CSVBackupFolder", "").asString();
+    }
+
+    void Configuration::setCSVBackupFolder(const std::string& csv)
+    {
+        m_json["CSVBackupFolder"] = csv;
+    }
+
+    bool Configuration::getShowGraphs() const
+    {
+        return m_json.get("ShowGraphs", true).asBool();
+    }
+
+    void Configuration::setShowGraphs(bool showGraphs)
+    {
+        m_json["ShowGraphs"] = showGraphs;
     }
 
     RecentAccount Configuration::getRecentAccount(int index) const

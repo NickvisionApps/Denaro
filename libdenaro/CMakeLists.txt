@@ -3,9 +3,10 @@
 endif()
 
 add_library(libdenaro
-	"src/controllers/mainwindowcontroller.cpp"
-	"src/controllers/preferencesviewcontroller.cpp"
-	"src/models/configuration.cpp"
+    "src/controllers/mainwindowcontroller.cpp"
+    "src/controllers/preferencesviewcontroller.cpp"
+    "src/models/color.cpp"
+    "src/models/configuration.cpp"
     "src/models/recentaccount.cpp")
 target_include_directories(libdenaro PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libdenaro PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")
