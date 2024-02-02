@@ -51,6 +51,7 @@
     <release version="2024.1.1-next" date="2024-01-04">
       <description translatable="no">
         <p>- Improved importing of QIF files</p>
+        <p>- Fixed a bug where the app would crash when filtering transactions for certain dates</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
