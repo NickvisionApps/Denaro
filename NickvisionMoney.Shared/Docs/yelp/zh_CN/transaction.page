@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="zh-HANS">
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="zh-CN">
 <info>
 	<link type="guide" xref="index"/>
 	<title type="link">Transaction 🧾</title>
@@ -31,7 +31,7 @@
 		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
 	</item>
 	<item>
-		<title>Type</title>
+		<title>类型</title>
 		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
 	</item>
 	<item>
@@ -51,7 +51,7 @@
 		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
 	</item>
 	<item>
-		<title>Color</title>
+		<title>顏色</title>
 		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
 	</item>
     <item>
