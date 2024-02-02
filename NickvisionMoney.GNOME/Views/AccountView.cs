@@ -1282,7 +1282,24 @@ public partial class AccountView : Adw.BreakpointBin
     /// <summary>
     /// Occurs when the date range's start year is changed
     /// </summary>
-    private void OnDateRangeStartYearChanged() => _controller.FilterStartDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_startYearDropDown.GetSelected()]), (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
+    private void OnDateRangeStartYearChanged()
+    {
+        var newYear = int.Parse(_controller.YearsForRangeFilter[(int)_startYearDropDown.GetSelected()]); 
+        if ((int)_startMonthDropDown.GetSelected() + 1 == 2) // If selected month is February
+        {
+            var selectedDay = (int)_startDayDropDown.GetSelected() + 1;
+            if ((newYear % 400 == 0 || newYear % 100 != 0) && newYear % 4 == 0) // If selected year is a leap year
+            {
+                _startDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 29).Select(x => x.ToString()).ToArray()));
+            }
+            else
+            {
+                _startDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 28).Select(x => x.ToString()).ToArray()));
+            }
+            _startDayDropDown.SetSelected(selectedDay > 28 ? 0 : (uint)selectedDay - 1);
+        }
+        _controller.FilterStartDate = new DateOnly(newYear, (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
+    }
 
     /// <summary>
     /// Occurs when the date range's start month is changed
@@ -1315,7 +1332,24 @@ public partial class AccountView : Adw.BreakpointBin
     /// <summary>
     /// Occurs when the date range's end year is changed
     /// </summary>
-    private void OnDateRangeEndYearChanged() => _controller.FilterEndDate = new DateOnly(int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]), (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
+    private void OnDateRangeEndYearChanged()
+    {
+        var newYear = int.Parse(_controller.YearsForRangeFilter[(int)_endYearDropDown.GetSelected()]);
+        if ((int)_endMonthDropDown.GetSelected() + 1 == 2) // If selected month is February
+        {
+            var selectedDay = (int)_endDayDropDown.GetSelected() + 1;
+            if ((newYear % 400 == 0 || newYear % 100 != 0) && newYear % 4 == 0) // If the selected year is a leap year
+            {
+                _endDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 29).Select(x => x.ToString()).ToArray()));
+            }
+            else
+            {
+                _endDayDropDown.SetModel(Gtk.StringList.New(Enumerable.Range(1, 28).Select(x => x.ToString()).ToArray()));
+            }
+            _endDayDropDown.SetSelected(selectedDay > 28 ? 0 : (uint)selectedDay - 1);
+        }
+        _controller.FilterEndDate = new DateOnly(newYear, (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
+    }
 
     /// <summary>
     /// Occurs when the date range's end month is changed
