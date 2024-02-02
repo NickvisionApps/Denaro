@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-12-08 14:02+0000\n"
+"PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "nickvision-money/docs/zh_Hans/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -43,7 +43,7 @@ msgstr "Nicholas Logozzo"
 #. (itstool) path: page/title
 #: yelp/C/account.page:20
 msgid "Account"
-msgstr ""
+msgstr "账户"
 
 #. (itstool) path: page/p
 #: yelp/C/account.page:21
@@ -104,7 +104,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "默认的交易类型"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:38
@@ -116,7 +116,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:41
 msgid "Transaction Reminders Threshold"
-msgstr "交易提醒门槛"
+msgstr "交易提醒阈值"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:42
@@ -178,7 +178,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:57
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "使用自定义货币"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:58
@@ -270,7 +270,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:88
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:89
@@ -362,7 +362,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:25
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:26
@@ -374,7 +374,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "默认交易颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -388,7 +388,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "默认转账颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -401,7 +401,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr "群组默认色"
+msgstr "群组默认颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -413,7 +413,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:41
 msgid "Checking Account Color"
-msgstr ""
+msgstr "支票账户颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
@@ -425,7 +425,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:45
 msgid "Savings Account Color"
-msgstr ""
+msgstr "储蓄账户颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:46
@@ -437,7 +437,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr ""
+msgstr "商务账户颜色"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -462,7 +462,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
-msgstr ""
+msgstr "插入十进制分隔符"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:58
@@ -775,7 +775,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:37
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:38
@@ -842,7 +842,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:57
 msgid "Color"
-msgstr ""
+msgstr "顏色"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:58
