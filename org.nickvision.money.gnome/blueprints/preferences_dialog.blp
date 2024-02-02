@@ -1,0 +1,29 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.PreferencesWindow root {
+  default-width: 600;
+  default-height: 500;
+  width-request: 360;
+  modal: true;
+  destroy-with-parent: false;
+  title: _("Preferences");
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      title: _("User Interface");
+
+      Adw.ComboRow themeRow {
+        title: _("Theme");
+        model: Gtk.StringList {
+          strings [C_("Theme", "Light"), C_("Theme", "Dark"), C_("Theme", "System")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "dark-mode-symbolic";
+        }
+      }
+    }
+  }
+}

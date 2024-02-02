@@ -1,0 +1,1144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"PO-Revision-Date: 2023-11-16 18:17+0000\n"
+"Last-Translator: Fjuro <ifjuro@proton.me>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
+"docs/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.2\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/account.page:8
+msgctxt "link"
+msgid "Account 🏦"
+msgstr "Účet 🏦"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:10 docs/yelp/C/configuration.page:10
+#: docs/yelp/C/import-export.page:10 docs/yelp/C/index.page:10
+#: docs/yelp/C/transaction.page:10 docs/yelp/C/transfer.page:10
+msgid "Fyodor Sobolev"
+msgstr "Fyodor Sobolev"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:14 docs/yelp/C/configuration.page:14
+#: docs/yelp/C/import-export.page:14 docs/yelp/C/index.page:14
+#: docs/yelp/C/transaction.page:14 docs/yelp/C/transfer.page:14
+msgid "Nicholas Logozzo"
+msgstr "Nicholas Logozzo"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/account.page:20
+msgid "Account"
+msgstr "Účet"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:21
+msgid ""
+"This page explains all properties of accounts in <app>Denaro</app>. Most of "
+"them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
+"automatically after you create a new account."
+msgstr ""
+"Na této stránce jsou vysvětleny všechny vlastnosti účtů v aplikaci "
+"<app>Denaro</app>. Většina z nich je uvedena v <gui>dialogovém okně "
+"Nastavení účtu</gui>. Toto okno se také automaticky otevře po vytvoření "
+"nového účtu."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:22
+msgid ""
+"Each account is stored in a single <file>*.nmoney</file> file. Files created "
+"in an older <em>stable</em> version of <app>Denaro</app> can be safely "
+"opened in a more recent <em>stable</em> version of the application. Although "
+"the app can run on different platforms (Windows and Linux), the <file>*."
+"nmoney</file> files are 100% compatible between platforms as long as they "
+"are from the same application version (i.e. V2023.1.0)."
+msgstr ""
+"Každý účet je uložen v jednom souboru <file>*.nmoney</file>. Soubory "
+"vytvořené ve starší <em>stabilní</em> verzi aplikace <app>Denaro</app> lze "
+"bezpečně otevřít v novější <em>stabilní</em> verzi aplikace. Přestože "
+"aplikace může běžet na různých platformách (Windows a Linux), soubory "
+"<file>*.nmoney</file> jsou mezi platformami 100% kompatibilní, pokud "
+"pocházejí ze stejné verze aplikace (např. V2023.1.0)."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:24
+msgid ""
+"Unstable (Beta and RC) versions of the application can contain bugs or "
+"unfinished modifications that can cause data loss. DO NOT use account files "
+"that contain real data in unstable versions of the app!"
+msgstr ""
+"Nestabilní (beta a RC) verze aplikace mohou obsahovat chyby nebo nedokončené "
+"úpravy, které mohou způsobit ztrátu dat. NEPOUŽÍVEJTE soubory účtů, které "
+"obsahují skutečná data, v nestabilních verzích aplikace!"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:29
+msgid "Name"
+msgstr "Název"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:30
+msgid ""
+"Account name is shown in the list of recent accounts and in tabs. A name "
+"doesn't have a length limit and it can contain any characters, including "
+"emojis."
+msgstr ""
+"Název účtu se zobrazuje v seznamu posledních účtů a na kartách. Název nemá "
+"omezenou délku a může obsahovat libovolné znaky včetně emotikonů."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:33
+msgid "Account Type"
+msgstr "Typ účtu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:34
+msgid ""
+"There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
+msgstr ""
+"K dispozici jsou 3 typy účtů: 🟣<em>Běžný</em>, 🔵<em>Spořicí</em> a 🟢"
+"<em>Firemní</em>. Typ účtu je pouze užitečné označení, které se zobrazuje v "
+"seznamu posledních účtů a nemá vliv na to, jak aplikace funguje nebo co "
+"můžete s účtem dělat. Každý typ účtu má svou vlastní barvu, tyto barvy lze "
+"nakonfigurovat v <link xref=\"configuration\">globálním nastavení</link> ."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:37
+msgid "Default Transaction Type"
+msgstr "Výchozí typ transakce"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:38
+msgid ""
+"When you create a new transaction its type by default will be the same as in "
+"this setting."
+msgstr ""
+"Při vytváření nové transakce bude její typ ve výchozím nastavení stejný jako "
+"v tomto nastavení."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:41
+msgid "Transaction Reminders Threshold"
+msgstr "Hranice pro připomenutí transakcí"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:42
+msgid "The threshold used when showing reminders about upcoming transactions."
+msgstr ""
+"Hranice použitá při zobrazování připomínek o nadcházejících transakcích."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:45
+msgid "System Currency"
+msgstr "Systémová měna"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:46
+msgid ""
+"Every time the application starts, it gets data about currency and numbers "
+"formatting from your system locale, and this data is used to show currency "
+"symbol (unless custom currency is used, see below) and to determine in what "
+"format the numbers will be accepted as values for transaction amounts. A few "
+"examples:"
+msgstr ""
+"Při každém spuštění získá aplikace údaje o měně a formátování čísel z vašich "
+"systémových místních nastavení. Tyto údaje se použijí k zobrazení symbolu "
+"měny (pokud není použita vlastní měna, viz níže) a k určení, v jakém formátu "
+"budou čísla přijímána jako hodnoty částek transakcí. Několik příkladů:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:48
+msgid ""
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+msgstr ""
+"Pokud je vaše místní prostředí <em>Angličtina (Spojené státy)</em>, symbol "
+"měny bude nastaven na <em>$</em> a <em>1,000.00</em> bude akceptováno jako "
+"platné číslo."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:49
+msgid ""
+"If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
+"em> and <em>1.000,00</em> will be accepted as a valid number."
+msgstr ""
+"Pokud je vaše místní prostředí <em>Čeština</em>, symbol měny bude nastaven "
+"na <em>Kč</em> a <em>1 000,00</em> bude akceptováno jako platné číslo."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:50
+msgid ""
+"If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
+"em> and <em>1000,00</em> will be accepted as a valid number."
+msgstr ""
+"Pokud je vaše místní prostředí <em>Ruština</em>, symbol měny bude nastaven "
+"na <em>₽</em> a <em>1000,00</em> bude akceptováno jako platné číslo."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:53
+msgid ""
+"On Linux, it is possible to set different locales for system language and "
+"formats. Changing these settings varies depending on the desktop environment "
+"you are using. Despite differences in the location of these settings on the "
+"desktop, changing these settings modify system environment variables, such "
+"as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. "
+"<app>Denaro</app> will try to use amount and date formats according to these "
+"variables. If the app fails to use the expected formats, please make sure "
+"the variables are set correctly via the <code>locale</code> command in a "
+"terminal. If you found a bug and want to report it, please provide the "
+"output of the <code>locale</code> command to allow developers to reproduce "
+"your issue with the same settings."
+msgstr ""
+"V systému Linux je možné nastavit různé místní jazyky a formáty systému. "
+"Změna těchto nastavení se liší v závislosti na používaném desktopovém "
+"prostředí. Navzdory rozdílům v umístění těchto nastavení jejich změna upraví "
+"proměnné systémového prostředí, například <code>LANG</code>, <code>LC_TIME</"
+"code> a <code>LC_MONETARY</code>. <app>Denaro</app> se pokusí použít formáty "
+"částek a dat podle těchto proměnných. Pokud aplikace očekávané formáty "
+"nepoužívá, zkontrolujte, zda jsou proměnné správně nastaveny pomocí příkazu "
+"<code>locale</code> v terminálu. Pokud jste našli chybu a chcete ji "
+"nahlásit, poskytněte prosím výstup příkazu <code>locale</code>, aby mohli "
+"vývojáři reprodukovat váš problém se stejným nastavením."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:57
+msgid "Use Custom Currency"
+msgstr "Použít vlastní měnu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:58
+msgid ""
+"If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
+"instead of currency symbol provided by your system locale."
+msgstr ""
+"Pokud je tato možnost povolena, bude místo symbolu měny, který poskytuje "
+"vaše systémové prostředí, použit <gui>vlastní symbol měny</gui>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:61
+msgid "Custom Currency Symbol"
+msgstr "Vlastní symbol měny"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:62
+msgid "Up to 3 characters or 1 emoji. It can't be a number."
+msgstr "Až 3 znaky nebo 1 emotikon. Nemůže to být číslo."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:65
+msgid "Custom Currency Code"
+msgstr "Vlastní kód měny"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:66
+msgid "Up to 3 characters or 1 emoji."
+msgstr "Až 3 znaky nebo 1 emotikon."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:67
+msgid ""
+"An example to understand the difference between a symbol and a code: <em>$</"
+"em> is a symbol, <em>USD</em> is a code."
+msgstr ""
+"Příklad pro pochopení rozdílu mezi symbolem a kódem: <em>Kč</em> je symbol, "
+"<em>CZK</em> je kód."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:70
+msgid "Custom Currency Amount Style"
+msgstr "Vlastní styl množství měny"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:71
+msgid "A choice of displaying an amount in one of the following ways:"
+msgstr "Výběr mezi zobrazením množství jedním z následujících způsobů:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:73
+msgid "$n"
+msgstr "$n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:74
+msgid "n$"
+msgstr "n$"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:75
+msgid "$ n"
+msgstr "$ n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:76
+msgid "n $"
+msgstr "n $"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr "Vlastní oddělovače desetinných míst a skupin měn"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr "Až 2 znaky nebo 1 emotikon."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr "Vlastní desetinné číslice měny"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:85
+msgid ""
+"The size of decimal part of amount values. With \"Unlimited\" digits there "
+"will be as many numbers in decimal part as required to show the precise "
+"amount, but there will be no decimal part if the amount is an integer number."
+msgstr ""
+"Velikost desetinné části hodnot částek. Při „neomezeném“ počtu číslic bude v "
+"desetinné části tolik čísel, kolik je potřeba k zobrazení přesné částky, ale "
+"pokud je částka celým číslem, nebude desetinná část žádná."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:88
+msgid "Password"
+msgstr "Heslo"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:89
+msgid ""
+"Each account can be password-protected. Adding a password causes an account "
+"to become encrypted (making it impossible to read the data without "
+"decrypting it using the password). Be careful: if the password is lost, you "
+"won't be able to restore the data! A password can also be changed or removed "
+"using the account settings dialog of an open account. Removing a password "
+"will decrypt the account."
+msgstr ""
+"Každý účet může být chráněn heslem. Přidáním hesla se účet zašifruje (bez "
+"dešifrování pomocí hesla není možné data číst). Buďte opatrní: pokud heslo "
+"ztratíte, nebudete moci data obnovit! Heslo lze také změnit nebo odstranit "
+"pomocí dialogového okna nastavení otevřeného účtu. Odstraněním hesla dojde k "
+"dešifrování účtu."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:92
+msgid "Sort by Id, Date or Amount"
+msgstr "Řazení podle ID, data nebo částky"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:93
+msgid ""
+"Each account stores whether to sort transactions in the main window by their "
+"id, date or amount. Every time you change this, it will be saved to the "
+"account file and restored when you reopen the account."
+msgstr ""
+"U každého účtu je uloženo, zda se mají transakce v hlavním okně řadit podle "
+"ID, data nebo částky. Pokaždé, když toto nastavení změníte, bude uloženo do "
+"souboru účtu a obnoví se při jeho opětovném otevření."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:96
+msgid "Sorting Order"
+msgstr "Pořadí řazení"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:97
+msgid ""
+"Each account stores information about the order of transactions in the main "
+"window. Every time you change this, it will be saved to the account file and "
+"restored when you reopen the account."
+msgstr ""
+"Každý účet uchovává informace o pořadí transakcí v hlavním okně. Pokaždé, "
+"když je změníte, uloží se do souboru účtu a obnoví se při jeho opětovném "
+"otevření."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:100
+msgid "Groups Visibility"
+msgstr "Viditelnost skupin"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:101
+msgid ""
+"Each account stores information about whether the groups list in the main "
+"window is hidden or not. Every time you change groups list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Každý účet ukládá informace o tom, zda je seznam skupin v hlavním okně "
+"skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu skupin, je tato "
+"informace uložena a poté obnovena při opětovném otevření účtu."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:104
+msgid "Tags Visibility"
+msgstr "Viditelnost štítků"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:105
+msgid ""
+"Each account stores information about whether the tags list in the main "
+"window is hidden or not. Every time you change tags list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Každý účet ukládá informace o tom, zda je seznam štítků v hlavním okně "
+"skrytý, nebo ne. Pokaždé, když změníte viditelnost seznamu štítků, je tato "
+"informace uložena a poté obnovena při opětovném otevření účtu."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/configuration.page:8
+msgctxt "link"
+msgid "Configuration 🔧"
+msgstr "Nastavení 🔧"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/configuration.page:20
+msgid "Configuration"
+msgstr "Nastavení"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:21
+msgid ""
+"This page describes what you can change in the application configuration."
+msgstr "Na této stránce je popsáno, co můžete změnit v nastavení aplikace."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:22
+msgid ""
+"Depending on your platform, in the application interface the configuration "
+"is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
+msgstr ""
+"V závislosti na platformě je konfigurace v rozhraní aplikace označena jako "
+"<gui>Předvolby</gui> nebo <gui>Nastavení</gui>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:25
+msgid "Theme"
+msgstr "Motiv"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:26
+msgid ""
+"Set light or dark theme, or make <app>Denaro</app> follow your system theme. "
+"Changing this on Windows requires the application restart to apply."
+msgstr ""
+"Nastavte si světlý nebo tmavý motiv, nebo nastavte, aby <app>Denaro</app> "
+"následovalo váš systémový motiv. Změna tohoto nastavení v systému Windows "
+"vyžaduje restart aplikace, aby se uplatnila."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:29
+msgid "Transaction Default Color"
+msgstr "Výchozí barva transakce"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:30
+msgid ""
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
+msgstr ""
+"Barva, která bude vybrána jako výchozí při přidání nové <link "
+"xref=\"transaction\">transakce</link> s jedinečnou barvou. Její změna "
+"neovlivní existující transakce, i když používají dříve zvolenou výchozí "
+"barvu."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:33
+msgid "Transfer Default Color"
+msgstr "Výchozí barva převodu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:34
+msgid ""
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"transactions."
+msgstr ""
+"Barva, která bude použita pro transakce vytvořené pomocí <link "
+"xref=\"transfer\">převodu</link> . Změna tohoto parametru neovlivní "
+"existující transakce."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:37
+msgid "Group Default Color"
+msgstr "Výchozí barva skupiny"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:38
+msgid ""
+"A color that will be selected by default when adding a new group. This is "
+"also a color for «Ungrouped» group."
+msgstr ""
+"Barva, která bude ve výchozím nastavení vybrána při přidávání nové skupiny. "
+"Je to také barva pro skupinu „Neseskupené“."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:41
+msgid "Checking Account Color"
+msgstr "Barva běžného účtu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:42
+msgid ""
+"A color used to mark <link xref=\"account\">accounts</link> with the "
+"<em>Checking</em> type in a recent accounts list."
+msgstr ""
+"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+"<em>Běžný</em> v seznamu nedávných účtů."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:45
+msgid "Savings Account Color"
+msgstr "Barva spořicího účtu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:46
+msgid ""
+"A color used to mark <link xref=\"account\">accounts</link> with the "
+"<em>Savings</em> type in a recent accounts list."
+msgstr ""
+"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+"<em>Spořicí</em> v seznamu nedávných účtů."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:49
+msgid "Business Account Color"
+msgstr "Barva firemního účtu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:50
+msgid ""
+"A color used to mark <link xref=\"account\">accounts</link> with the "
+"<em>Business</em> type in a recent accounts list."
+msgstr ""
+"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+"<em>Firemní</em> v seznamu nedávných účtů."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:53
+msgid "Use Native Digits"
+msgstr "Použít nativní číslice"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:54
+msgid ""
+"Whether to use numerals that are native for your locale instead of latin "
+"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+"instead of <em>012</em> for locales that use Eastern Arabic numerals."
+msgstr ""
+"Nastavení, zda se mají místo latinských číslic používat číslice, které jsou "
+"pro vaši oblast přirozené. Pokud je toto nastavení povoleno, bude například "
+"<em>٠١٢</em> použito místo <em>012</em> pro lokality, které používají "
+"východoarabské číslice."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:57
+msgid "Insert Decimal Separator"
+msgstr "Vložení desetinného oddělovače"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:58
+msgid ""
+"Set for which keys pressed will the locale's decimal separator be inserted "
+"into an amount field: numpad period, any period and comma, or none. If "
+"decimal separator is already presented in a field, it will not be inserted."
+msgstr ""
+"Nastavení, pro které stisknuté klávesy se do pole částky vloží desetinný "
+"oddělovač lokálního jazyka: tečka na numerickém bloku, libovolná tečka a "
+"čárka nebo žádný. Pokud již je desetinný oddělovač v poli, nebude vložen."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:61
+msgid "CSV Backup Folder"
+msgstr "Složka zálohy CSV"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:62
+msgid ""
+"A folder where your data will be automatically <link xref=\"import-"
+"export\">exported to CSV</link> after every change. This feature doesn't "
+"work for password-protected accounts, because CSV files can't be password-"
+"protected."
+msgstr ""
+"Složka, do které budou vaše data po každé změně automaticky <link "
+"xref=\"import-export\">exportována jako soubor CSV</link>. Tato funkce "
+"nefunguje pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/import-export.page:8
+msgctxt "link"
+msgid "Import/Export 📤"
+msgstr "Import/export 📤"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/import-export.page:20
+msgid "Import/Export"
+msgstr "Import/export"
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:22
+msgid "Import Formats"
+msgstr "Formáty importu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:26
+msgid "Dates should be in <em>YYYYMMDD</em> format."
+msgstr "Data by měla být ve formátu <em>RRRRMMDD</em>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:30
+msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"Data by měla být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:34
+msgid ""
+"❗ While CSV is a common format and some banks allow their users to export "
+"information as CSV, these files are in fact tables that can contain "
+"arbitrary data. Importing a CSV file created in other program will fail, "
+"because its data will not be compatible with what <app>Denaro</app> tries to "
+"get from a file. The purpose of CSV import/export is to provide a way to add "
+"data to an account using external programs such as text editors and office "
+"suites. Import will only add new transactions without overriding existing "
+"ones. If you want to create a CSV file manually, this is the header that "
+"includes all columns <app>Denaro</app> expects to find:"
+msgstr ""
+"❗ Formát CSV je sice běžný a některé banky umožňují svým uživatelům "
+"exportovat informace ve formátu CSV, ale tyto soubory jsou ve skutečnosti "
+"tabulky, které mohou obsahovat libovolná data. Import souboru CSV "
+"vytvořeného v jiném programu selže, protože jeho data nebudou kompatibilní s "
+"tím, co se aplikace <app>Denaro</app> snaží ze souboru získat. Účelem "
+"importu/exportu CSV je poskytnout způsob, jak přidávat data do účtu pomocí "
+"externích programů, jako jsou textové editory a kancelářské balíky. Import "
+"přidá pouze nové transakce, aniž by přepsal ty stávající. Pokud chcete "
+"soubor CSV vytvořit ručně, toto je hlavička, která obsahuje všechny sloupce, "
+"které aplikace <app>Denaro</app> očekává, že najde:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:39
+msgid "Transaction Id, should be unique for a given account. Ids start with 1."
+msgstr ""
+"ID transakce, mělo by být pro daný účet jedinečné. ID začínají číslem 1."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:43
+msgid ""
+"Transaction date (or start date in case of repeat transaction), should be in "
+"English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"Datum transakce (nebo datum zahájení v případě opakované transakce) by mělo "
+"být v anglickém (americkém) formátu (<em>MM/DD/RRRR</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:47
+msgid ""
+"Transaction description, it can contain any characters except semicolon."
+msgstr "Popis transakce, může obsahovat libovolné znaky kromě středníku."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:51
+msgid "Transaction type: 0 for income, 1 for expense."
+msgstr "Typ transakce: 0 pro příjem, 1 pro výdaj."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:55
+msgid "A number representing transaction repeat interval:"
+msgstr "Číslo představující interval opakování transakce:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:56
+msgid "0 - Never"
+msgstr "0 - Nikdy"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:57
+msgid "1 - Daily"
+msgstr "1 - Denně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:58
+msgid "2 - Weekly"
+msgstr "2 - Týdně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:59
+msgid "7 - Biweekly"
+msgstr "7 - Dvakrát týdně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:60
+msgid "3 - Monthly"
+msgstr "3 - Měsíčně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:61
+msgid "4 - Quarterly"
+msgstr "4 - Čtvrtletně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:62
+msgid "5 - Yearly"
+msgstr "5 - Ročně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:63
+msgid "6 - Biyearly"
+msgstr "6 - Dvakrát ročně"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:64
+msgid ""
+"See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
+"link> page for details about repeat transactions."
+msgstr ""
+"Podrobnosti o opakovaných transakcích naleznete v části <em>Interval "
+"opakování</em> na stránce <link xref=\"transaction\">transakce</link>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:68
+msgid ""
+"Should be either an Id of source transaction or 0 if it's a source "
+"transaction or -1 if it's not repeat transaction."
+msgstr ""
+"Mělo by to být buď ID zdrojové transakce nebo 0, pokud se jedná o zdrojovou "
+"transakci, nebo -1, pokud se nejedná o opakovanou transakci."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:72
+msgid ""
+"End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
+"YYYY</em>). Leave it empty if it's not repeat transaction."
+msgstr ""
+"Datum ukončení opakované transakce by mělo být v anglickém (americkém) "
+"formátu (<em>MM/DD/RRRR</em>). Pokud se nejedná o opakovanou transakci, "
+"ponechte jej prázdný."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:76
+msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
+msgstr ""
+"Částka transakce v anglickém (americkém) formátu (<em>123,456.78</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:80
+msgid ""
+"Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Barva transakce, by měla být ve formátu <em>rgb(R,G,B)</em>, kde <em>R</em>, "
+"<em>G</em> a <em>B</em> jsou celá čísla v rozsahu 0 až 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:84
+msgid "Whether a transaction should use group color: 0 — false, 1 — true."
+msgstr "Zda má transakce používat skupinovou barvu: 0 — ne, 1 — ano."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:88
+msgid ""
+"Transaction's group Id. Ids start with 1. For ungrouped transaction it "
+"should be -1 (not 0, this is incorrect value for group Id)."
+msgstr ""
+"ID skupiny transakce. ID začíná číslem 1. U neseskupených transakcí by mělo "
+"být -1 (ne 0, to je nesprávná hodnota pro ID skupiny)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:92
+msgid ""
+"Transaction's group name, should match group Id. It can contain any "
+"characters except semicolon. Leave it empty for ungrouped transaction, in "
+"any other cases it shouldn't be empty."
+msgstr ""
+"Název skupiny transakce, měl by odpovídat ID skupiny. Může obsahovat "
+"libovolné znaky kromě středníku. Pro transakce bez skupiny jej ponechte "
+"prázdný, v ostatních případech by neměl být prázdný."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:96
+msgid ""
+"Transaction's group description, should match group Id. It can contain any "
+"characters except semicolon and can be empty. Leave it empty for ungrouped "
+"transaction."
+msgstr ""
+"Popis skupiny transakce, měl by odpovídat identifikačnímu číslu skupiny. "
+"Může obsahovat libovolné znaky kromě středníku a může být prázdný. Pro "
+"transakce bez skupiny jej ponechte prázdný."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:100
+msgid ""
+"Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Barva skupiny, měla by být ve formátu <em>rgb(R,G,B)</em>, kde <em>R</em>, "
+"<em>G</em> a <em>B</em> jsou celá čísla v rozsahu 0 až 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:103
+msgid "Receipt and notes are not present in CSV."
+msgstr "Faktura a poznámky se v souboru CSV nenachází."
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:108
+msgid "Export Formats"
+msgstr "Formáty exportu"
+
+#. (itstool) path: div/p
+#: docs/yelp/C/import-export.page:109
+msgid ""
+"You can select whether to export all information or only from the current "
+"view. If you select the current view, currently displayed transactions will "
+"be exported in the same order in which they are shown."
+msgstr ""
+"Můžete si vybrat, zda chcete exportovat všechny informace, nebo pouze "
+"aktuální zobrazení. Pokud vyberete aktuální zobrazení, budou aktuálně "
+"zobrazené transakce exportovány ve stejném pořadí, v jakém jsou zobrazeny."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:113
+msgid ""
+"A file will contain an account information, a list of transactions and "
+"images of receipts. Transactions are colored like in the application, but "
+"colors are modified by making them half-transparent in order to make black "
+"text always clearly visible. You can set a password for an exported file."
+msgstr ""
+"Soubor bude obsahovat informace o účtu, seznam transakcí a obrázky faktur. "
+"Transakce jsou barevné jako v aplikaci, ale barvy jsou upraveny tak, že jsou "
+"poloprůhledné, aby byl černý text vždy dobře viditelný. Pro exportovaný "
+"soubor můžete nastavit heslo."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:7
+msgctxt "link"
+msgid "Denaro Help"
+msgstr "Nápověda aplikace Denaro"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:8
+msgctxt "text"
+msgid "Denaro Help"
+msgstr "Nápověda aplikace Denaro"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/index.page:20
+msgid "<_:media-1/> Denaro Help"
+msgstr "<_:media-1/> Nápověda aplikace Denaro"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:21
+msgid ""
+"This documentation will help you understand how to configure and manage data "
+"in <app>Denaro</app> to get the most of the application."
+msgstr ""
+"Tato dokumentace vám pomůže pochopit, jak konfigurovat a spravovat data v "
+"aplikaci <app>Denaro</app>, abyste z ní mohli vytěžit maximum."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:22
+msgid ""
+"To get support, use <link href=\"https://github.com/NickvisionApps/Denaro/"
+"issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
+"Denaro/discussions\">discussions</link> on Github, or <link href=\"https://"
+"bit.ly/3GrfEid\">join our Matrix channel</link>."
+msgstr ""
+"Potřebujete-li podporu, použijte <link href=\"https://github.com/"
+"NickvisionApps/Denaro/issues\">problémy</link> nebo <link href=\"https://"
+"github.com/NickvisionApps/Denaro/discussions\">diskuze</link> na GitHubu "
+"nebo se <link href=\"https://bit.ly/3GrfEid\">připojte k našemu kanálu "
+"Matrix</link>."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transaction.page:8
+msgctxt "link"
+msgid "Transaction 🧾"
+msgstr "Transakce 🧾"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transaction.page:20
+msgid "Transaction"
+msgstr "Transakce"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transaction.page:21
+msgid "This page explains all properties of transactions in <app>Denaro</app>."
+msgstr ""
+"Na této stránce jsou vysvětleny všechny vlastnosti transakcí v aplikaci "
+"<app>Denaro</app>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:25
+msgid "Id"
+msgstr "ID"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:26
+msgid ""
+"Each transaction has an Id that is unique for a given account. Ids start "
+"with 1 and increase for every transaction added. Ids can't be changed, ids "
+"of removed transactions are not reused."
+msgstr ""
+"Každá transakce má ID, které je pro daný účet jedinečné. ID začíná číslem 1 "
+"a zvyšuje se s každou přidanou transakcí. ID nelze měnit, identifikátory "
+"odstraněných transakcí se znovu nepoužívají."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:29
+msgid "Description"
+msgstr "Popis"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:30
+msgid "No limit on length. It can't contain semicolon."
+msgstr "Délka není omezena. Nesmí obsahovat středník."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:33
+msgid "Amount"
+msgstr "Množství"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:34
+msgid ""
+"A number in a format that is valid for your locale, see <em>System Currency</"
+"em> in <link xref=\"account\">Account page</link> for details."
+msgstr ""
+"Číslo ve formátu platném pro vaše místní prostředí, podrobnosti viz "
+"<em>Systémová měna</em> na stránce <link xref=\"account\">Účet</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:37
+msgid "Type"
+msgstr "Typ"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:38
+msgid ""
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
+msgstr ""
+"<em>Příjem</em> nebo <em>Výdaj</em>. Ve výchozím nastavení se při otevření "
+"dialogu pro přidání nové transakce vybere ta, která byla zvolena v <link "
+"xref=\"account\">nastavení účtu</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:41
+msgid "Date"
+msgstr "Datum"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:42
+msgid ""
+"Any date can be selected, you can also create transactions for future dates."
+msgstr ""
+"Lze vybrat libovolné datum, můžete také vytvářet transakce pro budoucí data."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:45
+msgid "Repeat Interval"
+msgstr "Interval opakování"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:46
+msgid ""
+"Use this option to create a recurring transaction. After you add transaction "
+"with repeat interval, this transaction will become a <em>source</em> "
+"transaction. <app>Denaro</app> will automatically generate <em>repeat</em> "
+"transactions for the dates up until today or a provided end date if set in "
+"the past. <em>Repeat</em> transactions can't be edited or deleted, only "
+"<em>source</em> can be modified. When you modify <em>source</em> transaction "
+"<app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</"
+"em> transactions. If you choose to disassociate, <em>repeat</em> "
+"transactions become normal transactions and can be edited or deleted "
+"separately."
+msgstr ""
+"Tuto možnost použijte k vytvoření opakující se transakce. Po přidání "
+"transakce s intervalem opakování se tato transakce stane <em>zdrojovou</em> "
+"transakcí. Aplikace <app>Denaro</app> bude automaticky generovat "
+"<em>opakované</em> transakce pro data do dnešního dne nebo zadaného data "
+"ukončení, pokud je nastaveno v minulosti. <em>Opakované</em> transakce nelze "
+"upravovat ani mazat, upravovat lze pouze <em>zdrojové</em> transakce. Při "
+"úpravě <em>zdrojové</em> transakce se aplikace <app>Denaro</app> zeptá, zda "
+"chcete upravit nebo zrušit přiřazení <em>opakovaných</em> transakcí. Pokud "
+"se rozhodnete pro zrušení přiřazení, <em>opakované</em> transakce se stanou "
+"normálními transakcemi a lze je upravovat nebo mazat samostatně."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:49
+msgid "Repeat End Date"
+msgstr "Datum ukončení opakování"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:50
+msgid ""
+"End date for a transaction with repeat. It can't be earlier than or on the "
+"same day as start date."
+msgstr ""
+"Datum ukončení transakce s opakováním. Nemůže být dřívější nebo stejné jako "
+"datum zahájení."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:53
+msgid "Group"
+msgstr "Skupina"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:54
+msgid ""
+"Each transaction can belong to only one group or none («Ungrouped» group)."
+msgstr ""
+"Každá transakce může patřit pouze do jedné skupiny nebo do žádné (skupina "
+"„Neseskupené“)."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:57
+msgid "Color"
+msgstr "Barva"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:58
+msgid ""
+"A color for transaction. Can be set to use either a group color or a unique "
+"color. When selecting unique color, it will be set by default to the color "
+"selected in <link xref=\"configuration\">configuration</link>, but can be "
+"changed to any color."
+msgstr ""
+"Barva pro transakce. Lze nastavit použití barvy skupiny nebo jedinečné "
+"barvy. Při výběru jedinečné barvy bude ve výchozím nastavení nastavena na "
+"barvu vybranou v <link xref=\"configuration\">nastavení</link>, lze ji ale "
+"změnit na libovolnou barvu."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:61
+msgid "Tags"
+msgstr "Štítky"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:62
+msgid ""
+"A list of tags for transaction. A transaction can have unlimited number of "
+"tags (or have no tags). Tags can contain any characters except comma (<code>,"
+"</code>), and have any length, but they are expected to be short keywords. "
+"Tags are meant to be used for additional filtering when using groups is not "
+"enough. Tags are only saved in transactions themselves, and as result unused "
+"tags disappear automatically on account closing."
+msgstr ""
+"Seznam štítků pro transakci. Transakce může mít neomezený počet štítků (nebo "
+"může být bez nich). Štítky mohou obsahovat libovolné znaky kromě čárky "
+"(<code>,</code>) a mohou mít libovolnou délku, očekává se však, že se bude "
+"jednat o krátká klíčová slova. Štítky jsou určeny k dodatečnému filtrování, "
+"pokud nestačí použití skupin. Štítky se ukládají pouze v samotných "
+"transakcích, v důsledku čehož nepoužité štítky při uzavření účtu automaticky "
+"zmizí."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:65
+msgid "Receipt"
+msgstr "Faktura"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:66
+msgid ""
+"An image of a receipt for transaction. You can upload JPEG or PNG image or "
+"PDF document, but no matter the format it will be converted and saved as "
+"JPEG image. In case of PDF, only the first page will be saved. You can "
+"delete or upload another file anytime."
+msgstr ""
+"Obrázek faktury za transakci. Můžete nahrát obrázek JPEG nebo PNG nebo "
+"dokument PDF, ale bez ohledu na formát bude převeden a uložen jako obrázek "
+"JPEG. V případě PDF bude uložena pouze první stránka. Soubor můžete kdykoli "
+"odstranit nebo nahrát jiný."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:69
+msgid "Notes"
+msgstr "Poznámky"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:70
+msgid "A freeform text note to attach to transaction."
+msgstr "Volně formulovaná textová poznámka, která se připojí k transakci."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transfer.page:8
+msgctxt "link"
+msgid "Transfer 💸"
+msgstr "Převod 💸"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transfer.page:20
+msgid "Transfer"
+msgstr "Převod"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:21
+msgid ""
+"Transfer is a way to move money from one account to another. After running a "
+"transfer 2 transactions will be created with the following descriptions:"
+msgstr ""
+"Převod je způsob, jak lze přenést peníze z jednoho účtu na druhý. Po "
+"provedení převodu se vytvoří 2 transakce s následujícími popisy:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:24
+msgid ""
+"«Transfer to <input>Destination Account Name</input>» on source account."
+msgstr "„Převod na <input>Název cílového účtu</input>“ na zdrojovém účtu."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:27
+msgid ""
+"«Transfer from <input>Source Account Name</input>» on destination account."
+msgstr "„Převod z <input>Název zdrojového účtu</input>“ na cílovém účtu."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:30
+msgid ""
+"Transactions created using transfer are simple transactions that can be "
+"freely edited or deleted. These transactions are not connected: modifying "
+"transaction on source account will not affect transaction on destination "
+"account, and vice versa."
+msgstr ""
+"Transakce vytvořené pomocí převodu jsou jednoduché transakce, které lze "
+"libovolně upravovat nebo mazat. Tyto transakce nejsou propojené: úprava "
+"transakce na zdrojovém účtu neovlivní transakci na cílovém účtu a naopak."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:31
+msgid ""
+"Transfer doesn't allow you to create repeating transactions or set any "
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
+msgstr ""
+"Převod neumožňuje vytvářet opakující se transakce ani nastavovat jiné "
+"vlastnosti než částku. Pro vytvořené transakce se použije barva vybraná v "
+"<link xref=\"configuration\">nastavení</link> ."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:32
+msgid ""
+"If you create a transfer between accounts with different currencies, you "
+"will be asked to provide a conversion rate."
+msgstr ""
+"Pokud vytváříte převod mezi účty v různých měnách, budete vyzváni k zadání "
+"převodního kurzu."

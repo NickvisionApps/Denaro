@@ -1,0 +1,7 @@
+libdenaro/src/controllers/mainwindowcontroller.cpp
+org.nickvision.money.gnome/blueprints/main_window.blp
+org.nickvision.money.gnome/blueprints/preferences_dialog.blp
+org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp
+org.nickvision.money.gnome/src/views/mainwindow.cpp
+org.nickvision.money.winui/MainWindow.xaml.cpp
+org.nickvision.money.winui/SettingsPage.xaml.cpp

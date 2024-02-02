@@ -1,0 +1,234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:25
+msgid "Denaro"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+msgid "Manage your personal finances"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
+msgid "Matrix Chat"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:32
+msgid "Contributors on GitHub"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+msgid "Fyodor Sobolev"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:37
+msgid "David Lapshin"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:39
+msgid "translator-credits"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+msgid "New update available"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+msgid "Unable to download and install update"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
+msgid "Preferences"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+msgid "About Denaro"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:23
+msgid "Main Menu"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:20
+msgid "User Interface"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+msgid "Theme"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+msgctxt "Theme"
+msgid "Light"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+msgctxt "Theme"
+msgid "Dark"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+msgctxt "Theme"
+msgid "System"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+msgctxt "Shortcut"
+msgid "Folder"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+msgid "Open Folder"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
+msgid "Close Folder"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
+msgctxt "Shortcut"
+msgid "Application"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:40
+msgid "About Application"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:45
+msgid "Quit"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:87
+msgid "Open"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:133
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+msgid "GitHub Repo"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:62
+msgid "Search for Files"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:63
+msgid "Home"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:64
+msgid "Help"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+msgid "Check for Updates"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Copy Debug Information"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Changelog"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+msgid "Report a Bug"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+msgid "Discussions"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+msgid "Credits"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
+msgid "Settings"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:85
+msgid "PREVIEW"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:92
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}\n"
+"Translators:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:157
+msgid "Drop here to open folder"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:229
+msgid "Update"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:291
+msgid "Debug information copied to clipboard."
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+msgid "An application restart is required to change the theme."
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+msgid "Automatically Check for Updates"
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+msgid "On"
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Off"
+msgstr ""

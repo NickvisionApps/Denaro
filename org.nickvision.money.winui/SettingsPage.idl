@@ -1,0 +1,8 @@
+namespace Nickvision.Application.WinUI
+{
+    [default_interface]
+    runtimeclass SettingsPage : Microsoft.UI.Xaml.Controls.UserControl
+    {
+        SettingsPage();
+    }
+}
