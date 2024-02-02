@@ -1298,7 +1298,6 @@ public partial class AccountView : Adw.BreakpointBin
             }
             _startDayDropDown.SetSelected(selectedDay > 28 ? 0 : (uint)selectedDay - 1);
         }
-        
         _controller.FilterStartDate = new DateOnly(newYear, (int)_startMonthDropDown.GetSelected() + 1, (int)_startDayDropDown.GetSelected() + 1);
     }
 
@@ -1349,7 +1348,6 @@ public partial class AccountView : Adw.BreakpointBin
             }
             _endDayDropDown.SetSelected(selectedDay > 28 ? 0 : (uint)selectedDay - 1);
         }
-        
         _controller.FilterEndDate = new DateOnly(newYear, (int)_endMonthDropDown.GetSelected() + 1, (int)_endDayDropDown.GetSelected() + 1);
     }
 
