@@ -24,3 +24,10 @@ jobs:
         with:
           name: application-snap
           path: ${{ steps.snapcraft-build.outputs.snap }}    
+      - name: Upload and Release Edge
+        uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+        with:
+          snap: ${{ steps.snapcraft-build.outputs.snap }}
+          release: ${{'edge'}}
