@@ -1,7 +1,7 @@
 #include "models/group.h"
 
-namespace Nickvision::Money::Shared::Models {
-    
+namespace Nickvision::Money::Shared::Models 
+{
         Group::Group(unsigned int id)
             : m_id{ id },
             m_name{ "" },

@@ -4,8 +4,8 @@
 #include "color.h"
 #include <string>
 
-namespace Nickvision::Money::Shared::Models {
-    
+namespace Nickvision::Money::Shared::Models 
+{
     /**
      * @brief A model of a group of transactions.
      */
@@ -99,7 +99,7 @@ namespace Nickvision::Money::Shared::Models {
         std::string m_description;
         double m_income;
         double m_expense;
-    }
+    };
     
 }
 
