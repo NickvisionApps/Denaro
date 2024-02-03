@@ -1,8 +1,8 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-#include "color.h"
 #include <string>
+#include "color.h"
 
 namespace Nickvision::Money::Shared::Models 
 {
@@ -101,8 +101,5 @@ namespace Nickvision::Money::Shared::Models
         double m_expense;
         Color m_color;
     };
-    
 }
-
-
 #endif //GROUP_H
