@@ -6,7 +6,7 @@ namespace Nickvision::Money::Shared::Models
         : m_sourceCurrency{ sourceCurrency },
         m_sourceAmount{ sourceAmount },
         m_resultCurrency{ resultCurrency },
-        m_conversionRate{ m_conversionRate }
+        m_conversionRate{ conversionRate }
     {
 
     }
@@ -33,6 +33,6 @@ namespace Nickvision::Money::Shared::Models
 
     double CurrencyConversion::getResultAmount() const
     {
-        return m_sourceAmount * m_conversionRate;
+        return m_sourceAmount / m_conversionRate;
     }
 }

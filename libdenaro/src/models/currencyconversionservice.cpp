@@ -60,9 +60,10 @@ namespace Nickvision::Money::Shared::Models
             if(!ratesJson.empty())
             {
                 std::unordered_map<std::string, double> rates;
+                double sourceRate{ ratesJson.get(sourceCurrency, 0.0).asDouble() };
                 for(const std::string& rate : ratesJson.getMemberNames())
                 {
-                    rates[rate] = ratesJson.get(rate, 0.0).asDouble();
+                    rates[rate] = sourceRate / ratesJson.get(rate, 0.0).asDouble();
                 }
                 if(needsUpdate)
                 {
