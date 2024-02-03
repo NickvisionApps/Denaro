@@ -110,3 +110,5 @@ apps:
     extensions: [gnome]
     plugs:
       - unity7
+      - network
+      - network-status
