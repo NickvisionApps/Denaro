@@ -99,6 +99,7 @@ namespace Nickvision::Money::Shared::Models
         std::string m_description;
         double m_income;
         double m_expense;
+        Color m_color;
     };
     
 }
