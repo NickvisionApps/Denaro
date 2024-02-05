@@ -1,4 +1,5 @@
 #include "models/currencyconversionservice.h"
+#include <cstdint>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -33,8 +34,8 @@ namespace Nickvision::Money::Shared::Models
         {
             std::ifstream in{ path };
             in >> json;
-            long seconds{ json.get("time_next_update_unix", 0).asInt64() };
-            long secondsNow{ std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count() };
+            std::int64_t seconds{ json.get("time_next_update_unix", 0).asInt64() };
+            std::int64_t secondsNow{ std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count() };
             if(seconds <= secondsNow)
             {
                 needsUpdate = true;

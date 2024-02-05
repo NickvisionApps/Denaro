@@ -1,4 +1,4 @@
-namespace Nickvision.Application.WinUI
+namespace Nickvision.Money.WinUI
 {
     [default_interface]
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window

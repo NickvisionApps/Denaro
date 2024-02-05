@@ -1,4 +1,4 @@
-namespace Nickvision.Application.WinUI.Controls
+namespace Nickvision.Money.WinUI.Controls
 {
     [default_interface]
     runtimeclass SettingsRow : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged

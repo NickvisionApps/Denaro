@@ -167,7 +167,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             IVectorView<IStorageItem> items{ co_await args.DataView().GetStorageItemsAsync() };
             if (items.Size() > 0)
             {
-                m_controller->openFolder(winrt::to_string(items.GetAt(0).Path()));
+                
             }
         }
     }
@@ -215,14 +215,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             }
             if(args.getAction() == "error")
             {
-                if(m_controller->isFolderOpened())
-                {
-                    NavViewFolder().IsSelected(true);
-                }
-                else
-                {
-                    NavViewHome().IsSelected(true);
-                }
+                NavViewHome().IsSelected(true);
             }
             else if(args.getAction() == "update")
             {

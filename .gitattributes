@@ -5,5 +5,7 @@
 *.ico binary
 *.pdf binary
 *.exe binary
+*.otf binary
+*.ttf binary
 # Exclude Docs From Stats
 docs/** linguist-documentation

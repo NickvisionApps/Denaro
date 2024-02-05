@@ -1,4 +1,4 @@
-namespace Nickvision.Application.WinUI.Controls
+namespace Nickvision.Money.WinUI.Controls
 {
     [default_interface]
     runtimeclass ViewStackPage : Microsoft.UI.Xaml.Controls.Frame
