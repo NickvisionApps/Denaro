@@ -7,7 +7,7 @@
 namespace Nickvision::Money::Shared::Models 
 {
     /**
-     * @brief A model of a group of transactions.
+     * @brief A model of a group for transactions.
      */
     class Group {
     public:
@@ -16,82 +16,90 @@ namespace Nickvision::Money::Shared::Models
          * @param id The id of the group
          */
         Group(unsigned int id);
-        /*
+        /**
          * @brief Gets the id of the group.
          * @return The id of the group.
          */
         unsigned int getId() const;
-        /*
+        /**
          * @brief Gets the name of the group.
          * @return The name of the group.
          */
         const std::string& getName() const;
-        /*
+        /**
          * @brief Sets the name of the group.
          * @param name The new name of the group.
          */
         void setName(const std::string& name);
-        /*
+        /**
          * @brief Gets the description of the group.
          * @return The description of the group.
          */
         const std::string& getDescription() const;
-        /*
+        /**
          * @brief Sets the description of the group.
          * @param description The new description of the group.
          */
         void setDescription(const std::string& description);
-        /*
+        /**
          * @brief Gets the income of the group.
          * @return The income of the group.
          */
         double getIncome() const;
-        /*
+        /**
          * @brief Sets the income of the group.
          * @param income The new income of the group.
          */
         void setIncome(double income);
-        /*
+        /**
          * @brief Gets the expense of the group.
          * @return The expense of the group.
          */
         double getExpense() const;
-        /*
+        /**
          * @brief Sets the expense of the group.
          * @param expense The new expense of the group.
          */
         void setExpense(double expense);
-        /*
+        /**
          * @brief Gets the balance of the group.
          * @return The balance of the group.
          */
         double getBalance() const;
-        /*
+        /**
          * @brief Gets the color of the group.
          * @return The color of the group.
          */
         const Color& getColor() const;
-        /*
+        /**
          * @brief Sets the color of the group.
          * @param color The new color of the group.
          */
         void setColor(const Color& color);
-        /*
-         * @brief Checks if this object is the same as another group object.
+        /**
+         * @brief Gets whether or not this Group is equal to compare Group.
+         * @param compare The Group to compare to
+         * @return True if this Group == compare Group 
          */
-        bool operator==(const Group& other) const;
-        /*
-         * @brief Checks if this object is not the same as another group object.
+        bool operator==(const Group& compare) const;
+        /**
+         * @brief Gets whether or not this Group is not equal to compare Group.
+         * @param compare The Group to compare to
+         * @return True if this Group != compare Group 
          */
-        bool operator!=(const Group& other) const;
-        /*
-         * @brief Checks if this object is less than another group object.
+        bool operator!=(const Group& compare) const;
+        /**
+         * @brief Gets whether or not this Group is less than to compare Group.
+         * @param compare The Group to compare to
+         * @return True if this Group < compare Group 
          */
-        bool operator<(const Group& other) const;
-        /*
-         * @brief Checks if this object is greater than another group object.
+        bool operator<(const Group& compare) const;
+        /**
+         * @brief Gets whether or not this Group is greater than to compare Group.
+         * @param compare The Group to compare to
+         * @return True if this Group > compare Group 
          */
-        bool operator>(const Group& other) const;
+        bool operator>(const Group& compare) const;
         
     private:
         unsigned int m_id;
