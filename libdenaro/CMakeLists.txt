@@ -5,10 +5,12 @@ endif()
 add_library(libdenaro
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
+    "src/models/accountmetadata.cpp"
     "src/models/color.cpp"
     "src/models/configuration.cpp"
     "src/models/currencyconversion.cpp"
     "src/models/currencyconversionservice.cpp"
+    "src/models/customcurrency.cpp"
     "src/models/group.cpp"
     "src/models/importresult.cpp"
     "src/models/receipt.cpp"
