@@ -11,6 +11,7 @@ add_library(libdenaro
     "src/models/currencyconversionservice.cpp"
     "src/models/group.cpp"
     "src/models/importresult.cpp"
+    "src/models/receipt.cpp"
     "src/models/recentaccount.cpp"
     "src/models/transfer.cpp")
 target_include_directories(libdenaro PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
