@@ -77,6 +77,18 @@ parts:
     prime:
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libxml++-5.0*.so*
 
+  matplotplusplus:
+    after: [build-deps]
+    source: https://github.com/alandefreitas/matplotplusplus
+    source-tag: 'v1.2.0'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
   podofo:
     after: [build-deps]
     source: https://github.com/podofo/podofo
@@ -90,7 +102,7 @@ parts:
       - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
 
   denaro:
-    after: [build-deps, maddy, libnick, libxmlplusplus, podofo]
+    after: [build-deps, maddy, libnick, libxmlplusplus, matplotplusplus, podofo]
     plugin: cmake
     source: https://github.com/NickvisionApps/Denaro.git
     source-depth: 1

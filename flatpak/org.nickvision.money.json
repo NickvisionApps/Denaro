@@ -108,6 +108,21 @@
             ]
         },
         {
+            "name": "matplotplusplus",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/alandefreitas/matplotplusplus",
+                    "tag": "v1.2.0"
+                }
+            ]
+        },
+        {
             "name": "podofo",
             "buildsystem": "cmake-ninja",
             "builddir": true,
