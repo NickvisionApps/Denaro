@@ -112,7 +112,10 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release"
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DMATPLOTPP_BUILD_EXAMPLES=OFF",
+                "-DMATPLOTPP_BUILD_TESTS=OFF",
+                "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
             ],
             "sources": [
                 {

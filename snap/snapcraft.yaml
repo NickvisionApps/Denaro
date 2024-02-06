@@ -86,6 +86,9 @@ parts:
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
+      - -DMATPLOTPP_BUILD_EXAMPLES=OFF
+      - -DMATPLOTPP_BUILD_TESTS=OFF
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
     build-environment:
       - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
 
