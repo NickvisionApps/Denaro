@@ -77,8 +77,20 @@ parts:
     prime:
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libxml++-5.0*.so*
 
+  podofo:
+    after: [build-deps]
+    source: https://github.com/podofo/podofo
+    source-tag: '0.10.3'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
   denaro:
-    after: [build-deps, maddy, libnick, libxmlplusplus]
+    after: [build-deps, maddy, libnick, libxmlplusplus, podofo]
     plugin: cmake
     source: https://github.com/NickvisionApps/Denaro.git
     source-depth: 1

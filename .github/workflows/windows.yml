@@ -27,7 +27,7 @@ jobs:
         uses: johnwason/vcpkg-action@v5
         id: vcpkg
         with:
-          pkgs: libnick
+          pkgs: libnick podofo
           triplet: x64-windows
           cache-key: windows-latest
           revision: 710677da49b03885c65c8b5ca43072d4b1acde75

@@ -108,6 +108,21 @@
             ]
         },
         {
+            "name": "podofo",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/podofo/podofo",
+                    "tag": "0.10.3"
+                }
+            ]
+        },
+        {
             "name": "org.nickvision.money",
             "buildsystem": "cmake-ninja",
             "builddir": true,
