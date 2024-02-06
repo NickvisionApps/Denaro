@@ -31,10 +31,10 @@ A C++20 compiler is also required to build Denaro.
 1. Set the `VCPKG_ROOT` environment variable to the path of your vcpkg installation's root directory.
 ### Windows
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`
-1. Run `vcpkg install libnick podofo`
+1. Run `vcpkg install libnick matplotplusplus podofo`
 ### Linux
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-linux`
-1. Run `vcpkg install libnick libxmlpp podofo`
+1. Run `vcpkg install libnick libxmlpp matplotplusplus podofo`
 
 ## Building
 1. First, clone/download the repo.
