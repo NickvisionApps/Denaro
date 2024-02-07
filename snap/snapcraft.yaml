@@ -108,6 +108,8 @@ parts:
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
+      - -DPODOFO_BUILD_TEST=OFF
+      - -DPODOFO_BUILD_EXAMPLES=OFF
     build-environment:
       - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
 
