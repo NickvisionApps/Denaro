@@ -79,7 +79,7 @@ parts:
 
   matplotplusplus:
     after: [build-deps]
-    source: https://github.com/alandefreitas/matplotplusplus
+    source: https://github.com/alandefreitas/matplotplusplus.git
     source-tag: 'v1.2.0'
     source-depth: 1
     plugin: cmake
@@ -94,7 +94,7 @@ parts:
 
   podofo:
     after: [build-deps]
-    source: https://github.com/podofo/podofo
+    source: https://github.com/podofo/podofo.git
     source-tag: '0.10.3'
     source-depth: 1
     plugin: cmake
