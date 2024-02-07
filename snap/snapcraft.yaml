@@ -27,6 +27,8 @@ parts:
       - libtiff-dev
       - libpng-dev
       - libfreetype-dev
+      - libblas-dev 
+      - liblapack-dev
     override-build: |
       cp -r ${CRAFT_PART_SRC}/ ${CRAFT_STAGE}/
       update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
@@ -112,8 +114,7 @@ parts:
   denaro:
     after: [build-deps, maddy, libnick, libxmlplusplus, matplotplusplus, podofo]
     plugin: cmake
-    source: https://github.com/NickvisionApps/Denaro.git
-    source-depth: 1
+    source: .
     build-snaps:
       - cmake
       - blueprint-compiler
