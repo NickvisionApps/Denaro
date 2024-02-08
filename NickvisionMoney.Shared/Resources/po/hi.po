@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-02-06 18:01+0000\n"
-"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
+"PO-Revision-Date: 2024-02-08 14:01+0000\n"
+"Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "app/hi/>\n"
 "Language: hi\n"
@@ -384,7 +384,7 @@ msgstr "समूह"
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:78
 #: NickvisionMoney.GNOME/Blueprints/window.blp:10
 msgid "Help"
-msgstr "मदद"
+msgstr "सहायता"
 
 #: ../../../Models/Account.cs:1717 ../../../Models/Account.cs:1790
 msgid "Id"
@@ -707,7 +707,7 @@ msgstr "{0} पर स्थानांतरण"
 
 #: ../../../Controllers/MainWindowController.cs:103
 msgid "translator-credits"
-msgstr "अनुवादक-क्रेडिट"
+msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
 
 #: ../../../Models/Account.cs:2111
 msgid "Two months from now"
@@ -788,15 +788,15 @@ msgstr "आगामी लेनदेन"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:975
 msgid "Update Only Source"
-msgstr "केवल स्रोत अद्यतन करें"
+msgstr "केवल स्रोत अपडेट करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:976
 msgid "Update Source and Generated"
-msgstr "अद्यतन स्रोत और जनरेट किया गया"
+msgstr "अपडेट स्रोत और जनरेट किया गया"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:970
 msgid "Update Transaction"
-msgstr "लेन-देन अद्यतन करें"
+msgstr "लेन-देन अपडेट करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:431
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:660
@@ -1172,7 +1172,7 @@ msgstr "आइए शुरू करें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:73
 msgid "Storage Location"
-msgstr "भंडारण स्थान"
+msgstr "स्टोरेज स्थान"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:86
 msgid "Account Password (Optional)"
