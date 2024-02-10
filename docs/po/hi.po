@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-06 23:36-0500\n"
-"PO-Revision-Date: 2024-02-06 18:01+0000\n"
-"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
+"POT-Creation-Date: 2024-02-09 23:40-0500\n"
+"PO-Revision-Date: 2024-02-08 14:01+0000\n"
+"Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/hi/>\n"
 "Language: hi\n"
@@ -16,7 +16,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "अनुवादक-क्रेडिट"
+msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
 
 #. (itstool) path: info/title
 #: docs/yelp/C/account.page:8
@@ -65,10 +65,10 @@ msgid ""
 "are from the same application version (i.e. V2023.1.0)."
 msgstr ""
 "प्रत्येक खाता एक एकल <file>*.nmoney</file> फ़ाइल में संग्रहीत है। <app>Denaro</app> के "
-"पुराने <em>स्थिर</em> संस्करण में बनाई गई फ़ाइलें एप्लिकेशन के नवीनतम <em>स्थिर</em> संस्करण "
-"में सुरक्षित रूप से खोली जा सकती हैं। हालाँकि ऐप विभिन्न प्लेटफ़ॉर्म (Windows और Linux) पर "
+"पुराने <em>स्थिर</em> वर्शन में बनाई गई फ़ाइलें एप्लिकेशन के नवीनतम <em>स्थिर</em> वर्शन में "
+"सुरक्षित रूप से खोली जा सकती हैं। हालाँकि ऐप विभिन्न प्लेटफ़ॉर्म (Windows और Linux) पर "
 "चल सकता है, <file>*.nmoney</file> फ़ाइलें प्लेटफ़ॉर्म के बीच 100% संगत हैं, जब तक कि वे "
-"एक ही एप्लिकेशन संस्करण (यानी V2023.1.0) से हैं।"
+"एक ही एप्लिकेशन वर्शन (यानी V2023.1.0) से हैं।"
 
 #. (itstool) path: note/p
 #: docs/yelp/C/account.page:24
@@ -77,9 +77,8 @@ msgid ""
 "unfinished modifications that can cause data loss. DO NOT use account files "
 "that contain real data in unstable versions of the app!"
 msgstr ""
-"एप्लिकेशन के अस्थिर (Beta और RC) संस्करणों में बग या अधूरे संशोधन हो सकते हैं जो डेटा हानि "
-"का कारण बन सकते हैं। ऐप के अस्थिर संस्करणों में वास्तविक डेटा वाली खाता फ़ाइलों का उपयोग न "
-"करें!"
+"एप्लिकेशन के अस्थिर (Beta और RC) वर्शन में बग या अधूरे संशोधन हो सकते हैं जो डेटा हानि का "
+"कारण बन सकते हैं। ऐप के अस्थिर वर्शन में वास्तविक डेटा वाली खाता फ़ाइलों का उपयोग न करें!"
 
 #. (itstool) path: item/title
 #: docs/yelp/C/account.page:29
@@ -616,8 +615,8 @@ msgstr ""
 "निर्यात करने की अनुमति देते हैं, ये फ़ाइलें वास्तव में तालिकाएं हैं जिनमें मनमाना डेटा हो सकता "
 "है। अन्य प्रोग्राम में बनाई गई CSV फ़ाइल को आयात करना विफल हो जाएगा, क्योंकि इसका डेटा "
 "<app>Denaro</app> किसी फ़ाइल से प्राप्त करने का प्रयास करने के साथ संगत नहीं होगा। CSV "
-"आयात/निर्यात का उद्देश्य टेक्स्ट एडिटर्स और ऑफिस सुइट्स जैसे बाहरी कार्यक्रमों का उपयोग करके "
-"किसी खाते में डेटा जोड़ने का एक तरीका प्रदान करना है। आयात केवल मौजूदा लेन-देन को "
+"आयात/निर्यात का उद्देश्य टेक्स्ट एडिटर्स और ऑफिस सुइट्स जैसे इक्स्टर्नल प्रोग्रामों का उपयोग "
+"करके किसी खाते में डेटा जोड़ने का एक तरीका प्रदान करना है। आयात केवल मौजूदा लेन-देन को "
 "ओवरराइड किए बिना नए लेन-देन जोड़ेगा। यदि आप मैन्युअल रूप से एक CSV फ़ाइल बनाना चाहते हैं, "
 "तो यह वह हेडर है जिसमें वे सभी कॉलम शामिल हैं जिन्हें <app>Denaro</app> ढूंढने की अपेक्षा "
 "करता है:"
@@ -834,7 +833,7 @@ msgid ""
 "This documentation will help you understand how to configure and manage data "
 "in <app>Denaro</app> to get the most of the application."
 msgstr ""
-"यह दस्तावेज़ आपको यह समझने में मदद करेगा कि एप्लिकेशन का अधिकतम लाभ उठाने के लिए "
+"यह दस्तावेज़ आपको यह समझने में सहायता करेगा कि एप्लिकेशन का अधिकतम लाभ उठाने के लिए "
 "<app>Denaro</app> में डेटा को कैसे कॉन्फ़िगर और प्रबंधित किया जाए।"
 
 #. (itstool) path: page/p
