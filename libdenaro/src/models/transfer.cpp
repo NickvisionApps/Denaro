@@ -7,7 +7,6 @@ namespace Nickvision::Money::Shared::Models
         m_sourceAccountName{ sourceAccountName.empty() ? sourceAccountPath.stem().string() : sourceAccountName },
         m_sourceAmount{ 0.0 },
         m_destinationAccountPath{ std::filesystem::path() },
-        m_destinationAccountName{ "" },
         m_destinationAccountPassword{ "" },
         m_conversionRate{ 1.0 }
     {
@@ -47,16 +46,6 @@ namespace Nickvision::Money::Shared::Models
     void Transfer::setDestinationAccountPath(const std::filesystem::path& destinationAccountPath)
     {
         m_destinationAccountPath = destinationAccountPath;
-    }
-
-    const std::string& Transfer::getDestinationAccountName() const
-    {
-        return m_destinationAccountName;
-    }
-
-    void Transfer::setDestinationAccountName(const std::string& destinationAccountName)
-    {
-        m_destinationAccountName = destinationAccountName;
     }
 
     const std::string& Transfer::getDestinationAccountPassword() const

@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <filesystem>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -41,11 +42,18 @@ namespace Nickvision::Money::Shared::Models
          */
         bool isEncrypted() const;
         /**
-         * @brief Logins and loads the account.
+         * @brief Logins to the account.
+         * @brief This method also loads the account's metadata into memory.
          * @param password The password for the account. If unencrypted, this param must be an empty string
          * @return True if successful, else false
          */
         bool login(const std::string& password);
+        /**
+         * @brief Loads the account's data (groups, tags, and transactions) into memory.
+         * @brief login() must be called first
+         * @return True if successful, else false 
+         */
+        bool load();
         /**
          * @brief Gets the metadata for the account.
          * @return The account metadata 
@@ -194,17 +202,17 @@ namespace Nickvision::Money::Shared::Models
         /**
          * @brief Sends a transfer to another account and creates an expense transaction for this account with the transfer.
          * @param transfer The transfer to send
-         * @param description The description for the expense transaction to be created
-         * @return The new expense transaction
+         * @param color The color to use for the transfer transaction
+         * @return The new expense transaction if successful, else std::nullopt
          */
-        Transaction sendTransfer(const Transfer& transfer, const std::string& description);
+        std::optional<Transaction> sendTransfer(const Transfer& transfer, const Color& color);
         /**
          * @brief Receives a transfer from another account and creates an income transaction for this account with the transfer.
          * @param transfer The transfer to receive
-         * @param description The description for the income transaction to be created
-         * @return The new income transaction
+         * @param color The color to use for the transfer transaction
+         * @return The new income transaction if successful, else std::nullopt
          */
-        Transaction receiveTransfer(const Transfer& transfer, const std::string& description);
+        std::optional<Transaction> receiveTransfer(const Transfer& transfer, const Color& color);
         /**
          * @brief Imports transactions from a file.
          * @param path The path to the file to import
@@ -281,7 +289,7 @@ namespace Nickvision::Money::Shared::Models
         AccountMetadata m_metadata;
         std::unordered_map<unsigned int, Group> m_groups;
         std::vector<std::string> m_tags;
-        std::unordered_map<unsigned int, Transaction> m_transaction;
+        std::unordered_map<unsigned int, Transaction> m_transactions;
         std::vector<std::pair<std::string, std::string>> m_transactionReminders;
         unsigned int m_nextAvailableGroupId;
         unsigned int m_nextAvailableTransactionId;

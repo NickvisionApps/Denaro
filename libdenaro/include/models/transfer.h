@@ -54,16 +54,6 @@ namespace Nickvision::Money::Shared::Models
          */
         void setDestinationAccountPath(const std::filesystem::path& destinationAccountPath);
         /**
-         * @brief Gets the name of the destination account.
-         * @return The destination account name  
-         */
-        const std::string& getDestinationAccountName() const;
-        /**
-         * @brief Sets the name of the destination account.
-         * @param destinationAccountName The new destination account name 
-         */
-        void setDestinationAccountName(const std::string& destinationAccountName);
-        /**
          * @brief Gets the password of the destination account.
          * @return The destination account password  
          */
@@ -96,7 +86,6 @@ namespace Nickvision::Money::Shared::Models
         std::string m_sourceAccountName;
         double m_sourceAmount;
         std::filesystem::path m_destinationAccountPath;
-        std::string m_destinationAccountName;
         std::string m_destinationAccountPassword;
         double m_conversionRate;
     };
