@@ -8,7 +8,8 @@ using namespace winrt::Microsoft::UI::Xaml;
 namespace winrt::Nickvision::Money::WinUI::implementation 
 {
     App::App()
-        : m_controller{ std::make_shared<MainWindowController>() }
+        : m_controller{ std::make_shared<MainWindowController>() },
+        m_mainWindow{ nullptr }
     {
         InitializeComponent();
 #ifdef DEBUG
@@ -39,8 +40,11 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void App::OnLaunched(const LaunchActivatedEventArgs& args)
     {
-        static Window window{ winrt::make<MainWindow>() };
-        window.as<MainWindow>()->SetController(m_controller, m_systemTheme);
-        window.Activate();
+        if(!m_mainWindow)
+        {
+            m_mainWindow = winrt::make<MainWindow>();
+            m_mainWindow.as<MainWindow>()->SetController(m_controller, m_systemTheme);
+        }
+        m_mainWindow.Activate();
     }
 }

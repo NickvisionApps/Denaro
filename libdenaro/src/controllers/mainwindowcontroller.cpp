@@ -18,6 +18,7 @@ using namespace Nickvision::Update;
 namespace Nickvision::Money::Shared::Controllers
 {
     MainWindowController::MainWindowController()
+        : m_started{ false }
     {
         Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro");
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
@@ -106,8 +107,7 @@ namespace Nickvision::Money::Shared::Controllers
 
     void MainWindowController::startup()
     {
-        static bool started{ false };
-        if (!started)
+        if (!m_started)
         {
 #ifdef _WIN32
             try
@@ -123,7 +123,7 @@ namespace Nickvision::Money::Shared::Controllers
                 checkForUpdates();
             }
 #endif
-            started = true;
+            m_started = true;
         }
     }
 

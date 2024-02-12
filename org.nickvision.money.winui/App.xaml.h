@@ -26,6 +26,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     private:
         std::shared_ptr<::Nickvision::Money::Shared::Controllers::MainWindowController> m_controller;
+        Microsoft::UI::Xaml::Window m_mainWindow;
         Microsoft::UI::Xaml::ElementTheme m_systemTheme;
     };
 }

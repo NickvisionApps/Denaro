@@ -1,6 +1,5 @@
 #include "application.h"
 #include <libnick/app/aura.h>
-#include "views/mainwindow.h"
 
 using namespace Nickvision::App;
 using namespace Nickvision::Money::Shared::Controllers;
@@ -10,7 +9,8 @@ namespace Nickvision::Money::GNOME
 {
     Application::Application(int argc, char* argv[])
         : m_controller{ std::make_shared<MainWindowController>() },
-        m_adw{ adw_application_new(m_controller->getAppInfo().getId().c_str(), G_APPLICATION_DEFAULT_FLAGS) }
+        m_adw{ adw_application_new(m_controller->getAppInfo().getId().c_str(), G_APPLICATION_DEFAULT_FLAGS) },
+        m_mainWindow{ nullptr }
     {
         m_args.reserve(static_cast<size_t>(argc));
         for(int i = 0; i < argc; i++)
@@ -42,7 +42,10 @@ namespace Nickvision::Money::GNOME
             adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_DEFAULT);
             break;
         }
-        static Views::MainWindow mainWindow{ m_controller, app };
-        mainWindow.show();
+        if(!m_mainWindow)
+        {
+            m_mainWindow = std::make_shared<Views::MainWindow>(m_controller, app);
+        }
+        m_mainWindow->show();
     }
 }

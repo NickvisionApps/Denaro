@@ -44,7 +44,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     }
 
     MainWindow::MainWindow()
-        : m_isActivated{ true }
+        : m_opened{ false },
+        m_isActivated{ true },
+        m_notificationClickToken{ 0 },
+        m_settingsPage{ nullptr }
     {
         InitializeComponent();
         this->m_inner.as<::IWindowNative>()->get_WindowHandle(&m_hwnd);
@@ -99,8 +102,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void MainWindow::OnLoaded(const IInspectable& sender, const RoutedEventArgs& args)
     {
-        static bool opened{ false };
-        if (!opened)
+        if (!m_opened)
         {
             if (!m_controller)
             {
@@ -109,7 +111,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             m_controller->connectTaskbar(m_hwnd);
             m_controller->startup();
             NavViewHome().IsSelected(true);
-            opened = true;
+            m_opened = true;
         }
     }
 
@@ -190,7 +192,6 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void MainWindow::OnNotificationSent(const NotificationSentEventArgs& args)
     {
-        static winrt::event_token clickToken{ 0 };
         DispatcherQueue().TryEnqueue([this, args]()
         {
             InfoBar().Message(winrt::to_hstring(args.getMessage()));
@@ -209,9 +210,9 @@ namespace winrt::Nickvision::Money::WinUI::implementation
                 InfoBar().Severity(InfoBarSeverity::Informational);
                 break;
             }
-            if(clickToken)
+            if(m_notificationClickToken)
             {
-                BtnInfoBar().Click(clickToken);
+                BtnInfoBar().Click(m_notificationClickToken);
             }
             if(args.getAction() == "error")
             {
@@ -220,7 +221,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             else if(args.getAction() == "update")
             {
                 BtnInfoBar().Content(winrt::box_value(winrt::to_hstring(_("Update"))));
-                clickToken = BtnInfoBar().Click({ this, &MainWindow::WindowsUpdate });
+                m_notificationClickToken = BtnInfoBar().Click({ this, &MainWindow::WindowsUpdate });
             }
             BtnInfoBar().Visibility(!args.getAction().empty() ? Visibility::Visible : Visibility::Collapsed);
             InfoBar().IsOpen(true);
@@ -245,10 +246,13 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         }
         else if(tag == L"Settings")
         {
-            static UserControl settingsPage{ winrt::make<SettingsPage>() };
-            settingsPage.as<SettingsPage>()->SetController(m_controller->createPreferencesViewController());
+            if(!m_settingsPage)
+            {
+                m_settingsPage = winrt::make<SettingsPage>();
+            }
+            m_settingsPage.as<SettingsPage>()->SetController(m_controller->createPreferencesViewController());
             ViewStack().CurrentPage(L"Custom");
-            FrameCustom().Content(winrt::box_value(settingsPage));
+            FrameCustom().Content(winrt::box_value(m_settingsPage));
         }
         TitleBarSearchBox().Visibility(tag == L"Folder" ? Visibility::Visible : Visibility::Collapsed);
         SetDragRegionForCustomTitleBar();

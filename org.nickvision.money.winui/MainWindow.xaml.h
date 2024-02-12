@@ -133,9 +133,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          */
         void SetDragRegionForCustomTitleBar();
         std::shared_ptr<::Nickvision::Money::Shared::Controllers::MainWindowController> m_controller;
+        bool m_opened;
         bool m_isActivated;
         HWND m_hwnd;
         Microsoft::UI::Xaml::ElementTheme m_systemTheme;
+        winrt::event_token m_notificationClickToken;
+        Microsoft::UI::Xaml::Controls::UserControl m_settingsPage;
     };
 }
 

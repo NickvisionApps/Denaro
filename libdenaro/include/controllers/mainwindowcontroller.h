@@ -102,6 +102,7 @@ namespace Nickvision::Money::Shared::Controllers
 #endif
 
     private:
+        bool m_started;
         std::shared_ptr<Nickvision::Update::Updater> m_updater;
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
