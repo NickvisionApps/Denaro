@@ -154,7 +154,7 @@ namespace Nickvision::Money::Shared::Models
         {
             return;
         }
-        metadata = m_metadata;
+        m_metadata = metadata;
         //TODO: Update database
     }
 
@@ -163,7 +163,7 @@ namespace Nickvision::Money::Shared::Models
         return m_groups;
     }
 
-    const std::vector<std::string>& getTags() const
+    const std::vector<std::string>& Account::getTags() const
     {
         return m_tags;
     }
@@ -197,7 +197,7 @@ namespace Nickvision::Money::Shared::Models
         Account accountToSend{ transfer.getDestinationAccountPath() };
         if(accountToSend.login(transfer.getDestinationAccountPassword()))
         {
-            accountToSend.receiveTransfer(transfer);
+            accountToSend.receiveTransfer(transfer, color);
             Transaction expense{ m_nextAvailableTransactionId };
             expense.setDescription(std::vformat(_("Transfer to {}"), std::make_format_args(accountToSend.getMetadata().getName())));
             expense.setType(TransactionType::Expense);
