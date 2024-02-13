@@ -28,13 +28,10 @@ namespace Nickvision::Money::Shared::Models
     {
         if(!m_loggedIn)
         {
-            //Set password if needed
-            if(m_database.isEncrypted())
+            //Unlock database
+            if(!m_database.unlock(password))
             {
-                if(!m_database.unlock(password))
-                {
-                    return false;
-                }
+                return false;
             }
             //Setup metadata table
             m_database.exec("CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)");
