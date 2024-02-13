@@ -1,42 +1,27 @@
 #include "models/account.h"
 #include <format>
+#include <libnick/database/sqlstatement.h>
 #include <libnick/localization/gettext.h>
 #include "models/customcurrency.h"
 
+using namespace Nickvision::Database;
+
 namespace Nickvision::Money::Shared::Models
 {
-    Account::Account(const std::filesystem::path& path)
-        : m_path{ path },
+    Account::Account(std::filesystem::path path)
+        : m_path{ path.replace_extension(".nmoney") },
         m_loggedIn{ false },
-        m_database{ nullptr },
-        m_isEncrypted{ false },
-        m_metadata{ path.stem().string(), AccountType::Checking },
+        m_database{ m_path, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE },
+        m_metadata{ m_path.stem().string(), AccountType::Checking },
         m_nextAvailableGroupId{ 1 },
         m_nextAvailableTransactionId{ 1 }
     {
-        if(m_path.extension() != ".nmoney")
-        {
-            m_path.replace_extension(".nmoney");
-        }
-        //Get database 
-        sqlite3* database{ nullptr };
-        if(sqlite3_open_v2(m_path.string().c_str(), &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nullptr) == SQLITE_OK)
-        {
-            //Determine if account is encrypted
-            if(sqlite3_exec(database, "PRAGMA schema_version", nullptr, nullptr, nullptr) != SQLITE_OK)
-            {
-                m_isEncrypted = true;
-            }
-            m_database = { database, [](sqlite3* sql)
-            {
-                sqlite3_close(sql);
-            }};
-        }
+
     }
 
     bool Account::isEncrypted() const
     {
-        return m_isEncrypted;
+        return m_database.isEncrypted();
     }
 
     bool Account::login(const std::string& password)
@@ -44,80 +29,76 @@ namespace Nickvision::Money::Shared::Models
         if(!m_loggedIn)
         {
             //Set password if needed
-            if(m_isEncrypted)
+            if(m_database.isEncrypted())
             {
-                sqlite3_key(m_database.get(), password.c_str(), static_cast<int>(password.size()));
+                if(!m_database.unlock(password))
+                {
+                    return false;
+                }
             }
-            if(sqlite3_exec(m_database.get(), "PRAGMA schema_version", nullptr, nullptr, nullptr) == SQLITE_OK)
+            //Setup metadata table
+            m_database.exec("CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN showTagsList INTEGER");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER");
+            //Setup groups table
+            m_database.exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)");
+            m_database.exec("ALTER TABLE groups ADD COLUMN rgba TEXT");
+            //Setup transactions table
+            m_database.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN rgba TEXT");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN receipt TEXT");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN notes TEXT");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN tags TEXT");
+            //Get metadata
+            SqlStatement statement{ m_database.createStatement("SELECT * FROM metadata where id = 0") };
+            if(statement.step())
             {
-                //Setup metadata table
-                sqlite3_exec(m_database.get(), "CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN showTagsList INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER", nullptr, nullptr, nullptr);
-                //Setup groups table
-                sqlite3_exec(m_database.get(), "CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE groups ADD COLUMN rgba TEXT", nullptr, nullptr, nullptr);
-                //Setup transactions table
-                sqlite3_exec(m_database.get(), "CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN gid INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN rgba TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN receipt TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN notes TEXT", nullptr, nullptr, nullptr);
-                sqlite3_exec(m_database.get(), "ALTER TABLE transactions ADD COLUMN tags TEXT", nullptr, nullptr, nullptr);
-                //Get metadata
-                sqlite3_stmt* metadata;
-                sqlite3_prepare_v2(m_database.get(), "SELECT * FROM metadata where id = 0", -1, &metadata, nullptr);
-                if(sqlite3_step(metadata) == SQLITE_ROW)
-                {
-                    m_metadata.setName((const char*)sqlite3_column_text(metadata, 1));
-                    m_metadata.setType(static_cast<AccountType>(sqlite3_column_int(metadata, 2)));
-                    m_metadata.setUseCustomCurrency(static_cast<bool>(sqlite3_column_int(metadata, 3)));
-                    CustomCurrency curr{ (const char*)sqlite3_column_text(metadata, 4), (const char*)sqlite3_column_text(metadata, 5) };
-                    curr.setDecimalSeparator((const char*)sqlite3_column_text(metadata, 10));
-                    curr.setGroupSeparator((const char*)sqlite3_column_text(metadata, 11));
-                    curr.setDecimalDigits(sqlite3_column_int(metadata, 12));
-                    curr.setAmountStyle(static_cast<AmountStyle>(sqlite3_column_int(metadata, 15)));
-                    m_metadata.setCustomCurrency(curr);
-                    m_metadata.setDefaultTransactionType(static_cast<TransactionType>(sqlite3_column_int(metadata, 6)));
-                    m_metadata.setTransactionRemindersThreshold(static_cast<RemindersThreshold>(sqlite3_column_int(metadata, 14)));
-                    m_metadata.setShowGroupsList(static_cast<bool>(sqlite3_column_int(metadata, 7)));
-                    m_metadata.setShowTagsList(static_cast<bool>(sqlite3_column_int(metadata, 13)));
-                    m_metadata.setSortTransactionsBy(static_cast<SortBy>(sqlite3_column_int(metadata, 9)));
-                    m_metadata.setSortFirstToLast(static_cast<bool>(sqlite3_column_int(metadata, 8)));
-                }
-                else
-                {
-                    sqlite3_stmt* newMetadata;
-                    sqlite3_prepare_v2(m_database.get(), "INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList, transactionRemindersThreshold, customAmountStyle) VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", -1, &metadata, nullptr);
-                    sqlite3_bind_text(newMetadata, 1, m_metadata.getName().c_str(), -1, SQLITE_TRANSIENT);
-                    sqlite3_bind_int(newMetadata, 2, static_cast<int>(m_metadata.getType()));
-                    sqlite3_bind_int(newMetadata, 3, static_cast<int>(m_metadata.getUseCustomCurrency()));
-                    sqlite3_bind_text(newMetadata, 4, m_metadata.getCustomCurrency().getSymbol().c_str(), -1, SQLITE_TRANSIENT);
-                    sqlite3_bind_text(newMetadata, 5, m_metadata.getCustomCurrency().getCode().c_str(), -1, SQLITE_TRANSIENT);
-                    sqlite3_bind_text(newMetadata, 10, m_metadata.getCustomCurrency().getDecimalSeparator().c_str(), -1, SQLITE_TRANSIENT);
-                    sqlite3_bind_text(newMetadata, 11, m_metadata.getCustomCurrency().getGroupSeparator().c_str(), -1, SQLITE_TRANSIENT);
-                    sqlite3_bind_int(newMetadata, 12, m_metadata.getCustomCurrency().getDecimalDigits());
-                    sqlite3_bind_int(newMetadata, 15, static_cast<int>(m_metadata.getCustomCurrency().getAmountStyle()));
-                    sqlite3_bind_int(newMetadata, 6, static_cast<int>(m_metadata.getDefaultTransactionType()));
-                    sqlite3_bind_int(newMetadata, 14, static_cast<int>(m_metadata.getTransactionRemindersThreshold()));
-                    sqlite3_bind_int(newMetadata, 7, static_cast<int>(m_metadata.getShowGroupsList()));
-                    sqlite3_bind_int(newMetadata, 13, static_cast<int>(m_metadata.getShowTagsList()));
-                    sqlite3_bind_int(newMetadata, 9, static_cast<int>(m_metadata.getSortTransactionsBy()));
-                    sqlite3_bind_int(newMetadata, 8, static_cast<int>(m_metadata.getSortFirstToLast()));
-                    sqlite3_step(newMetadata);
-                    sqlite3_finalize(newMetadata);
-                }
-                sqlite3_finalize(metadata);
-                m_loggedIn = true;
+                m_metadata.setName(statement.getColumnString(1));
+                m_metadata.setType(static_cast<AccountType>(statement.getColumnInt(2)));
+                m_metadata.setUseCustomCurrency(statement.getColumnBool(3));
+                CustomCurrency curr{ statement.getColumnString(4), statement.getColumnString(5) };
+                curr.setDecimalSeparator(statement.getColumnString(10));
+                curr.setGroupSeparator(statement.getColumnString(11));
+                curr.setDecimalDigits(statement.getColumnInt(12));
+                curr.setAmountStyle(static_cast<AmountStyle>(statement.getColumnInt(15)));
+                m_metadata.setCustomCurrency(curr);
+                m_metadata.setDefaultTransactionType(static_cast<TransactionType>(statement.getColumnInt(6)));
+                m_metadata.setTransactionRemindersThreshold(static_cast<RemindersThreshold>(statement.getColumnInt(14)));
+                m_metadata.setShowGroupsList(statement.getColumnBool(7));
+                m_metadata.setShowTagsList(statement.getColumnBool(13));
+                m_metadata.setSortTransactionsBy(static_cast<SortBy>(statement.getColumnInt(9)));
+                m_metadata.setSortFirstToLast(statement.getColumnBool(8));
             }
+            else
+            {
+                SqlStatement newStatement{ m_database.createStatement("INSERT INTO metadata (id, name, type, useCustomCurrency, customSymbol, customCode, defaultTransactionType, showGroupsList, sortFirstToLast, sortTransactionsBy, customDecimalSeparator, customGroupSeparator, customDecimalDigits, showTagsList, transactionRemindersThreshold, customAmountStyle) VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)") };
+                newStatement.bind(1, m_metadata.getName());
+                newStatement.bind(2, static_cast<int>(m_metadata.getType()));
+                newStatement.bind(3, m_metadata.getUseCustomCurrency());
+                newStatement.bind(4, m_metadata.getCustomCurrency().getSymbol());
+                newStatement.bind(5, m_metadata.getCustomCurrency().getCode());
+                newStatement.bind(10, m_metadata.getCustomCurrency().getDecimalSeparator());
+                newStatement.bind(11, m_metadata.getCustomCurrency().getGroupSeparator());
+                newStatement.bind(12, m_metadata.getCustomCurrency().getDecimalDigits());
+                newStatement.bind(15, static_cast<int>(m_metadata.getCustomCurrency().getAmountStyle()));
+                newStatement.bind(6, static_cast<int>(m_metadata.getDefaultTransactionType()));
+                newStatement.bind(14, static_cast<int>(m_metadata.getTransactionRemindersThreshold()));
+                newStatement.bind(7, m_metadata.getShowGroupsList());
+                newStatement.bind(13, m_metadata.getShowTagsList());
+                newStatement.bind(9, static_cast<int>(m_metadata.getSortTransactionsBy()));
+                newStatement.bind(8, m_metadata.getSortFirstToLast());
+                newStatement.step();
+            }
+            m_loggedIn = true;
         }
         return m_loggedIn;
     }

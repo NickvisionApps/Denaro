@@ -57,7 +57,7 @@ parts:
   libnick:
     after: [maddy, build-deps]
     source: https://github.com/nickvisionapps/libnick.git
-    source-tag: '2024.2.1'
+    source-tag: '2024.2.2'
     source-depth: 1
     plugin: cmake
     cmake-parameters:

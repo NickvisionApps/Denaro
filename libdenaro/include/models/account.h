@@ -1,19 +1,14 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
-#ifndef SQLITE_HAS_CODEC
-#define SQLITE_HAS_CODEC
-#endif
-
 #include <cstdint>
 #include <filesystem>
-#include <mutex>
 #include <optional>
 #include <string>
 #include <unordered_map>
 #include <utility>
 #include <vector>
-#include <libnick/sqlite3.h>
+#include <libnick/database/sqldatabase.h>
 #include "accountmetadata.h"
 #include "color.h"
 #include "exportmode.h"
@@ -35,7 +30,7 @@ namespace Nickvision::Money::Shared::Models
          * @brief Constructs an Account.
          * @param path The path to the .nmoney file 
          */
-        Account(const std::filesystem::path& path);
+        Account(std::filesystem::path path);
         /**
          * @brief Gets whether or not the account file is encrypted.
          * @return True if encrypted, else false 
@@ -281,11 +276,9 @@ namespace Nickvision::Money::Shared::Models
          * @return ImportResult 
          */
         ImportResult importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor);
-        mutable std::mutex m_mutex;
         std::filesystem::path m_path;
         bool m_loggedIn;
-        std::shared_ptr<sqlite3> m_database;
-        bool m_isEncrypted;
+        Database::SqlDatabase m_database;
         AccountMetadata m_metadata;
         std::unordered_map<unsigned int, Group> m_groups;
         std::vector<std::string> m_tags;

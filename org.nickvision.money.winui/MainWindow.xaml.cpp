@@ -33,10 +33,10 @@ using namespace winrt::Windows::System;
 
 namespace winrt::Nickvision::Money::WinUI::implementation 
 {
-    static std::vector<std::string> keys(const std::map<std::string, std::string>& m)
+    static std::vector<std::string> keys(const std::unordered_map<std::string, std::string>& m)
     {
         std::vector<std::string> k;
-        for(std::map<std::string, std::string>::const_iterator it = m.begin(); it != m.end(); it++)
+        for(std::unordered_map<std::string, std::string>::const_iterator it = m.begin(); it != m.end(); it++)
         {
             k.push_back(it->first);
         }
