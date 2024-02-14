@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"POT-Creation-Date: 2024-02-14 09:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:25
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
 msgid "Manage your personal finances"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Matrix Chat"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:32
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
 msgid "Contributors on GitHub"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:37
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "David Lapshin"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:39
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "translator-credits"
 msgstr ""
 
@@ -126,64 +126,64 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:87
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
 msgid "Open"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:133
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "GitHub Repo"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:62
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Search for Files"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:63
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Home"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:64
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Help"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Copy Debug Information"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Changelog"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Report a Bug"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Discussions"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Credits"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:85
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:88
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:92
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -193,7 +193,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:99
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -205,15 +205,15 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:157
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:159
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:229
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:223
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:291
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:288
 msgid "Debug information copied to clipboard."
 msgstr ""
 

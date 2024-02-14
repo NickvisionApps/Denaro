@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-14 22:10-0500\n"
+"POT-Creation-Date: 2024-02-14 09:24-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,1568 +19,1204 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2\n"
 
-#: ../../../Controllers/AccountViewController.cs:508
-msgid "(Copy)"
-msgstr "(Kopírovat)"
-
-#: ../../../Controllers/DashboardViewController.cs:83
-#: ../../../Controllers/DashboardViewController.cs:92
-#: ../../../Controllers/DashboardViewController.cs:101
-#: ../../../Controllers/DashboardViewController.cs:121
-#, csharp-format
-msgid "{0} from {1}"
-msgstr "{0} z {1}"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:633
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:639
-#, csharp-format
-msgid "{0} tag"
-msgid_plural "{0} tags"
-msgstr[0] "{0} štítek"
-msgstr[1] "{0} štítky"
-msgstr[2] "{0} štítků"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:161
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:474
-#, csharp-format
-msgid "{0} transaction"
-msgid_plural "{0} transactions"
-msgstr[0] "{0} transakce"
-msgstr[1] "{0} transakce"
-msgstr[2] "{0} transakcí"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:287
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:82
-msgid "Account Name"
-msgstr "Název účtu"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:303
-msgid "Account Name (Exists)"
-msgstr "Název účtu (existuje)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:298
-msgid "Account Name (Opened)"
-msgstr "Název účtu (otevřený)"
-
-#: ../../../Models/Account.cs:1653
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:74
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:493
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:32
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
-msgid "Account Settings"
-msgstr "Nastavení účtu"
-
-#: ../../../Models/Account.cs:1654
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:56
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
-msgid "Account Type"
-msgstr "Typ účtu"
-
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:107
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:179
-#: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:44
-msgid "Add"
-msgstr "Přidat"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:498
-msgid "Add a new transaction or import transactions from a file."
-msgstr "Přidejte novou transakci nebo importujte transakce ze souboru."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
-msgid "Add Password To PDF?"
-msgstr "Přidat heslo do PDF?"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:743
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:440
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:674
-msgid "All files"
-msgstr "Všechny soubory"
-
-#: ../../../Models/Account.cs:1687 ../../../Models/Account.cs:1724
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:493
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:159
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:72
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:73
-msgid "Amount"
-msgstr "Množství"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:512
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:194
-msgid "Amount (Invalid)"
-msgstr "Částka (neplatná)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:107
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:179
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:132
-msgid "Apply"
-msgstr "Použít"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1099
-msgid ""
-"Are you sure you want to delete this group?\n"
-"This action is irreversible."
-msgstr ""
-"Opravdu chcete odstranit tuto skupinu?\n"
-"Tato akce je nevratná."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1029
-msgid ""
-"Are you sure you want to delete this transaction?\n"
-"This action is irreversible."
-msgstr ""
-"Opravdu chcete odstranit tuto transakci?\n"
-"Tato akce je nevratná."
-
-#: ../../../Models/Account.cs:1661
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:58
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:156
-msgid "Business"
-msgstr "Firemní"
-
-#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:161
-msgid "Can't access the selected folder, check Flatpak permissions."
-msgstr ""
-"Nelze získat přístup k vybrané složce, zkontrolujte oprávnění Flatpaku."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:940
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:972
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:249
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:110
-msgid "Change Password"
-msgstr "Změnit heslo"
-
-#: ../../../Models/Account.cs:1659
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:58
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:156
-msgid "Checking"
-msgstr "Běžný"
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:111
-msgid "Close"
-msgstr "Zavřít"
-
-#: ../../../Controllers/MainWindowController.cs:97
-msgid "Contributors on GitHub ❤️"
-msgstr "Přispěvatelé na GitHubu ❤️"
-
-#: ../../../Models/Account.cs:1655
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:122
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:92
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:32
-msgid "Currency"
-msgstr "Měna"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:369
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:368
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:165
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:232
-msgid "Currency Code"
-msgstr "Kód měny"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:407
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:398
-msgid "Currency Code (Empty)"
-msgstr "Kód měny (prázdný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:367
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:366
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:161
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:228
-msgid "Currency Symbol"
-msgstr "Symbol měny"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:395
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:388
-msgid "Currency Symbol (Empty)"
-msgstr "Symbol měny (prázdný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:401
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:427
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:435
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:393
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:415
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:422
-msgid "Currency Symbol (Invalid)"
-msgstr "Symbol měny (neplatný)"
-
-#: ../../../Controllers/MainWindowController.cs:100
-msgid "DaPigGuy"
-msgstr "DaPigGuy"
-
-#: ../../../Models/Account.cs:1718
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:106
-msgid "Date"
-msgstr "Datum"
-
-#: ../../../Controllers/MainWindowController.cs:101
-msgid "David Lapshin"
-msgstr "David Lapshin"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:371
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:370
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:176
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:243
-msgid "Decimal Separator"
-msgstr "Oddělovač desetinných míst"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:413
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:403
-msgid "Decimal Separator (Empty)"
-msgstr "Oddělovač desetinných míst (prázdný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:419
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:429
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:408
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:417
-msgid "Decimal Separator (Invalid)"
-msgstr "Oddělovač desetinných míst (neplatný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:944
-msgid "Delete Existing"
-msgstr "Odstranit stávající"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1099
-msgid "Delete Group"
-msgstr "Odstranit skupinu"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1008
-msgid "Delete Only Source"
-msgstr "Odstranit pouze zdroj"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1009
-msgid "Delete Source and Generated"
-msgstr "Odstranit zdroj a generované"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1003
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1029
-msgid "Delete Transaction"
-msgstr "Odstranit transakci"
-
-#: ../../../Controllers/MainWindowController.cs:90
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
 msgstr "Denaro"
 
-#: ../../../Models/Account.cs:1686 ../../../Models/Account.cs:1719
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:491
-#: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:36
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:61
-msgid "Description"
-msgstr "Popis"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:507
-msgid "Description (Empty)"
-msgstr "Popis (prázdný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:155
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:36
-msgid "Destination Account"
-msgstr "Cílový účet"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:175
-msgid "Destination Account (Invalid)"
-msgstr "Cílový účet (neplatný)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:157
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:67
-msgid "Destination Account Password"
-msgstr "Heslo cílového účtu"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:188
-msgid "Destination Account Password (Invalid)"
-msgstr "Heslo cílového účtu (neplatné)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:182
-msgid "Destination Account Password (Required)"
-msgstr "Heslo cílového účtu (povinné)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:943
-msgid "Disassociate Existing"
-msgstr "Odpojit stávající"
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
-msgid "Error"
-msgstr "Chyba"
-
-#: ../../../Models/Account.cs:1639 ../../../Models/Account.cs:1770
-#: ../../../Models/Account.cs:1876 ../../../Models/Account.cs:1896
-#: ../../../Models/Account.cs:1936 ../../../Models/Account.cs:2003
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:75
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:131
-#: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:47
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:173
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:97
-msgid "Expense"
-msgstr "Výdaj"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:788
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:815
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
-msgid "Export to File"
-msgstr "Export do souboru"
-
-#: ../../../Controllers/AccountViewController.cs:991
-#: ../../../Controllers/AccountViewController.cs:1009
-msgid "Exported account to file successfully."
-msgstr "Účet byl úspěšně exportován do souboru."
-
-#: ../../../Controllers/MainWindowController.cs:99
-msgid "Fyodor Sobolev"
-msgstr "Fyodor Sobolev"
-
-#: ../../../Models/Account.cs:1604
-#, csharp-format
-msgid "Generated: {0}"
-msgstr "Vygenerováno: {0}"
-
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:478
-msgid "GitHub Repo"
-msgstr "Repozitář GitHub"
-
-#: ../../../Controllers/MainWindowController.cs:134
-msgid "Good Afternoon!"
-msgstr "Dobré odpoledne!"
-
-#: ../../../Controllers/MainWindowController.cs:136
-msgid "Good Day!"
-msgstr "Dobrý den!"
-
-#: ../../../Controllers/MainWindowController.cs:135
-msgid "Good Evening!"
-msgstr "Dobrý večer!"
-
-#: ../../../Controllers/TransactionDialogController.cs:216
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:58
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:46
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:170
-msgid "Group"
-msgstr "Skupina"
-
-#: ../../../Models/Account.cs:1721
-msgid "Group Name"
-msgstr "Název skupiny"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:373
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:372
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:192
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:259
-msgid "Group Separator"
-msgstr "Oddělovač skupin"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:421
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:437
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:410
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:424
-msgid "Group Separator (Invalid)"
-msgstr "Oddělovač skupin (neplatný)"
-
-#: ../../../Models/Account.cs:1684
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:153
-#: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:76
-msgid "Groups"
-msgstr "Skupiny"
-
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:181
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:78
-#: NickvisionMoney.GNOME/Blueprints/window.blp:10
-msgid "Help"
-msgstr "Nápověda"
-
-#: ../../../Models/Account.cs:1717 ../../../Models/Account.cs:1790
-msgid "Id"
-msgstr "ID"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
-msgid "Import from Account"
-msgstr "Import z účtu"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:741
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:40
-msgid "Import from File"
-msgstr "Import ze souboru"
-
-#: ../../../Controllers/AccountViewController.cs:969
-#, csharp-format
-msgid "Imported {0} transaction from file."
-msgid_plural "Imported {0} transactions from file."
-msgstr[0] "Importována {0} transakce ze souboru."
-msgstr[1] "Importovány {0} transakce ze souboru."
-msgstr[2] "Importováno {0} transakcí ze souboru."
-
-#: ../../../Models/Account.cs:1637 ../../../Models/Account.cs:1769
-#: ../../../Models/Account.cs:1875 ../../../Models/Account.cs:1895
-#: ../../../Models/Account.cs:1935 ../../../Models/Account.cs:2003
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:71
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:110
-#: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:33
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:169
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:93
-msgid "Income"
-msgstr "Příjem"
-
-#: ../../../Controllers/MainWindowController.cs:91
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
 msgid "Manage your personal finances"
 msgstr "Správa osobních financí"
 
-#: ../../../Controllers/MainWindowController.cs:95
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Matrix Chat"
 msgstr "Matrix chat"
 
-#: ../../../Models/Account.cs:1435 ../../../Models/Account.cs:1497
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:203
-msgid "N/A"
-msgstr "N/A"
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#, fuzzy
+msgid "Contributors on GitHub"
+msgstr "Přispěvatelé na GitHubu ❤️"
 
-#: ../../../Models/Account.cs:1685
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:364
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:145
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:51
-#: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:30
-msgid "Name"
-msgstr "Název"
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+msgid "Fyodor Sobolev"
+msgstr "Fyodor Sobolev"
 
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:389
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:155
-msgid "Name (Empty)"
-msgstr "Název (prázdný)"
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+msgid "David Lapshin"
+msgstr "David Lapshin"
 
-#: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:160
-msgid "Name (Exists)"
-msgstr "Název (existuje)"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:573
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:183
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Never"
-msgstr "Nikdy"
-
-#: ../../../Controllers/MainWindowController.cs:96
-#: ../../../Controllers/MainWindowController.cs:98
-msgid "Nicholas Logozzo"
-msgstr "Nicholas Logozzo"
-
-#: ../../../Models/Account.cs:1819
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:308
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:223
-msgid "Nickvision Denaro Account"
-msgstr "Účet Nickvision Denaro"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:832
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1031
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1101
-msgid "No"
-msgstr "Ne"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:406
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:479
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:605
-msgid "No End Date"
-msgstr "Žádné datum ukončení"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:497
-msgid "No Transactions"
-msgstr "Žádné transakce"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:487
-msgid "No Transactions Found"
-msgstr "Nenalezeny žádné transakce"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:488
-msgid "No transactions match the specified filters."
-msgstr "Žádné transakce neodpovídají zadaným filtrům."
-
-#: ../../../Models/Account.cs:1723
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:360
-msgid "Notes"
-msgstr "Poznámky"
-
-#: ../../../Controllers/AccountViewController.cs:978
-msgid "Nothing to import from the file."
-msgstr "Nic k importování ze souboru."
-
-#: ../../../Models/Account.cs:2107
-msgid "One month from now"
-msgstr "Jeden měsíc ode dneška"
-
-#: ../../../Models/Account.cs:2103
-msgid "One week from now"
-msgstr "Jeden týden ode dneška"
-
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:188
-msgid "Open"
-msgstr "Otevřít"
-
-#: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:306
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:21
-#: NickvisionMoney.GNOME/Blueprints/window.blp:211
-msgid "Open Account"
-msgstr "Otevřít účet"
-
-#: ../../../Models/Account.cs:1615
-msgid "Overview"
-msgstr "Přehled"
-
-#: ../../../Models/Account.cs:1822
-msgid "Page {0}"
-msgstr "Strana {0}"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:842
-msgid "PDF Password"
-msgstr "Heslo PDF"
-
-#: ../../../Models/Account.cs:1791
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:497
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:672
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:316
-msgid "Receipt"
-msgstr "Faktura"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:523
-msgid "Receipt (File Inaccessible)"
-msgstr "Faktura (soubor nedostupný)"
-
-#: ../../../Models/Account.cs:1789
-msgid "Receipts"
-msgstr "Účtenky"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:495
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:132
-msgid "Repeat End Date"
-msgstr "Datum ukončení opakování"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:517
-msgid "Repeat End Date (Invalid)"
-msgstr "Datum ukončení opakování (neplatné)"
-
-#: ../../../../NickvisionMoney.GNOME/Controls/TransactionRow.cs:114
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:159
-msgid "Repeat Interval"
-msgstr "Interval opakování"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:938
-msgid "Repeat Interval Changed"
-msgstr "Interval opakování změněn"
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
-msgid "Result was copied to clipboard."
-msgstr "Výsledek zkopírován do schránky."
-
-#: ../../../Models/Account.cs:1660
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:58
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:156
-msgid "Savings"
-msgstr "Spořicí"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:221
-msgid "Select Account"
-msgstr "Vybrat účet"
-
-#: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:154
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:149
-msgid "Select Backup Folder"
-msgstr "Vyberte složku záloh"
-
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:265
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:110
-msgid "Select Folder"
-msgstr "Vybrat složku"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
-msgid "Sort By Amount"
-msgstr "Seřadit podle množství"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
-msgid "Sort By Date"
-msgstr "Seřadit podle data"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
-msgid "Sort By Id"
-msgstr "Seřadit podle ID"
-
-#: ../../../Models/Account.cs:1722
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:197
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:196
-msgid "Tags"
-msgstr "Štítky"
-
-#: ../../../Controllers/AccountViewController.cs:580
-msgid "The password of the account was changed."
-msgstr "Heslo účtu bylo změněno."
-
-#: ../../../Controllers/AccountViewController.cs:576
-msgid "The password of the account was removed."
-msgstr "Heslo účtu bylo odstraněno."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:496
-msgid "The password will be removed upon closing this dialog."
-msgstr "Heslo bude odstraněno po zavření tohoto dialogu."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:442
-msgid "The passwords do not match."
-msgstr "Hesla se neshodují."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:938
-msgid ""
-"The repeat interval was changed.\n"
-"What would you like to do with existing generated transactions?\n"
-"\n"
-"New repeat transactions will be generated based off the new interval."
-msgstr ""
-"Interval opakování byl změněn.\n"
-"Co chcete udělat se stávajícími vygenerovanými transakcemi?\n"
-"\n"
-"Nové opakované transakce budou generovány na základě nového intervalu."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:729
-msgid "This account has no money available to transfer."
-msgstr "Tento účet nemá žádné peníze k převodu."
-
-#: ../../../Controllers/MainWindowController.cs:356
-msgid "This account is already opened."
-msgstr "Tento účet je již otevřen."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1003
-msgid ""
-"This transaction is a source repeat transaction.\n"
-"What would you like to do with the repeat transactions?\n"
-"\n"
-"Deleting only the source transaction will allow individual\n"
-"generated transactions to be modifiable."
-msgstr ""
-"Tato transakce je opakovanou transakcí zdroje.\n"
-"Co chcete s opakovanými transakcemi udělat?\n"
-"\n"
-"Odstraněním pouze zdrojové transakce umožníte\n"
-"individuální úpravu vygenerovaných transakcí."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:970
-msgid ""
-"This transaction is a source repeat transaction.\n"
-"What would you like to do with the repeat transactions?\n"
-"\n"
-"Updating only the source transaction will disassociate\n"
-"generated transactions from the source."
-msgstr ""
-"Tato transakce je opakovanou transakcí zdroje.\n"
-"Co chcete s opakovanými transakcemi udělat?\n"
-"\n"
-"Aktualizací pouze zdrojové transakce dojde k odpojení\n"
-"vygenerovaných transakcí od zdroje."
-
-#: ../../../Controllers/MainWindowController.cs:102
-msgid "Tobias Bernard"
-msgstr "Tobias Bernard"
-
-#: ../../../Models/Account.cs:2099
-msgid "Tomorrow"
-msgstr "Zítra"
-
-#: ../../../Models/Account.cs:1634
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:99
-#: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:61
-msgid "Total"
-msgstr "Celkem"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:165
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:55
-msgid "Transaction"
-msgstr "Transakce"
-
-#: ../../../Models/Account.cs:1716
-msgid "Transactions"
-msgstr "Transakce"
-
-#: ../../../Models/Account.cs:472
-msgid "Transactions without a group"
-msgstr "Transakce bez skupiny"
-
-#: ../../../Controllers/AccountViewController.cs:903
-#, csharp-format
-msgid "Transfer From {0}"
-msgstr "Převést z {0}"
-
-#: ../../../Controllers/AccountViewController.cs:875
-#, csharp-format
-msgid "Transfer To {0}"
-msgstr "Převést na {0}"
-
-#: ../../../Controllers/MainWindowController.cs:103
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
-#: ../../../Models/Account.cs:2111
-msgid "Two months from now"
-msgstr "Dva měsíce ode dneška"
-
-#: ../../../Models/Account.cs:1720
-msgid "Type"
-msgstr "Typ"
-
-#: ../../../Controllers/AccountViewController.cs:995
-#: ../../../Controllers/AccountViewController.cs:1013
-msgid "Unable to export account to file."
-msgstr "Nepodařilo se exportovat účet do souboru."
-
-#: ../../../Controllers/AccountViewController.cs:937
-msgid ""
-"Unable to import information from the file. Please ensure that the app has "
-"permissions to access the file and try again."
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+msgid "New update available"
 msgstr ""
-"Nepodařilo se importovat informace ze souboru. Ujistěte se, že má aplikace "
-"oprávnění k přístupu k vašemu souboru a zkuste to znovu."
 
-#: ../../../Controllers/AccountViewController.cs:973
-msgid "Unable to import transactions from the file."
-msgstr "Nepodařilo se importovat transakce ze souboru."
-
-#: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
-msgid ""
-"Unable to load currency data. Please try again. If the error still persists, "
-"report a bug."
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+msgid "Unable to download and install update"
 msgstr ""
-"Nepodařilo se načíst informace o měnách. Zkuste to prosím znovu. Pokud chyba "
-"nezmizí, nahlaste to prosím jako chybu."
 
-#: ../../../Controllers/MainWindowController.cs:338
-msgid "Unable to login to account. Provided password is invalid."
-msgstr "Nelze se přihlásit k účtu. Zadané heslo je neplatné."
-
-#: ../../../Controllers/MainWindowController.cs:292
-#: ../../../Controllers/MainWindowController.cs:345
-msgid ""
-"Unable to open the account. Please ensure that the app has permissions to "
-"access the file and try again."
-msgstr ""
-"Nepodařilo se otevřít účet. Ujistěte se, že má aplikace oprávnění k přístupu "
-"k vašemu souboru a zkuste to znovu."
-
-#: ../../../Controllers/MainWindowController.cs:280
-msgid "Unable to overwrite an existing account."
-msgstr "Nelze přepsat existující účet."
-
-#: ../../../Controllers/MainWindowController.cs:269
-msgid "Unable to overwrite an opened account."
-msgstr "Nelze přepsat otevřený účet."
-
-#: ../../../Controllers/AccountViewController.cs:452
-#: ../../../Controllers/AccountViewController.cs:829
-#: ../../../Controllers/AccountViewController.cs:944
-#: ../../../Controllers/TransactionDialogController.cs:92
-#: ../../../Controllers/TransactionDialogController.cs:340
-#: ../../../Models/Account.cs:471 ../../../Models/Account.cs:1690
-#: ../../../Models/Account.cs:1773 ../../../Models/Account.cs:1895
-#: ../../../Models/Account.cs:1896 ../../../Models/Account.cs:1900
-#: ../../../Models/Account.cs:1970
-msgid "Ungrouped"
-msgstr "Neseskupené"
-
-#: ../../../Controllers/AccountViewController.cs:1149
-#: ../../../Models/Account.cs:113
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:193
-msgid "Untagged"
-msgstr "Bez štítku"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:450
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1131
-msgid "Upcoming transactions"
-msgstr "Nadcházející transakce"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:975
-msgid "Update Only Source"
-msgstr "Aktualizovat pouze zdroj"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:976
-msgid "Update Source and Generated"
-msgstr "Aktualizovat zdroj a generované"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:970
-msgid "Update Transaction"
-msgstr "Aktualizovat transakci"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:431
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:660
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:707
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:347
-msgid "Upload"
-msgstr "Nahrát"
-
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:427
-#: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:703
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:325
-msgid "View"
-msgstr "Zobrazit"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
-msgid ""
-"Would you like to password-protect the PDF file?\n"
-"\n"
-"If the password is lost, the PDF will be inaccessible."
-msgstr ""
-"Chcete soubor PDF chránit heslem?\n"
-"\n"
-"Pokud heslo ztratíte, soubor PDF bude nepřístupný."
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:835
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1034
-#: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1104
-msgid "Yes"
-msgstr "Ano"
-
-#: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:115
-#: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:221
-msgid "Your system reported that your currency is"
-msgstr "Váš systém hlásí, že vaší měnou je"
-
-#: ../../../Controllers/MainWindowController.cs:133
-msgctxt "Morning"
-msgid "Good Morning!"
-msgstr "Dobré ráno!"
-
-#: ../../../Controllers/MainWindowController.cs:132
-msgctxt "Night"
-msgid "Good Morning!"
-msgstr "Dobré ráno!"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:21
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:372
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:24
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:19
-msgid "Back"
-msgstr "Zpět"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:63
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:161
-msgid "Default Transaction Type"
-msgstr "Výchozí typ transakce"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:83
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
-msgid "Transaction Reminders Threshold"
-msgstr "Hranice pro připomenutí transakcí"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:183
-msgid "One Day Before"
-msgstr "Jeden den před"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:183
-msgid "One Week Before"
-msgstr "Jeden týden před"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:183
-msgid "One Month Before"
-msgstr "Jeden měsíc před"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:183
-msgid "Two Months Before"
-msgstr "Dva měsíce před"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:93
-msgid "Manage the currency used by the account."
-msgstr "Správa měny používané účtem."
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:111
-msgid "Set a new password or remove one."
-msgstr "Nastavte nové heslo nebo jej odstraňte."
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:153
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:223
-msgid "Use Custom Currency"
-msgstr "Použít vlastní měnu"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:236
-msgid "Amount Display Style"
-msgstr "Styl zobrazení množství"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:178
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:194
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:245
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:261
-msgid "Other"
-msgstr "Jiný"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:194
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:261
-msgid "None"
-msgstr "Žádný"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:208
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:275
-msgid "Decimal Digits"
-msgstr "Desetinné číslice"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Two"
-msgstr "Dva"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Three"
-msgstr "Tři"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Four"
-msgstr "Čtyři"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Five"
-msgstr "Pět"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Six"
-msgstr "Šest"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
-msgid "Unlimited"
-msgstr "Neomezeně"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:226
-#: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:29
-msgid "New Password"
-msgstr "Nové heslo"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:230
-#: NickvisionMoney.GNOME/Blueprints/new_password_dialog.blp:34
-msgid "Confirm Password"
-msgstr "Potvrzení hesla"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:234
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:90
-msgid "Password Strength"
-msgstr "Síla hesla"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:246
-msgid "If the password is lost, there is no way to restore the file!"
-msgstr "Pokud dojde ke ztrátě hesla, není možné soubor obnovit!"
-
-#: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:250
-#: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
-msgid "Remove"
-msgstr "Odebrat"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:5
-msgid "Transfer Money"
-msgstr "Převod peněz"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
-msgid "CSV"
-msgstr "CSV"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:16
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:23
-msgid "Export All Information"
-msgstr "Exportovat všechny informace"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:17
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:24
-msgid "Export Current View"
-msgstr "Exportovat aktuální zobrazení"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:21
-msgid "PDF"
-msgstr "PDF"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:64
-msgid "Search by description"
-msgstr "Vyhledávání podle popisu"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:68
-msgid "Today's Overview"
-msgstr "Dnešní přehled"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:74
-#: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:22
-msgid "Reminders"
-msgstr "Připomínky"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:84
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:32
-msgid "Actions"
-msgstr "Akce"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:92
-msgid "Select All Overview Filters"
-msgstr "Vybrat všechny filtry přehledu"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
-msgid "New Group (Ctrl+G)"
-msgstr "Nová skupina (Ctrl+G)"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:161
-msgctxt "Group"
-msgid "New"
-msgstr "Nová"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:168
-msgid "Toggle Groups Visibility"
-msgstr "Přepnout viditelnost skupin"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:176
-msgid "Select All Groups Filters"
-msgstr "Vybrat všechny filtry skupin"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
-msgid "Unselect Groups Filters"
-msgstr "Zrušit výběr filtrů skupin"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:200
-msgid "Toggle Tags Visibility"
-msgstr "Přepnout viditelnost štítků"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:208
-msgid "Select All Tags Filters"
-msgstr "Vybrat všechny filtry štítků"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:215
-msgid "Unselect Tags Filters"
-msgstr "Zrušit výběr filtrů štítků"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:238
-msgid "Calendar"
-msgstr "Kalendář"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:243
-msgid "Select Current Month"
-msgstr "Vybrat aktuální měsíc"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:249
-msgid "Reset To Today"
-msgstr "Obnovit na dnešek"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:252
-msgid "Today"
-msgstr "Dnes"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:270
-msgid "Select Range"
-msgstr "Zvolit rozsah"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:275
-msgctxt "DateRange"
-msgid "Start"
-msgstr "Začátek"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:300
-msgctxt "DateRange"
-msgid "End"
-msgstr "Konec"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:362
-msgid "Visualize"
-msgstr "Vizualizace"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:380
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:126
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:192
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:287
-msgid "Next"
-msgstr "Další"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:445
-msgid "Sort From First To Last"
-msgstr "Řazení od prvního do posledního"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:451
-msgid "Sort From Last To First"
-msgstr "Řazení od posledního k prvnímu"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:483
-msgid "New Transaction (Ctrl+Shift+N)"
-msgstr "Nová transakce (Ctrl+Shift+N)"
-
-#: NickvisionMoney.GNOME/Blueprints/account_view.blp:491
-msgctxt "Transaction"
-msgid "New"
-msgstr "Nová"
-
-#: NickvisionMoney.GNOME/Blueprints/autocomplete_box.blp:15
-msgid "Suggestions"
-msgstr "Návrhy"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:26
-msgid "Converter"
-msgstr "Převodník"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:40
-msgid "Switch currencies"
-msgstr "Prohodit měny"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:43
-msgid "Switch"
-msgstr "Prohodit"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:60
-msgid "Loading..."
-msgstr "Načítání..."
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:70
-msgid "Source"
-msgstr "Zdroj"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:104
-msgid "Result"
-msgstr "Výsledek"
-
-#: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:87
-msgid "Copy Result Amount"
-msgstr "Zkopírovat množství výsledku"
-
-#: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
-msgid "All Accounts"
-msgstr "Všechny účty"
-
-#: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:42
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:175
-msgid "Color"
-msgstr "Barva"
-
-#: NickvisionMoney.GNOME/Blueprints/group_dialog.blp:62
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:283
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:336
-msgid "Delete"
-msgstr "Odstranit"
-
-#: NickvisionMoney.GNOME/Blueprints/group_row.blp:51
-msgid "Edit Group"
-msgstr "Upravit skupinu"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:48
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:16
-#: NickvisionMoney.GNOME/Blueprints/window.blp:199
-msgid "New Account"
-msgstr "Nový účet"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:49
-msgid "Use this wizard to get the most out of your account"
-msgstr "Pomocí tohoto průvodce získáte ze svého účtu maximum"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:54
-msgid "Let's Start"
-msgstr "Začínáme"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:73
-msgid "Storage Location"
-msgstr "Umístění úložiště"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:86
-msgid "Account Password (Optional)"
-msgstr "Heslo účtu (volitelné)"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:103
-msgid "Folder"
-msgstr "Složka"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:117
-msgid "Overwrite Existing Accounts"
-msgstr "Přepsat existující účty"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:143
-msgid "Account Options"
-msgstr "Možnosti účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:153
-msgid "This is only a useful label that doesn't affect how the app works."
-msgstr ""
-"Jedná se pouze o užitečné označení, které nemá vliv na fungování aplikace."
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:209
-msgid "Account Currency"
-msgstr "Měna účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:304
-msgid "Import Existing Information"
-msgstr "Importovat existující informace"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:313
-msgid ""
-"Upload a valid file to use to import existing information into the new "
-"account."
-msgstr ""
-"Pro importování existujících informací do nového účtu nahrajte platný soubor."
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:320
-msgid "Import File"
-msgstr "Import souboru"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:327
-msgid "Select File"
-msgstr "Vybrat soubor"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:337
-msgid "Clear File"
-msgstr "Vymazat soubor"
-
-#: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:348
-msgid "Create"
-msgstr "Vytvořit"
-
-#: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:30
-msgid "Enter Password To Login:"
-msgstr "Pro přihlášení zadejte heslo:"
-
-#: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:43
-msgid "Password"
-msgstr "Heslo"
-
-#: NickvisionMoney.GNOME/Blueprints/password_dialog.blp:54
-msgid "Unlock"
-msgstr "Odemknout"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:11
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:67
-#: NickvisionMoney.GNOME/Blueprints/window.blp:8
+#: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+msgid "About Denaro"
+msgstr "O aplikaci Denaro"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:23
+msgid "Main Menu"
+msgstr "Hlavní nabídka"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:20
 msgid "User Interface"
 msgstr "Uživatelské rozhraní"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:20
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Theme"
 msgstr "Motiv"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Light"
 msgstr "Světlý"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tmavý"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgctxt "Theme"
 msgid "System"
 msgstr "Systémový"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:32
-msgid "Colors"
-msgstr "Barvy"
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+#, fuzzy
+msgctxt "Shortcut"
+msgid "Folder"
+msgstr "Složka"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
-msgid "Customize the colors used by Denaro."
-msgstr "Přizpůsobit barvy používané Denarem."
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+#, fuzzy
+msgid "Open Folder"
+msgstr "Složka"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:41
-msgid "Transaction Default Color"
-msgstr "Výchozí barva transakce"
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
+#, fuzzy
+msgid "Close Folder"
+msgstr "Vybrat složku"
 
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:42
-msgid ""
-"A change in this setting will only be applied to newly added transactions."
-msgstr "Změna tohoto nastavení se projeví pouze u nově přidaných transakcí."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:52
-msgid "Transfer Default Color"
-msgstr "Výchozí barva převodu"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
-msgid "A change in this setting will only be applied to new transfers."
-msgstr "Změna tohoto nastavení se projeví pouze u nových převodů."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:63
-msgid "Group Default Color"
-msgstr "Výchozí barva skupiny"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:64
-msgid "A change in this setting will only be applied to new groups."
-msgstr "Změna tohoto nastavení se projeví pouze u nových skupin."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:74
-msgid "Checking Account Color"
-msgstr "Barva běžného účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:84
-msgid "Savings Account Color"
-msgstr "Barva spořicího účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:94
-msgid "Business Account Color"
-msgstr "Barva firemního účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:106
-msgid "Locale"
-msgstr "Národní prostředí"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:109
-msgid "Use Native Digits"
-msgstr "Použít nativní číslice"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:110
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits."
-msgstr ""
-"Zda se mají místo latinských číslic používat číslice, které jsou pro danou "
-"oblast přirozené."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:119
-msgid "Insert Decimal Separator"
-msgstr "Vložení desetinného oddělovače"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:120
-msgid ""
-"Set for which keys pressed will the locale's decimal separator be inserted "
-"into an amount field."
-msgstr ""
-"Nastavte, pro které stisknuté klávesy se do pole částky vloží desetinný "
-"oddělovač místního jazyka."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:123
-msgctxt "InsertSeparator"
-msgid "Off"
-msgstr "Vypnout"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:123
-msgid "Numpad period only"
-msgstr "Pouze čárka na numerické klávesnici"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:123
-msgid "Period and Comma"
-msgstr "Tečka a čárka"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:134
-msgid "Backup"
-msgstr "Záloha"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:137
-msgid "CSV Backup Folder"
-msgstr "Složka zálohy CSV"
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:138
-msgid ""
-"Unencrypted accounts will automatically export as CSV files to this folder "
-"when a change is made."
-msgstr ""
-"Nezašifrované účty se při změně automaticky exportují do této složky jako "
-"soubory CSV."
-
-#: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:159
-msgid "Clear Backup Folder"
-msgstr "Vymazat složku záloh"
-
-#: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:41
-msgid "No Reminders"
-msgstr "Žádné připomínky"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:13
-msgid "Account"
-msgstr "Účet"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:26
-msgid "Close Account"
-msgstr "Uzavřít účet"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:35
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:23
-msgctxt "Title"
-msgid "Transfer"
-msgstr "Převod"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:49
-msgid "New Group"
-msgstr "Nová skupina"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:58
-msgid "New Transaction"
-msgstr "Nová transakce"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:64
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
+#, fuzzy
+msgctxt "Shortcut"
 msgid "Application"
 msgstr "Aplikace"
 
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:73
-#: NickvisionMoney.GNOME/Blueprints/window.blp:9
-msgid "Keyboard Shortcuts"
-msgstr "Klávesové zkratky"
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:40
+#, fuzzy
+msgid "About Application"
+msgstr "Aplikace"
 
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:83
-#: NickvisionMoney.GNOME/Blueprints/window.blp:107
-msgid "Toggle Sidebar"
-msgstr "Přepnout postranní panel"
-
-#: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:88
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:45
 msgid "Quit"
 msgstr "Opustit"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:27
-msgid "Make a Copy"
-msgstr "Vytvořit kopii"
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+msgid "Open"
+msgstr "Otevřít"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:143
-msgid "Clear End Date"
-msgstr "Vymazat datum ukončení"
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+msgid "GitHub Repo"
+msgstr "Repozitář GitHub"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Daily"
-msgstr "Denně"
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#, fuzzy
+msgid "Search for Files"
+msgstr "Vymazat soubor"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Weekly"
-msgstr "Týdně"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Home"
+msgstr "Domů"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Biweekly"
-msgstr "Dvakrát týdně"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Help"
+msgstr "Nápověda"
 
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Monthly"
-msgstr "Měsíčně"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Quarterly"
-msgstr "Čtvrtletně"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Yearly"
-msgstr "Ročně"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:161
-msgid "Biyearly"
-msgstr "Dvakrát ročně"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:188
-msgid "Use group color"
-msgstr "Použít barvu skupiny"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:188
-msgid "Use unique color"
-msgstr "Použít unikátní barvu"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:228
-msgid "Enter a new tag name..."
-msgstr "Zadejte nový název štítku..."
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:233
-msgid "Add Tag"
-msgstr "Přidat štítek"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:250
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:308
-msgid "Extras"
-msgstr "Další"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:251
-msgid "Manage extra fields of the transaction."
-msgstr "Spravovat další pole transakce."
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:361
-msgid "Enter notes here"
-msgstr "Sem zadejte poznámky"
-
-#: NickvisionMoney.GNOME/Blueprints/transaction_row.blp:31
-msgid "Edit Transaction"
-msgstr "Upravit transakci"
-
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:29
-msgid ""
-"Transferring money will create an expense transaction with the given amount "
-"in this account and an income transaction with the given amount in the "
-"account to transfer to."
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+msgid "Check for Updates"
 msgstr ""
-"Převodem peněz se vytvoří nákladová transakce s danou částkou na tomto účtu "
-"a příjmová transakce s danou částkou na účtu, na který je prováděn převod."
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:37
-msgid "No Account Selected"
-msgstr "Není vybrán žádný účet"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#, fuzzy
+msgid "Copy Debug Information"
+msgstr "Exportovat všechny informace"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:47
-msgid "Select a destination account"
-msgstr "Vyberte cílový účet"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+msgid "Changelog"
+msgstr "Seznam změn"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:52
-#: NickvisionMoney.GNOME/Blueprints/window.blp:177
-msgid "Recent Accounts"
-msgstr "Nedávné účty"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+msgid "Report a Bug"
+msgstr "Nahlásit chybu"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:55
-#: NickvisionMoney.GNOME/Blueprints/window.blp:47
-msgid "Recents"
-msgstr "Nedávné"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+msgid "Discussions"
+msgstr "Diskuze"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:85
-msgid "Conversion Needed"
-msgstr "Nutná konverze"
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+msgid "Credits"
+msgstr "Zásluhy"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:89
-msgid "Use Custom Rates"
-msgstr "Použít vlastní kurzy"
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
+msgid "Settings"
+msgstr "Nastavení"
 
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:90
-msgid "Enter the conversion rates manually"
-msgstr "Ručně zadejte kurzy"
-
-#: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:117
-msgctxt "Button"
-msgid "Transfer"
-msgstr "Převod"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:5
-msgid "Currency Converter"
-msgstr "Převodník měn"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:11
-msgid "About Denaro"
-msgstr "O aplikaci Denaro"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:28
-msgid "Account Menu"
-msgstr "Nabídka účtu"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:57
-msgid "New Account (Ctrl+N)"
-msgstr "Nový účet (Ctrl+N)"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:61
-msgctxt "Account"
-msgid "New"
-msgstr "Nová"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:70
-msgid "Open Account (Ctrl+O)"
-msgstr "Otevřít účet (Ctrl+O)"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:86
-msgid "No Recent Accounts"
-msgstr "Žádné nedávné účty"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:115
-msgid "Toggle Graphs"
-msgstr "Přepnout grafy"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:125
-msgid "Main Menu"
-msgstr "Hlavní nabídka"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:132
-msgid "Dashboard"
-msgstr "Nástěnka"
-
-#: NickvisionMoney.GNOME/Blueprints/window.blp:168
-msgid ""
-"Create or open an account to get started. You may also drag a file into the "
-"app from your file browser."
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:88
+msgid "PREVIEW"
 msgstr ""
-"Chcete-li začít, vytvořte si nebo otevřete účet. Do aplikace můžete také "
-"přetáhnout soubor z prohlížeče souborů."
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:99
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}\n"
+"Translators:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:159
+msgid "Drop here to open folder"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:223
+msgid "Update"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:288
+#, fuzzy
+msgid "Debug information copied to clipboard."
+msgstr "Výsledek zkopírován do schránky."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+msgid "An application restart is required to change the theme."
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+msgid "Automatically Check for Updates"
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#, fuzzy
+msgid "On"
+msgstr "Otevřít"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#, fuzzy
+msgid "Off"
+msgstr "Vypnout"
+
+#~ msgid "(Copy)"
+#~ msgstr "(Kopírovat)"
+
+#, csharp-format
+#~ msgid "{0} from {1}"
+#~ msgstr "{0} z {1}"
+
+#, csharp-format
+#~ msgid "{0} tag"
+#~ msgid_plural "{0} tags"
+#~ msgstr[0] "{0} štítek"
+#~ msgstr[1] "{0} štítky"
+#~ msgstr[2] "{0} štítků"
+
+#, csharp-format
+#~ msgid "{0} transaction"
+#~ msgid_plural "{0} transactions"
+#~ msgstr[0] "{0} transakce"
+#~ msgstr[1] "{0} transakce"
+#~ msgstr[2] "{0} transakcí"
+
+#~ msgid "Account Name"
+#~ msgstr "Název účtu"
+
+#~ msgid "Account Name (Exists)"
+#~ msgstr "Název účtu (existuje)"
+
+#~ msgid "Account Name (Opened)"
+#~ msgstr "Název účtu (otevřený)"
+
+#~ msgid "Account Settings"
+#~ msgstr "Nastavení účtu"
+
+#~ msgid "Account Type"
+#~ msgstr "Typ účtu"
+
+#~ msgid "Add"
+#~ msgstr "Přidat"
+
+#~ msgid "Add a new transaction or import transactions from a file."
+#~ msgstr "Přidejte novou transakci nebo importujte transakce ze souboru."
+
+#~ msgid "Add Password To PDF?"
+#~ msgstr "Přidat heslo do PDF?"
+
+#~ msgid "All files"
+#~ msgstr "Všechny soubory"
+
+#~ msgid "Amount"
+#~ msgstr "Množství"
+
+#~ msgid "Amount (Invalid)"
+#~ msgstr "Částka (neplatná)"
+
+#~ msgid "Apply"
+#~ msgstr "Použít"
+
+#~ msgid ""
+#~ "Are you sure you want to delete this group?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "Opravdu chcete odstranit tuto skupinu?\n"
+#~ "Tato akce je nevratná."
+
+#~ msgid ""
+#~ "Are you sure you want to delete this transaction?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "Opravdu chcete odstranit tuto transakci?\n"
+#~ "Tato akce je nevratná."
+
+#~ msgid "Business"
+#~ msgstr "Firemní"
+
+#~ msgid "Can't access the selected folder, check Flatpak permissions."
+#~ msgstr ""
+#~ "Nelze získat přístup k vybrané složce, zkontrolujte oprávnění Flatpaku."
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgid "Change Password"
+#~ msgstr "Změnit heslo"
+
+#~ msgid "Checking"
+#~ msgstr "Běžný"
+
+#~ msgid "Close"
+#~ msgstr "Zavřít"
+
+#~ msgid "Currency"
+#~ msgstr "Měna"
+
+#~ msgid "Currency Code"
+#~ msgstr "Kód měny"
+
+#~ msgid "Currency Code (Empty)"
+#~ msgstr "Kód měny (prázdný)"
+
+#~ msgid "Currency Symbol"
+#~ msgstr "Symbol měny"
+
+#~ msgid "Currency Symbol (Empty)"
+#~ msgstr "Symbol měny (prázdný)"
+
+#~ msgid "Currency Symbol (Invalid)"
+#~ msgstr "Symbol měny (neplatný)"
+
+#~ msgid "DaPigGuy"
+#~ msgstr "DaPigGuy"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "Decimal Separator"
+#~ msgstr "Oddělovač desetinných míst"
+
+#~ msgid "Decimal Separator (Empty)"
+#~ msgstr "Oddělovač desetinných míst (prázdný)"
+
+#~ msgid "Decimal Separator (Invalid)"
+#~ msgstr "Oddělovač desetinných míst (neplatný)"
+
+#~ msgid "Delete Existing"
+#~ msgstr "Odstranit stávající"
+
+#~ msgid "Delete Group"
+#~ msgstr "Odstranit skupinu"
+
+#~ msgid "Delete Only Source"
+#~ msgstr "Odstranit pouze zdroj"
+
+#~ msgid "Delete Source and Generated"
+#~ msgstr "Odstranit zdroj a generované"
+
+#~ msgid "Delete Transaction"
+#~ msgstr "Odstranit transakci"
+
+#~ msgid "Description"
+#~ msgstr "Popis"
+
+#~ msgid "Description (Empty)"
+#~ msgstr "Popis (prázdný)"
+
+#~ msgid "Destination Account"
+#~ msgstr "Cílový účet"
+
+#~ msgid "Destination Account (Invalid)"
+#~ msgstr "Cílový účet (neplatný)"
+
+#~ msgid "Destination Account Password"
+#~ msgstr "Heslo cílového účtu"
+
+#~ msgid "Destination Account Password (Invalid)"
+#~ msgstr "Heslo cílového účtu (neplatné)"
+
+#~ msgid "Destination Account Password (Required)"
+#~ msgstr "Heslo cílového účtu (povinné)"
+
+#~ msgid "Disassociate Existing"
+#~ msgstr "Odpojit stávající"
+
+#~ msgid "Error"
+#~ msgstr "Chyba"
+
+#~ msgid "Expense"
+#~ msgstr "Výdaj"
+
+#~ msgid "Export to File"
+#~ msgstr "Export do souboru"
+
+#~ msgid "Exported account to file successfully."
+#~ msgstr "Účet byl úspěšně exportován do souboru."
+
+#, csharp-format
+#~ msgid "Generated: {0}"
+#~ msgstr "Vygenerováno: {0}"
+
+#~ msgid "Good Afternoon!"
+#~ msgstr "Dobré odpoledne!"
+
+#~ msgid "Good Day!"
+#~ msgstr "Dobrý den!"
+
+#~ msgid "Good Evening!"
+#~ msgstr "Dobrý večer!"
+
+#~ msgid "Group"
+#~ msgstr "Skupina"
+
+#~ msgid "Group Name"
+#~ msgstr "Název skupiny"
+
+#~ msgid "Group Separator"
+#~ msgstr "Oddělovač skupin"
+
+#~ msgid "Group Separator (Invalid)"
+#~ msgstr "Oddělovač skupin (neplatný)"
+
+#~ msgid "Groups"
+#~ msgstr "Skupiny"
+
+#~ msgid "Id"
+#~ msgstr "ID"
+
+#~ msgid "Import from Account"
+#~ msgstr "Import z účtu"
+
+#~ msgid "Import from File"
+#~ msgstr "Import ze souboru"
+
+#, csharp-format
+#~ msgid "Imported {0} transaction from file."
+#~ msgid_plural "Imported {0} transactions from file."
+#~ msgstr[0] "Importována {0} transakce ze souboru."
+#~ msgstr[1] "Importovány {0} transakce ze souboru."
+#~ msgstr[2] "Importováno {0} transakcí ze souboru."
+
+#~ msgid "Income"
+#~ msgstr "Příjem"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "Name"
+#~ msgstr "Název"
+
+#~ msgid "Name (Empty)"
+#~ msgstr "Název (prázdný)"
+
+#~ msgid "Name (Exists)"
+#~ msgstr "Název (existuje)"
+
+#~ msgid "Never"
+#~ msgstr "Nikdy"
+
+#~ msgid "Nicholas Logozzo"
+#~ msgstr "Nicholas Logozzo"
+
+#~ msgid "Nickvision Denaro Account"
+#~ msgstr "Účet Nickvision Denaro"
+
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#~ msgid "No End Date"
+#~ msgstr "Žádné datum ukončení"
+
+#~ msgid "No Transactions"
+#~ msgstr "Žádné transakce"
+
+#~ msgid "No Transactions Found"
+#~ msgstr "Nenalezeny žádné transakce"
+
+#~ msgid "No transactions match the specified filters."
+#~ msgstr "Žádné transakce neodpovídají zadaným filtrům."
+
+#~ msgid "Notes"
+#~ msgstr "Poznámky"
+
+#~ msgid "Nothing to import from the file."
+#~ msgstr "Nic k importování ze souboru."
+
+#~ msgid "One month from now"
+#~ msgstr "Jeden měsíc ode dneška"
+
+#~ msgid "One week from now"
+#~ msgstr "Jeden týden ode dneška"
+
+#~ msgid "Open Account"
+#~ msgstr "Otevřít účet"
+
+#~ msgid "Overview"
+#~ msgstr "Přehled"
+
+#~ msgid "Page {0}"
+#~ msgstr "Strana {0}"
+
+#~ msgid "PDF Password"
+#~ msgstr "Heslo PDF"
+
+#~ msgid "Receipt"
+#~ msgstr "Faktura"
+
+#~ msgid "Receipt (File Inaccessible)"
+#~ msgstr "Faktura (soubor nedostupný)"
+
+#~ msgid "Receipts"
+#~ msgstr "Účtenky"
+
+#~ msgid "Repeat End Date"
+#~ msgstr "Datum ukončení opakování"
+
+#~ msgid "Repeat End Date (Invalid)"
+#~ msgstr "Datum ukončení opakování (neplatné)"
+
+#~ msgid "Repeat Interval"
+#~ msgstr "Interval opakování"
+
+#~ msgid "Repeat Interval Changed"
+#~ msgstr "Interval opakování změněn"
+
+#~ msgid "Savings"
+#~ msgstr "Spořicí"
+
+#~ msgid "Select Account"
+#~ msgstr "Vybrat účet"
+
+#~ msgid "Select Backup Folder"
+#~ msgstr "Vyberte složku záloh"
+
+#~ msgid "Sort By Amount"
+#~ msgstr "Seřadit podle množství"
+
+#~ msgid "Sort By Date"
+#~ msgstr "Seřadit podle data"
+
+#~ msgid "Sort By Id"
+#~ msgstr "Seřadit podle ID"
+
+#~ msgid "Tags"
+#~ msgstr "Štítky"
+
+#~ msgid "The password of the account was changed."
+#~ msgstr "Heslo účtu bylo změněno."
+
+#~ msgid "The password of the account was removed."
+#~ msgstr "Heslo účtu bylo odstraněno."
+
+#~ msgid "The password will be removed upon closing this dialog."
+#~ msgstr "Heslo bude odstraněno po zavření tohoto dialogu."
+
+#~ msgid "The passwords do not match."
+#~ msgstr "Hesla se neshodují."
+
+#~ msgid ""
+#~ "The repeat interval was changed.\n"
+#~ "What would you like to do with existing generated transactions?\n"
+#~ "\n"
+#~ "New repeat transactions will be generated based off the new interval."
+#~ msgstr ""
+#~ "Interval opakování byl změněn.\n"
+#~ "Co chcete udělat se stávajícími vygenerovanými transakcemi?\n"
+#~ "\n"
+#~ "Nové opakované transakce budou generovány na základě nového intervalu."
+
+#~ msgid "This account has no money available to transfer."
+#~ msgstr "Tento účet nemá žádné peníze k převodu."
+
+#~ msgid "This account is already opened."
+#~ msgstr "Tento účet je již otevřen."
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Deleting only the source transaction will allow individual\n"
+#~ "generated transactions to be modifiable."
+#~ msgstr ""
+#~ "Tato transakce je opakovanou transakcí zdroje.\n"
+#~ "Co chcete s opakovanými transakcemi udělat?\n"
+#~ "\n"
+#~ "Odstraněním pouze zdrojové transakce umožníte\n"
+#~ "individuální úpravu vygenerovaných transakcí."
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Updating only the source transaction will disassociate\n"
+#~ "generated transactions from the source."
+#~ msgstr ""
+#~ "Tato transakce je opakovanou transakcí zdroje.\n"
+#~ "Co chcete s opakovanými transakcemi udělat?\n"
+#~ "\n"
+#~ "Aktualizací pouze zdrojové transakce dojde k odpojení\n"
+#~ "vygenerovaných transakcí od zdroje."
+
+#~ msgid "Tobias Bernard"
+#~ msgstr "Tobias Bernard"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Zítra"
+
+#~ msgid "Total"
+#~ msgstr "Celkem"
+
+#~ msgid "Transaction"
+#~ msgstr "Transakce"
+
+#~ msgid "Transactions"
+#~ msgstr "Transakce"
+
+#~ msgid "Transactions without a group"
+#~ msgstr "Transakce bez skupiny"
+
+#, csharp-format
+#~ msgid "Transfer From {0}"
+#~ msgstr "Převést z {0}"
+
+#, csharp-format
+#~ msgid "Transfer To {0}"
+#~ msgstr "Převést na {0}"
+
+#~ msgid "Two months from now"
+#~ msgstr "Dva měsíce ode dneška"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Unable to export account to file."
+#~ msgstr "Nepodařilo se exportovat účet do souboru."
+
+#~ msgid ""
+#~ "Unable to import information from the file. Please ensure that the app "
+#~ "has permissions to access the file and try again."
+#~ msgstr ""
+#~ "Nepodařilo se importovat informace ze souboru. Ujistěte se, že má "
+#~ "aplikace oprávnění k přístupu k vašemu souboru a zkuste to znovu."
+
+#~ msgid "Unable to import transactions from the file."
+#~ msgstr "Nepodařilo se importovat transakce ze souboru."
+
+#~ msgid ""
+#~ "Unable to load currency data. Please try again. If the error still "
+#~ "persists, report a bug."
+#~ msgstr ""
+#~ "Nepodařilo se načíst informace o měnách. Zkuste to prosím znovu. Pokud "
+#~ "chyba nezmizí, nahlaste to prosím jako chybu."
+
+#~ msgid "Unable to login to account. Provided password is invalid."
+#~ msgstr "Nelze se přihlásit k účtu. Zadané heslo je neplatné."
+
+#~ msgid ""
+#~ "Unable to open the account. Please ensure that the app has permissions to "
+#~ "access the file and try again."
+#~ msgstr ""
+#~ "Nepodařilo se otevřít účet. Ujistěte se, že má aplikace oprávnění k "
+#~ "přístupu k vašemu souboru a zkuste to znovu."
+
+#~ msgid "Unable to overwrite an existing account."
+#~ msgstr "Nelze přepsat existující účet."
+
+#~ msgid "Unable to overwrite an opened account."
+#~ msgstr "Nelze přepsat otevřený účet."
+
+#~ msgid "Ungrouped"
+#~ msgstr "Neseskupené"
+
+#~ msgid "Untagged"
+#~ msgstr "Bez štítku"
+
+#~ msgid "Upcoming transactions"
+#~ msgstr "Nadcházející transakce"
+
+#~ msgid "Update Only Source"
+#~ msgstr "Aktualizovat pouze zdroj"
+
+#~ msgid "Update Source and Generated"
+#~ msgstr "Aktualizovat zdroj a generované"
+
+#~ msgid "Update Transaction"
+#~ msgstr "Aktualizovat transakci"
+
+#~ msgid "Upload"
+#~ msgstr "Nahrát"
+
+#~ msgid "View"
+#~ msgstr "Zobrazit"
+
+#~ msgid ""
+#~ "Would you like to password-protect the PDF file?\n"
+#~ "\n"
+#~ "If the password is lost, the PDF will be inaccessible."
+#~ msgstr ""
+#~ "Chcete soubor PDF chránit heslem?\n"
+#~ "\n"
+#~ "Pokud heslo ztratíte, soubor PDF bude nepřístupný."
+
+#~ msgid "Yes"
+#~ msgstr "Ano"
+
+#~ msgid "Your system reported that your currency is"
+#~ msgstr "Váš systém hlásí, že vaší měnou je"
+
+#~ msgctxt "Morning"
+#~ msgid "Good Morning!"
+#~ msgstr "Dobré ráno!"
+
+#~ msgctxt "Night"
+#~ msgid "Good Morning!"
+#~ msgstr "Dobré ráno!"
+
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgid "Default Transaction Type"
+#~ msgstr "Výchozí typ transakce"
+
+#~ msgid "Transaction Reminders Threshold"
+#~ msgstr "Hranice pro připomenutí transakcí"
+
+#~ msgid "One Day Before"
+#~ msgstr "Jeden den před"
+
+#~ msgid "One Week Before"
+#~ msgstr "Jeden týden před"
+
+#~ msgid "One Month Before"
+#~ msgstr "Jeden měsíc před"
+
+#~ msgid "Two Months Before"
+#~ msgstr "Dva měsíce před"
+
+#~ msgid "Manage the currency used by the account."
+#~ msgstr "Správa měny používané účtem."
+
+#~ msgid "Set a new password or remove one."
+#~ msgstr "Nastavte nové heslo nebo jej odstraňte."
+
+#~ msgid "Use Custom Currency"
+#~ msgstr "Použít vlastní měnu"
+
+#~ msgid "Amount Display Style"
+#~ msgstr "Styl zobrazení množství"
+
+#~ msgid "Other"
+#~ msgstr "Jiný"
+
+#~ msgid "None"
+#~ msgstr "Žádný"
+
+#~ msgid "Decimal Digits"
+#~ msgstr "Desetinné číslice"
+
+#~ msgid "Two"
+#~ msgstr "Dva"
+
+#~ msgid "Three"
+#~ msgstr "Tři"
+
+#~ msgid "Four"
+#~ msgstr "Čtyři"
+
+#~ msgid "Five"
+#~ msgstr "Pět"
+
+#~ msgid "Six"
+#~ msgstr "Šest"
+
+#~ msgid "Unlimited"
+#~ msgstr "Neomezeně"
+
+#~ msgid "New Password"
+#~ msgstr "Nové heslo"
+
+#~ msgid "Confirm Password"
+#~ msgstr "Potvrzení hesla"
+
+#~ msgid "Password Strength"
+#~ msgstr "Síla hesla"
+
+#~ msgid "If the password is lost, there is no way to restore the file!"
+#~ msgstr "Pokud dojde ke ztrátě hesla, není možné soubor obnovit!"
+
+#~ msgid "Remove"
+#~ msgstr "Odebrat"
+
+#~ msgid "Transfer Money"
+#~ msgstr "Převod peněz"
+
+#~ msgid "CSV"
+#~ msgstr "CSV"
+
+#~ msgid "Export Current View"
+#~ msgstr "Exportovat aktuální zobrazení"
+
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+#~ msgid "Search by description"
+#~ msgstr "Vyhledávání podle popisu"
+
+#~ msgid "Today's Overview"
+#~ msgstr "Dnešní přehled"
+
+#~ msgid "Reminders"
+#~ msgstr "Připomínky"
+
+#~ msgid "Actions"
+#~ msgstr "Akce"
+
+#~ msgid "Select All Overview Filters"
+#~ msgstr "Vybrat všechny filtry přehledu"
+
+#~ msgid "New Group (Ctrl+G)"
+#~ msgstr "Nová skupina (Ctrl+G)"
+
+#~ msgctxt "Group"
+#~ msgid "New"
+#~ msgstr "Nová"
+
+#~ msgid "Toggle Groups Visibility"
+#~ msgstr "Přepnout viditelnost skupin"
+
+#~ msgid "Select All Groups Filters"
+#~ msgstr "Vybrat všechny filtry skupin"
+
+#~ msgid "Unselect Groups Filters"
+#~ msgstr "Zrušit výběr filtrů skupin"
+
+#~ msgid "Toggle Tags Visibility"
+#~ msgstr "Přepnout viditelnost štítků"
+
+#~ msgid "Select All Tags Filters"
+#~ msgstr "Vybrat všechny filtry štítků"
+
+#~ msgid "Unselect Tags Filters"
+#~ msgstr "Zrušit výběr filtrů štítků"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalendář"
+
+#~ msgid "Select Current Month"
+#~ msgstr "Vybrat aktuální měsíc"
+
+#~ msgid "Reset To Today"
+#~ msgstr "Obnovit na dnešek"
+
+#~ msgid "Today"
+#~ msgstr "Dnes"
+
+#~ msgid "Select Range"
+#~ msgstr "Zvolit rozsah"
+
+#~ msgctxt "DateRange"
+#~ msgid "Start"
+#~ msgstr "Začátek"
+
+#~ msgctxt "DateRange"
+#~ msgid "End"
+#~ msgstr "Konec"
+
+#~ msgid "Visualize"
+#~ msgstr "Vizualizace"
+
+#~ msgid "Next"
+#~ msgstr "Další"
+
+#~ msgid "Sort From First To Last"
+#~ msgstr "Řazení od prvního do posledního"
+
+#~ msgid "Sort From Last To First"
+#~ msgstr "Řazení od posledního k prvnímu"
+
+#~ msgid "New Transaction (Ctrl+Shift+N)"
+#~ msgstr "Nová transakce (Ctrl+Shift+N)"
+
+#~ msgctxt "Transaction"
+#~ msgid "New"
+#~ msgstr "Nová"
+
+#~ msgid "Suggestions"
+#~ msgstr "Návrhy"
+
+#~ msgid "Converter"
+#~ msgstr "Převodník"
+
+#~ msgid "Switch currencies"
+#~ msgstr "Prohodit měny"
+
+#~ msgid "Switch"
+#~ msgstr "Prohodit"
+
+#~ msgid "Loading..."
+#~ msgstr "Načítání..."
+
+#~ msgid "Source"
+#~ msgstr "Zdroj"
+
+#~ msgid "Result"
+#~ msgstr "Výsledek"
+
+#~ msgid "Copy Result Amount"
+#~ msgstr "Zkopírovat množství výsledku"
+
+#~ msgid "All Accounts"
+#~ msgstr "Všechny účty"
+
+#~ msgid "Color"
+#~ msgstr "Barva"
+
+#~ msgid "Delete"
+#~ msgstr "Odstranit"
+
+#~ msgid "Edit Group"
+#~ msgstr "Upravit skupinu"
+
+#~ msgid "New Account"
+#~ msgstr "Nový účet"
+
+#~ msgid "Use this wizard to get the most out of your account"
+#~ msgstr "Pomocí tohoto průvodce získáte ze svého účtu maximum"
+
+#~ msgid "Let's Start"
+#~ msgstr "Začínáme"
+
+#~ msgid "Storage Location"
+#~ msgstr "Umístění úložiště"
+
+#~ msgid "Account Password (Optional)"
+#~ msgstr "Heslo účtu (volitelné)"
+
+#~ msgid "Overwrite Existing Accounts"
+#~ msgstr "Přepsat existující účty"
+
+#~ msgid "Account Options"
+#~ msgstr "Možnosti účtu"
+
+#~ msgid "This is only a useful label that doesn't affect how the app works."
+#~ msgstr ""
+#~ "Jedná se pouze o užitečné označení, které nemá vliv na fungování aplikace."
+
+#~ msgid "Account Currency"
+#~ msgstr "Měna účtu"
+
+#~ msgid "Import Existing Information"
+#~ msgstr "Importovat existující informace"
+
+#~ msgid ""
+#~ "Upload a valid file to use to import existing information into the new "
+#~ "account."
+#~ msgstr ""
+#~ "Pro importování existujících informací do nového účtu nahrajte platný "
+#~ "soubor."
+
+#~ msgid "Import File"
+#~ msgstr "Import souboru"
+
+#~ msgid "Select File"
+#~ msgstr "Vybrat soubor"
+
+#~ msgid "Create"
+#~ msgstr "Vytvořit"
+
+#~ msgid "Enter Password To Login:"
+#~ msgstr "Pro přihlášení zadejte heslo:"
+
+#~ msgid "Password"
+#~ msgstr "Heslo"
+
+#~ msgid "Unlock"
+#~ msgstr "Odemknout"
+
+#~ msgid "Colors"
+#~ msgstr "Barvy"
+
+#~ msgid "Customize the colors used by Denaro."
+#~ msgstr "Přizpůsobit barvy používané Denarem."
+
+#~ msgid "Transaction Default Color"
+#~ msgstr "Výchozí barva transakce"
+
+#~ msgid ""
+#~ "A change in this setting will only be applied to newly added transactions."
+#~ msgstr "Změna tohoto nastavení se projeví pouze u nově přidaných transakcí."
+
+#~ msgid "Transfer Default Color"
+#~ msgstr "Výchozí barva převodu"
+
+#~ msgid "A change in this setting will only be applied to new transfers."
+#~ msgstr "Změna tohoto nastavení se projeví pouze u nových převodů."
+
+#~ msgid "Group Default Color"
+#~ msgstr "Výchozí barva skupiny"
+
+#~ msgid "A change in this setting will only be applied to new groups."
+#~ msgstr "Změna tohoto nastavení se projeví pouze u nových skupin."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Barva běžného účtu"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Barva spořicího účtu"
+
+#~ msgid "Business Account Color"
+#~ msgstr "Barva firemního účtu"
+
+#~ msgid "Locale"
+#~ msgstr "Národní prostředí"
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Použít nativní číslice"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits."
+#~ msgstr ""
+#~ "Zda se mají místo latinských číslic používat číslice, které jsou pro "
+#~ "danou oblast přirozené."
+
+#~ msgid "Insert Decimal Separator"
+#~ msgstr "Vložení desetinného oddělovače"
+
+#~ msgid ""
+#~ "Set for which keys pressed will the locale's decimal separator be "
+#~ "inserted into an amount field."
+#~ msgstr ""
+#~ "Nastavte, pro které stisknuté klávesy se do pole částky vloží desetinný "
+#~ "oddělovač místního jazyka."
+
+#~ msgid "Numpad period only"
+#~ msgstr "Pouze čárka na numerické klávesnici"
+
+#~ msgid "Period and Comma"
+#~ msgstr "Tečka a čárka"
+
+#~ msgid "Backup"
+#~ msgstr "Záloha"
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Složka zálohy CSV"
+
+#~ msgid ""
+#~ "Unencrypted accounts will automatically export as CSV files to this "
+#~ "folder when a change is made."
+#~ msgstr ""
+#~ "Nezašifrované účty se při změně automaticky exportují do této složky jako "
+#~ "soubory CSV."
+
+#~ msgid "Clear Backup Folder"
+#~ msgstr "Vymazat složku záloh"
+
+#~ msgid "No Reminders"
+#~ msgstr "Žádné připomínky"
+
+#~ msgid "Account"
+#~ msgstr "Účet"
+
+#~ msgid "Close Account"
+#~ msgstr "Uzavřít účet"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Převod"
+
+#~ msgid "New Group"
+#~ msgstr "Nová skupina"
+
+#~ msgid "New Transaction"
+#~ msgstr "Nová transakce"
+
+#~ msgid "Toggle Sidebar"
+#~ msgstr "Přepnout postranní panel"
+
+#~ msgid "Make a Copy"
+#~ msgstr "Vytvořit kopii"
+
+#~ msgid "Clear End Date"
+#~ msgstr "Vymazat datum ukončení"
+
+#~ msgid "Daily"
+#~ msgstr "Denně"
+
+#~ msgid "Weekly"
+#~ msgstr "Týdně"
+
+#~ msgid "Biweekly"
+#~ msgstr "Dvakrát týdně"
+
+#~ msgid "Monthly"
+#~ msgstr "Měsíčně"
+
+#~ msgid "Quarterly"
+#~ msgstr "Čtvrtletně"
+
+#~ msgid "Yearly"
+#~ msgstr "Ročně"
+
+#~ msgid "Biyearly"
+#~ msgstr "Dvakrát ročně"
+
+#~ msgid "Use group color"
+#~ msgstr "Použít barvu skupiny"
+
+#~ msgid "Use unique color"
+#~ msgstr "Použít unikátní barvu"
+
+#~ msgid "Enter a new tag name..."
+#~ msgstr "Zadejte nový název štítku..."
+
+#~ msgid "Add Tag"
+#~ msgstr "Přidat štítek"
+
+#~ msgid "Extras"
+#~ msgstr "Další"
+
+#~ msgid "Manage extra fields of the transaction."
+#~ msgstr "Spravovat další pole transakce."
+
+#~ msgid "Enter notes here"
+#~ msgstr "Sem zadejte poznámky"
+
+#~ msgid "Edit Transaction"
+#~ msgstr "Upravit transakci"
+
+#~ msgid ""
+#~ "Transferring money will create an expense transaction with the given "
+#~ "amount in this account and an income transaction with the given amount in "
+#~ "the account to transfer to."
+#~ msgstr ""
+#~ "Převodem peněz se vytvoří nákladová transakce s danou částkou na tomto "
+#~ "účtu a příjmová transakce s danou částkou na účtu, na který je prováděn "
+#~ "převod."
+
+#~ msgid "No Account Selected"
+#~ msgstr "Není vybrán žádný účet"
+
+#~ msgid "Select a destination account"
+#~ msgstr "Vyberte cílový účet"
+
+#~ msgid "Recent Accounts"
+#~ msgstr "Nedávné účty"
+
+#~ msgid "Recents"
+#~ msgstr "Nedávné"
+
+#~ msgid "Conversion Needed"
+#~ msgstr "Nutná konverze"
+
+#~ msgid "Use Custom Rates"
+#~ msgstr "Použít vlastní kurzy"
+
+#~ msgid "Enter the conversion rates manually"
+#~ msgstr "Ručně zadejte kurzy"
+
+#~ msgctxt "Button"
+#~ msgid "Transfer"
+#~ msgstr "Převod"
+
+#~ msgid "Currency Converter"
+#~ msgstr "Převodník měn"
+
+#~ msgid "Account Menu"
+#~ msgstr "Nabídka účtu"
+
+#~ msgid "New Account (Ctrl+N)"
+#~ msgstr "Nový účet (Ctrl+N)"
+
+#~ msgctxt "Account"
+#~ msgid "New"
+#~ msgstr "Nová"
+
+#~ msgid "Open Account (Ctrl+O)"
+#~ msgstr "Otevřít účet (Ctrl+O)"
+
+#~ msgid "No Recent Accounts"
+#~ msgstr "Žádné nedávné účty"
+
+#~ msgid "Toggle Graphs"
+#~ msgstr "Přepnout grafy"
+
+#~ msgid "Dashboard"
+#~ msgstr "Nástěnka"
+
+#~ msgid ""
+#~ "Create or open an account to get started. You may also drag a file into "
+#~ "the app from your file browser."
+#~ msgstr ""
+#~ "Chcete-li začít, vytvořte si nebo otevřete účet. Do aplikace můžete také "
+#~ "přetáhnout soubor z prohlížeče souborů."
 
 #~ msgid "result"
 #~ msgstr "výsledek"
@@ -1719,18 +1355,6 @@ msgstr ""
 #~ msgid "About {0}"
 #~ msgstr "O aplikaci {0}"
 
-#~ msgid "Changelog"
-#~ msgstr "Seznam změn"
-
-#~ msgid "Report a Bug"
-#~ msgstr "Nahlásit chybu"
-
-#~ msgid "Discussions"
-#~ msgstr "Diskuze"
-
-#~ msgid "Credits"
-#~ msgstr "Zásluhy"
-
 #~ msgid ""
 #~ "Nicholas Logozzo https://github.com/nlogozzo\n"
 #~ "Contributors on GitHub ❤️ https://github.com/NickvisionApps/Denaro/graphs/"
@@ -1763,14 +1387,8 @@ msgstr ""
 #~ "Překladatelé na Weblate ❤️ https://hosted.weblate.org/projects/nickvision-"
 #~ "money/app/"
 
-#~ msgid "Home"
-#~ msgstr "Domů"
-
 #~ msgid "Accounts"
 #~ msgstr "Účty"
-
-#~ msgid "Settings"
-#~ msgstr "Nastavení"
 
 #~ msgid "Transfer Money (Ctrl+T)"
 #~ msgstr "Převod peněz (Ctrl+T)"
