@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-02-08 14:01+0000\n"
+"PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "app/hi/>\n"
@@ -82,7 +82,7 @@ msgstr "जोड़ें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:498
 msgid "Add a new transaction or import transactions from a file."
-msgstr "एक नया लेनदेन जोड़ें या किसी फ़ाइल से लेनदेन आयात करें।"
+msgstr "एक नया लेनदेन जोड़ें या किसी फाइल से लेनदेन आयात करें।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
 msgid "Add Password To PDF?"
@@ -317,7 +317,7 @@ msgstr "लागत/खर्च"
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:815
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:11
 msgid "Export to File"
-msgstr "फ़ाइल में निर्यात करें"
+msgstr "फाइल में निर्यात करें"
 
 #: ../../../Controllers/AccountViewController.cs:991
 #: ../../../Controllers/AccountViewController.cs:1009
@@ -398,14 +398,14 @@ msgstr "खाते से आयात करें"
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:8
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:40
 msgid "Import from File"
-msgstr "फ़ाइल से आयात करें"
+msgstr "फाइल से आयात करें"
 
 #: ../../../Controllers/AccountViewController.cs:969
 #, csharp-format
 msgid "Imported {0} transaction from file."
 msgid_plural "Imported {0} transactions from file."
-msgstr[0] "फ़ाइल से आयातित {0} लेनदेन।"
-msgstr[1] "फ़ाइल से आयातित {0} लेनदेन।"
+msgstr[0] "फाइल से आयातित {0} लेनदेन।"
+msgstr[1] "फाइल से आयातित {0} लेनदेन।"
 
 #: ../../../Models/Account.cs:1637 ../../../Models/Account.cs:1769
 #: ../../../Models/Account.cs:1875 ../../../Models/Account.cs:1895
@@ -497,7 +497,7 @@ msgstr "नोट्स"
 
 #: ../../../Controllers/AccountViewController.cs:978
 msgid "Nothing to import from the file."
-msgstr "फ़ाइल से आयात करने के लिए कुछ भी नहीं।"
+msgstr "फाइल से आयात करने के लिए कुछ भी नहीं।"
 
 #: ../../../Models/Account.cs:2107
 msgid "One month from now"
@@ -538,7 +538,7 @@ msgstr "रसीद"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:523
 msgid "Receipt (File Inaccessible)"
-msgstr "रसीद (फ़ाइल अप्राप्य)"
+msgstr "रसीद (फाइल अप्राप्य)"
 
 #: ../../../Models/Account.cs:1789
 msgid "Receipts"
@@ -720,19 +720,19 @@ msgstr "प्रकार"
 #: ../../../Controllers/AccountViewController.cs:995
 #: ../../../Controllers/AccountViewController.cs:1013
 msgid "Unable to export account to file."
-msgstr "खाते को फ़ाइल में निर्यात करने में असमर्थ।"
+msgstr "खाते को फाइल में निर्यात करने में असमर्थ।"
 
 #: ../../../Controllers/AccountViewController.cs:937
 msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
-"फ़ाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फ़ा"
+"फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फ़ा"
 "इल तक पहुंचने की अनुमति है और पुनः प्रयास करें।"
 
 #: ../../../Controllers/AccountViewController.cs:973
 msgid "Unable to import transactions from the file."
-msgstr "फ़ाइल से लेनदेन आयात करने में असमर्थ।"
+msgstr "फाइल से लेनदेन आयात करने में असमर्थ।"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid ""
@@ -752,7 +752,7 @@ msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
-"खाता खोलने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फ़ाइल तक पहुंचने की "
+"खाता खोलने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फाइल तक पहुंचने की "
 "अनुमति है और पुनः प्रयास करें।"
 
 #: ../../../Controllers/MainWindowController.cs:280
@@ -962,7 +962,7 @@ msgstr "पासवर्ड की मजबूती"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:246
 msgid "If the password is lost, there is no way to restore the file!"
 msgstr ""
-"यदि पासवर्ड खो गया है, तो फ़ाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
+"यदि पासवर्ड खो गया है, तो फाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:250
 #: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
@@ -1209,20 +1209,20 @@ msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
-"मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फ़ा"
-"इल अपलोड करें।"
+"मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फाइल "
+"अपलोड करें।"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:320
 msgid "Import File"
-msgstr "फ़ाइल आयात करें"
+msgstr "फाइल आयात करें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:327
 msgid "Select File"
-msgstr "फ़ाइल का चयन करें"
+msgstr "फाइल का चयन करें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:337
 msgid "Clear File"
-msgstr "फ़ाइल साफ़ करें"
+msgstr "फाइल साफ़ करें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:348
 msgid "Create"
@@ -1368,8 +1368,8 @@ msgid ""
 "Unencrypted accounts will automatically export as CSV files to this folder "
 "when a change is made."
 msgstr ""
-"परिवर्तन किए जाने पर अनएन्क्रिप्टेड खाते स्वचालित रूप से इस फ़ोल्डर में CSV "
-"फ़ाइलों के रूप में निर्यात हो जाएंगे।"
+"परिवर्तन किए जाने पर अनएन्क्रिप्टेड खाते स्वचालित रूप से इस फोल्डर में CSV "
+"फाइलों के रूप में निर्यात हो जाएंगे।"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:159
 msgid "Clear Backup Folder"
@@ -1578,8 +1578,8 @@ msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
 msgstr ""
-"आरंभ करने के लिए एक खाता बनाएं या खोलें। आप अपने फ़ाइल ब्राउज़र से किसी फ़ा"
-"इल को ऐप में खींच भी सकते हैं।"
+"आरंभ करने के लिए एक खाता बनाएं या खोलें। आप अपने फाइल ब्राउज़र से किसी फाइल "
+"को ऐप में खींच भी सकते हैं।"
 
 #, fuzzy
 #~ msgid "result"
