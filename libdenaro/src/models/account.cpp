@@ -1,4 +1,5 @@
 #include "models/account.h"
+#include <chrono>
 #include <format>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/localization/gettext.h>
@@ -12,9 +13,7 @@ namespace Nickvision::Money::Shared::Models
         : m_path{ path.replace_extension(".nmoney") },
         m_loggedIn{ false },
         m_database{ m_path, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE },
-        m_metadata{ m_path.stem().string(), AccountType::Checking },
-        m_nextAvailableGroupId{ 1 },
-        m_nextAvailableTransactionId{ 1 }
+        m_metadata{ m_path.stem().string(), AccountType::Checking }
     {
 
     }
@@ -100,27 +99,6 @@ namespace Nickvision::Money::Shared::Models
         return m_loggedIn;
     }
 
-    bool Account::load()
-    {
-        if(!m_loggedIn)
-        {
-            return false;
-        }
-        //Clear existing data from memory
-        m_groups.clear();
-        m_tags.clear();
-        m_transactions.clear();
-        m_transactionReminders.clear();
-        m_nextAvailableGroupId = 1;
-        m_nextAvailableTransactionId = 1;
-        //TODO: Get groups
-        //TODO: Get tags and transactions
-        m_tags.push_back(_("Untagged"));
-        syncRepeatTransactions();
-        calculateTransactionReminders();
-        return true;
-    }
-
     const AccountMetadata& Account::getMetadata() const
     {
         return m_metadata;
@@ -133,7 +111,23 @@ namespace Nickvision::Money::Shared::Models
             return;
         }
         m_metadata = metadata;
-        //TODO: Update database
+        SqlStatement statement{ m_database.createStatement("UPDATE metadata SET name = ?, type = ?, useCustomCurrency = ?, customSymbol = ?, customCode = ?, defaultTransactionType = ?, showGroupsList = ?, sortFirstToLast = ?, sortTransactionsBy = ?, customDecimalSeparator = ?, customGroupSeparator = ?, customDecimalDigits = ?, showTagsList = ?, transactionRemindersThreshold = ?, customAmountStyle = ? WHERE id = 0") };
+        statement.bind(1, m_metadata.getName());
+        statement.bind(2, static_cast<int>(m_metadata.getType()));
+        statement.bind(3, m_metadata.getUseCustomCurrency());
+        statement.bind(4, m_metadata.getCustomCurrency().getSymbol());
+        statement.bind(5, m_metadata.getCustomCurrency().getCode());
+        statement.bind(10, m_metadata.getCustomCurrency().getDecimalSeparator());
+        statement.bind(11, m_metadata.getCustomCurrency().getGroupSeparator());
+        statement.bind(12, m_metadata.getCustomCurrency().getDecimalDigits());
+        statement.bind(15, static_cast<int>(m_metadata.getCustomCurrency().getAmountStyle()));
+        statement.bind(6, static_cast<int>(m_metadata.getDefaultTransactionType()));
+        statement.bind(14, static_cast<int>(m_metadata.getTransactionRemindersThreshold()));
+        statement.bind(7, m_metadata.getShowGroupsList());
+        statement.bind(13, m_metadata.getShowTagsList());
+        statement.bind(9, static_cast<int>(m_metadata.getSortTransactionsBy()));
+        statement.bind(8, m_metadata.getSortFirstToLast());
+        statement.step();
     }
 
     const std::unordered_map<unsigned int, Group>& Account::getGroups() const
@@ -151,19 +145,36 @@ namespace Nickvision::Money::Shared::Models
         return m_transactions;
     }
 
-    const std::vector<std::pair<std::string, std::string>>& Account::getTransactionReminders() const
+    std::vector<std::pair<std::string, std::string>> Account::getTransactionReminders() const
     {
-        return m_transactionReminders;
+        if(m_metadata.getTransactionRemindersThreshold() == RemindersThreshold::Never)
+        {
+            return {};
+        }
+        std::vector<std::pair<std::string, std::string>> reminders;
+        std::chrono::year_month_day today{ std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now()) };
+        std::string todayString{ std::to_string(unsigned(today.month())) + "/" + std::to_string(unsigned(today.day())) + "/" + std::to_string(int(today.year())) };
+
+        return reminders;
     }
 
     unsigned int Account::getNextAvailableGroupId() const
     {
-        return m_nextAvailableGroupId;
+        SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM groups WHERE NOT EXISTS (SELECT 1 FROM groups AS g2 WHERE g2.id = groups.id + 1)") };
+        statement.step();
+        return statement.getColumnInt(0);
     }
 
     unsigned int Account::getNextAvailableTransactionId() const
     {
-        return m_nextAvailableTransactionId;
+        SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM transactions WHERE NOT EXISTS (SELECT 1 FROM transactions AS t2 WHERE t2.id = transactions.id + 1)") };
+        statement.step();
+        return statement.getColumnInt(0);
+    }
+
+    void Account::changePassword(const std::string& password)
+    {
+        m_database.changePassword(password);
     }
 
     std::optional<Transaction> Account::sendTransfer(const Transfer& transfer, const Color& color)
@@ -176,7 +187,7 @@ namespace Nickvision::Money::Shared::Models
         if(accountToSend.login(transfer.getDestinationAccountPassword()))
         {
             accountToSend.receiveTransfer(transfer, color);
-            Transaction expense{ m_nextAvailableTransactionId };
+            Transaction expense{ getNextAvailableTransactionId() };
             expense.setDescription(std::vformat(_("Transfer to {}"), std::make_format_args(accountToSend.getMetadata().getName())));
             expense.setType(TransactionType::Expense);
             expense.setAmount(transfer.getSourceAmount());
@@ -193,7 +204,7 @@ namespace Nickvision::Money::Shared::Models
         {
             return std::nullopt;
         }
-        Transaction income{ m_nextAvailableTransactionId };
+        Transaction income{ getNextAvailableTransactionId() };
         income.setDescription(std::vformat(_("Transfer from {}"), std::make_format_args(transfer.getSourceAccountName())));
         income.setType(TransactionType::Income);
         income.setAmount(transfer.getDestinationAmount());

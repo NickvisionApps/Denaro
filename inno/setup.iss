@@ -63,8 +63,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\..\VC_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
 Source: "..\..\WindowsAppRuntimeInstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
-Source: "..\out-windows\org.nickvision.money.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
-Source: "..\out-windows\org.nickvision.money.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\build\org.nickvision.money.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\build\org.nickvision.money.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

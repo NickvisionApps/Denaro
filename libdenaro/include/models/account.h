@@ -44,12 +44,6 @@ namespace Nickvision::Money::Shared::Models
          */
         bool login(const std::string& password);
         /**
-         * @brief Loads the account's data (groups, tags, and transactions) into memory.
-         * @brief login() must be called first
-         * @return True if successful, else false 
-         */
-        bool load();
-        /**
          * @brief Gets the metadata for the account.
          * @return The account metadata 
          */
@@ -76,9 +70,10 @@ namespace Nickvision::Money::Shared::Models
         const std::unordered_map<unsigned int, Transaction>& getTransactions() const;
         /**
          * @brief Gets the transaction reminders for the account.
+         * @brief Each reminder is a pair of strings with the first string being the reminder's title and the second string being the reminder's subtitle.
          * @return The account's transaction reminders
          */
-        const std::vector<std::pair<std::string, std::string>>& getTransactionReminders() const;
+        std::vector<std::pair<std::string, std::string>> getTransactionReminders() const;
         /**
          * @brief Gets the next available group id.
          * @return The next available group id 
@@ -278,14 +273,11 @@ namespace Nickvision::Money::Shared::Models
         ImportResult importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor);
         std::filesystem::path m_path;
         bool m_loggedIn;
-        Database::SqlDatabase m_database;
+        mutable Database::SqlDatabase m_database;
         AccountMetadata m_metadata;
         std::unordered_map<unsigned int, Group> m_groups;
         std::vector<std::string> m_tags;
         std::unordered_map<unsigned int, Transaction> m_transactions;
-        std::vector<std::pair<std::string, std::string>> m_transactionReminders;
-        unsigned int m_nextAvailableGroupId;
-        unsigned int m_nextAvailableTransactionId;
     };
 }
 
