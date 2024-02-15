@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:17-0500\n"
+"POT-Creation-Date: 2024-02-14 19:52-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,28 +16,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libdenaro/src/models/account.cpp:168
+#: libdenaro/src/models/account.cpp:167
 msgid "Tomorrow"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:172
+#: libdenaro/src/models/account.cpp:171
 msgid "One week from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:176
+#: libdenaro/src/models/account.cpp:175
 msgid "One month from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:180
+#: libdenaro/src/models/account.cpp:179
 msgid "Two months from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:253
+#: libdenaro/src/models/account.cpp:252
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Tehing ({0})"
 
-#: libdenaro/src/models/account.cpp:270
+#: libdenaro/src/models/account.cpp:269
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Tehing ({0})"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:17-0500\n"
+"POT-Creation-Date: 2024-02-14 19:52-0500\n"
 "PO-Revision-Date: 2023-07-09 22:27+0000\n"
 "Last-Translator: Luci Draws <dpkg.luci@protonmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/nickvision-"
@@ -19,27 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
-#: libdenaro/src/models/account.cpp:168
+#: libdenaro/src/models/account.cpp:167
 msgid "Tomorrow"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:172
+#: libdenaro/src/models/account.cpp:171
 msgid "One week from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:176
+#: libdenaro/src/models/account.cpp:175
 msgid "One month from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:180
+#: libdenaro/src/models/account.cpp:179
 msgid "Two months from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:253
+#: libdenaro/src/models/account.cpp:252
 msgid "Transfer to {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:270
+#: libdenaro/src/models/account.cpp:269
 msgid "Transfer from {}"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:17-0500\n"
+"POT-Creation-Date: 2024-02-14 19:52-0500\n"
 "PO-Revision-Date: 2023-12-06 07:04+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,28 +20,28 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.3-dev\n"
 
-#: libdenaro/src/models/account.cpp:168
+#: libdenaro/src/models/account.cpp:167
 msgid "Tomorrow"
 msgstr "غدًا"
 
-#: libdenaro/src/models/account.cpp:172
+#: libdenaro/src/models/account.cpp:171
 msgid "One week from now"
 msgstr "بعد أسبوع من الآن"
 
-#: libdenaro/src/models/account.cpp:176
+#: libdenaro/src/models/account.cpp:175
 msgid "One month from now"
 msgstr "شهر واحد من الآن"
 
-#: libdenaro/src/models/account.cpp:180
+#: libdenaro/src/models/account.cpp:179
 msgid "Two months from now"
 msgstr "بعد شهرين من الآن"
 
-#: libdenaro/src/models/account.cpp:253
+#: libdenaro/src/models/account.cpp:252
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "حوِّل إلى {0}"
 
-#: libdenaro/src/models/account.cpp:270
+#: libdenaro/src/models/account.cpp:269
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "حوِّل من {0}"
