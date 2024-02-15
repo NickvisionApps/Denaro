@@ -39,11 +39,13 @@ parts:
     stage-packages:
       - libjsoncpp25
       - libboost-locale1.74.0
+      - libboost-date-time1.74.0
       - libstdc++6
     prime:
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libstdc++*.so*
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libjsoncpp*
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libboost_locale.so.1.74.0
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libboost_date_time.so.1.74.0
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libboost_thread.so.1.74.0
 
   maddy:
@@ -57,7 +59,7 @@ parts:
   libnick:
     after: [maddy, build-deps]
     source: https://github.com/nickvisionapps/libnick.git
-    source-tag: '2024.2.2'
+    source-tag: '2024.2.3'
     source-depth: 1
     plugin: cmake
     cmake-parameters:

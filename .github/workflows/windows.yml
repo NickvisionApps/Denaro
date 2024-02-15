@@ -27,10 +27,10 @@ jobs:
         uses: johnwason/vcpkg-action@v5
         id: vcpkg
         with:
-          pkgs: libnick matplotplusplus podofo
+          pkgs: boost-date-time libnick matplotplusplus podofo
           triplet: x64-windows
           cache-key: windows-latest
-          revision: a58271747fd00c2f53342f20c2d9fd944fbaa386
+          revision: 6176cdc54e9d0b6676b940888d8217aeb42846a3
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Build"
         working-directory: ${{github.workspace}}/build

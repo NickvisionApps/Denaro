@@ -5,6 +5,7 @@ endif()
 add_library(libdenaro
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
+    "src/helpers/datehelpers.cpp"
     "src/models/account.cpp"
     "src/models/accountmetadata.cpp"
     "src/models/color.cpp"
@@ -27,9 +28,10 @@ else()
 endif()
 
 find_package(libnick CONFIG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS date_time)
 find_package(Matplot++ CONFIG REQUIRED)
 find_package(podofo CONFIG REQUIRED)
-target_link_libraries(libdenaro PUBLIC libnick::libnick Matplot++::cimg  Matplot++::matplot $<IF:$<TARGET_EXISTS:podofo_shared>,podofo_shared,podofo_static>)
+target_link_libraries(libdenaro PUBLIC libnick::libnick Boost::date_time Matplot++::cimg  Matplot++::matplot $<IF:$<TARGET_EXISTS:podofo_shared>,podofo_shared,podofo_static>)
 
 if(HAS_GETTEXT)
     add_custom_command(TARGET libdenaro POST_BUILD COMMAND "${GETTEXT_XGETTEXT_EXECUTABLE}" --from-code=utf-8 --add-comments --c++ --force-po --output="${POT_FILE}" --keyword=_ --keyword=_n:1,2 --keyword=_p:1c,2 --keyword=_pn:1c,2,3 --keyword=C_:1c,2 --width=80 ${TRANSLATE_FILES} WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")

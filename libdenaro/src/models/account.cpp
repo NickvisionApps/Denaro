@@ -1,8 +1,8 @@
 #include "models/account.h"
-#include <chrono>
 #include <format>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/localization/gettext.h>
+#include "helpers/datehelpers.h"
 #include "models/customcurrency.h"
 
 using namespace Nickvision::Database;
@@ -94,6 +94,12 @@ namespace Nickvision::Money::Shared::Models
                 newStatement.bind(8, m_metadata.getSortFirstToLast());
                 newStatement.step();
             }
+            //Register fixdate sql function
+            m_database.registerFunction("fixdate", [](const SqlContext& context)
+            {
+                SqlContext ctx{ context };
+                ctx.result(DateHelpers::toIsoDateString(ctx.getArgs()[0].getString()));
+            }, 1);
             m_loggedIn = true;
         }
         return m_loggedIn;
@@ -145,16 +151,72 @@ namespace Nickvision::Money::Shared::Models
         return m_transactions;
     }
 
-    std::vector<std::pair<std::string, std::string>> Account::getTransactionReminders() const
+    std::vector<std::tuple<std::string, double, std::string>> Account::getTransactionReminders() const
     {
         if(m_metadata.getTransactionRemindersThreshold() == RemindersThreshold::Never)
         {
             return {};
         }
-        std::vector<std::pair<std::string, std::string>> reminders;
-        std::chrono::year_month_day today{ std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now()) };
-        std::string todayString{ std::to_string(unsigned(today.month())) + "/" + std::to_string(unsigned(today.day())) + "/" + std::to_string(int(today.year())) };
-
+        std::vector<std::tuple<std::string, double, std::string>> reminders;
+        boost::gregorian::date today{ boost::gregorian::day_clock::local_day() };
+        boost::gregorian::date threshold{ today };
+        std::string when;
+        switch(m_metadata.getTransactionRemindersThreshold())
+        {
+        case RemindersThreshold::OneDayBefore:
+            threshold += boost::gregorian::days{ 1 };
+            when = _("Tomorrow");
+            break;
+        case RemindersThreshold::OneWeekBefore:
+            threshold += boost::gregorian::weeks{ 1 };
+            when = _("One week from now");
+            break;
+        case RemindersThreshold::OneMonthBefore:
+            threshold += boost::gregorian::months{ 1 };
+            when = _("One month from now");
+            break;
+        case RemindersThreshold::TwoMonthsBefore:
+            threshold += boost::gregorian::months{ 2 };
+            when = _("Two months from now");
+            break;
+        }
+        SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions WHERE repeatFrom = -1 AND fixdata(date) > ? UNION SELECT t1.* FROM transactions t1 JOIN (SELECT repeatFrom, MAX(fixdate(date)) AS highest_date FROM transactions WHERE repeatFrom > 0 GROUP BY repeatFrom) t2 ON t1.repeatFrom = t2.repeatFrom AND fixdate(t1.date) = t2.highest_date") };
+        statement.bind(1, boost::gregorian::to_iso_string(today));
+        while(statement.step())
+        {
+            boost::gregorian::date upcoming{ DateHelpers::fromUSDateString(statement.getColumnString(1)) };
+            if(statement.getColumnInt(9) != -1)
+            {
+                switch(static_cast<TransactionRepeatInterval>(statement.getColumnInt(4)))
+                {
+                case TransactionRepeatInterval::Daily:
+                    upcoming += boost::gregorian::days{ 1 };
+                    break;
+                case TransactionRepeatInterval::Weekly:
+                    upcoming += boost::gregorian::weeks{ 1 };
+                    break;
+                case TransactionRepeatInterval::Biweekly:
+                    upcoming += boost::gregorian::weeks{ 2 };
+                    break;
+                case TransactionRepeatInterval::Monthly:
+                    upcoming += boost::gregorian::months{ 1 };
+                    break;
+                case TransactionRepeatInterval::Quarterly:
+                    upcoming += boost::gregorian::months{ 3 };
+                    break;
+                case TransactionRepeatInterval::Yearly:
+                    upcoming += boost::gregorian::years{ 1 };
+                    break;
+                case TransactionRepeatInterval::Biyearly:
+                    upcoming += boost::gregorian::years{ 2 };
+                    break;
+                }
+            }
+            if(upcoming <= threshold)
+            {
+                reminders.push_back({ statement.getColumnString(2), statement.getColumnDouble(5), when });
+            }
+        }
         return reminders;
     }
 

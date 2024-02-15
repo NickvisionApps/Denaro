@@ -1,9 +1,9 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
-#include <chrono>
 #include <string>
 #include <vector>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include "color.h"
 #include "receipt.h"
 #include "transactionrepeatinterval.h"
@@ -31,12 +31,12 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets the date of the transaction.
          * @return The transaction date 
          */
-        const std::chrono::year_month_day& getDate() const;
+        const boost::gregorian::date& getDate() const;
         /**
          * @brief Sets the date of the transaction.
          * @param date The new transaction date 
          */
-        void setDate(const std::chrono::year_month_day& date);
+        void setDate(const boost::gregorian::date& date);
         /**
          * @brief Gets the description of the transaction.
          * @return The transaction description 
@@ -119,24 +119,24 @@ namespace Nickvision::Money::Shared::Models
         void setRepeatInterval(TransactionRepeatInterval repeatInterval);
         /**
          * @brief Gets the source id of the repeat transaction.
-         * @return The repeat transaction source id (-1 if not a repeat transaction)
+         * @return The repeat transaction source id (-1 if not a repeat transaction, 0 if source transaction)
          */
         int getRepeatFrom() const;
         /**
          * @brief Sets the source id of the repeat transaction.
-         * @param repeatFrom The new repeat transaction source id (-1 if not a repeat transaction)
+         * @param repeatFrom The new repeat transaction source id (-1 if not a repeat transaction, 0 if source transaction)
          */
         void setRepeatFrom(int repeatFrom);
         /**
          * @brief Gets the repeat end date of the transaction.
          * @return The transaction repeat end date 
          */
-        const std::chrono::year_month_day& getRepeatEndDate() const;
+        const boost::gregorian::date& getRepeatEndDate() const;
         /**
          * @brief Sets the repeat end date of the transaction.
          * @param repeatEndDate The new transaction repeat end date
          */
-        void setRepeatEndDate(const std::chrono::year_month_day& repeatEndDate);
+        void setRepeatEndDate(const boost::gregorian::date& repeatEndDate);
         /**
          * @brief Gets the tags of the transaction.
          * @return The transaction tags
@@ -170,7 +170,7 @@ namespace Nickvision::Money::Shared::Models
          * @param newDate The date to use for the repeat transaction
          * @return The new repeat transaction
          */
-        Transaction repeat(unsigned int newId, const std::chrono::year_month_day& newDate) const;
+        Transaction repeat(unsigned int newId, const boost::gregorian::date& newDate) const;
         /**
          * @brief Gets whether or not this Transaction is equal to compare Transaction.
          * @param compare The Transaction to compare to
@@ -198,7 +198,7 @@ namespace Nickvision::Money::Shared::Models
 
     private:
         unsigned int m_id;
-        std::chrono::year_month_day m_date;
+        boost::gregorian::date m_date;
         std::string m_description;
         TransactionType m_type;
         double m_amount;
@@ -208,7 +208,7 @@ namespace Nickvision::Money::Shared::Models
         Receipt m_receipt;
         TransactionRepeatInterval m_repeatInterval;
         int m_repeatFrom;
-        std::chrono::year_month_day m_repeatEndDate;
+        boost::gregorian::date m_repeatEndDate;
         std::vector<std::string> m_tags;
         std::string m_notes;
     };

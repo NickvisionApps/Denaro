@@ -5,7 +5,7 @@ namespace Nickvision::Money::Shared::Models
 {
     Transaction::Transaction(unsigned int id)
         : m_id{ id },
-        m_date{ std::chrono::floor<std::chrono::days>(std::chrono::system_clock::now()) },
+        m_date{ boost::gregorian::day_clock::local_day() },
         m_type{ TransactionType::Income },
         m_amount{ 0.0 },
         m_groupId{ -1 },
@@ -21,12 +21,12 @@ namespace Nickvision::Money::Shared::Models
         return m_id;
     }
 
-    const std::chrono::year_month_day& Transaction::getDate() const
+    const boost::gregorian::date& Transaction::getDate() const
     {
         return m_date;
     }
 
-    void Transaction::setDate(const std::chrono::year_month_day& date)
+    void Transaction::setDate(const boost::gregorian::date& date)
     {
         m_date = date;
     }
@@ -125,12 +125,12 @@ namespace Nickvision::Money::Shared::Models
         m_repeatFrom = repeatFrom;
     }
 
-    const std::chrono::year_month_day& Transaction::getRepeatEndDate() const
+    const boost::gregorian::date& Transaction::getRepeatEndDate() const
     {
         return m_repeatEndDate;
     }
 
-    void Transaction::setRepeatEndDate(const std::chrono::year_month_day& repeatEndDate)
+    void Transaction::setRepeatEndDate(const boost::gregorian::date& repeatEndDate)
     {
         m_repeatEndDate = repeatEndDate;
     }
@@ -171,7 +171,7 @@ namespace Nickvision::Money::Shared::Models
         m_notes = notes;
     }
 
-    Transaction Transaction::repeat(unsigned int newId, const std::chrono::year_month_day& newDate) const
+    Transaction Transaction::repeat(unsigned int newId, const boost::gregorian::date& newDate) const
     {
         Transaction t{ newId };
         t.setDate(newDate);
