@@ -217,7 +217,7 @@ namespace Nickvision::Money::Shared::Models
          * @param exportMode ExportMode
          * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
          */
-        bool exportToCSV(const std::filesystem::path& path, ExportMode exportMode = ExportMode::All, std::vector<unsigned int> filteredIds = {});
+        bool exportToCSV(const std::filesystem::path& path, ExportMode exportMode = ExportMode::All, const std::vector<unsigned int>& filteredIds = {}) const;
         /**
          * @brief Exports the account to a PDF file.
          * @param path The path to the PDF file
@@ -225,7 +225,7 @@ namespace Nickvision::Money::Shared::Models
          * @param exportMode ExportMode
          * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
          */
-        bool exportToCSV(const std::filesystem::path& path, const std::string& password, ExportMode exportMode = ExportMode::All, std::vector<unsigned int> filteredIds = {});
+        bool exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode = ExportMode::All, const std::vector<unsigned int>& filteredIds = {}) const;
         /**
          * @brief Generates a graph.
          * @param type GraphType
@@ -236,7 +236,7 @@ namespace Nickvision::Money::Shared::Models
          * @param showLegend Whether or not to show the graph's legend
          * @return The byte vector of the graph image
          */
-        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, std::vector<unsigned int> filteredIds, int width = -1, int height = -1, bool showLegend = true);
+        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, const std::vector<unsigned int>& filteredIds, int width = -1, int height = -1, bool showLegend = true) const;
         /**
          * @brief Gets whether or not the object is valid or not.
          * @return True if valid (m_loggedIn), else false 
@@ -244,10 +244,6 @@ namespace Nickvision::Money::Shared::Models
         operator bool() const;
 
     private:
-        /**
-         * Populates the m_transactionReminders list.
-         */
-        void calculateTransactionReminders();
         /**
          * @brief Imports transactions from a CSV file.
          * @param path The path to the file to import

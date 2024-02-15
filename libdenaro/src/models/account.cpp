@@ -238,6 +238,86 @@ namespace Nickvision::Money::Shared::Models
         m_database.changePassword(password);
     }
 
+    double Account::getIncome(const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    double Account::getExpense(const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    double Account::getTotal(const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    double Account::getGroupIncome(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    double Account::getGroupExpense(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    double Account::getGroupTotal(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    {
+        return 0.0;
+    }
+
+    bool Account::addGroup(const Group& group)
+    {
+        return false;
+    }
+
+    bool Account::updateGroup(const Group& group)
+    {
+        return false;
+    }
+
+    std::pair<bool, std::vector<unsigned int>> Account::deleteGroup(unsigned int id)
+    {
+        return { false, {} };
+    }
+
+    std::pair<bool, std::vector<std::string>> Account::addTransaction(const Transaction& transaction)
+    {
+        return { false, {} };
+    }
+
+    std::pair<bool, std::vector<std::string>> Account::updateTransaction(const Transaction& transaction)
+    {
+        return { false, {} };
+    }
+
+    std::pair<bool, std::vector<std::string>> Account::updateSourceTransaction(const Transaction& transaction, bool updateGenerated)
+    {
+        return { false, {} };
+    }
+
+    bool Account::deleteTransaction(unsigned int id)
+    {
+        return false;
+    }
+
+    bool Account::deleteSourceTransaction(unsigned int id, bool deleteGenerated)
+    {
+        return false;
+    }
+
+    bool Account::deleteGeneratedTransactions(unsigned int sourceId)
+    {
+        return false;
+    }
+
+    bool Account::syncRepeatTransactions()
+    {
+        return false;
+    }
+
     std::optional<Transaction> Account::sendTransfer(const Transfer& transfer, const Color& color)
     {
         if(!m_loggedIn || transfer.getSourceAccountPath() != m_path)
@@ -272,6 +352,41 @@ namespace Nickvision::Money::Shared::Models
         income.setColor(color);
         addTransaction(income);
         return income;
+    }
+
+    ImportResult Account::importFromFile(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
+    {
+        return {};
+    }
+
+    bool Account::exportToCSV(const std::filesystem::path& path, ExportMode exportMode, const std::vector<unsigned int>& filteredIds) const
+    {
+        return false;
+    }
+
+    bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<unsigned int>& filteredIds) const
+    {
+        return false;
+    }
+
+    std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<unsigned int>& filteredIds, int width, int height, bool showLegend) const
+    {
+        return {};
+    }
+
+    ImportResult Account::importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
+    {
+        return {};
+    }
+
+    ImportResult Account::importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor)
+    {
+        return {};
+    }
+
+    ImportResult Account::importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
+    {
+        return {};
     }
 
     Account::operator bool() const

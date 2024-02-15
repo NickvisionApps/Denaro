@@ -68,6 +68,7 @@ endif()
 
 if (BUILD_TESTING)
     add_executable(libdenaro_test
+        "tests/accounttests.cpp"
         "tests/colortests.cpp"
         "tests/currencyconversiontests.cpp"
         "tests/datetests.cpp"
