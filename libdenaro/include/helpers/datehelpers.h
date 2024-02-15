@@ -15,9 +15,10 @@ namespace Nickvision::Money::Shared::DateHelpers
     /**
      * @brief Gets a US date string (MM/DD/YYYY) representation of the date object.
      * @param date The date object
+     * @param pad Whether or not to pad the US string with leading zeros if needed
      * @return The US date string representation
      */
-    std::string toUSDateString(const boost::gregorian::date& date);
+    std::string toUSDateString(const boost::gregorian::date& date, bool pad = false);
     /**
      * @brief Gets an ISO date string (YYYYMMDD) from a US date string (MM/DD/YYYY).
      * @param date The US date string

@@ -15,9 +15,25 @@ namespace Nickvision::Money::Shared
         return { static_cast<unsigned short>(std::stoul(splits[2])), static_cast<unsigned short>(std::stoul(splits[0])), static_cast<unsigned short>(std::stoul(splits[1])) };
     }
 
-    std::string DateHelpers::toUSDateString(const boost::gregorian::date& date)
+    std::string DateHelpers::toUSDateString(const boost::gregorian::date& date, bool pad)
     {
-        return std::to_string(date.month()) + "/" + std::to_string(date.day()) + "/" + std::to_string(date.year());
+        std::stringstream builder;
+        if(pad)
+        {
+            builder << std::setfill('0') << std::setw(2);
+        }
+        builder << date.month().as_number() << "/";
+        if(pad)
+        {
+            builder << std::setfill('0') << std::setw(2);
+        }
+        builder << date.day() << "/";
+        if(pad)
+        {
+            builder << std::setfill('0') << std::setw(4);
+        }
+        builder << date.year();
+        return builder.str();
     }
 
     std::string DateHelpers::toIsoDateString(const std::string& date)

@@ -22,7 +22,7 @@ namespace Nickvision::Money::Shared::Models
          * @param g The G color value
          * @param a The B color value 
          */
-        Color(int r, int g, int b);
+        Color(unsigned char r, unsigned char g, unsigned char b);
         /**
          * @brief Constructs a Color.
          * @param r The R color value
@@ -30,7 +30,7 @@ namespace Nickvision::Money::Shared::Models
          * @param a The B color value
          * @param a The A color value
          */
-        Color(int r, int g, int b, int a);
+        Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
         /**
          * @brief Constructs a Color.
          * @brief Strings must be in one of the following formats: "rgb(r,g,b)", "r,g,b", "rgba(r,g,b,a)", "r,g,b,a", "#rrggbb", "#rrggbbaa".
@@ -47,42 +47,42 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets the R color value.
          * @return The R color value 
          */
-        int getR() const;
+        unsigned char getR() const;
         /**
          * @brief Sets the R color value.
          * @param r The new R color value 
          */
-        void setR(int r);
+        void setR(unsigned char r);
         /**
          * @brief Gets the G color value.
          * @return The G color value 
          */
-        int getG() const;
+        unsigned char getG() const;
         /**
          * @brief Sets the G color value.
          * @param g The new G color value 
          */
-        void setG(int g);
+        void setG(unsigned char g);
         /**
          * @brief Gets the B color value.
          * @return The B color value 
          */
-        int getB() const;
+        unsigned char getB() const;
         /**
          * @brief Sets the B color value.
          * @param b The new B color value 
          */
-        void setB(int b);
+        void setB(unsigned char b);
         /**
          * @brief Gets the A color value.
          * @return The A color value 
          */
-        int getA() const;
+        unsigned char getA() const;
         /**
          * @brief Sets the A color value.
          * @param a The new A color value 
          */
-        void setA(int a);
+        void setA(unsigned char a);
         /**
          * @brief Gets the rgb string for this Color object.
          * @param header Whether or not to wrap the string in the header: rgb()
@@ -124,10 +124,10 @@ namespace Nickvision::Money::Shared::Models
         operator bool() const;
 
     private:
-        int m_r;
-        int m_g;
-        int m_b;
-        int m_a;
+        unsigned char m_r;
+        unsigned char m_g;
+        unsigned char m_b;
+        unsigned char m_a;
     };
 }
 

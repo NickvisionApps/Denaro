@@ -48,8 +48,8 @@ namespace Nickvision::Money::Shared::Models
             std::string response{ WebHelpers::fetchJsonString(apiUrl) };
             if(!response.empty())
             {
-                json = { response };
-                if(json.get("result", "").asString() != "success")
+                Json::Reader reader;
+                if(!reader.parse(response, json, false) || json.get("result", "").asString() != "success")
                 {
                     return {};
                 }

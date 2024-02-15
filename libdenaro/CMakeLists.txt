@@ -67,8 +67,11 @@ if(HAS_GETTEXT AND ITSTOOL_EXECUTABLE AND YELP_BUILD_EXECUTABLE)
 endif()
 
 if (BUILD_TESTING)
-	add_executable(libdenaro_test
-		"tests/main.cpp")
-	find_package(GTest CONFIG REQUIRED)
-	target_link_libraries(libdenaro_test PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main libdenaro)
+    add_executable(libdenaro_test
+        "tests/colortests.cpp"
+        "tests/currencyconversiontests.cpp"
+        "tests/datetests.cpp"
+        "tests/main.cpp")
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(libdenaro_test PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main libdenaro)
 endif()
