@@ -95,10 +95,9 @@ namespace Nickvision::Money::Shared::Models
                 newStatement.step();
             }
             //Register fixdate sql function
-            m_database.registerFunction("fixdate", [](const SqlContext& context)
+            m_database.registerFunction("fixdate", [](SqlContext& context)
             {
-                SqlContext ctx{ context };
-                ctx.result(DateHelpers::toIsoDateString(ctx.getArgs()[0].getString()));
+                context.result(DateHelpers::toIsoDateString(context.getArgs()[0].getString()));
             }, 1);
             m_loggedIn = true;
         }
