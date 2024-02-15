@@ -125,6 +125,7 @@ parts:
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/snap/denaro/current/usr
       - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_TESTING=OFF
     stage-packages:
       - libstdc++6
     build-environment:

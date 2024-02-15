@@ -2,6 +2,7 @@
 	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
+include(CTest)
 add_library(libdenaro
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
@@ -63,4 +64,11 @@ if(HAS_GETTEXT AND ITSTOOL_EXECUTABLE AND YELP_BUILD_EXECUTABLE)
     add_custom_command(TARGET libdenaro POST_BUILD COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_SOURCE_DIR}/docs/html/C/figures")
     add_custom_command(TARGET libdenaro POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_SOURCE_DIR}/docs/yelp/C/figures" "${CMAKE_SOURCE_DIR}/docs/html/C/figures")
     add_custom_command(TARGET libdenaro POST_BUILD COMMAND "${YELP_BUILD_EXECUTABLE}" html -o "${CMAKE_SOURCE_DIR}/docs/html/C/" "${CMAKE_SOURCE_DIR}/docs/yelp/C/")
+endif()
+
+if (BUILD_TESTING)
+	add_executable(libdenaro_test
+		"tests/main.cpp")
+	find_package(GTest CONFIG REQUIRED)
+	target_link_libraries(libdenaro_test PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main libdenaro)
 endif()
