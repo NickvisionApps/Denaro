@@ -1,5 +1,5 @@
 ﻿if(WIN32)
-	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
 include(CTest)
@@ -23,9 +23,9 @@ add_library(libdenaro
 target_include_directories(libdenaro PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libdenaro PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")
 if(MSVC)
-	target_compile_options(libdenaro PRIVATE /W4)
+    target_compile_options(libdenaro PRIVATE /W4)
 else()
-	target_compile_options(libdenaro PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(libdenaro PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 find_package(libnick CONFIG REQUIRED)
