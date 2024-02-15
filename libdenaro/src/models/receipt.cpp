@@ -126,6 +126,11 @@ namespace Nickvision::Money::Shared::Models
         return m_bytes.empty();
     }
 
+    ReceiptType Receipt::getType() const
+    {
+        return m_type;
+    }
+
     const std::string& Receipt::toString() const
     {
         return m_base64;

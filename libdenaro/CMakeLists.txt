@@ -71,7 +71,8 @@ if (BUILD_TESTING)
         "tests/colortests.cpp"
         "tests/currencyconversiontests.cpp"
         "tests/datetests.cpp"
-        "tests/main.cpp")
+        "tests/main.cpp"
+        "tests/receipttests.cpp")
     find_package(GTest CONFIG REQUIRED)
     target_link_libraries(libdenaro_test PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main libdenaro)
 endif()

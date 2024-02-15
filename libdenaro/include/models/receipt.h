@@ -44,6 +44,11 @@ namespace Nickvision::Money::Shared::Models
          */
         bool empty() const;
         /**
+         * @brief Gets the type of the receipt.
+         * @return The receipt type 
+         */
+        ReceiptType getType() const;
+        /**
          * @brief Gets the base64 encoded string representing this Receipt object.
          * @return The base64 string of this Receipt 
          */
