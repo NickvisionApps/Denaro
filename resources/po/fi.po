@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Huomenna"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Yksi viikko tästä hetkestä"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Yksi kuukausi tästä hetkestä"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Kaksi kuukautta tästä hetkestä"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Siirrä kohteeseen {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Siirrä kohteesta {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -483,12 +509,6 @@ msgstr "Pois"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Ei mitään tuotavaa tiedostosta."
 
-#~ msgid "One month from now"
-#~ msgstr "Yksi kuukausi tästä hetkestä"
-
-#~ msgid "One week from now"
-#~ msgstr "Yksi viikko tästä hetkestä"
-
 #~ msgid "Open Account"
 #~ msgstr "Avaa tili"
 
@@ -562,9 +582,6 @@ msgstr "Pois"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Huomenna"
-
 #~ msgid "Total"
 #~ msgstr "Yhteensä"
 
@@ -576,17 +593,6 @@ msgstr "Pois"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Tapahtumat ilman ryhmää"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Siirrä kohteesta {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Siirrä kohteeseen {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Kaksi kuukautta tästä hetkestä"
 
 #~ msgid "Type"
 #~ msgstr "Tyyppi"

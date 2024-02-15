@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.2-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Demain"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Dans une semaine"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Dans un mois"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Dans deux mois"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Transférer vers {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Transférer depuis {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -509,12 +535,6 @@ msgstr "Désactivé"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Rien à importer depuis le fichier."
 
-#~ msgid "One month from now"
-#~ msgstr "Dans un mois"
-
-#~ msgid "One week from now"
-#~ msgstr "Dans une semaine"
-
 #~ msgid "Open Account"
 #~ msgstr "Ouvrir un compte"
 
@@ -629,9 +649,6 @@ msgstr "Désactivé"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Demain"
-
 #~ msgid "Total"
 #~ msgstr "Total"
 
@@ -643,17 +660,6 @@ msgstr "Désactivé"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Transactions sans groupe"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Transférer depuis {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Transférer vers {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Dans deux mois"
 
 #~ msgid "Type"
 #~ msgstr "Type"

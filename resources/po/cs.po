@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Zítra"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Jeden týden ode dneška"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Jeden měsíc ode dneška"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Dva měsíce ode dneška"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Převést na {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Převést z {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -509,12 +535,6 @@ msgstr "Vypnout"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Nic k importování ze souboru."
 
-#~ msgid "One month from now"
-#~ msgstr "Jeden měsíc ode dneška"
-
-#~ msgid "One week from now"
-#~ msgstr "Jeden týden ode dneška"
-
 #~ msgid "Open Account"
 #~ msgstr "Otevřít účet"
 
@@ -627,9 +647,6 @@ msgstr "Vypnout"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Zítra"
-
 #~ msgid "Total"
 #~ msgstr "Celkem"
 
@@ -641,17 +658,6 @@ msgstr "Vypnout"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Transakce bez skupiny"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Převést z {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Převést na {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Dva měsíce ode dneška"
 
 #~ msgid "Type"
 #~ msgstr "Typ"

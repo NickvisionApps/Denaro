@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-08-29 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.1-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Morgen"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "In einer Woche ab jetzt"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "In einem Monat ab jetzt"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "In zwei Monaten"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Zu {0} Überweisen"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Von {0} Überweisen"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -504,12 +530,6 @@ msgstr "Aus"
 #~ msgid "Notes"
 #~ msgstr "Notizen"
 
-#~ msgid "One month from now"
-#~ msgstr "In einem Monat ab jetzt"
-
-#~ msgid "One week from now"
-#~ msgstr "In einer Woche ab jetzt"
-
 #~ msgid "Open Account"
 #~ msgstr "Konto öffnen"
 
@@ -624,9 +644,6 @@ msgstr "Aus"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Morgen"
-
 #~ msgid "Total"
 #~ msgstr "Insgesamt"
 
@@ -638,17 +655,6 @@ msgstr "Aus"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Überweisungen ohne Gruppe"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Von {0} Überweisen"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Zu {0} Überweisen"
-
-#~ msgid "Two months from now"
-#~ msgstr "In zwei Monaten"
 
 #~ msgid "Type"
 #~ msgstr "Art"

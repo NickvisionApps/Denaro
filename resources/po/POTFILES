@@ -1,3 +1,4 @@
+libdenaro/src/models/account.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
 org.nickvision.money.gnome/blueprints/main_window.blp
 org.nickvision.money.gnome/blueprints/preferences_dialog.blp

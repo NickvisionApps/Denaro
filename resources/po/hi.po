@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "कल"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "अब से एक सप्ताह बाद"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "अब से एक महीना"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "अब से दो महीने बाद"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "{0} पर स्थानांतरण"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "{0} से स्थानांतरण"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -506,12 +532,6 @@ msgstr "बंद"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "फाइल से आयात करने के लिए कुछ भी नहीं।"
 
-#~ msgid "One month from now"
-#~ msgstr "अब से एक महीना"
-
-#~ msgid "One week from now"
-#~ msgstr "अब से एक सप्ताह बाद"
-
 #~ msgid "Open Account"
 #~ msgstr "खाता खोलें"
 
@@ -624,9 +644,6 @@ msgstr "बंद"
 #~ msgid "Tobias Bernard"
 #~ msgstr "टोबियास बर्नार्ड"
 
-#~ msgid "Tomorrow"
-#~ msgstr "कल"
-
 #~ msgid "Total"
 #~ msgstr "कुल"
 
@@ -638,17 +655,6 @@ msgstr "बंद"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "समूह के बिना लेन-देन"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "{0} से स्थानांतरण"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "{0} पर स्थानांतरण"
-
-#~ msgid "Two months from now"
-#~ msgstr "अब से दो महीने बाद"
 
 #~ msgid "Type"
 #~ msgstr "प्रकार"

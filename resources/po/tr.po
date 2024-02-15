@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.1-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Yarın"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Bu günden, bir hafta sonra"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Bu günden, bir ay sonra"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Bu günden, iki ay sonra"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Şuraya Aktar: {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Şuradan Aktar: {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -507,12 +533,6 @@ msgstr "Kapalı"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Dosyadan içe aktarılacak bir şey yok."
 
-#~ msgid "One month from now"
-#~ msgstr "Bu günden, bir ay sonra"
-
-#~ msgid "One week from now"
-#~ msgstr "Bu günden, bir hafta sonra"
-
 #~ msgid "Open Account"
 #~ msgstr "Hesap Aç"
 
@@ -625,9 +645,6 @@ msgstr "Kapalı"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Yarın"
-
 #~ msgid "Total"
 #~ msgstr "Toplam"
 
@@ -639,17 +656,6 @@ msgstr "Kapalı"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Grupsuz işlemler"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Şuradan Aktar: {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Şuraya Aktar: {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Bu günden, iki ay sonra"
 
 #~ msgid "Type"
 #~ msgstr "Tür"

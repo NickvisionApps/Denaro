@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-11-15 07:06+0000\n"
 "Last-Translator: Michał Dominik <fancy0duck@duck.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,6 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Jutro"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Tydzień od dziś"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Miesiąc od dziś"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Dwa miesiące od dziś"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Przelej do {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Przelej z {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -509,12 +535,6 @@ msgstr "Wyłączone"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "W pliku nie ma nic do zaimportowania."
 
-#~ msgid "One month from now"
-#~ msgstr "Miesiąc od dziś"
-
-#~ msgid "One week from now"
-#~ msgstr "Tydzień od dziś"
-
 #~ msgid "Open Account"
 #~ msgstr "Otwórz konto"
 
@@ -627,9 +647,6 @@ msgstr "Wyłączone"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Jutro"
-
 #~ msgid "Total"
 #~ msgstr "Łącznie"
 
@@ -641,17 +658,6 @@ msgstr "Wyłączone"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Transakcje bez grupy"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Przelej z {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Przelej do {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Dwa miesiące od dziś"
 
 #~ msgid "Type"
 #~ msgstr "Rodzaj"

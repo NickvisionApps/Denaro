@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.4-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "明天"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "从现在起一周"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "从现在起一个月"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "从现在起二个月"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "轉帳到 {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "從 {0} 轉帳"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -502,12 +528,6 @@ msgstr "关闭"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "从文件未能导入内容。"
 
-#~ msgid "One month from now"
-#~ msgstr "从现在起一个月"
-
-#~ msgid "One week from now"
-#~ msgstr "从现在起一周"
-
 #~ msgid "Open Account"
 #~ msgstr "开设账户"
 
@@ -618,9 +638,6 @@ msgstr "关闭"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "明天"
-
 #~ msgid "Total"
 #~ msgstr "總額"
 
@@ -632,17 +649,6 @@ msgstr "关闭"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "暫無組群之交易"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "從 {0} 轉帳"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "轉帳到 {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "从现在起二个月"
 
 #~ msgid "Type"
 #~ msgstr "类型"

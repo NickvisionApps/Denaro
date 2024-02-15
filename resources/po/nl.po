@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-12-31 00:09+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Morgen"
+
+#: libdenaro/src/models/account.cpp:172
+#, fuzzy
+msgid "One week from now"
+msgstr "Eén week van tevoren"
+
+#: libdenaro/src/models/account.cpp:176
+#, fuzzy
+msgid "One month from now"
+msgstr "Eén maand van tevoren"
+
+#: libdenaro/src/models/account.cpp:180
+#, fuzzy
+msgid "Two months from now"
+msgstr "Twee maanden van tevoren"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Overmaken naar {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Overmaken van {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -614,9 +643,6 @@ msgstr "Uitgeschakeld"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Morgen"
-
 #~ msgid "Total"
 #~ msgstr "Totaal"
 
@@ -628,14 +654,6 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Transacties die geen deel uitmaken van een groep"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Overmaken van {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Overmaken naar {0}"
 
 #~ msgid "Type"
 #~ msgstr "Type"
@@ -718,15 +736,6 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "One Day Before"
 #~ msgstr "Eén dag van tevoren"
-
-#~ msgid "One Week Before"
-#~ msgstr "Eén week van tevoren"
-
-#~ msgid "One Month Before"
-#~ msgstr "Eén maand van tevoren"
-
-#~ msgid "Two Months Before"
-#~ msgstr "Twee maanden van tevoren"
 
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "Beheer de valuta die door de rekening wordt gebruikt."

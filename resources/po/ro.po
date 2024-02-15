@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-08-27 17:36+0000\n"
 "Last-Translator: Victor Mihalache <victormihalache@duck.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/nickvision-"
@@ -19,6 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0.1-dev\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Mâine"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Peste o săptămână"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Peste o lună"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Peste două luni"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Transferă către {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Transferă din {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -498,12 +524,6 @@ msgstr ""
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Nimic de importat din fișier."
 
-#~ msgid "One month from now"
-#~ msgstr "Peste o lună"
-
-#~ msgid "One week from now"
-#~ msgstr "Peste o săptămână"
-
 #~ msgid "Open Account"
 #~ msgstr "Deschideți un cont"
 
@@ -604,9 +624,6 @@ msgstr ""
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Mâine"
-
 #~ msgid "Total"
 #~ msgstr "Total"
 
@@ -618,17 +635,6 @@ msgstr ""
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Tranzacții fără grup"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Transferă din {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Transferă către {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Peste două luni"
 
 #~ msgid "Type"
 #~ msgstr "Gen"

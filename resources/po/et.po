@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,32 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Tehing ({0})"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Tehing ({0})"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -352,10 +378,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Transactions without a group"
 #~ msgstr "Tehingud"
-
-#, fuzzy, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Tehing ({0})"
 
 #, fuzzy
 #~ msgid "Upcoming transactions"

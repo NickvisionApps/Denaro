@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-02-14 19:17-0500\n"
 "PO-Revision-Date: 2023-09-16 10:15+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -18,6 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.2\n"
+
+#: libdenaro/src/models/account.cpp:168
+msgid "Tomorrow"
+msgstr "Domani"
+
+#: libdenaro/src/models/account.cpp:172
+msgid "One week from now"
+msgstr "Tra una settimana"
+
+#: libdenaro/src/models/account.cpp:176
+msgid "One month from now"
+msgstr "Tra un mese"
+
+#: libdenaro/src/models/account.cpp:180
+msgid "Two months from now"
+msgstr "Tra due mesi"
+
+#: libdenaro/src/models/account.cpp:253
+#, fuzzy
+msgid "Transfer to {}"
+msgstr "Trasferimento a {0}"
+
+#: libdenaro/src/models/account.cpp:270
+#, fuzzy
+msgid "Transfer from {}"
+msgstr "Trasferimento da {0}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:26
 msgid "Denaro"
@@ -511,12 +537,6 @@ msgstr "Spento"
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Nulla da importare dal file."
 
-#~ msgid "One month from now"
-#~ msgstr "Tra un mese"
-
-#~ msgid "One week from now"
-#~ msgstr "Tra una settimana"
-
 #~ msgid "Open Account"
 #~ msgstr "Apre un conto"
 
@@ -629,9 +649,6 @@ msgstr "Spento"
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Domani"
-
 #~ msgid "Total"
 #~ msgstr "Totale"
 
@@ -643,17 +660,6 @@ msgstr "Spento"
 
 #~ msgid "Transactions without a group"
 #~ msgstr "Transazioni senza gruppo"
-
-#, csharp-format
-#~ msgid "Transfer From {0}"
-#~ msgstr "Trasferimento da {0}"
-
-#, csharp-format
-#~ msgid "Transfer To {0}"
-#~ msgstr "Trasferimento a {0}"
-
-#~ msgid "Two months from now"
-#~ msgstr "Tra due mesi"
 
 #~ msgid "Type"
 #~ msgstr "Tipo"
