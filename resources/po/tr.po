@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:52-0500\n"
+"POT-Creation-Date: 2024-02-16 13:03-0500\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -35,12 +35,12 @@ msgstr "Bu günden, bir ay sonra"
 msgid "Two months from now"
 msgstr "Bu günden, iki ay sonra"
 
-#: libdenaro/src/models/account.cpp:252
+#: libdenaro/src/models/account.cpp:332
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Şuraya Aktar: {0}"
 
-#: libdenaro/src/models/account.cpp:269
+#: libdenaro/src/models/account.cpp:349
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Şuradan Aktar: {0}"
@@ -167,61 +167,61 @@ msgid "Open"
 msgstr "Aç"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:64
 #, fuzzy
 msgid "Search for Files"
 msgstr "Dosya Temizle"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Ev"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Help"
 msgstr "Yardım"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Tüm Bilgileri Dışa Aktar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Changelog"
 msgstr "Değişim günlüğü"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Report a Bug"
 msgstr "Hata Raporla"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Discussions"
 msgstr "Tartışmalar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Credits"
 msgstr "Geliştirenler"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Ayarlar"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:88
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -231,7 +231,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:99
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -243,15 +243,15 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:159
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:223
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:288
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Sonuç panoya kopyalandı."

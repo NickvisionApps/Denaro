@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:52-0500\n"
-"PO-Revision-Date: 2023-12-31 00:09+0000\n"
+"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"PO-Revision-Date: 2024-02-15 21:03+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,33 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.4\n"
 
 #: libdenaro/src/models/account.cpp:167
 msgid "Tomorrow"
 msgstr "Morgen"
 
 #: libdenaro/src/models/account.cpp:171
-#, fuzzy
 msgid "One week from now"
-msgstr "Eén week van tevoren"
+msgstr ""
 
 #: libdenaro/src/models/account.cpp:175
-#, fuzzy
 msgid "One month from now"
-msgstr "Eén maand van tevoren"
+msgstr ""
 
 #: libdenaro/src/models/account.cpp:179
-#, fuzzy
 msgid "Two months from now"
-msgstr "Twee maanden van tevoren"
+msgstr ""
 
-#: libdenaro/src/models/account.cpp:252
+#: libdenaro/src/models/account.cpp:332
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Overmaken naar {0}"
 
-#: libdenaro/src/models/account.cpp:269
+#: libdenaro/src/models/account.cpp:349
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Overmaken van {0}"
@@ -168,61 +165,61 @@ msgid "Open"
 msgstr "Openen"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "GitHub Repo"
 msgstr "GitHub-repo"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:64
 #, fuzzy
 msgid "Search for Files"
 msgstr "Bestand wissen"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Overzicht"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Help"
 msgstr "Hulp"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Alle informatie exporteren"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Changelog"
 msgstr "Wijzigingslog"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Report a Bug"
 msgstr "Bug melden"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Discussions"
 msgstr "Discussies"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Credits"
 msgstr "Met dank aan"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Instellingen"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:88
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -232,7 +229,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:99
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -244,15 +241,15 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:159
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:223
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:288
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
 msgid "Debug information copied to clipboard."
 msgstr ""
 
@@ -432,6 +429,9 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Huidige loskoppelen"
+
+#~ msgid "Error"
+#~ msgstr "Fout"
 
 #~ msgid "Expense"
 #~ msgstr "Uitgave"
@@ -737,6 +737,15 @@ msgstr "Uitgeschakeld"
 #~ msgid "One Day Before"
 #~ msgstr "Eén dag van tevoren"
 
+#~ msgid "One Week Before"
+#~ msgstr "Eén week van tevoren"
+
+#~ msgid "One Month Before"
+#~ msgstr "Eén maand van tevoren"
+
+#~ msgid "Two Months Before"
+#~ msgstr "Twee maanden van tevoren"
+
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "Beheer de valuta die door de rekening wordt gebruikt."
 
@@ -887,6 +896,21 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Suggestions"
 #~ msgstr "Suggesties"
+
+#~ msgid "Converter"
+#~ msgstr "Conversie"
+
+#~ msgid "Switch currencies"
+#~ msgstr "Valuta wisselen"
+
+#~ msgid "Switch"
+#~ msgstr "Wisselen"
+
+#~ msgid "Loading..."
+#~ msgstr "Laden…"
+
+#~ msgid "Source"
+#~ msgstr "Bron"
 
 #~ msgid "Result"
 #~ msgstr "Resultaat"
@@ -1141,9 +1165,8 @@ msgstr "Uitgeschakeld"
 #~ msgid "Transfer"
 #~ msgstr "Overboeken"
 
-#, fuzzy
 #~ msgid "Currency Converter"
-#~ msgstr "Valutacode"
+#~ msgstr "Valuta­conversie"
 
 #~ msgid "Account Menu"
 #~ msgstr "Rekeningmenu"

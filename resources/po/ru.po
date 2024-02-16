@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-14 19:52-0500\n"
+"POT-Creation-Date: 2024-02-16 13:03-0500\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -36,12 +36,12 @@ msgstr "Через месяц"
 msgid "Two months from now"
 msgstr "Через два месяца"
 
-#: libdenaro/src/models/account.cpp:252
+#: libdenaro/src/models/account.cpp:332
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Перевод на {0}"
 
-#: libdenaro/src/models/account.cpp:269
+#: libdenaro/src/models/account.cpp:349
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Перевод из {0}"
@@ -166,61 +166,61 @@ msgid "Open"
 msgstr "Открыть"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "GitHub Repo"
 msgstr "Репозиторий GitHub"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:64
 #, fuzzy
 msgid "Search for Files"
 msgstr "Сбросить файл"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Домашняя страница"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Help"
 msgstr "Справка"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Экспортировать всю информацию"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Changelog"
 msgstr "Список изменений"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Report a Bug"
 msgstr "Сообщить об ошибке"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Discussions"
 msgstr "Обсуждения"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Credits"
 msgstr "Авторы"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Настройки"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:88
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -230,7 +230,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:99
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -242,15 +242,15 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:159
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:223
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:288
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."

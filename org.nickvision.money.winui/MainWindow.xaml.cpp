@@ -46,8 +46,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     MainWindow::MainWindow()
         : m_opened{ false },
         m_isActivated{ true },
-        m_notificationClickToken{ 0 },
-        m_settingsPage{ nullptr }
+        m_notificationClickToken{ 0 }
     {
         InitializeComponent();
         this->m_inner.as<::IWindowNative>()->get_WindowHandle(&m_hwnd);
@@ -246,13 +245,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         }
         else if(tag == L"Settings")
         {
-            if(!m_settingsPage)
-            {
-                m_settingsPage = winrt::make<SettingsPage>();
-            }
-            m_settingsPage.as<SettingsPage>()->SetController(m_controller->createPreferencesViewController());
+            UserControl page{ winrt::make<SettingsPage>() };
+            page.as<SettingsPage>()->SetController(m_controller->createPreferencesViewController());
             ViewStack().CurrentPage(L"Custom");
-            FrameCustom().Content(winrt::box_value(m_settingsPage));
+            FrameCustom().Content(winrt::box_value(page));
         }
         TitleBarSearchBox().Visibility(tag == L"Folder" ? Visibility::Visible : Visibility::Collapsed);
         SetDragRegionForCustomTitleBar();
