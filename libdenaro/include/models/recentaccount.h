@@ -54,7 +54,7 @@ namespace Nickvision::Money::Shared::Models
         void setType(AccountType type);
         /**
          * @brief Gets whether or not the object represents an empty RecentAccount.
-         * @brief An empty RecentAccount is one that has no path or one whos path is empty
+         * @brief An empty RecentAccount is one that has no path or one whose path does not exist.
          * @return True if empty, else false
          */
         bool empty() const;

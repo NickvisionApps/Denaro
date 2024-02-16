@@ -93,7 +93,7 @@ namespace Nickvision::Money::Shared::Models
          */
         bool getUseGroupColor() const;
         /**
-         * @brief Sets whether or not to use the color of the associated group isntead of this transaction's color.
+         * @brief Sets whether or not to use the color of the associated group instead  of this transaction's color.
          * @param useGroupColor True to use group color, else false 
          */
         void setUseGroupColor(bool useGroupColor);
