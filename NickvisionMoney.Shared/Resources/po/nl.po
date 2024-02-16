@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-12-31 00:09+0000\n"
+"PO-Revision-Date: 2024-02-15 21:03+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.4\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -300,7 +300,7 @@ msgstr "Huidige loskoppelen"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
-msgstr ""
+msgstr "Fout"
 
 #: ../../../Models/Account.cs:1639 ../../../Models/Account.cs:1770
 #: ../../../Models/Account.cs:1876 ../../../Models/Account.cs:1896
@@ -1113,23 +1113,23 @@ msgstr "Suggesties"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:26
 msgid "Converter"
-msgstr ""
+msgstr "Conversie"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:40
 msgid "Switch currencies"
-msgstr ""
+msgstr "Valuta wisselen"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:43
 msgid "Switch"
-msgstr ""
+msgstr "Wisselen"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:60
 msgid "Loading..."
-msgstr ""
+msgstr "Laden…"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:70
 msgid "Source"
-msgstr ""
+msgstr "Bron"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:74
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:104
@@ -1537,9 +1537,8 @@ msgid "Transfer"
 msgstr "Overboeken"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:5
-#, fuzzy
 msgid "Currency Converter"
-msgstr "Valutacode"
+msgstr "Valuta­conversie"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
