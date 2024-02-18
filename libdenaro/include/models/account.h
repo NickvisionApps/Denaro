@@ -153,10 +153,10 @@ namespace Nickvision::Money::Shared::Models
         bool updateGroup(const Group& group);
         /**
          * @brief Deletes a group from the account.
-         * @param id The id of the group to remove
+         * @param group The group to delete
          * @return A pair with a boolean representing true if deletion was successful (else false) and a vector of ids of transactions that belonged to said group
          */
-        std::pair<bool, std::vector<unsigned int>> deleteGroup(unsigned int id);
+        std::pair<bool, std::vector<unsigned int>> deleteGroup(const Group& group);
         /**
          * @brief Adds a transaction to the account
          * @param transaction The transaction to add
@@ -172,11 +172,11 @@ namespace Nickvision::Money::Shared::Models
         bool updateTransaction(const Transaction& transaction, bool updateGenerated);
         /**
          * @brief Deletes a transaction from the account.
-         * @param id The id of the transaction to delete
+         * @param transaction The transaction to delete
          * @param deleteGenerated Whether or not to delete generated transactions associated with this transaction if it is a source transaction
          * @return True if successful, else false
          */
-        bool deleteTransaction(unsigned int id, bool deleteGenerated);
+        bool deleteTransaction(const Transaction& transaction, bool deleteGenerated);
         /**
          * @brief Deletes generated repeat transactions from the account.
          * @param sourceId The id of the source transaction 

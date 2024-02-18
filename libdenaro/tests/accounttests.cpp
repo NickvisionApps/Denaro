@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 #include <filesystem>
 #include <memory>
+#include <libnick/app/aura.h>
 #include "models/account.h"
 
+using namespace Nickvision::App;
 using namespace Nickvision::Money::Shared::Models;
 
 class AccountTest : public testing::Test
@@ -14,6 +16,7 @@ public:
 
     static void SetUpTestSuite()
     {
+        Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro");
         m_account = std::make_unique<Account>(m_accountPath);
     }
 

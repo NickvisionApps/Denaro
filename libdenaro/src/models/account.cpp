@@ -473,19 +473,19 @@ namespace Nickvision::Money::Shared::Models
         return !statement.step();
     }
 
-    std::pair<bool, std::vector<unsigned int>> Account::deleteGroup(unsigned int id)
+    std::pair<bool, std::vector<unsigned int>> Account::deleteGroup(const Group& group)
     {
         std::vector<unsigned int> belongingTransactions;
         SqlStatement statement{ m_database.createStatement("SELECT id FROM transactions WHERE gid = ?") };
-        statement.bind(1, static_cast<int>(id));
+        statement.bind(1, static_cast<int>(group.getId()));
         while(statement.step())
         {
             belongingTransactions.push_back(static_cast<unsigned int>(statement.getColumnInt(0)));
         }
         statement = m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?");
-        statement.bind(1, static_cast<int>(id));
+        statement.bind(1, static_cast<int>(group.getId()));
         statement = m_database.createStatement("DELETE FROM groups WHERE id = ?");
-        statement.bind(1, static_cast<int>(id));
+        statement.bind(1, static_cast<int>(group.getId()));
         return { !statement.step(), belongingTransactions };
     }
 
@@ -580,9 +580,27 @@ namespace Nickvision::Money::Shared::Models
         return res;
     }
 
-    bool Account::deleteTransaction(unsigned int id, bool deleteGenerated)
+    bool Account::deleteTransaction(const Transaction& transaction, bool deleteGenerated)
     {
-        return false;
+        SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE id = ?") };
+        statement.bind(1, static_cast<int>(transaction.getId()));
+        bool res{ !statement.step() };
+        if(transaction.getRepeatFrom() == 0)
+        {
+            if(deleteGenerated)
+            {
+                SqlStatement deleteStatement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
+                deleteStatement.bind(1, static_cast<int>(transaction.getId()));
+                res = res & !deleteStatement.step();
+            }
+            else
+            {
+                SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
+                disassociateStatement.bind(1, static_cast<int>(transaction.getId()));
+                res = res && !disassociateStatement.step();
+            }
+        }
+        return res;
     }
 
     bool Account::deleteGeneratedTransactions(unsigned int sourceId)
