@@ -42,31 +42,6 @@ namespace Nickvision::Money::Shared::Models
          */
         void setDescription(const std::string& description);
         /**
-         * @brief Gets the income of the group.
-         * @return The income of the group.
-         */
-        double getIncome() const;
-        /**
-         * @brief Sets the income of the group.
-         * @param income The new income of the group.
-         */
-        void setIncome(double income);
-        /**
-         * @brief Gets the expense of the group.
-         * @return The expense of the group.
-         */
-        double getExpense() const;
-        /**
-         * @brief Sets the expense of the group.
-         * @param expense The new expense of the group.
-         */
-        void setExpense(double expense);
-        /**
-         * @brief Gets the balance of the group.
-         * @return The balance of the group.
-         */
-        double getBalance() const;
-        /**
          * @brief Gets the color of the group.
          * @return The color of the group.
          */
@@ -105,8 +80,6 @@ namespace Nickvision::Money::Shared::Models
         unsigned int m_id;
         std::string m_name;
         std::string m_description;
-        double m_income;
-        double m_expense;
         Color m_color;
     };
 }

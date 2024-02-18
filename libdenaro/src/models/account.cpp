@@ -145,6 +145,7 @@ namespace Nickvision::Money::Shared::Models
     std::unordered_map<unsigned int, Group> Account::getGroups() const
     {
         std::unordered_map<unsigned int, Group> groups;
+        groups.reserve(getNumberOfGroups());
         Group ungrouped{ 0u };
         ungrouped.setName(_("Ungrouped"));
         ungrouped.setDescription(_("Transactions without a group"));
@@ -156,8 +157,6 @@ namespace Nickvision::Money::Shared::Models
             g.setName(statement.getColumnString(1));
             g.setDescription(statement.getColumnString(2));
             g.setColor({ statement.getColumnString(3) });
-            g.setIncome(getGroupIncome(g));
-            g.setExpense(getGroupExpense(g));
             groups.emplace(std::make_pair(g.getId(), g));
         }
         return groups;
@@ -183,6 +182,7 @@ namespace Nickvision::Money::Shared::Models
     std::unordered_map<unsigned int, Transaction> Account::getTransactions() const
     {
         std::unordered_map<unsigned int, Transaction> transactions;
+        transactions.reserve(getNumberOfTransactions());
         SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions") };
         while(statement.step())
         {
@@ -453,17 +453,38 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::addGroup(const Group& group)
     {
-        return false;
+        SqlStatement statement{ m_database.createStatement("INSERT INTO groups (id, name, description, rgba) VALUES (?,?,?,?)") };
+        statement.bind(1, static_cast<int>(group.getId()));
+        statement.bind(2, group.getName());
+        statement.bind(3, group.getDescription());
+        statement.bind(4, group.getColor().toRGBAHexString());
+        return !statement.step();
     }
 
     bool Account::updateGroup(const Group& group)
     {
-        return false;
+        SqlStatement statement{ m_database.createStatement("UPDATE groups SET name = ?, description = ?, rgba = ? WHERE id = ?") };
+        statement.bind(1, group.getName());
+        statement.bind(2, group.getDescription());
+        statement.bind(3, group.getColor().toRGBAHexString());
+        statement.bind(4, static_cast<int>(group.getId()));
+        return !statement.step();
     }
 
     std::pair<bool, std::vector<unsigned int>> Account::deleteGroup(unsigned int id)
     {
-        return { false, {} };
+        std::vector<unsigned int> belongingTransactions;
+        SqlStatement statement{ m_database.createStatement("SELECT id FROM transactions WHERE gid = ?") };
+        statement.bind(1, static_cast<int>(id));
+        while(statement.step())
+        {
+            belongingTransactions.push_back(static_cast<unsigned int>(statement.getColumnInt(0)));
+        }
+        statement = m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?");
+        statement.bind(1, static_cast<int>(id));
+        statement = m_database.createStatement("DELETE FROM groups WHERE id = ?");
+        statement.bind(1, static_cast<int>(id));
+        return { !statement.step(), belongingTransactions };
     }
 
     std::pair<bool, std::vector<std::string>> Account::addTransaction(const Transaction& transaction)

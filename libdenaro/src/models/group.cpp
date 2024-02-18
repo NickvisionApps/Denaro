@@ -5,9 +5,7 @@ namespace Nickvision::Money::Shared::Models
     Group::Group(unsigned int id)
         : m_id{ id },
         m_name{ "" },
-        m_description{ "" },
-        m_income{ 0.0 },
-        m_expense{ 0.0 }
+        m_description{ "" }
     {
 
     }
@@ -35,31 +33,6 @@ namespace Nickvision::Money::Shared::Models
     void Group::setDescription(const std::string& description)
     {
         m_description = description;
-    }
-
-    double Group::getIncome() const
-    {
-        return m_income;
-    }
-
-    void Group::setIncome(double income)
-    {
-        m_income = income;
-    }
-
-    double Group::getExpense() const
-    {
-        return m_expense;
-    }
-
-    void Group::setExpense(double expense)
-    {
-        m_expense = expense;
-    }
-
-    double Group::getBalance() const
-    {
-        return m_income - m_expense;
     }
     
     const Color& Group::getColor() const
