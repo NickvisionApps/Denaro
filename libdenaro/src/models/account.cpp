@@ -233,9 +233,9 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnInt(0);
     }
 
-    void Account::changePassword(const std::string& password)
+    bool Account::changePassword(const std::string& password)
     {
-        m_database.changePassword(password);
+        return m_database.changePassword(password);
     }
 
     double Account::getIncome(const std::vector<unsigned int>& transactionIds) const

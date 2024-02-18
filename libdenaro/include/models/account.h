@@ -86,9 +86,10 @@ namespace Nickvision::Money::Shared::Models
         unsigned int getNextAvailableTransactionId() const;
         /**
          * @brief Changes the password of the account.
-         * @param password new password for the account. If removing a password from the account,  
+         * @param password new password for the account. If removing a password from the account
+         * @return True if password changed successfully, else false
          */
-        void changePassword(const std::string& password);
+        bool changePassword(const std::string& password);
         /**
          * @brief Gets the total income amount for the transactions given.
          * @param transactionIds The ids of transactions to consider
