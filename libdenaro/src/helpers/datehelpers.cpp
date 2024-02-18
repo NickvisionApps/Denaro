@@ -17,6 +17,10 @@ namespace Nickvision::Money::Shared
 
     std::string DateHelpers::toUSDateString(const boost::gregorian::date& date, bool pad)
     {
+        if(date.is_not_a_date())
+        {
+            return "";
+        }
         std::stringstream builder;
         if(pad)
         {

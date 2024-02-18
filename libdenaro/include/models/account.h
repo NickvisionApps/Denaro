@@ -160,35 +160,23 @@ namespace Nickvision::Money::Shared::Models
         /**
          * @brief Adds a transaction to the account
          * @param transaction The transaction to add
-         * @return A pair with a boolean representing true if addition was successful (else false) and a vector of strings of new tags
+         * @return True if successful, else false
          */
-        std::pair<bool, std::vector<std::string>> addTransaction(const Transaction& transaction);
+        bool addTransaction(const Transaction& transaction);
         /**
          * @brief Updates a transaction in the account
          * @param transaction The transaction to update
-         * @return A pair with a boolean representing true if update was successful (else false) and a vector of strings of new tags
+         * @param updateGenerated Whether or not to update generated transactions associated with this transaction if it is a source transaction
+         * @return True if successful, else false
          */
-        std::pair<bool, std::vector<std::string>> updateTransaction(const Transaction& transaction);
-        /**
-         * @brief Updates a source transaction in the account
-         * @param transaction The transaction to update
-         * @param updateGenerated Whether or not to update generated transactions associated with the source
-         * @return A pair with a boolean representing true if update was successful (else false) and a vector of strings of new tags
-         */
-        std::pair<bool, std::vector<std::string>> updateSourceTransaction(const Transaction& transaction, bool updateGenerated);
+        bool updateTransaction(const Transaction& transaction, bool updateGenerated);
         /**
          * @brief Deletes a transaction from the account.
          * @param id The id of the transaction to delete
+         * @param deleteGenerated Whether or not to delete generated transactions associated with this transaction if it is a source transaction
          * @return True if successful, else false
          */
-        bool deleteTransaction(unsigned int id);
-        /**
-         * @brief Deletes a source transaction from the account.
-         * @param id The id of the transaction to delete
-         * @param deleteGenerated Whether or not to delete generated transactions associated with the source
-         * @return True if successful, else false
-         */
-        bool deleteSourceTransaction(unsigned int id, bool deleteGenerated);
+        bool deleteTransaction(unsigned int id, bool deleteGenerated);
         /**
          * @brief Deletes generated repeat transactions from the account.
          * @param sourceId The id of the source transaction 
