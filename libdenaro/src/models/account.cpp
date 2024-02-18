@@ -1,6 +1,8 @@
 #include "models/account.h"
+#include <algorithm>
 #include <format>
 #include <libnick/database/sqlstatement.h>
+#include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
 #include "helpers/datehelpers.h"
 #include "models/customcurrency.h"
@@ -104,6 +106,11 @@ namespace Nickvision::Money::Shared::Models
         return m_loggedIn;
     }
 
+    bool Account::changePassword(const std::string& password)
+    {
+        return m_database.changePassword(password);
+    }
+
     const AccountMetadata& Account::getMetadata() const
     {
         return m_metadata;
@@ -135,19 +142,70 @@ namespace Nickvision::Money::Shared::Models
         statement.step();
     }
 
-    const std::unordered_map<unsigned int, Group>& Account::getGroups() const
+    std::unordered_map<unsigned int, Group> Account::getGroups() const
     {
-        return m_groups;
+        std::unordered_map<unsigned int, Group> groups;
+        Group ungrouped{ 0u };
+        ungrouped.setName(_("Ungrouped"));
+        ungrouped.setDescription(_("Transactions without a group"));
+        groups.emplace(std::make_pair(0u, ungrouped));
+        SqlStatement statement{ m_database.createStatement("SELECT * FROM groups") };
+        while(statement.step())
+        {
+            Group g{ static_cast<unsigned int>(statement.getColumnInt(0)) };
+            g.setName(statement.getColumnString(1));
+            g.setDescription(statement.getColumnString(2));
+            g.setColor({ statement.getColumnString(3) });
+            g.setIncome(getGroupIncome(g));
+            g.setExpense(getGroupExpense(g));
+            groups.emplace(std::make_pair(g.getId(), g));
+        }
+        return groups;
     }
 
-    const std::vector<std::string>& Account::getTags() const
+    std::vector<std::string> Account::getTags() const
     {
-        return m_tags;
+        std::vector<std::string> tags;
+        SqlStatement statement{ m_database.createStatement("SELECT DISTINCT(tags) FROM transactions") };
+        while(statement.step())
+        {
+            for(const std::string& tag : StringHelpers::split(statement.getColumnString(0), ","))
+            {
+                if(std::find(tags.begin(), tags.end(), tag) == tags.end())
+                {
+                    tags.push_back(tag);
+                }
+            }
+        }
+        return tags;
     }
 
-    const std::unordered_map<unsigned int, Transaction>& Account::getTransactions() const
+    std::unordered_map<unsigned int, Transaction> Account::getTransactions() const
     {
-        return m_transactions;
+        std::unordered_map<unsigned int, Transaction> transactions;
+        SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions") };
+        while(statement.step())
+        {
+            Transaction t{ static_cast<unsigned int>(statement.getColumnInt(0)) };
+            t.setDate(DateHelpers::fromUSDateString(statement.getColumnString(1)));
+            t.setDescription(statement.getColumnString(2));
+            t.setType(static_cast<TransactionType>(statement.getColumnInt(3)));
+            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(statement.getColumnInt(4)));
+            t.setAmount(statement.getColumnDouble(5));
+            t.setGroupId(statement.getColumnInt(6) <= 0 ? -1 : statement.getColumnInt(6));
+            t.setColor({ statement.getColumnString(7) });
+            t.setReceipt({ statement.getColumnString(8) });
+            t.setRepeatFrom(statement.getColumnInt(9));
+            t.setRepeatEndDate(DateHelpers::fromUSDateString(statement.getColumnString(10)));
+            t.setUseGroupColor(statement.getColumnBool(11));
+            t.setNotes(statement.getColumnString(12));
+            for(const std::string& tag : StringHelpers::split(statement.getColumnString(13), ","))
+            {
+                t.addTag(tag);
+            }
+            transactions.emplace(std::make_pair(t.getId(), t));
+        }
+        return transactions;
     }
 
     std::vector<std::tuple<std::string, double, std::string>> Account::getTransactionReminders() const
@@ -233,39 +291,164 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnInt(0);
     }
 
-    bool Account::changePassword(const std::string& password)
+    size_t Account::getNumberOfGroups() const
     {
-        return m_database.changePassword(password);
+        SqlStatement statement{ m_database.createStatement("SELECT COUNT(id) FROM groups") };
+        statement.step();
+        return static_cast<size_t>(statement.getColumnInt(0));
+    }
+
+    size_t Account::getNumberOfTransactions() const
+    {
+        SqlStatement statement{ m_database.createStatement("SELECT COUNT(id) FROM transactions") };
+        statement.step();
+        return static_cast<size_t>(statement.getColumnInt(0));
     }
 
     double Account::getIncome(const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 0" };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " AND id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     double Account::getExpense(const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 1" };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " AND id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     double Account::getTotal(const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions" };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " WHERE id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        query += ")";
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     double Account::getGroupIncome(const Group& group, const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 0 AND gid = " + std::to_string(group.getId()) };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " AND id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     double Account::getGroupExpense(const Group& group, const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 1 AND gid = " + std::to_string(group.getId()) };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " AND id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     double Account::getGroupTotal(const Group& group, const std::vector<unsigned int>& transactionIds) const
     {
-        return 0.0;
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions WHERE gid = " + std::to_string(group.getId()) };
+        for(size_t i = 0; i < transactionIds.size(); i++)
+        {
+            if(i == 0)
+            {
+                query += " AND id IN (";
+            }
+            query += std::to_string(transactionIds[i]);
+            if(i != transactionIds.size() - 1)
+            {
+                query += ",";
+            }
+            else
+            {
+                query += ")";
+            }
+        }
+        query += ")";
+        SqlStatement statement{ m_database.createStatement(query) };
+        statement.step();
+        return statement.getColumnDouble(0);
     }
 
     bool Account::addGroup(const Group& group)

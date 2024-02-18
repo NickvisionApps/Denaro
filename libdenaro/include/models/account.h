@@ -44,6 +44,12 @@ namespace Nickvision::Money::Shared::Models
          */
         bool login(const std::string& password);
         /**
+         * @brief Changes the password of the account.
+         * @param password new password for the account. If removing a password from the account
+         * @return True if password changed successfully, else false
+         */
+        bool changePassword(const std::string& password);
+        /**
          * @brief Gets the metadata for the account.
          * @return The account metadata 
          */
@@ -54,20 +60,20 @@ namespace Nickvision::Money::Shared::Models
          */
         void setMetadata(const AccountMetadata& metadata);
         /**
-         * @brief Gets the groups for the account.
+         * @brief Gets all the groups for the account.
          * @return The account's groups 
          */
-        const std::unordered_map<unsigned int, Group>& getGroups() const;
+        std::unordered_map<unsigned int, Group> getGroups() const;
         /**
-         * @brief Gets the tags for the account.
+         * @brief Gets all the tags for the account.
          * @return The account's tags 
          */
-        const std::vector<std::string>& getTags() const;
+        std::vector<std::string> getTags() const;
         /**
-         * @brief Gets the transactions for the account.
+         * @brief Gets all the transactions for the account.
          * @return The account's transactions 
          */
-        const std::unordered_map<unsigned int, Transaction>& getTransactions() const;
+        std::unordered_map<unsigned int, Transaction> getTransactions() const;
         /**
          * @brief Gets the transaction reminders for the account.
          * @brief Each reminder is a tuple of the following: (std::string TransactionDescription, double TransactionAmount, std::string When)
@@ -85,11 +91,15 @@ namespace Nickvision::Money::Shared::Models
          */
         unsigned int getNextAvailableTransactionId() const;
         /**
-         * @brief Changes the password of the account.
-         * @param password new password for the account. If removing a password from the account
-         * @return True if password changed successfully, else false
+         * @brief Gets the number of groups in the account.
+         * @return The number of groups in the account
          */
-        bool changePassword(const std::string& password);
+        size_t getNumberOfGroups() const;
+        /**
+         * @brief Gets the number of transactions in the account.
+         * @return The number of transactions in the account
+         */
+        size_t getNumberOfTransactions() const;
         /**
          * @brief Gets the total income amount for the transactions given.
          * @param transactionIds The ids of transactions to consider
@@ -272,9 +282,6 @@ namespace Nickvision::Money::Shared::Models
         bool m_loggedIn;
         mutable Database::SqlDatabase m_database;
         AccountMetadata m_metadata;
-        std::unordered_map<unsigned int, Group> m_groups;
-        std::vector<std::string> m_tags;
-        std::unordered_map<unsigned int, Transaction> m_transactions;
     };
 }
 
