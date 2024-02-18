@@ -21,12 +21,12 @@ namespace Nickvision::Money::Shared::Models
          * @brief Constructs a Transaction.
          * @param id The id of the transaction 
          */
-        Transaction(unsigned int id);
+        Transaction(int id);
         /**
          * @brief Gets the id of the transaction.
          * @return The transaction id 
          */
-        unsigned int getId() const;
+        int getId() const;
         /**
          * @brief Gets the date of the transaction.
          * @return The transaction date 
@@ -170,7 +170,7 @@ namespace Nickvision::Money::Shared::Models
          * @param newDate The date to use for the repeat transaction
          * @return The new repeat transaction
          */
-        Transaction repeat(unsigned int newId, const boost::gregorian::date& newDate) const;
+        Transaction repeat(int newId, const boost::gregorian::date& newDate) const;
         /**
          * @brief Gets whether or not this Transaction is equal to compare Transaction.
          * @param compare The Transaction to compare to
@@ -197,7 +197,7 @@ namespace Nickvision::Money::Shared::Models
         bool operator>(const Transaction& compare) const;
 
     private:
-        unsigned int m_id;
+        int m_id;
         boost::gregorian::date m_date;
         std::string m_description;
         TransactionType m_type;

@@ -15,12 +15,12 @@ namespace Nickvision::Money::Shared::Models
          * @brief Constructs a Group.
          * @param id The id of the group
          */
-        Group(unsigned int id);
+        Group(int id);
         /**
          * @brief Gets the id of the group.
          * @return The id of the group.
          */
-        unsigned int getId() const;
+        int getId() const;
         /**
          * @brief Gets the name of the group.
          * @return The name of the group.
@@ -77,7 +77,7 @@ namespace Nickvision::Money::Shared::Models
         bool operator>(const Group& compare) const;
         
     private:
-        unsigned int m_id;
+        int m_id;
         std::string m_name;
         std::string m_description;
         Color m_color;

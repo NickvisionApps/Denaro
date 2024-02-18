@@ -2,7 +2,7 @@
 
 namespace Nickvision::Money::Shared::Models 
 {
-    Group::Group(unsigned int id)
+    Group::Group(int id)
         : m_id{ id },
         m_name{ "" },
         m_description{ "" }
@@ -10,7 +10,7 @@ namespace Nickvision::Money::Shared::Models
 
     }
 
-    unsigned int Group::getId() const
+    int Group::getId() const
     {
         return m_id;
     }

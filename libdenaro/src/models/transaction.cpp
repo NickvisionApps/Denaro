@@ -3,7 +3,7 @@
 
 namespace Nickvision::Money::Shared::Models
 {
-    Transaction::Transaction(unsigned int id)
+    Transaction::Transaction(int id)
         : m_id{ id },
         m_date{ boost::gregorian::day_clock::local_day() },
         m_type{ TransactionType::Income },
@@ -16,7 +16,7 @@ namespace Nickvision::Money::Shared::Models
 
     }
 
-    unsigned int Transaction::getId() const
+    int Transaction::getId() const
     {
         return m_id;
     }
@@ -171,7 +171,7 @@ namespace Nickvision::Money::Shared::Models
         m_notes = notes;
     }
 
-    Transaction Transaction::repeat(unsigned int newId, const boost::gregorian::date& newDate) const
+    Transaction Transaction::repeat(int newId, const boost::gregorian::date& newDate) const
     {
         Transaction t{ newId };
         t.setDate(newDate);

@@ -144,18 +144,18 @@ namespace Nickvision::Money::Shared::Models
         statement.step();
     }
 
-    std::unordered_map<unsigned int, Group> Account::getGroups() const
+    std::unordered_map<int, Group> Account::getGroups() const
     {
-        std::unordered_map<unsigned int, Group> groups;
+        std::unordered_map<int, Group> groups;
         groups.reserve(getNumberOfGroups());
-        Group ungrouped{ 0u };
+        Group ungrouped{ 0 };
         ungrouped.setName(_("Ungrouped"));
         ungrouped.setDescription(_("Transactions without a group"));
-        groups.emplace(std::make_pair(0u, ungrouped));
+        groups.emplace(std::make_pair(0, ungrouped));
         SqlStatement statement{ m_database.createStatement("SELECT * FROM groups") };
         while(statement.step())
         {
-            Group g{ static_cast<unsigned int>(statement.getColumnInt(0)) };
+            Group g{ statement.getColumnInt(0) };
             g.setName(statement.getColumnString(1));
             g.setDescription(statement.getColumnString(2));
             g.setColor({ statement.getColumnString(3) });
@@ -181,14 +181,14 @@ namespace Nickvision::Money::Shared::Models
         return tags;
     }
 
-    std::unordered_map<unsigned int, Transaction> Account::getTransactions() const
+    std::unordered_map<int, Transaction> Account::getTransactions() const
     {
-        std::unordered_map<unsigned int, Transaction> transactions;
+        std::unordered_map<int, Transaction> transactions;
         transactions.reserve(getNumberOfTransactions());
         SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions") };
         while(statement.step())
         {
-            Transaction t{ static_cast<unsigned int>(statement.getColumnInt(0)) };
+            Transaction t{ statement.getColumnInt(0) };
             t.setDate(DateHelpers::fromUSDateString(statement.getColumnString(1)));
             t.setDescription(statement.getColumnString(2));
             t.setType(static_cast<TransactionType>(statement.getColumnInt(3)));
@@ -279,14 +279,14 @@ namespace Nickvision::Money::Shared::Models
         return reminders;
     }
 
-    unsigned int Account::getNextAvailableGroupId() const
+    int Account::getNextAvailableGroupId() const
     {
         SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM groups WHERE NOT EXISTS (SELECT 1 FROM groups AS g2 WHERE g2.id = groups.id + 1)") };
         statement.step();
         return statement.getColumnInt(0);
     }
 
-    unsigned int Account::getNextAvailableTransactionId() const
+    int Account::getNextAvailableTransactionId() const
     {
         SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM transactions WHERE NOT EXISTS (SELECT 1 FROM transactions AS t2 WHERE t2.id = transactions.id + 1)") };
         statement.step();
@@ -307,7 +307,7 @@ namespace Nickvision::Money::Shared::Models
         return static_cast<size_t>(statement.getColumnInt(0));
     }
 
-    double Account::getIncome(const std::vector<unsigned int>& transactionIds) const
+    double Account::getIncome(const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 0" };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -331,7 +331,7 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getExpense(const std::vector<unsigned int>& transactionIds) const
+    double Account::getExpense(const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 1" };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -355,7 +355,7 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getTotal(const std::vector<unsigned int>& transactionIds) const
+    double Account::getTotal(const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions" };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -380,7 +380,7 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getGroupIncome(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    double Account::getGroupIncome(const Group& group, const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 0 AND gid = " + std::to_string(group.getId()) };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -404,7 +404,7 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getGroupExpense(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    double Account::getGroupExpense(const Group& group, const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 1 AND gid = " + std::to_string(group.getId()) };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -428,7 +428,7 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getGroupTotal(const Group& group, const std::vector<unsigned int>& transactionIds) const
+    double Account::getGroupTotal(const Group& group, const std::vector<int>& transactionIds) const
     {
         std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions WHERE gid = " + std::to_string(group.getId()) };
         for(size_t i = 0; i < transactionIds.size(); i++)
@@ -456,7 +456,7 @@ namespace Nickvision::Money::Shared::Models
     bool Account::addGroup(const Group& group)
     {
         SqlStatement statement{ m_database.createStatement("INSERT INTO groups (id, name, description, rgba) VALUES (?,?,?,?)") };
-        statement.bind(1, static_cast<int>(group.getId()));
+        statement.bind(1, group.getId());
         statement.bind(2, group.getName());
         statement.bind(3, group.getDescription());
         statement.bind(4, group.getColor().toRGBAHexString());
@@ -469,30 +469,30 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(1, group.getName());
         statement.bind(2, group.getDescription());
         statement.bind(3, group.getColor().toRGBAHexString());
-        statement.bind(4, static_cast<int>(group.getId()));
+        statement.bind(4, group.getId());
         return !statement.step();
     }
 
-    std::pair<bool, std::vector<unsigned int>> Account::deleteGroup(const Group& group)
+    std::pair<bool, std::vector<int>> Account::deleteGroup(const Group& group)
     {
-        std::vector<unsigned int> belongingTransactions;
+        std::vector<int> belongingTransactions;
         SqlStatement statement{ m_database.createStatement("SELECT id FROM transactions WHERE gid = ?") };
-        statement.bind(1, static_cast<int>(group.getId()));
+        statement.bind(1, group.getId());
         while(statement.step())
         {
-            belongingTransactions.push_back(static_cast<unsigned int>(statement.getColumnInt(0)));
+            belongingTransactions.push_back(statement.getColumnInt(0));
         }
         statement = m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?");
-        statement.bind(1, static_cast<int>(group.getId()));
+        statement.bind(1, group.getId());
         statement = m_database.createStatement("DELETE FROM groups WHERE id = ?");
-        statement.bind(1, static_cast<int>(group.getId()));
+        statement.bind(1, group.getId());
         return { !statement.step(), belongingTransactions };
     }
 
     bool Account::addTransaction(const Transaction& transaction)
     {
         SqlStatement statement{ m_database.createStatement("INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes, tags) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)") };
-        statement.bind(1, static_cast<int>(transaction.getId()));
+        statement.bind(1, transaction.getId());
         statement.bind(2, DateHelpers::toUSDateString(transaction.getDate()));
         statement.bind(3, transaction.getDescription());
         statement.bind(4, static_cast<int>(transaction.getType()));
@@ -548,7 +548,7 @@ namespace Nickvision::Money::Shared::Models
             }
         }
         statement.bind(13, tags);
-        statement.bind(14, static_cast<int>(transaction.getId()));
+        statement.bind(14, transaction.getId());
         bool res{ !statement.step() };
         if(transaction.getRepeatFrom() == 0)
         {
@@ -566,13 +566,13 @@ namespace Nickvision::Money::Shared::Models
                 updateStatement.bind(9, transaction.getUseGroupColor());
                 updateStatement.bind(10, transaction.getNotes());
                 updateStatement.bind(11, tags);
-                updateStatement.bind(12, static_cast<int>(transaction.getId()));
+                updateStatement.bind(12, transaction.getId());
                 res = res && !updateStatement.step();
             }
             else
             {
                 SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
-                disassociateStatement.bind(1, static_cast<int>(transaction.getId()));
+                disassociateStatement.bind(1, transaction.getId());
                 res = res && !disassociateStatement.step();
             }
             syncRepeatTransactions();
@@ -583,30 +583,30 @@ namespace Nickvision::Money::Shared::Models
     bool Account::deleteTransaction(const Transaction& transaction, bool deleteGenerated)
     {
         SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE id = ?") };
-        statement.bind(1, static_cast<int>(transaction.getId()));
+        statement.bind(1, transaction.getId());
         bool res{ !statement.step() };
         if(transaction.getRepeatFrom() == 0)
         {
             if(deleteGenerated)
             {
                 SqlStatement deleteStatement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
-                deleteStatement.bind(1, static_cast<int>(transaction.getId()));
+                deleteStatement.bind(1, transaction.getId());
                 res = res & !deleteStatement.step();
             }
             else
             {
                 SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
-                disassociateStatement.bind(1, static_cast<int>(transaction.getId()));
+                disassociateStatement.bind(1, transaction.getId());
                 res = res && !disassociateStatement.step();
             }
         }
         return res;
     }
 
-    bool Account::deleteGeneratedTransactions(unsigned int sourceId)
+    bool Account::deleteGeneratedTransactions(int sourceId)
     {
         SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
-        statement.bind(1, static_cast<int>(sourceId));
+        statement.bind(1, sourceId);
         return !statement.step();
     }
 
@@ -656,17 +656,17 @@ namespace Nickvision::Money::Shared::Models
         return {};
     }
 
-    bool Account::exportToCSV(const std::filesystem::path& path, ExportMode exportMode, const std::vector<unsigned int>& filteredIds) const
+    bool Account::exportToCSV(const std::filesystem::path& path, ExportMode exportMode, const std::vector<int>& filteredIds) const
     {
         return false;
     }
 
-    bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<unsigned int>& filteredIds) const
+    bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<int>& filteredIds) const
     {
         return false;
     }
 
-    std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<unsigned int>& filteredIds, int width, int height, bool showLegend) const
+    std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width, int height, bool showLegend) const
     {
         return {};
     }

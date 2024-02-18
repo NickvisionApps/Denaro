@@ -63,7 +63,7 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets all the groups for the account.
          * @return The account's groups 
          */
-        std::unordered_map<unsigned int, Group> getGroups() const;
+        std::unordered_map<int, Group> getGroups() const;
         /**
          * @brief Gets all the tags for the account.
          * @return The account's tags 
@@ -73,7 +73,7 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets all the transactions for the account.
          * @return The account's transactions 
          */
-        std::unordered_map<unsigned int, Transaction> getTransactions() const;
+        std::unordered_map<int, Transaction> getTransactions() const;
         /**
          * @brief Gets the transaction reminders for the account.
          * @brief Each reminder is a tuple of the following: (std::string TransactionDescription, double TransactionAmount, std::string When)
@@ -84,12 +84,12 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets the next available group id.
          * @return The next available group id 
          */
-        unsigned int getNextAvailableGroupId() const;
+        int getNextAvailableGroupId() const;
         /**
          * @brief Gets the next available transaction id.
          * @return The next available transaction id 
          */
-        unsigned int getNextAvailableTransactionId() const;
+        int getNextAvailableTransactionId() const;
         /**
          * @brief Gets the number of groups in the account.
          * @return The number of groups in the account
@@ -105,40 +105,40 @@ namespace Nickvision::Money::Shared::Models
          * @param transactionIds The ids of transactions to consider
          * @return The total income amount 
          */
-        double getIncome(const std::vector<unsigned int>& transactionIds = {}) const;
+        double getIncome(const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Gets the total expense amount for the transactions given.
          * @param transactionIds The ids of transactions to consider
          * @return The total expense amount 
          */
-        double getExpense(const std::vector<unsigned int>& transactionIds = {}) const;
+        double getExpense(const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Gets the total amount for the transactions given.
          * @param transactionIds The ids of transactions to consider
          * @return The total amount 
          */
-        double getTotal(const std::vector<unsigned int>& transactionIds = {}) const;
+        double getTotal(const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Gets the total income amount for the transactions given for a Group.
          * @param group The group to consider
          * @param transactionIds The ids of transactions to consider
          * @return The total income amount 
          */
-        double getGroupIncome(const Group& group, const std::vector<unsigned int>& transactionIds = {}) const;
+        double getGroupIncome(const Group& group, const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Gets the total expense amount for the transactions given for a Group.
          * @param group The group to consider
          * @param transactionIds The ids of transactions to consider
          * @return The total expense amount 
          */
-        double getGroupExpense(const Group& group, const std::vector<unsigned int>& transactionIds = {}) const;
+        double getGroupExpense(const Group& group, const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Gets the total amount for the transactions given for a Group.
          * @param group The group to consider
          * @param transactionIds The ids of transactions to consider
          * @return The total amount 
          */
-        double getGroupTotal(const Group& group, const std::vector<unsigned int>& transactionIds = {}) const;
+        double getGroupTotal(const Group& group, const std::vector<int>& transactionIds = {}) const;
         /**
          * @brief Adds a group to the account.
          * @param group The group to add
@@ -156,7 +156,7 @@ namespace Nickvision::Money::Shared::Models
          * @param group The group to delete
          * @return A pair with a boolean representing true if deletion was successful (else false) and a vector of ids of transactions that belonged to said group
          */
-        std::pair<bool, std::vector<unsigned int>> deleteGroup(const Group& group);
+        std::pair<bool, std::vector<int>> deleteGroup(const Group& group);
         /**
          * @brief Adds a transaction to the account
          * @param transaction The transaction to add
@@ -182,7 +182,7 @@ namespace Nickvision::Money::Shared::Models
          * @param sourceId The id of the source transaction 
          * @return True if successful, else false
          */
-        bool deleteGeneratedTransactions(unsigned int sourceId);
+        bool deleteGeneratedTransactions(int sourceId);
         /**
          * @brief Syncs repeat transactions in the account.
          * @return True if transactions were modified, else false 
@@ -216,7 +216,7 @@ namespace Nickvision::Money::Shared::Models
          * @param exportMode ExportMode
          * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
          */
-        bool exportToCSV(const std::filesystem::path& path, ExportMode exportMode = ExportMode::All, const std::vector<unsigned int>& filteredIds = {}) const;
+        bool exportToCSV(const std::filesystem::path& path, ExportMode exportMode = ExportMode::All, const std::vector<int>& filteredIds = {}) const;
         /**
          * @brief Exports the account to a PDF file.
          * @param path The path to the PDF file
@@ -224,7 +224,7 @@ namespace Nickvision::Money::Shared::Models
          * @param exportMode ExportMode
          * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
          */
-        bool exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode = ExportMode::All, const std::vector<unsigned int>& filteredIds = {}) const;
+        bool exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode = ExportMode::All, const std::vector<int>& filteredIds = {}) const;
         /**
          * @brief Generates a graph.
          * @param type GraphType
@@ -235,7 +235,7 @@ namespace Nickvision::Money::Shared::Models
          * @param showLegend Whether or not to show the graph's legend
          * @return The byte vector of the graph image
          */
-        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, const std::vector<unsigned int>& filteredIds, int width = -1, int height = -1, bool showLegend = true) const;
+        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width = -1, int height = -1, bool showLegend = true) const;
         /**
          * @brief Gets whether or not the object is valid or not.
          * @return True if valid (m_loggedIn), else false 
