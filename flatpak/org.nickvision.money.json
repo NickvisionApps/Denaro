@@ -103,7 +103,7 @@
                 {
                     "type": "archive",
                     "url": "https://downloads.sourceforge.net/project/openjade/opensp/1.5.1/OpenSP-1.5.1.tar.gz",
-                    "sha512": "a7dcc246ba7f58969ecd6d107c7b82dede811e65f375b7aa3e683621f2c6ff3e7dccefdd79098fcadad6cca8bb94c2933c63f4701be2c002f9a56f1bbe6b047e"
+                    "sha512": "c89c256d384001d73669181e0894e7ca083bedc3f8bfd77eb7c2d1e9fc5a7c91a33a0bc5ca50491e3a644bb1f58224b027d996e111e5d82d518f5d9f41c8546a"
                 }
             ]
         },
