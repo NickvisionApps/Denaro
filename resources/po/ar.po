@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-12-06 07:04+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,28 +20,36 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.3-dev\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr "دون مجموعة"
+
+#: libdenaro/src/models/account.cpp:153
+msgid "Transactions without a group"
+msgstr "المعاملات خارج المجموعات"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr "غدًا"
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "بعد أسبوع من الآن"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "شهر واحد من الآن"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 msgid "Two months from now"
 msgstr "بعد شهرين من الآن"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "حوِّل إلى {0}"
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "حوِّل من {0}"
@@ -655,9 +663,6 @@ msgstr "معطَّل"
 #~ msgid "Transactions"
 #~ msgstr "المعاملات"
 
-#~ msgid "Transactions without a group"
-#~ msgstr "المعاملات خارج المجموعات"
-
 #~ msgid "Type"
 #~ msgstr "النوع"
 
@@ -690,9 +695,6 @@ msgstr "معطَّل"
 
 #~ msgid "Unable to overwrite an opened account."
 #~ msgstr "تتعذَّر الكتابة على حساب مفتوح."
-
-#~ msgid "Ungrouped"
-#~ msgstr "دون مجموعة"
 
 #~ msgid "Untagged"
 #~ msgstr "من دون وسم"

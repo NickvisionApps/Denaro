@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -20,28 +20,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr "Sin agrupar"
+
+#: libdenaro/src/models/account.cpp:153
+msgid "Transactions without a group"
+msgstr "Transacciones sin grupo"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr "Mañana"
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "Dentro de una semana"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "Dentro de un mes"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 msgid "Two months from now"
 msgstr "Dentro de dos meses"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Transferir a {0}"
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Transferir desde {0}"
@@ -657,9 +665,6 @@ msgstr "Fuera"
 #~ msgid "Transactions"
 #~ msgstr "Transacciones"
 
-#~ msgid "Transactions without a group"
-#~ msgstr "Transacciones sin grupo"
-
 #~ msgid "Type"
 #~ msgstr "Tipo"
 
@@ -699,9 +704,6 @@ msgstr "Fuera"
 
 #~ msgid "Unable to overwrite an opened account."
 #~ msgstr "No se puede sobrescribir una cuenta abierta."
-
-#~ msgid "Ungrouped"
-#~ msgstr "Sin agrupar"
 
 #~ msgid "Untagged"
 #~ msgstr "Sin etiqueta"

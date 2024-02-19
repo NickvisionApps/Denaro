@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-10-20 04:03+0000\n"
 "Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/nickvision-"
@@ -19,28 +19,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.1\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:153
+#, fuzzy
+msgid "Transactions without a group"
+msgstr "Non se atoparon transaccións"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "Dentro dunha semana"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "Dentro dun mes"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 #, fuzzy
 msgid "Two months from now"
 msgstr "Dentro dun mes"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 msgid "Transfer to {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 msgid "Transfer from {}"
 msgstr ""
 
@@ -508,9 +517,6 @@ msgstr ""
 
 #~ msgid "No Transactions"
 #~ msgstr "Sen transaccións"
-
-#~ msgid "No Transactions Found"
-#~ msgstr "Non se atoparon transaccións"
 
 #~ msgid "No transactions match the specified filters."
 #~ msgstr "Ningunha transacción coincide cos filtro especificados."

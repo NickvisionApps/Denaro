@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,28 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr "Neseskupené"
+
+#: libdenaro/src/models/account.cpp:153
+msgid "Transactions without a group"
+msgstr "Transakce bez skupiny"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr "Zítra"
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "Jeden týden ode dneška"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "Jeden měsíc ode dneška"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 msgid "Two months from now"
 msgstr "Dva měsíce ode dneška"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Převést na {0}"
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Převést z {0}"
@@ -656,9 +664,6 @@ msgstr "Vypnout"
 #~ msgid "Transactions"
 #~ msgstr "Transakce"
 
-#~ msgid "Transactions without a group"
-#~ msgstr "Transakce bez skupiny"
-
 #~ msgid "Type"
 #~ msgstr "Typ"
 
@@ -697,9 +702,6 @@ msgstr "Vypnout"
 
 #~ msgid "Unable to overwrite an opened account."
 #~ msgstr "Nelze přepsat otevřený účet."
-
-#~ msgid "Ungrouped"
-#~ msgstr "Neseskupené"
 
 #~ msgid "Untagged"
 #~ msgstr "Bez štítku"

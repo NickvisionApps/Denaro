@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,28 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr "Ryhmittämätön"
+
+#: libdenaro/src/models/account.cpp:153
+msgid "Transactions without a group"
+msgstr "Tapahtumat ilman ryhmää"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr "Huomenna"
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "Yksi viikko tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "Yksi kuukausi tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 msgid "Two months from now"
 msgstr "Kaksi kuukautta tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Siirrä kohteeseen {0}"
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Siirrä kohteesta {0}"
@@ -591,9 +599,6 @@ msgstr "Pois"
 #~ msgid "Transactions"
 #~ msgstr "Tapahtumat"
 
-#~ msgid "Transactions without a group"
-#~ msgstr "Tapahtumat ilman ryhmää"
-
 #~ msgid "Type"
 #~ msgstr "Tyyppi"
 
@@ -613,9 +618,6 @@ msgstr "Pois"
 #, fuzzy
 #~ msgid "Unable to overwrite an opened account."
 #~ msgstr "Tiliä ei voitu viedä tiedostoon."
-
-#~ msgid "Ungrouped"
-#~ msgstr "Ryhmittämätön"
 
 #, fuzzy
 #~ msgid "Upcoming transactions"

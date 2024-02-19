@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 13:03-0500\n"
+"POT-Creation-Date: 2024-02-19 11:20-0500\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,28 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.2-dev\n"
 
-#: libdenaro/src/models/account.cpp:167
+#: libdenaro/src/models/account.cpp:152
+msgid "Ungrouped"
+msgstr "Sans groupe"
+
+#: libdenaro/src/models/account.cpp:153
+msgid "Transactions without a group"
+msgstr "Transactions sans groupe"
+
+#: libdenaro/src/models/account.cpp:227
 msgid "Tomorrow"
 msgstr "Demain"
 
-#: libdenaro/src/models/account.cpp:171
+#: libdenaro/src/models/account.cpp:231
 msgid "One week from now"
 msgstr "Dans une semaine"
 
-#: libdenaro/src/models/account.cpp:175
+#: libdenaro/src/models/account.cpp:235
 msgid "One month from now"
 msgstr "Dans un mois"
 
-#: libdenaro/src/models/account.cpp:179
+#: libdenaro/src/models/account.cpp:239
 msgid "Two months from now"
 msgstr "Dans deux mois"
 
-#: libdenaro/src/models/account.cpp:332
+#: libdenaro/src/models/account.cpp:634
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Transférer vers {0}"
 
-#: libdenaro/src/models/account.cpp:349
+#: libdenaro/src/models/account.cpp:651
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Transférer depuis {0}"
@@ -658,9 +666,6 @@ msgstr "Désactivé"
 #~ msgid "Transactions"
 #~ msgstr "Transactions"
 
-#~ msgid "Transactions without a group"
-#~ msgstr "Transactions sans groupe"
-
 #~ msgid "Type"
 #~ msgstr "Type"
 
@@ -701,9 +706,6 @@ msgstr "Désactivé"
 
 #~ msgid "Unable to overwrite an opened account."
 #~ msgstr "Impossible de remplacer un compte ouvert."
-
-#~ msgid "Ungrouped"
-#~ msgstr "Sans groupe"
 
 #~ msgid "Untagged"
 #~ msgstr "Sans étiquette"
