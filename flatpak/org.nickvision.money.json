@@ -94,6 +94,25 @@
             ]
         },
         {
+            "name": "libofx",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DENABLE_ICONV=OFF",
+                "-DENABLE_OFX2QIF=OFF",
+                "-DENABLE_OFXDUMP=OFF",
+                "-DENABLE_OFXCONNECT=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/libofx/libofx",
+                    "tag": "0.10.9"
+                }
+            ]
+        },
+        {
             "name": "libxmlplusplus",
             "buildsystem": "meson",
             "config-opts": [
@@ -139,6 +158,20 @@
                     "type": "git",
                     "url": "https://github.com/podofo/podofo",
                     "tag": "0.10.3"
+                }
+            ]
+        },
+        {
+            "name": "rapidcsv",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/d99kris/rapidcsv",
+                    "tag": "v8.80"
                 }
             ]
         },

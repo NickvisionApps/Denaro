@@ -74,6 +74,22 @@ parts:
       - uuid-dev
     override-prime: ''
 
+  libofx:
+    after: [build-deps]
+    source: https://github.com/libofx/libofx.git
+    source-tag: '0.10.9'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_ICONV=OFF
+      - -DENABLE_OFX2QIF=OFF
+      - -DENABLE_OFXDUMP=OFF
+      - -DENABLE_OFXCONNECT=OFF
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
   libxmlplusplus:
     after: [build-deps]
     source: https://github.com/libxmlplusplus/libxmlplusplus.git
@@ -115,8 +131,20 @@ parts:
     build-environment:
       - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
 
+  rapidcsv:
+    after: [build-deps]
+    source: https://github.com/d99kris/rapidcsv.git
+    source-tag: 'v8.80'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
   denaro:
-    after: [build-deps, maddy, libnick, libxmlplusplus, matplotplusplus, podofo]
+    after: [build-deps, maddy, libnick, libofx, libxmlplusplus, matplotplusplus, podofo, rapidcsv]
     plugin: cmake
     source: .
     build-snaps:

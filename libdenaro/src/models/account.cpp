@@ -612,7 +612,12 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::syncRepeatTransactions()
     {
-        return false;
+        //Delete repeat transactions if the date from the original transaction was changed to a smaller date
+        SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom > 0 AND (SELECT fixDate(date) FROM transactions WHERE id = repeatFrom) < fixDate(date)") };
+        bool res{ !statement.step() };
+        //Add missing repeat transactions up until today
+        
+        return res;
     }
 
     std::optional<Transaction> Account::sendTransfer(const Transfer& transfer, const Color& color)
@@ -653,6 +658,23 @@ namespace Nickvision::Money::Shared::Models
 
     ImportResult Account::importFromFile(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
     {
+        if(!std::filesystem::exists(path))
+        {
+            return {};
+        }
+        std::string extension{ StringHelpers::toLower(path.extension().string()) };
+        if(extension == ".csv")
+        {
+            return importFromCSV(path, defaultTransactionColor, defaultGroupColor);
+        }
+        else if(extension == ".ofx")
+        {
+            return importFromOFX(path, defaultTransactionColor);
+        }
+        else if(extension == ".qif")
+        {
+            return importFromQIF(path, defaultTransactionColor, defaultGroupColor);
+        }
         return {};
     }
 
