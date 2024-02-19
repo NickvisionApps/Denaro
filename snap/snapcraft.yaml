@@ -74,8 +74,14 @@ parts:
       - uuid-dev
     override-prime: ''
 
-  libofx:
+  libopensp:
     after: [build-deps]
+    source: https://downloads.sourceforge.net/project/openjade/opensp/1.5.1/OpenSP-1.5.1.tar.gz
+    source-type: tar
+    plugin: autotools
+
+  libofx:
+    after: [build-deps, libopensp]
     source: https://github.com/libofx/libofx.git
     source-tag: '0.10.9'
     source-depth: 1
