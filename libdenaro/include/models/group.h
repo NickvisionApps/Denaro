@@ -7,10 +7,16 @@
 namespace Nickvision::Money::Shared::Models 
 {
     /**
-     * @brief A model of a group for transactions.
+     * @brief A model of a group of transactions.
      */
-    class Group {
+    class Group 
+    {
     public:
+        /**
+         * @brief Constructs a Group.
+         * @brief This default constructor is required for the use of std::unordered_map. It should not be used by clients.
+         */
+        Group();
         /**
          * @brief Constructs a Group.
          * @param id The id of the group

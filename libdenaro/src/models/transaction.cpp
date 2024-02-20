@@ -3,6 +3,19 @@
 
 namespace Nickvision::Money::Shared::Models
 {
+    Transaction::Transaction()
+        : m_id{ -1 },
+        m_date{ boost::gregorian::day_clock::local_day() },
+        m_type{ TransactionType::Income },
+        m_amount{ 0.0 },
+        m_groupId{ -1 },
+        m_useGroupColor{ true },
+        m_repeatInterval{ TransactionRepeatInterval::Never },
+        m_repeatFrom{ -1 }
+    {
+
+    }
+
     Transaction::Transaction(int id)
         : m_id{ id },
         m_date{ boost::gregorian::day_clock::local_day() },
@@ -159,6 +172,11 @@ namespace Nickvision::Money::Shared::Models
         }
         m_tags.erase(find);
         return true;
+    }
+
+    void Transaction::setTags(const std::vector<std::string>& tags)
+    {
+        m_tags = tags;
     }
 
     const std::string& Transaction::getNotes() const

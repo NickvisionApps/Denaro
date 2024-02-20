@@ -38,7 +38,7 @@ namespace Nickvision::Money::Shared::Models
         bool isEncrypted() const;
         /**
          * @brief Logins to the account.
-         * @brief This method also loads the account's metadata into memory.
+         * @brief This method also loads the account's data into memory.
          * @param password The password for the account. If unencrypted, this param must be an empty string
          * @return True if successful, else false
          */
@@ -63,17 +63,17 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets all the groups for the account.
          * @return The account's groups 
          */
-        std::unordered_map<int, Group> getGroups() const;
+        const std::unordered_map<int, Group>& getGroups() const;
         /**
          * @brief Gets all the tags for the account.
          * @return The account's tags 
          */
-        std::vector<std::string> getTags() const;
+        const std::vector<std::string>& getTags() const;
         /**
          * @brief Gets all the transactions for the account.
          * @return The account's transactions 
          */
-        std::unordered_map<int, Transaction> getTransactions() const;
+        const std::unordered_map<int, Transaction>& getTransactions() const;
         /**
          * @brief Gets the transaction reminders for the account.
          * @brief Each reminder is a tuple of the following: (std::string TransactionDescription, double TransactionAmount, std::string When)
@@ -90,16 +90,6 @@ namespace Nickvision::Money::Shared::Models
          * @return The next available transaction id 
          */
         int getNextAvailableTransactionId() const;
-        /**
-         * @brief Gets the number of groups in the account.
-         * @return The number of groups in the account
-         */
-        size_t getNumberOfGroups() const;
-        /**
-         * @brief Gets the number of transactions in the account.
-         * @return The number of transactions in the account
-         */
-        size_t getNumberOfTransactions() const;
         /**
          * @brief Gets the total income amount for the transactions given.
          * @param transactionIds The ids of transactions to consider
@@ -270,6 +260,9 @@ namespace Nickvision::Money::Shared::Models
         bool m_loggedIn;
         mutable Database::SqlDatabase m_database;
         AccountMetadata m_metadata;
+        std::unordered_map<int, Group> m_groups;
+        std::vector<std::string> m_tags;
+        std::unordered_map<int, Transaction> m_transactions;
     };
 }
 

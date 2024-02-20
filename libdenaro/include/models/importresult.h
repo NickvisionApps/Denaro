@@ -25,33 +25,33 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets the list of new transaction ids from the import.
          * @return The list of new transaction ids 
          */
-        const std::vector<unsigned int>& getNewTransactionIds() const;
+        const std::vector<int>& getNewTransactionIds() const;
         /**
          * @brief Gets the list of new group ids from the import.
          * @return The list of new group ids 
          */
-        const std::vector<unsigned int>& getNewGroupIds() const;
+        const std::vector<int>& getNewGroupIds() const;
         /**
          * @brief Gets the list of new tags from the import.
          * @return The list of new tags
          */
         const std::vector<std::string>& getNewTags() const;
         /**
-         * @brief Adds an id to the new transaction ids list.
-         * @brief This method will only add the id if it doesn't already exist in the list.
-         * @param id The id to add 
+         * @brief Adds a transaction id to the new transaction ids list.
+         * @brief This method will only add the transaction id if it doesn't already exist in the list.
+         * @param id The transaction id to add 
          */
-        void addTransactionId(unsigned int id);
+        void addTransaction(int id);
         /**
-         * @brief Adds an id to the new group ids list.
-         * @brief This method will only add the id if it doesn't already exist in the list.
-         * @param id The id to add 
+         * @brief Adds a group id to the new group ids list.
+         * @brief This method will only add the group id if it doesn't already exist in the list.
+         * @param id The group id to add 
          */
-        void addGroupId(unsigned int id);
+        void addGroup(int id);
         /**
-         * @brief Adds a list of tags to the new tags list.
-         * @brief This method will only add non-existing tags. Existing tags will be skipped over to avoid duplicates.
-         * @param tags The list of tags to add 
+         * @brief Adds a list of tags to the new tags list. 
+         * @brief This method will only add tags if they doesn't already exist in the list.
+         * @param tags The tags to add
          */
         void addTags(const std::vector<std::string>& tags);
         /**
@@ -61,8 +61,8 @@ namespace Nickvision::Money::Shared::Models
         operator bool() const;
 
     private:
-        std::vector<unsigned int> m_newTransactionIds;
-        std::vector<unsigned int> m_newGroupIds;
+        std::vector<int> m_newTransactions;
+        std::vector<int> m_newGroups;
         std::vector<std::string> m_newTags;
     };
 }

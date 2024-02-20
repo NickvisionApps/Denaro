@@ -4,6 +4,7 @@
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
+#include <rapidcsv.h>
 #include "helpers/datehelpers.h"
 #include "models/customcurrency.h"
 
@@ -34,6 +35,11 @@ namespace Nickvision::Money::Shared::Models
             {
                 return false;
             }
+            //Register fixdate sql function
+            m_database.registerFunction("fixdate", [](SqlContext& context)
+            {
+                context.result(DateHelpers::toIsoDateString(context.getArgs()[0].getString()));
+            }, 1);
             //Setup metadata table
             m_database.exec("CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)");
             m_database.exec("ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER");
@@ -96,11 +102,47 @@ namespace Nickvision::Money::Shared::Models
                 newStatement.bind(8, m_metadata.getSortFirstToLast());
                 newStatement.step();
             }
-            //Register fixdate sql function
-            m_database.registerFunction("fixdate", [](SqlContext& context)
+            //Get groups
+            Group ungrouped{ 0 };
+            ungrouped.setName(_("Ungrouped"));
+            ungrouped.setDescription(_("Transactions without a group"));
+            m_groups.emplace(std::make_pair(0, ungrouped));
+            SqlStatement groupsStatement{ m_database.createStatement("SELECT * FROM groups") };
+            while(groupsStatement.step())
             {
-                context.result(DateHelpers::toIsoDateString(context.getArgs()[0].getString()));
-            }, 1);
+                Group g{ groupsStatement.getColumnInt(0) };
+                g.setName(groupsStatement.getColumnString(1));
+                g.setDescription(groupsStatement.getColumnString(2));
+                g.setColor({ groupsStatement.getColumnString(3) });
+                m_groups.emplace(std::make_pair(g.getId(), g));
+            }
+            //Get transactions and tags
+            SqlStatement transactionsStatement{ m_database.createStatement("SELECT * FROM transactions") };
+            while(transactionsStatement.step())
+            {
+                Transaction t{ transactionsStatement.getColumnInt(0) };
+                t.setDate(DateHelpers::fromUSDateString(transactionsStatement.getColumnString(1)));
+                t.setDescription(transactionsStatement.getColumnString(2));
+                t.setType(static_cast<TransactionType>(transactionsStatement.getColumnInt(3)));
+                t.setRepeatInterval(static_cast<TransactionRepeatInterval>(transactionsStatement.getColumnInt(4)));
+                t.setAmount(transactionsStatement.getColumnDouble(5));
+                t.setGroupId(transactionsStatement.getColumnInt(6));
+                t.setColor({ transactionsStatement.getColumnString(7) });
+                t.setReceipt({ transactionsStatement.getColumnString(8) });
+                t.setRepeatFrom(transactionsStatement.getColumnInt(9));
+                t.setRepeatEndDate(DateHelpers::fromUSDateString(transactionsStatement.getColumnString(10)));
+                t.setUseGroupColor(transactionsStatement.getColumnBool(11));
+                t.setNotes(transactionsStatement.getColumnString(12));
+                for(const std::string& tag : StringHelpers::split(transactionsStatement.getColumnString(13), ","))
+                {
+                    t.addTag(tag);
+                    if(std::find(m_tags.begin(), m_tags.end(), tag) == m_tags.end())
+                    {
+                        m_tags.push_back(tag);
+                    }
+                }
+                m_transactions.emplace(std::make_pair(t.getId(), t));
+            }
             //Sync repeat transactions
             syncRepeatTransactions();
             m_loggedIn = true;
@@ -144,70 +186,19 @@ namespace Nickvision::Money::Shared::Models
         statement.step();
     }
 
-    std::unordered_map<int, Group> Account::getGroups() const
+    const std::unordered_map<int, Group>& Account::getGroups() const
     {
-        std::unordered_map<int, Group> groups;
-        groups.reserve(getNumberOfGroups());
-        Group ungrouped{ 0 };
-        ungrouped.setName(_("Ungrouped"));
-        ungrouped.setDescription(_("Transactions without a group"));
-        groups.emplace(std::make_pair(0, ungrouped));
-        SqlStatement statement{ m_database.createStatement("SELECT * FROM groups") };
-        while(statement.step())
-        {
-            Group g{ statement.getColumnInt(0) };
-            g.setName(statement.getColumnString(1));
-            g.setDescription(statement.getColumnString(2));
-            g.setColor({ statement.getColumnString(3) });
-            groups.emplace(std::make_pair(g.getId(), g));
-        }
-        return groups;
+        return m_groups;
     }
 
-    std::vector<std::string> Account::getTags() const
+    const std::vector<std::string>& Account::getTags() const
     {
-        std::vector<std::string> tags;
-        SqlStatement statement{ m_database.createStatement("SELECT DISTINCT(tags) FROM transactions") };
-        while(statement.step())
-        {
-            for(const std::string& tag : StringHelpers::split(statement.getColumnString(0), ","))
-            {
-                if(std::find(tags.begin(), tags.end(), tag) == tags.end())
-                {
-                    tags.push_back(tag);
-                }
-            }
-        }
-        return tags;
+        return m_tags;
     }
 
-    std::unordered_map<int, Transaction> Account::getTransactions() const
+    const std::unordered_map<int, Transaction>& Account::getTransactions() const
     {
-        std::unordered_map<int, Transaction> transactions;
-        transactions.reserve(getNumberOfTransactions());
-        SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions") };
-        while(statement.step())
-        {
-            Transaction t{ statement.getColumnInt(0) };
-            t.setDate(DateHelpers::fromUSDateString(statement.getColumnString(1)));
-            t.setDescription(statement.getColumnString(2));
-            t.setType(static_cast<TransactionType>(statement.getColumnInt(3)));
-            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(statement.getColumnInt(4)));
-            t.setAmount(statement.getColumnDouble(5));
-            t.setGroupId(statement.getColumnInt(6));
-            t.setColor({ statement.getColumnString(7) });
-            t.setReceipt({ statement.getColumnString(8) });
-            t.setRepeatFrom(statement.getColumnInt(9));
-            t.setRepeatEndDate(DateHelpers::fromUSDateString(statement.getColumnString(10)));
-            t.setUseGroupColor(statement.getColumnBool(11));
-            t.setNotes(statement.getColumnString(12));
-            for(const std::string& tag : StringHelpers::split(statement.getColumnString(13), ","))
-            {
-                t.addTag(tag);
-            }
-            transactions.emplace(std::make_pair(t.getId(), t));
-        }
-        return transactions;
+        return m_transactions;
     }
 
     std::vector<std::tuple<std::string, double, std::string>> Account::getTransactionReminders() const
@@ -291,20 +282,6 @@ namespace Nickvision::Money::Shared::Models
         SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM transactions WHERE NOT EXISTS (SELECT 1 FROM transactions AS t2 WHERE t2.id = transactions.id + 1)") };
         statement.step();
         return statement.getColumnInt(0);
-    }
-
-    size_t Account::getNumberOfGroups() const
-    {
-        SqlStatement statement{ m_database.createStatement("SELECT COUNT(id) FROM groups") };
-        statement.step();
-        return static_cast<size_t>(statement.getColumnInt(0));
-    }
-
-    size_t Account::getNumberOfTransactions() const
-    {
-        SqlStatement statement{ m_database.createStatement("SELECT COUNT(id) FROM transactions") };
-        statement.step();
-        return static_cast<size_t>(statement.getColumnInt(0));
     }
 
     double Account::getIncome(const std::vector<int>& transactionIds) const
@@ -455,42 +432,81 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::addGroup(const Group& group)
     {
+        if(m_groups.contains(group.getId()) || group.getId() <= 0)
+        {
+            return false;
+        }
         SqlStatement statement{ m_database.createStatement("INSERT INTO groups (id, name, description, rgba) VALUES (?,?,?,?)") };
         statement.bind(1, group.getId());
         statement.bind(2, group.getName());
         statement.bind(3, group.getDescription());
         statement.bind(4, group.getColor().toRGBAHexString());
-        return !statement.step();
+        if(!statement.step())
+        {
+            m_groups.emplace(std::make_pair(group.getId(), group));
+            return true;
+        }
+        return false;
     }
 
     bool Account::updateGroup(const Group& group)
     {
+        if(!m_groups.contains(group.getId()))
+        {
+            return false;
+        }
         SqlStatement statement{ m_database.createStatement("UPDATE groups SET name = ?, description = ?, rgba = ? WHERE id = ?") };
         statement.bind(1, group.getName());
         statement.bind(2, group.getDescription());
         statement.bind(3, group.getColor().toRGBAHexString());
         statement.bind(4, group.getId());
-        return !statement.step();
+        if(!statement.step())
+        {
+            m_groups[group.getId()] = group;
+            return true;
+        }
+        return false;
     }
 
     std::pair<bool, std::vector<int>> Account::deleteGroup(const Group& group)
     {
-        std::vector<int> belongingTransactions;
-        SqlStatement statement{ m_database.createStatement("SELECT id FROM transactions WHERE gid = ?") };
-        statement.bind(1, group.getId());
-        while(statement.step())
+        if(!m_groups.contains(group.getId()))
         {
-            belongingTransactions.push_back(statement.getColumnInt(0));
+            return { false, {} };
         }
-        statement = m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?");
-        statement.bind(1, group.getId());
-        statement = m_database.createStatement("DELETE FROM groups WHERE id = ?");
-        statement.bind(1, group.getId());
-        return { !statement.step(), belongingTransactions };
+        //Get transactions belonging to the group and remove their association with the group
+        std::vector<int> belongingTransactions;
+        SqlStatement updateBelongingStatement{ m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?") };
+        updateBelongingStatement.bind(1, group.getId());
+        if(!updateBelongingStatement.step())
+        {
+            for(std::pair<const int, Transaction>& pair : m_transactions)
+            {
+                if(pair.second.getGroupId() == group.getId())
+                {
+                    belongingTransactions.push_back(pair.first);
+                    pair.second.setGroupId(-1);
+                    pair.second.setUseGroupColor(false);
+                }
+            }
+        }
+        //Delete group
+        SqlStatement deleteGroupStatement{ m_database.createStatement("DELETE FROM groups WHERE id = ?") };
+        deleteGroupStatement.bind(1, group.getId());
+        if(!deleteGroupStatement.step())
+        {
+            m_groups.erase(group.getId());
+            return { !deleteGroupStatement.step(), belongingTransactions };
+        }
+        return { false, {} };
     }
 
     bool Account::addTransaction(const Transaction& transaction)
     {
+        if(m_transactions.contains(transaction.getId()) || transaction.getId() <= 0)
+        {
+            return false;
+        }
         SqlStatement statement{ m_database.createStatement("INSERT INTO transactions (id, date, description, type, repeat, amount, gid, rgba, receipt, repeatFrom, repeatEndDate, useGroupColor, notes, tags) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)") };
         statement.bind(1, transaction.getId());
         statement.bind(2, DateHelpers::toUSDateString(transaction.getDate()));
@@ -508,23 +524,36 @@ namespace Nickvision::Money::Shared::Models
         std::string tags;
         for(size_t i = 0; i < transaction.getTags().size(); i++)
         {
-            tags += transaction.getTags()[i];
+            const std::string& tag{ transaction.getTags()[i] };
+            tags += tag;
             if(i < transaction.getTags().size() - 1)
             {
                 tags += ",";
             }
+            if(std::find(m_tags.begin(), m_tags.end(), tag) == m_tags.end())
+            {
+                m_tags.push_back(tag);
+            }
         }
         statement.bind(14, tags);
-        bool res{ !statement.step() };
-        if(transaction.getRepeatInterval() != TransactionRepeatInterval::Never && transaction.getRepeatFrom() == 0)
+        if(!statement.step())
         {
-            syncRepeatTransactions();
+            m_transactions.emplace(std::make_pair(transaction.getId(), transaction));
+            if(transaction.getRepeatInterval() != TransactionRepeatInterval::Never && transaction.getRepeatFrom() == 0)
+            {
+                syncRepeatTransactions();
+            }
+            return true;
         }
-        return res;
+        return false;
     }
 
     bool Account::updateTransaction(const Transaction& transaction, bool updateGenerated)
     {
+        if(!m_transactions.contains(transaction.getId()))
+        {
+            return false;
+        }
         SqlStatement statement{ m_database.createStatement("UPDATE transactions SET date = ?, description = ?, type = ?, repeat = ?, amount = ?, gid = ?, rgba = ?, receipt = ?, repeatFrom = ?, repeatEndDate = ?, useGroupColor = ?, notes = ?, tags = ? WHERE id = ?") };
         statement.bind(1, DateHelpers::toUSDateString(transaction.getDate()));
         statement.bind(2, transaction.getDescription());
@@ -541,83 +570,180 @@ namespace Nickvision::Money::Shared::Models
         std::string tags;
         for(size_t i = 0; i < transaction.getTags().size(); i++)
         {
-            tags += transaction.getTags()[i];
+            const std::string& tag{ transaction.getTags()[i] };
+            tags += tag;
             if(i < transaction.getTags().size() - 1)
             {
                 tags += ",";
             }
+            if(std::find(m_tags.begin(), m_tags.end(), tag) == m_tags.end())
+            {
+                m_tags.push_back(tag);
+            }
         }
         statement.bind(13, tags);
         statement.bind(14, transaction.getId());
-        bool res{ !statement.step() };
-        if(transaction.getRepeatFrom() == 0)
+        if(!statement.step())
         {
-            if(updateGenerated)
+            m_transactions[transaction.getId()] = transaction;
+            if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
-                SqlStatement updateStatement{ m_database.createStatement("UPDATE transactions SET description = ?, type = ?, repeat = ?, amount = ?, gid = ?, rgba = ?, receipt = ?, repeatEndDate = ?, useGroupColor = ?, notes = ?, tags = ? WHERE repeatFrom = ?") };
-                updateStatement.bind(1, transaction.getDescription());
-                updateStatement.bind(2, static_cast<int>(transaction.getType()));
-                updateStatement.bind(3, static_cast<int>(transaction.getRepeatInterval()));
-                updateStatement.bind(4, transaction.getAmount());
-                updateStatement.bind(5, transaction.getGroupId());
-                updateStatement.bind(6, transaction.getColor().toRGBAHexString());
-                updateStatement.bind(7, transaction.getReceipt().toString());
-                updateStatement.bind(8, DateHelpers::toUSDateString(transaction.getRepeatEndDate()));
-                updateStatement.bind(9, transaction.getUseGroupColor());
-                updateStatement.bind(10, transaction.getNotes());
-                updateStatement.bind(11, tags);
-                updateStatement.bind(12, transaction.getId());
-                res = res && !updateStatement.step();
+                if(updateGenerated)
+                {
+                    SqlStatement updateStatement{ m_database.createStatement("UPDATE transactions SET description = ?, type = ?, repeat = ?, amount = ?, gid = ?, rgba = ?, receipt = ?, repeatEndDate = ?, useGroupColor = ?, notes = ?, tags = ? WHERE repeatFrom = ?") };
+                    updateStatement.bind(1, transaction.getDescription());
+                    updateStatement.bind(2, static_cast<int>(transaction.getType()));
+                    updateStatement.bind(3, static_cast<int>(transaction.getRepeatInterval()));
+                    updateStatement.bind(4, transaction.getAmount());
+                    updateStatement.bind(5, transaction.getGroupId());
+                    updateStatement.bind(6, transaction.getColor().toRGBAHexString());
+                    updateStatement.bind(7, transaction.getReceipt().toString());
+                    updateStatement.bind(8, DateHelpers::toUSDateString(transaction.getRepeatEndDate()));
+                    updateStatement.bind(9, transaction.getUseGroupColor());
+                    updateStatement.bind(10, transaction.getNotes());
+                    updateStatement.bind(11, tags);
+                    updateStatement.bind(12, transaction.getId());
+                    if(!updateStatement.step())
+                    {
+                        for(std::pair<const int, Transaction>& pair : m_transactions)
+                        {
+                            if(pair.second.getRepeatFrom() == transaction.getId())
+                            {
+                                pair.second.setDescription(transaction.getDescription());
+                                pair.second.setType(transaction.getType());
+                                pair.second.setRepeatInterval(transaction.getRepeatInterval());
+                                pair.second.setAmount(transaction.getAmount());
+                                pair.second.setGroupId(transaction.getGroupId());
+                                pair.second.setColor(transaction.getColor());
+                                pair.second.setReceipt(transaction.getReceipt());
+                                pair.second.setRepeatEndDate(transaction.getRepeatEndDate());
+                                pair.second.setUseGroupColor(transaction.getUseGroupColor());
+                                pair.second.setNotes(transaction.getNotes());
+                                pair.second.setTags(transaction.getTags());
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
+                    disassociateStatement.bind(1, transaction.getId());
+                    if(!disassociateStatement.step())
+                    {
+                        for(std::pair<const int, Transaction>& pair : m_transactions)
+                        {
+                            if(pair.second.getRepeatFrom() == transaction.getId())
+                            {
+                                pair.second.setRepeatInterval(TransactionRepeatInterval::Never);
+                                pair.second.setRepeatFrom(-1);
+                                pair.second.setRepeatEndDate({});
+                            }
+                        }
+                    }
+                }
+                syncRepeatTransactions();
             }
-            else
-            {
-                SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
-                disassociateStatement.bind(1, transaction.getId());
-                res = res && !disassociateStatement.step();
-            }
-            syncRepeatTransactions();
+            return true;
         }
-        return res;
+        return false;
     }
 
     bool Account::deleteTransaction(const Transaction& transaction, bool deleteGenerated)
     {
+        if(!m_transactions.contains(transaction.getId()))
+        {
+            return false;
+        }
         SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE id = ?") };
         statement.bind(1, transaction.getId());
-        bool res{ !statement.step() };
-        if(transaction.getRepeatFrom() == 0)
+        if(!statement.step())
         {
-            if(deleteGenerated)
+            if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
-                SqlStatement deleteStatement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
-                deleteStatement.bind(1, transaction.getId());
-                res = res & !deleteStatement.step();
+                if(deleteGenerated)
+                {
+                    SqlStatement deleteStatement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
+                    deleteStatement.bind(1, transaction.getId());
+                    if(!deleteStatement.step())
+                    {
+                        for (std::unordered_map<int, Transaction>::iterator it = m_transactions.begin(); it != m_transactions.end();) 
+                        {
+                            if(it->second.getRepeatFrom() == transaction.getId())
+                            {
+                                it = m_transactions.erase(it);
+                            }
+                            else
+                            {
+                                it++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
+                    disassociateStatement.bind(1, transaction.getId());
+                    if(!disassociateStatement.step())
+                    {
+                        for(std::pair<const int, Transaction>& pair : m_transactions)
+                        {
+                            if(pair.second.getRepeatFrom() == transaction.getId())
+                            {
+                                pair.second.setRepeatInterval(TransactionRepeatInterval::Never);
+                                pair.second.setRepeatFrom(-1);
+                                pair.second.setRepeatEndDate({});
+                            }
+                        }
+                    }
+                }
             }
-            else
-            {
-                SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
-                disassociateStatement.bind(1, transaction.getId());
-                res = res && !disassociateStatement.step();
-            }
+            return true;
         }
-        return res;
+        return false;
     }
 
     bool Account::deleteGeneratedTransactions(int sourceId)
     {
         SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
         statement.bind(1, sourceId);
-        return !statement.step();
+        if(!statement.step())
+        {
+            for (std::unordered_map<int, Transaction>::iterator it = m_transactions.begin(); it != m_transactions.end();) 
+            {
+                if(it->second.getRepeatFrom() == sourceId)
+                {
+                    it = m_transactions.erase(it);
+                }
+                else
+                {
+                    it++;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     bool Account::syncRepeatTransactions()
     {
         //Delete repeat transactions if the date from the original transaction was changed to a smaller date
-        SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom > 0 AND (SELECT fixDate(date) FROM transactions WHERE id = repeatFrom) < fixDate(date)") };
-        bool res{ !statement.step() };
+        SqlStatement deleteExtra{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom > 0 AND (SELECT fixDate(date) FROM transactions WHERE id = repeatFrom) < fixDate(date)") };
+        if(!deleteExtra.step())
+        {
+            for (std::unordered_map<int, Transaction>::iterator it = m_transactions.begin(); it != m_transactions.end();) 
+            {
+                if(it->second.getRepeatFrom() > 0)
+                {
+                    if(it->second.getDate() < m_transactions[it->second.getRepeatFrom()].getDate())
+                    {
+                        m_transactions.erase(it->first);
+                    }
+                }
+            }
+        }
         //Add missing repeat transactions up until today
         
-        return res;
+        return true;
     }
 
     std::optional<Transaction> Account::sendTransfer(const Transfer& transfer, const Color& color)
@@ -695,7 +821,54 @@ namespace Nickvision::Money::Shared::Models
 
     ImportResult Account::importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
     {
-        return {};
+        /**
+         * CSV Header:
+         * ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA
+         */
+        rapidcsv::Document csv{ path.string(), rapidcsv::LabelParams(0, 0), rapidcsv::SeparatorParams(';'), rapidcsv::ConverterParams(true), rapidcsv::LineReaderParams(true, '#', true) };
+        if(csv.GetColumnCount() != 13) //id column excluded
+        {
+            return {};
+        }
+        ImportResult result;
+        for(int i = 0; i < csv.GetRowCount(); i++)
+        {
+            Transaction t{ getNextAvailableTransactionId() };
+            t.setDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(i, 0)));
+            t.setDescription(csv.GetCell<std::string>(i, 1));
+            t.setType(static_cast<TransactionType>(csv.GetCell<int>(i, 2)));
+            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(csv.GetCell<int>(i, 3)));
+            t.setRepeatFrom(csv.GetCell<int>(i, 4));
+            t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(i, 5)));
+            t.setAmount(csv.GetCell<double>(i, 6));
+            t.setColor({ csv.GetCell<std::string>(i, 7) });
+            if(!t.getColor())
+            {
+                t.setColor(defaultTransactionColor);
+            }
+            t.setUseGroupColor(csv.GetCell<bool>(i, 8));
+            t.setGroupId(csv.GetCell<int>(i, 9));
+            if(t.getGroupId() != -1 && !m_groups.contains(t.getGroupId()))
+            {
+                Group g{ t.getGroupId() };
+                g.setName(csv.GetCell<std::string>(i, 10));
+                g.setDescription(csv.GetCell<std::string>(i, 11));
+                g.setColor({ csv.GetCell<std::string>(i, 12) });
+                if(!g.getColor())
+                {
+                    g.setColor(defaultGroupColor);
+                }
+                if(addGroup(g))
+                {
+                    result.addGroup(g.getId());
+                }
+            }
+            if(addTransaction(t))
+            {
+                result.addTransaction(t.getId());
+            }
+        }
+        return result;
     }
 
     ImportResult Account::importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor)

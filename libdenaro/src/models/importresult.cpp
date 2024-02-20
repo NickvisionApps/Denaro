@@ -5,17 +5,17 @@ namespace Nickvision::Money::Shared::Models
 {
     bool ImportResult::empty() const
     {
-        return m_newTransactionIds.empty() && m_newGroupIds.empty() && m_newTags.empty();
+        return m_newTransactions.empty() && m_newGroups.empty() && m_newTags.empty();
     }
 
-    const std::vector<unsigned int>& ImportResult::getNewTransactionIds() const
+    const std::vector<int>& ImportResult::getNewTransactionIds() const
     {
-        return m_newTransactionIds;
+        return m_newTransactions;
     }
 
-    const std::vector<unsigned int>& ImportResult::getNewGroupIds() const
+    const std::vector<int>& ImportResult::getNewGroupIds() const
     {
-        return m_newGroupIds;
+        return m_newGroups;
     }
 
     const std::vector<std::string>& ImportResult::getNewTags() const
@@ -23,19 +23,19 @@ namespace Nickvision::Money::Shared::Models
         return m_newTags;
     }
 
-    void ImportResult::addTransactionId(unsigned int id)
+    void ImportResult::addTransaction(int id)
     {
-        if(std::find(m_newTransactionIds.begin(), m_newTransactionIds.end(), id) == m_newTransactionIds.end())
+        if(std::find(m_newTransactions.begin(), m_newTransactions.end(), id) == m_newTransactions.end())
         {
-            m_newTransactionIds.push_back(id);
+            m_newTransactions.push_back(id);
         }
     }
 
-    void ImportResult::addGroupId(unsigned int id)
+    void ImportResult::addGroup(int id)
     {
-        if(std::find(m_newGroupIds.begin(), m_newGroupIds.end(), id) == m_newGroupIds.end())
+        if(std::find(m_newGroups.begin(), m_newGroups.end(), id) == m_newGroups.end())
         {
-            m_newGroupIds.push_back(id);
+            m_newGroups.push_back(id);
         }
     }
 

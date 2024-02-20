@@ -19,6 +19,11 @@ namespace Nickvision::Money::Shared::Models
     public:
         /**
          * @brief Constructs a Transaction.
+         * @brief This default constructor is required for the use of std::unordered_map. It should not be used by clients.
+         */
+        Transaction();
+        /**
+         * @brief Constructs a Transaction.
          * @param id The id of the transaction 
          */
         Transaction(int id);
@@ -154,6 +159,12 @@ namespace Nickvision::Money::Shared::Models
          * @return True if successful, else false if the tag does not exist in the transaction
          */
         bool removeTag(const std::string& tag);
+        /**
+         * @brief Sets the tags of the transaction.
+         * @brief This method overwrites the current tags.
+         * @param tags The new transaction tags 
+         */
+        void setTags(const std::vector<std::string>& tags);
         /**
          * @brief Gets the notes of the transaction.
          * @return The transaction notes  

@@ -2,6 +2,14 @@
 
 namespace Nickvision::Money::Shared::Models 
 {
+    Group::Group()
+        : m_id{ -1 },
+        m_name{ "" },
+        m_description{ "" }
+    {
+
+    }
+
     Group::Group(int id)
         : m_id{ id },
         m_name{ "" },
