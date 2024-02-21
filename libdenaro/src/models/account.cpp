@@ -334,7 +334,7 @@ namespace Nickvision::Money::Shared::Models
 
     double Account::getTotal(const std::vector<int>& transactionIds) const
     {
-        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions)" };
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions" };
         for(size_t i = 0; i < transactionIds.size(); i++)
         {
             if(i == 0)
@@ -407,7 +407,7 @@ namespace Nickvision::Money::Shared::Models
 
     double Account::getGroupTotal(const Group& group, const std::vector<int>& transactionIds) const
     {
-        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions) WHERE gid = " + std::to_string(group.getId()) };
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions WHERE gid = " + std::to_string(group.getId()) };
         for(size_t i = 0; i < transactionIds.size(); i++)
         {
             if(i == 0)
