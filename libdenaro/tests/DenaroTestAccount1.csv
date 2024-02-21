@@ -1,6 +1,6 @@
 ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA
-1;1/2/2024;Income;0;0;-1;;5;#fcba03;0;-1;;;
-2;1/3/2024;Income;0;0;-1;;5;#fcba03;0;-1;;;
+1;1/2/2024;Income;0;0;-1;;5;#fcba03;0;1;Pay;Income from Work;#fcba03
+2;1/3/2024;Income;0;0;-1;;5;#fcba03;0;1;Pay;Income from Work;#fcba03
 3;1/4/2024;Income;0;0;-1;;5;#fcba03;0;-1;;;
 4;1/5/2024;Income;0;0;-1;;5;#fcba03;0;-1;;;
 5;1/5/2024;Income;0;0;-1;;5;#fcba03;0;-1;;;
@@ -401,8 +401,8 @@ ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;Use
 400;12/29/2023;Income;0;0;-1;;10;#fcbaaa;0;-1;;;
 401;12/30/2023;Income;0;0;-1;;10;#fcbaaa;0;-1;;;
 402;12/31/2023;Income;0;0;-1;;10;#fcbaaa;0;-1;;;
-403;1/1/2022;Expense;1;0;-1;0;2;#fcbaaa;0;-1;;;
-404;1/2/2022;Expense;1;0;-1;0;2;#fcbaaa;0;-1;;;
+403;1/1/2022;Expense;1;0;-1;0;2;#fcbaaa;0;2;Bills;;#fcbaaa
+404;1/2/2022;Expense;1;0;-1;0;2;#fcbaaa;0;2;Bills;;#fcbaaa
 405;1/3/2022;Expense;1;0;-1;0;2;#fcbaaa;0;-1;;;
 406;1/4/2022;Expense;1;0;-1;0;2;#fcbaaa;0;-1;;;
 407;1/5/2022;Expense;1;0;-1;0;2;#fcbaaa;0;-1;;;

@@ -825,42 +825,49 @@ namespace Nickvision::Money::Shared::Models
          * CSV Header:
          * ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA
          */
-        rapidcsv::Document csv{ path.string(), rapidcsv::LabelParams(0, 0), rapidcsv::SeparatorParams(';'), rapidcsv::ConverterParams(true), rapidcsv::LineReaderParams(true, '#', true) };
-        if(csv.GetColumnCount() != 13) //id column excluded
+        rapidcsv::Document csv{ path.string(), rapidcsv::LabelParams(0, -1), rapidcsv::SeparatorParams(';'), rapidcsv::ConverterParams(true), rapidcsv::LineReaderParams(true, '#', true) };
+        if(csv.GetColumnCount() != 14)
         {
             return {};
         }
         ImportResult result;
         for(size_t i = 0; i < csv.GetRowCount(); i++)
         {
-            Transaction t{ getNextAvailableTransactionId() };
-            t.setDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(0, i)));
-            t.setDescription(csv.GetCell<std::string>(1, i));
-            t.setType(static_cast<TransactionType>(csv.GetCell<int>(2, i)));
-            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(csv.GetCell<int>(3, i)));
-            t.setRepeatFrom(csv.GetCell<int>(4, i));
-            t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(5, i)));
-            t.setAmount(csv.GetCell<double>(6, i));
-            t.setColor({ csv.GetCell<std::string>(7, i) });
+            if(m_transactions.contains(csv.GetCell<int>(0, i))) //Transaction IDs must be unique
+            {
+                continue;
+            }
+            Transaction t{ csv.GetCell<int>(0, i) };
+            t.setDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(1, i)));
+            t.setDescription(csv.GetCell<std::string>(2, i));
+            t.setType(static_cast<TransactionType>(csv.GetCell<int>(3, i)));
+            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(csv.GetCell<int>(4, i)));
+            t.setRepeatFrom(csv.GetCell<int>(5, i));
+            t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(6, i)));
+            t.setAmount(csv.GetCell<double>(7, i));
+            t.setColor({ csv.GetCell<std::string>(8, i) });
             if(!t.getColor())
             {
                 t.setColor(defaultTransactionColor);
             }
-            t.setUseGroupColor(static_cast<bool>(csv.GetCell<int>(8, i)));
-            t.setGroupId(csv.GetCell<int>(9, i));
+            t.setUseGroupColor(static_cast<bool>(csv.GetCell<int>(9, i)));
+            t.setGroupId(csv.GetCell<int>(10, i));
             if(t.getGroupId() != -1 && !m_groups.contains(t.getGroupId()))
             {
                 Group g{ t.getGroupId() };
-                g.setName(csv.GetCell<std::string>(10, i));
-                g.setDescription(csv.GetCell<std::string>(11, i));
-                g.setColor({ csv.GetCell<std::string>(12, i) });
-                if(!g.getColor())
+                g.setName(csv.GetCell<std::string>(11, i));
+                if(!g.getName().empty()) //Group names must not be empty
                 {
-                    g.setColor(defaultGroupColor);
-                }
-                if(addGroup(g))
-                {
-                    result.addGroup(g.getId());
+                    g.setDescription(csv.GetCell<std::string>(12, i));
+                    g.setColor({ csv.GetCell<std::string>(13, i) });
+                    if(!g.getColor())
+                    {
+                        g.setColor(defaultGroupColor);
+                    }
+                    if(addGroup(g))
+                    {
+                        result.addGroup(g.getId());
+                    }
                 }
             }
             if(addTransaction(t))

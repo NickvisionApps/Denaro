@@ -46,4 +46,5 @@ TEST_F(AccountTest, ImportTestAccount1)
 {
     ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount1.csv", {}, {}) };
     ASSERT_EQ(result.getNewTransactionIds().size(), 1498);
+    ASSERT_EQ(result.getNewGroupIds().size(), 2);
 }
