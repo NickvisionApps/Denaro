@@ -41,3 +41,9 @@ TEST_F(AccountTest, EncryptedAccount)
 {
     ASSERT_TRUE(m_account->changePassword(m_password));
 }
+
+TEST_F(AccountTest, ImportTestAccount1)
+{
+    ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount1.csv", {}, {}) };
+    ASSERT_EQ(result.getNewTransactionIds().size(), 1498);
+}

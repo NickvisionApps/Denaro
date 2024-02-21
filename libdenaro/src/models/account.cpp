@@ -272,14 +272,14 @@ namespace Nickvision::Money::Shared::Models
 
     int Account::getNextAvailableGroupId() const
     {
-        SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM groups WHERE NOT EXISTS (SELECT 1 FROM groups AS g2 WHERE g2.id = groups.id + 1)") };
+        SqlStatement statement{ m_database.createStatement("SELECT IFNULL(MIN(id + 1), 1) AS next_id FROM groups WHERE NOT EXISTS (SELECT 1 FROM groups AS g2 WHERE g2.id = groups.id + 1)") };
         statement.step();
         return statement.getColumnInt(0);
     }
 
     int Account::getNextAvailableTransactionId() const
     {
-        SqlStatement statement{ m_database.createStatement("SELECT MIN(id + 1) AS next_id FROM transactions WHERE NOT EXISTS (SELECT 1 FROM transactions AS t2 WHERE t2.id = transactions.id + 1)") };
+        SqlStatement statement{ m_database.createStatement("SELECT IFNULL(MIN(id + 1), 1) AS next_id FROM transactions WHERE NOT EXISTS (SELECT 1 FROM transactions AS t2 WHERE t2.id = transactions.id + 1)") };
         statement.step();
         return statement.getColumnInt(0);
     }
@@ -334,7 +334,7 @@ namespace Nickvision::Money::Shared::Models
 
     double Account::getTotal(const std::vector<int>& transactionIds) const
     {
-        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions" };
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions)" };
         for(size_t i = 0; i < transactionIds.size(); i++)
         {
             if(i == 0)
@@ -407,7 +407,7 @@ namespace Nickvision::Money::Shared::Models
 
     double Account::getGroupTotal(const Group& group, const std::vector<int>& transactionIds) const
     {
-        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions WHERE gid = " + std::to_string(group.getId()) };
+        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions) WHERE gid = " + std::to_string(group.getId()) };
         for(size_t i = 0; i < transactionIds.size(); i++)
         {
             if(i == 0)
@@ -831,29 +831,29 @@ namespace Nickvision::Money::Shared::Models
             return {};
         }
         ImportResult result;
-        for(int i = 0; i < csv.GetRowCount(); i++)
+        for(size_t i = 0; i < csv.GetRowCount(); i++)
         {
             Transaction t{ getNextAvailableTransactionId() };
-            t.setDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(i, 0)));
-            t.setDescription(csv.GetCell<std::string>(i, 1));
-            t.setType(static_cast<TransactionType>(csv.GetCell<int>(i, 2)));
-            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(csv.GetCell<int>(i, 3)));
-            t.setRepeatFrom(csv.GetCell<int>(i, 4));
-            t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(i, 5)));
-            t.setAmount(csv.GetCell<double>(i, 6));
-            t.setColor({ csv.GetCell<std::string>(i, 7) });
+            t.setDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(0, i)));
+            t.setDescription(csv.GetCell<std::string>(1, i));
+            t.setType(static_cast<TransactionType>(csv.GetCell<int>(2, i)));
+            t.setRepeatInterval(static_cast<TransactionRepeatInterval>(csv.GetCell<int>(3, i)));
+            t.setRepeatFrom(csv.GetCell<int>(4, i));
+            t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(5, i)));
+            t.setAmount(csv.GetCell<double>(6, i));
+            t.setColor({ csv.GetCell<std::string>(7, i) });
             if(!t.getColor())
             {
                 t.setColor(defaultTransactionColor);
             }
-            t.setUseGroupColor(csv.GetCell<bool>(i, 8));
-            t.setGroupId(csv.GetCell<int>(i, 9));
+            t.setUseGroupColor(static_cast<bool>(csv.GetCell<int>(8, i)));
+            t.setGroupId(csv.GetCell<int>(9, i));
             if(t.getGroupId() != -1 && !m_groups.contains(t.getGroupId()))
             {
                 Group g{ t.getGroupId() };
-                g.setName(csv.GetCell<std::string>(i, 10));
-                g.setDescription(csv.GetCell<std::string>(i, 11));
-                g.setColor({ csv.GetCell<std::string>(i, 12) });
+                g.setName(csv.GetCell<std::string>(10, i));
+                g.setDescription(csv.GetCell<std::string>(11, i));
+                g.setColor({ csv.GetCell<std::string>(12, i) });
                 if(!g.getColor())
                 {
                     g.setColor(defaultGroupColor);
