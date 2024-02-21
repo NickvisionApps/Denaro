@@ -139,16 +139,6 @@ namespace Nickvision::Money::Shared::Models
          */
         void setInsertSeparator(InsertSeparatorTrigger separator);
         /**
-         * @brief Gets the CSV backup folder path.
-         * @return The CSV backup folder path 
-         */
-        std::string getCSVBackupFolder() const;
-        /**
-         * @brief Sets the csv backup folder path.
-         * @param csv The new csv backup folder path 
-         */
-        void setCSVBackupFolder(const std::string& csv);
-        /**
          * @brief Gets whether or not to show graphs by default.
          * @return True to show graphs by default, else false
          */

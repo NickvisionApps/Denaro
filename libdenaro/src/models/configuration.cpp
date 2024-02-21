@@ -213,16 +213,6 @@ namespace Nickvision::Money::Shared::Models
         m_json["InsertSeparator"] = static_cast<int>(separator);
     }
 
-    std::string Configuration::getCSVBackupFolder() const
-    {
-        return m_json.get("CSVBackupFolder", "").asString();
-    }
-
-    void Configuration::setCSVBackupFolder(const std::string& csv)
-    {
-        m_json["CSVBackupFolder"] = csv;
-    }
-
     bool Configuration::getShowGraphs() const
     {
         return m_json.get("ShowGraphs", true).asBool();
