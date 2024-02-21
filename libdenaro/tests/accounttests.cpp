@@ -40,6 +40,17 @@ TEST_F(AccountTest, Login)
 TEST_F(AccountTest, EncryptedAccount)
 {
     ASSERT_TRUE(m_account->changePassword(m_password));
+    ASSERT_TRUE(m_account->isEncrypted());
+}
+
+TEST_F(AccountTest, UpdateMetadata)
+{
+    AccountMetadata metadata{ m_account->getMetadata() };
+    metadata.setName("Piggy Bank");
+    metadata.setType(AccountType::Savings);
+    ASSERT_NO_THROW(m_account->setMetadata(metadata));
+    ASSERT_TRUE(m_account->getMetadata().getName() == "Piggy Bank");
+    ASSERT_TRUE(m_account->getMetadata().getType() == AccountType::Savings);
 }
 
 TEST_F(AccountTest, ImportTestAccount1)
@@ -47,4 +58,5 @@ TEST_F(AccountTest, ImportTestAccount1)
     ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount1.csv", {}, {}) };
     ASSERT_EQ(result.getNewTransactionIds().size(), 1498);
     ASSERT_EQ(result.getNewGroupIds().size(), 2);
+    ASSERT_TRUE(m_account->getTotal() > 0);
 }
