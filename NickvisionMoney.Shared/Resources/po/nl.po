@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-02-15 21:03+0000\n"
+"PO-Revision-Date: 2024-02-21 14:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -498,15 +498,15 @@ msgstr "Aantekeningen"
 
 #: ../../../Controllers/AccountViewController.cs:978
 msgid "Nothing to import from the file."
-msgstr ""
+msgstr "Niets om uit het bestand te importeren."
 
 #: ../../../Models/Account.cs:2107
 msgid "One month from now"
-msgstr ""
+msgstr "Over een maand"
 
 #: ../../../Models/Account.cs:2103
 msgid "One week from now"
-msgstr ""
+msgstr "Over een week"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:188
 msgid "Open"
@@ -565,7 +565,7 @@ msgstr "De herhaalperiode is gewijzigd"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:76
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "Resultaat is gekopieerd naar klem­bord."
 
 #: ../../../Models/Account.cs:1660
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:58
@@ -714,7 +714,7 @@ msgstr "Philip Goto https://philipgoto.nl/"
 
 #: ../../../Models/Account.cs:2111
 msgid "Two months from now"
-msgstr ""
+msgstr "Over twee maanden"
 
 #: ../../../Models/Account.cs:1720
 msgid "Type"
@@ -896,7 +896,7 @@ msgstr "Aangepaste valuta gebruiken"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:236
 msgid "Amount Display Style"
-msgstr ""
+msgstr "Weergave­stijl van hoeveel­heid"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:178
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:194
@@ -1041,9 +1041,8 @@ msgid "Toggle Tags Visibility"
 msgstr "Tags tonen/verbergen"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:208
-#, fuzzy
 msgid "Select All Tags Filters"
-msgstr "Alle groepsfilters selecteren"
+msgstr "Alle tag-filters selecteren"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:215
 msgid "Unselect Tags Filters"
@@ -1137,9 +1136,8 @@ msgid "Result"
 msgstr "Resultaat"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:87
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Geen recente accounts"
+msgstr "Resultaat­hoeveelheid kopiëren"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1467,7 +1465,7 @@ msgstr "Unieke kleur gebruiken"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:228
 msgid "Enter a new tag name..."
-msgstr ""
+msgstr "Voer nieuwe tag-naam in…"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:233
 msgid "Add Tag"
@@ -1522,14 +1520,12 @@ msgid "Conversion Needed"
 msgstr "Conversie benodigd"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:89
-#, fuzzy
 msgid "Use Custom Rates"
-msgstr "Aangepaste valuta gebruiken"
+msgstr "Aangepaste wissel­koersen gebruiken"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:90
-#, fuzzy
 msgid "Enter the conversion rates manually"
-msgstr "Voer conversie hier in"
+msgstr "Voer wisselkoersen handmatig in"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:117
 msgctxt "Button"
