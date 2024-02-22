@@ -119,16 +119,6 @@ namespace Nickvision::Money::Shared::Models
          */
         void setAccountBusinessColor(const Color& color);
         /**
-         * @brief Gets whether or not to use native digits for amount values.
-         * @return True for native digits, else false 
-         */
-        bool getUseNativeDigits() const;
-        /**
-         * @brief Sets whether or not to use native digits for amount values.
-         * @param useNativeDigits True to use native digits, else false 
-         */
-        void setUseNativeDigits(bool useNativeDigits);
-        /**
          * @brief Gets the trigger for inserting decimal separators.
          * @return InsertSeparatorTrigger
          */

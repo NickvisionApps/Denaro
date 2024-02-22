@@ -72,7 +72,7 @@ namespace Nickvision::Money::Shared
         return curr;
     }
 
-    std::string CurrencyHelpers::toAmountString(double amount, const Currency& currency, bool useNativeDigits, bool showCurrencySymbol, bool overwriteDecimal)
+    std::string CurrencyHelpers::toAmountString(double amount, const Currency& currency, bool showCurrencySymbol, bool overwriteDecimal)
     {
         std::stringstream builder;
         builder.imbue({ builder.getloc(), new NumberFormat(currency) });
@@ -85,11 +85,11 @@ namespace Nickvision::Money::Shared
         {
             if(currency.getAmountStyle() == AmountStyle::SymbolNumber)
             {
-                builder << (amount < 0 ? "−" : "") << currency.getSymbol();
+                builder << (amount < 0 ? "\u2212" : "") << currency.getSymbol();
             }
             else if(currency.getAmountStyle() == AmountStyle::SymbolSpaceNumber)
             {
-                builder << (amount < 0 ? "−" : "") << currency.getSymbol() << " ";
+                builder << (amount < 0 ? "\u2212" : "") << currency.getSymbol() << " ";
             }
         }
         builder << (amount < 0 ? amount * -1 : amount);
@@ -97,19 +97,13 @@ namespace Nickvision::Money::Shared
         {
             if(currency.getAmountStyle() == AmountStyle::NumberSymbol)
             {
-                builder << currency.getSymbol() << (amount < 0 ? "−" : "");
+                builder << currency.getSymbol() << (amount < 0 ? "\u2212" : "");
             }
             else if(currency.getAmountStyle() == AmountStyle::NumberSpaceSymbol)
             {
-                builder << " " << currency.getSymbol() << (amount < 0 ? "−" : "");
+                builder << " " << currency.getSymbol() << (amount < 0 ? "\u2212" : "");
             }
         }
-        return useNativeDigits ? replaceNativeDigits(builder.str()) : builder.str();
-    }
-
-    std::string CurrencyHelpers::replaceNativeDigits(const std::string& s)
-    {
-        //TODO
-        return "";
+        return builder.str();
     }
 }

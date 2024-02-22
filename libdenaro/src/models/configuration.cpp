@@ -193,16 +193,6 @@ namespace Nickvision::Money::Shared::Models
         m_json["AccountBusinessColor"] = color.toRGBAString(false);
     }
 
-    bool Configuration::getUseNativeDigits() const
-    {
-        return m_json.get("UseNativeDigits", true).asBool();
-    }
-
-    void Configuration::setUseNativeDigits(bool useNativeDigits)
-    {
-        m_json["UseNativeDigits"] = useNativeDigits;
-    }
-
     InsertSeparatorTrigger Configuration::getInsertSeparator() const
     {
         return static_cast<InsertSeparatorTrigger>(m_json.get("InsertSeparator", static_cast<int>(InsertSeparatorTrigger::NumpadOnly)).asInt());
