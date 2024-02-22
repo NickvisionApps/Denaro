@@ -46,12 +46,12 @@ namespace Nickvision::Money::Shared::Models
         m_useCustomCurrency = useCustomCurrency;
     }
 
-    const CustomCurrency& AccountMetadata::getCustomCurrency() const
+    const Currency& AccountMetadata::getCustomCurrency() const
     {
         return m_customCurrency;
     }
 
-    void AccountMetadata::setCustomCurrency(const CustomCurrency& customCurrency)
+    void AccountMetadata::setCustomCurrency(const Currency& customCurrency)
     {
         m_customCurrency = customCurrency;
     }

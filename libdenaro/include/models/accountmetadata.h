@@ -3,7 +3,7 @@
 
 #include <string>
 #include "accounttype.h"
-#include "customcurrency.h"
+#include "currency.h"
 #include "remindersthreshold.h"
 #include "sortby.h"
 #include "transactiontype.h"
@@ -57,12 +57,12 @@ namespace Nickvision::Money::Shared::Models
          * @brief getUseCustomCurrency() should be checked first to determine whether or not to utilize this custom currency.
          * @return The custom currency of the account
          */
-        const CustomCurrency& getCustomCurrency() const;
+        const Currency& getCustomCurrency() const;
         /**
          * @brief Sets the custom currency of the account.
          * @param customCurrency The new custom currency of the account 
          */
-        void setCustomCurrency(const CustomCurrency& customCurrency);
+        void setCustomCurrency(const Currency& customCurrency);
         /**
          * @brief Gets the default transaction type of the account.
          * @return The default transaction type of the account 
@@ -128,7 +128,7 @@ namespace Nickvision::Money::Shared::Models
         std::string m_name;
         AccountType m_type;
         bool m_useCustomCurrency;
-        CustomCurrency m_customCurrency;
+        Currency m_customCurrency;
         TransactionType m_defaultTransactionType;
         RemindersThreshold m_transactionRemindersThreshold;
         bool m_showGroupsList;

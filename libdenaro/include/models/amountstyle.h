@@ -11,19 +11,19 @@ namespace Nickvision::Money::Shared::Models
         /**
          * @brief $n 
          */
-        SignNumber = 0,
+        SymbolNumber = 0,
         /**
          * @brief n$ 
          */
-        NumberSign,
+        NumberSymbol,
         /**
          * @brief $ n 
          */
-        SignSpaceNumber,
+        SymbolSpaceNumber,
         /**
          * @brief n $
          */
-        NumberSpaceSign
+        NumberSpaceSymbol
     };
 }
 

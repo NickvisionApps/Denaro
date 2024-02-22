@@ -6,7 +6,7 @@
 #include <libnick/localization/gettext.h>
 #include <rapidcsv.h>
 #include "helpers/datehelpers.h"
-#include "models/customcurrency.h"
+#include "models/currency.h"
 
 using namespace Nickvision::Database;
 
@@ -69,9 +69,9 @@ namespace Nickvision::Money::Shared::Models
                 m_metadata.setName(statement.getColumnString(1));
                 m_metadata.setType(static_cast<AccountType>(statement.getColumnInt(2)));
                 m_metadata.setUseCustomCurrency(statement.getColumnBool(3));
-                CustomCurrency curr{ statement.getColumnString(4), statement.getColumnString(5) };
-                curr.setDecimalSeparator(statement.getColumnString(10));
-                curr.setGroupSeparator(statement.getColumnString(11));
+                Currency curr{ statement.getColumnString(4), statement.getColumnString(5) };
+                curr.setDecimalSeparator(statement.getColumnString(10)[0]);
+                curr.setGroupSeparator(statement.getColumnString(11)[0]);
                 curr.setDecimalDigits(statement.getColumnInt(12));
                 curr.setAmountStyle(static_cast<AmountStyle>(statement.getColumnInt(15)));
                 m_metadata.setCustomCurrency(curr);
@@ -173,8 +173,8 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(3, m_metadata.getUseCustomCurrency());
         statement.bind(4, m_metadata.getCustomCurrency().getSymbol());
         statement.bind(5, m_metadata.getCustomCurrency().getCode());
-        statement.bind(10, m_metadata.getCustomCurrency().getDecimalSeparator());
-        statement.bind(11, m_metadata.getCustomCurrency().getGroupSeparator());
+        statement.bind(10, std::to_string(m_metadata.getCustomCurrency().getDecimalSeparator()));
+        statement.bind(11, std::to_string(m_metadata.getCustomCurrency().getGroupSeparator()));
         statement.bind(12, m_metadata.getCustomCurrency().getDecimalDigits());
         statement.bind(15, static_cast<int>(m_metadata.getCustomCurrency().getAmountStyle()));
         statement.bind(6, static_cast<int>(m_metadata.getDefaultTransactionType()));
@@ -726,6 +726,7 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::syncRepeatTransactions()
     {
+        m_database.exec("BEGIN TRANSACTION");
         //Delete repeat transactions if the date from the original transaction was changed to a smaller date
         SqlStatement deleteExtra{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom > 0 AND (SELECT fixDate(date) FROM transactions WHERE id = repeatFrom) < fixDate(date)") };
         if(!deleteExtra.step())
@@ -741,8 +742,8 @@ namespace Nickvision::Money::Shared::Models
                 }
             }
         }
-        //Add missing repeat transactions up until today
-        
+        //TODO: Add missing repeat transactions up until today
+        m_database.exec("COMMIT");
         return true;
     }
 
@@ -831,6 +832,7 @@ namespace Nickvision::Money::Shared::Models
             return {};
         }
         ImportResult result;
+        m_database.exec("BEGIN TRANSACTION");
         for(size_t i = 0; i < csv.GetRowCount(); i++)
         {
             if(m_transactions.contains(csv.GetCell<int>(0, i))) //Transaction IDs must be unique
@@ -875,6 +877,7 @@ namespace Nickvision::Money::Shared::Models
                 result.addTransaction(t.getId());
             }
         }
+        m_database.exec("COMMIT");
         return result;
     }
 
