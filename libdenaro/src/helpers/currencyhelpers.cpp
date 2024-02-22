@@ -6,12 +6,11 @@
 
 using namespace Nickvision::Money::Shared::Models;
 
-class MoneyFormat : public std::moneypunct<char>
+class NumberFormat : public std::numpunct<char>
 {
 public:
-    MoneyFormat(const Currency& currency, bool showCurrencySymbol)
-        : m_currency{ currency },
-        m_showCurrencySymbol{ showCurrencySymbol }
+    NumberFormat(const Currency& currency)
+        : m_currency{ currency }
     {
         
     }
@@ -28,95 +27,83 @@ public:
 
     std::string do_grouping() const override
     {
-        return "\3";
-    }
-
-    std::string do_curr_symbol() const override
-    {
-        return m_showCurrencySymbol ? m_currency.getSymbol() : "";
-    }
-
-    std::money_base::pattern do_pos_format() const override
-    {
-        switch(m_currency.getAmountStyle())
-        {
-        case AmountStyle::SymbolNumber:
-            return { sign, symbol, none, value };
-        case AmountStyle::NumberSymbol:
-            return { value, none, symbol, sign };
-        case AmountStyle::SymbolSpaceNumber:
-            return { sign, symbol, space, value };
-        case AmountStyle::NumberSpaceSymbol:
-            return { value, space, symbol, sign };
-        default:
-            return { sign, symbol, none, value };
-        }
-    }
-
-    std::money_base::pattern do_neg_format() const override
-    {
-        return do_pos_format();
+        return "\003";
     }
 
 private:
     Currency m_currency;
-    bool m_showCurrencySymbol;
 };
 
 namespace Nickvision::Money::Shared
 {
-    const Currency& CurrencyHelpers::getSystemCurrency()
+    Currency CurrencyHelpers::getSystemCurrency()
     {
-        static std::unique_ptr<Currency> systemCurrency;
-        if(!systemCurrency)
+        Currency curr;
+        curr.setSymbol(std::use_facet<std::moneypunct<char>>(std::locale("")).curr_symbol());
+        curr.setCode(std::use_facet<std::moneypunct<char, true>>(std::locale("")).curr_symbol());
+        curr.setDecimalSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).decimal_point());
+        curr.setGroupSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).thousands_sep());
+        int numberIndex{ -1 };
+        int signIndex{ -1 };
+        int spaceIndex{ -1 };
+        for(int i = 0; i < 4; i++)
         {
-            systemCurrency = std::make_unique<Currency>();
-            const std::moneypunct<char>& money{ std::use_facet<std::moneypunct<char>>(std::locale("")) };
-            systemCurrency->setSymbol(money.curr_symbol());
-            systemCurrency->setCode(std::use_facet<std::moneypunct<char, true>>(std::locale("")).curr_symbol());
-            systemCurrency->setDecimalSeparator(money.decimal_point());
-            systemCurrency->setGroupSeparator(money.thousands_sep());
-            int numberIndex{ -1 };
-            int signIndex{ -1 };
-            int spaceIndex{ -1 };
-            for(int i = 0; i < 4; i++)
+            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::value)
             {
-                if(money.pos_format().field[i] == std::moneypunct<char>::value)
-                {
-                    numberIndex = i;
-                }
-                if(money.pos_format().field[i] == std::moneypunct<char>::sign)
-                {
-                    signIndex = i;
-                }
-                if(money.pos_format().field[i] == std::moneypunct<char>::space)
-                {
-                    spaceIndex = i;
-                }
+                numberIndex = i;
             }
-            if(signIndex < numberIndex)
+            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::sign)
             {
-                systemCurrency->setAmountStyle(spaceIndex == -1 ? AmountStyle::SymbolNumber : AmountStyle::SymbolSpaceNumber);
+                signIndex = i;
             }
-            else
+            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::space)
             {
-                systemCurrency->setAmountStyle(spaceIndex == -1 ? AmountStyle::NumberSymbol : AmountStyle::NumberSpaceSymbol);
+                spaceIndex = i;
             }
+        }     
+        if(signIndex < numberIndex)
+        {
+            curr.setAmountStyle(spaceIndex == -1 ? AmountStyle::SymbolNumber : AmountStyle::SymbolSpaceNumber);
         }
-        return *systemCurrency;
+        else
+        {
+            curr.setAmountStyle(spaceIndex == -1 ? AmountStyle::NumberSymbol : AmountStyle::NumberSpaceSymbol);
+        }
+        return curr;
     }
 
-    std::string CurrencyHelpers::toAmountString(double amount, Currency currency, bool useNativeDigits, bool showCurrencySymbol, bool overwriteDecimal)
+    std::string CurrencyHelpers::toAmountString(double amount, const Currency& currency, bool useNativeDigits, bool showCurrencySymbol, bool overwriteDecimal)
     {
-        MoneyFormat format{ currency, showCurrencySymbol };
         std::stringstream builder;
-        builder.imbue(std::locale(builder.getloc(), &format));
+        builder.imbue({ builder.getloc(), new NumberFormat(currency) });
         builder << std::fixed;
         if(!overwriteDecimal)
         {
             builder << std::setprecision(currency.getDecimalDigits());
         }
-        builder << std::put_money(amount);
+        if(showCurrencySymbol)
+        {
+            if(currency.getAmountStyle() == AmountStyle::SymbolNumber)
+            {
+                builder << (amount < 0 ? "−" : "") << currency.getSymbol();
+            }
+            else if(currency.getAmountStyle() == AmountStyle::SymbolSpaceNumber)
+            {
+                builder << (amount < 0 ? "−" : "") << currency.getSymbol() << " ";
+            }
+        }
+        builder << (amount < 0 ? amount * -1 : amount);
+        if(showCurrencySymbol)
+        {
+            if(currency.getAmountStyle() == AmountStyle::NumberSymbol)
+            {
+                builder << currency.getSymbol() << (amount < 0 ? "−" : "");
+            }
+            else if(currency.getAmountStyle() == AmountStyle::NumberSpaceSymbol)
+            {
+                builder << " " << currency.getSymbol() << (amount < 0 ? "−" : "");
+            }
+        }
         return useNativeDigits ? replaceNativeDigits(builder.str()) : builder.str();
     }
 

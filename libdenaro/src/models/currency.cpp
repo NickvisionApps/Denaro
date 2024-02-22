@@ -54,10 +54,6 @@ namespace Nickvision::Money::Shared::Models
 
     void Currency::setDecimalSeparator(char separator)
     {
-        if(separator == m_groupSeparator)
-        {
-            return;
-        }
         m_decimalSeparator = separator;
     }
 
@@ -68,10 +64,6 @@ namespace Nickvision::Money::Shared::Models
 
     void Currency::setGroupSeparator(char separator)
     {
-        if(separator == m_decimalSeparator)
-        {
-            return;
-        }
         m_groupSeparator = separator;
     }
 

@@ -1,13 +1,16 @@
 ﻿#include "controllers/mainwindowcontroller.h"
 #include <ctime>
 #include <format>
+#include <locale>
 #include <sstream>
 #include <thread>
-#include <boost/locale.hpp>
 #include <libnick/app/aura.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
 #include "models/configuration.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 using namespace Nickvision::Money::Shared::Models;
 using namespace Nickvision::App;
@@ -92,7 +95,16 @@ namespace Nickvision::Money::Shared::Controllers
         {
             builder << "Running locally" << std::endl;
         }
-        builder << StringHelpers::split(boost::locale::util::get_system_locale(), ".")[0] << std::endl;
+#ifdef _WIN32
+        LCID lcid = GetThreadLocale();
+        wchar_t name[LOCALE_NAME_MAX_LENGTH];
+        if(LCIDToLocaleName(lcid, name, LOCALE_NAME_MAX_LENGTH, 0) > 0)
+        {
+            builder << StringHelpers::toString(name) << std::endl;
+        }
+#elif defined(__linux__)
+        builder << std::locale("").name() << std::endl;
+#endif
         if (!extraInformation.empty())
         {
             builder << extraInformation << std::endl;

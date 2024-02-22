@@ -56,8 +56,6 @@ namespace Nickvision::Money::Shared::Models
         char getDecimalSeparator() const;
         /**
          * @brief Sets the decimal separator of the currency.
-         * @brief If the new decimal separator is the same as the current group separator, the new decimal separator will not be set.
-         * @brief If the new decimal separator is empty, the new decimal separator will not be set.
          * @param separator The new decimal separator of the currency 
          */
         void setDecimalSeparator(char separator);
@@ -68,7 +66,6 @@ namespace Nickvision::Money::Shared::Models
         char getGroupSeparator() const;
         /**
          * @brief Sets the group separator of the currency.
-         * @brief If the new group separator is the same as the current decimal separator, the new group separator will not be set.
          * @param separator The new group separator of the currency 
          */
         void setGroupSeparator(char separator);
