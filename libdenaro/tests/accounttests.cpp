@@ -68,3 +68,18 @@ TEST_F(AccountTest, ExportTestAccount)
     ASSERT_TRUE(std::filesystem::exists(exportPath));
     std::filesystem::remove(exportPath);
 }
+
+TEST_F(AccountTest, UpdateTransaction2)
+{
+    Transaction t{ m_account->getTransactions().at(2) };
+    t.setDescription("New and improved description");
+    t.setAmount(100);
+    ASSERT_TRUE(m_account->updateTransaction(t));
+}
+
+TEST_F(AccountTest, CheckUpdatedTransaction2)
+{
+    Transaction t{ m_account->getTransactions().at(2) };
+    ASSERT_TRUE(t.getDescription() == "New and improved description");
+    ASSERT_TRUE(t.getAmount() == 100);
+}

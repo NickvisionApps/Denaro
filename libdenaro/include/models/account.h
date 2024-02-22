@@ -159,14 +159,14 @@ namespace Nickvision::Money::Shared::Models
          * @param updateGenerated Whether or not to update generated transactions associated with this transaction if it is a source transaction
          * @return True if successful, else false
          */
-        bool updateTransaction(const Transaction& transaction, bool updateGenerated);
+        bool updateTransaction(const Transaction& transaction, bool updateGenerated = true);
         /**
          * @brief Deletes a transaction from the account.
          * @param transaction The transaction to delete
          * @param deleteGenerated Whether or not to delete generated transactions associated with this transaction if it is a source transaction
          * @return True if successful, else false
          */
-        bool deleteTransaction(const Transaction& transaction, bool deleteGenerated);
+        bool deleteTransaction(const Transaction& transaction, bool deleteGenerated = true);
         /**
          * @brief Deletes generated repeat transactions from the account.
          * @param sourceId The id of the source transaction 
@@ -242,14 +242,14 @@ namespace Nickvision::Money::Shared::Models
          */
         ImportResult importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor);
         /**
-         * @brief Imports transactions from an OFX file.
+         * @brief Imports transactions from an OFX/OFC file.
          * @param path The path to the file to import
          * @param defaultTransactionColor The default color for transactions
          * @return ImportResult 
          */
         ImportResult importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor);
         /**
-         * @brief Imports transactions from a CSV file.
+         * @brief Imports transactions from a QIF file.
          * @param path The path to the file to import
          * @param defaultTransactionColor The default color for transactions
          * @param defaultGroupColor The default color for groups

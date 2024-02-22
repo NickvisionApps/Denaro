@@ -4,6 +4,7 @@
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
+#include <libofx/libofx.h>
 #include <rapidcsv.h>
 #include "helpers/datehelpers.h"
 #include "models/currency.h"
@@ -794,7 +795,7 @@ namespace Nickvision::Money::Shared::Models
         {
             return importFromCSV(path, defaultTransactionColor, defaultGroupColor);
         }
-        else if(extension == ".ofx")
+        else if(extension == ".ofx" || extension == ".ofc")
         {
             return importFromOFX(path, defaultTransactionColor);
         }
@@ -927,7 +928,78 @@ namespace Nickvision::Money::Shared::Models
 
     ImportResult Account::importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor)
     {
-        return {};
+        LibofxContextPtr libofx{ libofx_get_new_context() };
+        ImportResult result;
+        std::tuple<Account*, ImportResult*, Color> cbData{ this, &result, defaultTransactionColor };
+        //Callback to read account information
+        ofx_set_account_cb(libofx, [](const struct OfxAccountData accountData, void* data)
+        {
+            Account& account{ *static_cast<Account*>(data) };
+            AccountMetadata metadata{ account.getMetadata() };
+            bool metadataChanged{ false };
+            //Only update the account name if it wasn't already set by the user
+            if(accountData.account_number_valid && metadata.getName() == account.m_path.stem().string())
+            {
+                metadata.setName(accountData.account_name);
+                metadataChanged = true;
+            }
+            //Only update the account type if it wasn't already set by the user
+            if(accountData.account_type_valid && metadata.getType() == AccountType::Checking)
+            {
+                if(accountData.account_type == OfxAccountData::AccountType::OFX_CHECKING)
+                {
+                    metadata.setType(AccountType::Checking);
+                }
+                else if(accountData.account_type == OfxAccountData::AccountType::OFX_SAVINGS)
+                {
+                    metadata.setType(AccountType::Savings);
+                }
+                metadataChanged = true;
+            }
+            if(metadataChanged)
+            {
+                account.setMetadata(metadata);
+            }
+            return 0;
+        }, this);
+        //Callback to read transactions
+        ofx_set_transaction_cb(libofx, [](const struct OfxTransactionData transactionData, void* data)
+        {
+            std::tuple<Account*, ImportResult*, Color>& cbData{ *static_cast<std::tuple<Account*, ImportResult*, Color>*>(data) };
+            Transaction t{ std::get<0>(cbData)->getNextAvailableTransactionId() };
+            if(transactionData.date_posted_valid)
+            {
+                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_posted)));
+            }
+            else if(transactionData.date_initiated_valid)
+            {
+                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_initiated)));
+            }
+            if(transactionData.name_valid)
+            {
+                t.setDescription(transactionData.name);
+            }
+            else if(transactionData.memo_valid)
+            {
+                t.setDescription(transactionData.memo);
+            }
+            if(transactionData.amount_valid)
+            {
+                t.setType(transactionData.amount >= 0 ? TransactionType::Income : TransactionType::Expense);
+                t.setAmount(transactionData.amount);
+            }
+            t.setColor(std::get<2>(cbData));
+            if(std::get<0>(cbData)->addTransaction(t))
+            {
+                std::get<1>(cbData)->addTransaction(t.getId());
+            }
+            return 0;
+        }, &cbData);
+        m_database.exec("BEGIN TRANSACTION");
+        libofx_proc_file(libofx, path.string().c_str(), LibofxFileFormat::AUTODETECT);
+        m_database.exec("COMMIT");
+        libofx_free_context(libofx);
+        return result;
     }
 
     ImportResult Account::importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
