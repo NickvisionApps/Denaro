@@ -19,11 +19,6 @@ namespace Nickvision::Money::Shared::Models
     public:
         /**
          * @brief Constructs a Transaction.
-         * @brief This default constructor is required for the use of std::unordered_map. It should not be used by clients.
-         */
-        Transaction();
-        /**
-         * @brief Constructs a Transaction.
          * @param id The id of the transaction 
          */
         Transaction(int id);

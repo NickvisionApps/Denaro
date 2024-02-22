@@ -462,7 +462,7 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(4, group.getId());
         if(!statement.step())
         {
-            m_groups[group.getId()] = group;
+            m_groups.at(group.getId()) = group;
             return true;
         }
         return false;
@@ -585,7 +585,7 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(14, transaction.getId());
         if(!statement.step())
         {
-            m_transactions[transaction.getId()] = transaction;
+            m_transactions.at(transaction.getId()) = transaction;
             if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
                 if(updateGenerated)
@@ -735,7 +735,7 @@ namespace Nickvision::Money::Shared::Models
             {
                 if(it->second.getRepeatFrom() > 0)
                 {
-                    if(it->second.getDate() < m_transactions[it->second.getRepeatFrom()].getDate())
+                    if(it->second.getDate() < m_transactions.at(it->second.getRepeatFrom()).getDate())
                     {
                         m_transactions.erase(it->first);
                     }
@@ -807,7 +807,51 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::exportToCSV(const std::filesystem::path& path, ExportMode exportMode, const std::vector<int>& filteredIds) const
     {
-        return false;
+        /**
+         * CSV Header:
+         * ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA
+         */
+        rapidcsv::Document csv{ {}, rapidcsv::LabelParams(), rapidcsv::SeparatorParams(';'), rapidcsv::ConverterParams(true) };
+        csv.SetColumnName(0, "ID");
+        csv.SetColumnName(1, "Date");
+        csv.SetColumnName(2, "Description");
+        csv.SetColumnName(3, "Type");
+        csv.SetColumnName(4, "RepeatInterval");
+        csv.SetColumnName(5, "RepeatFrom");
+        csv.SetColumnName(6, "RepeatEndDate");
+        csv.SetColumnName(7, "Amount");
+        csv.SetColumnName(8, "RGBA");
+        csv.SetColumnName(9, "UseGroupColor");
+        csv.SetColumnName(10, "Group");
+        csv.SetColumnName(11, "GroupName");
+        csv.SetColumnName(12, "GroupDescription");
+        csv.SetColumnName(13, "GroupRGBA");
+        for(const std::pair<const int, Transaction>& pair : m_transactions)
+        {
+            if(filteredIds.empty() || std::find(filteredIds.begin(), filteredIds.end(), pair.first) != filteredIds.end())
+            {
+                csv.SetCell<int>(0, pair.first, pair.first);
+                csv.SetCell<std::string>(1, pair.first, DateHelpers::toUSDateString(pair.second.getDate()));
+                csv.SetCell<std::string>(2, pair.first, pair.second.getDescription());
+                csv.SetCell<int>(3, pair.first, static_cast<int>(pair.second.getType()));
+                csv.SetCell<int>(4, pair.first, static_cast<int>(pair.second.getRepeatInterval()));
+                csv.SetCell<int>(5, pair.first, pair.second.getRepeatFrom());
+                csv.SetCell<std::string>(6, pair.first, DateHelpers::toUSDateString(pair.second.getRepeatEndDate()));
+                csv.SetCell<double>(7, pair.first, pair.second.getAmount());
+                csv.SetCell<std::string>(8, pair.first, pair.second.getColor().toRGBAHexString());
+                csv.SetCell<int>(9, pair.first, pair.second.getUseGroupColor());
+                if(pair.second.getGroupId() != -1)
+                {
+                    const Group& group{ m_groups.at(pair.second.getGroupId()) };
+                    csv.SetCell<int>(10, pair.first, group.getId());
+                    csv.SetCell<std::string>(11, pair.first, group.getName());
+                    csv.SetCell<std::string>(12, pair.first, group.getDescription());
+                    csv.SetCell<std::string>(13, pair.first, group.getColor().toRGBAHexString());
+                }
+            }
+        }
+        csv.Save(path.string());
+        return true;
     }
 
     bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<int>& filteredIds) const
