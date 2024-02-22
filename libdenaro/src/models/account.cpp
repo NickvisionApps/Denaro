@@ -43,26 +43,13 @@ namespace Nickvision::Money::Shared::Models
             }, 1);
             //Setup metadata table
             m_database.exec("CREATE TABLE IF NOT EXISTS metadata (id INTEGER PRIMARY KEY, name TEXT, type INTEGER, useCustomCurrency INTEGER, customSymbol TEXT, customCode TEXT, defaultTransactionType INTEGER, showGroupsList INTEGER, sortFirstToLast INTEGER, sortTransactionsBy INTEGER, customDecimalSeparator TEXT, customGroupSeparator TEXT, customDecimalDigits INTEGER, showTagsList INTEGER, transactionRemindersThreshold INTEGER, customAmountStyle INTEGER)");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN sortTransactionsBy INTEGER");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN customDecimalSeparator TEXT");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN customGroupSeparator TEXT");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN customDecimalDigits INTEGER");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN showTagsList INTEGER");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN transactionRemindersThreshold INTEGER");
-            m_database.exec("ALTER TABLE metadata ADD COLUMN customAmountStyle INTEGER");
+            m_database.exec("ALTER TABLE metadata ADD COLUMN IF NOT EXISTS sortTransactionsBy INTEGER, ADD COLUMN IF NOT EXISTS customDecimalSeparator TEXT, ADD COLUMN IF NOT EXISTS customGroupSeparator TEXT, ADD COLUMN IF NOT EXISTS customDecimalDigits INTEGER, ADD COLUMN IF NOT EXISTS showTagsList INTEGER, ADD COLUMN IF NOT EXISTS transactionRemindersThreshold INTEGER, ADD COLUMN IF NOT EXISTS customAmountStyle INTEGER");
             //Setup groups table
             m_database.exec("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT, description TEXT, rgba TEXT)");
             m_database.exec("ALTER TABLE groups ADD COLUMN rgba TEXT");
             //Setup transactions table
             m_database.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN gid INTEGER");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN rgba TEXT");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN receipt TEXT");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN repeatFrom INTEGER");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN repeatEndDate TEXT");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN useGroupColor INTEGER");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN notes TEXT");
-            m_database.exec("ALTER TABLE transactions ADD COLUMN tags TEXT");
+            m_database.exec("ALTER TABLE transactions ADD COLUMN IF NOT EXISTS gid INTEGER, ADD COLUMN IF NOT EXISTS rgba TEXT, ADD COLUMN IF NOT EXISTS receipt TEXT, ADD COLUMN IF NOT EXISTS repeatFrom INTEGER, ADD COLUMN IF NOT EXISTS repeatEndDate TEXT, ADD COLUMN IF NOT EXISTS useGroupColor INTEGER, ADD COLUMN IF NOT EXISTS notes TEXT, ADD COLUMN IF NOT EXISTS tags TEXT");
             //Get metadata
             SqlStatement statement{ m_database.createStatement("SELECT * FROM metadata where id = 0") };
             if(statement.step())
