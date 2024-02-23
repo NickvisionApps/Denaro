@@ -1,14 +1,16 @@
 #include "models/account.h"
 #include <algorithm>
 #include <format>
+#include <libofx/libofx.h>
+#include <libnick/app/aura.h>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
-#include <libofx/libofx.h>
 #include <rapidcsv.h>
 #include "helpers/datehelpers.h"
 #include "models/currency.h"
 
+using namespace Nickvision::App;
 using namespace Nickvision::Database;
 
 namespace Nickvision::Money::Shared::Models
@@ -918,6 +920,9 @@ namespace Nickvision::Money::Shared::Models
         LibofxContextPtr libofx{ libofx_get_new_context() };
         ImportResult result;
         std::tuple<Account*, ImportResult*, Color> cbData{ this, &result, defaultTransactionColor };
+        //Set dtd files
+        std::filesystem::path dtdDir{ Aura::getActive().getExecutableDirectory() / "dtd/" };
+        libofx_set_dtd_dir(libofx, dtdDir.string().c_str());
         //Callback to read account information
         ofx_set_account_cb(libofx, [](const struct OfxAccountData accountData, void* data)
         {
@@ -961,6 +966,10 @@ namespace Nickvision::Money::Shared::Models
             else if(transactionData.date_initiated_valid)
             {
                 t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_initiated)));
+            }
+            else if(transactionData.date_funds_available_valid)
+            {
+                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_funds_available)));
             }
             if(transactionData.name_valid)
             {

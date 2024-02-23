@@ -53,7 +53,7 @@ TEST_F(AccountTest, UpdateMetadata)
     ASSERT_TRUE(m_account->getMetadata().getType() == AccountType::Savings);
 }
 
-TEST_F(AccountTest, ImportTestAccount)
+TEST_F(AccountTest, ImportTestAccountCSV)
 {
     ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount1.csv", {}, {}) };
     ASSERT_EQ(result.getNewTransactionIds().size(), 1498);
@@ -61,7 +61,7 @@ TEST_F(AccountTest, ImportTestAccount)
     ASSERT_TRUE(m_account->getTotal() > 0);
 }
 
-TEST_F(AccountTest, ExportTestAccount)
+TEST_F(AccountTest, ExportTestAccountCSV)
 {
     std::filesystem::path exportPath{ Aura::getActive().getExecutableDirectory() / "export.csv" };
     ASSERT_TRUE(m_account->exportToCSV(exportPath, {}, {}));
@@ -82,4 +82,10 @@ TEST_F(AccountTest, CheckUpdatedTransaction2)
     Transaction t{ m_account->getTransactions().at(2) };
     ASSERT_TRUE(t.getDescription() == "New and improved description");
     ASSERT_TRUE(t.getAmount() == 100);
+}
+
+TEST_F(AccountTest, ImportTestAccountOFX)
+{
+    ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount2.ofx", {}, {}) };
+    ASSERT_EQ(result.getNewTransactionIds().size(), 3);
 }

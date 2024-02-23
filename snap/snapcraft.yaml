@@ -87,7 +87,6 @@ parts:
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
-      - -DENABLE_ICONV=OFF
       - -DENABLE_OFX2QIF=OFF
       - -DENABLE_OFXDUMP=OFF
       - -DENABLE_OFXCONNECT=OFF
